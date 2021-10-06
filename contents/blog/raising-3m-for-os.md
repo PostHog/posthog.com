@@ -7,14 +7,14 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
-categories: ceo-diaries
+categories: ["CEO diaries"]
 ---
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
 
 For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
 
-# Why raise money at all
+## Why raise money at all
 
 Before you decide if you want to raise money, it's important to know what you are trying to achieve and to optimize for that.
 
@@ -78,7 +78,7 @@ However, this could be a cool way to start before doing bootstrapping or VC in t
 
 From this point on, we're going to explain how we raised venture capital in this post.
 
-# Converting an Open Source project into a business
+## Converting an Open Source project into a business
 
 This is a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
 
@@ -141,11 +141,11 @@ There was one thing we never expected to happen - we ended up with offers for "t
 
 We had to shift from selling ourselves to investors, to having to let investors down. This made us feel pretty guilty after all the meetings and relationships that we had built, but it was a great problem to have, and we tried to be as upfront as possible through the process.
 
-# VCs are nice
+## VCs are nice
 
 It may have been luck, but we didn't have a single negative interaction the entire way through this process. People wanted to understand what we're working on, they were encouraging and very helpful - even when they said no in many cases. A lot of the meetings were very intense and direct, but those were the most helpful ones of all. If you can handle QA, you can handle VC!
 
-# The impact of coronavirus
+## The impact of coronavirus
 
 Coronavirus' impact made fundraising harder. We had started raising as the virus was spreading in China, but before it had affected the US significantly.
 
@@ -155,7 +155,7 @@ Tim and I had been living together in [San Francisco](/blog/moving-to-sf) for th
 
 However, after a couple more weeks, it felt like the VCs had become used to this process - they do dozens of meetings every week, so it didn't take long to adapt to "over the internet" fundraising becoming the new normal. We stopped discussing how lockdown was affecting each other on calls, and started getting more people closer to investing in PostHog.
 
-# "You're too early"
+## "You're too early"
 
 It sounds obvious, but many of the most successful open source companies start off with a really popular open source project. The implication is that you're going to have to build something that gets popular first, then monetize later, in most cases.
 
@@ -165,9 +165,9 @@ It means you'll probably need more money than a SaaS company to get off the grou
 
 Polarize people (without being rude of course!), then you'll find those that can share your passion.
 
-# The 'fundraising battlestation'
+## The 'fundraising battlestation'
 
-## Hardware
+### Hardware
 
 ![Fundraising battlestation](../images/fundraising-battlestation.jpg)
 
@@ -181,7 +181,7 @@ The lamp is there to help out with lighting a little, and the laptop stand is to
 
 The snack bowl is so I don't eat an entire bag of chips in one sitting.
 
-## Software
+### Software
 
 ### Investor CRM
 
@@ -289,7 +289,7 @@ If you ever speak to a happy user, or you get nice feedback on Twitter, ask them
 
 If you close an investor, it is a _really_ good idea to make sure you then get introductions to whomever else they'd think your company could be a good fit for. We got the *majority* of our investment this way. You are not supposed to do this from investors that rejected you though (although that happened without us asking and also led to a lot of investment once or twice, but I would always decline offers to introduce us to others if an investor said no).
 
-# Raising in the US when you live in a different country
+## Raising in the US when you live in a different country
 
 PostHog is proud to be remote first. We think that's a big advantage for open source companies. It means your users and community get to know you properly so it's easier to make friends with actual people who dig your stuff. We aren't a faceless corporation in an office somewhere. That's why I write posts like this.
 
@@ -297,7 +297,7 @@ The reason we chose to raise in the US and to create a US company, even as UK re
 
 It became clear, the same is true - at least for us - on the VC side. Not all, but the majority of UK investors we spoke with, felt the valuation was too high. I'd hazard a guess that we'd have $5M post money valuation in the UK (which would have meant we'd have needed to raise a lot less), whereas we ended up raising at $15M post. We can see why investors can be more risk averse - they can get into more companies if each company has a lower price. However, from the company's perspective, more money means you have more resource to hit a homerun, which is what has to happen for the majority of VCs to be successful. There is some [interesting albeit old data](https://tomtunguz.com/seed-followon-rates/) on how raising more money increases your chance of success later (although perhaps this is correlation not causation), but only up to a certain point.
 
-# The paperwork you'll need
+## The paperwork you'll need
 
 If you're raising money in the US, we'd recommend you have a US parent company. You can "flip" your existing company to have a US parent - this cost us $10k, which was a frustrating expense, but a necessary one that was far outweighed in financial terms by raising in a more competitive market. If you don't have a company formed for your project already, I'd just set up directly as a US company, and I'd definitely pay a US attorney to do that for you. You will have to have some money to do that, and it'll mean you need to get an accountant to do taxes. Tim and I saved up before we started and used our own money for this.
 
@@ -311,13 +311,13 @@ We've no affiliation other than being friends, but in order to model how much of
 
 If you have traction or a great vision, the world is what you make of it in fundraising. If you act meek and ask investors to make up the price, you'll land very low. Go in high and you'll polarize people - which is what you need… a definite yes or definite no! Just be careful if you set the bar too high, you will want to jump over it in the next round.
 
-# Getting the first cheque
+## Getting the first cheque
 
 We started off by speaking to some friendly angel investors. These are generally wealthy individuals who fall into two categories. Some are just plain passionate and love the idea of what you're working on. Others angel invest full time and are like a mini fund.
 
 To find angels, we thought about who we already knew and the founders of other companies similar to ours but much bigger. As we built the company, we got advice from many people along the way. We asked them. Some invested directly, others pointed us in the right direction. People were very responsive when we asked for specific help, and we will do our best to pay that forward. When people helped us, we tried to keep them posted on how we'd followed or not followed their advice so they could see that we really did value their time.
 
-# Getting the right investors
+## Getting the right investors
 
 Many investors are very hands off, others will put a lot of resource into helping you.
 
@@ -325,7 +325,7 @@ If you have the luxury of choosing, which happens towards the end of your round 
 
 More hand holding is probably better if you have less experience or you need someone to push you. We were worried that some of the more supportive investors were so supportive we'd struggle to realize that the company/project's success or failure ultimately is our responsibility - not theirs. We are the ones speaking to users every day.
 
-# Thanks for reading
+## Thanks for reading
 
 We hope this post was useful. If you would like to follow our journey, add yourself to [our newsletter](/newsletter).
 

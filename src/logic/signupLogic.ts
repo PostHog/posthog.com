@@ -1,12 +1,6 @@
 import { kea } from 'kea'
-import { EMAIL_GATED_SIGNUP_PREFIX, FEATURE_FLAGS } from 'lib/constants'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
-
-export enum SignupModalView {
-    EMAIL_PROMPT = 'EMAIL_PROMPT',
-    DEPLOYMENT_OPTIONS = 'DEPLOYMENT_OPTIONS',
-}
 
 export enum Realm {
     hosted = 'hosted',
@@ -15,6 +9,31 @@ export enum Realm {
 
 export type HubSpotContactResponse = {
     success: boolean
+}
+
+const validators = {
+    email: (email: string) =>
+        !email
+            ? 'Please enter an email'
+            : !isValidEmailAddress(email)
+            ? 'Please enter a valid email'
+            : (false as const),
+    firstname: (firstname: string) => !firstname && 'Please enter your first name',
+    company: (company: string) => !company && 'Please enter your company name',
+}
+
+export interface ContactFormType {
+    email: string
+    firstname: string
+    lastname: string
+    company: string
+    maus: number
+    monthly_events: number
+    data_warehouse_: string
+    hosting_provider: string
+    helm_charts: string
+    which_product_are_you_interested_in_: string
+    reason_for_self_host: string
 }
 
 async function createContact(email: string) {
@@ -48,59 +67,43 @@ async function updateContact(email: string, properties: Record<string, string>) 
 export const signupLogic = kea({
     path: typeof window === undefined ? undefined : () => ['signup'],
     actions: {
-        setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
         skipEmailEntry: true,
         reportModalShown: true,
         reportDeploymentOptionsShown: true,
-        onRenderSignupPage: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({
             deploymentType,
             nextHref,
         }),
-        setVariants: (newVariants: string[]) => ({ newVariants }),
-        setActiveVariant: (activeVariant: string) => ({ activeVariant }),
-        updateAvailableVariants: true,
+        setFormField: (field: string, value: any) => ({ field, value }),
     },
     reducers: {
-        modalView: [
-            SignupModalView.EMAIL_PROMPT as SignupModalView,
-            {
-                setModalView: (_, { view }: { view: SignupModalView }) => view,
-            },
-        ],
         email: [
             '',
             {
                 setEmail: (_, { email }: { email: string }) => email,
             },
         ],
-        experimentVariants: [
-            {} as Record<string, boolean>,
-            { persist: true },
+        contactForm: [
             {
-                setVariants: (state: Record<string, boolean>, { newVariants }: { newVariants: string[] }) => {
-                    const nextState = {} as Record<string, boolean>
-                    const existingVariants = Object.keys(state)
-                    newVariants.forEach((variant) => {
-                        if (existingVariants.includes(variant)) {
-                            // Don't overwrite an existing value
-                            nextState[variant] = state[variant]
-                        } else {
-                            nextState[variant] = false
-                        }
-                    })
-                    return nextState
-                },
-                setActiveVariant: (state: Record<string, boolean>, { activeVariant }: { activeVariant: string }) => {
-                    const nextState = {} as Record<string, boolean>
-                    const existingVariants = Object.keys(state)
-                    existingVariants.forEach((variant) => {
-                        nextState[variant] = variant === activeVariant
-                    })
-                    return nextState
-                },
+                email: '',
+                firstname: '',
+                lastname: '',
+                company: '',
+                maus: 0,
+                monthly_events: 0,
+                data_warehouse_: '',
+                hosting_provider: '',
+                helm_charts: '',
+                which_product_are_you_interested_in_: '',
+                reason_for_self_host: '',
+            } as ContactFormType,
+            {
+                setFormField: (state, { field, value }: { field: string; value: any }) => ({
+                    ...state,
+                    [field]: value,
+                }),
             },
         ],
     },
@@ -110,29 +113,20 @@ export const signupLogic = kea({
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
-            const { posthog, email, activeVariant } = values
-            const skipDeploymentOptions = activeVariant === FEATURE_FLAGS.EMAIL_GATED_SIGNUP_OLD_FLOW
+            const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
                     posthog.capture('signup: submit email')
-                    if (!skipDeploymentOptions) {
-                        actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
-                    }
                     await createContact(email)
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
-                } finally {
-                    if (skipDeploymentOptions) {
-                        window.location.replace(`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`)
-                    }
                 }
             }
         },
         skipEmailEntry: async () => {
             const { posthog } = values
             posthog.capture('signup: email modal skipped')
-            actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
         },
         reportModalShown: async () => {
             const { posthog } = values
@@ -141,15 +135,6 @@ export const signupLogic = kea({
         reportDeploymentOptionsShown: async () => {
             const { posthog } = values
             posthog.capture('signup: deployment options shown')
-        },
-        setModalView: async ({ view }) => {
-            switch (view) {
-                case SignupModalView.EMAIL_PROMPT:
-                    return actions.reportModalShown()
-                case SignupModalView.DEPLOYMENT_OPTIONS:
-                default:
-                    return actions.reportDeploymentOptionsShown()
-            }
         },
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
@@ -165,68 +150,70 @@ export const signupLogic = kea({
                 window.location.replace(nextHref)
             }
         },
-        onRenderSignupPage: () => {
-            if (typeof window !== 'undefined') {
-                if (values.shouldAutoRedirect) {
-                    window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
-                } else {
-                    actions.reportModalShown()
-                }
-            }
+        submitContactForm: async () => {
+            const { posthog, contactForm } = values
+            posthog.capture('contact: contact form submitted', contactForm)
         },
-        setVariants: () => {
-            const { experimentVariants, posthog } = values
-            const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
-            if (variantEntries.length && !variantEntries.some(([, status]) => status === true)) {
-                // If all available variants are inactive, we need to randomly pick one to activate.
-                const randomIndex = Math.floor(Math.random() * variantEntries.length)
-                const [name] = variantEntries[randomIndex]
-                actions.setActiveVariant(name)
-                posthog.capture('set email experiment variant', {
-                    variant: name,
-                    $set_once: {
-                        email_experiment_variant: name,
-                    },
-                })
-            }
+        submitContactFormSuccess: async () => {
+            const { posthog, contactFormResponse } = values
+            posthog.capture('contact: contact form submitted successfully', contactFormResponse)
         },
-        updateAvailableVariants: () => {
-            const { activeFeatureFlags } = values
-            const variantFlags: string[] = activeFeatureFlags.filter((flag: string) =>
-                flag.includes(EMAIL_GATED_SIGNUP_PREFIX)
-            )
-            actions.setVariants(variantFlags)
-        },
-        [actions.setFeatureFlags]: () => {
-            actions.updateAvailableVariants()
+        submitContactFormFailure: async () => {
+            const { posthog, contactFormResponse } = values
+            posthog.capture('contact: failure submitting contact form', contactFormResponse)
         },
     }),
-    events: ({ actions, values }) => ({
-        afterMount: () => {
-            if (typeof window !== undefined && !!values.posthog) {
-                actions.updateAvailableVariants()
-            }
-        },
+    loaders: ({ values }) => ({
+        contactFormResponse: [
+            {
+                status: null,
+                message: null,
+            },
+            {
+                submitContactForm: async () => {
+                    const fields: { name: string; value: string | number }[] = []
+                    Object.entries(values.contactForm).forEach(([name, value]) => {
+                        fields.push({
+                            name,
+                            value: value as string | number,
+                        })
+                    })
+                    const data = { fields }
+                    const response = await (
+                        await fetch(
+                            'https://api.hsforms.com/submissions/v3/integration/submit/6958578/f8854263-d80d-46f6-9905-a8ccb7f50f22',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    Accept: 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                            }
+                        )
+                    ).json()
+                    if (response.inlineMessage?.match(/Thanks/)) {
+                        return {
+                            status: 'success',
+                            message: response.inlineMessage,
+                        }
+                    }
+                    return {
+                        status: response.status || 'error',
+                        message: response.message,
+                    }
+                },
+            },
+        ],
     }),
     selectors: {
-        hasEmailGatedSignup: [
-            (s) => [s.activeVariant],
-            (activeVariant: string | null) =>
-                activeVariant && activeVariant !== FEATURE_FLAGS.EMAIL_GATED_SIGNUP_CONTROL,
-        ],
-        shouldAutoRedirect: [
-            (s) => [s.hasEmailGatedSignup, s.isLoggedIn],
-            (hasEmailGatedSignup: boolean, isLoggedIn: boolean) => {
-                return !hasEmailGatedSignup || isLoggedIn
-            },
-        ],
-        activeVariant: [
-            (s) => [s.experimentVariants],
-            (experimentVariants: Record<string, boolean>) => {
-                const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
-                const [name] = variantEntries.find(([, value]) => value) || []
-                return name || null
-            },
+        contactFormValidation: [
+            (s) => [s.contactForm],
+            (contactForm: ContactFormType) => ({
+                email: validators['email'](contactForm.email),
+                firstname: validators['firstname'](contactForm.firstname),
+                company: validators['company'](contactForm.company),
+            }),
         ],
     },
 })

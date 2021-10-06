@@ -277,7 +277,6 @@ body {
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
-    overscroll-behavior: none;
 }
 body.light {
     background-color: #eeefe9;
@@ -545,12 +544,10 @@ ul li {
     padding-left: 0;
 }
 li > ol {
-    margin-left: 1.45rem;
     margin-bottom: calc(1.45rem / 2);
     margin-top: calc(1.45rem / 2);
 }
 li > ul {
-    margin-left: 1.45rem;
     margin-bottom: calc(1.45rem / 2);
     margin-top: calc(1.45rem / 2);
     padding-bottom: 1rem;
@@ -654,18 +651,6 @@ header {
     background-size: cover;
     height: 240px !important;
     margin-bottom: 30px;
-}
-
-.blog-post-content {
-    p,
-    li {
-        font-size: 1.25em;
-        line-height: 1.75em;
-        opacity: 0.9;
-    }
-    li {
-        margin-bottom: calc(1.45rem / 2);
-    }
 }
 
 .menuHeaderWrapper {
@@ -1624,22 +1609,6 @@ body.light {
     .contributor-faces {
         display: flex;
         flex-wrap: wrap;
-    }
-    article {
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            letter-spacing: -0.015em;
-            margin-top: 2rem;
-        }
-        .article-content {
-            p,
-            li {
-                line-height: 1.75;
-            }
-        }
     }
     .breadcrumbs-container > li:not(:last-of-type)::after {
         content: url('/images/right-arrow.svg');

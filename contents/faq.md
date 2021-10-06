@@ -106,9 +106,9 @@ Yes. You can have full access to [PostHog's code](https://github.com/PostHog/pos
 
 There are three options:
 
-1. [PostHog Cloud](https://app.posthog.com/signup).
-2. [Self Deployment](/docs/deployment).
-3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
+1. [PostHog Cloud](https://app.posthog.com/signup)
+2. [Self Deployment](/docs/deployment)
+3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u)
 
 ### Can I get it live with my favorite hosting method?
 

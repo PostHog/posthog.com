@@ -5,5 +5,5 @@ sidebar: Docs
 showTitle: true
 ---
 
-![Self-host Architecture](../images/../../images/self-host-architecture.png)
+![Self-host Architecture](../../images/self-host-architecture.png)
 

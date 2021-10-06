@@ -46,8 +46,8 @@ We don't just state that we care - these are some of the things we've implemente
 * [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
 * [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple time zones and on schedules that suit them.
 * [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
-* [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a Denist appointment. 
-* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pragnancy loss](/handbook/people/time-off#bereavements--child-loss), as sometimes live doesn't work as we plan it.  
+* [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a dentist appointment. 
+* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pregnancy loss](/handbook/people/time-off#bereavements--child-loss), as sometimes live doesn't work as we plan it.
 * Very generous and [transparent pay](/handbook/people/compensation) - to reduce the financial stress that often comes with working for startups, or prevents many from even applying.
 * Proactive recruitment to encourage underrepresented groups of people to apply - so we are meeting with a balanced group of applicants for every role.
 * Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy!
@@ -56,7 +56,7 @@ We don't just state that we care - these are some of the things we've implemente
 * Life story Fridays (when we have a new team member, we'll ask them to present their life story for an hour on a Friday) - so you have more context on the points of views of others in the team.
 * [Sponsored visas](/handbook/people/hiring-process/#visa-sponsorship) for those who need them.
 * [Health insurance](/handbook/people/benefits/#pension-and-401k-contributions) for those from countries that do not provide this freely.
-* Mental Health Counselling provided via our partner [Spill](https://www.spill.chat/). 
+* Mental health counseling provided via our partner [Spill](https://www.spill.chat/). 
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!
 

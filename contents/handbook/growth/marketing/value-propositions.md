@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Value propositions
-
 Value propositions are the promises we make to our prospective customers about what PostHog does and the value it offers to them.
 
 Value propositions are not intended to be used verbatim, but to be interpreted, referred to and expanded upon. They're useful for checking and creating paid ads or for writing site copy, for example.
@@ -20,7 +18,7 @@ PostHog has several value propositions. Each is structured like a story:
 
 Our value propositions also call on our messaging pillars, which map to specific functionality that reinforce the proposition (e.g. _full-size controls for player two_). 
 
-### 1. An all-in-one platform
+## 1. An all-in-one platform
 
 PostHog offers a suite of product analysis tools, including funnels, heat maps, session recording and more, all in one easy-to-use platform. This enables data and engineering teams to get information faster, without writing any SQL, while less technical teams are also able to self-serve and get answers without needing support.
 
@@ -31,7 +29,7 @@ PostHog offers a suite of product analysis tools, including funnels, heat maps, 
 - **Result:** Now you can get answers faster and focus on improving your product, rather than writing SQL.
 
 
-### 2. Retain control & compliance
+## 2. Retain control & compliance
 
 PostHog is the only analytics platform which enables users to self-host on their own infrastructure. This means they have greater control over who has access to their data and regulatory compliance is a breeze because information never leaves existing systems.
 
@@ -42,7 +40,7 @@ PostHog is the only analytics platform which enables users to self-host on their
 - **Result:** Now you can get trustworthy product insights without worrying about compliance issues or data breaches. 
 
 
-### 3. Integrate with data warehouses
+## 3. Integrate with data warehouses
 
 PostHog's plugin system works seamlessly with tools such as data warehouses, both for importing and exporting data. This means even non-technical users can analyse data from across their infrastructure with ease and develop a conclusive understanding of user behaviour.  
 

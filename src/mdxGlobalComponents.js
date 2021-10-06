@@ -8,14 +8,10 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
-import { BlogAuthor } from './components/Blog/BlogAuthor'
-import { BlogCategoriesList } from './components/Blog/BlogCategoriesList'
-import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
-import { BlogIntro } from './components/Blog/BlogIntro'
-import { BlogPostLayout } from './components/Blog/BlogPostLayout'
-import { BlogPosts } from './components/Blog/BlogPosts'
-import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
+import { BorderWrapper } from './components/BorderWrapper'
+import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -27,30 +23,36 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { Contact } from './components/Contact'
+import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
-import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
+import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
+import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { ImageBlock } from './components/ImageBlock'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
+import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -85,6 +87,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
+import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
@@ -97,14 +100,10 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
-    BlogAuthor,
-    BlogCategoriesList,
-    BlogFeaturedImage,
-    BlogIntro,
-    BlogPostLayout,
-    BlogPosts,
-    BlogShareButtons,
+    Blog,
     BlogFooter,
+    BorderWrapper,
+    Breadcrumbs,
     CallToAction,
     Benefits,
     CareersHero,
@@ -116,30 +115,36 @@ export const shortcodes = {
     Chip,
     CodeBlock,
     CompensationCalculator,
+    Contact,
+    ContactForm,
     Container,
-    ContributorAvatars,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    Customers,
     DarkModeToggle,
     DemoScheduler,
+    DeployOption,
     DocsPageSurvey,
     DocsSearch,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
+    FloatedImage,
     Footer,
     GetStartedModal,
     GithubIcon,
     HiddenSection,
     Home,
     HostingOption,
+    ImageBlock,
     LandingPageCallToAction,
     LibraryStats,
     Link,
     Logo,
     MainNav,
     MdxAnchorHeaders,
+    Modal,
     NewsletterForm,
     NotFoundPage,
     OtherFeaturesBlock,
@@ -174,6 +179,7 @@ export const shortcodes = {
     Structure,
     TableOfContents,
     TeamQuote,
+    Tooltip,
     VisitLibrary,
     WorkableSnippet,
 }

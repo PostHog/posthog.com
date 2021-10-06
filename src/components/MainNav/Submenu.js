@@ -1,50 +1,29 @@
-import React, { useLayoutEffect, useState } from 'react'
-import SubmenuItem from './SubmenuItem'
-import Link from 'components/Link'
+import React from 'react'
 import { motion } from 'framer-motion'
+import Docs from './DocsSubmenu'
+import Company from './CompanySubmenu'
+
+const submenus = {
+    Docs,
+    Company,
+}
 
 export default function Submenu({ referenceElement, menu, open, parentURL }) {
+    const { component } = menu
     const variants = {
-        shown: {
-            transition: {
-                staggerChildren: 0.05,
-            },
-        },
+        hidden: { height: 0 },
+        shown: { height: 'auto' },
     }
-    const [offset, setOffset] = useState(0)
-    const getOffset = () => {
-        if (typeof window !== 'undefined') {
-            const offset =
-                window.innerWidth / 2 -
-                (referenceElement.current.getBoundingClientRect().x + referenceElement.current.offsetWidth / 2)
-            setOffset(offset)
-        }
-    }
-    useLayoutEffect(() => {
-        window.addEventListener('resize', getOffset)
-        getOffset()
-        return () => window.removeEventListener('resize', getOffset)
-    }, [])
     return (
-        <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute lg:left-20 lg:right-20 max-w-screen-3xl lg:block text-almost-black">
-            <div className="lg:bg-white lg:dark:bg-gray-accent-dark lg:rounded-xl lg:max-h-[calc(100vh-120px)] lg:overflow-auto posthog-scrollbars">
-                <div className="lg:dark:bg-gray-accent-dark text-[14px] lg:p-12 p-0 max-w-screen-xl mx-auto">
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-                        <Link className="text-primary hover:text-primary" to={parentURL}>
-                            <h1 className="hidden lg:inline-block text-4xl m-0 font-bold">{menu.title}</h1>
-                        </Link>
-                        <p className="hidden lg:block my-3 text-almost-black dark:text-white">
-                            <div dangerouslySetInnerHTML={{ __html: menu.description }} />
-                        </p>
-                    </motion.div>
-
-                    <motion.ul initial="hidden" an imate="shown" variants={variants} className="list-none p-0 m-0">
-                        {menu.items.map((item, index) => (
-                            <SubmenuItem item={item} key={index} />
-                        ))}
-                    </motion.ul>
-                </div>
-            </div>
+        <div className="z-10 top-[calc(40px+1.25rem)] lg:pt-5 lg:absolute left-0 w-full lg:block text-almost-black">
+            <motion.div
+                className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 my-6"
+                variants={variants}
+                initial="hidden"
+                animate="shown"
+            >
+                {submenus[component]({ menu, parentURL })}
+            </motion.div>
         </div>
     )
 }

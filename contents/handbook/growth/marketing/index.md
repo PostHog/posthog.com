@@ -20,7 +20,7 @@ See [our messaging framework for more information](/handbook/growth/marketing/me
 
 ## Value propositions
 
-We have used our messaging framework to then articulate a series of [value propositions](https://docs.google.com/spreadsheets/d/1VVLqk8xiKPj_rzDDhVA2eMFx7ENlhg9WnYDj2rkd_E4/edit?usp=sharing) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels. This is particular important for paid ads. 
+We have used our messaging framework to then articulate a series of [value propositions](https://posthog.com/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels. This is particular important for paid ads. 
 
 ## Products
 

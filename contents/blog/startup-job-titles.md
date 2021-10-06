@@ -13,7 +13,6 @@ featuredImageType: full
 One huge mistake some startups make is using titles to establish and reinforce hierarchy. This is dangerous for two reasons:
 
 1. Iteration and speed largely determine the growth trajectory of most product-led startups. Because of this, it's important to eschew managers in favor of 'anti-managers' - superbly strong individual contributors with a bias towards action, not control.
-
 2. Titles can make it harder to [give and receive feedback](https://posthog.com/handbook/people/feedback) - from both colleagues and customers. Without clear feedback, it's harder for individuals to improve, which can limit the whole team.
 
 At PostHog, we started off completely flat, with everyone reporting to our founders, James and Tim - and everyone getting individual contributor titles such as Software Engineer or Designer. If we’d had Senior Engineer and Junior Engineer titles, for example, that would've indicated that we care about hierarchy, thus discouraging peer-to-peer feedback and capping individual performance at the level of whoever was designated as Senior.
@@ -27,7 +26,6 @@ Towards the end of 2020, we were shipping lots of code but nothing moved the nee
 So we solved this problem in two ways:
 
 1. We introduced [Small Teams](https://posthog.com/handbook/people/team-structure/why-small-teams): small groups of people who owned specific tasks within the company. We have small teams for marketing, growth, design, product, and more.
-
 2. We introduced light [management](https://posthog.com/handbook/company/management) and tweaked our titles to reflect this.
 
 These changes have resulted in a huge lift to our product and design competencies - and much happier end users.
