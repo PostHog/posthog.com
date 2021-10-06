@@ -1,5 +1,5 @@
 ---
-date: 2021-10-06
+date: 2021-10-07
 title: Sessions deprecation
 rootPage: /blog
 sidebar: Blog
@@ -45,5 +45,4 @@ In addition to the changes above, we're significantly improving recordings inges
 > 💡 **Not seeing these changes yet?** We're A/B testing some of these changes in PostHog Cloud, you may still not be in the release group. Please [contact us](/slack) if you'd like to be included. If you're on PostHog Self-Hosted please keep an eye out for the next release.
 
 ## What's next?
-- Support session-based behavioral analytics (if it makes sense, gather more context first). Allow users to set their own `session_id` or have flexibility around the concept of sessions. Support a full range of analytics from session count, duration, multi-device sessions, ...
-> Why not support this today? We could, but it's a separate conversation/goal from Diagnosing Causes. We can gather more context and decide if it's worth prioritizing.
+Consider full support for session-based behavioral analytics. We need to gather more context first on the use cases for this. In particular, we want to make sure users have flexibility around their own concept of sessions, support a full range of analytics (e.g. session count, duration, multi-device sessions), etc.
