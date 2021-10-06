@@ -1,5 +1,5 @@
 ---
-date: 2021-09-21
+date: 2021-10-06
 title: Sessions deprecation
 rootPage: /blog
 sidebar: Blog
