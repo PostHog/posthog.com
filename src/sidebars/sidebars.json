@@ -674,12 +674,8 @@
                     "url": "/docs/user-guides/retention"
                 },
                 {
-                    "name": "Sessions",
-                    "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Session Recording",
-                    "url": "/docs/user-guides/session-recording"
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO (Single sign-on authentication)",
@@ -694,8 +690,8 @@
                     "url": "/docs/user-guides/trends"
                 },
                 {
-                    "name": "Users/People",
-                    "url": "/docs/user-guides/users"
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
                 }
             ]
         },
