@@ -43,8 +43,6 @@ Once the user has made a decision around their consent you can start or stop dat
 - Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
 - Do not initialize the posthog-js SDK via the call to `init`. If you do this you should ensure your application logic always performs conditional checks regarding the initialization state of the PostHog SDK.
 
-### Right of access
-
 ### Right to be forgotten
 
 A user must be able to request that their data be removed from PostHog. How you facilitate that request is up to you. For example, you could accept requests via email or form submission.
