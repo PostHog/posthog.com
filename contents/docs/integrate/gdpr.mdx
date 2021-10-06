@@ -36,7 +36,6 @@ Since PostHog automatically captures some data (for example, the IP address of a
 
 Within the consent you should identify the types of PII that are being processed and what tools are being used to process them. If you are using PostHog Cloud you should identify PostHog as a tool. If you are self-hosting you can either not list a tool or provide a generic description such as "Product Analytics".
 
-
 Once the user has made a decision around their consent you can start or stop data capturing and processing accordingly. If the user has opted out there are a number of ways to ensure data is not captured by PostHog and how you do this will differ depending on your application setup. Here are some ways PostHog makes this possible:
 
 - If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](https://posthog.com/docs/integrate/client/js#opt-users-out).
@@ -47,6 +46,15 @@ Once the user has made a decision around their consent you can start or stop dat
 ### Right of access
 
 ### Right to be forgotten
+
+A user must be able to request that their data be removed from PostHog. How you faciliate that request is up to you. For example, you could accept requests via email or form submission.
+
+You can remove a user from a PostHog instance via the PostHog user interface. To do this:
+
+1. Select **Persons** from the left-hand menu.
+2. Search for the person via their unique ID. For example, their email.
+3. Click **view** next to the person within the search results .
+4. Click **Delete this person** to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
 
 ## Reference
 
