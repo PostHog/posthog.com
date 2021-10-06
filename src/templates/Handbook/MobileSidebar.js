@@ -8,10 +8,10 @@ export default function InternalSidebar({ tableOfContents }) {
             <ul className="list-none m-0 p-0 flex flex-col space-y-2">
                 {tableOfContents?.map((navItem, index) => {
                     return (
-                        <li key={index}>
+                        <li style={{ marginLeft: `${navItem.depth / 1.5}rem` }} key={index}>
                             <InternalSidebarLink
                                 url={navItem.url}
-                                name={navItem.name}
+                                name={navItem.value}
                                 className="jumpTo text-[15px] pl-6"
                             />
                         </li>

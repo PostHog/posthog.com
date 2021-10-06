@@ -57,10 +57,10 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         currentClassName="active-link"
                     >
                         {tableOfContents?.map((navItem, index) => (
-                            <li key={index}>
+                            <li style={{ marginLeft: `${navItem.depth / 1.5}rem` }} key={index}>
                                 <InternalSidebarLink
                                     url={navItem.url}
-                                    name={navItem.name}
+                                    name={navItem.value}
                                     style={activeId === navItem.url ? { opacity: '1' } : {}}
                                     className="hover:opacity-100 opacity-60 text-[15px]"
                                 />
