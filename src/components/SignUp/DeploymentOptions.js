@@ -28,7 +28,7 @@ export default function DeploymentOptions({ className = '' }) {
                 <div className="flex justify-between items-center bg-gray-accent-light px-[18px] py-[16px] rounded-md flex-col xl:flex-row space-y-2 xl:space-y-0 ">
                     <p className="m-0 font-bold">Deployment questions?</p>
                     <TrackedCTA
-                        size="sm"
+                        size="md"
                         type="outline"
                         className="bg-white flex space-x-2 items-center font-bold"
                         to="/slack"
