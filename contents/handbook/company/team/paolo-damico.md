@@ -7,7 +7,7 @@ showTitle: true
 ## Q4 2021 Goals
 
 - **Product strategy.**
-  - ⭐️ Build the _core product_ strategy for Q4-21. _Likely related to Collaboration, Experimentation and "Making more successful products". These will be very ambitious goals, that will direclty impact company-level metrics (see [Product metrics](/handbook/product/metrics))._
+  - ⭐️ Build the _core product_ strategy for Q4-21. _Likely related to Collaboration, Experimentation and "Making more successful products". These will be very ambitious goals, that will directly impact company-level metrics (see [Product metrics](/handbook/product/metrics))._
   - Support Exec Team with context, feedback and any other activity in shaping up the product strategy for the next quarter/year. In particular, ensure we have clear company-level product metrics and we have a plan for improving them.
 - **Product execution.**
   - ⭐️ Ensure ownership and accountability on every key feature by a single engineer, particularly with defining clear and ambitious goals for each epic in each sprint. _Help owners improve on workflow, prioritization, solution scoping (particularly around overscoping) & post-delivery._
