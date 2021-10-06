@@ -16,6 +16,10 @@ The metric is defined [in this action][action]. The concept of the metric is use
 - Analyzing a recording. Watching a recording for 10 seconds or more.
 
 
+**Adding new insights**
+We're continuously improving the product and it's inevitable that we'll add more more insights. When we add more insights, they should either fire the already existing "insight viewed" & "insight analyzed" events (with adjusted properties), or the new event should be added to the action definition. In either case, it's important to **update this document, so we have a clear log of when new insights were added.**
+
+
 **Exclusions**
 We exclude the following events from counting as they don't signal getting actual value from PostHog:
 - Events done on test projects.
