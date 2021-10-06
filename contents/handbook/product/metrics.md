@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is "SNAZZY NAME HERE". The metric can be tracked in the [product dasboard][dashboard] and is reported weekly at PostHog News.
+As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is Discoveries. The metric can be tracked in the [product dasboard][dashboard] and is reported weekly at PostHog News.
 
-> 💡 "SNAZZY NAME HERE" is different from Discovered Learnings. Discovered Learnings is used as a metric for activation and growth.
+> 💡 Discoveries is different from Discovered Learnings. Discovered Learnings is used as a metric for activation and growth.
 
 Generally, small teams should be making measurable impact towards improving this metric (not all teams, not all the time). It's okay for epics and sprints to have other intermediate (and probably more concrete) goals, but overall each team should be moving the metric as a whole.
 
@@ -25,7 +25,7 @@ We exclude the following events from counting as they don't signal getting actua
 
 ## Additional context
 - The metric is purposefully kept simple to make it easy to action and avoid complex edge cases in an already ambiguous landscape (product changes all the time).
-- Why not Discover Learnings? It seems to have a higher correlation to retention, but:
+- Why not _Discovered Learnings_? It seems to have a higher correlation to retention, but:
   - It limits us only to trends and funnels, and users drive value from a variety of other sources. We're particularly investing in providing more value in others parts of the app too. It's a trade-off between better retention prediction and better immediate signaling.
   - Counts when users open an insight shared by another user (direct link).
 - Caveat: This metric also captures any value from Marketing efforts. As we start to invest more in user acquisition, we'll need to isolate the effect from Marketing in this Product metric.
