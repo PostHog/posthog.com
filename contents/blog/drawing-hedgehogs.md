@@ -17,7 +17,6 @@ A successful mascot should go beyond representing what a company does. It should
 
 ![GitHub - Octocat](../images/blog/drawing-hedgehogs/github-octocat.jpeg)
 
-
 ## Think before you ink
 
 When I set out to design PostHog's mascot, it felt like there was an ocean of possibility. I'll admit I've chased ideas in the past simply because they were cool or aesthetically pleasing, but this can be dangerous. So, I took the time to think and reflect before diving into the creative process. I've learned that taking the time to consider what your company stands for and who it is selling to helps massively later in the process. 
