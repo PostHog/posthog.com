@@ -26,7 +26,7 @@ For YC W21 companies, we also offer:
 
 ### Inbound request sources
 
-YC companies can reach out to us in many ways. Ideally, we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _[yc@posthog.com](mailto:yc@posthog.com)_ or _[ycdeal@posthog.com](mailto:ycdeal@posthog.com)_ (as well as individual emails and _[hey@posthog.com](mailto:hey@posthog.com)_).
+YC companies can reach out in different ways. Ideally, we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _[yc@posthog.com](mailto:yc@posthog.com)_.
 
 Having received a demo request through one of these sources, schedule an appropriate 1-hour slot and ensure at least one person can certainly attend it.
 
