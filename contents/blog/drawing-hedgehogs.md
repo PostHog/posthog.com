@@ -8,7 +8,7 @@ hideAnchor: true
 author: lottie-coxon
 featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
-categories: General, Company & Culture 
+categories: ["General"]
 ---
 
 Creating mascots goes beyond just putting iPencil to iPad. It’s a long, confusing, and sometimes frustrating process which requires a lot of patience and tolerance for drawing hedgehogs 12 hours a day.
