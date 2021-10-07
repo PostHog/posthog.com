@@ -6,5 +6,5 @@
 ```console
 export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}") && \
 echo "Your PostHog IP address is $INGRESS_IP" && \
-echo "Visit http://$INGRESS_IP to use PostHog\!"
+echo "Visit http://$INGRESS_IP to use PostHog"
 ```
