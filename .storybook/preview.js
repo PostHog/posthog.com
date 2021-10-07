@@ -1,3 +1,4 @@
+import { themes } from '@storybook/theming'
 import '../src/styles/global.css'
 
 export const parameters = {
@@ -7,5 +8,10 @@ export const parameters = {
             color: /(background|color)$/i,
             date: /Date$/,
         },
+    },
+    darkMode: {
+        dark: { ...themes.dark, appContentBg: '#151515' },
+        light: { ...themes.normal, appContentBg: 'white' },
+        stylePreview: true,
     },
 }
