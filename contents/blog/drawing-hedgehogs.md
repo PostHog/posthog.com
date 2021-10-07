@@ -25,8 +25,6 @@ For example, last year I chased a 'tech-head' visual involving human mascots wit
 
 Eventually I realized my error and iterated towards something better - but please, learn from my mistake and avoid such confused fumblings.
 
-**[insert image of tech heads]**
-
 ## Do market research
 
 I find that some good old market research is the perfect spring board for ideas, and that looking at companies with similar values can be especially rewarding. 
@@ -45,10 +43,10 @@ The hard part, of course, is actually designing the hedgehog. This is no easy fe
 
 My process is as follows:
 
-– Don’t think too much, just draw
-– Draw a lot and be willing to make mistakes
-– Try things you think you won’t like (if its awful, at least you’ve ruled it out)
-– Don’t copy from others. You may think this will allow you to improve, but people will see through it. Originality makes you great.
+- Don’t think too much, just draw
+- Draw a lot and be willing to make mistakes
+- Try things you think you won’t like (if its awful, at least you’ve ruled it out)
+- Don’t copy from others. You may think this will allow you to improve, but people will see through it. Originality makes you great.
 
 ## Use a tablet
 
