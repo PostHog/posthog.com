@@ -1,10 +1,58 @@
-import React from 'react'
+import {
+    Android,
+    AWS,
+    Azure,
+    DigitalOcean,
+    Docker,
+    GCS,
+    GitHub,
+    HelmChart,
+    Heroku,
+    Ios,
+    JS,
+    More,
+    NodeJS,
+    ReactIcon,
+    Ruby,
+    Segment,
+    Sentry,
+    Shopify,
+    Slack,
+    WordPress,
+    Zapier,
+} from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import React from 'react'
+
+const icons = {
+    android: Android,
+    aws: AWS,
+    azure: Azure,
+    'digital ocean': DigitalOcean,
+    docker: Docker,
+    gcs: GCS,
+    'helm chart': HelmChart,
+    heroku: Heroku,
+    ios: Ios,
+    js: JS,
+    nodejs: NodeJS,
+    react: ReactIcon,
+    ruby: Ruby,
+    shopify: Shopify,
+    segment: Segment,
+    sentry: Sentry,
+    wordpress: WordPress,
+    zapier: Zapier,
+    more: More,
+    github: GitHub,
+    slack: Slack,
+}
 
 export default function DeployOption({ url, icon, title, disablePrefetch }) {
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const Icon = icon && icons[icon]
     return (
         <Link
             disablePrefetch={disablePrefetch}
@@ -14,11 +62,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch }) {
                 posthog?.capture('deploy option clicked', { deploy_option: title })
             }}
         >
-            {icon && (
-                <svg className="w-5 h-5 text-black dark:text-white">
-                    <use xlinkHref={`#${icon}`}></use>
-                </svg>
-            )}
+            {Icon && <Icon className="w-4" />}
             <span>{title}</span>
         </Link>
     )

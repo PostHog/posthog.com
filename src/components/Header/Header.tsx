@@ -1,15 +1,11 @@
 import React from 'react'
-import './style.scss'
 import MainNav from '../MainNav'
-import Sprites from './Sprites'
+import './style.scss'
 
 export const Header = (): JSX.Element => {
     return (
-        <>
-            <Sprites />
-            <header className="relative z-[9999] p-5">
-                <MainNav />
-            </header>
-        </>
+        <header className="relative z-[9999] p-5">
+            <MainNav />
+        </header>
     )
 }
