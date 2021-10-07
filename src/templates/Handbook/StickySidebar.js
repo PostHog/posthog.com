@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
@@ -57,10 +57,11 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         currentClassName="active-link"
                     >
                         {tableOfContents?.map((navItem, index) => (
-                            <li style={{ marginLeft: `${navItem.depth / 1.5}rem` }} key={index}>
+                            <li key={index}>
                                 <InternalSidebarLink
                                     url={navItem.url}
                                     name={navItem.value}
+                                    depth={navItem.depth}
                                     style={activeId === navItem.url ? { opacity: '1' } : {}}
                                     className="hover:opacity-100 opacity-60 text-[15px]"
                                 />
