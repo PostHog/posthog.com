@@ -8,6 +8,16 @@ PostHog tracks user behaviour, whether or not the user is logged in and identifi
 
 A short video on Persons can be found [here](https://youtu.be/8_SsZW1v56Q);
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/andy.jpeg"
+        size="md"
+        name="Andy Su"
+        title="Founder and CEO, Pry"
+        quote={`“PostHog helps us answer questions like how valuable customers are who come to us via ads as opposed to those who are organic. We were able to answer that question with PostHog and use that information to make decisions about our advertising strategy, which is hugely valuable to us.”`}
+    />
+</BorderWrapper>
+
 ## Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GtSSxmOdyk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

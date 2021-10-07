@@ -8,6 +8,16 @@ You can create dashboard panels to display information you are collecting with P
 
 Dashboard panels can be created from any tab in 'Insights', and they can be tables, line charts, funnels, and pie charts.
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/anca.png"
+        size="md"
+        name="Anca Filip"
+        title="Head of Product, Mention Me"
+        quote={`“The first thing I did was create a dashboard and it took just ten minutes to get the information I needed. I hadn’t ever been able to get those insights from Google Analytics...seeing that information in PostHog was amazing.”`}
+    />
+</BorderWrapper>
+
 ## Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XUKQvXrE96k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

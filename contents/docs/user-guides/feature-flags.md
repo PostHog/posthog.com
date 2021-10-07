@@ -10,6 +10,16 @@ Feature flags allow you to safely deploy and roll back new features. It means yo
 
 ## Learning resources
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/joe.png"
+        size="md"
+        name="Joe Saunderson"
+        title="Software Engineer, Mention Me"
+        quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate — and PostHog is at the core of it.”`}
+    />
+</BorderWrapper>
+
 ### Tutorial
 
 For a comprehensive step-by-step tutorial on how to use feature flags, check out [How to safely roll out new features](/docs/tutorials/feature-flags).

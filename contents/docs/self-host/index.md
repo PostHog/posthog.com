@@ -31,3 +31,13 @@ There are various ways to configure and personalize your PostHog instance to bet
 - [Securing PostHog](/docs/self-host/configure/securing-posthog)
 - [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
 - [Email configuration](/docs/self-host/configure/email)
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/joe.png"
+        size="md"
+        name="Joe Saunderson"
+        title="Software Engineer, Mention Me"
+        quote={`“We self-hosted PostHog because we needed to keep everything on our infrastructure. Our clients’ privacy is very important to us and we have obligations to store their data safely.”`}
+    />
+</BorderWrapper>
