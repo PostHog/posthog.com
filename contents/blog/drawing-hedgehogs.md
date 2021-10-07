@@ -25,8 +25,6 @@ For example, last year I chased a 'tech-head' visual involving human mascots wit
 
 Eventually I realized my error and iterated towards something better - but please, learn from my mistake and avoid such confused fumblings.
 
-**[insert image of tech heads]**
-
 ## Do market research
 
 I find that some good old market research is the perfect spring board for ideas, and that looking at companies with similar values can be especially rewarding. 
