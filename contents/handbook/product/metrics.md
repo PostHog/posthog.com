@@ -30,10 +30,13 @@ We exclude the following events from counting as they don't signal getting actua
 ## Additional context
 - The metric is purposefully kept simple to make it easy to action and avoid complex edge cases in an already ambiguous landscape (product changes all the time).
 - Why not _Discovered Learnings_? It seems to have a higher correlation to retention, but:
-  - It limits us only to trends and funnels, and users drive value from a variety of other sources. We're particularly investing in providing more value in others parts of the app too. It's a trade-off between better retention prediction and better immediate signaling.
+  - It limits us only to trends and funnels, and users drive value from a variety of other sources. We're particularly investing in providing more value in others parts of the app too.
+  - While Discovered Learnings seems to lead to higher levels of retention percentually, in absolute numbers we retain more users through Discoveries (1).
   - Counts when users open an insight shared by another user (direct link).
 - Caveat: This metric also captures any value from Marketing efforts. As we start to invest more in user acquisition, we'll need to isolate the effect from Marketing in this Product metric.
 
+
+(1): _A test carried out on Oct 6 with cohorts from Aug 8 to Aug 29, 2021 revealed that Discoveries show 2.3x more retained users (in absolute numbers) and had an F1-score 33% higher than for Discovered Learnings._
 
 [dashboard]: https://app.posthog.com/dashboard/14719
 [action]: https://app.posthog.com/action/10784
