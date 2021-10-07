@@ -79,6 +79,7 @@ authors:
       image: https://www.gravatar.com/avatar/ecc56977271e781991b6172c16248459?w=90,
       link_type: twitter,
       link_url: https://twitter.com/leggetter
+    }
   - {
       handle: lottie-coxon,
       name: Lottie Coxon,
