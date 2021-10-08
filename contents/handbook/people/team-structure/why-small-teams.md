@@ -45,6 +45,8 @@ Think of the Small Team as the company you work for, and your line manager as yo
 
 No. This defeats the purpose of ownership. We should be hiring in both places. Sometimes that'll mean we "overstaff" certain teams, but in reality there will always be further projects we can move people onto if they run out of work. It's better to do this than to be perpetually understaffed and for our product to suffer as a result.
 
+Despite not being possible to be in multiple small teams - you can certainly attend the meetings of other small teams and otherwise work closely with them for the purposes of collaboration with your small team.
+
 ### Who is in a Small Team?
 
 No more than 6 people, but that's the only rule. It could be any group of people working together.
@@ -88,11 +90,11 @@ Spend money when it makes sense to do so. See our general policy on spending mon
 
 ### How do you keep the product together as a company?
 
-Marcus (Tim until Marcus starts) will be ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+Marcus is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 ### How do you stop duplicate work?
 
-Marcus (Tim until Marcus starts) has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+Marcus has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 
