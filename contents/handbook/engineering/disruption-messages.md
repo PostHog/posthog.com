@@ -12,7 +12,7 @@ On the Cloud version of PostHog we have the ability to show a message in a yello
 
 The disruption message should be used when:
 1. **Outage:** Services PostHog relies on are unavailable or intermittent (e.g. Clickhouse is in scheduled maintenance)
-2. **Data Integrity:** Data is temporarily missing, inaccurate (e.g. duplicated) or significantly delayed
+2. **Data integrity:** Data is temporarily missing, inaccurate (e.g. duplicated) or significantly delayed
 3. **Slow:** Significant regression in the performance of querying or user experience
 
 This list is just a guide - if you feel a disruption message would be valuable in a different scenario, use it.
