@@ -18,7 +18,7 @@ Recordings can only be used with our [JavaScript library](/docs/integrate/client
 Please note recordings does not work if you send data using Segment's SDK as this data is not collected. If you use Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source).
 </blockquote>
 
-Recordinsg can be toggled on and off in the JS library by appropriately setting the [config](/docs/integrate/client/js/#config). Users who opt out of event capturing will not have their sessions recorded.
+Recordings can be toggled on and off in the JS library by appropriately setting the [config](/docs/integrate/client/js/#config). Users who opt out of event capturing will not have their sessions recorded.
 
 To watch recordings, you can either visit the 'Recordings' page or click on any data point in an insight and from the list of persons related to that data point. This is specially useful in funnels, where you can **watch recordings of users who converted or dropped off.**
 
