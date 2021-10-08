@@ -8,8 +8,6 @@ Feature flags allow you to safely deploy and roll back new features. It means yo
 
 > **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
-## Learning resources
-
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/joe.png"
@@ -19,6 +17,8 @@ Feature flags allow you to safely deploy and roll back new features. It means yo
         quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate — and PostHog is at the core of it.”`}
     />
 </BorderWrapper>
+
+## Learning resources
 
 ### Tutorial
 
