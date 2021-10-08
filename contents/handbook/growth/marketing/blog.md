@@ -19,7 +19,7 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
 
 Joe is currently the main person responsible for our content output, but we are actively hiring a [Technical Content Marketer](https://apply.workable.com/posthog/j/B547BBDE8C/) to lead this area. 
 
-We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publically available as it is information that could be beneficial to our competitors. 
+We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publicly available as it is information that could be beneficial to our competitors. 
 
 If you have any good blog post ideas join our #ideas-for-blog-post Slack channel!
 
