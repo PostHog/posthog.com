@@ -1,5 +1,5 @@
 ---
-title: Runbooks
+title: Runbook
 sidebar: Docs
 showTitle: true
 ---
