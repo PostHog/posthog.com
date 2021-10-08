@@ -62,7 +62,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch }) {
                 posthog?.capture('deploy option clicked', { deploy_option: title })
             }}
         >
-            {Icon && <Icon className="w-4" />}
+            {Icon && <Icon />}
             <span>{title}</span>
         </Link>
     )
