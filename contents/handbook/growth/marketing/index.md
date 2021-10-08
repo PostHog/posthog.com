@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The Marketing team's objective is to _increase the number of relevant visitors to posthog.com._ Once a visitor lands on our website, the Growth team are then responsible for maximising conversion and activation. 
+The Marketing team's main focus is acquisition. Our specific objective is to _get as many relevant developers and technical product managers as possible to visit posthog.com_ 
 
-As we aspire to product-led growth, we believe that it is important to treat our Website & Docs as their own product as well, rather than having them be owned by Marketing. 
+Once a visitor lands on our website, the [Growth](/handbook/people/team-structure/growth) team are responsible for maximising activation. 
 
 ## Positioning
 
-We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools:
+We use a positioning statement to help us think about how we can continue to improve and evolve PostHog ahead of alternative tools:
 
 _For product managers who need to understand their users, PostHog is the only open-source, all-in-one analytics platform that offers everything from funnel analysis and cohort tracking, to feature flags and session recording._ 
 
@@ -18,33 +18,39 @@ _Unlike traditional tools, PostHog offers self-hosted deployments so that data d
 
 See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
 
-## Value propositions
+### Value propositions
 
-We have used our messaging framework to then articulate a series of [value propositions](https://posthog.com/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels. This is particular important for paid ads. 
+We have used our messaging framework to then articulate a series of [value propositions](/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels. This is particular important for paid ads. 
 
-## Products
+### Target user
+
+We have built out two user personas and will continue to flesh these out and add more as we gather more information:
+
+- Sam Software, a senior software engineer
+- Pam Product, a senior product manager
+
+See our [customer personas page](/handbook/growth/marketing/customer-personas) for more information about what is important to these users and how we ensuring they have the best possible experience with PostHog across all product and marketing touchpoints. 
+
+### Products
 
 An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
 - **PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
 - **PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
+- **PostHog Enterprise** is positioned to service large enterprises who have more complex or involved infra and config needs. 
 - **PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
-
-## Target audience
-
-*Innovative technical teams* building growth products, who care about:
-
-- a unified product analytics platform
-- open source
-- control: hosting, pricing, source, data, privacy and security
-
-We are in the process of building more specific user personas. 
 
 ## Acquisition channels
 
-We have identified a number of acquisition channels that we are prioritising based on our target user. These are split into scalable and non-scalable channels. Some of these are not owned by Marketing, but are closely linked:
+We have identified a number of channels that we are prioritising based on our target users. Some of these are not owned by Marketing, but are closely linked.
 
 <img width="1140" alt="Screenshot 2021-08-17 at 15 43 45" src="https://user-images.githubusercontent.com/70321811/129747467-549d0547-4cb6-43da-a83e-0411dc1c6001.png" />
+
+- [Content & SEO](/handbook/growth/marketing/blog)
+- [Email](/handbook/growth/marketing/newsletter)
+- [Paid ads](/handbook/growth/marketing/paid)
+- [Press](/handbook/growth/marketing/press)
+- [Sponsorship](/handbook/growth/marketing/open-source-sponsorship)
 
 ### Team
 
