@@ -60,7 +60,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 ### Debugging helm charts
 
 Issues around deployments can be tricky to solve. It's useful to ask for context around:
-1. What is their values.yml file
+1. What is their `values.yml` file
 2. What guide they were following
 3. What is the output of `kubectl get pods -A`
 4. If any pod is not healthy, what is the output of `kubectl logs -n posthog <podname>`
