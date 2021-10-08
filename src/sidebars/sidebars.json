@@ -313,18 +313,6 @@
                     "url": "/handbook/growth/marketing"
                 },
                 {
-                    "name": "Content",
-                    "url": "/handbook/growth/marketing/blog"
-                },
-                {
-                    "name": "Email",
-                    "url": "/handbook/growth/marketing/newsletter"
-                },
-                {
-                    "name": "Paid & SEO",
-                    "url": "/handbook/growth/marketing/paid"
-                },
-                {
                     "name": "Customer personas",
                     "url": "/handbook/growth/marketing/customer-personas"
                 },
@@ -333,18 +321,37 @@
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "name": "Press",
-                    "url": "/handbook/growth/marketing/press"
-                },
-                {
-                    "name": "Open-source sponsorship",
-                    "url": "/handbook/growth/marketing/open-source-sponsorship"
-                },
-                {
                     "name": "Product announcements",
                     "url": "/handbook/growth/marketing/product-announcements"
+                },
+                {
+                    "name": "Acquisition channels",
+                    "url": "",
+                    "children": [
+                        
+                        {
+                             "name": "Content & SEO",
+                             "url": "/handbook/growth/marketing/blog"
+                        },
+                        {
+                             "name": "Email",
+                             "url": "/handbook/growth/marketing/newsletter"
+                        },
+                        {
+                             "name": "Paid ads",
+                             "url": "/handbook/growth/marketing/paid"
+                        },
+                        {
+                             "name": "Press",
+                             "url": "/handbook/growth/marketing/press"
+                        },
+                        {
+                             "name": "Open-source sponsorship",
+                             "url": "/handbook/growth/marketing/open-source-sponsorship"
+                        }
+                        ]
                 }
-            ]
+             ]
         },
         {
             "name": "Growth",
