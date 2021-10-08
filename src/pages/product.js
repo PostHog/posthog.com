@@ -1,15 +1,16 @@
+import Chip from 'components/Chip'
+import { AWS, Azure, GCS, GitHub, Heroku, More } from 'components/Icons/Icons'
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import './styles/features.scss'
-import { ProductFooter } from '../components/ProductFooter'
+import Layout from '../components/Layout'
+import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
 import { ProductFeature } from '../components/ProductFeature'
 import ProductImage from '../components/ProductFeature/ProductImage'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
-import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
+import { ProductFooter } from '../components/ProductFooter'
 import { ProductSectionHeader } from '../components/ProductSectionHeader'
-import Chip from 'components/Chip'
 import { SEO } from '../components/seo'
-import { StaticImage } from 'gatsby-plugin-image'
-import Layout from '../components/Layout'
+import './styles/features.scss'
 
 function ProductPage() {
     return (
@@ -124,29 +125,39 @@ function ProductPage() {
                                     <Chip
                                         className="m-1"
                                         text="Heroku"
-                                        icon="heroku"
+                                        icon={<Heroku className="w-5 h-5" />}
                                         href="/docs/self-host/deploy/heroku"
                                     />
-                                    <Chip className="m-1" text="AWS" icon="aws" href="/docs/self-host/deploy/aws" />
+                                    <Chip
+                                        className="m-1"
+                                        text="AWS"
+                                        icon={<AWS className="w-5 h-5" />}
+                                        href="/docs/self-host/deploy/aws"
+                                    />
                                     <Chip
                                         className="m-1"
                                         text="Google Cloud"
-                                        icon="gcs"
+                                        icon={<GCS className="w-5 h-5" />}
                                         href="/docs/self-host/deploy/gcs"
                                     />
                                     <Chip
                                         className="m-1"
                                         text="Azure"
-                                        icon="azure"
+                                        icon={<Azure className="w-5 h-5" />}
                                         href="/docs/self-host/deploy/azure"
                                     />
                                     <Chip
                                         className="m-1"
                                         text="Source"
-                                        icon="github"
+                                        icon={<GitHub className="w-5 h-5" />}
                                         href="/docs/self-host/deploy/source"
                                     />
-                                    <Chip className="m-1" text="More" icon="more" href="/docs/deployment" />
+                                    <Chip
+                                        className="m-1"
+                                        text="More"
+                                        icon={<More className="w-5 h-5" />}
+                                        href="/docs/deployment"
+                                    />
                                 </ul>
                             </div>
 
