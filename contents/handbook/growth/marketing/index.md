@@ -40,6 +40,8 @@ An **open source product analytics platform**, PostHog addresses the lack of cho
 - **PostHog Enterprise** is positioned to service large enterprises who have more complex or involved infra and config needs. 
 - **PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
+Depending on the significance of the change to our product, may do an [announcement](/handbook/growth/marketing/product-announcements).
+
 ## Acquisition channels
 
 We have identified a number of channels that we are prioritising based on our target users. Some of these are not owned by Marketing, but are closely linked.
