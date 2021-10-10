@@ -1,14 +1,13 @@
+import Breadcrumbs from 'components/Breadcrumbs'
 import React from 'react'
-import { Link } from 'gatsby'
-import Layout from 'components/Layout'
-import { PosthogAnnouncement } from '../../PosthogAnnouncement/PosthogAnnouncement'
-import { GetStartedModal } from '../../GetStartedModal'
-import { BlogFooter } from '../../BlogFooter'
-import { BlogShareButtons } from '../BlogShareButtons'
-import { Structure } from '../../Structure'
-import { DarkModeToggle } from '../../DarkModeToggle'
 import { AuthorsData } from 'types'
+import { BlogFooter } from '../../BlogFooter'
+import { CrumbProps } from '../../Breadcrumbs'
+import { GetStartedModal } from '../../GetStartedModal'
+import { PosthogAnnouncement } from '../../PosthogAnnouncement/PosthogAnnouncement'
+import { Structure } from '../../Structure'
 import { BlogIntro } from '../BlogIntro'
+import { BlogShareButtons } from '../BlogShareButtons'
 
 interface BlogPostLayoutProps {
     pageTitle: string
@@ -18,6 +17,7 @@ interface BlogPostLayoutProps {
     blogArticleSlug: string
     blogDate?: string
     authorDetails?: AuthorsData
+    category: CrumbProps
 }
 
 export function BlogPostLayout({
@@ -28,23 +28,18 @@ export function BlogPostLayout({
     blogArticleSlug,
     blogDate,
     authorDetails,
+    category,
 }: BlogPostLayoutProps): JSX.Element {
+    const crumbs = [
+        { title: 'Blog', url: '/blog' },
+        ...(category ? [{ ...category, truncate: true }] : []),
+        { title: pageTitle, truncate: true },
+    ]
     return (
         <div className="text-primary dark:text-primary-dark">
-            <div className="md:mx-8">
-                <div className="flex justify-between items-center w-full px-4 md:px-0 mb-4 md:mb-6 mt-6 lg:mt-4">
-                    <div className="flex-grow">
-                        <Link
-                            to="/blog"
-                            className="text-gray-900 hover:text-gray-900 dark:text-white dark:hover:text-white hover:underline"
-                        >
-                            &larr; Back to blog
-                        </Link>
-                    </div>
-                    <DarkModeToggle />
-                </div>
+            <div className="px-4 mt-4 mb-9">
+                <Breadcrumbs crumbs={crumbs} darkModeToggle />
             </div>
-
             <BlogIntro
                 authorDetails={authorDetails}
                 featuredImageType={featuredImageType}

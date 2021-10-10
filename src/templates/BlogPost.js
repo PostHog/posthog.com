@@ -1,15 +1,15 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { SEO } from 'components/seo'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
+import Layout from 'components/Layout'
+import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { SEO } from 'components/seo'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { findAuthor } from 'lib/utils'
+import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 
-export default function BlogPost({ data }) {
+export default function BlogPost({ data, location: { state } }) {
     const { postData, authorsData } = data
     const {
         fields: { slug },
@@ -21,6 +21,7 @@ export default function BlogPost({ data }) {
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
     const authorDetails = findAuthor(authors)(author)
+    const category = state?.category
     const components = {
         h1: H1,
         h2: H2,
@@ -47,6 +48,7 @@ export default function BlogPost({ data }) {
                 featuredImageType={featuredImageType}
                 blogArticleSlug={slug}
                 authorDetails={authorDetails}
+                category={category}
             >
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

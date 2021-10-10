@@ -219,9 +219,11 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             path,
             component: BlogCategoryTemplate,
             context: {
-                title: `Blog: ${category}`,
+                title: category,
                 category,
+                pathname: path,
                 slug,
+                crumbs: [{ title: 'Blog', url: '/blog' }, { title: category }],
             },
         })
     })
