@@ -44,7 +44,7 @@ Events:                <none>
 
 1. List your pods
     ```
-    ➜ kubectl get pods
+    ➜ kubectl get pods -n posthog
     NAME                          READY   STATUS    RESTARTS   AGE
     posthog-posthog-kafka-0       1/1     Running   0          5m15s
     ```
@@ -63,13 +63,18 @@ Events:                <none>
     persistentvolumeclaim/data-posthog-posthog-kafka-0 patched
     ```
 
-    Note: while resizing the PVC you might get an error `disk resize is only supported on Unattached disk, current disk state: Attached`. In this specific case you need to temporary scale down the `StatefulSet` replica value to zero. **This will briefly disrupt the Kafka service availability and all the events after this point will be dropped as event ingestion will stop working**
+    Note: while resizing the PVC you might get an error `disk resize is only supported on Unattached disk, current disk state: Attached` (see below for more details).
+    <details>
+
+    In this specific case you need to temporary scale down the `StatefulSet` replica value to zero. **This will briefly disrupt the Kafka service availability and all the events after this point will be dropped as event ingestion will stop working**
 
     You can do that by running: `kubectl patch statefulset posthog-posthog-kafka -p '{ "spec": { "replicas": 0 }}'`
 
     After you successfully resized the PVC, you can restore the initial replica definition with: `kubectl patch statefulset posthog-posthog-kafka -p '{ "spec": { "replicas": 1 }}'`
 
-1. Delete the `StatefulSet` definition but leave its `pod`s online: `kubectl delete sts --cascade=orphan posthog-posthog-kafka`
+    </details>
+
+1. Delete the `StatefulSet` definition but leave its `pod`s online (this is to avoid an impact on the ingestion pipeline availability): `kubectl delete sts --cascade=orphan posthog-posthog-kafka`
 
 1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example)
 
