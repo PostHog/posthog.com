@@ -99,6 +99,9 @@ ingress:
     enabled: true
 certManager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 Run the upgrade (note that if you used the UI for install, you'll need to follow the getting started guide to setup kubeconfig, if you skipped it earlier use the "Remind me how to do this" link on the Kubernetes cluster tab)
@@ -126,6 +129,9 @@ ingress:
     enabled: true
 certManager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 ### 2. Install the chart
