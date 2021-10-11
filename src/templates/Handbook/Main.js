@@ -10,6 +10,7 @@ import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
 import { useActions } from 'kea'
 import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
+import { Heading } from 'components/Heading'
 
 const A = (props) => <a {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => (
@@ -65,6 +66,12 @@ export default function Main({
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()

@@ -755,7 +755,7 @@
 [[redirects]]
     from = "/handbook/growth/marketing/Customer-personas"
     to = "/handbook/growth/marketing/customer-personas"
-
+    
 # Added: 2021-09-20
 [[redirects]]
     from = "/handbook/engineering/product-team"
@@ -781,7 +781,17 @@
     from = "/handbook/engineering/debugging"
     to = "/handbook/engineering/production-access"
 
-# Added: 2021-9-22
+# Added: 2021-10-6
 [[redirects]]
-    from = "/handbook/product/scale-features-prioritization"
-    to = "/handbook/engineering/scale-features-prioritization"
+    from = "/docs/user-guides/session-recording"
+    to = "/docs/user-guides/recordings"
+
+# Added: 2021-10-6
+[[redirects]]
+    from = "/docs/user-guides/session-recording"
+    to = "/docs/user-guides/recordings"
+
+# Added: 2021-10-6
+[[redirects]]
+    from = "/docs/user-guides/users"
+    to = "/docs/user-guides/persons"

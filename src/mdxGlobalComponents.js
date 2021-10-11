@@ -42,6 +42,7 @@ import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
+import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
@@ -134,6 +135,7 @@ export const shortcodes = {
     Footer,
     GetStartedModal,
     GithubIcon,
+    Heading,
     HiddenSection,
     Home,
     HostingOption,
