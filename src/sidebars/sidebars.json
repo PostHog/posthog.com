@@ -490,7 +490,7 @@
                     "children": [
                         {
                             "name": "Overview",
-                            "url": "/docs/self-host/runbook/overview"
+                            "url": "/docs/self-host/runbook"
                         },
                         {
                             "name": "Kafka",

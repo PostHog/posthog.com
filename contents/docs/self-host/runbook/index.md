@@ -1,5 +1,6 @@
 ---
 title: Runbook
+sidebarTitle: Runbook
 sidebar: Docs
 showTitle: true
 ---
