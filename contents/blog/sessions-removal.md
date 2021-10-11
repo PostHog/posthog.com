@@ -39,7 +39,7 @@ From the context above, we decided to take the following actions:
     ![Person modal with recordings](../images/blog/person-modal-with-recordings.png)
 
 - On a Person page, recordings are now shown first (if enabled) and events as a secondary tab.
-- We've renamed the "Sessions recordings" feature into just "Recordings" to make it clear this are separate features, with different use cases.
+- We've renamed the "Sessions recordings" feature into just "Recordings" to make it clear these are separate features, with different use cases.
 - We're evaluating getting rid of the "Sessions" insight. The functionality is quite limited (only a time distribution with scant visualization) and confusing (e.g. the events/actions that compose a session). Further, only 1.5% of insights analyzed in the last month were on "Sessions". Please [reach out](/slack) if you have any thoughts.
 
 
