@@ -37,15 +37,7 @@ If you don't already have a cluster setup you should follow the getting started 
 
 You will also need to secure your PostHog deployment.
 
-### CLI
-
-Alternatively use [doctl](https://github.com/digitalocean/doctl) which also sets up kubeconfig for you.
-
-```console
-doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
-```
-
-### Configuring kubectl access
+#### Configuring kubectl access
 
 To monitor, debug, and maintain your PostHog instance, you should connect to your cluster using `kubectl`.
 
@@ -55,6 +47,14 @@ The simplest way to do this is with the following command:
 
 ```shell
 doctl kubernetes cluster kubeconfig save your_posthog_cluster_name
+```
+
+### CLI
+
+Alternatively use [doctl](https://github.com/digitalocean/doctl) which also sets up kubeconfig for you.
+
+```console
+doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
 ```
 
 ### Accessing PostHog
