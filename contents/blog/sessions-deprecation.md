@@ -1,5 +1,5 @@
 ---
-date: 2021-10-07
+date: 2021-10-11
 title: Sessions deprecation
 rootPage: /blog
 sidebar: Blog
@@ -8,9 +8,10 @@ hideAnchor: true
 author: paolodamico
 featuredImage: ../images/blog/generic-release-notes.png
 featuredImageType: full
+categories: ["General", "Release notes"]
 ---
 
-This blog post describes our process to deprecate and remove the previously existing "Sessions" page in PostHog. This page used to contain a list of all sessions by your users on a given day, where sessions were calculated by periods of activity where no inactivity larger than 30 minutes was detected. In addition, this is where you would be able to access [recordings](/docs/user-guides/recordings).
+This blog post explains the deprecation and removal of the "Sessions" page in PostHog. This page used to contain a daily list of all sessions by your users, separating them by periods where inactivity lasted longer than 30 minutes. In addition, this is where you would be able to access [recordings](/docs/user-guides/recordings).
 
 Now, you will see a **Recordings** tab on the main menu in its place.
 
@@ -32,11 +33,13 @@ For the second case, sessions is not the best way to solve the problem. Further,
 ### What's new?
 
 From the context above, we decided to take the following actions:
-- The sessions page has been removed. It introduced significant confusion and provided limited value. In numerical terms, less than 3% of pageviews in the app in the last month were on the sessions page for users with no recordings enabled (proxy metric).
-- Introduced a recordings list page instead. This page is mostly intended for finding specific recordings you want to watch (e.g. customer support or recordings with exceptions). This page also includes filtering tools geared towards that. _Funnels will be the starting point for other use cases._
-- On the Person modal you get when clicking on a data point in an insight graph, and particularly in Funnels, you now get a direct link to relevant recordings for the specific users in the data point.
+- We have removed the Sessions page. It introduced significant confusion and provided limited value. Less than 3% of pageviews in the app in the last month were on the sessions page for users with no recordings enabled (proxy metric).
+- We introduced a recordings list page instead. This page is mostly intended for finding specific recordings you want to watch (e.g. customer support or recordings with exceptions). This page also includes filtering tools geared towards that. _Funnels will be the starting point for other use cases._
+- On the Person modal you get when clicking on a data point in an insight graph, and particularly in Funnels, you now get a direct link to relevant recordings for the specific users in the data point. 
+    ![Person modal with recordings](../images/blog/person-modal-with-recordings.png)
+
 - On a Person page, recordings are now shown first (if enabled) and events as a secondary tab.
-- We're evaluating getting rid of the "Sessions" insight. The functionality is quite limited (only a time distribution with scant visualization) and confusing (e.g. the events/actions that compose a session). Further, only 1.5% of insights analyzed in the last month were on "Sessions".
+- We're evaluating getting rid of the "Sessions" insight. The functionality is quite limited (only a time distribution with scant visualization) and confusing (e.g. the events/actions that compose a session). Further, only 1.5% of insights analyzed in the last month were on "Sessions". Please [reach out](/slack) if you have any thoughts.
 
 
 In addition to the changes above, we're also significantly improving recordings ingestion and the playback experience. This will make sure more sessions are captured and that you can seamlessly find the relevant parts of a recording.
