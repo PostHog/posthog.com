@@ -483,6 +483,20 @@
                             "url": "/docs/self-host/configure/upgrading-posthog"
                         }
                     ]
+                },
+                {
+                    "name": "Runbook",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host/runbook/overview"
+                        },
+                        {
+                            "name": "Kafka",
+                            "url": "/docs/self-host/runbook/kafka"
+                        }
+                    ]
                 }
             ]
         },
