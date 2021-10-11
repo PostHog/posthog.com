@@ -38,10 +38,23 @@ If you don't already have a cluster setup you should follow the getting started 
 You will also need to secure your PostHog deployment.
 
 ### CLI
+
 Alternatively use [doctl](https://github.com/digitalocean/doctl) which also sets up kubeconfig for you.
 
 ```console
 doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
+```
+
+### Configuring kubectl access
+
+To monitor, debug, and maintain your PostHog instance, you should connect to your cluster using `kubectl`.
+
+To do so, you should follow [these instructions](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
+
+The simplest way to do this is with the following command:
+
+```shell
+doctl kubernetes cluster kubeconfig save your_posthog_cluster_name
 ```
 
 ### Accessing PostHog
@@ -50,13 +63,13 @@ After deploying PostHog to your Kubernetes cluster you can get the IP to connect
 
 <DOIPAddressSnippet />
 
-Congrats, you have a working PostHog instance =)
+Congrats, you now have a working PostHog instance!
 
 You can now [integrate your development applications](/docs/integrate) with your PostHog deployment for testing purposes.
 
 > Note: You will only be able to test web apps on HTTP such as those running on `localhost`.
 
-But there's one more important step before using it in production: making sure the data is not at risk, see the next section.
+But there's one more important step before using PostHog in production: securing your instance. See the next section for details.
 
 ### Securing your 1-click install
 
@@ -76,7 +89,7 @@ Create an `A` record from your desired hostname to the external IP.
 
 #### 3. Update PostHog
 
-Create `values.yaml`:
+Create a `values.yaml` file in the current directory with the following content:
 
 ```yaml
 cloud: "do"

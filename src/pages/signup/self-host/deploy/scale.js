@@ -55,7 +55,7 @@ export default function SelfHost({ location }) {
                             />
                             <TrackedCTA
                                 href="https://license.posthog.com/"
-                                size="sm"
+                                size="md"
                                 type="outline"
                                 className="text-dark-yellow hover:!text-dark-yellow self-start !text-opacity-100 mt-7"
                                 event={{ name: 'deploy: clicked Get license key' }}
