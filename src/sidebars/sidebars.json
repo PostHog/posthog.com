@@ -423,7 +423,7 @@
             "url": "/docs"
         },
         {
-            "name": "Self-host",
+            "name": "Get Started",
             "url": "",
             "children": [
                 {
@@ -453,6 +453,14 @@
                         {
                             "name": "Digital Ocean",
                             "url": "/docs/self-host/deploy/digital-ocean"
+                        },
+                        {
+                            "name": "Google Cloud Platform",
+                            "url": "/docs/self-host/deploy/gcp"
+                        },
+                        {
+                            "name": "Other platforms",
+                            "url": "/docs/self-host/deploy/other"
                         },
                         {
                             "name": "Google Cloud Platform",

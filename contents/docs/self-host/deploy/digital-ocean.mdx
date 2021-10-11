@@ -19,9 +19,11 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-[Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running.
+[Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running.
+<br />
 
-The first thing you'll need is a get a Digital Ocean account. You can click on the badge above to get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
+The first thing you'll need is a get a Digital Ocean account. You can click on the badge below to get $100 in credit over 60 days (i.e. run PostHog for free for 2 months).
+<br />
 
 <center>
   <a href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" title="DigitalOcean Referral">
@@ -95,7 +97,9 @@ First, we need to set up a Kubernetes cluster (see the official DigitalOcean [do
 
 <ClusterRequirementsSnippet />
 
-#### 1. Chart configuration
+### 1. Set up K8s cluster
+
+First, we need to set up a Kubernetes Cluster. See [Kubernetes quickstart](https://docs.digitalocean.com/products/kubernetes/quickstart/). Note that the minimum total resource requirements to run PostHog are 4vcpu and 4G of memory.
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
