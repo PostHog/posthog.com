@@ -23,7 +23,7 @@ _posthog.com/blog or somewhere else?_
 
 _Add or remove items to the amplification checklist_
 
-To maximize the reach of the blog content we create it's recommeneded that that we amplify in the following way:
+To maximize the reach of the blog content we create it's recommeneded that that we amplify in the following way. Note that we generally discourage using hashtags on Twitter, especially in the middle of sentences. 
 
 - [ ] Twitter (west cost US)
 - [ ] Scheduled again on Twitter (east coast US and Europe)
