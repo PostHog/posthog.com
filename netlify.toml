@@ -801,3 +801,9 @@
 [[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
+
+
+# Added: 2021-10-11
+[[redirects]]
+    from = "/docs/self-host/runbook/overview"
+    to = "/docs/self-host/runbook"
