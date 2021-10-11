@@ -1,6 +1,6 @@
 ---
 date: 2021-10-11
-title: Sessions deprecation
+title: Why we're removing the sessions page
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["General", "Release notes"]
 ---
 
-This blog post explains the deprecation and removal of the "Sessions" page in PostHog. This page used to contain a daily list of all sessions by your users, separating them by periods where inactivity lasted longer than 30 minutes. In addition, this is where you would be able to access [recordings](/docs/user-guides/recordings).
+This blog post explains why we're removing the "Sessions" page in PostHog. This page used to contain a daily list of all sessions by your users, separating them by periods where inactivity lasted longer than 30 minutes. In addition, this is where you would be able to access [recordings](/docs/user-guides/recordings).
 
 Now, you will see a **Recordings** tab on the main menu in its place.
 
@@ -39,6 +39,7 @@ From the context above, we decided to take the following actions:
     ![Person modal with recordings](../images/blog/person-modal-with-recordings.png)
 
 - On a Person page, recordings are now shown first (if enabled) and events as a secondary tab.
+- We've renamed the "Sessions recordings" feature into just "Recordings" to make it clear these are separate features, with different use cases.
 - We're evaluating getting rid of the "Sessions" insight. The functionality is quite limited (only a time distribution with scant visualization) and confusing (e.g. the events/actions that compose a session). Further, only 1.5% of insights analyzed in the last month were on "Sessions". Please [reach out](/slack) if you have any thoughts.
 
 

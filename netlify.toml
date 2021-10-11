@@ -799,5 +799,5 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/blog/sessions-removal"
-    to = "/blog/sessions-deprecation"
+    from = "/blog/sessions-deprecation"
+    to = "/blog/sessions-removal"
