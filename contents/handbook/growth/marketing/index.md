@@ -6,7 +6,7 @@ showTitle: true
 
 The Marketing team's main focus is acquisition. Our specific objective is to _get as many relevant developers and technical product managers as possible to visit posthog.com_ 
 
-Once a visitor lands on our website, the [Growth](/handbook/people/team-structure/growth) team are responsible for maximising activation. 
+Once a visitor lands on our website, the [Growth](/handbook/people/team-structure/growth) team are responsible for maximizing activation. 
 
 ## Positioning
 
