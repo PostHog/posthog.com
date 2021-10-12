@@ -280,6 +280,10 @@
                 {
                     "name": "ClickHouse query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
+                },
+                {
+                    "name": "Disruption Messages",
+                    "url": "/handbook/engineering/disruption-messages"
                 }
             ]
         },
