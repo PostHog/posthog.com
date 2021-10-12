@@ -24,8 +24,9 @@ Note that this is not the case for `ManyToManyField`s – they are only fetched 
 
 With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
 
-Generally this means avoiding migrations that need to process each row individually on _large_ tables, as then the migration may take forever, or may even obtain a persisting lock on the entire table, causing severe issues for the app.
-Examples of this are:
+Generally this means avoiding migrations that need to process each row individually on _large_ tables (events, but also persons, person distinct IDs, or logs), as then the migration may take forever, or may even obtain a persisting lock on the entire table, causing severe issues for the app.
+
+Examples of operations that are dangerous at scale are:
 - Adding new fields **with a non-null default** (null is fine, as it avoids a lock).
 - Iterating over all rows individually.
 
