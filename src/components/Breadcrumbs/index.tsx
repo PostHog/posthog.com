@@ -11,8 +11,10 @@ export interface CrumbProps {
 }
 
 interface BreadcrumbsProps {
-    crumbs: CrumbProps[]
+    crumbs?: CrumbProps[]
     darkModeToggle?: boolean
+    children?: JSX.Element | JSX.Element[]
+    className?: string
 }
 
 const crumbText = (classes = '') => cntl`
@@ -24,16 +26,16 @@ const crumbText = (classes = '') => cntl`
     ${classes}
 `
 
-function Crumb({ url, title, className = '', truncate }: CrumbProps): JSX.Element {
+export function Crumb({ url, title, className = '', truncate }: CrumbProps): JSX.Element {
     // If crumbs get more complex, create a conditional wrapper component to keep code DRY
     const truncateStyles: React.CSSProperties = {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        maxWidth: 200,
     }
     return (
         <li
-            style={truncate ? { overflow: 'hidden', minWidth: 80 } : {}}
             className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
         >
             {url ? (
@@ -49,13 +51,21 @@ function Crumb({ url, title, className = '', truncate }: CrumbProps): JSX.Elemen
     )
 }
 
-export default function Breadcrumbs({ crumbs, darkModeToggle }: BreadcrumbsProps): JSX.Element {
+export default function Breadcrumbs({
+    crumbs,
+    darkModeToggle,
+    children,
+    className = '',
+}: BreadcrumbsProps): JSX.Element {
     return (
-        <ul className="list-none p-0 m-0 flex border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b">
-            {crumbs &&
-                crumbs.map((crumb, index) => {
-                    return <Crumb key={index} {...crumb} />
-                })}
+        <ul
+            className={`list-none p-0 m-0 flex border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b ${className}`}
+        >
+            {children ||
+                (crumbs &&
+                    crumbs.map((crumb, index) => {
+                        return <Crumb key={index} {...crumb} />
+                    }))}
             {darkModeToggle && (
                 <li className="flex ml-auto border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                     <DarkModeToggle />

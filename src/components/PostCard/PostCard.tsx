@@ -1,6 +1,5 @@
 import 'antd/lib/card/style/css'
 import Byline from 'components/Blog/BlogAuthor/Byline'
-import { CrumbProps } from 'components/Breadcrumbs'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import React from 'react'
@@ -41,15 +40,7 @@ const ReadPostHome = ({ to }: { to: string }) => {
     )
 }
 
-const FeaturedPost = ({
-    post,
-    authorDetails,
-    category,
-}: {
-    post: PostTypeWithImage
-    authorDetails?: AuthorsData
-    category?: CrumbProps
-}) => {
+const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     const MetaContent = ({ className }: { className: string }): JSX.Element => (
         <div
             className={`lg:max-w-xl backdrop-blur ${className}`}
@@ -71,7 +62,6 @@ const FeaturedPost = ({
     return (
         <div className="w-full my-8">
             <Link
-                state={{ category }}
                 to={post.fields.slug}
                 className="text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100"
             >
@@ -92,19 +82,11 @@ const FeaturedPost = ({
     )
 }
 
-const LandingPageLatestPost = ({
-    post,
-    authorDetails,
-    category,
-}: {
-    post: PostTypeWithImage
-    authorDetails?: AuthorsData
-    category?: CrumbProps
-}) => {
+const LandingPageLatestPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
             <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
-                <Link state={{ category }} to={post.fields.slug} className="featured-post-img">
+                <Link to={post.fields.slug} className="featured-post-img">
                     <img
                         className="w-full h-auto block rounded shadow-lg mb-0"
                         src={post.frontmatter.featuredImage.publicURL}
@@ -113,11 +95,7 @@ const LandingPageLatestPost = ({
             </div>
             <div className="w-full py-4">
                 <h2 className="text-2xl text-white font-sans normal-case my-1">
-                    <Link
-                        state={{ category }}
-                        to={post.fields.slug}
-                        className="text-white hover:text-white hover:underline"
-                    >
+                    <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
                 </h2>
@@ -131,19 +109,11 @@ const LandingPageLatestPost = ({
     )
 }
 
-const LandingPageSnippet = ({
-    post,
-    authorDetails,
-    category,
-}: {
-    post: PostTypeWithImage
-    authorDetails?: AuthorsData
-    category?: CrumbProps
-}) => {
+const LandingPageSnippet = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
             <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
-                <Link state={{ category }} to={post.fields.slug} className="featured-post-img">
+                <Link to={post.fields.slug} className="featured-post-img">
                     <img
                         className="w-full h-auto block rounded shadow-lg mb-0"
                         src={post.frontmatter.featuredImage.publicURL}
@@ -152,11 +122,7 @@ const LandingPageSnippet = ({
             </div>
             <div className="w-full py-2">
                 <h2 className="text-lg text-white font-sans normal-case my-1 leading-tight">
-                    <Link
-                        state={{ category }}
-                        to={post.fields.slug}
-                        className="text-white hover:text-white hover:underline"
-                    >
+                    <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
                 </h2>
@@ -184,14 +150,12 @@ const PostCard = ({
     landingPage = false,
     snippet = false,
     authorDetails,
-    category,
 }: {
     post: PostType
     featured?: boolean
     landingPage?: boolean
     snippet?: boolean
     authorDetails?: AuthorsData
-    category: CrumbProps
 }): JSX.Element => {
     const { site } = useStaticQuery(query)
     const { defaultImage } = site.siteMetadata
@@ -202,25 +166,17 @@ const PostCard = ({
     return (
         <div>
             {featured ? (
-                <FeaturedPost category={category} post={post} authorDetails={authorDetails} />
+                <FeaturedPost post={post} authorDetails={authorDetails} />
             ) : landingPage ? (
-                <LandingPageLatestPost category={category} post={post} authorDetails={authorDetails} />
+                <LandingPageLatestPost post={post} authorDetails={authorDetails} />
             ) : snippet ? (
-                <LandingPageSnippet category={category} post={post} authorDetails={authorDetails} />
+                <LandingPageSnippet post={post} authorDetails={authorDetails} />
             ) : (
                 <div className="flex flex-col mb-6">
                     <h5 className="mb-0 font-bold font-sans normal-case leading-tight">
-                        <Link
-                            state={{ category }}
-                            to={post.fields.slug}
-                            className="dark:text-primary-dark text-primary"
-                        >
+                        <Link to={post.fields.slug} className="dark:text-primary-dark text-primary">
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
-                                <Link
-                                    state={{ category }}
-                                    to={post.fields.slug}
-                                    className="featured-post-img overflow-hidden"
-                                >
+                                <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     {gatsbyImageData ? (
                                         <GatsbyImage
                                             className="w-full rounded-md"

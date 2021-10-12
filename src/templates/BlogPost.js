@@ -9,7 +9,7 @@ import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 
-export default function BlogPost({ data, location: { state } }) {
+export default function BlogPost({ data, pageContext }) {
     const { postData, authorsData } = data
     const {
         fields: { slug },
@@ -21,7 +21,6 @@ export default function BlogPost({ data, location: { state } }) {
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
     const authorDetails = findAuthor(authors)(author)
-    const category = state?.category
     const components = {
         h1: H1,
         h2: H2,
@@ -32,7 +31,7 @@ export default function BlogPost({ data, location: { state } }) {
         pre: CodeBlock,
         ...shortcodes,
     }
-
+    const { categories } = pageContext
     return (
         <Layout>
             <SEO
@@ -48,7 +47,7 @@ export default function BlogPost({ data, location: { state } }) {
                 featuredImageType={featuredImageType}
                 blogArticleSlug={slug}
                 authorDetails={authorDetails}
-                category={category}
+                categories={categories}
             >
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

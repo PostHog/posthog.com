@@ -20,13 +20,10 @@ const Blog = ({
 }) => {
     const posts = edges.filter((edge) => !!edge.node.frontmatter.date)
     const title = pageContext?.title || 'Blog'
-    const categoryTitle = pageContext?.category
-    const category = categoryTitle && { title: categoryTitle, url: pageContext?.pathname }
     const crumbs = pageContext?.crumbs || [{ title: 'Blog' }]
     const findAuth = findAuthor(authors)
     const latestPost = (
         <PostCard
-            category={category}
             key={posts[0].node.id}
             post={posts[0].node}
             featured
@@ -36,12 +33,7 @@ const Blog = ({
     const nonLatestPosts = posts
         .slice(1)
         .map((edge) => (
-            <PostCard
-                category={category}
-                authorDetails={findAuth(edge.node.frontmatter.author)}
-                key={edge.node.id}
-                post={edge.node}
-            />
+            <PostCard authorDetails={findAuth(edge.node.frontmatter.author)} key={edge.node.id} post={edge.node} />
         ))
 
     return (
