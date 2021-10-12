@@ -1,5 +1,5 @@
 ---
-title: Schema changes
+title: Making schema changes safely
 sidebar: Handbook
 showTitle: true
 ---
