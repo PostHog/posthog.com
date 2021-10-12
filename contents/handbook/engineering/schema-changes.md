@@ -10,7 +10,7 @@ and require extra effort from the engineering team.
 
 Below are some important considerations to keep in mind regarding schema changes:
 
-## Deleting Django model fields is risky
+## Avoid deleting Django model fields
 
 Deleting columns, even completely unused ones, is discouraged.
 
@@ -24,15 +24,18 @@ Note that this is not the case for `ManyToManyField`s – they are only fetched 
 
 With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
 
-Generally this means avoiding migrations that need to process each row individually on large tables.
+Generally this means avoiding migrations that need to process each row individually on _large_ tables, as then the migration may take forever, or may even obtain a persisting lock on the entire table, causing severe issues for the app.
+Examples of this are:
+- Adding new fields **with a non-null default** (null is fine, as it avoids a lock).
+- Iterating over all rows individually.
 
-For a quick overview of Cloud scale, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
+> For a quick overview of what Cloud scale _looks like_, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
 
-## ClickHouse?
+## Tread carefully with ClickHouse schema changes
 
-- What are important considerations for designing a ClickHouse schema or migration?
-- What's the difference between self-hosted and Cloud ClickHouse migrations?
-- Do Django `infi.clickhouse_orm` migrations apply to Cloud?
+ClickHouse is at the core of PostHog's scalable analytics capabilities. The ClickHouse schema can be changed just like the Postgres one – with migrations – but there are two important bits of complexity added:
 
-@macobo
-@fuziontech
+1. ClickHouse has no indexes like traditional databases. Instead, each table has a sorting key, defined in the `ORDER BY` clause of the table. This determines how data is laid out on disk, and ClickHouse reads data in the order it's laid out, so it's important that the sorting key is optimal for the table's use cases.
+2. Tables that store events are _sharded_ + _distributed_ in PostHog Cloud. This improves performance in multi-tenant architecture, but means that updating these is not straightforward like with most tables, and may require manual write access to the cluster.
+
+To make sure that your new ClickHouse migration is A-OK – both above points having been addressed – make sure you loop in someone with extensive experience operating ClickHouse for review. Specifically, Karl and James G. can be of help.
