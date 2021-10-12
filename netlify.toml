@@ -785,3 +785,9 @@
 [[redirects]]
     from = "/handbook/product/scale-features-prioritization"
     to = "/handbook/engineering/scale-features-prioritization"
+
+
+# Added: 2021-10-12
+[[redirects]]
+    from = "/docs/user-guides/persons"
+    to = "/docs/user-guides/users"
