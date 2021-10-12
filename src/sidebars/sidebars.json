@@ -258,7 +258,7 @@
                     "url": "/handbook/engineering/production-access"
                 },
                 {
-                    "name": "Guide to safe schema changes",
+                    "name": "Making schema changes safely",
                     "url": "/handbook/engineering/schema-changes"
                 },
                 {
