@@ -258,6 +258,10 @@
                     "url": "/handbook/engineering/production-access"
                 },
                 {
+                    "name": "Guide to safe schema changes",
+                    "url": "/handbook/engineering/schema-changes"
+                },
+                {
                     "name": "AWS tips and FAQ",
                     "url": "/handbook/engineering/aws"
                 },
