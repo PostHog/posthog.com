@@ -32,4 +32,10 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 
 Additionally, when dealing with inputs, if you wish to still capture the input box but not its contents, you can use the class name `ph-ignore-input` instead.
 
+## Controlling the volume of recordings
 
+There is an option to automatically delete old session recordings after a (configurable) number of days in the project settings page. This feature is currently in beta - email hey@posthog.com to get this enabled if you'd like to use it.
+
+If you want further control, you can choose to enable session recordings using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
+
+To do this, default session recording to false, by setting `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config), and then conditionally call the method to enable it using the feature flag. The method is `posthog.startSessionRecording`.
