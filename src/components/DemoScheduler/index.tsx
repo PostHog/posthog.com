@@ -2,15 +2,15 @@ import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 import { Spacer } from '../Spacer'
-import { CalendlyEventListener, InlineWidget } from 'react-calendly'
+import { CalendlyEventListener, EventScheduledEvent, InlineWidget } from 'react-calendly'
 
 export const DemoScheduler = ({
-    iframeSrc = 'https://calendly.com/yakko/yc-onboarding-group',
+    iframeSrc = 'https://calendly.com/yakko/posthog-demo',
 }: {
     iframeSrc?: string
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
-    const calendlyEventScheduled = (e) => {
+    const calendlyEventScheduled = (e: EventScheduledEvent) => {
         const { event, payload = null } = e.data
         posthog?.capture(event, {
             calendly_event_uri: payload?.event.uri,

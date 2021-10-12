@@ -34,7 +34,9 @@ Body:
 }
 ```
 
-### Example request & response
+### Example request & response: /decide v2
+
+`/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
 
 #### Request
 
@@ -42,7 +44,41 @@ Body:
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "1234"
-}' https://app.posthog.com/decide/
+}' https://app.posthog.com/decide?v=2
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value"
+  }
+}
+```
+
+### Example request & response: /decide v1 (legacy)
+
+`/decide` version 1 is still the default if the query parameter `v` is not specified, although the latest `posthog-js` library no longer uses version 1 of the decide endpoint, and we recommend using version 2 as described above.
+
+#### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234"
+}' https://app.posthog.com/decide?v=1
 ```
 
 #### Response
@@ -60,12 +96,15 @@ curl -v -L --header "Content-Type: application/json" -d '  {
   ],
   "featureFlags": [
     "my-awesome-flag-1",
-    "my-awesome-flag-2"
+    "my-awesome-flag-2",
+    "my-multivariate-flag"
   ]
 }
 ```
 
-From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `featureFlags` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+
+Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
 
 ## Sending events
 
@@ -206,6 +245,100 @@ curl -v -L --header "Content-Type: application/json" -d '{
 }' https://app.posthog.com/batch/
 ```
 
+### Responses
+
+#### Status code: 200
+
+##### Responses
+
+```js
+{ 
+    status: 1 
+}
+```
+
+**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (token) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested. 
+
+
+#### Status code: 400
+
+##### Responses
+
+
+```js
+{   
+    type: 'validation_error', 
+    code: 'invalid_project', 
+    detail: 'Invalid Project ID.', 
+    attr: 'project_id' 
+}
+```
+
+**Meaning:** We were unable to determine the project to associate the events with.
+
+
+#### Status code: 401
+
+##### Responses
+
+
+```js
+{   
+    type: 'authentication_error', 
+    code: 'invalid_api_key', 
+    detail: 'Project API key invalid. You can find your project API key in PostHog project settings.', 
+}
+```
+
+**Meaning:** The token/API key you provided is invalid.
+
+import { Divider } from 'antd'
+
+<br />
+
+<Divider dashed style={{ background: '#eeeeee', height: 1 }} />
+
+<br />
+
+
+```js
+{   
+    type: 'authentication_error', 
+    code: 'invalid_personal_api_key', 
+    detail: 'Invalid Personal API key.', 
+}
+```
+
+**Meaning:**  The personal API key you used for authentication is invalid.
+
+#### Status code: 503 (Deprecated)
+
+##### Responses
+
+
+```js
+{   
+    type: 'server_error', 
+    code: 'fetch_team_fail', 
+    detail: 'Unable to fetch team from database.'
+}
+```
+
+**Meaning:** (Deprecated) This error will only occur in self-hosted Postgres instances if the database becomes unavailable. On ClickHouse-backed instances database failures cause events to be added to a dead letter queue, from which they can be recovered.
+
+### Invalid events
+
+We perform basic validation on the payload and project API key (token), returning a failure response if an error is encountered.
+
+However, we **will not return an error** to the client when the following happens:
+
+- An event does not have a name
+- An event does not have the `distinct_id` field set
+- The `distinct_id` field of an event has an empty value
+
+The three cases above will cause the event to not be ingested, but you will still receive a `200: OK` response from us. 
+
+This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints. 
 
 ## Reading data from PostHog
 
