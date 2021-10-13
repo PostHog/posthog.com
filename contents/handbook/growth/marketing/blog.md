@@ -28,7 +28,7 @@ Our content production workflow is as follows:
 * **Artwork:** We put an emphasis on the visual quality of the content we ship. If you're writing a blog post, you'll need an image to accompany it. If you're creating a video, you'll need a poster image (the still image that displays before you click play). Add the [Artwork project board](https://github.com/orgs/PostHog/projects/14) in your issue or PR at least several days in advance of when you'll need it. [Learn more in the Publishing section below.](#publishing)
   * **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 * **Extract the audio from the edited video (optional):** This goes into the podcast.
-* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed.
+* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
 
 ## Publishing
 
