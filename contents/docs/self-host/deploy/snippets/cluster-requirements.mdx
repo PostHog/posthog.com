@@ -1,0 +1,12 @@
+#### Cluster requirements
+* Kubernetes version >= 1.19
+* Ensure your cluster has enough resources to run PostHog (we suggest a total minimum of 4 vcpu & 8GB of memory).
+* Ensure the `AllowVolumeExpansion` parameter is set to `True` in the storage class definition (this setting enables PVC resize)
+    <details>
+
+    ```console
+    $ kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
+    true
+    ```
+
+    </details>

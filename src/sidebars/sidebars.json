@@ -429,14 +429,6 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Digital Ocean",
-                            "url": "/docs/self-host/deploy/digital-ocean"
-                        },
-                        {
-                            "name": "Google Cloud Platform",
-                            "url": "/docs/self-host/deploy/gcp"
-                        },
-                        {
                             "name": "AWS",
                             "url": "/docs/self-host/deploy/aws"
                         },
@@ -445,16 +437,20 @@
                             "url": "/docs/self-host/deploy/azure"
                         },
                         {
-                            "name": "Other",
+                            "name": "Digital Ocean",
+                            "url": "/docs/self-host/deploy/digital-ocean"
+                        },
+                        {
+                            "name": "Google Cloud Platform",
+                            "url": "/docs/self-host/deploy/gcp"
+                        },
+                        {
+                            "name": "Other platforms",
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
-                            "name": "Chart configuration",
+                            "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
-                        },
-                        {
-                            "name": "Troubleshooting and FAQ",
-                            "url": "/docs/self-host/deploy/troubleshooting"
                         },
                         {
                             "name": "Upgrade Notes",
@@ -463,6 +459,10 @@
                         {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
+                        },
+                        {
+                            "name": "Troubleshooting and FAQ",
+                            "url": "/docs/self-host/deploy/troubleshooting"
                         }
                     ]
                 },
