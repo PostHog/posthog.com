@@ -56,6 +56,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                    frontmatter {
+                        categories
+                    }
                 }
             }
             sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
@@ -130,6 +133,15 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const handbookMenuFlattened = flattenMenu(handbookMenu)
     const docsMenu = result.data.sidebars.childSidebarsJson.docs
     const docsMenuFlattened = flattenMenu(docsMenu)
+    const categories = {}
+    result.data.categories.group.forEach(({ category }) => {
+        const slug = slugify(category, { lower: true })
+        const url = `/blog/categories/${slug}`
+        categories[category] = {
+            slug,
+            url,
+        }
+    })
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
@@ -203,25 +215,27 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
+        const postCategories = node.frontmatter.categories || []
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
             context: {
                 id: node.id,
+                categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
             },
         })
     })
 
-    result.data.categories.group.forEach(({ category: category }) => {
-        const slug = slugify(category, { lower: true })
-        const path = `/blog/categories/${slug}`
+    Object.keys(categories).forEach((category) => {
+        const { url, slug } = categories[category]
         createPage({
-            path,
+            path: url,
             component: BlogCategoryTemplate,
             context: {
-                title: `Blog: ${category}`,
+                title: category,
                 category,
                 slug,
+                crumbs: [{ title: 'Blog', url: '/blog' }, { title: category }],
             },
         })
     })
