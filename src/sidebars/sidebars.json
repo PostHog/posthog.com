@@ -258,6 +258,10 @@
                     "url": "/handbook/engineering/production-access"
                 },
                 {
+                    "name": "Making schema changes safely",
+                    "url": "/handbook/engineering/schema-changes"
+                },
+                {
                     "name": "AWS tips and FAQ",
                     "url": "/handbook/engineering/aws"
                 },
@@ -280,6 +284,10 @@
                 {
                     "name": "ClickHouse query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
+                },
+                {
+                    "name": "Disruption Messages",
+                    "url": "/handbook/engineering/disruption-messages"
                 }
             ]
         },
@@ -481,6 +489,20 @@
                         {
                             "name": "Upgrading PostHog",
                             "url": "/docs/self-host/configure/upgrading-posthog"
+                        }
+                    ]
+                },
+                {
+                    "name": "Runbook",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host/runbook/overview"
+                        },
+                        {
+                            "name": "Kafka",
+                            "url": "/docs/self-host/runbook/kafka"
                         }
                     ]
                 }
@@ -724,8 +746,8 @@
                     "url": "/docs/user-guides/sessions"
                 },
                 {
-                    "name": "Session Recording",
-                    "url": "/docs/user-guides/session-recording"
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO (Single sign-on authentication)",
@@ -744,8 +766,8 @@
                     "url": "/docs/user-guides/trends"
                 },
                 {
-                    "name": "Users/People",
-                    "url": "/docs/user-guides/users"
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
                 }
             ]
         },

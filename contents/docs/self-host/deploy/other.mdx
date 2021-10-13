@@ -13,7 +13,7 @@ import TryUnsecureSnippet from './snippets/tryunsecure'
 For all other platforms, we suggest setting up Kubernetes first and using the helm chart directly to deploy a PostHog instance with Nginx ingress controller.
 
 ## Prerequisites
-- [Kubernetes](http://kubernetes.io) 1.16+
+- [Kubernetes](http://kubernetes.io) 1.19+
 - [Helm](https://helm.sh) >= v3
 
 
@@ -28,6 +28,9 @@ ingress:
     enabled: true
 certManager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 <InstallingSnippet />
