@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We do not currently do email marketing, beyond product announcements via newsletter. In the future, we will probably want to grow this channel. 
+We do not currently do email marketing, beyond product announcements via our newsletter, the PostHog Array. This is sent via Mailchimp. In the future, we will probably want to grow this channel. The Growth team use email for onboarding and other email flows, but this page covers marketing only. 
 
-Speak to James, Yakko, or Mo for access to our Mailchimp dashboard.
+Speak to Charles, Yakko, or Charles for more information. 
 
 ## Lists
 

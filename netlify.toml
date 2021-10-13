@@ -796,16 +796,15 @@
     from = "/handbook/product/scale-features-prioritization"
     to = "/handbook/engineering/scale-features-prioritization"
 
+# Added: 2021-10-11
+[[redirects]]
+    from = "/docs/user-guides/persons"
+    to = "/docs/user-guides/users"
 
 # Added: 2021-10-11
 [[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
-
-# Added: 2021-10-6
-[[redirects]]
-    from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"
 
 # Added: 2021-10-11
 [[redirects]]
