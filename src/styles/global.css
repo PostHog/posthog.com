@@ -9,7 +9,7 @@
 }
 
 main a,
-.article-content a {
+.article-content a:not(.cta) {
     @apply text-red hover:text-red font-semibold;
 }
 
@@ -118,8 +118,8 @@ p {
 }
 
 /* animated underlined links */
-.article-content a,
-footer a {
+.article-content a:not(.cta),
+footer a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
     background-size: 100% 0.1em, 0 0.1em;
