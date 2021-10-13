@@ -115,4 +115,4 @@ Another way companies can support their HR teams is to lead by example company-w
 
 Write more inclusive job descriptions, hire for traits over skills, pay people well, foster closeness often, encourage diversity (of people and ideas), and push for more transparency in your organization. That’s our secret sauce.
 
-_Loved this? Follow us on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
+_Loved this? Follow us on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
