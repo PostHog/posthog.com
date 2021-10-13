@@ -8,7 +8,7 @@ Apache Kafka is an open-source distributed event streaming platform used by thou
 
 At PostHog we mainly use it to stream events from our ingestion pipeline to ClickHouse.
 
-### 🔤 Dictionary
+### Dictionary
 * `broker`: a cluster is built by one or more servers. The servers forming the storage layer are called brokers
 * `event`: an event records the fact that "something happened" in the world or in your business. It is also called record or message in the documentation. When you read or write data to Kafka, you do this in the form of events. Conceptually, an event has a key, value, timestamp, and optional metadata headers
 * `producers`: client applications that publish (write) events to Kafka
@@ -17,7 +17,7 @@ At PostHog we mainly use it to stream events from our ingestion pipeline to Clic
 * `partition`: topics are partitioned, meaning a topic is spread over a number of "buckets" located on different Kafka brokers
 * `replication`: to make your data fault-tolerant and highly-available, every topic can be replicated, so that there are always multiple brokers that have a copy of the data just in case things go wrong
 
-### ⚙️ Standard operations
+### Standard operations
 
 #### Resize data disk
 
@@ -88,5 +88,5 @@ Events:                <none>
     /dev/disk/by-id/scsi-0DO_Volume_pvc-97776a5e-9cdc-4fac-8dad-199f1728b857   20G   40M   19G   1% /bitnami/kafka
     ```
 
-### 📚 Useful links
+### Useful links
 - [Official documentation](https://kafka.apache.org/documentation/)

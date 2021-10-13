@@ -202,6 +202,10 @@
                             "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
+                            "name": "Marketing hiring",
+                            "url": "/handbook/people/hiring-process/marketing-hiring"
+                        },
+                        {
                             "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
                         }
@@ -498,7 +502,7 @@
                     "children": [
                         {
                             "name": "Overview",
-                            "url": "/docs/self-host/runbook/overview"
+                            "url": "/docs/self-host/runbook"
                         },
                         {
                             "name": "Kafka",
