@@ -3,12 +3,12 @@ import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import React from 'react'
 import { Link } from 'react-scroll'
 
-export default function InternalSidebarLink({ url, name, className = '', style = {} }) {
+export default function InternalSidebarLink({ url, name, depth, className = '', style = {} }) {
     const key = typeof window !== 'undefined' ? window.location.pathname : 'gatsby-ssr-context'
     const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key }))
     return (
         <Link
-            style={style}
+            style={{ ...style, marginLeft: `${depth / 1.5}rem` }}
             offset={-50}
             smooth
             duration={300}
