@@ -16,7 +16,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Azure](/docs/self-host/deploy/azure)
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
-- [Using Helm Charts](/docs/self-host/deploy/other)
+- [Other platforms](/docs/self-host/deploy/other)
 
 **Fully managed**
 - [PostHog Cloud](/docs/cloud)
