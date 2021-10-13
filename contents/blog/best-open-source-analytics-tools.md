@@ -1,13 +1,14 @@
 ---
-Date: 2021-10-18
+Date: 2021-10-10
 title: The 7 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: joe-martin
-featuredImage: 
+featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
+categories: [General]
 ---
 
 Whether you’re looking for a solution for your business or side project, there’s no shortage of analytics tools to choose from. However many of the most popular tools can come with hefty price tags or other limitations which make them unsuitable for some uses. That’s where open source analytics analytics tools come in. 
@@ -19,7 +20,7 @@ Of course, not all open source analytics tools are created equal. Some tools are
 Here, we’ve selected some of the best open source analytics tools to help you choose the right open source analytics tool for you.  
 
 ## 1. [PostHog](https://posthog.com/)
-<image>
+![PostHog - Best open source analytics tool](../images/blog/open-source-analytics-tools/posthog-screenshot.png)
 
 PostHog is an all-in-one open source analytics platform that offers all of the essential tools you need to build better products, including funnels, feature flags, heat maps, session recordings and more. It’s entirely self-serve, with no SQL needed to run queries and the ability to auto-capture event information out of the box. 
 
@@ -40,7 +41,7 @@ PostHog is available under an MIT open source license. It offers a free version 
 [Try PostHog for free today](https://posthog.com/)
 
 ## 2. [Apache Spark](https://spark.apache.org/)
-<image>
+![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
 
 Apache Spark is an open source analytics engine specifically focused on large-scale data analysis — or big data analytics, as it’s commonly known. It can run on a wide range of libraries, including Hadoop, Apache Mesos or Kubernete, which makes it an incredibly versatile analytics option. 
 
@@ -56,7 +57,7 @@ However, the focus on libraries such as SQL make Apache Spark difficult for non-
 Apache Spark is available under the Apache 2.0 license and is entirely free. 
 
 ## 3. [Matomo](https://matomo.org/)
-<image>
+![Matomo- open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 Matomo is an open source web analytics platform, offering tools to help you understand users who visit your website. As a result it offers many tools you’d be more used to seeing in Google Analytics, such as keyword planners and form analytics, alongside other tools such as funnels, cohorts and heatmaps. While Google Analytics remains the most popular web analytics provider, Matomo is a solid alternative for those interested in protecting user privacy. 
 
@@ -70,7 +71,7 @@ Matomo is an open source web analytics platform, offering tools to help you unde
 Matomo is available under a AGPLv3 licence. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. 
 
 ## 4. [Plausible Analytics](https://plausible.io/)
-<image>
+![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 Like Matomo, Plausible Analytics is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is compliant with regulations such as GDPR. 
 
@@ -85,7 +86,7 @@ Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Goo
 Plausible analytics is available under a AGPLv3 licence. Pricing depends on the amount of traffic, with a 30-day free trial available. 
 
 ## 5. [Countly](https://count.ly/)
-<image>
+![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
 Like PostHog, Countly offers a wide range of tools to help you build better products. It has a strong focus on mobile products and enables you to bring together both qualitative and quantitative insights. However many features, such as dashboards or funnel analysis, are only available in the enterprise-level product. 
 
@@ -99,7 +100,7 @@ Like PostHog, Countly offers a wide range of tools to help you build better prod
 Countly is available under a AGPLv3 licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. 
 
 ## 6. Metabase
-<image>
+![Metabase - open source analytics tools](../images/blog/open-source-analytics-tools/metabase-screenshot.png)
 
 Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create sharable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
@@ -113,7 +114,7 @@ Metabase is one of the most popular open source business intelligence (BI) tools
 Metabase is available under a AGPL licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. 
 
 ## 7. [Grafana](https://grafana.com/products/cloud/) 
-<image>
+![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
 
 Grafana is more of an data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
 
