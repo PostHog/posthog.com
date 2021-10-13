@@ -42,7 +42,7 @@ PostHog is available under an MIT open source license. It offers a free version 
 ## 2. [Apache Spark](https://spark.apache.org/)
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
 
-Apache Spark is an open source analytics engine specifically focused on large-scale data analysis — or big data analytics, as it’s commonly known. It can run on a wide range of technologies, including Hadoop, Apache Mesos or Kubernete, which makes it an incredibly versatile analytics option. 
+Apache Spark is an open source analytics engine specifically focused on large-scale data analysis — or big data analytics, as it’s commonly known. It can run on a wide range of technologies, including Hadoop, Apache Mesos or Kubernetes, which makes it an incredibly versatile analytics option. 
 
 However, the focus on libraries such as SQL make Apache Spark difficult for non-technical users as support is provided solely by the community.
 
@@ -101,7 +101,7 @@ Countly is available under a AGPLv3 licence. A limited version of the product is
 ## 6. [Metabase](https://www.metabase.com/)
 ![Metabase - open source analytics tools](../images/blog/open-source-analytics-tools/metabase-screenshot.png)
 
-Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create sharable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
+Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 ### Strengths
 - Easy-to-use, no SQL required
