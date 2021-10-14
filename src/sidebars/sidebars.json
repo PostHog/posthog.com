@@ -554,6 +554,10 @@
                     "url": "/docs/integrate/identifying-users"
                 },
                 {
+                    "name": "GDPR guidance",
+                    "url": "/docs/integrate/gdpr"
+                },
+                {
                     "name": "Client libraries",
                     "url": "",
                     "children": [
