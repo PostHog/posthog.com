@@ -77,6 +77,7 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { Section } from './components/Section'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
@@ -171,6 +172,7 @@ export const shortcodes = {
     ProductSectionHeader,
     ResponsiveAnchor,
     RocketHorizontalRule,
+    Section,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,

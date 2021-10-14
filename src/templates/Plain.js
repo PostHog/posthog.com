@@ -7,6 +7,7 @@ import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import Hero from 'components/Hero'
+import { Section } from 'components/Section'
 
 export default function Plain({ data }) {
     const { pageData } = data
@@ -21,6 +22,7 @@ export default function Plain({ data }) {
         h6: H6,
         pre: CodeBlock,
         Hero,
+        Section,
         ...shortcodes,
     }
     return (
@@ -31,7 +33,7 @@ export default function Plain({ data }) {
                 article
                 image={featuredImage?.publicURL}
             />
-            <article className="max-w-2xl mx-auto my-12 md:my-24 px-4 article-content">
+            <article className="max-w-screen-2xl mx-auto my-12 md:my-24 px-4 article-content">
                 {showTitle && <h1 className="text-center">{title}</h1>}
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

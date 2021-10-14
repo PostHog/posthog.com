@@ -4,24 +4,33 @@ showTitle: false
 showSidebar: true
 ---
 
-<Hero
-    title={<>Test</>}
-    subtitle={
-        <>
-            PostHog’s self-hosted analytics platform helps teams better understand how their products are being used.
-            Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure.
-        </>
-    }
-    ctas={[
-        {
-            text: 'Get started - free',
-            href: '/',
-            type: 'primary',
-        },
-        {
-            text: 'Schedule a demo',
-            href: '/',
-            type: 'outline',
-        },
-    ]}
-/>
+<Section cols={4}>
+    <div>
+        <h3>Privacy</h3>
+        <p>
+            Keeping data on your existing infrastructure means you never have to send user data to third parties,
+            minimising the risk of breaches.
+        </p>
+    </div>
+    <div>
+        <h3>Control</h3>
+        <p>
+            Self-hosting means you control everything, from when to deploy updates to where the servers are physically
+            located.
+        </p>
+    </div>
+    <div>
+        <h3>Security</h3>
+        <p>
+            With self-hosting there’s no need for lengthy compliance or security audits. Just use your existing
+            infrastructure instead.{' '}
+        </p>
+    </div>
+    <div>
+        <h3>Security</h3>
+        <p>
+            With self-hosting there’s no need for lengthy compliance or security audits. Just use your existing
+            infrastructure instead.{' '}
+        </p>
+    </div>
+</Section>
