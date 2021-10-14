@@ -43,8 +43,8 @@ Once the setup is completed, you can pick one of those two methods to fetch the 
 > Note: before using PostHog in production remember to [secure your 1-click installation](#securing-your-1-click-install) and [configure your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
 
 <details>
-<summary>1-click install is also available via [doctl](https://github.com/digitalocean/doctl) cli</summary>
-
+<summary>1-click install is also available via doctl</summary>
+If you have [doctl](https://github.com/digitalocean/doctl) configured you can simply run:
 ```console
 doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
 ```
