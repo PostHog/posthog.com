@@ -13,7 +13,7 @@ With the number of software frameworks and services available to help with devel
 
 In this tutorial, we'll create a simple signup flow in a [Next.js](https://nextjs.org/) app, starting with a [Supabase](https://supabase.io/) example for authentication. We'll then look at how you can instrument that signup flow using the PostHog JavaScript SDK and create a signup funnel visualization within the PostHog open-source product analytics platform to analyze the success - or failure - of the signup flow.
 
-### Before you begin
+## Before you begin
 
 To follow this tutorial along, you need to:
 
@@ -120,4 +120,52 @@ You can then navigate to `http://localhost:3000` to try out the Supabase authent
 
 ![Supabase basic authentication app UI](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-app.png)
 
- We'll focus on signup for our application so try out the signup with email and password functionality as well as the magic link signup (note magic link emails for a single email address can be sent once per 60 seconds). Once you're familiar with Supabase Auth functionality, we're ready to start to build a simple traditional signup funnel.
+We'll focus on signup for our application so try out the signup with email and password functionality as well as the magic link signup (note magic link emails for a single email address can be sent once per 60 seconds). Once you're familiar with Supabase Auth functionality, we're ready to start to build a simple traditional signup funnel.
+
+## Create a signup funnel
+
+The goal of this tutorial is to demonstrate how to instrument and measure a signup flow. So, let's create a very simple signup flow as follows:
+
+1. User lands on the main website landing page which has two CTAs (call-to-actions) of **Sign Up**. One in the header and one in the landing page hero.
+2. User clicks on one of the signup buttons and is taken to the signup page.
+3. User enters their details to signup and submits the form.
+4. User successfully signs up.
+
+### Move the Auth functionality
+
+The landing page of the current app is currently the authentication page. So, let's move that to `/auth` path instead.
+
+To do this, simply rename `pages/index.js` to `pages/auth.js`. The `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
+
+If you try to sign up now, you'll be redirected to the `/` path by Supabase. In order to change the redirect to go to `/auth` we need to make two changes.
+
+Firstly, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
+
+![Supabase Auth settings](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-redirect-settings.png)
+
+Secondly, we need to update all calls to `supabaseClient.auth.signUp` and `supabaseClient.auth.signIn` within `components/Auth.js` to pass a `redirectTo` option. In order to do this, create a new `supabaseOptions` variable towards the top of `components/Auth.js`:
+
+```js
+const supabaseOptions = {
+  redirectTo: 'http://localhost:3000/auth'
+}
+```
+
+Here we set the `redirectTo` property value to `http://localhost:3000/auth` so that Supabase redirects to the `/auth` path after signup and login.
+
+Next, find all instance of `supabaseClient.auth.signUp` and `supabaseClient.auth.signIn` within `components/Auth.js` and pass in the `supabaseOptions` variable as the second parameter to the function call. For example, the first instance you'll change will look as follows:
+
+```js
+const { error: signInError } = await supabaseClient.auth.signIn({
+  email,
+  password,
+}, supabaseOptions)
+```
+
+The auth functionality should now work as it previously did but be served from `/auth`.
+
+![Supabase Auth signed in example](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signed-in.png)
+
+With that changed, we can look at adding a landing page for the signup flow.
+
+### Signup flow landing page
