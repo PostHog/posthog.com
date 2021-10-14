@@ -1,5 +1,5 @@
 ---
-title: Building and measuring a signup flow with Supabase, Next.js, and PostHog
+title: Building and measuring a signup funnel with Supabase, Next.js, and PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/spa.png
@@ -126,16 +126,23 @@ We'll focus on signup for our application so try out the signup with email and p
 
 The goal of this tutorial is to demonstrate how to instrument and measure a signup flow. So, let's create a very simple signup flow as follows:
 
-1. User lands on the main website landing page which has two CTAs (call-to-actions) of **Sign Up**. One in the header and one in the landing page hero.
+1. User lands on the main website landing page which has two CTAs (call-to-actions) of **SignUp**. One in the header and one in the landing page hero.
 2. User clicks on one of the signup buttons and is taken to the signup page.
 3. User enters their details to signup and submits the form.
-4. User successfully signs up.
+4. User receives registration verification email.
+4. User clicks the link in the email and successfully signs up.
 
 ### Move the Auth functionality
 
-The landing page of the current app is currently the authentication page. So, let's move that to `/auth` path instead.
+The landing page of the app is currently the authentication page. So, let's move that to `/auth` path instead.
 
-To do this, simply rename `pages/index.js` to `pages/auth.js`. The `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
+To do this, simply rename `pages/index.js` to `pages/auth.js`. Open `pages/auth.js` and update the default authentication view to be `sign_up` as follows:
+
+```js
+const [authView, setAuthView] = useState('sign_up')
+```
+
+The `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
 
 If you try to sign up now, you'll be redirected to the `/` path by Supabase. In order to change the redirect to go to `/auth` we need to make two changes.
 
@@ -151,7 +158,7 @@ const supabaseOptions = {
 }
 ```
 
-Here we set the `redirectTo` property value to `http://localhost:3000/auth` so that Supabase redirects to the `/auth` path after signup and login.
+Here, we set the `redirectTo` property value to `http://localhost:3000/auth` so that Supabase redirects to the `/auth` path after signup and login.
 
 Next, find all instance of `supabaseClient.auth.signUp` and `supabaseClient.auth.signIn` within `components/Auth.js` and pass in the `supabaseOptions` variable as the second parameter to the function call. For example, the first instance you'll change will look as follows:
 
@@ -169,3 +176,156 @@ The auth functionality should now work as it previously did but be served from `
 With that changed, we can look at adding a landing page for the signup flow.
 
 ### Signup flow landing page
+
+We'll keep the landing page really simple. Create a new file, `pages/index.js`, with the following content:
+
+```js
+import Link from 'next/link'
+
+const curlPostCmd = `
+curl -d '{"key1":"value1", "key2":"value2"\}' \\
+     -H "Content-Type: application/json" \\
+     -X POST https://api.awesomeapi.dev/data
+`
+
+const curlGetCmd = `
+curl -d https://api.awesomeapi.dev/data/{id}
+`
+
+const Index = () => {
+  return (
+    <div style={{ maxWidth: '520px', margin: '96px auto', fontSize: "14px" }}>
+
+        <nav>
+            <ul>
+                <li className="logo">
+                    <Link href="/">
+                        <a>Awesome API</a>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/auth">
+                        <a>
+                            <button>
+                                SignUp
+                            </button>
+                        </a>
+                    </Link>
+                </li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1 className="logo">Awesome API</h1>
+            <h2>Instantly build awesome functionality</h2>
+            <Link href="/auth">
+                <a>
+                    <button>
+                        SignUp
+                    </button>
+                </a>
+            </Link>
+        </header>
+
+        <main>
+            <h2><code>POST</code> something Awesome</h2>
+            <pre>
+                <code>
+                    {curlPostCmd.trim()}
+                </code>
+            </pre>
+
+            <h2><code>GET</code> something Awesome</h2>
+            <pre>
+                <code>
+                    {curlGetCmd.trim()}
+                </code>
+            </pre>
+        </main>
+
+        <footer>©️Awesome API 2021</footer>
+
+    </div>  
+  )
+}
+
+export default Index
+```
+
+As planned, the page has two CTA `<button>` elements that send the user to the `/auth` page for signup. One button is in the header and one is in what you could class as a "hero" location.
+
+With the file saved, append the following to the `style.css` file:
+
+```css
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+nav ul li {
+  height: 30px;
+}
+
+header h1, header h2 {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 3em;
+}
+
+header h2 {
+  font-size: 1.5em;
+}
+
+header button {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+header, main {
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 1em;
+  background-color: blue;
+  border-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+main code {
+  line-height: 1.5em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+main pre {
+  margin-bottom: 60px;
+}
+
+.logo {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.logo a, .logo a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+```
+
+This will result in an "Awesome API" landing page that looks as follows:
+
+![Awesome API example app landing page](../../images/tutorials/supabase-nextjs-signup-funnel/awesome-api-landing-page.png)
+
+Feel free to rebrand!
+
+Now that a landing page is in place we have a basic signup flow that we want the user to successfully navigate through and we're ready to instrument with PostHog.
+
+![Supabase Next.js signup flow animation](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signup-flow.gif)
