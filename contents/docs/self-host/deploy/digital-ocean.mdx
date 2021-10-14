@@ -42,11 +42,13 @@ Once the setup is completed, you can pick one of those two methods to fetch the 
 
 <DOIPAddress />
 
-> Note: before using PostHog in production remember to [secure your 1-click installation](#securing-your-1-click-install) and [configure your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
+> Note: before using PostHog in production remember to [secure your 1-click installation](#securing-your-1-click-install).
+
+> Note: You will only be able to test web apps on HTTP such as those running on `localhost`.
 
 ### Securing your 1-click install
 
-It's unfortunately [not yet possible to provide parameters to DigitalOcean](https://github.com/digitalocean/marketplace-kubernetes/issues/230), so we need a post-install step to enable TLS. In order to do this you will need [kubectl](https://kubernetes.io/docs/tasks/tools/) and [Helm](https://helm.sh/) installed.
+It's unfortunately [not yet possible to provide parameters to DigitalOcean](https://github.com/digitalocean/marketplace-kubernetes/issues/230), so we need a post-install step to enable TLS. In order to do this you will need [kubectl](https://kubernetes.io/docs/tasks/tools/) and [Helm](https://helm.sh/) installed and have [configured your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
 
 #### 1. Lookup the IP address of the installation
 
