@@ -20,6 +20,8 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
 - [Other platforms](/docs/self-host/deploy/other)
 
+If you don't know what to pick [DigitalOcean](/docs/self-host/deploy/digital-ocean) is likely the simplest.
+
 ## Configure
 
 There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
