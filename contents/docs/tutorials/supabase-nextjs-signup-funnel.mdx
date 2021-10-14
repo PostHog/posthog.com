@@ -78,7 +78,7 @@ The directory structure of your app will look as follows:
 ```
 
 - `components/Auth.js` is the signup, login, magic link, and forgot password component that makes use of Supabase Auth.
-- `lib/UserContext.js` provides functionality to get the current user, if one is logged in.
+- `lib/UserContext.js` provides functionality to get the current user from within a component wrapped in a `<UserContext />`, if a user is logged in.
 - `pages/_app.js` a Next.js [custom app component](https://nextjs.org/docs/advanced-features/custom-app) used to initialize all pages.
 - `pages/api/*` serverless API endpoints used within the Supabase authentication.
 - `pages/index.js` is presently the authentication page that uses the `Auth` component. But we'll move that shortly.
@@ -127,22 +127,24 @@ We'll focus on signup for our application so try out the signup with email and p
 The goal of this tutorial is to demonstrate how to instrument and measure a signup flow. So, let's create a very simple signup flow as follows:
 
 1. User lands on the main website landing page which has two CTAs (call-to-actions) of **SignUp**. One in the header and one in the landing page hero.
-2. User clicks on one of the signup buttons and is taken to the signup page.
-3. User enters their details to signup and submits the form.
-4. User receives registration verification email.
-4. User clicks the link in the email and successfully signs up.
+1. User clicks on one of the signup buttons and is taken to the signup page.
+1. User enters their details to signup and submits the form.
+1. User receives registration verification email.
+1. User clicks the link in the email and successfully signs up.
 
 ### Move the Auth functionality
 
-The landing page of the app is currently the authentication page. So, let's move that to `/auth` path instead.
+The landing page of the app is currently the authentication page. So, let's move that to `/auth` path instead. To do this, simply rename `pages/index.js` to `pages/auth.js`.
 
-To do this, simply rename `pages/index.js` to `pages/auth.js`. Open `pages/auth.js` and update the default authentication view to be `sign_up` as follows:
+The `/auth` page defaults to showing a sign in view. Since we are focusing on signup we need to change to default view. To do that, open `pages/auth.js` and update the default authentication view to be `sign_up` as follows:
 
 ```js
 const [authView, setAuthView] = useState('sign_up')
 ```
 
-The `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
+Finally, `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
+
+### Update the auth redirect location
 
 If you try to sign up now, you'll be redirected to the `/` path by Supabase. In order to change the redirect to go to `/auth` we need to make two changes.
 
@@ -326,6 +328,130 @@ This will result in an "Awesome API" landing page that looks as follows:
 
 Feel free to rebrand!
 
-Now that a landing page is in place we have a basic signup flow that we want the user to successfully navigate through and we're ready to instrument with PostHog.
+Now that a landing page is in place we have a basic signup flow that we want the user to successfully navigate through.
 
 ![Supabase Next.js signup flow animation](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signup-flow.gif)
+
+## Integrate with PostHog
+
+A user can now signup with our app but there are a number of potential drop-off points within the funnel. So, let's integrate the PostHog JavaScript SDK to instrument the user signup journey.
+
+Add two new environment variables to `.env.local` that will be used with the PostHog JavaScript SDK:
+
+```
+NEXT_PUBLIC_POSTHOG_API_KEY=your_posthog_api_key
+NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
+```
+
+The value for `NEXT_PUBLIC_POSTHOG_API_KEY` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project API Key** heading.
+
+The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for your running PostHog instance. If you're using cloud, this is `https://app.posthog.com`.
+
+With the required config in place we can install the PostHog JavaScript SDK:
+
+```bash
+npm i -S posthog-js
+```
+
+Create a new file, `utils/initPostHog.js`, and within it add code to initialize the PostHog JavaScript client:
+
+```js
+import posthog from 'posthog-js'
+
+export const initPostHog = () => {
+    if(typeof window !== 'undefined') {
+        posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
+            api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        })
+    }
+
+    return posthog
+}
+```
+
+The file exports a single function, `initPostHog`, that checks to ensure that the current runtime is the browser and, if so, initializes the PostHog JavaScript client with the config we've just stored. It also returns the `posthog` client instance so we can use within our app.
+
+PostHog JS has an auto-capture feature that automatically captures browser events (this can be disabled). However, it won't capture navigation events in Next.js that where the window doesn't reload so we need to add some custom code to capture navigations. Open up `pages/_app.js` and add this code within the `MyApp` function:
+
+```js
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { initPostHog } from '../utils/initPostHog'
+
+export default function MyApp({ Component, pageProps }) {
+
+  const router = useRouter()
+
+  useEffect(() => {
+    // Init for auto capturing
+    const posthog = initPostHog()
+
+    const handleRouteChange = () => {
+      if(typeof window !== 'undefined') {
+        posthog.capture('$pageview')
+      }
+    }
+
+    router.events.on("routeChangeComplete", handleRouteChange)
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange)
+    };
+  }, [router.events])
+```
+
+Here, we import the [React `useEffect`](https://reactjs.org/docs/hooks-effect.html) and [Next.js Router](https://nextjs.org/docs/api-reference/next/router) hooks. Within the `useEffect` hook we initialize the PostHog JS client using the function we've just created and bind to a `routeChangeComplete` on the Next.js router, handling the event within the `handleRouteChange` function. When this function is called, we manually trigger a page view event using PostHog js with `posthog.capture('$pageview')`.
+
+Now, head over to the **Events** section within your PostHog instance and you'll see new events appear as you test out the signup flow.
+
+![Signup funnel events in PostHog UI](../../images/tutorials/supabase-nextjs-signup-funnel/posthog-signup-funnel-events.png)
+
+Here's how some of the events can tie in to the flow we're trying to build:
+
+| Step                                                           | Event                                | Url / Screen                    |
+| -------------------------------------------------------------- | ------------------------------------ | --------------------------------|
+| 1. User lands on the main website landing page                 | Pageview                             | locahost:3000/                  |
+| 2. User clicks on one of the signup buttons                    | clicked button with text "SignUp"    | locahost:3000/                  |
+| 3. User enters their details to signup and submits the form    | submitted form                       | localhost:3000/auth             |
+| 4. User receives registration verification email               | _no event_                           | _outside of app_                |
+| 5. User clicks the link in the email and successfully signs up | _no event_                           | localhost:3000/auth             |
+
+From the above table, you can see that we can track everything up until the signup form submission.
+
+It is theoreticaly possible to track the step 4. email verification if the email sender provides a sent notification mechanism such as a webhook. So, if Supabase offered a webhook when auth emails were sent we could track this from the server.
+
+However, we need to, and should be able to, track step 5. when the user has successfully signed up. We know that the user lands on `/auth` when they are logged in. If we look at the code for that page there is a `user` variable that is set if the user is logged in. So, let's update `/pages/auth.js` so we can track a logged in user. First, include the `initPostHog` utility:
+
+```js
+import { initPostHog } from '../utils/initPostHog'
+```
+
+Next, update the `Index` definition:
+
+```js
+const Index = () => {
+  const { user, session } = useUser()
+  const { data, error } = useSWR(session ? ['/api/getUser', session.access_token] : null, fetcher)
+  const [authView, setAuthView] = useState('sign_up')
+
+  const posthog = initPostHog()
+
+  if(user) {
+    posthog.identify(user.email, user)
+    posthog.capture('loggedIn')
+  }
+
+```
+
+In the above code we utilize the `initPostHog` function again to reference an initialized PostHog JS instance. We then make two function calls:
+
+1. `posthog.identify(user.email, user)` - since the user is logged in we can identify them. We pass in `user.email`, their email address, as a destinct identifier. We also pass in the Supabase `user` variable so PostHog has access to additional user data.
+2. `posthog.capture('loggedIn')` - this triggers a simple `loggedIn` event that we can use to identify the user as successfully having logged in.
+
+If you now go through the login flow, you can map events in PostHog to the signup funnel that we're building.
+
+![Mapping events in PostHog to the signup funnel](../../images/tutorials/supabase-nextjs-signup-funnel/signup-flow-posthog-events.png)
+
+You'll also see the point at which `posthog.identify` is called since the **Person** associated with the event listed with each event entry.
+
+_Note: **Identify** is being called twice as the `Index` function is likely being called twice during the React component life cycle as the values of state variables change._
