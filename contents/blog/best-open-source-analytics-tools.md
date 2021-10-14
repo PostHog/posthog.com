@@ -19,7 +19,7 @@ Of course, not all open source analytics tools are created equal. Some tools are
 Here, we’ve selected some of the best open source analytics tools to help you choose the right open source analytics tool for you.  
 
 ## 1. [PostHog](https://posthog.com/)
-![PostHog - Best open source analytics tool](../images/blog/open-source-analytics-tools/posthog-screenshot.png)
+![PostHog - Best open source analytics tool](../images/blog/open-source-analytics-tools/posthog-screenshot1.png)
 
 PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, heat maps, session recordings and more. It’s entirely self-serve, with no SQL needed to run queries and the ability to auto-capture event information out of the box. 
 
