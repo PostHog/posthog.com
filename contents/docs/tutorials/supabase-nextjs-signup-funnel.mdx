@@ -1,0 +1,123 @@
+---
+title: Building and measuring a signup flow with Supabase, Next.js, and PostHog
+sidebar: Docs
+showTitle: true
+featuredImage: ../../images/tutorials/banners/spa.png
+---
+
+_Estimated reading time: TODO minutes_ ☕☕
+
+![SPA banner image](../../images/tutorials/banners/spa.png)
+
+With the number of software frameworks and services available to help with developer productivity and feature building, it's never been a better time to be a software developer. One of most important things you'll have to build, whether building a SaaS, developer tool, or consumer app, is a signup flow that begins on a landing page and ideally results in a successful signup. The purpose of this signup flow is to get as many real users through to being successfully signed up on your app or platform. So, it's important that you can measure whether your signup flow is converting and where any potential signups are dropping out. This is where PostHog can help.
+
+In this tutorial, we'll create a simple signup flow in a [Next.js](https://nextjs.org/) app, starting with a [Supabase](https://supabase.io/) example for authentication. We'll then look at how you can instrument that signup flow using the PostHog JavaScript SDK and create a signup funnel visualization within the PostHog open-source product analytics platform to analyze the success - or failure - of the signup flow.
+
+### Before you begin
+
+To follow this tutorial along, you need to:
+
+1. Have a [self-hosted instance of PostHog](/signup/self-host) or [sign up for PostHog Cloud](https://app.posthog.com/signup)
+1. Have a [self-hosted instance of Supabase](https://supabase.io/docs/guides/hosting/overview) or [sign up for a hosted Supabase account](https://app.supabase.io/api/login)
+
+It's easier to get up an running with the cloud hosted options. If you want to go with self-hosted then the [DigitalOcean PostHog 1-click deployment](https://posthog.com/docs/self-host/deploy/digital-ocean) makes getting started with PostHog much easier. For Supabase, [the Docker setup](https://supabase.io/docs/guides/hosting/docker) appears to be the best option.
+
+## Bootstrap signup with Supabase Auth
+
+Rather than building signup from scratch, let's instead start with an existing Supabase-powered example.
+
+Run the following in your terminal to bootstrap a Next.js application with pre-built signup and login functionality:
+
+```bash
+npx create-next-app --example https://github.com/supabase/supabase/tree/master/examples/nextjs-auth
+```
+
+The output will look similar to the following:
+
+```
+$ npx create-next-app --example https://github.com/supabase/supabase/tree/master/examples/nextjs-auth
+✔ What is your project named? … nextjs-supabase-signup-funnel
+Creating a new Next.js app in /Users/leggetter/posthog/git/nextjs-supabase-signup-funnel.
+
+Downloading files from repo https://github.com/supabase/supabase/tree/master/examples/nextjs-auth. This might take a moment.
+
+Installing packages. This might take a couple of minutes.
+
+Initialized a git repository.
+
+Success! Created nextjs-supabase-signup-funnel at /Users/leggetter/posthog/git/nextjs-supabase-signup-funnel
+```  
+
+You'll be prompted for a name for your app and the files will be downloaded into a directory with that name. Navigate into that new directory (for example, `cd nextjs-supabase-signup-funnel`) and run the following to ensure you have the latest version of the Supabase JavaScript SDK:
+
+```bash
+npm install -S @supabase/supabase-js
+```
+
+The directory structure of your app will look as follows:
+
+```bash.
+.
+├── README.md
+├── components
+│   └── Auth.js
+├── lib
+│   └── UserContext.js
+├── package.json
+├── pages
+│   ├── _app.js
+│   ├── api
+│   │   ├── auth.js
+│   │   └── getUser.js
+│   ├── index.js
+│   └── profile.js
+├── .env.local.example
+├── style.css
+└── utils
+    └── initSupabase.js
+```
+
+- `components/Auth.js` is the signup, login, magic link, and forgot password component that makes use of Supabase Auth.
+- `lib/UserContext.js` provides functionality to get the current user, if one is logged in.
+- `pages/_app.js` a Next.js [custom app component](https://nextjs.org/docs/advanced-features/custom-app) used to initialize all pages.
+- `pages/api/*` serverless API endpoints used within the Supabase authentication.
+- `pages/index.js` is presently the authentication page that uses the `Auth` component. But we'll move that shortly.
+- `pages/profile.js` is a page used to demonstrate server-side rendering.
+- `.env.local.example` environment variables/configuration.
+- `styles.css` basic styling.
+- `utils/initSupabase.js` initializes a [Supabase client](https://supabase.io/docs/reference/javascript/supabase-client) used to interact with Supabase.
+
+Now we understand the basic structure of the bootstrapped application, let's get it up and running.
+
+The one last piece of setup that's required before running the app is to create a Supabase project add the credentials from that to a `.env.local`. To create the `.env.local` run:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Now, head to the [Supabase dashboard](https://app.supabase.io/) to create a project. Click the **New project** button and you'll be presented with a "Create new project" dialog.
+
+![Supabase Create new project dialog](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-create-new-project-dialog.png)
+
+You may need to select an Organization. You will need to enter details for a project name, database password, and choose a deployment region. Once done, click the **Create new project** button.
+
+You'll then be presented with a page showing **Project API keys** and **Project Configuration**.
+
+![Supabase Project API keys and Project Configuration](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-api-keys-configuration.png)
+
+Update the contents of `.env.local` as follows:
+
+- Update the `NEXT_PUBLIC_SUPABASE_URL` value to be the URL from **Project Configuration**
+- Update the `NEXT_PUBLIC_SUPABASE_ANON_KEY` value to be the API key tagged with `anon` and `public` from **Project API keys**
+
+With the Supabase configuration in place, we can run the app with:
+
+```bash
+npm run dev
+```
+
+You can then navigate to `http://localhost:3000` to try out the Supabase authentication functionality including signup, login, login/signup with magic link (email), and forgot password.
+
+![Supabase basic authentication app UI](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-app.png)
+
+ We'll focus on signup for our application so try out the signup with email and password functionality as well as the magic link signup (note magic link emails for a single email address can be sent once per 60 seconds). Once you're familiar with Supabase Auth functionality, we're ready to start to build a simple traditional signup funnel.

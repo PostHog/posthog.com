@@ -340,30 +340,29 @@
                     "name": "Acquisition channels",
                     "url": "",
                     "children": [
-                        
                         {
-                             "name": "Content & SEO",
-                             "url": "/handbook/growth/marketing/blog"
+                            "name": "Content & SEO",
+                            "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                             "name": "Email",
-                             "url": "/handbook/growth/marketing/newsletter"
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
                         },
                         {
-                             "name": "Paid ads",
-                             "url": "/handbook/growth/marketing/paid"
+                            "name": "Paid ads",
+                            "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                             "name": "Press",
-                             "url": "/handbook/growth/marketing/press"
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
                         },
                         {
-                             "name": "Open-source sponsorship",
-                             "url": "/handbook/growth/marketing/open-source-sponsorship"
+                            "name": "Open-source sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
                         }
-                        ]
+                    ]
                 }
-             ]
+            ]
         },
         {
             "name": "Growth",
@@ -837,6 +836,10 @@
                 {
                     "name": "Analyzing your conversion with Fun…",
                     "url": "/docs/tutorials/funnels"
+                },
+                {
+                    "name": "Funnel conversation with Supabase and Next.js",
+                    "url": "/docs/tutorials/supabase-nextjs-signup-funnel"
                 },
                 {
                     "name": "Analyzing user behavior with Cohorts",
