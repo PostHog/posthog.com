@@ -1,4 +1,6 @@
+import { Heading } from 'components/Heading'
 import React from 'react'
+import GithubSlugger from 'github-slugger'
 
 const responsive = {
     wrapper: {
@@ -10,14 +12,44 @@ const responsive = {
     },
 }
 
-export const Section = ({ children, cols = 1 }: { children: JSX.Element[]; cols: number }): JSX.Element => {
+const headingSize = {
+    sm: 'text-[30px]',
+    md: 'text-[48px]',
+    lg: 'text-4xl md:text-[64px]',
+}
+
+export const Section = ({
+    children,
+    cols = 1,
+    title,
+    titleSize = 'sm',
+}: {
+    children: JSX.Element[]
+    cols: number
+    title?: string
+    tileSize?: string
+}): JSX.Element => {
+    const slugger = new GithubSlugger()
+    const id = slugger.slug(title)
     return (
-        <div className={`grid divide-dashed divide-gray-accent-light template-section ${responsive.wrapper[cols]}`}>
-            {React.Children.map(children, (child) =>
-                React.cloneElement(child, {
-                    className: `${child.props.className || ''} px-0 sm:px-7`,
-                })
+        <>
+            {title && (
+                <Heading
+                    id={id}
+                    hideCopy
+                    as="h2"
+                    className={`leading-normal text-center mb-9 ${headingSize[titleSize]}`}
+                >
+                    {title}
+                </Heading>
             )}
-        </div>
+            <div className={`grid divide-dashed divide-gray-accent-light template-section ${responsive.wrapper[cols]}`}>
+                {React.Children.map(children, (child) =>
+                    React.cloneElement(child, {
+                        className: `${child.props.className || ''} px-0 sm:px-7`,
+                    })
+                )}
+            </div>
+        </>
     )
 }

@@ -43,7 +43,6 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
-import { Hero } from './components/Hero'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
@@ -77,7 +76,6 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
-import { Section } from './components/Section'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
@@ -138,7 +136,6 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     Heading,
-    Hero,
     HiddenSection,
     Home,
     HostingOption,
@@ -172,7 +169,6 @@ export const shortcodes = {
     ProductSectionHeader,
     ResponsiveAnchor,
     RocketHorizontalRule,
-    Section,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
