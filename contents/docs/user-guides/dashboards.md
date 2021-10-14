@@ -14,7 +14,7 @@ Dashboard panels can be created from any tab in 'Insights', and they can be tabl
         size="md"
         name="Anca Filip"
         title="Head of Product, Mention Me"
-        quote={`“The first thing I did was create a dashboard and it took just ten minutes to get the information I needed. I hadn’t ever been able to get those insights from Google Analytics...seeing that information in PostHog was amazing.”`}
+        quote={`“The first thing I did was create a dashboard. It took just ten minutes to get the information I needed. Seeing that information so easily is amazing.”`}
     />
 </BorderWrapper>
 

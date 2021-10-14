@@ -35,7 +35,7 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
         size="md"
         name="Andy Su"
         title="Founder and CEO, Pry"
-        quote={`“Recently we saw people were clicking a Docs link in our footer. Nothing else in the footer, just that button. Spotting that with PostHog’s heatmap toolbar helped us know we needed to surface that link somewhere else and pushed us to put it in the main navigation.”`}
+        quote={`“Recently we saw people were clicking a Docs link in our footer. Nothing else in the footer, just that button. Spotting that with heatmaps in the toolbar helped us know we needed to surface that link somewhere else and pushed us to put it in the main navigation.”`}
     />
 </BorderWrapper>
 

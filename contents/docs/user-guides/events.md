@@ -12,7 +12,7 @@ The most critical thing that PostHog does is to capture events from your website
         size="md"
         name="Lleo Harress"
         title="Software Engineer, Mention Me"
-        quote={`“Retrospective data and event autocapture have been especially useful. We define an event and then see the retroactive data for it immediately. Previously we’d have to wait months to get usable data like that in Google Analytics or other tools.”`}
+        quote={`“Retrospective data and event autocapture are especially useful. When we have a question We can define an event and then see the retroactive data for it immediately, instead of waiting months to get new data.”`}
     />
 </BorderWrapper>
 

@@ -18,7 +18,7 @@ This is useful as it gives you an engagement statistic of how long the average u
         size="md"
         name="Anubhuti Mishra"
         title="UI/UX Designer at Hasura"
-        quote={`“I use PostHog to look at our top-performing website pages, such as tutorials, blog and pricing pages. We built a schedule around this so we are always shifting focus throughout the website and continue to improve with the help of PostHog.”`}
+        quote={`“I look at our top-performing website pages, such as tutorials, blog and pricing pages. Our team has built a schedule around this so we are always shifting focus throughout the website and continuing to improve.”`}
     />
 </BorderWrapper>
 

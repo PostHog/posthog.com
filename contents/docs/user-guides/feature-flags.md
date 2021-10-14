@@ -14,7 +14,7 @@ Feature flags allow you to safely deploy and roll back new features. It means yo
         size="md"
         name="Joe Saunderson"
         title="Software Engineer, Mention Me"
-        quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate — and PostHog is at the core of it.”`}
+        quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate.”`}
     />
 </BorderWrapper>
 

@@ -14,7 +14,7 @@ For every flow throughout your product, more people will start it than complete 
         size="md"
         name="Rikin Kachhia"
         title="Software Engineer, Hasura"
-        quote={`“Using PostHog, we observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
+        quote={`“We observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
     />
 </BorderWrapper>
 
