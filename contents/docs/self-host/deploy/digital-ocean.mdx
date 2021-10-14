@@ -10,6 +10,7 @@ tags:
 
 import GetUrlSnippet from './snippets/get-url'
 import GetIPAddressSnippet from './snippets/get-ip-address'
+import DOIPAddress from './snippets/do-ip-address'
 import PostInstallSnippet from './snippets/post-install'
 import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
@@ -37,7 +38,11 @@ You can then either follow the [1-click install](#1-click-install) or the [manua
 There is a [1-click install](https://marketplace.digitalocean.com/apps/posthog-1) option to deploy PostHog via the [DigitalOcean Marketplace](https://marketplace.digitalocean.com/).
 The DigitalOcean UI will ask you if you want to install PostHog on an already provisioned Kubernetes cluster or if you want to create a new one.
 
-Once the setup is completed, remember to [configure your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/) and [secure your 1-click installation](#securing-your-1-click-install).
+Once the setup is completed, you can pick one of those two methods to fetch the URL of your fresh new PostHog installation:
+
+<DOIPAddress />
+
+> Note: before using PostHog in production remember to [secure your 1-click installation](#securing-your-1-click-install) and [configure your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
 
 ### Securing your 1-click install
 
