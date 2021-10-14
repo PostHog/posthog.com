@@ -10,11 +10,11 @@ featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 ---
 
-Whether you’re looking for a solution for your business or side project, there’s no shortage of analytics tools to choose from. However many of the most popular tools come with hefty price tags or limitations which make them unsuitable for some uses. That’s where open source analytics analytics tools come in. 
+Whether you’re looking for a solution for your business or side project, there’s no shortage of analytics tools to choose from. However many of the most popular tools come with hefty price tags or require you to send data to their systems. That’s where open source analytics analytics tools come in. 
 
-Open source software is that which is literally developed in the open, with the source code freely available for modification and assessment. Open source companies also often provide free versions of their software, which is great if you’re looking for free open source alternatives to Mixpanel, Amplitude or other tools. 
+Open source software is literally developed in the open, with the source code freely available for modification and assessment. Open source companies also often provide free versions of their software, which is great if you’re looking for free open source alternatives to Mixpanel, Amplitude or other tools. 
 
-Of course, not all open source analytics tools are created equal. Some tools are focused on analysing massive databases, while others focus on web analytics as open source alternatives to Google Analytics. Others, such as PostHog, are all-in-one analytics platforms. 
+Of course, not all open source analytics tools are created equal. Some tools are focused on analyzing massive databases, while others focus on web analytics as open source alternatives to Google Analytics. Others, such as PostHog, are all-in-one analytics platforms. 
 
 Here, we’ve selected some of the best open source analytics tools to help you choose the right open source analytics tool for you.  
 
@@ -58,7 +58,7 @@ Apache Spark is available under the Apache 2.0 license and is entirely free.
 ## 3. [Matomo](https://matomo.org/)
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
-Matomo is an open source web analytics platform, offering tools to help you understand users who visit your website. As a result it offers many tools you’d be more used to seeing in Google Analytics, such as keyword planners and form analytics, alongside other tools such as funnels, cohorts and heatmaps. While Google Analytics remains the most popular web analytics provider, Matomo is a solid alternative for those interested in protecting user privacy. 
+Matomo is an open source platform for web analytics, rather than a product analytics. That means it's great for understanding metrics such as pageviews or for planning keywords, but it lacks product analytics features such as session recording or feature flags. Nevertheless, it's an alternative to Google Analytics for users who want to protect user privacy. 
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
@@ -115,7 +115,7 @@ Metabase is available under a AGPL licence. A limited version of the product is 
 ## 7. [Grafana](https://grafana.com/products/cloud/) 
 ![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
 
-Grafana is more of an data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
+Grafana is more of a data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
 
 ### Strengths
 - Great for tracking data in real-time
