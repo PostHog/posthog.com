@@ -1,18 +1,30 @@
 #### Cluster requirements
 * Kubernetes version >= 1.19
-* Ensure your cluster has enough resources to run PostHog (we suggest a total minimum of 4 vcpu & 8GB of memory).
-* Suggestion: ensure the `AllowVolumeExpansion` parameter is set to `True` in the storage class definition (this setting enables `PVC` resize)
+* Ensure your cluster has enough resources to run PostHog (we suggest a total minimum of 4 vcpu & 8GB of memory)
+* Suggestion: ensure `AllowVolumeExpansion` is set to `True` in the default storage class definition (this setting enables `PVC` resize)
     <details>
 
-    `PersistentVolumes` can be configured to be expandable. This feature when set to `true`, allows the users to resize the volume by editing the corresponding `PVC` object.
+    `PersistentVolumes` can be configured to be expandable. This feature when set to `true`, allows the users to resize the volume by editing the corresponding `PersistentVolumeClaims` object.
 
     This can become useful in case your storage usage grows and you want to resize the disk on-the-fly without having to resync data across PVCs.
 
-    To verify if your default storage class allows volume expansion you can run:
+    To verify if your storage class allows volume expansion you can run:
 
-    ```console
-    $ kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
+    ```shell
+    kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
     true
     ```
+
+    In case it returns `false`, you can enable volume expansion capabilities for your storage class by running:
+
+    ```shell
+    kubectl patch storageclass -p '{"allowVolumeExpansion": true}'
+    storageclass.storage.k8s.io/gp2 patched
+    ```
+
+    > N.B:
+    >  - expanding a persistent volume is a time consuming operation
+    >  - some platforms have a per-volume quota of one modification every 6 hours
+    >  - not all the volume types support this feature. Please take a look at the [official docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion) for more info
 
     </details>

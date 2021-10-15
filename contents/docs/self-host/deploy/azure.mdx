@@ -13,7 +13,7 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-First, we need to set up a Kubernetes cluster (see the official Azure [documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster) for more info). Note that Azure defaults to non-expandable volumes, to get an expandable volume see TODO (not sure if they default to non-expandable).
+First, we need to set up a Kubernetes cluster (see the official Azure [documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster) for more info).
 
 <ClusterRequirementsSnippet />
 
@@ -40,7 +40,7 @@ kafka:
 
 ### Lookup external IP
 
-```console
+```shell
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 ### Setting up DNS

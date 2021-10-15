@@ -31,7 +31,7 @@ Events:
 ### Connection is not secure
 
 First, check that DNS is set up properly:
-```console
+```shell
 nslookup <your-hostname> 1.1.1.1
 ```
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
@@ -57,9 +57,9 @@ We need to configure these well, but monitoring disk util can help catch this pr
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 
 ## FAQ
-  
+
 ### How can I increase storage size?
-  
+
 Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
 
 ### Are the errors I'm seeing important?
