@@ -23,16 +23,18 @@ export const Section = ({
     cols = 1,
     title,
     titleSize = 'sm',
+    className = '',
 }: {
     children: JSX.Element[]
     cols: number
     title?: string
-    tileSize?: string
+    titleSize?: string
+    className?: string
 }): JSX.Element => {
     const slugger = new GithubSlugger()
     const id = slugger.slug(title)
     return (
-        <>
+        <section className={`my-10 sm:my-20 lg:my-[140px] ${className}`}>
             {title && (
                 <Heading
                     id={id}
@@ -43,13 +45,15 @@ export const Section = ({
                     {title}
                 </Heading>
             )}
-            <div className={`grid divide-dashed divide-gray-accent-light template-section ${responsive.wrapper[cols]}`}>
+            <div
+                className={`grid divide-dashed divide-gray-accent-light template-section-content ${responsive.wrapper[cols]}`}
+            >
                 {React.Children.map(children, (child) =>
                     React.cloneElement(child, {
                         className: `${child.props.className || ''} px-0 sm:px-7`,
                     })
                 )}
             </div>
-        </>
+        </section>
     )
 }

@@ -491,3 +491,15 @@ ul {
         transform: translateX(10%);
     }
 }
+
+.template-section-content > * > {
+    * {
+        &:first-of-type,
+        &.mdx-header:first-of-type * {
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
