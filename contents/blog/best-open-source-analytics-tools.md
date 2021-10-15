@@ -12,7 +12,7 @@ featuredImageType: full
 
 Whether you’re looking for a solution for your business or side project, there’s no shortage of analytics tools to choose from. However many of the most popular tools come with hefty price tags or require you to send data to their systems. That’s where open source analytics analytics tools come in. 
 
-Open source software is literally developed in the open, with the source code freely available for modification and assessment. Open source companies also often provide free versions of their software, which is great if you’re looking for free open source alternatives to Mixpanel, Amplitude or other tools. 
+Open source software is literally developed in the open, with the source code freely available for modification and assessment. Such projects also often have free versions available, which is great if you’re looking for free  alternatives to Mixpanel, Amplitude or other tools. 
 
 Of course, not all open source analytics tools are created equal. Some tools are focused on analyzing massive databases, while others focus on web analytics as open source alternatives to Google Analytics. Others, such as PostHog, are all-in-one analytics platforms. 
 
@@ -21,9 +21,11 @@ Here, we’ve selected some of the best open source analytics tools to help you 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - Best open source analytics tool](../images/blog/open-source-analytics-tools/posthog-screenshot1.png)
 
-PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, heat maps, session recordings and more. It’s entirely self-serve, with no SQL needed to run queries and the ability to auto-capture event information out of the box. 
+PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, heat maps, session recordings and more. It’s entirely self-serve, with the ability to auto-capture event information out of the box. The interface makes querying your data a breeze, with no SQL required. 
 
 Best of all, PostHog can be self-hosted on your existing infrastructure — making it an excellent alternative to tools such as Mixpanel if you’re concerned about privacy. 
+
+Of course, we _would_ say PostHog is the best open source analytics platform, but if you need convincing then you can get started for free and decide for yourself today!
 
 ### Strengths
 - All-in-one analytics suite
@@ -35,7 +37,7 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 - Unlimited ability to scale 
 
 ### Open source license
-PostHog is available under an MIT open source license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data.
+PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data.
 
 > [Try PostHog for free today](https://posthog.com/) or [schedule a demo](https://posthog.com/book-a-demo) to learn more. 
 
