@@ -9,6 +9,7 @@ import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import Hero from 'components/Hero'
 import { Section } from 'components/Section'
 import FeatureSnapshot from 'components/FeatureSnapshot'
+import { Check, Close } from 'components/Icons/Icons'
 
 export default function Plain({ data }) {
     const { pageData } = data
@@ -25,6 +26,8 @@ export default function Plain({ data }) {
         Hero,
         Section,
         FeatureSnapshot,
+        Check,
+        Close,
         ...shortcodes,
     }
     return (
