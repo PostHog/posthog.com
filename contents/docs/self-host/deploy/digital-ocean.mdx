@@ -21,15 +21,13 @@ import TryUnsecureSnippet from './snippets/tryunsecure'
 
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running.
 
+The first thing you'll need is a get a Digital Ocean account. You can click on the badge above to get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
+
 <center>
   <a href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" title="DigitalOcean Referral">
     <img alt="DigitalOcean Referral Badge" src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" />
   </a>
 </center>
-
-<br />
-
-The first thing you'll need is a get a Digital Ocean account. You can click on the badge above to get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
 
 Then you can either follow the [1-click install](#1-click-install) or the [manual install](#manual-install).
 
@@ -43,6 +41,17 @@ Once the setup is completed, you can pick one of those two methods to fetch the 
 <DOIPAddress />
 
 > Note: before using PostHog in production remember to [secure your 1-click installation](#securing-your-1-click-install) and [configure your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
+
+<details>
+<summary>1-click install is also available via doctl</summary>
+If you have [doctl](https://github.com/digitalocean/doctl) configured you can simply run:
+```console
+doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
+```
+
+This will also configure your `kubectl` access.
+</details>
+
 
 ### Securing your 1-click install
 
