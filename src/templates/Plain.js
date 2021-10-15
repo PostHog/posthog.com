@@ -8,6 +8,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import Hero from 'components/Hero'
 import { Section } from 'components/Section'
+import FeatureSnapshot from 'components/FeatureSnapshot'
 
 export default function Plain({ data }) {
     const { pageData } = data
@@ -23,6 +24,7 @@ export default function Plain({ data }) {
         pre: CodeBlock,
         Hero,
         Section,
+        FeatureSnapshot,
         ...shortcodes,
     }
     return (

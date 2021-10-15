@@ -9,6 +9,7 @@ const componentsToIgnore = new Set([
     'UserLogosCarousel',
     'Section',
     'Hero',
+    'FeatureSnapshot',
 ])
 
 const getComponentsInDir = (dir, components = []) => {

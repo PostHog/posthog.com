@@ -4,33 +4,64 @@ showTitle: false
 showSidebar: true
 ---
 
-<Section cols={4}>
+<Hero
+    title="Self-hosted alternative to Google Analytics"
+    subtitle="PostHog’s self-hosted analytics platform helps teams better understand how their products are being used. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure."
+    ctas={[
+        { href: '/signup', text: 'Get started - free' },
+        { href: '/book-a-demo', text: 'Schedule a demo', type: 'outline' },
+    ]}
+/>
+
+<Section title="Why is it important to self-host your analytics?" titleSize="sm" cols={3}>
     <div>
-        <h3>Privacy</h3>
+        <h4>Privacy</h4>
         <p>
             Keeping data on your existing infrastructure means you never have to send user data to third parties,
             minimising the risk of breaches.
         </p>
     </div>
     <div>
-        <h3>Control</h3>
+        <h4>Control</h4>
         <p>
             Self-hosting means you control everything, from when to deploy updates to where the servers are physically
             located.
         </p>
     </div>
     <div>
-        <h3>Security</h3>
+        <h4>Security</h4>
         <p>
             With self-hosting there’s no need for lengthy compliance or security audits. Just use your existing
-            infrastructure instead.{' '}
+            infrastructure instead.
         </p>
     </div>
-    <div>
-        <h3>Security</h3>
-        <p>
-            With self-hosting there’s no need for lengthy compliance or security audits. Just use your existing
-            infrastructure instead.{' '}
-        </p>
-    </div>
+</Section>
+
+<Section title="Built for product-led teams" titleSize="md" cols={3}>
+    <p>
+        <strong>Track events easily and retroactively,</strong> right back to the moment PostHog was deployed.
+    </p>
+    <p>
+        Monitor any product metric and <strong>group users into cohorts</strong> based on any variable.
+    </p>
+    <p>
+        <strong>Annotate data and mark new releases,</strong> so you can understand product impact later.
+    </p>
+</Section>
+
+<Section title="Test updates safely with feature flags" titleSize="md">
+    <FeatureSnapshot
+        image="http://localhost:8000/static/a5f91c319cda67933f54770116ff8b10/c87c1/feature-flags.webp"
+        features={[
+            <>
+                <strong>Roll-out new updates in stages,</strong> so you can effortlessly roll-back if an issue arises.
+            </>,
+            <>
+                <strong>Toggle features for specific cohorts</strong> or beta-testing groups before a full release.
+            </>,
+            <>
+                <strong>Run multivariate A/B tests</strong> to gather insights and launch new features successfully.
+            </>,
+        ]}
+    />
 </Section>
