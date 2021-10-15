@@ -13,8 +13,8 @@ const responsive = {
 }
 
 const headingSize = {
-    sm: 'text-[30px]',
-    md: 'text-[48px]',
+    sm: 'text-2xl md:text-[30px]',
+    md: 'text-3xl md:text-[48px]',
     lg: 'text-4xl md:text-[64px]',
 }
 
@@ -45,12 +45,7 @@ export const Section = ({
     return (
         <section className={`my-10 sm:my-20 lg:my-[140px] ${className}`}>
             {title && (
-                <Heading
-                    id={id}
-                    hideCopy
-                    as="h2"
-                    className={`leading-normal text-center mb-9 ${headingSize[titleSize]}`}
-                >
+                <Heading id={id} hideCopy as="h2" className={`text-center mb-9 ${headingSize[titleSize]}`}>
                     {title}
                 </Heading>
             )}
