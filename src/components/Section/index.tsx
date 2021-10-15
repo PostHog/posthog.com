@@ -18,18 +18,27 @@ const headingSize = {
     lg: 'text-4xl md:text-[64px]',
 }
 
+const contentSize = {
+    full: 'w-full',
+    sm: 'max-w-[600px]',
+    md: 'max-w-[800px]',
+    lg: 'max-w-[1200px]',
+}
+
 export const Section = ({
     children,
     cols = 1,
     title,
     titleSize = 'sm',
     className = '',
+    size = 'full',
 }: {
     children: JSX.Element[]
     cols: number
     title?: string
-    titleSize?: string
+    titleSize?: 'sm' | 'md' | 'lg'
     className?: string
+    size?: 'full' | 'sm' | 'md' | 'lg'
 }): JSX.Element => {
     const slugger = new GithubSlugger()
     const id = slugger.slug(title)
@@ -46,11 +55,11 @@ export const Section = ({
                 </Heading>
             )}
             <div
-                className={`grid divide-dashed divide-gray-accent-light template-section-content ${responsive.wrapper[cols]}`}
+                className={`grid divide-dashed divide-gray-accent-light template-section-content mx-auto ${responsive.wrapper[cols]} ${contentSize[size]}`}
             >
                 {React.Children.map(children, (child) =>
                     React.cloneElement(child, {
-                        className: `${child.props.className || ''} px-0 sm:px-7`,
+                        className: `${child.props.className || ''} px-0 sm:px-7 py-2 sm:py-0`,
                     })
                 )}
             </div>
