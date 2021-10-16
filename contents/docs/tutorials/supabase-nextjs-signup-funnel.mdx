@@ -315,7 +315,7 @@ Here's how some of the events can tie in to the flow we're trying to build:
 
 From the above table, you can see that we can track everything up until the signup form submission.
 
-It is theoreticaly possible to track the step 4. email verification if the email sender provides a sent notification mechanism such as a webhook. So, if Supabase offered a webhook when auth emails were sent we could track this from the server.
+It is theoretically possible to track the step 4. email verification if the email sender provides a sent notification mechanism such as a webhook. So, if Supabase offered a webhook when auth emails were sent we could track this from the server.
 
 However, we need to, and should be able to, track step 5. when the user has successfully signed up. We know that the user lands on `/auth` when they are logged in. If we look at the code for that page there is a `user` variable that is set if the user is logged in. So, let's update `/pages/auth.js` so we can track a logged in user. First, include the `initPostHog` utility:
 
