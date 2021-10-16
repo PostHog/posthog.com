@@ -29,17 +29,17 @@ Rather than building signup from scratch, let's instead start with an existing S
 Run the following in your terminal to bootstrap a Next.js application with pre-built signup and login functionality:
 
 ```bash
-npx create-next-app --example https://github.com/supabase/supabase/tree/master/examples/nextjs-auth
+npx create-next-app --example https://github.com/PostHog/posthog-js-examples/tree/main/supabase-signup-funnel
 ```
 
 The output will look similar to the following:
 
 ```
-$ npx create-next-app --example https://github.com/supabase/supabase/tree/master/examples/nextjs-auth
+$ npx create-next-app --example https://github.com/PostHog/posthog-js-examples/tree/main/supabase-signup-funnel
 ✔ What is your project named? … nextjs-supabase-signup-funnel
 Creating a new Next.js app in /Users/leggetter/posthog/git/nextjs-supabase-signup-funnel.
 
-Downloading files from repo https://github.com/supabase/supabase/tree/master/examples/nextjs-auth. This might take a moment.
+Downloading files from repo https://github.com/PostHog/posthog-js-examples/tree/main/supabase-signup-funnel. This might take a moment.
 
 Installing packages. This might take a couple of minutes.
 
@@ -69,7 +69,7 @@ The directory structure of your app will look as follows:
 │   ├── api
 │   │   ├── auth.js
 │   │   └── getUser.js
-│   ├── index.js
+│   ├── auth.js
 │   └── profile.js
 ├── .env.local.example
 ├── style.css
@@ -81,7 +81,7 @@ The directory structure of your app will look as follows:
 - `lib/UserContext.js` provides functionality to get the current user from within a component wrapped in a `<UserContext />`, if a user is logged in.
 - `pages/_app.js` a Next.js [custom app component](https://nextjs.org/docs/advanced-features/custom-app) used to initialize all pages.
 - `pages/api/*` serverless API endpoints used within the Supabase authentication.
-- `pages/index.js` is presently the authentication page that uses the `Auth` component. But we'll move that shortly.
+- `pages/auth.js` is the authentication page that uses the `Auth` component.
 - `pages/profile.js` is a page used to demonstrate server-side rendering.
 - `.env.local.example` environment variables/configuration.
 - `styles.css` basic styling.
@@ -89,7 +89,7 @@ The directory structure of your app will look as follows:
 
 Now we understand the basic structure of the bootstrapped application, let's get it up and running.
 
-The one last piece of setup that's required before running the app is to create a Supabase project add the credentials from that to a `.env.local`. To create the `.env.local` run:
+The one last piece of setup that's required before running the app is to create a Supabase project, set some auth config, and add the credentials from that to a `.env.local`. To create the `.env.local` run:
 
 ```bash
 cp .env.local.example .env.local
@@ -110,15 +110,23 @@ Update the contents of `.env.local` as follows:
 - Update the `NEXT_PUBLIC_SUPABASE_URL` value to be the URL from **Project Configuration**
 - Update the `NEXT_PUBLIC_SUPABASE_ANON_KEY` value to be the API key tagged with `anon` and `public` from **Project API keys**
 
+Next, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
+
+![Supabase Auth settings](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-redirect-settings.png)
+
 With the Supabase configuration in place, we can run the app with:
 
 ```bash
 npm run dev
 ```
 
-You can then navigate to `http://localhost:3000` to try out the Supabase authentication functionality including signup, login, login/signup with magic link (email), and forgot password.
+You can then navigate to `http://localhost:3000/auth` to try out the Supabase authentication functionality including signup, login, login/signup with magic link (email), and forgot password.
 
 ![Supabase basic authentication app UI](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-app.png)
+
+When you're signed up and logged in the UI will look like this:
+
+![Supabase Auth signed in example](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signed-in.png)
 
 We'll focus on signup for our application so try out the signup with email and password functionality as well as the magic link signup (note magic link emails for a single email address can be sent once per 60 seconds). Once you're familiar with Supabase Auth functionality, we're ready to start to build a simple traditional signup funnel.
 
@@ -131,51 +139,6 @@ The goal of this tutorial is to demonstrate how to instrument and measure a sign
 1. User enters their details to signup and submits the form.
 1. User receives registration verification email.
 1. User clicks the link in the email and successfully signs up.
-
-### Move the Auth functionality
-
-The landing page of the app is currently the authentication page. So, let's move that to `/auth` path instead. To do this, simply rename `pages/index.js` to `pages/auth.js`.
-
-The `/auth` page defaults to showing a sign in view. Since we are focusing on signup we need to change to default view. To do that, open `pages/auth.js` and update the default authentication view to be `sign_up` as follows:
-
-```js
-const [authView, setAuthView] = useState('sign_up')
-```
-
-Finally, `pages/profile.js` file refers to the "/" path within a `<Link />` component so also update that reference.
-
-### Update the auth redirect location
-
-If you try to sign up now, you'll be redirected to the `/` path by Supabase. In order to change the redirect to go to `/auth` we need to make two changes.
-
-Firstly, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
-
-![Supabase Auth settings](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-redirect-settings.png)
-
-Secondly, we need to update all calls to `supabaseClient.auth.signUp` and `supabaseClient.auth.signIn` within `components/Auth.js` to pass a `redirectTo` option. In order to do this, create a new `supabaseOptions` variable towards the top of `components/Auth.js`:
-
-```js
-const supabaseOptions = {
-  redirectTo: 'http://localhost:3000/auth'
-}
-```
-
-Here, we set the `redirectTo` property value to `http://localhost:3000/auth` so that Supabase redirects to the `/auth` path after signup and login.
-
-Next, find all instance of `supabaseClient.auth.signUp` and `supabaseClient.auth.signIn` within `components/Auth.js` and pass in the `supabaseOptions` variable as the second parameter to the function call. For example, the first instance you'll change will look as follows:
-
-```js
-const { error: signInError } = await supabaseClient.auth.signIn({
-  email,
-  password,
-}, supabaseOptions)
-```
-
-The auth functionality should now work as it previously did but be served from `/auth`.
-
-![Supabase Auth signed in example](../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signed-in.png)
-
-With that changed, we can look at adding a landing page for the signup flow.
 
 ### Signup flow landing page
 
@@ -255,72 +218,6 @@ export default Index
 ```
 
 As planned, the page has two CTA `<button>` elements that send the user to the `/auth` page for signup. One button is in the header and one is in what you could class as a "hero" location.
-
-With the file saved, append the following to the `style.css` file:
-
-```css
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-nav ul li {
-  height: 30px;
-}
-
-header h1, header h2 {
-  margin-bottom: 20px;
-}
-
-header h1 {
-  font-size: 3em;
-}
-
-header h2 {
-  font-size: 1.5em;
-}
-
-header button {
-  padding: 10px;
-  border-radius: 10px;
-}
-
-header, main {
-  margin-bottom: 20px;
-}
-
-button {
-  font-size: 1em;
-  background-color: blue;
-  border-color: blue;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-main code {
-  line-height: 1.5em;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-main pre {
-  margin-bottom: 60px;
-}
-
-.logo {
-  text-transform: capitalize;
-  font-weight: bold;
-  font-style: italic;
-}
-
-.logo a, .logo a:visited {
-  text-decoration: none;
-  color: inherit;
-}
-```
 
 This will result in an "Awesome API" landing page that looks as follows:
 
@@ -455,3 +352,7 @@ If you now go through the login flow, you can map events in PostHog to the signu
 You'll also see the point at which `posthog.identify` is called since the **Person** associated with the event listed with each event entry.
 
 _Note: **Identify** is being called twice as the `Index` function is likely being called twice during the React component life cycle as the values of state variables change._
+
+## Create a signup funnel in PostHog
+
+Now that we have all the events for our signup flow we can define a funnel to analyze the user journey and identify drop-off points.
