@@ -19,7 +19,9 @@
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "generate-redirects": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
-        "test-redirects": "jest scripts"
+        "test-redirects": "jest scripts",
+        "storybook": "start-storybook -s ./static -p 6006",
+        "build-storybook": "build-storybook"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
@@ -104,11 +106,20 @@
         "typescript": "^4.0.2"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.5",
+        "@storybook/addon-actions": "^6.3.9",
+        "@storybook/addon-essentials": "^6.3.9",
+        "@storybook/addon-links": "^6.3.9",
+        "@storybook/addon-postcss": "^2.0.0",
+        "@storybook/builder-webpack5": "^6.3.9",
+        "@storybook/manager-webpack5": "^6.3.9",
+        "@storybook/react": "^6.3.9",
         "@types/chart.js": "^2.9.31",
         "@types/mdx-js__react": "^1.5.3",
         "@types/react-helmet": "^6.1.0",
         "@types/react-modal": "^3.10.6",
         "@typescript-eslint/parser": "^4.5.0",
+        "babel-loader": "^8.2.2",
         "eslint": "^7.9.0",
         "eslint-plugin-react": "^7.20.6",
         "husky": "^4.2.5",
@@ -117,6 +128,8 @@
         "mem": "^5.1.1",
         "prettier": "^2.1.0",
         "react-dev-utils": "^11.0.4",
+        "storybook-addon-gatsby": "0.0.2",
+        "storybook-dark-mode": "^1.0.8",
         "tailwindcss": "^2.2.4"
     },
     "husky": {
