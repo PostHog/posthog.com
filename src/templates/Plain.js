@@ -1,5 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
-import FeatureSnapshot from 'components/FeatureSnapshot'
+import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -44,6 +44,7 @@ export default function Plain({ data }) {
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
             </article>
+            <Section />
         </Layout>
     )
 }

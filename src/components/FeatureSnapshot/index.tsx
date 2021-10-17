@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FeatureSnapshot({
+export function FeatureSnapshot({
     image,
     features,
     reverse,
