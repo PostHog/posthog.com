@@ -1,14 +1,14 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
+import FeatureSnapshot from 'components/FeatureSnapshot'
+import { Hero } from 'components/Hero'
+import { Check, Close } from 'components/Icons/Icons'
+import Layout from 'components/Layout'
+import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import Hero from 'components/Hero'
-import { Section } from 'components/Section'
-import FeatureSnapshot from 'components/FeatureSnapshot'
-import { Check, Close } from 'components/Icons/Icons'
 
 const articleWidth = {
     lg: 'max-w-screen-2xl',

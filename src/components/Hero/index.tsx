@@ -1,9 +1,8 @@
-import React from 'react'
-import { CallToAction } from 'components/CallToAction'
 import { Heading } from 'components/Heading'
 import GithubSlugger from 'github-slugger'
+import React from 'react'
 
-export default function Hero({
+export function Hero({
     title,
     subtitle,
     ctas,
@@ -21,7 +20,7 @@ export default function Hero({
     return (
         <div className="max-w-[849px] mx-auto text-center">
             {title && (
-                <Heading id={id} as="h1" className="text-4xl md:text-[64px] leading-none mt-0 mb-5">
+                <Heading hideCopy id={id} as="h1" className="text-4xl md:text-[64px] leading-none mt-0 mb-5">
                     {title}
                 </Heading>
             )}
@@ -30,14 +29,9 @@ export default function Hero({
             )}
             {ctas && (
                 <div className="flex flex-col space-y-3 items-center">
-                    {ctas.map((cta, index) => {
-                        const { href, text, type } = cta
-                        return (
-                            <CallToAction key={index} href={href} type={type}>
-                                {text}
-                            </CallToAction>
-                        )
-                    })}
+                    {ctas.map((cta, index) => (
+                        <React.Fragment key={index}>{cta}</React.Fragment>
+                    ))}
                 </div>
             )}
         </div>

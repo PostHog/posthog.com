@@ -11,8 +11,10 @@ import Table from './_includes/example-table.mdx'
     title="Self-hosted alternative to Google Analytics"
     subtitle="PostHog’s self-hosted analytics platform helps teams better understand how their products are being used. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure."
     ctas={[
-        { href: '/signup', text: 'Get started - free' },
-        { href: '/book-a-demo', text: 'Schedule a demo', type: 'outline' },
+        <CallToAction href="/signup">Get started - free</CallToAction>,
+        <CallToAction href="/book-a-demo" type="outline">
+            Schedule a demo
+        </CallToAction>,
     ]}
 />
 

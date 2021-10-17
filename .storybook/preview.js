@@ -1,5 +1,7 @@
+import { createHistory, LocationProvider } from '@reach/router'
 import { themes } from '@storybook/theming'
 import '../src/styles/global.css'
+const history = createHistory(window)
 
 export const parameters = {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -15,3 +17,11 @@ export const parameters = {
         stylePreview: true,
     },
 }
+
+export const decorators = [
+    (Story) => (
+        <LocationProvider history={history}>
+            <Story />
+        </LocationProvider>
+    ),
+]
