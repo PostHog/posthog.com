@@ -1,6 +1,6 @@
 import { Heading } from 'components/Heading'
-import React from 'react'
 import GithubSlugger from 'github-slugger'
+import React from 'react'
 
 const responsive = {
     wrapper: {
@@ -52,11 +52,7 @@ export const Section = ({
             <div
                 className={`grid divide-dashed divide-gray-accent-light template-section-content mx-auto ${responsive.wrapper[cols]} ${contentSize[size]}`}
             >
-                {React.Children.map(children, (child) =>
-                    React.cloneElement(child, {
-                        className: `${child.props.className || ''} px-0 sm:px-7 py-2 sm:py-0`,
-                    })
-                )}
+                {children}
             </div>
         </section>
     )
