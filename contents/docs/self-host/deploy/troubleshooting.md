@@ -97,7 +97,7 @@ TooManyConnections: too many connections
 2. Connect to your Postgres pod:
 
     ```shell
-    kubectl exec -n posthog -it your-postgres-web-pod  -- sh
+    kubectl exec -n posthog -it your-postgres-pod  -- sh
     ```
 
 3. Connect to the `posthog` DB using the values you found from step 1:
