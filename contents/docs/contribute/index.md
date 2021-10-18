@@ -49,7 +49,7 @@ We expect all backend code to have corresponding tests. You can run the tests wi
 
 Tests in the `posthog` folder and those in the `ee` folder need different environment variables to run. 
 
-You can run `posthog` tests with `DEBUG=1 ./bin/tests posthog` and `ee` tests with `DEBUG=1 PRIMARY_DB=clickhouse ./bin/tests ee`. Those tests perform their own database setup and teardown so the only database setup is to install and run PostgreSQL and Clickhouse ([See this page for setup instructions](/docs/contribute/developing-locally)). 
+You can run `posthog` tests with `DEBUG=1 ./bin/tests posthog` and `ee` tests with `DEBUG=1 PRIMARY_DB=clickhouse ./bin/tests ee`. Those tests perform their own database setup and teardown. So the only database setup is to install and run PostgreSQL and Clickhouse ([See this page for setup instructions](/docs/contribute/developing-locally)). 
 
 #### Frontend
 We use [Cypress](https://www.cypress.io/) for functional frontend tests. Cypress is used to mock user interface interactions on a demo instance. We've currently targeted test coverage for the most used areas of PostHog and are working to increase coverage. 
