@@ -67,27 +67,135 @@ If you have time left in the 1-hour slot, **do this during the call** - ensure t
 
 You should:
 
-- Set up a private Slack group with them on our core team Slack group.
-    - If they do not use Slack internally, set up a private chat on the PostHog Users Slack.
-    - You should add Yakko, James, Tim, Paolo, and a random engineer to each group.
-- Create a one-time giveaway link for The PostHog YC Program in Printfection.
-    - To create a one-time giveaway link, [Login to Printfection](https://app.printfection.com/account/secure_login.php), go to **Campaigns** -> **Giveaways** -> **The PostHog YC Program**. Then click the **Get New Link** button and copy the link.
-    - Send the link to the YC contact and mark the link as sent in Printfection.
-    Remind the YC contact that they will get another set of merch if they refer another company. All the other company needs to do is [schedule a YC onboarding session](/yc-onboarding) and say that "Company X" referred them. Then, we'll double-merch both of them.
-- If they use PostHog Cloud, [update their plan to the Startup plan](/handbook/growth/sales/billing) using the Django Admin panel.
-    - Also, set `should_setup_billing` to `True` - this will prompt them to add card details (but assure them they won't get charged!)
-- If they will self-host PostHog, set them up with a [one-year EE license](/handbook/growth/sales/billing) (Paolo can help with this).
-- Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
-- If they refer another company, use Shopify to send them a $50 voucher at [our store](https://merch.posthog.com).
-- After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations)
-- Add their email domain to the 'YC W21 Onboarded Users' cohort as a new match group that tags `email contains @theirdomain.com`
+#### Set up a private Slack group
 
-## Shipping considerations
+Set up a private Slack group with them on our core team Slack group. If they do not use Slack internally, set up a private chat on the PostHog Users Slack.
 
-Printfection ships from the US only (but they're working on other options), so some countries will impose import duty on shipping. However, there are methods where import duty can be prepaid - for example, Priority Mail. So we will ship using a method that includes import duty where possible.
+You should add Yakko, James, Tim, Paolo, and a random engineer to each group.
 
-There will be some countries where shipping is not possible or unreliable. In these cases, offer the customer a $100 voucher for the PostHog merch store instead. Alternatively, you can ask if they have a US address that they can use for the Printfection delivery.
+#### Send a one-time giveaway
+
+Customers have the following giveaway options. Some options have restrictions depending on the shipping address.
+
+<table>
+<thead>
+<tr>
+<td width="150" valign="top">
+
+**Giveaway**
+
+</td>
+<td width="100" valign="top">
+
+**Eligable locations**
+
+</td>
+<td valign="top">
+
+**How to share**
+
+</td>
+</tr>
+</thead>
+<tbody>
+
+<!-- AirPods or Timbuk2 backpack via Printfection -->
+<tr>
+<td valign="top">
+
+AirPods or Timbuk2 backpack
+<small>(Depending on stock availability)</small>
+
+</td>
+<td valign="top">
+
+US and Canada only
+
+</td>
+<td valign="top">
+
+To create a one-time giveaway link:
+
+- [Login to Printfection](https://app.printfection.com/account/secure_login.php)
+- Go to **Campaigns** -> **Giveaways** -> **The PostHog YC Program**.
+- Click the **Get New Link** button and copy the link.
+- Send the link to the YC contact and mark the link as sent in Printfection.
+
+</td>
+</tr>
+
+<!-- Shopify merch giftcard -->
+
+<tr>
+<td valign="top">
+
+[PostHog merch](https://merch.posthog.com) $150 gift card (Shopify)
+
+</td>
+<td valign="top">
+
+Global
+
+</td>
+<td valign="top">
+
+To create a giftcard in Shopify:
+
+- [Login to Shopify](https://posthog.myshopify.com/admin)
+- Select **Products** -> **Gift cards** from the left-hand menu
+- Click **Issue gift card**
+- Create a new customer via the **Find or create a customer** section
+- Update the value to $150 and click **Save**
+
+</td>
+</tr>
+
+<!-- Open Collective giftcard -->
+
+<tr>
+<td valign="top">
+
+[Open Collective](https://opencollective.com) $150 gift card
+
+</td>
+<td valign="top">
+
+Global
+
+</td>
+<td valign="top">
+
+To create a giftcard in Open Collective:
+
+- [Signin to Open Collective](https://opencollective.com/signin)
+- Go to the [Gift Cards section within the PostHog org](https://opencollective.com/posthog/edit/gift-cards)
+- Click **Create gift cards**
+- Set the amount to $150 and set a reasonably long expiry
+- Choose to either send the customer the gift card via Open Collective or via a link
+- Depending on the option chosen for the above step, create the gift card
+
+</td>
+</tr>
+
+</tbody>
+</table>
+
+Remind the YC contact that they will get another set of merch if they refer another company. All the other company needs to do is [schedule a YC onboarding session](/yc-onboarding) and say that "Company X" referred them. Then, we'll double-merch both of them.
+
+#### Set up billing
+
+If they use PostHog Cloud, [update their plan to the Startup plan](/handbook/growth/sales/billing) using the Django Admin panel. Also, set `should_setup_billing` to `True` - this will prompt them to add card details (but assure them they won't get charged!)
+
+If they will self-host PostHog, set them up with a [one-year EE license](/handbook/growth/sales/billing) (Paolo can help with this).
+
+Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
+
+#### Set up HubSpot
+
+After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations).
+
+Add their email domain to the 'YC W21 Onboarded Users' cohort as a new match group that tags `email contains @theirdomain.com`.
 
 ## Responsibilities
 
-Yakko handles YC onboarding calls, and Phil manages Printfection. Charles also has admin privileges in Printfection.
+Yakko handles YC onboarding calls, and Phil manages Printfection, Open Collective, and Shopify. Charles has admin privileges in to everything that Phil does.
