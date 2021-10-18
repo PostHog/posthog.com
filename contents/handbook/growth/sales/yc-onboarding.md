@@ -87,7 +87,7 @@ Customers have the following giveaway options. Some options have restrictions de
 </td>
 <td width="100" valign="top">
 
-**Eligable locations**
+**Eligible locations**
 
 </td>
 <td valign="top">
