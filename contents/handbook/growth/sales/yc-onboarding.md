@@ -67,13 +67,13 @@ If you have time left in the 1-hour slot, **do this during the call** - ensure t
 
 You should:
 
-#### Set up a private Slack group
+#### 1. Set up a private Slack group
 
 Set up a private Slack group with them on our core team Slack group. If they do not use Slack internally, set up a private chat on the PostHog Users Slack.
 
 You should add Yakko, James, Tim, Paolo, and a random engineer to each group.
 
-#### Send a one-time giveaway
+#### 2. Send a one-time giveaway
 
 Customers have the following giveaway options. Some options have restrictions depending on the shipping address.
 
@@ -182,7 +182,7 @@ To create a giftcard in Open Collective:
 
 Remind the YC contact that they will get another set of merch if they refer another company. All the other company needs to do is [schedule a YC onboarding session](/yc-onboarding) and say that "Company X" referred them. Then, we'll double-merch both of them.
 
-#### Set up billing
+#### 3. Set up billing
 
 If they use PostHog Cloud, [update their plan to the Startup plan](/handbook/growth/sales/billing) using the Django Admin panel. Also, set `should_setup_billing` to `True` - this will prompt them to add card details (but assure them they won't get charged!)
 
@@ -190,7 +190,7 @@ If they will self-host PostHog, set them up with a [one-year EE license](/handbo
 
 Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
 
-#### Set up HubSpot
+#### 4. Set up HubSpot
 
 After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations).
 
