@@ -10,8 +10,9 @@ import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
 import { useActions } from 'kea'
 import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
+import { Heading } from 'components/Heading'
 
-const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
+const A = (props) => <a {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => (
     <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
@@ -65,6 +66,12 @@ export default function Main({
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
@@ -87,7 +94,7 @@ export default function Main({
                     style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
                     className="w-full 2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-auto"
                 >
-                    <section className="mb-8 xl:mb-14 relative">
+                    <section className="mb-8 relative">
                         <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
                         {!hideLastUpdated && (
                             <p className="mt-1 mb-0 opacity-50">
@@ -96,7 +103,7 @@ export default function Main({
                         )}
                     </section>
                     {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
-                    <section className="article-content">
+                    <section className="article-content handbook-docs-content">
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

@@ -10,7 +10,7 @@ hideAnchor: true
 
 It gets pretty easy to idolize the superstars of tech. One of the coolest things we've learned is that many of the most successful founders will find time to talk with you. To put this in context, GitLab is one of the world's leading open core companies, worth $2.75B. Kind of a big deal. We wanted to learn even more than we could discern from their handbook.
 
-[Sid Sijbrandij](https://twitter.com/sytses), founder and CEO of GitLab, and has always been an inspiration to PostHog. Their culture gave us the confidence to build PostHog all-remote, and it influenced the style of product we're building. Once we saw Sid had [liked a few of our releases](https://twitter.com/PostHogHQ/status/1288563434641072131) on Twitter, we thought we'd ask a friend of a friend to connect us.
+[Sid Sijbrandij](https://twitter.com/sytses), founder and CEO of GitLab, and has always been an inspiration to PostHog. Their culture gave us the confidence to build PostHog all-remote, and it influenced the style of product we're building. Once we saw Sid had [liked a few of our releases](https://twitter.com/PostHog/status/1288563434641072131) on Twitter, we thought we'd ask a friend of a friend to connect us.
 
 After all, he's been featured in [Wired](https://www.wired.com/story/hybrid-remote-work-offers-the-worst-of-both-worlds/) and [Forbes](https://www.forbes.com/sites/cognitiveworld/2020/04/21/tips-from-gitlab-on-remote-work-for-innovative-teams/#537e9f0f4fae), so PostHog felt like the next step up.
 

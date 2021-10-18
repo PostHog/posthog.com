@@ -6,11 +6,11 @@ import { Features, Plan, Price, Section } from './Plan'
 
 export const features = {
     Platform: [
-        { title: 'Funnels & trends', icon: <Funnels className="w-3" /> },
-        { title: 'Feature flags', icon: <FeatureFlags className="w-3" /> },
-        { title: 'Cohorts & retention', icon: <Cohorts className="w-3" /> },
-        { title: 'Session recordings', icon: <SessionRecordings className="w-3" /> },
-        { title: 'Path analysis', icon: <PathAnalysis className="w-3" /> },
+        { title: 'Funnels & trends', icon: <Funnels className="w-4" /> },
+        { title: 'Feature flags', icon: <FeatureFlags className="w-4" /> },
+        { title: 'Cohorts & retention', icon: <Cohorts className="w-4" /> },
+        { title: 'Session recordings', icon: <SessionRecordings className="w-4" /> },
+        { title: 'Path analysis', icon: <PathAnalysis className="w-4" /> },
     ],
     'Platform features': [
         { title: 'Dashboards' },
@@ -52,7 +52,7 @@ export const OpenSource = () => {
     return (
         <Plan title="Open source" subtitle="Great for startups" badge="LIMITED TO 1 PROJECT">
             <Section title="Platform" className="mb-auto">
-                <Features features={features['Platform']} className="grid-cols-1 md:grid-cols-2" />
+                <Features features={features['Platform']} size="sm" className="grid-cols-1 md:grid-cols-2 gap-y-4" />
             </Section>
             <Section title="Platform features" className="mt-auto">
                 <Features features={features['Platform features']} className="grid-cols-1 md:grid-cols-2" />

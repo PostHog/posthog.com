@@ -196,7 +196,6 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
                                     <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
-                                    <FooterMenuItem title="FAQ" url="/faq" />
                                 </ul>
                             </div>
                         </div>
@@ -218,6 +217,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Blog" url="/blog" />
                                     <FooterMenuItem title="Media" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
@@ -233,11 +233,11 @@ export function Footer(): JSX.Element {
             </div>
             <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 items-center text-base max-w-6xl mx-auto">
                 <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
+                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4">
                     <li>
                         <Link
                             to="/docs/contribute/code-of-conduct"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Code of conduct
                         </Link>
@@ -245,7 +245,7 @@ export function Footer(): JSX.Element {
                     <li>
                         <Link
                             to="/privacy"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Privacy
                         </Link>
@@ -253,7 +253,7 @@ export function Footer(): JSX.Element {
                     <li>
                         <Link
                             to="/terms"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Terms
                         </Link>

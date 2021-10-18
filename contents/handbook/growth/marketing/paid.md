@@ -4,39 +4,53 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The objective of our paid advertising is to increase the number of [relevant developers](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021) who are aware of PostHog. As we believe in [product-led growth](https://posthog.com/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy. Instead, we see them as a way to kick start and then amplify the work we are doing in other areas of marketing and product. 
+As we believe in [product-led growth](https://posthog.com/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
 
-We have just started to work with our first outside marketing agency, [Hey Digital](https://www.heydigital.co/). Hey will help us develop our paid ad strategy and manage paid channels on our behalf. We communicate with them via a shared internal Slack channel. Over the next few weeks, we expect this page to change a lot. 
+We work with an agency,[Hey Digital](https://www.heydigital.co/) to manage paid ads. Specifically, they help us with:
+- Paid ad tactics and monthly media plan
+- Creating paid ad assets for each channel
+- Manage paid channels on our behalf 
 
-## General tactics
+We communicate with them via a shared internal Slack channel, and have 2 checkin calls with them each month. We have a very light approvals process for creative:
+
+- Hey Digital team share asset(s) for feedback in Slack
+- PostHog team approve - Charles/Joe for copy, Cory for visuals
+- If approval is not given within 48 hours, Hey Digital will process regardless
+
+Specific details of our media plan are shared internally only, as they contain commmercially sensitive information that could be beneficial to our competitors. 
+
+## General principles
 
 These will evolve over time:
 - Show, don't tell - share genuinely interesting content and let the user discover the product themselves. If you wouldn't click on the link, why do you think our users would?
-- Use our very distinctive brand of graphic art as much as possible - it tells a story that draws people in better than screenshots of graphs. 
 - Better to be opinionated and a bit divisive than unmemorable.
 - No bullshit - double down on our open/transparent product and culture.
 - _Definitely_ no unfounded technical claims or feature promises.
 - Don't be afraid to use humor, coding jokes etc. 
 
-Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](/handbook/growth/developer-relations) are especially important. 
+Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](/handbook/growth/developer-relations) are also important. 
 
 ## Brand guidelines
 
+Hey Digital create our ad assets for most of our main channels. These guidelines may be useful to you however if you are doing one-off assets for things like paid newsletter sponsorships or one off campaigns on more niche paid channels. 
+
 - Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels as a general guide. 
-- For specific messaging to use in copy, we have put together [a sheet of our value propositions](https://docs.google.com/spreadsheets/d/1VVLqk8xiKPj_rzDDhVA2eMFx7ENlhg9WnYDj2rkd_E4/edit#gid=1752905631) and benefits. 
-- We have [a handy set of assets](https://www.figma.com/file/MRmFaOSXV1zYTGnOODGyCc/Social-Media?node-id=1307%3A13884) that you can use, together with guidelines for each platform. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
+- For specific messaging to use in copy, use our [value propositions](/handbook/growth/marketing/value-propositions) as a starting point - you do not have to copy them verbatim.  
+- We have [a handy set of assets](https://www.figma.com/file/MRmFaOSXV1zYTGnOODGyCc/Social-Media?node-id=1307%3A13884) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Channels
 
-We are still figuring these out, but have previously run experiments on:
-
+We currently run ads on:
 - Google Ads
-- LinkedIn Ads
-- Twitter Ads
-- Reddit Ads
+- Twitter
 
-We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more. Charles, James H and Mo generally have admin access to these channels. 
+We plan to run regular ads on:
+- Bing
+- LinkedIn
+- Reddit
 
-## SEO
+We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. Charles, Joe and James H generally have admin access to these channels.
 
-We are just getting started here as well, and have begun working with [Astronaut Marketing](https://astronaut.marketing/) to run an initial audit. Our focus is optimising for content SEO over technical SEO to start with. 
+## Tracking conversion
+
+We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. Charles currently keeps Google Ads updated by manually uploading conversion data - in the future, we will automate this process. 

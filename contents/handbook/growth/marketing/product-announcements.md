@@ -17,7 +17,7 @@ An example of a service feature would include bug fixes or minor performance imp
 
 Marketing support for a service feature would typically include: 
 
-- [x] - Including the news in the PostHog newsletter.
+- Including the news in the PostHog newsletter.
 
 ### Tier 2: Core features
 Core features are those which introduce changes which we expect to have a noticeable impact for a larger subset of users, but not a majority. 
@@ -26,13 +26,13 @@ An example of a core feature would include a new plugin which integrates PostHog
 
 Marketing support for a core feature would typically include:
 
-- [x] - Creating a blog announcement about the feature within one week of launch.
-- [x] - Sharing the blog announcement with the Slack community via the #editorial channel.
-- [x] - Sharing the blog announcement on PostHog's social media channels.
-- [x] - Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
-- [x] - If relevant, sharing the blog announcement with other external parties, such as integration partners or PPC agencies.
-- [x] - Updating any required assets on PostHog.com. 
-- [x] - Including the news in the PostHog newsletter.
+- Creating a blog announcement about the feature within one week of launch.
+- Sharing the blog announcement with the Slack community via the #editorial channel.
+- Sharing the blog announcement on PostHog's social media channels.
+- Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
+- If relevant, sharing the blog announcement with other external parties, such as integration partners or PPC agencies.
+- Updating any required assets on PostHog.com. 
+- Including the news in the PostHog newsletter.
 
 ### Tier 1: Major features
 Major features are those which introduce changes which we expect to have noticeable impact for a majority of users or which would represent reasons why prospective users would choose PostHog.
@@ -41,13 +41,13 @@ An example of a major feature would include the creation of a new tool, such as 
 
 Marketing support for a major feature would typically include:
 
-- [x] - Creating a blog announcement about the feature within 24 hours of launch.
-- [x] - Sharing the blog announcement with the Slack community via the #general channel.
-- [x] - Sharing the blog announcement on PostHog's social media channels and scheduling further posts in the first week.
-- [x] - Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
-- [x] - If relevant, sharing the blog announcement with other external parties, such as an integration partner or PPC agencies.
-- [x] - Creating a follow-on blog article about the feature within three weeks of launch.
-- [x] - Updating any third-party sites or listings, such as G2.com or StackShare.
-- [x] - Coordinating PR and external communications if required.
-- [x] - Updating any required assets on PostHog.com.
-- [x] - Including the news in the PostHog newsletter.
+- Creating a blog announcement about the feature within 24 hours of launch.
+- Sharing the blog announcement with the Slack community via the #general channel.
+- Sharing the blog announcement on PostHog's social media channels and scheduling further posts in the first week.
+- Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
+- If relevant, sharing the blog announcement with other external parties, such as an integration partner or PPC agencies.
+- Creating a follow-on blog article about the feature within three weeks of launch.
+- Updating any third-party sites or listings, such as G2.com or StackShare.
+- Coordinating PR and external communications if required.
+- Updating any required assets on PostHog.com.
+- Including the news in the PostHog newsletter.

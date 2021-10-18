@@ -8,7 +8,7 @@ Every week, we assign one person to be the "Support Hero." If this is you this w
 
 All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
 
-## Availability 
+## Availability
 
 You should work your 'normal' hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as support hero you are doing the bulk of the debugging/fixing.
 
@@ -55,5 +55,14 @@ As an engineer, when a question comes in your first instinct is to give them an 
     - If they have asked for help it is safe to assume they've given permission for you to log in as them.
 - When trying to debug an issue with a customer and it's not immediately obvious, it's usually much faster to do a Zoom session. You also tend to get other useful product feedback.
 - When dealing with slowness, ask users to send a screenshot of their "System Status" page (under settings)
-  - If they have a lot of volume and they're still on Postgres they should probably upgrade to Clickhouse 
+  - If they have a lot of volume and they're still on Postgres they should probably upgrade to Clickhouse
 - Sometimes questions will have been asked earlier in the User's Slack so it's worth searching through that if you're not sure.
+
+### Debugging helm charts
+
+Issues around deployments can be tricky to solve. It's useful to ask for context around:
+1. What is their `values.yml` file
+2. What guide they were following
+3. What is the output of `kubectl get pods -A`
+4. If any pod is not healthy, what is the output of `kubectl logs -n posthog <podname>`
+5. Helm chart version

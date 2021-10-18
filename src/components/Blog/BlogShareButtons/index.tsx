@@ -18,7 +18,7 @@ export const BlogShareButtons = (): JSX.Element => {
 
     return (
         <>
-            <div className="flex-col absolute -ml-3 mt-1 hidden sm:inline-flex">
+            <div className="flex-col absolute -ml-3 mt-1 hidden sm:inline-flex share-links">
                 <a
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`}
                     target="_blank"

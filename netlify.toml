@@ -752,7 +752,6 @@
     to = "/blog/startup-job-titles"
 
 # Added: 2021-09-14
-
 [[redirects]]
     from = "/handbook/growth/marketing/Customer-personas"
     to = "/handbook/growth/marketing/customer-personas"
@@ -781,3 +780,33 @@
 [[redirects]]
     from = "/handbook/engineering/debugging"
     to = "/handbook/engineering/production-access"
+
+# Added: 2021-10-6
+[[redirects]]
+    from = "/docs/user-guides/session-recording"
+    to = "/docs/user-guides/recordings"
+
+# Added: 2021-10-6
+[[redirects]]
+    from = "/docs/user-guides/session-recording"
+    to = "/docs/user-guides/recordings"
+
+# Added: 2021-10-6
+[[redirects]]
+    from = "/handbook/product/scale-features-prioritization"
+    to = "/handbook/engineering/scale-features-prioritization"
+
+# Added: 2021-10-11
+[[redirects]]
+    from = "/docs/user-guides/persons"
+    to = "/docs/user-guides/users"
+
+# Added: 2021-10-11
+[[redirects]]
+    from = "/blog/sessions-deprecation"
+    to = "/blog/sessions-removal"
+
+# Added: 2021-10-11
+[[redirects]]
+    from = "/docs/self-host/runbook/overview"
+    to = "/docs/self-host/runbook"

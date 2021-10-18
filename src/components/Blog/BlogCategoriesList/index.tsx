@@ -1,6 +1,6 @@
+import Chip from 'components/Chip'
 import React from 'react'
 import { BlogCategories, CategoryInterface } from '../constants/categories'
-import Chip from 'components/Chip'
 
 export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: string }): JSX.Element {
     return (
@@ -9,7 +9,7 @@ export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: strin
                 {BlogCategories.filter((cat) => !cat.hideFromNavigation).map((category: CategoryInterface) => {
                     const isActive = category.slug === activeSlug
                     return (
-                        <Chip href={category.link} key={category.slug} active={isActive}>
+                        <Chip className="whitespace-nowrap" href={category.link} key={category.slug} active={isActive}>
                             {category.title}
                         </Chip>
                     )
