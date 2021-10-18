@@ -82,3 +82,28 @@ TooManyConnections: too many connections
   File "clickhouse_pool/pool.py", line 102, in pull
     raise TooManyConnections("too many connections")
 ```
+
+## How do I connect to Postgres?
+    
+> **Tip:** Find out your pod names with `kubectl get pods -n posthog`
+
+1. Find out your PgBouncer host and Postgres password from the web pod:
+
+    ```sh
+    kubectl exec -n posthog -it your-posthog-web-pod \
+    -- sh -c 'echo host:$POSTHOG_PGBOUNCER_SERVICE_HOST password:$POSTHOG_DB_PASSWORD'
+    ```
+
+2. Connect to your Postgres pod:
+
+    ```shell
+    kubectl exec -n posthog -it your-postgres-web-pod  -- sh
+    ```
+
+3. Connect to the `posthog` DB using the values you found from step 1:
+
+    ```shell
+    psql -h your-pgbouncer-host -p 6543 -d posthog -U postgres
+    ```
+
+    Postgres will ask you for the password. Use the value you found from step 1.
