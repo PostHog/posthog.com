@@ -8,9 +8,15 @@ showTitle: true
 
 For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow and understanding where the bottlenecks and friction points are in it. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users. 
 
-> Using PostHog, we observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.
-> 
-> -- [Hasura](https://hasura.io/)
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/rikin.png"
+        size="md"
+        name="Rikin Kachhia"
+        title="Software Engineer, Hasura"
+        quote={`“We observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
+    />
+</BorderWrapper>
 
 ## What can you learn from funnels?
 

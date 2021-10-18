@@ -12,6 +12,16 @@ Sessions help you understand product usage by uncovering the amount of time user
 
 This is useful as it gives you an engagement statistic of how long the average usage time of your app or website is along with the distribution of usage across certain time frames.
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/mishra.jpeg"
+        size="md"
+        name="Anubhuti Mishra"
+        title="UI/UX Designer at Hasura"
+        quote={`“I look at our top-performing website pages, such as tutorials, blog and pricing pages. Our team has built a schedule around this so we are always shifting focus throughout the website and continuing to improve.”`}
+    />
+</BorderWrapper>
+
 ## Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LzrKZpMuONs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
