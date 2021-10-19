@@ -524,7 +524,17 @@
                         },
                         {
                             "name": "Kafka",
-                            "url": "/docs/self-host/runbook/kafka"
+                            "url": "/docs/self-host/runbook/kafka",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                },
+                                {
+                                    "name": "Upgrade",
+                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                }
+                            ]
                         }
                     ]
                 }
