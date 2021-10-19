@@ -202,6 +202,10 @@
                             "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
+                            "name": "Marketing hiring",
+                            "url": "/handbook/people/hiring-process/marketing-hiring"
+                        },
+                        {
                             "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
                         }
@@ -258,6 +262,10 @@
                     "url": "/handbook/engineering/production-access"
                 },
                 {
+                    "name": "Making schema changes safely",
+                    "url": "/handbook/engineering/schema-changes"
+                },
+                {
                     "name": "AWS tips and FAQ",
                     "url": "/handbook/engineering/aws"
                 },
@@ -280,6 +288,10 @@
                 {
                     "name": "ClickHouse query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
+                },
+                {
+                    "name": "Disruption Messages",
+                    "url": "/handbook/engineering/disruption-messages"
                 }
             ]
         },
@@ -289,6 +301,10 @@
                 {
                     "name": "Product team overview",
                     "url": "/handbook/product/product-team"
+                },
+                {
+                    "name": "Product Metrics",
+                    "url": "/handbook/product/metrics"
                 },
                 {
                     "name": "User feedback",
@@ -309,18 +325,6 @@
                     "url": "/handbook/growth/marketing"
                 },
                 {
-                    "name": "Content",
-                    "url": "/handbook/growth/marketing/blog"
-                },
-                {
-                    "name": "Email",
-                    "url": "/handbook/growth/marketing/newsletter"
-                },
-                {
-                    "name": "Paid & SEO",
-                    "url": "/handbook/growth/marketing/paid"
-                },
-                {
                     "name": "Customer personas",
                     "url": "/handbook/growth/marketing/customer-personas"
                 },
@@ -329,12 +333,34 @@
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "name": "Press",
-                    "url": "/handbook/growth/marketing/press"
+                    "name": "Product announcements",
+                    "url": "/handbook/growth/marketing/product-announcements"
                 },
                 {
-                    "name": "Open-source sponsorship",
-                    "url": "/handbook/growth/marketing/open-source-sponsorship"
+                    "name": "Acquisition channels",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Content & SEO",
+                            "url": "/handbook/growth/marketing/blog"
+                        },
+                        {
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
+                        },
+                        {
+                            "name": "Paid ads",
+                            "url": "/handbook/growth/marketing/paid"
+                        },
+                        {
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
+                        },
+                        {
+                            "name": "Open-source sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
+                        }
+                    ]
                 }
             ]
         },
@@ -413,14 +439,6 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Digital Ocean",
-                            "url": "/docs/self-host/deploy/digital-ocean"
-                        },
-                        {
-                            "name": "Google Cloud Platform",
-                            "url": "/docs/self-host/deploy/gcp"
-                        },
-                        {
                             "name": "AWS",
                             "url": "/docs/self-host/deploy/aws"
                         },
@@ -429,16 +447,20 @@
                             "url": "/docs/self-host/deploy/azure"
                         },
                         {
-                            "name": "Other",
+                            "name": "Digital Ocean",
+                            "url": "/docs/self-host/deploy/digital-ocean"
+                        },
+                        {
+                            "name": "Google Cloud Platform",
+                            "url": "/docs/self-host/deploy/gcp"
+                        },
+                        {
+                            "name": "Other Platforms",
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
-                            "name": "Chart configuration",
+                            "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
-                        },
-                        {
-                            "name": "Troubleshooting and FAQ",
-                            "url": "/docs/self-host/deploy/troubleshooting"
                         },
                         {
                             "name": "Upgrade Notes",
@@ -447,6 +469,10 @@
                         {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
+                        },
+                        {
+                            "name": "Troubleshooting and FAQ",
+                            "url": "/docs/self-host/deploy/troubleshooting"
                         }
                     ]
                 },
@@ -473,6 +499,20 @@
                         {
                             "name": "Upgrading PostHog",
                             "url": "/docs/self-host/configure/upgrading-posthog"
+                        }
+                    ]
+                },
+                {
+                    "name": "Runbook",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host/runbook"
+                        },
+                        {
+                            "name": "Kafka",
+                            "url": "/docs/self-host/runbook/kafka"
                         }
                     ]
                 }
@@ -511,6 +551,10 @@
                 {
                     "name": "Identifying users",
                     "url": "/docs/integrate/identifying-users"
+                },
+                {
+                    "name": "GDPR guidance",
+                    "url": "/docs/integrate/gdpr"
                 },
                 {
                     "name": "Client libraries",
@@ -554,6 +598,11 @@
                             "name": "Go",
                             "url": "/docs/integrate/server/go"
                         },
+                        {
+                            "name": "Java",
+                            "url": "/docs/integrate/server/java"
+                        },
+
                         {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
@@ -711,8 +760,8 @@
                     "url": "/docs/user-guides/sessions"
                 },
                 {
-                    "name": "Session Recording",
-                    "url": "/docs/user-guides/session-recording"
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO (Single sign-on authentication)",
@@ -731,8 +780,8 @@
                     "url": "/docs/user-guides/trends"
                 },
                 {
-                    "name": "Users/People",
-                    "url": "/docs/user-guides/users"
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
                 }
             ]
         },
@@ -913,8 +962,8 @@
                     "url": "/docs/contribute/project-structure"
                 },
                 {
-                    "name": "Updating documentation",
-                    "url": "/docs/contribute/updating-documentation"
+                    "name": "Contribute to docs, handbook & blog",
+                    "url": "/docs/contribute/contribute-to-website"
                 }
             ]
         }

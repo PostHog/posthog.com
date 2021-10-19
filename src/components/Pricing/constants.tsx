@@ -5,11 +5,11 @@ export const SCALE_MINIMUM_EVENTS = 6_666_666
 
 export const features = {
     Platform: [
-        { title: 'Funnels & trends', icon: <Funnels className="w-3" /> },
-        { title: 'Feature flags', icon: <FeatureFlags className="w-3" /> },
-        { title: 'Cohorts & retention', icon: <Cohorts className="w-3" /> },
-        { title: 'Session recordings', icon: <SessionRecordings className="w-3" /> },
-        { title: 'Path analysis', icon: <PathAnalysis className="w-3" /> },
+        { title: 'Funnels & trends', icon: <Funnels className="w-4" /> },
+        { title: 'Feature flags', icon: <FeatureFlags className="w-4" /> },
+        { title: 'Cohorts & retention', icon: <Cohorts className="w-4" /> },
+        { title: 'Session recordings', icon: <SessionRecordings className="w-4" /> },
+        { title: 'Path analysis', icon: <PathAnalysis className="w-4" /> },
     ],
     'Platform features': [
         { title: 'Dashboards' },

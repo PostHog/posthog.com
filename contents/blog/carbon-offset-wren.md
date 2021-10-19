@@ -28,4 +28,4 @@ Carbon offsetting won't fix the climate change crisis on its own - and we don’
 
 However, while carbon offsetting isn’t a cure-all, it remains an effective tool in limiting our environmental impact. We’re excited to offer it as a benefit for all team members. You can check out [other benefits we offer](https://posthog.com/careers) or even [submit an issue in GitHub](https://github.com/PostHog) if you have ideas for how we can be even more climate friendly.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._

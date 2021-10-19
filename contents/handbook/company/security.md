@@ -32,3 +32,16 @@ All of our policies can be found in our Drata portal, so this section of the Han
 - [System Access Control Policy](https://drive.google.com/file/d/1jxiy9OpS4aCllDQJk88emnihWKUv6Uyq/view?usp=sharing)
 - [Vendor Management Policy](https://drive.google.com/file/d/1AQxJ9k4V6kXzECdyS2Fn5h-BcXrgQQDi/view?usp=sharing)
 - [Vulnerability Management Policy](https://drive.google.com/file/d/1bUxuBvTCAzMasG39ShtfnUjRm_2gM1Q3/view?usp=sharing)
+
+## GDPR compliance
+
+For the purposes of GDPR, customers use PostHog in one of two ways:
+
+- PostHog Cloud
+- Self-hosting and managing a PostHog instance
+
+If a customer is using PostHog Cloud, then PostHog is the Data Processor and the customer is the Data Controller. We have some GDPR obligations here. 
+
+If a customer is self-hosting PostHog then they are both the Data Processor and the Data Controller because tehey are responsible for their PostHog instance. We do not have access to any of their user data, so we do not have specific GDPR obligations here. 
+
+As a Data Controller to PostHog Cloud customers, we are obliged to maintain documentation that records details of our data processing agreements with those customers. Charles is our Data Protection Officer and is responsible for maintaining this.

@@ -29,7 +29,7 @@ export default function SelfHost() {
             ]}
         >
             <SEO title="Self-host - PostHog" />
-            <ScaleModal hideBadge hideActions setOpen={setModalOpen} open={open} />
+            <ScaleModal hideActions setOpen={setModalOpen} open={open} />
             <section className="px-4">
                 <Intro title="Select your edition" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

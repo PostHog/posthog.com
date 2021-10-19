@@ -70,7 +70,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">
-                                    <div className="text-base">${finalCost}</div>
+                                    <div className="text-base">$2,000</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>

@@ -11,7 +11,8 @@ export default function InternalSidebar({ tableOfContents }) {
                         <li key={index}>
                             <InternalSidebarLink
                                 url={navItem.url}
-                                name={navItem.name}
+                                name={navItem.value}
+                                depth={navItem.depth}
                                 className="jumpTo text-[15px] pl-6"
                             />
                         </li>

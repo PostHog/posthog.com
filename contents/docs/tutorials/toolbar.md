@@ -2,6 +2,8 @@
 title: Visualizing user behavior - Toolbar
 sidebar: Docs
 showTitle: true
+featuredTutorial: true
+featuredImage: ../../images/tutorials/banners/toolbar.png
 ---
 
 _Estimated reading time: 6 minutes_ ☕☕

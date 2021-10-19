@@ -3,14 +3,21 @@ title: Deploying to Azure
 sidebarTitle: Azure
 sidebar: Docs
 showTitle: true
+tags:
+    - azure
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-First, we need to set up a Kubernetes Cluster, see [Creation with Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster). Make sure your cluster has enough resources to run PostHog (total minimum 4 vcpu & 8GiB RAM).
+First, we need to set up a Kubernetes cluster (see the official Azure [documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster) for more info).
+
+<ClusterRequirementsSnippet />
+
+## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
@@ -21,16 +28,19 @@ ingress:
     enabled: true
 certManager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 ### Installing the chart
 
 <InstallingSnippet />
 
-    
+
 ### Lookup external IP
 
-```console
+```shell
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 ### Setting up DNS

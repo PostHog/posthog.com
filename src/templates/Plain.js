@@ -29,7 +29,7 @@ export default function Plain({ data }) {
                 article
                 image={featuredImage?.publicURL}
             />
-            <article className="max-w-2xl mx-auto my-12 md:my-24 px-4">
+            <article className="max-w-2xl mx-auto my-12 md:my-24 px-4 article-content">
                 {showTitle && <h1 className="text-center">{title}</h1>}
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

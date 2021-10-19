@@ -10,7 +10,7 @@ export const OpenSource = () => {
     return (
         <Plan title="Open source" subtitle="Great for startups" badge="LIMITED TO 1 PROJECT">
             <Section title="Platform" className="mb-auto">
-                <Features features={features['Platform']} className="grid-cols-1 md:grid-cols-2" />
+                <Features features={features['Platform']} size="sm" className="grid-cols-1 md:grid-cols-2 gap-y-4" />
             </Section>
             <Section title="Platform features" className="mt-auto">
                 <Features features={features['Platform features']} className="grid-cols-1 md:grid-cols-2" />
