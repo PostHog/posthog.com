@@ -83,13 +83,28 @@ TooManyConnections: too many connections
     raise TooManyConnections("too many connections")
 ```
 
+## How do I see logs for a pod?
+
+1. Find the name of the pod you want to get logs on:
+
+    ```shell
+    kubectl get pods -n posthog
+    ```
+
+    This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
+
+2. Get the logs for that pod using the name from the previous step:
+   
+    ```shell
+    kubectl logs posthog-plugins-54f324b649-66afm -n posthog
+    ```
 ## How do I connect to Postgres?
     
 > **Tip:** Find out your pod names with `kubectl get pods -n posthog`
 
 1. Find out your PgBouncer host and Postgres password from the web pod:
 
-    ```sh
+    ```shell
     kubectl exec -n posthog -it your-posthog-web-pod \
     -- sh -c 'echo host:$POSTHOG_PGBOUNCER_SERVICE_HOST password:$POSTHOG_DB_PASSWORD'
     ```
@@ -107,3 +122,23 @@ TooManyConnections: too many connections
     ```
 
     Postgres will ask you for the password. Use the value you found from step 1.
+
+
+## How do I restart all pods for a service?
+
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team. 
+
+1. Terminate all running pods for the service:
+  
+    ```shell
+    # substitute posthog-plugins for the desired service
+    kubectl scale deployment posthog-plugins --replicas=0 -n posthog
+    ```
+
+
+2. Start new pods for the service:
+  
+    ```shell
+    # substitute posthog-plugins for the desired service
+    kubectl scale deployment posthog-plugins --replicas=1 -n posthog
+    ```
