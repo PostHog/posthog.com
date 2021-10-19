@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/pirate-funnel/pirate-funnels.png
 featuredImageType: full
+featuredTutorial: true
 author: hanna-crombie
 ---
 
