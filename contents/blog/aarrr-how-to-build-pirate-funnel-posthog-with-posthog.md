@@ -1,5 +1,5 @@
 ---
-date: 2021-09-23
+date: 2021-10-19
 title: How to build a pirate funnel (AARRR) with PostHog
 rootPage: /blog
 sidebar: Blog
