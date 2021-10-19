@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Git Setup
+# GitHub Setup
 
 ## Email
 
-It is ok to use a GitHub account that is associated with your personal (or non-PostHog) email address.
+It is a common scenario to use a GitHub account that is associated with your personal (or non-PostHog) email address.
 
 That will mean that notifications about PostHog work don't go to your PostHog account. Which can make them easier to miss.
 
