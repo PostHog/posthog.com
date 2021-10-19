@@ -46,22 +46,24 @@ export default function NotFoundPage(): JSX.Element {
 
                 <h4>Does pineapple belong on pizza?</h4>
 
-                {submittedPreference ? (
-                    <p>Thanks for letting us know!</p>
-                ) : (
-                    <Row gutter={[12, 4]}>
-                        <Col span={12}>
-                            <Button style={{ float: 'right' }} onClick={() => capturePineapplePreference(true)}>
-                                Yes
-                            </Button>
-                        </Col>
-                        <Col span={12}>
-                            <Button style={{ float: 'left' }} onClick={() => capturePineapplePreference(false)}>
-                                No
-                            </Button>
-                        </Col>
-                    </Row>
-                )}
+                <div style={{ paddingBottom: 10 }}>
+                    {submittedPreference ? (
+                        <p>Thanks for letting us know!</p>
+                    ) : (
+                        <Row gutter={[12, 4]}>
+                            <Col span={12}>
+                                <Button style={{ float: 'right' }} onClick={() => capturePineapplePreference(true)}>
+                                    Yes
+                                </Button>
+                            </Col>
+                            <Col span={12}>
+                                <Button style={{ float: 'left' }} onClick={() => capturePineapplePreference(false)}>
+                                    No
+                                </Button>
+                            </Col>
+                        </Row>
+                    )}
+                </div>
 
                 <div className="hedgehog mb-8">
                     <BasicHedgehogImage />
