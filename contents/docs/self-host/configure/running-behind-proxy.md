@@ -42,6 +42,7 @@ If your setting up a proxy to protect your PostHog instance and prevent access o
 | `/engage` | Endpoint for ingesting/capturing events. |
 | `/s` | Endpoint for capturing session recordings. |
 | `/static/array.js` | Frontend javascript code that loads `posthog-js`. |
+| `static/recorder.js` | Frontend javascript code that loads session recording. |
 | `/track` | Endpoint for ingesting/capturing events. |
 
 
