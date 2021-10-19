@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CallToAction } from '../CallToAction'
-import { Link } from 'gatsby'
 import { useValues } from 'kea'
 
 import Layout from '../Layout'
@@ -8,9 +7,11 @@ import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 import './NotFoundPage.scss'
+import { Button, Col, Row } from 'antd'
 
 export default function NotFoundPage(): JSX.Element {
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {
         if (posthog) {
@@ -18,6 +19,15 @@ export default function NotFoundPage(): JSX.Element {
             posthog.capture('page_404')
         }
     }, [])
+
+    const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreWrong = false) => {
+        setSubmittedPreference(true)
+        if (posthog) {
+            posthog.capture('pineapple_on_pizza_survey', {
+                does_pineapple_go_on_pizza: userLikesPineappleOnPizzaAkaTheyreWrong,
+            })
+        }
+    }
 
     return (
         <Layout className="not-found-page-container">
@@ -36,13 +46,22 @@ export default function NotFoundPage(): JSX.Element {
 
                 <h4>Does pineapple belong on pizza?</h4>
 
-                <p>
-                    We look forward to hearing your response on{' '}
-                    <a href="//twitter.com/posthog" target="_blank" rel="noreferrer">
-                        Twitter
-                    </a>
-                    .
-                </p>
+                {submittedPreference ? (
+                    <p>Thanks for letting us know!</p>
+                ) : (
+                    <Row gutter={[12, 4]}>
+                        <Col span={12}>
+                            <Button style={{ float: 'right' }} onClick={() => capturePineapplePreference(true)}>
+                                Yes
+                            </Button>
+                        </Col>
+                        <Col span={12}>
+                            <Button style={{ float: 'left' }} onClick={() => capturePineapplePreference(false)}>
+                                No
+                            </Button>
+                        </Col>
+                    </Row>
+                )}
 
                 <div className="hedgehog mb-8">
                     <BasicHedgehogImage />
