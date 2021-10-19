@@ -14,7 +14,7 @@ hideAnchor: true
    and have it be approved. If you work for PostHog someone (Tim or small team lead) will suggest the 
    first assignment.
 
-If you work for PostHog, check this [GitHub Setup advice](/handbook/engineering/notes/github)
+If you work for PostHog and use a personal GitHub account, [read how to route emails from the posthog organisation to your posthog email](/handbook/engineering/notes/github)
 
 ## Suggested learning roadmap
 
