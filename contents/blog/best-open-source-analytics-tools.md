@@ -121,7 +121,7 @@ Countly is available under a AGPLv3 licence. A limited version of the product is
 Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 ### Who is Metabase for?
-Metabase has a drag-and-drop interface which make it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. 
+Metabase has a drag-and-drop interface which makes it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focussed on more general analytics.
 
 ### Strengths
 - Easy-to-use, no SQL required
@@ -138,7 +138,7 @@ Metabase is available under a AGPL licence. A limited version of the product is 
 Grafana is more of a data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
 
 ### Who is Grafana for?
-Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in businesses or teams of any size, including enterprise. 
+Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in businesses or teams of any size, including enterprise, who need to observe and monitor data. It is not designed for product analytics.
 
 ### Strengths
 - Great for tracking data in real-time
