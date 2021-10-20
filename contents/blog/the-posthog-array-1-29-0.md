@@ -48,6 +48,7 @@ Extra concerns on privacy or compliance? Private projects now lets you have proj
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-private-project.png" alt="" />
 
 <br />
+
 > 🎁 Private projects is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 ### Trailing DAU/WAU/MAU graphs
