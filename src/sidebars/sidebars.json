@@ -838,8 +838,8 @@
                     "url": "/docs/tutorials/funnels"
                 },
                 {
-                    "name": "Funnel conversation with Supabase and Next.js",
-                    "url": "/docs/tutorials/supabase-nextjs-signup-funnel"
+                    "name": "Funnel conversation with Next.js and Supabase",
+                    "url": "/docs/tutorials/nextjs-supabase-signup-funnel"
                 },
                 {
                     "name": "Analyzing user behavior with Cohorts",
