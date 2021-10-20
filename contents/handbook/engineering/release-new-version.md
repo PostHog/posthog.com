@@ -54,7 +54,7 @@ On the week before the release, on Friday, we institute a code freeze. We branch
     - Bump `appVersion` to the latest app version (same number as on the Docker image).
     - Change the docker tag in [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) to point to the new tag (e.g. `release-1.29.0`).
     - Push the relevant changes and add the `bump-minor` label to the PR. **Do not merge until the latest version is built.**
-- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `release-[version]`, `latest-release`, `foss-latest-release` & `foss-release-[version]` Docker images to Docker Hub.
+- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub.
   ```bash
   git tag -a [version] -m "Version [version]"
   git push origin head --tags
