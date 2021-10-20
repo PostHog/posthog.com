@@ -31,25 +31,30 @@ Continuing our quest to help you understand why your users convert or don't conv
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-paths-advanced.png" alt="" />
 
+<br />
+
 > 🎁 Some of these new features require a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 ### Multivariate support in feature flags
 
 Feature flags just got a lot more powerful! Forget A/B testing, introducing A/B/C/D/... testing. You will now be able to create feature flags with multiple variants to allow for more comprehensive testing and feature releasing.
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/multivariate-feature-flags.png" alt="" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-multivariate-feature-flags.png" alt="" />
 
 ### Private projects
 
 Extra concerns on privacy or compliance? Private projects now lets you have projects to which only certain members of your team have access. Learn more on [our docs](/docs/user-guides/organizations-and-projects#private-projects).
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/private-project.png" alt="" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-private-project.png" alt="" />
+
+<br />
+> 🎁 Private projects is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 ### Trailing DAU/WAU/MAU graphs
 
 If you're interested in better measuring your user engagement DAU/WAU, WAU/MAU & DAU/MAU ratios can provide great signals, create graphs like this to better understand your engagement.
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/dau-wau-mau.png" alt="" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-dau-wau-mau.png" alt="" />
 
 ### Other improvements & fixes
 - **Renaming filters**. You will now be able to set custom names for your graph series. Your teammates will now be able to better understand your graphs.
