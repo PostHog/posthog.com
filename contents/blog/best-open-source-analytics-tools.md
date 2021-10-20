@@ -69,7 +69,7 @@ Apache Spark is available under the Apache 2.0 license and is entirely free.
 Matomo is an open source platform for web analytics, rather than a product analytics. That means it's great for understanding metrics such as pageviews or for planning keywords, but it lacks product analytics features such as session recording or feature flags. Nevertheless, it's an alternative to Google Analytics for users who want to protect user privacy. 
 
 ### Who is Matomo for?
-Matomo is intended for Marketing and Content teams who need to focus on SEO activities. It is suitable for both small and enterprise businesses.
+Matomo is intended for Marketing and Content teams who need to focus on SEO activities without losing control of their user data. It is suitable for both small and enterprise businesses.
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
