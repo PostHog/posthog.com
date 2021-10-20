@@ -1,23 +1,18 @@
 ---
-date: 2021-10-19
-title: How to build a pirate funnel (AARRR) with PostHog
-rootPage: /blog
-sidebar: Blog
+title: Building an AARRR pirate funnel
+sidebar: Docs
 showTitle: true
-hideAnchor: true
-featuredImage: ../images/blog/pirate-funnel/pirate-funnels.png
-featuredImageType: full
+featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
 featuredTutorial: true
-author: hanna-crombie
 ---
 
 Applying pirate metrics to your business is a really efficient way to determine where you are losing customers and how you should be optimizing your marketing and sales funnel, especially when you are just getting started with metrics.
 
-## What are pirate metrics and what do they have to do with analytics?
+## What are pirate metrics?
 
 The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym A.A.R.R.R (me hearties – get it?).
 
-![image](../images/blog/pirate-funnel/AARRR-funnel.png)
+![aarrr](../../images/tutorials/pirate-funnel/AARRR-funnel.png)
 
 Growth hackers use the pirate funnel to identify the weakest point in a customer acquisition cycle and see where they need to focus more effort. Simply put, if you aren’t sure where you’re going wrong, this is a great place to start.
 
@@ -47,7 +42,7 @@ Before getting started with the funnel, it’s important to make sure all of the
 
 On your PostHog app you’ll find the ‘Funnels’ feature tab located inside ‘Insights’.
 
-![New funnel in PostHog](../images/blog/pirate-funnel/creating-a-funnel.png)
+![New funnel in PostHog](../../images/tutorials/pirate-funnel/creating-a-funnel.png)
 
 ## Step 3: Adding steps to your funnel
 
@@ -61,7 +56,7 @@ Click on the ‘Add funnel step’ button and use the ‘Select action’ box on
 
 Because a funnel relies on at least two steps to calculate conversion success, you won’t see a conversion comparison until you add your second step.
 
-![Creating a funnel in PostHog](../images/blog/pirate-funnel/acquisition.png)
+![Creating a funnel in PostHog](../../images/tutorials/pirate-funnel/acquisition.png)
 
 ### Activation: the first move
 
@@ -75,7 +70,7 @@ Our Autocapture functionality will capture a lot of frontend elements by default
 
 Now that we have a couple of steps in our funnel, it is beginning to take shape and tell a story.
 
-![Selecting actions to build a funnel](../images/blog/pirate-funnel/activation.png)
+![Selecting actions to build a funnel](../../images/tutorials/pirate-funnel/activation.png)
 
 Already we can see the conversion percentage, and that there seem to be no issues in getting users to move through to the activation stage.
 
@@ -91,7 +86,7 @@ There are a number of actions you may want to track to tell you about user reten
 
 We want to track the number of users who watch a movie during their free trial. We might count users watching at least one movie during their free trial as a success metric for retention, so the ‘played_movie’ event will be used as the next step in our funnel.
 
-![Adding a funnel step](../images/blog/pirate-funnel/retention.png)
+![Adding a funnel step](../../images/tutorials/pirate-funnel/retention.png)
 
 ### Revenue: time to level up
 
@@ -99,7 +94,7 @@ Monetization is the root of the financial health of your business, meaning at so
 
 In the case of HogFlix, users who proceed through the payment process following their free trial are counted as a successful metric for the revenue stage. The ‘Made purchase’ action defines the fourth stage of the A.A.R.R.R. funnel.
 
-![Defining a revenue-related funnel step](../images/blog/pirate-funnel/revenue.png)
+![Defining a revenue-related funnel step](../../images/tutorials/pirate-funnel/revenue.png)
 
 ### Referral: sharing is caring
 
@@ -109,7 +104,7 @@ There’s a big difference between a happy customer and a brand evangelist. Taki
 
 Referral is the final step of the funnel to add here, and has been defined as a sharing event by users who have completed the rest of the journey.
 
-![4-step funnel in PostHog](../images/blog/pirate-funnel/shared-content.png)
+![4-step funnel in PostHog](../../images/tutorials/pirate-funnel/shared-content.png)
 
 ## Step 4: Refining your metrics
 
@@ -125,7 +120,7 @@ It can take some time to figure out how best to define the requirements for all 
 
 Now that your basic funnel is created you can save it to your dashboard by clicking on the ‘Add to dashboard’ button in the top left hand corner.
 
-![Saving a funnel to a dashboard in PostHog](../images/blog/pirate-funnel/add-funnel-to-dashboard.png)
+![Saving a funnel to a dashboard in PostHog](../../images/tutorials/pirate-funnel/add-funnel-to-dashboard.png)
 
 ## Step 6: Find your bottleneck
 
@@ -137,7 +132,7 @@ Do look at them relatively of course. Some steps may be unfair to compare to oth
 
 At HogFlix there is a significant drop off at the referral stage. Despite the great success from acquisition to revenue, there’s something keeping customers from really falling in love with the platform enough to promote the service to others.
 
-![Dashboard funnel graph](../images/blog/pirate-funnel/find-your-bottleneck.png)
+![Dashboard funnel graph](../../images/tutorials/pirate-funnel/find-your-bottleneck.png)
 
 ## Step 7: investigation
 
@@ -156,3 +151,5 @@ The possibilities for steps you can create between your steps are endless. You c
 Creating different funnels for different kinds of users or adding more steps to a funnel could also give you a better idea of where you want to focus attention.
 
 Ultimately, the A.A.R.R.R. framework serves as a great tool for considering the most critical metrics available to you so you can break down KPIs and prioritize efficiently. If you can apply the principles of the pirate funnel to your business, you’re already in a really healthy place to create a data-driven product.
+
+_Tutorial contributed by Hanna Crombie_

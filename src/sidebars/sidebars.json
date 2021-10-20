@@ -884,6 +884,10 @@
                 {
                     "name": "Deleting bulk data",
                     "url": "/docs/tutorials/deleting-data"
+                },
+                {
+                    "name": "Building an AARRR pirate funnel",
+                    "url": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
                 }
             ]
         },
