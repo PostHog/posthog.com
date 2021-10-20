@@ -313,6 +313,10 @@
                 {
                     "name": "Scale features prioritization",
                     "url": "/handbook/product/scale-features-prioritization"
+                },
+                {
+                    "name": "Plans and features",
+                    "url": "/handbook/product/plans-and-features"
                 }
             ]
         },
@@ -340,30 +344,29 @@
                     "name": "Acquisition channels",
                     "url": "",
                     "children": [
-                        
                         {
-                             "name": "Content & SEO",
-                             "url": "/handbook/growth/marketing/blog"
+                            "name": "Content & SEO",
+                            "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                             "name": "Email",
-                             "url": "/handbook/growth/marketing/newsletter"
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
                         },
                         {
-                             "name": "Paid ads",
-                             "url": "/handbook/growth/marketing/paid"
+                            "name": "Paid ads",
+                            "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                             "name": "Press",
-                             "url": "/handbook/growth/marketing/press"
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
                         },
                         {
-                             "name": "Open-source sponsorship",
-                             "url": "/handbook/growth/marketing/open-source-sponsorship"
+                            "name": "Open-source sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
                         }
-                        ]
+                    ]
                 }
-             ]
+            ]
         },
         {
             "name": "Growth",
