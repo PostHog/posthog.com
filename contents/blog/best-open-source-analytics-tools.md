@@ -28,7 +28,7 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 Of course, we _would_ say PostHog is the best open source analytics platform, but if you need convincing then you can get started for free and decide for yourself today!
 
 ### Who is PostHog for?
-PostHog is useful for a wide-variety of role, but is especially useful for Product Managers, Engineers, Growth Marketers and Product Engineers. It has options available for both small teams and enterprise usage. 
+PostHog is the best open source analytics tool for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for Engineering, Data Engineering and Product teams to use.
 
 ### Strengths
 - All-in-one analytics suite
