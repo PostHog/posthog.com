@@ -27,6 +27,9 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 
 Of course, we _would_ say PostHog is the best open source analytics platform, but if you need convincing then you can get started for free and decide for yourself today!
 
+### Who is PostHog for?
+PostHog is useful for a wide-variety of role, but is especially useful for Product Managers, Engineers, Growth Marketers and Product Engineers. It has options available for both small teams and enterprise usage. 
+
 ### Strengths
 - All-in-one analytics suite
 - Easy-to-use, no SQL required
@@ -48,6 +51,9 @@ Apache Spark is an open source analytics engine specifically focused on large-sc
 
 However, the focus on libraries such as SQL make Apache Spark difficult for non-technical users as support is provided solely by the community.
 
+### Who is Apache Spark for?
+Apache Spark is a technical system intended for Data Engineers and Data Scientists conducting large-scale analytics in an enterprise setting. 
+
 ### Strengths
 - Great for very large data volumes
 - Use libraries such as MLlib for machine learning
@@ -61,6 +67,9 @@ Apache Spark is available under the Apache 2.0 license and is entirely free.
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 Matomo is an open source platform for web analytics, rather than a product analytics. That means it's great for understanding metrics such as pageviews or for planning keywords, but it lacks product analytics features such as session recording or feature flags. Nevertheless, it's an alternative to Google Analytics for users who want to protect user privacy. 
+
+### Who is Matomo for?
+Matomo is intended for Marketing and Content teams who need to focus on SEO activities. It is suitable for both small and enterprise businesses.
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
@@ -76,7 +85,10 @@ Matomo is available under a AGPLv3 licence. Pricing depends mainly on the amount
 
 Like Matomo, Plausible Analytics is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is compliant with regulations such as GDPR. 
 
-Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting. 
+Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting.
+
+### Who is Plasuible Analytics for?
+Plausible is intended for Marketing and Content teams who need to focus on specific SEO metrics. It's designed for use in small to medium businesses or teams. 
 
 ### Strengths
 - Easy to use and focused on essential web metrics
@@ -89,7 +101,10 @@ Plausible Analytics is available under a AGPLv3 licence. Pricing depends on the 
 ## 5. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-Like PostHog, Countly offers a wide range of tools to help you build better products. It has a strong focus on mobile products and enables you to bring together both qualitative and quantitative insights. However many features, such as dashboards or funnel analysis, are only available in the enterprise-level product. 
+Like PostHog, Countly offers a wide range of tools to help you build better products. It has a strong focus on mobile products and enables you to bring together both qualitative and quantitative insights. However many features, such as dashboards or funnel analysis, are only available in the enterprise-level product.
+
+### Who is Countly for?
+Countly is suitable for both small teams and enterprise businesses, especially those which focus on mobile products. The crash analytics tools make it especially useful for Customer Support and Engineering teams. 
 
 ### Strengths
 - Wide range of analysis tools, including funnels
@@ -105,6 +120,9 @@ Countly is available under a AGPLv3 licence. A limited version of the product is
 
 Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
+### Who is Metabase for?
+Metabase has a drag-and-drop interface which make it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. 
+
 ### Strengths
 - Easy-to-use, no SQL required
 - Automated reports and interactive dashboards
@@ -118,6 +136,9 @@ Metabase is available under a AGPL licence. A limited version of the product is 
 ![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
 
 Grafana is more of a data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
+
+### Who is Grafana for?
+Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in businesses or teams of any size, including enterprise. 
 
 ### Strengths
 - Great for tracking data in real-time
