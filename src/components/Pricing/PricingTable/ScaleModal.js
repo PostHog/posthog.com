@@ -2,8 +2,9 @@ import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import { useValues } from 'kea'
 import React from 'react'
-import { PricingSlider } from '../../PricingSlider'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
+import { SCALE_MINIMUM_EVENTS } from '../constants'
+import { PricingSlider } from '../PricingSlider'
+import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { Plan } from './Plan'
 import { Scale } from './Plans'
 
@@ -35,8 +36,8 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </div>
 
                                 <PricingSlider
-                                    marks={[8000000, 10000000, 100000000, 150000000]}
-                                    min={8000000}
+                                    marks={[SCALE_MINIMUM_EVENTS, 10000000, 100000000, 150000000]}
+                                    min={SCALE_MINIMUM_EVENTS}
                                     max={150000000}
                                 />
                             </div>

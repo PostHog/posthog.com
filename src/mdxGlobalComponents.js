@@ -65,10 +65,10 @@ import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
+import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
-import { PricingSlider } from './components/PricingSlider'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -158,10 +158,10 @@ export const shortcodes = {
     FAQs,
     PlanComparison,
     PricingHero,
+    PricingSlider,
     PricingTable,
     Quote,
     Savings,
-    PricingSlider,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,

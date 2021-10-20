@@ -3,8 +3,8 @@ import { useActions } from 'kea'
 import { Structure } from '../../Structure'
 import { CloudPlanBreakdown } from './CloudPlanBreakdown'
 import { SelfHostedPlanBreakdown } from './SelfHostedPlanBreakdown'
-import { pricingSliderLogic, PricingOptionType } from '../../PricingSlider/pricingSliderLogic'
-import { inverseCurve } from 'components/PricingSlider/LogSlider'
+import { pricingSliderLogic, PricingOptionType } from '../PricingSlider/pricingSliderLogic'
+import { inverseCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import Chip from 'components/Chip'
 
 export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefault?: boolean }) => {
