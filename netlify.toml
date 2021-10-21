@@ -810,3 +810,9 @@
 [[redirects]]
     from = "/docs/self-host/runbook/overview"
     to = "/docs/self-host/runbook"
+
+
+# Added: 2021-10-21
+[[redirects]]
+    from = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
