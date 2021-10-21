@@ -5,32 +5,35 @@ showTitle: true
 featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
 featuredTutorial: true
 ---
+_Estimated reading time: 10 minutes_ ☕☕☕
 
-Applying pirate metrics to your business is a really efficient way to determine where you are losing customers and how you should be optimizing your marketing and sales funnel, especially when you are just getting started with metrics.
+![AARRR Funnel Banner Image](../../images/tutorials/banners/aarrr-funnel.png)
+
+Applying pirate metrics to your business is an efficient way to determine where you are losing customers and how you should be optimizing your marketing and sales funnel, especially when you are just getting started with metrics.
 
 ## What are pirate metrics?
 
-The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym A.A.R.R.R (me hearties – get it?).
+The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym AARRR (me hearties – get it?).
 
 ![aarrr](../../images/tutorials/pirate-funnel/aarrr-funnel.png)
 
 Growth hackers use the pirate funnel to identify the weakest point in a customer acquisition cycle and see where they need to focus more effort. Simply put, if you aren’t sure where you’re going wrong, this is a great place to start.
 
-In this tutorial we’ll walk through how to create an A.A.R.R.R. funnel using PostHog insights.
+In this tutorial we’ll walk through how to create an AARRR funnel using PostHog.
 
 ## Step 1: Define your funnel stages
 
-The stages are open for interpretation and will look different for every business. Start by examining your user journey and identifying the most important steps people take, like signing-up, adding an item to the basket, adding a new task to their dashboard, or completing a purchase.
+The stages of your funnel are open for interpretation and will look different for every business. Start by examining your user journey and identifying the most important steps people take, like signing-up, adding an item to the basket, adding a new task to their dashboard, or completing a purchase.
 
 There are a lot of [great resources](https://ms-mbalke.medium.com/aarrr-framework-metrics-that-let-your-startup-sound-like-a-pirate-ship-e91d4082994b) which can help you figure out how to define your funnel steps and how to adjust the framework to work for you. Different companies will interpret the funnel differently. Depending on your business model you might consider the acquisition stage to be represented by a new customer gain rather than a page visit, or want to swap the retention and revenue stages because repeat engagement may be more important.
 
 For this tutorial we’re going to be using HogFlix, a demo app built for streaming movies.
 
-A successful customer acquisition journey for a HogFlix looks like:
+A successful customer acquisition journey for HogFlix looks like:
 
 1. **Acquisition**: a potential user lands on the HogFlix website
-2. **Activation**: the user is interested, and begins a free trial by signing up for a free account
-3. **Retention**: the user enjoys the experience and watches a movie during their trial
+2. **Activation**: the user begins a free trial by signing up for a free account
+3. **Retention**: the user watches a movie during their trial
 4. **Revenue**: the user signs up for a paid account
 5. **Referral**: the users shares the site with a contact
 
@@ -92,7 +95,7 @@ We want to track the number of users who watch a movie during their free trial. 
 
 Monetization is the root of the financial health of your business, meaning at some point users need to convert to customers. The revenue stage of the funnel sets a goal to track how well initial users are converting to paying customers. This might mean upgrading a free plan to a premium subscription, continuing usage after the end of a free trial, or purchasing additional features.
 
-In the case of HogFlix, users who proceed through the payment process following their free trial are counted as a successful metric for the revenue stage. The ‘Made purchase’ action defines the fourth stage of the A.A.R.R.R. funnel.
+In the case of HogFlix, users who proceed through the payment process following their free trial are counted as a successful metric for the revenue stage. The ‘Made purchase’ action defines the fourth stage of the AARRR funnel.
 
 ![Defining a revenue-related funnel step](../../images/tutorials/pirate-funnel/revenue.png)
 
@@ -136,7 +139,7 @@ At HogFlix there is a significant drop off at the referral stage. Despite the gr
 
 ## Step 7: investigation
 
-This is where you want to turn from hard data to soft data. The broad metrics used to create an A.A.R.R.R. function as a kicking off point to let you know where your problem areas are. 
+This is where you want to turn from hard data to soft data. The broad metrics used to create an AARRR function as a kicking off point to let you know where your problem areas are. 
 
 Now it’s time to do a deep dive into the user journey in our bottleneck and figure out where the dropoff comes from. This can be via direct outreach and further data analysis. Perhaps you need to get a survey out to your customers to find out about how they are experiencing this part of the customer journey, or maybe there are already new features which you have in mind to solve the problem.
 
@@ -150,6 +153,6 @@ The possibilities for steps you can create between your steps are endless. You c
 
 Creating different funnels for different kinds of users or adding more steps to a funnel could also give you a better idea of where you want to focus attention.
 
-Ultimately, the A.A.R.R.R. framework serves as a great tool for considering the most critical metrics available to you so you can break down KPIs and prioritize efficiently. If you can apply the principles of the pirate funnel to your business, you’re already in a really healthy place to create a data-driven product.
+Ultimately, the AARRR framework serves as a great tool for considering the most critical metrics available to you so you can break down KPIs and prioritize efficiently. If you can apply the principles of the pirate funnel to your business, you’re already in a really healthy place to create a data-driven product.
 
-_Tutorial contributed by Hanna Crombie_
+_Tutorial contributed by [Hanna Crombie](https://www.linkedin.com/in/hannacrombie/)_
