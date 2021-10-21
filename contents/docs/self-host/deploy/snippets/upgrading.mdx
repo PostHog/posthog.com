@@ -3,17 +3,17 @@ import CommandHelmUpgradeSnippet from './command-helm-upgrade'
 
 To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, do the following:
 
-1. get and update the helm repo
+1. Get and update the helm repo:
 
 <CommandHelmGetRepoSnippet />
 
-2. Check if it's going to be a major upgrade
+2. Check if it's going to be a major version upgrade:
 
 ```shell
 helm list -n posthog
 helm search repo posthog
 ```
-Compare the numbers for the chart version (looks like `posthog-3.15.1`) you see in the commands above, if the first number is different it means we'll be doing a major upgrade. Check the [upgrade notes](/docs/self-host/deploy/upgrade-notes) before moving forward.
+Compare the numbers for the chart version (in the format `posthog-{major}.{minor}.{patch}` - for example, `posthog-3.15.1`) when running the commands above. If the upgrade is for a major version, check the [upgrade notes](/docs/self-host/deploy/upgrade-notes) before moving forward.
 
 3. Run the upgrade
 
