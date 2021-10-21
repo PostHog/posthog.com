@@ -1,5 +1,5 @@
 ---
-date: 2021-10-22
+date: 2021-10-21
 title: An introduction to product analytics and how it works
 rootPage: /blog
 sidebar: Blog
