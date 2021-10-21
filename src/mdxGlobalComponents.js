@@ -8,6 +8,7 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
@@ -47,6 +48,7 @@ import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
+import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
@@ -101,6 +103,7 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
+    BlockQuote,
     Blog,
     BlogFooter,
     BorderWrapper,
@@ -140,6 +143,7 @@ export const shortcodes = {
     Home,
     HostingOption,
     ImageBlock,
+    InlineCode,
     LandingPageCallToAction,
     LibraryStats,
     Link,

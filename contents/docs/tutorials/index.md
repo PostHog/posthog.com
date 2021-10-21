@@ -16,6 +16,7 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [How to safely roll out new features](/docs/tutorials/feature-flags)
 - [Visualizing user behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
+- [Building and measuring a sign up funnel with Next.js and Supabase](/docs/tutorials/nextjs-supabase-signup-funnel)
 - [Analyzing user behavior with Cohorts](/docs/tutorials/cohorts)
 - [Measuring retention and tracking churn](/docs/tutorials/retention)
 - [Tracking single page apps](/docs/tutorials/spa)
@@ -23,3 +24,4 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Tracking key B2B product metrics](/docs/tutorials/b2b)
 - [Sales and revenue tracking](/docs/tutorials/revenue)
 - [Running simple surveys with no backend](/docs/tutorials/survey)
+- [Building an AARRR pirate funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)

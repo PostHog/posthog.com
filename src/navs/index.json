@@ -21,7 +21,7 @@
                 "component": "Docs",
                 "items": [
                     {
-                        "title": "1. Self hosting",
+                        "title": "1. Self-host",
                         "link": {
                             "title": "Overview",
                             "url": "/docs/self-host"
@@ -86,8 +86,8 @@
                                         "url": "/docs/self-host/configure/upgrading-posthog"
                                     },
                                     {
-                                        "title": "Self host vs. PostHogCloud",
-                                        "url": "/docs/user-guides/organizations"
+                                        "title": "Self-hosted vs. PostHog Cloud",
+                                        "url": "/signup"
                                     },
                                     {
                                         "title": "ClickHouse",

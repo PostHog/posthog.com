@@ -812,7 +812,7 @@
     to = "/docs/self-host/runbook"
 
 
-# Added: 2021-10-21
+# Added: 2021-10-20
 [[redirects]]
-    from = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
-    to = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    from = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
