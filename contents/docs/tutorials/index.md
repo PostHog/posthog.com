@@ -24,3 +24,4 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Tracking key B2B product metrics](/docs/tutorials/b2b)
 - [Sales and revenue tracking](/docs/tutorials/revenue)
 - [Running simple surveys with no backend](/docs/tutorials/survey)
+- [Building an AARRR pirate funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
