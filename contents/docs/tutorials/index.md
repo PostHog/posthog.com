@@ -16,7 +16,7 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [How to safely roll out new features](/docs/tutorials/feature-flags)
 - [Visualizing user behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/docs/tutorials/nextjs-supabase-signup-funnel)
+- [Building and measuring a sign up funnel with Next.js and Supabase](/docs/tutorials/nextjs-supabase-signup-funnel)
 - [Analyzing user behavior with Cohorts](/docs/tutorials/cohorts)
 - [Measuring retention and tracking churn](/docs/tutorials/retention)
 - [Tracking single page apps](/docs/tutorials/spa)
