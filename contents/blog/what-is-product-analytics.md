@@ -11,47 +11,56 @@ featuredImageType: full
 ---
 ## What is product analytics?
 
-There are a lot of ways to describe product analytics and no fixed definition which every product manager or engineer could agree on. However, at the most basic level product analytics refers to the process of gathering data about how a product is used, then analyzing that data in order to make decisions about improving it. 
+At the most basic level product analytics refers to the process of gathering data about how a product is used, then analyzing that data in order to make decisions about improving it.
 
-A common example of product analytics is collecting information about how many users reach each stage of an onboarding funnel, so that changes can be identified to drive better conversion rates. 
+Where it gets more complicated is in the particular situations and decisions that are made using product analytics tools.
 
-There are two types of data which are typically gathered for product analytics:
+A good example of product analytics in action is collecting information about how many users reach each stage of an onboarding funnel, then using that information to improve or optimize a funnel. This is exactly [what companies such as Hasura use tools like PostHog for](https://posthog.com/customers/hasura)!
 
-- *Quantitative data* is that which is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](https://posthog.com/docs/user-guides/funnels) in PostHog to measure the conversion rate of a sign-up flow is an example of quantitative data analysis.
+![Product analytics funnel](../images/tutorials/pirate-funnel/find-your-bottleneck.png)
+<p align = "center">
+Above: An example of a simple product analytics funnel
+</p>
+
+There are two types of data which you can gather for product analytics:
+
+- *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](https://posthog.com/docs/user-guides/funnels) in PostHog to measure the conversion rate of a sign-up flow is an example of quantitative data analysis.
 - *Qualitative data* is that which is subjective, such as user feedback or observations. Using [session recordings](https://posthog.com/docs/user-guides/recordings) in PostHog to intuit where users may be experiencing friction is an example of qualitative data analysis.
 
-While there is a clear distinction between qualitative and quantitative data, there are also frameworks which can be used to translate between the two. NPS scores, for example, are often used to trandslate a user sentiment into a measurable data point.
+There are also frameworks which can be used to translate information between the two. NPS scores, for example, are often used to translate a user sentiment into a measurable data point.
+
+
 
 > Find out how [PostHog’s enables you to leverage quantative and qualitative data](https://posthog.com/product), or [schedule a demo](https://posthog.com/book-a-demo) to see it in action. 
 
 ## Why are product analytics tools important?
 
-Product analytics tools are important because they enable teams to make thoughtful and well-informed decisions about changes to their product. Product analytics tools also provide the means to measure success (or failure!) when needed, which can be important for knowing when to rollback changes. 
+Product analytics tools are important because they enable you to make thoughtful and well-informed decisions about changes to a product. Product analytics tools also enable you to measure success (or failure!) when needed, so you know if you need to rollback or double-down on a change. 
 
-While it is certainly possible to make and prioritise changes to a product without using product analytics tools, doing so is often very risky. Working without an analytical approach means it’s impossible to know if changes are having a beneficial impact, or even if you are solving the right problems to start with. 
+It's possible to get by without product analytics, but then it's impossible to know if changes are having a beneficial impact, or even if you are solving the right problems to start with. Product development without product analytics is like stumbling around in a dark room, trying to find the way out. You _might_ find the way out, but you might also fall down a hole! 
+
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/rikin.png"
         size="md"
         name="Rikin Kachhia"
         title="Software Engineer, Hasura"
-        quote={`“We observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
+        quote={`“We observed drop-offs at very particular stages of our onboarding flows and, as a result, we took actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
     />
 </BorderWrapper>
 
 ## Who uses product analytics?
 
-Nearly all modern businesses which sell digital products will employ product analytics tools at some level, from new start-ups such as [Pry](https://posthog.com/customers/pry) to established products with thousands of users such as [Hasura](https://posthog.com/customers/hasura).
+Nearly all modern businesses will employ product analytics tools at some level, from new start-ups such as [Pry](https://posthog.com/customers/pry) to established products with thousands of users such as [Hasura](https://posthog.com/customers/hasura).
 
 Product analytics tools are _not_ used solely by Product teams, but can be used by a wide range of teams or individuals within a business. These can include:
 
 - Product Managers or Product Engineers
-- Growth Marketers or Product Marketers
 - Software Engineers or Developers
 - Leadership or senior management
 - UI or UX Designers
 
-Individuals will often approach product analytics with a particular area of focus depending on their role. Product Engineers, for example, may investigate the adoption rate for certain features so that they can make decisions about the product roadmap. Meanwhile, UX Designers may use product analytics tools to understand where users spend the most time in a product, so they can optimize an interface. 
+Individuals will often employ product analytics on a particular area, depending on their role. Product Engineers, for example, may investigate the adoption rate for new features so that they can make decisions about the product roadmap. Meanwhile, UX Designers may use product analytics tools to understand where users are rage-clicking, so they can optimize the interface. 
 
 <BorderWrapper>
     <Quote
@@ -65,39 +74,39 @@ Individuals will often approach product analytics with a particular area of focu
 
 ## What product metrics should I track?
 
-It’s important when using product analytics tools to look at a wide variety of data and consider metrics relevant to specific decisions. Some metrics, such as number of customers, can give you a good sense of your overall product health but may not help you plan a product roadmap.
+It’s important when using product analytics tools to look at metrics relevant to specific decisions. Metrics such as the number of customers, can give you a good sense of your overall product health but won't help you plan a roadmap.
 
-Some of the product metrics you should definitely consider monitoring though include:
+One simple set of metrics which can help all teams to focus their efforts is the so-called pirate funnel, which was created by Dave McClure and tracks AARRR. That stands for:
 
-- Usage metrics, such as DAU (daily active users) or MAU (monthly active users)
-- Discovery metrics, such as what percentage of users adopt new features
-- Engagement metrics, such as how often users login to your product
-- Business metrics, such as MRR (monthly recurring revenue)
-- Retention metrics, such as churn rate and referral rates
+- *Acquisition:* Users who discover your product (e.g. free trials, web traffic)
+- *Activation:* Users who use your product (e.g. sign-ups, first orders)
+- *Retention:* Users who stay with your product (e.g. repeat purchases)
+- *Revenue:* The money bought in by users (e.g. Subscriptions, LTV)
+- *Referral:* The users who share your product (e.g. reviews, shares)
 
-The interval you track this data over will also vary depending on what the product is and the typical user lifecycle, but it can often help to look at data over daily, weekly, monthly and quarterly intervals.
-
-One simple set of metrics which can help teams to focus their efforts is the so-called pirate funnel, which tracks AARRR. That stands for: acquisition, activation, retention, referral and revenue.
-
-> Find out [how to build an AARRR pirate funnel](https://posthog.com/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog to determine where you can make improvements to your product.
+[![AARRR Tutorial](../images/tutorials/banners/aarrr-funnel.png)](https://posthog.com/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
 
 ## Do I need to share my data when using product analytics tools?
 
-Many product analytics tools work by capturing user actions with a short code snippet or third-party cookie, which then sends that data to the product analytics platform which runs on a remote data centre. This is how popular product analytics tools such as Amplitude or Mixpanel work. 
+No. 
 
-However there are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. This is why PostHog enables teams to self-host their product analytics, so that you can keep data on your existing infrastructure and benefit from product analytics without sharing data.
+Most product analytics tools such as Mixpanel and Amplitude work by capturing user actions with a short code snippet or third-party cookie which sends data to their data centers. But not all platforms work this way.
 
-Self-hosting your product analytics platform also provides other benefits, such as circumventing many ad blockers or browser privacy features due to the lack of third-party cookies and enabling greater control over how the service performs.
+PostHog enables you to self-host your product analytics, so you keep data on your infrastructure and don't need to share data with anyone. Not even PostHog. 
+
+There are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. Self-hosting your product analytics platform also provides other benefits, such as circumventing ad blockers due to the lack of third-party cookies.
 
 > Find out [how to self-host product analytics](https://posthog.com/docs/self-host) with PostHog and easily deploy to your infrastructure using Digital Ocean. 
 
 ## Is Google Analytics good for product analytics?
 
+No.
+
 Google Analytics is one of the most popular analytics platforms in the world and is useful for understanding a number of important metrics, but it isn’t the ideal platform for running product analytics. This is because Google Analytics was built to help users understand web metrics, rather than answer questions about _why_ users behave in certain ways. 
 
-In short, Google Analytics provides a handy overview of metrics such as bounce rate or web traffic, but it doesn’t offer more comprehensive tools such as feature flags or session recording.
+In short, Google Analytics provides a handy overview of web traffic or vanity metrics such as bounce rate, but it doesn’t offer tools such as feature flags or session recording.
 
-As a result, Google Analytics is often the preferred tool for specific roles in a marketing team who use other Google tools like AdWords, but is unsuitable for the needs of Product or Engineering teams. 
+As a result, Google Analytics is often the preferred tool for specific roles in a Marketing team that uses other Google tools, but is unsuitable for the needs of Product or Engineering teams. 
 
 <BorderWrapper>
     <Quote
@@ -111,10 +120,10 @@ As a result, Google Analytics is often the preferred tool for specific roles in 
 
 ## What are the best product analytics tools?
 
-There are a wide variety of product analytics tools available to choose from, each with its own quirks and strengths. Popular options include platforms such as Amplitude, Heap or Mixpanel, though each of these requires that user data must be shared with the platform. 
+Naturally, we think PostHog is the best product analytics tool available. 
 
-While we’re obviously biased on the topic, we believe PostHog is the best product analytics platform because it enables teams to choose whether to self-host or to host in the cloud, integrates with tools such as data warehouses and offers everything teams need to interrogate their data. Self-hosting means no data is shared with anyone else (not even PostHog), while hosting in the cloud enables you to get started in minutes. 
+Why? PostHog enables you to self-host your analytics, integrates with tools such as data warehouses and offers everything you need to interrogate your data in a simple, visual UI. No SQL required. PostHog also offers many unique features which closed-source competitors do not, such as feature flags and session recording. 
 
-In either case, PostHog offers all of the features you’d expect from a market-leading product analytics platform, including session recording, feature flags and funnel analysis. It's an all-in-one product analytics tool.
+There are a variety of product analytics tools available to choose from however, each with its own quirks and strengths. Popular options include platforms such as Amplitude, Heap, or Mixpanel, though none of these offer self-hosted deployments. 
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster and without writing SQL. [Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more. 
