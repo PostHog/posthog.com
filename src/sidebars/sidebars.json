@@ -532,7 +532,7 @@
                                 },
                                 {
                                     "name": "Upgrade",
-                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                    "url": "/docs/self-host/runbook/kafka/upgrade"
                                 }
                             ]
                         }
