@@ -18,18 +18,16 @@ Where it gets more complicated is in the particular situations and decisions tha
 A good example of product analytics in action is collecting information about how many users reach each stage of an onboarding funnel, then using that information to improve or optimize a funnel. This is exactly [what companies such as Hasura use tools like PostHog for](https://posthog.com/customers/hasura)!
 
 ![Product analytics funnel](../images/tutorials/pirate-funnel/find-your-bottleneck.png)
-<p align = "center">
-Above: An example of a simple product analytics funnel
+
+<p align = "center"><figcaption>Above: An example of a simple product analytics funnel</figcaption>
 </p>
 
 There are two types of data which you can gather for product analytics:
 
-- *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](https://posthog.com/docs/user-guides/funnels) in PostHog to measure the conversion rate of a sign-up flow is an example of quantitative data analysis.
+- *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](https://posthog.com/docs/user-guides/funnels) in PostHog to measure drop-off is an example of quantitative data analysis.
 - *Qualitative data* is that which is subjective, such as user feedback or observations. Using [session recordings](https://posthog.com/docs/user-guides/recordings) in PostHog to intuit where users may be experiencing friction is an example of qualitative data analysis.
 
 There are also frameworks which can be used to translate information between the two. NPS scores, for example, are often used to translate a user sentiment into a measurable data point.
-
-
 
 > Find out how [PostHog’s enables you to leverage quantative and qualitative data](https://posthog.com/product), or [schedule a demo](https://posthog.com/book-a-demo) to see it in action. 
 
@@ -39,15 +37,14 @@ Product analytics tools are important because they enable you to make thoughtful
 
 It's possible to get by without product analytics, but then it's impossible to know if changes are having a beneficial impact, or even if you are solving the right problems to start with. Product development without product analytics is like stumbling around in a dark room, trying to find the way out. You _might_ find the way out, but you might also fall down a hole! 
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/rikin.png"
-        size="md"
-        name="Rikin Kachhia"
-        title="Software Engineer, Hasura"
-        quote={`“We observed drop-offs at very particular stages of our onboarding flows and, as a result, we took actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”`}
-    />
-</BorderWrapper>
+[![Hasura case study](../images/customers/hasura/screenshot.png)](https://posthog.com/customers/hasura)
+
+<p align = "center"><figcaption>
+
+Find out [how Hasura improved conversions by 20%](https://posthog.com/customers/hasura) using PostHog
+
+</figcaption>
+</p>
 
 ## Who uses product analytics?
 
@@ -84,7 +81,15 @@ One simple set of metrics which can help all teams to focus their efforts is the
 - *Revenue:* The money bought in by users (e.g. Subscriptions, LTV)
 - *Referral:* The users who share your product (e.g. reviews, shares)
 
+
 [![AARRR Tutorial](../images/tutorials/banners/aarrr-funnel.png)](https://posthog.com/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
+
+<p align = "center"><figcaption>
+
+Find out [how to build a AARRR funnel](https://posthog.com/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
+
+</figcaption>
+</p>
 
 ## Do I need to share my data when using product analytics tools?
 
