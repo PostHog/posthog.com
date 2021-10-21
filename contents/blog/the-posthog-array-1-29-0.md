@@ -75,9 +75,25 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 - **Fixes to tooltips and person deep dive** - We've improved the way we display information on tooltips and the person deep dive modal.
 - Plus **350+ more** improvements & fixes.
 
-### Deprecation notices
+### Deprecation notice
 
-⚠️ Text on `@current` deprecation goes here.
+In PostHog 1.30.0 we will be introducing major improvements to the experience of using PostHog with multiple projects and that requires us to rework part of the API structure. Hence, in PostHog 1.29.0 the following API paths are deprecated, with straightforward replacements:
+
+- `/api/action/` becomes `/projects/<project_id>/actions/`
+- `/api/annotation/` becomes `/projects/<project_id>/annotations/`
+- `/api/cohort/` becomes `/projects/<project_id>/cohorts/`
+- `/api/dashboard/` becomes `/projects/<project_id>/dashboards/`
+- `/api/dashboard_item/` becomes `/projects/<project_id>/saved_insights/`
+- `/api/element/` becomes `/projects/<project_id>/elements/`
+- `/api/event/` becomes `/projects/<project_id>/events/`
+- `/api/feature_flag/` becomes `/projects/<project_id>/feature_flags/`
+- `/api/insight/` becomes `/projects/<project_id>/insights/`
+- `/api/paths/` becomes `/projects/<project_id>/paths/`
+- `/api/person/` becomes `/projects/<project_id>/persons/`
+- `/api/plugin_config/` becomes `/projects/<project_id>/plugin_configs/`
+- `/api/sessions_filter/` becomes `/projects/<project_id>/session_filters/`
+
+In a future PostHog version the deprecated paths will be removed. At the same time we will also have to remove the special `project_id` value `@current` (representing the currently selected project).
 
 ### Help us improve PostHog
 
