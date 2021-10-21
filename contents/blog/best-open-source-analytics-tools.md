@@ -87,7 +87,7 @@ Like Matomo, Plausible Analytics is focused on providing website analytics that 
 
 Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting.
 
-### Who is Plasuible Analytics for?
+### Who is Plausible Analytics for?
 Plausible is intended for Marketing and Content teams who need to focus on specific SEO metrics. It's designed for use in small to medium businesses or teams. 
 
 ### Strengths
