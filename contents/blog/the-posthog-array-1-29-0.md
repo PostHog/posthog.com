@@ -5,13 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories:
-    - Release notes
+categories: ["Release notes"]
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: Fully revamped Paths experience to better explore what actions your users are taking. Multivariate support in feature flags, private projects and DAU/WAU/MAU graphs are only a few of the new features.
+excerpt: Fully revamped Paths experience enables you to better explore what actions your users take. New features include multivariate feature flags, private projects and DAU/WAU/MAU graphs.
 ---
 
-PostHog 1.29.0 includes a fully revamped Paths experience to better explore what actions your users are taking. Multivariate support in feature flags, private projects and DAU/WAU/MAU graphs are only a few of the new features.
+PostHog 1.29.0 includes a fully revamped Paths experience which enables you to better explore what actions your users take. New features include multivariate feature flags, private projects and DAU/WAU/MAU graphs.
 
 ## PostHog 1.29.0 release notes
 
@@ -30,15 +29,15 @@ Continuing our quest to help you understand why your users convert or don't conv
 
 From jumping from a conversion drop-off in a funnel to identifying paths ending in a desired action, you will be able to fully understand the paths of your users. We're introducing a lot of additional features such as:
 
-- Select up to 20 steps
-- Fined-grained controls on what paths to show
+- The ability to select up to 20 steps
+- Fine-grained controls on what paths to show
 - Grouping paths through wildcards
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-paths-advanced.png" alt="" />
 
 <br />
 
-> 🎁 Some of these new features require a PostHog Scale or Enterprise license. [Learn more](/pricing)
+> 🎁 Some of these new features require a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 ### Multivariate support in feature flags
 
@@ -54,7 +53,7 @@ Extra concerns on privacy or compliance? Private projects now allow you to limit
 
 <br />
 
-> 🎁 Private projects is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing)
+> 🎁 Private projects is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 ### Trailing DAU/WAU/MAU graphs
 
@@ -68,7 +67,7 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 - **Column configurator** - You will now be able to select the columns you want to see in your events table.
     <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-column-configurator.png" alt="" />
 - **Password reset revamp** - We've shipped a lot of improvements to the password reset experience, including a new UI, API processing, and even new email designs 🎨. If you run with SAML-only login, password reset is now disabled.
-- **Fixes to dashboard load** - Previously loading huge dashboards could be quite slow and in some scenarios even cause some backend strain, this is now fixed.
+- **Fixes to dashboard loading** - Previously loading huge dashboards could be quite slow and in some scenarios even cause some backend strain, this is now fixed.
 - **Improved navigation in Insights** - A lot of under-the-hood improvements which will make navigation in Insights significantly smoother. Clicking back in your browser will now work as expected.
 - **Automatically load new events** in the events table.
 - **Fixed colors in insight table** - We've fixed a pesky bug in which graph series were being displayed with different colors on the graph versus on the table below.
