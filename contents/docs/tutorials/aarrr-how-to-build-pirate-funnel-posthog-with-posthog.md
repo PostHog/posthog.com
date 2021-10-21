@@ -12,7 +12,7 @@ Applying pirate metrics to your business is a really efficient way to determine 
 
 The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym A.A.R.R.R (me hearties – get it?).
 
-![aarrr](../../images/tutorials/pirate-funnel/AARRR-funnel.png)
+![aarrr](../../images/tutorials/pirate-funnel/aarrr-funnel.png)
 
 Growth hackers use the pirate funnel to identify the weakest point in a customer acquisition cycle and see where they need to focus more effort. Simply put, if you aren’t sure where you’re going wrong, this is a great place to start.
 
