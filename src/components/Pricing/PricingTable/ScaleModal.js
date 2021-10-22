@@ -14,6 +14,8 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
     const monthlyMinimumPrice = SCALE_MINIMUM_PRICING.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
     })
     return (
         <Modal open={open} setOpen={setOpen}>
