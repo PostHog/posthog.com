@@ -137,7 +137,7 @@ At HogFlix there is a significant drop off at the referral stage. Despite the gr
 
 ![Dashboard funnel graph](../../images/tutorials/pirate-funnel/find-your-bottleneck.png)
 
-## Step 7: investigation
+## Step 7: Investigation
 
 This is where you want to turn from hard data to soft data. The broad metrics used to create an AARRR function as a kicking off point to let you know where your problem areas are. 
 
