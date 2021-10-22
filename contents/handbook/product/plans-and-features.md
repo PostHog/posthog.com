@@ -1,13 +1,12 @@
 ---
-title: Plans and features
+title: Feature matrix
 sidebar: Handbook
 showTitle: true
 ---
 
-The feature sets available in a PostHog instance depend on two factors: deployment type and plan.
+> ⚠️ Looking to choose the right plan for your team? See our [Pricing](/pricing) page.
 
-
-### Cloud plans
+### Cloud features
 
 There are two plans for cloud. Organizations without a credit card are defaulted onto the Free plan and limited to 10,000 monthly events. 
 
@@ -35,7 +34,7 @@ Organizations that add a credit card are moved to the Standard plan. This plan i
 
 
 
-### Self-hosted plans
+### Self-hosted features
 
 Open source, Scale, and Enterprise instances all deploy the same software with a different license key.
 
