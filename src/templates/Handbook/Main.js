@@ -3,6 +3,7 @@ import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
+import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useRef } from 'react'
@@ -63,6 +64,7 @@ export default function Main({
         h4: (props) => Heading({ as: 'h4', ...props }),
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()

@@ -93,6 +93,7 @@ import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
+import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
     Endpoint,
@@ -188,4 +189,5 @@ export const shortcodes = {
     Tooltip,
     VisitLibrary,
     WorkableSnippet,
+    ZoomImage,
 }
