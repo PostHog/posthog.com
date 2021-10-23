@@ -18,5 +18,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         name: String
         url: String
       }
+      type Jobs implements Node
     `)
 }
