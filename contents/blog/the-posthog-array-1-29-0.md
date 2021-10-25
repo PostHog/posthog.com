@@ -79,7 +79,9 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 
 ### Deprecation notice
 
-In PostHog 1.30.0 we will be introducing major improvements to the experience of using PostHog with multiple projects and that requires us to rework part of the API structure. Hence, in PostHog 1.29.0 the following API paths are deprecated, with straightforward replacements:
+1. We're deprecating the sessions page and fully removing it in PostHog 1.30.0. Read more about it, [in this blog post](/blog/sessions-removal). If you have any feedback on this change, please [reach out](/slack).
+
+2. In PostHog 1.30.0 we will be introducing major improvements to the experience of using PostHog with multiple projects and that requires us to rework part of the API structure. Hence, in PostHog 1.29.0 the following API paths are deprecated, with straightforward replacements:
 
 - `/api/action/` becomes `/projects/<project_id>/actions/`
 - `/api/annotation/` becomes `/projects/<project_id>/annotations/`
