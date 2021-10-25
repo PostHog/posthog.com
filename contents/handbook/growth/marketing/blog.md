@@ -48,7 +48,7 @@ Our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8v
 Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) with the following content:
 
 - With a new Markdown file (md, mdx) in `/contents/blog/`
-- Any assets [optimized](/docs/contribute/updating-documentation) and added to a new folder under `contents/images/blog/`
+- Any assets [optimized](/docs/contribute/contribute-to-website) and added to a new folder under `contents/images/blog/`
 - Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
