@@ -816,3 +816,8 @@
 [[redirects]]
     from = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+
+# Manually Added: 2021-10-25
+[[redirects]]
+    from = "/docs/contribute/updating-documentation"
+    to = "/docs/contribute/contribute-to-website"
