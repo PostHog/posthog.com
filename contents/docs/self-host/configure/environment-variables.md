@@ -71,6 +71,6 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SAML_ATTR_LAST_NAME`| Name of attribute that contains the last name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `last_name`
 | `SAML_ATTR_EMAIL`| Name of attribute that contains the email of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `email`
 | `SAML_ENFORCED`| Whether password-based login is disabled and users automatically redirected to SAML login. Requires SAML to be properly configured. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-
+| `DEBUG_QUERIES`| Whether debugging queries (ClickHouse) is enabled in the Command Palette.| `False`
 
 [configuring email]: /docs/self-host/configure/email#general-configuration
