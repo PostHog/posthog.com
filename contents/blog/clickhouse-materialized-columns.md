@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: engineering
+categories: ["Engineering"]
 author: karl-aksel-puulmann
 featuredImage: ../images/blog/automating-software-company-github-actions.png # :TODO:
 featuredImageType: full
