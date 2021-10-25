@@ -15,9 +15,9 @@ Use `set_once` when we want the first value and it to never be updated afterward
 
 Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have some heuristics that help us determine a value, but users can also specify it. In these cases it might be beneficial to use `set_once` for the heuristically computed value and `set` for user specified value. Note that we will never override an existing value if `set_once` is used, so if heuristics are used on a continuous basis that would not be a good strategy.
 
-## How values get overridden?
+## How do values get overridden?
 
-**Below explains how overrides will work in the future, but currently overrides ignore timestamps. This means at the moment `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.**
+**The section below explains how overrides will work in the future, but currently overrides ignore timestamps. This means at the moment `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.**
 
 We rely on timestamps to know the order in which events happened. Note that we don't use ingestion order because events can arrive to PostHog in different order compared to when they were performed, e.g. when network was unreliable and some packets were resent later or when we're importing older events from a different PostHog instance.
 
