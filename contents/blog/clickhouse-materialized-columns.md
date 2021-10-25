@@ -1,5 +1,5 @@
 ---
-date: 2021-09-10
+date: 2021-10-26
 title: How to speed up ClickHouse queries using materialized columns
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Engineering"]
 author: karl-aksel-puulmann
-featuredImage: ../images/blog/automating-software-company-github-actions.png # :TODO:
+featuredImage: ../images/blog/blog-generic-2.png
 featuredImageType: full
 ---
 
