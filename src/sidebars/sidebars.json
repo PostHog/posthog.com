@@ -561,6 +561,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Badge",
+                    "url": "/docs/integrate/badge"
+                },
+                {
                     "name": "GDPR guidance",
                     "url": "/docs/integrate/gdpr"
                 },
