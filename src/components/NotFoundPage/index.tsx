@@ -65,8 +65,12 @@ export default function NotFoundPage(): JSX.Element {
                     )}
                 </div>
 
-                <div className="hedgehog mb-8">
-                    <BasicHedgehogImage />
+                <div></div>
+
+                <div>
+                    <center>
+                        <img src="/images/lost-hog.png" alt="Lost?" width="400" height="500"></img>
+                    </center>
                 </div>
 
                 <CallToAction type="primary" width="84" to="/">
