@@ -25,3 +25,4 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Sales and revenue tracking](/docs/tutorials/revenue)
 - [Running simple surveys with no backend](/docs/tutorials/survey)
 - [Building an AARRR pirate funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
+- [How to embed a shared Dashboard within a web page](/docs/tutorials/how-to-embed-shared-dashboard)

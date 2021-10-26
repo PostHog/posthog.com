@@ -896,6 +896,10 @@
                 {
                     "name": "Building an AARRR pirate funnel",
                     "url": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+                },
+                {
+                    "name": "How to embed a shared Dashboard",
+                    "url": "/docs/tutorials/how-to-embed-shared-dashboard"
                 }
             ]
         },
