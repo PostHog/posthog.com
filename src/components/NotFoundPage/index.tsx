@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { CallToAction } from '../CallToAction'
+import Chip from 'components/Chip'
 import { useValues } from 'kea'
-
-import Layout from '../Layout'
-import { BasicHedgehogImage } from '../BasicHedgehogImage'
+import React, { useEffect, useState } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-
+import { BasicHedgehogImage } from '../BasicHedgehogImage'
+import { CallToAction } from '../CallToAction'
+import Layout from '../Layout'
 import './NotFoundPage.scss'
-import { Button, Col, Row } from 'antd'
 
 export default function NotFoundPage(): JSX.Element {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -20,11 +18,11 @@ export default function NotFoundPage(): JSX.Element {
         }
     }, [])
 
-    const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreWrong = false) => {
+    const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreCorrect = false) => {
         setSubmittedPreference(true)
         if (posthog) {
             posthog.capture('pineapple_on_pizza_survey', {
-                does_pineapple_go_on_pizza: userLikesPineappleOnPizzaAkaTheyreWrong,
+                does_pineapple_go_on_pizza: userLikesPineappleOnPizzaAkaTheyreCorrect,
             })
         }
     }
@@ -38,8 +36,6 @@ export default function NotFoundPage(): JSX.Element {
                     Think this a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll fix it!
                 </p>
 
-                <div className="bg-gray h-[1px] leading-[0px] max-w-xs mx-auto mt-6 mb-8"></div>
-
                 <p>
                     <strong>But while you're here,</strong> we have an important question...
                 </p>
@@ -50,27 +46,15 @@ export default function NotFoundPage(): JSX.Element {
                     {submittedPreference ? (
                         <p>Thanks for letting us know!</p>
                     ) : (
-                        <Row gutter={[12, 4]}>
-                            <Col span={12}>
-                                <Button style={{ float: 'right' }} onClick={() => capturePineapplePreference(true)}>
-                                    Yes
-                                </Button>
-                            </Col>
-                            <Col span={12}>
-                                <Button style={{ float: 'left' }} onClick={() => capturePineapplePreference(false)}>
-                                    No
-                                </Button>
-                            </Col>
-                        </Row>
+                        <div className="flex justify-center space-x-2">
+                            <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
+                            <Chip onClick={() => capturePineapplePreference(false)} text="No" />
+                        </div>
                     )}
                 </div>
 
-                <div></div>
-
-                <div>
-                    <center>
-                        <img src="/images/lost-hog.png" alt="Lost?" width="400" height="500"></img>
-                    </center>
+                <div className="hedgehog my-8">
+                    <BasicHedgehogImage />
                 </div>
 
                 <CallToAction type="primary" width="84" to="/">
