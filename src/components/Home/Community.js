@@ -20,7 +20,7 @@ export default function Community() {
                 <h2 className={heading('md', 'white')}>
                     Join our <span className="text-red">huuuuge*</span> open source community
                 </h2>
-                <h3 className={heading('sm', 'tan')}>*4,600+ stars on GitHub</h3>
+                <h3 className={heading('sm', 'tan')}>*4,800+ stars on GitHub</h3>
                 <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-1 sm:divide-y-0 sm:divide-x-1 divide-dashed">
                     <CommunityStat title="15k+" description="Developer community" />
                     <CommunityStat title="180" description="Contributors" />
