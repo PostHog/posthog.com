@@ -13,7 +13,7 @@ So, you just sold a deal. How do you onboard the customer so they can make their
   - If they work at a small company, add them to our internal Slack. The advantage of this is that they're going to be logged into it all day, so are likely to be more responsive.
   - If they work at a huge company, they are unlikely to get a channel approved - so use PostHog Community Slack. Check with them if this is likely to be the case.
   - If they don't want to use Slack at all, then you should get them to email hey@posthog.com with any issues.
-- Add the private channel to our support queue in Papercups
+- Add the Papercups app to the private Slack channel
 - Book a setup call and ask the client to invite product/engineering stakeholders
   - Cover how to do product led growth (AARRRR) so they get their events in properly
   - Make sure everyone has seen a demo of the main functionality
