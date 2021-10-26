@@ -1,4 +1,3 @@
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import hedgehogImg from '../../images/cool-hedgehog.svg'
-
-export const BasicHedgehogImage = () => <img style={{ margin: 'auto' }} src={hedgehogImg} />
+export const BasicHedgehogImage = () => <StaticImage width={300} src="../../images/lost-hog.png" />
