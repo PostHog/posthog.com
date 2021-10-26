@@ -821,3 +821,8 @@
 [[redirects]]
     from = "/docs/contribute/updating-documentation"
     to = "/docs/contribute/contribute-to-website"
+
+# Manually Added: 2021-10-26
+[[redirects]]
+    from = "/docs/user-guides/users"
+    to = "/docs/user-guides/persons"    
