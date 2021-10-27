@@ -9,7 +9,9 @@ author: marcus-hyett
 featuredImage: ../images/blog/blog-generic-3.png
 featuredImageType: standard
 ---
+If you work in an industry, such as healthcare or medical insurance, which is covered by HIPAA regulations then there are limits around what data you can share and with who. Thankfully, PostHog doesn't see any of your data and can be self-hosted on your own infrastructure, making it the most HIPAA compliant product analytics platform available. 
 
+In this article I'll explain what HIPAA is, what the data must be protected and what your options are for running HIPAA compliant analytics - or you can [get started with PostHog today](https://posthog.com/pricing). 
 ## What is HIPAA?
 
 HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. Health Care Providers).
