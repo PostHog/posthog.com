@@ -28,15 +28,15 @@ In short, any information which is tied to a specific individual can be consider
 
 ## What is the impact of HIPAA on product analytics?
 
-Most product analytics tools require you to send your captured data to a third party system where the data is stored outside of your control. This is a problem under HIPAA, but there are two common ways remain compliant:
+Most product analytics tools require you to send your captured data to a third party system where the data is stored outside of your control. This is a problem under HIPAA, but there are two common ways to remain compliant:
 
-1. [**Anonymize the data**](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard): This involves either removing all traces of protected health information, including but not limited to email addresses, phone numbers, IP addresses, URLs, etc. Or following an expert determination to limit the data shared in such a way that the statistical risk of identifying an individual is mitigated.
-2. **[Sign a Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)** with your provider: This is essentially a contract with your provider that ensures they are compliant and jointly liable for the protection of your data.**
+1. [**Anonymize the data**](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard): This involves either removing all traces of protected health information, including but not limited to email addresses, phone numbers, IP addresses, URLs etc., or following an expert determination to limit the data shared in such a way that the statistical risk of identifying an individual is mitigated.
+2. **[Sign a Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)** : This is essentially a contract with your provider that ensures they are compliant and jointly liable for the protection of your data.**
 
-The downsides with these two solutions are:
+There are downsides to these two solutions:
 
 1. **Anonymization**: You can easily limit the data so much that it becomes meaningless and makes it impossible to perform standard and critical analyses of your product and users. There's no point reducing the data to an unusable state. 
-2. **Business Associate Agreement: Business Associate Agreements are often expensive and/or require you to pay for a higher tier of product than you actually require.**
+2. **Business Associate Agreement**: Business Associate Agreements are often expensive and/or require you to pay for a higher tier of product than you actually require.
 
 PostHog offers a third approach without either of these downsides: hosting the product analytics systems yourself.
 
@@ -44,9 +44,9 @@ PostHog offers a third approach without either of these downsides: hosting the p
 
 PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host PostHog on your own infrastructure and maintain full control of the data. 
 
-This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us. The data stays on your systems, in it's original form. 
+This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. 
 
-## Is Google Analytics HIPAA compliant?
+## Is Google Analytics HIPAA-compliant?
 
 The short answer is no, Google Analytics is not compliant with HIPAA for either Covered Entities or Business Associates. Nor are other Google tools, such as Google Optimize. 
 
@@ -59,7 +59,7 @@ As a web analytics service, Google Analytics is great for tracking high-level tr
 
 ### Step 1: Choose a hosting provider
 
-We recommend hosting PostHog on your own infrastructure. If you’re leveraging a private cloud you will need a Business Associate Agreement with your provider first. These are commonly available with services such as [Amazon Web Services](https://aws.amazon.com/compliance/hipaa-compliance/), [Google Cloud Platform](https://cloud.google.com/security/compliance/hipaa), [Microsoft Azure](https://docs.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us) and many more.
+We recommend hosting PostHog on your own infrastructure. If you’re leveraging a private cloud you will need a Business Associate Agreement with your provider first. These are commonly and easily available with services such as [Amazon Web Services](https://aws.amazon.com/compliance/hipaa-compliance/), [Google Cloud Platform](https://cloud.google.com/security/compliance/hipaa), [Microsoft Azure](https://docs.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us) and many more.
 
 
 ### Step 2: Deploy PostHog
@@ -69,14 +69,14 @@ Deploying PostHog onto your own infrastructure is very straightforward. You can 
 
 ### Step 3: Security configuration
 
-When setting up a PostHog instance **we strongly recommend that everyone use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
+When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
 
-We also strongly recommend that you limit access to PostHog and infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain PHI it may be possible for malicious users to infer PHI unless it is evaluated thoroughly via expert determination.
+We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain PHI, it may be possible for malicious users to infer PHI unless it is evaluated thoroughly via expert determination.
 
-We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems - however it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
+We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-We believe the most effective solution to HIPAA compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for our PostHog Cloud.
+We believe the most effective solution to HIPAA-compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for our PostHog Cloud.
   
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
