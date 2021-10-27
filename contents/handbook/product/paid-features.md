@@ -40,4 +40,4 @@ This document covers how we think about building and releasing paid features and
 
 For those of our community who are content with the free and open source version of the product its essential that they have the ability to opt out of both Marketing (e.g. email campaigns) and also in-product paid feature discovery (e.g. nudges or upsells). 
 
-To solve for this we will implement an Environment Variable (key TBC) which disables all paid feature discovery for your instance.
+To solve for this we will implement an [environment variable][/docs/self-host/configure/environment-variables] (`DISABLE_PAID_FEATURE_SHOWCASING = 1`) which disables all paid feature discovery for your instance.
