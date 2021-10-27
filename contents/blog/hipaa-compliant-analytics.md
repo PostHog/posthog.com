@@ -42,7 +42,7 @@ PostHog offers a third approach without either of these downsides: hosting the p
 
 ## How is HIPAA compliance different with PostHog?
 
-PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host PostHog on your own infrastructure and maintain full control of the data. 
+PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host on your own infrastructure and maintain full control of the data. 
 
 This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. 
 
