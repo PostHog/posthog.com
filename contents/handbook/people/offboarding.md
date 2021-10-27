@@ -94,7 +94,7 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> (US employee only) Remove the team member from Gusto (Gusto will automatically end any benefits provided via the platform, e.g. medical insurance <br />
 <input type="checkbox"/> (US employee only) Get the team member to sign their termination certificate <br />
 <input type="checkbox"/> Put on an out of office (forward email if the leavers expects external communication), then suspend the GSuite account for the team member  <br />
-<input type="checkbox"/> [Transfer ownership](https://support.google.com/a/answer/1247799?hl=en) of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.  <br />
+<input type="checkbox"/> Transfer [ownership](https://support.google.com/a/answer/1247799?hl=en) of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.  <br />
 <input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
 <input type="checkbox"/> Cancel team member's company card on Brex/Revolut - _check if they have any company subscriptions first that need transferring_ <br />
 <input type="checkbox"/> Offboard member on CharlieHR <br />
