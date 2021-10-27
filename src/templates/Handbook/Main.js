@@ -74,7 +74,7 @@ export default function Main({
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
-    const showToc = !hideAnchor && tableOfContents?.length
+    const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
     return (
         <div className="relative">
