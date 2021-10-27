@@ -47,7 +47,7 @@ PostHog offers a third approach without either of these downsides: hosting the p
 PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host on your own infrastructure and maintain full control of the data. 
 
 This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. 
-
+You may need to sign a BAA with your hosting provider, but major providers such as Google and AWS offer these for free.
 ## Is Google Analytics HIPAA-compliant?
 
 The short answer is no, Google Analytics is not compliant with HIPAA for either Covered Entities or Business Associates. Nor are other Google tools, such as Google Optimize. 
