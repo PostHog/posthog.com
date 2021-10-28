@@ -23,7 +23,7 @@ This document covers how we think about building and releasing paid features and
 * Paid features generally align with "Tier 1" from our [Product Announcements](https://posthog.com/handbook/growth/marketing/product-announcements) framework, we will follow the appropriate steps here to launch the feature publicly
 * We will not offer "try before you buy" on a new paid feature within the product as we do not wish to later take away something that is valuable from a user - however we will continue to offer free "Zoom demos" of any new feature to any interested customer
 * We do not have a one-size fits all approach for nudges and upsells and should take each feature on a case-by-case basis until we have repeatable patterns
-* The product team will be responsible for implementing any in product discovery of a new feature but will work closely with the growth team who will consult on the best practices and approaches
+* The Product Team will be responsible for implementing any in product discovery of a new feature but will work closely with the Growth Team who will consult on the best practices and approaches.
 
 ## How disruptive should paid feature discovery be?
 
