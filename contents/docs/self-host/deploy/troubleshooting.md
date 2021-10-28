@@ -102,27 +102,27 @@ TooManyConnections: too many connections
     
 > **Tip:** Find out your pod names with `kubectl get pods -n posthog`
 
-1. Find out your PgBouncer host and Postgres password from the web pod:
+1. Find out your Postgres password from the web pod:
 
     ```shell
     kubectl exec -n posthog -it your-posthog-web-pod \
-    -- sh -c 'echo host:$POSTHOG_PGBOUNCER_SERVICE_HOST password:$POSTHOG_DB_PASSWORD'
+    -- sh -c 'echo password:$POSTHOG_DB_PASSWORD'
     ```
 
 2. Connect to your Postgres pod:
 
     ```shell
-    kubectl exec -n posthog -it your-postgres-pod  -- sh
+    # Replace posthog-posthog-postgresql-0 with your pod's name if different
+    kubectl exec -n posthog -it posthog-posthog-postgresql-0  -- sh
     ```
 
-3. Connect to the `posthog` DB using the values you found from step 1:
+3. Connect to the `posthog` DB:
 
     ```shell
-    psql -h your-pgbouncer-host -p 6543 -d posthog -U postgres
+    psql -d posthog -U postgres
     ```
 
     Postgres will ask you for the password. Use the value you found from step 1.
-
 
 ## How do I restart all pods for a service?
 
