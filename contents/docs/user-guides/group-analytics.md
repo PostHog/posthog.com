@@ -97,7 +97,26 @@ PostHog::groupIdentify(array(
 
 ### [posthog-go](https://posthog.com/docs/integrate/server/go)
 
-:TODO:
+:TODO: Version requirements
+
+```go
+// Capturing an event with groups
+client.Enqueue(posthog.Capture{
+    DistinctId: "[distinct id]",
+    Event:      "some event",
+    Groups: posthog.NewGroups().
+        Set("company_id", "id:5").
+})
+
+// Updating a groups properties
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company_id",
+    Key:  "id:5",
+    Properties: posthog.NewProperties().
+        Set("company_name", "Awesome Inc").
+        Set("employees", 11),
+})
+```
 
 ### Other libraries
 
