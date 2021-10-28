@@ -13,7 +13,7 @@ This document covers how we think about building and releasing paid features and
 * **All new major features will be paid only by default (e.g. correlation analysis)**
     * **Why?** It will be easy for us to make Paid features free and open source in the future to support our community but it will not be possible to go the other way.
     * This doesn't mean we'll no longer create free features, it just means we'll have a deliberate conversation on each feature whether it makes sense to make it free and open source.
-* **Significant improvements to existing features will be paid only where it’s viable to split out the new functionality (e.g. Paths 2.0)**
+* **Significant improvements to existing features will be paid only where it’s viable to split out the functionality and it is net new functionality (e.g. Paths 2.0)**
     * **Why?** As above
 * **Improvements to existing functionality and bug fixes will be free for all (e.g. resolving data integrity issues, new information architecture, "turbo mode".**
    * **Why?** It's critical that everyone using our product gets the best experience we can offer, no matter if free or paid.
