@@ -29,7 +29,7 @@ This document covers how we think about building and releasing paid features and
 
 * Itinitally we should make upsells and nudges highly noticeable in order to give us stronger signal to validate this approach
 * We should avoid significantly disrupting user's flow through the product unless necessary
-* We should offer the ability for individuals to permenatly dismiss upsells where possible
+* We should offer the ability for individuals to temporarily or permanently dismiss upsells where the experience could be disruptive (example: correlation analysis within funnels).
 
 ## Who will get access to paid features?
 
