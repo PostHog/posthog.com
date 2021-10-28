@@ -443,6 +443,10 @@
                     "url": "/docs/self-host/postgres-vs-clickhouse"
                 },
                 {
+                    "name": "Migrate from Postgres to ClickHouse",
+                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
+                },
+                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
