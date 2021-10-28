@@ -1,5 +1,5 @@
 ---
-title: Paid Features
+title: Paid features
 sidebar: Handbook
 showTitle: true
 ---
