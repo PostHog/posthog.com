@@ -6,7 +6,7 @@ showTitle: true
 
 The lifecycle tool is designed to enable you to understand how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.
 
-This enables you to understand both what is driving the growth of active users in your product and gives you a place to start investigating issues like increased churn or a slowing aquisition of new users.
+This enables you to understand both what is driving the growth of active users in your product and gives you a place to start investigating issues like increased churn or a slowing acquisition of new users.
 
 ## Accessing lifecycle
 
