@@ -34,7 +34,7 @@ In short, any information which is tied to a specific individual can be consider
 Most product analytics tools require you to send your captured user data to a third party system where the data is stored outside of your control. This is a problem under HIPAA, but there are two common ways to remain compliant:
 
 1. [**Anonymize the data**](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard): This involves either removing all traces of protected health information, including but not limited to email addresses, phone numbers, IP addresses, URLs etc., or following an expert determination to limit the data shared in such a way that the statistical risk of identifying an individual is mitigated.
-2. **[Sign a Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)**: This is essentially a contract with your provider that ensures they are compliant and jointly liable for the protection of your data.**
+2. **[Sign a Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)**: This is essentially a contract with your provider that ensures they are compliant and jointly liable for the protection of your data.
 
 There are downsides to these two solutions:
 
