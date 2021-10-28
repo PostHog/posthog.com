@@ -33,7 +33,7 @@ The following examples use `company_id` as a group type and `id:5` as the group 
 
 ### [posthog-js](https://posthog.com/docs/integrate/client/js)
 
-:TODO: Specific library version requirement
+Update to version 1.16.0 or above to make use of the new functionality.
 
 In posthog-js it's possible to declare that a user is currently "active" in a particular group. This means all events (both normal and autocaptured) are considered to be for that group.
 
@@ -62,7 +62,7 @@ When the user logs out it's important to call `posthog.reset()` to avoid new eve
 
 ### [posthog-python](https://posthog.com/docs/integrate/server/python)
 
-:TODO: Specific library version requirement
+Update to version 1.4.3 or above to make use of the new functionality.
 
 ```python
 # Capturing an event with groups
@@ -77,7 +77,7 @@ posthog.group_identify('company_id', 'id:5', {
 
 ### [posthog-php](https://posthog.com/docs/integrate/server/php)
 
-:TODO: Specific library version requirement
+Update to version 2.1.0 or above to make use of the new functionality.
 
 ```c
 # Capturing an event with groups
@@ -97,8 +97,6 @@ PostHog::groupIdentify(array(
 
 ### [posthog-go](https://posthog.com/docs/integrate/server/go)
 
-:TODO: Version requirements
-
 ```go
 // Capturing an event with groups
 client.Enqueue(posthog.Capture{
@@ -116,6 +114,12 @@ client.Enqueue(posthog.GroupIdentify{
         Set("company_name", "Awesome Inc").
         Set("employees", 11),
 })
+```
+
+Using groups with go requires latest version of `posthog-go`. Update dependencies via:
+
+```shell
+go get -u github.com/posthog/posthog-go
 ```
 
 ### Other libraries
