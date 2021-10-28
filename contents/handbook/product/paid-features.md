@@ -33,7 +33,7 @@ This document covers how we think about building and releasing paid features and
 
 ## Who will get access to paid features?
 
-* PostHog Cloud: Anyone with a credit-card on file (including users below the payment threshold)
+* PostHog Cloud: Anyone in the Standard Plan (i.e. organizations with credit card on file [including users below the payment threshold])
 * Posthog Self-Hosted: Anyone on Scale or Enterprise tier
 * We will not take away features from existing users if we create a new tier
 
