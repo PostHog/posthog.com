@@ -52,7 +52,7 @@ Don’t log sensitive information. Make sure you never log:
 A good unit test should:
 * focus on a single use-case at a time
 * have a minimal set of assertion per test
-* demonstrate every use case. The thumb rule is: if it can happen, it should be covered
+* demonstrate every use case. The rule of thumb is: if it can happen, it should be covered
 
 #### Integration tests
 Integration tests should ensure that the feature works end-to-end. They must cover all the important use cases of the feature.
