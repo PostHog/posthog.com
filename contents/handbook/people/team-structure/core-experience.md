@@ -45,7 +45,7 @@ With the work above, we aim to solve the following meta-goals:
 - Build the next generation of engineers and engineering leaders, who would be running things when we are at 100 developers.
 - Remain a highly flexible team, ready to adapt to changing business requirements.
 - Be part of formalizing "the PostHog way", and writing a book about it.
-- Our tech stack is rather unique, though pretty powerful. We are also in a really powerful position to drive change in the industry ([data-first frontend](https://kea.js.org/blog/2021/05/14/data-first-frontend-revolution), anyone?). Let's capitalise on that.
+- Our tech stack is rather unique, though pretty powerful. We are also in a really powerful position to drive change in the industry ([data-first frontend](https://kea.js.org/blog/data-first-frontend-revolution), anyone?). Let's capitalise on that.
 - Zero TypeScript errors, code covered by logic tests, all scenes in Storybook, etc.
 - To do a damn good job at all of the above.
 
