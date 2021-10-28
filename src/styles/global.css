@@ -491,3 +491,12 @@ ul {
         transform: translateX(10%);
     }
 }
+
+/* Next Steps */
+
+.next-steps-content {
+    p {
+        @apply text-base;
+        margin-bottom: 20px;
+    }
+}
