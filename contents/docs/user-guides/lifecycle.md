@@ -24,8 +24,6 @@ You can see here that I have selected the Message Sent event to define my user a
 
 As with other tools in PostHog, you can add filters if you wish to focus on a subset of these events.
 
-Next set the time interval you are interested in, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
-
 ![image](https://user-images.githubusercontent.com/85295485/139205269-21790a9d-6f4c-471a-ae0a-76b2b6557646.png)
 
 Next set the time interval you are interested in, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
