@@ -992,6 +992,10 @@
                 {
                     "name": "Contribute to docs, handbook & blog",
                     "url": "/docs/contribute/contribute-to-website"
+                },
+                {
+                    "name": "Coding conventions",
+                    "url": "/docs/contribute/coding-conventions"
                 }
             ]
         }
