@@ -15,7 +15,7 @@ featuredImageType: standard
 
 ## What is user segmentation?
 
-User segmentation is the process of looking at your user base and breaking it down into groups of similar users, based on characteristics of the users or their behaviors. These groups can be used to perform focussed analysis to identify opportunities to improve and grow your product.
+User segmentation is the process of looking at your user base and breaking it down into groups of similar users, based on characteristics of the users or their behaviors. These groups can be used to perform focused analysis to identify opportunities to improve and grow your product.
 
 For example: For a global e-commerce company like Amazon, they might have user segments such as: Users in the US, Users who subscribe to fast shipping, Users who use the mobile app
 
