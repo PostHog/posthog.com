@@ -34,7 +34,7 @@ Additionally, when dealing with inputs, if you wish to still capture the input b
 
 ## Controlling the volume of recordings
 
-There is an option to automatically delete old session recordings after a (configurable) number of days in the project settings page. This feature is currently in beta - email hey@posthog.com to get this enabled if you'd like to use it.
+If you're running a Clickhouse instance, recordings are automatically deleted after 3-weeks. On Postgres instances, you can set recordings to delete after a configurable number of days in the project settings page.
 
 If you want further control, you can choose to enable session recordings using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
 
