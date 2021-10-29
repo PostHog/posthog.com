@@ -63,7 +63,7 @@ p {
         margin-bottom: 0.125rem;
     }
 
-    blockquote {
+    blockquote:not('.quote') {
         @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
     }
 
@@ -192,7 +192,7 @@ div[class^='feature-'].text-center {
 }
 
 article .article-content {
-    blockquote {
+    blockquote:not('.quote') {
         @apply text-base;
     }
 }
