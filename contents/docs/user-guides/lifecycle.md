@@ -28,7 +28,7 @@ As with other tools in PostHog, you can add filters if you wish to focus on a su
 
 ![image](https://user-images.githubusercontent.com/85295485/139205269-21790a9d-6f4c-471a-ae0a-76b2b6557646.png)
 
-Next set the time interval you are interested in, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
+Next set the time interval that aligns with the natural frequency of your product, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
 
 ### Interpreting your lifecycle
 
