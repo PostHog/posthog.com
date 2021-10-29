@@ -15,6 +15,9 @@ Our YC deal provides the following:
 
 For YC S21 companies, we also offer:
 
+- 20 million events/month, free for a year (instead of 3m events/month)
+- $24K PostHog Scale voucher (instead of $12K)
+- Free group pairing session to help with setup
 - PostHog AirPods, a PostHog Timbuk2 Backpack, a $150 Open Collective gift card, or a $150 PostHog Merch gift card.
 - A referral scheme that let's you double-down on the above deal
 
