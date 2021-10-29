@@ -8,6 +8,8 @@ export interface CrumbProps {
     title: string
     className?: string
     truncate?: boolean
+    linkColor?: string
+    onClick?: () => void
 }
 
 interface BreadcrumbsProps {
@@ -15,6 +17,7 @@ interface BreadcrumbsProps {
     darkModeToggle?: boolean
     children?: JSX.Element | JSX.Element[]
     className?: string
+    linkColor?: string
 }
 
 const crumbText = (classes = '') => cntl`
@@ -26,7 +29,7 @@ const crumbText = (classes = '') => cntl`
     ${classes}
 `
 
-export function Crumb({ url, title, className = '', truncate }: CrumbProps): JSX.Element {
+export function Crumb({ url, title, className = '', truncate, onClick, linkColor }: CrumbProps): JSX.Element {
     // If crumbs get more complex, create a conditional wrapper component to keep code DRY
     const truncateStyles: React.CSSProperties = {
         whiteSpace: 'nowrap',
@@ -34,16 +37,24 @@ export function Crumb({ url, title, className = '', truncate }: CrumbProps): JSX
         textOverflow: 'ellipsis',
         maxWidth: 200,
     }
+    const style: React.CSSProperties = {
+        ...(truncate ? truncateStyles : {}),
+        ...((url || onClick) && linkColor ? { color: linkColor } : {}),
+    }
     return (
         <li
             className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
         >
             {url ? (
-                <Link style={truncate ? truncateStyles : {}} className={crumbText(`text-red hover:text-red`)} to={url}>
+                <Link style={style} className={crumbText(`text-red hover:text-red`)} to={url}>
                     {title}
                 </Link>
+            ) : onClick ? (
+                <button onClick={onClick} style={style} className={crumbText(`text-yellow hover:text-yellow`)}>
+                    {title}
+                </button>
             ) : (
-                <span style={truncate ? truncateStyles : {}} className={crumbText()}>
+                <span style={style} className={crumbText()}>
                     {title}
                 </span>
             )}
@@ -56,6 +67,7 @@ export default function Breadcrumbs({
     darkModeToggle,
     children,
     className = '',
+    linkColor,
 }: BreadcrumbsProps): JSX.Element {
     return (
         <ul
@@ -64,7 +76,7 @@ export default function Breadcrumbs({
             {children ||
                 (crumbs &&
                     crumbs.map((crumb, index) => {
-                        return <Crumb key={index} {...crumb} />
+                        return <Crumb linkColor={linkColor} key={index} {...crumb} />
                     }))}
             {darkModeToggle && (
                 <li className="flex ml-auto border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">

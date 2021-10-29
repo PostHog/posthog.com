@@ -33,14 +33,16 @@ export default function Contact(props) {
 
     return (
         <>
-            <div className="flex justify-center space-x-2 mt-6">
-                <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
-                    Book a demo
-                </Chip>
-                <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
-                    Contact sales
-                </Chip>
-            </div>
+            {!props.hideTabs && (
+                <div className="flex justify-center space-x-2 mt-6">
+                    <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
+                        Book a demo
+                    </Chip>
+                    <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
+                        Contact sales
+                    </Chip>
+                </div>
+            )}
             <div className="mt-8">
                 {
                     {
