@@ -340,7 +340,7 @@ In the background, `exportEvents` sets up asynchronous processing of batches and
 
 ## Available packages and imports
 
-Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available by default.
+Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
 
 ### Global
 
