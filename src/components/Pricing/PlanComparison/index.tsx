@@ -40,7 +40,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Free (up to 1 million events), then $0.000225/event',
                     'Open source': 'Free',
-                    Scale: '$0.000225/event, $2k/mo minimum. (Discounts after 10 mil events)',
+                    Scale: '$0.000225/event, $1.5k/mo minimum. (Discounts after 10 mil events)',
                 },
             },
             {
