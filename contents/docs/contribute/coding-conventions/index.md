@@ -65,7 +65,7 @@ Our frontend webapp is written with [Kea](https://keajs.org/) and [React](https:
 
 We try to be very explicit about this separation, and avoid local React state wherever possible, with exceptions for the `lib/` folder. Having all our data in one layer makes for code that's easier to [test](https://kea.js.org/docs/guide/testing), and observe. Basically, getting your [data layer](https://kea.js.org/blog/data-first-frontend-revolution) right is hard enough. We aim to not make it harder by constraining your data to a DOM-style hierarchy.
 
-Hence the explicity in keeping the layers separate.
+Hence the explicitly in keeping the layers separate.
 
 #### General tips
 
