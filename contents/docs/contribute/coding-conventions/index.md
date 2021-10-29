@@ -56,3 +56,35 @@ A good unit test should:
 
 #### Integration tests
 Integration tests should ensure that the feature works end-to-end. They must cover all the important use cases of the feature.
+
+### Frontend 
+
+#### Two layers: Kea -> React
+
+Our frontend webapp is written with [Kea](https://keajs.org/) and [React](https://reactjs.org/) as two separate layers. Kea is used to organise the app's data for rendering (we call this the *data* or *state* layer), and React is used to render the computed state (this is the *view* or *template* layer).
+
+We try to be very explicit about this separation, and avoid local React state wherever possible, with exceptions for the `lib/` folder. Having all our data in one layer makes for code that's easier to [test](https://kea.js.org/docs/guide/testing), and observe. Basically, getting your [data layer](https://kea.js.org/blog/data-first-frontend-revolution) right is hard enough. We aim to not make it harder by constraining your data to a DOM-style hierarchy.
+
+Hence the explicity in keeping the layers separate.
+
+#### General tips
+
+- Do think data first: get [your mental model of the data flowing through the app](https://acco.io/i-escaped-node) right, and then everything else will be easy.
+- Be practical and pragmatic, yet remember that you're writing code that's expected to stick around for the next 1-3 years, not the next 3 weeks. This means optimise for mid-to-long term maintainability over quick wins that are measured in hours or minutes.
+
+#### Do-s & Don't-s
+
+- Write all new code with TypeScript and proper typing.
+- Write your frontend data handling code first, and write it in a Kea `logic`.
+- Don't use `useState` or `useEffect` to store local state. It's false convenience. Take the extra 3 minutes and change it to a `logic` early on in the development.
+- Logics still have a tiny initialisation cost. Hence this rule doesn't apply to library components in the `lib/` folder, which might be rendered hundreds of times on a page with different sets of data. Still feel free to write a logic for a complicated `lib/` component when needed.
+- Logics are camelcase and start with a lowercase (`dashboardLogic`). React components are camelcase and start with an uppercase (`DashboardMenu`).
+- Name the `.ts` file accoridng to its main export: `.ts` or `DashboardMenu.tsx`
+- Use only named exports (`export const DashboardMenu = () => <div />`).
+- Do not use `default` exports like `export default MyBigComponent`
+- We use regular SCSS files for styling to keep things simple and maintainable.
+- Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
+- Namespace all your CSS rules under globally unique names like `.my-blog-component { put everything here }`
+- Write [logic tests](https://kea.js.org/docs/guide/testing) for all logic files. 
+- If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
+- Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `yarn storybook` locally.
