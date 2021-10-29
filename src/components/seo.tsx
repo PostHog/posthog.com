@@ -10,9 +10,10 @@ interface SEOProps {
     image?: string
     article?: boolean
     canonicalUrl?: string
+    noindex?: boolean
 }
 
-export function SEO({ title, description, image, article, canonicalUrl }: SEOProps): JSX.Element {
+export function SEO({ title, description, image, article, canonicalUrl, noindex }: SEOProps): JSX.Element {
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
@@ -34,6 +35,7 @@ export function SEO({ title, description, image, article, canonicalUrl }: SEOPro
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>
+            {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
