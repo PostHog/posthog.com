@@ -35,7 +35,7 @@ We track user behavior across your website and applications.
 	* [Cohorts](/docs/user-guides/cohorts)
 	* [Retention](/docs/user-guides/retention)
 	* [Paths](/docs/user-guides/paths)
-	* [User histories](/docs/user-guides/users)
+	* [Persons histories](/docs/user-guides/persons)
 * Data visualization and product experimentation tools, such as:
 	* [Heatmaps](/docs/user-guides/toolbar)
 	* [Feature Flags](/docs/user-guides/feature-flags)
@@ -74,7 +74,7 @@ Very. We have thousands of users, over [3k stars](https://github.com/PostHog/pos
 
 Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/self-host/configure/upgrading-posthog), and the software will alert you to new updates within the application.
 
-Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slack](/slack) to keep up with our latest features.
+Pro-tip: follow us on [Twitter](https://twitter.com/PostHog) or join our [Slack](/slack) to keep up with our latest features.
 
 ### How many companies use it / How many well-known companies use it?
 
@@ -106,9 +106,9 @@ Yes. You can have full access to [PostHog's code](https://github.com/PostHog/pos
 
 There are three options:
 
-1. [PostHog Cloud](https://app.posthog.com/signup).
-2. [Self Deployment](/docs/deployment).
-3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
+1. [PostHog Cloud](https://app.posthog.com/signup)
+2. [Self Deployment](/docs/deployment)
+3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u)
 
 ### Can I get it live with my favorite hosting method?
 

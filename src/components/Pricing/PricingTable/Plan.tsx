@@ -1,16 +1,21 @@
 import React from 'react'
+import { feature } from './classes'
 
-export const Features = ({ features, className = '' }) => {
+export const Feature = ({ title, icon, size }) => {
     return (
-        <ul className={`p-0 list-none m-0 grid gap-2 ${className}`}>
+        <li className={feature(size)}>
+            {icon && <span>{icon}</span>}
+            <span>{title}</span>
+        </li>
+    )
+}
+
+export const Features = ({ features, size, className = '' }) => {
+    return (
+        <ul className={`p-0 list-none m-0 grid gap-2 text-xs ${className}`}>
             {features.map((feature, index) => {
                 const { title, icon } = feature
-                return (
-                    <li key={index} className="flex space-x-2 items-start">
-                        {icon && <span>{icon}</span>}
-                        <span>{title}</span>
-                    </li>
-                )
+                return <Feature key={index} title={title} icon={icon} size={size} />
             })}
         </ul>
     )
@@ -29,16 +34,16 @@ export const Badge = ({ title, className = '' }) => {
 export const Title = ({ className = '', title, subtitle, badge }) => {
     return (
         <span className={className}>
-            <h3 className="my-0 text-xl md:text-2xl flex items-center">
+            <h3 className="my-0 text-xl md:text-2xl">
                 <span>{title}</span>
-                {badge && <Badge className="ml-2" title={badge} />}
+                {badge && <Badge className="ml-2 align-middle" title={badge} />}
             </h3>
             <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
         </span>
     )
 }
 
-export const Plan = ({ title, subtitle, badge, children, className = '', titleClassName = '', style = {} }) => {
+export const Plan = ({ title, subtitle, badge, children, className = '', style = {} }) => {
     return (
         <div style={style} className={`flex flex-col py-6 md:py-9 px-6 md:px-14 ${className}`}>
             <Title title={title} subtitle={subtitle} />

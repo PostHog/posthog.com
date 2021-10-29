@@ -4,9 +4,23 @@ sidebar: Docs
 showTitle: true
 ---
 
+<blockquote class="warning-note">
+We are currently evaluating the possibility of sunsetting this feature for the time being. We do have plans to eventually reintroduce fully supported session-based analytics to PostHog. Read more <a href="/blog/sessions-deprecation">in this blog post</a>, and <a href="/slack" target="_blank">reach out</a> if you have any thoughts.
+</blockquote>
+
 Sessions help you understand product usage by uncovering the amount of time users spend on your app or website.
 
 This is useful as it gives you an engagement statistic of how long the average usage time of your app or website is along with the distribution of usage across certain time frames.
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/mishra.jpeg"
+        size="md"
+        name="Anubhuti Mishra"
+        title="UI/UX Designer at Hasura"
+        quote={`“I look at our top-performing website pages, such as tutorials, blog and pricing pages. Our team has built a schedule around this so we are always shifting focus throughout the website and continuing to improve.”`}
+    />
+</BorderWrapper>
 
 ## Demo video
 

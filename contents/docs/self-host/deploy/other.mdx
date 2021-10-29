@@ -5,17 +5,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-For all other platforms, we suggest setting up Kubernetes first and using the helm chart directly to deploy a PostHog instance with Nginx ingress controller.
+For all the other platforms, setup your Kubernetes cluster (see the documentation of your platform for more info). Note that many platforms default to non-expandable volumes.
 
-## Prerequisites
-- [Kubernetes](http://kubernetes.io) 1.4+ with Beta APIs enabled
-- [Helm](https://helm.sh) >= v3
-
+<ClusterRequirementsSnippet />
 
 ## Installing the chart
 
@@ -26,15 +24,18 @@ ingress:
   hostname: <your-hostname>
   nginx:
     enabled: true
-certManager:
+cert-manager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 <InstallingSnippet />
 
 ## Lookup external IP
 
-```console
+```shell
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 

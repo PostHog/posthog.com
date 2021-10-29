@@ -8,8 +8,10 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
+import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -28,6 +30,7 @@ import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
@@ -36,12 +39,16 @@ import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
+import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
+import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { ImageBlock } from './components/ImageBlock'
+import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
@@ -60,10 +67,10 @@ import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
+import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
-import { PricingSlider } from './components/PricingSlider'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -86,6 +93,7 @@ import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
+import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
     Endpoint,
@@ -96,8 +104,10 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
+    BlockQuote,
     Blog,
     BlogFooter,
+    BorderWrapper,
     Breadcrumbs,
     CallToAction,
     Benefits,
@@ -116,6 +126,7 @@ export const shortcodes = {
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    Customers,
     DarkModeToggle,
     DemoScheduler,
     DeployOption,
@@ -124,12 +135,16 @@ export const shortcodes = {
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
+    FloatedImage,
     Footer,
     GetStartedModal,
     GithubIcon,
+    Heading,
     HiddenSection,
     Home,
     HostingOption,
+    ImageBlock,
+    InlineCode,
     LandingPageCallToAction,
     LibraryStats,
     Link,
@@ -148,10 +163,10 @@ export const shortcodes = {
     FAQs,
     PlanComparison,
     PricingHero,
+    PricingSlider,
     PricingTable,
     Quote,
     Savings,
-    PricingSlider,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -174,4 +189,5 @@ export const shortcodes = {
     Tooltip,
     VisitLibrary,
     WorkableSnippet,
+    ZoomImage,
 }

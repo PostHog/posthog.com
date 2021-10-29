@@ -7,12 +7,17 @@ tags:
     - aws
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running PostHog.
+First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info).
+
+<ClusterRequirementsSnippet />
+
+## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
@@ -21,8 +26,11 @@ ingress:
   hostname: <your-hostname>
   nginx:
     enabled: true
-certManager:
+cert-manager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
 
@@ -33,7 +41,7 @@ certManager:
 
 ### Lookup external IP address
 
-```console
+```shell
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 

@@ -9,15 +9,19 @@
             "url": "/pricing"
         },
         {
+            "title": "Customers",
+            "url": "/customers"
+        },
+        {
             "title": "Docs",
             "url": "/docs",
             "sub": {
                 "title": "Docs",
-                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started, or visit the <a class='text-yellow hover:text-yellow font-bold' href='/docs'>Docs overview</a>.",
+                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started, or visit the <a class='text-red hover:text-red font-bold' href='/docs'>Docs overview</a>.",
                 "component": "Docs",
                 "items": [
                     {
-                        "title": "1. Self hosting",
+                        "title": "1. Self-host",
                         "link": {
                             "title": "Overview",
                             "url": "/docs/self-host"
@@ -82,8 +86,8 @@
                                         "url": "/docs/self-host/configure/upgrading-posthog"
                                     },
                                     {
-                                        "title": "Self host vs. PostHogCloud",
-                                        "url": "/docs/user-guides/organizations"
+                                        "title": "Self-hosted vs. PostHog Cloud",
+                                        "url": "/signup"
                                     },
                                     {
                                         "title": "ClickHouse",
@@ -212,8 +216,8 @@
                                         "url": "/docs/user-guides/trends"
                                     },
                                     {
-                                        "title": "Users",
-                                        "url": "/docs/user-guides/users"
+                                        "title": "Persons",
+                                        "url": "/docs/user-guides/persons"
                                     }
                                 ]
                             },
@@ -327,7 +331,7 @@
                     },
                     {
                         "title": "Careers",
-                        "description": "<p>We're currently hiring for <strong>3 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for",
+                        "description": "<p>We're currently hiring for <strong>5 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for.",
                         "link": {
                             "title": "Visit Careers page",
                             "url": "/careers"

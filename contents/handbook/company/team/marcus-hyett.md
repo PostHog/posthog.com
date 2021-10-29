@@ -4,6 +4,36 @@ sidebar: Handbook
 showTitle: true
 ---
 
+
+## Goals (Q4 2021)
+
+### Strategy
+
+* **Build and align the organization on Q4 and longer-term strategies for:**
+    * Data Integrity
+    * Deployment & Maintenance
+    * Performance
+* **Build and align the organization on a product strategy to maximize revenue growth without trading off the quality or value of the product**
+* **Build and align the organization on a high level product strategy of themes and goals for Q1 2022**
+* **Support Paolo: Building a clear high level strategy for core product in Q4**
+
+### Execution
+
+* **Deliver measurable (measurement defined by strategy) improvements in:**
+    * Data Integrity
+    * Deployment & Maintenance
+    * Performance
+* **Support Paolo: Deliver meaningful improvements to our core product that increase “Discoveries”, for example:**
+    * Diagnosing Causes
+    * Collaboration
+    * Experimentation
+
+### Personal
+
+* Travel to Australia to visit Family and Friends (without getting locked down..under )
+* Fit a fireplace into my new house
+
+
 ## Feedback actions
 Based on feedback from the company feedback sessions during our most recent offsite, these are the main areas I'm going to focus on improving
 * Feedback: Be more concise & keep going into a lot of detail

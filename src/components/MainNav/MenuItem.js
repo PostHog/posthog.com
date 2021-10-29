@@ -23,6 +23,7 @@ export default function MenuItem({ menuItem }) {
             <span ref={referenceElement} className="flex justify-between items-center">
                 {cta ? (
                     <CallToAction
+                        size="sm"
                         onClick={breakpoints.md && sub && handleSubClick}
                         to={url}
                         className={`mx-auto lg:mx-0 ${classes}`}

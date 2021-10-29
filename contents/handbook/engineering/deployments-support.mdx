@@ -1,0 +1,103 @@
+---
+title: Deployments support
+sidebar: Handbook
+showTitle: true
+---
+
+If you're the week's support hero or you are providing support for a customer and they have questions about their self-hosted deployment, follow this guide to provide initial support before looping in someone from the Platform team.
+
+## Gather basic information
+
+The first things you should ask are:
+
+-   Where did you deploy PostHog? (i.e. what cloud provider? DO, AWS, Azure?)
+-   What's in your `values.yaml` file?
+-   Did you make any changes to PostHog recently? (upgrade, scaling, etc)
+
+## Kickstart the debugging process
+
+1. What's the output of `kubectl get pods -n posthog`?
+
+    This should look something like this:
+
+    ```shell
+    NAME                                                READY   STATUS    RESTARTS   AGE
+    chi-posthog-posthog-0-0-0                           1/1     Running   0          11d
+    clickhouse-operator-6b5438eh5fb-bt5fk               2/2     Running   0          11d
+    posthog-beat-7782927b778-wxvhl                      1/1     Running   0          11d
+    posthog-cert-manager-69fahs7b57-c48dn               1/1     Running   0          11d
+    posthog-cert-manager-cainjector-6d95d93mn8-6tz6k    1/1     Running   0          11d
+    posthog-cert-manager-webhook-6469930mdfc-6l958      1/1     Running   0          11d
+    posthog-events-55283995cc-rpjdm                     1/1     Running   0          11d
+    posthog-ingress-nginx-controller-648bdn892f-w7qhp   1/1     Running   0          11d
+    posthog-pgbouncer-77fb4djs85c-2d24t                 1/1     Running   0          11d
+    posthog-plugins-54fjd8292649-66gsm                  1/1     Running   0          18m
+    posthog-posthog-kafka-0                             1/1     Running   0          11d
+    posthog-posthog-postgresql-0                        1/1     Running   0          11d
+    posthog-posthog-redis-master-0                      1/1     Running   0          11d
+    posthog-posthog-zookeeper-0                         1/1     Running   0          11d
+    posthog-posthog-zookeeper-1                         1/1     Running   0          11d
+    posthog-posthog-zookeeper-2                         1/1     Running   0          11d
+    posthog-web-78dns2f5d7-6zdkc                        1/1     Running   0          11d
+    posthog-worker-7857nd8268-j8c4f                     1/1     Running   0          11d
+    ```
+
+2. When they send you the output from the command in step 1, if any of the pods has a status other than `Running`, ask them for the output of `kubectl logs pod-name -n posthog`
+
+3. The output from the previous step **may or may not** be familiar to you. Sometimes the logs will be something you've seen before. If that's the case, try to reproduce the issue locally and come up with a fix. If things are cryptic to you, loop in someone from the Platform team.
+
+4. If a pod is listed as `Failed`, suggest that they try an upgrade with `helm upgrade -f values.yaml -n posthog`
+
+
+## Common issues
+
+Some common issues you might encounter are:
+
+### PostHog is stuck migrating/the migrate job has an issue
+
+Tell them to run the following:
+
+```shell
+kubectl delete job posthog-migrate -n posthog
+helm upgrade -f values.yaml -n posthog
+```
+
+### The plugin server has an issue
+
+The first thing that you can safely try here is to tell them to restart the plugins pod:
+
+```shell
+# terminate the running plugins pod
+kubectl scale deployment posthog-plugins --replicas=0 -n posthog
+
+# start a new plugins pod
+kubectl scale deployment posthog-plugins --replicas=1 -n posthog
+```
+
+### How can I connect to Postgres?
+
+Send them a link to [this doc](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres).
+
+### Kafka crashed / out of storage
+
+Send them a link to [this doc](/docs/self-host/deploy/troubleshooting#kafka-crash-looping-disk-full).
+
+### Connection is not secure / DNS problems
+
+Before looping in someone, ask them to check that DNS records are correctly set and have propagated with this command:
+
+```shell
+nslookup <your-hostname> 1.1.1.1
+```
+
+### Other issues
+
+Check out our [Troubleshooting page](/docs/self-host/deploy/troubleshooting) for other common issues and how you might be able to provide "first aid" before looping in someone.
+
+## All is lost
+
+The idea of this doc is to cover some basic support that you can provide in order to either help the customer solve their issue or gather basic info before someone from the Platform team to show up.
+
+However, never hesitate to call us! We're more than happy to help.
+
+Also, if things seem very serious and/or relate to a paying customer, do reach out to us right away.

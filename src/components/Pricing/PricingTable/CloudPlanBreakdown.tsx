@@ -1,10 +1,10 @@
 import { useValues } from 'kea'
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
-import { PricingSlider } from '../../PricingSlider'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
+import { PricingSlider } from '../PricingSlider'
+import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { Features, Plan, Price, Section } from './Plan'
-import { features } from './Plans'
+import { features } from '../constants'
 
 export const CloudPlanBreakdown = () => {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)

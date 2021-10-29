@@ -1,17 +1,24 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { SEO } from 'components/seo'
+import { Blockquote } from 'components/BlockQuote'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
+import { InlineCode } from 'components/InlineCode'
+import Layout from 'components/Layout'
+import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { SEO } from 'components/seo'
+import { ZoomImage } from 'components/ZoomImage'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { findAuthor } from 'lib/utils'
+import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 
-export default function BlogPost({ data }) {
+export default function BlogPost({ data, pageContext }) {
     const { postData, authorsData } = data
-    const { slug, body, excerpt } = postData
+    const {
+        fields: { slug },
+        body,
+        excerpt,
+    } = postData
     const {
         frontmatter: { authors },
     } = authorsData
@@ -25,9 +32,12 @@ export default function BlogPost({ data }) {
         h5: H5,
         h6: H6,
         pre: CodeBlock,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        img: ZoomImage,
         ...shortcodes,
     }
-
+    const { categories } = pageContext
     return (
         <Layout>
             <SEO
@@ -43,6 +53,7 @@ export default function BlogPost({ data }) {
                 featuredImageType={featuredImageType}
                 blogArticleSlug={slug}
                 authorDetails={authorDetails}
+                categories={categories}
             >
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

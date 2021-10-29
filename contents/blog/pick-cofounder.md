@@ -55,7 +55,7 @@ Cofounder breakup is a key way for your startup to fail.
 There are a few things PostHog did to guard against this:
 
 * Equal equity between cofounders - even if you didn't start on the same day. This can otherwise cause resentment.
-* A culture of direct feedback. James and Tim tell each other when they get frustrated and have [encouraged the team](https://twitter.com/PostHogHQ/status/1385543414511542273) to do this too.
+* A culture of direct feedback. James and Tim tell each other when they get frustrated and have [encouraged the team](https://twitter.com/PostHog/status/1385543414511542273) to do this too.
 * Clear individual goals for each week. There was a ton of stuff to build in the early days, so James' job was _everything_ else: getting user meetings, making wireframes, working out how to do taxes and payroll, raising money, or buying food. He even did some paid consultancy to make some money to pay for ads early on. Meanwhile, Tim focused on coding. This is how we got so far so quickly.
 * Both cofounders are involved in key decisions. To stereotype - salesy types tend to be more extroverted and can dominate the direction of a company. James and Tim, even with a team of 20, double up their one-on-ones to 2 hours each week to stay close and remain aligned on key decisions.
 * Work out what you both want out of life. Are you trying to retire early or is it the pure challenge? Go deep to figure out what the company and startup journey means to each of you.
@@ -64,4 +64,4 @@ There are a few things PostHog did to guard against this:
 
 Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Getting this right is perhaps the most crucial decision you'll take on your road to startup success.
 
-Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
