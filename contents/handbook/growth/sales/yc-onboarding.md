@@ -10,10 +10,10 @@ As a YCombinator company ourselves, we want to support other YC companies that w
 
 Our YC deal provides the following:
 
-- One free year of PostHog Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
+- One free year of PostHog Cloud with up to 3 million events per month *or* a $12K voucher towards PostHog Scale if they want to self-host PostHog.
 - Companies also get a $50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
 
-For YC W21 companies, we also offer:
+For YC S21 companies, we also offer:
 
 - PostHog AirPods, a PostHog Timbuk2 Backpack, a $150 Open Collective gift card, or a $150 PostHog Merch gift card.
 - A referral scheme that let's you double-down on the above deal
