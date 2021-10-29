@@ -51,7 +51,7 @@ Don’t log sensitive information. Make sure you never log:
 #### Unit tests
 A good unit test should:
 * focus on a single use-case at a time
-* have a minimal set of assertion per test
+* have a minimal set of assertions per test
 * demonstrate every use case. The rule of thumb is: if it can happen, it should be covered
 
 #### Integration tests
