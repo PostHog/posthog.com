@@ -431,7 +431,7 @@ await posthog.api.get(
 | :---------: | :---------: | 
 | `crypto`    | [Node.js standard lib's `crypto` module](https://nodejs.org/api/crypto.html) |
 | `url`    | [Node.js standard lib's `url` module](https://nodejs.org/api/url.html) |
-| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/url.html) |
+| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/zlib.html) |
 | `generic-pool`    | [`npm` package `generic-pool`](https://www.npmjs.com/package/generic-pool) |
 | `pg`    | [`npm` package `node-postgres`](https://www.npmjs.com/package/pg) |
 | `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |
