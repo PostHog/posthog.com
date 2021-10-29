@@ -6,6 +6,9 @@ import { SEO } from 'components/seo'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import Link from 'components/Link'
+
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export default function Plain({ data }) {
     const { pageData } = data
@@ -19,6 +22,7 @@ export default function Plain({ data }) {
         h5: H5,
         h6: H6,
         pre: CodeBlock,
+        a: A,
         ...shortcodes,
     }
     return (

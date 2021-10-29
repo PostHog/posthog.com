@@ -12,8 +12,9 @@ import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
 import SectionLinks from './SectionLinks'
 import StickySidebar from './StickySidebar'
+import Link from 'components/Link'
 
-const A = (props) => <a {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
         return (
@@ -71,6 +72,7 @@ export default function Main({
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
+        a: A,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
