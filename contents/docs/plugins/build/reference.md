@@ -340,7 +340,7 @@ In the background, `exportEvents` sets up asynchronous processing of batches and
 
 ## Available packages and imports
 
-Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing.
+Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
 
 ### Global
 
@@ -431,7 +431,7 @@ await posthog.api.get(
 | :---------: | :---------: | 
 | `crypto`    | [Node.js standard lib's `crypto` module](https://nodejs.org/api/crypto.html) |
 | `url`    | [Node.js standard lib's `url` module](https://nodejs.org/api/url.html) |
-| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/url.html) |
+| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/zlib.html) |
 | `generic-pool`    | [`npm` package `generic-pool`](https://www.npmjs.com/package/generic-pool) |
 | `pg`    | [`npm` package `node-postgres`](https://www.npmjs.com/package/pg) |
 | `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |

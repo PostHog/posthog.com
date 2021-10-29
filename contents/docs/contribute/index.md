@@ -47,6 +47,10 @@ You may find additional help, advice, and exercises by using our [Beginner's Gui
 #### Backend
 We expect all backend code to have corresponding tests. You can run the tests with the command `./bin/tests` from the project's root directory. To specify a specific test (rather than running all tests) you can run `./bin/tests posthog.api.test.test_action` for example.
 
+Tests in the `posthog` folder and those in the `ee` folder need different environment variables to run. 
+
+You can run `posthog` tests with `DEBUG=1 ./bin/tests posthog` and `ee` tests with `DEBUG=1 PRIMARY_DB=clickhouse ./bin/tests ee`. Those tests perform their own database setup and teardown. So the only database setup is to install and run PostgreSQL and Clickhouse ([See this page for setup instructions](/docs/contribute/developing-locally)). 
+
 #### Frontend
 We use [Cypress](https://www.cypress.io/) for functional frontend tests. Cypress is used to mock user interface interactions on a demo instance. We've currently targeted test coverage for the most used areas of PostHog and are working to increase coverage. 
 

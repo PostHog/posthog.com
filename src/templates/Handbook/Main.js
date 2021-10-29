@@ -1,31 +1,23 @@
-import React, { useRef } from 'react'
-import MainSidebar from './MainSidebar'
-import SectionLinks from './SectionLinks'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { shortcodes } from '../../mdxGlobalComponents'
+import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
-import StickySidebar from './StickySidebar'
-import MobileSidebar from './MobileSidebar'
-import { useActions } from 'kea'
-import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import { Heading } from 'components/Heading'
+import { InlineCode } from 'components/InlineCode'
+import { ZoomImage } from 'components/ZoomImage'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import React, { useRef } from 'react'
+import { shortcodes } from '../../mdxGlobalComponents'
+import MainSidebar from './MainSidebar'
+import MobileSidebar from './MobileSidebar'
+import SectionLinks from './SectionLinks'
+import StickySidebar from './StickySidebar'
 
 const A = (props) => <a {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => (
     <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
     </div>
-)
-const InlineCode = (props) => (
-    <code
-        {...props}
-        className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded"
-    />
-)
-const Blockquote = (props) => (
-    <blockquote {...props} className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark" />
 )
 
 const SectionLinksBottom = ({ previous, next }) => {
@@ -72,10 +64,11 @@ export default function Main({
         h4: (props) => Heading({ as: 'h4', ...props }),
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
-    const showToc = !hideAnchor && tableOfContents?.length
+    const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
     return (
         <div className="relative">

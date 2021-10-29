@@ -2,14 +2,21 @@ import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import { useValues } from 'kea'
 import React from 'react'
-import { PricingSlider } from '../../PricingSlider'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
+import { SCALE_MINIMUM_EVENTS, SCALE_MINIMUM_PRICING } from '../constants'
+import { PricingSlider } from '../PricingSlider'
+import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { Plan } from './Plan'
 import { Scale } from './Plans'
 
 export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)
     const eventNumberWithDelimiter = eventNumber.toLocaleString()
+    const monthlyMinimumPrice = SCALE_MINIMUM_PRICING.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    })
     return (
         <Modal open={open} setOpen={setOpen}>
             <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
@@ -35,8 +42,8 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </div>
 
                                 <PricingSlider
-                                    marks={[8000000, 10000000, 100000000, 150000000]}
-                                    min={8000000}
+                                    marks={[SCALE_MINIMUM_EVENTS, 10000000, 100000000, 150000000]}
+                                    min={SCALE_MINIMUM_EVENTS}
                                     max={150000000}
                                 />
                             </div>
@@ -69,7 +76,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">
-                                    <div className="text-base">$2,000</div>
+                                    <div className="text-base">{monthlyMinimumPrice}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>

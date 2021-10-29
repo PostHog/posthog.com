@@ -12,19 +12,19 @@ All other work takes a back seat while you're doing support, so don't plan on do
 
 You should work your 'normal' hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as support hero you are doing the bulk of the debugging/fixing.
 
-If you are planning on taking a day off or you won't be available, please find someone to swap with.
+If you are planning on taking a day off or you won't be available, please find someone to swap with and update the rotation on PagerDuty. Be sure to schedule an override for both swaps and **do not alter the rotation order** to avoid affecting other members.
 
-## Rota
+## Rotation
 
-You can view the Support Hero rota [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G).
+You can view the Support Hero rotation [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G). 
 
 ## Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in Papercups**:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels
-- GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one
-- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack
+- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on Papercups).
+- GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
+- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
 ## Communication
 
@@ -37,6 +37,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
     - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
+- Housekeeping. Once a customer issue/question has been addressed, close the conversastions on Papercups to make it easy to identify outstanding conversations.
 
 ## Prioritizing requests
 

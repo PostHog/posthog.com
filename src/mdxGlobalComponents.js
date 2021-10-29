@@ -8,6 +8,7 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
@@ -47,6 +48,7 @@ import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
+import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
@@ -65,10 +67,10 @@ import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
+import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
-import { PricingSlider } from './components/PricingSlider'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -91,6 +93,7 @@ import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
+import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
     Endpoint,
@@ -101,6 +104,7 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
+    BlockQuote,
     Blog,
     BlogFooter,
     BorderWrapper,
@@ -140,6 +144,7 @@ export const shortcodes = {
     Home,
     HostingOption,
     ImageBlock,
+    InlineCode,
     LandingPageCallToAction,
     LibraryStats,
     Link,
@@ -158,10 +163,10 @@ export const shortcodes = {
     FAQs,
     PlanComparison,
     PricingHero,
+    PricingSlider,
     PricingTable,
     Quote,
     Savings,
-    PricingSlider,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -184,4 +189,5 @@ export const shortcodes = {
     Tooltip,
     VisitLibrary,
     WorkableSnippet,
+    ZoomImage,
 }

@@ -1,8 +1,11 @@
 import { MDXProvider } from '@mdx-js/react'
+import { Blockquote } from 'components/BlockQuote'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
+import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import { SEO } from 'components/seo'
+import { ZoomImage } from 'components/ZoomImage'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { findAuthor } from 'lib/utils'
 import React from 'react'
@@ -29,6 +32,9 @@ export default function BlogPost({ data, pageContext }) {
         h5: H5,
         h6: H6,
         pre: CodeBlock,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        img: ZoomImage,
         ...shortcodes,
     }
     const { categories } = pageContext

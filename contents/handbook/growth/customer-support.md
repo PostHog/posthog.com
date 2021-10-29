@@ -42,7 +42,7 @@ This does mean sometimes that, especially when we are particularly busy, custome
 
 This is why, in addition, one person takes on the **Support Hero** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 
-[Click here to see learn more about **Support Hero**.](handbook/engineering/support-hero)
+[Click here to see learn more about **Support Hero**.](/handbook/engineering/support-hero)
 
 ### Simple, lightweight tools
 

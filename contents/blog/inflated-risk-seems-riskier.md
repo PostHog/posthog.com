@@ -71,7 +71,7 @@ Five months later, we got into YC and received the standard $120k cheque for 7%,
 
 Applying to YC was a challenging time and we’d like to help you have the best shot getting in. James [recently did an AmA on applying to YC that you can watch here](https://www.youtube.com/watch?v=t8ym94dOkYs).
 
-Future posts in this series will cover our fast-follow seed and series A rounds in detail. Subscribe to our [newsletter](https://posthog.com/newsletter) and follow us on [Twitter](https://twitter.com/posthoghq) to not miss anything.
+Future posts in this series will cover our fast-follow seed and series A rounds in detail. Subscribe to our [newsletter](https://posthog.com/newsletter) and follow us on [Twitter](https://twitter.com/PostHog) to not miss anything.
 
 If you haven’t tried PostHog yet what are you waiting for? We’re a fast growing, developer-first, and open source product analytics platform you can’t afford to miss.
 

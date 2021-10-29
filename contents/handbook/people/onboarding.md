@@ -120,8 +120,10 @@ Add these if appropriate for the role:
 
 <input type="checkbox"/>  Add team member to the 'Team' group in AWS (see [here](https://posthog.com/handbook/engineering/aws) for more info) <br />
 <input type="checkbox"/>  PagerDuty and into on-call rotation - make sure the alerts work <br />
+<input type="checkbox"/>  PagerDuty Support Hero [rotation](https://posthog.pagerduty.com/schedules#PPLGE4G). Read more about the Support Hero role [here](/handbook/engineering/support-hero) <br />
 <input type="checkbox"/>  Papercups. This includes both <a href="https://app.papercups.io" target="_blank">app access</a> and the <a href="https://posthogusers.slack.com/archives/G01JXEDAL22" target="_blank">#customer_support</a> channel on Users Slack<br />
 <input type="checkbox"/>  Heroku <br />
+<input type="checkbox"/>  Metabase <br />
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
 
 ###### Team Platform
@@ -144,6 +146,11 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Google Analytics and Google Search Console <br />
 <input type="checkbox"/>  Any social media platforms we have a presence on <br />
 <input type="checkbox"/>  Any other third party analytics tools we use (e.g. HootSuite, RivalIQ, etc.) <br />
+
+#### Product
+<input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
+<input type="checkbox"/>  Papercups. This includes both <a href="https://app.papercups.io" target="_blank">app access</a> and the <a href="https://posthogusers.slack.com/archives/G01JXEDAL22" target="_blank">#customer_support</a> channel on Users Slack<br />
+
 
 ## Tools we use
 

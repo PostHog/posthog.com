@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
-import { CallToAction } from '../CallToAction'
-import { Link } from 'gatsby'
+import Chip from 'components/Chip'
 import { useValues } from 'kea'
-
-import Layout from '../Layout'
-import { BasicHedgehogImage } from '../BasicHedgehogImage'
+import React, { useEffect, useState } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-
+import { BasicHedgehogImage } from '../BasicHedgehogImage'
+import { CallToAction } from '../CallToAction'
+import Layout from '../Layout'
 import './NotFoundPage.scss'
 
 export default function NotFoundPage(): JSX.Element {
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {
         if (posthog) {
@@ -19,16 +18,24 @@ export default function NotFoundPage(): JSX.Element {
         }
     }, [])
 
+    const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreCorrect = false) => {
+        setSubmittedPreference(true)
+        if (posthog) {
+            posthog.capture('pineapple_on_pizza_survey', {
+                does_pineapple_go_on_pizza: userLikesPineappleOnPizzaAkaTheyreCorrect,
+            })
+        }
+    }
+
     return (
         <Layout className="not-found-page-container">
             <div className="centered py-12">
                 <h2>Oops, there's nothing here</h2>
 
                 <p>
-                    Think this a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll fix it!
+                    Think this is a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll fix
+                    it!
                 </p>
-
-                <div className="bg-gray h-[1px] leading-[0px] max-w-xs mx-auto mt-6 mb-8"></div>
 
                 <p>
                     <strong>But while you're here,</strong> we have an important question...
@@ -36,15 +43,18 @@ export default function NotFoundPage(): JSX.Element {
 
                 <h4>Does pineapple belong on pizza?</h4>
 
-                <p>
-                    We look forward to hearing your response on{' '}
-                    <a href="//twitter.com/posthog" target="_blank" rel="noreferrer">
-                        Twitter
-                    </a>
-                    .
-                </p>
+                <div style={{ paddingBottom: 10 }}>
+                    {submittedPreference ? (
+                        <p>Thanks for letting us know!</p>
+                    ) : (
+                        <div className="flex justify-center space-x-2">
+                            <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
+                            <Chip onClick={() => capturePineapplePreference(false)} text="No" />
+                        </div>
+                    )}
+                </div>
 
-                <div className="hedgehog mb-8">
+                <div className="hedgehog my-8">
                     <BasicHedgehogImage />
                 </div>
 

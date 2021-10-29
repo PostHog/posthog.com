@@ -1,4 +1,5 @@
 import { kea } from 'kea'
+import { SCALE_MINIMUM_EVENTS, SCALE_MINIMUM_PRICING } from '../constants'
 import { sliderCurve } from './LogSlider'
 
 export type PricingOptionType = 'vpc' | 'self-hosted' | 'cloud'
@@ -11,7 +12,7 @@ export const pricingSliderLogic = kea({
     },
     reducers: {
         eventNumber: [
-            8000000,
+            SCALE_MINIMUM_EVENTS,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
             },
@@ -38,12 +39,12 @@ export const pricingSliderLogic = kea({
     selectors: ({ actions }) => ({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
-            (eventNumber: number, pricingOption: PricingOption) => {
+            (eventNumber: number, pricingOption: PricingOptionType) => {
                 if (pricingOption === 'self-hosted') {
                     let unitPricing = 0.000225
 
                     const estimatedCost = eventNumber * unitPricing
-                    let finalCost = estimatedCost > 2000 ? estimatedCost : 2000
+                    let finalCost = estimatedCost > SCALE_MINIMUM_PRICING ? estimatedCost : SCALE_MINIMUM_PRICING
 
                     if (eventNumber >= 10_000_000 && eventNumber < 100_000_000) {
                         unitPricing = 0.000045

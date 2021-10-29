@@ -21,7 +21,7 @@
                 "component": "Docs",
                 "items": [
                     {
-                        "title": "1. Self hosting",
+                        "title": "1. Self-host",
                         "link": {
                             "title": "Overview",
                             "url": "/docs/self-host"
@@ -86,8 +86,8 @@
                                         "url": "/docs/self-host/configure/upgrading-posthog"
                                     },
                                     {
-                                        "title": "Self host vs. PostHogCloud",
-                                        "url": "/docs/user-guides/organizations"
+                                        "title": "Self-hosted vs. PostHog Cloud",
+                                        "url": "/signup"
                                     },
                                     {
                                         "title": "ClickHouse",
@@ -216,8 +216,8 @@
                                         "url": "/docs/user-guides/trends"
                                     },
                                     {
-                                        "title": "Users",
-                                        "url": "/docs/user-guides/users"
+                                        "title": "Persons",
+                                        "url": "/docs/user-guides/persons"
                                     }
                                 ]
                             },
@@ -331,7 +331,7 @@
                     },
                     {
                         "title": "Careers",
-                        "description": "<p>We're currently hiring for <strong>4 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for",
+                        "description": "<p>We're currently hiring for <strong>5 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for.",
                         "link": {
                             "title": "Visit Careers page",
                             "url": "/careers"

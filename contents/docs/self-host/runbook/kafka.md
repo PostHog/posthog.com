@@ -24,42 +24,33 @@ At PostHog we mainly use it to stream events from our ingestion pipeline to Clic
 ##### Requirements
 You need to run a Kubernetes cluster with the _Volume Expansion_ feature enabled. This feature is supported on the majority of volume types since Kubernetes version >= 1.11 (see [docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion)).
 
-You can check if your default `StorageClass` has the field `allowVolumeExpansion` set to `true` by running `kubectl describe storageclass`:
-```
-➜ kubectl describe storageclass
-Name:            do-block-storage
-IsDefaultClass:  Yes
-Annotations:     kubectl.kubernetes.io/last-applied-configuration={"allowVolumeExpansion":true,"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"},"labels":{"doks.digitalocean.com/managed":"true"},"name":"do-block-storage"},"provisioner":"dobs.csi.digitalocean.com","reclaimPolicy":"Delete"}
-,storageclass.kubernetes.io/is-default-class=true
-Provisioner:           dobs.csi.digitalocean.com
-Parameters:            <none>
-AllowVolumeExpansion:  True
-MountOptions:          <none>
-ReclaimPolicy:         Delete
-VolumeBindingMode:     Immediate
-Events:                <none>
+To verify if your storage class allows volume expansion you can run:
+
+```shell
+kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
+true
 ```
 
 ##### How-to
 
 1. List your pods
-    ```
-    ➜ kubectl get pods -n posthog
+    ```shell
+    kubectl get pods -n posthog
     NAME                          READY   STATUS    RESTARTS   AGE
     posthog-posthog-kafka-0       1/1     Running   0          5m15s
     ```
 
 1. Connect to the Kafka container to verify the data directory filesystem size (in this example 15GB)
-    ```
-    ➜ kubectl exec -it posthog-posthog-kafka-0 -- /bin/bash
+    ```shell
+    kubectl exec -it posthog-posthog-kafka-0 -- /bin/bash
     posthog-posthog-kafka-0:/$ df -h /bitnami/kafka
     Filesystem                                                                Size  Used Avail Use% Mounted on
     /dev/disk/by-id/scsi-0DO_Volume_pvc-97776a5e-9cdc-4fac-8dad-199f1728b857   15G   40M   14G   1% /bitnami/kafka
     ```
 
 1. Resize the underlying PVC (in this example we are resizing it to to 20G)
-    ```
-    ➜ kubectl patch pvc data-posthog-posthog-kafka-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
+    ```shell
+    kubectl patch pvc data-posthog-posthog-kafka-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
     persistentvolumeclaim/data-posthog-posthog-kafka-0 patched
     ```
 
@@ -81,8 +72,8 @@ Events:                <none>
 1. Run `helm update` to recycle all the pods and re-deploy the `StatefulSet` definition
 
 1. Connect to the Kafka container to verify the new filesystem size
-    ```
-    ➜ kubectl exec -it posthog-posthog-kafka-0 -- /bin/bash
+    ```shell
+    kubectl exec -it posthog-posthog-kafka-0 -- /bin/bash
     posthog-posthog-kafka-0:/$ df -h /bitnami/kafka
     Filesystem                                                                Size  Used Avail Use% Mounted on
     /dev/disk/by-id/scsi-0DO_Volume_pvc-97776a5e-9cdc-4fac-8dad-199f1728b857   20G   40M   19G   1% /bitnami/kafka

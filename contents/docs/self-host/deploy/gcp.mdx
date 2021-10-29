@@ -4,14 +4,19 @@ sidebarTitle: Google Cloud Platform
 sidebar: Docs
 showTitle: true
 tags:
-  - gcp
+    - gcp
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 
-First, we need to set up a Kubernetes Cluster. See [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/).
+First, we need to set up a Kubernetes cluster (see the official GCP [documentation](https://cloud.google.com/kubernetes-engine/) for more info).
+
+<ClusterRequirementsSnippet />
+
+## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
@@ -44,7 +49,7 @@ If DNS has been updated properly, check whether the SSL certificate was created 
 
 This can be done via the following command:
 
-```console
+```shell
 gcloud beta --project yourproject compute ssl-certificates list
 ```
 

@@ -51,7 +51,7 @@ export function SEO({ title, description, image, article, canonicalUrl, noindex 
             {seo.title && <meta name="twitter:title" content={seo.title} />}
             {seo.description && <meta name="twitter:description" content={seo.description} />}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
-            <meta name="twitter:site" content="@PostHogHQ" />
+            <meta name="twitter:site" content="@PostHog" />
         </Helmet>
     )
 }

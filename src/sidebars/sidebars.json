@@ -234,6 +234,10 @@
                     "url": "/handbook/engineering/support-hero"
                 },
                 {
+                    "name": "Deployments support",
+                    "url": "/handbook/engineering/deployments-support"
+                },
+                {
                     "name": "Tech talks",
                     "url": "/handbook/engineering/tech-talks"
                 },
@@ -313,6 +317,10 @@
                 {
                     "name": "Scale features prioritization",
                     "url": "/handbook/product/scale-features-prioritization"
+                },
+                {
+                    "name": "Paid Features",
+                    "url": "/handbook/product/paid-features"
                 }
             ]
         },
@@ -340,30 +348,29 @@
                     "name": "Acquisition channels",
                     "url": "",
                     "children": [
-                        
                         {
-                             "name": "Content & SEO",
-                             "url": "/handbook/growth/marketing/blog"
+                            "name": "Content & SEO",
+                            "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                             "name": "Email",
-                             "url": "/handbook/growth/marketing/newsletter"
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
                         },
                         {
-                             "name": "Paid ads",
-                             "url": "/handbook/growth/marketing/paid"
+                            "name": "Paid ads",
+                            "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                             "name": "Press",
-                             "url": "/handbook/growth/marketing/press"
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
                         },
                         {
-                             "name": "Open-source sponsorship",
-                             "url": "/handbook/growth/marketing/open-source-sponsorship"
+                            "name": "Open-source sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
                         }
-                        ]
+                    ]
                 }
-             ]
+            ]
         },
         {
             "name": "Growth",
@@ -436,17 +443,13 @@
                     "url": "/docs/self-host/postgres-vs-clickhouse"
                 },
                 {
+                    "name": "Migrate from Postgres to ClickHouse",
+                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
+                },
+                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
-                        {
-                            "name": "Digital Ocean",
-                            "url": "/docs/self-host/deploy/digital-ocean"
-                        },
-                        {
-                            "name": "Google Cloud Platform",
-                            "url": "/docs/self-host/deploy/gcp"
-                        },
                         {
                             "name": "AWS",
                             "url": "/docs/self-host/deploy/aws"
@@ -456,16 +459,20 @@
                             "url": "/docs/self-host/deploy/azure"
                         },
                         {
-                            "name": "Other",
+                            "name": "Digital Ocean",
+                            "url": "/docs/self-host/deploy/digital-ocean"
+                        },
+                        {
+                            "name": "Google Cloud Platform",
+                            "url": "/docs/self-host/deploy/gcp"
+                        },
+                        {
+                            "name": "Other Platforms",
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
-                            "name": "Chart configuration",
+                            "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
-                        },
-                        {
-                            "name": "Troubleshooting and FAQ",
-                            "url": "/docs/self-host/deploy/troubleshooting"
                         },
                         {
                             "name": "Upgrade Notes",
@@ -474,6 +481,10 @@
                         {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
+                        },
+                        {
+                            "name": "Troubleshooting and FAQ",
+                            "url": "/docs/self-host/deploy/troubleshooting"
                         }
                     ]
                 },
@@ -552,6 +563,18 @@
                 {
                     "name": "Identifying users",
                     "url": "/docs/integrate/identifying-users"
+                },
+                {
+                    "name": "User properties",
+                    "url": "/docs/integrate/user-properties"
+                },
+                {
+                    "name": "Badge",
+                    "url": "/docs/integrate/badge"
+                },
+                {
+                    "name": "GDPR guidance",
+                    "url": "/docs/integrate/gdpr"
                 },
                 {
                     "name": "Client libraries",
@@ -839,6 +862,10 @@
                     "url": "/docs/tutorials/funnels"
                 },
                 {
+                    "name": "Funnel conversion with Next.js and Supabase",
+                    "url": "/docs/tutorials/nextjs-supabase-signup-funnel"
+                },
+                {
                     "name": "Analyzing user behavior with Cohorts",
                     "url": "/docs/tutorials/cohorts"
                 },
@@ -877,6 +904,10 @@
                 {
                     "name": "Deleting bulk data",
                     "url": "/docs/tutorials/deleting-data"
+                },
+                {
+                    "name": "Building an AARRR pirate funnel",
+                    "url": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
                 }
             ]
         },
@@ -961,6 +992,10 @@
                 {
                     "name": "Contribute to docs, handbook & blog",
                     "url": "/docs/contribute/contribute-to-website"
+                },
+                {
+                    "name": "Coding conventions",
+                    "url": "/docs/contribute/coding-conventions"
                 }
             ]
         }

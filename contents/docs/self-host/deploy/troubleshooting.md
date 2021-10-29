@@ -31,7 +31,7 @@ Events:
 ### Connection is not secure
 
 First, check that DNS is set up properly:
-```console
+```shell
 nslookup <your-hostname> 1.1.1.1
 ```
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
@@ -57,9 +57,9 @@ We need to configure these well, but monitoring disk util can help catch this pr
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 
 ## FAQ
-  
+
 ### How can I increase storage size?
-  
+
 Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
 
 ### Are the errors I'm seeing important?
@@ -82,3 +82,63 @@ TooManyConnections: too many connections
   File "clickhouse_pool/pool.py", line 102, in pull
     raise TooManyConnections("too many connections")
 ```
+
+## How do I see logs for a pod?
+
+1. Find the name of the pod you want to get logs on:
+
+    ```shell
+    kubectl get pods -n posthog
+    ```
+
+    This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
+
+2. Get the logs for that pod using the name from the previous step:
+   
+    ```shell
+    kubectl logs posthog-plugins-54f324b649-66afm -n posthog
+    ```
+## How do I connect to Postgres?
+    
+> **Tip:** Find out your pod names with `kubectl get pods -n posthog`
+
+1. Find out your Postgres password from the web pod:
+
+    ```shell
+    kubectl exec -n posthog -it your-posthog-web-pod \
+    -- sh -c 'echo password:$POSTHOG_DB_PASSWORD'
+    ```
+
+2. Connect to your Postgres pod:
+
+    ```shell
+    # Replace posthog-posthog-postgresql-0 with your pod's name if different
+    kubectl exec -n posthog -it posthog-posthog-postgresql-0  -- sh
+    ```
+
+3. Connect to the `posthog` DB:
+
+    ```shell
+    psql -d posthog -U postgres
+    ```
+
+    Postgres will ask you for the password. Use the value you found from step 1.
+
+## How do I restart all pods for a service?
+
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team. 
+
+1. Terminate all running pods for the service:
+  
+    ```shell
+    # substitute posthog-plugins for the desired service
+    kubectl scale deployment posthog-plugins --replicas=0 -n posthog
+    ```
+
+
+2. Start new pods for the service:
+  
+    ```shell
+    # substitute posthog-plugins for the desired service
+    kubectl scale deployment posthog-plugins --replicas=1 -n posthog
+    ```
