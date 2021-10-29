@@ -8,7 +8,7 @@ The lifecycle tool is designed to enable you to understand how your active users
 
 One of the most powerful insights you can get from this graph is understanding what's below the surface of your user growth. For instance you could be having stellar growth due to marketing efforts but bleeding users, unable to retain them. As you can imagine, this could lead to huge trouble down the line.
 
-This enables you to understand both what is driving the growth of active users in your product and gives you a place to start investigating issues like increased churn or a slowing acquisition of new users.
+In addition, this gives you a place to start investigating issues like increased churn or a slowing acquisition of new users.
 
 ## Accessing lifecycle
 
