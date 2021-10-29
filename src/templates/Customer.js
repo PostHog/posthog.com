@@ -9,12 +9,16 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
+import Link from 'components/Link'
+
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const components = {
     ...shortcodes,
     BorderWrapper,
     ImageBlock,
     FloatedImage,
+    a: A,
 }
 
 const Tags = ({ title, tags }) => {
