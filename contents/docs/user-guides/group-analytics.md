@@ -5,25 +5,25 @@ showTitle: true
 ---
 
 <blockquote class="warning-note">
-Group analytics is currently a alpha feature and not available for everyone.
-
-Exact details of the feature are due to change over the alpha period.
+<strong>Group Analytics</strong> is currently a alpha feature and not available for everyone.
+<br />
+Exact details of the feature can change over the alpha period.
 </blockquote>
 
-Group analytics allows you to calculate metrics on a group level. A "group" is an entity events
+**Group Analytics** allows you to calculate metrics on a group level. A "group" is an entity events
 belong to - such as an Company, Team or Playlist of songs. If you're a B2B company, groups help
 you analyze how various groups interact with your product rather than individual users.
 
 ## Prerequisites
 
-- The feature is only available in alpha right now. <a href="/slack" target="_blank">Reach out</a> if you would like to participate in the alpha.
+- The feature is only available in alpha right now. <a href="/slack" target="_blank">Reach out</a> if you're interested.
 - You are able to instrument up to 5 different group types per project
-- :TODO: Version of posthog that supports groups
+- The feature is currently available on PostHog Cloud
 
 ## Known limitations
 
+- You can't (yet) analyze groups in insights or use them in feature flags. This will be added over the coming week(s).
 - Updating group properties overwrites _all_ previous properties for that group
-- Only groups with properties are shown under Users page
 
 ## How to set up group analytics
 
