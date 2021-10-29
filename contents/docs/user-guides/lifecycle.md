@@ -44,6 +44,12 @@ Everything above the zero line on the horizontal access represents a user who wa
 Everything below the zero line represents a user who as not active in the interval:
 * **Dormant** - These are users who are not active in the current interval, irrespective if they were active in previous intervals (e.g. someone who has not sent a message today)
 
+**What to look for in your lifecycle chart?**
+This can vary a bit depending on your product, but in a general sense:
+- You want to see your "Returning" users growing or at least staying constant, otherwise this signals a leaky bucket problem.
+- If you have a large number of "Resurrecting" users it could mean that the interval you selected is not aligned with your product's true natural frequency (e.g. users use it weekly but you're watching it daily), 
+- If you're investing efforts in acquiring new users to your product (or the feature you're exploring), you want to see that this indeed translates in new users popping up.
+
 ## Going Deeper
 
 Now you have an overview of your lifecycle you can now dig into ares which look problematic, in our graph we can see a big drop in active users on the 23 October. If you click on the graph of "Dormant users" we will show you the users who became dormant here:
