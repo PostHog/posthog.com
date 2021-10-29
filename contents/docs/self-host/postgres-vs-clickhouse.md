@@ -26,4 +26,4 @@ TLDR: Because ClickHouse is a lot better at doing analytical queries on larger d
 
 An instance of PostHog using PostgreSQL can be efficient for small scale deploys. However, once you have more data, you might start having issues while running queries. The issue is that Postgres isn't very good at doing analytical queries on larger datasets. This is where ClickHouse comes in.
 
-[ClickHouse](https://clickhouse.tech) is an open-source, Apache 2.0 licensed OLAP database. It is very fast at doing analytical queries on large volumes of data. It also stores this data much more efficiently than Postgres does, and we've seen a 70% reduction in the amount of disk space needed to store the same data. They've raised [significant funding](https://www.crunchbase.com/organization/clickhouse) too.
+[ClickHouse](https://clickhouse.tech) is an open-source, Apache 2.0 licensed OLAP database. It is very fast at doing analytical queries on large volumes of data. It also stores this data much more efficiently than Postgres does, and we've seen a 70% reduction in the amount of disk space needed to store the same data.
