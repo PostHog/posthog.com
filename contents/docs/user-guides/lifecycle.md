@@ -48,6 +48,10 @@ Everything below the zero line represents a user who as not active in the interv
 
 Now you have an overview of your lifecycle you can now dig into ares which look problematic, in our graph we can see a big drop in active users on the 23 October. If you click on the graph of "Dormant users" we will show you the users who became dormant here:
 
+With the information from this graph in mind you may want to dig deeper to understand the following questions. Our [Retention](link to docs here) tool is better for answering this.
+- Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
+- Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
+
 ![image](https://user-images.githubusercontent.com/85295485/139206407-40bfa178-76d8-47a5-8482-fbf0f682c1d6.png)
 
 You can then click thourgh to look at these individual users behavior in the events or recordings tools 
