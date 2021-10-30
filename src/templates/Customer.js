@@ -1,25 +1,11 @@
 import { MDXProvider } from '@mdx-js/react'
-import { BorderWrapper } from 'components/BorderWrapper'
 import Breadcrumbs from 'components/Breadcrumbs'
-import { FloatedImage } from 'components/FloatedImage'
-import { ImageBlock } from 'components/ImageBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { shortcodes } from '../mdxGlobalComponents'
-import Link from 'components/Link'
-
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-
-const components = {
-    ...shortcodes,
-    BorderWrapper,
-    ImageBlock,
-    FloatedImage,
-    a: A,
-}
+import { shortcodes } from '../shortcodes'
 
 const Tags = ({ title, tags }) => {
     return (
@@ -79,7 +65,7 @@ export default function Customer({ data }) {
                     </aside>
                     <section className="article-content customer-content">
                         <h1 className="text-3xl">{title}</h1>
-                        <MDXProvider components={components}>
+                        <MDXProvider components={shortcodes}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>

@@ -1,19 +1,11 @@
 import { MDXProvider } from '@mdx-js/react'
-import { Blockquote } from 'components/BlockQuote'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
-import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import { SEO } from 'components/seo'
-import { ZoomImage } from 'components/ZoomImage'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { findAuthor } from 'lib/utils'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
-import { shortcodes } from '../mdxGlobalComponents'
-import Link from 'components/Link'
-
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+import { shortcodes } from '../shortcodes'
 
 export default function BlogPost({ data, pageContext }) {
     const { postData, authorsData } = data
@@ -27,20 +19,7 @@ export default function BlogPost({ data, pageContext }) {
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
     const authorDetails = findAuthor(authors)(author)
-    const components = {
-        h1: H1,
-        h2: H2,
-        h3: H3,
-        h4: H4,
-        h5: H5,
-        h6: H6,
-        pre: CodeBlock,
-        inlineCode: InlineCode,
-        blockquote: Blockquote,
-        img: ZoomImage,
-        a: A,
-        ...shortcodes,
-    }
+
     const { categories } = pageContext
     return (
         <Layout>
@@ -59,7 +38,7 @@ export default function BlogPost({ data, pageContext }) {
                 authorDetails={authorDetails}
                 categories={categories}
             >
-                <MDXProvider components={components}>
+                <MDXProvider components={shortcodes}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
             </BlogPostLayout>

@@ -1,25 +1,12 @@
 import { MDXProvider } from '@mdx-js/react'
-import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
-import { Heading } from 'components/Heading'
-import { InlineCode } from 'components/InlineCode'
-import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useRef } from 'react'
-import { shortcodes } from '../../mdxGlobalComponents'
+import { shortcodes } from '../../shortcodes'
 import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
 import SectionLinks from './SectionLinks'
 import StickySidebar from './StickySidebar'
-import Link from 'components/Link'
-
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-const Iframe = (props) => (
-    <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-        <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-    </div>
-)
 
 const SectionLinksBottom = ({ previous, next }) => {
     return (
@@ -54,21 +41,6 @@ export default function Main({
     previous,
     hideLastUpdated,
 }) {
-    const components = {
-        iframe: Iframe,
-        inlineCode: InlineCode,
-        blockquote: Blockquote,
-        pre: CodeBlock,
-        h1: (props) => Heading({ as: 'h1', ...props }),
-        h2: (props) => Heading({ as: 'h2', ...props }),
-        h3: (props) => Heading({ as: 'h3', ...props }),
-        h4: (props) => Heading({ as: 'h4', ...props }),
-        h5: (props) => Heading({ as: 'h5', ...props }),
-        h6: (props) => Heading({ as: 'h6', ...props }),
-        img: ZoomImage,
-        a: A,
-        ...shortcodes,
-    }
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
@@ -99,7 +71,7 @@ export default function Main({
                     </section>
                     {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                     <section className="article-content handbook-docs-content">
-                        <MDXProvider components={components}>
+                        <MDXProvider components={shortcodes}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
