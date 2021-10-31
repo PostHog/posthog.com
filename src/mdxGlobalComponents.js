@@ -22,6 +22,7 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -119,6 +120,7 @@ export const shortcodes = {
     Transparency,
     WhyWereHere,
     WorkingAtPostHog,
+    Checkbox,
     Chip,
     CodeBlock,
     CompensationCalculator,

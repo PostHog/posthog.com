@@ -6,6 +6,7 @@ import Card from 'components/Card'
 import { motion } from 'framer-motion'
 import { SEO } from 'components/seo'
 import Logo from 'components/Logo'
+import Checkbox from 'components/Checkbox'
 
 const logos = {
     Segment,
@@ -85,25 +86,8 @@ export default function Integrations({
                                 {maintainers.map((maintainer) => {
                                     const { type } = maintainer
                                     return (
-                                        <li
-                                            key={type}
-                                            className="flex items-center space-x-2 text-base relative font-semibold"
-                                        >
-                                            <span>
-                                                <input
-                                                    onChange={(e) => handleChange(e, 'maintainer')}
-                                                    value={type}
-                                                    id={type}
-                                                    aria-describedby={`${type}-description`}
-                                                    name={type}
-                                                    type="checkbox"
-                                                    className="focus:ring-primary h-4 w-4 text-primary border border-primary bg-primary rounded checkbox appearance-none bg-opacity-0 absolute transition-all"
-                                                />
-                                                <Check className="w-4 h-4 relative invisible text-white pointer-events-none" />
-                                            </span>
-                                            <label className="flex" htmlFor={type}>
-                                                <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
-                                            </label>
+                                        <li key={type} className="flex items-center space-x-2 text-base font-semibold">
+                                            <Checkbox value={type} onChange={(e) => handleChange(e, 'maintainer')} />
                                         </li>
                                     )
                                 })}
