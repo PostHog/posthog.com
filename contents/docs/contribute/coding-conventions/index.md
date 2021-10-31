@@ -70,7 +70,7 @@ Hence the explicitly in keeping the layers separate.
 #### General tips
 
 - Think data first: get [your mental model of the data flowing through the app](https://acco.io/i-escaped-node) right, and then everything else will be easy.
-- Be practical and pragmatic, yet remember that you're writing code that's expected to stick around for the next 1-3 years, not the next 3 weeks. This means optimise for mid-to-long term maintainability over quick wins that are measured in hours or minutes.
+- Be practical, yet remember that you're writing code that's expected to stick around for the next 1-3 years, not the next 3 weeks. This means optimize for mid-to-long term maintainability over quick wins that are measured in hours or minutes.
 
 #### Do-s & Don't-s
 
