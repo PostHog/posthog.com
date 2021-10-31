@@ -14,6 +14,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
@@ -110,6 +111,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Card,
     Benefits,
     CareersHero,
     InterviewProcess,
