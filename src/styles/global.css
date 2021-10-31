@@ -491,3 +491,10 @@ ul {
         transform: translateX(10%);
     }
 }
+
+.checkbox:checked {
+    @apply bg-opacity-100;
+    & + svg {
+        @apply visible;
+    }
+}
