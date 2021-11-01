@@ -57,6 +57,8 @@ It's often necessary to combine multiple segmentation types when running analyse
 
 There are a variety tools available to help you segment users or use the segments to understand their behaviours within your product. These can include basic web analytics tools such as Google Analytics, or all-in-one product analytics tools such as PostHog. 
 
-Naturally, we think PostHog is one of the best tools to use for user segmentation because it enables you to explore segmented users using tools such as funnels, trends, paths and retention charts. Uniquely, PostHog also enables you to self-host your analytics platform so that you have better control of the user data and do not need to share it with third parties. 
+Naturally, we think PostHog is one of the best tools to use for user segmentation because it enables you to explore segmented users using tools such as funnels, trends, paths and retention charts. Uniquely, PostHog also enables you to self-host your analytics platform so that you have better control of the user data and do not need to share it with third parties.
+
+For more information, you can also read our tutorial about [how to segment users in PostHog](https://posthog.com/docs/tutorials/how-to-segment-users). 
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
