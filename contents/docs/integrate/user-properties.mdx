@@ -67,14 +67,14 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 Important notice: here with equal timestamps and previous method (rows 4 and 11) this means that we use the value from person 1. Person 1 in case of `identify` means the values passed into the identify call. In the case of `alias` person 1 is the first distinct ID provided. To elaborate look at the following examples:
 
 For `identify` this series of calls would mean we end up with `location=New York` and `browser=Safari`.
-```
+```js
 posthog.set('Alice', {'location': 'Rome'}, timestamp=1)
 posthog.set_once('Alice', '{browser': 'Chrome', timestamp=1)
 posthog.identify('Alice', {'$set': {'location': 'New York'}, '$set_once':{'browser':'Safari'}}, timestamp=1)
 ```
 
 For `alias` this series of calls would mean we end up with `location=Rome` and `browser=Chrome`.
-```
+```js
 posthog.set('Alice 1', {'location': 'Rome'}, timestamp=1)
 posthog.set_once('Alice 1', '{browser': 'Chrome', timestamp=1)
 posthog.set('Alice 2', {'location': 'New York'}, timestamp=1)
