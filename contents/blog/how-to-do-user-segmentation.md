@@ -28,7 +28,7 @@ By understanding how these segments differ, Amazon would then be able to build p
 
 In order to serve your users, you need to understand them in as much detail as possible. If you don't segment users then you're only able to understand them as individuals (which becomes impossible once you userbase start to grow) or as a whole. 
 
-Trying to understand your userbase as a whole is a trap. It means you can only focus on the _average_ of all your users, which can both distort the data and elminate the detail you need to make informed decisions.  
+Trying to understand your userbase as a whole is a trap. It means you can only focus on the _average_ of all your users, which can both distort the data and eliminate the detail you need to make informed decisions.  
 
 For example, imagine a company has 10 customers. Seven of these customers are aged between 15-16 years old, while two are aged 40-42 and a single customer is aged 75. Segmenting users by age in this way reveals that the company is successful with younger users in the 16-18 age bracket, while looking at the average of the whole userbase would suggest an average customer age of 26 - almost twice the actual age of 70% of users. 
 
