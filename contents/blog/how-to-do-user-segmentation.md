@@ -1,6 +1,6 @@
 ---
 date: 2021-10-28
-title: How to do user segmentation
+title: What is user segmentation?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
