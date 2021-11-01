@@ -85,7 +85,7 @@ Someone you have a personal or professional relationship with to confidently say
 
 **Social referral** 
 
-The [Workable referral page](https://referrals.workable.com/posthog/jobs/) make is super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
+The [Workable referral page](https://referrals.workable.com/posthog/jobs/) makes it super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
 
 If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
 
