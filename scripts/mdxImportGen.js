@@ -1,7 +1,16 @@
 const fs = require('fs')
 
 const baseDir = './src/components'
-const componentsToIgnore = new Set(['Layout', 'SidebarContents', 'Header', 'Menu', 'UserLogosCarousel'])
+const componentsToIgnore = new Set([
+    'Layout',
+    'SidebarContents',
+    'Header',
+    'Menu',
+    'UserLogosCarousel',
+    'Section',
+    'Hero',
+    'FeatureSnapshot',
+])
 
 const getComponentsInDir = (dir, components = []) => {
     const dirContents = fs.readdirSync(dir)
