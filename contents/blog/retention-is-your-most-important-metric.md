@@ -44,7 +44,7 @@ You then look at then look at how this cohort retains over time, this means as y
 
 In PostHog this is really easy to set up in our retention tool, by navigating to the retention insight and selection the event and time period you would like to measure retention for and view the customer retention graph:
 
-![Untitled](Retention%20is%20your%20most%20important%20metric%2080ccac701430453f8fe0e6257fe679a6/Untitled.png)
+![Retention PostHog Screenshot](contents/images/blog/retention-screenshot-most-important-metric.png )
 
 ## Customer Retention Strategies
 
