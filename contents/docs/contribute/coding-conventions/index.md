@@ -70,21 +70,28 @@ Hence the explicitly in keeping the layers separate.
 #### General tips
 
 - Think data first: get [your mental model of the data flowing through the app](https://acco.io/i-escaped-node) right, and then everything else will be easy.
-- Be practical, yet remember that you're writing code that's expected to stick around for the next 1-3 years, not the next 3 weeks. This means optimize for mid-to-long term maintainability over quick wins that are measured in hours or minutes.
+- Be practical, yet remember that you are balancing speed of delivery with ease of maintainability. If you have to choose: code should be easier to understand than it was to write.
 
 #### Do-s & Don't-s
 
-- Write all new code with TypeScript and proper typing.
-- Write your frontend data handling code first, and write it in a Kea `logic`.
-- Don't use `useState` or `useEffect` to store local state. It's false convenience. Take the extra 3 minutes and change it to a `logic` early on in the development.
-- Logics still have a tiny initialisation cost. Hence this rule doesn't apply to library components in the `lib/` folder, which might be rendered hundreds of times on a page with different sets of data. Still feel free to write a logic for a complicated `lib/` component when needed.
-- Logics are camelcase and start with a lowercase (`dashboardLogic`). React components are camelcase and start with an uppercase (`DashboardMenu`).
-- Name the `.ts` file accoridng to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx`
-- Use only named exports (`export const DashboardMenu = () => <div />`).
-- Do not use `default` exports like `export default MyBigComponent`
-- We use regular SCSS files for styling to keep things simple and maintainable.
-- Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
-- Namespace all your CSS rules under globally unique names like `.my-blog-component { put everything here }`
-- Write [logic tests](https://kea.js.org/docs/guide/testing) for all logic files. 
-- If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
-- Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `yarn storybook` locally.
+- General
+  - Write all new code with TypeScript and proper typing.
+  - Write your frontend data handling code first, and write it in a Kea `logic`.
+  - Don't use `useState` or `useEffect` to store local state. It's false convenience. Take the extra 3 minutes and change it to a `logic` early on in the development.
+  - Logics still have a tiny initialization cost. Hence this rule doesn't apply to library components in the `lib/` folder, which might be rendered hundreds of times on a page with different sets of data. Still feel free to write a logic for a complicated `lib/` component when needed.
+  - Use named exports (`export const DashboardMenu = () => <div />`), and avoid `default` exports.
+- Naming things:
+  - Always look around the codebase for naming conventions, and follow the best practices of the environment (e.g. use `camelCase` variables in JS, `under_score` in Python).
+  - Use clear, yet functional names (`searchResults` vs `data`).
+  - Logics are camelcase and start with a lowercase (`dashboardLogic`)
+  - React components are camelcase and start with an uppercase (`DashboardMenu`).
+  - Props for both logics and components start with uppercase (`DashboardLogicProps` & `DashboardMenuProps`)
+  - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx`
+- CSS
+  - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
+  - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
+  - Namespace all your CSS rules under globally unique names like `.my-blog-component { put everything here }`
+- Testing
+  - Write [logic tests](https://kea.js.org/docs/guide/testing) for all logic files. 
+  - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
+  - Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `yarn storybook` locally.
