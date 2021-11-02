@@ -83,10 +83,10 @@ Hence the explicitly in keeping the layers separate.
 - Naming things:
   - Always look around the codebase for naming conventions, and follow the best practices of the environment (e.g. use `camelCase` variables in JS, `under_score` in Python).
   - Use clear, yet functional names (`searchResults` vs `data`).
-  - Logics are camelcase and start with a lowercase (`dashboardLogic`)
-  - React components are camelcase and start with an uppercase (`DashboardMenu`).
-  - Props for both logics and components start with uppercase (`DashboardLogicProps` & `DashboardMenuProps`)
-  - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx`
+  - Logics are camelCase (`dashboardLogic`)
+  - React components are PascalCase (`DashboardMenu`).
+  - Props for both logics and components are PascalCase and end with `Props` (`DashboardLogicProps` & `DashboardMenuProps`)
+  - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx` or `dashboardLogic.ts`. Pay attention to the case.
 - CSS
   - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
   - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
