@@ -56,7 +56,7 @@ const faqs = [
     {
         q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
         a:
-            'You can switch from PostHog Cloud to Self-hosted Scale - just email our support team (hey@posthog.com). We will manually transfer your data, free. Likewise, you can switch from Self-hosted Scale to PostHog Cloud too - email us.',
+            'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Free then you can make the transfer yourself using [our plugin](https://github.com/PostHog/posthog-plugin-migrator3000).',
     },
     {
         q: 'On the Self-hosted Free plan, what happens if I exceed 1 million tracked users?',
