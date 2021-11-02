@@ -12,6 +12,17 @@ showTitle: true
 
 - You should have a **clean** [ClickHouse-backed PostHog instance up and running](docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
 - Your old and new instances should both be running **the exact same version of PostHog**, with a minimum version of `1.29.0`
+
+<details>
+
+<summary><b>Having difficulties upgrading your Postgres-backed instance due to long-running migrations?</b></summary>
+
+<br />
+
+Check out [this guide](/docs/self-host/postgres-upgrade-migrations).
+
+</details>
+
 ## Approach
 
 ClickHouse-backed PostHog instances still use a Postgres database to store data that is not used in analytical queries, such as user information, feature flags, dashboard configurations, etc.
