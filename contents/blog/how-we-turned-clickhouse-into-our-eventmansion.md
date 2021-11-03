@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 Author: joe-martin
-featuredImage: ../images/blog/blog-generic-1.png
+featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
 ---
 
