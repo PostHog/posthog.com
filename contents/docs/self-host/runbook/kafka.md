@@ -69,7 +69,7 @@ true
 
 1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example)
 
-1. Run `helm update` to recycle all the pods and re-deploy the `StatefulSet` definition
+1. Run a `helm` upgrade to recycle all the pods and re-deploy the `StatefulSet` definition
 
 1. Connect to the Kafka container to verify the new filesystem size
     ```shell
