@@ -1,5 +1,5 @@
 ---
-date: 2021-11-06
+date: 2021-11-03
 title: An introduction to customer retention
 rootPage: /blog
 sidebar: Blog
