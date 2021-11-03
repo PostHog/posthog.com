@@ -1,14 +1,50 @@
-import React, { useState, useEffect } from 'react'
+import { CopyOutlined } from '@ant-design/icons'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import darkTheme from 'prism-react-renderer/themes/nightOwl'
 import lightTheme from 'prism-react-renderer/themes/nightOwlLight'
-import { getCookie, generateRandomHtmlId } from '../../lib/utils'
-import { useValues } from 'kea'
+import React, { useEffect, useState } from 'react'
+import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
-import { CopyOutlined } from '@ant-design/icons'
-import { layoutLogic } from 'logic/layoutLogic'
-import Tooltip from '../Tooltip'
+
+const TooltipTitle = ({ title, visible, className }: { title: string; visible: boolean; className: string }) => {
+    return (
+        <AnimatePresence>
+            {visible && (
+                <motion.div
+                    className={className}
+                    initial={{ position: 'absolute', translateY: 0, opacity: 0 }}
+                    animate={{ translateY: '-150%', opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                    {title}
+                </motion.div>
+            )}
+        </AnimatePresence>
+    )
+}
+
+export default function Tooltip({
+    title = '',
+    visible,
+    children,
+    className = '',
+}: {
+    title: string
+    visible: boolean
+    children: JSX.Element[]
+    className: ''
+}) {
+    return (
+        <div className="relative">
+            <TooltipTitle className={className} visible={visible} title={title} />
+            {children}
+        </div>
+    )
+}
 
 interface CodeBlockProps {
     children: {
