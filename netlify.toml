@@ -826,3 +826,38 @@
 [[redirects]]
     from = "/docs/user-guides/users"
     to = "/docs/user-guides/persons"    
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/deploy/gke-clickhouse"
+    to = "/docs/self-host/deploy/gcp"  
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/deploy/aws-clickhouse"
+    to = "/docs/self-host/deploy/aws"  
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/integrations/api"
+    to = "/docs/api"
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/features/sso"
+    to = "/docs/user-guides/sso"
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/securing-posthog"
+    to = "/docs/self-host/configure/securing-posthog"
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/smtp-credentials"
+    to = "/docs/self-host/configure/email"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/deploy-linode"
+    to = "/docs/self-host"
