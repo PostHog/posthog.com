@@ -1,12 +1,12 @@
-import Layout from 'components/Layout'
-import React, { useEffect, useState } from 'react'
-import { heading, section } from 'components/Home/classes'
-import { Segment, Zapier, Sentry, Check } from 'components/Icons/Icons'
 import Card from 'components/Card'
-import { motion } from 'framer-motion'
-import { SEO } from 'components/seo'
-import Logo from 'components/Logo'
 import Checkbox from 'components/Checkbox'
+import { heading, section } from 'components/Home/classes'
+import { Check, Segment, Sentry, Zapier } from 'components/Icons/Icons'
+import Layout from 'components/Layout'
+import Logo from 'components/Logo'
+import { SEO } from 'components/seo'
+import { motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
 
 const logos = {
     Segment,
@@ -155,7 +155,7 @@ export default function Integrations({
 
 export const query = graphql`
     query IntegrationsQuery {
-        allIntegrations {
+        allIntegration {
             maintainers: group(field: maintainer) {
                 type: fieldValue
             }

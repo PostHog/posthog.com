@@ -13,7 +13,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             parent: null,
             children: [],
             internal: {
-                type: `Integrations`,
+                type: `Integration`,
                 contentDigest: createContentDigest(integration),
             },
             url: url.replace('https://posthog.com', ''),
@@ -21,5 +21,26 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             ...other,
         }
         createNode(node)
+    })
+
+    const plugins = await fetch(
+        'https://raw.githubusercontent.com/PostHog/plugin-repository/main/repository.json'
+    ).then((res) => res.json())
+    plugins.forEach((plugin) => {
+        const { displayOnWebsiteLib, name, ...other } = plugin
+        if (displayOnWebsiteLib) {
+            const node = {
+                id: createNodeId(`plugin-${name}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Plugin`,
+                    contentDigest: createContentDigest(plugin),
+                },
+                name,
+                ...other,
+            }
+            createNode(node)
+        }
     })
 }
