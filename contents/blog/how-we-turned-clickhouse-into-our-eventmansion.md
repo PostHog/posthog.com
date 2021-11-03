@@ -81,3 +81,4 @@ We’re also currently experimenting with MaterializedPostgresSQL engine as a wa
 
 But that may be a topic for a future blogpost...
 
+> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
