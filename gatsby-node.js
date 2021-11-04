@@ -16,6 +16,10 @@ exports.onCreatePage = async ({ page, actions }) => {
         // Update the page.
         createPage(page)
     }
+    if (page.path.match(/^\/next\-steps/)) {
+        page.matchPath = '/next-steps/*'
+        createPage(page)
+    }
 }
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {

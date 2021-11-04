@@ -7,7 +7,7 @@ exports.handler = async (e) => {
     let data = {}
     if (companyName) {
         const clearbitData = await fetch(`https://company.clearbit.com/v1/domains/find?name=${companyName}`, {
-            headers: { Authorization: `Basic ${process.env.CLEARBIT_API_KEY}` },
+            headers: { Authorization: `Bearer ${process.env.CLEARBIT_API_KEY}` },
         }).then((res) => res.json())
         const { name, logo } = clearbitData
         data = {
