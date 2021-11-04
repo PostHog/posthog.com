@@ -1,11 +1,22 @@
-import React from 'react'
-import Zoom from 'react-medium-image-zoom'
+import React, { useCallback, useState } from 'react'
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
-export const ZoomImage = (props: any) => {
+export const ZoomImage = ({ frame, ...other }: { frame: boolean }) => {
+    const [isZoomed, setIsZoomed] = useState(false)
+
+    const handleZoomChange = useCallback((shouldZoom) => {
+        setIsZoomed(shouldZoom)
+    }, [])
+
     return (
-        <Zoom overlayBgColorEnd="rgb(0 0 0 / 85%)" overlayBgColorStart="rgb(0 0 0 / 80%)">
-            <img {...props} />
-        </Zoom>
+        <ControlledZoom
+            isZoomed={isZoomed}
+            onZoomChange={handleZoomChange}
+            overlayBgColorEnd="rgb(0 0 0 / 85%)"
+            overlayBgColorStart="rgb(0 0 0 / 80%)"
+        >
+            <img className={frame && !isZoomed ? 'rounded-md shadow-lg' : ''} {...other} />
+        </ControlledZoom>
     )
 }
