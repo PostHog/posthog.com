@@ -861,3 +861,9 @@
 [[redirects]]
     from = "/docs/deployment/deploy-linode"
     to = "/docs/self-host"
+
+
+# Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka"
+    to = "/docs/self-host/runbook/kafka/resize-disk"
