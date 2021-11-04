@@ -32,4 +32,4 @@ In this specific example, we will restore the table `events`.
 ### Automated using `clickhouse-backup`
 The tool provides an automatic restore operation that you can invoke by running: `clickhouse-backup restore <BACKUP NAME>`.
 
-For more informations please look at the [official documentation](https://github.com/AlexAkulov/clickhouse-backup).
+For more information please look at the [official documentation](https://github.com/AlexAkulov/clickhouse-backup).
