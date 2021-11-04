@@ -128,6 +128,24 @@ PostHog will retain your information for as long as your account is active or as
 
 Please note that due to the open source nature of our products, services, and community, we may retain limited personally-identifiable information indefinitely in order to ensure transactional integrity and nonrepudiation. For example, if you provide your information in connection with a blog post, GitHub issue or comment, we may display that information even if you have deleted your account as we do not automatically delete community posts. Also, as described in our Terms of Use, if you contribute to a PostHog project and provide your personal information in connection with that contribution, that information (including your name) will be embedded and publicly displayed with your contribution and we will not be able to delete or erase it because doing so would break the project code.
 
+## Sub-processors
+
+A sub-processor is any business who has or potentially will have access to or process your data. We use a minimal number of sub-processors outlined below, together with the reasons why. This list may be updated from time to time, and all privacy policies of these sub-processors are reviewed by our Data Protection Officer before we engage with them. 
+
+**All customers**
+- GitHub - open source repositories and internal project management tool
+- Slack - internal communications tool
+- Google Workspace - internal collaboration tools
+- Mailchimp - email campaign service provider
+- HubSpot - CRM database
+- Clearbit - marketing data engine
+
+**PostHog Cloud customers**
+- AWS - cloud service provider
+- Cloudflare - cloud service provider
+- Heroku - cloud service provider
+- Sentry - application monitoring and error tracking
+
 ## Contacting PostHog about your privacy
 
 If you have questions or concerns about the way we are handling your information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at [privacy@posthog.com](mailto:privacy@posthog.com).
