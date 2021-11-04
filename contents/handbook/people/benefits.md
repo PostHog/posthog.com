@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Beyond [pay and equity](/handbook/people/compensation), we offer several additional benefits to our team.
+Outside of our [pay and equity](/handbook/people/compensation), we also offer several other exceptional benefits to our team.
 
-With everyone being distributed across the world, we do our best to provide the same benefits to everyone, but they might vary slightly by country depending on the services that are available and local regulations. 
+> With everyone being distributed across the world, we do our best to provide the same benefits to everyone, but they might vary slightly by country depending on the services that are available and local regulations. 
 
 If you have any ideas for how we can improve our benefits offering, then please let us know!
 
@@ -77,3 +77,7 @@ We encourage team members to try and meet up with each other when practical, and
 We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
 
 We also have biweekly coffee catch-ups as a team, and we use the [Donut](https://www.donut.com/?ref=slackdirectory) Slack app to pair you up with random colleague on Slack. Simply join the #virtual-coffee channel on Slack and be paired up with someone on the team to meet for a virtual coffee/tea etc. 
+
+### We'll be your first investor
+
+We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [bias for action](/handbook/company/values)! 
