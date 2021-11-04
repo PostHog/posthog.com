@@ -87,8 +87,9 @@ https://app.posthog.com/api/person/
 
 ## Tips
 
-The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
-The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
+- The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
+- The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
+- The maximum size of a POST request body is governed by `settings.DATA_UPLOAD_MAX_MEMORY_SIZE`, and is 20MB by default.
 
 ## Pagination
 
