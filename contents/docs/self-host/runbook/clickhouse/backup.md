@@ -28,7 +28,7 @@ plugin_log_entries
 session_recording_events
 ```
 
-#### Manual backup
+#### Manual
 To perform a manual backup, we will ask ClickHouse to freeze our tables, creating hard links to the table data. Hard links are placed in the directory `/var/lib/clickhouse/shadow/N/` where `N` is the incremental number of the backup. The query creates the backup almost instantly, but first it will wait for the current queries to the corresponding table to finish running. After we created the backup, we can copy the data from `/var/lib/clickhouse/shadow/` to a remote server or object store service and delete it from the local server.
 
 In this specific example, we will backup the table `events`.
@@ -64,7 +64,7 @@ In this specific example, we will backup the table `events`.
 
 You can find more information about the [`ALTER FREEZE` operation](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/#alter_freeze-partition) and more advanced backup use cases in the [official documentation](https://clickhouse.com/docs/en/operations/backup/).
 
-#### Automated backup using `clickhouse-backup`
+#### Automated using `clickhouse-backup`
 The [clickhouse-backup](https://github.com/AlexAkulov/clickhouse-backup) tool helps you to automate the manual steps above. It also offers native support for multiple backends and object stores like: local storage, FTP, SFTP, Azure Blob Storage, AWS S3, Google Cloud Storage, ...
 
 Once configured, the tool provides a variety of sub-commands for managing backups. Creating a backup is as easy as running: `clickhouse-backup create`.

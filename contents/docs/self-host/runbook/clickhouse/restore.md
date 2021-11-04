@@ -6,7 +6,7 @@ showTitle: true
 
 A backup is worthless if the restoration process hasn’t been tested. If you backed something up and never tried to restore it, chances are that restore will not work properly when you actually need it or it will take longer than business can tolerate. Perform regular test restores to ensure your data will be there when you need it!
 
-### Manual restore
+### Manual
 In this specific example, we will restore the table `events`.
 
 1. Optional: create the table you would like to restore (if it doesn’t exist yet) from its backed up metadata file
@@ -29,7 +29,7 @@ In this specific example, we will restore the table `events`.
     clickhouse-client --database posthog --query "SELECT COUNT(1) from events"
     ````
 
-### Automatic restore using `clickhouse-backup`
+### Automated using `clickhouse-backup`
 The tool provides an automatic restore operation that you can invoke by running: `clickhouse-backup restore <BACKUP NAME>`.
 
 For more informations please look at the [official documentation](https://github.com/AlexAkulov/clickhouse-backup).
