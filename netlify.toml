@@ -825,4 +825,9 @@
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"    
+    to = "/docs/user-guides/persons"
+
+[[redirects]]
+  from = "/next-steps/*"
+  to = "/next-steps"
+  status = 200
