@@ -69,4 +69,4 @@ The [clickhouse-backup](https://github.com/AlexAkulov/clickhouse-backup) tool he
 
 Once configured, the tool provides a variety of sub-commands for managing backups. Creating a backup is as easy as running: `clickhouse-backup create`.
 
-For more informations please look at the [official documentation](https://github.com/AlexAkulov/clickhouse-backup).
+For more information please look at the [official documentation](https://github.com/AlexAkulov/clickhouse-backup).
