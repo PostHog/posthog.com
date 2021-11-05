@@ -39,7 +39,7 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 ### Pull, don't push
 
-We believe customers will judge us first and foremost on our product. We won’t set ourselves up for long-term success if we push customers into using us. 
+We believe customers will judge us first and foremost on our product (our app, our website and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
