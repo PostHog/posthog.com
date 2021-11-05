@@ -54,7 +54,7 @@ This can vary a bit depending on your product, but in a general sense:
 
 Now that you have an overview of your lifecycle, you can now dig into ares which look problematic. In our graph we can see a big drop in active users on the 23 October. If you click on the graph of "Dormant users," we will show you the users who became dormant here:
 
-With the information from this graph in mind you may want to dig deeper to understand the following questions. Our [Retention](link to docs here) tool is better for answering this.
+With the information from this graph in mind, you may want to dig deeper to understand the following questions. Our [Retention](link to docs here) tool is better for answering this.
 - Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
 - Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
 
