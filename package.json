@@ -78,7 +78,7 @@
         "node-fetch": "^2.6.1",
         "postcss": "^8.3.5",
         "prism-react-renderer": "^1.2.0",
-        "prismjs": "^1.23.0",
+        "prismjs": "^1.25.0",
         "query-string": "^6.13.1",
         "rc-slider": "^9.7.2",
         "react": "^16.13.1",
