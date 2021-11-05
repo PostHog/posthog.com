@@ -1,27 +1,10 @@
 ---
-title: Kafka
+title: Resize disk
 sidebar: Docs
 showTitle: true
 ---
 
-Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
-
-At PostHog we mainly use it to stream events from our ingestion pipeline to ClickHouse.
-
-### Dictionary
-* `broker`: a cluster is built by one or more servers. The servers forming the storage layer are called brokers
-* `event`: an event records the fact that "something happened" in the world or in your business. It is also called record or message in the documentation. When you read or write data to Kafka, you do this in the form of events. Conceptually, an event has a key, value, timestamp, and optional metadata headers
-* `producers`: client applications that publish (write) events to Kafka
-* `consumer`: client application subscribed to (read and process) events from Kafka
-* `topic`: group of events
-* `partition`: topics are partitioned, meaning a topic is spread over a number of "buckets" located on different Kafka brokers
-* `replication`: to make your data fault-tolerant and highly-available, every topic can be replicated, so that there are always multiple brokers that have a copy of the data just in case things go wrong
-
-### Standard operations
-
-#### Resize data disk
-
-##### Requirements
+### Requirements
 You need to run a Kubernetes cluster with the _Volume Expansion_ feature enabled. This feature is supported on the majority of volume types since Kubernetes version >= 1.11 (see [docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion)).
 
 To verify if your storage class allows volume expansion you can run:
@@ -31,7 +14,7 @@ kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
 true
 ```
 
-##### How-to
+#### How-to
 
 1. List your pods
     ```shell
@@ -78,6 +61,3 @@ true
     Filesystem                                                                Size  Used Avail Use% Mounted on
     /dev/disk/by-id/scsi-0DO_Volume_pvc-97776a5e-9cdc-4fac-8dad-199f1728b857   20G   40M   19G   1% /bitnami/kafka
     ```
-
-### Useful links
-- [Official documentation](https://kafka.apache.org/documentation/)
