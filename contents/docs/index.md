@@ -18,9 +18,9 @@ We have seen multiple larger companies who cannot send their data to third-party
 
 PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third-parties.
 
-## Documentation structure
+## Getting started with PostHog
 
-### Deployment
+### 1. Deployment
 
 There are 2 ways of using PostHog:
 
@@ -35,9 +35,9 @@ Start using [PostHog Cloud for free](https://app.posthog.com).
 
 Check out our [deployment page](/docs/self-host/overview#deploy).
 
-### Capturing events with PostHog
+### 2. Capturing events with PostHog
 
-You can capture events and send data to PostHog in 3 different ways:
+[Events](/docs/user-guides/events) are the fundamental building block of the advanced analytics features of PostHog.  You can capture events and send data to PostHog in 3 different ways:
 
 **Snippet**
 
@@ -53,9 +53,9 @@ We provide [15+ libraries](/docs/integrate/overview) for various popular program
 
 You can use our [API](/docs/api/overview) to get data in and out of PostHog, making it suitable for any use case you have that is not met by our integrations. 
 
-### Tutorials
+### 3. Tutorials
 
-Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs. 
+After sending events into out platform, the [tutorials](/docs/tutorials) will help you learn how to use PostHog's many features with in-depth walkthroughs. 
 
 **Doing analytics with PostHog**
 
