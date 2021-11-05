@@ -36,7 +36,7 @@ const maintainerIcons = {
 
 export default function Integrations({
     data: {
-        allIntegrations: { integrations, maintainers },
+        allIntegration: { integrations, maintainers },
     },
 }) {
     const [filteredIntegrations, setFilteredIntegrations] = useState(null)
