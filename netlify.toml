@@ -817,11 +817,6 @@
     from = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
 
-# Manually Added: 2021-10-25
-[[redirects]]
-    from = "/docs/contribute/updating-documentation"
-    to = "/docs/contribute/contribute-to-website"
-
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
@@ -880,7 +875,7 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/contribute/updating-documentation"
-    to = "docs/contribute" 
+    to = "/docs/contribute" 
     
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -896,11 +891,6 @@
 [[redirects]]
     from = "/handbook/people/handbook/people/hiring-process/marketing-hiring"
     to = "/handbook/people/hiring-process/marketing-hiring" 
-    
-# Manually Added: 2021-11-04
-[[redirects]]
-    from = "/docs/api/overview"
-    to = "/docs/api" 
     
 # Manually Added: 2021-11-04
 [[redirects]]
