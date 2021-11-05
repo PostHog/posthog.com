@@ -956,3 +956,9 @@
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
+
+
+# Added: 2021-11-05
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka"
+    to = "/docs/self-host/runbook/kafka/resize-disk"
