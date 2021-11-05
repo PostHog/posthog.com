@@ -12,7 +12,7 @@ showTitle: true
 
 ### No sneaky shit
 
-Most of our customers are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronising to both the customer and the marketing people creating the content. 
+Our focus customers are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronising to both the customer and the marketing people creating the content. 
  
 We will never try to trick someone into using PostHog through spammy marketing tactics. That's a great way to boost vanity signup metrics in the short term before the customer quickly churns out.
  
