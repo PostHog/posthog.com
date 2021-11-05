@@ -41,7 +41,11 @@ export const InstallingPostHog = () => {
             <p>
                 There are multiple ways to run PostHog - it all depends on your stage of company, business goals or
                 security requirements. Not sure which is right for you?{' '}
-                <Link className="group inline-flex items-center">
+                <Link
+                    event="next steps - installing posthog: Compare plans and benefits"
+                    to="/pricing"
+                    className="group inline-flex items-center"
+                >
                     Compare plans and benefits <RightArrow className="w-4 h-4 bounce" />
                 </Link>
             </p>
@@ -51,10 +55,20 @@ export const InstallingPostHog = () => {
                     <h5>Self-host</h5>
                     <p>Maintain full control of customer data by hosting on your own infrastructure.</p>
 
-                    <CallToAction className="mb-2">View deployment instructions</CallToAction>
+                    <CallToAction
+                        to="/docs/self-host"
+                        event="next steps - installing posthog: View deployment instructions"
+                        className="mb-2"
+                    >
+                        View deployment instructions
+                    </CallToAction>
                     <p className="!text-[14px]">
                         Ready to upgrade?{' '}
-                        <Link className="group inline-flex items-center">
+                        <Link
+                            to="https://license.posthog.com/"
+                            event="next steps - installing posthog: Get a license key"
+                            className="group inline-flex items-center"
+                        >
                             Get a license key <RightArrow className="w-4 h-4 bounce" />
                         </Link>
                     </p>
@@ -63,14 +77,24 @@ export const InstallingPostHog = () => {
                 <li>
                     <h5>PostHog Cloud</h5>
                     <p>Create an account, install tracking code, and get started in minutes.</p>
-                    <CallToAction className="mb-2">Try PostHog Cloud - free</CallToAction>
+                    <CallToAction
+                        to="https://app.posthog.com/signup"
+                        event="next steps - installing posthog: Try PostHog Cloud - free"
+                        className="mb-2"
+                    >
+                        Try PostHog Cloud - free
+                    </CallToAction>
                     <Divider className="my-4" />
                 </li>
                 <li>
                     <h5>Hosting or deployment questions?</h5>
                     <p>
-                        Join our <Link>Slack</Link> to ask questions directly to the PostHog team - or search for
-                        similar questions from others in the community.
+                        Join our{' '}
+                        <Link to="/slack" event="next steps - installing posthog: Slack">
+                            Slack
+                        </Link>{' '}
+                        to ask questions directly to the PostHog team - or search for similar questions from others in
+                        the community.
                     </p>
                     <Divider className="my-8" />
                 </li>
@@ -94,7 +118,9 @@ export const PlansPricing = () => {
                     available.
                 </li>
             </ul>
-            <CallToAction>Compare plans & calculate pricing</CallToAction>
+            <CallToAction to="/pricing" event="next steps - Plans & pricing: Compare plans & calculate pricing">
+                Compare plans & calculate pricing
+            </CallToAction>
             <Divider className="my-8" />
         </>
     )
@@ -113,7 +139,9 @@ export const Customers = () => {
                     } = customer
                     return (
                         <li key={id}>
-                            <Link to={slug}>{title}</Link>
+                            <Link event={`next steps - How teams are using PostHog: ${title}`} to={slug}>
+                                {title}
+                            </Link>
                             <p className="text-[14px] text-gray-accent-dark">{toolsUsed.join(', ')}</p>
                         </li>
                     )
@@ -137,7 +165,9 @@ export const Tutorials = () => {
                     } = tutorial
                     return (
                         <li key={id}>
-                            <Link to={slug}>{title}</Link>
+                            <Link event={`next steps - Popular tutorials: ${title}`} to={slug}>
+                                {title}
+                            </Link>
                         </li>
                     )
                 })}
@@ -152,19 +182,32 @@ export const LearnMore = () => {
         <>
             <ul className="p-0 pl-4 m-0 space-y-2 list-outside">
                 <li>
-                    <Link to="/product">Explore the product</Link>
+                    <Link event="next steps - Learn more about PostHog: Explore the product" to="/product">
+                        Explore the product
+                    </Link>
                 </li>
                 <li>
-                    <Link to="/handbook/company/story">Read our story</Link>
+                    <Link event="next steps - Learn more about PostHog: Read our story" to="/handbook/company/story">
+                        Read our story
+                    </Link>
                 </li>
                 <li>
-                    <Link href="https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA">Visit our YouTube</Link>
+                    <Link
+                        event="next steps - Learn more about PostHog: Visit our YouTube"
+                        href="https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA"
+                    >
+                        Visit our YouTube
+                    </Link>
                 </li>
                 <li>
-                    <Link to="/slack">Join our Slack</Link>
+                    <Link event="next steps - Learn more about PostHog: Join our Slack" to="/slack">
+                        Join our Slack
+                    </Link>
                 </li>
                 <li>
-                    <Link to="/handbook/company/team">Meet the team</Link>
+                    <Link event="next steps - Learn more about PostHog: Meet the team" to="/handbook/company/team">
+                        Meet the team
+                    </Link>
                 </li>
             </ul>
             <Divider className="my-8" />
