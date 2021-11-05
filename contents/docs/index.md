@@ -57,17 +57,20 @@ You can use our [API](/docs/api/overview) to get data in and out of PostHog, mak
 
 After sending events into out platform, the [tutorials](/docs/tutorials) will help you learn how to use PostHog's many features with in-depth walkthroughs. 
 
-**Doing analytics with PostHog**
+**A quick-start overview of PostHog**
+- [Building an AARRR pirate funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
 
+**Deeper analytics with PostHog**
+
+- [Complete guide to event tracking](/docs/tutorials/actions)
+- [Analyzing user behavior with cohorts](/docs/tutorials/cohorts)
+- [Analyzing your conversion with funnels](/docs/tutorials/funnels)
+- [Measuring retention and tracking churn](/docs/tutorials/retention)
+- [Sales and revenue tracking](/docs/tutorials/revenue)
 - [How to safely roll out new features](/docs/tutorials/feature-flags)
 - [Visualizing user behavior with the PostHog toolbar](/docs/tutorials/toolbar)
-- [Analyzing your conversion with funnels](/docs/tutorials/funnels)
-- [Analyzing user behavior with cohorts](/docs/tutorials/cohorts)
-- [Measuring retention and tracking churn](/docs/tutorials/retention)
 - [Tracking single page apps](/docs/tutorials/spa)
-- [Complete guide to event tracking](/docs/tutorials/actions)
 - [Tracking key B2B product metrics](/docs/tutorials/b2b)
-- [Sales and revenue tracking](/docs/tutorials/revenue)
 - [Running surveys with no backend](/docs/tutorials/survey)
 
 **Integrating PostHog with other tools**
