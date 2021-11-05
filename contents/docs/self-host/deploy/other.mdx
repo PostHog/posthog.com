@@ -15,6 +15,13 @@ For all the other platforms, setup your Kubernetes cluster (see the documentatio
 
 <ClusterRequirementsSnippet />
 
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+>
+> * for PostgreSQL, take a look at [AWS Aurora](https://aws.amazon.com/rds/aurora/), [Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql), [DigitalOcean managed databases](https://www.digitalocean.com/products/managed-databases-postgresql/), [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
+>
+
 ## Installing the chart
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
