@@ -780,6 +780,10 @@
                     "url": "/docs/user-guides/sessions"
                 },
                 {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
+                },
+                {
                     "name": "Recordings",
                     "url": "/docs/user-guides/recordings"
                 },
