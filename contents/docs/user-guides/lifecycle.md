@@ -60,7 +60,7 @@ With the information from this graph in mind you may want to dig deeper to under
 
 ![image](https://user-images.githubusercontent.com/85295485/139206407-40bfa178-76d8-47a5-8482-fbf0f682c1d6.png)
 
-You can then click thourgh to look at these individual users behavior in the events or recordings tools 
+You can then click through to look at these individual users behavior in the events or recordings tools 
 
 ![image](https://user-images.githubusercontent.com/85295485/139206528-bbdce478-97d9-48ad-888d-3220b50e2b42.png)
 
