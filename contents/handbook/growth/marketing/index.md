@@ -6,24 +6,9 @@ showTitle: true
 
 ## We take a principled approach to marketing
 
-- No sneaky shit
 - Be opinionated
 - Pull, don’t push
-
-### No sneaky shit
-
-Our focus customers are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronising to both the customer and the marketing people creating the content. 
- 
-We will never try to trick someone into using PostHog through spammy marketing tactics. That's a great way to boost vanity signup metrics in the short term before the customer quickly churns out.
- 
-For these reasons, we:
- 
-- Don't use any analytics except our own. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier.
-- Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. People can see our entire codebase, after all!
-- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product.'?
-- Don't badmouth or make false claims about our competitors. We will compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
-- Don't bombard customers with 'deals', pop-ups and other dark patterns. If you don't like them, why do you think our customers will feel differently? 
-- Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led culture building products for other engineers. 
+- No sneaky shit
 
 ### Be opinionated
 
@@ -39,7 +24,7 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 ### Pull, don't push
 
-We believe customers will judge us first and foremost on our product (our app, our website and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+We believe customers will judge us first and foremost on our product (ie. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
@@ -54,6 +39,21 @@ Addressing a) is the responsibility of everyone at PostHog. The marketing team's
 - Making sure our comms are extremely high quality
 - Sharing our messages in the right places, where relevant customers can see them
 - Spending enough time and/or money in those places so that our messages get through
+
+### No sneaky shit
+
+Our focus customers are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronizing to both the customer and the marketing people creating the content. 
+ 
+We will never try to trick someone into using PostHog through spammy marketing tactics. That's a great way to boost vanity signup metrics in the short term before the customer quickly churns out.
+ 
+For these reasons, we:
+ 
+- Don't use any analytics except our own. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier.
+- Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. People can see our entire codebase, after all!
+- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product.'?
+- Don't badmouth or make false claims about our competitors. We will compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
+- Don't bombard customers with 'deals', pop-ups and other dark patterns. If you don't like them, why do you think our customers will feel differently? 
+- Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. 
 
 ## So how do these values become an actual strategy?
 
