@@ -19,7 +19,7 @@ We will never try to trick someone into using PostHog through spammy marketing t
 For these reasons, we:
  
 - Don't use any analytics except our own. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier.
-- Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. 
+- Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. People can see our entire codebase, after all!
 - Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product.'?
 - Don't badmouth or make false claims about our competitors. We will compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
 - Don't bombard customers with 'deals', pop-ups and other dark patterns. If you don't like them, why do you think our customers will feel differently? 
