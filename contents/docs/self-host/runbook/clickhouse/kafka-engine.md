@@ -18,4 +18,4 @@ kafka_plugin_log_entries
 kafka_session_recording_events
 ```
 
-Note: `SELECT` is not particularly useful for reading messages (except for debugging), because each message can be read only once.
+Note: `SELECT` is not particularly useful for reading messages (except for debugging), because each message can be read only once. **You will lose data if you manually read from this table, as you’ll artificially increment the internal offset ClickHouse uses to read from this table.**
