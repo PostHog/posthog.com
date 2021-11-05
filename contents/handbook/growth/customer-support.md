@@ -18,7 +18,6 @@ These are the ways in which customers can currently reach us, in order of popula
 
 - **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions
 - **Email** - a user may email hey@posthog.com with a specific support query
-- **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
 ### Tutorials and workshops
