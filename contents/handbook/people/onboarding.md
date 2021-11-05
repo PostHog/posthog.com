@@ -96,7 +96,6 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to, and flag any you think are missing
 *   [ ] Go through all of the security onboarding and background checks on [Drata](https://app.drata.com/) - you need to complete _all_ of the Drata onboarding steps
 *   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team)
-*   [ ] New joiner announcement: interview with Mo
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
 ## Onboarding buddy
