@@ -50,9 +50,16 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 ### Prioritizing requests
 
-1. Responding to and debugging issues for paying customers
-1. Responding to and debugging issues for community users
-1. Fixing issues, creating PRs
+1. Respond to and debug issues for _Focus_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
+2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
+3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
+4. Fix issues, create PRs
+
+We tag customers in Papercups according to these categories so you can easily filter them - you can view the tags in the right hand pane in the Papercups app:
+
+<img width="219" alt="Screenshot 2021-11-05 at 15 51 02" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png">
+
+At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them. 
 
 ### Escalating issues
 
