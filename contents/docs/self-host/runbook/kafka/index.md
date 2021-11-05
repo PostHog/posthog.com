@@ -6,7 +6,7 @@ showTitle: true
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
-At PostHog we mainly use it  to stream events from our ingestion pipeline to ClickHouse.
+At PostHog we mainly use it to stream events from our ingestion pipeline to ClickHouse.
 
 ### Dictionary
 * `broker`: a cluster is built by one or more servers. The servers forming the storage layer are called brokers
