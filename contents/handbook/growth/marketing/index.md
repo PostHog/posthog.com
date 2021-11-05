@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Everything starts with our values
+## We take a principled approach to marketing
 
 - No sneaky shit
 - Be opinionated
