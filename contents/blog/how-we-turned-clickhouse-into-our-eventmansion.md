@@ -77,7 +77,7 @@ So, naturally we’re thinking about how to do even more with ClickHouse and bui
 
 One of the things we’re interested in exploring, for example, is the possibility of building functions at the source instead of writing queries for the functionality. Our hope is that adding these functions to a master code base will be more efficient and we won’t need to rely on SQL to do so much heavy lifting. We’re looking to [hire a C++ Engineer](https://posthog.com/careers) who can help us achieve this. 
 
-We’re also currently experimenting with MaterializedPostgresSQL engine as a way to consume the logical replication log coming from Postgres and materializes it in a mergetree table on ClickHouse. Data drift is a huge pain point for any near real time data product and we’re hopeful we can find a way to guarantee to some extent the quality of data in ClickHouse compared to our source of truth in Postgres. 
+We’re also currently experimenting with [MaterializedPostgresSQL engine](https://clickhouse.com/docs/en/engines/database-engines/materialized-postgresql/) as a way to consume the logical replication log coming from Postgres and materializes it in a mergetree table on ClickHouse. Data drift is a huge pain point for any near real-time data product and we’re hopeful we can find a way to guarantee to some extent the quality of data in ClickHouse compared to our source of truth in Postgres. 
 
 But that may be a topic for a future blogpost...
 
