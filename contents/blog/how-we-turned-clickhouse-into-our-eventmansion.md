@@ -10,7 +10,7 @@ featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
 ---
 
-Recently, PostHog was invited to speak at OSA Con 2021, an open source analytics conference organised by Altinity. It was a fantastic opportunity to talk to the community, alongside other engineers and leaders from projects such as ClickHouse, Airflow, Superset & Preset, Pinot, Druid, Cube.js, and Presto. 
+Recently, PostHog was invited to speak at [OSA Con 2021](https://altinity.com/osa-con-2021/), an open source analytics conference organised by Altinity. It was a fantastic opportunity to talk to the community, alongside other engineers and leaders from projects such as [ClickHouse](https://clickhouse.com/), [Airflow](https://airflow.apache.org/), [Superset](https://superset.apache.org/) & [Preset](https://preset.io/), [Pinot](https://pinot.apache.org/), [Druid](https://druid.apache.org/), [Cube.js](https://cube.dev/), and [Presto](https://prestodb.io/). 
 
 Topics ranged from deep dives into reverse ETL processes to discussions about broad trends in the data engineering sector. At PostHog, we chose to talk about our experience [migrating PostHog from Postgres to ClickHouse](/blog/clickhouse-announcement) — why we did it, how it went and what impact it had. ClickHouse is a technology we’re heavily invested in, so we wanted to share some points from our presentation here too. 
 
@@ -47,13 +47,13 @@ Eventually, we decided we knew enough to proceed and so we spun our test cluster
 
 ## Turning ClickHouse into our EventMansion
 
-It wasn’t all smooth sailing. Mutations in particular tripped us up, as we initially used them a lot instead of taking the time to model the data perfectly for ClickHouse. The documentation suggests not running more than one or two mutations an hour. We were running several hundred per minute. 
+It wasn’t all smooth sailing. [Mutations](https://clickhouse.com/docs/en/sql-reference/statements/alter/#mutations), in particular, tripped us up, as we initially used them a lot instead of taking the time to model the data perfectly for ClickHouse. The documentation suggests not running more than one or two mutations an hour. We were running several hundred per minute. 
 
 Our advice? Don’t do that. It will get you so far, but it’s not a sustainable approach and eventually lead to us experiencing an outage. 
 
 The reason for this is that, as you are mutating the data, ClickHouse essentially waits until it merges the mutated table parts in a single, larger table part. The more mutations you run, the further behind ClickHouse gets and the slower queries can get. This process is very good for small numbers of large files, but not for large numbers of small files. It took us a long time to figure this out. 
 
-We also had some issues with ClickHouse’s indexes. If you know exactly what data you need to pull and can specify the exact key and row then that can end up slower than other requests because ClickHouse builds sparse indexes which aren’t a true index of the entire dataset. 
+We also had some issues with [ClickHouse’s indexes](https://clickhouse.com/docs/en/sql-reference/statements/alter/index/). If you know exactly what data you need to pull and can specify the exact key and row then that can end up slower than other requests because ClickHouse builds sparse indexes which aren’t a true index of the entire dataset. 
 
 However, beyond this the experience of migrating to ClickHouse was incredibly positive — especially if you compare to the way we solved our original priorities:
 
