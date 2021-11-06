@@ -104,4 +104,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/karlakselpuulmann/
     }
+  - {
+      handle: james-greenhill,
+      name: James Greenhill,
+      role: Software Engineer,
+      image: https://posthog.imgix.net/static/JamesG-e034bf44489fe64be854099aff5fdb7e.png?w=90,
+      link_type: twitter,
+      link_url: https://twitter.com/fuziontech
+    }
 ---
