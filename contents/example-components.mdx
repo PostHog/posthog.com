@@ -1,0 +1,93 @@
+---
+title: Example Components
+showTitle: false
+showSidebar: true
+width: lg
+noindex: true
+---
+
+import Table from './_includes/example-table.mdx'
+
+<Hero
+    title="Self-hosted alternative to Google Analytics"
+    subtitle="PostHog’s self-hosted analytics platform helps teams better understand how their products are being used. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure."
+    ctas={[
+        <CallToAction href="/signup">Get started - free</CallToAction>,
+        <CallToAction href="/book-a-demo" type="outline">
+            Schedule a demo
+        </CallToAction>,
+    ]}
+/>
+
+<Section title="Why is it important to self-host your analytics?" titleSize="sm" cols={3}>
+    <div>
+        <h4>Privacy</h4>
+        <p>
+            Keeping data on your existing infrastructure means you never have to send user data to third parties,
+            minimising the risk of breaches.
+        </p>
+    </div>
+    <div>
+        <h4>Control</h4>
+        <p>
+            Self-hosting means you control everything, from when to deploy updates to where the servers are physically
+            located.
+        </p>
+    </div>
+    <div>
+        <h4>Security</h4>
+        <p>
+            With self-hosting there’s no need for lengthy compliance or security audits. Just use your existing
+            infrastructure instead.
+        </p>
+    </div>
+</Section>
+
+<Section title="Everything product-led teams need in one place" titleSize="sm" size="md">
+    <Table />
+</Section>
+
+<Section title="Built for product-led teams" titleSize="md" cols={3}>
+    <p>
+        <strong>Track events easily and retroactively,</strong> right back to the moment PostHog was deployed.
+    </p>
+    <p>
+        Monitor any product metric and <strong>group users into cohorts</strong> based on any variable.
+    </p>
+    <p>
+        <strong>Annotate data and mark new releases,</strong> so you can understand product impact later.
+    </p>
+</Section>
+
+<Section title="Test updates safely with feature flags" titleSize="md">
+    <FeatureSnapshot
+        features={[
+            <>
+                <strong>Roll-out new updates in stages,</strong> so you can effortlessly roll-back if an issue arises.
+            </>,
+            <>
+                <strong>Toggle features for specific cohorts</strong> or beta-testing groups before a full release.
+            </>,
+            <>
+                <strong>Run multivariate A/B tests</strong> to gather insights and launch new features successfully.
+            </>,
+        ]}
+    />
+</Section>
+
+<Section title="Session recording included as standard" titleSize="md">
+    <FeatureSnapshot
+        reverse
+        features={[
+            <>
+                <strong>Replay sessions</strong> to see every user’s actions without infringing on their privacy.
+            </>,
+            <>
+                <strong>Diagnose bugs, rage-clicks and more</strong> by seeing exactly how products are used.
+            </>,
+            <>
+                Use heatmaps to trace every click and <strong>visualize where users get lost.</strong>
+            </>,
+        ]}
+    />
+</Section>

@@ -136,6 +136,8 @@ Body:
 
 You can send multiple events in one go with the Batch API.
 
+There is no limit on the number of events you can send in a batch, but the entire request body must be less than 20MB by default (see [API overview](/docs/api/overview)).
+
 > **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```bash

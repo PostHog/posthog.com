@@ -317,6 +317,10 @@
                 {
                     "name": "Scale features prioritization",
                     "url": "/handbook/product/scale-features-prioritization"
+                },
+                {
+                    "name": "Paid Features",
+                    "url": "/handbook/product/paid-features"
                 }
             ]
         },
@@ -439,6 +443,10 @@
                     "url": "/docs/self-host/postgres-vs-clickhouse"
                 },
                 {
+                    "name": "Migrate from Postgres to ClickHouse",
+                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
+                },
+                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
@@ -508,15 +516,35 @@
                 },
                 {
                     "name": "Runbook",
-                    "url": "",
+                    "url": "/docs/self-host/runbook",
                     "children": [
                         {
-                            "name": "Overview",
-                            "url": "/docs/self-host/runbook"
+                            "name": "ClickHouse",
+                            "url": "/docs/self-host/runbook/clickhouse",
+                            "children": [
+                                {
+                                    "name": "Backup",
+                                    "url": "/docs/self-host/runbook/clickhouse/backup"
+                                },
+                                {
+                                    "name": "Kafka Engine",
+                                    "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
+                                },
+                                {
+                                    "name": "Restore",
+                                    "url": "/docs/self-host/runbook/clickhouse/restore"
+                                }
+                            ]
                         },
                         {
                             "name": "Kafka",
-                            "url": "/docs/self-host/runbook/kafka"
+                            "url": "/docs/self-host/runbook/kafka",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -559,6 +587,10 @@
                 {
                     "name": "User properties",
                     "url": "/docs/integrate/user-properties"
+                },
+                {
+                    "name": "Badge",
+                    "url": "/docs/integrate/badge"
                 },
                 {
                     "name": "GDPR guidance",
@@ -768,6 +800,10 @@
                     "url": "/docs/user-guides/sessions"
                 },
                 {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
+                },
+                {
                     "name": "Recordings",
                     "url": "/docs/user-guides/recordings"
                 },
@@ -850,7 +886,7 @@
                     "url": "/docs/tutorials/funnels"
                 },
                 {
-                    "name": "Funnel conversation with Next.js and Supabase",
+                    "name": "Funnel conversion with Next.js and Supabase",
                     "url": "/docs/tutorials/nextjs-supabase-signup-funnel"
                 },
                 {
@@ -980,6 +1016,10 @@
                 {
                     "name": "Contribute to docs, handbook & blog",
                     "url": "/docs/contribute/contribute-to-website"
+                },
+                {
+                    "name": "Coding conventions",
+                    "url": "/docs/contribute/coding-conventions"
                 }
             ]
         }

@@ -11,6 +11,9 @@ import { findAuthor } from 'lib/utils'
 import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import Link from 'components/Link'
+
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export default function BlogPost({ data, pageContext }) {
     const { postData, authorsData } = data
@@ -35,6 +38,7 @@ export default function BlogPost({ data, pageContext }) {
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
+        a: A,
         ...shortcodes,
     }
     const { categories } = pageContext

@@ -15,7 +15,7 @@ Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity)
 
 The following page outline how we hire here at PostHog. 
 
-> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [marketing](handbook/people/hiring-process/marketing-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
+> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [marketing](/handbook/people/hiring-process/marketing-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
 
 All of our recruiting is done in-house, so we do not work with external agencies for any of our roles currently. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
@@ -75,18 +75,26 @@ Once the role is online, the People team will share the details with the team, t
 
 #### Referrals
 
-Every time we open a new role, we will share the details and ideal profile with the team during standup.
+Every time we open a new role, we will share the details and ideal profile with the team during All Hands on Monday.
 
-If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
+**Personal referral** 
 
-**What counts as a referral?** 
+If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
 
 Someone you have a personal or professional relationship with to confidently say they align with our values and fit our requirements. Please make sure the candidate has given their consent before putting them forward!
+
+**Social referral** 
+
+The [Workable referral page](https://referrals.workable.com/posthog/jobs/) makes it super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
+
+If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
+
+The referral bonus for social referrals is $500, and we again match any amount you choose to give to charity.  
 
 **What's the process?**
 
 *   If there is an ongoing conversation, please ping Eltje into the email thread with the referred candidate, she will take it over from there.
-*   Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
+*   Otherwise, please upload the profile to the [Workable referral page](https://referrals.workable.com/posthog/jobs/). 
 *   If they have applied themselves already, let Eltje know within 48 hours of them applying.
 
 **Referral payouts** 

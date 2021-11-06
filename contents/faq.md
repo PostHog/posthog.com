@@ -35,7 +35,7 @@ We track user behavior across your website and applications.
 	* [Cohorts](/docs/user-guides/cohorts)
 	* [Retention](/docs/user-guides/retention)
 	* [Paths](/docs/user-guides/paths)
-	* [User histories](/docs/user-guides/users)
+	* [Persons histories](/docs/user-guides/persons)
 * Data visualization and product experimentation tools, such as:
 	* [Heatmaps](/docs/user-guides/toolbar)
 	* [Feature Flags](/docs/user-guides/feature-flags)
