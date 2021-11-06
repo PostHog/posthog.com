@@ -826,3 +826,8 @@
 [[redirects]]
     from = "/docs/user-guides/users"
     to = "/docs/user-guides/persons"    
+
+# Added: 2021-11-06
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka/resize-disk"
+    to = "/docs/self-host/runbook/kafka"
