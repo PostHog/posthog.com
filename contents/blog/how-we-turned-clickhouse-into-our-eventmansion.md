@@ -1,11 +1,11 @@
 ---
-date: 2021-11-08
+date: 2021-11-06
 title: How we turned ClickHouse into our event mansion
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-Author: joe-martin
+author: joe-martin
 featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
 ---
