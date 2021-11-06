@@ -6,6 +6,7 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React from 'react'
 import { submenu } from '../classes'
 import Founders from '../components/Founders'
+import Jobs from '../components/Jobs'
 import Team from '../components/Team'
 import { LinkedIn, Slack, Twitter, YouTube } from './Icons'
 
@@ -22,6 +23,7 @@ const footerLink = cntl`
 const components = {
     Team,
     Founders,
+    Jobs,
 }
 
 const Social = ({ className = '' }) => (
