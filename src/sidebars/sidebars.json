@@ -516,15 +516,35 @@
                 },
                 {
                     "name": "Runbook",
-                    "url": "",
+                    "url": "/docs/self-host/runbook",
                     "children": [
                         {
-                            "name": "Overview",
-                            "url": "/docs/self-host/runbook"
+                            "name": "ClickHouse",
+                            "url": "/docs/self-host/runbook/clickhouse",
+                            "children": [
+                                {
+                                    "name": "Backup",
+                                    "url": "/docs/self-host/runbook/clickhouse/backup"
+                                },
+                                {
+                                    "name": "Kafka Engine",
+                                    "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
+                                },
+                                {
+                                    "name": "Restore",
+                                    "url": "/docs/self-host/runbook/clickhouse/restore"
+                                }
+                            ]
                         },
                         {
                             "name": "Kafka",
-                            "url": "/docs/self-host/runbook/kafka"
+                            "url": "/docs/self-host/runbook/kafka",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -778,6 +798,10 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
                 },
                 {
                     "name": "Recordings",

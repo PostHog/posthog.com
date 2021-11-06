@@ -16,6 +16,13 @@ First, we need to set up a Kubernetes cluster (see the official GCP [documentati
 
 <ClusterRequirementsSnippet />
 
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+>
+> * for PostgreSQL, take a look at [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
+>
+
 ## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
