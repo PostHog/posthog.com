@@ -10,26 +10,26 @@ featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
 ---
 
-Recently, PostHog was invited to speak at OSA Con 2021, an open source analytics conference organised by Altinity. It was a fantastic opportunity to talk to the community, alongside other engineers and leaders from companies such as eBay, Facebook and Rudderstack. 
+Recently, PostHog was invited to speak at OSA Con 2021, an open source analytics conference organised by Altinity. It was a fantastic opportunity to talk to the community, alongside other engineers and leaders from projects such as ClickHouse, Airflow, Superset & Preset, Pinot, Druid, Cube.js, and Presto. 
 
-Topics ranged from deep dives into reverse ETL processes to discussions about broad trends in the data engineering sector. At PostHog, we chose to talk about our experience [migrating PostHog from Postgres to ClickHouse](https://posthog.com/blog/clickhouse-announcement) — why we did it, how it went and what impact it had. ClickHouse is a technology we’re heavily invested in, so we wanted to share some points from our presentation here too. 
+Topics ranged from deep dives into reverse ETL processes to discussions about broad trends in the data engineering sector. At PostHog, we chose to talk about our experience [migrating PostHog from Postgres to ClickHouse](/blog/clickhouse-announcement) — why we did it, how it went and what impact it had. ClickHouse is a technology we’re heavily invested in, so we wanted to share some points from our presentation here too. 
 
 ## The night before ClickHouse
 
-The original version of PostHog ran on Postgres. In fact, the _very_ first version was an MVP created by our co-founder, Tim Glaser, over the course of [four intense weeks at YCombinator](https://posthog.com/blog/inflated-risk-seems-riskier). 
+The original version of PostHog ran on Postgres. In fact, the _very_ first version was an MVP created by our co-founder, Tim Glaser, over the course of [four intense weeks at YCombinator](/blog/inflated-risk-seems-riskier). 
 
-These early versions were straightforward web apps which relied entirely on Django ORM for queries and ran on Postgres because of its capacity to handle relational data. They had easy, one-click deployments set up via Heroku. 
+These early revisions were straightforward web apps which relied entirely on Django ORM for queries and ran on Postgres because of its capacity to handle relational data. They had easy, one-click deployments set up via Heroku. 
 
-This approach was great for getting early traction, but we very quickly started to push Heroku Postgres to the absolute limit. As more teams adopted PostHog and as those teams ingested more events, our performance started to decline. The more users we had and the more they used us, they worse their experience got. 
+This approach was great for getting early traction, but we very quickly started to push Heroku Postgres to the absolute limit. As more teams adopted PostHog and as those teams ingested more events, our performance started to decline. The more users we had and the more they used us, the worse their experience got. 
 
 This is what spurred us to consider a new database. We needed a more scalable solution and it needed to be one which fit with both the characteristics of our product — that it’s open-source and can be self-hosted — and the needs of our users — that it can offer real-time results and users can define and filter on their own event properties. 
 
 
 ## Choosing ClickHouse
 
-Faced with this need, we started investigating replacements for Postgres. We looked at a wide range of OLAP solutions, including Pinot, Presto, Druid, TimescaleDB, CitrusDB and ClickHouse. Some of our team had used these tools before at other companies, such as Uber where Pinot and Presto are both used extensively. 
+Faced with this need, we started investigating replacements for Postgres. We looked at a wide range of OLAP solutions, including [Pinot](https://pinot.apache.org/), [Presto](https://prestodb.io/), [Druid](https://druid.apache.org/), [TimescaleDB](https://www.timescale.com/), CitrusDB, and ClickHouse. Some of our team had used these tools before at other companies, such as Uber where Pinot and Presto are both used extensively. 
 
-We assessed each tool we looked at on three main factors:
+While assessing each tool, we looked at on three main factors:
 
 - *Speed:* Our users want results in real-time, so our new database needed to scale really well and give fast results. Ideally it wouldn’t be too expensive either.
 - *Complexity:* PostHog users can self-host and install our product themselves, so we didn’t want it to be too complicated for users to manage or deploy. We didn’t want users to have to install an entire Hadoop stack, for example.
@@ -43,7 +43,7 @@ ClickHouse repeatedly performed an order of magnitude better than other tools we
 - *Process from disk:* Some OLAP solutions, like Presto, require data to live in memory. That’s fast, but you need to have a _lot_ of memory for big datasets. ClickHouse processes from disk, which is better for smaller instances too. 
 - *Real-time data updates:* ClickHouse basically processes data as it arrives, so there’s no need to pre-aggregate data. It’s faster for us, and our users.
 
-Eventually, we decided we knew enough to proceed and so we spun our test cluster out into an actual production cluster. It’s just part of how [we like to bias for speed](https://posthog.com/careers). 
+Eventually, we decided we knew enough to proceed and so we spun our test cluster out into an actual production cluster. It’s just part of how [we like to bias for speed](/careers). 
 
 ## Turning ClickHouse into our EventMansion
 
@@ -51,33 +51,33 @@ It wasn’t all smooth sailing. Mutations in particular tripped us up, as we ini
 
 Our advice? Don’t do that. It will get you so far, but it’s not a sustainable approach and eventually lead to us experiencing an outage. 
 
-The reason for this is that, as you are mutating the data, ClickHouse essentially waits until it merge the mutated table parts in a single, larger table part. The more mutations you run, the further behind ClickHouse gets and the slower queries can get. This process is essentially very good for small numbers of large files, but not for large numbers of small files. It took us a long time to figure this out. 
+The reason for this is that, as you are mutating the data, ClickHouse essentially waits until it merges the mutated table parts in a single, larger table part. The more mutations you run, the further behind ClickHouse gets and the slower queries can get. This process is very good for small numbers of large files, but not for large numbers of small files. It took us a long time to figure this out. 
 
 We also had some issues with ClickHouse’s indexes. If you know exactly what data you need to pull and can specify the exact key and row then that can end up slower than other requests because ClickHouse builds sparse indexes which aren’t a true index of the entire dataset. 
 
 However, beyond this the experience of migrating to ClickHouse was incredibly positive — especially if you compare to the way we solved our original priorities:
 
 - *Real-time results*: Our users want PostHog to stay as fast as it was in the beginning. ClickHouse’s performance improvements were such that, with a little cleverness in the way we architect, we’re still able to provide answers in real-time.
-- *Future-proofing:* We need to constantly grow our feature set. ClickHouse SQL was developed to resemble Postgres and MySQL syntax, which means we’ve been able to continue adding new features without ClickHouse becoming a bottleneck.
-- *Filter on user-defined properties:* We leverage ClickHouse’s JSON deserialization functionality and features such as [materialized columns](https://posthog.com/blog/clickhouse-materialized-columns) to provide this, albeit at the cost of some CPU overhead.
+- *Future-proofing:* We need to constantly grow our feature set. [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference/) was developed to resemble Postgres and MySQL syntax, which means we’ve been able to continue adding new features without ClickHouse becoming a bottleneck.
+- *Filter on user-defined properties:* We leverage ClickHouse’s JSON deserialization functionality and features such as [materialized columns](/blog/clickhouse-materialized-columns) to provide this, albeit at the cost of some CPU overhead.
 
 ## Making the switch
 
-Normally, the process of switching to a new database model could be quite tricky. Luckily however, we’d just created feature flags within PostHog and were able to leverage this when switching. 
+Normally, the process of switching to a new database model could be quite tricky. Luckily, however, we’d just created [feature flags](/docs/user-guides/feature-flags) within PostHog and were able to leverage this when switching. 
 
-First, we deployed ClickHouse in parallel to Postgres and begane ingesting data simultaneously into both. We then put all of our features and internal tools behind a feature flag in PostHog, reimplemented our analytic queries one by one and then used the feature flags to switch over. 
+First, we deployed ClickHouse in parallel to Postgres and began ingesting data simultaneously into both. We then put all of our features and internal tools behind a feature flag in PostHog, reimplemented our analytic queries one by one and then used the feature flags to switch over. 
 
-Once everything was migrated we were able to simply stop storing data on Postgres while our users began deploying PostHog through our Helm Chart, which we use because of the amazing [ClickHouse-Operator made by Altinity](https://altinity.com/kubernetes-operator/). Easy. 
+Once everything was migrated we were able to simply stop storing data on Postgres while our users began deploying PostHog through our [Helm Chart](https://github.com/PostHog/charts-clickhouse), which we use because of the amazing [ClickHouse-Operator made by Altinity](https://altinity.com/kubernetes-operator/). Easy. 
 
 ## The future of ClickHouse on PostHog
 
-It’s fair to say that we bet the farm on ClickHouse, but it’s definitely turned out to be a good bet so far. ClickHouse has recently [raised a significant amount of funding](https://uk.finance.yahoo.com/news/clickhouse-raises-250m-series-b-140000178.html) to secure its long-term future and accelerate its product development, but more importantly it’s created a better experience for PostHog users. 
+It’s fair to say that we bet the farm on ClickHouse, but it’s definitely turned out to be a good bet so far. ClickHouse has recently [raised a significant amount of funding](https://clickhouse.com/blog/en/2021/clickhouse-raises-250m-series-b/) to secure its long-term future and accelerate its product development, but more importantly, it’s created a better experience for PostHog users. 
 
 So, naturally we’re thinking about how to do even more with ClickHouse and build deeper connections with the technology. 
 
 One of the things we’re interested in exploring, for example, is the possibility of building functions at the source instead of writing queries for the functionality. Our hope is that adding these functions to a master code base will be more efficient and we won’t need to rely on SQL to do so much heavy lifting. We’re looking to [hire a C++ Engineer](https://posthog.com/careers) who can help us achieve this. 
 
-We’re also currently experimenting with MaterializedPostgresSQL engine as a way to consume the logical representation log coming from Postgres and materializes it in a mergetree table on ClickHouse. Data drift is a huge pain point for any near-data product and we’re hopeful we can find a way to guarantee to some extent the quality of data in ClickHouse compared to our source of truth in Postgres. 
+We’re also currently experimenting with MaterializedPostgresSQL engine as a way to consume the logical replication log coming from Postgres and materializes it in a mergetree table on ClickHouse. Data drift is a huge pain point for any near real time data product and we’re hopeful we can find a way to guarantee to some extent the quality of data in ClickHouse compared to our source of truth in Postgres. 
 
 But that may be a topic for a future blogpost...
 
