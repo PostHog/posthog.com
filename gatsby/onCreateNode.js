@@ -30,7 +30,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
                     const imageUrl = author && author.avatar_url
-                    let fileNode =
+                    const fileNode =
                         imageUrl &&
                         (await createRemoteFileNode({
                             url: imageUrl,
@@ -58,7 +58,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             },
         }).then((res) => res.json())
 
-        let fileNode =
+        const markdown =
             download_url &&
             (await createRemoteFileNode({
                 url: download_url,
@@ -68,8 +68,25 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 cache,
                 store,
             }))
-        if (fileNode) {
-            node.markdown___NODE = fileNode.id
+        if (markdown) {
+            node.markdown___NODE = markdown.id
+        }
+        const { default_branch } = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+            },
+        }).then((res) => res.json())
+        const imageURL = `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/logo.png`
+        const image = await createRemoteFileNode({
+            url: imageURL,
+            parentNodeId: node.id,
+            createNode,
+            createNodeId,
+            cache,
+            store,
+        })
+        if (image) {
+            node.logo___NODE = image && image.id
         }
     }
 }

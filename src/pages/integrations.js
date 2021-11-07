@@ -7,6 +7,7 @@ import Layout from 'components/Layout'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
 import { motion } from 'framer-motion'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 
 const logos = {
@@ -131,7 +132,8 @@ const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) 
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
             >
                 {(filteredData || data).map((integration) => {
-                    const { id, name, description, url, Maintainers, verified } = integration
+                    const { id, name, description, url, Maintainers, verified, logo } = integration
+
                     const Logo = logos[name]
                     const MaintainerIcon = maintainerIcons[Maintainers]
                     return (
@@ -147,12 +149,17 @@ const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) 
                                 url={url}
                                 className="text-primary hover:text-primary p-6 relative block w-full h-full"
                             >
-                                <h3 className="flex items-center">
-                                    {Logo && (
-                                        <span>
-                                            <Logo className="mr-2" />
-                                        </span>
+                                <h3 className="flex items-center text-xl">
+                                    {logo ? (
+                                        <GatsbyImage className="w-7 mr-2" image={getImage(logo)} />
+                                    ) : (
+                                        Logo && (
+                                            <span>
+                                                <Logo className="mr-2" />
+                                            </span>
+                                        )
                                     )}
+
                                     <span>{name}</span>
                                 </h3>
                                 <p>{description}</p>
@@ -231,6 +238,11 @@ export const query = graphql`
                 url
                 Maintainers: maintainer
                 verified
+                logo {
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
             }
         }
     }
