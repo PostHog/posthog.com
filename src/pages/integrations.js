@@ -2,7 +2,7 @@ import Card from 'components/Card'
 import Checkbox from 'components/Checkbox'
 import Chip from 'components/Chip'
 import { heading, section } from 'components/Home/classes'
-import { Check, Segment, Sentry, Zapier } from 'components/Icons/Icons'
+import { Segment, Sentry, Zapier } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
@@ -157,11 +157,6 @@ const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) 
                                 </h3>
                                 <p>{description}</p>
                                 <span className="absolute right-3 top-3 flex space-x-1">
-                                    {verified && (
-                                        <span title="Verified">
-                                            <Check className="text-[green] h-5 w-5" />
-                                        </span>
-                                    )}
                                     {MaintainerIcon && MaintainerIcon}
                                 </span>
                             </Card>
