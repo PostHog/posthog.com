@@ -5,16 +5,19 @@ export default function Checkbox({
     value,
     className,
     onChange,
+    checked,
     ...other
 }: {
     value: string
     className: string
     onChange: () => void
+    checked: boolean
 }): JSX.Element {
     return (
         <div {...other} className={`relative flex items-center space-x-2 text-base font-semibold ${className}`}>
             <span>
                 <input
+                    checked={checked}
                     type="checkbox"
                     onChange={onChange}
                     value={value}

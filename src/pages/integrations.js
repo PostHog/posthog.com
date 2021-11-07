@@ -1,5 +1,6 @@
 import Card from 'components/Card'
 import Checkbox from 'components/Checkbox'
+import Chip from 'components/Chip'
 import { heading, section } from 'components/Home/classes'
 import { Check, Segment, Sentry, Zapier } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -34,18 +35,13 @@ const maintainerIcons = {
     ),
 }
 
-export default function Integrations({
-    data: {
-        allIntegration: { integrations, maintainers },
-    },
-}) {
-    const [filteredIntegrations, setFilteredIntegrations] = useState(null)
-    const [filters, setFilters] = useState({
-        maintainer: [],
-    })
-
-    const handleChange = (e, filter) => {
-        const { value, checked } = e.target
+const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) => {
+    const initialFilters = (filterableData) =>
+        Object.fromEntries(Object.entries(filterableData).map(([key]) => [key, []]))
+    const [filteredData, setFilteredData] = useState(null)
+    const [filters, setFilters] = useState(initialFilters(filterableData))
+    const handleChange = (e, filter, value) => {
+        const { checked } = e.target
         let newFilters = { ...filters }
         if (!checked) {
             newFilters[filter].splice(newFilters[filter].indexOf(value), 1)
@@ -56,16 +52,144 @@ export default function Integrations({
     }
 
     useEffect(() => {
-        const filtered = integrations.filter((integration) => {
+        const filtered = data.filter((item) => {
             return Object.keys(filters).every((key) => {
-                return filters[key].some((filterBy) => {
-                    return integration[key] === filterBy
-                })
+                return (
+                    filters[key].length <= 0 ||
+                    filters[key].some((filterBy) => {
+                        return item[key] === filterBy
+                    })
+                )
             })
         })
-        setFilteredIntegrations(filtered.length <= 0 ? null : filtered)
+        setFilteredData(filtered)
     }, [filters])
 
+    useEffect(() => {
+        setFilteredData(null)
+        setFilters(initialFilters(filterableData))
+    }, [filterableData])
+
+    return (
+        <div className={section('flex space-y-12 md:space-y-0 md:space-x-4 flex-col md:flex-row items-start relative')}>
+            <aside className="w-[300px] md:sticky top-4">
+                <ul className="list-none p-0 m-0 flex flex-col space-y-6">
+                    <li>
+                        <h5 className="border-b border-dashed border-gray-accent-light inline-block">Type</h5>
+                        <ul className="list-none p-0 m-0 flex mt-2 space-x-2">
+                            <li>
+                                <Chip onClick={() => setDataType('plugins')} active={dataType === 'plugins'}>
+                                    Plugin
+                                </Chip>
+                            </li>
+                            <li>
+                                <Chip onClick={() => setDataType('integrations')} active={dataType === 'integrations'}>
+                                    Integration
+                                </Chip>
+                            </li>
+                        </ul>
+                    </li>
+                    {Object.keys(filterableData).map((filter) => {
+                        return (
+                            <li key={filter}>
+                                <h5 className="border-b border-dashed border-gray-accent-light inline-block">
+                                    {filter}
+                                </h5>
+                                <ul className="list-none p-0 m-0 flex flex-col space-y-2 mt-2">
+                                    {filterableData[filter].map(({ type }) => {
+                                        return (
+                                            <li
+                                                key={type}
+                                                className="flex items-center space-x-2 text-base font-semibold"
+                                            >
+                                                <Checkbox
+                                                    checked={filters[filter]?.includes(type)}
+                                                    value={type.replace('_', ' ')}
+                                                    onChange={(e) => handleChange(e, filter, type)}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </aside>
+            <motion.ul
+                initial="hidden"
+                animate="show"
+                variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.05,
+                        },
+                    },
+                }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
+            >
+                {(filteredData || data).map((integration) => {
+                    const { id, name, description, url, maintainer, verified } = integration
+                    const Logo = logos[name]
+                    const MaintainerIcon = maintainerIcons[maintainer]
+                    return (
+                        <motion.li
+                            className="list-none"
+                            variants={{
+                                hidden: { translateY: '-20%', opacity: 0 },
+                                show: { translateY: 0, opacity: 1 },
+                            }}
+                            key={id}
+                        >
+                            <Card
+                                url={url}
+                                className="text-primary hover:text-primary p-6 relative block w-full h-full"
+                            >
+                                <h3 className="flex items-center">
+                                    {Logo && (
+                                        <span>
+                                            <Logo className="mr-2" />
+                                        </span>
+                                    )}
+                                    <span>{name}</span>
+                                </h3>
+                                <p>{description}</p>
+                                <span className="absolute right-3 top-3 flex space-x-1">
+                                    {verified && (
+                                        <span title="Verified">
+                                            <Check className="text-[green] h-5 w-5" />
+                                        </span>
+                                    )}
+                                    {MaintainerIcon && MaintainerIcon}
+                                </span>
+                            </Card>
+                        </motion.li>
+                    )
+                })}
+            </motion.ul>
+        </div>
+    )
+}
+
+export default function Integrations({ data: { allIntegration, allPlugin } }) {
+    const data = {
+        plugins: {
+            data: allPlugin.plugins,
+            filterableData: {
+                Maintainers: allPlugin.maintainers,
+                Categories: allPlugin.types,
+            },
+        },
+        integrations: {
+            data: allIntegration.integrations,
+            filterableData: {
+                Maintainers: allIntegration.maintainers,
+            },
+        },
+    }
+    const [dataType, setDataType] = useState('plugins')
     return (
         <Layout>
             <SEO title="Integrate PostHog" description="Keep your entire product stack in sync with PostHog" />
@@ -75,78 +199,7 @@ export default function Integrations({
                         <h1 className={heading()}>Integrations</h1>
                         <h2 className={heading('sm')}>Keep your entire product stack in sync with PostHog</h2>
                     </div>
-                    <div
-                        className={section(
-                            'flex space-y-12 md:space-y-0 md:space-x-4 flex-col md:flex-row items-start relative'
-                        )}
-                    >
-                        <aside className="w-[300px] md:sticky top-4">
-                            <h5 className="border-b border-dashed border-gray-accent-light inline-block">Maintainer</h5>
-                            <ul className="list-none p-0 m-0 flex flex-col space-y-2 mt-2">
-                                {maintainers.map((maintainer) => {
-                                    const { type } = maintainer
-                                    return (
-                                        <li key={type} className="flex items-center space-x-2 text-base font-semibold">
-                                            <Checkbox value={type} onChange={(e) => handleChange(e, 'maintainer')} />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </aside>
-                        <motion.ul
-                            initial="hidden"
-                            animate="show"
-                            variants={{
-                                hidden: { opacity: 0 },
-                                show: {
-                                    opacity: 1,
-                                    transition: {
-                                        staggerChildren: 0.05,
-                                    },
-                                },
-                            }}
-                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
-                        >
-                            {(filteredIntegrations || integrations).map((integration) => {
-                                const { id, name, description, url, maintainer, verified } = integration
-                                const Logo = logos[name]
-                                const MaintainerIcon = maintainerIcons[maintainer]
-                                return (
-                                    <motion.li
-                                        className="list-none"
-                                        variants={{
-                                            hidden: { translateY: '-20%', opacity: 0 },
-                                            show: { translateY: 0, opacity: 1 },
-                                        }}
-                                        key={id}
-                                    >
-                                        <Card
-                                            url={url}
-                                            className="text-primary hover:text-primary p-6 relative block w-full h-full"
-                                        >
-                                            <h3 className="flex items-center">
-                                                {Logo && (
-                                                    <span>
-                                                        <Logo className="mr-2" />
-                                                    </span>
-                                                )}
-                                                <span>{name}</span>
-                                            </h3>
-                                            <p>{description}</p>
-                                            <span className="absolute right-3 top-3 flex space-x-1">
-                                                {verified && (
-                                                    <span title="Verified">
-                                                        <Check className="text-[green] h-5 w-5" />
-                                                    </span>
-                                                )}
-                                                {MaintainerIcon && MaintainerIcon}
-                                            </span>
-                                        </Card>
-                                    </motion.li>
-                                )
-                            })}
-                        </motion.ul>
-                    </div>
+                    <DataSection setDataType={setDataType} dataType={dataType} data={data[dataType]} />
                 </section>
             </div>
         </Layout>
@@ -164,7 +217,24 @@ export const query = graphql`
                 name
                 description
                 url
-                maintainer
+                Maintainers: maintainer
+                verified
+            }
+        }
+        allPlugin {
+            maintainers: group(field: maintainer) {
+                type: fieldValue
+            }
+            types: group(field: type) {
+                type: fieldValue
+            }
+            plugins: nodes {
+                id
+                Categories: type
+                name
+                description
+                url
+                Maintainers: maintainer
                 verified
             }
         }
