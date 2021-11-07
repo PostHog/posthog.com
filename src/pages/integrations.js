@@ -131,9 +131,9 @@ const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) 
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
             >
                 {(filteredData || data).map((integration) => {
-                    const { id, name, description, url, maintainer, verified } = integration
+                    const { id, name, description, url, Maintainers, verified } = integration
                     const Logo = logos[name]
-                    const MaintainerIcon = maintainerIcons[maintainer]
+                    const MaintainerIcon = maintainerIcons[Maintainers]
                     return (
                         <motion.li
                             className="list-none"
@@ -156,7 +156,7 @@ const DataSection = ({ data: { data, filterableData }, dataType, setDataType }) 
                                     <span>{name}</span>
                                 </h3>
                                 <p>{description}</p>
-                                <span className="absolute right-3 top-3 flex space-x-1">
+                                <span className="absolute right-3 top-2 flex space-x-1">
                                     {MaintainerIcon && MaintainerIcon}
                                 </span>
                             </Card>
