@@ -139,7 +139,7 @@ TooManyConnections: too many connections
     > **Note:** You're connecting to your production database, proceed with caution!
 
     ```shell
-    clickhouse-client
+    clickhouse-client -d posthog
     ```
 
 ## How do I restart all pods for a service?
