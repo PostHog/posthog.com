@@ -17,10 +17,11 @@ First, we need to set up a Kubernetes cluster (see the official AWS [documentati
 
 <ClusterRequirementsSnippet />
 
-> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
 > * for PostgreSQL, take a look at [AWS Aurora](https://aws.amazon.com/rds/aurora/)
 > * for Apache Kafka, take a look at [AWS MSK](https://aws.amazon.com/msk/) and [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [AWS Elasticache for Redis](https://aws.amazon.com/elasticache/redis)
 > * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
 >
 
