@@ -3,6 +3,8 @@ import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
+import Link from 'components/Link'
+import Team from 'components/Team'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -12,7 +14,6 @@ import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
 import SectionLinks from './SectionLinks'
 import StickySidebar from './StickySidebar'
-import Link from 'components/Link'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => (
@@ -55,6 +56,7 @@ export default function Main({
     hideLastUpdated,
 }) {
     const components = {
+        Team,
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,

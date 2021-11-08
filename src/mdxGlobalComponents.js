@@ -89,6 +89,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
+import { Team } from './components/Team'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
@@ -186,6 +187,7 @@ export const shortcodes = {
     StartNowButton,
     Structure,
     TableOfContents,
+    Team,
     TeamQuote,
     Tooltip,
     VisitLibrary,
