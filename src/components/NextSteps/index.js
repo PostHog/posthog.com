@@ -54,8 +54,12 @@ export default function NextSteps({ location }) {
                 <div className="px-5 max-w-[600px] mx-auto">
                     <div className="flex justify-center items-center my-16 space-x-4 transition-opacity">
                         <Logo noText />
-                        <span className="text-2xl">❤️</span>
-                        <img className="w-[64px]" src={customer.logo} />
+                        {customer.logo && (
+                            <>
+                                <span className="text-2xl">❤️</span>
+                                <img className="w-[64px]" src={customer.logo} />
+                            </>
+                        )}
                     </div>
                     <h1 className={heading()}>Next steps</h1>
                     <Intro name={customer.name} />
