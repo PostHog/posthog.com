@@ -79,14 +79,20 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             },
         }).then((res) => res.json())
         const imageURL = `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/logo.png`
-        const image = await createRemoteFileNode({
-            url: imageURL,
-            parentNodeId: node.id,
-            createNode,
-            createNodeId,
-            cache,
-            store,
-        })
+        let image
+        try {
+            image = await createRemoteFileNode({
+                url: imageURL,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            })
+        } catch (e) {
+            // Ignore
+        }
+
         if (image) {
             node.logo___NODE = image && image.id
         }
