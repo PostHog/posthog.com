@@ -51,16 +51,18 @@ const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
 }
 
 export const Heading = ({
-    as,
+    as = 'h1',
     children,
     className = '',
     id,
+    hideCopy = false,
     ...other
 }: {
-    as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
     children: JSX.Element | string
     className: string
     id: string
+    hideCopy?: boolean
 }): JSX.Element => {
     const [hovered, setHovered] = useState(false)
     const Heading = as
@@ -72,7 +74,7 @@ export const Heading = ({
             className={`relative group ${className}`}
             {...other}
         >
-            <CopyAnchor hovered={hovered} id={id} />
+            {!hideCopy && <CopyAnchor hovered={hovered} id={id} />}
             {children}
         </Heading>
     )

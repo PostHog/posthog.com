@@ -3,6 +3,7 @@ const path = require('path')
 exports.createPages = require('./gatsby/createPages')
 exports.onCreateNode = require('./gatsby/onCreateNode')
 exports.createSchemaCustomization = require('./gatsby/createSchemaCustomization')
+exports.sourceNodes = require('./gatsby/sourceNodes')
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.

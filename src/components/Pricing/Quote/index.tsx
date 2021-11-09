@@ -52,6 +52,7 @@ const base = {
         text-primary
         dark:text-primary-dark
         m-0
+        quote
     `,
     name: cntl`
         not-italic

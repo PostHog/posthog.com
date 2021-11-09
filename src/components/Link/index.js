@@ -14,6 +14,7 @@ export default function Link({
     iconClasses = '',
     state = {},
     event = '',
+    href,
     ...other
 }) {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -24,14 +25,14 @@ export default function Link({
         }
         onClick && onClick()
     }
-
-    const internal = !disablePrefetch && /^\/(?!\/)/.test(to)
-    return onClick && !to ? (
+    const url = to || href
+    const internal = !disablePrefetch && /^\/(?!\/)/.test(url)
+    return onClick && !url ? (
         <button onClick={handleClick} className={className}>
             {children}
         </button>
     ) : internal ? (
-        <GatsbyLink {...other} to={to} className={className} state={state} onClick={handleClick}>
+        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
             {children}
         </GatsbyLink>
     ) : (
@@ -40,7 +41,7 @@ export default function Link({
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
-            href={to}
+            href={url}
             className={className}
         >
             {external ? (

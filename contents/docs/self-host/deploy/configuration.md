@@ -57,8 +57,8 @@ postgresql:
 
 kafka:
   persistence:
-    size: 10Gi
-  logRetentionBytes: _8_000_000_000
+    size: 20Gi
+  logRetentionBytes: _15_000_000_000
 
 # Extra replicas for more loaded services
 web:

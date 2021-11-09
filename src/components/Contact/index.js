@@ -33,14 +33,16 @@ export default function Contact(props) {
 
     return (
         <>
-            <div className="flex justify-center space-x-2 mt-6">
-                <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
-                    Book a demo
-                </Chip>
-                <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
-                    Contact sales
-                </Chip>
-            </div>
+            {!props.hideTabs && (
+                <div className="flex justify-center space-x-2 mt-6">
+                    <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
+                        Book a demo
+                    </Chip>
+                    <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
+                        Contact sales
+                    </Chip>
+                </div>
+            )}
             <div className="mt-8">
                 {
                     {
@@ -49,8 +51,8 @@ export default function Contact(props) {
                             <DemoScheduler
                                 iframeSrc={
                                     {
-                                        personal: 'https://calendly.com/yakko/posthog-scale-enterprise-demo',
-                                        group: 'https://calendly.com/yakko/posthog-demo',
+                                        personal: 'https://calendly.com/jamesefhawkins/posthog-scale-enterprise-demo',
+                                        group: 'https://calendly.com/jamesefhawkins/posthog-demo',
                                     }[demoType]
                                 }
                             />

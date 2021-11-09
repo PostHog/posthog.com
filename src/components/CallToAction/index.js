@@ -55,6 +55,7 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     select-none
     rounded-full
     inline-block
+    cta
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}

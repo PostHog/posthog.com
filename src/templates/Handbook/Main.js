@@ -12,8 +12,9 @@ import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
 import SectionLinks from './SectionLinks'
 import StickySidebar from './StickySidebar'
+import Link from 'components/Link'
 
-const A = (props) => <a {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => (
     <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
@@ -65,10 +66,11 @@ export default function Main({
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
+        a: A,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
-    const showToc = !hideAnchor && tableOfContents?.length
+    const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
     return (
         <div className="relative">
