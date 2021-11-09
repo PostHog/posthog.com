@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-import { wrapElement, initKea } from './kea'
+import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
 
 initKea(false)
@@ -27,7 +27,7 @@ export const onRouteUpdate = ({ location }) => {
         })
         try {
             preferredTheme =
-                (/^handbook|^docs|^blog/.test(slug) &&
+                (/^handbook|^docs|^blog|^plugins/.test(slug) &&
                     (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
                 'light'
         } catch (err) {}

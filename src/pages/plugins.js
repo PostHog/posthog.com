@@ -1,3 +1,4 @@
+import Breadcrumbs from 'components/Breadcrumbs'
 import Card from 'components/Card'
 import Checkbox from 'components/Checkbox'
 import { heading, section } from 'components/Home/classes'
@@ -37,7 +38,7 @@ const maintainerIcons = {
 
 const Filters = ({ filterableData, filters, handleFilterChange }) => {
     return (
-        <aside className="w-[300px] md:sticky top-4">
+        <aside className="w-[300px] md:sticky top-20">
             <ul className="list-none p-0 m-0 flex flex-col space-y-6">
                 {Object.keys(filterableData).map((filter) => {
                     return (
@@ -81,7 +82,7 @@ const Cards = ({ data }) => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
         >
             {data.map((integration) => {
-                const { id, name, description, url, Maintainers, verified, logo } = integration
+                const { id, name, description, url, slug, Maintainers, verified, logo } = integration
 
                 const Logo = logos[name]
                 const MaintainerIcon = maintainerIcons[Maintainers]
@@ -94,8 +95,11 @@ const Cards = ({ data }) => {
                         }}
                         key={id}
                     >
-                        <Card url={url} className="text-primary hover:text-primary p-6 relative block w-full h-full">
-                            <h3 className="flex items-center text-xl">
+                        <Card
+                            url={slug || url}
+                            className="text-primary hover:text-primary p-6 relative block w-full h-full"
+                        >
+                            <h3 className="flex items-center text-xl text-primary dark:text-primary">
                                 {logo ? (
                                     <GatsbyImage className="w-7 mr-2" image={getImage(logo)} />
                                 ) : (
@@ -157,6 +161,16 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
     return (
         <Layout>
             <SEO title="Integrate PostHog" description="Keep your entire product stack in sync with PostHog" />
+            <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                <Breadcrumbs
+                    crumbs={[
+                        {
+                            title: 'Plugins & Integrations',
+                        },
+                    ]}
+                    darkModeToggle
+                />
+            </div>
             <div>
                 <section>
                     <div className={section()}>
@@ -200,6 +214,7 @@ export const query = graphql`
                 name
                 description
                 url
+                slug
                 Maintainer: maintainer
                 verified
                 logo {

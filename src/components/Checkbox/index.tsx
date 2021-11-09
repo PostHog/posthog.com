@@ -24,9 +24,9 @@ export default function Checkbox({
                     id={value}
                     aria-describedby={`${value}-description`}
                     name={value}
-                    className="focus:ring-primary h-4 w-4 text-primary border border-primary bg-primary rounded checkbox appearance-none bg-opacity-0 absolute transition-all"
+                    className="focus:ring-primary h-4 w-4 text-primary border border-primary dark:border-white bg-primary dark:bg-white rounded checkbox appearance-none bg-opacity-0 dark:bg-opacity-0 absolute transition-all"
                 />
-                <Check className="w-4 h-4 relative invisible text-white pointer-events-none" />
+                <Check className="w-4 h-4 relative invisible text-white dark:text-primary pointer-events-none" />
             </span>
             <label className="flex" htmlFor={value}>
                 <span>{value.charAt(0).toUpperCase() + value.slice(1)}</span>

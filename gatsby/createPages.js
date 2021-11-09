@@ -10,6 +10,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
+    const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -100,6 +101,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             categories: allMdx(limit: 1000) {
                 group(field: frontmatter___categories) {
                     category: fieldValue
+                }
+            }
+            plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
+                nodes {
+                    id
+                    slug
                 }
             }
         }
@@ -255,6 +262,17 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             component: CustomerTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+
+    result.data.plugins.nodes.forEach((node) => {
+        const { id, slug } = node
+        createPage({
+            path: slug,
+            component: PluginTemplate,
+            context: {
+                id,
             },
         })
     })
