@@ -1,5 +1,5 @@
+import { Link } from 'gatsby'
 import React from 'react'
-import Link from 'components/Link'
 
 export default function Card({
     children,
@@ -10,12 +10,15 @@ export default function Card({
     url: string
     className?: string
 }): JSX.Element {
-    return (
-        <Link
-            to={url}
-            className={`group bg-white rounded-[10px] overflow-hidden hover:shadow-xl hover:translate-y-[-2px] ${className}`}
-        >
+    const internal = /^\/(?!\/)/.test(url)
+    const classes = `group bg-white rounded-[10px] overflow-hidden hover:shadow-xl hover:translate-y-[-2px] ${className}`
+    return internal ? (
+        <Link to={url} className={classes}>
             {children}
         </Link>
+    ) : (
+        <a href={url} target="_blank" rel="noreferrer noopener" className={classes}>
+            {children}
+        </a>
     )
 }
