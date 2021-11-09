@@ -8,12 +8,12 @@ export default function Jobs() {
     // must be added as an environment variable WORKABLE_API_KEY.
     // If no Workable API key is found, the job count is 0
     return (
-        <>
+        <div className="text-primary dark:text-white">
             <p>
                 We're currently hiring for <strong>{totalCount} roles</strong>.
             </p>
             <p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for.</p>
-        </>
+        </div>
     )
 }
 
