@@ -498,3 +498,37 @@ ul {
         @apply visible;
     }
 }
+
+.plugin-cards {
+    > * {
+        @apply border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-t-0;
+        @media (min-width: 1024px) {
+            &:nth-child(3n + 1),
+            &:nth-child(3n) {
+                @apply border-l-0 border-r-0;
+            }
+            &:nth-last-child(-n + 3) {
+                @apply border-b-0;
+            }
+        }
+        @media (min-width: 640px) and (max-width: 1024px) {
+            &:nth-child(even) {
+                @apply border-l-0 border-r-0;
+            }
+            &:nth-child(odd) {
+                @apply border-l-0;
+            }
+            &:last-child {
+                @apply border-b-0;
+            }
+        }
+        @media (max-width: 640px) {
+            & {
+                @apply border-l-0 border-r-0;
+            }
+            &:first-child {
+                @apply border-t;
+            }
+        }
+    }
+}

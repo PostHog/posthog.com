@@ -43,8 +43,8 @@ const Filters = ({ filterableData, filters, handleFilterChange }) => {
                 {Object.keys(filterableData).map((filter) => {
                     return (
                         <li key={filter}>
-                            <h5 className="border-b border-dashed border-gray-accent-light inline-block">{filter}</h5>
-                            <ul className="list-none p-0 m-0 flex flex-col space-y-2 mt-2">
+                            <h5 className="inline-block">{filter}</h5>
+                            <ul className="list-none p-0 m-0 flex flex-col space-y-2">
                                 {filterableData[filter].map((type) => {
                                     return (
                                         <li key={type} className="flex items-center space-x-2 text-base font-semibold">
@@ -79,7 +79,7 @@ const Cards = ({ data }) => {
                     },
                 },
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 md:pl-6 m-0 flex-grow w-full"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 md:pl-6 m-0 flex-grow w-full plugin-cards"
         >
             {data.map((integration) => {
                 const { id, name, description, url, slug, Maintainers, verified, logo } = integration
@@ -97,9 +97,9 @@ const Cards = ({ data }) => {
                     >
                         <Card
                             url={slug || url}
-                            className="text-primary hover:text-primary p-6 relative block w-full h-full"
+                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white p-6 relative block w-full h-full bg-opacity-0 !rounded-none"
                         >
-                            <h3 className="flex items-center text-xl text-primary dark:text-primary">
+                            <h3 className="flex items-center text-xl text-primary dark:text-white">
                                 {logo ? (
                                     <GatsbyImage className="w-7 mr-2" image={getImage(logo)} />
                                 ) : (
