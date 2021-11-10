@@ -1,6 +1,6 @@
 ---
-date: TBC
-title: Finding your 'North Star Metric' and why it matters
+date: 2021-11-16
+title: Finding your North Star metric and why it matters
 rootPage: /blog
 sidebar: Blog
 showTitle: true
