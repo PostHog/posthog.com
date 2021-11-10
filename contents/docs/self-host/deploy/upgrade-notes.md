@@ -47,5 +47,5 @@ Error: UPGRADE FAILED: cannot patch "posthog-posthog-kafka" with kind StatefulSe
 ```
 There are two options:
 1. Change your values to match to what the Kafka values were before (`size: 5Gi` and `logRetentionBytes: _4_000_000_000`)
-2. Resize the Kafka disk follwing our runbook [kafka-resize-disk](https://posthog.com/docs/self-host/runbook/kafka/resize-disk)
+2. Resize the Kafka disk following our runbook [kafka-resize-disk](https://posthog.com/docs/self-host/runbook/kafka/resize-disk)
 
