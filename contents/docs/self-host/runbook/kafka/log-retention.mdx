@@ -11,4 +11,4 @@ When kafka disk gets full the kafka pod gets stuck leading us to drop all incomi
 
 Note that the retention check loop by default is ran every 5min [retention check interval](https://kafka.apache.org/documentation/#brokerconfigs_log.retention.check.interval.ms), we can change it to be more frequent, but probably don't need to.
 
-We want to minimize the probability of kafka disk getting full and losing events and maximize disk usage to have as long retention as possible to have data to recover from in case something broke about ingestion. Therefor we suggest setting time to be relatively low (2h or 24h) and bytes to be about 90% of the volume size.
+We want to minimize the probability of kafka disk getting full and losing events and maximize disk usage to have as long retention as possible to have data to recover from in case something broke about ingestion. Therefore we suggest setting time to be relatively low (2h or 24h) and bytes to be about 90% of the volume size.
