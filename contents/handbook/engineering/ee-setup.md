@@ -42,6 +42,7 @@ brew install libxml2 libxmlsec1 pkg-config
 - Run the frontend
   - `yarn build`
   - `yarn start` or click "▶️" next to `"start"` in the scripts section of package.json.
+  - Alternatively, you can also run `./bin/start-frontend` or `yarn start-http --host 0.0.0.0` if you're running into issues with `yarn start`
 - Run the backend
   - In `/etc/hosts`, add a line with `127.0.0.1 kafka clickhouse`
   - Make sure you're running your `virtualenv` with `source env/bin/activate`
