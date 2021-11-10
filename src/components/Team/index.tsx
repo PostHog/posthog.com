@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { GithubIcon } from 'components/GithubIcon'
+import { countryCodeEmoji } from 'country-code-emoji'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -36,8 +37,16 @@ export default function Team() {
                             <div className="team-center-space"></div>
 
                             <div className="team-right-image relative">
-                                <GatsbyImage image={image} alt={title} title={title} />
-                                <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">{country}</span>
+                                <GatsbyImage
+                                    objectFit="contain"
+                                    className="w-full"
+                                    image={image}
+                                    alt={title}
+                                    title={title}
+                                />
+                                <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">
+                                    {countryCodeEmoji(country)}
+                                </span>
                             </div>
                         </div>
                     </li>
