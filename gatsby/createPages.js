@@ -12,7 +12,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const result = await graphql(`
         {
-            allMdx(limit: 1000) {
+            allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
                 nodes {
                     id
                     slug
