@@ -101,7 +101,7 @@ Of course, there are plenty of other product analytics tools - including [open-s
 
 ## Why you shouldn't use Google Analytics to track your North Star metric
 
-Google Analytics is good for a lot of things, especially if you want to track basic web metrics such as pageviews or vanity metrics such as bounce rate. However, as a _web_ analytics platform it is limited to tracking only specific metrics for websites. It can't track other types of events, nor does it offer the same breadth of analysis tools that a product analytics platform like PostHog does. 
+Google Analytics is good for a lot of things, especially if you want to track basic web metrics such as pageviews or  bounce rate. However, as a _web_ analytics platform it is limited to tracking only specific metrics for websites. It can't track other types of events, nor does it offer the same breadth of analysis tools that a product analytics platform like PostHog does. 
 
 You couldn't, for example, use Google Analytics to track a North Star metric such as Discoveries. Nor could you self-host it on your own infrastructure. 
 
