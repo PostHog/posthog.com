@@ -112,4 +112,12 @@ authors:
       link_type: twitter,
       link_url: https://twitter.com/fuziontech
     }
+  - {
+      handle: andy-vandervell,
+      name: Andy Vandervell,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/92976667?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/andyvandervell/
+    }
 ---
