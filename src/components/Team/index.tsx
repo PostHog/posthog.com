@@ -49,7 +49,7 @@ export default function Team() {
 
 const query = graphql`
     query TeamQuery {
-        team: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }, sort: { fields: frontmatter___order }) {
+        team: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }, sort: { fields: frontmatter___startDate }) {
             teamMembers: nodes {
                 id
                 body
