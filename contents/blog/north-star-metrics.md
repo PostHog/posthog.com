@@ -49,7 +49,7 @@ While these metrics can be important in isolation, they don't measure value or r
 ## Types of North Star metrics
 Before you can find your North Star, it's useful to understand the different types of North Star metrics and the kinds of businesses they best apply to:
 
-### Revenue / revenue optimisation
+### Revenue / revenue optimization
 Metrics such as annual recurring revenue (ARR) or average order value (AOR) are examples of pure revenue metrics. We think this is a poor choice for an early-stage startup and is better applied to established businesses where customer growth or engagement has plateaued.  
 
 ### Consumption
