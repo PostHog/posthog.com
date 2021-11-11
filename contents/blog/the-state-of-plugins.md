@@ -49,7 +49,7 @@ The most popular plugin on Cloud (excluding GeoIP) is the Timestamp Parser, whic
 
 ## Plugins on self-hosted PostHog deployments
 
-Gathering and parsing data on self-hosted users is a bit harder, but we can pull some data from status reports going back two months. This comes with the caveat that we are looking at distinct IDs, meaning some organizations may be counted twice.
+Gathering and parsing data on self-hosted users is a bit harder, but we can pull some data from status reports going back two months from teams who did not opt out. This comes with the caveat that we are looking at distinct IDs, meaning some organizations may be counted twice.
 
 
 Of the 1,500+ organizations in the dataset, 75.6% use plugins, and 23.5% use a plugin other than GeoIP. Both are much better ratios than Cloud. 
