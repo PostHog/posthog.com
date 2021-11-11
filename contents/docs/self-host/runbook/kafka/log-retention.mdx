@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-When kafka disk gets full the kafka pod gets stuck leading us to drop all incoming events until fixed. To avoid this we can use log retention policies. There are two configs we can set (both set minimum values and data can't be deleted beforehand):
+When Kafka's disk gets full, the service can get stuck, leading us to drop all incoming events. To mitigate the issue, we can edit Kafka's log retention policies to free up some space. There are two configs we can set (both set minimum values and data can't be deleted beforehand):
 
 1. time - [kafka docs](https://kafka.apache.org/documentation/#topicconfigs_local.retention.ms)
 2. bytes - [kafka docs](https://kafka.apache.org/documentation/#topicconfigs_local.retention.bytes)
