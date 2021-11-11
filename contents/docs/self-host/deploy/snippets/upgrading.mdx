@@ -24,9 +24,11 @@ Check the Helm [documentation](https://helm.sh/docs/helm/helm_upgrade/) for more
 <details>
 <summary>Troubleshooting</summary>
 If you see this error
+
 ```
 Error: UPGRADE FAILED: release posthog failed, and has been rolled back due to atomic being set: post-upgrade hooks failed: warning: Hook post-upgrade posthog/templates/migrate.job.yaml failed: jobs.batch "posthog-migrate" already exists
 ```
+
 it happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl delete job posthog-migrate -n posthog`) before running the upgrade again.
 </details>
 
