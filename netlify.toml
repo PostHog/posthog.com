@@ -1,8 +1,6 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/plugins"
-  status = 200
-
+  to = "/integrations/:splat"
 
 [[redirects]]
   from = "/careers/*"

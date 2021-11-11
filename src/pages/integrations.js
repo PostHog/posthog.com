@@ -168,7 +168,7 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
                 <Breadcrumbs
                     crumbs={[
                         {
-                            title: 'Plugins & Integrations',
+                            title: 'Integrations',
                         },
                     ]}
                     darkModeToggle
@@ -177,7 +177,7 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
             <div>
                 <section>
                     <div className={section()}>
-                        <h1 className={heading()}>Plugins & Integrations</h1>
+                        <h1 className={heading()}>Integrations</h1>
                         <h2 className={heading('sm')}>Keep your entire product stack in sync with PostHog</h2>
                     </div>
                     <div

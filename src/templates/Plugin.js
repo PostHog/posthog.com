@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import React from 'react'
 
-export default function Customer({ data }) {
+export default function Integration({ data }) {
     const {
         pluginData: { name, category, maintainer, description, markdown, logo },
     } = data
@@ -16,8 +16,8 @@ export default function Customer({ data }) {
                     <Breadcrumbs
                         crumbs={[
                             {
-                                title: 'Plugins & Integrations',
-                                url: '/plugins',
+                                title: 'Integrations',
+                                url: '/integrations',
                             },
                             {
                                 title: name,

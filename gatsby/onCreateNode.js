@@ -71,7 +71,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             }))
         if (markdown) {
             node.markdown___NODE = markdown.id
-            node.slug = `/plugins/${slugify(node.name, { lower: true })}`
+            node.slug = `/integrations/${slugify(node.name, { lower: true })}`
         }
         const { default_branch } = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
             headers: {
