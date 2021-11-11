@@ -5,7 +5,15 @@ sidebar: Docs
 showTitle: true
 ---
 
-In addition to events having properties, users can also have properties. There are two different methods that can be used: `set` and `set_once`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way.
+In addition to events having properties, users can also have properties. There are two different methods that can be used: `set` and `set_once`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way. Additionally note that both methods can be used in properties with any event capture, e.g.
+```js
+posthog.capture(
+    'Set some user properties', 
+    { 
+        $set: { location: 'London'  },
+        $set_once: { referred_by: 'some ID' },
+    }
+```
 
 ## When to use `set` and `set_once`?
 
@@ -68,17 +76,17 @@ Important notice: here with equal timestamps and previous method (rows 4 and 11)
 
 For `identify` this series of calls would mean we end up with `location=New York` and `browser=Safari`.
 ```js
-posthog.set('Alice', {'location': 'Rome'}, timestamp=1)
-posthog.set_once('Alice', '{browser': 'Chrome', timestamp=1)
-posthog.identify('Alice', {'$set': {'location': 'New York'}, '$set_once':{'browser':'Safari'}}, timestamp=1)
+posthog.set('Alice', {location: 'Rome'}, timestamp=1)
+posthog.set_once('Alice', {browser: 'Chrome', timestamp=1)
+posthog.identify('Alice', {$set: {location: 'New York'}, $set_once: {browser:'Safari'}}, timestamp=1)
 ```
 
 For `alias` this series of calls would mean we end up with `location=Rome` and `browser=Chrome`.
 ```js
-posthog.set('Alice 1', {'location': 'Rome'}, timestamp=1)
-posthog.set_once('Alice 1', '{browser': 'Chrome', timestamp=1)
-posthog.set('Alice 2', {'location': 'New York'}, timestamp=1)
-posthog.set_once('Alice 2', '{browser': 'Safari', timestamp=1)
+posthog.set('Alice 1', {location: 'Rome'}, timestamp=1)
+posthog.set_once('Alice 1', {browser: 'Chrome', timestamp=1)
+posthog.set('Alice 2', {location: 'New York'}, timestamp=1)
+posthog.set_once('Alice 2', {browser: 'Safari', timestamp=1)
 posthog.alias('Alice 1', 'Alice 2', timestamp=1000)
 ```
 
