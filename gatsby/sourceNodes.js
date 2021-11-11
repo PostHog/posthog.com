@@ -24,7 +24,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
     })
 
     const plugins = await fetch(
-        'https://raw.githubusercontent.com/PostHog/plugin-repository/main/repository.json'
+        'https://raw.githubusercontent.com/PostHog/integrations-repository/main/plugins.json'
     ).then((res) => res.json())
     plugins.forEach((plugin) => {
         const { displayOnWebsiteLib, name, ...other } = plugin
