@@ -103,9 +103,9 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Remove team member from the internal company Slack <br />
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />
 <input type="checkbox"/> Remove team member from 1Password <br />
-<input type="checkbox"/> Remove team member from app.posthog.com <br />
+<input type="checkbox"/> Remove team member's [PostHog Cloud](https://app.posthog.com/admin/) account completely <br />
 <input type="checkbox"/> Remove team member from AWS <br />
 <input type="checkbox"/> Remove team member from Workable <br />
 <input type="checkbox"/> Remove team member from Orbit (access &amp; team member state) <br />
-<input type="checkbox"/> Remove team member from the [Team page](https://posthog.com/handbook/company/team) <br />
+<input type="checkbox"/> Remove team member from the [Team page](/handbook/company/team) <br />
 <input type="checkbox"/> Ask their manager for any other accounts they need to be removed from <br />

@@ -7,6 +7,7 @@ import React from 'react'
 const linksHeadingSm = cntl`
     text-sm
     text-gray
+    dark:text-gray
     mb-1
     leading-tight
     pb-[0.2rem]

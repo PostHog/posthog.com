@@ -94,6 +94,7 @@ import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
+import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
@@ -192,6 +193,7 @@ export const shortcodes = {
     TeamQuote,
     Tooltip,
     VisitLibrary,
+    WorkableOpenRoles,
     WorkableSnippet,
     ZoomImage,
 }

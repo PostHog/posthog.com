@@ -22,28 +22,32 @@ Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have
 We rely on timestamps to know the order in which events happened. Note that we don't use ingestion order because events can arrive to PostHog in different order compared to when they were performed, e.g. when network was unreliable and some packets were resent later or when we're importing older events from a different PostHog instance.
 
 This table explains, when values get overridden (TS means timestamp):
-```
-   | value exists | method   | previous method | previous TS is ___ call TS | write/override 
- 1 | no           | N/A      | N/A             | N/A                        | yes
- 2 | yes          | set      | set             | before                     | yes
- 3 | yes          | set      | set_once        | before                     | yes
- 4 | yes          | set      | set             | equal                      | no
- 5 | yes          | set      | set_once        | equal                      | yes 
- 6 | yes          | set      | set             | after                      | no
- 7 | yes          | set      | set_once        | after                      | yes 
- 8 | yes          | set_once | set             | before                     | no 
- 9 | yes          | set_once | set_once        | before                     | no
-10 | yes          | set_once | set             | equal                      | no 
-11 | yes          | set_once | set_once        | equal                      | no
-12 | yes          | set_once | set             | after                      | no
-13 | yes          | set_once | set_once        | after                      | yes
-```
+
+
+| | value exists | method   | previous method | previous TS is ___ call TS | write/override 
+--- | --- | --- | --- | --- | ---
+ 1 | no  | N/A      | N/A             | N/A                        | yes 
+ 2 | yes | set      | set             | before                     | yes
+ 3 | yes | set | set_once | before | yes
+ 4 | yes | set | set | equal | no
+ 5 | yes | set | set_once | equal | yes 
+ 6 | yes | set | set | after | no
+ 7 | yes | set | set_once | after | yes 
+ 8 | yes | set_once | set | before | no 
+ 9 | yes | set_once | set_once | before | no
+10 | yes | set_once | set | equal | no 
+11 | yes | set_once | set_once | equal | no
+12 | yes | set_once | set | after | no
+13 | yes | set_once | set_once | after | yes
+
 
 When `identify` or `alias` methods are used, then all user properties individually get merged based on the same logic. 
 
 P1 refers to Person or 1's property and P2 to Person or distinct id 2's property. Notice how "yes" from above turned into "2".
-```
-   | P1 exists | P2 exists | P2 method | P1 method | P1 TS is ___ P2 TS | value used
+
+
+|   | P1 exists | P2 exists | P2 method | P1 method | P1 TS is ___ P2 TS | value used
+--- | --- | --- | --- | --- | --- | ---
  0 | yes       | no        | N/A       | N/A       | N/A                | 1
  1 | no        | yes       | N/A       | N/A       | N/A                | 2
  2 | yes       | yes       | set       | set       | before             | 2
@@ -58,19 +62,19 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 11 | yes       | yes       | set_once  | set_once  | equal              | 1
 12 | yes       | yes       | set_once  | set       | after              | 1
 13 | yes       | yes       | set_once  | set_once  | after              | 2
-```
+
 
 Important notice: here with equal timestamps and previous method (rows 4 and 11) this means that we use the value from person 1. Person 1 in case of `identify` means the values passed into the identify call. In the case of `alias` person 1 is the first distinct ID provided. To elaborate look at the following examples:
 
 For `identify` this series of calls would mean we end up with `location=New York` and `browser=Safari`.
-```
+```js
 posthog.set('Alice', {'location': 'Rome'}, timestamp=1)
 posthog.set_once('Alice', '{browser': 'Chrome', timestamp=1)
 posthog.identify('Alice', {'$set': {'location': 'New York'}, '$set_once':{'browser':'Safari'}}, timestamp=1)
 ```
 
 For `alias` this series of calls would mean we end up with `location=Rome` and `browser=Chrome`.
-```
+```js
 posthog.set('Alice 1', {'location': 'Rome'}, timestamp=1)
 posthog.set_once('Alice 1', '{browser': 'Chrome', timestamp=1)
 posthog.set('Alice 2', {'location': 'New York'}, timestamp=1)

@@ -11,7 +11,20 @@ showTitle: true
 ## Requirements
 
 - You should have a **clean** [ClickHouse-backed PostHog instance up and running](docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
-- Your old and new instances should both be running **the exact same version of PostHog**, with a minimum version of `1.29.0`
+- Your old and new instances should both be running **the exact same version of PostHog**, with a minimum version of `1.29.0` (note: if you do not follow release tags and instead update PostHog by pulling from `master`, you should make sure both versions are on the **same commit**.)
+
+> **Note:** PostHog users on version 1.29.0 will be able to migrate events to a new instance, but autocaptured events will not be migrated correctly. This bug will be fixed in version 1.30.0. More information on the [Exporting events](#exporting-events) section. 
+
+<details>
+
+<summary><b>Having difficulties upgrading your Postgres-backed instance due to long-running migrations?</b></summary>
+
+<br />
+
+Check out [this guide](/docs/self-host/postgres-upgrade-migrations).
+
+</details>
+
 ## Approach
 
 ClickHouse-backed PostHog instances still use a Postgres database to store data that is not used in analytical queries, such as user information, feature flags, dashboard configurations, etc.
@@ -29,6 +42,7 @@ With this migration, we will copy over the Postgres data that is still stored in
 Access your old Postgres-backed PostHog instance and run the following command:
 
 ```shell
+# tip: use the flag -U to specify a username if necessary 
 pg_dump -d posthog -f export.sql --no-owner --data-only \
 -t posthog_action \
 -t posthog_actionstep \
@@ -223,6 +237,12 @@ posthog-worker-7857nd8268-j8c4f                     1/1     Running   0         
 Once you have **completed the steps above**, you can now move on to migrating your events.
 
 For this, we will use the [PostHog Migrator 3000 plugin](https://github.com/PostHog/posthog-plugin-migrator3000).
+
+### Important considerations
+
+This plugin works on PostHog instances with version 1.29.0 or above.
+
+Version 1.30.0 (coming soon) fixes a bug with exporting autocaptured events, so, unless you do not use autocapture at all, we recommend upgrading to 1.30.0 on both instances before performing the events migration.
 
 ### Instructions
 

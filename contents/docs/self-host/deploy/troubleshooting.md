@@ -113,16 +113,34 @@ TooManyConnections: too many connections
 
     ```shell
     # Replace posthog-posthog-postgresql-0 with your pod's name if different
-    kubectl exec -n posthog -it posthog-posthog-postgresql-0  -- sh
+    kubectl exec -n posthog -it posthog-posthog-postgresql-0  -- /bin/bash
     ```
 
 3. Connect to the `posthog` DB:
+
+    > **Note:** You're connecting to your production database, proceed with caution!
 
     ```shell
     psql -d posthog -U postgres
     ```
 
     Postgres will ask you for the password. Use the value you found from step 1.
+
+## How do I connect to ClickHouse?
+
+1. Connect to the `chi-posthog-posthog-0-0-0` pod:
+
+    ```shell
+    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash 
+    ```
+
+2. Connect to ClickHouse using `clickhouse-client`:
+
+    > **Note:** You're connecting to your production database, proceed with caution!
+
+    ```shell
+    clickhouse-client -d posthog
+    ```
 
 ## How do I restart all pods for a service?
 

@@ -114,10 +114,6 @@
                             "url": "/handbook/people/team-structure/core-experience"
                         },
                         {
-                            "name": "Team Design",
-                            "url": "/handbook/people/team-structure/design"
-                        },
-                        {
                             "name": "Team Growth",
                             "url": "/handbook/people/team-structure/growth"
                         },
@@ -128,6 +124,10 @@
                         {
                             "name": "Team Marketing",
                             "url": "/handbook/people/team-structure/marketing"
+                        },
+                        {
+                            "name": "Team Website and Docs",
+                            "url": "/handbook/people/team-structure/website-docs"
                         },
                         {
                             "name": "Team People",
@@ -303,7 +303,7 @@
             "name": "Product",
             "children": [
                 {
-                    "name": "Product team overview",
+                    "name": "Overview",
                     "url": "/handbook/product/product-team"
                 },
                 {
@@ -321,6 +321,15 @@
                 {
                     "name": "Paid Features",
                     "url": "/handbook/product/paid-features"
+                }
+            ]
+        },
+        {
+            "name": "Design",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/handbook/design/about-design"
                 }
             ]
         },
@@ -516,15 +525,35 @@
                 },
                 {
                     "name": "Runbook",
-                    "url": "",
+                    "url": "/docs/self-host/runbook",
                     "children": [
                         {
-                            "name": "Overview",
-                            "url": "/docs/self-host/runbook"
+                            "name": "ClickHouse",
+                            "url": "/docs/self-host/runbook/clickhouse",
+                            "children": [
+                                {
+                                    "name": "Backup",
+                                    "url": "/docs/self-host/runbook/clickhouse/backup"
+                                },
+                                {
+                                    "name": "Kafka Engine",
+                                    "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
+                                },
+                                {
+                                    "name": "Restore",
+                                    "url": "/docs/self-host/runbook/clickhouse/restore"
+                                }
+                            ]
                         },
                         {
                             "name": "Kafka",
-                            "url": "/docs/self-host/runbook/kafka"
+                            "url": "/docs/self-host/runbook/kafka",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -778,6 +807,10 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
                 },
                 {
                     "name": "Recordings",

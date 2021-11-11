@@ -80,7 +80,6 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Team members should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t) - _Team member_
 *   [ ] Identify user as team member in [Orbit](https://app.orbit.love/login) - _Anyone_
 *   [ ] Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) - _Manager_
-*   [ ] Tell Mo that they're new to the team so he can schedule their intro interviews - _Anyone_
 
 ## During their first week
 
@@ -97,7 +96,6 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to, and flag any you think are missing
 *   [ ] Go through all of the security onboarding and background checks on [Drata](https://app.drata.com/) - you need to complete _all_ of the Drata onboarding steps
 *   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team)
-*   [ ] New joiner announcement: interview with Mo
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
 ## Onboarding buddy

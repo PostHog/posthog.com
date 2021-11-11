@@ -815,12 +815,167 @@
     from = "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
 
-# Manually Added: 2021-10-25
-[[redirects]]
-    from = "/docs/contribute/updating-documentation"
-    to = "/docs/contribute/contribute-to-website"
-
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
     to = "/docs/user-guides/persons"    
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/deploy/gke-clickhouse"
+    to = "/docs/self-host/deploy/gcp"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/deploy/aws-clickhouse"
+    to = "/docs/self-host/deploy/aws"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/integrations/api"
+    to = "/docs/api"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/features/sso"
+    to = "/docs/user-guides/sso"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/securing-posthog"
+    to = "/docs/self-host/configure/securing-posthog"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/smtp-credentials"
+    to = "/docs/self-host/configure/email"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/deploy-linode"
+    to = "/docs/self-host"
+
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/request_demo"
+    to = "/schedule-demo" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/strategy/investor-updates"
+    to = "/handbook/strategy/investors" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/engineering/feature-parity"
+    to = "/handbook/strategy/strategy" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/contribute/updating-documentation"
+    to = "/docs/contribute" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/growth/marketing/messaging_framework"
+    to = "/handbook/growth/marketing" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/growth/handbook/engineering/support-hero"
+    to = "/handbook/growth/handbook/support-hero" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/people/handbook/people/hiring-process/marketing-hiring"
+    to = "/handbook/people/hiring-process/marketing-hiring" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/plugins/maxmind"
+    to = "/plugins"
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/about"
+    to = "/handbook/company/story" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/team"
+    to = "/handbook/company/team"
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/contact"
+    to = "/signup/self-host/get-in-touch#contact" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/integrate/third-party"
+    to = "/docs/integrate" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/deployment/running-behind-proxy"
+    to = "/docs/self-host/configure/running-behind-proxy" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/integrated"
+    to = "/docs/integrate" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/scaling-posthog"
+    to = "/docs/self-host/deploy/configuration#scaling-up" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/handbook/growth/sales/"
+    to = "/handbook/growth/sales/overview" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/api/api"
+    to = "/docs/api" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/code-of-conduct"
+    to = "/docs/contribute/code-of-conduct" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/tutorials"
+    to = "/docs/tutorials" 
+    
+# Manually Added: 2021-11-04
+[[redirects]]
+    from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
+    to = "/docs/self-host/postgres-vs-clickhouse" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-29-1"
+    to = "/blog/the-posthog-array-1-29-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-28-1"
+    to = "/blog/the-posthog-array-1-28-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-23-1"
+    to = "/blog/the-posthog-array-1-23-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-15-1"
+    to = "/blog/the-posthog-array-1-15-0" 
+    
+# Added: 2021-11-10
+[[redirects]]
+    from = "/handbook/people/team-structure/design"
+    to = "/handbook/design/about-design"

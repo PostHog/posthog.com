@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-import { Spin } from 'antd'
-
 What better way to document MDX than with MDX?
 
 ## Rationale
@@ -18,24 +16,23 @@ Not in scope here - but it's essentially React in Markdown.
 
 ## How do we make it work?
 
-### Plugin
+### Page creation
 
-The first thing we need is `gatsby-plugin-mdx`. That's configured in `gatsby-config.js`.
+Website pages are automatically created for all MD and MDX files using Gatsby's createPages API. Slugs are automatically generated based on the file title, and the design template for each page is determined based on the folder the file resides in.
 
-We also need `gatsby-source-filesystem` but we already use that for Markdown remarking.
+### Design templates
 
-### createPages
+There are currently 5 templates:
 
-There is a plugin that creates MDX pages for you, but it was a bit limiting with regards to templates. Hence, we implement page creation ourselves 
-in `gatsby/createPages.js`.
+-   **Handbook / Docs** - Files located in `contents/handbook` and `contents/docs`
+-   **Blog post** - Files located in `contents/blog`
+-   **Blog category** - Automatically created based on categories used in blog posts
+-   **Customer** - Files located in `contents/customers`
+-   **Plain** - All other files located in `contents`
 
-That does 2 GraphQL queries - one for Markdown files, and the other for MDX files.
+Each template is passed a unique automatically generated ID that is used to query the data contained inside of the post.
 
-The response is almost the same, with a few differences. 
-
-Here, for the MDX part, we pass the page (node) `id` as part of the context for the template to process each page.
-
-The GraphQL query will return everything we need, from content to frontmatter, and we use the component 
+The GraphQL query inside of each template will return everything we need, from content to frontmatter, and we use the component
 `MDXRenderer` to render the body, and `MDXProvider` to pass some context that is available to all MDX pages.
 
 In this case, we pass references to components that can then be used without imports directly on MDX pages, like this hedgehog:
@@ -43,12 +40,10 @@ In this case, we pass references to components that can then be used without imp
 <BasicHedgehogImage />
 <br />
 
-Because of the components passed to `MDXProvider`, I can include this hedgehog by just adding `<BasicHedgehogImage />` in my 
-MDX file - no import needed. 
+Because of the components passed to `MDXProvider`, I can include this hedgehog by just adding `<BasicHedgehogImage />` in my
+MDX file - no import needed.
 
-However, if I want to include something from a module, I can also do so. Here's a spinner component from AntD:
-
-<Spin />
+However, if I want to include something from a module, I can also do so. Here's how one would insert a spinner component from AntD:
 
 ```js
 
@@ -60,28 +55,30 @@ import { Spin } from 'antd'
 
 ```
 
+> Currently, almost every component on the site is available automatically. This will eventually change because it causes some performance issues. For now, if you need a reference for which components you should be using in your MDX, check out the [Storybook page](/handbook/engineering/storybook).
+
 ### mdxImportGen
 
-The `mdxImportGen.js` script handles global MDX imports automatically. This is currently a quick implementation that can improve 
+The `mdxImportGen.js` script handles global MDX imports automatically. This is currently a quick implementation that can improve
 and be made more robust in the pre-commit process. Essentially, it prepares a file based on all the components in our `src/components` directory
-which is then used to pass the components to `MDXProvider`, making them available everywhere. 
+which is then used to pass the components to `MDXProvider`, making them available everywhere.
 
 Doing globally available imports this way was important for 3 main reasons:
 
-- Relative imports in MDX can be annoying
-- Keeping MDX files clean
-- Making MDX a nice experience even for less technical people that update our website
+-   Relative imports in MDX can be annoying
+-   Keeping MDX files clean
+-   Making MDX a nice experience even for less technical people that update our website
 
 ### CodeBlock
 
 To create syntax-highlighted code blocks in Markdown, we use a plugin that handles it automatically.
 
-However, this plugin does not work for MDX. As such, we establish a `CodeBlock` component passed alongside the others 
+However, this plugin does not work for MDX. As such, we establish a `CodeBlock` component passed alongside the others
 as a prop to `MDXProvider`. It operates on `pre` tags.
 
 This component leverages the `prism-react-renderer` module, which does not have the Okaidia theme that we use on Markdown pages.
 
-As such, we could either switch themes or port the Okaidia CSS into the acceptable format. The latter was done and 
+As such, we could either switch themes or port the Okaidia CSS into the acceptable format. The latter was done and
 the ported theme styles can be found in `src/lib/okaidia/index.js`.
 
 ## Final note
