@@ -25,6 +25,10 @@ I used a combination of PostHog, Metabase, Python scripts, and Google Sheets to 
 
 ## Why we like plugins
 
+![](../images/blog/state-of-plugins/plugin-views.png)
+
+<p align = "center"><figcaption>Above: Pageviews for the Plugin Library (weekly)</figcaption></p>
+
 Fun fact: the average length for the top six most popular plugins on PostHog is only 57 lines of code. Some, such as the Timestamp Parser, are only 16 lines long! The other thing they have in common is that they cover basic functionality which we haven’t built natively into PostHog yet. 
 
 This is a deliberate decision. It’s true that we could spend engineering time to build these features, such as filtering nested properties, but plugins enable us to quickly solve the same challenge without the resource overhead. Then, once we fully understand the challenge, we can create a better solution — some plugins are literally the duct tape version of full fledged features we’re building at the moment. 
@@ -35,9 +39,13 @@ Plugins also enable us to build useful functionality in a matter of hours. The T
 
 Despite feeling like a core part of the product, PostHog’s geolocation capabilities are actually handled by a plugin. This is a widely used feature, and the plugin is enabled for everyone by default, meaning it has thousands of users, both on self-hosted instances and Cloud. 
 
-As a result, it has been removed from all the graphs and tables you’ll be seeing in this document, so we can focus on plugins users have deliberately enabled.
+As a result, it has been removed from all the graphs and tables you’ll be seeing in this document, so we can focus on plugins which users have deliberately enabled.
 
 ## Plugins on PostHog Cloud
+
+![](../images/blog/state-of-plugins/cloud-usage.png)
+
+<p align = "center"><figcaption>Above: Plugin usage on PostHog Cloud</figcaption></p>
 
 PostHog Cloud users have a selection of whitelisted plugins that they can install from [our plugin library](https://posthog.com/plugins). Arbitrary plugins are not allowed, so if users want to install their own plugins, they must first submit a PR to our [Plugin repo](https://github.com/PostHog/plugin-repository) for review.
 
@@ -49,8 +57,11 @@ The most popular plugin on Cloud (excluding GeoIP) is the Timestamp Parser, whic
 
 ## Plugins on self-hosted PostHog deployments
 
-Gathering and parsing data on self-hosted users is a bit harder, but we can pull some data from status reports going back two months from teams who did not opt out. This comes with the caveat that we are looking at distinct IDs, meaning some organizations may be counted twice.
+![](../images/blog/state-of-plugins/self-usage.png)
 
+<p align = "center"><figcaption>Above: Plugin usage on self-hosted deployments</figcaption></p>
+
+Gathering and parsing data on self-hosted users is a bit harder, but we can pull some data from status reports going back two months from teams who did not opt out. This comes with the caveat that we are looking at distinct IDs, meaning some organizations may be counted twice.
 
 Of the 1,500+ organizations in the dataset, 75.6% use plugins, and 23.5% use a plugin other than GeoIP. Both are much better ratios than Cloud. 
 
@@ -69,6 +80,10 @@ Export plugins are arguably our most important type of plugin, as they are speci
 BigQuery is by far the most popular export destination, across both self-hosted and Cloud deployments.  
 
 ## The future of plugins
+
+![](../images/blog/state-of-plugins/plugin-time.png)
+
+<p align = "center"><figcaption>Above: Time spent running plugins on PostHog Cloud (weekly)</figcaption></p>
 
 One of the most striking data points we have about plugins is that installations per week have been mostly flat and the correlation with user sign-ups is constant. This means we’re not doing a good job of getting more users to try out plugins (at least on Cloud) even though we are doing a good job of getting people to try PostHog. 
 
