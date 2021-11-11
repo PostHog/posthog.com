@@ -2,7 +2,7 @@ import Breadcrumbs from 'components/Breadcrumbs'
 import Card from 'components/Card'
 import Checkbox from 'components/Checkbox'
 import { heading, section } from 'components/Home/classes'
-import { Segment, Sentry, Zapier } from 'components/Icons/Icons'
+import { Puzzle, Segment, Sentry, Zapier } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
@@ -82,10 +82,20 @@ const Cards = ({ data }) => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 md:pl-6 m-0 flex-grow w-full plugin-cards"
         >
             {data.map((integration) => {
-                const { id, name, description, url, slug, Maintainers, verified, logo } = integration
+                const {
+                    id,
+                    name,
+                    description,
+                    url,
+                    slug,
+                    Maintainer,
+                    verified,
+                    logo,
+                    internal: { type },
+                } = integration
 
                 const Logo = logos[name]
-                const MaintainerIcon = maintainerIcons[Maintainers]
+                const MaintainerIcon = maintainerIcons[Maintainer]
                 return (
                     <motion.li
                         className="list-none"
@@ -115,6 +125,11 @@ const Cards = ({ data }) => {
                             <p>{description}</p>
                             <span className="absolute right-3 top-2 flex space-x-1">
                                 {MaintainerIcon && MaintainerIcon}
+                                {type === 'Plugin' && (
+                                    <span title="Plugin" className="text-gray">
+                                        <Puzzle className="w-5 h-5" />
+                                    </span>
+                                )}
                             </span>
                         </Card>
                     </motion.li>
@@ -203,6 +218,9 @@ export const query = graphql`
         allIntegration {
             integrations: nodes {
                 id
+                internal {
+                    type
+                }
                 name
                 description
                 url
@@ -213,6 +231,9 @@ export const query = graphql`
         allPlugin {
             plugins: nodes {
                 id
+                internal {
+                    type
+                }
                 Category: type
                 name
                 description
