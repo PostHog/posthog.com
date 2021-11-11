@@ -50,7 +50,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 ### Prioritizing requests
 
-1. Respond to and debug issues for _Focus_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
+1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
 2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
