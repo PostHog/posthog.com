@@ -265,15 +265,16 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             },
         })
     })
-
     result.data.plugins.nodes.forEach((node) => {
         const { id, slug } = node
-        createPage({
-            path: slug,
-            component: PluginTemplate,
-            context: {
-                id,
-            },
-        })
+        if (slug) {
+            createPage({
+                path: slug,
+                component: PluginTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
     })
 }

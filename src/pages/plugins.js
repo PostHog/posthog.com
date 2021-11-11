@@ -158,6 +158,9 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
         setFilteredData(filtered)
     }, [filters])
 
+    // In order to show integrations correctly, a valid GitHub API key
+    // must be added as an environment variable GITHUB_API_KEY.
+
     return (
         <Layout>
             <SEO title="Integrate PostHog" description="Keep your entire product stack in sync with PostHog" />
