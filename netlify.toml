@@ -956,3 +956,26 @@
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
+
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-29-1"
+    to = "/blog/the-posthog-array-1-29-0" 
+
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-28-1"
+    to = "/blog/the-posthog-array-1-28-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-23-1"
+    to = "/blog/the-posthog-array-1-23-0" 
+
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-15-1"
+    to = "/blog/the-posthog-array-1-15-0" 
