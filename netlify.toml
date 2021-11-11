@@ -956,3 +956,9 @@
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
+
+
+# Added: 2021-11-10
+[[redirects]]
+    from = "/handbook/people/team-structure/design"
+    to = "/handbook/design/about-design"
