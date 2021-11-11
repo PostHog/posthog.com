@@ -11,9 +11,9 @@ Segment allows you to easily manage data and integrations with services across y
 
 We are _big fans_ of Segment, and many in our team use it now or have used it in the past. However, it comes with some limitations for PostHog. 
 
-The PostHog integration with Segment gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture. All features for your PostHog instance will be the same, but all Segment sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar). 
+The PostHog integration with Segment gives you access to some things our [JS library](/docs/integrate/client/js) can do, but using Segment alone means you can't have autocapture, feature flags, session recordings, heatmaps or the toolbar. Segment is also more easily blocked by ad-blockers.
 
-Lastly, Segment is also more easily blocked by ad-blockers. To get around these limitations, you can install the [PostHog snippet](/docs/integrate/client/js) alongside your Segment integration.
+To get around these limitations, you can install the [PostHog snippet or posthog-js](/docs/integrate/client/js) alongside your Segment integration. You would then use Segment for any custom events (for example `segment.track('user sign up')`), and posthog-js will add on 
 
 ## Getting started with Segment
 
