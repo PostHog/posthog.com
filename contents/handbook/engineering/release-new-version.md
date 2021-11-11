@@ -54,11 +54,13 @@ On the week before the release, on Friday, we institute a code freeze. We branch
     - Bump `appVersion` to the latest app version (same number as on the Docker image).
     - Change the docker tag in [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) to point to the new tag (e.g. `release-1.29.0`).
     - Push the relevant changes and add the `bump-minor` label to the PR. **Do not merge until the latest version is built.**
-- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub.
+- [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release is completely ready, some users may see the image on Docker Hub and update immediately.**
   ```bash
   git tag -a [version] -m "Version [version]"
   git push origin head --tags
   ```
-- [ ] Cherrypick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) and merge to make sure `master` is up to date.
+- [ ] Cherrypick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) to make sure `master` is up to date.
+  - [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
+- [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 - [ ] Send the newsletter with the PostHog Array. We do this through Mailchimp. You can use the template for the previously sent newsletter. You may need to ask someone with access to help with this last part.
