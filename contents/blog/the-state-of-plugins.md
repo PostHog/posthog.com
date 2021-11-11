@@ -17,7 +17,7 @@ I used a combination of PostHog, Metabase, Python scripts, and Google Sheets to 
 ## TL;DR
 
 - Most teams using PostHog use plugins (if GeoIP is included)
-Relatively few Cloud teams use plugins (if GeoIP is excluded)
+- Relatively few Cloud teams use plugins (if GeoIP is excluded)
 Self-hosted users are way more likely to use plugins than Cloud users
 - Export plugins are key for our larger customers (particularly self-hosted ones)
 - Simple plugins covering basic functionality that PostHog lacks are quite popular
