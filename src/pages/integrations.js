@@ -107,22 +107,25 @@ const Cards = ({ data }) => {
                     >
                         <Card
                             url={slug || url}
-                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white p-6 relative block w-full h-full bg-opacity-0 !rounded-none"
+                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white p-12 relative block w-full h-full bg-opacity-0 !rounded-none"
                         >
-                            <h3 className="flex items-center text-xl text-primary dark:text-white">
+                            <h3 className="flex flex-col text-xl text-primary dark:text-white">
                                 {logo ? (
-                                    <GatsbyImage className="w-7 mr-2" image={getImage(logo)} />
+                                    <GatsbyImage
+                                        className="w-12 mb-4 p-4 rounded bg-white shadow"
+                                        image={getImage(logo)}
+                                    />
                                 ) : (
                                     Logo && (
                                         <span>
-                                            <Logo className="mr-2" />
+                                            <Logo className="" />
                                         </span>
                                     )
                                 )}
 
                                 <span>{name}</span>
                             </h3>
-                            <p>{description}</p>
+                            <p className="opacity-75">{description}</p>
                             <span className="absolute right-3 top-2 flex space-x-1">
                                 {MaintainerIcon && MaintainerIcon}
                                 {type === 'Plugin' && (
