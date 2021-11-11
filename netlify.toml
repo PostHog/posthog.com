@@ -981,3 +981,8 @@
 [[redirects]]
     from = "/handbook/people/team-structure/design"
     to = "/handbook/design/about-design"
+
+# Added: 2021-11-11
+[[redirects]]
+    from = "/handbook/design/about-design"
+    to = "/handbook/people/team-structure/design"
