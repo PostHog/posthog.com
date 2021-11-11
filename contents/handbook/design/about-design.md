@@ -1,5 +1,5 @@
 ---
-title: Marketing and product design
+title: Design at PostHog
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
@@ -17,19 +17,11 @@ Designers are spread between Small Teams. Like sovereign states have ambassadors
 | [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | Growth  |
 | [Chris Clark](/handbook/company/team#chris-clark-product-designer)  | Product Designer | Core Experience, Core Analytics |
 
-## Mission
+Design at PostHog:
 
-We’re here to:
-
-- Support Small Teams (and contributors) in building better versions of PostHog
-- Enable customers to build better products (using PostHog)
-- Communicate to prospective customers the value we provide
-
-## Responsibilities
-
-- Initiate new projects to support the missions above
-- Support Small Teams in completing their sprint tasks
-- Iterate based on feedback from customers, in collaboration with other Small Teams
+- Supports Small Teams (and contributors) in building better versions of PostHog
+- Enables customers to build better products (using PostHog)
+- Communicates to prospective customers the value we provide
 
 ## How we work
 
@@ -90,3 +82,6 @@ Tag issue or PR with relevant project board.
 - [#team-design](https://posthog.slack.com/messages/team-design) _- more internal discussion about topics interesting to designers_
 - Product design uses [#team-core-experience](https://posthog.slack.com/messages/team-core-experience) and [#team-core-analytics](https://posthog.slack.com/messages/team-core-analytics)
 
+# Portfolio
+
+You can find [PostHog's design portfolio](https://dribbble.com/posthog) on Dribbble... or just have a look around!
