@@ -58,7 +58,7 @@ It feels pretty weird how much of a relationship we're starting to build with th
 
 ## So, the board meeting
 
-Cancer has taken an eye; my way of saying screw you to it is that I'm not going to let it take away or reduce the opportunity at PostHog for anyone - directly or indirectly (including my family) involved.
+Cancer has taken an eye; my way of saying screw you to it is that I'm not going to let it take away or reduce the opportunity at PostHog for anyone directly or indirectly (including my family) involved.
 
 We've had tremendous progress. Our goal for August was to get five reference customers for our paid self hosted product. We've now gone way past this and are at around 10, with around 100 paying customers on cloud, and a further 8,000 ish companies in total deployed.
 
