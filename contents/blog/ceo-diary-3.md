@@ -35,7 +35,7 @@ When you get a diagnosis, there's no debate - you have to get over the next hurd
 
 ## 100% remote, 0% regrets
 
-For the first few weeks, it was unclear if it had spread. In the early days, both my wife and I had living nightmares - finding ourselves day dreaming about the worst case scenario. It was during these, I was grateful that I'd been lucky enough to work from home and had as a result bene present.
+For the first few weeks, it was unclear if it had spread. In the early days, both my wife and I had living nightmares - finding ourselves day dreaming about the worst case scenario. I was grateful that I was lucky enough to work from home and be present during these periods.
 
 I was worried about balance. I decided that if the cancer hadn't spread, we'd end up on a cycle of chemo, largely at home, which I could work around. If it had spread, I'd need to learn more to make a decision. It'd be horrible to be commuting.
 
