@@ -48,7 +48,7 @@ There's just more to do to look after her:
 * Daily injections.
 * Daily checks of her line / temperature - to make sure she hasn't got an infection.
 * Weekly blood tests.
-* Anti bacterial spray / wipes all the time. Nappy changes have to involve gloves as it's literally toxic waste...
+* Anti-bacterial spray / wipes all the time. Nappy changes have to involve gloves as it's literally toxic waste.
 * Chemotherapy session for six hours every three weeks, in hospital.
 * We can't see people inside at certain stages of her chemo cycle when her immunity is low.
 * She's not able to do some things many other kids can do. She had to drop out of nursery to avoid catching illnesses, and she can't have a real bath or go swimming because of her line. She can't take painkillers when she's teething in case they mask a temperature rise.
