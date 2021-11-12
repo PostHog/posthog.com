@@ -22,8 +22,9 @@ you analyze how various groups interact with your product rather than individual
 
 ## Known limitations
 
-- You can't (yet) analyze groups in insights or use them in feature flags. This will be added over the coming week(s).
+- You can't yet use groups for feature flags or in all insights. These features will be added over the coming week(s).
 - Updating group properties overwrites _all_ previous properties for that group
+- Only groups where properties are set are shown in various insights.
 
 ## How to set up group analytics
 
