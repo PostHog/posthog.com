@@ -120,7 +120,7 @@ Goal of the Support Hero person on duty is to:
 
 * make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
 
-* provide actionable informations as _Note_ for all the items you cannot close before the end of your shift (this is important as hand-off to the next person on-call)
+* provide actionable information as _Note_ for all the items you cannot close before the end of your shift (this is important as hand-off to the next person on-call)
 
 Here's a q quick overview of Papercups' main features:
 
