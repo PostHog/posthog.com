@@ -46,7 +46,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
     - [Papercups](#papercups) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
-- Housekeeping. Once a customer issue/question has been addressed, close the conversastions on [Papercups](#papercups) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the conversation on [Papercups](#papercups) to make it easy to identify outstanding conversations.
 
 ### Prioritizing requests
 
