@@ -18,20 +18,10 @@ PostHog 1.30.0 includes a description here.
 > For a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-
-- [PostHog 1.30.0 release notes](#posthog-1300-release-notes)
-  - [Fresh new look-and-feel](#fresh-new-look-and-feel)
-  - [Correlation analysis](#correlation-analysis)
-  - [Saved insights](#saved-insights)
-  - [Fully revamped recordings](#fully-revamped-recordings)
-  - [Other improvements & fixes](#other-improvements--fixes)
-  - [Deprecation & removal notices](#deprecation--removal-notices)
-  - [Help us improve PostHog](#help-us-improve-posthog)
-- [PostHog News](#posthog-news)
-- [Community](#community)
-  - [Community MVP 🏆](#community-mvp-)
-  - [Community shoutouts](#community-shoutouts)
-- [Open roles](#open-roles)
+- [Fresh new look-and-feel](#fresh-new-look-and-feel)
+- [Correlation analysis](#correlation-analysis)
+- [Saved insights](#saved-insights)
+- [Fully revamped recordings](#fully-revamped-recordings)
 
 ### Fresh new look-and-feel
 
