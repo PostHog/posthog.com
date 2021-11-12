@@ -1342,11 +1342,11 @@ export const More = (props): JSX.Element => {
 
 export const Check = ({ color = 'primary', ...other }: { color?: string }): JSX.Element => {
     return (
-        <svg {...other} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="13" cy="13" r="13" className={`fill-current text-${color}`} />
+        <svg {...other} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path
-                d="M19.0022 9.00005H17.5002V9.49835H17.0019V9.99971H16.5V10.498H16.0017V10.9999H15.5004V11.4982H15.0021V12H14.4997V12.4978H14.0019V13.0002H13.5V13.5021H12.9982V13.9999H12.4999V14.5017H11.998V15H11.5002V15.5019H10.9983V15H10.5V14.5017H9.99819V13.9999H9.50039V13.5021H8.99802V13.0002H7.5V15.5018H7.9983V16.0001H8.50016V16.5015H8.99796V16.9998H9.50033V17.5017H9.99812V18H10.5V18.5018H11.998V18H12.4999V17.5017H12.9982V16.9998H13.5V16.5015H14.0019V16.0001H14.4997V15.5018H15.0021V15H15.5004V14.5017H16.0017V13.9998H16.5V13.502H17.0019V13.0002H17.5002V12.4978H18.002V12H18.4998V11.4981H19.0022V10.9998H19.5V9L19.0022 9.00005Z"
-                fill="white"
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
             />
         </svg>
     )

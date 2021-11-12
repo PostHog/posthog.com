@@ -117,8 +117,8 @@ const Cards = ({ data }) => {
                                     />
                                 ) : (
                                     Logo && (
-                                        <span>
-                                            <Logo className="" />
+                                        <span className="w-12 h-12 mb-4 p-4 rounded bg-white shadow relative text-primary dark:text-primary">
+                                            <Logo className="w-full h-full absolute object-cover inset-0 p-2" />
                                         </span>
                                     )
                                 )}
