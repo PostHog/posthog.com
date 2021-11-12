@@ -27,7 +27,7 @@ The sequence of events:
 * Then it got intense. Within a further two weeks, she'd had 5 general anaesthetics for a range of tests, including surgery to remove one of her eyes and surgery to fit a [Hickman line](https://en.wikipedia.org/wiki/Hickman_line) for chemotherapy. Each time a toddler has a general anaesthetic, they cannot eat for 4 to 6 hours beforehand depending on the procedure. That's the only way to stop her crying, and the appointments seem to run around 2-3 hours late on average, and we had a large amount of travel to get to and from them. All of this, combined with uncertainty, was the hardest part. We also had a house move in this time too, which was a good thing - it was a nice upgrade, and we had lots of help from family.
 * A month after the diagnosis, we've had final confirmation that it hasn't spread outside her eyes. Chemo has started to treat her seeing eye and we're coming to the end of the first week of that. Hopefully the tumours will respond to the chemo - there is a 66% chance of saving her seeing eye.
 
-## You're so brave
+## "You're so brave"
 
 We've heard this a lot, but the reality is that we have no choice.
 
