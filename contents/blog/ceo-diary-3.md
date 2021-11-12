@@ -39,30 +39,13 @@ For the first few weeks, it was unclear if it had spread. In the early days, bot
 
 I was worried about balance. I decided that if the cancer hadn't spread, we'd end up on a cycle of chemo, largely at home, which I could work around. If it had spread, I'd need to learn more to make a decision. It'd be horrible to be commuting.
 
-## The practicalities
-
-There's just more to do to look after her:
-
-* Antibiotics twice a day at the weekend.
-* Four eye drops a day.
-* Daily injections.
-* Daily checks of her line / temperature - to make sure she hasn't got an infection.
-* Weekly blood tests.
-* Anti-bacterial spray / wipes all the time. Nappy changes have to involve gloves as it's literally toxic waste.
-* Chemotherapy session for six hours every three weeks, in hospital.
-* We can't see people inside at certain stages of her chemo cycle when her immunity is low.
-* She's not able to do some things many other kids can do. She had to drop out of nursery to avoid catching illnesses, and she can't have a real bath or go swimming because of her line. She can't take painkillers when she's teething in case they mask a temperature rise.
-* Regular scans of her seeing eye under general anaesthetic.
-
-It feels pretty weird how much of a relationship we're starting to build with the staff at the various hospitals involved. We've got their cell numbers, and they tell us all the gossip on results or how to get through the system. 
-
 ## So, the board meeting
 
-Cancer has taken an eye; my way of saying screw you to it is that I'm not going to let it take away or reduce the opportunity at PostHog for anyone directly or indirectly (including my family) involved.
+Cancer has taken an eye; my way of saying screw you to the disease is that I'm not going to let it take away or reduce the opportunity at PostHog for anyone directly or indirectly (including my family!) involved.
 
-PostHog has made tremendous progress. Our goal for August was to get five reference customers for our paid self-hosted product. We've gone way past that and are at around 10, with around 100 paying customers on PostHog Cloud, and a further 8,000ish companies deployed in total .
+PostHog has made tremendous progress. Our goal for August was to get five reference customers for our paid self-hosted product. We've gone way past that and are at around 10, with around 100 paying customers on PostHog Cloud, and a further 8,000ish companies deployed in total.
 
-There are two modes for product market fit:
+There are two modes for [product market fit](https://www.ycombinator.com/library/5z-the-real-product-market-fit):
 
 * 0 to 1
 * 1 to many
@@ -82,11 +65,11 @@ We now need to:
 
 We believe these two activities will compound.
 
-### Getting more in
+### More in
 
-This is an unknown unknown. So the only way to figure it out is to get started making our own luck.
+This is an unknown unknown; the only way to figure it out is to get started making our own luck.
 
-We've been blessed with mainly organic growth to date. The advantage is that this product-led channel is very leveraged - we can double down on our product and we will grow faster (more word-of-mouth growth, and better retention). However, we can't create wild product improvements overnight - we need to push on more channels than this to accelerate.
+We've been blessed with mainly organic growth to date. The advantage is that this product-led channel is very leveraged - we can double down on our product and we will grow faster (more word-of-mouth growth, and better retention). However, we can't create wild product improvements overnight (mostly) - we need to push on more channels than this to accelerate.
 
 As we created our reference customers, we've realized what the most successful users of PostHog [have in common](/handbook/strategy/strategy).
 
