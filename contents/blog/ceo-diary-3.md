@@ -70,7 +70,7 @@ There are two modes for product market fit:
 This means we feel that:
 
 * Open source project = 1 to many mode
-* PostHog Cloud = 1 to many mode (although we are focused on self hosted)
+* PostHog Cloud = 1 to many mode (although we are focused on self-hosted)
 * PostHog Scale = 1 to many mode
 
 ## Next up
