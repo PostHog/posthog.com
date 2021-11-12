@@ -86,7 +86,7 @@ We believe these two activities will compound.
 
 This is an unknown unknown. So the only way to figure it out is to get started making our own luck.
 
-We've been blessed with mainly organic growth to date. The advantage is that this product-led channel is very leveraged - we can double down on our product and we will grow faster (more word of mouth growth, and better retention). However, we can't create wild product improvements overnight - we need to push on more channels than this to accelerate.
+We've been blessed with mainly organic growth to date. The advantage is that this product-led channel is very leveraged - we can double down on our product and we will grow faster (more word-of-mouth growth, and better retention). However, we can't create wild product improvements overnight - we need to push on more channels than this to accelerate.
 
 As we created our reference customers, we've realized what the most successful users of PostHog [have in common](/handbook/strategy/strategy).
 
