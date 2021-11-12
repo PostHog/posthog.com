@@ -96,7 +96,7 @@ We are creating a simple algorithm that scores each company that deploys (and is
 
 ### More out
 
-We've some huge fans using us in production in massive enterprises. It stands to reason - they care greatly about data control, and they're able to deploy PostHog the day they find it since all data stays in their infrastructure, and they can start for free.
+We've some huge fans using us in massive enterprises. It stands to reason - they care greatly about data control, and they're able to deploy PostHog the day they find it since all data stays in their infrastructure, and they can start for free.
 
 We are going to put more focus on our pricing and adoption model for enterprises. Should we start on the open source project, grow to PostHog Scale in a few places, then grow to Enterprise? Or should we go from PostHog open source to PostHog Enterprise? We'll find out by experimenting and talking to users.
 
