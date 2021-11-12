@@ -1,5 +1,5 @@
 ---
-date: 2021-11-11
+date: 2021-11-12
 title: Cancer and revenue - the latest board meeting
 rootPage: /blog
 sidebar: Blog
