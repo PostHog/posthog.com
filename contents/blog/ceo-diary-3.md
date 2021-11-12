@@ -80,7 +80,7 @@ We now need to:
 * More in: Accelerate growth of the open source product and the Scale product.
 * More out: Get higher order values. We are working on our Enterprise product. This has a longer cycle since larger organizations are slower moving.
 
-These two things together we believe will compound.
+We believe these two activities will compound.
 
 ### Getting more in
 
