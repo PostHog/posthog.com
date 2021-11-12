@@ -29,7 +29,9 @@ you analyze how various groups interact with your product rather than individual
 
 To make use of group analytics, you need to update your event capture code. See the sections below for how to set it up depending on how you are sending data to PostHog.
 
-The following examples use `company_id` as a group type and `id:5` as the group key. Replace these with your particular values.
+The following examples use `company` as a group type and `id:5` as the group key. Replace these with your particular values.
+
+> **Tip:** Use a singular form of the group name throughout ingestion.
 
 ### [posthog-js](https://posthog.com/docs/integrate/client/js)
 
@@ -45,7 +47,7 @@ posthog.init('[your api key]', {
     loaded: function(posthog) {
         posthog.identify('[user unique id]');
 
-        posthog.group('company_id', 'id:5');
+        posthog.group('company', 'id:5');
         posthog.group('playlist', 'id:77', {
             length: 77,
             some: 'properties'
@@ -66,10 +68,10 @@ Update to version 1.4.3 or above to make use of the new functionality.
 
 ```python
 # Capturing an event with groups
-posthog.capture('[distinct id]', 'some event', groups={'company_id': 'id:5'})
+posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
 
 # Updating group properties
-posthog.group_identify('company_id', 'id:5', {
+posthog.group_identify('company', 'id:5', {
     'company_name': 'Awesome Inc',
     'employees': 11
 })
@@ -84,12 +86,12 @@ Update to version 2.1.0 or above to make use of the new functionality.
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
     'event' => 'some event',
-    '$groups' => array("company_id" => "id:5")
+    '$groups' => array("company" => "id:5")
 ));
 
 # Updating a groups properties
 PostHog::groupIdentify(array(
-    'groupType' => 'company_id',
+    'groupType' => 'company',
     'groupKey' => 'id:5',
     'properties' => array("company_name" => "Awesome Inc", "employees" => 11)
 ));
@@ -103,12 +105,12 @@ client.Enqueue(posthog.Capture{
     DistinctId: "[distinct id]",
     Event:      "some event",
     Groups: posthog.NewGroups().
-        Set("company_id", "id:5").
+        Set("company", "id:5").
 })
 
 // Updating a groups properties
 client.Enqueue(posthog.GroupIdentify{
-    Type: "company_id",
+    Type: "company",
     Key:  "id:5",
     Properties: posthog.NewProperties().
         Set("company_name", "Awesome Inc").
@@ -120,6 +122,29 @@ Using groups with go requires latest version of `posthog-go`. Update dependencie
 
 ```shell
 go get -u github.com/posthog/posthog-go
+```
+
+### [posthog-node](https://posthog.com/docs/integrate/server/node)
+
+Update to version 1.2.0 or above to make use of the new functionality.
+
+```javascript
+// Capturing an event with groups
+posthog.capture({
+    event: "some event",
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' }
+})
+
+// Updating a groups properties
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'id:5',
+    properties: {
+        company_name: 'Awesome Inc',
+        employees: 11
+    }
+})
 ```
 
 ### Other libraries
@@ -143,7 +168,7 @@ Body:
         "key1": "value1",
         "key2": "value2",
         "$groups": {
-            "company_id": "id:5"
+            "company": "id:5"
         }
     }
 }
@@ -161,7 +186,7 @@ Body:
     "event": "$groupidentify",
     "properties": {
         "distinct_id": "[your users' distinct id]",
-        "$group_type": "company_id",
+        "$group_type": "company",
         "$group_key": "id:5",
         "$group_set": {
             "company_name": "Awesome Inc",
