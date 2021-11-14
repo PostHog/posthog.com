@@ -79,7 +79,7 @@ const Cards = ({ data }) => {
                     },
                 },
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 md:pl-6 m-0 flex-grow w-full plugin-cards"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 md:pl-6 m-0 flex-grow w-full gap-4"
         >
             {data.map((integration) => {
                 const {
@@ -107,7 +107,7 @@ const Cards = ({ data }) => {
                     >
                         <Card
                             url={slug || url}
-                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white p-12 relative block w-full h-full bg-opacity-0 !rounded-none"
+                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white p-6 relative block w-full h-full dark:bg-gray-accent-dark"
                         >
                             <h3 className="flex flex-col text-xl text-primary dark:text-white">
                                 {logo ? (
