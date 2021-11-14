@@ -531,3 +531,10 @@ ul {
         @apply visible;
     }
 }
+
+.plugin-content {
+    h1 a {
+        /* Temporary fix until plugin content can be processed as MDX */
+        color: inherit !important;
+    }
+}

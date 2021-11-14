@@ -27,7 +27,7 @@ export default function Integration({ data }) {
                     />
                 </div>
                 <div className="max-w-screen-sm mx-auto px-4 flex flex-col md:flex-row items-start mt-16 md:mt-20">
-                    <section className="article-content">
+                    <section className="article-content plugin-content">
                         <div dangerouslySetInnerHTML={{ __html: markdown?.childMarkdownRemark?.html }} />
                     </section>
                 </div>
