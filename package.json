@@ -67,6 +67,7 @@
         "gatsby-transformer-json": "^2.2.8",
         "gatsby-transformer-remark": "^2.8.7",
         "gatsby-transformer-sharp": "^2.2.14",
+        "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",
         "katex": "^0.12.0",
         "kea": "^2.2.2",
