@@ -59,6 +59,7 @@ import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -158,6 +159,7 @@ export const shortcodes = {
     MdxAnchorHeaders,
     Modal,
     NewsletterForm,
+    NextSteps,
     NotFoundPage,
     OtherFeaturesBlock,
     OverflowXSection,

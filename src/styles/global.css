@@ -525,6 +525,15 @@ ul {
     }
 }
 
+/* Next Steps */
+
+.next-steps-content {
+    p {
+        @apply text-base;
+        margin-bottom: 20px;
+    }
+}
+
 .checkbox:checked {
     @apply bg-opacity-100 dark:bg-opacity-100;
     & + svg {
