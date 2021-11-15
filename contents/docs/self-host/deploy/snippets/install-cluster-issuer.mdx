@@ -3,23 +3,21 @@ Create a new cluster resource that will take care of signing your TLS certificat
 1. Create a new file called `cluster-issuer.yaml` with the following content. Note: please remember to replace `your-name@domain.com`
 with a valid email address as you will receive email notifications on certificate renewals:
 
-    ```yaml
-
-    apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer
-    metadata:
-      name: letsencrypt-prod
-    spec:
-      acme:
-        email: "your-name@domain.com"
-        server: https://acme-v02.api.letsencrypt.org/directory
-        privateKeySecretRef:
-          name: posthog-prod-private-key
-        solvers:
-        - http01:
-            ingress:
-              class: nginx
-
-    ```
+  ```yaml
+  apiVersion: cert-manager.io/v1
+  kind: ClusterIssuer
+  metadata:
+    name: letsencrypt-prod
+  spec:
+    acme:
+      email: "your-name@domain.com"
+      server: https://acme-v02.api.letsencrypt.org/directory
+      privateKeySecretRef:
+        name: posthog-tls
+      solvers:
+      - http01:
+          ingress:
+            class: nginx
+  ```
 
 1. Deploy this new resource to your cluster by running: `kubectl apply -f cluster-issuer.yaml`
