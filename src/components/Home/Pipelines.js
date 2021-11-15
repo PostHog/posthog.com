@@ -1,7 +1,8 @@
-import React from 'react'
+import { CallToAction } from 'components/CallToAction'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import React from 'react'
+import { heading, section } from './classes'
 import Icon from './Icon'
-import { section, heading } from './classes'
 
 const Chip = ({ icon, title, className }) => {
     return (
@@ -55,6 +56,9 @@ export default function Pipelines() {
             <h3 className={heading('sm')}>
                 Reliably ingest data at any scale to build a holistic view of your customers.
             </h3>
+            <CallToAction to="/integrations" type="outline" className="mt-8">
+                Explore integrations
+            </CallToAction>
             <div className="lg:block flex">
                 <div className="grid lg:grid-cols-3 mt-8 lg:mt-16 mb-8 gap-8 lg:gap-0 w-full sm:w-3/4 lg:w-auto">
                     <div>

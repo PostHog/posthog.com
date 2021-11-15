@@ -49,6 +49,10 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                shouldBlockNodeFromTransformation: (node) =>
+                    node.internal.type === 'File' &&
+                    node.url &&
+                    node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
