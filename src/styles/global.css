@@ -524,3 +524,17 @@ ul {
         }
     }
 }
+
+.checkbox:checked {
+    @apply bg-opacity-100 dark:bg-opacity-100;
+    & + svg {
+        @apply visible;
+    }
+}
+
+.plugin-content {
+    h1 a {
+        /* Temporary fix until plugin content can be processed as MDX */
+        color: inherit !important;
+    }
+}
