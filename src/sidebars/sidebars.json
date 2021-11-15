@@ -552,6 +552,10 @@
                                 {
                                     "name": "Resize disk",
                                     "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                },
+                                {
+                                    "name": "Log retention",
+                                    "url": "/docs/self-host/runbook/kafka/log-retention"
                                 }
                             ]
                         }
