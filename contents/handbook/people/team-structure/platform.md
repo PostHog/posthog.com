@@ -21,7 +21,7 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 - Fail fast. Fix faster.
 - Ship anywhere
 - Infrastructure scales with demand
-- Enable devlopers to extend PostHog as a Platform
+- Enable developers to extend PostHog as a Platform
 - Support Small Teams (and contributors) in building and debugging PostHog
 - Be frugal.
 
