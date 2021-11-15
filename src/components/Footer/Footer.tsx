@@ -38,10 +38,10 @@ const link = (marginBottom = '1') => cntl`
     inline-block
 `
 
-const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
+const FooterMenuItem = ({ title = '', url = '', addGclid = false, className = '', marginBottom = '1' }) => {
     return (
         <li className={className}>
-            <Link className={link(marginBottom)} to={url}>
+            <Link className={link(marginBottom)} to={url} addGclid={addGclid}>
                 {title}
             </Link>
         </li>
@@ -172,7 +172,11 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Getting started</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
+                                    <FooterMenuItem
+                                        title="PostHog Cloud"
+                                        url="https://app.posthog.com/signup"
+                                        addGclid
+                                    />
                                     <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
                                 </ul>

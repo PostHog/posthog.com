@@ -142,7 +142,11 @@ export const Cloud = ({ finalCost, eventNumberWithDelimiter }) => {
                     </span>
                 </Price>
             </Section>
-            <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
+            <TrackedCTA
+                addGclid
+                className="my-7"
+                event={{ name: 'select edition: clicked get started', type: 'cloud' }}
+            >
                 Get started
             </TrackedCTA>
             <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>

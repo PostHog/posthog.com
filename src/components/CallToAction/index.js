@@ -1,8 +1,8 @@
+import React from 'react'
 import cntl from 'cntl'
 import Link from 'components/Link'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
-import React from 'react'
 
 const sizes = {
     sm: 'text-small font-semibold px-3 py-1 border-2',
@@ -79,6 +79,7 @@ export const CallToAction = ({
     className,
     external,
     state = {},
+    addGclid = false,
 }) => {
     const url = to || href
     return (
@@ -88,6 +89,7 @@ export const CallToAction = ({
             className={button(type, width, className, size)}
             onClick={onClick}
             to={url}
+            addGclid={addGclid}
         >
             {children}
         </Link>

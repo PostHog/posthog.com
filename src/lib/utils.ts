@@ -65,3 +65,10 @@ export function isValidEmailAddress(email: string): boolean {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(String(email).toLowerCase())
 }
+
+export const appendGclid = (url: string, gclid?: string | null): string => {
+    if (gclid) {
+        return `${url}${url.includes('?') ? '&' : '?'}gclid=${gclid}`
+    }
+    return url
+}

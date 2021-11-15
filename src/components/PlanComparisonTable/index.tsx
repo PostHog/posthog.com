@@ -1,4 +1,5 @@
 import { Button, Col, Row } from 'antd'
+import Link from 'components/Link'
 import React from 'react'
 import imgBuilding from '../../images/building.svg'
 import imgCloud from '../../images/cloud.svg'
@@ -262,11 +263,11 @@ export const PlanComparisonTable = () => {
                         <li>You want to get automatic updates with all the latest features.</li>
                     </ul>
                     <div className="p-comparison-btn">
-                        <a href="https://app.posthog.com/signup">
+                        <Link to="https://app.posthog.com/signup" addGclid>
                             <Button type="primary" size="large">
                                 Start free
                             </Button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </Col>

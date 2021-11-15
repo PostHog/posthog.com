@@ -33,7 +33,7 @@ export const CloudPlanBreakdown = () => {
                                 </span>
                             </Price>
                         </Section>
-                        <CallToAction href="https://app.posthog.com/signup" className="my-7">
+                        <CallToAction href="https://app.posthog.com/signup" addGclid className="my-7">
                             Deploy now
                         </CallToAction>
                         <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>

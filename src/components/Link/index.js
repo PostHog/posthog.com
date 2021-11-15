@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import { ExternalLink } from 'components/Icons/Icons'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import { appendGclid } from 'lib/utils'
 
 export default function Link({
     to,
     children,
     className = '',
-    onClick,
-    disablePrefetch,
-    external,
+    onClick = undefined,
+    disablePrefetch = false,
+    external = false,
     iconClasses = '',
     state = {},
-    href,
+    href = '',
+    addGclid = false,
     ...other
 }) {
-    const url = to || href
+    const { gclid } = useValues(posthogAnalyticsLogic)
+    const [url, setUrl] = useState(to || href)
+    useEffect(() => {
+        // Run in an effect because gclid is not available in SSR
+        if (addGclid && gclid) {
+            setUrl(appendGclid(url, gclid))
+        }
+    }, [gclid])
     const internal = !disablePrefetch && /^\/(?!\/)/.test(url)
     return onClick && !url ? (
         <button onClick={onClick} className={className}>

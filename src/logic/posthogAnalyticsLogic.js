@@ -82,5 +82,11 @@ export const posthogAnalyticsLogic = kea({
                 }
             },
         ],
+        gclid: [
+            (s) => [s.posthog],
+            (posthog) => {
+                return posthog?.persistence?.props?.gclid || null
+            },
+        ],
     },
 })

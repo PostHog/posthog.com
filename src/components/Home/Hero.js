@@ -38,7 +38,10 @@ export default function Hero() {
             </div>
             <div className="w-full mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
                 <p className="px-4 font-semibold text-center z-10 relative mb-0">
-                    Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
+                    Don't need to self host? Try{' '}
+                    <Link to="//app.posthog.com/signup" addGclid>
+                        PostHog Cloud
+                    </Link>
                 </p>
                 <div className="max-w-screen-2xl mx-auto w-full relative">
                     <span className="absolute bottom-3 md:-bottom-12 right-0 overflow-x-hidden 2xl:overflow-x-visible">

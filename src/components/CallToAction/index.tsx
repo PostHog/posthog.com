@@ -1,7 +1,7 @@
 // @todo - add/use to, href, and onClick props
 
 import React from 'react'
-import { Link } from 'gatsby'
+import Link from '../Link'
 
 import { mergeClassList } from '../../lib/utils'
 
@@ -25,6 +25,7 @@ interface CallToActionProps {
     width?: string
     href?: string
     to?: string
+    addGclid?: boolean
 }
 
 const icons = {
@@ -57,6 +58,7 @@ export const CallToAction = ({
     href,
     to,
     onClick,
+    addGclid = false,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
         <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded rounded-sm px-3 py-2`}>
@@ -75,12 +77,8 @@ export const CallToAction = ({
         </>
     )
 
-    return href ? (
-        <a href={href} className={classList}>
-            {innerHtml}
-        </a>
-    ) : to ? (
-        <Link to={to} className={classList}>
+    return href || to ? (
+        <Link to={to} href={href} addGclid={addGclid} className={classList}>
             {innerHtml}
         </Link>
     ) : (

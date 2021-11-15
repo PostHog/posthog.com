@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link } from '../components/Link'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Icon } from 'antd'
 import { SEO } from '../components/seo'
@@ -26,11 +26,11 @@ const TrialPage = () => (
                             about installing it yourself.
                         </p>
                         <p>
-                            <a href="https://app.posthog.com/signup">
+                            <Link to="https://app.posthog.com/signup" addGclid>
                                 <Button type="primary" size="large">
                                     Sign Up
                                 </Button>
-                            </a>
+                            </Link>
                         </p>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">

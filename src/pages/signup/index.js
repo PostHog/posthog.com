@@ -63,6 +63,7 @@ export default function SignUp() {
                             </ul>
                             <TrackedCTA
                                 href="https://app.posthog.com/signup"
+                                addGclid
                                 event={{ name: 'get started: clicked Continue', type: 'cloud' }}
                             >
                                 Continue
