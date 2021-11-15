@@ -41,11 +41,11 @@ How to fix?
 
 ### Upgrading from 4.x.x
 
-4.0.0 changes defaults for Kafka pvc sice and log retention policy. If your upgrade fails with the following:
+4.0.0 changes defaults for Kafka PVC size and log retention policy. If your upgrade fails with the following:
 ```
 Error: UPGRADE FAILED: cannot patch "posthog-posthog-kafka" with kind StatefulSet: StatefulSet.apps "posthog-posthog-kafka" is invalid: spec: Forbidden: updates to statefulset spec for fields other than 'replicas', 'template', and 'updateStrategy' are forbidden
 ```
 There are two options:
 1. Change your values to match to what the Kafka values were before (`size: 5Gi` and `logRetentionBytes: _4_000_000_000`)
-2. Resize the Kafka disk following our runbook [kafka-resize-disk](https://posthog.com/docs/self-host/runbook/kafka/resize-disk)
+2. Resize the PVC (Persistent Volume Claim) used by Kafka following our runbook [kafka-resize-disk](https://posthog.com/docs/self-host/runbook/kafka/resize-disk)
 
