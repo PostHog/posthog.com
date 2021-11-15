@@ -114,10 +114,6 @@
                             "url": "/handbook/people/team-structure/core-experience"
                         },
                         {
-                            "name": "Team Design",
-                            "url": "/handbook/people/team-structure/design"
-                        },
-                        {
                             "name": "Team Growth",
                             "url": "/handbook/people/team-structure/growth"
                         },
@@ -128,6 +124,10 @@
                         {
                             "name": "Team Marketing",
                             "url": "/handbook/people/team-structure/marketing"
+                        },
+                        {
+                            "name": "Team Website and Docs",
+                            "url": "/handbook/people/team-structure/website-docs"
                         },
                         {
                             "name": "Team People",
@@ -303,7 +303,7 @@
             "name": "Product",
             "children": [
                 {
-                    "name": "Product team overview",
+                    "name": "Overview",
                     "url": "/handbook/product/product-team"
                 },
                 {
@@ -321,6 +321,15 @@
                 {
                     "name": "Paid Features",
                     "url": "/handbook/product/paid-features"
+                }
+            ]
+        },
+        {
+            "name": "Design",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/handbook/design/about-design"
                 }
             ]
         },
@@ -543,6 +552,10 @@
                                 {
                                     "name": "Resize disk",
                                     "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                },
+                                {
+                                    "name": "Log retention",
+                                    "url": "/docs/self-host/runbook/kafka/log-retention"
                                 }
                             ]
                         }

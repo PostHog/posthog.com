@@ -14,6 +14,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
@@ -21,6 +22,7 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -57,6 +59,7 @@ import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -111,6 +114,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Card,
     Benefits,
     CareersHero,
     InterviewProcess,
@@ -118,6 +122,7 @@ export const shortcodes = {
     Transparency,
     WhyWereHere,
     WorkingAtPostHog,
+    Checkbox,
     Chip,
     CodeBlock,
     CompensationCalculator,
@@ -154,6 +159,7 @@ export const shortcodes = {
     MdxAnchorHeaders,
     Modal,
     NewsletterForm,
+    NextSteps,
     NotFoundPage,
     OtherFeaturesBlock,
     OverflowXSection,
