@@ -5,8 +5,6 @@ showTitle: true
 hideAnchor: true
 ---
 
-![Image of Cloud Infrastructure](https://github.com/PostHog/posthog-cloud/blob/master/docs/images/infra.png?raw=true)
-
 ## People
 
 [See team structure page](/handbook/people/team-structure/team-structure)
@@ -19,10 +17,11 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 
 - We don't lose events
 - Data is as up to date as possible
-- Engineers always be able to ship and build
+- Engineers always are able to ship and build
 - Fail fast. Fix faster.
 - Ship anywhere
-- Stack scales with demand
+- Infrastructure scales with demand
+- Enable devlopers to extend PostHog as a Platform
 - Support Small Teams (and contributors) in building and debugging PostHog
 - Be frugal.
 
@@ -40,34 +39,28 @@ Concrete things we take responsibility over:
 ## Customer
 
 - Other Small Teams in making sure they have the tools (databases, queues, etc) and the ability to deploy effortlessly that they need to build
-- End users (Both cloud and on-prem teams)
+- Self deployed teams
+- app.posthog.com users
 
-## Output metrics
+## Metrics
 
-### VPC
+### Self Deploy 
 ###### Retention 
 - Metric: Retention
 - Objective: Better than cloud
+###### Ease of deploy 
+- Metric: NPS on survey of how install experience was
+- Objective: NPS of > 8
 ### Cloud
 ###### Data Loss
-- Metric: Data loss %
-- Objective: < 0.1%
-###### Uptime 
+- Metric: % of events dropped 
+- Objective: < 0.01%
+###### Uptime SLO 
 - Metric: Uptime
 - Objective: > 99.99%
-###### Speed 
-- Metric: Speed
-- Objectives
-  - Event ingestion: TBD
-  - Query response: TBD
-- Overall: We should anticipate increasing demand (either manually or automatically)
 ##### Cost 
 - Metric: Infra Costs 
 - Objective: Our costs should grow at a rate that is sublinear relative to scale
-### Dev experience
-##### Dev experience NPS (Infra)
-- Metric: Developer experience (relating to infra) (maybe NPS?)
-- Objective: TBD (maybe NPS?)
 
 ## Slack channel
 
