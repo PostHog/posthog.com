@@ -22,6 +22,19 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 If you don't know what to pick [DigitalOcean](/docs/self-host/deploy/digital-ocean) is likely the simplest.
 
+### Choosing the right deployment 
+
+| Deployment | Event Capacity | Ease of setup | Scalable |
+|------------|----------------|---------------|----------|
+| [Magic Curl](https://github.com/posthog/deployment#if-you-want-a-quick-install-on-an-ubuntu-vm) | < 1M Events per Month | Easy | Vertically |
+| [Helm Chart](/docs/self-host/deploy/other) | > 1M per Month | Medium to Hard | Horizontally |
+| [Helm Chart + External Services](/docs/self-host/configure/external-providers) | > 1B per Month | Medium to Hard | Horizontally|
+| [Cloud](https://app.posthog.com) | 0 to 50B Events per Month | Easy | Horizontally |
+
+>Definitions:
+> - **Vertically scalable** means that you will only be able to scale your instance up on one compute node. Once you grow beyond the size of the largest available instance type that you have access to you will no longer be able to scale this instance. 
+> - **Horizontally scalable** means that you can scale the PostHog installation out both vertically (larger instances) and horizontally with *more* instances. This means that in terms of actual scalability you are not constrained by anything but cost of resources. 
+
 ## Configure
 
 There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
@@ -31,6 +44,7 @@ There are various ways to configure and personalize your PostHog instance to bet
 - [Securing PostHog](/docs/self-host/configure/securing-posthog)
 - [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
 - [Email configuration](/docs/self-host/configure/email)
+- [Using external providers](/docs/self-host/configure/external-providers)
 
 <BorderWrapper>
     <Quote
