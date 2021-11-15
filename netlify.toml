@@ -979,3 +979,8 @@
 [[redirects]]
     from = "/handbook/people/team-structure/design"
     to = "/handbook/design/about-design"
+
+# Manually Added: 2021-11-15
+[[redirects]]
+    from = "/trial"
+    to = "/signup"
