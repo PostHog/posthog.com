@@ -41,8 +41,8 @@ brew install libxml2 libxmlsec1 pkg-config
   - `docker-compose -f ee/docker-compose.ch.yml up db redis zookeeper kafka clickhouse`
 - Run the frontend
   - `yarn build`
-  - `yarn start` or click "▶️" next to `"start"` in the scripts section of package.json.
-  - Alternatively, you can also run `./bin/start-frontend` or `yarn start-http --host 0.0.0.0` if you're running into issues with `yarn start`
+  - `yarn start-docker:esbuild` or click "▶️" next to `"start-docker:esbuild"` in the scripts section of package.json.
+      - This will serve up the frontend on host `0.0.0.0` so that services on Docker can interact with it.
 - Run the backend
   - In `/etc/hosts`, add a line with `127.0.0.1 kafka clickhouse`
   - Make sure you're running your `virtualenv` with `source env/bin/activate`
