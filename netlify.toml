@@ -1,6 +1,8 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/integrations/:splat"
+  to = "/plugins"
+  status = 200
+
 
 [[redirects]]
   from = "/careers/*"
@@ -818,12 +820,7 @@
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"
-
-[[redirects]]
-  from = "/next-steps/*"
-  to = "/next-steps"
-  status = 200
+    to = "/docs/user-guides/persons"    
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -960,27 +957,8 @@
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
 
-# Manually Added: 2021-11-10
-[[redirects]]
-    from = "/blog/the-posthog-array-1-29-1"
-    to = "/blog/the-posthog-array-1-29-0" 
 
-# Manually Added: 2021-11-10
+# Added: 2021-11-15
 [[redirects]]
-    from = "/blog/the-posthog-array-1-28-1"
-    to = "/blog/the-posthog-array-1-28-0" 
-
-# Manually Added: 2021-11-10
-[[redirects]]
-    from = "/blog/the-posthog-array-1-23-1"
-    to = "/blog/the-posthog-array-1-23-0" 
-
-# Manually Added: 2021-11-10
-[[redirects]]
-    from = "/blog/the-posthog-array-1-15-1"
-    to = "/blog/the-posthog-array-1-15-0" 
-    
-# Added: 2021-11-10
-[[redirects]]
-    from = "/handbook/people/team-structure/design"
-    to = "/handbook/design/about-design"
+    from = "/handbook/design/about-design"
+    to = "/handbook/people/team-structure/design"
