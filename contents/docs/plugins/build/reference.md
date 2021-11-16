@@ -148,7 +148,7 @@ All the above methods represent their equivalent Redis commands – see Redis do
 
 Example:
 ```js
-async function processEvent(event, { config, cache }) {
+export function processEvent(event, { config, cache }) {
     const counterValue = (await cache.get('greeting_counter', 0))
     cache.set('greeting_counter', counterValue + 1)
     if (!event.properties) event.properties = {}
@@ -163,7 +163,7 @@ The `global` object is used for sharing functionality between `setupPlugin` and 
 
 Example:
 ```js
-export async function setupPlugin({ global, config }) {
+export function setupPlugin({ global, config }) {
     global.eventsToTrack = config.split(',') 
 }
 
@@ -191,7 +191,7 @@ As such, accessing the contents of an uploaded file can be done with `attachment
 
 Example:
 ```js
-export async function setupPlugin({ attachments, global }: Meta) {
+export function setupPlugin({ attachments, global }: Meta) {
     if (attachments.maxmindMmdb) {
         global.ipLookup = new Reader(attachments.maxmindMmdb.contents)
     }
