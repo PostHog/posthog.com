@@ -152,11 +152,13 @@ Equally, we can see specific events that are correlated:
 
 ![Event property correlations](../../images/docs/user-guides/funnel-correlation-event-properties.png)
 
-Here we see that in our example funnel, users that performed the "opted into navigation redesign" event were 3.1 times less likely to convert. We can drill down further to see how this events properties are correlationed also, using the expand event button to the left and we see that people that opted for the redesign and did not have a billing plan were 3.3 times less likely to convert. Where we go from here requires further investigation, but the important point is that we now have strings to pull on which hopefully end up with meaningful insights.
+Above we see that in our example funnel, users that performed the "opted into navigation redesign" event were 3.1 times less likely to convert. We can drill down further to see how this events properties are correlationed also, using the expand event button to the left and we see that people that opted for the redesign and did not have a billing plan were 3.3 times less likely to convert. Where we go from here requires further investigation, but the important point is that we now have strings to pull on which hopefully end up with actionable insights.
+
+One route for further exploration might be to drill down to the people that were considered for this specific event correlation. We can do so by clicking on the "Completed" and "Dropped off" numbers within a row. In the above case, users for both "Completed" and "Dropped off" will have performed the "opted into navigation redesign". However, "Completed" uses completed the funnel, where as "Dropped off" users will have entered the funnel, but failed to make it through to the end.
 
 You have better context on your product, and what could be a relevant signal or not. There will be some events and/or properties that perhaps have trivial correlations, or don't actually provide an actionable signal. To remove this potential distractions, use either the property names drop down to ignore them in analysis for a funnel in particular, or use the "Exclude from project" feature which will ensure that you and your team will not see correlations for these events and properties whilst within this project.
 
-It's important to remember that the accuracy and therefore usefulness of any correlation is dependent on the sample size. Try to ensure that there's enough volume to your funnel to ensure its meaningful.
+It's important to remember that the accuracy and therefore usefulness of any correlation is dependent on the sample size, if you've only got a handful of users for a specific correlation then it would be wise to try to increase this number. You can do this by, for instance, increasing the date range size of the funnel.
 
 ### Understand how your changes are improving your flow
 
