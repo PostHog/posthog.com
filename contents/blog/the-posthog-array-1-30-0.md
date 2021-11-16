@@ -25,7 +25,7 @@ PostHog 1.30.0 includes a description here.
 
 ### Fresh new look-and-feel
 
-PostHog just got a lot fresher! We have a brand new UI and layout that had been on the works, codename `lemonade` (because it's fresh). It's not only a coat of paint, we've pushed a lot of improvements to overall navigation and performance, we call it turbo mode.
+PostHog just got a lot fresher! We have a brand new UI and layout that had been in the works, codenamed `lemonade` (because it's fresh). It's not only a new coat of paint - we've also pushed a lot of improvements to overall navigation and performance too. We call it turbo mode.
 
 
 {images here}
@@ -34,7 +34,9 @@ PostHog just got a lot fresher! We have a brand new UI and layout that had been 
 
 ### Correlation analysis
 
-Trying to understand why your users are converting or dropping? Presenting Correlation analysis. This nifty new insight will automatically match your funnels to any relevant signals on why your users convert or drop (e.g. "Users in Canada are 5x more likely to convert" or "Users in Chrome are 3x less likely to convert"). Funnel optimization to the next level. [Read more here](/docs/....).
+Want to understand why users convert or churn? Presenting: Correlation analysis. This nifty new insight automatically matches funnels to any relevant conversion signals, giving you effortless correlation information such as "Users in Canada are 5x more likely to convert" or "Users in Chrome are 3x less likely to convert". This is a very powerful which enables you to take funnel optimization to the next level. 
+
+[Read more here](/docs/....).
 
 {image here}
 
@@ -44,7 +46,7 @@ Trying to understand why your users are converting or dropping? Presenting Corre
 
 ### Saved insights
 
-No more recreating the same insight multiple times. You will now be able to save insights on PostHog without adding them to a dashboard. Further, you'll be able to see a list of insights created by other team members, and easily search them and filter them. We're investing a lot of effort to make sure you can better collaborate within PostHog.
+Tired of creating the same insights multiple times? You can now save insights on PostHog without adding them to a dashboard. Further, you're able to see, search and filter a list of insights created by other team members - which makes it a lot easier to collaborate with PostHog. 
 
 {image here}
 
@@ -61,7 +63,7 @@ The recordings playback experience just got a lot better. From significant perfo
 
 ### Other improvements & fixes
 - **Turbo mode**. You'll notice a significant speed improvement when using PostHog. App navigation will now happen almost instantly. In particular, you'll notice navigation between dashboards and insights happens without any delay.
-- **Duplicate dashboards**. Thanks to a community member you can now easily duplicate your dashboard instead of manually recreating it.
+- **Duplicate dashboards**. Thanks to community member [Yuvaraj J](https://github.com/PostHog/posthog/pull/6476), you can now easily duplicate dashboards instead of manually recreating them. Thanks, Yuvaraj!
 - **Security on Docker builds.** We've moved to a different base image for Docker (`alpine`) and this new image build solves a lot of security vulnerabilities on upstream dependencies.
 - Have a large number of dashboards? You'll now be able to **easily search the dashboard list.**
 - Fixed a bug that caused the app to believe there was a new version available when it wasn't ready to be shipped.
@@ -89,7 +91,7 @@ No new joiners this month, but stay tuned for new people joining real soon!
 ## Community
 ### Community MVP 🏆
 
-Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to [timgl](https://github.com/asherf)!
+Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to [asherf](https://github.com/asherf)!
 
 Asher pushed several PRs to improve the Python code quality in the main PostHog app.
 
