@@ -7,11 +7,11 @@ showTitle: true
 hideAnchor: true
 categories: ["Release notes"]
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: Excerpt here
+excerpt: Brand new and faster user interface, automatic conversion signal detection with Correlation analysis, saving insights for future use and a fully revamped recordings playback experience and more than 350 improvements/fixes more.
 ---
 
 
-PostHog 1.30.0 includes a description here.
+PostHog 1.30.0 is a milestone release! A brand new and faster user interface, automatic conversion signal detection with Correlation analysis, saving insights for future use and a fully revamped recordings playback experience are just a few of the improvements included.
 
 ## PostHog 1.30.0 release notes
 
@@ -28,7 +28,8 @@ PostHog 1.30.0 includes a description here.
 PostHog just got a lot fresher! We have a brand new UI and layout that had been in the works, codenamed `lemonade` (because it's fresh). It's not only a new coat of paint - we've also pushed a lot of improvements to overall navigation and performance too. We call it turbo mode.
 
 
-{images here}
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-lemonade.png" alt="Screenshot of new user interface" />
+
 
 <br />
 
@@ -38,7 +39,8 @@ Want to understand why users convert or churn? Presenting: Correlation analysis.
 
 [Read more here](/docs/....).
 
-{image here}
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="Screenshot of correlation analysis" />
+
 
 > 🎁 Correlation analysis is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
@@ -48,7 +50,8 @@ Want to understand why users convert or churn? Presenting: Correlation analysis.
 
 Tired of creating the same insights multiple times? You can now save insights on PostHog without adding them to a dashboard. Further, you're able to see, search and filter a list of insights created by other team members - which makes it a lot easier to collaborate with PostHog. 
 
-{image here}
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-saved-insights.png" alt="Screenshot of saved insights" />
+
 
 <br />
 
@@ -65,6 +68,7 @@ The recordings playback experience just got a lot better. From significant perfo
 - **Turbo mode**. You'll notice a significant speed improvement when using PostHog. App navigation will now happen almost instantly. In particular, you'll notice navigation between dashboards and insights happens without any delay.
 - **Duplicate dashboards**. Thanks to community member [Yuvaraj J](https://github.com/PostHog/posthog/pull/6476), you can now easily duplicate dashboards instead of manually recreating them. Thanks, Yuvaraj!
 - **Security on Docker builds.** We've moved to a different base image for Docker (`alpine`) and this new image build solves a lot of security vulnerabilities on upstream dependencies.
+- **Improved query performance**. We improved how person properties are handled which results in up to 2x faster queries.
 - Have a large number of dashboards? You'll now be able to **easily search the dashboard list.**
 - Fixed a bug that caused the app to believe there was a new version available when it wasn't ready to be shipped.
 - Fixed bugs with person counts not matching between an insight graph and the person list.
