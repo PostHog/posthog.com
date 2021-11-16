@@ -25,10 +25,11 @@ PostHog 1.30.0 is a milestone release! A brand new and faster user interface, au
 
 ### Fresh new look-and-feel
 
-PostHog just got a lot fresher! We have a brand new UI and layout that had been in the works, codenamed `lemonade` (because it's fresh). It's not only a new coat of paint - we've also pushed a lot of improvements to overall navigation and performance too. We call it turbo mode.
-
+We reworked PostHog's UI philosophy from the ground up, all to offer you the most intuitive and sleek user experience possible. With 1.30.0 we're introducing our redesigned navigation experience – codenamed Lemonade for its freshness. An evolution of the interface you know, it's simply much nicer packaging for the existing features, along with a new helpful addition: breadcrumbs for hierarchical navigation. We hope you'll find this a joy to use. And if you have any feedback regarding the redesign, we'd love to hear your thoughts!
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-lemonade.png" alt="Screenshot of new user interface" />
+
+In addition to the new coat of paint, we've been working on performance improvements – codenamed Turbo Mode. Although not visible at first glance, recent under-the-hood changes make switching between pages feel smoother and snappier.
 
 
 <br />
