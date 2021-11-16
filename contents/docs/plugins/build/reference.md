@@ -168,7 +168,7 @@ export function setupPlugin({ global, config }) {
 }
 
 export function processEvent(event, { global, config }) {
-    if(global.eventsToTrack.indexOf(event.event) > -1) {
+    if(global.eventsToTrack.includes(event.event)) {
         // Do something
     }
 }
