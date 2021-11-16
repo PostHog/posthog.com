@@ -146,7 +146,7 @@ For example, in the previous section we discussed a hypothesis that operating sy
 
 ![Person property correlations](../../images/docs/user-guides/funnel-correlation-user-properties.png)
 
-Here we can see that the conversion rate of people using Android and iOS are 4.1 and 3.1 times less likely to convert in our example funnel. However, we also see other properties that may be of interest, for instance the "Country Name". This gives us some threads to pull on, perhaps we might look into internationalization, or ensure the app loads well in different regions.
+Above we can see that the conversion rate of people using Android and iOS are 4.1x and 3.1x times less likely to convert in our example funnel. However, we also see other properties that may be of interest, for instance the "Country Name". This gives us some threads to pull on, perhaps we might look into internationalization, or ensure the app loads well in different regions.
 
 Equally, we can see specific events that are correlated:
 
