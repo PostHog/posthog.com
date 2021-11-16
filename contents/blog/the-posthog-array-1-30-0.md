@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: ["Release notes"]
-featuredImage: ../images/blog/array/1-28-0.png
+featuredImage: ../images/blog/array/1-30-0.png
 excerpt: Brand new and faster user interface, automatic conversion signal detection with Correlation analysis, saving insights for future use and a fully revamped recordings playback experience and more than 350 improvements/fixes more.
 ---
 
