@@ -545,5 +545,9 @@ ul {
     h1 a {
         /* Temporary fix until plugin content can be processed as MDX */
         color: inherit !important;
+        @apply !font-bold;
+    }
+    img {
+        @apply hidden;
     }
 }
