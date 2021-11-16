@@ -989,3 +989,8 @@
 [[redirects]]
     from = "/handbook/design/about-design"
     to = "/handbook/people/team-structure/design"
+
+# Added: 2021-11-16
+[[redirects]]
+    from = "/plugins"
+    to = "/integrations"
