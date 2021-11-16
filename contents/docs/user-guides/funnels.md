@@ -138,27 +138,8 @@ You can instantly see that the conversion rate is lower on Linux; this indicates
 
 You can break down by a number of user and event properties (e.g. browser, country, etc.) to help quickly validate the initial hypothesis you may have.
 
-### Automatically identify possible causes of failure and success
+The above process depends on thinking up a hypothesis to test. PostHog can also do this thinking for you, by automatically showing you which events and properties affect the conversion rate of users. To find out how to use this feature, check out [Correlation Analysis](correlation).
 
-If you're not sure what might be a significant event or property in determining how likely someone is to convert, you can use Correlation analysis. This report will automatically highlighting significant events or properties. Given a funnel, PostHog will calculate the conversion rate for different slices (either by events performed, properties they have or properties for the events they performed) and surface any relevant signals.
-
-For example, in the previous section we discussed a hypothesis that operating system might play a significant role in determining whether someone converts. With Correlation analysis we can automatically identify if this is the case, along with every other possible event or property correlation. Example:
-
-![Person property correlations](../../images/docs/user-guides/funnel-correlation-user-properties.png)
-
-Above we can see that the conversion rate of people using Android and iOS are 4.1x and 3.1x times less likely to convert in our example funnel. However, we also see other properties that may be of interest, for instance the "Country Name". This gives us some threads to pull on, perhaps we might look into internationalization, or ensure the app loads well in different regions.
-
-Equally, we can see specific events that are correlated:
-
-![Event property correlations](../../images/docs/user-guides/funnel-correlation-event-properties.png)
-
-Above we see that in our example funnel, users that performed the "opted into navigation redesign" event were 3.1 times less likely to convert. We can drill down further to see how this events properties are correlationed also, using the expand event button to the left and we see that people that opted for the redesign and did not have a billing plan were 3.3 times less likely to convert. Where we go from here requires further investigation, but the important point is that we now have strings to pull on which hopefully end up with actionable insights.
-
-One route for further exploration might be to drill down to the people that were considered for this specific event correlation. We can do so by clicking on the "Completed" and "Dropped off" numbers within a row. In the above case, users for both "Completed" and "Dropped off" will have performed the "opted into navigation redesign". However, "Completed" uses completed the funnel, where as "Dropped off" users will have entered the funnel, but failed to make it through to the end.
-
-You have better context on your product, and what could be a relevant signal or not. There will be some events and/or properties that perhaps have trivial correlations, or don't actually provide an actionable signal. To remove this potential distractions, use either the property names drop down to ignore them in analysis for a funnel in particular, or use the "Exclude from project" feature which will ensure that you and your team will not see correlations for these events and properties whilst within this project.
-
-It's important to remember that the accuracy and therefore usefulness of any correlation is dependent on the sample size, if you've only got a handful of users for a specific correlation then it would be wise to try to increase this number. You can do this by, for instance, increasing the date range size of the funnel.
 
 ### Understand how your changes are improving your flow
 
