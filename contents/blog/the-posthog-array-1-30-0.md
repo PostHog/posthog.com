@@ -37,7 +37,7 @@ PostHog just got a lot fresher! We have a brand new UI and layout that had been 
 
 Want to understand why users convert or churn? Presenting: Correlation analysis. This nifty new insight automatically matches funnels to any relevant conversion signals, giving you effortless correlation information such as "Users in Canada are 5x more likely to convert" or "Users in Chrome are 3x less likely to convert". This is a very powerful which enables you to take funnel optimization to the next level. 
 
-[Read more here](/docs/....).
+Read more on the [Correlation analysis docs](/docs/user-guides/correlation).
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="Screenshot of correlation analysis" />
 
@@ -57,7 +57,7 @@ Tired of creating the same insights multiple times? You can now save insights on
 
 ### Fully revamped recordings
 
-The recordings playback experience just got a lot better. From significant performance improvements (you'll no longer need to wait for the entire recording to load), to a brand new playback interface. Find the right spot in a recording quickly and understand better what your users are doing.
+The recordings experience just got a lot better. We added a new recordings tab that allows you to filter and search across multiple days (replacing the [old sessions tab](/blog/sessions-removal)). Once you've found the recording you want to watch, there's a brand new player experience that loads much faster and overlays events on the seekbar. Find the right spot in a recording quickly and understand better what your users are doing.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-recordings.png" alt="Screenshot of new recordings playback experience" />
 
