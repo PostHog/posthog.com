@@ -150,7 +150,7 @@ Example:
 ```js
 export function processEvent(event, { config, cache }) {
     const counterValue = (await cache.get('greeting_counter', 0))
-    cache.set('greeting_counter', counterValue + 1)
+    await cache.set('greeting_counter', counterValue + 1)
     if (!event.properties) event.properties = {}
     event.properties['greeting_counter'] = counterValue
     return event
