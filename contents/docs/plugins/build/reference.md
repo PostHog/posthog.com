@@ -164,7 +164,7 @@ The `global` object is used for sharing functionality between `setupPlugin` and 
 Example:
 ```js
 export function setupPlugin({ global, config }) {
-    global.eventsToTrack = config.split(',') 
+    global.eventsToTrack = (config.eventsToTrack || '').split(',') 
 }
 
 export function processEvent(event, { global, config }) {
