@@ -19,10 +19,10 @@ authors:
   - {
       handle: yakko-majuri,
       name: Yakko Majuri,
-      role: Developer Experience,
+      role: Software Engineer,
       image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90,
-      link_type: linkedin,
-      link_url: https://www.linkedin.com/in/yakko-majuri
+      link_type: github,
+      link_url: https://github.com/yakkomajuri
     }
   - {
       handle: joe-martin,
