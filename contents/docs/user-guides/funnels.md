@@ -142,7 +142,7 @@ You can break down by a number of user and event properties (e.g. browser, count
 
 If you're not sure what might be a significant event or property in determining how likely someone is to convert, you can use Correlation analysis. This report will automatically highlighting significant events or properties. Given a funnel, PostHog will calculate the conversion rate for different slices (either by events performed, properties they have or properties for the events they performed) and surface any relevant signals.
 
-For example, in the previous section we discussed a hypothesis that operating system might be a significant property when determining someones likeliness to convert. With correlation analysis we can automatically identify if this is the case, along with every other possible event or property correlation e.g. the :
+For example, in the previous section we discussed a hypothesis that operating system might play a significant role in determining whether someone converts. With Correlation analysis we can automatically identify if this is the case, along with every other possible event or property correlation. Example:
 
 ![Person property correlations](../../images/docs/user-guides/funnel-correlation-user-properties.png)
 
