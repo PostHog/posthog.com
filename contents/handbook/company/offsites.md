@@ -25,4 +25,6 @@ Some guidelines:
 - We'd encourage you to get an AirBnB for everyone not living in the city as you automatically get a space you can work from and there's less organizing involved.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having a loose agenda and an idea of what you want to achieve _before_ the start of the trip.
 
+The budget for these trips is up to $1,000 per person.
+
 When we have an ops person in place they will be in charge of organising this event but up until then it'll be a combination of Charles, Tim and the relevant small team lead.
