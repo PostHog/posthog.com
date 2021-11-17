@@ -172,8 +172,8 @@
                         ],
                         "footerLinks": [
                             {
-                                "title": "Plugins",
-                                "url": "/plugins"
+                                "title": "Integrations",
+                                "url": "/integrations"
                             },
                             {
                                 "title": "Build your own plugin",
