@@ -182,7 +182,7 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
         const filtered = data.filter((item) => {
             return Object.keys(filters).every((key) => {
                 if (key === 'search') {
-                    return item.name.includes(filters[key])
+                    return item.name.toLowerCase().includes(filters[key].toLowerCase())
                 }
                 return (
                     filters[key].length <= 0 ||
