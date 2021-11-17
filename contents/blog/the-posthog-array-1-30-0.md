@@ -92,7 +92,7 @@ The recordings experience just got a lot better. We added a new recordings tab t
 
 ### Deprecation & removal notices
 
-1. This version (`1.30.0`) will be the last version where we support a Postgres-only deployment of PostHog. See [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a Clickhouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. This version (`1.30.0`) will be the last version where we support a Postgres-only deployment of PostHog. See [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're now fully removing the legacy Sessions list page. Read more about it, [in this blog post](/blog/sessions-removal).
 
 ### Help us improve PostHog
