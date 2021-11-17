@@ -13,6 +13,10 @@ excerpt: Brand new and faster user interface, automatic conversion signal detect
 
 PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user interface, automatic conversion signal detection with correlation analysis, the ability to save insights for future use and a fully revamped recordings playback experience. And that's just for starters!
 
+<blockquote class='warning-note'>
+<b>Postgres-based deployments are now deprecated</b> in favor of Clickhouse-backed installations. It's important to migrate your installation to keep getting the latest updates and features. <a href="#deprecation--removal-notices">Read more</a> about this below.
+</blockquote>
+
 ## PostHog 1.30.0 release notes
 
 > Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
@@ -80,8 +84,8 @@ The recordings experience just got a lot better. We added a new recordings tab t
 
 ### Deprecation & removal notices
 
-1. We're now fully removing the legacy Sessions list page. Read more about it, [in this blog post](/blog/sessions-removal).
-2. 1.30.0 will be the latest version where we support a Postgres only deployment of PostHog. See [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a Clickhouse version.
+1. This version (`1.30.0 `) will be the last version where we support a Postgres-only deployment of PostHog. See [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a Clickhouse version. Clickhouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+2. We're now fully removing the legacy Sessions list page. Read more about it, [in this blog post](/blog/sessions-removal).
 
 ### Help us improve PostHog
 
