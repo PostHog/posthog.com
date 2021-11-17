@@ -11,11 +11,11 @@ excerpt: Brand new and faster user interface, automatic conversion signal detect
 ---
 
 
-PostHog 1.30.0 is a milestone release! A brand new and faster user interface, automatic conversion signal detection with Correlation analysis, saving insights for future use and a fully revamped recordings playback experience are just a few of the improvements included.
+PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user interface, automatic conversion signal detection with correlation analysis, the ability to save insights for future use and a fully revamped recordings playback experience. And that's just for starters!
 
 ## PostHog 1.30.0 release notes
 
-> For a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
 - [Fresh new look-and-feel](#fresh-new-look-and-feel)
@@ -36,7 +36,7 @@ In addition to the new coat of paint, we've been working on performance improvem
 
 ### Correlation analysis
 
-Want to understand why users convert or churn? Presenting: Correlation analysis. This nifty new insight automatically matches funnels to any relevant conversion signals, giving you effortless correlation information such as "Users in Canada are 5x more likely to convert" or "Users in Chrome are 3x less likely to convert". This is a very powerful which enables you to take funnel optimization to the next level. 
+Want to understand why users convert or churn? Presenting: Correlation analysis. This nifty new insight automatically matches funnels to any relevant conversion signals, giving you effortless correlation information such as "Users in Canada are 5x more likely to convert" or "Users in Chrome are 3x less likely to convert". This is a very powerful feature which enables you to take funnel optimization to the next level. 
 
 Read more on the [Correlation analysis docs](/docs/user-guides/correlation).
 
@@ -58,7 +58,7 @@ Tired of creating the same insights multiple times? You can now save insights on
 
 ### Fully revamped recordings
 
-The recordings experience just got a lot better. We added a new recordings tab that allows you to filter and search across multiple days (replacing the [old sessions tab](/blog/sessions-removal)). Once you've found the recording you want to watch, there's a brand new player experience that loads much faster and overlays events on the seekbar. Find the right spot in a recording quickly and understand better what your users are doing.
+The recordings experience just got a lot better. We added a new recordings tab that enables you to filter and search across multiple days (replacing the [old sessions tab](/blog/sessions-removal)). Once you've found the recording you want to watch, there's a brand new player experience that loads much faster and overlays events on the seekbar. Find the right spot in a recording quickly and understand better what your users are doing.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-recordings.png" alt="Screenshot of new recordings playback experience" />
 
