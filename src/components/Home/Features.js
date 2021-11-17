@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react'
-import Slider from 'react-slick'
-import { StaticImage } from 'gatsby-plugin-image'
-import Icon from './Icon'
 import { CallToAction } from 'components/CallToAction'
-import { section, heading } from './classes'
 import SliderNav from 'components/SliderNav'
+import { StaticImage } from 'gatsby-plugin-image'
+import React, { useRef, useState } from 'react'
+import Slider from 'react-slick'
+import { heading, section } from './classes'
+import Icon from './Icon'
 
 const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
     const borderColor = index === activeFeature ? 'red' : 'gray'
@@ -58,8 +58,6 @@ export default function Features() {
 
     const sliderImageProps = {
         quality: 100,
-        height: 500,
-        width: 890,
     }
 
     const handleChange = (oldIndex, newIndex) => {
@@ -107,7 +105,7 @@ export default function Features() {
                 handlePrevious={() => sliderRef.current.slickPrev()}
                 handleNext={() => sliderRef.current.slickNext()}
                 currentIndex={activeFeature}
-                length={3}
+                length={4}
             />
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
@@ -118,25 +116,28 @@ export default function Features() {
                         feature="Funnels"
                     />
                     <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-trends.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-trends.png" />}
                         description="See changes in product usage with"
                         icon="trends"
                         feature="Trends"
                     />
                     <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.png" />}
                         description="Understand why with"
                         icon="session-recordings-with-bg"
                         feature="Session recordings"
                     />
                     <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.png" />}
                         description="Roll out changes safely with"
                         icon="feature-flags-with-bg"
                         feature="Feature flags"
+                    />
+                    <SliderItem
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-plugins.png" />}
+                        description="Keep your entire product stack in sync with"
+                        icon="custom-plugins"
+                        feature="Plugins"
                     />
                 </Slider>
             </div>
