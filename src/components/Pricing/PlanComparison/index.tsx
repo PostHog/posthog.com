@@ -69,8 +69,8 @@ const sections = [
                 tiers: { 'PostHog Cloud': 'Instant', 'Open source': 'Instant', Scale: '1-3 days' },
             },
             {
-                name: 'Automatic updates',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+                name: 'Proactive alerting for security patches',
+                tiers: { 'PostHog Cloud': 'n/a', 'Open source': false, Scale: true },
             },
             {
                 name: 'Self-hosted database',
@@ -81,7 +81,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Managed by PostHog',
                     'Open source': 'Managed by you',
-                    Scale: 'We help you manage',
+                    Scale: 'We help you manage by unblocking when you get stuck',
                 },
             },
         ],
@@ -141,6 +141,36 @@ const sections = [
         ],
     },
     {
+        name: 'Advanced analytics',
+        features: [
+            {
+                name: 'Correlation analysis',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+            },
+            {
+                name: 'Advanced user paths (custom final steps / enhanced filters)',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+            },
+            {
+                name: 'Group analytics',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+            },
+        ],
+    },
+    {
+        name: 'Collaboration',
+        features: [
+            {
+                name: 'Event taxonomy descriptions',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+            },
+            {
+                name: 'Dashboard tagging',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
+            },
+        ],
+    },
+    {
         name: 'Platform',
         features: [
             {
@@ -162,10 +192,6 @@ const sections = [
             {
                 name: 'Ad blocker-resistant',
                 tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true },
-            },
-            {
-                name: 'Uptime & scalability SLAs',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
         ],
     },
