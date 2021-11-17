@@ -21,16 +21,12 @@ export const features = {
     ],
     'Advanced features': [
         { title: 'Correlation analysis' },
-        { title: 'Priority Session Recordings' },
+        { title: 'Priority recordings' },
         { title: 'Multivariate testing' },
-        { title: 'Deep Dive Dashboards' },
+        { title: 'Advanced Paths analysis' },
         { title: 'Multiple projects' },
     ],
-    Collaboration: [
-        { title: 'User permissions' },
-        { title: 'Dashboard collaboration tools' },
-        { title: 'Team event management tools' },
-    ],
+    Collaboration: [{ title: 'Insight collaboration tools' }, { title: 'Team event management tools' }],
     'Account & support': [
         { title: 'Team training' },
         { title: 'Dashboard configuration support' },

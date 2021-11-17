@@ -206,10 +206,10 @@ export const PlanComparisonTable = () => {
                     <td>Unlimited users</td>
                 </tr>
                 <tr>
-                    <td>User permissioning</td>
-                    <td>No user permissioningz</td>
-                    <td>No user permissioning</td>
-                    <td>User permissioning</td>
+                    <td>No private projects</td>
+                    <td>No private projects</td>
+                    <td>No private projects</td>
+                    <td>Private projects</td>
                 </tr>
                 <tr>
                     <td>SSO</td>
@@ -217,7 +217,12 @@ export const PlanComparisonTable = () => {
                     <td>No SSO</td>
                     <td>SSO</td>
                 </tr>
-
+                <tr>
+                    <td>No SAML</td>
+                    <td>No SAML</td>
+                    <td>No SAML</td>
+                    <td>SAML</td>
+                </tr>
                 <tr>
                     <td colSpan={3}>
                         <strong>Support</strong>

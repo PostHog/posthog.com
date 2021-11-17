@@ -87,4 +87,4 @@ Any Administrator or Owner can make a project private or open at any time in the
 
 Regular organization Members can be made project Administrators, giving them elevated permissions just inside the project.
 
-> **Note:** Private projects belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
+> **Note:** Private projects requies an Enterprise license. To use this feature, [contact us for a license](/pricing).
