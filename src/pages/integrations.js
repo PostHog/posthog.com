@@ -39,6 +39,17 @@ const maintainerIcons = {
 const Filters = ({ filterableData, filters, handleFilterChange }) => {
     return (
         <aside className="w-[300px] md:sticky top-20">
+            <div className="mb-5">
+                <h5>Search</h5>
+                <input
+                    id="integrations-search"
+                    className="w-full text-xs text-primary dark:text-primary-dark outline-none bg-transparent py-2 placeholder-primary-50::placeholder dark:placeholder-primary-dark-50::placeholder border border-solid rounded-sm"
+                    placeholder="BigQuery Export"
+                    style={{ paddingLeft: 5, borderColor: '#9A9A9A', maxWidth: 175, paddingRight: 4 }}
+                    onChange={(e) => handleFilterChange(e, 'search', e.target.value)}
+                />
+            </div>
+
             <ul className="list-none p-0 m-0 flex flex-col space-y-6">
                 {Object.keys(filterableData).map((filter) => {
                     return (
@@ -152,19 +163,27 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
     const [filteredData, setFilteredData] = useState(null)
     const [filters, setFilters] = useState(Object.fromEntries(Object.entries(filterableData).map(([key]) => [key, []])))
     const handleFilterChange = (e, filter, value) => {
-        const { checked } = e.target
         let newFilters = { ...filters }
-        if (!checked) {
-            newFilters[filter].splice(newFilters[filter].indexOf(value), 1)
+        if (filter === 'search') {
+            newFilters.search = value
         } else {
-            newFilters = { ...newFilters, [filter]: [...newFilters[filter], value] }
+            const { checked } = e.target
+            if (!checked) {
+                newFilters[filter].splice(newFilters[filter].indexOf(value), 1)
+            } else {
+                newFilters = { ...newFilters, [filter]: [...newFilters[filter], value] }
+            }
         }
+
         setFilters(newFilters)
     }
 
     useEffect(() => {
         const filtered = data.filter((item) => {
             return Object.keys(filters).every((key) => {
+                if (key === 'search') {
+                    return item.name.includes(filters[key])
+                }
                 return (
                     filters[key].length <= 0 ||
                     filters[key].some((filterBy) => {
