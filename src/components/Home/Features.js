@@ -24,9 +24,6 @@ const SliderItem = ({ image, description, icon, feature }) => {
         <div>
             <div className="p-6 sm:p-10 border-r border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
                 {image}
-                <p className="font-semibold mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
-                    {description} <Icon className="w-8 h-8 inline-block" name={icon} /> {feature}
-                </p>
             </div>
         </div>
     )
@@ -76,14 +73,14 @@ export default function Features() {
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={0}
-                        title="funnel analysis"
+                        title="product analytics"
                     />
                     ,{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={1}
-                        title="product usage trends"
+                        title="funnel analysis"
                     />
                     ,{' '}
                     <FeatureButton
@@ -92,13 +89,13 @@ export default function Features() {
                         title="session recordings"
                         index={2}
                     />{' '}
-                    &{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={3}
                         title="feature flags"
-                    />
+                    />{' '}
+                    & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
                 </h3>
             </div>
             <SliderNav
@@ -109,36 +106,13 @@ export default function Features() {
             />
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
-                    <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />}
-                        description="Identify dropoff and prioritize product changes with"
-                        icon="funnels"
-                        feature="Funnels"
-                    />
-                    <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-trends.png" />}
-                        description="See changes in product usage with"
-                        icon="trends"
-                        feature="Trends"
-                    />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-trends.png" />} />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />} />
                     <SliderItem
                         image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.png" />}
-                        description="Understand why with"
-                        icon="session-recordings-with-bg"
-                        feature="Session recordings"
                     />
-                    <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.png" />}
-                        description="Roll out changes safely with"
-                        icon="feature-flags-with-bg"
-                        feature="Feature flags"
-                    />
-                    <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-plugins.png" />}
-                        description="Keep your entire product stack in sync with"
-                        icon="custom-plugins"
-                        feature="Plugins"
-                    />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.png" />} />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-plugins.png" />} />
                 </Slider>
             </div>
             <div className="px-4 text-center my-16">
