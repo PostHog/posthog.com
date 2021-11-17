@@ -92,6 +92,10 @@ See our [customer personas page](/handbook/growth/marketing/customer-personas) f
 
 Depending on the significance of the change to our product, may do an [announcement](/handbook/growth/marketing/product-announcements).
 
+## Who are our competitors and where can I find out about them? 
+
+We closely follow other companies which are active in the product analytics space. Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
+
 ## Who are the marketing team?
 
 The Marketing Small Team page is maintained [here](/handbook/people/team-structure/marketing). 
