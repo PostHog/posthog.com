@@ -150,23 +150,94 @@ Once you have a new branch, you can make changes.
 
 #### Frontmatter
 
-At the top of most posthog.com docs and handbook pages, it is necessary to have the following for the page to appear:
+Most PostHog pages utilize frontmatter as a way of providing additional data to the page. Available frontmatter varies based on the template the page uses. Templates are determined based on the folder the file resides in:
+
+##### Blog
+
+Markdown files located in /contents/blog
 
 ```markdown
 ---
-title: Example Title
-sidebarTitle: Example title shown in sidebar
-sidebar: Example Sidebar
-showTitle: true
+date: 2021-11-16
+title: The state of plugins on PostHog
+rootPage: /blog
+author: yakko-majuri
+featuredImage: ../images/blog/running-content.png
+featuredImageType: full
 ---
 ```
 
-- `title`: the page title
-- `sidebar`: the sidebar menu that the page will attach to. You can see a list of available sidebars in `/src/sidebars/sidebars.json`. You can choose not to have a sidebar by setting this to `null`.
-- `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
-- `showTitle` should always be set to `true`.
+- `date`: the date the blog was posted
+- `title`: the title that appears at the top of the blog post and on the blog listing page
+- `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
+- `author`: the author of the post. correlates to your handle located in /contents/author.md
+- `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
+- `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 
-Some pages, such as blogposts, may have additional fields. You can often refer to the source of existing pages for examples, but if in doubt you can always ask for help in the [PostHog Community Slack](/slack). 
+##### Docs & Handbook
+
+Markdown files located in /contents/docs and /contents/handbook
+
+```markdown
+---
+title: Contribute to the website: documentation, handbook, and blog
+---
+```
+
+- `title`: the title that appears at the top of the handbook / doc page
+
+##### Customers
+
+Markdown files located in /contents/customers
+
+```markdown
+---
+title: How Hasura improved conversion rates by 10-20% with PostHog
+customer: Hasura
+logo: ../images/customers/hasura/logo.svg
+featuredImage: ../images/customers/hasura/featured.jpg
+industries:
+    - Developer tool
+users:
+    - Engineering
+    - UI
+    - UX
+    - Marketing teams
+toolsUsed:
+    - Funnel Analysis
+    - Session Recording
+    - Self-Hosting
+---
+```
+
+- `title`: the title of the case study
+- `customer`: the name of the customer
+- `logo`: the customer logo
+- `featuredImage`: the image that appears in the card on the customers listing page
+- `industries`: a list of industries that apply to the company
+- `users`: a list of user types that use the company's product
+- `toolsUsed`: a list of highlighted PostHog tools used by the company
+
+##### Plain
+
+If the file doesn't reside in one of the above folders, it uses the plain template.
+
+```markdown
+---
+title: Example Components
+showTitle: false
+width: lg
+noindex: true
+---
+```
+
+- `title`: the title that appears at the top of the page
+- `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
+- `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
+- `noindex`: `true` | `false` - determines whether to index the page or not
+
+
+You can often refer to the source of existing pages for more examples, but if in doubt, you can always ask for help in the [PostHog Community Slack](/slack). 
 
 #### Images/GIFs
 
