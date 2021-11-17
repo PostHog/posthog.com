@@ -13,9 +13,11 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info).
+First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info). Follow the "Managed nodes - Linux" guide.  
 
 <ClusterRequirementsSnippet />
+
+Note that AWS by default has `allowVolumeExpansion` set to `false`, in the default EKS cluster this can be changed with `kubectl patch sc gp2 -p '{"allowVolumeExpansion": true}'`, see more info in [eks user guide for storage classes](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html).
 
 > Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
