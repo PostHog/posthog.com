@@ -81,17 +81,13 @@ The recordings experience just got a lot better. We added a new recordings tab t
 ### Deprecation & removal notices
 
 1. We're now fully removing the legacy Sessions list page. Read more about it, [in this blog post](/blog/sessions-removal).
-
+2. 1.30.0 will be the latest version where we support a Postgres only deployment of PostHog. See [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a Clickhouse version.
 
 ### Help us improve PostHog
 
 We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
 
 As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
-
-## PostHog News
-
-No new joiners this month, but stay tuned for new people joining real soon!
 
 ## Community
 ### Community MVP 🏆
