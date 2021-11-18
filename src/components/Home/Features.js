@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react'
-import Slider from 'react-slick'
-import { StaticImage } from 'gatsby-plugin-image'
-import Icon from './Icon'
 import { CallToAction } from 'components/CallToAction'
-import { section, heading } from './classes'
 import SliderNav from 'components/SliderNav'
+import { StaticImage } from 'gatsby-plugin-image'
+import React, { useRef, useState } from 'react'
+import Slider from 'react-slick'
+import { heading, section } from './classes'
+import Icon from './Icon'
 
 const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
     const borderColor = index === activeFeature ? 'red' : 'gray'
@@ -24,9 +24,6 @@ const SliderItem = ({ image, description, icon, feature }) => {
         <div>
             <div className="p-6 sm:p-10 border-r border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
                 {image}
-                <p className="font-semibold mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
-                    {description} <Icon className="w-8 h-8 inline-block" name={icon} /> {feature}
-                </p>
             </div>
         </div>
     )
@@ -58,8 +55,6 @@ export default function Features() {
 
     const sliderImageProps = {
         quality: 100,
-        height: 500,
-        width: 890,
     }
 
     const handleChange = (oldIndex, newIndex) => {
@@ -78,14 +73,14 @@ export default function Features() {
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={0}
-                        title="funnel analysis"
+                        title="product analytics"
                     />
                     ,{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={1}
-                        title="product usage trends"
+                        title="funnel analysis"
                     />
                     ,{' '}
                     <FeatureButton
@@ -94,50 +89,30 @@ export default function Features() {
                         title="session recordings"
                         index={2}
                     />{' '}
-                    &{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={3}
                         title="feature flags"
-                    />
+                    />{' '}
+                    & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
                 </h3>
             </div>
             <SliderNav
                 handlePrevious={() => sliderRef.current.slickPrev()}
                 handleNext={() => sliderRef.current.slickNext()}
                 currentIndex={activeFeature}
-                length={3}
+                length={4}
             />
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-trends.png" />} />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />} />
                     <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />}
-                        description="Identify dropoff and prioritize product changes with"
-                        icon="funnels"
-                        feature="Funnels"
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.png" />}
                     />
-                    <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-trends.jpg" />}
-                        description="See changes in product usage with"
-                        icon="trends"
-                        feature="Trends"
-                    />
-                    <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.jpg" />}
-                        description="Understand why with"
-                        icon="session-recordings-with-bg"
-                        feature="Session recordings"
-                    />
-                    <SliderItem
-                        width={890}
-                        image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.jpg" />}
-                        description="Roll out changes safely with"
-                        icon="feature-flags-with-bg"
-                        feature="Feature flags"
-                    />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.png" />} />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-plugins.png" />} />
                 </Slider>
             </div>
             <div className="px-4 text-center my-16">
