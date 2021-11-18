@@ -24,7 +24,7 @@ you analyze how various groups interact with your product rather than individual
 
 ## Known limitations
 
-- You can't (yet) analyze groups in insights or use them in feature flags.
+- You can't yet use groups for feature flags or in lifecycle/stickiness/session insights.
 - Updating group properties overwrites _all_ previous properties for that group
 
 These limitations will be removed in the coming weeks.
@@ -46,7 +46,7 @@ To make use of group analytics, you need to update your event capture code. See 
 
 The following examples use `company` as a group type and `id:5` as the group key. Replace these with your particular values.
 
-> **Tip:** Use a singular form of the group name throughout ingestion
+> **Tip:** Use a singular form of the group type throughout ingestion
 
 ### [posthog-js](https://posthog.com/docs/integrate/client/js)
 
@@ -137,6 +137,29 @@ Using groups with go requires latest version of `posthog-go`. Update dependencie
 
 ```shell
 go get -u github.com/posthog/posthog-go
+```
+
+### [posthog-node](https://posthog.com/docs/integrate/server/node)
+
+Update to version 1.2.0 or above to make use of the new functionality.
+
+```javascript
+// Capturing an event with groups
+posthog.capture({
+    event: "some event",
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' }
+})
+
+// Updating a groups properties
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'id:5',
+    properties: {
+        company_name: 'Awesome Inc',
+        employees: 11
+    }
+})
 ```
 
 ### Other libraries

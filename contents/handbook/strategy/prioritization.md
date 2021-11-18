@@ -19,7 +19,7 @@ To achieve this, we will need revenue to be able to re-invest into making a bett
 
 ## Our current focus / milestone
 
-We're currently focused on ["Diagnosing Causes"](/handbook/strategy/strategy).
+We're currently focused on ["Collaboration"](/handbook/strategy/strategy).
 
 ## How do we shift focus between priorities?
 

@@ -7,9 +7,9 @@ showTitle: true
 We have two types of rotations for engineering:
 
 1. Support Hero, first line responder to customer questions and bug reports
-2. Secondary on-call, responsible for prioritizing and solving escalated issues, sentry errors and alerts.
+2. Secondary on-call, responsible for prioritizing and solving escalated issues, Sentry errors and alerts.
 
-When someone is Support Hero, they are also the secondary on-call person for their team
+When someone is _Support Hero_, they are also the secondary on-call person for their team
 
 ## 1. Support Hero
 
@@ -25,13 +25,13 @@ If you are planning on taking a day off or you won't be available, please find s
 
 ### Rotation
 
-You can view the Support Hero rotation [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G). 
+You can view the Support Hero rotation [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G).
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in Papercups**:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Papercups](#papercups)**:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on Papercups).
+- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on [Papercups](#papercups)).
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
@@ -45,8 +45,8 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
-    - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
-- Housekeeping. Once a customer issue/question has been addressed, close the conversastions on Papercups to make it easy to identify outstanding conversations.
+    - [Papercups](#papercups) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
+- Housekeeping. Once a customer issue/question has been addressed, close the conversation on [Papercups](#papercups) to make it easy to identify outstanding conversations.
 
 ### Prioritizing requests
 
@@ -55,11 +55,11 @@ As an engineer, when a question comes in your first instinct is to give them an 
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
 
-We tag customers in Papercups according to these categories so you can easily filter them - you can view the tags in the right hand pane in the Papercups app:
+We tag customers in [Papercups](#papercups) according to these categories so you can easily filter them - you can view the tags in the right hand pane in the [Papercups](#papercups) app:
 
 <img width="219" alt="Screenshot 2021-11-05 at 15 51 02" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
 
-At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them. 
+At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
 
 ### Escalating issues
 
@@ -99,3 +99,43 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
 
+### Papercups
+
+We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+
+Papercups is an open source live customer support app. It allows us to manage all our customer conversations in one place and reply through Slack, web, or via mobile app.
+
+##### How to access Papercups
+You can access the app via [app.papercups.io](https://app.papercups.io). If you don’t have access, ask Charles.
+
+The first time you sign into Papercups, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+
+##### How to use Papercups
+
+You’ll spend most of your time in the “Conversations” view, where you’ll find all customer conversations divided by _status_.
+
+Goal of the Support Hero person on duty is to:
+
+* keep the quantity of items in the _All_ section as small as possible (this is important so we can keep our focus on workable items only)
+
+* make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
+
+* provide actionable information as _Note_ for all the items you cannot close before the end of your shift (this is important as hand-off to the next person on-call)
+
+Here's a q quick overview of Papercups' main features:
+
+- _Main conversations view_: when you sign into Papercups, you can either [view all conversations](https://app.papercups.io/conversations/all), or just those [assigned to you](https://app.papercups.io/conversations/me). If you are the first person to respond to a query, you will be automatically assigned that conversation. Don't forget to close a conversation by ticking the box in the top right when you are done, so we know which queries have been resolved!
+- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer support_ channel in the [PostHog Users Slack](http://posthog.com/slack) - both work.
+- _Slack integration (2)_: In the PostHog Users Slack, messages posted in the _general_ and _feedback_ channels are also synced with the Papercups app. As above, this means you can reply to users in that Slack channel directly or in Papercups. Please try to reply in a Slack thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
+- _Email integration_: Any emails that come into hey@ get synced with Papercups and Slack, so you can reply on either of those platforms, or directly to the email. If you reply via email, please make sure you at least bcc hey@ so we know that someone has responded!
+- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
+- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation. This is useful for sharing context with other team members.
+- _Analytics_: 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. We don't report on these yet as we're still figuring out the best way for us to do support.
+
+Papercups is an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.
+
+##### How to deal with spam, marketing, partnership proposals or anything like that
+
+Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Papercups). When this happens, simply mark the conversation as closed.
+
+For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.

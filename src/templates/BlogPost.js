@@ -26,6 +26,7 @@ export default function BlogPost({ data, pageContext }) {
         frontmatter: { authors },
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
+    const { gitLogLatestDate } = postData?.parent.fields
     const authorDetails = findAuthor(authors)(author)
     const components = {
         h1: H1,
@@ -52,6 +53,7 @@ export default function BlogPost({ data, pageContext }) {
             />
             <BlogPostLayout
                 blogDate={date}
+                blogUpdatedDate={gitLogLatestDate}
                 pageTitle={title}
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
@@ -92,6 +94,9 @@ export const query = graphql`
             parent {
                 ... on File {
                     relativePath
+                    fields {
+                        gitLogLatestDate(formatString: "MMMM DD, YYYY")
+                    }
                 }
             }
         }

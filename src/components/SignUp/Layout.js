@@ -7,7 +7,7 @@ export default function Layout({ children, crumbs = [] }) {
     return (
         <>
             <header className="px-4 mt-[-1px]">
-                <Breadcrumbs linkColor="#8F8F8C" crumbs={crumbs} />
+                <Breadcrumbs logo linkColor="#8F8F8C" crumbs={crumbs} />
             </header>
             <main>{children}</main>
             <footer className="px-4 mt-16 md:mt-32 pb-8">

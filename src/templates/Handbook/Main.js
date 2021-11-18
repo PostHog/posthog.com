@@ -15,11 +15,17 @@ import StickySidebar from './StickySidebar'
 import Link from 'components/Link'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-const Iframe = (props) => (
-    <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-        <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-    </div>
-)
+const Iframe = (props) => {
+    if (props.src && props.src.indexOf('youtube.com') !== -1) {
+        return (
+            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
+                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
+            </div>
+        )
+    } else {
+        return <iframe {...props} />
+    }
+}
 
 const SectionLinksBottom = ({ previous, next }) => {
     return (

@@ -111,7 +111,7 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Session recordings" url="/product/#insights" />
                                     <FooterMenuItem title="Feature flags" url="/product/#insights" />
-                                    <FooterMenuItem title="Plugins library" url="/plugins" />
+                                    <FooterMenuItem title="Integrations" url="/integrations" />
                                 </ul>
                             </div>
                             <div>
