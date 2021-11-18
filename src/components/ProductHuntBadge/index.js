@@ -32,8 +32,8 @@ function ProductHuntBadge() {
         visible && (
             <div className="text-white flex flex-col md:flex-row items-center justify-center py-3 px-4 relative">
                 <motion.div
-                    initial={{ translateX: '-100%' }}
-                    animate={{ translateX: 0 }}
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
                     className="bg-red absolute inset-0 w-full h-full transition-all duration-1000"
                 />
                 <p className="mb-2 mr-0 md:mb-0 md:mr-4 font-bold text-sm md:text-base">
