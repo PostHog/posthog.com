@@ -30,13 +30,15 @@ function ProductHuntBadge() {
 
     return (
         visible && (
-            <div className="text-white flex items-center justify-center space-x-4 py-3 px-4 relative">
+            <div className="text-white flex flex-col md:flex-row items-center justify-center py-3 px-4 relative">
                 <motion.div
                     initial={{ translateX: '-100%' }}
                     animate={{ translateX: 0 }}
                     className="bg-red absolute inset-0 w-full h-full transition-all duration-1000"
                 />
-                <p className="m-0 font-bold">Nov 18: Check us out on ProductHunt.</p>
+                <p className="mb-2 mr-0 md:mb-0 md:mr-4 font-bold text-sm md:text-base">
+                    Nov 18: Check us out on ProductHunt.
+                </p>
                 <a
                     className="relative"
                     href="https://www.producthunt.com/posts/posthog-3?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-posthog-3"
@@ -46,11 +48,11 @@ function ProductHuntBadge() {
                     <img
                         src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=320054&theme=light"
                         alt="PostHog - An all-in-one product analytics suite you can self-host | Product Hunt"
-                        className="max-w-[200px]"
+                        className="max-w-[180px] md:max-w-[200px]"
                     />
                 </a>
                 <button onClick={handleClick} className="absolute right-4">
-                    <Close className="w-4 h-4" />
+                    <Close className="h-3 w-3 md:w-4 md:h-4" />
                 </button>
             </div>
         )
