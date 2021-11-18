@@ -493,8 +493,15 @@ ul {
 }
 
 .template-section-content {
+    &:not(.divide-dashed) {
+        @apply gap-x-12;
+    }
+    &.divide-dashed {
+        > * {
+            @apply px-0 sm:px-7 my-2;
+        }
+    }
     > * {
-        @apply px-0 sm:px-7 my-2;
         & > {
             * {
                 &:first-of-type,

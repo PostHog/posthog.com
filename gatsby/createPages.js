@@ -11,6 +11,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
+    const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -38,6 +39,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         depth
                         value
                     }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+                nodes {
+                    id
                     fields {
                         slug
                     }
@@ -260,6 +269,16 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         createPage({
             path: slug,
             component: CustomerTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
+    result.data.product.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: slug,
+            component: ProductTemplate,
             context: {
                 id: node.id,
             },
