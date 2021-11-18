@@ -1,5 +1,5 @@
 ---
-title: Customer personas
+title: Personas
 sidebar: Handbook
 showTitle: true
 ---

@@ -1,5 +1,5 @@
 ---
-title: Customer testimonials
+title: Testimonials
 sidebar: Handbook
 showTitle: true
 ---
