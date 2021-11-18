@@ -17,8 +17,6 @@ First, we need to set up a Kubernetes cluster (see the official AWS [documentati
 
 <ClusterRequirementsSnippet />
 
-Note that AWS by default has `allowVolumeExpansion` set to `false`, in the default EKS cluster this can be changed with `kubectl patch sc gp2 -p '{"allowVolumeExpansion": true}'`, see more info in [eks user guide for storage classes](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html).
-
 > Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
 > * for PostgreSQL, take a look at [AWS Aurora](https://aws.amazon.com/rds/aurora/)
