@@ -78,7 +78,6 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
-import { ProductHuntBadge } from './components/ProductHuntBadge'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
@@ -179,7 +178,6 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
-    ProductHuntBadge,
     ProductSectionHeader,
     ResponsiveAnchor,
     RocketHorizontalRule,
