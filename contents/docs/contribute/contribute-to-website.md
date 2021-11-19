@@ -6,8 +6,8 @@ showTitle: true
 
 You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
-1. You can create a Pull Request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
-2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a Pull Request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
+1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
 Below, we'll explain how to set up option two.
 
@@ -202,7 +202,7 @@ The sidebar is generated from `/src/sidebars/sidebars.json`.
 
 ## Committing changes
 
-It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the Pull Request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
+It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -285,9 +285,9 @@ Once you have committed the changes you want to push to GitHub, click the **Push
 
 </HiddenSection>
 
-## Create a Pull Request
+## Create a pull request
 
-Create a Pull Request to request that your changes be merged into the main branch of the repository.
+Create a pull request to request that your changes be merged into the main branch of the repository.
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -307,9 +307,9 @@ To github.com:PostHog/posthog.com.git
 
 <HiddenSection headingType='h3' title='Via GitHub Desktop'>
 
-With the branch published, click the **Create Pull Request** button.
+With the branch published, click the **Create pull request** button.
 
-![Pull Request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
+![pull request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
 
 This will open up a page on github.com in your default web browser.
 
@@ -321,9 +321,17 @@ If you are pushing to an existing branch, navigate to the [posthog.com repo](htt
 
 Then, open the **Contribute** dropdown and click the **Open pull request** button.
 
-Make the Pull Request title descriptive name and complete the detail requested in the body.
+Make the pull request title descriptive name and complete the detail requested in the body.
 
-If you know who you would like to review the Pull Request, select them in the **Reviewers** dropdown.
+If you know who you would like to review the pull request, select them in the **Reviewers** dropdown.
+
+## Preview branch
+
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Netlify will generate a preview link available on the `netlify/posthog/deploy-preview` line. This includes all of your changes so you can preview before your pull request is merged.
+
+![Preview branch](../../images/docs/contribute/preview-branch.png)
+
+> **Note:** Checks are run automatically for PostHog org members and previous contributors. First time contributors will require authorization for checks to be run by a PostHog org member.
 
 ## Deployment
 
