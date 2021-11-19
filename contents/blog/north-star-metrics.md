@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: andy-vandervell
+author: ["andy-vandervell"]
 featuredImage: ../images/blog/blog-generic-2.png
 featuredImageType: full
 ---

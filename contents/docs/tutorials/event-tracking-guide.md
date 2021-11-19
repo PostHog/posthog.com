@@ -2,6 +2,7 @@
 title: Complete guide to event tracking 
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

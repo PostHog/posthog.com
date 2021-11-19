@@ -2,6 +2,9 @@
 title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+topics:
+    - funnels
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕

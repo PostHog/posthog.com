@@ -2,6 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Layout from 'components/Layout'
 import { Section } from 'components/Section'
+import TutorialsSlider from 'components/TutorialsSlider'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
@@ -17,9 +18,9 @@ export default function Product({ data }) {
             <Breadcrumbs crumbs={[{ title: 'Product', url: '/product' }, { title }]} darkModeToggle className="px-4" />
             <section className="max-w-[880px] mx-auto px-5">
                 <h1 className="text-center mt-10 mb-12">{title}</h1>
-                <GatsbyImage className="lg:-mb-16" image={getImage(featuredImage)} />
+                <GatsbyImage image={getImage(featuredImage)} />
                 <article>
-                    <MDXProvider components={{ ...shortcodes, Section }}>
+                    <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider }}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </article>

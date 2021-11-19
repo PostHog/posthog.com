@@ -45,7 +45,7 @@ export const Section = ({
     const slugger = new GithubSlugger()
     const id = slugger.slug(title)
     return (
-        <section className={`my-10 sm:my-20 lg:my-[140px] ${className}`}>
+        <section className={`my-10 sm:my-20 ${className}`}>
             {title && (
                 <Heading id={id} hideCopy as="h2" className={`text-center mb-16 ${headingSize[titleSize]}`}>
                     {title}

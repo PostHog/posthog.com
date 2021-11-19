@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: joe-martin
+author: ["joe-martin"]
 featuredImage: ../images/blog/blog-generic-1.png
 featuredImageType: full
 ---

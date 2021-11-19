@@ -2,6 +2,7 @@
 title: Tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕

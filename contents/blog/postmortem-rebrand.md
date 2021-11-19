@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: cory-watilo
+author: ["cory-watilo"]
 featuredImage: ../images/blog/rebrand-postmortem.png
 featuredImageType: full
 categories: ["General", "Company & culture"]
