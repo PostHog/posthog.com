@@ -34,6 +34,7 @@ Sometimes, tasks need a few review cycles to get resolved, and PRs remain open f
 - Chunk your PRs down. Implement just the MVP, and leave the rest for later.
 - Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer, if they get a clean PR to review.
 - Push your code out as a Draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
+- Most importantly, [really understand why it's paramount to reduce WIP](https://loom.com/share/5efceb288b634a449041918bdba08202), until you feel it in your bones.
 
 
 ## 3. Writing code
