@@ -2,6 +2,8 @@
 title: Funnels
 sidebar: Docs
 showTitle: true
+topics:
+    - funnels
 ---
 
 ## Why do funnels matter?

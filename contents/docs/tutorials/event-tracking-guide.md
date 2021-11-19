@@ -3,6 +3,9 @@ title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
+topics:
+  - quantitative analysis
+featuredImage: ../../images/tutorials/banners/actions.png
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

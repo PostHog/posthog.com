@@ -2,6 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Layout from 'components/Layout'
 import { Section } from 'components/Section'
+import { SEO } from 'components/seo'
 import TutorialsSlider from 'components/TutorialsSlider'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -11,10 +12,11 @@ import { shortcodes } from '../mdxGlobalComponents'
 export default function Product({ data }) {
     const { pageData } = data
     const { body, excerpt } = pageData
-    const { title, subtitle, featuredImage } = pageData?.frontmatter
+    const { title, subtitle, featuredImage, description } = pageData?.frontmatter
 
     return (
         <Layout>
+            <SEO title={`${title} - PostHog`} description={description || excerpt} />
             <Breadcrumbs crumbs={[{ title: 'Product', url: '/product' }, { title }]} darkModeToggle className="px-4" />
             <section className="max-w-[880px] mx-auto px-5">
                 <h1 className="text-center mt-10 mb-12">{title}</h1>
@@ -39,6 +41,7 @@ export const query = graphql`
             }
             frontmatter {
                 title
+                description
                 featuredImage {
                     childImageSharp {
                         gatsbyImageData

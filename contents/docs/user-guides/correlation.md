@@ -2,6 +2,8 @@
 title: Correlation analysis 
 sidebar: Docs 
 showTitle: true
+topics:
+    - funnels
 ---
 
 ## What is correlation analysis and what is it good for?
