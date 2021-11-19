@@ -19,17 +19,20 @@ Deciding what we work on happens in our sprint planning session, where the high 
 
 As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
 
-## 2. Sizing a task (or 1-day PRs)
+## 2. Sizing a task and reducing WIP
 
-Your PRs should be sized to be doable in one day, including code review and QA. If it's not, you need to break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, easy to review and less likely to cause merge conflicts. 
+Efficient engineering organziations actively [reduce Work In Progress](https://loom.com/share/5efceb288b634a449041918bdba08202) (WIP) to avoid negative feedback loops that drive down productivity. Hence a PR should be optimised for two things: 1) quality of implementation, and 2) the speed with which we can merge it in.
 
-These PRs should still offer a slice of value, even if that value is hidden behind a feature flag for the moment.
+Your PRs should ideally be sized to be doable in one day, including code review and QA. If it's not, you should break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, easy to review and less likely to cause merge conflicts. 
 
-| The wrong way to do this | The right way to do this |
-| --- | --- |
-| Do backend code in one PR, then frontend in the next | Create the smallest version of the feature/bug fix that adds value |
-| The design and usability has to be perfect in one PR | Release it behind a feature flag, iterate on the design in the next PR |
-| Lots of back and forth on whether the code will perform | Release it behind a feature flag, test it and watch the metrics |
+Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
+
+- First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority.
+- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra review cycle that starts with *"Almost there, just this one new bug, and remove that console.log please"*.
+- Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code.
+- Release behind a feature flag, iterate on improving the features or the design in a follow up PR, after more people have had time to test.
+- Chunk your PRs down. Implement just the MVP, and leave the rest for later.
+- Push your code out as a Draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
 
 
 ## 3. Writing code
