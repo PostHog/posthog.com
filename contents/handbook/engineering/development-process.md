@@ -27,7 +27,7 @@ Your PRs should ideally be sized to be doable in one day, including code review 
 
 Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
 
-- First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority.
+- First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
 - Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra review cycle that starts with *"Almost there, just this one new bug, and remove that console.log please"*.
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code.
 - Release behind a feature flag, iterate on improving the features or the design in a follow up PR, after more people have had time to test.
