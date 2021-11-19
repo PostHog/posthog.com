@@ -32,6 +32,7 @@ Sometimes, tasks need a few review cycles to get resolved, and PRs remain open f
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code.
 - Release behind a feature flag, iterate on improving the features or the design in a follow up PR, after more people have had time to test.
 - Chunk your PRs down. Implement just the MVP, and leave the rest for later.
+- Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer, if they get a clean PR to review.
 - Push your code out as a Draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
 
 
