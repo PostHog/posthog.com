@@ -1,0 +1,62 @@
+---
+title: Self-host
+showTitle: false
+width: lg
+---
+
+import Features from '../src/components/Home/Features'
+import Customers from '../src/components/Home/Customers'
+
+<Hero
+    title="The all-in-one, self-hosted product analytics suite"
+    subtitle="Our open source analytics platform gives you complete control of your data so you can learn, optimise and grow."
+    ctas={[
+        <CallToAction width="56" to="/signup">
+            Get started
+        </CallToAction>,
+        <CallToAction width="56" type="outline" to="/book-a-demo">
+            Schedule a demo
+        </CallToAction>,
+    ]}
+/>
+
+<Features
+    title={
+        <>
+            Everything you need to <span className="text-blue">optimise</span> and{' '}
+            <span className="text-blue">grow</span> in one place
+        </>
+    }
+/>
+
+<Customers />
+
+<Section title="And for good reason" cols={3}>
+    <div>
+        <h5>
+            <span className="text-yellow">Reduce</span> security risks
+        </h5>
+        <p>
+            Running analytics on your infrastructure dramatically reduces the risk of data breaches, improves security
+            and makes compliance easier.
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow">Freedom to optimise</span> and tweak as you please
+        </h5>
+        <p>
+            With total control over your instance and a full view of PostHog’s open source codebase, you can make any
+            changes or adjustments necessary without having to wait for support to pick up your ticket.{' '}
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow">Gain</span> a better understanding of your customers
+        </h5>
+        <p>
+            By tracking and monitoring the metrics important to you in-house, you can keep a closer eye on your
+            customers behaviour and respond accordingly.
+        </p>
+    </div>
+</Section>
