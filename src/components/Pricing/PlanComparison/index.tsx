@@ -81,7 +81,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Managed by PostHog',
                     'Open source': 'Managed by you',
-                    Scale: 'We help you manage by unblocking when you get stuck',
+                    Managed by you, with support from us
                 },
             },
         ],
