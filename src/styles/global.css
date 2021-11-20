@@ -558,3 +558,17 @@ ul {
         @apply hidden;
     }
 }
+
+@keyframes ticker {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-1800px, 0, 0);
+    }
+}
+
+.infinite-carousel-ticker {
+    animation: ticker 18s linear infinite;
+}

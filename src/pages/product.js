@@ -1,26 +1,11 @@
 import { Autocapture, Compliance, OpenSource, Pipelines, SelfHost, Warehouse } from 'components/Icons/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import Slider from 'react-slick'
 import Layout from '../components/Layout'
 import { SEO } from '../components/seo'
 import './styles/features.scss'
 
 function ProductPage() {
-    const sliderSettings = {
-        dots: false,
-        infinite: true,
-        arrows: false,
-        autoplay: true,
-        slidesToShow: 5,
-        speed: 10000,
-        autoplaySpeed: 1,
-        cssEase: 'linear',
-        pauseOnHover: false,
-        accessibility: false,
-        draggable: false,
-    }
-
     const features = [
         {
             title: 'Event pipelines',
@@ -49,21 +34,24 @@ function ProductPage() {
         <Layout>
             <SEO title="Product • PostHog" />
             <section>
-                <Slider {...sliderSettings} className="text-[#5B5B5B] font-bold my-7">
-                    {features.map(({ title, icon }, index) => {
-                        return (
-                            <div key={index}>
-                                <span className="flex items-center justify-center space-x-2">
+                <div className="overflow-hidden">
+                    <ul className="text-[#5B5B5B] font-bold my-7 flex infinite-carousel-ticker list-none p-0">
+                        {[...features, ...features].map(({ title, icon }, index) => {
+                            return (
+                                <li
+                                    className="w-[300px] flex-shrink-0 flex space-x-2 items-center justify-center"
+                                    key={index}
+                                >
                                     {icon}
                                     <p className="m-0">{title}</p>
-                                </span>
-                            </div>
-                        )
-                    })}
-                </Slider>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             </section>
             <section className="grid grid-cols-2 gap-14 items-center">
-                <div className="w-[480px] justify-self-end">
+                <div className="max-w-[480px] justify-self-end">
                     <h1 className="text-gray text-[20px] mb-0">What is PostHog?</h1>
                     <h2 className="text-[48px] mt-0 font-bold">
                         An ever-expanding suite of tools to <span className="text-red">build better products</span>
