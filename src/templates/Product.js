@@ -49,7 +49,11 @@ export default function Product({ data }) {
     return (
         <Layout>
             <SEO title={`${title} - PostHog`} description={description || excerpt} />
-            <Breadcrumbs crumbs={[{ title: 'Product', url: '/product' }, { title }]} darkModeToggle className="px-4" />
+            <Breadcrumbs
+                crumbs={[{ title: 'Product', url: '/product' }, { title }]}
+                darkModeToggle
+                className="px-4 mt-4"
+            />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
                 className="px-5 mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
