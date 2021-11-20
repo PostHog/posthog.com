@@ -50,6 +50,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                    frontmatter {
+                        documentation
+                    }
                 }
             }
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
@@ -276,11 +279,13 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     })
     result.data.product.nodes.forEach((node) => {
         const { slug } = node.fields
+        const { documentation } = node.frontmatter
         createPage({
             path: slug,
             component: ProductTemplate,
             context: {
                 id: node.id,
+                documentation,
             },
         })
     })
