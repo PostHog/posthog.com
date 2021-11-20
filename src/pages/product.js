@@ -33,25 +33,23 @@ function ProductPage() {
     return (
         <Layout>
             <SEO title="Product • PostHog" />
-            <section>
-                <div className="overflow-hidden">
-                    <ul className="text-[#5B5B5B] font-bold my-7 flex infinite-carousel-ticker list-none p-0">
-                        {[...features, ...features].map(({ title, icon }, index) => {
-                            return (
-                                <li
-                                    className="w-[300px] flex-shrink-0 flex space-x-2 items-center justify-center"
-                                    key={index}
-                                >
-                                    {icon}
-                                    <p className="m-0">{title}</p>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+            <section className="overflow-hidden mt-7 mb-12">
+                <ul className="text-[#5B5B5B] font-bold flex infinite-features-ticker list-none p-0">
+                    {[...features, ...features].map(({ title, icon }, index) => {
+                        return (
+                            <li
+                                className="w-[300px] flex-shrink-0 flex space-x-2 items-center justify-center"
+                                key={index}
+                            >
+                                {icon}
+                                <p className="m-0">{title}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
             </section>
-            <section className="grid grid-cols-2 gap-14 items-center">
-                <div className="max-w-[480px] justify-self-end">
+            <section className="my-12 lg:my-0 grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-14 items-center">
+                <div className="lg:max-w-[480px] justify-self-end px-5 box-content">
                     <h1 className="text-gray text-[20px] mb-0">What is PostHog?</h1>
                     <h2 className="text-[48px] mt-0 font-bold">
                         An ever-expanding suite of tools to <span className="text-red">build better products</span>

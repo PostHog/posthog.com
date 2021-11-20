@@ -559,7 +559,7 @@ ul {
     }
 }
 
-@keyframes ticker {
+@keyframes features-ticker {
     0% {
         transform: translate3d(0, 0, 0);
     }
@@ -569,6 +569,22 @@ ul {
     }
 }
 
-.infinite-carousel-ticker {
-    animation: ticker 18s linear infinite;
+.infinite-features-ticker {
+    animation: features-ticker 35s linear infinite;
+}
+
+.active-product {
+    a {
+        @apply opacity-100;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        background: #f54e00;
+        border-radius: 2px;
+        left: -12px;
+    }
 }

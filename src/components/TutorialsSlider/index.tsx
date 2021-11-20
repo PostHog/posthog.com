@@ -81,7 +81,7 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
                             handleNext={() => sliderRef.current.slickNext()}
                             currentIndex={activeSlide}
                             length={tutorials.length - 1}
-                            className="my-0"
+                            className="!my-0"
                         />
                     )}
                 </div>

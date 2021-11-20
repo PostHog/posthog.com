@@ -1044,5 +1044,35 @@
                 }
             ]
         }
+    ],
+    "product": [
+        {
+            "name": "Funnels",
+            "url": "/product/funnels"
+        },
+        {
+            "name": "Session recordings",
+            "url": "/product/session-recordings"
+        },
+        {
+            "name": "Heatmaps",
+            "url": "/product/heatmaps"
+        },
+        {
+            "name": "Feature flags",
+            "url": "/product/feature-flags"
+        },
+        {
+            "name": "Trends",
+            "url": "/product/trends"
+        },
+        {
+            "name": "Quantitative analysis",
+            "url": "/product/quantitative-analysis"
+        },
+        {
+            "name": "User paths",
+            "url": "/product/user-paths"
+        }
     ]
 }
