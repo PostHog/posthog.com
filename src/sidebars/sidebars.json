@@ -1047,8 +1047,24 @@
     ],
     "product": [
         {
+            "name": "Overview",
+            "url": "/product"
+        },
+        {
             "name": "Funnels",
             "url": "/product/funnels"
+        },
+        {
+            "name": "Trends",
+            "url": "/product/trends"
+        },
+        {
+            "name": "User paths",
+            "url": "/product/user-paths"
+        },
+        {
+            "name": "Quantitative analysis",
+            "url": "/product/quantitative-analysis"
         },
         {
             "name": "Session recordings",
@@ -1061,18 +1077,6 @@
         {
             "name": "Feature flags",
             "url": "/product/feature-flags"
-        },
-        {
-            "name": "Trends",
-            "url": "/product/trends"
-        },
-        {
-            "name": "Quantitative analysis",
-            "url": "/product/quantitative-analysis"
-        },
-        {
-            "name": "User paths",
-            "url": "/product/user-paths"
         }
     ]
 }
