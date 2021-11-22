@@ -11,6 +11,8 @@ featuredImage: ../images/blog/plugin-saga-1.png
 featuredImageType: full
 ---
 
+# Part 1. The World Map.
+
 It all started with the world map.
 
 October 2020. We follow a group of 9 engineers, hot off the heels of [implementing ClickHouse support](https://posthog.com/blog/clickhouse-announcement), as they brave the pandemic and gather at a company retreat in Italy. The company is not even a year old, and while nobody is terribly sure what's going to happen next, there's contagious optimism in the air.
@@ -89,11 +91,58 @@ We use [Celery](https://docs.celeryproject.org/) to process events in the backgr
 
 What if we build a new server with the [NodeJS port of Celery](https://celery-node.js.org/), and just plug that in as another step in the existing pipeline? 
 
-This would solve all pending issues: we wouldn't have to worry about Python dependencies (it's JavaScript all the way down), there would be no process management for a gRPC link, and we could eventually rewrite the entire ingestion pipeline in JavaScript to get a speed boost over Python.
+This would solve all pending issues: we wouldn't have to worry about Python dependencies, we could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and we could eventually rewrite the entire ingestion pipeline in NodeJS to get a speed boost over Python.
 
 What's not to like?
 
 Well, if only it was that simple...
+
+# Part 2. How to build a scalable arbitrary code execution machine.
+
+When we left the story, we had just set out to build a NodeJS app that:
+
+- Gets a stream of events from Python through a Redis queue (via [celery.node](https://celery-node.js.org/))
+- Runs user-defined JavaScript on that stream of events.
+- Sends them back to Python through the same queue for ingestion.
+
+The first and the last steps are easy enough, but what about the middle? How do you run user defined JavaScript?
+
+Turns out NodeJS v14 has a [built in VM module](https://nodejs.org/dist./v14.17.5/docs/api/vm.html) that allows running custom JavaScript in a separate context. 
+
+> JavaScript code can be compiled and run immediately or compiled, saved, and run later.
+
+Perfect.
+
+> The vm module is not a security mechanism. Do not use it to run untrusted code.
+
+That's not perfect, but this was to be expected. Privilege escalation attacks are a real thing. 
+
+Node's VM is rather limited as well, and the two most popular abstractions turned out to be:
+
+- [`isolated-vm`](https://github.com/laverdet/isolated-vm) - used by various big companies, and follows a model where it   
+- [`vm2`](https://github.com/patriksimek/vm2)
+
+## ---Vomit below---
+
+Any time you run someone else's code on your machine, you never know what can happen. No matter how secure you make things, there will be a way to escape the 
+
+There's always the danger of escaping a sandbox, so to counterbalance this, we decided to launch plugins 
+
+We could cut off a VMs access to the system, but you never know what might slip through the cracks. 
+
+
+
+Obviously malicious code is going to be a problem, and we're going to have to make tradeoffs along the way.
+
+
+
+
+fun issues:
+- https://github.com/PostHog/plugin-server/issues/273
+
+mistakes made:
+- https://github.com/PostHog/plugin-server/issues/487
+
 
 ## The story continues
 
@@ -101,7 +150,7 @@ This article is the first in a series about plugins in PostHog.
 
 - [x] Part 1. The World Map.
 - [ ] Part 2. How to build a scalable arbitrary code execution machine.
-- [ ] Part 3. Rebuilding action-mapping to a real-time pipeline
+- [ ] Part 3. Rebuilding action-mapping to a real-time pipeline https://github.com/PostHog/plugin-server/issues/235
 - [ ] Part 4. How plugins lower the barrier to entry for contributors
 - [ ] Part 5. ???
 - [ ] Part 6. Profit!
