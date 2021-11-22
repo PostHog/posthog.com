@@ -588,3 +588,17 @@ ul {
         left: -12px;
     }
 }
+
+.images-slider > div {
+    &:nth-of-type(even) {
+        margin-left: -12%;
+        margin-top: 7%;
+    }
+    &:nth-of-type(odd) {
+        margin-left: -12%;
+    }
+    &:first-of-type {
+        margin-left: 0px;
+    }
+    width: calc(25% + 12%);
+}
