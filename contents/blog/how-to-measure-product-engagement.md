@@ -27,11 +27,11 @@ Product engagement also makes a great [North Star Metric](https://posthog.com/bl
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/tiffany.jpeg"
+        imageSource="/images/customers/anca.png"
         size="md"
-        name="Tiffany Wong"
-        title="Co-founder, Pry"
-        quote={`“We’re tracking how users engage with our platform, where they fall out of our funnels and what the overall trends in behavior are. The data we’ve gathered has helped us make several important decisions about where to improve our platform.”`}
+        name="Anca Filip"
+        title="Head of Product, Mention Me"
+        quote={`“PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before.”`}
     />
 </BorderWrapper>
 
@@ -88,10 +88,11 @@ If users are paying for features they don’t use then it lowers the perceived v
 
 By comparing the values of these metrics against each other you can begin to get an idea of where you’re winning on product engagement, and where you might be losing out. 
 
-![](../images/blog/how-to-measure-engagement/product-engagement-metrics.png)
+![](../images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
 
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 
+
 This is because, in addition to tracking the metrics above, PostHog enables you to to understand their context through tools such as  [session recording](https://posthog.com/docs/user-guides/sessions), [heat maps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [cohorts](https://posthog.com/docs/user-guides/cohorts) and [correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
 
 Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
