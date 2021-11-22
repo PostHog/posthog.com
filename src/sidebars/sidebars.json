@@ -1070,13 +1070,14 @@
             "name": "Session recordings",
             "url": "/product/session-recordings"
         },
-        {
-            "name": "Heatmaps",
-            "url": "/product/heatmaps"
-        },
+
         {
             "name": "Feature flags",
             "url": "/product/feature-flags"
+        },
+        {
+            "name": "Heatmaps",
+            "url": "/product/heatmaps"
         }
     ]
 }
