@@ -47,7 +47,7 @@ Another option might be to take, for instance, the "Country Name" property and a
 ![Breakdown by country](../../images/docs/user-guides/funnel-correlation-analysis-country.png)
 
 
-## Making correlations accurate
+## Making correlations accurate
 
 You have better context on your product, and what could be a relevant signal or not. There will be some events and/or properties that perhaps have trivial correlations, or don't actually provide an actionable signal. To remove this
 potential distractions, use either the property names drop down to ignore them in analysis for a funnel in particular, or use the _Exclude from project_ feature which will ensure that you and your team will not see correlations for these events and properties whilst within this project.
