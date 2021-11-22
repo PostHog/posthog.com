@@ -1,5 +1,5 @@
 ---
-date: 2021-11-19
+date: 2021-11-23
 title: How to measure product engagement
 rootPage: /blog
 sidebar: Blog
