@@ -12,7 +12,7 @@ featuredImageType: full
 
 Black Friday is normally an occasion to shop around for a new TV or mobile phone. But we wanted to do something a little different; something to celebrate and support the open source community which we both rely upon and are proud to be part of. 
 
-So, we’re announcing our Give Back Friday campaign. **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now and Cyber Monday we’ll donate $5 USD across eight handpicked open-source projects.** 
+So, we’re announcing our Give Back Friday campaign. **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between 00:00 on Black Friday and 23:59 on Cyber Monday we’ll donate $5 USD across eight handpicked open-source projects.** We'll donate a maximum of $50,000 to these projects in total. 
 
 ## Who gets the money? 
 
@@ -37,13 +37,15 @@ That’s easy. Between now and 00:01 BST, 30 November simply follow these steps:
 2. Click the :star: icon. Hint: it's in the top right corner.
 3. That’s it. We'll donate on your behalf!
 
-On the morning of Tuesday, 30 November we’ll count up how many stars we’ve gained and contact the projects above to make the donation. You can unstar later if you’d like, but we suggest waiting until later in the week. That way, you’ll be sure your star counted! 
+On the morning of Tuesday, 30 November we’ll count up how many stars we’ve gained and contact the projects above to make the donations. We'll quickly verify the stars are legitimate (see 'Small Print' below).
 
 ## Why are we doing this?
 
-We wanted to create a festive activity but, because most of our paying users are other businesses, we didn’t want to simply slash prices. Instead, we wanted to truly celebrate and support the open-source community in a meaningful way.
+PostHog is an open-source project and our team is all individually proud to be part of the open-source community. We wanted to create a festive activity but, because most of our paying users are other businesses, we didn’t want to simply slash prices. We wanted to truly celebrate and support the open-source community in a meaningful way.
 
-We also wanted to involve our community too, which is why we’ve chosen to give donations based on GitHub stars. If you’d like to unstar us after we’ve counted your contributions, that’s absolutely fine. 
+We also wanted to involve our community too, which is why we’ve chosen to give donations based on GitHub stars. If you’d like to unstar us after we’ve counted your contributions, that’s absolutely fine - we suggest just waiting til later in the week to be sure your star is counted towards the total. We previously had the idea of allowing people to directly donate to open source projects and we'd match them, but we felt this idea makes it a lot easier for our community to express their support this way, and counting stars is a straightforward way to keep track. 
+
+Finally, getting people who care about open source projects to star our repo is of course beneficial to us - it'll give us an opportunity to reach a relevant new audience of people who are likely to benefit from using PostHog. If we get enough stars, we may feature on GitHub Trending, which also helps us to reach a wider audience still. 
 
 ## Is there any small print?
 
