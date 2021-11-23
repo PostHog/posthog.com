@@ -145,41 +145,36 @@ This is the best of all worlds. Self-hosted users have all the freedom: they can
 We still want to [enable arbitrary plugins on Cloud](https://github.com/PostHog/posthog/issues/6855), and [support all npm packages](https://github.com/PostHog/posthog/issues/6887), with [proper levels of isolation](https://github.com/PostHog/posthog/issues/6888), but considering what you can already do, we decided to punt on this for now. 
 
 ## Piscina
+- https://github.com/piscinajs/piscina/pull/113
 
+## Defence against malicious plugins
+- https://github.com/PostHog/plugin-server/pull/155
+- https://github.com/PostHog/posthog/issues/6891
 
-
-
-## ---Vomit below---
-
-Any time you run someone else's code on your machine, you never know what can happen. No matter how secure you make things, there will be a way to escape the 
-
-There's always the danger of escaping a sandbox, so to counterbalance this, we decided to launch plugins 
-
-We could cut off a VMs access to the system, but you never know what might slip through the cracks. 
-
-
-
-Obviously malicious code is going to be a problem, and we're going to have to make tradeoffs along the way.
-
-
-
-
-fun issues:
+## Kafka
 - https://github.com/PostHog/plugin-server/issues/273
+- Redis pooling
 
-mistakes made:
+## Ingestion inside the plugin server
+- https://github.com/PostHog/plugin-server/pull/34
+- https://github.com/PostHog/plugin-server/pull/116
+
+## Action-Event matching
+- https://github.com/PostHog/plugin-server/issues/235
+
+## Retries
+- https://github.com/PostHog/plugin-server/issues/273
+- https://github.com/PostHog/plugin-server/pull/351
+
+## Exporting and importing events
+- https://github.com/PostHog/plugin-server/pull/535
+- https://github.com/PostHog/plugin-server/pull/504
+
+## Benchmarks
+- How fast is this now?
+
+## Mistakes made
 - https://github.com/PostHog/plugin-server/issues/487
 
-
-## The story continues
-
-This article is the first in a series about plugins in PostHog.
-
-- [x] Part 1. The World Map.
-- [ ] Part 2. How to build a scalable arbitrary code execution machine.
-- [ ] Part 3. Rebuilding action-mapping to a real-time pipeline https://github.com/PostHog/plugin-server/issues/235
-- [ ] Part 4. How plugins lower the barrier to entry for contributors
-- [ ] Part 5. ???
-- [ ] Part 6. Profit!
-
-_Follow the story by subscribing to our [newsletter](https://posthog.com/newsletter) to get future updates._
+## Epic
+- https://github.com/PostHog/posthog/issues/1896
