@@ -63,7 +63,7 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
     }
 
     return (
-        tutorials.length > 0 && (
+        tutorials.length > 1 && (
             <div>
                 <div className="flex justify-between items-end mb-6">
                     <h4 className="m-0">{topic.charAt(0).toUpperCase() + topic.slice(1)} tutorials</h4>
