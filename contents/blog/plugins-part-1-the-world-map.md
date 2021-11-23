@@ -151,6 +151,8 @@ We still want to [enable arbitrary plugins on Cloud](https://github.com/PostHog/
 - https://github.com/PostHog/plugin-server/pull/155
 - https://github.com/PostHog/posthog/issues/6891
 
+## Scheduled plugins via redlock
+
 ## Kafka
 - https://github.com/PostHog/plugin-server/issues/273
 - Redis pooling
