@@ -565,12 +565,12 @@ ul {
     }
 
     100% {
-        transform: translate3d(-1800px, 0, 0);
+        transform: translate3d(-2700px, 0, 0);
     }
 }
 
 .infinite-features-ticker {
-    animation: features-ticker 35s linear infinite;
+    animation: features-ticker 80s linear infinite;
 }
 
 .active-product {

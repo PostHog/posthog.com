@@ -1,4 +1,14 @@
-import { Autocapture, Compliance, OpenSource, Pipelines, SelfHost, Warehouse } from 'components/Icons/Icons'
+import {
+    Annotations,
+    Autocapture,
+    Compliance,
+    Dashboards,
+    Extensibility,
+    OpenSource,
+    Pipelines,
+    SelfHost,
+    Warehouse,
+} from 'components/Icons/Icons'
 import React from 'react'
 
 const features = [
@@ -22,6 +32,18 @@ const features = [
     {
         title: 'Compliance-friendly',
         icon: <Compliance />,
+    },
+    {
+        title: 'Dashboards',
+        icon: <Dashboards className="w-6" />,
+    },
+    {
+        title: 'Annotations',
+        icon: <Annotations className="w-6" />,
+    },
+    {
+        title: 'Extensibility',
+        icon: <Extensibility className="w-6" />,
     },
 ]
 
