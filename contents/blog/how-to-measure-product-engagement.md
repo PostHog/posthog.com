@@ -25,16 +25,6 @@ Your users are constantly providing feedback through their actions; which featur
 
 Product engagement also makes a great [North Star Metric](https://posthog.com/blog/north-star-metrics), as it’s usually a reliable forecast for retention and can provide a strong foundation for product development.
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/anca.png"
-        size="md"
-        name="Anca Filip"
-        title="Head of Product, Mention Me"
-        quote={`“PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before.”`}
-    />
-</BorderWrapper>
-
 ## What are product engagement metrics?
 The engagement metrics you need to track will depend on what your business looks like and what your product is.
 
@@ -42,18 +32,18 @@ In order to use the right product engagement metric for your organization you ne
 By examining your personas and how their individual actions influence revenue and growth, you can select the most appropriate engagement metrics for your product.
 
 ### Common engagement metrics
-For some products **interactions** are a key metric. Social media platforms, for example, look at numbers of likes, comments and shares.
+If your product is an online service which users engage with regularly then **interactions** are a key metric. Social media platforms, for example, look at numbers of likes, comments and shares.
 
-For a gaming product **session duration** is likely to be a good indicator of positive user engagement. The longer users play, the better. 
+For gaming products **session duration** is likely to be a good indicator of positive user engagement. The longer users play, the better. 
 
-Other digital services may track different types of usage. YouTube may base engagement metrics on **views**, for example, while Google may use the number of **search queries**.
+If you're a business which delivers content then your key metric should be based on how that content is delivered. YouTube may base engagement metrics on **views**, for example, while Google may use the number of **search queries**.
 
 The individual metrics are limitless. You’ll see **pageviews**, **bounce rate**, **page scroll depth**, **purchases** and many more used as KPIs for different business models. It’s important not to choose these glibly, but to make sure you’ve chosen the perfect fit for your product.
 
 ## What is the best way to measure product engagement?
 Listening to users’ actions is important, but how can you track engagement metrics and translate them into actionable insights?
 
-![](../images/blog/how-to-measure-engagement/correlation.png)
+![](../images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
 
 A good way to get started is to use some basic metrics to create a broad framework for engagement insight. The following metrics are very easy to track with the help of product analytics software such as PostHog (pictured above).
 
@@ -88,10 +78,20 @@ If users are paying for features they don’t use then it lowers the perceived v
 
 By comparing the values of these metrics against each other you can begin to get an idea of where you’re winning on product engagement, and where you might be losing out. 
 
-![](../images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
+![](../images/blog/how-to-measure-engagement/correlation.png)
 
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/anca.png"
+        size="md"
+        name="Anca Filip"
+        title="Head of Product, Mention Me"
+        quote={`“PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before.”`}
+    />
+</BorderWrapper>
 
 This is because, in addition to tracking the metrics above, PostHog enables you to to understand their context through tools such as  [session recording](https://posthog.com/docs/user-guides/sessions), [heat maps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [cohorts](https://posthog.com/docs/user-guides/cohorts) and [correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
 
