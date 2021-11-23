@@ -63,9 +63,9 @@ export default function ProductAnalytics({ children, className = '' }) {
     }, [controls, inView])
 
     return (
-        <section className="px-5">
+        <section id="product-analytics" className="px-5">
             <FeatureScreenshots />
-            <div id="product-analytics" className="max-w-[960px] mx-auto">
+            <div className="max-w-[960px] mx-auto">
                 <motion.ul
                     className="list-none grid md:grid-cols-2 m-0 p-0"
                     ref={ref}
