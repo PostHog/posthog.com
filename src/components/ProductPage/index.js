@@ -1,9 +1,14 @@
 import React from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
-import FeatureScreenshots from './FeatureScreenshots'
+import FeatureFlags from './FeatureFlags'
 import FeatureSlider from './FeatureSlider'
+import Heatmaps from './Heatmaps'
 import Hero from './Hero'
+import Navigation from './Navigation'
+import Platform from './Platform'
+import ProductAnalytics from './ProductAnalytics'
+import SessionRecordings from './SessionRecordings'
 
 function ProductPage() {
     return (
@@ -11,7 +16,12 @@ function ProductPage() {
             <SEO title="Product • PostHog" />
             <FeatureSlider />
             <Hero />
-            <FeatureScreenshots />
+            <Navigation />
+            <ProductAnalytics />
+            <SessionRecordings />
+            <FeatureFlags />
+            <Heatmaps />
+            <Platform />
         </Layout>
     )
 }

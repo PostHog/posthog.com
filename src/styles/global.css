@@ -589,7 +589,7 @@ ul {
     }
 }
 
-.images-slider > div {
+.images-slider > li {
     &:nth-of-type(even) {
         margin-left: -12%;
         margin-top: 7%;

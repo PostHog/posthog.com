@@ -1,7 +1,40 @@
+import { motion, useAnimation } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
+    const controls = useAnimation()
+    const [ref, inView] = useInView({ threshold: 0.5 })
+
+    const container = {
+        hidden: {
+            opacity: 0,
+        },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.05,
+            },
+        },
+    }
+
+    const item = {
+        hidden: { translateX: '100%', opacity: 0, scale: 0 },
+        show: {
+            translateX: 0,
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.5, type: 'spring' },
+        },
+    }
+
+    useEffect(() => {
+        if (inView) {
+            controls.start('show')
+        }
+    }, [controls, inView])
+
     return (
         <section className="my-12 lg:my-0 grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-14 items-center">
             <div className="lg:max-w-[480px] justify-self-end px-5 box-content">
@@ -20,9 +53,17 @@ export default function Hero() {
                     tools.
                 </p>
             </div>
-            <div className="justify-self-end relative flex flex-col">
-                <StaticImage loading="eager" quality={100} src="./images/hero-1.png" />
-                <div className="justify-self-end self-end w-[80%] mt-[-30%]">
+            <motion.div
+                ref={ref}
+                initial="hidden"
+                animate={controls}
+                variants={container}
+                className="justify-self-end relative flex-col hidden lg:flex"
+            >
+                <motion.div variants={item}>
+                    <StaticImage loading="eager" quality={100} src="./images/hero-1.png" />
+                </motion.div>
+                <motion.div variants={item} className="justify-self-end self-end w-[80%] mt-[-30%]">
                     <StaticImage
                         loading="eager"
                         objectPosition="top"
@@ -30,8 +71,8 @@ export default function Hero() {
                         quality={100}
                         src="./images/hero-2.png"
                     />
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     )
 }
