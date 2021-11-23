@@ -103,7 +103,7 @@ export default function Platform() {
                             className="border-b border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed px-6 py-12 flex items-end"
                         >
                             <div>
-                                <div className="mb-4">{icon}</div>
+                                <div className="mb-4 opacity-50">{icon}</div>
                                 <h5>{title}</h5>
                                 <p>{description}</p>
                             </div>
