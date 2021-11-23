@@ -52,7 +52,7 @@ export default function Product({ data }) {
             <Breadcrumbs
                 crumbs={[{ title: 'Product', url: '/product' }, { title }]}
                 darkModeToggle
-                className="px-4 mt-4"
+                className="px-4 mt-4 sticky top-0 z-10 bg-tan dark:bg-primary"
             />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
