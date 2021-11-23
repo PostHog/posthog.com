@@ -9,5 +9,5 @@ helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog
 <details>
 <summary>Troubleshooting</summary>
 
-If you don't see some pods come up (e.g. `chi-posthog-posthog-0-0-0` pod is missing after deleting a previous instance and trying to install PostHog again), try running `helm upgrade -f values.yaml -n posthog posthog posthog/posthog`.
+If you don't see some pods or services come up (e.g. `chi-posthog-posthog-0-0-0` pod or `clickhouse-posthog` service is missing), try running `helm upgrade -f values.yaml -n posthog posthog posthog/posthog`.
 </details>
