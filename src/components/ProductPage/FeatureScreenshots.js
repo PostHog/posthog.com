@@ -2,6 +2,15 @@ import { motion, useAnimation } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import Zoom from 'react-medium-image-zoom'
+
+const ZoomImage = ({ children }) => {
+    return (
+        <Zoom overlayBgColorEnd="rgb(0 0 0 / 85%)" overlayBgColorStart="rgb(0 0 0 / 80%)">
+            {children}
+        </Zoom>
+    )
+}
 
 export default function FeatureScreenshots() {
     const controls = useAnimation()
@@ -44,19 +53,29 @@ export default function FeatureScreenshots() {
             className="p-0 m-0 list-none flex justify-between images-slider my-12"
         >
             <motion.li variants={item}>
-                <StaticImage objectFit="top" src="./images/showcase-1.png" />
+                <ZoomImage>
+                    <StaticImage objectFit="top" src="./images/showcase-1.png" />
+                </ZoomImage>
             </motion.li>
             <motion.li variants={item}>
-                <StaticImage objectFit="top" src="./images/showcase-2.png" />
+                <ZoomImage>
+                    <StaticImage objectFit="top" src="./images/showcase-2.png" />
+                </ZoomImage>
             </motion.li>
             <motion.li variants={item}>
-                <StaticImage objectFit="top" src="./images/showcase-3.png" />
+                <ZoomImage>
+                    <StaticImage objectFit="top" src="./images/showcase-3.png" />
+                </ZoomImage>
             </motion.li>
             <motion.li variants={item}>
-                <StaticImage objectFit="top" src="./images/showcase-4.png" />
+                <ZoomImage>
+                    <StaticImage objectFit="top" src="./images/showcase-4.png" />
+                </ZoomImage>
             </motion.li>
             <motion.li variants={item}>
-                <StaticImage objectFit="top" src="./images/showcase-5.png" />
+                <ZoomImage>
+                    <StaticImage objectFit="top" src="./images/showcase-5.png" />
+                </ZoomImage>
             </motion.li>
         </motion.ul>
     )
