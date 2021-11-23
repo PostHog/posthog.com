@@ -1,8 +1,11 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/plugins"
-  status = 200
+  to = "/integrations/:splat"
 
+[[redirects]]
+  from = "/next-steps/*"
+  to = "/next-steps"
+  status = 200
 
 [[redirects]]
   from = "/careers/*"
@@ -981,3 +984,8 @@
 [[redirects]]
     from = "/handbook/people/team-structure/design"
     to = "/handbook/design/about-design"
+
+# Added: 2021-11-11
+[[redirects]]
+    from = "/handbook/design/about-design"
+    to = "/handbook/people/team-structure/design"

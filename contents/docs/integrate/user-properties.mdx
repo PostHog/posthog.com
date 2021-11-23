@@ -60,33 +60,30 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
  1 | no        | yes       | N/A       | N/A       | N/A                | 2
  2 | yes       | yes       | set       | set       | before             | 2
  3 | yes       | yes       | set       | set_once  | before             | 2
- 4 | yes       | yes       | set       | set       | equal              | 1
+ 4 | yes       | yes       | set       | set       | equal              | 1 or 2
  5 | yes       | yes       | set       | set_once  | equal              | 2 
  6 | yes       | yes       | set       | set       | after              | 1
  7 | yes       | yes       | set       | set_once  | after              | 2 
  8 | yes       | yes       | set_once  | set       | before             | 1 
  9 | yes       | yes       | set_once  | set_once  | before             | 1
 10 | yes       | yes       | set_once  | set       | equal              | 1 
-11 | yes       | yes       | set_once  | set_once  | equal              | 1
+11 | yes       | yes       | set_once  | set_once  | equal              | 1 or 2
 12 | yes       | yes       | set_once  | set       | after              | 1
 13 | yes       | yes       | set_once  | set_once  | after              | 2
 
 
-Important notice: here with equal timestamps and previous method (rows 4 and 11) this means that we use the value from person 1. Person 1 in case of `identify` means the values passed into the identify call. In the case of `alias` person 1 is the first distinct ID provided. To elaborate look at the following examples:
+> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples:
 
-For `identify` this series of calls would mean we end up with `location=New York` and `browser=Safari`.
+For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
 ```js
 posthog.set('Alice', {location: 'Rome'}, timestamp=1)
-posthog.set_once('Alice', {browser: 'Chrome', timestamp=1)
-posthog.identify('Alice', {$set: {location: 'New York'}, $set_once: {browser:'Safari'}}, timestamp=1)
+posthog.identify('Alice', {$set: {location: 'New York'}}, timestamp=1)
 ```
 
-For `alias` this series of calls would mean we end up with `location=Rome` and `browser=Chrome`.
+For `alias` this series of calls would also mean we end up with `location` being `Rome` or `New York`.
 ```js
 posthog.set('Alice 1', {location: 'Rome'}, timestamp=1)
-posthog.set_once('Alice 1', {browser: 'Chrome', timestamp=1)
 posthog.set('Alice 2', {location: 'New York'}, timestamp=1)
-posthog.set_once('Alice 2', {browser: 'Safari', timestamp=1)
 posthog.alias('Alice 1', 'Alice 2', timestamp=1000)
 ```
 

@@ -14,7 +14,7 @@ A short video on Persons can be found [here](https://youtu.be/8_SsZW1v56Q);
         size="md"
         name="Andy Su"
         title="Founder and CEO, Pry"
-        quote={`We look into things such as how valuable customers who come to us via ads are compared to those who are organic. We then use that information to make decisions about our advertising strategy.”`}
+        quote={`“We look into things such as how valuable customers who come to us via ads are compared to those who are organic. We then use that information to make decisions about our advertising strategy.”`}
     />
 </BorderWrapper>
 

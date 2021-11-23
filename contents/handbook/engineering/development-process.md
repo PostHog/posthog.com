@@ -15,18 +15,27 @@ However, if we have no checks in place, we will release quickly but everything w
 
 ## 1. How to decide what to build
 
-There are 3 places that work comes from.
+Deciding what we work on happens in our sprint planning session, where the high level themes for the next sprint get decided. Each team then takes those high level priorities and breaks them down, plus adds their own smaller items like bugfixes, smaller features or other improvements.
 
-- Issues/bugs (raised by the community or us)
-- [Roadmap](/handbook/strategy/roadmap)
-- "This should be better"
+As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
 
+## 2. Sizing a task and reducing WIP
 
-## 2. Sizing a task
+Efficient engineering organizations actively [reduce Work In Progress](https://loom.com/share/5efceb288b634a449041918bdba08202) (WIP) to avoid negative feedback loops that drive down productivity. Hence a PR should be optimised for two things: 1) quality of implementation, and 2) the speed with which we can merge it in.
 
-When picking up a task, it should be doable in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, less likely to cause merge conflicts, and should still deliver some kind of value.
+Your PRs should ideally be sized to be doable in one day, including code review and QA. If it's not, you should break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, easy to review and less likely to cause merge conflicts. 
 
-Even if you're contributing, this is helpful as it means you'll be able to contribute to PostHog faster.
+Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
+
+- First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
+- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
+- Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code, either as comments or by clearly labelling your variables.
+- It's always good to put new features behind [feature flags](https://posthog.com/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
+- Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer, if they get a clean PR to review.
+- Push your code out as a Draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
+- Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Bias for action](https://posthog.com/handbook/company/values#bias-for-action) after all.
+- Most importantly, [really understand why it's paramount to reduce WIP](https://loom.com/share/5efceb288b634a449041918bdba08202), until you feel it in your bones.
+
 
 ## 3. Writing code
 

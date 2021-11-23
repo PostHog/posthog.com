@@ -82,15 +82,7 @@ export default function SelfHost() {
         }
     }, [demoType])
     return (
-        <Layout
-            crumbs={[
-                {
-                    title: 'PostHog',
-                    url: '/',
-                },
-                ...crumbs,
-            ]}
-        >
+        <Layout crumbs={[...crumbs]}>
             <SEO title="Select edition - PostHog" />
             <section className="px-4">
                 {demoType ? <Book demoType={demoType} /> : <Editions setDemoType={setDemoType} />}

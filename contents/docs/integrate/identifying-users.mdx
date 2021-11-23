@@ -58,6 +58,12 @@ PostHog also has a few built-in protections stopping the most common threats to 
   - `0`
 - We do not allow identifying users with empty space strings of any length (`' '`, `'       '`, etc.)
 
+If we encounter an `$identify` event with one of these disallowed IDs, the following will happen:
+
+- We process the event normally (it will be ingested and show up in the UI)
+- We refuse to merge users if both IDs exist
+- The user with the disallowed ID will not be marked as identified in the UI (but they will have an $identify event)
+
 
 
 
