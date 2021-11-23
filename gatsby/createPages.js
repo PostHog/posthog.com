@@ -108,6 +108,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         name
                         url
                     }
+                    product {
+                        name
+                        url
+                    }
                 }
             }
             categories: allMdx(limit: 1000) {
@@ -280,12 +284,24 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     result.data.product.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
+        let next = null
+        let previous = null
+        const sidebar = result.data.sidebars.childSidebarsJson.product
+        sidebar.some((item, index) => {
+            if (item.url === slug) {
+                next = sidebar[index + 1]
+                previous = sidebar[index - 1]
+                return true
+            }
+        })
         createPage({
             path: slug,
             component: ProductTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
+                next,
+                previous,
             },
         })
     })

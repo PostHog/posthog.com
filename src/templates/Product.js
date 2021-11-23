@@ -11,8 +11,9 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import GithubSlugger from 'github-slugger'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
+import SectionLinks from './Handbook/SectionLinks'
 
-export default function Product({ data }) {
+export default function Product({ data, pageContext: { next, previous } }) {
     const { pageData, documentation, sidebars } = data
     const {
         body,
@@ -21,7 +22,6 @@ export default function Product({ data }) {
     } = pageData
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
-
     const Documentation = () => {
         return (
             <>
@@ -84,6 +84,9 @@ export default function Product({ data }) {
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </article>
+                    <div className="mt-12">
+                        <SectionLinks next={next} previous={previous} />
+                    </div>
                 </section>
             </div>
         </Layout>
