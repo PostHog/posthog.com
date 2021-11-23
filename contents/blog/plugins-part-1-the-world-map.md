@@ -105,7 +105,9 @@ When we left the story, we had just set out to build a NodeJS app that:
 - Runs user-defined JavaScript on that stream of events.
 - Sends them back to Python through the same queue for ingestion.
 
-The first and the last steps are easy enough, but what about the middle? How do you run user defined JavaScript?
+## VM2
+
+The first and the last steps are easy enough, but what about the middle? How do you even securely run user defined JavaScript code?
 
 Turns out NodeJS v14 has a [built in VM module](https://nodejs.org/dist./v14.17.5/docs/api/vm.html) that allows running custom JavaScript in a separate context. 
 
@@ -115,12 +117,37 @@ Perfect.
 
 > The vm module is not a security mechanism. Do not use it to run untrusted code.
 
-That's not perfect, but this was to be expected. Privilege escalation attacks are a real thing. 
+Not ideal, but expected. [Privilege escalation](https://en.wikipedia.org/wiki/Privilege_escalation) and [resource exhaustion](https://en.wikipedia.org/wiki/Resource_exhaustion_attack) attacks are real. We can't avoid them, but we can build strategies to mitigate them.
 
-Node's VM is rather limited as well, and the two most popular abstractions turned out to be:
+Node's VM module is rather limited as well. It puts your code in an isolated context, has ~~limited~~ no support for secure communications with the host, and has holes like this:
 
-- [`isolated-vm`](https://github.com/laverdet/isolated-vm) - used by various big companies, and follows a model where it   
-- [`vm2`](https://github.com/patriksimek/vm2)
+```js
+const vm = require('vm');
+vm.runInNewContext('this.constructor.constructor("return process")().exit()');
+console.log('Never gets executed.');
+```
+
+Thus we need an abstraction. The two most popular are `isolated-vm` and `vm2`. What's the [difference between them](https://github.com/patriksimek/vm2/wiki/vm2-vs-isolated-vm), and which is best for us?
+
+- [`isolated-vm`](https://github.com/laverdet/isolated-vm) is used by various big companies, and claims to be really secure. Each "isolate" runs in a new thread, with controllable CPU and memory limits. There are methods to copy data between the main thread and an isolate, and we can share objects and functions between the host and the isolate. It's not a perfect sandbox, but it's as close as we can get. 
+- [`vm2`](https://github.com/patriksimek/vm2) has a different isolation model. Each "vm" runs in an isolated context NodeVM context, in the same thread with the rest of the app. There are no memory or CPU limits we can enforce. You're running the code locally, just not sharing any variables with the host app.
+
+While `isolated-vm` feels like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421). 
+
+> At the end of the day, I would have had to implement some Proxying code similar to vm2, just to get fetch working, and decided it's not worth the effort, considering the time budget and the extremely likely case that I'll leave in some security holes.
+
+VM2 didn't have this problem, as it had its own system of proxies that make sharing code between the host and the VM seamless.  
+
+Because of this, we decided to change our security model. On PostHog Cloud, we would control the installed plugins ourselves, not letting in any code we haven't vetted. On self-hosted, users are free to write as many [arbitrary plugins](https://github.com/PostHog/posthog/issues/6855) as they please.  
+
+This is the best of all worlds. Self-hosted users have all the freedom: they can use the built-in editor to write JavaScript directly in PostHog. PostHog Cloud users will still benefit from community plugins: they're all developed and tested in the open. We just need to manually check and install them, before Cloud users get access. One of [our most used plugins](https://posthog.com/blog/the-state-of-plugins) came about this way.
+
+We still want to [enable arbitrary plugins on Cloud](https://github.com/PostHog/posthog/issues/6855), and [support all npm packages](https://github.com/PostHog/posthog/issues/6887), with [proper levels of isolation](https://github.com/PostHog/posthog/issues/6888), but considering what you can already do, we decided to punt on this for now. 
+
+## Piscina
+
+
+
 
 ## ---Vomit below---
 
