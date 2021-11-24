@@ -1,4 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
+import { ZoomImage } from 'components/ZoomImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import Section from './Section'
@@ -22,7 +23,9 @@ export default function Heatmaps() {
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">
-                <StaticImage width={517} src="./images/heatmaps.png" />
+                <ZoomImage>
+                    <StaticImage width={517} src="./images/heatmaps.png" />
+                </ZoomImage>
             </div>
         </Section>
     )

@@ -1,4 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
+import { ZoomImage } from 'components/ZoomImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import Section from './Section'
@@ -21,7 +22,9 @@ export default function SessionRecordings() {
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">
-                <StaticImage width={624} src="./images/session-recordings.png" />
+                <ZoomImage>
+                    <StaticImage width={624} src="./images/session-recordings.png" />
+                </ZoomImage>
             </div>
         </Section>
     )

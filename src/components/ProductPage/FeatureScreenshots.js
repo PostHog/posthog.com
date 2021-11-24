@@ -1,16 +1,8 @@
+import { ZoomImage } from 'components/ZoomImage'
 import { motion, useAnimation } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
-import Zoom from 'react-medium-image-zoom'
-
-const ZoomImage = ({ children }) => {
-    return (
-        <Zoom overlayBgColorEnd="rgb(0 0 0 / 85%)" overlayBgColorStart="rgb(0 0 0 / 80%)">
-            {children}
-        </Zoom>
-    )
-}
 
 export default function FeatureScreenshots() {
     const controls = useAnimation()
