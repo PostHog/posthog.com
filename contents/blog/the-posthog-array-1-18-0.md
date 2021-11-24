@@ -195,7 +195,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Fix emojis with lz64 encoding [\#2403](https://github.com/PostHog/posthog/pull/2403) ([timgl](https://github.com/timgl))
 - Add actions to sidebar [\#2402](https://github.com/PostHog/posthog/pull/2402) ([timgl](https://github.com/timgl))
 - Fix navigation with actions & events [\#2401](https://github.com/PostHog/posthog/pull/2401) ([paolodamico](https://github.com/paolodamico))
-- Separate endpoint for session recordings [\#2398](https://github.com/PostHog/posthog/pull/2398) ([macobo](https://github.com/macobo))
+- Separate endpoint for session recording [\#2398](https://github.com/PostHog/posthog/pull/2398) ([macobo](https://github.com/macobo))
 - Use isoformat\(\) for dates in Kafka WAL [\#2396](https://github.com/PostHog/posthog/pull/2396) ([mariusandra](https://github.com/mariusandra))
 - Combine events and actions into select box [\#2394](https://github.com/PostHog/posthog/pull/2394) ([timgl](https://github.com/timgl))
 - Event usage split clickhouse queries [\#2388](https://github.com/PostHog/posthog/pull/2388) ([timgl](https://github.com/timgl))

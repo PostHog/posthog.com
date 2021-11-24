@@ -36,6 +36,6 @@ Additionally, when dealing with inputs, if you wish to still capture the input b
 
 If you're running a Clickhouse instance, recordings are automatically deleted after 3-weeks. On Postgres instances, you can set recordings to delete after a configurable number of days in the project settings page.
 
-If you want further control, you can choose to enable session recordings using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
+If you want further control, you can choose to enable session recording using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
 
 To do this, default session recording to false, by setting `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config), and then conditionally call the method to enable it using the feature flag. The method is `posthog.startSessionRecording`.

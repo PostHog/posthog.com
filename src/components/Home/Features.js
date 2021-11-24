@@ -86,7 +86,7 @@ export default function Features() {
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
-                        title="session recordings"
+                        title="session recording"
                         index={2}
                     />{' '}
                     <FeatureButton
@@ -117,7 +117,7 @@ export default function Features() {
             </div>
             <div className="px-4 text-center my-16">
                 <h4 className="text-3xl font-bold mb-8">
-                    <span className="opacity-40">Plus</span> cohorts, user paths, retention, session browsing
+                    <span className="opacity-40">Plus</span> cohorts, user paths, retention,
                     <br />{' '}
                     <span className="text-xl block leading-tight mt-2">
                         & synced annotations <span className="opacity-40">across every view in the platform</span>
