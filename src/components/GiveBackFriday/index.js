@@ -6,8 +6,8 @@ export default function GiveBackFriday() {
     return (
         <section className="px-2 md:px-5 dark relative">
             <div className="text-center bg-primary rounded-lg flex justify-center items-center px-5 py-10 sm:py-[10%]">
-                <div className="max-w-[875px] mx-auto">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[92px] text-white">
+                <div className="max-w-[1020px] mx-auto">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[92px] text-white mb-8">
                         Give Back Fr
                         <span className="relative inline-flex flex-row items-center">
                             <span className="absolute top-[-.1em] transform star-gbf">
@@ -30,20 +30,21 @@ export default function GiveBackFriday() {
                         day
                     </h1>
                     <h2 className="text-lg md:text-xl lg:text-[30px] text-white leading-tight mb-1">
-                        Send some <span className="text-orange">love</span> to the open source community this weekend.
+                        Send some <span className="text-orange">love</span> to the open source community.
                     </h2>
-                    <p className="text-white mb-9 text-base lg:text-[20px] mt-0 ">
-                        For every star our GitHub repo gets, we'll donate $5 to open source projects - up to $50,000.
+                    <p className="text-white mb-9 text-base lg:text-[18px] mt-0 text-opacity-75">
+                        We'll donate $5 for each new star on our GitHub repo to open source projects through Cyber
+                        Monday - up to $50,000!
                     </p>
                     <div className="flex flex-col space-y-4 justify-center items-center">
-                        <CallToAction type="outline" className="!w-64">
-                            Find out more
+                        <CallToAction type="outline" className="!w-64" to="/blog/give-back-friday-2021">
+                            Learn more
                         </CallToAction>
                         <CallToAction
                             to="https://github.com/PostHog/posthog"
                             className="!bg-[#F9BD2B] !border-[#F9BD2B] !w-64"
                         >
-                            Give a star
+                            Star our repo on GitHub
                         </CallToAction>
                     </div>
                 </div>
