@@ -776,9 +776,8 @@
 
 # Added: 2021-09-27
 [[redirects]]
-    from = "/handbook/engineering/production-access"
-    to = "/handbook/engineering/debugging"
-
+    from = "/handbook/product/scale-features-prioritization"
+    to = "/handbook/product/enterprise-features-prioritization"
 
 # Added: 2021-09-27
 [[redirects]]
