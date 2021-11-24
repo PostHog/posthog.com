@@ -36,7 +36,7 @@ export default function GiveBackFriday() {
                         For every star our GitHub repo gets, we'll donate $5 to open source projects - up to $50,000.
                     </p>
                     <div className="flex flex-col space-y-4 justify-center items-center">
-                        <CallToAction type="outline" className="!w-64">
+                        <CallToAction to="/blog/give-back-friday-2021" type="outline" className="!w-64">
                             Find out more
                         </CallToAction>
                         <CallToAction
