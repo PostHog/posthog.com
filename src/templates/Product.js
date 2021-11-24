@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
+import FooterCTA from 'components/FooterCTA'
 import { RightArrow } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -87,6 +88,7 @@ export default function Product({ data, pageContext: { next, previous } }) {
                     <div className="mt-12">
                         <SectionLinks next={next} previous={previous} />
                     </div>
+                    <FooterCTA />
                 </section>
             </div>
         </Layout>

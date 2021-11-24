@@ -43,6 +43,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
+import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
@@ -145,6 +146,7 @@ export const shortcodes = {
     FeaturesSelfHost,
     FloatedImage,
     Footer,
+    FooterCTA,
     GetStartedModal,
     GithubIcon,
     Heading,
