@@ -204,6 +204,14 @@ configuration.capturePushNotifications = NO;
  * continueUserActivity and openURL methods on the posthog client.
  */
 configuration.captureDeepLinks = NO;
+
+/**
+ * Whether the posthog client should include the `$device_id` property when sending events.
+ * When enabled, `UIDevice`'s `identifierForVendor` property is used. Changing the value of
+ * of this property after initializing the client will have no effect.
+ * The default value is `YES`.
+ */
+configuration.shouldSendDeviceID = YES;
 ``` 
 
 ## Thank you

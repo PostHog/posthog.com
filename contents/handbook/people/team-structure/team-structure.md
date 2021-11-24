@@ -5,12 +5,13 @@ showTitle: true
 hideAnchor: true
 ---
 
-# Reporting structure
+## Reporting structure
 
 - [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
   - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
     - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
       - [Paolo D'Amico, Product](/handbook/company/team#paolo-damico-product)
+      - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
     - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
       - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
@@ -24,35 +25,35 @@ hideAnchor: true
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
     - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
-    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
-    - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
     - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
+    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
   - [Phil Leggetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
 
-# Small teams
+## Small teams
 
 We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
 
-## Engineering
+### Engineering
 
-### [Core Analytics](core-analytics)
+#### [Core Analytics](core-analytics)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
 - [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
+- Harry Waye (Full Stack Engineer)
 
 <br />
 
-### [Core Experience](core-experience)
+#### [Core Experience](core-experience)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
@@ -63,34 +64,41 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-### [Platform](platform)
+#### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
+- Guido Iaquinti (Site Reliability Engineer)
 
 <br />
 
-## [Growth](growth)
+### [Growth](growth)
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-- [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
-- [Phil Leggetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
-- [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Sam Winslow](/handbook/company/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
-- [Eli Kinsey](/handbook/company/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
 
 <br />
 
-## [Marketing](marketing)
+### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
+- [Phil Leggetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
+- [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
+
+<br />
+
+### [Website and Docs](website-docs)
+- [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
+- [Eli Kinsey](/handbook/company/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
-## [People & culture](people)
+<br />
+
+### [People & culture](people)
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
 
 
-# Organization changes
+## Organization changes
 
 We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/people/team-structure/why-small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:
 

@@ -2,6 +2,7 @@
 title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
+featuredImage: ../../images/tutorials/banners/funnels.png
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

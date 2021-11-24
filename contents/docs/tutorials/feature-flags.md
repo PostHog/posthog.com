@@ -2,6 +2,8 @@
 title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
+featuredImage: ../../images/tutorials/banners/feature-flags.png
+featuredTutorial: true
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

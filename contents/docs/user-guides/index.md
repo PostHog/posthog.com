@@ -23,7 +23,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | ----------------------------------------------- | -------------------------------------------- | ----- | ------------ |
 | [Action history](/docs/user-guides/actions)        | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Custom dashboards](/docs/user-guides/dashboards)  | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [User tracking & history](/docs/user-guides/users) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Persons tracking & history](/docs/user-guides/persons) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Optimisation features
 

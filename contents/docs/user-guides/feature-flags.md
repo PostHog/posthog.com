@@ -8,6 +8,16 @@ Feature flags allow you to safely deploy and roll back new features. It means yo
 
 > **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/joe.png"
+        size="md"
+        name="Joe Saunderson"
+        title="Software Engineer, Mention Me"
+        quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate.”`}
+    />
+</BorderWrapper>
+
 ## Learning resources
 
 ### Tutorial
@@ -116,6 +126,8 @@ However, for flags using a rollout percentage mechanism (either by itself or in 
 As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
 
 ## Multivariate feature flags (alpha)
+
+> Multivariate feature flags are only available when using PostHog >= 1.28 (if self-hosting) and [posthog-js](https://github.com/PostHog/posthog-js) >= 1.13.
 
 PostHog 1.28 introduces support for multivariate feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
 

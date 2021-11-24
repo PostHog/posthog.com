@@ -12,7 +12,7 @@ module.exports = {
             'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
         url: 'https://posthog.com', // No trailing slash allowed!
         image: '/banner.png', // Path to your image you placed in the 'static' folder
-        twitterUsername: '@PostHogHQ',
+        twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
     plugins: [
@@ -49,6 +49,10 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                shouldBlockNodeFromTransformation: (node) =>
+                    node.internal.type === 'File' &&
+                    node.url &&
+                    node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
@@ -189,6 +193,7 @@ module.exports = {
                 isEnabledDevMode: true,
                 initOptions: {
                     _capture_metrics: true,
+                    persistence: 'localStorage+cookie',
                 },
             },
         },

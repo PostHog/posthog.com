@@ -1,6 +1,6 @@
-import React from 'react'
 import { CallToAction } from 'components/CallToAction'
-import { section, heading } from './classes'
+import React from 'react'
+import { heading, section } from './classes'
 
 export default function CTA() {
     return (
@@ -13,7 +13,7 @@ export default function CTA() {
                         type="custom"
                         width="56"
                         className="bg-white text-blue hover:text-blue border-2 border-white"
-                        to="/docs/self-host"
+                        to="/signup"
                     >
                         Get started
                     </CallToAction>
@@ -21,7 +21,7 @@ export default function CTA() {
                         type="custom"
                         width="56"
                         className="bg-blue text-white border-2 rounded-full border-white"
-                        to="/schedule-demo"
+                        to="/book-a-demo"
                     >
                         Schedule a demo
                     </CallToAction>

@@ -1,21 +1,32 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { SEO } from 'components/seo'
+import { Blockquote } from 'components/BlockQuote'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
+import { InlineCode } from 'components/InlineCode'
+import Layout from 'components/Layout'
+import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { SEO } from 'components/seo'
+import { ZoomImage } from 'components/ZoomImage'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { findAuthor } from 'lib/utils'
+import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import Link from 'components/Link'
 
-export default function BlogPost({ data }) {
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+export default function BlogPost({ data, pageContext }) {
     const { postData, authorsData } = data
-    const { slug, body, excerpt } = postData
+    const {
+        fields: { slug },
+        body,
+        excerpt,
+    } = postData
     const {
         frontmatter: { authors },
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
+    const { gitLogLatestDate } = postData?.parent.fields
     const authorDetails = findAuthor(authors)(author)
     const components = {
         h1: H1,
@@ -25,9 +36,13 @@ export default function BlogPost({ data }) {
         h5: H5,
         h6: H6,
         pre: CodeBlock,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        img: ZoomImage,
+        a: A,
         ...shortcodes,
     }
-
+    const { categories } = pageContext
     return (
         <Layout>
             <SEO
@@ -38,11 +53,13 @@ export default function BlogPost({ data }) {
             />
             <BlogPostLayout
                 blogDate={date}
+                blogUpdatedDate={gitLogLatestDate}
                 pageTitle={title}
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
                 blogArticleSlug={slug}
                 authorDetails={authorDetails}
+                categories={categories}
             >
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
@@ -77,6 +94,9 @@ export const query = graphql`
             parent {
                 ... on File {
                     relativePath
+                    fields {
+                        gitLogLatestDate(formatString: "MMMM DD, YYYY")
+                    }
                 }
             }
         }
