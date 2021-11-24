@@ -4,15 +4,15 @@ customer: Saga
 logo: ../images/customers/saga/saga.svg
 featuredImage: ../images/customers/saga/featured.jpg
 industries:
-    - Knowledge sharing software
+    - Productivity software
 users:
     - Leadership
     - Product
     - Engineering
 toolsUsed:
-    - Self-Hosting
+    - Self-hosting
     - Events
-    - Feature Flags
+    - Feature flags
 ---
 
 [Saga](https://saga.so/) is a knowledge sharing tool which enables teams to centralize their docs and notes into a single, searchable platform. Since launching in 2020 Saga’s public beta has been adopted by teams all around the world and the product has had constant updates. 
