@@ -10,7 +10,7 @@ export default function GiveBackFriday() {
                     <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[92px] text-white">
                         Give Back Fr
                         <span className="relative inline-flex flex-row items-center">
-                            <span className="absolute top-[-.1em] transform scale-[1.5]">
+                            <span className="absolute top-[-.1em] transform star-gbf">
                                 <svg
                                     className="w-full h-auto"
                                     width="38"
