@@ -10,9 +10,9 @@ const features = [
         url: 'product-analytics',
     },
     {
-        title: 'Session recordings',
+        title: 'Session recording',
         icon: <SessionRecordings />,
-        url: 'session-recordings',
+        url: 'session-recording',
     },
     {
         title: 'Feature flags',
@@ -46,10 +46,10 @@ export default function Navigation() {
                             offset={-110}
                             smooth
                             to={url}
-                            className="text-primary dark:text-white hover:text-primary dark:hover:text-white opacity-80 flex items-center space-x-2 px-4 py-4 md:px-6 md:py-4"
+                            className="text-primary dark:text-white hover:text-primary hover:bg-gray-accent-light hover:bg-opacity-50 dark:hover:bg-gray-accent dark:hover:bg-opacity-20 dark:hover:text-white opacity-80 flex h-full items-center space-x-2 px-4 py-3 md:px-6 md:py-3"
                         >
                             {icon}
-                            <span className="hidden lg:inline-block">{title}</span>
+                            <span className="hidden lg:inline-block text-[14px]">{title}</span>
                         </Link>
                     </li>
                 ))}

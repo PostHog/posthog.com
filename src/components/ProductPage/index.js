@@ -8,7 +8,7 @@ import Hero from './Hero'
 import Navigation from './Navigation'
 import Platform from './Platform'
 import ProductAnalytics from './ProductAnalytics'
-import SessionRecordings from './SessionRecordings'
+import SessionRecording from './SessionRecording'
 
 function ProductPage() {
     return (
@@ -18,7 +18,7 @@ function ProductPage() {
             <Hero />
             <Navigation />
             <ProductAnalytics />
-            <SessionRecordings />
+            <SessionRecording />
             <FeatureFlags />
             <Heatmaps />
             <Platform />
