@@ -19,4 +19,4 @@ It actually is. YC have invested in over 3,000 startups - and they're widely see
 
 As an open-source company, we document everything we do on our [blog](https://posthog.com/blog), in our [company handbook](https://posthog.com/handbook/company/story), and on our [GitHub repo](https://github.com/posthog/posthog). So it was only natural that we'd also want to document this achievement - as a reminder of how far we've come and where we're going.
 
-_Follow our journey on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) and subscribe to our [newsletter](https://posthog.com/newsletter) for more advice on growth, startups, and analytics._
+_Follow our journey on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) and subscribe to our [newsletter](https://posthog.com/newsletter) for more advice on growth, startups, and analytics._

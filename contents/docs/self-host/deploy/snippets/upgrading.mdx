@@ -1,11 +1,34 @@
-To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
+import CommandHelmGetRepoSnippet from './command-helm-get-repo'
+import CommandHelmUpgradeSnippet from './command-helm-upgrade'
 
-```console
-helm repo update
-helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog --atomic
+To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, do the following:
+
+1. Get and update the helm repo:
+
+<CommandHelmGetRepoSnippet />
+
+2. Check if it's going to be a major version upgrade:
+
+```shell
+helm list -n posthog
+helm search repo posthog
+```
+Compare the numbers for the chart version (in the format `posthog-{major}.{minor}.{patch}` - for example, `posthog-3.15.1`) when running the commands above. If the upgrade is for a major version, check the [upgrade notes](/docs/self-host/deploy/upgrade-notes) before moving forward.
+
+3. Run the upgrade
+
+<CommandHelmUpgradeSnippet />
+
+Check the Helm [documentation](https://helm.sh/docs/helm/helm_upgrade/) for more info about the `helm upgrade` command.
+
+<details>
+<summary>Troubleshooting</summary>
+If you see this error
+
+```
+Error: UPGRADE FAILED: release posthog failed, and has been rolled back due to atomic being set: post-upgrade hooks failed: warning: Hook post-upgrade posthog/templates/migrate.job.yaml failed: jobs.batch "posthog-migrate" already exists
 ```
 
-**When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes).**
-
-See [the Helm docs](https://helm.sh/docs/helm/helm_upgrade/) for documentation on the `helm upgrade` command.
+it happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl delete job posthog-migrate -n posthog`) before running the upgrade again.
+</details>
 

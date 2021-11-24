@@ -10,7 +10,7 @@ We believe this approach will lead to the best product for end users, which is h
 
 [Adam Gross](https://twitter.com/adam_g?lang=en) has given some excellent [talks on this topic](https://www.heavybit.com/library/video/self-serve-go-to-market/), that we've borrowed from.
 
-#1-2-3 framework
+# 1-2-3 framework
 
 ## Product
 

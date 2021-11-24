@@ -5,7 +5,7 @@ import staples from './images/staples.svg'
 import spacex from './images/spacex.svg'
 import landmark from './images/landmark.svg'
 import hasura from './images/hasura.svg'
-import grafana from './images/grafana.svg'
+import phantom from './images/phantom.svg'
 import outbrain from './images/outbrain.svg'
 import tinkoff from './images/tinkoff.svg'
 
@@ -35,9 +35,9 @@ export default function Customers() {
                     <Customer width={267} height={35} image={spacex} />
                     <Customer width={206} height={47} image={landmark} />
                     <Customer width={173.46} height={51} image={hasura} />
-                    <Customer width={184} height={44} image={grafana} />
                     <Customer width={138} height={31} image={outbrain} />
                     <Customer width={162} height={50.58} image={tinkoff} />
+                    <Customer width={175} height={41} image={phantom} />
                 </ul>
             </div>
         </section>

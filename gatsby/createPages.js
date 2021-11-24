@@ -1,6 +1,7 @@
 const replacePath = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
+const Slugger = require('github-slugger')
 
 module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
@@ -8,6 +9,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
+    const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
+    const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -19,7 +22,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
                 nodes {
                     id
-                    tableOfContents
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -28,7 +34,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
                 nodes {
                     id
-                    tableOfContents
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
+                nodes {
+                    id
                     fields {
                         slug
                     }
@@ -40,6 +57,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                    frontmatter {
+                        categories
+                    }
                 }
             }
             sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
@@ -47,6 +67,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     handbook {
                         children {
                             children {
+                                children {
+                                    name
+                                    url
+                                }
                                 name
                                 url
                             }
@@ -59,6 +83,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     docs {
                         children {
                             children {
+                                children {
+                                    name
+                                    url
+                                }
                                 name
                                 url
                             }
@@ -73,6 +101,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             categories: allMdx(limit: 1000) {
                 group(field: frontmatter___categories) {
                     category: fieldValue
+                }
+            }
+            plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
+                nodes {
+                    id
+                    slug
                 }
             }
         }
@@ -99,22 +133,30 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         }, [])
     }
 
-    function flattenToc(items) {
-        return items.reduce((acc, item) => {
-            if (item.url) {
-                acc.push({ url: item.url.slice(1), name: item.title })
+    function formatToc(headings) {
+        const slugger = new Slugger()
+        return headings.map((heading) => {
+            return {
+                ...heading,
+                depth: heading.depth - 2,
+                url: slugger.slug(heading.value),
             }
-            if (item.items) {
-                acc.push(...flattenToc(item.items))
-            }
-            return acc
-        }, [])
+        })
     }
 
     const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
     const handbookMenuFlattened = flattenMenu(handbookMenu)
     const docsMenu = result.data.sidebars.childSidebarsJson.docs
     const docsMenuFlattened = flattenMenu(docsMenu)
+    const categories = {}
+    result.data.categories.group.forEach(({ category }) => {
+        const slug = slugify(category, { lower: true })
+        const url = `/blog/categories/${slug}`
+        categories[category] = {
+            slug,
+            url,
+        }
+    })
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
@@ -131,7 +173,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         let next = null
         let previous = null
         let breadcrumb = null
-        const tableOfContents = node.tableOfContents.items && flattenToc(node.tableOfContents.items)
+        const tableOfContents = formatToc(node.headings)
         handbookMenuFlattened.some((item, index) => {
             if (item.url === slug) {
                 next = handbookMenuFlattened[index + 1]
@@ -161,7 +203,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         let next = null
         let previous = null
         let breadcrumb = null
-        const tableOfContents = node.tableOfContents.items && flattenToc(node.tableOfContents.items)
+        const tableOfContents = formatToc(node.headings)
         docsMenuFlattened.some((item, index) => {
             if (item.url === slug) {
                 next = docsMenuFlattened[index + 1]
@@ -188,26 +230,51 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
+        const postCategories = node.frontmatter.categories || []
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
             context: {
                 id: node.id,
+                categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
             },
         })
     })
 
-    result.data.categories.group.forEach(({ category: category }) => {
-        const slug = slugify(category, { lower: true })
-        const path = `/blog/categories/${slug}`
+    Object.keys(categories).forEach((category) => {
+        const { url, slug } = categories[category]
         createPage({
-            path,
+            path: url,
             component: BlogCategoryTemplate,
             context: {
-                title: `Blog: ${category}`,
+                title: category,
                 category,
                 slug,
+                crumbs: [{ title: 'Blog', url: '/blog' }, { title: category }],
             },
         })
+    })
+
+    result.data.customers.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: slug,
+            component: CustomerTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
+    result.data.plugins.nodes.forEach((node) => {
+        const { id, slug } = node
+        if (slug) {
+            createPage({
+                path: slug,
+                component: PluginTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
     })
 }

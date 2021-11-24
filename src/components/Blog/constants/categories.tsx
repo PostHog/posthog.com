@@ -1,6 +1,6 @@
-import React from 'react'
-import { Twitter, GitHub, LinkedIn } from 'components/Icons/Icons'
+import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
 import { graphql } from 'gatsby'
+import React from 'react'
 export interface CategoryInterface {
     title: string
     slug: string
@@ -35,7 +35,7 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/release-notes',
     },
     {
-        title: 'CEO diary',
+        title: 'CEO diaries',
         slug: 'ceo-diaries',
         link: '/blog/categories/ceo-diaries',
     },

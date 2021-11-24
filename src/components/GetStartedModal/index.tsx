@@ -47,7 +47,7 @@ export const GetStartedModal = () => {
                         <p>Deploy PostHog Open Source on your own infrastructure. Free forever.</p>
                     </div>
                 </Link>
-                <a href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
+                <a href="/schedule-demo#contact">
                     <div className="modalSelfDeploy modalCard">
                         <div className="modalCardHeader">
                             <img src={modalSelfDeploy} alt="modal-self-deploy " />

@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE
+// AUTO GENERATED FILE 
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
@@ -8,9 +8,13 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
+import { BorderWrapper } from './components/BorderWrapper'
+import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
@@ -18,33 +22,44 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { Contact } from './components/Contact'
+import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
+import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
+import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
+import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { ImageBlock } from './components/ImageBlock'
+import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
+import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -55,10 +70,10 @@ import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
+import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
-import { PricingSlider } from './components/PricingSlider'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -80,88 +95,107 @@ import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
+import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
+import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
-    Accordion,
-    AnchorScrollNavbar,
-    AnimateIntoView,
-    AnimatedBurger,
-    ArrayCTA,
-    BasicHedgehogImage,
-    Blog,
-    BlogFooter,
-    CallToAction,
-    Benefits,
-    CareersHero,
-    InterviewProcess,
-    OpenRoles,
-    Transparency,
-    WhyWereHere,
-    WorkingAtPostHog,
-    Chip,
-    CodeBlock,
-    CompensationCalculator,
-    Container,
-    ContributorCard,
-    ContributorSearch,
-    ContributorsChart,
-    DarkModeToggle,
-    DemoScheduler,
-    DocsPageSurvey,
-    DocsSearch,
-    FeaturesComparisonTable,
-    FeaturesNav,
-    FeaturesSelfHost,
-    Footer,
-    GetStartedModal,
-    GithubIcon,
-    HiddenSection,
-    Home,
-    HostingOption,
-    LandingPageCallToAction,
-    LibraryStats,
-    Link,
-    Logo,
-    MainNav,
-    MdxAnchorHeaders,
-    NewsletterForm,
-    NotFoundPage,
-    OtherFeaturesBlock,
-    OverflowXSection,
-    PageHeader,
-    PlanComparisonTable,
-    PostCard,
-    CloudVsSelfHost,
-    FAQs,
-    PlanComparison,
-    PricingHero,
-    PricingTable,
-    Quote,
-    Savings,
-    PricingSlider,
-    ProductAnchorNavbar,
-    ProductFeature,
-    ProductFeaturePlugin,
-    ProductFooter,
-    ProductSectionHeader,
-    ResponsiveAnchor,
-    RocketHorizontalRule,
-    DesignedForYourStackBlock,
-    FeaturedSectionTextLeft,
-    FeaturedSectionTextRight,
-    FeaturedSectionTripleImage,
-    SignupModal,
-    SliderNav,
-    Spacer,
-    StarRepoButton,
-    StartNowButton,
-    Structure,
-    TableOfContents,
-    TeamQuote,
-    Tooltip,
-    VisitLibrary,
-    WorkableSnippet,
+	Endpoint,
+	MethodTags,
+	Accordion,
+	AnchorScrollNavbar,
+	AnimateIntoView,
+	AnimatedBurger,
+	ArrayCTA,
+	BasicHedgehogImage,
+	BlockQuote,
+	Blog,
+	BlogFooter,
+	BorderWrapper,
+	Breadcrumbs,
+	CallToAction,
+	Card,
+	Benefits,
+	CareersHero,
+	InterviewProcess,
+	OpenRoles,
+	Transparency,
+	WhyWereHere,
+	WorkingAtPostHog,
+	Checkbox,
+	Chip,
+	CodeBlock,
+	CompensationCalculator,
+	Contact,
+	ContactForm,
+	Container,
+	ContributorCard,
+	ContributorSearch,
+	ContributorsChart,
+	Customers,
+	DarkModeToggle,
+	DemoScheduler,
+	DeployOption,
+	DocsPageSurvey,
+	DocsSearch,
+	FeaturesComparisonTable,
+	FeaturesNav,
+	FeaturesSelfHost,
+	FloatedImage,
+	Footer,
+	GetStartedModal,
+	GithubIcon,
+	Heading,
+	HiddenSection,
+	Home,
+	HostingOption,
+	ImageBlock,
+	InlineCode,
+	LandingPageCallToAction,
+	LibraryStats,
+	Link,
+	Logo,
+	MainNav,
+	MdxAnchorHeaders,
+	Modal,
+	NewsletterForm,
+	NextSteps,
+	NotFoundPage,
+	OtherFeaturesBlock,
+	OverflowXSection,
+	PageHeader,
+	PlanComparisonTable,
+	PostCard,
+	CloudVsSelfHost,
+	FAQs,
+	PlanComparison,
+	PricingHero,
+	PricingSlider,
+	PricingTable,
+	Quote,
+	Savings,
+	ProductAnchorNavbar,
+	ProductFeature,
+	ProductFeaturePlugin,
+	ProductFooter,
+	ProductSectionHeader,
+	ResponsiveAnchor,
+	RocketHorizontalRule,
+	DesignedForYourStackBlock,
+	FeaturedSectionTextLeft,
+	FeaturedSectionTextRight,
+	FeaturedSectionTripleImage,
+	SignupModal,
+	SliderNav,
+	Spacer,
+	StarRepoButton,
+	StartNowButton,
+	Structure,
+	TableOfContents,
+	TeamQuote,
+	Tooltip,
+	VisitLibrary,
+	WorkableOpenRoles,
+	WorkableSnippet,
+	ZoomImage
 }

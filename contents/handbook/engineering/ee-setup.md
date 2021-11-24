@@ -10,7 +10,10 @@ Rough instructions on how to "get the EE version running in all its glory". **Cu
 There are multiple ways to run your EE setup depending on your preferences and needs.
 
 ### Option A. Backend docker-based & frontend locally.
-Use our handy command prebuilt command to run. Everything will run on Docker. Frontend will be built and KEA typegen will be run on the background so you can work on the frontend too.
+
+This is the simplest setup, and it's most useful if you're working just on the front-end.
+
+The entire backend will run on Docker, and the frontend will run locally with KEA typegen. We have a handy one-line command to run this environment.
 
 ```
 yarn start-ch-dev
@@ -21,7 +24,9 @@ If you're running into problems, such as Kafka connection errors, frontend not b
 ```
 yarn clear-ch-dev
 ```
-### Option B. Running Python + Webpack locally
+### Option B. Running Python + frontend locally (the rest on docker)
+
+This setup is useful if you'll be making changes to both backend and frontend of the application.
 
 Our SAML integration depends on the `xmlsec` package which requires a bunch of OS-level dependencies. These dependencies ship by default in the Docker integration, but if you're running the Python code on a `virtualenv`, you'll need to install them manually. Check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec). Here's the command you can run on macOS,
 
@@ -29,19 +34,24 @@ Our SAML integration depends on the `xmlsec` package which requires a bunch of O
 brew install libxml2 libxmlsec1 pkg-config
 ```
 
-- Run all the services
+- Run services on docker
   - Stop local postgres, kafka, clickhouse and zookeeper instances if you have them
-  - Same for redis, though it doesn't really matter much
+      - If you're on a mac and installed postgres with brew, you can stop it with `brew services stop postgresql`
+  - Stop redis too, though it doesn't really matter much
   - `docker-compose -f ee/docker-compose.ch.yml up db redis zookeeper kafka clickhouse`
 - Run the frontend
   - `yarn build`
-  - `yarn start` or click "▶️" next to `"start"` in the scripts section of package.json.
+  - `yarn start-docker:esbuild` or click "▶️" next to `"start-docker:esbuild"` in the scripts section of package.json.
+      - This will serve up the frontend on host `0.0.0.0` so that services on Docker can interact with it.
 - Run the backend
-  - `export DEBUG=1`
-  - `export PRIMARY_DB=clickhouse`
-  - `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`
-  - `export KAFKA_ENABLED=true`
-  - `export KAFKA_HOSTS=localhost:9092`
+  - In `/etc/hosts`, add a line with `127.0.0.1 kafka clickhouse`
+  - Make sure you're running your `virtualenv` with `source env/bin/activate`
+  - Set the following environment variables:
+    - `export DEBUG=1`
+    - `export PRIMARY_DB=clickhouse`
+    - `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`
+    - `export KAFKA_ENABLED=true`
+    - `export KAFKA_HOSTS=localhost:9092`
   - Run migrations: `python manage.py migrate && python manage.py migrate_clickhouse`
   - Run the app: `python manage.py runserver` (or set it up via your IDE)
   - Run the worker: `./bin/start-worker`

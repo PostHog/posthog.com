@@ -4,24 +4,33 @@ sidebarTitle: Google Cloud Platform
 sidebar: Docs
 showTitle: true
 tags:
-  - gcp
+    - gcp
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 
-First, we need to set up a Kubernetes Cluster. See [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/).
+First, we need to set up a Kubernetes cluster (see the official GCP [documentation](https://cloud.google.com/kubernetes-engine/) for more info).
+
+<ClusterRequirementsSnippet />
+
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+>
+> * for PostgreSQL, take a look at [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [Google Cloud Memorystore](https://cloud.google.com/memorystore) and [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
+>
+
+## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
 cloud: "gcp"
 ingress:
   hostname: <your-hostname>
-  nginx:
-    enabled: false
-certManager:
-  enabled: false
 ```
 
 ### Installing the chart
@@ -45,7 +54,7 @@ If DNS has been updated properly, check whether the SSL certificate was created 
 
 This can be done via the following command:
 
-```console
+```shell
 gcloud beta --project yourproject compute ssl-certificates list
 ```
 

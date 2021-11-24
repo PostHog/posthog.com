@@ -10,8 +10,9 @@ const log = (...args) => {
     }
 }
 
+/** Return date (without time) in ISO format. */
 const formatDate = (date) => {
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+    return date.toISOString().slice(0, 10)
 }
 
 const redirectText = (from, to) => {

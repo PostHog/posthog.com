@@ -1,12 +1,13 @@
-import React from 'react'
 import cntl from 'cntl'
+import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import Accordion from 'components/Accordion'
+import React from 'react'
 
 const linksHeadingSm = cntl`
     text-sm
     text-gray
+    dark:text-gray
     mb-1
     leading-tight
     pb-[0.2rem]
@@ -73,7 +74,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="md:text-base"
                         title="Contact sales"
-                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                        url="/signup/self-host/get-in-touch#contact"
                     />
                 </ul>
             </div>
@@ -110,10 +111,18 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Session recordings" url="/product/#insights" />
                                     <FooterMenuItem title="Feature flags" url="/product/#insights" />
-                                    <FooterMenuItem title="Plugins library" url="/plugins" />
+                                    <FooterMenuItem title="Integrations" url="/integrations" />
                                 </ul>
                             </div>
                             <div>
+                                <h4 className={linksHeadingMd}>
+                                    <Link
+                                        to="/customers"
+                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
+                                    >
+                                        Customers
+                                    </Link>
+                                </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Event autocapture" url="/product/#platform" />
@@ -138,7 +147,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Support" url="/support" />
                                     <FooterMenuItem
                                         title="Contact sales"
-                                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                                        url="/signup/self-host/get-in-touch#contact"
                                     />
                                 </ul>
                             </div>
@@ -147,7 +156,6 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Roadmap" url="/handbook/strategy/roadmap" />
                                     <FooterMenuItem title="Contributors" url="/contributors" />
-                                    <FooterMenuItem title="Code of conduct" url="/docs/contribute/code-of-conduct" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
                                     <FooterMenuItem
                                         title="PostHog FM"
@@ -165,7 +173,7 @@ export function Footer(): JSX.Element {
                                 <h5 className={linksHeadingSm}>Getting started</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
-                                    <FooterMenuItem title="Self hosting" url="/docs/self-host" />
+                                    <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
                                 </ul>
                             </div>
@@ -189,7 +197,6 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
                                     <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
-                                    <FooterMenuItem title="FAQ" url="/faq" />
                                 </ul>
                             </div>
                         </div>
@@ -211,6 +218,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Blog" url="/blog" />
                                     <FooterMenuItem title="Media" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
@@ -226,11 +234,19 @@ export function Footer(): JSX.Element {
             </div>
             <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 items-center text-base max-w-6xl mx-auto">
                 <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
+                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4">
+                    <li>
+                        <Link
+                            to="/docs/contribute/code-of-conduct"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                        >
+                            Code of conduct
+                        </Link>
+                    </li>
                     <li>
                         <Link
                             to="/privacy"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Privacy
                         </Link>
@@ -238,7 +254,7 @@ export function Footer(): JSX.Element {
                     <li>
                         <Link
                             to="/terms"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Terms
                         </Link>

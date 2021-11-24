@@ -1,13 +1,13 @@
-import React from 'react'
+import Breadcrumbs from 'components/Breadcrumbs'
 import { graphql } from 'gatsby'
+import { findAuthor } from 'lib/utils'
+import React from 'react'
 import Layout from '../Layout'
-import PostCard from '../PostCard'
 import { NewsletterForm } from '../NewsletterForm'
+import PostCard from '../PostCard'
 import { SEO } from '../seo'
 import { Structure } from '../Structure'
-import { BlogCategoriesList } from '../Blog/BlogCategoriesList'
-import { DarkModeToggle } from '../DarkModeToggle'
-import { findAuthor } from 'lib/utils'
+import { BlogCategoriesList } from './BlogCategoriesList'
 
 const Blog = ({
     data: {
@@ -20,8 +20,8 @@ const Blog = ({
 }) => {
     const posts = edges.filter((edge) => !!edge.node.frontmatter.date)
     const title = pageContext?.title || 'Blog'
+    const crumbs = pageContext?.crumbs || [{ title: 'Blog' }]
     const findAuth = findAuthor(authors)
-
     const latestPost = (
         <PostCard
             key={posts[0].node.id}
@@ -42,8 +42,8 @@ const Blog = ({
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
-                    <div className="flex justify-end items-center w-full px-4 mb-4 mt-6 lg:mt-4">
-                        <DarkModeToggle />
+                    <div className="px-4 mt-4 mb-9">
+                        <Breadcrumbs crumbs={crumbs} darkModeToggle />
                     </div>
 
                     <Structure.Section width="5xl" className="my-0">

@@ -4,17 +4,15 @@ sidebar: Handbook
 showTitle: true
 ---
 
-*Last Updated On: 04/08/2021*
-
-As a developer-focused company offering a product that, in most cases, will require at least *some* developer involvement (and sometimes a lot of it!), Developer Relations is an important area to us.
-
-Beyond being a developer-focused product, an appropriate PostHog setup requires that the customer, at a minimum, integrate a PostHog library into their codebase. Additionally, engineers may also step in to:
+As a developer-focused company, Developer Relations is an important area to us. Beyond being a developer-focused product, an appropriate PostHog setup requires that the customer, at a minimum, integrate a PostHog library into their codebase. Additionally, engineers may also step in to:
 
 - Deploy and maintain a self-hosted instance of PostHog
+- Integrate SDKs or directly work with the PostHog API to ingest live data
+- Import historical data into PostHog
+- Export data from PostHog
 - Configure integrations with other services
-- Export data from PostHog (e.g. via API)
 - Add data into PostHog from third-party services
-- Build a plugin for PostHog
+- Extend PostHog through plugins
 - Run queries directly against the PostHog database (when self-hosting)
 
 Finally, as an open core company with a large and well-established MIT-licensed offering, we are also in close contact with developers via:
@@ -25,42 +23,67 @@ Finally, as an open core company with a large and well-established MIT-licensed 
 
 As a result, developers/engineers are a core part of our userbase and community, making them a key component of our success. 
 
-Thus, this page will provide some insight into what developer relations at PostHog entails in the near to medium term.
+This page provides some insight into what Developer Relations at PostHog entails in the near to medium term.
 
-## Defining developer relations at PostHog
+## Defining Developer Relations at PostHog
 
-Developer relations can be a confusing space, with a lot of controversy and disagreements about taxonomy.
+Developer Relations can be a confusing space, with a lot of controversy and disagreements about taxonomy.
 
-For us, the most important thing is that we have our own structure for conceptualizing this, rather than seeking an absolute truth - at the end of the day, every company approaches DevRel differently.
+For us, the most important thing is that we have our own structure for conceptualizing this rather than seeking an absolute truth. At the end of the day, every company approaches DevRel differently.
 
-At PostHog, we see "developer relations" as intersecting Product, Engineering, and Marketing. This is refleted in the work we do and the skills that people have who take on developer relations roles here.
+At PostHog, we see "Developer Relations" as intersecting Product, Engineering, and Marketing. This is reflected in the work we do and the skills that people have who take on DevRel roles here.
 
-![Developer Relations Intersection](../../../images/handbook/devrel-intersection.png)
+import DevRelIntersectionImage from '../../../images/handbook/devrel-intersection.png'
 
-The future may see developer relations becoming its own [small team](/handbook/people/team-structure/why-small-teams) but for the moment we work within the [growth engnieering](https://posthog.com/handbook/people/team-structure/growth-engineering).
+<center>
+  <img src={DevRelIntersectionImage} alt="Developer Relations Intersection" />
+</center>
 
-## Near to medium term focus
+## Near to medium-term focus
 
-Our near to medium term focus is as follows, in priority order:
+There won't be a "DevRel" team at PostHog, and we'll instead see DevRel as a function that operates as more of a "guild". Instead, DevRel roles will reside within [small teams](/handbook/people/team-structure/why-small-teams), providing DevRel skills to those teams as they need them. In the longer-term, teams may be formed that consist mainly of DevRel roles focusing on experience, education, and marketing.
+
+Our near to medium-term focus is as follows, in priority order:
 
 1. Improve educational content
 2. Support existing PostHog community
 3. Engage with broader developer communities
 
+There presently is no plan to look at API standards, OpenAPI specs, SDK, or other developer enabling tools. This plan may change.
+
 ### Improve educational content 
 
-The near term focus for developer relations at PostHog is to improve the educational content available to developers (and potentially non-developer users via user guides). We broadly define this as **Education** with the specifics in the near term being the [PostHog documentation](/docs).
+The near term focus for Developer Relations at PostHog is to improve the educational content available to developers. We broadly define this as **Education** with the specifics in the near term being the [PostHog documentation](/docs) and enabling our existing customer base, making it easier for Data Engineers to integrate with PostHog. This includes:
 
-### Support existing PostHog community
+- Tutorials on integrating with data warehouses (e.g. Snowflake and Big Query) and performing data transformations (ETL)
+- Improving our [self-hosting deployment guides](https://posthog.com/docs/self-host#deploy) to ensure the process as smooth as possible
+- Working with the community to help them transition from the version of PostHog fully backed by Postgres to the version of PostHog powered by ClickHouse
+- Help the rest of the PostHog team create consistently awesome documentation through contribution guides and collaboration on pull requests
+- Improve and enhance existing documentation
 
-We have a thriving community across [Slack](https://posthog.com/slack) (link will launch the PostHog community Slack) and [GitHub](https://github.com/posthog). We have programs in place to gather feedback, encourage and manage contribution, and reward positive community activities. But we feel we can do more.
+We're hiring a [Developer Educator](https://apply.workable.com/posthog/j/F928106DB5/) to help us execute on this.
+
+### Support the existing PostHog community
+
+We have a thriving community across [Slack](https://posthog.com/slack) (link will launch the PostHog community Slack) and [GitHub](https://github.com/posthog). We have programs in place to gather feedback, encourage and manage contribution, and reward positive community activities. But we feel we can do more. Examples of the type of things we're looking at doing here include
+
+- Ensuring the Slack onboarding flow makes new community members feel welcome, ensuring they're aware of our [Code of Conduct](https://posthog.com/docs/contribute/code-of-conduct), and encouraging them to get involved
+- Updating how we reward contribution from the community: we presently give gift cards for contributions that can be redeemed for [PostHog merch](https://merch.posthog.com), and although this works reasonably well, we need to review and improve
+- Related to the above, assess if we should create a heroes/ambassadors/champions/MVP program and if so, define what that looks like and execute
+- Begin thinking about how we identify, define, and manage support and engagement with external communities (see next section)
+
+To support and own this effort, we've proposed the hiring of a [Community Programs Manager](https://github.com/PostHog/company-internal/issues/440) (internal link).
 
 ### Engage with broader developer communities
 
-Once we gain a better understanding of which developer communities benefit the most from PostHog we'll begin supporting and engaging with those communities. We have work to do before we make a start here.
+We've identified that people in Data Engineering roles introduce PostHog into their organizations. PostHog is introduced so that Data Engineers can focus on more complex data engineering tasks beyond writing SQL so that Product Managers and other less hands-on-data roles can analyze product usage. However, Data Engineers don't continuously use PostHog. This means there's definite value in Data Engineers being aware of PostHog, but there isn't a significant benefit from external community engagement. There is an option to advocate and educate developers on data warehouses within external communities, but then awareness of PostHog is only raised indirectly. We are running a [Data Engineering newsletter sponsorship experiment](https://github.com/PostHog/company-internal/issues/399) (internal link), but we'd also like to find an audience that directly benefits from PostHog first.
+
+We hypothesize that a target persona for Developer Relations should be software engineers/software developers and are product minded. They may identify as a "Product Engineer". This type of person will directly benefit from PostHog and use PostHog nearly daily as they build features and analyze their success.
+
+Once we've hired a Developer Educator and Community Programs Manager, we'll begin to experiment with reaching Product Engineers. To do this, we'll demonstrate how PostHog helps developers who are building on and using Jamstack-focused technologies such as Next.js, Gatsby, Sanity, Supabase, Netlify, and Vercel.
 
 If you believe that your community members would benefit from PostHog, [get in touch](mailto:hey@posthog.com).
 
 ## What's next?
 
-At PostHog we work in the open. As such, expect pull requests and updates to this page as we work to further define, build, and execute Developer Relations @ PostHog.
+At PostHog, we work in the open. As such, expect pull requests and updates to this page as we work to further define, build, and execute Developer Relations @ PostHog.

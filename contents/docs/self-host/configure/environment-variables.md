@@ -15,7 +15,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
 | `SECRET_KEY`               | **❗️ Always required.** [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
-| `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://app.posthog.com`)            | **❗️ Always required.** Principal/canonical URL of your PostHog instance. Needed for emails, webhooks and SSO to work properly. We currently do not support subpaths in this URL. | `http://localhost:8000`
+| `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://posthog.your-domain.com`)            | **❗️ Always required.** Principal/canonical URL of your PostHog instance. Needed for emails, webhooks and SSO to work properly. We currently do not support subpaths in this URL. | `http://localhost:8000`
 | `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). You can set this to a truthy value when developing, but disable this in production!  | `False` |
 | `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode, else `True`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
@@ -71,6 +71,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SAML_ATTR_LAST_NAME`| Name of attribute that contains the last name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `last_name`
 | `SAML_ATTR_EMAIL`| Name of attribute that contains the email of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `email`
 | `SAML_ENFORCED`| Whether password-based login is disabled and users automatically redirected to SAML login. Requires SAML to be properly configured. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-
+| `DEBUG_QUERIES`| Whether debugging queries (ClickHouse) is enabled in the Command Palette.| `False`
+| `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 
 [configuring email]: /docs/self-host/configure/email#general-configuration

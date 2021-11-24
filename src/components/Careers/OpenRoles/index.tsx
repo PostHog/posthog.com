@@ -1,23 +1,8 @@
-import { WorkableSnippet } from 'components/WorkableSnippet'
-import React, { useEffect } from 'react'
+import WorkableOpenRoles from 'components/WorkableOpenRoles'
+import React from 'react'
 import { Structure } from '../../Structure'
 
-interface WorkableWindow extends Window {
-    whr_embed: (id: number, options: Record<string, string>) => void
-    whr: (document: Document) => any
-}
-
-declare const window: WorkableWindow
-
 export const OpenRoles = () => {
-    useEffect(() => {
-        if (window && window.whr) {
-            window.whr(document).ready(function () {
-                window.whr_embed(456332, { detail: 'titles', base: 'departments', zoom: 'country' })
-            })
-        }
-    })
-
     // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
         <div id="open-roles">
@@ -44,7 +29,7 @@ export const OpenRoles = () => {
                         </p>
                     </div>
                     <div className="flex-1 max-w-md mx-auto">
-                        <WorkableSnippet />
+                        <WorkableOpenRoles />
                     </div>
                 </div>
             </Structure.Section>

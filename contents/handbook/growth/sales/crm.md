@@ -29,7 +29,7 @@ If you'd like to dig deeper, HubSpot have a ton of [documentation](https://knowl
 People currently come into HubSpot through one of 4 ways:
 - They email hey@posthog.com or sales@posthog.com
 - They sign up to the PostHog app
-- The complete [this form](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u)
+- They complete [this form](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u)
 - They are manually added to HubSpot by a member of the team, e.g. if you met someone interested in PostHog at an event
 
 ### Email

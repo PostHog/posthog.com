@@ -19,10 +19,10 @@ authors:
   - {
       handle: yakko-majuri,
       name: Yakko Majuri,
-      role: Developer Experience,
+      role: Software Engineer,
       image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90,
-      link_type: linkedin,
-      link_url: https://www.linkedin.com/in/yakko-majuri
+      link_type: github,
+      link_url: https://github.com/yakkomajuri
     }
   - {
       handle: joe-martin,
@@ -71,5 +71,53 @@ authors:
       image: https://avatars.githubusercontent.com/u/154479?v=4,
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/corywatilo/
+    }
+  - {
+      handle: leggetter,
+      name: Phil Leggetter,
+      role: Head of Developer Relations,
+      image: https://www.gravatar.com/avatar/ecc56977271e781991b6172c16248459?w=90,
+      link_type: twitter,
+      link_url: https://twitter.com/leggetter
+    }
+  - {
+      handle: lottie-coxon,
+      name: Lottie Coxon,
+      role: Graphic Designer,
+      image: https://avatars.githubusercontent.com/u/65415371?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/charlotte-coxon/
+    }
+  - {
+      handle: hanna-crombie,
+      name: Hanna Crombie,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/59732236?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/hannacrombie/
+    }
+  - {
+      handle: karl-aksel-puulmann,
+      name: Karl-Aksel Puulmann,
+      role: Software Engineer,
+      image: https://avatars.githubusercontent.com/u/148820?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/karlakselpuulmann/
+    }
+  - {
+      handle: james-greenhill,
+      name: James Greenhill,
+      role: Software Engineer,
+      image: https://posthog.imgix.net/static/JamesG-e034bf44489fe64be854099aff5fdb7e.png?w=90,
+      link_type: twitter,
+      link_url: https://twitter.com/fuziontech
+    }
+  - {
+      handle: andy-vandervell,
+      name: Andy Vandervell,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/92976667?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/andyvandervell/
     }
 ---

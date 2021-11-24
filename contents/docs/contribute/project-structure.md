@@ -89,7 +89,7 @@ Various components used all around the PostHog app. Reusable components will mos
 
 Components referring to specific pages of the PostHog app. Mostly non-reusable. 
 
-##### s`rc/styles`
+##### `src/styles`
 
 [Sass](https://sass-lang.com/) files for the PostHog app's style.
 

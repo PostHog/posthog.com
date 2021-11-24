@@ -1,8 +1,9 @@
-import React from 'react'
-import { Card, Col, Progress, Tag, Tooltip } from 'antd'
-import { Link } from 'gatsby'
-import { emojiKey } from './emojiKey'
+import { Card, Col, Progress, Tag } from 'antd'
 import { Spacer } from 'components/Spacer'
+import { Link } from 'gatsby'
+import React from 'react'
+import Tooltip from '../Tooltip'
+import { emojiKey } from './emojiKey'
 import tooltipIcon from './images/tooltip.svg'
 
 interface ContributorCardStructureMeta {
@@ -45,7 +46,7 @@ const ContributorCardStructure = ({
         children: React.ReactNode
         pageKey: string
     }) => (
-        <Tooltip title={title} overlayClassName="contributor-card-tooltip">
+        <Tooltip title={title}>
             <span onClick={(e) => handleTooltipContentClick(e, pageKey)} className="tooltip-content">
                 {children}
             </span>

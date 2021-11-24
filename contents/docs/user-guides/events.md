@@ -6,6 +6,16 @@ showTitle: true
 
 The most critical thing that PostHog does is to capture events from your website or application. For example, if a user clicks a button or visits a URL – those are events.
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/lleo.png"
+        size="md"
+        name="Lleo Harress"
+        title="Software Engineer, Mention Me"
+        quote={`“Retrospective data and event autocapture are especially useful. When we have a question We can define an event and then see the retroactive data for it immediately, instead of waiting months to get new data.”`}
+    />
+</BorderWrapper>
+
 ## Demo video
 
 If you'd like to watch a video about our Events feature, check out our demo video below. It is set to start on the Events section:

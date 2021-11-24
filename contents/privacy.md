@@ -128,6 +128,89 @@ PostHog will retain your information for as long as your account is active or as
 
 Please note that due to the open source nature of our products, services, and community, we may retain limited personally-identifiable information indefinitely in order to ensure transactional integrity and nonrepudiation. For example, if you provide your information in connection with a blog post, GitHub issue or comment, we may display that information even if you have deleted your account as we do not automatically delete community posts. Also, as described in our Terms of Use, if you contribute to a PostHog project and provide your personal information in connection with that contribution, that information (including your name) will be embedded and publicly displayed with your contribution and we will not be able to delete or erase it because doing so would break the project code.
 
+## Sub-processors
+
+A sub-processor is any business who has or potentially will have access to or process your data. We use a minimal number of sub-processors outlined below, together with the reasons why. This list may be updated from time to time, and all privacy policies of these sub-processors are reviewed by our Data Protection Officer before we engage with them. 
+
+**All customers**
+- GitHub - open source repositories and internal project management tool
+- Slack - internal communications tool
+- Google Workspace - internal collaboration tools
+- Mailchimp - email campaign service provider
+- HubSpot - CRM database
+- Clearbit - marketing data engine
+- Orbit - community engagement platform
+
+**PostHog Cloud customers**
+- AWS - cloud service provider
+- Cloudflare - cloud service provider
+- Heroku - cloud service provider
+- Sentry - application monitoring and error tracking
+
+## Job applications
+
+This section sets out how we collect, store, and process personal information as part of our recruitment process. It only applies to users of our website who submit an application for one of our open roles. 
+
+We use [Workable](https://workable.com/), an online application provided by Workable Software Limited, to assist with our recruitment process. We use Workable to process personal information as a data processor on our behalf. Workable is only entitled to process your personal data in accordance with our instructions.
+
+Where you apply for a job opening posted by us, these provisions will apply to our processing of your personal information. When you apply for a job opening via the application function on a job site like LinkedIn or similar online service provider (referred to below as a “Partner”), you should note that the relevant Partner may retain your personal data and may also collect data from us in respect of the progress of your application. Any use by the Partner of your data will be in accordance with the Partner’s privacy policy.
+
+### Information we collect from applicants
+
+#### Information we collect from you
+
+We collect and process some or all of the following types of information from you:
+
+* Information you provide when you apply for a role, including contact details such as name, email address, physical address, telephone number
+* Information relating to your employment history such as resumé/CV, employment history, qualifications and skills
+* If you contact us, we may keep a record of that correspondence
+* A record of your progress through any hiring process that we may conduct
+* Details of your visits to Workable’s Website including, but not limited to, traffic data, location data, weblogs and other communication data, the site that referred you to Workable’s Website and the resources that you access.
+
+#### Information we collect from other sources
+
+* Workable provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.
+* Workable allows PostHog to search various databases which may include your personal data (include your CV or Resumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.
+* We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.
+
+### How we use applicant information
+
+We _only_ collect and use your personal information for the following purposes:
+
+* To communicate with you about the role you have applied for and to manage the recruitment process
+* To consider your application for potential future job opportunities
+
+We will never use a candidate's personal information for marketing purposes. 
+
+### Legal basis for processing applicant personal information
+
+If you are a national of countries in the European Economic Area (EEA), United Kingdom, or Switzerland, we collect and process your personal information on the following legal bases set out by applicable law:
+
+**Consent:** We may ask you for your consent to process your personal information. You can withdraw your consent at any time, which will not affect the lawfulness of the processing before your consent was withdrawn.
+
+**Legitimate Interest:** We process certain personal information for our legitimate interests. These legitimate interests include, for example, running our recruitment process and managing applicants.
+
+**Compliance with Legal Obligations**: In some cases, we may have a legal obligation to process your personal information, such as to meet our legal requirements or in response to a court or regulatory order. We also may need to process your personal information to protect vital interests, or to exercise, establish, or defend legal claims.
+
+### International data transfer of applicant data
+
+Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.
+
+PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into EU standard contractual clauses with the data importer, or take other measures to provide an adequate level of data protection.
+
+In particular, your data may be accessible to i) Workable’s staff in the USA or ii) may be stored by Workable’s hosting service provider on servers in the USA as well as in the EU. The USA does not have the same data protection laws as the United Kingdom and EEA. A Data Processor Agreement has been signed between Workable Software Limited and its overseas group companies, and between Workable Software Limited and each of its data processors. These data processor agreements are designed to help safeguard your privacy rights and give you remedies in the unlikely event of a misuse of your personal data.
+
+### How long we keep applicant personal data
+
+We will hold all the data for 24 months. Prior to that, your personal information will be deleted if:
+
+* You delete your personal information; or
+* You write to us asking us to delete your personal information.
+
+### Your rights and choices as an applicant
+
+You may access, correct, or delete your personal information at any time. You may also withdraw your consent, or object to the processing of your personal information when based on our legitimate interests. To do so, please email us at: [careers@posthog.com](mailto:careers@posthog.com)
+
 ## Contacting PostHog about your privacy
 
 If you have questions or concerns about the way we are handling your information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at [privacy@posthog.com](mailto:privacy@posthog.com).

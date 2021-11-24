@@ -4,15 +4,35 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [blog](/blog) is for telling PostHog stories and sharing updates around our product. We feature a combination of PostHog company news, deep dives on specific product-related topics, PostHog app highlights and stories about company building and the team. 
+Content is a key pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
-We currently aim to ship 2 pieces of content per week, one that is product-focused and one that is company-related. Mo writes the company-related content, while product-related content is written by a relevant team member (e.g. developer, product manager) and then edited by Mo. 
+## Content & SEO strategy
 
-We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). We use a list of [the most common keywords](https://github.com/PostHog/meta/issues/14) driving people to PostHog as indicators of which content would be valuable. 
+Content SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users.
 
-If you have any good blog post ideas join our #ideas-for-blog-post Slack channel - the more opinionated the better!
+We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Charles. 
 
-## Workflow
+The top keywords are then used as the basis of our content strategy. Broadly speaking, we aim for:
+
+- 80% SEO-optimized content, written by the Marketing team. The purpose of these is to build our domain authority and generate a sustained improvement in posthog.com's keyword rankings. 
+- 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News. 
+
+Joe is currently the main person responsible for our content output, but we are actively hiring a [Technical Content Marketer](https://apply.workable.com/posthog/j/B547BBDE8C/) to lead this area. 
+
+We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publicly available as it is information that could be beneficial to our competitors. 
+
+If you have any good blog post ideas join our [#ideas-for-blog-post Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y)!
+
+## Content categories
+
+As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
+
+- **Blog post** = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. for Hacker News).
+- **Docs - Tutorial** = Anything that explains 'how to do X' _that is specific to PostHog_. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
+- **Docs - User guide** = Specific guides to PostHog features (e.g. Actions, Funnels). 
+- **Docs - Everything else** = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
+
+## Production workflow
 
 Our content production workflow is as follows:
 
@@ -28,16 +48,16 @@ Our content production workflow is as follows:
 * **Artwork:** We put an emphasis on the visual quality of the content we ship. If you're writing a blog post, you'll need an image to accompany it. If you're creating a video, you'll need a poster image (the still image that displays before you click play). Add the [Artwork project board](https://github.com/orgs/PostHog/projects/14) in your issue or PR at least several days in advance of when you'll need it. [Learn more in the Publishing section below.](#publishing)
   * **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 * **Extract the audio from the edited video (optional):** This goes into the podcast.
-* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed.
+* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
 
-## Publishing
+### Publishing
 
 Our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) is our source of truth for blog content.
 
 Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) with the following content:
 
 - With a new Markdown file (md, mdx) in `/contents/blog/`
-- Any assets [optimized](/docs/contribute/updating-documentation) and added to a new folder under `contents/images/blog/`
+- Any assets [optimized](/docs/contribute/contribute-to-website) and added to a new folder under `contents/images/blog/`
 - Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
@@ -58,7 +78,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. (This gives Team Design a heads up on how much time we have to produce a post image.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
-## Distribution
+### Distribution
 
 The [blog post GitHub issue template](https://github.com/PostHog/posthog.com/blob/master/.github/ISSUE_TEMPLATE/blog-post-idea-template.md) outlines how the content should be amplified and distributed. This can and should be edited for each post using the team's experience and ideas to identify what's best on a post-by-post basis.
 

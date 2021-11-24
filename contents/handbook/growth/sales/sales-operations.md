@@ -12,20 +12,19 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 
 ## Process
 
-1. Customer emails us, usually hey@ or sales@, asking about one of our Scale plans (Free or Paid). 
+1. Customer emails us, usually hey@ or sales@, asking about our Scale plan.
 2. We respond quickly and to-the-point. We give specific and clear answers to questions, and do not hide information behind a call or demo. You should find out:
     1. Their company's name if not obvious
     2. Their approximate monthly events and/or MAUs
     3. Who their cloud provider is - AWS, GCP etc.
-    4. (Scale Free only) If they have Helm Chart/Kubernetes (k8s) experience
-3. We'll usually do an intro call with Yakko (demo and technical questions) and Charles (setup process and pricing) next. The objective of this call is to help figure out with the customer what the best solution is for them, not to push a sale onto them. We have [demo guidelines here](/handbook/growth/sales/demos). For pricing, the most important things to emphasize are a) month-to-month billing only, no minimum contract and b) cost per event is _massively_ discounted at higher volumes. If multiple technical people are joining on the customer's side and they are a large company, you may want an infra engineer to join - only do this _very_ occasionally. 
-4. If it looks like the customer wants to go for Scale Paid, create [a Deal](/handbook/growth/sales/crm) in HubSpot to keep track of everything. Record your notes and tag the appropriate member of the [Infrastructure & Deployments Team](/handbook/people/team-structure/infrastructure) depending on the customer's timezone. 
+3. We'll usually do an intro call with James H next. The objective of this call is to help figure out with the customer what the best solution is for them, not to push a sale onto them. We have [demo guidelines here](/handbook/growth/sales/demos). For pricing, the most important things to emphasize are a) month-to-month billing only, no minimum contract and b) cost per event is _massively_ discounted at higher volumes. If multiple technical people are joining on the customer's side and they are a large company, you may want an engineer to join - only do this _very_ occasionally. 
+4. If it looks like PostHog Scale is the right solution, create [a Deal](/handbook/growth/sales/crm) in HubSpot to keep track of everything. 
 5. You should also set up a shared Slack channel to discuss implementation, as it's the easiest way to resolve any follow up questions. Add as many relevant people on PostHog's side as seems relevant - customers will have a better experience at this stage talking directly to engineers about implementation, not funnelling questions through a single point of contact. 
 6. We track implementation in a [GitHub project](https://github.com/orgs/PostHog/projects/10). The first 1-2 months are spent scaling the instance properly so we don't go too big and waste customers' money. Manage expectations - the first few weeks _should_ be a bit laggy/buggy, as this ensures we're not setting them up with a needlessly large server. 
-7. Once the customer is ready to begin event ingestion, this is the point at which we will ask for payment details, so we can start tracking usage. Paolo will generate a payment link in Stripe. 
+7. Once the customer is ready to begin event ingestion, this is the point at which we will ask for payment details, so we can start tracking usage. Generate a payment link in Stripe - ask Paolo if you need help. 
 8. Schedule a call to help them set up their first dashboards and ensure they are getting the most out of PostHog. We should ask for at least one Product Manager on the customer's side to join this call, as they are likely to be the key stakeholder at this point. 
 9. As part of this dashboard setup, you should get the relevant member(s) of our team added to their account as a guest so we can proactively support with ensuring they have the right dashboards, config etc. (but don't push if they would rather we didn't do this). 
-10. Ongoing support is provided in the shared Slack channel. 
+10. Ongoing support is provided in the shared Slack channel once they are paying. _Make sure you also add the Papercups app to the channel, so we can be responsive to support queries._
 
 After the initial call, if a customer is keen to proceed, you should share steps 5 through 9 with them to ensure that everyone is on the same page and expectations are managed appropriately. 
 
@@ -38,14 +37,12 @@ Assuming PostHog is the best solution for a customer, you should look at their l
 - _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
 - _High volume, more technical_ - Scale, as the price per event is greatly discounted at higher volumes vs. Cloud because we don't pay hosting costs. The only time Cloud makes sense here is if the customers wants absolutely zero hassle, doesn't have privacy needs and aren't budget-focused.
 
-### What about Scale Free?
+### What about Open Source?
 
-We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need ClickHouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
+Open Source will be appealing to customers who want to self-host, but are happy with 3 logins only and community-based support. 
 
-By contrast, Scale Paid is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
+By contrast, Scale is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
 
-
-We have a short waiting list of customers waiting for deployment, so are currently prioritizing those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
 
 ### Okay, they're using PostHog. Now what?
 
@@ -57,7 +54,7 @@ Read about how we do this in the dedicated handbook section, [Ensuring Customer 
 
 _Can I give a Scale customer a free trial?_
 
-No, because we don't need to - they can get up and running with our Scale Free or Cloud plans first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
+No, because we don't need to - they can get up and running with our Open Source or Cloud plans first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
 
 _Can I give a Scale customer a discount?_
 
@@ -75,19 +72,19 @@ _How do I find out a customer's usage?_
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
-Unfortunately we don't have a way to do this easily right now. If they have been on a Scale Paid plan, we can do this manually. If they are coming from the Open Source version, we suggest that they just restart on Cloud. 
+Unfortunately we don't have a way to do this easily right now. If they have been on a Scale plan, we can do this manually. If they are coming from the Open Source version, we suggest that they just restart on Cloud. 
 
-_Can a customer transfer from Cloud to Scale Paid?_
+_Can a customer transfer from Cloud to Scale?_
 
-Yes - we offer 3 months free of Scale Paid so they can run both systems in parallel, tracking events in both places. That means when they switch off Cloud, they'll have 3 months of data to start with in Scale.
+We offer plugins for customers to export all their data to a data warehouse. Then they can [bulk import historical data](https://posthog.com/docs/integrate/ingest-historic-data).
+
+They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
+
+If they need a more complex migration with many pre-made dashboards and lots of users and actions, we are currently trialling a partnership with another company to do this for them for a one off fee. Speak to James H if you have a client interested in this.
 
 _A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
 
 Downtime means that queries won't load, but event ingestion will still continue to work fine. 
-
-_What's the difference between Postgres and ClickHouse?_
-
-Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to ClickHouse (since the data format is different later). ClickHouse is massively more scalable, but requires a lot more work to deploy, so we provide extra support from our infra team to get everything set up and refined over the first few weeks. 
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 
