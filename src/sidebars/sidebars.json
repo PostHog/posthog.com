@@ -300,6 +300,10 @@
                 {
                     "name": "Disruption Messages",
                     "url": "/handbook/engineering/disruption-messages"
+                },
+                {
+                    "name": "Storybook",
+                    "url": "/handbook/engineering/storybook"
                 }
             ]
         },
