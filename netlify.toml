@@ -989,3 +989,36 @@
 [[redirects]]
     from = "/handbook/design/about-design"
     to = "/handbook/people/team-structure/design"
+
+[[redirects]]
+    from = "/product-features/self-hosted"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/event-autocapture"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/trends"
+    to = "/product/trends"
+
+[[redirects]]
+    from = "/product-features/funnels"
+    to = "/product/funnels"
+
+[[redirects]]
+    from = "/product-features/retention"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/feature-flags"
+    to = "/product/feature-flags"
+
+[[redirects]]
+    from = "/product-features/session-recording"
+    to = "/product/session-recordings"
+
+[[redirects]]
+    from = "/product-features/plugins"
+    to = "/integrations"
+    status = 302
