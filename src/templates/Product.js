@@ -60,7 +60,7 @@ export default function Product({ data, pageContext: { next, previous } }) {
             >
                 <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end">
                     <nav>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
+                        <ul className="list-none p-0 m-0 flex flex-col space-y-3">
                             {sidebars.product.map(({ url, name }) => {
                                 return (
                                     <li key={url} className={url === slug ? 'active-product relative' : ''}>

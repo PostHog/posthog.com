@@ -4,11 +4,11 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import Section from './Section'
 
-export default function SessionRecordings() {
+export default function SessionRecording() {
     return (
-        <Section id="session-recordings">
+        <Section id="session-recording">
             <div className="md:w-2/5">
-                <h3>Session recordings</h3>
+                <h3>Session recording</h3>
                 <p>
                     Grab the popcorn: Play back individual user sessions to watch how users interact with your product.
                 </p>
@@ -16,14 +16,14 @@ export default function SessionRecordings() {
                     type="outline"
                     size="md"
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
-                    to="/product/session-recordings"
+                    to="/product/session-recording"
                 >
-                    Learn more about session recordings
+                    Learn more about session recording
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">
                 <ZoomImage>
-                    <StaticImage width={624} src="./images/session-recordings.png" />
+                    <StaticImage width={624} src="./images/session-recording.png" alt="Session recording" />
                 </ZoomImage>
             </div>
         </Section>

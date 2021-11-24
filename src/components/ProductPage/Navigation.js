@@ -10,9 +10,9 @@ const features = [
         url: 'product-analytics',
     },
     {
-        title: 'Session recordings',
+        title: 'Session recording',
         icon: <SessionRecordings />,
-        url: 'session-recordings',
+        url: 'session-recording',
     },
     {
         title: 'Feature flags',
