@@ -76,15 +76,17 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 
 For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
 ```js
-posthog.set('Alice', {location: 'Rome'}, timestamp=1)
-posthog.identify('Alice', {$set: {location: 'New York'}}, timestamp=1)
+ts = datetime.datetime.now()
+posthog.set('Alice', {'location': 'Rome'}, timestamp=ts)
+posthog.identify('Alice', {'$set': {'location': 'New York'}}, timestamp=ts)
 ```
 
 For `alias` this series of calls would also mean we end up with `location` being `Rome` or `New York`.
 ```js
-posthog.set('Alice 1', {location: 'Rome'}, timestamp=1)
-posthog.set('Alice 2', {location: 'New York'}, timestamp=1)
-posthog.alias('Alice 1', 'Alice 2', timestamp=1000)
+ts = datetime.datetime.now()
+posthog.set('Alice 1', {'location': 'Rome'}, timestamp=ts)
+posthog.set('Alice 2', {'location': 'New York'}, timestamp=ts)
+posthog.alias('Alice 1', 'Alice 2')
 ```
 
 
