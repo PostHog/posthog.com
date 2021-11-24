@@ -555,7 +555,7 @@ export const jobs = {
 async function lookForTheTeapot (request) {
     const res = await fetch(request.url)
     if (res.status !== 418) {
-        await jobs.lookForTheTeapot(request).runIn(30, 'seconds')
+        await jobs.continueSearchingForTheTeapot(request).runIn(30, 'seconds')
         return
     }
     console.log('found the teapot!')
