@@ -49,7 +49,7 @@ export default function GiveBackFriday() {
                 </div>
             </div>
             <div className="absolute right-2 bottom-[-5vw] w-[30vw]">
-                <StaticImage width={560} src="./images/hogs.png" />
+                <StaticImage placeholder="tracedSVG" width={560} src="./images/hogs.png" />
             </div>
         </section>
     )
