@@ -37,10 +37,16 @@ export default function GiveBackFriday() {
                         Monday - up to $50,000!
                     </p>
                     <div className="flex flex-col space-y-4 justify-center items-center">
-                        <CallToAction type="outline" className="!w-64" to="/blog/give-back-friday-2021">
+                        <CallToAction
+                            event="give back friday - Learn more"
+                            type="outline"
+                            className="!w-64"
+                            to="/blog/give-back-friday-2021"
+                        >
                             Learn more
                         </CallToAction>
                         <CallToAction
+                            event="give back friday - Star our repo on GitHub"
                             to="https://github.com/PostHog/posthog"
                             className="!bg-[#F9BD2B] !border-[#F9BD2B] !w-64"
                         >
