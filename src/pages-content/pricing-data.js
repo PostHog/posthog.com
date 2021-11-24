@@ -71,7 +71,7 @@ const faqs = [
     {
         q: 'Does session recording impact costs?',
         a:
-            'Session recording generates events which are billed the same as any other event type. You can tightly control where it is used to manage the cost. Using session recording heavily will increase costs significantly.',
+            'Session recording is currently free to use. This might change in the future.',
     },
     {
         q: 'How long do you retain data?',
