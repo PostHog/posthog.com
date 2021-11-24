@@ -12,7 +12,7 @@ featuredImageType: full
 
 Black Friday is normally an occasion to shop around for a new TV or mobile phone. But we wanted to do something a little different; something to celebrate and support the open source community which we both rely upon and are proud to be part of. 
 
-So, we’re announcing our Give Back Friday campaign. **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between 00:00 on Black Friday and 23:59 on Cyber Monday we’ll donate $5 USD across eight handpicked open-source projects.** We'll donate a maximum of $50,000 to these projects in total. 
+So, we’re announcing our Give Back Friday campaign. **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between 00:00 on Black Friday and 23:59 on Cyber Monday we’ll donate $5 USD across seven handpicked open-source projects.** We'll donate a maximum of $50,000 to these projects in total. 
 
 ## Who gets the money? 
 
@@ -27,7 +27,6 @@ We’re donating to the following projects, all of which are either used extensi
 | [Piscina](https://github.com/piscinajs/piscina)                          | A fast, efficient Node.js Worker Thread Pool implementation.          | We run a fork of Piscina which powers activities across PostHog.                               |
 | [All-contributors](https://github.com/all-contributors/all-contributors) | A tool to recognize community contributions to open-source projects.  | We run a form of All-contributors to power our contributions bot.                              |
 | [Alex](https://github.com/all-contributors/all-contributors)             | A tool to detect insensitive or inconsiderate writing.                | Alex is used by our team and was suggested by Paul D'Ambra.                                    |
-| [Ant-design](https://github.com/all-contributors/all-contributors)       | An open-source UI design language and React UI library.               | Ant-design is used heavily across both our website and product.                                |
 
 ## How does this work?
 
@@ -41,7 +40,7 @@ On the morning of Tuesday, 30 November we’ll count up how many stars we’ve g
 
 ## Why are we doing this?
 
-PostHog is an open-source project and our team is all individually proud to be part of the open-source community. We wanted to create a festive activity but, because most of our paying users are other businesses, we didn’t want to simply slash prices. We wanted to truly celebrate and support the open-source community in a meaningful way.
+PostHog is an open-source project and our team is all individually proud to be part of the open-source community. We wanted to take this weekend as an opportunity to truly celebrate and support the open-source community in a meaningful way. We don't do short-lived price cuts, as we don't believe it's the right way to build trust with our customers or a sustainable business in the long run.
 
 We also wanted to involve our community too, which is why we’ve chosen to give donations based on GitHub stars. If you’d like to unstar us after we’ve counted your contributions, that’s absolutely fine - we suggest just waiting til later in the week to be sure your star is counted towards the total. We previously had the idea of allowing people to directly donate to open source projects and we'd match them, but we felt this idea makes it a lot easier for our community to express their support this way, and counting stars is a straightforward way to keep track. 
 
