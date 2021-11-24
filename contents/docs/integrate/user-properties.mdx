@@ -75,14 +75,14 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 > **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples:
 
 For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
-```js
+```python
 ts = datetime.datetime.now()
 posthog.set('Alice', {'location': 'Rome'}, timestamp=ts)
 posthog.identify('Alice', {'$set': {'location': 'New York'}}, timestamp=ts)
 ```
 
 For `alias` this series of calls would also mean we end up with `location` being `Rome` or `New York`.
-```js
+```python
 ts = datetime.datetime.now()
 posthog.set('Alice 1', {'location': 'Rome'}, timestamp=ts)
 posthog.set('Alice 2', {'location': 'New York'}, timestamp=ts)
