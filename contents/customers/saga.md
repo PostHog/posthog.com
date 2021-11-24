@@ -1,0 +1,61 @@
+---
+title: How Saga captured 50% more events and boosted retention by 70%
+customer: Saga
+logo: ../images/customers/saga/saga.svg
+featuredImage: ../images/customers/saga/featured.jpg
+industries:
+    - Knowledge sharing software
+users:
+    - Leadership
+    - Product
+    - Engineering
+toolsUsed:
+    - Self-Hosting
+    - Events
+    - Feature Flags
+---
+
+[Saga](https://saga.so/) is a knowledge sharing tool which enables teams to centralize their docs and notes into a single, searchable platform. Since launching in 2020 Saga’s public beta has been adopted by teams all around the world and the product has had constant updates. 
+
+As a fast-growing startup, Saga recognised the importance of product analytics from the very beginning, using Amplitude to track users in its earliest versions. However the team soon ran into issues with data integrity. 
+
+“We tried Amplitude and LogRocket first,” said Saga Co-founder Filip Stanev. “Very early on we discovered that we were losing information due to ad blockers and privacy features. We also didn’t think it was a great idea to share information with these platforms.”
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/filip.png"
+        size="md"
+        name="Filip Stanev"
+        title="Co-founder at Saga"
+        quote={`“We tried LogRocket, but it felt very invasive. We didn’t feel comfortable with how much they were tracking. We tried Amplitude, but it was just far too slow. Even creating dashboards felt laggy.”`}
+    />
+</BorderWrapper>
+
+## Saga captures 50% more events with PostHog than with MixPanel
+
+Saga soon switched to MixPanel as a replacement product analytics platform. However the team found that MixPanel’s design, while aesthetically pleasing, was cumbersome to use — and that data integrity issues persisted. PostHog, which the team deployed after seeing it on HackerNews, was the only platform which gave accurate results. 
+
+“We installed MixPanel and PostHog at the same time and the difference in data was quite big,” said Filip. “We were seeing between 40-50% more events in PostHog, just because we were self-hosting. PostHog also tracks around 20-30% more users than MixPanel does.”
+
+As a result, while Saga continues to keep MixPanel and PostHog running side-by-side, only PostHog is trusted for daily reports and product analysis. Saga has even set up an integration between PostHog and Discord so that daily results are automatically shared in the company chat. 
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/filip.png"
+        size="md"
+        name="Filip Stanev"
+        title="Co-founder at Saga"
+        quote={`“PostHog tracks more events than Mixpanel. For one  event we defined, Mixpanel reported 6,343 occurrences last month. PostHog reported what we know to be the true figure, 8,169 — almost 30% more than MixPanel.”`}
+    />
+</BorderWrapper>
+
+## How Saga tracked events to improve retention by 70%  
+
+With PostHog deployed, the team started to look at how they could take advantage of the extra data they were getting — as well as the extra tools PostHog made available. The first area of the product where the team started to focus? Tutorials. 
+
+“We spent a month working on tutorials for Saga and it took a long time before we felt it was right,” said Filip. “Then, by [tracking events across sessions](https://posthog.com/docs/user-guides/events), it took us just five sessions to discover that users kept missing one step, would then get stuck and ultimately leave. We had gotten it wrong and knew we had to redo it all.”
+
+Later, after making changes to solve the issues they had discovered, Saga was able to validate its solution by tracking user behaviour. They saw that retention increased by 70-80%.
+
+“The ability to track events across sessions is a big thing for us, because otherwise we’d need to use another completely different tool for that,” said Filip. “It’s the same with [feature flags](https://posthog.com/docs/user-guides/feature-flags), which are integrated very tightly into our product. It really makes PostHog stand out as more than just another analytics platform.”
+
