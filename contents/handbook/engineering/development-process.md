@@ -28,10 +28,12 @@ Each goal should have a single owner.
 
 This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
 
+
 After the sprint planning, each team should have their own session (can be async!) where they
 - Do a detailed retrospective.
 - Divide up the big ambitious goals between the members of the team
 - Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
+  - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
 
 ### What does an awesome big ambitious goal look like?
 
