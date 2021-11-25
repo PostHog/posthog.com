@@ -17,7 +17,21 @@ However, if we have no checks in place, we will release quickly but everything w
 
 Deciding what we work on happens in our sprint planning session, where the high level themes for the next sprint get decided. Each team then takes those high level priorities and breaks them down, plus adds their own smaller items like bugfixes, smaller features or other improvements.
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
+The sprint planning works like this:
+- During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that fit in with our roadmap.
+- On Wednesday we get together. We use Zoom's breakout rooms to split into the small teams, and each team finalizes the one or two big ambitious goals that they want to tackle as a team.
+- We come back in the same room, where
+  - We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
+  - Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough
+
+Each goal should have a single owner.
+
+This meeting is also a chance to co-ordinate any cross-team dependencies. These should be the exception, not the rule. 
+
+After the sprint planning, each team should have their own session (can be async!) where they
+- Do a retrospective
+- Divide up the big ambitous goals between the members of the team
+- Prioritize any other work (smaller features, bug fixes, refactoring etc)
 
 ## 2. Sizing a task and reducing WIP
 
