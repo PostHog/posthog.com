@@ -12,7 +12,7 @@ Please spend money in a way that you think is in the best interests of the compa
 
 If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
 
-If you live in the UK, you should use your Revolut card for UK-specific spending (i.e. ordering from UK sites), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary. 
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary.
 
 For larger expenses which don't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
 
