@@ -31,7 +31,7 @@ This meeting is also a chance to coordinate any cross-team dependencies. These s
 After the sprint planning, each team should have their own session (can be async!) where they
 - Do a detailed retrospective.
 - Divide up the big ambitious goals between the members of the team
-- Prioritize any other work (smaller features, bug fixes, refactoring etc)
+- Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
 
 ### What does an awesome big ambitious goal look like?
 
