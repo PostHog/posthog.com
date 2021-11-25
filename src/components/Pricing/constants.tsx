@@ -8,7 +8,7 @@ export const features = {
         { title: 'Funnels & trends', icon: <Funnels className="w-4" /> },
         { title: 'Feature flags', icon: <FeatureFlags className="w-4" /> },
         { title: 'Cohorts & retention', icon: <Cohorts className="w-4" /> },
-        { title: 'Session recordings', icon: <SessionRecordings className="w-4" /> },
+        { title: 'Session recording', icon: <SessionRecordings className="w-4" /> },
         { title: 'Path analysis', icon: <PathAnalysis className="w-4" /> },
     ],
     'Platform features': [
@@ -21,7 +21,7 @@ export const features = {
     ],
     'Advanced features': [
         { title: 'Correlation analysis' },
-        { title: 'Priority Session Recordings' },
+        { title: 'Priority Session Recording' },
         { title: 'Multivariate testing' },
         { title: 'Deep Dive Dashboards' },
         { title: 'Multiple projects' },

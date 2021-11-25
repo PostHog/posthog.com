@@ -15,7 +15,7 @@ At the most basic level product analytics refers to the process of gathering dat
 
 Where it gets more complicated is in the particular situations and decisions that are made using product analytics tools.
 
-A good example of product analytics in action is collecting information about how many users reach each stage of an onboarding funnel, then using that information to improve or optimize a funnel. This is exactly [what companies such as Hasura use tools like PostHog for](https://posthog.com/customers/hasura)!
+A good example of product analytics in action is collecting information about how many users reach each stage of an onboarding funnel, then using that information to improve or optimize a funnel. This is exactly [what companies such as Hasura use tools like PostHog for](/customers/hasura)!
 
 ![Product analytics funnel](../images/tutorials/pirate-funnel/slide-funnels.png)
 
@@ -24,12 +24,12 @@ A good example of product analytics in action is collecting information about ho
 
 There are two types of data which you can gather for product analytics:
 
-- *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](https://posthog.com/docs/user-guides/funnels) in PostHog to measure drop-off is an example of quantitative data analysis.
-- *Qualitative data* is that which is subjective, such as user feedback or observations. Using [session recordings](https://posthog.com/docs/user-guides/recordings) in PostHog to intuit where users may be experiencing friction is an example of qualitative data analysis.
+- *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](/docs/user-guides/funnels) in PostHog to measure drop-off is an example of quantitative data analysis.
+- *Qualitative data* is that which is subjective, such as user feedback or observations. Using [session recording](/docs/user-guides/recordings) in PostHog to intuit where users may be experiencing friction is an example of qualitative data analysis.
 
 There are also frameworks which can be used to translate information between the two. NPS scores, for example, are often used to translate a user sentiment into a measurable data point.
 
-> Find out how [PostHog’s enables you to leverage quantative and qualitative data](https://posthog.com/product), or [schedule a demo](https://posthog.com/book-a-demo) to see it in action. 
+> Find out how [PostHog’s enables you to leverage quantative and qualitative data](/product), or [schedule a demo](/book-a-demo) to see it in action. 
 
 ## Why are product analytics tools important?
 
@@ -37,18 +37,15 @@ Product analytics tools are important because they enable you to make thoughtful
 
 It's possible to get by without product analytics, but then it's impossible to know if changes are having a beneficial impact, or even if you are solving the right problems to start with. Product development without product analytics is like stumbling around in a dark room, trying to find the way out. You _might_ find the way out, but you might also fall down a hole! 
 
-[![Hasura case study](../images/customers/hasura/screenshot.png)](https://posthog.com/customers/hasura)
+[![Hasura case study](../images/customers/hasura/screenshot.png)](/customers/hasura)
 
-<p align = "center"><figcaption>
-
-Find out [how Hasura improved conversions by 20%](https://posthog.com/customers/hasura) using PostHog
-
+<figcaption className="text-center">
+Find out <a href="/customers/hasura">how Hasura improved conversions by 20%</a> using PostHog
 </figcaption>
-</p>
 
 ## Who uses product analytics?
 
-Nearly all modern businesses will employ product analytics tools at some level, from new start-ups such as [Pry](https://posthog.com/customers/pry) to established products with thousands of users such as [Hasura](https://posthog.com/customers/hasura).
+Nearly all modern businesses will employ product analytics tools at some level, from new start-ups such as [Pry](/customers/pry) to established products with thousands of users such as [Hasura](/customers/hasura).
 
 Product analytics tools are _not_ used solely by Product teams, but can be used by a wide range of teams or individuals within a business. These can include:
 
@@ -82,11 +79,11 @@ One simple set of metrics which can help all teams to focus their efforts is the
 - *Referral:* The users who share your product (e.g. reviews, shares)
 
 
-[![AARRR Tutorial](../images/tutorials/banners/aarrr-funnel.png)](https://posthog.com/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
+[![AARRR Tutorial](../images/tutorials/banners/aarrr-funnel.png)](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
 
 <p align = "center"><figcaption>
 
-Find out [how to build a AARRR funnel](https://posthog.com/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
+Find out [how to build a AARRR funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
 
 </figcaption>
 </p>
@@ -101,7 +98,7 @@ PostHog enables you to self-host your product analytics, so you keep data on you
 
 There are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. Self-hosting your product analytics platform also provides other benefits, such as circumventing ad blockers due to the lack of third-party cookies.
 
-> Find out [how to self-host product analytics](https://posthog.com/docs/self-host) with PostHog and easily deploy to your infrastructure using Digital Ocean. 
+> Find out [how to self-host product analytics](/docs/self-host) with PostHog and easily deploy to your infrastructure using Digital Ocean. 
 
 ## Is Google Analytics good for product analytics?
 
@@ -131,4 +128,4 @@ Why? PostHog enables you to self-host your analytics, integrates with tools such
 
 There are a variety of product analytics tools available to choose from however, each with its own quirks and strengths. Popular options include platforms such as Amplitude, Heap, or Mixpanel, though none of these offer self-hosted deployments. 
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster and without writing SQL. [Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more. 
+> PostHog is an open source product analytics tool which enables teams to build better products faster and without writing SQL. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more. 

@@ -127,7 +127,7 @@ const sections = [
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
-                name: 'Session recordings',
+                name: 'Session recording',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
