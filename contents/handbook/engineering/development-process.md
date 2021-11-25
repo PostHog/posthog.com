@@ -33,6 +33,22 @@ After the sprint planning, each team should have their own session (can be async
 - Divide up the big ambitious goals between the members of the team
 - Prioritize any other work (smaller features, bug fixes, refactoring etc)
 
+### What does an awesome big ambitious goal look like?
+
+* **Clear:** Anyone with general context can read it and instantly know what specifically it means to achieve it (i.e. NOT “refactor components”)
+* **Finite:** There should be an obvious end to the goal and cannot go on forever (i.e. NOT “improve dashboards”)
+* **Assessable:** You can validate whether or not you’ve achieved the goal - it doesn’t need to be a metric (e.g. Increased signups by 20% or Events can be ingested in any order)
+* **Meaningful:** If we achieve this goal it will make our solve a real need for our customers (i.e. a 10x improvement in performance sounds great as a goal - but its not meaningful if our customers are happy with the current performance)
+* **Challenging:** It should too big for one person to solve on their own and require creativity or brute force to achieve in the proposed time-frame (e.g. ship correlation analysis with a killer feature no one else has)
+* **Homogenous:** The goal should be all about achieving a single meaningful thing and not a collection of unconnected things (i.e. NOT ‘Improve query performance and launch collaboration MVP’)
+
+Goals should be time-bound, but since we primarily use goals for our two-weekly sprint planning we should consider them generally timebound to two weeks.
+
+### Types of big ambitious goals
+
+* **Moonshots:** These are big scary goals, we expect to fail to achieve them 50% of the time, if we fail we expect to learn something equally as valuable as if we succeed (just scraping the goal counts as a success)
+* **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
+
 ## 2. Sizing a task and reducing WIP
 
 Efficient engineering organizations actively [reduce Work In Progress](https://loom.com/share/5efceb288b634a449041918bdba08202) (WIP) to avoid negative feedback loops that drive down productivity. Hence a PR should be optimised for two things: 1) quality of implementation, and 2) the speed with which we can merge it in.
