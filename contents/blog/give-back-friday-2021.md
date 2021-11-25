@@ -28,7 +28,7 @@ We're donating to the following projects, all of which are either used extensive
 | [KeePass](https://keepass.info/donate.html)                              | An open-source multi-platform password manager.                       | Keepass is used regularly by our team and was suggested by Joe Martin.                         |
 | [Piscina](https://github.com/piscinajs/piscina)                          | A fast, efficient Node.js Worker Thread Pool implementation.          | We run a fork of Piscina which powers activities across PostHog.                               |
 | [All-contributors](https://github.com/all-contributors/all-contributors) | A tool to recognize community contributions to open-source projects.  | We run a form of All-contributors to power our contributions bot.                              |
-| [Alex](https://github.com/all-contributors/all-contributors)             | A tool to detect insensitive or inconsiderate writing.                | Alex is used by our team and was suggested by Paul D'Ambra.                                    |
+| [Alex](https://github.com/get-alex/alex)             | A tool to detect insensitive or inconsiderate writing.                | Alex is used by our team and was suggested by Paul D'Ambra.                                    |
 
 ## How does this work?
 
