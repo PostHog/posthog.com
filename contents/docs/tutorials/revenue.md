@@ -3,7 +3,7 @@ title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-topics: ['funnels', 'quantitative analysis']
+topics: ['funnels']
 featuredImage: ../../images/tutorials/banners/revenue.png
 ---
 
