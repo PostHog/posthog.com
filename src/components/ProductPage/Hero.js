@@ -47,7 +47,10 @@ export default function Hero() {
                     <li className="text-[20px]">Diagnose & build context</li>
                     <li className="text-[20px]">Test & roll out improvements</li>
                 </ul>
-                <p>PostHog is open source, and a radically different approach to building better products.</p>
+                <p>
+                    PostHog is an open-source analytics platform that offers a radically different approach to building
+                    better products.
+                </p>
                 <p>
                     Host on your own infrastructure and capture up to 30% more events, compared to cloud-based analytics
                     tools.
