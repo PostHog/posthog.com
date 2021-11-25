@@ -7,7 +7,7 @@ showTitle: true
 ## TL;DR
 Our mission is to “Increase the number of successful products in the world”.
 
-We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recordings, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
+We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recording, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
 
 We focused on our paid product earlier this year. We quickly hit a milestone for the first 5 reference customers, and we've kept selling since. The next step on our journey is to figure out how to accelerate our top of funnel growth, whilst achieving larger order values from our Enterprise product.
 

@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/100x/100x.png
-author: james-hawkins
+author: ["james-hawkins"]
 ---
 
 Today, we're announcing that we're giving away 1 million ingested events/month on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.

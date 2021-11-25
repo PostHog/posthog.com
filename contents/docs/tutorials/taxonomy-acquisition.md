@@ -2,6 +2,7 @@
 title: Set up deep dive acquisition dashboards
 sidebar: Docs
 showTitle: true
+author: ['james-hawkins']
 ---
 
 This tutorial will help you:

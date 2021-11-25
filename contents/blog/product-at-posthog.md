@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: paolodamico
+author: ["paolodamico"]
 featuredImage: ../images/blog/product-at-posthog.png
 featuredImageType: full
 ---
