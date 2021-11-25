@@ -1,3 +1,4 @@
+import FooterCTA from 'components/FooterCTA'
 import React from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
@@ -22,6 +23,9 @@ function ProductPage() {
             <FeatureFlags />
             <Heatmaps />
             <Platform />
+            <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
+                <FooterCTA />
+            </div>
         </Layout>
     )
 }
