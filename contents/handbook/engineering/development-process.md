@@ -26,11 +26,11 @@ The sprint planning works like this:
 
 Each goal should have a single owner.
 
-This meeting is also a chance to co-ordinate any cross-team dependencies. These should be the exception, not the rule. 
+This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
 
 After the sprint planning, each team should have their own session (can be async!) where they
 - Do a retrospective
-- Divide up the big ambitous goals between the members of the team
+- Divide up the big ambitious goals between the members of the team
 - Prioritize any other work (smaller features, bug fixes, refactoring etc)
 
 ## 2. Sizing a task and reducing WIP
