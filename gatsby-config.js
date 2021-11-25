@@ -83,6 +83,13 @@ module.exports = {
                 path: `${__dirname}/src/navs`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `authors`,
+                path: `${__dirname}/src/data/authors.json`,
+            },
+        },
         `gatsby-transformer-gitinfo`,
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: marcus-hyett
+author: ["marcus-hyett"]
 featuredImage: ../images/blog/dogfooding.png
 featuredImageType: full
 ---

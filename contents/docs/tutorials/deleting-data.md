@@ -2,6 +2,7 @@
 title: Deleting bulk data
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
 ---
 
 > <strong>Important:</strong> Bulk data deletion is done at your own risk. We do not yet provide a standard way to delete data in bulk, so you must be extremely careful when performing such an operation. We do not take responsibility for any loss of data as a result of this process.

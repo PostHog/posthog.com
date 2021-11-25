@@ -2,6 +2,7 @@
 title: Tracking how teams use your product
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕

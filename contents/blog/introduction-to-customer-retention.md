@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: marcus-hyett
+author: ["marcus-hyett"]
 featuredImage: ../images/blog/blog-generic-5.png
 featuredImageType: full
 ---

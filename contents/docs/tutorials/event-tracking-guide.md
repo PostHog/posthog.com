@@ -2,6 +2,8 @@
 title: Complete guide to event tracking 
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/actions.png
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

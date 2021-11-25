@@ -4,6 +4,9 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
 featuredTutorial: true
+author: ["hanna-crombie"]
+topics:
+    - funnels
 ---
 _Estimated reading time: 10 minutes_ ☕☕☕
 

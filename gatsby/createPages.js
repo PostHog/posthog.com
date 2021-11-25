@@ -11,6 +11,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
+    const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -40,6 +41,17 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                     fields {
                         slug
+                    }
+                }
+            }
+            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        documentation
                     }
                 }
             }
@@ -93,6 +105,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                             name
                             url
                         }
+                        name
+                        url
+                    }
+                    product {
                         name
                         url
                     }
@@ -262,6 +278,30 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             component: CustomerTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+    result.data.product.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { documentation } = node.frontmatter
+        let next = null
+        let previous = null
+        const sidebar = result.data.sidebars.childSidebarsJson.product
+        sidebar.some((item, index) => {
+            if (item.url === slug) {
+                next = sidebar[index + 1]
+                previous = sidebar[index - 1]
+                return true
+            }
+        })
+        createPage({
+            path: slug,
+            component: ProductTemplate,
+            context: {
+                id: node.id,
+                documentation: documentation || '',
+                next,
+                previous,
             },
         })
     })

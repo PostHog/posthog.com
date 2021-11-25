@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/feature-flags.png
 featuredTutorial: true
+author: ['yakko-majuri']
+topics: ['feature flags']
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

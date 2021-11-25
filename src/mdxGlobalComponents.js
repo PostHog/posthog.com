@@ -43,6 +43,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
+import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
@@ -78,6 +79,7 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
+import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
@@ -94,6 +96,7 @@ import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
@@ -143,6 +146,7 @@ export const shortcodes = {
     FeaturesSelfHost,
     FloatedImage,
     Footer,
+    FooterCTA,
     GetStartedModal,
     GithubIcon,
     Heading,
@@ -178,6 +182,7 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
+    ProductPage,
     ProductSectionHeader,
     ResponsiveAnchor,
     RocketHorizontalRule,
@@ -194,6 +199,7 @@ export const shortcodes = {
     TableOfContents,
     TeamQuote,
     Tooltip,
+    TutorialsSlider,
     VisitLibrary,
     WorkableOpenRoles,
     WorkableSnippet,

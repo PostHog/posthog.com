@@ -65,7 +65,7 @@ export default function Customers() {
                             logo="/images/customers/pry.svg"
                             name="Tiffany Wong"
                             title="Co-founder, Pry Financials"
-                            image={<StaticImage width={100} quality={100} src="./images/tiffany.png" />}
+                            imageSource="/images/customers/tiffany.png"
                             quote={
                                 <span>
                                     “Hosting PostHog on our own infrastructure was easy to do and means{' '}

@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/series-b/series-b-baby.png
-author: joe-martin
+author: ["joe-martin"]
 ---
 
 **Jun 10th, 2021** – [PostHog](https://posthog.com), the open source product analytics company, today announced $15 million in fresh funding and major new free features for users of data warehouses.
