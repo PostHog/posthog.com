@@ -548,6 +548,10 @@
                                     "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
                                 },
                                 {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/clickhouse/resize-disk"
+                                },
+                                {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
                                 }
@@ -564,6 +568,16 @@
                                 {
                                     "name": "Log retention",
                                     "url": "/docs/self-host/runbook/kafka/log-retention"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Postgresql",
+                            "url": "/docs/self-host/runbook/postgresql",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
                         }
