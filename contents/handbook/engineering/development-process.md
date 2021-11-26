@@ -51,6 +51,12 @@ Goals should be time-bound, but since we primarily use goals for our two-weekly 
 * **Moonshots:** These are big scary goals, we expect to fail to achieve them 50% of the time, if we fail we expect to learn something equally as valuable as if we succeed (just scraping the goal counts as a success)
 * **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
 
+### Outcomes of goals
+When we review the status of the goals from the previous sprint, we'll classify them as follows:
+* **Nailed it:** We hit the goal spectacularly (high fives all round)
+* **Scraped it:** We almost hit the goal - but we'll need to do a little bit more next sprint to tidy up (we should adjust our workload to have fewer resources on big goals during the next sprint to comfortable get this finished)
+* **Failed it:** We were no-where near hitting the goal, but we learned some valuable lessons - we're going to go back to the drawing board - maybe the goal wasn't right or maybe there's a different way to approach it
+
 ## 2. Sizing a task and reducing WIP
 
 Efficient engineering organizations actively [reduce Work In Progress](https://loom.com/share/5efceb288b634a449041918bdba08202) (WIP) to avoid negative feedback loops that drive down productivity. Hence a PR should be optimised for two things: 1) quality of implementation, and 2) the speed with which we can merge it in.
