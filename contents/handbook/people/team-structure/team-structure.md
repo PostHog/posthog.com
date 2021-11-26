@@ -34,7 +34,6 @@ hideAnchor: true
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
     - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
-  - [Phil Leggetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
 
 ## Small teams
 
@@ -82,7 +81,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
-- [Phil Leggetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 
 <br />

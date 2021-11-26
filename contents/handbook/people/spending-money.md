@@ -141,9 +141,9 @@ If you believe an open-source project is fundamentally important to the success 
 
 To enable individuals to support projects on an ad-hoc basis, we use [Open Collective](https://opencollective.com/) and have a $100/month budget per team member.
 
-To get setup with Open Collective get in touch with [Phil](/handbook/company/team#phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make "contributions" (sponsor a project) as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
+To get setup with Open Collective get in touch with Charles who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make "contributions" (sponsor a project) as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
-_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask [Phil](/handbook/company/team#phil-leggetter-developer-relations) to set up the sponsorship._ 
+_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask Charles to set up the sponsorship._ 
 
 ## Work space
 
