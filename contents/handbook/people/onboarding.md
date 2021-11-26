@@ -160,6 +160,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US) or Revolut (UK) - company cards and expenses tracking
 - Shopify - powers our merch store
+- Printfection - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 - CharlieHR - holiday tracking, personal details
 
 ### Engineering
