@@ -46,6 +46,7 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
+import { GiveBackFriday } from './components/GiveBackFriday'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
@@ -149,6 +150,7 @@ export const shortcodes = {
     FooterCTA,
     GetStartedModal,
     GithubIcon,
+    GiveBackFriday,
     Heading,
     HiddenSection,
     Home,

@@ -559,6 +559,22 @@ ul {
     }
 }
 
+.star-gbf {
+    animation: pulse 5s linear infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(1.8);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
 @keyframes features-ticker {
     0% {
         transform: translate3d(0, 0, 0);
