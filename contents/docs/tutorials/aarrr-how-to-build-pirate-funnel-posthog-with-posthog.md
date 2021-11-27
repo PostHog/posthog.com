@@ -3,7 +3,7 @@ title: Building an AARRR pirate funnel
 sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
-featuredTutorial: true
+featuredTutorial: false
 author: ["hanna-crombie"]
 topics:
     - funnels
