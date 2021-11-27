@@ -97,7 +97,7 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 - [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
 - [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
 
-PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
+PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to not also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
 
 ### Papercups
 
