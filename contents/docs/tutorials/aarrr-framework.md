@@ -10,7 +10,7 @@ topics: ['funnels', 'trends', 'plugins']
 
 AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic framework to establish end-to-end product tracking - this tutorial will help you figure out how to define each of these metrics for your product.
 
-> For products focussed on virality, it may be worth additionally tracking Growth Loops
+> For products focused on virality, it may be worth additionally tracking Growth Loops
 
 ## General rules
 
@@ -34,7 +34,7 @@ Optionally, it may be rational to add a quality signal here. For example, PostHo
 
 ## Activation
 
-Some users don't get retained because they never used the product properly in the first place. For example, they just created an account (adding to Acquisition), but they didn't do anything once they were in. Measuring Activation means you can clarify if you need to focus on this problem, or the seperate problem of users coming back once they have experienced value for the first time.
+Some users don't get retained because they never used the product properly in the first place. For example, they just created an account (adding to Acquisition), but they didn't do anything once they were in. Measuring Activation means you can clarify if you need to focus on this problem, or the separate problem of users coming back once they have experienced value for the first time.
 
 To define Activation, don't be afraid to go deep. It must mean the first "aha" moment. For PostHog's own team, it means that users answer a product question (not just that they've got set up and integrated). For marketplaces, it might mean a user makes money. For social media websites, it might mean that a user builds an audience or receives a significant number of likes on a post.
 
