@@ -960,6 +960,10 @@
                     "url": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
                 },
                 {
+                    "name": "Measuring growth loops",
+                    "url": "/docs/tutorials/measuring-your-growth-loop"
+                },
+                {
                     "name": "How to embed a shared Dashboard",
                     "url": "/docs/tutorials/how-to-embed-shared-dashboard"
                 }
