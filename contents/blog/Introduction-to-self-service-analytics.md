@@ -14,7 +14,7 @@ There are lots of ways to do analytics. You can do SQL. You can do it in the clo
 
 That’s a term which covers a lot of popular analytics platforms, including PostHog, Mixpanel and Amplitude. But what does it mean, exactly? 
 
-To put it simply, a self-service analytics platform is one which empowers everyone within an organization to analyze product and user data themselves. Self-service analytics platforms therefore provide access to the data and the tools to interrogate it — all without resorting to dozens of unorganized spreadsheets. 
+To put it simply, a self-service analytics platform is one which empowers everyone within an organization to analyze product and user data themselves. Self-service analytics platforms therefore provide access to the data and the tools to interrogate it — all without resorting to dozens of unorganized spreadsheets, and specifically without requiring your team to have SQL skills.
 
 In this article we’ll describe how product-led teams benefit from self-service analytics, what the alternatives are and discuss some of the popular tools in this space. 
 
