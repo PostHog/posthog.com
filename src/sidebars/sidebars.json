@@ -900,6 +900,10 @@
                     "url": "/docs/tutorials"
                 },
                 {
+                    "name": "Getting started with the AARRR framework",
+                    "url": "/docs/tutorials/aarrr-framework"
+                },
+                {
                     "name": "How to safely roll out new features",
                     "url": "/docs/tutorials/feature-flags"
                 },
