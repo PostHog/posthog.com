@@ -45,7 +45,7 @@ Access your old Postgres-backed PostHog instance and run the following command:
 
 ```shell
 # tip: use the flag -U to specify a username if necessary
-pg_dump -d posthog -f export.sql --no-owner --data-only \
+pg_dump -d posthog -f tmp/export.sql --no-owner --data-only \
 -t posthog_action \
 -t posthog_actionstep \
 -t posthog_annotation \
@@ -70,6 +70,18 @@ pg_dump -d posthog -f export.sql --no-owner --data-only \
 ```
 
 > **Note:** If your old PostHog instance is hosted on Heroku, you should follow [this guide](https://devcenter.heroku.com/articles/heroku-postgres-import-export) to export **all of your data**, load into a separate database (we recommend a local Postgres instance), and then run the command above.
+
+If you do not access your Postgres database via a port-forwarding mechanism to your local machine, you will then need to copy the file from the server to your local system (or the remote server from where you access your new instance). You can do this with `scp`:
+
+```shell
+scp <your_username>@<database_hostname>:/tmp/export.sql .
+```
+
+If your old instance was deployed using the Helm chart, you can use:
+
+```shell
+kubectl cp <postgres-pod-name>:/tmp/export.sql ./export.sql # -n posthog
+```
 
 ### 2. Accessing Postgres on your new instance
 
@@ -108,6 +120,8 @@ To do so, connect to your new Postgres instance using the command from the previ
 > **Refresher:** Connect to Postgres from your Postgres pod with the command `psql -h your-pgbouncer-host -p 6543 -d posthog -U postgres`.
 
 Once connected, you should have access to the `psql` shell. To **erase all data** in the tables we'll be importing into, run the following:
+
+> **Warning:** Only run this in your **new** instance.
 
 ```sql
 -- This command is a destructive action that leads to data deletion!!!
