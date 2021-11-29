@@ -17,7 +17,45 @@ However, if we have no checks in place, we will release quickly but everything w
 
 Deciding what we work on happens in our sprint planning session, where the high level themes for the next sprint get decided. Each team then takes those high level priorities and breaks them down, plus adds their own smaller items like bugfixes, smaller features or other improvements.
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
+The sprint planning works like this:
+- During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that fit in with our roadmap.
+- On Wednesday we get together. We use Zoom's breakout rooms to split into the small teams, and each team finalizes the one or two big ambitious goals that they want to tackle as a team.
+- We come back in the same room, where
+  - We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
+  - Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough
+
+Each goal should have a single owner.
+
+This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+
+
+After the sprint planning, each team should have their own session (can be async!) where they
+- Do a detailed retrospective.
+- Divide up the big ambitious goals between the members of the team
+- Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
+  - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
+
+### What does an awesome big ambitious goal look like?
+
+* **Clear:** Anyone with general context can read it and instantly know what specifically it means to achieve it (i.e. NOT “refactor components”)
+* **Finite:** There should be an obvious end to the goal and cannot go on forever (i.e. NOT “improve dashboards”)
+* **Assessable:** You can validate whether or not you’ve achieved the goal - it doesn’t need to be a metric (e.g. Increased signups by 20% or Events can be ingested in any order)
+* **Meaningful:** If we achieve this goal it will make our solve a real need for our customers (i.e. a 10x improvement in performance sounds great as a goal - but its not meaningful if our customers are happy with the current performance)
+* **Challenging:** It should too big for one person to solve on their own and require creativity or brute force to achieve in the proposed time-frame (e.g. ship correlation analysis with a killer feature no one else has)
+* **Homogenous:** The goal should be all about achieving a single meaningful thing and not a collection of unconnected things (i.e. NOT ‘Improve query performance and launch collaboration MVP’)
+
+Goals should be time-bound, but since we primarily use goals for our two-weekly sprint planning we should consider them generally timebound to two weeks.
+
+### Types of big ambitious goals
+
+* **Moonshots:** These are big scary goals, we expect to fail to achieve them 50% of the time, if we fail we expect to learn something equally as valuable as if we succeed (just scraping the goal counts as a success)
+* **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
+
+### Outcomes of goals
+When we review the status of the goals from the previous sprint, we'll classify them as follows:
+* **Nailed it:** We hit the goal spectacularly (high fives all round)
+* **Scraped it:** We almost hit the goal - but we'll need to do a little bit more next sprint to tidy up (we should adjust our workload to have fewer resources on big goals during the next sprint to comfortable get this finished)
+* **Failed it:** We were no-where near hitting the goal, but we learned some valuable lessons - we're going to go back to the drawing board - maybe the goal wasn't right or maybe there's a different way to approach it
 
 ## 2. Sizing a task and reducing WIP
 
