@@ -19,6 +19,7 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Building and measuring a sign up funnel with Next.js and Supabase](/docs/tutorials/nextjs-supabase-signup-funnel)
 - [Analyzing user behavior with Cohorts](/docs/tutorials/cohorts)
 - [Measuring retention and tracking churn](/docs/tutorials/retention)
+- [Measuring growth loops](/docs/tutorials/measuring-your-growth-loop)
 - [Tracking single page apps](/docs/tutorials/spa)
 - [Complete guide to event tracking](/docs/tutorials/actions)
 - [Tracking key B2B product metrics](/docs/tutorials/b2b)
