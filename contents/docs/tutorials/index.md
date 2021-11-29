@@ -15,7 +15,7 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 
 ### General product analytics
 
-- [Getting started with product analytics - the AARRR framework](/docs/tutorials/aarrr-framework)
+- [Getting started with the AARRR framework](/docs/tutorials/aarrr-framework)
 - [Complete guide to event tracking](/docs/tutorials/actions)
 - [Building an AARRR funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
 - [How to safely roll out new features](/docs/tutorials/feature-flags)
