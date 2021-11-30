@@ -128,4 +128,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/charlescook1/
     }
+  - {
+      handle: vivek-sonar,
+      name: Vivek Sonar,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/59370685?v=4,
+      link_type: LinkedIn,
+      link_url: https://www.linkedin.com/in/vivek-sonar-266b2417b/
+    }
 ---

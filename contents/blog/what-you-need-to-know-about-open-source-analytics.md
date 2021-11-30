@@ -1,12 +1,12 @@
 ---
-date: 2021-12-04
+date: 2021-11-29
 title: What you need to know about open-source analytics
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["vivek-sonar"]
-featuredImage: featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: standard
 ---
 
