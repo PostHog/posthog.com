@@ -19,8 +19,8 @@ const Home = () => {
     return (
         <Layout>
             <SEO
-                title="PostHog - Open-Source Product Analytics"
-                description="Self-hosted product analytics stack, to deploy on your infrastructure."
+                title="PostHog - Host Your Own Product Analytics"
+                description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
             />
             <Hero />
             <Customers />
