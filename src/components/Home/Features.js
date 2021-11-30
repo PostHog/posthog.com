@@ -88,7 +88,8 @@ export default function Features() {
                         activeFeature={activeFeature}
                         title="session recording"
                         index={2}
-                    />{' '}
+                    />
+                    ,{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
