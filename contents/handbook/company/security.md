@@ -38,10 +38,10 @@ All of our policies can be found in our Drata portal, so this section of the Han
 For the purposes of GDPR, customers use PostHog in one of two ways:
 
 - PostHog Cloud
-- Self-hosting and managing a PostHog instance
+- Self-hosting and managing a PostHog instance (PostHog Open Source, PostHog Scale and PostHog Enterprise)
 
 If a customer is using PostHog Cloud, then PostHog is the Data Processor and the customer is the Data Controller. We have some GDPR obligations here. 
 
-If a customer is self-hosting PostHog then they are both the Data Processor and the Data Controller because tehey are responsible for their PostHog instance. We do not have access to any of their user data, so we do not have specific GDPR obligations here. 
+If a customer is self-hosting PostHog then they are both the Data Processor and the Data Controller because they are responsible for their PostHog instance. We do not have access to any of their user data, so we do not have specific GDPR obligations here. 
 
 As a Data Controller to PostHog Cloud customers, we are obliged to maintain documentation that records details of our data processing agreements with those customers. Charles is our Data Protection Officer and is responsible for maintaining this.
