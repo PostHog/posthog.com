@@ -1,4 +1,3 @@
-import GiveBackFriday from 'components/GiveBackFriday'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
@@ -23,7 +22,6 @@ const Home = () => {
                 title="PostHog - Open-Source Product Analytics"
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."
             />
-            <GiveBackFriday />
             <Hero />
             <Customers />
             <BeforeAndAfter />
