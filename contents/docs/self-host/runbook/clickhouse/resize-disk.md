@@ -18,7 +18,7 @@ showTitle: true
 
 1. Run a `helm` upgrade
 
-1. Connect to the Kafka container to verify the new filesystem size
+1. Connect to the ClickHouse container to verify the new filesystem size
     ```shell
     kubectl -n posthog exec -it chi-posthog-posthog-0-0-0 -- /bin/bash
     clickhouse@chi-posthog-posthog-0-0-0:/$ df -h /var/lib/clickhouse/
@@ -26,7 +26,7 @@ showTitle: true
     /dev/disk/by-id/scsi-0DO_Volume_pvc-f39035c1-c68c-4572-81f2-273de6eb088c   40G  186M   38G   1% /var/lib/clickhouse
     ```
 
-Note that this doesn't work for decreases, if you try the disk won't be resized and the following errors can be seen in the clickhouse operator pod
+Note: this procedure doesn't work to decrease a volume. If you try, the disk won't be resized and the following errors can be seen in the ClickHouse operator pod
 ```
 posthog/posthog:ERROR unable to reconcile PVC(posthog/data-volumeclaim-template-chi-posthog-posthog-0-0-0) err: PersistentVolumeClaim "data-volumeclaim-template-chi-posthog-posthog-0-0-0" is in valid: spec.resources.requests.storage: Forbidden: field can not be less than previous value
 ```

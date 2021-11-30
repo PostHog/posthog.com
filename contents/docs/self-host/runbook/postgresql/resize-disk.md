@@ -33,7 +33,7 @@ true
     Note: while resizing the PVC you might get an error `disk resize is only supported on Unattached disk, current disk state: Attached` (see below for more details).
     <details>
 
-    In this specific case you need to temporary scale down the `StatefulSet` replica value to zero. **This will briefly disrupt the Postgresql service availability and TODO: what's the impact?**
+    In this specific case you need to temporary scale down the `StatefulSet` replica value to zero. **This will briefly disrupt the Postgresql service availability and make the PostHog UI inaccessible. On newer versions of PostHog events will be queued and ingestion won't be impacted**
 
     You can do that by running: `kubectl -n posthog patch statefulset posthog-posthog-postgresql -p '{ "spec": { "replicas": 0 }}'`
 
