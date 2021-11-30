@@ -432,6 +432,10 @@
                         {
                             "name": "Billing",
                             "url": "/handbook/growth/sales/billing"
+                        },
+                        {
+                            "name": "Who we do business with",
+                            "url": "/handbook/growth/sales/who-we-do-business-with"
                         }
                     ]
                 }
@@ -898,6 +902,10 @@
                 {
                     "name": "Overview",
                     "url": "/docs/tutorials"
+                },
+                {
+                    "name": "Getting started with the AARRR framework",
+                    "url": "/docs/tutorials/aarrr-framework"
                 },
                 {
                     "name": "How to safely roll out new features",

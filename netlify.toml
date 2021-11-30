@@ -1022,3 +1022,7 @@
     from = "/product-features/plugins"
     to = "/integrations"
     status = 302
+
+[[redirects]]
+    from = "/heatmaps"
+    to = "/product/heatmaps"

@@ -64,7 +64,7 @@ export default function Customers() {
                         <Quote
                             logo="/images/customers/pry.svg"
                             name="Tiffany Wong"
-                            title="Co-founder, Pry Financials"
+                            title="Co-founder, Pry"
                             imageSource="/images/customers/tiffany.png"
                             quote={
                                 <span>

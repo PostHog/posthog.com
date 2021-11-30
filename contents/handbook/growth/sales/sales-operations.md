@@ -50,6 +50,12 @@ Congratulations, this is the best part! Now we focus on making customers success
 
 Read about how we do this in the dedicated handbook section, [Ensuring Customer Delight at PostHog](/handbook/growth/customer-support). 
 
+## How we measure revenue
+
+We typically use two top-level metrics when looking at revenue: MRR (monthly recurring revenue) and NRR (net revenue retention).
+
+We have developed a [script](https://github.com/PostHog/growth-accounting#calculating-revenue) located in the [growth accounting repo](https://github.com/PostHog/growth-accounting) to make these calculations easy.
+
 ## FAQs
 
 _Can I give a Scale customer a free trial?_
