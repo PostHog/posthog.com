@@ -2,6 +2,9 @@
 title: Tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/b2b.png
+topics: ['feature flags', 'trends']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕

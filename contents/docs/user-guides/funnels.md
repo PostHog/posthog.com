@@ -2,6 +2,8 @@
 title: Funnels
 sidebar: Docs
 showTitle: true
+topics:
+    - funnels
 ---
 
 ## Why do funnels matter?
@@ -28,7 +30,7 @@ For every flow throughout your product, more people will start it than complete 
 * Understand seasonality in your conversion rates
 * Refining your funnel to filter out noise
 
-## Getting Started
+## Getting started
 
 ### Setting up a funnel
 
@@ -138,7 +140,8 @@ You can instantly see that the conversion rate is lower on Linux; this indicates
 
 You can break down by a number of user and event properties (e.g. browser, country, etc.) to help quickly validate the initial hypothesis you may have.
 
-Automating the solution to highlight potential problems and hypotheses for you is something we're actively working on so, take a look at [our roadmap](/handbook/strategy/roadmap) to learn more about what we're building here.
+The above process depends on thinking up a hypothesis to test. PostHog can also do this thinking for you, by automatically showing you which events and properties most significantly affect the conversion rate of users. To find out how to use this feature, check out [Correlation Analysis](correlation).
+
 
 ### Understand how your changes are improving your flow
 

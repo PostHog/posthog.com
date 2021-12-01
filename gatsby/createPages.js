@@ -10,6 +10,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
+    const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
+    const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const result = await graphql(`
         {
             allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
@@ -39,6 +41,17 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                     fields {
                         slug
+                    }
+                }
+            }
+            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        documentation
                     }
                 }
             }
@@ -95,11 +108,21 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         name
                         url
                     }
+                    product {
+                        name
+                        url
+                    }
                 }
             }
             categories: allMdx(limit: 1000) {
                 group(field: frontmatter___categories) {
                     category: fieldValue
+                }
+            }
+            plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
+                nodes {
+                    id
+                    slug
                 }
             }
         }
@@ -257,5 +280,41 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
             },
         })
+    })
+    result.data.product.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { documentation } = node.frontmatter
+        let next = null
+        let previous = null
+        const sidebar = result.data.sidebars.childSidebarsJson.product
+        sidebar.some((item, index) => {
+            if (item.url === slug) {
+                next = sidebar[index + 1]
+                previous = sidebar[index - 1]
+                return true
+            }
+        })
+        createPage({
+            path: slug,
+            component: ProductTemplate,
+            context: {
+                id: node.id,
+                documentation: documentation || '',
+                next,
+                previous,
+            },
+        })
+    })
+    result.data.plugins.nodes.forEach((node) => {
+        const { id, slug } = node
+        if (slug) {
+            createPage({
+                path: slug,
+                component: PluginTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
     })
 }

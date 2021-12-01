@@ -3,6 +3,7 @@ import { Blockquote } from 'components/BlockQuote'
 import { BlogPostLayout } from 'components/Blog/BlogPostLayout'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
+import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
@@ -11,7 +12,6 @@ import { findAuthor } from 'lib/utils'
 import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import Link from 'components/Link'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -26,7 +26,8 @@ export default function BlogPost({ data, pageContext }) {
         frontmatter: { authors },
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
-    const authorDetails = findAuthor(authors)(author)
+    const { gitLogLatestDate } = postData?.parent.fields
+    const authorDetails = findAuthor(authors)(author && author[0])
     const components = {
         h1: H1,
         h2: H2,
@@ -52,6 +53,7 @@ export default function BlogPost({ data, pageContext }) {
             />
             <BlogPostLayout
                 blogDate={date}
+                blogUpdatedDate={gitLogLatestDate}
                 pageTitle={title}
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
@@ -92,6 +94,9 @@ export const query = graphql`
             parent {
                 ... on File {
                     relativePath
+                    fields {
+                        gitLogLatestDate(formatString: "MMMM DD, YYYY")
+                    }
                 }
             }
         }

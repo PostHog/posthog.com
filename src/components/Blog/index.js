@@ -22,19 +22,19 @@ const Blog = ({
     const title = pageContext?.title || 'Blog'
     const crumbs = pageContext?.crumbs || [{ title: 'Blog' }]
     const findAuth = findAuthor(authors)
+    const latestAuthor = posts[0].node.frontmatter.author
     const latestPost = (
         <PostCard
             key={posts[0].node.id}
             post={posts[0].node}
             featured
-            authorDetails={findAuth(posts[0].node.frontmatter.author)}
+            authorDetails={findAuth(latestAuthor && latestAuthor[0])}
         />
     )
-    const nonLatestPosts = posts
-        .slice(1)
-        .map((edge) => (
-            <PostCard authorDetails={findAuth(edge.node.frontmatter.author)} key={edge.node.id} post={edge.node} />
-        ))
+    const nonLatestPosts = posts.slice(1).map((edge) => {
+        const author = edge.node.frontmatter.author
+        return <PostCard authorDetails={findAuth(author && author[0])} key={edge.node.id} post={edge.node} />
+    })
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">

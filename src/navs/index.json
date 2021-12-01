@@ -172,8 +172,8 @@
                         ],
                         "footerLinks": [
                             {
-                                "title": "Plugins",
-                                "url": "/plugins"
+                                "title": "Integrations",
+                                "url": "/integrations"
                             },
                             {
                                 "title": "Build your own plugin",
@@ -229,7 +229,7 @@
                                         "url": "/docs/user-guides/feature-flags"
                                     },
                                     {
-                                        "title": "Session recordings",
+                                        "title": "Session recording",
                                         "url": "/docs/user-guides/session-recording"
                                     }
                                 ]

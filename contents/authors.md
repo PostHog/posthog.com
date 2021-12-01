@@ -19,10 +19,10 @@ authors:
   - {
       handle: yakko-majuri,
       name: Yakko Majuri,
-      role: Developer Experience,
+      role: Software Engineer,
       image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90,
-      link_type: linkedin,
-      link_url: https://www.linkedin.com/in/yakko-majuri
+      link_type: github,
+      link_url: https://github.com/yakkomajuri
     }
   - {
       handle: joe-martin,
@@ -111,5 +111,21 @@ authors:
       image: https://posthog.imgix.net/static/JamesG-e034bf44489fe64be854099aff5fdb7e.png?w=90,
       link_type: twitter,
       link_url: https://twitter.com/fuziontech
+    }
+  - {
+      handle: andy-vandervell,
+      name: Andy Vandervell,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/92976667?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/andyvandervell/
+    }
+  - {
+      handle: charles-cook,
+      name: Charles Cook,
+      role: VP of Operations,
+      image: https://avatars.githubusercontent.com/u/70321811?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/charlescook1/
     }
 ---

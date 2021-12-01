@@ -16,6 +16,7 @@ interface BlogPostLayoutProps {
     featuredImageType?: string
     blogArticleSlug: string
     blogDate?: string
+    blogUpdatedDate?: string
     authorDetails?: AuthorsData
     categories: { title: string; url: string }[]
 }
@@ -27,6 +28,7 @@ export function BlogPostLayout({
     featuredImageType,
     blogArticleSlug,
     blogDate,
+    blogUpdatedDate,
     authorDetails,
     categories,
 }: BlogPostLayoutProps): JSX.Element {
@@ -59,6 +61,7 @@ export function BlogPostLayout({
                 featuredImage={featuredImage}
                 pageTitle={pageTitle}
                 blogDate={blogDate}
+                blogUpdatedDate={blogUpdatedDate}
             />
             <div className="max-w-xl mx-auto relative pt-12 article-content blog-content">
                 <BlogShareButtons />

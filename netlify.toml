@@ -1,8 +1,11 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/plugins"
-  status = 200
+  to = "/integrations/:splat"
 
+[[redirects]]
+  from = "/next-steps/*"
+  to = "/next-steps"
+  status = 200
 
 [[redirects]]
   from = "/careers/*"
@@ -956,3 +959,70 @@
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-29-1"
+    to = "/blog/the-posthog-array-1-29-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-28-1"
+    to = "/blog/the-posthog-array-1-28-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-23-1"
+    to = "/blog/the-posthog-array-1-23-0" 
+
+# Manually Added: 2021-11-10
+[[redirects]]
+    from = "/blog/the-posthog-array-1-15-1"
+    to = "/blog/the-posthog-array-1-15-0" 
+    
+# Added: 2021-11-10
+[[redirects]]
+    from = "/handbook/people/team-structure/design"
+    to = "/handbook/design/about-design"
+
+# Added: 2021-11-11
+[[redirects]]
+    from = "/handbook/design/about-design"
+    to = "/handbook/people/team-structure/design"
+
+[[redirects]]
+    from = "/product-features/self-hosted"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/event-autocapture"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/trends"
+    to = "/product/trends"
+
+[[redirects]]
+    from = "/product-features/funnels"
+    to = "/product/funnels"
+
+[[redirects]]
+    from = "/product-features/retention"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/feature-flags"
+    to = "/product/feature-flags"
+
+[[redirects]]
+    from = "/product-features/session-recording"
+    to = "/product/session-recordings"
+
+[[redirects]]
+    from = "/product-features/plugins"
+    to = "/integrations"
+    status = 302
+
+[[redirects]]
+    from = "/heatmaps"
+    to = "/product/heatmaps"

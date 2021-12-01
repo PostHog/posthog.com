@@ -25,6 +25,7 @@ module.exports = {
                     md: '(max-width: 1023px)',
                     lg: '(max-width: 1279px)',
                     xl: '(max-width: 1535px)',
+                    '2xl': '(max-width: 2560px)',
                 },
             },
         },
@@ -49,6 +50,10 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                shouldBlockNodeFromTransformation: (node) =>
+                    node.internal.type === 'File' &&
+                    node.url &&
+                    node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
@@ -77,6 +82,13 @@ module.exports = {
             options: {
                 name: `navs`,
                 path: `${__dirname}/src/navs`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `authors`,
+                path: `${__dirname}/src/data/authors.json`,
             },
         },
         `gatsby-transformer-gitinfo`,

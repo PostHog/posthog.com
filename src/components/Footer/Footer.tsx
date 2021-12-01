@@ -7,6 +7,7 @@ import React from 'react'
 const linksHeadingSm = cntl`
     text-sm
     text-gray
+    dark:text-gray
     mb-1
     leading-tight
     pb-[0.2rem]
@@ -80,21 +81,21 @@ export function Footer(): JSX.Element {
             <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0">
                 <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
                     <Accordion title={'Product analytics suite'} titleClasses={linksHeadingLg}>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                             <div>
                                 <h4 className={linksHeadingMd}>
                                     <Link
                                         to="/product"
                                         className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
                                     >
-                                        Product tour
+                                        Product overview
                                     </Link>
                                 </h4>
                                 <h5 className={linksHeadingSm}>Analytics</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Trends" url="/product/#analytics" />
-                                    <FooterMenuItem title="Funnels" url="/product/#analytics" />
-                                    <FooterMenuItem title="Retention" url="/product/#analytics" />
+                                    <FooterMenuItem title="Funnels" url="/product/funnels" />
+                                    <FooterMenuItem title="Trends" url="/product/trends" />
+                                    <FooterMenuItem title="Paths" url="/product/user-paths" />
                                 </ul>
                             </div>
                             <div>
@@ -108,9 +109,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Features</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Session recordings" url="/product/#insights" />
-                                    <FooterMenuItem title="Feature flags" url="/product/#insights" />
-                                    <FooterMenuItem title="Plugins library" url="/plugins" />
+                                    <FooterMenuItem title="Session recording" url="/product/session-recording" />
+                                    <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
+                                    <FooterMenuItem title="Heatmaps" url="/heatmaps" />
                                 </ul>
                             </div>
                             <div>
@@ -124,9 +125,12 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Event autocapture" url="/product/#platform" />
-                                    <FooterMenuItem title="Self-hosting" url="/product/#platform" />
+                                    <FooterMenuItem
+                                        title="Quantitative analysis"
+                                        url="/product/quantitative-analysis"
+                                    />
                                     <FooterMenuItem title="Open source" url="https://github.com/posthog/posthog" />
+                                    <FooterMenuItem title="Integrations" url="/integrations" />
                                 </ul>
                             </div>
                         </div>

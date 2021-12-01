@@ -11,25 +11,32 @@ Gathering user feedback is critical for the development of our product. It's not
 > 😍 Want to share feedback? Simply send us an email to [hey@posthog.com](mailto:hey@posthog.com) or reach out on [Slack](/slack). **We're always happy to hear from you!**
 
 
-### Feedback Hero
-Previously a single person owned the feedback process. As we grew, we created the Feedback Hero ([see discussion](https://github.com/PostHog/product-internal/issues/98)) to scale our feedback process. The Feedback Hero is **rotated every two weeks**. This person is in charge of:
-1. Proactive reach out to users to schedule feedback calls.
-2. Having the feedback calls.
+### Feedback heroes
+> **Historic context:** Previously a single person owned the feedback process. As we grew, we created the Feedback Hero ([see discussion](https://github.com/PostHog/product-internal/issues/98)) to scale our feedback process. On November 2021, we decided to remove the figure of "Feedback Hero" as multiple people now talk to users continuously for a variety of reasons.  
+
+Almost everyone at PostHog talks to users, we believe this is critical to build a successful product. However, we have some people (Marcus, Joe & Paolo) that are more continuously involved in this process and are frequently talking to users. These feedback heroes are responsible for:
+
+1. Proactive reach out to users to schedule feedback calls, case studies or usability tests (as needed).
+2. Having the feedback calls and inviting other team members to join.
 3. Housekeeping. Logging the relevant notes and other reports (see [process](#feedback-process)) below. Send the user applicable rewards as a thank you for their time.
 4. Follow-up. Create any relevant issues, follow-up with users around specific issues, questions or concerns.
 
-The Feedback Hero rotation can be found [in this doc](https://docs.google.com/spreadsheets/d/1DkD-Jw_LvSixhBK7-m8UO_r7g_wAW0IvoeAjg3IawNg/edit#gid=0).
+### BETA - Contact owners
+As more people at PostHog are taking to users in a decentralized fashion, we want to make sure we don't overwhelm users or abuse of their time. To do so, we have contact onwers who gatekeep users. Each owner can have a better control of when we've spoken to those users and make sure we only schedule conversations when it's appropriate. Other team members can ask the contact owner for an intro, and/or help scheduling a call with those users.
+
+The contact list and contact onwers can be found in [this doc](https://docs.google.com/spreadsheets/d/15nYBas4sP0iY4xIGRJ7wLhKlzYrDJxXHTeNWcRl6Xk4/edit)
 
 ### Feedback call process
 
 **Scheduling**
 - Make sure all feedback calls are registered in the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
-- Notify team members of upcoming calls in the [#product](https://posthog.slack.com/archives/C01RJ7T212S) channel to invite them to join.
+- Notify team members of upcoming calls in the [#product](https://posthog.slack.com/archives/C01RJ7T212S) channel to invite them to join, unless the call is intended for specific members (e.g. a usability test usually involves the engineer(s) who built the feature).
 - Not a hard rule, but it's usually good to limit the number of team members (around two) joining from our side to foment a more intimate chat. 
 
 
 **During the call**
 - Do a quick round of intros if you haven't met previously.
+- Chat informally with the user to build rapport and gather some initial context (it will greatly improve the quality of the feedback!).
 - Ask the user if it's okay to record the conversation (mention we only use internally and keep for 3 months maximum).
 - If this is the first interview with the user, ask them for context about their company, their role, if they're technical.
 - The topics of the conversation are usually better informed from the previous step. It's always more helpful to talk about topics where the user has had more experience. It's however always useful to consider what we're currently working on at Product/Growth/Marketing and ask questions that could help each team do a better job.
@@ -54,10 +61,10 @@ We strongly value our users' time. We particularly acknowledge the value it prov
 
 
 ### Repositories of information 
-We keep a log (notes) of user feedback to continuously aid in the product development process. Recordings are kept at most 3 months to respect our user's privacy. User feedback is registered in the following places:
+We keep a log (written notes without PII) of user feedback to continuously aid in the product development process. Recordings are kept at most 3 months to respect our user's privacy. User feedback is registered in the following places:
 - **Feedback notes.** Feedback notes are mainly kept in this [Google doc][feedback-doc].
 - **Feedback records.** Our source of truth for records of users who we have interviewed is [Orbit](https://app.orbit.love/posthog/activities?activity_type=custom%3AFeedback+call&affiliation=member). 
-- **Feedback records for Scale/Sales customers.** For Scale customers or sales-focused customers, we also register any records on **Hubspot** (and link the relevant notes/Orbit record). This is not intended as a source of truth for the scope of feedback calls, but rather for the benefits of team members doing sales efforts.
+- **Feedback records for Scale/Enterprise/Focus customers.** For Scale customers or sales-focused customers, we also register any records on **Hubspot** (and link the relevant notes/Orbit record). This is not intended as a source of truth for the scope of feedback calls, but rather for the benefits of team members doing sales efforts.
 - **Recordings.** All recordings are kept in [this folder][recordings] in the Product shared drive. Recordings are kept for up to 3 months.
 - **Usability tests.** As usability tests are done with a specific focus, we create issues for each feature in the product-internal repo ([example](https://github.com/PostHog/product-internal/issues/157)). Notes related to this issue  only are kept in their respective issue. Recordings are still kept in the same folder, as well as the appropriate Orbit record. 
 
@@ -67,10 +74,10 @@ Any PostHog team member may receive feedback at any time, whether doing sales, c
 Some feedback is particularly worth highlighting to the rest of the team. To do so, just share the snippet on the [#posthogfeedback](https://posthog.slack.com/archives/C011L071P8U) channel and link to the [doc][feedback-doc] if applicable.
 
 <blockquote class='warning-note'>
-To ensure feedback durability and visibility, the #posthogfeedback channel should not be used as the primary source of <i>storage</i>. Please mainly add the feedback to the main Google doc.
+To ensure feedback durability and visibility, the #posthogfeedback channel should not be used as the primary source of <i>storage</i>. Please add the feedback to the main Google doc.
 </blockquote>
 
-If you're not part of the [Feedback Hero](#feedback-hero) rotation, **we strongly recommend you to join at least one feedback call per month.** Regardless of your role, you will always benefit from staying in the loop with our users.
+**We strongly recommend that everyone joins at least one user call per month.** Regardless of your role, you will always benefit from staying in the loop with our users and their pain.
 
 [feedback-doc]: https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit
 [recordings]: https://drive.google.com/drive/folders/1kmhj0GMAZTjVauN8JJKs_U7BgaD7XnUJ?usp=sharing

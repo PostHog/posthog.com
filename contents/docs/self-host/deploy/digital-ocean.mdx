@@ -19,6 +19,7 @@ import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
+import InstallClusterIssuer from './snippets/install-cluster-issuer'
 
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running.
 
@@ -90,6 +91,9 @@ and then run:
 <CommandHelmGetRepoSnippet />
 <CommandHelmUpgradeSnippet />
 
+#### 4. Install `ClusterIssuer`
+<InstallClusterIssuer />
+
 <PostInstallSnippet />
 
 ## Manual install
@@ -98,10 +102,11 @@ First, we need to set up a Kubernetes cluster (see the official DigitalOcean [do
 
 <ClusterRequirementsSnippet />
 
-> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
 > * for PostgreSQL, take a look at [DigitalOcean managed databases](https://www.digitalocean.com/products/managed-databases-postgresql/)
 > * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
 > * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
 >
 
@@ -116,9 +121,6 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
-kafka:
-  persistence:
-    size: 20Gi
 ```
 
 #### 2. Install the chart

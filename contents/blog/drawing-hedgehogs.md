@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: lottie-coxon
+author: ["lottie-coxon"]
 featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
 categories: ["General"]

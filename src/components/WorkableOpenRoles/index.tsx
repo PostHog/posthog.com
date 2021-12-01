@@ -41,7 +41,7 @@ export default function WorkableOpenRoles({ department = '' }: { department?: st
                                             href={url}
                                         >
                                             <span>{title}</span>
-                                            <RightArrow className="w-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />
+                                            <RightArrow className="w-[24px] h-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />
                                         </a>
                                     </li>
                                 )

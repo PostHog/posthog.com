@@ -3,6 +3,10 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
     createTypes(`
       type Mdx implements Node {
         contributors: [Contributors]
+        frontmatter: Frontmatter
+      }
+      type Frontmatter {
+        authorData: [AuthorsJson] @link(by: "handle", from: "author")
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")
@@ -46,6 +50,18 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         city: String
         zip_code: Int
         telecommuting: Boolean
+      }
+      type Plugin implements Node {
+        name: String,
+        url: String,
+        description: String,
+        verified: Boolean,
+        maintainer: String,
+        displayOnWebsiteLib: Boolean,
+        type: String
+        markdown: File @link(from: "markdown___NODE")
+        logo: File @link(from: "logo___NODE")
+        slug: String
       }
     `)
 }

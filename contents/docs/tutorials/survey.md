@@ -2,6 +2,7 @@
 title: Running surveys with no backend
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
 ---
 
 ## Objective

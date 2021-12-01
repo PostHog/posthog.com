@@ -3,6 +3,9 @@ title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/funnels.png
+author: ['yakko-majuri']
+topics:
+    - funnels
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

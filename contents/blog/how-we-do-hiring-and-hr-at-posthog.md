@@ -1,7 +1,7 @@
 ---
 date: 2021-06-23
 title: How we do hiring & HR at PostHog
-author: mo-shehu
+author: ["mo-shehu"]
 rootPage: /blog
 sidebar: Blog
 showTitle: true

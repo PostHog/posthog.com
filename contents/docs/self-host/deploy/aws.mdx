@@ -13,14 +13,15 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info).
+First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info). Follow the "Managed nodes - Linux" guide.  
 
 <ClusterRequirementsSnippet />
 
-> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
 > * for PostgreSQL, take a look at [AWS Aurora](https://aws.amazon.com/rds/aurora/)
 > * for Apache Kafka, take a look at [AWS MSK](https://aws.amazon.com/msk/) and [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [AWS ElastiCache for Redis](https://aws.amazon.com/elasticache/redis) and [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
 > * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
 >
 
@@ -35,9 +36,6 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
-kafka:
-  persistence:
-    size: 20Gi
 ```
 
 
