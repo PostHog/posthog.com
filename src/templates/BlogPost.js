@@ -26,7 +26,7 @@ export default function BlogPost({ data, pageContext }) {
         frontmatter: { authors },
     } = authorsData
     const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
-    const { gitLogLatestDate } = postData?.parent.fields
+    const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const authorDetails = findAuthor(authors)(author && author[0])
     const components = {
         h1: H1,
@@ -53,7 +53,7 @@ export default function BlogPost({ data, pageContext }) {
             />
             <BlogPostLayout
                 blogDate={date}
-                blogUpdatedDate={gitLogLatestDate}
+                blogUpdatedDate={lastUpdated}
                 pageTitle={title}
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
