@@ -1,6 +1,6 @@
 ---
 date: 2021-12-01
-title: Don’t Bother Securing Your Trademarks In The Beginning
+title: Don’t bother securing your trademarks in the beginning
 rootPage: /blog
 sidebar: Blog
 showTitle: true
