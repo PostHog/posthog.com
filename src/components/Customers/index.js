@@ -96,7 +96,7 @@ export default function Customers() {
                                             />
                                         </span>
                                         <div className="relative px-9 py-9 flex flex-col h-full items-start">
-                                            <img src={logo?.publicURL} />
+                                            <img className="max-w-[200px]" src={logo?.publicURL} />
                                             <h3 className="text-2xl mb-24 mt-4">{title}</h3>
                                             <div className="text-red hover:text-red font-bold flex space-x-1 items-center text-[17px] mt-auto">
                                                 <span>Read case study</span>
