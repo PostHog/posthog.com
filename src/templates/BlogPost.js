@@ -8,7 +8,6 @@ import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { findAuthor } from 'lib/utils'
 import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
@@ -16,18 +15,14 @@ import { shortcodes } from '../mdxGlobalComponents'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export default function BlogPost({ data, pageContext }) {
-    const { postData, authorsData } = data
+    const { postData } = data
     const {
         fields: { slug },
         body,
         excerpt,
     } = postData
-    const {
-        frontmatter: { authors },
-    } = authorsData
-    const { date, title, featuredImage, featuredImageType, author, description } = postData?.frontmatter
+    const { date, title, featuredImage, featuredImageType, authors, description } = postData?.frontmatter
     const { gitLogLatestDate } = postData?.parent.fields
-    const authorDetails = findAuthor(authors)(author && author[0])
     const components = {
         h1: H1,
         h2: H2,
@@ -58,7 +53,7 @@ export default function BlogPost({ data, pageContext }) {
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
                 blogArticleSlug={slug}
-                authorDetails={authorDetails}
+                authorDetails={authors}
                 categories={categories}
             >
                 <MDXProvider components={components}>
@@ -72,6 +67,7 @@ export default function BlogPost({ data, pageContext }) {
 export const query = graphql`
     query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
+            id
             body
             excerpt(pruneLength: 150)
             fields {
@@ -89,7 +85,14 @@ export const query = graphql`
                 featuredImage {
                     publicURL
                 }
-                author
+                authors: authorData {
+                    handle
+                    name
+                    role
+                    image
+                    link_type
+                    link_url
+                }
             }
             parent {
                 ... on File {
@@ -99,19 +102,6 @@ export const query = graphql`
                     }
                 }
             }
-        }
-        authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
-            frontmatter {
-                authors {
-                    handle
-                    name
-                    role
-                    image
-                    link_type
-                    link_url
-                }
-            }
-            id
         }
     }
 `
