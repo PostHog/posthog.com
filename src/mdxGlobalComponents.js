@@ -91,6 +91,7 @@ import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
+import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
@@ -194,6 +195,7 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     StarRepoButton,
+    StarUsBanner,
     StartNowButton,
     Structure,
     TableOfContents,
