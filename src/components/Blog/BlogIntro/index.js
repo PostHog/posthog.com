@@ -12,7 +12,7 @@ export function PlainIntro({ pageTitle, blogDate, blogUpdatedDate, authorDetails
                 </p>
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
             </Structure.Section>
-            {authorDetails.length > 0 && (
+            {authorDetails && authorDetails.length > 0 && (
                 <Structure.Section width="xl" className="mb-12">
                     <ul className="list-none m-0 p-0 flex items-center flex-wrap justify-center">
                         {authorDetails.map((author, index) => (

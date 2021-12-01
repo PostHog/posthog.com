@@ -48,7 +48,7 @@ export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, blogUpda
                         titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0 text-white text-2xl md:text-4xl"
                     />
 
-                    {authorDetails.length > 0 && (
+                    {authorDetails && authorDetails.length > 0 && (
                         <div className="w-full max-w-xl mt-2 md:mt-6">
                             <ul className="list-none m-0 p-0 flex items-center flex-wrap">
                                 {authorDetails.map((author, index) => (
