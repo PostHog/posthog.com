@@ -218,6 +218,28 @@ toolsUsed:
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
 
+##### Team
+
+Markdown files located in /contents/team
+
+```markdown
+---
+name: James Hawkins
+jobTitle: Co-Founder & CEO
+headshot: ../images/team/James.png
+github: jamesefhawkins
+country: GB
+startDate: 2019-07-03
+---
+```
+
+- `name`: the name of the team member
+- `jobTitle`: the role of the team member
+- `headshot`: the relative path to the team member's headshot
+- `github`: the team member's GitHub handle
+- `country`: the country the team member resides in
+- `startDate`: the team member's date of hire
+
 ##### Plain
 
 If the file doesn't reside in one of the above folders, it uses the plain template.

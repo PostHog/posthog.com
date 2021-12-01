@@ -34,6 +34,7 @@
         "autoprefixer": "^10.3.1",
         "chart.js": "^2.9.4",
         "cntl": "^1.0.0",
+        "country-code-emoji": "^2.3.0",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
         "dotenv": "^10.0.0",

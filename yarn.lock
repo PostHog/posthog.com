@@ -8045,6 +8045,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+country-code-emoji@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/country-code-emoji/-/country-code-emoji-2.3.0.tgz#17de6ef57964467568a53ae9fb30044371a5055c"
+  integrity sha512-MqmIWr3aucoU/3XZU44e0sz6izAlErqaUYp9/NFzdnzb9TrwwornyW3ws2da5TSnpTUr2qP2840oJW9oNKXCoQ==
+
 cp-file@^7.0.0:
   version "7.0.0"
   resolved "https://registry.npmjs.org/cp-file/-/cp-file-7.0.0.tgz"
