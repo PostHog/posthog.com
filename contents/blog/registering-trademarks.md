@@ -1,17 +1,15 @@
 ---
-date: 2021-11-02
+date: 2021-12-01
 title: Don’t Bother Securing Your Trademarks In The Beginning
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: charles-cook
-featuredImage: ../images/blog/leo-anthias.png
+author: ["charles-cook"]
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 ---
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xui-bm6bBFM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Don't bother securing your trademarks in the early days of your business - wait until you've raised a seed round first.
 
