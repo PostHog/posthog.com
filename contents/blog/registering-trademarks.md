@@ -1,12 +1,12 @@
 ---
-date: 2021-12-01
+date: 2021-11-02
 title: Don’t Bother Securing Your Trademarks In The Beginning
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["charles-cook"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/leo-anthias.png
 featuredImageType: full
 ---
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
