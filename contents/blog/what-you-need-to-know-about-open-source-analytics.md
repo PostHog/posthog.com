@@ -33,13 +33,15 @@ Open source is a licensing model which enables anyone to see and modify the sour
 PostHog is an example of an open-source project, as anyone can access our source code via our [GitHub repo](https://github.com/PostHog/posthog) and we offer a [FOSS version](https://github.com/PostHog/posthog-foss) of PostHog under a permissive MIT license. This means that the only restriction is that a license and copyright notice must be included with all versions of the software.
 
 ## Why is being open-source important in product analytics?
-PostHog’s mission is to help more companies build successful products and the decision to be open source is part of that. We believe we need to change how product analytics works and that the open-source model will enable faster, community-driven progress. 
+PostHog’s mission is to help more companies build successful products and the decision to be open source is part of that. We believe we need to change how product analytics works and that the open-source model will enable faster, better, community-driven progress. 
 
 For example, teams using closed-source analytics tools are often limited on which software they can use or integrate with. An open-source approach removes this issue because teams can add to our source code directly and create new integrations between platforms by themselves. Many popular PostHog plugins were developed by the community, for example. 
 
-An open-source product analytics platform also offers other advantages, such as the ability to influence the product roadmap or enabling users to fix bugs themselves instead of waiting for customer support. If PostHog were to make decisions which the community disagreed with then the users can express that more directly.
+An open-source product analytics platform also offers other advantages, such as the ability to influence the product roadmap or enabling users to fix bugs themselves instead of waiting for customer support. If PostHog were to make decisions which the community disagreed with then the users can express that more directly. 
 
-PostHog also offers a FOSS version of the software, which makes product analytics accessible to smaller teams or individuals - not just large companies on expensive contracts with closed-source providers.
+Being open-source doesn't just offer additional protection to the community - it also better protects the community's users too. This is because open-source platforms can be self-hosted on a team's existing infrastructure, unlike closed-source solutions. Teams which use these closed-source platforms have to share any data they want to analyze with third-parties, such as MixPanel and Amplitude. This data therefore becomes more vulnerable to security breaches, but with an open-source solution such as PostHog the data never has to be shared with anyone. 
+
+Finally, FOSS versions of product analytics can help make such tools and processes accessible to smaller teams or individuals - not just large companies on expensive contracts with closed-source providers. [PostHog offers just such a version](https://posthog.com/pricing), if you're interested!
 
 ## What is the best open-source product analytics platform?
 There are many product analytics platforms to choose from but most of these are closed-source platforms, such as MixPanel or Amplitude. However, we believe that PostHog is not just the best open-source product analytics platform, but the best product analytics platform overall. 
@@ -49,6 +51,3 @@ This is because, in addition to the advantages which come from an open-source mo
 Additionally, PostHog offers a wide range of product analytics tools to help teams get the insights they need. PostHog is the only open-source product analytics platform which offers core analytics tools in addition to features such as session recording and feature flags.
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
-
-
-
