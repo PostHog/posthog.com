@@ -27,6 +27,7 @@ However, if we have no checks in place, we will release quickly but everything w
         * Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough.
         * Each goal should have a single owner.
     * This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+    * As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
 * **Evaluate success:** Review impact of each major milestone and feedback into the planning process
 
 **What about the small stuff?**
