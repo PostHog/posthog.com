@@ -952,11 +952,6 @@
     
 # Manually Added: 2021-11-04
 [[redirects]]
-    from = "/tutorials"
-    to = "/docs/tutorials" 
-    
-# Manually Added: 2021-11-04
-[[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
 
