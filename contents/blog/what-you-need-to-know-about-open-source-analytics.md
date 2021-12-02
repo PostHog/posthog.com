@@ -15,7 +15,7 @@ When you imagine product analytics, you may think of tools built by and for larg
 In this article we’ll explain what product analytics is, what it means for it to be open source and what the advantages are for users in teams of all sizes. 
 
 ## What is product analytics, and why is it used?
-Product analytics is the method of collecting and investigating product data in order to gain insight. You may use these insights to make better decisions about a process or make an existing design more efficient. You may use them to change the type of users you are targeting, or to change your pricing model. Either way, these insights enable you to build better products, faster. 
+Product analytics is the method of collecting and investigating product data in order to gain insight on how to improve the product. You may use these insights to make better decisions about a process or make an existing design more efficient. You may use them to change the type of users you are targeting, or to change your pricing model. Either way, these insights enable you to build better products, faster. 
 
 A typical example of product analytics in action is using a tool such as PostHog to [track users through a funnel in your product or website](/docs/user-guides/funnels), so you can make improvements that increase customer activation. Companies such as [Hasura have used PostHog to improve conversion by 10-20%](/customers/hasura) by doing exactly this!
 
