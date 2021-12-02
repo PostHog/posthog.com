@@ -84,6 +84,23 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
+
+#
+# For DigitalOcean LB (TCP) mode, we need to enable some additional config
+# in the ingress controller in order to get the proper IP address forwarded
+# to our app. Otherwise we'll get the load balancer nodes addresses instead.
+#
+# ref:
+#   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
+#   - https://docs.digitalocean.com/products/networking/load-balancers/
+#
+ingress-nginx:
+  controller:
+    config:
+      use-proxy-protocol: true
+    service:
+      annotations:
+        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 ```
 
 and then run:
@@ -121,6 +138,23 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
+
+#
+# For DigitalOcean LB (TCP) mode, we need to enable some additional config
+# in the ingress controller in order to get the proper IP address forwarded
+# to our app. Otherwise we'll get the load balancer nodes addresses instead.
+#
+# ref:
+#   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
+#   - https://docs.digitalocean.com/products/networking/load-balancers/
+#
+ingress-nginx:
+  controller:
+    config:
+      use-proxy-protocol: true
+    service:
+      annotations:
+        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 ```
 
 #### 2. Install the chart
