@@ -5,15 +5,15 @@ showTitle: true
 ---
 
 ## TL;DR
-Our mission is to “Increase the number of successful products in the world”.
+Our mission is to increase the number of successful products in the world.
 
-We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recording, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
+We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recording, feature flags, and many more features. Within a year, we had thousands of customers using us and we started generating revenue.
 
-We focused on our paid product earlier this year. We quickly hit a milestone for the first 5 reference customers, and we've kept selling since. The next step on our journey is to figure out how to accelerate our top of funnel growth, whilst achieving larger order values from our Enterprise product.
+We focused on our paid product earlier in 2021. We quickly hit a milestone for the first 5 reference customers and we've kept selling since. The next step on our journey is to figure out how to accelerate our top of funnel growth, while achieving larger order values from our Enterprise product.
 
 ## Context
 
-We’ve grown a lot (10s of thousands of sign ups), but it’s clear that the many of our users use us *despite* a bad experience - complex deployment and maintenance, in particular. This is a great problem to have. It means we’re solving a hair on fire problem - product analytics that you can self host.
+We’ve grown a lot - tens of thousands of sign ups - but it’s clear that the many of our users use us *despite* a bad experience, with complex deployment and maintenance a particular issue. This is a great problem to have, as itt means we’re solving a hair on fire problem - product analytics that you can self host.
 
 For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed.
 
@@ -25,23 +25,23 @@ For any company, nothing matters more than product market fit. If we get that ri
 
 **Where do we want to get to?**
 
-In 2026 we will **IPO with $100M ARR.** To achieve this, Posthog will need to be **the standard devtool for building better products**
+In 2026 we will _go public with $100M ARR._ To achieve this, Posthog will need to be _the standard devtool for building better products._
 
 **How do we get there?**
 
-* **Unlock unserved segments:** Build for customers that can’t use cloud offerings because of data control or scale
-* **Grow our community:** Build a strong and successful developer community around Posthog
-* **Convert customers:** Convert our biggest users to paying customers
-* **Go broad:** Build all the tools our customers need to build better products
-* **Build partnerships:** Partner with others to build plugins and deploy our tools
-* **Ride the privacy wave:** Ride the wave of data control triggered by growing in privacy regulation
+* Build for unserved customers that can’t use cloud offerings because of data control or scale
+* Grow a strong and successful developer community around Posthog
+* Convert our biggest users to paying customers
+* Go broad and develop all the tools our customers need to build better products
+* Partner with others to build plugins and deploy our tools
+* Ride the industry wave of increasing data control that has been triggered by growing privacy regulation
 
 
 ### What should we be working on today?
 
 **The mechanics of success**
 
-Revenue is critical for us to IPO** **but we won't set short-term revenue targets. We focus on [metrics within our control that contribute more to our revenue in the long-term.](https://app.posthog.com/dashboard/20464)
+Revenue is critical for us to go public _but we won't set short-term revenue targets_ as revenue is an output metric to several other inputs. Instead, we think it is more appropriate to focus on [metrics within our control that contribute more to our revenue in the long-term.](https://app.posthog.com/dashboard/20464)
 
 * **[Quality signups](https://app.posthog.com/insights/ujGv0WqI?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464):** Volume of quality organizations signing up 
 * **[Conversion to paid](https://app.posthog.com/insights/M5KDFdvX?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22realm%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22cloud%22%5D%2C%22operator%22%3A%22exact%22%7D%5D%7D%2C%7B%22id%22%3A%2212299%22%2C%22name%22%3A%22User%20paid%20on%20cloud%20or%20self%20hosted%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%5D&display=FunnelViz&insight=FUNNELS&interval=week&date_from=-30d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=1&funnel_viz_type=trends&funnel_from_step=0&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464):** Rate at which quality sign-ups become paid customers
@@ -53,36 +53,36 @@ Revenue is critical for us to IPO** **but we won't set short-term revenue target
 
 ### How should we prioritize between competing directions?
 
-While there is value in the items on the right, we value the items on the left more
+While there is value in the items on the right, we value the items on the left more.
 
-**Breadth vs depth of capabilities**
+**Breadth vs. depth of capabilities**
 
-* **Breadth:** Build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate
+* _Breadth_: build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate.
 
-**High Quality Users vs High paying businesses**
+**High quality users vs. high paying businesses**
 
-* **High Quality Users:** Focus on acquiring more high quality users over big ticket contracts to get better feedback and learn faster
+* _High quality users_: focus on acquiring more high quality users over big ticket contracts, so we can get better feedback and learn faster.
 
-**Plugin based platform vs one-stop-shop**
+**Plugin-based platform vs one-stop-shop**
 
-* **Plugin based:** To move faster, look for ways to integrate with the best tools to solve customer problems over building every feature ourselves
+* _Plugin-based platform_: to move faster, look for ways to integrate with the best tools to solve customer problems over building every feature ourselves.
 
-**Self-hosted vs Cloud**
+**Self-hosted vs. Cloud**
 
-* **Self-hosted:** Focus on customers who need to self-host, there’s a huge untapped market and we’re uniquely placed to win
+* _Self-hosted_: focus on customers who need to self-host, as there is a huge untapped market and we’re uniquely placed to win.
 
-**Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs adapt to it**
+**Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
-* **Reject:** We have a single product for ingesting, storing and analyzing data, we create more value by making this easy to self-host than by being a small part of a cloud stack
+* _Reject_: we have a single product for ingesting, storing and analyzing data, and we will create more value for customers by making this easy to self-host than by being a small part of a cloud stack.
 
-## Target audience (for 2021)
+## Target audience for 2021
 
 Our customers are a combination of users, businesses and the products themselves. In order to understand where we should focus our efforts, below is a proposed breakdown of our target audience based on attributes of a product. 
 
-* Needs
+* _Needs_
   * Need to control their user data
   * Need to excel at product led 
-* Haves
+* _Haves_
   * Have budget and savvy engineers are the decision makers
   * Have achieved product market fit
   * Have a central analytics function
