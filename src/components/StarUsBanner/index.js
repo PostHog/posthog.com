@@ -6,8 +6,9 @@ export default function StarUsBanner() {
         <div className="bg-[#F54E00] p-3 text-center">
             <p className="m-0 flex justify-center items-center space-x-3 text-white font-semibold">
                 <span>Star us on GitHub</span>
-                <span className="h-[28px]">
+                <span className="h-[28px] w-[125px]">
                     <GitHubButton
+                        className="text-[#F54E00] hover:text-[#F54E00]"
                         href="https://github.com/posthog/posthog"
                         data-size="large"
                         data-show-count="true"
