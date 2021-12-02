@@ -73,8 +73,7 @@ Leveraging first principles is a great way to understand needs without being bia
 
 Look at your competitor’s products and ask yourself, “Why do they have this feature?”. This will help you identify the problems they were solving for and build a better solution.
 
-Identify core needs through different means, filter out the noise, and focus on the unique problems you can solve better than anyone else. Look for connections between different data sources that are describing the same problem and separate must-solve problems from nice-to-solve ones to prioritize your focus.
-
-PostHog combines two great features for understanding needs by connecting freeform analysis of metrics with qualitative research powered by reviewing session recordings. [Deploy PostHog Free today](https://posthog.com/docs/self-host#deploy).
+### How does PostHog do this?
+Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past and are able to offer insights. 
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
