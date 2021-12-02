@@ -26,7 +26,7 @@ Have an approximate structure for the interview, and vary the questions to get a
 ### How does PostHog do this?
 Gathering user feedback is something we invest in as an on-going activity, regularly reaching out to members of the community and speaking with them directly. Often we record and share these calls internally. 
 
-We also run seperate usability tests with handpicked users when releasing new features. You can find out more about [how we gather user feedback in the PostHog handbook](https://posthog.com/handbook/product/user-feedback).
+We also run separate usability tests with handpicked users when releasing new features. You can find out more about [how we gather user feedback in the PostHog handbook](https://posthog.com/handbook/product/user-feedback).
 
 ## Specifications / Requirements 
 Customers (especially large enterprises) enjoy providing detailed requirements and specifications around user experiences and their product’s performance. As a Product Manager, it’s easy to dismiss these requirements as “prescriptive”, “solutionizing” or “bespoke”, but they’re often a valuable source of insights.
