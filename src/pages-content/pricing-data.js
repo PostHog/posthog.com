@@ -70,8 +70,7 @@ const faqs = [
     },
     {
         q: 'Does session recording impact costs?',
-        a:
-            'Session recording is currently free to use. This might change in the future.',
+        a: 'Session recording is currently free to use. This might change in the future.',
     },
     {
         q: 'How long do you retain data?',

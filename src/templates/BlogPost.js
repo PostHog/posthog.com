@@ -22,7 +22,7 @@ export default function BlogPost({ data, pageContext }) {
         excerpt,
     } = postData
     const { date, title, featuredImage, featuredImageType, authors, description } = postData?.frontmatter
-    const { gitLogLatestDate } = postData?.parent.fields
+    const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const components = {
         h1: H1,
         h2: H2,
@@ -48,7 +48,7 @@ export default function BlogPost({ data, pageContext }) {
             />
             <BlogPostLayout
                 blogDate={date}
-                blogUpdatedDate={gitLogLatestDate}
+                blogUpdatedDate={lastUpdated}
                 pageTitle={title}
                 featuredImage={featuredImage?.publicURL}
                 featuredImageType={featuredImageType}
