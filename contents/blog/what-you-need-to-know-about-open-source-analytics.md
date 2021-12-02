@@ -30,7 +30,7 @@ Product analytics is useful for many different teams within an organization, fro
 ## What is open source software?
 Open source is a licensing model which enables anyone to see and modify the source code within the software. This isn’t the case for most software, which is closed source. There are a variety of open-source licenses, but most open source projects are also distributed for free - this is called Free and Open Source Software (FOSS). 
 
-PostHog is an example of an open-source project, as anyone can access our source code via our GitHub repo and we offer a FOSS version of PostHog under a permissive MIT license. This means that the only restriction is that a license and copyright notice must be included with all versions of the software.
+PostHog is an example of an open-source project, as anyone can access our source code via our [GitHub repo](https://github.com/PostHog/posthog) and we offer a [FOSS version](https://github.com/PostHog/posthog-foss) of PostHog under a permissive MIT license. This means that the only restriction is that a license and copyright notice must be included with all versions of the software.
 
 ## Why is being open-source important in product analytics?
 PostHog’s mission is to help more companies build successful products and the decision to be open source is part of that. We believe we need to change how product analytics works and that the open-source model will enable faster, community-driven progress. 
