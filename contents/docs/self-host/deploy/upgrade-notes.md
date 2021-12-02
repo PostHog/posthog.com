@@ -80,9 +80,9 @@ There are two options:
     ```
     but this is safe to be ignored.
 
-1. You can now moving on with the update as usual:
+1. You can now move on with the Helm update as usual:
     ```
     helm repo update posthog
     helm upgrade --install -f ...
     ```
-    Note: the ClickHouse pod will not be restarted (but the `clickhouse-operator` will) so no downtime is expected as part of this release.
+    Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
