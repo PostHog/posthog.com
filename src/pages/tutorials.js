@@ -1,39 +1,109 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import Checkbox from 'components/Checkbox'
-import { Calendar } from 'components/Icons/Icons'
+import { Calendar, Cards, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import { Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 
-const Tutorial = ({ image, date, url, authors }) => {
+const CardView = ({ data }) => {
     return (
-        <div className="w-full text-black dark:text-white">
-            <div className="flex justify-between items-center mb-2">
-                {authors && (
-                    <ul className="flex space-x-2 list-none p-0 m-0">
-                        {authors.map(({ image, name, id }) => {
-                            return (
-                                <li key={id} className="flex space-x-2 items-center">
-                                    <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
-                                        <img className="absolute w-full h-full inset-0 object-cover" src={image} />
-                                    </div>
-                                    <span className="author text-[15px] font-semibold opacity-50">{name}</span>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
-                <span className="flex space-x-2 items-center ml-auto">
-                    <Calendar className="text-gray" />
-                    <time className="font-semibold opacity-50 text-[13px]">{date}</time>
-                </span>
-            </div>
+        <ul className="list-none p-0 m-0 flex flex-col space-y-20">
+            {data.map((tutorial) => {
+                const {
+                    frontmatter: { featuredImage, authors, title },
+                    parent: {
+                        fields: { date },
+                    },
+                    id,
+                    fields: { slug },
+                } = tutorial
+                return (
+                    <li key={id}>
+                        <div className="w-full text-black dark:text-white">
+                            <div className="flex justify-between items-center mb-2">
+                                {authors && (
+                                    <ul className="flex space-x-2 list-none p-0 m-0">
+                                        {authors.map(({ image, name, id }) => {
+                                            return (
+                                                <li key={id} className="flex space-x-2 items-center">
+                                                    <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
+                                                        <img
+                                                            className="absolute w-full h-full inset-0 object-cover"
+                                                            src={image}
+                                                        />
+                                                    </div>
+                                                    <span className="author text-[15px] font-semibold opacity-50">
+                                                        {name}
+                                                    </span>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                )}
+                                <span className="flex space-x-2 items-center ml-auto">
+                                    <Calendar className="text-gray" />
+                                    <time className="font-semibold opacity-50 text-[13px]">{date}</time>
+                                </span>
+                            </div>
 
-            <Link to={url}>
-                {image ? <GatsbyImage image={getImage(image)} /> : <img width={700} height={441} src="/banner.png" />}
-            </Link>
-        </div>
+                            <Link to={slug}>
+                                {featuredImage ? (
+                                    <GatsbyImage image={getImage(featuredImage)} />
+                                ) : (
+                                    <img width={700} height={441} src="/banner.png" />
+                                )}
+                            </Link>
+                        </div>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+const ListView = ({ data }) => {
+    return (
+        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
+            {data.map((tutorial) => {
+                const {
+                    frontmatter: { featuredImage, authors, title },
+                    parent: {
+                        fields: { date },
+                    },
+                    id,
+                    fields: { slug },
+                } = tutorial
+                return (
+                    <li key={id} className="flex justify-between items-center">
+                        <Link className="font-bold" to={slug}>
+                            {title}
+                        </Link>
+                        <div className="flex-shrink-0">
+                            {authors && (
+                                <ul className="flex space-x-2 list-none p-0 m-0">
+                                    {authors.map(({ image, name, id }) => {
+                                        return (
+                                            <li key={id} className="flex space-x-2 items-center">
+                                                <div className="w-[24px] h-[24px] relative rounded-full overflow-hidden">
+                                                    <img
+                                                        className="absolute w-full h-full inset-0 object-cover"
+                                                        src={image}
+                                                    />
+                                                </div>
+                                                <span className="author text-[15px] font-semibold opacity-50">
+                                                    {name}
+                                                </span>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
+                        </div>
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
 
@@ -46,7 +116,7 @@ export default function Tutorials() {
     const filterableData = {
         Category: categories,
     }
-
+    const [view, setView] = useState('card')
     const [filteredData, setFilteredData] = useState(null)
     const [filters, setFilters] = useState(Object.fromEntries(Object.entries(filterableData).map(([key]) => [key, []])))
     const handleFilterChange = (e, filter, value) => {
@@ -121,33 +191,29 @@ export default function Tutorials() {
                     </nav>
                 </aside>
                 <section className="col-span-2 px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-10 pb-20">
-                    <div className="lg:max-w-[700px]">
-                        <div className="mb-10">
+                    <div
+                        className={
+                            {
+                                card: 'lg:max-w-[700px]',
+                                list: 'max-w-full',
+                            }[view]
+                        }
+                    >
+                        <div className="mb-10 flex justify-between items-center max-w-[700px]">
                             <h1 className="font-bold text-3xl">PostHog tutorials</h1>
+                            <div className="flex space-x-3 items-center">
+                                <button onClick={() => setView('card')}>
+                                    <Cards style={{ color: view === 'card' ? '#F54E00' : '#BFBFBC' }} />
+                                </button>
+                                <button onClick={() => setView('list')}>
+                                    <List style={{ color: view === 'list' ? '#F54E00' : '#BFBFBC' }} />
+                                </button>
+                            </div>
                         </div>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-20">
-                            {(filteredData || data).map((tutorial) => {
-                                const {
-                                    frontmatter: { featuredImage, authors, title },
-                                    parent: {
-                                        fields: { date },
-                                    },
-                                    id,
-                                    fields: { slug },
-                                } = tutorial
-                                return (
-                                    <li key={id}>
-                                        <Tutorial
-                                            title={title}
-                                            image={featuredImage}
-                                            date={date}
-                                            authors={authors}
-                                            url={slug}
-                                        />
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                        {{
+                            card: CardView,
+                            list: ListView,
+                        }[view]({ data: filteredData || data })}
                     </div>
                 </section>
             </div>
