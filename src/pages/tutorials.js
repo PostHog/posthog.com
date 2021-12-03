@@ -1,8 +1,9 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import Checkbox from 'components/Checkbox'
-import { Calendar, Cards, List } from 'components/Icons/Icons'
+import { Calendar, Cards, LargePlus, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
-import { Link, useStaticQuery } from 'gatsby'
+import Link from 'components/Link'
+import { useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 
@@ -216,16 +217,9 @@ export default function Tutorials() {
                     </nav>
                 </aside>
                 <section className="col-span-2 px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-10 pb-20">
-                    <div
-                        className={
-                            {
-                                card: 'lg:max-w-[700px]',
-                                list: 'max-w-full',
-                            }[view]
-                        }
-                    >
-                        <div className="mb-10 flex justify-between items-center max-w-[700px]">
-                            <h1 className="font-bold text-3xl">PostHog tutorials</h1>
+                    <div className="flex justify-between items-center mb-10 ">
+                        <div className="flex justify-between items-center max-w-[700px] w-full">
+                            <h1 className="font-bold text-3xl m-0">PostHog tutorials</h1>
                             <div className="flex space-x-3 items-center">
                                 <button onClick={() => setView('card')}>
                                     <Cards style={{ color: view === 'card' ? '#F54E00' : '#BFBFBC' }} />
@@ -235,6 +229,19 @@ export default function Tutorials() {
                                 </button>
                             </div>
                         </div>
+                        <Link to="/docs/contribute/contribute-to-website" className="flex space-x-2 items-center">
+                            <LargePlus className="text-red" />
+                            <span className="text-[15px] font-bold">New tutorial</span>
+                        </Link>
+                    </div>
+                    <div
+                        className={
+                            {
+                                card: 'lg:max-w-[700px]',
+                                list: 'max-w-full',
+                            }[view]
+                        }
+                    >
                         {{
                             card: CardView,
                             list: ListView,
