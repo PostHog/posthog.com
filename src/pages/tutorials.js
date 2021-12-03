@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 
 const CardView = ({ data }) => {
     return (
-        <ul className="list-none p-0 m-0 flex flex-col space-y-20">
+        <ul className="list-none p-0 m-0 flex flex-col space-y-10 md:space-y-20">
             {data.map((tutorial) => {
                 const {
                     frontmatter: { featuredImage, Contributor, title },
@@ -92,7 +92,7 @@ const ListView = ({ data }) => {
                                                         src={image}
                                                     />
                                                 </div>
-                                                <span className="author text-[15px] font-semibold opacity-50">
+                                                <span className="author text-[15px] font-semibold opacity-50 hidden sm:block">
                                                     {name}
                                                 </span>
                                             </li>
@@ -168,7 +168,7 @@ export default function Tutorials() {
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 700px) 1fr' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
-                <aside className="lg:sticky top-10 flex-shrink-0 w-[177px] justify-self-end pr-8 box-content pt-10 pb-20">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-[177px] justify-self-end px-5 lg:px-8 box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
                         <ul className="list-none p-0 m-0 flex flex-col space-y-4">
                             <li>
@@ -216,10 +216,10 @@ export default function Tutorials() {
                         </ul>
                     </nav>
                 </aside>
-                <section className="col-span-2 px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-10 pb-20">
-                    <div className="flex justify-between items-center mb-10 ">
+                <section className="col-span-2 px-5 lg:px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20">
+                    <div className="flex flex-col-reverse sm:flex-row justify-between items-end sm:items-center mb-10 space-y-4 space-y-reverse sm:space-y-0 sm:space-x-6">
                         <div className="flex justify-between items-center max-w-[700px] w-full">
-                            <h1 className="font-bold text-3xl m-0">PostHog tutorials</h1>
+                            <h1 className="font-bold text-2xl md:text-3xl m-0">PostHog tutorials</h1>
                             <div className="flex space-x-3 items-center">
                                 <button onClick={() => setView('card')}>
                                     <Cards style={{ color: view === 'card' ? '#F54E00' : '#BFBFBC' }} />
@@ -229,7 +229,10 @@ export default function Tutorials() {
                                 </button>
                             </div>
                         </div>
-                        <Link to="/docs/contribute/contribute-to-website" className="flex space-x-2 items-center">
+                        <Link
+                            to="/docs/contribute/contribute-to-website"
+                            className="flex space-x-2 items-center flex-shrink-0"
+                        >
                             <LargePlus className="text-red" />
                             <span className="text-[15px] font-bold">New tutorial</span>
                         </Link>
