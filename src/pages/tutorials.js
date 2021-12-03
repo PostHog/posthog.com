@@ -7,6 +7,27 @@ import { useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 
+const Filter = ({ title, options, onChange }) => {
+    return (
+        <>
+            <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">{title}</h5>
+            <ul className="list-none p-0 m-0 flex flex-col space-y-2">
+                {options.map(({ fieldValue }) => {
+                    return (
+                        <li key={fieldValue} className="flex items-center space-x-2 text-base font-semibold">
+                            <Checkbox
+                                className="text-[14px] opacity-70 font-semibold"
+                                onChange={(e) => onChange(e, title, fieldValue)}
+                                value={fieldValue}
+                            />
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
+
 const CardView = ({ data }) => {
     return (
         <ul className="list-none p-0 m-0 flex flex-col space-y-10 md:space-y-20">
@@ -171,48 +192,17 @@ export default function Tutorials() {
                 <aside className="lg:sticky top-10 flex-shrink-0 w-[177px] justify-self-end px-5 lg:px-8 box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
                         <ul className="list-none p-0 m-0 flex flex-col space-y-4">
-                            <li>
-                                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">
-                                    Category
-                                </h5>
-                                <ul className="list-none p-0 m-0 flex flex-col space-y-2">
-                                    {categories.map(({ category }) => {
-                                        return (
-                                            <li
-                                                key={category}
-                                                className="flex items-center space-x-2 text-base font-semibold"
-                                            >
-                                                <Checkbox
-                                                    className="text-[14px] opacity-70 font-semibold"
-                                                    onChange={(e) => handleFilterChange(e, 'Category', category)}
-                                                    value={category}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </li>
-                            <li>
-                                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">
-                                    Contributor
-                                </h5>
-                                <ul className="list-none p-0 m-0 flex flex-col space-y-2">
-                                    {contributors.map(({ contributor }) => {
-                                        return (
-                                            <li
-                                                key={contributor}
-                                                className="flex items-center space-x-2 text-base font-semibold"
-                                            >
-                                                <Checkbox
-                                                    className="text-[14px] opacity-70 font-semibold"
-                                                    onChange={(e) => handleFilterChange(e, 'Contributor', contributor)}
-                                                    value={contributor}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </li>
+                            {Object.keys(filterableData).map((title) => {
+                                return (
+                                    <li key={title}>
+                                        <Filter
+                                            title={title}
+                                            options={filterableData[title]}
+                                            onChange={handleFilterChange}
+                                        />
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </nav>
                 </aside>
@@ -287,10 +277,10 @@ const query = graphql`
                 }
             }
             categories: group(field: frontmatter___topics) {
-                category: fieldValue
+                fieldValue
             }
             contributors: group(field: frontmatter___authorData___name) {
-                contributor: fieldValue
+                fieldValue
             }
         }
     }
