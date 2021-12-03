@@ -11,7 +11,7 @@ const CardView = ({ data }) => {
         <ul className="list-none p-0 m-0 flex flex-col space-y-20">
             {data.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, authors, title },
+                    frontmatter: { featuredImage, Contributor, title },
                     parent: {
                         fields: { date },
                     },
@@ -22,9 +22,9 @@ const CardView = ({ data }) => {
                     <li key={id}>
                         <div className="w-full text-black dark:text-white">
                             <div className="flex justify-between items-center mb-2">
-                                {authors && (
+                                {Contributor && (
                                     <ul className="flex space-x-2 list-none p-0 m-0">
-                                        {authors.map(({ image, name, id }) => {
+                                        {Contributor.map(({ image, name, id }) => {
                                             return (
                                                 <li key={id} className="flex space-x-2 items-center">
                                                     <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
@@ -67,7 +67,7 @@ const ListView = ({ data }) => {
         <ul className="list-none p-0 m-0 flex flex-col space-y-4">
             {data.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, authors, title },
+                    frontmatter: { featuredImage, Contributor, title },
                     parent: {
                         fields: { date },
                     },
@@ -80,9 +80,9 @@ const ListView = ({ data }) => {
                             {title}
                         </Link>
                         <div className="flex-shrink-0">
-                            {authors && (
+                            {Contributor && (
                                 <ul className="flex space-x-2 list-none p-0 m-0">
-                                    {authors.map(({ image, name, id }) => {
+                                    {Contributor.map(({ image, name, id }) => {
                                         return (
                                             <li key={id} className="flex space-x-2 items-center">
                                                 <div className="w-[24px] h-[24px] relative rounded-full overflow-hidden">
@@ -109,12 +109,13 @@ const ListView = ({ data }) => {
 
 export default function Tutorials() {
     const {
-        tutorials: { nodes, categories },
+        tutorials: { nodes, categories, contributors },
     } = useStaticQuery(query)
 
     const data = nodes
     const filterableData = {
         Category: categories,
+        Contributor: contributors,
     }
     const [view, setView] = useState('card')
     const [filteredData, setFilteredData] = useState(null)
@@ -131,7 +132,6 @@ export default function Tutorials() {
                 newFilters = { ...newFilters, [filter]: [...newFilters[filter], value] }
             }
         }
-
         setFilters(newFilters)
     }
 
@@ -144,7 +144,11 @@ export default function Tutorials() {
                 return (
                     filters[key].length <= 0 ||
                     filters[key].some((filterBy) => {
-                        return item.frontmatter[key]?.includes(filterBy)
+                        if (key === 'Contributor') {
+                            return item.frontmatter[key]?.some((author) => author.name === filterBy)
+                        } else {
+                            return item.frontmatter[key]?.includes(filterBy)
+                        }
                     })
                 )
             })
@@ -165,7 +169,7 @@ export default function Tutorials() {
             >
                 <aside className="lg:sticky top-10 flex-shrink-0 w-[177px] justify-self-end pr-8 box-content pt-10 pb-20">
                     <nav>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-6">
+                        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
                             <li>
                                 <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">
                                     Category
@@ -181,6 +185,27 @@ export default function Tutorials() {
                                                     className="text-[14px] opacity-70 font-semibold"
                                                     onChange={(e) => handleFilterChange(e, 'Category', category)}
                                                     value={category}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">
+                                    Contributor
+                                </h5>
+                                <ul className="list-none p-0 m-0 flex flex-col space-y-2">
+                                    {contributors.map(({ contributor }) => {
+                                        return (
+                                            <li
+                                                key={contributor}
+                                                className="flex items-center space-x-2 text-base font-semibold"
+                                            >
+                                                <Checkbox
+                                                    className="text-[14px] opacity-70 font-semibold"
+                                                    onChange={(e) => handleFilterChange(e, 'Contributor', contributor)}
+                                                    value={contributor}
                                                 />
                                             </li>
                                         )
@@ -232,7 +257,7 @@ const query = graphql`
                 frontmatter {
                     title
                     Category: topics
-                    authors: authorData {
+                    Contributor: authorData {
                         id
                         image
                         name
@@ -253,6 +278,9 @@ const query = graphql`
             }
             categories: group(field: frontmatter___topics) {
                 category: fieldValue
+            }
+            contributors: group(field: frontmatter___authorData___name) {
+                contributor: fieldValue
             }
         }
     }
