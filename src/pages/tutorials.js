@@ -1,17 +1,32 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import Checkbox from 'components/Checkbox'
-import { Calendar, Cards, LargePlus, List } from 'components/Icons/Icons'
+import { Calendar, Cards, Chevron, LargePlus, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
+import { motion } from 'framer-motion'
 import { useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 
 const Filter = ({ title, options, onChange }) => {
+    const [open, setOpen] = useState(false)
     return (
         <>
-            <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">{title}</h5>
-            <ul className="list-none p-0 m-0 flex flex-col space-y-2">
+            <button className="flex justify-between items-baseline w-full" onClick={() => setOpen(!open)}>
+                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">{title}</h5>
+                <span
+                    style={{ transform: `rotate(${open ? '180' : '0'}deg)` }}
+                    className="opacity-40 transition-transform"
+                >
+                    <Chevron />
+                </span>
+            </button>
+            <motion.ul
+                initial={{ height: 0 }}
+                animate={{ height: open ? 'auto' : 0 }}
+                className="list-none p-0 m-0 flex flex-col space-y-2 overflow-hidden"
+                style={{ marginBottom: open ? 20 : 0 }}
+            >
                 {options.map(({ fieldValue }) => {
                     return (
                         <li key={fieldValue} className="flex items-center space-x-2 text-base font-semibold">
@@ -23,7 +38,7 @@ const Filter = ({ title, options, onChange }) => {
                         </li>
                     )
                 })}
-            </ul>
+            </motion.ul>
         </>
     )
 }
@@ -189,9 +204,9 @@ export default function Tutorials() {
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 700px) 1fr' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
-                <aside className="lg:sticky top-10 flex-shrink-0 w-[177px] justify-self-end px-5 lg:px-8 box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[177px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
+                        <ul className="list-none p-0 m-0 flex flex-col">
                             {Object.keys(filterableData).map((title) => {
                                 return (
                                     <li key={title}>
