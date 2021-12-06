@@ -17,7 +17,7 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
 - 80% SEO-optimized content, written by the Marketing team. The purpose of these is to build our domain authority and generate a sustained improvement in posthog.com's keyword rankings. 
 - 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News. 
 
-Joe is currently the main person responsible for our content output, but we are actively hiring a [Technical Content Marketer](https://apply.workable.com/posthog/j/B547BBDE8C/) to lead this area. 
+Joe is currently the main person responsible for our content output, but we will soon onboard a Content Marketer to lead this function.
 
 We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publicly available as it is information that could be beneficial to our competitors. 
 
@@ -61,7 +61,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
-- Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
+- Add the author of the post as an array (not a string) ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
 - Assign the post a category using `categories` in the frontmatter section. The available categories are **General**, **Company & culture**, **Engineering**, **Release notes**, **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
 
   ```

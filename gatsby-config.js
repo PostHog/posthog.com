@@ -25,6 +25,7 @@ module.exports = {
                     md: '(max-width: 1023px)',
                     lg: '(max-width: 1279px)',
                     xl: '(max-width: 1535px)',
+                    '2xl': '(max-width: 2560px)',
                 },
             },
         },

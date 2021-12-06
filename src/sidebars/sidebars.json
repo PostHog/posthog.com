@@ -432,6 +432,10 @@
                         {
                             "name": "Billing",
                             "url": "/handbook/growth/sales/billing"
+                        },
+                        {
+                            "name": "Who we do business with",
+                            "url": "/handbook/growth/sales/who-we-do-business-with"
                         }
                     ]
                 }
@@ -548,6 +552,10 @@
                                     "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
                                 },
                                 {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/clickhouse/resize-disk"
+                                },
+                                {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
                                 }
@@ -564,6 +572,16 @@
                                 {
                                     "name": "Log retention",
                                     "url": "/docs/self-host/runbook/kafka/log-retention"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Postgresql",
+                            "url": "/docs/self-host/runbook/postgresql",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
                         }
@@ -898,6 +916,10 @@
                 {
                     "name": "Overview",
                     "url": "/docs/tutorials"
+                },
+                {
+                    "name": "Getting started with the AARRR framework",
+                    "url": "/docs/tutorials/aarrr-framework"
                 },
                 {
                     "name": "How to safely roll out new features",

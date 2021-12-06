@@ -3,7 +3,7 @@ title: Building an AARRR pirate funnel
 sidebar: Docs
 showTitle: true
 featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
-featuredTutorial: true
+featuredTutorial: false
 author: ["hanna-crombie"]
 topics:
     - funnels
@@ -132,7 +132,7 @@ Now that your basic funnel is created you can save it to your dashboard by click
 
 When starting out with a pirate funnel, it might seem like finding the root of your conversion problems is going to be the hardest part, but this step is easier than you think.
 
-PostHog funnels automatically calculate conversion and dropoff, so you can instantly see where your largest percentage of users drop off in the process. This is your bottleneck.
+PostHog funnels automatically calculate conversion and drop-off, so you can instantly see where your largest percentage of users drop off in the process. This is your bottleneck.
 
 Do look at them relatively of course. Some steps may be unfair to compare to others, especially if you have spent a significant amount of time refining your funnel properties. You may have added additional actions or filters which you may want to experiment with before determining the best place to focus on.
 
@@ -144,7 +144,7 @@ At HogFlix there is a significant drop off at the referral stage. Despite the gr
 
 This is where you want to turn from hard data to soft data. The broad metrics used to create an AARRR function as a kicking off point to let you know where your problem areas are. 
 
-Now it’s time to do a deep dive into the user journey in our bottleneck and figure out where the dropoff comes from. This can be via direct outreach and further data analysis. Perhaps you need to get a survey out to your customers to find out about how they are experiencing this part of the customer journey, or maybe there are already new features which you have in mind to solve the problem.
+Now it’s time to do a deep dive into the user journey in our bottleneck and figure out where the drop-off comes from. This can be via direct outreach and further data analysis. Perhaps you need to get a survey out to your customers to find out about how they are experiencing this part of the customer journey, or maybe there are already new features which you have in mind to solve the problem.
 
 There are a host of other features you can use on the PostHog platform to explore the area. The [toolbar](/docs/tutorials/toolbar) offers a heatmap feature, providing valuable context about how users navigate your website or app, so you can determine how to display information and structure your product in a way that steers users towards that next stage of the funnel.
 
