@@ -13,7 +13,7 @@ We focused on our paid product earlier in 2021. We quickly hit a milestone for t
 
 ## Context
 
-We’ve grown a lot - tens of thousands of sign ups - but it’s clear that the many of our users use us *despite* a bad experience, with complex deployment and maintenance a particular issue. This is a great problem to have, as itt means we’re solving a hair on fire problem - product analytics that you can self host.
+We’ve grown a lot - tens of thousands of sign ups - but it’s clear that the many of our users use us *despite* a bad experience, with complex deployment and maintenance a particular issue. This is a great problem to have, as it means we’re solving a hair-on-fire problem - product analytics that you can self-host.
 
 For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed.
 
