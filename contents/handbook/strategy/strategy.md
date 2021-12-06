@@ -65,7 +65,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **Plugin-based platform vs one-stop-shop**
 
-* _Plugin-based platform_: to move faster, look for ways to integrate with the best tools to solve customer problems over building every feature ourselves.
+* _Plugin-based platform_: integrate with the best services and data sources to solve customer problems faster
 
 **Self-hosted vs. Cloud**
 
