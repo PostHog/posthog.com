@@ -7,23 +7,74 @@ showTitle: true
 # What are groups and how are they different to cohorts?
 Groups are how you track and perform analysis on an aggregation of something. The simplest example of a group is a company, you have users from multiple companies that might use your product - groups allows you do to analytics (and much more) on companies rather than only users - e.g. Daily Active Companies.
 
-Groups are not limited to companies they can be of any type you determine
+Groups are not limited to companies they can be of any type you determine. For example, transactions can be a group. Let's say you have a payment app. A user can do multiple transactions, and you want to track & do analysis on the transaction level, not the user level. You can then create a transaction group type, and each transaction is a group of its own, allowing you to answer question like: How many transactions (not users) finished, and what is the conversion rate per transaction.
 
-Groups differ from cohorts, a cohort is a essentially a list of users, whereas a group represents multiple entities which multiple users might be associated with. Following the company example again from above, you can might a cohort of users who belong to a certain company. But you could create a type of group which represent all companies and the users associated with them.
+Groups differ from cohorts, a cohort is a essentially a list of users, whereas a group represents multiple entities which multiple users might be associated with. Following the company example again from above, you can have a cohort of users who belong to a certain company. But you could create a type of group which represent all companies and the users associated with them.
 
 # What can you do with groups? @marcushyett-ph
-* **Group Analytics** - You can perform any type of analytics (e.g. Trends, Funnels, Retention, etc.) based on groups rather than users (e.g. Number of companies who signed up in the last 28days)
-* **Feature flags** - You can use groups to roll-out your feature flags more consistently, instead of giving different users in the same organization a different experience, roll out the feature flag to whole organizations
+
+* **Group Analytics** - You can perform any type of analytics (e.g. Trends, Funnels, Retention, etc.) based on groups rather than users (e.g. Number of companies who signed up in the last 28 days, Number of total transactions in the past 14 days, etc.)
+* **Feature flags** - You can use groups to roll-out your feature flags more consistently. Instead of giving users in the same organization a different experience, roll out the feature flag to whole organizations.
 
 # How our solution works? @neilkakkar
 
+With groups, there's two important concepts to remember. These are Groups and Group Types.
+
 ## Groups vs Group Types @neilkakkar
-Terminology: group types (e.g. company) vs groups (e.g. Company X whose your client)
+
+The group types determine what kind of groups you have. For example, a `company` is a group type. A `transaction` is a group type. There's a hard limit of 5 group types you can create, so think carefully about what group types you want.
+
+A group is a specific instance of a group type. For example, if `company` is a group type, then `PostHog`, `Tesla`, `IBM`, `SpaceX` are the groups. You can have unlimited groups.
+
+As another example, if `transaction` is a group type, then each `transactionID` is a group.
+
+## Defining groups
+
+Groups are at the event level. If everything is setup correctly, then events that come into PostHog has a group associated with it, which is determined by you. See below for how to set this up. (link)
+
+Thus, there's no new events corresponding to groups: it's simply the events that already exist, aggregated by group values.
+
+A popular misconception is that groups are defined per user. This might make sense if the group type is a company, since a company is a set of users, but it quickly breaks down when you're looking at a transaction group type: here a user can do multiple transactions. Thus, remember that groups are defined on events.
 
 
-## ... @neilkakkar
+Another important concept to remember here is that a single event belongs to only a single group per group type. For example, say you have a `transaction occured` event. And you have 3 group types: `transaction`, `company`, `pineapple_type`.
 
-*Any additional information about groups (like tracked by users), and then an example of the problem mentioned above solved using the new terminology we introduced (to drive the point home re: how to think about groups).*
+Then, this event can belong to at most one group per group type. So, for this event, you can have `transaction = 123456789`, `company = PostHog`, `pineapple_type = British`.
+
+You can't have something like: `transaction = [123456789, 12345678910]`. This is impossible.
+
+You can skip some groups if they don't make sense. For example, `transaction = 123456789`, `company = PostHog`, and no `pineapple_type` is valid as well.
+
+## Group Properties
+
+Every group can have properties associated with it. For example, if you have the `PostHog` group, you could have properties defined on this group, like `company_name`, `revenue`, `user_count`, etc. etc.
+
+As another example, the `transactionID 12345679` group of `transaction` group type can have properties like `transaction_value`, `transaction_method`, etc. associated with them.
+
+These properties can be used in insights similar to how you use person properties.
+## How to think about Insights on groups
+
+Since there's no new events, you can use the same events you've been using for your insights. It's the same funnel you already have, aggregated differently.
+
+The groups determine what your insights aggregate on. For example, consider the funnel with two events: `User signed up -> User did something important` (tk: better example?)
+
+Traditionally, you'd only have unique users in the funnel: Users from any and every company who're using your product and doing something important. Your conversion rate is per user. But what if you're interested in looking at this conversion rate across companies? Say, you're a B2B product and doing something important once per company is good enough. Then the funnel you want to track is `User signed up -> User did something important` aggregated by unique companies, not users.
+
+That's a group aggregation over the company group type. It's the same events, aggregated differently.
+
+What if you wanted to breakdown this funnel by company name? Maybe there's specific companies that never converted, and you want to follow up with them to see what's going wrong. Like mentioned above, if you have group properties defined, you can breakdown by `company_name`. 
+
+TODO: consistent capitalisation
+
+## How to think about Feature Flags with groups
+
+Similar to insights, where you're aggregating events by group type, you can have Feature Flags that work on groups. This allows you to rollout a feature by company, instead of users.
+
+With group properties defined, you can even do things like rolling out a feature to companies where the `user_count` is less than, say, 3. Maybe it's a feature for small teams, or maybe you simply want to minimise impact in the beginning.
+
+TODO: Go deeper into how FF are now modded to run with groups?
+
+TODO: Explain group properties somewhere^^
 
 # How do I get started? @marcushyett-ph
 
@@ -230,3 +281,4 @@ This will show how many organizations have made it through the funnel as opposed
 # Feature Flags @neilkakkar
 
 # Limitations @neilkakkar
+
