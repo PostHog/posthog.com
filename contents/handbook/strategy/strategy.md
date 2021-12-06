@@ -73,7 +73,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
-* _Reject_: we have a single product for ingesting, storing and analyzing data, and we will create more value for customers by making this easy to self-host than by being a small part of a cloud stack.
+* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
 
 ## Target audience for 2021
 
