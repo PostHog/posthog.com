@@ -6,6 +6,9 @@ width: lg
 
 import Features from '../src/components/Home/Features'
 import Customers from '../src/components/Home/Customers'
+import Community from '../src/components/Home/Community'
+import Pipelines from '../src/components/Home/Pipelines'
+import Tutorials from '../src/components/Home/Tutorials'
 
 <Hero
     title="The all-in-one, self-hosted product analytics suite"
@@ -31,7 +34,9 @@ import Customers from '../src/components/Home/Customers'
 
 <Customers />
 
-<Section title="And for good reason" cols={3}>
+<Pipelines />
+
+<Section cols={3}>
     <div>
         <h5>
             <span className="text-yellow">Reduce</span> security risks
@@ -58,5 +63,17 @@ import Customers from '../src/components/Home/Customers'
             By tracking and monitoring the metrics important to you in-house, you can keep a closer eye on your
             customers behaviour and respond accordingly.
         </p>
+    </div>
+</Section>
+
+<Community />
+
+<Section cols={1}>
+    <div>
+        <Tutorials
+            title="Watch PostHog in action"
+            subtitle="See some of the ways PostHog can transform your analytics."
+            cta={{ title: 'Get started', url: '/signup' }}
+        />
     </div>
 </Section>

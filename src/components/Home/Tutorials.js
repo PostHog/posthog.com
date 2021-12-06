@@ -5,14 +5,14 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { heading, section } from './classes'
 
-export default function Tutorials() {
+export default function Tutorials({ title, subtitle, cta }) {
     const {
         tutorials: { nodes },
     } = useStaticQuery(query)
     return (
         <section className={section()}>
-            <h2 className={heading('md')}>Tutorials</h2>
-            <h3 className={heading('sm', 'gray')}>See the power of PostHog in action.</h3>
+            <h2 className={heading('md')}>{title}</h2>
+            <h3 className={heading('sm', 'gray')}>{subtitle}</h3>
             <ul className="list-none p-0 m-0 grid lg:grid-cols-3 mt-9 lg:divide-x divide-y lg:divide-y-0 divide-dashed divide-gray-accent-light lg:border-r lg:border-l border-gray-accent-light border-dashed">
                 {nodes.map((tutorial, index) => {
                     const {
@@ -31,8 +31,8 @@ export default function Tutorials() {
                 })}
             </ul>
             <div className="text-center mt-5">
-                <CallToAction to="/docs/tutorials" type="outline">
-                    Explore all tutorials
+                <CallToAction to={cta?.url} type="outline">
+                    {cta?.title}
                 </CallToAction>
             </div>
         </section>

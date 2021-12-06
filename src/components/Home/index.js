@@ -25,11 +25,21 @@ const Home = () => {
             <Hero />
             <Customers />
             <BeforeAndAfter />
-            <Features />
+            <Features
+                title={
+                    <>
+                        Everything product-led teams need <span className="text-yellow">in one place</span>
+                    </>
+                }
+            />
             <Pipelines />
             <Quote />
             <Community />
-            <Tutorials />
+            <Tutorials
+                title="Tutorials"
+                subtitle="See the power of PostHog in action."
+                cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
+            />
             <CTA />
         </Layout>
     )
