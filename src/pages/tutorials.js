@@ -48,10 +48,7 @@ const CardView = ({ data }) => {
         <ul className="list-none p-0 m-0 flex flex-col space-y-10 md:space-y-20">
             {data.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, Contributor, title },
-                    parent: {
-                        fields: { date },
-                    },
+                    frontmatter: { featuredImage, Contributor, title, date },
                     id,
                     fields: { slug },
                 } = tutorial
@@ -104,10 +101,7 @@ const ListView = ({ data }) => {
         <ul className="list-none p-0 m-0 flex flex-col space-y-4">
             {data.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, Contributor, title },
-                    parent: {
-                        fields: { date },
-                    },
+                    frontmatter: { featuredImage, Contributor, title, date },
                     id,
                     fields: { slug },
                 } = tutorial
@@ -263,7 +257,11 @@ export default function Tutorials() {
 
 const query = graphql`
     query TutorialsQuery {
-        tutorials: allMdx(filter: { fields: { slug: { regex: "/^/docs/tutorials/" } } }, limit: 1000) {
+        tutorials: allMdx(
+            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
+            limit: 1000
+            sort: { fields: frontmatter___date, order: DESC }
+        ) {
             nodes {
                 id
                 fields {
@@ -271,6 +269,7 @@ const query = graphql`
                 }
                 frontmatter {
                     title
+                    date(formatString: "MMM 'YY")
                     Category: topics
                     Contributor: authorData {
                         id
@@ -280,13 +279,6 @@ const query = graphql`
                     featuredImage {
                         childImageSharp {
                             gatsbyImageData(width: 700, height: 441)
-                        }
-                    }
-                }
-                parent {
-                    ... on File {
-                        fields {
-                            date: gitLogLatestDate(formatString: "MMM 'YY")
                         }
                     }
                 }

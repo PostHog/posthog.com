@@ -2,15 +2,16 @@
 title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/feature-flags.png
+featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: true
 author: ['yakko-majuri']
 topics: ['feature flags']
+date: 2020-09-24
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
 
-![](../../images/tutorials/banners/feature-flags.png)
+![](../images/tutorials/banners/feature-flags.png)
 
 Rolling out new features in your product can really be a pain.
 
@@ -47,13 +48,13 @@ It can also be useful to create your feature flags before working on the functio
 
 Click on 'Feature Flags' on the left sidebar in PostHog.
 
-![Feature Flags Page](../../images/tutorials/feature-flags/feature-flags-page.png)
+![Feature Flags Page](../images/tutorials/feature-flags/feature-flags-page.png)
 
 ### Step 2: Creating a new flag
 
 While on the 'Feature Flags' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
 
-![Create Feature Flag](../../images/tutorials/feature-flags/create-flag.png)
+![Create Feature Flag](../images/tutorials/feature-flags/create-flag.png)
 
 ### Step 3: Configuring your flag
 
@@ -185,7 +186,7 @@ A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
-![Trends A/B Testing](../../images/tutorials/feature-flags/trends-ab.png)
+![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
 
 ### Starting with a few users first
 

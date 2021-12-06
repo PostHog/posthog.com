@@ -3,15 +3,16 @@ title: Visualizing user behavior - Toolbar
 sidebar: Docs
 showTitle: true
 featuredTutorial: true
-featuredImage: ../../images/tutorials/banners/toolbar.png
+featuredImage: ../images/tutorials/banners/toolbar.png
 author: ['yakko-majuri']
 topics:
     - heatmaps
+date: 2020-09-24
 ---
 
 _Estimated reading time: 6 minutes_ ☕☕
 
-![Toolbar banner image](../../images/tutorials/banners/toolbar.png)
+![Toolbar banner image](../images/tutorials/banners/toolbar.png)
 
 An underlying purpose of analytics is to answer questions by utilizing data.
 
@@ -29,7 +30,7 @@ Enter the PostHog Toolbar.
 
 Consider the question: _"Where are my users clicking?"_
 
-![Toolbar landing image](../../images/tutorials/toolbar/toolbar-landing-page.png)
+![Toolbar landing image](../images/tutorials/toolbar/toolbar-landing-page.png)
 
 How's that for an answer?
 
@@ -71,7 +72,7 @@ The PostHog Toolbar will only be enabled for you - not your users. Effectively, 
 
 To launch the toolbar, you can just access your website and it should appear for you. If that does not work, you can go over to PostHog and click the 'Launch Toolbar' button on the top left of the sidebar:
 
-![Launch Toolbar](../../images/tutorials/toolbar/launch-toolbar.png)
+![Launch Toolbar](../images/tutorials/toolbar/launch-toolbar.png)
 
 This will prompt you to select the URL you'd like to launch it on (in case you are tracking multiple websites). Once you've clicked the desired URL, you will then be taken to a new tab where your website will load with the toolbar enabled.
 
@@ -85,7 +86,7 @@ The heatmap is the most exciting feature of our toolbar. To use it, just hover o
 
 The process is the same for toggling any functionality on or off. By default, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
 
-![Launch Toolbar](../../images/tutorials/toolbar/toolbar-options.png)
+![Launch Toolbar](../images/tutorials/toolbar/toolbar-options.png)
 
 ### Step 2: Understanding the heatmap
 
@@ -93,7 +94,7 @@ With the heatmap on, you should now see that clickable elements on your website 
 
 Here's another example from our website with the heatmap enabled:
 
-![PostHog Website Footer](../../images/tutorials/toolbar/posthog-footer.png)
+![PostHog Website Footer](../images/tutorials/toolbar/posthog-footer.png)
 
 What the toolbar is doing here is displaying the number of clicks on each of those elements over the past 7 days. 
 
@@ -101,7 +102,7 @@ Numbers at the bottom or top of the screen just indicate that there are more ele
 
 With the heatmap enabled, if you then click on an element, you will also be able to see its ranking on the page and create an action from it.
 
-![Heatmap Selected Element](../../images/tutorials/toolbar/selected-element.png)
+![Heatmap Selected Element](../images/tutorials/toolbar/selected-element.png)
 
 ## Creating actions
 
@@ -117,7 +118,7 @@ To create an action from an element, toggle on 'Inspect' after hovering over the
 
 Example from our website:
 
-![Toolbar inspect element](../../images/tutorials/toolbar/inspect-toolbar.png)
+![Toolbar inspect element](../images/tutorials/toolbar/inspect-toolbar.png)
 
 Just like the heatmap, this will also add an overlay to the elements, albeit a blue one.
 
@@ -125,7 +126,7 @@ Then, if you click on an element, you will be given the option to create an acti
 
 This will open up an action creation modal, like this:
 
-![Toolbar create action](../../images/tutorials/toolbar/toolbar-create-action.png)
+![Toolbar create action](../images/tutorials/toolbar/toolbar-create-action.png)
 
 You should then fill in the name of the action under 'What did your user do?', scroll down, and click 'Create Action'.
 
@@ -171,7 +172,7 @@ However, you can also visualize your actions with the toolbar.
 
 By toggling on 'Actions' (green flag icon), you should have a view of all actions on the page. 
 
-![Toolbar Actions](../../images/tutorials/toolbar/toolbar-actions.png)
+![Toolbar Actions](../images/tutorials/toolbar/toolbar-actions.png)
 
 Here, you can click an element and see all actions that use it. This is a great way of making sure the relevant elements to you have an action associated with them. 
 

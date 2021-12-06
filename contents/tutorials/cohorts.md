@@ -3,11 +3,12 @@ title: Analyzing user behavior with cohorts
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
+date: 2020-11-02
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Cohorts banner image](../../images/tutorials/banners/cohorts.png)
+![Cohorts banner image](../images/tutorials/banners/cohorts.png)
 
 Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 
@@ -61,11 +62,11 @@ These cohorts can then be used in 'Insights' to compare metrics across groups.
 
 To create a cohort, navigate to 'People' -> 'Cohorts' on the sidebar. This will bring you to the Cohorts page, where you can create a cohort by clicking '+ New Cohort':
 
-![Cohorts Page](../../images/tutorials/cohorts/cohorts-page.png)
+![Cohorts Page](../images/tutorials/cohorts/cohorts-page.png)
 
 Clicking the button will open up the following page:
 
-![Create Cohort](../../images/tutorials/cohorts/create-cohort.png)
+![Create Cohort](../images/tutorials/cohorts/create-cohort.png)
 
 Here, you have a few options:
 
@@ -91,7 +92,7 @@ Cohorts can be used in most of PostHog's features, so let's go over some of the 
 
 #### Feature flags
 
-![Feature flags by cohort](../../images/tutorials/cohorts/feature-flags.png)
+![Feature flags by cohort](../images/tutorials/cohorts/feature-flags.png)
 
 You can create [feature flags](/docs/tutorials/feature-flags) that target specific cohorts in order to roll out features to specific user groups first, or simply to see how features perform with different cohorts. 
 
@@ -114,20 +115,20 @@ Regarding business metrics, cohorts are especially useful to determine retention
 
 To answer questions like these, just filter your queries by cohort when using Insights (by clicking 'Add filter'), like so:
 
-![Cohort filter](../../images/tutorials/cohorts/filter.png)
+![Cohort filter](../images/tutorials/cohorts/filter.png)
 
 This will give you the same query as before but only including events from users in that specific cohort.
 
 Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/user-guides/funnels).
 
-![Cohort dashboard funnels](../../images/tutorials/cohorts/dashboard.png)
+![Cohort dashboard funnels](../images/tutorials/cohorts/dashboard.png)
 [_Access a full dashboards tutorial here_](/docs/user-guides/dashboards/)
 
 Finally, you are also able to see how different cohorts perform on the same chart/table when in 'Trends'.
 
 To do so, rather than filtering, you should add a breakdown by cohort, selecting the relevant cohorts to include in the chart:
 
-![Cohort breakdown](../../images/tutorials/cohorts/trends-breakdown.png)
+![Cohort breakdown](../images/tutorials/cohorts/trends-breakdown.png)
 
 This is a useful way of seeing metrics for different cohorts in one single chart, helping you determine what user groups perform better with respect to your KPIs, for example.
 

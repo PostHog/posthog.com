@@ -4,12 +4,13 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 topics: ['funnels']
-featuredImage: ../../images/tutorials/banners/revenue.png
+featuredImage: ../images/tutorials/banners/revenue.png
+date: 2020-11-18
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![Revenue tracking banner image](../../images/tutorials/banners/revenue.png)
+![Revenue tracking banner image](../images/tutorials/banners/revenue.png)
 
 To determine the quality of your product, and if you have a good product/market fit, one of the best metrics you can use is:
 
@@ -63,7 +64,7 @@ In the example above, `_sale_completed` would be called after your existing logi
 
 Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in ['Trends'](/docs/user-guides/trends), and might look something like this:
 
-![Revenue Over Time Chart](../../images/tutorials/revenue/revenue-over-time.png)
+![Revenue Over Time Chart](../images/tutorials/revenue/revenue-over-time.png)
 
 The chart above is targeting a `$purchase` event over the time period of "Last 90 days". However, instead of tracking the total volume of the event, it is tracking a sum of the value of one of its properties, called `purchase_value`.
 
@@ -86,7 +87,7 @@ However, the last four options target numerical properties on events. When track
 
 Here are is an example [dashboard](/docs/user-guides/dashboards) combining charts that use all four of the numerical operations:
 
-![Operations Dashboard Image](../../images/tutorials/revenue/operations-dashboard.png)
+![Operations Dashboard Image](../images/tutorials/revenue/operations-dashboard.png)
 
 ### Total revenue in the last month
 
@@ -96,7 +97,7 @@ To see the total revenue of the previous month, for instance, you can set your t
 
 Here's what a dashboard with these views might look like:
 
-![TR Per Month Image](../../images/tutorials/revenue/tr-month.png)
+![TR Per Month Image](../images/tutorials/revenue/tr-month.png)
 
 > **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build a plugin](/docs/plugins/overview) to automate this.
 
@@ -116,13 +117,13 @@ For example, for a company with the following pricing structure:
 
 We can break down revenue by the property `plan` and see how each plan is performing:
 
-![Plan breakdown image](../../images/tutorials/revenue/plan-breakdown.png)
+![Plan breakdown image](../images/tutorials/revenue/plan-breakdown.png)
 
 If, rather than plans, your company has different revenue sources altogether, you could, for instance, substitute the `plan` property for `source`. This would allow you to have the same view, broken down by source, such as `in_app` or `desktop`.
 
 This can also be visualized as a pie, in order to see more clearly the actual _contribution_ of a plan to TR:
 
-![Pie Plan Breakdown Image](../../images/tutorials/revenue/pie-plan-breakdown.png)
+![Pie Plan Breakdown Image](../images/tutorials/revenue/pie-plan-breakdown.png)
 
 > **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/plugins/currency-normalization) to do so.
 
@@ -141,7 +142,7 @@ To do so, you can set up a funnel with the following two events:
 
 This gives you the following view:
 
-![Conversion To Basic Image](../../images/tutorials/revenue/conversion-to-basic.png)
+![Conversion To Basic Image](../images/tutorials/revenue/conversion-to-basic.png)
 
 The funnel above shows us that, out of all unique users who paid for a plan (had a `$purchase` event), 33.4% pick plan `basic`.
 
@@ -154,7 +155,7 @@ Let's answer the following two questions with funnels:
 
 Here's an example dashboard that answers these questions: 
 
-![Conversion Dashboard image](../../images/tutorials/revenue/funnels-dashboard.png)
+![Conversion Dashboard image](../images/tutorials/revenue/funnels-dashboard.png)
 
 ##### Pageview -> Free trial -> Purchase -> Premium plan
 
@@ -197,7 +198,7 @@ For this, we need to calculate retention. This can be done either on purchases a
 
 Here's an example of a monthly retention table (recurring) for a specific plan:
 
-![Retention growth plan image](../../images/tutorials/revenue/retention-growth.png)
+![Retention growth plan image](../images/tutorials/revenue/retention-growth.png)
 
 Here we can see the retention on the 'Growth' plan, which appears to be improving over time.
 

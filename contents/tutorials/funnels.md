@@ -2,15 +2,16 @@
 title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/funnels.png
+featuredImage: ../images/tutorials/banners/funnels.png
 author: ['yakko-majuri']
 topics:
     - funnels
+date: 2020-09-29
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Funnels Banner Image](../../images/tutorials/banners/funnels.png)
+![Funnels Banner Image](../images/tutorials/banners/funnels.png)
 
 For most products, having a user land on your page is just the beginning. 
 
@@ -32,7 +33,7 @@ _"What percentage of users who visit my website actually sign up?"_
 
 To answer those questions, you should really be using funnels.
 
-![Funnel Example](../../images/tutorials/funnels/insights-funnel.png)
+![Funnel Example](../images/tutorials/funnels/insights-funnel.png)
 
 Above is a simple example of a PostHog funnel. It was made to answer the question:
 
@@ -69,7 +70,7 @@ A standard but very useful funnel is looking at the sign up process from end to 
 
 Our 'Funnels' feature is located in 'Insights'. After navigating to 'Insights' on the sidebar, click on the 'Funnels' tab to get to this page:
 
-![Funnels Page](../../images/tutorials/funnels/funnels-page.png)
+![Funnels Page](../images/tutorials/funnels/funnels-page.png)
 
 ### Step 2: Adding steps to your funnel
 
@@ -89,7 +90,7 @@ Once you're satisfied with all the steps you've added, you can then click 'Calcu
 
 This should yield something like this (without the red rectangles):
 
-![Finished Funnel](../../images/tutorials/funnels/finished-funnel.png)
+![Finished Funnel](../images/tutorials/funnels/finished-funnel.png)
 
 Let's go over the highlighted areas on this image:
 
@@ -121,7 +122,7 @@ The 'History' button is available at every tab on Insights. It lets you go back 
 
 If you click the 'Add to Dashboard' button on the top right, this will open up the following modal:
 
-![Add Funnel to Dashboard](../../images/tutorials/funnels/add-to-dashboard.png)
+![Add Funnel to Dashboard](../images/tutorials/funnels/add-to-dashboard.png)
 
 Here you can set a name for your funnel and add the funnel to one of your dashboards (or create a new one).
 
@@ -148,7 +149,7 @@ PostHog not only provides you with funnels that display aggregate user data, but
 
 You can find this on the bottom-left of the Funnels page by scrolling down:
 
-![Individual user funnels](../../images/tutorials/funnels/individual-users.png)
+![Individual user funnels](../images/tutorials/funnels/individual-users.png)
 
 This way, you are able to take direct action on each user, such as send a follow-up email, or give them a discount. 
 

@@ -3,11 +3,12 @@ title: Tracking single page apps
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
+date: 2020-11-03
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![SPA banner image](../../images/tutorials/banners/spa.png)
+![SPA banner image](../images/tutorials/banners/spa.png)
 
 If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
 
@@ -163,7 +164,7 @@ Additionally, you also have choices when calling `posthog.capture`. You can eith
 
 If you override the default property, your events table will look like this:
 
-![SPA Events Table](../../images/tutorials/spa/events-table.png)
+![SPA Events Table](../images/tutorials/spa/events-table.png)
 
 Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
 

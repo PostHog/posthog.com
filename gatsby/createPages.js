@@ -12,6 +12,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const result = await graphql(`
         {
             allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
@@ -33,6 +34,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 }
             }
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
                 nodes {
                     id
                     headings {
@@ -239,6 +252,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 menu: docsMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
+                tableOfContents,
+            },
+        })
+    })
+
+    result.data.tutorials.nodes.forEach((node) => {
+        const tableOfContents = formatToc(node.headings)
+        createPage({
+            path: replacePath(node.fields.slug),
+            component: TutorialTemplate,
+            context: {
+                id: node.id,
                 tableOfContents,
             },
         })
