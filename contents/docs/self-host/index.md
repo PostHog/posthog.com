@@ -14,13 +14,14 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ### Deployment options
 
+- [Hobby](/docs/self-host/hobby) - for testing or very small hobby projects
 - [AWS](/docs/self-host/deploy/aws)
-- [Azure](/docs/self-host/deploy/azure)
-- [DigitalOcean](/docs/self-host/deploy/digital-ocean)
+- [DigitalOcean](/docs/self-host/deploy/digital-ocean) - likely the simplest option for production use cases
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
-- [Other platforms](/docs/self-host/deploy/other)
 
-If you don't know what to pick [DigitalOcean](/docs/self-host/deploy/digital-ocean) is likely the simplest.
+The following options are in Beta
+- [Azure](/docs/self-host/deploy/azure)
+- [Other platforms](/docs/self-host/deploy/other)
 
 ## Configure
 
