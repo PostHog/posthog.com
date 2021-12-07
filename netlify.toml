@@ -1026,3 +1026,9 @@
 [[redirects]]
     from = "/heatmaps"
     to = "/product/heatmaps"
+
+
+# Added: 2021-12-03
+[[redirects]]
+    from = "/handbook/company/branding"
+    to = "/handbook/company/brand-assets"

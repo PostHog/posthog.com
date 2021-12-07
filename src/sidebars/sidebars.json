@@ -39,6 +39,10 @@
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
+                    "name": "Brand",
+                    "url": "/handbook/strategy/brand"
+                },
+                {
                     "name": "Prioritization",
                     "url": "/handbook/strategy/prioritization"
                 }
@@ -94,8 +98,8 @@
                     "url": "/handbook/company/security"
                 },
                 {
-                    "name": "Branding",
-                    "url": "/handbook/company/branding"
+                    "name": "Brand assets",
+                    "url": "/handbook/company/brand-assets"
                 },
                 {
                     "name": "Team structure",

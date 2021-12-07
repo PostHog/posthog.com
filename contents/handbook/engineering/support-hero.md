@@ -87,18 +87,6 @@ Issues around deployments can be tricky to solve. It's useful to ask for context
 5. Helm chart version
 
 
-## Secondary on-call
-
-Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
-
-### Rotation
-
-- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
-
-PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
-
 ### Papercups
 
 We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
@@ -139,3 +127,17 @@ Papercups is an open source company, so if there are any additional features you
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Papercups). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.
+
+
+
+## Secondary on-call
+
+Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
+
+### Rotation
+
+- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+
+PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
