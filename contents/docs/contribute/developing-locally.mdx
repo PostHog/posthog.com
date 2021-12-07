@@ -146,6 +146,8 @@ DEBUG=1 python3 manage.py migrate
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
+> **Another friendly tip:** You may run into `psycopg2` errors while migrating on a Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this. 
+    
 8. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
 ```bash
