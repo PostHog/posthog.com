@@ -33,7 +33,7 @@ hideAnchor: true
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
+
 
 ## Small teams
 
@@ -75,7 +75,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ### [Growth](growth)
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-- [Sam Winslow](/handbook/company/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
