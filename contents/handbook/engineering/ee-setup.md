@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+This page is deprecated. Please read [Developing Locally](/docs/contribute/developing-locally) instead.
+
 Rough instructions on how to "get the EE version running in all its glory". **Currently for internal use only.**
 
 

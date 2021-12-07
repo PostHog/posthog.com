@@ -9,54 +9,201 @@ showTitle: true
     special handling related to releases.
 </blockquote>
 
-<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen>
+## What does it take?
 
-> **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
+To run PostHog, you must configure and launch the following services
 
-> If you want to run your development instance using **ClickHouse**, check out our [EE setup](/handbook/engineering/ee-setup) section (currently intended for internal use only).
+- PostHog's Django Backend
+- PostHog's NodeJS Plugin Server
+- PostHog's NodeJS Frontend
+- PostgreSQL
+- Redis
+- ClickHouse
+- Kafka
+- Zookeeper
 
-### Clone PostHog
+To make this manageable, we officially support two different approaches:
 
-1. Clone the repository:
+1. [Running everything inside Docker](#run-everything-inside-docker). This is easiest to get started, but can be slow.
+2. [Running the PostHog apps natively, with all the services in Docker](#run-posthog-natively-run-the-services-in-docker). This approach is most practical if you want to debug the code natively.
+
+The instructions below assume you're running MacOS. For Linux, adjust the steps as needed (e.g. use `apt` instead of `brew`).
+
+In case some steps here have fallen out of date, please tell us about it by [submitting a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx).
+
+## Mac OS prerequisites
+
+1. Install xcode developer tools if you haven't already: `xcode-select --install`.
+
+2. Install Homebrew by following the [instructions here](https://brew.sh/).
+
+<blockquote class="warning-note">
+    Note: After installation, make sure to follow the instructions printed in your terminal to add homebrew to your path. Same for <code>nvm</code> and <code>pyenv</code> below.
+</blockquote>
+
+3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and give it **at least 4 GB** of RAM!
+
+4. Add the following lines to `/etc/hosts`:
+
+```
+127.0.0.1 kafka clickhouse
+```
+
+Somehow ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
+
+5. Clone the [PostHog repository](https://github.com/posthog/posthog) locally. All future commands assume you're inside the `posthog/` folder.
 
 ```bash
 git clone https://github.com/PostHog/posthog
+cd posthog
 ```
 
-2. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
+## Run everything inside Docker
 
-### Set up databases
+TODO.
 
-<HiddenSection headingType='h4' title='With Docker' id='dbs-with-docker'>
+## Run PostHog natively, run the services in docker.
 
-1. Make sure you have Docker and Docker Compose installed and Docker Engine is running
-2. Run:
+### Step 1. Backend services
 
-```bash
-docker-compose -f docker-compose.dev.yml up -d redis db
+In this step we will install Postgres, Redis, ClickHouse, Kafka and Zookeeper via Docker.
+
+1. Run the services via Docker:
+
+```
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml pull
+docker-compose -f ee/docker-compose.ch.arm64.yml start zookeeper kafka clickhouse db redis
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml pull
+docker-compose -f ee/docker-compose.ch.yml start zookeeper kafka clickhouse db redis
 ```
 
 > **Friendly tip:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:` likely Docker Engine isn't running.
 
 > **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
 
-</HiddenSection>
+2. Verify via `docker ps` and `docker logs` or via the Docker Desktop Dashboard that all these services are up and running. They should display something like this in their logs:
 
-<HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
+```
+# docker ps
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS        PORTS                                                                                            NAMES
+b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   ee_clickhouse_1
+12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           ee_kafka_1
+432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           ee_db_1
+cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           ee_zookeeper_1
+ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           ee_redis_1
 
-1. Make sure you have [Redis installed](https://redis.io/download) and running. We recommend using version 5 or higher.
+# docker logs ee_db_1 -n 1
+2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
 
-    ```bash
-    # macOS (Homebrew)
-    brew install redis && brew services start redis
-    ```
+# docker logs ee_redis_1 -n 1
+1:M 06 Dec 2021 13:47:08.435 * Ready to accept connections
 
-2. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. We recommend using version 11 or higher. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
+# docker logs ee_clickhouse_1 -n 1
+Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
 
-    ```bash
-    # macOS (Homebrew)
-    brew install postgresql && brew services start postgresql
-    ```
+# docker logs ee_kafka_1
+[2021-12-06 13:47:23,814] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
+
+# docker logs ee_zookeeper_1
+# Because ClickHouse and Kafka connect to Zookeeper, there will be a lot of noise here. That's good.
+```
+
+3. Install Postgres locally anyway.
+
+Even if we plan to run Postgres inside Docker, we need a local copy of Postgres (11+) for its CLI tools (`createdb`) and development libraries/headers. These are required by `pip` to install `psycopg2`.
+
+On Mac OS you would run `brew install postgresql`. This installs both the Postgres server and its tools. DO NOT start the server after running this.
+
+On Linux you often have separate packages, `postgres` for the tools, `postgres-server` for the server, and `postgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up to date list of pacakages.
+
+
+### Step 2. NodeJS Frontend
+
+1. Install nvm by following the [instructions here](https://github.com/nvm-sh/nvm)
+
+2. Install the latest minor release of NodeJS 14 with `nvm install 14`.
+
+3. Install yarn version 1.22 with `npm install -g yarn@1`
+
+4. Install npm packages by running `yarn`
+
+5. Run `yarn start`, which runs in parallel 1) our [esbuild](https://esbuild.github.io/)-powered dev server, 2) [kea-typegen](https://github.com/keajs/kea-typegen), which generates `logicType.ts` files for each `logic.ts` in the codebase.
+
+6. The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`ctrl+c`), discard all changes in the working directory (`git reset --hard`), and run `yarn start` again. You may need to discard all changes once more when the second round of type generation completes.
+
+### Step 3. NodeJS Plugin Server
+
+1. Assuming NodeJS is installed, run `cd plugin-server && yarn` to install all required packages.
+
+### Step 4. Python Backend
+
+1. Install pyenv by following the [instructions here](https://github.com/pyenv/pyenv).
+
+2. Install the latest path release of Python 3.8 with `pyenv install 3.8` (and then selecting the precise version from the list presented). For example:
+
+```
+pyenv install 3.8 # gives a list of versions to install
+pyenv install 3.8.12
+pyenv global 3.8.12
+```
+
+3. Create the virtual environment in current directory called 'env':
+
+```bash
+python3 -m venv env
+```
+
+4. Activate the virtual environment:
+
+```bash
+# for bash/zsh/etc
+source env/bin/activate
+
+# if you're using the fish shell
+source env/bin/activate.fish
+```
+
+5. Install requirements with pip
+
+```bash
+pip install -r requirements.txt
+```
+
+If you are using a Mac with Apple Silicon, the command above will fail due to `grpcio`. To fix it, run this instead:
+
+```bash
+CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+```
+
+With `grpcio` installed, you don't need to specify any flags the next time you `pip install`.
+
+6. If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
+
+```
+brew install libxml2 libxmlsec1 pkg-config
+pip install python3-saml==1.12.0
+```
+
+7. Install dev requirements:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+TODO: this step doesn't work. `typed-asd` has an error that's fixed in 1.5.0, but we have:
+
+- black 19.10b0 depends on typed-ast>=1.4.0
+- mypy 0.790 depends on typed-ast<1.5.0 and >=1.4.0
+
+
+
+------
+
+OLD INSTRUCTIONS BELOW
+
 
 3. Create the Postgres database with the command `createdb posthog` on the shell or by using the Postgres interactive terminal:
 
@@ -77,66 +224,7 @@ docker-compose -f docker-compose.dev.yml up -d redis db
 
 If you ran `brew link postgresql` upon installation, there should be no need to specify the full path to `createuser`.
 
-</HiddenSection>
-
 ### Running PostHog
-
-1. Navigate into the correct folder (project's root directory):
-
-```bash
-cd posthog
-```
-
-2. Create the virtual environment in current directory called 'env':
-
-```bash
-python3 -m venv env
-```
-
-3. Activate the virtual environment:
-
-```bash
-source env/bin/activate
-```
-
-4. Install requirements with pip
-
-```bash
-pip install -r requirements.txt
-```
-
-If you have problems with this step (TLS/SSL error), then run
-
-```bash
-~ brew update && brew upgrade
-```
-
-followed by
-
-```bash
-python3 -m pip install --upgrade pip
-```
-
-then retry the requirements.txt install.
-
-> **Friendly tip:** If you're running into errors with this step on a Mac with an Apple Silicon chip, you may need to set some environment variables before running the install command, like so:
-    
-```bash
-CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
-```
-    
-5. If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
-
-```
-brew install libxml2 libxmlsec1 pkg-config
-pip install python3-saml==1.12.0
-```
-
-6. Install dev requirements:
-
-```bash
-pip install -r requirements-dev.txt
-```
 
 7. Run migrations:
 
@@ -145,22 +233,6 @@ DEBUG=1 python3 manage.py migrate
 ```
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
-
-8. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
-
-```bash
-# macOS (Homebrew)
-brew install yarn
-```
-
-9. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
-
-```bash
-# macOS (Homebrew)
-brew install node
-```
-
-> **Note:** For Apple Silicon support, please use NodeJS >= v15.0
 
 10. Start the backend, worker, and frontend simultaneously with:
     ```bash
@@ -180,8 +252,6 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 </HiddenSection>
 
 <HiddenSection headingType='h2' title='Using Docker'>
-
-> **Note:** Currently Docker does not support Apple Silicon. Please use the virtualenv setup instead.
 
 > **Note:** Developing with Docker may be very slow. If you're planning on doing more than a few simple changes we'd recommend you use the virtualenv setup.
 
