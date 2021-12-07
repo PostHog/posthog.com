@@ -74,6 +74,8 @@ Leveraging first principles is a great way to understand needs without being bia
 Look at your competitor’s products and ask yourself, “Why do they have this feature?”. This will help you identify the problems they were solving for and build a better solution.
 
 ### How does PostHog do this?
-Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past and are able to offer insights. 
+Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
+
+There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have [run MixPanel and PostHog side-by-side to compare performance](https://posthog.com/customers/saga). 
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
