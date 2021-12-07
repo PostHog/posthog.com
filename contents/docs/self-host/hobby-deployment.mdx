@@ -1,0 +1,17 @@
+---
+title: Hobby Deployment
+sidebar: Docs
+showTitle: true
+---
+
+We provide a PostHog "hobby deployment" option for those that want to try out self-hosted PostHog without having to spend a lot on infrastructure costs.
+
+This type of deployment is aimed at users who want to test out the platform or do some minimal tracking (e.g. for a personal blog). It should **not** be used as a production instance for tracking a product with any reasonable amount of scale.
+
+## Quick install on an Ubuntu VM
+
+For a quick install that uses Docker, you can run the following command:
+
+```bash 
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)" 
+``` 
