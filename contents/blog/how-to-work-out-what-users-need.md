@@ -53,7 +53,7 @@ Want to find out more about our community? You can [join the PostHog Slack group
 ## Metrics
 Monitor how people are using your product,  as they may be getting stuck when trying to accomplish something. You can piece together key pieces of information from success metrics to see what differs between users who are successful and those who are not, to shed light on unmet user needs.
 
-You can use PostHog to monitor user behaviors through metrics across your product using our [trends tool](https://posthog.com/product-features/trends).
+You can use PostHog to monitor user behaviors through metrics across your product using our [trends tool](/product-features/trends).
 
 ### How does PostHog do this?
 It's fair to say that metrics are a vital part of the way we work at PostHog and, unsurprisingly, we use our own product to collect such information. We have dedicated dashboards setup for most teams and [a north star metric we use](/blog/north-star-metrics) as a company to stay on track, but we also enable everyone to query the data themselves and discover new insights.
@@ -77,5 +77,3 @@ Look at your competitor’s products and ask yourself, “Why do they have this 
 Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
 
 There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have [run MixPanel and PostHog side-by-side to compare performance](/customers/saga). 
-
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) for more posts on startups, growth, and analytics._
