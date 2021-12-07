@@ -14,6 +14,7 @@ showTitle: true
 To run PostHog, you must configure and launch the following services
 
 - PostHog's Django Backend
+- PostHog's Celery Worker
 - PostHog's NodeJS Plugin Server
 - PostHog's NodeJS Frontend
 - PostgreSQL
@@ -60,7 +61,75 @@ cd posthog
 
 ## Run everything inside Docker
 
-TODO.
+```bash
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml build
+docker-compose -f ee/docker-compose.ch.arm64.yml up
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml build
+docker-compose -f ee/docker-compose.ch.yml up
+```
+
+### Step 1. Start the backend services
+
+The first time you run PostHog, run one of the following sets of commands:
+
+```bash
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml pull
+docker-compose -f ee/docker-compose.ch.arm64.yml start zookeeper kafka clickhouse db redis
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml pull
+docker-compose -f ee/docker-compose.ch.yml start zookeeper kafka clickhouse db redis
+```
+
+Then make sure all five services are running with `docker ps`:
+
+```bash
+# docker ps
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS        PORTS                                                                                            NAMES
+b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   ee_clickhouse_1
+12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           ee_kafka_1
+432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           ee_db_1
+cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           ee_zookeeper_1
+ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           ee_redis_1
+```
+
+### Step 2. Build the dev containers.
+
+```bash
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml build backend frontend plugins worker
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml build backend frontend plugins worker
+```
+
+### Step 3. Run initial migrations
+
+```bash
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml run backend python manage.py migrate
+docker-compose -f ee/docker-compose.ch.arm64.yml run backend python manage.py migrate_clickhouse
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml run backend python manage.py migrate
+docker-compose -f ee/docker-compose.ch.yml run backend python manage.py migrate_clickhouse
+```
+
+### Step 4. Start everything.
+
+```bash
+# Apple Silicon (arm64)
+docker-compose -f ee/docker-compose.ch.arm64.yml start
+
+# x86 systems (amd64)
+docker-compose -f ee/docker-compose.ch.yml start
+```
+
+You can now open http://localhost:8000/ and PostHog should be running.
 
 ## Run PostHog natively, run the services in docker.
 
@@ -70,7 +139,7 @@ In this step we will install Postgres, Redis, ClickHouse, Kafka and Zookeeper vi
 
 1. Run the services via Docker:
 
-```
+```bash
 # Apple Silicon (arm64)
 docker-compose -f ee/docker-compose.ch.arm64.yml pull
 docker-compose -f ee/docker-compose.ch.arm64.yml start zookeeper kafka clickhouse db redis
@@ -168,19 +237,21 @@ source env/bin/activate.fish
 
 5. Install requirements with pip
 
+If you are using a Mac with Apple Silicon, first run the following command to install `grpcio`, which needs special attention:
+
+```bash
+CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install grpcio==1.33.1  14:16:01
+```
+
+Then install all other packages:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-If you are using a Mac with Apple Silicon, the command above will fail due to `grpcio`. To fix it, run this instead:
+6. SAML support.
 
-```bash
-CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
-```
-
-With `grpcio` installed, you don't need to specify any flags the next time you `pip install`.
-
-6. If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
+If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS, run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
 ```
 brew install libxml2 libxmlsec1 pkg-config
@@ -251,7 +322,6 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 
 > **Friendly tip:** Homebrew services can be stopped with `brew services stop <service_name>`
 
-</HiddenSection>
 
 <HiddenSection headingType='h2' title='Using Docker'>
 
@@ -303,7 +373,7 @@ Run `./bin/start-frontend`
 ### Running backend tests
 
 Run `./bin/tests`
-    
+
 To see debug logs (includes e.g. ClickHouse queries), run `./bin/tests --log-cli-level=DEBUG`
 
 ### Running end-to-end Cypress tests
