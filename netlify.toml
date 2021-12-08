@@ -1022,3 +1022,9 @@
     from = "/product-features/plugins"
     to = "/integrations"
     status = 302
+
+
+# Added: 2021-12-08
+[[redirects]]
+    from = "/handbook/company/brand-assets"
+    to = "/handbook/company/branding"
