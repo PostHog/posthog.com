@@ -2,6 +2,7 @@ const replacePath = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
 const Slugger = require('github-slugger')
+const { default: fetch } = require('node-fetch')
 
 module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
@@ -257,14 +258,27 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
+    const tutorialsPageViews = await fetch(
+        'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'
+    ).then((res) => res.json())
+
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
+        const { slug } = node.fields
+        let pageViews
+        tutorialsPageViews.items[0].result.some((insight) => {
+            if (insight.breakdown_value.includes(slug)) {
+                pageViews = insight.count
+                return true
+            }
+        })
         createPage({
             path: replacePath(node.fields.slug),
             component: TutorialTemplate,
             context: {
                 id: node.id,
                 tableOfContents,
+                pageViews,
             },
         })
     })

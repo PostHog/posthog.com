@@ -24,7 +24,7 @@ const SidebarSection = ({ title, children }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-export default function Plain({ data }) {
+export default function Tutorial({ data, pageContext: { pageViews } }) {
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, description, contributors, categories } = pageData?.frontmatter
@@ -38,6 +38,7 @@ export default function Plain({ data }) {
         a: A,
         ...shortcodes,
     }
+
     return (
         <Layout>
             <SEO
@@ -87,7 +88,7 @@ export default function Plain({ data }) {
                             </div>
                         </SidebarSection>
                         <SidebarSection>
-                            <p className="m-0">100 views</p>
+                            <p className="m-0 opacity-50 font-semibold">{pageViews} views</p>
                         </SidebarSection>
                         <SidebarSection title="Filed under...">
                             <ul className="list-none p-0 m-0 flex flex-col items-start space-y-2">
