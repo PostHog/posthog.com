@@ -1,4 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
+import Breadcrumbs from 'components/Breadcrumbs'
 import Chip from 'components/Chip'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { Hero } from 'components/Hero'
@@ -47,12 +48,20 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                 article
                 image={featuredImage?.publicURL}
             />
+            <Breadcrumbs
+                crumbs={[
+                    { title: 'Tutorials', url: '/tutorials' },
+                    { title: title, truncate: true },
+                ]}
+                darkModeToggle
+                className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
+            />
             <div
                 style={{ gridAutoColumns: '1fr minmax(auto, 650px) minmax(max-content, 1fr)' }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start"
+                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
-                <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20 ml-auto">
-                    <div className="max-w-[650px] w-full">
+                <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+                    <div className="lg:max-w-[650px] w-full">
                         <h1 className="text-2xl mb-6">{title}</h1>
                         <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
                         <MDXProvider components={components}>
@@ -60,7 +69,7 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                         </MDXProvider>
                     </div>
                 </article>
-                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 lg:pb-20 mr-auto">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto">
                     <div className="grid divide-y divide-gray-accent-light divide-dashed">
                         <SidebarSection title="Contributors">
                             <ul className="list-none m-0 p-0">
