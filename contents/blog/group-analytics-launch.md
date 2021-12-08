@@ -1,0 +1,31 @@
+---
+date: 2021-12-15
+title: Group analytics are now available in PostHog
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author: ["joe-martin"]
+featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImageType: full
+---
+
+Today, we’re excited to announce that PostHog now supports group analytics for both self-hosted users and those on PostHog Cloud. 
+
+Group analytics are used for tracking and analyzing multiples of any event type within PostHog. Unlike cohorts, which essentially create lists of users, groups can track a far wider range of information because they apply to _events_, rather than users. 
+
+As a result, group analytics are especially useful for certain types of product, such as:
+
+- *B2B products:* If you sell primarily to businesses, groups can be used to track data at a company-level and report on metrics such as Daily Active Companies. 
+
+- *Crypto and financial products:* If your product deals with payments, groups can be used to track events such as transactions and report on metrics such as Daily Payments. 
+
+- *Social media products:* If your product deals with user-generated content (UGC), groups can be used to track subscriptions, as well as report on metrics such as Likes, Follows or Shares. 
+
+Groups work perfectly with all other PostHog tools, enabling you to analyze group data with [funnels](/docs/user-guides/funnels), [trends](/docs/user-guides/trends), [paths](/docs/user-guides/paths) and [retention charts](/docs/user-guides/retention). This opens up the potential for entirely new insights, such as using groups within a funnel analysis to see how a company moves through a sign-up funnel in the same way that you would do for an individual user. 
+
+![View Groups](../../images/docs/user-guides/funnels-group-aggregation.png)
+
+You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as you can now easily give all users within an organization a consistent experience without needing to manually add users to an enabled flag. 
+
+Group analytics has been released as a [premium feature](/pricing) and is available now for both self-hosted and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/groups) and illustrate some popular use-cases. We’d also welcome any feedback you have as an issue in the GitHub repo, or in the [PostHog Slack group](/slack).  
