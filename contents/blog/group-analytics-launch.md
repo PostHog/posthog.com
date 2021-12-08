@@ -20,7 +20,7 @@ As a result, group analytics are especially useful for certain types of product,
 
 - *Crypto and financial products:* If your product deals with payments, groups can be used to track events such as transactions and report on metrics such as Daily Payments. 
 
-- *Social media products:* If your product deals with user-generated content (UGC), groups can be used to track subscriptions, as well as report on metrics such as Likes, Follows or Shares. 
+- *Social media products:* If your product deals with user-generated content (UGC), groups can be used to track submissions, as well as report on metrics such as Likes, Follows or Shares. 
 
 Groups work perfectly with all other PostHog tools, enabling you to analyze group data with [funnels](/docs/user-guides/funnels), [trends](/docs/user-guides/trends), [paths](/docs/user-guides/paths) and [retention charts](/docs/user-guides/retention). This opens up the potential for entirely new insights, such as using groups within a funnel analysis to see how a company moves through a sign-up funnel in the same way that you would do for an individual user. 
 
