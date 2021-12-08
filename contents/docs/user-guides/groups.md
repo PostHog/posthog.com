@@ -81,7 +81,6 @@ What if you wanted to breakdown this funnel by company name? Maybe there's speci
 
 Similar to insights, where you're aggregating events by group type, you can have Feature Flags that work on groups. This allows you to rollout a feature by company, instead of users. Preventing disruption when two users at the same company see a different experience.
 
-With group properties defined, you can even do things like rolling out a feature to `companies` where the `user_count` is less than, say, 3. Maybe it's a feature for small teams, or maybe you simply want to minimise impact in the beginning.
 
 You can use feature flags as you normally would, except you need to select the group type you wish to "Match by", using the drop down by release conditions.
 
