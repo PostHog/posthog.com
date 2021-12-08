@@ -96,26 +96,30 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                                 <Mail />
                             </div>
                         </SidebarSection>
-                        <SidebarSection>
-                            <p className="m-0 opacity-50 font-semibold">{pageViews} views</p>
-                        </SidebarSection>
-                        <SidebarSection title="Filed under...">
-                            <ul className="list-none p-0 m-0 flex flex-col items-start space-y-2">
-                                {categories.map((category) => {
-                                    return (
-                                        <li key={category}>
-                                            <Chip
-                                                className="text-red hover:text-red"
-                                                href={`/tutorials/${category}`}
-                                                size="sm"
-                                            >
-                                                {category}
-                                            </Chip>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </SidebarSection>
+                        {pageViews && (
+                            <SidebarSection>
+                                <p className="m-0 opacity-50 font-semibold">{pageViews} views</p>
+                            </SidebarSection>
+                        )}
+                        {categories?.length > 0 && (
+                            <SidebarSection title="Filed under...">
+                                <ul className="list-none p-0 m-0 flex flex-col items-start space-y-2">
+                                    {categories.map((category) => {
+                                        return (
+                                            <li key={category}>
+                                                <Chip
+                                                    className="text-red hover:text-red"
+                                                    href={`/tutorials/category/${category}`}
+                                                    size="sm"
+                                                >
+                                                    {category}
+                                                </Chip>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </SidebarSection>
+                        )}
                     </div>
                 </aside>
             </div>

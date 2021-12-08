@@ -14,6 +14,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
+    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
+    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const result = await graphql(`
         {
             allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
@@ -56,6 +58,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                }
+                categories: group(field: frontmatter___topics) {
+                    fieldValue
+                }
+                contributors: group(field: frontmatter___authorData___name) {
+                    fieldValue
                 }
             }
             product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
@@ -268,7 +276,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         let pageViews
         tutorialsPageViews.items[0].result.some((insight) => {
             if (insight.breakdown_value.includes(slug)) {
-                pageViews = insight.count
+                pageViews = insight.aggregated_value
                 return true
             }
         })
@@ -279,6 +287,28 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+            },
+        })
+    })
+
+    result.data.tutorials.categories.forEach(({ fieldValue }) => {
+        const slug = `/tutorials/category/${slugify(fieldValue, { lower: true })}`
+        createPage({
+            path: slug,
+            component: TutorialsCategoryTemplate,
+            context: {
+                activeFilter: fieldValue,
+            },
+        })
+    })
+
+    result.data.tutorials.contributors.forEach(({ fieldValue }) => {
+        const slug = `/tutorials/contributor/${slugify(fieldValue, { lower: true })}`
+        createPage({
+            path: slug,
+            component: TutorialsAuthorTemplate,
+            context: {
+                activeFilter: fieldValue,
             },
         })
     })
