@@ -45,6 +45,7 @@ After the sprint planning, each team should have their own session (can be async
 - Divide up the big ambitious goals between the members of the team
 - Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
   - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
+  - If we only 'scrape' the previous goal, we should split 1/2 on a new big goal and 1/2 on finishing off the previous goal and other work
 
 ### What does an awesome big ambitious goal look like?
 
