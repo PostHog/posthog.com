@@ -5,12 +5,12 @@ import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import { motion } from 'framer-motion'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import slugify from 'slugify'
 
-const Filters = ({ activeFilter, view }) => {
+const Filters = ({ activeFilter, view, openFilter }) => {
     const {
         tutorials: { categories, contributors },
     } = useStaticQuery(filterQuery)
@@ -32,7 +32,14 @@ const Filters = ({ activeFilter, view }) => {
             {filterableData.map(({ title, path, options }) => {
                 return (
                     <li key={title}>
-                        <Filter view={view} title={title} path={path} options={options} activeFilter={activeFilter} />
+                        <Filter
+                            openFilter={openFilter}
+                            view={view}
+                            title={title}
+                            path={path}
+                            options={options}
+                            activeFilter={activeFilter}
+                        />
                     </li>
                 )
             })}
@@ -40,8 +47,11 @@ const Filters = ({ activeFilter, view }) => {
     )
 }
 
-const Filter = ({ title, options, activeFilter, path, view }) => {
-    const [open, setOpen] = useState(options.some(({ fieldValue }) => fieldValue === activeFilter))
+const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
+    const [open, setOpen] = useState(
+        openFilter === title || options.some(({ fieldValue }) => fieldValue === activeFilter)
+    )
+
     return (
         <>
             <button className="flex justify-between items-baseline w-full" onClick={() => setOpen(!open)}>
@@ -61,12 +71,14 @@ const Filter = ({ title, options, activeFilter, path, view }) => {
             >
                 {options.map(({ fieldValue }) => {
                     const url = `${path}/${slugify(fieldValue, { lower: true })}`
+                    const active = activeFilter === fieldValue
                     return (
                         <li key={fieldValue} className="flex items-center space-x-2 text-base font-semibold">
                             <Chip
-                                state={{ view }}
-                                active={activeFilter === fieldValue}
-                                href={url}
+                                active={active}
+                                onClick={() =>
+                                    navigate(active ? '/tutorials' : url, { state: { view, openFilter: title } })
+                                }
                                 size="sm"
                                 className="text-[14px] font-semibold"
                                 text={fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}
@@ -209,7 +221,7 @@ export default function Tutorials({
             >
                 <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[177px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
-                        <Filters view={view} activeFilter={activeFilter} />
+                        <Filters openFilter={location?.state?.openFilter} view={view} activeFilter={activeFilter} />
                     </nav>
                 </aside>
                 <section className="h-full col-span-2 px-5 lg:px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20">
