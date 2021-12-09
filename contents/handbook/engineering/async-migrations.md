@@ -20,18 +20,6 @@ Now, while we can execute such changes to PostHog Cloud "manually" (i.e. James G
 
 As a result, we needed to create a system capable of safely and efficiently managing migrations that need to happen asynchronously.
 
-## Why did we write this system from scratch?
-
-As a provider of a product that users can self-host, we needed a bespoke solution that interoperates well with our particular tech stack and requirements, such as:
-
-1. The ability to run asynchronous tasks using a system already in use (Celery)
-2. Accounting for both databases we have in use (Postgres and ClickHouse) and their subsequent migrations
-3. Accounting for our EE codebase
-4. The ability for self-hosted users to manage and monitor migrations easily 
-5. Accounting for our particular deployment options
-6. Allowing logical branching (splitting code paths) in the future
-7. Extensibility to support future needs we might have for long-running operations
-
 ## How do async migrations work?
 
 ### Writing an async migration
