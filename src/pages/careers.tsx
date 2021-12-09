@@ -1,18 +1,18 @@
-import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-import { CareersHero } from '../components/Careers/CareersHero'
-import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
-import { WhyWereHere } from '../components/Careers/WhyWereHere'
-import { Transparency } from '../components/Careers/Transparency'
-import { InterviewProcess } from '../components/Careers/InterviewProcess'
-import { Benefits } from '../components/Careers/Benefits'
-import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
-import { OpenRoles } from '../components/Careers/OpenRoles'
 import { GetStartedModal } from 'components/GetStartedModal'
+import Layout from 'components/Layout'
+import { StaticImage } from 'gatsby-plugin-image'
+import React from 'react'
+import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
+import { Benefits } from '../components/Careers/Benefits'
+import { CareersHero } from '../components/Careers/CareersHero'
+import { InterviewProcess } from '../components/Careers/InterviewProcess'
+import { OpenRoles } from '../components/Careers/OpenRoles'
+import '../components/Careers/styles/index.scss'
+import { Transparency } from '../components/Careers/Transparency'
+import { WhyWereHere } from '../components/Careers/WhyWereHere'
+import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
-import Layout from 'components/Layout'
-import '../components/Careers/styles/index.scss'
 
 const IndexPage = () => {
     return (
@@ -45,7 +45,7 @@ const IndexPage = () => {
                         <StaticImage
                             width={100}
                             height={100}
-                            className="rounded-full bg-red"
+                            imgClassName="rounded-full bg-red"
                             alt={`Charles Cook - Business Operations`}
                             src="../components/TeamQuote/images/Charles.png"
                         />
@@ -70,7 +70,7 @@ const IndexPage = () => {
                         <StaticImage
                             width={100}
                             height={100}
-                            className="rounded-full bg-yellow"
+                            imgClassName="rounded-full bg-yellow"
                             alt={`Kunal Pathak - Growth Engineer`}
                             src="../components/TeamQuote/images/Kunal.png"
                         />
@@ -97,7 +97,7 @@ const IndexPage = () => {
                         <StaticImage
                             width={100}
                             height={100}
-                            className="rounded-full bg-blue"
+                            imgClassName="rounded-full bg-blue"
                             alt={`Eric Duong - Software Engineer`}
                             src="../components/TeamQuote/images/Eric.png"
                         />
@@ -123,7 +123,7 @@ const IndexPage = () => {
                         <StaticImage
                             width={100}
                             height={100}
-                            className="rounded-full bg-tan"
+                            imgClassName="rounded-full bg-tan"
                             alt={`Eltje Lange - People & Talent`}
                             src="../components/TeamQuote/images/Eltje.png"
                         />

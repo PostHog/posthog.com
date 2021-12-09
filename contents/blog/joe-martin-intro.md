@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: mo-shehu
+author: ["mo-shehu"]
 featuredImage: ../images/blog/joe-martin-intro.png
 featuredImageType: full
 ---

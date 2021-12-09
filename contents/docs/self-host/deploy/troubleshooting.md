@@ -128,7 +128,16 @@ TooManyConnections: too many connections
 
 ## How do I connect to ClickHouse?
 
-1. Connect to the `chi-posthog-posthog-0-0-0` pod:
+> **Tip:** Find out your pod names with `kubectl get pods -n posthog`
+
+1. Find out your ClickHouse user and password from the web pod:
+
+    ```shell
+    kubectl exec -n posthog -it <your-posthog-web-pod> \
+    -- sh -c 'echo user:$CLICKHOUSE_USER password:$CLICKHOUSE_PASSWORD'
+    ```
+
+3. Connect to the `chi-posthog-posthog-0-0-0` pod:
 
     ```shell
     kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash 
@@ -139,7 +148,7 @@ TooManyConnections: too many connections
     > **Note:** You're connecting to your production database, proceed with caution!
 
     ```shell
-    clickhouse-client
+    clickhouse-client -d posthog --user <user_from_step_1> --password <password_from_step_1>
     ```
 
 ## How do I restart all pods for a service?

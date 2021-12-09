@@ -2,6 +2,9 @@
 title: Measuring retention and tracking churn
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/retention.png
+
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

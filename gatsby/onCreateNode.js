@@ -6,6 +6,8 @@ const uniqBy = require('lodash.uniqby')
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
+const GitUrlParse = require('git-url-parse')
+const slugify = require('slugify')
 
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
@@ -29,7 +31,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
                     const imageUrl = author && author.avatar_url
-                    let fileNode =
+                    const fileNode =
                         imageUrl &&
                         (await createRemoteFileNode({
                             url: imageUrl,
@@ -47,6 +49,52 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 })
             )
             node.contributors = contributorsNode
+        }
+    }
+    if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
+        const { name, owner } = GitUrlParse(node.url)
+        const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+            },
+        }).then((res) => res.json())
+
+        const markdown =
+            download_url &&
+            (await createRemoteFileNode({
+                url: download_url,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            }))
+        if (markdown) {
+            node.markdown___NODE = markdown.id
+            node.slug = `/integrations/${slugify(node.name, { lower: true })}`
+        }
+        const { default_branch } = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+            },
+        }).then((res) => res.json())
+        const imageURL = `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/logo.png`
+        let image
+        try {
+            image = await createRemoteFileNode({
+                url: imageURL,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            })
+        } catch (e) {
+            // Ignore
+        }
+
+        if (image) {
+            node.logo___NODE = image && image.id
         }
     }
 }

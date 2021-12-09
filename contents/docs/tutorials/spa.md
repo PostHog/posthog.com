@@ -2,6 +2,8 @@
 title: Tracking single page apps
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/spa.png
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

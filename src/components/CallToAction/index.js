@@ -79,6 +79,7 @@ export const CallToAction = ({
     className,
     external,
     state = {},
+    event,
 }) => {
     const url = to || href
     return (
@@ -88,6 +89,7 @@ export const CallToAction = ({
             className={button(type, width, className, size)}
             onClick={onClick}
             to={url}
+            event={event}
         >
             {children}
         </Link>

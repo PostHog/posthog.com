@@ -1,7 +1,7 @@
 ---
 date: 2021-06-25
 title: A non-coder's thoughts on an 'Everybody Codes' culture
-author: joe-martin
+author: ["joe-martin"]
 rootPage: /blog 
 sidebar: Blog 
 showTitle: true 

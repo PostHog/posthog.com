@@ -17,6 +17,14 @@ First, we need to set up a Kubernetes cluster (see the official Azure [documenta
 
 <ClusterRequirementsSnippet />
 
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+>
+> * for PostgreSQL, take a look at [Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql)
+> * for Apache Kafka, take a look at [Apache Kafka in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-introduction) and [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/) and [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
+>
+
 ## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
@@ -28,9 +36,6 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
-kafka:
-  persistence:
-    size: 20Gi
 ```
 
 ### Installing the chart

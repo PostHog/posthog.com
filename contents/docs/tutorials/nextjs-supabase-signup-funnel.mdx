@@ -2,12 +2,17 @@
 title: Building and measuring a sign up funnel with Next.js, Supabase, and PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/supabase-nextjs-signup-funnel/signup-funnel-conversion-posthog.png
+featuredImage: ../../images/tutorials/banners/nextjs-supabase.png
+author: ['leggetter']
+topics:
+    - funnels
+    - user paths
+    - session recordings
 ---
 
 _Estimated reading time: 20 minutes_ ☕☕☕
 
-![Signup Funnel conversion with PostHog](../../images/tutorials/supabase-nextjs-signup-funnel/signup-funnel-conversion-posthog.png)
+![Signup Funnel conversion with PostHog](../../images/tutorials/nextjs-supabase.png)
 
 With the number of software frameworks and services available to help with developer productivity and feature building, it's never been a better time to be a software developer. One of most important things you'll have to build, whether building a SaaS, developer tool, or consumer app, is a sign up flow that begins on a landing page and ideally results in a successful sign up. The purpose of this sign up flow is to get as many real users through to being successfully signed up on your app or platform. So, it's important that you can measure whether your sign up flow is converting and where any potential sign ups are dropping out of that funnel.
 
@@ -17,9 +22,9 @@ In this tutorial, we'll create a simple sign up flow in a Next.js app, starting 
 
 The application in this tutorial is built entirely upon open-source technologies:
 
-- [Next.js](https://nextjs.org/) is feature rich, Node.js open-source React framework for building modern web apps.
-- [Supabase](https://supabase.io/) is an open-source alternative to Firebase offering functionality such as a Postgres database, authentication, realtime subscriptions and storage.
-- [PostHog](/) is an open-source product analytics platform with features including feature flags, session recording, analysis of trends, funnels, user paths, and more.
+-   [Next.js](https://nextjs.org/) is feature rich, Node.js open-source React framework for building modern web apps.
+-   [Supabase](https://supabase.io/) is an open-source alternative to Firebase offering functionality such as a Postgres database, authentication, realtime subscriptions and storage.
+-   [PostHog](/) is an open-source product analytics platform with features including feature flags, session recording, analysis of trends, funnels, user paths, and more.
 
 To follow this tutorial along, you need to have:
 
@@ -53,7 +58,7 @@ Installing packages. This might take a couple of minutes.
 Initialized a git repository.
 
 Success! Created nextjs-supabase-signup-funnel at /Users/leggetter/posthog/git/nextjs-supabase-signup-funnel
-```  
+```
 
 You'll be prompted for a name for your app and the files will be downloaded into a directory with that name. The directory structure of your app will look as follows:
 
@@ -78,15 +83,15 @@ You'll be prompted for a name for your app and the files will be downloaded into
     └── initSupabase.js
 ```
 
-- `components/Auth.js` is the sign up, login, magic link, and forgot password component that makes use of Supabase Auth.
-- `lib/UserContext.js` provides functionality to get the current user from within a component wrapped in a `<UserContext />`, if a user is logged in.
-- `pages/_app.js` a Next.js [custom app component](https://nextjs.org/docs/advanced-features/custom-app) used to initialize all pages.
-- `pages/api/*` serverless API endpoints used within the Supabase authentication.
-- `pages/auth.js` is the authentication page that uses the `Auth` component.
-- `pages/profile.js` is a page used to demonstrate server-side rendering.
-- `.env.local.example` environment variables/configuration.
-- `styles.css` basic styling.
-- `utils/initSupabase.js` initializes a [Supabase client](https://supabase.io/docs/reference/javascript/supabase-client) used to interact with Supabase.
+-   `components/Auth.js` is the sign up, login, magic link, and forgot password component that makes use of Supabase Auth.
+-   `lib/UserContext.js` provides functionality to get the current user from within a component wrapped in a `<UserContext />`, if a user is logged in.
+-   `pages/_app.js` a Next.js [custom app component](https://nextjs.org/docs/advanced-features/custom-app) used to initialize all pages.
+-   `pages/api/*` serverless API endpoints used within the Supabase authentication.
+-   `pages/auth.js` is the authentication page that uses the `Auth` component.
+-   `pages/profile.js` is a page used to demonstrate server-side rendering.
+-   `.env.local.example` environment variables/configuration.
+-   `styles.css` basic styling.
+-   `utils/initSupabase.js` initializes a [Supabase client](https://supabase.io/docs/reference/javascript/supabase-client) used to interact with Supabase.
 
 Now we understand the basic structure of the bootstrapped application, let's get it up and running.
 
@@ -108,8 +113,8 @@ You'll then be presented with a page showing **Project API keys** and **Project 
 
 Update the contents of `.env.local` as follows:
 
-- Update the `NEXT_PUBLIC_SUPABASE_URL` value to be the URL from **Project Configuration**
-- Update the `NEXT_PUBLIC_SUPABASE_ANON_KEY` value to be the API key tagged with `anon` and `public` from **Project API keys**
+-   Update the `NEXT_PUBLIC_SUPABASE_URL` value to be the URL from **Project Configuration**
+-   Update the `NEXT_PUBLIC_SUPABASE_ANON_KEY` value to be the API key tagged with `anon` and `public` from **Project API keys**
 
 Next, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
 
@@ -161,60 +166,54 @@ curl -d https://api.awesomeapi.dev/data/{id}
 `
 
 const Index = () => {
-  return (
-    <div style={{ maxWidth: '520px', margin: '96px auto', fontSize: "14px" }}>
+    return (
+        <div style={{ maxWidth: '520px', margin: '96px auto', fontSize: '14px' }}>
+            <nav>
+                <ul>
+                    <li className="logo">
+                        <Link href="/">
+                            <a>Awesome API</a>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/auth">
+                            <a>
+                                <button>SignUp</button>
+                            </a>
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
 
-        <nav>
-            <ul>
-                <li className="logo">
-                    <Link href="/">
-                        <a>Awesome API</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/auth">
-                        <a>
-                            <button>
-                                SignUp
-                            </button>
-                        </a>
-                    </Link>
-                </li>
-            </ul>
-        </nav>
+            <header>
+                <h1 className="logo">Awesome API</h1>
+                <h2>Instantly build awesome functionality</h2>
+                <Link href="/auth">
+                    <a>
+                        <button>SignUp</button>
+                    </a>
+                </Link>
+            </header>
 
-        <header>
-            <h1 className="logo">Awesome API</h1>
-            <h2>Instantly build awesome functionality</h2>
-            <Link href="/auth">
-                <a>
-                    <button>
-                        SignUp
-                    </button>
-                </a>
-            </Link>
-        </header>
+            <main>
+                <h2>
+                    <code>POST</code> something Awesome
+                </h2>
+                <pre>
+                    <code>{curlPostCmd.trim()}</code>
+                </pre>
 
-        <main>
-            <h2><code>POST</code> something Awesome</h2>
-            <pre>
-                <code>
-                    {curlPostCmd.trim()}
-                </code>
-            </pre>
+                <h2>
+                    <code>GET</code> something Awesome
+                </h2>
+                <pre>
+                    <code>{curlGetCmd.trim()}</code>
+                </pre>
+            </main>
 
-            <h2><code>GET</code> something Awesome</h2>
-            <pre>
-                <code>
-                    {curlGetCmd.trim()}
-                </code>
-            </pre>
-        </main>
-
-        <footer>©️Awesome API 2021</footer>
-
-    </div>  
-  )
+            <footer>©️Awesome API 2021</footer>
+        </div>
+    )
 }
 
 export default Index
@@ -233,7 +232,16 @@ Now that a landing page is in place we have all the assets required for a basic 
 import signUpFlowAnimation from '../../images/tutorials/supabase-nextjs-signup-funnel/supabase-signup-flow.gif'
 
 <center>
-  <img src={signUpFlowAnimation} style={{width: "575px", borderRadius: "10px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 20px 20px", marginBottom: "60px"}} alt="Supabase Next.js sign up flow animation" />
+    <img
+        src={signUpFlowAnimation}
+        style={{
+            width: '575px',
+            borderRadius: '10px',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 20px 20px',
+            marginBottom: '60px',
+        }}
+        alt="Supabase Next.js sign up flow animation"
+    />
 </center>
 
 ## Integrate with PostHog
@@ -263,7 +271,7 @@ Create a new file, `utils/initPostHog.js`, and within it add code to initialize 
 import posthog from 'posthog-js'
 
 export const initPostHog = () => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
         posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
             api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         })
@@ -314,13 +322,13 @@ Now, restart your application so it picks up the new config in `.env.local` and 
 
 Here's how some of the events can tie in to the flow we're trying to build:
 
-| Step                                                            | Event                                | Url / Screen                    |
-| --------------------------------------------------------------- | ------------------------------------ | --------------------------------|
-| 1. User lands on the main website landing page                  | Pageview                             | locahost:3000/                  |
-| 2. User clicks on one of the sign up buttons                    | clicked button with text "SignUp"    | locahost:3000/                  |
-| 3. User enters their details to sign up and submits the form    | submitted form                       | localhost:3000/auth             |
-| 4. User receives registration verification email                | _no event_                           | _outside of app_                |
-| 5. User clicks the link in the email and successfully signs up  | _no event_                           | localhost:3000/auth             |
+| Step                                                           | Event                             | Url / Screen        |
+| -------------------------------------------------------------- | --------------------------------- | ------------------- |
+| 1. User lands on the main website landing page                 | Pageview                          | locahost:3000/      |
+| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | locahost:3000/      |
+| 3. User enters their details to sign up and submits the form   | submitted form                    | localhost:3000/auth |
+| 4. User receives registration verification email               | _no event_                        | _outside of app_    |
+| 5. User clicks the link in the email and successfully signs up | _no event_                        | localhost:3000/auth |
 
 From the above table, you can see that we can track everything up until the sign up form submission.
 
@@ -368,13 +376,13 @@ Now that we have all the events for our sign up flow we can define a funnel to a
 
 First, let's recap the events in the funnel and include the new `loggedIn` event:
 
-| Step                                                            | Event                                | Url / Screen                    |
-| --------------------------------------------------------------- | ------------------------------------ | --------------------------------|
-| 1. User lands on the main website landing page                  | Pageview                             | locahost:3000/                  |
-| 2. User clicks on one of the sign up buttons                    | clicked button with text "SignUp"    | locahost:3000/                  |
-| 3. User enters their details to sign up and submits the form    | submitted form                       | localhost:3000/auth             |
-| 4. User receives registration verification email                | _no event_                           | _outside of app_                |
-| 5. User clicks the link in the email and successfully signs up  | loggedIn                             | localhost:3000/auth             |
+| Step                                                           | Event                             | Url / Screen        |
+| -------------------------------------------------------------- | --------------------------------- | ------------------- |
+| 1. User lands on the main website landing page                 | Pageview                          | locahost:3000/      |
+| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | locahost:3000/      |
+| 3. User enters their details to sign up and submits the form   | submitted form                    | localhost:3000/auth |
+| 4. User receives registration verification email               | _no event_                        | _outside of app_    |
+| 5. User clicks the link in the email and successfully signs up | loggedIn                          | localhost:3000/auth |
 
 To begin defining a funnel click on the **New Insight** left-hand menu item within PostHog and select the **Funnels** tab.
 
@@ -392,7 +400,7 @@ A funnel visualization won't appear at this point because a funnel must have mor
 
 ### Step 2 - User clicks SignUp button
 
-To add the second step, click either of the **Add funnel step** buttons. Change the event to **Autocapture** since the event we're looking to make use of was one [autocaptured](/docs/integrate/client/js#autocapture) by the PostHog JS SDK. Then, set a filter. When you click the filter icon this time, select the **Elements** tab and select the **Text** property. 
+To add the second step, click either of the **Add funnel step** buttons. Change the event to **Autocapture** since the event we're looking to make use of was one [autocaptured](/docs/integrate/client/js#autocapture) by the PostHog JS SDK. Then, set a filter. When you click the filter icon this time, select the **Elements** tab and select the **Text** property.
 
 ![Step 2 - user clicks sign up button filter on element text](../../images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked.png)
 

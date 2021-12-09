@@ -172,8 +172,8 @@
                         ],
                         "footerLinks": [
                             {
-                                "title": "Plugins",
-                                "url": "/plugins"
+                                "title": "Integrations",
+                                "url": "/integrations"
                             },
                             {
                                 "title": "Build your own plugin",
@@ -229,7 +229,7 @@
                                         "url": "/docs/user-guides/feature-flags"
                                     },
                                     {
-                                        "title": "Session recordings",
+                                        "title": "Session recording",
                                         "url": "/docs/user-guides/session-recording"
                                     }
                                 ]
@@ -331,10 +331,14 @@
                     },
                     {
                         "title": "Careers",
-                        "description": "<p>Discover what it's like to work at PostHog and why we're unlike any company you've ever worked for.</p><p><strong>We're hiring!</strong></p>",
+                        "description": "",
                         "link": {
                             "title": "Visit Careers page",
                             "url": "/careers"
+                        },
+                        "component": {
+                            "position": "bottom",
+                            "name": "Jobs"
                         }
                     }
                 ]

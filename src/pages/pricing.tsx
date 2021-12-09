@@ -24,8 +24,8 @@ const PricingNew = (): JSX.Element => {
             <section className="mt-12 md:mt-24 px-5">
                 <h1 className={heading()}>Pricing</h1>
                 <h2 className="my-12 text-lg text-center">
-                    <span className="opacity-50">All plans include</span> <span className="text-yellow">unlimited</span>{' '}
-                    events, tracked users, <span className="opacity-50">and</span> teammates.
+                    <span className="opacity-50">All plans include</span> event autocapture, tracked users,{' '}
+                    <span className="opacity-50">and</span> teammates.
                 </h2>
 
                 <PricingTable showScaleByDefault={hash === SHOW_SCALE_HASH} />

@@ -1,11 +1,12 @@
 import cntl from 'cntl'
 import { DarkModeToggle } from 'components/DarkModeToggle'
+import Logo from 'components/Logo'
 import { Link } from 'gatsby'
 import React from 'react'
 
 export interface CrumbProps {
     url?: string
-    title: string
+    title: string | JSX.Element
     className?: string
     truncate?: boolean
     linkColor?: string
@@ -18,6 +19,7 @@ interface BreadcrumbsProps {
     children?: JSX.Element | JSX.Element[]
     className?: string
     linkColor?: string
+    logo?: boolean
 }
 
 const crumbText = (classes = '') => cntl`
@@ -68,11 +70,13 @@ export default function Breadcrumbs({
     children,
     className = '',
     linkColor,
+    logo,
 }: BreadcrumbsProps): JSX.Element {
     return (
         <ul
             className={`list-none p-0 m-0 flex border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b ${className}`}
         >
+            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" color={linkColor} noText />} />}
             {children ||
                 (crumbs &&
                     crumbs.map((crumb, index) => {

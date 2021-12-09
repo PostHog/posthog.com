@@ -1,11 +1,11 @@
 ---
-date: 2021-11-28
+date: 2021-10-28
 title: HIPAA compliant analytics with PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: marcus-hyett
+author: ["marcus-hyett"]
 featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: standard
 ---

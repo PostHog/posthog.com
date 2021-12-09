@@ -2,6 +2,8 @@
 title: Analyzing user behavior with cohorts
 sidebar: Docs
 showTitle: true
+author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/cohorts.png
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
