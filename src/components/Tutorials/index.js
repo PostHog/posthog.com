@@ -1,6 +1,6 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import Chip from 'components/Chip'
-import { Calendar, Cards, Chevron, LargePlus, List } from 'components/Icons/Icons'
+import { Calendar, Cards, Chevron, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
@@ -131,7 +131,7 @@ const ListView = ({ data }) => {
                     fields: { slug },
                 } = tutorial
                 return (
-                    <li key={id} className="flex justify-between items-center">
+                    <li key={id} className="flex justify-between items-start">
                         <Link className="font-bold" to={slug}>
                             {title}
                         </Link>
@@ -201,22 +201,8 @@ export default function Tutorials({
                                 </button>
                             </div>
                         </div>
-                        <Link
-                            to="/docs/contribute/contribute-to-website"
-                            className="flex space-x-2 items-center flex-shrink-0"
-                        >
-                            <LargePlus className="text-red" />
-                            <span className="text-[15px] font-bold">New tutorial</span>
-                        </Link>
                     </div>
-                    <div
-                        className={
-                            {
-                                card: 'lg:max-w-[700px]',
-                                list: 'max-w-full',
-                            }[view]
-                        }
-                    >
+                    <div className="lg:max-w-[700px]">
                         {{
                             card: CardView,
                             list: ListView,
