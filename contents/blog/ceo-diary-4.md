@@ -1,6 +1,6 @@
 ---
 date: 2021-12-09
-title: How come your website is so nice?
+title: "How come your website is so nice?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -12,17 +12,17 @@ featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 ---
 
-""How come your website is so nice?"
+"How come your website is so nice?"
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.
 
 ## Figure out if design matters
 
-PostHog follows bottom-up adoption. This means our users find us online, install, hopefully add their team and then reach out to buy our paid version. We're very different to our competitors like this.
+PostHog follows bottom-up adoption. This means our users find us online, install, hopefully add their team and then reach out to buy our paid version. We're very different from our competitors in this way.
 
 This means that design is key. Our website and product are our storefront - not a sales team. It needs to be one of our core competencies.
 
-Good design for product-led companies on your "marketing" website (for want of a better word) signifies a high quality product experience. Accept that you'll be judged, and make this an advantage not a failure mode.
+Good design for product-led companies on your "marketing" website (for lack of a better word) signifies a high quality product experience. Accept that you'll be judged, and use this to your advantage.
 
 ## Hiring the right people - what Stripe taught me
 
@@ -37,16 +37,16 @@ PostHog focused on getting these two things done. We made sure we had people tha
 
 ## Treat your website as a product, but not at first
 
-We see so many websites, it's easy to build on autopilot... Before you know it you're Googling "how to center a div in a div", and adding testimonials and Calls To Action.
+We see so many websites, it's easy to build on autopilot... Before you know it you're Googling "how to center a div in a div", and adding testimonials and calls to action.
 
 This is a good way to get something mediocre built very fast - which is what you want on day one.
 
 Once you've got some consistency and a sense of brand, start thinking from a user's perspective. This is what we did to think of our website and docs as a product:
 
-1. **Start with why**: e.g. The mission of our company and our motivation for building a website and docs to help us achieve it
-2. **Who’s it for**: e.g. Break down the people who might come to our website / docs into segments and prioritize one that looks like it has the biggest opportunity, try and use some qualitative and quantitative data where we have it
-3. **What do they need:** e.g. Looking at the segment we’re focussing on, what are their needs from our website and docs and which are the most important to solve, try and use some qualitative and quantitative data where we have it
-4. **How could we solve the needs:** e.g. Brainstorm potential solutions to the highest priority needs
+1. **Start with why**: the mission of our company and our motivation for building a website and docs to help us achieve it
+2. **Who’s it for**: break down the people who might come to our website/docs into segments and prioritize one that looks like it has the biggest opportunity, try and use some qualitative and quantitative data where we have it
+3. **What do they need:** looking at the segment we’re focusing on, what are their needs from our website and docs and which are the most important to solve, try and use some qualitative and quantitative data where we have it
+4. **How could we solve the needs:** brainstorm potential solutions to the highest priority needs
 
 You can go even further - what do acquisition, activation, retention, referral and revenue look like for your website or your docs? Then you know you're actually solving needs.
 
