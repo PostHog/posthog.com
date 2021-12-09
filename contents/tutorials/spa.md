@@ -8,8 +8,6 @@ date: 2020-11-03
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![SPA banner image](../images/tutorials/banners/spa.png)
-
 If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
 
 This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website. 

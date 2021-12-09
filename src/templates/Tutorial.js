@@ -26,7 +26,7 @@ const SidebarSection = ({ title, children }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-export default function Tutorial({ data, pageContext: { pageViews } }) {
+export default function Tutorial({ data, pageContext: { pageViews }, location }) {
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, description, contributors, categories } = pageData?.frontmatter
@@ -76,14 +76,19 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                             <ul className="list-none m-0 p-0">
                                 {contributors.map(({ image, id, name }) => {
                                     return (
-                                        <li key={id} className="flex space-x-2 items-center">
-                                            <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
-                                                <img
-                                                    className="absolute w-full h-full inset-0 object-cover"
-                                                    src={image}
-                                                />
-                                            </div>
-                                            <span className="author text-[14px] font-semibold opacity-50">{name}</span>
+                                        <li key={id}>
+                                            <Link
+                                                className="flex space-x-2 items-center"
+                                                to={`/tutorials/contributors/${slugify(name, { lower: true })}`}
+                                            >
+                                                <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
+                                                    <img
+                                                        className="absolute w-full h-full inset-0 object-cover"
+                                                        src={image}
+                                                    />
+                                                </div>
+                                                <span className="author text-[14px] font-semibold">{name}</span>
+                                            </Link>
                                         </li>
                                     )
                                 })}
@@ -91,10 +96,36 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                         </SidebarSection>
                         <SidebarSection title="Share">
                             <div className="opacity-50 flex space-x-3 items-center">
-                                <Facebook />
-                                <Twitter className="w-[32px] h-[32px]" />
-                                <LinkedIn className="w-[32px] h-[32px]" />
-                                <Mail />
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
+                                    href={`https://www.facebook.com/sharer/sharer.php?u=${location.href}`}
+                                >
+                                    <Facebook />
+                                </a>
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
+                                    href={`https://twitter.com/intent/tweet?url=${location.href}`}
+                                >
+                                    <Twitter className="w-[32px] h-[32px]" />
+                                </a>
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
+                                    href={`https://www.linkedin.com/shareArticle?url=${location.href}`}
+                                >
+                                    <LinkedIn className="w-[32px] h-[32px]" />
+                                </a>
+                                <a
+                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
+                                    href={`mailto:?subject=${location.href}`}
+                                >
+                                    <Mail />
+                                </a>
                             </div>
                         </SidebarSection>
                         {pageViews && (

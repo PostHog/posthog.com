@@ -9,8 +9,6 @@ date: 2021-08-02
 
 _Estimated reading time: 7 minutes_ ☕☕
 
-![Actions banner image](../images/tutorials/banners/actions.png)
-
 One of the features we're very proud of at PostHog is event autocapture.
 
 Autocapture is great because it ensures you don't miss out on any data that could potentially be relevant to your product. If you restructure your frontend, for example, autocapture will continue to collect relevant events without you needing to update your codebase each time. 

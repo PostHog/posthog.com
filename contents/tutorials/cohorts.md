@@ -8,8 +8,6 @@ date: 2020-11-02
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Cohorts banner image](../images/tutorials/banners/cohorts.png)
-
 Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 
 This happens for a variety of reasons, including software, user profiles, accessibility needs, culture, understanding of the product, individual goals, among many other variables.

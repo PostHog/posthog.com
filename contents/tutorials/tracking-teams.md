@@ -8,8 +8,6 @@ date: 2021-04-08
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![Revenue tracking banner image](../images/tutorials/banners/user-model.png)
-
 When using PostHog or any other product analytics tool, there are two key entities that underpin all of your analytics: events and users.
 
 Every event that you capture is associated with a user, which generally corresponds to a person.

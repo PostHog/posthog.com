@@ -8,8 +8,6 @@ date: 2020-11-04
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Retention banner image](../images/tutorials/banners/retention.png)
-
 For most businesses, retention is one of the top metrics to track and use to inform decisions.
 
 Think about it: if you try to fill a bucket of water with holes in it, it doesn't matter how much water you put in, the bucket will never get full.

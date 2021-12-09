@@ -10,8 +10,6 @@ date: 2020-11-17
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![B2B Tutorial Banner Image](../images/tutorials/banners/b2b.png)
-
 If you run a B2B business, it is especially important to track group usage of your product, since, by definition, you have multiple clearly-defined groups as your clients. 
 
 Since usage may vary from company to company in your clients list, digging deeper into how these different teams and businesses use your product is essential to developing a platform that meets the use-case of your core audience well.

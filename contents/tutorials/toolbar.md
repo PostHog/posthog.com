@@ -12,8 +12,6 @@ date: 2020-09-24
 
 _Estimated reading time: 6 minutes_ ☕☕
 
-![Toolbar banner image](../images/tutorials/banners/toolbar.png)
-
 An underlying purpose of analytics is to answer questions by utilizing data.
 
 _"Who's using my website?"_ 

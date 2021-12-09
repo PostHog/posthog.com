@@ -11,8 +11,6 @@ date: 2020-09-29
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Funnels Banner Image](../images/tutorials/banners/funnels.png)
-
 For most products, having a user land on your page is just the beginning. 
 
 After all, a pageview isn't worth much if it doesn't lead to anything. 

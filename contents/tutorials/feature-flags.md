@@ -11,8 +11,6 @@ date: 2020-09-24
 
 _Estimated reading time: 7 minutes_ ☕☕
 
-![](../images/tutorials/banners/feature-flags.png)
-
 Rolling out new features in your product can really be a pain.
 
 As a company that is growing fast and [consistently putting out new functionality](/blog/we-ship-whenever), we know this very well. 

@@ -3,6 +3,7 @@ import Chip from 'components/Chip'
 import { Calendar, Cards, Chevron, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
+import { SEO } from 'components/seo'
 import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -66,7 +67,7 @@ const Filter = ({ title, options, activeFilter, path }) => {
                                 active={activeFilter === fieldValue}
                                 href={url}
                                 size="sm"
-                                className="text-[14px] opacity-70 font-semibold"
+                                className="text-[14px] font-semibold"
                                 text={fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}
                             />
                         </li>
@@ -199,6 +200,7 @@ export default function Tutorials({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
+            <SEO title="PostHog tutorials - PostHog" />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 700px) 1fr' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"

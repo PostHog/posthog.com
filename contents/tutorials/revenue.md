@@ -10,8 +10,6 @@ date: 2020-11-18
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![Revenue tracking banner image](../images/tutorials/banners/revenue.png)
-
 To determine the quality of your product, and if you have a good product/market fit, one of the best metrics you can use is:
 
 _Are people paying for it?_
