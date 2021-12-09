@@ -13,10 +13,10 @@ showTitle: true
 
 To run PostHog, you must run the following services:
 
-- PostHog's Django Backend
-- PostHog's Celery Worker
-- PostHog's NodeJS Plugin Server
-- PostHog's NodeJS Frontend
+- PostHog's Django backend
+- PostHog's Celery worker
+- PostHog's Node.js plugin server
+- PostHog's Node.js frontend
 - PostgreSQL
 - Redis
 - ClickHouse
@@ -25,66 +25,68 @@ To run PostHog, you must run the following services:
 
 The guide below explains how to get them all running.
 
-We officially support only one way of running PostHog, where all services (Postgres, Redis, ClickHouse, Kafka, Zookeeper) run via Docker, with PostHog's apps running natively on your system.
-For a while, we used to support running the PostHog apps themselves in Docker, but recently deprecated this approach because 1) that made everything really really slow, 2) you need to install nodejs and python locally anyway if you want to commit any code due to our pre-commit hooks (black & prettier). Thus to simplify instructions, we consolidated on the steps below.
+The supported way of running PostHog locally is:
+- all services (Postgres, Redis, ClickHouse, Kafka, Zookeeper) run via Docker
+- PostHog itself runs on the host (your system)
 
-The instructions below assume you're running MacOS. For Linux, adjust the steps as needed (e.g. use `apt` instead of `brew`).
+> It is also technically possible to run PostHog in Docker, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
+
+The instructions below assume you're running macOS. For Linux, adjust the steps as needed (e.g. use your distro's package manager instead of `brew`).
 
 In case some steps here have fallen out of date, please tell us about it by [submitting a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx).
 
-## Mac OS prerequisites
+## macOS prerequisites
 
-1. Install xcode developer tools if you haven't already: `xcode-select --install`.
+1. Install Xcode developer tools if you haven't already: `xcode-select --install`.
 
-2. Install Homebrew by following the [instructions here](https://brew.sh/).
+2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
 
 <blockquote class="warning-note">
-    Note: After installation, make sure to follow the instructions printed in your terminal to add homebrew to your path. Same for <code>nvm</code> and <code>pyenv</code> below.
+    Note: After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your `$PATH`. Otherwise the command line will not know about packages installed with `brew`. Same for `nvm` and `pyenv` below.
 </blockquote>
 
-3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and give it **at least 4 GB of RAM** (6GB if you can afford it) and 8 CPU cores.
+3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and 4 CPU cores.
 
-4. Add the following lines to `/etc/hosts`:
+4. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
 
-```
-127.0.0.1 kafka clickhouse
+```bash
+sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
 ```
 
 Somehow ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
-5. Clone the [PostHog repository](https://github.com/posthog/posthog) locally. All future commands assume you're inside the `posthog/` folder.
+5. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
 ```bash
-git clone https://github.com/PostHog/posthog
-cd posthog
+git clone https://github.com/PostHog/posthog && cd posthog
 ```
 
-## Run PostHog natively, run the services in docker.
+## Get things up and running
 
-### Step 1. Backend services
+### Step 1: backend services
 
 In this step we will install Postgres, Redis, ClickHouse, Kafka and Zookeeper via Docker.
 
 First, run the services via Docker:
 
 ```bash
-# Apple Silicon (arm64)
+# ARM (arm64) systems (e.g. Apple Silicon)
 docker-compose -f ee/docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
 docker-compose -f ee/docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
 
-# x86 systems (amd64)
+# x86 (amd64) systems
 docker-compose -f ee/docker-compose.ch.yml pull zookeeper kafka clickhouse db redis
 docker-compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse db redis
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, likely Docker Engine isn't running.
 
-> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means you need to add more RAM to Docker.
+> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in Docker Desktop settings.
 
-> **Friendly tip 3:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
+> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall).
 
 
-Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop Dashboard) that all these services are up and running. They should display something like this in their logs:
+Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
 
 ```
 # docker ps
@@ -113,28 +115,23 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 
 > **Friendly tip:** Kafka is currently the only x86 container used, and might segfault randomly when running on Apple Silicon. Restart it when that happens.
 
-Finally, install Postgres locally anyway.
+Finally, install Postgres locally. Even planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
-Even if we plan to run Postgres inside Docker, we need a local copy of Postgres (min v11, recommended v14) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
-
-On Mac OS you would run:
-
+On macOS you can just run:
 ```bash
 brew install postgresql
 ```
-
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
-On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up to date list of pacakages.
+On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of pacakages.
 
+### Step 2: Node.js frontend
 
-### Step 2. NodeJS Frontend
+1. Install nvm: https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
-1. Install nvm by following the [instructions here](https://github.com/nvm-sh/nvm)
+2. Install the latest Node.js 14 (the version used by PostHog in production) with `nvm install 14`. You can start using it in the current shell with `nvm use 14`.
 
-2. Install the latest minor release of NodeJS 14 with `nvm install 14`.
-
-3. Install yarn version 1.22 with `npm install -g yarn@1`
+3. Install yarn with `npm install -g yarn@1`
 
 4. Install npm packages by running `yarn`
 
@@ -142,11 +139,11 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 6. The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`ctrl+c`), discard all changes in the working directory (`git reset --hard`), and run `yarn start` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### Step 3. NodeJS Plugin Server
+### Step 3: Node.js plugin server
 
-1. Assuming NodeJS is installed, run `cd plugin-server && yarn` to install all required packages.
+1. Assuming NodeJS is installed, run `yarn --cwd plugin-server` to install all required packages.
 
-### Step 4. Python Backend
+### Step 5: Python backend
 
 1. Install pyenv by following the [instructions here](https://github.com/pyenv/pyenv).
 
@@ -204,7 +201,7 @@ pip install python3-saml==1.12.0
 pip install -r requirements-dev.txt
 ```
 
-### Step 5. Run database migrations
+### Step 5: Run database migrations
 
 ```bash
 export DEBUG=1
@@ -220,64 +217,42 @@ python manage.py migrate_clickhouse
 
 > **Another friendly tip:** You may run into `psycopg2` errors while migrating on a Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
-### Step 6. Run PostHog
+### Step 6: Start PostHog
 
-Start the backend, worker, and frontend simultaneously with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
 ```bash
 export KAFKA_HOSTS=kafka:9092
 ./bin/start
 ```
 
-Now open [http://localhost:8000](http://localhost:8000) to see the app.
+Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
-To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it, so you can see some data on dashboard.
+To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
 
-<br />
-<hr />
+## Testing
 
-## Running PostHog
+For a PostHog PR to be merged, all tests must be green.
 
-PostHog consists of the following apps:
+Run backend tests locally simply with:
+```bash
+pytest
+```
+You can narrow down the run to only files under matching paths:
+```bash
+pytest posthog/test/test_entity_model.py
+```
+Or to only test cases with matching function names:
+```bash
+pytest posthog/test/test_entity_model.py -k test_inclusion
+```
+To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DEBUG`.
 
-- PostHog's Django Backend
-- PostHog's Celery Worker
-- PostHog's NodeJS Plugin Server
-- PostHog's NodeJS Frontend
+For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
 
-You can run each of them separately (a common scenario when debugging services separately), or all at once.
-
-### Running backend, worker, plugin server and frontend all together
-
-This script runs the below three scripts concurrently, and automatically sets `DEBUG=1`.
-
-Run `KAFKA_HOSTS=kafka:9092 ./bin/start`
-
-### Running backend separately (Django)
-
-Run `DEBUG=1 ./bin/start-backend`
-
-### Running background worker (Celery) and Plugin Server (NodeJS) separately
-
-Run `DEBUG=1 KAFKA_HOSTS=kafka:9092 ./bin/start-worker`
-
-### Running frontend separately (React)
-
-Run `yarn start`
-
-### Running backend tests
-
-Run `./bin/tests`
-
-To see debug logs (includes e.g. ClickHouse queries), run `./bin/tests --log-cli-level=DEBUG`
-
-### Running end-to-end Cypress tests
-
-Run `./bin/e2e-test-runner`
-
-### Debugging the backend in PyCharm
+#### Debugging the backend in PyCharm
 
 With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
@@ -292,16 +267,9 @@ KAFKA_HOSTS=kafka:9092;
 DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 ```
 
-### Let's spin it up!
-
-1. Run `./bin/start-frontend`
-2. Run `./bin/start-worker`
-3. Set some breakpoints
-4. In the top toolbar, select the config you just created and click the green bug icon. This runs `python manage.py runserver` with extra parameters that enable debugging.
-
 ## Testing ingestion and feature flags
 
-> **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance.
+> **Note:** When developing locally with environment variable `DEBUG=1` (which enables a setting called `SELF_CAPTURE`), all analytics inside your local PostHog instance is based on that instance itself – more specifically, the currently selected project. This means that your activity is immediately reflected in the current project, which is potentially useful for testing features – for example, which feature flags are currently enabled for your development instance is decided by the project you have open at the very same time.
 
 Run `python manage.py sync_feature_flags` to create all used flags locally.
 
