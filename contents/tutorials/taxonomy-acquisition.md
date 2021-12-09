@@ -6,7 +6,6 @@ author: ['james-hawkins']
 date: 2021-09-19
 featuredImage: ../images/tutorials/banners/deep-dive.png
 ---
-![Funnels Banner Image](../../images/tutorials/banners/deep-dive.png)
 
 This tutorial will help you:
 

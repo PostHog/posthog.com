@@ -9,8 +9,6 @@ topics: ['funnels', 'trends', 'plugins']
 date: 2021-11-29
 ---
 
-![Retention banner image](../../images/tutorials/banners/get-started-aarrr.png)
-
 AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic framework to establish end-to-end product tracking - this tutorial will help you figure out how to define each of these metrics for your product.
 
 > For products focused on virality, it may be worth additionally tracking growth loops.
