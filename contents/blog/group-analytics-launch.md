@@ -28,6 +28,6 @@ Groups work perfectly with all other PostHog tools, enabling you to analyze grou
 
 You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as you can now easily give all users within an organization a consistent experience without needing to manually add users to an enabled flag. 
 
-Group analytics has been released as a [premium feature](/pricing) and is available now for both self-hosted and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/groups) and illustrate some popular use-cases. 
+Group analytics has been released as a [premium feature](/pricing) and is available now for both PostHog Scale, PostHog Enterprise, and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/groups) and illustrate some popular use-cases. 
 
 As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog, or in the [PostHog Slack group](/slack).  
