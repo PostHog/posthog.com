@@ -9,6 +9,7 @@ showTitle: true
     special handling related to releases.
 </blockquote>
 
+
 ## What does PostHog look like?
 
 Before jumping into setup, let's dissect a PostHog. The app itself is made up of 4 components that run simultaneously:
@@ -27,7 +28,7 @@ These components rely on a few external services:
 - Zookeeper – for coordinating Kafka and ClickHouse clusters
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
-- the external services run in Docker over `docker-compose`
+- the external services run in Docker over `docker compose`
 - PostHog itself runs on the host (your system)
 
 This is what we'll be using in the guide below.
@@ -38,6 +39,7 @@ This is what we'll be using in the guide below.
 The instructions here assume you're running macOS. For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`). Windows isn't supported.
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx)!
+
 
 ## macOS prerequisites
 
@@ -65,6 +67,7 @@ ClickHouse and Kafka won't be able to talk to each other without these mapped ho
 git clone https://github.com/PostHog/posthog && cd posthog/
 ```
 
+
 ## Get things up and running
 
 ### 1. Spin up external services
@@ -75,12 +78,12 @@ First, run the services in Docker:
 
 ```bash
 # ARM (arm64) systems (e.g. Apple Silicon)
-docker-compose -f ee/docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
-docker-compose -f ee/docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
+docker compose -f ee/docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
+docker compose -f ee/docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
 
 # x86 (amd64) systems
-docker-compose -f ee/docker-compose.ch.yml pull zookeeper kafka clickhouse db redis
-docker-compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse db redis
+docker compose -f ee/docker-compose.ch.yml pull zookeeper kafka clickhouse db redis
+docker compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse db redis
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -216,7 +219,7 @@ python manage.py migrate_clickhouse
 
 > **Another friendly tip:** You may run into `psycopg2` errors while migrating on an Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
-### Step 6: Start PostHog
+### 6. Start PostHog
 
 Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
@@ -230,6 +233,7 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
 To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
+
 
 ## Testing
 
@@ -264,6 +268,7 @@ This means that your activity is immediately reflected in the current project, w
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+
 
 ## Extra: Debugging the backend in PyCharm
 
