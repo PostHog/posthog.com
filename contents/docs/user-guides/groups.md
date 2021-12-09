@@ -36,11 +36,13 @@ Thus, there's no new events corresponding to groups: it's simply the events that
 
 A popular misconception is that groups are defined per user. This might make sense if the group type is a company, since a company is a set of users, but it quickly breaks down when you're looking at a transaction group type: here a user can do multiple transactions. Thus, remember that groups are defined on events.
 
+If users belong to multiple companies, e.g. internal staff members accessing multiple company accounts. We assume that the user was part of that company for the duration of that event and not that the user was part of two companies at the same time.
+
 Another important concept to remember here is that a single event belongs to only a single group per group type. For example, say you have a `transaction occured` event. And you have 3 group types: `transaction`, `company`, `pineapple_type`.
 
 Then, this event can belong to at most one group per group type. So, for this event, you can have `transaction = 123456789`, `company = PostHog`, `pineapple_type = British`.
 
-You can't have something like: `transaction = [123456789, 12345678910]`. This is not possible.
+**Warning:** You can't have something like: `transaction = [123456789, 12345678910]`. This is not possible.
 
 You can skip some groups if they don't make sense. For example, `transaction = 123456789`, `company = PostHog`, and no `pineapple_type` is valid as well.
 
@@ -61,7 +63,10 @@ Following the company example again, you can have a cohort of users which belong
 # How do I get started?
 
 ## Getting access
-Groups is a paid feature, so you'll need to be on our [Scale or Enterprise plans](https://posthog.com/pricing) for self-hosted or have entered your credit-card on cloud.
+
+Group analytics is a premium feature that requires an additional subscription.
+- If you're self-hosting PostHog, Group Analytics is available on the Scale & Enterprise plans. [Get a license now](https://license.posthog.com?utm_source=docs&utm_campaign=group-analytics-docs-license)
+- If you're on PostHog Cloud, you just need to set up your billing information. Group Analytics is available on all our paid plans. [Set up billing](https://app.posthog.com/organization/billing?utm_source=docs&utm_campaign=group-analytics-docs-license)
 
 On-self hosted you must also be on the latest release: 1.31.0 or above.
 
