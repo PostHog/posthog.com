@@ -36,9 +36,9 @@ Groups work perfectly with all other PostHog tools, enabling you to analyze grou
 
 ![View Groups](../images/blog/array/funnels-group-aggregation.png)
 
-You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as organizations such as Tapico, the open finance provider, have found out.
+You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as organizations such as [Tapico](https://tapico.io/), the open finance engine, have found out.
 
-"Using groups we can enable feature flags per instance, dark launch features for a specific instance, or implement kill switches and ops flags," said Weyert de Boer, Senior Software Engineer at Tapico.
+"Using groups we can enable feature flags per instance, dark launch features for a specific instance, or implement kill switches and ops flags," said Weyert de Boer, Senior Software Engineer at [Tapico](https://tapico.io/).
 
 Group analytics has been released as a [premium feature](/pricing) and is available now for both PostHog Scale, PostHog Enterprise, and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/groups) and illustrate some popular use-cases. 
 
