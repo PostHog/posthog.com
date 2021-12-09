@@ -162,7 +162,7 @@ client.Enqueue(posthog.GroupIdentify{
 })
 ```
 
-Using groups with go requires latest version of `posthog-go`. Update dependencies via:
+Using groups with go requires the latest version of `posthog-go`. Update dependencies via:
 
 ```shell
 go get -u github.com/posthog/posthog-go
