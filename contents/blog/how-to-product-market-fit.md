@@ -71,6 +71,4 @@ After you’ve reached product market fit in one market, here are some growth pl
 
 ## How can PostHog help me validate product market fit?
 Product analytics is key to understanding the behavior of your customers. 
-Leveraging PostHog’s [retention tool](https://posthog.com/docs/user-guides/retention) is a great way to determine whether your current product has product market fit. [Deploy PostHog Free today](https://posthog.com/docs/self-host#deploy). 
-
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+Leveraging PostHog’s [retention tool](/docs/user-guides/retention) is a great way to determine whether your current product has product market fit. [Deploy PostHog Free today](/docs/self-host#deploy). 
