@@ -14,6 +14,16 @@ Today, we’re excited to announce that PostHog now supports group analytics for
 
 Group analytics are used for tracking and analyzing multiples of any event type within PostHog. Unlike cohorts, which essentially create lists of users, groups can track a far wider range of information because they apply to _events_, rather than users. 
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/weyert-tapico.png"
+        size="md"
+        name="Weyert de Boer"
+        title="Senior Software Engineer, Tapico"
+        quote={`“The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. Group Analytics also give us more detailed insight into user behaviour between instances. We love it!”`}
+    />
+</BorderWrapper>
+
 As a result, group analytics are especially useful for certain types of product, such as:
 
 - *B2B products:* If you sell primarily to businesses, groups can be used to track data at a company-level and report on metrics such as Daily Active Companies. 
@@ -26,8 +36,10 @@ Groups work perfectly with all other PostHog tools, enabling you to analyze grou
 
 ![View Groups](../../images/docs/user-guides/funnels-group-aggregation.png)
 
-You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as you can now easily give all users within an organization a consistent experience without needing to manually add users to an enabled flag. 
+You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as organizations such as Tapico, the open finance provider, have found out.
+
+"Using groups we can enable feature flags per instance, dark launch features for a specific instance, or implement kill switches and ops flags," said Weyert de Boer, Senior Software Engineer at Tapico.
 
 Group analytics has been released as a [premium feature](/pricing) and is available now for both PostHog Scale, PostHog Enterprise, and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/groups) and illustrate some popular use-cases. 
 
-As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog, or in the [PostHog Slack group](/slack).  
+As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog), or in the [PostHog Slack group](/slack).  
