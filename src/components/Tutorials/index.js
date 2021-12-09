@@ -208,7 +208,7 @@ export default function Tutorials({
                         <Filters activeFilter={activeFilter} />
                     </nav>
                 </aside>
-                <section className="col-span-2 px-5 lg:px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20">
+                <section className="h-full col-span-2 px-5 lg:px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20">
                     <div className="flex flex-col-reverse sm:flex-row justify-between items-end sm:items-center mb-10 space-y-4 space-y-reverse sm:space-y-0 sm:space-x-6">
                         <div className="flex justify-between items-center max-w-[700px] w-full">
                             <h1 className="font-bold text-2xl md:text-3xl m-0">PostHog tutorials</h1>
