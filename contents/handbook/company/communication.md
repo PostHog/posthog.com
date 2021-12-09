@@ -211,3 +211,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 1. Particularly confidential & sensitive meetings with third-parties outside of PostHog
 1. 1-1 performance or evaluation meetings
 1. Meetings on organizational changes
+
+### Calendly
+
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account. 

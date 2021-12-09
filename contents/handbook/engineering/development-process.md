@@ -15,25 +15,37 @@ However, if we have no checks in place, we will release quickly but everything w
 
 ## 1. How to decide what to build
 
-Deciding what we work on happens in our sprint planning session, where the high level themes for the next sprint get decided. Each team then takes those high level priorities and breaks them down, plus adds their own smaller items like bugfixes, smaller features or other improvements.
+* **Major Milestones:** Product + eng align on major milestones (e.g. Collaboration) which we have strong conviction will drive our success metrics 
+* **Assign Owner:** A single engineer will be accountable for a milestone partnering closely other functions to ensure it’s successful
+* **Break into goals:** The owner turns this ambiguous milestone into a roadmap of ambitious meaningful sprint sized goals, thinking 2 - 3 sprints ahead to give other functions time
+* **Execute on goals:** Our sprint planning session is where the high level goals for the next sprint get decided. Each team takes these and breaks them down and adds their own smaller items like bugfixes.
+  The sprint planning works like this:
+     * During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that align with major milestones.
+     * On Wednesday we get together. We use Zoom's breakout rooms to split into the small teams, and each team finalizes the ambitious goals that they want to tackle.
+     * We come back in the same room, where
+        * We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
+        * Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough.
+        * Each goal should have a single owner.
+    * This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+    * As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
+* **Evaluate success:** Review impact of each major milestone and feedback into the planning process
 
-The sprint planning works like this:
-- During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that fit in with our roadmap.
-- On Wednesday we get together. We use Zoom's breakout rooms to split into the small teams, and each team finalizes the one or two big ambitious goals that they want to tackle as a team.
-- We come back in the same room, where
-  - We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
-  - Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough
+**What about the small stuff?**
 
-Each goal should have a single owner.
+Everything can’t directly contribute to a company level goal, it’s important that the small stuff also gets done for us to succeed.
 
-This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+* **Dogfooding**: Use the product yourself, when you see something that annoys you, fix it
+* **Sidequests:** Smaller projects you are passionate about but may not shoot up our metrics (e.g. turbo mode)
+* **Support hero:** Support hero dedicates all of their time to customers, solving the wild and wonderful issues our customers find each week
 
+**What happens after sprint planning?**
 
 After the sprint planning, each team should have their own session (can be async!) where they
 - Do a detailed retrospective.
 - Divide up the big ambitious goals between the members of the team
 - Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
   - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
+  - If we only 'scrape' the previous goal, we should split 1/2 on a new big goal and 1/2 on finishing off the previous goal and other work
 
 ### What does an awesome big ambitious goal look like?
 
@@ -52,6 +64,7 @@ Goals should be time-bound, but since we primarily use goals for our two-weekly 
 * **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
 
 ### Outcomes of goals
+
 When we review the status of the goals from the previous sprint, we'll classify them as follows:
 * **Nailed it:** We hit the goal spectacularly (high fives all round)
 * **Scraped it:** We almost hit the goal - but we'll need to do a little bit more next sprint to tidy up (we should adjust our workload to have fewer resources on big goals during the next sprint to comfortable get this finished)

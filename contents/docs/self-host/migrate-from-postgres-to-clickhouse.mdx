@@ -6,11 +6,11 @@ showTitle: true
 
 > If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues). You should also be aware that **some of the steps on this document are potentially destructive**! Proceed with caution.
 
-**PostHog backed by PostgreSQL is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for [vastly superior performance](docs/self-host/postgres-vs-clickhouse), as well as to receive new features and continued support in the future.
+**PostHog backed by PostgreSQL is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for [vastly superior performance](/docs/self-host/postgres-vs-clickhouse), as well as to receive new features and continued support in the future.
 
 ## Requirements
 
--   You should have a **clean** [ClickHouse-backed PostHog instance up and running](docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
+-   You should have a **clean** [ClickHouse-backed PostHog instance up and running](/docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
 -   Your old and new instances should both be running **the exact same version of PostHog**, with a minimum version of `1.29.0` (note: if you do not follow release tags and instead update PostHog by pulling from `master`, you should make sure both versions are on the **same commit**.)
 
 > **Note:** PostHog users on version 1.29.0 will be able to migrate events to a new instance, but autocaptured events will not be migrated correctly. This bug will be fixed in version 1.30.0. More information on the [Exporting events](#exporting-events) section.

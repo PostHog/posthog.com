@@ -801,11 +801,6 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/docs/user-guides/users"
-
-# Added: 2021-10-11
-[[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
 
@@ -1025,12 +1020,6 @@
 
 # Added: 2021-12-09
 [[redirects]]
-    from = "/handbook/company/brand-assets"
-    to = "/handbook/company/branding"
-
-
-# Added: 2021-12-09
-[[redirects]]
     from = "/docs/tutorials/aarrr-framework"
     to = "/tutorials/aarrr-framework"
 
@@ -1129,3 +1118,8 @@
 [[redirects]]
     from = "/docs/tutorials/tracking-teams"
     to = "/tutorials/tracking-teams"
+    
+# Added: 2021-12-03
+[[redirects]]
+    from = "/handbook/company/branding"
+    to = "/handbook/company/brand-assets"
