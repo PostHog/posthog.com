@@ -1,5 +1,5 @@
 ---
-date: 2021-12-21
+date: 2021-12-09
 title: How to achieve B2B product market fit
 rootPage: /blog
 sidebar: Blog
