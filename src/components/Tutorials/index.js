@@ -10,7 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import slugify from 'slugify'
 
-const Filters = ({ activeFilter }) => {
+const Filters = ({ activeFilter, view }) => {
     const {
         tutorials: { categories, contributors },
     } = useStaticQuery(filterQuery)
@@ -32,7 +32,7 @@ const Filters = ({ activeFilter }) => {
             {filterableData.map(({ title, path, options }) => {
                 return (
                     <li key={title}>
-                        <Filter title={title} path={path} options={options} activeFilter={activeFilter} />
+                        <Filter view={view} title={title} path={path} options={options} activeFilter={activeFilter} />
                     </li>
                 )
             })}
@@ -40,12 +40,12 @@ const Filters = ({ activeFilter }) => {
     )
 }
 
-const Filter = ({ title, options, activeFilter, path }) => {
+const Filter = ({ title, options, activeFilter, path, view }) => {
     const [open, setOpen] = useState(options.some(({ fieldValue }) => fieldValue === activeFilter))
     return (
         <>
             <button className="flex justify-between items-baseline w-full" onClick={() => setOpen(!open)}>
-                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose">{title}</h5>
+                <h5 className="inline-block text-[15px] opacity-40 font-semibold leading-loose mb-2">{title}</h5>
                 <span
                     style={{ transform: `rotate(${open ? '180' : '0'}deg)` }}
                     className="opacity-40 transition-transform"
@@ -64,6 +64,7 @@ const Filter = ({ title, options, activeFilter, path }) => {
                     return (
                         <li key={fieldValue} className="flex items-center space-x-2 text-base font-semibold">
                             <Chip
+                                state={{ view }}
                                 active={activeFilter === fieldValue}
                                 href={url}
                                 size="sm"
@@ -178,9 +179,10 @@ export default function Tutorials({
         tutorials: { nodes, categories, contributors },
     },
     pageContext,
+    location,
 }) {
     const data = nodes
-    const [view, setView] = useState('card')
+    const [view, setView] = useState(location?.state?.view || 'card')
     const { activeFilter } = pageContext
 
     useEffect(() => {
@@ -207,7 +209,7 @@ export default function Tutorials({
             >
                 <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[177px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
-                        <Filters activeFilter={activeFilter} />
+                        <Filters view={view} activeFilter={activeFilter} />
                     </nav>
                 </aside>
                 <section className="h-full col-span-2 px-5 lg:px-8 border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 pb-20">
