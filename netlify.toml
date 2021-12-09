@@ -801,11 +801,6 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/docs/user-guides/users"
-
-# Added: 2021-10-11
-[[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
 
