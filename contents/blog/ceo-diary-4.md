@@ -43,12 +43,12 @@ This is a good way to get something mediocre built very fast - which is exactly 
 
 Once you've got some consistency and a sense of brand, start thinking from a user's perspective. This is what we did to think of our website and docs as a product:
 
-1. **Start with why**: We thought about [our mission](https://posthog.com/handbook/strategy/strategy) and our motivation for building a website and docs to help us achieve it.
+1. **Start with why**: We thought about [our mission](/handbook/strategy/strategy) and our motivation for building a website and docs to help us achieve it.
 2. **Ask who it's for**: We broke down the people who might come to our website/docs into segments and prioritized the biggest opportunities, trying to use qualitative and quantitative data where we could.
 3. **Consider what they need:** We looked at the focus segment and what their needs from our website and docs were. We asked which needs were the most important to solve, again using qualitative and quantitative data where we had it.
 4. **Plan how to solve needs:** We brainstormed potential solutions to the highest priority needs.
 
-You can go even further - what do [acquisition, activation, retention, referral and revenue](https://posthog.com/docs/tutorials/aarrr-framework) look like for your website or your docs? Then you know you're actually solving needs.
+You can go even further - what do [acquisition, activation, retention, referral and revenue](/docs/tutorials/aarrr-framework) look like for your website or your docs? Then you know you're actually solving needs.
 
 This exercise is taking us in some [really innovative directions](https://github.com/PostHog/posthog.com/issues/2568).
 
