@@ -13,17 +13,25 @@ const Filters = ({ activeFilter }) => {
     const {
         tutorials: { categories, contributors },
     } = useStaticQuery(filterQuery)
-    const filterableData = {
-        Category: categories,
-        Contributor: contributors,
-    }
+    const filterableData = [
+        {
+            title: 'Category',
+            path: '/tutorials/categories',
+            options: categories,
+        },
+        {
+            title: 'Contributor',
+            path: '/tutorials/contributors',
+            options: contributors,
+        },
+    ]
 
     return (
         <ul className="list-none p-0 m-0 flex flex-col">
-            {Object.keys(filterableData).map((title) => {
+            {filterableData.map(({ title, path, options }) => {
                 return (
                     <li key={title}>
-                        <Filter title={title} options={filterableData[title]} activeFilter={activeFilter} />
+                        <Filter title={title} path={path} options={options} activeFilter={activeFilter} />
                     </li>
                 )
             })}
@@ -31,7 +39,7 @@ const Filters = ({ activeFilter }) => {
     )
 }
 
-const Filter = ({ title, options, activeFilter }) => {
+const Filter = ({ title, options, activeFilter, path }) => {
     const [open, setOpen] = useState(options.some(({ fieldValue }) => fieldValue === activeFilter))
     return (
         <>
@@ -51,11 +59,12 @@ const Filter = ({ title, options, activeFilter }) => {
                 style={{ marginBottom: open ? 20 : 0 }}
             >
                 {options.map(({ fieldValue }) => {
+                    const url = `${path}/${slugify(fieldValue, { lower: true })}`
                     return (
                         <li key={fieldValue} className="flex items-center space-x-2 text-base font-semibold">
                             <Chip
                                 active={activeFilter === fieldValue}
-                                href={`/tutorials/${title.toLowerCase()}/${slugify(fieldValue, { lower: true })}`}
+                                href={url}
                                 size="sm"
                                 className="text-[14px] opacity-70 font-semibold"
                                 text={fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}

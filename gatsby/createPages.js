@@ -292,7 +292,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     })
 
     result.data.tutorials.categories.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/category/${slugify(fieldValue, { lower: true })}`
+        const slug = `/tutorials/categories/${slugify(fieldValue, { lower: true })}`
         createPage({
             path: slug,
             component: TutorialsCategoryTemplate,
@@ -303,7 +303,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     })
 
     result.data.tutorials.contributors.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/contributor/${slugify(fieldValue, { lower: true })}`
+        const slug = `/tutorials/contributors/${slugify(fieldValue, { lower: true })}`
         createPage({
             path: slug,
             component: TutorialsAuthorTemplate,

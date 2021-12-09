@@ -11,6 +11,7 @@ import { SEO } from 'components/seo'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
+import slugify from 'slugify'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 
@@ -109,7 +110,7 @@ export default function Tutorial({ data, pageContext: { pageViews } }) {
                                             <li key={category}>
                                                 <Chip
                                                     className="text-red hover:text-red"
-                                                    href={`/tutorials/category/${category}`}
+                                                    href={`/tutorials/categories/${slugify(category, { lower: true })}`}
                                                     size="sm"
                                                 >
                                                     {category}
