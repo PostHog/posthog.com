@@ -1021,3 +1021,111 @@
 [[redirects]]
     from = "/heatmaps"
     to = "/product/heatmaps"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/handbook/company/brand-assets"
+    to = "/handbook/company/branding"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-framework"
+    to = "/tutorials/aarrr-framework"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/b2b"
+    to = "/tutorials/b2b"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/cohorts"
+    to = "/tutorials/cohorts"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/deleting-data"
+    to = "/tutorials/deleting-data"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/event-tracking-guide"
+    to = "/tutorials/event-tracking-guide"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/feature-flags"
+    to = "/tutorials/feature-flags"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/funnels"
+    to = "/tutorials/funnels"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/how-to-embed-shared-dashboard"
+    to = "/tutorials/how-to-embed-shared-dashboard"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/nextjs-supabase-signup-funnel"
+    to = "/tutorials/nextjs-supabase-signup-funnel"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/retention"
+    to = "/tutorials/retention"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/revenue"
+    to = "/tutorials/revenue"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/spa"
+    to = "/tutorials/spa"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/survey"
+    to = "/tutorials/survey"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/taxonomy-acquisition"
+    to = "/tutorials/taxonomy-acquisition"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/toolbar"
+    to = "/tutorials/toolbar"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/tracking-teams"
+    to = "/tutorials/tracking-teams"
