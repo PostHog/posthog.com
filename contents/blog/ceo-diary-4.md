@@ -1,6 +1,6 @@
 ---
 date: 2021-12-09
-title: "How come your website is so nice?"
+title: '"How come your website is so nice?"'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
