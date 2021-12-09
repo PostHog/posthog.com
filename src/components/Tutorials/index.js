@@ -6,7 +6,7 @@ import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import slugify from 'slugify'
 
 const Filters = ({ activeFilter }) => {
@@ -181,6 +181,17 @@ export default function Tutorials({
     const data = nodes
     const [view, setView] = useState('card')
     const { activeFilter } = pageContext
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.localStorage.getItem('preferred-theme')) {
+            setView(window.localStorage.getItem('preferred-theme'))
+        }
+    }, [])
+
+    const handleViewClick = (view) => {
+        setView(view)
+        localStorage.setItem('preferred-theme', view)
+    }
     return (
         <Layout>
             <Breadcrumbs
@@ -202,10 +213,10 @@ export default function Tutorials({
                         <div className="flex justify-between items-center max-w-[700px] w-full">
                             <h1 className="font-bold text-2xl md:text-3xl m-0">PostHog tutorials</h1>
                             <div className="flex space-x-3 items-center">
-                                <button onClick={() => setView('card')}>
+                                <button onClick={() => handleViewClick('card')}>
                                     <Cards style={{ color: view === 'card' ? '#F54E00' : '#BFBFBC' }} />
                                 </button>
-                                <button onClick={() => setView('list')}>
+                                <button onClick={() => handleViewClick('list')}>
                                     <List style={{ color: view === 'list' ? '#F54E00' : '#BFBFBC' }} />
                                 </button>
                             </div>
