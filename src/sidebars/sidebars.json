@@ -784,7 +784,10 @@
                     "name": "Cohorts",
                     "url": "/docs/user-guides/cohorts"
                 },
-
+                {
+                    "name": "Groups",
+                    "url": "/docs/user-guides/groups"
+                },
                 {
                     "name": "Correlation analysis",
                     "url": "/docs/user-guides/correlation"
