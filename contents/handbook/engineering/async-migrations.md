@@ -112,7 +112,7 @@ When the Django server boots up - a setup step for async migrations happens, whi
 2. Populates a dependencies map and in-memory record of migration definitions
 3. Creates a database record for each
 4. Check if all async migrations necessary for this PostHog version have completed (else don't start)
-5. Triggers a migration to run if `AUTO_START_SPECIAL_MIGRATIONS` is set and there's an uncompleted migration for this version
+5. Triggers migrations to run (in order) if `AUTO_START_SPECIAL_MIGRATIONS` is set and there are uncompleted migrations for this version
 
 #### Running a migration
 
