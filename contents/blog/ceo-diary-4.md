@@ -8,7 +8,7 @@ hideAnchor: true
 categories:
     - CEO diaries
 author: ["james-hawkins"]
-featuredImage: ../images/blog/blog-generic-4.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -28,27 +28,27 @@ Good design for product-led companies on your "marketing" website (for lack of a
 
 One of my most memorable moments as a founder was a 30 minute chat with [Malthe Sigurdsson](https://twitter.com/malthe/) - he used to run design at [Stripe](https://stripe.com/). For the unitiated - people drool over Stripe's design quality - especially their [docs](https://stripe.com/docs). I wanted to know how they got there.
 
-Apart from him telling me that he'd be a bad hire for us when we met originally, he told me:
+Apart from him telling me that he'd be a bad hire for us when we met originally, he also told me:
 
 * Great designers iterate quickly. You won't get it perfect in Figma first.
 * Hire generalists early on.
 
-PostHog focused on getting these two things done. We made sure we had people that could work in Figma or CSS, and who'd be able to get our audience. We got some pushback in the hiring process that we were unicorn hunting, and it took months, but we'd do everything the same way all over again.
+We followed his advice. We made sure we had people that could work in Figma or CSS, and who'd be able to understand our audience. We got some pushback in the hiring process that we were unicorn hunting, and it took months, but we'd do everything the same way all over again.
 
 ## Treat your website as a product, but not at first
 
 We see so many websites, it's easy to build on autopilot... Before you know it you're Googling "how to center a div in a div", and adding testimonials and calls to action.
 
-This is a good way to get something mediocre built very fast - which is what you want on day one.
+This is a good way to get something mediocre built very fast - which is exactly what you want on day one.
 
 Once you've got some consistency and a sense of brand, start thinking from a user's perspective. This is what we did to think of our website and docs as a product:
 
-1. **Start with why**: the mission of our company and our motivation for building a website and docs to help us achieve it
-2. **Who’s it for**: break down the people who might come to our website/docs into segments and prioritize one that looks like it has the biggest opportunity, try and use some qualitative and quantitative data where we have it
-3. **What do they need:** looking at the segment we’re focusing on, what are their needs from our website and docs and which are the most important to solve, try and use some qualitative and quantitative data where we have it
-4. **How could we solve the needs:** brainstorm potential solutions to the highest priority needs
+1. **Start with why**: We thought about [our mission](https://posthog.com/handbook/strategy/strategy) and our motivation for building a website and docs to help us achieve it.
+2. **Ask who it's for**: We broke down the people who might come to our website/docs into segments and prioritized the biggest opportunities, trying to use qualitative and quantitative data where we could.
+3. **Consider what they need:** We looked at the focus segment and what their needs from our website and docs were. We asked which needs were the most important to solve, again using qualitative and quantitative data where we had it.
+4. **Plan how to solve needs:** We brainstormed potential solutions to the highest priority needs.
 
-You can go even further - what do acquisition, activation, retention, referral and revenue look like for your website or your docs? Then you know you're actually solving needs.
+You can go even further - what do [acquisition, activation, retention, referral and revenue](https://posthog.com/docs/tutorials/aarrr-framework) look like for your website or your docs? Then you know you're actually solving needs.
 
 This exercise is taking us in some [really innovative directions](https://github.com/PostHog/posthog.com/issues/2568).
 
@@ -61,7 +61,7 @@ Therefore the first version of our website avoided these patterns:
 * Stock doodles that every startup uses (we avoided this, and hired a graphic designer as early as we could)
 * Single landing-page where the links take you to an anchor link on the same page (we had >50 pages when we launched)
 
-## Don't treat implementation as a second class citizen
+## Don't treat implementation as a second-class citizen
 
 Great design is irrelevant without implementation. The better you are at getting things merged easily, the more steps you'll take and the further you'll go. 
 
