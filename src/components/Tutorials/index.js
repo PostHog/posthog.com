@@ -210,7 +210,9 @@ export default function Tutorials({
     return (
         <Layout>
             <Breadcrumbs
-                crumbs={[{ title: 'Tutorials' }]}
+                crumbs={[
+                    { title: 'Tutorials', url: location?.pathname !== '/tutorials' && '/tutorials', state: { view } },
+                ]}
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
