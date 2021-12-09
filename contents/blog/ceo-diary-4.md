@@ -26,7 +26,7 @@ Good design for product-led companies on your "marketing" website (for lack of a
 
 ## Hiring the right people - what Stripe taught me
 
-One of my most memorable moments as a founder was a 30 minute chat with [Malthe Sigurdsson](https://twitter.com/malthe/) - he used to run design at [Stripe](https://stripe.com/). For the unitiated - people drool over Stripe's design quality - especially their [docs](https://stripe.com/docs). I wanted to know how they got there.
+One of my most memorable moments as a founder was a 30 minute chat with [Malthe Sigurdsson](https://twitter.com/malthe/) - he used to run design at [Stripe](https://stripe.com/). For the uninitiated - people drool over Stripe's design quality - especially their [docs](https://stripe.com/docs). I wanted to know how they got there.
 
 Apart from him telling me that he'd be a bad hire for us when we met originally, he also told me:
 
