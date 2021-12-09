@@ -4,24 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-# What are groups and how are they different to cohorts?
-Groups are how you track and perform analysis on the aggregation of an something other than a user. 
-
-## Types of groups
-
-The simplest example of a group is a company, users from multiple companies that might use your product - groups allows you do to analytics on these - e.g. Daily Active Companies.
-
-Groups are not limited to companies they can be of any type you determine. For example, transactions can be a group. 
-
-Let's say you have a payment app. You want to track & do analysis on the transaction level, not the user level. You can  create a transaction group type, allowing you to answer questions like: "What is the conversion rate per transaction?"
-
-## Groups vs cohorts
-
-Groups differ from cohorts, a cohort is a essentially a list of users. Whereas a groups represent every entity of a certain type.
-
-Following the company example again, you can have a cohort of users which belong to a certain company (e.g. Company A). But you could create a group type of "companies" which represents all companies and their users.
-
 # What can you do with groups?
+
+Groups are how you track and perform analysis on the aggregation of an something other than a user. 
 
 ## Group Analytics
 You can perform any type of analytics (e.g. Trends, Funnels, Retention, etc.) based on groups rather than users (e.g. Number of companies who signed up in the last 28 days, Number of total transactions in the past 14 days, etc.)
@@ -34,6 +19,8 @@ You can use groups to roll-out your feature flags more consistently. Instead of 
 With groups, there's two important concepts to remember. These are Groups and Group Types.
 
 ## Groups vs Group Types
+
+The simplest example of a group type is a company, users from multiple companies that might use your product - groups allows you do to analytics on these - e.g. Daily Active Companies.
 
 The group types determine what kind of groups you have. For example, a `company` is a group type. A `transaction` is a group type. There's a hard limit of 5 group types you can create, so think carefully about what group types you want.
 
@@ -65,26 +52,11 @@ As another example, the `transactionID 12345679` group of `transaction` group ty
 
 These properties can be used in insights similar to how you use person properties.
 
-## How to think about Insights on groups
+## Groups vs cohorts
 
-Since there's no new events, you can use the same events you've been using for your insights. It's the same funnel you already have, aggregated differently.
+Groups differ from cohorts, a cohort is a essentially a list of users. Whereas a groups represent every entity of a certain type.
 
-The groups determine what your insights aggregate on. For example, consider the funnel with two events: `User signed up -> User activated`
-
-Traditionally, you'd only have unique users in the funnel: Users from any and every company who're using your product and doing something important. Your conversion rate is per user. But what if you're interested in looking at this conversion rate across companies? Say, you're a B2B product and doing something important once per company is good enough. Then the funnel you want to track is `User signed up -> User activated` aggregated by unique companies, not users.
-
-That's a group aggregation over the company group type. It's the same events, aggregated differently.
-
-What if you wanted to breakdown this funnel by company name? Maybe there's specific companies that never converted, and you want to follow up with them to see what's going wrong. Like mentioned above, if you have group properties defined, you can breakdown by `company_name`. 
-
-## How to think about Feature Flags with groups
-
-Similar to insights, where you're aggregating events by group type, you can have Feature Flags that work on groups. This allows you to rollout a feature by company, instead of users. Preventing disruption when two users at the same company see a different experience.
-
-
-You can use feature flags as you normally would, except you need to select the group type you wish to "Match by", using the drop down by release conditions.
-
-You will also need to update your event tracking code (covered below), for the feature flag to be able to determine the groups of the current user.
+Following the company example again, you can have a cohort of users which belong to a certain company (e.g. Company A). But you could create a group type of "companies" which represents all companies and their users.
 
 # How do I get started?
 
@@ -267,6 +239,16 @@ Body:
 ## Analysing group insights
 Once you have integrated tracking for groups this will unlock the ability to analyze based on them.
 
+Since there's no new events, you can use the same events you've been using for your insights. It's the same funnel you already have, aggregated differently.
+
+The groups determine what your insights aggregate on. For example, consider the funnel with two events: `User signed up -> User activated`
+
+Traditionally, you'd only have unique users in the funnel: Users from any and every company who're using your product and doing something important. Your conversion rate is per user. But what if you're interested in looking at this conversion rate across companies? Say, you're a B2B product and doing something important once per company is good enough. Then the funnel you want to track is `User signed up -> User activated` aggregated by unique companies, not users.
+
+That's a group aggregation over the company group type. It's the same events, aggregated differently.
+
+What if you wanted to breakdown this funnel by company name? Maybe there's specific companies that never converted, and you want to follow up with them to see what's going wrong. Like mentioned above, if you have group properties defined, you can breakdown by `company_name`. 
+
 ## Viewing groups and their properties
 To view groups and their properties, head to the "Persons and Groups" tab on the navigation bar.
 
@@ -288,6 +270,22 @@ This will show how many organizations have made it through the funnel as opposed
 
 ![View Groups](../../images/docs/user-guides/funnels-group-aggregation.png)
 
+## How to think about Feature Flags with groups
+
+Similar to insights, where you're aggregating events by group type, you can have Feature Flags that work on groups. This allows you to rollout a feature by company, instead of users. Preventing disruption when two users at the same company see a different experience.
+
+
+You can use feature flags as you normally would, except you need to select the group type you wish to "Match by", using the drop down by release conditions.
+
+You will also need to update your event tracking code (covered below), for the feature flag to be able to determine the groups of the current user.
+
+## Integrating groups with feature flags
+@macobo to complete
+
 # Limitations
 * A maximum of 5 group types can be created per project
 * Multiple groups of the same type cannot assigned to a single event (e.g. Company A & Company B)
+* Groups are not currently supported for:
+    * Lifecycle - Expected soon
+    * User Paths - These only support user level analytics
+    * Sessions - This is being deprecated, group support will not be added
