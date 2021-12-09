@@ -21,7 +21,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 - Custom Blog artwork
 - Some marketing projects and branding
 - Sometimes I get involved with layouts but usually that is up to Cory
-- Team images and ocassionally organising team bios
+- Team images and occasionally organising team bios
 - Merchandise 
 - Basically anything that requires artwork I'm ya (wo)man 
 
@@ -39,13 +39,13 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - I love telling people exciting things, and I am a massive blabber mouth. Therefore I will talk about the secret Christmas Party plans or secret Offsite locations if I am trusted with them. So don't trust me, please.
 
-- I am unashamedly open and will tell you if I'm stressed, sad, happy or confused - and even embarrasing stories if you are lucky.
+- I am unashamedly open and will tell you if I'm stressed, sad, happy or confused - and even embarrassing stories if you are lucky.
 
 - I have a tendency to be a bit of a push over and a people pleaser - I am working on it, but please be considerate when asking me to do something for you as I will try to bend over backwards to help someone in need. (But if it is a real design emergency know that I will always be there to help)
 
 - I am not a perfectionist, but if something doesnt feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and I my gut has a good track record. 
 
-- I love a good goofy joke so please humour me with your wit and charm - it really brightens my day. 
+- I love a good goofy joke so please humour me with your with and charm - it really brightens my day. 
 
 - I, similarly to a golden retriever, think that everyone is great- no need to win me over.
 
