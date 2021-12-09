@@ -58,8 +58,8 @@ We provide open source product analytics. That means our users have to put some 
 
 Therefore the first version of our website avoided these patterns:
 
-* Stock doodles that every startup uses (we avoided this, and hired a graphic designer as early as we could)
-* Single landing-page where the links take you to an anchor link on the same page (we had >50 pages when we launched)
+* Stock doodles that every startup uses (we avoided this, and hired a graphic designer as early as we could).
+* Single landing-page where the links take you to an anchor link on the same page (we had >50 pages when we launched).
 
 ## Don't treat implementation as a second-class citizen
 
