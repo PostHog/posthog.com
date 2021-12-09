@@ -34,7 +34,7 @@ As a result, group analytics are especially useful for certain types of product,
 
 Groups work perfectly with all other PostHog tools, enabling you to analyze group data with [funnels](/docs/user-guides/funnels), [trends](/docs/user-guides/trends), [paths](/docs/user-guides/paths) and [retention charts](/docs/user-guides/retention). This opens up the potential for entirely new insights, such as using groups within a funnel analysis to see how a company moves through a sign-up funnel in the same way that you would do for an individual user. 
 
-![View Groups](../../images/docs/user-guides/funnels-group-aggregation.png)
+![View Groups](../images/blog/array/funnels-group-aggregation.png)
 
 You can even use groups with [feature flags](/docs/user-guides/feature-flags) to roll out or test new features with all users within an organization. This makes feature flags a lot more practical for B2B focused products, as organizations such as Tapico, the open finance provider, have found out.
 
