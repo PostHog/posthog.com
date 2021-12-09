@@ -33,7 +33,7 @@ Apart from him telling me that he'd be a bad hire for us when we met originally,
 * Great designers iterate quickly. You won't get it perfect in Figma first.
 * Hire generalists early on.
 
-PostHog focussed on getting these two things done. We made sure we had people that could work in Figma or CSS, and who'd be able to get our audience. We got some pushback in the hiring process that we were unicorn hunting, and it took months, but we'd do everything the same way all over again.
+PostHog focused on getting these two things done. We made sure we had people that could work in Figma or CSS, and who'd be able to get our audience. We got some pushback in the hiring process that we were unicorn hunting, and it took months, but we'd do everything the same way all over again.
 
 ## Treat your website as a product, but not at first
 
