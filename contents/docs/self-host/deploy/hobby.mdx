@@ -6,12 +6,26 @@ showTitle: true
 
 We provide a PostHog "hobby deployment" option for those that want to try out self-hosted PostHog without having to spend a lot on infrastructure costs.
 
-This type of deployment is aimed at users who want to test out the platform or do some minimal tracking (e.g. for a personal blog). It should **not** be used as a production instance for tracking a product with any reasonable amount of scale.
+This type of deployment is aimed at users who want to test out the platform or do some minimal tracking (e.g. for a personal blog, or to test PostHog as simply as possible with low volumes).
+
+It should **not** be used as a production instance for tracking a product with any reasonable amount of scale.
+
+## Pre-requisites
+
+* You have deployed a Linux Ubuntu Virtual Machine. 
+  * In testing, a $10/month (2GB RAM) Ubuntu droplet on Digital Ocean can handle approximately 100k events/month with simple analytics queries and no surges in traffic. If you have more data than this, you should use our other deployment types.
 
 ## Quick install on an Ubuntu VM
 
-For a quick install that uses Docker, you can run the following command:
+For a quick install that uses Docker, run the following command:
 
 ```bash 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)" 
 ``` 
+
+## Migrating
+
+If you need to move into production or if your server is struggling, you can migrate to a production instance as follows:
+
+* [deploy a fresh production instance](../) of PostHog
+* install the [Migrator 3000 plugin](https://github.com/PostHog/posthog-plugin-migrator3000) to migrate your data over
