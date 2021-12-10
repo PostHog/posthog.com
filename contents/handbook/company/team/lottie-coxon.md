@@ -47,7 +47,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - I love a good goofy joke so please humour me with your wit and charm - it really brightens my day. 
 
-- I, similarly to a golden retriever, think that everyone is great- no need to win me over.
+- I, similarly to a golden retriever, think that everyone is great - no need to win me over.
 
 - I catergorically love my personal time, as should everyone else, so I don't reply before 9am, after 6:30pm and never on weekends. 
 
