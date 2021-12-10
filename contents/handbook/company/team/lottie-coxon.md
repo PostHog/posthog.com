@@ -8,7 +8,7 @@ This guide should help you understand my brain and how it works.
 
 ## Bio
 
-I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of marmite. I was born in London and grew up in Surrey (aka the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and now we are based in Kinshasa, the capital of the Democratic Republic of Congo- and who knows where we will end up next.
+I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of Marmite. I was born in London and grew up in Surrey (AKA the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and now we are based in Kinshasa, the capital of the Democratic Republic of Congo - and who knows where we will end up next.
 
 I am apart of the Design team, specialising in visual flare, aka branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first ofically 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for 3 Oxford Balls. 
 
