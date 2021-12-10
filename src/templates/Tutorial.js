@@ -24,6 +24,23 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
+const SocialLink = ({ children, url }) => {
+    const width = 626
+    const height = 436
+    const handleClick = () => {
+        if (typeof window !== 'undefined') {
+            const left = window.innerWidth / 2 - width / 2
+            const top = window.innerHeight / 2 - height / 2
+            window.open(url, '', `left=${left},top=${top},width=${width},height=${height}`)
+        }
+    }
+    return (
+        <a className="text-primary hover:text-primary dark:text-white dark:hover:text-white" onClick={handleClick}>
+            {children}
+        </a>
+    )
+}
+
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export default function Tutorial({ data, pageContext: { pageViews }, location }) {
@@ -96,33 +113,18 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                         </SidebarSection>
                         <SidebarSection title="Share">
                             <div className="opacity-50 flex space-x-3 items-center">
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                                    href={`https://www.facebook.com/sharer/sharer.php?u=${location.href}`}
-                                >
+                                <SocialLink url={`https://www.facebook.com/sharer/sharer.php?u=${location.href}`}>
                                     <Facebook />
-                                </a>
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                                    href={`https://twitter.com/intent/tweet?url=${location.href}`}
-                                >
+                                </SocialLink>
+                                <SocialLink url={`https://twitter.com/intent/tweet?url=${location.href}`}>
                                     <Twitter className="w-[32px] h-[32px]" />
-                                </a>
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                                    href={`https://www.linkedin.com/shareArticle?url=${location.href}`}
-                                >
+                                </SocialLink>
+                                <SocialLink url={`https://www.linkedin.com/shareArticle?url=${location.href}`}>
                                     <LinkedIn className="w-[32px] h-[32px]" />
-                                </a>
+                                </SocialLink>
                                 <a
                                     className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                                    href={`mailto:?subject=${location.href}`}
+                                    href={`mailto:?subject=${title}&body=${location.href}`}
                                 >
                                     <Mail />
                                 </a>
