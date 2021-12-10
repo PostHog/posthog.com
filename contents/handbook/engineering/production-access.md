@@ -35,6 +35,7 @@ Follow the steps below (for macOS) to install the [Session Manager plugin](https
 #### Download the bundled installer.
 
 ```bash
+cd ~/awstemp
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "sessionmanager-bundle.zip"
 ```
 
@@ -48,6 +49,7 @@ unzip sessionmanager-bundle.zip
 
 ```bash
 sudo ./sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
+rm -r ~/awstemp
 ```
 
 ### Step 3
@@ -68,10 +70,10 @@ Plug the Task ID (from the previous step) into the following command and get to 
 aws ecs execute-command  \
     --region us-east-1 \
     --cluster posthog-production-cluster \
-    --task <TASK_ID from earlier> \
+    --interactive \
     --container posthog-production \
     --command "/bin/bash" \
-    --interactive
+    --task <TASK_ID from earlier>
 ```
 
 If you need a Django shell, just run the following after connecting
