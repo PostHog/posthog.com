@@ -17,7 +17,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [Trends](/docs/user-guides/trends)             | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | UTM segmentation                            | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
-### Visualisation features
+### Visualization features
 
 | Feature                                         | Status                                       | Cloud | Self-managed |
 | ----------------------------------------------- | -------------------------------------------- | ----- | ------------ |
@@ -25,7 +25,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [Custom dashboards](/docs/user-guides/dashboards)  | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Persons tracking & history](/docs/user-guides/persons) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
-### Optimisation features
+### Optimization features
 
 | Feature                                                      | Status                                                 | Cloud | Self-managed |
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
@@ -72,6 +72,8 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 
 ### Features demo video
+
+> This video is significantly dated. [Schedule a demo](../book-a-demo) if you need something more recent.
 
 <span class="centered">
 

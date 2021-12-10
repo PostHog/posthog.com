@@ -119,6 +119,12 @@ python3 -m pip install --upgrade pip
 
 then retry the requirements.txt install.
 
+> **Friendly tip:** If you're running into errors with this step on a Mac with an Apple Silicon chip, you may need to set some environment variables before running the install command, like so:
+    
+```bash
+CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+```
+    
 5. If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
 ```
@@ -140,6 +146,8 @@ DEBUG=1 python3 manage.py migrate
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
+> **Another friendly tip:** You may run into `psycopg2` errors while migrating on a Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this. 
+    
 8. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
 ```bash

@@ -57,9 +57,9 @@ export default function Product({ data, pageContext: { next, previous } }) {
             />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
-                className="px-5 mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
+                className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
             >
-                <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end">
+                <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end lg:pl-5 px-5 lg:px-0">
                     <nav>
                         <ul className="list-none p-0 m-0 flex flex-col space-y-3">
                             {sidebars.product.map(({ url, name }) => {
@@ -77,18 +77,20 @@ export default function Product({ data, pageContext: { next, previous } }) {
                         </ul>
                     </nav>
                 </aside>
-                <section className="col-span-2 max-w-[880px]">
-                    <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                    <GatsbyImage image={getImage(featuredImage)} />
-                    <article>
-                        <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
-                    </article>
-                    <div className="mt-12">
-                        <SectionLinks next={next} previous={previous} />
+                <section className="col-span-2 overflow-hidden">
+                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0">
+                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
+                        <GatsbyImage image={getImage(featuredImage)} />
+                        <article>
+                            <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </article>
+                        <div className="mt-12">
+                            <SectionLinks next={next} previous={previous} />
+                        </div>
+                        <FooterCTA />
                     </div>
-                    <FooterCTA />
                 </section>
             </div>
         </Layout>

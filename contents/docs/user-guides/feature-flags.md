@@ -67,7 +67,7 @@ posthog.onFeatureFlags(function() {
 
 > **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the 'Project Settings' page in PostHog.
 
-## Develop Locally
+## Develop locally
 
 To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
 

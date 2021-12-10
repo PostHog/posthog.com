@@ -88,7 +88,8 @@ export default function Features() {
                         activeFeature={activeFeature}
                         title="session recording"
                         index={2}
-                    />{' '}
+                    />
+                    ,{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
@@ -123,7 +124,7 @@ export default function Features() {
                         & synced annotations <span className="opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
-                <CallToAction width="56" type="outline" to="/docs/user-guides">
+                <CallToAction width="56" type="outline" to="/product">
                     Explore all features
                 </CallToAction>
             </div>

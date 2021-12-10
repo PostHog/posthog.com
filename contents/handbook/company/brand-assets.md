@@ -1,5 +1,5 @@
 ---
-title: Branding
+title: Brand assets
 sidebar: Handbook
 showTitle: true
 hideAnchor: false

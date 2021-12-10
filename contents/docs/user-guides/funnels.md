@@ -30,7 +30,7 @@ For every flow throughout your product, more people will start it than complete 
 * Understand seasonality in your conversion rates
 * Refining your funnel to filter out noise
 
-## Getting Started
+## Getting started
 
 ### Setting up a funnel
 

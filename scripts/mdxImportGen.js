@@ -10,6 +10,7 @@ const componentsToIgnore = new Set([
     'Section',
     'Hero',
     'FeatureSnapshot',
+    'Team',
 ])
 
 const getComponentsInDir = (dir, components = []) => {
