@@ -61,7 +61,7 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                 style={{ gridAutoColumns: '1fr minmax(auto, 650px) minmax(max-content, 1fr)' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
-                <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+                <article className="article-content col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                     <div className="lg:max-w-[650px] w-full">
                         <h1 className="text-2xl mb-6">{title}</h1>
                         <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
