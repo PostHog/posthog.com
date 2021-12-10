@@ -14,7 +14,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ### Deployment options
 
-- [Hobby](/docs/self-host/hobby) - for testing or very small hobby projects
+- [Hobby](https://github.com/posthog/posthog#readme) - for testing or very small hobby projects
 - [AWS](/docs/self-host/deploy/aws)
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean) - likely the simplest option for production use cases
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
