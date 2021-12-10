@@ -43,7 +43,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - I have a tendency to be a bit of a pushover and a people pleaser - I am working on it, but please be considerate when asking me to do something for you as I will try to bend over backwards to help someone in need. But if it is a real design emergency know that I will always be there to help.
 
-- I am not a perfectionist, but if something doesnt feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and I my gut has a good track record. 
+- I am not a perfectionist, but if something doesnt feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and my gut has a good track record. 
 
 - I love a good goofy joke so please humour me with your with and charm - it really brightens my day. 
 
