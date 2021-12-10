@@ -1027,3 +1027,8 @@
 [[redirects]]
     from = "/handbook/company/branding"
     to = "/handbook/company/brand-assets"
+
+# Added: 2021-12-10
+[[redirects]]
+    from = "/docs/self-host/deploy/hobby"
+    to = "/docs/self-host/hobby-deployment"
