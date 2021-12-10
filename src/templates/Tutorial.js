@@ -95,6 +95,7 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                                     return (
                                         <li key={id}>
                                             <Link
+                                                state={{ openFilter: 'Contributor' }}
                                                 className="flex space-x-2 items-center"
                                                 to={`/tutorials/contributors/${slugify(name, { lower: true })}`}
                                             >
@@ -142,6 +143,7 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                                         return (
                                             <li key={category}>
                                                 <Chip
+                                                    state={{ openFilter: 'Category' }}
                                                     className="text-red hover:text-red"
                                                     href={`/tutorials/categories/${slugify(category, { lower: true })}`}
                                                     size="sm"
