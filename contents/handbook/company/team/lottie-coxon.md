@@ -10,7 +10,7 @@ This guide should help you understand my brain and how it works.
 
 I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of Marmite. I was born in London and grew up in Surrey (AKA the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and now we are based in Kinshasa, the capital of the Democratic Republic of Congo - and who knows where we will end up next.
 
-I am apart of the Design team, specialising in visual flare, aka branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first ofically 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for 3 Oxford Balls. 
+I am apart of the Design team, specialising in visual flare, AKA branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first official 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for three Oxford Balls. 
 
 I love good conversation, anything honey roasted and bright blue skies. My guilty pleasure is fashion but obviously I veto any fast fashion vendors- sustainable all the way people! Oh and I love to create things, and usually always have a small side project running at all times, such as making my own jewellery, painting flower pots or hand making thank you cards. I'm convinced I have no left brain, just one massive right one.  
 
