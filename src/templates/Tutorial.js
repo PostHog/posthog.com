@@ -177,6 +177,7 @@ export const query = graphql`
                     name
                 }
                 featuredImage {
+                    publicURL
                     childImageSharp {
                         gatsbyImageData
                     }
