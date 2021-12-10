@@ -45,7 +45,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - I am not a perfectionist, but if something doesnt feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and my gut has a good track record. 
 
-- I love a good goofy joke so please humour me with your with and charm - it really brightens my day. 
+- I love a good goofy joke so please humour me with your wit and charm - it really brightens my day. 
 
 - I, similarly to a golden retriever, think that everyone is great- no need to win me over.
 
