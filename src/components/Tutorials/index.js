@@ -156,21 +156,29 @@ const CardView = ({ data }) => {
 
 const ListView = ({ data }) => {
     return (
-        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
+        <ul className="list-none p-0 m-0 flex flex-col space-y-6 sm:space-y-8">
             {data.map((tutorial) => {
                 const {
-                    frontmatter: { Contributor, title },
+                    frontmatter: { Contributor, title, featuredImage },
                     id,
                     fields: { slug },
                 } = tutorial
                 return (
-                    <li key={id} className="flex justify-between items-start">
-                        <Link className="font-bold" to={slug}>
-                            {title}
-                        </Link>
-                        <div className="flex-shrink-0">
+                    <li key={id} className="flex items-start">
+                        <div className="hidden sm:block mr-6">
+                            {featuredImage ? (
+                                <GatsbyImage className="w-[213px] rounded-md" image={getImage(featuredImage)} />
+                            ) : (
+                                <img className="w-[213px] rounded-md" width={700} height={441} src="/banner.png" />
+                            )}
+                        </div>
+
+                        <div>
+                            <Link className="font-bold sm:text-[20px]" to={slug}>
+                                {title}
+                            </Link>
                             {Contributor && (
-                                <ul className="flex space-x-2 list-none p-0 m-0">
+                                <ul className="flex space-x-2 list-none p-0 m-0 mt-1">
                                     {Contributor.map(({ image, name, id }) => {
                                         return (
                                             <li key={id} className="flex space-x-2 items-center">
@@ -180,7 +188,7 @@ const ListView = ({ data }) => {
                                                         src={image}
                                                     />
                                                 </div>
-                                                <span className="author text-[15px] font-semibold opacity-50 hidden sm:block">
+                                                <span className="author text-[15px] font-semibold opacity-50">
                                                     {name}
                                                 </span>
                                             </li>
