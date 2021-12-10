@@ -3,13 +3,13 @@ title: Tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/b2b.png
+featuredImage: ../../images/tutorials/banners/b2b-new.png
 topics: ['feature flags', 'trends']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![B2B Tutorial Banner Image](../../images/tutorials/banners/b2b.png)
+![B2B Tutorial Banner Image](../../images/tutorials/banners/b2b-new.png)
 
 If you run a B2B business, it is especially important to track group usage of your product, since, by definition, you have multiple clearly-defined groups as your clients. 
 

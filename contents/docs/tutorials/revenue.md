@@ -4,12 +4,12 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 topics: ['funnels']
-featuredImage: ../../images/tutorials/banners/revenue.png
+featuredImage: ../../images/tutorials/banners/revenue-new.png
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![Revenue tracking banner image](../../images/tutorials/banners/revenue.png)
+![Revenue tracking banner image](../../images/tutorials/banners/revenue-new.png)
 
 To determine the quality of your product, and if you have a good product/market fit, one of the best metrics you can use is:
 
