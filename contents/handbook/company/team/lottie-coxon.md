@@ -31,7 +31,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - Sometimes I listen to a song over and over because it sounds so darn good.
 
-- I love a good bit of control in all areas of my life, which obviously includes work. This means I like to know what people want of me, and not knowing what people expect from me makes me anxious and figety (the worst kind of Lottie). This also means I will message you if I need to know something even if it seems silly or small.
+- I love a good bit of control in all areas of my life, which obviously includes work. This means I like to know what people want of me, and not knowing what people expect from me makes me anxious and fidgety (the worst kind of Lottie). This also means I will message you if I need to know something even if it seems silly or small.
 
 - While surprises are fun for some, they aren't for me. Please give me heads up on upcoming projects that will need my attention. 
 
