@@ -45,7 +45,7 @@ export default function Team() {
                                     title={title}
                                 />
                                 <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">
-                                    {countryCodeEmoji(country)}
+                                    {country === 'world' ? '🌎' : countryCodeEmoji(country)}
                                 </span>
                             </div>
                         </div>
