@@ -3,7 +3,11 @@ title: Running surveys with no backend
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/surveys.png
 ---
+
+![Survey banner image](../../images/tutorials/banners/surveys.png)
+
 
 ## Objective
 

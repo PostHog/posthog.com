@@ -2,7 +2,7 @@
 title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/funnels.png
+featuredImage: ../../images/tutorials/banners/funnels-new.png
 author: ['yakko-majuri']
 topics:
     - funnels
@@ -10,7 +10,7 @@ topics:
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Funnels Banner Image](../../images/tutorials/banners/funnels.png)
+![Funnels Banner Image](../../images/tutorials/banners/funnels-new.png)
 
 For most products, having a user land on your page is just the beginning. 
 
