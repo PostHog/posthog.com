@@ -48,7 +48,7 @@ In case some steps here have fallen out of date, please tell us about it – fee
 2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
 
 <blockquote class="warning-note">
-    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>. Same for <code>nvm</code> and <code>pyenv</code> below.
+    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
 </blockquote>
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
@@ -135,6 +135,10 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 1. Install nvm: https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
+<blockquote class="warning-note">
+    After installation, make sure to follow the instructions printed in your terminal to add NVM to your <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
+</blockquote>
+
 2. Install the latest Node.js 14 (the version used by PostHog in production) with `nvm install 14`. You can start using it in the current shell with `nvm use 14`.
 
 3. Install yarn with `npm install -g yarn@1`.
@@ -153,13 +157,13 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 1. Install Python 3.8+. You can do so with Homebrew: `brew install python3`. Make sure to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
-3. Create the virtual environment in current directory called 'env':
+2. Create the virtual environment in current directory called 'env':
 
 ```bash
 python3 -m venv env
 ```
 
-4. Activate the virtual environment:
+3. Activate the virtual environment:
 
 ```bash
 # For bash/zsh/etc.
@@ -169,7 +173,7 @@ source env/bin/activate
 source env/bin/activate.fish
 ```
 
-5. Install requirements with pip
+4. Install requirements with pip
 
 If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
@@ -186,7 +190,7 @@ pip install -r requirements.txt
 
 If on an x86 platform, simply run the latter version.
 
-7. Install dev requirements
+5. Install dev requirements
 
 ```bash
 pip install -r requirements-dev.txt
