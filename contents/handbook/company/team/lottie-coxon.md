@@ -66,7 +66,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 ## How I can help you
 
 - I can draw a hedgehog doing literally anything.
-- I am actually full of ideas- some good some bad but can help brainstorming as I have a different perspective than your normal tech start-up nut. 
+- I am actually full of ideas - some good some bad but can help brainstorming as I have a different perspective than your normal tech start-up nut. 
 - I'm a very good listener and can empathise easily - maybe this is not totally work related but I see the people I work with as friends as well as colleagues.
 - I can help you with designing layouts.
 - I have an artistic eye for things so please use my eyeballs for things inside and outside of work. 
