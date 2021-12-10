@@ -75,6 +75,6 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 ## How you can help me
 
 - Tell me what I am doing wrong, or right. Any feedback is welcomed!
-- Tell me what you want from me, because sometimes I can't gage this easily.
+- Tell me what you want from me, because sometimes I can't gauge this easily.
 - Let me know if I am going in the wrong direction or have misunderstood as soon as possible. I hate to waste other peoples and my own time.
 - Give me deadlines for everything - like I mentioned earlier I love control and therefore I try to organise every task of my day, week and month. 
