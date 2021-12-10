@@ -17,7 +17,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 ## Areas of responsibility
 
-- Anything to do with hedgehog mascots -I'm all over it.
+- Anything to do with hedgehog mascots - I'm all over it.
 - Custom blog artwork
 - Some marketing projects and branding
 - Sometimes I get involved with layouts but usually that is up to Cory
