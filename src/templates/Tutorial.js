@@ -138,12 +138,12 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                         )}
                         {categories?.length > 0 && (
                             <SidebarSection title="Filed under...">
-                                <ul className="list-none p-0 m-0 flex flex-col items-start space-y-2">
+                                <ul className="list-none p-0 flex items-start flex-wrap -m-1">
                                     {categories.map((category) => {
                                         return (
-                                            <li key={category}>
+                                            <li className="m-1" key={category}>
                                                 <Chip
-                                                    state={{ openFilter: 'Categ' }}
+                                                    state={{ openFilter: 'Category' }}
                                                     className="text-red hover:text-red"
                                                     href={`/tutorials/categories/${slugify(category, { lower: true })}`}
                                                     size="xs"
