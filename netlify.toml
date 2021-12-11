@@ -1123,3 +1123,7 @@
 [[redirects]]
     from = "/handbook/company/branding"
     to = "/handbook/company/brand-assets"
+
+[[redirects]]
+    from = "/docs/tutorials/*"
+    to = "/tutorials/:splat"

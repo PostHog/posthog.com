@@ -52,7 +52,7 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
     return (
         <>
             <button
-                className={`flex transition-colors rounded-md justify-between items-center w-full py-1 px-4 ${
+                className={`flex hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-colors rounded-md justify-between items-center w-full py-1 px-4 ${
                     open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
                 }`}
                 onClick={() => navigate('/tutorials', { state: { view, openFilter: openFilter !== title && title } })}
