@@ -5,6 +5,7 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 
 const sizes = {
+    xs: 'text-[15px] font-semibold px-2 py-1 border-2',
     sm: 'text-small font-semibold px-3 py-1 border-2',
     md: 'text-small font-semibold px-5 py-2 border-2',
     lg: 'text-[17px] font-bold px-5 py-2 border-3 ',

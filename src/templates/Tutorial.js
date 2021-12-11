@@ -143,10 +143,10 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                                         return (
                                             <li key={category}>
                                                 <Chip
-                                                    state={{ openFilter: 'Category' }}
+                                                    state={{ openFilter: 'Categ' }}
                                                     className="text-red hover:text-red"
                                                     href={`/tutorials/categories/${slugify(category, { lower: true })}`}
-                                                    size="sm"
+                                                    size="xs"
                                                 >
                                                     {category}
                                                 </Chip>
