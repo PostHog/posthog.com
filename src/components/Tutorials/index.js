@@ -165,13 +165,13 @@ const ListView = ({ data }) => {
                 } = tutorial
                 return (
                     <li key={id} className="flex items-start">
-                        <div className="hidden sm:block mr-6">
+                        <Link to={slug} className="hidden sm:block mr-6">
                             {featuredImage ? (
                                 <GatsbyImage className="w-[213px] rounded-md" image={getImage(featuredImage)} />
                             ) : (
                                 <img className="w-[213px] rounded-md" width={700} height={441} src="/banner.png" />
                             )}
-                        </div>
+                        </Link>
 
                         <div>
                             <Link className="font-bold sm:text-[20px]" to={slug}>
