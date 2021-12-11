@@ -52,7 +52,7 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
     return (
         <>
             <button
-                className={`flex hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-colors rounded-md justify-between items-center w-full py-1 px-4 ${
+                className={`flex transition-colors rounded-md justify-between items-center w-full py-1 px-4 ${
                     open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
                 }`}
                 onClick={() => navigate('/tutorials', { state: { view, openFilter: openFilter !== title && title } })}
@@ -237,9 +237,9 @@ export default function Tutorials({
             <SEO title="PostHog tutorials - PostHog" />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 700px) 1fr' }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20 gap-4"
             >
-                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[177px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 lg:pb-20">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[231px] justify-self-end my-10 lg:px-0 px-5 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
                         <Filters location={location} view={view} activeFilter={activeFilter} />
                     </nav>
