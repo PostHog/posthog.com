@@ -143,7 +143,7 @@ const CardView = ({ data }) => {
                                 {featuredImage ? (
                                     <GatsbyImage image={getImage(featuredImage)} />
                                 ) : (
-                                    <img width={700} height={441} src="/banner.png" />
+                                    <img width={700} height={395} src="/banner.png" />
                                 )}
                             </Link>
                         </div>
@@ -169,7 +169,7 @@ const ListView = ({ data }) => {
                             {featuredImage ? (
                                 <GatsbyImage className="w-[213px] rounded-md" image={getImage(featuredImage)} />
                             ) : (
-                                <img className="w-[213px] rounded-md" width={700} height={441} src="/banner.png" />
+                                <img className="w-[213px] rounded-md" width={700} height={395} src="/banner.png" />
                             )}
                         </Link>
 
@@ -287,7 +287,7 @@ export const TutorialsFragment = graphql`
             }
             featuredImage {
                 childImageSharp {
-                    gatsbyImageData(width: 700, height: 441)
+                    gatsbyImageData(width: 700, height: 395)
                 }
             }
         }
