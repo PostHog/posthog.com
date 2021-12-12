@@ -2,7 +2,7 @@
 title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/funnels.png
+featuredImage: ../images/tutorials/banners/funnels-new.png
 author: ['yakko-majuri']
 topics:
     - funnels

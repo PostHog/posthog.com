@@ -1127,3 +1127,8 @@
 [[redirects]]
     from = "/docs/tutorials/*"
     to = "/tutorials/:splat"
+
+# Added: 2021-12-08
+[[redirects]]
+    from = "/docs/self-host/hobby-deployment"
+    to = "/docs/self-host/deploy/hobby"

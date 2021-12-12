@@ -3,8 +3,8 @@ title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../images/tutorials/banners/actions.png
 date: 2021-08-02
+featuredImage: ../images/tutorials/banners/actions-new.png
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕

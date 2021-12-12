@@ -84,6 +84,8 @@ Developer relations and community is also super important to us, but covered els
  
 The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press). 
 
+We track marketing activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
+
 ## Who is our target customer and what do we want to say to them?
 
 We have articulated a series of [value propositions](/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels.

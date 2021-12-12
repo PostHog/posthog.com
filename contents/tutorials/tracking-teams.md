@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
+featuredImage: ../images/tutorials/banners/user-model-new.png
+
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕

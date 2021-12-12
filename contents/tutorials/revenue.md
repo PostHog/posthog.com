@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 topics: ['funnels']
-featuredImage: ../images/tutorials/banners/revenue.png
 date: 2020-11-18
+featuredImage: ../images/tutorials/banners/revenue-new.png
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
