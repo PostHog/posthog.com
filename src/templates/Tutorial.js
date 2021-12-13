@@ -130,7 +130,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                     <div className="lg:max-w-[650px] w-full">
                         <h1 className="text-2xl mb-6">{title}</h1>
-                        {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
                         <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
                         {featuredVideo && (
                             <div className="mb-6 flex space-x-2">
@@ -138,6 +137,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                                 <ViewButton view={view} title="Video" setView={setView} />
                             </div>
                         )}
+                        {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
                         {view === 'Article' ? (
                             <div className="article-content">
                                 <MDXProvider components={components}>
