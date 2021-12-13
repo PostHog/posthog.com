@@ -76,7 +76,13 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
                         !activeFilter ? 'active-product' : ''
                     }`}
                 >
-                    <Link className={'text-base font-semibold'} to="/tutorials" state={{ view, openFilter: title }}>
+                    <Link
+                        className={`transition-colors text-base hover:opacity-70 font-semibold text-primary dark:text-white hover:text-primary dark:hover:text-white ${
+                            !activeFilter ? '!opacity-100' : 'opacity-50'
+                        }`}
+                        to="/tutorials"
+                        state={{ view, openFilter: title }}
+                    >
                         All
                     </Link>
                 </li>
@@ -90,7 +96,13 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
                                 active ? 'active-product' : ''
                             }`}
                         >
-                            <Link className={'text-base font-semibold'} to={url} state={{ view, openFilter: title }}>
+                            <Link
+                                className={`transition-colors text-base hover:opacity-70 font-semibold text-primary dark:text-white hover:text-primary dark:hover:text-white ${
+                                    active ? '!opacity-100' : 'opacity-50'
+                                }`}
+                                to={url}
+                                state={{ view, openFilter: title }}
+                            >
                                 {fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}
                             </Link>
                         </li>
