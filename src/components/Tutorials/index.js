@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import slugify from 'slugify'
 
 const Filters = ({ activeFilter, view, location }) => {
-    const openFilter = location?.state?.openFilter
+    const openFilter = location?.state?.openFilter || 'Category'
     const {
         tutorials: { categories, contributors },
     } = useStaticQuery(filterQuery)
