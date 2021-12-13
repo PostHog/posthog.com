@@ -300,6 +300,10 @@
                 {
                     "name": "Disruption Messages",
                     "url": "/handbook/engineering/disruption-messages"
+                },
+                {
+                    "name": "Writing async migrations",
+                    "url": "/handbook/engineering/async-migrations"
                 }
             ]
         },
@@ -536,6 +540,10 @@
                         {
                             "name": "Upgrading PostHog",
                             "url": "/docs/self-host/configure/upgrading-posthog"
+                        },
+                        {
+                            "name": "Async migrations",
+                            "url": "/docs/self-host/configure/async-migrations"
                         }
                     ]
                 },
