@@ -262,10 +262,6 @@
                     "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
-                    "name": "Setting up PostHog EE",
-                    "url": "/handbook/engineering/ee-setup"
-                },
-                {
                     "name": "Common issues",
                     "url": "/handbook/engineering/common-issues"
                 },
