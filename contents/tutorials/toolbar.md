@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: true
 featuredImage: ../images/tutorials/banners/toolbar.png
+featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=48
 author: ['yakko-majuri']
 topics:
     - heatmaps
@@ -33,11 +34,6 @@ Consider the question: _"Where are my users clicking?"_
 How's that for an answer?
 
 This tutorial will walk you through using the PostHog Toolbar to answer some of your analytics questions, as well as show you step-by-step how to create actions with it, so that you can sort through your events and level up your PostHog game. 
-
-
-<span class='centered'>...</span>
-
-_Prefer to watch a video? Check out the [Toolbar sections of our demo video](https://youtu.be/aUILrrrlu50?t=48) for a shorter overview of this functionality._
 
 ## Prerequisites
 

@@ -6,6 +6,7 @@ featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: true
 author: ['yakko-majuri']
 topics: ['feature flags']
+featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
 date: 2020-09-24
 ---
 
@@ -22,10 +23,6 @@ To make this process less painful and safer, you can use feature flags.
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
 This tutorial will walk you through creating and using a feature flag with PostHog and answer some of the questions you may have when using them.
-
-<span class='centered'>...</span>
-
-_Prefer to watch a video? Check out the [Feature Flags section of our demo video](https://youtu.be/aUILrrrlu50?t=950) for a shorter overview of this functionality._
 
 ## Prerequisites
 

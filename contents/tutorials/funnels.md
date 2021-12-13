@@ -3,6 +3,7 @@ title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/funnels-new.png
+featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=504
 author: ['yakko-majuri']
 topics:
     - funnels
@@ -40,10 +41,6 @@ _"Out of the PostHog team members who visited the website, how many clicked our 
 Just like us, you probably have a lot of questions that can be answered with funnels. 
 
 Hence, this tutorial will walk you through creating a funnel step-by-step, while covering some of the use cases and features of PostHog funnels. 
-
-<span class='centered'>...</span>
-
-_Prefer to watch a video? Check out the [Funnels section of our demo video](https://youtu.be/aUILrrrlu50?t=504) for a shorter overview of this functionality._
 
 ## Prerequisites
 

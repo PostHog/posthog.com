@@ -13,7 +13,7 @@ import { SEO } from 'components/seo'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import slugify from 'slugify'
@@ -48,12 +48,27 @@ const SocialLink = ({ children, url }) => {
     )
 }
 
+const ViewButton = ({ title, view, setView }) => {
+    return (
+        <button
+            onClick={() => setView(title)}
+            style={{
+                background: view === title ? '#F54E00' : '#E5E7E0',
+                color: view === title ? 'white' : 'black',
+            }}
+            className="py-2 px-4 rounded-md w-1/2 transition-colors"
+        >
+            {title}
+        </button>
+    )
+}
+
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
     const { pageData } = data
     const { body, excerpt } = pageData
-    const { title, featuredImage, description, contributors, categories } = pageData?.frontmatter
+    const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
         pre: CodeBlock,
         Hero,
@@ -66,6 +81,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
     }
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
+    const [view, setView] = useState('Article')
 
     useEffect(() => {
         if (hash) {
@@ -96,13 +112,32 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                     <div className="lg:max-w-[650px] w-full">
                         <h1 className="text-2xl mb-6">{title}</h1>
-                        {breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
+                        {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
                         <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
-                        <div className="article-content">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </div>
+                        {featuredVideo && (
+                            <div className="mb-6 flex space-x-2">
+                                <ViewButton view={view} title="Article" setView={setView} />
+                                <ViewButton view={view} title="Video" setView={setView} />
+                            </div>
+                        )}
+                        {view === 'Article' ? (
+                            <div className="article-content">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
+                        ) : (
+                            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
+                                <iframe
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    src={featuredVideo}
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        )}
                         <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
                             <DocsPageSurvey />
                         </div>
@@ -177,7 +212,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                                 </ul>
                             </SidebarSection>
                         )}
-                        {!breakpoints.md && (
+                        {view === 'Article' && !breakpoints.md && (
                             <div className="pt-12">
                                 <h4 className="text-[13px] mb-2">On this page</h4>
                                 <Scrollspy
@@ -223,6 +258,7 @@ export const query = graphql`
                     image
                     name
                 }
+                featuredVideo
                 featuredImage {
                     publicURL
                     childImageSharp {
