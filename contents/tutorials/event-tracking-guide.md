@@ -3,12 +3,11 @@ title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/actions-new.png
+date: 2021-08-02
+featuredImage: ../images/tutorials/banners/actions-new.png
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
-
-![Actions banner image](../../images/tutorials/banners/actions-new.png)
 
 One of the features we're very proud of at PostHog is event autocapture.
 
@@ -64,7 +63,7 @@ To learn how to create actions using our toolbar, you can visit our [dedicated t
 
 To create actions from the events table, just click on the plus sign on the left of any event to reveal a button allowing you to create an action from that specific event. You will also be able to customize the action further in the following steps (such as add another event). 
 
-![Action from event image](../../images/tutorials/actions/action-from-event.png)
+![Action from event image](../images/tutorials/actions/action-from-event.png)
 <small class='centered'>_Creating actions from the events table_</small>
 
 
@@ -72,7 +71,7 @@ To create actions from the events table, just click on the plus sign on the left
 
 Lastly, you can of course create actions from the 'Actions' page under 'Events':
 
-![Actions page image](../../images/features/actions/actions-page.png)
+![Actions page image](../images/features/actions/actions-page.png)
 
 #### Action options
 
