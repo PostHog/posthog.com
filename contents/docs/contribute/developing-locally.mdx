@@ -261,6 +261,8 @@ To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DE
 
 For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
 
+Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
+
 For frontend tests, all you need is `yarn test`.
 
 
