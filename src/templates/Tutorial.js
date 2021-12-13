@@ -1,4 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
+import { useLocation } from '@reach/router'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Chip from 'components/Chip'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
@@ -9,12 +10,17 @@ import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
 import slugify from 'slugify'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import InternalSidebarLink from './Handbook/InternalSidebarLink'
+import MobileSidebar from './Handbook/MobileSidebar'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -44,7 +50,7 @@ const SocialLink = ({ children, url }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-export default function Tutorial({ data, pageContext: { pageViews }, location }) {
+export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, description, contributors, categories } = pageData?.frontmatter
@@ -58,6 +64,14 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
         a: A,
         ...shortcodes,
     }
+    const { hash } = useLocation()
+    const breakpoints = useBreakpoint()
+
+    useEffect(() => {
+        if (hash) {
+            scroll.scrollMore(-50)
+        }
+    }, [])
 
     return (
         <Layout>
@@ -81,9 +95,10 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
             >
                 <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                     <div className="lg:max-w-[650px] w-full">
+                        <h1 className="text-2xl mb-6">{title}</h1>
+                        {breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
+                        <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
                         <div className="article-content">
-                            <h1 className="text-2xl mb-6">{title}</h1>
-                            <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -93,7 +108,7 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                         </div>
                     </div>
                 </article>
-                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                     <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                         <SidebarSection title="Contributors">
                             <ul className="list-none m-0 p-0">
@@ -161,6 +176,28 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                                     })}
                                 </ul>
                             </SidebarSection>
+                        )}
+                        {!breakpoints.md && (
+                            <div className="pt-12">
+                                <h4 className="text-[13px] mb-2">On this page</h4>
+                                <Scrollspy
+                                    offset={-50}
+                                    className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                    items={tableOfContents?.map((navItem) => navItem.url)}
+                                    currentClassName="active-product"
+                                >
+                                    {tableOfContents?.map((navItem, index) => (
+                                        <li className="relative leading-none" key={index}>
+                                            <InternalSidebarLink
+                                                url={navItem.url}
+                                                name={navItem.value}
+                                                depth={navItem.depth}
+                                                className="hover:opacity-100 opacity-60 text-[14px]"
+                                            />
+                                        </li>
+                                    ))}
+                                </Scrollspy>
+                            </div>
                         )}
                     </div>
                 </aside>
