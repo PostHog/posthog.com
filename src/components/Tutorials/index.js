@@ -176,7 +176,7 @@ const ListView = ({ data }) => {
                     fields: { slug },
                 } = tutorial
                 return (
-                    <li key={id} className="flex items-start">
+                    <li key={id} className="flex items-center">
                         <Link to={slug} className="hidden sm:block mr-6">
                             {featuredImage ? (
                                 <GatsbyImage className="w-[213px] rounded-md" image={getImage(featuredImage)} />
