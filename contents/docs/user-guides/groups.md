@@ -285,7 +285,59 @@ You can use feature flags as you normally would, except you need to select the g
 You will also need to update your event tracking code (covered below), for the feature flag to be able to determine the groups of the current user.
 
 ## Integrating groups with feature flags
-@macobo to complete
+
+### [posthog-js](https://posthog.com/docs/integrate/client/js)
+
+If you have updated tracking, you can use grouo-based feature flags as normal in posthog-js.
+
+```js
+if (posthog.isFeatureEnabled('new-groups-feature')) {
+    // do something
+}
+```
+
+To check flag status for a different group, first switch the active group via a `posthog.group()` call.
+
+### [posthog-python](https://posthog.com/docs/integrate/server/python)
+
+Update to version 1.4.3 or above to make use of the new functionality.
+
+To check a flag that's matching by companies, specify groups in relevant call:
+
+```python
+if posthog.feature_enabled("new-groups-feature", "[distinct id]", groups={"company": "id:5"}):
+    # do something
+```
+
+### [posthog-php](https://posthog.com/docs/integrate/server/php)
+
+Update to version 2.1.0 or above to make use of the new functionality.
+
+To check a flag that's matching by companies, specify groups in relevant feature flag call:
+
+```c
+if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "id:5"))) {
+    // Do something
+}
+```
+
+### [posthog-go](https://posthog.com/docs/integrate/server/go)
+
+Does not yet support feature flags with groups. Missing this? [Let us know](https://github.com/PostHog/posthog/issues)
+
+### [posthog-node](https://posthog.com/docs/integrate/server/node)
+
+Update to version 1.2.0 or above to make use of the new functionality.
+
+To check a flag that's matching by companies, specify groups in relevant feature flag call:
+
+```javascript
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: 'id:5' })
+
+if (isFlagEnabled) {
+    // Toggle feature-flag specific behavior
+}
+```
 
 # Limitations
 * A maximum of 5 group types can be created per project
