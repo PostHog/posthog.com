@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Chip from 'components/Chip'
+import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { Hero } from 'components/Hero'
 import { Check, Close, Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
@@ -78,17 +79,22 @@ export default function Tutorial({ data, pageContext: { pageViews }, location })
                 style={{ gridAutoColumns: '1fr minmax(auto, 650px) minmax(max-content, 1fr)' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
-                <article className="article-content col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+                <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                     <div className="lg:max-w-[650px] w-full">
-                        <h1 className="text-2xl mb-6">{title}</h1>
-                        <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                        <div className="article-content">
+                            <h1 className="text-2xl mb-6">{title}</h1>
+                            <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
+                        <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
+                            <DocsPageSurvey />
+                        </div>
                     </div>
                 </article>
                 <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto">
-                    <div className="grid divide-y divide-gray-accent-light divide-dashed">
+                    <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                         <SidebarSection title="Contributors">
                             <ul className="list-none m-0 p-0">
                                 {contributors.map(({ image, id, name }) => {
