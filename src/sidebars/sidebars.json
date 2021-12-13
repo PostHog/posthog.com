@@ -488,6 +488,10 @@
                             "url": "/docs/self-host/deploy/gcp"
                         },
                         {
+                            "name": "Hobby",
+                            "url": "/docs/self-host/deploy/hobby"
+                        },
+                        {
                             "name": "Other Platforms",
                             "url": "/docs/self-host/deploy/other"
                         },
