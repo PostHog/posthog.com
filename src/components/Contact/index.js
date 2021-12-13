@@ -51,8 +51,8 @@ export default function Contact(props) {
                             <DemoScheduler
                                 iframeSrc={
                                     {
-                                        personal: 'https://calendly.com/jamesefhawkins/posthog-scale-enterprise-demo',
-                                        group: 'https://calendly.com/jamesefhawkins/posthog-demo',
+                                        personal: 'https://calendly.com/cameron-posthog/posthog-scale-enterprise-demo',
+                                        group: 'https://calendly.com/cameron-posthog/posthog-demo',
                                     }[demoType]
                                 }
                             />

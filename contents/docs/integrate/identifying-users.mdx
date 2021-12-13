@@ -20,8 +20,6 @@ PostHog will then pull their anonymous ID (e.g. `17b845b08de74-033c497ed2753c-35
 
 From now on, all events PostHog sees with ID `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55` will be attributed to the person with ID `my_user_12345`. This person now has 2 distinct IDs, and either of them can be used to reference the same person.
 
-In addition, this person will now be marked as identified in the PostHog UI.
-
 # Considerations
 
 Identifying users is a powerful feature, but it also has the potential to create problems if misused. 
@@ -37,7 +35,6 @@ While implementing analytics with PostHog, make sure you avoid above pitfalls to
 
 PostHog also has a few built-in protections stopping the most common threats to data integrity:
 
-- We do not allow identified users to be re-identified with another ID
 - We do not allow identifying users with the following IDs (case insensitive):
     - `anonymous`
     - `guest`
@@ -62,7 +59,7 @@ If we encounter an `$identify` event with one of these disallowed IDs, the follo
 
 - We process the event normally (it will be ingested and show up in the UI)
 - We refuse to merge users if both IDs exist
-- The user with the disallowed ID will not be marked as identified in the UI (but they will have an $identify event)
+- The user with the disallowed ID will have an $identify event
 
 
 

@@ -801,11 +801,6 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/docs/user-guides/users"
-
-# Added: 2021-10-11
-[[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
 
@@ -1023,8 +1018,22 @@
     to = "/integrations"
     status = 302
 
+[[redirects]]
+    from = "/heatmaps"
+    to = "/product/heatmaps"
+
+
+# Added: 2021-12-03
+[[redirects]]
+    from = "/handbook/company/branding"
+    to = "/handbook/company/brand-assets"
 
 # Added: 2021-12-08
 [[redirects]]
-    from = "/handbook/company/brand-assets"
-    to = "/handbook/company/branding"
+    from = "/docs/self-host/hobby-deployment"
+    to = "/docs/self-host/deploy/hobby"
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/handbook/engineering/ee-setup"
+    to = "/docs/contribute/developing-locally"

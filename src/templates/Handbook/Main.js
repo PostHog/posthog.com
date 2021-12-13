@@ -3,7 +3,10 @@ import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
+import Link from 'components/Link'
+import Team from 'components/Team'
 import { ZoomImage } from 'components/ZoomImage'
+import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useRef } from 'react'
@@ -12,7 +15,6 @@ import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
 import SectionLinks from './SectionLinks'
 import StickySidebar from './StickySidebar'
-import Link from 'components/Link'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => {
@@ -60,7 +62,16 @@ export default function Main({
     previous,
     hideLastUpdated,
 }) {
+    const { countries } = useStaticQuery(query)
+
+    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
+
+    const TotalTeam = (props) => (
+        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
+    )
+
     const components = {
+        Team,
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -73,6 +84,8 @@ export default function Main({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
+        TotalCountries,
+        TotalTeam,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
@@ -117,3 +130,13 @@ export default function Main({
         </div>
     )
 }
+
+const query = graphql`
+    query {
+        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+            group(field: frontmatter___country) {
+                totalCount
+            }
+        }
+    }
+`

@@ -3,11 +3,13 @@ title: Tracking how teams use your product
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
+featuredImage: ../../images/tutorials/banners/user-model-new.png
+
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
 
-![Revenue tracking banner image](../../images/tutorials/banners/user-model.png)
+![Revenue tracking banner image](../../images/tutorials/banners/user-model-new.png)
 
 When using PostHog or any other product analytics tool, there are two key entities that underpin all of your analytics: events and users.
 

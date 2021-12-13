@@ -46,7 +46,6 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
-import { GiveBackFriday } from './components/GiveBackFriday'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
@@ -92,6 +91,7 @@ import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
+import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
@@ -150,7 +150,6 @@ export const shortcodes = {
     FooterCTA,
     GetStartedModal,
     GithubIcon,
-    GiveBackFriday,
     Heading,
     HiddenSection,
     Home,
@@ -196,6 +195,7 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     StarRepoButton,
+    StarUsBanner,
     StartNowButton,
     Structure,
     TableOfContents,
