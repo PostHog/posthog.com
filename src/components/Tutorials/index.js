@@ -239,7 +239,7 @@ export default function Tutorials({
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 700px) 1fr' }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20 gap-4"
             >
-                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[231px] justify-self-end my-10 lg:px-0 px-5 lg:my-0 lg:pt-10 lg:pb-20">
+                <aside className="pl-5 hidden lg:block lg:sticky top-10 flex-shrink-0 w-full lg:w-[231px] justify-self-end my-10 lg:my-0 lg:pt-10 lg:pb-20">
                     <nav>
                         <Filters location={location} view={view} activeFilter={activeFilter} />
                     </nav>
