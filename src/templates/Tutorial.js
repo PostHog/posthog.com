@@ -1,15 +1,16 @@
 import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
+import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Chip from 'components/Chip'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { FeatureSnapshot } from 'components/FeatureSnapshot'
-import { Hero } from 'components/Hero'
-import { Check, Close, Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import { Heading } from 'components/Heading'
+import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
+import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -21,6 +22,18 @@ import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import InternalSidebarLink from './Handbook/InternalSidebarLink'
 import MobileSidebar from './Handbook/MobileSidebar'
+
+const Iframe = (props) => {
+    if (props.src && props.src.indexOf('youtube.com') !== -1) {
+        return (
+            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
+                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
+            </div>
+        )
+    } else {
+        return <iframe {...props} />
+    }
+}
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -70,12 +83,17 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
     const { body, excerpt } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
+        iframe: Iframe,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
         pre: CodeBlock,
-        Hero,
-        Section,
-        FeatureSnapshot,
-        Check,
-        Close,
+        img: ZoomImage,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
         ...shortcodes,
     }
@@ -127,16 +145,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                                 </MDXProvider>
                             </div>
                         ) : (
-                            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                                <iframe
-                                    className="absolute top-0 left-0 w-full h-full"
-                                    src={featuredVideo}
-                                    title="YouTube video player"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
+                            <Iframe src={featuredVideo} />
                         )}
                         <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
                             <DocsPageSurvey />
