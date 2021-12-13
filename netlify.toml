@@ -1028,8 +1028,12 @@
     from = "/handbook/company/branding"
     to = "/handbook/company/brand-assets"
 
-
 # Added: 2021-12-08
 [[redirects]]
     from = "/docs/self-host/hobby-deployment"
     to = "/docs/self-host/deploy/hobby"
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/handbook/engineering/ee-setup"
+    to = "/docs/contribute/developing-locally"
