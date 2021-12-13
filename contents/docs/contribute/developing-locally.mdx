@@ -55,17 +55,17 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 4. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
 
-```bash
-sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
-```
+    ```bash
+    sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    ```
 
-ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
+    ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
 5. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
-```bash
-git clone https://github.com/PostHog/posthog && cd posthog/
-```
+    ```bash
+    git clone https://github.com/PostHog/posthog && cd posthog/
+    ```
 
 
 ## Get things up and running
@@ -155,55 +155,57 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 ### 4. Prepare the Django server
 
-1. Install Python 3.8+. You can do so with Homebrew: `brew install python3`. Make sure to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.9+. You can do so with Homebrew: `brew install python@3.9`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+
+    **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 
 2. Create the virtual environment in current directory called 'env':
 
-```bash
-python3 -m venv env
-```
+    ```bash
+    python3 -m venv env
+    ```
 
 3. Activate the virtual environment:
 
-```bash
-# For bash/zsh/etc.
-source env/bin/activate
+    ```bash
+    # For bash/zsh/etc.
+    source env/bin/activate
 
-# For fish
-source env/bin/activate.fish
-```
+    # For fish
+    source env/bin/activate.fish
+    ```
 
 4. Install requirements with pip
 
-If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
+    If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
-```bash
-brew install openssl
-CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
-```
+    ```bash
+    brew install openssl
+    CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    ```
 
-These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
+    These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-If on an x86 platform, simply run the latter version.
+    If on an x86 platform, simply run the latter version.
 
 5. Install dev requirements
 
-```bash
-pip install -r requirements-dev.txt
-```
+    ```bash
+    pip install -r requirements-dev.txt
+    ```
 
 6. (optional) SAML support
 
-If you want to run PostHog with the _full_ feature set, you'll need to install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
+    If you want to run PostHog with the _full_ feature set, you'll need to install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
-```
-brew install libxml2 libxmlsec1 pkg-config
-pip install python3-saml==1.12.0
-```
+    ```
+    brew install libxml2 libxmlsec1 pkg-config
+    pip install python3-saml==1.12.0
+    ```
 
 ### 5. Prepare databases
 
