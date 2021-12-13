@@ -262,10 +262,6 @@
                     "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
-                    "name": "Setting up PostHog EE",
-                    "url": "/handbook/engineering/ee-setup"
-                },
-                {
                     "name": "Common issues",
                     "url": "/handbook/engineering/common-issues"
                 },
@@ -810,7 +806,10 @@
                     "name": "Cohorts",
                     "url": "/docs/user-guides/cohorts"
                 },
-
+                {
+                    "name": "Group Analytics",
+                    "url": "/docs/user-guides/group-analytics"
+                },
                 {
                     "name": "Correlation analysis",
                     "url": "/docs/user-guides/correlation"
