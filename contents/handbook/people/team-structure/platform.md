@@ -44,6 +44,8 @@ Concrete things we take responsibility over:
 
 ## Output metrics
 
+- Primary: Ease of deployment (?)
+
 ### VPC
 ###### Retention 
 - Metric: Retention
