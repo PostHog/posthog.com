@@ -154,8 +154,8 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 </article>
                 <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                     <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                        <SidebarSection title="Contributors">
-                            <ul className="list-none m-0 p-0">
+                        <SidebarSection title={`Contributor${contributors.length > 1 ? 's' : ''}`}>
+                            <ul className="list-none m-0 p-0 flex flex-col space-y-2">
                                 {contributors.map(({ image, id, name }) => {
                                     return (
                                         <li key={id}>
