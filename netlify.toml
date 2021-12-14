@@ -1137,3 +1137,105 @@
 [[redirects]]
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/aarrr-framework"
+    to = "/docs/tutorials/aarrr-framework"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/b2b"
+    to = "/docs/tutorials/b2b"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/cohorts"
+    to = "/docs/tutorials/cohorts"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/deleting-data"
+    to = "/docs/tutorials/deleting-data"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/event-tracking-guide"
+    to = "/docs/tutorials/event-tracking-guide"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/feature-flags"
+    to = "/docs/tutorials/feature-flags"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/funnels"
+    to = "/docs/tutorials/funnels"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/how-to-embed-shared-dashboard"
+    to = "/docs/tutorials/how-to-embed-shared-dashboard"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/nextjs-supabase-signup-funnel"
+    to = "/docs/tutorials/nextjs-supabase-signup-funnel"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/retention"
+    to = "/docs/tutorials/retention"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/revenue"
+    to = "/docs/tutorials/revenue"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/spa"
+    to = "/docs/tutorials/spa"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/survey"
+    to = "/docs/tutorials/survey"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/taxonomy-acquisition"
+    to = "/docs/tutorials/taxonomy-acquisition"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/toolbar"
+    to = "/docs/tutorials/toolbar"
+
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/tutorials/tracking-teams"
+    to = "/docs/tutorials/tracking-teams"

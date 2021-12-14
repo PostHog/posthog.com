@@ -4,11 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Note:** Async migrations are currently a work in progress under the name of "special migrations".
-
 ## What are async migrations?
 
-Async migrations (AKA big/special migrations) are migrations that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. 
+Async migrations (AKA big/special migrations) are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. 
 
 ## Why are async migrations necessary?
 
