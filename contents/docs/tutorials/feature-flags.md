@@ -2,7 +2,7 @@
 title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/feature-flags.png
+featuredImage: ../../images/tutorials/banners/feature-flags-transparent.png
 featuredTutorial: true
 author: ['yakko-majuri']
 topics: ['feature flags']
@@ -10,7 +10,7 @@ topics: ['feature flags']
 
 _Estimated reading time: 7 minutes_ ☕☕
 
-![](../../images/tutorials/banners/feature-flags.png)
+![](../../images/tutorials/banners/feature-flags-transparent.png)
 
 Rolling out new features in your product can really be a pain.
 

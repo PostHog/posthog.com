@@ -3,12 +3,12 @@ title: Tracking single page apps
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/spa.png
+featuredImage: ../../images/tutorials/banners/spa-transparent.png
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![SPA banner image](../../images/tutorials/banners/spa.png)
+![SPA banner image](../../images/tutorials/banners/spa-transparent.png)
 
 If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
 

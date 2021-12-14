@@ -3,12 +3,12 @@ title: Analyzing user behavior with cohorts
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/cohorts.png
+featuredImage: ../../images/tutorials/banners/cohorts-transparent.png
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Cohorts banner image](../../images/tutorials/banners/cohorts.png)
+![Cohorts banner image](../../images/tutorials/banners/cohorts-transparent.png)
 
 Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 

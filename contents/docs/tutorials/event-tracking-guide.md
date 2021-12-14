@@ -3,12 +3,12 @@ title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/actions-new.png
+featuredImage: ../../images/tutorials/banners/actions-transparent.png
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
 
-![Actions banner image](../../images/tutorials/banners/actions-new.png)
+![Actions banner image](../../images/tutorials/banners/actions-transparent.png)
 
 One of the features we're very proud of at PostHog is event autocapture.
 

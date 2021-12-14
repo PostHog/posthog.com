@@ -3,7 +3,7 @@ title: Visualizing user behavior - Toolbar
 sidebar: Docs
 showTitle: true
 featuredTutorial: true
-featuredImage: ../../images/tutorials/banners/toolbar.png
+featuredImage: ../../images/tutorials/banners/toolbar-transparent.png
 author: ['yakko-majuri']
 topics:
     - heatmaps
@@ -11,7 +11,7 @@ topics:
 
 _Estimated reading time: 6 minutes_ ☕☕
 
-![Toolbar banner image](../../images/tutorials/banners/toolbar.png)
+![Toolbar banner image](../../images/tutorials/banners/toolbar-transparent.png)
 
 An underlying purpose of analytics is to answer questions by utilizing data.
 

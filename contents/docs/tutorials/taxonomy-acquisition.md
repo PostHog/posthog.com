@@ -3,9 +3,9 @@ title: Set up deep dive acquisition dashboards
 sidebar: Docs
 showTitle: true
 author: ['james-hawkins']
-featuredImage: ../../images/tutorials/banners/deep-dive.png
+featuredImage: ../../images/tutorials/banners/deep-dive-transparent.png
 ---
-![Funnels Banner Image](../../images/tutorials/banners/deep-dive.png)
+![Funnels Banner Image](../../images/tutorials/banners/deep-dive-transparent.png)
 
 This tutorial will help you:
 

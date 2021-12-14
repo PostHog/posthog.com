@@ -2,7 +2,7 @@
 title: Building an AARRR pirate funnel
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/aarrr-funnel.png
+featuredImage: ../../images/tutorials/banners/aarrr-funnel-transparent.png
 featuredTutorial: false
 author: ["hanna-crombie"]
 topics:
@@ -10,7 +10,7 @@ topics:
 ---
 _Estimated reading time: 10 minutes_ ☕☕☕
 
-![AARRR Funnel Banner Image](../../images/tutorials/banners/aarrr-funnel.png)
+![AARRR Funnel Banner Image](../../images/tutorials/banners/aarrr-funnel-transparent.png)
 
 Applying pirate metrics to your business is an efficient way to determine where you are losing customers and how you should be optimizing your marketing and sales funnel, especially when you are just getting started with metrics.
 

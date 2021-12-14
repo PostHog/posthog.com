@@ -3,13 +3,13 @@ title: Measuring retention and tracking churn
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/retention.png
+featuredImage: ../../images/tutorials/banners/retention-transparent.png
 
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-![Retention banner image](../../images/tutorials/banners/retention.png)
+![Retention banner image](../../images/tutorials/banners/retention-transparent.png)
 
 For most businesses, retention is one of the top metrics to track and use to inform decisions.
 
