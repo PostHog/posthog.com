@@ -14,8 +14,5 @@ export const pageQuery = graphql`
                 }
             }
         }
-        markdownRemark(fields: { slug: { eq: "/authors" } }) {
-            ...AuthorsFragment
-        }
     }
 `

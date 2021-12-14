@@ -172,6 +172,7 @@ export default function BlogPost({ data, pageContext, location }) {
 export const query = graphql`
     query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
+            id
             body
             excerpt(pruneLength: 150)
             fields {

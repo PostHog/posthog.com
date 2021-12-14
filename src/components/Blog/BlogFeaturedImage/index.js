@@ -1,8 +1,8 @@
+import cntl from 'cntl'
 import React from 'react'
 import { Structure } from '../../Structure'
 import BlogAuthor from '../BlogAuthor'
 import { PlainIntro } from '../BlogIntro'
-import cntl from 'cntl'
 
 const bgGradient = cntl`
     before:h-full
@@ -48,14 +48,20 @@ export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, blogUpda
                         titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0 text-white text-2xl md:text-4xl"
                     />
 
-                    {authorDetails?.handle && (
+                    {authorDetails && authorDetails.length > 0 && (
                         <div className="w-full max-w-xl mt-2 md:mt-6">
-                            <BlogAuthor
-                                className="flex space-x-4"
-                                color={'primary-dark'}
-                                colorDark={'primary-dark'}
-                                authorDetails={authorDetails}
-                            />
+                            <ul className="list-none m-0 p-0 flex items-center flex-wrap">
+                                {authorDetails.map((author, index) => (
+                                    <li key={index} className="mr-4">
+                                        <BlogAuthor
+                                            className="flex space-x-4"
+                                            color={'primary-dark'}
+                                            colorDark={'primary-dark'}
+                                            authorDetails={author}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     )}
                 </div>
