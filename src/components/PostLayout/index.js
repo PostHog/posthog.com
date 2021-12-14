@@ -150,7 +150,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
             style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
-            <article className="article-content col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+            <article className="article-content col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
                 <div style={{ maxWidth: contentWidth }} className="w-full">
                     {children}
                 </div>
