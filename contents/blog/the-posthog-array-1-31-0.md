@@ -84,7 +84,7 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Cameron DeLeone! Cameron joined PostHog to help us level up our Developer Relationships. Cameron is ?? (🍍 on 🍕).
+Welcome Cameron DeLeone! Cameron joined PostHog to help us level up our Customer Success experience. Cameron is ?? (🍍 on 🍕).
 
 > Fun fact here.
 
