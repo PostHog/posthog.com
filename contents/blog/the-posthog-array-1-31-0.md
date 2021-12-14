@@ -99,13 +99,14 @@ We want to thank each and every community member that contributed to this releas
 - [abtinmo](https://github.com/abtinmo)
 - [k4kuz0](https://github.com/k4kuz0)
 - [vicampuzano](https://github.com/vicampuzano)
-- [timgl](https://github.com/timgl) // #7296
+- [jyuvaraj03](https://github.com/jyuvaraj03)
 - [ajsharp](https://github.com/ajsharp)
 - [maxmue](https://github.com/maxmue)
 - [hjweddie](https://github.com/hjweddie)
-- [timgl](https://github.com/timgl) // #7072
+- [timgl](https://github.com/asherf)
 - [chasovskiy](https://github.com/chasovskiy)
-- [timgl](https://github.com/timgl) // #7118
+- [joesaunderson](https://github.com/joesaunderson)
+- [Jaspreet-singh-1032](https://github.com/Jaspreet-singh-1032)
 
 ## Open roles
 
