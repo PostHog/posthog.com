@@ -2,10 +2,11 @@
 title: Getting started with the AARRR framework
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/get-started-aarrr-transparent.png
+featuredImage: ../images/tutorials/banners/get-started-aarrr.png
 featuredTutorial: true
 author: ["james-hawkins"]
 topics: ['funnels', 'trends', 'plugins']
+date: 2021-11-29
 ---
 
 ![Retention banner image](../../images/tutorials/banners/get-started-aarrr-transparent.png)

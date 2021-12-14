@@ -3,13 +3,12 @@ title: Tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/b2b-transparent.png
+featuredImage: ../images/tutorials/banners/b2b.png
 topics: ['feature flags', 'trends']
+date: 2020-11-17
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
-
-![B2B Tutorial Banner Image](../../images/tutorials/banners/b2b-transparent.png)
 
 If you run a B2B business, it is especially important to track group usage of your product, since, by definition, you have multiple clearly-defined groups as your clients. 
 
@@ -46,7 +45,7 @@ Next, you might also want to filter your own team out of the data. The best way 
 
 Here's what your chart might look like after the aforementioned setup:
 
-![Trends Screenshot](../../images/tutorials/b2b/trends.png)
+![Trends Screenshot](../images/tutorials/b2b/trends.png)
 
 Depending on your PostHog setup, you might need or want to narrow this view even further. For this, you can set as many filters you like, to ensure you're measuring users that really did use your product. For example, you might want to filter based on a specific URL, or change the event from `$pageview` to a custom action that you set up. You could, for instance, determine that to count an active user, the user needs to use a certain part of your product. As such, you could represent that by a button click or [custom event](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors).
 
@@ -76,21 +75,21 @@ const login = (userEmail, userPassword, userCompanyName) => {
 
 This way, you can then find the user on PostHog's 'People' page and access their individual page to analyze their events and watch their recorded sessions.
 
-![People Screenshot](../../images/tutorials/b2b/person.png)
+![People Screenshot](../images/tutorials/b2b/person.png)
 
 Additionally, you will also then be able to filter charts in 'Insights' to find the data on that specific user, by setting a filter like 'Email equals `tester@test.com`'. Here's an example:
 
-![Chart Person Screenshot](../../images/tutorials/b2b/chart-person.png)
+![Chart Person Screenshot](../images/tutorials/b2b/chart-person.png)
 
 On the chart above, we can see how often the user performed the action 'Toggle Dark Mode'. However, you could do the same for the actions that you set which are valuable to you, such as 'Invited Team Member', 'Logged In', and 'Used Feature X'.
 
 And remember, you can set this filter on any 'Insights', including 'Retention':
 
-![Person Retention Screenshot](../../images/tutorials/b2b/person-retention.png)
+![Person Retention Screenshot](../images/tutorials/b2b/person-retention.png)
 
 And 'Paths':
 
-![Person Paths Screenshot](../../images/tutorials/b2b/person-paths.png)
+![Person Paths Screenshot](../images/tutorials/b2b/person-paths.png)
 
 PostHog also remembers your filters, so flipping through tabs in 'Insights' ensures your views are filtered accordingly by default.
 
@@ -114,7 +113,7 @@ As a B2B business, an obvious yet valuable segmentation would be a breakdown by 
 
 For example, at PostHog, we use the properties `team_id` and `company_name` to do this. As such, we can create a chart like the following:
 
-![Breakdown Screenshot](../../images/tutorials/b2b/breakdown.png)
+![Breakdown Screenshot](../images/tutorials/b2b/breakdown.png)
 
 Here, we can clearly see the usage of our product by company. This can be useful for a variety of reasons, such as:
 
@@ -132,7 +131,7 @@ Having established some key metrics, you can then compare the two to determine w
 
 For example, here's some real PostHog data (with company names anonymized):
 
-![Funnel Companies](../../images/tutorials/b2b/funnel-companies.png)
+![Funnel Companies](../images/tutorials/b2b/funnel-companies.png)
 
 Users creating an action in PostHog is something we care about because it shows that a team has dedicated some time to understanding how PostHog works and want to leverage actions to perform more advanced analytics.
 
@@ -165,7 +164,7 @@ This is useful to determine if your features are performing as expected, and if 
 
 In our case, feature flags are a great example:
 
-![Feature Flags Tracking](../../images/tutorials/b2b/feature-flags.png)
+![Feature Flags Tracking](../images/tutorials/b2b/feature-flags.png)
 
 Originally rolled out as an experimental feature, our [feature flags](/docs/user-guides/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
 
@@ -175,7 +174,7 @@ After some time discussing if our 'Live Actions' feature has been useful to user
 
 While this was initially driven by our internal sentiment about the feature, looking at different metrics for the feature's performance was helpful in confirming that the feature indeed was barely being used:
 
-![Live Actions Usage](../../images/tutorials/b2b/live-actions.png)
+![Live Actions Usage](../images/tutorials/b2b/live-actions.png)
 
 Keeping an eye on how your features are performing is key to determining if there are any that are worth dropping altogether, or that require special attention to be developed further.
 
@@ -202,7 +201,7 @@ Rather than flipping back and forth between tabs, you probably want to have your
 
 What should be in each of your dashboards is entirely up to you, and they could look something like this:
 
-![Demo dashboard screenshot](../../images/tutorials/b2b/demo-dashboard.png)
+![Demo dashboard screenshot](../images/tutorials/b2b/demo-dashboard.png)
 
 Any chart, table, funnel, and graph from our 'Insights' can be added to a dashboard. To do so, once you are happy with a certain view you created, just click 'Add to Dashboard' on the top-right corner. This will let you select what dashboard you want to add the panel to. 
 
@@ -220,13 +219,13 @@ If you want to stay on top of new signups (or any other specific action), you ca
 
 Once configured in setup, you are able to set custom messages to be sent to you when a certain action is triggered. You can set this on each new action that you create, on the action creation page:
 
-![Demo Dashboard screenshot](../../images/tutorials/b2b/slack.png)
+![Demo Dashboard screenshot](../images/tutorials/b2b/slack.png)
 
 If you create actions with our [Toolbar](/docs/tutorials/toolbar), you can set this up by clicking on the desired action from the 'Actions' page ('Events' -> 'Actions').
 
 With everything configured, you will start receiving messages like these:
 
-![Slack message](../../images/slack-message.png)
+![Slack message](../images/slack-message.png)
 
 These messages can help keep your team up-to-date with key user events such as signups without leaving the team's chat platform. For example, it can be useful for:
 

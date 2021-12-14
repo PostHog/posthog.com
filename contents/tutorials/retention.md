@@ -3,13 +3,12 @@ title: Measuring retention and tracking churn
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/retention-transparent.png
+date: 2020-11-04
+featuredImage: ../images/tutorials/banners/retention.png
 
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
-
-![Retention banner image](../../images/tutorials/banners/retention-transparent.png)
 
 For most businesses, retention is one of the top metrics to track and use to inform decisions.
 
@@ -80,7 +79,7 @@ Stickiness is also a metric of repeated usage, but it disregards the absolute ti
 
 > **Pro tip:** Stickiness is particularly useful at the early stages of your product tracking when you do not have a lot of data. In this case, it makes sense to focus on the overall repeated usage of features rather than looking at retention over specific time periods. 
 
-![Retention in Insights image](../../images/tutorials/retention/insights.png)
+![Retention in Insights image](../images/tutorials/retention/insights.png)
 
 This tutorial will focus on 'retention' specifically, but the majority of concepts is also applicable to stickiness views.
 
@@ -90,7 +89,7 @@ To start calculating your retention, head over to the 'Retention' tab in 'Insigh
 
 This will show you a retention table for the `$pageview` event, like so:
 
-![Retention table image](../../images/tutorials/retention/table.png)
+![Retention table image](../images/tutorials/retention/table.png)
 
 If this table is a bit confusing to you, check out our dedicated [retention](/docs/user-guides/retention) page for a full walkthrough of how it works.
 

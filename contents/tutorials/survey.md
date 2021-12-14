@@ -3,11 +3,9 @@ title: Running surveys with no backend
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../../images/tutorials/banners/surveys-transparent.png
+date: 2021-07-14
+featuredImage: ../images/tutorials/banners/surveys.png
 ---
-
-![Survey banner image](../../images/tutorials/banners/surveys-transparent.png)
-
 
 ## Objective
 
@@ -91,7 +89,7 @@ There's a lot you can do with survey data in PostHog, such as:
 
 For example, here's a dashboard based on app ratings:
 
-![PostHog Survey Dashboard](../../images/tutorials/survey/survey-dashboard.png)
+![PostHog Survey Dashboard](../images/tutorials/survey/survey-dashboard.png)
 
 And that's it! 
 
