@@ -61,21 +61,18 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 ### Automatically running migrations
 
-From PostHog 1.32.0 onwards, we will set `AUTO_START_SPECIAL_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
+From PostHog 1.32.0 onwards, we will set `AUTO_START_ASYNC_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
 
 The current default is to trigger a task to run 30 minutes after the deploy and if there are multiple migrations to run, we will automatically run the next migration in line once the previous one completes.
 
-However, on PostHog 1.31.0, `AUTO_START_SPECIAL_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
+However, on PostHog 1.31.0, `AUTO_START_ASYNC_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
 
-If you would like to customize the behaviour you can set `AUTO_START_SPECIAL_MIGRATIONS` in your `values.yaml` file like this (note the two values we have in the chart default `values.yaml` should be kept):
+If you would like to customize the behaviour you can set `AUTO_START_ASYNC_MIGRATIONS` in your `values.yaml` file like this (note the two values we have in the chart default `values.yaml` should be kept):
 ```
-env:
-  - name: ASYNC_EVENT_PROPERTY_USAGE
-    value: "true"
-  - name: EVENT_PROPERTY_USAGE_INTERVAL_SECONDS
-    value: "86400"
-  - name: AUTO_START_SPECIAL_MIGRATIONS
-    value: "false"
+web:
+  env:
+    - name: AUTO_START_ASYNC_MIGRATIONS
+      value: "false"
 ```
 
 ### Celery scaling considerations
