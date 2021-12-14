@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import MobileSidebar from '../../templates/Handbook/MobileSidebar'
-import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
 import { useLocation } from '@reach/router'
@@ -31,30 +26,6 @@ const Iframe = (props) => {
     }
 }
 
-const ViewButton = ({ title, view, setView }) => {
-    return (
-        <button
-            onClick={() => setView(title)}
-            style={{
-                background: view === title ? '#F54E00' : '#E5E7E0',
-                color: view === title ? 'white' : 'black',
-            }}
-            className="py-2 px-4 rounded-md w-1/2 transition-colors"
-        >
-            {title}
-        </button>
-    )
-}
-
-const SidebarSection = ({ title, children }) => {
-    return (
-        <div className="py-4">
-            {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
-            {children}
-        </div>
-    )
-}
-
 const ShareLink = ({ children, url }) => {
     const width = 626
     const height = 436
@@ -73,6 +44,15 @@ const ShareLink = ({ children, url }) => {
 }
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+export const SidebarSection = ({ title, children, className = '' }) => {
+    return (
+        <div className={`py-4 ${className}`}>
+            {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
+            {children}
+        </div>
+    )
+}
 
 export const Topics = ({ topics }) => {
     return (
@@ -116,18 +96,33 @@ export const ShareLinks = ({ title, href }) => {
     )
 }
 
-export const Contributors = ({ contributors }) => {
+export const Contributor = ({ image, name }) => {
     return (
-        <ul className="list-none m-0 p-0 flex flex-col space-y-2">
+        <>
+            <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
+                <img className="absolute w-full h-full inset-0 object-cover" src={image} />
+            </div>
+            <span className="author text-[14px] font-semibold">{name}</span>
+        </>
+    )
+}
+
+export const Contributors = ({ contributors, className = '' }) => {
+    const classes = 'flex space-x-2 items-center no-underline'
+    return (
+        <ul className={`list-none m-0 p-0 ${className}`}>
             {contributors.map(({ image, id, name, url, state }) => {
                 return (
                     <li key={id}>
-                        <Link state={state} className="flex space-x-2 items-center" to={url}>
-                            <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
-                                <img className="absolute w-full h-full inset-0 object-cover" src={image} />
-                            </div>
-                            <span className="author text-[14px] font-semibold">{name}</span>
-                        </Link>
+                        {url ? (
+                            <Link state={state} className={classes} to={url}>
+                                <Contributor image={image} name={name} />
+                            </Link>
+                        ) : (
+                            <span className={classes}>
+                                <Contributor image={image} name={name} />
+                            </span>
+                        )}
                     </li>
                 )
             })}
@@ -135,25 +130,14 @@ export const Contributors = ({ contributors }) => {
     )
 }
 
-export default function PostLayout({ tableOfContents, children, sidebarComponents }) {
+export const Text = ({ children }) => {
+    return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[13px]">{children}</p>
+}
+
+export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650 }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
-    const components = {
-        iframe: Iframe,
-        inlineCode: InlineCode,
-        blockquote: Blockquote,
-        pre: CodeBlock,
-        img: ZoomImage,
-        h1: (props) => Heading({ as: 'h1', ...props }),
-        h2: (props) => Heading({ as: 'h2', ...props }),
-        h3: (props) => Heading({ as: 'h3', ...props }),
-        h4: (props) => Heading({ as: 'h4', ...props }),
-        h5: (props) => Heading({ as: 'h5', ...props }),
-        h6: (props) => Heading({ as: 'h6', ...props }),
-        a: A,
-        ...shortcodes,
-    }
 
     useEffect(() => {
         if (hash) {
@@ -163,23 +147,17 @@ export default function PostLayout({ tableOfContents, children, sidebarComponent
 
     return (
         <div
-            style={{ gridAutoColumns: '1fr minmax(auto, 650px) minmax(max-content, 1fr)' }}
+            style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
-            <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
-                <div className="lg:max-w-[650px] w-full">{children}</div>
+            <article className="article-content col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+                <div style={{ maxWidth: contentWidth }} className="w-full">
+                    {children}
+                </div>
             </article>
             <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                    {sidebarComponents?.map(({ title, component }, index) => {
-                        return (
-                            component && (
-                                <SidebarSection key={index} title={title}>
-                                    {component}
-                                </SidebarSection>
-                            )
-                        )
-                    })}
+                    {sidebar && sidebar}
                     {view === 'Article' && !breakpoints.md && tableOfContents && (
                         <div className="pt-12">
                             <h4 className="text-[13px] mb-2">On this page</h4>

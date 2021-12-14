@@ -2,14 +2,12 @@ import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
-import Chip from 'components/Chip'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { Heading } from 'components/Heading'
-import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, Topics, PageViews } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, Topics, PageViews, SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -17,11 +15,9 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
-import Scrollspy from 'react-scrollspy'
 import slugify from 'slugify'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import InternalSidebarLink from './Handbook/InternalSidebarLink'
 import MobileSidebar from './Handbook/MobileSidebar'
 
 const Iframe = (props) => {
@@ -34,32 +30,6 @@ const Iframe = (props) => {
     } else {
         return <iframe {...props} />
     }
-}
-
-const SidebarSection = ({ title, children }) => {
-    return (
-        <div className="py-4">
-            {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
-            {children}
-        </div>
-    )
-}
-
-const SocialLink = ({ children, url }) => {
-    const width = 626
-    const height = 436
-    const handleClick = () => {
-        if (typeof window !== 'undefined') {
-            const left = window.innerWidth / 2 - width / 2
-            const top = window.innerHeight / 2 - height / 2
-            window.open(url, '', `left=${left},top=${top},width=${width},height=${height}`)
-        }
-    }
-    return (
-        <a className="text-primary hover:text-primary dark:text-white dark:hover:text-white" onClick={handleClick}>
-            {children}
-        </a>
-    )
 }
 
 const ViewButton = ({ title, view, setView }) => {
@@ -78,6 +48,44 @@ const ViewButton = ({ title, view, setView }) => {
 }
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+const TutorialSidebar = ({ contributors, location, title, pageViews, categories }) => {
+    return (
+        <>
+            {contributors?.length > 0 && (
+                <SidebarSection title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                    <Contributors
+                        className="flex flex-col space-y-2"
+                        contributors={contributors.map((contributor) => ({
+                            ...contributor,
+                            url: `/tutorials/contributors/${slugify(contributor.name, { lower: true })}`,
+                            state: { openFilter: 'Contributor' },
+                        }))}
+                    />
+                </SidebarSection>
+            )}
+            <SidebarSection title="Share">
+                <ShareLinks title={title} href={location.href} />
+            </SidebarSection>
+            {pageViews && (
+                <SidebarSection>
+                    <PageViews pageViews={pageViews} />
+                </SidebarSection>
+            )}
+            {categories?.length > 0 && (
+                <SidebarSection title="Filed under...">
+                    <Topics
+                        topics={categories?.map((category) => ({
+                            title: category,
+                            url: `/tutorials/categories/${slugify(category, { lower: true })}`,
+                            state: { openFilter: 'Category' },
+                        }))}
+                    />
+                </SidebarSection>
+            )}
+        </>
+    )
+}
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
     const { pageData } = data
@@ -130,39 +138,15 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 featuredVideo={featuredVideo}
                 tableOfContents={tableOfContents}
                 title={title}
-                sidebarComponents={[
-                    {
-                        title: `Contributor${contributors?.length > 1 ? 's' : ''}`,
-                        component: contributors?.length > 0 && (
-                            <Contributors
-                                contributors={contributors.map((contributor) => ({
-                                    ...contributor,
-                                    url: `/tutorials/contributors/${slugify(contributor.name, { lower: true })}`,
-                                    state: { openFilter: 'Contributor' },
-                                }))}
-                            />
-                        ),
-                    },
-                    {
-                        title: 'Share',
-                        component: <ShareLinks title={title} href={location.href} />,
-                    },
-                    {
-                        component: pageViews && <PageViews pageViews={pageViews} />,
-                    },
-                    {
-                        title: 'Filed under...',
-                        component: categories?.length > 0 && (
-                            <Topics
-                                topics={categories?.map((category) => ({
-                                    title: category,
-                                    url: `/tutorials/categories/${slugify(category, { lower: true })}`,
-                                    state: { openFilter: 'Category' },
-                                }))}
-                            />
-                        ),
-                    },
-                ]}
+                sidebar={
+                    <TutorialSidebar
+                        contributors={contributors}
+                        location={location}
+                        title={title}
+                        pageViews={pageViews}
+                        categories={categories}
+                    />
+                }
             >
                 <h1 className="text-2xl mb-6">{title}</h1>
                 <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
