@@ -12,7 +12,7 @@ featuredImageType: full
 
 Today, we’re excited to announce that PostHog now supports group analytics for both PostHog Scale / Enterprise users and those on PostHog Cloud. 
 
-Group analytics are used for tracking and analyzing multiples of any event type within PostHog. Unlike cohorts, which essentially create lists of users, groups can track a far wider range of information because they apply to _events_, rather than users. 
+Group analytics are used for tracking and analyzing multiples of any event type within PostHog. Unlike cohorts, which essentially create lists of users, groups can track a far wider range of information because they apply at the event level. 
 
 <BorderWrapper>
     <Quote
