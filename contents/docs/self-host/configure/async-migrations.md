@@ -48,9 +48,9 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 | Column | Description |
 | : -----: | :--------: |
-| Name     | The migration's name. This corresponds to the migration file name in `posthog/async_migrations/migrations` |
+| Name     | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) |
 | Description | An overview of what this migration does |
-| Status | The current status of this migration. One of: 'Not started','Running','Completed successfully','Errored','Rolled back','Starting'. |
+| Status | The current [status](https://github.com/PostHog/posthog/blob/master/posthog/models/async_migration.py#L5) of this migration. One of: 'Not started','Running','Completed successfully','Errored','Rolled back','Starting'. |
 | Error | The last error encountered by this migration |
 | Progress | How far along this migration is (0-100) |
 | Current operation index | The index of the operation currently being executed. Useful for cross-referencing with the migration file |
@@ -61,11 +61,19 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 ### Automatically running migrations
 
-From PostHog 1.32.0 onwards, we will set `AUTO_START_SPECIAL_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
+From PostHog 1.32.0 onwards, we will set `AUTO_START_ASYNC_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
 
 The current default is to trigger a task to run 30 minutes after the deploy and if there are multiple migrations to run, we will automatically run the next migration in line once the previous one completes.
 
-However, on PostHog 1.31.0, `AUTO_START_SPECIAL_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
+However, on PostHog 1.31.0, `AUTO_START_ASYNC_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
+
+If you would like to customize the behaviour you can set `AUTO_START_ASYNC_MIGRATIONS` in your `values.yaml` file like this (note the two values we have in the chart default `values.yaml` should be kept):
+```
+web:
+  env:
+    - name: AUTO_START_ASYNC_MIGRATIONS
+      value: "false"
+```
 
 ### Celery scaling considerations
 
