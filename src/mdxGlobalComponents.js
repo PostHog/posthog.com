@@ -67,6 +67,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
+import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
@@ -172,6 +173,7 @@ export const shortcodes = {
     PageHeader,
     PlanComparisonTable,
     PostCard,
+    PostLayout,
     CloudVsSelfHost,
     FAQs,
     PlanComparison,

@@ -9,6 +9,7 @@ import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
+import PostLayout, { Contributors, ShareLinks, Topics, PageViews } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -123,129 +124,68 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <div
-                style={{ gridAutoColumns: '1fr minmax(auto, 650px) minmax(max-content, 1fr)' }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+            <PostLayout
+                body={body}
+                featuredImage={featuredImage}
+                featuredVideo={featuredVideo}
+                tableOfContents={tableOfContents}
+                title={title}
+                sidebarComponents={[
+                    {
+                        title: `Contributor${contributors?.length > 1 ? 's' : ''}`,
+                        component: contributors?.length > 0 && (
+                            <Contributors
+                                contributors={contributors.map((contributor) => ({
+                                    ...contributor,
+                                    url: `/tutorials/contributors/${slugify(contributor.name, { lower: true })}`,
+                                    state: { openFilter: 'Contributor' },
+                                }))}
+                            />
+                        ),
+                    },
+                    {
+                        title: 'Share',
+                        component: <ShareLinks title={title} href={location.href} />,
+                    },
+                    {
+                        component: pageViews && <PageViews pageViews={pageViews} />,
+                    },
+                    {
+                        title: 'Filed under...',
+                        component: categories?.length > 0 && (
+                            <Topics
+                                topics={categories?.map((category) => ({
+                                    title: category,
+                                    url: `/tutorials/categories/${slugify(category, { lower: true })}`,
+                                    state: { openFilter: 'Category' },
+                                }))}
+                            />
+                        ),
+                    },
+                ]}
             >
-                <article className="col-span-2 px-5 lg:px-8 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
-                    <div className="lg:max-w-[650px] w-full">
-                        <h1 className="text-2xl mb-6">{title}</h1>
-                        <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
-                        {featuredVideo && (
-                            <div className="mb-6 flex space-x-2">
-                                <ViewButton view={view} title="Article" setView={setView} />
-                                <ViewButton view={view} title="Video" setView={setView} />
-                            </div>
-                        )}
-                        {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
-                        {view === 'Article' ? (
-                            <div className="article-content">
-                                <MDXProvider components={components}>
-                                    <MDXRenderer>{body}</MDXRenderer>
-                                </MDXProvider>
-                            </div>
-                        ) : (
-                            <Iframe src={featuredVideo} />
-                        )}
-                        <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
-                            <DocsPageSurvey />
-                        </div>
+                <h1 className="text-2xl mb-6">{title}</h1>
+                <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
+                {featuredVideo && (
+                    <div className="mb-6 flex space-x-2">
+                        <ViewButton view={view} title="Article" setView={setView} />
+                        <ViewButton view={view} title="Video" setView={setView} />
                     </div>
-                </article>
-                <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
-                    <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                        <SidebarSection title={`Contributor${contributors.length > 1 ? 's' : ''}`}>
-                            <ul className="list-none m-0 p-0 flex flex-col space-y-2">
-                                {contributors.map(({ image, id, name }) => {
-                                    return (
-                                        <li key={id}>
-                                            <Link
-                                                state={{ openFilter: 'Contributor' }}
-                                                className="flex space-x-2 items-center"
-                                                to={`/tutorials/contributors/${slugify(name, { lower: true })}`}
-                                            >
-                                                <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
-                                                    <img
-                                                        className="absolute w-full h-full inset-0 object-cover"
-                                                        src={image}
-                                                    />
-                                                </div>
-                                                <span className="author text-[14px] font-semibold">{name}</span>
-                                            </Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </SidebarSection>
-                        <SidebarSection title="Share">
-                            <div className="opacity-50 flex space-x-3 items-center">
-                                <SocialLink url={`https://www.facebook.com/sharer/sharer.php?u=${location.href}`}>
-                                    <Facebook />
-                                </SocialLink>
-                                <SocialLink url={`https://twitter.com/intent/tweet?url=${location.href}`}>
-                                    <Twitter className="w-[32px] h-[32px]" />
-                                </SocialLink>
-                                <SocialLink url={`https://www.linkedin.com/shareArticle?url=${location.href}`}>
-                                    <LinkedIn className="w-[32px] h-[32px]" />
-                                </SocialLink>
-                                <a
-                                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                                    href={`mailto:?subject=${title}&body=${location.href}`}
-                                >
-                                    <Mail />
-                                </a>
-                            </div>
-                        </SidebarSection>
-                        {pageViews && (
-                            <SidebarSection>
-                                <p className="m-0 opacity-50 font-semibold">{pageViews} views</p>
-                            </SidebarSection>
-                        )}
-                        {categories?.length > 0 && (
-                            <SidebarSection title="Filed under...">
-                                <ul className="list-none p-0 flex items-start flex-wrap -m-1">
-                                    {categories.map((category) => {
-                                        return (
-                                            <li className="m-1" key={category}>
-                                                <Chip
-                                                    state={{ openFilter: 'Category' }}
-                                                    className="text-red hover:text-red"
-                                                    href={`/tutorials/categories/${slugify(category, { lower: true })}`}
-                                                    size="xs"
-                                                >
-                                                    {category}
-                                                </Chip>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </SidebarSection>
-                        )}
-                        {view === 'Article' && !breakpoints.md && (
-                            <div className="pt-12">
-                                <h4 className="text-[13px] mb-2">On this page</h4>
-                                <Scrollspy
-                                    offset={-50}
-                                    className="list-none m-0 p-0 flex flex-col space-y-[10px]"
-                                    items={tableOfContents?.map((navItem) => navItem.url)}
-                                    currentClassName="active-product"
-                                >
-                                    {tableOfContents?.map((navItem, index) => (
-                                        <li className="relative leading-none" key={index}>
-                                            <InternalSidebarLink
-                                                url={navItem.url}
-                                                name={navItem.value}
-                                                depth={navItem.depth}
-                                                className="hover:opacity-100 opacity-60 text-[14px]"
-                                            />
-                                        </li>
-                                    ))}
-                                </Scrollspy>
-                            </div>
-                        )}
+                )}
+                {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
+                {view === 'Article' ? (
+                    <div className="article-content">
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
                     </div>
-                </aside>
-            </div>
+                ) : (
+                    <Iframe src={featuredVideo} />
+                )}
+                <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
+                    <DocsPageSurvey />
+                </div>
+            </PostLayout>
         </Layout>
     )
 }
