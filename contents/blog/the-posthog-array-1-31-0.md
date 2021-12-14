@@ -84,9 +84,9 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Cameron DeLeone! Cameron joined PostHog to help us level up our Customer Success experience. Cameron is ?? (🍍 on 🍕).
+Welcome Cameron DeLeone! Cameron joined PostHog to help us level up our Customer Success experience. Cameron is a definite no for pineapple on pizza (🍍 on 🍕).
 
-> Fun fact here.
+> I've always been a food lover, and started talking about food at 7 months old (my first word was "broc" for broccoli). I haven't shut up about it since.
 
 
 ## Community
@@ -106,6 +106,7 @@ We want to thank each and every community member that contributed to this releas
 - [timgl](https://github.com/timgl) // #7072
 - [chasovskiy](https://github.com/chasovskiy)
 - [timgl](https://github.com/timgl) // #7118
+
 ## Open roles
 
 Join us in helping make more products successful! We're currently hiring for the following roles:
