@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
-featuredImage: ../images/tutorials/banners/user-model-new.png
+featuredImage: ../images/tutorials/banners/user-model.png
 
 ---
 
