@@ -97,6 +97,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
+import { TestimonialsTable } from './components/TestimonialsTable'
 import { Tooltip } from './components/Tooltip'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
@@ -203,6 +204,7 @@ export const shortcodes = {
     Structure,
     TableOfContents,
     TeamQuote,
+    TestimonialsTable,
     Tooltip,
     Tutorials,
     TutorialsSlider,
