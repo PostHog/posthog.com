@@ -21,6 +21,7 @@ export const features = {
     ],
     'Advanced features': [
         { title: 'Correlation analysis' },
+        { title: 'Group Analytics' },
         { title: 'Priority Session Recording' },
         { title: 'Multivariate testing' },
         { title: 'Deep Dive Dashboards' },
