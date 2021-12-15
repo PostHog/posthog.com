@@ -1,6 +1,6 @@
 ---
 date: 2021-12-15
-title: Group Analytics are now available in PostHog
+title: Group Analytics is now available in PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
