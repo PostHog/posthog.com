@@ -59,10 +59,6 @@ We've been working hard on creating the best user experience, particularly in ou
 
 <br />
 
-
-@yakkomajuri Special Migrations context here?
-
-
 ### Other improvements & fixes
 - Improved breakdown in funnels. We have a new vertical layout to display funnels broken down by a property (e.g. conversion by browser) that will make it even easier to compare conversion across multiple dimensions.
 - Searching events & properties is now significantly faster. We've changed the way these properties are shown and we now list them by popularity within your team. Create those insights faster!
