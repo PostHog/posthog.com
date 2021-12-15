@@ -24,7 +24,6 @@ export const features = {
         { title: 'Group Analytics' },
         { title: 'Priority Session Recording' },
         { title: 'Multivariate Testing' },
-        { title: 'Deep Dive Dashboards' },
         { title: 'Multiple projects' },
     ],
     Collaboration: [
