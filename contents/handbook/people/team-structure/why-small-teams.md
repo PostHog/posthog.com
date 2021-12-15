@@ -101,3 +101,7 @@ By keeping communication asynchronous and transparent, this is made much easier 
 ### Can a Small Team "own" another Small Team?
 
 Not for now, no. Perhaps when we're much larger this is something to think about.
+
+### How does a Small Team retrospect or review their work?
+
+In order to uphold our values of [transparency](/handbook/company/culture), retrospectives are central to our planning process. Retrospectives aim to inspect three things: what worked well, what did not work well and areas of improvement. This process allows Small Teams to openly discuss any team, process or product issues as well as identify ongoing impediments or risks. 
