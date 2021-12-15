@@ -6,15 +6,15 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: ["Release notes"]
-featuredImage: ../images/blog/generic-release-notes.png
+featuredImage: ../images/blog/posthog-array-blog.png
 excerpt: PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysis, a revamped overall user experience on Insights and 350+ more improvements and fixes.
 ---
 
 
-Happy holidays from PostHog! This is our last release of the year. PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysis, a revamped overall user experience on Insights and 350+ more improvements and fixes. Please note that a Postgres-based installation is no longer supported for PostHog 1.31.0.
+Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you’re using the Postgres-based version. Upgrade to ClickHouse first. Instructions can be found <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">here</a>.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.31.0 release notes
@@ -28,9 +28,11 @@ Happy holidays from PostHog! This is our last release of the year. PostHog 1.31.
 
 ### Group Analytics
 
-Introducing Group Analytics! Group Analytics enable you to perform aggregation on multiple levels aside from Users. For instance, if you have a B2B product, you will now be able not only to identify unique individual users, but users belonging to a Company. This enables analytics such as retention by company, events performed by unique companies, among many others. 
+Introducing Group Analytics! Group Analytics enable you to analyze groups, which aggregate events within PostHog. You can have multiple groups and they can even change dynamically. 
 
-You can have multiple groups and they can change dynamically. Check out [the docs](/docs/user-guides/group-analytics) for more details.
+Group Analytics is especially useful if you have a B2B product, as you will now be able to create a Company group type which tracks all unique users within a company, then create insights such as retention by company and events performed by unique companies. 
+
+Visit our [Group Analytics documentation](/docs/user-guides/group-analytics) to find out what else is possible with Group Analytics. 
 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="TODO: Change this image" />
@@ -42,7 +44,7 @@ You can have multiple groups and they can change dynamically. Check out [the doc
 
 ### Improved Correlation Analysis
 
-Correlation Analysis just got better! Aside from significantly improving the UI & UX, we've introduced a details option for advanced users looking for deeper understanding of how events and/or properties contribute to conversion or drop-offs. This new detail view will show a complete confusion matrix (which shows true positives, true negatives, false negatives and false postivies) plus a correlation score (from `-1.0` to `1.0` which signals how strongly performing an event or having a property correlates with conversion or drop-offs).
+Correlation Analysis just got better! Aside from significantly improving the UI & UX, we've introduced a details option for advanced users looking for deeper understanding of how events and properties contribute to conversion or drop-offs. This new detail view will show a complete confusion matrix which shows true positives, true negatives, false negatives and false postives. We've also added a correlation score from `-1.0` to `1.0` to signal how strongly an event or property correlates with conversion or drop-off.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="TODO: Change this image" />
 
@@ -65,17 +67,17 @@ We've been working hard on creating the best user experience, particularly in ou
 - Following our [lemonade redesign](/blog/the-posthog-array-1-30-0#fresh-new-look-and-feel) we now have a ton more UI improvements. In particular tables got a pretty slick facelift.
 - We've improved the layout configuration for dashboards so they'll be more responsive and look better on very small or very large screens.
 - Pushed significant improvements to the recordings list load time.
-- Introducing a new funnel query builder. We now group advanced options separately, so you funnel definition is clearer.
-- Fixed bug in feature flags when in certain cases a 0% release was considered as a 100% release.
-- Fixed bug where private project names were shown to members who shouldn't have access.
+- Introducing a new funnel query builder! We now group advanced options separately, so funnel definition is clearer.
+- Fixed a bug in Feature Flags where a 0% release was sometimes considered as a 100% release.
+- Fixed a bug where private project names were shown to members who shouldn't have access.
 - Plus 350+ improvements & fixes.
 
 ### Deprecation & removal notices
 
 1. This version (`1.31.0`) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
-2. We're deprecating the **Sessions** insight (distribution of session length). Please [reach out](/support) if you have any feedback on this.
+2. We're [deprecating the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
 
-### Talk to us on how we can improve
+### Talk to us about how we can improve
 
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
 
@@ -103,7 +105,7 @@ We want to thank each and every community member that contributed to this releas
 - [ajsharp](https://github.com/ajsharp)
 - [maxmue](https://github.com/maxmue)
 - [hjweddie](https://github.com/hjweddie)
-- [timgl](https://github.com/asherf)
+- [asherf](https://github.com/asherf)
 - [chasovskiy](https://github.com/chasovskiy)
 - [joesaunderson](https://github.com/joesaunderson)
 - [Jaspreet-singh-1032](https://github.com/Jaspreet-singh-1032)
