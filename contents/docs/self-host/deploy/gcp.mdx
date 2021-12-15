@@ -45,7 +45,7 @@ ingress:
 
 ## Setting up DNS
 
-Create a record from your desired hostname to the external IP.
+Create the record of your desired hostname pointing to the load balancer record found above.
 
 ## Troubleshooting
 ### I cannot connect to my PostHog instance after creation
@@ -62,8 +62,10 @@ If running the command shows the SSL cert as `PROVISIONING`, that means that the
 
 As a troubleshooting tool, you can allow HTTP access by setting `ingress.gcp.forceHttps` and `web.secureCookies` both to false, but we recommend always accessing PostHog via https.
 
-## Upgrading the chart
+### Upgrading the chart
+
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
+
 <UninstallingSnippet />

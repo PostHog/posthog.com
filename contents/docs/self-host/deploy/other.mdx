@@ -41,22 +41,24 @@ kafka:
 
 <InstallingSnippet />
 
-## Lookup external IP
+#### Lookup the address of the installation
 
-```shell
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
-```
+<GetInstallationAddress />
 
 ## Setting up DNS
 
-Create a record from your desired hostname to the external IP.
+Create the record of your desired hostname pointing to the load balancer record found above.
 
 ## Troubleshooting
+
 ### I cannot connect to my PostHog instance after creation
+
 <TryUnsecureSnippet />
 
-## Upgrading the chart
+### Upgrading the chart
+
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
+
 <UninstallingSnippet />

@@ -6,9 +6,9 @@ showTitle: true
 tags:
     - aws
 ---
-
 import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
+import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
@@ -36,7 +36,11 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
+```
 
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+```
 #
 # For AWS ELB in L4 (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded
@@ -55,32 +59,29 @@ ingress-nginx:
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 ```
 
-
 ## Installing the chart
 
 <InstallingSnippet />
 
 
-### Lookup external IP address
+## Lookup the address of the installation
 
-```shell
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
-```
+<GetInstallationAddress />
 
-### Setting up DNS
+## Setting up DNS
 
-Create a `CNAME` record from your desired hostname to the hostname associated with the AWS LB.
-
-## Upgrading the chart
-
-<UpgradingSnippet />
-
-## Uninstalling the chart
-
-<UninstallingSnippet />
+Create the record of your desired hostname pointing to the load balancer record found above.
 
 ## Troubleshooting
 
 ### I cannot connect to my PostHog instance after creation
 
 <TryUnsecureSnippet />
+
+### Upgrading the chart
+
+<UpgradingSnippet />
+
+### Uninstalling the chart
+
+<UninstallingSnippet />

@@ -8,8 +8,7 @@ tags:
     - digitalocean
 ---
 
-import GetUrlSnippet from './snippets/get-url'
-import GetIPAddressSnippet from './snippets/get-ip-address'
+import GetInstallationAddress from './snippets/get-installation-address'
 import DOIPAddress from './snippets/do-ip-address'
 import CommandHelmGetRepoSnippet from './snippets/command-helm-get-repo'
 import CommandHelmUpgradeSnippet from './snippets/command-helm-upgrade'
@@ -52,25 +51,28 @@ Once the setup is completed, you can pick one of those two methods to fetch the 
 If you have [doctl](https://github.com/digitalocean/doctl) configured you can simply run:
 
 ```shell
-doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
+doctl kubernetes cluster create \
+  posthog-cluster \
+  --count=2 \
+  --size="s-2vcpu-4gb" \
+  --1-clicks=posthog
 ```
 
 This will also configure your `kubectl` access.
 
 </HiddenSection>
 
-
 ### Securing your 1-click install
 
 It's unfortunately [not yet possible to provide parameters to DigitalOcean](https://github.com/digitalocean/marketplace-kubernetes/issues/230), so we need a post-install step to enable TLS. In order to do this you will need [kubectl](https://kubernetes.io/docs/tasks/tools/) and [Helm](https://helm.sh/) installed and have [configured your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
 
-#### 1. Lookup the IP address of the installation
+#### 1. Lookup the address of the installation
 
-<GetIPAddressSnippet />
+<GetInstallationAddress />
 
-#### 2. Set up DNS
+#### 2. Setting up DNS
 
-Create an `A` record from your desired hostname to the external IP we got above.
+Create the record of your desired hostname pointing to the load balancer record found above.
 
 #### 3. Update PostHog
 
@@ -84,7 +86,12 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
+```
 
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+
+```yaml
 #
 # For DigitalOcean LB (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded
@@ -94,12 +101,21 @@ cert-manager:
 #   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
 #   - https://docs.digitalocean.com/products/networking/load-balancers/
 #
+#
+# Additionally we'll also enable pod communication through the Load Balancer
+# to ensure Let's Encrypt can reach the cert-manager Pod validating our domain.
+#
+# ref:
+#   - https://github.com/kubernetes/ingress-nginx/issues/3996
+#   - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
+#
 ingress-nginx:
   controller:
     config:
       use-proxy-protocol: true
     service:
       annotations:
+        service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
         service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 ```
 
@@ -138,7 +154,11 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
+```
 
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+```
 #
 # For DigitalOcean LB (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded
@@ -148,12 +168,21 @@ cert-manager:
 #   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
 #   - https://docs.digitalocean.com/products/networking/load-balancers/
 #
+#
+# Additionally we'll also enable pod communication through the Load Balancer
+# to ensure Let's Encrypt can reach the cert-manager Pod validating our domain.
+#
+# ref:
+#   - https://github.com/kubernetes/ingress-nginx/issues/3996
+#   - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
+#
 ingress-nginx:
   controller:
     config:
       use-proxy-protocol: true
     service:
       annotations:
+        service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
         service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 ```
 
@@ -161,13 +190,16 @@ ingress-nginx:
 
 <InstallingSnippet />
 
-#### 3. Lookup the IP address of our installation
+#### 3. Lookup the address of the installation
 
 <GetIPAddressSnippet />
 
-#### 4. Set up DNS
+Note: due to a limitation in the DigitalOcean ingress controller, the second method will not work if you have enabled the settings to support the GeoIP integration.
+Please use the web UI to get your IP address.
 
-Create an `A` record from your desired hostname to the external IP we got above.
+#### 4. Setting up DNS
+
+Create the record of your desired hostname pointing to the load balancer record found above.
 
 <PostInstallSnippet />
 
