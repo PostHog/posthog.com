@@ -9,9 +9,11 @@ tags:
 
 import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
+import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
+import SetupDNS from './snippets/setup-dns'
 
 First, we need to set up a Kubernetes cluster (see the official Azure [documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster) for more info).
 
@@ -38,18 +40,18 @@ cert-manager:
   enabled: true
 ```
 
-### Installing the chart
+## Installing the chart
 
 <InstallingSnippet />
 
 
-### Lookup the address of the installation
+## Lookup the address of the installation
 
 <GetInstallationAddress />
 
-### Setting up DNS
+## Setting up DNS
 
-Create the record of your desired hostname pointing to the load balancer record found above.
+<SetupDNS />
 
 ## Troubleshooting
 

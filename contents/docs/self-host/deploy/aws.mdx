@@ -12,6 +12,7 @@ import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
+import SetupDNS from './snippets/setup-dns'
 
 First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info). Follow the "Managed nodes - Linux" guide.
 
@@ -70,7 +71,7 @@ ingress-nginx:
 
 ## Setting up DNS
 
-Create the record of your desired hostname pointing to the load balancer record found above.
+<SetupDNS />
 
 ## Troubleshooting
 
