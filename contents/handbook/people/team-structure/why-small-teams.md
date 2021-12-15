@@ -33,7 +33,7 @@ See [team structure](team-structure).
 
 ## FAQ
 
-### Who do Small Teams report to? How does this work with management?
+### Who do Small Teams report to? How does this work with management? (drop down revealing response below)
 
 The Accountable Person has the final say in a given Small Team's decision making - they decide what to build / work on.
 
