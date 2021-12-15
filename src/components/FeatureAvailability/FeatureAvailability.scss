@@ -1,0 +1,52 @@
+@import '../../vars';
+
+.feature-availability {
+    border-radius: 4px;
+    padding: 8px 16px;
+    border: 1px solid $border;
+    margin-bottom: 16px;
+
+    h4 {
+        margin-top: 0;
+        font-size: 1em;
+    }
+
+    h5 {
+        margin: 0;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        color: $text_muted_alt;
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+        a {
+            margin-left: 4px;
+            color: $primary !important;
+        }
+    }
+
+    .feature-availability-inner {
+        display: flex;
+        div {
+            flex-grow: 1;
+        }
+
+        li {
+            font-size: 0.95em;
+            line-height: 1.3em;
+            display: flex;
+            align-items: center;
+            .anticon {
+                margin-right: 4px;
+                color: $success;
+            }
+
+            &.unavailable {
+                color: $text_muted;
+                .anticon {
+                    color: $danger;
+                }
+            }
+        }
+    }
+}

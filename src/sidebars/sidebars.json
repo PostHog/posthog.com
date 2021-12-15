@@ -689,7 +689,6 @@
                             "name": "Java",
                             "url": "/docs/integrate/server/java"
                         },
-
                         {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
@@ -810,9 +809,8 @@
                     "name": "Cohorts",
                     "url": "/docs/user-guides/cohorts"
                 },
-
                 {
-                    "name": "Correlation analysis",
+                    "name": "Correlation Analysis",
                     "url": "/docs/user-guides/correlation"
                 },
                 {
@@ -830,6 +828,10 @@
                 {
                     "name": "Funnels",
                     "url": "/docs/user-guides/funnels"
+                },
+                {
+                    "name": "Group Analytics",
+                    "url": "/docs/user-guides/group-analytics"
                 },
                 {
                     "name": "Organizations and projects",
@@ -1109,7 +1111,6 @@
             "name": "Session recording",
             "url": "/product/session-recording"
         },
-
         {
             "name": "Feature flags",
             "url": "/product/feature-flags"
