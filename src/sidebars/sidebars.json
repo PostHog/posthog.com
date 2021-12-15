@@ -834,6 +834,10 @@
                     "url": "/docs/user-guides/group-analytics"
                 },
                 {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
+                },
+                {
                     "name": "Organizations and projects",
                     "url": "/docs/user-guides/organizations-and-projects"
                 },
@@ -842,8 +846,16 @@
                     "url": "/docs/user-guides/paths"
                 },
                 {
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
+                },
+                {
                     "name": "Plugins",
                     "url": "/docs/user-guides/plugins"
+                },
+                {
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "Retention",
@@ -852,14 +864,6 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Lifecycle",
-                    "url": "/docs/user-guides/lifecycle"
-                },
-                {
-                    "name": "Recordings",
-                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO & SAML",
@@ -876,10 +880,6 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "Persons",
-                    "url": "/docs/user-guides/persons"
                 }
             ]
         },

@@ -6,43 +6,6 @@ showTitle: true
 
 If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning you can add one-click login with single sign-on (SSO). In addition to supporting log in with third-party providers, we also allow automatic provision of users. This means that your team members can create their account self-serve (see below).
 
-<table>
-    <thead>
-        <tr>
-            <td>Provider</td>
-            <td>Login</td>
-            <td>Automatic user provisioning</td>
-            <td>Support</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a href="#github">GitHub</a></td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>PostHog Cloud and self-hosted</td>
-        </tr>
-         <tr>
-            <td><a href="#gitlab">GitLab</a></td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>PostHog Cloud and self-hosted</td>
-        </tr>
-        <tr>
-            <td><a href="#google">Google</a> (🔒 Premium)</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>PostHog Cloud and self-hosted</td>
-        </tr>
-        <tr>
-            <td><a href="#saml">SAML</a> (🔒 Premium)</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>Self-hosted <b>only</b></td>
-        </tr>
-    </tbody>
-</table>
-
 ### Automatic user provisioning
 
 When you enable automatic user provisioning you set a list of **whitelisted domains**. Whenever a user logs in for the first using the third-party provider you enabled, if their provider-validated email address matches your whitelisted domain, an account will be automatically created for them in the organization.
@@ -59,6 +22,8 @@ Please note that you will <b>not</b> be able to use SSO with the first user of y
 </blockquote>
 
 ### GitHub
+
+<FeatureAvailability allPlans />
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
@@ -78,6 +43,8 @@ Please note that you will <b>not</b> be able to use SSO with the first user of y
 
 ### GitLab
 
+<FeatureAvailability allPlans />
+
 1. Go to `Settings -> Applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>click here for GitLab.com</a>)
 
 2. Register your application
@@ -90,9 +57,7 @@ Please note that you will <b>not</b> be able to use SSO with the first user of y
 
 ### Google
 
-<blockquote class="warning-note">
-<b>Please note SSO with Google is a 🔒 premium feature of PostHog</b> and requires either a PostHog Cloud plan (credit card connected) or a PostHog Scale license.
-</blockquote>
+<FeatureAvailability availablePlans={['free', 'standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']}  />
 
 To set up Google SSO please follow these instructions:
 
@@ -108,6 +73,8 @@ To set up Google SSO please follow these instructions:
 
 
 ## SAML
+
+<FeatureAvailability availablePlans={['enterprise']}  />
 
 <blockquote class="warning-note">
 <b>Please note SSO with SAML is a 🔒 premium feature of PostHog</b> and requires a <a href="https://posthog.com/pricing" target="_blank" rel="noopener">PostHog Scale</a> license. In addition, <b>SAML is only supported on PostHog self-hosted</b>.
