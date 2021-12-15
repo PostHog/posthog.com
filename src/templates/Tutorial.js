@@ -146,7 +146,10 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 }
             >
                 <h1 className="text-2xl mb-6">{title}</h1>
-                <GatsbyImage className="mb-6" image={getImage(featuredImage)} />
+                <GatsbyImage
+                    className="mb-6 bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
+                    image={getImage(featuredImage)}
+                />
                 {featuredVideo && (
                     <div className="mb-6 flex space-x-2">
                         <ViewButton view={view} title="Article" setView={setView} />
@@ -192,7 +195,7 @@ export const query = graphql`
                 featuredImage {
                     publicURL
                     childImageSharp {
-                        gatsbyImageData
+                        gatsbyImageData(placeholder: NONE)
                     }
                 }
             }

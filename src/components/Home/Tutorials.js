@@ -23,7 +23,11 @@ export default function Tutorials() {
                     return (
                         <li key={index} className="lg:p-10 py-10">
                             <Link to={slug}>
-                                <GatsbyImage image={image} alt={title} />
+                                <GatsbyImage
+                                    className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
+                                    image={image}
+                                    alt={title}
+                                />
                                 <h4>{title}</h4>
                             </Link>
                         </li>
@@ -31,7 +35,7 @@ export default function Tutorials() {
                 })}
             </ul>
             <div className="text-center mt-5">
-                <CallToAction to="/docs/tutorials" type="outline">
+                <CallToAction to="/tutorials" type="outline">
                     Explore all tutorials
                 </CallToAction>
             </div>
@@ -48,7 +52,7 @@ const query = graphql`
                     title
                     featuredImage {
                         childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(placeholder: NONE)
                         }
                     }
                 }
