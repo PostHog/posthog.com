@@ -312,33 +312,22 @@ module.exports = {
               `,
                 feeds: [
                     {
-                        serialize: ({ query: { site, authorsData, allMdx } }) => {
+                        serialize: ({ query: { site, allMdx } }) => {
                             let {
                                 siteMetadata: { siteUrl },
                             } = site
 
-                            let findRelevantAuthor = (authorKey) =>
-                                authorsData.frontmatter.authors.find(({ handle }) => handle === authorKey)
-
                             let allMdxs = allMdx.edges.map((edge) => {
                                 let { node } = edge
                                 let { frontmatter, excerpt, slug, id, body } = node
-                                let { date, title, author, featuredImage } = frontmatter
-                                let authorsData = findRelevantAuthor(author)
-                                let newAuthorData = []
-                                if (authorsData) {
-                                    newAuthorData = Object.keys(authorsData).map((key) => {
-                                        let newKey = key.replace('_', '')
-                                        return { [`blog:${newKey}`]: authorsData[key] }
-                                    })
-                                }
+                                let { date, title, authors, featuredImage } = frontmatter
                                 return {
                                     description: excerpt,
                                     date,
                                     title,
                                     url: `${siteUrl}/${slug}`,
                                     guid: id,
-                                    author: authorsData ? authorsData.name : null,
+                                    author: authors && authors[0].name,
                                     custom_elements: [{ 'content:encoded': body }],
                                     enclosure: {
                                         url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
@@ -366,23 +355,17 @@ module.exports = {
                                     featuredImage {
                                       publicURL
                                     }
-                                    author
+                                    authors: authorData {
+                                        handle
+                                        name
+                                        role
+                                        image
+                                        link_type
+                                        link_url
+                                    }
                                   }
                                 }
                               }
-                            }
-                            authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
-                              frontmatter {
-                                authors {
-                                  handle
-                                  name
-                                  role
-                                  image
-                                  link_type
-                                  link_url
-                                }
-                              }
-                              id
                             }
                           }
                         `,

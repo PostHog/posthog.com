@@ -2,15 +2,15 @@
 title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/feature-flags.png
+featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: true
 author: ['yakko-majuri']
 topics: ['feature flags']
+featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
+date: 2020-09-24
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
-
-![](../../images/tutorials/banners/feature-flags.png)
 
 Rolling out new features in your product can really be a pain.
 
@@ -23,10 +23,6 @@ To make this process less painful and safer, you can use feature flags.
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
 This tutorial will walk you through creating and using a feature flag with PostHog and answer some of the questions you may have when using them.
-
-<span class='centered'>...</span>
-
-_Prefer to watch a video? Check out the [Feature Flags section of our demo video](https://youtu.be/aUILrrrlu50?t=950) for a shorter overview of this functionality._
 
 ## Prerequisites
 
@@ -47,13 +43,13 @@ It can also be useful to create your feature flags before working on the functio
 
 Click on 'Feature Flags' on the left sidebar in PostHog.
 
-![Feature Flags Page](../../images/tutorials/feature-flags/feature-flags-page.png)
+![Feature Flags Page](../images/tutorials/feature-flags/feature-flags-page.png)
 
 ### Step 2: Creating a new flag
 
 While on the 'Feature Flags' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
 
-![Create Feature Flag](../../images/tutorials/feature-flags/create-flag.png)
+![Create Feature Flag](../images/tutorials/feature-flags/create-flag.png)
 
 ### Step 3: Configuring your flag
 
@@ -185,7 +181,7 @@ A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
-![Trends A/B Testing](../../images/tutorials/feature-flags/trends-ab.png)
+![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
 
 ### Starting with a few users first
 
