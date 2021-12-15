@@ -35,8 +35,10 @@ Group Analytics is especially useful if you have a B2B product, as you will now 
 Visit our [Group Analytics documentation](/docs/user-guides/group-analytics) to find out what else is possible with Group Analytics. 
 
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="TODO: Change this image" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-list.png" alt="Example screenshot: List of groups" />
 
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-insight.png" alt="Example screenshot: Using groups in an insight" />
 
 > 🎁 Group Analytics is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
@@ -46,7 +48,7 @@ Visit our [Group Analytics documentation](/docs/user-guides/group-analytics) to 
 
 Correlation Analysis just got better! Aside from significantly improving the UI & UX, we've introduced a details option for advanced users looking for deeper understanding of how events and properties contribute to conversion or drop-offs. This new detail view will show a complete confusion matrix which shows true positives, true negatives, false negatives and false postives. We've also added a correlation score from `-1.0` to `1.0` to signal how strongly an event or property correlates with conversion or drop-off.
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_30_0-correlation.png" alt="TODO: Change this image" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/correlation-matrix.png" alt="Example screenshot: correlation matrix" />
 
 
 <br />
