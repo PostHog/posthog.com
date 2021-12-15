@@ -26,7 +26,7 @@ Group Analytics are used for tracking and analyzing multiples of any event type 
 
 As a result, Group Analytics is especially useful for certain types of product, such as:
 
-- *B2B products:* If you sell primarily to businesses, groups can be used to track data at a company-level and report on metrics such as Daily Active Companies. 
+- *B2B products:* If you sell primarily to businesses, groups can be used to track data at a company level and report on metrics such as Daily Active Companies. 
 
 - *Crypto and financial products:* If your product deals with payments, groups can be used to track events such as transactions and report on metrics such as Daily Payments. 
 
