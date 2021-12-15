@@ -1,5 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
+import Breadcrumbs, { Crumb } from 'components/Breadcrumbs'
+import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -12,8 +14,6 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import Breadcrumbs, { Crumb } from 'components/Breadcrumbs'
-import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -27,7 +27,11 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
             {featuredImage && (
                 <div className="relative">
                     <GatsbyImage
-                        className="rounded-lg z-0 relative before:h-full before:left-0 before:right-0 before:top-0 before:z-[1] before:absolute before:bg-gradient-to-b before:from-black/75 before:to-black/25"
+                        className={`rounded-lg z-0 relative ${
+                            featuredImageType === 'full'
+                                ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
+                                : ''
+                        }`}
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (

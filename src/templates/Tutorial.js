@@ -7,7 +7,7 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, Topics, PageViews, SidebarSection } from 'components/PostLayout'
+import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -58,8 +58,6 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
                         className="flex flex-col space-y-2"
                         contributors={contributors.map((contributor) => ({
                             ...contributor,
-                            url: `/tutorials/contributors/${slugify(contributor.name, { lower: true })}`,
-                            state: { openFilter: 'Contributor' },
                         }))}
                     />
                 </SidebarSection>
@@ -78,7 +76,6 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
                         topics={categories?.map((category) => ({
                             title: category,
                             url: `/tutorials/categories/${slugify(category, { lower: true })}`,
-                            state: { openFilter: 'Category' },
                         }))}
                     />
                 </SidebarSection>
