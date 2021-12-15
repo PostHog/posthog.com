@@ -150,11 +150,11 @@ const sections = [
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
-                name: 'Session recording',
+                name: 'Session Recording',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
-                name: 'Feature flags',
+                name: 'Feature Flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
@@ -167,11 +167,11 @@ const sections = [
         name: 'Advanced features',
         features: [
             {
-                name: 'Correlation analysis',
+                name: 'Correlation Analysis',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
-                name: 'Group analytics',
+                name: 'Group Analytics',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
