@@ -1,18 +1,16 @@
 import Breadcrumbs from 'components/Breadcrumbs'
-import { Calendar, Cards, Chevron, List } from 'components/Icons/Icons'
+import { Calendar, Cards, List } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
-import { motion } from 'framer-motion'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import slugify from 'slugify'
 
-const Filters = ({ activeFilter, view, location }) => {
-    const openFilter = location?.state?.openFilter || 'Category'
+const Filters = ({ view, location, activeFilter }) => {
     const {
-        tutorials: { categories, contributors },
+        tutorials: { categories },
     } = useStaticQuery(filterQuery)
     const filterableData = [
         {
@@ -20,26 +18,14 @@ const Filters = ({ activeFilter, view, location }) => {
             path: '/tutorials/categories',
             options: categories,
         },
-        {
-            title: 'Contributor',
-            path: '/tutorials/contributors',
-            options: contributors,
-        },
     ]
 
     return (
-        <ul className="list-none p-0 m-0 flex flex-col space-y-2">
+        <ul className="list-none p-0 m-0 flex flex-col space-y-4">
             {filterableData.map(({ title, path, options }) => {
                 return (
                     <li key={title}>
-                        <Filter
-                            openFilter={openFilter}
-                            view={view}
-                            title={title}
-                            path={path}
-                            options={options}
-                            activeFilter={activeFilter}
-                        />
+                        <Filter view={view} title={title} path={path} options={options} activeFilter={activeFilter} />
                     </li>
                 )
             })}
@@ -47,32 +33,13 @@ const Filters = ({ activeFilter, view, location }) => {
     )
 }
 
-const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
-    const open = openFilter === title || options.some(({ fieldValue }) => fieldValue === activeFilter)
+const Filter = ({ title, options, path, view, activeFilter }) => {
     return (
         <>
-            <button
-                className={`flex transition-colors rounded-md justify-between items-center w-full py-1 px-4 ${
-                    open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
-                }`}
-                onClick={() => navigate('/tutorials', { state: { view, openFilter: openFilter !== title && title } })}
-            >
-                <h5 className="m-0 inline-block text-[15px] font-semibold">{title}</h5>
-                <span
-                    style={{ transform: `rotate(${open ? '180' : '0'}deg)` }}
-                    className="transition-transform w-[28px] h-[28px] bg-tan dark:bg-primary flex justify-center items-center rounded-full"
-                >
-                    <Chevron />
-                </span>
-            </button>
-            <motion.ul
-                initial={{ height: open ? 'auto' : 0 }}
-                animate={{ height: open ? 'auto' : 0 }}
-                className="list-none p-0 m-0 flex flex-col space-y-3 overflow-hidden pl-4"
-                style={{ margin: open ? '1rem 0' : 0 }}
-            >
+            <h5 className="m-0 inline-block text-[15px] px-4 font-semibold opacity-[.85]">{title}</h5>
+            <ul className="list-none p-0 m-0 flex flex-col space-y-3 overflow-hidden pl-4 mt-3">
                 <li
-                    className={`flex ml-3 items-center space-x-2 text-base font-semibold relative ${
+                    className={`flex items-center space-x-2 text-base font-semibold relative ${
                         !activeFilter ? 'active-product' : ''
                     }`}
                 >
@@ -81,7 +48,7 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
                             !activeFilter ? '!opacity-100' : 'opacity-50'
                         }`}
                         to="/tutorials"
-                        state={{ view, openFilter: title }}
+                        state={{ view }}
                     >
                         All
                     </Link>
@@ -92,7 +59,7 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
                     return (
                         <li
                             key={fieldValue}
-                            className={`flex ml-3 items-center space-x-2 text-base font-semibold relative ${
+                            className={`flex items-center space-x-2 text-base font-semibold relative ${
                                 active ? 'active-product' : ''
                             }`}
                         >
@@ -101,14 +68,14 @@ const Filter = ({ title, options, activeFilter, path, view, openFilter }) => {
                                     active ? '!opacity-100' : 'opacity-50'
                                 }`}
                                 to={url}
-                                state={{ view, openFilter: title }}
+                                state={{ view }}
                             >
                                 {fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}
                             </Link>
                         </li>
                     )
                 })}
-            </motion.ul>
+            </ul>
         </>
     )
 }
