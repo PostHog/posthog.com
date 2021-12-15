@@ -20,7 +20,7 @@ export const features = {
         { title: 'Data I/O' },
     ],
     'Advanced features': [
-        { title: 'Correlation analysis' },
+        { title: 'Correlation Analysis' },
         { title: 'Group Analytics' },
         { title: 'Priority Session Recording' },
         { title: 'Multivariate Testing' },
