@@ -23,7 +23,7 @@ export const features = {
         { title: 'Correlation analysis' },
         { title: 'Group Analytics' },
         { title: 'Priority Session Recording' },
-        { title: 'Multivariate testing' },
+        { title: 'Multivariate Testing' },
         { title: 'Deep Dive Dashboards' },
         { title: 'Multiple projects' },
     ],
