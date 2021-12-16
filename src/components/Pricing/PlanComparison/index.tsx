@@ -69,12 +69,8 @@ const sections = [
                 tiers: { 'PostHog Cloud': 'Instant', 'Open source': 'Instant', Scale: '1-3 days' },
             },
             {
-                name: 'Automatic updates',
+                name: 'Updates on schedule',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
-            },
-            {
-                name: 'Self-hosted database',
-                tiers: { 'PostHog Cloud': 'n/a', 'Open source': 'Postgres or ClickHouse', Scale: 'ClickHouse' },
             },
             {
                 name: 'Server management',
@@ -186,7 +182,7 @@ const sections = [
             },
             {
                 name: 'Zapier',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
+                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true },
             },
         ],
     },
