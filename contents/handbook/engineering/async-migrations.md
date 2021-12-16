@@ -4,19 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## What are async migrations?
-
-Async migrations (AKA big/special migrations) are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. 
-
-## Why are async migrations necessary?
-
-Migrations are inevitable, and sometimes it may be necessary to execute non-trivial schema changes that can take a long time to complete. 
-
-For example, ClickHouse does not support changing the primary key of a table, which is a change we were [forced to make in anticipation of upgrading ClickHouse beyond version 21.6](https://github.com/PostHog/posthog/issues/5684). As a result, the way to change the schema of the table was to create a new table and insert all the data from the old table into it, which took us an entire week to run on PostHog Cloud.
-
-Now, while we can execute such changes to PostHog Cloud "manually", we cannot expect the same of our users (plus this approach does not scale well for us either).
-
-As a result, we needed to create a system capable of safely and efficiently managing migrations that need to happen asynchronously.
+See the user facing documentation under [self-host/configure/async-migrations](/docs/self-host/configure/async-migrations)
 
 ## How do async migrations work?
 
