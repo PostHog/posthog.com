@@ -61,7 +61,7 @@ Insights and dashboards are the core of PostHog's analytics capabilities, which 
 - Visualization of funnels has been reworked for improved readability of results, particularly when using breakdown. This makes comparing conversion based on properties easier than ever.
 - Searching events & properties is now significantly faster. We've changed the way these properties are shown and now list them by popularity within the project. Create those insights faster!
 - The funnel query builder has been streamlined – essential settings are better exposed, while advanced options can be expanded when you need them.
-- The dashboard grid has been simplified to avoid annoying situations where your carefully crafted layout becomes misaligned on a different sceren resolution. Instead of four complicated layouts, there are now two: single-column for mobile devices, and multi-column for larger screens.
+- The dashboard grid has been simplified to avoid annoying situations where your carefully crafted layout becomes misaligned on a different screen resolutions. Instead of four complicated layouts, there are now two: single-column for mobile devices, and multi-column for larger screens.
 
 Expect further major improvements to this area in 1.32.
 
