@@ -93,16 +93,16 @@ import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
   <TabPane tab="posthog-js" key="1">
     <GroupsIngestionPosthogJs />
   </TabPane>
-  <TabPane tab="python" key="2">
+  <TabPane tab="Python" key="2">
     <GroupsIngestionPython />
   </TabPane>
-  <TabPane tab="php" key="3">
+  <TabPane tab="PHP" key="3">
     <GroupsIngestionPHP />
   </TabPane>
-  <TabPane tab="go" key="4">
+  <TabPane tab="Golang" key="4">
     <GroupsIngestionGo />
   </TabPane>
-  <TabPane tab="node.js" key="5">
+  <TabPane tab="NodeJS" key="5">
     <GroupsIngestionNode />
   </TabPane>
   <TabPane tab="Other libraries" key="6">
@@ -157,58 +157,30 @@ You will also need to update your event tracking code (covered below), for the f
 
 ## Integrating groups with feature flags
 
-### [posthog-js](https://posthog.com/docs/integrate/client/js)
+import GroupsFeatureFlagsPosthogJs from './snippets/groups-flags-posthog-js.mdx'
+import GroupsFeatureFlagsPython from './snippets/groups-flags-python.mdx'
+import GroupsFeatureFlagsPHP from './snippets/groups-flags-php.mdx'
+import GroupsFeatureFlagsGo from './snippets/groups-flags-go.mdx'
+import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 
-If you have updated tracking, you can use grouo-based feature flags as normal in posthog-js.
 
-```js
-if (posthog.isFeatureEnabled('new-groups-feature')) {
-    // do something
-}
-```
-
-To check flag status for a different group, first switch the active group via a `posthog.group()` call.
-
-### [posthog-python](https://posthog.com/docs/integrate/server/python)
-
-Update to version 1.4.3 or above to make use of the new functionality.
-
-To check a flag that's matching by companies, specify groups in relevant call:
-
-```python
-if posthog.feature_enabled("new-groups-feature", "[distinct id]", groups={"company": "id:5"}):
-    # do something
-```
-
-### [posthog-php](https://posthog.com/docs/integrate/server/php)
-
-Update to version 2.1.0 or above to make use of the new functionality.
-
-To check a flag that's matching by companies, specify groups in relevant feature flag call:
-
-```c
-if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "id:5"))) {
-    // Do something
-}
-```
-
-### [posthog-go](https://posthog.com/docs/integrate/server/go)
-
-Does not yet support feature flags with groups. Missing this? [Let us know](https://github.com/PostHog/posthog/issues)
-
-### [posthog-node](https://posthog.com/docs/integrate/server/node)
-
-Update to version 1.2.0 or above to make use of the new functionality.
-
-To check a flag that's matching by companies, specify groups in relevant feature flag call:
-
-```javascript
-const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: 'id:5' })
-
-if (isFlagEnabled) {
-    // Toggle feature-flag specific behavior
-}
-```
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+  <TabPane tab="posthog-js" key="1">
+    <GroupsFeatureFlagsPosthogJs />
+  </TabPane>
+  <TabPane tab="Python" key="2">
+    <GroupsFeatureFlagsPython />
+  </TabPane>
+  <TabPane tab="PHP" key="3">
+    <GroupsFeatureFlagsPHP />
+  </TabPane>
+  <TabPane tab="Golang" key="4">
+    <GroupsFeatureFlagsGo />
+  </TabPane>
+  <TabPane tab="NodeJS" key="5">
+    <GroupsFeatureFlagsNode />
+  </TabPane>
+</Tabs>
 
 # Limitations
 
