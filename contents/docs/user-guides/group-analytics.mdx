@@ -6,7 +6,7 @@ showTitle: true
 
 # What can you do with groups?
 
-Groups are how you track and perform analysis on the aggregation of an something other than a user. 
+Groups are how you track and perform analysis on the aggregation of an something other than a user.
 
 ## Group Analytics
 You can perform any type of analytics (e.g. Trends, Funnels, Retention, etc.) based on groups rather than users (e.g. Number of companies who signed up in the last 28 days, Number of total transactions in the past 14 days, etc.)
@@ -77,169 +77,40 @@ The following examples use `company` as a group type and `id:5` as the group key
 
 > **Tip:** Use a singular form of the group type throughout ingestion
 
-### [posthog-js](https://posthog.com/docs/integrate/client/js)
 
-Update to version 1.16.0 or above to make use of the new functionality.
+import { Tabs } from 'antd'
+export const TabPane = Tabs.TabPane
 
-In posthog-js it's possible to declare that a user is currently "active" in a particular group. This means all events (both normal and autocaptured) are considered to be for that group.
+import GroupsIngestionPosthogJs from './snippets/groups-ingestion-posthog-js.mdx'
+import GroupsIngestionPython from './snippets/groups-ingestion-python.mdx'
+import GroupsIngestionPHP from './snippets/groups-ingestion-php.mdx'
+import GroupsIngestionGo from './snippets/groups-ingestion-go.mdx'
+import GroupsIngestionNode from './snippets/groups-ingestion-node.mdx'
+import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
 
-To make sure all events get attached to groups, we recommend calling `posthog.group` in `loaded` callback.
 
-```js
-posthog.init('[your api key]', {
-    api_host: 'https://posthog.[your-domain].com',
-    loaded: function(posthog) {
-        posthog.identify('[user unique id]');
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+  <TabPane tab="posthog-js" key="1">
+    <GroupsIngestionPosthogJs />
+  </TabPane>
+  <TabPane tab="python" key="2">
+    <GroupsIngestionPython />
+  </TabPane>
+  <TabPane tab="php" key="3">
+    <GroupsIngestionPHP />
+  </TabPane>
+  <TabPane tab="go" key="4">
+    <GroupsIngestionGo />
+  </TabPane>
+  <TabPane tab="node.js" key="5">
+    <GroupsIngestionNode />
+  </TabPane>
+  <TabPane tab="Other libraries" key="6">
+    <GroupsIngestionOther />
+  </TabPane>
+</Tabs>
 
-        posthog.group('company', 'id:5');
-        posthog.group('playlist', 'id:77', {
-            length: 77,
-            some: 'properties'
-        });
-    }
-});
-```
 
-Subsequent calls to `posthog.group()` with the same group type but a different group key make the new group be active.
-
-#### Handling logging out
-
-When the user logs out it's important to call `posthog.reset()` to avoid new events being registered under registered groups and the logged in user.
-
-### [posthog-python](https://posthog.com/docs/integrate/server/python)
-
-Update to version 1.4.3 or above to make use of the new functionality.
-
-```python
-# Capturing an event with groups
-posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
-
-# Updating group properties
-posthog.group_identify('company', 'id:5', {
-    'company_name': 'Awesome Inc',
-    'employees': 11
-})
-```
-
-### [posthog-php](https://posthog.com/docs/integrate/server/php)
-
-Update to version 2.1.0 or above to make use of the new functionality.
-
-```c
-# Capturing an event with groups
-PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'some event',
-    '$groups' => array("company" => "id:5")
-));
-
-# Updating a groups properties
-PostHog::groupIdentify(array(
-    'groupType' => 'company',
-    'groupKey' => 'id:5',
-    'properties' => array("company_name" => "Awesome Inc", "employees" => 11)
-));
-```
-
-### [posthog-go](https://posthog.com/docs/integrate/server/go)
-
-```go
-// Capturing an event with groups
-client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event:      "some event",
-    Groups: posthog.NewGroups().
-        Set("company", "id:5").
-})
-
-// Updating a groups properties
-client.Enqueue(posthog.GroupIdentify{
-    Type: "company",
-    Key:  "id:5",
-    Properties: posthog.NewProperties().
-        Set("company_name", "Awesome Inc").
-        Set("employees", 11),
-})
-```
-
-Using groups with go requires the latest version of `posthog-go`. Update dependencies via:
-
-```shell
-go get -u github.com/posthog/posthog-go
-```
-
-### [posthog-node](https://posthog.com/docs/integrate/server/node)
-
-Update to version 1.2.0 or above to make use of the new functionality.
-
-```javascript
-// Capturing an event with groups
-posthog.capture({
-    event: "some event",
-    distinctId: '[distinct id]',
-    groups: { company: 'id:5' }
-})
-
-// Updating a groups properties
-posthog.groupIdentify({
-    groupType: 'company',
-    groupKey: 'id:5',
-    properties: {
-        company_name: 'Awesome Inc',
-        employees: 11
-    }
-})
-```
-
-### Other libraries
-
-Not all libraries support group analytics yet, but you can work around this issue by sending events in specific formats.
-
-This section uses our [Capture APIs](https://posthog.com/docs/api/post-only-endpoints) for examples but you can adapt this
-approach to any library.
-
-#### Capturing events with groups
-
-```shell
-POST https://[your-instance].com/capture/
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "event": "[event name]",
-    "properties": {
-        "distinct_id": "[your users' distinct id]",
-        "key1": "value1",
-        "key2": "value2",
-        "$groups": {
-            "company": "id:5"
-        }
-    }
-}
-
-```
-
-#### Updating group properties
-
-```shell
-POST https://[your-instance].com/capture/
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "event": "$groupidentify",
-    "properties": {
-        "distinct_id": "[your users' distinct id]",
-        "$group_type": "company",
-        "$group_key": "id:5",
-        "$group_set": {
-            "company_name": "Awesome Inc",
-            "employees": 11
-        }
-    }
-}
-
-```
 
 ## Analysing group insights
 Once you have integrated tracking for groups this will unlock the ability to analyze based on them.
@@ -252,7 +123,7 @@ Traditionally, you'd only have unique users in the funnel: Users from any and ev
 
 That's a group aggregation over the company group type. It's the same events, aggregated differently.
 
-What if you wanted to breakdown this funnel by company name? Maybe there's specific companies that never converted, and you want to follow up with them to see what's going wrong. Like mentioned above, if you have group properties defined, you can breakdown by `company_name`. 
+What if you wanted to breakdown this funnel by company name? Maybe there's specific companies that never converted, and you want to follow up with them to see what's going wrong. Like mentioned above, if you have group properties defined, you can breakdown by `company_name`.
 
 ## Viewing groups and their properties
 To view groups and their properties, head to the "Persons and Groups" tab on the navigation bar.

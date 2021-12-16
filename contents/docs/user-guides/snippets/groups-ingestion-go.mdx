@@ -1,0 +1,25 @@
+Using groups with go requires the latest version of [posthog-go](https://posthog.com/docs/integrate/server/go). Update dependencies via:
+
+```shell
+go get -u github.com/posthog/posthog-go
+```
+
+
+```go
+// Capturing an event with groups
+client.Enqueue(posthog.Capture{
+    DistinctId: "[distinct id]",
+    Event:      "some event",
+    Groups: posthog.NewGroups().
+        Set("company", "id:5").
+})
+
+// Updating a groups properties
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "id:5",
+    Properties: posthog.NewProperties().
+        Set("company_name", "Awesome Inc").
+        Set("employees", 11),
+})
+```

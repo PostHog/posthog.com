@@ -1,0 +1,26 @@
+Update [posthog-js](https://posthog.com/docs/integrate/client/js)2 to version 1.16.0 or above to make use of the new functionality.
+
+In  it's possible to declare that a user is currently "active" in a particular group. This means all events (both normal and autocaptured) are considered to be for that group.
+
+To make sure all events get attached to groups, we recommend calling `posthog.group` in `loaded` callback.
+
+```js
+posthog.init('[your api key]', {
+    api_host: 'https://posthog.[your-domain].com',
+    loaded: function(posthog) {
+        posthog.identify('[user unique id]');
+
+        posthog.group('company', 'id:5');
+        posthog.group('playlist', 'id:77', {
+            length: 77,
+            some: 'properties'
+        });
+    }
+});
+```
+
+Subsequent calls to `posthog.group()` with the same group type but a different group key make the new group be active.
+
+#### Handling logging out
+
+When the user logs out it's important to call `posthog.reset()` to avoid new events being registered under registered groups and the logged in user.
