@@ -10,11 +10,14 @@ posthog.init('[your api key]', {
     loaded: function(posthog) {
         posthog.identify('[user unique id]');
 
-        posthog.group('company', 'id:5');
-        posthog.group('playlist', 'id:77', {
-            length: 77,
-            some: 'properties'
+        posthog.group('company', 'id:5', {
+            company_name: 'Awesome Inc',
+            employees: 11
         });
+
+        // A call without properties sets the group on subsequent events
+        // but does not update properties
+        posthog.group('playlist', 'id:77');
     }
 });
 ```
