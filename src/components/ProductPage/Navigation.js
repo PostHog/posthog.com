@@ -5,17 +5,17 @@ import Scrollspy from 'react-scrollspy'
 
 const features = [
     {
-        title: 'Product analytics',
+        title: 'Product Analytics',
         icon: <Funnels />,
         url: 'product-analytics',
     },
     {
-        title: 'Session recording',
+        title: 'Session Recording',
         icon: <SessionRecordings />,
         url: 'session-recording',
     },
     {
-        title: 'Feature flags',
+        title: 'Feature Flags',
         icon: <FeatureFlags />,
         url: 'feature-flags',
     },
