@@ -1,0 +1,20 @@
+Update [posthog-node](https://posthog.com/docs/integrate/server/node) to version 1.2.0 or above to make use of the new functionality.
+
+```javascript
+// Capturing an event with groups
+posthog.capture({
+    event: "some event",
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' }
+})
+
+// Updating a groups properties
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'id:5',
+    properties: {
+        company_name: 'Awesome Inc',
+        employees: 11
+    }
+})
+```

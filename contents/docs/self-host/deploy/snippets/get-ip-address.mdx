@@ -1,6 +1,0 @@
-```shell
-export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}") && \
-echo "\n-----\n" && \
-echo "Your PostHog IP address is: $INGRESS_IP" && \
-echo "\n-----\n"
-```

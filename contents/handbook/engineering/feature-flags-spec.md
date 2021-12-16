@@ -61,4 +61,4 @@ class FeatureFlagsPoller:
 To check if your `isSimpleFlag` implementation is in accordance with others, the following should be true:
 
 1. `SHA1('a.b')` should equal `'69f6642c9d71b463485b4faf4e989dc3fe77a8c6'`
-2. The integer value for the hash of `'a.b'` should equal `0.4139158829615955`
+2. The floating point value for the hash of `'a.b'` should equal `0.4139158829615955`

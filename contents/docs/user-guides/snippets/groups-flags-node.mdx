@@ -1,0 +1,11 @@
+Update [posthog-node](https://posthog.com/docs/integrate/server/node) to version 1.2.0 or above to make use of the new functionality.
+
+To check a flag that's matching by companies, specify groups in relevant feature flag call:
+
+```javascript
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: 'id:5' })
+
+if (isFlagEnabled) {
+    // Toggle feature-flag specific behavior
+}
+```
