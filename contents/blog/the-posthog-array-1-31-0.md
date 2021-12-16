@@ -46,7 +46,7 @@ Visit our [Group Analytics documentation](/docs/user-guides/group-analytics) to 
 
 ### Improved: Correlation Analysis
 
-Correlation Analysis just got better! Aside from significantly improving the UI & UX, we've introduced a details option for advanced users looking for deeper understanding of how events and properties contribute to conversion or drop-offs. This new detail view will show a complete confusion matrix which shows true positives, true negatives, false negatives and false postives. We've also added a correlation score from `-1.0` to `1.0` to signal how strongly an event or property correlates with conversion or drop-off.
+Correlation Analysis just got better! In addition to significantly improving the UI & UX, we've also introduced a details option for advanced users looking for deeper understanding of how events and properties contribute to conversion or drop-offs. This new detail view shows a complete confusion matrix which shows true positives, true negatives, false negatives and false positives. We've also added a correlation score from `-1.0` to `1.0` to signal how strongly an event or property correlates with conversion or drop-off.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/correlation-matrix.png" alt="Example screenshot: correlation matrix" />
 
