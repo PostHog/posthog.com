@@ -1,5 +1,5 @@
 ---
-date: 2021-12-15
+date: 2021-12-16
 title: Array 1.31.0
 rootPage: /blog
 sidebar: Blog
