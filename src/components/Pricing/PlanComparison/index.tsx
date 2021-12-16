@@ -83,10 +83,6 @@ const sections = [
                 },
             },
             {
-                name: 'Updates on schedule',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
-            },
-            {
                 name: 'Server management',
                 tiers: {
                     'PostHog Cloud': 'Managed by PostHog',
