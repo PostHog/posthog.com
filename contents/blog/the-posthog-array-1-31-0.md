@@ -26,7 +26,7 @@ Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, int
 - [Improved Correlation Analysis](#improved-correlation-analysis)
 - [Improved user experience](#improved-user-experience)
 
-### Group Analytics
+### New: Group Analytics
 
 Introducing Group Analytics! Group Analytics enable you to analyze groups, which aggregate events within PostHog. You can have multiple groups and they can even change dynamically. 
 
@@ -44,7 +44,7 @@ Visit our [Group Analytics documentation](/docs/user-guides/group-analytics) to 
 
 <br />
 
-### Improved Correlation Analysis
+### Improved: Correlation Analysis
 
 Correlation Analysis just got better! Aside from significantly improving the UI & UX, we've introduced a details option for advanced users looking for deeper understanding of how events and properties contribute to conversion or drop-offs. This new detail view will show a complete confusion matrix which shows true positives, true negatives, false negatives and false postives. We've also added a correlation score from `-1.0` to `1.0` to signal how strongly an event or property correlates with conversion or drop-off.
 
@@ -53,26 +53,41 @@ Correlation Analysis just got better! Aside from significantly improving the UI 
 
 <br />
 
-### Improved user experience
+### Polished: Experience of insights
 
-We've been working hard on creating the best user experience, particularly in our core Analytics product. Creating and navigating insights will now be a lot faster and smoother. Improvements include: finding events & properties faster, overall faster navigation, improvements to tooltips, etc.
+Insights and dashboards are the core of PostHog's analytics capabilities, which is why we're putting extra focus on making using them _spark joy_. This release brings various improvements to the experience:
+
+- You can now easily link to saved insights like so: https://app.posthog.com/insights/vMA1IlmP. While unwieldy query parameters were previously required, now all PostHog wants for Christmas is the ID of the insight. Merry sharing!
+- Visualization of funnels has been reworked for improved readability of results, particularly when using breakdown. This makes comparing conversion based on properties easier than ever.
+- Searching events & properties is now significantly faster. We've changed the way these properties are shown and now list them by popularity within the project. Create those insights faster!
+- The funnel query builder has been streamlined – essential settings are better exposed, while advanced options can be expanded when you need them.
+- The dashboard grid has been simplified to avoid annoying situations where your carefully crafted layout becomes misaligned on a different sceren resolution. Instead of four complicated layouts, there are now two: single-column for mobile devices, and multi-column for larger screens.
+
+We've also fixed various bugs around insights and dashboards that may have been hampering your experience.
+
+Expect further major improvements to this area in 1.32.
+
+<br />
+
+### Enhanced: App design and performance
+
+Following up on the [overhaul of navigation in 1.30](/blog/the-posthog-array-1-30-0#fresh-new-lookandfeel), we've continued major improvements to the UI of the app's most used pages. These top-level pages have been overhauled for uniformity, clarity, and snappiness.
+Breadcrumbs are now fully dynamic and adjust to the current page in all situations.
+The sidebar has been made more graceful: it adjusts to the screen size in a smarter way, and will remember your preferences in the browser.
+
+![Pages](https://user-images.githubusercontent.com/4550621/146378918-1738e262-3f5c-4b6b-adfb-b69767995b99.png)
 
 <br />
 
 ### Other improvements & fixes
-- Improved breakdown in funnels. We have a new vertical layout to display funnels broken down by a property (e.g. conversion by browser) that will make it even easier to compare conversion across multiple dimensions.
-- Searching events & properties is now significantly faster. We've changed the way these properties are shown and we now list them by popularity within your team. Create those insights faster!
-- Following our [lemonade redesign](/blog/the-posthog-array-1-30-0#fresh-new-look-and-feel) we now have a ton more UI improvements. In particular tables got a pretty slick facelift.
-- We've improved the layout configuration for dashboards so they'll be more responsive and look better on very small or very large screens.
-- Pushed significant improvements to the recordings list load time.
-- Introducing a new funnel query builder! We now group advanced options separately, so funnel definition is clearer.
-- Fixed a bug in Feature Flags where a 0% release was sometimes considered as a 100% release.
-- Fixed a bug where private project names were shown to members who shouldn't have access.
+- Recordings now load up to a few times faster.
+- Fixed bug in feature flags when in certain cases a 0% release was considered as a 100% release.
+- Fixed bug where private project names were shown to members who shouldn't have access.
 - Plus 350+ improvements & fixes.
 
 ### Deprecation & removal notices
 
-1. This version (`1.31.0`) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're [deprecating the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
 
 ### Talk to us about how we can improve
