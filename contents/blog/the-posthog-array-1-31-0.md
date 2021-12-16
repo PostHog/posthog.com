@@ -63,16 +63,16 @@ Insights and dashboards are the core of PostHog's analytics capabilities, which 
 - The funnel query builder has been streamlined – essential settings are better exposed, while advanced options can be expanded when you need them.
 - The dashboard grid has been simplified to avoid annoying situations where your carefully crafted layout becomes misaligned on a different sceren resolution. Instead of four complicated layouts, there are now two: single-column for mobile devices, and multi-column for larger screens.
 
-We've also fixed various bugs around insights and dashboards that may have been hampering your experience.
-
 Expect further major improvements to this area in 1.32.
 
 <br />
 
 ### Enhanced: App design and performance
 
-Following up on the [overhaul of navigation in 1.30](/blog/the-posthog-array-1-30-0#fresh-new-lookandfeel), we've continued major improvements to the UI of the app's most used pages. These top-level pages have been overhauled for uniformity, clarity, and snappiness.
+Following up on the [overhaul of navigation in 1.30](/blog/the-posthog-array-1-30-0#fresh-new-lookandfeel), we've made major UI improvements to the app's most used pages. These top-level views have been overhauled for uniformity, clarity, and snappiness.
+
 Breadcrumbs are now fully dynamic and adjust to the current page in all situations.
+
 The sidebar has been made more graceful: it adjusts to the screen size in a smarter way, and will remember your preferences in the browser.
 
 ![Pages](https://user-images.githubusercontent.com/4550621/146378918-1738e262-3f5c-4b6b-adfb-b69767995b99.png)
@@ -80,6 +80,7 @@ The sidebar has been made more graceful: it adjusts to the screen size in a smar
 <br />
 
 ### Other improvements & fixes
+
 - Recordings now load up to a few times faster.
 - Fixed bug in feature flags when in certain cases a 0% release was considered as a 100% release.
 - Fixed bug where private project names were shown to members who shouldn't have access.
