@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import { DemoScheduler } from '../components/DemoScheduler'
-import { Spacer } from '../components/Spacer'
+import { CallToAction } from 'components/CallToAction'
 import { Link } from 'gatsby'
-import { Button } from 'antd'
+import React, { useState } from 'react'
+import { DemoScheduler } from '../components/DemoScheduler'
+import Layout from '../components/Layout'
+import { Spacer } from '../components/Spacer'
 import './styles/yc-onboarding.scss'
 
 const DemoCallInfo = () => (
@@ -41,14 +41,16 @@ export const YCOnboarding = () => {
             <div className="get-in-touch-wrapper">
                 <Spacer />
                 <h1 className="centered">PostHog YC Onboarding</h1>
-                <Button
-                    className="centered"
-                    style={{ margin: 'auto' }}
-                    type="primary"
-                    onClick={() => setShowInfo(!showInfo)}
-                >
-                    {showInfo ? 'Hide Info' : 'Show Info'}
-                </Button>
+                <div className="flex justify-center">
+                    <CallToAction
+                        className="centered"
+                        style={{ margin: 'auto' }}
+                        type="primary"
+                        onClick={() => setShowInfo(!showInfo)}
+                    >
+                        {showInfo ? 'Hide Info' : 'Show Info'}
+                    </CallToAction>
+                </div>
                 <Spacer height={25} />
                 {showInfo ? <DemoCallInfo /> : null}
                 <DemoScheduler />

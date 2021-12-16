@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
-import './ContactForm.scss'
 import { useActions, useValues } from 'kea'
 import { signupLogic } from 'logic/signupLogic'
-import { CheckCircleFilled, ExclamationCircleOutlined, LoadingOutlined } from '@ant-design/icons'
+import React, { ChangeEvent, useState } from 'react'
+import './ContactForm.scss'
 
 interface ContactFormType {
     email: string
@@ -100,20 +99,17 @@ export const ContactForm = (): JSX.Element => {
                 <div className="center">
                     {loading && (
                         <>
-                            <LoadingOutlined />
                             <h4 className="mt-3 mb-0 font-normal opacity-50">Sending your message...</h4>
                         </>
                     )}
                     {response.status === 'success' && (
                         <>
-                            <CheckCircleFilled />
                             <h4 className="mt-3 mb-0 font-normal opacity-50">Thank you for reaching out!</h4>
                             <p>We'll get back to you soon.</p>
                         </>
                     )}
                     {response.status === 'error' && (
                         <>
-                            <ExclamationCircleOutlined />
                             <h4 className="mt-3 mb-0 font-normal opacity-50">Something went wrong</h4>
                             <p>
                                 Looks like there was a problem submitting your message. That's on us! Please reach out

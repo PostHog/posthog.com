@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { TabPane } from 'components/Tabs'
+import React, { useEffect, useState } from 'react'
+import { currencyData } from './compensation_data/currency'
+import { levelModifier } from './compensation_data/level_modifier'
 import { locationFactor } from './compensation_data/location_factor'
 import { sfBenchmark } from './compensation_data/sf_benchmark'
-import { Select, Statistic, Tag, Radio } from 'antd'
-import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
-import { currencyData } from './compensation_data/currency'
-
-import 'antd/lib/statistic/style/css'
-import 'antd/lib/tag/style/css'
-import 'antd/lib/radio/style/css'
 import './style.scss'
 
 const formatCur = (val: number, currency: string) => {
@@ -18,6 +14,30 @@ const formatCur = (val: number, currency: string) => {
         currency,
     })
     return formatter.format(Math.round(val * (currencyData[currency] || 1))).replace('.00', '')
+}
+
+const Select = ({ children, onChange, ...other }) => {
+    const handleChange = (e) => onChange(e.target.value)
+
+    return (
+        <select
+            className="mt-1 block w-auto box-border pl-3 pr-10 py-2 text-base border-gray-accent-light focus:outline-none focus:ring-blue focus:border-blue sm:text-sm rounded-md"
+            onChange={handleChange}
+            {...other}
+        >
+            {children}
+        </select>
+    )
+}
+
+const Tag = ({ children }) => {
+    return (
+        <span
+            className={`text-[11px] py-1 px-2 rounded-sm border border-opacity-50 font-normal leading-none mr-2 dark:!text-white`}
+        >
+            {children}
+        </span>
+    )
 }
 
 export const CompensationCalculator = () => {
@@ -72,9 +92,9 @@ export const CompensationCalculator = () => {
             <p>Select a role</p>
             <Select style={{ width: '100%', marginBottom: '0.75rem' }} value={job} onChange={setItem('job')}>
                 {Object.keys(sfBenchmark).map((job) => (
-                    <Select.Option value={job} key={job}>
+                    <option value={job} key={job}>
                         {job}
-                    </Select.Option>
+                    </option>
                 ))}
             </Select>
             <p>Country</p>
@@ -85,9 +105,9 @@ export const CompensationCalculator = () => {
                 onChange={setItem('country')}
             >
                 {countries.map((country) => (
-                    <Select.Option value={country} key={country}>
+                    <option value={country} key={country}>
                         {country}
-                    </Select.Option>
+                    </option>
                 ))}
             </Select>
             <p>Region</p>
@@ -99,57 +119,54 @@ export const CompensationCalculator = () => {
             >
                 {locationFactor
                     .filter((location) => location.country === country)
-                    .map((countryRegion) => (
-                        <Select.Option value={countryRegion.area} key={countryRegion.area}>
-                            {countryRegion.area} <span>{countryRegion.locationFactor}</span>
-                        </Select.Option>
-                    ))}
+                    .map((countryRegion) => {
+                        console.log(countryRegion)
+                        return (
+                            <option value={countryRegion.area} key={countryRegion.area}>
+                                {countryRegion.area} - {countryRegion.locationFactor}
+                            </option>
+                        )
+                    })}
             </Select>
             <p>Level</p>
-            <Radio.Group
-                style={{ width: '100%', marginBottom: '0.75rem' }}
-                value={level}
-                buttonStyle="solid"
-                onChange={(e) => setItem('level')(e.target.value)}
+            <div
+                style={{ marginBottom: '0.75rem' }}
+                className="bg-gray-accent-light dark:bg-gray-accent-dark dark:bg-opacity-50 flex flex-col md:inline-block rounded-sm"
             >
-                {Object.entries(levelModifier).map(([level, modifier]) => (
-                    <Radio.Button value={level} key={level}>
-                        {level} <span>{modifier}</span>
-                    </Radio.Button>
+                {Object.entries(levelModifier).map(([tabLevel, modifier]) => (
+                    <TabPane
+                        key={tabLevel}
+                        active={level === tabLevel}
+                        tab={`${tabLevel} ${modifier}`}
+                        onClick={() => setItem('level')(tabLevel)}
+                    />
                 ))}
-            </Radio.Group>
+            </div>
+
             <p>Step</p>
             <Select style={{ width: '100%', marginBottom: '0.75rem' }} value={step} onChange={setItem('step')}>
                 {Object.entries(stepModifier).map(([step, modifier]) => (
-                    <Select.Option value={step} key={step}>
+                    <option value={step} key={step}>
                         {step} {modifier[0]} - {modifier[1]}
-                    </Select.Option>
+                    </option>
                 ))}
             </Select>
-            <Statistic
-                title={<p>Base salary</p>}
-                value={
-                    job && country && region && location && typeof calculatedLocationFactor === 'number'
-                        ? formatCur(
-                              sfBenchmark[job] *
-                                  calculatedLocationFactor *
-                                  levelModifier[level] *
-                                  stepModifier[step][0],
-                              location?.currency
-                          ) +
-                          ' - ' +
-                          formatCur(
-                              sfBenchmark[job] *
-                                  calculatedLocationFactor *
-                                  levelModifier[level] *
-                                  stepModifier[step][1],
-                              location?.currency
-                          )
-                        : '--'
-                }
-            />
+            <p>Base salary</p>
+            <h3 className="!m-0 font-semibold">
+                {job && country && region && location && typeof calculatedLocationFactor === 'number'
+                    ? formatCur(
+                          sfBenchmark[job] * calculatedLocationFactor * levelModifier[level] * stepModifier[step][0],
+                          location?.currency
+                      ) +
+                      ' - ' +
+                      formatCur(
+                          sfBenchmark[job] * calculatedLocationFactor * levelModifier[level] * stepModifier[step][1],
+                          location?.currency
+                      )
+                    : '--'}
+            </h3>
             {job && country && region && (
-                <div>
+                <div className="mt-2">
                     <Tag>SF Benchmark: {formatCur(sfBenchmark[job])}</Tag> x{' '}
                     <Tag>Location factor: {calculatedLocationFactor}</Tag> x{' '}
                     <Tag>Level modifier: {levelModifier[level]}</Tag>x{' '}

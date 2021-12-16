@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import { Spacer } from '../components/Spacer'
-import { Row, Tabs, Spin } from 'antd'
-import { useActions, useValues } from 'kea'
-import { contributorsLogic } from '../logic/contributorsLogic'
-import { SEO } from '../components/seo'
-import pluginLibraryOgImage from '../images/posthog-plugins.png'
+import Chip from 'components/Chip'
 import { ContributorCard } from 'components/ContributorCard'
-import { Contributor } from 'types'
-import { ContributorSearch } from 'components/ContributorSearch'
 import { ContributorsChart } from 'components/ContributorsChart'
-
-const { TabPane } = Tabs
+import { ContributorSearch } from 'components/ContributorSearch'
+import { useActions, useValues } from 'kea'
+import React, { useState } from 'react'
+import { Contributor } from 'types'
+import Layout from '../components/Layout'
+import { SEO } from '../components/seo'
+import { Spacer } from '../components/Spacer'
+import pluginLibraryOgImage from '../images/posthog-plugins.png'
+import { contributorsLogic } from '../logic/contributorsLogic'
 
 export const ContributorsPage = () => {
     const { setSearchQuery } = useActions(contributorsLogic)
@@ -36,20 +34,22 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
-                        <TabPane tab="List" key="list" />
-                        <TabPane tab="Stats" key="stats" />
-                    </Tabs>
+                    <div className="flex justify-center space-x-2 items-center">
+                        <Chip active={activeTab === 'list'} onClick={() => setActiveTab('list')}>
+                            List
+                        </Chip>
+                        <Chip active={activeTab === 'stats'} onClick={() => setActiveTab('stats')}>
+                            Stats
+                        </Chip>
+                    </div>
                     <Spacer height={20} />
 
                     {activeTab === 'list' ? (
                         <>
                             <ContributorSearch />
                             <Spacer height={20} />
-                            <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
-                                {contributorsLoading ? (
-                                    <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
-                                ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-5">
+                                {!contributorsLoading && (
                                     <>
                                         {filteredContributors.map((contributor: Contributor) => (
                                             <ContributorCard
@@ -64,7 +64,7 @@ export const ContributorsPage = () => {
                                         ))}
                                     </>
                                 )}
-                            </Row>
+                            </div>
                         </>
                     ) : (
                         <ContributorsChart />

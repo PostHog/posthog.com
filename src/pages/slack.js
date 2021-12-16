@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Spin } from 'antd'
 import queryString from 'query-string'
+import React, { useEffect, useState } from 'react'
 import { SEO } from '../components/seo'
 
 function Slack() {
@@ -35,9 +34,6 @@ function Slack() {
                         in the PostHog app.
                     </div>
                 )}
-                <div style={{ marginTop: '2rem' }}>
-                    <Spin size="large" />
-                </div>
             </div>
         </>
     )

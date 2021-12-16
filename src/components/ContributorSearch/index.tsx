@@ -1,15 +1,14 @@
-import React from 'react'
-import { Input } from 'antd'
 import { useActions } from 'kea'
 import { contributorsLogic } from 'logic/contributorsLogic'
+import React from 'react'
 
 export const ContributorSearch = () => {
     const { processSearchInput } = useActions(contributorsLogic)
     return (
         <div className="max-w-xs mx-auto">
-            <Input.Search
-                className="contributor-search"
-                size="large"
+            <input
+                placeholder="Search..."
+                className="contributor-search px-4 py-2 text-base rounded-md max-w-[250px] w-full"
                 onChange={(e) => processSearchInput(e.target.value)}
             />
         </div>

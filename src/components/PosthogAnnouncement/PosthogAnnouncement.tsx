@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { Close } from 'components/Icons/Icons'
 import { Link } from 'gatsby'
-import { CloseOutlined } from '@ant-design/icons'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
+import React, { useEffect, useState } from 'react'
 import { unsafeHash } from '../../lib/utils'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 export const PosthogAnnouncement = () => {
     const [showAnnouncement, setShowAnnouncement] = useState(false)
@@ -48,7 +48,7 @@ export const PosthogAnnouncement = () => {
         <div className="announcement-banner">
             <p className="centered announcement-text">
                 {text}
-                <CloseOutlined className="announcement-banner-close" onClick={(e) => stopAnnouncement(e, 'close')} />
+                <Close className="announcement-banner-close" onClick={(e) => stopAnnouncement(e, 'close')} />
             </p>
         </div>
     )

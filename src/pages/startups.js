@@ -1,23 +1,6 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
-import Button from 'antd/lib/button'
-import 'antd/lib/button/style/css'
-import 'antd/lib/input/style/css'
-import 'antd/lib/select/style/css'
-import 'antd/lib/list/style/css'
-import 'antd/lib/form/style/css'
-import 'antd/lib/card/style/css'
-import 'antd/lib/layout/style/css'
-import { Link } from 'gatsby'
-import trends from '../images/product-screenshots/product-trends.png'
-import benHorowitz from '../images/ben-horowitz.jpg'
-import michaelSeibel from '../images/michael-seibel.jpg'
-import paulGraham from '../images/paul-graham.jpg'
-import { Col, Row, Card, Tabs } from 'antd'
 import { SEO } from '../components/seo'
-
-const { TabPane } = Tabs
-const { Meta } = Card
 
 const StartupsPage = () => {
     useEffect(() => {
@@ -28,7 +11,7 @@ const StartupsPage = () => {
     return (
         <Layout className="index-page">
             <SEO title="PostHog for Startups" description="We offer a special deal - startups get going for free." />
-            <Row gutter={[24, 8]}>
+            {/* <Row gutter={[24, 8]}>
                 <Col span={24} className="gutter-row">
                     <h2 className="large-header">
                         Find product market fit.
@@ -234,7 +217,7 @@ const StartupsPage = () => {
                         />
                     </Card>
                 </Col>
-            </Row>
+            </Row> */}
         </Layout>
     )
 }

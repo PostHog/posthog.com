@@ -1,4 +1,3 @@
-import { CopyOutlined } from '@ant-design/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
@@ -129,8 +128,23 @@ export const CodeBlock = (props: CodeBlockProps) => {
         <div className="relative">
             <Tooltip className="right-0" title="Copied!" visible={tooltipVisible}>
                 {copyToClipboardAvailable ? (
-                    <span className="text-primary dark:text-primary-dark absolute right-2 top-1">
-                        <CopyOutlined onClick={copyToClipboard} />
+                    <span className="text-primary dark:text-primary-dark opacity-60 absolute right-1 top-1">
+                        <button onClick={copyToClipboard}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+                                />
+                            </svg>
+                        </button>
                     </span>
                 ) : null}
             </Tooltip>

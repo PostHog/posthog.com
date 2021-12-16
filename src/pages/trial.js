@@ -1,7 +1,7 @@
+import { CallToAction } from 'components/CallToAction'
+import { Cloud, ServerIcon } from 'components/Icons/Icons'
 import React from 'react'
-import { Link } from 'gatsby'
 import Layout from '../components/Layout'
-import { Row, Col, Button, Icon } from 'antd'
 import { SEO } from '../components/seo'
 import './styles/trial.scss'
 
@@ -10,15 +10,11 @@ const TrialPage = () => (
         <div className="trial-page-wrapper">
             <div className="trial-page-container">
                 <SEO title="PostHog Trial" description="Get started, for free." />
-                <Row gutter={[24, 24]}>
-                    <Col span={24} align="middle">
-                        <h1>Try PostHog - free for 30 days</h1>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 96]} className="card-row">
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
-                        <h2>
-                            <Icon type="cloud" theme="filled" /> Cloud
+                <h1>Try PostHog - free for 30 days</h1>
+                <div className="grid grid-cols-2 gap-5">
+                    <div className="card-col">
+                        <h2 className="flex space-x-4 items-center">
+                            <Cloud /> <span>Cloud</span>
                         </h2>
                         <h3>Just create an account.</h3>
                         <p>
@@ -26,16 +22,12 @@ const TrialPage = () => (
                             about installing it yourself.
                         </p>
                         <p>
-                            <a href="https://app.posthog.com/signup">
-                                <Button type="primary" size="large">
-                                    Sign Up
-                                </Button>
-                            </a>
+                            <CallToAction to="https://app.posthog.com/signup">Sign Up</CallToAction>
                         </p>
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
-                        <h2>
-                            <Icon type="hdd" theme="filled" /> Open Source
+                    </div>
+                    <div className="card-col">
+                        <h2 className="flex space-x-4 items-center">
+                            <ServerIcon /> <span>Open Source</span>
                         </h2>
                         <h3>Host your own instance.</h3>
                         <p>
@@ -43,15 +35,10 @@ const TrialPage = () => (
                             infrastructure.
                         </p>
                         <p>
-                            <Link to="/docs/self-host">
-                                <Button type="primary" size="large">
-                                    Self Deploy
-                                </Button>
-                            </Link>
+                            <CallToAction to="/docs/self-host">Self Deploy</CallToAction>
                         </p>
-                    </Col>
-                </Row>
-                <Row className="spacer-row"></Row>
+                    </div>
+                </div>
             </div>
         </div>
     </Layout>

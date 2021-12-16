@@ -254,74 +254,60 @@ curl -v -L --header "Content-Type: application/json" -d '{
 ##### Responses
 
 ```js
-{ 
-    status: 1 
+{
+    status: 1
 }
 ```
 
-**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (token) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested. 
-
+**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (token) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested.
 
 #### Status code: 400
 
 ##### Responses
 
-
 ```js
-{   
-    type: 'validation_error', 
-    code: 'invalid_project', 
-    detail: 'Invalid Project ID.', 
-    attr: 'project_id' 
+{
+    type: 'validation_error',
+    code: 'invalid_project',
+    detail: 'Invalid Project ID.',
+    attr: 'project_id'
 }
 ```
 
 **Meaning:** We were unable to determine the project to associate the events with.
 
-
 #### Status code: 401
 
 ##### Responses
 
-
 ```js
-{   
-    type: 'authentication_error', 
-    code: 'invalid_api_key', 
-    detail: 'Project API key invalid. You can find your project API key in PostHog project settings.', 
+{
+    type: 'authentication_error',
+    code: 'invalid_api_key',
+    detail: 'Project API key invalid. You can find your project API key in PostHog project settings.',
 }
 ```
 
 **Meaning:** The token/API key you provided is invalid.
 
-import { Divider } from 'antd'
-
-<br />
-
-<Divider dashed style={{ background: '#eeeeee', height: 1 }} />
-
-<br />
-
-
 ```js
-{   
-    type: 'authentication_error', 
-    code: 'invalid_personal_api_key', 
-    detail: 'Invalid Personal API key.', 
+{
+    type: 'authentication_error',
+    code: 'invalid_personal_api_key',
+    detail: 'Invalid Personal API key.',
 }
 ```
 
-**Meaning:**  The personal API key you used for authentication is invalid.
+**Meaning:** The personal API key you used for authentication is invalid.
 
 #### Status code: 503 (Deprecated)
 
 ##### Responses
 
-
 ```js
-{   
-    type: 'server_error', 
-    code: 'fetch_team_fail', 
+{
+    type: 'server_error',
+    code: 'fetch_team_fail',
     detail: 'Unable to fetch team from database.'
 }
 ```
@@ -334,13 +320,13 @@ We perform basic validation on the payload and project API key (token), returnin
 
 However, we **will not return an error** to the client when the following happens:
 
-- An event does not have a name
-- An event does not have the `distinct_id` field set
-- The `distinct_id` field of an event has an empty value
+-   An event does not have a name
+-   An event does not have the `distinct_id` field set
+-   The `distinct_id` field of an event has an empty value
 
-The three cases above will cause the event to not be ingested, but you will still receive a `200: OK` response from us. 
+The three cases above will cause the event to not be ingested, but you will still receive a `200: OK` response from us.
 
-This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints. 
+This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.
 
 ## Reading data from PostHog
 

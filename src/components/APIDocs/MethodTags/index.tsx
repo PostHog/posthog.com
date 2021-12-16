@@ -1,5 +1,4 @@
 import React from 'react'
-import { Tag } from 'antd'
 
 export type method = 'post' | 'put' | 'patch' | 'get' | 'delete'
 
@@ -8,15 +7,21 @@ interface MethodTagsProps {
 }
 
 const methodToColor: Record<method, string> = {
-    post: 'green',
-    patch: 'purple',
-    get: 'blue',
-    delete: 'red',
-    put: 'gold',
+    post: 'border-[#2ac276] text-[#2ac276]',
+    patch: 'border-[#8a008a] text-[#8a008a]',
+    get: 'border-blue text-blue',
+    delete: 'border-red text-red',
+    put: 'border-yellow text-yellow',
 }
 
 const MethodTag = ({ method }: { method: method }) => {
-    return <Tag color={methodToColor[method]}>{method.toUpperCase()}</Tag>
+    return (
+        <span
+            className={`text-[11px] py-1 px-2 rounded-sm border border-opacity-50 font-normal leading-none ${methodToColor[method]} mr-2`}
+        >
+            {method.toUpperCase()}
+        </span>
+    )
 }
 
 export const MethodTags = ({ allowedMethods }: MethodTagsProps) => {

@@ -4,9 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { Tabs } from 'antd'
-export const TabPane = Tabs.TabPane
-
 Live data ingestion, opposed to [historical data ingestions](/docs/integrate/ingest-historic-data), is the process of sending events from your applications to PostHog in real-time; as they happen.
 
 Live (real-time) events can be integrated using [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), and [third-party platform integrations](/docs/integrate/overview#integrations).
@@ -37,25 +34,25 @@ import ReactNativeInstall from './client/react-native/snippets/install.mdx'
 import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
 
 <Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-  <TabPane tab="JavaScript" key="1">
-    <JSInstall />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidInstall />
-    <AndroidConfigure />
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSInstall />
-    <IOSConfigure />
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <FlutterPackage />
-    <FlutterInstall />
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeInstall />
-    <ReactNativeConfigure />
-  </TabPane>
+    <TabPane tab="JavaScript" key="1">
+        <JSInstall />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+        <AndroidInstall />
+        <AndroidConfigure />
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+        <IOSInstall />
+        <IOSConfigure />
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+        <FlutterPackage />
+        <FlutterInstall />
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+        <ReactNativeInstall />
+        <ReactNativeConfigure />
+    </TabPane>
 </Tabs>
 
 # Autocapture
@@ -75,25 +72,34 @@ import AndroidCapture from './client/android/snippets/capture.mdx'
 import IOSCapture from './client/ios/snippets/capture.mdx'
 import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-  <TabPane tab="JavaScript" key="1">
-    <JSCapture />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidCapture />
-    <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSCapture />
-    <p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeCapture />
-    <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
-  </TabPane>
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+    <TabPane tab="JavaScript" key="1">
+        <JSCapture />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+        <AndroidCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+        <IOSCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+        <p>
+            See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+        </p>
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+        <ReactNativeCapture />
+        <p>
+            For more information see the{' '}
+            <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.
+        </p>
+    </TabPane>
 </Tabs>
 
 # Identify users
@@ -104,21 +110,21 @@ import IOSIdentify from './client/ios/snippets/identify.mdx'
 import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
 
 <Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-  <TabPane tab="JavaScript" key="1">
-    <JSIdentify />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidIdentify />
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSIdentify />
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <p>
-      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
-    </p>
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeIdentify />
-  </TabPane>
+    <TabPane tab="JavaScript" key="1">
+        <JSIdentify />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+        <AndroidIdentify />
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+        <IOSIdentify />
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+        <p>
+            See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+        </p>
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+        <ReactNativeIdentify />
+    </TabPane>
 </Tabs>

@@ -37,7 +37,6 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
-import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -65,7 +64,6 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
-import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
@@ -82,20 +80,17 @@ import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
-import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
-import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
-import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { Tutorials } from './components/Tutorials'
@@ -143,7 +138,6 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
-    DocsSearch,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -171,7 +165,6 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
-    PlanComparisonTable,
     PostCard,
     PostLayout,
     CloudVsSelfHost,
@@ -188,20 +181,17 @@ export const shortcodes = {
     ProductFooter,
     ProductPage,
     ProductSectionHeader,
-    ResponsiveAnchor,
     RocketHorizontalRule,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
-    SignupModal,
     SliderNav,
     Spacer,
     StarRepoButton,
     StarUsBanner,
     StartNowButton,
     Structure,
-    TableOfContents,
     TeamQuote,
     Tooltip,
     Tutorials,

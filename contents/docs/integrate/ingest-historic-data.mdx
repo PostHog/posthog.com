@@ -4,18 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { Tabs } from 'antd'
-export const TabPane = Tabs.TabPane
-
 Historical data ingestion (or importing data), opposed to [live data ingestion](/docs/integrate/ingest-live-data), is the process of transporting data from external sources into PostHog so you can benefit from PostHog product analytics on historical data. It may be that you have historical data that you want to analyze along with new live data or that you have a requirement to periodically import data from third-party sources to augment your live data.
 
 Whatever the reason for the historical data ingestion, this guide covers what to consider during that process.
 
 The three main factors to consider are:
 
-- [Data ingestion process](#data-ingestion-process): how to get the event data from the third-party source into PostHog
-- [Importing events](#importing-events): Sending the events captured in the third-party data source into PostHog as custom events
-- [User identification](#user-identification): How to identify users within PostHog and ties those users back to the user within original data source
+-   [Data ingestion process](#data-ingestion-process): how to get the event data from the third-party source into PostHog
+-   [Importing events](#importing-events): Sending the events captured in the third-party data source into PostHog as custom events
+-   [User identification](#user-identification): How to identify users within PostHog and ties those users back to the user within original data source
 
 Historical data is sent to PostHog using either a [server library](/docs/integrate/overview#server-libraries) or the [PostHog API](/docs/api/overview). For more information see the [importing events section](#importing-events).
 
@@ -25,10 +22,10 @@ Since the third-party data source will offer an API you can use the power of sof
 
 The following factors are important in the export and then import process:
 
-- The volume of data
-- API rate limits of both the data source and PostHog
-- Ensure that only the data required for events is exported
-- Handle error scenarios allowing the process to resume form the last successful point
+-   The volume of data
+-   API rate limits of both the data source and PostHog
+-   Ensure that only the data required for events is exported
+-   Handle error scenarios allowing the process to resume form the last successful point
 
 With the above factors in mind it's recommended that you break the process up into steps such as the following:
 
@@ -37,6 +34,7 @@ With the above factors in mind it's recommended that you break the process up in
 3. Transform the data to the format you will use with PostHog and again save to a storage mechanism for faster access in later steps.
 
     The data format should be:
+
     ```json
     {
         "event": "[event name]",
@@ -50,7 +48,7 @@ With the above factors in mind it's recommended that you break the process up in
     ```
 
     At this stage it's also important to consider the following:
-    
+
     1. Use the same `event` name that you're going to use with your [live data ingestion](/docs/integrate/ingest-live-data) so the historical and live events are seen as the same type within PostHog
     1. Use the same unique identifier within the `distinct_id` field as you are within your [live data ingestion](/docs/integrate/ingest-live-data) so historical events and live events are associated with the same user
     1. Convert the old event property names to the new event property names you are using within the events in your [live data ingestion](/docs/integrate/ingest-live-data)
@@ -63,8 +61,8 @@ With the above factors in mind it's recommended that you break the process up in
 
 Once you are ready to import the data into PostHog you can use one of the following:
 
-- a PostHog [server libraries](/docs/integrate/overview#server-libraries)
-- the [PostHog API](/docs/api/overview)
+-   a PostHog [server libraries](/docs/integrate/overview#server-libraries)
+-   the [PostHog API](/docs/api/overview)
 
 As mentioned above, the data should be in the following format:
 
@@ -89,31 +87,43 @@ import CURLCapture from './server/curl/snippets/capture.mdx'
 
 > The server libraries handle batching capture requests. If you decide to use the API directly you will need to manage this yourself.
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-  <TabPane tab="Node.js" key="1">
-    <NodeCapture />
-    <p>For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Python" key="2">
-    <PythonCapture />
-    <p>For more information see the <a href="/docs/integrate/server/python">python docs</a>.</p>
-  </TabPane>
-  <TabPane tab="PHP" key="3">
-    <PHPCapture />
-    <p>For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Go" key="4">
-    <GoCapture />
-    <p>For more information see the <a href="/docs/integrate/server/go">Go docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Ruby" key="5">
-    <RubyCapture />
-    <p>For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.</p>
-  </TabPane>    
-  <TabPane tab="cURL" key="6">
-    <CURLCapture />
-    <p>For more information see the <a href="/docs/api">API docs</a>.</p>
-  </TabPane>
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+    <TabPane tab="Node.js" key="1">
+        <NodeCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Python" key="2">
+        <PythonCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/server/python">python docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="PHP" key="3">
+        <PHPCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Go" key="4">
+        <GoCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/server/go">Go docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Ruby" key="5">
+        <RubyCapture />
+        <p>
+            For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="cURL" key="6">
+        <CURLCapture />
+        <p>
+            For more information see the <a href="/docs/api">API docs</a>.
+        </p>
+    </TabPane>
 </Tabs>
 
 ## User identification
@@ -127,29 +137,41 @@ import GoIdentify from './server/go/snippets/identify.mdx'
 import RubyIdentify from './server/ruby/snippets/identify.mdx'
 import CURLIdentify from './server/curl/snippets/identify.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-  <TabPane tab="Node.js" key="1">
-    <NodeIdentify />
-    <p>For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Python" key="2">
-    <PythonIdentify />
-    <p>For more information see the <a href="/docs/integrate/server/python">Python docs</a>.</p>
-  </TabPane>
-  <TabPane tab="PHP" key="3">
-    <PHPIdentify />
-    <p>For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Go" key="4">
-    <GoIdentify />
-    <p>For more information see the <a href="/docs/integrate/server/go">Go docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Ruby" key="5">
-    <RubyIdentify />
-    <p>For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.</p>
-  </TabPane>    
-  <TabPane tab="cURL" key="6">
-    <CURLIdentify />
-    <p>For more information see the <a href="/docs/api">API docs</a>.</p>
-  </TabPane>
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+    <TabPane tab="Node.js" key="1">
+        <NodeIdentify />
+        <p>
+            For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Python" key="2">
+        <PythonIdentify />
+        <p>
+            For more information see the <a href="/docs/integrate/server/python">Python docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="PHP" key="3">
+        <PHPIdentify />
+        <p>
+            For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Go" key="4">
+        <GoIdentify />
+        <p>
+            For more information see the <a href="/docs/integrate/server/go">Go docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="Ruby" key="5">
+        <RubyIdentify />
+        <p>
+            For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.
+        </p>
+    </TabPane>
+    <TabPane tab="cURL" key="6">
+        <CURLIdentify />
+        <p>
+            For more information see the <a href="/docs/api">API docs</a>.
+        </p>
+    </TabPane>
 </Tabs>

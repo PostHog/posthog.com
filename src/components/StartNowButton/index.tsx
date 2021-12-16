@@ -1,6 +1,5 @@
+import { CallToAction } from 'components/CallToAction'
 import React from 'react'
-import { Link } from 'gatsby'
-import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import './style.scss'
 
@@ -14,11 +13,7 @@ export const StartNowButton = ({ href = '/pricing', innerText = 'Start Now' }: S
         <div className="start-now-btn-wrapper">
             <div className="startNowWrapper">
                 <div className="startNowRow">
-                    <Link to={href}>
-                        <Button type="primary" className="startNowButton">
-                            {innerText}
-                        </Button>
-                    </Link>
+                    <CallToAction to={href}>{innerText}</CallToAction>
                     <img src={rays} />
                 </div>
             </div>

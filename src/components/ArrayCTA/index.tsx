@@ -1,15 +1,12 @@
+import { CallToAction } from 'components/CallToAction'
 import React from 'react'
-import { Link } from 'gatsby'
-import { Button } from 'antd'
-
 export const ArrayCTA = () => (
     <>
         <br />
-        <Link to="https://app.posthog.com/signup">
-            <Button className="center" type="primary" size="large">
-                Try PostHog Cloud Now
-            </Button>
-        </Link>
+        <CallToAction to="https://app.posthog.com/signup" className="center max-w-[300px]">
+            Try PostHog Cloud Now
+        </CallToAction>
+
         <br />
     </>
 )
