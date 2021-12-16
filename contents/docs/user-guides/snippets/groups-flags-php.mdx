@@ -1,0 +1,9 @@
+Update [posthog-php](https://posthog.com/docs/integrate/server/php) to version 2.1.0 or above to make use of the new functionality.
+
+To check a flag that's matching by companies, specify groups in relevant feature flag call:
+
+```c
+if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "id:5"))) {
+    // Do something
+}
+```

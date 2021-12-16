@@ -9,9 +9,13 @@ tags:
 
 import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
+import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
+import SetupDNS from './snippets/setup-dns'
+
+> Note: This deployment option is in Beta. See alternative deployment options [here](/docs/self-host#deployment-options).
 
 First, we need to set up a Kubernetes cluster (see the official Azure [documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster) for more info).
 
@@ -38,26 +42,29 @@ cert-manager:
   enabled: true
 ```
 
-### Installing the chart
+## Installing the chart
 
 <InstallingSnippet />
 
 
-### Lookup external IP
+## Lookup the address of the installation
 
-```shell
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
-```
-### Setting up DNS
+<GetInstallationAddress />
 
-Create a record from your desired hostname to the external IP.
+## Setting up DNS
+
+<SetupDNS />
 
 ## Troubleshooting
+
 ### I cannot connect to my PostHog instance after creation
+
 <TryUnsecureSnippet />
 
-## Upgrading the chart
+### Upgrading the chart
+
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
+
 <UninstallingSnippet />

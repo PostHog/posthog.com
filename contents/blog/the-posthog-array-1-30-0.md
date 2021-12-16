@@ -22,19 +22,10 @@ PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user
 > Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [PostHog 1.30.0 release notes](#posthog-1300-release-notes)
-  - [Fresh new look-and-feel](#fresh-new-look-and-feel)
-  - [Correlation analysis](#correlation-analysis)
-  - [Saved insights](#saved-insights)
-  - [Fully revamped recordings](#fully-revamped-recordings)
-  - [Other improvements & fixes](#other-improvements--fixes)
-  - [Deprecation & removal notices](#deprecation--removal-notices)
-  - [Help us improve PostHog](#help-us-improve-posthog)
-- [Community](#community)
-  - [Community MVP 🏆](#community-mvp-)
-  - [Community shoutouts](#community-shoutouts)
-- [Open roles](#open-roles)
-
+- [Fresh new look-and-feel](#fresh-new-look-and-feel)
+- [Correlation analysis](#correlation-analysis)
+- [Saved insights](#saved-insights)
+- [Fully revamped recordings](#fully-revamped-recordings)
 ### Fresh new look-and-feel
 
 We reworked PostHog's UI philosophy from the ground up, all to offer you the most intuitive and sleek user experience possible. With 1.30.0 we're introducing our redesigned navigation experience – codenamed Lemonade for its freshness. An evolution of the interface you know, it's simply much nicer packaging for the existing features, along with a new helpful addition: breadcrumbs for hierarchical navigation. We hope you'll find this a joy to use. And if you have any feedback regarding the redesign, we'd love to hear your thoughts!
