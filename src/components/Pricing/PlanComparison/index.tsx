@@ -226,7 +226,7 @@ const sections = [
             },
             {
                 name: 'Zapier',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
         ],
     },
