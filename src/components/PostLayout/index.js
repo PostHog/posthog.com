@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Scrollspy from 'react-scrollspy'
-import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
 import { useLocation } from '@reach/router'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { animateScroll as scroll } from 'react-scroll'
-import { InlineCode } from 'components/InlineCode'
-import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
-import { ZoomImage } from 'components/ZoomImage'
-import Link from 'components/Link'
-import { shortcodes } from '../../mdxGlobalComponents'
-import { Heading } from 'components/Heading'
 import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import Link from 'components/Link'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import React, { useEffect, useState } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
+import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -99,7 +93,7 @@ export const ShareLinks = ({ title, href }) => {
 export const Contributor = ({ image, name }) => {
     return (
         <>
-            <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
+            <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
                 <img className="absolute w-full h-full inset-0 object-cover" src={image} />
             </div>
             <span className="author text-[14px] font-semibold">{name}</span>
