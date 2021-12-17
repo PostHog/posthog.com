@@ -54,7 +54,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
                     <Contributors className="flex flex-col space-y-2" contributors={contributors} />
                 </SidebarSection>
             )}
