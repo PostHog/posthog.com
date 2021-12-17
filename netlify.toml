@@ -547,9 +547,10 @@
     to = "/docs/user-guides/session-recording"
 
 # Added: 2021-07-13
+# Edited: 2021-12-14
 [[redirects]]
     from = "/docs/features/sessions"
-    to = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -1133,7 +1134,14 @@
     from = "/docs/self-host/hobby-deployment"
     to = "/docs/self-host/deploy/hobby"
 
+
 # Added: 2021-12-13
 [[redirects]]
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
+
+
+# Added: 2021-12-14
+[[redirects]]
+    from = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"
