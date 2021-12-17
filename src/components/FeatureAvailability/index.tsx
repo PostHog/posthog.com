@@ -9,7 +9,7 @@ interface PlanInterface {
     name: string
 }
 
-const PLANS: Record<'cloud' | 'hosted', PlanInterface[]> = {
+const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
     cloud: [
         {
             key: 'free',
@@ -28,10 +28,10 @@ const PLANS: Record<'cloud' | 'hosted', PlanInterface[]> = {
             name: 'Enterprise',
         },
     ],
-    hosted: [
+    selfHosted: [
         {
             key: 'openSource',
-            name: 'Open source',
+            name: 'Open-source',
         },
         {
             key: 'scale',
@@ -47,6 +47,10 @@ const PLANS: Record<'cloud' | 'hosted', PlanInterface[]> = {
 interface FeatureAvailabilityProps {
     allPlans?: boolean
     availablePlans?: AvailablePlans[]
+    /* Restricted plan means there are some limitations to the specific functionality available for that feature.
+        Example: Paths is available for everyone, but advanced display features or end point selection is not available on free tiers.
+        TODO: Support clarifying restricions.
+    */
     restrictedPlans?: AvailablePlans[]
 }
 
@@ -62,7 +66,8 @@ function Plan({
     return (
         <li className={restricted ? 'restricted' : available ? '' : 'unavailable'}>
             {restricted ? <MinusCircleFilled /> : available ? <CheckCircleFilled /> : <CloseCircleFilled />}
-            {name} plan{restricted && '*'}
+            {name}
+            {restricted && '*'}
         </li>
     )
 }
@@ -79,7 +84,7 @@ export function FeatureAvailability({
             <div className="feature-availability-inner">
                 <div>
                     <h5>
-                        Cloud
+                        Cloud plans
                         <a href="/pricing?realm=cloud">
                             <InfoCircleOutlined />
                         </a>
@@ -97,13 +102,13 @@ export function FeatureAvailability({
                 </div>
                 <div>
                     <h5>
-                        Self-hosted
+                        Self-hosted plans
                         <a href="/pricing?realm=self-hosted">
                             <InfoCircleOutlined />
                         </a>
                     </h5>
                     <ul>
-                        {PLANS.hosted.map((plan) => (
+                        {PLANS.selfHosted.map((plan) => (
                             <Plan
                                 key={plan.key}
                                 available={allPlans || availablePlans?.includes(plan.key)}

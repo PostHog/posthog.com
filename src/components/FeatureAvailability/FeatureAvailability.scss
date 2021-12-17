@@ -15,13 +15,15 @@
         margin: 0;
         font-size: 0.9em;
         text-transform: uppercase;
-        color: $text_muted_alt;
         display: flex;
         align-items: center;
         margin-bottom: 6px;
         a {
             margin-left: 4px;
             color: $primary !important;
+        }
+        span.anticon {
+            vertical-align: middle;
         }
     }
 
