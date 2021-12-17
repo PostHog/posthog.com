@@ -48,6 +48,9 @@ Many acronyms, like that one, will be familiar to developers. But when in doubt,
 
 Write "Documentation style guide", not "Documentation Style Guide". 
 
+**Use title case for feature names**
+There's [plenty of discussion](https://github.com/PostHog/posthog/issues/7648) about this, but in short: If it's a feature name then it's a proper noun and should be capitalized, e.g. Feature Flags, Group Analytics, Product Analytics.  
+
 **Follow the style standards of each programming language**
 
 In code samples, use the conventions of the language the code is written in.

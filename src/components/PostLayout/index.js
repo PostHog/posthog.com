@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Scrollspy from 'react-scrollspy'
-import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
 import { useLocation } from '@reach/router'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { animateScroll as scroll } from 'react-scroll'
-import { InlineCode } from 'components/InlineCode'
-import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
-import { ZoomImage } from 'components/ZoomImage'
-import Link from 'components/Link'
-import { shortcodes } from '../../mdxGlobalComponents'
-import { Heading } from 'components/Heading'
 import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import Link from 'components/Link'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import React, { useEffect, useState } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
+import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -80,7 +74,9 @@ export const ShareLinks = ({ title, href }) => {
             <ShareLink url={`https://www.facebook.com/sharer/sharer.php?u=${href}`}>
                 <Facebook />
             </ShareLink>
-            <ShareLink url={`https://twitter.com/intent/tweet?url=${href}`}>
+            <ShareLink
+                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40poshog%0A%0A`}
+            >
                 <Twitter className="w-[32px] h-[32px]" />
             </ShareLink>
             <ShareLink url={`https://www.linkedin.com/shareArticle?url=${href}`}>
@@ -99,7 +95,7 @@ export const ShareLinks = ({ title, href }) => {
 export const Contributor = ({ image, name }) => {
     return (
         <>
-            <div className="w-[32px] h-[32px] relative rounded-full overflow-hidden">
+            <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
                 <img className="absolute w-full h-full inset-0 object-cover" src={image} />
             </div>
             <span className="author text-[14px] font-semibold">{name}</span>
@@ -131,7 +127,7 @@ export const Contributors = ({ contributors, className = '' }) => {
 }
 
 export const Text = ({ children }) => {
-    return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[13px]">{children}</p>
+    return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
 export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650 }) {
@@ -145,6 +141,8 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
         }
     }, [])
 
+    const toc = tableOfContents?.filter((item) => item.depth <= 2)
+
     return (
         <div
             style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
@@ -155,11 +153,11 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                     {children}
                 </div>
             </article>
-            <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+            <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
-                    {view === 'Article' && !breakpoints.md && tableOfContents && (
-                        <div className="pt-12">
+                    {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
+                        <div className="pt-12 !border-t-0">
                             <h4 className="text-[13px] mb-2">On this page</h4>
                             <Scrollspy
                                 offset={-50}
@@ -167,7 +165,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                                 items={tableOfContents?.map((navItem) => navItem.url)}
                                 currentClassName="active-product"
                             >
-                                {tableOfContents?.map((navItem, index) => (
+                                {toc.map((navItem, index) => (
                                     <li className="relative leading-none" key={index}>
                                         <InternalSidebarLink
                                             url={navItem.url}

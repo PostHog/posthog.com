@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 topics: ['funnels']
 date: 2020-11-18
-featuredImage: ../images/tutorials/banners/revenue-new.png
+featuredImage: ../images/tutorials/banners/revenue.png
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
