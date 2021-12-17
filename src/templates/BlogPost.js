@@ -61,7 +61,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
-            {categories && (
+            {categories?.length > 0 && (
                 <SidebarSection title="Topic(s)">
                     <Topics topics={categories} />
                 </SidebarSection>
