@@ -127,7 +127,7 @@ export const Contributors = ({ contributors, className = '' }) => {
 }
 
 export const Text = ({ children }) => {
-    return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[13px]">{children}</p>
+    return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
 export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650 }) {
