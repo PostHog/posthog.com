@@ -74,7 +74,9 @@ export const ShareLinks = ({ title, href }) => {
             <ShareLink url={`https://www.facebook.com/sharer/sharer.php?u=${href}`}>
                 <Facebook />
             </ShareLink>
-            <ShareLink url={`https://twitter.com/intent/tweet?url=${href}`}>
+            <ShareLink
+                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40poshog%0A%0A`}
+            >
                 <Twitter className="w-[32px] h-[32px]" />
             </ShareLink>
             <ShareLink url={`https://www.linkedin.com/shareArticle?url=${href}`}>
