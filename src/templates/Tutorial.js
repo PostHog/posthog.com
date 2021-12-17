@@ -67,7 +67,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
             </SidebarSection>
             {pageViews && (
                 <SidebarSection>
-                    <PageViews pageViews={pageViews} />
+                    <PageViews pageViews={pageViews.toLocaleString()} />
                 </SidebarSection>
             )}
             {categories?.length > 0 && (
