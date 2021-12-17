@@ -161,16 +161,18 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                                 items={tableOfContents?.map((navItem) => navItem.url)}
                                 currentClassName="active-product"
                             >
-                                {tableOfContents?.map((navItem, index) => (
-                                    <li className="relative leading-none" key={index}>
-                                        <InternalSidebarLink
-                                            url={navItem.url}
-                                            name={navItem.value}
-                                            depth={navItem.depth}
-                                            className="hover:opacity-100 opacity-60 text-[14px]"
-                                        />
-                                    </li>
-                                ))}
+                                {tableOfContents
+                                    ?.filter((item) => item.depth <= 2)
+                                    .map((navItem, index) => (
+                                        <li className="relative leading-none" key={index}>
+                                            <InternalSidebarLink
+                                                url={navItem.url}
+                                                name={navItem.value}
+                                                depth={navItem.depth}
+                                                className="hover:opacity-100 opacity-60 text-[14px]"
+                                            />
+                                        </li>
+                                    ))}
                             </Scrollspy>
                         </div>
                     )}
