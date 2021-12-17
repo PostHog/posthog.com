@@ -274,5 +274,10 @@
         "featuresUsed": ["customer support"],
         "author": { "name": "Nick Booth", "role": "CTO", "company": { "name": "Feedr.co" } },
         "quote": "The team at PostHog are great. They talk to us and listen to us and work with us no matter how stupid our questions sometimes are."
+    },
+    {
+        "featuresUsed": ["self-hosting", "competitor"],
+        "author": { "name": "Colin Wren", "role": "CTO & Co-founder", "company": { "name": "Reciprocal.dev" } },
+        "quote": "I’ve found PostHog to be miles ahead of the other tools I’ve tried so far and I’m a little miffed that I didn’t find it straight away and wasted time with MixPanel."
     }
 ]
