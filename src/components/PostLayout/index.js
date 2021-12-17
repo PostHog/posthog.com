@@ -141,6 +141,8 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
         }
     }, [])
 
+    const toc = tableOfContents?.filter((item) => item.depth <= 2)
+
     return (
         <div
             style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
@@ -154,7 +156,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
             <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
-                    {view === 'Article' && !breakpoints.md && tableOfContents && (
+                    {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
                         <div className="pt-12 !border-t-0">
                             <h4 className="text-[13px] mb-2">On this page</h4>
                             <Scrollspy
@@ -163,18 +165,16 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                                 items={tableOfContents?.map((navItem) => navItem.url)}
                                 currentClassName="active-product"
                             >
-                                {tableOfContents
-                                    ?.filter((item) => item.depth <= 2)
-                                    .map((navItem, index) => (
-                                        <li className="relative leading-none" key={index}>
-                                            <InternalSidebarLink
-                                                url={navItem.url}
-                                                name={navItem.value}
-                                                depth={navItem.depth}
-                                                className="hover:opacity-100 opacity-60 text-[14px]"
-                                            />
-                                        </li>
-                                    ))}
+                                {toc.map((navItem, index) => (
+                                    <li className="relative leading-none" key={index}>
+                                        <InternalSidebarLink
+                                            url={navItem.url}
+                                            name={navItem.value}
+                                            depth={navItem.depth}
+                                            className="hover:opacity-100 opacity-60 text-[14px]"
+                                        />
+                                    </li>
+                                ))}
                             </Scrollspy>
                         </div>
                     )}
