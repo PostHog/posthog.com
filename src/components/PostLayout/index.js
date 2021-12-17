@@ -151,7 +151,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                     {children}
                 </div>
             </article>
-            <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+            <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
                     {view === 'Article' && !breakpoints.md && tableOfContents && (
