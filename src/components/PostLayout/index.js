@@ -155,7 +155,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
                     {view === 'Article' && !breakpoints.md && tableOfContents && (
-                        <div className="pt-12">
+                        <div className="pt-12 !border-t-0">
                             <h4 className="text-[13px] mb-2">On this page</h4>
                             <Scrollspy
                                 offset={-50}
