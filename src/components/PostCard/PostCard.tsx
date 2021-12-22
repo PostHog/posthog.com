@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link, useStaticQuery, graphql } from 'gatsby'
-import { GatsbyImage, GatsbyImageProps, IGatsbyImageData } from 'gatsby-plugin-image'
-import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
-import { AuthorsData } from 'types'
 import Byline from 'components/Blog/BlogAuthor/Byline'
+import { graphql, Link, useStaticQuery } from 'gatsby'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import React from 'react'
+import { AuthorsData } from 'types'
+import { CallToAction } from '../CallToAction'
 
 export interface PostType {
     id: string
@@ -40,7 +40,7 @@ const ReadPostHome = ({ to }: { to: string }) => {
     )
 }
 
-const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
+const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: [AuthorsData] }) => {
     const MetaContent = ({ className }: { className: string }): JSX.Element => (
         <div
             className={`lg:max-w-xl backdrop-blur ${className}`}

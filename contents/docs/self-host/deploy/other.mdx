@@ -5,14 +5,26 @@ sidebar: Docs
 showTitle: true
 ---
 
+import ClusterRequirementsSnippet from './snippets/cluster-requirements'
+import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
+import UninstallingSnippet from './snippets/uninstalling'
+import TryUnsecureSnippet from './snippets/tryunsecure'
+import SetupDNS from './snippets/setup-dns'
 
-For all other platforms, we suggest setting up Kubernetes first and using the helm chart directly to deploy a PostHog instance with Nginx ingress controller.
+> Note: This deployment option is in Beta. See alternative deployment options [here](/docs/self-host#deployment-options).
 
-## Prerequisites
-- [Kubernetes](http://kubernetes.io) 1.4+ with Beta APIs enabled
-- [Helm](https://helm.sh) >= v3
+For all the other platforms, setup your Kubernetes cluster (see the documentation of your platform for more info). Note that many platforms default to non-expandable volumes.
 
+<ClusterRequirementsSnippet />
+
+> Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
+>
+> * for PostgreSQL, take a look at [AWS Aurora](https://aws.amazon.com/rds/aurora/), [Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql), [DigitalOcean managed databases](https://www.digitalocean.com/products/managed-databases-postgresql/), [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> * for Redis, take a look at [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
+>
 
 ## Installing the chart
 
@@ -23,58 +35,33 @@ ingress:
   hostname: <your-hostname>
   nginx:
     enabled: true
-certManager:
+cert-manager:
   enabled: true
+kafka:
+  persistence:
+    size: 20Gi
 ```
 
-To install the chart with the release name `posthog` in `posthog` namespace, run the following:
+<InstallingSnippet />
 
-```console
-helm repo add posthog https://posthog.github.io/charts-clickhouse/
-helm repo update
-helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog posthog posthog/posthog
-```
+#### Lookup the address of the installation
 
-### Lookup external IP
+<GetInstallationAddress />
 
-```console
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
-```
+## Setting up DNS
 
-### Setting up DNS
+<SetupDNS />
 
-Create a record from your desired hostname to the external IP.
+## Troubleshooting
 
 ### I cannot connect to my PostHog instance after creation
 
-As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via https.
-```yaml
-ingress:
-  nginx:
-    redirectToTLS: false
-  letsencrypt: false
-web:
-  secureCookies: false
-```
+<TryUnsecureSnippet />
 
-After upgrading you can run the following to get the IP to access PostHog:
-```console
-export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "Visit http://$INGRESS_IP to use PostHog\!"
-```
+### Upgrading the chart
 
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
 
-To uninstall the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
-```console
-$ helm uninstall posthog --namespace posthog
-```
-
-> See [the Helm docs](https://helm.sh/docs/helm/helm_uninstall/) for documentation on the `helm uninstall` command.
-
-The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed. If that happens try deleting the namespace:
-```console
-kubectl delete namespace posthog
-```
+<UninstallingSnippet />

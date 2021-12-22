@@ -1,0 +1,224 @@
+---
+date: 2021-09-30
+title: How to seed, grow, and scale Developer Relations (and how we're doing it at PostHog)
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author: ['leggetter']
+featuredImage: ../images/blog/devrel-posthog-roles.png
+featuredImageType: full
+categories: ['General', 'Company & culture']
+---
+
+Developer Relations exists and is executed in different ways at almost every company. Our [Developer Relations journey at PostHog](/handbook/growth/developer-relations) has just begun, and we still don't know exactly what it will look like in the medium term. But we can still assess what our needs are going to look like and formulate a plan to seed, grow, and scale Developer Relations. This plan, at the very least, provides a level of clarity that enables us to move forward as we iterate, learn, and continuously improve.
+
+In this post, I'll share the questions I've posed myself about seeding, growing, and scaling Developer Relations. I'll include my general answers and the specifics about how we're approaching DevRel at PostHog. In doing so, I hope you will find the sharing of these questions, how we intend to answer them, and the process we've gone through valuable when planning the growth of your DevRel team.
+
+## Does your company need Developer Relations?
+
+This one is simple. If a company has one or more products that developers use, then the answer is "yes" because Developer Relations exists to serve customers who are developers.
+
+Needing DevRel doesn't instantly mean you need to hire a team or even have a person in a full-time DevRel role. But it does indicate that you need somebody to wear a DevRel hat from time to time.
+
+### At PostHog...
+
+PostHog is an open-source product analytics platform. We do have end-users of PostHog that aren't developers. But there are plenty of interactions with PostHog from developers. It is [installed](/docs/self-host), maintained, [integrated](/docs/integrated), and also [used](/docs/user-guides) by software developers with a product mindset. My current thinking is that a key persona for DevRel at PostHog is someone who would identify themselves as a "Product Engineer" or a product-minded software developer.
+
+## What will Developer Relations do?
+
+Responsibilities that could fall to dedicated Developer Relations roles will likely fall to other team members at early stage developer-focused startups. But, as a company grows, there will be a need to have people taking on DevRel in a full-time capacity.
+
+DevRel is a multi-functional profession:
+
+-   **Product vision and definition**: Some Developer Relations teams wholly own parts of the product, but this will almost always come hand-in-hand with being responsible for engineering execution, too (see next bullet point). This will include market research, vision setting, and customer interviews to validate ideas or get product feedback. For example, at Nexmo/Vonage where I previously helped grow DevRel, the team was responsible for the API standards and the entire life-cycle of the documentation and server SDKs.
+-   **Engineering execution**: Within DevRel, this is often referred to as "Developer Experience", "DevX" or "DX". It's unlikely to include responsibility for anything within a core platform but often encompasses ownership of more peripheral product assets such as documentation, SDKs, sample code, plugins, and integrations. The ownership of a documentation platform and docs creation can also fit either here or within Product.
+-   **Customer success**: You sometimes see partner developer advocates or partner engineers within Developer Relations who work directly with customers to help them deploy, integrate, and customize a product. This is most often the case at developer-centric companies with a partner ecosystem of plugins or addons but can sometimes be the case at pure API companies. These roles more traditionally sit within Sales as Sales Engineers or Solutions Engineers.
+-   **Developer-focused marketing**: Ranging from customer enablement through tutorials, screencasts, and onboarding emails, to acquisitional or brand awareness marketing. Yes, DevRel does indeed do marketing; occasionally, very traditional marketing such as sponsorship and paid advertisement for brand awareness and acquisition, but should spend the majority of time on education. The line can get a little blurred here with developer experience.
+
+What activities you'll need your DevRel roles to undertake from the above will depend on the company goals and on:
+
+-   Gaps identified in what your existing teams are doing but aren't going to take on.
+-   What activities should be handed off from other team functions to allow them to focus elsewhere.
+-   Company stage of growth or strategic shift that introduces the need, increases the need or identifies an opportunity for DevRel.
+
+Anyone who knows me and is reading this may be surprised I've not mentioned [AAARRRP, the DevRel strategy framework](http://www.leggetter.co.uk/aaarrrp) yet. Well, there you go. The point of AAARRRP is to help you **map your company's goals to DevRel activities that can help you achieve those goals**.
+
+### At PostHog...
+
+PostHog has seen significant growth over the past year resulting in a [Series B raise](https://posthog.com/blog/15-million-series-b). Following this, [James](/handbook/company/team#james-hawkins-co-founder--ceo) and [Tim](/handbook/company/team#tim-glaser-co-founder--cto), our co-founders, decided it was the right time to introduce dedicated DevRel roles (I'm particularly pleased about this because it means I now get to work here!). Before this, all potential DevRel activities were spread across other team members. But, because PostHog is a developer-centric company, operates with [small teams](/handbook/people/team-structure/why-small-teams), and embraces [stepping on toes](/handbook/company/values#step-on-toes), people need to continue to do what's required to ship. There are, however, some gaps and opportunities where DevRel can make improvements or begin new activities.
+
+In the near term, our AAARRRP goals are Activation, Retention, Referral, and Product. Instead of narrowing in on specific activities, we've broadly mapped the priorities as:
+
+1. **Oversee documentation**: This isn't about dictating how documentation is written or being a gatekeeper. It's about encouraging and enabling consistency, having the time to iterate on content that could otherwise become stale, and identifying gaps based on analysis, feedback, or utilizing team experience. DevRel, much like our [amazing design team](/handbook/people/team-structure/design), can function as a service team with people deployed to the small team that most requires them at that time.
+2. **Catalyze our community**: We have a thriving community across [our GitHub repos](https://github.com/posthog) and the [PostHog community Slack](/slack). On GitHub, we reward contributions with thanks on our READMEs, a listing on the [Contributors page](/contributors) of our website, and credit for our [merch store](https://merch.posthog.com). But we want to do more to build upon this fantastic foundation because [community is core to our business](/handbook/strategy/business-model#why-would-you-work-on-the-community-edition).
+3. **Engage with broader developer communities**: Right now, the only community we actively engage with is the one we've built. We need to expand our reach and build relationships within communities that will benefit from the PostHog platform.
+
+## What Developer Relations roles do you need?
+
+The roles your company needs depend on the focus and activities undertaken by people within DevRel roles.
+
+The most frequently found roles within Developer Relations and the activities they undertake are<sup>†</sup>:
+
+-   **Developer Advocate**: A generalist role who takes on numerous DevRel activities. This role is also the role you'd expect to see out representing your brand within external communities.
+-   **[Developer] Community Manager**: Responsibilities will range from defining programs that enable community engagement and growth to event management.
+-   **Developer Educator**: A role focused on content and code samples that educate developers - normally expected to focus on written and video content as well as possible courses or self-paced learning.
+-   **Developer Evangelist**: Like the developer advocate, this is a generalist role traditionally associated with marketing-focused activities.
+-   **Developer Relations Engineer**: A newer catch-all job title for a code-focused role within DevRel. The job spec for this role is frequently very similar to that of a Developer Advocate.
+-   **Developer Experience Engineer**: Focusing on the experience that developers have when using a product. Covers documentation, API standards and specs, SDKs, code samples, integrations, and other assets directly touched by the developer customer.
+
+_<sup>†</sup> [Source: Most popular roles within Developer Relations](https://noti.st/leggetter/9B23EW/defining-the-roles-within-developer-relations-v0-1-0#s6yhNbi)_
+
+### At PostHog...
+
+We'll hire based on our activities priority list:
+
+1. **Oversee documentation**: A role we're actively hiring for is a [Developer Educator](https://apply.workable.com/posthog/j/F928106DB5/) who will focus on documentation and enabling our existing customer base, making it easier for Data Engineers to integrate with PostHog. We've gone with this role over Technical Writer (omitted from the list above because it's a very broad job title) because, although the initial focus is docs, we do want this person to engage with the community and create other types of educational content in the future. I would like to hire a Tech Writer in the future to help provide even more structure and standardization to our docs.
+2. **Catalyze our community**: The hire we require for this is a Community Programs Manager to define programs and execute on them.
+3. **Engage with broader developer communities**: Once we've identified key external communities, we'll hire a Developer Advocate with the interests and skills required to authentically engage with those communities.
+
+## How do you seed and grow Developer Relations?
+
+In early-stage startups that need Developer Relations, the go-to hire is frequently a Developer Advocate because this person will have to do a bit of everything. The company is probably still trying to work out what DevRel will do.
+
+The other roles that are often the first DevRel hires are Technical Writers and Developer Educators because documentation, sample code, and exceptional developer content is fundamental to developer-focused products. A Developer Educator role has more of a focus on community engagement activities such as blog posts and video creation.
+
+As a company grows, there will be more specialization. This isn't specific to DevRel and is common across many functions.
+
+import diagram from '../images/blog/devrel-seed-grow-grow-more-diagram.png'
+
+<img src={diagram} alt="DevRel: Seed, grow, and, grow more by function" className="blog-post-img-large" />
+
+You may begin by hiring one or more generalist Developer Advocates who will contribute to docs, update and maintain SDKs, create sample code, and engage with external communities. It's also likely that you'll need to bring a Community Manager on board to engage with directly and facilitate broader engagement with communities.
+
+As the company and thus DevRel team grows, you're going to need specialist roles.
+
+For example, you can create a Developer Experience team of Technical Writers/Developer Educators and Developer Experience Engineers that focus on documentation, SDKs, and sample code. Developer Advocates will then shift focus to more community engagement activities such as workshops, meetups, speaking, and continuously gathering feedback directly from developers or identifying technology trends within communities. In addition, you may create a Developer Education team focused on blog and video content because 2020 has demonstrated the value of companies having such dedicated developer content teams.
+
+As this growth-fueled shift occurs, it's essential to understand that you're changing the roles' definition - or at least the potential breadth. You may lose people who like being a generalist unless you can continue to allow them to contribute outside of their specialization. For example, Developer Advocates are likely hands-on coders, so when shifting, ensure they still have opportunities to contribute to docs, SDKs, and sample code.
+
+### At PostHog...
+
+I've been hired as the first person in Developer Relations, and I've spent some time working on docs, engaging with our community on GitHub and Slack, have organized some newsletter sponsorship, and am taking a look and upgrading our swag/merch. I'm the generalist first hire.
+
+The "What DevRel roles do you need?" section outlines our likely short-term hiring plan of Developer Educator, Community Programmes Manager, a Developer Advocate, and ideally a Technical Writer. Beyond that, I can see a few growth opportunities:
+
+-   **More Developer Educators**: I see the benefit of more Developer Educators joining the team to ensure that we have content that enables developers to deploy, maintain, scale, integrate, and extend (see [plugins](https://posthog.com/docs/user-guides/plugins)) the PostHog open-source platform. As we grow, I can see people in these roles specializing in either existing customer education (Activation) or using educational content to reach new developers (Acquisition). A rotation schedule<sup>††</sup> could be implemented to ensure opportunities to maintain a broad skillset exist.
+-   **Developer Advocates for external communities**: As we identify key external communities, there's a definite benefit to having developer advocates focused on them. At Nexmo/Vonage, we hired programming language developer advocates (JS, Python, Ruby, PHP, C# .NET, Java etc.) because we believed a communications API platform has potential value to most developers. At PostHog, the advocacy roles are more likely to be focused on:
+    -   General web and app technology trends such as Next.js, Gatsby, Supabase, Sanity.io, Netlify, Vercel etc. used by progressive companies who are building new or actively upgrading products. For this, a Jamstack Advocate may be the correct role.
+    -   Data storage, manipulation, and transformation technologies such as Snowflake, Data Bricks, Google/BigQuery, Microsoft Azure/SQL Data Warehouse, ETL platforms, etc. A Data Cloud Advocate may be the right role to focus on these technologies.
+-   **Create a startup program**: In the same way that every company needs to send email to engage with their customers, every company needs to understand and improve how their customers are using their product. I use this analogy because SendGrid were very successful in their work with startup communities. So, working with startup incubators and accelerators to ensure PostHog is the go-to product analytics platform is a no-brainer to me. Starting with FinTech may be a good approach since it will align with our focus on companies that have a fundamental need for privacy and data control.
+
+_<sup>††</sup> I can see value in a rotation schedule being across multiple DevRel roles and also into non-DevRel roles._
+
+#### A Developer Relations Guild
+
+As things stand, I don't believe we're going to form a "DevRel team". Instead, I believe we'll have a **DevRel Guild** where DevRel roles will reside within [small teams](/handbook/people/team-structure/why-small-teams), providing DevRel skills to those teams as they need them. If we grow as outlined above, I can see teams formed that consist mainly of DevRel roles with a focus on experience, education, and marketing.
+
+How we grow will change with the company needs, but this gives us a few directions we could potentially go in.
+
+## How do you scale Developer Relations?
+
+I believe there are three key factors:
+
+1. A team structure that empowers and provides focus.
+2. Work with customers, partners, and community.
+3. A transparent change management process that ensures the team can provide input and feedback.
+
+### An empowering team structure
+
+I've already covered that with growth comes specialization. Specialization results in focus, and a team will ultimately be able to deliver more that way; a team asked to focus purely on developer content creation will deliver more than a team asked for write docs, update SDKs, write sample code, write blog posts, manage and present on Twitch streams, and speak at events.
+
+Team structure can be **Functional**, **Multi-Functional**, or **Regional**, but the DevRel roles should be focused.
+
+Examples of **Functional** and focused DevRel teams are:
+
+-   **Developer Experience**: API standards, documentation, code samples, SDKs, libraries, other tooling that enables developers.
+-   **Developer Education**: Developer enabling content covering documentation, blog posts, static video, live video, and other educational materials.
+-   **Community**: Creating and managing programs for customers, partners, and third-party communities. At some companies, this team can also support and enable community within the company.
+-   **Integrations & Partnerships**: Integrations with third-party technologies used by developers, direct integrations with key customers, or helping build an ecosystem with partners such as those seen with Slack apps, Salesforce apps etc.
+
+In a **Multi-Functional** team set up where a team consists of Product Managers, Engineers, DevRel roles, and Marketing roles, the specialization may change from sprint to sprint as a product moves through the product life-cycle; from inception/proof of concept through to a go-to-market phase. _Occasionally_ changing specialization can be a good setup for a generalist developer advocate, allowing them to apply their broad range of skills but still have time to focus in stages as product development progresses.
+
+For example, the DevRel role's focus may shift:
+
+-   **Proof of Concept**: At this stage, the person in the DevRel role may be "customer zero" (see [the developer advocate as customer zero](https://developerrelations.com/dev-rel/the-developer-advocate-as-customer-zero)), providing feedback and acting as a customer.
+-   **Development**: Continuing to act as "customer zero" as well as preparing the assets and structure for the beta (or other early access) program.
+-   **Beta**: Executing on the beta plan, using this stage to raise awareness and excitement with developers, enabling developers with the product, and getting product feedback.
+-   **Go-to-market**: Ramping up activities focused on awareness, acquisition, and activation.
+
+**Regional** teams are are often multi-functional but, as you'd expect, focus on a specific geographic location. You'll most likely see this as the number of DevRel roles at a company gets to a point where it's possible to justify having North American, EMEA, and APAC regional teams.
+
+It's always important to be collaborative. But there's also a lot of value in not having to collaborate on absolutely everything to get something done. Therefore, a team should be **empowered** as much as possible to do everything they need to get stuff done; equipment, software, skills, authority, budget, and more. If you're leading a DevRel team, this most definitely means support. Your role as a leader of a DevRel team - and any empowered team - is to support and enable them, not tell them what to do.
+
+### Work with customers, partners, and community
+
+When scaling, it's essential to think beyond simply adding headcount. That, in itself, isn't scaling. You're only really scaling a team if further investment increases output more than the increase in input. For example, if a Developer Education team of five people produces five pieces of content a week (one piece per person), adding another person should result in the team producing more than one additional piece of content a week. The additional headcount should help the team be more efficient or create new programs that result in exponentially more content (at least more than one piece per week from the previous example).
+
+So, how do you scale DevRel? As discussed, a specialized, focused, and efficient team is a step in the right direction. But, the real opportunity to scale is through collaboration with customers, partners, and your broader community. Let's use the word "community" to encapsulate customers, partners, and the wider community to simplify things.
+
+Firstly, you should work for and with your community to create a [flywheel effect](https://www.jimcollins.com/concepts/the-flywheel.html). You should do this in combination with programs that support and enable collaboration. Here are some examples:
+
+-   **Open-source**: Open-source as much as you can to enable your community to provide feedback and contribute. At a minimum, this should include your documentation, sample code, SDKs, and API specifications. If possible, open-source your whole platform (see [open-core](https://en.wikipedia.org/wiki/Open-core_model)).
+-   **Value-add "write for us" program**: "Write for us" programs shouldn't be a cheap way to get content. But, they can be effective if they provide genuine value to the author. Beyond payment or a donation to a charity chosen by the author, this means providing detailed feedback on content to help the author improve as a writer and software developer, attributing the content to the author and promoting it with acknowledgement to help them grow their profile.
+-   **Rewards & heroes program**: Have a clear reward structure for contributions, celebrate your MVPs, and when you feel there's a large enough community to justify it, create a hero or ambassador program.
+-   **Meetups program**: There are two approaches you can take here:
+    1. If you have a symbiotic alignment with an existing technology trend, it's worth reaching out to existing meetup organizers and offering sponsorship. You will initially get out what you put in but, over time, this will create the desired flywheel effect.
+    2. If you're fortunate enough to have a large or highly dedicated community, it's worth considering creating a mechanism that allows your heroes or ambassadors to organize meetups. Create a meetup organizer package and help your hero set up, run, and support the meetup.
+
+As with many things in DevRel, these are unlikely to be quick wins. But, as the community grows, engages, and contributes, the velocity of the flywheel increases. As this happens, the community is increasingly responsible for the input and output as you work to scale your DevRel program. A word of caution: do not start too many programs in parallel. Instead, identify the one with the highest value and get that right first. Then, move on to the program with the next highest value.
+
+### Change management
+
+I'll admit this sounds very _enterprisey_, but change management isn't something that should only happen in enterprise organizations. I've seen change mismanaged at both startups and enterprises, and because I've felt this pain and managed the fallout, I know it's so important.
+
+The approach **not** to take is:
+
+1. Arbitrarily assign a person or team to make a change.
+2. That team dictates the change with the support of the company executives without asking for any feedback.
+
+A simple yet much better approach is:
+
+1. Identify that a change is required.
+2. Identify key stakeholders.
+3. Assign one or more people as responsible for proposing the change. Ideally, include stakeholders within this team.
+4. Ensure everyone is aware of the change process, share a timeline of events, including when input and feedback is requested, and that the team responsible for the change is responsible for the decision.
+5. Allow the team to do their work and come up with one or more potential changes.
+6. Get feedback and iterate. More iterations will mean more time.
+7. The team should thank everyone for their feedback, share the decision, and explain why they made that decision.
+8. Everyone gets behind the decision and moves on.
+
+This process will take a bit more time. But, because everyone has had an opportunity to contribute, they're more likely to be bought into the decision. At the very least, they'll understand why the decision was made. If you don't involve people impacted by the change, you may have made the decision faster, but you'll fight inertia and get to the desired destination slower.
+
+### At PostHog...
+
+It's just too early to know if DevRel will need to scale significantly. But I'll ensure we approach it as outlined in this section.
+
+## What function should Developer Relations be part of?
+
+Developer Relations typically reports into Marketing, Product, or Engineering. However, in smaller companies, DevRel may directly report to a founder.
+
+Two things should determine what function or who DevRel reports to:
+
+-   **Goal alignment**: As you've put together the DevRel strategy, you've identified what you expect DevRel to help the company achieve. Which other function shares these goals? If your goals are around Awareness and Acquisition, then Marketing may be the right fit. If it's Activation and Product, then Product or Engineering is likely better aligned.
+-   **Supportive leadership**: The person that a DevRel person or team reports to must be supportive of the idea of Developer Relations. Ideally, they've also some experience of either working in DevRel or supporting a team before. If not, you're in for a rough ride. Would you have a CTO who hasn't written any code before? Have a watch of [Get executive buy-in... or else by Jessica West](https://www.youtube.com/watch?v=BUt77eE5QRI).
+
+### At PostHog...
+
+At the time of writing this (September 2021), PostHog is around thirty people, so I report to James, our CEO. Has James worked in DevRel before? No. But he can code, is the co-founder of an engineering-lead company, and believes in the power of the developer.
+
+Will DevRel always report into the CEO? It's too early to say. As you'll see above, we're still iterating, and things will change.
+
+## Developer Relations at your company will change
+
+DevRel at your company will change, and DevRel at PostHog will change (see [DevRel: from startup to enterprise](https://www.youtube.com/watch?v=Vn4mdEa8f2Q)). DevRel isn't any different to any other role or function in this respect. However, it does feel like there is often some uncertainty about DevRel and that Developer Relations teams have endured more change than traditional functions. I believe this is because "modern Developer Relations" (see [History of Modern Developer Relations by Brandon West](https://www.youtube.com/watch?v=vFGDzaLiAnM)) is still a relatively new profession in comparison to the likes of Engineering or Product.
+
+Developer Relations at some companies, such as Twilio, is seen as a constant. Those who have worked in the industry for a while have seen DevRel teams come and go, which can be unnerving. However, there is no doubt that, when understood, supported, well-executed, and measured correctly, a DevRel team can significantly influence the success of a company and, in some cases, be transformative.
+
+_A big thanks to [Martyn Davies](https://www.linkedin.com/in/martynrdavies/) for providing feedback on this post._
+
+import LetUsKnowCTA from './_includes/let-us-know-cta.mdx'
+
+<LetUsKnowCTA />
+
+_Have some suggestions or noticed an error? [Suggest an edit](https://github.com/PostHog/posthog.com/blob/master/contents/blog/scaling-devrel.mdx)._

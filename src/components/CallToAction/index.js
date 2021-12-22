@@ -1,10 +1,14 @@
-import React from 'react'
-import Link from 'components/Link'
 import cntl from 'cntl'
+import Link from 'components/Link'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import React from 'react'
 
 const sizes = {
-    sm: 'text-small font-semibold px-2 py-1 border-2',
-    md: 'text-[17px] font-bold px-5 py-2 border-3',
+    xs: 'text-[13px] font-semibold px-2 py-[.2rem] border-2',
+    sm: 'text-small font-semibold px-3 py-1 border-2',
+    md: 'text-small font-semibold px-5 py-2 border-2',
+    lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
 }
 
 const primary = cntl`
@@ -47,31 +51,47 @@ const buttonTypes = {
     outline,
 }
 
-const button = (type = 'primary', width = 'auto', className = '', size = 'md') => cntl`
+const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
     rounded-full
     inline-block
+    cta
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
     ${className}
 `
 
+export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
+
+    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+}
+
 export const CallToAction = ({
     type = 'primary',
     width = 'auto',
-    size = 'md',
+    size = 'lg',
     href,
     to,
     onClick,
     children,
     className,
     external,
+    state = {},
+    event,
 }) => {
     const url = to || href
     return (
-        <Link external={external} className={button(type, width, className, size)} onClick={onClick} to={url}>
+        <Link
+            state={state}
+            external={external}
+            className={button(type, width, className, size)}
+            onClick={onClick}
+            to={url}
+            event={event}
+        >
             {children}
         </Link>
     )

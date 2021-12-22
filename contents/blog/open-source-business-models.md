@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: mo-shehu
+author: ["mo-shehu"]
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/L1Ovbzs7vyo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -67,4 +67,4 @@ This approach is great if you created your product as a hobby and are fine with 
 
 There are many ways to monetize open-source software, and the approach you choose will depend on how much maintenance you’d like to take on, how large a team you’d like to assemble, and how much money you’re looking to raise — whether in organic revenue or through venture capital. Whichever approach you take, focus on building an outstanding product and an engaged community at all times, as those advantages accrue to you indefinitely.
 
-Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.

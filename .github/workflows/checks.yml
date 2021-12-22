@@ -35,16 +35,6 @@ jobs:
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
 
-            # Replaced by JS checks (remove when sure JS checks are working)
-            # - name: Add safe redirects
-            #   if: ${{ github.base_ref == 'master' }}
-            #   run: |
-            #       git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
-            #       python3 ./scripts/safe_rename.py
-            #       rm pr_diff
-            #       git add .
-            #       [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
-
             - name: Fix typos
               run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
@@ -58,6 +48,8 @@ jobs:
     js_checks:
         name: Safe Redirects
         runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == github.repository
+
         steps:
             - uses: actions/checkout@v2
               with:
@@ -68,7 +60,7 @@ jobs:
             - name: Install dependencies
               run: yarn
             - name: Run tests
-              run: yarn test-generate-redirects
+              run: yarn test-redirects
             - name: Configure Git
               run: |
                   git fetch origin master:master
@@ -76,7 +68,7 @@ jobs:
                   git config user.email hey@posthog.com
             - name: Add safe redirects
               if: ${{ github.base_ref == 'master' }}
-              run: yarn generate-redirects-js
+              run: yarn generate-redirects
             - name: Cleanup and commit
               if: ${{ github.base_ref == 'master' }}
               run: |

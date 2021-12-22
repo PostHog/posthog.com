@@ -41,6 +41,8 @@ All sprint planning meetings are open to anyone to attend - if you are not a mem
 
 Alternating with Sprint Planning, Life Stories we hear from 1-2 members of the team who share a bit about themselves with us. No particular format - it's one of the few times a presentation makes sense! Each team member has up to 30min, inclusive of Q&A. These are a fun opportunity for us to get to know a bit about the people we work with, what cool things we didn't know about them, and whether or not they believe that pineapple belongs on pizza...
 
+We schedule these several weeks in advance, but if you are unable to make your slot or would simply prefer not to participate, just let Charles or Eltje know - they are not mandatory!
+
 ### HogTalks
 
 HogTalks follows a casual interview format where we invite inspiring folks in our network to come tell us a bit about themselves. We'll usually dive into a specific topic that is relevant to what we are working on at PostHog (e.g. product strategy, company scaling, tech architecture). A member of the team will conduct the interview, before we open up to wider questions. We also record the content to release later as a podcast/video recording.

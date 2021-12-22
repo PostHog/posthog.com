@@ -1,6 +1,6 @@
-import React from 'react'
 import cntl from 'cntl'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction/index.js' // TEMP fix because of duplicate files
+import React from 'react'
 
 const chip = (className = '') => cntl`
     select-none
@@ -11,7 +11,17 @@ const chip = (className = '') => cntl`
     ${className}
 `
 
-export default function Chip({ onClick, text, children, active, href, size = 'sm', icon, className = '' }) {
+export default function Chip({
+    onClick,
+    text,
+    children,
+    active,
+    href,
+    size = 'sm',
+    icon = null,
+    className = '',
+    state,
+}) {
     return (
         <CallToAction
             size={size}
@@ -19,12 +29,9 @@ export default function Chip({ onClick, text, children, active, href, size = 'sm
             href={href}
             type={active ? 'primary' : 'outline'}
             className={chip(className)}
+            state={state}
         >
-            {icon && (
-                <svg className="w-5 h-5">
-                    <use xlinkHref={`#${icon}`}></use>
-                </svg>
-            )}
+            {icon}
             <span>{text || children}</span>
         </CallToAction>
     )

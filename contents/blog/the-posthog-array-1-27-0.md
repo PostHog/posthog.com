@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: release-notes
+categories: ["Release notes"]
 featuredImage: ../images/blog/array/1-27-0.png
 excerpt: PostHog 1.27.0 is here! Completely redesigned funnels experience will help you dive deeper to understand why your users aren't converting. Plus 400+ improvements & fixes.
 ---
@@ -151,4 +151,4 @@ Don't see a role for you? We're always looking for exceptional people, reach out
 
 <hr/>
 
-_Follow us on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._

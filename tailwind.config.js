@@ -87,6 +87,8 @@ module.exports = {
         },
         scale: {
             '-1': '-1',
+            75: '.75',
+            100: '1',
         },
         flex: {
             1: '1',
@@ -115,6 +117,7 @@ module.exports = {
             'gray-accent-dark': '#2C2C2C',
             'gray-accent-light': '#E5E7E0',
             blue: '#1D4AFF',
+            red: '#F54E00',
         }),
         extend: {
             fontFamily: {

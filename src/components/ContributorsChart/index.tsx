@@ -1,9 +1,8 @@
-import React, { useRef, useEffect } from 'react'
 import Chart from 'chart.js'
-import { useValues } from 'kea'
-import { contributorStatsLogic } from './contributorStatsLogic'
 import { Spacer } from 'components/Spacer'
-import { Link } from 'gatsby'
+import { useValues } from 'kea'
+import React, { useEffect, useRef } from 'react'
+import { contributorStatsLogic } from './contributorStatsLogic'
 
 export const ContributorsChart = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -111,10 +110,6 @@ export const ContributorsChart = () => {
             ) : (
                 <>
                     <h2>Top 15 PostHog Contributors</h2>
-                    <p className="text-primary text-opacity-50">
-                        ⚠️ Only displaying <a href="/docs/contribute/recognizing-contributions">contributions</a> from
-                        after March 29, 2021
-                    </p>
                     <Spacer height={10} />
                     <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
                 </>

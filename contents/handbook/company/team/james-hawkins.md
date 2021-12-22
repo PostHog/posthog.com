@@ -12,7 +12,7 @@ I started off as a bad professional cyclist, became a worse developer, bootstrap
 
 I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinner with my family, then 9pm to around 11pm ish.
 
-## Areas of responsibility
+## Areas of responsibility
 
 - Make sure we've always enough money to think long term
 - Make sure we have exceptional people working here
@@ -24,7 +24,7 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - Sometimes I can end up bottlenecking stuff by being indecisive. Call me out on this.
 - I'm a little disorganized. I compensate for this by making sure the teams I work on have this skill. Often I think this actually helps me prioritize the things that really matter.
 - If I haven't responded to something that you've sent me, that's probably because I've read it and don't feel particularly strongly - so just make a call on what to do if you don't hear back in a reasonable time frame.
-- I'm an optimist and I'm level headed. If you've got bad news, I am never going to get mad
+- I'm an optimist and I'm level headed. If you've got bad news, I am never going to get mad.
 
 ## What I value
 
@@ -38,34 +38,51 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 
 ## How I can help you
 
-- I can help you figure out how to build relationships with people
-- I can help you figure out what you should be working on
-- I can help you get constructive feedback on your performance
-- I can help you figure out what to do in your career
-- I can help be a rubber duck
-- I can help bounce ideas around
+- I can help you figure out how to build relationships with people.
+- I can help you figure out what you should be working on.
+- I can help you get constructive feedback on your performance.
+- I can help you figure out what to do in your career.
+- I can help be a rubber duck.
+- I can help bounce ideas around.
 
 ## How you can help me
 
-- Come to 1:1s with an agenda and clear things I can help with
+- Come to 1:1s with an agenda and clear things I can help with.
 - Ship :) Lots of things will be on fire in a startup all the time. Make sure you're moving the needle every week.
 
-## My goals until August 6th
+## My goals until end January 2022
 
-I'm going into tactical mode as we're working on deepening product market fit for our paid product, as part of our short term strategy to Nail Funnels.
+We've now hit product market fit for PostHog open source and PostHog Scale.
 
-### Strategy
-- Make sure we have product market fit with our focus segment
-- Do nothing else
-### Execution - in next 6 weeks I want:
-- Work to onboard existing users properly to turn them into 5 reference customers
-  - Get meetings / build relationships with them in order to make sure they’re up and running with funnels properly (activation is defined clearly, they’re using us for the list of “jobs to be done” that we’re supposed to be enabling.
-  - Clear pricing model
-  - Internal guidance on what is free versus paid
-- Sustain existing success
-  - Get them to use funnels for the full list of jobs to be done
-- Don’t get distracted outside of the above
-  - Make sure that my direct reports have goals that they can focus on autonomously
+Next up, I need to demonstrate we can accelerate our adoption in high quality companies.
+
+### Personal strategy
+
+- Give away ownership of customer pipeline
+- Focus on community growth
+
+### Execution todo
+
+- Hire and onboard someone else able to run all $0 to $50K ish sales
+- Figure out how to accelerate adoption from customers that fit our [customer DNA profile](https://docs.google.com/spreadsheets/d/13nP76FIoc-4FcG7_A7-b0aTrgftgDERTGy5F45FKHUE/edit#gid=0)
+- Set clear input-focussed goals for teams, that will optimize for [_long term_ revenue](/blog/ceo-diary-1)
+- Experiment with larger order values as opportunities arise. 
 - Personal
-  - Do 1 bike ride a week
-  - Exchange on house
+  - Two short runs a week
+  - Support my wife in attending my daughter's hospital appointments if travel is required
+
+### Archived todo
+
+It makes me feel better crossing stuff out, rather than deleting it, thus:
+
+- ~~Work to onboard existing users properly to turn them into 5 reference customers~~
+  - ~~Get meetings / build relationships with them in order to make sure they’re up and running with funnels properly (activation is defined clearly, they’re using us for the list of “jobs to be done” that we’re supposed to be enabling.~~
+  - ~~Clear pricing model~~
+  - ~~Internal guidance on what is free versus paid~~
+- ~~Sustain existing success~~
+  - ~~Get them to use funnels for the full list of jobs to be done~~
+- ~~Don’t get distracted outside of the above~~
+  - ~~Make sure that my direct reports have goals that they can focus on autonomously~~
+- ~~Personal~~
+  - ~~Exchange on house~~
+  - ~~Ride bike once per week~~ Didn't complete this, but I've changed the goal to running through the winter.

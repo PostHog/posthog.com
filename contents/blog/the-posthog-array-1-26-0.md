@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: release-notes
+categories: ["Release notes"]
 featuredImage: ../images/blog/array/1-26-0.png
 excerpt: PostHog 1.26.0 is here! Read about our Series B raise, our new features, and find out who are the 4 new team members we've onboarded.
 ---
@@ -172,6 +172,6 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 
 <hr/>
 
-Follow us on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
 
 

@@ -1,31 +1,34 @@
-import React, { useRef } from 'react'
-import MainSidebar from './MainSidebar'
-import SectionLinks from './SectionLinks'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { shortcodes } from '../../mdxGlobalComponents'
+import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
-import StickySidebar from './StickySidebar'
+import { Heading } from 'components/Heading'
+import { InlineCode } from 'components/InlineCode'
+import Link from 'components/Link'
+import Team from 'components/Team'
+import TestimonialsTable from 'components/TestimonialsTable'
+import { ZoomImage } from 'components/ZoomImage'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import React, { useRef } from 'react'
+import { shortcodes } from '../../mdxGlobalComponents'
+import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
-import { useActions } from 'kea'
-import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
+import SectionLinks from './SectionLinks'
+import StickySidebar from './StickySidebar'
 
-const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
-const Iframe = (props) => (
-    <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-        <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-    </div>
-)
-const InlineCode = (props) => (
-    <code
-        {...props}
-        className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded"
-    />
-)
-const Blockquote = (props) => (
-    <blockquote {...props} className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark" />
-)
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const Iframe = (props) => {
+    if (props.src && props.src.indexOf('youtube.com') !== -1) {
+        return (
+            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
+                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
+            </div>
+        )
+    } else {
+        return <iframe {...props} />
+    }
+}
 
 const SectionLinksBottom = ({ previous, next }) => {
     return (
@@ -60,15 +63,35 @@ export default function Main({
     previous,
     hideLastUpdated,
 }) {
+    const { countries } = useStaticQuery(query)
+
+    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
+
+    const TotalTeam = (props) => (
+        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
+    )
+
     const components = {
+        Team,
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
+        a: A,
+        TotalCountries,
+        TotalTeam,
+        TestimonialsTable,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
-    const showToc = !hideAnchor && tableOfContents?.length
+    const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
     return (
         <div className="relative">
@@ -87,7 +110,7 @@ export default function Main({
                     style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
                     className="w-full 2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-auto"
                 >
-                    <section className="mb-8 xl:mb-14 relative">
+                    <section className="mb-8 relative">
                         <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
                         {!hideLastUpdated && (
                             <p className="mt-1 mb-0 opacity-50">
@@ -96,7 +119,7 @@ export default function Main({
                         )}
                     </section>
                     {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
-                    <section className="article-content">
+                    <section className="article-content handbook-docs-content">
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
@@ -109,3 +132,13 @@ export default function Main({
         </div>
     )
 }
+
+const query = graphql`
+    query {
+        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+            group(field: frontmatter___country) {
+                totalCount
+            }
+        }
+    }
+`

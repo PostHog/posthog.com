@@ -30,6 +30,8 @@ All small teams as well as current, future and past candidates.
 
 ## Output metrics
 
+- Primary: 0% undesired churn
+
 Talent:
 - Hiring progress vs. plan
 - Time to hire 

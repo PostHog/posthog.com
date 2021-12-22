@@ -12,7 +12,7 @@ module.exports = {
             'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
         url: 'https://posthog.com', // No trailing slash allowed!
         image: '/banner.png', // Path to your image you placed in the 'static' folder
-        twitterUsername: '@PostHogHQ',
+        twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
     plugins: [
@@ -25,6 +25,7 @@ module.exports = {
                     md: '(max-width: 1023px)',
                     lg: '(max-width: 1279px)',
                     xl: '(max-width: 1535px)',
+                    '2xl': '(max-width: 2560px)',
                 },
             },
         },
@@ -49,6 +50,10 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                shouldBlockNodeFromTransformation: (node) =>
+                    node.internal.type === 'File' &&
+                    node.url &&
+                    node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
@@ -77,6 +82,20 @@ module.exports = {
             options: {
                 name: `navs`,
                 path: `${__dirname}/src/navs`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `authors`,
+                path: `${__dirname}/src/data/authors.json`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `testimonials`,
+                path: `${__dirname}/src/data/testimonials.json`,
             },
         },
         `gatsby-transformer-gitinfo`,
@@ -189,6 +208,7 @@ module.exports = {
                 isEnabledDevMode: true,
                 initOptions: {
                     _capture_metrics: true,
+                    persistence: 'localStorage+cookie',
                 },
             },
         },
@@ -299,33 +319,22 @@ module.exports = {
               `,
                 feeds: [
                     {
-                        serialize: ({ query: { site, authorsData, allMdx } }) => {
+                        serialize: ({ query: { site, allMdx } }) => {
                             let {
                                 siteMetadata: { siteUrl },
                             } = site
 
-                            let findRelevantAuthor = (authorKey) =>
-                                authorsData.frontmatter.authors.find(({ handle }) => handle === authorKey)
-
                             let allMdxs = allMdx.edges.map((edge) => {
                                 let { node } = edge
                                 let { frontmatter, excerpt, slug, id, body } = node
-                                let { date, title, author, featuredImage } = frontmatter
-                                let authorsData = findRelevantAuthor(author)
-                                let newAuthorData = []
-                                if (authorsData) {
-                                    newAuthorData = Object.keys(authorsData).map((key) => {
-                                        let newKey = key.replace('_', '')
-                                        return { [`blog:${newKey}`]: authorsData[key] }
-                                    })
-                                }
+                                let { date, title, authors, featuredImage } = frontmatter
                                 return {
                                     description: excerpt,
                                     date,
                                     title,
                                     url: `${siteUrl}/${slug}`,
                                     guid: id,
-                                    author: authorsData ? authorsData.name : null,
+                                    author: authors && authors[0].name,
                                     custom_elements: [{ 'content:encoded': body }],
                                     enclosure: {
                                         url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
@@ -353,23 +362,17 @@ module.exports = {
                                     featuredImage {
                                       publicURL
                                     }
-                                    author
+                                    authors: authorData {
+                                        handle
+                                        name
+                                        role
+                                        image
+                                        link_type
+                                        link_url
+                                    }
                                   }
                                 }
                               }
-                            }
-                            authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
-                              frontmatter {
-                                authors {
-                                  handle
-                                  name
-                                  role
-                                  image
-                                  link_type
-                                  link_url
-                                }
-                              }
-                              id
                             }
                           }
                         `,

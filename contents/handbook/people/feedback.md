@@ -39,11 +39,19 @@ We currently run performance reviews every 6 months, based on your start date. W
 1. The People team adds recurring calendar invites to the calendar of the team member and their manager to kick off the performance review process.  
 2. The team member will schedule a 1 hour performance review meeting with their manager. A member of the people team may sit in on the occasional feedback meeting to see how well they are working as we get up and running. 
 3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
-4. Afterwards, the team member communicates back to the People team that the review is complete and what next steps are needed (if any). We store the docs on [Google Drive](https://drive.google.com/drive/folders/1ElPt_fB79qgB-6tQTI8BTKStUHhy_NcS). You should then share your doc publicly with the team, for transparency and so they have the opportunity to share any additional feedback. 
+4. Afterwards, the team member let's the People team that the review is complete and what next steps are needed (if any). We store the docs on [Google Drive](https://drive.google.com/drive/folders/1ElPt_fB79qgB-6tQTI8BTKStUHhy_NcS). You should then share your doc publicly with the team, for transparency and so they have the opportunity to share any additional feedback. 
 
-While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
+While the 360 degree team meetings are purely feedback-focused, you should aim to spend a significant chunk of the performance review looking ahead to the next 6 months. 
 
 Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more repsonsive to changes in the market and people's roles. 
+
+### Some guidance for managers
+
+- These are really important for team members - please give these reviews your full attention and don't mess around with rescheduling etc. as much as you can. 
+- As manager, you should drive the review, pausing at appropriate points to ask the team member for any questions or further comments they'd like to add. 
+- It is helpful to open by looking at the big picture before diving into the details. For example 'overall you're doing great, and there are a few things we should focus on' or 'I feel there were quite a few places where we weren't aligned, so let's figure out why.'
+- You should spend most of your time a) discussing points where you didn't agree on the assessment, and b) looking forward to the next 6 months. Feel free to skip over sections where you are in agreement to save time for more valuable discussion. 
+- You may find it helpful to have both docs up side by side on your screen as you go through the review.  
 
 ### How to give good feedback
 
@@ -95,3 +103,13 @@ In the future, we will split the session into groups in order to manage time bet
 The full team session prioritises openness, breadth and transparency of feedback, as everyone gets to both give and receive feedback in front of the entire team. 
 
 The performance review process centres on a single person for one hour, involves their manager only, and is intended to be more of an in-depth conversation about the future.
+
+## Quarterly team surveys
+
+We introduced quarterly team surveys in Q1 2021 to give everyone the opportunity to share their honest opinion of how things are going. While we all give feedback regularly, we wanted to gather the feedback in a way that allows us to track it over time and see how we progress.
+
+The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and adjusted for our needs. The questions cover categories such as Company Confidence, Culture, Growth and Development etc.
+
+The questions follow a simple linear scale ranging from 1 (strongly disagree) to 5 (strongly agree). We also added an optional comment field, in case there you have more detailed feedback. In line with our values, we have decided to _not_ make this anonymous.
+
+We run the survey at the end of each quarter and share the results with the team afterwards. We also share some high level results on the [people page.](https://posthog.com/handbook/people/team-structure/people)

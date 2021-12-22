@@ -7,7 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: mo-shehu
+author: ["mo-shehu"]
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kz4aX1NIzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -51,5 +51,5 @@ We're young, aren't struggling for finance and we've the team needed to deepen o
 
 Engineers are becoming increasingly mission-driven creators who want to understand what the user struggles with and how to alleviate those struggles. During our hiring process, many engineers reveal that they’re leaving their current companies because there’s simply no room to create stuff - either because they’re not given the autonomy to do so or because the product(s) they work on lack sufficient usage to track trends and test new features. Good engineers are scarce, and if you’re lucky enough to snag a few bright stars, give them the keys to the kingdom and watch what they build with it. You’ll be pleasantly surprised.
 
-Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
 

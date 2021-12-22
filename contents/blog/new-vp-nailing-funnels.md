@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: marcus-hyett
+author: ["marcus-hyett"]
 featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
 ---
 
@@ -77,4 +77,4 @@ But you can't just assume everyone will buy into the strategy because you posted
 
 Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
 
-_Loved this? Follow us on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on growth, startups, and product analytics._
+_Loved this? Follow us on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on growth, startups, and product analytics._

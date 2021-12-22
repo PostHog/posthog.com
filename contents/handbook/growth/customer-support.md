@@ -6,24 +6,23 @@ showTitle: true
 
 ## We aim to delight
 
-You can build a good company by focusing on getting lots of customers. To build a great company, you must delight your existing customers. This means that the journey doesn't simply end once we sign up a user - even more important is to ensure that PostHog is consistently delivering value for them. 
+You can build a good company by focusing on getting lots of customers. To build a great company, you must delight your existing customers. This means that the journey doesn't simply end once we sign up a user - even more important is to ensure that PostHog is consistently delivering value for them.
 
 ## How we ensure customer delight at PostHog
 
 ### It's easy for customers to reach us
 
-We have a few different routes for users to contact us. As an open source company, our bias is towards increasing the bandwidth of communication with our users and making it easy for them to reach us. We do not believe in putting up barriers by saying they can only reach us through a dedicated support email address, for example. 
+We have a few different routes for users to contact us. As an open source company, our bias is towards increasing the bandwidth of communication with our users and making it easy for them to reach us. We do not believe in putting up barriers by saying they can only reach us through a dedicated support email address, for example.
 
 These are the ways in which customers can currently reach us, in order of popularity:
 
 - **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions
 - **Email** - a user may email hey@posthog.com with a specific support query
-- **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
 ### Tutorials and workshops
 
-Product analytics are only as valuable as the questions you ask. We’re committed to helping teams of all sizes learn how to ask the right questions to grow their product. To this end, we’re constantly producing new content in the form of [tutorials](https://posthog.com/docs/tutorials), [blog posts](https://posthog.com/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA). 
+Product analytics are only as valuable as the questions you ask. We’re committed to helping teams of all sizes learn how to ask the right questions to grow their product. To this end, we’re constantly producing new content in the form of [tutorials](https://posthog.com/docs/tutorials), [blog posts](https://posthog.com/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
 
 #### Product analytics worksheet
 We've created a [Product Metrics Worksheet](https://docs.google.com/document/d/1mXKS08ngcJlbJdaYihikHO7RDY8dbxyChmsUneOwrfw/edit?usp=sharing) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog.
@@ -34,11 +33,11 @@ For [Scale](/pricing#scale) customers, we include a complimentary workshop where
 
 ### No dedicated support people
 
-We intentionally have not hired a single person dedicated to customer support. The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product. 
+We intentionally have not hired a single person dedicated to customer support. The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product.
 
-Providing support is a responsibility shared across our team - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help. 
+Providing support is a responsibility shared across our team - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat. 
+This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat.
 
 This is why, in addition, one person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 

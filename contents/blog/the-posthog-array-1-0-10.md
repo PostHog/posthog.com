@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: release-notes
+categories: ["Release notes"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -66,4 +66,4 @@ We obviously prioritize bug fixing but what was cool was that the issue created 
 
 ## PostHog news
 
-If you follow [our Twitter](https://twitter.com/PostHogHQ), you may have seen us posting about hiring – we are keen on growing the PostHog team so we can build new features even faster – if you’re an engineer who is interested (or knows someone who maybe is) you can find out more on our [careers](/careers) page.
+If you follow [our Twitter](https://twitter.com/PostHog), you may have seen us posting about hiring – we are keen on growing the PostHog team so we can build new features even faster – if you’re an engineer who is interested (or knows someone who maybe is) you can find out more on our [careers](/careers) page.

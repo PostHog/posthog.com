@@ -1,0 +1,16 @@
+import GetInstallationAddress from './get-installation-address'
+
+As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via HTTPs.
+```yaml
+ingress:
+  nginx:
+    enabled: true
+    redirectToTLS: false
+  letsencrypt: false
+web:
+  secureCookies: false
+```
+
+After upgrading you can run the following command to get the URL to access PostHog:
+
+<GetInstallationAddress />

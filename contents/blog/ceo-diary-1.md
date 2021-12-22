@@ -5,15 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ceo-diaries
-author: james-hawkins
+categories: ["CEO diaries"]
+author: ["james-hawkins"]
 featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
 _We are open source_ is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary?
 
-# Late mover advantage
+## Late mover advantage
 
 Product analytics is a busy space. It reminds me of the _front_ entrance to Liverpool Street station in London:
 
@@ -37,7 +37,7 @@ A winning strategy for us involves:
 3. Enjoying wider adoption within each company since the product keeps getting better
 4. Making more money as big companies happily pay for the value, leading us back to step #1 
 
-# So what are we doing about the above?
+## So what are we doing about the above?
 
 PostHog started off as an open source project. We started getting emails like this one, which is from a 30k employee corporate that you'll have heard of:
 
@@ -53,7 +53,7 @@ So we decided to get [Five Reference Customers](../handbook/strategy/strategy), 
 
 From this exercise, we learned we had to level up our UX around funnels - so we [nailed funnels](new-vp-nailing-funnels). Next up, we're working on [nailing diagnoses](../handbook/strategy/roadmap). This is particularly cool as we're starting to see how our broad approach with analytics, session recording, and feature flags uniquely lets users visualize their funnels, understand _why_ funnel performance is bad, and release changes to safely improve it.
 
-# A board meeting happened
+## A board meeting happened
 
 This mainly focused on what our reference customers have in common.
 
@@ -63,7 +63,7 @@ This is what we're seeing:
 
 ![Customer problems they have in common](../images/blog/CEO-diary-1/customer-dna.jpg)
 
-# What's next
+## What's next
 
 We want to get more scores like the above, so we did two things:
 

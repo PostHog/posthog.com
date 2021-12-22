@@ -36,7 +36,7 @@ We will at this stage also ask for work samples or portfolios, to get a better f
 
 #### 2. Technical interview and portfolio review
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round usually lasts 60 minutes.
+The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round usually lasts 45-60 minutes and usually involves two of our team members. They will ask questions around background and previous experience, as well as some scenario-based questions. At the end, they will leave time to answer any open questions. 
 
 #### 3. Marketing SuperDay
 

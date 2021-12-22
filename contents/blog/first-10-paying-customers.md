@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: mo-shehu
+author: ["mo-shehu"]
 featuredImage: ../images/blog/first-10-customers.png
 featuredImageType: full
 ---
@@ -51,7 +51,7 @@ Traffic is crucial to getting eyeballs on your product and driving subscriptions
 
 Writing is also a forcing function on your thinking process. Better writing leads to better thinking, which sharpens your communication skills and improves your product planning. Make it a habit for every member of your team (not just the founders) to contribute to your blog, YouTube channel, or online community periodically — once a month is good. They can write about some aspect of their role and share it with their networks to attract new customers and build their individual content portfolios.
 
-At PostHog, we use our [blog](https://posthog.com/blog) to tell our [company story](https://posthog.com/blog/before-yc), announce new product updates, and talk about startup life and culture - like with this post. Get on social media and connect with other founders in your space and potential customers. We’re on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://www.linkedin.com/company/posthog) - connect with us!
+At PostHog, we use our [blog](https://posthog.com/blog) to tell our [company story](https://posthog.com/blog/before-yc), announce new product updates, and talk about startup life and culture - like with this post. Get on social media and connect with other founders in your space and potential customers. We’re on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://www.linkedin.com/company/posthog) - connect with us!
 
 ### Join the right online communities
 Being active in the right online communities gets you seen by the right crowd. A good rule of thumb is to go where problems are discussed online. Communities include GitHub, StackOverflow, Reddit, Quora, ProductHunt, and Slack communities are all great places to start. Engage with other members, help them solve their problems, and post about your product where appropriate. This is one of the highest-leverage tasks you can perform in the early days. Community visibility pays for itself many-fold down the line.
@@ -91,5 +91,5 @@ Unless you’ve magically built a viral product that sells itself, early user ac
 
 And because we’d be remiss if we didn’t plug our own product, you can track all that user activity, traffic, and revenue using PostHog’s product analytics suite. See the full list of features [here](https://posthog.com/product-features) and sign up for a free trial today.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
 

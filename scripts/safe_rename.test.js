@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const getRedirects = require('./safe_rename').getRedirects
 
+jest.useFakeTimers().setSystemTime(new Date('2021-08-09').getTime())
+
 const debug = false
 
 const singleRenameGitDiff = `
@@ -33,6 +35,7 @@ test('redirect will be added for single file rename', async () => {
     const redirects = await getRedirects({ gitDiff, localConfig, remoteConfig, debug })
 
     expect(redirects.length).toBe(1)
+    expect(redirects[0]).toContain('# Added: 2021-08-09')
     expect(redirects[0]).toContain('from = "/docs/one"')
     expect(redirects[0]).toContain('to = "/docs/two"')
 })
@@ -46,8 +49,12 @@ test('redirect will be added for multi file rename', async () => {
     const redirects = await getRedirects({ gitDiff, localConfig, remoteConfig, debug })
 
     expect(redirects.length).toBe(3)
+
+    expect(redirects[0]).toContain('# Added: 2021-08-09')
     expect(redirects[0]).toContain('from = "/docs/one"')
     expect(redirects[0]).toContain('to = "/docs/two"')
+
+    expect(redirects[1]).toContain('# Added: 2021-08-09')
     expect(redirects[1]).toContain('from = "/docs/cheese"')
     expect(redirects[1]).toContain('to = "/docs/mushroom"')
     expect(redirects[2]).toContain('from = "/docs/fish"')

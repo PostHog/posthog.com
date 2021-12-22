@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ceo-diaries
+categories: ["CEO diaries"]
 ---
 
 YC has been running for 15 years, and getting bigger every year.

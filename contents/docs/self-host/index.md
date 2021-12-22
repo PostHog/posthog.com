@@ -12,12 +12,16 @@ Getting a shiny, running production environment of PostHog is probably one the f
 
 Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services.
 
-### **Deployment options**
+### Deployment options
 
-- [DigitalOcean](/docs/self-host/deploy/digital-ocean)
-- [Google Cloud Platform](/docs/self-host/deploy/gcp)
+- [Hobby](/docs/self-host/deploy/hobby) - for testing or very small hobby projects
 - [AWS](/docs/self-host/deploy/aws)
-- [Using Helm Charts](/docs/self-host/deploy/other)
+- [DigitalOcean](/docs/self-host/deploy/digital-ocean) - likely the simplest option for production use cases
+- [Google Cloud Platform](/docs/self-host/deploy/gcp)
+
+The following options are in Beta
+- [Azure](/docs/self-host/deploy/azure)
+- [Other platforms](/docs/self-host/deploy/other)
 
 ## Configure
 
@@ -28,3 +32,13 @@ There are various ways to configure and personalize your PostHog instance to bet
 - [Securing PostHog](/docs/self-host/configure/securing-posthog)
 - [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
 - [Email configuration](/docs/self-host/configure/email)
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/joe.png"
+        size="md"
+        name="Joe Saunderson"
+        title="Software Engineer, Mention Me"
+        quote={`“We self-hosted PostHog because we needed to keep everything on our infrastructure. Our clients’ privacy is very important to us and we have obligations to store their data safely.”`}
+    />
+</BorderWrapper>

@@ -1,10 +1,10 @@
+import { Button, Col, Row } from 'antd'
 import React from 'react'
-import { Row, Col, Button } from 'antd'
-import imgCloud from '../../images/cloud.svg'
 import imgBuilding from '../../images/building.svg'
-import imgOpenSource from '../../images/plan-open-source.svg'
+import imgCloud from '../../images/cloud.svg'
 import imgScaleFree from '../../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../../images/plan-enterprise2.svg'
+import imgOpenSource from '../../images/plan-open-source.svg'
 
 export const PlanComparisonTable = () => {
     return (
@@ -286,11 +286,7 @@ export const PlanComparisonTable = () => {
                         <li>You want to export data to your data lake.</li>
                     </ul>
                     <div className="p-comparison-btn">
-                        <Button
-                            type="primary"
-                            size="large"
-                            href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
-                        >
+                        <Button type="primary" size="large" href="/signup/self-host/get-in-touch#contact">
                             Contact sales
                         </Button>
                     </div>
