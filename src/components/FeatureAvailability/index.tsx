@@ -84,13 +84,13 @@ export function FeatureAvailability({
             <div className="feature-availability-inner">
                 <div>
                     <h5>
-                        Cloud plans
-                        <a href="/pricing?realm=cloud">
+                        Self-hosted plans
+                        <a href="/pricing?realm=self-hosted">
                             <InfoCircleOutlined />
                         </a>
                     </h5>
                     <ul>
-                        {PLANS.cloud.map((plan) => (
+                        {PLANS.selfHosted.map((plan) => (
                             <Plan
                                 key={plan.key}
                                 available={allPlans || availablePlans?.includes(plan.key)}
@@ -102,13 +102,13 @@ export function FeatureAvailability({
                 </div>
                 <div>
                     <h5>
-                        Self-hosted plans
-                        <a href="/pricing?realm=self-hosted">
+                        Cloud plans
+                        <a href="/pricing?realm=cloud">
                             <InfoCircleOutlined />
                         </a>
                     </h5>
                     <ul>
-                        {PLANS.selfHosted.map((plan) => (
+                        {PLANS.cloud.map((plan) => (
                             <Plan
                                 key={plan.key}
                                 available={allPlans || availablePlans?.includes(plan.key)}
