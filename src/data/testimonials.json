@@ -233,7 +233,7 @@
     {
         "featuresUsed": ["data integrity", "performance", "competitor"],
         "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga" } },
-        "quote": "We installed MixPanel and PostHog at the same time. We saw between 40-50% more events in PostHog, just because we were self-hosting. PostHog also tracks around 20-30% more users than MixPanel does. For example, for one particular event we defined, Mixpanel reported 6,343 occurrences last month. PostHog reported what we know to be the true figure, which is 8,169 — almost 30% more than MixPanel."
+        "quote": "We installed Mixpanel and PostHog at the same time. We saw between 40-50% more events in PostHog, just because we were self-hosting. PostHog also tracks around 20-30% more users than Mixpanel does. For example, for one particular event we defined, Mixpanel reported 6,343 occurrences last month. PostHog reported what we know to be the true figure, which is 8,169 — almost 30% more than Mixpanel."
     },
     {
         "featuresUsed": ["data integrity", "performance", "competitor"],
@@ -278,6 +278,6 @@
     {
         "featuresUsed": ["self-hosting", "competitor"],
         "author": { "name": "Colin Wren", "role": "CTO & Co-founder", "company": { "name": "Reciprocal.dev" } },
-        "quote": "I’ve found PostHog to be miles ahead of the other tools I’ve tried so far and I’m a little miffed that I didn’t find it straight away and wasted time with MixPanel."
+        "quote": "I’ve found PostHog to be miles ahead of the other tools I’ve tried so far and I’m a little miffed that I didn’t find it straight away and wasted time with Mixpanel."
     }
 ]
