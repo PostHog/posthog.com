@@ -216,12 +216,19 @@ When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can
 
 ### Example implementation
 
+See the [`sentry_django_example`](https://github.com/PostHog/posthog-python/tree/master/sentry_django_example) project for a complete example.
+
 ```python
-from posthog.sentry import update_posthog
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from posthog.sentry.posthog_integration import PostHogIntegration
+
+PostHogIntegration.organization = "orgname"
+PostHogIntegration.project_id = "123456"
 
 sentry_sdk.init(
     dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    before_send=update_posthog
+    integrations=[DjangoIntegration(), PostHogIntegration()],
 )
 
 # Also set `posthog_distinct_id` tag
