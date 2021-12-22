@@ -25,7 +25,7 @@ Growth engineering works
 
 ## Output metrics
 
-* Primary: [Conversion to paid](https://app.posthog.com/insights/M5KDFdvX?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22realm%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22cloud%22%5D%2C%22operator%22%3A%22exact%22%7D%5D%7D%2C%7B%22id%22%3A%2212299%22%2C%22name%22%3A%22User%20paid%20on%20cloud%20or%20self%20hosted%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%5D&display=FunnelViz&insight=FUNNELS&interval=week&date_from=-30d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=1&funnel_viz_type=trends&funnel_from_step=0&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464) 
+* Primary: Number of users per self-hosted deployment
 * Acquisition
 * Activation
 * Revenue
