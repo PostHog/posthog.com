@@ -44,7 +44,7 @@ Concrete things we take responsibility over:
 
 ## Output metrics
 
-- Primary: Ease of deployment (?)
+- Primary: Install conversion rate (Number of attempted installs / successful installs)
 
 ### VPC
 ###### Retention 
