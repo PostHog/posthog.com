@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: paolodamico
+author: ["paolodamico"]
 featuredImage: ../images/blog/generic-release-notes.png
 featuredImageType: full
 categories: ["General", "Release notes"]

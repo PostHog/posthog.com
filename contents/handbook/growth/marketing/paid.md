@@ -6,7 +6,7 @@ showTitle: true
 
 As we believe in [product-led growth](https://posthog.com/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
 
-We work with an agency,[Hey Digital](https://www.heydigital.co/) to manage paid ads. Specifically, they help us with:
+We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid ads. Specifically, they help us with:
 - Paid ad tactics and monthly media plan
 - Creating paid ad assets for each channel
 - Manage paid channels on our behalf 
@@ -41,16 +41,16 @@ Hey Digital create our ad assets for most of our main channels. These guidelines
 ## Channels
 
 We currently run ads on:
-- Google Ads
-- Twitter
+- Google Ads - _awareness, conversion_
+- Twitter - _awareness_
+- Bing media network (inc. DuckDuckGo) - _awareness, conversion_
+- LinkedIn - _awareness_
+- Reddit - _awareness_
 
-We plan to run regular ads on:
-- Bing
-- LinkedIn
-- Reddit
+Generally we only use high purchase intent channels like Google and Bing for conversion. We find that other channels are much more effective for general awareness. 
 
 We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. Charles, Joe and James H generally have admin access to these channels.
 
-## Tracking conversion
+## Tracking conversion
 
 We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. Charles currently keeps Google Ads updated by manually uploading conversion data - in the future, we will automate this process. 

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: hanna-crombie
+author: ['hanna-crombie']
 featuredImage: ../images/blog/blog-generic-1.png
 featuredImageType: standard
 ---

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: joe-martin
+author: ["joe-martin"]
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 ---
@@ -35,7 +35,7 @@ PostHog is the best open source analytics tool for companies that are focused on
 - Easy-to-use, no SQL required
 - Self-hosting and cloud-hosting available
 - Feature flags for running A/B tests
-- Session recordings for gathering insights
+- Session recording for gathering insights
 - Event pipelines to integrate with data warehouses
 - Unlimited ability to scale 
 

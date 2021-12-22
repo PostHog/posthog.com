@@ -11,6 +11,7 @@ export interface CrumbProps {
     truncate?: boolean
     linkColor?: string
     onClick?: () => void
+    state?: any
 }
 
 interface BreadcrumbsProps {
@@ -31,7 +32,7 @@ const crumbText = (classes = '') => cntl`
     ${classes}
 `
 
-export function Crumb({ url, title, className = '', truncate, onClick, linkColor }: CrumbProps): JSX.Element {
+export function Crumb({ url, title, className = '', truncate, onClick, linkColor, state }: CrumbProps): JSX.Element {
     // If crumbs get more complex, create a conditional wrapper component to keep code DRY
     const truncateStyles: React.CSSProperties = {
         whiteSpace: 'nowrap',
@@ -48,7 +49,7 @@ export function Crumb({ url, title, className = '', truncate, onClick, linkColor
             className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
         >
             {url ? (
-                <Link style={style} className={crumbText(`text-red hover:text-red`)} to={url}>
+                <Link style={style} className={crumbText(`text-red hover:text-red`)} to={url} state={state}>
                     {title}
                 </Link>
             ) : onClick ? (

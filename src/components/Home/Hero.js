@@ -59,7 +59,7 @@ export default function Hero() {
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
                 <Feature icon="event-pipelines" title="Event pipelines" />
                 <Feature icon="analytics" title="Analytics" />
-                <Feature icon="session-recordings" title="Session recordings" />
+                <Feature icon="session-recordings" title="Session recording" />
                 <Feature icon="feature-flags" title="Feature flags" />
                 <Feature icon="data-warehouse" title="Export to data warehouse" />
             </ul>
