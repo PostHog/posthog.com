@@ -1,13 +1,13 @@
 import React from 'react'
 import { heading, section } from './classes'
-import yCombinator from './images/y-combinator.svg'
-import staples from './images/staples.svg'
-import spacex from './images/spacex.svg'
-import landmark from './images/landmark.svg'
+import airbus from './images/airbus.svg'
 import hasura from './images/hasura.svg'
-import phantom from './images/phantom.svg'
+import landmark from './images/landmark.svg'
 import outbrain from './images/outbrain.svg'
-import tinkoff from './images/tinkoff.svg'
+import phantom from './images/phantom.svg'
+import spacex from './images/spacex.svg'
+import staples from './images/staples.svg'
+import yCombinator from './images/y-combinator.svg'
 
 const Customer = ({ image, width, height }) => {
     return (
@@ -33,10 +33,10 @@ export default function Customers() {
                     <Customer width={212} height={44} image={yCombinator} />
                     <Customer width={198} height={36} image={staples} />
                     <Customer width={267} height={35} image={spacex} />
+                    <Customer width={229} height={41} image={airbus} />
                     <Customer width={206} height={47} image={landmark} />
                     <Customer width={173.46} height={51} image={hasura} />
                     <Customer width={138} height={31} image={outbrain} />
-                    <Customer width={162} height={50.58} image={tinkoff} />
                     <Customer width={175} height={41} image={phantom} />
                 </ul>
             </div>

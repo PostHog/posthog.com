@@ -86,3 +86,11 @@ There are two options:
     helm upgrade --install -f ...
     ```
     Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
+
+### Upgrading from 6.x.x
+
+7.0.0 upgrades the Helm dependency chart [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager) from version `1.2.0` to `1.6.1`. This brings some updates to the custom resource definition (CRD).
+
+If you **are not** overriding `cert-manager.installCRDs` by setting it to `false` **there’s nothing you need to do**. You can go on updating your Helm release as usual and enjoy your day!
+
+If otherwise you are manually managing the `cert-manager`‘s CRDs, please remember to update the definitions in order to keep everything in sync.

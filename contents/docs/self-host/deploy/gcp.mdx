@@ -11,6 +11,7 @@ import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
+import SetupDNS from './snippets/setup-dns'
 
 First, we need to set up a Kubernetes cluster (see the official GCP [documentation](https://cloud.google.com/kubernetes-engine/) for more info).
 
@@ -33,7 +34,7 @@ ingress:
   hostname: <your-hostname>
 ```
 
-### Installing the chart
+## Installing the chart
 
 <InstallingSnippet />
 
@@ -45,7 +46,7 @@ ingress:
 
 ## Setting up DNS
 
-Create a record from your desired hostname to the external IP.
+<SetupDNS />
 
 ## Troubleshooting
 ### I cannot connect to my PostHog instance after creation
@@ -62,8 +63,10 @@ If running the command shows the SSL cert as `PROVISIONING`, that means that the
 
 As a troubleshooting tool, you can allow HTTP access by setting `ingress.gcp.forceHttps` and `web.secureCookies` both to false, but we recommend always accessing PostHog via https.
 
-## Upgrading the chart
+### Upgrading the chart
+
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
+
 <UninstallingSnippet />
