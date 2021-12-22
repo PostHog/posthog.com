@@ -335,8 +335,11 @@
             }
         },
         {
+            "title": "Explore product",
+            "url": "https://demo.posthog.com"
+        },
+        {
             "title": "Get started",
-            "classes": "lg:ml-6",
             "cta": true,
             "url": "/signup",
             "hideBorder": true
