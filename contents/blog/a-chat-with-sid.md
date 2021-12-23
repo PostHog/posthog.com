@@ -4,7 +4,7 @@ title: The Early Days of GitLab - A Chat with Sid Sijbrandij
 rootPage: /blog
 sidebar: Blog
 showTitle: true
-author: james-hawkins
+author: ["james-hawkins"]
 hideAnchor: true
 ---
 

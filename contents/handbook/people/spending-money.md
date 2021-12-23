@@ -12,7 +12,7 @@ Please spend money in a way that you think is in the best interests of the compa
 
 If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
 
-If you live in the UK, you should use your Revolut card for UK-specific spending (i.e. ordering from UK sites), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary. 
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary.
 
 For larger expenses which don't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
 
@@ -141,9 +141,9 @@ If you believe an open-source project is fundamentally important to the success 
 
 To enable individuals to support projects on an ad-hoc basis, we use [Open Collective](https://opencollective.com/) and have a $100/month budget per team member.
 
-To get setup with Open Collective get in touch with [Phil](/handbook/company/team#phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make "contributions" (sponsor a project) as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
+To get setup with Open Collective get in touch with Charles who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make "contributions" (sponsor a project) as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
-_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask [Phil](/handbook/company/team#phil-leggetter-developer-relations) to set up the sponsorship._ 
+_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask Charles to set up the sponsorship._ 
 
 ## Work space
 
@@ -151,7 +151,7 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
+You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
 ## Meeting each other
 
@@ -169,7 +169,7 @@ It's important to us at PostHog to celebrate team member milestones and achievem
 
 **Birthdays**
 
-We have a budget of $50 for a personalised birthday gift. Eltje will reach out to the team a week before the birthday to start a virtual birthday card and ask for gift ideas. 
+We have a budget of $50 for a personalized birthday gift. Eltje will reach out to the team a week before the birthday to start a virtual birthday card and ask for gift ideas. 
 
 **Significant life events**
 

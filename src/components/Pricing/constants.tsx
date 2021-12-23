@@ -5,25 +5,25 @@ export const SCALE_MINIMUM_EVENTS = 6_666_666
 
 export const features = {
     Platform: [
-        { title: 'Funnels & trends', icon: <Funnels className="w-4" /> },
-        { title: 'Feature flags', icon: <FeatureFlags className="w-4" /> },
-        { title: 'Cohorts & retention', icon: <Cohorts className="w-4" /> },
-        { title: 'Session recordings', icon: <SessionRecordings className="w-4" /> },
+        { title: 'Funnels & Trends', icon: <Funnels className="w-4" /> },
+        { title: 'Feature Flags', icon: <FeatureFlags className="w-4" /> },
+        { title: 'Cohorts & Retention', icon: <Cohorts className="w-4" /> },
+        { title: 'Session Recording', icon: <SessionRecordings className="w-4" /> },
         { title: 'Path analysis', icon: <PathAnalysis className="w-4" /> },
     ],
     'Platform features': [
         { title: 'Dashboards' },
-        { title: 'Event autocapture' },
+        { title: 'Event Autocapture' },
         { title: 'Annotations' },
         { title: 'API' },
         { title: 'Plugins' },
         { title: 'Data I/O' },
     ],
     'Advanced features': [
-        { title: 'Correlation analysis' },
-        { title: 'Priority Session Recordings' },
-        { title: 'Multivariate testing' },
-        { title: 'Deep Dive Dashboards' },
+        { title: 'Correlation Analysis' },
+        { title: 'Group Analytics' },
+        { title: 'Priority Session Recording' },
+        { title: 'Multivariate Testing' },
         { title: 'Multiple projects' },
     ],
     Collaboration: [

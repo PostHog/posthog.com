@@ -3,6 +3,10 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
     createTypes(`
       type Mdx implements Node {
         contributors: [Contributors]
+        frontmatter: Frontmatter
+      }
+      type Frontmatter {
+        authorData: [AuthorsJson] @link(by: "handle", from: "author")
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")

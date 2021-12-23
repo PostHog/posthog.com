@@ -20,13 +20,14 @@ You can create bespoke pricing with the following steps:
 
 1. Go to https://dashboard.stripe.com/products and click 'Add product'
   2. Alternatively you can add a new price to an existing product
-3. Give it a name (likely the name of the customer) and description. The customer will see this name!
-4. Pricing model select "Graduated model"
+  1. If you want the user to get enterprise features, you need to click `Add metadata` with key `plan` and value `enterprise`
+1. Give it a name (likely the name of the customer) and description. The customer will see this name!
+1. Pricing model select "Graduated model"
    1. The first tier is likely a flat fee, all the other tiers are likely unit based prices
-5. Select "Usage is metered"
-6. "Charge for metered usage by" should be set to `Sum of usage values during period`
-7. Save product, and copy the API ID under "Pricing" (starts with `price_`)
-8. Send customer to `https://license.posthog.com/?price_id=price_...`
+1. Select "Usage is metered"
+1. "Charge for metered usage by" should be set to `Sum of usage values during period`
+1. Save product, and copy the API ID under "Pricing" (starts with `price_`)
+1. Send customer to `https://license.posthog.com/?price_id=price_...`
 
 
 #### Activate subscription

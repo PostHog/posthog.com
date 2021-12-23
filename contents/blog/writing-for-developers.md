@@ -6,7 +6,7 @@ featuredImage: ../images/blog/writing-for-developers/writing-for-developers.png
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: james-hawkins
+author: ["james-hawkins"]
 featuredImageType: full
 ---
 

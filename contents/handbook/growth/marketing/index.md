@@ -84,6 +84,8 @@ Developer relations and community is also super important to us, but covered els
  
 The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press). 
 
+We track marketing activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
+
 ## Who is our target customer and what do we want to say to them?
 
 We have articulated a series of [value propositions](/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels.
@@ -91,6 +93,10 @@ We have articulated a series of [value propositions](/handbook/growth/marketing/
 See our [customer personas page](/handbook/growth/marketing/customer-personas) for more information about what is important to our target users and how we ensuring they have the best possible experience with PostHog across all product and marketing touchpoints.
 
 Depending on the significance of the change to our product, may do an [announcement](/handbook/growth/marketing/product-announcements).
+
+## Who are our competitors and where can I find out about them? 
+
+We closely follow other companies which are active in the product analytics space. Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
 
 ## Who are the marketing team?
 

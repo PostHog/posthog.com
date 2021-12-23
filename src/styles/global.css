@@ -493,8 +493,15 @@ ul {
 }
 
 .template-section-content {
+    &:not(.divide-dashed) {
+        @apply gap-x-12;
+    }
+    &.divide-dashed {
+        > * {
+            @apply px-0 sm:px-7 my-2;
+        }
+    }
     > * {
-        @apply px-0 sm:px-7 my-2;
         & > {
             * {
                 &:first-of-type,
@@ -535,7 +542,6 @@ ul {
 }
 
 .checkbox:checked {
-    @apply bg-opacity-100 dark:bg-opacity-100;
     & + svg {
         @apply visible;
     }
@@ -545,5 +551,53 @@ ul {
     h1 a {
         /* Temporary fix until plugin content can be processed as MDX */
         color: inherit !important;
+        @apply !font-bold;
     }
+    img {
+        @apply hidden;
+    }
+}
+
+@keyframes features-ticker {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-2700px, 0, 0);
+    }
+}
+
+.infinite-features-ticker {
+    animation: features-ticker 80s linear infinite;
+}
+
+.active-product {
+    a {
+        @apply opacity-100;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        background: #f54e00;
+        border-radius: 2px;
+        left: -12px;
+    }
+}
+
+.images-slider > li {
+    &:nth-of-type(even) {
+        margin-left: -12%;
+        margin-top: 7%;
+    }
+    &:nth-of-type(odd) {
+        margin-left: -12%;
+    }
+    &:first-of-type {
+        margin-left: 0px;
+    }
+    width: calc(25% + 12%);
 }

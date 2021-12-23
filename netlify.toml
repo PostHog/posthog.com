@@ -3,6 +3,11 @@
   to = "/integrations/:splat"
 
 [[redirects]]
+  from = "/next-steps/*"
+  to = "/next-steps"
+  status = 200
+
+[[redirects]]
   from = "/careers/*"
   to = "/careers"
   status = 200
@@ -542,9 +547,10 @@
     to = "/docs/user-guides/session-recording"
 
 # Added: 2021-07-13
+# Edited: 2021-12-14
 [[redirects]]
     from = "/docs/features/sessions"
-    to = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -796,11 +802,6 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/docs/user-guides/users"
-
-# Added: 2021-10-11
-[[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
 
@@ -818,12 +819,7 @@
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"
-
-[[redirects]]
-  from = "/next-steps/*"
-  to = "/next-steps"
-  status = 200
+    to = "/docs/user-guides/persons"    
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -863,124 +859,288 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/request_demo"
-    to = "/schedule-demo"
-
+    to = "/schedule-demo" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/strategy/investor-updates"
-    to = "/handbook/strategy/investors"
-
+    to = "/handbook/strategy/investors" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/engineering/feature-parity"
-    to = "/handbook/strategy/strategy"
-
+    to = "/handbook/strategy/strategy" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/contribute/updating-documentation"
-    to = "/docs/contribute"
-
+    to = "/docs/contribute" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/marketing/messaging_framework"
-    to = "/handbook/growth/marketing"
-
+    to = "/handbook/growth/marketing" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/handbook/engineering/support-hero"
-    to = "/handbook/growth/handbook/support-hero"
-
+    to = "/handbook/growth/handbook/support-hero" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/people/handbook/people/hiring-process/marketing-hiring"
-    to = "/handbook/people/hiring-process/marketing-hiring"
-
+    to = "/handbook/people/hiring-process/marketing-hiring" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/plugins/maxmind"
     to = "/plugins"
-
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/about"
-    to = "/handbook/company/story"
-
+    to = "/handbook/company/story" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/team"
     to = "/handbook/company/team"
-
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/contact"
-    to = "/signup/self-host/get-in-touch#contact"
-
+    to = "/signup/self-host/get-in-touch#contact" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrate/third-party"
-    to = "/docs/integrate"
-
+    to = "/docs/integrate" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/deployment/running-behind-proxy"
-    to = "/docs/self-host/configure/running-behind-proxy"
-
+    to = "/docs/self-host/configure/running-behind-proxy" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrated"
-    to = "/docs/integrate"
-
+    to = "/docs/integrate" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/scaling-posthog"
-    to = "/docs/self-host/deploy/configuration#scaling-up"
-
+    to = "/docs/self-host/deploy/configuration#scaling-up" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/sales/"
-    to = "/handbook/growth/sales/overview"
-
+    to = "/handbook/growth/sales/overview" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/api/api"
-    to = "/docs/api"
-
+    to = "/docs/api" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/code-of-conduct"
-    to = "/docs/contribute/code-of-conduct"
-
-# Manually Added: 2021-11-04
-[[redirects]]
-    from = "/tutorials"
-    to = "/docs/tutorials"
-
+    to = "/docs/contribute/code-of-conduct" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
-    to = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/docs/self-host/postgres-vs-clickhouse" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-29-1"
-    to = "/blog/the-posthog-array-1-29-0"
+    to = "/blog/the-posthog-array-1-29-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-28-1"
-    to = "/blog/the-posthog-array-1-28-0"
+    to = "/blog/the-posthog-array-1-28-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-23-1"
-    to = "/blog/the-posthog-array-1-23-0"
+    to = "/blog/the-posthog-array-1-23-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-15-1"
-    to = "/blog/the-posthog-array-1-15-0"
-
+    to = "/blog/the-posthog-array-1-15-0" 
+    
 # Added: 2021-11-10
 [[redirects]]
     from = "/handbook/people/team-structure/design"
     to = "/handbook/design/about-design"
+
+# Added: 2021-11-11
+[[redirects]]
+    from = "/handbook/design/about-design"
+    to = "/handbook/people/team-structure/design"
+
+[[redirects]]
+    from = "/product-features/self-hosted"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/event-autocapture"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/trends"
+    to = "/product/trends"
+
+[[redirects]]
+    from = "/product-features/funnels"
+    to = "/product/funnels"
+
+[[redirects]]
+    from = "/product-features/retention"
+    to = "/product"
+
+[[redirects]]
+    from = "/product-features/feature-flags"
+    to = "/product/feature-flags"
+
+[[redirects]]
+    from = "/product-features/session-recording"
+    to = "/product/session-recordings"
+
+[[redirects]]
+    from = "/product-features/plugins"
+    to = "/integrations"
+    status = 302
+
+[[redirects]]
+    from = "/heatmaps"
+    to = "/product/heatmaps"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-framework"
+    to = "/tutorials/aarrr-framework"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/b2b"
+    to = "/tutorials/b2b"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/cohorts"
+    to = "/tutorials/cohorts"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/deleting-data"
+    to = "/tutorials/deleting-data"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/event-tracking-guide"
+    to = "/tutorials/event-tracking-guide"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/feature-flags"
+    to = "/tutorials/feature-flags"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/funnels"
+    to = "/tutorials/funnels"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/how-to-embed-shared-dashboard"
+    to = "/tutorials/how-to-embed-shared-dashboard"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/nextjs-supabase-signup-funnel"
+    to = "/tutorials/nextjs-supabase-signup-funnel"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/retention"
+    to = "/tutorials/retention"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/revenue"
+    to = "/tutorials/revenue"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/spa"
+    to = "/tutorials/spa"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/survey"
+    to = "/tutorials/survey"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/taxonomy-acquisition"
+    to = "/tutorials/taxonomy-acquisition"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/toolbar"
+    to = "/tutorials/toolbar"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/tracking-teams"
+    to = "/tutorials/tracking-teams"
+    
+# Added: 2021-12-03
+[[redirects]]
+    from = "/handbook/company/branding"
+    to = "/handbook/company/brand-assets"
+
+[[redirects]]
+    from = "/docs/tutorials/*"
+    to = "/tutorials/:splat"
+
+# Added: 2021-12-08
+[[redirects]]
+    from = "/docs/self-host/hobby-deployment"
+    to = "/docs/self-host/deploy/hobby"
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/handbook/engineering/ee-setup"
+    to = "/docs/contribute/developing-locally"
+
+
+# Added: 2021-12-14
+[[redirects]]
+    from = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"

@@ -44,20 +44,15 @@ Concrete things we take responsibility over:
 
 ## Metrics
 
-### Self Hosted 
-###### Retention 
-- Metric: Retention
-- Objective: Better than cloud
-###### Ease of deploy 
-- Metric: NPS on survey of how install experience was
-- Objective: NPS of > 8
+- Primary: Install conversion rate (Number of attempted installs / successful installs)
+
 ### Cloud
 ###### Data Loss
 - Metric: % of events dropped 
 - Objective: < 0.01%
 ###### Uptime SLO 
 - Metric: Uptime
-- Objective: > 99.99%
+- Objective: > 99%
 ##### Cost 
 - Metric: Infra Costs 
 - Objective: Our costs should grow at a rate that is sublinear relative to scale

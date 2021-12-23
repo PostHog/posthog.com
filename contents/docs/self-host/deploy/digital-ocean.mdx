@@ -8,12 +8,11 @@ tags:
     - digitalocean
 ---
 
-import GetUrlSnippet from './snippets/get-url'
-import GetIPAddressSnippet from './snippets/get-ip-address'
+import GetInstallationAddress from './snippets/get-installation-address'
 import DOIPAddress from './snippets/do-ip-address'
 import CommandHelmGetRepoSnippet from './snippets/command-helm-get-repo'
 import CommandHelmUpgradeSnippet from './snippets/command-helm-upgrade'
-import PostInstallSnippet from './snippets/post-install'
+import SetupDNS from './snippets/setup-dns'
 import ClusterRequirementsSnippet from './snippets/cluster-requirements'
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
@@ -21,9 +20,12 @@ import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 import InstallClusterIssuer from './snippets/install-cluster-issuer'
 
-[Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running.
+[Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers.
+Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming,
+Digital Ocean is generally simpler to use and faster to get running.
 
-The first thing you'll need is a get a Digital Ocean account. You can click on the badge above to get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
+The first thing you'll need is a get a Digital Ocean account. You can click on the badge above to
+get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
 
 <center>
   <a href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" title="DigitalOcean Referral">
@@ -36,8 +38,19 @@ Then you can either follow the [1-click install](#1-click-install) or the [manua
 
 ## 1-click install
 
-There is a [1-click install](https://marketplace.digitalocean.com/apps/posthog-1) option to deploy PostHog via the [DigitalOcean Marketplace](https://marketplace.digitalocean.com/).
-The DigitalOcean UI will ask you if you want to install PostHog on an already provisioned Kubernetes cluster or if you want to create a new one.
+There is a [1-click install](https://marketplace.digitalocean.com/apps/posthog-1) option to deploy PostHog via the
+[DigitalOcean Marketplace](https://marketplace.digitalocean.com/). The DigitalOcean UI will ask you if you want to
+install PostHog on an already provisioned Kubernetes cluster or if you want to create a new one.
+
+Otherwise if you have [doctl](https://github.com/digitalocean/doctl) already configured you can simply run (this will also configure your `kubectl` access):
+
+```shell
+doctl kubernetes cluster create \
+  posthog-cluster \
+  --count=2 \
+  --size="s-2vcpu-4gb" \
+  --1-clicks=posthog
+```
 
 Once the setup is completed, you can pick one of those two methods to fetch the URL of your fresh new PostHog installation:
 
@@ -47,32 +60,11 @@ Once the setup is completed, you can pick one of those two methods to fetch the 
 
 > Note: Without securing your instance you will only be able to test web apps on HTTP such as those running on `localhost`.
 
-<HiddenSection headingType='h3' title='1-click install is also available via doctl'>
-
-If you have [doctl](https://github.com/digitalocean/doctl) configured you can simply run:
-
-```shell
-doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
-```
-
-This will also configure your `kubectl` access.
-
-</HiddenSection>
-
-
 ### Securing your 1-click install
 
 It's unfortunately [not yet possible to provide parameters to DigitalOcean](https://github.com/digitalocean/marketplace-kubernetes/issues/230), so we need a post-install step to enable TLS. In order to do this you will need [kubectl](https://kubernetes.io/docs/tasks/tools/) and [Helm](https://helm.sh/) installed and have [configured your `kubectl` access](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/).
 
-#### 1. Lookup the IP address of the installation
-
-<GetIPAddressSnippet />
-
-#### 2. Set up DNS
-
-Create an `A` record from your desired hostname to the external IP we got above.
-
-#### 3. Update PostHog
+#### 1. Update PostHog
 
 Create a `values.yaml` file in the current directory with the following content:
 
@@ -86,15 +78,52 @@ cert-manager:
   enabled: true
 ```
 
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+
+```yaml
+#
+# For DigitalOcean LB (TCP) mode, we need to enable some additional config
+# in the ingress controller in order to get the proper IP address forwarded
+# to our app. Otherwise we'll get the load balancer nodes addresses instead.
+#
+# ref:
+#   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
+#   - https://docs.digitalocean.com/products/networking/load-balancers/
+#
+#
+# Additionally we'll also enable pod communication through the Load Balancer
+# to ensure Let's Encrypt can reach the cert-manager Pod validating our domain.
+#
+# ref:
+#   - https://github.com/kubernetes/ingress-nginx/issues/3996
+#   - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
+#
+ingress-nginx:
+  controller:
+    config:
+      use-proxy-protocol: true
+    service:
+      annotations:
+        service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
+        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+```
+
 and then run:
 
 <CommandHelmGetRepoSnippet />
 <CommandHelmUpgradeSnippet />
 
-#### 4. Install `ClusterIssuer`
+#### 2. Install `ClusterIssuer`
 <InstallClusterIssuer />
 
-<PostInstallSnippet />
+#### 3. Lookup the address of the installation
+
+<GetInstallationAddress />
+
+#### 4. Setting up DNS
+
+<SetupDNS />
 
 ## Manual install
 
@@ -123,19 +152,50 @@ cert-manager:
   enabled: true
 ```
 
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+```
+#
+# For DigitalOcean LB (TCP) mode, we need to enable some additional config
+# in the ingress controller in order to get the proper IP address forwarded
+# to our app. Otherwise we'll get the load balancer nodes addresses instead.
+#
+# ref:
+#   - https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address
+#   - https://docs.digitalocean.com/products/networking/load-balancers/
+#
+#
+# Additionally we'll also enable pod communication through the Load Balancer
+# to ensure Let's Encrypt can reach the cert-manager Pod validating our domain.
+#
+# ref:
+#   - https://github.com/kubernetes/ingress-nginx/issues/3996
+#   - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
+#
+ingress-nginx:
+  controller:
+    config:
+      use-proxy-protocol: true
+    service:
+      annotations:
+        service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
+        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+```
+
 #### 2. Install the chart
 
 <InstallingSnippet />
 
-#### 3. Lookup the IP address of our installation
+#### 3. Lookup the address of the installation
 
 <GetIPAddressSnippet />
 
-#### 4. Set up DNS
+Note: due to a limitation in the DigitalOcean ingress controller, the second method will not work if you have enabled the settings to support the GeoIP integration.
+Please use the web UI to get your IP address.
 
-Create an `A` record from your desired hostname to the external IP we got above.
+#### 4. Setting up DNS
 
-<PostInstallSnippet />
+<SetupDNS />
 
 ## Troubleshooting
 

@@ -19,11 +19,11 @@ export default function Link({
 }) {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         if (event && posthog) {
             posthog.capture(event)
         }
-        onClick && onClick()
+        onClick && onClick(e)
     }
     const url = to || href
     const internal = !disablePrefetch && /^\/(?!\/)/.test(url)

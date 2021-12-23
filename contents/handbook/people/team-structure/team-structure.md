@@ -19,13 +19,12 @@ hideAnchor: true
       - Paul D'Ambra, Full Stack Engineer
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
       - Guido Iaquinti, Site Reliability Engineer
+      - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
     - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
     - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
     - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
-    - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
-    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
@@ -34,7 +33,7 @@ hideAnchor: true
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-  - [Phil Leggetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
+
 
 ## Small teams
 
@@ -76,13 +75,11 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ### [Growth](growth)
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-- [Sam Winslow](/handbook/company/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
-- [Phil Leggetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 
 <br />
