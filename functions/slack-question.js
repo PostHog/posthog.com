@@ -9,7 +9,6 @@ exports.handler = async (e) => {
     const { trigger_id, actions } = JSON.parse(payload)
     if (actions && actions[0]['action_id'] === 'answer-question-button') {
         const { question, name, email } = JSON.parse(actions[0].value)
-        console.log(JSON.parse(actions[0].value))
         fetch('https://slack.com/api/views.open', {
             method: 'POST',
             body: JSON.stringify({
