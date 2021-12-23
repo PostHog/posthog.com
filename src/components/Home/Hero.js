@@ -42,7 +42,7 @@ export default function Hero() {
                     Want to explore the product?{' '}
                     <Link to="//demo.posthog.com">
                         Visit demo.posthog.com
-                        <RightArrow className="w-4 h-4 -rotate-45 inline-block text-gray" />
+                        <RightArrow className="w-4 h-4 -rotate-45 ml-[-.1rem] inline-block text-gray" />
                     </Link>
                 </p>
                 <div className="max-w-screen-2xl mx-auto w-full relative">
