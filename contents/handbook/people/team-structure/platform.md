@@ -44,7 +44,7 @@ Concrete things we take responsibility over:
 
 ## Metrics
 
-### Self Deploy 
+### Self Hosted 
 ###### Retention 
 - Metric: Retention
 - Objective: Better than cloud
