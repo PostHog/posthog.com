@@ -40,8 +40,8 @@ export default function Hero() {
             <div className="w-full mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
                 <p className="px-4 font-semibold text-center z-10 relative mb-0">
                     Want to explore the product?{' '}
-                    <Link to="//demo.posthog.com">
-                        Visit demo.posthog.com
+                    <Link to="//demo.posthog.com" target="_blank" rel="noopener">
+                        Try the demo
                         <RightArrow className="w-4 h-4 -rotate-45 ml-[-.1rem] inline-block text-gray" />
                     </Link>
                 </p>
