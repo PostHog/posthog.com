@@ -335,10 +335,6 @@
             }
         },
         {
-            "title": "Explore product",
-            "url": "https://demo.posthog.com"
-        },
-        {
             "title": "Get started",
             "cta": true,
             "url": "/signup",
