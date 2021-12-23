@@ -1,7 +1,7 @@
 import CommandHelmGetRepoSnippet from './command-helm-get-repo'
 import CommandHelmUpgradeSnippet from './command-helm-upgrade'
 
-To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, do the following:
+To upgrade the chart using [Helm](https://helm.sh/) with the release name `posthog` in `posthog` namespace, do the following:
 
 1. Get and update the helm repo:
 
@@ -31,4 +31,3 @@ Error: UPGRADE FAILED: release posthog failed, and has been rolled back due to a
 
 it happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl delete job posthog-migrate -n posthog`) before running the upgrade again.
 </details>
-

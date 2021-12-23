@@ -7,20 +7,22 @@ export default function InternalSidebarLink({ url, name, depth, className = '', 
     const key = typeof window !== 'undefined' ? window.location.pathname : 'gatsby-ssr-context'
     const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key }))
     return (
-        <Link
-            style={{ ...style, marginLeft: `${depth / 1.5}rem` }}
-            offset={-50}
-            smooth
-            duration={300}
-            to={url}
-            hashSpy
-            className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange ${className}`}
-            spy
-            onSetActive={() => {
-                reportScrollUpdated(url)
-            }}
-        >
-            {name}
-        </Link>
+        <span className="block" style={{ marginLeft: `${depth / 1.5}rem` }}>
+            <Link
+                style={style}
+                offset={-50}
+                smooth
+                duration={300}
+                to={url}
+                hashSpy
+                className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange ${className}`}
+                spy
+                onSetActive={() => {
+                    reportScrollUpdated(url)
+                }}
+            >
+                {name}
+            </Link>
+        </span>
     )
 }

@@ -161,7 +161,7 @@ Markdown files located in /contents/blog
 date: 2021-11-16
 title: The state of plugins on PostHog
 rootPage: /blog
-author: yakko-majuri
+author: ["yakko-majuri"]
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 ---
@@ -170,7 +170,7 @@ featuredImageType: full
 - `date`: the date the blog was posted
 - `title`: the title that appears at the top of the blog post and on the blog listing page
 - `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
-- `author`: the author of the post. correlates to your handle located in /contents/author.md
+- `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
 - `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 

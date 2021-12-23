@@ -35,6 +35,7 @@ Follow the steps below (for macOS) to install the [Session Manager plugin](https
 #### Download the bundled installer.
 
 ```bash
+cd ~/awstemp
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "sessionmanager-bundle.zip"
 ```
 
@@ -48,14 +49,16 @@ unzip sessionmanager-bundle.zip
 
 ```bash
 sudo ./sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
+rm -r ~/awstemp
 ```
 
 ### Step 3
 
-Go to the ECS console in AWS. Select the `posthog-production-cluster` and then select the service that you would like to exec into (most likely a `web` or `worker` task).
+Go to the ECS console in AWS. Select the `posthog-production-cluster` and then select the service that you would like to exec into (most likely a `posthog-production` or `worker` task).
+
 From that service select a currently running task. **IT MUST BE RUNNING AND STABLE**. If the service is flapping this will not help you.
 
-Copy the _TASK ID_. We'll be using that later.
+Copy the _TASK ID_ (should look something like this `5627220248b6289d11ba5465524902b9`). We'll be using that later.
 
 ### Step 4
 
@@ -68,10 +71,10 @@ Plug the Task ID (from the previous step) into the following command and get to 
 aws ecs execute-command  \
     --region us-east-1 \
     --cluster posthog-production-cluster \
-    --task <TASK_ID from earlier> \
     --container posthog-production \
     --command "/bin/bash" \
-    --interactive
+    --task <TASK_ID from earlier> \
+    --interactive 
 ```
 
 If you need a Django shell, just run the following after connecting

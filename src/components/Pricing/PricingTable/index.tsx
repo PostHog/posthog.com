@@ -1,24 +1,32 @@
-import React, { useState } from 'react'
+import { useLocation } from '@reach/router'
+import Chip from 'components/Chip'
+import { inverseCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { useActions } from 'kea'
+import queryString from 'query-string'
+import React, { useEffect, useState } from 'react'
 import { Structure } from '../../Structure'
+import { PricingOptionType, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { CloudPlanBreakdown } from './CloudPlanBreakdown'
 import { SelfHostedPlanBreakdown } from './SelfHostedPlanBreakdown'
-import { pricingSliderLogic, PricingOptionType } from '../PricingSlider/pricingSliderLogic'
-import { inverseCurve } from 'components/Pricing/PricingSlider/LogSlider'
-import Chip from 'components/Chip'
 
-export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefault?: boolean }) => {
+export const PricingTable = () => {
     const CLOUD_PLAN = 'cloud'
     const SELF_HOSTED_PLAN = 'self-hosted'
     const [currentPlanType, setCurrentPlanType] = useState(SELF_HOSTED_PLAN)
     const currentPlanBreakdown = currentPlanType === 'cloud' ? <CloudPlanBreakdown /> : <SelfHostedPlanBreakdown />
     const { setPricingOption, setSliderValue } = useActions(pricingSliderLogic)
+    const location = useLocation()
 
     const setPlanType = (type: PricingOptionType, sliderValue: number) => {
         setCurrentPlanType(type)
         setPricingOption(type)
         setSliderValue(inverseCurve(sliderValue))
     }
+
+    useEffect(() => {
+        const realm = queryString.parse(location.search)?.realm
+        if (realm === CLOUD_PLAN || realm === SELF_HOSTED_PLAN) setCurrentPlanType(realm)
+    }, [location])
 
     return (
         <div className="pricing-hero relative ">

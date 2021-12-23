@@ -72,6 +72,7 @@ You should always try to figure out the issues customers are having by yourself 
     - Do this by going to https://app.posthog.com/admin/posthog/user/, finding the relevant user and clicking 'log in as them'
     - To go back to your old user, just log out
     - If they have asked for help it is safe to assume they've given permission for you to log in as them.
+    - You can also check to see sentry errors tied to the user via the `user.username` parameter for e.g. [for test@posthog.com](https://sentry.io/organizations/posthog2/issues/?project=1899813&query=is%3Aunresolved+user.username%3Atest%40posthog.com&statsPeriod=14d)
 - When trying to debug an issue with a customer and it's not immediately obvious, it's usually much faster to do a Zoom session. You also tend to get other useful product feedback.
 - When dealing with slowness, ask users to send a screenshot of their "System Status" page (under settings)
   - If they have a lot of volume and they're still on Postgres they should probably upgrade to Clickhouse
