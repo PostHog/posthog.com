@@ -165,6 +165,14 @@ const sections = [
                 name: 'Multivariate testing',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
+            {
+                name: 'Event taxonomy descriptions and tags',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Dashboard tagging',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
         ],
     },
     {
@@ -196,11 +204,19 @@ const sections = [
                 tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
             },
             {
+                name: 'Private projects',
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+            },
+            {
                 name: 'Ad blocker-resistant',
                 tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Backup configuration',
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+            },
+            {
+                name: 'Proactive security patch alerting',
                 tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
             },
         ],
