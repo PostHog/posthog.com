@@ -6,6 +6,10 @@ showTitle: true
 
 Charges on various platforms can be confusing to understand as loadbalancers (which we have 1 in the default configuration) and storage (default configuration has 64Gi) are often charged separately from compute. Plus potential network utilization or other miscellaneous costs.
 
+## Hobby ($10/mo)
+
+See [Hobby Deployment](hobby) for details on volumes.
+
 ## DigitalOcean ($56/mo)
 
 See [DigitalOcean Kubernetes pricing](https://www.digitalocean.com/pricing#kubernetes).
