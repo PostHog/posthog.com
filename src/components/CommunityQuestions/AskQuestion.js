@@ -6,13 +6,13 @@ export default function AskQuestion({ isValid, loading }) {
     return (
         <Form>
             <Field
-                className="bg-gray-accent-light py-2 px-4 text-base rounded-md w-full"
+                className="bg-gray-accent-light dark:bg-gray-accent-dark py-2 px-4 text-base rounded-md w-full"
                 type="text"
                 name="name"
                 placeholder="Full name"
             />
             <Field
-                className="bg-gray-accent-light py-2 px-4 text-base rounded-md mt-2 w-full"
+                className="bg-gray-accent-light dark:bg-gray-accent-dark py-2 px-4 text-base rounded-md mt-2 w-full"
                 type="text"
                 name="question"
                 as="textarea"

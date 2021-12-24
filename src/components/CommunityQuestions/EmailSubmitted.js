@@ -33,7 +33,7 @@ export default function EmailSubmitted() {
                 </>
             ) : (
                 <>
-                    <div className="bg-tan p-4 rounded-sm mb-4">
+                    <div className="bg-tan dark:bg-primary p-4 rounded-sm mb-4">
                         <h6 className="m-0">We’ll email you.</h6>
                         <p className="text-[14px] opacity-50 m-0">We typically answer in 1-2 days.</p>
                         <img className="mx-auto mt-2" src={emailSaved} />

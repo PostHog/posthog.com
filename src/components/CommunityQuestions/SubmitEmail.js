@@ -9,7 +9,7 @@ export default function SubmitEmail({ isValid, loading }) {
             <p>No need to constantly refresh this page for updates!</p>
             <Form className="grid m-0">
                 <Field
-                    className="bg-gray-accent-light py-2 px-4 text-base rounded-md w-full"
+                    className="bg-gray-accent-light py-2 px-4 text-base rounded-md w-full dark:text-primary"
                     type="email"
                     name="email"
                     placeholder="Email"

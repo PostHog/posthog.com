@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Avatar({ image }) {
     return (
-        <div className="bg-gray-accent-light rounded-full w-[40px] h-[40px] overflow-hidden flex-shrink-0">
+        <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded-full w-[40px] h-[40px] overflow-hidden flex-shrink-0">
             {image ? (
                 <img src={image} width="40" height="40" />
             ) : (

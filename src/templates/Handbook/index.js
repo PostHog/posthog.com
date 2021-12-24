@@ -151,6 +151,12 @@ export const query = graphql`
                 question_body
                 answer_author
                 answer_body
+                authorData {
+                    link_url
+                    name
+                    role
+                    image
+                }
             }
         }
     }
