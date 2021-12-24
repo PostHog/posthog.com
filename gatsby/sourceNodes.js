@@ -62,4 +62,46 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             createNode(node)
         }
     })
+
+    const questions = await fetch(
+        `https://slack.com/api/conversations.history?channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        }
+    ).then((res) => res.json())
+    questions &&
+        questions.messages.forEach((message, index) => {
+            const { blocks } = message
+            const blockIds = [
+                'question_author',
+                'question_avatar',
+                'question_slug',
+                'question_body',
+                'answer_author',
+                'answer_body',
+            ]
+            const question = {}
+            blocks.forEach((block) => {
+                if (blockIds.includes(block.block_id) && block.text) {
+                    question[block.block_id] =
+                        block.text.type === 'mrkdwn' ? block.text.text : block.text.text.split(': ')[1]
+                }
+            })
+            if (Object.keys(question).length > 0 && blockIds.every((id) => question[id])) {
+                const node = {
+                    id: createNodeId(`question-${index}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `Question`,
+                        contentDigest: createContentDigest(question),
+                    },
+                    ...question,
+                }
+                createNode(node)
+            }
+        })
 }

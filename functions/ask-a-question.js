@@ -21,7 +21,7 @@ exports.handler = async (e) => {
                         type: 'header',
                         text: {
                             type: 'plain_text',
-                            text: `${body.name} on ${body.url}`,
+                            text: `${body.name} on ${body.slug}`,
                             emoji: true,
                         },
                     },
@@ -46,8 +46,9 @@ exports.handler = async (e) => {
                                 value: JSON.stringify({
                                     question: body.question,
                                     name: body.name,
-                                    url: body.url,
+                                    slug: body.slug,
                                     email: body.email,
+                                    timestamp: body.timestamp,
                                 }),
                                 action_id: 'answer-question-button',
                             },

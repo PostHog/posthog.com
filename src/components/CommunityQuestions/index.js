@@ -34,7 +34,7 @@ export default function CommunityQuestions() {
                         }}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true)
-                            const body = JSON.stringify({ ...values, url: location.href, timestamp })
+                            const body = JSON.stringify({ ...values, slug: location.pathname, timestamp })
                             fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
                                 .then((res) => res.json())
                                 .then((data) => {
