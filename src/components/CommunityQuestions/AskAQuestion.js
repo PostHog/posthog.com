@@ -10,7 +10,7 @@ export default function AskAQuestion() {
     const [timestamp, setTimestamp] = useState(null)
     const [emailSubmitted, setEmailSubmitted] = useState(false)
     return (
-        <>
+        <div className="mt-10">
             <h4>Ask a question</h4>
             <div className="flex items-start space-x-4">
                 <Avatar />
@@ -62,6 +62,6 @@ export default function AskAQuestion() {
                     </Formik>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
