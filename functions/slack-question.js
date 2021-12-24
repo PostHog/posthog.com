@@ -135,6 +135,8 @@ exports.handler = async (e) => {
             }
         })
 
+        avatar = await fetch(`https:${avatar}?d=404`).then((res) => (res.ok && `https:${avatar}`) || '')
+
         fetch('https://slack.com/api/chat.update', {
             method: 'POST',
             headers: {
@@ -166,7 +168,7 @@ exports.handler = async (e) => {
                         type: 'section',
                         text: {
                             type: 'plain_text',
-                            text: `Avatar: https:${avatar}`,
+                            text: `Avatar: ${avatar}`,
                         },
                         block_id: 'question_avatar',
                     },

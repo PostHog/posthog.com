@@ -90,7 +90,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         block.text.type === 'mrkdwn' ? block.text.text : block.text.text.split(': ')[1]
                 }
             })
-            if (Object.keys(question).length > 0 && blockIds.every((id) => question[id])) {
+            if (Object.keys(question).length > 0 && blockIds.every((id) => id === 'question_avatar' || question[id])) {
                 const node = {
                     id: createNodeId(`question-${index}`),
                     parent: null,

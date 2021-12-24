@@ -6,7 +6,7 @@ import Link from 'components/Link'
 export default function CommunityQuestions({ questions }) {
     return (
         <>
-            {questions && (
+            {questions.length > 0 && (
                 <div className="my-10">
                     <h3 className="mb-4">Community questions</h3>
                     <div className="w-full max-w-[405px] grid gap-5">
