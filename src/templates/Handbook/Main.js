@@ -63,6 +63,7 @@ export default function Main({
     next,
     previous,
     hideLastUpdated,
+    questions,
 }) {
     const { countries } = useStaticQuery(query)
 
@@ -125,7 +126,7 @@ export default function Main({
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
-                    <CommunityQuestions />
+                    <CommunityQuestions questions={questions} />
                 </article>
 
                 {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}

@@ -1,68 +1,44 @@
-import React, { useState } from 'react'
-import { Formik } from 'formik'
-import { useLocation } from '@reach/router'
-import AskQuestion from './AskQuestion'
+import React from 'react'
+import AskAQuestion from './AskAQuestion'
 import Avatar from './Avatar'
-import QuestionSubmitted from './QuestionSubmitted'
+import Link from 'components/Link'
 
-export default function CommunityQuestions() {
-    const location = useLocation()
-    const [timestamp, setTimestamp] = useState(null)
-    const [emailSubmitted, setEmailSubmitted] = useState(false)
-
+export default function CommunityQuestions({ questions }) {
     return (
         <>
-            <h4>Ask a question</h4>
-            <div className="flex items-start space-x-4">
-                <Avatar />
-                <div className="w-full max-w-[405px]">
-                    <Formik
-                        isInitialValid={false}
-                        initialValues={{ name: '', question: '', email: '' }}
-                        validate={(values) => {
-                            const errors = {}
-                            if (!values.name) {
-                                errors.name = 'Required'
-                            }
-                            if (!values.question) {
-                                errors.question = 'Required'
-                            }
-                            if (timestamp && !values.email) {
-                                errors.email = 'Required'
-                            }
-                            return errors
-                        }}
-                        onSubmit={(values, { setSubmitting, resetForm }) => {
-                            setSubmitting(true)
-                            const body = JSON.stringify({ ...values, slug: location.pathname, timestamp })
-                            fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
-                                .then((res) => res.json())
-                                .then((data) => {
-                                    if (values.email) {
-                                        setEmailSubmitted(true)
-                                    } else {
-                                        setTimestamp(data.timestamp)
-                                        resetForm({ values })
-                                    }
-                                    setSubmitting(false)
-                                })
-                        }}
-                    >
-                        {({ isSubmitting, isValid, values }) => {
-                            return !timestamp ? (
-                                <AskQuestion loading={isSubmitting} isValid={isValid} />
-                            ) : (
-                                <QuestionSubmitted
-                                    loading={isSubmitting}
-                                    values={values}
-                                    emailSubmitted={emailSubmitted}
-                                    isValid={isValid}
-                                />
+            {questions && (
+                <div className="my-10">
+                    <h3 className="mb-4">Community questions</h3>
+                    <div className="w-full max-w-[405px] grid gap-5">
+                        {questions.map((question, index) => {
+                            const {
+                                question_author,
+                                question_avatar,
+                                question_body,
+                                answer_author,
+                                answer_body,
+                            } = question
+                            return (
+                                <div key={index} className="flex items-start space-x-4 w-full">
+                                    <Avatar image={question_avatar} />
+                                    <div className="flex-grow">
+                                        <p className="mb-0">{question_body}</p>
+                                        <p className="text-[14px] font-semibold opacity-50">by {question_author}</p>
+                                        <div className="bg-gray-accent-light p-4 rounded-md w-full">
+                                            <div className="flex space-x-2 items-center">
+                                                <Avatar />
+                                                <Link className="text-[14px] font-semibold">{answer_author}</Link>
+                                            </div>
+                                            <p className="my-3">{answer_body}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             )
-                        }}
-                    </Formik>
+                        })}
+                    </div>
                 </div>
-            </div>
+            )}
+            <AskAQuestion />
         </>
     )
 }
