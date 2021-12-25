@@ -55,12 +55,10 @@ To dig even deeper, we can use [`clickhouse-flamegraph`](https://github.com/Slac
 
 <div
   class="relative mt-2 mb-4"
-  style="width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; justify-content: center"
 >
   <object
     data={'/images/flamegraph.svg'}
     type="image/svg+xml"
-    style="max-width: 1600px"
   />
 </div>
 
