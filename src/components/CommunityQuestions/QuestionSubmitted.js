@@ -15,7 +15,11 @@ export default function QuestionSubmitted({ values, emailSubmitted, isValid, loa
                 <span>Question sent. Answer will be posted here.</span>
             </p>
             <div className="p-6 bg-white dark:bg-gray-accent-dark rounded-[10px]">
-                {emailSubmitted ? <EmailSubmitted /> : <SubmitEmail loading={loading} isValid={isValid} />}
+                {emailSubmitted ? (
+                    <EmailSubmitted email={values.email} />
+                ) : (
+                    <SubmitEmail loading={loading} isValid={isValid} />
+                )}
             </div>
         </div>
     )

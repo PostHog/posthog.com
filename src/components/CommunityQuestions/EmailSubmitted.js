@@ -3,9 +3,15 @@ import { Check } from 'components/Icons/Icons'
 import GitHubButton from 'react-github-btn'
 import emailSaved from './email-saved.svg'
 import Button from './Button'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 
-export default function EmailSubmitted() {
+export default function EmailSubmitted({ email }) {
     const [subscribed, setSubscribed] = useState(false)
+
+    const handleSubscribe = async () => {
+        await addToMailchimp(email)
+        setSubscribed(true)
+    }
     return (
         <div className="text-center">
             {subscribed ? (
@@ -40,7 +46,7 @@ export default function EmailSubmitted() {
                     </div>
                     <p className="text-[14px] opacity-50 m-0">While we have you...</p>
                     <h6 className="m-0">Care to receive our email updates?</h6>
-                    <Button onClick={() => setSubscribed(true)}>Sure, subscribe me to the newsletter!</Button>
+                    <Button onClick={handleSubscribe}>Sure, subscribe me to the newsletter!</Button>
                 </>
             )}
         </div>
