@@ -2,12 +2,15 @@
 const fetch = require('node-fetch')
 const queryString = require('query-string')
 const gravatar = require('gravatar')
+const formData = require('form-data')
+const Mailgun = require('mailgun.js')
 
 exports.handler = async (e) => {
     let { body } = e
     if (!body) return { statusCode: 500, body: 'Missing body' }
     const { payload } = queryString.parse(body)
-    const { trigger_id, actions } = JSON.parse(payload)
+    const { trigger_id, actions, token } = JSON.parse(payload)
+    if (token !== process.env.SLACK_VERIFICATION_TOKEN) return { statusCode: 500, body: 'Invalid token' }
     if (actions && actions[0]['action_id'] === 'answer-question-button') {
         const { question, name, email, slug, timestamp } = JSON.parse(actions[0].value)
         fetch('https://slack.com/api/views.open', {
@@ -15,7 +18,7 @@ exports.handler = async (e) => {
             body: JSON.stringify({
                 trigger_id: trigger_id,
                 view: {
-                    private_metadata: timestamp,
+                    private_metadata: timestamp || '',
                     type: 'modal',
                     title: {
                         type: 'plain_text',
@@ -117,6 +120,7 @@ exports.handler = async (e) => {
         let modalSlug
         let modalName
         let avatar
+        let modalEmail
         Object.keys(values).forEach((key) => {
             if (values[key]['modal-question']) {
                 modalQuestion = values[key]['modal-question'].value
@@ -131,13 +135,29 @@ exports.handler = async (e) => {
                 modalName = values[key]['modal-full-name'].value
             }
             if (values[key]['modal-email']) {
-                avatar = gravatar.url(values[key]['modal-email'].value)
+                modalEmail = values[key]['modal-email'].value
+                avatar = gravatar.url(modalEmail)
             }
         })
 
+        const mailgun = new Mailgun(formData)
+        const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY })
+        const mailgunData = {
+            from: 'hey@posthog.com',
+            to: modalEmail,
+            subject: `Someone answered your question on posthog.com!`,
+            template: 'question-answered',
+            'h:X-Mailgun-Variables': JSON.stringify({
+                question: modalQuestion,
+                answer: modalAnswer,
+            }),
+            'h:Reply-To': 'hey@posthog.com',
+        }
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
+
         avatar = await fetch(`https:${avatar}?d=404`).then((res) => (res.ok && `https:${avatar}`) || '')
 
-        fetch('https://slack.com/api/chat.update', {
+        await fetch('https://slack.com/api/chat.update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
