@@ -9,9 +9,9 @@ exports.handler = async (e) => {
     let { body } = e
     if (!body) return { statusCode: 500, body: 'Missing body' }
     const { payload } = queryString.parse(body)
-    const { trigger_id, actions, token } = JSON.parse(payload)
+    const { trigger_id, actions, token, type } = JSON.parse(payload)
     if (token !== process.env.SLACK_VERIFICATION_TOKEN) return { statusCode: 500, body: 'Invalid token' }
-    if (actions && actions[0]['action_id'] === 'answer-question-button') {
+    if (type === 'block_actions' && actions[0]['action_id'] === 'answer-question-button') {
         const { question, name, email, slug, timestamp } = JSON.parse(actions[0].value)
         fetch('https://slack.com/api/views.open', {
             method: 'POST',
@@ -107,7 +107,7 @@ exports.handler = async (e) => {
             }),
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.SLACK_API_KEY}` },
         })
-    } else {
+    } else if (type === 'view_submission') {
         const {
             user: { username },
             view: {

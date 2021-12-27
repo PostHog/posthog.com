@@ -4,9 +4,12 @@ import { useLocation } from '@reach/router'
 import AskQuestion from './AskQuestion'
 import Avatar from './Avatar'
 import QuestionSubmitted from './QuestionSubmitted'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 export default function AskAQuestion() {
     const location = useLocation()
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const [timestamp, setTimestamp] = useState(null)
     const [emailSubmitted, setEmailSubmitted] = useState(false)
     return (
@@ -42,6 +45,7 @@ export default function AskAQuestion() {
                                     } else {
                                         setTimestamp(data.timestamp)
                                         resetForm({ values })
+                                        posthog.capture('Question asked')
                                     }
                                     setSubmitting(false)
                                 })
