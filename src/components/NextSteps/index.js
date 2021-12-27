@@ -50,7 +50,7 @@ export default function NextSteps({ location }) {
     return (
         <div style={{ opacity: loading ? '0' : '1' }}>
             <Layout crumbs={[{ title: 'Next steps' }]}>
-                <SEO title="Next Steps - PostHog" />
+                <SEO title="Next Steps - PostHog" image="/.netlify/functions/customer-og.js" />
                 <div className="px-5 max-w-[600px] mx-auto">
                     <div className="flex justify-center items-center my-16 space-x-4 transition-opacity">
                         <Logo noText />
