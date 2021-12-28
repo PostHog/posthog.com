@@ -13,7 +13,7 @@ exports.handler = async (e) => {
     if (token !== process.env.SLACK_VERIFICATION_TOKEN) return { statusCode: 500, body: 'Invalid token' }
     if (type === 'block_actions' && actions[0]['action_id'] === 'answer-question-button') {
         const { question, name, email, slug, timestamp } = JSON.parse(actions[0].value)
-        fetch('https://slack.com/api/views.open', {
+        await fetch('https://slack.com/api/views.open', {
             method: 'POST',
             body: JSON.stringify({
                 trigger_id: trigger_id,
