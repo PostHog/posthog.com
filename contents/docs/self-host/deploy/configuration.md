@@ -140,7 +140,6 @@ To use an external `ClickHouse` cluster, set `clickhouseOperator.enabled` to `fa
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
-
 ### [PostgreSQL](https://www.postgresql.org/)
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
