@@ -73,8 +73,10 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         }
     ).then((res) => res.json())
     questions &&
+        questions.messages &&
         questions.messages.forEach((message, index) => {
             const { blocks } = message
+            if (!blocks || blocks.length <= 0) return
             const blockIds = [
                 'question_author',
                 'question_avatar',
