@@ -74,25 +74,68 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
     ).then((res) => res.json())
     questions &&
         questions.messages &&
-        questions.messages.forEach((message, index) => {
+        questions.messages.forEach(async (message, index) => {
             const { blocks } = message
-            if (!blocks || blocks.length <= 0) return
-            const blockIds = [
-                'question_author',
-                'question_avatar',
-                'question_slug',
-                'question_body',
-                'answer_author',
-                'answer_body',
-            ]
-            const question = {}
+
+            if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
+
+            const question = { replies: [] }
+            const blockIds = {
+                name_and_slug: (block) => {
+                    const split = block.text.text.split(' on ')
+                    question.name = split[0]
+                    question.slug = split[1]
+                },
+                question: (block) => {
+                    question.body = block.text.text
+                    if (block.accessory) {
+                        question.avatar = block.accessory.image_url
+                    }
+                },
+            }
+
             blocks.forEach((block) => {
-                if (blockIds.includes(block.block_id) && block.text) {
-                    question[block.block_id] =
-                        block.text.type === 'mrkdwn' ? block.text.text : block.text.text.split(': ')[1]
+                const blockId = block.block_id
+                if (blockIds[blockId] && block.text) {
+                    blockIds[blockId](block)
                 }
             })
-            if (Object.keys(question).length > 0 && blockIds.every((id) => id === 'question_avatar' || question[id])) {
+
+            if (Object.keys(question).length > 0) {
+                const replies =
+                    message.thread_ts &&
+                    (
+                        await fetch(
+                            `https://slack.com/api/conversations.replies?ts=${message.thread_ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                                },
+                            }
+                        ).then((res) => res.json())
+                    ).messages
+                if (replies) {
+                    question.replies = await Promise.all(
+                        replies.slice(1).map((reply) => {
+                            return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then((user) => {
+                                    return {
+                                        name: user.user.name,
+                                        body: reply.text,
+                                        avatar: user.user.profile.image_72,
+                                    }
+                                })
+                        })
+                    )
+                }
+
                 const node = {
                     id: createNodeId(`question-${index}`),
                     parent: null,

@@ -143,19 +143,22 @@ export const query = graphql`
                 }
             }
         }
-        questions: allQuestion(filter: { question_slug: { eq: $slug } }) {
+        questions: allQuestion(filter: { slug: { eq: $slug } }) {
             nodes {
-                question_author
-                question_avatar
-                question_slug
-                question_body
-                answer_author
-                answer_body
-                authorData {
-                    link_url
+                avatar
+                body
+                name
+                slug
+                replies {
+                    avatar
+                    body
                     name
-                    role
-                    image
+                    authorData {
+                        name
+                        role
+                        image
+                        link_url
+                    }
                 }
             }
         }
