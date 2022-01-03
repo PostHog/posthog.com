@@ -29,7 +29,7 @@ export function SEO({ title, description, image, article, canonicalUrl, noindex 
     const seo = {
         title: title || defaultTitle,
         description: description || defaultDescription,
-        image: `${process.env.DEPLOY_URL || siteUrl}${image || defaultImage}`,
+        image: `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
     }
 
