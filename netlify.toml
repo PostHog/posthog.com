@@ -1144,3 +1144,6 @@
 [[redirects]]
     from = "/docs/user-guides/sessions"
     to = "/blog/sessions-removal"
+
+[build]
+  command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer gatsby build"

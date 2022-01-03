@@ -142,7 +142,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
-        executablePath: process.env.NETLIFY_DEV ? undefined : await chromium.executablePath,
+        executablePath: await chromium.executablePath,
         headless: chromium.headless,
     })
     const page = await browser.newPage()
