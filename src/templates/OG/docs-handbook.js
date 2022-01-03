@@ -1,4 +1,4 @@
-module.exports = blog = ({ title, timeToRead, html, lastUpdated, breadcrumbs, contributors }) => `
+module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcrumbs, contributors }) => `
 <html>
   <head>
     <meta charset="utf-8" />

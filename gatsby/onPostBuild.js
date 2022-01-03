@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
+const customerTemplate = require('../src/templates/OG/customer.js')
 const { flattenMenu } = require('./utils')
 
 module.exports = exports.onPostBuild = async ({ graphql }) => {
@@ -115,6 +116,22 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     product {
                         name
                         url
+                    }
+                }
+            }
+            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        featuredImage {
+                            absolutePath
+                        }
+                        logo {
+                            absolutePath
+                        }
+                        title
                     }
                 }
             }
@@ -246,6 +263,22 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 breadcrumbs: [{ name: 'Docs' }, ...(breadcrumbs || [])],
             }),
             slug: fields.slug,
+        })
+    }
+
+    // Customers OG
+    for (const post of data.customers.nodes) {
+        const { frontmatter } = post
+        const logoType = frontmatter.logo.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
+        const featuredImage = fs.readFileSync(path.resolve(__dirname, frontmatter.featuredImage.absolutePath), {
+            encoding: 'base64',
+        })
+        const logo = fs.readFileSync(path.resolve(__dirname, frontmatter.logo.absolutePath), {
+            encoding: 'base64',
+        })
+        await createOG({
+            html: customerTemplate({ title: frontmatter.title, featuredImage, logo, logoType }),
+            slug: post.fields.slug,
         })
     }
 
