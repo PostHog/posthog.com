@@ -3,41 +3,8 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
   <head>
     <meta charset="utf-8" />
     <style>
-    @font-face {
-      font-family: 'MatterVF';
-  
-      /* PRODUCTION */
-      src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
-              format('woff2 supports variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
-              format('woff supports variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations');
-  
-      font-style: normal;
-      font-weight: 300 900;
-      font-display: swap;
-  }
-  
-  @font-face {
-      font-family: 'MatterVF';
-  
-      /* PRODUCTION */
-      src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
-              format('woff2 supports variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
-              format('woff2-variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
-              format('woff supports variations'),
-          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
-              format('woff-variations');
-  
-      font-style: italic;
-      font-weight: 300 900;
-      font-display: swap;
-  }
       body {
-        font-family: "MatterVF", "Helvetica", "sans-serif";
+        font-family: "Matter SQ", "sans-serif";
         overflow: hidden;
         color: black;
         background-color: #eeefe9;

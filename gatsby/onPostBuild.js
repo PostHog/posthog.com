@@ -5,6 +5,7 @@ const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
 const { flattenMenu } = require('./utils')
+const fetch = require('node-fetch')
 
 module.exports = exports.onPostBuild = async ({ graphql }) => {
     const { data } = await graphql(`
@@ -140,6 +141,28 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)
+    const dir2 = path.resolve(__dirname, '../fonts')
+    if (!fs.existsSync(dir2)) fs.mkdirSync(dir2)
+
+    const font = await fetch(
+        'https://raw.githubusercontent.com/smallbrownbike/miniature-pancake/main/MatterVF-Regular.otf',
+        {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+            },
+        }
+    )
+    await new Promise((resolve, reject) => {
+        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.otf'))
+        font.body.pipe(fileStream)
+        font.body.on('error', (err) => {
+            reject(err)
+        })
+        fileStream.on('finish', function () {
+            resolve()
+        })
+    })
+    await chromium.font(path.resolve(__dirname, '../fonts/matter.otf'))
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
         executablePath: await chromium.executablePath,
