@@ -17,7 +17,7 @@ module.exports = customer = ({ logo, featuredImage, title, logoType }) => `
       <div
         style="
           padding: 53px 63px;
-          border-bottom: 4px dashed #a9a9a980;
+          border-bottom: 2px dashed #a9a9a980;
           display: flex;
           align-items: center;
         "

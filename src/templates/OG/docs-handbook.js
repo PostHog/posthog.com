@@ -3,8 +3,41 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
   <head>
     <meta charset="utf-8" />
     <style>
+    @font-face {
+      font-family: 'MatterVF';
+  
+      /* PRODUCTION */
+      src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+              format('woff2 supports variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+              format('woff supports variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations');
+  
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+  }
+  
+  @font-face {
+      font-family: 'MatterVF';
+  
+      /* PRODUCTION */
+      src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+              format('woff2 supports variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+              format('woff2-variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+              format('woff supports variations'),
+          url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+              format('woff-variations');
+  
+      font-style: italic;
+      font-weight: 300 900;
+      font-display: swap;
+  }
       body {
-        font-family: "Helvetica", "sans-serif";
+        font-family: "MatterVF", "Helvetica", "sans-serif";
         overflow: hidden;
         color: black;
         background-color: #eeefe9;
@@ -53,7 +86,7 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
 
   <body>
     <section>
-      <div style="padding: 21px 63px 25px; border-bottom: 4px dashed #a9a9a980">
+      <div style="padding: 21px 63px 25px; border-bottom: 2px dashed #a9a9a980">
         <svg
           width="251"
           height="48"
@@ -143,7 +176,7 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
           style="
             flex-grow: 1;
             padding: 30px 30px 30px 63px;
-            border-right: 4px dashed #a9a9a980;
+            border-right: 2px dashed #a9a9a980;
             position: relative;
           "
         >
@@ -229,6 +262,7 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
                     height: 60px;
                     border-radius: 100%;
                     overflow: hidden;
+                    flex-shrink: 0;
                   "
                 >
                   <img
