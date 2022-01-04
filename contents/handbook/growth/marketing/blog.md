@@ -61,7 +61,8 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
-- Add the author of the post as an array (not a string) ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).)
+- Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
+- Add a keywords field to the frontmatter. Keywords should be added as an array, not a string. This enables [our internal linker](https://github.com/PostHog/internallinker) to automatically link internal pages with similar keywords.
 - Assign the post a category using `categories` in the frontmatter section. The available categories are **General**, **Company & culture**, **Engineering**, **Release notes**, **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
 
   ```
@@ -77,6 +78,22 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Add a meta description using `description` in the frontmatter section (optional)
 - Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. (This gives Team Design a heads up on how much time we have to produce a post image.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
+
+Fully completed and correct frontmatter should look like this: 
+
+ ```
+ ---
+date: 2021-06-10
+title: PostHog raises $15 million Series B for open source product analytics
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+keywords: ["fundraise", "fundraising"]
+featuredImage: ../images/blog/series-b/series-b-baby.png
+author: ["joe-martin"]
+---
+ ```
 
 ### Distribution
 
