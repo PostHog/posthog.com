@@ -144,8 +144,21 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
             flex-grow: 1;
             padding: 30px 30px 30px 63px;
             border-right: 4px dashed #a9a9a980;
+            position: relative;
           "
         >
+        <div style="
+              position: fixed;
+              left: 0;
+              bottom: 0;
+              height: 250px;
+              width: 856px;
+              background: linear-gradient(
+                          180deg,
+                          #eeefe900 0%,
+                          #eeefe9 100%
+                        );
+              "></div>
           <div style="font-size: 28px">
             ${breadcrumbs
                 .map((crumb) => {
