@@ -3,7 +3,7 @@ module.exports = blog = ({ title, authorData, image }) => `<html>
   <meta charset="utf-8" />
   <style>
     body {
-      font-family: "Arial", "Helvetica", "sans-serif";
+      font-family: "Helvetica", "sans-serif";
       overflow: hidden;
       color: white;
     }

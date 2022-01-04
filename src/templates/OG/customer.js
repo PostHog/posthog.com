@@ -4,7 +4,7 @@ module.exports = customer = ({ logo, featuredImage, title, logoType }) => `
     <meta charset="utf-8" />
     <style>
       body {
-        font-family: "Arial", "Helvetica", "sans-serif";
+        font-family: "Helvetica", "sans-serif";
         overflow: hidden;
         color: black;
         background-color: #eeefe9;
