@@ -49,7 +49,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `MATERIALIZE_COLUMNS_SCHEDULE_CRON` | How frequently to run clickhouse column materialization. | `0 5 * * SAT`
 | `MULTI_ORG_ENABLED` | Allows creating multiple organizations in your instance (multi-tenancy). **Requires a premium license.** | `False`
 | `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
-| `OPT_OUT_CAPTURING`        | Disable sending product usage data to posthog. | `False`
+| `OPT_OUT_CAPTURING`        | Disable sending product usage data to PostHog. | `False`
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_USER`| Database user name. | `postgres` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
