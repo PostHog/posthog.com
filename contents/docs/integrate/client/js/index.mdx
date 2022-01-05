@@ -285,6 +285,12 @@ By default we store all this information in a `cookie`, however due to the size 
 -   `cookie`. Everything is stored in a cookie.
 -   `memory`. Stores in page memory, which means data is only persisted for the duration of the page view.
 
+<blockquote class="warning-note">
+    Warning: Please be aware that localStorage can't be used across subdomains. If you have multiple sites on the same
+    domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each
+    subdomain.
+</blockquote>
+
 If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only, or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. **Warning:** Remember to call `posthog.identify` every time your app loads or every page refresh will be treated as a different user.
 
 ## Config
