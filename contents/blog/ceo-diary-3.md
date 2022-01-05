@@ -22,7 +22,7 @@ The sequence of events:
 
 * Her left iris became darker than her right one over the course of a few days.
 * We showed an optician a day or two later at a regular eye appointment we already had scheduled. We were referred to a specialist, but with more than a month of waiting.
-* Over the next couple of days her pupil got dilated. We were told to go to A&E immediately. 
+* Over the next couple of days her pupysclihdlv;nil got dilated. We were told to go to A&E immediately. 
 * Within two days we had a diagnosis of cancer in both her eyes. Eyes with retinoblastoma are graded from A (least advanced) to E (most advanced) for the disease - one of her eyes was an E (certain removal), the other was a D. She had a range of other symptoms and raised lymph nodes in her head and neck, which caused concern that it had spread. That has only happened once in the last eight years in the UK.
 * Within a further two weeks, she'd had five general anaesthetics for a range of tests, including surgery to remove one of eye and fit a [Hickman line](https://en.wikipedia.org/wiki/Hickman_line) for chemotherapy. Each time a toddler has a general anaesthetic, they cannot eat for up to six hours beforehand. The appointments run around two to three hours late on average, and we had a large amount of travel. All of this, combined with uncertainty, was the hardest part. We also moved house, which was a good thing - it was a nice upgrade, and we had lots of help from family.
 * A month after the diagnosis, we've had final confirmation that it hasn't spread outside her eyes. Chemo has started to treat her seeing eye and we're coming to the end of the first week of that. Hopefully the tumours will respond to the chemo - there is a 66% chance of saving her seeing eye.
