@@ -1,10 +1,19 @@
-module.exports = customer = ({ logo, featuredImage, title, logoType }) => `
+module.exports = customer = ({ logo, featuredImage, title, logoType, font }) => `
 <html>
   <head>
     <meta charset="utf-8" />
     <style>
+    @font-face {
+        font-family: 'MatterVF';    
+        src: url(data:application/x-font-woff;charset=utf-8;base64,${font})
+                format('woff supports variations'),
+                url(data:application/x-font-woff;charset=utf-8;base64,${font}) format('woff-variations');
+        font-style: normal;
+        font-weight: 300 900;
+        font-display: swap;
+    }
       body {
-        font-family: "Helvetica", "sans-serif";
+        font-family: "MatterVF", "sans-serif";
         overflow: hidden;
         color: black;
         background-color: #eeefe9;

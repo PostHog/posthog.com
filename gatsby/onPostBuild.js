@@ -141,28 +141,28 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)
-    const dir2 = path.resolve(__dirname, '../fonts')
-    if (!fs.existsSync(dir2)) fs.mkdirSync(dir2)
-
-    const font = await fetch(
-        'https://raw.githubusercontent.com/smallbrownbike/miniature-pancake/main/MatterVF-Regular.otf',
-        {
-            headers: {
-                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-            },
-        }
-    )
+    const fontDir = path.resolve(__dirname, '../fonts')
+    if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
+    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+        headers: {
+            Origin: 'https://posthog.com',
+        },
+    })
     await new Promise((resolve, reject) => {
-        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.otf'))
-        font.body.pipe(fileStream)
-        font.body.on('error', (err) => {
+        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.woff'))
+        res.body.pipe(fileStream)
+        res.body.on('error', (err) => {
             reject(err)
         })
         fileStream.on('finish', function () {
             resolve()
         })
     })
-    await chromium.font(path.resolve(__dirname, '../fonts/matter.otf'))
+
+    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
+        encoding: 'base64',
+    })
+
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
         executablePath: await chromium.executablePath,
@@ -195,7 +195,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             encoding: 'base64',
         })
         await createOG({
-            html: blogTemplate({ title, authorData: authorData && authorData[0], image }),
+            html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
             slug: post.fields.slug,
         })
     }
@@ -236,6 +236,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         })
         await createOG({
             html: docsHandbookTemplate({
+                font,
                 title,
                 timeToRead,
                 html,
@@ -278,6 +279,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         })
         await createOG({
             html: docsHandbookTemplate({
+                font,
                 title,
                 timeToRead,
                 html,
@@ -300,7 +302,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             encoding: 'base64',
         })
         await createOG({
-            html: customerTemplate({ title: frontmatter.title, featuredImage, logo, logoType }),
+            html: customerTemplate({ title: frontmatter.title, featuredImage, logo, logoType, font }),
             slug: post.fields.slug,
         })
     }
