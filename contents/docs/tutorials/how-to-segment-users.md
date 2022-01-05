@@ -2,14 +2,13 @@
 title: How to segment users
 sidebar: Docs
 showTitle: true
-topics: ['segment', 'segmentation', 'cohorts']
-featuredImage: ../../images/tutorials/banners/how-to-segment-users-banner.png
+featuredImage: ../../images/tutorials/banners/segment.png
 featuredTutorial: true
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕
 
-![segmentation](../../images/tutorials/banners/how-to-segment-users-banner.png)
+![segmentation](../../images/tutorials/segmentation/segment-posthog-banner.png)
 
 In PostHog you can easily segment users into any of the four main segmentation categories. This is helpful for exploring user behaviour in greater detail and can be essential for activities such as product personalization or roadmap prioritization.
 
@@ -57,7 +56,7 @@ What if we want to see if there are countries around the world where users look 
 
 ### Step 1: Enable the GeoIP plugin
 
-If you haven’t done so already, click 'Plugins' and enable [the GeoIP plugin](https://posthog.com/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
+If you haven’t done so already, click 'Plugin' and enable [the GeoIP plugin](https://posthog.com/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
 
 ![segmentation](../../images/tutorials/segmentation/segment-posthog-3.png)
 
@@ -113,7 +112,7 @@ Click the export button to download the details of this cohort. You can then imp
 
 What if we have a website that we designed for desktop and we want to understand if it's worth optimizing for mobile? To do this, we could use a technographic segmentation to  see what device users access the website on.
 
-### Step 1: Open the Trends tool and look at page views
+### Step 1: Open the trends tool and look at page views
 
 As before, open up 'New Insight'. We can then use the default view in the 'Trends' tool, which examines the pageview event.
 
