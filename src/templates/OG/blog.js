@@ -50,10 +50,10 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
           background: rgb(0, 0, 0);
           background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 0%,
             rgba(0, 0, 0, 0) 35%,
             rgba(0, 0, 0, 0) 25%,
-            rgba(0, 0, 0, 0.4) 100%
+            rgba(0, 0, 0, 0.5) 100%
           );
         "
       ></div>
@@ -97,7 +97,7 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
               />
             </div>
             <div>
-              <p style="font-size: 36px; margin: 0; font-weight: 700px">
+              <p style="font-size: 36px; margin: 0; font-weight: 700">
                 ${authorData.name}
               </p>
               <p
