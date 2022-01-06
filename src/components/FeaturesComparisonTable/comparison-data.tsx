@@ -65,7 +65,7 @@ const featuresComparisonData: FeatureComparisonData[] = [
         heap: false,
     },
     {
-        title: 'Session Recording',
+        title: 'Recordings',
         posthog: true,
         amplitude: false,
         mixpanel: false,
