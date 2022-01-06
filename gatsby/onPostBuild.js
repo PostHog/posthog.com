@@ -30,32 +30,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                    }
-                    parent {
-                        ... on File {
-                            fields {
-                                lastUpdated: gitLogLatestDate(formatString: "MMM D, YYYY")
-                            }
-                        }
-                    }
-                    timeToRead
-                    excerpt(pruneLength: 500)
-                    contributors {
-                        username
-                        avatar {
-                            absolutePath
-                        }
-                    }
-                }
-            }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -201,12 +176,11 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     }
 
     const handbookMenu = data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
     const docsMenu = data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
+    const docsHandbookMenus = flattenMenu([...handbookMenu, ...docsMenu])
 
-    // Handbook OG
-    for (const post of data.handbook.nodes) {
+    // Docs and Handbook OG
+    for (const post of data.docsHandbook.nodes) {
         const { title } = post.frontmatter
         const {
             timeToRead,
@@ -229,7 +203,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             }
         })
         let breadcrumbs = null
-        handbookMenuFlattened.some((item) => {
+        docsHandbookMenus.some((item) => {
             if (item.url === fields.slug) {
                 breadcrumbs = item.breadcrumb
                 return true
@@ -243,51 +217,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 excerpt,
                 lastUpdated,
                 contributors,
-                breadcrumbs: [{ name: 'Handbook' }, ...(breadcrumbs || [])],
-            }),
-            slug: fields.slug,
-        })
-    }
-
-    // Docs OG
-    for (const post of data.docs.nodes) {
-        const { title } = post.frontmatter
-        const {
-            timeToRead,
-            excerpt,
-            fields,
-            parent: {
-                fields: { lastUpdated },
-            },
-        } = post
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
-        const contributors = post.contributors.map((contributor) => {
-            const { avatar, username } = contributor
-            return {
-                username,
-                avatar:
-                    avatar.absolutePath &&
-                    fs.readFileSync(path.resolve(__dirname, avatar.absolutePath), {
-                        encoding: 'base64',
-                    }),
-            }
-        })
-        let breadcrumbs = null
-        docsMenuFlattened.some((item) => {
-            if (item.url === fields.slug) {
-                breadcrumbs = item.breadcrumb
-                return true
-            }
-        })
-        await createOG({
-            html: docsHandbookTemplate({
-                font,
-                title,
-                timeToRead,
-                excerpt,
-                lastUpdated,
-                contributors,
-                breadcrumbs: [{ name: 'Docs' }, ...(breadcrumbs || [])],
+                breadcrumbs: [{ name: fields.slug.startsWith('/docs') ? 'Docs' : 'Handbook' }, ...(breadcrumbs || [])],
             }),
             slug: fields.slug,
         })
