@@ -30,7 +30,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            handbook: allMarkdownRemark(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
+            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -46,7 +46,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         }
                     }
                     timeToRead
-                    html
+                    excerpt(pruneLength: 500)
                     contributors {
                         username
                         avatar {
@@ -55,7 +55,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            docs: allMarkdownRemark(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -71,7 +71,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         }
                     }
                     timeToRead
-                    html
+                    excerpt(pruneLength: 500)
                     contributors {
                         username
                         avatar {
@@ -210,12 +210,13 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const { title } = post.frontmatter
         const {
             timeToRead,
-            html,
+            excerpt,
             fields,
             parent: {
                 fields: { lastUpdated },
             },
         } = post
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
         const contributors = post.contributors.map((contributor) => {
             const { avatar, username } = contributor
             return {
@@ -239,7 +240,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 font,
                 title,
                 timeToRead,
-                html,
+                excerpt,
                 lastUpdated,
                 contributors,
                 breadcrumbs: [{ name: 'Handbook' }, ...(breadcrumbs || [])],
@@ -253,12 +254,13 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const { title } = post.frontmatter
         const {
             timeToRead,
-            html,
+            excerpt,
             fields,
             parent: {
                 fields: { lastUpdated },
             },
         } = post
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
         const contributors = post.contributors.map((contributor) => {
             const { avatar, username } = contributor
             return {
@@ -282,7 +284,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 font,
                 title,
                 timeToRead,
-                html,
+                excerpt,
                 lastUpdated,
                 contributors,
                 breadcrumbs: [{ name: 'Docs' }, ...(breadcrumbs || [])],

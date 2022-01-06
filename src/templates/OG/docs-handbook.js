@@ -1,4 +1,4 @@
-module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcrumbs, contributors, font }) => `
+module.exports = docsHandbook = ({ title, timeToRead, excerpt, lastUpdated, breadcrumbs, contributors, font }) => `
 <html>
   <head>
     <meta charset="utf-8" />
@@ -185,7 +185,7 @@ module.exports = docsHandbook = ({ title, timeToRead, html, lastUpdated, breadcr
             ${timeToRead} min read
           </h3>
           <div class="content">
-            ${html}
+            <p>${excerpt}</p>
           </div>
         </div>
         <div style="padding: 30px 40px; flex-shrink: 0; width: 260px">
