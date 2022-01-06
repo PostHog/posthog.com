@@ -1,37 +1,4 @@
-// https://api.exchangeratesapi.io/2021-01-01?base=USD
-
-export const currencyData: Record<string, number> = {
-    CAD: 1.274,
-    HKD: 7.753,
-    ISK: 127.21,
-    PHP: 48.183,
-    DKK: 6.064,
-    HUF: 296.545,
-    CZK: 21.385,
-    GBP: 0.733,
-    RON: 3.967,
-    SEK: 8.177,
-    IDR: 14050.004,
-    INR: 73.067,
-    BRL: 5.194,
-    RUB: 74.539,
-    HRK: 6.154,
-    JPY: 103.08,
-    THB: 29.93,
-    CHF: 0.88,
-    EUR: 0.815,
-    MYR: 4.021,
-    BGN: 1.594,
-    TRY: 7.427,
-    CNY: 6.538,
-    NOK: 8.533,
-    NZD: 1.384,
-    ZAR: 14.687,
-    USD: 1,
-    MXN: 19.897,
-    SGD: 1.322,
-    AUD: 1.295,
-    ILS: 3.215,
-    KRW: 1088.746,
-    PLN: 3.716,
-}
+// https://api.exchangeratesapi.io/v1/2022-01-01
+    ? access_key = 1f842ade23438d3909309adf1a4158a8
+    & base = USD
+    & symbols = CAD, HKD, ISK, PHP, DKK, HUF, CZK, GBP, RON, SEK, IDR, INR, BRL, RUB, HRK, JPY, THB, CHF, EUR, MYR, BGN, TRY, CNY, NOK, NZD, ZAR, USD
