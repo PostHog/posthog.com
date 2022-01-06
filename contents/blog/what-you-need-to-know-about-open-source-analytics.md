@@ -1,5 +1,5 @@
 ---
-date: 2022-01-01
+date: 2022-01-10
 title: What you need to know about open-source analytics
 rootPage: /blog
 sidebar: Blog
