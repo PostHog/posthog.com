@@ -3,7 +3,7 @@
         "handle": "james-hawkins",
         "name": "James Hawkins",
         "role": "Co-founder/CEO of PostHog",
-        "image": "https://posthog.imgix.net/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png?w=90",
+        "image": "../images/team/Lottie.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/james406"
     },
