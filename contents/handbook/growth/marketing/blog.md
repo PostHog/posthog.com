@@ -17,11 +17,11 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
 - 80% SEO-optimized content, written by the Marketing team. The purpose of these is to build our domain authority and generate a sustained improvement in posthog.com's keyword rankings. 
 - 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News. 
 
-Joe is currently the main person responsible for our content output, but we will soon onboard a Content Marketer to lead this function.
+Andy is currently the main person responsible for our content output.
 
 We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publicly available as it is information that could be beneficial to our competitors. 
 
-If you have any good blog post ideas join our [#ideas-for-blog-post Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y)!
+If you have any good blog post ideas join our [#ideas-for-blog-post team Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y). Community members can suggest them to Andy Vandervell directly or via [the User slack channel](/slack)!
 
 ## Content categories
 
@@ -92,6 +92,7 @@ hideAnchor: true
 keywords: ["fundraise", "fundraising"]
 featuredImage: ../images/blog/series-b/series-b-baby.png
 author: ["joe-martin"]
+categories: ["General"]
 ---
  ```
 
