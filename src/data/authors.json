@@ -126,5 +126,13 @@
         "image": "https://avatars.githubusercontent.com/u/70321811?v=4",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlescook1/"
+    },
+    {
+        "handle": "vivek-sonar",
+        "name": "Vivek Sonar",
+        "role": "Contributor",
+        "image": "/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/vivek-sonar-266b2417b/"
     }
 ]
