@@ -9,6 +9,7 @@ author: [marcus-hyett]
 keywords: ["segment", "user segmentation", "segmentation"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
+categories: ["General"]
 ---
 
 User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights. 
