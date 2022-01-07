@@ -39,7 +39,7 @@ Depending on how your app/website is built, recordings can take a lot of disk sp
 
 ### PostHog Cloud & Clickhouse Self-hosted
 
-If you're running a Clickhouse instance, recordings are **automatically deleted after 3 weeks**. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. You can set your own retention policy by executing a query like this on your Clickhouse instance.
+By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by executing a query like this on your Clickhouse instance.
 
 ```
 ALTER TABLE session_recording_events TTL toDate(created_at) + INTERVAL 6 WEEK
