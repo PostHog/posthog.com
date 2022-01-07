@@ -82,6 +82,21 @@ exports.handler = async (e) => {
                             },
                         },
                     },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Edit',
+                            emoji: true,
+                        },
+                        value: JSON.stringify({
+                            question: body.question,
+                            name: body.name,
+                            slug: body.slug,
+                            email: body.email,
+                        }),
+                        action_id: 'edit-question-button',
+                    },
                 ],
             },
         ],
