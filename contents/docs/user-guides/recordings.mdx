@@ -47,7 +47,7 @@ ALTER TABLE session_recording_events TTL toDate(created_at) + INTERVAL 6 WEEK
 
 ### Legacy Postgres Self-hosted
 
-Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the project settings page (/project/settings#recordings).
+Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/project/settings#recordings).
 
 ### Preserving recordings
 
