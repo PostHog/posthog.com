@@ -37,7 +37,7 @@
 
     This can become useful in case your need to reprovision a pod/statefulset but you don't want to lose the underlying data
 
-    To verify which `reclaimPolicy` is your default storage class using you can run:
+    To verify which `reclaimPolicy` your default storage class is using you can run:
 
     ```shell
     kubectl get storageclass -o json | jq '.items[].reclaimPolicy'
