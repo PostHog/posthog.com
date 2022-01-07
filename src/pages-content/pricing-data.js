@@ -75,7 +75,12 @@ const faqs = [
     {
         q: 'How long do you retain data?',
         a:
-            'Data in PostHog Cloud is retained for 7 years - after 1 year, data is moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+            'Data (except recordings, see below) in PostHog Cloud is retained for 7 years - after 1 year, data may be moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+    },
+    {
+        q: 'How long do you retain recordings?',
+        a:
+            'Recordings are kept on Clickhouse-based installations for 3 weeks. If you are self-hosting, you can change this setting (see Recordings docs). If you are on legacy Postgres recordings are kept indefinitely unless you set a custom retention policy.',
     },
     {
         q: 'What happens after the data retention period elapses?',
