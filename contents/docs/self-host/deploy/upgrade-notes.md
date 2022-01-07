@@ -108,3 +108,10 @@ As result, we have deprecated the following Helm values:
 - `beat.affinity`
 
 If you didn’t make any customization to those, there’s nothing you need to do. Otherwise, please rename your customized values to be in the `workers.` scope.
+
+### Upgrading from 8.x.x
+
+9.0.0 changes the supported Kubernetes version to >=1.20 <= 1.23:
+
+- drops support for Kubernetes 1.19 as it has reached end of life on 2021-10-28
+- adds support for Kubernetes 1.23 released on 2021-12-07
