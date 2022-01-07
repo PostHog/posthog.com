@@ -2,13 +2,11 @@
 title: How to segment users
 sidebar: Docs
 showTitle: true
-featuredImage: ../../images/tutorials/banners/how-to-segment-users-banner.png
+featuredImage: ../images/tutorials/banners/how-to-segment-users-banner.png
 featuredTutorial: true
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕
-
-![segmentation](../../images/tutorials/banners/how-to-segment-users-banner.png)
 
 In PostHog you can easily segment users into any of the four main segmentation categories. This is helpful for exploring user behaviour in greater detail and can be essential for activities such as product personalization or roadmap prioritization.
 
@@ -40,13 +38,13 @@ posthog.identify('Alice', {'$set': {'age-group': '20 - 30'}})
 
 Next, go to 'New Insight' and select 'Trends' within PostHog, then select the event which represents purchases (or the event you wish to focus on):
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-1.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-1.png)
 
 ### Step 3: Breakdown by user age
 
 Go to the 'Breakdown by' configuration and select 'Age Group' (or the name of your property) from the person properties list. Set the visualization to 'Value' to get a clear ranking of the purchases by age group.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-2.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-2.png)
 
 In this example you can instantly see that most purchases are coming from users in the 30-40 demographic user segment. You can click on each bar to inspect individual users in this segment more closely. 
 
@@ -58,13 +56,13 @@ What if we want to see if there are countries around the world where users look 
 
 If you haven’t done so already, click 'Plugins' and enable [the GeoIP plugin](/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-3.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-3.png)
 
 ### Step 2: Open the Trends tool and analyze purchases and views
 
 Click 'New Insight' and select 'Trends'. We want to know the conversion rate between viewing and purchasing a product, so we need to add two events to this graph: one for when a product is viewed and one for when it is purchased. 
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-4.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-4.png)
 
 Next, we calculate the conversion rate. We can use the 'Formula' tool to do this by simplying dividing purchases (B) by views (A). 
 
@@ -72,7 +70,7 @@ Next, we calculate the conversion rate. We can use the 'Formula' tool to do this
 
 Using 'Breakdown by', select 'Country Name' from the user propertie list. Now we can see the average conversion rate per country.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-5.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-5.png)
 
 In this example it seems there is a solid conversion rate in the US, but no conversions at all in Ireland. We may want to invest in supporting the local currency (Euros) in Ireland to get more purchases in this user segment. 
 
@@ -90,7 +88,7 @@ We can use the 'Breakdown by' tool to identify individual users by selecting a u
 
 Switch the visualization to 'Value'. Now we can see which users have made a purchase and how many purchases each user has made. This helps us define exactly what we should consider a power user to be compared to other users.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-6.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-6.png)
 
 ### Step 2: Create a cohort for power buyers
 
@@ -98,7 +96,7 @@ We have a group of really active users who make more than 20 purchases per month
 
 It would be valuable to automatically segment any users who fit this definition of a power user, which we can do using the 'Cohorts' tool. Simply create a matching criteria which fits the definition; in this case anyone who purchases more than 20 times per month. 
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-7.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-7.png)
 
 ### Step 3: Download the cohort 
 
@@ -106,7 +104,7 @@ Now that we have our segment identified and created as a cohort, we want to down
 
 Click the export button to download the details of this cohort. You can then import this into your marketing tool of choice to send emails and keep the these power users engaged with your product.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-8.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-8.png)
 
 ## Technographic segmentation
 
@@ -116,7 +114,7 @@ What if we have a website that we designed for desktop and we want to understand
 
 As before, open up 'New Insight'. We can then use the default view in the 'Trends' tool, which examines the pageview event.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-9.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-9.png)
 
 ### Step 2: Break down by browser
 
@@ -124,6 +122,6 @@ Next, we can use the 'Breakdown by' tool to breakdown using the 'Browser' proper
 
 We can see the different browsers that are used. Some for iOS and Android represent mobile browsers, while others are desktop browsers like Chrome and Microsoft Edge.
 
-![segmentation](../../images/tutorials/segmentation/segment-posthog-10.png)
+![segmentation](../images/tutorials/segmentation/segment-posthog-10.png)
 
 Nearly all usage is coming from people on desktop devices so in our example it doesn’t seem worthwhile investing in a mobile optimized site for this segment right now.

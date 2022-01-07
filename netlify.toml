@@ -1144,3 +1144,8 @@
 [[redirects]]
     from = "/docs/user-guides/sessions"
     to = "/blog/sessions-removal"
+
+# Added: 2022-01-07
+[[redirects]]
+    from = "/docs/tutorials/how-to-segment-users"
+    to = "/tutorials/how-to-segment-users"
