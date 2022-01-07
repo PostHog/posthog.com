@@ -56,7 +56,7 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 - I’d love it if I’m able to find answers to questions by myself and can get things working without needing to ask for help.
 - I'd love it if I can test the product out or see it demonstrated at a scale similar to my needs.
 
-## Persona: Pam Product
+## Persona: Pat Product
 
 ![](../../../images/handbook/pat-persona.png)
 
@@ -65,7 +65,7 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 | Technical or Senior Product Manager, Chief or Head of Product, Product Engineer, Product Lead, Product Manager | Initiator, Influencer, Decision maker, User |
 
 ### Persona story
-Pat is a Senior Product Manager at an early-stage SaaS company making productivity software. Pat is reasonably technical — he can get by with SQL, for example — but not a developer by any means. Pat just knows enough to work well with them!
+Pat is a Senior Product Manager at an early-stage SaaS company making productivity software. Pat is reasonably technical — they can get by with SQL, for example — but not a developer by any means. Pat just knows enough to work well with them!
 
 28 years old, Pat is career-minded and active on LinkedIn, as well as Twitter and other platforms or private communities for knowledge sharing. Pat also likes to discover new products through ProductHunt or Kickstarter, among others. 
 
