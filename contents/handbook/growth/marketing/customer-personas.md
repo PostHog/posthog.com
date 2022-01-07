@@ -69,7 +69,7 @@ Pat is a Senior Product Manager at an early-stage SaaS company making productivi
 
 28 years old, Pat is career-minded and active on LinkedIn, as well as Twitter and other platforms or private communities for knowledge sharing. Pat also likes to discover new products through ProductHunt or Kickstarter, among others. 
 
-Pat started looking for a new analytics tool after becoming frustrated at using Google Analytics for product decisions and started by asking for recommendations from colleagues before widening the search to Google and review sites such as G2. In addition to PostHog, Pat also looked at Amplitude and Heap.io, trying their free trial options. Some other tools Pat required queries in SQL, which Pat ruled out in favour of no-code options.
+Pat began looking for a new analytics tool after becoming frustrated at using Google Analytics for product decisions and started by asking for recommendations from colleagues before widening the search to Google and review sites such as G2. In addition to PostHog, Pat also looked at Amplitude and Heap.io, trying their free trial options. Some other tools Pat required queries in SQL, which Pat ruled out in favour of no-code options.
 
 Pricing was a bit of an issue for some tools Pat looked at, especially as some of them were lacking particularly interesting tools, such as session recording. This, combined with the option to avoid compliance and data challenges by self-hosting, tipped Pat into choosing PostHog. Scalability wasn’t something Pat really thought about, but feature flags seemed exciting from an experimentation point of view. 
 
