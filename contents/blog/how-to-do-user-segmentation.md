@@ -20,7 +20,7 @@ User segmentation is the process of looking at your userbase and breaking it dow
 
 For example, a global ecommerce company such as Amazon might have user segments such as: 
 
-- Users in the US, 
+- Users in the US 
 - Users who subscribe to Amazon Prime
 - Users who use the mobile app
 
