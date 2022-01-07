@@ -9,7 +9,7 @@ showTitle: true
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
-## Installation 
+## Installation
 
 ```bash
 pip install posthog
@@ -30,18 +30,20 @@ posthog.personal_api_key = '<ph_personal_api_key>'
 posthog.host = '<ph_instance_address>'
 ```
 
-You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs. 
+You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
 
 > **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
 You can find your keys in the 'Project Settings' page in PostHog.
 
 To debug, you can toggle debug mode on:
+
 ```python
 posthog.debug = True
 ```
 
 And to make sure no calls happen during your tests, you can disable them, like so:
+
 ```python
 if settings.TEST:
     posthog.disabled = True
@@ -54,15 +56,19 @@ if settings.TEST:
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
 
 A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+-   `distinct id` which uniquely identifies your user
+-   `event name` to specify the event
+
+*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
-- `properties`, which is a dictionary with any information you'd like to add
-- `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
+
+-   `properties`, which is a dictionary with any information you'd like to add
+-   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 
 For example:
+
 ```python
 posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': 'romcom'})
 ```
@@ -83,8 +89,8 @@ To set properties on your users via an event, you can leverage the event propert
 
 ```python
 posthog.capture(
-    'distinct id', 
-    event='movie played', 
+    'distinct id',
+    event='movie played',
     properties={ '$set': { 'userProperty': 'value' } }
 )
 ```
@@ -99,8 +105,8 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 ```python
 posthog.capture(
-    'distinct id', 
-    event='movie played', 
+    'distinct id',
+    event='movie played',
     properties={ '$set_once': { 'userProperty': 'value' } }
 )
 ```
@@ -113,14 +119,16 @@ posthog.capture(
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
 like segment users by these properties.
 
 An `identify` call requires:
-- `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key:value pairs 
+
+-   `distinct id` which uniquely identifies your user
+-   `properties` with a dict with any key:value pairs
 
 For example:
+
 ```python
 posthog.identify('distinct id', {
     'email': 'dwayne@gmail.com',
@@ -141,10 +149,12 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
 
 An `alias` call requires:
-- `previous distinct id` the unique ID of the user before
-- `distinct id` the current unique id
+
+-   `previous distinct id` the unique ID of the user before
+-   `distinct id` the current unique id
 
 For example:
+
 ```python
 posthog.alias('anonymous session id', 'distinct id')
 ```
@@ -173,7 +183,7 @@ def homepage(request):
     return render_template(template, request=request)
 ```
 
-> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence). 
+> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
 
 ### Sending page views
 
@@ -188,6 +198,7 @@ posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.co
 For Django, you can do the initialisation of the key in the AppConfig, so that it's available everywhere.
 
 in `yourapp/apps.py`
+
 ```python
 from django.apps import AppConfig
 import posthog
@@ -200,6 +211,7 @@ class YourAppConfig(AppConfig):
 ```
 
 Then, anywhere else in your app you can do:
+
 ```python
 import posthog
 
@@ -212,7 +224,7 @@ def purchase(request):
 
 ## Sentry
 
-When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles. 
+When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
 
 ### Example implementation
 
@@ -224,7 +236,6 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from posthog.sentry.posthog_integration import PostHogIntegration
 
 PostHogIntegration.organization = "orgname"
-PostHogIntegration.project_id = "123456"
 
 sentry_sdk.init(
     dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
