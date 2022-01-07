@@ -80,6 +80,13 @@ Don't worry! We only need to run a few commands in the terminal.
 
 ### Running posthog.com locally
 
+If you're using an Apple Silicon Mac (M1) then you'll need to run the following commands before using yarn:
+
+```bash
+rm -rf ./node_modules
+brew install vips
+```
+
 Type the following into the terminal and press return:
 
 ```bash
