@@ -20,8 +20,8 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        Host your own
-                        <br /> product analytics suite
+                        The product analytics suite
+                        <br /> <span className="text-red">you can host yourself</span>
                     </h1>
                     <h2 className={heading('sm', 'primary', 'my-6', 'max-w-xl', 'mx-auto')}>
                         With our open source platform, customer data never has to leave your infrastructure

@@ -366,6 +366,10 @@
                     "url": "/handbook/growth/marketing/product-announcements"
                 },
                 {
+                    "name": "HostHogs (Running Events)",
+                    "url": "/handbook/growth/marketing/hosthogs"
+                },
+                {
                     "name": "Acquisition channels",
                     "url": "",
                     "children": [
@@ -464,14 +468,6 @@
                     "url": "/docs/self-host/architecture"
                 },
                 {
-                    "name": "Postgres vs ClickHouse",
-                    "url": "/docs/self-host/postgres-vs-clickhouse"
-                },
-                {
-                    "name": "Migrate from Postgres to ClickHouse",
-                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                },
-                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
@@ -506,6 +502,10 @@
                         {
                             "name": "Upgrade Notes",
                             "url": "/docs/self-host/deploy/upgrade-notes"
+                        },
+                        {
+                            "name": "Migrate from Postgres to ClickHouse",
+                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
                         },
                         {
                             "name": "Hosting Costs",
@@ -589,7 +589,6 @@
                         },
                         {
                             "name": "Postgresql",
-                            "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
                                     "name": "Resize disk",

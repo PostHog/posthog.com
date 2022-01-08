@@ -1,7 +1,7 @@
 #### Cluster requirements
 * Kubernetes version >=1.19 <= 1.22
 * Ensure your cluster has enough resources to run PostHog (we suggest a total minimum of 4 vcpu & 8GB of memory)
-* Suggestion: ensure `AllowVolumeExpansion` is set to `True` in the storage class definition (this setting enables `PVC` resize)
+* Suggestion: ensure `allowVolumeExpansion` is set to `True` in the storage class definition (this setting enables `PVC` resize)
     <details>
 
     `PersistentVolumes` can be configured to be expandable. This feature when set to `true`, allows the users to resize the volume by editing the corresponding `PersistentVolumeClaims` object.
@@ -26,5 +26,29 @@
     >  - expanding a persistent volume is a time consuming operation
     >  - some platforms have a per-volume quota of one modification every 6 hours
     >  - not all the volume types support this feature. Please take a look at the [official docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion) for more info
+
+    </details>
+
+* Suggestion: ensure `reclaimPolicy` is set to `Retain` in the storage class definition (this setting allows for manual reclamation of the resource)
+    <details>
+
+    The `Retain` reclaim policy allows for manual reclamation of the resource. When the PersistentVolumeClaim is deleted, the PersistentVolume still exists and the volume is considered "released".
+    But it is not yet available for another claim because the previous claimant's data remains on the volume (see the [official documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming)).
+
+    This can become useful in case your need to reprovision a pod/statefulset but you don't want to lose the underlying data
+
+    To verify which `reclaimPolicy` your default storage class is using you can run:
+
+    ```shell
+    kubectl get storageclass -o json | jq '.items[].reclaimPolicy'
+    "Retain"
+    ```
+
+    If your storage class allows it, you can modify the `reclaimPolicy` by running:
+
+    ```shell
+    kubectl patch storageclass -p '{"reclaimPolicy": "Retain"}'
+    storageclass.storage.k8s.io/gp2 patched
+    ```
 
     </details>
