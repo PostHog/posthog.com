@@ -12,7 +12,7 @@ export default function Team() {
         team: { teamMembers },
     } = useStaticQuery(query)
     return (
-        <ul className="list-none p-0 m-0">
+        <ul className="list-none p-0 m-0 flex flex-col space-y-12 max-w-[1100px]">
             {teamMembers.map((teamMember) => {
                 const {
                     id,
@@ -22,32 +22,31 @@ export default function Team() {
                 const title = `${name}, ${jobTitle}`
                 const image = getImage(headshot)
                 return (
-                    <li key={id}>
-                        <div className="team-row">
-                            <div className="team-left-text">
-                                <h3>{title}</h3>
-                                <GithubIcon username={github} />
-                                <div className="team-left-bio">
-                                    <MDXProvider components={shortcodes}>
-                                        <MDXRenderer>{body}</MDXRenderer>
-                                    </MDXProvider>
-                                </div>
+                    <li
+                        className="flex lg:flex-row flex-col-reverse lg:space-x-12 space-y-2 lg:space-y-0 space-y-reverse items-center"
+                        key={id}
+                    >
+                        <div>
+                            <h3>
+                                {title}{' '}
+                                <span className="ml-2">{country === 'world' ? '🌎' : countryCodeEmoji(country)}</span>
+                            </h3>
+                            <GithubIcon username={github} />
+                            <div className="h-[350px] overflow-y-scroll">
+                                <MDXProvider components={shortcodes}>
+                                    <MDXRenderer>{body}</MDXRenderer>
+                                </MDXProvider>
                             </div>
-
-                            <div className="team-center-space"></div>
-
-                            <div className="team-right-image relative">
-                                <GatsbyImage
-                                    objectFit="contain"
-                                    className="w-full"
-                                    image={image}
-                                    alt={title}
-                                    title={title}
-                                />
-                                <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">
-                                    {country === 'world' ? '🌎' : countryCodeEmoji(country)}
-                                </span>
-                            </div>
+                        </div>
+                        <div className="relative w-[250px] h-[250px] xl:w-[400px] xl:h-[400px] overflow-hidden rounded-full flex-shrink-0 bg-gray-accent-light dark:bg-gray-accent-dark">
+                            <GatsbyImage
+                                objectFit="contain"
+                                objectPosition="top"
+                                className="w-full"
+                                image={image}
+                                alt={title}
+                                title={title}
+                            />
                         </div>
                     </li>
                 )
@@ -65,7 +64,7 @@ const query = graphql`
                 frontmatter {
                     headshot {
                         childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(width: 400)
                         }
                     }
                     jobTitle
