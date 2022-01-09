@@ -40,7 +40,7 @@ const ReadPostHome = ({ to }: { to: string }) => {
     )
 }
 
-const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
+const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: [AuthorsData] }) => {
     const MetaContent = ({ className }: { className: string }): JSX.Element => (
         <div
             className={`lg:max-w-xl backdrop-blur ${className}`}

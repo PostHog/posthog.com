@@ -1,5 +1,4 @@
 import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
-import { graphql } from 'gatsby'
 import React from 'react'
 export interface CategoryInterface {
     title: string
@@ -54,19 +53,3 @@ export const socialLinks: SocialLinksInterface = {
     linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
     github: { icon: <GitHub />, label: 'GitHub' },
 }
-
-export const AuthorsFragment = graphql`
-    fragment AuthorsFragment on MarkdownRemark {
-        frontmatter {
-            authors {
-                handle
-                name
-                role
-                image
-                link_type
-                link_url
-            }
-        }
-        id
-    }
-`

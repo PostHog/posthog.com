@@ -547,9 +547,10 @@
     to = "/docs/user-guides/session-recording"
 
 # Added: 2021-07-13
+# Edited: 2021-12-14
 [[redirects]]
     from = "/docs/features/sessions"
-    to = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -801,11 +802,6 @@
 
 # Added: 2021-10-11
 [[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/docs/user-guides/users"
-
-# Added: 2021-10-11
-[[redirects]]
     from = "/blog/sessions-deprecation"
     to = "/blog/sessions-removal"
 
@@ -952,11 +948,6 @@
     
 # Manually Added: 2021-11-04
 [[redirects]]
-    from = "/tutorials"
-    to = "/docs/tutorials" 
-    
-# Manually Added: 2021-11-04
-[[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
     to = "/docs/self-host/postgres-vs-clickhouse" 
 
@@ -1022,3 +1013,142 @@
     from = "/product-features/plugins"
     to = "/integrations"
     status = 302
+
+[[redirects]]
+    from = "/heatmaps"
+    to = "/product/heatmaps"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-framework"
+    to = "/tutorials/aarrr-framework"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/b2b"
+    to = "/tutorials/b2b"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/cohorts"
+    to = "/tutorials/cohorts"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/deleting-data"
+    to = "/tutorials/deleting-data"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/event-tracking-guide"
+    to = "/tutorials/event-tracking-guide"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/feature-flags"
+    to = "/tutorials/feature-flags"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/funnels"
+    to = "/tutorials/funnels"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/how-to-embed-shared-dashboard"
+    to = "/tutorials/how-to-embed-shared-dashboard"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/nextjs-supabase-signup-funnel"
+    to = "/tutorials/nextjs-supabase-signup-funnel"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/retention"
+    to = "/tutorials/retention"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/revenue"
+    to = "/tutorials/revenue"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/spa"
+    to = "/tutorials/spa"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/survey"
+    to = "/tutorials/survey"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/taxonomy-acquisition"
+    to = "/tutorials/taxonomy-acquisition"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/toolbar"
+    to = "/tutorials/toolbar"
+
+
+# Added: 2021-12-09
+[[redirects]]
+    from = "/docs/tutorials/tracking-teams"
+    to = "/tutorials/tracking-teams"
+    
+# Added: 2021-12-03
+[[redirects]]
+    from = "/handbook/company/branding"
+    to = "/handbook/company/brand-assets"
+
+[[redirects]]
+    from = "/docs/tutorials/*"
+    to = "/tutorials/:splat"
+
+# Added: 2021-12-08
+[[redirects]]
+    from = "/docs/self-host/hobby-deployment"
+    to = "/docs/self-host/deploy/hobby"
+
+# Added: 2021-12-13
+[[redirects]]
+    from = "/handbook/engineering/ee-setup"
+    to = "/docs/contribute/developing-locally"
+
+
+# Added: 2021-12-14
+[[redirects]]
+    from = "/docs/user-guides/sessions"
+    to = "/blog/sessions-removal"
+
+[build]
+  command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+
+# Added: 2022-01-07
+[[redirects]]
+    from = "/docs/tutorials/how-to-segment-users"
+    to = "/tutorials/how-to-segment-users"

@@ -95,7 +95,7 @@ Product analytics platforms are the ideal way to track your North Star metric, a
 
 Naturally, we think PostHog is the best product analytics platform available because it enables you to deploy analytics onto your own infrastructure. That means you don't need to rely on third parties which may be blocked by ad blockers or privacy features, nor do you need to send any data to a third-party platform. This approach increases the accuracy of your data, minimizes the risk of security breaches and gives you greater control. 
 
-Of course, there are plenty of other product analytics tools - including [open-source analytics platforms](https://posthog.com/blog/best-open-source-analytics-tools), as well as closed-source alternatives such as MixPanel, Amplitude and Pendo. 
+Of course, there are plenty of other product analytics tools - including [open-source analytics platforms](https://posthog.com/blog/best-open-source-analytics-tools), as well as closed-source alternatives such as Mixpanel, Amplitude and Pendo. 
 
 > New to product analytics? Check out our [introduction to product analytics](https://posthog.com/blog/what-is-product-analytics), or [request a demo with one of our engineers](https://posthog.com/book-a-demo) to get started with PostHog. 
 
