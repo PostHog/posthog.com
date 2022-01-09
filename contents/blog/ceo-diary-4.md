@@ -30,7 +30,7 @@ However, when things didn't work out, we often didn't re-hire for the role quick
 
 The end result? Lost time - and that has a lot of opportunity cost. There must have been a reason to hire in the first place.
 
-# Acheived focus by making it outcome-based
+# Achieved focus by making it outcome-based
 
 It was midway through last year when it clicked.
 
