@@ -95,7 +95,7 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] Add yourself to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
 *   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to, and flag any you think are missing
 *   [ ] Go through all of the security onboarding and background checks on [Drata](https://app.drata.com/) - you need to complete _all_ of the Drata onboarding steps
-*   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team) by adding a new Markdown file to the `/contents/team` folder. More guidance on this is located [here](/docs/contribute/contribute-to-website#team).
+*   [ ] Send Lottie a picture of you (and make sure it's a high resolution one). Once you get a drawn version back, add yourself to the [team page](https://posthog.com/handbook/company/team) by adding a new Markdown file to the `/contents/team` folder. More guidance on this is located [here](/docs/contribute/contribute-to-website#team).
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
 ## Onboarding buddy
