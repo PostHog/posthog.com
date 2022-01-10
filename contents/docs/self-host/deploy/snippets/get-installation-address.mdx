@@ -1,10 +1,10 @@
 ```shell
 POSTHOG_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}" 2> /dev/null)
 POSTHOG_HOSTNAME=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].hostname}" 2> /dev/null)
-if [ ! -z "$POSTHOG_IP" ]; then
+if [ -n "$POSTHOG_IP" ]; then
     POSTHOG_INSTALLATION=$POSTHOG_IP
 fi
-if [ ! -z "$POSTHOG_HOSTNAME" ]; then
+if [ -n "$POSTHOG_HOSTNAME" ]; then
     POSTHOG_INSTALLATION=$POSTHOG_HOSTNAME
 fi
 
