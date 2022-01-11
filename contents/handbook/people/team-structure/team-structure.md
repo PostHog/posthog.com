@@ -33,7 +33,8 @@ hideAnchor: true
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-
+  - [Simon Fisher, Customer Success Lead](/handbook/company/team#simon-fisher-customer-success)
+    - Cameron DeLeone, Customer Success Manager
 
 ## Small teams
 
@@ -93,6 +94,12 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### [People & culture](people)
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
+
+<br />
+
+### [Customer Success](customer-success)
+- [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
+- Cameron DeLeone (Customer Success Manager)
 
 
 ## Organization changes

@@ -140,6 +140,10 @@
                         {
                             "name": "Team People",
                             "url": "/handbook/people/team-structure/people"
+                        },
+                        {
+                            "name": "Team Customer Success",
+                            "url": "/handbook/people/team-structure/customer-success"
                         }
                     ]
                 }
