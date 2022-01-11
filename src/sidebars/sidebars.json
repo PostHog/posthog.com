@@ -5,6 +5,19 @@
             "url": "/handbook"
         },
         {
+            "name": "Getting started",
+            "children": [
+                {
+                    "name": "Start here",
+                    "url": "/handbook/getting-started/start-here"
+                },
+                {
+                    "name": "Meetings",
+                    "url": "/handbook/getting-started/meetings"
+                }
+            ]
+        },
+        {
             "name": "Company",
             "url": "",
             "children": [
@@ -45,19 +58,6 @@
                 {
                     "name": "Prioritization",
                     "url": "/handbook/strategy/prioritization"
-                }
-            ]
-        },
-        {
-            "name": "Getting started",
-            "children": [
-                {
-                    "name": "Start here",
-                    "url": "/handbook/getting-started/start-here"
-                },
-                {
-                    "name": "Meetings",
-                    "url": "/handbook/getting-started/meetings"
                 }
             ]
         },
