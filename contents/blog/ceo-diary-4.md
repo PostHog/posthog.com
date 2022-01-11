@@ -18,9 +18,9 @@ featuredImageType: full
 - 300% net revenue retention (!)
 - 0.41 years CAC payback (!)
 
-What we learned - good and bad...
+Here's what we learned - good and bad...
 
-## We were disciplined at letting people go, but we got scared to re-hire
+## We were disciplined at letting people go, but we were scared to re-hire
 
 We hired [world class people](../handbook/company/team), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
@@ -64,9 +64,9 @@ At our first offsite in 2020, we ran a [full team feedback session](../handbook/
 
 Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
 
-Compellingly, Paolo - then, one of our engineers, had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going board with our product, giving us a much better strategy).
+Compellingly, Paolo - then, one of our engineers - had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going broard with our product, giving us a much better strategy).
 
-We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us, was a key part of getting to five reference customers - this became really obvious last year.
+We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us was a key part of getting to five reference customers - this became really obvious last year.
 
 The best part? We've not had to sacrifice engineering autonomy.
 
@@ -74,7 +74,7 @@ Both Marcus and Paolo can write code, and they both ship from time to time. This
 
 ## How to build a design team
 
-I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. In 2020, PostHog could get something built to an ok standard very very fast, but it never got to the level others were achieving. That changed in 2021.
+I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. In 2020, PostHog could get something built to an ok standard very fast, but it never got to the level others were achieving. That changed in 2021.
 
 We learned that great designers for early stage design teams:
 
@@ -89,7 +89,7 @@ Many people in the hiring process told us this was way too much to ask for. It h
 
 ## Having a founder do the first sales was useful
 
-We had to make a lot of changes to get the first deals done, in a very short space of time.
+We had to make a lot of changes in a very short space of time to get the first deals done.
 
 Here's the list of what we changed to get our first five reference customers:
 
@@ -108,11 +108,11 @@ A founder will have the easiest time trying to make changes fast. It was temptin
 
 The outcome was extremely fast revenue growth with exceptional retention... and being a bit behind on top of funnel growth - which we can catch up on next.
 
-## Self serve was way better than we thought it would be
+## Self-serve was way better than we thought it would be
 
-We've had wild success with self serve in 2021.
+We've had wild success with self-serve in 2021.
 
-We made pricing transparent, put as much info as we could into our docs, created a self serve payment flow, eliminated the need for annual minimum commitments, and had money flowing in almost immediately.
+We made pricing transparent, put as much info as we could into our docs, created a self-serve payment flow, eliminated the need for annual minimum commitments, and had money flowing in almost immediately.
 
 There are two further things we did that helped:
 
@@ -129,7 +129,7 @@ If you ever do a trip to Portugal, avoid lots of bus transfers. Trust us.
 
 Focus will be the hardest thing to achieve _and_ the most important.
 
-As we've hit product market fit for our free _and_ paid products, we can't throw the entire company at just one thing at a time any more. We need to build features whilst improving quality.
+As we've hit product market fit for our free _and_ paid products, we can't throw the entire company at just one thing at a time any more. We need to build features while improving quality.
 
 The team is bigger, we have way more customers, and the platform is bigger and more powerful. 
 
