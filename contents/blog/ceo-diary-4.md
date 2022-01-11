@@ -83,7 +83,7 @@ We learned that great designers for early stage design teams:
 
 We followed this guidance. The end result?
 
-The majority of people in our deisgn team can code _and_ work in Figma.
+The majority of people in our design team can code _and_ work in Figma.
 
 Many people in the hiring process told us this was way too much to ask for. It helps us empathize with technical users, it helps designers collaborate with engineers, and it means our design team are flexible and don't get stuck. So we iterate faster.
 
