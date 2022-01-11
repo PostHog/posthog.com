@@ -68,6 +68,10 @@ It's really valuable for us to understand what types of requests we've had so we
 When you respond to an issue add a "conversation tag" with one of the following categories:
 * Performance
 * Deployments
+  * Scaling
+  * Setup 
+  * Maintainance
+  * Hobbyist
 * Instrumentation
 * User Experience Confusion
 * Data Integrity
