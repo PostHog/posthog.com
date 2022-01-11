@@ -4,6 +4,7 @@ const fs = require('fs')
 const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
+const careersTemplate = require('../src/templates/OG/careers.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -109,6 +110,11 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         }
                         title
                     }
+                }
+            }
+            careers: allJobs {
+                nodes {
+                    title
                 }
             }
         }
@@ -238,6 +244,12 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             slug: post.fields.slug,
         })
     }
+
+    // Careers OG
+    await createOG({
+        html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
+        slug: 'careers',
+    })
 
     await browser.close()
 }
