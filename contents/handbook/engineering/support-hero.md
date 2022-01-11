@@ -61,6 +61,34 @@ We tag customers in [Papercups](#papercups) according to these categories so you
 
 At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
 
+## Categorizing requests
+
+It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users
+
+When you respond to an issue add a "conversation tag" with one of the following categories:
+* Performance
+* Deployments
+  * Scaling
+  * Setup 
+  * Maintenance
+  * Hobbyist
+  * Migrations
+  * Supporting Managed Instances
+* Instrumentation
+* User Experience Confusion
+* Data Integrity
+* API
+* Plugins
+* Recordings
+* Toolbar
+* Feature-flags
+* Not-a-bug
+* Billing
+* Feature request
+* Other
+
+If something falls into two categories, just tag the one you think is most relevant.
+
 ### Escalating issues
 
 You should always try to figure out the issues customers are having by yourself before escalating. This means gathering more information from the customer, reproducing the issue and ideally fixing the issue yourself by creating a PR. Only if you are completely swamped, you really don't have any knowledge about the area (most common with deployment questions) or you can't figure out what's going on should you escalate to secondary on call.

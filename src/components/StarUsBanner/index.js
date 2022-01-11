@@ -1,17 +1,10 @@
 import { Close } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GitHubButton from 'react-github-btn'
 
 export default function StarUsBanner() {
-    const [visible, setVisible] = useState(false)
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const hideBanner = window?.localStorage?.getItem('hide-banner')
-            setVisible(hideBanner !== 'true')
-        }
-    }, [])
+    const [visible, setVisible] = useState(window.localStorage.getItem('hide-banner') !== 'true')
 
     const handleClick = () => {
         setVisible(false)
