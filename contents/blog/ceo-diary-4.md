@@ -74,7 +74,7 @@ Both Marcus and Paolo can write code, and they both ship from time to time. This
 
 ## How to build a design team
 
-I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. In 2020, PostHog could get something built to an ok standard very very fast, but it never got to the level others were achieving. That changed in 20201.
+I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. In 2020, PostHog could get something built to an ok standard very very fast, but it never got to the level others were achieving. That changed in 2021.
 
 We learned that great designers for early stage design teams:
 
