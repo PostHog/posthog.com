@@ -16,16 +16,16 @@ hideAnchor: true
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
       - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
       - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
-      - Paul D'Ambra, Full Stack Engineer
+      - [Paul D'Ambra, Full Stack Engineer](/handbook/company/team#paul-d'ambra-full-stack-engineer)
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
-      - Guido Iaquinti, Site Reliability Engineer
+      - [Guido Iaquinti, Site Reliability Engineer](/handbook/company/team#guido-iaquinti-site-reliability-engineer)
       - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
     - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
     - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
     - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
-    - Harry Waye, Full Stack Engineer
+    - [Harry Waye, Full Stack Engineer](/handbook/company/team#harry-waye-full-stack-engineer)
   - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
@@ -48,7 +48,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
 - [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
-- Harry Waye (Full Stack Engineer)
+- [Harry Waye](/handbook/company/team#harry-waye-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
@@ -59,7 +59,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
-- Paul D'Ambra, Full Stack Engineer
+- [Paul D'Ambra](/handbook/company/team#paul-d'ambra-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
@@ -68,7 +68,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
-- Guido Iaquinti (Site Reliability Engineer)
+- [Guido Iaquinti](/handbook/company/team#guido-iaquinti-site-reliability-engineer)
 
 <br />
 
