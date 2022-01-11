@@ -77,6 +77,7 @@ When you respond to an issue add a "conversation tag" with one of the following 
 * Toolbar
 * Feature-flags
 * Not-a-bug
+* Billing
 * Feature request
 * Other
 
