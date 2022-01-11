@@ -1,5 +1,5 @@
 ---
-title: '"Why I ditched Google Analytics & MixPanel for PostHog"'
+title: '"Why I ditched Google Analytics & Mixpanel for PostHog"'
 customer: Reciprocal.dev
 logo: ../images/customers/reciprocal/reciprocal-logo.svg
 featuredImage: ../images/customers/reciprocal/reciprocal-featured-image.png
@@ -27,18 +27,18 @@ In my opinion though, Google Analytics is a mess. It’s good for quantitative m
         size="md"
         name="Colin Wren"
         title="Co-founder, Reciprocal.dev"
-        quote={`“I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I didn’t find it straight away and wasted time with MixPanel.”`}
+        quote={`“I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I didn’t find it straight away and wasted time with Mixpanel.”`}
     />
 </BorderWrapper>
 
-I was getting so little value from Google Analytics that I started to look for a new tool that would provide more qualitative data. I picked MixPanel because the UI looked good and it had funnel reports that allowed me to see conversions easily.
+I was getting so little value from Google Analytics that I started to look for a new tool that would provide more qualitative data. I picked Mixpanel because the UI looked good and it had funnel reports that allowed me to see conversions easily.
 
-### Switching from MixPanel to PostHog
-Initially MixPanel delivered the value we had hoped for. We were able to see how our app was used, see which areas of the product weren’t converting and use that data in discussions about improvements to the product. However, MixPanel’s free tier is _very_ limited and only lets you create five funnels. They want you to pay for their services, but we found them too expensive to justify. 
+### Switching from Mixpanel to PostHog
+Initially Mixpanel delivered the value we had hoped for. We were able to see how our app was used, see which areas of the product weren’t converting and use that data in discussions about improvements to the product. However, Mixpanel’s free tier is _very_ limited and only lets you create five funnels. They want you to pay for their services, but we found them too expensive to justify. 
 
-So, I started looking for a self-hosted alternative. By [self-hosting our analytics](https://posthog.com/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of MixPanel's lowest pricing tier. We would also have more control over our user data. 
+So, I started looking for a self-hosted alternative. By [self-hosting our analytics](https://posthog.com/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of Mixpanel's lowest pricing tier. We would also have more control over our user data. 
 
-During my research I came across PostHog. It offered the same funnel views that MixPanel did, could be self-hosted and even offered a free tier that offered unlimited funnels. It was a no-brainer for us to switch.
+During my research I came across PostHog. It offered the same funnel views that Mixpanel did, could be self-hosted and even offered a free tier that offered unlimited funnels. It was a no-brainer for us to switch.
 
 Moving to PostHog required a few changes in our codebase, but because I’d abstracted the analytics events into a single function I only had to update that function and the analytics initialization. I used an options object which allows custom event data to be defined, which can then be used to filter out events or to tailor reports:
 
@@ -58,7 +58,7 @@ export function recordEvent(eventName: string, options: AnalyticsOptions): void 
 
 After this, [building funnels in PostHog](https://posthog.com/docs/user-guides/funnels) was really easy. I built a sequence of events trigger as a user performs actions in the app and [saved these insights into a dashboard](https://posthog.com/docs/user-guides/dashboards) so there would be a single place to collect insights for a particular behaviour or section of the product.
 
-There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](https://posthog.com/docs/user-guides/feature-flags) and [plugins that integrate with release management tools](https://posthog.com/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with MixPanel.
+There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](https://posthog.com/docs/user-guides/feature-flags) and [plugins that integrate with release management tools](https://posthog.com/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with Mixpanel.
 
 <BorderWrapper>
     <Quote
@@ -71,7 +71,7 @@ There are also tools that make it easier to track which iteration of the product
 </BorderWrapper>
 
 ### How switching to PostHog worked for us
-As an early stage start-up our priority is to get the most out of our tools for the lowest price possible. MixPanel gave us a qualitative dataset of how users were using our app, but the limitations and cost meant there was very little value in the tool. It wasn’t something we could use to grow the product.
+As an early stage start-up our priority is to get the most out of our tools for the lowest price possible. Mixpanel gave us a qualitative dataset of how users were using our app, but the limitations and cost meant there was very little value in the tool. It wasn’t something we could use to grow the product.
 
 PostHog gave us the means to build a qualitative dataset and didn’t limit us on how we dissected data. As a result, PostHog better enables us to grow the product and, with self-hosting as an option, we’re more in control of our analytics usage overall. By moving to PostHog we’ve been able to identify significant friction points in our sign-up process and make improvements that lead to an increase in people creating an account.
 
