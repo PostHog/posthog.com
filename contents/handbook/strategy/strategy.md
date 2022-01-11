@@ -52,6 +52,8 @@ Revenue is critical for us to go public _but we won't set short-term revenue tar
 
 We discuss how we track against our high-level metrics once a week during PostHog news. 
 
+[Click here to see our goals for 2022 (internal)](https://github.com/PostHog/company-internal/blob/master/internal-metric-goals-2022.md)
+
 ### How should we prioritize between competing directions?
 
 While there is value in the items on the right, we value the items on the left more.
@@ -76,7 +78,7 @@ While there is value in the items on the right, we value the items on the left m
 
 * _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
 
-## Target audience for 2021
+## Target audience for 2022
 
 Our customers are a combination of users, businesses and the products themselves. In order to understand where we should focus our efforts, below is a proposed breakdown of our target audience based on attributes of a product. 
 
