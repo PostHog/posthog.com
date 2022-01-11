@@ -11,30 +11,30 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-2021 went well for us - especially given we're not even two years old yet.
+2021 went well for PostHog - especially given we're not even two years old yet.
 
-- 7,000 customers across our range of products (!)
+- 7,014 customers across our range of products (!)
 - 800% increase in organic traffic (!)
 - 300% net revenue retention (!)
 - 0.41 years CAC payback (!)
 
 What we learned - good and bad...
 
-# We let people go when we had to, but we didn't re-hire quickly when this happened
+## We were disciplined at letting people go, but we got scared to re-hire
 
-We hired world class people, and we let people go quickly when it wasn't working (paying them much greater severance than normal when this happened).
+We hired [world class people](../handbook/company/team), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
-Tim and I believed that people working with great people is a huge motivator - talent compounds is one of our values. Feedback from our team surveys have since confirmed our team value this. 
+Tim and I believed that people working with great people is a huge motivator - [talent compounds](../handbook/company/values#talent-compounds) is one of our [values](../handbook/company/values). Feedback from our team surveys have since confirmed our team agrees. 
 
 However, when things didn't work out, we often didn't re-hire for the role quickly, or at all. We got scar tissue! We must've been hiring for the role in the first place for a reason.
 
-The end result? Lost time - and that has a lot of opportunity cost. There must have been a reason to hire in the first place.
+The end result? Lost time - and that has a lot of opportunity cost.
 
-# Achieved focus by making it outcome-based
+## Who to listen to
 
 It was midway through last year when it clicked.
 
-We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the team size too. Those things combined makes knowing where to focus particularly challenging!
+We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the [team])(../handbook/company/team) size too. Those things combined makes knowing where to focus particularly challenging!
 
 We were getting a lot of inbound paid demand, so we felt we should figure out how to get product market fit for our paid product. This would force us to have a clear split between our free and paid products.
 
@@ -42,126 +42,95 @@ We did this:
 
 * Aimed to get 5 reference customers.
   * Reference = paying list price, genuinely delighted, using the product a lot
-* Wrote out what they had in common along the way
-  * Needs
-  * Haves
+* Wrote out what they had in common along the way. We created a spreadsheet that looked a little like this:
 
-# How to do product
+![A spreadsheet show company names listed alongside what they need and what they have](../images/5-reference-customers.png)
 
-Speaking as a founder, product can feel really unappealing to invest in.
+Note - we had to sell more than 5 deals, to get 5 reference customers. We also looked for antipatterns - when a customer wasn't having a great experience, what did they look like.
 
-I mean - isn't it all about prioritizing, and aren't the founders supposed to do that?
+Once we'd learned what our best customers had in common, we realized this is the group we should listen to when deciding what to build.
 
-At our first offsite in 2020, we ran a 360 feedback dinner. This is quite a unique experience:
+# Product people can transform your company
 
-- Everyone sits around a table
-- You pass from one person to the next
+As a founder, I never used to want to invest in hiring product people.
+
+Don't they just dictate what to build to our team, thus annoying our team, and probably understanding our (technical) users less well than our engineers? Can't anyone listen to users? Wouldn't an extra layer of communication slow us down?
+
+At our first offsite in 2020, we ran a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). This is a unique experience:
+
+- Everyone sits around a table. Ok, you've probably done that before.
 - The person who's turn it is, gets feedback from everyone else in the team
-- This feedback is moderated to be 70% constructive
+- This feedback is moderated to be 70% [constructive and as specific as possible](../handbook/people/feedback#how-to-give-good-feedback)
 
-Tim and I were both given the feedback that we've scar tissue around product done badly in our previous careers, and it's causing us not to build this discipline at all into the company.
+Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
 
-Compellingly, Paolo - one of our engineers at the time, had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going board with our product, giving us a much better strategy).
+Compellingly, Paolo - then, one of our engineers, had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going board with our product, giving us a much better strategy).
 
-We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us, was a key part of getting to five reference customers.
+We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us, was a key part of getting to five reference customers - this became really obvious last year.
 
-# How to do design
+The best part? We've not had to sacrifice engineering autonomy.
 
-I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. Tim and I could get something built to an ok standard very very fast, but it never got to the level others were achieving.
+Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/people/team-structure/why-small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
+
+## How to build a design team
+
+I often looked up to other companies, blown away by the quality of design work - from aesthetics to product. In 2020, PostHog could get something built to an ok standard very very fast, but it never got to the level others were achieving. That changed in 20201.
 
 We learned that great designers for early stage design teams:
 
 - iterate very quickly
-- are quite broad - yes this means they may be able to code _and_ work in Figma (although we found many people believe finding people like this is unicorn-hunting
+- are broad
 
-The implementation also matters. We didn't just think about design for our platform, we invested heavily in posthog.com - our marketing and docs website, which we also treat as a product. This was justified because it's our storefront - we don't do any outbound sales.
+We followed this guidance. The end result?
 
-# Having a founder do a bunch of the first sales was pretty useful
+The majority of people in our deisgn team can code _and_ work in Figma.
+
+Many people in the hiring process told us this was way too much to ask for. It helps us empathize with technical users, it helps designers collaborate with engineers, and it means our design team are flexible and don't get stuck. So we iterate faster.
+
+## Having a founder do the first sales was useful
 
 We had to make a lot of changes to get the first deals done, in a very short space of time.
 
-# How to really focus on those you build for
+Here's the list of what we changed to get our first five reference customers:
 
-Open source gives you lots of growth. Last time I checked, 7,014 companies use PostHog.
+- pricing model
+- who we were selling to
+- the sales process
+- if we did trials or not
+- how we did customer success meetings
+- how support works
+- how demos work
+- how payments work
+- how and when people sign versus self serve
+- the difference between free/paid products
 
-This makes it hard to know who to listen to.
+A founder will have the easiest time trying to make changes fast. It was tempting to hire someone to do all of the above, but we optimized for downside risk. It was more important we'd bottleneck not getting other work done (like focussing more on marketing or developer relations earlier in the year) than not to learn how to sell at all.
 
-We released our paid products this year.
+The outcome was extremely fast revenue growth with exceptional retention... and being a bit behind on top of funnel growth - which we can catch up on next.
 
-# Our cloud product has been bizarrely successful
+## Self serve was way better than we thought it would be
 
-We've had 
+We've had wild success with self serve in 2021.
 
-# Bus transfers in Portugal = hell no
+We made pricing transparent, put as much info as we could into our docs, created a self serve payment flow, eliminated the need for annual minimum commitments, and had money flowing in almost immediately.
 
-If you ever do a trip to Portugal, avoid lots of bus transfers.
-=======
-categories:
-    - CEO diaries
-author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
-featuredImageType: full
----
+There are two further things we did that helped:
 
-"How come your website is so nice?"
+- we incentivized users to add their card (more free usage) 
+- usage-based pricing means you can have zero minimum costs, making it easier to get started
 
-I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.
+Once we got better at product, we saw dramatic improvements in our retention too.
 
-## Figure out if design matters
+## Bus transfers in Portugal = hell no
 
-PostHog follows bottom-up adoption. This means our users find us online, install, hopefully add their team and then reach out to buy our paid version. We're very different from our competitors in this way.
+If you ever do a trip to Portugal, avoid lots of bus transfers. Trust us.
 
-This means that design is key. Our website and product are our storefront - not a sales team. It needs to be one of our core competencies.
+## 2022 prediction
 
-Good design for product-led companies on your "marketing" website (for lack of a better word) signifies a high quality product experience. Accept that you'll be judged, and use this to your advantage.
+Focus will be the hardest thing to achieve _and_ the most important.
 
-## Hiring the right people - what Stripe taught me
+As we've hit product market fit for our free _and_ paid products, we can't throw the entire company at just one thing at a time any more. We need to build features whilst improving quality.
 
-One of my most memorable moments as a founder was a 30 minute chat with [Malthe Sigurdsson](https://twitter.com/malthe/) - he used to run design at [Stripe](https://stripe.com/). For the uninitiated - people drool over Stripe's design quality - especially their [docs](https://stripe.com/docs). I wanted to know how they got there.
+The team is bigger, we have way more customers, and the platform is bigger and more powerful. 
 
-Apart from him telling me that he'd be a bad hire for us when we met originally, he also told me:
-
-* Great designers iterate quickly. You won't get it perfect in Figma first.
-* Hire generalists early on.
-
-We followed his advice. We made sure we had people that could work in Figma or CSS, and who'd be able to understand our audience. We got some pushback in the hiring process that we were unicorn hunting, and it took months, but we'd do everything the same way all over again.
-
-## Treat your website as a product, but not at first
-
-We see so many websites, it's easy to build on autopilot... Before you know it you're Googling "how to center a div in a div", and adding testimonials and calls to action.
-
-This is a good way to get something mediocre built very fast - which is exactly what you want on day one.
-
-Once you've got some consistency and a sense of brand, start thinking from a user's perspective. This is what we did to think of our website and docs as a product:
-
-1. **Start with why**: We thought about [our mission](/handbook/strategy/strategy) and our motivation for building a website and docs to help us achieve it.
-2. **Ask who it's for**: We broke down the people who might come to our website/docs into segments and prioritized the biggest opportunities, trying to use qualitative and quantitative data where we could.
-3. **Consider what they need:** We looked at the focus segment and what their needs from our website and docs were. We asked which needs were the most important to solve, again using qualitative and quantitative data where we had it.
-4. **Plan how to solve needs:** We brainstormed potential solutions to the highest priority needs.
-
-You can go even further - what do [acquisition, activation, retention, referral and revenue](/docs/tutorials/aarrr-framework) look like for your website or your docs? Then you know you're actually solving needs.
-
-This exercise is taking us in some [really innovative directions](https://github.com/PostHog/posthog.com/issues/2568).
-
-## Think about patterns carefully
-
-We provide open source product analytics. That means our users have to put some work in to try out PostHog. Do you want to put work into flakey software? No.
-
-Therefore the first version of our website avoided these patterns:
-
-* Stock doodles that every startup uses (we avoided this, and hired a graphic designer as early as we could).
-* Single landing-page where the links take you to an anchor link on the same page (we had >50 pages when we launched).
-
-## Don't treat implementation as a second-class citizen
-
-Great design is irrelevant without implementation. The better you are at getting things merged easily, the more steps you'll take and the further you'll go. 
-
-As we got stronger at implementation, we found we could push for far more - we have complete confidence we can execute. Get design to show off what they're working on internally, just as engineering would.
-
-## Iterate
-
-You aren't going to get it right on the first go. Be happy [chopping and changing](https://github.com/PostHog/posthog.com/issues/2479) - the long term result will be better, and no one cares about brand consistency in your first year. You'll create a better brand by doing, and applying what you learn about your users.
-
-## Get comfortable
-
-Many of the best things you can work on are hard to measure - that's why they're opportunities; no one else wants to do them. Investing in design is like this.
+The good news? We know we're selling something people want.
