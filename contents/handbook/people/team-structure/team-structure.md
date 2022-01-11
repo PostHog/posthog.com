@@ -34,7 +34,7 @@ hideAnchor: true
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
   - [Simon Fisher, Customer Success Lead](/handbook/company/team#simon-fisher-customer-success)
-    - Cameron DeLeone, Customer Success Manager
+    - [Cameron DeLeone, Customer Success Manager](/handbook/company/team#cameron-deleone-customer-success)
 
 ## Small teams
 
@@ -99,7 +99,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### [Customer Success](customer-success)
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
-- Cameron DeLeone (Customer Success Manager)
+- [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
 
 
 ## Organization changes
