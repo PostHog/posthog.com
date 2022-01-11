@@ -80,7 +80,7 @@ When you initially respond to an issue add a "conversation tag" with the followi
 
 If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
 
-If a ticket dosn't fit a category correctly, we might need to update our tags, open a PR to edit this page.
+If a ticket doesn't fit a category correctly, we might need to update our tags, open a PR to edit this page.
 
 ### Escalating issues
 
