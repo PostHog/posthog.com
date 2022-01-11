@@ -87,7 +87,7 @@ When you respond to an issue add a "conversation tag" with one of the following 
 * Feature request
 * Other
 
-If something falls into two categories just tag the one you think its most relevant
+If something falls into two categories, just tag the one you think is most relevant.
 
 ### Escalating issues
 
