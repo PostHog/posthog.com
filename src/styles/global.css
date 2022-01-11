@@ -29,6 +29,10 @@ p {
         margin-bottom: 1rem;
     }
 
+    h3 {
+        @apply mb-2;
+    }
+
     p,
     li {
         font-size: 17px;
@@ -56,12 +60,26 @@ p {
         margin-bottom: 1rem;
     }
 
+    ul,
+    ol {
+        @apply pb-2;
+    }
+
+    blockquote + h2,
+    blockquote + h3 {
+        @apply mt-0;
+    }
+
     li li {
         font-size: 1rem;
     }
 
     li {
         margin-bottom: 0.125rem;
+    }
+
+    blockquote {
+        @apply mb-4;
     }
 
     blockquote:not('.quote') {
@@ -101,6 +119,14 @@ p {
 
         > div {
             @apply ml-4 mt-2 rounded;
+        }
+
+        p {
+            @apply pl-4;
+
+            &:last-child {
+                @apply pb-0;
+            }
         }
     }
 
