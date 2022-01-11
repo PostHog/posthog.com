@@ -2,7 +2,7 @@
 title: Visualizing user behavior - Toolbar
 sidebar: Docs
 showTitle: true
-featuredTutorial: true
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/toolbar.png
 featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=48
 author: ['yakko-majuri']

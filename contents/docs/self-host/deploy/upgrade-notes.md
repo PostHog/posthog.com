@@ -94,3 +94,24 @@ There are two options:
 If you **are not** overriding `cert-manager.installCRDs` by setting it to `false` **there’s nothing you need to do**. You can go on updating your Helm release as usual and enjoy your day!
 
 If otherwise you are manually managing the `cert-manager`‘s CRDs, please remember to update the definitions in order to keep everything in sync.
+
+### Upgrading from 7.x.x
+
+8.0.0 deprecates the `beat` deployment ([#184](https://github.com/PostHog/charts-clickhouse/pull/184)) as its functionalities are now executed by the `workers` deployment.
+
+As result, we have deprecated the following Helm values:
+
+- `beat.replicacount`
+- `beat.resources`
+- `beat.nodeSelector`
+- `beat.tolerations`
+- `beat.affinity`
+
+If you didn’t make any customization to those, there’s nothing you need to do. Otherwise, please rename your customized values to be in the `workers.` scope.
+
+### Upgrading from 8.x.x
+
+9.0.0 changes the supported Kubernetes version to >=1.20 <= 1.23:
+
+- drops support for Kubernetes 1.19 as it has reached end of life on 2021-10-28
+- adds support for Kubernetes 1.23 released on 2021-12-07

@@ -6,6 +6,7 @@ import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import Tabs, { TabPane } from 'components/Tabs'
 import Team from 'components/Team'
+import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -89,6 +90,7 @@ export default function Main({
         TotalTeam,
         Tabs,
         TabPane,
+        TestimonialsTable,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()

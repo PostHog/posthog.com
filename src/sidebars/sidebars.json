@@ -366,6 +366,10 @@
                     "url": "/handbook/growth/marketing/product-announcements"
                 },
                 {
+                    "name": "HostHogs (Running Events)",
+                    "url": "/handbook/growth/marketing/hosthogs"
+                },
+                {
                     "name": "Acquisition channels",
                     "url": "",
                     "children": [
@@ -464,14 +468,6 @@
                     "url": "/docs/self-host/architecture"
                 },
                 {
-                    "name": "Postgres vs ClickHouse",
-                    "url": "/docs/self-host/postgres-vs-clickhouse"
-                },
-                {
-                    "name": "Migrate from Postgres to ClickHouse",
-                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                },
-                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
@@ -506,6 +502,10 @@
                         {
                             "name": "Upgrade Notes",
                             "url": "/docs/self-host/deploy/upgrade-notes"
+                        },
+                        {
+                            "name": "Migrate from Postgres to ClickHouse",
+                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
                         },
                         {
                             "name": "Hosting Costs",
@@ -589,7 +589,6 @@
                         },
                         {
                             "name": "Postgresql",
-                            "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
                                     "name": "Resize disk",
@@ -693,7 +692,6 @@
                             "name": "Java",
                             "url": "/docs/integrate/server/java"
                         },
-
                         {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
@@ -815,11 +813,7 @@
                     "url": "/docs/user-guides/cohorts"
                 },
                 {
-                    "name": "Group Analytics",
-                    "url": "/docs/user-guides/group-analytics"
-                },
-                {
-                    "name": "Correlation analysis",
+                    "name": "Correlation Analysis",
                     "url": "/docs/user-guides/correlation"
                 },
                 {
@@ -839,6 +833,14 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
+                    "name": "Group Analytics",
+                    "url": "/docs/user-guides/group-analytics"
+                },
+                {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
+                },
+                {
                     "name": "Organizations and projects",
                     "url": "/docs/user-guides/organizations-and-projects"
                 },
@@ -847,8 +849,16 @@
                     "url": "/docs/user-guides/paths"
                 },
                 {
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
+                },
+                {
                     "name": "Plugins",
                     "url": "/docs/user-guides/plugins"
+                },
+                {
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "Retention",
@@ -857,14 +867,6 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Lifecycle",
-                    "url": "/docs/user-guides/lifecycle"
-                },
-                {
-                    "name": "Recordings",
-                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO & SAML",
@@ -881,10 +883,6 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "Persons",
-                    "url": "/docs/user-guides/persons"
                 }
             ]
         },
@@ -1042,7 +1040,6 @@
             "name": "Session recording",
             "url": "/product/session-recording"
         },
-
         {
             "name": "Feature flags",
             "url": "/product/feature-flags"

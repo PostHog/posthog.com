@@ -91,6 +91,13 @@ module.exports = {
                 path: `${__dirname}/src/data/authors.json`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `testimonials`,
+                path: `${__dirname}/src/data/testimonials.json`,
+            },
+        },
         `gatsby-transformer-gitinfo`,
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',

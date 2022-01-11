@@ -1,4 +1,4 @@
-const replacePath = require('./utils')
+const { replacePath, flattenMenu } = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
 const Slugger = require('github-slugger')
@@ -152,23 +152,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     if (result.errors) {
         return Promise.reject(mdPagesResult.errors)
-    }
-
-    function flattenMenu(items, breadcrumb = []) {
-        return items.reduce((acc, item) => {
-            if (item.url) {
-                acc.push({ url: item.url, name: item.name, breadcrumb })
-            }
-            if (item.children) {
-                acc.push(
-                    ...flattenMenu(item.children, [
-                        ...breadcrumb,
-                        { name: item.name, url: item.url || item.children[0].url },
-                    ])
-                )
-            }
-            return acc
-        }, [])
     }
 
     function formatToc(headings) {

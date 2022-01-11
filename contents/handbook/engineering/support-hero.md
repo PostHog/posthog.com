@@ -61,6 +61,34 @@ We tag customers in [Papercups](#papercups) according to these categories so you
 
 At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
 
+## Categorizing requests
+
+It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users
+
+When you respond to an issue add a "conversation tag" with one of the following categories:
+* Performance
+* Deployments
+  * Scaling
+  * Setup 
+  * Maintenance
+  * Hobbyist
+  * Migrations
+  * Supporting Managed Instances
+* Instrumentation
+* User Experience Confusion
+* Data Integrity
+* API
+* Plugins
+* Recordings
+* Toolbar
+* Feature-flags
+* Not-a-bug
+* Billing
+* Feature request
+* Other
+
+If something falls into two categories, just tag the one you think is most relevant.
+
 ### Escalating issues
 
 You should always try to figure out the issues customers are having by yourself before escalating. This means gathering more information from the customer, reproducing the issue and ideally fixing the issue yourself by creating a PR. Only if you are completely swamped, you really don't have any knowledge about the area (most common with deployment questions) or you can't figure out what's going on should you escalate to secondary on call.
@@ -72,6 +100,7 @@ You should always try to figure out the issues customers are having by yourself 
     - Do this by going to https://app.posthog.com/admin/posthog/user/, finding the relevant user and clicking 'log in as them'
     - To go back to your old user, just log out
     - If they have asked for help it is safe to assume they've given permission for you to log in as them.
+    - You can also check to see sentry errors tied to the user via the `user.username` parameter for e.g. [for test@posthog.com](https://sentry.io/organizations/posthog2/issues/?project=1899813&query=is%3Aunresolved+user.username%3Atest%40posthog.com&statsPeriod=14d)
 - When trying to debug an issue with a customer and it's not immediately obvious, it's usually much faster to do a Zoom session. You also tend to get other useful product feedback.
 - When dealing with slowness, ask users to send a screenshot of their "System Status" page (under settings)
   - If they have a lot of volume and they're still on Postgres they should probably upgrade to Clickhouse

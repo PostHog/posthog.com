@@ -55,7 +55,7 @@ const sections = [
                 name: 'Scales to...',
                 tiers: {
                     'PostHog Cloud': 'Millions of users/mo',
-                    'Open source': '~1m users/mo',
+                    'Open source': '~100k users/mo (no hard limit, but we recommend support beyond this)',
                     Scale: 'Millions of users/mo',
                     Enterprise: 'Millions of users/mo',
                 },
@@ -80,19 +80,6 @@ const sections = [
                     'Open source': 'Instant',
                     Scale: '1-3 days',
                     Enterprise: '1-3 days',
-                },
-            },
-            {
-                name: 'Automatic updates',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
-            },
-            {
-                name: 'Self-hosted database',
-                tiers: {
-                    'PostHog Cloud': 'n/a',
-                    'Open source': 'ClickHouse',
-                    Scale: 'ClickHouse',
-                    Scale: 'ClickHouse',
                 },
             },
             {
@@ -151,14 +138,17 @@ const sections = [
             },
             {
                 name: 'Session Recording',
+                docsLink: 'docs/user-guides/recordings',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Feature Flags',
+                docsLink: 'docs/user-guides/feature-flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Plugins',
+                docsLink: 'docs/user-guides/plugins',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
         ],
@@ -168,14 +158,25 @@ const sections = [
         features: [
             {
                 name: 'Correlation Analysis',
+                docsLink: 'docs/user-guides/correlation',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
                 name: 'Group Analytics',
+                docsLink: 'docs/user-guides/group-analytics',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
                 name: 'Multivariate testing',
+                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags-alpha',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Event taxonomy descriptions and tags',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Dashboard tagging',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
         ],
@@ -194,18 +195,26 @@ const sections = [
             },
             {
                 name: 'SSO/SAML',
+                docsLink: 'docs/user-guides/sso',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: false, Enterprise: true },
             },
             {
                 name: 'API access',
+                docsLink: 'docs/api',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'User permissions',
+                docsLink: 'docs/user-guides/organizations-and-projects#permissions',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
                 name: 'Advanced user permissions',
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+            },
+            {
+                name: 'Private projects',
+                docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
                 tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
             },
             {
@@ -216,6 +225,10 @@ const sections = [
                 name: 'Backup configuration',
                 tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
             },
+            {
+                name: 'Proactive security patch alerting',
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+            },
         ],
     },
     {
@@ -223,19 +236,23 @@ const sections = [
         features: [
             {
                 name: 'Slack',
+                docsLink: 'docs/integrate/webhooks/slack#4-add-to-action',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Microsoft Teams',
+                docsLink: 'docs/integrate/webhooks/microsoft-teams',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Discord',
+                docsLink: 'docs/integrate/webhooks/discord',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Zapier',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                docsLink: 'https://zapier.com/apps/posthog/integrations',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
         ],
     },
@@ -244,6 +261,7 @@ const sections = [
         features: [
             {
                 name: 'Slack (community)',
+                docsLink: 'slack',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
@@ -542,7 +560,11 @@ export const PlanComparison = ({ className = '' }) => {
                                                 className="py-5 px-6 text-sm font-normal text-almost-black text-left border-white border-opacity-10"
                                                 scope="row"
                                             >
-                                                {feature.name}
+                                                {typeof feature.docsLink === 'string' ? (
+                                                    <a href={feature.docsLink}>{feature.name}</a>
+                                                ) : (
+                                                    feature.name
+                                                )}
                                             </th>
                                             {tiers.map((tier) => (
                                                 <td

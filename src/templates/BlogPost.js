@@ -54,14 +54,14 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
                     <Contributors className="flex flex-col space-y-2" contributors={contributors} />
                 </SidebarSection>
             )}
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
-            {categories && (
+            {categories?.length > 0 && (
                 <SidebarSection title="Topic(s)">
                     <Topics topics={categories} />
                 </SidebarSection>
@@ -95,7 +95,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
-    const { body, excerpt } = postData
+    const { body, excerpt, fields } = postData
     const { date, title, featuredImage, featuredImageType, contributors, description } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -121,7 +121,11 @@ export default function BlogPost({ data, pageContext, location }) {
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={
+                    featuredImageType === 'full'
+                        ? `/og-images/${fields.slug.replace(/\//g, '')}.jpeg`
+                        : featuredImage?.publicURL
+                }
             />
             <Breadcrumbs className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary" darkModeToggle>
                 <Crumb title="Blog" url="/blog" />
