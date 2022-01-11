@@ -65,7 +65,7 @@ At the moment, Charles manually tags customers based on Stripe and HubSpot data 
 
 It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users
 
-When you respond to an issue add a tag with one of the following categories:
+When you respond to an issue add a "conversation tag" with one of the following categories:
 * Performance
 * Deployments
 * User Experience Confusion
