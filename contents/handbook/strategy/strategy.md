@@ -52,7 +52,7 @@ Revenue is critical for us to go public _but we won't set short-term revenue tar
 
 We discuss how we track against our high-level metrics once a week during PostHog news. 
 
-[Click here to see our goals for 2022 (internal)](https://github.com/PostHog/company-internal/blob/master/internal-metric-goals-2022.md)
+[Targets for these metrics for 2022 (internal)](https://github.com/PostHog/company-internal/blob/master/internal-metric-goals-2022.md)
 
 ### How should we prioritize between competing directions?
 
