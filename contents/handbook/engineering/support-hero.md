@@ -70,10 +70,9 @@ When you initially respond to an issue add a "conversation tag" with the followi
 * Performance
 * Docs confusion _either missing or confusing_.
 * Data integrity
-* Deployments
-  * Setup
-  * Upgrading
-  * Maintenance
+* Deployments/Setup
+* Deployments/Upgrading
+* Deployments/Maintenance
 * Non-self-serve _for requests that need to be processed manually (e.g. removing events)_.
 * Billing
 * Feature request
