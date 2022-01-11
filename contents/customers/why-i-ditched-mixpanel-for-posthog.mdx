@@ -36,7 +36,7 @@ I was getting so little value from Google Analytics that I started to look for a
 ### Switching from Mixpanel to PostHog
 Initially Mixpanel delivered the value we had hoped for. We were able to see how our app was used, see which areas of the product weren’t converting and use that data in discussions about improvements to the product. However, Mixpanel’s free tier is _very_ limited and only lets you create five funnels. They want you to pay for their services, but we found them too expensive to justify. 
 
-So, I started looking for a self-hosted alternative. By [self-hosting our analytics](https://posthog.com/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of Mixpanel's lowest pricing tier. We would also have more control over our user data. 
+So, I started looking for a self-hosted alternative. By [self-hosting our analytics](/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of Mixpanel's lowest pricing tier. We would also have more control over our user data. 
 
 During my research I came across PostHog. It offered the same funnel views that Mixpanel did, could be self-hosted and even offered a free tier that offered unlimited funnels. It was a no-brainer for us to switch.
 
@@ -56,9 +56,9 @@ export function recordEvent(eventName: string, options: AnalyticsOptions): void 
 }
 ```
 
-After this, [building funnels in PostHog](https://posthog.com/docs/user-guides/funnels) was really easy. I built a sequence of events trigger as a user performs actions in the app and [saved these insights into a dashboard](https://posthog.com/docs/user-guides/dashboards) so there would be a single place to collect insights for a particular behaviour or section of the product.
+After this, [building funnels in PostHog](/docs/user-guides/funnels) was really easy. I built a sequence of events trigger as a user performs actions in the app and [saved these insights into a dashboard](/docs/user-guides/dashboards) so there would be a single place to collect insights for a particular behaviour or section of the product.
 
-There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](https://posthog.com/docs/user-guides/feature-flags) and [plugins that integrate with release management tools](https://posthog.com/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with Mixpanel.
+There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](/docs/user-guides/feature-flags) and [plugins that integrate with release management tools](/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with Mixpanel.
 
 <BorderWrapper>
     <Quote
