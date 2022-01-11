@@ -1,5 +1,5 @@
 ---
-title: Support Hero and Rotations
+title: Support Hero and rotations
 sidebar: Handbook
 showTitle: true
 ---
@@ -63,9 +63,9 @@ At the moment, Charles manually tags customers based on Stripe and HubSpot data 
 
 ## Categorizing requests
 
-It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users
+It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
 
-When you respond to an issue add a "conversation tag" with one of the following categories:
+When you initially respond to an issue add a "conversation tag" with the following categories:
 * Performance
 * Deployments
   * Scaling
@@ -87,7 +87,7 @@ When you respond to an issue add a "conversation tag" with one of the following 
 * Feature request
 * Other
 
-If something falls into two categories, just tag the one you think is most relevant.
+If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
 
 ### Escalating issues
 
