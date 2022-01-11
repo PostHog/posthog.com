@@ -13,62 +13,48 @@ hideAnchor: true
 
 ## Mission
 
-Make using and developing for PostHog as reliable as running water. Wherever you want it.
+Make deploying, scaling and managing PostHog easy
 
-## Goals 
+## Goals & Key Results
 
-- We don't lose events
-- Data is as up to date as possible
-- Engineers always be able to ship and build
-- Fail fast. Fix faster.
-- Ship anywhere
-- Stack scales with demand
-- Support Small Teams (and contributors) in building and debugging PostHog
-- Be frugal.
+* PostHog is the easiest self-hosted product to deploy and scale in the world
+    * Result: Volume of clients requring help @marcushyett-ph
+    * Result: % of successful installs / upgrades @guidoiaquinti
+    * Result: Max size of operating instances @fuziontech
+    * Montior: % of users on latest version of PostHog @tiina303
+    * Result: We don't lose customers because we can't scale enough (shared with Core Analytics) @marcushyett-ph
+* Move all posthog-supported instances to self-hosted
+    * Result: No alerts come to us from customer-instances
+* All valid events are ingested correctly
+    * Result: Time ingestion is down on cloud (from alert) @fuziontech
+    * Result: Lost events between ingress and clickhouse @fuziontech
+* Data is as up to date as possible
+    * Result: Latency between ingress and clickhouse @fuziontech
+* A good experience for plugin developers
+    * Result: Good docs, alerting, debugging and testing @yakkomajuri
 
-## Responsibilities
-Concrete things we take responsibility over:
+## Scope
+In Scope
+  * Deploying and managing Posthog (Cloud + Self-hosted)
+  * Scaling posthog (Cloud + Self-hosted)
+  * Infrstructure for migrations on Clickhouse
+  * Ingestion, libraries and plugins (contentious)
 
-- [app.posthog.com](https://app.posthog.com) and its infrastructure
-- On Prem & Single Tenant deployments
-- CI/CD - How we deploy
-- Data infrastructure (ClickHouse, Kafka)
-- Monitoring and Alerting stack
-- Event ingestion
-- Extensibility: Plugin server, plugins, and libraries
+Out of Scope
+  * Developer Experience
+  * Expanding the plugins library
+  * Writing analytics queries for performance and table schemas
 
-## Customer
-
-- Other Small Teams in making sure they have the tools (databases, queues, etc) and the ability to deploy effortlessly that they need to build
-- End users (Both cloud and on-prem teams)
-
-## Output metrics
-
-### VPC
-###### Retention 
-- Metric: Retention
-- Objective: Better than cloud
-### Cloud
-###### Data Loss
-- Metric: Data loss %
-- Objective: < 0.1%
-###### Uptime 
-- Metric: Uptime
-- Objective: > 99.99%
-###### Speed 
-- Metric: Speed
-- Objectives
-  - Event ingestion: TBD
-  - Query response: TBD
-- Overall: We should anticipate increasing demand (either manually or automatically)
-##### Cost 
-- Metric: Infra Costs 
-- Objective: Our costs should grow at a rate that is sublinear relative to scale
-### Dev experience
-##### Dev experience NPS (Infra)
-- Metric: Developer experience (relating to infra) (maybe NPS?)
-- Objective: TBD (maybe NPS?)
+## How we work?
+* Pairing at least two people on one goal/project - not having a single person alone working on a goal
+* The board should be our source of truth
+* We document what we do to share context internally
+* We finish what we start, or we don't start it at all
+* We continually prioritize
+* We prioritize ublocking others
+* We have an agenda and follow up on actions from our meetings
+* Be frugal
 
 ## Slack channel
 
-[#team-deployments-and-infrastructure](https://posthog.slack.com/messages/team-deployments-and-infrastructure)
+[#team-platform](https://posthog.slack.com/messages/team-platform)
