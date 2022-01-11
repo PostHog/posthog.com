@@ -20,7 +20,7 @@ featuredImageType: full
 
 Here's what we learned - good and bad...
 
-## We were disciplined at letting people go, but we were scared to re-hire
+## We were disciplined at letting people go, but we got scared to re-hire
 
 We hired [world class people](../handbook/company/team), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
