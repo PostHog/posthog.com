@@ -70,7 +70,7 @@ When you respond to an issue add a "conversation tag" with one of the following 
 * Deployments
   * Scaling
   * Setup 
-  * Maintainance
+  * Maintenance
   * Hobbyist
 * Instrumentation
 * User Experience Confusion
