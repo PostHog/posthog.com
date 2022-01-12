@@ -1,5 +1,5 @@
 // import { replacePath } from './utils'
-const replacePath = require('./utils')
+const { replacePath } = require('./utils')
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')

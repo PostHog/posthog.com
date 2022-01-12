@@ -39,6 +39,10 @@
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
+                    "name": "Brand",
+                    "url": "/handbook/strategy/brand"
+                },
+                {
                     "name": "Prioritization",
                     "url": "/handbook/strategy/prioritization"
                 }
@@ -94,8 +98,8 @@
                     "url": "/handbook/company/security"
                 },
                 {
-                    "name": "Branding",
-                    "url": "/handbook/company/branding"
+                    "name": "Brand assets",
+                    "url": "/handbook/company/brand-assets"
                 },
                 {
                     "name": "Team structure",
@@ -258,10 +262,6 @@
                     "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
-                    "name": "Setting up PostHog EE",
-                    "url": "/handbook/engineering/ee-setup"
-                },
-                {
                     "name": "Common issues",
                     "url": "/handbook/engineering/common-issues"
                 },
@@ -300,6 +300,10 @@
                 {
                     "name": "Disruption Messages",
                     "url": "/handbook/engineering/disruption-messages"
+                },
+                {
+                    "name": "Writing async migrations",
+                    "url": "/handbook/engineering/async-migrations"
                 }
             ]
         },
@@ -360,6 +364,10 @@
                 {
                     "name": "Product announcements",
                     "url": "/handbook/growth/marketing/product-announcements"
+                },
+                {
+                    "name": "HostHogs (Running Events)",
+                    "url": "/handbook/growth/marketing/hosthogs"
                 },
                 {
                     "name": "Acquisition channels",
@@ -432,6 +440,10 @@
                         {
                             "name": "Billing",
                             "url": "/handbook/growth/sales/billing"
+                        },
+                        {
+                            "name": "Who we do business with",
+                            "url": "/handbook/growth/sales/who-we-do-business-with"
                         }
                     ]
                 }
@@ -456,14 +468,6 @@
                     "url": "/docs/self-host/architecture"
                 },
                 {
-                    "name": "Postgres vs ClickHouse",
-                    "url": "/docs/self-host/postgres-vs-clickhouse"
-                },
-                {
-                    "name": "Migrate from Postgres to ClickHouse",
-                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                },
-                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
@@ -484,6 +488,10 @@
                             "url": "/docs/self-host/deploy/gcp"
                         },
                         {
+                            "name": "Hobby",
+                            "url": "/docs/self-host/deploy/hobby"
+                        },
+                        {
                             "name": "Other Platforms",
                             "url": "/docs/self-host/deploy/other"
                         },
@@ -494,6 +502,10 @@
                         {
                             "name": "Upgrade Notes",
                             "url": "/docs/self-host/deploy/upgrade-notes"
+                        },
+                        {
+                            "name": "Migrate from Postgres to ClickHouse",
+                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
                         },
                         {
                             "name": "Hosting Costs",
@@ -528,6 +540,10 @@
                         {
                             "name": "Upgrading PostHog",
                             "url": "/docs/self-host/configure/upgrading-posthog"
+                        },
+                        {
+                            "name": "Async migrations",
+                            "url": "/docs/self-host/configure/async-migrations"
                         }
                     ]
                 },
@@ -548,6 +564,10 @@
                                     "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
                                 },
                                 {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/clickhouse/resize-disk"
+                                },
+                                {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
                                 }
@@ -564,6 +584,15 @@
                                 {
                                     "name": "Log retention",
                                     "url": "/docs/self-host/runbook/kafka/log-retention"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Postgresql",
+                            "children": [
+                                {
+                                    "name": "Resize disk",
+                                    "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
                         }
@@ -663,7 +692,6 @@
                             "name": "Java",
                             "url": "/docs/integrate/server/java"
                         },
-
                         {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
@@ -784,9 +812,8 @@
                     "name": "Cohorts",
                     "url": "/docs/user-guides/cohorts"
                 },
-
                 {
-                    "name": "Correlation analysis",
+                    "name": "Correlation Analysis",
                     "url": "/docs/user-guides/correlation"
                 },
                 {
@@ -806,6 +833,14 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
+                    "name": "Group Analytics",
+                    "url": "/docs/user-guides/group-analytics"
+                },
+                {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
+                },
+                {
                     "name": "Organizations and projects",
                     "url": "/docs/user-guides/organizations-and-projects"
                 },
@@ -814,8 +849,16 @@
                     "url": "/docs/user-guides/paths"
                 },
                 {
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
+                },
+                {
                     "name": "Plugins",
                     "url": "/docs/user-guides/plugins"
+                },
+                {
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "Retention",
@@ -824,14 +867,6 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Lifecycle",
-                    "url": "/docs/user-guides/lifecycle"
-                },
-                {
-                    "name": "Recordings",
-                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO & SAML",
@@ -848,10 +883,6 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "Persons",
-                    "url": "/docs/user-guides/persons"
                 }
             ]
         },
@@ -893,77 +924,7 @@
         },
         {
             "name": "Tutorials",
-            "url": "",
-            "children": [
-                {
-                    "name": "Overview",
-                    "url": "/docs/tutorials"
-                },
-                {
-                    "name": "How to safely roll out new features",
-                    "url": "/docs/tutorials/feature-flags"
-                },
-                {
-                    "name": "Visualizing user behavior - Toolbar",
-                    "url": "/docs/tutorials/toolbar"
-                },
-                {
-                    "name": "Analyzing your conversion with Fun…",
-                    "url": "/docs/tutorials/funnels"
-                },
-                {
-                    "name": "Funnel conversion with Next.js and Supabase",
-                    "url": "/docs/tutorials/nextjs-supabase-signup-funnel"
-                },
-                {
-                    "name": "Analyzing user behavior with Cohorts",
-                    "url": "/docs/tutorials/cohorts"
-                },
-                {
-                    "name": "Measuring retention and tracking c…",
-                    "url": "/docs/tutorials/retention"
-                },
-                {
-                    "name": "Setting up deep dive acquisition dashboards",
-                    "url": "/docs/tutorials/taxonomy-acquisition"
-                },
-                {
-                    "name": "Tracking single page apps",
-                    "url": "/docs/tutorials/spa"
-                },
-                {
-                    "name": "Complete guide to event tracking",
-                    "url": "/docs/tutorials/event-tracking-guide"
-                },
-                {
-                    "name": "Tracking key B2B product metrics",
-                    "url": "/docs/tutorials/b2b"
-                },
-                {
-                    "name": "Sales and revenue tracking",
-                    "url": "/docs/tutorials/revenue"
-                },
-                {
-                    "name": "Tracking how teams use your product",
-                    "url": "/docs/tutorials/tracking-teams"
-                },
-                {
-                    "name": "Running surveys with no backend",
-                    "url": "/docs/tutorials/survey"
-                },
-                {
-                    "name": "Deleting bulk data",
-                    "url": "/docs/tutorials/deleting-data"
-                },
-                {
-                    "name": "Building an AARRR pirate funnel",
-                    "url": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
-                },
-                {
-                    "name": "How to embed a shared Dashboard",
-                    "url": "/docs/tutorials/how-to-embed-shared-dashboard"
-                }
-            ]
+            "url": "/tutorials"
         },
         {
             "name": "API",
@@ -1052,6 +1013,40 @@
                     "url": "/docs/contribute/coding-conventions"
                 }
             ]
+        }
+    ],
+    "product": [
+        {
+            "name": "Overview",
+            "url": "/product"
+        },
+        {
+            "name": "Funnels",
+            "url": "/product/funnels"
+        },
+        {
+            "name": "Trends",
+            "url": "/product/trends"
+        },
+        {
+            "name": "User paths",
+            "url": "/product/user-paths"
+        },
+        {
+            "name": "Quantitative analysis",
+            "url": "/product/quantitative-analysis"
+        },
+        {
+            "name": "Session recording",
+            "url": "/product/session-recording"
+        },
+        {
+            "name": "Feature flags",
+            "url": "/product/feature-flags"
+        },
+        {
+            "name": "Heatmaps",
+            "url": "/product/heatmaps"
         }
     ]
 }

@@ -23,7 +23,11 @@ export default function Tutorials({ title, subtitle, cta }) {
                     return (
                         <li key={index} className="lg:p-10 py-10">
                             <Link to={slug}>
-                                <GatsbyImage image={image} alt={title} />
+                                <GatsbyImage
+                                    className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
+                                    image={image}
+                                    alt={title}
+                                />
                                 <h4 className="leading-snug">{title}</h4>
                             </Link>
                         </li>
@@ -50,7 +54,7 @@ const query = graphql`
                     title
                     featuredImage {
                         childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(placeholder: NONE)
                         }
                     }
                 }

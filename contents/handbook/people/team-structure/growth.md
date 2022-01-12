@@ -25,6 +25,7 @@ Growth engineering works
 
 ## Output metrics
 
+* Primary: Number of users per self-hosted deployment
 * Acquisition
 * Activation
 * Revenue

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: yakko-majuri
+author: ["yakko-majuri"]
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 ---

@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories:
     - CEO diaries
-author: james-hawkins
+author: ["james-hawkins"]
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 ---

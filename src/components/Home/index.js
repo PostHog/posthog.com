@@ -1,3 +1,4 @@
+import StarUsBanner from 'components/StarUsBanner'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
@@ -17,31 +18,36 @@ const Home = () => {
     useValues(posthogAnalyticsLogic) // mount this logic
 
     return (
-        <Layout>
-            <SEO
-                title="PostHog - Open-Source Product Analytics"
-                description="Self-hosted product analytics stack, to deploy on your infrastructure."
-            />
-            <Hero />
-            <Customers />
-            <BeforeAndAfter />
-            <Features
-                title={
-                    <>
-                        Everything product-led teams need <span className="text-yellow">in one place</span>
-                    </>
-                }
-            />
-            <Pipelines />
-            <Quote />
-            <Community />
-            <Tutorials
-                title="Tutorials"
-                subtitle="See the power of PostHog in action."
-                cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
-            />
-            <CTA />
-        </Layout>
+        typeof window !== 'undefined' && (
+            <>
+                <StarUsBanner />
+                <Layout>
+                    <SEO
+                        title="PostHog - Host Your Own Product Analytics"
+                        description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
+                    />
+                    <Hero />
+                    <Customers />
+                    <BeforeAndAfter />
+                    <Features
+                        title={
+                            <>
+                                Everything product-led teams need <span className="text-yellow">in one place</span>
+                            </>
+                        }
+                    />
+                    <Pipelines />
+                    <Quote />
+                    <Community />
+                    <Tutorials
+                        title="Tutorials"
+                        subtitle="See the power of PostHog in action."
+                        cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
+                    />
+                    <CTA />
+                </Layout>
+            </>
+        )
     )
 }
 

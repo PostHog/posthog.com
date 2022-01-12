@@ -50,7 +50,7 @@ export default function Handbook({
                 title={`${title} - Posthog ${breadcrumbBase.name}`}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
             />
             <Layout>
                 <div className="handbook-container px-4">
