@@ -34,7 +34,7 @@ The end result? Lost time - and that has a lot of opportunity cost.
 
 It was midway through last year when it clicked.
 
-We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the [team])(../handbook/company/team) size too. Those things combined makes knowing where to focus particularly challenging!
+We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the [team](../handbook/company/team) size too. Those things combined makes knowing where to focus particularly challenging!
 
 We were getting a lot of inbound paid demand, so we felt we should figure out how to get product market fit for our paid product. This would force us to have a clear split between our free and paid products.
 
