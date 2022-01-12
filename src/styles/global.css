@@ -63,14 +63,8 @@ p {
         margin-bottom: 0.125rem;
     }
 
-    blockquote:not('.quote') {
+    blockquote:not(.quote) {
         @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
-    }
-
-    &.customer-content {
-        blockquote {
-            @apply bg-transparent p-0;
-        }
     }
 
     iframe {
