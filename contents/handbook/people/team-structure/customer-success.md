@@ -27,8 +27,7 @@ Primarily brand new and existing users of Scale and Enterprise
 
 ## Output metrics
 
-* Revenue
-* New customer acquisition
+* Revenue through conversion of high quality free sign-ups to paid
 * Existing customer retention
 
 ## Principles
