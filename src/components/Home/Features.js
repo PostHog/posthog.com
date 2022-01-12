@@ -83,16 +83,17 @@ export default function Features({ title }) {
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
-                        title="session recordings"
+                        title="session recording"
                         index={2}
-                    />{' '}
+                    />
+                    ,{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={3}
                         title="feature flags"
-                    />{' '}
-                    & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
+                    />
+                    , & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
                 </h3>
             </div>
             <SliderNav
@@ -120,7 +121,7 @@ export default function Features({ title }) {
                         & synced annotations <span className="opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
-                <CallToAction width="56" type="outline" to="/docs/user-guides">
+                <CallToAction width="56" type="outline" to="/product">
                     Explore all features
                 </CallToAction>
             </div>

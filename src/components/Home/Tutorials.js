@@ -24,17 +24,19 @@ export default function Tutorials({ title, subtitle, cta }) {
                         <li key={index} className="lg:p-10 py-10">
                             <Link to={slug}>
                                 <GatsbyImage image={image} alt={title} />
-                                <h4>{title}</h4>
+                                <h4 className="leading-snug">{title}</h4>
                             </Link>
                         </li>
                     )
                 })}
             </ul>
-            <div className="text-center mt-5">
-                <CallToAction to={cta?.url} type="outline">
-                    {cta?.title}
-                </CallToAction>
-            </div>
+            {cta?.url && cta?.title && (
+                <div className="text-center mt-5">
+                    <CallToAction to={cta?.url} type="outline">
+                        {cta?.title}
+                    </CallToAction>
+                </div>
+            )}
         </section>
     )
 }

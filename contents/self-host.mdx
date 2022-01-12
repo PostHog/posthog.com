@@ -1,7 +1,7 @@
 ---
 title: Self-host
 showTitle: false
-width: lg
+width: full
 ---
 
 import Features from '../src/components/Home/Features'
@@ -9,10 +9,12 @@ import Customers from '../src/components/Home/Customers'
 import Community from '../src/components/Home/Community'
 import Pipelines from '../src/components/Home/Pipelines'
 import Tutorials from '../src/components/Home/Tutorials'
+import CTA from '../src/components/Home/CTA'
+import { FeatureStrip } from '../src/components/Home/Hero'
 
 <Hero
-    title="The all-in-one, self-hosted product analytics suite"
-    subtitle="Our open source analytics platform gives you complete control of your data so you can learn, optimise and grow."
+    title="The all-in-one, <span style='color: #f64e00;'>self-hosted</span> product analytics suite"
+    subtitle="Our open source analytics platform gives you complete control of your data so you can learn, optimize and grow."
     ctas={[
         <CallToAction width="56" to="/signup">
             Get started
@@ -23,10 +25,12 @@ import Tutorials from '../src/components/Home/Tutorials'
     ]}
 />
 
+<FeatureStrip className="mt-12" />
+
 <Features
     title={
         <>
-            Everything you need to <span className="text-blue">optimise</span> and{' '}
+            Everything you need to <span className="text-blue">optimize</span> and{' '}
             <span className="text-blue">grow</span> in one place
         </>
     }
@@ -36,10 +40,12 @@ import Tutorials from '../src/components/Home/Tutorials'
 
 <Pipelines />
 
+<div className="max-w-screen-2xl mx-auto">
+
 <Section cols={3}>
     <div>
         <h5>
-            <span className="text-yellow">Reduce</span> security risks
+            <span className="text-yellow block text-2xl">Reduce</span> security risks
         </h5>
         <p>
             Running analytics on your infrastructure dramatically reduces the risk of data breaches, improves security
@@ -48,7 +54,7 @@ import Tutorials from '../src/components/Home/Tutorials'
     </div>
     <div>
         <h5>
-            <span className="text-yellow">Freedom to optimise</span> and tweak as you please
+            <span className="text-yellow block text-2xl">Freedom to optimize</span> and tweak as you please
         </h5>
         <p>
             With total control over your instance and a full view of PostHog’s open source codebase, you can make any
@@ -57,23 +63,19 @@ import Tutorials from '../src/components/Home/Tutorials'
     </div>
     <div>
         <h5>
-            <span className="text-yellow">Gain</span> a better understanding of your customers
+            <span className="text-yellow block text-2xl">Gain</span> a better understanding of your customers
         </h5>
         <p>
             By tracking and monitoring the metrics important to you in-house, you can keep a closer eye on your
-            customers behaviour and respond accordingly.
+            customers behavior and respond accordingly.
         </p>
     </div>
 </Section>
 
+</div>
+
 <Community />
 
-<Section cols={1}>
-    <div>
-        <Tutorials
-            title="Watch PostHog in action"
-            subtitle="See some of the ways PostHog can transform your analytics."
-            cta={{ title: 'Get started', url: '/signup' }}
-        />
-    </div>
-</Section>
+<Tutorials title="See PostHog in action" subtitle="Discover some of the ways PostHog can transform your analytics." />
+
+<CTA />
