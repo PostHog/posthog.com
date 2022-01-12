@@ -172,7 +172,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     // Blog post OG
     for (const post of data.blog.nodes) {
         const { title, authorData, featuredImage } = post.frontmatter
-        const image = fs.readFileSync(path.resolve(__dirname, featuredImage.absolutePath), {
+        const image = fs.readFileSync(featuredImage.absolutePath, {
             encoding: 'base64',
         })
         await createOG({
@@ -203,7 +203,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 username,
                 avatar:
                     avatar.absolutePath &&
-                    fs.readFileSync(path.resolve(__dirname, avatar.absolutePath), {
+                    fs.readFileSync(avatar.absolutePath, {
                         encoding: 'base64',
                     }),
             }
@@ -233,10 +233,10 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     for (const post of data.customers.nodes) {
         const { frontmatter } = post
         const logoType = frontmatter.logo.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
-        const featuredImage = fs.readFileSync(path.resolve(__dirname, frontmatter.featuredImage.absolutePath), {
+        const featuredImage = fs.readFileSync(frontmatter.featuredImage.absolutePath, {
             encoding: 'base64',
         })
-        const logo = fs.readFileSync(path.resolve(__dirname, frontmatter.logo.absolutePath), {
+        const logo = fs.readFileSync(frontmatter.logo.absolutePath, {
             encoding: 'base64',
         })
         await createOG({
