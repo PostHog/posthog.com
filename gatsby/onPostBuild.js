@@ -188,14 +188,8 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     // Docs and Handbook OG
     for (const post of data.docsHandbook.nodes) {
         const { title } = post.frontmatter
-        const {
-            timeToRead,
-            excerpt,
-            fields,
-            parent: {
-                fields: { lastUpdated },
-            },
-        } = post
+        const { timeToRead, excerpt, fields, parent } = post
+        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
         if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
         const contributors = post.contributors.map((contributor) => {
             const { avatar, username } = contributor
