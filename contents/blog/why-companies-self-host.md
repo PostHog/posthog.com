@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 keywords: ["self host analytics","self hosted analytics"]
-featuredImage: ..contents/images/blog/posthog-release-notes-blog.png
+featuredImage: ../images/blog/posthog-release-notes-blog.png
 author: ["andy-vandervell"]
 categories: ["General"]
 ---
