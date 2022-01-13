@@ -8,14 +8,17 @@ If your team doesn't have a dedicated designer, create an [issue](https://github
 
 In the issue should be details about what you need from a product designer:
 
-1. What do you need designed and why?
-2. What is the deadline?
+1. Have you provided sufficient context for the problem you're trying to solve?
+2. Are there any technical constraints to be aware of?
+3. Is there any user feedback or other qualitative data that can inform the problem?
+4. How soon do you need a solution?
+5. Do you have success criteria documented?
 
 If there isn’t a clear deadline for your design request, we’ll prioritize according to our availability.
 
 ### When to loop in design
 
-Because we hire self-starters, there is no expectation that every project should start by running through design _first_.
+Because we hire self-starters, there is no expectation that every project should start by running through design _first_. If you are contributing design, be sure to consult the [contribution guidelines](/handbook/company/contributing-to-product-design)
 
 Depending on your preferred workflow, there are different ways we can get involved.
 
