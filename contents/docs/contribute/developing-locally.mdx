@@ -4,10 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-<blockquote class="warning-note">
-    ⚠️ Do not use <code>release-*</code> patterns in your branches unless pushing a release as these branches have
-    special handling related to releases.
-</blockquote>
+
+> ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
+> for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
 
 
 ## What does PostHog look like?
@@ -240,6 +239,9 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
 
+### 7. Develop
+
+This is it! You can now change PostHog in any way you want. To do this, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use <code>release-*</code> patterns in your branches unless pushing a release, as such branches have special handling related to releases.
 
 ## Testing
 
@@ -280,7 +282,7 @@ If you'd like to have ALL feature flags that exist in PostHog at your disposal r
 
 ## Extra: Debugging the backend in PyCharm
 
-With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
+With [PyCharm's](/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.
