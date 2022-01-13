@@ -1,6 +1,11 @@
+import {
+    Info as InfoCircleOutlined,
+    Maybe as MinusCircleFilled,
+    No as CloseCircleFilled,
+    Yes as CheckCircleFilled,
+} from 'components/Icons/Icons'
 import React from 'react'
 import './FeatureAvailability.scss'
-import { CheckCircleFilled, CloseCircleFilled, InfoCircleOutlined, MinusCircleFilled } from '@ant-design/icons'
 
 type AvailablePlans = 'free' | 'standard' | 'enterpriseCloud' | 'startup' | 'openSource' | 'scale' | 'enterprise'
 
@@ -65,7 +70,9 @@ function Plan({
 }): JSX.Element {
     return (
         <li className={restricted ? 'restricted' : available ? '' : 'unavailable'}>
-            {restricted ? <MinusCircleFilled /> : available ? <CheckCircleFilled /> : <CloseCircleFilled />}
+            <span>
+                {restricted ? <MinusCircleFilled /> : available ? <CheckCircleFilled /> : <CloseCircleFilled />}
+            </span>
             {name}
             {restricted && '*'}
         </li>
