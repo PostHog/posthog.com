@@ -109,19 +109,25 @@ TooManyConnections: too many connections
     kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- sh -c 'echo The Postgres password is: $POSTHOG_DB_PASSWORD'
     ```
 
-2. Connect to your Postgres pod:
-
-    > **Note:** You're connecting to your production database, proceed with caution!
+2. Connect to your Postgres pod's shell:
 
     ```bash
     # We need to determine the name of the Postgres pod (usually it's 'posthog-posthog-postgresql-0')
     POSTHOG_POSTGRES_POD_NAME=$(kubectl get pods -n posthog | grep -- '-postgresql-' | awk '{print $1}')
     # We'll connect straight to the Postgres pod's psql interface
-    kubectl exec -n posthog -it $POSTHOG_POSTGRES_POD_NAME  -- psql -d posthog -U postgres
+    kubectl exec -n posthog -it $POSTHOG_POSTGRES_POD_NAME  -- /bin/bash
     ```
 
-    Postgres will ask you for the password. Use the value you found out in step 1. Now, simply run SQL queries!
-    Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
+3. Connect to the `posthog` database:
+
+    > You're connecting to your production database, proceed with caution!
+
+    ```bash
+    psql -d posthog -U postgres
+    ```
+
+    Postgres will ask you for the password. Use the value you found out in step 1.  
+    Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
 ## How do I connect to ClickHouse?
 
