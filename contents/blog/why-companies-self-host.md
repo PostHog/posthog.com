@@ -59,7 +59,7 @@ Again, it's related to privacy, as our CTO and co-founder, Tim Glaser, explains:
 
 "Event tracking is typically prevented by ad blockers, which block tracking that originates from third-party domains. Self-hosting your analytics avoids this problem because the tracking originates from your domain. 
 
-"This behavior isn't limited to ad blockers, either. VPNs and privacy browsers, which aren't explicitly positioned as adblockers, will generally block third-party trackers by default."
+"This behavior isn't limited to ad blockers, either. VPNs and privacy browsers, which aren't explicitly positioned as ad blockers, will generally block third-party trackers by default."
 
 Data quality is a critical issue for businesses who are now recognising the competitive advantage of data-driven product decisions. A [recent analysis](https://mikkeldengsoe.substack.com/p/data-to-engineers) of the top 50 European tech companies indicates high-growth startups are hiring data analysts at a higher rate than ever - banking app Monzo more than doubled the size of its data team in the last two years, while food delivery app Glovo has 74 open data roles compared to 102 open engineering roles.
 
