@@ -210,6 +210,8 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables.
 
+If on ARM, first run `export SKIP_SERVICE_VERSION_REQUIREMENTS=1` as ClickHouse 21.9 – which is the first ARM-compatible version of ClickHouse – isn't _officially_ supported by PostHog yet.
+
 ```bash
 DEBUG=1 python manage.py migrate
 DEBUG=1 python manage.py migrate_clickhouse
@@ -217,7 +219,7 @@ DEBUG=1 python manage.py migrate_clickhouse
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
-> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
 ### 6. Start PostHog
 
