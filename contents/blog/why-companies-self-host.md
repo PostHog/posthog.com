@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 keywords: ["self host analytics","self hosted analytics"]
-featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
+featuredImage: ..contents/images/blog/posthog-release-notes-blog.png
 author: ["andy-vandervell"]
 categories: ["General"]
 ---
