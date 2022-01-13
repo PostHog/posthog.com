@@ -15,7 +15,7 @@ PostHog is a self-hosted, [open-source analytics tool](/blog/best-open-source-an
 
 This is a question we're always interrogating. As a business it's important we're on the right path and part of that journey is constantly talking to and listening to our customers, whether they're paying or open-source users. 
 
-Those conversations never end, but through them we've found there are three fundamental reasons companies choose to self-host. If any of them apply to you, PostHog might be the product analytics you need.
+Those conversations never end, but through them we've found there are three fundamental reasons companies choose to self-host. If any of them apply to you, PostHog might be the product analytics platform you need.
 
 ## 1) Data privacy
 
