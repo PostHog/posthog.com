@@ -21,7 +21,7 @@ Make deploying, scaling and managing PostHog easy
     * Result: Volume of clients requring help @marcushyett-ph
     * Result: % of successful installs / upgrades @guidoiaquinti
     * Result: Max size of operating instances @fuziontech
-    * Montior: % of users on latest version of PostHog @tiina303
+    * Monitor: % of users on latest version of PostHog @tiina303
     * Result: We don't lose customers because we can't scale enough (shared with Core Analytics) @marcushyett-ph
 * Move all posthog-supported instances to self-hosted
     * Result: No alerts come to us from customer-instances
