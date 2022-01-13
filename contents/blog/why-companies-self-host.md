@@ -73,8 +73,8 @@ PostHog customers frequently tell us that controlling their data through self-ho
 
 We are self-hosting evangelists and [deploying PostHog](/docs/self-host) is a quick and easy process, but we also recognise not everyone wants, needs or is ready to self-host. That's why we [also offer PostHog Cloud](/signup), a version of PostHog hosted and managed by us with automatic upgrades, and minimal setup.
 
-We often find customers prefer to start on PostHog Cloud and migrate to self-hosting when they're ready. You can start using PostHog Cloud immediately and it's free to use up to 1 million events per month.
+We often find customers prefer to start on PostHog Cloud and we make it easy to migrate to self-hosting if they desire. You can start using PostHog Cloud immediately and it's free to use up to 1 million events per month. Moreover, unlike other SaaS providers, our source code is open.
 
-If data privacy isn't a priority and you just need reliable analytics as quickly as possible, cloud-hosting is always a sensible option until you're ready to transition. 
+If data privacy isn't a priority and you just need reliable analytics as quickly as possible, cloud-hosting is always a sensible option.
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
