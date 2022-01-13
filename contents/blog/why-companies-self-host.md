@@ -23,16 +23,6 @@ General Data Protection Regulation - four mundane words with huge consequences. 
 
 Failure to comply is costly. Under its provisions, regulators can fine companies the greater of €20 million or 4% of global turnover. Amazon and WhatsApp were [fined €746 million](https://www.wired.co.uk/article/amazon-gdpr-fine) and [€225 million](https://www.bbc.co.uk/news/technology-58422465) respectively in 2021. Other nations, notably Japan, South Korea, Israel, Brazil and Canada have either introduced GDPR-like regulations or amended existing legislation to match, while California introduced the [CCPA](https://oag.ca.gov/privacy/ccpa) to protect residents of California.
 
-This wave of regulation has big consequences for anyone tracking user behavior, doubly so in sectors like health and finance with additional data protections. While cloud-based product analytics is convenient, third-party data processing brings with it an additional level of risk, complexity and legal administration. And that complexity is magnified if your company is handling client data.
-
-[Mention Me](/customers/mention-me), a marketing platform whose clients include global brands like Puma, FarFetch and Zipcar, had exactly this problem when choosing a product analytics provider. 
-
-“We knew we needed to keep everything on our infrastructure," says Joe Saunderson, Software Engineer at Mention Me. "Our clients’ privacy is very important to us and we have obligations to store their data safely.” 
-
-They investigated third-party providers, but found their approach to data privacy unclear, making self-hosting the best option.
-
-[Pry](/customers/pry), a financial planning platform for small businesses, faced a similar problem in keeping control of the sensitive financial information of its clients. Co-founder Tiffany Wong concluded self-hosting was the answer as she can be "confident that our data is safe and shared with as few platforms as possible".
-
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/rikin.png"
@@ -42,6 +32,16 @@ They investigated third-party providers, but found their approach to data privac
         quote={`“No other tools we looked at offered self-hosted deployments. Some of our systems deal with sensitive data and we didn’t want to get into compliance issues with third parties. Self-hosting just took that whole problem away.”`}
     />
 </BorderWrapper>
+
+This wave of regulation has big consequences for anyone tracking user behavior, doubly so in sectors like health and finance with additional data protections. While cloud-based product analytics is convenient, third-party data processing brings with it an additional level of risk, complexity and legal administration. And that complexity is magnified if your company is handling client data.
+
+[Mention Me](/customers/mention-me), a marketing platform whose clients include global brands like Puma, FarFetch and Zipcar, had exactly this problem when choosing a product analytics provider. 
+
+“We knew we needed to keep everything on our infrastructure," says Joe Saunderson, Software Engineer at Mention Me. "Our clients’ privacy is very important to us and we have obligations to store their data safely.” 
+
+They investigated third-party providers, but found their approach to data privacy unclear, making self-hosting the best option.
+
+[Pry](/customers/pry), a financial planning platform for small businesses, faced a similar problem in keeping control of the sensitive financial information of its clients. Co-founder Tiffany Wong concluded self-hosting was the answer as she can be "confident that our data is safe and shared with as few platforms as possible".
 
 Issues around data portability are particularly crucial for health startups. Any product capturing health information in the US is subject to HIPAA, which regulates how companies use protected health information (PHI). Companies need to use [HIPAA compliant analytics providers](/blog/hipaa-compliant-analytics) and sign a Business Associate Agreement (BAA) before any user tracking can occur. By self-hosting, companies keep control of their data and avoid the legal expense, time and energy drained in dealing with legal agreements.
 
