@@ -105,7 +105,7 @@ TooManyConnections: too many connections
     ```bash
     # First we need to determine the name of the web pod – see "How do I see logs for a pod?" for more on this
     POSTHOG_WEB_POD_NAME=$(kubectl get pods -n posthog | grep -- '-web-' | awk '{print $1}')
-    # Then we can get the password from the pod's environent variables
+    # Then we can get the password from the pod's environment variables
     kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- sh -c 'echo The Postgres password is: $POSTHOG_DB_PASSWORD'
     ```
 
