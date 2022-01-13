@@ -12,6 +12,9 @@ Every six months the entire company will get together somewhere in the world for
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
 
+Our last company offsite was held in [Porto in August 2021](https://youtu.be/WOBH1Qy0xhA), and in Italy prior to that. During our last company offsite, the team did a Hackathon together, visited a winery, and even learned how to make pizza! 
+
+
 ## Small team offsites
 
 We want to try to encourage small teams to get together every six months. These are more focused on work and on creating strong bonds within teams. Ideally they happen around three months after an all-company offsite.
