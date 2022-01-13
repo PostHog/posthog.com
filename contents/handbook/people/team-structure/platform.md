@@ -37,7 +37,7 @@ Make deploying, scaling and managing PostHog easy
 In Scope
   * Deploying and managing Posthog (Cloud + Self-hosted)
   * Scaling posthog (Cloud + Self-hosted)
-  * Infrstructure for migrations on Clickhouse
+  * Infrastructure for data migrations (for ClickHouse, PostgreSQL, Kafka,...)
   * Ingestion, libraries and plugins (contentious)
 
 Out of Scope
