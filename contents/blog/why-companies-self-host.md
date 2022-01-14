@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 keywords: ["self host analytics","self hosted analytics"]
 featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["General"]
 ---
