@@ -596,15 +596,14 @@ ul {
     width: calc(25% + 12%);
 }
 
-.DocSearch-Search-Icon,
-.DocSearch-Button-Keys {
+.DocSearch-Search-Icon {
     @apply hidden;
 }
 .DocSearch.DocSearch-Container {
     z-index: 99999999;
 }
 .DocSearch-Button {
-    @apply flex-grow text-left;
+    @apply flex-grow text-left flex items-center space-x-1;
 }
 .DocSearch-Button-Placeholder {
     @apply inline-flex items-center;
