@@ -25,22 +25,23 @@ exports.handler = async (e) => {
 
         const answer = replies.messages && replies.messages[1] && replies.messages[1].text
         if (answer) {
-            if (email) {
-                const mailgun = new Mailgun(formData)
-                const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY })
-                const mailgunData = {
-                    from: 'hey@posthog.com',
-                    to: email,
-                    subject: `Someone answered your question on posthog.com!`,
-                    template: 'question-answered',
-                    'h:X-Mailgun-Variables': JSON.stringify({
-                        question,
-                        answer,
-                    }),
-                    'h:Reply-To': 'hey@posthog.com',
-                }
-                await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
-            }
+            // Disabling until we figure out the best way to handle email notifications
+            // if (email) {
+            //     const mailgun = new Mailgun(formData)
+            //     const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY })
+            //     const mailgunData = {
+            //         from: 'hey@posthog.com',
+            //         to: email,
+            //         subject: `Someone answered your question on posthog.com!`,
+            //         template: 'question-answered',
+            //         'h:X-Mailgun-Variables': JSON.stringify({
+            //             question,
+            //             answer,
+            //         }),
+            //         'h:Reply-To': 'hey@posthog.com',
+            //     }
+            //     await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
+            // }
             await fetch('https://slack.com/api/chat.update', {
                 method: 'POST',
                 headers: {
