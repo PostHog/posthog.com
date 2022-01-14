@@ -118,7 +118,7 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 ### Upgrading from 9.x.x
 
-10.0.0 removes some legacy Helm annotations we don't need anymore (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
+10.0.0 removes some legacy Helm annotations we don't need anymore (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info) and also introduces the requirement of using PostHog version >= 1.XX.X (TODO).
 
 In order to upgrade you'll need to run the following script first:
 
