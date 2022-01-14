@@ -40,19 +40,19 @@ export const pricingSliderLogic = kea({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
+                let finalCost = 0
+                let unitPricing = 0.000225
                 if (pricingOption === 'self-hosted') {
-                    let unitPricing = 0.000225
-
                     const estimatedCost = eventNumber * unitPricing
-                    let finalCost = estimatedCost > SCALE_MINIMUM_PRICING ? estimatedCost : SCALE_MINIMUM_PRICING
+                    finalCost = estimatedCost > SCALE_MINIMUM_PRICING ? estimatedCost : SCALE_MINIMUM_PRICING
 
                     if (eventNumber >= 10_000_000 && eventNumber < 100_000_000) {
                         unitPricing = 0.000045
-                        finalCost = 10_000_000 * 0.000225 + (eventNumber - 10_000_000) * 0.000045
-                    } else if (eventNumber >= 100000000) {
+                        finalCost = 10_000_000 * 0.000225 + (eventNumber - 10_000_000) * unitPricing
+                    } else if (eventNumber >= 100_000_000) {
                         unitPricing = 0.000009
                         finalCost =
-                            10_000_000 * 0.000225 + 90_000_000 * 0.000045 + (eventNumber - 100_000_000) * 0.000009
+                            10_000_000 * 0.000225 + 90_000_000 * 0.000045 + (eventNumber - 100_000_000) * unitPricing
                     }
 
                     actions.setAdditionalUnitPrice(unitPricing)
@@ -60,8 +60,18 @@ export const pricingSliderLogic = kea({
                 }
 
                 // Cloud
-                const billableEvents = eventNumber - 1000000 > 0 ? eventNumber - 1000000 : 0
-                return Math.round(billableEvents * 0.000225).toLocaleString()
+                if (eventNumber > 1_000_000 && eventNumber <= 10_000_000) {
+                    unitPricing = 0.000225
+                    finalCost = (eventNumber - 1_000_000) * unitPricing
+                } else if (eventNumber > 10_000_000 && eventNumber <= 100_000_000) {
+                    unitPricing = 0.000075
+                    finalCost = 9_000_000 * 0.000225 + (eventNumber - 10_000_000) * unitPricing
+                } else if (eventNumber > 100_000_000) {
+                    unitPricing = 0.000075
+                    finalCost = 9_000_000 * 0.000225 + 90_000_000 * 0.000075 + (eventNumber - 100_000_000) * unitPricing
+                }
+                actions.setAdditionalUnitPrice(unitPricing)
+                return Math.round(finalCost).toLocaleString()
             },
         ],
     }),

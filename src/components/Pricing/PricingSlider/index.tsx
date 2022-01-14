@@ -1,5 +1,5 @@
 import React from 'react'
-import { useValues, useActions } from 'kea'
+import { useActions } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
 
