@@ -128,24 +128,24 @@ In order to upgrade you'll need to run the following script first:
 RELEASE_NAME="posthog"
 RELEASE_NAMESPACE="posthog"
 
-for deployment in $(kubectl -n posthog get deployments --no-headers=true | awk '/posthog-*/{print $1}' | tr '\n' ' ')
+for deployment in $(kubectl -n $RELEASE_NAMESPACE get deployments --no-headers=true | awk '/posthog-*/{print $1}' | tr '\n' ' ')
 do
 
-  kubectl -n posthog annotate deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
-  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
-  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
 
-  kubectl -n posthog label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
-  kubectl -n posthog label deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
-  kubectl -n posthog label deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
+  kubectl -n "$RELEASE_NAMESPACE" label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
+  kubectl -n "$RELEASE_NAMESPACE" label deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
+  kubectl -n "$RELEASE_NAMESPACE" label deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
 
-  kubectl -n posthog annotate deployment "$deployment" "helm.sh/hook-"
-  kubectl -n posthog annotate deployment "$deployment" "helm.sh/hook-weight-"
-  kubectl -n posthog annotate deployment "$deployment" "helm.sh/hook-delete-policy-"
-  kubectl -n posthog annotate deployment "$deployment" "helm.sh/resource-policy-"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "helm.sh/hook-"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "helm.sh/hook-weight-"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "helm.sh/hook-delete-policy-"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "helm.sh/resource-policy-"
 done
 ```
 
 Note: please replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name or namespace.
 
-After running the script above you can continue your upgrade as usual.
+After running the script above you can continue the upgrade process as usual.
