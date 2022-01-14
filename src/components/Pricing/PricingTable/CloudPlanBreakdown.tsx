@@ -56,7 +56,7 @@ export const CloudPlanBreakdown = () => {
                             <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
                                 <div className="mb-0 text-xs text-primary font-bold">Event volume</div>
                                 <div className="opacity-50 text-2xs text-right font-semibold">
-                                    Monthly price per event
+                                    Monthly price per event (tiered)
                                 </div>
                             </div>
                             <dl className="flex justify-between mb-1 p-2">
