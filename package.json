@@ -29,6 +29,7 @@
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",
         "@popperjs/core": "^2.10.2",
+        "@slack/bolt": "^3.8.1",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
         "autoprefixer": "^10.3.1",
