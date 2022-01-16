@@ -95,34 +95,64 @@ TooManyConnections: too many connections
 
 2. Get the logs for that pod using the name from the previous step:
    
-    ```shell
+    ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 ## How do I connect to Postgres?
     
+1. Find out your Postgres password from the web pod:
+
+    ```bash
+    # First we need to determine the name of the web pod – see "How do I see logs for a pod?" for more on this
+    POSTHOG_WEB_POD_NAME=$(kubectl get pods -n posthog | grep -- '-web-' | awk '{print $1}')
+    # Then we can get the password from the pod's environment variables
+    kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- sh -c 'echo The Postgres password is: $POSTHOG_DB_PASSWORD'
+    ```
+
+2. Connect to your Postgres pod's shell:
+
+    ```bash
+    # We need to determine the name of the Postgres pod (usually it's 'posthog-posthog-postgresql-0')
+    POSTHOG_POSTGRES_POD_NAME=$(kubectl get pods -n posthog | grep -- '-postgresql-' | awk '{print $1}')
+    # We'll connect straight to the Postgres pod's psql interface
+    kubectl exec -n posthog -it $POSTHOG_POSTGRES_POD_NAME  -- /bin/bash
+    ```
+
+3. Connect to the `posthog` database:
+
+    > You're connecting to your production database, proceed with caution!
+
+    ```bash
+    psql -d posthog -U postgres
+    ```
+
+    Postgres will ask you for the password. Use the value you found out in step 1.  
+    Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
+
+## How do I connect to ClickHouse?
+
 > **Tip:** Find out your pod names with `kubectl get pods -n posthog`
 
-1. Find out your PgBouncer host and Postgres password from the web pod:
+1. Find out your ClickHouse user and password from the web pod:
 
     ```shell
-    kubectl exec -n posthog -it your-posthog-web-pod \
-    -- sh -c 'echo host:$POSTHOG_PGBOUNCER_SERVICE_HOST password:$POSTHOG_DB_PASSWORD'
+    kubectl exec -n posthog -it <your-posthog-web-pod> \
+    -- sh -c 'echo user:$CLICKHOUSE_USER password:$CLICKHOUSE_PASSWORD'
     ```
 
-2. Connect to your Postgres pod:
+3. Connect to the `chi-posthog-posthog-0-0-0` pod:
 
     ```shell
-    kubectl exec -n posthog -it your-postgres-pod  -- sh
+    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash 
     ```
 
-3. Connect to the `posthog` DB using the values you found from step 1:
+2. Connect to ClickHouse using `clickhouse-client`:
+
+    > **Note:** You're connecting to your production database, proceed with caution!
 
     ```shell
-    psql -h your-pgbouncer-host -p 6543 -d posthog -U postgres
+    clickhouse-client -d posthog --user <user_from_step_1> --password <password_from_step_1>
     ```
-
-    Postgres will ask you for the password. Use the value you found from step 1.
-
 
 ## How do I restart all pods for a service?
 

@@ -14,6 +14,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
@@ -21,6 +22,7 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -35,12 +37,13 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
-import { DocsSearch } from './components/DocsSearch'
+import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
+import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
@@ -57,12 +60,14 @@ import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
+import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
@@ -75,6 +80,7 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
+import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
@@ -86,12 +92,16 @@ import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
+import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { Tutorials } from './components/Tutorials'
+import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
+import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
@@ -110,6 +120,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Card,
     Benefits,
     CareersHero,
     InterviewProcess,
@@ -117,6 +128,7 @@ export const shortcodes = {
     Transparency,
     WhyWereHere,
     WorkingAtPostHog,
+    Checkbox,
     Chip,
     CodeBlock,
     CompensationCalculator,
@@ -131,12 +143,13 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
-    DocsSearch,
+    FeatureAvailability,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
     FloatedImage,
     Footer,
+    FooterCTA,
     GetStartedModal,
     GithubIcon,
     Heading,
@@ -153,12 +166,14 @@ export const shortcodes = {
     MdxAnchorHeaders,
     Modal,
     NewsletterForm,
+    NextSteps,
     NotFoundPage,
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
     PlanComparisonTable,
     PostCard,
+    PostLayout,
     CloudVsSelfHost,
     FAQs,
     PlanComparison,
@@ -171,6 +186,7 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
+    ProductPage,
     ProductSectionHeader,
     ResponsiveAnchor,
     RocketHorizontalRule,
@@ -182,12 +198,16 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     StarRepoButton,
+    StarUsBanner,
     StartNowButton,
     Structure,
     TableOfContents,
     TeamQuote,
     Tooltip,
+    Tutorials,
+    TutorialsSlider,
     VisitLibrary,
+    WorkableOpenRoles,
     WorkableSnippet,
     ZoomImage,
 }

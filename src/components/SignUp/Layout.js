@@ -6,8 +6,8 @@ import React from 'react'
 export default function Layout({ children, crumbs = [] }) {
     return (
         <>
-            <header className="px-4">
-                <Breadcrumbs crumbs={crumbs} />
+            <header className="px-4 mt-[-1px]">
+                <Breadcrumbs logo linkColor="#8F8F8C" crumbs={crumbs} />
             </header>
             <main>{children}</main>
             <footer className="px-4 mt-16 md:mt-32 pb-8">

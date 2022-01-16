@@ -21,9 +21,9 @@ If resignation is the only solution after you have discussed your concerns, plea
 
 ## Involuntary departure
 
-In this case, we require the team member to leave. 
+In this case, we are letting the team member go. 
 
-This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. 
+This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. If the decision is down to performance issues, we will have already communicated feedback to the individual and given them time to take the feedback on board. However, performance issues sadly can't always be resolved, which means we might ultimately need to end someone's employment. 
 
 Once the team member has been with us for 3 months, we will provide a 4-month [notice](https://posthog.com/handbook/people/compensation#severance) (otherwise, it will be a month). We will usually ask the team member to stop working immediately, but still pay them a 4-month severance).
 
@@ -93,7 +93,8 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> (UK employee only) Email team member P45 and upcoming payslips <br />
 <input type="checkbox"/> (US employee only) Remove the team member from Gusto (Gusto will automatically end any benefits provided via the platform, e.g. medical insurance <br />
 <input type="checkbox"/> (US employee only) Get the team member to sign their termination certificate <br />
-<input type="checkbox"/> Put on an out of office (forward email if the leavers expects external communication), then deactivate the GSuite account for the team member  <br />
+<input type="checkbox"/> Put on an out of office (forward email if the leavers expects external communication), then suspend the GSuite account for the team member  <br />
+<input type="checkbox"/> Transfer [ownership](https://support.google.com/a/answer/1247799?hl=en) of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.  <br />
 <input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
 <input type="checkbox"/> Cancel team member's company card on Brex/Revolut - _check if they have any company subscriptions first that need transferring_ <br />
 <input type="checkbox"/> Offboard member on CharlieHR <br />
@@ -102,9 +103,9 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Remove team member from the internal company Slack <br />
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />
 <input type="checkbox"/> Remove team member from 1Password <br />
-<input type="checkbox"/> Remove team member from app.posthog.com <br />
+<input type="checkbox"/> Remove team member's [PostHog Cloud](https://app.posthog.com/admin/) account completely <br />
 <input type="checkbox"/> Remove team member from AWS <br />
 <input type="checkbox"/> Remove team member from Workable <br />
 <input type="checkbox"/> Remove team member from Orbit (access &amp; team member state) <br />
-<input type="checkbox"/> Remove team member from the [Team page](https://posthog.com/handbook/company/team) <br />
+<input type="checkbox"/> Remove team member from the [Team page](/handbook/company/team) <br />
 <input type="checkbox"/> Ask their manager for any other accounts they need to be removed from <br />

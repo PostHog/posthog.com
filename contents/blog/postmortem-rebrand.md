@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: cory-watilo
+author: ["cory-watilo"]
 featuredImage: ../images/blog/rebrand-postmortem.png
 featuredImageType: full
 categories: ["General", "Company & culture"]
@@ -16,7 +16,7 @@ Since we're an open source company and our [communication is public](/handbook/c
 
 ## Joining PostHog during a pivot
 
-When I started at PostHog, our primary focus was selling PostHog Cloud, our hosted analytics solution. More recently we've shifted toward our self-hosted analytics solution. We've also grown into a more full-featured platform that offers feature flags, session recordings, and data pipelines.
+When I started at PostHog, our primary focus was selling PostHog Cloud, our hosted analytics solution. More recently we've shifted toward our self-hosted analytics solution. We've also grown into a more full-featured platform that offers feature flags, session recording, and data pipelines.
 
 As a designer, my task is to package our unique product suite into something visitors can quickly understand in a quick glimpse of the homepage.
 

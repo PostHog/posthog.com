@@ -5,264 +5,86 @@ showTitle: true
 ---
 
 ## TL;DR
-Our mission is to “Increase the number of successful products in the world”.
+Our mission is to increase the number of successful products in the world.
 
-We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recordings, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
+We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recording, feature flags, and many more features. Within a year, we had thousands of customers using us and we started generating revenue.
 
-Our next step on our journey is to prove a deeper level of product/market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
+We focused on our paid product earlier in 2021. We quickly hit a milestone for the first 5 reference customers and we've kept selling since. The next step on our journey is to figure out how to accelerate our top of funnel growth, while achieving larger order values from our Enterprise product.
 
-### Context
+## Context
 
-We’ve grown a lot, but it’s clear that the many of our users use us *despite* a bad experience - bugs, instability, lots of maintenance or confusing UX. This is a great problem to have. It means we’re solving a hair on fire problem - product analytics that you can self host.
+We’ve grown a lot - tens of thousands of sign ups - but it’s clear that the many of our users use us *despite* a bad experience, with complex deployment and maintenance a particular issue. This is a great problem to have, as it means we’re solving a hair-on-fire problem - product analytics that you can self-host.
 
-For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or - in future - sales teams to succeed.
+For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed.
 
-Rather than trying to please everyone, we decided to focus on delighting a handful of companies first. We jumped straight into looking for ‘the Big 5’ companies that at first appeared similar but then realized they’re using us to solve very different needs.
-
-The proposed strategy below focuses on a long term direction and a shorter term first milestone along the way to get us to product market fit, based on needs instead. We would love your feedback.
-
-
-### Mission
+## Mission
 
 **_“Increase the number of successful products in the world”_**
 
+## Long-term vision (for 2026)
 
-### Long-term vision (for 2023)
+**Where do we want to get to?**
 
-**_“Everyone building a product has a clear path to making it successful without losing control of their data”_**
+In 2026 we will _go public with $100M ARR._ To achieve this, Posthog will need to be _the standard devtool for building better products._
 
-This means engineers can install PostHog and within a few hours, qualitative and quantitative data will be captured from their product, audience and any other data sources they have (playing nicely with data warehouses).
+**How do we get there?**
 
-PostHog will surface this data at the right time to anyone involved in building the product (PMs, Engineers, Support) to make their own well-informed decisions and safely release changes, validate and realize the opportunities identified.
+* Build for unserved customers that can’t use cloud offerings because of data control or scale
+* Grow a strong and successful developer community around Posthog
+* Convert our biggest users to paying customers
+* Go broad and develop all the tools our customers need to build better products
+* Partner with others to build plugins and deploy our tools
+* Ride the industry wave of increasing data control that has been triggered by growing privacy regulation
 
-It will be a “no brainer” for anyone to use PostHog with any product they are building.
 
+### What should we be working on today?
 
-### Target audience (for 2021)
+**The mechanics of success**
+
+Revenue is critical for us to go public _but we won't set short-term revenue targets_ as revenue is an output metric to several other inputs. Instead, we think it is more appropriate to focus on [metrics within our control that contribute more to our revenue in the long-term.](https://app.posthog.com/dashboard/20464)
+
+* **[Quality signups](https://app.posthog.com/insights/ujGv0WqI?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464):** Volume of quality organizations signing up 
+* **[Conversion to paid](https://app.posthog.com/insights/M5KDFdvX?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22realm%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22cloud%22%5D%2C%22operator%22%3A%22exact%22%7D%5D%7D%2C%7B%22id%22%3A%2212299%22%2C%22name%22%3A%22User%20paid%20on%20cloud%20or%20self%20hosted%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%5D&display=FunnelViz&insight=FUNNELS&interval=week&date_from=-30d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=1&funnel_viz_type=trends&funnel_from_step=0&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464):** Rate at which quality sign-ups become paid customers
+* **Ease of deployment (TBD):** Effort required to deploy and maintain a Posthog instance at scale
+    * Contributing Metrics: Customer sentiment (TBD), time spent on maintenance (TBD) and [scale of instances](https://app.posthog.com/insights/x8T5a1J4?insight=TRENDS&interval=day&actions=%5B%5D&events=%5B%7B%22id%22%3A%22instance%20status%20report%22%2C%22name%22%3A%22instance%20status%20report%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22events_count_total%22%2C%22value%22%3A%22100000000%22%2C%22operator%22%3A%22gt%22%2C%22type%22%3A%22group%22%2C%22group_type_index%22%3A1%7D%5D%2C%22math%22%3A%22unique_group%22%2C%22math_group_type_index%22%3A1%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&display=ActionsBarValue&date_from=-90d)
+* **[Discoveries](https://app.posthog.com/insights/O4R-Frza?events=%5B%5D&actions=%5B%7B%22id%22%3A%2210784%22%2C%22math%22%3A%22total%22%2C%22name%22%3A%22Discoveries%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464):** The volume of meaningful insights discovered using Posthog
+    * Contributing Metrics: [Insight viewed](https://app.posthog.com/insights/rK1gVlAi/edit?insight=TRENDS&display=ActionsLineGraph&actions=%5B%5D&events=%5B%7B%22id%22%3A%22insight%20viewed%22%2C%22name%22%3A%22insight%20viewed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&interval=week&date_from=-90d), insights shared (TBD), [products used across users](https://app.posthog.com/insights/7lCZsIPO?events=%5B%7B%22id%22%3A%22insight%20loaded%22%2C%22math%22%3A%22unique_group%22%2C%22name%22%3A%22insight%20loaded%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22math_group_type_index%22%3A0%7D%5D&actions=%5B%7B%22id%22%3A%224959%22%2C%22name%22%3A%22KFA%20-%20Feature%20flags%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%2C%7B%22id%22%3A%223091%22%2C%22name%22%3A%22KFA%20-%20Session%20recordings%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A2%7D%2C%7B%22id%22%3A%226868%22%2C%22name%22%3A%22Tried%20Plugins%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A3%7D%5D&display=FunnelViz&insight=FUNNELS&interval=day&date_from=-90d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=3&funnel_viz_type=steps&funnel_from_step=0&funnel_order_type=unordered&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464), [avg active users per organization](https://app.posthog.com/insights/09GUvJKq/edit?insight=TRENDS&display=ActionsLineGraph&actions=%5B%7B%22id%22%3A%225043%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%2C%22name%22%3A%22App%20Pageview%20-%20Logged%20in%22%2C%22math%22%3A%22dau%22%7D%5D&events=%5B%7B%22id%22%3A%22%24pageview%22%2C%22name%22%3A%22%24pageview%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22math%22%3A%22unique_group%22%2C%22math_group_type_index%22%3A0%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&formula=B%2FA&interval=week&date_from=-90d), [rate from insight viewed to analyzed](https://app.posthog.com/insights/2PnHWW87?insight=TRENDS&display=ActionsLineGraph&actions=%5B%5D&events=%5B%7B%22id%22%3A%22insight%20viewed%22%2C%22name%22%3A%22insight%20viewed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%7D%2C%7B%22id%22%3A%22insight%20analyzed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A1%2C%22name%22%3A%22insight%20analyzed%22%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&formula=B%2FA&interval=week&date_from=-90d)
+
+We discuss how we track against our high-level metrics once a week during PostHog news. 
+
+### How should we prioritize between competing directions?
+
+While there is value in the items on the right, we value the items on the left more.
+
+**Breadth vs. depth of capabilities**
+
+* _Breadth_: build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate.
+
+**High quality users vs. high paying businesses**
+
+* _High quality users_: focus on acquiring more high quality users over big ticket contracts, so we can get better feedback and learn faster.
+
+**Plugin-based platform vs one-stop-shop**
+
+* _Plugin-based platform_: integrate with the best services and data sources to solve customer problems faster
+
+**Self-hosted vs. Cloud**
+
+* _Self-hosted_: focus on customers who need to self-host, as there is a huge untapped market and we’re uniquely placed to win.
+
+**Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
+
+* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
+
+## Target audience for 2021
 
 Our customers are a combination of users, businesses and the products themselves. In order to understand where we should focus our efforts, below is a proposed breakdown of our target audience based on attributes of a product. 
 
-**Product data protection level**
-
-*   **Bespoke:** Product data needs to be stored on bespoke infrastructure (e.g. not AWS, GCP) controlled by the owner, they may also have other bespoke requirements around dedicated support, SLAs and limitations on services communicating outside their network
-*   **Controlled:** Product data must be stored on infrastructure controlled by the owner on standard infrastructure (e.g. AWS, GCP, etc)
-*   **Cloud:** Product data must be secure but can be stored on infrastructure owned by PostHog
-
-**Product lifecycle stage**
-
-*   **Introduction:** A new product with a small number of early adopters using it, yet to achieve product market fit
-*   **Growth:** A product which has found initial product market fit with a limited audience and focused on expanding their reach
-*   **Maturity:** A product which has saturated its audiences and is focused on retaining users
-*   **Decline:** A product which is losing market share and needs to be phased out or pivoted
-
-<table>
-  <tr>
-   <td rowspan="4" >
-<strong>Data protection level</strong>
-   </td>
-   <td><strong>Bespoke</strong>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Controlled</strong>
-   </td>
-   <td>
-   </td>
-   <td>Focus
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Cloud</strong>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td><strong>Introduction</strong>
-   </td>
-   <td><strong>Growth</strong>
-   </td>
-   <td><strong>Maturity</strong>
-   </td>
-   <td><strong>Decline</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td colspan="5" ><strong>Product lifecycle stage</strong>
-   </td>
-  </tr>
-</table>
-
-
-**Why focus on controlled data / growth products?**
-
-There are a number of reasons to focus on these types of products:
-
-1. We have early validation that we have a unique advantage over competitors for businesses requiring controlled data because of our open source approach
-2. We’re seeing early traction in this segment: “Driving activation through funnel optimization” is the primary activity for most growth products, today our “funnels” feature has the strongest engagement (49% more discovered learnings than trends, with a similar number of unique users)
-3. If successful at getting to PMF with this focus segment; PostHog will move into this segment ourselves, this puts us a step ahead when it comes to growth since we will be able to validate our product, move extremely fast and leverage the benefits directly
-4. Products in this phase **need** great analytics to be successful, products in the introduction phase rely more on qualitative data from early adopters (which we’re not well-positioned to solve today)
-
-**What are the core needs for controlled data / growth products?**
-
-1. We need to keep our data on our own infrastructure to protect our customers
-2. We need to optimize our onboarding funnel to grow our product
-3. We need to clearly share our findings to drive high quality decisions
-4. We need reliable information to be confident in the decisions we make
-5. We need analysis to be fast to keep pace with our growing business
-
-
-### First milestone (now until early August)
-
-In order to achieve product market fit with this segment we need to start by solving a limited number of problems exceptionally well for a small number of customers (5) and then expand.
-
-The proposed timeline for the first milestone coincides with the next board meeting, our goals should be realistic but ambitious so we should aim for a 50% chance of hitting them by this date.
-
-These goals and key results are suggestions for now, teams across the company should be empowered to jointly identify, set and achieve their own goals to optimize for overall progress  towards our mission.
-
-**Goals**
-
-*   **We have 5 reference customers in our focus segment**
-    *   **Setting up and maintaining PostHog continuously on customer controlled infrastructure is fast and easy**
-        *   Key Results, for example: P90 deployment time < 5minutes
-        *   Key Results, for example: P90 troubleshooting/upgrading/maintenance time < 5 minutes / month
-    *   **Our customers deeply understand their activation funnel to grow their product**
-        *   Key results, for example: Achieve high product maturity for 5 key “growth jobs” (see below for example)
-    *   **Our customers have a rapid and reliable experience**
-        *   Key results, for example: P95 end-to-end query time for funnels &lt; 3 seconds, no usability bugs filed
-
-**One Sentence Version**
-
-To get 5 reference customers in the controlled data / growth product segment we need to nail funnels.
-
-**Two Word Version**
-
-“Nail Funnels”
-
-### Milestone 2 (Early August onwards)
-
-After nailing funnels, our primary focus should transition to _Diagnosing Causes_, since our customers will now be able to understand when problems are happening with their nailed funnels but to address these issues they must go one step deeper and understand why they are occurring.
-
-In parallel we should spin-up evergreen investments around growth and our core platform (Performance, Reliability and Extensibility) to ensure we are reaching as many organizations as possible (increasing the number of successful products in the world) and so we don’t lose trust with existing users due to issues underpinning our platform.
-
-**One sentence version**
-Nailing funnels means people will find problems with their products, next we need to enable them to _Diagnose Causes_ so they can fix these problems and make their product successful.
-
-**Two word version**
-Nail Diagnosis
-
-## Why should we focus on diagnosing causes?
-
-* Our current focus on funnels is generating significant demand from users for going deeper, to understand why people are and are not successful (we’re seeing a number of customer requests in this direction)
-* We currently have a number of tools in our suite (e.g. sessions, trends, paths) that can be evolved and tightly integrated to enable our users to go deeper and understand why issues are occurring
-* We have seen demand for experimentation capabilities, but the value of experiments are heavily constrained by the quality of the hypothesis people can generate from diagnosing causes
-
-
-## What are the needs of our target audience?
-
-At a very high level these are the core needs to solve for and some examples of what that might look like in practice.
-
-<table>
-  <tr>
-   <td><strong>Priority</strong>
-   </td>
-   <td><strong>Description of Need</strong>
-   </td>
-   <td><strong>Current progress</strong>
-   </td>
-   <td><strong>Unique ability to execute</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>P0
-   </td>
-   <td>Understand what users were doing when they dropped-off <em>(e.g. reliable session recording and playback, seamless to find the right sessions, etc.)</em>
-   </td>
-   <td>Mid
-   </td>
-   <td>Very High
-   </td>
-  </tr>
-  <tr>
-   <td>P0
-   </td>
-   <td>Understanding what successful and unsuccessful users have in common
-<p>
-<em>(e.g. correlation of events and user properties with success and failure)</em></p>
-   </td>
-   <td>Low
-   </td>
-   <td>High
-   </td>
-  </tr>
-  <tr>
-   <td>P1
-   </td>
-   <td>Understand what events might have caused the user to drop-off
-<p>
-<em>(e.g. reviewing prioritized events from around the time of drop-off)</em></p>
-   </td>
-   <td>Mid
-   </td>
-   <td>Mid
-   </td>
-  </tr>
-  <tr>
-   <td>P1
-   </td>
-   <td>Understand what path people took before and after they were successful or unsuccessful
-<p>
-<em>(e.g. extended and enhanced paths capability)</em></p>
-   </td>
-   <td>Mid
-   </td>
-   <td>High
-   </td>
-  </tr>
-  <tr>
-   <td>P1
-   </td>
-   <td>Backtest hypothesis to build supporting evidence
-<p>
-<em>(e.g. ad-hoc trends queries leverage insights found)</em></p>
-   </td>
-   <td>Mid
-   </td>
-   <td>High
-   </td>
-  </tr>
-  <tr>
-   <td>P2
-   </td>
-   <td>Collect all evidence together into shareable hypotheses
-   </td>
-   <td>Low
-   </td>
-   <td>Mid
-   </td>
-  </tr>
-</table>
-
-We should use this grid as a starting point to prioritize building out detailed problems to solve for users.
+* _Needs_
+  * Need to control their user data
+  * Need to excel at product led 
+* _Haves_
+  * Have budget and savvy engineers are the decision makers
+  * Have achieved product market fit
+  * Have a central analytics function
+  * Have deployed our open source product successfully

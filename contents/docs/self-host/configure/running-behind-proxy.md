@@ -31,7 +31,7 @@ Trusted proxies are used to determine which proxies to consider as valid from th
 
 ### Public endpoints
 
-If your setting up a proxy to protect your PostHog instance and prevent access only through an authorized connection, you should consider there are some endpoints that must always be publicly accessible in order for event ingestion, session recording and feature flags to work properly. These endpoints are listed below.
+If you're setting up a proxy to protect your PostHog instance and prevent access only through an authorized connection, you should consider there are some endpoints that must always be publicly accessible in order for event ingestion, session recording and feature flags to work properly. These endpoints are listed below.
 
 | Path | Description |
 | ---- | ---- |

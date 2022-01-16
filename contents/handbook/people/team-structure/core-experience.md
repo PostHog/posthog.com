@@ -45,7 +45,7 @@ With the work above, we aim to solve the following meta-goals:
 - Build the next generation of engineers and engineering leaders, who would be running things when we are at 100 developers.
 - Remain a highly flexible team, ready to adapt to changing business requirements.
 - Be part of formalizing "the PostHog way", and writing a book about it.
-- Our tech stack is rather unique, though pretty powerful. We are also in a really powerful position to drive change in the industry ([data-first frontend](https://kea.js.org/blog/2021/05/14/data-first-frontend-revolution), anyone?). Let's capitalise on that.
+- Our tech stack is rather unique, though pretty powerful. We are also in a really powerful position to drive change in the industry ([data-first frontend](https://kea.js.org/blog/data-first-frontend-revolution), anyone?). Let's capitalise on that.
 - Zero TypeScript errors, code covered by logic tests, all scenes in Storybook, etc.
 - To do a damn good job at all of the above.
 
@@ -66,6 +66,9 @@ List below is prioritized.
 Our current focus is making Product Managers at scale-ups successful.
 We'll still strive to **maintain** success with technical users.
 
+## Output metrics
+
+- Primary: [Discoveries](https://app.posthog.com/insights/O4R-Frza?events=%5B%5D&actions=%5B%7B%22id%22%3A%2210784%22%2C%22math%22%3A%22total%22%2C%22name%22%3A%22Discoveries%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464)
 
 ## Slack channel
 

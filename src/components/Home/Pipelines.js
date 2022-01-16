@@ -1,7 +1,9 @@
-import React from 'react'
+import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import React from 'react'
+import { heading, section } from './classes'
 import Icon from './Icon'
-import { section, heading } from './classes'
 
 const Chip = ({ icon, title, className }) => {
     return (
@@ -55,10 +57,13 @@ export default function Pipelines() {
             <h3 className={heading('sm')}>
                 Reliably ingest data at any scale to build a holistic view of your customers.
             </h3>
+            <CallToAction to="/integrations" type="outline" className="mt-8">
+                Explore integrations
+            </CallToAction>
             <div className="lg:block flex">
                 <div className="grid lg:grid-cols-3 mt-8 lg:mt-16 mb-8 gap-8 lg:gap-0 w-full sm:w-3/4 lg:w-auto">
                     <div>
-                        <h4 className="text-2xl m-0 text-blue">Push from data warehouse</h4>
+                        <h4 className="text-2xl m-0 text-blue">Push from a data warehouse</h4>
                         <p className="text-base font-semibold">from BigQuery, Snowflake, S3 or Redshift</p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap max-w-xs mx-auto">
                             <Chip icon="snowflake" title="Snowflake" />
@@ -83,7 +88,13 @@ export default function Pipelines() {
                     </div>
                     <div>
                         <h4 className="text-2xl m-0 text-yellow">Integrate your ecosystem</h4>
-                        <p className="text-base font-semibold">PostHog plugins pipe data between your stack</p>
+                        <p className="text-base font-semibold">
+                            PostHog{' '}
+                            <Link to="/integrations" className="text-primary" style={{ textDecoration: 'underline' }}>
+                                plugins
+                            </Link>{' '}
+                            pipe data between your stack
+                        </p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap">
                             <Chip icon="hubspot" title="HubSpot" />
                             <Chip icon="salesforce" title="Salesforce" />
@@ -92,7 +103,12 @@ export default function Pipelines() {
                     </div>
                     {!breakpoints.md && <PipelineGraphic />}
                     <div className="lg:mt-6 lg:col-span-3">
-                        <h4 className="text-2xl m-0 text-blue">Push to data warehouse</h4>
+                        <Link to="/integrations">
+                            <h4 className="text-2xl m-0 text-blue" style={{ transition: 'ease-in' }}>
+                                Push to your data warehouse
+                            </h4>
+                        </Link>
+
                         <p className="text-base font-semibold">
                             An actionable data schema sets you up for further analysis
                         </p>

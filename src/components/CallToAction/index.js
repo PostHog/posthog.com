@@ -5,6 +5,7 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 
 const sizes = {
+    xs: 'text-[13px] font-semibold px-2 py-[.2rem] border-2',
     sm: 'text-small font-semibold px-3 py-1 border-2',
     md: 'text-small font-semibold px-5 py-2 border-2',
     lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
@@ -55,6 +56,7 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     select-none
     rounded-full
     inline-block
+    cta
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
@@ -78,6 +80,7 @@ export const CallToAction = ({
     className,
     external,
     state = {},
+    event,
 }) => {
     const url = to || href
     return (
@@ -87,6 +90,7 @@ export const CallToAction = ({
             className={button(type, width, className, size)}
             onClick={onClick}
             to={url}
+            event={event}
         >
             {children}
         </Link>

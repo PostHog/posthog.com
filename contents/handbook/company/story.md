@@ -64,3 +64,10 @@ We're now focused on achieving strong product/market fit with our [target segmen
 
 Our team has now grown to 25 people in 10 countries. 
 
+## Sep 2021: Product Market fit achieved for PostHog Scale
+
+We now have product market fit for our open source product and PostHog Scale.
+
+Our revenue has quickly risen as a result, now we need to accelerate community growth, and we'll work on product market fit for PostHog Enterprise.
+
+We're 30 people in 12 countries.

@@ -102,6 +102,14 @@ Here's what they do:
 
 Gives you access to the plugin config values as described in `plugin.json` and configured via the PostHog interface.
 
+Example:
+```js
+export async function processEvent(event, { config }) {
+    event.properties['greeting'] = config.greeting
+    return event
+})
+```
+
 ### cache
 
 A way to store values that persist across special function calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
@@ -138,10 +146,34 @@ All the above methods represent their equivalent Redis commands – see Redis do
 - [LRANGE](https://redis.io/commands/lrange)
 - [LLEN](https://redis.io/commands/llen)
 
+Example:
+```js
+export function processEvent(event, { config, cache }) {
+    const counterValue = (await cache.get('greeting_counter', 0))
+    await cache.set('greeting_counter', counterValue + 1)
+    if (!event.properties) event.properties = {}
+    event.properties['greeting_counter'] = counterValue
+    return event
+}
+```
 
 ### global
 
 The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog plugins. 
+
+Example:
+```js
+export function setupPlugin({ global, config }) {
+    global.eventsToTrack = (config.eventsToTrack || '').split(',') 
+}
+
+export function processEvent(event, { global, config }) {
+    if(global.eventsToTrack.includes(event.event)) {
+        // Do something
+    }
+}
+```
+
 
 ### attachments
 
@@ -156,6 +188,15 @@ interface PluginAttachment {
 ```
 
 As such, accessing the contents of an uploaded file can be done with `attachments.attachmentName.contents`.
+
+Example:
+```js
+export function setupPlugin({ attachments, global }: Meta) {
+    if (attachments.maxmindMmdb) {
+        global.ipLookup = new Reader(attachments.maxmindMmdb.contents)
+    }
+}
+```
 
 ### jobs
 
@@ -340,7 +381,7 @@ In the background, `exportEvents` sets up asynchronous processing of batches and
 
 ## Available packages and imports
 
-Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing.
+Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
 
 ### Global
 
@@ -431,7 +472,7 @@ await posthog.api.get(
 | :---------: | :---------: | 
 | `crypto`    | [Node.js standard lib's `crypto` module](https://nodejs.org/api/crypto.html) |
 | `url`    | [Node.js standard lib's `url` module](https://nodejs.org/api/url.html) |
-| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/url.html) |
+| `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/zlib.html) |
 | `generic-pool`    | [`npm` package `generic-pool`](https://www.npmjs.com/package/generic-pool) |
 | `pg`    | [`npm` package `node-postgres`](https://www.npmjs.com/package/pg) |
 | `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |
@@ -514,7 +555,7 @@ export const jobs = {
 async function lookForTheTeapot (request) {
     const res = await fetch(request.url)
     if (res.status !== 418) {
-        await jobs.lookForTheTeapot(request).runIn(30, 'seconds')
+        await jobs.continueSearchingForTheTeapot(request).runIn(30, 'seconds')
         return
     }
     console.log('found the teapot!')

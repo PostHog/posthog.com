@@ -45,24 +45,14 @@
                                         "url": "/docs/self-host/deploy/gcp"
                                     },
                                     {
-                                        "icon": "helm chart",
-                                        "title": "Helm Chart",
-                                        "url": "/docs/self-host/deploy/other"
-                                    },
-                                    {
                                         "icon": "digital ocean",
                                         "title": "Digital Ocean",
                                         "url": "/docs/self-host/deploy/digital-ocean"
                                     },
                                     {
-                                        "icon": "azure",
-                                        "title": "Azure",
-                                        "url": "/docs/self-host/deploy/azure"
-                                    },
-                                    {
-                                        "icon": "github",
-                                        "title": "Source",
-                                        "url": "https://github.com/PostHog/posthog"
+                                        "icon": "hobby",
+                                        "title": "Hobby",
+                                        "url": "/docs/self-host/deploy/hobby"
                                     }
                                 ]
                             },
@@ -74,8 +64,16 @@
                                         "url": "/docs/self-host/architecture"
                                     },
                                     {
+                                        "title": "Migrate from Postgres to ClickHouse",
+                                        "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
+                                    },
+                                    {
                                         "title": "Configuring PostHog",
                                         "url": "/docs/self-host#configure"
+                                    },
+                                    {
+                                        "title": "Self-hosted vs. PostHog Cloud",
+                                        "url": "/signup"
                                     },
                                     {
                                         "title": "Hosting costs",
@@ -84,14 +82,6 @@
                                     {
                                         "title": "Upgrade guide",
                                         "url": "/docs/self-host/configure/upgrading-posthog"
-                                    },
-                                    {
-                                        "title": "Self-hosted vs. PostHog Cloud",
-                                        "url": "/signup"
-                                    },
-                                    {
-                                        "title": "ClickHouse",
-                                        "url": "/docs/self-host/postgres-vs-clickhouse#clickhouse"
                                     }
                                 ]
                             }
@@ -172,8 +162,8 @@
                         ],
                         "footerLinks": [
                             {
-                                "title": "Plugins",
-                                "url": "/plugins"
+                                "title": "Integrations",
+                                "url": "/integrations"
                             },
                             {
                                 "title": "Build your own plugin",
@@ -216,8 +206,8 @@
                                         "url": "/docs/user-guides/trends"
                                     },
                                     {
-                                        "title": "Users",
-                                        "url": "/docs/user-guides/users"
+                                        "title": "Persons",
+                                        "url": "/docs/user-guides/persons"
                                     }
                                 ]
                             },
@@ -229,7 +219,7 @@
                                         "url": "/docs/user-guides/feature-flags"
                                     },
                                     {
-                                        "title": "Session recordings",
+                                        "title": "Session recording",
                                         "url": "/docs/user-guides/session-recording"
                                     }
                                 ]
@@ -331,10 +321,14 @@
                     },
                     {
                         "title": "Careers",
-                        "description": "<p>We're currently hiring for <strong>5 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for.",
+                        "description": "",
                         "link": {
                             "title": "Visit Careers page",
                             "url": "/careers"
+                        },
+                        "component": {
+                            "position": "bottom",
+                            "name": "Jobs"
                         }
                     }
                 ]

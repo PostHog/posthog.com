@@ -1,5 +1,5 @@
-import React from 'react'
 import { SliderNavArrow } from 'components/Icons/Icons'
+import React from 'react'
 
 export const SliderNavButton = ({ onClick, disabled, previous }) => {
     return (
@@ -13,9 +13,9 @@ export const SliderNavButton = ({ onClick, disabled, previous }) => {
     )
 }
 
-export default function SliderNav({ handlePrevious, handleNext, currentIndex, length }) {
+export default function SliderNav({ handlePrevious, handleNext, currentIndex, length, className = '' }) {
     return (
-        <div className="flex justify-center space-x-2 my-8">
+        <div className={`flex justify-center space-x-2 my-8 ${className}`}>
             <SliderNavButton previous disabled={currentIndex <= 0} onClick={handlePrevious} />
             <SliderNavButton disabled={currentIndex >= length} onClick={handleNext} />
         </div>

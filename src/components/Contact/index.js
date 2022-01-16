@@ -26,21 +26,23 @@ export default function Contact(props) {
         if (tab === 'contact' || tab === 'demo') {
             setActiveTab(tab)
         }
-        if (demo && (demo === 'group' || demo === 'personal')) {
+        if (demo && (demo === 'group' || demo === 'scale' || demo === 'enterprise')) {
             setDemoType(demo)
         }
     }, [location])
 
     return (
         <>
-            <div className="flex justify-center space-x-2 mt-6">
-                <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
-                    Book a demo
-                </Chip>
-                <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
-                    Contact sales
-                </Chip>
-            </div>
+            {!props.hideTabs && (
+                <div className="flex justify-center space-x-2 mt-6">
+                    <Chip active={activeTab === 'demo'} onClick={() => handleChipClick('demo')}>
+                        Book a demo
+                    </Chip>
+                    <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
+                        Contact sales
+                    </Chip>
+                </div>
+            )}
             <div className="mt-8">
                 {
                     {
@@ -49,8 +51,9 @@ export default function Contact(props) {
                             <DemoScheduler
                                 iframeSrc={
                                     {
-                                        personal: 'https://calendly.com/yakko/posthog-scale-enterprise-demo',
-                                        group: 'https://calendly.com/yakko/posthog-demo',
+                                        scale: 'https://calendly.com/cameron-posthog/posthog-scale-enterprise-demo',
+                                        group: 'https://calendly.com/cameron-posthog/posthog-demo',
+                                        enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',
                                     }[demoType]
                                 }
                             />

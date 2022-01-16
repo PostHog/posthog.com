@@ -1,6 +1,5 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import { graphql } from 'gatsby'
-import { findAuthor } from 'lib/utils'
 import React from 'react'
 import Layout from '../Layout'
 import { NewsletterForm } from '../NewsletterForm'
@@ -12,29 +11,24 @@ import { BlogCategoriesList } from './BlogCategoriesList'
 const Blog = ({
     data: {
         allMdx: { edges },
-        markdownRemark: {
-            frontmatter: { authors },
-        },
     },
     pageContext,
 }) => {
     const posts = edges.filter((edge) => !!edge.node.frontmatter.date)
     const title = pageContext?.title || 'Blog'
     const crumbs = pageContext?.crumbs || [{ title: 'Blog' }]
-    const findAuth = findAuthor(authors)
     const latestPost = (
         <PostCard
             key={posts[0].node.id}
             post={posts[0].node}
             featured
-            authorDetails={findAuth(posts[0].node.frontmatter.author)}
+            authorDetails={posts[0].node.frontmatter.authors}
         />
     )
-    const nonLatestPosts = posts
-        .slice(1)
-        .map((edge) => (
-            <PostCard authorDetails={findAuth(edge.node.frontmatter.author)} key={edge.node.id} post={edge.node} />
-        ))
+    const nonLatestPosts = posts.slice(1).map((edge) => {
+        const authors = edge.node.frontmatter.authors
+        return <PostCard authorDetails={authors} key={edge.node.id} post={edge.node} />
+    })
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
@@ -75,7 +69,7 @@ export const BlogFragment = graphql`
         id
         excerpt(pruneLength: 250)
         frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMM D, YYYY")
             title
             rootPage
             featuredImage {
@@ -84,7 +78,14 @@ export const BlogFragment = graphql`
                     gatsbyImageData(width: 1200, height: 630)
                 }
             }
-            author
+            authors: authorData {
+                handle
+                name
+                role
+                image
+                link_type
+                link_url
+            }
         }
     }
 `

@@ -6,8 +6,8 @@ showTitle: true
 
 You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
-1. You can create a Pull Request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
-2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a Pull Request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
+1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
 Below, we'll explain how to set up option two.
 
@@ -22,7 +22,7 @@ In order to run the PostHog website locally, you need the following installed:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (installed with GitHub Desktop)
 - [Node.js](https://nodejs.org/en/download/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x)
 
 Optionally, if you are unfamiliar with using Git from the command line, you will need the following installed:
 
@@ -80,6 +80,13 @@ Don't worry! We only need to run a few commands in the terminal.
 
 ### Running posthog.com locally
 
+If you're using an Apple Silicon Mac (M1) then you'll need to run the following commands before using yarn:
+
+```bash
+rm -rf ./node_modules
+brew install vips
+```
+
 Type the following into the terminal and press return:
 
 ```bash
@@ -94,11 +101,11 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8080` in your web browser.
+The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8000` in your web browser.
 
-Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8080` in your web browser.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8000` in your web browser.
 
-> If you have something else running on port `8080` you'll be asked if you are okay in running on port `8081`, in which case the website will be accessible on `http://localhost:8081`.
+> If you have something else running on port `8000` you'll be asked if you are okay in running on port `8001`, in which case the website will be accessible on `http://localhost:8001`.
 
 ### Finding the content to edit
 
@@ -150,23 +157,116 @@ Once you have a new branch, you can make changes.
 
 #### Frontmatter
 
-At the top of most posthog.com docs and handbook pages, it is necessary to have the following for the page to appear:
+Most PostHog pages utilize frontmatter as a way of providing additional data to the page. Available frontmatter varies based on the template the page uses. Templates are determined based on the folder the file resides in:
+
+##### Blog
+
+Markdown files located in /contents/blog
 
 ```markdown
 ---
-title: Example Title
-sidebarTitle: Example title shown in sidebar
-sidebar: Example Sidebar
-showTitle: true
+date: 2021-11-16
+title: The state of plugins on PostHog
+rootPage: /blog
+author: ["yakko-majuri"]
+featuredImage: ../images/blog/running-content.png
+featuredImageType: full
 ---
 ```
 
-- `title`: the page title
-- `sidebar`: the sidebar menu that the page will attach to. You can see a list of available sidebars in `/src/sidebars/sidebars.json`. You can choose not to have a sidebar by setting this to `null`.
-- `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
-- `showTitle` should always be set to `true`.
+- `date`: the date the blog was posted
+- `title`: the title that appears at the top of the blog post and on the blog listing page
+- `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
+- `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
+- `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
+- `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 
-Some pages, such as blogposts, may have additional fields. You can often refer to the source of existing pages for examples, but if in doubt you can always ask for help in the [PostHog Community Slack](/slack). 
+##### Docs & Handbook
+
+Markdown files located in /contents/docs and /contents/handbook
+
+```markdown
+---
+title: Contribute to the website: documentation, handbook, and blog
+---
+```
+
+- `title`: the title that appears at the top of the handbook / doc page
+
+##### Customers
+
+Markdown files located in /contents/customers
+
+```markdown
+---
+title: How Hasura improved conversion rates by 10-20% with PostHog
+customer: Hasura
+logo: ../images/customers/hasura/logo.svg
+featuredImage: ../images/customers/hasura/featured.jpg
+industries:
+    - Developer tool
+users:
+    - Engineering
+    - UI
+    - UX
+    - Marketing teams
+toolsUsed:
+    - Funnel Analysis
+    - Session Recording
+    - Self-Hosting
+---
+```
+
+- `title`: the title of the case study
+- `customer`: the name of the customer
+- `logo`: the customer logo
+- `featuredImage`: the image that appears in the card on the customers listing page
+- `industries`: a list of industries that apply to the company
+- `users`: a list of user types that use the company's product
+- `toolsUsed`: a list of highlighted PostHog tools used by the company
+
+##### Team
+
+Markdown files located in /contents/team
+
+```markdown
+---
+name: James Hawkins
+jobTitle: Co-Founder & CEO
+headshot: ../images/team/James.png
+github: jamesefhawkins
+country: GB
+startDate: 2019-07-03
+---
+```
+
+- `name`: the name of the team member
+- `jobTitle`: the role of the team member
+- `headshot`: the relative path to the team member's headshot
+- `github`: the team member's GitHub handle
+- `country`: the country the team member resides in
+- `startDate`: the team member's date of hire
+
+##### Plain
+
+If the file doesn't reside in one of the above folders, it uses the plain template.
+
+```markdown
+---
+title: Example Components
+showTitle: false
+width: lg
+noindex: true
+---
+```
+
+- `title`: the title that appears at the top of the page
+- `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
+- `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
+- `noindex`: `true` | `false` - determines whether to index the page or not
+
+
+You can often refer to the source of existing pages for more examples, but if in doubt, you can always ask for help in the [PostHog Community Slack](/slack). 
 
 #### Images/GIFs
 
@@ -202,7 +302,7 @@ The sidebar is generated from `/src/sidebars/sidebars.json`.
 
 ## Committing changes
 
-It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the Pull Request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
+It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -285,9 +385,9 @@ Once you have committed the changes you want to push to GitHub, click the **Push
 
 </HiddenSection>
 
-## Create a Pull Request
+## Create a pull request
 
-Create a Pull Request to request that your changes be merged into the main branch of the repository.
+Create a pull request to request that your changes be merged into the main branch of the repository.
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -307,9 +407,9 @@ To github.com:PostHog/posthog.com.git
 
 <HiddenSection headingType='h3' title='Via GitHub Desktop'>
 
-With the branch published, click the **Create Pull Request** button.
+With the branch published, click the **Create pull request** button.
 
-![Pull Request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
+![pull request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
 
 This will open up a page on github.com in your default web browser.
 
@@ -321,9 +421,17 @@ If you are pushing to an existing branch, navigate to the [posthog.com repo](htt
 
 Then, open the **Contribute** dropdown and click the **Open pull request** button.
 
-Make the Pull Request title descriptive name and complete the detail requested in the body.
+Make the pull request title descriptive name and complete the detail requested in the body.
 
-If you know who you would like to review the Pull Request, select them in the **Reviewers** dropdown.
+If you know who you would like to review the pull request, select them in the **Reviewers** dropdown.
+
+## Preview branch
+
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Netlify will generate a preview link available on the `netlify/posthog/deploy-preview` line. This includes all of your changes so you can preview before your pull request is merged.
+
+![Preview branch](../../images/docs/contribute/preview-branch.png)
+
+> **Note:** Checks are run automatically for PostHog org members and previous contributors. First time contributors will require authorization for checks to be run by a PostHog org member.
 
 ## Deployment
 

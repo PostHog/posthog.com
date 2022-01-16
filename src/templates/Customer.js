@@ -9,12 +9,16 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
+import Link from 'components/Link'
+
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const components = {
     ...shortcodes,
     BorderWrapper,
     ImageBlock,
     FloatedImage,
+    a: A,
 }
 
 const Tags = ({ title, tags }) => {
@@ -39,6 +43,7 @@ export default function Customer({ data }) {
         customerData: {
             body,
             excerpt,
+            fields,
             frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
@@ -48,7 +53,7 @@ export default function Customer({ data }) {
                 title={`${title} - PostHog`}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <Layout>
                 <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
@@ -90,6 +95,9 @@ export const query = graphql`
         customerData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
+            fields {
+                slug
+            }
             frontmatter {
                 title
                 customer
