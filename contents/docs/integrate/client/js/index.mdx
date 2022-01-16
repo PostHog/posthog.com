@@ -336,7 +336,7 @@ In this section we describe some additional details on advanced configuration av
 
 | Attribute                                                                      | Description                                                                                                    |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `advanced_decide_disabled`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
+| `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`           | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 
 <blockquote class="warning-note">
@@ -358,7 +358,7 @@ In this section we describe some additional details on advanced configuration av
 
 One of the very first things the PostHog library does when `init()` is called is make a request to the `/decide` endpoint on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend. This endpoint is required to run most features of the library (detailed below). However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
 
-The `/decide` endpoint can be disabled by setting `advanced_decide_disabled = true` in PostHog config.
+The `/decide` endpoint can be disabled by setting `advanced_disable_decide = true` in PostHog config.
 
 **Resources dependent on `/decide`**
 
