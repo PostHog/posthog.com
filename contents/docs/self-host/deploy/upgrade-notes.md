@@ -124,11 +124,11 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 2. we have renamed few `values.yaml` file in order to reduce confusion and align our naming convention to the industry best practices:
 
-`clickhouseOperator.enabled` -> `clickhouse.enabled`
-`clickhouseOperator.namespace` -> `clickhouse.namespace`
-`clickhouseOperator.storage` -> `clickhouse.persistence.size`
-`clickhouseOperator.useNodeSelector` -> `clickhouse.useNodeSelector`
-`clickhouseOperator.serviceType` -> `clickhouse.serviceType`
-`clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
+    - `clickhouseOperator.enabled` -> `clickhouse.enabled`
+    - `clickhouseOperator.namespace` -> `clickhouse.namespace`
+    - `clickhouseOperator.storage` -> `clickhouse.persistence.size`
+    - `clickhouseOperator.useNodeSelector` -> `clickhouse.useNodeSelector`
+    - `clickhouseOperator.serviceType` -> `clickhouse.serviceType`
+    - `clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
 
-If you are overriding any of those values, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
+    If you are overriding any of those values, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
