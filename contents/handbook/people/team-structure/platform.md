@@ -17,7 +17,7 @@ Make deploying, scaling and managing PostHog easy
 ## Goals & Key Results
 
 * PostHog is the easiest self-hosted product to deploy and scale in the world
-    * Result: Volume of clients requring help @marcushyett-ph
+    * Result: Volume of clients requiring help @marcushyett-ph
     * Result: % of successful installs / upgrades @guidoiaquinti
     * Result: Max size of operating instances @fuziontech
     * Monitor: % of users on latest version of PostHog @tiina303
