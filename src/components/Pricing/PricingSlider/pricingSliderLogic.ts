@@ -60,15 +60,13 @@ export const pricingSliderLogic = kea({
                 }
 
                 // Cloud
-                if (eventNumber > 1_000_000 && eventNumber <= 10_000_000) {
-                    unitPricing = 0.000225
-                    finalCost = (eventNumber - 1_000_000) * unitPricing
-                } else if (eventNumber > 10_000_000 && eventNumber <= 100_000_000) {
-                    unitPricing = 0.000075
-                    finalCost = 9_000_000 * 0.000225 + (eventNumber - 10_000_000) * unitPricing
-                } else if (eventNumber > 100_000_000) {
-                    unitPricing = 0.000075
-                    finalCost = 9_000_000 * 0.000225 + 90_000_000 * 0.000075 + (eventNumber - 100_000_000) * unitPricing
+                threshold_to_price = [[1_000_000, 0], [10_000_000, 0.000225], [100_000_000, 0.000075], [Number.MAX_SAFE_INTEGER, 0.000025]]
+                finalCost = 0
+                already_counted_events = 0
+                for ([threshold, unitPricing] of threshold_to_price) {
+                    finalCost = finalCost + max(0, min(eventNumber - already_counted_events, threshold)) * unitPricing
+                    already_counted_events = threshold
+                }
                 }
                 actions.setAdditionalUnitPrice(unitPricing)
                 return Math.round(finalCost).toLocaleString()
