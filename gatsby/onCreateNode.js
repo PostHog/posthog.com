@@ -22,11 +22,14 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         // Create GitHub contributor nodes for handbook & docs
         if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
-            const contributors = await fetch(url, {
+            let contributors = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
             }).then((res) => res.json())
+            contributors = contributors.filter(
+                (contributor) => contributor && contributor.author && contributor.author.login
+            )
             const contributorsNode = await Promise.all(
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
