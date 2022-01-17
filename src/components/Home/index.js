@@ -18,26 +18,24 @@ const Home = () => {
     useValues(posthogAnalyticsLogic) // mount this logic
 
     return (
-        typeof window !== 'undefined' && (
-            <>
-                <StarUsBanner />
-                <Layout>
-                    <SEO
-                        title="PostHog - Host Your Own Product Analytics"
-                        description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
-                    />
-                    <Hero />
-                    <Customers />
-                    <BeforeAndAfter />
-                    <Features />
-                    <Pipelines />
-                    <Quote />
-                    <Community />
-                    <Tutorials />
-                    <CTA />
-                </Layout>
-            </>
-        )
+        <>
+            <StarUsBanner />
+            <Layout>
+                <SEO
+                    title="PostHog - Host Your Own Product Analytics"
+                    description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
+                />
+                <Hero />
+                <Customers />
+                <BeforeAndAfter />
+                <Features />
+                <Pipelines />
+                <Quote />
+                <Community />
+                <Tutorials />
+                <CTA />
+            </Layout>
+        </>
     )
 }
 
