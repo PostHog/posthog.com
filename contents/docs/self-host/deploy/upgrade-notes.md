@@ -120,7 +120,7 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 10.0.0 introduces two major changes:
 
-1. as of today we've been including additional `StorageClass` definition into our Helm chart when installing it on AWS or GCP platforms. Starting from this release, we will not do that anymore and we will rely on the cluster default storage class. If you still want to install those additional storage classes, simply set `installCustomStorageClass: true` in your `values.yaml`.
+1. as of today we've been including additional `StorageClass` definition into our Helm chart when installing it on AWS or GCP platforms. Starting from this release, we will not do that anymore and we will rely on the cluster default storage class. If you still want to install those additional storage classes, simply set `installCustomStorageClass: true` in your `values.yaml`. If you are planning to use the default storage class, make sure you are running with our [requirement settings](https://posthog.com/docs/self-host/deploy/aws#cluster-requirements) (`allowVolumeExpansion` set to `true` and `reclaimPolicy` set to `Retain`).
 
 2. we have renamed few `values.yaml` file in order to reduce confusion and align our naming convention to the industry best practices:
 
