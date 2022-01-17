@@ -131,4 +131,4 @@ If you didn’t make any customization to those, there’s nothing you need to d
 `clickhouseOperator.serviceType` -> `clickhouse.serviceType`
 `clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
 
-If you are overriding any of those values, please make the corresponding changes before upgrading.
+If you are overriding any of those values, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
