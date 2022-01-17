@@ -1,18 +1,12 @@
 ---
 date: 2021-12-09
 title: '"How come your website is so nice?"'
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 categories:
     - CEO diaries
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
-
-"How come your website is so nice?"
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.
 

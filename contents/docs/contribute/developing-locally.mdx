@@ -4,10 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-<blockquote class="warning-note">
-    ⚠️ Do not use <code>release-*</code> patterns in your branches unless pushing a release as these branches have
-    special handling related to releases.
-</blockquote>
+
+> ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
+> for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
 
 
 ## What does PostHog look like?
@@ -151,7 +150,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 ### 3. Prepare the plugin server
 
-1. Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
+Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
 
 ### 4. Prepare the Django server
 
@@ -211,26 +210,22 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables.
 
-```bash
-export DEBUG=1
-export PRIMARY_DB=clickhouse
-export SKIP_SERVICE_VERSION_REQUIREMENTS=1
-export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
+If on ARM, first run `export SKIP_SERVICE_VERSION_REQUIREMENTS=1` as ClickHouse 21.9 – which is the first ARM-compatible version of ClickHouse – isn't _officially_ supported by PostHog yet.
 
-python manage.py migrate
-python manage.py migrate_clickhouse
+```bash
+DEBUG=1 python manage.py migrate
+DEBUG=1 python manage.py migrate_clickhouse
 ```
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
-> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an Apple Silicon machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
 ### 6. Start PostHog
 
 Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
 ```bash
-export KAFKA_HOSTS=kafka:9092
 ./bin/start
 ```
 
@@ -240,6 +235,9 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
 
+### 7. Develop
+
+This is it! You can now change PostHog in any way you want. To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
 
 ## Testing
 
@@ -280,7 +278,7 @@ If you'd like to have ALL feature flags that exist in PostHog at your disposal r
 
 ## Extra: Debugging the backend in PyCharm
 
-With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
+With [PyCharm's](/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.
