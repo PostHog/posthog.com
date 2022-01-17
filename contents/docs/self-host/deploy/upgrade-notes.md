@@ -118,9 +118,28 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 ### Upgrading from 9.x.x
 
-10.0.0 removes some legacy Helm annotations we don't need anymore (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info) and also introduces the requirement of using PostHog version >= 1.XX.X (TODO).
+10.0.0 introduces two major changes:
 
-In order to upgrade you'll need to run the following script first:
+1. as of today we've been including additional `StorageClass` definition into our Helm chart when installing it on AWS or GCP platforms. Starting from this release, we will not do that anymore and we will rely on the cluster default storage class. If you still want to install those additional storage classes, simply set `installCustomStorageClass: true` in your `values.yaml`.
+
+2. we have renamed few `values.yaml` file in order to reduce confusion and align our naming convention to the industry best practices:
+
+`clickhouseOperator.enabled` -> `clickhouse.enabled`
+`clickhouseOperator.namespace` -> `clickhouse.namespace`
+`clickhouseOperator.storage` -> `clickhouse.persistence.size`
+`clickhouseOperator.useNodeSelector` -> `clickhouse.useNodeSelector`
+`clickhouseOperator.serviceType` -> `clickhouse.serviceType`
+`clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
+
+If you are overriding any of those values, please make the corresponding changes before upgrading.
+
+<!---
+
+### Upgrading from 10.x.x
+
+11.0.0 removes some legacy Helm annotations (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info) and also introduces the requirement of using PostHog version >= 1.XX.X (TODO).
+
+In order to upgrade you'll need to run the following script first (please replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name or namespace):
 
 ```
 #!/usr/bin/env sh
@@ -146,6 +165,10 @@ do
 done
 ```
 
-Note: please replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name or namespace.
-
 After running the script above you can continue the upgrade process as usual.
+
+Note: the PR is introducing the use of the new [_TTL controller_ API](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/), available since Kubernetes 1.12 and enabled by default on version >=1.21 (in [AWS EKS](https://aws.amazon.com/blogs/containers/amazon-eks-1-20-released/) has been enabled in 1.20 as well).
+
+If you are running Kubernetes version 1.20 without the TTL controller API you might need to manually cleanup the `posthog-migrate` job before any upgrade by running: `kubectl -n posthog delete job posthog-migrate`
+
+-->
