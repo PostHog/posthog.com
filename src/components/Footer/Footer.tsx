@@ -178,6 +178,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
                                     <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
+                                    <FooterMenuItem title="Tutorials" url="/tutorials" />
                                 </ul>
                             </div>
                             <div>

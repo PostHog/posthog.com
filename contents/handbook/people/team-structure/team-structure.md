@@ -28,12 +28,13 @@ hideAnchor: true
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
+    - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
     - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
+
 
 ## Small teams
 
@@ -75,13 +76,13 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ### [Growth](growth)
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-- [Sam Winslow](/handbook/company/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
 ### [Marketing](marketing)
-- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
+- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
+- [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
 
 <br />
 

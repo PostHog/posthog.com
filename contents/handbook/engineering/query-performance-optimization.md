@@ -40,7 +40,7 @@ Need more granular access to queries than these dashboards provide? Take a look 
 
 If you have a fix, you need to make sure it works and doesn't regress.
 
-Under the main repo, you can find a query performance benchmark suite at `ee/benchmarks`. These are run nightly on master.
+Under the main repo, you can find a query performance benchmark suite at `ee/benchmarks`. These are run nightly on master. You can refresh this manually by running the [Benchmark workflow](https://github.com/PostHog/posthog/actions/workflows/benchmark.yml), which might be handy for chained PRs.
 
 After fixing an issue:
 1. Make sure there's an appropriate benchmark for the fix

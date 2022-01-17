@@ -12,13 +12,19 @@ export function PlainIntro({ pageTitle, blogDate, blogUpdatedDate, authorDetails
                 </p>
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
             </Structure.Section>
-            {authorDetails?.handle && (
+            {authorDetails && authorDetails.length > 0 && (
                 <Structure.Section width="xl" className="mb-12">
-                    <BlogAuthor
-                        className="flex flex-col space-y-4 justify-center text-center"
-                        direction="column"
-                        authorDetails={authorDetails}
-                    />
+                    <ul className="list-none m-0 p-0 flex items-center flex-wrap justify-center">
+                        {authorDetails.map((author, index) => (
+                            <li key={index} className="mr-4 mt-4">
+                                <BlogAuthor
+                                    className="flex flex-col space-y-4 justify-center text-center"
+                                    direction="column"
+                                    authorDetails={author}
+                                />
+                            </li>
+                        ))}
+                    </ul>
                 </Structure.Section>
             )}
         </>

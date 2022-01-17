@@ -5,13 +5,12 @@ showTitle: true
 hideAnchor: true
 ---
 
-![Image of Cloud Infrastructure](https://github.com/PostHog/posthog-cloud/blob/master/docs/images/infra.png?raw=true)
-
 ## People
 
 [See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
+
 
 Make deploying, scaling and managing PostHog easy
 

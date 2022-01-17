@@ -56,10 +56,10 @@ const faqs = [
     {
         q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
         a:
-            'You can switch from PostHog Cloud to Self-hosted Scale - just email our support team (hey@posthog.com). We will manually transfer your data, free. Likewise, you can switch from Self-hosted Scale to PostHog Cloud too - email us.',
+            'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using [our plugin](https://github.com/PostHog/posthog-plugin-migrator3000).',
     },
     {
-        q: 'On the Self-hosted Free plan, what happens if I exceed 1 million tracked users?',
+        q: 'On the Self-hosted Open Source plan, what happens if I exceed 1 million tracked users?',
         a:
             "We have a soft limit, meaning if you exceed the plan's allocation, we will reach out by email to discuss options. We'll continue to track users - you won't lose any customer data.",
     },
@@ -70,13 +70,17 @@ const faqs = [
     },
     {
         q: 'Does session recording impact costs?',
-        a:
-            'Session recording is currently free to use. This might change in the future.',
+        a: 'Session recording is currently free to use. This might change in the future.',
     },
     {
         q: 'How long do you retain data?',
         a:
-            'Data in PostHog Cloud is retained for 7 years - after 1 year, data is moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+            'Data (except recordings, see below) in PostHog Cloud is retained for 7 years - after 1 year, data may be moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+    },
+    {
+        q: 'How long do you retain recordings?',
+        a:
+            'Recordings are kept on Clickhouse-based installations for 3 weeks. If you are self-hosting, you can change this setting (see Recordings docs). If you are on legacy Postgres recordings are kept indefinitely unless you set a custom retention policy.',
     },
     {
         q: 'What happens after the data retention period elapses?',

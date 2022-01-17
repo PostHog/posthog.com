@@ -5,7 +5,15 @@ sidebar: Docs
 showTitle: true
 ---
 
-In addition to events having properties, users can also have properties. There are two different methods that can be used: `set` and `set_once`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way.
+In addition to events having properties, users can also have properties. There are two different methods that can be used: `set` and `set_once`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way. Note that both methods can be used in properties with normal event capture, e.g. using our [js library](/docs/integrate/client/js):
+```js
+posthog.capture(
+    'Set some user properties', 
+    { 
+        $set: { location: 'London'  },
+        $set_once: { referred_by: 'some ID' },
+    }
+```
 
 ## When to use `set` and `set_once`?
 
@@ -64,19 +72,21 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 13 | yes       | yes       | set_once  | set_once  | after              | 2
 
 
-> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples:
+> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples using our [python library](docs/integrate/server/python):
 
 For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
-```js
-posthog.set('Alice', {'location': 'Rome'}, timestamp=1)
-posthog.identify('Alice', {'$set': {'location': 'New York'}}, timestamp=1)
+```python
+ts = datetime.datetime.now()
+posthog.capture('Alice', event='set location', properties={'$set': {'location': 'Rome'}}, timestamp=ts)
+posthog.identify('Alice', {'location': 'New York'}, timestamp=ts)
 ```
 
 For `alias` this series of calls would also mean we end up with `location` being `Rome` or `New York`.
-```js
-posthog.set('Alice 1', {'location': 'Rome'}, timestamp=1)
-posthog.set('Alice 2', {'location': 'New York'}, timestamp=1)
-posthog.alias('Alice 1', 'Alice 2', timestamp=1000)
+```python
+ts = datetime.datetime.now()
+posthog.capture('Alice 1', event='set location', properties={'$set': {'location': 'Rome'}}, timestamp=ts)
+posthog.capture('Alice 2', event='set location', properties={'$set': {'location': 'New York'}}, timestamp=ts)
+posthog.alias('Alice 1', 'Alice 2')
 ```
 
 

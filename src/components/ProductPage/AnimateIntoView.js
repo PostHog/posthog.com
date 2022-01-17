@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 export const item = {
-    hidden: { translateY: '50%', opacity: 0 },
+    hidden: { translateY: '25%', opacity: 0 },
     show: {
         translateY: 0,
         opacity: 1,
-        transition: { duration: 0.5, type: 'spring' },
+        transition: { duration: 1, type: 'spring' },
     },
 }
 
