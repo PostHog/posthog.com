@@ -68,7 +68,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
-- [Guido Iaquinti](/handbook/company/team#guido-iaquinti-site-reliability-engineer)
+- [Guido Iaquinti](/handbook/company/team#guido-iaquinti-site-reliability-engineer) (Site Reliability Engineer)
 
 <br />
 
