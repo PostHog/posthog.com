@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries"]
+author: ["james-hawkins"]
+categories: ["CEO diaries", "Inside PostHog"]
 ---
 
 I'm [James](https://twitter.com/james406), and I work with [Tim](https://twitter.com/timgl). We are the co-founders of PostHog - a current batch YC company.

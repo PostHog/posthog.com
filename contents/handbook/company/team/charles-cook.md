@@ -9,13 +9,12 @@ This guide might be helpful in working with me.
 ## Areas of responsibility
 
 - Making sure all our business operations run smoothly
-- Overseeing all things marketing, including our external paid ads agency
-- All of our finance stuff (accounting, tax etc.)
+- Overseeing all things marketing, including managing our external paid ads agency
+- All of our financial reporting and planning, including managing our external accountants
 - Any legal matters, including compliance and privacy - I am the main point of contact with our lawyers
-- Sales operations, ie. making sure we follow up with customers, generating quotes
-- Making sure our customer support systems run smoothly
+- Making sure our customer support systems (ie. Papercups) run smoothly
 - I contribute a lot to our people and culture initiatives, like running BookHogs
-- Investor relations and fundraising ops, supporting Tim and James 
+- Investor relations and fundraising ops, supporting Tim and James and doing all the legal paperwork with our lawyers 
 - I do regular 1-1s with half of the team to chat about non-work stuff (Eltje does the other half)
 
 ## Quirks
@@ -46,7 +45,7 @@ This guide might be helpful in working with me.
 
 ## How you can help me
 
-- If you need something substantive from me that isn't a quick answer, please shoot me an email instead of Slack, so I don't forget it. 
+- If you need me to do something for you (rather than just answer a question), please shoot me an email instead of Slack, as it's easier for me to track. 
 - Tell me what we could be doing better from a company-building perspective. I'm particularly interested in unusual ideas. 
 - Give feedback on our marketing initiatives - especially if you are a developer!
 - Let me know when I need to slow down and do something to a higher standard. 

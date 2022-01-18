@@ -95,36 +95,39 @@ TooManyConnections: too many connections
 
 2. Get the logs for that pod using the name from the previous step:
    
-    ```shell
+    ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 ## How do I connect to Postgres?
     
-> **Tip:** Find out your pod names with `kubectl get pods -n posthog`
-
 1. Find out your Postgres password from the web pod:
 
-    ```shell
-    kubectl exec -n posthog -it your-posthog-web-pod \
-    -- sh -c 'echo password:$POSTHOG_DB_PASSWORD'
+    ```bash
+    # First we need to determine the name of the web pod – see "How do I see logs for a pod?" for more on this
+    POSTHOG_WEB_POD_NAME=$(kubectl get pods -n posthog | grep -- '-web-' | awk '{print $1}')
+    # Then we can get the password from the pod's environment variables
+    kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- sh -c 'echo The Postgres password is: $POSTHOG_DB_PASSWORD'
     ```
 
-2. Connect to your Postgres pod:
+2. Connect to your Postgres pod's shell:
 
-    ```shell
-    # Replace posthog-posthog-postgresql-0 with your pod's name if different
-    kubectl exec -n posthog -it posthog-posthog-postgresql-0  -- /bin/bash
+    ```bash
+    # We need to determine the name of the Postgres pod (usually it's 'posthog-posthog-postgresql-0')
+    POSTHOG_POSTGRES_POD_NAME=$(kubectl get pods -n posthog | grep -- '-postgresql-' | awk '{print $1}')
+    # We'll connect straight to the Postgres pod's psql interface
+    kubectl exec -n posthog -it $POSTHOG_POSTGRES_POD_NAME  -- /bin/bash
     ```
 
-3. Connect to the `posthog` DB:
+3. Connect to the `posthog` database:
 
-    > **Note:** You're connecting to your production database, proceed with caution!
+    > You're connecting to your production database, proceed with caution!
 
-    ```shell
+    ```bash
     psql -d posthog -U postgres
     ```
 
-    Postgres will ask you for the password. Use the value you found from step 1.
+    Postgres will ask you for the password. Use the value you found out in step 1.  
+    Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
 ## How do I connect to ClickHouse?
 
