@@ -5,6 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author: ["james-hawkins"]
+categories: ["CEO diaries", "Inside PostHog"]
 ---
 
 Let me tell you a story of the financial pressures that face new founders and how that pressure motivated Tim and me to make an epic ~~pivot~~ [leap](https://posthog.com/blog/story-about-pivots), from bootstrapping to a VC-backed startup.
