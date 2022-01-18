@@ -10,7 +10,7 @@ As we improve our Product, it's key to have a guiding metric that we can all at 
 
 Generally, small teams should be making measurable impact towards improving this metric (not all teams, not all the time). It's okay for epics and sprints to have other intermediate (and probably more concrete) goals, but overall each team should be moving the metric as a whole.
 
-## Discoveries: Metric definition
+## What is a Discovery?
 The metric is defined [in this action][action]. The concept of the metric is users driving insights from PostHog, so any of these actions:
 - Analyzing any insight. Analyzing means viewing for 10 seconds or more. Insights include: trends, funnels, paths, lifecycle, stickiness.
 - Analyzing a recording. Watching a recording for 10 seconds or more.
