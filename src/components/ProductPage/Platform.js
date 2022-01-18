@@ -31,8 +31,8 @@ const features = [
         icon: <OpenSource />,
     },
     {
-        title: 'Self-hostable',
-        description: `Customer data stays on your servers. You’re in total control of your PostHog instance.`,
+        title: 'SSO',
+        description: `Enable single sign-on authentication via Google, GitHub or GitLab for added security.`,
         icon: <SelfHost />,
     },
     {
