@@ -9,17 +9,17 @@ We have two types of rotations for engineering:
 1. Support Hero, first line responder to customer questions and bug reports
 2. Secondary on-call, responsible for prioritizing and solving escalated issues, Sentry errors and alerts.
 
-When someone is _Support Hero_, they are also the secondary on-call person for their team
+When someone is _Support Hero_, they are also the secondary on-call person for their team.
 
 ## 1. Support Hero
 
-Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the statisfaction of helping them out and contribute to a lot of different parts of our system.
+Every week, we assign one person to be the Support Hero. If this is you this week, congratulations! Support Hero is an intense but super fun week where you get to talk to a bunch of users, get the statisfaction of helping them out and contribute to a lot of different parts of our system.
 
-All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
+All other work takes a back seat while you're doing support, so don't plan on doing any normal work.
 
 ### Availability
 
-You should work your 'normal' hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as support hero you are doing the bulk of the debugging/fixing.
+You should work your normal hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as Support Hero you are doing the bulk of the debugging/fixing.
 
 If you are planning on taking a day off or you won't be available, please find someone to swap with and update the rotation on PagerDuty. Be sure to schedule an override for both swaps and **do not alter the rotation order** to avoid affecting other members.
 
@@ -29,9 +29,9 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Papercups](#papercups)**:
+There are a couple of channels that customer requests come in through so make sure you keep an eye on all of them, but  **most stuff will happen in [Papercups](#papercups)**:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on [Papercups](#papercups)).
+- [PostHog Users's Slack](https://posthog.com/slack), specifically #Community-Support where we centralize most help requests and encourage users to help each other (also on [Papercups](#papercups)).
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
