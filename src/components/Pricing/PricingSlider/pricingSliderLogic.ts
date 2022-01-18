@@ -49,13 +49,7 @@ export const pricingSliderLogic = kea({
                               [100_000_000, 0.000075],
                               [Number.MAX_SAFE_INTEGER, 0.000025],
                           ]
-                console.log('-----------------------------')
                 for (const [threshold, unitPricing] of thresholdPrices) {
-                    console.log(
-                        threshold,
-                        unitPricing,
-                        Math.max(0, Math.min(eventNumber - alreadyCountedEvents, threshold - alreadyCountedEvents))
-                    )
                     finalCost =
                         finalCost +
                         Math.max(0, Math.min(eventNumber - alreadyCountedEvents, threshold - alreadyCountedEvents)) *
