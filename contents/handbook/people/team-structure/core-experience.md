@@ -3,7 +3,10 @@ title: Team Core Experience
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
+
 ---
+
+
 
 In PostHog, as a company of [product-minded engineers](/blog/turning-engineers-into-product-people), we believe if you're 
 not having a good experience with our product, we're not doing a good job. No matter if it's because we don't have the 
@@ -24,51 +27,48 @@ organization in matters of product design, user experience, and frontend & API t
 
 [See team structure page](/handbook/people/team-structure/team-structure)
 
+
 ## Mission
+
+Company goal that resonates most with this team:
+
+> Quality: Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch.
 
 Team Core Experience aims to:
 
-- Implement PostHog's vision of increasing the number of successful products in the world, by building features that will move us closer to said vision.
+- Increase the quality of our features across all dimensions (see scope below).
 - Maintain a coherent strategy for frontend and API development (technologies, tools and methodology).
-- Always be in touch with product leadership and our customers, in order to figure out what works, what doesn't, and what needs to be built next.
-- Actually build those features.
-- Support other teams in PostHog in maintaining a coherently high level of product experience across the board.
-- Push the envelope and give back to the open source community whenever we develop abstractions that could benefit other organizations.
+- Ensuring our features are used the way we expect them to.
+- Understanding users and their needs... and solving for that.
 
 ## Goals
 
-With the work above, we aim to solve the following meta-goals:
+What is quality and how do we track it?
 
-- Part of our vision: It should be unbelievably easy and intuitive for anyone to use PostHog to get answers to  questions they have, and even find the answers to questions they had not considered asking.
+We track specific goals/targets depending on feature. For example:
 
-- To make our tech worthy of the fanatical following that is emerging around PostHog.
-- Build the next generation of engineers and engineering leaders, who would be running things when we are at 100 developers.
-- Remain a highly flexible team, ready to adapt to changing business requirements.
-- Be part of formalizing "the PostHog way", and writing a book about it.
-- Our tech stack is rather unique, though pretty powerful. We are also in a really powerful position to drive change in the industry ([data-first frontend](https://kea.js.org/blog/data-first-frontend-revolution), anyone?). Let's capitalise on that.
-- Zero TypeScript errors, code covered by logic tests, all scenes in Storybook, etc.
-- To do a damn good job at all of the above.
+- Qualitative data (what users are saying)
+- Measured data (KPIs, performance metrics, etc)
+- Internal company feedback (meeting company goals)
 
-In short, if you want a crash course at how to build large and complex webapps, at scale, while retaining a maintainable codebase and high customer satisfaction, and touch every part of the stack, this is the team to work with.
+Main metric: number of discoveries.
 
+## Scope
 
+We handle everything not owned by Core Analytics and Platform.
 
-## Responsibilities
-List below is prioritized.
+We handle everything people in the team have worked on.
 
-1. Reaching parity in terms of features, performance and user experience with leading product analytics solutions, including:
-   1. Extending core feature set (particularly on the frontend) as informed by dogfooding, user feedback, experimentation and strategic decisions.
-   2. Extending user experience to enable product analytics for non-technical users. 
-2. Maintaining (and improving where applicable) supporting activities for the core experience (this includes: cohorts, persons, sessions *[not session recording]*, annotations, settings, authentication, account management). 
+What are the things that we're uniquely best at doing?
+- Frontend
+- Product
+- 
 
 
-## Customer
-Our current focus is making Product Managers at scale-ups successful.
-We'll still strive to **maintain** success with technical users.
+## How we work
 
-## Output metrics
-
-- Primary: [Discoveries](https://app.posthog.com/insights/O4R-Frza?events=%5B%5D&actions=%5B%7B%22id%22%3A%2210784%22%2C%22math%22%3A%22total%22%2C%22name%22%3A%22Discoveries%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464)
+- How we work: What processes and behaviors we expect to get stuff done?
+- Document things!
 
 ## Slack channel
 
