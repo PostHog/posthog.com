@@ -13,7 +13,7 @@ showTitle: true
 
 In order to ensure users have a good experience, we review each others' work. When requesting feedback, be sure to consider the following guidelines:
 * What kind of feedback are you looking for? Be as specific as possible.
-* Have you provided sufficient context for the solution you're proposing? It can be hard to measure the success of a solution if you aren't fully aware of the problem being solved. For any work we're reviewing, there should be a corresponding github issue.
+* Have you provided sufficient context for the solution you're proposing? It can be hard to measure the success of a solution if you aren't fully aware of the problem being solved. For any work we're reviewing, there should be a corresponding GitHub issue.
 * Does your design use existing components? If not, do you have some justification for why you've deviated from the current patterns?
 * What are the advantages of this component over alternative components?
 * Is your design consistent with the visual style we have established for the product? If you're deviating, be sure to provide some details on why and on what problems you're hoping to solve.
