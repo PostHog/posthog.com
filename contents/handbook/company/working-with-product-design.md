@@ -18,7 +18,7 @@ If there isn’t a clear deadline for your design request, we’ll prioritize ac
 
 ### When to loop in design
 
-Because we hire self-starters, there is no expectation that every project should start by running through design _first_. If you are contributing design, be sure to consult the [contribution guidelines](/handbook/company/contributing-to-product-design)
+Because we hire self-starters, there is no expectation that every project should start by running through design _first_. If you are contributing to design, be sure to consult the [contribution guidelines](/handbook/company/contributing-to-product-design)
 
 Depending on your preferred workflow, there are different ways we can get involved.
 
