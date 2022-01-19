@@ -46,7 +46,7 @@ And you should sell more to get more revenue, right?
 
 <div style="width:360px;max-width:100%;"><div style="height:0;padding-bottom:65%;position:relative;"><iframe width="360" height="234" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/61rx1x"></iframe></div><p><a href="https://imgflip.com/gif/61rx1x">via Imgflip</a></p></div>
 
-New business feels quicker than trying to gradually upsell existing users. If product focusses on enabling existing pipeline to close, you end up in the above failure mode.
+New business feels quicker than trying to gradually upsell existing users. If product focuses on enabling existing pipeline to close, you end up in the above failure mode.
 
 # Why we've had a great experience
 
@@ -93,9 +93,9 @@ This matters to us as it prevents "information silos". Sidenote: I tried hard to
 
 That doesn't just apply to people reporting stuff upwards. This is what the exec team at PostHog does:
 
-* We share our exec meetings publically in the company. Anyone can comment / read.
+* We share our exec meetings publicly in the company. Anyone can comment / read.
 * We write out strategy changes into a pull request. Anyone can comment / read / suggest changes.
-* We share our board meetings publically in the company. Anyonen can comment / read.
+* We share our board meetings publicly in the company. Anyonen can comment / read.
 * We share realtime updates around fundraising. Not after the fact.
 * We have a public handbook - which is world editable
 
