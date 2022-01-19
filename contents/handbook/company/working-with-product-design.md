@@ -11,7 +11,7 @@ In the issue should be details about what you need from a product designer:
 1. Have you provided sufficient context for the problem you're trying to solve?
 2. Are there any technical constraints to be aware of?
 3. Is there any user feedback or other qualitative data that can inform the problem?
-4. How soon do you need a solution?
+4. How soon do you need a solution? Be explicit if you are or will be blocked without the design.
 5. Do you have success criteria documented?
 
 If there isn’t a clear deadline for your design request, we’ll prioritize according to our availability.
