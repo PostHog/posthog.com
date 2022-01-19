@@ -1,5 +1,5 @@
 ---
-title: How Phantom enhanced its infrastructure and cut failure rates by 90%
+title: How Phantom enhanced its product and cut failure rates by 90%
 customer: Phantom
 logo: ../images/customers/phantom/phantom.png
 featuredImage: ../images/customers/phantom/featured.png
