@@ -77,12 +77,12 @@ First, run the services in Docker:
 
 ```bash
 # ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f ee/docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
-docker compose -f ee/docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
 
 # x86 (amd64) systems
-docker compose -f ee/docker-compose.ch.yml pull zookeeper kafka clickhouse db redis
-docker compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
