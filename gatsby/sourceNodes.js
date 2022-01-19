@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const uniqBy = require('lodash.uniqby')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -8,7 +9,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             headers: { Authorization: `Bearer ${process.env.WORKABLE_API_KEY}` },
         }).then((res) => res.json())
 
-        jobs.forEach((job) => {
+        uniqBy(jobs, (job) => job.title).forEach((job) => {
             const node = {
                 parent: null,
                 children: [],

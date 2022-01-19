@@ -54,7 +54,7 @@ Then, click on "Edit Source", and you're good to go. Copy your code and config i
 
 ### Using a GitHub repository
 
-We have a [GitHub template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
+We have a [GitHub template (GH login required)](https://github.com/PostHog/posthog-plugin-starter-kit/generate) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
 
 Other than this, there's the `index.test.js` file for tests, and `package.json` for package dependencies and metadata.
 

@@ -4,6 +4,7 @@ const fs = require('fs')
 const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
+const careersTemplate = require('../src/templates/OG/careers.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -111,6 +112,11 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
+            careers: allJobs {
+                nodes {
+                    title
+                }
+            }
         }
     `)
 
@@ -166,7 +172,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     // Blog post OG
     for (const post of data.blog.nodes) {
         const { title, authorData, featuredImage } = post.frontmatter
-        const image = fs.readFileSync(path.resolve(__dirname, featuredImage.absolutePath), {
+        const image = fs.readFileSync(featuredImage.absolutePath, {
             encoding: 'base64',
         })
         await createOG({
@@ -182,14 +188,8 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     // Docs and Handbook OG
     for (const post of data.docsHandbook.nodes) {
         const { title } = post.frontmatter
-        const {
-            timeToRead,
-            excerpt,
-            fields,
-            parent: {
-                fields: { lastUpdated },
-            },
-        } = post
+        const { timeToRead, excerpt, fields, parent } = post
+        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
         if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
         const contributors = post.contributors.map((contributor) => {
             const { avatar, username } = contributor
@@ -197,7 +197,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 username,
                 avatar:
                     avatar.absolutePath &&
-                    fs.readFileSync(path.resolve(__dirname, avatar.absolutePath), {
+                    fs.readFileSync(avatar.absolutePath, {
                         encoding: 'base64',
                     }),
             }
@@ -227,10 +227,10 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     for (const post of data.customers.nodes) {
         const { frontmatter } = post
         const logoType = frontmatter.logo.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
-        const featuredImage = fs.readFileSync(path.resolve(__dirname, frontmatter.featuredImage.absolutePath), {
+        const featuredImage = fs.readFileSync(frontmatter.featuredImage.absolutePath, {
             encoding: 'base64',
         })
-        const logo = fs.readFileSync(path.resolve(__dirname, frontmatter.logo.absolutePath), {
+        const logo = fs.readFileSync(frontmatter.logo.absolutePath, {
             encoding: 'base64',
         })
         await createOG({
@@ -238,6 +238,12 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             slug: post.fields.slug,
         })
     }
+
+    // Careers OG
+    await createOG({
+        html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
+        slug: 'careers',
+    })
 
     await browser.close()
 }

@@ -63,14 +63,8 @@ p {
         margin-bottom: 0.125rem;
     }
 
-    blockquote:not('.quote') {
+    blockquote:not(.quote) {
         @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
-    }
-
-    &.customer-content {
-        blockquote {
-            @apply bg-transparent p-0;
-        }
     }
 
     iframe {
@@ -600,6 +594,27 @@ ul {
         margin-left: 0px;
     }
     width: calc(25% + 12%);
+}
+
+.DocSearch-Search-Icon {
+    @apply hidden;
+}
+.DocSearch.DocSearch-Container {
+    z-index: 99999999;
+}
+.DocSearch-Button {
+    @apply flex-grow text-left flex items-center space-x-1;
+}
+.DocSearch-Button-Placeholder {
+    @apply inline-flex items-center;
+}
+.DocSearch-Button-Container {
+    @apply flex items-center;
+}
+.DocSearch-Button-Placeholder::before {
+    content: url('/images/search.svg');
+    height: 16px;
+    @apply mr-3;
 }
 
 .mary-chain {

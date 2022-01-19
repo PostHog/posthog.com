@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
+        "@docsearch/react": "^3.0.0-alpha.42",
         "@headlessui/react": "^1.4.0",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",
@@ -38,7 +39,6 @@
         "cntl": "^1.0.0",
         "country-code-emoji": "^2.3.0",
         "cross-env": "^7.0.3",
-        "docsearch.js": "^2.6.3",
         "dotenv": "^10.0.0",
         "eslint-plugin-flowtype": "^2.50.3",
         "form-data": "^4.0.0",

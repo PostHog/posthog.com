@@ -727,10 +727,6 @@
                             "url": "/docs/integrate/third-party/google-tag-manager"
                         },
                         {
-                            "name": "Metabase",
-                            "url": "/docs/integrate/third-party/metabase"
-                        },
-                        {
                             "name": "Next.js",
                             "url": "/docs/integrate/third-party/next-js"
                         },
