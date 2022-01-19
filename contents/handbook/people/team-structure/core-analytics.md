@@ -28,6 +28,8 @@ Enable any user to painlessly, confidently, and consistently surface insights fr
 - 
 
 ## How we work?
+- No islands
+- Scope work into small achievable chunks
 
 ## Output metrics
 
