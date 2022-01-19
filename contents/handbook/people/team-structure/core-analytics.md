@@ -52,7 +52,7 @@ Non-exhaustive examples:
 - Extensibility
 
 ## How we work?
-- No islands. Make sure people work on tasks with atleast 1 other person
+- No islands. Make sure people work on tasks with at least 1 other person
 - Scope work into small achievable chunks
 - Reduce work in progress
 - Shipping MVPs for internal testing ASAP and iterating quickly
