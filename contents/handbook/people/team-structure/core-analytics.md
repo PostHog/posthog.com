@@ -11,17 +11,23 @@ hideAnchor: true
 
 ## Mission
 
-Make PostHog the best and most performant product analytics platform.
+Enable any user to painlessly, confidently, and consistently surface insights from their data that are useful for their product
+## Goals & Key Results
 
-## Responsibilities
+- Consistency - Maintain performance and availability of performing analysis
+- Confidence - Guarantee data quality 
+- Painlessness - Ensure features provide direct abilities to analyze their data. Users should not have to create unnecessary workarounds
 
-- Make sure data is correct and reliable
-- Make sure queries are quick
-- Increase the types of queries customers can do in PostHog (including frontend changes)
+## Scope
 
-## Customer
+### In Scope
+- how queries are built
+- improving query flexibility and abilities
+- Aligning user interface for optimal queryability 
+### Out of scope
+- 
 
-- Product managers at scale-ups
+## How we work?
 
 ## Output metrics
 
