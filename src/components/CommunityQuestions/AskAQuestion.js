@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { Formik } from 'formik'
 import { useLocation } from '@reach/router'
+import { Formik } from 'formik'
+import { useValues } from 'kea'
+import React, { useState } from 'react'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import AskQuestion from './AskQuestion'
 import Avatar from './Avatar'
 import QuestionSubmitted from './QuestionSubmitted'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 export default function AskAQuestion() {
     const location = useLocation()
@@ -20,7 +20,7 @@ export default function AskAQuestion() {
                 <div className="w-full max-w-[405px]">
                     <Formik
                         isInitialValid={false}
-                        initialValues={{ name: '', question: '', email: '' }}
+                        initialValues={{ name: '', question: '', email: '', 'mary-chain': '' }}
                         validate={(values) => {
                             const errors = {}
                             if (!values.name) {
@@ -35,6 +35,7 @@ export default function AskAQuestion() {
                             return errors
                         }}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
+                            if (values['mary-chain']) return
                             setSubmitting(true)
                             const body = JSON.stringify({ ...values, slug: location.pathname, timestamp })
                             fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })

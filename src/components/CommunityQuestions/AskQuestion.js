@@ -1,5 +1,5 @@
+import { Field, Form } from 'formik'
 import React from 'react'
-import { Form, Field } from 'formik'
 import Button from './Button'
 
 export default function AskQuestion({ isValid, loading }) {
@@ -18,6 +18,7 @@ export default function AskQuestion({ isValid, loading }) {
                 as="textarea"
                 placeholder="Type your question..."
             />
+            <Field className="mary-chain" type="text" placeholder="Ignore if human" name="mary-chain" />
             <Button loading={loading} type="submit" disabled={!isValid}>
                 Submit
             </Button>

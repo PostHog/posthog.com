@@ -601,3 +601,7 @@ ul {
     }
     width: calc(25% + 12%);
 }
+
+.mary-chain {
+    display: none;
+}
