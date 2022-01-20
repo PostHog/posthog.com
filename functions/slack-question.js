@@ -326,7 +326,6 @@ app.action('publish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
     const { question, name, slug, email, avatar } = JSON.parse(actions[0].value)
-    console.log(body.state.values)
     const replies = await client.conversations.replies({
         ts: message.ts,
         channel: process.env.SLACK_QUESTION_CHANNEL,
@@ -334,23 +333,26 @@ app.action('publish-button', async ({ ack, client, body }) => {
 
     const answer = replies.messages && replies.messages[1] && replies.messages[1].text
     if (answer) {
-        // Disabling until we figure out the best way to handle email notifications
-        // if (email) {
-        //     const mailgun = new Mailgun(formData)
-        //     const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY })
-        //     const mailgunData = {
-        //         from: 'hey@posthog.com',
-        //         to: email,
-        //         subject: `Someone answered your question on posthog.com!`,
-        //         template: 'question-answered',
-        //         'h:X-Mailgun-Variables': JSON.stringify({
-        //             question,
-        //             answer,
-        //         }),
-        //         'h:Reply-To': 'hey@posthog.com',
-        //     }
-        //     await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
-        // }
+        if (email) {
+            const mailgun = new Mailgun(formData)
+            const mg = mailgun.client({
+                username: 'api',
+                key: process.env.MAILGUN_API_KEY,
+                url: 'https://api.eu.mailgun.net',
+            })
+            const mailgunData = {
+                from: 'hey@posthog.com',
+                to: email,
+                subject: `Someone answered your question on posthog.com!`,
+                template: 'question-answered',
+                'h:X-Mailgun-Variables': JSON.stringify({
+                    question,
+                    answer,
+                }),
+                'h:Reply-To': 'hey@posthog.com',
+            }
+            await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
+        }
         const messageUpdate = {
             channel: process.env.SLACK_QUESTION_CHANNEL,
             ts: message.ts,
