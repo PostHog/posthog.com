@@ -63,31 +63,10 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    {
-                        resolve: `gatsby-remark-images`,
-                        options: {
-                            maxWidth: 800,
-                            linkImagesToOriginal: false,
-                            tracedSVG: true,
-                        },
-                    },
-                    {
-                        resolve: `gatsby-remark-images-medium-zoom`,
-                    },
                     `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                 ],
-                plugins: [
-                    `gatsby-remark-images`,
-                    {
-                        resolve: `gatsby-remark-images-medium-zoom`,
-                        options: {
-                            background: 'rgb(0 0 0 / 85%)',
-                            zIndex: 9999,
-                        },
-                    },
-                    `gatsby-remark-static-images`,
-                ],
+                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
