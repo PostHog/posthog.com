@@ -215,6 +215,10 @@
                                 "title": "Features",
                                 "items": [
                                     {
+                                        "title": "Experimentation",
+                                        "url": "/docs/user-guides/experimentation"
+                                    },
+                                    {
                                         "title": "Feature flags",
                                         "url": "/docs/user-guides/feature-flags"
                                     },
