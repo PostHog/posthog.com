@@ -115,3 +115,42 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 - drops support for Kubernetes 1.19 as it has reached end of life on 2021-10-28
 - adds support for Kubernetes 1.23 released on 2021-12-07
+
+### Upgrading from 9.x.x
+
+10.0.0 introduces two major changes:
+
+1. as of today we've been including additional `StorageClass` definition into our Helm chart when installing it on AWS or GCP platforms. Starting from this release, we will not do that anymore and we will rely on the cluster default storage class. If you still want to install those additional storage classes, simply set `installCustomStorageClass: true` in your `values.yaml`. If you are planning to use the default storage class, make sure you are running with our [requirement settings](https://posthog.com/docs/self-host/deploy/aws#cluster-requirements) (`allowVolumeExpansion` set to `true` and `reclaimPolicy` set to `Retain`).
+
+2. we have renamed few chart inputs in order to reduce confusion and align our naming convention to the industry standards:
+
+    - `clickhouseOperator.enabled` -> `clickhouse.enabled`
+    - `clickhouseOperator.namespace` -> `clickhouse.namespace`
+    - `clickhouseOperator.storage` -> `clickhouse.persistence.size`
+    - `clickhouseOperator.useNodeSelector` -> `clickhouse.useNodeSelector`
+    - `clickhouseOperator.serviceType` -> `clickhouse.serviceType`
+    - `clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
+
+    If you are overriding any of those, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
+
+### Upgrading from 10.x.x
+
+11.0.0 removes some legacy Helm annotations not needed anymore. By removing those and upgrading your installation, all future upgrades to stateless components should now happen without downtime (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
+
+Before running the Helm upgrade command, please run the following script first (note: replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace, which can be found via `helm list`):
+
+```
+#!/usr/bin/env sh
+
+RELEASE_NAME="posthog"
+RELEASE_NAMESPACE="posthog"
+
+for deployment in $(kubectl -n "$RELEASE_NAMESPACE" get deployments --no-headers -o custom-columns=NAME:.metadata.name | grep "posthog")
+do
+  kubectl -n "$RELEASE_NAMESPACE" label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
+  kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
+done
+```
+
+After that you continue the Helm upgrade process as usual.

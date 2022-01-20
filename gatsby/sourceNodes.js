@@ -63,4 +63,91 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             createNode(node)
         }
     })
+
+    const questions = await fetch(
+        `https://slack.com/api/conversations.history?channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        }
+    ).then((res) => res.json())
+    questions &&
+        questions.messages &&
+        questions.messages.forEach(async (message, index) => {
+            const { blocks } = message
+
+            if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
+
+            const question = { replies: [] }
+            const blockIds = {
+                name_and_slug: (block) => {
+                    const split = block.text.text.split(' on ')
+                    question.name = split[0]
+                    question.slug = split[1]
+                },
+                question: (block) => {
+                    question.body = block.text.text
+                    if (block.accessory) {
+                        question.avatar = block.accessory.image_url
+                    }
+                },
+            }
+
+            blocks.forEach((block) => {
+                const blockId = block.block_id
+                if (blockIds[blockId] && block.text) {
+                    blockIds[blockId](block)
+                }
+            })
+
+            if (Object.keys(question).length > 0) {
+                const replies =
+                    message.thread_ts &&
+                    (
+                        await fetch(
+                            `https://slack.com/api/conversations.replies?ts=${message.thread_ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                                },
+                            }
+                        ).then((res) => res.json())
+                    ).messages
+                if (replies) {
+                    question.replies = await Promise.all(
+                        replies.slice(1).map((reply) => {
+                            return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then((user) => {
+                                    return {
+                                        name: user.user.name,
+                                        body: reply.text,
+                                        avatar: user.user.profile.image_72,
+                                    }
+                                })
+                        })
+                    )
+                }
+
+                const node = {
+                    id: createNodeId(`question-${index}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `Question`,
+                        contentDigest: createContentDigest(question),
+                    },
+                    ...question,
+                }
+                createNode(node)
+            }
+        })
 }

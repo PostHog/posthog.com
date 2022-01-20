@@ -8,7 +8,6 @@ import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import PostLayout, { Contributors, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
-import { ZoomImage } from 'components/ZoomImage'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
@@ -109,7 +108,6 @@ export default function BlogPost({ data, pageContext, location }) {
         pre: CodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        img: ZoomImage,
         a: A,
         ...shortcodes,
     }

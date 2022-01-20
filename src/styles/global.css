@@ -616,3 +616,7 @@ ul {
     height: 16px;
     @apply mr-3;
 }
+
+.mary-chain {
+    display: none;
+}

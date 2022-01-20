@@ -4,31 +4,30 @@ sidebar: Docs
 showTitle: true
 ---
 
-
 > ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
 > for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
-
 
 ## What does PostHog look like?
 
 Before jumping into setup, let's dissect a PostHog. The app itself is made up of 4 components that run simultaneously:
 
-- Django server
-- Celery worker (handles execution of background tasks)
-- Node.js plugin server (handles event ingestion and plugins)
-- React frontend built with Node.js
+-   Django server
+-   Celery worker (handles execution of background tasks)
+-   Node.js plugin server (handles event ingestion and plugins)
+-   React frontend built with Node.js
 
 These components rely on a few external services:
 
-- PostgreSQL – for storing ordinary data (users, projects, saved insights)
-- Redis – for caching and inter-service communication
-- ClickHouse – for storing big data (events, persons – analytics queries)
-- Kafka – for queuing events for ingestion
-- Zookeeper – for coordinating Kafka and ClickHouse clusters
+-   PostgreSQL – for storing ordinary data (users, projects, saved insights)
+-   Redis – for caching and inter-service communication
+-   ClickHouse – for storing big data (events, persons – analytics queries)
+-   Kafka – for queuing events for ingestion
+-   Zookeeper – for coordinating Kafka and ClickHouse clusters
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
-- the external services run in Docker over `docker compose`
-- PostHog itself runs on the host (your system)
+
+-   the external services run in Docker over `docker compose`
+-   PostHog itself runs on the host (your system)
 
 This is what we'll be using in the guide below.
 
@@ -39,7 +38,6 @@ The instructions here assume you're running macOS. For Linux, adjust the steps a
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx)!
 
-
 ## macOS prerequisites
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
@@ -47,7 +45,8 @@ In case some steps here have fallen out of date, please tell us about it – fee
 2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
 
 <blockquote class="warning-note">
-    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
+    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
+    <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
 </blockquote>
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
@@ -66,7 +65,6 @@ In case some steps here have fallen out of date, please tell us about it – fee
     git clone https://github.com/PostHog/posthog && cd posthog/
     ```
 
-
 ## Get things up and running
 
 ### 1. Spin up external services
@@ -77,12 +75,12 @@ First, run the services in Docker:
 
 ```bash
 # ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f ee/docker-compose.ch.arm64.yml pull zookeeper kafka clickhouse db redis
-docker compose -f ee/docker-compose.ch.arm64.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis
 
 # x86 (amd64) systems
-docker compose -f ee/docker-compose.ch.yml pull zookeeper kafka clickhouse db redis
-docker compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -123,9 +121,11 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 Finally, install Postgres locally. Even planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
 On macOS you can just run:
+
 ```bash
 brew install postgresql
 ```
+
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of pacakages.
@@ -135,7 +135,8 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 1. Install nvm: https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
 <blockquote class="warning-note">
-    After installation, make sure to follow the instructions printed in your terminal to add NVM to your <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
+    After installation, make sure to follow the instructions printed in your terminal to add NVM to your{' '}
+    <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
 2. Install the latest Node.js 14 (the version used by PostHog in production) with `nvm install 14`. You can start using it in the current shell with `nvm use 14`.
@@ -244,17 +245,23 @@ This is it! You can now change PostHog in any way you want. To commit changes, c
 For a PostHog PR to be merged, all tests must be green, and ideally you should be introducing new ones as well – that's why you must be able to run tests with ease.
 
 For backend, simply use:
+
 ```bash
 pytest
 ```
+
 You can narrow the run down to only files under matching paths:
+
 ```bash
 pytest posthog/test/test_entity_model.py
 ```
+
 Or to only test cases with matching function names:
+
 ```bash
 pytest posthog/test/test_entity_model.py -k test_inclusion
 ```
+
 To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DEBUG`.
 
 For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
@@ -262,7 +269,6 @@ For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily in
 Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
 
 For frontend tests, all you need is `yarn test`.
-
 
 ## Extra: Working with feature flags
 
@@ -274,7 +280,6 @@ This means that your activity is immediately reflected in the current project, w
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
-
 
 ## Extra: Debugging the backend in PyCharm
 
