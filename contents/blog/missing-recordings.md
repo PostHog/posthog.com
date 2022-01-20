@@ -1,6 +1,6 @@
 # The mystery of missing recordings at PostHog
 
-Session recordings is one of PostHog's core features. It allows customers to see their website being used, mouse clicks and all. It's really cool, but, until recently, we had one big issue with the feature. Customers would often tell us recordings were missing, and we didn't know why.
+Session Recording is one of PostHog's core features. It allows customers to see their website being used, mouse clicks and all. It's really cool, but, until recently, we had one big issue with the feature. Customers would often tell us recordings were missing, and we didn't know why.
 
 This is the story of how we decreased the number of missing recordings from 15% to <1%.
 
