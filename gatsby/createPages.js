@@ -272,6 +272,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+                slug,
             },
         })
     })

@@ -2,6 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
+import CommunityQuestions from 'components/CommunityQuestions'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
@@ -85,7 +86,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
 }
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
-    const { pageData } = data
+    const { pageData, questions } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
@@ -166,6 +167,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 ) : (
                     <Iframe src={featuredVideo} />
                 )}
+                <CommunityQuestions questions={questions?.nodes} />
                 <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
                     <DocsPageSurvey />
                 </div>
@@ -175,7 +177,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
 }
 
 export const query = graphql`
-    query TutorialLayout($id: String!) {
+    query TutorialLayout($id: String!, $slug: String!) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -196,6 +198,25 @@ export const query = graphql`
                     publicURL
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
+                    }
+                }
+            }
+        }
+        questions: allQuestion(filter: { slug: { eq: $slug } }) {
+            nodes {
+                avatar
+                body
+                name
+                slug
+                replies {
+                    avatar
+                    body
+                    name
+                    authorData {
+                        name
+                        role
+                        image
+                        link_url
                     }
                 }
             }

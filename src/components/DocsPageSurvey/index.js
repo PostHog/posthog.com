@@ -22,7 +22,7 @@ const button = cntl`
 const ResponseButtons = ({ submitResponse }) => {
     return (
         <>
-            <h3 className="text-white mb-5">Was this page useful?</h3>
+            <h3 className="text-white mb-5 !mt-0">Was this page useful?</h3>
             <div className="flex space-x-5 items-center">
                 <CallToAction onClick={() => submitResponse(true)} size="sm" type="outline" className={button}>
                     <ThumbsUp />
