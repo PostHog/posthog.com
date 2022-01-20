@@ -12,7 +12,7 @@ import Navigation from './Navigation'
 import '../../styles/handbook.scss'
 
 export default function Handbook({
-    data: { post },
+    data: { post, questions },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
     const { hash } = useLocation()
@@ -95,6 +95,7 @@ export default function Handbook({
                                     next,
                                     previous,
                                     hideLastUpdated,
+                                    questions: questions?.nodes,
                                 }}
                             />
                         </div>
@@ -107,7 +108,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!) {
+    query HandbookQuery($id: String!, $slug: String!) {
         post: mdx(id: { eq: $id }) {
             id
             body
@@ -138,6 +139,25 @@ export const query = graphql`
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM D, YYYY")
+                    }
+                }
+            }
+        }
+        questions: allQuestion(filter: { slug: { eq: $slug } }) {
+            nodes {
+                avatar
+                body
+                name
+                slug
+                replies {
+                    avatar
+                    body
+                    name
+                    authorData {
+                        name
+                        role
+                        image
+                        link_url
                     }
                 }
             }
