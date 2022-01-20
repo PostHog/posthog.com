@@ -7,6 +7,7 @@ import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
+import { ZoomImage } from 'components/ZoomImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -84,6 +85,7 @@ export default function Main({
         h4: (props) => Heading({ as: 'h4', ...props }),
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
         a: A,
         TotalCountries,
         TotalTeam,

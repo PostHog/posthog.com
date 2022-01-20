@@ -65,8 +65,6 @@
         "gatsby-plugin-typescript": "^2.4.24",
         "gatsby-remark-autolink-headers": "^2.1.10",
         "gatsby-remark-copy-linked-files": "^2.3.2",
-        "gatsby-remark-images": "^6.0.0",
-        "gatsby-remark-images-medium-zoom": "^1.7.0",
         "gatsby-remark-katex": "^3.1.8",
         "gatsby-remark-prismjs": "^3.5.1",
         "gatsby-remark-static-images": "^1.2.1",
