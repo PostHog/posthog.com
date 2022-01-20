@@ -1151,4 +1151,4 @@
     to = "/tutorials/how-to-segment-users"
     
 [build]
-    command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer NODE_VERSION=14 GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
