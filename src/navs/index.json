@@ -183,13 +183,11 @@
                                 "items": [
                                     {
                                         "title": "Trends",
-                                        "url": "/docs/user-guides/trends",
-                                        "badge": "new"
+                                        "url": "/docs/user-guides/trends"
                                     },
                                     {
                                         "title": "Funnels",
-                                        "url": "/docs/user-guides/funnels",
-                                        "badge": "beta"
+                                        "url": "/docs/user-guides/funnels"
                                     },
                                     {
                                         "title": "Paths",
