@@ -132,3 +132,25 @@ If you didn’t make any customization to those, there’s nothing you need to d
     - `clickhouse.persistentVolumeClaim` -> `clickhouse.persistence.existingClaim`
 
     If you are overriding any of those, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
+
+### Upgrading from 10.x.x
+
+11.0.0 removes some legacy Helm annotations that are not necessary anymore (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
+
+Before running the Helm upgrade, please run the following script first (note: replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace):
+
+```
+#!/usr/bin/env sh
+
+RELEASE_NAME="posthog"
+RELEASE_NAMESPACE="posthog"
+
+for deployment in $(kubectl -n posthog get deployments --no-headers -o custom-columns=NAME:.metadata.name | grep "posthog-")
+do
+  kubectl -n posthog label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
+  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
+  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
+done
+```
+
+After running the step above you can continue the Helm upgrade process as usual.
