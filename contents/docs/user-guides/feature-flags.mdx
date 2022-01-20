@@ -6,25 +6,19 @@ showTitle: true
 
 <FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
 
-Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
+Feature Flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application. Feature Flags can also help you control access to certain features in your product (e.g. only show paid features to users with an active subscription).
 
 > **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
+
+> **Looking to test changes to your product?** Check out our [Experimentation](/docs/user-guides/experimentation) feature.
 
 ## Learning resources
 
 ### Tutorial
 
-For a comprehensive step-by-step tutorial on how to use feature flags, check out [How to safely roll out new features](/docs/tutorials/feature-flags).
+For a comprehensive step-by-step tutorial on how to use Feature Flags, check out our [How to safely roll out new features](/docs/tutorials/feature-flags) tutorial.
 
-![Create feature flags](../../images/tutorials/banners/feature-flags.png)
-
-### Demo video
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/a6WEuVncYok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<br />
-
-## Creating feature flags
+## Creating Feature Flags
 
 In the sidebar, go to 'Experiments' and click '+ New Feature Flag'.
 
@@ -32,26 +26,26 @@ Think of a descriptive name and select how you want to roll out your feature.
 
 ![Create feature flags](../../images/features/feature-flags/experiments-page.png)
 
-## Implementing the feature flag
+## Implementing the Feature Flag
 
 When you create a feature flag, we'll show you an example snippet. It'll look something like this:
 
 ```js
-if(posthog.isFeatureEnabled('new-beta-feature')) {
+if (posthog.isFeatureEnabled('new-beta-feature')) {
     // do something
 }
 ```
 
 What you do inside that if statement is up to you. You might change the CSS of a button, hide an entire section, or move things around.
 
-Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, *except* the very first time a user visits your site.
+Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, _except_ the very first time a user visits your site.
 
 To combat that, there's a callback you can use to wait for the flags to come in:
 
 ```js
-posthog.onFeatureFlags(function() {
+posthog.onFeatureFlags(function () {
     // feature flags are guaranteed to be available at this point
-    if(posthog.isFeatureEnabled('new-beta-feature')) {
+    if (posthog.isFeatureEnabled('new-beta-feature')) {
         // do something
     }
 })
@@ -59,7 +53,7 @@ posthog.onFeatureFlags(function() {
 
 > **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the 'Project Settings' page in PostHog.
 
-## Develop locally
+## Using locally
 
 To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
 
@@ -113,9 +107,9 @@ If the feature has caused a problem (like a huge server load), or you don't need
 
 For feature flags that filter by user properties only, a given flag will always be on if a certain user meets all the specified property filters.
 
-However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed. 
+However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed.
 
-As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
+As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way.
 
 ## Multivariate feature flags (alpha)
 
@@ -134,7 +128,7 @@ Note that the rollout percentage of feature flag variants must add up to 100%. I
 With the latest version of our JS library, you can call:
 
 ```js
-if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
+if (posthog.getFeatureFlag('checkout-button-color') === 'black') {
     // do something
 }
 ```
@@ -159,7 +153,7 @@ posthog.feature_flags.getFlagVariants()
 ```json
 {
     "new-beta-feature": true,
-    "checkout-button-color": "black",
+    "checkout-button-color": "black"
 }
 ```
 
@@ -168,10 +162,10 @@ posthog.feature_flags.getFlagVariants()
 `onFeatureFlags(callback)` now passes the feature flag variants object as the second argument to `callback`, which looks like this:
 
 ```js
-posthog.onFeatureFlags(function(flags, flagVariants) {
+posthog.onFeatureFlags(function (flags, flagVariants) {
     // do something useful
-    console.log(flags)         // ["new-beta-feature", "checkout-button-color"]
-    console.log(flagVariants)  // { "new-beta-feature": true, "checkout-button-color": "black" }
+    console.log(flags) // ["new-beta-feature", "checkout-button-color"]
+    console.log(flagVariants) // { "new-beta-feature": true, "checkout-button-color": "black" }
 })
 ```
 
@@ -186,3 +180,7 @@ We send the event properties as `$feature/your-feature-name`, for example `$feat
 For example, if you have a Trends graph of button click events and you'd like to narrow it down to clicks only when the checkout button is blue, apply a filter to your graph series such that `$feature/checkout-button-color = blue`.
 
 If you'd like to compare all variants for which we have data in one graph, apply a breakdown by `$feature/checkout-button-color`.
+
+## Experimentation
+
+Feature Flags and Experimentation are different features and work for different use cases. Check out our [Experimentation](/docs/user-guides/experimentation) guide for more details.
