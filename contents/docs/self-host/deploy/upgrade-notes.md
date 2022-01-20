@@ -145,11 +145,11 @@ Before running the Helm upgrade, please run the following script first (note: re
 RELEASE_NAME="posthog"
 RELEASE_NAMESPACE="posthog"
 
-for deployment in $(kubectl -n posthog get deployments --no-headers -o custom-columns=NAME:.metadata.name | grep "posthog-")
+for deployment in $(kubectl -n $RELEASE_NAMESPACE get deployments --no-headers -o custom-columns=NAME:.metadata.name | grep "posthog")
 do
-  kubectl -n posthog label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
-  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
-  kubectl -n posthog annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
+  kubectl -n $RELEASE_NAMESPACE label deployment "$deployment" "app.kubernetes.io/managed-by=Helm"
+  kubectl -n $RELEASE_NAMESPACE annotate deployment "$deployment" "meta.helm.sh/release-name=$RELEASE_NAME"
+  kubectl -n $RELEASE_NAMESPACE annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
 done
 ```
 
