@@ -63,5 +63,11 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         logo: File @link(from: "logo___NODE")
         slug: String
       }
+      type NavsJsonMainSubItemsSectionsItems implements Node {
+        icon: String,
+        title: String,
+        url: String,
+        badge: String
+      }
     `)
 }
