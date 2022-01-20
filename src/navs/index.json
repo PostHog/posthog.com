@@ -216,7 +216,8 @@
                                 "items": [
                                     {
                                         "title": "Experimentation",
-                                        "url": "/docs/user-guides/experimentation"
+                                        "url": "/docs/user-guides/experimentation",
+                                        "badge": "beta"
                                     },
                                     {
                                         "title": "Feature flags",
