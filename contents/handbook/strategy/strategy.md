@@ -76,15 +76,28 @@ While there is value in the items on the right, we value the items on the left m
 
 * _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
 
-## Target audience for 2022
+## Direction for 2022
 
-Our customers are a combination of users, businesses and the products themselves. In order to understand where we should focus our efforts, below is a proposed breakdown of our target audience based on attributes of a product. 
+ * **2 word summary: **Nail Enterprise
+    * **Customers**
+        * **Focus on Enterprise.** E.g. Large initial contracts (~$200k/year+) and smaller deals in organizations that will eventually become very large. 
+        * **Non Goal:** Start doing outbound sales
+    * **Product**
+        * **Goals:**
+            * **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
+            * **Extensibility:** You can instantly connect PostHog to any other system 
+            * **Deployments:** PostHog is the easiest self-hosted product to deploy and scale in the world
+        * **Non Goals:**
+            * Build lots of new low quality / partial features
+            * Build everything a single enterprise customer wants just to close a deal
+
+## Target customers for 2022
+
+Our ideal customer is an Enterprise who meets as many of these these criteria as possible:
 
 * _Needs_
   * Need to control their user data
-  * Need to excel at product led 
 * _Haves_
   * Have budget and savvy engineers are the decision makers
-  * Have achieved product market fit
-  * Have a central analytics function
+  * Have a central analytics or devops function
   * Have deployed our open source product successfully
