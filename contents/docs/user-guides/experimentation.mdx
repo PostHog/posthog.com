@@ -75,9 +75,9 @@ TODO: Advanced math details on how experimentation works, how we compute signifi
 
 ### How we ensure distribution of people
 
-For every experiment, we leverage PostHog's multivariate feature flags. There's one control group, and up to 3 test groups. Based on their distinctID, each user is randomly distributed into one of these groups. This is stable, so the same users, even when they revisit your page, stay in the same group.
+For every experiment, we leverage PostHog's multivariate feature flags. There's one control group, and upto 3 test groups. Based on their distinctID, each user is randomly distributed into one of these groups. This is stable, so the same users, even when they revisit your page, stay in the same group.
 
-We do this by creating a hash out of the feature flag key and the distinctID. It's worth noting that when you have low data (<1,000 users per variant), the difference in variant exposure can be up to 20%. This means, a test variant could have 800 people only, when control has 1,000.
+We do this by creating a hash out of the feature flag key and the distinctID. It's worth noting that when you have low data (<1,000 users per variant), the difference in variant exposure can be upto 20%. This means, a test variant could have 800 people only, when control has 1,000.
 
 All our calculations take this exposure into account.
 
@@ -116,6 +116,42 @@ Below are calculations for each kind of experiment.
 
 Trend experiments capture count data. For example, if you want to measure the change in total count of clicks, you'd use this kind of experiment.
 
-We use monte carlo simulations to determine the probability of each variant being the best. A variant 
+We use monte carlo simulations to determine the probability of each variant being the best. Every variant can be simulated as a gamma distribution with shape parameter = trend count, and exposure = relative exposure for this variant.
+
+Then, for each variant, we can sample from their distributions and get a count value for each of them.
+
+The probability of a variant being the best is given by:
+
+TODO: Latex, or take an image?
+
+```
+probability = (1/N)summation(i=1 to N) (count_target > count_control) & (count_target > count_other_variants)
+```
+
+For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
 ### Funnel Experiment Calculations
+
+Funnel experiments capture conversion rates. For example, if you want to measure the change in conversion rate for buying a subscription to your site, you'd use this kind of experiment.
+
+We use monte carlo simulations to determine the probability of each variant being the best. Every variant can be simulated as a beta distribution with alpha parameter = number of conversions, and beta parameter = number of failures, for this variant.
+
+Then, for each variant, we can sample from their distributions and get a conversion rate for each of them.
+
+The probability of a variant being the best is given by:
+
+TODO: Latex, or take an image?
+
+```
+probability = (1/N)summation(i=1 to N) (conversion_rate_target > conversion_rate_control) & (conversion_rate_target > conversion_rate_other_variants)
+```
+
+To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf).
+
+To do this, we again run a monte carlo simulation, and calculate loss as:
+
+```
+loss = (1/N)summation(i=1 to N) max(0, max(conversion_rate_other_variants - conversion_rate_target))
+```
+
+This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
