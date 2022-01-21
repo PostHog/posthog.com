@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/series-b/series-b-baby.png
+featuredImage: ../images/blog/
 featuredImageType: full
 author: ["rick-marron"]
 categories: ["Engineering"]
