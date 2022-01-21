@@ -97,6 +97,7 @@ Our ideal customer is an Enterprise who meets as many of these these criteria as
 
 * _Needs_
   * Need to control their user data
+  * Need to excel at product led growth
 * _Haves_
   * Have budget and savvy engineers are the decision makers
   * Have a central analytics or devops function
