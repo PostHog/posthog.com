@@ -78,7 +78,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Direction for 2022
 
- * **2 word summary: **Nail Enterprise
+ * 2 word summary: **Nail Enterprise**
     * **Customers**
         * **Focus on Enterprise.** E.g. Large initial contracts (~$200k/year+) and smaller deals in organizations that will eventually become very large. 
         * **Non Goal:** Start doing outbound sales
