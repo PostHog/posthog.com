@@ -25,8 +25,6 @@ Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have
 
 ## How do values get overridden?
 
-**The section below explains how overrides will work in the future, but currently overrides ignore timestamps. This means at the moment `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.**
-
 We rely on timestamps to know the order in which events happened. Note that we don't use ingestion order because events can arrive to PostHog in different order compared to when they were performed, e.g. when network was unreliable and some packets were resent later or when we're importing older events from a different PostHog instance.
 
 This table explains, when values get overridden (TS means timestamp):
@@ -89,6 +87,7 @@ posthog.capture('Alice 2', event='set location', properties={'$set': {'location'
 posthog.alias('Alice 1', 'Alice 2')
 ```
 
+> **Note:** PostHog versions <1.33 overrides ignore timestamps. This means `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.
 
 
 
