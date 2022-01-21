@@ -137,7 +137,7 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 11.0.0 removes some legacy Helm annotations not needed anymore. By removing those and upgrading your installation, all future upgrades to stateless components should now happen without downtime (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
 
-Before running the Helm upgrade command, please run the following script first (note: replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace, which can be found via `helm list`):
+Before running the Helm upgrade command, please run the following script first (replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace, which can be found via `helm list`):
 
 ```
 #!/usr/bin/env sh
@@ -152,5 +152,7 @@ do
   kubectl -n "$RELEASE_NAMESPACE" annotate deployment "$deployment" "meta.helm.sh/release-namespace=$RELEASE_NAMESPACE"
 done
 ```
+
+Note: you can safely ignore errors like `error: --overwrite is false but found the following declared annotation(s): 'meta.helm.sh/release-name' already has a value (posthog)`
 
 After that you continue the Helm upgrade process as usual.
