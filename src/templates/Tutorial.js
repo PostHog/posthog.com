@@ -202,7 +202,7 @@ export const query = graphql`
                 }
             }
         }
-        questions: allQuestion(filter: { slug: { eq: $slug } }) {
+        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
             nodes {
                 avatar
                 body
