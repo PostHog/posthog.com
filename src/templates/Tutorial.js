@@ -131,6 +131,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
             <PostLayout
+                questions={<CommunityQuestions questions={questions?.nodes} />}
                 body={body}
                 featuredImage={featuredImage}
                 featuredVideo={featuredVideo}
@@ -167,7 +168,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 ) : (
                     <Iframe src={featuredVideo} />
                 )}
-                <CommunityQuestions questions={questions?.nodes} />
                 <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
                     <DocsPageSurvey />
                 </div>
