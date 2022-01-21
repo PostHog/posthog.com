@@ -6,7 +6,7 @@ showTitle: true
 
 <FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
-Experimentation helps you test product changes to your app and find the optimal changes. You can test hypotheses about which product changes will lead to optimal results. You may have heard it before as A/B testing. Examples:
+Experimentation helps you test product changes to your app and find the optimal changes. You can test hypotheses about which product changes will lead to optimal results. You may have heard it called A/B testing before. Examples:
 
 -   You want to test which copy or visual design has the highest conversion.
 -   You want to test which flow leads to the highest number of purchases.
@@ -14,28 +14,35 @@ Experimentation helps you test product changes to your app and find the optimal 
 
 > 🚧 **Experimentation is currently in beta** and support is limited to our [JavaScript](/docs/integrate/client/js#feature-flags) integration. If you have any feedback, please <a href="https://posthog.com/support" target="_blank">reach out</a>.
 
-## How it works?
+## How does it work?
 
-With Experimentation, you start with a hypothesis on how to improve your product (e.g. changing the flow, changing copy, changing visual styles, ...) and a goal (e.g. improve conversion, improve sign ups, ...).
+With Experimentation, you start with a hypothesis on how to improve your product (e.g. changing the flow, changing copy, changing visual styles, ...) and a goal (e.g. improve conversion, improve sign ups, ...). Once you have those you can:
 
--   Once you have those, you can create an Experiment which will have a control group and any number of experimentation variants (at least one).
--   You can select which users will participate in the Experiment (e.g. paid users, users in a given country, or all users).
--   Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your Experiment to reach significant results.
--   You can tweak your settings to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
--   The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). You ask PostHog which group does this user belong to and then you show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
--   Once your experiment is running, we'll automatically track your main conversion and let you know which variant leads to the best results. While the experiment is running, we'll also tell you the probability that any given variant is the winning variant.
--   To ensure your experiment does not introduce any regressions, you can also track secondary metrics. This is particularly useful if you're optimizing a metric that has a natural trade-off with another metric (e.g. you can maximize conversion by reducing your price but then your total revenue may be reduced).
--   Once your experiment is terminated, you can easily archive and share your results with other team members.
+1. Create an Experiment which will have a control group and any number of experimentation variants (at least one).
+
+2. Select which users will participate in the Experiment (e.g. paid users, users in a given country, or all users).
+
+Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your Experiment to reach significant results.
+
+You can tweak your settings to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
+
+The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). You ask PostHog which group does this user belong to and then you show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
+
+Once your experiment is running, we'll automatically track your main conversion and let you know which variant leads to the best results. While the experiment is running, we'll also tell you the probability that any given variant is the winning variant.
+
+To ensure your experiment does not introduce any regressions, you can also track secondary metrics. This is particularly useful if you're optimizing a metric that has a natural trade-off with another metric (e.g. you can maximize conversion by reducing your price but then your total revenue may be reduced).
+
+Once your experiment is terminated, you can easily archive and share your results with other team members.
 
 ### Significant results
 
-In order for your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only 1 user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that uses the scientific method (e.g. this is also done when testing new drugs or vaccines).
+In order for your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that uses the scientific method (e.g. this is also done when testing new drugs or vaccines).
 
-PostHog computes this significance for you automatically and under the hood (you can read more about how we do this in our Advanced section below). We will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment.
+PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below
 
 ### Experimentation vs. Feature Flags
 
-Experimentation and Feature Flags are different features because they serve different purposes. **Experimentation** is used to test changes to your product where you want to maximize a specific metric (ex. testing a new flow to maximize conversion rate). **Feature Flags** are used for phased roll-outs (e.g. a new experimental feature you want to make sure works correctly) or as a way to control feature access. More on Feature Flags [here](/docs/user-guides/feature-flags).
+Experimentation and Feature Flags are different features because they serve different purposes. **Experimentation** is used to test changes to your product where you want to maximize a specific metric (eg. testing a new flow to maximize conversion rate). **Feature Flags** are used for phased roll-outs (e.g. a new experimental feature you want to make sure works correctly) or as a way to control feature access. Read our [Feature Flags user guide](/docs/user-guides/feature-flags) for more infomation on this.
 
 Experimentation uses Feature Flags under the hood to handle user allocation to an experiment. You'll notice this when checking if a user is assigned to an experiment.
 
@@ -53,14 +60,14 @@ TODO: Guide on how to run an experiment here.
 
 You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to terminate an experiment or not (regardless of the original estimated running time). If you terminate the experiment before you see this banner, results will not be significant (see Advanced for more details on this) and any conclusions could be completely wrong.
 
-Once you have decided to terminate an experiment there are a few things to do.
+Once you have decided to terminate an experiment there are a few things to do:
 
 -   [ ] Click on "Terminate the experiment" on the experiment page. This will ensure final results are kept.
 -   [ ] We recommend you roll-out the winning variant to all your users. TODO: Explain here how to do this with PostHog.
 -   [ ] Share results with relevant members of your team.
 -   [ ] After the winning variant is rolled-out, it's good practice to remove the other variants from your code, and make the winning variant part of your core code (i.e. stop checking for the respective Feature Flag).
 -   [ ] Document conclusions and findings in your PostHog experiment. This will help preserve context for team members who in the future need to understand what happened.
--   [ ] Archive the experiment. This will terminate the Feature Flag so make sure your code no longer depends on the flag.
+-   [ ] Archive the experiment. This will terminate the Feature Flag and ensure your code no longer depends on the flag.
 
 ## Advanced: What's under the hood?
 
