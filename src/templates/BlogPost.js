@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs, { Crumb } from 'components/Breadcrumbs'
-import CommunityQuestions from 'components/CommunityQuestions'
 import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
@@ -150,11 +149,6 @@ export default function BlogPost({ data, pageContext, location }) {
                 <Crumb className="whitespace-nowrap" title={title} truncate />
             </Breadcrumbs>
             <PostLayout
-                questions={
-                    <div className="lg:px-[50px]">
-                        <CommunityQuestions questions={questions?.nodes} />
-                    </div>
-                }
                 contentWidth={790}
                 sidebar={
                     <BlogPostSidebar
