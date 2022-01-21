@@ -643,3 +643,7 @@ ul {
     background-color: #77b96c;
     color: rgba(255, 255, 255, 0.88);
 }
+
+.mary-chain {
+    display: none;
+}

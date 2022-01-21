@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
+import CommunityQuestions from 'components/CommunityQuestions'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
@@ -62,6 +63,7 @@ export default function Main({
     next,
     previous,
     hideLastUpdated,
+    questions,
 }) {
     const { countries } = useStaticQuery(query)
 
@@ -124,6 +126,7 @@ export default function Main({
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
+                    <CommunityQuestions questions={questions} />
                 </article>
 
                 {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}

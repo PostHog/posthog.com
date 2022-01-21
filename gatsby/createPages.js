@@ -215,6 +215,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -245,6 +246,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
+                slug,
             },
         })
     })
