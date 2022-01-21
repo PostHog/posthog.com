@@ -272,6 +272,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+                slug,
             },
         })
     })
@@ -307,6 +308,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                slug,
             },
         })
     })

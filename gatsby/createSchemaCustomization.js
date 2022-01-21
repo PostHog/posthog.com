@@ -17,7 +17,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       type Question implements Node {
         body: String
         name: String
-        slug: String
+        slug: [String]
         avatar: String
         replies: [Reply]
       }
