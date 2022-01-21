@@ -72,3 +72,50 @@ Once you have decided to terminate an experiment there are a few things to do:
 ## Advanced: What's under the hood?
 
 TODO: Advanced math details on how experimentation works, how we compute significance, safe to terminate state, etc.
+
+### How we ensure distribution of people
+
+For every experiment, we leverage PostHog's multivariate feature flags. There's one control group, and upto 3 test groups. Based on their distinctID, each user is randomly distributed into one of these groups. This is stable, so the same users, even when they revisit your page, stay in the same group.
+
+We do this by creating a hash out of the feature flag key and the distinctID. It's worth noting that when you have low data (<1,000 users per variant), the difference in variant exposure can be upto 20%. This means, a test variant could have 800 people only, when control has 1,000.
+
+All our calculations take this exposure into account.
+
+### Recommendations for sample size and running time
+
+When you're creating an experiment, we show you recommended running times and sample sizes based on parameters you've chosen.
+
+For trend experiments, we use Lehr's equation [as explained here](http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/styled-4/code-12/#poisson-distributed-or-count-data) to determine sample sizes.
+
+```
+exposure = 4 / (sqrt(lambda1) - sqrt(lambda2))^2
+```
+
+where lambda1 is the baseline count data we've seen for the past two weeks,
+and lambda2 is `baseline count + mde*(baseline count)`.
+
+`mde` is the minimum acceptable improvement you choose in the UI.
+
+For funnel experiments, we use the general [Sample Size Determination](https://en.wikipedia.org/wiki/Sample_size_determination) formula, with 80% power and 5% significance. The formula then becomes:
+
+```
+sample size per variant = 16 * conversion_rate * (1 - conversion_rate) / (mde)^2
+```
+
+where `mde` is again the minimum detectable effect chosen in the UI.
+
+We give these values as an estimate for how long to run the experiment. It's possible to end experiments before you reach the end, if you see an outsized effect.
+
+### Bayesian A/B Testing
+
+We follow a mostly bayesian approach to A/B testing. While running any experiment, we calculate two parameters: (1) Probability of each variant being the best, and (2) whether the results are significant or not.
+
+Below are calculations for each kind of experiment.
+
+### Trend Experiment Calculations
+
+Trend experiments capture count data. For example, if you want to measure the change in total count of clicks, you'd use this kind of experiment.
+
+We use monte carlo simulations to determine the probability of each variant being the best. A variant 
+
+### Funnel Experiment Calculations
