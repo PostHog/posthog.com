@@ -1,4 +1,15 @@
-# The mystery of missing recordings at PostHog
+---
+date: 2021-06-10
+title: The mystery of missing recordings at PostHog
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/series-b/series-b-baby.png
+featuredImageType: full
+author: ["rick-marron"]
+categories: ["Engineering"]
+---
 
 Session Recording is one of PostHog's core features. It allows customers to see their website being used, mouse clicks and all. It's really cool, but, until recently, we had one big issue with the feature. Customers would often tell us recordings were missing, and we didn't know why.
 
