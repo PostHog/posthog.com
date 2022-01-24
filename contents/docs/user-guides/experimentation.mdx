@@ -61,6 +61,38 @@ Guide on how to create an experiment [here](https://docs.google.com/document/d/1
 
 TODO: Guide on how to run an experiment here.
 
+Before you can launch an experiment, you need to implement the code for each feature flag variant. On the draft experiment screen, you'll see a snippet telling you how to query for the variant. It looks something like:
+
+```js
+if (posthog.getFeatureFlag('your-chosen-feature-flag-key') === 'control') {
+    // where 'control' is the variant, run your code here
+}
+```
+
+One important gotcha to keep in mind is that feature flag values are loaded asynchronously, so you should use [the onFeatureFlag directive](https://posthog.com/docs/user-guides/feature-flags#onfeatureflags) to check when feature flags are loaded. That is, call the snippet above inside the `onFeatureFlag` callback.
+
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
+
+
+
+There's two easy ways to test your changes:
+
+1. Use the PostHog Toolbar
+
+Once you've pushed your experiment code, you can open the PostHog toolbar, click on the feature flags option, and override the feature flag to whichever variant you want, and see that the changes reflect on your screen.
+
+2. Use the web developer console
+
+The experiment draft screen also has a snippet for testing your code. Once you've pushed your experiment code, open the console on your browser, and paste the snippet in. This will override the feature flag for you, and you should be able to see the changes you've made on screen.
+
+Once you're satisfied, you're ready to launch your experiment.
+
+**Note:** The Feature Flag is activated only when you launch the experiment.
+
+While the experiment is running, you can see results on the page. Sometimes, in the beginning of an experiment, results can be skewed to one side. For example, you launched at midnight, so people on the other side of the world are active first, and the first few hours of data you collect is all from them. This can artificially skew results to one variant. While possible, it's important that you don't end your experiments at this stage: the results are probably insignificant. This is known as the peeking problem.
+
+While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. Thus, we tell you when it's safe to end an experiment. When it's not safe, there's a red banner on top telling you it's not safe to end this experiment.
+
 ### Terminating an experiment
 
 You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to terminate an experiment or not (regardless of the original estimated running time). If you terminate the experiment before you see this banner, results will not be significant (see Advanced for more details on this) and any conclusions could be completely wrong.
@@ -76,7 +108,7 @@ Once you have decided to terminate an experiment there are a few things to do:
 
 ## Advanced: What's under the hood?
 
-TODO: Advanced math details on how experimentation works, how we compute significance, safe to terminate state, etc.
+Below are all formulas and calculations we go through when recommending sample sizes and determining significance.
 
 ### How we ensure distribution of people
 
@@ -110,6 +142,8 @@ sample size per variant = 16 * conversion_rate * (1 - conversion_rate) / (mde)^2
 where `mde` is again the minimum detectable effect chosen in the UI.
 
 We give these values as an estimate for how long to run the experiment. It's possible to end experiments before you reach the end, if you see an outsized effect.
+
+Note how the recommended sample size in each case is inversely related to the minimum acceptable improvement. This makes sense, since the smaller the `mde`, the more sensitive your experiment is, and the more data you need to judge significance.
 
 ### Bayesian A/B Testing
 
