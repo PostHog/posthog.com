@@ -48,8 +48,9 @@ The default configuration is geared towards minimizing costs. Here are example e
 # Note that this is experimental, please let us know how this worked for you.
 
 # More storage space
-clickhouseOperator:
-  storage: 60Gi
+clickhouse:
+  persistence:
+    size: 60Gi
 
 postgresql:
   persistence:
@@ -82,8 +83,9 @@ plugins:
 # Note that this is experimental, please let us know how this worked for you.
 
 # More storage space
-clickhouseOperator:
-  storage: 200Gi
+clickhouse:
+  persistence:
+    size: 200Gi
 
 postgresql:
   persistence:
@@ -134,9 +136,9 @@ Currently the easiest way to scale up a ClickHouse environment hosted by our hel
 
 ClickHouse is the database that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). As such it's important to set the database size to be enough to store the raw data via `clickhouseOperator.size` value.
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). As such it's important to set the database size to be enough to store the raw data via `clickhouse.persistence.size` value.
 
-To use an external `ClickHouse` cluster, set `clickhouseOperator.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
+To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
