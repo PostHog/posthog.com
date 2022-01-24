@@ -11,7 +11,7 @@ author: ["andy-vandervell"]
 categories: ["Privacy", "Product Analytics", "Perspectives", "General"]
 ---
 
-Ten years ago today, the European Commission published the first draft of the General Data Protection Regulation (GDPR). But, as the recent ruling in Austria concerning one website's use of Google Analytics proves, how those rules are enforced and interpreted is still contested.
+Ten years ago today, the European Commission published the first draft of the General Data Protection Regulation (GDPR). But, as [the recent ruling in Austria concerning one website's use of Google Analytics](https://isgoogleanalyticsillegal.com/) proves, how those rules are enforced and interpreted is still contested.
 
 There's lots of detail in the full ruling (link needed), but here's a quick summary:
 
