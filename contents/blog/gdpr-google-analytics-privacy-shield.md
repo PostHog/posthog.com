@@ -67,7 +67,7 @@ Over two years after a new complaint filed by Max Schrems in Ireland, the Court 
 Schrems alleges an Austrian website and Google violated the GDPR when a data subject visited a website on health topics. The complaint details how personal data, including user identifiers, IP address and browser details, were exported from Austria to the US where it could be subject to local law enforcement requests for access.
 
 ### July 16, 2021: Amazon fined €746 million for GDPR breach
-Amazon [is fined](https://www.wired.co.uk/article/amazon-gdpr-fine) nearly $900 million for failing to follow rules regarding its use of targeted advertising and proper consent. It's the largest GDPR fine to date.
+Amazon [is fined](https://www.wired.co.uk/article/amazon-gdpr-fine) €746 million for failing to follow rules regarding its use of targeted advertising and proper consent. It's the largest GDPR fine to date.
 
 ### January 13, 2022: Austrian authority rules Google Analytics violates GDPR
 The Austrian data authority partially upholds the complaint, ruling that the Austrian website did violate the GDPR. Google, as a data processor, isn't deemed liable.
