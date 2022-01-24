@@ -17,7 +17,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       type Question implements Node {
         body: String
         name: String
-        slug: String
+        slug: [String]
         avatar: String
         replies: [Reply]
       }
@@ -75,6 +75,12 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         markdown: File @link(from: "markdown___NODE")
         logo: File @link(from: "logo___NODE")
         slug: String
+      }
+      type NavsJsonMainSubItemsSectionsItems implements Node {
+        icon: String,
+        title: String,
+        url: String,
+        badge: String
       }
     `)
 }

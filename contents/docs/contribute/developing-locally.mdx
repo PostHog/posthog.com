@@ -34,7 +34,11 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS. For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`). Windows isn't supported.
+The instructions here assume you're running macOS. 
+
+For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`). 
+
+Windows isn't supported natively. But, Windows users can run a Linux virtual machine. The latest Ubuntu Desktop is recommended. (Ubuntu Server is not recommended as debugging the frontend will require a browser that can access localhost.)
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx)!
 

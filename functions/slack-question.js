@@ -150,7 +150,7 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
                 type: 'modal',
                 title: {
                     type: 'plain_text',
-                    text: `${name}'s question`,
+                    text: `Question`,
                     emoji: true,
                 },
                 submit: {

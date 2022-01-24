@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
 import { useLocation } from '@reach/router'
+import Layout from 'components/Layout'
+import { SEO } from 'components/seo'
+import { graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import { animateScroll as scroll } from 'react-scroll'
-import { SEO } from 'components/seo'
-import Main from './Main'
-import ArticleFooter from './Footer'
-import MainSidebar from './MainSidebar'
-import Layout from 'components/Layout'
-import Navigation from './Navigation'
 import '../../styles/handbook.scss'
+import ArticleFooter from './Footer'
+import Main from './Main'
+import MainSidebar from './MainSidebar'
+import Navigation from './Navigation'
 
 export default function Handbook({
     data: { post, questions },
@@ -143,7 +143,7 @@ export const query = graphql`
                 }
             }
         }
-        questions: allQuestion(filter: { slug: { eq: $slug } }) {
+        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
             nodes {
                 avatar
                 body

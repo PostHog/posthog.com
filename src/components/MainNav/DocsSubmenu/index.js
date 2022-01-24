@@ -11,9 +11,9 @@ export default function Docs({ menu, parentURL }) {
                     <Link className="text-primary hover:text-primary" to={parentURL}>
                         <h1 className="hidden lg:inline-block text-4xl m-0 font-bold">{menu.title}</h1>
                     </Link>
-                    <p className={submenu.section.description('hidden lg:block')}>
+                    <div className={submenu.section.description('hidden lg:block')}>
                         <div dangerouslySetInnerHTML={{ __html: menu.description }} />
-                    </p>
+                    </div>
                 </div>
 
                 <ul className="list-none p-0 m-0">
