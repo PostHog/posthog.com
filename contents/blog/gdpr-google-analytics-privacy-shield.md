@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImage: ../images/blog/google-analytics-gdpr.png
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Privacy", "Product Analytics", "General"]
