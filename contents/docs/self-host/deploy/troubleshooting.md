@@ -83,7 +83,7 @@ TooManyConnections: too many connections
     raise TooManyConnections("too many connections")
 ```
 
-## How do I see logs for a pod?
+### How do I see logs for a pod?
 
 1. Find the name of the pod you want to get logs on:
 
@@ -98,7 +98,7 @@ TooManyConnections: too many connections
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
-## How do I connect to Postgres?
+### How do I connect to Postgres?
     
 1. Find out your Postgres password from the web pod:
 
@@ -129,7 +129,7 @@ TooManyConnections: too many connections
     Postgres will ask you for the password. Use the value you found out in step 1.  
     Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
-## How do I connect to ClickHouse?
+### How do I connect to ClickHouse?
 
 > **Tip:** Find out your pod names with `kubectl get pods -n posthog`
 
@@ -154,7 +154,7 @@ TooManyConnections: too many connections
     clickhouse-client -d posthog --user <user_from_step_1> --password <password_from_step_1>
     ```
 
-## How do I restart all pods for a service?
+### How do I restart all pods for a service?
 
 > **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team. 
 
