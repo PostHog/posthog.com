@@ -592,13 +592,19 @@
                             ]
                         },
                         {
-                            "name": "Postgresql",
+                            "name": "PostgreSQL",
+                            "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
                                     "name": "Resize disk",
                                     "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
+                        },
+                        {
+                            "name": "Zookeeper",
+                            "url": "/docs/self-host/runbook/zookeeper",
+                            "children": []
                         }
                     ]
                 }

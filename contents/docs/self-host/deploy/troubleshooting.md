@@ -4,18 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../runbook) section.
+
 ## Troubleshooting
 
-### helm install failed
+### helm failed for not enough resources
 
-##### Not enough resources
+While running `helm upgrade --install` you might run into an error like `timed out waiting for the condition`
 
-You might see one of these errors from `helm install`:
-```
-Error: failed post-install: timed out waiting for the condition
-Error: failed pre-install: timed out waiting for the condition
-```
-One of the potential causes is that we couldn't find enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running:
+One of the potential causes is that Kubernetes doesn't have enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm` command is still running:
 1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
 2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
 ```
@@ -26,7 +23,7 @@ Events:
   Warning  FailedScheduling   45s (x5 over 3m47s)  default-scheduler   0/3 nodes are available: 3 Insufficient memory.
 ```
 
-**How to fix this**: try installing on a bigger Kubernetes cluster.
+**How to fix this**: add more nodes to your Kubernetes cluster.
 
 ### Connection is not secure
 
@@ -38,13 +35,14 @@ Note that when using a browser there are various layers of caching and other log
 
 ### Kafka crash looping (disk full)
 
-You might see an error similar to this one in the kafka pod
+You might see an error similar to this one in the Kafka pod:
+
 ```
 Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the disk is full. The fastest fix here is to increase the Kafka volume size (this can be done by changing `kafka.persistence.size` in your `values.yaml` and running a [`helm upgrade`](/docs/self-host/configure/upgrading-posthog#upgrade-instructions). Note: you might want to avoid applying other changes if you haven't upgraded recently).
+This tells us that the data disk is full. To resize the disk, please follow the [runbook](../runbook/kafka/resize-disk).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
@@ -60,7 +58,7 @@ See more in these stack overflow questions ([1](https://stackoverflow.com/questi
 
 ### How can I increase storage size?
 
-Change the value (e.g. `clickhouse.persistence.size`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
+To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../runbook) section.
 
 ### Are the errors I'm seeing important?
 
@@ -72,7 +70,6 @@ The following messages in the ClickHouse pod happen when ClickHouse reshuffles h
 ...
 <Warning> StorageKafka (kafka_session_recording_events): Can't get assignment. It can be caused by some issue with consumer group (not enough partitions?). Will keep trying.
 ```
-
 
 The following error is produced by some low-priority celery tasks and we haven't seen any actual impact so can safely be ignored. It shows up in Sentry as well.
 ```
