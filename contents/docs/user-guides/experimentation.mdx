@@ -93,6 +93,8 @@ While the experiment is running, you can see results on the page. Sometimes, in 
 
 While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. Thus, we tell you when it's safe to end an experiment. When it's not safe, there's a red banner on top telling you it's not safe to end this experiment.
 
+Note that this recommendation doesn't cover all edge cases. It is still possible, when new data comes in, that results flip completely. This is true for any experiments and any significance test in existence today. But, the probability of this happening is very low, which is why most people are comfortable taking this risk. For a 0 risk experiment, you'd have to run it for an infinite amount of time: every new person is new data to be accomodated.
+
 ### Terminating an experiment
 
 You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to terminate an experiment or not (regardless of the original estimated running time). If you terminate the experiment before you see this banner, results will not be significant (see Advanced for more details on this) and any conclusions could be completely wrong.
