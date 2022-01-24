@@ -75,6 +75,8 @@ Once you break down the chain of events, one thing becomes abundantly clear: a n
 
 The only reliable solution is for the US to enact adequate legal protections for EU citizens, but this would be politically difficult. And, while an executive order could smooth the path to a quicker resolution, it would be subject to the whims of any incoming president who didn't like it. Hello, Donald Trump. 
 
-This legal instability makes controlling your own data, in our view, critically important. Self-hosting in private clouds obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution will cost time and money.
+This legal instability makes controlling your own data, in our view, critically important. Self-hosting in private clouds obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. 
+
+The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution costs time and money.
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
