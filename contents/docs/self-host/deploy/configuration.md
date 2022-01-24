@@ -154,42 +154,54 @@ To use an external Redis service, please set `redis.enabled` to `false` and then
 #### Credentials
 By default, Redis doesn't use any password for authentication. If you want to configure it to use a password (recommended) see the options below.
 
-##### Internal Redis
-* set `redis.auth.enabled` to `true`
-* to directly provide the password value in the `values.yaml` simply set it in `redis.auth.password`
-* if you want to provide the password via a Kubernetes secret, please configure `redis.auth.existingSecret` and `redis.auth.existingSecretPasswordKey` accordingly:
+<details>
+  <summary>
+    <b>Internal Redis</b>
+  </summary>
 
-  Example:
+  * set `redis.auth.enabled` to `true`
+  * to directly provide the password value in the `values.yaml` simply set it in `redis.auth.password`
+  * if you want to provide the password via a Kubernetes secret, please configure `redis.auth.existingSecret` and `redis.auth.existingSecretPasswordKey` accordingly:
 
-  1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
-
-  2. configure your `values.yaml` to reference the secret:
-    ```
-    redis:
-      enabled: true
-      auth:
-        enabled: true
-        existingSecret: "redis-existing-secret"
-        existingSecretPasswordKey: "redis-password"
-    ```
-
-##### External Redis
-* to directly provide the password value in the `values.yaml` simply set it in `externalRedis.password`
-
-* if you want to provide a password via an existing secret, please configure `externalRedis.existingSecret` and `externalRedis.existingSecretPasswordKey` accordingly:
-
-    Example
+    **Example**
 
     1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
-    1. configure your `values.yaml` to reference the secret:
+    2. configure your `values.yaml` to reference the secret:
       ```
-      externalRedis:
-        host: "<YOUR_REDIS_HOST>"
-        port: <YOUR_REDIS_PORT>
-        existingSecret: "redis-existing-secret"
-        existingSecretPasswordKey: "redis-password"
+      redis:
+        enabled: true
+        auth:
+          enabled: true
+          existingSecret: "redis-existing-secret"
+          existingSecretPasswordKey: "redis-password"
       ```
+
+</details>
+
+<details>
+  <summary>
+    <b>External Redis</b>
+  </summary>
+
+  * to directly provide the password value in the `values.yaml` simply set it in `externalRedis.password`
+
+  * if you want to provide a password via an existing secret, please configure `externalRedis.existingSecret` and `externalRedis.existingSecretPasswordKey` accordingly:
+
+      **Example**
+
+      1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
+
+      1. configure your `values.yaml` to reference the secret:
+        ```
+        externalRedis:
+          host: "<YOUR_REDIS_HOST>"
+          port: <YOUR_REDIS_PORT>
+          existingSecret: "redis-existing-secret"
+          existingSecretPasswordKey: "redis-password"
+        ```
+
+</details>
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 

@@ -6,6 +6,8 @@ showTitle: true
 
 ## Troubleshooting
 
+If you are looking for for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../runbook) section.
+
 ### helm install failed
 
 ##### Not enough resources
@@ -38,13 +40,14 @@ Note that when using a browser there are various layers of caching and other log
 
 ### Kafka crash looping (disk full)
 
-You might see an error similar to this one in the kafka pod
+You might see an error similar to this one in the Kafka pod:
+
 ```
 Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the disk is full. The fastest fix here is to increase the Kafka volume size (this can be done by changing `kafka.persistence.size` in your `values.yaml` and running a [`helm upgrade`](/docs/self-host/configure/upgrading-posthog#upgrade-instructions). Note: you might want to avoid applying other changes if you haven't upgraded recently).
+This tells us that the data disk is full. To resize the disk, please follow the [runbook](../runbook/kafka/resize-disk).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
@@ -60,7 +63,7 @@ See more in these stack overflow questions ([1](https://stackoverflow.com/questi
 
 ### How can I increase storage size?
 
-Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
+To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../runbook) section.
 
 ### Are the errors I'm seeing important?
 
@@ -72,7 +75,6 @@ The following messages in the ClickHouse pod happen when ClickHouse reshuffles h
 ...
 <Warning> StorageKafka (kafka_session_recording_events): Can't get assignment. It can be caused by some issue with consumer group (not enough partitions?). Will keep trying.
 ```
-
 
 The following error is produced by some low-priority celery tasks and we haven't seen any actual impact so can safely be ignored. It shows up in Sentry as well.
 ```
@@ -94,12 +96,12 @@ TooManyConnections: too many connections
     This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
 
 2. Get the logs for that pod using the name from the previous step:
-   
+
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 ## How do I connect to Postgres?
-    
+
 1. Find out your Postgres password from the web pod:
 
     ```bash
@@ -126,7 +128,7 @@ TooManyConnections: too many connections
     psql -d posthog -U postgres
     ```
 
-    Postgres will ask you for the password. Use the value you found out in step 1.  
+    Postgres will ask you for the password. Use the value you found out in step 1.
     Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
 ## How do I connect to ClickHouse?
@@ -143,7 +145,7 @@ TooManyConnections: too many connections
 3. Connect to the `chi-posthog-posthog-0-0-0` pod:
 
     ```shell
-    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash 
+    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash
     ```
 
 2. Connect to ClickHouse using `clickhouse-client`:
@@ -156,10 +158,10 @@ TooManyConnections: too many connections
 
 ## How do I restart all pods for a service?
 
-> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team. 
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team.
 
 1. Terminate all running pods for the service:
-  
+
     ```shell
     # substitute posthog-plugins for the desired service
     kubectl scale deployment posthog-plugins --replicas=0 -n posthog
@@ -167,7 +169,7 @@ TooManyConnections: too many connections
 
 
 2. Start new pods for the service:
-  
+
     ```shell
     # substitute posthog-plugins for the desired service
     kubectl scale deployment posthog-plugins --replicas=1 -n posthog
