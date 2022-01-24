@@ -48,7 +48,7 @@ Edward Snowden leaked millions of secret US intelligence files detailing the hug
 ### October 2015: European court deems EU-US data protection agreement 'invalid'
 Responding to a complaint from privacy campaigner Max Schrems, the European Court of Justice deemed the 'Safe Harbor Privacy Principles' allowing data portability between the EU and US invalid. Schrems used the Snowden revelations, arguing that data transferred by Facebook from Ireland to US servers was insufficiently protected due to the NSA's surveillance practices. [The ruling](https://iapp.org/resources/article/schrems-i/) became known as 'Schrems I'.
 
-### May 24, 2016: The GDPR comes is approved by EU
+### May 24, 2016: The GDPR is approved by EU
 The GDPR, short for General Data Protection Regulation, becomes EU law. It's the most comprehensive data protection legislation in the world. Among its many directives, it stipulates that the personal data of any EU citizen cannot be exported to another nation that lacks equivalent data protection laws or contractual protections.   
 
 ### July 12, 2016: The EU-US Privacy Shield is created
