@@ -60,7 +60,7 @@ See more in these stack overflow questions ([1](https://stackoverflow.com/questi
 
 ### How can I increase storage size?
 
-Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
+Change the value (e.g. `clickhouse.persistence.size`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
 
 ### Are the errors I'm seeing important?
 
@@ -94,12 +94,12 @@ TooManyConnections: too many connections
     This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
 
 2. Get the logs for that pod using the name from the previous step:
-   
+
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 ### How do I connect to Postgres?
-    
+
 1. Find out your Postgres password from the web pod:
 
     ```bash
@@ -126,7 +126,7 @@ TooManyConnections: too many connections
     psql -d posthog -U postgres
     ```
 
-    Postgres will ask you for the password. Use the value you found out in step 1.  
+    Postgres will ask you for the password. Use the value you found out in step 1.
     Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
 ### How do I connect to ClickHouse?
@@ -143,7 +143,7 @@ TooManyConnections: too many connections
 3. Connect to the `chi-posthog-posthog-0-0-0` pod:
 
     ```shell
-    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash 
+    kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash
     ```
 
 2. Connect to ClickHouse using `clickhouse-client`:
@@ -156,10 +156,10 @@ TooManyConnections: too many connections
 
 ### How do I restart all pods for a service?
 
-> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team. 
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team.
 
 1. Terminate all running pods for the service:
-  
+
     ```shell
     # substitute posthog-plugins for the desired service
     kubectl scale deployment posthog-plugins --replicas=0 -n posthog
@@ -167,7 +167,7 @@ TooManyConnections: too many connections
 
 
 2. Start new pods for the service:
-  
+
     ```shell
     # substitute posthog-plugins for the desired service
     kubectl scale deployment posthog-plugins --replicas=1 -n posthog
