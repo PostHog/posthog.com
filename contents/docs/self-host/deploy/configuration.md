@@ -1,5 +1,5 @@
 ---
-title: PostHog ClickHouse chart configuration
+title: PostHog chart configuration
 sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true
@@ -9,10 +9,11 @@ showTitle: true
 
 By default, the chart installs the following dependencies:
 
-- [Altinity/clickhouse-operator](https://github.com/Altinity/clickhouse-operator/)
+- [altinity/clickhouse-operator](https://github.com/Altinity/clickhouse-operator/)
+- [bitnami/kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka)
 - [bitnami/postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 - [bitnami/redis](https://github.com/bitnami/charts/tree/master/bitnami/redis)
-- [bitnami/kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka)
+- [bitnami/zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper)
 
 There is optional support for the following additional dependencies:
 
@@ -21,13 +22,12 @@ There is optional support for the following additional dependencies:
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
 - [prometheus-community/prometheus-statsd-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter)
 
-See the [Chart configuration](#chart-configuration) section for how to enable and configure each.
 
 ## Chart configuration
 
-Dependent charts can also have values overwritten. Preface values with `postgresql.*`, see options for each chart in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or under each charts repos in [Dependencies](#dependencies).
+All PostHog Helm chart configuration options can be found in the [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) generated from the [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) file.
 
-All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in values.yaml file.
+Dependent charts can also have values overwritten. See [Chart.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) for more info regarding the source shard and the namespace that can be used for the override.
 
 ### Setting up email
 Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
@@ -122,15 +122,7 @@ plugins:
 
 </details>
 
-#### Scaling ClickHouse Vertically
-
-Currently the easiest way to scale up a ClickHouse environment hosted by our helm chart config is to set the affinity for which node ClickHouse is deployed to and scale that node up in terms fo the resources it has available to it. This is very easy to do in practice. Let's get down to the nuts and bolts of how to get this done!
-- Create a node instance or group with more CPU and memory in your K8s cluster with a [label](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) of `clickhouse:true` set on it (this will be used to target that node for ClickHouse deployment). There are a few ways to create a node group and most are implementation specific to your kubernetes platform. A few references for how to create an manage node groups can be found for [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pools), [EKS](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html), and [DigitalOcean](https://docs.digitalocean.com/products/kubernetes/#worker-nodes-and-node-pools).
-  - Essentially if you know the node that you want ClickHouse to be installed on you can run `kubectl label nodes <desired-clickhouse-node-name> clickhouse=true`
-- Set `.Values.clickhouse.nodeSelector.clickhouse: "true"` in your `values.yaml`. You can find more information about optional settings like that [here](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) and also more about `nodeSelectors` [here](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)
-
-
-### [ClickHouse](https://clickhouse.tech/)
+### [ClickHouse](../runbook/clickhouse/)
 
 ClickHouse is the database that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
@@ -138,9 +130,8 @@ By default, ClickHouse is installed as a part of the chart, powered by [clickhou
 
 To use an external `ClickHouse` cluster, set `clickhouseOperator.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
-### [PostgreSQL](https://www.postgresql.org/)
+### [PostgreSQL](../runbook/postgresql/)
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
 
@@ -148,26 +139,63 @@ By default, PostgreSQL is installed as part of the chart. To use an external Pos
 
 To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
 ### [Redis](https://redis.io/)
 
-By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your Redis cluster uses a password define it with `redis.password`, otherwise just omit it.
+Redis is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `redis` namespace.
 
-To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. Otherwise, the Redis pods will get recreated on every update, potentially incurring some downtime.
+#### Use an external service
+To use an external Redis service, please set `redis.enabled` to `false` and then configure the `externalRedis` values.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
+#### Credentials
+By default, Redis doesn't use any password for authentication. If you want to configure it to use a password (recommended) see the options below.
 
-### [Kafka](https://kafka.apache.org/)
+##### Internal Redis
+* set `redis.auth.enabled` to `true`
+* to directly provide the password value in the `values.yaml` simply set it in `redis.auth.password`
+* if you want to provide the password via a Kubernetes secret, please configure `redis.auth.existingSecret` and `redis.auth.existingSecretPasswordKey` accordingly:
+
+  Example:
+
+  1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
+
+  2. configure your `values.yaml` to reference the secret:
+    ```
+    redis:
+      enabled: true
+      auth:
+        enabled: true
+        existingSecret: "redis-existing-secret"
+        existingSecretPasswordKey: "redis-password"
+    ```
+
+##### External Redis
+* to directly provide the password value in the `values.yaml` simply set it in `externalRedis.password`
+
+* if you want to provide a password via an existing secret, please configure `externalRedis.existingSecret` and `externalRedis.existingSecretPasswordKey` accordingly:
+
+    Example
+
+    1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
+
+    1. configure your `values.yaml` to reference the secret:
+      ```
+      externalRedis:
+        host: "<YOUR_REDIS_HOST>"
+        port: <YOUR_REDIS_PORT>
+        existingSecret: "redis-existing-secret"
+        existingSecretPasswordKey: "redis-password"
+      ```
+
+### [Kafka](../runbook/kafka/)
 
 By default, Kafka is installed as part of the chart. Kafka is used as a queue between the PostHog web application and PostHog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
-
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
 
 ### [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
 This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
+
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)
 
