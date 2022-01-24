@@ -104,19 +104,19 @@ b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         2
 cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           ee_zookeeper_1
 ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           ee_redis_1
 
-# docker logs ee_db_1 -n 1
+# docker logs posthog_db_1 -n 1
 2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
 
-# docker logs ee_redis_1 -n 1
+# docker logs posthog_redis_1 -n 1
 1:M 06 Dec 2021 13:47:08.435 * Ready to accept connections
 
-# docker logs ee_clickhouse_1 -n 1
+# docker logs posthog_clickhouse_1 -n 1
 Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
 
-# docker logs ee_kafka_1
+# docker logs posthog_kafka_1
 [2021-12-06 13:47:23,814] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
 
-# docker logs ee_zookeeper_1
+# docker logs posthog_zookeeper_1
 # Because ClickHouse and Kafka connect to Zookeeper, there will be a lot of noise here. That's good.
 ```
 
