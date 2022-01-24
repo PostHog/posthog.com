@@ -18,7 +18,7 @@ Make PostHog the best platform to analyze your product data
     - p90 query performance across features < 5s. Count slow and buggy/failing queries as some large number (60s)
     - Pinpoint the scale of clients we can support with low involvement (# events/month, # persons/month)
 - Confidence - Ensure quality of insights
-    - Attempts to surface similar results are consistent
+    - Ensure attempts to surface similar results are consistent
     - Measure the difference between insight results that should return identical results
     - Reduce number of churned users caused by insights
     - Reduce # of data integrity support issues 
