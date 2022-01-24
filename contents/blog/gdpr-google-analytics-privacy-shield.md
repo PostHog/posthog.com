@@ -30,14 +30,12 @@ As confirmed by [guidance](https://tweakers.net/nieuws/192020/autoriteit-persoon
 ### 3. This is just the beginning
 This complaint was but one of 100 similar complaints lodged by the same non-profit group. The founder, Max Schrems, [told WIRED](https://www.wired.co.uk/article/google-analytics-europe-austria-privacy-shield): "It's not specific to Google Analytics. It's basically about outsourcing to US providers in general". Other complaints include the use of Google Analytics and Facebook Connect by the likes of Airbnb and Ikea, so expect to hear about more rulings in the coming months.
 
-Most of the conversation thus far has focused on whether this means [Google Analytics is illegal](https://isgoogleanalyticsillegal.com/) to use in Europe, but this goes way beyond Google Analytics alone. This is about a core principle of the GDPR: data portability.
-
-In its [response](https://blog.google/around-the-globe/google-europe/its-time-for-a-new-eu-us-data-transfer-framework/) to the ruling, Google urged the EU and US to come up with a new legal framework to create legal stability. It's a reasonable demand but, as we're about to show, we've been here several times before. Why would a new agreement succeed where previous ones failed?
-
 ## How did we get here? A brief history of GDPR
-The GDPR is complex enough on its own, but the path to where we are now spans a decade of legal judgements and interconnected events. It's one of the many reasons we believe [self-hosting your analytics is a good idea](https://posthog.com/blog/why-companies-self-host) for many businesses. Why enter into lots of complicated, time-consuming legal agreements when you can just control your own data?
+Most of the conversation thus far has focused on whether this means [Google Analytics is illegal](https://isgoogleanalyticsillegal.com/) to use in Europe, but this goes way beyond Google Analytics alone. This is just the latest chapter in a long running saga concerning a core principle of the GDPR: data portability.
 
-To make things easier to digest, let's break this down to a timeline...
+In its [response](https://blog.google/around-the-globe/google-europe/its-time-for-a-new-eu-us-data-transfer-framework/) to the ruling, Google urged the EU and US to come up with a new legal framework to create legal stability. It's a reasonable demand but, we've been here several times before.
+
+To understand the problem a little better, it helps to understand the history of GDPR. Let's break things down: 
 
 ### January 25, 2012: The European Commission publishes its draft GDPR
 Here's where things start, 10 years ago today. In response to "rapid technological developments", the European Commission [published a draft](https://web.archive.org/web/20121203024154/http://ec.europa.eu/justice/data-protection/document/review2012/com_2012_11_en.pdf) of its proposed General Data Protection Regulation (GDPR) to regulate the free movement of data. 
