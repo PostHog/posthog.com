@@ -4,20 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../runbook) section.
+
 ## Troubleshooting
 
-If you are looking for for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../runbook) section.
+### helm failed for not enough resources
 
-### helm install failed
+While running `helm upgrade --install` you might run into an error like `timed out waiting for the condition`
 
-##### Not enough resources
-
-You might see one of these errors from `helm install`:
-```
-Error: failed post-install: timed out waiting for the condition
-Error: failed pre-install: timed out waiting for the condition
-```
-One of the potential causes is that we couldn't find enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running:
+One of the potential causes is that Kubernetes doesn't have enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm` command is still running:
 1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
 2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
 ```
@@ -28,7 +23,7 @@ Events:
   Warning  FailedScheduling   45s (x5 over 3m47s)  default-scheduler   0/3 nodes are available: 3 Insufficient memory.
 ```
 
-**How to fix this**: try installing on a bigger Kubernetes cluster.
+**How to fix this**: add more nodes to your Kubernetes cluster.
 
 ### Connection is not secure
 
@@ -85,7 +80,7 @@ TooManyConnections: too many connections
     raise TooManyConnections("too many connections")
 ```
 
-## How do I see logs for a pod?
+### How do I see logs for a pod?
 
 1. Find the name of the pod you want to get logs on:
 
@@ -100,7 +95,7 @@ TooManyConnections: too many connections
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
-## How do I connect to Postgres?
+### How do I connect to Postgres?
 
 1. Find out your Postgres password from the web pod:
 
@@ -131,7 +126,7 @@ TooManyConnections: too many connections
     Postgres will ask you for the password. Use the value you found out in step 1.
     Now you can run SQL queries! Just remember that an SQL query needs to be terminated with a semicolon `;` to run.
 
-## How do I connect to ClickHouse?
+### How do I connect to ClickHouse?
 
 > **Tip:** Find out your pod names with `kubectl get pods -n posthog`
 
@@ -156,7 +151,7 @@ TooManyConnections: too many connections
     clickhouse-client -d posthog --user <user_from_step_1> --password <password_from_step_1>
     ```
 
-## How do I restart all pods for a service?
+### How do I restart all pods for a service?
 
 > **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team.
 
