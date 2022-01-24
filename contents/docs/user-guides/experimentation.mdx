@@ -6,7 +6,7 @@ showTitle: true
 
 <FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
-Experimentation helps you test product changes to your app and find the optimal changes. You can test hypotheses about which product changes will lead to optimal results. You may have heard it called A/B testing before. Examples:
+Experiments helps you test product changes to your app. You can test hypotheses about which product changes will lead to optimal results. You may have heard it called A/B testing before. Examples:
 
 -   You want to test which copy or visual design has the highest conversion.
 -   You want to test which flow leads to the highest number of purchases.
@@ -18,11 +18,13 @@ Experimentation helps you test product changes to your app and find the optimal 
 
 With Experimentation, you start with a hypothesis on how to improve your product (e.g. changing the flow, changing copy, changing visual styles, ...) and a goal (e.g. improve conversion, improve sign ups, ...). Once you have those you can:
 
-1. Create an Experiment which will have a control group and any number of experimentation variants (at least one).
+1. Create an Experiment which will have a control group and some test variants (at least one, at most three).
 
 2. Select which users will participate in the Experiment (e.g. paid users, users in a given country, or all users).
 
 Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your Experiment to reach significant results.
+
+We distribute all selected users equally between the control and test groups. So, for example, if there are 3 test variants and 1 control variant, each variant gets 25% of the total users selected.
 
 You can tweak your settings to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
 
@@ -36,7 +38,9 @@ Once your experiment is terminated, you can easily archive and share your result
 
 ### Results significance
 
-In order for your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that uses the scientific method (e.g. this is also done when testing new drugs or vaccines).
+For your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that is a simple randomized controlled experiment (e.g. this is also done when testing new drugs or vaccines).
+
+Furthermore, even if there's a lot of exposure, if, say, all variants are exposed to 10,000 participants, if the difference in conversion rate between the variants is less than 1%, it's hard to say whether one variant is truly better than the other. To be significant, there must be enough difference between the conversion rates.
 
 PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below
 
