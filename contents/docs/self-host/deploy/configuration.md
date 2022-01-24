@@ -130,6 +130,8 @@ By default, ClickHouse is installed as a part of the chart, powered by [clickhou
 
 To use an external `ClickHouse` cluster, set `clickhouseOperator.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
+
 
 ### [PostgreSQL](../runbook/postgresql/)
 
