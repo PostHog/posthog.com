@@ -65,7 +65,7 @@ To understand why, it helps to break down the history of the GDPR:
 ## What happens next?
 Once you break down the chain of events, one thing becomes abundantly clear: a new Privacy Shield, such as that suggested by Google, would run into the same legal challenges that scuppered previous agreements. 
 
-The only reliable solution is for the US to enact adequate legal protections for EU citizens, but this would be politically difficult. And, while an executive order could smooth the path to a quicker resolution, it would be subject to the whims of any incoming president who didn't like it. Hello, Donald Trump. 
+The only reliable solution is for the US to enact adequate legal protections for EU citizens, but this would be politically difficult. An executive order could smooth the path to a quicker resolution, but it would be subject to the whims of any incoming president who didn't like it. Hello, Donald Trump. 
 
 This legal instability makes controlling your own data, in our view, critically important. [Self-hosting your analytics](/blog/why-companies-self-host) obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. 
 
