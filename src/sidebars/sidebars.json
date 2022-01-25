@@ -546,8 +546,18 @@
                             "url": "/docs/self-host/configure/upgrading-posthog"
                         },
                         {
-                            "name": "Async migrations",
-                            "url": "/docs/self-host/configure/async-migrations"
+                            "name": "Async Migrations",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/docs/self-host/configure/async-migrations/overview"
+                                },
+                                {
+                                    "name": "Migration guide: 0002_events_sample_by",
+                                    "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                }
+                            ]
                         }
                     ]
                 },
