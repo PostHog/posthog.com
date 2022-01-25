@@ -8,6 +8,19 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")
       }
+      type Reply {
+        name: String
+        body: String
+        avatar: String
+        authorData: AuthorsJson @link(by: "slack_username", from: "name")
+      }
+      type Question implements Node {
+        body: String
+        name: String
+        slug: [String]
+        avatar: String
+        replies: [Reply]
+      }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")
         url: String
@@ -62,6 +75,12 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         markdown: File @link(from: "markdown___NODE")
         logo: File @link(from: "logo___NODE")
         slug: String
+      }
+      type NavsJsonMainSubItemsSectionsItems implements Node {
+        icon: String,
+        title: String,
+        url: String,
+        badge: String
       }
     `)
 }

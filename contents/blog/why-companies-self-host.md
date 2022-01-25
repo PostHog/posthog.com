@@ -58,7 +58,7 @@ So what's going on here?
 
 Again, it's related to privacy, as our CTO and co-founder, Tim Glaser, explains:
 
-"Event tracking is typically prevented by ad blockers, which block tracking that originates from third-party domains. Self-hosting your analytics avoids this problem because the tracking originates from your domain. 
+"Event tracking is typically prevented by ad blockers, which block tracking that originates from third-party domains. Self-hosting your analytics avoids this problem as you’re just sending the data to your own server. 
 
 "This behavior isn't limited to ad blockers, either. VPNs and privacy browsers, which aren't explicitly positioned as ad blockers, will generally block third-party trackers by default."
 
