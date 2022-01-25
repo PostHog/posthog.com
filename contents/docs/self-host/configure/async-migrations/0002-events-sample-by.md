@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-`0002_events_sample_by` is an async migration added to change the `SAMPLE BY` and `ORDER BY` clauses of our events table in ClickHouse.
+[`0002_events_sample_by`](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0002_events_sample_by.py) is an async migration added to change the `SAMPLE BY` and `ORDER BY` clauses of our events table in ClickHouse.
 
 There were 2 important reasons for doing this:
 
@@ -26,8 +26,8 @@ There were 2 important reasons for doing this:
 ## Checks
 
 1. `is_required`: only run this migration on instances with the old schema (new deploys get the new schema by default)
-2. `precheck`: make sure there's enough free disk space in CH to run the migration
-3. `healthcheck`: prevent CH from blowing up for lack of disk space
+2. `precheck`: make sure there's enough free disk space in ClickHouse to run the migration
+3. `healthcheck`: prevent ClickHouse from blowing up for lack of disk space
 
 ## FAQ
 
