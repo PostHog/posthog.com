@@ -21,7 +21,7 @@ There's lots of detail in the full ruling (link needed), but here's a quick summ
 
 That's a very simplified version of events, but here are three important takeaways:
 
-### 1 . Google was cleared of any wrongdoing (for now)
+### 1 . Google itself was cleared of any wrongdoing
 Only the website that was using Google Analytics, as the data controller, was found liable for the breach. Under the GDPR, breaching the regulation can result in huge fines of up to €20 million or 4% of a company's global turnover, whichever is the largest. [Amazon was fined €746 million by authorities in Luxembourg in 2020](https://www.bbc.co.uk/news/business-58024116), the largest GDPR fine so far. Getting it wrong can be painful.
 
 ### 2. Any website using Google Analytics in the EU could be liable
