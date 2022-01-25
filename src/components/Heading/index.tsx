@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
+import { AnimatePresence, motion } from 'framer-motion'
+import React, { useState } from 'react'
 
 const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
     const [visible, setVisible] = useState(false)
-    const { href } = useLocation()
+    const { origin, pathname } = useLocation()
     const handleClick = () => {
-        const url = `${href}#${id}`
+        const url = `${origin}${pathname}#${id}`
         navigator.clipboard.writeText(url)
         setVisible(true)
         setTimeout(() => {
