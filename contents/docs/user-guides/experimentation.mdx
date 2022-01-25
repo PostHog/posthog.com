@@ -114,7 +114,7 @@ Below are all formulas and calculations we go through when recommending sample s
 
 ### How we ensure distribution of people
 
-For every experiment, we leverage PostHog's multivariate feature flags. There's one control group, and up to 3 test groups. Based on their distinctID, each user is randomly distributed into one of these groups. This is stable, so the same users, even when they revisit your page, stay in the same group.
+For every experiment, we leverage PostHog's multivariate feature flags. There's one control group, and up to three test groups. Based on their distinctID, each user is randomly distributed into one of these groups. This is stable, so the same users, even when they revisit your page, stay in the same group.
 
 We do this by creating a hash out of the feature flag key and the distinctID. It's worth noting that when you have low data (<1,000 users per variant), the difference in variant exposure can be up to 20%. This means, a test variant could have 800 people only, when control has 1,000.
 
