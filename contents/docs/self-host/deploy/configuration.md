@@ -131,7 +131,7 @@ Currently the easiest way to scale up a ClickHouse environment hosted by our hel
   - Essentially if you know the node that you want ClickHouse to be installed on you can run `kubectl label nodes <desired-clickhouse-node-name> clickhouse=true`
   - To restrict other pods from not using that node we can add a taint via `kubectl taint nodes <desired-clickhouse-node-name> dedicated=clickhouse:NoSchedule`
 - Update your `values.yaml`:
-```
+```yaml
 clickhouse:
   nodeSelector:
     clickhouse: "true"
@@ -152,6 +152,21 @@ ClickHouse is the database that does the bulk of heavy lifting with regards to s
 By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). As such it's important to set the database size to be enough to store the raw data via `clickhouse.persistence.size` value.
 
 To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
+
+#### Custom settings
+
+It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
+
+To do so, change `clickhouse.profiles` setting as below. The `default` profile is used by posthog for all queries.
+
+```yaml
+clickhouse:
+  profiles:
+    default/max_execution_time: "180"
+    default/max_memory_usage: "40000000000"
+```
+
+Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operations/settings/).
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
