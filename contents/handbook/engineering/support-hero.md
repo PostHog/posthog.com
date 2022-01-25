@@ -1,5 +1,5 @@
 ---
-title: Support Hero and Rotations
+title: Support Hero and rotations
 sidebar: Handbook
 showTitle: true
 ---
@@ -57,37 +57,30 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 We tag customers in [Papercups](#papercups) according to these categories so you can easily filter them - you can view the tags in the right hand pane in the [Papercups](#papercups) app:
 
-<img width="219" alt="Screenshot 2021-11-05 at 15 51 02" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
+<img width="219" alt="" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
 
 At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
 
 ## Categorizing requests
 
-It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users
+It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
 
-When you respond to an issue add a "conversation tag" with one of the following categories:
+When you initially respond to an issue add a "conversation tag" with the following categories:
+* User experience _(confusing/unclear UX)_.
 * Performance
-* Deployments
-  * Scaling
-  * Setup 
-  * Maintenance
-  * Hobbyist
-  * Migrations
-  * Supporting Managed Instances
-* Instrumentation
-* User Experience Confusion
-* Data Integrity
-* API
-* Plugins
-* Recordings
-* Toolbar
-* Feature-flags
-* Not-a-bug
+* Docs confusion _either missing or confusing_.
+* Data integrity
+* Deployments/Setup
+* Deployments/Upgrading
+* Deployments/Maintenance
+* Non-self-serve _for requests that need to be processed manually (e.g. removing events)_.
 * Billing
 * Feature request
-* Other
+* Bug _functionality bugs, something is broken_.
 
-If something falls into two categories, just tag the one you think is most relevant.
+If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
+
+If a ticket doesn't fit a category correctly, we might need to update our tags, open a PR to edit this page.
 
 ### Escalating issues
 

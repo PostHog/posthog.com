@@ -140,6 +140,10 @@
                         {
                             "name": "Team People",
                             "url": "/handbook/people/team-structure/people"
+                        },
+                        {
+                            "name": "Team Customer Success",
+                            "url": "/handbook/people/team-structure/customer-success"
                         }
                     ]
                 }
@@ -315,7 +319,7 @@
                     "url": "/handbook/product/product-team"
                 },
                 {
-                    "name": "Product Metrics",
+                    "name": "Product metrics",
                     "url": "/handbook/product/metrics"
                 },
                 {
@@ -327,7 +331,7 @@
                     "url": "/handbook/product/scale-features-prioritization"
                 },
                 {
-                    "name": "Paid Features",
+                    "name": "Paid features",
                     "url": "/handbook/product/paid-features"
                 }
             ]
@@ -542,8 +546,18 @@
                             "url": "/docs/self-host/configure/upgrading-posthog"
                         },
                         {
-                            "name": "Async migrations",
-                            "url": "/docs/self-host/configure/async-migrations"
+                            "name": "Async Migrations",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/docs/self-host/configure/async-migrations/overview"
+                                },
+                                {
+                                    "name": "Migration guide: 0002_events_sample_by",
+                                    "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -588,13 +602,24 @@
                             ]
                         },
                         {
-                            "name": "Postgresql",
+                            "name": "PostgreSQL",
+                            "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
                                     "name": "Resize disk",
                                     "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
+                        },
+                        {
+                            "name": "Redis",
+                            "url": "/docs/self-host/runbook/redis",
+                            "children": []
+                        },
+                        {
+                            "name": "Zookeeper",
+                            "url": "/docs/self-host/runbook/zookeeper",
+                            "children": []
                         }
                     ]
                 }
@@ -725,10 +750,6 @@
                         {
                             "name": "Google Tag Manager",
                             "url": "/docs/integrate/third-party/google-tag-manager"
-                        },
-                        {
-                            "name": "Metabase",
-                            "url": "/docs/integrate/third-party/metabase"
                         },
                         {
                             "name": "Next.js",

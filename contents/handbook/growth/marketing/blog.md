@@ -91,6 +91,7 @@ showTitle: true
 hideAnchor: true
 keywords: ["fundraise", "fundraising"]
 featuredImage: ../images/blog/series-b/series-b-baby.png
+featuredImageType: full
 author: ["joe-martin"]
 categories: ["General"]
 ---
