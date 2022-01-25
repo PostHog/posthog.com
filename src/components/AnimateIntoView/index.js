@@ -7,7 +7,7 @@ export default function AnimateIntoView({ children, className }) {
     const [ref, inView] = useInView({ threshold: 1 })
     const variants = {
         hidden: { top: -100, opacity: 0 },
-        shown: { top: -40, opacity: 1, transition: { duration: 0.5, type: 'spring', delay: 0.3 } },
+        shown: { top: -60, opacity: 1, transition: { duration: 0.5, type: 'spring', delay: 0.3 } },
     }
 
     useEffect(() => {
