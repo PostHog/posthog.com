@@ -32,7 +32,7 @@ This complaint was but one of 100 similar complaints lodged by the same non-prof
 
 ![Is Google Analytics illegal website](../images/blog/gdpr-privacy-shield/is-ga-legal-website.png)
 <figcaption className="text-center">
-The Austrian ruling [questions the legality](https://isgoogleanalyticsillegal.com/) of using Google in the EU
+  The Austrian ruling <a href="https://isgoogleanalyticsillegal.com/">questions the legality</a> of using Google in the EU
 </figcaption>
 
 ## A brief history of GDPR
