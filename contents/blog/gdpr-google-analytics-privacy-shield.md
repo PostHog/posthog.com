@@ -38,7 +38,7 @@ This complaint was but one of 100 similar complaints lodged by the same non-prof
 ## A brief history of GDPR
 In its [response](https://blog.google/around-the-globe/google-europe/its-time-for-a-new-eu-us-data-transfer-framework/) to the ruling, Google urged the EU and US to come up with a new legal framework to create legal stability. It's a reasonable suggestion, but we've been here several times before.
 
-To understand the problem a little better, it helps to understand the history of GDPR. Let's break things down: 
+To understand why, it helps to break down the history of the GDPR:
 
 - **January 25, 2012:** The European Commission [publishes a draft](https://web.archive.org/web/20121203024154/http://ec.europa.eu/justice/data-protection/document/review2012/com_2012_11_en.pdf) of its proposed General Data Protection Regulation (GDPR) to regulate the free movement of data
 
