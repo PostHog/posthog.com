@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 ## Q1 2022 Goals
-- ⭐️ Build and share the **vision** for one ambitious and very **exciting** goal.
+- ⭐️ Craft a clear **vision** for an ambitious goal that gets everyone **very excited**!
 - ⭐️ Build the strategy for one **ambiguous opportunity** to improve a company metric or achieve a company goal.
 - Enable Core Experience Team to plan their sprints and ship high quality features autonomously.
 
