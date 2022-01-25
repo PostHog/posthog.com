@@ -17,4 +17,5 @@ This is a non-exhaustive list of things I'm currently trying to accomplish. It's
 ### Personal - Q1 2022
 - Don't lose (another, again) mission in [Pandemic Legacy: Season Zero](https://en.wikipedia.org/wiki/Legacy_game). 
 - See all of my nieces at least once. And my nephew.  
-- Make something out of wood. Something _cool_. 
+- Make something out of wood. Something _cool_.
+- Don't miss a Donut chat. 
