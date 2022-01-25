@@ -602,6 +602,11 @@
                             ]
                         },
                         {
+                            "name": "Redis",
+                            "url": "/docs/self-host/runbook/redis",
+                            "children": []
+                        },
+                        {
                             "name": "Zookeeper",
                             "url": "/docs/self-host/runbook/zookeeper",
                             "children": []
