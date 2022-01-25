@@ -37,38 +37,27 @@ In its [response](https://blog.google/around-the-globe/google-europe/its-time-fo
 
 To understand the problem a little better, it helps to understand the history of GDPR. Let's break things down: 
 
-### January 25, 2012: The European Commission publishes its draft GDPR
-Here's where things start, 10 years ago today. In response to "rapid technological developments", the European Commission [published a draft](https://web.archive.org/web/20121203024154/http://ec.europa.eu/justice/data-protection/document/review2012/com_2012_11_en.pdf) of its proposed General Data Protection Regulation (GDPR) to regulate the free movement of data. 
+- **January 25, 2012:** In response to "rapid technological developments", the European Commission [published a draft](https://web.archive.org/web/20121203024154/http://ec.europa.eu/justice/data-protection/document/review2012/com_2012_11_en.pdf) of its proposed General Data Protection Regulation (GDPR) to regulate the free movement of data. 
 
-### June 2013: Edward Snowden leaks the largest cache of intelligence data in history
-Edward Snowden leaked millions of secret US intelligence files detailing the huge extent of digital surveillance. This leak fundamentally changed the debate around personal privacy and data protection forever, and it's an important factor in much of what's happened since.
+- **June 2013:** Edward Snowden leaks millions of secret US intelligence files detailing the huge extent of digital surveillance. The leak fundamentally changes the debate around personal privacy and data protection forever, and becomes an important factor in much of what's happened since.
 
-### October 2015: European court deems EU-US data protection agreement 'invalid'
-Responding to a complaint from privacy campaigner Max Schrems, the European Court of Justice deemed the 'Safe Harbor Privacy Principles' allowing data portability between the EU and US invalid. Schrems used the Snowden revelations, arguing that data transferred by Facebook from Ireland to US servers was insufficiently protected due to the NSA's surveillance practices. [The ruling](https://iapp.org/resources/article/schrems-i/) became known as 'Schrems I'.
+- **October 2015:** Responding to a complaint from privacy campaigner Max Schrems, the European Court of Justice deems the 'Safe Harbor Privacy Principles' allowing data portability between the EU and US invalid. Schrems used the Snowden revelations, arguing that data transferred by Facebook from Ireland to US servers was insufficiently protected due to the NSA's surveillance practices. [The ruling](https://iapp.org/resources/article/schrems-i/) is known as 'Schrems I'.
 
-### May 24, 2016: The GDPR is approved by EU
-The GDPR, short for General Data Protection Regulation, becomes EU law. It's the most comprehensive data protection legislation in the world. Among its many directives, it stipulates that the personal data of any EU citizen cannot be exported to another nation that lacks equivalent data protection laws or contractual protections.   
+- **May 24, 2016:** The GDPR, short for General Data Protection Regulation, becomes EU law. It's the most comprehensive data protection legislation in the world. Among its many directives, it stipulates that the personal data of any EU citizen cannot be exported to another nation that lacks equivalent data protection laws or contractual protections.   
 
-### July 12, 2016: The EU-US Privacy Shield is created
-In response to Schrems I, the EU and US negotiate the EU-US Privacy Shield, a replacement for the previous 'Safe Harbor' rules. It's designed to allow US companies to receive data from the EU while adhering to EU privacy laws.
+- **July 12, 2016:** In response to Schrems I, the EU and US negotiate the EU-US Privacy Shield, a replacement for the previous 'Safe Harbor' rules. It's designed to allow US companies to receive data from the EU while adhering to EU privacy laws.
 
-### January 25, 2017: President Donald Trump signs the "Enhanced Public Safety" executive order
-The new executive order demands that government agencies ensure their privacy policies "exclude persons who are not United States citizens or lawful permanent residents" from the protections of the Privacy Act. President Joe Biden would later repeal the executive order in January, 2021.
+- **January 25, 2017:** President Donald Trump signs an executive order called "Enhanced Public Safety" executive. The order demands government agencies ensure their privacy policies "exclude persons who are not United States citizens or lawful permanent residents" from the protections of the Privacy Act. President Joe Biden would later repeal the executive order in January, 2021.
 
-### May 25, 2018: EU member states ratify the GDPR
-Just over two years after it was first approved by the EU, all member states have passed the GDPR in their national parliaments and the GDPR is now in force. National data protection authorities become responsible for enforcing the law in their countries.
+- **May 25, 2018:** Just over two years after it was first approved by the EU, all member states have passed the GDPR in their national parliaments and the GDPR is now in force. National data protection authorities become responsible for enforcing the law in their countries.
 
-### July 16, 2020: European court rules the EU-US Privacy Shield invalid
-Over two years after a new complaint filed by Max Schrems in Ireland, the Court of Justice of the European Union (CJEU) rules the Privacy Shield [doesn't provide adequate protection](https://gdprhub.eu/index.php?title=CJEU_-_C-311/18_-_Schrems_II) for EU citizens. Existing Standard Contractual Clauses (SCC) allowing data transfer to the US are deemed inadequate.
+- **July 16, 2020:** Over two years after a new complaint filed by Max Schrems in Ireland, the Court of Justice of the European Union (CJEU) rules the revised Privacy Shield [doesn't provide adequate protection](https://gdprhub.eu/index.php?title=CJEU_-_C-311/18_-_Schrems_II) for EU citizens. Existing Standard Contractual Clauses (SCC) allowing data transfer to the US are deemed inadequate.
 
-### August 17, 2020: Max Schrems files complaint with Austrian DPA
-Schrems alleges an Austrian website and Google violated the GDPR when a data subject visited a website on health topics. The complaint details how personal data, including user identifiers, IP address and browser details, were exported from Austria to the US where it could be subject to local law enforcement requests for access.
+- **August 17, 2020:** Max Schrems files a new complaint with Austrian DPA alleging an Austrian website and Google violated the GDPR. The complaint details how the personal data of a data subject, including user identifiers, IP address and browser details, were exported from Austria to the US where it could be subject to local law enforcement requests for access.
 
-### July 16, 2021: Amazon fined €746 million for GDPR breach
-Amazon [is fined](https://www.wired.co.uk/article/amazon-gdpr-fine) €746 million for failing to follow rules regarding its use of targeted advertising and proper consent. It's the largest GDPR fine to date.
+- **July 16, 2021:** Amazon [is fined](https://www.wired.co.uk/article/amazon-gdpr-fine) €746 million for failing to follow rules regarding its use of targeted advertising and proper consent. It's the largest GDPR fine to date.
 
-### January 13, 2022: Austrian authority rules Google Analytics violates GDPR
-The Austrian data authority partially upholds the complaint, ruling that the Austrian website did violate the GDPR. Google, as a data processor, isn't deemed liable.
+- **January 13, 2022:** The Austrian data authority partially upholds the complaint, ruling that the Austrian website did violate the GDPR. Google, as a data processor, isn't deemed liable.
 
 ## What happens next?
 Once you break down the chain of events, one thing becomes abundantly clear: a new Privacy Shield, such as that suggested by Google, would run into the same legal challenges that scuppered previous agreements. 
