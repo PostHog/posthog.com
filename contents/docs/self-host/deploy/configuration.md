@@ -153,6 +153,20 @@ Redis is installed by default as part of the chart. You can customize all its se
 #### Use an external service
 To use an external Redis service, please set `redis.enabled` to `false` and then configure the `externalRedis` values.
 
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+    redis:
+      enabled: false
+
+    externalRedis:
+      host: "posthog.cache.us-east-1.amazonaws.com"
+      port: 6379
+
+</details>
+
 #### Credentials
 By default, Redis doesn't use any password for authentication. If you want to configure it to use a password (recommended) see the options below.
 
@@ -214,6 +228,19 @@ Kakfa is installed by default as part of the chart. You can customize all its se
 
 #### Use an external service
 To use an external Kafka service, please set `kafka.enabled` to `false` and then configure the `externalKafka` values.
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+    kafka:
+      enabled: false
+
+    externalKafka:
+      brokers: "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094,broker-2.posthog.kafka.us-east-1.amazonaws.com:9094,broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+
+</details>
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
