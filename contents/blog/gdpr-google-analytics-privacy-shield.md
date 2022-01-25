@@ -24,7 +24,7 @@ That's a very simplified version of events, but here are three important takeawa
 ### 1 . Google itself was cleared of any wrongdoing
 Only the website that was using Google Analytics, as the data controller, was found liable for the breach. Under the GDPR, breaching the regulation can result in huge fines of up to €20 million or 4% of a company's global turnover, whichever is the largest. [Amazon was fined €746 million by authorities in Luxembourg in 2020](https://www.bbc.co.uk/news/business-58024116), the largest GDPR fine so far. Getting it wrong can be painful.
 
-### 2. Any website using Google Analytics in the EU could be liable
+### 2. Any website using GA in the EU could be liable
 As confirmed by [guidance](https://tweakers.net/nieuws/192020/autoriteit-persoonsgegevens-waarschuwt-voor-mogelijk-verbod-op-google-analytics.html) published by the Dutch Data Protection Authority, any website or product using Google Analytics in the EU could be in breach of the GDPR. Much of the ruling hinges on specific configuration options within GA, which further complicates things for end users.
 
 ### 3. This is just the beginning
