@@ -69,6 +69,6 @@ The only reliable solution is for the US to enact adequate legal protections for
 
 This legal instability makes controlling your own data, in our view, critically important. [Self-hosting your analytics](/blog/why-companies-self-host) obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. 
 
-The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution is a waster of time and money.
+The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution is a waste of time and money.
 
 > PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
