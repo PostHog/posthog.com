@@ -5,17 +5,9 @@ showTitle: true
 ---
 
 ## Q1 2022 Goals
-- **Product strategy.**
-  - 2x ambitious Product milestones (like Experimentation). Strategy >> Execution. Exciting/evangelism.
-  - Decentralize & scale customer feedback loop with Customer Success Team.
-  - Scale (make sure it works optimally) Design work with Eng Teams.
-  - Bring more industry context. TODO:
-  - Great handle on our numbers. Discover opportunities in data (increase Discoveries from this). Excite others to do this.
-- **Product execution.**
-  - Owners have all context for sprint planning, updated roadmaps and no blockers. Particularly, sprint goals should be well justified (very clear, no fluff on why) with data before sprint planning meeting.
-  - Coding and PR reviews (except UX reviews) < 20% of my time.
-  - Adjust work style to different Engineers. Less/more hands on / scoping.
-  - Increase Discoveries / active users > x%
+- ⭐️ Build and share the **vision** for one ambitious and very **exciting** goal.
+- ⭐️ Build the strategy for one **ambiguous opportunity** to improve a company metric or achieve a company goal.
+- Enable Core Experience Team to plan their sprints and ship high quality features autonomously.
 
 ## Q4 2021 Goals
 
