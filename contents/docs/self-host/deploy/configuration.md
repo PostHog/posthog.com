@@ -143,7 +143,7 @@ By default, PostgreSQL is installed as part of the chart. To use an external Pos
 
 To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
 
 ### [Redis](https://redis.io/)
@@ -205,14 +205,17 @@ By default, Redis doesn't use any password for authentication. If you want to co
 
 </details>
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
 
 ### [Kafka](../runbook/kafka/)
 
-By default, Kafka is installed as part of the chart. Kafka is used as a queue between the PostHog web application and PostHog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
+Kakfa is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `kafka` namespace.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
+#### Use an external service
+To use an external Kafka service, please set `kafka.enabled` to `false` and then configure the `externalKafka` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
 
 ### [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)

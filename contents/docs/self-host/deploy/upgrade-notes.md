@@ -168,3 +168,15 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 - `redis.password` -> `externalRedis.password`
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 12.x.x
+
+13.0.0 improves the configuration of Kafka.
+
+The built-in Kafka service type default is now `ClusterIP` from the previous `NodePort`. If you were relying on this setting you can override the new default by setting `kafka.service.type` to `NodePort`.
+
+As part of this work, we have also renamed a few chart inputs in order to reduce confusion and align our naming convention to the industry standards:
+
+* `kafka.url`, `kafka.host`, `kafka.port` have been consolidated into `externalKafka.brokers` (example: `externalKafka.brokers: "kafka-broker1:9094,kafka-broker2:9094,kafka-broker3:9094"`)
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
