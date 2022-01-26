@@ -16,6 +16,20 @@ In the issue should be details about what you need from a product designer:
 
 If there isn’t a clear deadline for your design request, we’ll prioritize according to our availability.
 
+## Designers always offer "free consultations"
+- This is especially true for teams without a dedicated Product Designer
+- Syncing before starting a project is always strongly recommended. It helps us stay on the same page and makes sure we only step on each others toes (and not entire feet).
+- Don’t feel like you _have_ to craft a solution yourself. (What might feel complicated to you might be a breeze for us, so don’t feel like you need to try to solve it first. If we might be able to save you hours of agony, a quick Zoom might be well worth it.)
+
+## Conversations happen wherever it’s relevant, but design assets should always live in our [Figma org](https://www.figma.com/files/project/17131046/App?fuid=987006441684352800)
+- Depending on a project’s stage, conversations might naturally occur in various places (Google Docs, issues, Figma comments, or pull requests). Given the ratio of designers to engineers, we’ll stick with this method for the foreseeable future.
+- Regardless of where conversations happen, design decisions should make their way into finalized Figma mockups to serve as the single source of truth to inform implementation.
+- All Figma assets should be shared back to the project via the GitHub issue. It's also fine to socialize changes via other channels, but documenting in GitHubis critical.
+
+## Figma mockups > GitHub comments and issues
+- Completed Figma mockups hold (almost) as much weight as pull requests. Documented designs in Figma should be considered the source of truth for implmentation. Any feedback (including GitHub comments) should make its way into mockups to be considered final.
+- If effort goes into making a mockup and gathering feedback, as much effort as possible should go into making the final product look like the mock.
+
 ### When to loop in design
 
 Because we hire self-starters, there is no expectation that every project should start by running through design _first_. If you are contributing to design, be sure to consult the [contribution guidelines](/handbook/company/contributing-to-product-design)
