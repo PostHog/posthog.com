@@ -137,7 +137,7 @@ const sections = [
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
-                name: 'Session Recording',
+                name: 'Recordings',
                 docsLink: 'docs/user-guides/recordings',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
@@ -145,6 +145,11 @@ const sections = [
                 name: 'Feature Flags',
                 docsLink: 'docs/user-guides/feature-flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Experimentation',
+                docsLink: 'docs/user-guides/experimentation',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
                 name: 'Plugins',
@@ -168,11 +173,16 @@ const sections = [
             },
             {
                 name: 'Multivariate testing',
-                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags-alpha',
+                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
-                name: 'Event taxonomy descriptions and tags',
+                name: 'Advanced Paths',
+                docsLink: 'docs/user-guides/paths',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Event & properties Taxonomy',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {

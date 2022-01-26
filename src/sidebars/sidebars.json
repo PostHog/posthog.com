@@ -846,6 +846,10 @@
                     "url": "/docs/user-guides/events"
                 },
                 {
+                    "name": "Experimentation",
+                    "url": "/docs/user-guides/experimentation"
+                },
+                {
                     "name": "Feature Flags",
                     "url": "/docs/user-guides/feature-flags"
                 },
