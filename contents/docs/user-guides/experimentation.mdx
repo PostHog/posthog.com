@@ -8,10 +8,11 @@ showTitle: true
 
 Experiments helps you test changes to your product. You can test hypotheses about which changes will lead to optimal results. You may have also heard it called A/B testing, or split testing. Examples:
 
--   You want to test which copy or visual design has the highest conversion.
--   You want to test which flow leads to the highest number of purchases.
+- You want to test which copy or visual design has the highest conversion.
+- You want to test which flow leads to the highest number of purchases.
 - You want to test if certain deals & promotions do better with users in a specific country.
 - You want to test if showing your website copy in German does better than English in Austria.
+- You want to test if certain copy does better within a cohort of new users.
 
 > 🚧 **Experimentation is currently in beta** and support is limited to our [JavaScript](/docs/integrate/client/js#feature-flags) integration. If you have any feedback, please <a href="https://posthog.com/support" target="_blank">reach out</a>.
 
@@ -27,7 +28,7 @@ Based on your user selection and your goal, we will estimate the number of users
 
 We distribute all selected users equally between the control and test groups. So, for example, if there are 3 test variants and 1 control variant, each variant gets 25% of the total users selected.
 
-You can tweak your settings to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
+You can tweak settings on the creation screen to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
 
 The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). You ask PostHog which group does this user belong to and then you show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
 
