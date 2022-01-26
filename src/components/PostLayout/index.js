@@ -107,7 +107,7 @@ export const Contributors = ({ contributors, className = '' }) => {
     const classes = 'flex space-x-2 items-center no-underline'
     return (
         <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.map(({ image, id, name, url, state }) => {
+            {contributors.slice(0, 3).map(({ image, id, name, url, state }) => {
                 return (
                     <li key={id}>
                         {url ? (

@@ -25,6 +25,11 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         avatar: File @link(from: "avatar___NODE")
         url: String
         username: String
+        teamData: TeamData
+      }
+      type TeamData {
+        name: String
+        jobTitle: String
       }
       type SidebarsJson implements Node {
         docs: [SidebarNav]
