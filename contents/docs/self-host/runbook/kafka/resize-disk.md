@@ -50,7 +50,7 @@ true
 
 1. Delete the `StatefulSet` definition but leave its `pod`s online (this is to avoid an impact on the ingestion pipeline availability): `kubectl -n posthog delete sts --cascade=orphan posthog-posthog-kafka`
 
-1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example)
+1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example). Remember to also update the retention policy accordingly, more info [here](/docs/self-host/deploy/troubleshooting#why-did-we-run-into-this-problem-and-how-to-avoid-it-in-the-future)
 
 1. Run a `helm` upgrade to recycle all the pods and re-deploy the `StatefulSet` definition
 
