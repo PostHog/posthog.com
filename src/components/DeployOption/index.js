@@ -50,9 +50,10 @@ const icons = {
     slack: Slack,
 }
 
-export default function DeployOption({ url, icon, title, disablePrefetch }) {
+export default function DeployOption({ url, icon, title, disablePrefetch, badge }) {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const Icon = icon && icons[icon]
+    const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
     return (
         <Link
             disablePrefetch={disablePrefetch}
@@ -64,6 +65,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch }) {
         >
             {Icon && <Icon />}
             <span>{title}</span>
+            {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
         </Link>
     )
 }

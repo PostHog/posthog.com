@@ -131,7 +131,7 @@ export const Text = ({ children }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
-export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650 }) {
+export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650, questions }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
@@ -149,10 +149,11 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
             style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
-            <article className="article-content col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
-                <div style={{ maxWidth: contentWidth }} className="w-full">
+            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+                <div style={{ maxWidth: contentWidth }} className="w-full article-content">
                     {children}
                 </div>
+                {questions && questions}
             </article>
             <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">

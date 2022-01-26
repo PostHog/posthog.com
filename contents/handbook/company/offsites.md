@@ -12,6 +12,8 @@ Every six months the entire company will get together somewhere in the world for
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
 
+Our last company offsite was held in [Porto in August 2021](https://youtu.be/WOBH1Qy0xhA), and in Italy prior to that. During our last company offsite, the team did a Hackathon together, visited a winery, and even learned how to make pizza! 
+
 ## Small team offsites
 
 We want to try to encourage small teams to get together every six months. These are more focused on work and on creating strong bonds within teams. Ideally they happen around three months after an all-company offsite.
@@ -23,7 +25,13 @@ Some guidelines:
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - We'd encourage you to pick a city that one or more of your team members already live in, and a place that minimises travel time/expenses for everyone else.
 - We'd encourage you to get an AirBnB for everyone not living in the city as you automatically get a space you can work from and there's less organizing involved.
-- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having a loose agenda and an idea of what you want to achieve _before_ the start of the trip.
+- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having a loose agenda and an idea of what you want to achieve _before_ the start of the trip. 
+
+Ideas for the agenda:
+- Planning session. What does the team want to achieve in the next month/quarter/year?
+- Look at the [team page](https://posthog.com/handbook/people/team-structure/team-structure#small-teams), what needs to be updated?
+- [360 degree feedback session](/handbook/people/feedback#ground-rules)
+
 
 The budget for these trips is up to $1,000 per person.
 

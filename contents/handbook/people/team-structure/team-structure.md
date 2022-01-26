@@ -28,12 +28,14 @@ hideAnchor: true
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
+    - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
     - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-
+  - [Simon Fisher, Customer Success Lead](/handbook/company/team#simon-fisher-customer-success)
+    - [Cameron DeLeone, Customer Success Manager](/handbook/company/team#cameron-deleone-customer-success)
 
 ## Small teams
 
@@ -79,8 +81,9 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 <br />
 
 ### [Marketing](marketing)
-- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
+- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
+- [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
 
 <br />
 
@@ -93,6 +96,12 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### [People & culture](people)
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
+
+<br />
+
+### [Customer Success](customer-success)
+- [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
+- [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
 
 
 ## Organization changes

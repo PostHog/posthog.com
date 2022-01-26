@@ -1,4 +1,4 @@
-const replacePath = require('./utils')
+const { replacePath, flattenMenu } = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
 const Slugger = require('github-slugger')
@@ -18,13 +18,21 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const result = await graphql(`
         {
-            allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
+            allMdx(
+                filter: {
+                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    frontmatter: { title: { ne: "" } }
+                }
+                limit: 1000
+            ) {
                 nodes {
                     id
                     slug
                 }
             }
-            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
                 nodes {
                     id
                     headings {
@@ -36,7 +44,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -154,23 +162,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         return Promise.reject(mdPagesResult.errors)
     }
 
-    function flattenMenu(items, breadcrumb = []) {
-        return items.reduce((acc, item) => {
-            if (item.url) {
-                acc.push({ url: item.url, name: item.name, breadcrumb })
-            }
-            if (item.children) {
-                acc.push(
-                    ...flattenMenu(item.children, [
-                        ...breadcrumb,
-                        { name: item.name, url: item.url || item.children[0].url },
-                    ])
-                )
-            }
-            return acc
-        }, [])
-    }
-
     function formatToc(headings) {
         const slugger = new Slugger()
         return headings.map((heading) => {
@@ -232,6 +223,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -262,6 +254,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -287,6 +280,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+                slug,
             },
         })
     })
@@ -322,6 +316,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                slug,
             },
         })
     })

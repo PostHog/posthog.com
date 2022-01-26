@@ -25,6 +25,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
 import { ContactForm } from './components/ContactForm'
@@ -37,7 +38,6 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
-import { DocsSearch } from './components/DocsSearch'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
@@ -132,6 +132,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityQuestions,
     CompensationCalculator,
     Contact,
     ContactForm,
@@ -144,7 +145,6 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
-    DocsSearch,
     FeatureAvailability,
     FeaturesComparisonTable,
     FeaturesNav,
