@@ -156,7 +156,11 @@ export const query = graphql`
                     authorData {
                         name
                         role
-                        image
+                        image {
+                            childImageSharp {
+                                gatsbyImageData
+                            }
+                        }
                         link_url
                     }
                 }

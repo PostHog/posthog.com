@@ -380,7 +380,6 @@ module.exports = {
                                         handle
                                         name
                                         role
-                                        image
                                         link_type
                                         link_url
                                     }

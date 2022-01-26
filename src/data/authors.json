@@ -115,7 +115,7 @@
         "handle": "andy-vandervell",
         "name": "Andy Vandervell",
         "role": "Content Marketing Manager",
-        "image": "https://avatars.githubusercontent.com/u/92976667?v=4",
+        "image": "../../static/images/authors/andy-vandervell-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/andyvandervell/"
     },
@@ -131,7 +131,7 @@
         "handle": "eli-kinsey",
         "name": "Eli Kinsey",
         "role": "Front End Engineer",
-        "image": "https://avatars.githubusercontent.com/u/28248250?v=4",
+        "image": "../../static/images/authors/eli-kinsey-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/eli-kinsey/",
         "slack_username": "eli"
