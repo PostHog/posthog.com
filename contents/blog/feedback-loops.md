@@ -24,25 +24,31 @@ To recap, the five steps I mentioned are
 
 I expect most people are familiar with agile development, which makes the basic case for gathering feedback: Finding out you're building the wrong thing before you've built it lets you be a lot faster than finding this out once you've built something.
 
-We can take this a step further by creating feedback loops between each of the steps mentioned above. If feedback is good, and helps keep you on the right track, getting feedback between each step should be better than getting feedback only at the end.[^1]
+But what if, instead of getting feedback on the product, you get feedback on each stage you go through? If feedback is good, and helps keep you on the right track, getting feedback between each step should be better than getting feedback only at the end.[^1]
 
 [^1]: There's a case to be made about diminishing returns, and the cost of effort it takes to create the feedback loop, which is why you wouldn't want to extend this argument to "gathering feedback every hour/minute/second"
 
-For example, when gathering context and figuring out the problem, it's important to involve teammates, especially if they are product owners. Explore competitor products together. Make the thread open, so everyone in the company can see and contribute to it. It’s valuable to hear from colleagues who might have more context because they were previously an insider or have other relevant knowledge.
+I like the five-step model because it provides natural schelling points to check for feedback.
 
-None of this happens automatically, but asking yourself the question: "How can I verify my thinking?" actively forces you to seek feedback. Reducing the barrier of entry for others to give feedback is one of the highest leverage activities you can do.
+For example, when gathering context and figuring out the problem, I love involving teammates, especially product owners. We explore competitor products together. We make discussion and strategy threads open, so everyone in the company can see and contribute to it. It’s valuable to hear from colleagues who might have more context because they were previously an insider or have other relevant knowledge. [Here's a recent example for automated insights](https://github.com/PostHog/posthog/issues/8261)
 
-TODO: Challenging feedback loops? Where you confirm/reject
+None of this happens automatically, but asking the question: "How can I verify my thinking?" actively forces me to seek feedback. One of the highest leverage activities I can do here is reducing the barrier of entry for others to give feedback.
 
 Another good example you might be familiar with is the maxim: "Make small pull requests". The generating function behind this maxim is faster feedback loops. Smaller pull requests are easier to review, which not only helps catch problems quickly, but ensures you get feedback faster. Imagine how much faster you get things done and how much better your code looks when you have small PRs that get reviewed quickly, vs. a 500 line change that takes reviewers ages to get to.
+ 
+Threading together feedback loops like these allows you to explore a larger sample space of solutions.
 
-I like the five-step model because it provides natural schelling points to check for feedback. 
+For example, consider you're in the build phase. You've come up with a solution, and our building out the solution. It may happen that you hit a technical snag. Now, usually, you'd look for technical solutions to a technical problem. However, this can sometimes be counterproductive.
 
-TODO: Hmm, where is this post going? Dump more thoughts, cut and refine later.
 
-Apart from these quick feedback loops, there are slower but still important feedback loops between consecutive steps. For example, new technical constraints may show up while implementing a solution, forcing you to go back to the drawing board. My advice? Don’t get married to the initial idea you came up with. Divorces are hard.
+While working on [Experimentation](/docs/user-guides/experimentation) at PostHog, we decided to allow users to reuse an existing [Feature Flag](/docs/user-guides/feature-flags) to do experiments. This made sense because people would create the feature flag, test the A/B versions look alright, and then use that same Feature Flag in an experiment, without having to do any code changes.
 
-While working on experimentation at PostHog, we decided to allow users to reuse an existing [Feature Flag](/docs/user-guides/feature-flags) to do experiments. This made sense because people would create the feature flag, test the A/B versions look alright, and then use that same Feature Flag in an experiment, without having to do any code changes.
+However, during implementation I found that this made variant distribution very tricky. Making things work like this meant the results would not be 100% accurate., unless I go through several technical hoops to guarantee distribution. This would've taken much longer.
 
-However, during implementation I realised this clashed with one of the principles. Making things work like this meant the results would not be 100% accurate. So,  we came up with the extra constraint of not re-using Feature Flags.
+Instead, we treated this as valuable feedback and went back to the drawing board. "Can we come up with a better flow, given that we can't reuse existing feature flags?". If this led nowhere, I would've revisited the technical solution. But, this turned out to be very much possible, and we formalised the extra constraint of not re-using Feature Flags.
+
+Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem.
+
+I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, and come up with solutions you wouldn't have otherwise thought of.
+
 
