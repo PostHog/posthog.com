@@ -133,6 +133,21 @@ By default, ClickHouse is installed as a part of the chart, powered by [clickhou
 
 To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
+#### Custom settings
+
+It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
+
+To do so, you can override the `clickhouse.profiles` values as below. The `default` profile is used by PostHog for all queries.
+
+```yaml
+clickhouse:
+  profiles:
+    default/max_execution_time: "180"
+    default/max_memory_usage: "40000000000"
+```
+
+Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operations/settings/).
+
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
 
