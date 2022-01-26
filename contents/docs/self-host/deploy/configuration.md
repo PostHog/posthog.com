@@ -157,7 +157,7 @@ To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and
 
 It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
 
-To do so, change `clickhouse.profiles` setting as below. The `default` profile is used by posthog for all queries.
+To do so, you can override the `clickhouse.profiles` values as below. The `default` profile is used by PostHog for all queries.
 
 ```yaml
 clickhouse:
