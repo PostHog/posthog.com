@@ -3,7 +3,7 @@
         "handle": "james-hawkins",
         "name": "James Hawkins",
         "role": "Co-founder/CEO of PostHog",
-        "image": "/images/authors/james-hawkins-posthog.png",
+        "image": "../../static/images/authors/james-hawkins-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/james406"
     },
@@ -11,7 +11,7 @@
         "handle": "mo-shehu",
         "name": "Mo Shehu",
         "role": "Content Lead",
-        "image": "/images/authors/mo-shehu-posthog.png",
+        "image": "../../static/images/authors/mo-shehu-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/shehuphd"
     },
@@ -19,7 +19,7 @@
         "handle": "yakko-majuri",
         "name": "Yakko Majuri",
         "role": "Software Engineer",
-        "image": "/images/authors/yakko-majuri-posthog.png",
+        "image": "../../static/images/authors/yakko-majuri-posthog.png",
         "link_type": "github",
         "link_url": "https://github.com/yakkomajuri"
     },
@@ -27,7 +27,7 @@
         "handle": "joe-martin",
         "name": "Joe Martin",
         "role": "Product Marketer",
-        "image": "/images/authors/joe-martin-posthog.png",
+        "image": "../../static/images/authors/joe-martin-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/joemartinwords"
     },
@@ -35,7 +35,7 @@
         "handle": "michael-matloka",
         "name": "Michael Matloka",
         "role": "Software Engineer",
-        "image": "/images/authors/michael-matloka-posthog.png",
+        "image": "../../static/images/authors/michael-matloka-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/matlokam"
     },
@@ -43,7 +43,7 @@
         "handle": "paolodamico",
         "name": "Paolo D'Amico",
         "role": "Product",
-        "image": "/images/authors/paolo-damico-posthog.png",
+        "image": "../../static/images/authors/paolo-damico-posthog.png",
         "link_type": "github",
         "link_url": "https://github.com/paolodamico"
     },
@@ -51,7 +51,7 @@
         "handle": "marcus-hyett",
         "name": "Marcus Hyett",
         "role": "VP Product",
-        "image": "/images/authors/marcus-hyett-posthog.png",
+        "image": "../../static/images/authors/marcus-hyett-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/marcus-hyett/"
     },
@@ -59,7 +59,7 @@
         "handle": "marius-andra",
         "name": "Marius Andra",
         "role": "Software Engineer",
-        "image": "/images/authors/marius-andra-posthog.png",
+        "image": "../../static/images/authors/marius-andra-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/mariusandra/"
     },
@@ -67,7 +67,7 @@
         "handle": "cory-watilo",
         "name": "Cory Watilo",
         "role": "Lead Designer",
-        "image": "/images/authors/cory-watilo-posthog.png",
+        "image": "../../static/images/authors/cory-watilo-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/corywatilo/"
     },
@@ -75,7 +75,7 @@
         "handle": "leggetter",
         "name": "Phil Leggetter",
         "role": "Head of Developer Relations",
-        "image": "/images/authors/phil-legetter-posthog.png",
+        "image": "../../static/images/authors/phil-legetter-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/leggetter"
     },
@@ -83,7 +83,7 @@
         "handle": "lottie-coxon",
         "name": "Lottie Coxon",
         "role": "Graphic Designer",
-        "image": "/images/authors/lottie-coxon-posthog.png",
+        "image": "../../static/images/authors/lottie-coxon-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlotte-coxon/"
     },
@@ -91,7 +91,7 @@
         "handle": "hanna-crombie",
         "name": "Hanna Crombie",
         "role": "Contributor",
-        "image": "/images/authors/contributor-posthog.png",
+        "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/hannacrombie/"
     },
@@ -99,7 +99,7 @@
         "handle": "karl-aksel-puulmann",
         "name": "Karl-Aksel Puulmann",
         "role": "Software Engineer",
-        "image": "/images/authors/karl-aksel-puulmann-posthog.png",
+        "image": "../../static/images/authors/karl-aksel-puulmann-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/karlakselpuulmann/"
     },
@@ -107,7 +107,7 @@
         "handle": "james-greenhill",
         "name": "James Greenhill",
         "role": "Software Engineer",
-        "image": "/images/authors/james-greenhill-posthog.png",
+        "image": "../../static/images/authors/james-greenhill-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/fuziontech"
     },
@@ -123,7 +123,7 @@
         "handle": "charles-cook",
         "name": "Charles Cook",
         "role": "VP of Operations",
-        "image": "/images/authors/charles-cook-posthog.png",
+        "image": "../../static/images/authors/charles-cook-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlescook1/"
     }

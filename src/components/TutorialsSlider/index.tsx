@@ -17,7 +17,7 @@ const SliderItem = ({ image, date, url, authors, title }) => {
                             return (
                                 <li key={id} className="flex space-x-2 items-center">
                                     <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
-                                        <img className="absolute w-full h-full inset-0 object-cover" src={image} />
+                                        <GatsbyImage image={getImage(image)} />
                                     </div>
                                     <span className="author text-[15px] font-semibold opacity-50">{name}</span>
                                 </li>
@@ -110,7 +110,7 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
 
 export const query = graphql`
     query TutorialsSliderQuery {
-        allMdx(filter: { fields: { slug: { regex: "/^/docs/tutorials/" } } }, limit: 1000) {
+        allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }, limit: 1000) {
             nodes {
                 id
                 fields {
@@ -121,7 +121,11 @@ export const query = graphql`
                     topics
                     authors: authorData {
                         id
-                        image
+                        image {
+                            childImageSharp {
+                                gatsbyImageData
+                            }
+                        }
                         name
                     }
                     featuredImage {

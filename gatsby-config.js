@@ -98,6 +98,13 @@ module.exports = {
                 path: `${__dirname}/src/data/testimonials.json`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `authorImages`,
+                path: `${__dirname}/static/images/authors`,
+            },
+        },
         `gatsby-transformer-gitinfo`,
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',

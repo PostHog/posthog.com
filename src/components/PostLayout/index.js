@@ -3,6 +3,7 @@ import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
@@ -96,7 +97,7 @@ export const Contributor = ({ image, name }) => {
     return (
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
-                <img className="absolute w-full h-full inset-0 object-cover" src={image} />
+                <GatsbyImage image={getImage(image)} />
             </div>
             <span className="author text-[14px] font-semibold">{name}</span>
         </>

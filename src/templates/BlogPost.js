@@ -199,7 +199,11 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image
+                    image {
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
                     name
                 }
             }

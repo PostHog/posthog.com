@@ -99,9 +99,9 @@ const CardView = ({ data }) => {
                                             return (
                                                 <li key={id} className="flex space-x-2 items-center">
                                                     <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
-                                                        <img
-                                                            className="absolute w-full h-full inset-0 object-cover"
-                                                            src={image}
+                                                        <GatsbyImage
+                                                            className="bg-[#E5E7E0] dark:bg-[#2C2C2C]"
+                                                            image={getImage(image)}
                                                         />
                                                     </div>
                                                     <span className="author text-[15px] font-semibold opacity-50">
@@ -168,9 +168,9 @@ const ListView = ({ data }) => {
                                         return (
                                             <li key={id} className="flex space-x-2 items-center">
                                                 <div className="w-[24px] h-[24px] relative rounded-full overflow-hidden">
-                                                    <img
-                                                        className="absolute w-full h-full inset-0 object-cover"
-                                                        src={image}
+                                                    <GatsbyImage
+                                                        className="bg-[#E5E7E0] dark:bg-[#2C2C2C]"
+                                                        image={getImage(image)}
                                                     />
                                                 </div>
                                                 <span className="author text-[15px] font-semibold opacity-50">
@@ -267,7 +267,11 @@ export const TutorialsFragment = graphql`
             Category: topics
             Contributor: authorData {
                 id
-                image
+                image {
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
                 name
             }
             featuredImage {

@@ -188,7 +188,11 @@ export const query = graphql`
                 categories: topics
                 contributors: authorData {
                     id
-                    image
+                    image {
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
                     name
                 }
                 featuredVideo
