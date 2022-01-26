@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/intro-phil.png
 featuredImageType: full
+categories: ["Inside PostHog"]
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VKSPhPbhyRs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

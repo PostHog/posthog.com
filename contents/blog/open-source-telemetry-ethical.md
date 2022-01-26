@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ["Open Source", "Startups"]
 ---
 
 Many open source projects now track their usage in some way, shape, or form.
