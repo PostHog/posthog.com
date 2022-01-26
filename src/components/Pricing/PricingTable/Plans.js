@@ -76,7 +76,7 @@ export const Scale = ({
                     </TrackedCTA>
                     <TrackedCTA
                         type="outline"
-                        to="/signup/self-host/get-in-touch?plan=scale&demo=personal#demo"
+                        to="/signup/self-host/get-in-touch?plan=scale&demo=scale#demo"
                         event={{ name: 'select edition: clicked book demo', type: 'scale' }}
                     >
                         Book a demo
@@ -112,7 +112,7 @@ export const Enterprise = () => {
             </TrackedCTA>
             <TrackedCTA
                 type="outline"
-                to="/signup/self-host/get-in-touch?plan=enterprise&demo=personal#demo"
+                to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
                 event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
             >
                 Book a demo

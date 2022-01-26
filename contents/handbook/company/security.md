@@ -88,6 +88,6 @@ We receive data collected by our customers from end-users and allows them to und
 
 ## HIPAA 
 
-Self-hosting PostHog makes it very easy for customers processing Protected Health Information (PHI) to stay HIPAA-compliant, and we have put together [a guide here](/blog/hipaa-compliant-analytics) to help customers get set up. 
+Self-hosting PostHog makes it very easy for customers processing Protected Health Information (PHI) to stay HIPAA-compliant. Our [guide to HIPAA-compliant analytics](/blog/hipaa-compliant-analytics) explains how they can get set up.
 
 We only support the use of a self-hosted version of PostHog for companies with HIPAA obligations. As such, we do not recommend the use of PostHog Cloud in this particular case, nor do we enter into Business Associate Agreements (BAA) to do so. 

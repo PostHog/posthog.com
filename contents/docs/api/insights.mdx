@@ -8,24 +8,29 @@ showTitle: true
 
 The `/api/insight/` endpoints allow you to run queries on your data in PostHog.
 
+<blockquote class="warning-note">
+    <b>Want to contribute?</b> This page currently only documents the Trend endpoint. Documentation for Funnels, Paths,
+    Correlation Analysis, Lifecycle and Stickiness is missing. Edit this page in GitHub with a PR to contribute.
+</blockquote>
+
 ## Endpoints
 
 ### Trend
 
-<Endpoint endpoint='/api/insight/trend' allowedMethods={['get']} />
+<Endpoint endpoint="/api/insight/trend" allowedMethods={['get']} />
 
 Get a list of trends from PostHog.
 
 <HiddenSection headingType='h4' title='Query parameters'>
 
-| Parameter | Type / Valid Values | Description | Required |
-| --- | --- | --- | --- |
-| `events` | Array of Events | Basic usage is `[{"id": "$pageview"}]`.<br /><br />For each event, you can specify:<br />- `id` Name of the event<br />- `properties` A Properties object (see below)<br />- `order` (int) order of the event. This is mostly used for funnels | ✅ |
-| `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `interval` | `string` | Interval of the data. `minute`, `hour`, `day`, `week`, `month` | ❌ |
-| `breakdown_value` | `string` | Split out all entities by any property value or cohort id. | ❌ |
-| `breakdown_type` | `string` | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value` | ❌ |
-| `display` | `string` | Default: `ActionsLineGraph`. Determines how the data is aggregated at the end.<br /><br />- `ActionsLineGraph` default, one result per day<br />- `ActionsBarValue` all values over the time range aggregated to one result. Useful if you're breaking things down.  <br /><br />
+| Parameter         | Type / Valid Values | Description                                                                                                                                                                                                                                                                                                                                                                                                                   | Required |
+| ----------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `events`          | Array of Events     | Basic usage is `[{"id": "$pageview"}]`.<br /><br />For each event, you can specify:<br />- `id` Name of the event<br />- `properties` A Properties object (see below)<br />- `order` (int) order of the event. This is mostly used for funnels                                                                                                                                                                                | ✅       |
+| `properties`      | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌       |
+| `interval`        | `string`            | Interval of the data. `minute`, `hour`, `day`, `week`, `month`                                                                                                                                                                                                                                                                                                                                                                | ❌       |
+| `breakdown_value` | `string`            | Split out all entities by any property value or cohort id.                                                                                                                                                                                                                                                                                                                                                                    | ❌       |
+| `breakdown_type`  | `string`            | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value`                                                                                                                                                                                                                                                                                                              | ❌       |
+| `display`         | `string`            | Default: `ActionsLineGraph`. Determines how the data is aggregated at the end.<br /><br />- `ActionsLineGraph` default, one result per day<br />- `ActionsBarValue` all values over the time range aggregated to one result. Useful if you're breaking things down. <br /><br />                                                                                                                                              |
 
 </HiddenSection>
 
@@ -75,163 +80,6 @@ Content-Type: application/json
         }
     ],
     "next": null
-}
-```
-
-</HiddenSection>
-
-### Session
-
-<Endpoint endpoint='/api/insight/session' allowedMethods={['get']} />
-
-Get a list of sessions from PostHog.
-
-<HiddenSection headingType='h4' title='Query parameters'>
-
-| Parameter | Type / Valid Values | Description | Required |
-| --- | --- | --- | --- |
-| `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `session` | `string` |Specifies the type of operation to perform on session duration values. For example, `avg`, or `dist`. | ❌ |
-
-</HiddenSection>
-
-<HiddenSection headingType='h4' title='Example'>
-
-##### Request
-
-```
-GET /api/insight/session?session=avg
-```
-
-##### Response
-
-```json
-HTTP 200 OK
-Content-Type: application/json
-
-{
-    "result": [
-        {
-            "data": [
-                0.0,
-                0.0,
-                0.0,
-                10.12,
-                8.5,
-                33.9,
-                9.65,
-                0.1
-            ],
-            "labels": [
-                "Mon. 26 April",
-                "Tue. 27 April",
-                "Wed. 28 April",
-                "Thu. 29 April",
-                "Fri. 30 April",
-                "Sat. 1 May",
-                "Sun. 2 May",
-                "Mon. 3 May"
-            ],
-            "days": [
-                "2021-04-26",
-                "2021-04-27",
-                "2021-04-28",
-                "2021-04-29",
-                "2021-04-30",
-                "2021-05-01",
-                "2021-05-02",
-                "2021-05-03"
-            ],
-            "label": "Average Session Length (minutes)",
-            "count": 12,
-            "chartLabel": "Average Session Length (minutes)"
-        }
-    ],
-    "last_refresh": "2021-05-03T05:10:18.712759Z",
-    "is_cached": true
-}
-```
-
-</HiddenSection>
-
-### Path
-
-<Endpoint endpoint='/api/insight/path' allowedMethods={['get']} />
-
-Get a list of paths from PostHog.
-
-<HiddenSection headingType='h4' title='Query parameters'>
-
-
-| Parameter | Type / Valid Values | Description | Required |
-| --- | --- | --- | --- |
-| `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `request_type` | `string` | | ❌ |
-| `start` | `string` |  | ❌ |
-
-
-
-</HiddenSection>
-
-<HiddenSection headingType='h4' title='Example'>
-
-##### Request
-
-```
-GET /api/insight/path/?properties=[{"key":"$browser","value":"Chrome"}]&start=http://localhost:1313/
-```
-
-##### Response
-
-```json
-HTTP 200 OK
-Content-Type: application/json
-
-{
-    "result": [
-        {
-            "source": "1_http://localhost:1313/",
-            "source_id": "017926d6-3fb8-0000-ac2d-a1261e215135",
-            "target": "2_http://localhost:1313/portfolio/",
-            "target_id": "017926d6-bd2f-0000-2fc5-23537f3a66a8",
-            "value": 1
-        },
-        {
-            "source": "1_http://localhost:1313/blog/",
-            "source_id": "0179221e-5d3c-0000-561f-850d00218ea1",
-            "target": "2_http://localhost:1313/about/",
-            "target_id": "0179221e-7142-0000-287a-8a8c4058d671",
-            "value": 1
-        },
-        {
-            "source": "2_http://localhost:1313/about/",
-            "source_id": "0179221e-7142-0000-287a-8a8c4058d671",
-            "target": "3_http://localhost:1313/blog/",
-            "target_id": "0179221e-75e4-0000-256e-48bcc5660654",
-            "value": 1
-        },
-        {
-            "source": "2_http://localhost:1313/portfolio/",
-            "source_id": "017926d6-bd2f-0000-2fc5-23537f3a66a8",
-            "target": "3_http://localhost:1313/portfolio/",
-            "target_id": "017926de-04ea-0000-42cf-c964644e646a",
-            "value": 1
-        },
-        {
-            "source": "3_http://localhost:1313/blog/",
-            "source_id": "0179221e-75e4-0000-256e-48bcc5660654",
-            "target": "4_http://localhost:1313/portfolio/",
-            "target_id": "0179221e-865e-0000-3851-10a4a7f5ec7c",
-            "value": 1
-        },
-        {
-            "source": "3_http://localhost:1313/portfolio/",
-            "source_id": "017926de-04ea-0000-42cf-c964644e646a",
-            "target": "4_http://localhost:1313/portfolio/posthog/",
-            "target_id": "017926de-2d06-0000-ba31-070c446839a5",
-            "value": 1
-        }
-    ]
 }
 ```
 

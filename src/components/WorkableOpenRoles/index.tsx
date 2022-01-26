@@ -28,14 +28,11 @@ export default function WorkableOpenRoles({ department = '' }: { department?: st
                 return (
                     <li key={title}>
                         <h3>{title}</h3>
-                        <ul className="list-none p-0 m-0 mt-4 mb-6">
+                        <ul className="list-none p-0 m-0 mt-4 mb-6 border border-dashed border-gray-accent-light border-b-0">
                             {openRoles.map((role) => {
                                 const { title, url } = role
                                 return (
-                                    <li
-                                        className="border border-dashed border-gray-accent-light even:border-t-0 group"
-                                        key={title}
-                                    >
+                                    <li className="border-b border-dashed border-gray-accent-light" key={title}>
                                         <a
                                             className="px-4 py-3 text-base text-primary hover:text-primary font-bold flex justify-between"
                                             href={url}
