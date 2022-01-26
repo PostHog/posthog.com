@@ -4,9 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
+> Note: Async Migrations are in Beta, if you're interested in trying this out reach out to us on [PostHog Users's Slack](https://posthog.com/slack) first.
+
 ## What are async migrations?
 
-Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. Related internal docs can be found [here](/docs/handbook/engineering/async-migrations).
+Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. Related internal docs can be found [here](/handbook/engineering/async-migrations).
 
 ## Why are async migrations necessary?
 
@@ -36,7 +38,7 @@ SET is_staff=true
 WHERE email=<your_email_here>
 ```
 
-To confirm that everything worked as expected, visit `/admin/` (trailing slash required) in your instance. If you're able to access the admin panel, you're good to go!
+To confirm that everything worked as expected, visit `/instance/async_migrations` in your instance. If you're able to see the migrations info, you're good to go!
 
 ### Async migrations page
 
@@ -48,32 +50,15 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 | Column | Description |
 | : -----: | :--------: |
-| Name     | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) |
-| Description | An overview of what this migration does |
+| Name and Description | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) followed by an overview of what this migration does |
 | Status | The current [status](https://github.com/PostHog/posthog/blob/master/posthog/models/async_migration.py#L5) of this migration. One of: 'Not started','Running','Completed successfully','Errored','Rolled back','Starting'. |
-| Error | The last error encountered by this migration |
 | Progress | How far along this migration is (0-100) |
 | Current operation index | The index of the operation currently being executed. Useful for cross-referencing with the migration file |
 | Current query ID | The ID of the last query ran (or currently running). Useful for checking and/or killing queries in the database if necessary. |
-| Celery task ID | The ID of the Celery task running the migration. Used to force stop a migration task if necessary. |
 | Started at | When the migration started. |
 | Finished at | When the migration ended. |
 
-### Automatically running migrations
-
-From PostHog 1.32.0 onwards, we will set `AUTO_START_ASYNC_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
-
-The current default is to trigger a task to run 30 minutes after the deploy and if there are multiple migrations to run, we will automatically run the next migration in line once the previous one completes.
-
-However, on PostHog 1.31.0, `AUTO_START_ASYNC_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
-
-If you would like to customize the behaviour you can set `AUTO_START_ASYNC_MIGRATIONS` in your `values.yaml` file like this (note the two values we have in the chart default `values.yaml` should be kept):
-```
-web:
-  env:
-    - name: AUTO_START_ASYNC_MIGRATIONS
-      value: "false"
-```
+The settings tab allows you to change the configuration, e.g. whether async migrations should run automatically.
 
 ### Celery scaling considerations
 
