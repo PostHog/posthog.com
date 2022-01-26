@@ -154,7 +154,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     <BlogPostSidebar
                         categories={categories}
                         contributors={contributors}
-                        date={lastUpdated || date}
+                        date={date}
                         filePath={filePath}
                         title={title}
                         location={location}
