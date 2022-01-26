@@ -215,6 +215,9 @@ By default, Redis doesn't use any password for authentication. If you want to co
       1. configure your `values.yaml` to reference the secret:
 
         ```yaml
+        redis:
+          enable: false
+
         externalRedis:
           host: "<YOUR_REDIS_HOST>"
           port: <YOUR_REDIS_PORT>
