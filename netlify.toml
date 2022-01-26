@@ -1137,3 +1137,9 @@
 [[redirects]]
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
+
+
+# Added: 2022-01-26
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/overview"
+    to = "/docs/self-host/configure/async-migrations"
