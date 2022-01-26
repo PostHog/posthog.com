@@ -41,7 +41,7 @@ email:
 The default configuration is geared towards minimizing costs. Here are example extra values overrides to use for scaling up:
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
+    <b> Override values for {`<`} 1M events/month</b>
   </summary>
 
 ```yaml
@@ -76,7 +76,7 @@ plugins:
 
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for > 1M events/month</b>
+    <b> Override values for > 1M events/month</b>
   </summary>
 
 ```yaml
@@ -179,12 +179,14 @@ To use an external Redis service, please set `redis.enabled` to `false` and then
     <b>Example</b>
   </summary>
 
-    redis:
-      enabled: false
+```yaml
+redis:
+  enabled: false
 
-    externalRedis:
-      host: "posthog.cache.us-east-1.amazonaws.com"
-      port: 6379
+externalRedis:
+  host: "posthog.cache.us-east-1.amazonaws.com"
+  port: 6379
+```
 
 </details>
 
@@ -205,7 +207,8 @@ By default, Redis doesn't use any password for authentication. If you want to co
     1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
     2. configure your `values.yaml` to reference the secret:
-      ```
+
+      ```yaml
       redis:
         enabled: true
         auth:
@@ -230,7 +233,8 @@ By default, Redis doesn't use any password for authentication. If you want to co
       1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
       1. configure your `values.yaml` to reference the secret:
-        ```
+
+        ```yaml
         externalRedis:
           host: "<YOUR_REDIS_HOST>"
           port: <YOUR_REDIS_PORT>
@@ -255,11 +259,13 @@ To use an external Kafka service, please set `kafka.enabled` to `false` and then
     <b>Example</b>
   </summary>
 
-    kafka:
-      enabled: false
+```yaml
+kafka:
+  enabled: false
 
-    externalKafka:
-      brokers: "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094,broker-2.posthog.kafka.us-east-1.amazonaws.com:9094,broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+externalKafka:
+  brokers: "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094,broker-2.posthog.kafka.us-east-1.amazonaws.com:9094,broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+```
 
 </details>
 
