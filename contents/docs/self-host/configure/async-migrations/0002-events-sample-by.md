@@ -53,5 +53,5 @@ kubectl describe pod chi-posthog-posthog-0-0-0 -n posthog
 
 If the output of the above showed the pod was once terminated with the reason `OOMKilled`, then you will have confirmed the diagnosis.
 
-To scale ClickHouse vertically (add more memory), follow [this scaling guide](/docs/self-host/deploy/configuration#scaling-clickhouse-vertically).
+To scale ClickHouse vertically (add more memory), follow [this scaling guide](/docs/self-host/runbook/clickhouse/vertical_scaling).
 
