@@ -73,17 +73,13 @@ One important gotcha to keep in mind is that feature flag values are loaded asyn
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
 
-There's two easy ways to test your changes:
-
-**1. Use the PostHog Toolbar** - Once you've pushed your experiment code, you can open the PostHog toolbar, click on the feature flags option, and override the feature flag to whichever variant you want, and see that the changes reflect on your screen.
-
-**Note:** This doesn't work if you're using NextJs
-
-**2. Use the web developer console** - The experiment draft screen also has a snippet for testing your code. Once you've pushed your experiment code, open the console on your browser, and paste the snippet in. This will override the feature flag for you, and you should be able to see the changes you've made on screen.
+To test your experiment, **use the web developer console**. The experiment draft screen has a snippet for testing your code. Once you've pushed your experiment code, open the console on your browser, and paste the snippet in. This will override the feature flag for you, and you should be able to see the changes you've made on screen.
 
 Once you're satisfied, you're ready to launch your experiment.
 
 **Note:** The feature flag is activated only when you launch the experiment.
+
+**Note:** While the toolbar allows you to toggle feature flags on and off, this only works for active feature flags. Thus, it's not always possible to use the toolbar to test experiment feature flag changes.
 
 While the experiment is running, you can see results on the page. Sometimes, in the beginning of an experiment, results can be skewed to one side. For example, if you launched at midnight then people on the other side of the world are active first, and the first few hours of data you collect is all from them. This can artificially skew results to one variant. While possible, it's important that you don't end your experiments at this stage: the results are probably insignificant. This is known as the peeking problem.
 
