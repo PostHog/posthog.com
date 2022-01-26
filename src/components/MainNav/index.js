@@ -42,6 +42,7 @@ export default function MainNav() {
                                     icon
                                     title
                                     url
+                                    badge
                                 }
                             }
                             footerLinks {

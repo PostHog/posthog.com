@@ -37,7 +37,7 @@ Phantom’s team uses PostHog on a daily basis to track metrics such as daily ac
 
 “At one point during the beta failure rates started to get pretty high,” said Francesco. “At that stage we were using public RPC endpoints, which basically act as our backend. Tracking failure rates in PostHog helped trigger the decision to pay for better RPC providers, which resulted in a better user experience.” 
 
-Phantom’s failure rate fell by 90% as a result of this switch and the team now uses PostHog’s [feature flags](../docs/user-guides/feature-flags) to keep failure rates at 1% or below.
+Phantom’s failure rate fell by 90% as a result of this switch and the team now uses PostHog’s [feature flags](/product/feature-flags) to keep failure rates at 1% or below.
 
 “Feature flags are crucial for us,” says Francesco. “We use them as kill switches for all our features, because a Chrome extension is similar to a mobile app in the sense that we can’t deploy a new version on demand. Feature flags give us a level of remote control to protect the user experience.”
 

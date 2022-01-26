@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
 import { useLocation } from '@reach/router'
+import Layout from 'components/Layout'
+import { SEO } from 'components/seo'
+import { graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import { animateScroll as scroll } from 'react-scroll'
-import { SEO } from 'components/seo'
-import Main from './Main'
-import ArticleFooter from './Footer'
-import MainSidebar from './MainSidebar'
-import Layout from 'components/Layout'
-import Navigation from './Navigation'
 import '../../styles/handbook.scss'
+import ArticleFooter from './Footer'
+import Main from './Main'
+import MainSidebar from './MainSidebar'
+import Navigation from './Navigation'
 
 export default function Handbook({
-    data: { post },
+    data: { post, questions },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
     const { hash } = useLocation()
@@ -95,6 +95,7 @@ export default function Handbook({
                                     next,
                                     previous,
                                     hideLastUpdated,
+                                    questions: questions?.nodes,
                                 }}
                             />
                         </div>
@@ -107,7 +108,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!) {
+    query HandbookQuery($id: String!, $slug: String!) {
         post: mdx(id: { eq: $id }) {
             id
             body
@@ -138,6 +139,25 @@ export const query = graphql`
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM D, YYYY")
+                    }
+                }
+            }
+        }
+        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
+            nodes {
+                avatar
+                body
+                name
+                slug
+                replies {
+                    avatar
+                    body
+                    name
+                    authorData {
+                        name
+                        role
+                        image
+                        link_url
                     }
                 }
             }
