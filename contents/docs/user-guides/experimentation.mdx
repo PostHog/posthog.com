@@ -6,7 +6,7 @@ showTitle: true
 
 <FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
-Experiments helps you test changes to your product. You can test hypotheses about which changes will lead to optimal results. You may have also heard it called A/B testing, or split testing. Examples:
+Experimentation helps you test changes to your product. You can test hypotheses about which changes will lead to optimal results. You may have also heard it called A/B testing, or split testing. Examples:
 
 - You want to test which copy or visual design has the highest conversion.
 - You want to test which flow leads to the highest number of purchases.
@@ -22,15 +22,15 @@ With Experimentation, you start with a hypothesis on how to improve your product
 
 1. Create an Experiment which will have a control group and some test variants (at least one, at most three).
 
-2. Select which users will participate in the Experiment (e.g. paid users, users in a given country, or all users).
+2. Select which users will participate in the Experiment (e.g. paid users, users in a given country, a cohort, or all users).
 
-Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your Experiment to reach significant results.
+Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your experiment to reach significant results.
 
 We distribute all selected users equally between the control and test groups. So, for example, if there are 3 test variants and 1 control variant, each variant gets 25% of the total users selected.
 
 You can tweak settings on the creation screen to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
 
-The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). You ask PostHog which group does this user belong to and then you show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
+The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). Your code asks PostHog which group does this user belong to and then accordingly show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
 
 Once your experiment is running, we'll automatically let you know which variant leads to the best results. While the experiment is running, we'll also tell you the probability that any given variant is the winning variant.
 
@@ -38,13 +38,13 @@ To ensure your experiment does not introduce any regressions, you can also track
 
 Once your experiment is terminated, you can easily archive and share your results with other team members.
 
-### Results significance
+### How do we handle statistical significance?
 
 For your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that is a simple randomized controlled experiment (e.g. this is also done when testing new drugs or vaccines).
 
 Furthermore, even if there's a lot of exposure, if, say, all variants are exposed to 10,000 participants, if the difference in conversion rate between the variants is less than 1%, it's hard to say whether one variant is truly better than the other. To be significant, there must be enough difference between the conversion rates, given the exposure size.
 
-PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below
+PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below.
 
 ### Experimentation vs. Feature Flags
 
@@ -56,11 +56,10 @@ Experimentation uses Feature Flags under the hood to handle user allocation to a
 
 ### Creating an experiment
 
-Guide on how to create an experiment [here](https://docs.google.com/document/d/1DJmSY6ILZFmHhmRLTQ0L2oXGgFZCvGM4DF-zh92DIE8/edit?usp=sharing).
+Find out how to create an experiment [here](https://docs.google.com/document/d/1DJmSY6ILZFmHhmRLTQ0L2oXGgFZCvGM4DF-zh92DIE8/edit?usp=sharing).
 
 ### Running an experiment
 
-TODO: Guide on how to run an experiment here.
 
 Before you can launch an experiment, you need to implement the code for each feature flag variant. On the draft experiment screen, you'll see a snippet telling you how to query for the variant. It looks something like:
 
@@ -74,8 +73,6 @@ One important gotcha to keep in mind is that feature flag values are loaded asyn
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
 
-
-
 There's two easy ways to test your changes:
 
 1. Use the PostHog Toolbar
@@ -88,26 +85,26 @@ The experiment draft screen also has a snippet for testing your code. Once you'v
 
 Once you're satisfied, you're ready to launch your experiment.
 
-**Note:** The Feature Flag is activated only when you launch the experiment.
+**Note:** The feature flag is activated only when you launch the experiment.
 
-While the experiment is running, you can see results on the page. Sometimes, in the beginning of an experiment, results can be skewed to one side. For example, you launched at midnight, so people on the other side of the world are active first, and the first few hours of data you collect is all from them. This can artificially skew results to one variant. While possible, it's important that you don't end your experiments at this stage: the results are probably insignificant. This is known as the peeking problem.
+While the experiment is running, you can see results on the page. Sometimes, in the beginning of an experiment, results can be skewed to one side. For example, if you launched at midnight then people on the other side of the world are active first, and the first few hours of data you collect is all from them. This can artificially skew results to one variant. While possible, it's important that you don't end your experiments at this stage: the results are probably insignificant. This is known as the peeking problem.
 
-While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. Thus, we tell you when it's safe to end an experiment. When it's not safe, there's a red banner on top telling you it's not safe to end this experiment.
+While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. For this reason, we display a banner that informs you whether it's safe to end an experiment or not.
 
 Note that this recommendation doesn't cover all edge cases. It is still possible, when new data comes in, that results flip completely. This is true for any experiments and any significance test in existence today. But, the probability of this happening is very low, which is why most people are comfortable taking this risk. For a 0 risk experiment, you'd have to run it for an infinite amount of time: every new person is new data to be accomodated.
 
 ### Terminating an experiment
 
-You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to terminate an experiment or not (regardless of the original estimated running time). If you terminate the experiment before you see this banner, results will not be significant (see Advanced for more details on this) and any conclusions could be completely wrong.
+You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to do so, regardless of the original estimated running time. Terminating before significance implies conclusions could be completely wrong. (see [Advanced section below](#advanced-whats-under-the-hood) to understand how we compute significance)
 
 Once you have decided to terminate an experiment there are a few things to do:
 
 -   [ ] Click on "Terminate the experiment" on the experiment page. This will ensure final results are kept.
--   [ ] We recommend you roll-out the winning variant to all your users. TODO: Explain here how to do this with PostHog.
+-   [ ] We recommend you roll-out the winning variant to all your users.
 -   [ ] Share results with relevant members of your team.
 -   [ ] After the winning variant is rolled-out, it's good practice to remove the other variants from your code, and make the winning variant part of your core code (i.e. stop checking for the respective feature flag).
 -   [ ] Document conclusions and findings in your PostHog experiment. This will help preserve context for team members who in the future need to understand what happened.
--   [ ] Archive the experiment. This will terminate the feature flag and ensure your code no longer depends on the flag.
+-   [ ] Archive the experiment. This will disable the feature flag and ensure your code no longer depends on the flag.
 
 ## Advanced: What's under the hood?
 
@@ -164,11 +161,8 @@ Then, for each variant, we can sample from their distributions and get a count v
 
 The probability of a variant being the best is given by:
 
-TODO: Latex, or take an image?
+![Probability](../../images/docs/user-guides/experimentation/count_data_probability.png)
 
-```
-probability = (1/N)summation(i=1 to N) (count_target > count_control) & (count_target > count_other_variants)
-```
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
@@ -182,18 +176,12 @@ Then, for each variant, we can sample from their distributions and get a convers
 
 The probability of a variant being the best is given by:
 
-TODO: Latex, or take an image?
-
-```
-probability = (1/N)summation(i=1 to N) (conversion_rate_target > conversion_rate_control) & (conversion_rate_target > conversion_rate_other_variants)
-```
+![Probability](../../images/docs/user-guides/experimentation/conversion_probability.png)
 
 To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf).
 
 To do this, we again run a monte carlo simulation, and calculate loss as:
 
-```
-loss = (1/N)summation(i=1 to N) max(0, max(conversion_rate_other_variants - conversion_rate_target))
-```
+![Loss](../../images/docs/user-guides/experimentation/loss-calculation.png)
 
 This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
