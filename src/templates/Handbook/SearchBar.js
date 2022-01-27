@@ -50,11 +50,11 @@ export default function SearchBar({ base }) {
             <DocSearch
                 translations={{
                     button: {
-                        buttonText: `Search ${breakpoints.xs ? '' : base} `,
+                        buttonText: `Search ${breakpoints.xs ? '' : base || 'almost anything'} `,
                         buttonAriaLabel: 'Search',
                     },
                 }}
-                searchParameters={{ facetFilters: [`tags:${base}`] }}
+                searchParameters={base && { facetFilters: [`tags:${base}`] }}
                 appId="B763I3AO0D"
                 indexName="posthog"
                 apiKey="f1386529b9fafc5c3467e0380f19de4b"

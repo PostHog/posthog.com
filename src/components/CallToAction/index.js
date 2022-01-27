@@ -49,6 +49,7 @@ const buttonTypes = {
     primary,
     secondary,
     outline,
+    custom: '',
 }
 
 const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
