@@ -2,59 +2,11 @@ import AnimatedBurger from 'components/AnimatedBurger'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { motion } from 'framer-motion'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React, { useState } from 'react'
 import MenuItem from './MenuItem'
 
 export default function MainNav() {
-    const data = useStaticQuery(graphql`
-        query MainNavQuery {
-            navsJson {
-                main {
-                    title
-                    url
-                    cta
-                    classes
-                    hideBorder
-                    sub {
-                        title
-                        description
-                        component
-                        items {
-                            title
-                            description
-                            component {
-                                position
-                                name
-                            }
-                            link {
-                                title
-                                url
-                            }
-                            sections {
-                                link {
-                                    title
-                                    url
-                                }
-                                title
-                                items {
-                                    icon
-                                    title
-                                    url
-                                    badge
-                                }
-                            }
-                            footerLinks {
-                                title
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
     const [expanded, expandMenu] = useState(false)
     const menu = data?.navsJson?.main
     const breakpoints = useBreakpoint()
