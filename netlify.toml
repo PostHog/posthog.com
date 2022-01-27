@@ -1152,3 +1152,9 @@
     
 [build]
     command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+
+
+# Added: 2022-01-27
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/overview"
+    to = "/docs/self-host/configure/async-migrations"
