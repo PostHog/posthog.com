@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product Updates"]
 featuredImage: ../images/blog/array/1-27-0.png
 excerpt: PostHog 1.27.0 is here! Completely redesigned funnels experience will help you dive deeper to understand why your users aren't converting. Plus 400+ improvements & fixes.
 ---
