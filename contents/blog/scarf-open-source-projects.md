@@ -4,6 +4,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+keywords: 
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 author: ["avi-press"]
