@@ -135,5 +135,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/eli-kinsey/",
         "slack_username": "eli"
+    },
+    {
+        "handle": "avi-press",
+        "name": "Avi Press",
+        "role": "Founder & CEO at Scarf",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/avi-press-4437a356/"
     }
 ]
