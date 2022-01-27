@@ -16,7 +16,7 @@ The famous line from Marc Andreesen that *“software is eating the world”* ha
 
 But there is another phenomenon riding on those coattails that doesn’t receive the attention it deserves. If you look closely, you’ll see that open-source software specifically is eating more and more of the overall software space – and is set to transform how large companies think about technology.
 
-> Avi Press is Founder and CEO at [Scarf](https://about.scarf.sh/scarf-gateway) - a platform dedicated to helping open-source maintainers connect with their users and deliver better software. 
+> This is a guest post by Avi Press, founder and CEO at [Scarf](https://about.scarf.sh/scarf-gateway) - a platform dedicated to helping open-source maintainers connect with their users and deliver better software. 
 
 ### Where do we see open-source software playing a role?
 
@@ -36,11 +36,11 @@ These examples represent just a portion of the ways that open-source software co
 
 Convincing enterprise clients to consider open-source solutions is often not an easy proposition, and so it might seem counterintuitive to see so much movement in this direction. Some of the reasons that we can attribute to this include:
 
-- Cost - Companies are always looking to reduce costs, and if open-source solutions can provide the requisite value, then it makes for a compelling option when compared to high-priced proprietary software. Commercial open-source support has also improved significantly, often rivaling what one might expect from proprietary software providers.
+- **Cost** - Companies are always looking to reduce costs, and if open-source solutions can provide the requisite value, then it makes for a compelling option when compared to high-priced proprietary software. Commercial open-source support has also improved significantly, often rivaling what one might expect from proprietary software providers.
 
-- Community - Perhaps the most significant factor when it comes to open-source software is the community that gets built around these tools. A diverse set of individuals and companies leveraging, modifying, and redistributing a piece of software allows for vibrant knowledge sharing and innovation.
+- **Community** - Perhaps the most significant factor when it comes to open-source software is the community that gets built around these tools. A diverse set of individuals and companies leveraging, modifying, and redistributing a piece of software allows for vibrant knowledge sharing and innovation.
 
-- Security - Having more eyes on any given piece of code means that vulnerabilities are spotted and resolved faster. This is the precise rationale behind the common warning in software engineering to “never roll your own cryptography”. Building secure software is hard; to solve the very hardest problems, open collaboration has proven most effective. In this vein, open-source also allows enterprises to take more control over their own security by enabling easy auditing and submitting fixes that can be shared with the community.
+- **Security** - Having more eyes on any given piece of code means that vulnerabilities are spotted and resolved faster. This is the precise rationale behind the common warning in software engineering to “never roll your own cryptography”. Building secure software is hard; to solve the very hardest problems, open collaboration has proven most effective. In this vein, open-source also allows enterprises to take more control over their own security by enabling easy auditing and submitting fixes that can be shared with the community.
 
 This is not to say that open-source software doesn’t come with its own challenges for large businesses. When you are relying on the good nature of maintainers, [incentives between stakeholders can be misaligned](https://about.scarf.sh/post/package-registries-and-open-source) and things can go wrong. 
 
