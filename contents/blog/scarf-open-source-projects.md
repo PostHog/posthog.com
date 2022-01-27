@@ -1,20 +1,20 @@
-date: 2022-01-28
+date: 2022-01-27
 title: Why open-source projects are essential for large businesses
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 keywords: 
-featuredImage: ../images/blog/series-b/series-b-baby.png
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-author: ["joe-martin"]
+author: ["avi-press"]
 categories: ["Open Source", "Startups"]
 
 The famous line from Marc Andreesen that *“software is eating the world”* has become part and parcel of modern technology’s canon and it continues to act as a rallying cry for the industry as a whole. 
 
 But there is another phenomenon riding on those coattails that doesn’t receive the attention it deserves. If you look closely, you’ll see that open-source software specifically is eating more and more of the overall software space – and is set to transform how large companies think about technology.
 
-> This is a guest post from [Scarf](https://about.scarf.sh/scarf-gateway) - a platform dedicated to helping open-source maintainers connect with their users and deliver better software. 
+> Avi Press is Founder and CEO at [Scarf](https://about.scarf.sh/scarf-gateway) - a platform dedicated to helping open-source maintainers connect with their users and deliver better software. 
 
 ### Where do we see open-source software playing a role?
 

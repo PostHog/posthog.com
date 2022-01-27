@@ -8,6 +8,7 @@ hideAnchor: true
 author: ['hanna-crombie']
 featuredImage: ../images/blog/blog-generic-1.png
 featuredImageType: standard
+categories: ["Guides", "Product Analytics"]
 ---
 
 Product engagement is the most important factor when it comes to driving retention and revenue for your business. Though it seems easy to view success through a financial lens, revenue alone is rarely a clear indicator of a sustainable product. 
