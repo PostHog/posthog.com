@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product Updates"]
 featuredImage: ../images/blog/array/1-26-0.png
 excerpt: PostHog 1.26.0 is here! Read about our Series B raise, our new features, and find out who are the 4 new team members we've onboarded.
 ---
