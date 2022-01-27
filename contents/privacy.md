@@ -70,7 +70,7 @@ You may withdraw your consent at any time through the unsubscribe feature provid
 
 ### Sharing your information
 
-PostHog will share your personal information with the third-parties listed below for the purposes that are described in this Privacy Policy or otherwise with your consent. 
+PostHog may share your personal information with the third-parties listed below for the purposes that are described in this Privacy Policy or otherwise with your consent. 
 
 PostHog only shares your personal information with those of its employees, contractors, and affiliated organizations that (i) need to know that personal information in order to process it on PostHog's behalf or to provide services available on the Website, and (ii) that have agreed not to disclose it to others
 
