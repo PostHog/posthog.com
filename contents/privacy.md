@@ -230,7 +230,7 @@ Please see the section on Global Privacy Practices and Your Rights above.
 
 ## Contacting PostHog about your privacy
 
-The relevant data controller for any personal information processed in connection with our Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the PostHog entity which will be your employer. 
+The relevant data controller for any personal information processed in connection with our Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the country-specific PostHog entity which will be your employer. 
 
 If you have any questions about this Privacy Policy or our privacy and security practices or you wish to make a complaint about our compliance with applicable privacy laws, please feel free to contact us at privacy@posthog.com.  
 
