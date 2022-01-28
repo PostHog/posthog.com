@@ -25,6 +25,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
 import { ContactForm } from './components/ContactForm'
@@ -37,7 +38,7 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
-import { DocsSearch } from './components/DocsSearch'
+import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -67,6 +68,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
+import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
@@ -97,6 +99,7 @@ import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableOpenRoles } from './components/WorkableOpenRoles'
@@ -129,6 +132,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityQuestions,
     CompensationCalculator,
     Contact,
     ContactForm,
@@ -141,7 +145,7 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
-    DocsSearch,
+    FeatureAvailability,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -171,6 +175,7 @@ export const shortcodes = {
     PageHeader,
     PlanComparisonTable,
     PostCard,
+    PostLayout,
     CloudVsSelfHost,
     FAQs,
     PlanComparison,
@@ -201,6 +206,7 @@ export const shortcodes = {
     TableOfContents,
     TeamQuote,
     Tooltip,
+    Tutorials,
     TutorialsSlider,
     VisitLibrary,
     WorkableOpenRoles,

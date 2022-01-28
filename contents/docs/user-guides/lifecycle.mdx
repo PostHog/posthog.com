@@ -1,0 +1,70 @@
+---
+title: Lifecycle
+sidebar: Docs
+showTitle: true
+---
+
+<FeatureAvailability allPlans />
+
+The lifecycle tool is designed to enable you to understand how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.
+
+One of the most powerful insights you can get from this graph is understanding what's below the surface of your user growth. For instance you could be having stellar growth due to marketing efforts but bleeding users, unable to retain them. As you can imagine, this could lead to huge trouble down the line.
+
+In addition, this gives you a place to start investigating issues like increased churn or a slowing acquisition of new users.
+
+## Accessing lifecycle
+
+1. Click 'Insights' on the left sidebar
+2. Click the 'Lifecycle' tab
+
+### Configuring your lifecycle
+
+Lifecycle breaks down whether a user has been active in your selected time interval or not and by whether they were also active in the previous internal.
+
+To start with, you'll need to select an event that best describes activity for your product, this might be something as simple as logging into your app or loading the page. For example: in a messaging product, you might consider someone active if they've sent a message within the interval.
+
+You can see here that I have selected the Message Sent event to define my user activity metric:
+![image](https://user-images.githubusercontent.com/85295485/139204932-dfd438d7-cb86-407c-8a0e-efb6a906f3d3.png)
+
+As with other tools in PostHog, you can add filters if you wish to focus on a subset of these events.
+
+![image](https://user-images.githubusercontent.com/85295485/139205269-21790a9d-6f4c-471a-ae0a-76b2b6557646.png)
+
+Next set the time interval that aligns with the natural frequency of your product, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
+
+### Interpreting your lifecycle
+
+Our lifecycle chart for "Message sent" looks like this:
+
+![image](https://user-images.githubusercontent.com/85295485/139205374-d891ef11-2ed2-4e92-abcb-80726795d881.png)
+
+Everything above the zero line on the horizontal access represents a user who was active in the interval:
+* **New** - This was someone who not been active previously becoming active (e.g. Sending a message for the first time)
+* **Resurrecting** - This is someone who was not active in the previous interval becoming active once again (e.g. did not send a message yesterday but sent one today)
+* **Returning** - This is someone who was active in the previous interval and also active in the current interval (e.g. sent a message yesterday and also sent a message today)
+
+Everything below the zero line represents a user who as not active in the interval:
+* **Dormant** - These are users who are not active in the current interval, irrespective if they were active in previous intervals (e.g. someone who has not sent a message today)
+
+**What to look for in your lifecycle chart?**
+This can vary a bit depending on your product, but in a general sense:
+- You want to see your "Returning" users growing or at least staying constant, otherwise this signals a leaky bucket problem.
+- If you have a large number of "Resurrecting" users it could mean that the interval you selected is not aligned with your product's true natural frequency (e.g. users use it weekly but you're watching it daily), 
+- If you're investing efforts in acquiring new users to your product (or the feature you're exploring), you want to see that this indeed translates in new users popping up.
+
+## Going Deeper
+
+Now that you have an overview of your lifecycle, you can now dig into ares which look problematic. In our graph we can see a big drop in active users on the 23 October. If you click on the graph of "Dormant users," we will show you the users who became dormant here:
+
+With the information from this graph in mind, you may want to dig deeper to understand the following questions. Our [Retention](retention) tool is better for answering this.
+- Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
+- Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
+
+![image](https://user-images.githubusercontent.com/85295485/139206407-40bfa178-76d8-47a5-8482-fbf0f682c1d6.png)
+
+You can then click through to look at these individual users behavior in the events or recordings tools 
+
+![image](https://user-images.githubusercontent.com/85295485/139206528-bbdce478-97d9-48ad-888d-3220b50e2b42.png)
+
+Or create a cohort for further analysis in the trends tool.
+

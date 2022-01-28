@@ -10,6 +10,9 @@ import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
+import SetupDNS from './snippets/setup-dns'
+
+> Note: This deployment option is in Beta. See alternative deployment options [here](/docs/self-host#deployment-options).
 
 For all the other platforms, setup your Kubernetes cluster (see the documentation of your platform for more info). Note that many platforms default to non-expandable volumes.
 
@@ -34,29 +37,28 @@ ingress:
     enabled: true
 cert-manager:
   enabled: true
-kafka:
-  persistence:
-    size: 20Gi
 ```
 
 <InstallingSnippet />
 
-## Lookup external IP
+#### Lookup the address of the installation
 
-```shell
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
-```
+<GetInstallationAddress />
 
 ## Setting up DNS
 
-Create a record from your desired hostname to the external IP.
+<SetupDNS />
 
 ## Troubleshooting
+
 ### I cannot connect to my PostHog instance after creation
+
 <TryUnsecureSnippet />
 
-## Upgrading the chart
+### Upgrading the chart
+
 <UpgradingSnippet />
 
-## Uninstalling the chart
+### Uninstalling the chart
+
 <UninstallingSnippet />

@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 author: ["james-hawkins"]
 hideAnchor: true
+categories: ["Open Source"]
 ---
 
 It gets pretty easy to idolize the superstars of tech. One of the coolest things we've learned is that many of the most successful founders will find time to talk with you. To put this in context, GitLab is one of the world's leading open core companies, worth $2.75B. Kind of a big deal. We wanted to learn even more than we could discern from their handbook.

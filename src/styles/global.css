@@ -63,14 +63,8 @@ p {
         margin-bottom: 0.125rem;
     }
 
-    blockquote:not('.quote') {
+    blockquote:not(.quote) {
         @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
-    }
-
-    &.customer-content {
-        blockquote {
-            @apply bg-transparent p-0;
-        }
     }
 
     iframe {
@@ -542,7 +536,6 @@ ul {
 }
 
 .checkbox:checked {
-    @apply bg-opacity-100 dark:bg-opacity-100;
     & + svg {
         @apply visible;
     }
@@ -601,4 +594,56 @@ ul {
         margin-left: 0px;
     }
     width: calc(25% + 12%);
+}
+
+.DocSearch-Search-Icon {
+    @apply hidden;
+}
+.DocSearch.DocSearch-Container {
+    z-index: 99999999;
+}
+.DocSearch-Button {
+    @apply flex-grow text-left flex items-center space-x-1;
+}
+.DocSearch-Button-Placeholder {
+    @apply inline-flex items-center;
+}
+.DocSearch-Button-Container {
+    @apply flex items-center;
+}
+.DocSearch-Button-Placeholder::before {
+    content: url('/images/search.svg');
+    height: 16px;
+    @apply mr-3;
+}
+
+/* Lemon Tag */
+.lemon-tag {
+    font-size: 0.75em;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    display: inline;
+    color: #2d2d2d;
+    line-height: 1rem;
+}
+
+.lemon-tag.warning {
+    background-color: #f7a501;
+}
+
+.lemon-tag.danger {
+    background-color: #df4313;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.lemon-tag.success {
+    background-color: #77b96c;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.mary-chain {
+    display: none;
 }

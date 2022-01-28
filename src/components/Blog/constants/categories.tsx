@@ -1,5 +1,4 @@
 import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
-import { graphql } from 'gatsby'
 import React from 'react'
 export interface CategoryInterface {
     title: string
@@ -15,14 +14,14 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog',
     },
     {
-        title: 'General',
-        slug: 'general',
-        link: '/blog/categories/general',
+        title: 'Inside PostHog',
+        slug: 'inside-posthog',
+        link: '/blog/categories/inside-posthog',
     },
     {
-        title: 'Company & culture',
-        slug: 'company-and-culture',
-        link: '/blog/categories/company-and-culture',
+        title: 'Product Updates',
+        slug: 'product-updates',
+        link: '/blog/categories/product-updates',
     },
     {
         title: 'Engineering',
@@ -30,14 +29,14 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/engineering',
     },
     {
-        title: 'Release notes',
-        slug: 'release-notes',
-        link: '/blog/categories/release-notes',
+        title: 'Product Analytics',
+        slug: 'product-analytics',
+        link: '/blog/categories/product-analytics',
     },
     {
-        title: 'CEO diaries',
-        slug: 'ceo-diaries',
-        link: '/blog/categories/ceo-diaries',
+        title: 'Guides',
+        slug: 'guides',
+        link: '/blog/categories/guides',
     },
 ]
 
@@ -54,19 +53,3 @@ export const socialLinks: SocialLinksInterface = {
     linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
     github: { icon: <GitHub />, label: 'GitHub' },
 }
-
-export const AuthorsFragment = graphql`
-    fragment AuthorsFragment on MarkdownRemark {
-        frontmatter {
-            authors {
-                handle
-                name
-                role
-                image
-                link_type
-                link_url
-            }
-        }
-        id
-    }
-`

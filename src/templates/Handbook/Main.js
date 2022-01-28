@@ -1,10 +1,12 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
+import CommunityQuestions from 'components/CommunityQuestions'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import Team from 'components/Team'
+import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -61,6 +63,7 @@ export default function Main({
     next,
     previous,
     hideLastUpdated,
+    questions,
 }) {
     const { countries } = useStaticQuery(query)
 
@@ -86,6 +89,7 @@ export default function Main({
         a: A,
         TotalCountries,
         TotalTeam,
+        TestimonialsTable,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
@@ -122,6 +126,7 @@ export default function Main({
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
+                    {breadcrumbBase.name === 'Docs' && <CommunityQuestions questions={questions} />}
                 </article>
 
                 {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}

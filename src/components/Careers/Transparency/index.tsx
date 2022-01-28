@@ -67,7 +67,7 @@ export const Transparency = () => {
                 <div className="border-gray-accent-light border-dashed border-b-0 border-t-0 sm:border-t-0 sm:border-l px-4 py-8 md:py-12 border-r-0">
                     <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
                         <p className="mb-0 text-base text-black font-lightish">
-                            We pay top of the market and built a{' '}
+                            We pay generously and built a{' '}
                             <a href="/handbook/people/compensation">compensation calculator</a> to keep salary
                             discussions simple and fair. You’ll know your approximate starting salary before you even
                             apply.
