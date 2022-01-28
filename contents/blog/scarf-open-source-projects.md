@@ -1,5 +1,5 @@
 ---
-date: 2022-01-27
+date: 2022-01-28
 title: Why open-source projects are essential for large businesses
 rootPage: /blog
 sidebar: Blog
