@@ -5,44 +5,46 @@ const { MenuBuilder } = require('redoc')
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
-    const api_endpoints = await fetch('https://app.posthog.com/api/schema/', {
-        headers: {
-            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
-            accept: 'application/json',
-        },
-    }).then((res) => res.json())
-    console.log(api_endpoints)
-    const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
-    const all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+    if (process.env.POSTHOG_APP_API_KEY) {
+        const api_endpoints = await fetch('https://app.posthog.com/api/schema/', {
+            headers: {
+                Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+                accept: 'application/json',
+            },
+        }).then((res) => res.json())
+        console.log(api_endpoints)
+        const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
+        const all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
 
-    all_endpoints.forEach((endpoint) => {
-        const node = {
-            id: createNodeId(`api_endpoint-${endpoint.name}`),
+        all_endpoints.forEach((endpoint) => {
+            const node = {
+                id: createNodeId(`api_endpoint-${endpoint.name}`),
+                internal: {
+                    type: `api_endpoint`,
+                    contentDigest: createContentDigest({
+                        items: endpoint.items,
+                    }),
+                },
+                items: JSON.stringify(
+                    endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
+                ),
+                url: '/docs/api/' + endpoint.name,
+                name: endpoint.name,
+            }
+            console.log(node)
+            createNode(node)
+        })
+        createNode({
+            id: createNodeId(`api_endpoint-components`),
             internal: {
-                type: `api_endpoint`,
+                type: `ApiComponents`,
                 contentDigest: createContentDigest({
-                    items: endpoint.items,
+                    components: api_endpoints.components,
                 }),
             },
-            items: JSON.stringify(
-                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-            ),
-            url: '/docs/api/' + endpoint.name,
-            name: endpoint.name,
-        }
-        console.log(node)
-        createNode(node)
-    })
-    createNode({
-        id: createNodeId(`api_endpoint-components`),
-        internal: {
-            type: `ApiComponents`,
-            contentDigest: createContentDigest({
-                components: api_endpoints.components,
-            }),
-        },
-        components: JSON.stringify(api_endpoints.components),
-    })
+            components: JSON.stringify(api_endpoints.components),
+        })
+    }
 
     if (process.env.WORKABLE_API_KEY) {
         const { jobs } = await fetch('https://posthog.workable.com/spi/v3/jobs?state=published', {
