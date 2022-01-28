@@ -27,7 +27,7 @@ const Nav = () => {
                                     return (
                                         <li key={title}>
                                             <Link
-                                                className="text-base text-black hover:text-black hover:opacity-100 opacity-50 transition-opacity font-semibold"
+                                                className="text-base text-black hover:text-black dark:text-white dark:hover:text-white hover:opacity-100 opacity-50 transition-opacity font-semibold"
                                                 to={url}
                                             >
                                                 {title}

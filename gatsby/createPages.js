@@ -24,6 +24,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     slug
                 }
             }
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
             handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
                 nodes {
                     id
@@ -36,7 +48,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            userGuides: allMdx(filter: { fields: { slug: { regex: "/^/user-guides/" } } }) {
                 nodes {
                     id
                     headings {
@@ -98,40 +110,48 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             }
             sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
                 childSidebarsJson {
+                    userGuides {
+                        children {
+                            title
+                            url
+                        }
+                        title
+                        url
+                    }
                     handbook {
                         children {
                             children {
                                 children {
-                                    name
+                                    title
                                     url
                                 }
-                                name
+                                title
                                 url
                             }
-                            name
+                            title
                             url
                         }
-                        name
+                        title
                         url
                     }
                     docs {
                         children {
                             children {
                                 children {
-                                    name
+                                    title
                                     url
                                 }
-                                name
+                                title
                                 url
                             }
-                            name
+                            title
                             url
                         }
-                        name
+                        title
                         url
                     }
                     product {
-                        name
+                        title
                         url
                     }
                 }
@@ -151,7 +171,41 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     `)
 
     if (result.errors) {
-        return Promise.reject(mdPagesResult.errors)
+        return Promise.reject(result.errors)
+    }
+
+    function createPosts(data, menu) {
+        const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
+        data.forEach((node) => {
+            const { slug } = node.fields
+            let next = null
+            let previous = null
+            let breadcrumb = null
+            const tableOfContents = formatToc(node.headings)
+            menuFlattened.some((item, index) => {
+                if (item.url === slug) {
+                    next = menuFlattened[index + 1]
+                    previous = menuFlattened[index - 1]
+                    breadcrumb = item.breadcrumb
+                    return true
+                }
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: HandbookTemplate,
+                context: {
+                    id: node.id,
+                    next,
+                    previous,
+                    menu: result.data.sidebars.childSidebarsJson[menu],
+                    breadcrumb,
+                    breadcrumbBase: { name: 'Handbook', url: '/handbook' },
+                    tableOfContents,
+                    slug,
+                },
+            })
+        })
     }
 
     function formatToc(headings) {
@@ -165,10 +219,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     }
 
-    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
-    const docsMenu = result.data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
     const categories = {}
     result.data.categories.group.forEach(({ category }) => {
         const slug = slugify(category, { lower: true })
@@ -189,67 +239,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
-    result.data.handbook.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents,
-                slug,
-            },
-        })
-    })
-
-    result.data.docs.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents,
-                slug,
-            },
-        })
-    })
+    createPosts(result.data.handbook.nodes, 'handbook')
+    createPosts(result.data.docs.nodes, 'docs')
+    createPosts(result.data.userGuides.nodes, 'userGuides')
 
     const tutorialsPageViews = await fetch(
         'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'

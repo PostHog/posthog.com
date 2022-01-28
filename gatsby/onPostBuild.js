@@ -62,36 +62,36 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         children {
                             children {
                                 children {
-                                    name
+                                    title
                                     url
                                 }
-                                name
+                                title
                                 url
                             }
-                            name
+                            title
                             url
                         }
-                        name
+                        title
                         url
                     }
                     docs {
                         children {
                             children {
                                 children {
-                                    name
+                                    title
                                     url
                                 }
-                                name
+                                title
                                 url
                             }
-                            name
+                            title
                             url
                         }
-                        name
+                        title
                         url
                     }
                     product {
-                        name
+                        title
                         url
                     }
                 }

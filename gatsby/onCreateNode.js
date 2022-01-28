@@ -20,13 +20,15 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             value: replacePath(slug),
         })
         // Create GitHub contributor nodes for handbook & docs
-        if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
+        if (/^\/handbook|^\/docs|^\/user-guides/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
             let contributors = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
             }).then((res) => res.json())
+            if (slug.includes('user-guides')) {
+            }
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )

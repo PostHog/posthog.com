@@ -606,12 +606,15 @@ ul {
     @apply flex-grow text-left flex items-center space-x-1;
 }
 .DocSearch-Button-Placeholder {
-    @apply inline-flex items-center;
+    @apply inline-flex items-center dark:text-white text-black opacity-25;
 }
 .DocSearch-Button-Container {
     @apply flex items-center;
 }
-.DocSearch-Button-Placeholder::before {
+.DocSearch-Button-Key {
+    @apply dark:text-white text-black opacity-25;
+}
+.DocSearch-Button-Container::before {
     content: url('/images/search.svg');
     height: 16px;
     @apply mr-3;
@@ -646,4 +649,16 @@ ul {
 
 .mary-chain {
     display: none;
+}
+
+.active-link:before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 80%;
+    background: #f54e00;
+    border-radius: 2px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }

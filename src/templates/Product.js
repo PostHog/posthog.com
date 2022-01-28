@@ -62,14 +62,14 @@ export default function Product({ data, pageContext: { next, previous } }) {
                 <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end lg:pl-5 px-5 lg:px-0">
                     <nav>
                         <ul className="list-none p-0 m-0 flex flex-col space-y-3">
-                            {sidebars.product.map(({ url, name }) => {
+                            {sidebars.product.map(({ url, title }) => {
                                 return (
                                     <li key={url} className={url === slug ? 'active-product relative' : ''}>
                                         <Link
                                             className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold opacity-50 hover:opacity-80 transition-opacity"
                                             to={url}
                                         >
-                                            {name}
+                                            {title}
                                         </Link>
                                     </li>
                                 )
@@ -126,7 +126,7 @@ export const query = graphql`
         }
         sidebars: sidebarsJson {
             product {
-                name
+                title
                 url
             }
         }

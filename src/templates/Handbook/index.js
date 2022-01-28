@@ -120,14 +120,16 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
                     tableOfContents={tableOfContents}
+                    contentWidth="100%"
                 >
                     <section>
                         <div className="mb-8 relative">
                             <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
                             {!hideLastUpdated && (
-                                <p className="mt-1 mb-0 !opacity-30 text-black font-semibold">
+                                <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}

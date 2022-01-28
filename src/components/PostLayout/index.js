@@ -2,6 +2,7 @@ import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
+import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
@@ -130,7 +131,49 @@ export const Text = ({ children }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
-export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650, questions }) {
+const Menu = ({ title, url, children }) => {
+    const { pathname } = useLocation()
+    const isActive = url === pathname
+    const [open, setOpen] = useState(false)
+    const buttonClasses = `text-left relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-4 py-1 inline-block w-full rounded-md ${
+        children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
+    }`
+    useEffect(() => {
+        const isOpen = (children) => {
+            return (
+                children &&
+                children.some((child) => {
+                    return child.url === pathname || isOpen(child.children)
+                })
+            )
+        }
+        setOpen(isActive || (children && isOpen(children)))
+    }, [])
+    return (
+        <ul className="list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4">
+            <li>
+                {title && url ? (
+                    <Link className={buttonClasses} to={url}>
+                        <span className={isActive ? 'active-link' : ''}>{title}</span>
+                    </Link>
+                ) : (
+                    <button className={buttonClasses} onClick={() => setOpen(!open)}>
+                        {title}
+                    </button>
+                )}
+                {children && children.length > 0 && open && (
+                    <motion.div className="mt-1" initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                        {children.map((child, index) => (
+                            <Menu key={index} {...child} />
+                        ))}
+                    </motion.div>
+                )}
+            </li>
+        </ul>
+    )
+}
+
+export default function PostLayout({ tableOfContents, children, sidebar, contentWidth = 650, questions, menu }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
@@ -145,16 +188,30 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
 
     return (
         <div
-            style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
+            style={{
+                gridAutoColumns: menu
+                    ? `265px 1fr 1fr min-content`
+                    : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+            }}
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
-            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+            {menu && (
+                <aside className="max-w-[265px] mt-5 px-5 sticky top-20">
+                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3">Table of contents</p>
+                    <nav className="-ml-4">
+                        {menu.map((menuItem, index) => {
+                            return <Menu key={index} {...menuItem} />
+                        })}
+                    </nav>
+                </aside>
+            )}
+            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
                 <div style={{ maxWidth: contentWidth }} className="w-full article-content">
                     {children}
                 </div>
                 {questions && questions}
             </article>
-            <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+            <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                 <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
                     {view === 'Article' && !breakpoints.md && toc?.length > 1 && (

@@ -34,10 +34,11 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       type SidebarsJson implements Node {
         docs: [SidebarNav]
         handbook: [SidebarNav]
+        userGuides: [SidebarNav]
       }
       type SidebarNav {
         children: [SidebarNav]
-        name: String
+        title: String
         url: String
       }
       type Jobs implements Node {
