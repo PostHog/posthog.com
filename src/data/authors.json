@@ -114,7 +114,7 @@
     {
         "handle": "andy-vandervell",
         "name": "Andy Vandervell",
-        "role": "Contributor",
+        "role": "Content Marketer",
         "image": "https://avatars.githubusercontent.com/u/92976667?v=4",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/andyvandervell/"
@@ -135,5 +135,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/eli-kinsey/",
         "slack_username": "eli"
+    },
+    {
+        "handle": "avi-press",
+        "name": "Avi Press",
+        "role": "Founder & CEO at Scarf",
+        "image": "https://avatars.githubusercontent.com/u/1388071?v=4",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/avi-press-4437a356/"
     }
 ]
