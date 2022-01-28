@@ -12,7 +12,7 @@ hideAnchor: true
 
 ## Mission
 
-Make PostHog _the_ most transparent company in the world, and the best place for people to work. Our goal is to create a world-class remote company by enabling our team to (a) maximize their impact and performance, (b) growth personally and professionally and (c) have a strong sense of purpose and belonging.
+Make PostHog _the_ most transparent company in the world, and the best place for people to work. Our goal is to create a world-class remote company by enabling our team to (a) maximize their impact and performance, (b) grow personally and professionally, and (c) have a strong sense of purpose and belonging.
 
 ## Responsibilities
 
