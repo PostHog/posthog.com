@@ -138,7 +138,7 @@ However, recent GDPR rulings have punished Google Analytics users for transmitti
 Google offers plenty of [information about data privacy settings](https://support.google.com/analytics/topic/2919631?hl=en&ref_topic=1008008) to help users, but if you’re concerned about the risks of using Google Analytics then the safest solution is to use an analytics platform which keeps data on your own infrastructure. This ensures you can collect user data and it never has to be transmitted to other countries or shared with third parties. 
 
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure and is fully GDPR compliant.
-
-[Try PostHog for free](https://posthog.com/signup) today or [book a demo](https://posthog.com/book-a-demo) to learn more.
+>
+> [Try PostHog for free](https://posthog.com/signup) today or [book a demo](https://posthog.com/book-a-demo) to learn more.
  
 
