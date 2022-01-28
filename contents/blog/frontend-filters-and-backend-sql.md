@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ["Engineering"]
 ---
 
 By: [Engineering @ PostHog](https://www.linkedin.com/company/posthog)

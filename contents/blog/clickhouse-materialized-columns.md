@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Engineering"]
+categories: ["Engineering", "Guides"]
 author: ["karl-aksel-puulmann"]
 featuredImage: ../images/blog/blog-generic-2.png
 featuredImageType: full

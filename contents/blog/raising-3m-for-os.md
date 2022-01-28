@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
 author: ["james-hawkins"]
-categories: ["CEO diaries", "Inside PostHog"]
+categories: ["CEO diaries", "Inside PostHog", "Open Source"]
 ---
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
