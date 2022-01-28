@@ -1,6 +1,6 @@
 ---
 date: 2022-02-02
-title: The 5 best GDPR compliant analytics tools
+title: The 5 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -12,16 +12,16 @@ featuredImageType: full
 
 The European Union's GDPR (General Data Protection Regulation) was created in 2016 to provide a framework which protects user privacy and shape how the data of users in the EU (and the UK) can be stored and shared. It applies to all businesses, non-profits and public organizations across the EU and the penalties for breaking it are severe -- up to 4% of your yearly revenue. 
 
-While GDPR has created an essential and much-needed framework for handling user data however, it has also complicated the ways in which teams can collect user information. A recent ruling in Austria, for example, punished a business for using Google Analytics and exporting user data to Google's US-based servers. As a result, many teams are now searching for new GDPR compliant analytics tools for fear that popular tools such as Amplitude, Mixpanel and [Google Analytics may be illegal](https://isgoogleanalyticsillegal.com/). 
+While GDPR has created an essential and much-needed framework for handling user data, it has also complicated the ways in which teams can collect user information. A recent ruling in Austria, for example, punished a business for using Google Analytics and exporting user data to Google's US-based servers. As a result, many teams are now searching for new GDPR-compliant analytics tools for fear that popular tools such as Amplitude, Mixpanel and [Google Analytics may be illegal](https://isgoogleanalyticsillegal.com/). 
 
-Of course, not all GDPR analytics tools are created equal and that’s why we’ve created this list of the 5 best GDPR compliant analytics tools. [Google may propose alternative solutions to big tech's GDPR problem](/blog/gdpr-google-analytics-privacy-shield), but the best solution is still to choose an analytics provider which you can self-host. 
+Of course, not all GDPR analytics tools are created equal and that’s why we’ve created this list of the best-GDPR compliant analytics tools. [Google may propose alternative solutions to big tech's GDPR problem](/blog/gdpr-google-analytics-privacy-shield), but the best solution is still to choose an analytics provider which you can self-host. 
 
 ## 1. [PostHog](https://posthog.com/product)
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-PostHog is an all-in-one analytics platform that includes tools such as Session Recording, Feature Flags, Heatmaps and Group Analytics. It’s also available in a self-hosted deployment, which means you can control exactly where user information is stored and how it is processed. 
+PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that includes tools such as Session Recording, Feature Flags, Heatmaps and Group Analytics. It’s also available in a self-hosted deployment, which means you can control exactly where user information is stored and how it is processed. 
 
-We believe this extensive feature set makes PostHog a powerful, GDPR compliant alternative to tools such as Mixpanel and Amplitude, which only offer cloud-hosted services with servers outside the EU. 
+We believe this extensive feature set makes PostHog a powerful, GDPR compliant alternative to tools such as Mixpanel and Amplitude, which only offer cloud-hosted services.
 
 Best of all, PostHog is entirely self-serve, with event auto-capture that enables you to start collecting information out of the box and making fast, product-led decisions. 
 
@@ -110,7 +110,7 @@ Sort of. GoAccess can be configured not to collect PII (personally identifying i
 ## 5. Matomo
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
-Matomo is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open-source. 
+Matomo is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open source. 
 
 One of Matomo’s most appealing features is the ability to import existing Google Analytics data into Matomo when getting started, so that you don’t lose any previous insights. It’s also entirely self-serve, which better enables less technical team members to run analysis. 
 
@@ -127,12 +127,12 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 - Open source, via GPL 3.0
 
 ### Is Matomo GDPR compliant?
-Yes. Matomo offers first-party cookies by default and offers robust tools to ensure PII is anonymised. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
+Yes. Matomo offers first-party cookies by default and offers robust tools to ensure personally indentifiable information (PII) is anonymised. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
 
 ## Is Google Analytics GDPR compliant?
 Google Analytics is one of the world’s most popular web analytics services, enabling millions of businesses to collect basic information about website visitors, such as pageviews, bounce rates and more. 
 
-However, recent GDPR rulings have punished Google Analytics users for transmitting personal data outside of the EU through the tool. The details of these rulings are complex and continually evolving, but if your country is bound by the GDPR then continuing to use Google Analytics may now be illegal. 
+However, recent GDPR rulings have punished Google Analytics users for transmitting personal data outside of the EU through the tool. The details of these rulings are complex and continually evolving, but if your country is bound by the GDPR then you need to take care in how it's configured to ensure compliance. 
 
 Google offers plenty of [information about data privacy settings](https://support.google.com/analytics/topic/2919631?hl=en&ref_topic=1008008) to help users, but if you’re concerned about the risks of using Google Analytics then the safest solution is to use an analytics platform which keeps data on your own infrastructure. This ensures you can collect user data and it never has to be transmitted to other countries or shared with third parties. 
 
