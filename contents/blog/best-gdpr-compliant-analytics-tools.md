@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+categories: ["Product Analytics", "Open Source", "Guides"
 ---
 
 The European Union's GDPR (General Data Protection Regulation) was created in 2016 to provide a framework which protects user privacy and shape how the data of users in the EU (and the UK) can be stored and shared. It applies to all businesses, non-profits and public organizations across the EU and the penalties for breaking it are severe -- up to 4% of your yearly revenue. 
@@ -23,7 +24,7 @@ PostHog is an all-in-one, [open source analytics platform](/blog/best-open-sourc
 
 We believe this extensive feature set makes PostHog a powerful, GDPR compliant alternative to tools such as Mixpanel and Amplitude, which only offer cloud-hosted services.
 
-Best of all, PostHog is entirely self-serve, with event auto-capture that enables you to start collecting information out of the box and making fast, product-led decisions. 
+Best of all, PostHog is entirely [self-serve](/blog/Introduction-to-self-service-analytics), with event auto-capture that enables you to start collecting information out of the box and making fast, product-led decisions. 
 
 Of course, we’re somewhat biased in our recommendation here - but don’t just take our word for it. PostHog is entirely open source, meaning that even if you don’t want to book a demo or get started straight away then you can still check out our repo and documentation for more info!
 
