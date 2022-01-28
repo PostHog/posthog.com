@@ -158,7 +158,7 @@ export const query = graphql`
                         role
                         image {
                             childImageSharp {
-                                gatsbyImageData
+                                gatsbyImageData(width: 40, height: 40)
                             }
                         }
                         link_url

@@ -205,7 +205,7 @@ export const query = graphql`
                     id
                     image {
                         childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(width: 38, height: 38)
                         }
                     }
                     name
@@ -235,7 +235,7 @@ export const query = graphql`
                         role
                         image {
                             childImageSharp {
-                                gatsbyImageData
+                                gatsbyImageData(width: 40, height: 40)
                             }
                         }
                         link_url
