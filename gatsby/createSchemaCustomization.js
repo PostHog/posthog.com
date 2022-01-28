@@ -82,5 +82,36 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         url: String,
         badge: String
       }
+      type ApiEndpoint implements Node {
+        id: String,
+        name: String,
+        url: String,
+        items: String,
+      }
+      type ApiComponents implements Node {
+        id: String,
+        components: String,
+      }
+      type Integration implements Node {
+        url: String,
+        name: String,
+        description: String,
+        verified: Boolean,
+        maintainer: String,
+        imageUrl: String,
+      }
+      type Plugin implements Node {
+        name: String,
+        url: String,
+        description: String,
+        verified: Boolean,
+        maintainer: String,
+        displayOnWebsiteLib: Boolean
+        type: String,
+        markdown: File,
+        logo: File,
+        slug: String,
+        imageLink: String,
+      }
     `)
 }

@@ -14,6 +14,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
+    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const result = await graphql(`
@@ -42,6 +43,13 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                }
+            }
+            apidocs: allApiEndpoint {
+                nodes {
+                    id
+                    name
+                    url
                 }
             }
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
@@ -255,6 +263,36 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
                 slug,
+            },
+        })
+    })
+
+    result.data.apidocs.nodes.forEach((node) => {
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        // const tableOfContents = formatToc(node.headings)
+        // docsMenuFlattened.some((item, index) => {
+        //     if (item.url === slug) {
+        //         next = docsMenuFlattened[index + 1]
+        //         previous = docsMenuFlattened[index - 1]
+        //         breadcrumb = item.breadcrumb
+        //         return true
+        //     }
+        // })
+
+        createPage({
+            path: replacePath(node.url),
+            component: ApiEndpoint,
+            context: {
+                id: node.id,
+                // next,
+                // previous,
+                // menu: docsMenu,
+                // breadcrumb,
+                // breadcrumbBase: { name: 'Docs', url: '/docs' },
+                // tableOfContents,
+                // slug,
             },
         })
     })
