@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
-export const SCALE_MINIMUM_PRICING = 1_500
-export const SCALE_MINIMUM_EVENTS = 6_666_666
+export const SCALE_MINIMUM_PRICING = 0
+export const SCALE_MINIMUM_EVENTS = 0
 
 export const features = {
     Platform: [

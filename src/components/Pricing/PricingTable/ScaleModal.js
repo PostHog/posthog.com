@@ -42,9 +42,10 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </div>
 
                                 <PricingSlider
-                                    marks={[SCALE_MINIMUM_EVENTS, 10000000, 100000000, 150000000]}
-                                    min={SCALE_MINIMUM_EVENTS}
+                                    marks={[1000, 1000000, 10000000, 150000000]}
+                                    min={1000}
                                     max={150000000}
+                                    defaultValue={1000}
                                 />
                             </div>
 
