@@ -11,7 +11,7 @@ excerpt: Excerpt coming soon.
 ---
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of <code>v1.31.0</code> (last version supported is <code>1.30.0</code>) and you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.32.0 release notes
@@ -21,13 +21,11 @@ excerpt: Excerpt coming soon.
 **Release highlights:**
 - [Feature one](#feature-one)
 
-### Feature one
+### Redesigned Persons & Groups pages
 
-Description here.
+We've redesigned how the Persons & Groups pages look to make it easier to find what you're looking for. You'll now be able to easily see which groups (if any) the user belongs to, and better manage the user's properties.
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-list.png" alt="Example screenshot: List of groups" />
-
-> 🎁 X is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_32_0-new-person-page.gif" alt="Example screenshot: New Person page" />
 
 <br />
 
@@ -39,14 +37,16 @@ Description here.
 
 ### Other improvements & fixes
 
-- List here
-- Plus x+ improvements & fixes.
+- Set friendly names to your groups (from [Group Analytics](/docs/user-guides/group-analytics)). Now instead of seeing `org` (as you may call it in your code), you can rename it to see "Organization" in PostHog's UI. Further, you can now set the plurar version as well to improve readability. [PR](https://github.com/PostHog/posthog/pull/7974).
+- Significant performance improvements to the Actions page. When viewing an action, we'll now show you the most recent events (~6 months ago) without constant polling. This should make it easy and faster to debug actions.
+- Lifecycle query just got faster! We've also clarified how each of the groups (new, returning, resurrecting and dormant) in lifecycle are defined. [Read more](https://github.com/PostHog/posthog/pull/8021) on this.
+- To improve query performance, the "All time" filter will now only consider events from 2015 onwards. We realized some instances had events with incorrect timestamps (frequently UNIX epoch [Jan 1, 1970]), which would lead to performance issues and hard to parse graphs.
+- Plus 330+ improvements & fixes.
 
 ### Deprecation & removal notices
 
 1. Since the previous version (1.31.0), we no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
-2. We're removing support for insights with "Minute" intervals. From user feedback, these insights were hard to parse and could lead to significant performance issues in self-hosted instances. Please [reach out](/support) if you have any feedback on this.
-3. We're [removing the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
+2. We're removing support for insights with "Minute" intervals. From user feedback, these insights were hard to parse and could lead to significant performance issues in self-hosted instances. Please [reach out](/support) if you have any feedback on this. More details on the [PR](https://github.com/PostHog/posthog/pull/7847).
 
 ### Talk to us about how we can improve
 
@@ -55,11 +55,25 @@ We’re always working on improving the product experience and would love to tal
 As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 
+### Experimentation launch 🚀
+
+We've been working hard on a brand new Experimentation feature which will let you quickly and confidently run experiments to test product improvements. This feature is currently available on Beta on PostHog Cloud, but if you'd like to be a beta tester or get a demo, please [reach out](https://posthog.com/slack) or schedule a [demo call](https://calendly.com/posthog-feedback) with the Engineering Team that created it.
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_32_0-experiments-sneak-peek.png" alt="Example screenshot: Experiments sneak peek" />
+
 ## PostHog News
 
-Welcome Andy Vandervell! Andy joined PostHog to .... Andy on pineapple on pizza (🍍 on 🍕).
+Welcome to our new team members!
 
-> Weird fact here.
+
+[Andy](https://posthog.com/handbook/company/team#andy-vandervell-content-marketer) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
+
+> I am the only person called Andrew Vandervell in the universe.
+
+[Simon](https://posthog.com/handbook/company/team#simon-fisher-customer-success) joined us in Customer Success to help our Enterprise customers get the most value out of PostHog. Simon's stance on pineapple on pizza (🍍 on 🍕) is: .
+
+> Fact goes here.
+
 
 ## Community
 
@@ -79,7 +93,12 @@ We want to thank each and every community member that contributed to this releas
 
 Join us in helping make more products successful! We're currently hiring for the following roles:
 
-- Open role list here
+- Software Engineer
+- Full Stack Engineer
+- Tech Lead Manager/Engineering Manager
+- Community Engineer, more details here
+- Full Stack Engineer
+- Ex-Founders*
 
 Learn more about these roles on our [Careers page](https://posthog.com/careers).
 
