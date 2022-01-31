@@ -51,7 +51,7 @@ In addition to the above, we've improved how tooltips are displayed so they cont
 
 ### Funnels vertical breakdown
 
-Funnels with breakdowns just got a lot better. This new visualization can help you quickly better understand how your users are converting.
+Funnels with breakdowns just got a lot better. This new visualization can help you better understand how your users are converting.
 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_32_0-funnel-vertical-breakdown.png" alt="Example screenshot: Funnels with a vertical breakdown" />
