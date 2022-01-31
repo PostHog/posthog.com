@@ -54,18 +54,6 @@ Yes, note that:
 
 Yes, for the brief period of time. When events ingestion from Kafka to ClickHouse is stopped we are still ingesting persons data. For example we might see a person property that was just set, but we wouldn't see the event that set it yet. Once the migration (or rollback) has finished and we caught up everything will be consistent again.
 
-### How can I stop the migration?
-
-In the async migrations page at `/instance/async_migrations` you can choose to `stop` or `stop and rollback` the migration from the `...` button on the right most column.
-
-![Stopping the migration](/images/async-migrations-stop-rollback.png)
-
-### The migration is in an Error state - what should I do?
-
-Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
-
-![Rollback errored migration](/images/async-migrations-error-rollback-button.png)
-
 ### The migration errored with "EOF: Unexpected end of line when reading bytes" - what should I do?
 
 Your ClickHouse instance may have run out of memory.

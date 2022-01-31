@@ -60,6 +60,19 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 The settings tab allows you to change the configuration, e.g. whether async migrations should run automatically.
 
+### How can I stop the migration?
+
+In the async migrations page at `/instance/async_migrations` you can choose to `stop` or `stop and rollback` the migration from the `...` button on the right most column.
+
+![Stopping the migration](../../../images/async-migrations-stop-rollback.png)
+
+### The migration is in an Error state - what should I do?
+
+Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
+
+![Rollback errored migration](../../../images/async-migrations-error-rollback-button.png)
+
+
 ### Celery scaling considerations
 
 To run async migrations, we occupy one Celery worker process to run the task. Celery runs `n` processes (per pod) where `n == number of CPU cores on the posthog-worker pod`. As such, we recommend scaling the `posthog-worker` pod in anticipation of running an async migration.
