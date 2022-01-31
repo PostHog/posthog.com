@@ -168,3 +168,17 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 - `redis.password` -> `externalRedis.password`
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 12.x.x
+
+13.0.0 fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse server password.
+
+As part of this work, the following chart inputs have changed:
+
+- `clickhouse.host` -> `externalClickhouse.host`
+- `clickhouse.enabled` now toggles the internal ClickHouse cluster on/off. If this is off, you will need to specify an external clickhouse cluster.
+- `clickhouse.database` was previously used as the cluster name as well. Now `clickhouse.cluster` has been introduced.
+- `clickhouse.user` is now usable
+- `clickhouse.replication` was removed
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
