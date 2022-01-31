@@ -58,7 +58,7 @@ Some common issues you might encounter are:
 Tell them to run the following:
 
 ```shell
-kubectl delete job posthog-migrate -n posthog
+kubectl -n posthog delete job $(kubectl -n posthog get jobs --no-headers -o custom-columns=NAME:.metadata.name)
 helm upgrade -f values.yaml -n posthog
 ```
 

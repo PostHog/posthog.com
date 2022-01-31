@@ -16,11 +16,11 @@ Rolling out new features in your product can really be a pain.
 
 As a company that is growing fast and [consistently putting out new functionality](/blog/we-ship-whenever), we know this very well. 
 
-You might have great tests and robust CI/CD workflows in place, but there's always the chance that something will go wrong, or that your users may not appreciate the change.
+You might have great tests and robust CI/CD workflows in place, but there's always the chance that something will go wrong.
 
-To make this process less painful and safer, you can use feature flags.
+To make this process less painful and safer, you can use Feature Flags.
 
-Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
+Feature Flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
 This tutorial will walk you through creating and using a feature flag with PostHog and answer some of the questions you may have when using them.
 
@@ -33,9 +33,9 @@ To follow this tutorial along, you need to:
 
 ## Determining a use case
 
-Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you'd like some inspiration to determine a good use case, you can refer to the ['Putting Your Flag to Use'](#putting-your-flag-to-use) section of this tutorial for ideas.
+Before you create a Feature Flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you'd like some inspiration to determine a good use case, you can refer to the ['Putting Your Flag to Use'](#putting-your-flag-to-use) section of this tutorial for ideas.
 
-It can also be useful to create your feature flags before working on the functionality, so that you can build the feature with the flag in mind, saving you the time and effort to make sure the feature built is completely encapsulated by the flag.
+It can also be useful to create your Feature Flags before working on the functionality, so that you can build the feature with the flag in mind, saving you the time and effort to make sure the feature built is completely encapsulated by the flag.
 
 ## Creating feature flags
 
@@ -104,7 +104,7 @@ When used in conjunction with property filters, PostHog will first check if the 
 
 Just click 'Save feature flag' and that's it! Your flag will now be active. Clicking on it will also allow you to edit it as you wish.
 
-## Implementing the feature flag
+## Implementing the Feature Flag
 
 When you create a feature flag, PostHog displays an example snippet that you can plug into your codebase. It looks something like this:
 
@@ -167,19 +167,11 @@ Here are some suggestions of use cases that could fit nicely with feature flags:
 
 ### Exploring the impact of a feature on business metrics
 
-Perhaps the most useful way to utilize feature flags is to answer relevant questions about your product, especially regarding how you can make it better.
+Perhaps the most useful way to utilize Feature Flags is to answer relevant questions about your product, especially regarding how your flag is performing with certain metrics.
 
-You might be interested in improving conversion, retention, or just making sure you have a good user experience.
+> If you're interested in improving conversion, retention, or any other business metrics, you may want to run an A/B test with our [Experimentation](/docs/user-guides/experimentation) feature instead.
 
-To do this, you can do A/B testing with feature flags.
-
-In simple terms, A/B testing is a method for determining how to provide the best user experience or meet other product goals by testing how different features perform. 
-
-This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How does our conversion rate for free trial users becoming paid users change if we double the number of CTAs on the page?".
-
-A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
-
-Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
+Here's an example view of Trends in PostHog filtering Pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
 ![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
 
@@ -199,11 +191,9 @@ Better yet, you can then release it slowly to make sure nothing breaks, and, if 
 
 And this brings us to the next example.
 
-<div class="note-block"><b>Fun Fact:</b> We used a PostHog feature flag to release this very tutorial. This was the first tutorial we wrote but didn't want to release a lonely tutorial on the website. We also did not want to have to put all tutorials in one PR, so we wrapped our Tutorials section on the navigation with a feature flag and merged tutorials one by one as they came. Then, when we felt like we were ready to launch, we just toggled the flag on.</div>
+<div class="note-block"><b>Fun Fact:</b> We used a PostHog Feature Flag to release this very tutorial. This was the first tutorial we wrote but didn't want to release a lonely tutorial on the website. We also did not want to have to put all tutorials in one PR, so we wrapped our Tutorials section on the navigation with a feature flag and merged tutorials one by one as they came. Then, when we felt like we were ready to launch, we just toggled the flag on.</div>
 
 
 ### Rollback with peace of mind
 
-You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality.
-
-Perhaps your goal all along was to do A/B testing for your UX, but, when something breaks, you can always roll it back safely with minor consequences (if implemented correctly).
+You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality. When something breaks, you can always roll it back safely with minor consequences (if implemented correctly).

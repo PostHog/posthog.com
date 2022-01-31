@@ -19,7 +19,7 @@ Our roadmap for the rest of 2021 will do three things:
 
 ## 1. Collaboration
 
-As larger teams and more complex organizations grow on PostHog, they need to work together to share insights and make decisions. Our focus on collaobration is key, not only to improve the quality and quantity of insights every user gets from PostHog, but also to ensure that users of PostHog get access to **only** the sensitive data which they **need** to access, ensuring user privacy.
+As larger teams and more complex organizations grow on PostHog, they need to work together to share insights and make decisions. Our focus on collaboration is key, not only to improve the quality and quantity of insights every user gets from PostHog, but also to ensure that users of PostHog get access to **only** the sensitive data which they **need** to access, ensuring user privacy.
 
 Collaboration is also key to ensure all team members (including those less-technical) can access, interpret, and share insights about their product.
 

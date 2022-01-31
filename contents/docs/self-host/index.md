@@ -1,5 +1,5 @@
 ---
-title: Self-Host PostHog
+title: Self-host PostHog
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true

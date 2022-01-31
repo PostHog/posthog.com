@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries"]
+author: ["james-hawkins"]
+categories: ["CEO diaries", "Inside PostHog"]
 ---
 
 YC has been running for 15 years, and getting bigger every year.
