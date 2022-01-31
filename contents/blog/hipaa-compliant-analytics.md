@@ -1,6 +1,6 @@
 ---
 date: 2021-10-28
-title: HIPAA-compliant analytics with PostHog
+title: PostHog & HIPAA compliance
 rootPage: /blog
 sidebar: Blog
 showTitle: true
