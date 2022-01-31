@@ -4,7 +4,6 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
 import Slider from 'react-slick'
 import { heading, section } from './classes'
-import Icon from './Icon'
 
 const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
     const borderColor = index === activeFeature ? 'red' : 'gray'
@@ -29,7 +28,7 @@ const SliderItem = ({ image, description, icon, feature }) => {
     )
 }
 
-export default function Features() {
+export default function Features({ title }) {
     const [activeFeature, setActiveFeature] = useState(0)
     const sliderRef = useRef(null)
 
@@ -64,9 +63,7 @@ export default function Features() {
     return (
         <section className={section()}>
             <div>
-                <h2 className={heading('lg', 'primary', 'max-w-[1100px] mx-auto')}>
-                    Everything product-led teams need <span className="text-yellow">in one place</span>
-                </h2>
+                <h2 className={heading('lg', 'primary', 'max-w-[1100px] mx-auto')}>{title}</h2>
                 <h3 className="text-lg md:text-2xl text-center mt-4 md:mt-8">
                     One platform for{' '}
                     <FeatureButton
@@ -95,8 +92,8 @@ export default function Features() {
                         activeFeature={activeFeature}
                         index={3}
                         title="feature flags"
-                    />{' '}
-                    & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
+                    />
+                    , & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
                 </h3>
             </div>
             <SliderNav

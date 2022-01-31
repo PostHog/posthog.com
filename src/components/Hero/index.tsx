@@ -21,7 +21,7 @@ export function Hero({
         <div className="max-w-[849px] mx-auto text-center">
             {title && (
                 <Heading hideCopy id={id} as="h1" className="text-4xl md:text-[64px] leading-none mt-0 mb-5">
-                    {title}
+                    <div dangerouslySetInnerHTML={{ __html: title }} />
                 </Heading>
             )}
             {subtitle && (
