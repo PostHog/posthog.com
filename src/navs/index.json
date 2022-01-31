@@ -182,8 +182,8 @@
                                 "title": "Analytics",
                                 "items": [
                                     {
-                                        "title": "Cohorts",
-                                        "url": "/docs/user-guides/cohorts"
+                                        "title": "Trends",
+                                        "url": "/docs/user-guides/trends"
                                     },
                                     {
                                         "title": "Funnels",
@@ -194,20 +194,20 @@
                                         "url": "/docs/user-guides/paths"
                                     },
                                     {
+                                        "title": "Correlation Analysis",
+                                        "url": "/docs/user-guides/correlation"
+                                    },
+                                    {
                                         "title": "Retention",
                                         "url": "/docs/user-guides/retention"
                                     },
                                     {
-                                        "title": "Sessions",
-                                        "url": "/docs/user-guides/sessions"
+                                        "title": "Lifecycle",
+                                        "url": "/docs/user-guides/lifecycle"
                                     },
                                     {
-                                        "title": "Trends",
-                                        "url": "/docs/user-guides/trends"
-                                    },
-                                    {
-                                        "title": "Persons",
-                                        "url": "/docs/user-guides/persons"
+                                        "title": "Toolbar",
+                                        "url": "/docs/user-guides/toolbar"
                                     }
                                 ]
                             },
@@ -215,12 +215,17 @@
                                 "title": "Features",
                                 "items": [
                                     {
+                                        "title": "Experimentation",
+                                        "url": "/docs/user-guides/experimentation",
+                                        "badge": "beta"
+                                    },
+                                    {
                                         "title": "Feature flags",
                                         "url": "/docs/user-guides/feature-flags"
                                     },
                                     {
-                                        "title": "Session recording",
-                                        "url": "/docs/user-guides/session-recording"
+                                        "title": "Recordings",
+                                        "url": "/docs/user-guides/recordings"
                                     }
                                 ]
                             },
@@ -240,16 +245,8 @@
                                         "url": "/docs/user-guides/organizations-and-projects"
                                     },
                                     {
-                                        "title": "Plugins",
-                                        "url": "/docs/user-guides/plugins"
-                                    },
-                                    {
                                         "title": "SSO",
                                         "url": "/docs/user-guides/sso"
-                                    },
-                                    {
-                                        "title": "Toolbar",
-                                        "url": "/docs/user-guides/toolbar"
                                     }
                                 ]
                             },
@@ -267,6 +264,14 @@
                                     {
                                         "title": "Events",
                                         "url": "/docs/user-guides/events"
+                                    },
+                                    {
+                                        "title": "Persons",
+                                        "url": "/docs/user-guides/persons"
+                                    },
+                                    {
+                                        "title": "Plugins",
+                                        "url": "/docs/user-guides/plugins"
                                     }
                                 ]
                             }

@@ -22,9 +22,9 @@ export default function Community() {
                 </h2>
                 <h3 className={heading('sm', 'tan')}>*6,000+ stars on GitHub</h3>
                 <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-1 sm:divide-y-0 sm:divide-x-1 divide-dashed">
-                    <CommunityStat title="20k+" description="Developer community" />
-                    <CommunityStat title="240+" description="Contributors" />
-                    <CommunityStat title="30b+" description="Events tracked" />
+                    <CommunityStat title="22k+" description="Developer community" />
+                    <CommunityStat title="250+" description="Contributors" />
+                    <CommunityStat title="31b+" description="Events tracked" />
                 </ul>
                 <CallToAction type="outline" width="56" href="https://github.com/PostHog/posthog">
                     Browse on GitHub

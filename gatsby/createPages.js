@@ -18,13 +18,21 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const result = await graphql(`
         {
-            allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
+            allMdx(
+                filter: {
+                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    frontmatter: { title: { ne: "" } }
+                }
+                limit: 1000
+            ) {
                 nodes {
                     id
                     slug
                 }
             }
-            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
                 nodes {
                     id
                     headings {
@@ -36,7 +44,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -272,6 +280,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+                slug,
             },
         })
     })
@@ -307,6 +316,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                slug,
             },
         })
     })

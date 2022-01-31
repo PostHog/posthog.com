@@ -60,9 +60,9 @@ export default function Hero() {
                             objectPosition="bottom"
                             loading="eager"
                             placeholder="none"
-                            width={357}
+                            width={400}
                             imgClassName="h-auto"
-                            className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-60px] md:mr-[-75px]"
+                            className="h-full max-w-[200px] md:max-w-[300px] xl:max-w-none mr-0 md:mr-0"
                             objectFit="contain"
                             src="./images/hero-right.png"
                         />

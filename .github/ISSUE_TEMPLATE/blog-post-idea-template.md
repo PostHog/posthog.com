@@ -19,6 +19,14 @@ _Who are we trying to reach with the content?_
 
 _posthog.com/blog or somewhere else?_
 
+## Who is writing the blog post?
+
+_is it one person or a collaboration_
+
+## When do we want to publish?
+
+_a rough publish date is fine_
+
 ## Amplification checklist
 
 _Add or remove items to the amplification checklist_
@@ -31,4 +39,4 @@ To maximize the reach of the blog content we create it's recommended that we amp
 - [ ] Slack (internal) to enourage our team to amplify
 - [ ] Slack (community) to encourage the community to amplify
 - [ ] PostHog News
-- [ ] Encourage author to post and ask for additional amplification from team
+- [ ] Author to post and ask for additional amplification from team

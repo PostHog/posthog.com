@@ -137,7 +137,7 @@ If you didn’t make any customization to those, there’s nothing you need to d
 
 11.0.0 removes some legacy Helm annotations not needed anymore. By removing those and upgrading your installation, all future upgrades to stateless components should now happen without downtime (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
 
-Before running the Helm upgrade command, please run the following script first (note: replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace, which can be found via `helm list`):
+Before running the Helm upgrade command, please run the following script first (replace the `RELEASE_NAME` and `RELEASE_NAMESPACE` accordingly if you are using a custom release name/namespace, which can be found via `helm list`):
 
 ```
 #!/usr/bin/env sh
@@ -153,4 +153,32 @@ do
 done
 ```
 
+Note: you can safely ignore errors like `error: --overwrite is false but found the following declared annotation(s): 'meta.helm.sh/release-name' already has a value (posthog)`
+
 After that you continue the Helm upgrade process as usual.
+
+### Upgrading from 11.x.x
+
+12.0.0 fixes a couple of long standing bugs related to the Redis service setup. You can now provide a Redis password (or a pointer to a Kubernetes secret containing it) directly in your `values.yaml` file.
+
+As part of this work, we have also renamed a few chart inputs in order to reduce confusion and align our naming convention to the industry standards:
+
+- `redis.host` -> `externalRedis.host`
+- `redis.port` -> `externalRedis.port`
+- `redis.password` -> `externalRedis.password`
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 12.x.x
+
+13.0.0 fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse service password.
+
+As part of this work, the following chart inputs have changed:
+
+- `clickhouse.host` -> `externalClickhouse.host`
+- `clickhouse.enabled` now toggles the internal ClickHouse cluster on/off. If this is off, you will need to specify an external clickhouse cluster.
+- `clickhouse.database` was previously used as the cluster name as well. Now `clickhouse.cluster` has been introduced.
+- `clickhouse.user` is now usable
+- `clickhouse.replication` was removed
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.

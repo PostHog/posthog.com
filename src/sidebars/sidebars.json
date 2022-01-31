@@ -5,6 +5,19 @@
             "url": "/handbook"
         },
         {
+            "name": "Getting started",
+            "children": [
+                {
+                    "name": "Start here",
+                    "url": "/handbook/getting-started/start-here"
+                },
+                {
+                    "name": "Meetings",
+                    "url": "/handbook/getting-started/meetings"
+                }
+            ]
+        },
+        {
             "name": "Company",
             "url": "",
             "children": [
@@ -45,19 +58,6 @@
                 {
                     "name": "Prioritization",
                     "url": "/handbook/strategy/prioritization"
-                }
-            ]
-        },
-        {
-            "name": "Getting started",
-            "children": [
-                {
-                    "name": "Start here",
-                    "url": "/handbook/getting-started/start-here"
-                },
-                {
-                    "name": "Meetings",
-                    "url": "/handbook/getting-started/meetings"
                 }
             ]
         },
@@ -546,8 +546,18 @@
                             "url": "/docs/self-host/configure/upgrading-posthog"
                         },
                         {
-                            "name": "Async migrations",
-                            "url": "/docs/self-host/configure/async-migrations"
+                            "name": "Async Migrations",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/docs/self-host/configure/async-migrations/overview"
+                                },
+                                {
+                                    "name": "Migration guide: 0002_events_sample_by",
+                                    "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -592,13 +602,24 @@
                             ]
                         },
                         {
-                            "name": "Postgresql",
+                            "name": "PostgreSQL",
+                            "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
                                     "name": "Resize disk",
                                     "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
+                        },
+                        {
+                            "name": "Redis",
+                            "url": "/docs/self-host/runbook/redis",
+                            "children": []
+                        },
+                        {
+                            "name": "Zookeeper",
+                            "url": "/docs/self-host/runbook/zookeeper",
+                            "children": []
                         }
                     ]
                 }
@@ -823,6 +844,10 @@
                 {
                     "name": "Events",
                     "url": "/docs/user-guides/events"
+                },
+                {
+                    "name": "Experimentation",
+                    "url": "/docs/user-guides/experimentation"
                 },
                 {
                     "name": "Feature Flags",

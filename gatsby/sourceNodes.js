@@ -85,7 +85,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 name_and_slug: (block) => {
                     const split = block.text.text.split(' on ')
                     question.name = split[0]
-                    question.slug = split[1]
+                    question.slug = split[1].split(',').map((slug) => slug.trim())
                 },
                 question: (block) => {
                     question.body = block.text.text

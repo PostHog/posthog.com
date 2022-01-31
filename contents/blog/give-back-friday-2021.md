@@ -8,6 +8,7 @@ hideAnchor: true
 author: ['joe-martin']
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
+categories: ["Open Source"]
 ---
 
 Black Friday is normally an occasion to shop around for a new TV or mobile phone. But we wanted to do something a little different, something to celebrate and support the open source community which we both rely upon and are proud to be part of.  So, we're announcing our Give Back Friday campaign:
