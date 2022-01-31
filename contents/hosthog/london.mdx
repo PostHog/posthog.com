@@ -1,0 +1,83 @@
+---
+date: 2022-02-24
+city: London
+venue: { name: Cobalance, address: Shoreditch High Street, London }
+from: '18:00'
+to: '20:30'
+agenda:
+    [
+        {
+            from: '18:00',
+            to: '18:30',
+            description: 'Sign in, grab some merch and hang with the PostHog team.',
+            emoji: '👋🏼',
+        },
+        {
+            from: '18:30',
+            to: '19:00',
+            description: 'After a welcome from CEO James Hawkins, hear how Mention Me uses PostHog to build better products in a fireside chat with Head of Product Anca Filip, hosted by PostHog’s Marcus Hyett.',
+            emoji: '💬',
+        },
+        {
+            from: '19:15',
+            to: '20:30',
+            description: 'Chat with the team and other PostHog users over a cocktail and slice of pizza. We’d love to hear your ideas and feedback!',
+            emoji: '🍺',
+        },
+    ]
+speakers:
+    [
+        {
+            name: 'James Hawkins',
+            title: 'Co-founder & CEO',
+            company: 'PostHog',
+            linkedIn: 'https://www.linkedin.com/in/j-hawkins',
+            image: '../images/hosthog/london/speakers/james.png',
+        },
+        {
+            name: 'Anca Filip',
+            title: 'Head of Product',
+            company: 'Mention Me',
+            linkedIn: 'https://www.linkedin.com/in/ancafilip',
+            image: '../images/hosthog/london/speakers/anca.png',
+        },
+        {
+            name: 'Marcus Hyett',
+            title: 'VP of Product',
+            company: 'PostHog',
+            linkedIn: '',
+            image: '../images/hosthog/london/speakers/marcus.png',
+        },
+    ]
+---
+
+<Title>
+    Join us for our first community meetup <span className="text-red">in London</span>
+</Title>
+
+<Section className="border-b border-dashed border-gray-accent-light pb-4" style={{marginBottom: 0}} divider={false} cols={2}>
+
+<div>
+
+We’re delighted to announce our first ever community meet-up on **24th February** where special guests from Mention Me will join us to discuss how they’re using PostHog to build better products and create a rich culture of experimentation.
+
+This is also your chance to meet the PostHog team and share your feedback over a cocktail and slice of pizza (pineapple optional).
+
+<CallToAction to="/">RSVP on Eventbrite</CallToAction>
+
+<Disclaimer />
+
+<WhereWhen />
+
+</div>
+
+![HostHog London](../images/hosthog/london/featured.png)
+
+</Section>
+
+<Section divider={false}>
+    <Section style={{ margin: 0 }} divider={false} cols={2}>
+        <Agenda />
+        <Speakers />
+    </Section>
+</Section>
