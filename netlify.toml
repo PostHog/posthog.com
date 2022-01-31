@@ -1144,3 +1144,8 @@
 [[redirects]]
     from = "/docs/user-guides/sessions"
     to = "/blog/sessions-removal"
+
+# Added: 2022-01-31
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/overview"
+    to = "/docs/self-host/configure/async-migrations"
