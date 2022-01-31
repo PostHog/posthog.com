@@ -14,7 +14,7 @@ import SessionRecording from './SessionRecording'
 function ProductPage() {
     return (
         <Layout>
-            <SEO title="Product • PostHog" />
+            <SEO title="Product • PostHog" image="/images/product/product.png" />
             <FeatureSlider />
             <Hero />
             <Navigation />
