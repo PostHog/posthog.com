@@ -39,7 +39,7 @@ There were 2 important reasons for doing this:
 
 ### Will this migration cause any data loss?
 
-No. During the migration events ingestion from Kafka to ClickHouse will be paused for a brief period. There won't be any data loss as we'll be consuming all the events from Kafka later. Futhermore this migration duplicates the events table and keeps the old table as a backup so we can always restore it.
+No. During the migration events ingestion from Kafka to ClickHouse will be paused for a brief period. There won't be any data loss as we'll be consuming all the events from Kafka later. Furthermore this migration duplicates the events table and keeps the old table as a backup so we can always restore it.
 
 No. During the migration we take advantage of Kafka storing all the incoming events during the brief period when ingestion from Kafka to ClickHouse is stopped. while we write the last partition to the new table and swap the tables.
 
