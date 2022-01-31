@@ -8,11 +8,9 @@ showTitle: true
 - ⭐️ Craft a clear **vision** for an ambitious goal that gets everyone **very excited**!
 - ⭐️ Build the strategy for one **ambiguous opportunity** to improve a company metric or achieve a company goal (_should be ready to be worked on by end of Q1_).
 - Enable Core Experience Team to plan their sprints and ship higher quality features autonomously.
+- Aid Engineering Team to ensure we ship Collaboration for Launch Week.
 
 ## Q4 2021 Goals
-
-### Retrospective
-Coming soon.
 
 ### Planning
 
