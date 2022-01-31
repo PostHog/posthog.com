@@ -171,7 +171,7 @@ If you are overriding any of those values, please make the corresponding changes
 
 ### Upgrading from 12.x.x
 
-13.0.0 fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse server password.
+13.0.0 fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse service password.
 
 As part of this work, the following chart inputs have changed:
 
