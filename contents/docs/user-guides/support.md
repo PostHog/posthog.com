@@ -15,10 +15,10 @@ Broadly, our Enterprise support is bespoke, whereas Open Source, Cloud and Scale
 |Support type|Open Source|Cloud|Scale|Enterprise|
 |---|---|---|---|---|
 |[Community](#community-support)|✔️|✔️|✔️|✔️|
-|[Dedicated Slack](#dedicated-slack)|x|Minimum $2k/month spend|✔️|✔️|
+|[Dedicated Slack](#dedicated-slack)|x|Minimum $2k/month spend|➕|✔️|
 |[Dedicated email](#dedicated-email)|x|x|x|✔️|
 |[Training sessions](#training-sessions)|x|x|x|✔️|
-|[Deployment developer pairing](#deployment-developer-pairing)|x|x|✔️|✔️|
+|[Deployment developer pairing](#deployment-developer-pairing)|x|x|➕|✔️|
 |[Configuration assistance](#configuration-assistance)|x|x|x|✔️|
 |[Standard Terms and Conditions](#standard-terms-and-conditions)|MIT Licence|✔️|✔️|✔️|
 |[Master Services Agreement](#master-services-agreement-msa)|x|x|x|✔️|
@@ -27,6 +27,8 @@ Broadly, our Enterprise support is bespoke, whereas Open Source, Cloud and Scale
 |[Payment via invoicing](#payment-via-invoicing)|x|x|Minimum $2k/month spend|✔️|
 |[Downtime developer pairing](#downtime-developer-pairing)|x|x|x|✔️|
 |[Region-specific private cloud infrastructure managed by PostHog](#region-specific-cloud-infrastructure-managed-by-posthog)|x|x|x|✔️|
+
+➕ By default, the Scale plan does not include items marked with a ➕, however we work with several partners that can offer a 'fully supported' experience for Scale customers.
 
 ## Community Support
 
