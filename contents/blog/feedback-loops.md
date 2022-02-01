@@ -63,12 +63,11 @@ We recently reached the "Gathering feedback" stage of Experimentation, and this 
 
 But, if I want to aggressively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments. This meant tying up any loose ends, writing up documentation, and ensuring that basic features were obvious-bugs free.
 
-The benefits here were three-fold: 
+The benefits here are three-fold: 
 
-1. We aren't building features we'd later scrap because some basic assumption was invalidated 
+1. We aren't building features we'll later scrap because some basic assumption was invalidated 
 2. We're making progress on other priorities
-3. Most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well
-
+3. We're increasing the number of users running experiments. This means a larger surface area of people who finish experiments and more feedback, allowing us to iterate well
 
 Note how gathering feedback was not an afterthought, but an important part of planning out our sprint, which justified the change in direction.
 
