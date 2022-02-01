@@ -294,7 +294,7 @@
                 "items": [
                     {
                         "title": "Our story",
-                        "description": "<p>PostHog was founded in 2020. We have <strong>5,500 customers</strong>, and our team of 26 is fully distributed around the world.</p>",
+                        "description": "<p>PostHog was founded in 2020. We have <strong>5,500 customers</strong>, and our team of <TotalTeam /> is fully distributed around the world.</p>",
                         "link": {
                             "title": "Read our story",
                             "url": "/handbook/company/story"
