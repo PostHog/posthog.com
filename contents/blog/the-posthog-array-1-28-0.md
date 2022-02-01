@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product Updates"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/1-28-0.png
 excerpt: Understand your conversion rates better, PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, and many more improvements and fixes.
 ---

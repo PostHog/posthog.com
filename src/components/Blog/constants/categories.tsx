@@ -19,7 +19,7 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/inside-posthog',
     },
     {
-        title: 'Product Updates',
+        title: 'Product updates',
         slug: 'product-updates',
         link: '/blog/categories/product-updates',
     },
@@ -29,7 +29,7 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/engineering',
     },
     {
-        title: 'Product Analytics',
+        title: 'Product analytics',
         slug: 'product-analytics',
         link: '/blog/categories/product-analytics',
     },
