@@ -38,8 +38,7 @@ Another good example you might be familiar with is the maxim: "Make small pull r
  
 Threading together feedback loops like these allows you to explore a larger sample space of solutions.
 
-For example, consider you're in the build phase. You've come up with a solution, and our building out the solution. It may happen that you hit a technical snag. Now, usually, you'd look for technical solutions to a technical problem. However, this can sometimes be counterproductive.
-
+For example, consider you're in the build phase. You've come up with a solution, and are building out the solution. It may happen that you hit a technical snag. Now, usually, you'd look for technical solutions to a technical problem. However, this can sometimes be counterproductive.
 
 While working on [Experimentation](/docs/user-guides/experimentation) at PostHog, we decided to allow users to reuse an existing [Feature Flag](/docs/user-guides/feature-flags) to do experiments. This made sense because people would create the feature flag, test the A/B versions look alright, and then use that same Feature Flag in an experiment, without having to do any code changes.
 
@@ -49,6 +48,12 @@ Instead, we treated this as valuable feedback and went back to the drawing board
 
 Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem.
 
-I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, and come up with solutions you wouldn't have otherwise thought of.
+We recently reached the "Gathering feedback" stage of Experimentation, and this surfaced a new problem: Running A/B tests takes a while, which means feedback is delayed. We want to hear how users run their experiments, but to get feedback around this, we need to wait 2+ weeks for users to finish running experiments. Usually, we'd continue building important stuff until we get feedback and iterate.
+
+But, if I want to aggresively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: Once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments.
+
+The benefits here were three-fold: We aren't building features we'd later scrap because some basic assumption was invalidated. We're making progress on other priorities. And finally, most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well.
+
+I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, come up with solutions you wouldn't have otherwise thought of, and leads to a higher quality product.
 
 
