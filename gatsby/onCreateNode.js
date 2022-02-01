@@ -11,6 +11,31 @@ const slugify = require('slugify')
 
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
+    if (node.internal.type === 'Question') {
+        async function createImageNode(imageURL) {
+            return createRemoteFileNode({
+                url: imageURL,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            }).catch((e) => console.error(e))
+        }
+        if (node.imageURL) {
+            const imageNode = await createImageNode(node.imageURL)
+            node.avatar___NODE = imageNode && imageNode.id
+        }
+
+        if (node.replies) {
+            for (reply of node.replies) {
+                if (reply.imageURL) {
+                    const imageNode = await createImageNode(reply.imageURL)
+                    reply.avatar___NODE = imageNode && imageNode.id
+                }
+            }
+        }
+    }
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         const slug = createFilePath({ node, getNode, basePath: `pages` })

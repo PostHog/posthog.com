@@ -91,7 +91,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 question: (block) => {
                     question.body = block.text.text
                     if (block.accessory) {
-                        question.avatar = block.accessory.image_url
+                        question.imageURL = block.accessory.image_url
                     }
                 },
             }
@@ -127,7 +127,10 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             data
                 .filter(({ slug }) => slug)
                 .map(({ slug, slack_timestamp }) => {
-                    return getReplies(slack_timestamp).then((replies) => ({ slug, replies }))
+                    return getReplies(slack_timestamp).then((replies) => ({
+                        slug: slug.split(',').map((slug) => slug.trim()),
+                        replies,
+                    }))
                 })
         )
         messages.length > 0 &&
@@ -179,7 +182,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                             return {
                                 name: user.user.name,
                                 body: reply.text,
-                                avatar: user.user.profile.image_72,
+                                imageURL: user.user.profile.image_72,
                             }
                         })
                 })
