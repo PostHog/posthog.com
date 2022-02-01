@@ -13,6 +13,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         body: String
         imageURL: String
         authorData: AuthorsJson @link(by: "slack_username", from: "name")
+        avatar: File @link(from: "avatar___NODE")
       }
       type Question implements Node {
         body: String
@@ -20,6 +21,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         slug: [String]
         imageURL: String
         replies: [Reply]
+        avatar: File @link(from: "avatar___NODE")
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")

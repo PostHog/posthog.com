@@ -135,6 +135,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         )
         messages.length > 0 &&
             messages.forEach(({ slug, replies }, index) => {
+                if (!replies) return
                 const question = {
                     ...replies[0],
                     slug,
