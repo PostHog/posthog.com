@@ -104,7 +104,11 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
 
             if (Object.keys(question).length > 0) {
-                const replies = await getReplies(message.thread_ts, process.env.SLACK_QUESTION_CHANNEL)
+                const replies = await getReplies(
+                    message.thread_ts,
+                    process.env.SLACK_QUESTION_CHANNEL,
+                    process.env.SLACK_API_KEY
+                )
                 question.replies = replies.slice(1)
                 const node = {
                     id: createNodeId(`question-${index}`),
@@ -127,10 +131,12 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             data
                 .filter(({ slug }) => slug)
                 .map(({ slug, slack_timestamp, slack_channel }) => {
-                    return getReplies(slack_timestamp, slack_channel).then((replies) => ({
-                        slug: slug.split(',').map((slug) => slug.trim()),
-                        replies,
-                    }))
+                    return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY).then(
+                        (replies) => ({
+                            slug: slug.split(',').map((slug) => slug.trim()),
+                            replies,
+                        })
+                    )
                 })
         )
         messages.length > 0 &&
@@ -155,14 +161,14 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
     }
 
-    async function getReplies(ts, channel) {
+    async function getReplies(ts, channel, apiKey) {
         const replies =
             ts &&
             (
                 await fetch(`https://slack.com/api/conversations.replies?ts=${ts}&channel=${channel}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                        Authorization: `Bearer ${apiKey}`,
                     },
                 }).then((res) => res.json())
             ).messages
@@ -172,7 +178,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                            Authorization: `Bearer ${apiKey}`,
                         },
                     })
                         .then((res) => res.json())
