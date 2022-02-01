@@ -72,3 +72,5 @@ The benefits here are three-fold:
 Note how gathering feedback was not an afterthought, but an important part of planning out our sprint, which justified the change in direction.
 
 I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, come up with solutions you wouldn't have otherwise thought of, and leads to a higher quality product.
+
+> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
