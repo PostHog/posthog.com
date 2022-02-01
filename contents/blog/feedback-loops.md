@@ -40,19 +40,27 @@ Threading together feedback loops like these allows you to explore a larger samp
 
 For example, consider you're in the build phase. You've come up with a solution, and are building out the solution. It may happen that you hit a technical snag. Now, usually, you'd look for technical solutions to a technical problem. However, this can sometimes be counterproductive.
 
-While working on [Experimentation](/docs/user-guides/experimentation) at PostHog, we decided to allow users to reuse an existing [Feature Flag](/docs/user-guides/feature-flags) to do experiments. This made sense because people would create the feature flag, test the A/B versions look alright, and then use that same Feature Flag in an experiment, without having to do any code changes.
+Here's a concrete example. [Experimentation](/docs/user-guides/experimentation) is a new feature we've been building that allows users to run A/B tests. We have feature flags, and you can use these in your code to show A & B variants of a website, and we automatically measure results like significance, and whether you should switch or not.
 
-However, during implementation I found that this made variant distribution very tricky. Making things work like this meant the results would not be 100% accurate., unless I go through several technical hoops to guarantee distribution. This would've taken much longer.
+We decided to allow users to reuse an existing [Feature Flag](/docs/user-guides/feature-flags) to do experiments. This made sense because people would create the feature flag, test the A/B versions look alright, and then use that same Feature Flag in an experiment, without having to do any code changes.
+
+However, during implementation I found that this made variant distribution very tricky. Making things work like this meant the results would not be 100% accurate, unless I go through several technical hoops to guarantee distribution.[^2] This would've taken much longer.
+
+[^2]: [The specifics are in this GitHub comment](https://github.com/PostHog/posthog/issues/7462#issuecomment-987868293). Have I told you yet how much I love open source companies because I can link to examples like these?
 
 Instead, we treated this as valuable feedback and went back to the drawing board. "Can we come up with a better flow, given that we can't reuse existing feature flags?". If this led nowhere, I would've revisited the technical solution. But, this turned out to be very much possible, and we formalised the extra constraint of not re-using Feature Flags.
 
-Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem.
+Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem. This constraint also led us to a UX flow that was a lot less confusing: Every experiment has three stages now: Creation, Implementation, and Results.
+
+Sometimes, it can be hard to get feedback at each stage.
 
 We recently reached the "Gathering feedback" stage of Experimentation, and this surfaced a new problem: Running A/B tests takes a while, which means feedback is delayed. We want to hear how users run their experiments, but to get feedback around this, we need to wait 2+ weeks for users to finish running experiments. Usually, we'd continue building important stuff until we get feedback and iterate.
 
 But, if I want to aggresively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: Once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments.
 
 The benefits here were three-fold: We aren't building features we'd later scrap because some basic assumption was invalidated. We're making progress on other priorities. And finally, most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well.
+
+Note how gathering feedback was not an afterthought, but an important part of planning out our sprint, which justified the change in direction.
 
 I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, come up with solutions you wouldn't have otherwise thought of, and leads to a higher quality product.
 
