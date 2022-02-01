@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
+const { createClient } = require('@supabase/supabase-js')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -103,40 +104,8 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
 
             if (Object.keys(question).length > 0) {
-                const replies =
-                    message.thread_ts &&
-                    (
-                        await fetch(
-                            `https://slack.com/api/conversations.replies?ts=${message.thread_ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                                },
-                            }
-                        ).then((res) => res.json())
-                    ).messages
-                if (replies) {
-                    question.replies = await Promise.all(
-                        replies.slice(1).map((reply) => {
-                            return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                                },
-                            })
-                                .then((res) => res.json())
-                                .then((user) => {
-                                    return {
-                                        name: user.user.name,
-                                        body: reply.text,
-                                        avatar: user.user.profile.image_72,
-                                    }
-                                })
-                        })
-                    )
-                }
-
+                const replies = await getReplies(message.thread_ts)
+                question.replies = replies.slice(1)
                 const node = {
                     id: createNodeId(`question-${index}`),
                     parent: null,
@@ -150,4 +119,71 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 createNode(node)
             }
         })
+
+    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
+    const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug')
+    if (data && data.length > 0) {
+        const messages = await Promise.all(
+            data
+                .filter(({ slug }) => slug)
+                .map(({ slug, slack_timestamp }) => {
+                    return getReplies(slack_timestamp).then((replies) => ({ slug, replies }))
+                })
+        )
+        messages.length > 0 &&
+            messages.forEach(({ slug, replies }, index) => {
+                const question = {
+                    ...replies[0],
+                    slug,
+                    replies: replies[1] && replies.slice(1),
+                }
+                const node = {
+                    id: createNodeId(`question-${index}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `Question`,
+                        contentDigest: createContentDigest(question),
+                    },
+                    ...question,
+                }
+                createNode(node)
+            })
+    }
+
+    async function getReplies(ts) {
+        const replies =
+            ts &&
+            (
+                await fetch(
+                    `https://slack.com/api/conversations.replies?ts=${ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                        },
+                    }
+                ).then((res) => res.json())
+            ).messages
+        if (replies) {
+            return await Promise.all(
+                replies.map((reply) => {
+                    return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                        },
+                    })
+                        .then((res) => res.json())
+                        .then((user) => {
+                            return {
+                                name: user.user.name,
+                                body: reply.text,
+                                avatar: user.user.profile.image_72,
+                            }
+                        })
+                })
+            )
+        }
+    }
 }
