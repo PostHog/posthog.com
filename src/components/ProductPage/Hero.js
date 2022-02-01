@@ -55,7 +55,7 @@ export default function Hero() {
                     <p>
                         <a
                             href="/docs/self-host"
-                            className="border-dashed border-2 border-l-0 border-t-0 border-r-0 border-gray-accent-light text-primary font-medium"
+                            className="border-dashed border-2 border-l-0 border-t-0 border-r-0 border-gray-accent-light dark:border-opacity-50 dark:hover:border-opacity-75 text-primary dark:text-white font-medium"
                         >
                             Host on your own infrastructure
                         </a>{' '}
