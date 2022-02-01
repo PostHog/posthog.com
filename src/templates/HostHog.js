@@ -23,8 +23,8 @@ const Title = () => (
 )
 
 const Disclaimer = () => (
-    <p className="mt-3">
-        <small className="text-black opacity-75">Attendance is free, but space is limited. RSVPs are required.</small>
+    <p className="mt-3 !leading-tight">
+        <small className="text-black opacity-75 ">Attendance is free, but space is limited. RSVPs are required.</small>
     </p>
 )
 
@@ -84,7 +84,7 @@ export default function HostHog({ data }) {
                 {agenda.map(({ to, from, description, emoji }) => {
                     return (
                         <>
-                            <h6 style={{ marginTop: 22, marginBottom: 0 }}>
+                            <h6 className="mt-4 mb-0">
                                 {from} - {to} {emoji && emoji}
                             </h6>
                             <p style={{ margin: 0, fontSize: 15 }}>{description}</p>
@@ -97,11 +97,11 @@ export default function HostHog({ data }) {
 
     const Speakers = () => {
         return (
-            <div className="sm:mt-0 mt-6">
-                <h3>Speakers</h3>
+            <div className="mt-6 sm:mt-0 -mx-5 sm:mx-0">
+                <h3 className="pl-5 sm:pl-0">Speakers</h3>
                 <ul
-                    className="flex space-x-4 justify-between flex-wrap"
-                    style={{ listStyle: 'none', margin: 0, padding: 0 }}
+                    className="flex space-x-6 p-0 px-4 sm:px-0 sm:space-x-4 justify-between whitespace-nowrap overflow-x-auto"
+                    style={{ listStyle: 'none', margin: 0 }}
                 >
                     {speakers.map(({ name, title, company, linkedIn, image }) => {
                         return (
@@ -110,9 +110,10 @@ export default function HostHog({ data }) {
                                 <h5 style={{ marginTop: 22, fontSize: 18, margin: 0 }}>{name}</h5>
                                 <p
                                     style={{ fontSize: 16, color: 'black', opacity: '.50', margin: 0 }}
-                                    className="font-semibold"
+                                    className="font-semibold !leading-snug"
                                 >
-                                    {title}
+                                    {title},<br />
+                                    {company}
                                 </p>
                                 {linkedIn && (
                                     <a
@@ -166,7 +167,8 @@ export default function HostHog({ data }) {
                 <div className="border-t border-gray-accent-light border-dashed pt-10">
                     <h3 className="m-0">Can’t make it to {city}?</h3>
                     <p className="mt-1 mb-16 sm:mb-8 text-base">
-                        Our mailing list is the first to find out when we’re planning a HostHog event closer to you.
+                        Our mailing list subscribers are the first to find out when we're planning a HostHog event
+                        closer to you.
                     </p>
                     <Subscribe />
                 </div>
