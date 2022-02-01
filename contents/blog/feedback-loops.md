@@ -1,5 +1,5 @@
 ---
-date: 2021-12-15
+date: 2022-02-01
 title: Aggressively seeking feedback loops for product development
 rootPage: /blog
 sidebar: Blog
@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["neil-kakkar"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
+categories: ["Engineering"]
 ---
 
 I recently wrote a blog post for my personal site about the [lessons I'd learned from leading my first two projects as a Software Engineer at PostHog](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html). In it, I lay out a five-step approach for how I own projects.  
@@ -63,5 +64,3 @@ The benefits here were three-fold: We aren't building features we'd later scrap 
 Note how gathering feedback was not an afterthought, but an important part of planning out our sprint, which justified the change in direction.
 
 I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, come up with solutions you wouldn't have otherwise thought of, and leads to a higher quality product.
-
-
