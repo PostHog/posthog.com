@@ -33,7 +33,7 @@ export default function HostHog({ data }) {
         id,
         body,
         excerpt,
-        frontmatter: { date, venue, from, to, city, agenda, speakers, description },
+        frontmatter: { date, venue, from, to, city, agenda, speakers, description, featuredImage },
     } = data.mdx
 
     const WhereWhen = () => {
@@ -136,6 +136,13 @@ export default function HostHog({ data }) {
         )
     }
 
+    const FeaturedImage = () => {
+        return (
+            <div className="self-start relative w-full before:absolute before:h-full before:w-full before:bg-gray-accent before:rounded-sm before:-bottom-3 before:-right-3">
+                <img className="w-full relative" src={featuredImage?.publicURL} />
+            </div>
+        )
+    }
     const components = {
         pre: CodeBlock,
         Hero,
@@ -149,6 +156,7 @@ export default function HostHog({ data }) {
         Disclaimer,
         Agenda,
         Speakers,
+        FeaturedImage,
         ...shortcodes,
     }
 
@@ -186,6 +194,9 @@ export const query = graphql`
             frontmatter {
                 description
                 date(formatString: "dddd, Do MMMM")
+                featuredImage {
+                    publicURL
+                }
                 venue {
                     name
                     address
