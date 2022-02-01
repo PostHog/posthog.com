@@ -8,12 +8,14 @@ hideAnchor: true
 author: ["neil-kakkar"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Engineering"]
+categories: ["Engineering", "Inside PostHog", "Open Source"]
 ---
 
 I recently wrote a blog post for my personal site about the [lessons I'd learned from leading my first two projects as a Software Engineer at PostHog](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html). In it, I lay out a five-step approach for how I own projects.  
 
 One common theme that stood out was how feedback loops between each stage lead to much better decisions. In this post, I want to talk about why these feedback loops are useful, and how to actively seek iterative gains from these loops.
+
+## My aggressive approach to feedback loops
 
 To recap, the five steps I mentioned are
 
@@ -29,7 +31,7 @@ But what if, instead of getting feedback on the product, you get feedback on eac
 
 [^1]: There's a case to be made about diminishing returns, and the cost of effort it takes to create the feedback loop, which is why you wouldn't want to extend this argument to "gathering feedback every hour/minute/second"
 
-I like the five-step model because it provides natural schelling points to check for feedback.
+I like the five-step model because it provides [natural schelling points](https://en.wikipedia.org/wiki/Focal_point_(game_theory)) to check for feedback.
 
 For example, when gathering context and figuring out the problem, I love involving teammates, especially product owners. We explore competitor products together. We make discussion and strategy threads open, so everyone in the company can see and contribute to it. It’s valuable to hear from colleagues who might have more context because they were previously an insider or have other relevant knowledge. [Here's a recent example for automated insights](https://github.com/PostHog/posthog/issues/8261)
 
@@ -40,6 +42,8 @@ Another good example you might be familiar with is the maxim: "Make small pull r
 Threading together feedback loops like these allows you to explore a larger sample space of solutions.
 
 For example, consider you're in the build phase. You've come up with a solution, and are building out the solution. It may happen that you hit a technical snag. Now, usually, you'd look for technical solutions to a technical problem. However, this can sometimes be counterproductive.
+
+## How feedback loops helped make PostHog better – an example
 
 Here's a concrete example. [Experimentation](/docs/user-guides/experimentation) is a new feature we've been building that allows users to run A/B tests. We have feature flags, and you can use these in your code to show A & B variants of a website, and we automatically measure results like significance, and whether you should switch or not.
 
@@ -57,9 +61,14 @@ Sometimes, it can be hard to get feedback at each stage.
 
 We recently reached the "Gathering feedback" stage of Experimentation, and this surfaced a new problem: Running A/B tests takes a while, which means feedback is delayed. We want to hear how users run their experiments, but to get feedback around this, we need to wait 2+ weeks for users to finish running experiments. Usually, we'd continue building important stuff until we get feedback and iterate.
 
-But, if I want to aggressively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: Once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments. This meant tying up any loose ends, writing up documentation, and ensuring that basic features were obvious-bugs free.
+But, if I want to aggressively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments. This meant tying up any loose ends, writing up documentation, and ensuring that basic features were obvious-bugs free.
 
-The benefits here were three-fold: We aren't building features we'd later scrap because some basic assumption was invalidated. We're making progress on other priorities. And finally, most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well.
+The benefits here were three-fold: 
+
+1. We aren't building features we'd later scrap because some basic assumption was invalidated 
+2. We're making progress on other priorities
+3. Most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well
+
 
 Note how gathering feedback was not an afterthought, but an important part of planning out our sprint, which justified the change in direction.
 
