@@ -5,6 +5,7 @@ import { Check, Close, LinkedIn } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
+import { SEO } from 'components/seo'
 import Subscribe from 'components/Subscribe'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -31,7 +32,8 @@ export default function HostHog({ data }) {
     const {
         id,
         body,
-        frontmatter: { date, venue, from, to, city, agenda, speakers },
+        excerpt,
+        frontmatter: { date, venue, from, to, city, agenda, speakers, description },
     } = data.mdx
 
     const WhereWhen = () => {
@@ -151,6 +153,7 @@ export default function HostHog({ data }) {
 
     return (
         <Layout>
+            <SEO title={`HostHog ${city} - PostHog`} description={description || excerpt} />
             <div className="max-w-[1070px] mx-auto mt-14 px-5">
                 <article>
                     <p className="text-[20px] font-semibold opacity-50 text-black m-0">HostHog: {city} 2022</p>
@@ -179,6 +182,7 @@ export const query = graphql`
             body
             excerpt(pruneLength: 150)
             frontmatter {
+                description
                 date(formatString: "dddd, Do MMMM")
                 venue {
                     name
