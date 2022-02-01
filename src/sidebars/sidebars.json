@@ -5,6 +5,19 @@
             "url": "/handbook"
         },
         {
+            "name": "Getting started",
+            "children": [
+                {
+                    "name": "Start here",
+                    "url": "/handbook/getting-started/start-here"
+                },
+                {
+                    "name": "Meetings",
+                    "url": "/handbook/getting-started/meetings"
+                }
+            ]
+        },
+        {
             "name": "Company",
             "url": "",
             "children": [
@@ -45,19 +58,6 @@
                 {
                     "name": "Prioritization",
                     "url": "/handbook/strategy/prioritization"
-                }
-            ]
-        },
-        {
-            "name": "Getting started",
-            "children": [
-                {
-                    "name": "Start here",
-                    "url": "/handbook/getting-started/start-here"
-                },
-                {
-                    "name": "Meetings",
-                    "url": "/handbook/getting-started/meetings"
                 }
             ]
         },
@@ -140,6 +140,10 @@
                         {
                             "name": "Team People",
                             "url": "/handbook/people/team-structure/people"
+                        },
+                        {
+                            "name": "Team Customer Success",
+                            "url": "/handbook/people/team-structure/customer-success"
                         }
                     ]
                 }
@@ -315,7 +319,7 @@
                     "url": "/handbook/product/product-team"
                 },
                 {
-                    "name": "Product Metrics",
+                    "name": "Product metrics",
                     "url": "/handbook/product/metrics"
                 },
                 {
@@ -327,7 +331,7 @@
                     "url": "/handbook/product/scale-features-prioritization"
                 },
                 {
-                    "name": "Paid Features",
+                    "name": "Paid features",
                     "url": "/handbook/product/paid-features"
                 }
             ]
@@ -364,6 +368,10 @@
                 {
                     "name": "Product announcements",
                     "url": "/handbook/growth/marketing/product-announcements"
+                },
+                {
+                    "name": "HostHogs (Running Events)",
+                    "url": "/handbook/growth/marketing/hosthogs"
                 },
                 {
                     "name": "Acquisition channels",
@@ -464,14 +472,6 @@
                     "url": "/docs/self-host/architecture"
                 },
                 {
-                    "name": "Postgres vs ClickHouse",
-                    "url": "/docs/self-host/postgres-vs-clickhouse"
-                },
-                {
-                    "name": "Migrate from Postgres to ClickHouse",
-                    "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                },
-                {
                     "name": "Deploy",
                     "url": "",
                     "children": [
@@ -508,6 +508,10 @@
                             "url": "/docs/self-host/deploy/upgrade-notes"
                         },
                         {
+                            "name": "Migrate from Postgres to ClickHouse",
+                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
+                        },
+                        {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
                         },
@@ -542,8 +546,22 @@
                             "url": "/docs/self-host/configure/upgrading-posthog"
                         },
                         {
-                            "name": "Async migrations",
-                            "url": "/docs/self-host/configure/async-migrations"
+                            "name": "Async Migrations",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/docs/self-host/configure/async-migrations/overview"
+                                },
+                                {
+                                    "name": "0002_events_sample_by",
+                                    "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                },
+                                {
+                                    "name": "0003_fill_person_distinct_id2",
+                                    "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -588,7 +606,7 @@
                             ]
                         },
                         {
-                            "name": "Postgresql",
+                            "name": "PostgreSQL",
                             "url": "/docs/self-host/runbook/postgresql",
                             "children": [
                                 {
@@ -596,6 +614,16 @@
                                     "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                 }
                             ]
+                        },
+                        {
+                            "name": "Redis",
+                            "url": "/docs/self-host/runbook/redis",
+                            "children": []
+                        },
+                        {
+                            "name": "Zookeeper",
+                            "url": "/docs/self-host/runbook/zookeeper",
+                            "children": []
                         }
                     ]
                 }
@@ -693,7 +721,6 @@
                             "name": "Java",
                             "url": "/docs/integrate/server/java"
                         },
-
                         {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
@@ -727,10 +754,6 @@
                         {
                             "name": "Google Tag Manager",
                             "url": "/docs/integrate/third-party/google-tag-manager"
-                        },
-                        {
-                            "name": "Metabase",
-                            "url": "/docs/integrate/third-party/metabase"
                         },
                         {
                             "name": "Next.js",
@@ -815,11 +838,7 @@
                     "url": "/docs/user-guides/cohorts"
                 },
                 {
-                    "name": "Group Analytics",
-                    "url": "/docs/user-guides/group-analytics"
-                },
-                {
-                    "name": "Correlation analysis",
+                    "name": "Correlation Analysis",
                     "url": "/docs/user-guides/correlation"
                 },
                 {
@@ -831,12 +850,24 @@
                     "url": "/docs/user-guides/events"
                 },
                 {
+                    "name": "Experimentation",
+                    "url": "/docs/user-guides/experimentation"
+                },
+                {
                     "name": "Feature Flags",
                     "url": "/docs/user-guides/feature-flags"
                 },
                 {
                     "name": "Funnels",
                     "url": "/docs/user-guides/funnels"
+                },
+                {
+                    "name": "Group Analytics",
+                    "url": "/docs/user-guides/group-analytics"
+                },
+                {
+                    "name": "Lifecycle",
+                    "url": "/docs/user-guides/lifecycle"
                 },
                 {
                     "name": "Organizations and projects",
@@ -847,8 +878,16 @@
                     "url": "/docs/user-guides/paths"
                 },
                 {
+                    "name": "Persons",
+                    "url": "/docs/user-guides/persons"
+                },
+                {
                     "name": "Plugins",
                     "url": "/docs/user-guides/plugins"
+                },
+                {
+                    "name": "Recordings",
+                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "Retention",
@@ -857,14 +896,6 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Lifecycle",
-                    "url": "/docs/user-guides/lifecycle"
-                },
-                {
-                    "name": "Recordings",
-                    "url": "/docs/user-guides/recordings"
                 },
                 {
                     "name": "SSO & SAML",
@@ -881,10 +912,6 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "Persons",
-                    "url": "/docs/user-guides/persons"
                 }
             ]
         },
@@ -1042,7 +1069,6 @@
             "name": "Session recording",
             "url": "/product/session-recording"
         },
-
         {
             "name": "Feature flags",
             "url": "/product/feature-flags"

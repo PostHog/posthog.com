@@ -5,6 +5,20 @@ import Link from '../Link'
 import { heading, section } from './classes'
 import Icon from './Icon'
 
+export const FeatureStrip = ({ className = '' }) => {
+    return (
+        <ul
+            className={`bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b ${className}`}
+        >
+            <Feature icon="event-pipelines" title="Event pipelines" />
+            <Feature icon="analytics" title="Analytics" />
+            <Feature icon="session-recordings" title="Session recordings" />
+            <Feature icon="feature-flags" title="Feature flags" />
+            <Feature icon="data-warehouse" title="Export to data warehouse" />
+        </ul>
+    )
+}
+
 const Feature = ({ title, icon }) => {
     return (
         <li className="flex px-6 md:px-6 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center">
@@ -20,8 +34,8 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        Host your own
-                        <br /> product analytics suite
+                        The product analytics suite
+                        <br /> <span className="text-red">you can host yourself</span>
                     </h1>
                     <h2 className={heading('sm', 'primary', 'my-6', 'max-w-xl', 'mx-auto')}>
                         With our open source platform, customer data never has to leave your infrastructure
@@ -46,23 +60,16 @@ export default function Hero() {
                             objectPosition="bottom"
                             loading="eager"
                             placeholder="none"
-                            width={357}
+                            width={400}
                             imgClassName="h-auto"
-                            className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-60px] md:mr-[-75px]"
+                            className="h-full max-w-[200px] md:max-w-[300px] xl:max-w-none mr-0 md:mr-0"
                             objectFit="contain"
                             src="./images/hero-right.png"
                         />
                     </span>
                 </div>
             </div>
-
-            <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
-                <Feature icon="event-pipelines" title="Event pipelines" />
-                <Feature icon="analytics" title="Analytics" />
-                <Feature icon="session-recordings" title="Session recording" />
-                <Feature icon="feature-flags" title="Feature flags" />
-                <Feature icon="data-warehouse" title="Export to data warehouse" />
-            </ul>
+            <FeatureStrip />
         </section>
     )
 }

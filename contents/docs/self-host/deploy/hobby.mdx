@@ -12,22 +12,38 @@ It should **not** be used as a production instance for tracking a product with a
 
 ## Pre-requisites
 
-* You have deployed a Linux Ubuntu Virtual Machine. 
-  *  A $10/month (2GB RAM) droplet on Digital Ocean can handle approximately 100k events spread over a month
-  * We recommend a $20/ month (4GB RAM) if you expect any surges in event volumes
-  * Over 100K we'd recommend our Scale deployment methods
+-   You have deployed a Linux Ubuntu Virtual Machine.
+    -   A $10/month (2GB RAM) droplet on Digital Ocean can handle approximately 100k events spread over a month
+    -   We recommend a $20/ month (4GB RAM) if you expect any surges in event volumes
+    -   Over 100K we'd recommend our Scale deployment methods
+
+You can click on the badge below to get US$100 in credit over 60 days
+(i.e. run PostHog for free for ~2 months).
+
+<center>
+    <a
+        href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"
+        title="DigitalOcean Referral"
+    >
+        <img
+            noZoom
+            alt="DigitalOcean Referral Badge"
+            src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg"
+        />
+    </a>
+</center>
 
 ## Quick install on an Ubuntu VM
 
 For a quick install that uses Docker, run the following command:
 
-```bash 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)" 
-``` 
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
+```
 
 ## Migrating
 
 If you need to move into production or if your server is struggling, you can migrate to a production instance as follows:
 
-* [deploy a fresh production instance](../) of PostHog
-* install the [Migrator 3000 plugin](https://github.com/PostHog/posthog-plugin-migrator3000) to migrate your data over
+-   [deploy a fresh production instance](../) of PostHog
+-   install the [Migrator 3000 plugin](https://github.com/PostHog/posthog-plugin-migrator3000) to migrate your data over

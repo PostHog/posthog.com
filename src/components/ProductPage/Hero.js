@@ -45,16 +45,21 @@ export default function Hero() {
                     </h2>
                     <ul className="text-[20px] font-semibold">
                         <li className="text-[20px]">Measure performance</li>
-                        <li className="text-[20px]">Diagnose & build context</li>
-                        <li className="text-[20px]">Test & roll out improvements</li>
+                        <li className="text-[20px]">Diagnose &amp; build context</li>
+                        <li className="text-[20px]">Test &amp; roll out improvements</li>
                     </ul>
                     <p>
                         PostHog is an open-source analytics platform that offers a radically different approach to
                         building better products.
                     </p>
                     <p>
-                        Host on your own infrastructure and capture up to 30% more events, compared to cloud-based
-                        analytics tools.
+                        <a
+                            href="/docs/self-host"
+                            className="border-dashed border-2 border-l-0 border-t-0 border-r-0 border-gray-accent-light text-primary font-medium"
+                        >
+                            Host on your own infrastructure
+                        </a>{' '}
+                        and capture up to 30% more events, compared to cloud-based analytics tools.
                     </p>
                 </div>
                 <motion.div

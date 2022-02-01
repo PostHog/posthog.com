@@ -94,8 +94,8 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
 }
 
 export default function BlogPost({ data, pageContext, location }) {
-    const { postData } = data
-    const { body, excerpt } = postData
+    const { postData, questions } = data
+    const { body, excerpt, fields } = postData
     const { date, title, featuredImage, featuredImageType, contributors, description } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -121,7 +121,11 @@ export default function BlogPost({ data, pageContext, location }) {
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={
+                    featuredImageType === 'full'
+                        ? `/og-images/${fields.slug.replace(/\//g, '')}.jpeg`
+                        : featuredImage?.publicURL
+                }
             />
             <Breadcrumbs className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary" darkModeToggle>
                 <Crumb title="Blog" url="/blog" />
@@ -150,7 +154,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     <BlogPostSidebar
                         categories={categories}
                         contributors={contributors}
-                        date={lastUpdated || date}
+                        date={date}
                         filePath={filePath}
                         title={title}
                         location={location}
@@ -174,7 +178,7 @@ export default function BlogPost({ data, pageContext, location }) {
 }
 
 export const query = graphql`
-    query BlogPostLayout($id: String!) {
+    query BlogPostLayout($id: String!, $slug: String!) {
         postData: mdx(id: { eq: $id }) {
             id
             body
@@ -199,7 +203,11 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image
+                    image {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
+                    }
                     name
                 }
             }
@@ -208,6 +216,29 @@ export const query = graphql`
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")
+                    }
+                }
+            }
+        }
+        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
+            nodes {
+                avatar
+                body
+                name
+                slug
+                replies {
+                    avatar
+                    body
+                    name
+                    authorData {
+                        name
+                        role
+                        image {
+                            childImageSharp {
+                                gatsbyImageData(width: 40, height: 40)
+                            }
+                        }
+                        link_url
                     }
                 }
             }

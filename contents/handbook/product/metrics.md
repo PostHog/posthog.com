@@ -4,16 +4,19 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is Discoveries. The metric can be tracked in the [product dasboard][dashboard] and is reported weekly at PostHog News.
+# Discoveries
+
+As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is **Discoveries**. The metric can be tracked in the [product dasboard][dashboard] and is reported weekly at PostHog News.
 
 > 💡 Discoveries is different from Discovered Learnings. Discovered Learnings is used as a metric for activation and growth.
 
 Generally, small teams should be making measurable impact towards improving this metric (not all teams, not all the time). It's okay for epics and sprints to have other intermediate (and probably more concrete) goals, but overall each team should be moving the metric as a whole.
 
-## Metric definition
+## What is a Discovery?
 The metric is defined [in this action][action]. The concept of the metric is users driving insights from PostHog, so any of these actions:
-- Analyzing any insight. Analyzing means viewing for 10 seconds or more. Insights include: trends, funnels, sessions (*), paths, lifecycle, stickiness and quant analysis.
+- Analyzing any insight. Analyzing means viewing for 10 seconds or more. Insights include: trends, funnels, paths, lifecycle, stickiness.
 - Analyzing a recording. Watching a recording for 10 seconds or more.
+- Analyzing a correlation analysis report. Analyzing means viewing for 10 seconds or more. 
 
 
 **Adding new insights**

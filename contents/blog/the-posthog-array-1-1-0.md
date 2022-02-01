@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product Updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---

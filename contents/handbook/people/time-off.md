@@ -12,6 +12,8 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People team will look holiday usage occasionally but _only_ to encourage people who haven't taken enough time off to do so. The 25 days is a minimum, not a guide. 
 
+As a benchmark, in 2021 the team on average took 32 days off. 
+
 
 ## Permissionless time off
 

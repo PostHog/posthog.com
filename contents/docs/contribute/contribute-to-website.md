@@ -22,7 +22,7 @@ In order to run the PostHog website locally, you need the following installed:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (installed with GitHub Desktop)
 - [Node.js](https://nodejs.org/en/download/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x)
 
 Optionally, if you are unfamiliar with using Git from the command line, you will need the following installed:
 
@@ -79,6 +79,13 @@ Don't worry! We only need to run a few commands in the terminal.
 </HiddenSection>
 
 ### Running posthog.com locally
+
+If you're using an Apple Silicon Mac (M1) then you'll need to run the following commands before using yarn:
+
+```bash
+rm -rf ./node_modules
+brew install vips
+```
 
 Type the following into the terminal and press return:
 

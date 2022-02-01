@@ -7,11 +7,16 @@ showTitle: true
 
 ## Why does this exist?
 
-Our Sentry integration is a two-way integration. Once installed, it will:
-- Add a direct link in Sentry to the profile of the person affected in PostHog
-- Send an `$exception` event to PostHog with a direct link to Sentry
+Our Sentry integration is a two-way integration which works on Javascript & Python. Once installed, it will:
+- Add a direct link in Sentry to the profile of the person affected in PostHog.
+- Send an `$exception` event to PostHog with a direct link to Sentry.
 
 This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
+
+
+If you're looking for the PostHog + Sentry integration for Python, please check out the [Python docs](/docs/integrate/server/python#sentry).
+
+# Javascript integration
 
 ## Installation
 

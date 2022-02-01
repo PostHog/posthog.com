@@ -7,6 +7,12 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../../mdxGlobalComponents'
 
+const kebabCase = (string) =>
+    string
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .replace(/[\s_]+/g, '-')
+        .toLowerCase()
+
 export default function Team() {
     const {
         team: { teamMembers },
@@ -25,7 +31,7 @@ export default function Team() {
                     <li key={id}>
                         <div className="team-row">
                             <div className="team-left-text">
-                                <h3>{title}</h3>
+                                <h3 id={kebabCase(name) + '-' + kebabCase(jobTitle)}>{title}</h3>
                                 <GithubIcon username={github} />
                                 <div className="team-left-bio">
                                     <MDXProvider components={shortcodes}>
