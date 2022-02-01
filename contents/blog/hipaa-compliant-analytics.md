@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: standard
-categories: ["Guides", "Privacy", "Product Analytics"]
+categories: ["Guides", "Privacy", "Product analytics"]
 ---
 If you work in an industry, such as healthcare or medical insurance, which is covered by HIPAA regulations then there are limits around what data you can share and with who. However PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it the most HIPAA-compliant product analytics platform available. 
 

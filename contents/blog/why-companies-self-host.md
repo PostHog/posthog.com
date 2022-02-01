@@ -9,7 +9,7 @@ keywords: ["self host analytics","self hosted analytics"]
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["Product Analytics", "Guides"]
+categories: ["Product analytics", "Guides"]
 ---
 
 PostHog is a self-hosted, [open-source analytics tool](/blog/best-open-source-analytics-tools). Transparency is one of our [core values](/handbook/company/culture) and we believe self-hosting is the best solution for many businesses, especially large enterprises with complex needs. But, why? Why do we believe in this idea when the likes of Mixpanel, Amplitude and Heap are busy doing the exact opposite?

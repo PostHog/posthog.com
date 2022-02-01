@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Product Analytics", "Open Source", "Guides"]
+categories: ["Product analytics", "Open source", "Guides"]
 ---
 
 The European Union's GDPR (General Data Protection Regulation) was created in 2016 to provide a framework which protects user privacy and shape how the data of users in the EU (and the UK) can be stored and shared. It applies to all businesses, non-profits and public organizations across the EU and the penalties for breaking it are severe -- up to 4% of your yearly revenue. 

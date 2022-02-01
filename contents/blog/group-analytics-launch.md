@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Product Updates"]
+categories: ["Product updates"]
 ---
 
 Today, we’re excited to announce that PostHog has launched Group Analytics for both PostHog Scale / Enterprise users and those on PostHog Cloud. 
