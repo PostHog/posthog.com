@@ -1,6 +1,6 @@
+import Link from 'components/Link'
 import React from 'react'
 import Avatar from './Avatar'
-import Link from 'components/Link'
 
 const Reply = ({ avatar, name, body, authorData }) => {
     return (
@@ -30,7 +30,7 @@ export default function Question({ question }) {
             <div className="flex-grow">
                 <p className="mb-0">{body}</p>
                 <p className="text-[14px] font-semibold opacity-50 mb-3">by {name}</p>
-                {replies.length > 0 && replies.map((reply, index) => <Reply key={index} {...reply} />)}
+                {replies && replies.length > 0 && replies.map((reply, index) => <Reply key={index} {...reply} />)}
             </div>
         </div>
     )

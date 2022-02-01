@@ -104,7 +104,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
 
             if (Object.keys(question).length > 0) {
-                const replies = await getReplies(message.thread_ts)
+                const replies = await getReplies(message.thread_ts, process.env.SLACK_QUESTION_CHANNEL)
                 question.replies = replies.slice(1)
                 const node = {
                     id: createNodeId(`question-${index}`),
@@ -121,13 +121,13 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         })
 
     const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
-    const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug')
+    const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug, slack_channel')
     if (data && data.length > 0) {
         const messages = await Promise.all(
             data
                 .filter(({ slug }) => slug)
-                .map(({ slug, slack_timestamp }) => {
-                    return getReplies(slack_timestamp).then((replies) => ({
+                .map(({ slug, slack_timestamp, slack_channel }) => {
+                    return getReplies(slack_timestamp, slack_channel).then((replies) => ({
                         slug: slug.split(',').map((slug) => slug.trim()),
                         replies,
                     }))
@@ -154,19 +154,16 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
     }
 
-    async function getReplies(ts) {
+    async function getReplies(ts, channel) {
         const replies =
             ts &&
             (
-                await fetch(
-                    `https://slack.com/api/conversations.replies?ts=${ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                        },
-                    }
-                ).then((res) => res.json())
+                await fetch(`https://slack.com/api/conversations.replies?ts=${ts}&channel=${channel}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                    },
+                }).then((res) => res.json())
             ).messages
         if (replies) {
             return await Promise.all(

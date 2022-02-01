@@ -453,7 +453,7 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
         const view = {
             trigger_id: shortcut.trigger_id,
             view: {
-                private_metadata: shortcut.message.ts,
+                private_metadata: JSON.stringify({ ts: shortcut.message.ts, channel: shortcut.channel.id }),
                 callback_id: 'submit-db-button',
                 type: 'modal',
                 title: {
@@ -508,6 +508,8 @@ app.view('submit-db-button', async ({ ack, view }) => {
         slug: null,
     }
 
+    const { ts, channel } = JSON.parse(private_metadata)
+
     Object.keys(values).forEach((valueKey) => {
         Object.keys(body).forEach((bodyKey) => {
             if (values[valueKey][bodyKey]) {
@@ -516,7 +518,8 @@ app.view('submit-db-button', async ({ ack, view }) => {
         })
     })
 
-    body.slack_timestamp = private_metadata
+    body.slack_timestamp = ts
+    body.slack_channel = channel
 
     await supabase.from('Messages').upsert([body])
 })
