@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
+featuredImageType: full
 excerpt: PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysis, a revamped overall user experience on Insights and 350+ more improvements and fixes.
 ---
 

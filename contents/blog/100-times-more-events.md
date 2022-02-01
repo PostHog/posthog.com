@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/100x/100x.png
+featuredImageType: full
 author: ["james-hawkins"]
 categories: ["Product updates"]
 ---
