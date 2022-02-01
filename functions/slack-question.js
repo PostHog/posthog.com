@@ -444,7 +444,8 @@ app.action('publish-button', async ({ ack, client, body }) => {
 app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
     try {
         await ack()
-
+        const user = await client.users.info({ user: shortcut.user.id })
+        if (!user.user.is_admin) return
         const { data, error } = await supabase
             .from('Messages')
             .select('slack_timestamp, slug')
@@ -453,7 +454,11 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
         const view = {
             trigger_id: shortcut.trigger_id,
             view: {
-                private_metadata: JSON.stringify({ ts: shortcut.message.ts, channel: shortcut.channel.id }),
+                private_metadata: JSON.stringify({
+                    ts: shortcut.message.ts,
+                    channel: shortcut.channel.id,
+                    user: shortcut.user.id,
+                }),
                 callback_id: 'submit-db-button',
                 type: 'modal',
                 title: {
@@ -508,7 +513,7 @@ app.view('submit-db-button', async ({ ack, view }) => {
         slug: null,
     }
 
-    const { ts, channel } = JSON.parse(private_metadata)
+    const { ts, channel, user } = JSON.parse(private_metadata)
 
     Object.keys(values).forEach((valueKey) => {
         Object.keys(body).forEach((bodyKey) => {
@@ -520,6 +525,7 @@ app.view('submit-db-button', async ({ ack, view }) => {
 
     body.slack_timestamp = ts
     body.slack_channel = channel
+    body.slack_user = user
 
     await supabase.from('Messages').upsert([body])
 })
