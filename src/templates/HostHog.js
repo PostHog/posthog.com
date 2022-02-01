@@ -24,7 +24,7 @@ const Title = () => (
 
 const Disclaimer = () => (
     <p className="mt-3">
-        <small className="text-black opacity-75">HostHog events are free to attend, but space is limited.</small>
+        <small className="text-black opacity-75">Attendance is free, but space is limited. RSVPs are required.</small>
     </p>
 )
 
