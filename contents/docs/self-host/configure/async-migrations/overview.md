@@ -64,13 +64,13 @@ The settings tab allows you to change the configuration, e.g. whether async migr
 
 In the async migrations page at `/instance/async_migrations` you can choose to `stop` or `stop and rollback` the migration from the `...` button on the right most column.
 
-![Stopping the migration](../../../images/async-migrations-stop-rollback.png)
+![Stopping the migration](../../../../images/async-migrations-stop-rollback.png)
 
 ### The migration is in an Error state - what should I do?
 
 Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
 
-![Rollback errored migration](../../../images/async-migrations-error-rollback-button.png)
+![Rollback errored migration](../../../../images/async-migrations-error-rollback-button.png)
 
 
 ### Celery scaling considerations
