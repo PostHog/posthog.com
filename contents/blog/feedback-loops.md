@@ -56,7 +56,7 @@ Sometimes, it can be hard to get feedback at each stage.
 
 We recently reached the "Gathering feedback" stage of Experimentation, and this surfaced a new problem: Running A/B tests takes a while, which means feedback is delayed. We want to hear how users run their experiments, but to get feedback around this, we need to wait 2+ weeks for users to finish running experiments. Usually, we'd continue building important stuff until we get feedback and iterate.
 
-But, if I want to aggressively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: Once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments.
+But, if I want to aggressively seek feedback at every stage, this doesn't work. Here, we came up with an alternative solution: Once basic experimentation features were in place, we switched focus away from building Experimentation. Instead, we focused on other priorities, and getting users to use experiments. This meant tying up any loose ends, writing up documentation, and ensuring that basic features were obvious-bugs free.
 
 The benefits here were three-fold: We aren't building features we'd later scrap because some basic assumption was invalidated. We're making progress on other priorities. And finally, most importantly, we're increasing the number of users running experiments, which means a larger surface area of people who finish experiments, thus more feedback which allows us to iterate well.
 
