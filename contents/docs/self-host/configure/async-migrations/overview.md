@@ -1,6 +1,6 @@
 ---
 title: Async Migrations
-sidebar: Handbook
+sidebar: Docs
 showTitle: true
 ---
 

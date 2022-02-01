@@ -1,6 +1,6 @@
 ---
 title: Migration guide - 0002_events_sample_by
-sidebar: Handbook
+sidebar: Docs
 showTitle: true
 ---
 
