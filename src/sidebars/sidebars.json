@@ -298,7 +298,7 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "ClickHouse query performance optimization",
+                    "name": "Query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
                 },
                 {
