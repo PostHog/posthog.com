@@ -25,7 +25,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         avatar: File @link(from: "avatar___NODE")
         name: String
         fullName: String
-        authorData: AuthorsJson @link(by: "slack_username", from: "name")
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")

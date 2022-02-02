@@ -164,7 +164,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
 
     function createReplies(node, replies) {
         for (reply of replies) {
-            const { rawBody, name, imageURL, ts } = reply
+            const { rawBody, name, imageURL, ts, fullName } = reply
             const replyId = createNodeId(`reply-${ts}`)
             const replyNode = {
                 id: replyId,
@@ -178,6 +178,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 },
                 name,
                 imageURL,
+                fullName,
             }
             createNode(replyNode)
             createParentChildLink({ parent: node, child: replyNode })
@@ -214,7 +215,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                                 rawBody,
                                 imageURL: user.user.profile.image_72,
                                 ts: reply.ts,
-                                fullName: user?.user?.isAdmin ? user?.user?.profile?.real_name : null,
+                                fullName: user?.user?.profile?.real_name,
                             }
                         })
                 })

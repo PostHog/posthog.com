@@ -152,7 +152,18 @@ export const query = graphql`
                     }
                     avatar {
                         childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(width: 40, height: 40)
+                        }
+                    }
+                    teamMember {
+                        frontmatter {
+                            name
+                            jobTitle
+                            headshot {
+                                childImageSharp {
+                                    gatsbyImageData(width: 40, height: 40)
+                                }
+                            }
                         }
                     }
                 }

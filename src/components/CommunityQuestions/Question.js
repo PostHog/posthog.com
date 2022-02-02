@@ -2,7 +2,6 @@ import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
-import Link from 'components/Link'
 import { ZoomImage } from 'components/ZoomImage'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
@@ -17,19 +16,14 @@ const components = {
     ...shortcodes,
 }
 
-const Reply = ({ avatar, name, childMdx, authorData }) => {
+const Reply = ({ avatar, name, childMdx, teamMember }) => {
     return (
         <div className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 rounded-md w-full mt-3">
             <div className="flex space-x-2 items-center">
-                <Avatar image={authorData?.image || avatar} />
+                <Avatar image={teamMember?.frontmatter?.headshot || avatar} />
                 <p className="m-0 text-[14px] font-semibold">
-                    {authorData?.link_url ? (
-                        <Link to={authorData.link_url}>{authorData.name}</Link>
-                    ) : (
-                        <span>{name}</span>
-                    )}
-
-                    <span className="opacity-50">, {authorData?.role || 'Contributor'}</span>
+                    <span>{teamMember?.frontmatter?.name || name}</span>
+                    <span className="opacity-50">, {teamMember?.frontmatter?.jobTitle || 'Contributor'}</span>
                 </p>
             </div>
             <div className="my-3">
