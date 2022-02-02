@@ -109,9 +109,12 @@ ingress-nginx:
         service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 ```
 
-and then run:
+and since you started with the one-click deploy you'll need the helm chart locally, so run:
 
 <CommandHelmGetRepoSnippet />
+
+now you can upgrade your cluster with the new values
+
 <CommandHelmUpgradeSnippet />
 
 #### 2. Install `ClusterIssuer`
