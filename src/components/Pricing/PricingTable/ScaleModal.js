@@ -42,7 +42,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </div>
 
                                 <PricingSlider
-                                    marks={[1000, 1000000, 10000000, 150000000]}
+                                    marks={[1000, 1000000, 2000000, 10000000, 150000000]}
                                     min={1000}
                                     max={150000000}
                                     defaultValue={1000}
@@ -55,7 +55,15 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">First 10 million</dt>
+                                    <dt className="mb-0 opacity-75 text-xs">First 1 million</dt>
+                                    <dd className="mb-0 font-bold text-xs">Free</dd>
+                                </dl>
+                                <dl className="flex justify-between mb-0 p-2">
+                                    <dt className="mb-0 opacity-75 text-xs">1-2 million</dt>
+                                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
+                                </dl>
+                                <dl className="flex justify-between mb-0 p-2">
+                                    <dt className="mb-0 opacity-75 text-xs">2-10 million</dt>
                                     <dd className="mb-0 font-bold text-xs">$0.000225</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
