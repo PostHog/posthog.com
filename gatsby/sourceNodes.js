@@ -3,7 +3,7 @@ const uniqBy = require('lodash.uniqby')
 const { createClient } = require('@supabase/supabase-js')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
-    const { createNode } = actions
+    const { createNode, createParentChildLink } = actions
 
     if (process.env.WORKABLE_API_KEY) {
         const { jobs } = await fetch('https://posthog.workable.com/spi/v3/jobs?state=published', {
@@ -78,20 +78,19 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         questions.messages &&
         questions.messages.forEach(async (message, index) => {
             const { blocks } = message
-
             if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
-
-            const question = { replies: [] }
+            const question = {}
+            const reply = { ts: message.ts }
             const blockIds = {
                 name_and_slug: (block) => {
                     const split = block.text.text.split(' on ')
-                    question.name = split[0]
+                    reply.name = split[0]
                     question.slug = split[1].split(',').map((slug) => slug.trim())
                 },
                 question: (block) => {
-                    question.rawBody = block.text.text
+                    reply.rawBody = block.text.text
                     if (block.accessory) {
-                        question.imageURL = block.accessory.image_url
+                        reply.imageURL = block.accessory.image_url
                     }
                 },
             }
@@ -110,9 +109,9 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     process.env.SLACK_API_KEY,
                     false
                 )
-                question.replies = replies.slice(1)
+                question.replies = [reply, ...replies.slice(1)]
                 const node = {
-                    id: createNodeId(`question-${index}`),
+                    id: createNodeId(`question-${message.thread_ts}`),
                     parent: null,
                     children: [],
                     internal: {
@@ -122,6 +121,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     ...question,
                 }
                 createNode(node)
+                createReplies(node, question.replies)
             }
         })
 
@@ -136,20 +136,19 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         (replies) => ({
                             slug: slug.split(',').map((slug) => slug.trim()),
                             replies,
+                            slack_timestamp,
                         })
                     )
                 })
         )
         messages.length > 0 &&
-            messages.forEach(({ slug, replies }, index) => {
-                if (!replies) return
+            messages.forEach(({ slug, replies, slack_timestamp }) => {
                 const question = {
-                    ...replies[0],
                     slug,
-                    replies: replies[1] && replies.slice(1),
+                    replies,
                 }
                 const node = {
-                    id: createNodeId(`question-${index}`),
+                    id: createNodeId(`question-${slack_timestamp}`),
                     parent: null,
                     children: [],
                     internal: {
@@ -159,7 +158,30 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     ...question,
                 }
                 createNode(node)
+                createReplies(node, replies)
             })
+    }
+
+    function createReplies(node, replies) {
+        for (reply of replies) {
+            const { rawBody, name, imageURL, ts } = reply
+            const replyId = createNodeId(`reply-${ts}`)
+            const replyNode = {
+                id: replyId,
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Reply`,
+                    contentDigest: createContentDigest(rawBody),
+                    content: rawBody,
+                    mediaType: 'text/markdown',
+                },
+                name,
+                imageURL,
+            }
+            createNode(replyNode)
+            createParentChildLink({ parent: node, child: replyNode })
+        }
     }
 
     async function getReplies(ts, channel, apiKey, format) {
@@ -188,9 +210,11 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                                 ? await formatSlackElements(reply.blocks[0].elements, apiKey)
                                 : reply.text
                             return {
-                                name: user.user.name,
+                                name: user?.user?.profile?.first_name || user?.user?.name,
                                 rawBody,
                                 imageURL: user.user.profile.image_72,
+                                ts: reply.ts,
+                                fullName: user?.user?.isAdmin ? user?.user?.profile?.real_name : null,
                             }
                         })
                 })
@@ -211,10 +235,10 @@ async function formatSlackElements(elements, apiKey) {
                     Authorization: `Bearer ${apiKey}`,
                 },
             }).then((res) => res.json())
-            return user?.user?.real_name
+            return user?.user?.profile?.first_name || user?.user?.name
         },
         link: (el) => {
-            return `[${el.text}](${el.url})`
+            return `[${el.text || el.url}](${el.url})`
         },
         emoji: (el) => {
             return ''

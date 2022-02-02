@@ -8,20 +8,24 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")
       }
-      type Reply {
+      type Replies {
         name: String
         rawBody: String
         imageURL: String
-        authorData: AuthorsJson @link(by: "slack_username", from: "name")
-        avatar: File @link(from: "avatar___NODE")
       }
       type Question implements Node {
         rawBody: String
         name: String
         slug: [String]
         imageURL: String
-        replies: [Reply]
+        replies: [Replies]
         avatar: File @link(from: "avatar___NODE")
+      }
+      type Reply implements Node {
+        avatar: File @link(from: "avatar___NODE")
+        name: String
+        fullName: String
+        authorData: AuthorsJson @link(by: "slack_username", from: "name")
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")

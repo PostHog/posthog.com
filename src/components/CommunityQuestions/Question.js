@@ -17,7 +17,7 @@ const components = {
     ...shortcodes,
 }
 
-const Reply = ({ avatar, name, body, authorData }) => {
+const Reply = ({ avatar, name, childMdx, authorData }) => {
     return (
         <div className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 rounded-md w-full mt-3">
             <div className="flex space-x-2 items-center">
@@ -34,7 +34,7 @@ const Reply = ({ avatar, name, body, authorData }) => {
             </div>
             <div className="my-3">
                 <MDXProvider components={components}>
-                    <MDXRenderer>{body.childMdx.body}</MDXRenderer>
+                    <MDXRenderer>{childMdx.body}</MDXRenderer>
                 </MDXProvider>
             </div>
         </div>
@@ -42,18 +42,18 @@ const Reply = ({ avatar, name, body, authorData }) => {
 }
 
 export default function Question({ question }) {
-    const { avatar, body, name, replies } = question
+    const { avatar, childMdx, name } = question[0]
     return (
         <div className="flex items-start space-x-4 w-full">
             <Avatar image={avatar} />
             <div className="flex-grow max-w-[405px]">
                 <div>
                     <MDXProvider components={components}>
-                        <MDXRenderer>{body.childMdx.body}</MDXRenderer>
+                        <MDXRenderer>{childMdx.body}</MDXRenderer>
                     </MDXProvider>
                 </div>
                 <p className="text-[14px] font-semibold opacity-50 mb-3">by {name}</p>
-                {replies && replies.length > 0 && replies.map((reply, index) => <Reply key={index} {...reply} />)}
+                {question.length > 1 && question.slice(1).map((reply, index) => <Reply key={index} {...reply} />)}
             </div>
         </div>
     )

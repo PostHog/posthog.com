@@ -8,6 +8,7 @@ require('dotenv').config({
 })
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
+const createMDXNode = require('gatsby-plugin-mdx/utils/create-mdx-node')
 
 module.exports = exports.onCreateNode = async ({
     node,
@@ -18,8 +19,8 @@ module.exports = exports.onCreateNode = async ({
     createNodeId,
     createContentDigest,
 }) => {
-    const { createNodeField, createNode } = actions
-    if (node.internal.type === 'Question') {
+    const { createNodeField, createNode, createParentChildLink } = actions
+    if (node.internal.type === 'Reply') {
         async function createImageNode(imageURL) {
             return createRemoteFileNode({
                 url: imageURL,
@@ -34,50 +35,10 @@ module.exports = exports.onCreateNode = async ({
             const imageNode = await createImageNode(node.imageURL)
             node.avatar___NODE = imageNode && imageNode.id
         }
-
-        const { rawBody } = node
-        const questionId = createNodeId(`replies-${rawBody}`)
-        const questionNode = {
-            id: questionId,
-            parent: null,
-            children: [],
-            internal: {
-                type: `Replies`,
-                contentDigest: createContentDigest(rawBody),
-                content: rawBody,
-                mediaType: 'text/markdown',
-            },
-        }
-        await createNode(questionNode)
-        node.body___NODE = questionId
-
-        if (node.replies) {
-            for (reply of node.replies) {
-                const { rawBody } = reply
-                const replyId = createNodeId(`replies-${rawBody}`)
-                const node = {
-                    id: replyId,
-                    parent: null,
-                    children: [],
-                    internal: {
-                        type: `Replies`,
-                        contentDigest: createContentDigest(rawBody),
-                        content: rawBody,
-                        mediaType: 'text/markdown',
-                    },
-                }
-                await createNode(node)
-                reply.body___NODE = replyId
-                if (reply.imageURL) {
-                    const imageNode = await createImageNode(reply.imageURL)
-                    reply.avatar___NODE = imageNode && imageNode.id
-                }
-            }
-        }
     }
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
-        if (parent.internal.type === 'Replies') return
+        if (parent.internal.type === 'Reply') return
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
             node,
