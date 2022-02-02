@@ -11,9 +11,9 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-When PostHog was fresh out of YC last year, there were two things we focussed on: (i) build and (ii) talk to customers. Hiring a product person felt like a bureacratic layer which would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize. We didn't want our engineers to be "shielded" from our customers.
+When PostHog was fresh out of YC last year, there were two things we focussed on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.
 
-By PostHog's series B, I realized this approach was wrong.
+By PostHog's series B, our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
 # Why I used to think this way
 
@@ -58,11 +58,11 @@ We looked for scrappy, anti-plan type folk who wouldn't create a detailed year l
 
 Above all though, the most important part of getting the team to click was our engineers telling Tim (my cofounder) and me that we needed to hire a product person. Sidenote: this happened in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). They were absolutely right.
 
-## 2. We got our board on side
+## 2. We got our board to look at leading indicator metrics
 
-We want to focus on optimizing leading indicator metrics, as high up the funnel as possible. Then we put those into our board meetings.
+We want to focus on optimizing leading indicator metrics, as high up the funnel as possible. That means you have a faster feedback loop for learning. We put those into our board meetings.
 
-We still send financial and revenue data each time, and have modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
+PostHog still sends financial and revenue data each time, and have modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
 
 Specifically, this is the list we currently care about:
 
@@ -73,21 +73,23 @@ Specifically, this is the list we currently care about:
 
 ## 3. We structured the company for autonomy
 
-PostHog uses small teams, inspired by Twilio, who were inspired by Amazon. We're around 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control. LINK SMALL TEAMS
+PostHog uses [small teams](../handbook/people/team-structure/why-small-teams), inspired by Twilio, who were inspired by Amazon. [Jeff Lawson's book](https://www.askyourdeveloper.com/) is a good 101 on this topic. TL;DR - we're 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control.
 
-## 4. We learned how to focus
+These teams are supported by product people. That means engineers are not told in detail what to do, or what is ok to merge. We put our product people into specific small teams where there is lots of help needed, but many teams run fine without them doing more than informal support (at our current scale at least).
 
-We created a Nail X framework. You tell the company "Nail X" where X is a thing you must nail. I'm not joking. "Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made funnels in PostHog awesome.
+## 4. We created two (very) basic frameworks
 
-Get X reference customers was another useful framework. This came out of a board meeting. We realized that we had product market fit with our free open source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group.
+We created a Nail X framework. You tell the company "Nail X" where X is a thing you must nail. I'm not joking. [Unnuanced communication can be powerful](https://twitter.com/danluu/status/1487228574608211969). Product people decide what we need to nail.
 
-Finally, our sprints are quite key in deciding what gets built. HERE'S MORE STUFF
+"Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made funnels in PostHog awesome.
+
+Get X reference customers was another useful framework. This came out of a board meeting. We realized that we had product market fit with our free open source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
 
 ## 5. We wrote stuff down
 
-This matters to us as it prevents "information silos". Sidenote: I tried hard to find a less corporate way to describe that, but couldn't.
+This matters to us as it prevents "information silos". I tried hard to find a less corporate way to describe that succinctly, but couldn't.
 
-That doesn't just apply to people reporting stuff upwards. This is what the exec team at PostHog does:
+_Everyone_ must work like this. This is what the exec team at PostHog does:
 
 * We share our exec meetings publicly in the company. Anyone can comment / read.
 * We write out strategy changes into a pull request. Anyone can comment / read / suggest changes.
@@ -97,9 +99,9 @@ That doesn't just apply to people reporting stuff upwards. This is what the exec
 
 ## 6. Product should involve engineers
 
-Product ar eproactive with getting feedback. They involve engineering - many times a day, PostHog's engineering team speak to real life users. That may be over Slack, or it may be on a call.
+Product are proactive with getting feedback. They involve engineering - many times a day, PostHog's engineering team speak to real life users. That may be over Slack, or it may be on a call.
 
-When engineers release new features, we'll encourage them to get one or more users to use the thing in real life. (REFERENCE SOME INTERESTING ISSUES HERE WHERE WE'VE DONE THIS - IE A/B TESTING NOTES)
+When engineers release new features, we'll encourage them to [collaborate directly with users](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html) in real life.
 
 # The difference it has made
 
@@ -111,8 +113,10 @@ This has been mind blowing. Here are a few stats for how last year when compared
 * 0 to (significant) revenue
 * 0 to many reference customers 
 
-Overall, it just felt easier to grow _and_ like we were losing less energy trying to prioritize things. We could still make fast/ad hoc decisions, but with much more information behind them. Progress was both calmer and faster.
+Overall, it just felt easier to grow _and_ like we were losing less energy trying to prioritize things. We could still make fast/ad hoc decisions, but with much more information behind them. Progress was both calmer and faster. We became proud of the product.
 
 # Timing
 
-I suspect we were right at 2 people that product was something that fell to us, but it didn't take long for it to become critical. If we were to start over, I'd probably not hire product in the first 5 hires, but I'd definitely hire product in the first 10.
+I suspect we were right at 2 people that product was something that fell to us.
+
+However, we were wrong that once we had product market fit for our open source product, to continue making detailed decisions about prioritization. At this stage, we didn't know every user ourselves any more, and there was too much data to hold in our heads - that's where more focussed product people can do a better job than founders or the engineering team at deciding what to build.
