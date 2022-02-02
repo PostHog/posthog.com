@@ -5,7 +5,6 @@ import { InlineCode } from 'components/InlineCode'
 import { ZoomImage } from 'components/ZoomImage'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { shortcodes } from '../../mdxGlobalComponents'
 import Avatar from './Avatar'
 
 const Reply = ({ avatar, name, childMdx, teamMember }) => {
@@ -14,7 +13,6 @@ const Reply = ({ avatar, name, childMdx, teamMember }) => {
         blockquote: Blockquote,
         pre: CodeBlock,
         img: ZoomImage,
-        ...shortcodes,
     }
     return (
         <div className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 rounded-md w-full mt-3">
@@ -40,7 +38,6 @@ export default function Question({ question }) {
         blockquote: Blockquote,
         pre: CodeBlock,
         img: ZoomImage,
-        ...shortcodes,
     }
     const { avatar, childMdx, name } = question[0]
     return (
