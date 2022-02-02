@@ -62,7 +62,7 @@ To understand why, it helps to break down the history of the GDPR:
 
 - **January 13, 2022:** The Austrian data authority partially upholds the Shrems complaint, ruling that the Austrian website did violate the GDPR. Google, as a data processor, isn't deemed liable
 
->Read our guide to the [best GDPR-compliant analytics tools](https://posthog.com/blog/best-gdpr-compliant-analytics-tools) for advice on alternatives to Google Analytics
+>Read our guide to the [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) for advice on alternatives to Google Analytics
 
 ## What happens next?
 Once you break down the chain of events, one thing becomes abundantly clear: a new Privacy Shield, such as that suggested by Google, would run into the same legal challenges that scuppered previous agreements. 
