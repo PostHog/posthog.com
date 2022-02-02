@@ -124,42 +124,43 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 createReplies(node, question.replies)
             }
         })
-
-    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
-    const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug, slack_channel')
-    if (data && data.length > 0) {
-        const messages = await Promise.all(
-            data
-                .filter(({ slug }) => slug)
-                .map(({ slug, slack_timestamp, slack_channel }) => {
-                    return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY, true).then(
-                        (replies) => ({
-                            slug: slug.split(',').map((slug) => slug.trim()),
-                            replies,
-                            slack_timestamp,
-                        })
-                    )
+    if (process.env.SUPABASE_API_KEY && process.env.SUPABASE_URL) {
+        const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
+        const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug, slack_channel')
+        if (data && data.length > 0) {
+            const messages = await Promise.all(
+                data
+                    .filter(({ slug }) => slug)
+                    .map(({ slug, slack_timestamp, slack_channel }) => {
+                        return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY, true).then(
+                            (replies) => ({
+                                slug: slug.split(',').map((slug) => slug.trim()),
+                                replies,
+                                slack_timestamp,
+                            })
+                        )
+                    })
+            )
+            messages.length > 0 &&
+                messages.forEach(({ slug, replies, slack_timestamp }) => {
+                    const question = {
+                        slug,
+                        replies,
+                    }
+                    const node = {
+                        id: createNodeId(`question-${slack_timestamp}`),
+                        parent: null,
+                        children: [],
+                        internal: {
+                            type: `Question`,
+                            contentDigest: createContentDigest(question),
+                        },
+                        ...question,
+                    }
+                    createNode(node)
+                    createReplies(node, replies)
                 })
-        )
-        messages.length > 0 &&
-            messages.forEach(({ slug, replies, slack_timestamp }) => {
-                const question = {
-                    slug,
-                    replies,
-                }
-                const node = {
-                    id: createNodeId(`question-${slack_timestamp}`),
-                    parent: null,
-                    children: [],
-                    internal: {
-                        type: `Question`,
-                        contentDigest: createContentDigest(question),
-                    },
-                    ...question,
-                }
-                createNode(node)
-                createReplies(node, replies)
-            })
+        }
     }
 
     function createReplies(node, replies) {

@@ -59,7 +59,7 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
                         },
                         label: {
                             type: 'plain_text',
-                            text: 'Slug',
+                            text: 'Slug (eg: /docs/api/insights), separated by commas',
                             emoji: true,
                         },
                     },
