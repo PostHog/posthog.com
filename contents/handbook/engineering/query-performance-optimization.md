@@ -10,7 +10,7 @@ This document outlines some best practices to archive good query performance at 
 
 PostHog uses two different datastores:
 
-- **PostgreSQL**: row-oriented OLTP database, mainly used to store and query datasets using predictable clausole(s). It is likely your best choice if:
+- **PostgreSQL**: row-oriented OLTP database, mainly used to store and query datasets using predictable clause(s). It is likely your best choice if:
     - the query pattern to access your dataset is predictable
     - the dataset will likely not grow overtime above (<= 1 TB)
     - the dataset needs to mutate often (`DELETE`/`UPDATE`)
