@@ -1,6 +1,6 @@
 ---
 date: 2022-02-01
-title: Aggressively seeking feedback loops for product development
+title: How I learned to love feedback loops (and make better products)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Engineering", "Inside PostHog", "Open Source"]
 ---
 
-I recently wrote a blog post for my personal site about the [lessons I'd learned from leading my first two projects as a Software Engineer at PostHog](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html). In it, I lay out a five-step approach for how I own projects.  
+I recently wrote a blog post for my personal site about the <a target='_blank' rel="noopener" href='https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html'>lessons I'd learned from leading my first two projects as a Software Engineer at PostHog </a>. In it, I lay out a five-step approach for how I own projects.  
 
 One common theme that stood out was how feedback loops between each stage lead to much better decisions. In this post, I want to talk about why these feedback loops are useful, and how to actively seek iterative gains from these loops.
 
