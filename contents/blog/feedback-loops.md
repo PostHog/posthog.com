@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["neil-kakkar"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Engineering", "Inside PostHog", "Open Source"]
+categories: ["Engineering", "Inside PostHog", "Open source"]
 ---
 
 I recently wrote a blog post for my personal site about the <a target='_blank' rel="noopener" href='https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html'>lessons I'd learned from leading my first two projects as a Software Engineer at PostHog </a>. In it, I lay out a five-step approach for how I own projects.  
