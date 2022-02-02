@@ -11,9 +11,9 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-As a fresh YC grad, we needed to build and talk to customers. Product felt like a bureacratic layer which would slow us down.
+When PostHog was fresh out of YC last year, there were two things we focussed on: (i) build and (ii) talk to customers. Hiring a product person felt like a bureacratic layer which would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize. We didn't want our engineers to be "shielded" from our customers.
 
-By PostHog's series B, I realized I was completely wrong!
+By PostHog's series B, I realized this approach was wrong.
 
 # Why I used to think this way
 
@@ -21,7 +21,7 @@ My previous experience of product management:
 
 * Here's a list of features the enterprise sales team wants
 * How much pipeline does each of these features influence?
-* Builds as much of the above as possible whilst trying to manage existing customer requests
+* _Builds as much of the above as possible whilst trying to manage existing customer requests_
 
 Lead to:
 
@@ -30,54 +30,50 @@ Lead to:
 * No word of mouth growth
 * Customer churn in the long term
 
-# Your company's board will drive this
-
-... just when you thought you were in control of your destiny!
+# It starts with expectation setting
 
 <a href="https://imgflip.com/i/61pr1n"><img src="https://i.imgflip.com/61pr1n.jpg" title="made at imgflip.com"/></a><div><a href="https://imgflip.com/memegenerator">from Imgflip Meme Generator</a></div><br />
 
 Alas.
 
-Whilst we should measure what matters - often it's what is easiest to measaure that gets measured.
+Whilst we should measure what matters - often it's what is measured, is what ends up mattering.
 
-So, what's easy to measure and feels important? Revenue. A B2B SAAS company will default into prioritizing this extremely strongly.
+Revenue is pretty easy to measure and feels important. A B2B SAAS company will therefore default into prioritizing this. That feels intuitive - your company will die without money.
 
 And you should sell more to get more revenue, right?
 
 <div style="width:360px;max-width:100%;"><div style="height:0;padding-bottom:65%;position:relative;"><iframe width="360" height="234" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/61rx1x"></iframe></div><p><a href="https://imgflip.com/gif/61rx1x">via Imgflip</a></p></div>
 
-New business feels quicker than trying to gradually upsell existing users. If product focuses on enabling existing pipeline to close, you end up in the above failure mode.
+If product focuses on enabling existing pipeline to close, versus customer retention and growth, you end up in the above failure mode.
 
-# Why we've had a great experience
+# How we approached building a small product team
 
-... and here are the actual things we did.
+We've 2 product managers in a team of 30 people. [Results later](#the-difference-it-has-made) (they're good), here's what we did.
 
-## 1. We got the personalities right
+## 1. We hired product managers who can code
 
-Our product people must be able to empathize with our users. We build for developers, so that meant hiring people that could write a little code. It felt like a compromise to not look for this.
+Our product people must be able to empathize with our users. We build for developers, so that meant hiring people that could write at least a little code. It felt like a compromise to not look for this.
 
-We looked for scrappy, anti-plan type folk who wouldn't create a detailed year long roadmap but would create loose guidance, with tons of context, and would help the company iterate its product over time. This fitted the culture we felt was optimal.
+We looked for scrappy, anti-plan type folk who wouldn't create a detailed year long roadmap but would create loose guidance, with tons of context, and would help the company iterate its product over time. This fitted the culture we felt was optimal. Product managers who can code are likely to be a bit scrappier - after all, they've probably acquired both these skills by working in smaller organizations where roles are broad.
 
-Probably most important - our engineers told us we needed to hire a product person. They were absolutely right.
+Above all though, the most important part of getting the team to click was our engineers telling Tim (my cofounder) and me that we needed to hire a product person. Sidenote: this happened in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). They were absolutely right.
 
 ## 2. We got our board on side
 
 We want to focus on optimizing leading indicator metrics, as high up the funnel as possible. Then we put those into our board meetings.
 
-If we must provide further data, we do - but it goes into an appendix. We spent time to explain why this was.
+We still send financial and revenue data each time, and have modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
 
-We of course could have the wrong leading indicators, that's why you need your appendix data. In that case, change your leading indicators.
+Specifically, this is the list we currently care about:
 
-This is the list we currently care about:
-
-* Quality sign ups
+* Quality sign ups (we look for signups that match our [Ideal Customer Profile](../handbook/strategy/strategy#target-customers-for-2022))
 * Conversion rate of high quality sign ups to paid
 * Deployment conversion rate
-* Number of discoveries inside PostHog
+* Number of discoveries inside PostHog (this is people creating a data visualization with filtering - the more users do this, the better we retain them)
 
 ## 3. We structured the company for autonomy
 
-PostHog uses small teams, inspired by Twilio, who were inspired by Amazon. We're around 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control.
+PostHog uses small teams, inspired by Twilio, who were inspired by Amazon. We're around 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control. LINK SMALL TEAMS
 
 ## 4. We learned how to focus
 
@@ -115,6 +111,8 @@ This has been mind blowing. Here are a few stats for how last year when compared
 * 0 to (significant) revenue
 * 0 to many reference customers 
 
-Overall, it just felt easier to grow _and_ like we were losing less energy trying to prioritize things. Progress was felt calmer, but was faster.
+Overall, it just felt easier to grow _and_ like we were losing less energy trying to prioritize things. We could still make fast/ad hoc decisions, but with much more information behind them. Progress was both calmer and faster.
 
-Perhaps we were right at 2 people that product was something that fell to us, but it didn't take long for it to become critical.
+# Timing
+
+I suspect we were right at 2 people that product was something that fell to us, but it didn't take long for it to become critical. If we were to start over, I'd probably not hire product in the first 5 hires, but I'd definitely hire product in the first 10.
