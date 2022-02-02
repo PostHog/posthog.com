@@ -119,4 +119,4 @@ Overall, it just felt easier to grow _and_ like we were losing less energy tryin
 
 I suspect we were right at 2 people that product was something that fell to us.
 
-However, we were wrong that once we had product market fit for our open source product, to continue making detailed decisions about prioritization. At this stage, we didn't know every user ourselves any more, and there was too much data to hold in our heads - that's where more focussed product people can do a better job than founders or the engineering team at deciding what to build.
+However, we were wrong that once we had product market fit for our open source product, to continue making detailed decisions about prioritization. At this stage, we didn't know every user ourselves any more, and there was too much data to hold in our heads - that's where more focused product people can do a better job than founders or the engineering team at deciding what to build.
