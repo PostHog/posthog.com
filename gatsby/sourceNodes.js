@@ -185,7 +185,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         .then((res) => res.json())
                         .then(async (user) => {
                             const rawBody = format
-                                ? await formatSlackElements(reply.blocks[0].elements[0].elements, apiKey)
+                                ? await formatSlackElements(reply.blocks[0].elements, apiKey)
                                 : reply.text
                             return {
                                 name: user.user.name,
@@ -222,8 +222,16 @@ async function formatSlackElements(elements, apiKey) {
     }
     const message = []
     for (el of elements) {
-        const formatted = await types[el.type](el)
-        message.push(formatted)
+        if (el.type === 'rich_text_preformatted') {
+            el.elements.forEach((el) => {
+                message.push('```shell\n' + el.text + '\n```')
+            })
+        } else {
+            for (el of el.elements) {
+                const formatted = await types[el.type](el)
+                message.push(formatted)
+            }
+        }
     }
     return message.join('')
 }

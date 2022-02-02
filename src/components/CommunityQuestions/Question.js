@@ -46,7 +46,7 @@ export default function Question({ question }) {
     return (
         <div className="flex items-start space-x-4 w-full">
             <Avatar image={avatar} />
-            <div className="flex-grow">
+            <div className="flex-grow max-w-[405px]">
                 <div>
                     <MDXProvider components={components}>
                         <MDXRenderer>{body.childMdx.body}</MDXRenderer>
