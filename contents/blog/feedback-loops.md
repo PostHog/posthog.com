@@ -55,7 +55,7 @@ However, during implementation I found that this made variant distribution very 
 
 Instead, we treated this as valuable feedback and went back to the drawing board. "Can we come up with a better flow, given that we can't reuse existing feature flags?". If this led nowhere, I would've revisited the technical solution. But, this turned out to be very much possible, and we formalised the extra constraint of not re-using Feature Flags.
 
-Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem. This constraint also led us to a UX flow that was a lot less confusing: Every experiment has three stages now: Creation, Implementation, and Results.
+Seeking feedback loops between stages allowed us to think of non-technical solutions to a technical problem, and led us to a UX flow that was a lot less confusing. Every experiment has three stages now: Creation, Implementation, and Results.
 
 Sometimes, it can be hard to get feedback at each stage.
 
