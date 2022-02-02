@@ -25653,6 +25653,14 @@ xpath@^0.0.27:
   resolved "https://registry.npmjs.org/xpath/-/xpath-0.0.27.tgz"
   integrity sha512-fg03WRxtkCV6ohClePNAECYsmpKKTv5L8y/X3Dn1hQrec3POx2jHZ/0P2qQ6HvsrU1BmeqXcof3NGGueG6LxwQ==
 
+xss@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/xss/-/xss-1.0.10.tgz#5cd63a9b147a755a14cb0455c7db8866120eb4d2"
+  integrity sha512-qmoqrRksmzqSKvgqzN0055UFWY7OKx1/9JWeRswwEVX9fCG5jcYRxa/A2DHcmZX6VJvjzHRQ2STeeVcQkrmLSw==
+  dependencies:
+    commander "^2.20.3"
+    cssfilter "0.0.10"
+
 xss@^1.0.6:
   version "1.0.8"
   resolved "https://registry.npmjs.org/xss/-/xss-1.0.8.tgz"

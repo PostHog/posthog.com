@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
 const { createClient } = require('@supabase/supabase-js')
+const xss = require('xss')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode, createParentChildLink } = actions
@@ -158,7 +159,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         ...question,
                     }
                     createNode(node)
-                    createReplies(node, replies)
+                    replies && createReplies(node, replies)
                 })
         }
     }
@@ -264,5 +265,9 @@ async function formatSlackElements(elements, apiKey) {
             }
         }
     }
-    return message.join('')
+    const options = {
+        whiteList: {},
+        stripIgnoreTag: true,
+    }
+    return xss(message.join(''), options)
 }
