@@ -89,7 +89,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     question.slug = split[1].split(',').map((slug) => slug.trim())
                 },
                 question: (block) => {
-                    question.body = block.text.text
+                    question.rawBody = block.text.text
                     if (block.accessory) {
                         question.imageURL = block.accessory.image_url
                     }
@@ -107,7 +107,8 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 const replies = await getReplies(
                     message.thread_ts,
                     process.env.SLACK_QUESTION_CHANNEL,
-                    process.env.SLACK_API_KEY
+                    process.env.SLACK_API_KEY,
+                    false
                 )
                 question.replies = replies.slice(1)
                 const node = {
@@ -131,7 +132,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             data
                 .filter(({ slug }) => slug)
                 .map(({ slug, slack_timestamp, slack_channel }) => {
-                    return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY).then(
+                    return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY, true).then(
                         (replies) => ({
                             slug: slug.split(',').map((slug) => slug.trim()),
                             replies,
@@ -161,7 +162,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
     }
 
-    async function getReplies(ts, channel, apiKey) {
+    async function getReplies(ts, channel, apiKey, format) {
         const replies =
             ts &&
             (
@@ -182,10 +183,13 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         },
                     })
                         .then((res) => res.json())
-                        .then((user) => {
+                        .then(async (user) => {
+                            const rawBody = format
+                                ? await formatSlackElements(reply.blocks[0].elements[0].elements, apiKey)
+                                : reply.text
                             return {
                                 name: user.user.name,
-                                body: reply.text,
+                                rawBody,
                                 imageURL: user.user.profile.image_72,
                             }
                         })
@@ -193,4 +197,33 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             )
         }
     }
+}
+
+async function formatSlackElements(elements, apiKey) {
+    const types = {
+        text: (el) => {
+            return el.style?.code ? '`' + el.text + '`' : el.text
+        },
+        user: async (el) => {
+            const user = await fetch(`https://slack.com/api/users.info?user=${el.user_id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${apiKey}`,
+                },
+            }).then((res) => res.json())
+            return user?.user?.real_name
+        },
+        link: (el) => {
+            return `[${el.text}](${el.url})`
+        },
+        emoji: (el) => {
+            return ''
+        },
+    }
+    const message = []
+    for (el of elements) {
+        const formatted = await types[el.type](el)
+        message.push(formatted)
+    }
+    return message.join('')
 }

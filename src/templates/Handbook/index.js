@@ -150,7 +150,11 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
-                body
+                body {
+                    childMdx {
+                        body
+                    }
+                }
                 name
                 slug
                 replies {
@@ -159,7 +163,11 @@ export const query = graphql`
                             gatsbyImageData
                         }
                     }
-                    body
+                    body {
+                        childMdx {
+                            body
+                        }
+                    }
                     name
                     authorData {
                         name

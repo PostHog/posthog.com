@@ -10,13 +10,13 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
       }
       type Reply {
         name: String
-        body: String
+        rawBody: String
         imageURL: String
         authorData: AuthorsJson @link(by: "slack_username", from: "name")
         avatar: File @link(from: "avatar___NODE")
       }
       type Question implements Node {
-        body: String
+        rawBody: String
         name: String
         slug: [String]
         imageURL: String

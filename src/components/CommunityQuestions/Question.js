@@ -1,6 +1,21 @@
+import { MDXProvider } from '@mdx-js/react'
+import { Blockquote } from 'components/BlockQuote'
+import { CodeBlock } from 'components/CodeBlock'
+import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
+import { ZoomImage } from 'components/ZoomImage'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
+import { shortcodes } from '../../mdxGlobalComponents'
 import Avatar from './Avatar'
+
+const components = {
+    inlineCode: InlineCode,
+    blockquote: Blockquote,
+    pre: CodeBlock,
+    img: ZoomImage,
+    ...shortcodes,
+}
 
 const Reply = ({ avatar, name, body, authorData }) => {
     return (
@@ -17,7 +32,11 @@ const Reply = ({ avatar, name, body, authorData }) => {
                     <span className="opacity-50">, {authorData?.role || 'Contributor'}</span>
                 </p>
             </div>
-            <p className="my-3">{body}</p>
+            <div className="my-3">
+                <MDXProvider components={components}>
+                    <MDXRenderer>{body.childMdx.body}</MDXRenderer>
+                </MDXProvider>
+            </div>
         </div>
     )
 }
@@ -28,7 +47,11 @@ export default function Question({ question }) {
         <div className="flex items-start space-x-4 w-full">
             <Avatar image={avatar} />
             <div className="flex-grow">
-                <p className="mb-0">{body}</p>
+                <div>
+                    <MDXProvider components={components}>
+                        <MDXRenderer>{body.childMdx.body}</MDXRenderer>
+                    </MDXProvider>
+                </div>
                 <p className="text-[14px] font-semibold opacity-50 mb-3">by {name}</p>
                 {replies && replies.length > 0 && replies.map((reply, index) => <Reply key={index} {...reply} />)}
             </div>
