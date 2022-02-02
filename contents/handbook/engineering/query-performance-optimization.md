@@ -42,6 +42,21 @@ PostHog uses two different datastores:
 
 1. use the `LIKE` operator only if necessary: if you know what you are looking for use the `=` operator
 
+Note: for the Django app we currently rely on the Django-ORM as interface between our data and the relational database. While we don't directly write SQL queries in this case, the following best practices should be considered anyway.
+
+If you want to print executed queries (while running with `DEBUG`) you can run:
+
+```
+from django.db import connection
+print(connection.queries)
+```
+
+while for an individual query you can run:
+
+```
+print(Model.objects.filter(name='test').query)
+```
+
 #### Indexing
 
 If you are programmatically ordering, sorting, or grouping by a column, you should probably have an index on it. The caveat is that indexing slows down writes to the table and takes disk space (please drop unused indexes).
