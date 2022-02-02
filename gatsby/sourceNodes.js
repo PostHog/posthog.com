@@ -226,6 +226,11 @@ async function formatSlackElements(elements, apiKey) {
             el.elements.forEach((el) => {
                 message.push('```shell\n' + el.text + '\n```')
             })
+        } else if (el.type === 'rich_text_list') {
+            const { style } = el
+            el.elements.forEach((el, index) => {
+                message.push(`${style === 'ordered' ? index + 1 + '.' : '-'} ${el.elements[0].text}\n`)
+            })
         } else {
             for (el of el.elements) {
                 const formatted = await types[el.type](el)
