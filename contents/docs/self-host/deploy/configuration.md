@@ -5,6 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+This document outlines the most important configuration options available in the chart.
+
 ## Dependencies
 
 By default, the chart installs the following dependencies:
@@ -29,19 +31,11 @@ All PostHog Helm chart configuration options can be found in the [ALL_VALUES.md]
 
 Dependent charts can also have values overwritten. See [Chart.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) for more info regarding the source shard and the namespace that can be used for the override.
 
-### Setting up email
-Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
-```yaml
-email:
-  user: <your STMP login user>
-  password:  <your STMP password>
-```
-
 ### Scaling up
 The default configuration is geared towards minimizing costs. Here are example extra values overrides to use for scaling up:
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
+    <b>Custom overrides for {`<`} 1M events/month</b>
   </summary>
 
 ```yaml
@@ -76,7 +70,7 @@ plugins:
 
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for > 1M events/month</b>
+    <b>Custom overrides for > 1M events/month</b>
   </summary>
 
 ```yaml
@@ -125,13 +119,63 @@ plugins:
 </details>
 
 
+### Email (SMTP service)
+For PostHog to be able to send emails we need a working SMTP service available. You can configure PostHog to use the service by editing the `email` section of your `values.yaml` file. Example:
+
+```yaml
+email:
+  host: <SMTP service host>
+  port: <SMTP service port>
+```
+
+If your SMTP services requires authentication (recommended) you can either:
+
+* directly provide the SMTP login in the `values.yaml` by simply setting `email.user` and `email.password`
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+  ```yaml
+  email:
+    host: <SMTP service host>
+    port: <SMTP service port>
+    user: <SMTP service user>
+    password: <SMTP service password>
+  ```
+
+</details>
+
+* provide the password via a Kubernetes secret, by configuring `email.existingSecret` and `email.existingSecretKey` accordingly
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+1. create the secret by running: `kubectl -n posthog create secret generic "smtp-password" --from-literal="password=<YOUR_PASSWORD>"`
+
+2. configure your `values.yaml` to reference the secret:
+
+  ```yaml
+  email:
+    host: <SMTP service host>
+    port: <SMTP service port>
+    user: <SMTP service user>
+    existingSecret: "smtp-password"
+    existingSecretKey: "password"
+  ```
+
+</details>
+
+
 ### [ClickHouse](../runbook/clickhouse/)
 
-ClickHouse is the database that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
+ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). As such it's important to set the database size to be enough to store the raw data via `clickhouse.persistence.size` value.
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
 
-To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
 #### Custom settings
 
@@ -155,9 +199,12 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
 
-By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `externalPostgresql.postgresHost` and `externalPostgresql.postgresqlPassword`. The other options (`externalPostgresql.postgresqlDatabase`, `externalPostgresql.postgresqlUsername` and `externalPostgresql.postgresqlPort`) may also want changing from their default values.
+PostgreSQL is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `postgresql` namespace.
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
+Note: to avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL upstream chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more details.
+
+#### Use an external service
+To use an external PostgreSQL service, please set `postgresql.enabled` to `false` and then configure the `externalPostgresql` values.
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
