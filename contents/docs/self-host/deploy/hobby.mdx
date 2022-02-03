@@ -41,6 +41,12 @@ For a quick install that uses Docker, run the following command:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
 ```
 
+## Upgrading
+
+To upgrade PostHog, you can run `./posthog/bin/upgrade`. This will cause a few minutes of downtime. 
+
+If `./posthog/bin/upgrade` can't be found, run `cd posthog && git pull origin master && cd ../` first.
+
 ## Migrating
 
 If you need to move into production or if your server is struggling, you can migrate to a production instance as follows:
