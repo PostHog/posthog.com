@@ -819,7 +819,7 @@
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"
+    to = "/docs/user-guides/persons"    
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -859,118 +859,118 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/request_demo"
-    to = "/schedule-demo"
-
+    to = "/schedule-demo" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/strategy/investor-updates"
-    to = "/handbook/strategy/investors"
-
+    to = "/handbook/strategy/investors" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/engineering/feature-parity"
-    to = "/handbook/strategy/strategy"
-
+    to = "/handbook/strategy/strategy" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/contribute/updating-documentation"
-    to = "/docs/contribute"
-
+    to = "/docs/contribute" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/marketing/messaging_framework"
-    to = "/handbook/growth/marketing"
-
+    to = "/handbook/growth/marketing" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/handbook/engineering/support-hero"
-    to = "/handbook/growth/handbook/support-hero"
-
+    to = "/handbook/growth/handbook/support-hero" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/people/handbook/people/hiring-process/marketing-hiring"
-    to = "/handbook/people/hiring-process/marketing-hiring"
-
+    to = "/handbook/people/hiring-process/marketing-hiring" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/plugins/maxmind"
     to = "/plugins"
-
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/about"
-    to = "/handbook/company/story"
-
+    to = "/handbook/company/story" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/team"
     to = "/handbook/company/team"
-
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/contact"
-    to = "/signup/self-host/get-in-touch#contact"
-
+    to = "/signup/self-host/get-in-touch#contact" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrate/third-party"
-    to = "/docs/integrate"
-
+    to = "/docs/integrate" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/deployment/running-behind-proxy"
-    to = "/docs/self-host/configure/running-behind-proxy"
-
+    to = "/docs/self-host/configure/running-behind-proxy" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrated"
-    to = "/docs/integrate"
-
+    to = "/docs/integrate" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/scaling-posthog"
-    to = "/docs/self-host/deploy/configuration#scaling-up"
-
+    to = "/docs/self-host/deploy/configuration#scaling-up" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/sales/"
-    to = "/handbook/growth/sales/overview"
-
+    to = "/handbook/growth/sales/overview" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/api/api"
-    to = "/docs/api"
-
+    to = "/docs/api" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/code-of-conduct"
-    to = "/docs/contribute/code-of-conduct"
-
+    to = "/docs/contribute/code-of-conduct" 
+    
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
-    to = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/docs/self-host/postgres-vs-clickhouse" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-29-1"
-    to = "/blog/the-posthog-array-1-29-0"
+    to = "/blog/the-posthog-array-1-29-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-28-1"
-    to = "/blog/the-posthog-array-1-28-0"
+    to = "/blog/the-posthog-array-1-28-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-23-1"
-    to = "/blog/the-posthog-array-1-23-0"
+    to = "/blog/the-posthog-array-1-23-0" 
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-15-1"
-    to = "/blog/the-posthog-array-1-15-0"
-
+    to = "/blog/the-posthog-array-1-15-0" 
+    
 # Added: 2021-11-10
 [[redirects]]
     from = "/handbook/people/team-structure/design"
@@ -1119,7 +1119,7 @@
 [[redirects]]
     from = "/docs/tutorials/tracking-teams"
     to = "/tutorials/tracking-teams"
-
+    
 # Added: 2021-12-03
 [[redirects]]
     from = "/handbook/company/branding"
@@ -1149,7 +1149,7 @@
 [[redirects]]
     from = "/docs/tutorials/how-to-segment-users"
     to = "/tutorials/how-to-segment-users"
-
+    
 [build]
     command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
 
