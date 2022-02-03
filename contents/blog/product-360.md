@@ -1,6 +1,6 @@
 ---
-date: 2022-01-18
-title: I used to think product people aren't needed. I was wrong
+date: 2022-02-03
+title: I used to think you don't need product people. I was wrong.
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ When PostHog was fresh out of YC last year, there were two things we focused on:
 
 By [PostHog's series B](/blog/15-million-series-b), our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
->James Hawkins is PostHog Co-Founder & CEO. Connect with him on [LinkedIn](https://www.linkedin.com/in/j-hawkins/) and follow him on [Twitter](https://www.linkedin.com/in/j-hawkins/).
+>James Hawkins is PostHog's Co-Founder & CEO. Follow him on [Twitter](https://www.linkedin.com/in/j-hawkins/).
 
 ## Why I used to think this way
 
