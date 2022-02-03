@@ -15,6 +15,8 @@ When PostHog was fresh out of YC last year, there were two things we focused on:
 
 By [PostHog's series B](/blog/15-million-series-b), our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
+>James Hawkins is PostHog Co-Founder & CEO. Connect with him on [LinkedIn](https://www.linkedin.com/in/j-hawkins/) and follow him on [Twitter](https://www.linkedin.com/in/j-hawkins/).
+
 ## Why I used to think this way
 
 My previous experience of product management:
