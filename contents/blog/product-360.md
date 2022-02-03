@@ -25,7 +25,7 @@ My previous experience of product management:
 * How much pipeline does each of these features influence?
 * _Builds as much of the above as possible whilst trying to manage existing customer requests_
 
-Lead to:
+Led to:
 
 * Lots of initial enterprise contracts
 * A product users find frustrating to use
