@@ -34,7 +34,7 @@ For Kafka by default we have `logRetentionHours=24`, but you could have overridd
 ```
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clickhouse_events_proto --from-beginning --max-messages 1
 ```
-Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest the retention in reality to be at least 3 days and to not start the migration on Friday or the weekend so in the unlikely event that something goes catastropically wrong there is enough time to find a resolution with our support. See the docs for info about [resizing kafka](/docs/self-host/runbook/kafka/resize-disk) and [kafka log retention](/docs/self-host/runbook/kafka/log-retention).
+Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest the retention in reality to be at least 3 days and to not start the migration on Friday or the weekend so in the unlikely event that something goes catastrophically wrong there is enough time to find a resolution with our support. See the docs for info about [resizing kafka](/docs/self-host/runbook/kafka/resize-disk) and [kafka log retention](/docs/self-host/runbook/kafka/log-retention).
 
 </details>
 
