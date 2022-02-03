@@ -14,7 +14,9 @@ excerpt: The image preview you see when sharing a link is a great opportunity to
 
 ## The TL;DR version:
 
-The image preview you see when sharing a link is a great opportunity to get your brand’s message in front of people without them even clicking through to your website. Most sites just opt to display a logo and some brand elements.
+The image preview you see when sharing a link on social media is called the Open Graph image, and is essentially free advertising space. It's a chance to get a message in front of people without them even clicking through to your website.
+
+But most sites (including ours, up until recently) just opt to display a logo and some branding, leaving a lot of opportunity on the table.
 
 ### Before
 
@@ -169,7 +171,19 @@ Now we show a preview from the article, along with some relevant information abo
 
 ![Open Graph image](../images/blog/open-graph-images/og-12.png)
 
-### Other examples
+This gives us the chance to draw a user into the content on the page before they decide to click. Our bet was this could increase clickthroughs by reducing the uncertainty about what was on the other side of the link.
+
+Questions visitors may subconsciously have could include:
+
+- How fresh is this content?
+- How much of a time investment is this going to be?
+- Is this a website that's going to bombard me with ads?
+- Will I be able to easily access the information I might click to see?
+- Does this website "seem" like it will load quickly?
+
+Believe it or not, we can address all of these questions using visual cues in these images, and we can communicate them in a fraction of a second.
+
+### Other Open Graph templates throughout PostHog.com
 
 **Blog post**
 
@@ -183,7 +197,7 @@ There are a considerations for our blog posts:
 
 **Customer stories**
 
-- Since each customer story involves two logos, we placed them at the top along with a heart in between.
+Since each customer story involves two logos, we placed them at the top along with a heart in between.
 
 ![Example of Open Graph image in a customer story](../images/blog/open-graph-images/og-14.png)
 
@@ -192,12 +206,6 @@ There are a considerations for our blog posts:
 Especially useful for the PostHog team when posting roles on LinkedIn, this image is always up to date with the latest roles we’re hiring.
 
 ![Careers Open Graph image](../images/blog/open-graph-images/og-1.png)
-
-**Personalized pages for customers and prospects**
-
-We’ve even designed (and plan to implement) custom “Getting started” pages for prospective customers, so PostHog feels a little more personalized when our link is shared around a company’s Slack.
-
-![Next Steps Open Graph image](../images/blog/open-graph-images/og-15.png)
 
 ## How it works
 
@@ -215,7 +223,7 @@ It's important to note that some websites cache Open Graph on their servers. If 
 
 ## In summary...
 
-This was a really fun project to work on, as it adds immediate value on a daily basis to anyone seeing a link to posthog.com. On a personal note, it’s pretty special to work at a company where this type of polish is valued.
+This was a really fun project to work on, as it adds immediate value on a daily basis to anyone seeing a link to PostHog.com. On a personal note, it’s pretty special to work at a company where this type of polish is valued.
 
 We still consider this a v1 approach, as there are plenty of edge cases to work through - not to mention what to do with article's begin with images or titles - like how to format it all.
 
@@ -223,8 +231,12 @@ In a future update, we plan to [make our Tutorials Open Graph images transparent
 
 ![Opaque tutorial Open Graph images](../images/blog/open-graph-images/opaque-tutorials.png)
 
+We've also designed (and plan to implement) dynamic images for personalized landing pages (to be shared with prospective customers) so PostHog feels a little more personalized when our link is shared around a company’s Slack.
+
+![Next Steps Open Graph image](../images/blog/open-graph-images/og-15.png)
+
 But this first step is lightyears more interesting to look at than a simple PostHog logo on a white background. (If you see opportunity for improvement, we invite you to submit a pull request [on our website’s repo](http://github.com/posthog/posthog.com)!)
 
-A big shout out goes to the team at GitHub who worked on their new Open Graph images, as it served as a starting point in inspiring what we ultimately built.
+A tip of the hat goes to the team at GitHub who worked on their new Open Graph images, as it served as a starting point in inspiring what we ultimately built.
 
-We really hope you enjoy seeing our Open Graph previews as much as we enjoyed making them!
+We really hope you enjoy seeing our Open Graph previews across the internet as much as we enjoyed making them!
