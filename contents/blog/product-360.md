@@ -11,7 +11,7 @@ featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 ---
 
-When PostHog was fresh out of YC last year, there were two things we focussed on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.
+When PostHog was fresh out of YC last year, there were two things we focused on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.
 
 By [PostHog's series B](/blog/15-million-series-b), our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
