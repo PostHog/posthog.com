@@ -64,7 +64,7 @@ Above all, though, the most important part of getting the team to click was our 
 
 We want to focus on optimizing leading indicator metrics, as high up the funnel as possible. That means you have a faster feedback loop for learning. We put those into our board meetings.
 
-PostHog still sends financial and revenue data each time, and has modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
+PostHog still sends financial and revenue data each time, and has modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indicators. If it starts diverging, look for different leading indicators.
 
 Specifically, this is the list we currently care about:
 
