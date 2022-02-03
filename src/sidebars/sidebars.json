@@ -500,6 +500,10 @@
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
+                            "name": "Hosting in EU",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
                         },
