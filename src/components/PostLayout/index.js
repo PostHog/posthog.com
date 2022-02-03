@@ -42,7 +42,7 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 
 export const SidebarSection = ({ title, children, className = '' }) => {
     return (
-        <div className={`py-4 ${className}`}>
+        <div className={`py-4 first:pt-0 px-5 lg:px-6 ${className}`}>
             {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
             {children}
         </div>
@@ -110,7 +110,7 @@ export const Contributors = ({ contributors, className = '' }) => {
         <ul className={`list-none m-0 p-0 ${className}`}>
             {contributors.slice(0, 3).map(({ image, id, name, url, state }) => {
                 return (
-                    <li key={id}>
+                    <li key={name}>
                         {url ? (
                             <Link state={state} className={classes} to={url}>
                                 <Contributor image={image} name={name} />
@@ -131,11 +131,34 @@ export const Text = ({ children }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
-const Menu = ({ title, url, children }) => {
+const Chevron = ({ open }) => {
+    return (
+        <div className="bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white">
+            <svg
+                className="transition-transform w-"
+                style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <g opacity="0.3">
+                    <path
+                        d="M3.59608 9.74106L6.99976 6.33626L10.4034 9.74106C10.8595 10.1972 11.5984 10.1972 12.0545 9.74106C12.51 9.28551 12.51 8.54613 12.0545 8.0906L7.82492 3.86106C7.36937 3.40606 6.6311 3.40606 6.17558 3.86106L1.9466 8.09004V8.09059C1.4905 8.54613 1.4905 9.28441 1.94605 9.74049C2.40159 10.1966 3.13987 10.1966 3.59595 9.74103L3.59608 9.74106Z"
+                        fill="currentColor"
+                    />
+                </g>
+            </svg>
+        </div>
+    )
+}
+
+const Menu = ({ title, url, children, className = '' }) => {
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
-    const buttonClasses = `text-left relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-4 py-1 inline-block w-full rounded-md ${
+    const buttonClasses = `text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[6px] inline-block w-full rounded-md ${
         children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
     }`
     useEffect(() => {
@@ -150,22 +173,26 @@ const Menu = ({ title, url, children }) => {
         setOpen(isActive || (children && isOpen(children)))
     }, [])
     return (
-        <ul className="list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4">
+        <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {title && url ? (
                     <Link className={buttonClasses} to={url}>
-                        <span className={isActive ? 'active-link' : ''}>{title}</span>
+                        <span className={isActive ? 'active-link' : 'opacity-50 hover:opacity-100 transition-opacity'}>
+                            {title}
+                        </span>
+                        {children && children.length > 0 && <Chevron open={open} />}
                     </Link>
                 ) : (
                     <button className={buttonClasses} onClick={() => setOpen(!open)}>
-                        {title}
+                        <span>{title}</span>
+                        {children && children.length > 0 && <Chevron open={open} />}
                     </button>
                 )}
                 {children && children.length > 0 && (
-                    <motion.div className="mt-1" initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
-                        {children.map((child, index) => (
-                            <Menu key={index} {...child} />
-                        ))}
+                    <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
+                        {children.map((child, index) => {
+                            return <Menu key={child.title} {...child} />
+                        })}
                     </motion.div>
                 )}
             </li>
@@ -196,14 +223,18 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
             {menu && (
-                <aside className="max-w-[265px] mt-5 px-5 sticky top-20">
-                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3">Table of contents</p>
-                    <nav className="-ml-4">
-                        {menu.map((menuItem, index) => {
-                            return <Menu key={index} {...menuItem} />
-                        })}
-                    </nav>
-                </aside>
+                <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                    <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                        <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">
+                            Table of contents
+                        </p>
+                        <nav>
+                            {menu.map((menuItem, index) => {
+                                return <Menu className="ml-0" key={menuItem.title} {...menuItem} />
+                            })}
+                        </nav>
+                    </aside>
+                </div>
             )}
             <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
                 <div style={{ maxWidth: contentWidth }} className="w-full article-content">
@@ -211,11 +242,11 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                 </div>
                 {questions && questions}
             </article>
-            <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[229px] justify-self-end px-5 lg:px-8 lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
-                <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
+            <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[300px] justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                     {sidebar && sidebar}
                     {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                        <div className="pt-12 !border-t-0">
+                        <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6">
                             <h4 className="text-[13px] mb-2">On this page</h4>
                             <Scrollspy
                                 offset={-50}
@@ -224,7 +255,7 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                                 currentClassName="active-product"
                             >
                                 {toc.map((navItem, index) => (
-                                    <li className="relative leading-none" key={index}>
+                                    <li className="relative leading-none" key={navItem.url}>
                                         <InternalSidebarLink
                                             url={navItem.url}
                                             name={navItem.value}
