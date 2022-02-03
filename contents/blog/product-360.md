@@ -56,7 +56,7 @@ We've two product managers in a team of 30 people. [Results later](#the-differen
 
 Our product people must be able to empathize with our users. We build for developers, so that meant hiring people that could write at least a little code. It felt like a compromise to not look for this.
 
-We looked for scrappy, anti-plan type folk who wouldn't create a detailed year long roadmap but would create loose guidance, with tons of context, and would help the company iterate its product over time. This fitted the culture we felt was optimal. Product managers who can code are likely to be a bit scrappier - after all, they've probably acquired both these skills by working in smaller organizations where roles are broad.
+We looked for scrappy, anti-plan type folk who wouldn't create a detailed year long roadmap but would create loose guidance, with plenty of context, and would help the company iterate its product over time. This fitted the culture we felt was optimal. Product managers who can code are likely to be a bit scrappier - after all, they've probably acquired both these skills by working in smaller organizations where roles are broad.
 
 Above all, though, the most important part of getting the team to click was our engineers telling Tim (my cofounder) and me that we needed to hire a product person. Sidenote: this happened in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). They were absolutely right.
 
