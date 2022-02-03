@@ -4,8 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
+import React from 'react'
 import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
+import HandbookLayout from './src/templates/Handbook'
 
 initKea(false)
 
@@ -18,4 +20,8 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
         var theme = /^handbook|^docs|^blog|^integrations|^product|^tutorials/.test(slug) ? window.__theme : 'light'
         document.body.className = theme
     }
+}
+export const wrapPageElement = ({ element, props }) => {
+    const slug = props.location.pathname.substring(1)
+    return /^handbook|^docs/.test(slug) ? <HandbookLayout {...props} /> : element
 }

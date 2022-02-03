@@ -161,8 +161,8 @@ const Menu = ({ title, url, children }) => {
                         {title}
                     </button>
                 )}
-                {children && children.length > 0 && open && (
-                    <motion.div className="mt-1" initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                {children && children.length > 0 && (
+                    <motion.div className="mt-1" initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
                         {children.map((child, index) => (
                             <Menu key={index} {...child} />
                         ))}

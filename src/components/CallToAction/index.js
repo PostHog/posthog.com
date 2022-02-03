@@ -55,7 +55,7 @@ const buttonTypes = {
 const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
-    rounded-full
+    rounded-sm
     inline-block
     cta
     w-${width}
