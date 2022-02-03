@@ -12,7 +12,7 @@ We have extensive [docs](/docs) on how to deploy and use PostHog, which are upda
 
 ## Community Slack
 
-For general product support, join our [community Slack](/slack) group - 1,800 members and counting! It is by far the quickest way to get help from the PostHog team and wider community. 
+For general product support, join our [community Slack](/slack) group - 1,800 members and counting! It is by far the quickest way to get help from the community. 
 
 ## Bugs or feature requests
 
