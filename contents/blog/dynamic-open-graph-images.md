@@ -235,7 +235,7 @@ We've also designed (and plan to implement) dynamic images for personalized land
 
 ![Next Steps Open Graph image](../images/blog/open-graph-images/og-15.png)
 
-But this first step is lightyears more interesting to look at than a simple PostHog logo on a white background. (If you see opportunity for improvement, we invite you to submit a pull request [on our website’s repo](http://github.com/posthog/posthog.com)!)
+But this first step is light years more interesting to look at than a simple PostHog logo on a white background. (If you see opportunity for improvement, we invite you to submit a pull request [on our website’s repo](http://github.com/posthog/posthog.com)!)
 
 A tip of the hat goes to the team at GitHub who worked on their new Open Graph images, as it served as a starting point in inspiring what we ultimately built.
 
