@@ -17,7 +17,26 @@ There were 2 important reasons for doing this:
 ## Preparation
 
 1. Make sure you have enough free space in your ClickHouse instance. We certify this via a preflight check before running the migration, but it is good that you're also aware of the requirement.
-2. Make sure there's enough disk space in Kafka and verify that the retention policies are reasonable (ClickHouse event ingestion will be paused during the migration and to make sure we don't lose any data we'll want to make sure they won't expire too fast from Kafka).
+2. Make sure we have long enough retention in Kafka and (ClickHouse event ingestion will be paused during the migration and to make sure we don't lose any data we'll want to make sure they won't expire too fast from Kafka).
+
+
+<details>
+
+<summary>
+    <b>How to verify?</b>
+</summary>
+
+<br />
+
+For ClickHouse check the events table size from `/instance/status` page in the app, where under "Clickhouse table sizes" there is the "events" table size. We need that to be smaller than "Clickhouse disk free space" as we'll be duplicating the events table. If you need to increase ClickHouse storage check out [clickhouse resize disk docs](/docs/self-host/runbook/clickhouse/resize-disk).
+
+For Kafka by default we have `logRetentionHours=24`, but you could have overridden it in your `values.yaml`, which guarantees the minimal amount of time we'll keep events. Note, that there's also `logRetentionBytes` to better use the disk available, which might mean your retention in reality can be a lot longer than 24h. You can check what the oldest message is by running in your kafka pod shell:
+```
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clickhouse_events_proto --from-beginning --max-messages 1
+```
+Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest the retention in reality to be at least 3 days and to not start the migration on Friday or the weekend so in the unlikely event that something goes catastropically wrong there is enough time to find a resolution with our support. See the docs for info about [resizing kafka](/docs/self-host/runbook/kafka/resize-disk) and [kafka log retention](/docs/self-host/runbook/kafka/log-retention).
+
+</details>
 
 ## Operations
 
