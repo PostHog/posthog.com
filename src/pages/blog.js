@@ -6,7 +6,7 @@ export const pageQuery = graphql`
     query {
         allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
+            filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
             edges {
                 node {

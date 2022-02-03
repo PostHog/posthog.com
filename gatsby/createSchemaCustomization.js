@@ -1,4 +1,4 @@
-module.exports = exports.createSchemaCustomization = async ({ actions }) => {
+module.exports = exports.createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
       type Mdx implements Node {
@@ -93,4 +93,16 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         badge: String
       }
     `)
+    createTypes([
+        schema.buildObjectType({
+            name: 'Mdx',
+            interfaces: ['Node'],
+            fields: {
+                isFuture: {
+                    type: 'Boolean!',
+                    resolve: (source) => new Date(source.frontmatter.date) > new Date(),
+                },
+            },
+        }),
+    ])
 }
