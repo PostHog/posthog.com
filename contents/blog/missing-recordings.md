@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 author: ["rick-marron"]
 categories: ["Engineering"]
