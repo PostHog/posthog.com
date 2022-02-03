@@ -1139,7 +1139,6 @@
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
 
-
 # Added: 2021-12-14
 [[redirects]]
     from = "/docs/user-guides/sessions"
