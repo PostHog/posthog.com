@@ -34,7 +34,7 @@ Led to:
 
 ## It starts with expectation setting
 
-<a href="https://imgflip.com/i/61pr1n"><img src="https://i.imgflip.com/61pr1n.jpg" title="made at imgflip.com"/></a><div><a href="https://imgflip.com/memegenerator">from Imgflip Meme Generator</a></div><br />
+![product management meme](../images/blog/product-people-blog/product-management-meme.png)
 
 Alas.
 
