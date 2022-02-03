@@ -5,17 +5,17 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries"]
+categories: ["CEO diaries", "Inside PostHog", "Engineering"]
 author: ["james-hawkins"]
-featuredImage: ../images/blog/ceo-diary.png
+featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 ---
 
 When PostHog was fresh out of YC last year, there were two things we focussed on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.
 
-By PostHog's series B, our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
+By [PostHog's series B](/blog/15-million-series-b), our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
-# Why I used to think this way
+## Why I used to think this way
 
 My previous experience of product management:
 
@@ -30,15 +30,15 @@ Lead to:
 * No word of mouth growth
 * Customer churn in the long term
 
-# It starts with expectation setting
+## It starts with expectation setting
 
 <a href="https://imgflip.com/i/61pr1n"><img src="https://i.imgflip.com/61pr1n.jpg" title="made at imgflip.com"/></a><div><a href="https://imgflip.com/memegenerator">from Imgflip Meme Generator</a></div><br />
 
 Alas.
 
-Whilst we should measure what matters - often it's what is measured, is what ends up mattering.
+Whilst we should measure what matters – often it's what is measured, is what ends up mattering.
 
-Revenue is pretty easy to measure and feels important. A B2B SAAS company will therefore default into prioritizing this. That feels intuitive - your company will die without money.
+Revenue is pretty easy to measure and feels important. A B2B SaaS company will therefore default into prioritizing this. That feels intuitive - your company will die without money.
 
 And you should sell more to get more revenue, right?
 
@@ -46,23 +46,23 @@ And you should sell more to get more revenue, right?
 
 If product focuses on enabling existing pipeline to close, versus customer retention and growth, you end up in the above failure mode.
 
-# How we approached building a small product team
+## How we approached building a small product team
 
-We've 2 product managers in a team of 30 people. [Results later](#the-difference-it-has-made) (they're good), here's what we did.
+We've two product managers in a team of 30 people. [Results later](#the-difference-it-has-made) (they're good), here's what we did.
 
-## 1. We hired product managers who can code
+### 1. We hired product managers who can code
 
 Our product people must be able to empathize with our users. We build for developers, so that meant hiring people that could write at least a little code. It felt like a compromise to not look for this.
 
 We looked for scrappy, anti-plan type folk who wouldn't create a detailed year long roadmap but would create loose guidance, with tons of context, and would help the company iterate its product over time. This fitted the culture we felt was optimal. Product managers who can code are likely to be a bit scrappier - after all, they've probably acquired both these skills by working in smaller organizations where roles are broad.
 
-Above all though, the most important part of getting the team to click was our engineers telling Tim (my cofounder) and me that we needed to hire a product person. Sidenote: this happened in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). They were absolutely right.
+Above all, though, the most important part of getting the team to click was our engineers telling Tim (my cofounder) and me that we needed to hire a product person. Sidenote: this happened in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). They were absolutely right.
 
-## 2. We got our board to look at leading indicator metrics
+### 2. We got our board to look at leading indicator metrics
 
 We want to focus on optimizing leading indicator metrics, as high up the funnel as possible. That means you have a faster feedback loop for learning. We put those into our board meetings.
 
-PostHog still sends financial and revenue data each time, and have modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
+PostHog still sends financial and revenue data each time, and has modelling to control the business' burn rate appropriately, but it goes into an appendix. We need to make sure this output connects to the input of our leading indiciators. If it starts diverging, look for different leading indicators.
 
 Specifically, this is the list we currently care about:
 
@@ -71,21 +71,21 @@ Specifically, this is the list we currently care about:
 * Deployment conversion rate
 * Number of discoveries inside PostHog (this is people creating a data visualization with filtering - the more users do this, the better we retain them)
 
-## 3. We structured the company for autonomy
+### 3. We structured the company for autonomy
 
 PostHog uses [small teams](../handbook/people/team-structure/why-small-teams), inspired by Twilio, who were inspired by Amazon. [Jeff Lawson's book](https://www.askyourdeveloper.com/) is a good 101 on this topic. TL;DR - we're 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control.
 
 These teams are supported by product people. That means engineers are not told in detail what to do, or what is ok to merge. We put our product people into specific small teams where there is lots of help needed, but many teams run fine without them doing more than informal support (at our current scale at least).
 
-## 4. We created two (very) basic frameworks
+### 4. We created two (very) basic frameworks
 
 We created a Nail X framework. You tell the company "Nail X" where X is a thing you must nail. I'm not joking. [Unnuanced communication can be powerful](https://twitter.com/danluu/status/1487228574608211969). Product people decide what we need to nail.
 
-"Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made funnels in PostHog awesome.
+"Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made [Funnels](/product/funnels) in PostHog awesome.
 
-Get X reference customers was another useful framework. This came out of a board meeting. We realized that we had product market fit with our free open source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
+Get X reference customers was another useful framework. This came out of a board meeting. We realized that we had product market fit with our free open-source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
 
-## 5. We wrote stuff down
+### 5. We wrote stuff down
 
 This matters to us as it prevents "information silos". I tried hard to find a less corporate way to describe that succinctly, but couldn't.
 
@@ -97,13 +97,13 @@ _Everyone_ must work like this. This is what the exec team at PostHog does:
 * We share realtime updates around fundraising. Not after the fact.
 * We have a public handbook - which is world editable
 
-## 6. Product should involve engineers
+### 6. Product should involve engineers
 
 Product are proactive with getting feedback. They involve engineering - many times a day, PostHog's engineering team speak to real life users. That may be over Slack, or it may be on a call.
 
 When engineers release new features, we'll encourage them to [collaborate directly with users](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html) in real life.
 
-# The difference it has made
+## The difference it has made
 
 This has been mind blowing. Here are a few stats for how last year when compared to the year before:
 
@@ -115,8 +115,10 @@ This has been mind blowing. Here are a few stats for how last year when compared
 
 Overall, it just felt easier to grow _and_ like we were losing less energy trying to prioritize things. We could still make fast/ad hoc decisions, but with much more information behind them. Progress was both calmer and faster. We became proud of the product.
 
-# Timing
+## Timing
 
-I suspect we were right at 2 people that product was something that fell to us.
+I suspect we were right at two people that product was something that fell to us.
 
-However, we were wrong that once we had product market fit for our open source product, to continue making detailed decisions about prioritization. At this stage, we didn't know every user ourselves any more, and there was too much data to hold in our heads - that's where more focused product people can do a better job than founders or the engineering team at deciding what to build.
+However, we were wrong that once we had product market fit for our open-source product, to continue making detailed decisions about prioritization. At this stage, we didn't know every user ourselves any more, and there was too much data to hold in our heads - that's where more focused product people can do a better job than founders or the engineering team at deciding what to build.
+
+>PostHog is an open-source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
