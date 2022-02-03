@@ -1,13 +1,13 @@
 ---
 date: 2022-03-01
-title: "Dynamic Open Graph images: your website's free social media ad that's always up-to-date"
+title: "Dynamic Open Graph images: Your website's free social media ad (that's always up-to-date)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["cory-watilo"]
 categories: ["Inside PostHog"]
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: ../images/blog/actual-post-open-graph-image.png
 featuredImageType: full
 excerpt: The image preview you see when sharing a link is a great opportunity to get your brand’s message in front of people without them even clicking through to your website. Most sites just opt to display a logo and some brand elements.
 ---
@@ -25,14 +25,17 @@ This is what ours used to look like. There’s a lot of untapped potential here.
 
 ### After
 
-We decided to create custom artwork to make better use of the space that Open Graph provides. Each of our most visited pages now has a unique graphic - some dynamically generated every time we update [posthog.com](http://posthog.com) (like this one).
+We decided to make better use of the space that Open Graph provides by creating custom layouts and images for most individual pages of our website. Some dynamically generated every time we update [posthog.com](http://posthog.com) (like [this Docs article](/docs)).
 
-![Dynamically-generated Open Graph image with live data from our website](../images/blog/open-graph-images/og-1.png)
+![Dynamically-generated Open Graph image with live data from our website](../images/blog/open-graph-images/og-12.png)
 <figcaption class="text-center text-primary text-opacity-70 font-semibold !text-sm -mt-4 mb-4 hover:text-primary dark:text-white dark:hover:text-white">Dynamically-generated Open Graph image with live data from our website</figcaption>
 
 This project is now generating hundreds of Open Graph image previews daily and appearing in Twitter and LinkedIn timelines, and in Slack channels everywhere.
 
 ## Now for the extended version...
+
+Now that I've drawn you in with the short version, I'll explain in more detail about Open Graph, why we decided to put effort into ours, some inspiration behind it, and how we built our end result in a static website environment.
+
 ### What is an Open Graph image?
 
 When you share a link on social sites like Twitter, LinkedIn, and Facebook, a special image called the [Open Graph image](https://ogp.me/) will often appear with the URL. Other apps like Slack, iMessage, and Telegram also use it too.
@@ -215,6 +218,10 @@ It's important to note that some websites cache Open Graph on their servers. If 
 This was a really fun project to work on, as it adds immediate value on a daily basis to anyone seeing a link to posthog.com. On a personal note, it’s pretty special to work at a company where this type of polish is valued.
 
 We still consider this a v1 approach, as there are plenty of edge cases to work through - not to mention what to do with article's begin with images or titles - like how to format it all.
+
+In a future update, we plan to [make our Tutorials Open Graph images transparent](https://github.com/PostHog/posthog.com/issues/2720) so they naturally work in both light and dark modes.
+
+![Opaque tutorial Open Graph images](../images/blog/open-graph-images/opaque-tutorials.png)
 
 But this first step is lightyears more interesting to look at than a simple PostHog logo on a white background. (If you see opportunity for improvement, we invite you to submit a pull request [on our website’s repo](http://github.com/posthog/posthog.com)!)
 
