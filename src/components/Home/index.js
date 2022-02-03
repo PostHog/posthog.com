@@ -41,7 +41,7 @@ const Home = () => {
                 <Community />
                 <Tutorials
                     title="Tutorials"
-                    subtitle="See the power of PostHog in action."
+                    subtitle="See PostHog in action."
                     cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
                 />
                 <CTA />
