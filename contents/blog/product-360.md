@@ -1,6 +1,6 @@
 ---
 date: 2022-01-18
-title: I used to think product people aren't needed
+title: I used to think product people aren't needed. I was wrong
 rootPage: /blog
 sidebar: Blog
 showTitle: true
