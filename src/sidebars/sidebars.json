@@ -508,16 +508,26 @@
                             "url": "/docs/self-host/deploy/upgrade-notes"
                         },
                         {
-                            "name": "Migrate from Postgres to ClickHouse",
-                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                        },
-                        {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
                         },
                         {
                             "name": "Troubleshooting and FAQ",
                             "url": "/docs/self-host/deploy/troubleshooting"
+                        }
+                    ]
+                },
+                {
+                    "name": "Migrate",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "to another self-hosted instance",
+                            "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+                        },
+                        {
+                            "name": "between cloud and self-hosted",
+                            "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
                         }
                     ]
                 },
