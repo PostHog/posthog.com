@@ -57,4 +57,16 @@ We're working towards a solution for archiving and preserving recordings data fo
 
 If you want more granular controls, you can choose to enable session recording using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
 
-To do this, default session recording to `false`, by setting `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config), and then conditionally call the method to enable it using the feature flag. The method is `posthog.startSessionRecording`.
+To do this set `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config) to `true`.
+
+Then conditionally call the method `posthog.startSessionRecording` to enable it using the feature flag.
+
+For example:
+
+```javascript
+    window.posthog.onFeatureFlags((function() {
+        if (window.posthog.isFeatureEnabled("you-feature-flag")) {
+            window.posthog.startSessionRecording()
+        }
+    })
+```
