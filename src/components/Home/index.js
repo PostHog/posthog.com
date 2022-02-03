@@ -24,6 +24,7 @@ const Home = () => {
                 <SEO
                     title="PostHog - Host Your Own Product Analytics"
                     description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
+                    image="/images/home.png"
                 />
                 <Hero />
                 <Customers />
