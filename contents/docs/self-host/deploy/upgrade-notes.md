@@ -171,7 +171,36 @@ If you are overriding any of those values, please make the corresponding changes
 
 ### Upgrading from 12.x.x
 
-13.0.0 improves the configuration of Kafka.
+13.0.0 fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse service password.
+
+As part of this work, the following chart inputs have changed:
+
+- `clickhouse.host` -> `externalClickhouse.host`
+- `clickhouse.enabled` now toggles the internal ClickHouse cluster on/off. If this is off, you will need to specify an external clickhouse cluster.
+- `clickhouse.database` was previously used as the cluster name as well. Now `clickhouse.cluster` has been introduced.
+- `clickhouse.user` is now usable
+- `clickhouse.replication` was removed
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 13.x.x
+
+14.0.0 fixes customizing PostgreSQL installation, previously many `values.yaml` values did not work as expected.
+
+As part of this work, the following chart inputs have changed:
+
+- `postgresql.postgresqlHost` -> `externalPostgresql.postgresqlHost`
+- `postgresql.postgresqlPort` -> `externalPostgresql.postgresqlPort`
+- `postgresql.postgresqlUsername` -> `externalPostgresql.postgresqlUsername`
+- Existing `postgresql.postgresqlUsername` was removed as PostHog requires admin access to the postgresql cluster to install extensions.
+- `postgresql.existingSecret` will now work after 14.0.0
+- `postgresql.existingSecretKey` was removed. This did not previously work.
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+
+### Upgrading from 14.x.x
+15.0.0 improves the configuration of Kafka.
 
 The built-in Kafka service type default is now `ClusterIP` from the previous `NodePort`. If you were relying on this setting you can override the new default by setting `kafka.service.type` to `NodePort`.
 

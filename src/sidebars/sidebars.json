@@ -298,7 +298,7 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "ClickHouse query performance optimization",
+                    "name": "Query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
                 },
                 {
@@ -554,8 +554,12 @@
                                     "url": "/docs/self-host/configure/async-migrations/overview"
                                 },
                                 {
-                                    "name": "Migration guide: 0002_events_sample_by",
+                                    "name": "0002_events_sample_by",
                                     "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                },
+                                {
+                                    "name": "0003_fill_person_distinct_id2",
+                                    "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
                                 }
                             ]
                         }
@@ -844,6 +848,10 @@
                 {
                     "name": "Events",
                     "url": "/docs/user-guides/events"
+                },
+                {
+                    "name": "Experimentation",
+                    "url": "/docs/user-guides/experimentation"
                 },
                 {
                     "name": "Feature Flags",

@@ -68,7 +68,7 @@ export const Scale = ({
                         </div>
                     </Section>
                     <TrackedCTA
-                        to="/signup/self-host/deploy/scale"
+                        href="https://license.posthog.com/"
                         className="mt-7 mb-3"
                         event={{ name: 'select edition: clicked get started', type: 'scale' }}
                     >

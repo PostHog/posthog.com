@@ -1,8 +1,7 @@
 ---
 date: 2021-12-09
 title: '"How come your website is so nice?"'
-categories:
-    - CEO diaries
+categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full

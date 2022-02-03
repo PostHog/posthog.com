@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/12-million-series-a.png
 featuredImageType: full
+categories: ["Inside PostHog"]
 ---
 
 (Dec 17, 2020) – PostHog, the open source product analytics company, today announced $12 million in funding and major new features - including plugins, session recordings and  feature flags. The company’s Series A was led by GV (formerly Google Ventures), with participation from Y Combinator’s Continuity Fund. PostHog also brings on board Jason Warner (CTO, GitHub) as an investor, joining Solomon Hykes (Founder, Docker) and David Cramer (Founder, Sentry) who participated in the company’s seed round. 

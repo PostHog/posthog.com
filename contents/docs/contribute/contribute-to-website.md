@@ -247,6 +247,73 @@ startDate: 2019-07-03
 - `country`: the country the team member resides in
 - `startDate`: the team member's date of hire
 
+##### HostHog
+
+Markdown files located in /contents/hosthog
+
+```markdown
+---
+date: 2022-02-24
+city: London
+venue: { name: Cobalance, address: Shoreditch High Street, London }
+from: '18:00'
+to: '20:30'
+agenda:
+    [
+        {
+            from: '18:00',
+            to: '18:30',
+            description: 'Sign in, grab some exclusive merch and meet the PostHog team over a cocktail in the Cellar Bar.',
+            emoji: '👋🏼',
+        },
+        {
+            from: '18:30',
+            to: '19:00',
+            description: 'After a welcome from CEO James Hawkins, hear how Mention Me uses PostHog to build better products in a fireside chat with Head of Product Anca Filip, hosted by PostHog’s Marcus Hyett.',
+            emoji: '💬',
+        },
+        {
+            from: '19:15',
+            to: '20:30',
+            description: 'Chat to the team and other PostHog users over a cocktail and slice of pizza. We’d love to hear your ideas and feedback!',
+            emoji: '🍺',
+        },
+    ]
+speakers:
+    [
+        {
+            name: 'James Hawkins',
+            title: 'Co-founder & CEO',
+            company: 'PostHog',
+            linkedIn: 'https://www.linkedin.com/in/j-hawkins',
+            image: '../images/hosthog/london/speakers/james.png',
+        },
+        {
+            name: 'Anca Filip',
+            title: 'Head of Product',
+            company: 'Mention Me',
+            linkedIn: 'https://www.linkedin.com/in/ancafilip',
+            image: '../images/hosthog/london/speakers/anca.png',
+        },
+        {
+            name: 'Marcus Hyett',
+            title: 'VP of Product',
+            company: 'PostHog',
+            linkedIn: '',
+            image: '../images/hosthog/london/speakers/marcus.png',
+        },
+    ]
+---
+```
+
+- `date`: date of the event
+- `city`: city where the event takes place
+- `venue`: venue details
+- `from`: event start time
+- `to`: event end time
+- `agenda`: event timeline
+- `speakers`: list of event speakers
+
 ##### Plain
 
 If the file doesn't reside in one of the above folders, it uses the plain template.

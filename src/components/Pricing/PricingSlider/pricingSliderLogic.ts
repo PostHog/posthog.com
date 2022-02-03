@@ -41,12 +41,18 @@ export const pricingSliderLogic = kea({
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
                 if (pricingOption === 'self-hosted') {
-                    let unitPricing = 0.000225
+                    let unitPricing = 0
 
                     const estimatedCost = eventNumber * unitPricing
                     let finalCost = estimatedCost > SCALE_MINIMUM_PRICING ? estimatedCost : SCALE_MINIMUM_PRICING
 
-                    if (eventNumber >= 10_000_000 && eventNumber < 100_000_000) {
+                    if (eventNumber >= 1_000_000 && eventNumber < 2_000_000) {
+                        unitPricing = 0.00045
+                        finalCost = (eventNumber - 1_000_000) * 0.00045
+                    } else if (eventNumber >= 2_000_000 && eventNumber < 10_000_000) {
+                        unitPricing = 0.000225
+                        finalCost = 1_000_000 * 0.00045 + (eventNumber - 2_000_000) * 0.000225
+                    } else if (eventNumber >= 10_000_000 && eventNumber < 100_000_000) {
                         unitPricing = 0.000045
                         finalCost = 10_000_000 * 0.000225 + (eventNumber - 10_000_000) * 0.000045
                     } else if (eventNumber >= 100000000) {

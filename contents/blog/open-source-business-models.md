@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["mo-shehu"]
+categories: ["Guides", "Product analytics", "Open source"]
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/L1Ovbzs7vyo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

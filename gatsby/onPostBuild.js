@@ -26,7 +26,9 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         authorData {
                             name
                             role
-                            image
+                            image {
+                                absolutePath
+                            }
                         }
                     }
                 }
@@ -175,8 +177,19 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const image = fs.readFileSync(featuredImage.absolutePath, {
             encoding: 'base64',
         })
+        const author =
+            authorData &&
+            authorData.map((author) => {
+                const image = fs.readFileSync(author.image.absolutePath, {
+                    encoding: 'base64',
+                })
+                return {
+                    ...author,
+                    image,
+                }
+            })[0]
         await createOG({
-            html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
+            html: blogTemplate({ title, authorData: author, image, font }),
             slug: post.fields.slug,
         })
     }
