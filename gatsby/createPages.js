@@ -190,7 +190,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     return true
                 }
             })
-
             createPage({
                 path: replacePath(slug),
                 component: HandbookTemplate,
@@ -200,7 +199,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     previous,
                     menu: result.data.sidebars.childSidebarsJson[menu],
                     breadcrumb,
-                    breadcrumbBase: { name: 'Handbook', url: '/handbook' },
+                    breadcrumbBase: menuFlattened[0],
                     tableOfContents,
                     slug,
                 },

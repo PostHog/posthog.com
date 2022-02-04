@@ -40,6 +40,23 @@ const HandbookSidebar = ({ contributors, title, location }) => {
     )
 }
 
+const Breadcrumb = ({ breadcrumb }) => {
+    return (
+        <ul className="list-none flex m-0 p-0">
+            {breadcrumb.map(({ title, url }) => {
+                return (
+                    <li
+                        key={url}
+                        className='after:content-["/"] after:mx-1 after:text-gray-accent-light last:after:hidden'
+                    >
+                        <Link to={url}>{title}</Link>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 export default function Handbook({
     data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
@@ -127,6 +144,7 @@ export default function Handbook({
                 >
                     <section>
                         <div className="mb-8 relative">
+                            <Breadcrumb breadcrumb={[breadcrumbBase, ...breadcrumb]} />
                             <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
                             {!hideLastUpdated && (
                                 <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
