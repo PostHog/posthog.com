@@ -1,5 +1,5 @@
 ---
-date: 2022-02-01
+date: 2022-02-04
 title: How I learned to love feedback loops (and make better products)
 rootPage: /blog
 sidebar: Blog
