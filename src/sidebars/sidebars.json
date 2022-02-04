@@ -588,6 +588,10 @@
                                 {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
+                                },
+                                {
+                                    "name": "Vertical Scaling",
+                                    "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
                                 }
                             ]
                         },
