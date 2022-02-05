@@ -65,7 +65,16 @@ Composite indices are useful when you want to optimize querying on multiple non-
 
 ### How-to find slow queries
 
-To find and debug slow queries in production we currently have a single option available: pull real time logs from Heroku by executing `heroku logs --app posthog --ps postgres`
+To find and debug slow queries in production you have a few options available:
+- Browse to the [Diagnose](https://data.heroku.com/datastores/56166304-6297-4dce-af64-a1536ea2197c#diagnose) tab in Heroku Data's dashboard. You can break queries down by:
+  - Most time consuming
+  - Most frequently invoked
+  - Slowest execution time
+  - Slowest I/O
+- You can also use Heroku's [Diagnose](https://blog.heroku.com/pg-diagnose) feature by running `heroku pg:diagnose` to get a breakdown of long running queries, long transactions, among other diagnostics.
+- For a more raw approach you can access real time logs from Heroku by executing `heroku logs --app posthog --ps postgres`
+- With any logs pulled from PostgreSQL you can use [pgbadger](https://github.com/darold/pgbadger) to find exactly the queries that are consuming the most time and resources.
+
 
 ### How-to fix slow queries
 Fixing a slow query is usually a 3 steps process:
