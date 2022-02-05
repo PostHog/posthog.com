@@ -15,8 +15,8 @@ module.exports = exports.createResolvers = ({ createResolvers }) => {
                         firstOnly: true,
                     })
                     return {
-                        name: data?.frontmatter?.name,
-                        jobTitle: data?.frontmatter?.jobTitle,
+                        name: data && data.frontmatter && data.frontmatter.name,
+                        jobTitle: data && data.frontmatter && data.frontmatter.jobTitle,
                     }
                 },
             },

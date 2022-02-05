@@ -58,7 +58,7 @@ const Breadcrumb = ({ breadcrumb }) => {
 }
 
 export default function Handbook({
-    data: { post },
+    data: { post, countries },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
@@ -144,7 +144,7 @@ export default function Handbook({
                 >
                     <section>
                         <div className="mb-8 relative">
-                            <Breadcrumb breadcrumb={[breadcrumbBase, ...breadcrumb]} />
+                            <Breadcrumb breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]} />
                             <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
                             {!hideLastUpdated && (
                                 <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
@@ -164,6 +164,11 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!) {
+        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+            group(field: frontmatter___country) {
+                totalCount
+            }
+        }
         post: mdx(id: { eq: $id }) {
             id
             body
