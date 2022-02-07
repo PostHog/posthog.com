@@ -43,7 +43,9 @@ By default, recordings are automatically deleted after 3 weeks. Old recordings a
 
 ```
 ALTER TABLE session_recording_events MODIFY TTL toDate(created_at) + INTERVAL 6 WEEK
-```
+````
+
+Note: if you're Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above. Otherwise, the command can hang.
 
 ### Legacy Postgres Self-hosted
 
