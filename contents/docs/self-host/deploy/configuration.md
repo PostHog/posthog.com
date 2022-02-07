@@ -327,3 +327,12 @@ This might be useful when checking out metrics. Figure out your `prometheus-serv
 `kubectl --namespace NS port-forward posthog-prometheus-server-XXX 9090`.
 
 After this, you should be able to access Prometheus server on `localhost`.
+
+
+### [Statsd](https://github.com/statsd/statsd)
+By default, StatsD is not installed as part of the chart. If you want to enable it, please set `prometheus-statsd-exporter.enabled` to `true`.
+
+#### Use an external service
+To use an external StatsD service, please set `prometheus-statsd-exporter.enabled` to `false` and then configure the `externalStatsd` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [prometheus-statsd-exporter chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter) for full configuration options._
