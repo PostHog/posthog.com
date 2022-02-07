@@ -12,99 +12,7 @@ This page refers to our public endpoints, which use the same API key as the [Pos
 
 > **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
 
-## Feature flags
 
-PostHog offers support for [feature flags](/docs/user-guides/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not.
-
-As such, to create feature flags, you will need to use another endpoint, which we're currently still documenting. However, to check if a feature flag is enabled, you can use the following endpoint:
-
-#### /decide
-
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
-
-To get the feature flags that are enabled for a given user, you will need to perform the following request:
-
-```shell
-POST <ph_instance_address>/decide/ # e.g. https://posthog.yourcompany.com for self-hosted users
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "[user's distinct id]"
-}
-```
-
-### Example request & response: /decide v2
-
-`/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
-
-#### Request
-
-```shell
-curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234"
-}' https://app.posthog.com/decide?v=2
-```
-
-#### Response
-
-```shell
-{
-  "config": {
-    "enable_collect_everything": true
-  },
-  "editorParams": {},
-  "isAuthenticated": false,
-  "supportedCompression": [
-    "gzip",
-    "lz64"
-  ],
-  "featureFlags": {
-    "my-awesome-flag": true,
-    "my-awesome-flag-2": true,
-    "my-multivariate-flag": "some-string-value"
-  }
-}
-```
-
-### Example request & response: /decide v1 (legacy)
-
-`/decide` version 1 is still the default if the query parameter `v` is not specified, although the latest `posthog-js` library no longer uses version 1 of the decide endpoint, and we recommend using version 2 as described above.
-
-#### Request
-
-```shell
-curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234"
-}' https://app.posthog.com/decide?v=1
-```
-
-#### Response
-
-```shell
-{
-  "config": {
-    "enable_collect_everything": true
-  },
-  "editorParams": {},
-  "isAuthenticated": false,
-  "supportedCompression": [
-    "gzip",
-    "lz64"
-  ],
-  "featureFlags": [
-    "my-awesome-flag-1",
-    "my-awesome-flag-2",
-    "my-multivariate-flag"
-  ]
-}
-```
-
-From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `featureFlags` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
-
-Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
 
 ## Sending events
 
@@ -341,6 +249,101 @@ However, we **will not return an error** to the client when the following happen
 The three cases above will cause the event to not be ingested, but you will still receive a `200: OK` response from us. 
 
 This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints. 
+
+
+## Feature flags
+
+PostHog offers support for [feature flags](/docs/user-guides/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not.
+
+As such, to create feature flags, you will need to use another endpoint, which we're currently still documenting. However, to check if a feature flag is enabled, you can use the following endpoint:
+
+#### /decide
+
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
+
+To get the feature flags that are enabled for a given user, you will need to perform the following request:
+
+```shell
+POST <ph_instance_address>/decide/ # e.g. https://posthog.yourcompany.com for self-hosted users
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "[user's distinct id]"
+}
+```
+
+### Example request & response: /decide v2
+
+`/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
+
+#### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234"
+}' https://app.posthog.com/decide?v=2
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value"
+  }
+}
+```
+
+### Example request & response: /decide v1 (legacy)
+
+`/decide` version 1 is still the default if the query parameter `v` is not specified, although the latest `posthog-js` library no longer uses version 1 of the decide endpoint, and we recommend using version 2 as described above.
+
+#### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234"
+}' https://app.posthog.com/decide?v=1
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": [
+    "my-awesome-flag-1",
+    "my-awesome-flag-2",
+    "my-multivariate-flag"
+  ]
+}
+```
+
+From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `featureFlags` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+
+Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
 
 ## Reading data from PostHog
 
