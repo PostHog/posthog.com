@@ -5,13 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
-excerpt: Excerpt coming soon.
+featuredImageType: full
+excerpt: PostHog 1.32.0 makes it easier to find what you want in the Persons & Groups page, introduces vertical funnels and sets the stage for the launch of Experimentation!
 ---
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of <code>v1.31.0</code> (last version supported is <code>1.30.0</code>) and you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.32.0 release notes
@@ -20,10 +21,9 @@ excerpt: Excerpt coming soon.
 
 **Release highlights:**
 - [Redesigned Persons & Groups pages](#redesigned-persons--groups-pages)
-- [Short link sharing](#short-link-sharing)
+- [Short insight link sharing](#short-insight-link-sharing)
 - [Improved insight experience](#improved-insight-experience)
 - [Funnels vertical breakdown](#funnels-vertical-breakdown)
-
 ### Redesigned Persons & Groups pages
 
 We've redesigned how the Persons & Groups pages look to make it easier to find what you're looking for. You'll now be able to easily see which groups (if any) the user belongs to, and better manage the user's properties.
@@ -32,9 +32,9 @@ We've redesigned how the Persons & Groups pages look to make it easier to find w
 
 <br />
 
-### Short link sharing
+### Short insight link sharing
 
-When sharing saved insights, you will now get a short and sweet URL to share with your teammates. This means something like this: `https://app.posthog.com/insights/y3tskB1B`, instead of well.... a very, very long URL you would see before. Further, this now makes it possible to create very complex insights with multiple series and filters.
+When sharing saved insights, you will now get a short and sweet URL to share with your teammates. This means something like this: `https://app.posthog.com/insights/y3tskB1B`, instead of well.... a very, very long URL you would see before. Further, this now makes it possible to create very complex insights with multiple series and filters (which could be limited by the maximum URL length supported).
 
 ### Improved insight experience
 
@@ -51,7 +51,7 @@ In addition to the above, we've improved how tooltips are displayed so they cont
 
 ### Funnels vertical breakdown
 
-Funnels with breakdowns just got a lot better. This new visualization can help you better understand how your users are converting.
+Funnels with breakdowns just got a lot better. This new view enables you to quickly understand how your users convert through a funnel. The colors can help you quickly identify patterns based on the breakdown applied.
 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_32_0-funnel-vertical-breakdown.png" alt="Example screenshot: Funnels with a vertical breakdown" />
@@ -60,7 +60,7 @@ Funnels with breakdowns just got a lot better. This new visualization can help y
 
 ### Other improvements & fixes
 
-- Set friendly names to your groups (from [Group Analytics](/docs/user-guides/group-analytics)). Now instead of seeing `org` (as you may call it in your code), you can rename it to see "Organization" in PostHog's UI. Further, you can now set the plurar version as well to improve readability. [PR](https://github.com/PostHog/posthog/pull/7974).
+- Set friendly names to your groups (from [Group Analytics](/docs/user-guides/group-analytics)). Now instead of seeing `org` (as you may call it in your code), you can rename it to see "Organization" in PostHog's UI. Further, you can now set the plural version as well to improve readability. [PR](https://github.com/PostHog/posthog/pull/7974).
 - Simplified dashboard grid that makes it more responsive and consistent across multiple screen sizes.
 - Toolbar launch page. When navigating to toolbar on the sidebar you'll now see a simplified experience to launch it. Plus, we've improved how authorized domains are managed.
 - Significant performance improvements to the Actions page. When viewing an action, we'll now show you the most recent events (~6 months ago) without constant polling. This should make it easy and faster to debug actions.
@@ -77,7 +77,7 @@ Funnels with breakdowns just got a lot better. This new visualization can help y
 
 ### Deprecation & removal notices
 
-1. Since the previous version (1.31.0), we no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. Since the previous version (1.31.0), we no longer support a Postgres-only deployment of PostHog. Read [our migration guide](/docs/self-host/migrate-from-postgres-to-clickhouse) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're removing support for insights with "Minute" intervals. From user feedback, these insights were hard to parse and could lead to significant performance issues in self-hosted instances. Please [reach out](/support) if you have any feedback on this. More details on the [PR](https://github.com/PostHog/posthog/pull/7847).
 
 ### Talk to us about how we can improve
@@ -95,7 +95,7 @@ We've been working hard on a brand new Experimentation feature which will let yo
 
 ## PostHog News
 
-Welcome to our new team members!
+We want to welcome our new team members!
 
 
 [Andy](https://posthog.com/handbook/company/team#andy-vandervell-content-marketer) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
@@ -115,11 +115,10 @@ Want to help improve PostHog? We always welcome contributions from our community
 
 Join us in helping make more products successful! We're currently hiring for the following roles:
 
-- Software Engineer
-- Full Stack Engineer
+- Software Engineer - Kubernetes
+- Full Stack Engineer - Growth
 - Tech Lead Manager/Engineering Manager
 - Community Engineer, more details here
-- Full Stack Engineer
 - Ex-Founders*
 
 Learn more about these roles on our [Careers page](https://posthog.com/careers).

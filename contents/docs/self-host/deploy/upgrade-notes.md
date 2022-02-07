@@ -182,3 +182,18 @@ As part of this work, the following chart inputs have changed:
 - `clickhouse.replication` was removed
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 13.x.x
+
+14.0.0 fixes customizing PostgreSQL installation, previously many `values.yaml` values did not work as expected.
+
+As part of this work, the following chart inputs have changed:
+
+- `postgresql.postgresqlHost` -> `externalPostgresql.postgresqlHost`
+- `postgresql.postgresqlPort` -> `externalPostgresql.postgresqlPort`
+- `postgresql.postgresqlUsername` -> `externalPostgresql.postgresqlUsername`
+- Existing `postgresql.postgresqlUsername` was removed as PostHog requires admin access to the postgresql cluster to install extensions.
+- `postgresql.existingSecret` will now work after 14.0.0
+- `postgresql.existingSecretKey` was removed. This did not previously work.
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.

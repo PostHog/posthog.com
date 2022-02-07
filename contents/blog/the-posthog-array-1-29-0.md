@@ -5,8 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product Updates"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/1-28-0.png
+featuredImageType: full
 excerpt: Fully revamped Paths experience enables you to better explore what actions your users take. New features include multivariate feature flags, private projects and DAU/WAU/MAU graphs.
 ---
 

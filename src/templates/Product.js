@@ -49,7 +49,11 @@ export default function Product({ data, pageContext: { next, previous } }) {
 
     return (
         <Layout>
-            <SEO title={`${title} - PostHog`} description={description || excerpt} />
+            <SEO
+                image={`/images/product/${slug.split('/')[2]}.png`}
+                title={`${title} - PostHog`}
+                description={description || excerpt}
+            />
             <Breadcrumbs
                 crumbs={[{ title: 'Product', url: '/product' }, { title }]}
                 darkModeToggle

@@ -82,7 +82,7 @@ We have identified the following acquisition channels as most important to our s
 
 Developer relations and community is also super important to us, but covered elsewhere as we don't strictly define it as part of marketing at PostHog. 
  
-The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press). 
+The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about Product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press). 
 
 We track marketing activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
 

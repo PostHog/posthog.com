@@ -1,8 +1,10 @@
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
+const { createClient } = require('@supabase/supabase-js')
+const xss = require('xss')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
-    const { createNode } = actions
+    const { createNode, createParentChildLink } = actions
 
     if (process.env.WORKABLE_API_KEY) {
         const { jobs } = await fetch('https://posthog.workable.com/spi/v3/jobs?state=published', {
@@ -77,20 +79,19 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         questions.messages &&
         questions.messages.forEach(async (message, index) => {
             const { blocks } = message
-
             if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
-
-            const question = { replies: [] }
+            const question = {}
+            const reply = { ts: message.ts }
             const blockIds = {
                 name_and_slug: (block) => {
                     const split = block.text.text.split(' on ')
-                    question.name = split[0]
+                    reply.name = split[0]
                     question.slug = split[1].split(',').map((slug) => slug.trim())
                 },
                 question: (block) => {
-                    question.body = block.text.text
+                    reply.rawBody = block.text.text
                     if (block.accessory) {
-                        question.avatar = block.accessory.image_url
+                        reply.imageURL = block.accessory.image_url
                     }
                 },
             }
@@ -103,42 +104,15 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             })
 
             if (Object.keys(question).length > 0) {
-                const replies =
-                    message.thread_ts &&
-                    (
-                        await fetch(
-                            `https://slack.com/api/conversations.replies?ts=${message.thread_ts}&channel=${process.env.SLACK_QUESTION_CHANNEL}`,
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                                },
-                            }
-                        ).then((res) => res.json())
-                    ).messages
-                if (replies) {
-                    question.replies = await Promise.all(
-                        replies.slice(1).map((reply) => {
-                            return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                                },
-                            })
-                                .then((res) => res.json())
-                                .then((user) => {
-                                    return {
-                                        name: user.user.name,
-                                        body: reply.text,
-                                        avatar: user.user.profile.image_72,
-                                    }
-                                })
-                        })
-                    )
-                }
-
+                const replies = await getReplies(
+                    message.thread_ts,
+                    process.env.SLACK_QUESTION_CHANNEL,
+                    process.env.SLACK_API_KEY,
+                    false
+                )
+                question.replies = [reply, ...replies.slice(1)]
                 const node = {
-                    id: createNodeId(`question-${index}`),
+                    id: createNodeId(`question-${message.thread_ts}`),
                     parent: null,
                     children: [],
                     internal: {
@@ -148,6 +122,152 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     ...question,
                 }
                 createNode(node)
+                createReplies(node, question.replies)
             }
         })
+    if (process.env.SUPABASE_API_KEY && process.env.SUPABASE_URL) {
+        const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
+        const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug, slack_channel')
+        if (data && data.length > 0) {
+            const messages = await Promise.all(
+                data
+                    .filter(({ slug }) => slug)
+                    .map(({ slug, slack_timestamp, slack_channel }) => {
+                        return getReplies(slack_timestamp, slack_channel, process.env.SLACK_USERS_API_KEY, true).then(
+                            (replies) => ({
+                                slug: slug.split(',').map((slug) => slug.trim()),
+                                replies,
+                                slack_timestamp,
+                            })
+                        )
+                    })
+            )
+            messages.length > 0 &&
+                messages.forEach(({ slug, replies, slack_timestamp }) => {
+                    const question = {
+                        slug,
+                        replies,
+                    }
+                    const node = {
+                        id: createNodeId(`question-${slack_timestamp}`),
+                        parent: null,
+                        children: [],
+                        internal: {
+                            type: `Question`,
+                            contentDigest: createContentDigest(question),
+                        },
+                        ...question,
+                    }
+                    createNode(node)
+                    replies && createReplies(node, replies)
+                })
+        }
+    }
+
+    function createReplies(node, replies) {
+        for (reply of replies) {
+            const { rawBody, name, imageURL, ts, fullName } = reply
+            const replyId = createNodeId(`reply-${ts}`)
+            const replyNode = {
+                id: replyId,
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Reply`,
+                    contentDigest: createContentDigest(rawBody),
+                    content: rawBody,
+                    mediaType: 'text/markdown',
+                },
+                name,
+                imageURL,
+                fullName,
+            }
+            createNode(replyNode)
+            createParentChildLink({ parent: node, child: replyNode })
+        }
+    }
+
+    async function getReplies(ts, channel, apiKey, format) {
+        const replies =
+            ts &&
+            (
+                await fetch(`https://slack.com/api/conversations.replies?ts=${ts}&channel=${channel}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${apiKey}`,
+                    },
+                }).then((res) => res.json())
+            ).messages
+        if (replies) {
+            return await Promise.all(
+                replies.map((reply) => {
+                    return fetch(`https://slack.com/api/users.info?user=${reply.user}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${apiKey}`,
+                        },
+                    })
+                        .then((res) => res.json())
+                        .then(async (user) => {
+                            const rawBody = format
+                                ? await formatSlackElements(reply.blocks[0].elements, apiKey)
+                                : reply.text
+                            return {
+                                name: user?.user?.profile?.first_name || user?.user?.name,
+                                rawBody,
+                                imageURL: user.user.profile.image_72,
+                                ts: reply.ts,
+                                fullName: user?.user?.profile?.real_name,
+                            }
+                        })
+                })
+            )
+        }
+    }
+}
+
+async function formatSlackElements(elements, apiKey) {
+    const types = {
+        text: (el) => {
+            return el.style?.code ? '`' + el.text + '`' : el.text
+        },
+        user: async (el) => {
+            const user = await fetch(`https://slack.com/api/users.info?user=${el.user_id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${apiKey}`,
+                },
+            }).then((res) => res.json())
+            return user?.user?.profile?.first_name || user?.user?.name
+        },
+        link: (el) => {
+            return `[${el.text || el.url}](${el.url})`
+        },
+        emoji: (el) => {
+            return ''
+        },
+    }
+    const message = []
+    for (el of elements) {
+        if (el.type === 'rich_text_preformatted') {
+            el.elements.forEach((el) => {
+                message.push('```shell\n' + el.text + '\n```')
+            })
+        } else if (el.type === 'rich_text_list') {
+            const { style } = el
+            el.elements.forEach((el, index) => {
+                message.push(`${style === 'ordered' ? index + 1 + '.' : '-'} ${el.elements[0].text}\n`)
+            })
+        } else {
+            for (el of el.elements) {
+                const formatted = await types[el.type](el)
+                message.push(formatted)
+            }
+        }
+    }
+    const options = {
+        whiteList: {},
+        stripIgnoreTag: true,
+    }
+    return xss(message.join(''), options)
 }

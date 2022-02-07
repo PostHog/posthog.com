@@ -9,7 +9,7 @@ keywords: ["self host analytics","self hosted analytics"]
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["Product Analytics", "Guides"]
+categories: ["Product analytics", "Guides"]
 ---
 
 PostHog is a self-hosted, [open-source analytics tool](/blog/best-open-source-analytics-tools). Transparency is one of our [core values](/handbook/company/culture) and we believe self-hosting is the best solution for many businesses, especially large enterprises with complex needs. But, why? Why do we believe in this idea when the likes of Mixpanel, Amplitude and Heap are busy doing the exact opposite?
@@ -45,6 +45,8 @@ They investigated third-party providers, but found their approach to data privac
 [Pry](/customers/pry), a financial planning platform for small businesses, faced a similar problem in keeping control of the sensitive financial information of its clients. Co-founder Tiffany Wong concluded self-hosting was the answer as she can be "confident that our data is safe and shared with as few platforms as possible".
 
 Issues around data portability are particularly crucial for healthcare companies. Any product capturing health information in the US is subject to HIPAA, which regulates how companies use protected health information (PHI). Companies need to use [HIPAA compliant analytics providers](/blog/hipaa-compliant-analytics) and sign a Business Associate Agreement (BAA) before any user tracking can occur. By self-hosting, companies keep control of their data and avoid the legal expense, time and energy drained in dealing with legal agreements.
+
+> Looking for an alternative to Google Analytics? Read our [guide to the best GDPR-compliant analytics](/blog/best-gdpr-compliant-analytics-tools) tools on the market.
 
 ## 2) More reliable data
 
