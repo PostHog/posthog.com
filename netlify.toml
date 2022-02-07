@@ -1139,7 +1139,6 @@
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
 
-
 # Added: 2021-12-14
 [[redirects]]
     from = "/docs/user-guides/sessions"
@@ -1152,3 +1151,14 @@
     
 [build]
     command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+
+# Added: 2022-01-25
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations"
+    to = "/docs/self-host/configure/async-migrations/overview"
+
+
+# Added: 2022-02-04
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
+    to = "/docs/self-host/runbook/clickhouse/vertical-scaling"

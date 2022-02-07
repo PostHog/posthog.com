@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/leo-anthias.png
 featuredImageType: full
+categories: ["Open source", "Startups"]
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 

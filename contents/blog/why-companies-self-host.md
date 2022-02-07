@@ -9,7 +9,7 @@ keywords: ["self host analytics","self hosted analytics"]
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["General"]
+categories: ["Product analytics", "Guides"]
 ---
 
 PostHog is a self-hosted, [open-source analytics tool](/blog/best-open-source-analytics-tools). Transparency is one of our [core values](/handbook/company/culture) and we believe self-hosting is the best solution for many businesses, especially large enterprises with complex needs. But, why? Why do we believe in this idea when the likes of Mixpanel, Amplitude and Heap are busy doing the exact opposite?
@@ -46,6 +46,8 @@ They investigated third-party providers, but found their approach to data privac
 
 Issues around data portability are particularly crucial for healthcare companies. Any product capturing health information in the US is subject to HIPAA, which regulates how companies use protected health information (PHI). Companies need to use [HIPAA compliant analytics providers](/blog/hipaa-compliant-analytics) and sign a Business Associate Agreement (BAA) before any user tracking can occur. By self-hosting, companies keep control of their data and avoid the legal expense, time and energy drained in dealing with legal agreements.
 
+> Looking for an alternative to Google Analytics? Read our [guide to the best GDPR-compliant analytics](/blog/best-gdpr-compliant-analytics-tools) tools on the market.
+
 ## 2) More reliable data
 
 Cloud-based and self-hosted analytics do the same thing, so surely they collect the same data? Wrong.
@@ -58,7 +60,7 @@ So what's going on here?
 
 Again, it's related to privacy, as our CTO and co-founder, Tim Glaser, explains:
 
-"Event tracking is typically prevented by ad blockers, which block tracking that originates from third-party domains. Self-hosting your analytics avoids this problem because the tracking originates from your domain. 
+"Event tracking is typically prevented by ad blockers, which block tracking that originates from third-party domains. Self-hosting your analytics avoids this problem as you’re just sending the data to your own server. 
 
 "This behavior isn't limited to ad blockers, either. VPNs and privacy browsers, which aren't explicitly positioned as ad blockers, will generally block third-party trackers by default."
 

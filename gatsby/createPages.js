@@ -16,15 +16,24 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
+    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const result = await graphql(`
         {
-            allMdx(filter: { fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" } }, limit: 1000) {
+            allMdx(
+                filter: {
+                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    frontmatter: { title: { ne: "" } }
+                }
+                limit: 1000
+            ) {
                 nodes {
                     id
                     slug
                 }
             }
-            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
                 nodes {
                     id
                     headings {
@@ -36,7 +45,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -147,6 +156,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     slug
                 }
             }
+            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
+                nodes {
+                    id
+                    slug
+                }
+            }
         }
     `)
 
@@ -215,6 +230,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -245,6 +261,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -270,6 +287,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 tableOfContents,
                 pageViews,
+                slug,
             },
         })
     })
@@ -305,6 +323,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                slug,
             },
         })
     })
@@ -363,6 +382,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             createPage({
                 path: slug,
                 component: PluginTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
+    })
+    result.data.hostHog.nodes.forEach((node) => {
+        const { id, slug } = node
+        if (slug) {
+            createPage({
+                path: slug,
+                component: HostHogTemplate,
                 context: {
                     id,
                 },

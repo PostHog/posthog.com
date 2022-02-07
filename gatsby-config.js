@@ -17,6 +17,13 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: 'gatsby-plugin-mailchimp',
+            options: {
+                endpoint:
+                    'https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&amp;id=97194afa0a',
+            },
+        },
+        {
             resolve: 'gatsby-plugin-breakpoints',
             options: {
                 queries: {
@@ -96,6 +103,13 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `authorImages`,
+                path: `${__dirname}/static/images/authors`,
             },
         },
         `gatsby-transformer-gitinfo`,
@@ -366,7 +380,6 @@ module.exports = {
                                         handle
                                         name
                                         role
-                                        image
                                         link_type
                                         link_url
                                     }
