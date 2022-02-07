@@ -93,7 +93,7 @@ keywords: ["fundraise", "fundraising"]
 featuredImage: ../images/blog/series-b/series-b-baby.png
 featuredImageType: full
 author: ["joe-martin"]
-categories: ["Product Analytics", "Guides"]
+categories: ["Product analytics", "Guides"]
 ---
  ```
 
