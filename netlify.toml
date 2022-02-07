@@ -1157,3 +1157,9 @@
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations"
     to = "/docs/self-host/configure/async-migrations/overview"
+
+
+# Added: 2022-02-07
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/vertical-scaling"
+    to = "/docs/self-host/runbook/clickhouse/vertical_scaling"
