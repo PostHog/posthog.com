@@ -197,3 +197,15 @@ As part of this work, the following chart inputs have changed:
 - `postgresql.existingSecretKey` was removed. This did not previously work.
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+
+### Upgrading from 14.x.x
+
+15.0.0 renamed the `prometheus-statsd-exporter` subchart alias from `statsd` to the default (`prometheus-statsd-exporter`).
+
+As part of this work, we've also:
+
+* deprecated all the resources in the `metrics` namespace
+* added the possibility to use an external `statsd` service by using the `externalStatsd` variable
+
+If you are overriding the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
