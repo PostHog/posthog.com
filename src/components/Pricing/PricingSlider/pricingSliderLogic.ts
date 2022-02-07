@@ -39,6 +39,8 @@ export const pricingSliderLogic = kea({
                 const thresholdPrices =
                     pricingOption === 'self-hosted'
                         ? [
+                              [1_000_000, 0],
+                              [2_000_000, 0.00045],
                               [10_000_000, 0.000225],
                               [100_000_000, 0.000045],
                               [Number.MAX_SAFE_INTEGER, 0.000009],
