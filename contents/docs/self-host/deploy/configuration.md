@@ -208,6 +208,19 @@ To use an external PostgreSQL service, please set `postgresql.enabled` to `false
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
+### [PgBouncer](https://www.pgbouncer.org/)
+PgBouncer is a lightweight connection pooler for PostgreSQL and it is installed by default as part of the chart. It is currently required in order for the installation to work (see [here](https://github.com/PostHog/charts-clickhouse/issues/280) for more info).
+
+If you've configured your PostgreSQL instance to require the use of TLS, you'll need to pass an additional env variables to the PgBouncer deployment (see the [official documentation](https://www.pgbouncer.org/config.html) for more info). Example:
+
+```yaml
+pgbouncer:
+  env:
+  - name: SERVER_TLS_SSLMODE
+    value: "your_value"
+```
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
 ### [Redis](https://redis.io/)
 
