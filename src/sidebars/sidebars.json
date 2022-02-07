@@ -298,7 +298,7 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "ClickHouse query performance optimization",
+                    "name": "Query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
                 },
                 {
@@ -588,6 +588,10 @@
                                 {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
+                                },
+                                {
+                                    "name": "Vertical Scaling",
+                                    "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
                                 }
                             ]
                         },
