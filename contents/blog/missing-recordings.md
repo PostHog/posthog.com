@@ -8,10 +8,10 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 author: ["rick-marron"]
-categories: ["Engineering"]
+categories: ["Engineering", "Inside PostHog"]
 ---
 
-[Session Recording](product/session-recording) is one of PostHog's core features. It allows customers to see their website being used, mouse clicks and all. It's really cool, but, until recently, we had one big issue with the feature. Customers would often tell us recordings were missing, and we didn't know why. 
+[Session Recording](product/session-recording) is one of PostHog's core features. It allows customers to see their website being used by real users, mouse clicks and all. It's really cool, but, until recently, we had one big issue with the feature. Customers would often tell us recordings were missing, and we didn't know why. 
 
 This is the story of how we decreased the number of missing recordings from 15% to <1%, and in doing so, moved the feature out of beta.
 
@@ -70,4 +70,4 @@ Fixing this issue of missing recordings was part of a larger effort to improve t
 
 With this focus on quality, we've seen usage of the feature go up significantly. Weekly active users is up 2.5x, and each of those users are watching about 2x as many recordings per week.
 
-You can learn more about our [recordings feature here](https://posthog.com/product/session-recording), and make an account to try it out yourself!
+Read our [Sessions Recordings documentation](/docs/user-guides/recordings) for more detailed information, or you can [make an account for free](https://posthog.com/pricing) to try it out yourself!
