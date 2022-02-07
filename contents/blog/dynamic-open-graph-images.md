@@ -191,7 +191,7 @@ There are a considerations for our blog posts:
 
 - If we place an image in the background, text layered on top needs to be readable. The fix? We added subtle text shadows and partially transparent gradients layered between the text and image.
 - Some posts have multiple authors, so that needs to be factored in.
-- Some post images have text [inside the image](https://posthog.com/blog/yc-top-companies). In this case, we don't want to auto-generate an Open Graph image for these, we have a parameter in our blog post’s front matter to skip this image generation.
+- In some cases, post images have text [inside the image](https://posthog.com/blog/yc-top-companies) that would be obscured with auto-generated Open Graph images. We have a parameter in our blog post’s front matter to skip this image generation.
 
 ![Blog Open Graph image](../images/blog/open-graph-images/og-13.png)
 
@@ -209,11 +209,61 @@ Especially useful for the PostHog team when posting roles on LinkedIn, this imag
 
 ## How it works
 
-A more technical explanation of how we built this can be found [in this pull request](https://github.com/PostHog/posthog.com/pull/2695), but here’s a summary:
+### Overview
 
-- We use headless Chrome via Puppeteer.
-- We load images and our custom font and screenshot the preview.
-- Images are generated at build time. (We use Gatsby, a static site generator, so nothing is technically on-the-fly, but rather generated at build.)
+We use [Gatsby](https://www.gatsbyjs.com), a static site generator, so once the build process is complete, we run through a series of steps:
+
+- Pass an HTML string containing some page data to [Puppeteer](https://github.com/puppeteer/puppeteer) (a Node library for headless screenshotting) for each page
+- Load images and our custom font and screenshot the preview
+- Use the new image instead of our site-wide fallback Open Graph image
+
+### Details
+
+Gatsby has a really cool API that allows you to hook into the last point of the build process: `onPostBuild`. This is where all of the magic takes place.
+
+We first query for each page that will use custom Open Graph images. (Right now, that's Docs, Handbook, Customers, Careers, and our blog posts.)
+
+From there, we do some initial setup:
+
+1. Create folders for images and fonts
+1. Download our webfont
+1. Spin up a new Chromium page with Puppeteer
+
+After setup is complete, we finally iterate through each queried page, set the content of the Chromium page with an HTML string, screenshot the page, and save it. Here's what that looks like for blog posts:
+
+```
+for (const post of data.blog.nodes) {
+    const { title, authorData, featuredImage } = post.frontmatter
+    const image = fs.readFileSync(featuredImage.absolutePath, {
+        encoding: 'base64',
+    })
+    await createOG({
+        html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
+        slug: post.fields.slug,
+    })
+}
+```
+
+**What's happening in this for...of loop, though?**
+
+```
+const image = fs.readFileSync(featuredImage.absolutePath, {
+    encoding: 'base64',
+})
+```
+
+Since the site isn't technically "live" yet, we don't have access to a public URL to insert into our HTML template. The workaround is embedding it in an `<img />` element as Base64. You'll see this workaround in a few other places in the code.
+
+```
+await createOG({
+    html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
+    slug: post.fields.slug,
+})
+```
+
+We have an asynchronous function called `createOG`. This handles setting the Chromium page content, screenshotting, and saving the image. It takes an HTML string to set the Chromium page content and a slug to create the file name of the screenshot.
+
+> You can explore our solution [in this pull request](https://github.com/PostHog/posthog.com/pull/2695).
 
 ### Testing Open Graph previews
 
