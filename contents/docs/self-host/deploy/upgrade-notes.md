@@ -208,4 +208,4 @@ As part of this work, we've also:
 * deprecated all the resources in the `metrics` namespace
 * added the possibility to use an external `statsd` service by using the `externalStatsd` variable
 
-If you are overriding the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+If you are using the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
