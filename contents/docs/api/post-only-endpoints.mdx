@@ -14,7 +14,7 @@ This page refers to our public endpoints, which use the same API key as the [Pos
 
 
 
-## Sending events
+# Sending events
 
 To send events to PostHog, you can use any of [our libraries](/docs/integrate/overview) **or** any Mixpanel library by changing the `api_host` setting to the address of your instance.
 
@@ -251,7 +251,7 @@ The three cases above will cause the event to not be ingested, but you will stil
 This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints. 
 
 
-## Feature flags
+# Feature flags
 
 PostHog offers support for [feature flags](/docs/user-guides/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not.
 
@@ -345,7 +345,7 @@ From this response, if you are looking to use feature flags in your backend, you
 
 Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
 
-## Reading data from PostHog
+# Reading data from PostHog
 
 We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/overview) for more information.
 
