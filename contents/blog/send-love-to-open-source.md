@@ -23,7 +23,7 @@ We're donating to the following projects, all of which are either used extensive
 
 | **Who?**                                                    | **What?                                                     | **Why?**                                                                 |
 |----------------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| [Rrweb](https://github.com/rrweb-io/rrweb)                     | An open-source web session replay library                         | Rrweb powers our [Session Recording](https://posthog.com/docs/user-guides/recordings) feature |
+| [Rrweb](https://github.com/rrweb-io/rrweb)                     | An open-source web session replay library                         | [Explanation here] |
 | [Django REST](https://github.com/encode/django-rest-framework) | A powerful toolkit for building Web APIs | [explanation here]                                                                            |
 | [Babel](https://github.com/babel/)                         | A compiler for writing next generation JavaScript            | [explanation here]                                                       |
 | [Sindre Sorhus](https://github.com/sindresorhus)                       | Sindre is a prolific open-source developer numerous tools and packages                                          | [explanation here]                                                                            |
