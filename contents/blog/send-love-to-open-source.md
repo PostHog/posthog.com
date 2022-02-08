@@ -13,7 +13,7 @@ categories: ["Open source"]
 
 Valentine's Day is coming up and while PostHoggers around the world will be using the occasion to give thanks to their loved ones, we'd also like to share our love for the open-source community that helps power PostHog. Here's how:
 
-> **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now through to the end Valentine's Day, we'll donate $5 USD across [TBC ADD FINAL NUMBER HERE] handpicked open-source projects.**
+> **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now through to the end Valentine's Day, we'll donate $5 USD across the four handpicked open-source projects.**
 
 We'll donate a maximum of $50,000 to these projects in total. 
 
@@ -31,7 +31,7 @@ We're donating to the following projects, all of which are either used extensive
 
 ## How does this work?
 
-That's easy. Between now and the end of Valentine's Dat, simply follow these steps:
+That's easy. Between now and the end of Valentine's Day, simply follow these steps:
 
 1. Login to GitHub and go to [the PostHog repo](https://github.com/PostHog/posthog).
 2. Click the ⭐️ icon. Hint: it's in the top right corner.
