@@ -43,7 +43,6 @@ On the morning of Tuesday, February 15, we'll count up how many stars we've gain
 
 PostHog is an open-source project and our team is proud to be part of the open-source community. We wanted to take this week as an opportunity to truly celebrate and support the open-source community in a meaningful way.
 
-
 Finally, getting people who care about open source projects to star our repo is of course beneficial to us - it'll give us an opportunity to reach a relevant new audience of people who are likely to benefit from using PostHog. If we get enough stars, we may feature on GitHub Trending, which also helps us to reach a wider audience.
 
 ## The small print
