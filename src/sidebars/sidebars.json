@@ -500,6 +500,10 @@
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
+                            "name": "Hosting in EU",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
                         },
@@ -588,6 +592,10 @@
                                 {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
+                                },
+                                {
+                                    "name": "Vertical Scaling",
+                                    "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
                                 }
                             ]
                         },

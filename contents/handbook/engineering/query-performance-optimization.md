@@ -34,8 +34,6 @@ PostHog uses two different datastores:
 
 1. (if possible) avoid `JOIN`
 
-1. **always avoid** foreign keys: they are in your way to shard your database, your app is accustomed to rely on them to maintain data integrity instead of doing it on its own, they have performance impact (they add an additional lookup for each insert/delete), they lead to unpredictable performance, ...
-
 1. avoid the use of subqueries: a subquery is a `SELECT` statement that is embedded in a clause of another SQL statement. It's easier to write, but `JOIN`s are usually better-optimized for the database engines.
 
 1. use appropriate [data type(s)](https://www.postgresql.org/docs/10/datatype.html): not all the types occupy the same, and when we use a concrete data type, we can also limit its size according to what we store. For example, `VARCHAR(4000)` is not the same as `VARCHAR(40)`. We always have to adjust to what we will store in our fields not to occupy unnecessary space in our database (and we should enforce this limit in the application code to avoid query errors).
@@ -65,7 +63,16 @@ Composite indices are useful when you want to optimize querying on multiple non-
 
 ### How-to find slow queries
 
-To find and debug slow queries in production we currently have a single option available: pull real time logs from Heroku by executing `heroku logs --app posthog --ps postgres`
+To find and debug slow queries in production you have a few options available:
+- Browse to the [Diagnose](https://data.heroku.com/datastores/56166304-6297-4dce-af64-a1536ea2197c#diagnose) tab in Heroku Data's dashboard. You can break queries down by:
+  - Most time consuming
+  - Most frequently invoked
+  - Slowest execution time
+  - Slowest I/O
+- You can also use Heroku's [Diagnose](https://blog.heroku.com/pg-diagnose) feature by running `heroku pg:diagnose` to get a breakdown of long running queries, long transactions, among other diagnostics.
+- For a more raw approach you can access real time logs from Heroku by executing `heroku logs --app posthog --ps postgres`
+- With any logs pulled from PostgreSQL you can use [pgbadger](https://github.com/darold/pgbadger) to find exactly the queries that are consuming the most time and resources.
+
 
 ### How-to fix slow queries
 Fixing a slow query is usually a 3 steps process:
