@@ -23,9 +23,9 @@ We're donating to the following projects, all of which are either used extensive
 
 | **Who?**                                                       | **Why?**                                                                                                                                                                     |
 |----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Rrweb](https://github.com/rrweb-io/rrweb)                     | Rrweb is open-source web session replay library. It helps power PostHog's powerful [Session Recording](https://posthog.com/product/session-recording) feature              |
+| [Rrweb](https://github.com/rrweb-io/rrweb)                     | Rrweb is an open-source web session replay library that supports PostHog's [Session Recording](https://posthog.com/product/session-recording) feature              |
 | [Django REST](https://github.com/encode/django-rest-framework) | The project's web APIs power PostHog's REST APIs                                                                                                                           |
-| [Babel](https://github.com/babel/)                             |                                                                                                                                                                            |
+| [Babel](https://github.com/babel/)                             | [explanation here]                                                                                                                                                                           |
 | [Sindre Sorhus](https://github.com/sindresorhus)               | Sindre is a prolific open-source developer who maintains some of our [most-used packages](https://github.com/sponsors/community?account=PostHog&page=1&sort_by=MOST_USED)  |
 
 
