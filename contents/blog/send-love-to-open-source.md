@@ -13,13 +13,13 @@ categories: ["Open source"]
 
 Valentine's Day is coming up and while PostHoggers around the world will be using the occasion to give thanks to their loved ones, we'd also like to share our love for the open-source community that helps power PostHog. Here's how:
 
-> **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now through to the end Valentine's Day, we'll donate $5 USD across the four handpicked open-source projects.**
+> **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now through to the end Valentine's Day, we'll donate $5 USD across four handpicked open-source community contributors.**
 
-We'll donate a maximum of $50,000 to these projects in total. 
+We'll donate a maximum of $50,000 in total. 
 
 ## Who gets the money? 
 
-We're donating to the following projects, all of which are either used extensively in our website or product, or have been suggested for their daily usefulness to our team outside of work.
+We're donating to three projects and one open-source developer who's work is used extensively in our website or product.
 
 | **Who?**                                                       | **Why?**                                                                                                                                                                     |
 |----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -41,7 +41,7 @@ On the morning of Tuesday, February 15, we'll count up how many stars we've gain
 
 ## Why are we doing this?
 
-PostHog is an open-source project and our team is proud to be part of the open-source community. We wanted to take this week as an opportunity to truly celebrate and support the open-source community in a meaningful way.
+PostHog is an open-source project and our team is proud to be part of the open-source community. We wanted to take this week as an opportunity to celebrate and support the open-source community in a meaningful way.
 
 Finally, getting people who care about open source projects to star our repo is of course beneficial to us - it'll give us an opportunity to reach a relevant new audience of people who are likely to benefit from using PostHog. If we get enough stars, we may feature on GitHub Trending, which also helps us to reach a wider audience.
 
