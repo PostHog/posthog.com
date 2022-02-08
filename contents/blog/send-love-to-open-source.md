@@ -11,7 +11,7 @@ author: ["andy-vandervell"]
 categories: ["Open source"]
 ---
 
-Valentine's Day is coming up and while PostHoggers around the world will be using the occasion to give thanks to their loved ones, we'd also like to share our love for the open-source community that helps power PostHog. Here's how:
+Valentine's Day is coming up we'd like to share our love for the open-source community that helps power PostHog! Here's how:
 
 > **For every GitHub star we receive on [the PostHog repo](https://github.com/PostHog/posthog) between now through and the end of Valentine's Day, we'll donate $5 USD across four handpicked open-source community contributors.**
 
@@ -19,7 +19,7 @@ We'll donate a maximum of $50,000 in total.
 
 ## Who gets the money? 
 
-We're donating to three projects and one open-source developer who's work is used extensively in our website or product.
+We're donating to three projects and one open-source developer whose work is used extensively in our website or product.
 
 | **Who?**                                                       | **Why?**                                                                                                                                                                     |
 |----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
