@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/give-back-friday.png
+featuredImage: ../images/blog/send-love-to-open-source.png
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Open source"]
