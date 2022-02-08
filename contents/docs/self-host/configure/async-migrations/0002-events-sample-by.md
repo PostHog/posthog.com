@@ -37,7 +37,7 @@ There were 2 important reasons for doing this:
 
 ## After completion
 
-To be extra safe we don't delete `events_backup_0002_events_sample_by` table, but it could take up significant amount of disk space. We suggest deleting it manually after a few hours/days if things look good. To do that [connect to ClickHouse](https://posthog.com/docs/self-host/deploy/troubleshooting) and run `DROP TABLE events_backup_0002_events_sample_by`.
+To be extra safe we don't delete `events_backup_0002_events_sample_by` table, but it could take up a significant amount of disk space. We suggest deleting it manually after a few hours/days if things look good. To do that [connect to ClickHouse](https://posthog.com/docs/self-host/deploy/troubleshooting) and run `DROP TABLE events_backup_0002_events_sample_by`.
 
 ## FAQ
 
