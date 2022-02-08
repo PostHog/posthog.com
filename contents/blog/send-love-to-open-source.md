@@ -21,7 +21,7 @@ We'll donate a maximum of $50,000 to these projects in total.
 
 We're donating to the following projects, all of which are either used extensively in our website or product, or have been suggested for their daily usefulness to our team outside of work.
 
-| **Who?**                                                    | **What?                                                     | **Why?**                                                                 |
+| **Who?**                                                    | **What?**                                                     | **Why?**                                                                 |
 |----------------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | [Rrweb](https://github.com/rrweb-io/rrweb)                     | An open-source web session replay library                         | [Explanation here] |
 | [Django REST](https://github.com/encode/django-rest-framework) | A powerful toolkit for building Web APIs | [explanation here]                                                                            |
