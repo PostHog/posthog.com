@@ -143,5 +143,13 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/avi-press-4437a356/"
+    },
+    {
+        "handle": "neil-kakkar",
+        "name": "Neil Kakkar",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/neil-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/neilkakkar"
     }
 ]
