@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/send-love-to-open-source.png
-featuredImageType: full
+featuredImageType: standard
 author: ["andy-vandervell"]
 categories: ["Open source"]
 ---
