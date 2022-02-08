@@ -73,7 +73,7 @@ But we think that the opportunity to build a strong brand off the back of these 
 
 ## What do we actually do then?
 
-The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/strategy#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come in organically. 
+The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/strategy#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. 
 
 We have identified the following acquisition channels as most important to our strategy. They are listed in descending order of priority:
  
