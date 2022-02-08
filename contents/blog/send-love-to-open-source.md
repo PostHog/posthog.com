@@ -21,12 +21,12 @@ We'll donate a maximum of $50,000 to these projects in total.
 
 We're donating to the following projects, all of which are either used extensively in our website or product, or have been suggested for their daily usefulness to our team outside of work.
 
-| **Project**                                                    | **What is it?                                                     | **Why are we supporting it?**                                                                 |
+| **Who?**                                                    | **What?                                                     | **Why?**                                                                 |
 |----------------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | [Rrweb](https://github.com/rrweb-io/rrweb)                     | An open-source web session replay library                         | Rrweb powers our [Session Recording](https://posthog.com/docs/user-guides/recordings) feature |
 | [Django REST](https://github.com/encode/django-rest-framework) | A powerful toolkit for building Web APIs | [explanation here]                                                                            |
-| [Signal](https://github.com/signalapp)                         | Open-source private messenger for iOS, Android and Mac            | All the PostHog team are frequent users                                                       |
-| [Homebrew](https://github.com/Homebrew/)                       | Package manager for Mac                                           | [explanation here]                                                                            |
+| [Babel](https://github.com/babel/)                         | A compiler for writing next generation JavaScript            | [explanation here]                                                       |
+| [Sindre Sorhus](https://github.com/sindresorhus)                       | Sindre is a prolific open-source developer numerous tools and packages                                          | [explanation here]                                                                            |
 
 
 ## How does this work?
