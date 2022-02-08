@@ -75,7 +75,7 @@ But we think that the opportunity to build a strong brand off the back of these 
 
 The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/strategy#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. 
 
-We have identified the following acquisition channels as most important to our strategy. They are listed in descending order of priority:
+We have identified the following acquisition channels as most important to our strategy. 
  
 - [Content](/handbook/growth/marketing/blog). We write two types of content - SEO and shareable.
   - _SEO content_ is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring though! Our aim is to increase our organic reach on Google, basically. We sometimes put small paid ads spending behind this type of content on LinkedIn or Twitter. 
