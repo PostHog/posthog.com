@@ -21,12 +21,12 @@ We'll donate a maximum of $50,000 to these projects in total.
 
 We're donating to the following projects, all of which are either used extensively in our website or product, or have been suggested for their daily usefulness to our team outside of work.
 
-| **Who?**                                                    | **What?**                                                     | **Why?**                                                                 |
-|----------------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| [Rrweb](https://github.com/rrweb-io/rrweb)                     | An open-source web session replay library                         | [Explanation here] |
-| [Django REST](https://github.com/encode/django-rest-framework) | A powerful toolkit for building Web APIs | [explanation here]                                                                            |
-| [Babel](https://github.com/babel/)                         | A compiler for writing next generation JavaScript            | [explanation here]                                                       |
-| [Sindre Sorhus](https://github.com/sindresorhus)                       | Sindre is a prolific open-source developer numerous tools and packages                                          | [explanation here]                                                                            |
+| **Who?**                                                       | **Why?**                                                                                                                                                                     |
+|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Rrweb](https://github.com/rrweb-io/rrweb)                     | Rrweb is open-source web session replay library. It helps power PostHog's powerful [Session Recording](https://posthog.com/product/session-recording) feature              |
+| [Django REST](https://github.com/encode/django-rest-framework) | The project's web APIs power PostHog's REST APIs                                                                                                                           |
+| [Babel](https://github.com/babel/)                             |                                                                                                                                                                            |
+| [Sindre Sorhus](https://github.com/sindresorhus)               | Sindre is a prolific open-source developer who maintains some of our [most-used packages](https://github.com/sponsors/community?account=PostHog&page=1&sort_by=MOST_USED)  |
 
 
 ## How does this work?
