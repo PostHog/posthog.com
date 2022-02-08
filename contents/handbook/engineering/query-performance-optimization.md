@@ -34,8 +34,6 @@ PostHog uses two different datastores:
 
 1. (if possible) avoid `JOIN`
 
-1. **always avoid** foreign keys: they are in your way to shard your database, your app is accustomed to rely on them to maintain data integrity instead of doing it on its own, they have performance impact (they add an additional lookup for each insert/delete), they lead to unpredictable performance, ...
-
 1. avoid the use of subqueries: a subquery is a `SELECT` statement that is embedded in a clause of another SQL statement. It's easier to write, but `JOIN`s are usually better-optimized for the database engines.
 
 1. use appropriate [data type(s)](https://www.postgresql.org/docs/10/datatype.html): not all the types occupy the same, and when we use a concrete data type, we can also limit its size according to what we store. For example, `VARCHAR(4000)` is not the same as `VARCHAR(40)`. We always have to adjust to what we will store in our fields not to occupy unnecessary space in our database (and we should enforce this limit in the application code to avoid query errors).
