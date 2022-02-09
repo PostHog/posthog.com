@@ -110,6 +110,7 @@ When we review a PR, we'll look at the following things:
 - Will the code perform with millions of events/users/actions?
 - Are there tests and do they test the right things?
 - Are there any security flaws?
+- Is the code in line with our [coding conventions](/docs/contribute/coding-conventions)?
 
 Things we do not care about during review:
 - Syntax. If we're arguing about syntax, that means we should install a code formatter
