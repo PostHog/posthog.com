@@ -17,7 +17,7 @@ The metric is defined [in this action][action]. The concept of the metric is use
 - Analyzing any insight. Analyzing means viewing for 10 seconds or more. Insights include: trends, funnels, paths, lifecycle, stickiness.
 - Analyzing a recording. Watching a recording for 10 seconds or more.
 - Analyzing a correlation analysis report. Analyzing means viewing for 10 seconds or more. 
-- Analyzing a dashboard. Analyzing means viewing a dashboard for 10 seconds or more. Viewing a dashboard does not fire "insight analyzed" events for its dashboard items.
+- Analyzing a dashboard. Analyzing means viewing a dashboard for 10 seconds or more. Viewing a dashboard does not fire "insight analyzed" events for its dashboard items. _Introduced on Feb 21._
 
 
 **Adding new insights**
