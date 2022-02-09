@@ -18,19 +18,19 @@ By [PostHog's series B](/blog/15-million-series-b), our team showed me that I wa
 >James Hawkins is PostHog's Co-Founder & CEO. Follow him on [Twitter](https://www.linkedin.com/in/j-hawkins/).
 
 ## Why I used to think this way
-
-My previous experience of product management:
+My previous experience of product management was something like this:
 
 * Here's a list of features the enterprise sales team wants
 * How much pipeline does each of these features influence?
 * _Builds as much of the above as possible whilst trying to manage existing customer requests_
 
-Led to:
+This lead to lots of initial enterprise contracts, but negative outcomes in the long term like:
 
-* Lots of initial enterprise contracts
-* A product users find frustrating to use
+* A product users found frustrating to use
 * No word of mouth growth
-* Customer churn in the long term
+* High customer churn
+
+These were all traps I wanted to avoid for PostHog and lead me to favor hiring more engineering talent over product people.
 
 ## It starts with expectation setting
 
