@@ -540,6 +540,10 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Instance settings",
+                            "url": "/docs/self-host/configure/instance-settings"
+                        },
+                        {
                             "name": "Environment variables",
                             "url": "/docs/self-host/configure/environment-variables"
                         },
