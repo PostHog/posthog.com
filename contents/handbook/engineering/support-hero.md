@@ -32,6 +32,7 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 There are a couple of channels that customer requests come in through so make sure you keep an eye on all of them, but  **most stuff will happen in [Papercups](#papercups)**:
 
 - [PostHog Users's Slack](https://posthog.com/slack), specifically #Community-Support where we centralize most help requests and encourage users to help each other (also on [Papercups](#papercups)).
+- [Website Questions Slack Channel](https://posthog.slack.com/archives/C02T45CFFAQ) - users may post questions directly into our website, they will appear in this channel if so.
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
