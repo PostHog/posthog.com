@@ -10,53 +10,65 @@ featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: standard
 categories: ["Guides", "Privacy", "Product analytics"]
 ---
-If you work in an industry, such as healthcare or medical insurance, which is covered by HIPAA regulations then there are limits around what data you can share and with who. However PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it the most HIPAA-compliant product analytics platform available. 
+If you have users in Europe it's important to understand the implications of handling their data privately and securely. PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it one of the most GDPR-compliant product analytics platforms available. 
 
-In this article I'll explain what HIPAA is, what data must be protected and what your options are for  HIPAA-compliant analytics - or you can [get started with PostHog today](https://posthog.com/pricing). 
+In this article I'll explain what GDPR is, what data must be protected and what your options are for GDPR-compliant analytics - or you can [get started with PostHog today](https://posthog.com/pricing). 
 
-## What is HIPAA?
+## What is GDPR?
 
-HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
+The General Data Protection Regulation (GDPR) is the toughest privacy and security law in the world. Though it was drafted and passed by the European Union (EU), it imposes obligations onto organizations anywhere, so long as they target or collect data related to people in the EU. The regulation was put into effect on May 25, 2018.
 
-A key goal of this legislation is to [“assure that individuals’ health information is properly protected while allowing the flow of health information needed to provide and promote high quality health care and to protect the public's health and well being.”](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html) 
+GDPR applies to any anyone that processes the personal data of EU citizens or residents, or you offer goods or services to such people, even if you’re not in the EU.
 
-In other words, it stops anyone from using or sharing a persons data improperly.
+The consequences of violating GDPR are severe. It can lead to fines reaching into the tens of millions of euros and can be up to 4% of global revenue.
 
-The consequences of violating HIPAA are severe. It can lead to fines of over $1M and prison sentences of up to 10 years for the most egregious violations.
+## What data is protected under GDPR?
 
-## What data is protected under HIPAA?
+Personal data is protected under GDPR, this means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
 
-Data which is protected under HIPAA is called Protected Health Information (PHI), or ePHI if it exists specifically in electronic format. It includes any identifying information related to a past, present or future health status. That includes individual diagnoses, medical test results and prescription info, as well as birthdays, gender, ethnicity and contact information.
+In short, any information which is tied to a specific individual can be considered Personal Data, from their social security number or license plate number to photos, emails, URLs, IP addresses or even Pseudonyms.
 
-In short, any information which is tied to a specific individual can be considered PHI, from their social security number or license plate number to photos, emails, URLs or formal medical information. 
+## What is the impact of GDPR on product analytics?
 
-## What is the impact of HIPAA on product analytics?
+The number one rule is don’t collect, store or use any personal data without a good reason for it, such as:
+* The person gave you specific, unambiguous consent to process the data. (e.g. They’ve opted in to your marketing email list.)
+* Processing is necessary to enter into a contract to someone. (e.g. You need to do a background check.)
+* You need to process it to comply with a legal obligation of yours. (e.g. You receive an order from the court in your jurisdiction.)
+* You need to process the data to save somebody’s life. (e.g. Well, you’ll probably know when this one applies.)
+* Processing is necessary to perform a task in the public interest or to carry out some official function. (e.g. You’re a private garbage collection company.)
+* You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a child’s data
 
-Most product analytics tools require you to send your captured user data to a third-party system where the data is stored outside of your control. This is a problem under HIPAA, but there are two common ways to remain compliant:
+**Unambiguous Consent**
 
-1. **[Anonymize the data](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)**: This involves either removing all traces of protected health information, including but not limited to email addresses, phone numbers, IP addresses, URLs etc., or following an expert determination to limit the data shared in such a way that the statistical risk of identifying an individual is mitigated.
-2. **[Sign a Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)**: This is essentially a contract with your provider that ensures they are compliant and jointly liable for the protection of your data.
+There are specific rules about what consent means, hiding it away on page 73 or of your terms and conditions is not good enough:
 
-There are downsides to these two solutions:
+* Consent must be “freely given, specific, informed and unambiguous.”
+* Requests for consent must be “clearly distinguishable from the other matters” and presented in “clear and plain language.”
+* Data subjects can withdraw previously given consent whenever they want, and you have to honor their decision.
+* Children under 13 can only give consent with permission from their parent.
+* You need to keep documentary evidence of consent.
 
-1. **Anonymization**: You can easily limit the data so much that it becomes meaningless and makes it impossible to perform standard and critical analyses of your product and users. There's no point reducing the data to an unusable state. 
-2. **Business Associate Agreement**: Business Associate Agreements are often expensive and/or require you to pay for a higher tier of product than you actually require.
+So if you're tracking users in your product using PostHog to improve your product, you should explicity ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
 
-PostHog offers a third approach without either of these downsides: hosting the product analytics systems yourself.
+If you use PostHog with cookies on your website (for logged out users), you should also use a cookie banner to enable people to give and withdraw their consent for using cookies.
 
-## How is HIPAA compliance different with PostHog?
+**Security**
 
-PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host on your own infrastructure and maintain full control of the data. 
+You’re required to handle data securely by implementing “appropriate technical and organizational measures.”
 
-This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. 
+This means both technical measures (like encrypting data) and organizational measures (like staff training and limiting access to personal data).
 
-You may need to sign a BAA with your hosting provider, but major providers such as Google and AWS offer these for free.
+If you have a data breach, you have 72 hours to tell the data subjects or face penalties. (This notification requirement may be waived if you use technological safeguards, such as encryption, to render data useless to an attacker.)
 
-## How to set PostHog up for HIPAA compliant analytics
+## How is GDPR compliance different with PostHog?
+
+PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host on your own infrastructure and maintain full control of the data, this means you can decide on the technical and organizational security measures that are most appropriate for your organization. It also means that you can store your data within the EU, encouraging consent from EU citizens and making it easy to comply with any future data sovereignty requirements.
+
+## How to set PostHog up for GDPR compliant analytics
 
 ### Step 1: Choose a hosting provider
 
-We recommend hosting PostHog on your own infrastructure. If you’re leveraging a private cloud you will need a Business Associate Agreement with your provider first. These are commonly and easily available with services such as [Amazon Web Services](https://aws.amazon.com/compliance/hipaa-compliance/), [Google Cloud Platform](https://cloud.google.com/security/compliance/hipaa), [Microsoft Azure](https://docs.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us) and many more, often for free.
+We recommend hosting PostHog on your own infrastructure, or a private cloud such as AWS, Google Cloud Platform or Microsoft Azure.
 
 ### Step 2: Deploy PostHog
 
@@ -66,12 +78,6 @@ Deploying PostHog onto your own infrastructure is very straightforward. You can 
 
 When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
 
-We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain PHI, it may be possible for malicious users to infer PHI unless it is evaluated thoroughly via expert determination.
+We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain Personal Data, it may be possible for malicious users to infer Personal Data unless it is evaluated thoroughly via expert determination.
 
-We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
-
-## Does PostHog offer a BAA for PostHog Cloud?
-
-We believe the most effective solution to HIPAA-compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for  PostHog Cloud.
-  
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
+We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls in place when sharing Personal Data outside of your self-hosted PostHog instance.
