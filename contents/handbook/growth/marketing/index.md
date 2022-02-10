@@ -4,6 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
+## Where does marketing fit at PostHog?
+
+At the most fundamental level, we want to:
+
+1. Get developers and technical product managers to use PostHog - _features_
+2. Get those developers and technical product managers to be able to sell PostHog internally - _benefits_
+
+Broadly speaking, the role of the _Marketing_ and _Website & Docs_ teams is to do 1. The role of the _Customer Success_ and _Growth_ teams is to do 2. 
+
+(This is a slightly simplified view due to natural overlaps, so consider this a rough approximation.)
+
 ## We take a principled approach to marketing
 
 Marketing at PostHog is about bringing transparency to what we're working on. Three principles guide us here:
