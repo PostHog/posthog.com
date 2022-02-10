@@ -209,9 +209,10 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     })
                         .then((res) => res.json())
                         .then(async (user) => {
-                            const rawBody = format
-                                ? await formatSlackElements(reply.blocks[0].elements, apiKey)
-                                : reply.text
+                            const rawBody =
+                                format && reply.blocks
+                                    ? await formatSlackElements(reply.blocks[0].elements, apiKey)
+                                    : reply.text
                             return {
                                 name: user?.user?.profile?.first_name || user?.user?.name,
                                 rawBody,
