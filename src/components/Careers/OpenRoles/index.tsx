@@ -22,6 +22,14 @@ export const OpenRoles = () => {
                             into a better time to apply.
                         </p>
                         <p>
+                            If you'd like to try before you apply, why not have a go at one our our
+                            <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
+                                good first issues
+                            </a>
+                            or build a plugin as part of our
+                            <a href="https://github.com/PostHog/posthog/issues/8437">plugin bounty</a>.
+                        </p>
+                        <p>
                             <em>
                                 When you click through some of these jobs might say 'San Francisco' or 'London', but
                                 we're hiring all over the world.
