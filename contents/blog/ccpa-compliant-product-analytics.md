@@ -33,7 +33,7 @@ The CCPA applies to for-profit businesses that meet any of the following:
 * Buy, receive, or sell the personal information of 50,000 or more California residents, households, or devices
 * Derive 50% or more of their annual revenue from selling California residents’ personal information.
 
-Personal information is protected under CCPA and is consdiered information that identifies could be linked with a person.
+Personal information is protected under CCPA and is considered information that identifies could be linked with a person.
 
 In short, any information which is tied to a specific individual can be considered Personal Information, from their social security number or license plate number to photos, emails, URLs, IP addresses or even pseudonyms.
 
