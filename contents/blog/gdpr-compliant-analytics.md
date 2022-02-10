@@ -48,7 +48,7 @@ There are specific rules about what consent means, hiding it away on page 73 or 
 * Children under 13 can only give consent with permission from their parent.
 * You need to keep documentary evidence of consent.
 
-So if you're tracking users in your product using PostHog to improve your product, you should explicity ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
+So if you're tracking users in your product using PostHog to improve your product, you should explicitly ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
 
 If you use PostHog with cookies on your website (for logged out users), you should also use a cookie banner to enable people to give and withdraw their consent for using cookies.
 
