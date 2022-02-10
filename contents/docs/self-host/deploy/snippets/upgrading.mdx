@@ -30,4 +30,12 @@ Error: UPGRADE FAILED: release posthog failed, and has been rolled back due to a
 ```
 
 it happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl -n posthog delete job $(kubectl -n posthog get jobs --no-headers -o custom-columns=NAME:.metadata.name)`) before running the upgrade again.
+  
+  
+If you see this error
+  
+```
+ UPGRADE FAILED: rendered manifests contain a resource that already exists.
+```
+Follow [these instructions](/docs/self-host/deploy/upgrade-notes#upgrading-from-3xx%23upgrading-from-10xx#upgrading-from-10xx) before running the upgrade command again.
 </details>
