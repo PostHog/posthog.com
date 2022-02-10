@@ -63,7 +63,7 @@ Back to the drawing board.
 
 What was causing the rest of the missing recordings? With no more clues, it came time to dig through the mechanics of the code.
 
-### So, how does session recording work?
+### So, how does Session Recording work?
 
 Under the hood, we're using the open source project [RRWeb](https://github.com/rrweb-io/rrweb) to power our recordings feature. RRWeb handles capturing what happened in the DOM, serializing it (so you can send it to your server), and then replaying the serialized data.
 
