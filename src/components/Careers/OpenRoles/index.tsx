@@ -22,7 +22,7 @@ export const OpenRoles = () => {
                             into a better time to apply.
                         </p>
                         <p>
-                            If you'd like to try before you apply, why not have a go at one our our
+                            If you'd like to try before you apply, why not have a go at one of our
                             <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
                                 good first issues
                             </a>
