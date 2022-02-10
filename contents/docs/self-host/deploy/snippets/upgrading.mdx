@@ -15,7 +15,13 @@ helm search repo posthog
 ```
 Compare the numbers for the chart version (in the format `posthog-{major}.{minor}.{patch}` - for example, `posthog-3.15.1`) when running the commands above. If the upgrade is for a major version, check the [upgrade notes](/docs/self-host/deploy/upgrade-notes) before moving forward.
 
-3. Run the upgrade
+3. (optional) Grab the up-to-date values.yaml file and save to values.yaml
+
+```shell
+helm get values posthog -n posthog
+```
+
+4. Run the upgrade
 
 <CommandHelmUpgradeSnippet />
 
