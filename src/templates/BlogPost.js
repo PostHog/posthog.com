@@ -94,7 +94,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
 }
 
 export default function BlogPost({ data, pageContext, location }) {
-    const { postData, questions } = data
+    const { postData } = data
     const { body, excerpt, fields } = postData
     const { date, title, featuredImage, featuredImageType, contributors, description } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
@@ -178,7 +178,7 @@ export default function BlogPost({ data, pageContext, location }) {
 }
 
 export const query = graphql`
-    query BlogPostLayout($id: String!, $slug: String!) {
+    query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
             id
             body
@@ -203,7 +203,11 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image
+                    image {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
+                    }
                     name
                 }
             }
@@ -212,25 +216,6 @@ export const query = graphql`
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")
-                    }
-                }
-            }
-        }
-        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
-            nodes {
-                avatar
-                body
-                name
-                slug
-                replies {
-                    avatar
-                    body
-                    name
-                    authorData {
-                        name
-                        role
-                        image
-                        link_url
                     }
                 }
             }

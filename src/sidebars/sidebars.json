@@ -298,7 +298,7 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "ClickHouse query performance optimization",
+                    "name": "Query performance optimization",
                     "url": "/handbook/engineering/query-performance-optimization"
                 },
                 {
@@ -500,6 +500,10 @@
                             "url": "/docs/self-host/deploy/other"
                         },
                         {
+                            "name": "Hosting in EU",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Configuration",
                             "url": "/docs/self-host/deploy/configuration"
                         },
@@ -508,16 +512,26 @@
                             "url": "/docs/self-host/deploy/upgrade-notes"
                         },
                         {
-                            "name": "Migrate from Postgres to ClickHouse",
-                            "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                        },
-                        {
                             "name": "Hosting Costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
                         },
                         {
                             "name": "Troubleshooting and FAQ",
                             "url": "/docs/self-host/deploy/troubleshooting"
+                        }
+                    ]
+                },
+                {
+                    "name": "Migrate",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "to another self-hosted instance",
+                            "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+                        },
+                        {
+                            "name": "between cloud and self-hosted",
+                            "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
                         }
                     ]
                 },
@@ -554,8 +568,12 @@
                                     "url": "/docs/self-host/configure/async-migrations/overview"
                                 },
                                 {
-                                    "name": "Migration guide: 0002_events_sample_by",
+                                    "name": "0002_events_sample_by",
                                     "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                },
+                                {
+                                    "name": "0003_fill_person_distinct_id2",
+                                    "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
                                 }
                             ]
                         }
@@ -584,6 +602,10 @@
                                 {
                                     "name": "Restore",
                                     "url": "/docs/self-host/runbook/clickhouse/restore"
+                                },
+                                {
+                                    "name": "Vertical Scaling",
+                                    "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
                                 }
                             ]
                         },

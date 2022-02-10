@@ -160,6 +160,12 @@ The probability of a variant being the best is given by:
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
+### Trend Experiment Exposure
+
+Since count data can be over a total count, vs. the number of unique users, we use a proxy metric to measure exposure: The number of times `$feature_flag_called` event returns `control` or `test` is the respective exposure for the variant. This event is sent automatically when you do: `posthog.getFeatureFlag()`.
+
+It's possible that a variant showing fewer count data can have higher probability, if its exposure is much smaller as well.
+
 ### Funnel Experiment Calculations
 
 Funnel experiments capture conversion rates. For example, if you want to measure the change in conversion rate for buying a subscription to your site, you'd use this kind of experiment.
@@ -179,3 +185,14 @@ To do this, we again run a monte carlo simulation, and calculate loss as:
 ![Loss](../../images/docs/user-guides/experimentation/loss-calculation.png)
 
 This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
+
+### Important Note about Significance
+
+In the early days of an experiment, data can vary wildly, and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
+
+Thus, before we hit 100 participants for each variant in an experiment, we default to results being not significant. Further, if the probability of the winning variant is less than 90%, we default to results being not significant.
+
+So, you'll only see the green significance banner when all 3 conditions are met:
+1. Each variant has >100 unique users
+2. The calculations above declare significance
+3. The probability of being the best > 90%.

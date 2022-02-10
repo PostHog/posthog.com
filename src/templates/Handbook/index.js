@@ -145,19 +145,26 @@ export const query = graphql`
         }
         questions: allQuestion(filter: { slug: { in: [$slug] } }) {
             nodes {
-                avatar
-                body
-                name
-                slug
-                replies {
-                    avatar
-                    body
+                childrenReply {
                     name
-                    authorData {
-                        name
-                        role
-                        image
-                        link_url
+                    childMdx {
+                        body
+                    }
+                    avatar {
+                        childImageSharp {
+                            gatsbyImageData(width: 40, height: 40)
+                        }
+                    }
+                    teamMember {
+                        frontmatter {
+                            name
+                            jobTitle
+                            headshot {
+                                childImageSharp {
+                                    gatsbyImageData(width: 40, height: 40)
+                                }
+                            }
+                        }
                     }
                 }
             }
