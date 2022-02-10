@@ -11,9 +11,10 @@ author: ["rick-marron"]
 categories: ["Engineering", "Inside PostHog"]
 ---
 
-[Session Recording](product/session-recording) is one of PostHog's core features. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean)
+[Session Recording](product/session-recording) is one of PostHog's core features. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
 
 Recently, we made a ton of improvements to the feature. To name a few, we:
+
 * Decreased average recording load time from ~2.5s to 700ms
 * Resolved a big bug that caused recordings to "wonk out" if a recording spanned multiple tabs or browser windows
 * Revamped the player experience to make it faster for users to get to the moment in the recording they care about
@@ -33,9 +34,9 @@ We had a couple ideas, but they all had drawbacks. The two main ones we consider
 
 2. Measure how often we've received data for a recording, but it wasn't complete. For a recording to be shown to users, it needs to have enough data that we can draw the entire page - we call this a 'full snapshot'. This metric would measure how often we started a recording but didn't send up a full snapshot, so we couldn't render the page for the user. Theoretically, this should rarely happen.
 
-We decided to use the second metric because it would let us strive to 0% missing recordings. If you're curious, you can read the conversation that led to this decision in [this GitHub issue](https://github.com/PostHog/posthog/issues/5478).
+We decided to use the second metric because it would let us strive for 0% missing recordings. If you're curious, you can read the conversation that led to this decision in [this GitHub issue](https://github.com/PostHog/posthog/issues/5478).
 
-In the first run of the metric, it showed that we we're missing ~15% of recordings across [PostHog Cloud](/pricing) users.
+In the first run of the metric, it showed that we were missing ~15% of recordings across [PostHog Cloud](/pricing) users.
 
 ## Checking Sentry for clues
 
@@ -43,7 +44,7 @@ Now that we had a metric, we started hunting for clues. What was causing the mis
 
 The first place we looked was Sentry. There were a couple of errors in the ingestion pipeline that seemed suspicious. The most notable was a "Max data upload size exceeded" error that was firing a few thousand times a day. This seemed like it could be an obvious cause of missing recordings. If some data was not being uploaded because it was too big, it would make sense that we could not get a 'full snapshot'.
 
-To figure out what was causing this error, we looked at data that had been uploaded that was just below our size threshold of 20mb. It looked like large data URLs of images were the cause.
+To figure out what was causing this error, we looked at data that had been uploaded which was just below our size threshold of 20mb. It looked like large data URLs of images were the cause.
 
 To test this out, we made a filter that would remove data URLs from any payload that exceeded a 5mb threshold, and it would replace the image with an obvious placeholder.
 
@@ -51,13 +52,13 @@ To test this out, we made a filter that would remove data URLs from any payload 
 
 One issue we faced was that we didn't want this feature to significantly increase the size of `posthog-js`, but we would have to include the placeholder image in the bundle. After some discussion, we landed on the idea of using a very small SVG that could easily scale to the size of the image being replaced. You can read more about the discussion that landed us here in [the PR itself](https://github.com/PostHog/posthog-js/pull/317).
 
-
 After deploying the fix, two things happened:
 
 1. The Sentry error went away 🥳
 2. The missing recordings only went down a few percent 😩
 
 Back to the drawing board.
+
 ## Looking deeper
 
 What was causing the rest of the missing recordings? With no more clues, it came time to dig through the mechanics of the code.
@@ -70,7 +71,7 @@ To decrease the amount of data that's transmitted, RRWeb works by taking a full 
 
 From the full snapshot, you can re-create a still image of the website, and from the mutations, you can replay how the page changes over time. This is very similar to how video compression works with "key frames" and deltas.
 
-### Keep digging
+### Solving the real mystery
 
 With this knowledge in mind, we started looking into why we were receiving mutation data for recordings, but without a full snapshot.
 
@@ -78,7 +79,7 @@ Presumably, if the mutations were being sent up, the snapshot code must've alrea
 
 After a day or so of pounding our heads on the keyboard, we realized that most of the missing recording cases were on single page applications. With this clue in mind, and knowing that RRWeb takes a full-snapshot on page load, it didn't take long to realize the cause. 
 
-We were splitting recordings when a user was inactive for 30 minutes (so users don't see a 10 hour long recording). But when the split happened, we were not taking a new full snapshot.
+We were splitting recordings when a user was inactive for 30 minutes (so users don't see a 10-hour long recording). But when the split happened, we were not taking a new full snapshot.
 
 We made [a fix](https://github.com/PostHog/posthog-js/pull/318) for this, and the missing recordings started to quickly drop.
 
@@ -88,7 +89,7 @@ Because this fix went into posthog-js, and different customers upgrade at differ
 
 However, after about a month of waiting (and continuously checking the metrics 😬), the 15% missing recordings metric dropped to <1% 🎉.
 
-With this focus on quality, we've seen the usage of the Session Recordings feature go up significantly. Weekly active users is up 2.5x, and each of those users are watching about 2x as many recordings per week.
+With this focus on quality, we've seen the usage of the Session Recordings feature go up significantly. Weekly active users is up 2.5x, and each of those users are watching about twice as many recordings per week.
 
 And we're not done yet, we're still working to make it even easier to find and watch the recordings that show you valuable insights about your users.
 
