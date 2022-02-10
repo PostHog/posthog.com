@@ -182,3 +182,30 @@ As part of this work, the following chart inputs have changed:
 - `clickhouse.replication` was removed
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 13.x.x
+
+14.0.0 fixes customizing PostgreSQL installation, previously many `values.yaml` values did not work as expected.
+
+As part of this work, the following chart inputs have changed:
+
+- `postgresql.postgresqlHost` -> `externalPostgresql.postgresqlHost`
+- `postgresql.postgresqlPort` -> `externalPostgresql.postgresqlPort`
+- `postgresql.postgresqlUsername` -> `externalPostgresql.postgresqlUsername`
+- Existing `postgresql.postgresqlUsername` was removed as PostHog requires admin access to the postgresql cluster to install extensions.
+- `postgresql.existingSecret` will now work after 14.0.0
+- `postgresql.existingSecretKey` was removed. This did not previously work.
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+
+### Upgrading from 14.x.x
+
+15.0.0 renamed the `prometheus-statsd-exporter` subchart alias from `statsd` to the default (`prometheus-statsd-exporter`).
+
+As part of this work, we've also:
+
+* deprecated all the resources in the `metrics` namespace
+* added the possibility to use an external `statsd` service by using the `externalStatsd` variable
+
+If you are using the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.

@@ -63,7 +63,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - The post added to the sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
 - Add a keywords field to the frontmatter. Keywords should be added as an array, not a string. This enables [our internal linker](https://github.com/PostHog/internallinker) to automatically link internal pages with similar keywords.
-- Assign the post a category using `categories` in the frontmatter section. The available categories are **General**, **Company & culture**, **Engineering**, **Release notes**, **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
+- Assign the post categories (you can use more than one) using `categories` in the frontmatter section. The available categories are **Inside PostHog**, **Product updates**, **Engineering**, **Product analytics**, **Guides**, **Open source**, **Privacy**, **Startups** and **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
 
   ```
   categories:
@@ -93,7 +93,7 @@ keywords: ["fundraise", "fundraising"]
 featuredImage: ../images/blog/series-b/series-b-baby.png
 featuredImageType: full
 author: ["joe-martin"]
-categories: ["General"]
+categories: ["Product analytics", "Guides"]
 ---
  ```
 

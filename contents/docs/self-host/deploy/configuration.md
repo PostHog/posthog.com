@@ -5,6 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+This document outlines the most important configuration options available in the chart.
+
 ## Dependencies
 
 By default, the chart installs the following dependencies:
@@ -20,6 +22,9 @@ There is optional support for the following additional dependencies:
 - [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
+- [prometheus-community/prometheus-kafka-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter)
+- [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter)
+- [prometheus-community/prometheus-redis-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter)
 - [prometheus-community/prometheus-statsd-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter)
 
 
@@ -29,19 +34,11 @@ All PostHog Helm chart configuration options can be found in the [ALL_VALUES.md]
 
 Dependent charts can also have values overwritten. See [Chart.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) for more info regarding the source shard and the namespace that can be used for the override.
 
-### Setting up email
-Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
-```yaml
-email:
-  user: <your STMP login user>
-  password:  <your STMP password>
-```
-
 ### Scaling up
 The default configuration is geared towards minimizing costs. Here are example extra values overrides to use for scaling up:
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
+    <b>Custom overrides for {`<`} 1M events/month</b>
   </summary>
 
 ```yaml
@@ -76,7 +73,7 @@ plugins:
 
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for > 1M events/month</b>
+    <b>Custom overrides for > 1M events/month</b>
   </summary>
 
 ```yaml
@@ -125,13 +122,63 @@ plugins:
 </details>
 
 
+### Email (SMTP service)
+For PostHog to be able to send emails we need a working SMTP service available. You can configure PostHog to use the service by editing the `email` section of your `values.yaml` file. Example:
+
+```yaml
+email:
+  host: <SMTP service host>
+  port: <SMTP service port>
+```
+
+If your SMTP services requires authentication (recommended) you can either:
+
+* directly provide the SMTP login in the `values.yaml` by simply setting `email.user` and `email.password`
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+  ```yaml
+  email:
+    host: <SMTP service host>
+    port: <SMTP service port>
+    user: <SMTP service user>
+    password: <SMTP service password>
+  ```
+
+</details>
+
+* provide the password via a Kubernetes secret, by configuring `email.existingSecret` and `email.existingSecretKey` accordingly
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+1. create the secret by running: `kubectl -n posthog create secret generic "smtp-password" --from-literal="password=<YOUR_PASSWORD>"`
+
+2. configure your `values.yaml` to reference the secret:
+
+  ```yaml
+  email:
+    host: <SMTP service host>
+    port: <SMTP service port>
+    user: <SMTP service user>
+    existingSecret: "smtp-password"
+    existingSecretKey: "password"
+  ```
+
+</details>
+
+
 ### [ClickHouse](../runbook/clickhouse/)
 
-ClickHouse is the database that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
+ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). As such it's important to set the database size to be enough to store the raw data via `clickhouse.persistence.size` value.
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
 
-To use an external `ClickHouse` cluster, set `clickhouse.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
 #### Custom settings
 
@@ -155,12 +202,28 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
 
-By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also want changing from their default values.
+PostgreSQL is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `postgresql` namespace.
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
+Note: to avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL upstream chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more details.
+
+#### Use an external service
+To use an external PostgreSQL service, please set `postgresql.enabled` to `false` and then configure the `externalPostgresql` values.
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
+### [PgBouncer](https://www.pgbouncer.org/)
+PgBouncer is a lightweight connection pooler for PostgreSQL and it is installed by default as part of the chart. It is currently required in order for the installation to work (see [here](https://github.com/PostHog/charts-clickhouse/issues/280) for more info).
+
+If you've configured your PostgreSQL instance to require the use of TLS, you'll need to pass an additional env variables to the PgBouncer deployment (see the [official documentation](https://www.pgbouncer.org/config.html) for more info). Example:
+
+```yaml
+pgbouncer:
+  env:
+  - name: SERVER_TLS_SSLMODE
+    value: "your_value"
+```
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
 ### [Redis](https://redis.io/)
 
@@ -267,3 +330,30 @@ This might be useful when checking out metrics. Figure out your `prometheus-serv
 `kubectl --namespace NS port-forward posthog-prometheus-server-XXX 9090`.
 
 After this, you should be able to access Prometheus server on `localhost`.
+
+
+### [Statsd](https://github.com/statsd/statsd) / [`prometheus-statsd-exporter`](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter)
+By default, StatsD is not installed as part of the chart. If you want to enable it, please set `prometheus-statsd-exporter.enabled` to `true`.
+
+#### Use an external service
+To use an external StatsD service, please set `prometheus-statsd-exporter.enabled` to `false` and then configure the `externalStatsd` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [prometheus-statsd-exporter chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter) for full configuration options._
+
+
+### [prometheus-kafka-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter)
+By default, `prometheus-kafka-exporter` is not installed as part of the chart. If you want to enable it, please set `prometheus-kafka-exporter.enabled` to `true`. If you are using an external Kafka, please configure `prometheus-kafka-exporter.kafkaServer` accordingly.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [prometheus-kafka-exporter chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter) for full configuration options._
+
+
+### [prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter)
+By default, `prometheus-postgres-exporter` is not installed as part of the chart. If you want to enable it, please set `prometheus-postgres-exporter.enabled` to `true`. If you are using an external Kafka, please configure `prometheus-postgres-exporter.config.datasource` accordingly.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [prometheus-postgres-exporter chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter) for full configuration options._
+
+
+### [prometheus-redis-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter)
+By default, `prometheus-redis-exporter` is not installed as part of the chart. If you want to enable it, please set `prometheus-redis-exporter.enabled` to `true`. If you are using an external Redis, please configure `prometheus-redis-exporter.redisAddress` accordingly.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [prometheus-redis-exporter chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter) for full configuration options._

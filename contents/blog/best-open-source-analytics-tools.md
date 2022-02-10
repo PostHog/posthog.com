@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
-categories: ["Product analytics", "Guides"]
+categories: ["Product analytics", "Guides", "Open source"]
 ---
 
 Whether you’re looking for a solution for your business or side project, there’s no shortage of analytics tools to choose from. However many of the most popular tools come with hefty price tags or require you to send data to their systems. That’s where open source analytics analytics tools come in. 

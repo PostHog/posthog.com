@@ -4,7 +4,20 @@ sidebar: Handbook
 showTitle: true
 ---
 
+## Where does marketing fit at PostHog?
+
+At the most fundamental level, we want to:
+
+1. Get developers and technical product managers to use PostHog - _features_
+2. Get those developers and technical product managers to be able to sell PostHog internally - _benefits_
+
+Broadly speaking, the role of the _Marketing_ and _Website & Docs_ teams is to do 1. The role of the _Customer Success_ and _Growth_ teams is to do 2. 
+
+(This is a slightly simplified view due to natural overlaps, so consider this a rough approximation.)
+
 ## We take a principled approach to marketing
+
+Marketing at PostHog is about bringing transparency to what we're working on. Three principles guide us here:
 
 - Be opinionated
 - Pull, don’t push
@@ -16,7 +29,7 @@ PostHog was created because we believed that product analytics was broken and we
  
 We need to reflect this vision in our marketing, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us, than 80% mildly agree with us. 
  
-We communicate clearly, directly, and honestly. 
+We communicate clearly, directly, and honestly.
  
 It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them.
  
@@ -24,7 +37,7 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 ### Pull, don't push
 
-We believe customers will judge us first and foremost on our product (ie. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+_We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (ie. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
@@ -51,7 +64,7 @@ For these reasons, we:
 - Don't use any analytics except our own. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier.
 - Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. People can see our entire codebase, after all!
 - Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product.'?
-- Don't badmouth or make false claims about our competitors. We will compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
+- Don't unfairly criticize or make false claims about our competitors. We will however compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
 - Don't bombard customers with 'deals', pop-ups and other dark patterns. If you don't like them, why do you think our customers will feel differently? 
 - Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. 
 
@@ -71,18 +84,20 @@ But we think that the opportunity to build a strong brand off the back of these 
 
 ## What do we actually do then?
 
-The Marketing team's main focus is acquisition. Our specific objective is to _get as many relevant developers and technical product managers as possible to visit posthog.com_. 
+The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/strategy#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. 
 
-We have identified the following acquisition channels as most important to our strategy. You can find out more details on their relevant pages:
+We have identified the following acquisition channels as most important to our strategy. 
  
-- [SEO content](/handbook/growth/marketing/blog). We write high value and genuinely useful content that targets the types of keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring though! Our aim is to increase our organic reach on Google, basically. 
-- [Brand-building content](/handbook/growth/marketing/blog). We also write content that we think our customers will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn into signups, but they help us to build our unique and distinctive brand in the open source community. And frankly, it's just nice to share knowledge with our community about the cool stuff our team is doing. We share this content on 'super node' sites like Hacker News, Product Hunt and Reddit. 
-- [Paid ads](/handbook/growth/marketing/paid). We advertise on Google Search, Twitter, LinkedIn, DuckDuckGo (via Bing) and Reddit. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically. However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. 
-- [Open-source sponsorship](/handbook/growth/marketing/open-source-sponsorship). PostHog is an open-source product analytics platform built on top of many other amazing open-source projects. We believe in open-source and the open-core model. However, many open-source projects go underfunded. Sponsoring them is in our self-interest, but we also fundamentally believe that supporting them is the right thing to do.
+- [Content](/handbook/growth/marketing/blog). We write two types of content - SEO and shareable.
+  - _SEO content_ is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring though! Our aim is to increase our organic reach on Google, basically. We sometimes put small paid ads spending behind this type of content on LinkedIn or Twitter. 
+  - _Shareable content_ is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn into signups, but they help us to build our unique and distinctive brand in the open source community. We share this content on 'super node' sites like Hacker News, Product Hunt and Reddit. 
+- [Product launches](https://posthog.com/handbook/growth/marketing/product-announcements). These bring transparency to the work that the PostHog team is doing. Product and engineering pull marketing here, not the other way around. Marketing's role is to look for cool things the team is already working on and to amplify them, often through a coordinated campaign that maximizes impact. Marketing's role is definitely _not_ to get teams to build features we think are 'marketable'. We define product broadly here - they can be anything from a major PostHog app feature to a cool internal tool that someone has built which we think the world should see. 
+  - We're currently experimenting with different types and size of launch to see what works most effectively here. 
+- [Paid ads](/handbook/growth/marketing/paid). This is intentionally at the bottom of the list. We advertise on Google Search and DuckDuckGo (via Bing) for _conversion_, and Twitter, LinkedIn, Reddit and Carbon for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. 
 
-Developer relations and community is also super important to us, but covered elsewhere as we don't strictly define it as part of marketing at PostHog. 
+[Developer relations and community](https://posthog.com/handbook/growth/developer-relations) is also super important to us, but covered elsewhere as we don't strictly define it as part of marketing at PostHog. Ditto for [Growth](https://posthog.com/handbook/growth/strategy). 
  
-The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about Product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press). 
+The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about Product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press), if at all. 
 
 We track marketing activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
 

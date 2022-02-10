@@ -4,7 +4,15 @@ sidebar: Handbook
 showTitle: true
 ---
 
+## Q1 2022 Goals
+- ⭐️ Craft a clear **vision** for an ambitious goal that gets everyone **very excited**!
+- ⭐️ Build the strategy for one **ambiguous opportunity** to improve a company metric or achieve a company goal (_should be ready to be worked on by end of Q1_).
+- Enable Core Experience Team to plan their sprints and ship higher quality features autonomously.
+- Aid Engineering Team to ensure we ship Collaboration for Launch Week.
+
 ## Q4 2021 Goals
+
+### Planning
 
 - **Product strategy.**
   - ⭐️ Build the _core product_ strategy for Q4-21. _Likely related to Collaboration, Experimentation and "Making more successful products". These will be very ambitious goals, that will directly impact company-level metrics (see [Product metrics](/handbook/product/metrics))._
@@ -18,18 +26,3 @@ showTitle: true
   - Improve iteration speed by removing me as a dependency for code reviews and PRs.
 - **Enterprise & Growth support.**
   - Ensure the essential set of 1) enterprise and 2) revenue features are built in a timely manner (including prioritization, scoping, context sharing) to unblock customers. _Right trade-off between never blocking enterprise customers and ensuring resources are only used when needed._
-    
-## FINISHED -  Goals (Jul 13 - Aug 6 2021)
-- **Execute on nailing funnels.** Ensure the funnels product actually solves user’s needs and is shipped with the highest user experience quality.
-  - Ensure engineers have all the context needed to Nail Funnels, particularly information around user’s problems / use cases, user feedback, and relevant data insights.
-  - Support engineers in scoping problems so they maximize for value delivered and can be built in a constrained time frame.  
-  - Provide feedback, test features thoroughly and report/fix issues based on dogfooding, user feedback and usability tests to ensure a high quality experience.
-  - Support Marcus and the entire team measure success through qualitative, quantitative metric(s).
-- **On what’s next.** Provide as much context as possible (mainly on user input, usage data, and user experience intuition) for engineers and the Exec Team to decide what to work on next (on an operational and strategic level, respectively).
-  - Support engineers set up their own behavioral metrics and encourage them to measure results on their own work and figure out improvements.
-  - Provide context from user interviews, data analyses and other sources to figure out sprint priorities. Includes helping break down problems.
-  - Provide internal product context to non-engineering members of the team as we figure out what to focus on next. 
-- **Engineering**
-  - Ship series/steps naming feature OR saved reports.
-  - Ship UI/UX improvements on funnels as features are built.
-  - Pick up any critical bug or UX issue if no one else can.
