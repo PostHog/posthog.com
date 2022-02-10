@@ -6,7 +6,6 @@ showTitle: true
 
 PostHog's core relies on email messaging for certain functionality. For example:
 - Sending a reset link to a user that has forgotten their password.
-- Sending a weekly report on the number of active users.
 - Sending an invite link for new team members to join PostHog.
 
 
@@ -16,7 +15,7 @@ To prevent spam, most email providers have very complex systems in place that va
 
 ## General configuration
 
-To configure a remote email server, you will need to set up the following [environment variables](/docs/self-host/configure/environment-variables):
+To configure a remote email server, you will need to head over to [Instance settings](/docs/self-host/configure/instance-settings) and set up the following parameters (please note that if you're running PostHog older than 1.33.0, you will need to configure these parameters via [environment variables](/docs/self-host/configure/environment-variables)):
 - `EMAIL_HOST`: Defaults to `None`. Hostname to connect to for establishing SMTP connections.
 - `EMAIL_PORT`: Defaults to `25`. Port that should be used to connect to the host.
 - `EMAIL_HOST_USER`: Defaults to `null`. Credentials to connect to the host.
@@ -39,7 +38,7 @@ EMAIL_DEFAULT_FROM: no-reply@example.com
 SITE_URL: https://posthog.example.com
 ```
 
-The above sample configuration would be set in your `values.yaml` this way:
+The above sample configuration can also be set in your `values.yaml` this way, however configuring your email service with [Instance settings](/docs/self-host/configure/instance-settings) instead is highly recommended:
 ```yaml
 email:
   from_email: no-reply@example.com
@@ -81,11 +80,11 @@ After you have set up your sending configuration, you can continue below to set 
 
 1. To create the required credentials, go to Settings > [API keys](https://app.sendgrid.com/settings/api_keys) and click on "Create API key".
 
-1. Set a name for your API key, we recommend using "PostHog", and select the "Restricted Key" option. You will need to enable the "Mail Send" permission as detailed below. Copy the key directly to your environment configuration.
+1. Set a name for your API key, we recommend using "PostHog", and select the "Restricted Key" option. You will need to enable the "Mail Send" permission as detailed below. Copy the key directly to your instance configuration.
 
 ![API Sendgrid](../../../images/configuring-posthog/sendgrid-3.png)
 
-1. With the key you created above, you can now set your environment configuration in PostHog:
+1. With the key you created above, you can now set your instance configuration in PostHog:
     ```yaml
     EMAIL_HOST: smtp.sendgrid.net
     EMAIL_PORT: 587
@@ -97,8 +96,8 @@ After you have set up your sending configuration, you can continue below to set 
     SITE_URL: https://posthog.example.com # this is the URL of your instance 
     ```
 
-1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
-    > Please note that you will need to restart both your web server and background worker for this to work properly.
+1. Test your integration! Whenever updating email settings, we will attempt to send you a test email so you can assert everything is working as expected. Please note that if you update these settings via environment variables, you need to restart your server and test sending an email (e.g. request a password reset).
+    > Remember that you will need to restart **both your web server and background worker** for this to work properly.
 
 
 1. As an additional optional step, we recommend turning off 'open & click tracking' to avoid having weird-looking links and increase deliverability (there's little value in having this data). You can do so by going to [tracking settings](https://app.sendgrid.com/settings/tracking).
@@ -119,7 +118,7 @@ After you have set up your sending configuration, you can continue below to set 
 
 1. Once you have added all records and verify them you can go to the domain settings > "SMTP credentials" section. You then need to create a set of SMTP credentials.
 
-1. With the SMTP credentials, you can now set the required environment variables for email to work properly. You will also need to obtain the hostname from the credentials page. Your configuration should now look something like this.
+1. With the SMTP credentials, you can now set the required settings for email to work properly. You will also need to obtain the hostname from the credentials page. Your configuration should now look something like this.
     ```yaml
     EMAIL_HOST: smtp.eu.mailgun.org # obtained from credentials page
     EMAIL_PORT: 587
@@ -131,9 +130,8 @@ After you have set up your sending configuration, you can continue below to set 
     SITE_URL: https://posthog.example.com # this is the URL of your instance
     ```
 
-1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
-    
-> **Note:** You will need to restart both your web server and background worker for this to work properly.
+1. Test your integration! Whenever updating email settings, we will attempt to send you a test email so you can assert everything is working as expected. Please note that if you update these settings via environment variables, you need to restart your server and test sending an email (e.g. request a password reset).
+    > Remember that you will need to restart **both your web server and background worker** for this to work properly.
 
 
 [dkim]: https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail
