@@ -6,7 +6,6 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/is-ga-illegal-microsite.png
-featuredImageType: full
 author: ["cory-watilo"]
 categories: ["Inside PostHog"]
 ---
@@ -23,7 +22,7 @@ Within five days, we launched [IsGoogleAnalyticsIllegal.com](https://isgoogleana
 
 ![The Netherlends also likely to declare Google Analytics illegal](../images/blog/is-ga-illegal-microsite/illegal-in-austria.png)
 
-### Soon our VP of Ops came up with an idea to launch a microsite
+### Then our VP of Ops came up with an idea to launch a microsite
 
 ![Is this idea funny or just really dumb?](../images/blog/is-ga-illegal-microsite/is-this-funny-or-just-really-dumb.png)
 
@@ -99,14 +98,14 @@ As it turns out, uBlock is allergic to the following slug:
 /google-analytics-alternatives
 ```
 
-This page was inaccessible to those users, so we had to [change the path](https://github.com/PostHog/isgoogleanalyticsillegal.com/pull/7) to `/alternatives`.
+Since that page was inaccessible to uBlock users, we had to [change the path](https://github.com/PostHog/isgoogleanalyticsillegal.com/pull/7) to `/alternatives`.
 
 ### The difference between *website analytics* and *product analytics* isn’t as understood as we thought
 
 We see a differentiation between:
 
 - *Website analytics* - tool to analyze web-based traffic
-- *Product analytics* - a much strong toolset, designed for product teams and engineers to analyze and learn insights about in-app usage, whether web app or mobile
+- *Product analytics* - a larger, more in-depth toolset, designed for product teams and engineers to analyze and learn insights about in-app usage, whether web app or mobile
 
 We were very specific in saying *product analytics* and not *website analytics*. Unfortunately some mistook our statement as the latter, and the claim we’re the only open source website analytics platform would be false!
 
@@ -122,7 +121,7 @@ It was quickly followed up by the contrarian opinion, followed by a discussion a
 
 ### Consider how people will interpret what you’re *not* actually saying
 
-On the site, we ask the question, “Is Google Analytics illegal?” We are not stating Google Analytics *is* illegal.
+On the site, we ask the question: “Is Google Analytics illegal?” We are not stating Google Analytics *is* illegal.
 
 Countries required to follow GDPR can still use Google Analytics if they don’t transmit personal data like IP address.
 
@@ -130,9 +129,9 @@ Unfortunately, not everyone understood this distinction.
 
 ![D99263DC-C425-4D0D-989D-48C57C899C82.jpeg](../images/blog/is-ga-illegal-microsite/D99263DC-C425-4D0D-989D-48C57C899C82.jpeg)
 
-Considering one of our values is to not use sneaky marketing tactics, I’ll admit our headline is borderline.
+Given the fact that one of our values is to not use sneaky marketing tactics, I'll won't deny we pushed the boundaries here.
 
-There is a risk that pitching the tagline the way we did could result in a negative perception with a certain userbase. Ultimately we decided to run with it, and we’ve been pleased with the results.
+There's a risk that pitching the tagline the way we did could result in a negative perception with a certain userbase. Ultimately we decided to run with it, and we’ve been pleased with the results.
 
 ## What’s next?
 
