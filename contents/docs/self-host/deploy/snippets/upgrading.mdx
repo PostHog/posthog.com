@@ -29,19 +29,37 @@ Check the Helm [documentation](https://helm.sh/docs/helm/helm_upgrade/) for more
 
 <details>
 <summary>Troubleshooting</summary>
-If you see this error
+If you see this error:
 
 ```
 Error: UPGRADE FAILED: release posthog failed, and has been rolled back due to atomic being set: post-upgrade hooks failed: warning: Hook post-upgrade posthog/templates/migrate.job.yaml failed: jobs.batch "posthog-migrate" already exists
 ```
 
-it happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl -n posthog delete job $(kubectl -n posthog get jobs --no-headers -o custom-columns=NAME:.metadata.name)`) before running the upgrade again.
+It happens because the migrate job was left around from a previous upgrade attempt, we just need to kill that job (`kubectl -n posthog delete job $(kubectl -n posthog get jobs --no-headers -o custom-columns=NAME:.metadata.name)`) before running the upgrade again.
   
+---
+
+If you see this error:
+
+```
+Error: UPGRADE FAILED: an error occurred while rolling back the release. original upgrade error: cannot patch "posthog-posthog-kafka" with kind StatefulSet: StatefulSet.apps "posthog-posthog-kafka" is invalid
+```
+
+You may have tried to scale the persistence of a StatefulSet down. This can happen for both Kafka and ClickHouse. You should make sure the values file you are using to upgrade does not lower the `kafka.persistence` or `clickhouse.persistence` value.
+
+You can check the current values in your cluster with the following command:
+
+```
+helm get values posthog -n posthog # replace with your target namespace if not 'posthog'
+```
+
+---
   
-If you see this error
+If you see this error:
   
 ```
  UPGRADE FAILED: rendered manifests contain a resource that already exists.
 ```
+
 Follow [these instructions](/docs/self-host/deploy/upgrade-notes#upgrading-from-3xx%23upgrading-from-10xx#upgrading-from-10xx) before running the upgrade command again.
 </details>
