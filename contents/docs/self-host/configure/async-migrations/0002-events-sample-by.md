@@ -17,7 +17,26 @@ There were 2 important reasons for doing this:
 ## Preparation
 
 1. Make sure you have enough free space in your ClickHouse instance. We certify this via a preflight check before running the migration, but it is good that you're also aware of the requirement.
-2. Make sure there's enough disk space in Kafka and verify that the retention policies are reasonable (ClickHouse event ingestion will be paused during the migration and to make sure we don't lose any data we'll want to make sure they won't expire too fast from Kafka).
+2. Make sure we have a long enough retention policy in Kafka (ClickHouse event ingestion will be paused during the migration, and to make sure we don't lose any data we'll want to make sure events won't expire too fast from Kafka).
+
+
+<details>
+
+<summary>
+    <b>How can I verify the migration was successful?</b>
+</summary>
+
+<br />
+
+For ClickHouse check the events table size from the `/instance/status` page in the app. You can find it under "ClickHouse table sizes". We need that to be smaller than "ClickHouse disk free space" as we'll be duplicating the events table. If you need to increase your ClickHouse storage check out our [ClickHouse resize disk docs](/docs/self-host/runbook/clickhouse/resize-disk).
+
+For Kafka by default we have `logRetentionHours=24`, but you could have overridden it in your `values.yaml`, which guarantees the minimal amount of time we'll keep events. Note, that there's also `logRetentionBytes` to better use the disk available, which might mean your retention in reality can be a lot longer than 24h. You can check what the oldest message is by running in your kafka pod shell:
+```
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clickhouse_events_proto --from-beginning --max-messages 1
+```
+Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest making sure you have at least 3 days worth of data. See the docs for info about [resizing kafka](/docs/self-host/runbook/kafka/resize-disk) and [kafka log retention](/docs/self-host/runbook/kafka/log-retention).
+
+</details>
 
 ## Operations
 
