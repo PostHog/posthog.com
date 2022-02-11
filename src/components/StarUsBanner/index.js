@@ -24,29 +24,17 @@ export default function StarUsBanner() {
             {visible && (
                 <motion.div
                     key="star-us-banner"
-                    initial={{ translateY: 'calc(100% + 23px)', opacity: 0 }}
+                    initial={{ translateY: 'calc(100%)', opacity: 0 }}
                     animate={{ translateY: '0%', opacity: 1 }}
-                    exit={{ translateY: 'calc(100% + 23px)', opacity: 1 }}
+                    exit={{ translateY: 'calc(100%)', opacity: 1 }}
                     className="fixed bottom-[23px] z-[9998] w-full flex justify-center items-center"
                 >
                     <div className="flex items-center space-x-4 bg-red py-[12px] px-[25px] text-white rounded-full ">
-                        <p className="m-0 text-base font-semibold flex items-center space-x-4">
-                            <span>Star us on GitHub</span>
-                            <span className="h-[28px] w-[125px]">
-                                <GitHubButton
-                                    className="text-red hover:text-red"
-                                    href="https://github.com/posthog/posthog"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star posthog/posthog on GitHub"
-                                >
-                                    Star
-                                </GitHubButton>
+                        <p className="m-0 text-base font-bold text-white flex items-center space-x-4">
+                            <span>
+                                <a href="/hosthog/london">Come say &#128075; at our London meet-up!</a>
                             </span>
                         </p>
-                        <button className="text-white" onClick={handleClick}>
-                            <Close className="w-3 h-3" />
-                        </button>
                     </div>
                 </motion.div>
             )}
