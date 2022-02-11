@@ -70,7 +70,7 @@ Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, 
 
 ![Plausible Analytics - plausible hipaa analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Another open source analytics platform, Plausible is designed to help teams track basic website metrics such as pageviews and bounce rates. This pared-back focus means Plausible lacks the more powerful features included in PostHog, such as Feature Flags and Session Recording, but makes it suited to the needs of website managers. 
+Another open-source analytics platform, Plausible is designed to help teams track basic website metrics such as pageviews and bounce rates. This pared-back focus means Plausible lacks the more powerful features included in PostHog, such as Feature Flags and Session Recording, but makes it suited to the needs of website managers. 
 
 One benefit of Plausible’s approach is that it only requires a 1KB script in order to function and has a much smaller impact on page performance than Google Analytics. Again, because it’s open source (under an AGPL license), it can be tailored to the needs of your team and can be deployed on-premises.
 
