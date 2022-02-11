@@ -24,17 +24,17 @@ But there was one fix that stood out in this quality push. Customers would often
 
 This is the story of how we decreased the number of missing recordings from 15% to <1%, and in doing so, moved the feature out of beta.
 
+>[Rick Marron](https://posthog.com/handbook/company/team#rick-marron,-software-engineer) is a software engineer at PostHog. In previous lives Rick was a Program Manager at Microsoft, and he spent over a year in Nairobi, Kenya where he developed the first publicly available real-time source for traffic data in the city using computer vision and street cameras. He's a native of Rochester, New York but lives in Los Angeles now because... sunshine. Follow him [on Twitter](https://twitter.com/rick_marron) and [Github](https://github.com/rcmarron). 
+
 ## Measuring the issue
 
 To start, we had to find a way to measure missing recordings. If we can't measure it, we can't know if we fixed it. But how can you measure something that's missing?
 
 We had a couple ideas, but they all had drawbacks. The two main ones we considered were:
 
-**1. Measure how often we receive web analytics events outside of a recording**
-The idea is that a user should have a recording if they're sending up other events. The problem is that this doesn't account for cases when recordings are disabled, so the metric would always be < 100%.
+**1. Measure how often we receive web analytics events outside of a recording:** The idea is that a user should have a recording if they're sending up other events. The problem is that this doesn't account for cases when recordings are disabled, so the metric would always be < 100%.
 
-**2. Measure how often we've received data for a recording, but it wasn't complete** 
-For a recording to be shown to users, it needs to have enough data that we can draw the entire page - we call this a 'full snapshot'. This metric would measure how often we started a recording but didn't send up a full snapshot, so we couldn't render the page for the user. Theoretically, this should rarely happen.
+**2. Measure how often we've received data for a recording, but it wasn't complete:** For a recording to be shown to users, it needs to have enough data that we can draw the entire page - we call this a 'full snapshot'. This metric would measure how often we started a recording but didn't send up a full snapshot, so we couldn't render the page for the user. Theoretically, this should rarely happen.
 
 We decided to use the second metric because it would let us strive for 0% missing recordings. If you're curious, you can read the conversation that led to this decision in [this GitHub issue](https://github.com/PostHog/posthog/issues/5478).
 
