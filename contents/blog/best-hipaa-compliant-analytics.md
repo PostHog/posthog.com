@@ -1,5 +1,5 @@
 ---
-date: 2022-02-01
+date: 2022-02-17
 title: The 4 best HIPAA compliant analytics tools
 rootPage: /blog
 sidebar: Blog
