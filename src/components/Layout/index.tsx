@@ -1,4 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
+import Logo from 'components/Logo'
 import { useValues } from 'kea'
 import React, { useEffect } from 'react'
 import { GetStartedModal } from '../../components/GetStartedModal'
@@ -13,13 +15,20 @@ import './SkeletonLoading.css'
 
 const Navigation = () => {
     return (
-        <div className="flex justify-between px-4 py-2 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark sticky top-0 z-50 bg-tan dark:bg-primary text-[15px] font-semibold text-[#00000040]">
-            <SearchBar />
+        <div className="flex items-center justify-between px-4 py-2 md:border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark md:sticky top-0 z-50 bg-tan dark:bg-primary text-[15px] font-semibold text-[#00000040]">
+            <div className="md:hidden block">
+                <Link to="/">
+                    <Logo />
+                </Link>
+            </div>
+            <div className="md:block hidden">
+                <SearchBar />
+            </div>
             <div className="flex flex-shrink-0 space-x-2">
                 <CallToAction type="custom" className="bg-red border-red text-white hover:text-white" size="md">
                     Try PostHog
                 </CallToAction>
-                <CallToAction type="outline" size="md" className="text-red hover:text-red">
+                <CallToAction type="outline" size="md" className="text-red hover:text-red md:block hidden">
                     Demo
                 </CallToAction>
             </div>
@@ -39,10 +48,8 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
     return (
         <>
             <div className="flex items-start">
-                <div className="z-[9999] px-7 py-4 flex-shrink-0 w-[230px] h-screen sticky top-0 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                    <Header />
-                </div>
-                <div className="w-[calc(100vw-230px)]">
+                <Header />
+                <div className="w-full md:w-[calc(100vw-230px)]">
                     <Navigation />
                     <main>{children}</main>
                     <Footer />
