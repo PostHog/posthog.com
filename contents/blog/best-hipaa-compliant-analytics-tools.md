@@ -15,19 +15,25 @@ HIPAA, which stands for the Health Insurance Portability and Accountability Act,
 
 Data protected under HIPAA is called Protected Health Information (PHI), or ePHI if it is digitized. It includes any data which can be used to identify the past, current or future health status of an individual. This obviously includes test results and diagnoses, but it can also cover birthdays, ethnicity, gender and other information. Even your IP address can be considered ePHI under HIPAA. 
 
-One of the challenges for organizations affected by HIPAA is that it limits how data about customers can be gathered, stored and shared. Many platforms which rely on third-party cookies, such as Mixpanel or Amplitude, cannot be used under HIPAA regulations without either anonymising data or creating cumbersome (and costly) BAA agreements. 
+One of the challenges for organizations affected by HIPAA is that it limits how data about customers can be gathered, stored and shared. 
 
-In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA. This advice is intended as an informal guide and should not be considered legal advice. 
+In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA,  Many platforms which rely on third-party cookies, such as Mixpanel or Amplitude, cannot be used under HIPAA regulations without either anonymising data or creating cumbersome (and costly) BAA agreements. 
 
-> If your business is operating inside the EU, it’s worth checking our article about [GDPR compliant analytics](https://posthog.com/blog/best-gdpr-compliant-analytics-tools) to ensure your product complies with both sets of regulations. 
+### What is a Business Associate Agreement (BAA)?
 
-## 1. [PostHog](https://posthog.com/product)
+Some services enable HIPAA compliance through the creation of a [Business Associate Agreement, or BAA](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html). This is essentially a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
+
+It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license than they may otherwise require. Additionally, not all organizations may offer BAAs at all. 
+
+> If your business operates inside the EU, it’s worth checking our article about [GDPR compliant analytics](/blog/best-gdpr-compliant-analytics-tools) to ensure you comply with both sets of regulations. 
+
+## 1. [PostHog](/product)
 
 ![PostHog - hipaa compliant analytics](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 PostHog is an all-in-one analytics platform which gives you everything you need to understand your users and build better products. It’s also completely open-source and [can be self-hosted on your own infrastructure](/docs/self-host), so that you never have to share data with anyone — including PostHog. 
 
-We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just [a HIPAA-compliant analytics platform](https://posthog.com/blog/hipaa-compliant-analytics), it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
+We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just [a HIPAA-compliant analytics platform](/blog/hipaa-compliant-analytics), it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
 
 PostHog is also entirely self-serve, with features such as event auto-capture, which make it perfect for less technical users who don’t want to write reams of SQL. Technical users can meanwhile cater the platform to their needs or integrate with internal tools via [PostHog’s open source repos](https://github.com/PostHog).
 
@@ -47,7 +53,7 @@ Yes. Unlike platforms such as Mixpanel or Amplitude, PostHog enables you to depl
 
 You _may_ need to create a BAA with your hosting provider if one doesn’t already exist, but major providers such as Google and AWS offer these for free. 
 
-> [Try PostHog for free](https://posthog.com/signup) today or [schedule a demo](https://posthog.com/book-a-demo) to learn more about using PostHog under HIPAA regulations. 
+> [Try PostHog for free](/signup) today or [schedule a demo](/book-a-demo) to learn more about using PostHog under HIPAA regulations. 
 
 ## 2. [Countly](https://count.ly/)
 
@@ -118,6 +124,6 @@ According to [Google’s own disclaimers](https://support.google.com/analytics/a
 Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data. 
 
 > PostHog is an open-source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure to be used under HIPAA regulations without a Business Associate Agreement.
-[Try PostHog for free](https://posthog.com/signup) today or [book a demo](https://posthog.com/book-a-demo) to learn more.
+[Try PostHog for free](/signup) today or [book a demo](/book-a-demo) to learn more.
  
 
