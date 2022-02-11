@@ -3,7 +3,7 @@ title: How to segment users
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/how-to-segment-users-banner.png
-featuredTutorial: true
+featuredTutorial: false
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕
