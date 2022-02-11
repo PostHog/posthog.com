@@ -1,5 +1,5 @@
 ---
-date: 2022-02-03
+date: 2022-02-11
 title: I used to think you don't need product people. I was wrong.
 rootPage: /blog
 sidebar: Blog
@@ -15,7 +15,7 @@ When PostHog was fresh out of YC last year, there were two things we focused on:
 
 By [PostHog's series B](/blog/15-million-series-b), our team showed me that I was totally wrong. Here's why that was the case, what we did about it, and the results.
 
->James Hawkins is PostHog's Co-Founder & CEO. Follow him on [Twitter](https://www.linkedin.com/in/j-hawkins/).
+>James Hawkins is PostHog's Co-Founder & CEO. Follow him on [Twitter](https://twitter.com/james406).
 
 ## Why I used to think this way
 My previous experience of product management was something like this:
@@ -83,7 +83,7 @@ We created a Nail X framework. You tell the company "Nail X" where X is a thing 
 
 "Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made [Funnels](/product/funnels) in PostHog awesome.
 
-Get X reference customers was another useful framework. This came out of a board meeting. We realized that we had product market fit with our free open-source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
+Get X reference customers was another useful framework. This came out of [a board meeting](ceo-diary-3#so-the-board-meeting). We realized that we had product market fit with our free open-source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
 
 ### 5. We wrote stuff down
 
@@ -93,15 +93,17 @@ _Everyone_ must work like this. This is what the exec team at PostHog does:
 
 * We share our exec meetings publicly in the company. Anyone can comment / read.
 * We write out strategy changes into a pull request. Anyone can comment / read / suggest changes.
-* We share our board meetings publicly in the company. Anyonen can comment / read.
+* We share our board meetings publicly in the company. Anyone can comment / read.
 * We share realtime updates around fundraising. Not after the fact.
-* We have a public handbook - which is world editable
+* We have a public [handbook](../handbook) - which is world editable
 
-### 6. Product should involve engineers
+### 6. Product and engineering are peers
 
-Product are proactive with getting feedback. They involve engineering - many times a day, PostHog's engineering team speak to real life users. That may be over Slack, or it may be on a call.
+Product are proactive with getting feedback - they find and shape the biggest problems for engineers to solve.
 
-When engineers release new features, we'll encourage them to [collaborate directly with users](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html) in real life.
+Engineers at PostHog own solving these problems end-to-end - that means [engineers collaborate directly with users](https://neilkakkar.com/How-I-Own-Projects-as-a-Software-Engineer.html) from their initial ideas to implementation.
+
+Anti rule: product doesn't dictate to engineers by producing feature requirements.
 
 ## The difference it has made
 
