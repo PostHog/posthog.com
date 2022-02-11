@@ -53,7 +53,7 @@ You _may_ need to create a BAA with your hosting provider if one doesn’t alrea
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-Tailored to the needs of Internet Of Things (IOT) organizations, Countly’s product analytics platform offers tools such as multi-device user tracking and crash analytics. This makes it especially suited to hardware manufacturers, or teams who need to focus on debugging customer issues.
+Tailored to the needs of Internet Of Things (IoT) organizations, Countly’s product analytics platform offers tools such as multi-device user tracking and crash analytics. This makes it especially suited to hardware manufacturers, or teams who need to focus on debugging customer issues.
 
 Unlike PostHog (above) and Plausible (below), Countly isn’t open source - though it does offer a range of plugins to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
 
