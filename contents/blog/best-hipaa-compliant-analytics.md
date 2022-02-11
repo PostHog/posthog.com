@@ -29,7 +29,7 @@ PostHog is an all-in-one analytics platform which gives you everything you need 
 
 We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just [a HIPAA compliant analytics platform](https://posthog.com/blog/hipaa-compliant-analytics), it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
 
-PostHog is also entirely self-serve, with features such as with event auto-capture which make it perfect for less technical users who don’t want to write reams of SQL. Technical users can meanwhile cater the platform to their needs or integrate with internal tools via [PostHog’s open source repos](https://github.com/PostHog).
+PostHog is also entirely self-serve, with features such as event auto-capture, which make it perfect for less technical users who don’t want to write reams of SQL. Technical users can meanwhile cater the platform to their needs or integrate with internal tools via [PostHog’s open source repos](https://github.com/PostHog).
 
 ### Features & benefits
 
