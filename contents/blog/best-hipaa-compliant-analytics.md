@@ -19,7 +19,7 @@ One of the challenges for organizations affected by HIPAA is that it limits how 
 
 In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA. This advice is intended as an informal guide and should not be considered legal advice. 
 
-> If your business is operating inside the EU, it’s worth checking our post about [GDPR compliant analytics](https://posthog.com/blog/best-gdpr-compliant-analytics-tools) to ensure your product complies with both sets of regulations. 
+> If your business is operating inside the EU, it’s worth checking our article about [GDPR compliant analytics](https://posthog.com/blog/best-gdpr-compliant-analytics-tools) to ensure your product complies with both sets of regulations. 
 
 ## 1. [PostHog](https://posthog.com/product)
 
