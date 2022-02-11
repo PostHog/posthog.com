@@ -37,7 +37,7 @@ One of the easiest filters to create is to filter out internal users identified 
 
 > email ∌ (doesn’t contain) @posthog.com
 
-The filters you apply  are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
+The filters you apply are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
 
 ## Step 3: Add more filters
 
