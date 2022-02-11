@@ -30,9 +30,11 @@ To start, we had to find a way to measure missing recordings. If we can't measur
 
 We had a couple ideas, but they all had drawbacks. The two main ones we considered were:
 
-1. Measure how often we receive web analytics events outside of a recording. The idea is that a user should have a recording if they're sending up other events. The problem is that this doesn't account for cases when recordings are disabled, so the metric would always be < 100%.
+**1. Measure how often we receive web analytics events outside of a recording**
+The idea is that a user should have a recording if they're sending up other events. The problem is that this doesn't account for cases when recordings are disabled, so the metric would always be < 100%.
 
-2. Measure how often we've received data for a recording, but it wasn't complete. For a recording to be shown to users, it needs to have enough data that we can draw the entire page - we call this a 'full snapshot'. This metric would measure how often we started a recording but didn't send up a full snapshot, so we couldn't render the page for the user. Theoretically, this should rarely happen.
+**2. Measure how often we've received data for a recording, but it wasn't complete** 
+For a recording to be shown to users, it needs to have enough data that we can draw the entire page - we call this a 'full snapshot'. This metric would measure how often we started a recording but didn't send up a full snapshot, so we couldn't render the page for the user. Theoretically, this should rarely happen.
 
 We decided to use the second metric because it would let us strive for 0% missing recordings. If you're curious, you can read the conversation that led to this decision in [this GitHub issue](https://github.com/PostHog/posthog/issues/5478).
 
