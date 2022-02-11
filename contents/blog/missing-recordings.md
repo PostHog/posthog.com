@@ -1,6 +1,6 @@
 ---
 date: 2022-02-11
-title: The mystery of PostHog’s missing session recordings
+title: Solving the mystery of PostHog’s missing session recordings
 rootPage: /blog
 sidebar: Blog
 showTitle: true
