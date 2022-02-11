@@ -74,7 +74,7 @@ Another open source analytics platform, Plausible is designed to help teams trac
 
 One benefit of Plausible’s approach is that it only requires a 1KB script in order to function and has a much smaller impact on page performance than Google Analytics. Again, because it’s open source (under an AGPL license), it can be tailored to the needs of your team and can be deployed on-premises.
 
-Plausible is a good fit for website admins and includes integrations with both Slack and Google Search Console, it lacks the more powerful features needed by Product or Engineering teams in larger organizations.
+Plausible is a good fit for website admins and includes integrations with both Slack and Google Search Console, but it lacks the more powerful features needed by Product or Engineering teams in larger organizations.
 
 ### Features & benefits
 
