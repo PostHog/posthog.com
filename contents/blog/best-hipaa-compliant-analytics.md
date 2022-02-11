@@ -84,7 +84,7 @@ Plausible is a good fit for website admins and includes integrations with both S
 
 ### Is Plausible HIPAA compliant?
 
-Yes. Plausible can be hosted on your own infrastructure, just like PostHog (above). It also collects minimal amounts of user data and only presents it in anonymized, aggregated format. This is both a benefit and a drawback however, as it’s not possible to use Plausible to inspect the behavior or information of individual users. 
+Yes. Plausible can be hosted on your own infrastructure, just like PostHog (above). It also collects minimal amounts of user data and only presents it in an anonymized, aggregated format. This is both a benefit and a drawback however, as it’s not possible to use Plausible to inspect the behavior or information of individual users. 
 
 You may still need to create a BAA with your cloud hosting provider, as with any self-hosted solution. 
 
