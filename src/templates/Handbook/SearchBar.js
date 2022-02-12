@@ -46,7 +46,7 @@ export default function SearchBar({ base }) {
     }, [])
 
     return (
-        <div className="flex space-x-3 w-full text-[14px] px-3 items-center flex-grow relative">
+        <div className="flex space-x-3 w-full text-[14px] px-2 items-center flex-grow relative">
             <DocSearch
                 translations={{
                     button: {
