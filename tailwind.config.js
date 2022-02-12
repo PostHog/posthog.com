@@ -118,6 +118,8 @@ module.exports = {
             'gray-accent-light': '#E5E7E0',
             blue: '#1D4AFF',
             red: '#F54E00',
+            'red-hover': '#EB5008',
+            'red-active': '#DA500F',
         }),
         extend: {
             fontFamily: {
@@ -165,6 +167,8 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
+                'red-hover': '#EB5008',
+                'red-active': '#DA500F',
                 'dashed-line-dark': '#4b4b4b',
                 'dashed-line-light': '#D0D1C9',
                 blue: '#1D4AFF',

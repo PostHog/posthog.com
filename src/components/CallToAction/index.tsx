@@ -41,7 +41,7 @@ const icons = {
 }
 
 const buttonTypeClasses = {
-    primary: 'button-primary rounded text-white hover:text-white',
+    primary: 'button-primary bg-red border-red text-white hover:text-white',
     secondary: 'button-secondary rounded text-white hover:text-white',
     button: 'button rounded text-white hover:text-white',
     custom: '',

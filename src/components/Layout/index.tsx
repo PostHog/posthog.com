@@ -25,10 +25,10 @@ const Navigation = () => {
                 <SearchBar />
             </div>
             <div className="flex flex-shrink-0 space-x-2">
-                <CallToAction type="custom" className="bg-red border-red text-white hover:text-white" size="md">
+                <CallToAction type="primary" className="" size="sm">
                     Try PostHog
                 </CallToAction>
-                <CallToAction type="outline" size="md" className="text-red hover:text-red md:block hidden">
+                <CallToAction type="outline" size="sm" className="text-red hover:text-red md:block hidden">
                     Demo
                 </CallToAction>
             </div>

@@ -26,12 +26,12 @@ const Nav = () => {
                             {title && (
                                 <p className="text-[14px] font-semibold text-primary opacity-25 m-0 mb-3">{title}</p>
                             )}
-                            <ul className="list-none p-0 m-0 flex flex-col space-y-3">
+                            <ul className="list-none p-0 m-0 flex flex-col space-y-2">
                                 {children.map(({ title, url }) => {
                                     return (
                                         <li key={title}>
                                             <Link
-                                                className="text-base text-black hover:text-black dark:text-white dark:hover:text-white hover:opacity-100 opacity-50 transition-opacity font-semibold"
+                                                className="text-base text-black hover:text-black dark:text-white dark:hover:text-white hover:opacity-100 opacity-50 transition-opacity font-semibold text-sm"
                                                 to={url}
                                             >
                                                 {title}
