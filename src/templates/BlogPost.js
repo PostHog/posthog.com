@@ -154,7 +154,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     <BlogPostSidebar
                         categories={categories}
                         contributors={contributors}
-                        date={lastUpdated || date}
+                        date={date}
                         filePath={filePath}
                         title={title}
                         location={location}
@@ -203,7 +203,11 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image
+                    image {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
+                    }
                     name
                 }
             }

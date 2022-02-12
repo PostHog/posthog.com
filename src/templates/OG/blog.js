@@ -93,7 +93,7 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
                   width: 100%;
                   height: 100%;
                 "
-                src="${authorData.image}"
+                src="data:image/png;charset=utf-8;base64,${authorData.image}"
               />
             </div>
             <div>

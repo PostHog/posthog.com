@@ -14,7 +14,7 @@ showTitle: true
     /dev/disk/by-id/scsi-0DO_Volume_pvc-f39035c1-c68c-4572-81f2-273de6eb088c   20G   50M   19G   1% /var/lib/clickhouse
     ```
 
-1. In your Helm chart configuration, update the `clickhouseOperator.storage` value in `value.yaml` to the target size (40G in this example)
+1. In your Helm chart configuration, update the `clickhouse.persistence.size` value in `value.yaml` to the target size (40G in this example)
 
 1. Run a `helm` upgrade
 

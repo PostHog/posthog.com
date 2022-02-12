@@ -51,7 +51,7 @@ export default function Contact(props) {
                             <DemoScheduler
                                 iframeSrc={
                                     {
-                                        scale: 'https://calendly.com/cameron-posthog/posthog-scale-enterprise-demo',
+                                        scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         group: 'https://calendly.com/cameron-posthog/posthog-demo',
                                         enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',
                                     }[demoType]

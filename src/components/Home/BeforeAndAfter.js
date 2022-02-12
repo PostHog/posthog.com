@@ -35,10 +35,10 @@ export default function BeforeAndAfter() {
             <div className={section('bg-primary rounded-lg p-4 pb-0 md:pt-16 lg:pb-0 lg:p-12 lg:pt-32')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
                     <div className="relative">
-                        <AnimateIntoView className="absolute -right-16">
+                        <AnimateIntoView className="absolute left-20">
                             <img src={factoBlurb} />
                         </AnimateIntoView>
-                        <StaticImage className="max-w-[200px] md:max-w-full" src="../../images/facto-home.png" />
+                        <StaticImage className="max-w-[200px] md:max-w-[300px]" src="../../images/facto-home.png" />
                     </div>
                     <div>
                         <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none xl:text-6xl">

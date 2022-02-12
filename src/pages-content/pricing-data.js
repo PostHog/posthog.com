@@ -56,12 +56,11 @@ const faqs = [
     {
         q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
         a:
-            'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using [our plugin](https://github.com/PostHog/posthog-plugin-migrator3000).',
+            'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using our plugin - https://github.com/PostHog/posthog-plugin-migrator3000.',
     },
     {
         q: 'On the Self-hosted Open Source plan, what happens if I exceed 1 million tracked users?',
-        a:
-            "We have a soft limit, meaning if you exceed the plan's allocation, we will reach out by email to discuss options. We'll continue to track users - you won't lose any customer data.",
+        a: 'There is no hard limit set. You may likely need some kind of support at this scale.',
     },
     {
         q: 'Do I pay anything for stored events?',
@@ -90,7 +89,7 @@ const faqs = [
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'No - instead we offer a contract with no minimum length. In PostHog Cloud, the first 1 million events are free, every month. Interested in the Self-hosted Scale plan? You can try all features in PostHog Cloud first, if needed, and there is no minimum contract length since we charge on usage.',
+            'No - instead we offer a contract with no minimum length. In PostHog Scale and PostHog Cloud, the first 1 million events are free, every month.',
     },
     {
         q: 'What currency are your prices in?',
@@ -104,7 +103,7 @@ const faqs = [
     {
         q: 'Are there any minimums or annual commitments?',
         a:
-            'For PostHog Cloud, there is no minimum - pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. For Self-hosted Scale, we have a minimum commitment of $2,000/month.',
+            'No! We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of PostHog Enterprise.',
     },
 ]
 

@@ -47,7 +47,8 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Free (up to 1 million events), then $0.000225/event',
                     'Open source': 'Free',
-                    Scale: '$0.000225/event, $1.5k/mo minimum. (Discounts after 10 mil events)',
+                    Scale:
+                        'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
                     Enterprise: 'Contact us',
                 },
             },
@@ -137,7 +138,7 @@ const sections = [
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
-                name: 'Session Recording',
+                name: 'Recordings',
                 docsLink: 'docs/user-guides/recordings',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
             },
@@ -145,6 +146,11 @@ const sections = [
                 name: 'Feature Flags',
                 docsLink: 'docs/user-guides/feature-flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Experimentation',
+                docsLink: 'docs/user-guides/experimentation',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
                 name: 'Plugins',
@@ -168,11 +174,16 @@ const sections = [
             },
             {
                 name: 'Multivariate testing',
-                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags-alpha',
+                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
-                name: 'Event taxonomy descriptions and tags',
+                name: 'Advanced Paths',
+                docsLink: 'docs/user-guides/paths',
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+            },
+            {
+                name: 'Event & properties Taxonomy',
                 tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
             },
             {
@@ -267,15 +278,20 @@ const sections = [
             {
                 name: 'Slack (dedicated channel)',
                 tiers: {
-                    'PostHog Cloud': '$2k/month spend or above',
+                    'PostHog Cloud': '$10k/month spend or above',
                     'Open source': false,
-                    Scale: true,
+                    Scale: '$10k/month spend or above',
                     Enterprise: true,
                 },
             },
             {
                 name: 'Email',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: {
+                    'PostHog Cloud': '$10k/month spend or above',
+                    'Open source': false,
+                    Scale: '$10k/month spend or above',
+                    Enterprise: true,
+                },
             },
             {
                 name: 'Account manager',
@@ -287,7 +303,12 @@ const sections = [
             },
             {
                 name: 'Deployment developer pairing',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: {
+                    'PostHog Cloud': false,
+                    'Open source': false,
+                    Scale: '$10k/month spend or above',
+                    Enterprise: true,
+                },
             },
             {
                 name: 'Dashboard configuration support',
@@ -328,7 +349,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': false,
                     'Open source': false,
-                    Scale: 'Minimum $2k/month spend',
+                    Scale: '$2k/month spend or above',
                     Enterprise: true,
                 },
             },

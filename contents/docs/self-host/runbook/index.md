@@ -9,3 +9,6 @@ This section contains routine procedures and operations to manage PostHog instal
 ### Services
 * [ClickHouse](/docs/self-host/runbook/clickhouse)
 * [Kafka](/docs/self-host/runbook/kafka)
+* [PostgreSQL](/docs/self-host/runbook/postgresql)
+* [Redis](/docs/self-host/runbook/redis)
+* [Zookeeper](/docs/self-host/runbook/zookeeper)

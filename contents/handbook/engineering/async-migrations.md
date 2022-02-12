@@ -10,83 +10,7 @@ See the user facing documentation under [self-host/configure/async-migrations](/
 
 ### Writing an async migration
 
-To write an async migration, you should create a migration file inside `posthog/special_migrations/migrations`. The name should follow the convention we use for Django and EE migrations (e.g. `0005_update_events_schema`).
-
-Here's what an example async migration looks like:
-
-<details>
-
-<summary><b>Example async migration</b></summary>
-
-<br />
-
-
-
-```python
-from posthog.constants import AnalyticsDBMS
-from posthog.special_migrations.definition import SpecialMigrationDefinition, SpecialMigrationOperation
-from posthog.version_requirement import ServiceVersionRequirement
-from ee.clickhouse.client import sync_execute
-
-class Migration(SpecialMigrationDefinition):
-
-    description = "Migrate table_x to a new schema"
-
-    # minimum posthog version for running this migration
-    posthog_min_version = "1.28.0"
-
-    # maximum posthog version this migration can be run on - it becomes a requirement from 1.31.1 onwards
-    posthog_max_version = "1.31.0"
-
-    # if clickhouse is on a version below 21.6.0, this migration won't run
-    service_version_requirements = [
-        ServiceVersionRequirement(service="clickhouse", supported_version=">=21.6.0"),
-    ]
-
-    # the special migration that needs to have completed before this one
-    depends_on = "0003_previous_special_migration"
-
-    # ordered list of operations in the migration
-    operations = [
-        SpecialMigrationOperation(
-            database=AnalyticsDBMS.POSTGRES,
-            sql="CREATE TABLE table_x_new ( key VARCHAR, value VARCHAR ) ENGINE = ReplacingMergeTree('value') ORDER BY key",
-            rollback="DROP TABLE table_x_new",
-        ),
-        SpecialMigrationOperation(
-            database=AnalyticsDBMS.POSTGRES,
-            sql="INSERT INTO table_x_new (col1) SELECT key, value FROM table_x",
-            rollback="TRUNCATE TABLE table_x_new",
-        ),
-    ]
-    
-    # only run if the table doesn't already exist
-    def is_required(self):
-        result = sync_execute("SELECT count(*) FROM system.tables WHERE database='posthog' AND name='table_x_new'")
-        return result[0][0] == 0 
-
-    # check if we're not running low on storage
-    def healthcheck(self):
-        result = sync_execute("SELECT free_space FROM system.disks")
-        if result[0][0] < 1000000000:
-            return (False, "ClickHouse available storage below 1GB") 
-
-        return (True, None)
-
-    # update progress based on the total rows moved
-    def progress(self, _):
-        result = sync_execute(f"SELECT count(*) FROM table_x")
-        result2 = sync_execute(f"SELECT count(*) FROM table_x_new")
-        total_rows_to_move = result2[0][0]
-        total_rows_moved = result[0][0]
-
-        progress = 100 * total_rows_moved / total_rows_to_move
-        return progress
-
-```
-
-</details>
-
+To write an async migration, you should create a migration file inside [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations). The name should follow the convention we use for Django and EE migrations (e.g. `0005_update_events_schema`). Check out the existing migrations or [examples](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/examples).
 
 ### Workflow and architecture 
 
@@ -98,7 +22,7 @@ When the Django server boots up - a setup step for async migrations happens, whi
 2. Populates a dependencies map and in-memory record of migration definitions
 3. Creates a database record for each
 4. Check if all async migrations necessary for this PostHog version have completed (else don't start)
-5. Triggers migrations to run (in order) if `AUTO_START_SPECIAL_MIGRATIONS` is set and there are uncompleted migrations for this version
+5. Triggers migrations to run (in order) if `AUTO_START_ASYNC_MIGRATIONS` is set and there are uncompleted migrations for this version
 
 #### Running a migration
 
@@ -122,7 +46,7 @@ When a migration is triggered, the following happens:
 
 #### Stopping a migration
 
-A migration can be stopped by issuing a command via Celery's app control to terminate the process running the task. 
+A migration can be stopped from the async migrations management page or by issuing a command via Celery's app control to terminate the process running the task.
 
 #### Rollbacks
 
@@ -163,34 +87,34 @@ Is required functions could also take into consideration table schemas, for exam
 
 The codebase is structured as follows:
 
-#### posthog/models/special_migration.py
+#### posthog/models/async_migration.py
 
 The Django ORM (Postgres) model for storing metadata about async migrations.
 
-#### posthog/api/special_migrations.py
+#### posthog/api/async_migrations.py
 
 API for requesting data about async migrations as well as triggering starts, stops, and rollbacks.
 
-#### posthog/tasks/special_migrations.py
+#### posthog/tasks/async_migrations.py
 
 Celery tasks for dealing with async migrations. These are:
 
-1. `run_special_migration`: Explicitly triggered to run a migration
-2. `check_special_migration_health`: Runs every 30 minutes to perform a healthcheck
+1. `run_async_migration`: Explicitly triggered to run a migration
+2. `check_async_migration_health`: Runs every 30 minutes to perform a healthcheck
 
-#### posthog/special_migrations/definition.py
+#### posthog/async_migrations/definition.py
 
 Classes to be used when writing an async migration, outlining the necessary components of a migration.
 
-#### posthog/special_migrations/setup.py
+#### posthog/async_migrations/setup.py
 
 Code that runs when the Django server boots to setup the necessary scaffolding for async migrations.
 
-#### posthog/special_migrations/runner.py
+#### posthog/async_migrations/runner.py
 
 Code related to running an async migration, from executing operations in sequence to attempting rollbacks.
 
-#### posthog/special_migrations/utils.py
+#### posthog/async_migrations/utils.py
 
 Code to support the runner in tasks that do not depend on the availability of the migration definition (module).
 

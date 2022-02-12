@@ -25,6 +25,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
 import { ContactForm } from './components/ContactForm'
@@ -95,6 +96,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
+import { Subscribe } from './components/Subscribe'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
@@ -131,6 +133,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityQuestions,
     CompensationCalculator,
     Contact,
     ContactForm,
@@ -201,6 +204,7 @@ export const shortcodes = {
     StarUsBanner,
     StartNowButton,
     Structure,
+    Subscribe,
     TableOfContents,
     TeamQuote,
     Tooltip,
