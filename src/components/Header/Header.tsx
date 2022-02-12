@@ -182,16 +182,12 @@ const MobileNav = ({ handleMobileMenu, open }) => {
         return unsubscribe
     }, [])
 
-    useEffect(() => {
-        if (yState >= 200) {
-            handleMobileMenu()
-        }
-    }, [yState])
-
     const handleDragEnd = () => {
         if (yState < 200) {
             y.stop()
             y.set(0)
+        } else {
+            handleMobileMenu()
         }
     }
 
