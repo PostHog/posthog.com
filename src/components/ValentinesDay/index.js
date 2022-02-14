@@ -27,7 +27,7 @@ export default function ValentinesDay() {
                         ve
                     </h1>
                     <h2 className="text-lg md:text-xl lg:text-[30px] text-white leading-tight mb-1">
-                        Fall in <span className="text-red">love</span> with open source projects this Valentines Day.
+                        Fall in <span className="text-red">love</span> with open source projects this Valentine's Day.
                     </h2>
                     <p className="text-white mb-9 text-base lg:text-[18px] mt-0 text-opacity-75">
                         For every star our GitHub repo gets, we'll donate $5 to open source projects - up to $50,000.
