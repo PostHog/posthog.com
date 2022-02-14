@@ -1,2 +1,16 @@
 /*
   X-Frame-Options: SAMEORIGIN
+  Cache-Control: public
+  Cache-Control: max-age=604800
+
+/brand/*
+  Cache-Control: public
+  Cache-Control: max-age=604800
+
+/images/*
+  Cache-Control: public
+  Cache-Control: max-age=604800
+
+/wp-content/*
+  Cache-Control: public
+  Cache-Control: max-age=604800
