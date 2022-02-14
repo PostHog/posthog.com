@@ -83,6 +83,48 @@ Fixing a slow query is usually a 3 steps process:
 
 1. fix the query that should now generate a less costly `EXPLAIN` plan.
 
+### How-to reduce IO
+
+ 1. Indices require IO, we can get rid of some IO by removing unused indices
+ 2. Can check IO with something like:
+
+```
+SELECT total_time, blk_write_time, calls, query
+FROM pg_stat_statements
+ORDER BY (blk_write_time) DESC 
+LIMIT 10;
+```
+
+ 3. SELECTs and cause IO: https://blog.okmeter.io/postgresql-exploring-how-select-queries-can-produce-disk-writes-f36c8bee6b6f
+
+#### Removing foreign key fields
+
+We don’t want to remove, as this is backwards incompatible. Do this as deprecation first
+Want to remove index straight away? Add `db_index=False`
+Rename e.g. `foreign_key_field` to `__deprecated_foreign_key_field`, add `db_column= foreign_key_field` such that attempts to reference from outside the model will require full qualification (we keep the field around such that Django doesn’t try to create deletion migrations)
+Wait for one release of field deprecation to have been in place
+Remove field completely in next release, add note that users should update through deprecation version such that running code is compatible
+
+#### Removing unused indices on foreign key fields
+
+Say you have an index on `team_id`, `person_id`. If `team_id` and `person_id` are Django foreign keys, it’s going to have created indices on `team_id` and `person_id`. We can still use the composite index for both `team_id` and `person_id` lookups, as mentioned on https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid having to write the other two indices by adding `db_index=False`
+
+#### Finding and removing unused indices
+
+How do you know if they are unused? Do something like 
+
+```
+SELECT s.schemaname,
+       s.relname AS tablename,
+       s.indexrelname AS indexname,
+       pg_relation_size(s.indexrelid) AS index_size
+FROM pg_catalog.pg_stat_user_indexes s
+   JOIN pg_catalog.pg_index i ON s.indexrelid = i.indexrelid
+WHERE s.idx_scan = 0      -- has never been scanned
+ORDER BY pg_relation_size(s.indexrelid) DESC;
+```
+
+If indices are unused, it should be safe to remove via removing `db_index=False` and running `./manage.py makemigration`
 
 ## ClickHouse
 
