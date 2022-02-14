@@ -102,7 +102,9 @@ LIMIT 10;
 We don’t want to remove, as this is backwards incompatible. Do this as deprecation first
 Want to remove index straight away? Add `db_index=False`
 Rename e.g. `foreign_key_field` to `__deprecated_foreign_key_field`, add `db_column= foreign_key_field` such that attempts to reference from outside the model will require full qualification (we keep the field around such that Django doesn’t try to create deletion migrations)
-Wait for one release of field deprecation to have been in place
+Wait for one release of field deprecation to have been in place.
+TODO: Somehow make select queries not request this field (i.e. to make it such
+that we can drop the column).
 Remove field completely in next release, add note that users should update through deprecation version such that running code is compatible
 
 #### Removing unused indices on foreign key fields
