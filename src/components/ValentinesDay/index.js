@@ -87,7 +87,7 @@ export default function ValentinesDay() {
                     </svg>
                 </div>
 
-                <StaticImage placeholder="tracedSVG" src="./images/hogs.png" />
+                <StaticImage width={560} placeholder="none" loading="eager" src="./images/hogs.png" />
             </div>
         </section>
     )
