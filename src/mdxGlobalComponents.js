@@ -102,6 +102,7 @@ import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
+import { ValentinesDay } from './components/ValentinesDay'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
@@ -210,6 +211,7 @@ export const shortcodes = {
     Tooltip,
     Tutorials,
     TutorialsSlider,
+    ValentinesDay,
     VisitLibrary,
     WorkableOpenRoles,
     WorkableSnippet,
