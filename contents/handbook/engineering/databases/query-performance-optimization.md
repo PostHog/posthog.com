@@ -109,7 +109,12 @@ Remove field completely in next release, add note that users should update throu
 
 #### Removing unused indices on foreign key fields
 
-Say you have an index on `team_id`, `person_id`. If `team_id` and `person_id` are Django foreign keys, it’s going to have created indices on `team_id` and `person_id`. We can still use the composite index for both `team_id` and `person_id` lookups, as mentioned on https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid having to write the other two indices by adding `db_index=False`
+Say you have an index on `team_id`, `person_id`. If `team_id` and `person_id`
+are Django foreign keys, it’s going to have created indices on `team_id` and
+`person_id`. We can still use the composite index for both `team_id` and
+`person_id` lookups, as mentioned on
+https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid
+having to write the other two indices by adding `db_index=False` 
 
 #### Finding and removing unused indices
 
@@ -126,7 +131,15 @@ WHERE s.idx_scan = 0      -- has never been scanned
 ORDER BY pg_relation_size(s.indexrelid) DESC;
 ```
 
-If indices are unused, it should be safe to remove via removing `db_index=False` and running `./manage.py makemigration`
+If indices are unused, it should be safe to remove via removing `db_index=False`
+and running `./manage.py makemigration`
+
+#### Avoiding locking on related tables
+
+When e.g. bulk inserting, we can end up needing to select a lot of keys from
+referenced tables. When we don't actually care about this, we can specify
+`db_constraint=False`, along with making any required migrations if we're
+updating an existing field.
 
 ## ClickHouse
 
