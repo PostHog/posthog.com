@@ -158,7 +158,7 @@ const Menu = ({ title, url, children, className = '' }) => {
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
-    const buttonClasses = `text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[6px] inline-block w-full rounded-md ${
+    const buttonClasses = `text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[5px] inline-block w-full rounded-md ${
         children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
     }`
     useEffect(() => {
@@ -236,10 +236,8 @@ export default function PostLayout({ tableOfContents, children, sidebar, content
                     </aside>
                 </div>
             )}
-            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
-                <div style={{ maxWidth: contentWidth }} className="w-full article-content">
-                    {children}
-                </div>
+            <article className="col-span-2 px-5 lg:px-10 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
+                <div className="w-full max-w-[650px] lg:max-w-[650px] mx-auto article-content">{children}</div>
                 {questions && questions}
             </article>
             <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[300px] justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">

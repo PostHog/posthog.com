@@ -24,7 +24,7 @@ const Nav = () => {
                     return (
                         <div key={index} className="mt-8 last:mt-auto">
                             {title && (
-                                <p className="text-[14px] font-semibold text-primary opacity-25 m-0 mb-3">{title}</p>
+                                <p className="text-[14px] font-semibold text-primary opacity-35 m-0 mb-2">{title}</p>
                             )}
                             <ul className="list-none p-0 m-0 flex flex-col space-y-2">
                                 {children.map(({ title, url }) => {
