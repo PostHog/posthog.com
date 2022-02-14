@@ -95,7 +95,7 @@ ORDER BY (blk_write_time) DESC
 LIMIT 10;
 ```
 
- 3. SELECTs and cause IO: https://blog.okmeter.io/postgresql-exploring-how-select-queries-can-produce-disk-writes-f36c8bee6b6f
+ 3. SELECTs can cause IO: https://blog.okmeter.io/postgresql-exploring-how-select-queries-can-produce-disk-writes-f36c8bee6b6f
 
 #### Removing foreign key fields
 
