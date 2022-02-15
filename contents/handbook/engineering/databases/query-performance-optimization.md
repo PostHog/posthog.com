@@ -97,15 +97,6 @@ LIMIT 10;
 
  3. SELECTs can cause IO: https://blog.okmeter.io/postgresql-exploring-how-select-queries-can-produce-disk-writes-f36c8bee6b6f
 
-#### Removing foreign key fields
-
-We don’t want to remove, as this is backwards incompatible. Do this as deprecation first
-Want to remove index straight away? Add `db_index=False`
-Rename e.g. `foreign_key_field` to `__deprecated_foreign_key_field`, add `db_column= foreign_key_field` such that attempts to reference from outside the model will require full qualification (we keep the field around such that Django doesn’t try to create deletion migrations)
-Wait for one release of field deprecation to have been in place.
-TODO: Somehow make select queries not request this field (i.e. to make it such
-that we can drop the column).
-Remove field completely in next release, add note that users should update through deprecation version such that running code is compatible
 
 #### Removing unused indices on foreign key fields
 
@@ -115,6 +106,18 @@ are Django foreign keys, it’s going to have created indices on `team_id` and
 `person_id` lookups, as mentioned on
 https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid
 having to write the other two indices by adding `db_index=False` 
+
+#### Removing foreign key fields
+
+We don’t want to remove immediatly as this is backwards incompatible. Do this as
+a deprecation first. Let's get the gains of not having an index and constraint
+first.
+
+Rename e.g. `foreign_key_field` to `__deprecated_foreign_key_field`, add `db_column= foreign_key_field` such that attempts to reference from outside the model will require full qualification (we keep the field around such that Django doesn’t try to create deletion migrations)
+Wait for one release of field deprecation to have been in place.
+TODO: Somehow make select queries not request this field (i.e. to make it such
+that we can drop the column).
+Remove field completely in next release, add note that users should update through deprecation version such that running code is compatible
 
 #### Finding and removing unused indices
 
@@ -133,6 +136,18 @@ ORDER BY pg_relation_size(s.indexrelid) DESC;
 
 If indices are unused, it should be safe to remove via removing `db_index=False`
 and running `./manage.py makemigration`
+
+This will geneerate a migration, however, if you look at the `./manage.py sqlmigrate`
+output it may not be dropping the index concurrently, so will be a blocking
+operation. To get around this we need to modify the migration:
+
+ 1. use
+    [`SeparateDatabaseAndState`](https://docs.djangoproject.com/en/3.2/ref/migration-operations/#separatedatabaseandstate)
+    to allow django to keep track of the state of
+    the model in the db, but let us modify how the index is created.
+ 2. use
+    [`RemoveIndexConcurrently`](https://docs.djangoproject.com/en/4.0/ref/contrib/postgres/operations/#django.contrib.postgres.operations.RemoveIndexConcurrently
+    ) to drop the index without blocking.
 
 #### Avoiding locking on related tables
 
