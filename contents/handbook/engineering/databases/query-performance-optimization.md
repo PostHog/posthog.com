@@ -86,7 +86,7 @@ Fixing a slow query is usually a 3 steps process:
 ### How-to reduce IO
 
  1. Indices require IO, we can get rid of some IO by removing unused indices
- 2. Can check IO with something like:
+ 2. Can check writes IO with something like:
 
 ```
 SELECT total_time, blk_write_time, calls, query
