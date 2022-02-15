@@ -627,3 +627,46 @@ If your plugin uses `exportEvents`, some metrics will be automatically provided 
 - `retry_errors`: The number of explicit errors of type `RetryError` thrown by the `exportEvents` function. These errors trigger retries to ensure the payload gets delivered.
 - `other_errors`: Unexpected errors thrown by the `exportEvents` function. Any error beyond a `RetryError` is considered unexpected
 - `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the plugin exhausts all the retries triggered by a `RetryError`
+
+
+## Testing
+
+In order to ensure plugins are stable and work as expected for all their users, we highly recommend writing tests for every plugin you build.
+
+### Adding testing capabilities to your plugin
+You will need to add jest and our plugin testing scaffold to your project in your `package.json` file:
+```json
+"jest": {
+    "testEnvironment": "node"
+},
+"scripts": {
+    "test": "jest ."
+},
+"devDependencies": {
+    "@posthog/plugin-scaffold": "0.10.0",
+    "jest": "^27.0.4"
+}
+```
+
+Create your test files e.g. `index.test.js` or `index.test.ts` for testing your `index.js` or `index.ts` file
+
+### Writing tests
+
+Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your plugin (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+
+### Using the plugin scaffold
+
+Since most PostHog plugins are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
+
+* **CreateEvent** - This will mock an event being created in PostHog e.g. ```createEvent({ event: "booking completed", properties: { amount: "20", currency: "USD" } })```
+* **CreateIdentify** - This will mock an identify event e.g. ```createIdentify()```
+
+More detail on other helper functions and how to use them can be found in our [hello world example](https://github.com/PostHog/posthog-hello-world-plugin/blob/main/index.test.js) and in the [utils library](https://github.com/PostHog/plugin-scaffold/blob/main/test/utils.js)
+
+These helper functions can be added to your test script using the following line:
+
+```js 
+const { createEvent, createIdentify} = require("@posthog/plugin-scaffold/test/utils");
+```
+
+For testing cron activities (e.g. run every minute), we recommend testing the fuctions that are called from this cron in your test - rather than trying to mock the cron event.
