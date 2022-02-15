@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/hosthog-banner.png
-featuredImageType: full
+featuredImageType: standard
 categories: ["Inside PostHog"]
 ---
 
