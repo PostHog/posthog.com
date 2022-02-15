@@ -2,17 +2,37 @@
   X-Frame-Options: SAMEORIGIN
 
 /brand/*
-  Cache-Control: public
-  Cache-Control: max-age=120
+  cache-control: public
+  cache-control: max-age=120
+
+/changelog/*
+  cache-control: public
+  cache-control: max-age=120
+
+/icons/*
+  cache-control: public
+  cache-control: max-age=120
 
 /images/*
-  Cache-Control: public
-  Cache-Control: max-age=120
+  cache-control: public
+  cache-control: max-age=120
 
-/wp-content/*
-  Cache-Control: public
-  Cache-Control: max-age=120
+/og-images/*
+  cache-control: public
+  cache-control: max-age=120
 
 /static/*
-  Cache-Control: public
-  Cache-Control: max-age=120
+  cache-control: public
+  cache-control: max-age=120
+
+/wp-content/*
+  cache-control: public
+  cache-control: max-age=120
+
+/*.js
+  cache-control: public
+  cache-control: max-age=120
+
+/*.css
+  cache-control: public
+  cache-control: max-age=120
