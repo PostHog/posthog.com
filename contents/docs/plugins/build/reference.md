@@ -669,4 +669,4 @@ These helper functions can be added to your test script using the following line
 const { createEvent, createIdentify} = require("@posthog/plugin-scaffold/test/utils");
 ```
 
-For testing cron activities (e.g. run every minute), we recommend testing the fuctions that are called from this cron in your test - rather than trying to mock the cron event.
+For testing cron activities (e.g. run every minute), we recommend testing the functions that are called from this cron in your test - rather than trying to mock the cron event.
