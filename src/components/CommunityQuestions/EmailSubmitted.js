@@ -23,7 +23,7 @@ export default function EmailSubmitted({ email }) {
                         <span>You're subscribed!</span>
                     </p>
                     <h6 className="mt-2 mb-3">
-                        Be sure to check us out on <a href="https://github.com/PostHog/posthog">Github.com</a>
+                        Be sure to check us out on <a href="https://github.com/PostHog/posthog">GitHub</a>
                     </h6>
                     <p className="m-0 flex justify-center items-centertext-white font-semibold">
                         <GitHubButton

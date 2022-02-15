@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["yakko-majuri"]
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
-categories: ["Engineering", "Product Updates"]
+categories: ["Engineering", "Product updates"]
 ---
 
 The plugin server has become an integral part of PostHog, as it is responsible for event ingestion. However, it isn’t called “ingestion server” because it was originally designed to run plugins. So, how are those going?

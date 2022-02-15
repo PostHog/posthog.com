@@ -17,6 +17,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
+    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const result = await graphql(`
         {
             allMdx(
@@ -158,6 +159,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 }
             }
             plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
+                nodes {
+                    id
+                    slug
+                }
+            }
+            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
                 nodes {
                     id
                     slug
@@ -413,6 +420,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             createPage({
                 path: slug,
                 component: PluginTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
+    })
+    result.data.hostHog.nodes.forEach((node) => {
+        const { id, slug } = node
+        if (slug) {
+            createPage({
+                path: slug,
+                component: HostHogTemplate,
                 context: {
                     id,
                 },

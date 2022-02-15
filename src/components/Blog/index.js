@@ -82,7 +82,6 @@ export const BlogFragment = graphql`
                 handle
                 name
                 role
-                image
                 link_type
                 link_url
             }

@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/blog-generic-5.png
 featuredImageType: full
-categories: ["Guides", "Product Analytics"]
+categories: ["Guides", "Product analytics"]
 ---
 
 Customer retention metrics are some of the most important to understand and the most vital to the long term success of any product. In this article we’ll explain what customer retention is, why it’s important and some examples of tactics you can use to improve customer retention and reduce churn in your user base. 
