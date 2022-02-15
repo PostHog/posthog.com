@@ -109,7 +109,7 @@ having to write the other two indices by adding `db_index=False`
 
 #### Removing foreign key fields
 
-We don’t want to remove immediatly as this is backwards incompatible. Do this as
+We don’t want to remove immediately as this is backwards incompatible. Do this as
 a deprecation first. Let's get the gains of not having an index and constraint
 first.
 
