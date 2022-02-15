@@ -1,6 +1,6 @@
 ---
 date: 2022-02-15
-title: HostHogs - Free drinks, free pizza and frequently asked questions
+title: HostHogs: Free drinks, free pizza and frequently asked questions
 rootPage: /blog
 sidebar: Blog
 showTitle: true
