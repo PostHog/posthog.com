@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/hosthog-banner.png
 featuredImageType: full
-categories: ["Event", "HostHog", "Community"]
+categories: ["Inside PostHog"]
 ---
 
 As you may have heard, we’ll soon host our first ever meet-up for anyone who uses or is interested in finding out more about PostHog. It’ll take place in London, on February 24th — [we’d love for you to join us](https://www.eventbrite.com/e/hosthog-london-2022-tickets-259372428917). 
