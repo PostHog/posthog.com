@@ -94,7 +94,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            blogPosts: allMdx(filter: { fields: { slug: { regex: "/^/blog/" } } }) {
+            blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
                 nodes {
                     id
                     fields {
