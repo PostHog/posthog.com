@@ -104,7 +104,7 @@ Say you have an index on `team_id`, `person_id`. If `team_id` and `person_id`
 are Django foreign keys, it’s going to have created indices on `team_id` and
 `person_id`. We can still use the composite index for both `team_id` and
 `person_id` lookups, as mentioned on
-https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid
+https://www.postgresql.org/docs/11/indexes-multicolumn.html , thus we can avoid
 having to write the other two indices by adding `db_index=False` 
 
 #### Removing foreign key fields
