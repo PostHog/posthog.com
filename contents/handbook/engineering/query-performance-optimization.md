@@ -137,7 +137,7 @@ ORDER BY pg_relation_size(s.indexrelid) DESC;
 If indices are unused, it should be safe to remove via removing `db_index=False`
 and running `./manage.py makemigration`
 
-This will geneerate a migration, however, if you look at the `./manage.py sqlmigrate`
+This will generate a migration, however, if you look at the `./manage.py sqlmigrate`
 output it may not be dropping the index concurrently, so will be a blocking
 operation. To get around this we need to modify the migration:
 
