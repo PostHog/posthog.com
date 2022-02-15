@@ -13,7 +13,7 @@ categories: ["Guides", "Product analytics", "Open source"]
 
 So, you’ve decided to build an open-source product.
 
-While your choice is highly commendable, the resounding applause from devs on GitHub and HackerNews won’t pay the bills. At some point, you’ll need to monetize your product to sustain its development (and your team) in the long run.
+While your choice is highly commendable, the resounding applause from devs on GitHub and Hacker News won’t pay the bills. At some point, you’ll need to monetize your product to sustain its development (and your team) in the long run.
 
 Just one thing: **you need to build a community.**
 
