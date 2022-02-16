@@ -35,7 +35,7 @@ export default function StarUsBanner() {
                 >
                     <div className="flex items-center space-x-4 bg-red py-[12px] px-[25px] text-white rounded-full ">
                         <p className="m-0 text-base font-semibold flex items-center space-x-4">
-                            {posthog?.isFeatureEnabled('london-banner') ? (
+                            {posthog && posthog.isFeatureEnabled && posthog.isFeatureEnabled('london-banner') ? (
                                 <Link to="/hosthog/london" className="text-white hover:text-white">
                                     Come say &#128075; at our London meet-up!
                                 </Link>
