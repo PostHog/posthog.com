@@ -1,0 +1,99 @@
+---
+date: 2022-02-22
+title: A simple guide to personal data and PII
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/google-analytics-gdpr.png
+featuredImageType: full
+author: ["andy-vandervell"]
+categories: ["Privacy", "Guides"]
+---
+
+Privacy is a big deal. Consumers are more aware of it than ever and legislators are increasingly keen to flex their muscles on their behalf. Be it [GDPR](link to docs), [HIPAA](link to docs), [CCPA](link to docs) or any of the similar international regulations around the world, software engineers and product managers need to understand how to deal with personal data. That starts with knowing how it's defined.
+
+## What is PII?
+
+Personally Identifiable Information (PII) is a US legal term - it's not used in the EU's GDPR, which prefers the broader term 'personal data'. That said, if something is considered PII in the US, it's probably considered personal data under the GDPR.
+
+There is no single legal document in the US that defines PII. Instead, specific federal and state laws define what is considered PII in any given context. Helpfully, though, the National Institute of Standards and Technology (NIST), has a definition of PII that is [widely accepted](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-122.pdf):
+
+>_"(1) any information that can be used to distinguish or trace an individual's identity, such as name, social security number, date and place of birth, mother's maiden name, or biometric records"_
+
+>_"(2) any other information that is linked or linkable to an individual, such as medical, educational, financial, and employment information."_
+
+### Examples of PII
+
+Again, we're leaning on the NIST here, which provides numerous examples of PII:
+
+- **Names**, including an individual's full name, maiden name, mother's maiden name, or known aliases
+
+- **Personal identification numbers**, such as such a social security number (SSN), passport number, driver‘s license, taxpayer identification number, patient identification number, and financial accounts or credit card numbers
+
+- **Digital identifiers**, which includes but is not limited to static IP addresses, MAC addresses, and unique device identifiers (UDI)
+
+- **Addresses and contact information**, including home addresses, email addresses, and any type of telephone number
+
+- **Personal characteristics**, such as photos of an individual's face or other distinguishing characteristics (e.g. a tattoo), x-rays, fingerprints, and biometric data (e.g. retina scans, voice signature, facial geometry)
+
+- **Any other linked of linkable information**, including date of birth, place of birth, race, religion, weight, employment information, medical data, education information, financial information, and most kinds of geographical identifier.
+
+### What's the difference between PHI and PII?
+
+Protected Health Information (PHI) is a type of PII as defined by the US HIPAA law and many of the items listed above are also examples of PHI.
+
+PHI that's connected to individual identifiers, such as name, address, etc.,  must be treated with extreme care under HIPAA. Penalties for breaches include fines and even jail time on extreme cases.
+
+If HIPAA compliance is a concern for your business, read our guide to the [best HIPAA-compliant analytics tools](blog/best-hipaa-compliant-analytics-tools). And, in case you were wondering, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant).
+
+## What is personal data?
+
+Under the GPDR, 'personal data' is defined as any information which:
+
+1. Identifies a 'data subject' directly
+2. Can be used to identify a 'data subject' when combined with other information.
+
+This second point is what makes the GDPR powerful, or troublesome depending on your point of view. The GDPR anticipates, and seeks to prevent, organizations from combining data in order to circumvent its provisions.
+
+Also, note the use of "data subject" here. It's deliberate. You don't need to know an individual's name for them to be identified. Any kind of digital profile counts, even if the profile doesn't include a name.
+
+Of course, any time you're collecting personal data, consent is required: hence cookie consent notices on websites.
+
+Recent legal rulings have cast doubt on the [legality of using Google Analytics](https://isgoogleanalyticsillegal.com/). Our [guide to GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) offers some alternatives if it's a concern for your business.
+
+### Examples of personal data under GDPR
+
+Names, identification numbers, location data and plenty more besides qualifies as personal data under the GDPR, but there is no official list of what the regulation considers personal data. Common sense prevails, though, and certainly everything in our list of PII examples applies to the GDPR.
+
+The GDPR does, however, define 'special categories of personal data' that are subject to additional protections. These include:
+
+- race
+- ethnic origin
+- political opinions
+- religious or philosophical beliefs
+- trade union membership
+- genetic data
+- biometric data (where this is used for identification purposes)
+- health data
+- sex life
+- sexual orientation.
+
+Collecting this data requires "explicit consent" and must be justifiable under relevant local laws and under the GDPR. The UK Information Commissioner's Office (ICO) has a [useful guide summarizing the requirements](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/special-category-data/).
+
+### What is non-personal data?
+
+It's also useful to understand what isn't considered personal data under the GDPR. Here are a few examples:
+
+- Personal data that has been successfully anonymized
+- Generalized data, such age ranges
+- Partially or fully-masked IP addresses
+- Data not originating from an identifiable individual
+
+The European Commission published [guidance on the free flow of non-personal data](https://ec.europa.eu/commission/presscorner/detail/en/MEMO_19_2750) in relation to the GDPR in May, 2019. It stresses that mixed data sets personal and non-personal data **doesn't** have to be processed separately, but when combined the GDPR fully applies even when "personal data represents only a small part of the dataset".
+
+## PostHog and privacy compliance
+
+PostHog is an [open-source product analytics platform](/best-open-source-analytics-tools) you can self-host, so data never has to leave your infrastructure. This is ideal for businesses who handle sensitive data but don't want to sacrifice advanced features like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Funnel Analysis](/product/funnels), and [Heatmaps](/product/heatmaps) - all of which is included in PostHog.
+
+Read our [privacy compliance documentation](LINK HERE) for more information on how to deploy PostHog in a privacy-compliant manner.
