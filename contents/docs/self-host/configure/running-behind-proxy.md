@@ -56,6 +56,7 @@ You need to make sure your proxy server is sending `X-Forwarded-For` headers. Fo
         proxy_set_header Host $http_host;
         proxy_redirect off;
         proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port 443;
         proxy_pass http://127.0.0.1:8000;
     }
 ```
