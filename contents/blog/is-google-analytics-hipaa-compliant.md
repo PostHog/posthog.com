@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ..images/blog/hipaa-compliant-product-analytics.png
+featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Privacy", "Guides"]
