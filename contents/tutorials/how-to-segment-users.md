@@ -4,6 +4,9 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/how-to-segment-users-banner.png
 featuredTutorial: false
+author: ["joe-martin"]
+topics: ['filters']
+date: 2022-02-11
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕
