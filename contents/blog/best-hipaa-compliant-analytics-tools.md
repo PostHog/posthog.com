@@ -25,7 +25,7 @@ Some services enable HIPAA compliance through the creation of a [Business Associ
 
 It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license than they may otherwise require. Additionally, not all organizations may offer BAAs at all. 
 
-> If your business operates inside the EU, it’s worth checking our article about [GDPR compliant analytics](/blog/best-gdpr-compliant-analytics-tools) to ensure you comply with both sets of regulations. 
+> If your business operates inside the EU, it’s worth checking out our article about [GDPR compliant analytics](/blog/best-gdpr-compliant-analytics-tools) to ensure you comply with both sets of regulations. 
 
 ## 1. [PostHog](/product)
 
