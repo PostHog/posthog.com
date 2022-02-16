@@ -10,9 +10,9 @@ featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: standard
 categories: ["Guides", "Privacy", "Product analytics"]
 ---
-If you have users in Europe it's important to understand the implications of handling their data privately and securely. PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it one of the most GDPR-compliant product analytics platforms available. 
+If you have users in Europe it's, important to understand the implications of handling their data privately and securely. PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it one of the most GDPR-compliant product analytics platforms available. 
 
-In this article I'll explain what GDPR is, what data must be protected and what your options are for GDPR-compliant analytics - or you can [get started with PostHog today](https://posthog.com/pricing). 
+This guide explains what GDPR is, what data must be protected and what your options are for GDPR-compliant analytics.
 
 ## What is GDPR?
 
@@ -26,33 +26,33 @@ The consequences of violating GDPR are severe. It can lead to fines reaching int
 
 Personal data is protected under GDPR, this means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
 
-In short, any information which is tied to a specific individual can be considered Personal Data, from their social security number or license plate number to photos, emails, URLs, IP addresses or even Pseudonyms.
+In short, any information which is tied to a specific individual can be considered personal data, from their social security number or license plate number to photos, emails, URLs, IP addresses or even pseudonyms.
 
 ## What is the impact of GDPR on product analytics?
 
 The number one rule is don’t collect, store or use any personal data without a good reason for it, such as:
-* The person gave you specific, unambiguous consent to process the data. (e.g. They’ve opted in to your marketing email list.)
-* Processing is necessary to enter into a contract to someone. (e.g. You need to do a background check.)
-* You need to process it to comply with a legal obligation of yours. (e.g. You receive an order from the court in your jurisdiction.)
-* You need to process the data to save somebody’s life. (e.g. Well, you’ll probably know when this one applies.)
-* Processing is necessary to perform a task in the public interest or to carry out some official function. (e.g. You’re a private garbage collection company.)
-* You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a child’s data
+* The person gave you specific, unambiguous consent to process the data (e.g. they’ve opted in to your marketing email list)
+* Processing is necessary to enter into a contract to someone (e.g. you need to do a background check)
+* You need to process it to comply with a legal obligation of yours (e.g. you receive an order from the court in your jurisdiction)
+* You need to process the data to save somebody’s life (e.g. well, you’ll probably know when this one applies)
+* Processing is necessary to perform a task in the public interest or to carry out some official function (e.g. you’re a private garbage collection company)
+* You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a minor's data
 
-**Unambiguous Consent**
+### You must acquire "Unambiguous Consent"
 
 There are specific rules about what consent means, hiding it away on page 73 or of your terms and conditions is not good enough:
 
-* Consent must be “freely given, specific, informed and unambiguous.”
-* Requests for consent must be “clearly distinguishable from the other matters” and presented in “clear and plain language.”
-* Data subjects can withdraw previously given consent whenever they want, and you have to honor their decision.
-* Children under 13 can only give consent with permission from their parent.
-* You need to keep documentary evidence of consent.
+* Consent must be “freely given, specific, informed and unambiguous”
+* Requests for consent must be “clearly distinguishable from the other matters” and presented in “clear and plain language”
+* Data subjects can withdraw previously given consent whenever they want, and you have to honor their decision
+* Children under 13 can only give consent with permission from their parent
+* You need to keep documentary evidence of consent
 
 So if you're tracking users in your product using PostHog to improve your product, you should explicitly ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
 
 If you use PostHog with cookies on your website (for logged out users), you should also use a cookie banner to enable people to give and withdraw their consent for using cookies.
 
-**Security**
+### Data must be handled securely
 
 You’re required to handle data securely by implementing “appropriate technical and organizational measures.”
 
@@ -62,7 +62,7 @@ If you have a data breach, you have 72 hours to tell the data subjects or face p
 
 ## How is GDPR compliance different with PostHog?
 
-PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because it enables you to self-host on your own infrastructure and maintain full control of the data, this means you can decide on the technical and organizational security measures that are most appropriate for your organization. It also means that you can store your data within the EU, encouraging consent from EU citizens and making it easy to comply with any future data sovereignty requirements.
+PostHog is different from most other product analytics tools such as Mixpanel or Amplitude because you can you self-host it on your own infrastructure. You maintain full control of the data and you can decide on the technical and organizational security measures that are most appropriate for your organization. It also means that you can store your data within the EU, encouraging consent from EU citizens and making it easy to comply with any future data sovereignty requirements.
 
 ## How to set PostHog up for GDPR compliant analytics
 
@@ -78,6 +78,6 @@ Deploying PostHog onto your own infrastructure is very straightforward. You can 
 
 When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
 
-We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain Personal Data, it may be possible for malicious users to infer Personal Data unless it is evaluated thoroughly via expert determination.
+We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain personal data, it may be possible for malicious users to infer personal data unless it is evaluated thoroughly via expert determination.
 
-We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls in place when sharing Personal Data outside of your self-hosted PostHog instance.
+We also strongly advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
