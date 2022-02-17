@@ -52,6 +52,15 @@ It's also why we've created this continually updated and crowdsourced list of co
 
 **Why?** Quoting [MentionMe Software Engineer Lleo Harress](https://posthog.com/customers/mention-me): “Retrospective data and event autocapture have been especially useful. We’ve had occasions where we’ve speculated something but haven’t been capturing the data to prove it, so we define an event and then see the retroactive data for it immediately. Previously we’d have to wait months to get usable data like that in Google Analytics or other tools.”
 
+### Figure out what kinds of users are successful more often than not
+
+**Submitted by:** [Neil Kakkar](https://twitter.com/neilkakkar)
+
+**How?** [Correlation Analysis](https://posthog.com/docs/user-guides/correlation) tells you users with which properties convert better than others
+
+**Why?** The success of a product is limited by how well you understand your users. Maybe there's an industry that really loves your product, but you don't event know about it? Correlation analysis helps surface insights like these, which can change product strategy completely.
+
+
 ### [Insert your idea here]
 **Submitted by:** [your name](link to Github or Twitter profile)
 
