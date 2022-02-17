@@ -48,9 +48,9 @@ export default function AskAQuestion() {
                                 })
                         }}
                     >
-                        {({ isSubmitting, isValid, values }) => {
+                        {({ isSubmitting, isValid, values, setFieldValue }) => {
                             return !timestamp ? (
-                                <AskQuestion loading={isSubmitting} isValid={isValid} />
+                                <AskQuestion setFieldValue={setFieldValue} loading={isSubmitting} isValid={isValid} />
                             ) : (
                                 <QuestionSubmitted
                                     loading={isSubmitting}
