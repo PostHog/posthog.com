@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog is the product analytics suite you can self-host. With our open source platform, customer data never has to leave your infrastructure.
+PostHog is the all-in-one product analytics suite you can self-host. With our open source platform, customer data never has to leave your infrastructure.
 
 We believe the era of third-party product analytics software will eventually come to end, and that there should be an alternative to sending your customers' personal information and usage data to third parties. PostHog gives you full control over all your user data, while enabling you to do powerful analytics.
 
