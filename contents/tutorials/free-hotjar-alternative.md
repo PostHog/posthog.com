@@ -2,7 +2,7 @@
 title: How to replace Hotjar for free with PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/internal-users-filter.png
+featuredImage: ../images/tutorials/banners/free-hotjar-alternative-banner.png
 featuredTutorial: true
 author: ["joe-martin"]
 topics: ['session recording']
