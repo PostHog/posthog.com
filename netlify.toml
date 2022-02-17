@@ -1188,3 +1188,7 @@
 [[redirects]]
     from = "/docs/privacy/overview"
     to = "/docs/privacy"
+
+[[redirects]]
+    from = "/docs/integrate/gdpr"
+    to = "/docs/privacy/gdpr-compliance"

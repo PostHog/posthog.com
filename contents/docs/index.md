@@ -55,7 +55,7 @@ You can use our [API](/docs/api/overview) to get data in and out of PostHog, mak
 
 ### Tutorials
 
-Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs. 
+Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs.
 
 **Doing analytics with PostHog**
 
@@ -96,3 +96,7 @@ Check out our [contributing docs](/docs/contributing) for information on how to 
 ### Platform structure
 
 [Platform structure](/docs/user-guides/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
+
+### Privacy and PostHog
+
+Our [privacy compliance docs](/docs/privacy) detail how to deploy PostHog in accordance with various privacy frameworks, including [the GDPR](/docs/privacy/gdpr-compliance), [HIPAA](docs/privacy/hipaa-compliance) and the [CCPA](/docs/privacy/ccpa-compliance). 

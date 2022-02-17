@@ -690,10 +690,6 @@
                     "url": "/docs/integrate/badge"
                 },
                 {
-                    "name": "GDPR guidance",
-                    "url": "/docs/integrate/gdpr"
-                },
-                {
                     "name": "Client libraries",
                     "url": "",
                     "children": [
