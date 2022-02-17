@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { isKeyHotkey } from 'is-hotkey'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { createEditor, Editor, Element, Path, Range, Transforms } from 'slate'
 import { withHistory } from 'slate-history'
 import { Editable, ReactEditor, Slate, useFocused, useSelected, useSlate, withReact } from 'slate-react'
@@ -66,7 +66,7 @@ const icons = {
 
 const createLinkNode = (href, text) => ({
     type: 'link',
-    href,
+    link: href,
     children: [{ text }],
 })
 
@@ -182,7 +182,7 @@ const Link = ({ attributes, children, element }) => {
             {selected && focused && (
                 <div className="flex items-center rounded-sm shadow-lg overflow-hidden absolute bg-white z-10">
                     <span contentEditable={false} className="p-2">
-                        {element.href}
+                        {element.link}
                     </span>
                 </div>
             )}
@@ -296,13 +296,16 @@ const RichText = ({ setFieldValue }) => {
         }
     }
 
+    useEffect(() => {
+        setFieldValue('question', value)
+    }, [value])
+
     return (
         <Slate editor={editor} value={value} onChange={setValue}>
             <div className="mt-2 shadow-lg bg-white rounded-md">
                 <div className="flex space-x-1 border-b border-dashed border-gray-accent-light py-2 px-4 z-10 relative">
                     <MarkButton format="bold" icon="b" />
                     <MarkButton format="italic" icon="i" />
-                    <MarkButton format="underline" icon="u" />
                     <MarkButton format="code" icon="code" />
                     <LinkButton format="link" icon="link" />
                 </div>

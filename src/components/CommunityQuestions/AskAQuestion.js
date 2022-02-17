@@ -2,10 +2,37 @@ import { useLocation } from '@reach/router'
 import { Formik } from 'formik'
 import { useValues } from 'kea'
 import React, { useState } from 'react'
+import { Text } from 'slate'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import AskQuestion from './AskQuestion'
 import Avatar from './Avatar'
 import QuestionSubmitted from './QuestionSubmitted'
+
+const slackSerialize = (node) => {
+    if (Text.isText(node)) {
+        let string = node.text
+        if (node.bold) {
+            string = `*${string}*`
+        }
+        if (node.code) {
+            string = `\`${string}\``
+        }
+        if (node.italic) {
+            string = `_${string}_`
+        }
+        return string
+    }
+
+    const children = node.children.map((n) => slackSerialize(n)).join('')
+    switch (node.type) {
+        case 'code':
+            return `\`${children}\``
+        case 'link':
+            return `<${node.link}|${children}>`
+        default:
+            return children
+    }
+}
 
 export default function AskAQuestion() {
     const location = useLocation()
@@ -37,7 +64,12 @@ export default function AskAQuestion() {
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             if (values['mary-chain']) return
                             setSubmitting(true)
-                            const body = JSON.stringify({ ...values, slug: location.pathname, timestamp })
+                            const body = JSON.stringify({
+                                ...values,
+                                question: values.question.map((n) => slackSerialize(n)).join('\n'),
+                                slug: location.pathname,
+                                timestamp,
+                            })
                             fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
                                 .then((res) => res.json())
                                 .then((data) => {
@@ -48,9 +80,14 @@ export default function AskAQuestion() {
                                 })
                         }}
                     >
-                        {({ isSubmitting, isValid, values, setFieldValue }) => {
+                        {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
                             return !timestamp ? (
-                                <AskQuestion setFieldValue={setFieldValue} loading={isSubmitting} isValid={isValid} />
+                                <AskQuestion
+                                    submitForm={submitForm}
+                                    setFieldValue={setFieldValue}
+                                    loading={isSubmitting}
+                                    isValid={isValid}
+                                />
                             ) : (
                                 <QuestionSubmitted
                                     loading={isSubmitting}
