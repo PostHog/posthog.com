@@ -1186,5 +1186,5 @@
 
 # Added: 2022-02-17
 [[redirects]]
-    from = "/docs/privacy/privacy-compliance"
+    from = "/docs/privacy/overview"
     to = "/docs/privacy"
