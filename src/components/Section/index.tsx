@@ -33,6 +33,7 @@ export const Section = ({
     className = '',
     size = 'full',
     divider = true,
+    style,
 }: {
     children: JSX.Element[]
     cols: number
@@ -41,11 +42,12 @@ export const Section = ({
     className?: string
     size?: 'full' | 'sm' | 'md' | 'lg'
     divider?: boolean
+    style?: any
 }): JSX.Element => {
     const slugger = new GithubSlugger()
     const id = slugger.slug(title)
     return (
-        <section className={`my-10 sm:mt-12 sm:mb-20 ${className}`}>
+        <section style={style} className={`my-10 sm:mt-12 sm:mb-20 ${className}`}>
             {title && (
                 <Heading id={id} hideCopy as="h2" className={`text-center mb-16 ${headingSize[titleSize]}`}>
                     {title}

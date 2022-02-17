@@ -10,7 +10,7 @@ export default function Heatmaps() {
             <div className="md:w-2/5">
                 <h3>Heatmaps</h3>
                 <p>
-                    See what’s clicking with users. Heatmaps show what’s capturing users’ attention by overlaying
+                    See what’s clicking with users. Heatmaps show what captures users’ attention by overlaying
                     click-counts in your product.
                 </p>
                 <CallToAction

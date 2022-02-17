@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries"]
+author: ["james-hawkins"]
+categories: ["CEO diaries", "Inside PostHog"]
 ---
 
 [YC](https://ycombinator.com) (a startup accelerator we are taking part in) ask you to move to the Bay Area for the whole program. This gives you “a socially acceptable excuse to look after yourselves and to work, but little else”. Little did we know how important that ability to focus would be later on. Some of the literature says many people find YC the “the most productive period of their lives”, which is something we have found.

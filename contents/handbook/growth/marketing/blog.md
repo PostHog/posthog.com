@@ -17,11 +17,11 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
 - 80% SEO-optimized content, written by the Marketing team. The purpose of these is to build our domain authority and generate a sustained improvement in posthog.com's keyword rankings. 
 - 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News. 
 
-Joe is currently the main person responsible for our content output, but we are actively hiring a [Technical Content Marketer](https://apply.workable.com/posthog/j/B547BBDE8C/) to lead this area. 
+Andy is currently the main person responsible for our content output.
 
 We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). Further details about our specific content SEO plans can be found on the [Marketing project](https://github.com/orgs/PostHog/projects/8) in GitHub - we don't make the details of these publicly available as it is information that could be beneficial to our competitors. 
 
-If you have any good blog post ideas join our [#ideas-for-blog-post Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y)!
+If you have any good blog post ideas join our [#ideas-for-blog-post team Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y). Community members can suggest them to Andy Vandervell directly or via [the User slack channel](/slack)!
 
 ## Content categories
 
@@ -46,7 +46,7 @@ Our content production workflow is as follows:
 * **Write the blog post:** We write up a concise blog post about the discussion or tutorial (with the help of the transcript, if available). This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly. If based on a video a 60-minute interview usually yields a ~1,500-word blog post.
 * **Get feedback:** Once written, if the blog post is to be published on the PostHog blog, push it to GitHub and create a Pull Request for feedback. See [Publishing](#publishing) for more information. If the blog post is going to be published on an external site, use Google Docs to get feedback.
 * **Artwork:** We put an emphasis on the visual quality of the content we ship. If you're writing a blog post, you'll need an image to accompany it. If you're creating a video, you'll need a poster image (the still image that displays before you click play). Add the [Artwork project board](https://github.com/orgs/PostHog/projects/14) in your issue or PR at least several days in advance of when you'll need it. [Learn more in the Publishing section below.](#publishing)
-  * **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
+  * **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on Hacker News, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 * **Extract the audio from the edited video (optional):** This goes into the podcast.
 * **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
 
@@ -61,8 +61,9 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
-- Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
-- Assign the post a category using `categories` in the frontmatter section. The available categories are **General**, **Company & culture**, **Engineering**, **Release notes**, **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
+- Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
+- Add a keywords field to the frontmatter. Keywords should be added as an array, not a string. This enables [our internal linker](https://github.com/PostHog/internallinker) to automatically link internal pages with similar keywords.
+- Assign the post categories (you can use more than one) using `categories` in the frontmatter section. The available categories are **Inside PostHog**, **Product updates**, **Engineering**, **Product analytics**, **Guides**, **Open source**, **Privacy**, **Startups** and **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
 
   ```
   categories:
@@ -77,6 +78,24 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - Add a meta description using `description` in the frontmatter section (optional)
 - Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. (This gives Team Design a heads up on how much time we have to produce a post image.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
+
+Fully completed and correct frontmatter should look like this: 
+
+ ```
+ ---
+date: 2021-06-10
+title: PostHog raises $15 million Series B for open source product analytics
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+keywords: ["fundraise", "fundraising"]
+featuredImage: ../images/blog/series-b/series-b-baby.png
+featuredImageType: full
+author: ["joe-martin"]
+categories: ["Product analytics", "Guides"]
+---
+ ```
 
 ### Distribution
 

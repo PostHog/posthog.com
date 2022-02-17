@@ -1,12 +1,35 @@
-module.exports = exports.createSchemaCustomization = async ({ actions }) => {
+module.exports = exports.createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
       type Mdx implements Node {
         contributors: [Contributors]
         frontmatter: Frontmatter
+        avatar: File @link(from: "avatar___NODE")
+        teamMember: Mdx
+        name: String
+        childMdx: Mdx
       }
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")
+      }
+      type Replies {
+        name: String
+        rawBody: String
+        imageURL: String
+      }
+      type Question implements Node {
+        rawBody: String
+        name: String
+        slug: [String]
+        imageURL: String
+        replies: [Replies]
+        avatar: File @link(from: "avatar___NODE")
+        childrenReply: Mdx
+      }
+      type Reply implements Node {
+        avatar: File @link(from: "avatar___NODE")
+        name: String
+        fullName: String
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")
@@ -63,5 +86,23 @@ module.exports = exports.createSchemaCustomization = async ({ actions }) => {
         logo: File @link(from: "logo___NODE")
         slug: String
       }
+      type NavsJsonMainSubItemsSectionsItems implements Node {
+        icon: String,
+        title: String,
+        url: String,
+        badge: String
+      }
     `)
+    createTypes([
+        schema.buildObjectType({
+            name: 'Mdx',
+            interfaces: ['Node'],
+            fields: {
+                isFuture: {
+                    type: 'Boolean!',
+                    resolve: (source) => new Date(source.frontmatter.date) > new Date(),
+                },
+            },
+        }),
+    ])
 }

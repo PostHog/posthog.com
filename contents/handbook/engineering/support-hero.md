@@ -1,5 +1,5 @@
 ---
-title: Support Hero and Rotations
+title: Support Hero and rotations
 sidebar: Handbook
 showTitle: true
 ---
@@ -57,9 +57,30 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 We tag customers in [Papercups](#papercups) according to these categories so you can easily filter them - you can view the tags in the right hand pane in the [Papercups](#papercups) app:
 
-<img width="219" alt="Screenshot 2021-11-05 at 15 51 02" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
+<img width="219" alt="" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
 
 At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
+
+## Categorizing requests
+
+It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
+
+When you initially respond to an issue add a "conversation tag" with the following categories:
+* User experience _(confusing/unclear UX)_.
+* Performance
+* Docs confusion _either missing or confusing_.
+* Data integrity
+* Deployments/Setup
+* Deployments/Upgrading
+* Deployments/Maintenance
+* Non-self-serve _for requests that need to be processed manually (e.g. removing events)_.
+* Billing
+* Feature request
+* Bug _functionality bugs, something is broken_.
+
+If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
+
+If a ticket doesn't fit a category correctly, we might need to update our tags, open a PR to edit this page.
 
 ### Escalating issues
 
@@ -72,32 +93,23 @@ You should always try to figure out the issues customers are having by yourself 
     - Do this by going to https://app.posthog.com/admin/posthog/user/, finding the relevant user and clicking 'log in as them'
     - To go back to your old user, just log out
     - If they have asked for help it is safe to assume they've given permission for you to log in as them.
+    - You can also check to see sentry errors tied to the user via the `user.username` parameter for e.g. [for test@posthog.com](https://sentry.io/organizations/posthog2/issues/?project=1899813&query=is%3Aunresolved+user.username%3Atest%40posthog.com&statsPeriod=14d)
 - When trying to debug an issue with a customer and it's not immediately obvious, it's usually much faster to do a Zoom session. You also tend to get other useful product feedback.
 - When dealing with slowness, ask users to send a screenshot of their "System Status" page (under settings)
   - If they have a lot of volume and they're still on Postgres they should probably upgrade to Clickhouse
 - Sometimes questions will have been asked earlier in the User's Slack so it's worth searching through that if you're not sure.
 
-#### Debugging helm charts
+#### Debugging deployments
 
-Issues around deployments can be tricky to solve. It's useful to ask for context around:
-1. What is their `values.yml` file
-2. What guide they were following
-3. What is the output of `kubectl get pods -A`
-4. If any pod is not healthy, what is the output of `kubectl logs -n posthog <podname>`
-5. Helm chart version
+See the handbook page [Deployments Support](/handbook/engineering/deployments-support) and user-facing [Deployments Troubleshooting](/docs/self-host/deploy/troubleshooting) page.
 
+#### Ingestion issues
 
-## Secondary on-call
+If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
 
-Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
-
-### Rotation
-
-- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
-
-PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
+1. Check if the plugin server is alive and healthy (suggest a restart if not - this is safe)
+2. Ask if they have Sentry set up and see any errors
+3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 
 ### Papercups
 
@@ -134,8 +146,21 @@ Here's a q quick overview of Papercups' main features:
 
 Papercups is an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.
 
-##### How to deal with spam, marketing, partnership proposals or anything like that
+##### How to deal with spam, marketing, partnership proposals, etc.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Papercups). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.
+
+
+## Secondary on-call
+
+Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
+
+### Rotation
+
+- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+
+PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.

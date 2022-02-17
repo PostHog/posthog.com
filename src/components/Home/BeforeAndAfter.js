@@ -1,12 +1,12 @@
-import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
+import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderHandle } from 'react-compare-slider'
-import AnimateIntoView from '../AnimateIntoView'
-import Logo from '../Logo'
-import CodeBlock from './CodeBlock'
-import { section, gradientWrapper } from './classes'
 import factoBlurb from '../../images/facto-blurb.svg'
 import outlinedChart from '../../images/outlined-chart.svg'
+import AnimateIntoView from '../AnimateIntoView'
+import Logo from '../Logo'
+import { gradientWrapper, section } from './classes'
+import CodeBlock from './CodeBlock'
 
 const exampleCode = `SELECT entrance_period_start,
        reached_from_step_count,
@@ -35,10 +35,10 @@ export default function BeforeAndAfter() {
             <div className={section('bg-primary rounded-lg p-4 pb-0 md:pt-16 lg:pb-0 lg:p-12 lg:pt-32')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
                     <div className="relative">
-                        <AnimateIntoView className="absolute -right-16">
+                        <AnimateIntoView className="absolute left-20">
                             <img src={factoBlurb} />
                         </AnimateIntoView>
-                        <StaticImage className="max-w-[200px] md:max-w-full" src="../../images/facto-home.png" />
+                        <StaticImage className="max-w-[200px] md:max-w-[300px]" src="../../images/facto-home.png" />
                     </div>
                     <div>
                         <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none xl:text-6xl">
@@ -50,28 +50,41 @@ export default function BeforeAndAfter() {
                         </h3>
                     </div>
                 </div>
-                <div className="grid grid-cols-2 text-center dark mb-4 md:mb-8 mt-12 items-center">
-                    <h4 className="text-white text-xs sm:text-base md:text-xl m-0">Before PostHog</h4>
-                    <h4 className="text-white flex items-center space-x-1 sm:space-x-4 justify-center text-xs sm:text-base md:text-xl m-0">
-                        <span>With</span>{' '}
-                        <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" color="white" noText />{' '}
-                        <span>PostHog</span>
-                    </h4>
-                </div>
+
                 <ReactCompareSlider
+                    className="dark mt-12"
                     handle={
                         <ReactCompareSliderHandle
+                            style={{
+                                height: 'calc(100% - 67px)',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                            }}
                             buttonStyle={{ background: 'black', backdropFilter: 'none', width: 36, height: 36 }}
                         />
                     }
                     itemOne={
-                        <div className={`w-full ${gradientWrapper}`}>
-                            <CodeBlock code={exampleCode} language="sql" />
+                        <div className="bg-primary">
+                            <h4 className="text-white text-xs sm:text-base md:text-xl m-0 text-center w-1/2 h-[67px] flex items-center md:items-start justify-center">
+                                Before PostHog
+                            </h4>
+                            <div className={`w-full text-xs md:text-base ${gradientWrapper}`}>
+                                <CodeBlock code={exampleCode} language="sql" />
+                            </div>
                         </div>
                     }
                     itemTwo={
-                        <div className="w-full">
-                            <img width={1023} height={414} className="float-right" src={outlinedChart} />
+                        <div className="bg-primary">
+                            <h4 className="text-white flex space-x-1 sm:space-x-4 justify-center text-xs sm:text-base md:text-xl my-0 w-1/2 ml-auto bg-primary h-[67px] items-center md:items-start">
+                                <span>With</span>{' '}
+                                <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" color="white" noText />{' '}
+                                <span>PostHog</span>
+                            </h4>
+                            <div className="w-full">
+                                <img width={1023} height={414} className="float-right" src={outlinedChart} />
+                            </div>
                         </div>
                     }
                 />

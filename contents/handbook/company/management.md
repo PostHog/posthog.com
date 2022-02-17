@@ -6,7 +6,15 @@ showTitle: true
 
 As we grow, we'll increase the number of managers at PostHog. Here's what a manager at PostHog looks like.
 
-## Defining the role of manager
+## Team leads vs managers
+
+You'll sometimes hear us use the term "Team Lead". A team lead is the leader of a small team. Sometimes they also manage the individuals that are part of their team, sometimes they don't.
+
+Team leads are responsible for setting context and direction within the team. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
+
+Team leads should make sure sprints take place on a regular basis, and are conducted transparently. Setting direction means the team leads finalize the sprint priorities. It's ok for team members to change what they picked to work on during the sprint, but it's the team leads' responsibility to help make sure team members have the right context to make good decisions if they change plan, and that everyone starts the sprint pointing in the right direction.
+
+## Defining the role of a manager
 
 A manager at PostHog has two tasks:
 1. Making sure their direct reports are happy and productive
@@ -15,12 +23,17 @@ A manager at PostHog has two tasks:
 That's it.
 
 A manager at PostHog is _not_ responsible for:
-1. Setting compensation (we have transparent compensation)
+1. Setting compensation (we have a [compensation calculator](/handbook/people/compensation) and increases are done occasionally/proactively by the people team).
 1. Setting tasks for their direct reports
 1. Creating a career path (career paths should be transparent and documented, and for now centrally managed)
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
 1. Giving feedback (managers give feedback in their capacity as individual contributor, but so does everyone else)
 
+## How do I make sure my direct reports are happy and productive?
+
+1. Schedule [regular 1:1s](/handbook/company/1-1s) every week or every other week
+1. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months
+1. Talk about the long-term career plans every now and again. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
 
 ## What does setting context mean?
 

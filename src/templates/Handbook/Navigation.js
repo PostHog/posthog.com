@@ -1,9 +1,9 @@
-import React from 'react'
-import Link from 'components/Link'
-import { DarkModeToggle } from 'components/DarkModeToggle'
-import SearchBar from './SearchBar'
-import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
 import cntl from 'cntl'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
+import Link from 'components/Link'
+import React from 'react'
+import SearchBar from './SearchBar'
 
 const crumbText = (classes = '') => cntl`
     font-bold
@@ -76,7 +76,7 @@ export default function Navigation({
                         })}
                     <Crumb text={title} className="border-r-0" />
                 </ul>
-                <div className="flex-grow border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                <div className="flex-grow">
                     <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
                         <SearchBar base={breadcrumbBase.name.toLowerCase()} />
                     </div>

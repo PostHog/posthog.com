@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
-categories: ["CEO diaries"]
+author: ["james-hawkins"]
+categories: ["CEO diaries", "Inside PostHog", "Open Source"]
 ---
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
@@ -129,7 +130,7 @@ Do a really good job of that and you'll get random emails from folks at bigger c
 * January 4th 2020: We started the YC W20 batch, and that meant receiving our first $150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
 * January 23rd 2020: We wrote the first line of code for PostHog
 * February 14th: We did a mini launch for a few YC companies to get early feedback
-* February 21st: PostHog [launched on HackerNews](https://news.ycombinator.com/item?id=22376732)
+* February 21st: PostHog [launched on Hacker News](https://news.ycombinator.com/item?id=22376732)
 * March 6th: Day 1 of fundraising and first cheque ($10K!)
 * March 12th: Left San Francisco due to covid and started working fully remote from the UK. Everything seemed to slow down at this point for 3 weeks. Our bank balance was $205K this day.
 * March 16th: Demo day. 

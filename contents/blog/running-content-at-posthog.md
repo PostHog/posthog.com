@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
+categories: ["Inside PostHog", "Startups"]
 ---
 
 ## Why you need content

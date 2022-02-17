@@ -30,18 +30,34 @@ const Editions = ({ setDemoType }) => {
                 </div>
                 <div className="md:pl-12 pt-12 md:pt-0">
                     <h2 className="text-[15px] font-semibold mb-4 text-gray">Full-service plans</h2>
-                    <div className="flex flex-col space-y-4">
-                        <Title title="Scale" subtitle="For large userbases or event volumes" badge="SELF-HOSTED" />
-                        <Title title="Enterprise" subtitle="A focus on compliance and security" badge="SELF-HOSTED" />
+                    <div className="flex flex-col space-y-10">
+                        <div className="space-y-4">
+                            <Title title="Scale" subtitle="For large userbases or event volumes" badge="SELF-HOSTED" />
+                            <CallToAction
+                                width="full"
+                                className="mt-7"
+                                onClick={() => setDemoType('scale')}
+                                event={{ name: 'book a demo: clicked scale demo' }}
+                            >
+                                Book a Scale demo
+                            </CallToAction>
+                        </div>
+                        <div className="space-y-4">
+                            <Title
+                                title="Enterprise"
+                                subtitle="A focus on compliance and security"
+                                badge="SELF-HOSTED"
+                            />
+                            <CallToAction
+                                width="full"
+                                className="mt-7"
+                                onClick={() => setDemoType('enterprise')}
+                                event={{ name: 'book a demo: clicked enterprise demo' }}
+                            >
+                                Book an Enterprise demo
+                            </CallToAction>
+                        </div>
                     </div>
-                    <CallToAction
-                        width="full"
-                        className="mt-7"
-                        onClick={() => setDemoType('personal')}
-                        event={{ name: 'book a demo: clicked 1:1 demo' }}
-                    >
-                        Book a 1:1 demo
-                    </CallToAction>
                 </div>
             </div>
         </>

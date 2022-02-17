@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import MenuItem from './MenuItem'
-import { motion } from 'framer-motion'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import AnimatedBurger from 'components/AnimatedBurger'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import AnimatedBurger from 'components/AnimatedBurger'
+import { motion } from 'framer-motion'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import React, { useState } from 'react'
+import MenuItem from './MenuItem'
 
 export default function MainNav() {
     const data = useStaticQuery(graphql`
@@ -42,6 +42,7 @@ export default function MainNav() {
                                     icon
                                     title
                                     url
+                                    badge
                                 }
                             }
                             footerLinks {
@@ -65,14 +66,12 @@ export default function MainNav() {
     const halfMenu = Math.floor(menuLength / 2)
     return (
         <div className="flex justify-between items-center">
-            {breakpoints.md && (
-                <Link
-                    className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
-                    to="/"
-                >
-                    <Logo />
-                </Link>
-            )}
+            <Link
+                className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
+                to="/"
+            >
+                <Logo />
+            </Link>
             {(expanded || !breakpoints.md) && (
                 <motion.nav
                     className="lg:static absolute w-full left-0 top-full lg:overflow-visible overflow-hidden hidden lg:block"

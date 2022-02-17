@@ -15,7 +15,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
         var slug = location.pathname.substring(1)
-        var theme = /^handbook|^docs|^blog|^integrations|^product/.test(slug) ? window.__theme : 'light'
+        var theme = /^handbook|^docs|^blog|^integrations|^product|^tutorials/.test(slug) ? window.__theme : 'light'
         document.body.className = theme
     }
 }

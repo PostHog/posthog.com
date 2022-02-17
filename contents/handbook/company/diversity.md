@@ -17,7 +17,7 @@ We are aware that diversity & inclusion  efforts are a lifelong work and that we
 
 ## How diversity helps us
 
-At PostHog, we view diversity as a tactic, like paying people towards the top of the market, or communicating company goals to set context for our team. There is plenty of research into the link between highly diverse teams and increased [performance](https://www.ucdenver.edu/docs/librariesprovider68/default-document-library/jmna-articles-bonuscontent-2.pdf?Status=Temp&sfvrsn=84c0fb9_2) and [innovation](https://www.bcg.com/en-us/publications/2018/how-diverse-leadership-teams-boost-innovation). 
+At PostHog, we view diversity as a tactic, like generous and transparent [compensation](https://posthog.com/handbook/people/compensation#how-it-works), or communicating company goals to set context for our team. There is plenty of research into the link between highly diverse teams and increased [performance](https://www.ucdenver.edu/docs/librariesprovider68/default-document-library/jmna-articles-bonuscontent-2.pdf?Status=Temp&sfvrsn=84c0fb9_2) and [innovation](https://www.bcg.com/en-us/publications/2018/how-diverse-leadership-teams-boost-innovation). 
 
 In order to build the most diverse team, we have introduced the [Rooney rule](https://en.wikipedia.org/wiki/Rooney_Rule) to our Recruitment process. Originally implemented by the National Football League (NFL) but increasingly used by companies, the Rooney rule requires at least one person of an underrepresented minority to be considered for every open position.
 

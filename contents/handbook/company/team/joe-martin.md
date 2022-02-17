@@ -10,7 +10,9 @@ showTitle: true
 
 Before I took up Product Marketing I was a Content Marketer, a Copywriter and a Journalist. Before _that_ I was a clown, a chainsaw salesman and a cleaner in a morgue. I've had a strange life. 
 
-I'm engaged and live just outside of London. I'm passionate about punk music, videogame preservation and garlic. I can't ride a bike. 
+I'm engaged and live just outside of London. I'm passionate about punk music, videogame preservation and garlic. I can't ride a bike.
+
+You can read more about what I'm focused on in [my goals document](https://posthog.com/handbook/company/team/joe-martin-goals). 
 
 # How I can help you
 - I can help you figure out the right way to communicate something, to anyone, no matter how technical. 

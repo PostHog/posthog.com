@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-_Interested in what plugins we have available? Check out our [Plugin library](/plugins)._
+_Interested in what plugins we have available? Check out our [Integrations](/integrations)._
 
 <hr /><br />
 

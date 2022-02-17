@@ -22,68 +22,66 @@ You can use the cohorts to:
 
 ## Creating a new cohort
 
-**Step 1:** Navigate to the 'People' page:
+There are two ways to create a new cohort:
+#### Creating a new cohort from the cohorts page
+
+**Step 1:** Navigate to the 'Cohorts' page in the sidebar:
 
 ![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
 
-<br />
 
-**Step 2:** Click '+ New Cohort' on the top left.
-
-<br />
+**Step 2:** Click '+ New Cohort' on the top right.
 
 
-## Cohort settings
+#### Creating a new cohort directly from an insight
 
-There are three key settings for a cohort: 'action', 'property', and 'New group'. See below:
+It is also possible to create a cohort using data from a trend. Currently, this feature is only available from within trends, but [funnels](/docs/user-guides/funnels) and other insights will soon offer this as well. 
 
-<br />
+**Step 1:** Go to insights, create a new trend, and click any data point on the graph to view persons represented in the underlying data.
+
+![click data point on trend to show persons](../../images/docs/user-guides/trend-click-on-data-point.png)
+
+**Step 2:** In the modal popup, click 'Save as cohort' in the bottom right.
+
+![create cohort from trend modal](../../images/features/cohorts/create-cohort-from-trend.png)
+
+## Cohort types
+
+When creating a cohort from scratch, you'll first choose between two type of cohorts, static and dynamic: 
+
+![two types of cohorts: static and dynamic](../../images/features/cohorts/static-and-dynamic-cohorts.png)
+
+
+### Static cohorts
+
+You might want to batch users together based on based on the value of some mutable property at a certain point in time. So, for example, if you wanted to save a cohort of users you experimented on, and selected them based on usage at a given point in time, you might want to 'freeze' that list and have it accessible to track them at a later point in time. To do so, you can upload a csv of users. Unlike a dynamic cohort, a static cohort will not change as user properties/events change.
+
+### Dynamic cohorts 
+
+##### Match users who performed action or event
+Sometimes, you'll want to group users that have performed a certain event or [actions](/docs/user-guides/actions) within a given time. For example, you might want to track 'daily active' or 'weekly active' users, based on the frequency of them performing a given action. For this, you'll want a list that dynamically updates, moving users in or out as they meet criteria or not. 
+
+##### Match users who have properties
+Or, you might select a user property to filter on, and then update that property, and with a dynamic cohort, the user could be filtered in or out. Commonly, this used to combine users at a certain team, from a certain marketing campaign (via their UTM tags), email, etc.
 
 ![Three key cohort settings](../../images/features/cohorts/cohort-options.png)
 
-'New group' adds another group of filters that a user must match to be a part of the cohort, as an `OR` operation. This means that if a user matches _any_ of the groups you add, they will be added to the cohort. 
-
-<br />
-
-**Group users by actions**
-
-You can group users who have performed certain [actions](/docs/user-guides/actions). You need to already have configured actions for that to work.
-
-**Group users by property**
-
-You can also group users who have a certain property in common. Commonly, this used to combine users at a certain team, from a certain marketing campaign (via their UTM tags), or whatever other static property you need:
-
-<br />
+**'Add matching criteria'** adds another group of filters that a user must match to be a part of the cohort, as an `OR` operation. This means that if a user matches _any_ of the groups you add, they will be added to the cohort. 
 
 
 ## Adjusting time frames
 
 You may only want users who have performed a certain action within a certain timeframe.
 
-On setting the cohort to 'user has *action*', you will be presented with the following:
-
-<br />
-
-
-<span class='centered'>
+On setting the cohort to match users who '*performed action or event*', you will be presented with the following:
 
 ![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)
 
-</span>
-
-<br />
-
-
-Currently, our time filtering for cohorts has 3 options, but we are working to [expand this functionality](https://github.com/PostHog/posthog/issues/199).
-
-<br />
-
+You can match users on actions/events performed within the last day, week, 2 weeks, or month. 
 
 ## Viewing users in a cohort
 
-Go to 'People' > 'Cohorts' in the left-hand navigation (as shown in the beginning of this page) and select the cohort you want to view by clicking it, and you'll be presented with a list
-
-<br />
+Go to 'Cohorts' in the left-hand navigation (as shown [here](/docs/user-guides/cohorts#creating-a-new-cohort-from-the-cohorts-page) and select the cohort you want to view by clicking it, and you'll be presented with a list.
 
 ## Differentiating team vs. users traffic
 From the initial setup, [PostHog is tracking various events](/docs/integrate/client/js#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.

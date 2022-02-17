@@ -1,5 +1,5 @@
 // import { replacePath } from './utils'
-const replacePath = require('./utils')
+const { replacePath } = require('./utils')
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
@@ -8,11 +8,37 @@ require('dotenv').config({
 })
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
+const createMDXNode = require('gatsby-plugin-mdx/utils/create-mdx-node')
 
-module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
-    const { createNodeField, createNode } = actions
+module.exports = exports.onCreateNode = async ({
+    node,
+    getNode,
+    actions,
+    store,
+    cache,
+    createNodeId,
+    createContentDigest,
+}) => {
+    const { createNodeField, createNode, createParentChildLink } = actions
+    if (node.internal.type === 'Reply') {
+        async function createImageNode(imageURL) {
+            return createRemoteFileNode({
+                url: imageURL,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            }).catch((e) => console.error(e))
+        }
+        if (node.imageURL) {
+            const imageNode = await createImageNode(node.imageURL)
+            node.avatar___NODE = imageNode && imageNode.id
+        }
+    }
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
+        if (parent.internal.type === 'Reply') return
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
             node,
@@ -22,11 +48,14 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         // Create GitHub contributor nodes for handbook & docs
         if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
-            const contributors = await fetch(url, {
+            let contributors = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
             }).then((res) => res.json())
+            contributors = contributors.filter(
+                (contributor) => contributor && contributor.author && contributor.author.login
+            )
             const contributorsNode = await Promise.all(
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor

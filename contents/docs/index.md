@@ -73,7 +73,6 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 **Integrating PostHog with other tools**
 
 - [Integrate PostHog with Shopify](/docs/integrate/third-party/shopify) 
-- [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
 - [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
 
 ### Integrations

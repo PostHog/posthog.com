@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/blog-generic-1.png
 featuredImageType: full
+categories: ["Guides", "Product analytics"]
 ---
 ## What is product analytics?
 

@@ -1,5 +1,6 @@
 import { GetStartedModal } from 'components/GetStartedModal'
 import Layout from 'components/Layout'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
@@ -15,12 +16,17 @@ import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
 
 const IndexPage = () => {
+    const data = useStaticQuery(query)
+    const latestJob = data?.allJobs?.nodes && data.allJobs.nodes[0]
+    const latestJobCreatedAt = latestJob && new Date(latestJob['created_at'])
+
     return (
         <Layout>
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
                 We could use your help."
+                image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
             />
 
             <CareersHero />
@@ -135,5 +141,16 @@ const IndexPage = () => {
         </Layout>
     )
 }
+
+const query = graphql`
+    query CareersQuery {
+        allJobs(sort: { fields: created_at, order: DESC }) {
+            nodes {
+                created_at
+                title
+            }
+        }
+    }
+`
 
 export default IndexPage

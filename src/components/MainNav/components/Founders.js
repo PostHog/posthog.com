@@ -9,7 +9,7 @@ export default function Founders() {
                     placeholder="none"
                     alt="Tim and James"
                     quality={100}
-                    width={150}
+                    width={148}
                     className="mb-4 md:mb-0 pointer-events-none"
                     src="./images/founders.png"
                 />

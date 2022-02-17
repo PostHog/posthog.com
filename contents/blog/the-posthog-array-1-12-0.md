@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
-
-
-
 
 Shared dashboards, global annotations, retention table improvements and a metric ton of bug fixes. This week's PostHog array has it all.
 

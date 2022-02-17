@@ -1,4 +1,4 @@
-import GiveBackFriday from 'components/GiveBackFriday'
+import StarUsBanner from 'components/StarUsBanner'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
@@ -18,22 +18,35 @@ const Home = () => {
     useValues(posthogAnalyticsLogic) // mount this logic
 
     return (
-        <Layout>
-            <SEO
-                title="PostHog - Open-Source Product Analytics"
-                description="Self-hosted product analytics stack, to deploy on your infrastructure."
-            />
-            <GiveBackFriday />
-            <Hero />
-            <Customers />
-            <BeforeAndAfter />
-            <Features />
-            <Pipelines />
-            <Quote />
-            <Community />
-            <Tutorials />
-            <CTA />
-        </Layout>
+        <>
+            <StarUsBanner />
+            <Layout>
+                <SEO
+                    title="PostHog - Host your own product analytics"
+                    description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
+                    image="/images/home.png"
+                />
+                <Hero />
+                <Customers />
+                <BeforeAndAfter />
+                <Features
+                    title={
+                        <>
+                            Everything product-led teams need <span className="text-yellow">in one place</span>
+                        </>
+                    }
+                />
+                <Pipelines />
+                <Quote />
+                <Community />
+                <Tutorials
+                    title="Tutorials"
+                    subtitle="See PostHog in action."
+                    cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
+                />
+                <CTA />
+            </Layout>
+        </>
     )
 }
 
