@@ -2,13 +2,12 @@ import { kea } from 'kea'
 import { SCALE_MINIMUM_EVENTS, SCALE_MINIMUM_PRICING } from '../constants'
 import { sliderCurve } from './LogSlider'
 
-export type PricingOptionType = 'vpc' | 'self-hosted' | 'cloud'
+export type PricingOptionType = 'self-hosted' | 'cloud'
 
 export const pricingSliderLogic = kea({
     actions: {
         setSliderValue: (value: number) => ({ value }),
         setPricingOption: (option: PricingOptionType) => ({ option }),
-        setAdditionalUnitPrice: (value: number) => ({ value }),
     },
     reducers: {
         eventNumber: [
@@ -29,39 +28,42 @@ export const pricingSliderLogic = kea({
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
         ],
-        additionalUnitPrice: [
-            0.000225,
-            {
-                setAdditionalUnitPrice: (_: null, { value }: { value: number }) => value,
-            },
-        ],
     },
-    selectors: ({ actions }) => ({
+    selectors: () => ({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
-                if (pricingOption === 'self-hosted') {
-                    let unitPricing = 0.000225
+                let finalCost = 0
+                let alreadyCountedEvents = 0
 
-                    const estimatedCost = eventNumber * unitPricing
-                    let finalCost = estimatedCost > SCALE_MINIMUM_PRICING ? estimatedCost : SCALE_MINIMUM_PRICING
-
-                    if (eventNumber >= 10_000_000 && eventNumber < 100_000_000) {
-                        unitPricing = 0.000045
-                        finalCost = 10_000_000 * 0.000225 + (eventNumber - 10_000_000) * 0.000045
-                    } else if (eventNumber >= 100000000) {
-                        unitPricing = 0.000009
-                        finalCost =
-                            10_000_000 * 0.000225 + 90_000_000 * 0.000045 + (eventNumber - 100_000_000) * 0.000009
-                    }
-
-                    actions.setAdditionalUnitPrice(unitPricing)
-                    return Math.round(finalCost).toLocaleString()
+                const thresholdPrices =
+                    pricingOption === 'self-hosted'
+                        ? [
+                              [1_000_000, 0],
+                              [2_000_000, 0.00045],
+                              [10_000_000, 0.000225],
+                              [100_000_000, 0.000045],
+                              [Number.MAX_SAFE_INTEGER, 0.000009],
+                          ]
+                        : [
+                              [1_000_000, 0],
+                              [10_000_000, 0.000225],
+                              [100_000_000, 0.000075],
+                              [Number.MAX_SAFE_INTEGER, 0.000025],
+                          ]
+                for (const [threshold, unitPricing] of thresholdPrices) {
+                    finalCost =
+                        finalCost +
+                        Math.max(0, Math.min(eventNumber - alreadyCountedEvents, threshold - alreadyCountedEvents)) *
+                            unitPricing
+                    alreadyCountedEvents = threshold
                 }
 
-                // Cloud
-                const billableEvents = eventNumber - 1000000 > 0 ? eventNumber - 1000000 : 0
-                return Math.round(billableEvents * 0.000225).toLocaleString()
+                if (pricingOption === 'self-hosted') {
+                    finalCost = finalCost > SCALE_MINIMUM_PRICING ? finalCost : SCALE_MINIMUM_PRICING
+                }
+
+                return Math.round(finalCost).toLocaleString()
             },
         ],
     }),

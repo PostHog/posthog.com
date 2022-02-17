@@ -29,7 +29,7 @@ export default function AskAQuestion() {
                             if (!values.question) {
                                 errors.question = 'Required'
                             }
-                            if (timestamp && !values.email) {
+                            if (!values.email) {
                                 errors.email = 'Required'
                             }
                             return errors
@@ -41,13 +41,9 @@ export default function AskAQuestion() {
                             fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
                                 .then((res) => res.json())
                                 .then((data) => {
-                                    if (values.email) {
-                                        setEmailSubmitted(true)
-                                    } else {
-                                        setTimestamp(data.timestamp)
-                                        resetForm({ values })
-                                        posthog.capture('Question asked')
-                                    }
+                                    posthog.capture('Question asked')
+                                    setTimestamp(data.timestamp)
+                                    setEmailSubmitted(true)
                                     setSubmitting(false)
                                 })
                         }}

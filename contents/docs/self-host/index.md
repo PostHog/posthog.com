@@ -12,6 +12,8 @@ Getting a shiny, running production environment of PostHog is probably one the f
 
 Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services.
 
+> Note: when choosing to self-host you'll be managing the service yourself, which means running regular upgrades, scaling as needed etc. If you're looking for a more hands-off experience we recommend checking out [PostHog Cloud](/docs/cloud).
+
 ### Deployment options
 
 - [Hobby](/docs/self-host/deploy/hobby) - for testing or very small hobby projects

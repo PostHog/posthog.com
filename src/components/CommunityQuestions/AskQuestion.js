@@ -13,6 +13,12 @@ export default function AskQuestion({ isValid, loading }) {
             />
             <Field
                 className="bg-gray-accent-light dark:bg-gray-accent-dark py-2 px-4 text-base rounded-md mt-2 w-full"
+                type="email"
+                name="email"
+                placeholder="Email"
+            />
+            <Field
+                className="bg-gray-accent-light dark:bg-gray-accent-dark py-2 px-4 text-base rounded-md mt-2 w-full"
                 type="text"
                 name="question"
                 as="textarea"

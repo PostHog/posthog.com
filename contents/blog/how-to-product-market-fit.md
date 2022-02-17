@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides", "Product Analytics"]
+categories: ["Guides", "Product analytics"]
 ---
 
 Validating B2B product market fit is a common problem and the bad news is that there's no universal standard for validating product market fit. But there are some great heuristics you can use to understand whether you’re on the right track - and this article explains a little of how we use them when thinking about product market fit at PostHog.
