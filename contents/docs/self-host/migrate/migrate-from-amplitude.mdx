@@ -32,6 +32,7 @@ For reference, as of writing, Amplitude's event structure is (according to their
   // device_carrier, city, etc.
   ...other_fields
 }
+```
 
 When capturing the event, roughly, the schema you'll want to use is:
 
@@ -71,7 +72,7 @@ In addition to tracking the events themselves, we want to tie users' events both
 
 We'd ideally like to be able to attribute "Application installed" to the user with ID 123, so we need to also call alias with:
 
-```ts
+```js
 const aliasMessage = {
   distinctId: user_id, // 123
   aliasId: device_id, // 551dc114-7604-430c-a42f-cf81a3059d2b
