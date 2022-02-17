@@ -13,7 +13,7 @@ In these guides, we offer advice for using PostHog in a compliant manner under t
 
 - [The Health Insurance Portability and Accountability Act](/docs/privacy/hipaa-compliance/) (HIPAA), which applies to businesses capturing and processing health data in the US
 
-- [The California Consumer Privacy Act](/docs/privacy/ccpa-compliance/), which applies to qualifying for-profit businesses collecting personal information on residents of California
+- [The California Consumer Privacy Act](/docs/privacy/ccpa-compliance/) (CCPA), which applies to qualifying for-profit businesses collecting personal information on residents of California
 
 **Please note:** these guides don't constitute legal advice. We recommend seeking professional advice to ensure you remain compliant with relevant legislation.
 
