@@ -14,7 +14,7 @@ PostHog solves that. We let every person in the company have easy access to prod
 
 ## What can I use PostHog for?
 
-PostHog providers everything product-led teams need in one place, including:
+PostHog provides everything product-led teams need in one place, including:
 
 - Product Analytics
 - Session Recording
