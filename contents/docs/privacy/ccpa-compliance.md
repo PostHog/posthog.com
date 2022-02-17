@@ -16,11 +16,17 @@ Personal data is protected under GDPR, which means any information that relates 
 ## What is the impact of GDPR on product analytics?
 
 The number one rule is don’t collect, store or use any personal data without a good reason for it, such as:
+
 * The person gave you specific, unambiguous consent to process the data (e.g. they’ve opted in to your marketing email list)
+
 * Processing is necessary to enter into a contract to someone (e.g. you need to do a background check)
+
 * You need to process it to comply with a legal obligation of yours (e.g. you receive an order from the court in your jurisdiction)
+
 * You need to process the data to save somebody’s life (e.g. well, you’ll probably know when this one applies)
+
 * Processing is necessary to perform a task in the public interest or to carry out some official function (e.g. you’re a private garbage collection company)
+
 * You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a minor's data
 
 ### You must acquire "Unambiguous Consent"
@@ -28,9 +34,13 @@ The number one rule is don’t collect, store or use any personal data without a
 There are specific rules about what consent means; hiding it away on page 73 or of your terms and conditions is not good enough:
 
 * Consent must be “freely given, specific, informed and unambiguous”
+
 * Requests for consent must be “clearly distinguishable from the other matters” and presented in “clear and plain language”
+
 * Data subjects can withdraw previously given consent whenever they want, and you have to honor their decision
+
 * Children under 13 can only give consent with permission from their parent
+
 * You need to keep documentary evidence of consent
 
 So, if you're tracking users in your product using PostHog to improve your product, you should explicitly ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
@@ -52,7 +62,7 @@ GDPR requirements differ depending on how your business interacts with personal 
 You will be using PostHog in one of two ways:
 
 1. Hosted and managed by us on PostHog Cloud
-1. Self-hosted by you on a private cloud or your own infrastructure
+2. Self-hosted by you on a private cloud or your own infrastructure
 
 If you are using PostHog Cloud then PostHog is the Data Processor and you are the Data Controller.
 

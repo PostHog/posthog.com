@@ -29,7 +29,7 @@ Most product analytics tools require you to send your captured user data to a th
 
 There are downsides to these two solutions:
 
-1. **Anonymization**: You can easily limit the data so much that it becomes meaningless and makes it impossible to perform standard and critical analyses of your product and users. There's no point reducing the data to an unusable state.
+1. **Anonymization**: You can easily limit the data so much that it becomes meaningless and makes it impossible to perform standard and critical analyses of your product and users. There's no point reducing the data to an unusable state
  
 2. **Business Associate Agreement**: Business Associate Agreements are often expensive and/or require you to pay for a higher tier of product than you actually require.
 
