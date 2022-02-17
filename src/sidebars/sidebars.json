@@ -464,208 +464,208 @@
             "url": "",
             "children": [
                 {
-                "name": "Self-host",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Overview",
-                        "url": "/docs/self-host"
-                    },
-                    {
-                        "name": "Deployments",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "AWS",
-                                "url": "/docs/self-host/deploy/aws"
-                            },
-                            {
-                                "name": "Azure",
-                                "url": "/docs/self-host/deploy/azure"
-                            },
-                            {
-                                "name": "Digital Ocean",
-                                "url": "/docs/self-host/deploy/digital-ocean"
-                            },
-                            {
-                                "name": "Google Cloud Platform",
-                                "url": "/docs/self-host/deploy/gcp"
-                            },
-                            {
-                                "name": "Hobby",
-                                "url": "/docs/self-host/deploy/hobby"
-                            },
-                            {
-                                "name": "Other platforms",
-                                "url": "/docs/self-host/deploy/other"
-                            },
-                            {
-                                "name": "EU-only hosting",
-                                "url": "/docs/self-host/deploy/hosting-in-eu"
-                            },
-                            {
-                                "name": "Configuration",
-                                "url": "/docs/self-host/deploy/configuration"
-                            },
-                            {
-                                "name": "Upgrade notes",
-                                "url": "/docs/self-host/deploy/upgrade-notes"
-                            },
-                            {
-                                "name": "Managing hosting costs",
-                                "url": "/docs/self-host/deploy/hosting-costs"
-                            },
-                            {
-                                "name": "Troubleshooting and FAQs",
-                                "url": "/docs/self-host/deploy/troubleshooting"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Configure",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "Environment variables",
-                                "url": "/docs/self-host/configure/environment-variables"
-                            },
-                            {
-                                "name": "Securing PostHog",
-                                "url": "/docs/self-host/configure/securing-posthog"
-                            },
-                            {
-                                "name": "Running behind a proxy",
-                                "url": "/docs/self-host/configure/running-behind-proxy"
-                            },
-                            {
-                                "name": "Configuring email",
-                                "url": "/docs/self-host/configure/email"
-                            },
-                            {
-                                "name": "Upgrading PostHog",
-                                "url": "/docs/self-host/configure/upgrading-posthog"
-                            },
-                            {
-                                "name": "Async migrations",
-                                "url": "",
-                                "children": [
-                                    {
-                                        "name": "Overview",
-                                        "url": "/docs/self-host/configure/async-migrations/overview"
-                                    },
-                                    {
-                                        "name": "0002_events_sample_by",
-                                        "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
-                                    },
-                                    {
-                                        "name": "0003_fill_person_distinct_id2",
-                                        "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Self-host architecture",
-                        "url": "/docs/self-host/architecture"
-                    },
-                    {
-                        "name": "Runbook",
-                        "url": "/docs/self-host/runbook",
-                        "children": [
-                            {
-                                "name": "ClickHouse",
-                                "url": "/docs/self-host/runbook/clickhouse",
-                                "children": [
-                                    {
-                                        "name": "Backup",
-                                        "url": "/docs/self-host/runbook/clickhouse/backup"
-                                    },
-                                    {
-                                        "name": "Kafka Engine",
-                                        "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
-                                    },
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/self-host/runbook/clickhouse/resize-disk"
-                                    },
-                                    {
-                                        "name": "Restore",
-                                        "url": "/docs/self-host/runbook/clickhouse/restore"
-                                    },
-                                    {
-                                        "name": "Vertical Scaling",
-                                        "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "Kafka",
-                                "url": "/docs/self-host/runbook/kafka",
-                                "children": [
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/self-host/runbook/kafka/resize-disk"
-                                    },
-                                    {
-                                        "name": "Log retention",
-                                        "url": "/docs/self-host/runbook/kafka/log-retention"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "PostgreSQL",
-                                "url": "/docs/self-host/runbook/postgresql",
-                                "children": [
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/self-host/runbook/postgresql/resize-disk"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "Redis",
-                                "url": "/docs/self-host/runbook/redis",
-                                "children": []
-                            },
-                            {
-                                "name": "Zookeeper",
-                                "url": "/docs/self-host/runbook/zookeeper",
-                                "children": []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "Cloud",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Overview",
-                        "url": "/docs/cloud"
-                    },
-                    {
-                        "name": "Deploying a reverse proxy",
-                        "url": "/docs/cloud/proxy"
-                    }
-                ]
-            },
-            {
-                "name": "Migrate",
-                "url": "",
-                "children": [
-                    {
-                        "name": "To another Self-hosted instance",
-                        "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-                    },
-                    {
-                        "name": "Between Cloud and Self-hosted",
-                        "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
-                    }
-                ]
-            },
-          ]
+                    "name": "Self-host",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host"
+                        },
+                        {
+                            "name": "Deployments",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
+                                },
+                                {
+                                    "name": "Digital Ocean",
+                                    "url": "/docs/self-host/deploy/digital-ocean"
+                                },
+                                {
+                                    "name": "Google Cloud Platform",
+                                    "url": "/docs/self-host/deploy/gcp"
+                                },
+                                {
+                                    "name": "Hobby",
+                                    "url": "/docs/self-host/deploy/hobby"
+                                },
+                                {
+                                    "name": "Other platforms",
+                                    "url": "/docs/self-host/deploy/other"
+                                },
+                                {
+                                    "name": "EU-only hosting",
+                                    "url": "/docs/self-host/deploy/hosting-in-eu"
+                                },
+                                {
+                                    "name": "Configuration",
+                                    "url": "/docs/self-host/deploy/configuration"
+                                },
+                                {
+                                    "name": "Upgrade notes",
+                                    "url": "/docs/self-host/deploy/upgrade-notes"
+                                },
+                                {
+                                    "name": "Managing hosting costs",
+                                    "url": "/docs/self-host/deploy/hosting-costs"
+                                },
+                                {
+                                    "name": "Troubleshooting and FAQs",
+                                    "url": "/docs/self-host/deploy/troubleshooting"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Configure",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Environment variables",
+                                    "url": "/docs/self-host/configure/environment-variables"
+                                },
+                                {
+                                    "name": "Securing PostHog",
+                                    "url": "/docs/self-host/configure/securing-posthog"
+                                },
+                                {
+                                    "name": "Running behind a proxy",
+                                    "url": "/docs/self-host/configure/running-behind-proxy"
+                                },
+                                {
+                                    "name": "Configuring email",
+                                    "url": "/docs/self-host/configure/email"
+                                },
+                                {
+                                    "name": "Upgrading PostHog",
+                                    "url": "/docs/self-host/configure/upgrading-posthog"
+                                },
+                                {
+                                    "name": "Async migrations",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/configure/async-migrations/overview"
+                                        },
+                                        {
+                                            "name": "0002_events_sample_by",
+                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                        },
+                                        {
+                                            "name": "0003_fill_person_distinct_id2",
+                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Self-host architecture",
+                            "url": "/docs/self-host/architecture"
+                        },
+                        {
+                            "name": "Runbook",
+                            "url": "/docs/self-host/runbook",
+                            "children": [
+                                {
+                                    "name": "ClickHouse",
+                                    "url": "/docs/self-host/runbook/clickhouse",
+                                    "children": [
+                                        {
+                                            "name": "Backup",
+                                            "url": "/docs/self-host/runbook/clickhouse/backup"
+                                        },
+                                        {
+                                            "name": "Kafka Engine",
+                                            "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
+                                        },
+                                        {
+                                            "name": "Resize disk",
+                                            "url": "/docs/self-host/runbook/clickhouse/resize-disk"
+                                        },
+                                        {
+                                            "name": "Restore",
+                                            "url": "/docs/self-host/runbook/clickhouse/restore"
+                                        },
+                                        {
+                                            "name": "Vertical Scaling",
+                                            "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Kafka",
+                                    "url": "/docs/self-host/runbook/kafka",
+                                    "children": [
+                                        {
+                                            "name": "Resize disk",
+                                            "url": "/docs/self-host/runbook/kafka/resize-disk"
+                                        },
+                                        {
+                                            "name": "Log retention",
+                                            "url": "/docs/self-host/runbook/kafka/log-retention"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "PostgreSQL",
+                                    "url": "/docs/self-host/runbook/postgresql",
+                                    "children": [
+                                        {
+                                            "name": "Resize disk",
+                                            "url": "/docs/self-host/runbook/postgresql/resize-disk"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Redis",
+                                    "url": "/docs/self-host/runbook/redis",
+                                    "children": []
+                                },
+                                {
+                                    "name": "Zookeeper",
+                                    "url": "/docs/self-host/runbook/zookeeper",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Cloud",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/cloud"
+                        },
+                        {
+                            "name": "Deploying a reverse proxy",
+                            "url": "/docs/cloud/proxy"
+                        }
+                    ]
+                },
+                {
+                    "name": "Migrate",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "To another Self-hosted instance",
+                            "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+                        },
+                        {
+                            "name": "Between Cloud and Self-hosted",
+                            "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "Integrate PostHog",
