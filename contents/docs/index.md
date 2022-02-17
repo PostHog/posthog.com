@@ -10,7 +10,7 @@ We believe the era of third-party product analytics software will eventually com
 
 Without a self-hosted solution like PostHog, companies who cannot send their data to third-party tracking services for cost or privacy reasons often end up with a complex data pipeline into a data warehouse, with an analytics platform on top. Data analysts end up being the only people who understand it.
 
-PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third parties.
+PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third parties. Additionally, you can run analysis through a straightforward, self-serve interface -- no SQL required!
 
 ## What can I use PostHog for?
 
