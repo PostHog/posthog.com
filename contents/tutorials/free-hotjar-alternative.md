@@ -41,7 +41,7 @@ It’s worth noting that some tiers do not have access to premium features, such
 
 We strongly recommend enabling PostHog's autocapture feature to make sure you get the most out of Session Recording and that common events, such as pageviews, are automatically ingested. You can then analyse these events and filter Session Recordings for them, combining the capabilities of Hotjar with a product analytics platform. 
 
-To start capturing events you must add the snippet found in your Project Settings page above the `</head>` tag in your website HTML. This snippet also enables you to capture custom events which may be unique to your product.
+To start capturing events you must add the snippet found in your Project Settings page above the `</head>` tag in your website HTML. This snippet also enables you to capture custom events, which you can define in the Events & Actions page. You can then filter any captured session based on these [custom events](/docs/user-guides/events), or even [use Feature Flags to _only_ capture these sessions](/docs/user-guides/recordings#further-controls). 
 
 You can [disable autocapture](https://posthog.com/docs/integrate/client/js#config) separately if you only wish to capture custom events, but doing so will greatly limit your ability to filter Session Recordings or to analyze product usage. You cannot opt out of capturing any events, as while while session recordings do not count towards your allowance of free events, each recording does generate at least one event. 
 
