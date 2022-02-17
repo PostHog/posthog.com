@@ -45,7 +45,7 @@ Using our [HTML snippet](/docs/integrate/client/snippet-installation) is the qui
 
 **Integrations**
 
-We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry).
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry). Visit our [Integration library for a full list of integrations](/integrations), or head to [our GitHub repo](https://github.com/PostHog) to start building your own. 
 
 **API**
 
