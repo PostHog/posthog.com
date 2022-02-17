@@ -1024,6 +1024,28 @@
             ]
         },
         {
+            "name": "Privacy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/privacy/"
+                },
+                {
+                    "name": "PostHog & the GDPR",
+                    "url": "/docs/privacy/gdpr-compliance"
+                },
+                {
+                    "name": "PostHog & the HIPAA",
+                    "url": "/docs/privacy/hipaa-compliance"
+                },
+                {
+                    "name": "PostHog & the CCPA",
+                    "url": "/docs/privacy/ccpa-compliance"
+                }
+            ]
+        },
+        {
             "name": "Contribute",
             "url": "",
             "children": [

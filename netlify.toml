@@ -1182,3 +1182,9 @@
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations/overview"
     to = "/docs/self-host/configure/async-migrations"
+
+
+# Added: 2022-02-17
+[[redirects]]
+    from = "/docs/privacy/privacy-compliance"
+    to = "/docs/privacy"
