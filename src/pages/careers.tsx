@@ -53,7 +53,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-red"
                             alt={`Charles Cook - Business Operations`}
-                            src="../components/TeamQuote/images/Charles.png"
+                            src="../components/TeamQuote/images/charles_new.png"
                         />
                     }
                 />
@@ -78,7 +78,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-yellow"
                             alt={`Kunal Pathak - Growth Engineer`}
-                            src="../components/TeamQuote/images/Kunal.png"
+                            src="../components/TeamQuote/images/kunal_new.png"
                         />
                     }
                 />
@@ -105,7 +105,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-blue"
                             alt={`Eric Duong - Software Engineer`}
-                            src="../components/TeamQuote/images/Eric.png"
+                            src="../components/TeamQuote/images/eric_new.png"
                         />
                     }
                 />
@@ -131,7 +131,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-tan"
                             alt={`Eltje Lange - People & Talent`}
-                            src="../components/TeamQuote/images/Eltje.png"
+                            src="../components/TeamQuote/images/eltje_new.png"
                         />
                     }
                 />
