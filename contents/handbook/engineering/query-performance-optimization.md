@@ -85,43 +85,28 @@ Fixing a slow query is usually a 3 steps process:
 
 ### How-to reduce IO
 
- 1. Indices require IO, we can get rid of some IO by removing unused indices
- 2. Can check IO with something like:
+Some operations we perform can cause a large amount of IO. For writes
+specifically this can be from writing table data but also from writing to
+indices. We're using the Django ORM to generate table schemas, which is
+convenient but also tends to add indices where we perhaps either don't need
+them, or where a single composite index would better serve our querying
+patterns.
 
-```
-SELECT total_time, blk_write_time, calls, query
-FROM pg_stat_statements
-ORDER BY (blk_write_time) DESC 
-LIMIT 10;
-```
-
- 3. SELECTs can cause IO: https://blog.okmeter.io/postgresql-exploring-how-select-queries-can-produce-disk-writes-f36c8bee6b6f
-
+TODO: fill in other sources and mitigations to high IO
 
 #### Removing unused indices on foreign key fields
 
-Say you have an index on `team_id`, `person_id`. If `team_id` and `person_id`
-are Django foreign keys, it’s going to have created indices on `team_id` and
-`person_id`. We can still use the composite index for both `team_id` and
-`person_id` lookups, as mentioned on
-https://www.postgresql.org/docs/10/indexes-multicolumn.html , thus we can avoid
-having to write the other two indices by adding `db_index=False` 
+When we add a `ForeignKey` to a model, django will add a couple of things that
+we may or may not need, an index and a constraint. Sometimes these are
+superfluous and we'd do better to not have these. For example, consider this
+changes in [this PR](https://github.com/PostHog/posthog/pull/8579).
 
-#### Removing foreign key fields
-
-We don’t want to remove immediatly as this is backwards incompatible. Do this as
-a deprecation first. Let's get the gains of not having an index and constraint
-first.
-
-Rename e.g. `foreign_key_field` to `__deprecated_foreign_key_field`, add `db_column= foreign_key_field` such that attempts to reference from outside the model will require full qualification (we keep the field around such that Django doesn’t try to create deletion migrations)
-Wait for one release of field deprecation to have been in place.
-TODO: Somehow make select queries not request this field (i.e. to make it such
-that we can drop the column).
-Remove field completely in next release, add note that users should update through deprecation version such that running code is compatible
-
-#### Finding and removing unused indices
-
-How do you know if they are unused? Do something like 
+Here we had a table with two `ForeignKey`s, `team` and `person`. The query
+pattern for this table always filters by `team` and the `distinct_id` `CharField`
+column (it's essentially a lookup table from (`team_id`, `distinct_id`) ->
+`person_id`). As a result we have an index on (`team_id`, `distinct_id`). The
+`team_id` index that django is adding for the `ForeignKey` is not used at all,
+as observed by running:
 
 ```
 SELECT s.schemaname,
@@ -134,27 +119,27 @@ WHERE s.idx_scan = 0      -- has never been scanned
 ORDER BY pg_relation_size(s.indexrelid) DESC;
 ```
 
-If indices are unused, it should be safe to remove via removing `db_index=False`
-and running `./manage.py makemigration`
+To remove this index, we perform the following:
 
-This will generate a migration, however, if you look at the `./manage.py sqlmigrate`
-output it may not be dropping the index concurrently, so will be a blocking
-operation. To get around this we need to modify the migration:
-
- 1. use
+ 1. add `db_index=False` to the `team` `ForeignKey`. This updates Djangos
+    understanding of the state of the database schema.
+ 2. run `./manage.py makemigrations posthog` to generate a new database
+    migration. One issue with the generated migration is that it does not `DROP`
+    the index `CONCURRENTLY`. See the [postgresql
+    docs](https://www.postgresql.org/docs/9.3/sql-dropindex.html) for more
+    details here, but essentially it means that while the generated migration is
+    running, the table will be locked, and we do not know how long for. Queries
+    on this table will pile up and could cause an outage. To get around this we:
+ 3. manually update this generated migration to drop the index `CONCURRENTLY`.
+    This updated command will return instantly, the table will not be locked,
+    and dropping the index will happen in the background. Note that we need to
+    use
     [`SeparateDatabaseAndState`](https://docs.djangoproject.com/en/3.2/ref/migration-operations/#separatedatabaseandstate)
-    to allow django to keep track of the state of
-    the model in the db, but let us modify how the index is created.
- 2. use
-    [`RemoveIndexConcurrently`](https://docs.djangoproject.com/en/4.0/ref/contrib/postgres/operations/#django.contrib.postgres.operations.RemoveIndexConcurrently
-    ) to drop the index without blocking.
-
-#### Avoiding locking on related tables
-
-When e.g. bulk inserting, we can end up needing to select a lot of keys from
-referenced tables. When we don't actually care about this, we can specify
-`db_constraint=False`, along with making any required migrations if we're
-updating an existing field.
+    such that we can ensure that django will not create new migrations on
+    subsequent runs.
+    
+Then once we've run this migration, we should see the index disappear from the
+above index SQL results.
 
 ## ClickHouse
 
