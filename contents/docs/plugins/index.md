@@ -19,11 +19,7 @@ Plugins can be used for a wide variety of use cases, such as:
 
 ## Enabling plugins
 
-Head to 'Project' -> 'Plugins' on the left sidebar in the PostHog app:
-
-<img width="1912" alt="Screenshot 2022-02-17 at 14 57 40" src="https://user-images.githubusercontent.com/70321811/154508116-d97d2dc5-4fd5-48bd-be1e-6930a87c52bc.png">
-
-Here you can install official PostHog plugins, install a custom plugin by pasting a link to its public repository, or write your own plugin directly in PostHog.
+Head to 'Project' -> 'Plugins' on the left sidebar in the PostHog app. Here you can install official PostHog plugins, install a custom plugin by pasting a link to its public repository, or write your own plugin directly in PostHog.
 
 ## Self-host plugin troubleshooting
 
