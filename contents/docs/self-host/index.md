@@ -11,8 +11,8 @@ Getting production environment of PostHog up and running is probably one the fir
 
 ## Deployment options
 
-- [Hobby](/docs/self-host/deploy/hobby) - recommended for testing or very small hobby projects (<100k events/month)
-- [DigitalOcean](/docs/self-host/deploy/digital-ocean) - recommended for production use cases if you don't have a preference
+- [Hobby](/docs/self-host/deploy/hobby) - _recommended for testing or very small hobby projects (<100k events/month)_
+- [DigitalOcean](/docs/self-host/deploy/digital-ocean) - _recommended for production use cases if you don't have a preference_
 - [AWS](/docs/self-host/deploy/aws)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
 - [Azure](/docs/self-host/deploy/azure) - _in beta_
