@@ -1,74 +1,48 @@
 ---
-title: PostHog & GDPR compliance
-sidebarTitle: PostHog & the GDPR
+title: PostHog & CCPA compliance
+sidebarTitle: PostHog & CCPA
 sidebar: Docs
 showTitle: true
 ---
 
-The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy and security law, drafted and passed by the European Union (EU). It imposes obligations onto organizations anywhere, so long as they target or collect data related to people in the EU.
+If you have users who are Californian residents, it's important to understand the implications of handling their data privately and securely. PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it one of the most CCPA-compliant product analytics platforms available. 
 
-We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe. It can lead to fines reaching into the tens of millions of euros and can be up to 4% of global revenue.
+This guide explains what the CCPA is, what data must be protected and what your options are for CCPA-compliant analytics. 
 
-## What data is protected under GDPR?
+## What is the CCPA?
 
-Personal data is protected under GDPR, which means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
+The California Consumer Privacy Act of 2018 (CCPA) gives consumers control over the personal information that businesses collect about them:
 
-## What is the impact of GDPR on product analytics?
+* The right to know about the personal information a business collects about them and how it is used and shared
+* The right to delete personal information collected from them (with some exceptions)
+* The right to opt-out of the sale of their personal information
+* The right to non-discrimination for exercising their CCPA rights.
 
-The number one rule is don’t collect, store or use any personal data without a good reason for it, such as:
+## What data is protected under CCPA?
 
-* The person gave you specific, unambiguous consent to process the data (e.g. they’ve opted in to your marketing email list)
+Only California residents have rights under the CCPA. A California resident is a person who resides in California, even if they temporarily outside of the state.
 
-* Processing is necessary to enter into a contract to someone (e.g. you need to do a background check)
+The CCPA applies to for-profit businesses that meet **any** (not all) of the following criteria:
 
-* You need to process it to comply with a legal obligation of yours (e.g. you receive an order from the court in your jurisdiction)
+* Have a gross annual revenue of over $25 million
+* Buy, receive, or sell the personal information of 50,000 or more California residents, households, or devices
+* Derive 50% or more of their annual revenue from selling California residents’ personal information.
 
-* You need to process the data to save somebody’s life (e.g. well, you’ll probably know when this one applies)
+Personal information is protected under CCPA and is considered information that identifies or could be linked with a person.
 
-* Processing is necessary to perform a task in the public interest or to carry out some official function (e.g. you’re a private garbage collection company)
+In short, any information which is tied to a specific individual can be considered Personal Information, from their social security number or license plate number to photos, emails, URLs, IP addresses or even pseudonyms.
 
-* You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a minor's data
+## What is the impact of CCPA on product analytics?
 
-### You must acquire "Unambiguous Consent"
+The CCPA requires businesses to give consumers certain information in a “notice at collection”. This means that, when people sign-up to use your product, you need to explain how you intend to use their data to improve the product for them.
 
-There are specific rules about what consent means; hiding it away on page 73 or of your terms and conditions is not good enough:
+A notice at collection must list the categories of personal information businesses collect about consumers and the purposes for which they use the categories of information. The notice must also contain a link to the business’s privacy policy, where consumers can get more details on your privacy practices.
 
-* Consent must be “freely given, specific, informed and unambiguous”
+The right to delete personal information is also covered by CCPA. You have 45 days to respond to a request from a user to delete any personal information stored about them.
 
-* Requests for consent must be “clearly distinguishable from the other matters” and presented in “clear and plain language”
+## How to set PostHog up for CCPA compliance
 
-* Data subjects can withdraw previously given consent whenever they want, and you have to honor their decision
-
-* Children under 13 can only give consent with permission from their parent
-
-* You need to keep documentary evidence of consent
-
-So, if you're tracking users in your product using PostHog to improve your product, you should explicitly ask for consent to use this data and explain exactly how you will use it when users sign up for your service.
-
-If you use PostHog with cookies on your website (for logged out users), you should also use a cookie banner to enable people to give and withdraw their consent for using cookies.
-
-### Data must be handled securely
-
-You’re required to handle data securely by implementing “appropriate technical and organizational measures.”
-
-This means both technical measures (like encrypting data) and organizational measures (like staff training and limiting access to personal data).
-
-If you have a data breach, you have 72 hours to tell the data subjects or face penalties. (This notification requirement may be waived if you use technological safeguards, such as encryption, to render data useless to an attacker.)
-
-## How to set PostHog up for GDPR compliance
-
-GDPR requirements differ depending on how your business interacts with personal data. Companies can be data controllers, data processors, or both a controller and a processor. [Data controllers](https://gdpr-info.eu/art-24-gdpr/) collect their end users’ data and decide why and how it is processed. [Data processors](https://gdpr-info.eu/art-28-gdpr/) are businesses instructed to process customer data on behalf of other businesses.
-
-You will be using PostHog in one of two ways:
-
-1. Hosted and managed by us on PostHog Cloud
-2. Self-hosted by you on a private cloud or your own infrastructure
-
-If you are using PostHog Cloud then PostHog is the Data Processor and you are the Data Controller.
-
-If you are self-hosting PostHog then you are both the Data Processor and the Data Controller because you are responsible for your PostHog instance.
-
-In both cases you are the Data Controller.
+PostHog enables you to self-host your analytics on your own infrastructure and maintain full control of the data – i.e. you decide how and where to host any personal information. It also means you have full control of the underlying database, making it possible for you to easily share any information stored about an individual or delete any personal data. 
 
 ### Step 1: Choose a hosting provider
 
@@ -86,30 +60,9 @@ We also strongly recommend that you limit access to PostHog and the infrastructu
 
 Finally, we advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
 
-### Step 4: Configure consent
+## Deleting personal information in PostHog
 
-Since PostHog automatically captures data which can be personal data, you must provide a mechanism for the consensual capturing of that data. In the GDPR, this is called the [right to be informed](https://gdpr-info.eu/issues/right-to-be-informed/).
-
-Within the consent you should identify the types of personal data that are being processed and what tools are being used to process them:
-
-- **If you are using PostHog Cloud** you should identify PostHog as a tool 
-- **If you are self-hosting** you can either not list a tool or provide a generic description such as "Product Analytics".
-
-If a user **opts out** then you must stop data capturing and processing. Here are some ways PostHog makes this possible:
-
-- If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](https://posthog.com/docs/integrate/client/js#opt-users-out)
-
-- Ensure [posthog-js is configured](https://posthog.com/docs/integrate/client/js#config) not to auto-capture and do not make [capture](https://posthog.com/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
-
-- Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
-
-- Do not initialize the posthog-js SDK via the call to `init`. If you do this you should ensure your application logic always performs conditional checks regarding the initialization state of the PostHog SDK.
-
-## Complying with 'right to be forgotten' requests
-
-A user must be able to request that their data be removed from PostHog. How you facilitate that request is up to you. For example, you could accept requests via email or form submission.
-
-You can remove a user from a PostHog instance via the PostHog user interface. To do this:
+If a user request the deletion of their information under the CCPA, complete the following steps:
 
 - Select **Persons** from the left-hand menu
 - Search for the person via their unique ID. For example, their email
