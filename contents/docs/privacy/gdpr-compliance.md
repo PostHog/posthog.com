@@ -7,7 +7,7 @@ showTitle: true
 
 The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy and security law, drafted and passed by the European Union (EU). It imposes obligations onto organizations anywhere, so long as they target or collect data related to people in the EU.
 
-We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe. It can lead to fines reaching into the tens of millions of euros and can be up to 4% of global revenue.
+We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe.
 
 ## What data is protected under GDPR?
 

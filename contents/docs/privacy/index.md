@@ -15,7 +15,7 @@ In these guides, we offer advice for using PostHog in a compliant manner under t
 
 - [The California Consumer Privacy Act](/docs/privacy/ccpa-compliance/), which applies to qualifying for-profit businesses collecting personal information on residents of California
 
-These guides don't constitute legal and advice. We recommend seeking professional advice to ensure you remain compliant with relevant legislation.
+**Please note:** these guides don't constitute legal advice. We recommend seeking professional advice to ensure you remain compliant with relevant legislation.
 
 In addition to these guides, we also provide ongoing [updates and advice on privacy issues](/blog/categories/privacy) on the PostHog blog.
 
