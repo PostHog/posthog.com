@@ -35,17 +35,15 @@ It’s worth noting that some tiers do not have access to premium features, such
 
 > Session Recordings do not currently count towards your free event limit and there is no limit on the number of recordings you can capture on any pricing tier.
 
-## Step 2: Disable autocapture (optional)
+## Step 2: Enable event capture
 
 ![free hotjar alternative - disable auto](../images/tutorials/hotjar-alternative/disable-autocapture.png)
 
-PostHog can automatically capture many types of events, such as pageviews, pageleaves or [feature flag](/docs/user-guides/feature-flags) calls. This is achieved via a snippet found in your Project Settings, which must be added just above the `</head>` tag in your website HTML. This snippet also enables you to capture custom events. 
+We strongly recommend enabling PostHog's autocapture feature to make sure you get the most out of Session Recording and that common events, such as pageviews, are automatically ingested. You can then analyse these events and filter Session Recordings for them, combining the capabilities of Hotjar with a product analytics platform. 
 
-Autocaptured events count towards your total number of events, so if you wish to stay within your free allowance then it may be best to [disable autocapture](https://posthog.com/docs/integrate/client/js#config). 
+To start capturing events you must add the snippet found in your Project Settings page above the `</head>` tag in your website HTML. This snippet also enables you to capture custom events which may be unique to your product.
 
-Users who opt out of capturing _any_ events will not be able to record sessions as, while session recordings do not count towards your allowance of free events, each recording does generate at least one event. 
-
-> Disabling autocapture will mean you can only track custom events which you have defined within PostHog, and will greatly limit your ability to analyze product usage.
+You can [disable autocapture](https://posthog.com/docs/integrate/client/js#config) separately if you only wish to capture custom events, but doing so will greatly limit your ability to filter Session Recordings or to analyze product usage. You cannot opt out of capturing any events, as while while session recordings do not count towards your allowance of free events, each recording does generate at least one event. 
 
 ## Step 3: Enable Session Recording & Heatmaps
 
