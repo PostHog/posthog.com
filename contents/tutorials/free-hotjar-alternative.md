@@ -1,11 +1,11 @@
 ---
-title: How to replace Hotjar for free
+title: How to replace Hotjar for free with PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/internal-users-filter.png
 featuredTutorial: true
 author: ["joe-martin"]
-topics: ['filters']
+topics: ['session recording']
 date: 2022-02-16
 ---
 
@@ -39,7 +39,7 @@ It’s worth noting that some tiers do not have access to premium features, such
 
 ![free hotjar alternative - disable auto](../images/tutorials/hotjar-alternative/disable-autocapture.png)
 
-PostHog can automatically capture many types of events, such as pageviews, pageleaves or [feature flag](/docs/user-guides/feature-flags) calls. This is achieved via a snippet found in your Project Settings, which must be added just above the </head> tag in your website HTML. This snippet also enables you to capture custom events. 
+PostHog can automatically capture many types of events, such as pageviews, pageleaves or [feature flag](/docs/user-guides/feature-flags) calls. This is achieved via a snippet found in your Project Settings, which must be added just above the `</head>` tag in your website HTML. This snippet also enables you to capture custom events. 
 
 Autocaptured events count towards your total number of events, so if you wish to stay within your free allowance then it may be best to [disable autocapture](https://posthog.com/docs/integrate/client/js#config). 
 
@@ -59,11 +59,11 @@ Once Session Recordings are enabled, you must add the sites you want to record s
 
 If you visit any of the permitted domains or URLs while logged in to PostHog then the [toolbar](/docs/user-guides/toolbar) will automatically launch, enabling you to view heatmap data, toggle feature flags and inspect page elements. 
 
-## Step 4: Ignore sensitive information
+## Step 4: Ignore sensitive user info
 
 If your product captures any sensitive information from users, you can add the CSS class name `ph-no-capture` to elements in order to [block PostHog from capturing sensitive information](https://posthog.com/docs/user-guides/recordings#ignoring-sensitive-elements).  
 
-## Step 4: Watch recordings (and close your Hotjar account)
+## Step 5: Watch recordings and close your Hotjar account
 
 ![free hotjar alternative - posthog](../images/tutorials/hotjar-alternative/watch-recording.png)
 
