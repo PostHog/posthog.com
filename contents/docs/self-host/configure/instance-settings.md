@@ -24,7 +24,7 @@ Starting with version 1.34.0, staff users can also easily manage (add/remove) ot
 
 If you don't have any staff users (e.g. if you deployed PostHog before version 1.32.0), you can add your first staff user, by connecting to your instance (via a `web` pod), and then running the commands below.
 
-> To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-django)
+> To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-the-web-server)
 
 
 ```bash
