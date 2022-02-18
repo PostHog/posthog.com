@@ -26,9 +26,10 @@ hideAnchor: true
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
     - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - Harry Waye, Full Stack Engineer
-  - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
+  - [Charles Cook, VP of Operations & Marketing](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
     - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
+    - Grace McKenzie, Operations Manager
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
     - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
@@ -81,9 +82,9 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 <br />
 
 ### [Marketing](marketing)
-- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops)
+- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
-- [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
+- [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
 
 <br />
 
@@ -94,8 +95,10 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-### [People & culture](people)
+### [People & Operations](people)
+- [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
+- Grace McKenzie (Operations Manager)
 
 <br />
 

@@ -25,7 +25,7 @@ Sam is a Senior Software Engineer at a mid-sized developer tool company. Obvious
 
 28 years old, Sam doesn’t often post on Facebook or LinkedIn, but is more active on Twitter and Reddit and likes to engage with specific developer communities there. 
 
-Sam first found PostHog through Google, but had seen the company mentioned before on sites such as HackerNews. Sam was specifically looking for a self-hosted alternative to other tools. Sam liked that PostHog seemed more technical than the likes of Amplitude or Pendo, and the fact that it was open source was interesting too. 
+Sam first found PostHog through Google, but had seen the company mentioned before on sites such as Hacker News. Sam was specifically looking for a self-hosted alternative to other tools. Sam liked that PostHog seemed more technical than the likes of Amplitude or Pendo, and the fact that it was open source was interesting too. 
 
 The main trigger for moving forward was that Sam could self-host the analytics and didn’t need to share data with third parties. Deploying quickly and working iteratively would be a definite advantage, especially as PostHog promised to scale through ClickHouse. Sam didn’t think much about pricing at this stage. 
 
