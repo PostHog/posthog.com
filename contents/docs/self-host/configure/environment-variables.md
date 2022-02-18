@@ -79,7 +79,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 ## Instance settings
 
-The following settings should mainly be managed with [Instance settings](/docs/self-host/configure/instance-settings). However, if you can still set them via environment variables if you prefer. Please be mindful that if these settings are overriden in the settings page, the overriden values will prevail.
+The following settings should mainly be managed with [Instance settings](/docs/self-host/configure/instance-settings). However, if you can still set them via environment variables if you prefer. Please be mindful that if these settings are overridden in the settings page, the overridden values will prevail.
 
 | Variable                   | Description                           | Default Value          | Managed with Instance Settings |
 | :------------------------: | :------------------------------------ | :-------------------: |  :-------------------: |
