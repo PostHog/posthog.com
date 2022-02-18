@@ -1,5 +1,5 @@
 ---
-date: 2022-02-11
+date: 2022-02-18
 title: I used to think you don't need product people. I was wrong.
 rootPage: /blog
 sidebar: Blog
