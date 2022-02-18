@@ -31,6 +31,7 @@
         "@mdx-js/react": "^1.6.22",
         "@popperjs/core": "^2.10.2",
         "@slack/bolt": "^3.8.1",
+        "@supabase/supabase-js": "^1.29.4",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
         "autoprefixer": "^10.3.1",
@@ -116,7 +117,8 @@
         "sharp": "^0.27.2",
         "slugify": "^1.6.0",
         "svg-sprite": "^1.5.0",
-        "typescript": "^4.0.2"
+        "typescript": "^4.0.2",
+        "xss": "^1.0.10"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",

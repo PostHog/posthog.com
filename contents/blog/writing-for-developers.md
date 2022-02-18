@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Startups", "CEO diaries", "Inside PostHog"]
 ---
 
-As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
+As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).
 
 Out of five posts that I hoped would get there, four did. Look mom, lots of traffic:
 

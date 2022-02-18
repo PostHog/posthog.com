@@ -160,6 +160,12 @@ The probability of a variant being the best is given by:
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
+### Trend Experiment Exposure
+
+Since count data can be over a total count, vs. the number of unique users, we use a proxy metric to measure exposure: The number of times `$feature_flag_called` event returns `control` or `test` is the respective exposure for the variant. This event is sent automatically when you do: `posthog.getFeatureFlag()`.
+
+It's possible that a variant showing fewer count data can have higher probability, if its exposure is much smaller as well.
+
 ### Funnel Experiment Calculations
 
 Funnel experiments capture conversion rates. For example, if you want to measure the change in conversion rate for buying a subscription to your site, you'd use this kind of experiment.

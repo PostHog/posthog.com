@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides", "Product Analytics"]
+categories: ["Guides", "Product analytics"]
 ---
 
 Understanding the needs of your users better than anyone else is critical for the success of any product.

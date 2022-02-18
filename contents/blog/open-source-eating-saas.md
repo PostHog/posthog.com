@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Open Source", "Product Analytics"]
+categories: ["Open source", "Product analytics"]
 ---
 
 Software-as-a-Service (SaaS) fatigue is real.
@@ -24,7 +24,7 @@ It has never been so easy to launch a SaaS product. That means there is an [ocea
 
 Following the open source route means you are building in a place like GitHub, which is *designed* for people to raise issues and submit feature requests. The vast majority of open source users already have a GitHub account and can just raise an issue. SaaS product feedback in the early days usually involves emails/phone calls/Slack groups. Open source has all of this available *and* their community of users are already used to leaving feedback in the repo.
 
-It's tough to measure the advantages of this stuff, but taking YCombinator launches on HackerNews, we think this is why our own launch was the most upvoted from the [W20 batch](https://bestofshowhn.com/yc-w20).. and that's with a product at the time which was only 4 weeks old. Unsurprisingly, there are now a bunch of awesome OS projects in S20 with the same or more upvotes than us :)
+It's tough to measure the advantages of this stuff, but taking YCombinator launches on Hacker News, we think this is why our own launch was the most upvoted from the [W20 batch](https://bestofshowhn.com/yc-w20).. and that's with a product at the time which was only 4 weeks old. Unsurprisingly, there are now a bunch of awesome OS projects in S20 with the same or more upvotes than us :)
 
 ## Your work is public 
 
