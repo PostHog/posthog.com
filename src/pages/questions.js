@@ -82,12 +82,9 @@ const Question = ({ question }) => {
                 </p>
             </div>
             <div className="artcle-content my-2">
-                <p>{childMdx.excerpt}</p>
+                <p className="m-0">{childMdx.excerpt}</p>
             </div>
-            <Link
-                className="text-black dark:text-white hover:text-black dark:hover:text-white m-0 text-[13px] font-semibold opacity-50"
-                to={`/questions/${question.id}`}
-            >
+            <Link className="text-red hover:red m-0 text-[13px] font-semibold" to={`/questions/${question.id}`}>
                 {replies.length - 1} response{replies.length - 1 === 1 ? '' : 's'}
             </Link>
         </li>
