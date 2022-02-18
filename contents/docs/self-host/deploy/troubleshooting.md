@@ -108,7 +108,7 @@ POSTHOG_WEB_POD_NAME=$(kubectl get pods -n posthog | grep -- '-web-' | awk '{pri
 kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- python manage.py shell_plus
 ```
 
-In a moment you see the shell load, and finally a message like this:
+In a moment you should see the shell load and finally a message like this appear:
 
 ```
 Type "help", "copyright", "credits" or "license" for more information.
