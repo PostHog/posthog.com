@@ -476,48 +476,28 @@
                             "url": "",
                             "children": [
                                 {
-                                    "name": "AWS",
-                                    "url": "/docs/self-host/deploy/aws"
-                                },
-                                {
-                                    "name": "Azure",
-                                    "url": "/docs/self-host/deploy/azure"
+                                    "name": "Hobby",
+                                    "url": "/docs/self-host/deploy/hobby"
                                 },
                                 {
                                     "name": "Digital Ocean",
                                     "url": "/docs/self-host/deploy/digital-ocean"
                                 },
                                 {
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
                                     "name": "Google Cloud Platform",
                                     "url": "/docs/self-host/deploy/gcp"
                                 },
                                 {
-                                    "name": "Hobby",
-                                    "url": "/docs/self-host/deploy/hobby"
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
                                 },
                                 {
                                     "name": "Other platforms",
                                     "url": "/docs/self-host/deploy/other"
-                                },
-                                {
-                                    "name": "EU-only hosting",
-                                    "url": "/docs/self-host/deploy/hosting-in-eu"
-                                },
-                                {
-                                    "name": "Configuration",
-                                    "url": "/docs/self-host/deploy/configuration"
-                                },
-                                {
-                                    "name": "Upgrade notes",
-                                    "url": "/docs/self-host/deploy/upgrade-notes"
-                                },
-                                {
-                                    "name": "Managing hosting costs",
-                                    "url": "/docs/self-host/deploy/hosting-costs"
-                                },
-                                {
-                                    "name": "Troubleshooting and FAQs",
-                                    "url": "/docs/self-host/deploy/troubleshooting"
                                 }
                             ]
                         },
@@ -542,37 +522,41 @@
                                     "url": "/docs/self-host/configure/email"
                                 },
                                 {
-                                    "name": "Upgrading PostHog",
-                                    "url": "/docs/self-host/configure/upgrading-posthog"
-                                },
-                                {
-                                    "name": "Async migrations",
-                                    "url": "",
-                                    "children": [
-                                        {
-                                            "name": "Overview",
-                                            "url": "/docs/self-host/configure/async-migrations/overview"
-                                        },
-                                        {
-                                            "name": "0002_events_sample_by",
-                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
-                                        },
-                                        {
-                                            "name": "0003_fill_person_distinct_id2",
-                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
-                                        }
-                                    ]
+                                    "name": "Helm chart configuration",
+                                    "url": "/docs/self-host/deploy/configuration"
                                 }
                             ]
                         },
                         {
-                            "name": "Self-host architecture",
+                            "name": "Architecture",
                             "url": "/docs/self-host/architecture"
+                        },
+                        {
+                            "name": "Managing hosting costs",
+                            "url": "/docs/self-host/deploy/hosting-costs"
+                        },
+                        {
+                            "name": "EU-only hosting",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
                         },
                         {
                             "name": "Runbook",
                             "url": "/docs/self-host/runbook",
                             "children": [
+                                {
+                                    "name": "Upgrading PostHog",
+                                    "url": "/docs/self-host/configure/upgrading-posthog",
+                                    "children": [
+                                        {
+                                            "name": "Upgrade notes",
+                                            "url": "/docs/self-host/deploy/upgrade-notes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Troubleshooting and FAQs",
+                                    "url": "/docs/self-host/deploy/troubleshooting"
+                                },
                                 {
                                     "name": "ClickHouse",
                                     "url": "/docs/self-host/runbook/clickhouse",
@@ -632,6 +616,24 @@
                                     "name": "Zookeeper",
                                     "url": "/docs/self-host/runbook/zookeeper",
                                     "children": []
+                                },
+                                {
+                                    "name": "Async migrations",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/configure/async-migrations/overview"
+                                        },
+                                        {
+                                            "name": "0002_events_sample_by",
+                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                        },
+                                        {
+                                            "name": "0003_fill_person_distinct_id2",
+                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
                                 }
                             ]
                         }
