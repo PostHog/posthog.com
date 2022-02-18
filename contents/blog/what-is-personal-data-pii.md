@@ -18,11 +18,11 @@ This guide will help you understand what is and isn't personal data, and identif
 **Contents:**
 
 - [What is PII?](#what-is-pii)
- - [Examples of PII](#examples-of-pii)
- - [The difference between PII and PHI](#whats-the-difference-between-pii-and-phi)
+    - [Examples of PII](#examples-of-pii)
+    - [The difference between PII and PHI](#whats-the-difference-between-pii-and-phi)
 - [What is personal data?](#what-is-personal-data)
- - [Examples of personal data under the GDPR](#examples-of-personal-data-under-gdpr)
- - [What is non-personal data?](#what-is-non-personal-data)
+    - [Examples of personal data under the GDPR](#examples-of-personal-data-under-gdpr)
+    - [What is non-personal data?](#what-is-non-personal-data)
 - [PostHog and privacy compliance](#posthog-and-privacy-compliance)
 
 ## What is PII?
