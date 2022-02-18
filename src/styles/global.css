@@ -698,6 +698,10 @@ ul {
     @apply !p-2;
 }
 
+.w-md-editor-content {
+    @apply !h-[150px];
+}
+
 .w-md-editor {
     @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md;
 }
