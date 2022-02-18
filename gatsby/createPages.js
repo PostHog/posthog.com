@@ -278,28 +278,27 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         let next = null
         let previous = null
         let breadcrumb = null
-        // const tableOfContents = formatToc(node.headings)
-        // docsMenuFlattened.some((item, index) => {
-        //     if (item.url === slug) {
-        //         next = docsMenuFlattened[index + 1]
-        //         previous = docsMenuFlattened[index - 1]
-        //         breadcrumb = item.breadcrumb
-        //         return true
-        //     }
-        // })
+        const tableOfContents = formatToc(node.headings)
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
 
         createPage({
             path: replacePath(node.url),
             component: ApiEndpoint,
             context: {
                 id: node.id,
-                // next,
-                // previous,
-                // menu: docsMenu,
-                // breadcrumb,
-                // breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
+                next,
+                previous,
+                menu: handbookMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                tableOfContents,
             },
         })
     })

@@ -1,3 +1,14 @@
 .menu-content {
     display: none !important;
 }
+
+.api-documentation {
+    hr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    }
+    code {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        padding: 0 3px;
+    }
+}
