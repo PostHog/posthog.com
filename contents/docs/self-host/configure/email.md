@@ -38,7 +38,7 @@ EMAIL_DEFAULT_FROM: no-reply@example.com
 SITE_URL: https://posthog.example.com
 ```
 
-The above sample configuration can also be set in your `values.yaml` this way, however configuring your email service with [Instance settings](/docs/self-host/configure/instance-settings) instead is highly recommended:
+The above sample configuration can also be set in your `values.yaml` this way, however configuring your email service with [Instance settings](/docs/self-host/configure/instance-settings) instead is highly recommended (this is because environment variables are only read when there are no values set from the UI/API, i.e. the values set from the UI/API take precedence, as such setting them here can help you ensure you have a single source of truth):
 ```yaml
 email:
   from_email: no-reply@example.com

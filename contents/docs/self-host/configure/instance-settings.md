@@ -18,11 +18,14 @@ Settings can easily be updated from PostHog's user interface. When updating, set
 
 Staff users are a special kind of instance-level permission that allows managing advanced instance-wide settings. A user can be a staff user regardless of their permission level to any organization(s) or project(s) in your instance. Only staff users can manage these settings.
 
-Staff users can also easily manage (add/remove) other staff users via the PostHog user interface or the API. You can visit the _Instance status_ (`/instance/status/`) page and navigate to the "Staff users" tab to do this.
+Starting on 1.34.0 version, staff users can also easily manage (add/remove) other staff users via the PostHog user interface or the API. You can visit the _Instance status_ (`/instance/status/`) page and navigate to the "Staff users" tab to do this.
 
 As of PostHog 1.32.0, the first user in any instance is a staff user. This user can then add others if applicable. When possible, it is recommended to have multiple staff users to ensure your instance can always be properly maintained.
 
-If you don't have any staff users (e.g. if you deployed PostHog before version 1.32.0), you can add your first staff user, by connecting to your instance (via a `web` pod), and then running the following commands.
+If you don't have any staff users (e.g. if you deployed PostHog before version 1.32.0), you can add your first staff user, by connecting to your instance (via a `web` pod), and then running the commands below.
+
+> To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres)
+
 
 ```bash
 python manage.py shell_plus
