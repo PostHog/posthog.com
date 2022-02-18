@@ -1,6 +1,6 @@
 ---
 title: PostHog & HIPAA compliance
-sidebarTitle: PostHog & the HIPAA
+sidebarTitle: PostHog & HIPAA
 sidebar: Docs
 showTitle: true
 ---

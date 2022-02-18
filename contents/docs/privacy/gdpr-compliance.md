@@ -1,6 +1,6 @@
 ---
 title: PostHog & GDPR compliance
-sidebarTitle: PostHog & the GDPR
+sidebarTitle: PostHog & GDPR
 sidebar: Docs
 showTitle: true
 ---
