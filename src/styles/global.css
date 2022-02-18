@@ -685,7 +685,7 @@ ul {
 }
 
 .w-md-editor-toolbar {
-    @apply !h-auto !bg-white dark:!bg-gray-accent-light !p-2 !border-dashed !border-gray-accent-light !rounded-tr-md !rounded-tl-md;
+    @apply !h-auto !bg-white !p-2 !border-dashed !border-gray-accent-light;
     ul {
         @apply flex items-center;
         button {
@@ -703,5 +703,12 @@ ul {
 }
 
 .w-md-editor {
-    @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md;
+    @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md overflow-hidden;
+}
+
+body.dark {
+    .w-md-editor-toolbar,
+    .w-md-editor-content {
+        @apply !bg-gray-accent-light;
+    }
 }
