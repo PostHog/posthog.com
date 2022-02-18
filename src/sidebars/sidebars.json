@@ -1028,15 +1028,15 @@
                     "url": "/docs/privacy/"
                 },
                 {
-                    "name": "PostHog & GDPR",
+                    "name": "GDPR guidance",
                     "url": "/docs/privacy/gdpr-compliance"
                 },
                 {
-                    "name": "PostHog & HIPAA",
+                    "name": "HIPAA guidance",
                     "url": "/docs/privacy/hipaa-compliance"
                 },
                 {
-                    "name": "PostHog & CCPA",
+                    "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
                 }
             ]
