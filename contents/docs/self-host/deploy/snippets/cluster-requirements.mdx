@@ -18,7 +18,7 @@
     In case it returns `false`, you can enable volume expansion capabilities for your storage class by running:
 
     ```shell
-    kubectl patch storageclass -p '{"allowVolumeExpansion": true}'
+    kubectl patch storageclass nameofstorageclass -p '{"allowVolumeExpansion": true}'
     storageclass.storage.k8s.io/gp2 patched
     ```
 
