@@ -96,7 +96,7 @@ TooManyConnections: too many connections
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 
-### How do I connect do Django?
+### How do I connect to Django?
 
 1. Find the name of the pod you want to connect to:
 
