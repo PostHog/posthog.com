@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting and FAQ
+title: Troubleshooting and debugging your PostHog instance
 sidebar: Docs
 showTitle: true
 ---

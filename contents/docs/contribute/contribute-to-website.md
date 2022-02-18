@@ -367,6 +367,29 @@ Once you've made a new markdown file, you should link to it from the sidebar whe
 
 The sidebar is generated from `/src/sidebars/sidebars.json`.
 
+#### Redirects
+
+Redirects are managed in `netlify.toml` which is located in the root folder.
+
+To declare a new redirect, open `netlify.toml` and add an entry with the `[[redirects]]` heading:
+
+```
+[[redirects]]
+    from = "/docs/integrations/android-integration"
+    to = "/docs/libraries/android"
+```
+
+The default HTTP status code is 301, but if you need to define a different status code, it can be changed like this:
+
+```
+[[redirects]]
+    from = "/docs/integrations/android-integration"
+    to = "/docs/libraries/android"
+    status = 302
+```
+
+>  If you ever need to rename a file to get a different slug, a redirect is automatically created with the Safe Redirects action
+
 ## Committing changes
 
 It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
