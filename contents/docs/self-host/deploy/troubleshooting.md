@@ -96,7 +96,7 @@ TooManyConnections: too many connections
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
 
-### How do I connect to the web server?
+### How do I connect to the web server's shell?
 
 PostHog is built on Django, which comes with some useful utilities. One of them is a Python shell.
 You can connect to it like so:
