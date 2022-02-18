@@ -37,11 +37,13 @@ Because Google doesn't allow Covered Entities to enter into a BAA with it, as th
 
 > Unless otherwise specified in writing by Google, Google does not intend uses of Google Analytics to create obligations under the Health Insurance Portability and Accountability Act, as amended, (“HIPAA”), and makes no representations that Google Analytics satisfies HIPAA requirements. If you are (or become) a Covered Entity or Business Associate under HIPAA, you may not use Google Analytics for any purpose or in any manner involving Protected Health Information unless you have received prior written consent to such use from Google.
 
-Because using Google Analytics requires transmitting data to Google-owned servers, a BAA would be necessary to be compliant. Were you to use Google Analytics to process or transmit PHI you would be liable for investigation and a fine.
+A BAA is necessary because Google Analytics transmits data to Google-owned servers when you use it. Were you to use Google Analytics to process or transmit PHI you would be liable for investigation and a fine.
 
-## How much does violating HIPAA cost?
+## HIPAA fines, explained
 
 HIPAA fines operate on a sliding scale based on the severity of the breach and the total number of breaches. This means they get expensive very quickly, especially for products or businesses with large user bases. The largest HIPAA fine to date is [$16 million](https://www.hipaajournal.com/anthem-inc-settles-state-attorneys-general-data-breach-investigations-and-pays-48-2-million-in-penalties/) against health insurer Anthem.
+
+Fines aren't limited to large businesses. In 2017, a [children's charity was fined](https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/ccdh/index.html) due to storing PHI on a third-party platform without a BAA.
 
 ## HIPAA-compliant alternatives to Google Analytics
 
@@ -53,7 +55,7 @@ If you want to find [product market fit](https://posthog.com/blog/how-to-product
 
 While there are lots options out there, we think **PostHog is the most HIPAA-compliant product analytics platform** out there.
 
-Unlike third-party analytics options like Mixpanel or Amplitude, **PostHog is the only comprehensive product analytics suite you can self-host** on your own infrastructure. 
+Unlike third-party analytics options like Mixpanel or Amplitude, **PostHog is the only comprehensive product analytics platform you can self-host** on your own infrastructure. 
 
 This is important because:
 
@@ -61,8 +63,8 @@ This is important because:
 
 2. **You don't need a Business Associate Agreement:** BAAs are time-consuming and expensive, and also require frequent legal review to ensure continued compliance. Self-hosting means you don't need to enter into any additional BAAs, other than the one you should already have with your existing cloud provider.
 
-3. **Compliance doesn't cost extra:** If you need HIPAA compliance, third-party providers will frequently demand you use a more expensive tier of their product than you really need. Customers who use PostHog as their [HIPAA-compliant analytics provider](link to listicle here) pay the same as customers with less stringent privacy needs.
+3. **Compliance doesn't cost extra:** If you need HIPAA compliance, third-party providers will frequently demand you use a more expensive tier of their product than you really need. Customers who use PostHog as their [HIPAA-compliant analytics provider](https://posthog.com/blog/best-hipaa-compliant-analytics-tools) pay the same as customers with less stringent privacy needs.
 
-Read our [PostHog & HIPAA compliance guide](link to new docs page) for more info on how to deploy PostHog correctly, or [book a demo](https://posthog.com/book-a-demo) to learn more.
+Read our [PostHog & HIPAA compliance guide](/docs/privacy/hipaa-compliance) for more info on how to deploy PostHog correctly, or [book a demo](https://posthog.com/book-a-demo) to learn more.
 
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. [Try PostHog for free today](https://posthog.com/signup) or [book a demo](https://posthog.com/book-a-demo) to learn more.
