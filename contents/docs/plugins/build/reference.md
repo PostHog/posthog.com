@@ -670,3 +670,11 @@ const { createEvent, createIdentify} = require("@posthog/plugin-scaffold/test/ut
 ```
 
 For testing cron activities (e.g. run every minute), we recommend testing the functions that are called from this cron in your test - rather than trying to mock the cron event.
+
+### Running tests
+
+If you have configured your package.json file as above you should be able to run
+
+`npm run test` 
+
+And your tests will execute.
