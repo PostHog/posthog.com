@@ -104,7 +104,7 @@ export default function FAQ({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <section className="max-w-[884px] mx-auto my-12">
+            <section className="max-w-[884px] mx-auto my-12 px-5">
                 <h1>FAQ</h1>
                 <p>
                     We’ve been asked hundreds of questions, so we decided to compile the answers here. (We hope this
