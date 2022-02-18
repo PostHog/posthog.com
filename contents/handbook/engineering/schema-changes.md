@@ -10,15 +10,15 @@ and require extra effort from the engineering team.
 
 Below are some important considerations to keep in mind regarding schema changes:
 
-## Avoid deleting or renaming Django models and fields
+## Do not delete or rename Django models and fields
 
 Deleting and renaming tables and columns, even completely unused ones, is strongly discouraged.
 
 The reason is that the Django ORM **always** specifies tables and columns to fetch in its `SELECT` queries – so when a migration moves a table/column away, in between the migration having ran and the new server having deployed completely, there's a period where the old server is still live and tries to `SELECT` that column. The only thing it gets from the database though is an error, as the resource isn't there anymore! This situation results in a period of short-lived but very significant pain for users.
 
-To avoid this pain, **do not delete/rename models and fields**. Instead:
-- if the name is no longer relevant, keep it the same in the database, but feel free to change the naming in Python/JS code (just make sure the change ISN'T reflected in the DB),
-- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it.
+To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
+- if the name is no longer relevant, keep it the same in the database – feel free to change the naming in Python/JS code, but make sure the change ISN'T reflected in the database,
+- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it be.
 
 ## Design for PostHog Cloud scale
 
