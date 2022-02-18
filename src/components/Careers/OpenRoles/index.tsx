@@ -22,7 +22,8 @@ export const OpenRoles = () => {
                             into a better time to apply.
                         </p>
                         <p>
-                            Regardless of the timing of your application or interest in PostHog, you can go ahead and contribute to one of our
+                            Regardless of the timing of your application or interest in PostHog, you can go ahead and
+                            contribute to one of our
                             <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
                                 good first issues
                             </a>
