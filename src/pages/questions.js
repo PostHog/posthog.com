@@ -25,6 +25,7 @@ const Search = () => {
         <>
             {modal && (
                 <DocSearchModal
+                    searchParameters={{ facetFilters: [`tags:questions`] }}
                     onClose={() => setModal(false)}
                     initialQuery={value}
                     appId="B763I3AO0D"
@@ -111,11 +112,13 @@ export default function FAQ({
                     helps you find what you’re looking for even faster!)
                 </p>
                 <Search />
-                <ul className="list-none p-0 m-0">
-                    {nodes.map((question, index) => (
-                        <Question key={index} question={question} />
-                    ))}
-                </ul>
+                <div className="questions-content">
+                    <ul className="list-none p-0 m-0">
+                        {nodes.map((question, index) => (
+                            <Question key={index} question={question} />
+                        ))}
+                    </ul>
+                </div>
             </section>
         </Layout>
     )
