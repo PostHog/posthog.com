@@ -1,18 +1,17 @@
-import Breadcrumbs from 'components/Breadcrumbs'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
-import React, {useState} from 'react'
+import React, { useRef, useState } from 'react'
+import { push as Menu } from 'react-burger-menu'
 import '../styles/api-docs.scss'
+import MainSidebar from './Handbook/MainSidebar'
+import Navigation from './Handbook/Navigation'
+import SectionLinks from './Handbook/SectionLinks'
 
-import { RedocStandalone } from 'redoc'
 import Highlight, {defaultProps} from 'prism-react-renderer'
 import CodeBlock from 'components/Home/CodeBlock'
 import { Button } from 'antd'
 import ReactMarkdown from 'react-markdown'
-import { push as Menu } from 'react-burger-menu'
-import MainSidebar from './Handbook/MainSidebar'
-import Navigation from './Handbook/Navigation'
 
 function Endpoints({paths}) {
     const map_verbs = {
@@ -178,10 +177,12 @@ function ResponseExample({item, objects, objectKey}) {
     </Highlight>
 }
 
-export default function ApiEndpoint({
-    data,
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
-    }) {
+
+const SectionLinksTop = ({ previous, next }) => {
+    return <SectionLinks className="mt-9" previous={previous} next={next} />
+}
+
+export default function ApiEndpoint({ data, pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase } }) {
     const {
         data: { id, items, name, url },
         components: { components },
@@ -194,47 +195,60 @@ export default function ApiEndpoint({
         paths[item.path][item.httpVerb] = item.operationSpec
     })
     const objects = JSON.parse(components)
-    console.log(objects)
-    console.log(paths)
+    const mainEl = useRef()
+
     const [menuOpen, setMenuOpen] = useState(false)
+
     const handleMobileMenuClick = () => {
         setMenuOpen(!menuOpen)
     }
-    const slug = ""
-    const title=""
-    const filePath = ""
+    const styles = {
+        bmOverlay: {
+            background: 'transparent',
+        },
+    }
     return (
         <>
             <SEO title={`${name} - PostHog`} />
             <Layout>
                 <div className="handbook-container px-4">
                     <div id="handbook-menu-wrapper">
-                        {/* <Menu
+                        <Menu
                             width="calc(100vw - 80px)"
                             onClose={() => setMenuOpen(false)}
                             customBurgerIcon={false}
                             customCrossIcon={false}
-                            // styles={styles}
+                            styles={styles}
                             pageWrapId="handbook-content-menu-wrapper"
                             outerContainerId="handbook-menu-wrapper"
                             overlayClassName="backdrop-blur"
                             isOpen={menuOpen}
                         >
-                            <MainSidebar height={'auto'} menu={menu} slug={""} className="p-5 pb-32 md:hidden" />
+                            <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32 md:hidden" />
                         </Menu>
                         <Navigation
-                            next={next}
-                            previous={previous}
-                            title={title}
-                            filePath={filePath}
+                            title={name}
+                            filePath={null}
                             breadcrumb={breadcrumb}
                             breadcrumbBase={breadcrumbBase}
                             menuOpen={menuOpen}
                             handleMobileMenuClick={handleMobileMenuClick}
-                        /> */}
-                        <div id="handbook-content-menu-wrapper">
-                            <div className="max-w-screen-sm mx-auto px-4 flex flex-col md:flex-row items-start mt-16 md:mt-20">
-                                <section className="plugin-content api-documentation">
+                            />
+
+                    </div>
+                    <section id="handbook-content-menu-wrapper">
+                        <SectionLinksTop next={next} previous={previous} />
+                        <div className="flex items-start mt-8">
+                            <MainSidebar
+                                height={'auto'}
+                                sticky
+                                top={90}
+                                mainEl={mainEl}
+                                menu={menu}
+                                slug={slug}
+                                className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
+                            />
+                            <article className="article-content api-content-container api-documentation" ref={mainEl}>
                                     <h2>{name}</h2>
                                     
                                     <Endpoints paths={paths} />
@@ -264,11 +278,9 @@ export default function ApiEndpoint({
                                             <hr />
                                         </>
                                     })}
-                                    
-                                </section>
-                            </div>
+                            </article>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </Layout>
         </>

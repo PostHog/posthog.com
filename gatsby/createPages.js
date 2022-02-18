@@ -275,10 +275,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     })
 
     result.data.apidocs.nodes.forEach((node) => {
+        const slug = replacePath(node.url)
         let next = null
         let previous = null
         let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
         docsMenuFlattened.some((item, index) => {
             if (item.url === slug) {
                 next = docsMenuFlattened[index + 1]
@@ -289,16 +289,19 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
 
         createPage({
-            path: replacePath(node.url),
+            path: slug,
             component: ApiEndpoint,
             context: {
                 id: node.id,
+                slug,
+                menu: docsMenu,
                 next,
                 previous,
-                menu: handbookMenu,
+                // menu: docsMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents,
+                // tableOfContents,
+                // slug,
             },
         })
     })
