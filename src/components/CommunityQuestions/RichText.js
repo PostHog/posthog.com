@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion'
-import { isKeyHotkey } from 'is-hotkey'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { createEditor, Editor, Element, Path, Range, Transforms } from 'slate'
-import { withHistory } from 'slate-history'
-import { Editable, ReactEditor, Slate, useFocused, useSelected, useSlate, withReact } from 'slate-react'
+import MDEditor from '@uiw/react-md-editor'
+import React, { useEffect } from 'react'
+import rehypeSanitize from 'rehype-sanitize'
 
-const icons = {
-    b: (
+const bold = {
+    name: 'bold',
+    keyCommand: 'bold',
+    buttonProps: { 'aria-label': 'Bold' },
+    icon: (
         <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M0.394742 13H5.65074C8.31474 13 10.1867 11.632 10.1867 9.238C10.1867 7.6 9.21474 6.574 8.08074 6.124C8.80074 5.728 9.53874 4.828 9.53874 3.64C9.53874 1.534 7.79274 0.399999 5.52474 0.399999H0.394742V13ZM3.23874 10.552V7.546H5.41674C6.87474 7.546 7.50474 8.086 7.50474 9.076C7.50474 10.048 6.87474 10.552 5.41674 10.552H3.23874ZM3.23874 5.17V2.632H5.23674C6.42474 2.632 6.92874 3.118 6.92874 3.91C6.92874 4.684 6.42474 5.17 5.29074 5.17H3.23874Z"
@@ -14,7 +14,20 @@ const icons = {
             />
         </svg>
     ),
-    i: (
+    execute: (state, api) => {
+        let modifyText = `**${state.selectedText}**`
+        if (!state.selectedText) {
+            modifyText = `****`
+        }
+        api.replaceSelection(modifyText)
+    },
+}
+
+const italic = {
+    name: 'italic',
+    keyCommand: 'italic',
+    buttonProps: { 'aria-label': 'Italicize' },
+    icon: (
         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M0.0360938 13H1.56609L3.00609 3.928H1.47609L0.0360938 13ZM1.63809 2.2H3.40209L3.70809 0.256H1.94409L1.63809 2.2Z"
@@ -22,16 +35,20 @@ const icons = {
             />
         </svg>
     ),
-    u: (
-        <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line y1="18" x2="16" y2="18" stroke="black" strokeWidth="2" />
-            <path
-                d="M7.51069 15.128C10.0867 15.128 11.8467 13.656 11.8467 11.016V3.8H10.0707V11.048C10.0707 12.616 9.03069 13.48 7.51069 13.48C5.97469 13.48 4.93469 12.616 4.93469 11.048V3.8H3.15869V11.016C3.15869 13.656 4.91869 15.128 7.51069 15.128Z"
-                fill="black"
-            />
-        </svg>
-    ),
-    code: (
+    execute: (state, api) => {
+        let modifyText = `*${state.selectedText}*`
+        if (!state.selectedText) {
+            modifyText = `**`
+        }
+        api.replaceSelection(modifyText)
+    },
+}
+
+const code = {
+    name: 'code',
+    keyCommand: 'code',
+    buttonProps: { 'aria-label': 'Code' },
+    icon: (
         <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M5.80395 1.35631C5.80395 1.06647 5.69075 0.794129 5.48513 0.588497C5.08756 0.192017 4.34818 0.191471 3.95227 0.589044L0.31773 4.22415C0.115934 4.42594 0 4.70485 0 4.99087C0 5.27634 0.115937 5.5558 0.31773 5.75759L3.95339 9.39326C4.15792 9.59723 4.43026 9.70989 4.71957 9.70989C5.00777 9.70989 5.27957 9.59724 5.48575 9.39216C5.69082 9.18764 5.80402 8.91473 5.80402 8.62544C5.80402 8.33614 5.69082 8.06325 5.48575 7.85871L2.61855 4.99095L5.48533 2.12375C5.69096 1.91923 5.80415 1.64688 5.80415 1.35648L5.80395 1.35631Z"
@@ -43,7 +60,20 @@ const icons = {
             />
         </svg>
     ),
-    link: (
+    execute: (state, api) => {
+        let modifyText = `\`\`\`${state.selectedText}\`\`\``
+        if (!state.selectedText) {
+            modifyText = `\`\`\`\`\`\``
+        }
+        api.replaceSelection(modifyText)
+    },
+}
+
+const link = {
+    name: 'link',
+    keyCommand: 'link',
+    buttonProps: { 'aria-label': 'Link' },
+    icon: (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_3781_82365)">
                 <path
@@ -62,263 +92,37 @@ const icons = {
             </defs>
         </svg>
     ),
-}
-
-const createLinkNode = (href, text) => ({
-    type: 'link',
-    link: href,
-    children: [{ text }],
-})
-
-const createParagraphNode = (children = [{ text: '' }]) => ({
-    type: 'paragraph',
-    children,
-})
-
-const removeLink = (editor, opts = {}) => {
-    Transforms.unwrapNodes(editor, {
-        ...opts,
-        match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
-    })
-}
-
-const insertLink = (editor, url) => {
-    if (!url) return
-    const { selection } = editor
-    const link = createLinkNode(url, 'New Link')
-    ReactEditor.focus(editor)
-    if (selection) {
-        const [parentNode, parentPath] = Editor.parent(editor, selection.focus?.path)
-        if (parentNode.type === 'link') {
-            removeLink(editor)
+    execute: (state, api) => {
+        let modifyText = `[${state.selectedText}]()`
+        if (!state.selectedText) {
+            modifyText = `[]()`
         }
-        if (editor.isVoid(parentNode)) {
-            Transforms.insertNodes(editor, createParagraphNode([link]), {
-                at: Path.next(parentPath),
-                select: true,
-            })
-        } else if (Range.isCollapsed(selection)) {
-            Transforms.insertNodes(editor, link, { select: true })
-        } else {
-            Transforms.wrapNodes(editor, link, { split: true })
-            Transforms.collapse(editor, { edge: 'end' })
-        }
-    } else {
-        Transforms.insertNodes(editor, createParagraphNode([link]))
-    }
+        api.replaceSelection(modifyText)
+    },
 }
 
-const withLinks = (editor) => {
-    const { isInline } = editor
-    editor.isInline = (element) => (element.type === 'link' ? true : isInline(element))
-    return editor
-}
-
-const toggleMark = (editor, format, data) => {
-    const isActive = isMarkActive(editor, format)
-    if (isActive) {
-        Editor.removeMark(editor, format)
-    } else {
-        Editor.addMark(editor, format, data)
-    }
-}
-
-const isMarkActive = (editor, format) => {
-    const marks = Editor.marks(editor)
-    return marks && marks[format]
-}
-
-const isBlockActive = (editor, format) => {
-    const { selection } = editor
-    if (!selection) return false
-    const [match] = Array.from(
-        Editor.nodes(editor, {
-            at: Editor.unhangRange(editor, selection),
-            match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === format,
-        })
-    )
-    return !!match
-}
-
-const Elements = (props) => {
-    switch (props.element.type) {
-        case 'block-quote':
-            return <blockquote {...props.attributes}>{props.children}</blockquote>
-        case 'link':
-            return <Link {...props} />
-        default:
-            return <p {...props.attributes}>{props.children}</p>
-    }
-}
-
-const Leaf = ({ attributes, children, leaf }) => {
-    if (leaf.bold) {
-        children = <strong>{children}</strong>
-    }
-
-    if (leaf.code) {
-        children = <code>{children}</code>
-    }
-
-    if (leaf.italic) {
-        children = <em>{children}</em>
-    }
-
-    if (leaf.underline) {
-        children = <u>{children}</u>
-    }
-
-    return <span {...attributes}>{children}</span>
-}
-
-const Link = ({ attributes, children, element }) => {
-    const editor = useSlate()
-    const selected = useSelected()
-    const focused = useFocused()
-
-    return (
-        <span className="relative">
-            <a {...attributes}>{children}</a>
-            {selected && focused && (
-                <div className="flex items-center rounded-sm shadow-lg overflow-hidden absolute bg-white z-10">
-                    <span contentEditable={false} className="p-2">
-                        {element.link}
-                    </span>
-                </div>
-            )}
-        </span>
-    )
-}
-
-const MarkButton = ({ format, icon }) => {
-    const editor = useSlate()
-    const active = isMarkActive(editor, format)
-    return (
-        <button
-            className={`${
-                active ? 'bg-gray-accent-light' : 'opacity-30'
-            } rounded-md w-[32px] h-[32px] flex items-center justify-center transition-opacity`}
-            active={active}
-            onMouseDown={(event) => {
-                event.preventDefault()
-                toggleMark(editor, format, true)
-            }}
-        >
-            {icons[icon]}
-        </button>
-    )
-}
-
-const AddURL = ({ setShowAdd }) => {
-    const editor = useSlate()
-    const marks = Editor.marks(editor)
-    const [value, setValue] = useState(marks?.link?.url)
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        insertLink(editor, value)
-        setShowAdd(false)
-    }
-
-    return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <form
-                onSubmit={handleSubmit}
-                className="m-0 flex rounded-sm shadow-lg overflow-hidden absolute -bottom-1 left-1/2 transform -translate-x-1/2 translate-y-full"
-            >
-                <input
-                    autoFocus
-                    onChange={(e) => setValue(e.target.value)}
-                    value={value}
-                    className="p-2"
-                    placeholder="URL"
-                />
-                <button type="submit" className="p-2 bg-red text-white">
-                    Update
-                </button>
-            </form>
-        </motion.div>
-    )
-}
-
-const LinkButton = ({ format, icon }) => {
-    const editor = useSlate()
-    const active = isBlockActive(editor, format)
-    const [showAdd, setShowAdd] = useState(false)
-
-    const handleClick = (e) => {
-        e.preventDefault()
-        if (!active) {
-            setShowAdd(!showAdd)
-        } else {
-            removeLink(editor)
-        }
-    }
-
-    return (
-        <>
-            <div className="flex items-center relative">
-                <button
-                    className={`${
-                        active ? 'bg-gray-accent-light' : 'opacity-30'
-                    } rounded-md w-[32px] h-[32px] flex items-center justify-center transition-opacity`}
-                    active={active}
-                    onClick={handleClick}
-                >
-                    {icons[icon]}
-                </button>
-                {showAdd && <AddURL setShowAdd={setShowAdd} />}
-            </div>
-        </>
-    )
-}
-
-const RichText = ({ setFieldValue }) => {
-    const [value, setValue] = useState([createParagraphNode()])
-    const renderElement = useCallback((props) => <Elements {...props} />, [])
-    const renderLeaf = useCallback((props) => <Leaf {...props} />, [])
-    const editor = useMemo(() => withReact(withHistory(withLinks(createEditor()))), [])
-
-    const [showEditLink, setShowEditLink] = useState(false)
-    const onKeyDown = (event) => {
-        const { selection } = editor
-        if (selection && Range.isCollapsed(selection)) {
-            const { nativeEvent } = event
-            if (isKeyHotkey('left', nativeEvent)) {
-                event.preventDefault()
-                Transforms.move(editor, { unit: 'offset', reverse: true })
-                return
-            }
-            if (isKeyHotkey('right', nativeEvent)) {
-                event.preventDefault()
-                Transforms.move(editor, { unit: 'offset' })
-                return
-            }
-        }
-    }
+export default function RichText({ setFieldValue }) {
+    const [value, setValue] = React.useState('')
 
     useEffect(() => {
         setFieldValue('question', value)
     }, [value])
-
     return (
-        <Slate editor={editor} value={value} onChange={setValue}>
-            <div className="mt-2 shadow-lg bg-white rounded-md">
-                <div className="flex space-x-1 border-b border-dashed border-gray-accent-light py-2 px-4 z-10 relative">
-                    <MarkButton format="bold" icon="b" />
-                    <MarkButton format="italic" icon="i" />
-                    <MarkButton format="code" icon="code" />
-                    <LinkButton format="link" icon="link" />
-                </div>
-                <Editable
-                    onKeyDown={onKeyDown}
-                    className="py-2 px-4"
-                    renderElement={renderElement}
-                    renderLeaf={renderLeaf}
-                    placeholder="Type more details..."
-                />
-            </div>
-        </Slate>
+        <div className="container">
+            <MDEditor
+                placeholder="Type more details..."
+                visiableDragbar={false}
+                commands={[bold, italic, code, link]}
+                commandsFilter={(cmd) =>
+                    cmd && /(fullscreen|divider|preview|live|edit)/.test(cmd.name || cmd.keyCommand) ? false : cmd
+                }
+                preview={'edit'}
+                value={value}
+                onChange={setValue}
+                previewOptions={{
+                    rehypePlugins: [[rehypeSanitize]],
+                }}
+            />
+        </div>
     )
 }
-
-export default RichText

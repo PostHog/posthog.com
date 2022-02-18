@@ -683,3 +683,21 @@ ul {
         transform: scale(1);
     }
 }
+
+.w-md-editor-toolbar {
+    @apply !h-auto !bg-white dark:!bg-gray-accent-light !p-2 !border-dashed !border-gray-accent-light !rounded-tr-md !rounded-tl-md;
+    ul {
+        @apply flex items-center;
+        button {
+            @apply rounded-md !w-[32px] !h-[32px] flex items-center justify-center transition-opacity opacity-30 hover:bg-gray-accent-light hover:opacity-100;
+        }
+    }
+}
+
+.w-md-editor-input {
+    @apply !p-2;
+}
+
+.w-md-editor {
+    @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md;
+}
