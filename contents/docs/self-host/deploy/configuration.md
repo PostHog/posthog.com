@@ -19,8 +19,9 @@ By default, the chart installs the following dependencies:
 
 There is optional support for the following additional dependencies:
 
-- [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
+- [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
 - [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+- [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
 - [prometheus-community/prometheus-kafka-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter)
 - [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter)
@@ -298,6 +299,18 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
 
+### [Grafana](https://github.com/grafana/grafana)
+By default, `grafana` is not installed as part of the chart. If you want to enable it, please set `grafana.enabled` to `true`.
+
+The default settings provide a vanilla installation with an auto generated login. The username is `admin` and the auto-generated password can be fetched by running:
+
+```shell
+kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+```
+
+To configure the stack (like expose the service via an ingress resource, manage users, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [grafana chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) for full configuration options._
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)
 

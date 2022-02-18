@@ -1,9 +1,13 @@
 import { Close } from 'components/Icons/Icons'
+import Link from 'components/Link'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import GitHubButton from 'react-github-btn'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 export default function StarUsBanner() {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
@@ -31,18 +35,26 @@ export default function StarUsBanner() {
                 >
                     <div className="flex items-center space-x-4 bg-red py-[12px] px-[25px] text-white rounded-full ">
                         <p className="m-0 text-base font-semibold flex items-center space-x-4">
-                            <span>Star us on GitHub</span>
-                            <span className="h-[28px] w-[125px]">
-                                <GitHubButton
-                                    className="text-red hover:text-red"
-                                    href="https://github.com/posthog/posthog"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star posthog/posthog on GitHub"
-                                >
-                                    Star
-                                </GitHubButton>
-                            </span>
+                            {posthog && posthog.isFeatureEnabled && posthog.isFeatureEnabled('london-banner') ? (
+                                <Link to="/hosthog/london" className="text-white hover:text-white">
+                                    Come say &#128075; at our London meet-up!
+                                </Link>
+                            ) : (
+                                <>
+                                    <span>Star us on GitHub</span>
+                                    <span className="h-[28px] w-[125px]">
+                                        <GitHubButton
+                                            className="text-red hover:text-red"
+                                            href="https://github.com/posthog/posthog"
+                                            data-size="large"
+                                            data-show-count="true"
+                                            aria-label="Star posthog/posthog on GitHub"
+                                        >
+                                            Star
+                                        </GitHubButton>
+                                    </span>
+                                </>
+                            )}
                         </p>
                         <button className="text-white" onClick={handleClick}>
                             <Close className="w-3 h-3" />

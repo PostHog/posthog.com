@@ -5,10 +5,11 @@ sidebar: Docs
 
 In this page you can find a collection of guidelines, style suggestions, and tips for making contributions to the codebase.
 
-### Logging
+### Backend
+#### Logging
 As a general rule, we should have logs for every expected and unexpected actions of the application, using the appropriate _log level_.
 
-#### Levels
+##### Levels
 A _log level_ or _log severity_ is a piece of information telling how important a given log message is:
 
 * `DEBUG`: should be used for information that may be needed for diagnosing issues and troubleshooting or when running application
@@ -17,7 +18,7 @@ in the test environment for the purpose of making sure everything is running cor
 * `WARN`: should be used when something unexpected happened but the code can continue the work
 * `ERROR`: should be used when the application hits an issue preventing one or more functionalities from properly functioning
 
-#### Format
+##### Format
 `django-structlog` is the default logging library we use (see [docs](https://django-structlog.readthedocs.io/en/latest/)).
 It's a _structured logging_ framework that adds cohesive metadata on each logs that makes it easier to track events or incidents.
 
@@ -35,7 +36,7 @@ will produce:
 ```
 As you can see above, the log contains all the information needed to understand the app behaviour.
 
-#### Security
+##### Security
 Don’t log sensitive information. Make sure you never log:
 
 * authorization tokens
