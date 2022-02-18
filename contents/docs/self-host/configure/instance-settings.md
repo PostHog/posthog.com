@@ -24,7 +24,7 @@ As of PostHog 1.32.0, the first user in any instance is a staff user. This user 
 
 If you don't have any staff users (e.g. if you deployed PostHog before version 1.32.0), you can add your first staff user, by connecting to your instance (via a `web` pod), and then running the commands below.
 
-> To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres)
+> To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-django)
 
 
 ```bash

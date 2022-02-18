@@ -95,6 +95,29 @@ TooManyConnections: too many connections
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
+
+### How do I connect do Django?
+
+1. Find the name of the pod you want to connect to:
+
+    ```shell
+    kubectl get pods -n posthog
+    ```
+
+    This command will list all running pods. For any Django shell operations, you'll want to find a `web` pod.
+
+2. Connect to the pod using the name from the previous step:
+
+    ```bash
+    kubectl exec --stdin --tty --namespace=posthog $YOUR_POD_NAME  -- /bin/bash
+    ```
+
+3. Open Django shell
+
+    ```bash
+    python manage.py shell_plus
+    ```
+
 ### How do I connect to Postgres?
 
 1. Find out your Postgres password from the web pod:
