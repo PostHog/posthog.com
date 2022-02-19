@@ -5,7 +5,7 @@ import rehypeSanitize from 'rehype-sanitize'
 const bold = {
     name: 'bold',
     keyCommand: 'bold',
-    buttonProps: { 'aria-label': 'Bold' },
+    buttonProps: { 'aria-label': 'Bold', tabIndex: '-1' },
     icon: (
         <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -26,7 +26,7 @@ const bold = {
 const italic = {
     name: 'italic',
     keyCommand: 'italic',
-    buttonProps: { 'aria-label': 'Italicize' },
+    buttonProps: { 'aria-label': 'Italicize', tabIndex: '-1' },
     icon: (
         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -47,7 +47,7 @@ const italic = {
 const code = {
     name: 'code',
     keyCommand: 'code',
-    buttonProps: { 'aria-label': 'Code' },
+    buttonProps: { 'aria-label': 'Code', tabIndex: '-1' },
     icon: (
         <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -72,7 +72,7 @@ const code = {
 const link = {
     name: 'link',
     keyCommand: 'link',
-    buttonProps: { 'aria-label': 'Link' },
+    buttonProps: { 'aria-label': 'Link', tabIndex: '-1' },
     icon: (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_3781_82365)">
