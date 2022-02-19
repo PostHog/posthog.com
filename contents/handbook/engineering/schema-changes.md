@@ -10,15 +10,15 @@ and require extra effort from the engineering team.
 
 Below are some important considerations to keep in mind regarding schema changes:
 
-## Avoid deleting Django model fields
+## Do not delete or rename Django models and fields
 
-Deleting columns, even completely unused ones, is discouraged.
+Deleting and renaming tables and columns, even completely unused ones, is strongly discouraged.
 
-The reason is that the Django ORM **always** specifies columns to fetch in its `SELECT` queries – so when a migration deletes a column, in between the migration having ran and the new server having deployed completely, there's a period where the old server is still live and tries to `SELECT` that column. The only thing it gets from the database though is an error, as the column isn't there anymore! This situation results in a period of short-lived but very significant pain for users.
+The reason is that the Django ORM **always** specifies tables and columns to fetch in its `SELECT` queries – so when a migration moves a table/column away, in between the migration having ran and the new server having deployed completely, there's a period where the old server is still live and tries to `SELECT` that column. The only thing it gets from the database though is an error, as the resource isn't there anymore! This situation results in a period of short-lived but very significant pain for users.
 
-To avoid this pain, in most cases **we currently don't delete fields that aren't used anymore** – we just clearly mark them with `DEPRECATED` in code.
-
-Note that this is not the case for `ManyToManyField`s – they are only fetched when explicitly used, as they are in fact tables of their own (called associative tables). There may still be a problem if going from from "M2M field existing and in use" to "M2M field deleted" in one deployment, but if you have an "M2M field existing but unused" stage in the middle, there should be no place for Django to trip up.
+To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
+- if the name is no longer relevant, keep it the same in the database – feel free to change the naming in Python/JS code, but make sure the change ISN'T reflected in the database,
+- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it be.
 
 ## Design for PostHog Cloud scale
 
