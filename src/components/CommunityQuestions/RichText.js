@@ -61,7 +61,7 @@ const code = {
         </svg>
     ),
     execute: (state, api) => {
-        let modifyText = `\`\`\`${state.selectedText}\`\`\``
+        let modifyText = `\`\`\`\n${state.selectedText}\n\`\`\``
         if (!state.selectedText) {
             modifyText = `\`\`\`\`\`\``
         }
