@@ -10,6 +10,14 @@ and require extra effort from the engineering team.
 
 Below are some important considerations to keep in mind regarding schema changes:
 
+## General considerations
+
+Before making a schema change, consider:
+- Do we need the schema change at all? Would this be better solved with an application-level code change instead?
+- Is my change backwards compatible? Both old and new code _will_ be running in parallel in both posthog cloud and self-hosted, so breaking changes can and will cause outages.
+- Can I deploy my schema change separately from application code change? For non-trivial changes, you want to deploy schema change first to ensure it's easy to roll back and if it's backwards compatible.
+- Am I doing a blocking migration? Migrations which lock huge tables can easily cause outages. 
+
 ## Do not delete or rename Django models and fields
 
 Deleting and renaming tables and columns, even completely unused ones, is strongly discouraged.
@@ -20,7 +28,7 @@ To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
 - if the name is no longer relevant, keep it the same in the database – feel free to change the naming in Python/JS code, but make sure the change ISN'T reflected in the database,
 - if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it be.
 
-## Design for PostHog Cloud scale
+## Design for scale
 
 With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
 
