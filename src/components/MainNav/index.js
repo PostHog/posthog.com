@@ -1,11 +1,32 @@
+import { Auth } from '@supabase/ui'
 import AnimatedBurger from 'components/AnimatedBurger'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { supabase } from 'lib/supabase'
 import React, { useState } from 'react'
+import { link, menuItem as menuItemClass } from './classes'
 import MenuItem from './MenuItem'
+
+const Login = ({ setLoginOpen }) => {
+    const handleClose = () => {
+        setLoginOpen(false)
+    }
+    return (
+        <motion.div
+            onClick={handleClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed w-full h-full top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
+        >
+            <div onClick={(e) => e.stopPropagation()} className="max-w-[400px] w-full bg-tan p-6 rounded-md">
+                <Auth magicLink supabaseClient={supabase} />
+            </div>
+        </motion.div>
+    )
+}
 
 export default function MainNav() {
     const data = useStaticQuery(graphql`
@@ -55,7 +76,9 @@ export default function MainNav() {
             }
         }
     `)
+    const { user } = Auth.useUser()
     const [expanded, expandMenu] = useState(false)
+    const [loginOpen, setLoginOpen] = useState(false)
     const menu = data?.navsJson?.main
     const breakpoints = useBreakpoint()
     const variants = {
@@ -63,7 +86,15 @@ export default function MainNav() {
         shown: { height: 'auto' },
     }
     const menuLength = menu.length
-    const halfMenu = Math.floor(menuLength / 2)
+    const halfMenu = Math.floor(menuLength / 2) + 1
+
+    const handleClick = () => {
+        if (user) {
+            supabase.auth.signOut()
+        } else {
+            setLoginOpen(true)
+        }
+    }
     return (
         <div className="flex justify-between items-center">
             <Link
@@ -97,11 +128,19 @@ export default function MainNav() {
                             {menu.slice(halfMenu, menu.length).map((menuItem, index) => {
                                 return <MenuItem key={index} menuItem={menuItem} />
                             })}
+                            <li className={menuItemClass(true)}>
+                                <span className="flex justify-between items-center">
+                                    <Link onClick={handleClick} className={link('w-full text-center')}>
+                                        {user ? 'Logout' : 'Login'}
+                                    </Link>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </motion.nav>
             )}
             <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
+            {loginOpen && <Login setLoginOpen={setLoginOpen} />}
         </div>
     )
 }

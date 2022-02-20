@@ -32,6 +32,7 @@
         "@popperjs/core": "^2.10.2",
         "@slack/bolt": "^3.8.1",
         "@supabase/supabase-js": "^1.29.4",
+        "@supabase/ui": "^0.36.4",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
         "autoprefixer": "^10.3.1",

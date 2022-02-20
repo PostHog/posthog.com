@@ -683,3 +683,23 @@ ul {
         transform: scale(1);
     }
 }
+
+#auth-sign-in,
+#auth-forgot-password,
+#auth-sign-up,
+#auth-magic-link {
+    @apply mt-0;
+}
+
+.sbui-btn {
+    @apply !bg-red;
+}
+
+.sbui-typography-link {
+    @apply !text-red;
+}
+
+.dark .sbui-checkbox[type='checkbox']:checked,
+.sbui-checkbox[type='checkbox']:checked {
+    @apply !bg-red;
+}

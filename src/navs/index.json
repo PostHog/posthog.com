@@ -345,12 +345,6 @@
             "cta": true,
             "url": "/signup",
             "hideBorder": true
-        },
-        {
-            "title": "Login",
-            "classes": "text-center w-full",
-            "url": "https://app.posthog.com/login",
-            "hideBorder": true
         }
     ]
 }
