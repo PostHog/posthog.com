@@ -16,7 +16,7 @@ graph TD
     DECIDE["/decide API"]
     CAPTURE[Capture API]
     PLUGINS[Plugin server]
-    PERSONS["Postgres (persons table)"]
+    PERSONS["PostgreSQL (persons table)"]
     Kafka2[Kafka]
 
     CLIENT -..-> DECIDE
