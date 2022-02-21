@@ -19,5 +19,5 @@ In these guides, we offer advice for using PostHog in a compliant manner under t
 
 ### Further reading
 
-- [The best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools/)
-- [The best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools/)
+- [A simple guide to personal data and PII](/blog/what-is-personal-data-pii)
+- [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)
