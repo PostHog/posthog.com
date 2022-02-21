@@ -506,6 +506,10 @@
                             "url": "",
                             "children": [
                                 {
+                                    "name": "Instance settings",
+                                    "url": "/docs/self-host/configure/instance-settings"
+                                },
+                                {
                                     "name": "Environment variables",
                                     "url": "/docs/self-host/configure/environment-variables"
                                 },
@@ -696,10 +700,6 @@
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
-                },
-                {
-                    "name": "GDPR guidance",
-                    "url": "/docs/integrate/gdpr"
                 },
                 {
                     "name": "Client libraries",
@@ -1028,6 +1028,28 @@
                 {
                     "name": "Data model",
                     "url": "/docs/data-model"
+                }
+            ]
+        },
+        {
+            "name": "Privacy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/privacy/"
+                },
+                {
+                    "name": "GDPR guidance",
+                    "url": "/docs/privacy/gdpr-compliance"
+                },
+                {
+                    "name": "HIPAA guidance",
+                    "url": "/docs/privacy/hipaa-compliance"
+                },
+                {
+                    "name": "CCPA guidance",
+                    "url": "/docs/privacy/ccpa-compliance"
                 }
             ]
         },
