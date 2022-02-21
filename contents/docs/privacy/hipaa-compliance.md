@@ -63,6 +63,5 @@ We believe the most effective solution to HIPAA-compliant product analytics is t
 
 ### Further reading
 
-- [The best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools)
 - [A simple guide to personal data & PII](/blog/what-is-personal-data-pii)
 - [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)

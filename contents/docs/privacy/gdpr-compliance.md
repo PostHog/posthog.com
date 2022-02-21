@@ -119,4 +119,3 @@ You can remove a user from a PostHog instance via the PostHog user interface. To
 ### Further reading
 
 - [A simple guide to personal data and PII](/blog/what-is-personal-data-pii)
-- [The best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
