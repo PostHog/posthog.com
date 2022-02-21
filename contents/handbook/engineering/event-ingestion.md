@@ -50,7 +50,7 @@ It is responsible for:
 - Validating API keys.
 - Anonymizing IPs according to project settings.
 - Decompressing and normalizing the shape of event data for the rest of the system.
-- Sending processed to `events_plugin_ingestion` kafka topic.
+- Sending processed to `events_plugin_ingestion` Kafka topic.
 - If communication with Postgres fails, logging events to kafka `dead_letter_queue` table.
 
 The design goal of this service is to be as simple and resilient as possible to avoid dropping events.
