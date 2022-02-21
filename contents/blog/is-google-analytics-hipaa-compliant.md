@@ -1,5 +1,5 @@
 ---
-date: 2022-21-02
+date: 2022-02-21
 title: Is Google Analytics HIPAA compliant?
 rootPage: /blog
 sidebar: Blog
