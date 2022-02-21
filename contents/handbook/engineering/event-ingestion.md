@@ -132,7 +132,7 @@ flowchart LR
     events -.reads from.-> sharded_events
 ```
 
-### `writable_events` table
+#### `writable_events` table
 
 `writable_events` table is of [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
 
@@ -160,7 +160,7 @@ This table:
 - Based on the hash, sends the row to the right shard on the `posthog` cluster into the `posthog.sharded_events` table.
 - Does not contain materialized columns as they would hinder INSERT queries.
 
-### `sharded_events` table
+#### `sharded_events` table
 
 `sharded_events` table is a [Replicated](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/)[ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/).
 
@@ -169,7 +169,7 @@ This table:
 - Is sharded and replicated.
 - Is queried indirectly via the `events` table.
 
-### `events` table
+#### `events` table
 
 Similar to `writable_events`, `events` table is of [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
 
