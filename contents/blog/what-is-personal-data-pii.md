@@ -1,5 +1,5 @@
 ---
-date: 2022-02-22
+date: 2022-02-21
 title: A simple guide to personal data and PII
 rootPage: /blog
 sidebar: Blog
