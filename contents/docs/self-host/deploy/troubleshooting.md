@@ -95,6 +95,34 @@ TooManyConnections: too many connections
     ```bash
     kubectl logs posthog-plugins-54f324b649-66afm -n posthog
     ```
+
+### How do I connect to the web server's shell?
+
+PostHog is built on Django, which comes with some useful utilities. One of them is a Python shell.
+You can connect to it like so:
+
+```bash
+# First we need to determine the name of the web pod – see "How do I see logs for a pod?" for more on this
+POSTHOG_WEB_POD_NAME=$(kubectl get pods -n posthog | grep -- '-web-' | awk '{print $1}')
+# Then we connect to the interactive Django shell
+kubectl exec -n posthog -it $POSTHOG_WEB_POD_NAME -- python manage.py shell_plus
+```
+
+In a moment you should see the shell load and finally a message like this appear:
+
+```
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+```
+
+That means you can now type Python code and run it with PostHog context (such as models) already loaded!
+For example, to see the number of users in your instance run:
+
+```python
+User.objects.count()
+```
+
 ### How do I connect to Postgres?
 
 1. Find out your Postgres password from the web pod:
