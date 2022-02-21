@@ -33,7 +33,7 @@ It's worth noting that, because BAAs expose third-parties to increased risk and 
 
 PostHog is an all-in-one analytics platform which gives you everything you need to understand your users and build better products. It’s also completely open-source and [can be self-hosted on your own infrastructure](/docs/self-host), so that you never have to share data with anyone — including PostHog. 
 
-We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just [a HIPAA-compliant analytics platform](/blog/hipaa-compliant-analytics), it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
+We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just a HIPAA-compliant analytics platform, it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
 
 PostHog is also entirely self-serve, with features such as event auto-capture, which make it perfect for less technical users who don’t want to write reams of SQL. Technical users can meanwhile cater the platform to their needs or integrate with internal tools via [PostHog’s open source repos](https://github.com/PostHog).
 
@@ -51,9 +51,9 @@ PostHog is also entirely self-serve, with features such as event auto-capture, w
 
 Yes. Unlike platforms such as Mixpanel or Amplitude, PostHog enables you to deploy onto your own infrastructure so that data doesn’t need to be sent to any third parties. This means you maintain full control and don’t need to set up a Business Associate Agreement (BAA) with PostHog, because we never handle any PHI or ePHI. 
 
-You _may_ need to create a BAA with your hosting provider if one doesn’t already exist, but major providers such as Google and AWS offer these for free. 
+You _may_ need to create a BAA with your hosting provider if one doesn’t already exist, but major providers such as Google and AWS offer these for free. Read our [HIPAA compliance guidance](/docs/privacy/hipaa-compliance) for more information on using PostHog.
 
-> [Try PostHog for free](/signup) today or [schedule a demo](/book-a-demo) to learn more about using PostHog under HIPAA regulations. 
+> [Try PostHog for free](/signup) today or [schedule a demo](/book-a-demo) to learn more about using PostHog. 
 
 ## 2. [Countly](https://count.ly/)
 
@@ -115,7 +115,7 @@ Mixpanel isn’t HIPAA compliant out-of-the-box, but offers a Business Associate
 
 ## Is Google Analytics HIPAA compliant?
 
-The short answer is that, no, Google Analytics is not HIPAA compliant. 
+The short answer is that, no, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant). 
 
 According to [Google’s own disclaimers](https://support.google.com/analytics/answer/6366371?hl=en#hipaa&zippy=%2Cin-this-article), Google Analytics cannot be used for handling PHI or ePHI (including IP addresses) by _either_ covered entities or their third-party business associates: 
 
@@ -123,5 +123,5 @@ According to [Google’s own disclaimers](https://support.google.com/analytics/a
 
 Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data. 
 
-> PostHog is an open-source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure to be used under HIPAA regulations without a Business Associate Agreement.
+> PostHog is an open-source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure to be [used under HIPAA regulations](/docs/privacy/hipaa-compliance) without a Business Associate Agreement.
 [Try PostHog for free](/signup) today or [book a demo](/book-a-demo) to learn more.
