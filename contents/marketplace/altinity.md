@@ -16,8 +16,8 @@ The management team, investors and advisors have over 150 years of experience in
 
 ### Support
 - PostHog Deployment
-- PostHog as a managed service
+- PostHog as a Managed Service
 
 ## Contact
 
-[Request info from Altinity](https://share.hsforms.com/1oB6TmR1ARzqYEc9XTlCrTg4559u).
+[Speak to Altinity](mailto:marketplace+altinity@posthog.com)
