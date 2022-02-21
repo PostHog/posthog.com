@@ -1187,3 +1187,9 @@
 [[redirects]]
     from = "/docs/integrate/gdpr"
     to = "/docs/privacy/gdpr-compliance"
+
+
+# Added: 2022-02-21
+[[redirects]]
+    from = "/blog/hipaa-compliant-analytics"
+    to = "/blog/best-hipaa-compliant-analytics-tools"
