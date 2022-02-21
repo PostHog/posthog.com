@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-In it's simplest form, PostHog is a analytics data store where events come in and get analyzed.
+In it's simplest form, PostHog is an analytics data store where events come in and get analyzed.
 
 This document gives an overview of how data ingestion works.
 
