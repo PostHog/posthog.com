@@ -5,14 +5,18 @@ showTitle: true
 ---
 
 
-When using PostHog, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them. However, for general use, you most likely do not have to worry about the vast majority of these.
+As of [PostHog 1.33.0](/blog/the-posthog-array-1-33-0) some settings can now be managed directly in the app, without having to connect to your cluster and/or redeploy. If you are on version 1.33.0 or newer, please review [Instance settings](/docs/self-host/configure/instance-settings) first.
+
+For settings that can be managed with Instance Settings, you can either set the values via environment variables or through the Instance Settings page in your instance. However, it is strongly **recommended to use Instance settings.** Environment variables are only loaded when there are no values in Instance settings, which means that environment variables could reflect outdated values. 
+
+For other settings, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them. However, for general use, you most likely do not have to worry about the vast majority of these.
 
 Rows with a missing 'Default Value' usually default to an empty string. This is different from `None`.
 
-Some variables here are default Django variables. This [Django Docs page](https://docs.djangoproject.com/en/2.2/ref/settings/) has more information about them.
+Some variables here are default Django variables. This [Django Docs page](https://docs.djangoproject.com/en/3.2/ref/settings/) has more information about them.
 
 
-| Variable                   | Description                           | Default Value         |
+| Variable                   | Description                           | Default Value          |
 | :------------------------: | :------------------------------------ | :-------------------: |
 | `SECRET_KEY`               | **❗️ Always required.** [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
 | `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://posthog.your-domain.com`)            | **❗️ Always required.** Principal/canonical URL of your PostHog instance. Needed for emails, webhooks and SSO to work properly. We currently do not support subpaths in this URL. | `http://localhost:8000`
@@ -31,14 +35,6 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). You can set this to a truthy value when developing, but disable this in production!  | `False` |
 | `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
-| `EMAIL_DEFAULT_FROM` | Please see [configuring email] for details.| Please see [configuring email] for details.
-| `EMAIL_ENABLED` | Please see [configuring email] for details.| Please see [configuring email] for details.
-| `EMAIL_HOST_PASSWORD` | Please see [configuring email] for details.               | Please see [configuring email] for details.
-| `EMAIL_HOST_USER` | Please see [configuring email] for details.                                | Please see [configuring email] for details.
-| `EMAIL_HOST` | Please see [configuring email] for details.     | Please see [configuring email] for details.
-| `EMAIL_PORT` | Please see [configuring email] for details.                                | Please see [configuring email] for details.
-| `EMAIL_USE_TLS` | Please see [configuring email] for details.         | Please see [configuring email] for details.
-| `EMAIL_USE_TLS` | Please see [configuring email] for details.       | Please see [configuring email] for details.
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
@@ -79,5 +75,21 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | _Empty_
+
+
+## Instance settings
+
+The following settings should mainly be managed with [Instance settings](/docs/self-host/configure/instance-settings). However, if you can still set them via environment variables if you prefer. Please be mindful that if these settings are overridden in the settings page, the overridden values will prevail.
+
+| Variable                   | Description                           | Default Value          | Managed with Instance Settings |
+| :------------------------: | :------------------------------------ | :-------------------: |  :-------------------: |
+| `EMAIL_DEFAULT_FROM` | Please see [configuring email] for details.| Please see [configuring email] for details.  | ✅ Yes
+| `EMAIL_ENABLED` | Please see [configuring email] for details.| Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_HOST_PASSWORD` | Please see [configuring email] for details.               | Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_HOST_USER` | Please see [configuring email] for details.                                | Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_HOST` | Please see [configuring email] for details.     | Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_PORT` | Please see [configuring email] for details.                                | Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_USE_TLS` | Please see [configuring email] for details.         | Please see [configuring email] for details. | ✅ Yes
+| `EMAIL_USE_TLS` | Please see [configuring email] for details.       | Please see [configuring email] for details. | ✅ Yes
 
 [configuring email]: /docs/self-host/configure/email#general-configuration
