@@ -49,7 +49,7 @@ Fines aren't limited to large businesses. In 2017, a [children's charity was fin
 
 While Google Analytics is sufficient if you just want to see what pages a user views on a website, it won't help you improve your product in a meaningful way. For that, you need product analytics.
 
-Product analytics platforms like [PostHog](https://posthog.com/) include features like [session recording](https://posthog.com/product/session-recording), [heatmaps](https://posthog.com/product/heatmaps) and [funnels](https://posthog.com/product/funnels) that help you understand how users navigate your product — not just what they're looking at.
+Product analytics platforms like [PostHog](https://posthog.com/) include features like [Session Recording](https://posthog.com/product/session-recording), [Heatmaps](https://posthog.com/product/heatmaps) and [Funnels](https://posthog.com/product/funnels) that help you understand how users navigate your product — not just what they're looking at.
 
 If you want to find [product market fit](https://posthog.com/blog/how-to-product-market-fit), your product's [North Star metric](https://posthog.com/blog/north-star-metrics) or what your [users really need](https://posthog.com/blog/how-to-work-out-what-users-need)... you need product analytics.
 
@@ -63,7 +63,7 @@ This is important because:
 
 2. **You don't need a Business Associate Agreement:** BAAs are time-consuming and expensive, and also require frequent legal review to ensure continued compliance. Self-hosting means you don't need to enter into any additional BAAs, other than the one you should already have with your existing cloud provider.
 
-3. **Compliance doesn't cost extra:** If you need HIPAA compliance, third-party providers will frequently demand you use a more expensive tier of their product than you really need. Customers who use PostHog as their [HIPAA-compliant analytics provider](https://posthog.com/blog/best-hipaa-compliant-analytics-tools) pay the same as customers with less stringent privacy needs.
+3. **Compliance doesn't cost extra:** If you need HIPAA compliance, third-party providers will frequently demand you use a more expensive tier of their product than you really need. Customers who use PostHog as their [HIPAA-compliant analytics](https://posthog.com/blog/best-hipaa-compliant-analytics-tools) provider pay the same as customers with less stringent privacy needs.
 
 Read our [PostHog & HIPAA compliance guide](/docs/privacy/hipaa-compliance) for more info on how to deploy PostHog correctly, or [book a demo](https://posthog.com/book-a-demo) to learn more.
 
