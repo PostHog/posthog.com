@@ -39,7 +39,7 @@ The following sections break each part down in more detail.
 Client libraries are responsible for capturing user interactions and sending the events to us.
 
 Note that various client libraries also can call `/decide` endpoint for:
-- posthog-js: on load for compression, session recording, feature flags and other autocapture-related settings
+- `posthog-js`: on load for compression, session recording, feature flags and other autocapture-related settings
 - other libraries: for checking feature flags
 
 ### Capture API
