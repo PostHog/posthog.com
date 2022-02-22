@@ -8,37 +8,40 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
+
+## Feature list
+
 | Feature |  Owner  |  Label  |
 |---|---|---|
-| Actions | [@pauldambra][@pauldambra]  | <span class="tag-label" style="background:#ff0000; color: white;">test</span> |
-| Annotations | [@pauldambra][@pauldambra]  |   |
-| API | [@Twixes][@Twixes]  |   |
-| Billing | [@paolodamico][@paolodamico]  |   |
-| Cohorts | [@EDsCODE][@EDsCODE]  |   |
-| Correlation Analysis | [@neilkakkar][@neilkakkar]  |   |
-| Events | [@alexkim205][@alexkim205]  |   |
-| Experimentation | [@neilkakkar][@neilkakkar] |   |
-| Feature Flags | [@neilkakkar][@neilkakkar]  |   |
-| Funnels | [@neilkakkar][@neilkakkar]  |   |
-| Groups | [@macobo][@macobo]  |   |
-| Project Home Page | [@rcmarron][@rcmarron]  |   |
-| Ingestion Setup | [@liyiy][@liyiy]  |   |
-| Lifecycle | [@EDsCODE][@EDsCODE]  |   |
-| Paths | [@neilkakkar][@neilkakkar]  |   |
-| Permissions | [@Twixes][@Twixes]  |   |
-| Property Filters | [@mariusandra][@mariusandra]  |   |
-| Recordings | [@rcmarron][@rcmarron]  |   |
-| Retention | [@EDsCODE][@EDsCODE]  |   |
-| Saved Insights | [@Twixes][@Twixes]  |   |
-| Session Analytics | [@rcmarron][@rcmarron]  |   |
-| Settings (personal & project) | [@paolodamico][@paolodamico]  |   |
-| Stickiness | [@EDsCODE][@EDsCODE]  |   |
-| Taxonomy | [@alexkim205][@alexkim205]  |   |
-| Toolbar | [@pauldambra][@pauldambra]  |   |
-| Trends | [@EDsCODE][@EDsCODE]  |   |
+| Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">actions</span> |
+| Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
+| API | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">API</span>  |
+| Billing | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">billing</span> |
+| Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">cohorts</span>  |
+| Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">correlation</span> |
+| Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">events</span>  |
+| Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">experimentation</span> |
+| Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature-flags</span> |
+| Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">funnels</span>  |
+| Groups | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">groups</span> |
+| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span>  |
+| Ingestion Setup | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">ingestion</span>  |
+| Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">lifecycle</span>  |
+| Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">paths</span> |
+| Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">permissions</span>  |
+| Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">filters</span>  |
+| Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">recordings</span> |
+| Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">retention</span> |
+| Saved Insights | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">saved-insights</span> |
+| Session Analytics | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">sessions</span> |
+| Settings (personal & project) | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">settings</span> |
+| Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">stickiness</span>  |
+| Taxonomy | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">taxonomy</span>  |
+| Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">toolbar</span>  |
+| Trends | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">trends</span>  |
 
 
-### Why did we establish feature owners?
+## Why did we establish feature owners?
 At our Engineering Offsite in February 2022 we realized the issue that some bugs and maintenance tasks may have been falling through the cracks because there were no clear owners.
 
 
