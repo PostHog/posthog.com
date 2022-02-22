@@ -65,20 +65,8 @@ hideAnchor: true
 - Good logging and monitoring
 - 5 Billion / month events
 - SOC 2 Ready
-- All infra is managed as code on prod / staging + EU 🎈
-
-## Scope
-In Scope
-  * Deploying and managing Posthog (Cloud + Self-hosted)
-  * Scaling posthog (Cloud + Self-hosted)
-  * Infrastructure for data migrations (for ClickHouse, PostgreSQL, Kafka,...)
-  * Ingestion, libraries and plugins (contentious)
-
-Out of Scope
-  * Developer Experience
-  * Expanding the plugins library
-  * Writing analytics queries for performance and table schemas
-
+- All infra is managed as code on prod / staging + EU Ready 🎈
+  
 # How we work?
 ## Guidelines
 * We work as teams on one goal/project - not having a single person alone working on a goal
