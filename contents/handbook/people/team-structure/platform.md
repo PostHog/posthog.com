@@ -9,28 +9,62 @@ hideAnchor: true
 
 [See team structure page](/handbook/people/team-structure/team-structure)
 
-## Mission
+# Platform Sub-Team Mission Statements
 
+## Ingestion
 
-Make deploying, scaling and managing PostHog easy
+**Provide the best events pipeline in the world.**
 
-## Goals & Key Results
+## Infrastructure
 
-* PostHog is the easiest self-hosted product to deploy and scale in the world
-    * Result: Volume of clients requiring help @marcushyett-ph
-    * Result: % of successful installs / upgrades @guidoiaquinti
-    * Result: Max size of operating instances @fuziontech
-    * Monitor: % of users on latest version of PostHog @tiina303
-    * Result: We don't lose customers because we can't scale enough (shared with Core Analytics) @marcushyett-ph
-* Move all posthog-supported instances to self-hosted
-    * Result: No alerts come to us from customer-instances
-* All valid events are ingested correctly
-    * Result: Time ingestion is down on cloud (from alert) @fuziontech
-    * Result: Lost events between ingress and clickhouse @fuziontech
-* Data is as up to date as possible
-    * Result: Latency between ingress and clickhouse @fuziontech
-* A good experience for plugin developers
-    * Result: Good docs, alerting, debugging and testing @yakkomajuri
+**Make deploying, scaling, and managing PostHog easy, fast, and reliable.**
+
+# Roadmap
+
+## Ingestion
+
+### 3 year
+
+- Ingest events out of order
+- No events left behind (99.99%)
+- All events are correct (99.99%)
+- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
+- Events are ingested and visible in app within 5 seconds p99
+- Integrated delightful plugin developer experience (inside PostHog)
+    - CI/CD
+    - Testing
+    - Synthetic data testing
+- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
+
+### 6 months
+
+- Scalable to 1Bn Persons 🎉
+- Ingestion monitoring and management
+    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
+- Events are ingested and visible in app within 30 seconds p99
+- Easy to build a well tested plugin (DevEx)
+    - Documentation
+    - GitHub Template
+        - Unit tests
+        - Style
+
+## Infrastructure
+
+### 3 year
+
+- All infrastructure is managed as code
+- Cloud is global
+- Best in class security and privacy compliance
+- Scale beyond 1 Trillion events / month
+- Support Non-Cube Deploys 🤖
+
+### 6 month
+
+- ClickHouse Upgraded
+- Good logging and monitoring
+- 5 Billion / month events
+- SOC 2 Ready
+- All infra is managed as code on prod / staging + EU 🎈
 
 ## Scope
 In Scope
@@ -44,7 +78,7 @@ Out of Scope
   * Expanding the plugins library
   * Writing analytics queries for performance and table schemas
 
-## How we work?
+# How we work?
 * Pairing at least two people on one goal/project - not having a single person alone working on a goal
 * The board should be our source of truth
 * We document what we do to share context internally
@@ -54,6 +88,6 @@ Out of Scope
 * We have an agenda and follow up on actions from our meetings
 * Be frugal
 
-## Slack channel
+# Slack channel
 
 [#team-platform](https://posthog.slack.com/messages/team-platform)
