@@ -49,7 +49,7 @@ const Search = () => {
             </p>
             <p className="text-[14px] opacity-70 m-0 mt-3">
                 Can't find the answer you're looking for? Ask a question at the end of any page in our{' '}
-                <a href="/docs">Docs</a>.
+                <Link to="/docs">Docs</Link>.
             </p>
         </>
     )
