@@ -60,6 +60,7 @@ hideAnchor: true
 
 ### 6 month
 
+- No Heroku
 - ClickHouse Upgraded
 - Good logging and monitoring
 - 5 Billion / month events
@@ -79,7 +80,8 @@ Out of Scope
   * Writing analytics queries for performance and table schemas
 
 # How we work?
-* Pairing at least two people on one goal/project - not having a single person alone working on a goal
+## Guidelines
+* We work as teams on one goal/project - not having a single person alone working on a goal
 * The board should be our source of truth
 * We document what we do to share context internally
 * We finish what we start, or we don't start it at all
@@ -88,6 +90,32 @@ Out of Scope
 * We have an agenda and follow up on actions from our meetings
 * Be frugal
 
+## Standups
+We have a Platform wide standup every Monday, Wednesday, and Friday. Standups are an opportunity for us to discuss what we are working on, feedback, and topics we may want other people's opinions on. It is also an important forum to announce that you are blocked or ask for help. Everyone should try to make standups but feel free to drop off if what is being talked about isn't relevant or valuable to you.
+
+
+## Engineering Planning
+We plan our work using a two week sprint with sprint planning and retro meetings on the wednesday before the start of the next print. We primarily use the [Platform project board](https://github.com/orgs/PostHog/projects/10) to communicate what we are working on for the sprint, what is blocked, in review, done, and what we are planning on doing next.
+
+### Sprint Planning
+Sprint planning happens every other week the Wednesday before the start of the new sprint and is PostHog engineering wide. We first break out into breakout rooms for Infrastructure and Ingestion and in each we determine what the goals will be for the upcoming sprint. After that we join back into the engineering wide sprint planning we pitch the goals to the entire engineering team, looking for feedback. This is a great opportunity for other teams within the company to raise concerns about things they may be blocked on.
+
+Sub-teams are fluid so members may change from sprint to sprint.
+
+### Retro & Team Planning
+After the Eng Sprint Planning meeting the Infrastructure and Ingestion teams will meet up to retro the previous sprint. The is also where we game plan the next sprint in terms of what tasks need to be done to accomplish to goals set in the Engineering Sprint Planning.
+
+While planning we make sure that the teams that we have settled on for Ingestion and Infrastructure have more than one person working on a goal or project in the same timezone. We want to reduce the number of _lone wolfs_ and encourage people to work together and spread context. There are a few benefits to this including shared context, quicker PR approvals, easy rubber ducking, and more trust and camaraderie on the team. 🌞
+
+### Project Boards
+We use Github Project boards to organize what work needs to get done for a certain project. During a sprint we may not get an entire project done, but we should set our goals relative to milestones measurable in the project boards.
+
+For example if there is a project that is to re-partition 100 tables, goals set for a sprint could look like:
+- `Migrate 50 of the 100 tables`
+- `Migration framework is production ready`
+- `We have migrated 10% of customers with all 100 tables`
+
+The projects can be viewed as epics if that is what you are used to.
 # Slack channel
 
 [#team-platform](https://posthog.slack.com/messages/team-platform)
