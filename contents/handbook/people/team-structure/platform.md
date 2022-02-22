@@ -91,7 +91,7 @@ Sprint planning happens every other week the Wednesday before the start of the n
 Sub-teams are fluid so members may change from sprint to sprint.
 
 ### Retro & Team Planning
-After the Eng Sprint Planning meeting the Infrastructure and Ingestion teams will meet up to retro the previous sprint. The is also where we game plan the next sprint in terms of what tasks need to be done to accomplish to goals set in the Engineering Sprint Planning.
+After the Eng Sprint Planning meeting the Infrastructure and Ingestion teams will meet up to retro the previous sprint. This is also where we game plan the next sprint in terms of what tasks need to be done to accomplish to goals set in the Engineering Sprint Planning.
 
 While planning we make sure that the teams that we have settled on for Ingestion and Infrastructure have more than one person working on a goal or project in the same timezone. We want to reduce the number of _lone wolfs_ and encourage people to work together and spread context. There are a few benefits to this including shared context, quicker PR approvals, easy rubber ducking, and more trust and camaraderie on the team. 🌞
 
