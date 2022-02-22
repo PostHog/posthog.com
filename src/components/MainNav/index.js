@@ -1,3 +1,4 @@
+import { useLocation } from '@reach/router'
 import { Auth } from '@supabase/ui'
 import AnimatedBurger from 'components/AnimatedBurger'
 import Link from 'components/Link'
@@ -6,14 +7,15 @@ import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { supabase } from 'lib/supabase'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { link, menuItem as menuItemClass } from './classes'
 import MenuItem from './MenuItem'
 
-const Login = ({ setLoginOpen }) => {
+const Login = ({ setLoginOpen, view }) => {
     const handleClose = () => {
         setLoginOpen(false)
     }
+
     return (
         <motion.div
             onClick={handleClose}
@@ -22,7 +24,7 @@ const Login = ({ setLoginOpen }) => {
             className="fixed w-full h-full top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
         >
             <div onClick={(e) => e.stopPropagation()} className="max-w-[400px] w-full bg-tan p-6 rounded-md">
-                <Auth magicLink supabaseClient={supabase} />
+                <Auth redirectTo={'http://localhost:8888'} view={view} magicLink supabaseClient={supabase} />
             </div>
         </motion.div>
     )
@@ -79,8 +81,10 @@ export default function MainNav() {
     const { user } = Auth.useUser()
     const [expanded, expandMenu] = useState(false)
     const [loginOpen, setLoginOpen] = useState(false)
+    const [loginView, setLoginView] = useState(undefined)
     const menu = data?.navsJson?.main
     const breakpoints = useBreakpoint()
+    const location = useLocation()
     const variants = {
         hidden: { height: 0 },
         shown: { height: 'auto' },
@@ -95,6 +99,29 @@ export default function MainNav() {
             setLoginOpen(true)
         }
     }
+    // useEffect(() => {
+    //     const resetPassword = queryString.parse(location?.search)?.type === 'recovery'
+    //     if (resetPassword) {
+    //         setLoginView('update_password')
+    //         setLoginOpen(true)
+    //     }
+    // }, [])
+
+    useEffect(() => {
+        const { data: authListener } = supabase.auth.onAuthStateChange((e) => {
+            if (e === 'PASSWORD_RECOVERY') {
+                setLoginView('update_password')
+                setLoginOpen(true)
+            } else {
+                setLoginView(undefined)
+                setLoginOpen(false)
+            }
+        })
+
+        return () => {
+            authListener.unsubscribe()
+        }
+    }, [])
     return (
         <div className="flex justify-between items-center">
             <Link
@@ -140,7 +167,7 @@ export default function MainNav() {
                 </motion.nav>
             )}
             <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
-            {loginOpen && <Login setLoginOpen={setLoginOpen} />}
+            {loginOpen && <Login view={loginView} setLoginOpen={setLoginOpen} />}
         </div>
     )
 }

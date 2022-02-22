@@ -26,6 +26,8 @@ export default function AskAQuestion() {
                 .eq('id', user.id)
                 .single()
             setUserValues({ email: user.email, firstName: data?.first_name, lastName: data?.last_name })
+        } else {
+            setUserValues({})
         }
         setLoading(false)
     }
@@ -37,12 +39,16 @@ export default function AskAQuestion() {
             <div className="mt-10">
                 <h4>Ask a question</h4>
                 <div className="flex flex-col items-start space-y-2">
-                    <div className="flex space-x-2 items-center font-semibold opacity-50">
-                        <Avatar />
-                        <p className="m-0 text-[15px]">
-                            {userValues.firstName ? `${userValues.firstName} ${userValues.lastName}` : 'Contributor'}
-                        </p>
-                    </div>
+                    {user && (
+                        <div className="flex space-x-2 items-center font-semibold opacity-50">
+                            <Avatar />
+                            <p className="m-0 text-[15px]">
+                                {userValues.firstName
+                                    ? `${userValues.firstName} ${userValues.lastName}`
+                                    : 'Contributor'}
+                            </p>
+                        </div>
+                    )}
 
                     <div className="w-full max-w-[405px]">
                         <Formik

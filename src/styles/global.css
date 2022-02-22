@@ -687,7 +687,8 @@ ul {
 #auth-sign-in,
 #auth-forgot-password,
 #auth-sign-up,
-#auth-magic-link {
+#auth-magic-link,
+#auth-update-password {
     @apply mt-0;
 }
 
