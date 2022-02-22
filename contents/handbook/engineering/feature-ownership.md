@@ -11,6 +11,8 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 
 ## Feature list
 
+You can also view the list [directly in GitHub](https://github.com/PostHog/posthog/labels?q=feature+tag) and filter issues there.
+
 | Feature |  Owner  |  Label  |
 |---|---|---|
 | Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">actions</span> |
@@ -25,11 +27,12 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 | Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">experimentation</span> |
 | Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature-flags</span> |
 | Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">funnels</span>  |
-| Groups | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">groups</span> |
+| Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">group-analytics</span> |
 | Onboarding | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">onboarding</span>  |
 | Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">lifecycle</span>  |
 | Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">permissions</span>  |
+| Persons | [@macobo][@macobo]  | <span class="lemon-tag gh-tag">persons</span>  |
 | Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span> |
 | Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">filters</span>  |
 | Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">recordings</span> |
