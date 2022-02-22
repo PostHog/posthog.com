@@ -105,8 +105,10 @@ For example if there is a project that is to re-partition 100 tables, goals set 
 
 The projects can be viewed as epics if that is what you are used to.
 
-### Platform Board
-We use a [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style [board](https://github.com/orgs/PostHog/projects/10) to show what we are working on, planning on working on, blocked on, what is in review, and what is done. This provides context on what the operational priorities are for the week and what work people can pick up if they have a few extra cycles or are looking for what the most impactful task is at any one moment for them and their sub-team. It's up to the sub-teams to decide what tasks are on deck for each sprint based on the goals that were set for the sprint. We try to keep this as up to date as possible and assign ourselves as owners so that there isn't duplicate work done on the same task and if there is a question about a task we know who to ask.
+### Team Kanban Board
+We use a [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style [board](https://github.com/orgs/PostHog/projects/10) for each team to show what we are working on, planning on working on, blocked on, what is in review, and what is done. This provides context on what the operational priorities are for the sprint and what work people can pick up if they have a few extra cycles or are looking for what the most impactful task is at any one moment for them and their sub-team. It's up to the sub-teams to decide what tasks are on deck for each sprint based on the goals that were set for the sprint. We try to keep this as up to date as possible and assign ourselves as owners so that there isn't duplicate work done on the same task and if there is a question about a task we know who to ask.
+
+We also tag the tasks that we set aside for the sprint with the sprint number/name so that we can filter out what is on the board for a quick view of how we are making progress against the sprint goals.
 
 The board also acts as a source of truth for other teams to have a quick check in on the progress of tasks for the sprint, especially if they will be the primary consumers of the product of the task. This works within the team as well.
 # Slack channel
