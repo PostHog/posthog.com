@@ -25,11 +25,11 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 | Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature-flags</span> |
 | Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">funnels</span>  |
 | Groups | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">groups</span> |
-| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span>  |
-| Ingestion Setup | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">ingestion</span>  |
+| Onboarding | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">onboarding</span>  |
 | Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">lifecycle</span>  |
 | Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">permissions</span>  |
+| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span>  |
 | Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">filters</span>  |
 | Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">recordings</span> |
 | Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">retention</span> |
