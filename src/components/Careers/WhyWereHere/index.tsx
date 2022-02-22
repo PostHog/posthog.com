@@ -21,7 +21,7 @@ export const WhyWereHere = () => {
                                 </p>
                                 <p>
                                     We started PostHog as part of Y Combinator's W20 cohort and had the most successful
-                                    B2B software launch on HackerNews since 2012 - with a product that was just 4 weeks
+                                    B2B software launch on Hacker News since 2012 - with a product that was just 4 weeks
                                     old.
                                 </p>
                             </div>

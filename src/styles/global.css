@@ -647,3 +647,43 @@ ul {
 .mary-chain {
     display: none;
 }
+
+.heart-pulse {
+    animation: pulse 5s linear infinite;
+}
+
+.heart-fade {
+    opacity: 0;
+    animation-name: fade;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.mermaid {
+    line-height: 1;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

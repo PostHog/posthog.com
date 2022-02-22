@@ -10,17 +10,27 @@ and require extra effort from the engineering team.
 
 Below are some important considerations to keep in mind regarding schema changes:
 
-## Avoid deleting Django model fields
+## General considerations
 
-Deleting columns, even completely unused ones, is discouraged.
+Before making a schema change, consider:
+- Do we need the schema change at all? Would this be better solved with an application-level code change instead?
+- Is my change backwards compatible? Both old and new code _will_ be running in parallel in both posthog cloud and self-hosted, so breaking changes can and will cause outages.
+- Can I deploy my schema change separately from application code change? For non-trivial changes, you want to deploy schema change first to ensure it's easy to roll back and if it's backwards compatible.
+- Am I doing a blocking migration? Migrations which lock huge tables can easily cause outages. 
 
-The reason is that the Django ORM **always** specifies columns to fetch in its `SELECT` queries – so when a migration deletes a column, in between the migration having ran and the new server having deployed completely, there's a period where the old server is still live and tries to `SELECT` that column. The only thing it gets from the database though is an error, as the column isn't there anymore! This situation results in a period of short-lived but very significant pain for users.
+If you're doing anything tricky, it is worth reading up on zero-downtime migrations and make sure you know how the change will work operationally in practice.
 
-To avoid this pain, in most cases **we currently don't delete fields that aren't used anymore** – we just clearly mark them with `DEPRECATED` in code.
+## Do not delete or rename Django models and fields
 
-Note that this is not the case for `ManyToManyField`s – they are only fetched when explicitly used, as they are in fact tables of their own (called associative tables). There may still be a problem if going from from "M2M field existing and in use" to "M2M field deleted" in one deployment, but if you have an "M2M field existing but unused" stage in the middle, there should be no place for Django to trip up.
+Deleting and renaming tables and columns, even completely unused ones, is strongly discouraged.
 
-## Design for PostHog Cloud scale
+The reason is that the Django ORM **always** specifies tables and columns to fetch in its `SELECT` queries – so when a migration moves a table/column away, in between the migration having ran and the new server having deployed completely, there's a period where the old server is still live and tries to `SELECT` that column. The only thing it gets from the database though is an error, as the resource isn't there anymore! This situation results in a period of short-lived but very significant pain for users.
+
+To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
+- if the name is no longer relevant, keep it the same in the database – feel free to change the naming in Python/JS code, but make sure the change ISN'T reflected in the database,
+- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it be.
+
+## Design for scale
 
 With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
 
@@ -29,6 +39,7 @@ Generally this means avoiding migrations that need to process each row individua
 Examples of operations dangerous at scale are:
 - Adding new fields **with a non-null default** (null is fine, as it avoids a lock).
 - Iterating over all rows individually.
+- Adding an index
 
 > For a quick overview of what Cloud scale _looks like_, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
 
