@@ -14,6 +14,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 | Feature |  Owner  |  Label  |
 |---|---|---|
 | Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">actions</span> |
+| Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">actors-modal</span>  |
 | Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
 | API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">api-structure</span>  |
 | Billing | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">billing</span> |
@@ -29,7 +30,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 | Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">lifecycle</span>  |
 | Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">permissions</span>  |
-| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span>  |
+| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span> |
 | Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">filters</span>  |
 | Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">recordings</span> |
 | Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">retention</span> |
