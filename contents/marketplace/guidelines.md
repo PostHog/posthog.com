@@ -1,8 +1,10 @@
 ---
-title: Marketplace Guidelines
+title: Marketplace guidelines
 showTitle: true
 hideLastUpdated: true
 ---
+
+**[← Back to Marketplace](/marketplace)**
 
 ## Getting listed
 
@@ -32,8 +34,8 @@ Our main aim is that it's clear if your product/service is built on PostHog, but
 
 Do these things:
 
-* [Use the PostHog name or logo](../handbook/company/brand-assets) to link to PostHog
-* [Use the PostHog name or logo](../handbook/company/brand-assets) to advertise that your product or service has PostHog integration
+* [Use the PostHog name or logo](/handbook/company/brand-assets) to link to PostHog
+* [Use the PostHog name or logo](/handbook/company/brand-assets) to advertise that your product or service has PostHog integration
 * Create a blog post to announce you provide a product or service built on PostHog
 
 Please don't do these things:
@@ -53,7 +55,7 @@ If our team hear good user feedback about your product or service, we are more l
 ## Commercial terms
 
 * There is no cost to be listed.
-* PostHog aims for you to sell directly to other PostHog community members (we don't take or provide commission for simplicity's sake and to make things simpler to get started)
+* PostHog aims for you to sell directly to other PostHog community members. (We don't take or provide commission for simplicity's sake and to make things simpler to get started.)
 
 ## Reseller licenses
 

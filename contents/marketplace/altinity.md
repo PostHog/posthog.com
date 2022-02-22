@@ -4,7 +4,11 @@ showTitle: true
 hideLastUpdated: true
 ---
 
-Altinity is based on three insights that will permanently change the way businesses create value from data.
+**[← Back to Marketplace](/marketplace)**
+
+<img src="/images/marketplace/alinity.png" alt="Tenrec" width="100" style="float: right; margin: 0 0 1rem 1rem;" />
+
+[Altinity](https://altinity.com) is based on three insights that will permanently change the way businesses create value from data.
 
 1. A universe of business value is waiting to be unlocked through fast access to very large amounts of data.
 1. Inclusive open source communities are the best mechanism to develop fit-for-use database technologies and deliver them quickly to users.
@@ -15,9 +19,9 @@ The management team, investors and advisors have over 150 years of experience in
 ## Services offered
 
 ### Support
-- PostHog Deployment
-- PostHog as a Managed Service
+- PostHog deployment
+- PostHog as a managed service
 
 ## Contact
 
-[Speak to Altinity](mailto:marketplace+altinity@posthog.com)
+[Send a message to Altinity](mailto:marketplace+altinity@posthog.com)
