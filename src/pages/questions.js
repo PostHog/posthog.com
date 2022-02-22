@@ -2,12 +2,14 @@ import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { CodeBlock } from 'components/CodeBlock'
+import AskAQuestion from 'components/CommunityQuestions/AskAQuestion'
 import { Days } from 'components/CommunityQuestions/Question'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
+import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
@@ -15,6 +17,7 @@ import React, { useState } from 'react'
 const Search = () => {
     const [value, setValue] = useState('')
     const [modal, setModal] = useState(false)
+    const [showForm, setShowForm] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
         if (value.trim()) {
@@ -38,15 +41,27 @@ const Search = () => {
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     name="faq-search"
-                    placeholder="Search hundreds of FAQs..."
+                    placeholder="Search hundreds of answers..."
                     className="px-4 py-3 bg-white dark:bg-gray-accent-dark shadow-md rounded-md max-w-[477px] w-full"
                 />
 
                 <button className="px-6 py-3 bg-red shadow-md rounded-md text-white font-bold">Search</button>
             </form>
-            <p className="text-[13px] opacity-50 m-0 mx-4 mt-3">
+            <p className="text-[13px] opacity-50 m-0 mt-3">
                 Try product questions, or anything about installation or self-hosting.
             </p>
+            <p className="text-[14px] opacity-70 m-0 mt-3">
+                Can't find the answer you're looking for?{' '}
+                <button className="text-red" onClick={() => setShowForm(!showForm)}>
+                    Ask us anything
+                </button>
+                .
+            </p>
+            {showForm && (
+                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                    <AskAQuestion />
+                </motion.div>
+            )}
         </>
     )
 }
@@ -62,7 +77,7 @@ const Question = ({ question }) => {
         img: ZoomImage,
     }
     return (
-        <li className="mt-9">
+        <li className="mt-9 first:mt-7">
             <div className="flex space-x-2">
                 {avatar ? (
                     <GatsbyImage className="rounded-full overflow-hidden" image={getImage(avatar)} />
@@ -85,7 +100,7 @@ const Question = ({ question }) => {
             <div className="artcle-content my-2">
                 <p className="m-0">{childMdx.excerpt}</p>
             </div>
-            <Link className="text-red hover:red m-0 text-[13px] font-semibold" to={`/questions/${question.id}`}>
+            <Link className="text-red hover:red m-0 text-[14px] font-semibold" to={`/questions/${question.id}`}>
                 {replies.length - 1} response{replies.length - 1 === 1 ? '' : 's'}
             </Link>
         </li>
@@ -106,10 +121,10 @@ export default function FAQ({
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
             <section className="max-w-[884px] mx-auto my-12 px-5">
-                <h1>FAQ</h1>
+                <h1>Questions &amp; answers</h1>
                 <p>
-                    We’ve been asked hundreds of questions, so we decided to compile the answers here. (We hope this
-                    helps you find what you’re looking for even faster!)
+                    We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
+                    helps you find what you're looking for even faster!)
                 </p>
                 <Search />
                 <div className="questions-content">

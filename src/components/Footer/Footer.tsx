@@ -223,6 +223,7 @@ export function Footer(): JSX.Element {
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="FAQ" url="/faq" />
+                                    <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
                                     <FooterMenuItem title="Media" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
