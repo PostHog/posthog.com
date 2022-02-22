@@ -238,6 +238,10 @@
                     "url": "/handbook/engineering/how-we-review"
                 },
                 {
+                    "name": "Feature ownership",
+                    "url": "/handbook/engineering/feature-ownership"
+                },
+                {
                     "name": "Releasing a new version",
                     "url": "/handbook/engineering/release-new-version"
                 },
