@@ -181,6 +181,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 name,
                 imageURL,
                 fullName,
+                ts: new Date(ts * 1000),
             }
             createNode(replyNode)
             createParentChildLink({ parent: node, child: replyNode })
