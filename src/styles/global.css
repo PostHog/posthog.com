@@ -660,6 +660,10 @@ ul {
     animation-iteration-count: infinite;
 }
 
+.mermaid {
+    line-height: 1;
+}
+
 @keyframes fade {
     0% {
         opacity: 0;
