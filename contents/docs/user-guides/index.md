@@ -1,15 +1,15 @@
 ---
-title: User guides
+title: Manuals
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
 
-Below you will find a comprehensive list of all the features that comprise the PostHog core. As stated in our [pricing page](/pricing) page, we are committed to our open source community and as such, **all base analytics features are available on all plans.**
+Below you will find a comprehensive list of all the features that comprise the PostHog core. As part of our commitment to open source, **all base analytics features are available on all plans.**
 
 ### Analysis features
 
-| Feature                                     | Status                                       | Cloud | Self-managed |
+| Feature                                     | Status                                       | Cloud | Self-host |
 | ------------------------------------------- | -------------------------------------------- | ----- | ------------ |
 | [Cohort analysis](/docs/user-guides/cohorts)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Session analysis](/docs/user-guides/sessions) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
@@ -19,7 +19,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Visualization features
 
-| Feature                                         | Status                                       | Cloud | Self-managed |
+| Feature                                         | Status                                       | Cloud | Self-host |
 | ----------------------------------------------- | -------------------------------------------- | ----- | ------------ |
 | [Action history](/docs/user-guides/actions)        | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Custom dashboards](/docs/user-guides/dashboards)  | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
@@ -27,7 +27,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Optimization features
 
-| Feature                                                      | Status                                                 | Cloud | Self-managed |
+| Feature                                                      | Status                                                 | Cloud | Self-host |
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
 | [Feature flags](/docs/user-guides/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [Conversion rate optimization](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
@@ -35,7 +35,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Tracking features
 
-| Feature                                                                        | Status                                       | Cloud | Self-managed |
+| Feature                                                                        | Status                                       | Cloud | Self-host |
 | ------------------------------------------------------------------------------ | -------------------------------------------- | ----- | ------------ |
 | [Autocapture event tracking](/docs/user-guides/events#autocapture-event-tracking) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Push-based event tracking](/docs/user-guides/events#push-based-event-tracking)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
@@ -43,7 +43,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Libraries
 
-**All our libraries work with either the cloud or the self-managed options.**
+_All of our libraries work with PostHog Cloud and Self-hosted versions._
 
 | Feature                                                            | Status                                       | Client | Server |
 | ------------------------------------------------------------------ | -------------------------------------------- | ------ | ------ |
@@ -61,7 +61,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Additional features
 
-| Feature                                                          | Status                                                 | Cloud | Self-managed |
+| Feature                                                          | Status                                                 | Cloud | Self-host    |
 | ---------------------------------------------------------------- | ------------------------------------------------------ | ----- | ------------ |
 | Privacy friendly                                                 | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | Ad-blocker friendly                                              | <span style="color: #71AA55">**Live**</span>           |       | ✔            |
@@ -69,22 +69,3 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [CSV export](https://github.com/PostHog/posthog/issues/724)      | <span style="color: #F9BD2B">**In development**</span> | ✔     | ✔            |
 | User roles                                                       | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 | Custom databases (e.g. Snowflake / ClickHouse)                   | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
-
-
-### Features demo video
-
-> This video is significantly dated. [Schedule a demo](../book-a-demo) if you need something more recent.
-
-<span class="centered">
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-</span>
-
-<br />
-
-<small class="centered">
-
-_For video notes marking when each feature is showcased, watch the video [on YouTube](https://www.youtube.com/watch?v=aUILrrrlu50)._
-
-</small>

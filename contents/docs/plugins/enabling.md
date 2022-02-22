@@ -1,5 +1,5 @@
 ---
-title: Enabling plugins
+title: Plugin troubleshooting
 sidebar: Docs
 showTitle: true
 ---

@@ -22,8 +22,9 @@ const Home = () => {
             <StarUsBanner />
             <Layout>
                 <SEO
-                    title="PostHog - Host Your Own Product Analytics"
+                    title="PostHog - Host your own product analytics"
                     description="PostHog is the all-in-one platform for building better products. Heatmaps, funnels, feature flags, session replays and more. Try for free."
+                    image="/images/home.png"
                 />
                 <Hero />
                 <Customers />
@@ -40,7 +41,7 @@ const Home = () => {
                 <Community />
                 <Tutorials
                     title="Tutorials"
-                    subtitle="See the power of PostHog in action."
+                    subtitle="See PostHog in action."
                     cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
                 />
                 <CTA />
