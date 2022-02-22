@@ -1166,3 +1166,9 @@
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
+
+
+# Added: 2022-02-22
+[[redirects]]
+    from = "/docs/privacy/hipaa-compliance"
+    to = "/blog/hipaa-compliant-analytics"
