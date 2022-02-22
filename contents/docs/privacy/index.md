@@ -19,7 +19,7 @@ In these guides, we offer advice for using PostHog in a compliant manner under t
 
 ## Frequently asked questions
 
-This overview covers some frequently asked questions about PostHog and privacy. Have a question not covered here? Use the 'Ask a question' box at the bottom of this page.
+This overview covers some frequently asked questions about PostHog and privacy. Have a question not covered here? Use the 'Ask a question' box at the bottom of the page.
 
 ### What is and isn't considered personal data?
 
