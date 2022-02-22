@@ -15,10 +15,11 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 |---|---|---|
 | Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">actions</span> |
 | Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
-| API | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">API</span>  |
+| API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">api-structure</span>  |
 | Billing | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">billing</span> |
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">correlation</span> |
+| Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">dashboards</span> |
 | Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">events</span>  |
 | Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">experimentation</span> |
 | Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature-flags</span> |
