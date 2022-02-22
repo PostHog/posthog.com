@@ -10,7 +10,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
-| Actions | [@pauldambra][@pauldambra]  |  |
+| Actions | [@pauldambra][@pauldambra]  | <span class="tag-label" style="background:#ff0000; color: white;">test</span> |
 | Annotations | [@pauldambra][@pauldambra]  |   |
 | API | [@Twixes][@Twixes]  |   |
 | Billing | [@paolodamico][@paolodamico]  |   |
