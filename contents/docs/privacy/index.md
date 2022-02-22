@@ -34,7 +34,7 @@ Read our [simple guide to personal data and PII](/blog/what-is-personal-data-pii
 
 ### What personal data does PostHog collect?
 
-The PostHog product collects a range of data that is considered personal data, including but not limited to:
+PostHog collects a range of data that is considered personal data, including but not limited to:
 
 - Technical device information (e.g. IP addresses)
 - Names and email addresses of logged in users of the product
@@ -47,9 +47,9 @@ It also collects behavioral data, such as:
 - Content viewed or product features used
 - Content or product interaction
 
-We collect this data on users of the PostHog product to enable us to understand, and improve, the experience.
+We also collect this data on users of the PostHog Cloud and self-hosted instances to enable us to understand, and improve, the experience, but we cannot see or collect data on the end users of self-hosted PostHog instances.
 
-We **do not** intentionally collect sensitive or special category information, such as genetic or biometric data. 
+We **do not** intentionally collect sensitive or special category information, such as genetic or biometric data, in any setting. 
 
 More information is available in our [privacy policy](/privacy).
 
