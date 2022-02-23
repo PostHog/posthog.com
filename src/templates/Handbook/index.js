@@ -148,6 +148,7 @@ export const query = graphql`
                 id
                 childrenReply {
                     id
+                    subject
                     name
                     ts(difference: "days")
                     childMdx {

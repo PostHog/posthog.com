@@ -94,6 +94,9 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                             reply.imageURL = block.accessory.image_url
                         }
                     },
+                    subject: (block) => {
+                        reply.subject = block.text.text
+                    },
                 }
 
                 blocks.forEach((block) => {
@@ -195,7 +198,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
 
     function createReplies(node, replies) {
         for (reply of replies) {
-            const { rawBody, name, imageURL, ts, fullName } = reply
+            const { rawBody, name, imageURL, ts, fullName, subject } = reply
             const replyId = createNodeId(`reply-${ts}`)
             const replyNode = {
                 id: replyId,
@@ -210,6 +213,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 name,
                 imageURL,
                 fullName,
+                subject,
                 ts: new Date(ts * 1000),
             }
             createNode(replyNode)
