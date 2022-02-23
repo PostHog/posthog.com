@@ -20,11 +20,14 @@ export default function AskAQuestion() {
                 <div className="w-full max-w-[405px]">
                     <Formik
                         isInitialValid={false}
-                        initialValues={{ name: '', question: '', email: '', 'mary-chain': '' }}
+                        initialValues={{ name: '', question: '', email: '', subject: '', 'mary-chain': '' }}
                         validate={(values) => {
                             const errors = {}
                             if (!values.name) {
                                 errors.name = 'Required'
+                            }
+                            if (!values.subject) {
+                                errors.subject = 'Required'
                             }
                             if (!values.question) {
                                 errors.question = 'Required'

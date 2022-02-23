@@ -9,6 +9,12 @@ export default function AskQuestion({ isValid, loading, setFieldValue, submitFor
             <Field
                 className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md w-full shadow-md"
                 type="text"
+                name="subject"
+                placeholder="Subject"
+            />
+            <Field
+                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
+                type="text"
                 name="name"
                 placeholder="Full name"
             />
@@ -22,7 +28,7 @@ export default function AskQuestion({ isValid, loading, setFieldValue, submitFor
             <RichText setFieldValue={setFieldValue} />
             <div className="flex items-center justify-between">
                 <Button onClick={() => submitForm()} loading={loading} type="submit" disabled={!isValid}>
-                    Submit reply
+                    Submit
                 </Button>
                 <p className="m-0 flex items-center space-x-2">
                     <span className="text-[13px] opacity-30 font-semibold">Supports</span>
