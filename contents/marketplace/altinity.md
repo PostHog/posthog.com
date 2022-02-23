@@ -6,7 +6,7 @@ hideLastUpdated: true
 
 **[← Back to Marketplace](/marketplace)**
 
-<img src="/images/marketplace/alinity.png" alt="Tenrec" width="100" style="float: right; margin: 0 0 1rem 1rem;" />
+<img src="/images/marketplace/alinity.png" alt="Tenrec" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
 
 [Altinity](https://altinity.com) is based on three insights that will permanently change the way businesses create value from data.
 

@@ -6,7 +6,7 @@ hideLastUpdated: true
 
 **[← Back to Marketplace](/marketplace)**
 
-<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style="border-radius: 100px; float: right; margin: 0 0 1rem 1rem;" />
+<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{borderRadius: '100px', float: 'right', margin: '0 0 1rem 1rem'}} />
 
 Tenrec is currently working on an EU deployment of PostHog.
 

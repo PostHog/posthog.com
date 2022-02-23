@@ -15,7 +15,7 @@ If you've got a product or service built on PostHog, [get it listed](/marketplac
 
 ## Directory
 
-<img src="/images/marketplace/alinity.png" alt="Tenrec" width="100" style="float: right; margin-top: 1rem;" />
+<img src="/images/marketplace/alinity.png" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem'}} />
 
 #### [**Altinity**](../marketplace/altinity)
 
@@ -27,7 +27,7 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 <hr />
   
-<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style="border-radius: 100px; float: right; margin-top: 1rem;" />
+<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem'}} />
 
 #### [**Tenrec**](../marketplace/tenrec) (Coming soon)
 
