@@ -15,7 +15,7 @@ export const Days = ({ ts, url }) => {
             to={url}
             className="font-normal ml-2 text-black hover:text-black dark:text-white dark:hover:text-white opacity-30"
         >
-            {ts} day{days === 1 ? '' : 's'} ago
+            {ts <= 0 ? 'Today' : `${ts} day${days === 1 ? '' : 's'} ago`}
         </Link>
     )
 }
@@ -55,11 +55,12 @@ export default function Question({ question, id }) {
         pre: CodeBlock,
         img: ZoomImage,
     }
-    const { avatar, childMdx, name, ts } = question[0]
+    const { avatar, childMdx, name, ts, subject } = question[0]
     return (
         <div className="flex items-start space-x-4 w-full">
             <Avatar image={avatar} />
             <div className="flex-grow max-w-[405px]">
+                {subject && <h3 className="m-0 mb-1 text-[15px]">{subject}</h3>}
                 <div>
                     <MDXProvider components={components}>
                         <MDXRenderer>{childMdx.body}</MDXRenderer>

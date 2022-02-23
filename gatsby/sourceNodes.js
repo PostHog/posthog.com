@@ -73,9 +73,6 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
                     'Content-Type': 'application/json',
                 },
-                subject: (block) => {
-                    reply.subject = block.text.text
-                },
             }
         ).then((res) => res.json())
         questions &&
@@ -96,6 +93,9 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         if (block.accessory) {
                             reply.imageURL = block.accessory.image_url
                         }
+                    },
+                    subject: (block) => {
+                        reply.subject = block.text.text
                     },
                 }
 

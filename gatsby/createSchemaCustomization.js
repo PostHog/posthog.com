@@ -8,6 +8,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         teamMember: Mdx
         name: String
         childMdx: Mdx
+        ts: Date
       }
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")

@@ -209,6 +209,8 @@ export const query = graphql`
         questions: allQuestion(filter: { slug: { in: [$slug] } }) {
             nodes {
                 childrenReply {
+                    id
+                    subject
                     name
                     childMdx {
                         body
