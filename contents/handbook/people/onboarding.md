@@ -61,6 +61,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Add them to all relevant [Slack channels](https://github.com/PostHog/company-internal/issues/234) - _Eltje_ 
 *   [ ] Add team member to PostHog Users Slack - _Charles_
 *   [ ] Add team member to PostHog organization in GitHub - _Charles_
+*   [ ] Add team member to PostHog organization in Figma - _Charles or any Figma Admin_
 *   [ ] Add team member and onboarding buddy to their onboarding issue on Github - _Eltje_
 *   [ ] _(UK only)_ Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time - _Eltje_
 *   [ ] _(UK only)_ Ask if they want to be part of our [private healthcare](https://posthog.com/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions) - _Eltje_

@@ -630,6 +630,13 @@ ul {
     line-height: 1rem;
 }
 
+.lemon-tag.gh-tag {
+    text-transform: unset;
+    background-color: rgba(83, 117, 255, 0.1);
+    padding: 4px 8px;
+    color: #5375ff;
+}
+
 .lemon-tag.warning {
     background-color: #f7a501;
 }
