@@ -9,12 +9,6 @@ export default function AskQuestion({ isValid, loading, setFieldValue, submitFor
             <Field
                 className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md w-full shadow-md"
                 type="text"
-                name="subject"
-                placeholder="Subject"
-            />
-            <Field
-                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
-                type="text"
                 name="name"
                 placeholder="Full name"
             />
@@ -23,6 +17,12 @@ export default function AskQuestion({ isValid, loading, setFieldValue, submitFor
                 type="email"
                 name="email"
                 placeholder="Email"
+            />
+            <Field
+                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
+                type="text"
+                name="subject"
+                placeholder="Subject"
             />
             <Field className="mary-chain" type="text" placeholder="Ignore if human" name="mary-chain" />
             <RichText setFieldValue={setFieldValue} />
