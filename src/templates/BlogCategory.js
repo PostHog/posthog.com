@@ -6,7 +6,7 @@ export const pageQuery = graphql`
     query($category: String) {
         allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { categories: { in: [$category] } } }
+            filter: { isFuture: { eq: false }, frontmatter: { categories: { in: [$category] } } }
         ) {
             edges {
                 node {

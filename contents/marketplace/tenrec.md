@@ -4,11 +4,15 @@ showTitle: true
 hideLastUpdated: true
 ---
 
+**[← Back to Marketplace](/marketplace)**
+
+<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{borderRadius: '100px', float: 'right', margin: '0 0 1rem 1rem'}} />
+
 Tenrec is currently working on an EU deployment of PostHog.
 
 ## Services offered
 
-### Tenrec
+### Regional hosting
 
 Tenrec plan to offer EU-hosting for PostHog Scale.
 
@@ -18,4 +22,4 @@ If you're interested, please contact us below.
 
 ## Contact
 
-[Let me know when it's ready](mailto:marketplace+tenrec@posthog.com)
+[Ask to join the waitlist](mailto:marketplace+tenrec@posthog.com)

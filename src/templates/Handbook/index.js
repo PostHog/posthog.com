@@ -145,8 +145,11 @@ export const query = graphql`
         }
         questions: allQuestion(filter: { slug: { in: [$slug] } }) {
             nodes {
+                id
                 childrenReply {
+                    id
                     name
+                    ts(difference: "days")
                     childMdx {
                         body
                     }
