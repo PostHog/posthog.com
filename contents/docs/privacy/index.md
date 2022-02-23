@@ -32,27 +32,6 @@ According to the GDPR, personal data is any information which:
 
 Read our [simple guide to personal data and PII](/blog/what-is-personal-data-pii) for more specific examples to help you identify what personal data you are collecting.
 
-### What personal data does PostHog collect?
-
-PostHog collects a range of data that is considered personal data, including but not limited to:
-
-- Technical device information (e.g. IP addresses)
-- Names and email addresses of logged in users of the product
-- Names and email addresses of community Slack members
-- Location
-
-It also collects behavioral data, such as:
-
-- Referral URLs
-- Content viewed or product features used
-- Content or product interaction
-
-We also collect this data on users of the PostHog Cloud and self-hosted instances to enable us to understand, and improve, the experience, but we cannot see or collect data on the end users of self-hosted PostHog instances.
-
-We **do not** intentionally collect sensitive or special category information, such as genetic or biometric data, in any setting. 
-
-More information is available in our [privacy policy](/privacy).
-
 ### How does the GDPR impact analytics?
 
 There are three key GDPR principles that impact your use PostHog and analytics in general:
