@@ -45,8 +45,7 @@ Our content production workflow is as follows:
 * **Get the transcript (optional):** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
 * **Write the blog post:** We write up a concise blog post about the discussion or tutorial (with the help of the transcript, if available). This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly. If based on a video a 60-minute interview usually yields a ~1,500-word blog post.
 * **Get feedback:** Once written, if the blog post is to be published on the PostHog blog, push it to GitHub and create a Pull Request for feedback. See [Publishing](#publishing) for more information. If the blog post is going to be published on an external site, use Google Docs to get feedback.
-* **Artwork:** We put an emphasis on the visual quality of the content we ship. If you're writing a blog post, you'll need an image to accompany it. If you're creating a video, you'll need a poster image (the still image that displays before you click play). Add the [Artwork project board](https://github.com/orgs/PostHog/projects/14) in your issue or PR at least several days in advance of when you'll need it. [Learn more in the Publishing section below.](#publishing)
-  * **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on Hacker News, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
+* **Artwork:** Things that are more interesting to the eye are more likely to be clicked on. Each blog post or tutorial need an accompanying image. [Learn more in the Publishing section below.](#publishing)
 * **Extract the audio from the edited video (optional):** This goes into the podcast.
 * **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
 
@@ -56,10 +55,14 @@ Our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8v
 
 Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) with the following content:
 
-- With a new Markdown file (md, mdx) in `/contents/blog/`
-- Any assets [optimized](/docs/contribute/contribute-to-website) and added to a new folder under `contents/images/blog/`
-- Each post should have a `featuredImage`. Request one by tagging the [Artwork project board](https://github.com/orgs/PostHog/projects/14). Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) - at least 3 working days out, so we have time to produce artwork. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
-- You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
+- A new Markdown file (md, mdx) in `/contents/blog/`
+- Any assets added to a new folder under `contents/images/blog/`
+- Each post should have artwork. If you deem your post worthy of custom art, add the [Artwork project board](https://github.com/orgs/PostHog/projects/14) to your post's issue. Please ensure you have a target publish date specified in the [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) (and in the post's frontmatter, _for that matter_) - at least 3 working days out, so we have time to produce artwork. Lottie will [create the artwork and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
+  - We encourage custom artwork on posts that will be (or are likely to be) amplified, whether paid or organic. But we also maintain a library of reusable artwork, so if your timeline is tight or the topic would be hard to visualize, this is a great resource. Find them in `/contents/images/blog` under `blog-generic-X.png` (currently 5 options).
+   - Blog artwork is displayed in three places: above the post itself, on the `/blog` index page, and is also used as the post's [Open Graph image](https://ogp.me/). 
+  - We have two display modes for how the post image and title appear. Use the `featuredImage` property in the post's frontmatter like in [this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md).
+    1. If the post's image has a white background or has text that needs to be unobfuscated, use `featuredImageType: standard`. (This will prevent our [Open Graph Image generator](/blog/dynamic-open-graph-images) from overlaying the title and author info on the image, and will [stack the artwork and blog title](/blog/yc-top-companies) on the actual blog post page.)
+    1. Otherwise, use `featuredImageType: full`. This should generally be used unless you're sure you need the above option.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
 - Add a keywords field to the frontmatter. Keywords should be added as an array, not a string. This enables [our internal linker](https://github.com/PostHog/internallinker) to automatically link internal pages with similar keywords.
@@ -76,7 +79,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
   ```
   
 - Add a meta description using `description` in the frontmatter section (optional)
-- Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. (This gives Team Design a heads up on how much time we have to produce a post image.)
+- Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. Posts dated [in the future](https://github.com/PostHog/posthog.com/pull/2964) won't display on the site until their specified date, though a build is required day-of in order to publish the post. (The Website & Docs team or other Netlify admins can kick off a manual build.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
 Fully completed and correct frontmatter should look like this: 
