@@ -20,7 +20,7 @@ Altinity customers range from startups to Fortune 10 enterprises.
 ## Services offered
 
 ### Support
-- Altinity.Cloud ClickHouse backends for PostHog users who prefer to use ClickHouse as a hands-off service
+- Coming soon (likely from PostHog 1.33.0): Altinity.Cloud ClickHouse backends for PostHog users who prefer to use ClickHouse as a hands-off service - get in touch now if you are interested
 - Enterprise support for users who prefer to operate ClickHouse in self-managed environments
 
 ## Contact
