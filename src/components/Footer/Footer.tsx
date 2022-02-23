@@ -164,6 +164,7 @@ export function Footer(): JSX.Element {
                                         title="PostHog FM"
                                         url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
                                     />
+                                    <FooterMenuItem title="Marketplace" url="/marketplace" />
                                 </ul>
                             </div>
                         </div>
