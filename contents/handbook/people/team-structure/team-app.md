@@ -31,7 +31,7 @@ Makers everywhere get better at building products because of posthog
 * Tight integration with developer workflows
    * Not a focus for next 6 months (maybe hackathon project) 
 * No more complex than it is today
-   * Deprecate, hide of simplify exsiting complex insights: Team West
+   * Deprecate, hide of simplify existing complex insights: Team West
    * Simplify actions: Team East
    * UI consistent and docs inline: Team East
 * Using PostHov sparks joy
