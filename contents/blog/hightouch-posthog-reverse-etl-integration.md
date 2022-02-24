@@ -1,6 +1,6 @@
 ---
-date: 2022-02-14
-title: You can now Reverse ETL into PostHog with Hightouch
+date: 2022-02-24
+title: You can now reverse ETL into PostHog with Hightouch
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -27,7 +27,7 @@ Ultimately, the pros and cons of CDPs vs data warehouses is an article in itself
 
 ## What data can be synced?
 
-Currently, Hightouch can sync data to the 'Persons' object in PostHog from any of the following data sources:
+Currently, Hightouch can sync 'Events' and data to the 'Persons' object in PostHog from any of the following data sources:
 
 - Airtable
 - Athena
@@ -42,6 +42,8 @@ Currently, Hightouch can sync data to the 'Persons' object in PostHog from any o
 - Redshift
 - Snowflake
 - SQL Server
+
+You can read more about Hightouch's PostHog integration [in its documentation](https://hightouch.io/docs/destinations/posthog/).
 
 ## Why is this useful?
 
@@ -63,7 +65,7 @@ Hightouch has three standard tiers:
 - Starter ($350 per month for up 2 destinations)
 - Pro ($800 per month for up to 3 destinations)
 
-Hightouch also offers a 30-day trial on its paid tiers. Head to its [pricing page](https://hightouch.io/pricing/) for more detail and custom options.
+You can try any destination for free for 14 days and Hightouch also offers a 30-day trial on its paid tiers. Head to its [pricing page](https://hightouch.io/pricing/) for more detail and custom options.
 
 ## Can I build my own Reverse ETL plugin for PostHog?
 
