@@ -1,3 +1,5 @@
+#### Browser or mobile libraries 
+
 ```js
 // Capturing an event with groups
 analytics.track('[event name]', {
@@ -8,6 +10,29 @@ analytics.track('[event name]', {
 
 // Updating group properties
 analytics.track('$groupidentify', {
+    "$group_type": "company",
+    "$group_key": "id:5",
+    "$group_set": {
+        "company_name": "Awesome Inc",
+        "employees": 11
+    }
+})
+```
+
+#### Backend libraries
+
+For backend libraries you need to send a distinct id (as with any other .track call).
+
+```python
+# Capturing an event with groups
+analytics.track('distinct_id', '[event name]', {
+    "$groups": {
+        "company": "id:5"
+    }
+})
+
+# Updating group properties
+analytics.track('distinct_id', '$groupidentify', {
     "$group_type": "company",
     "$group_key": "id:5",
     "$group_set": {
