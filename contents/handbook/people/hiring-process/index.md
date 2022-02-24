@@ -54,7 +54,7 @@ For certain roles, we also publish on other job boards.
 
 **Engineering**
 
-*   HackerNews Who's Hiring
+*   Hacker News Who's Hiring
     *   Tend to get high quality candidates, and people interested in working at startups.
     *   See [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
 

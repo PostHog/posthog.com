@@ -50,8 +50,6 @@ export function DocsFooter({ filename, title }: DocsFooterProps) {
                         feature request
                     </a>
                     <br />
-                    Email us at <a href="mailto:hey@posthog.com">hey@posthog.com</a>
-                    <br />
                 </Col>
             </Row>
         </div>

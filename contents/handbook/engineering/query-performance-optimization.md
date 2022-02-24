@@ -83,6 +83,63 @@ Fixing a slow query is usually a 3 steps process:
 
 1. fix the query that should now generate a less costly `EXPLAIN` plan.
 
+### How-to reduce IO
+
+Some operations we perform can cause a large amount of IO. For writes
+specifically this can be from writing table data but also from writing to
+indices. We're using the Django ORM to generate table schemas, which is
+convenient but also tends to add indices where we perhaps either don't need
+them, or where a single composite index would better serve our querying
+patterns.
+
+TODO: fill in other sources and mitigations to high IO
+
+#### Removing unused indices on foreign key fields
+
+When we add a `ForeignKey` to a model, django will add a couple of things that
+we may or may not need, an index and a constraint. Sometimes these are
+superfluous and we'd do better to not have these. For example, consider this
+changes in [this PR](https://github.com/PostHog/posthog/pull/8579).
+
+Here we had a table with two `ForeignKey`s, `team` and `person`. The query
+pattern for this table always filters by `team` and the `distinct_id` `CharField`
+column (it's essentially a lookup table from (`team_id`, `distinct_id`) ->
+`person_id`). As a result we have an index on (`team_id`, `distinct_id`). The
+`team_id` index that django is adding for the `ForeignKey` is not used at all,
+as observed by running:
+
+```
+SELECT s.schemaname,
+       s.relname AS tablename,
+       s.indexrelname AS indexname,
+       pg_relation_size(s.indexrelid) AS index_size
+FROM pg_catalog.pg_stat_user_indexes s
+   JOIN pg_catalog.pg_index i ON s.indexrelid = i.indexrelid
+WHERE s.idx_scan = 0      -- has never been scanned
+ORDER BY pg_relation_size(s.indexrelid) DESC;
+```
+
+To remove this index, we perform the following:
+
+ 1. add `db_index=False` to the `team` `ForeignKey`. This updates Djangos
+    understanding of the state of the database schema.
+ 2. run `./manage.py makemigrations posthog` to generate a new database
+    migration. One issue with the generated migration is that it does not `DROP`
+    the index `CONCURRENTLY`. See the [postgresql
+    docs](https://www.postgresql.org/docs/9.3/sql-dropindex.html) for more
+    details here, but essentially it means that while the generated migration is
+    running, the table will be locked, and we do not know how long for. Queries
+    on this table will pile up and could cause an outage. To get around this we:
+ 3. manually update this generated migration to drop the index `CONCURRENTLY`.
+    This updated command will return instantly, the table will not be locked,
+    and dropping the index will happen in the background. Note that we need to
+    use
+    [`SeparateDatabaseAndState`](https://docs.djangoproject.com/en/3.2/ref/migration-operations/#separatedatabaseandstate)
+    such that we can ensure that django will not create new migrations on
+    subsequent runs.
+    
+Then once we've run this migration, we should see the index disappear from the
+above index SQL results.
 
 ## ClickHouse
 
