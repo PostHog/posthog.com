@@ -15,13 +15,13 @@ We're delighted to announce that [Hightouch](https://hightouch.io/) has released
 
 ## What is Hightouch?
 
-Hightouch is an alternative to Customer Data Platforms (CDP) like Segment, though it can be used in conjunction with them. It allows data teams and engineers to sync data from centralized data warehouses (e.g. Google BigQuery, Redshift, Snowflake etc.) to products like PostHog. This is called Reverse ETL – that's extract, transform and load.
+Hightouch is an alternative to Customer Data Platforms (CDP) like Segment, though it can be used in conjunction with them. It allows data teams and engineers to sync data from centralized data warehouses (e.g. Google BigQuery, Redshift, Snowflake etc.) to products like PostHog. This is called reverse ETL – that's extract, transform and load.
 
 ## Why is Reverse ETL useful?
 
 Because it makes your data warehouse the single source of truth, ensuring all your tools are using the same up-to-date data. It effectively turns your data warehouse into a CDP, removing the need for a third-party platform that owns your data or introduces latency into your data pipeline.
 
-It's worth pointing out that you can send customer data directly to PostHog from CDPs to like [Rudderstack](/docs/integrate/third-party/rudderstack) and [Segment](/docs/integrate/third-party/segment) with [existing PostHog integrations](/integrations). However, CDPs will send raw data, whereas a Reverse ETL from your data warehouse gives data scientists the opportunity to model data before it's synced. 
+It's worth pointing out that you can send customer data directly to PostHog from CDPs to like [Rudderstack](/docs/integrate/third-party/rudderstack) and [Segment](/docs/integrate/third-party/segment) with [existing PostHog integrations](/integrations). However, CDPs will send raw data, whereas a reverse ETL from your data warehouse gives data scientists the opportunity to model data before it's synced. 
 
 Ultimately, the pros and cons of CDPs vs data warehouses is an article in itself, but the most useful thing to know is that, in most organizations, a data warehouse will be owned by a data science team, whereas a marketing team will own a CDP.
 
@@ -67,12 +67,12 @@ Hightouch has three standard tiers:
 
 You can try any destination for free for 14 days and Hightouch also offers a 30-day trial on its paid tiers. Head to its [pricing page](https://hightouch.io/pricing/) for more detail and custom options.
 
-## Can I build my own Reverse ETL plugin for PostHog?
+## Can I build my own reverse ETL plugin for PostHog?
 
 You absolutely can. 
 
 PostHog is open source and we love it when people contribute to making the product better for everyone. The community has already contributed plugins for, to name just a few, [Salesforce](https://github.com/Vinovest/posthog-salesforce), [Google Pub Sub](https://github.com/vendasta/pubsub-plugin), and [Rudderstack](https://github.com/rudderlabs/rudderstack-posthog-plugin).
 
-We're also currently running a [PostHog Plugin Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific plugins we'd like have on PostHog.
+We also recently ran a [PostHog Plugin Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific plugins we'd like have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
 
 Whether you have an idea for a plugin or just need some help, please [join our community Slack channel](/slack) to get involved.
