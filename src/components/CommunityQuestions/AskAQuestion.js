@@ -38,18 +38,8 @@ export default function AskAQuestion() {
         !loading && (
             <div className="mt-10">
                 <h4>Ask a question</h4>
-                <div className="flex flex-col items-start space-y-2">
-                    {user && (
-                        <div className="flex space-x-2 items-center font-semibold opacity-50">
-                            <Avatar />
-                            <p className="m-0 text-[15px]">
-                                {userValues.firstName
-                                    ? `${userValues.firstName} ${userValues.lastName}`
-                                    : 'Contributor'}
-                            </p>
-                        </div>
-                    )}
-
+                <div className="flex items-start space-x-4">
+                    <Avatar />
                     <div className="w-full max-w-[405px]">
                         <Formik
                             isInitialValid={false}
@@ -63,10 +53,13 @@ export default function AskAQuestion() {
                             validate={(values) => {
                                 const errors = {}
                                 if (!values.firstName) {
-                                    errors.name = 'Required'
+                                    errors.firstName = 'Required'
                                 }
                                 if (!values.lastName) {
-                                    errors.name = 'Required'
+                                    errors.lastName = 'Required'
+                                }
+                                if (!values.subject) {
+                                    errors.subject = 'Required'
                                 }
                                 if (!values.question) {
                                     errors.question = 'Required'
@@ -86,21 +79,26 @@ export default function AskAQuestion() {
                                         last_name: values.lastName,
                                     })
                                 }
-                                // const body = JSON.stringify({ ...values, slug: location.pathname, timestamp })
-                                // fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
-                                //     .then((res) => res.json())
-                                //     .then((data) => {
-                                //         posthog.capture('Question asked')
-                                //         setTimestamp(data.timestamp)
-                                //         setEmailSubmitted(true)
-                                //         setSubmitting(false)
-                                //     })
+                                const body = JSON.stringify({
+                                    ...values,
+                                    slug: location.pathname,
+                                    timestamp,
+                                })
+                                fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                        posthog.capture('Question asked')
+                                        setTimestamp(data.timestamp)
+                                        setEmailSubmitted(true)
+                                        setSubmitting(false)
+                                    })
                             }}
                         >
-                            {({ isSubmitting, isValid, values, setFieldValue }) => {
+                            {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
                                 return !timestamp ? (
                                     <AskQuestion
                                         userValues={userValues}
+                                        submitForm={submitForm}
                                         setFieldValue={setFieldValue}
                                         loading={isSubmitting}
                                         isValid={isValid}

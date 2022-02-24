@@ -12,20 +12,31 @@ exports.handler = async (e) => {
         avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
     }
 
+    const name = `${body.firstName} ${body.lastName}`
+
     const message = {
         channel: process.env.SLACK_QUESTION_CHANNEL,
         ts: body.timestamp,
         text: body.question,
-        username: body.name,
+        username: name,
         blocks: [
             {
                 type: 'header',
                 text: {
                     type: 'plain_text',
-                    text: `${body.name} on ${body.slug}`,
+                    text: `${name} on ${body.slug}`,
                     emoji: true,
                 },
                 block_id: 'name_and_slug',
+            },
+            {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: body.subject,
+                    emoji: true,
+                },
+                block_id: 'subject',
             },
             {
                 type: 'section',
@@ -38,7 +49,7 @@ exports.handler = async (e) => {
                     accessory: {
                         type: 'image',
                         image_url: avatar,
-                        alt_text: body.name,
+                        alt_text: name,
                     },
                 }),
             },
@@ -55,9 +66,10 @@ exports.handler = async (e) => {
                         },
                         value: JSON.stringify({
                             question: body.question,
-                            name: body.name,
+                            name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                             avatar,
                         }),
                         action_id: 'publish-button',
@@ -91,9 +103,10 @@ exports.handler = async (e) => {
                         },
                         value: JSON.stringify({
                             question: body.question,
-                            name: body.name,
+                            name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                         }),
                         action_id: 'edit-question-button',
                     },

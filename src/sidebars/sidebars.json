@@ -238,6 +238,10 @@
                     "url": "/handbook/engineering/how-we-review"
                 },
                 {
+                    "name": "Feature ownership",
+                    "url": "/handbook/engineering/feature-ownership"
+                },
+                {
                     "name": "Releasing a new version",
                     "url": "/handbook/engineering/release-new-version"
                 },
@@ -308,6 +312,10 @@
                 {
                     "name": "Writing async migrations",
                     "url": "/handbook/engineering/async-migrations"
+                },
+                {
+                    "name": "Event ingestion",
+                    "url": "/handbook/engineering/event-ingestion"
                 }
             ]
         },
@@ -505,6 +513,10 @@
                             "name": "Configure",
                             "url": "",
                             "children": [
+                                {
+                                    "name": "Instance settings",
+                                    "url": "/docs/self-host/configure/instance-settings"
+                                },
                                 {
                                     "name": "Environment variables",
                                     "url": "/docs/self-host/configure/environment-variables"
@@ -928,10 +940,6 @@
                     "url": "/docs/user-guides/sso"
                 },
                 {
-                    "name": "Support",
-                    "url": "/docs/user-guides/support"
-                },
-                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
@@ -1048,6 +1056,10 @@
                     "url": "/docs/privacy/ccpa-compliance"
                 }
             ]
+        },
+        {
+            "name": "Support",
+            "url": "/docs/user-guides/support"
         },
         {
             "name": "Contribute",

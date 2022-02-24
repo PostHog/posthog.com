@@ -11,7 +11,7 @@ We recommend that you read the full text of the GDPR and seek independent legal 
 
 ## What data is protected under GDPR?
 
-Personal data is protected under GDPR, which means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
+[Personal data](/blog/what-is-personal-data-pii) is protected under GDPR, which means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
 
 ## What is the impact of GDPR on product analytics?
 
@@ -115,3 +115,7 @@ You can remove a user from a PostHog instance via the PostHog user interface. To
 - Search for the person via their unique ID. For example, their email
 - Click **view** next to the person within the search results
 - Click **Delete this person** to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+
+### Further reading
+
+- [A simple guide to personal data and PII](/blog/what-is-personal-data-pii)

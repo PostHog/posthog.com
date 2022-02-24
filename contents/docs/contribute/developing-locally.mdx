@@ -34,9 +34,9 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS. 
+The instructions here assume you're running macOS.
 
-For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`). 
+For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`).
 
 Windows isn't supported natively. But, Windows users can run a Linux virtual machine. The latest Ubuntu Desktop is recommended. (Ubuntu Server is not recommended as debugging the frontend will require a browser that can access localhost.)
 
@@ -159,7 +159,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 ### 4. Prepare the Django server
 
-1. Install Python 3.9+. You can do so with Homebrew: `brew install python@3.9`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
     **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 
