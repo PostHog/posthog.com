@@ -1,5 +1,5 @@
 ---
-date: 2022-02-24
+date: 2022-02-28
 title: Array 1.33.0
 rootPage: /blog
 sidebar: Blog
@@ -24,7 +24,7 @@ Release description.
 **Release highlights:**
 - [Feature one]()
 
-### New: Feature One
+### New: Experimentation
 
 Description here.
 
@@ -35,17 +35,36 @@ Description here.
 
 <br />
 
-### Improved: Feature Two
+
+### New: Dashboard permissions
 
 Description here.
+
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-list.png" alt="Update me" />
+
+> 🎁 Feature is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+
+<br />
+
+### New: Altitiny Cloud support
+
+We've partnered up with Altinity to offer a worry-free managed ClickHouse database. Altinity are experts in Clickhouse and data infrastructure and they help large organizations to deploy, manage and scale their PostHog instance.
+
+Find out more about our Altinity integration in our [Marketplace docs](/marketplace/altinity).
 
 <br />
 
 
 ### Other improvements & fixes
 
-- Details here.
-- Plus x+ improvements & fixes.
+- Improved: Short robust permalinks.
+- New: Instance status configuration
+- Improved: Smarter events and property filters.
+- Improved: Redesigned share dashboard modal.
+- New: Insight legends.
+- Improved: Automatic API documentation.
+- Plus 290+ improvements & fixes.
 
 ### Deprecation & removal notices
 
@@ -60,9 +79,9 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Grace McKenzie! Grace joined PostHog as an Ops Manager to help keep the company running smoothly. Grace is a ?? for pineapple on pizza (🍍 on 🍕).
+Welcome Grace McKenzie! Grace joined PostHog as an Ops Manager to help keep the company running smoothly. Grace has a very unique position on pineapple on pizza (🍍 on 🍕), "I will tolerate pineapple on pizza as long as there is bacon and ranch dipping sauce involved".
 
-> Interesting fact here.
+> I once lead a self-researched and organized pub crawl for 30 strangers in Prague after having only been in the city for 6 hours!
 
 
 ## Community
@@ -70,9 +89,7 @@ Welcome Grace McKenzie! Grace joined PostHog as an Ops Manager to help keep the 
 Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started.
 
 ### Community shoutouts
-We want to thank each and every community member that contributed to this release of PostHog!
-
-- [timgl](https://github.com/timgl)
+We want to thank [jc00ke](https://github.com/jc00ke) and [TheDoctor0](https://github.com/TheDoctor0) who contributed to this release of PostHog!
 
 ## Open roles
 
