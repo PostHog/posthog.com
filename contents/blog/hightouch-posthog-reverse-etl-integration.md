@@ -17,7 +17,7 @@ We're delighted to announce that [Hightouch](https://hightouch.io/) has released
 
 Hightouch is an alternative to Customer Data Platforms (CDP) like Segment, though it can be used in conjunction with them. It allows data teams and engineers to sync data from centralized data warehouses (e.g. Google BigQuery, Redshift, Snowflake etc.) to products like PostHog. This is called reverse ETL – that's extract, transform and load.
 
-## Why is Reverse ETL useful?
+## Why is reverse ETL useful?
 
 Because it makes your data warehouse the single source of truth, ensuring all your tools are using the same up-to-date data. It effectively turns your data warehouse into a CDP, removing the need for a third-party platform that owns your data or introduces latency into your data pipeline.
 
