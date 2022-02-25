@@ -1029,7 +1029,7 @@
                 },
                 {
                     "name": "Event Definitions",
-                    "url": "/docs/api/event_definitions"
+                    "url": "/docs/api/event-definitions"
                 },
                 {
                     "name": "Events",
@@ -1041,7 +1041,7 @@
                 },
                 {
                     "name": "Feature Flags",
-                    "url": "/docs/api/feature_flags"
+                    "url": "/docs/api/feature-flags"
                 },
                 {
                     "name": "Groups",
@@ -1049,7 +1049,7 @@
                 },
                 {
                     "name": "Groups Types",
-                    "url": "/docs/api/groups_types"
+                    "url": "/docs/api/groups-types"
                 },
                 {
                     "name": "Invites",
@@ -1065,7 +1065,7 @@
                 },
                 {
                     "name": "Plugin Configs",
-                    "url": "/docs/api/plugin_configs"
+                    "url": "/docs/api/plugin-configs"
                 },
                 {
                     "name": "Plugins",
@@ -1077,11 +1077,11 @@
                 },
                 {
                     "name": "Property Definitions",
-                    "url": "/docs/api/property_definitions"
+                    "url": "/docs/api/property-definitions"
                 },
                 {
                     "name": "Session_recordings",
-                    "url": "/docs/api/session_recordings"
+                    "url": "/docs/api/session-recordings"
                 },
                 {
                     "name": "User",

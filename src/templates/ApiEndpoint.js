@@ -63,9 +63,7 @@ function generateName(item) {
     if (item.operationId.includes('_list')) {
         return 'List all ' + name.toLowerCase()
     }
-    if (verbMap[item.httpVerb] === undefined) {
-        console.log(item.httpVerb)
-    }
+
     return verbMap[item.httpVerb] + ' ' + name.toLowerCase()
 }
 
@@ -168,7 +166,9 @@ function Parameters({ item, objects }) {
 }
 
 function RequestBody({ item, objects }) {
-    let objectKey = item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1)
+    let objectKey =
+        item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
+        item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
     if (!objectKey) return null
     let object = objects.schemas[objectKey]
 
@@ -193,7 +193,7 @@ function RequestBody({ item, objects }) {
 
 function ResponseBody({ item, objects }) {
     let objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
-        .split('/')
+        ?.split('/')
         .at(-1)
     if (!objectKey) return null
     let object = objects.schemas[objectKey]
@@ -227,7 +227,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     let params = []
 
     if (item.requestBody) {
-        let objectKey = item.requestBody.content?.['application/json']?.schema['$ref'].split('/').at(-1)
+        let objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
         if (!objectKey) return null
         let object = objects.schemas[objectKey]
         params = Object.entries(object.properties).filter(
@@ -241,7 +241,6 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                 )[0],
             ]
         }
-        console.log(params)
         params = params.map(([name, schema]) => {
             return [
                 name,
@@ -251,7 +250,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
             ]
         })
     }
-    const path = item.pathName.replace('{', ':').replace('}', '')
+    const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
     let queryParams = item.parameters.filter((param) => param.in === 'query')
     return (
         <>
@@ -280,9 +279,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                     code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
 curl${item.httpVerb === 'delete' ? ' -X DELETE \\' : ''}
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path.replace('{', '[').replace('}', ']')}${params.map(
-                        (item) => `\\\n\t-d ${item[0]}="${item[1]}"`
-                    )}`}
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}="${item[1]}"`)}`}
                     language="bash"
                     hideNumbers={true}
                 />
@@ -471,7 +468,12 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                             <h2>{generateName(item)}</h2>
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div>
-                                                    {item.description || pathDescription(item)}
+                                                    <ReactMarkdown>
+                                                        {!item.description ||
+                                                        item.description === items[0].operationSpec?.description
+                                                            ? pathDescription(item)
+                                                            : item.description}
+                                                    </ReactMarkdown>
                                                     <Parameters item={item} />
 
                                                     <RequestBody item={item} objects={objects} />
@@ -491,11 +493,18 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                                     <ResponseExample
                                                         item={item}
                                                         objects={objects}
-                                                        objectKey={item.responses[
-                                                            Object.keys(item.responses)[0]
-                                                        ]?.content?.['application/json']?.schema['$ref']
-                                                            .split('/')
-                                                            .at(-1)}
+                                                        objectKey={
+                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                                'application/json'
+                                                            ]?.schema['$ref']
+                                                                ?.split('/')
+                                                                .at(-1) ||
+                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                                'application/json'
+                                                            ]?.schema['items']['$ref']
+                                                                ?.split('/')
+                                                                .at(-1)
+                                                        }
                                                         exampleLanguage={exampleLanguage}
                                                         setExampleLanguage={setExampleLanguage}
                                                     />
