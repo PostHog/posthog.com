@@ -8,175 +8,363 @@ import MainSidebar from './Handbook/MainSidebar'
 import Navigation from './Handbook/Navigation'
 import SectionLinks from './Handbook/SectionLinks'
 
-import Highlight, {defaultProps} from 'prism-react-renderer'
+import Highlight, { defaultProps } from 'prism-react-renderer'
 import CodeBlock from 'components/Home/CodeBlock'
-import { Button } from 'antd'
+import { Button, Select } from 'antd'
 import ReactMarkdown from 'react-markdown'
+import { getCookie, setCookie } from 'lib/utils'
+import * as OpenAPISampler from 'openapi-sampler'
 
-function Endpoints({paths}) {
-    const map_verbs = {
-        get: 'blue',
-        post: 'green',
-        patch: 'orange',
-        put: 'green',
-        delete: 'red',
-    }
-    return <div>
-        <h3>Endpoints</h3>
-    {Object.entries(paths).map(([path, value]) => 
-        <>
-
-            {Object.keys(value).map(verb => <>
-            <span className={`text-${map_verbs[verb]}`}>{verb.toUpperCase()} </span>
-            {path}<br />
-            </>
-            )}
-        </>
-    )}
-    </div>
+const mapVerbsColor = {
+    get: 'blue',
+    post: 'green',
+    patch: 'orange',
+    put: 'green',
+    delete: 'red',
 }
 
+function Endpoints({ paths }) {
+    return (
+        <div>
+            <h3>Endpoints</h3>
+            {Object.entries(paths).map(([path, value]) => (
+                <>
+                    {Object.keys(value).map((verb) => (
+                        <span key={verb}>
+                            <span className={`text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()} </span>
+                            {path}
+                            <br />
+                        </span>
+                    ))}
+                </>
+            ))}
+        </div>
+    )
+}
+
+function humanReadableName(name) {
+    name = name.replace('_partial', '').split('_')
+    if (name.length > 1) {
+        name = name.slice(0, name.length - 1) // Remove _list, _retrieve etc
+    }
+    return name.map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
+}
+
+const verbMap = {
+    get: 'Retrieve',
+    post: 'Create',
+    patch: 'Update',
+    delete: 'Delete',
+}
 function generateName(item) {
     let name = item.operationId.split('_')
-    name = name.slice(0, name.length-1).map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
-    if(item.operationId.includes('_list')) {
-        name = name + ' List'
+    name = name.slice(0, name.length - 1).join(' ')
+    name = name.replace(' partial', '')
+    if (item.operationId.includes('_list')) {
+        return 'List all ' + name.toLowerCase()
     }
-    return item.httpVerb.toUpperCase() + ' ' + name
+    if (verbMap[item.httpVerb] === undefined) {
+        console.log(item.httpVerb)
+    }
+    return verbMap[item.httpVerb] + ' ' + name.toLowerCase()
 }
 
-function Params({params, objects, object, depth=0}) {
-    if(depth > 4) return null
-    if(object) {
+function Params({ params, objects, object, depth = 0 }) {
+    if (depth > 4) return null
+    if (object) {
         params = Object.entries(object.properties).map(([key, value]) => {
             return {
                 name: key,
-                schema: value
+                schema: value,
             }
         })
     }
     const [openSubParams, setOpenSubParams] = useState([])
 
-    return  <>
-        {params.map((param, index) => <>
-            <strong>{param.name}</strong> {param.schema.type}
-            {param.schema.enum && <> one of {param.schema.enum.map(item => <code style={{marginRight: 4}}>{item}</code>)}</>}
-            <br />
-            {param.schema.default && <>Default: <code>{param.schema.default}</code><br /></>}
-            <ReactMarkdown>{param.schema.description}</ReactMarkdown>
+    return (
+        <>
+            {params.map((param, index) => (
+                <div key={index}>
+                    <strong>{param.name}</strong> {param.schema.type}
+                    {param.schema.enum && (
+                        <>
+                            {' '}
+                            one of{' '}
+                            {param.schema.enum.map((item) => (
+                                <code style={{ marginRight: 4 }} key={item}>
+                                    {item}
+                                </code>
+                            ))}
+                        </>
+                    )}
+                    <br />
+                    {param.schema.default && (
+                        <>
+                            Default: <code>{param.schema.default}</code>
+                            <br />
+                        </>
+                    )}
+                    <ReactMarkdown>{param.schema.description}</ReactMarkdown>
+                    {param.schema.items?.$ref && (
+                        <>
+                            {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
+                                <div>
+                                    <Button
+                                        type="link"
+                                        onClick={() => {
+                                            setOpenSubParams(
+                                                openSubParams.filter((item) => item !== param.schema.items.$ref)
+                                            )
+                                        }}
+                                    >
+                                        Show less
+                                    </Button>
+                                    <div style={{ marginLeft: '1rem' }}>
+                                        <Params
+                                            objects={objects}
+                                            object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
+                                            depth={depth + 1}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <Button
+                                        type="link"
+                                        onClick={() => setOpenSubParams([...openSubParams, param.schema.items.$ref])}
+                                    >
+                                        Show more
+                                    </Button>
+                                </>
+                            )}
+                        </>
+                    )}
+                    <hr />
+                </div>
+            ))}
+        </>
+    )
+}
+function Parameters({ item, objects }) {
+    let pathParams = item.parameters.filter((param) => param.in === 'path')
+    let queryParams = item.parameters.filter((param) => param.in === 'query')
 
-            {param.schema.items?.$ref && <>
-
-                {openSubParams.indexOf(param.schema.items.$ref) > -1 ? <div>
-                    <Button type="link" onClick={() => {
-                        setOpenSubParams(openSubParams.filter(item => item !== param.schema.items.$ref))
-                    }}>Show less</Button>
-                    <div style={{marginLeft: '1rem'}}>
-                        <Params objects={objects} object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]} depth={depth+1} />
-                    </div>
-                </div>: <>
-                    <Button type="link" onClick={() => setOpenSubParams([...openSubParams, param.schema.items.$ref])}>Show more</Button>
+    return (
+        <>
+            {pathParams.length > 0 && (
+                <>
+                    <h4>Path Parameters</h4>
+                    <Params params={pathParams} />
                 </>
-                } 
-            </>}
-            {index < params.length-1 && <hr />}
-        </>)}
-    </>
-}
-function Parameters({item, objects}) {
-    let pathParams = item.parameters.filter(param => param.in === 'path')
-    let queryParams = item.parameters.filter(param => param.in === 'query')
-    
-    return <>
-        {pathParams.length > 0 && <>
-            <h4>Path Parameters</h4>
-            <Params params={pathParams} type="Path" />
-        </>}
-        {queryParams.length > 0 && <>
-            <h4>Query Parameters</h4>
-            <Params params={queryParams} type="Query" />
-        </>}
-    </>
+            )}
+            {queryParams.length > 0 && (
+                <>
+                    <h4>Query Parameters</h4>
+                    <Params params={queryParams} />
+                </>
+            )}
+        </>
+    )
 }
 
-function RequestBody({item, objects}) {
+function RequestBody({ item, objects }) {
     let objectKey = item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1)
-    if(!objectKey) return null
+    if (!objectKey) return null
     let object = objects.schemas[objectKey]
 
-    return <>
-    <br />
-        <h4>Request Body</h4>
-        <Params params={Object.entries(object.properties).map(([name, schema]) => {
-            return {
-                name,
-                schema
-            }
-        }).filter(item => !item.schema.readOnly)} type="Path" objects={objects} />
-    </>
+    return (
+        <>
+            <h4>Request Parameters</h4>
+            <br />
+            <Params
+                params={Object.entries(object.properties)
+                    .map(([name, schema]) => {
+                        return {
+                            name,
+                            schema,
+                        }
+                    })
+                    .filter((item) => !item.schema.readOnly)}
+                objects={objects}
+            />
+        </>
+    )
 }
 
-function RequestExample({item, objects}) {
+function ResponseBody({ item, objects }) {
+    let objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
+        .split('/')
+        .at(-1)
+    if (!objectKey) return null
+    let object = objects.schemas[objectKey]
+    let [showResponse, setShowResponse] = useState(false)
+
+    return (
+        <>
+            <h4>Response</h4>
+            <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
+                {showResponse ? 'Hide' : 'Show'} response
+            </Button>
+            <br />
+            {showResponse && (
+                <Params
+                    params={Object.entries(object.properties)
+                        .map(([name, schema]) => {
+                            return {
+                                name,
+                                schema,
+                            }
+                        })
+                        .filter((item) => !item.schema.readOnly)}
+                    objects={objects}
+                />
+            )}
+        </>
+    )
+}
+
+function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) {
     let params = []
-    if(item.requestBody) {
+
+    if (item.requestBody) {
         let objectKey = item.requestBody.content?.['application/json']?.schema['$ref'].split('/').at(-1)
-        if(!objectKey) return null
+        if (!objectKey) return null
         let object = objects.schemas[objectKey]
-        params = Object.entries(object.properties).filter(([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly).map(([name, schema]) => {
-            return [name, schema.example || schema.type]
+        params = Object.entries(object.properties).filter(
+            ([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly
+        )
+        // If no params are required, just grab the first relevant one as an example
+        if (params.length === 0) {
+            params = [
+                Object.entries(object.properties).filter(
+                    ([name, schema]) => ['id', 'short_id'].indexOf(name) === -1
+                )[0],
+            ]
+        }
+        console.log(params)
+        params = params.map(([name, schema]) => {
+            return [
+                name,
+                schema.items.$ref === '#/components/schemas/FilterEvent'
+                    ? { id: '$pageview' }
+                    : schema.example || schema.type,
+            ]
         })
     }
-    let queryParams = item.parameters.filter(param => param.in === 'query')
-
-    return <CodeBlock
-        code={`curl https://app.posthog.com${item.pathName} \\n
-    -u token \
-    ${params.map(item => `-d ${item[0]}="${item[1]}\n`)}
-        `}
-        language="bash"
-        />
-}
-
-function generateResponseExample(objectKey, objects, depth=0) {
-    if(depth > 4) { return ""}
-    let resp = {}
-    Object.entries(objects.schemas[objectKey].properties).map(([key, value]) => {
-        if (value.type === 'array' && value.items.$ref) {
-            
-            resp[key] = [
-                generateResponseExample(value.items.$ref.split('/').at(-1), objects)
-            ]
-        } else if (value.allOf) {
-            resp[key] = generateResponseExample(value.allOf[0].$ref.split('/').at(-1), objects)
-
-        } else {
-            resp[key] = value.example || value.type
-        }
-    })
-    return resp
-}
-
-
-function ResponseExample({item, objects, objectKey}) {
-    
-    if(!objectKey) {
-        return "No response"
-    }
-    return <Highlight {...defaultProps} code={JSON.stringify(generateResponseExample(objectKey, objects), null, 2)} language="json">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={className} style={{ background: '#24292E', margin: 0 }}>
-            {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-                ))}
+    const path = item.pathName.replace('{', ':').replace('}', '')
+    let queryParams = item.parameters.filter((param) => param.in === 'query')
+    return (
+        <>
+            <div className="code-example justify-between flex">
+                <div className="text-gray">
+                    <span className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </span>
+                    {path}
+                </div>
+                <Select
+                    value={exampleLanguage}
+                    onChange={(key) => setExampleLanguage(key)}
+                    bordered={false}
+                    style={{ border: 0, background: 'transparent' }}
+                >
+                    <Select.Option key="curl" value="curl">
+                        curl
+                    </Select.Option>
+                    <Select.Option key="python" value="python">
+                        python
+                    </Select.Option>
+                </Select>
             </div>
-            ))}
-        </pre>
-        )}
-    </Highlight>
+
+            {exampleLanguage === 'curl' && (
+                <CodeBlock
+                    code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+curl${item.httpVerb === 'delete' ? ' -X DELETE \\' : ''}
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
+    https://app.posthog.com${path.replace('{', '[').replace('}', ']')}${params.map(
+                        (item) => `\\\n\t-d ${item[0]}="${item[1]}"`
+                    )}`}
+                    language="bash"
+                    hideNumbers={true}
+                />
+            )}
+            {exampleLanguage === 'python' && (
+                <CodeBlock
+                    code={`api_key = "[your personal api key]"
+project_id = "[your project id]"
+response = requests.${item.httpVerb}(
+    "https://app.posthog.com${path}".format(
+        project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+    ),
+    headers={"Authorization": "Bearer {}".format(api_key)},${
+        params.length > 0
+            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t\t').replace('\n}', '\n\t}')}`
+            : ''
+    }
+)${item.httpVerb !== 'delete' ? '.json()' : ''}`}
+                    language="bash"
+                    hideNumbers={true}
+                />
+            )}
+        </>
+    )
 }
 
+function ResponseExample({ item, objects, objectKey }) {
+    if (!objectKey) {
+        return 'No response'
+    }
+    return (
+        <Highlight
+            {...defaultProps}
+            code={JSON.stringify(
+                OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
+                null,
+                2
+            )}
+            language="json"
+        >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{ background: '#24292E', margin: 0 }}>
+                    {tokens.map((line, i) => (
+                        <div {...getLineProps({ line, key: i })} key={i}>
+                            {line.map((token, key) => (
+                                <span {...getTokenProps({ token, key })} key={key} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
+    )
+}
+
+const pathDescription = (item) => {
+    let name = humanReadableName(item.operationId).toLowerCase()
+    if (item.operationId.includes('_list')) {
+        return (
+            <>
+                Returns a list of {name}. The {name} are returned in sorted order, with the most recent charges
+                appearing first.
+            </>
+        )
+    }
+    if (item.httpVerb === 'get') {
+        return <>Returns a single {name.slice(0, -1)}, which you can request by passing through an id in the url. </>
+    }
+    if (item.httpVerb === 'post') {
+        return (
+            <>
+                Create {name}. You need to pass through any required fields, and you can optionally pass through other
+                fields.
+            </>
+        )
+    }
+    if (item.httpVerb === 'patch') {
+        return (
+            <>Update {name} by setting the values of the parameters passed. Any parameters not set will be unchanged.</>
+        )
+    }
+}
 
 const SectionLinksTop = ({ previous, next }) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
@@ -184,11 +372,14 @@ const SectionLinksTop = ({ previous, next }) => {
 
 export default function ApiEndpoint({ data, pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase } }) {
     const {
-        data: { id, items, name, url },
+        data: { id, url },
         components: { components },
     } = data
+    const name = humanReadableName(data.data.name)
     const paths = {}
-    JSON.parse(items).map((item) => {
+    // Filter PUT as it's basically the same as PATCH
+    const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
+    items.map((item) => {
         if (!paths[item.path]) {
             paths[item.path] = {}
         }
@@ -198,6 +389,11 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
     const mainEl = useRef()
 
     const [menuOpen, setMenuOpen] = useState(false)
+    const [exampleLanguage, setExampleLanguageState] = useState(getCookie('api_docs_example_language') || 'curl')
+    const setExampleLanguage = (language) => {
+        setCookie('api_docs_example_language', language)
+        setExampleLanguageState(language)
+    }
 
     const handleMobileMenuClick = () => {
         setMenuOpen(!menuOpen)
@@ -209,7 +405,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
     }
     return (
         <>
-            <SEO title={`${name} - PostHog`} />
+            <SEO title={`${name} API Reference - PostHog`} />
             <Layout>
                 <div className="handbook-container px-4">
                     <div id="handbook-menu-wrapper">
@@ -233,8 +429,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                             breadcrumbBase={breadcrumbBase}
                             menuOpen={menuOpen}
                             handleMobileMenuClick={handleMobileMenuClick}
-                            />
-
+                        />
                     </div>
                     <section id="handbook-content-menu-wrapper">
                         <SectionLinksTop next={next} previous={previous} />
@@ -249,35 +444,65 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                 className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
                             />
                             <article className="article-content api-content-container api-documentation" ref={mainEl}>
-                                    <h2>{name}</h2>
-                                    
-                                    <Endpoints paths={paths} />
+                                <h2>{name}</h2>
+                                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
+                                    <p>
+                                        For instructions on how to authenticate to use this endpoint, see{' '}
+                                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
+                                            API overview
+                                        </a>
+                                        .
+                                    </p>
+                                </blockquote>
+                                <p>
+                                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+                                </p>
 
-                                    {JSON.parse(items).filter(item => !item.operationId.includes('partial')).map(item => {
-                                        item = item.operationSpec
-                                        let objectKey = 'Dashboard'
-                                        
-                                        console.log(item)
-                                        return <>
+                                <Endpoints paths={paths} />
+
+                                {items.map((item) => {
+                                    item = item.operationSpec
+                                    let objectKey = 'Dashboard'
+
+                                    return (
+                                        <div key={item.operationId}>
                                             <h2>{generateName(item)}</h2>
-                                            <div className="grid grid-cols-2">
+                                            <div className="grid grid-cols-2 gap-4">
                                                 <div>
+                                                    {item.description || pathDescription(item)}
                                                     <Parameters item={item} />
+
                                                     <RequestBody item={item} objects={objects} />
 
+                                                    <ResponseBody item={item} objects={objects} />
                                                 </div>
                                                 <div>
-                                                    <h3>Request</h3>
-                                                    <RequestExample item={item} objects={objects} />
+                                                    <h4>Request</h4>
+                                                    <RequestExample
+                                                        item={item}
+                                                        objects={objects}
+                                                        exampleLanguage={exampleLanguage}
+                                                        setExampleLanguage={setExampleLanguage}
+                                                    />
 
-                                                    <h3>Response</h3>
-                                                    <ResponseExample item={item} objects={objects} objectKey={item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref'].split('/').at(-1)} />
-                                                    
+                                                    <h4>Response</h4>
+                                                    <ResponseExample
+                                                        item={item}
+                                                        objects={objects}
+                                                        objectKey={item.responses[
+                                                            Object.keys(item.responses)[0]
+                                                        ]?.content?.['application/json']?.schema['$ref']
+                                                            .split('/')
+                                                            .at(-1)}
+                                                        exampleLanguage={exampleLanguage}
+                                                        setExampleLanguage={setExampleLanguage}
+                                                    />
                                                 </div>
                                             </div>
                                             <hr />
-                                        </>
-                                    })}
+                                        </div>
+                                    )
+                                })}
                             </article>
                         </div>
                     </section>

@@ -994,28 +994,26 @@
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "name": "Elements",
-                    "url": "/docs/api/elements"
-                },
-                {
-                    "name": "Events",
-                    "url": "/docs/api/events"
-                },
-                {
-                    "name": "People",
-                    "url": "/docs/api/people"
-                },
-                {
                     "name": "Insights",
-                    "url": "/docs/api/insights"
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/api/insights"
+                        },
+                        {
+                            "name": "Trend",
+                            "url": "/docs/api/trend"
+                        },
+                        {
+                            "name": "Funnel",
+                            "url": "/docs/api/funnel"
+                        }
+                    ]
                 },
                 {
-                    "name": "User",
-                    "url": "/docs/api/user"
-                },
-                {
-                    "name": "Feature Flags",
-                    "url": "/docs/api/feature-flags"
+                    "name": "Actions",
+                    "url": "/docs/api/actions"
                 },
                 {
                     "name": "Annotations",
@@ -1024,6 +1022,70 @@
                 {
                     "name": "Cohorts",
                     "url": "/docs/api/cohorts"
+                },
+                {
+                    "name": "Dashboards",
+                    "url": "/docs/api/dashboards"
+                },
+                {
+                    "name": "Event Definitions",
+                    "url": "/docs/api/event_definitions"
+                },
+                {
+                    "name": "Events",
+                    "url": "/docs/api/events"
+                },
+                {
+                    "name": "Experiments",
+                    "url": "/docs/api/experiments"
+                },
+                {
+                    "name": "Feature Flags",
+                    "url": "/docs/api/feature_flags"
+                },
+                {
+                    "name": "Groups",
+                    "url": "/docs/api/groups"
+                },
+                {
+                    "name": "Groups Types",
+                    "url": "/docs/api/groups_types"
+                },
+                {
+                    "name": "Invites",
+                    "url": "/docs/api/invites"
+                },
+                {
+                    "name": "Members",
+                    "url": "/docs/api/members"
+                },
+                {
+                    "name": "Persons",
+                    "url": "/docs/api/persons"
+                },
+                {
+                    "name": "Plugin Configs",
+                    "url": "/docs/api/plugin_configs"
+                },
+                {
+                    "name": "Plugins",
+                    "url": "/docs/api/plugins"
+                },
+                {
+                    "name": "Projects",
+                    "url": "/docs/api/projects"
+                },
+                {
+                    "name": "Property Definitions",
+                    "url": "/docs/api/property_definitions"
+                },
+                {
+                    "name": "Session_recordings",
+                    "url": "/docs/api/session_recordings"
+                },
+                {
+                    "name": "User",
+                    "url": "/docs/api/user"
                 },
                 {
                     "name": "Data model",

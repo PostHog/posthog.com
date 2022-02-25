@@ -15,8 +15,8 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             },
         }).then((res) => res.json())
         const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
-        const all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-
+        let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+        all_endpoints
         all_endpoints.forEach((endpoint) => {
             const node = {
                 id: createNodeId(`api_endpoint-${endpoint.name}`),
@@ -29,7 +29,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 items: JSON.stringify(
                     endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
                 ),
-                url: '/docs/api/' + endpoint.name,
+                url: '/docs/api/' + endpoint.name.replace('_', '-'),
                 name: endpoint.name,
             }
             createNode(node)
