@@ -126,6 +126,8 @@ worker:
 
 </details>
 
+#### Using dedicated nodes for services
+
 For the stateful services (ClickHouse, Kafka, Redis, PostgreSQL, Zookeeper), we suggest you to run them on nodes with dedicated CPU resources and fast drives (SSD/NVMe).
 
 In order to do so, after having labeled your Kubernetes nodes, you can assign pods to them using the following overrides:
