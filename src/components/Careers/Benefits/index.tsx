@@ -56,7 +56,7 @@ export const Benefits = () => {
                     <Benefit
                         image={compensationImg}
                         title="Generous, transparent compensation &amp; equity"
-                        details="We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so equity is offered with very employee-friendly terms."
+                        details="We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so we offer equity with very employee-friendly terms."
                     />
                     <Benefit
                         image={ptoImg}
