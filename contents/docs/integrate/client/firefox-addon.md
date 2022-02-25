@@ -34,4 +34,4 @@ If you'd like to instrument your own custom events, all you need to do is
 posthog.capture('custom_event_name', {})
 ```
 
-For more details on [capturing events](https://posthog.com/docs/integrate/client/js)
+[See our JS library guide for](https://posthog.com/docs/integrate/client/js) more details
