@@ -245,8 +245,8 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         params = params.map(([name, schema]) => {
             return [
                 name,
-                schema.items.$ref === '#/components/schemas/FilterEvent'
-                    ? { id: '$pageview' }
+                schema.items?.$ref === '#/components/schemas/FilterEvent'
+                    ? [{ id: '$pageview' }]
                     : schema.example || schema.type,
             ]
         })
@@ -297,7 +297,9 @@ response = requests.${item.httpVerb}(
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
-            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t\t').replace('\n}', '\n\t}')}`
+            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                  .replaceAll('\n', '\n\t')
+                  .replace('\n}', '\n\t}')}`
             : ''
     }
 )${item.httpVerb !== 'delete' ? '.json()' : ''}`}
