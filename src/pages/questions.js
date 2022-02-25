@@ -144,19 +144,14 @@ export const query = graphql`
         questions: allQuestion(sort: { fields: childReply___ts, order: DESC }, limit: 20) {
             nodes {
                 id
+                subject
                 childrenReply {
                     id
-                    subject
                     name
                     ts(difference: "days")
                     childMdx {
                         body
                         excerpt(pruneLength: 400)
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 20, height: 20)
-                        }
                     }
                     teamMember {
                         frontmatter {

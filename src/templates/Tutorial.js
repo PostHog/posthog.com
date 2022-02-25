@@ -177,7 +177,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
 }
 
 export const query = graphql`
-    query TutorialLayout($id: String!, $slug: String!) {
+    query TutorialLayout($id: String!) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -202,34 +202,6 @@ export const query = graphql`
                     publicURL
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
-                    }
-                }
-            }
-        }
-        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
-            nodes {
-                childrenReply {
-                    id
-                    subject
-                    name
-                    childMdx {
-                        body
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 40, height: 40)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 40, height: 40)
-                                }
-                            }
-                        }
                     }
                 }
             }

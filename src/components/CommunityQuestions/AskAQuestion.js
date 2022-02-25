@@ -83,6 +83,7 @@ export default function AskAQuestion() {
                                     ...values,
                                     slug: location.pathname,
                                     timestamp,
+                                    userID: user?.id,
                                 })
                                 fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
                                     .then((res) => res.json())

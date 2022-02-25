@@ -7,6 +7,11 @@ import RichText from './RichText'
 export default function AskQuestion({ isValid, loading, userValues, setFieldValue, submitForm }) {
     const { user } = Auth.useUser()
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        submitForm()
+    }
+
     return (
         <Form>
             <div className="flex space-x-2">
@@ -44,7 +49,7 @@ export default function AskQuestion({ isValid, loading, userValues, setFieldValu
             <Field className="mary-chain" type="text" placeholder="Ignore if human" name="mary-chain" />
             <RichText setFieldValue={setFieldValue} />
             <div className="flex items-center justify-between">
-                <Button onClick={() => submitForm()} loading={loading} disabled={!isValid}>
+                <Button onClick={handleSubmit} loading={loading} disabled={!isValid}>
                     Submit
                 </Button>
                 <p className="m-0 flex items-center space-x-2">

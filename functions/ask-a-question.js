@@ -1,11 +1,32 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fetch = require('node-fetch')
 const getGravatar = require('gravatar')
+const { createClient } = require('@supabase/supabase-js')
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
 
 exports.handler = async (e) => {
     let { body } = e
     if (!body) return { statusCode: 500, body: 'Missing body' }
     body = JSON.parse(body)
+    const { slug, question, email, subject, userID } = body
+    await supabase
+        .from('messages')
+        .insert({
+            slug: [slug],
+            subject,
+        })
+        .then(async (data) => {
+            await supabase
+                .from('replies')
+                .insert({
+                    body: question,
+                    message_id: data?.data[0]?.id,
+                    email,
+                    user_id: userID,
+                })
+                .then((data) => console.log(data))
+        })
+
     let avatar
     if (body.email) {
         const gravatar = getGravatar.url(body.email)
