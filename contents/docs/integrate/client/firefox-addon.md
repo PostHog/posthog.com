@@ -14,7 +14,7 @@ Open the html file used in your `default_popup` and add the posthog `array.js` s
 1. Copy the latest version of array.js from: https://app.posthog.com/static/array.js and import it locally using `<script src="array.js" />` before the `</head>` tag
 2. If you're packaging your plugin automatically use the [npm module for posthog.js](https://www.npmjs.com/package/posthog-js)
 
-You'll all you need to do now is initialize PostHog
+All you need to do now is initialize PostHog
 
 ```javascript
 posthog.init('your_project_token',{api_host:'https://app.posthog.com',persistence:'localStorage'})
