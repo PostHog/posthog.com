@@ -28,7 +28,7 @@ posthog.init('your_project_token',{api_host:'https://app.posthog.com',persistenc
 
 One of the best things about using PostHog is, all the interactions like clicks will automatically generate events in PostHog, so you don't need to do anything else to start analyzing.
 
-If you'd like to instrument your own custom events, all you need to do is
+If you'd like to instrument your own custom events, all you need to do is:
 
 ```javascript
 posthog.capture('custom_event_name', {})
