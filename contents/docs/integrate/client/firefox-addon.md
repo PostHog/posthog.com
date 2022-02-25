@@ -11,7 +11,7 @@ Do you have a firefox browser plugin with a popup extension and want to understa
 ## Installing PostHog inside your plugin
 
 Open the html file used in your `default_popup` and add the posthog `array.js` script, to do this you'll need to either:
-1. Copy the latest version of array.js from: https://app.posthog.com/static/array.js and import it locally using `<script src="array.js>` before the `</head>` tag
+1. Copy the latest version of array.js from: https://app.posthog.com/static/array.js and import it locally using `<script src="array.js" />` before the `</head>` tag
 2. If you're packaging your plugin automatically use the [npm module for posthog.js](https://www.npmjs.com/package/posthog-js)
 
 You'll all you need to do now is initialize PostHog
