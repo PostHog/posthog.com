@@ -22,7 +22,7 @@ posthog.init('your_project_token',{api_host:'https://app.posthog.com',persistenc
 
 `your_project_token` - This is the ``Project API key`` which can be found on PostHog under [Project Settings](https://app.posthog.com/project/settings)
 `api_host` - This is the URL to your posthog instance (if you're not using PostHog Cloud)
-`persistence` - This indicates we should store user data in localStorage rather than cookies - there are issues with cookie persistence on firefox plugins
+`persistence` - This indicates we should store user data in localStorage rather than cookies - there are issues with cookie persistence on Firefox plugins
 
 ## Tracking events
 
