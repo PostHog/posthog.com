@@ -43,9 +43,9 @@ The default configuration is geared towards minimizing costs. Here are example e
   </summary>
 
 ```yaml
-# Note that this is experimental, please let us know how this worked for you.
+# Note: those overrides are experimental, please let us know how this worked for you!
 
-# More storage space
+# Use larger storage for stateful services
 clickhouse:
   persistence:
     size: 60Gi
@@ -59,7 +59,10 @@ kafka:
     size: 20Gi
   logRetentionBytes: _15_000_000_000
 
-# Extra replicas for more loaded services
+# Add additional replicas for the stateless services
+events:
+  replicacount: 2
+
 web:
   replicacount: 2
 
@@ -67,6 +70,9 @@ worker:
   replicacount: 2
 
 plugins:
+  replicacount: 2
+
+pgbouncer:
   replicacount: 2
 ```
 
@@ -78,9 +84,9 @@ plugins:
   </summary>
 
 ```yaml
-# Note that this is experimental, please let us know how this worked for you.
+# Note: those overrides are experimental, please let us know how this worked for you!
 
-# More storage space
+# Use larger storage for stateful services
 clickhouse:
   persistence:
     size: 200Gi
@@ -89,25 +95,17 @@ postgresql:
   persistence:
     size: 60Gi
 
-redis:
-  master:
-    size: 30Gi
-
 kafka:
   persistence:
     size: 30Gi
   logRetentionBytes: _22_000_000_000
 
-# Enable horizontal autoscaling for services
-pgbouncer:
+# Enable horizontal pod autoscaling for stateless services
+events:
   hpa:
     enabled: true
 
 web:
-  hpa:
-    enabled: true
-
-beat:
   hpa:
     enabled: true
 
@@ -118,9 +116,33 @@ worker:
 plugins:
   hpa:
     enabled: true
+
+pgbouncer:
+  hpa:
+    enabled: true
 ```
 
 </details>
+
+For the stateful services (ClickHouse, Kafka, Redis, PostgreSQL, Zookeeper), we suggest you to run them on nodes with dedicated CPU resources and fast drives (SSD/NVMe).
+
+In order to do so, after having labeled your Kubernetes nodes, you can assign pods to them using the following overrides:
+
+- ClickHouse: `clickhouse.nodeSelector`
+- Kafka: `kafka.nodeSelector`
+- Redis: `redis.master.nodeSelector`
+- PostgreSQL: `postgresql.master.nodeSelector`
+- Zookeeper: `zookeeper.nodeSelector`
+
+Example:
+
+```yaml
+clickhouse.nodeSelector:
+  diskType: ssd
+  nodeType: fast
+```
+
+For more fine grained options, `affinity` and `tolerations` overrides are also available for the majority of the stateful components. See the official Kubernetes [documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for more info.
 
 
 ### Email (SMTP service)
