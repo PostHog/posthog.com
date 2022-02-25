@@ -326,7 +326,10 @@ kafka:
   enabled: false
 
 externalKafka:
-  brokers: "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094,broker-2.posthog.kafka.us-east-1.amazonaws.com:9094,broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+  brokers:
+    - "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-2.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
 ```
 
 </details>

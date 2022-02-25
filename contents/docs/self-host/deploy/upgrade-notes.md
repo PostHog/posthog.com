@@ -215,6 +215,6 @@ The built-in Kafka service type default is now `ClusterIP` from the previous `No
 
 As part of this work, we have also renamed a few chart inputs in order to reduce confusion and align our naming convention to the industry standards:
 
-* `kafka.url`, `kafka.host`, `kafka.port` have been consolidated into `externalKafka.brokers` (example: `externalKafka.brokers: "kafka-broker1:9094,kafka-broker2:9094,kafka-broker3:9094"`)
+* `kafka.url`, `kafka.host`, `kafka.port` have been consolidated into the `externalKafka.brokers` variable.
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
