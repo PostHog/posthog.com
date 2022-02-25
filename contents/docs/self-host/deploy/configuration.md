@@ -63,17 +63,18 @@ kafka:
 events:
   replicacount: 2
 
+pgbouncer:
+  replicacount: 2
+
+plugins:
+  replicacount: 2
+
 web:
   replicacount: 2
 
 worker:
   replicacount: 2
 
-plugins:
-  replicacount: 2
-
-pgbouncer:
-  replicacount: 2
 ```
 
 </details>
@@ -105,6 +106,14 @@ events:
   hpa:
     enabled: true
 
+pgbouncer:
+  hpa:
+    enabled: true
+
+plugins:
+  hpa:
+    enabled: true
+
 web:
   hpa:
     enabled: true
@@ -113,13 +122,6 @@ worker:
   hpa:
     enabled: true
 
-plugins:
-  hpa:
-    enabled: true
-
-pgbouncer:
-  hpa:
-    enabled: true
 ```
 
 </details>
