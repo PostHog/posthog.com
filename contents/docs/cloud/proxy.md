@@ -29,7 +29,7 @@ NB Cloudfront doesn't forward headers, cookies, or query parameters received fro
 #### Create a distribution
 
 1. Create a CloudFront distribution 
-2. Set the origin domain to your PostHog instance. `app.posthog.com` for PostHog cloud.
+2. Set the origin domain to your PostHog instance. `app.posthog.net` for PostHog cloud.
 3. Allow all HTTP methods
 4. Create, and attach to the distribution, [an "origin request policy"](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) that forwards all query parameters
 5. Choose the appropriate price class for your use
