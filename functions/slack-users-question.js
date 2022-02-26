@@ -21,9 +21,10 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
         const user = await client.users.info({ user: shortcut.user.id })
         if (!user.user.is_admin) return
         const { data, error } = await supabase
-            .from('Messages')
+            .from('messages')
             .select('slack_timestamp, slug')
             .eq('slack_timestamp', shortcut.message.ts)
+            .single()
 
         const view = {
             trigger_id: shortcut.trigger_id,
@@ -66,8 +67,8 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
                 ],
             },
         }
-        if (data.length > 0 && data[0].slug) {
-            view.view.blocks[0].element.initial_value = data[0].slug
+        if (data && data.slug) {
+            view.view.blocks[0].element.initial_value = data.slug.join(',')
             view.view.blocks[0].optional = true
             view.view.submit.text = 'Update'
         }
@@ -77,7 +78,7 @@ app.shortcut('publish_thread', async ({ shortcut, ack, client, logger }) => {
     }
 })
 
-app.view('submit-db-button', async ({ ack, view }) => {
+app.view('submit-db-button', async ({ ack, view, client }) => {
     await ack()
     const {
         private_metadata,
@@ -97,11 +98,38 @@ app.view('submit-db-button', async ({ ack, view }) => {
         })
     })
 
-    body.slack_timestamp = ts
-    body.slack_channel = channel
-    body.slack_user = user
+    const replies = await client.conversations.replies({ channel, ts }).then((data) => data.messages)
 
-    await supabase.from('Messages').upsert([body])
+    await supabase
+        .from('messages')
+        .insert({
+            slug: body.slug.split(','),
+            slack_timestamp: ts,
+            published: true,
+        })
+        .then(async (data) => {
+            id = data?.data[0]?.id
+            await Promise.all(
+                replies.map((reply) => {
+                    return client.users.info({ user: reply.user }).then((user) => {
+                        const email = user.user.profile.email
+                        return supabase
+                            .from('profiles')
+                            .select('id')
+                            .eq('email', email)
+                            .single()
+                            .then((data) => {
+                                return supabase.from('replies').insert({
+                                    body: reply.text,
+                                    message_id: id,
+                                    email,
+                                    user: data?.data?.id,
+                                })
+                            })
+                    })
+                })
+            )
+        })
 })
 
 exports.handler = async (event, context, callback) => {
