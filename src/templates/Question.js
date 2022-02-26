@@ -1,7 +1,6 @@
-import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
-import { Reply } from 'components/CommunityQuestions/Question'
+import { Days, Reply } from 'components/CommunityQuestions/Question'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -9,23 +8,25 @@ import PostLayout, { Contributors, SidebarSection, Text } from 'components/PostL
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import moment from 'moment'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { CodeBlock } from '../components/CodeBlock'
 
 const QuestionSidebar = ({ question, location, title, pageViews, categories, slugs }) => {
-    const days = Number(question.ts)
+    const now = moment()
+    const days = now.diff(question.created_at, 'days')
     return (
         <>
             <SidebarSection title={`Asked by`}>
                 <Contributors
                     className="flex flex-col space-y-2"
-                    contributors={[{ name: question.name, image: question.avatar }]}
+                    contributors={[{ name: question.user?.first_name || 'Contributor', imageURL: question.avatar }]}
                 />
             </SidebarSection>
             <SidebarSection>
                 <Text>
-                    Posted {days} day{days === 1 ? '' : 's'} ago
+                    Posted <Days className="!font-semibold !opacity-90 !ml-1 lowercase" created={question.created} />
                 </Text>
             </SidebarSection>
             {slugs && (
@@ -63,23 +64,27 @@ export default function Question({
             <Breadcrumbs
                 crumbs={[
                     { title: 'Questions', url: '/questions' },
-                    { title: `${question.name}'s question`, truncate: true },
+                    { title: `${question.user?.first_name || 'Contributor'}'s question`, truncate: true },
                 ]}
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
             <PostLayout article={false} sidebar={<QuestionSidebar slugs={slug} question={question} />}>
                 <div className="bg-white dark:bg-gray-accent-dark p-5 rounded-md shadow-lg article-content questions-content">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{question.childMdx.body}</MDXRenderer>
-                    </MDXProvider>
+                    <ReactMarkdown>{question.childMdx.rawBody}</ReactMarkdown>
                 </div>
                 <div className="mt-6">
                     {childrenReply.length > 1 &&
                         childrenReply
                             .slice(1)
                             .map((reply, index) => (
-                                <Reply className="!bg-transparent !py-2" parentId={id} key={index} {...reply} />
+                                <Reply
+                                    className="!bg-transparent !py-2"
+                                    parentId={id}
+                                    key={index}
+                                    {...reply}
+                                    body={reply.childMdx.rawBody}
+                                />
                             ))}
                 </div>
             </PostLayout>
@@ -94,15 +99,14 @@ export const query = graphql`
             slug
             childrenReply {
                 id
-                name
-                ts(difference: "days")
-                childMdx {
-                    body
+                user {
+                    first_name
+                    last_name
+                    avatar
                 }
-                avatar {
-                    childImageSharp {
-                        gatsbyImageData(width: 37, height: 37)
-                    }
+                created_at
+                childMdx {
+                    rawBody
                 }
                 teamMember {
                     frontmatter {

@@ -183,7 +183,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         created_at,
                         body,
                         user (
-                            first_name, last_name
+                            first_name, last_name, avatar
                         )
                         `
                     )
@@ -243,9 +243,9 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                     content: body,
                     mediaType: 'text/markdown',
                 },
-                name: user?.first_name || 'Contributor',
-                fullName: fullName || 'Contributor',
-                ts: created_at,
+                user,
+                body,
+                created_at,
             }
             createNode(replyNode)
             createParentChildLink({ parent: node, child: replyNode })

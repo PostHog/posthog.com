@@ -8,21 +8,6 @@ exports.handler = async (e) => {
     let { body } = e
     if (!body) return { statusCode: 500, body: 'Missing body' }
     body = JSON.parse(body)
-    const { slug, question, email, subject, userID } = body
-    await supabase
-        .from('messages')
-        .insert({
-            slug: [slug],
-            subject,
-        })
-        .then((data) => {
-            return supabase.from('replies').insert({
-                body: question,
-                message_id: data?.data[0]?.id,
-                email,
-                user: userID,
-            })
-        })
 
     let avatar
     if (body.email) {

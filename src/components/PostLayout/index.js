@@ -1,5 +1,6 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
+import Avatar from 'components/CommunityQuestions/Avatar'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -93,11 +94,13 @@ export const ShareLinks = ({ title, href }) => {
     )
 }
 
-export const Contributor = ({ image, name }) => {
+export const Contributor = ({ image, name, imageURL }) => {
     return (
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
-                {image ? (
+                {imageURL ? (
+                    <Avatar image={imageURL} />
+                ) : image ? (
                     <GatsbyImage image={getImage(image)} />
                 ) : (
                     <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +124,7 @@ export const Contributors = ({ contributors, className = '' }) => {
     const classes = 'flex space-x-2 items-center no-underline'
     return (
         <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.map(({ image, id, name, url, state }) => {
+            {contributors.map(({ image, imageURL, id, name, url, state }) => {
                 return (
                     <li key={id}>
                         {url ? (
@@ -130,7 +133,7 @@ export const Contributors = ({ contributors, className = '' }) => {
                             </Link>
                         ) : (
                             <span className={classes}>
-                                <Contributor image={image} name={name} />
+                                <Contributor imageURL={imageURL} image={image} name={name} />
                             </span>
                         )}
                     </li>
@@ -169,7 +172,10 @@ export default function PostLayout({
             style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
             className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
         >
-            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
+            <article
+                style={{ maxWidth: contentWidth }}
+                className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full"
+            >
                 <div style={{ maxWidth: contentWidth }} className={`w-full ${article ? 'article-content' : ''}`}>
                     {children}
                 </div>

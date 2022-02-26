@@ -20,22 +20,6 @@ module.exports = exports.onCreateNode = async ({
     createContentDigest,
 }) => {
     const { createNodeField, createNode, createParentChildLink } = actions
-    if (node.internal.type === 'Reply') {
-        async function createImageNode(imageURL) {
-            return createRemoteFileNode({
-                url: imageURL,
-                parentNodeId: node.id,
-                createNode,
-                createNodeId,
-                cache,
-                store,
-            }).catch((e) => console.error(e))
-        }
-        if (node.imageURL) {
-            const imageNode = await createImageNode(node.imageURL)
-            node.avatar___NODE = imageNode && imageNode.id
-        }
-    }
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent.internal.type === 'Reply') return

@@ -10,13 +10,13 @@ import ReactMarkdown from 'react-markdown'
 import AskAQuestion from './AskAQuestion'
 import Avatar from './Avatar'
 
-export const Days = ({ created, url }) => {
+export const Days = ({ created, url, className = '' }) => {
     const now = moment()
     const days = now.diff(created, 'days')
     return (
         <Link
             to={url}
-            className="font-normal ml-2 text-black hover:text-black dark:text-white dark:hover:text-white opacity-30"
+            className={`font-normal ml-2 text-black hover:text-black dark:text-white dark:hover:text-white opacity-30 ${className}`}
         >
             {days <= 0 ? 'Today' : `${days} day${days === 1 ? '' : 's'} ago`}
         </Link>
