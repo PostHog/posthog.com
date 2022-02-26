@@ -229,11 +229,9 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
     }
 
     function createReplies(node, replies) {
-        console.log(replies)
         for (reply of replies) {
             const { body, user, id, created_at } = reply
             const fullName = user && `${user.first_name} ${user.last_name}`
-            console.log(created_at)
             const replyId = createNodeId(`reply-${id}`)
             const replyNode = {
                 id: replyId,

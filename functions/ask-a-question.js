@@ -15,16 +15,13 @@ exports.handler = async (e) => {
             slug: [slug],
             subject,
         })
-        .then(async (data) => {
-            await supabase
-                .from('replies')
-                .insert({
-                    body: question,
-                    message_id: data?.data[0]?.id,
-                    email,
-                    user_id: userID,
-                })
-                .then((data) => console.log(data))
+        .then((data) => {
+            return supabase.from('replies').insert({
+                body: question,
+                message_id: data?.data[0]?.id,
+                email,
+                user: userID,
+            })
         })
 
     let avatar
@@ -150,6 +147,6 @@ exports.handler = async (e) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ timestamp: slack.ts }),
+        body: JSON.stringify({ timestamp: slack.ts, avatar }),
     }
 }

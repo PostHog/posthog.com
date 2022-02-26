@@ -1,13 +1,13 @@
-import { MDXProvider } from '@mdx-js/react'
+import { Auth } from '@supabase/ui'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import { ZoomImage } from 'components/ZoomImage'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import moment from 'moment'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import AskAQuestion from './AskAQuestion'
 import Avatar from './Avatar'
 
 export const Days = ({ created, url }) => {
@@ -23,7 +23,7 @@ export const Days = ({ created, url }) => {
     )
 }
 
-export const Reply = ({ avatar, name, childMdx, teamMember, ts, parentId, id, className = '' }) => {
+export const Reply = ({ user, body, teamMember, created_at, parentId, id, className = '' }) => {
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -31,19 +31,17 @@ export const Reply = ({ avatar, name, childMdx, teamMember, ts, parentId, id, cl
         img: ZoomImage,
     }
     return (
-        <div id={id} className={`py-4 rounded-md w-full mt-3 ${className}`}>
+        <div id={id} className={`pt-4 rounded-md w-full mt-3 ${className}`}>
             <div className="flex space-x-4 items-start">
-                <Avatar image={teamMember?.frontmatter?.headshot || avatar} />
+                <Avatar image={user?.avatar} />
                 <div className="min-w-0">
                     <p className="m-0 text-[14px] font-semibold text-black dark:text-white">
-                        <span>{teamMember?.frontmatter?.name || name}</span>
+                        <span>{user?.first_name || 'Anonymous'}</span>
                         <span className="opacity-50">, {teamMember?.frontmatter?.jobTitle || 'Contributor'}</span>
-                        <Days ts={ts} url={`/questions/${parentId}#${id}`} />
+                        <Days created={created_at} url={`/questions/${parentId}`} />
                     </p>
                     <div className="my-3">
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{childMdx.body}</MDXRenderer>
-                        </MDXProvider>
+                        <ReactMarkdown>{body}</ReactMarkdown>
                     </div>
                 </div>
             </div>
@@ -59,9 +57,22 @@ export default function Question({ replies, subject, id }) {
         img: ZoomImage,
     }
     const { body, user, created_at } = replies[0]
+    const [showReply, setShowReply] = useState(false)
+    const auth = Auth.useUser()
+
+    const handleSubmit = (body) => {
+        const replyBody = {
+            ...body,
+            messageID: id,
+        }
+        return fetch('/.netlify/functions/reply-to-question', {
+            method: 'POST',
+            body: JSON.stringify(replyBody),
+        }).then((res) => res.json())
+    }
     return (
         <div className="flex items-start space-x-4 w-full">
-            {/* <Avatar image={avatar} /> */}
+            <Avatar image={user?.avatar} />
             <div className="flex-grow max-w-[405px]">
                 {subject && <h3 className="m-0 mb-1 text-[15px]">{subject}</h3>}
                 <div>
@@ -71,8 +82,20 @@ export default function Question({ replies, subject, id }) {
                     <span className="font-semibold opacity-50">by {user?.first_name || 'Contributor'}</span>{' '}
                     <Days created={created_at} url={`/questions/${id}`} />
                 </p>
-                {/* {question.length > 1 &&
-                    question.slice(1).map((reply, index) => <Reply key={index} parentId={id} {...reply} />)} */}
+                {replies.length > 1 &&
+                    replies.slice(1).map((reply, index) => {
+                        return <Reply key={reply.id} {...reply} />
+                    })}
+                {auth.user &&
+                    (!showReply ? (
+                        <button onClick={() => setShowReply(true)} className="text-red font-semibold rounded-md">
+                            Reply
+                        </button>
+                    ) : (
+                        <div>
+                            <AskAQuestion onSubmit={handleSubmit} subject={false} buttonText="Submit reply" />
+                        </div>
+                    ))}
             </div>
         </div>
     )

@@ -4,7 +4,15 @@ import React from 'react'
 import Button from './Button'
 import RichText from './RichText'
 
-export default function AskQuestion({ isValid, loading, userValues, setFieldValue, submitForm }) {
+export default function AskQuestion({
+    isValid,
+    loading,
+    userValues,
+    setFieldValue,
+    submitForm,
+    buttonText = 'Submit',
+    subject,
+}) {
     const { user } = Auth.useUser()
 
     const handleSubmit = (e) => {
@@ -40,17 +48,19 @@ export default function AskQuestion({ isValid, loading, userValues, setFieldValu
                     placeholder="Email"
                 />
             )}
-            <Field
-                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
-                type="text"
-                name="subject"
-                placeholder="Subject"
-            />
+            {subject && (
+                <Field
+                    className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                />
+            )}
             <Field className="mary-chain" type="text" placeholder="Ignore if human" name="mary-chain" />
             <RichText setFieldValue={setFieldValue} />
             <div className="flex items-center justify-between">
                 <Button onClick={handleSubmit} loading={loading} disabled={!isValid}>
-                    Submit
+                    {buttonText}
                 </Button>
                 <p className="m-0 flex items-center space-x-2">
                     <span className="text-[13px] opacity-30 font-semibold">Supports</span>

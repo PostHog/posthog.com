@@ -21,7 +21,7 @@ export default function CommunityQuestions() {
                 created_at,
                 body,
                 user (
-                    first_name, last_name
+                    first_name, last_name, avatar
                 )
                 `
                     )
@@ -39,6 +39,12 @@ export default function CommunityQuestions() {
             getMessages()
         }
     }, [pathname])
+
+    const handleSubmit = (body) => {
+        return fetch('/.netlify/functions/ask-a-question', { method: 'POST', body: JSON.stringify(body) }).then((res) =>
+            res.json()
+        )
+    }
     return (
         <>
             {questions.length > 0 && (
@@ -52,7 +58,10 @@ export default function CommunityQuestions() {
                     </div>
                 </div>
             )}
-            <AskAQuestion />
+            <div className="mt-10">
+                <h4>Ask a question</h4>
+                <AskAQuestion onSubmit={handleSubmit} />
+            </div>
         </>
     )
 }

@@ -8,7 +8,7 @@ export default function QuestionSubmitted({ values, emailSubmitted, isValid, loa
     return (
         <div>
             <ReactMarkdown>{values.question}</ReactMarkdown>
-            <p className="text-[14px] font-semibold opacity-50">by {values.name}</p>
+            <p className="text-[14px] font-semibold opacity-50">by {values.firstName}</p>
             <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
                 <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
                     <Check className="w-[12px] h-[12px] text-white" />

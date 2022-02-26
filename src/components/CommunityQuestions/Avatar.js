@@ -1,11 +1,10 @@
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 export default function Avatar({ image }) {
     return (
         <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded-full w-[40px] h-[40px] overflow-hidden flex-shrink-0">
             {image ? (
-                <GatsbyImage className="w-[40px] h-[40px]" image={getImage(image)} />
+                <img className="w-[40px] h-[40px]" src={image} />
             ) : (
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

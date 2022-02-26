@@ -9,7 +9,7 @@ import AskQuestion from './AskQuestion'
 import Avatar from './Avatar'
 import QuestionSubmitted from './QuestionSubmitted'
 
-export default function AskAQuestion() {
+export default function AskAQuestion({ buttonText, subject = true, onSubmit }) {
     const location = useLocation()
     const { posthog } = useValues(posthogAnalyticsLogic)
     const [timestamp, setTimestamp] = useState(null)
@@ -22,10 +22,15 @@ export default function AskAQuestion() {
         if (user) {
             const { data, error } = await supabase
                 .from('profiles')
-                .select('first_name, last_name')
+                .select('first_name, last_name, avatar')
                 .eq('id', user.id)
                 .single()
-            setUserValues({ email: user.email, firstName: data?.first_name, lastName: data?.last_name })
+            setUserValues({
+                email: user.email,
+                firstName: data?.first_name,
+                lastName: data?.last_name,
+                avatar: data?.avatar,
+            })
         } else {
             setUserValues({})
         }
@@ -36,85 +41,86 @@ export default function AskAQuestion() {
     }, [user])
     return (
         !loading && (
-            <div className="mt-10">
-                <h4>Ask a question</h4>
-                <div className="flex items-start space-x-4">
-                    <Avatar />
-                    <div className="w-full max-w-[405px]">
-                        <Formik
-                            isInitialValid={false}
-                            initialValues={{
-                                firstName: userValues?.firstName || '',
-                                lastName: userValues?.lastName || '',
-                                question: '',
-                                email: user?.email || '',
-                                'mary-chain': '',
-                            }}
-                            validate={(values) => {
-                                const errors = {}
-                                if (!values.firstName) {
-                                    errors.firstName = 'Required'
-                                }
-                                if (!values.lastName) {
-                                    errors.lastName = 'Required'
-                                }
-                                if (!values.subject) {
-                                    errors.subject = 'Required'
-                                }
-                                if (!values.question) {
-                                    errors.question = 'Required'
-                                }
-                                if (!values.email) {
-                                    errors.email = 'Required'
-                                }
-                                return errors
-                            }}
-                            onSubmit={async (values, { setSubmitting, resetForm }) => {
-                                if (values['mary-chain']) return
-                                setSubmitting(true)
-                                if (user && (!userValues.firstName || !userValues.lastName)) {
-                                    const { data, error } = await supabase.from('profiles').upsert({
-                                        id: user.id,
-                                        first_name: values.firstName,
-                                        last_name: values.lastName,
-                                    })
-                                }
-                                const body = JSON.stringify({
-                                    ...values,
-                                    slug: location.pathname,
-                                    timestamp,
-                                    userID: user?.id,
+            <div className="flex items-start space-x-4">
+                <Avatar image={userValues.avatar} />
+                <div className="w-full max-w-[405px]">
+                    <Formik
+                        isInitialValid={false}
+                        initialValues={{
+                            firstName: userValues?.firstName || '',
+                            lastName: userValues?.lastName || '',
+                            question: '',
+                            email: user?.email || '',
+                            'mary-chain': '',
+                        }}
+                        validate={(values) => {
+                            const errors = {}
+                            if (!values.firstName) {
+                                errors.firstName = 'Required'
+                            }
+                            if (!values.lastName) {
+                                errors.lastName = 'Required'
+                            }
+                            if (subject && !values.subject) {
+                                errors.subject = 'Required'
+                            }
+                            if (!values.question) {
+                                errors.question = 'Required'
+                            }
+                            if (!values.email) {
+                                errors.email = 'Required'
+                            }
+                            return errors
+                        }}
+                        onSubmit={async (values, { setSubmitting, resetForm }) => {
+                            if (values['mary-chain']) return
+                            setSubmitting(true)
+                            const body = {
+                                ...values,
+                                slug: location.pathname,
+                                timestamp,
+                                userID: user?.id,
+                            }
+                            onSubmit &&
+                                onSubmit(body).then(async (data) => {
+                                    const { avatar, timestamp } = data
+                                    if (user) {
+                                        const { data, error } = await supabase.from('profiles').upsert({
+                                            id: user.id,
+                                            first_name: values.firstName,
+                                            last_name: values.lastName,
+                                            avatar: avatar,
+                                        })
+                                    }
+
+                                    posthog.capture('Question asked')
+                                    setTimestamp(timestamp)
+                                    setEmailSubmitted(true)
+                                    setSubmitting(false)
                                 })
-                                fetch('/.netlify/functions/ask-a-question', { method: 'POST', body })
-                                    .then((res) => res.json())
-                                    .then((data) => {
-                                        posthog.capture('Question asked')
-                                        setTimestamp(data.timestamp)
-                                        setEmailSubmitted(true)
-                                        setSubmitting(false)
-                                    })
-                            }}
-                        >
-                            {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
-                                return !timestamp ? (
-                                    <AskQuestion
-                                        userValues={userValues}
-                                        submitForm={submitForm}
-                                        setFieldValue={setFieldValue}
-                                        loading={isSubmitting}
-                                        isValid={isValid}
-                                    />
-                                ) : (
-                                    <QuestionSubmitted
-                                        loading={isSubmitting}
-                                        values={values}
-                                        emailSubmitted={emailSubmitted}
-                                        isValid={isValid}
-                                    />
-                                )
-                            }}
-                        </Formik>
-                    </div>
+                        }}
+                    >
+                        {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
+                            return !timestamp ? (
+                                <AskQuestion
+                                    userValues={userValues}
+                                    submitForm={submitForm}
+                                    setFieldValue={setFieldValue}
+                                    loading={isSubmitting}
+                                    isValid={isValid}
+                                    buttonText={buttonText}
+                                    subject={subject}
+                                />
+                            ) : (
+                                <QuestionSubmitted
+                                    loading={isSubmitting}
+                                    values={values}
+                                    emailSubmitted={emailSubmitted}
+                                    isValid={isValid}
+                                />
+                            )
+                        }}
+                    </Formik>
                 </div>
             </div>
         )
