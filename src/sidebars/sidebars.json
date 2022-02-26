@@ -484,24 +484,24 @@
                             "url": "",
                             "children": [
                                 {
-                                    "name": "Hobby",
-                                    "url": "/docs/self-host/deploy/hobby"
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
                                 },
                                 {
                                     "name": "Digital Ocean",
                                     "url": "/docs/self-host/deploy/digital-ocean"
                                 },
                                 {
-                                    "name": "AWS",
-                                    "url": "/docs/self-host/deploy/aws"
-                                },
-                                {
                                     "name": "Google Cloud Platform",
                                     "url": "/docs/self-host/deploy/gcp"
                                 },
                                 {
-                                    "name": "Azure",
-                                    "url": "/docs/self-host/deploy/azure"
+                                    "name": "Hobby",
+                                    "url": "/docs/self-host/deploy/hobby"
                                 },
                                 {
                                     "name": "Other platforms",
