@@ -90,6 +90,7 @@ export default function AskAQuestion({ buttonText, subject = true, onSubmit }) {
                                             first_name: values.firstName,
                                             last_name: values.lastName,
                                             avatar: avatar,
+                                            email: values.email,
                                         })
                                     }
 

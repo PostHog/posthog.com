@@ -9,8 +9,11 @@ export default function CommunityQuestions() {
     const { pathname } = useLocation()
 
     const getMessages = async () => {
-        // Get all messages
-        const messages = await supabase.from('messages').select('subject, id').contains('slug', [pathname])
+        const messages = await supabase
+            .from('messages')
+            .select('subject, id')
+            .eq('published', true)
+            .contains('slug', [pathname])
         Promise.all(
             messages.data.map((message) => {
                 return supabase

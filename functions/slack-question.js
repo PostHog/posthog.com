@@ -5,6 +5,8 @@ const formData = require('form-data')
 const Mailgun = require('mailgun.js')
 const getGravatar = require('gravatar')
 const { App, AwsLambdaReceiver } = require('@slack/bolt')
+const { createClient } = require('@supabase/supabase-js')
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
 
 const awsLambdaReceiver = new AwsLambdaReceiver({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -254,7 +256,9 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
 app.action('unpublish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { name, slug, question, avatar, email, subject } = JSON.parse(actions[0].value)
+    const { name, slug, question, avatar, email, subject, messageID } = JSON.parse(actions[0].value)
+
+    await supabase.from('messages').upsert({ id: messageID, published: false })
     const messageUpdate = {
         channel: process.env.SLACK_QUESTION_CHANNEL,
         ts: message.ts,
@@ -310,6 +314,8 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                             name: name,
                             slug: slug,
                             email: email,
+                            subject: subject,
+                            messageID,
                             avatar,
                         }),
                         action_id: 'publish-button',
@@ -344,6 +350,7 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                             name: name,
                             slug: slug,
                             email: email,
+                            subject,
                         }),
                         action_id: 'edit-question-button',
                     },
@@ -358,15 +365,55 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
 app.action('publish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { question, name, slug, email, avatar, subject } = JSON.parse(actions[0].value)
+    const { question, name, slug, email, avatar, subject, messageID } = JSON.parse(actions[0].value)
     const replies = await client.conversations.replies({
         ts: message.ts,
         channel: process.env.SLACK_QUESTION_CHANNEL,
     })
+    let id = messageID
+    if (id) {
+        await supabase.from('messages').upsert({ id, published: true })
+    } else {
+        await supabase
+            .from('messages')
+            .insert({
+                slug: slug.split(','),
+                subject,
+                published: true,
+            })
+            .then(async (data) => {
+                id = data?.data[0]?.id
+                await supabase.from('replies').insert({
+                    body: question,
+                    message_id: id,
+                    email,
+                })
+                await Promise.all(
+                    replies.messages.slice(1).map((reply) => {
+                        return client.users.info({ user: reply.user }).then((user) => {
+                            const email = user.user.profile.email
+                            return supabase
+                                .from('profiles')
+                                .select('id')
+                                .eq('email', email)
+                                .single()
+                                .then((data) => {
+                                    return supabase.from('replies').insert({
+                                        body: reply.text,
+                                        message_id: id,
+                                        email,
+                                        user: data?.data?.id,
+                                    })
+                                })
+                        })
+                    })
+                )
+            })
+    }
 
     const answer = replies.messages && replies.messages[1] && replies.messages[1].text
     if (answer) {
-        if (email) {
+        if (email && !messageID) {
             const mailgun = new Mailgun(formData)
             const mg = mailgun.client({
                 username: 'api',
@@ -451,6 +498,7 @@ app.action('publish-button', async ({ ack, client, body }) => {
                                 slug: slug,
                                 email: email,
                                 subject: subject,
+                                messageID: id,
                                 avatar,
                             }),
                             action_id: 'unpublish-button',
