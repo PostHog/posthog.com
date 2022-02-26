@@ -74,6 +74,7 @@ exports.handler = async (e) => {
                             email: body.email,
                             subject: body.subject,
                             avatar,
+                            userID: body.userID,
                         }),
                         action_id: 'publish-button',
                         confirm: {
@@ -110,6 +111,7 @@ exports.handler = async (e) => {
                             slug: body.slug,
                             email: body.email,
                             subject: body.subject,
+                            userID: body.userID,
                         }),
                         action_id: 'edit-question-button',
                     },

@@ -81,7 +81,7 @@ const Question = ({ question }) => {
             <div className="flex space-x-2">
                 <Avatar image={user?.avatar} />
                 <p className="text-black dark:text-white m-0 text-[13px] font-semibold opacity-50 flex space-x-2">
-                    {user?.firstName || 'Contributor'} <Days created={created_at} url={`/questions/${question.id}`} />
+                    {user?.first_name || 'Contributor'} <Days created={created_at} url={`/questions/${question.id}`} />
                 </p>
             </div>
             <div className="artcle-content my-2">

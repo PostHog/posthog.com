@@ -21,7 +21,9 @@ const QuestionSidebar = ({ question, location, title, pageViews, categories, slu
             <SidebarSection title={`Asked by`}>
                 <Contributors
                     className="flex flex-col space-y-2"
-                    contributors={[{ name: question.user?.first_name || 'Contributor', imageURL: question.avatar }]}
+                    contributors={[
+                        { name: question.user?.first_name || 'Contributor', imageURL: question.user?.avatar },
+                    ]}
                 />
             </SidebarSection>
             <SidebarSection>

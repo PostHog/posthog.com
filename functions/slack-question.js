@@ -41,7 +41,9 @@ app.view('submit-button', async ({ ack, view, client }) => {
         })
     })
 
-    body.timestamp = private_metadata
+    const { ts, userID } = JSON.parse(private_metadata)
+
+    body.timestamp = ts
 
     let avatar
     if (body.email) {
@@ -106,6 +108,7 @@ app.view('submit-button', async ({ ack, view, client }) => {
                             email: body.email,
                             subject: body.subject,
                             avatar,
+                            userID,
                         }),
                         action_id: 'publish-button',
                         confirm: {
@@ -141,6 +144,7 @@ app.view('submit-button', async ({ ack, view, client }) => {
                             email: body.email,
                             subject: body.subject,
                             timestamp: body.timestamp,
+                            userID,
                         }),
                         action_id: 'edit-question-button',
                     },
@@ -149,18 +153,18 @@ app.view('submit-button', async ({ ack, view, client }) => {
         ],
     }
 
-    client.chat.update(message)
+    await client.chat.update(message)
 })
 
 app.action('edit-question-button', async ({ ack, client, body, logger }) => {
     await ack()
     try {
-        const { question, name, email, slug, subject } = JSON.parse(body.actions[0].value)
+        const { question, name, email, slug, subject, userID } = JSON.parse(body.actions[0].value)
         const result = await client.views.open({
             trigger_id: body.trigger_id,
             view: {
                 callback_id: 'submit-button',
-                private_metadata: body.message.ts,
+                private_metadata: JSON.stringify({ ts: body.message.ts, userID }),
                 type: 'modal',
                 title: {
                     type: 'plain_text',
@@ -256,7 +260,7 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
 app.action('unpublish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { name, slug, question, avatar, email, subject, messageID } = JSON.parse(actions[0].value)
+    const { name, slug, question, avatar, email, subject, messageID, userID } = JSON.parse(actions[0].value)
 
     await supabase.from('messages').upsert({ id: messageID, published: false })
     const messageUpdate = {
@@ -316,6 +320,7 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                             email: email,
                             subject: subject,
                             messageID,
+                            userID,
                             avatar,
                         }),
                         action_id: 'publish-button',
@@ -338,34 +343,18 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                             },
                         },
                     },
-                    {
-                        type: 'button',
-                        text: {
-                            type: 'plain_text',
-                            text: 'Edit',
-                            emoji: true,
-                        },
-                        value: JSON.stringify({
-                            question: question,
-                            name: name,
-                            slug: slug,
-                            email: email,
-                            subject,
-                        }),
-                        action_id: 'edit-question-button',
-                    },
                 ],
             },
         ],
     }
 
-    client.chat.update(messageUpdate)
+    await client.chat.update(messageUpdate)
 })
 
 app.action('publish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { question, name, slug, email, avatar, subject, messageID } = JSON.parse(actions[0].value)
+    const { question, name, slug, email, avatar, subject, messageID, userID } = JSON.parse(actions[0].value)
     const replies = await client.conversations.replies({
         ts: message.ts,
         channel: process.env.SLACK_QUESTION_CHANNEL,
@@ -387,6 +376,7 @@ app.action('publish-button', async ({ ack, client, body }) => {
                     body: question,
                     message_id: id,
                     email,
+                    user: userID,
                 })
                 await Promise.all(
                     replies.messages.slice(1).map((reply) => {
@@ -412,121 +402,120 @@ app.action('publish-button', async ({ ack, client, body }) => {
     }
 
     const answer = replies.messages && replies.messages[1] && replies.messages[1].text
-    if (answer) {
-        if (email && !messageID) {
-            const mailgun = new Mailgun(formData)
-            const mg = mailgun.client({
-                username: 'api',
-                key: process.env.MAILGUN_API_KEY,
-                url: 'https://api.eu.mailgun.net',
-            })
-            const mailgunData = {
-                from: 'hey@posthog.com',
-                to: email,
-                subject: `Someone answered your question on posthog.com!`,
-                template: 'question-answered',
-                'h:X-Mailgun-Variables': JSON.stringify({
-                    question,
-                    answer,
+    // if (email && !messageID) {
+    //     const mailgun = new Mailgun(formData)
+    //     const mg = mailgun.client({
+    //         username: 'api',
+    //         key: process.env.MAILGUN_API_KEY,
+    //         url: 'https://api.eu.mailgun.net',
+    //     })
+    //     const mailgunData = {
+    //         from: 'hey@posthog.com',
+    //         to: email,
+    //         subject: `Someone answered your question on posthog.com!`,
+    //         template: 'question-answered',
+    //         'h:X-Mailgun-Variables': JSON.stringify({
+    //             question,
+    //             answer,
+    //         }),
+    //         'h:Reply-To': 'hey@posthog.com',
+    //     }
+    //     await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
+    // }
+    const messageUpdate = {
+        channel: process.env.SLACK_QUESTION_CHANNEL,
+        ts: message.ts,
+        text: question,
+        username: name,
+        blocks: [
+            {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: `${name} on ${slug}`,
+                    emoji: true,
+                },
+                block_id: 'name_and_slug',
+            },
+            {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: subject,
+                    emoji: true,
+                },
+                block_id: 'subject',
+            },
+            {
+                type: 'section',
+                block_id: 'question',
+                text: {
+                    type: 'mrkdwn',
+                    text: question,
+                },
+                ...(avatar && {
+                    accessory: {
+                        type: 'image',
+                        image_url: avatar,
+                        alt_text: name,
+                    },
                 }),
-                'h:Reply-To': 'hey@posthog.com',
-            }
-            await mg.messages.create(process.env.MAILGUN_DOMAIN, mailgunData).catch((err) => console.log(err))
-        }
-        const messageUpdate = {
-            channel: process.env.SLACK_QUESTION_CHANNEL,
-            ts: message.ts,
-            text: question,
-            username: name,
-            blocks: [
-                {
-                    type: 'header',
-                    text: {
-                        type: 'plain_text',
-                        text: `${name} on ${slug}`,
-                        emoji: true,
-                    },
-                    block_id: 'name_and_slug',
+            },
+            {
+                type: 'section',
+                block_id: 'published',
+                text: {
+                    type: 'plain_text',
+                    text: '✅ Published',
+                    emoji: true,
                 },
-                {
-                    type: 'header',
-                    text: {
-                        type: 'plain_text',
-                        text: subject,
-                        emoji: true,
-                    },
-                    block_id: 'subject',
-                },
-                {
-                    type: 'section',
-                    block_id: 'question',
-                    text: {
-                        type: 'mrkdwn',
-                        text: question,
-                    },
-                    ...(avatar && {
-                        accessory: {
-                            type: 'image',
-                            image_url: avatar,
-                            alt_text: name,
+            },
+            {
+                type: 'actions',
+                elements: [
+                    {
+                        type: 'button',
+                        style: 'danger',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Unpublish',
+                            emoji: true,
                         },
-                    }),
-                },
-                {
-                    type: 'section',
-                    block_id: 'published',
-                    text: {
-                        type: 'plain_text',
-                        text: '✅ Published',
-                        emoji: true,
-                    },
-                },
-                {
-                    type: 'actions',
-                    elements: [
-                        {
-                            type: 'button',
-                            style: 'danger',
-                            text: {
+                        value: JSON.stringify({
+                            question: question,
+                            name: name,
+                            slug: slug,
+                            email: email,
+                            subject: subject,
+                            messageID: id,
+                            userID,
+                            avatar,
+                        }),
+                        action_id: 'unpublish-button',
+                        confirm: {
+                            title: {
                                 type: 'plain_text',
-                                text: 'Unpublish',
-                                emoji: true,
+                                text: 'Please confirm',
                             },
-                            value: JSON.stringify({
-                                question: question,
-                                name: name,
-                                slug: slug,
-                                email: email,
-                                subject: subject,
-                                messageID: id,
-                                avatar,
-                            }),
-                            action_id: 'unpublish-button',
+                            text: {
+                                type: 'mrkdwn',
+                                text: 'Clicking confirm will remove this thread from the website',
+                            },
                             confirm: {
-                                title: {
-                                    type: 'plain_text',
-                                    text: 'Please confirm',
-                                },
-                                text: {
-                                    type: 'mrkdwn',
-                                    text: 'Clicking confirm will remove this thread from the website',
-                                },
-                                confirm: {
-                                    type: 'plain_text',
-                                    text: 'Confirm',
-                                },
-                                deny: {
-                                    type: 'plain_text',
-                                    text: 'Cancel',
-                                },
+                                type: 'plain_text',
+                                text: 'Confirm',
+                            },
+                            deny: {
+                                type: 'plain_text',
+                                text: 'Cancel',
                             },
                         },
-                    ],
-                },
-            ],
-        }
-        client.chat.update(messageUpdate)
+                    },
+                ],
+            },
+        ],
     }
+    await client.chat.update(messageUpdate)
 })
 
 exports.handler = async (event, context, callback) => {

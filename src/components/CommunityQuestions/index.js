@@ -15,7 +15,7 @@ export default function CommunityQuestions() {
             .eq('published', true)
             .contains('slug', [pathname])
         Promise.all(
-            messages.data.map((message) => {
+            messages?.data.map((message) => {
                 return supabase
                     .from('replies')
                     .select(
