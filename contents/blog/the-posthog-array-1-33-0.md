@@ -11,7 +11,9 @@ featuredImageType: full
 excerpt: Introducing a full multivariate Experimentation suite, granular permissions on dashboards, Altinity Cloud support for ClickHouse, configuring your instance from the PostHog UI and 290+ improvements/fixes.
 ---
 
-PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to your product to ensure you maximize value for your end users. For Enterprise customers, you can now set granular permissions on dashboards. An easier way to configure your instance, support for Altinity Cloud, insight legends, insight permalinks and 290+ improvements/fixes are included.
+PostHog 1.33.0 introduces a full Experimentation suite, enabling you to run multivariate experiments to ensure you maximize value for your end users. Introducing also support for a managed ClickHouse infrastructure through Altinity Cloud, insight legends and insight permalinks. Plus, there are over 290+ improvements and bugfixes included!
+
+For Enterprise customers, we've also added the ability to set granular permissions on dashboards. 
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires ClickHouse. To use this version, you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
