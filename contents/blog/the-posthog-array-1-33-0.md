@@ -35,7 +35,7 @@ PostHog now offers a full end-to-end A/B testing suite! Previously you could use
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
-With [Experimentation](/docs/user-guides/experimentation), you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed.
+With [Experimentation](/docs/user-guides/experimentation), you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. This enables you to ship product changes confidently while maintaining speed.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments-2.png" alt="Screenshot: Experiments with a funnel conversion rate target metric" />
 
