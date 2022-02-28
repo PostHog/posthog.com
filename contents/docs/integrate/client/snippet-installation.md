@@ -35,7 +35,7 @@ PostHog supports tracking across multiple domains - just include the same snippe
 
 However, you can also configure "permitted domains" in your 'Project Settings'. These are domains where you'll be able to record user sessions and use the PostHog toolbar. 
 
-###  Ignore/censure elements
+###  Ignore/censor elements
 PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
 
 ```html
