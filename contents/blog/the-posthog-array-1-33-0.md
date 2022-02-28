@@ -57,7 +57,7 @@ To introduce more detailed control to dashboards for large teams, PostHog now le
 
 ### New: Altitiny Cloud support
 
-We've partnered up with Altinity to offer a worry-free managed ClickHouse database. Altinity is an expert in Clickhouse and data infrastructure and it can help large organizations to deploy, manage and scale their PostHog instance.
+We've partnered with Altinity to offer a worry-free managed ClickHouse database. Altinity is an expert in ClickHouse and data infrastructure and helps large organizations to deploy, manage and scale their PostHog instance.
 
 Find out more about our Altinity integration in our [Marketplace docs](/marketplace/altinity).
 
