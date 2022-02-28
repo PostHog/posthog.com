@@ -16,7 +16,7 @@ PostHog 1.33.0 introduces a full Experimentation suite, enabling you to run mult
 For Enterprise customers, we've also added the ability to set granular permissions on dashboards. 
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> From this version onwards, you'll need to make sure to run all async migrations on your instance after upgrading. The next version (1.34.0) will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
+<b>IMPORTANT!</b> From this version onwards, you'll need to make sure to run all async migrations on your instance <b>after upgrading to 1.33.0</b>. The next version (1.34.0) will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
 </blockquote>
 
 ## PostHog 1.33.0 release notes
