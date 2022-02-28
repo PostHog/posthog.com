@@ -74,7 +74,7 @@ We're making it much more straightforward to manage your PostHog instance, with 
 
 ### Other improvements & fixes
 
-- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident the recipient we'll see the insight you intended.
+- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident the recipient will see the insight you intended.
 - Improved: Smarter events and property filters. We've made a lot of improvements to how we show events and event properties across the app. We'll now only show you the relevant properties for a specific event and we'll signal when an event has not been seen in the last 30 days, so you can create insights faster.
 - Improved: Redesigned share dashboard modal. We've made it simpler and more clear when your dashboard is shared, internally and externally.
 - Improved: A new async migration (`person_distinct_id2`) will speed up queries >70% for projects with 10M+ unique users.
