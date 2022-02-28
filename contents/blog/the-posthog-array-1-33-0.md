@@ -11,7 +11,9 @@ featuredImageType: full
 excerpt: Introducing a full multivariate Experimentation suite, granular permissions on dashboards, Altinity Cloud support for ClickHouse, configuring your instance from the PostHog UI and 290+ improvements/fixes.
 ---
 
-PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to your product to ensure you maximize value for your end users. For Enterprise customers, you can now set granular permissions on dashboards. An easier way to configure your instance, support for Altinity Cloud, insight legends, insight permalinks and 290+ improvements/fixes are included.
+PostHog 1.33.0 introduces a full Experimentation suite, enabling you to run multivariate experiments to ensure you maximize value for your end users. Introducing also support for a managed ClickHouse infrastructure through Altinity Cloud, insight legends and insight permalinks. Plus, there are over 290+ improvements and bugfixes included!
+
+For Enterprise customers, we've also added the ability to set granular permissions on dashboards. 
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> From this version onwards, you'll need to make sure to run all async migrations on your instance after upgrading. The next version (1.34.0) will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
@@ -26,11 +28,11 @@ PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to you
 
 ### New: Experimentation
 
-A full end-to-end A/B testing suite is now part of PostHog! Feature Flags were already powerful and you could technically use them to run A/B tests, but with a lot of manual work. This new feature will help you plan your experiment (select users, determine sample size exposure, determine estimated run time), allocate users evenly across test groups, track results seamlessly and let you know once your results reach statistical significance.
+PostHog now offers a full end-to-end A/B testing suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant. 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
-With Experimentation, you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed. Read more about this feature in [the docs](https://posthog.com/docs/user-guides/experimentation).
+With [Experimentation](/docs/user-guides/experimentation), you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments-2.png" alt="Screenshot: Experiments with a funnel conversion rate target metric" />
 
@@ -52,7 +54,7 @@ To introduce more detailed control to dashboards for large teams, PostHog now le
 
 ### New: Altitiny Cloud support
 
-We've partnered up with Altinity to offer a worry-free managed ClickHouse database. Altinity are experts in Clickhouse and data infrastructure and they help large organizations to deploy, manage and scale their PostHog instance.
+We've partnered up with Altinity to offer a worry-free managed ClickHouse database. Altinity is an expert in Clickhouse and data infrastructure and it can help large organizations to deploy, manage and scale their PostHog instance.
 
 Find out more about our Altinity integration in our [Marketplace docs](/marketplace/altinity).
 
@@ -69,7 +71,7 @@ We're significantly improving the way you manage your PostHog instance. Some set
 
 ### Other improvements & fixes
 
-- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident, the recipient we'll see the insight you intended.
+- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident the recipient we'll see the insight you intended.
 - Improved: Smarter events and property filters. We've made a lot of improvements to how we show events and event properties across the app. We'll now only show you the relevant properties for a specific event and we'll signal when an event has not been seen in the last 30 days, so you can create insights faster.
 - Improved: Redesigned share dashboard modal. We've made it simpler and more clear when your dashboard is shared, internally and externally.
 - New: Insight legends. Each insight now offers a legend within each graph to provide clarity to what each line represents. This is particularly useful when sharing screenshots of an insight so the recipient knows what each line represents.
