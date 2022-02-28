@@ -238,6 +238,10 @@
                     "url": "/handbook/engineering/how-we-review"
                 },
                 {
+                    "name": "Feature ownership",
+                    "url": "/handbook/engineering/feature-ownership"
+                },
+                {
                     "name": "Releasing a new version",
                     "url": "/handbook/engineering/release-new-version"
                 },
@@ -308,6 +312,10 @@
                 {
                     "name": "Writing async migrations",
                     "url": "/handbook/engineering/async-migrations"
+                },
+                {
+                    "name": "Event ingestion",
+                    "url": "/handbook/engineering/event-ingestion"
                 }
             ]
         },
@@ -476,24 +484,24 @@
                             "url": "",
                             "children": [
                                 {
-                                    "name": "Hobby",
-                                    "url": "/docs/self-host/deploy/hobby"
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
                                 },
                                 {
                                     "name": "Digital Ocean",
                                     "url": "/docs/self-host/deploy/digital-ocean"
                                 },
                                 {
-                                    "name": "AWS",
-                                    "url": "/docs/self-host/deploy/aws"
-                                },
-                                {
                                     "name": "Google Cloud Platform",
                                     "url": "/docs/self-host/deploy/gcp"
                                 },
                                 {
-                                    "name": "Azure",
-                                    "url": "/docs/self-host/deploy/azure"
+                                    "name": "Hobby",
+                                    "url": "/docs/self-host/deploy/hobby"
                                 },
                                 {
                                     "name": "Other platforms",
@@ -505,6 +513,10 @@
                             "name": "Configure",
                             "url": "",
                             "children": [
+                                {
+                                    "name": "Instance settings",
+                                    "url": "/docs/self-host/configure/instance-settings"
+                                },
                                 {
                                     "name": "Environment variables",
                                     "url": "/docs/self-host/configure/environment-variables"
@@ -696,10 +708,6 @@
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
-                },
-                {
-                    "name": "GDPR guidance",
-                    "url": "/docs/integrate/gdpr"
                 },
                 {
                     "name": "Client libraries",
@@ -932,10 +940,6 @@
                     "url": "/docs/user-guides/sso"
                 },
                 {
-                    "name": "Support",
-                    "url": "/docs/user-guides/support"
-                },
-                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
@@ -1092,6 +1096,32 @@
                     "url": "/docs/data-model"
                 }
             ]
+        },
+        {
+            "name": "Privacy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/privacy/"
+                },
+                {
+                    "name": "GDPR guidance",
+                    "url": "/docs/privacy/gdpr-compliance"
+                },
+                {
+                    "name": "HIPAA guidance",
+                    "url": "/docs/privacy/hipaa-compliance"
+                },
+                {
+                    "name": "CCPA guidance",
+                    "url": "/docs/privacy/ccpa-compliance"
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "url": "/docs/user-guides/support"
         },
         {
             "name": "Contribute",

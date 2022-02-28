@@ -630,6 +630,13 @@ ul {
     line-height: 1rem;
 }
 
+.lemon-tag.gh-tag {
+    text-transform: unset;
+    background-color: rgba(83, 117, 255, 0.1);
+    padding: 4px 8px;
+    color: #5375ff;
+}
+
 .lemon-tag.warning {
     background-color: #f7a501;
 }
@@ -748,6 +755,10 @@ ul {
     animation-iteration-count: infinite;
 }
 
+.mermaid {
+    line-height: 1;
+}
+
 @keyframes fade {
     0% {
         opacity: 0;
@@ -769,5 +780,34 @@ ul {
     }
     100% {
         transform: scale(1);
+    }
+}
+
+.w-md-editor-toolbar {
+    @apply !h-auto !bg-white !p-2 !border-dashed !border-gray-accent-light;
+    ul {
+        @apply flex items-center;
+        button {
+            @apply rounded-md !w-[32px] !h-[32px] flex items-center justify-center transition-opacity opacity-30 hover:bg-gray-accent-light hover:opacity-100;
+        }
+    }
+}
+
+.w-md-editor-input {
+    @apply !p-2;
+}
+
+.w-md-editor-content {
+    @apply !h-[150px];
+}
+
+.w-md-editor {
+    @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md overflow-hidden;
+}
+
+body.dark {
+    .w-md-editor-toolbar,
+    .w-md-editor-content {
+        @apply !bg-gray-accent-light;
     }
 }

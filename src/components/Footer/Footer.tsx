@@ -164,6 +164,7 @@ export function Footer(): JSX.Element {
                                         title="PostHog FM"
                                         url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
                                     />
+                                    <FooterMenuItem title="Marketplace" url="/marketplace" />
                                 </ul>
                             </div>
                         </div>
@@ -223,6 +224,7 @@ export function Footer(): JSX.Element {
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="FAQ" url="/faq" />
+                                    <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
                                     <FooterMenuItem title="Media" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />

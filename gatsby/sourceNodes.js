@@ -105,66 +105,98 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
             createNode(node)
         }
     })
-
-    const questions = await fetch(
-        `https://slack.com/api/conversations.history?channel=${process.env.SLACK_QUESTION_CHANNEL}`,
-        {
-            headers: {
-                Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-        }
-    ).then((res) => res.json())
-    questions &&
-        questions.messages &&
-        questions.messages.forEach(async (message, index) => {
-            const { blocks } = message
-            if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
-            const question = {}
-            const reply = { ts: message.ts }
-            const blockIds = {
-                name_and_slug: (block) => {
-                    const split = block.text.text.split(' on ')
-                    reply.name = split[0]
-                    question.slug = split[1].split(',').map((slug) => slug.trim())
-                },
-                question: (block) => {
-                    reply.rawBody = block.text.text
-                    if (block.accessory) {
-                        reply.imageURL = block.accessory.image_url
-                    }
+    if (process.env.SLACK_API_KEY && process.env.SLACK_QUESTION_CHANNEL) {
+        const questions = await fetch(
+            `https://slack.com/api/conversations.history?channel=${process.env.SLACK_QUESTION_CHANNEL}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.SLACK_API_KEY}`,
+                    'Content-Type': 'application/json',
                 },
             }
+        ).then((res) => res.json())
+        questions &&
+            questions.messages &&
+            questions.messages.forEach(async (message, index) => {
+                const { blocks } = message
+                if (!blocks || blocks.length <= 0 || !blocks.some((block) => block.block_id === 'published')) return
+                const question = {}
+                const reply = { ts: message.ts }
+                const blockIds = {
+                    name_and_slug: (block) => {
+                        const split = block.text.text.split(' on ')
+                        reply.name = split[0]
+                        question.slug = split[1].split(',').map((slug) => slug.trim())
+                    },
+                    question: (block) => {
+                        reply.rawBody = block.text.text
+                        if (block.accessory) {
+                            reply.imageURL = block.accessory.image_url
+                        }
+                    },
+                    subject: (block) => {
+                        reply.subject = block.text.text
+                    },
+                }
 
-            blocks.forEach((block) => {
-                const blockId = block.block_id
-                if (blockIds[blockId] && block.text) {
-                    blockIds[blockId](block)
+                blocks.forEach((block) => {
+                    const blockId = block.block_id
+                    if (blockIds[blockId] && block.text) {
+                        blockIds[blockId](block)
+                    }
+                })
+
+                if (Object.keys(question).length > 0) {
+                    const replies = await getReplies(
+                        message.thread_ts,
+                        process.env.SLACK_QUESTION_CHANNEL,
+                        process.env.SLACK_API_KEY,
+                        false
+                    )
+                    question.replies = [reply, ...replies.slice(1)]
+                    const node = {
+                        id: createNodeId(`question-${message.thread_ts}`),
+                        parent: null,
+                        children: [],
+                        internal: {
+                            type: `Question`,
+                            contentDigest: createContentDigest(question),
+                        },
+                        ...question,
+                    }
+                    createNode(node)
+                    createReplies(node, question.replies)
                 }
             })
+    } else {
+        const ts = new Date()
+        const questionNode = {
+            id: createNodeId(`question-${ts}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Question`,
+                contentDigest: createContentDigest(ts + ''),
+            },
+            ts,
+        }
+        createNode(questionNode)
+        const replyNode = {
+            id: createNodeId(`reply-${ts}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Reply`,
+                contentDigest: createContentDigest(ts + ''),
+                content: ts + '',
+                mediaType: 'text/markdown',
+            },
+            ts,
+        }
+        createNode(replyNode)
+        createParentChildLink({ parent: questionNode, child: replyNode })
+    }
 
-            if (Object.keys(question).length > 0) {
-                const replies = await getReplies(
-                    message.thread_ts,
-                    process.env.SLACK_QUESTION_CHANNEL,
-                    process.env.SLACK_API_KEY,
-                    false
-                )
-                question.replies = [reply, ...replies.slice(1)]
-                const node = {
-                    id: createNodeId(`question-${message.thread_ts}`),
-                    parent: null,
-                    children: [],
-                    internal: {
-                        type: `Question`,
-                        contentDigest: createContentDigest(question),
-                    },
-                    ...question,
-                }
-                createNode(node)
-                createReplies(node, question.replies)
-            }
-        })
     if (process.env.SUPABASE_API_KEY && process.env.SUPABASE_URL) {
         const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY)
         const { data, error } = await supabase.from('Messages').select('slack_timestamp, slug, slack_channel')
@@ -206,7 +238,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
 
     function createReplies(node, replies) {
         for (reply of replies) {
-            const { rawBody, name, imageURL, ts, fullName } = reply
+            const { rawBody, name, imageURL, ts, fullName, subject } = reply
             const replyId = createNodeId(`reply-${ts}`)
             const replyNode = {
                 id: replyId,
@@ -221,6 +253,8 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                 name,
                 imageURL,
                 fullName,
+                subject,
+                ts: new Date(ts * 1000),
             }
             createNode(replyNode)
             createParentChildLink({ parent: node, child: replyNode })

@@ -8,6 +8,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         teamMember: Mdx
         name: String
         childMdx: Mdx
+        ts: Date
       }
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")
@@ -16,6 +17,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         name: String
         rawBody: String
         imageURL: String
+        subject: String
       }
       type Question implements Node {
         rawBody: String
@@ -30,6 +32,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         avatar: File @link(from: "avatar___NODE")
         name: String
         fullName: String
+        subject: String
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")
