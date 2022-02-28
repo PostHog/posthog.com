@@ -26,7 +26,7 @@ PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to you
 
 ### New: Experimentation
 
-A full end-to-end A/B testing suite is now part of PostHog! [Feature Flags](/product/feature-flags) were already powerful and you could technically use them to run A/B tests, but with a lot of manual work. This new feature will help you plan your experiment (select users, determine sample size exposure, determine estimated run time), allocate users evenly across test groups, track results seamlessly and let you know once your results reach statistical significance.
+PostHog now offers a full end-to-end A/B testing suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant. 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
