@@ -14,7 +14,7 @@ excerpt: Introducing a full multivariate Experimentation suite, granular permiss
 PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to your product to ensure you maximize value for your end users. For Enterprise customers, you can now set granular permissions on dashboards. An easier way to configure your instance, support for Altinity Cloud, insight legends, insight permalinks and 290+ improvements/fixes are included.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> From this version onwards, you'll need to make sure to run all async migrations on your instance after upgrading. The next version (1.34.0) will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
 </blockquote>
 
 ## PostHog 1.33.0 release notes
@@ -30,7 +30,7 @@ A full end-to-end A/B testing suite is now part of PostHog! Feature Flags were a
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
-With Experimentation, you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed.
+With Experimentation, you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed. Read more about this feature in [the docs](https://posthog.com/docs/user-guides/experimentation).
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments-2.png" alt="Screenshot: Experiments with a funnel conversion rate target metric" />
 
@@ -79,7 +79,7 @@ We're significantly improving the way you manage your PostHog instance. Some set
 
 ### Deprecation & removal notices
 
-No new deprecation notices in this release.
+- Please make sure to run all [async migrations](/docs/self-host/configure/async-migrations/overview) after upgrading to this version (1.33.0) and before upgrading to the next version (1.34.0, March 2022).
 
 ### Talk to us about how we can improve
 
