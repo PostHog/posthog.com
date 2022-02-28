@@ -39,6 +39,7 @@
         "chart.js": "^2.9.4",
         "chrome-aws-lambda": "^10.1.0",
         "cntl": "^1.0.0",
+        "core-js": "^3.21.1",
         "country-code-emoji": "^2.3.0",
         "cross-env": "^7.0.3",
         "dotenv": "^10.0.0",

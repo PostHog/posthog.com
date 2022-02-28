@@ -1,19 +1,20 @@
+import { Button, Select } from 'antd'
+import CodeBlock from 'components/Home/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
+import 'core-js/features/array/at'
+import 'core-js/features/string/replace-all'
 import { graphql } from 'gatsby'
-import React, { useRef, useState } from 'react'
+import { getCookie, setCookie } from 'lib/utils'
+import * as OpenAPISampler from 'openapi-sampler'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import React, { useEffect, useRef, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
+import ReactMarkdown from 'react-markdown'
 import '../styles/api-docs.scss'
 import MainSidebar from './Handbook/MainSidebar'
 import Navigation from './Handbook/Navigation'
 import SectionLinks from './Handbook/SectionLinks'
-
-import Highlight, { defaultProps } from 'prism-react-renderer'
-import CodeBlock from 'components/Home/CodeBlock'
-import { Button, Select } from 'antd'
-import ReactMarkdown from 'react-markdown'
-import { getCookie, setCookie } from 'lib/utils'
-import * as OpenAPISampler from 'openapi-sampler'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -27,17 +28,19 @@ function Endpoints({ paths }) {
     return (
         <div>
             <h3>Endpoints</h3>
-            {Object.entries(paths).map(([path, value]) => (
-                <>
-                    {Object.keys(value).map((verb) => (
-                        <span key={verb}>
-                            <span className={`text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()} </span>
-                            {path}
-                            <br />
-                        </span>
-                    ))}
-                </>
-            ))}
+            <ul className="list-none m-0 p-0">
+                {Object.entries(paths).map(([path, value]) => (
+                    <li key={value}>
+                        {Object.keys(value).map((verb) => (
+                            <span key={verb}>
+                                <span className={`text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()} </span>
+                                {path}
+                                <br />
+                            </span>
+                        ))}
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
@@ -144,18 +147,18 @@ function Params({ params, objects, object, depth = 0 }) {
     )
 }
 function Parameters({ item, objects }) {
-    let pathParams = item.parameters.filter((param) => param.in === 'path')
-    let queryParams = item.parameters.filter((param) => param.in === 'query')
+    let pathParams = item.parameters?.filter((param) => param.in === 'path')
+    let queryParams = item.parameters?.filter((param) => param.in === 'query')
 
     return (
         <>
-            {pathParams.length > 0 && (
+            {pathParams?.length > 0 && (
                 <>
                     <h4>Path Parameters</h4>
                     <Params params={pathParams} />
                 </>
             )}
-            {queryParams.length > 0 && (
+            {queryParams?.length > 0 && (
                 <>
                     <h4>Query Parameters</h4>
                     <Params params={queryParams} />
@@ -251,7 +254,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         })
     }
     const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
-    let queryParams = item.parameters.filter((param) => param.in === 'query')
+    let queryParams = item.parameters?.filter((param) => param.in === 'query')
     return (
         <>
             <div className="code-example justify-between flex">
@@ -263,7 +266,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                     value={exampleLanguage}
                     onChange={(key) => setExampleLanguage(key)}
                     bordered={false}
-                    style={{ border: 0, background: 'transparent' }}
+                    style={{ border: 0, background: 'transparent', width: 90 }}
                 >
                     <Select.Option key="curl" value="curl">
                         curl
@@ -388,7 +391,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
     const mainEl = useRef()
 
     const [menuOpen, setMenuOpen] = useState(false)
-    const [exampleLanguage, setExampleLanguageState] = useState(getCookie('api_docs_example_language') || 'curl')
+    const [exampleLanguage, setExampleLanguageState] = useState()
     const setExampleLanguage = (language) => {
         setCookie('api_docs_example_language', language)
         setExampleLanguageState(language)
@@ -402,6 +405,13 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
             background: 'transparent',
         },
     }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setExampleLanguageState(getCookie('api_docs_example_language') || 'curl')
+        }
+    }, [])
+
     return (
         <>
             <SEO title={`${name} API Reference - PostHog`} />
@@ -432,7 +442,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                     </div>
                     <section id="handbook-content-menu-wrapper">
                         <SectionLinksTop next={next} previous={previous} />
-                        <div className="flex items-start mt-8">
+                        <div className="flex items-start mt-8 md:space-x-16">
                             <MainSidebar
                                 height={'auto'}
                                 sticky
@@ -442,7 +452,10 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                 slug={slug}
                                 className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
                             />
-                            <article className="article-content api-content-container api-documentation" ref={mainEl}>
+                            <article
+                                className="article-content api-content-container api-documentation flex-grow"
+                                ref={mainEl}
+                            >
                                 <h2>{name}</h2>
                                 <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
                                     <p>
@@ -464,10 +477,10 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                     let objectKey = 'Dashboard'
 
                                     return (
-                                        <div key={item.operationId}>
-                                            <h2>{generateName(item)}</h2>
-                                            <div className="grid grid-cols-2 gap-4">
+                                        <div className="mt-8" key={item.operationId}>
+                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                 <div>
+                                                    <h2>{generateName(item)}</h2>
                                                     <ReactMarkdown>
                                                         {!item.description ||
                                                         item.description === items[0].operationSpec?.description
@@ -480,7 +493,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
 
                                                     <ResponseBody item={item} objects={objects} />
                                                 </div>
-                                                <div>
+                                                <div className="lg:sticky top-0">
                                                     <h4>Request</h4>
                                                     <RequestExample
                                                         item={item}
@@ -510,7 +523,6 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                                     />
                                                 </div>
                                             </div>
-                                            <hr />
                                         </div>
                                     )
                                 })}
