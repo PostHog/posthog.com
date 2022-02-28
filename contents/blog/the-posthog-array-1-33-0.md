@@ -65,7 +65,7 @@ Find out more about our Altinity integration in our [Marketplace docs](/marketpl
 
 ### New: Instance configuration UI
 
-We're significantly improving the way you manage your PostHog instance. Some settings are now configurable directly on the UI, instead of you having to rely on environment variables (e.g. email settings). You can read more about these settings in the [instance settings docs](/docs/self-host/configure/instance-settings) and [environment variables docs](/docs/self-host/configure/environment-variables).
+We're making it much more straightforward to manage your PostHog instance, with a new UI that surfaces options and removes the need to rely on environment variables such as email settings. You can read more about these settings in the [instance settings docs](/docs/self-host/configure/instance-settings) and [environment variables docs](/docs/self-host/configure/environment-variables).
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-instance-configuration.png" alt="Screenshot: Instance configuration" />
 
