@@ -31,11 +31,11 @@ For Enterprise customers, we've also added the ability to set granular permissio
 
 ### New: Experimentation
 
-PostHog now offers a full end-to-end A/B testing suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant. 
+PostHog now offers a full end-to-end A/B testing suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work to setup and interpret. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
-With [Experimentation](/docs/user-guides/experimentation), you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed.
+With [Experimentation](/docs/user-guides/experimentation), you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. This enables you to ship product changes confidently while maintaining speed.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments-2.png" alt="Screenshot: Experiments with a funnel conversion rate target metric" />
 
@@ -57,7 +57,7 @@ To introduce more detailed control to dashboards for large teams, PostHog now le
 
 ### New: Altitiny Cloud support
 
-We've partnered up with Altinity to offer a worry-free managed ClickHouse database. Altinity is an expert in Clickhouse and data infrastructure and it can help large organizations to deploy, manage and scale their PostHog instance.
+We've partnered with Altinity to offer a worry-free managed ClickHouse database. Altinity is an expert in ClickHouse and data infrastructure and helps large organizations to deploy, manage and scale their PostHog instance. If you need to self-host PostHog, but don't want to manage the deployment yourself then Altitiny is the solution for you. 
 
 Find out more about our Altinity integration in our [Marketplace docs](/marketplace/altinity).
 
@@ -65,7 +65,7 @@ Find out more about our Altinity integration in our [Marketplace docs](/marketpl
 
 ### New: Instance configuration UI
 
-We're significantly improving the way you manage your PostHog instance. Some settings are now configurable directly on the UI, instead of you having to rely on environment variables (e.g. email settings). You can read more about these settings in the [instance settings docs](/docs/self-host/configure/instance-settings) and [environment variables docs](/docs/self-host/configure/environment-variables).
+We're making it much more straightforward to manage your PostHog instance, with a new UI that surfaces options and removes the need to rely on environment variables such as email settings. You can read more about these settings in the [instance settings docs](/docs/self-host/configure/instance-settings) and [environment variables docs](/docs/self-host/configure/environment-variables).
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-instance-configuration.png" alt="Screenshot: Instance configuration" />
 
@@ -74,9 +74,9 @@ We're significantly improving the way you manage your PostHog instance. Some set
 
 ### Other improvements & fixes
 
-- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident the recipient we'll see the insight you intended.
+- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident the recipient will see the insight you intended.
 - Improved: Smarter events and property filters. We've made a lot of improvements to how we show events and event properties across the app. We'll now only show you the relevant properties for a specific event and we'll signal when an event has not been seen in the last 30 days, so you can create insights faster.
-- Improved: Redesigned share dashboard modal. We've made it simpler and more clear when your dashboard is shared, internally and externally.
+- Improved: Redesigned share dashboard modal. We've made it simpler and clearer when your dashboard is shared, internally and externally.
 - Improved: A new async migration (`person_distinct_id2`) will speed up queries >70% for projects with 10M+ unique users.
 - New: Insight legends. Each insight now offers a legend within each graph to provide clarity to what each line represents. This is particularly useful when sharing screenshots of an insight so the recipient knows what each line represents.
 - Improved: Automatic API documentation. We've implemented [Swagger](https://github.com/swagger-api) to automatically generate API docs to ensure these are always up-to-date.
