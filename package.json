@@ -89,7 +89,7 @@
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
         "mobx": "^6.3.13",
-        "node-fetch": "^2.6.1",
+        "node-fetch": "^2.6.7",
         "postcss": "^8.3.5",
         "prism-react-renderer": "^1.2.0",
         "prismjs": "^1.25.0",
