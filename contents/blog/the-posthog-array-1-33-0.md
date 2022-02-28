@@ -25,6 +25,9 @@ For Enterprise customers, we've also added the ability to set granular permissio
 
 **Release highlights:**
 - [Experimentation](#new-experimentation)
+- [Dashboard permissions](#new-dashboard-permissions)
+- [Altinity Cloud support](#new-altitiny-cloud-support)
+- [Instance configuration UI](#new-instance-configuration-ui)
 
 ### New: Experimentation
 
