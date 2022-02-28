@@ -8,10 +8,10 @@ hideAnchor: true
 categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: Excerpt coming
+excerpt: Introducing a full multivariate Experimentation suite, granular permissions on dashboards, Altinity Cloud support for ClickHouse, configuring your instance from the PostHog UI and 290+ improvements/fixes.
 ---
 
-Release description.
+PostHog 1.33.0 introduces a full Experimentation suite! A/B/C/... changes to your product to ensure you maximize value for your end users. For Enterprise customers, you can now set granular permissions on dashboards. An easier way to configure your instance, support for Altinity Cloud, insight legends, insight permalinks and 290+ improvements/fixes are included.
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/self-host/migrate-from-postgres-to-clickhouse" target="_blank">upgrade to ClickHouse</a> first.
@@ -22,28 +22,31 @@ Release description.
 > To upgrade your PostHog instance, you can check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [Feature one]()
+- [Experimentation](#new-experimentation)
 
 ### New: Experimentation
 
-Description here.
+A full end-to-end A/B testing suite is now part of PostHog! Feature Flags were already powerful and you could technically use them to run A/B tests, but with a lot of manual work. This new feature will help you plan your experiment (select users, determine sample size exposure, determine estimated run time), allocate users evenly across test groups, track results seamlessly and let you know once your results reach statistical significance.
 
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-list.png" alt="Update me" />
+With Experimentation, you can now test multiple variants to optimize for a specific metric, or even conversion rate for a funnel. You'll now be able to ship product changes confidently while maintaining speed.
 
-> 🎁 Feature is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments-2.png" alt="Screenshot: Experiments with a funnel conversion rate target metric" />
+
+> 🎁 Experimentation is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 <br />
 
 
 ### New: Dashboard permissions
 
-Description here.
+To introduce more detailed control to dashboards for large teams, PostHog now lets you select different edit permissions for each dashboard. You can select whether anyone can edit a dashboard or just a specific list of team members. This can help prevent accidental edits and provide confidence that the dashboards are showing the metrics you intend. Underlying insights in a dashboard are also protected from edit when this setting is enabled.
 
 
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/group-analytics-list.png" alt="Update me" />
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png" alt="Screenshot: Dashboard permissions" />
 
-> 🎁 Feature is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+> 🎁 Dashboard permissions is a premium feature and requires a **PostHog Enterprise** license. [Learn more](/pricing).
 
 <br />
 
@@ -55,15 +58,23 @@ Find out more about our Altinity integration in our [Marketplace docs](/marketpl
 
 <br />
 
+### New: Instance configuration UI
+
+We're significantly improving the way you manage your PostHog instance. Some settings are now configurable directly on the UI, instead of you having to rely on environment variables (e.g. email settings). You can read more about these settings in the [instance settings docs](/docs/self-host/configure/instance-settings) and [environment variables docs](/docs/self-host/configure/environment-variables).
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-instance-configuration.png" alt="Screenshot: Instance configuration" />
+
+<br />
+
 
 ### Other improvements & fixes
 
-- Improved: Short robust permalinks.
-- New: Instance status configuration
-- Improved: Smarter events and property filters.
-- Improved: Redesigned share dashboard modal.
-- New: Insight legends.
-- Improved: Automatic API documentation.
+- Improved: Short robust permalinks. When sharing an insight link (e.g. `https://app.posthog.com/insights/BYt1oFdI`), we'll now automatically switch you to the relevant project (if the link is from a different project). You can now be confident, the recipient we'll see the insight you intended.
+- Improved: Smarter events and property filters. We've made a lot of improvements to how we show events and event properties across the app. We'll now only show you the relevant properties for a specific event and we'll signal when an event has not been seen in the last 30 days, so you can create insights faster.
+- Improved: Redesigned share dashboard modal. We've made it simpler and more clear when your dashboard is shared, internally and externally.
+- New: Insight legends. Each insight now offers a legend within each graph to provide clarity to what each line represents. This is particularly useful when sharing screenshots of an insight so the recipient knows what each line represents.
+- Improved: Automatic API documentation. We've implemented [Swagger](https://github.com/swagger-api) to automatically generate API docs to ensure these are always up-to-date.
+- Improved: Performance of Events page. The events page will now load up to 10x faster! We've improved the way queries are performed, and what information is loaded to reduce load times to a minimum. 
 - Plus 290+ improvements & fixes.
 
 ### Deprecation & removal notices
