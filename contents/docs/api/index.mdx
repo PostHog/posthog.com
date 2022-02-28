@@ -53,6 +53,8 @@ There are three options:
     ```
 
 Any one of these methods works, but only the value encountered first (in the order above) will be used for authenticaition!
+showTitle: false
+showSidebar: false
 
 For PostHog Cloud, use `app.posthog.com` as the host address.
 
@@ -70,7 +72,6 @@ api/event/?token=my_project_api_key
 
 ```bash
 POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
-
 curl \
 --header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
 https://posthog.example.com/api/person/
