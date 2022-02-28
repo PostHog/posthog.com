@@ -44,9 +44,9 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### Engineering
 
-Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). Team East and West work on the PostHog product in general and they're spread out based on timezone. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
+Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
 
-#### Team East
+#### App East
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
@@ -56,7 +56,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 <br />
 
-#### Team West
+#### App West
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
@@ -67,7 +67,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 <br />
 
-#### [Team Platform](platform)
+#### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
