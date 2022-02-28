@@ -14,6 +14,7 @@ Both emails are sent via Mailchimp. PostHog News (working title) is a work-in-pr
 ## Lists
 
 We currently grow our general email list from three sources:
+
 - Newsletter signups from the website
 - PostHog users who opt-in
 - Event attendees
