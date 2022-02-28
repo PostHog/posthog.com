@@ -771,3 +771,26 @@ ul {
         transform: scale(1);
     }
 }
+
+.api-documentation {
+    hr {
+        @apply border-0 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed bg-transparent mt-2;
+    }
+    code {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        padding: 0 3px;
+    }
+    .prism-code {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .code-example {
+        background: lighten(rgb(36, 41, 46), 10%);
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    button {
+        @apply !text-red hover:!text-red font-semibold;
+    }
+}
