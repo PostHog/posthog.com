@@ -15,13 +15,8 @@ hideAnchor: true
 
 ## Platform Sub-Team Mission Statements
 
-### Ingestion
-
-**Provide the best events pipeline in the world.**
-
-### Infrastructure
-
-**Make deploying, scaling, and managing PostHog easy, fast, and reliable.**
+- **Ingestion:** Provide the best events pipeline in the world.
+- **Infrastructure:** Make deploying, scaling, and managing PostHog easy, fast, and reliable.
 
 ## Roadmap
 
@@ -72,6 +67,7 @@ hideAnchor: true
 - All infra is managed as code on prod / staging + EU Ready 🎈
   
 ## How we work?
+
 ### Guidelines
 
 * We work as teams on one goal/project - not having a single person alone working on a goal
