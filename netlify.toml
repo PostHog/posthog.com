@@ -1182,3 +1182,9 @@
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations/overview"
     to = "/docs/self-host/configure/async-migrations"
+
+
+# Added: 2022-03-01
+[[redirects]]
+    from = "/docs/privacy/hipaa-compliance"
+    to = "/blog/hipaa-compliant-analytics"
