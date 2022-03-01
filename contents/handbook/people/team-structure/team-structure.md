@@ -44,25 +44,26 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### Engineering
 
-#### [Core Analytics](core-analytics)
-- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
-- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
+Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
+
+#### App East
+- [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
+- [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
-- [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
-- [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
-- Harry Waye (Full Stack Engineer)
+- [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
+- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
+- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 
-#### [Core Experience](core-experience)
-- [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
-- [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
-- [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
+#### App West
+- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
+- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
+- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
-- Paul D'Ambra, Full Stack Engineer
+- [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
+- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
+- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 
@@ -71,7 +72,8 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
-- Guido Iaquinti (Site Reliability Engineer)
+- [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
+- [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 
 <br />
 

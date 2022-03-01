@@ -238,6 +238,10 @@
                     "url": "/handbook/engineering/how-we-review"
                 },
                 {
+                    "name": "Feature ownership",
+                    "url": "/handbook/engineering/feature-ownership"
+                },
+                {
                     "name": "Releasing a new version",
                     "url": "/handbook/engineering/release-new-version"
                 },
@@ -308,6 +312,10 @@
                 {
                     "name": "Writing async migrations",
                     "url": "/handbook/engineering/async-migrations"
+                },
+                {
+                    "name": "Event ingestion",
+                    "url": "/handbook/engineering/event-ingestion"
                 }
             ]
         },
@@ -498,26 +506,6 @@
                                 {
                                     "name": "Other platforms",
                                     "url": "/docs/self-host/deploy/other"
-                                },
-                                {
-                                    "name": "EU-only hosting",
-                                    "url": "/docs/self-host/deploy/hosting-in-eu"
-                                },
-                                {
-                                    "name": "Configuration",
-                                    "url": "/docs/self-host/deploy/configuration"
-                                },
-                                {
-                                    "name": "Upgrade notes",
-                                    "url": "/docs/self-host/deploy/upgrade-notes"
-                                },
-                                {
-                                    "name": "Managing hosting costs",
-                                    "url": "/docs/self-host/deploy/hosting-costs"
-                                },
-                                {
-                                    "name": "Troubleshooting and FAQs",
-                                    "url": "/docs/self-host/deploy/troubleshooting"
                                 }
                             ]
                         },
@@ -525,6 +513,10 @@
                             "name": "Configure",
                             "url": "",
                             "children": [
+                                {
+                                    "name": "Instance settings",
+                                    "url": "/docs/self-host/configure/instance-settings"
+                                },
                                 {
                                     "name": "Environment variables",
                                     "url": "/docs/self-host/configure/environment-variables"
@@ -542,37 +534,41 @@
                                     "url": "/docs/self-host/configure/email"
                                 },
                                 {
-                                    "name": "Upgrading PostHog",
-                                    "url": "/docs/self-host/configure/upgrading-posthog"
-                                },
-                                {
-                                    "name": "Async migrations",
-                                    "url": "",
-                                    "children": [
-                                        {
-                                            "name": "Overview",
-                                            "url": "/docs/self-host/configure/async-migrations/overview"
-                                        },
-                                        {
-                                            "name": "0002_events_sample_by",
-                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
-                                        },
-                                        {
-                                            "name": "0003_fill_person_distinct_id2",
-                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
-                                        }
-                                    ]
+                                    "name": "Helm chart configuration",
+                                    "url": "/docs/self-host/deploy/configuration"
                                 }
                             ]
                         },
                         {
-                            "name": "Self-host architecture",
+                            "name": "Architecture",
                             "url": "/docs/self-host/architecture"
+                        },
+                        {
+                            "name": "Managing hosting costs",
+                            "url": "/docs/self-host/deploy/hosting-costs"
+                        },
+                        {
+                            "name": "EU-only hosting",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
                         },
                         {
                             "name": "Runbook",
                             "url": "/docs/self-host/runbook",
                             "children": [
+                                {
+                                    "name": "Upgrading PostHog",
+                                    "url": "/docs/self-host/configure/upgrading-posthog",
+                                    "children": [
+                                        {
+                                            "name": "Upgrade notes",
+                                            "url": "/docs/self-host/deploy/upgrade-notes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Troubleshooting and FAQs",
+                                    "url": "/docs/self-host/deploy/troubleshooting"
+                                },
                                 {
                                     "name": "ClickHouse",
                                     "url": "/docs/self-host/runbook/clickhouse",
@@ -632,6 +628,24 @@
                                     "name": "Zookeeper",
                                     "url": "/docs/self-host/runbook/zookeeper",
                                     "children": []
+                                },
+                                {
+                                    "name": "Async migrations",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/configure/async-migrations/overview"
+                                        },
+                                        {
+                                            "name": "0002_events_sample_by",
+                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                        },
+                                        {
+                                            "name": "0003_fill_person_distinct_id2",
+                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -694,10 +708,6 @@
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
-                },
-                {
-                    "name": "GDPR guidance",
-                    "url": "/docs/integrate/gdpr"
                 },
                 {
                     "name": "Client libraries",
@@ -930,10 +940,6 @@
                     "url": "/docs/user-guides/sso"
                 },
                 {
-                    "name": "Support",
-                    "url": "/docs/user-guides/support"
-                },
-                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
@@ -952,7 +958,7 @@
                     "url": "/docs/plugins"
                 },
                 {
-                    "name": "Enabling plugins",
+                    "name": "Plugin troubleshooting",
                     "url": "/docs/plugins/enabling"
                 },
                 {
@@ -992,28 +998,26 @@
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "name": "Elements",
-                    "url": "/docs/api/elements"
-                },
-                {
-                    "name": "Events",
-                    "url": "/docs/api/events"
-                },
-                {
-                    "name": "People",
-                    "url": "/docs/api/people"
-                },
-                {
                     "name": "Insights",
-                    "url": "/docs/api/insights"
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/api/insights"
+                        },
+                        {
+                            "name": "Trend",
+                            "url": "/docs/api/trend"
+                        },
+                        {
+                            "name": "Funnel",
+                            "url": "/docs/api/funnel"
+                        }
+                    ]
                 },
                 {
-                    "name": "User",
-                    "url": "/docs/api/user"
-                },
-                {
-                    "name": "Feature Flags",
-                    "url": "/docs/api/feature-flags"
+                    "name": "Actions",
+                    "url": "/docs/api/actions"
                 },
                 {
                     "name": "Annotations",
@@ -1024,10 +1028,100 @@
                     "url": "/docs/api/cohorts"
                 },
                 {
+                    "name": "Dashboards",
+                    "url": "/docs/api/dashboards"
+                },
+                {
+                    "name": "Event Definitions",
+                    "url": "/docs/api/event-definitions"
+                },
+                {
+                    "name": "Events",
+                    "url": "/docs/api/events"
+                },
+                {
+                    "name": "Experiments",
+                    "url": "/docs/api/experiments"
+                },
+                {
+                    "name": "Feature Flags",
+                    "url": "/docs/api/feature-flags"
+                },
+                {
+                    "name": "Groups",
+                    "url": "/docs/api/groups"
+                },
+                {
+                    "name": "Groups Types",
+                    "url": "/docs/api/groups-types"
+                },
+                {
+                    "name": "Invites",
+                    "url": "/docs/api/invites"
+                },
+                {
+                    "name": "Members",
+                    "url": "/docs/api/members"
+                },
+                {
+                    "name": "Persons",
+                    "url": "/docs/api/persons"
+                },
+                {
+                    "name": "Plugin Configs",
+                    "url": "/docs/api/plugin-configs"
+                },
+                {
+                    "name": "Plugins",
+                    "url": "/docs/api/plugins"
+                },
+                {
+                    "name": "Projects",
+                    "url": "/docs/api/projects"
+                },
+                {
+                    "name": "Property Definitions",
+                    "url": "/docs/api/property-definitions"
+                },
+                {
+                    "name": "Session_recordings",
+                    "url": "/docs/api/session-recordings"
+                },
+                {
+                    "name": "User",
+                    "url": "/docs/api/user"
+                },
+                {
                     "name": "Data model",
                     "url": "/docs/data-model"
                 }
             ]
+        },
+        {
+            "name": "Privacy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/privacy/"
+                },
+                {
+                    "name": "GDPR guidance",
+                    "url": "/docs/privacy/gdpr-compliance"
+                },
+                {
+                    "name": "HIPAA guidance",
+                    "url": "/docs/privacy/hipaa-compliance"
+                },
+                {
+                    "name": "CCPA guidance",
+                    "url": "/docs/privacy/ccpa-compliance"
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "url": "/docs/user-guides/support"
         },
         {
             "name": "Contribute",

@@ -1162,11 +1162,6 @@
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
 
-# Added: 2022-02-03
-[[redirects]]
-    from = "/docs/self-host/configure/async-migrations"
-    to = "/docs/self-host/configure/async-migrations/overview"
-
 
 # Added: 2022-02-14
 [[redirects]]
@@ -1184,7 +1179,17 @@
     to = "/docs/self-host/configure/async-migrations"
 
 
-# Added: 2022-03-01
+# Added: 2022-02-17
 [[redirects]]
-    from = "/docs/privacy/hipaa-compliance"
-    to = "/blog/hipaa-compliant-analytics"
+    from = "/docs/privacy/overview"
+    to = "/docs/privacy"
+
+[[redirects]]
+    from = "/docs/integrate/gdpr"
+    to = "/docs/privacy/gdpr-compliance"
+
+
+# Added: 2022-02-21
+[[redirects]]
+    from = "/blog/hipaa-compliant-analytics"
+    to = "/blog/best-hipaa-compliant-analytics-tools"
