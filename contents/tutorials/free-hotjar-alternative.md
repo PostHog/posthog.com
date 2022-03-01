@@ -28,7 +28,7 @@ If you haven’t already started using PostHog, that’s the obvious first step.
 Whichever option and pricing tier you choose, PostHog offers a generous free allowance of events:
 
 - Users on [PostHog Cloud](/pricing) receive 10,000 free events each month
-- Users on [PostHog Scale](/pricing) receive 1 million free events each month
+- Users on [PostHog Scale](/pricing) also receive 1 million free events each month
 - Users on [PostHog Open Source](/pricing) have no limit on the number of tracked events
 
 It’s worth noting that some tiers do not have access to premium features, such as [Correlation Analysis](/docs/user-guides/correlation) or [A/B Experimentation](/docs/user-guides/experimentation). However, _all_ tiers have access to core features such as [Session Recording](/docs/user-guides/recordings), [Funnel](/docs/user-guides/funnels) & [Trend Analysis](/docs/user-guides/trends) and [Feature Flags](/docs/user-guides/feature-flags). 
