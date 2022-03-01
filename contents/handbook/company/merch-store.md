@@ -12,7 +12,7 @@ We have a [merch store](https://merch.posthog.com/) where our community can purc
 PostHog merch will be carried out (quite literally) into the wider world where people who've never heard of us will see our brand, it's important that our Merch is:
 
 * **Quality** - Our merch must be something you'd want to wear
-* **Sustainable** - Our merch shouldn't be someting that's never used or made in an unsustainable way
+* **Sustainable** - Our merch shouldn't be something that's never used or made in an unsustainable way
 * **Shippable** - Any one of our community no-matter where in the world they live should be able to receive our merch
 
 ## How do we manufacture merch
@@ -67,7 +67,7 @@ If you have created a new product in Printfection to add it to Shopify is quite 
 
 1. Go to Shopify click Products -> Add Product
 2. Add all the details about the product, including images, description, title etc
-3. Add the IDs from printfection (this is essential for the integration to work) - To do this review the sectin "1. Add products and required ID fields to your store " from [this setup document](https://help.printfection.com/hc/en-us/articles/218014268-Integrating-Shopify-Printfection-via-Zapier-)
+3. Add the IDs from printfection (this is essential for the integration to work) - To do this review the section "1. Add products and required ID fields to your store " from [this setup document](https://help.printfection.com/hc/en-us/articles/218014268-Integrating-Shopify-Printfection-via-Zapier-)
 4. Select "track inventory" and set it to match what is available in printfection (Adding the quantity to the printfection location name)
 5. Set the product to active
 
@@ -77,4 +77,4 @@ Warning: If you have something with different sizes, it's a little more complex,
 
 ## Legacy setups
 
-We have integrations with many othe providers from Printify to Printful and Gelato. For the most part you can ignore anything that references these as these are legacy settings from previous fulfilment channels.
+We have integrations with many other providers from Printify to Printful and Gelato. For the most part you can ignore anything that references these as these are legacy settings from previous fulfillment channels.
