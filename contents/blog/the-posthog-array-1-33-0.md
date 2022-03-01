@@ -43,6 +43,15 @@ With [Experimentation](/docs/user-guides/experimentation), you can now test mult
 
 <br />
 
+### New: Dashboard redesign
+
+We've redesigned dashboards to make them more useful than ever. Changes include better exposition of titles, descriptions, tags and activity, so that it's easier to understand at a glance. 
+
+We've also added a new Insight Details feature that can give you a handy summary of the query. Now all the information you need to understand a dashboard is right there in front of you!
+
+![Screenshot: Dashboard permissionsk](../images/blog/array/1_33_0-dashboards.png)
+
+<br />
 
 ### New: Dashboard permissions
 
