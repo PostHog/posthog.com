@@ -155,7 +155,7 @@ Grafana is available under an AGPLv3 license. A limited version is available for
 
 Similar to Plausible Analytics, Pirsch is a lightweight analytics tool which describes itself as an alternative to Google Analytics. Like other tools in that category, it lacks advanced or enterprise features such as [Session Recording](/docs/user-guides/recordings), [Experimentation](/docs/user-guides/experimentation) or [Feature Flags](/docs/user-guides/feature-flags). 
 
-However, as a streamlined tool Pirsch does focus on some of the analytics queries which matter most to content teams and writers - such as tracking page views, time on page and URM parameters. It also includes a filter system which is accessible for non-technical audiences, and a dark mode. Which is nice.  
+However, as a streamlined tool Pirsch does focus on some of the analytics queries which matter most to content teams and writers - such as tracking page views, time on page and UTM parameters. It also includes a filter system which is accessible for non-technical audiences, and a dark mode. Which is nice.  
 
 ### Who is Pirsch for?
 Like Plausible Analytics, Pirsch is focused on users who only need to track basic website metrics and don't need more powerful features. This makes it a good fit for bloggers and non-technical users, especially if they care about user privacy and want to avoid cookie banners across multiple sites. 
