@@ -27,7 +27,7 @@ If you haven’t already started using PostHog, that’s the obvious first step.
 
 Whichever option and pricing tier you choose, PostHog offers a generous free allowance of events:
 
-- Users on [PostHog Cloud](/pricing) receive 10,000 free events each month
+- Users on [PostHog Cloud](/pricing) receive 1 million free events each month
 - Users on [PostHog Scale](/pricing) also receive 1 million free events each month
 - Users on [PostHog Open Source](/pricing) have no limit on the number of tracked events
 
