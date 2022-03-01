@@ -1,5 +1,5 @@
 ---
-date: 2021-10-15
+date: 2021-03-01
 title: The 8 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
