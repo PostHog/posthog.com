@@ -19,7 +19,7 @@ If you're already growing, changing the way you price has a real chance to accel
 
 Here is a breakdown of our counterintuitive lesson - the more we gave away for free, and the less we asked from users on day 1, the _more_ money we made.
 
-# Don't let pricing get in the way of growth
+## Don't let pricing get in the way of growth
 
 Most companies agonize over how their product is adopted yet price on $x/month - focusing on the dollar amount, rather than the mechanism. Start by thinking about _how_ you charge.
 
@@ -45,14 +45,14 @@ So, how did we get pricing out of the way?
 
 **Be self serve** so users can start paying you to solve a problem they have _right now_. Defaulting to _not_ using a sales team, and providing transarent pricing, means you can get people in the moment.
 
-# But don't lose the ability to do big contracts
+## But don't lose the ability to do big contracts
 
 * We differentiated on features
 * Our usage grows with our customers' products. If we charged a flat fee, we couldn't do this so easily.
 
 Just because it's easy to get started, doesn't mean your product has to be cheap.
 
-# You don't have to do all these things immediately
+## You don't have to do all these things immediately
 
 Early on, optimize for learning. Later on, optimize for the best solution for your users.
 
@@ -62,7 +62,7 @@ For these, we didn't offer $0 minimum - we charged $2k/month minimum. We simply 
 
 **We didn't start with self-serve sales**, as we wanted to talk to users at first. This meant we grew more slowly to optimize for learning at the start. Once we had a reasonable formula, we could accelerate things by chopping out any manual sales process.
 
-# Pricing to value is dumb
+## Pricing to value is dumb
 
 Conventional wisdom is to "price to value", which is broadly interpreted as you should charge a given customer the most you can.
 
@@ -70,17 +70,17 @@ This gives you no room - if the service is at all below initial expectations, th
 
 There are exceptions to this rule - relationship-driven enterprise sales, for example. But, long term, anyone pricing like this is asking to get disrupted.
 
-# Make pricing work for your biggest customers
+## Make pricing work for your biggest customers
 
 We implemented logarithmically-decling pricing with usage. This means something like - every time your volume goes up 10x, the incremental price decrease 5x.
 
-# Don't try to make money off people that don't have money
+## Don't try to make money off people that don't have money
 
 This was one of our biggest lessons. We started by focussing on startups but realized our lowest churn teams were working on products that already had product market fit.
 
 Trying to get money out of tiny startups would have been a mistake.
 
-# We're not done yet
+## We're not done yet
 
 If you like what you're reading, you'll probably have had a peek at [PostHog's pricing](../pricing).
 
@@ -91,13 +91,13 @@ Before you copy paste, we've room for improvement. Here are a few things we're w
 * An enterprise cloud offering
 * Some way of capturing market share for _extremely high volume_ but _low marginal value_ users
 
-# The results
+## The results
 
 TODO: insert chart just showing shape of revenue growth
 
 Enough said.
 
-# Pricing as a product
+## Pricing as a product
 
 Think of your pricing like a product - you want users to become paying customers. What problems do users have from where they are today, to becoming paying customers tomorrow?
 
