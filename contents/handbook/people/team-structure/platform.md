@@ -22,7 +22,7 @@ hideAnchor: true
 
 ### Ingestion
 
-#### 3 year
+#### 3-year
 
 - Ingest events out of order
 - No events left behind (99.99%)
@@ -49,7 +49,7 @@ hideAnchor: true
 
 ### Infrastructure
 
-#### 3 year
+#### 3-year
 
 - All infrastructure is managed as code
 - Cloud is global
