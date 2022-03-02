@@ -375,26 +375,13 @@ app.action('publish-button', async ({ ack, client, body }) => {
                 await supabase.from('replies').insert({
                     body: question,
                     message_id: id,
-                    email,
                     user: userID,
                 })
                 await Promise.all(
                     replies.messages.slice(1).map((reply) => {
-                        return client.users.info({ user: reply.user }).then((user) => {
-                            const email = user.user.profile.email
-                            return supabase
-                                .from('profiles')
-                                .select('id')
-                                .eq('email', email)
-                                .single()
-                                .then((data) => {
-                                    return supabase.from('replies').insert({
-                                        body: reply.text,
-                                        message_id: id,
-                                        email,
-                                        user: data?.data?.id,
-                                    })
-                                })
+                        return supabase.from('replies').insert({
+                            body: reply.text,
+                            message_id: id,
                         })
                     })
                 )

@@ -111,21 +111,9 @@ app.view('submit-db-button', async ({ ack, view, client }) => {
             id = data?.data[0]?.id
             await Promise.all(
                 replies.map((reply) => {
-                    return client.users.info({ user: reply.user }).then((user) => {
-                        const email = user.user.profile.email
-                        return supabase
-                            .from('profiles')
-                            .select('id')
-                            .eq('email', email)
-                            .single()
-                            .then((data) => {
-                                return supabase.from('replies').insert({
-                                    body: reply.text,
-                                    message_id: id,
-                                    email,
-                                    user: data?.data?.id,
-                                })
-                            })
+                    return supabase.from('replies').insert({
+                        body: reply.text,
+                        message_id: id,
                     })
                 })
             )
