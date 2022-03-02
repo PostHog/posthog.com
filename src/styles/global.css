@@ -743,3 +743,25 @@ body.dark {
         @apply !bg-gray-accent-light;
     }
 }
+
+.sbui-auth {
+    form#auth-sign-in,
+    form#auth-sign-up {
+        div .sbui-space-col:last-of-type {
+            margin: 0;
+            a {
+                display: none;
+            }
+        }
+    }
+    form#auth-magic-link,
+    form#auth-forgot-password {
+        .sbui-typography-link {
+            display: none;
+        }
+    }
+}
+
+.sbui-input {
+    @apply !shadow-none !border-gray-accent-light;
+}
