@@ -1,5 +1,5 @@
 ---
-date: 2022-03-01
+date: 2022-03-03
 title: "Dynamic Open Graph images: Your website's free social media ad (that's always up-to-date)"
 rootPage: /blog
 sidebar: Blog
