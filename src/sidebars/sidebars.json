@@ -248,6 +248,10 @@
                         {
                             "name": "Writing async migrations",
                             "url": "/handbook/engineering/databases/async-migrations"
+                        },
+                        {
+                            "name": "ClickHouse event table migrations",
+                            "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
                         }
                     ]
                 },
