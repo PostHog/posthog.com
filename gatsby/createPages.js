@@ -182,6 +182,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             questions: allQuestion {
                 nodes {
                     id
+                    subject
                 }
             }
         }
@@ -423,9 +424,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         }
     })
     result.data.questions.nodes.forEach((node) => {
-        const { id } = node
+        const { id, subject } = node
+        const slug = slugify(subject, { lower: true })
         createPage({
-            path: `questions/${id}`,
+            path: `questions/${slug}`,
             component: Question,
             context: {
                 id,

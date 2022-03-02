@@ -13,6 +13,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
 import React, { useState } from 'react'
+import slugify from 'slugify'
 
 const Search = () => {
     const [value, setValue] = useState('')
@@ -50,7 +51,7 @@ const Search = () => {
             <p className="text-[13px] opacity-50 m-0 mt-3">
                 Try product questions, or anything about installation or self-hosting.
             </p>
-            <p className="text-[14px] opacity-70 m-0 mt-3">
+            <p className="text-[14px] opacity-70 m-0 mt-3 mb-4">
                 Can't find the answer you're looking for?{' '}
                 <button className="text-red" onClick={() => setShowForm(!showForm)}>
                     Ask us anything
@@ -76,18 +77,21 @@ const Question = ({ question }) => {
         pre: CodeBlock,
         img: ZoomImage,
     }
+
+    const slug = slugify(question.subject, { lower: true })
+
     return (
         <li className="mt-9 first:mt-7">
             <div className="flex space-x-2">
                 <Avatar image={user?.avatar} />
                 <p className="text-black dark:text-white m-0 text-[13px] font-semibold opacity-50 flex space-x-2">
-                    {user?.first_name || 'Contributor'} <Days created={created_at} url={`/questions/${question.id}`} />
+                    {user?.first_name || 'Contributor'} <Days created={created_at} url={`/questions/${slug}`} />
                 </p>
             </div>
             <div className="artcle-content my-2">
                 <p className="m-0">{childMdx.excerpt}</p>
             </div>
-            <Link className="text-red hover:red m-0 text-[14px] font-semibold" to={`/questions/${question.id}`}>
+            <Link className="text-red hover:red m-0 text-[14px] font-semibold" to={`/questions/${slug}`}>
                 {replies.length - 1} response{replies.length - 1 === 1 ? '' : 's'}
             </Link>
         </li>
