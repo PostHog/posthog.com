@@ -70,7 +70,7 @@ Hence the explicitly in keeping the layers separate.
 
 #### General tips
 
-- Think data first: get [your mental model of the data flowing through the app](https://acco.io/i-escaped-node) right, and then everything else will be easy.
+- Think data first: get [your mental model of the data flowing through the app](https://acco.io/i-escaped-node) right, and then everything else will be simpler.
 - Be practical, yet remember that you are balancing speed of delivery with ease of maintainability. If you have to choose: code should be easier to understand than it was to write.
 
 #### Do-s & Don't-s
@@ -82,13 +82,13 @@ Hence the explicitly in keeping the layers separate.
   - Logics still have a tiny initialization cost. Hence this rule doesn't apply to library components in the `lib/` folder, which might be rendered hundreds of times on a page with different sets of data. Still feel free to write a logic for a complicated `lib/` component when needed.
   - Use named exports (`export const DashboardMenu = () => <div />`), and avoid `default` exports.
 - Naming things:
-  - Always look around the codebase for naming conventions, and follow the best practices of the environment (e.g. use `camelCase` variables in JS, `under_score` in Python).
+  - Always look around the codebase for naming conventions, and follow the best practices of the environment (e.g. use `camelCase` variables in JS, `snake_case` in Python).
   - Use clear, yet functional names (`searchResults` vs `data`).
   - Logics are camelCase (`dashboardLogic`)
   - React components are PascalCase (`DashboardMenu`).
   - Props for both logics and components are PascalCase and end with `Props` (`DashboardLogicProps` & `DashboardMenuProps`)
   - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx` or `dashboardLogic.ts` or `Dashboard.scss`. Pay attention to the case.
-  - Avoid `index.ts` and `styles.css` and other generic names, even if this is the only file in a folder.
+  - Avoid `index.ts`, `styles.css`, and other generic names, even if this is the only file in a directory.
 - CSS
   - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
   - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
