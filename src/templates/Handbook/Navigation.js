@@ -81,18 +81,20 @@ export default function Navigation({
                         <SearchBar base={breadcrumbBase.name.toLowerCase()} />
                     </div>
                 </div>
-                <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
-                    <CommunityLink
-                        icon={<Edit />}
-                        text={'Edit this page'}
-                        url={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
-                    />
-                    <CommunityLink
-                        icon={<Issue />}
-                        text={'Raise an issue'}
-                        url={`https://github.com/PostHog/posthog.com/issues/new?title=${breadcrumbBase.name} feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
-                    />
-                </ul>
+                {filePath && (
+                    <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                        <CommunityLink
+                            icon={<Edit />}
+                            text={'Edit this page'}
+                            url={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
+                        />
+                        <CommunityLink
+                            icon={<Issue />}
+                            text={'Raise an issue'}
+                            url={`https://github.com/PostHog/posthog.com/issues/new?title=${breadcrumbBase.name} feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
+                        />
+                    </ul>
+                )}
                 <DarkModeToggle className="m-0" />
             </div>
         </div>

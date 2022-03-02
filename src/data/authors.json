@@ -151,5 +151,13 @@
         "image": "../../static/images/authors/neil-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/neilkakkar"
+    },
+    {
+        "handle": "rick-marron",
+        "name": "Rick Marron",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/rick-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/Rick_Marron"
     }
 ]

@@ -77,12 +77,6 @@ export default function Footer({ contributors, filePath, title }) {
                                         feature request
                                     </a>
                                 </li>
-                                <li>
-                                    Email us at{' '}
-                                    <a className="text-yellow hover:text-yellow" href="mailto:hey@posthog.com">
-                                        hey@posthog.com
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>

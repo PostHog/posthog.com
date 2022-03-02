@@ -63,7 +63,7 @@ Goals should be time-bound, but since we primarily use goals for our two-weekly 
 * **Moonshots:** These are big scary goals, we expect to fail to achieve them 50% of the time, if we fail we expect to learn something equally as valuable as if we succeed (just scraping the goal counts as a success)
 * **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
 
-### Outcomes of goals
+### Outcomes of goals
 
 When we review the status of the goals from the previous sprint, we'll classify them as follows:
 * **Nailed it:** We hit the goal spectacularly (high fives all round)
@@ -110,6 +110,7 @@ When we review a PR, we'll look at the following things:
 - Will the code perform with millions of events/users/actions?
 - Are there tests and do they test the right things?
 - Are there any security flaws?
+- Is the code in line with our [coding conventions](/docs/contribute/coding-conventions)?
 
 Things we do not care about during review:
 - Syntax. If we're arguing about syntax, that means we should install a code formatter
