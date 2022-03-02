@@ -33,6 +33,12 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         name: String
         fullName: String
         subject: String
+        user: User
+      }
+      type User {
+        first_name: String
+        last_name: String
+        avatar: String
       }
       type Contributors {
         avatar: File @link(from: "avatar___NODE")

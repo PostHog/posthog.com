@@ -23,7 +23,10 @@ const Login = ({ setLoginOpen, view, setLoginView }) => {
             animate={{ opacity: 1 }}
             className="fixed w-full h-full top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
         >
-            <div onClick={(e) => e.stopPropagation()} className="max-w-[400px] w-full bg-tan rounded-md">
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="max-w-[400px] w-full bg-tan dark:bg-primary rounded-md"
+            >
                 <div className="p-6 pb-4">
                     {(view === 'sign_in' || view === 'sign_up') && (
                         <div className="pb-2 mb-6 grid items-center grid-cols-2 text-center text-md font-semibold relative">
@@ -62,7 +65,7 @@ const Login = ({ setLoginOpen, view, setLoginView }) => {
                         </div>
                     )}
                 </div>
-                <div className="py-4 border-t border-dashed border-gray-accent-light">
+                <div className="py-4 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                     <p className="m-0 text-center text-[14px] font-semibold">
                         Looking to sign into{' '}
                         <Link className="text-red hover:text-red" to="https://app.posthog.com/login">
