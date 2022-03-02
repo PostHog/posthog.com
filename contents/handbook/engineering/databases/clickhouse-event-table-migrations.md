@@ -72,7 +72,7 @@ FROM sharded_events
 
 </details>
 
-<details><summary>3. Attach a _new_ kafka topic + materialized view + Distributed tableto catch up with main table</summary>
+<details><summary>3. Attach a _new_ kafka topic + materialized view + distributed table to catch up with the main table</summary>
 
 ```sql
 
