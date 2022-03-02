@@ -290,7 +290,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                             return {
                                 name: user?.user?.profile?.first_name || user?.user?.name,
                                 rawBody,
-                                imageURL: user.user.profile.image_72,
+                                imageURL: user?.user?.profile?.image_72,
                                 ts: reply.ts,
                                 fullName: user?.user?.profile?.real_name,
                             }
