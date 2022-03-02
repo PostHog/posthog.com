@@ -43,13 +43,21 @@ With [Experimentation](/docs/user-guides/experimentation), you can now test mult
 
 <br />
 
+### New: Dashboard redesign
+
+We've redesigned dashboards to make them more useful than ever. Changes include better exposition of titles, descriptions, tags and activity, so that it's easier to understand at a glance. 
+
+We've also added a new Insight Details feature that can give you a handy summary of the query. Now all the information you need to understand a dashboard is right there in front of you!
+
+![Screenshot: Dashboard redesign](../images/blog/array/1_33_0-dashboards.png)
+
+<br />
 
 ### New: Dashboard permissions
 
-To introduce more detailed control to dashboards for large teams, PostHog now lets you select different edit permissions for each dashboard. You can select whether anyone can edit a dashboard or just a specific list of team members. This can help prevent accidental edits and provide confidence that the dashboards are showing the metrics you intend. Underlying insights in a dashboard are also protected from edit when this setting is enabled.
+It's now possible to granularly control team members' access to dashboards – by default anyone in the project can still edit them, but there is also an option to restrict editing only to specific invited team members. Those who don't have edit access to a dashboard are also prevented from editing insights belonging to it. With this feature unwanted changes to existing dashboards and insights no longer pose a problem for teams.
 
-
-<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png" alt="Screenshot: Dashboard permissions" />
+![Screenshot: Dashboard permissions](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png)
 
 > 🎁 Dashboard permissions is a premium feature and requires a **PostHog Enterprise** license. [Learn more](/pricing).
 
