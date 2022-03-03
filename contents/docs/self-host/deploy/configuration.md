@@ -208,7 +208,7 @@ By default, ClickHouse is installed as a part of the chart, powered by [clickhou
 
 
 #### Use an external service
-To use an external PostgreSQL service, please set `postgresql.enabled` to `false` and then configure the `externalPostgresql` values.
+To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
 
 Read more on how to deploy using Altinity Cloud [here](/docs/self-host/configure/using-altinity-cloud).
 
