@@ -99,7 +99,7 @@ migrate:
   enabled: false
 ```
 
-2. Get the external kafka IP via `kubectl get svc -n posthog | grep kafka-0-external`
+2. Get the external Kafka IP via `kubectl get svc -n posthog | grep kafka-0-external`
 
 3. [Deploy posthog using helm](/docs/self-host) with new values.yaml (fill in placeholder values)
 
