@@ -7,7 +7,7 @@ hideAnchor: true
 
 # Role of a Product Manager
 
-The role a Product Manager varies enormously by individual and organization, however there are some nuances about what makes a great Product Manager at PostHog and what you can expect from them.
+The role of a Product Manager varies enormously by individual and organization, however there are some nuances about what makes a great Product Manager at PostHog and what you can expect from them.
 
 ## Why do we have Product Managers?
 
