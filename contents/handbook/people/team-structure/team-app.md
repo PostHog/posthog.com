@@ -34,7 +34,7 @@ Makers everywhere get better at building products because of posthog
    * Deprecate, hide of simplify existing complex insights: Team West
    * Simplify actions: Team East
    * UI consistent and docs inline: Team East
-* Using PostHov sparks joy
+* Using PostHog sparks joy
     * Something with a hedgehog: Team East
 * We support trillion event querying
     * Persons on events to support billion level querying: Team East
