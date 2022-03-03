@@ -536,6 +536,10 @@
                                 {
                                     "name": "Helm chart configuration",
                                     "url": "/docs/self-host/deploy/configuration"
+                                },
+                                {
+                                    "name": "Deploying ClickHouse using Altinity.Cloud",
+                                    "url": "/docs/self-host/configure/using-altinity-cloud"
                                 }
                             ]
                         },
