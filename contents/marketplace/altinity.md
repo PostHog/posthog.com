@@ -21,7 +21,7 @@ Altinity customers range from startups to Fortune 10 enterprises.
 
 ### Support
 - Enterprise support for users who prefer to operate ClickHouse in self-managed environments
-- Altinity.Cloud ClickHouse backends for PostHog users who prefer to use ClickHouse as a hands-off service. Read more [here](/docs/self-host/configure/using-altinity-cloud).
+- Altinity.Cloud ClickHouse backends for PostHog users who prefer to use ClickHouse as a hands-off service. Find out more about using Altinity.Cloud to manage your self-hosted instance in [our deployment configuration docs.](/docs/self-host/configure/using-altinity-cloud).
 
 ## Contact
 
