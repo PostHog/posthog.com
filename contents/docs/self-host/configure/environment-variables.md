@@ -33,11 +33,14 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `DEBUG_QUERIES`| Whether debugging queries (ClickHouse) is enabled in the Command Palette.| `False`
 | `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). You can set this to a truthy value when developing, but disable this in production!  | `False` |
+| `CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS` | If set, disables using ProtoBuf schemas for kafka communication. Needs to be set when using an external ClickHouse service provider during initial deploy. | `False`
 | `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
+| `KAFKA_URL` | Address used by the application to contact kafka | `kafka://kafka`
+| `KAFKA_URL_FOR_CLICKHOUSE` | Address used by ClickHouse to read from kafka. Falls back to `KAFKA_URL` | `None`
 | `MATERIALIZE_COLUMNS_ANALYSIS_PERIOD_HOURS` | Diagnostic for what columns to materialize | `168`
 | `MATERIALIZE_COLUMNS_BACKFILL_PERIOD_DAYS` | How far back backfill materialized columns | `90`
 | `MATERIALIZE_COLUMNS_MAX_AT_ONCE` | How many columns to materialize at once | `10`
