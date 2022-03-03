@@ -1,6 +1,6 @@
 ## Mission
 
-Makers everywhere get better at building products because of posthog
+Makers everywhere get better at building products because of PostHog
 
 # Roadmap
 
