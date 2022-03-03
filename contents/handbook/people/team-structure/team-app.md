@@ -7,7 +7,7 @@ Makers everywhere get better at building products because of posthog
 ## 3 year goals
 * You can explore data across all insights and dimensions
 * You can trivially share any insight anywhere
-* Onboaridng is as easy as a video game
+* Onboarding is as easy as a video game
 * Tight integration with developer workflows
 * No more complex than it is today
 * Using PostHov sparks joy
