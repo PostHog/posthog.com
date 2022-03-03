@@ -6,7 +6,7 @@ showTitle: true
 
 ## Product Analytics for Firefox Addons
 
-Do you have a firefox browser plugin with a popup extension and want to understand how it's being used? PostHog is the perfect way to do just that.
+Do you have a Firefox browser plugin with a popup extension and want to understand how it's being used? PostHog is the perfect way to do just that.
 
 ## Installing PostHog inside your plugin
 
