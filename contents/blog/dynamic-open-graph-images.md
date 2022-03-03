@@ -1,6 +1,6 @@
 ---
 date: 2022-03-03
-title: "Using Gatsby and Puppeteer to make Open Graph images 100x better"
+title: "Using Gatsby and Puppeteer to create dynamic Open Graph images"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
