@@ -15,7 +15,7 @@ Product development at PostHog is engineering led, all new projects and existing
 
 ## How do they act?
 
-* **Accelerating** - They're always looking for opportunities push the team to ship faster, more impact and high quality 
+* **Accelerating** - They're always looking for opportunities push the team to ship faster, with more impact and high quality 
 * **Empowering** - They empower others to make great decisions and elevate their ambition through context and coaching
 * **Thoughtful** - Deeply consider the implications and motivations of product decisions and tailor their approach to get the most out of every team member
 
