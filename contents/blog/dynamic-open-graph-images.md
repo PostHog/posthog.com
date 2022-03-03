@@ -1,6 +1,6 @@
 ---
 date: 2022-03-03
-title: "Dynamic Open Graph images: Your website's free social media ad (that's always up-to-date)"
+title: "Using Gatsby and Puppeteer to create awesome Dynamic Open Graph images"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
