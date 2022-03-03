@@ -1195,25 +1195,25 @@
     to = "/blog/best-hipaa-compliant-analytics-tools"
 
 
-# Added: 2022-03-02
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/async-migrations"
-    to = "/handbook/engineering/databases/async-migrations"
+    from = "/handbook/engineering/databases/async-migrations"
+    to = "/handbook/engineering/async-migrations"
 
 
-# Added: 2022-03-02
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/event-ingestion"
-    to = "/handbook/engineering/databases/event-ingestion"
+    from = "/handbook/engineering/databases/event-ingestion"
+    to = "/handbook/engineering/event-ingestion"
 
 
-# Added: 2022-03-02
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/query-performance-optimization"
-    to = "/handbook/engineering/databases/query-performance-optimization"
+    from = "/handbook/engineering/databases/query-performance-optimization"
+    to = "/handbook/engineering/query-performance-optimization"
 
 
-# Added: 2022-03-02
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/schema-changes"
-    to = "/handbook/engineering/databases/schema-changes"
+    from = "/handbook/engineering/databases/schema-changes"
+    to = "/handbook/engineering/schema-changes"
