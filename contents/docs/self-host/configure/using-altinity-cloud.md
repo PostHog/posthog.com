@@ -17,7 +17,7 @@ This document outlines how to deploy PostHog using Altinity Cloud ClickHouse clu
 
 ## Deployment instructions
 
-PostHog uses Kafka to send data from the app to ClickHouse. For that reason, Kafka needs to be accessible for ClickHouse during deployment.
+PostHog uses Kafka to send data from the app to ClickHouse. For that reason, Kafka needs to be accessible to ClickHouse during deployment.
 
 ### Deploying using external Kafka
 
