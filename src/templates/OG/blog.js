@@ -51,8 +51,8 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
           background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.5) 0%,
-            rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, .2) 40%,
+            rgba(0, 0, 0, .2) 60%,
             rgba(0, 0, 0, 0.5) 100%
           );
         "
