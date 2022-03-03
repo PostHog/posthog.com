@@ -52,7 +52,7 @@ Read more about how to configure external Kafka in the chart [in our deployment 
 
 To deploy using a version of Kafka managed by the PostHog Helm chart, follow these three steps:
 
-1. [Deploy helm](/docs/self-host) initially with the following values.yaml:
+1. [Deploy your Helm chart](/docs/self-host) initially with the following values.yaml:
 
 ```yaml
 kafka:
