@@ -50,7 +50,7 @@ Read more about how to configure external Kafka in the chart [in our deployment 
 
 ### Using internal Kafka
 
-Deployment using Kafka managed by Posthog Helm chart requires three steps:
+To deploy using a version of Kafka managed by the PostHog Helm chart, follow these three steps:
 
 1. [Deploy helm](/docs/self-host) initially with the following values.yaml:
 
