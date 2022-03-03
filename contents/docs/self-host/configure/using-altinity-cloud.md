@@ -46,7 +46,7 @@ externalClickhouse:
   secure: true
 ```
 
-Read more on configuring external Kafka in the chart [here](https://posthog.com/docs/self-host/deploy/configuration#kafka)
+Read more about how to configure external Kafka in the chart [in our deployment documentation](https://posthog.com/docs/self-host/deploy/configuration#kafka).
 
 ### Using internal Kafka
 
