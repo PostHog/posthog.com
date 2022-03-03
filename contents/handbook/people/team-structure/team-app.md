@@ -10,7 +10,7 @@ Makers everywhere get better at building products because of posthog
 * Onboarding is as easy as a video game
 * Tight integration with developer workflows
 * No more complex than it is today
-* Using PostHov sparks joy
+* Using PostHog sparks joy
 * We support trillion event querying
 
 ## 6 Month Goals
