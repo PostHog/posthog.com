@@ -230,6 +230,32 @@
             "url": "",
             "children": [
                 {
+                    "name": "Databases",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Event ingestion",
+                            "url": "/handbook/engineering/databases/event-ingestion"
+                        },
+                        {
+                            "name": "Making schema changes safely",
+                            "url": "/handbook/engineering/databases/schema-changes"
+                        },
+                        {
+                            "name": "Query performance optimization",
+                            "url": "/handbook/engineering/databases/query-performance-optimization"
+                        },
+                        {
+                            "name": "Writing async migrations",
+                            "url": "/handbook/engineering/databases/async-migrations"
+                        },
+                        {
+                            "name": "ClickHouse event table migrations",
+                            "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        }
+                    ]
+                },
+                {
                     "name": "Development process",
                     "url": "/handbook/engineering/development-process"
                 },
@@ -278,10 +304,6 @@
                     "url": "/handbook/engineering/production-access"
                 },
                 {
-                    "name": "Making schema changes safely",
-                    "url": "/handbook/engineering/schema-changes"
-                },
-                {
                     "name": "AWS tips and FAQ",
                     "url": "/handbook/engineering/aws"
                 },
@@ -302,20 +324,8 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "Query performance optimization",
-                    "url": "/handbook/engineering/query-performance-optimization"
-                },
-                {
                     "name": "Disruption Messages",
                     "url": "/handbook/engineering/disruption-messages"
-                },
-                {
-                    "name": "Writing async migrations",
-                    "url": "/handbook/engineering/async-migrations"
-                },
-                {
-                    "name": "Event ingestion",
-                    "url": "/handbook/engineering/event-ingestion"
                 }
             ]
         },
@@ -536,6 +546,10 @@
                                 {
                                     "name": "Helm chart configuration",
                                     "url": "/docs/self-host/deploy/configuration"
+                                },
+                                {
+                                    "name": "Deploying ClickHouse using Altinity.Cloud",
+                                    "url": "/docs/self-host/configure/using-altinity-cloud"
                                 }
                             ]
                         },
