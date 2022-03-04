@@ -29,7 +29,7 @@ Product development at PostHog is engineering-led. All projects and [features ha
 
 ### Execution
 
-* **Context** - Gather and summarize customer, company and industry context into clear actionable opinions to inform product decisions.
+* **Context** - Gather and summarize customer, company and industry context into clear actionable opinions which inform product decisions.
 * **Unblock** - Identify bottlenecks and remove them, make fast and thorough calls on the toughest product decisions.
 * **Challenge** - Challenge the team to think bigger, solve the most impactful problems and stretch their own skills.
 * **Fill Gaps** - If we don't have a role for something but it needs to be done to ship a great product, do it.
