@@ -1200,7 +1200,6 @@
     from = "/handbook/engineering/databases/async-migrations"
     to = "/handbook/engineering/async-migrations"
 
-
 # Added: 2022-03-03
 [[redirects]]
     from = "/handbook/engineering/databases/event-ingestion"
@@ -1211,7 +1210,6 @@
 [[redirects]]
     from = "/handbook/engineering/databases/query-performance-optimization"
     to = "/handbook/engineering/query-performance-optimization"
-
 
 # Added: 2022-03-03
 [[redirects]]
