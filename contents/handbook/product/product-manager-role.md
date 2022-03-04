@@ -33,4 +33,4 @@ Product development at PostHog is engineering-led. All projects and [features ha
 * **Unblock** - Identify and remove bottlenecks to enable fast calls on the toughest product decisions.
 * **Challenge** - Challenge the team to think bigger, solve the most impactful problems and stretch their own skills.
 * **Fill Gaps** - If we don't have a role for something but it needs to be done to ship a great product, do it.
-* **Communicate** - Over-communicate, over-transparently
+* **Communicate** - Over-communicate, over-transparently.
