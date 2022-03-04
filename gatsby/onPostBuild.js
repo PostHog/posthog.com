@@ -209,7 +209,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             return {
                 username,
                 avatar:
-                    avatar.absolutePath &&
+                    avatar?.absolutePath &&
                     fs.readFileSync(avatar.absolutePath, {
                         encoding: 'base64',
                     }),
