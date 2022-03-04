@@ -6,15 +6,13 @@ showTitle: true
 
 <FeatureAvailability allPlans />
 
-The most critical thing that PostHog does is to capture events from your website or application. For example, if a user clicks a button or visits a page – those are events.
+The most important thing that PostHog does is to capture events from your website or application. An event is basically any action a user takes on your website or in your application - if they click a button or visits a page, that's an event.
 
 ## Live events
 
 ![Events table](../../images/features/events/live-events.png)
 
-To see your live events table, click 'Events' on the left sidebar.
-
-Here you will see a live feed of Events as they are happening. 
+To see your live events table, click 'Events' on the left sidebar. Here you will see a live feed of Events as they are happening. 
 
 ## Event properties
 
@@ -22,42 +20,28 @@ You can view the properties of each event by clicking on the items in the ‘Eve
 
 ![Events table](../../images/features/events/event-properties.png)
 
-You can also click each person/user to view a their entire event history.
+You can also click each user to view a their entire event history.
 
 ## Event filtering
 
-You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts). To focus in on specific events that are ocurring in your project.
+You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
 
 ## Autocapture event tracking
 
-PostHog has the capability to capture all front end events automatically from a simple JavaScript snippet.
+PostHog can capture all front-end events automatically using a simple [JavaScript snippet](/docs/integrate/client/snippet-installation). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
 
-This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
-
-#### Limitations of utocapture
+#### Limitations of autocapture
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
 
 Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags. 
 
-If you need to collect more data from inputs, you should use [Custom events and Actions](/docs/user-guides/actions).
+If you need to collect more data from inputs, you should use [custom events and Actions](/docs/user-guides/actions).
 
 ## Push-based event tracking
 
-Most users of PostHog will want to combine their back-end data, such as user information, with the front end actions of those users in their UI.
+Most users of PostHog will want to combine their back-end data, such as user information, with the front end actions of those users in their UI. There are three ways of passing data to PostHog:
 
-There are three ways of passing data to PostHog – the API or through the JS snippet.
-
-### API
-
-Visit our [API documentation](/docs/api/overview).
-
-### JS snippet
-
-The snippet installation page explains how to push events through the front end.
-
-In particular, we recommend pushing basic user information, such as email address, to make it much easier to understand the analytics.
-
-### Libraries
-
-We have specific [client and server-side libraries](https://posthog.com/docs/integrate) for may different platforms and languages.
+- Our [API](/docs/api/overview)
+- JS [snippet](/docs/integrate/client/snippet-installation)
+- Client- and server-side [libraries](/docs/integrate)
