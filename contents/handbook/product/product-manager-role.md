@@ -17,7 +17,7 @@ Product development at PostHog is engineering-led. All projects and [features ha
 
 * **Accelerating** - They're always looking for opportunities push the team to ship faster, with greater impact and quality. 
 * **Empowering** - They empower others to make great decisions and elevate their ambition through context and coaching.
-* **Thoughtful** - Deeply consider the implications and motivations of product decisions and tailor their approach to get the most out of every team member.
+* **Thoughtful** - They carefully consider the implications and motivations of product decisions and tailor their approach to get the most out of every team member.
 
 ## What do they do?
 
