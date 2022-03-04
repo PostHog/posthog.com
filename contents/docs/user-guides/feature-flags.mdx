@@ -6,7 +6,7 @@ showTitle: true
 
 <FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
 
-Feature Flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application. Feature Flags can also help you control access to certain features in your product (e.g. only show paid features to users with an active subscription).
+Feature Flags allow you to safely deploy and roll back new features. It means you can ship the code for new features and then slowly roll them out to your users. If something has gone wrong, you can roll back without having to re-deploy your application. Feature Flags can also help you control access to certain parts in your product (e.g. only show paid features to users with an active subscription).
 
 > **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
@@ -20,11 +20,11 @@ For a comprehensive step-by-step tutorial on how to use Feature Flags, check out
 
 ## Creating Feature Flags
 
-In the sidebar, go to 'Experiments' and click '+ New Feature Flag'.
+In the sidebar, go to 'Feature Flags' and click '+ New Feature Flag'.
 
 Think of a descriptive name and select how you want to roll out your feature.
 
-![Create feature flags](../../images/features/feature-flags/experiments-page.png)
+![Create feature flags](../../images/features/feature-flags/feature-flags-page.png)
 
 ## Implementing the Feature Flag
 
@@ -36,9 +36,9 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-What you do inside that if statement is up to you. You might change the CSS of a button, hide an entire section, or move things around.
+What you do inside that if statement is up to you. You might change the CSS of a button, hide an entire section, or move elements around on the page.
 
-Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, _except_ the very first time a user visits your site.
+Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags which apply. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, _except_ the very first time a user visits your site.
 
 To combat that, there's a callback you can use to wait for the flags to come in:
 
@@ -51,11 +51,9 @@ posthog.onFeatureFlags(function () {
 })
 ```
 
-> **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the 'Project Settings' page in PostHog.
-
 ## Using locally
 
-To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
+To test feature flags locally, you can open your developer tools and override the feature flags. You will get a warning that you're manually overriding feature flags.
 
 ```js
 posthog.feature_flags.override(['feature-flag-1', 'feature-flag-2'])
@@ -79,8 +77,8 @@ posthog.feature_flags.getFlags()
 
 There are three options for deciding who sees your new feature. You can roll out the feature to:
 
-1. A fixed percentage of users,
-1. A set of users filtered based on their user properties,
+1. A fixed percentage of users
+1. A set of users filtered based on their user properties or a cohort (based on user properties)
 1. A combination of the two
 
 ### Roll out to a percentage of users
@@ -101,7 +99,7 @@ By combining user properties and percentage of users you can determine something
 
 ## De-activating properties
 
-If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures **no users** will have the flag enabled.
+If the feature has caused a problem, or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures **no users** will have the flag enabled.
 
 ## Feature flag persistence
 
