@@ -30,7 +30,6 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
     ```
 
 #### Troubleshooting
-
 If the resize didn't work check for errors in the ClickHouse operator pod.
 
 This procedure doesn't work to decrease a volume. If you try, the disk won't be resized and the following errors can be seen in the ClickHouse operator pod
