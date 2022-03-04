@@ -11,7 +11,7 @@ The role of a Product Manager varies enormously by individual and organization, 
 
 ## Why do we have Product Managers?
 
-Product development at PostHog is engineering led, all new projects and existing [features have an engineering owner](/handbook/engineering/feature-ownership) who is the "informed captain" making the final call on everything that they build. Product Managers ensure these owners have the company, industry and customer context they need to make great decisions whilst challenging them to move faster and think bigger.
+Product development at PostHog is engineering-led. All projects and [features have an engineering owner](/handbook/engineering/feature-ownership) who is the "informed captain" and makes the final call on everything they build. Product Managers ensure these owners have the company, industry and customer context they need to make great decisions, whilst also challenging them to move faster and think bigger.
 
 ## How do they act?
 
