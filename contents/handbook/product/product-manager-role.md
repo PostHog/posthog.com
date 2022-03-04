@@ -23,7 +23,7 @@ Product development at PostHog is engineering-led. All projects and [features ha
 
 ### Strategy
 
-* **Direction** - Set and align the team / company on the most impactful and exciting direction.
+* **Direction** - Align the team and company on the most impactful and exciting direction.
 * **Goals & Metrics** - Set and align the team / company on ambitious goals and metrics to validate our progress.
 * **New Opportunities** - Find new, impactful and exciting opportunities for the team and company to capitalize on.
 
