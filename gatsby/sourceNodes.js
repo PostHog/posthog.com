@@ -1,10 +1,50 @@
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
+const { MenuBuilder } = require('redoc')
 const { createClient } = require('@supabase/supabase-js')
 const xss = require('xss')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode, createParentChildLink } = actions
+
+    if (process.env.POSTHOG_APP_API_KEY) {
+        const api_endpoints = await fetch('https://app.posthog.com/api/schema/', {
+            headers: {
+                Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+                accept: 'application/json',
+            },
+        }).then((res) => res.json())
+        const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
+        let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+        all_endpoints
+        all_endpoints.forEach((endpoint) => {
+            const node = {
+                id: createNodeId(`api_endpoint-${endpoint.name}`),
+                internal: {
+                    type: `api_endpoint`,
+                    contentDigest: createContentDigest({
+                        items: endpoint.items,
+                    }),
+                },
+                items: JSON.stringify(
+                    endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
+                ),
+                url: '/docs/api/' + endpoint.name.replace('_', '-'),
+                name: endpoint.name,
+            }
+            createNode(node)
+        })
+        createNode({
+            id: createNodeId(`api_endpoint-components`),
+            internal: {
+                type: `ApiComponents`,
+                contentDigest: createContentDigest({
+                    components: api_endpoints.components,
+                }),
+            },
+            components: JSON.stringify(api_endpoints.components),
+        })
+    }
 
     if (process.env.WORKABLE_API_KEY) {
         const { jobs } = await fetch('https://posthog.workable.com/spi/v3/jobs?state=published', {
@@ -250,7 +290,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                             return {
                                 name: user?.user?.profile?.first_name || user?.user?.name,
                                 rawBody,
-                                imageURL: user.user.profile.image_72,
+                                imageURL: user?.user?.profile?.image_72,
                                 ts: reply.ts,
                                 fullName: user?.user?.profile?.real_name,
                             }
