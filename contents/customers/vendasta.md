@@ -20,7 +20,7 @@ This rapid growth hasn’t come without some friction however, especially for th
 
 “We had some very talented people who were spending a lot of time just on simple requests, like how many visitors per week,” said Vendasta Staff Developer Dylan Knowles. “It’s not a problem when you have a single team, but when you have 20 product teams? It doesn’t scale well.”
 
-Recognizing the need for a self-serve solution Kedar Page, a Data Scientist at Vendasta, pushed to move off Snowplow and find an analytics platform which was more suitable for Vendasta’s scale.
+Recognizing the need for a self-serve solution, Kedar Page, a Data Scientist at Vendasta, pushed to move off Snowplow and find an analytics platform which was more suitable for Vendasta’s scale.
 
 “PMs, designers and strategists wanted insights at their fingertips, but it invariably required an analyst and the turnaround time wasn’t quick enough to facilitate data driven decision making,” explained Kedar. “So, I started exploring tools that would enable non-analysts to get the information they needed.”
 
