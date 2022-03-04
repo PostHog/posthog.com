@@ -874,10 +874,6 @@
                     "url": "/docs/user-guides"
                 },
                 {
-                    "name": "Application settings",
-                    "url": "/docs/user-guides/application-settings"
-                },
-                {
                     "name": "Actions",
                     "url": "/docs/user-guides/actions"
                 },
@@ -918,6 +914,10 @@
                     "url": "/docs/user-guides/group-analytics"
                 },
                 {
+                    "name": "Heatmaps",
+                    "url": "/docs/user-guides/toolbar"
+                },
+                {
                     "name": "Lifecycle",
                     "url": "/docs/user-guides/lifecycle"
                 },
@@ -948,6 +948,10 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
+                },
+                 {
+                    "name": "Settings",
+                    "url": "/docs/user-guides/application-settings"
                 },
                 {
                     "name": "SSO & SAML",
