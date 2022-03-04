@@ -2,6 +2,7 @@ import { Calendar } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import SliderNav from 'components/SliderNav'
 import { graphql, useStaticQuery } from 'gatsby'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
 import Slider from 'react-slick'
@@ -16,7 +17,7 @@ const SliderItem = ({ image, date, url, authors, title }) => {
                             return (
                                 <li key={id} className="flex space-x-2 items-center">
                                     <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
-                                        <img className="absolute w-full h-full inset-0 object-cover" src={image} />
+                                        <GatsbyImage image={getImage(image)} />
                                     </div>
                                     <span className="author text-[15px] font-semibold opacity-50">{name}</span>
                                 </li>
@@ -51,7 +52,6 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
         infinite: false,
         arrows: false,
         speed: 500,
-        slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: false,
         variableWidth: true,
@@ -61,25 +61,26 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
     const handleChange = (_, newIndex) => {
         setActiveSlide(newIndex)
     }
-
+    const breakpoints = useBreakpoint()
+    const slidesToShow = breakpoints.lg ? 1 : breakpoints['2xl'] ? 2 : 3
     return (
         tutorials.length > 1 && (
             <div>
                 <div className="flex justify-between items-end mb-6">
                     <h4 className="m-0">{topic.charAt(0).toUpperCase() + topic.slice(1)} tutorials</h4>
-                    {tutorials.length > 1 && (
+                    {tutorials.length > 1 && tutorials.length > slidesToShow && (
                         <SliderNav
                             handlePrevious={() => sliderRef.current.slickPrev()}
                             handleNext={() => sliderRef.current.slickNext()}
                             currentIndex={activeSlide}
-                            length={tutorials.length - 1}
+                            length={tutorials.length - slidesToShow}
                             className="!my-0"
                         />
                     )}
                 </div>
 
-                <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                    <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
+                <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark w-screen">
+                    <Slider beforeChange={handleChange} ref={sliderRef} slidesToShow={slidesToShow} {...sliderSettings}>
                         {tutorials.map((tutorial) => {
                             const {
                                 frontmatter: { featuredImage, authors, title },
@@ -109,7 +110,7 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
 
 export const query = graphql`
     query TutorialsSliderQuery {
-        allMdx(filter: { fields: { slug: { regex: "/^/docs/tutorials/" } } }, limit: 1000) {
+        allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }, limit: 1000) {
             nodes {
                 id
                 fields {
@@ -120,7 +121,11 @@ export const query = graphql`
                     topics
                     authors: authorData {
                         id
-                        image
+                        image {
+                            childImageSharp {
+                                gatsbyImageData(width: 36, height: 36)
+                            }
+                        }
                         name
                     }
                     featuredImage {

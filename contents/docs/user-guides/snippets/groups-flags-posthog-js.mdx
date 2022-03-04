@@ -1,0 +1,10 @@
+If you have updated tracking, you can use group-based feature flags as normal in [posthog-js](https://posthog.com/docs/integrate/client/js).
+
+```js
+if (posthog.isFeatureEnabled('new-groups-feature')) {
+    // do something
+}
+```
+
+To check flag status for a different group, first switch the active group via a `posthog.group()` call.
+

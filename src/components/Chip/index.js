@@ -11,7 +11,17 @@ const chip = (className = '') => cntl`
     ${className}
 `
 
-export default function Chip({ onClick, text, children, active, href, size = 'sm', icon = null, className = '' }) {
+export default function Chip({
+    onClick,
+    text,
+    children,
+    active,
+    href,
+    size = 'sm',
+    icon = null,
+    className = '',
+    state,
+}) {
     return (
         <CallToAction
             size={size}
@@ -19,6 +29,7 @@ export default function Chip({ onClick, text, children, active, href, size = 'sm
             href={href}
             type={active ? 'primary' : 'outline'}
             className={chip(className)}
+            state={state}
         >
             {icon}
             <span>{text || children}</span>

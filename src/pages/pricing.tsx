@@ -1,34 +1,27 @@
-import React from 'react'
-import { SEO } from '../components/seo'
-import { CallToAction } from 'components/CallToAction'
-import { PricingHero } from '../components/Pricing/PricingHero'
-import { PricingTable } from '../components/Pricing/PricingTable'
-import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
-import { PlanComparison } from '../components/Pricing/PlanComparison'
-import { Savings } from '../components/Pricing/Savings'
-import { FAQs } from '../components/Pricing/FAQs'
-import { Quote } from '../components/Pricing/Quote'
-import { Footer } from '../components/Footer'
-import { useLocation } from '@reach/router'
-import '../components/Pricing/styles/index.scss'
+import { heading } from 'components/Home/classes'
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import { heading } from 'components/Home/classes'
+import React from 'react'
+import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
+import { FAQs } from '../components/Pricing/FAQs'
+import { PlanComparison } from '../components/Pricing/PlanComparison'
+import { PricingTable } from '../components/Pricing/PricingTable'
+import { Quote } from '../components/Pricing/Quote'
+import '../components/Pricing/styles/index.scss'
+import { SEO } from '../components/seo'
 
 const PricingNew = (): JSX.Element => {
-    const { hash } = useLocation()
-    const SHOW_SCALE_HASH = '#scale'
     return (
         <Layout>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section className="mt-12 md:mt-24 px-5">
                 <h1 className={heading()}>Pricing</h1>
                 <h2 className="my-12 text-lg text-center">
-                    <span className="opacity-50">All plans include</span> <span className="text-yellow">unlimited</span>{' '}
-                    events, tracked users, <span className="opacity-50">and</span> teammates.
+                    <span className="opacity-50">All plans include</span> event autocapture, tracked users,{' '}
+                    <span className="opacity-50">and</span> teammates.
                 </h2>
 
-                <PricingTable showScaleByDefault={hash === SHOW_SCALE_HASH} />
+                <PricingTable />
             </section>
             <CloudVsSelfHost className="mb-28 md:pt-28 md:pb-14" />
             <h3 className="relative text-almost-black text-center mb-6">Compare plans</h3>

@@ -35,11 +35,9 @@ Goal-wise, I am focused in becoming a better IC/engineer by:
 - Creating something fundamentally useful and amplifications and maintaining it
 - Empowering the people around me to make great decisions
 
-I don't optimize for but also don't mind leading small teams. Fundamentally it needs to support the goal of "becoming a better engineer" - tackling more ambitious things is one way to achieve that..
-
 ## Personality and quirks
 
-- I am both self-deprecating and huumble in person. I honestly think all adults are just faking it :)
+- I am both self-deprecating and humble in person. I honestly think all adults are just faking it :)
 - I am very direct in my written word, it can sound harsh.
     - This also known as the Estonian style of communication.
     - I both assume and hope I'm attributed good intent - the goal is to provide clear and actionable feedback, not punish.
@@ -52,7 +50,7 @@ I don't optimize for but also don't mind leading small teams. Fundamentally it n
     - I'll call you out for lack of testing/clarity/expectation setting on your pull requests
 - I don't know what's valuable to document vs not. I rely heavily on people around me to set that context.
 - I use a well-oiled Linux machine and stay well away from Apple hardware and software.
-- I have a small child and try to set clear and strict boundaries between work and personal life. It is hard to schedule calls with me for US-based people.
+- I have a small child and try to set clear and strict boundaries between work and personal life. Meetings with US-based I'll try to schedule to be early in your day (e.g. 9 or 10am East Coast).
 - I care deeply about the well-being of people in our team - take care of yourself, this is a marathon not a sprint.
 
 

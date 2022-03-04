@@ -8,7 +8,7 @@ export default function SessionRecording() {
     return (
         <Section id="session-recording">
             <div className="md:w-2/5">
-                <h3>Session recording</h3>
+                <h3>Session Recording</h3>
                 <p>
                     Grab the popcorn: Play back individual user sessions to watch how users interact with your product.
                 </p>
@@ -18,7 +18,7 @@ export default function SessionRecording() {
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
                     to="/product/session-recording"
                 >
-                    Learn more about session recording
+                    Learn more about Session Recording
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">

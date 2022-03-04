@@ -50,11 +50,17 @@ export default function SubmenuItem({ item }) {
                                 }`}
                             >
                                 {items.map((item, index) => {
-                                    const { icon, title, url } = item
+                                    const { icon, title, url, badge } = item
 
                                     return (
                                         <li key={index}>
-                                            <DeployOption url={url} title={title} icon={icon} disablePrefetch />
+                                            <DeployOption
+                                                url={url}
+                                                title={title}
+                                                icon={icon}
+                                                disablePrefetch
+                                                badge={badge}
+                                            />
                                         </li>
                                     )
                                 })}

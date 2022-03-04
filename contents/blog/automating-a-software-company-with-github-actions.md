@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Engineering"]
+categories: ["Engineering", "Guides"]
 author: ["michael-matloka"]
 featuredImage: ../images/blog/automating-software-company-github-actions.png
 featuredImageType: full

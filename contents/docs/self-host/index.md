@@ -1,26 +1,22 @@
 ---
-title: Self-Host PostHog
+title: Self-host PostHog
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
 
+Getting a production environment of PostHog up and running is probably one of the first things you want to do! This section goes through the different options available depending on where you'll be hosting PostHog, and includes guides on several of the most popular services. 
 
-## Deploy
+> Note: if you self-host PostHog, you'll be managing the service yourself. This means running regular upgrades, scaling as needed etc. If you are less technical or looking for a more hands-off experience, we recommend checking out [PostHog Cloud](/docs/cloud).
 
-Getting a shiny, running production environment of PostHog is probably one the first things you want to do!
+## Deployment options
 
-Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services.
-
-### Deployment options
-
+- [Hobby](/docs/self-host/deploy/hobby) - _recommended for testing or very small hobby projects (<100k events/month)_
+- [DigitalOcean](/docs/self-host/deploy/digital-ocean) - _recommended for production use cases if you don't have a preference_
 - [AWS](/docs/self-host/deploy/aws)
-- [Azure](/docs/self-host/deploy/azure)
-- [DigitalOcean](/docs/self-host/deploy/digital-ocean)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
-- [Other platforms](/docs/self-host/deploy/other)
-
-If you don't know what to pick [DigitalOcean](/docs/self-host/deploy/digital-ocean) is likely the simplest.
+- [Azure](/docs/self-host/deploy/azure) - _in beta_
+- [Other platforms](/docs/self-host/deploy/other) - _in beta_
 
 ## Configure
 
@@ -31,13 +27,3 @@ There are various ways to configure and personalize your PostHog instance to bet
 - [Securing PostHog](/docs/self-host/configure/securing-posthog)
 - [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
 - [Email configuration](/docs/self-host/configure/email)
-
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/joe.png"
-        size="md"
-        name="Joe Saunderson"
-        title="Software Engineer, Mention Me"
-        quote={`“We self-hosted PostHog because we needed to keep everything on our infrastructure. Our clients’ privacy is very important to us and we have obligations to store their data safely.”`}
-    />
-</BorderWrapper>

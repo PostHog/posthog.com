@@ -25,6 +25,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
 import { ContactForm } from './components/ContactForm'
@@ -37,7 +38,7 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
-import { DocsSearch } from './components/DocsSearch'
+import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -46,7 +47,6 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
-import { GiveBackFriday } from './components/GiveBackFriday'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
@@ -68,6 +68,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
+import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
@@ -92,11 +93,14 @@ import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
+import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
+import { Subscribe } from './components/Subscribe'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableOpenRoles } from './components/WorkableOpenRoles'
@@ -129,6 +133,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityQuestions,
     CompensationCalculator,
     Contact,
     ContactForm,
@@ -141,7 +146,7 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
-    DocsSearch,
+    FeatureAvailability,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -150,7 +155,6 @@ export const shortcodes = {
     FooterCTA,
     GetStartedModal,
     GithubIcon,
-    GiveBackFriday,
     Heading,
     HiddenSection,
     Home,
@@ -172,6 +176,7 @@ export const shortcodes = {
     PageHeader,
     PlanComparisonTable,
     PostCard,
+    PostLayout,
     CloudVsSelfHost,
     FAQs,
     PlanComparison,
@@ -196,11 +201,14 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     StarRepoButton,
+    StarUsBanner,
     StartNowButton,
     Structure,
+    Subscribe,
     TableOfContents,
     TeamQuote,
     Tooltip,
+    Tutorials,
     TutorialsSlider,
     VisitLibrary,
     WorkableOpenRoles,

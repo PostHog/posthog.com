@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/first-10-customers.png
 featuredImageType: full
+categories: ["Guides", "Startups"]
 ---
 
 Creating a product that people need and are willing to pay for is hard. At PostHog, it took us months to get to 10 paying customers — this after [pivoting](https://posthog.com/blog/story-about-pivots) several times before we finally landed on product analytics. We tried a million things and took some hard knocks, so here are a few shortcuts to get to customer #10 faster.
@@ -51,7 +52,7 @@ Traffic is crucial to getting eyeballs on your product and driving subscriptions
 
 Writing is also a forcing function on your thinking process. Better writing leads to better thinking, which sharpens your communication skills and improves your product planning. Make it a habit for every member of your team (not just the founders) to contribute to your blog, YouTube channel, or online community periodically — once a month is good. They can write about some aspect of their role and share it with their networks to attract new customers and build their individual content portfolios.
 
-At PostHog, we use our [blog](https://posthog.com/blog) to tell our [company story](https://posthog.com/blog/before-yc), announce new product updates, and talk about startup life and culture - like with this post. Get on social media and connect with other founders in your space and potential customers. We’re on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://www.linkedin.com/company/posthog) - connect with us!
+At PostHog, we use our [blog](https://posthog.com/blog) to tell our [company story](https://posthog.com/blog/before-yc), announce new Product updates, and talk about startup life and culture - like with this post. Get on social media and connect with other founders in your space and potential customers. We’re on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://www.linkedin.com/company/posthog) - connect with us!
 
 ### Join the right online communities
 Being active in the right online communities gets you seen by the right crowd. A good rule of thumb is to go where problems are discussed online. Communities include GitHub, StackOverflow, Reddit, Quora, ProductHunt, and Slack communities are all great places to start. Engage with other members, help them solve their problems, and post about your product where appropriate. This is one of the highest-leverage tasks you can perform in the early days. Community visibility pays for itself many-fold down the line.

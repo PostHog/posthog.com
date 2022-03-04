@@ -1,7 +1,8 @@
-const replacePath = require('./utils')
+const { replacePath, flattenMenu } = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
 const Slugger = require('github-slugger')
+const { default: fetch } = require('node-fetch')
 
 module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
@@ -12,15 +13,29 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
+    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
+    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
+    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
+    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
+    const Question = path.resolve(`src/templates/Question.js`)
     const result = await graphql(`
         {
-            allMdx(limit: 1000) {
+            allMdx(
+                filter: {
+                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    frontmatter: { title: { ne: "" } }
+                }
+                limit: 1000
+            ) {
                 nodes {
                     id
                     slug
                 }
             }
-            handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
                 nodes {
                     id
                     headings {
@@ -32,7 +47,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            apidocs: allApiEndpoint {
+                nodes {
+                    id
+                    name
+                    url
+                }
+            }
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -42,6 +64,24 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fields {
                         slug
                     }
+                }
+            }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+                categories: group(field: frontmatter___topics) {
+                    fieldValue
+                }
+                contributors: group(field: frontmatter___authorData___name) {
+                    fieldValue
                 }
             }
             product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
@@ -63,7 +103,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            blogPosts: allMdx(filter: { fields: { slug: { regex: "/^/blog/" } } }) {
+            blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
                 nodes {
                     id
                     fields {
@@ -80,6 +120,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         children {
                             children {
                                 children {
+                                    children {
+                                        children {
+                                            name
+                                            url
+                                        }
+                                        name
+                                        url
+                                    }
                                     name
                                     url
                                 }
@@ -96,6 +144,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         children {
                             children {
                                 children {
+                                    children {
+                                        children {
+                                            name
+                                            url
+                                        }
+                                        name
+                                        url
+                                    }
                                     name
                                     url
                                 }
@@ -125,28 +181,22 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     slug
                 }
             }
+            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
+                nodes {
+                    id
+                    slug
+                }
+            }
+            questions: allQuestion {
+                nodes {
+                    id
+                }
+            }
         }
     `)
 
     if (result.errors) {
         return Promise.reject(mdPagesResult.errors)
-    }
-
-    function flattenMenu(items, breadcrumb = []) {
-        return items.reduce((acc, item) => {
-            if (item.url) {
-                acc.push({ url: item.url, name: item.name, breadcrumb })
-            }
-            if (item.children) {
-                acc.push(
-                    ...flattenMenu(item.children, [
-                        ...breadcrumb,
-                        { name: item.name, url: item.url || item.children[0].url },
-                    ])
-                )
-            }
-            return acc
-        }, [])
     }
 
     function formatToc(headings) {
@@ -210,6 +260,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
                 tableOfContents,
+                slug,
             },
         })
     })
@@ -240,6 +291,87 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
+                slug,
+            },
+        })
+    })
+
+    result.data.apidocs.nodes.forEach((node) => {
+        const slug = replacePath(node.url)
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
+
+        createPage({
+            path: slug,
+            component: ApiEndpoint,
+            context: {
+                id: node.id,
+                slug,
+                menu: docsMenu,
+                next,
+                previous,
+                // menu: docsMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                // tableOfContents,
+                // slug,
+            },
+        })
+    })
+
+    const tutorialsPageViews = await fetch(
+        'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'
+    ).then((res) => res.json())
+
+    result.data.tutorials.nodes.forEach((node) => {
+        const tableOfContents = formatToc(node.headings)
+        const { slug } = node.fields
+        let pageViews
+        tutorialsPageViews.items[0].result.some((insight) => {
+            if (insight.breakdown_value.includes(slug)) {
+                pageViews = insight.aggregated_value
+                return true
+            }
+        })
+        createPage({
+            path: replacePath(node.fields.slug),
+            component: TutorialTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                pageViews,
+                slug,
+            },
+        })
+    })
+
+    result.data.tutorials.categories.forEach(({ fieldValue }) => {
+        const slug = `/tutorials/categories/${slugify(fieldValue, { lower: true })}`
+        createPage({
+            path: slug,
+            component: TutorialsCategoryTemplate,
+            context: {
+                activeFilter: fieldValue,
+            },
+        })
+    })
+
+    result.data.tutorials.contributors.forEach(({ fieldValue }) => {
+        const slug = `/tutorials/contributors/${slugify(fieldValue, { lower: true })}`
+        createPage({
+            path: slug,
+            component: TutorialsAuthorTemplate,
+            context: {
+                activeFilter: fieldValue,
             },
         })
     })
@@ -253,6 +385,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                slug,
             },
         })
     })
@@ -316,5 +449,27 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 },
             })
         }
+    })
+    result.data.hostHog.nodes.forEach((node) => {
+        const { id, slug } = node
+        if (slug) {
+            createPage({
+                path: slug,
+                component: HostHogTemplate,
+                context: {
+                    id,
+                },
+            })
+        }
+    })
+    result.data.questions.nodes.forEach((node) => {
+        const { id } = node
+        createPage({
+            path: `questions/${id}`,
+            component: Question,
+            context: {
+                id,
+            },
+        })
     })
 }

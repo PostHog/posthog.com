@@ -9,6 +9,7 @@
         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
     */
+
     /* PRODUCTION */
     src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
             format('woff2 supports variations'),
@@ -444,7 +445,7 @@ pre {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 2rem !important;
+    margin-bottom: 2rem;
     font-size: 0.85rem;
     line-height: 1.42;
     background: hsla(0, 0%, 0%, 0.04);
@@ -452,6 +453,11 @@ pre {
     overflow: auto;
     word-wrap: normal;
     padding: 1.45rem;
+
+    &.inline {
+        display: inline-block;
+        margin: 0;
+    }
 }
 table {
     margin-left: 0;
@@ -1544,14 +1550,6 @@ for all other rows the portrait image wraps above bio*/
 .team-left-text,
 .team-right-text {
     min-width: 280px;
-}
-
-.team-left-bio,
-.team-right-bio {
-    height: 250px;
-    padding-right: 20px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .team-left-image,

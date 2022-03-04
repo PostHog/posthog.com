@@ -5,7 +5,7 @@ import { Spacer } from '../Spacer'
 import { CalendlyEventListener, EventScheduledEvent, InlineWidget } from 'react-calendly'
 
 export const DemoScheduler = ({
-    iframeSrc = 'https://calendly.com/yakko/posthog-demo',
+    iframeSrc = 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
 }: {
     iframeSrc?: string
 }): JSX.Element => {

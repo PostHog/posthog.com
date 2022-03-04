@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/wren.png
 featuredImageType: full
+categories: ["Inside PostHog"]
 ---
 
 Earlier this month, we finished our first PostHog offsite of the year near Porto, in Portugal. Team members travelled from America, Estonia, The United Kingdom, and Poland to spend a week living together and, in many cases, meeting for the first time.

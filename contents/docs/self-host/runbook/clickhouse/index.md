@@ -13,6 +13,9 @@ We internally use it to store information like:
 
 and to power all our analytics queries.
 
+## Scaling up
+Check out the [configuration](/docs/self-host/deploy/configuration#scaling-up) section of our self-deploy docs!
+
 ## Dictionary
 * sharding: is a method for horizontally partitioning a dataset
 * shard: holds a partition of the dataset

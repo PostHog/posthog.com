@@ -1,0 +1,47 @@
+Not all libraries support group analytics yet, but you can work around this issue by sending events in specific formats.
+
+This section uses our [Capture APIs](https://posthog.com/docs/api/post-only-endpoints) for examples but you can adapt this
+approach to any library.
+
+#### Capturing events with groups
+
+```shell
+POST https://[your-instance].com/capture/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "event": "[event name]",
+    "properties": {
+        "distinct_id": "[your users' distinct id]",
+        "key1": "value1",
+        "key2": "value2",
+        "$groups": {
+            "company": "id:5"
+        }
+    }
+}
+
+```
+
+#### Updating group properties
+
+```shell
+POST https://[your-instance].com/capture/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "[your users' distinct id]",
+        "$group_type": "company",
+        "$group_key": "id:5",
+        "$group_set": {
+            "company_name": "Awesome Inc",
+            "employees": 11
+        }
+    }
+}
+
+```

@@ -21,9 +21,9 @@ If resignation is the only solution after you have discussed your concerns, plea
 
 ## Involuntary departure
 
-In this case, we require the team member to leave. 
+In this case, we are letting the team member go. 
 
-This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. 
+This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. If the decision is down to performance issues, we will have already communicated feedback to the individual and given them time to take the feedback on board. However, performance issues sadly can't always be resolved, which means we might ultimately need to end someone's employment. 
 
 Once the team member has been with us for 3 months, we will provide a 4-month [notice](https://posthog.com/handbook/people/compensation#severance) (otherwise, it will be a month). We will usually ask the team member to stop working immediately, but still pay them a 4-month severance).
 

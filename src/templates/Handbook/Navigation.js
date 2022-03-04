@@ -1,9 +1,9 @@
-import React from 'react'
-import Link from 'components/Link'
-import { DarkModeToggle } from 'components/DarkModeToggle'
-import SearchBar from './SearchBar'
-import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
 import cntl from 'cntl'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
+import Link from 'components/Link'
+import React from 'react'
+import SearchBar from './SearchBar'
 
 const crumbText = (classes = '') => cntl`
     font-bold
@@ -76,23 +76,25 @@ export default function Navigation({
                         })}
                     <Crumb text={title} className="border-r-0" />
                 </ul>
-                <div className="flex-grow border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                <div className="flex-grow">
                     <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
                         <SearchBar base={breadcrumbBase.name.toLowerCase()} />
                     </div>
                 </div>
-                <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
-                    <CommunityLink
-                        icon={<Edit />}
-                        text={'Edit this page'}
-                        url={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
-                    />
-                    <CommunityLink
-                        icon={<Issue />}
-                        text={'Raise an issue'}
-                        url={`https://github.com/PostHog/posthog.com/issues/new?title=${breadcrumbBase.name} feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
-                    />
-                </ul>
+                {filePath && (
+                    <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                        <CommunityLink
+                            icon={<Edit />}
+                            text={'Edit this page'}
+                            url={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
+                        />
+                        <CommunityLink
+                            icon={<Issue />}
+                            text={'Raise an issue'}
+                            url={`https://github.com/PostHog/posthog.com/issues/new?title=${breadcrumbBase.name} feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
+                        />
+                    </ul>
+                )}
                 <DarkModeToggle className="m-0" />
             </div>
         </div>

@@ -103,3 +103,13 @@ In the future, we will split the session into groups in order to manage time bet
 The full team session prioritises openness, breadth and transparency of feedback, as everyone gets to both give and receive feedback in front of the entire team. 
 
 The performance review process centres on a single person for one hour, involves their manager only, and is intended to be more of an in-depth conversation about the future.
+
+## Quarterly team surveys
+
+We introduced quarterly team surveys in Q1 2021 to give everyone the opportunity to share their honest opinion of how things are going. While we all give feedback regularly, we wanted to gather the feedback in a way that allows us to track it over time and see how we progress.
+
+The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and adjusted for our needs. The questions cover categories such as Company Confidence, Culture, Growth and Development etc.
+
+The questions follow a simple linear scale ranging from 1 (strongly disagree) to 5 (strongly agree). We also added an optional comment field, in case there you have more detailed feedback. In line with our values, we have decided to _not_ make this anonymous.
+
+We run the survey at the end of each quarter and share the results with the team afterwards. We also share some high level results on the [people page.](https://posthog.com/handbook/people/team-structure/people)

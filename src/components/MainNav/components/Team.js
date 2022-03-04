@@ -11,7 +11,7 @@ export default function Team() {
                 layout="fixed"
                 objectPosition="left"
                 quality={100}
-                height={60}
+                height={75}
                 src="./images/team.png"
             />
         </div>
