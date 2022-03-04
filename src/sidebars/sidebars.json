@@ -324,6 +324,10 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
+                    "name": "ClickHouse container image for ARM64",
+                    "url": "/handbook/engineering/build-clickhouse-image-for-arm64"
+                },
+                {
                     "name": "Disruption Messages",
                     "url": "/handbook/engineering/disruption-messages"
                 }
