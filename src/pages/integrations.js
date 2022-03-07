@@ -1,4 +1,5 @@
 import Breadcrumbs from 'components/Breadcrumbs'
+import { CallToAction } from 'components/CallToAction'
 import Card from 'components/Card'
 import Checkbox from 'components/Checkbox'
 import { heading, section } from 'components/Home/classes'
@@ -227,10 +228,17 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
                             filters={filters}
                             handleFilterChange={handleFilterChange}
                         />
-                        <Cards data={filteredData || data} />
+                        <div className="flex-grow w-full">
+                            <Cards data={filteredData || data} />
+                            <div className="text-center mt-12">
+                                <h2 className={heading('sm')}>Didn't find the integration you need?</h2>
+                                <CallToAction className="mt-4" to="/docs/plugins/build">
+                                    Build your own!
+                                </CallToAction>
+                            </div>
+                        </div>
                     </div>
                 </section>
-                <h2 className={heading('sm')}>Didn't find the integration you need? Build your own plugin!</h2>
             </div>
         </Layout>
     )
