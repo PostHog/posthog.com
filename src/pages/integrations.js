@@ -230,6 +230,7 @@ export default function Integrations({ data: { allIntegration, allPlugin } }) {
                         <Cards data={filteredData || data} />
                     </div>
                 </section>
+                <h2 className={heading('sm')}>Didn't find the integration you need? Build your own plugin!</h2>
             </div>
         </Layout>
     )
