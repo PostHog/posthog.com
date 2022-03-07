@@ -47,9 +47,9 @@ For a quick install that uses Docker, run the following command:
 
 ## Upgrading
 
-To upgrade PostHog, you can run `./posthog/bin/upgrade`. This will cause a few minutes of downtime.
-
-If `./posthog/bin/upgrade` can't be found, run `cd posthog && git pull origin master && cd ../` first.
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
+```
 
 ## Migrating
 
