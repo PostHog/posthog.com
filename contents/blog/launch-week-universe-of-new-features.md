@@ -42,7 +42,7 @@ Critics are calling it "the most statistically signicant new feature since [a jo
 - **Releasing:** Tuesday, March 22
 - **Directed by:** xxxx
 - **Starring:** Karl-Askel Puulman, Harry Waye and Guido Iaquinti
-- **Introducing:** Sharded ClickHouse and easier self-hosted deploymments
+- **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
 "Incredibly polished" ⭐️⭐️⭐️⭐️⭐️ - Hedgehog Gazette
 
