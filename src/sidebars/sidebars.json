@@ -384,11 +384,7 @@
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "name": "Product announcements",
-                    "url": "/handbook/growth/marketing/product-announcements"
-                },
-                {
-                    "name": "HostHogs (Running Events)",
+                    "name": "Events",
                     "url": "/handbook/growth/marketing/hosthogs"
                 },
                 {
@@ -400,20 +396,24 @@
                             "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                            "name": "Email",
-                            "url": "/handbook/growth/marketing/newsletter"
+                            "name": "Sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
                         },
                         {
                             "name": "Paid ads",
                             "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                            "name": "Press",
-                            "url": "/handbook/growth/marketing/press"
+                            "name": "Product launches",
+                            "url": "/handbook/growth/marketing/product-announcements"
                         },
                         {
-                            "name": "Open-source sponsorship",
-                            "url": "/handbook/growth/marketing/open-source-sponsorship"
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
+                        },
+                        {
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
                         }
                     ]
                 }
