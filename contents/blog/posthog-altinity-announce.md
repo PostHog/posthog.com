@@ -1,5 +1,5 @@
 ---
-date: 2022-03-07
+date: 2022-03-09
 title: PostHog teams up with Altinity
 rootPage: /blog
 sidebar: Blog
@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Release notes", "Product updates"]
+categories: ["Product updates"]
 ---
 
 That’s right, we’re teaming up with Altinity. It’s an exciting new partnership that also marks the launch of the [PostHog Marketplace](/marketplace). Double announcement!
