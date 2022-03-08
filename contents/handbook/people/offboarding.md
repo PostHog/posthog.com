@@ -12,12 +12,11 @@ Very infrequently, we may have long term contractors working for PostHog, acting
 
 In this case, the team member chooses to leave PostHog. 
 
-We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work during that notice period. This is so we have some time to find someone to hire and to enable a handover.
+We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work during that notice period. This is so we have some time to find someone to hire and to enable a handover. Please assume by default we will expect you to work all of this period. In some rare situations, for roles such as recruitment, we may request you work only part of this period - it'd be weird to be recruit people whilst you are just about to leave.
 
 If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the [people team](https://posthog.com/handbook/people/team-structure/people) to discuss your reasons for wanting to leave. We want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
 
 If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your manager or the people team. We will then start a discussion around what is needed for the handover.
-
 
 ## Involuntary departure
 
