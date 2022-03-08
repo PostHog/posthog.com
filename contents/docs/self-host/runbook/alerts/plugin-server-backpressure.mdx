@@ -46,7 +46,7 @@ As such, you should:
 
 Before digging into the specific cause of the alert, consider which side of the backpressure equation is currently having the bigger impact.
 
-Given backpressure is essentially the difference between events processed by the Django server and those processed by the plugin server, backpressure can increase if we're receving more events on the Django end _or_ processing fewer events on the plugin server end (or both at the same time).
+Given backpressure is essentially the difference between events processed by the Django server and those processed by the plugin server, backpressure can increase if we're receiving more events on the Django end _or_ processing fewer events on the plugin server end (or both at the same time).
 
 To determine this, take a look at the "events received" panel ([PostHog Cloud internal link](https://metrics.posthog.com/d/iffHpmSMz/posthog-cloud?orgId=1&viewPanel=10)).
 
