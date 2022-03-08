@@ -7,11 +7,11 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-author: ["andy-vandervell"]
+author: ["alex-kim"]
 categories: ["Product updates"]
 ---
 
-As PostHog grows, the data that users are sending to PostHog continue to grow into the billions.
+As PostHog grows, the data that users are sending to PostHog continues to grow into the billions.
 
 Data explosion is real, and we've been working hard to deliver a solution to your data management woes. Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PH. 
 
@@ -27,9 +27,9 @@ This is the first step in a continuous effort to help make organizing your data 
 
 ## What is an Event?
 
-[Events](https://posthog.com/docs/user-guides/events) are the basic building blocks of data that is sent to PostHog. Events can capture a wide variety of different interactions, from a new user signing up to capturing a server event when an API endpoint is called.
+[Events](/docs/user-guides/events) are the basic building blocks of data that is sent to PostHog. Events can capture a wide variety of different interactions, from a new user signing up to capturing a server event when an API endpoint is called.
 
-[Event Properties](https://posthog.com/docs/user-guides/events#event-properties) make up the meat of the event. These can be viewed nested in the context of a single event, or as a flat list in the Data Management > Event Properties tab.
+[Event Properties](/docs/user-guides/events#event-properties) make up the meat of the event. These can be viewed nested in the context of a single event, or as a flat list in the Data Management > Event Properties tab.
 
 ## How to create event and event property definitions
 
@@ -49,7 +49,7 @@ Alternatively, click on view in the definition hover card and you'll be redirect
 
 ### Creating definitions with the API
 
-You can also opt to create definitions with our API. Check out our documentation on how to use the [`event_definitions`](https://posthog.com/docs/api/event-definitions) and [`property_definitions`](https://posthog.com/docs/api/property-definitions) API endpoints.
+You can also opt to create definitions with our API. Check out our documentation on how to use the [`event_definitions`](/docs/api/event-definitions) and [`property_definitions`](/docs/api/property-definitions) API endpoints.
 
 ## How to use Data Management as a team (Best practices)
 
@@ -80,4 +80,4 @@ Not at all! The awesome thing about definitions in PostHog is that they can be c
 
 We're excited to get these data management features in, but we're just scratching the surface. We've prepared some documentation to help you get started with creating definitions and potential use-cases.
 
-As always, we welcome any feedback you may have about this feature. Feel free to open an issue in our Github repo or give us a shout in our PostHog Users slack channel.
+As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack).
