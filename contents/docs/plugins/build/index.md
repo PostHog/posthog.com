@@ -6,7 +6,7 @@ showTitle: true
 
 PostHog makes it possible to build your own [plugins](/docs/plugins/overview) and integrate with other platforms. So, if [our integration library](/integrations) is missing something you need then you may still be able to create it yourself.
 
-Plugins can add more information to the event, modify existing properties or trigger a range of other activities. There are also some plugins that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/plugins/build/reference#jobs-1).
+Plugins can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some plugins that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/plugins/build/reference#jobs-1).
 
 Before building your first plugin it's important to understand how data flows through plugins in the first place. There are three critical concepts to remember:
 
