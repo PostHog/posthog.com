@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> **In a rush?** All actions are prefixed with a light bulb emoji. Search for 💡 on this page to quickly find all listed mitigation actions.
+
 Backpressure is a metric representing lag in our ingestion pipeline. 
 
 In simple terms, it is the difference between events sent to PostHog (hitting the Django server `capture` endpoint) and the events processed by the plugin server in a given period of time.
@@ -95,7 +97,9 @@ However, if it appears that our ingestion rate is slowing down, then we must loo
 
 #### Individual plugins issues
 
-Helpful resources beyond graphs: 
+> **Recap:** A given team's plugin instance is called a _plugin config_ and these are stored on the Postgres table `posthog_pluginconfig`. When looking for issues with "plugins" we are in fact looking for problematic plugin configs.  
+
+Helpful resources (beyond graphs): 
 
 - Plugin logs (`plugin_log_entries` table on ClickHouse)
 
@@ -107,27 +111,24 @@ Helpful resources beyond graphs:
 
 **Question to ask** 
 
-Is a plugin triggering unusually long jobs?
+Is a plugin config triggering unusually long jobs?
 
 **Potential mitigation** 
 
-Disable the problematic plugin
+[Disable the problematic plugin config](#-action-disable-the-problematic-plugin-config)
 
-##### VM setups
+### 💡 Action: Disable the problematic plugin config
 
-**Dashboard to look at** 
+To disable a specific plugin config, access the Django shell and run the following:
 
-foo
+```python
+plugin_config = PluginConfig.objects.get(id=<plugin_config_id_here>)
+plugin_config.enabled = False
+plugin_config.save()
+```
 
-**Question to ask** 
+If you're unsure about how to connect to the Django shell, follow [this guide for ECS](handbook/engineering/production-access) or [this guide for Helm chart deployments](docs/self-host/deploy/troubleshooting).
 
-foo
-
-**Potential mitigation** 
-
-Disable the problematic plugin
-
-### 💡 Action: Disable the problematic plugin
 
 
 
