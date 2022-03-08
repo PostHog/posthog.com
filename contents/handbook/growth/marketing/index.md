@@ -100,7 +100,7 @@ We have identified the following acquisition channels as most important to our s
 
 Other channels:
 
-- We also send out an [email newsletter](/handbook/growth/marketing/newsletter) every 2 weeks. This is for existing customers, and usually contains one tutorial and one recent blog post, plus a couple of other fun sections. The newsletter is quite new, so the format is likely to evolve. We do not use email to try and convince new customers to use PostHog, but we want the newsletter content to be valuable enough to users to share within their organizations or externally. 
+- We also send out an [email newsletter](/handbook/growth/marketing/newsletter) every 2 weeks. This is for existing users who opt-in, and usually contains one tutorial and one recent blog post, plus a couple of other fun sections. The newsletter is quite new, so the format is likely to evolve. We do not use email to try and convince new customers to use PostHog, but we want the newsletter content to be valuable enough to users to share within their organizations or externally. 
 - We haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press), if at all. 
 - [Developer relations and community](https://posthog.com/handbook/growth/developer-relations) is also super important to us, but covered elsewhere as we consider it its own discipline at PostHog. Same for [Growth](https://posthog.com/handbook/growth/strategy). 
 
