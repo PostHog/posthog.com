@@ -84,3 +84,41 @@ You can scale in two ways:
 
 Once the migration has run, you can scale the pod back down. 
 
+### Error Upgrading: Async migrations are not completed
+
+You might have ran into a message like this
+```
+List of async migrations to be applied:
+- 0123_migration_name_1 - Available on Posthog versions 1.35.0 - 1.40.9
+- 0124_migration_name_2 - Available on Posthog versions 1.37.0 - 1.40.9
+
+Async migrations are not completed. See more info https://posthog.com/docs/self-host/configure/async-migrations/overview
+```
+
+This means you were trying to update to a version that requires these async migrations to be completed.
+1. If you're on a version that has these migrations available you can head over to the async migrations (at `/instance/async_migrations`). After completing the required migrations re-run the upgrade. Note: we recommend a minimum version of 1.33.0 for running async migrations for a smoother experience.
+1. If you're not on a version that has the migration available you'll first need to upgrade to that version. Then head over to the async migrations (at `/instance/async_migrations`). After completing the required migrations you can continue upgrading forward.
+
+The table below lists out recommended PostHog app and chart versions to use for updating to if there's a need for a multi step upgrade.
+
+| Async Migration | PostHog Version | Chart Version |
+| --------------- | --------------- | --------------|
+| 0001            | 1.33.0          | 16.1.0        |
+| 0002            | 1.33.0          | 16.1.0        |
+| 0003            | 1.33.0          | 16.1.0        |
+
+
+#### Upgrading hobby deployment to a specific version
+
+Before following the normal upgrading procedure update the `.env` file to have `POSTHOG_APP_TAG` match `release-<desired version>`. For example run
+```
+echo "POSTHOG_APP_TAG=release-1.33.0" >>.env
+```
+
+#### Upgrading helm chart to a specific version
+
+To upgrade to a specific chart version you can use `--version <desired version>` flag, e.g.
+```
+helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
+```
+Make sure you have followed the [upgrade instructions](https://posthog.com/docs/self-host/configure/upgrading-posthog) for your platform (specifically major upgrade notes as needed).
