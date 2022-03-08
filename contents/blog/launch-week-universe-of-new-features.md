@@ -22,7 +22,7 @@ All of this (and more) lead to huge growth. Users grew by 4x, the number of open
 
 As an open-source product, we're also delighted to see huge growth in [our Slack community](/slack) - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
 
-But this is just the beginning. We've also been busy making PostHog broader, more comprehensive, and a more powerful tool for making great products. 
+But this is just the beginning. We've also been busy making PostHog a broader and more powerful tool for making great products. 
 
 To celebrate, starting on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
 
