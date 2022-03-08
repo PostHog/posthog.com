@@ -1,4 +1,4 @@
-date: 2022-03-22
+date: 2022-03-14
 title: PostHog Launch Week I: A Universe of New Features
 rootPage: /blog
 sidebar: Blog
