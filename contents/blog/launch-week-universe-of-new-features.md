@@ -20,7 +20,7 @@ PostHog made huge strides in 2021. To name just a few landmarks, we:
 
 All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled, we acquired numerous reference customers, and went from zero revenue to significant revenue.
 
-As an open-source product, we're also delighted to see huge growth in our Slack community - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
+As an open-source product, we're also delighted to see huge growth in [our Slack community](/slack) - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
 
 But this is just the beginning. We've also been busy making PostHog broader, more comprehensive, and a more powerful tool for making great products. 
 
