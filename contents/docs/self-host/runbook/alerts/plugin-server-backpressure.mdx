@@ -1,0 +1,135 @@
+---
+title: Backpressure
+sidebar: Docs
+showTitle: true
+---
+
+Backpressure is a metric representing lag in our ingestion pipeline. 
+
+In simple terms, it is the difference between events sent to PostHog (hitting the Django server `capture` endpoint) and the events processed by the plugin server in a given period of time.
+
+For example, if 550,000 (valid) events were sent to PostHog between 9:55am and 10am, and the plugin server has processed (ingested or discarded) 500,000, then backpressure for this 5-minute interval is 50,000.
+
+Note that backpressure can also be negative. Imagine our Django server goes down and thus stops receiving events but there are still unprocessed events in Kafka. In that case we might receive 0 new events but the plugin server will still process a positive number of events, leading to negative backpressure.
+
+Both positive and negative backpressure happen often and are normal in a high-load ingestion pipeline. However, we are concerned with large spikes that are out of the ordinary, particularly when it comes to positive backpressure.
+
+> If you take away one thing from this intro, remember this: the **lower** the backpressure the **better**. 
+
+## I got paged about high backpressure - what should I do?
+
+## Step 0: Confirm events are still being ingested
+
+<!-- WIP - this section should actually link to a separate runbook on ingestion having stopped -->
+
+The first thing you should do when paged about backpressure is confirm that PostHog is still ingesting events.
+
+There are many ways to do this, including visiting the Events page (`/events`) or the system status page (`/instance/status`), looking at the `events` table on ClickHouse, or looking at an event ingestion dashboard panel.
+
+If PostHog is _not_ ingesting events, you should determine when it was last ingesting events and what has changed since then.
+
+<HiddenSection headingType='h4' title='PostHog Cloud'>
+
+On PostHog Cloud, if ingestion has stopped completely, the most likely reason is that we deployed a broken commit.
+
+As such, you should:
+
+1. Revert the events and plugins tasks to an earlier revision
+2. Inspect the commit history (pro tip: the PostHog Cloud dashboard shows annotations of deploys alongside the metrics) for what could have caused the issue
+3. Revert suspect commits
+
+</HiddenSection>
+
+### Step 1: Determine the broader cause
+
+Before digging into the specific cause of the alert, consider which side of the backpressure equation is currently having the bigger impact.
+
+Given backpressure is essentially the difference between events processed by the Django server and those processed by the plugin server, backpressure can increase if we're receving more events on the Django end _or_ processing fewer events on the plugin server end (or both at the same time).
+
+To determine this, take a look at the "events received" panel ([PostHog Cloud internal link](https://metrics.posthog.com/d/iffHpmSMz/posthog-cloud?orgId=1&viewPanel=10)).
+
+If you see a spike, PostHog may just be going through a period of high load (a lot of events sent). Provided this is temporary, backpressure will eventually come down on its own. 
+
+### 💡 Action: Scale the plugin server
+
+One thing you can do to speed up ingestion during high load is to increase the number of plugin server instances running. Vertically scaling plugin server instances could also be helpful if you notice instances are using up most of the allocated CPU or memory.
+
+This is potentially the only useful action under a period of high load where the plugin server has no issues, but it is also helpful for coping with backpressure when the plugin server ingestion rate is the issue.
+
+
+<HiddenSection headingType='h4' title='ECS instructions'>
+
+To horizontally scale the plugin server on ECS, do the following:
+
+1. Access the ECS dashboard
+1. Select the cluster `posthog-production-cluster`
+1. Under services, select `posthog-production-plugins`
+1. On the top right corner, click 'Update'
+1. Increase the desired number of tasks and save the new config
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Helm chart instructions'>
+
+To horizontally scale the plugin server on a helm chart deployment, run the following command:
+
+```sh
+kubectl scale deployment posthog-plugins --replicas=[desired_instances_number] -n posthog 
+```
+
+Substitute `[desired_instances_number]` for a number higher than the current number of running instances.
+
+You can get the current number of replicas with the following command:
+
+```sh
+kubectl get deployments posthog-plugins -n posthog -o=jsonpath='{.status.replicas}'
+```
+
+</HiddenSection>
+
+### Step 2: Determine what's slowing down the plugin server
+
+If we're still ingesting events at a good rate, and the spike is caused by an unusual high rate of events sent, scaling is the main thing that can be done immediately.
+
+However, if it appears that our ingestion rate is slowing down, then we must look deeper into the plugin server.
+
+#### Individual plugins issues
+
+Helpful resources beyond graphs: 
+
+- Plugin logs (`plugin_log_entries` table on ClickHouse)
+
+##### Plugin jobs
+
+**Dashboard to look at** 
+
+[runJob duration by job type](https://metrics.posthog.com/d/aeApFf-7z/piscina?orgId=1&viewPanel=7)
+
+**Question to ask** 
+
+Is a plugin triggering unusually long jobs?
+
+**Potential mitigation** 
+
+Disable the problematic plugin
+
+##### VM setups
+
+**Dashboard to look at** 
+
+foo
+
+**Question to ask** 
+
+foo
+
+**Potential mitigation** 
+
+Disable the problematic plugin
+
+### 💡 Action: Disable the problematic plugin
+
+
+
+
+
