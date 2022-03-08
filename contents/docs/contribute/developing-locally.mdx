@@ -34,9 +34,9 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS. 
+The instructions here assume you're running macOS.
 
-For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`). 
+For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`).
 
 Windows isn't supported natively. But, Windows users can run a Linux virtual machine. The latest Ubuntu Desktop is recommended. (Ubuntu Server is not recommended as debugging the frontend will require a browser that can access localhost.)
 
@@ -98,25 +98,25 @@ Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dash
 ```
 # docker ps
 CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS        PORTS                                                                                            NAMES
-b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   ee_clickhouse_1
-12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           ee_kafka_1
-432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           ee_db_1
-cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           ee_zookeeper_1
-ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           ee_redis_1
+b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
+12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
+432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
+cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
+ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1
 
-# docker logs ee_db_1 -n 1
+# docker logs posthog-db-1 -n 1
 2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
 
-# docker logs ee_redis_1 -n 1
+# docker logs posthog-redis-1 -n 1
 1:M 06 Dec 2021 13:47:08.435 * Ready to accept connections
 
-# docker logs ee_clickhouse_1 -n 1
+# docker logs posthog-clickhouse-1 -n 1
 Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
 
-# docker logs ee_kafka_1
+# docker logs posthog-kafka-1
 [2021-12-06 13:47:23,814] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
 
-# docker logs ee_zookeeper_1
+# docker logs posthog-zookeeper-1
 # Because ClickHouse and Kafka connect to Zookeeper, there will be a lot of noise here. That's good.
 ```
 
@@ -159,7 +159,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 ### 4. Prepare the Django server
 
-1. Install Python 3.9+. You can do so with Homebrew: `brew install python@3.9`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
     **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 

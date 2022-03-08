@@ -6,29 +6,29 @@ showTitle: true
 
 <FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
 
-Feature Flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application. Feature Flags can also help you control access to certain features in your product (e.g. only show paid features to users with an active subscription).
+Feature Flags allow you to safely deploy and roll back new features. This means you can ship the code for new features and then roll them out to your users in a managed way. If something has goes wrong, you can then roll back without having to re-deploy your application. Feature Flags can also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription.
 
-> **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
+> Feature Flags are currently available with our [JavaScript](/docs/integrate/client/js#feature-flags) and [Python](/docs/integrate/server/python) libraries. We're working to support this feature on all of our libraries, but for now you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
-> **Looking to test changes to your product?** Check out our [Experimentation](/docs/user-guides/experimentation) feature.
+> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature.
 
 ## Learning resources
 
 ### Tutorial
 
-For a comprehensive step-by-step tutorial on how to use Feature Flags, check out our [How to safely roll out new features](/tutorials/feature-flags) tutorial.
+We have a comprehensive, step-by-step [tutorial](/tutorials/feature-flags) on how to use Feature Flags.
 
 ## Creating Feature Flags
 
-In the sidebar, go to 'Experiments' and click '+ New Feature Flag'.
+In the sidebar, go to 'Feature Flags' and click '+ New Feature Flag'.
 
 Think of a descriptive name and select how you want to roll out your feature.
 
-![Create feature flags](../../images/features/feature-flags/experiments-page.png)
+![Create feature flags](../../images/features/feature-flags/feature-flags-page.png)
 
-## Implementing the Feature Flag
+## Implementing the feature flag
 
-When you create a feature flag, we'll show you an example snippet. It'll look something like this:
+When you create a feature flag, we'll show you an example snippet. It will look something like this:
 
 ```js
 if (posthog.isFeatureEnabled('new-beta-feature')) {
@@ -36,9 +36,9 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-What you do inside that if statement is up to you. You might change the CSS of a button, hide an entire section, or move things around.
+What you do inside that if statement is up to you. You might change the CSS of a button, hide an entire section, or move elements around on the page.
 
-Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, _except_ the very first time a user visits your site.
+Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags which apply. We store those flags as a cookie. This means that for most page views the feature flags will be available immediately, _except_ the very first time a user visits your site.
 
 To combat that, there's a callback you can use to wait for the flags to come in:
 
@@ -51,11 +51,9 @@ posthog.onFeatureFlags(function () {
 })
 ```
 
-> **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the 'Project Settings' page in PostHog.
-
 ## Using locally
 
-To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
+To test feature flags locally, you can open your developer tools and override the feature flags. You will get a warning that you're manually overriding feature flags.
 
 ```js
 posthog.feature_flags.override(['feature-flag-1', 'feature-flag-2'])
@@ -79,17 +77,17 @@ posthog.feature_flags.getFlags()
 
 There are three options for deciding who sees your new feature. You can roll out the feature to:
 
-1. A fixed percentage of users,
-1. A set of users filtered based on their user properties,
+1. A fixed percentage of users
+1. A set of users filtered based on their user properties or a cohort (based on user properties)
 1. A combination of the two
 
 ### Roll out to a percentage of users
 
-By rolling out to a percentage of users you can slowly ramp up who sees a new feature. The way this works is we "hash" a combination of the key of the feature flag and the unique distinct ID of the user.
+By rolling out to a percentage of users, you can gradually ramp up who sees a new feature. To do this, we "hash" a combination of the key of the feature flag and the unique distinct ID of the user.
 
 This way a user will always fall on the same place between 0 and 100%, so they will consistently see or not see the feature controlled by the flag. As you move the slider towards 100%, more users will start seeing your feature.
 
-The hashing means that the same user will fall along different points of the line for each new feature. For example, Alice will start seeing the feature at 5% for feature A, but only at 80% for feature B.
+The hashing means that the same user will fall along different points of the line for each new feature. For example, a user may start seeing the feature at 5% for feature A, but only at 80% for feature B.
 
 ### Filter by user properties
 
@@ -101,7 +99,7 @@ By combining user properties and percentage of users you can determine something
 
 ## De-activating properties
 
-If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures **no users** will have the flag enabled.
+If the feature has caused a problem, or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures _no users_ will have the flag enabled.
 
 ## Feature flag persistence
 
@@ -109,19 +107,19 @@ For feature flags that filter by user properties only, a given flag will always 
 
 However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed.
 
-As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way.
+As a result, bear in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way.
 
-## Multivariate Feature Flags
+## Multivariate feature flags (beta)
 
 > Multivariate feature flags are only available when using PostHog >= 1.28 (if self-hosting) and [posthog-js](https://github.com/PostHog/posthog-js) >= 1.13.
 
-PostHog 1.28 introduces support for multivariate feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
+PostHog 1.28 introduced support for multivariate feature flags which can return string values according to a specified distribution. Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, or 70/20/10%. This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
 
 ### Creating a feature flag with multiple variants
 
 Create a multivariate feature flag just like you would a standard flag, and then change the "Served value" option to "a string value". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each.
 
-Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your test, i.e. have some users receive no value at all, configure the **release condition groups**. While the release condition groups determine how many users will be bucketed into **any** of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
+Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your test, i.e. have some users receive no value at all, configure the _release condition groups_. While the release condition groups determine how many users will be bucketed into _any_ of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
 
 ### Using multivariate feature flags in your code
 
@@ -183,4 +181,4 @@ If you'd like to compare all variants for which we have data in one graph, apply
 
 ## Experimentation
 
-Feature Flags and Experimentation are different features and work for different use cases. Check out our [Experimentation](/docs/user-guides/experimentation) guide for more details.
+Feature Flags and Experimentation are different features and work for different use cases. Check out our [Experimentation](/docs/user-guides/experimentation) manual for more details.

@@ -13,7 +13,7 @@ export default function CommunityQuestions({ questions }) {
                             return (
                                 question.childrenReply &&
                                 question.childrenReply.length > 0 && (
-                                    <Question key={index} question={question.childrenReply} />
+                                    <Question id={question.id} key={index} question={question.childrenReply} />
                                 )
                             )
                         })}

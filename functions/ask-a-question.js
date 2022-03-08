@@ -28,6 +28,15 @@ exports.handler = async (e) => {
                 block_id: 'name_and_slug',
             },
             {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: body.subject,
+                    emoji: true,
+                },
+                block_id: 'subject',
+            },
+            {
                 type: 'section',
                 block_id: 'question',
                 text: {
@@ -58,6 +67,7 @@ exports.handler = async (e) => {
                             name: body.name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                             avatar,
                         }),
                         action_id: 'publish-button',
@@ -94,6 +104,7 @@ exports.handler = async (e) => {
                             name: body.name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                         }),
                         action_id: 'edit-question-button',
                     },

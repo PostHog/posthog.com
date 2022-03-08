@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Note: Async Migrations are in Beta, if you're interested in trying this out reach out to us on [PostHog Users's Slack](https://posthog.com/slack) first.
-
 ## What are async migrations?
 
 Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. Related internal docs can be found [here](/handbook/engineering/async-migrations).
@@ -27,6 +25,8 @@ Managing async migrations is a job for self-hosted PostHog instance admins. Thes
 However, worry not! We've built a system to make managing these as easy as possible.
 
 ### Prerequisite
+
+Make sure you're on PostHog App version 1.33 or later.
 
 To manage async migrations, you must be a staff user. PostHog deployments from version 1.31.0 onwards will automatically give the instance's first user "staff status", but those who have deployed PostHog before 1.31.0 will have to manually update Postgres.
 

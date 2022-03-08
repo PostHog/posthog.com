@@ -10,7 +10,7 @@ Just create a new Pull Request if you want to make an update.
 
 You can ask [Yakko](https://github.com/yakkomajuri) for a review!
 
-If you'd like any guidance before starting work on your PR, you can reach us on [Slack](https://posthog.com/slack) or email (_hey@posthog.com_) - we're very responsive and friendly.
+If you'd like any guidance before starting work on your PR, you can reach us on [Slack](https://posthog.com/slack) - we're very responsive and friendly.
 
 ## Issues
 

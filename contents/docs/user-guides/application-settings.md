@@ -1,50 +1,59 @@
 ---
-title: Application settings
+title: Settings & Billing
 sidebar: Docs
 showTitle: true
 ---
-This page documents all the application settings and configuration available on PostHog. These settings are generally available for both PostHog Cloud and PostHog Enterprise versions and should not be confused with instance settings (see [Configuring PostHog](/docs/self-host/)) for more details. Each subsection is represented as a tab in the user interface.
+
+<FeatureAvailability allPlans />
+
+This page documents all settings within the PostHog _application_. If you are self-hosting PostHog, a guide to configuring your _instance_ settings [can be found here](/docs/self-host/configure/instance-settings).
+
+- **Organization settings** - covers your entire organization
+- **Billing** - covers your entire organization 
+- **Project settings** - affect your current project only
+- **My settings** - affect the current user that is logged in only
 
 ## Organization settings
-Settings pertaining to the entire organization and/or instance. These settings can be accessed by opening the account dropdown on the right corner of the top navigation bar and then clicking on "Organization settings & billing". Contains the following settings:
+Open your account dropdown in the top right corner of the navigation bar and then click on the gear icon next to 'Current organization'. Contains the following settings:
 
-#### General settings
-- Organization name.
-- Service data collection. Enables you to control how PostHog captures data on your organization's usage to improve our product. If you decide to anonymize your data at any point we'll retroactively delete or redact any personal information we have previously received.
+- _Display name_
+- _Invites_
+- _Members_ - you can remove and change roles for team members here
+- _Notification preferences_
+- _Danger Zone_ - delete your organization
 
-#### Team members
-- Team member management. Invite new members, cancel invitations, change role for team members or remove team members.
+Once you have invited a member to your Organization, you will then also need to add them to the relevant Project (see below) in order to be able to view it if the project is set to 'private'.
 
-#### Billing/licenses
-- **License management** **[Self-hosted only]** - Add new license keys and review existing license keys.
-- **Billing management** **[Cloud only]** - View current billing plan and usage, switch billing plans, cancel billing subscription, update payment information.
+## Billing and license management
+Open your account dropdown in the top right corner of the navigation bar and then click on 'Billing' (Cloud only) or 'License management' (Self Host only). Contains the following settings:
+
+- [Cloud only] _Billing and usage_ - view your current billing plan and usage; manage your subscription (via Stripe) including changing your billing plan, cancel your subscription, and update payment information
+- [Self-hosted only] _License management_ - add new and manage existing license keys
 
 ## Project settings
-Settings scoped to the current project. These settings can be accessed by clicking on the project selector at the center of the top navigation bar and then clicking on the settings icon. Contains the following settings:
+Click on 'Project settings' in the left hand menu. Contains the following settings:
 
-#### General settings
-- Project name.
-- Data capturing configuration. General configuration for how data is captured in your instance.
-    - Anonymize client IP data. Toggles whether the full IP address of each customer is stored with each event.
+- _Project name_
+- _Website event autocapture_ - JavaScript snippet code to include in your website's HTML
+- _Project API key_
+- _Timezone_ - allows you to see relevant time conversions in PostHog
+- _Filter out internal and test users_ - filter out events from internal sources in your queries
+- _Correlation analysis exclusions (beta)_ - globally exclude certain events or properties from your correlation analysis
+- _Path cleaning rules (beta)_ - make your Paths clearer by aliasing one or multiple URLs
+- _Permitted domains/URLs_ - specify domains and URLs where the Toolbar will automatically launch if you are logged in, and where sessions will be recorded (if enabled)
+- _Data attributes_ - these attributes can be used when using the Toolbar and defining Actions to match unique elements on your pages
+- _Webhook integration_ - configure a webhook to receive notifications on Slack, Teams or Discord when a certain action is received in PostHog
+- _Data capture configuration_ - set whether or not the full IP address of each user is stored with each Event
+- _PostHog Toolbar_ - enable or disable the Toolbar for this project
+- _Recordings_ - enable or disable Session Recording for this project
+- _Group Analytics_ (paid plans only) - name your group types
+- _Access Control_ - set whether anyone in your Organization can access the project, or just invited users
+- _Danger zone_ - delete your project
 
-#### Ingestion settings
-- Ingestion key & Javascript snippet code. Main key used to ingest events through the JS snippet, PostHog libraries or API.
-- Managed URLs. This are URLs (or base domains) where the Toolbar will automatically be opened when you're logged in to PostHog. These URLs will also be recognized when creating actions.
+## My settings
+Open your account dropdown in the top right corner of the navigation bar and then click on gear icon next to your username. Contains the following settings:
 
-#### Integrations
-- Toolbar settings. Enables or disables the Toolbar for the specific project.
-- Slack / Teams integration. Configure a webhook to receive notifications on Slack or Teams when certain action is received on PostHog (see [Slack integration](/docs/integrate/webhooks/slack) or [Teams integration](/docs/integrate/webhooks/microsoft-teams) for more details).
-
-## Personal settings
-Settings scoped to the logged in user, any changes here **will only affect the currently logged in user**. These settings can be accessed by opening the account dropdown on the right corner of the top navigation bar and then clicking on "My account". Contains the following settings:
-
-#### General settings
-- Name.
-- Email address.
-
-#### Authentication
-- Change password.
-- Personal API keys. These keys are used to authenticate you against our api (see [docs](/docs/api/overview#authentication) for more information).
-
-#### Notifications
-- Notification settings. Control which notifications (email or push) you receive (e.g. security updates).
+- _Password_
+- _Personal API keys_ - used to authenticate you against our API
+- _Security and Feature Updates_ - enable or disable email notifications with security and product feature updates only (no marketing emails)
+- _Anonymize Data Collection_ - set whether or not to allow PostHog to collect data about your usage of the product
