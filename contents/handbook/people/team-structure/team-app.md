@@ -40,4 +40,46 @@ Makers everywhere get better at building products because of PostHog
     * Persons on events to support billion level querying: Team East
 
 
+## Roadmap Details
 
+### Automatically discover relevant insights: Team West
+
+* **Priority**: Mid (TBC)
+* **Goal**:
+   * Users discover valuable new insights without needing to search for them
+         * Primary Metric: % insights analyzed, which were automatically generated
+* **Motivation**:
+   * **Customer**:
+         * This feature has not been heavily requested by our existing customers today
+         * [Customers need to understand when there is a drop in onboarding or high level of exceptions so they can take immediate action](https://github.com/PostHog/posthog/issues/2773)
+   * **Data**:
+         * [25% of insights are analyzed by someone who didn’t create them today](https://app.posthog.com/insights/WrEI3Q8i), indicating people are looking for existing analyses to quickly get valuable information
+   * **Industry**:
+         * Datadog have an [anomaly detection tool](https://www.datadoghq.com/blog/introducing-anomaly-detection-datadog/)
+         * Amplitude has [anomaly + forecasting capabilities](https://help.amplitude.com/hc/en-us/articles/360044072251-Anomaly-and-Forecast)
+* **Use cases**:
+   * **Finding related insights** **to answer common questions** (e.g. people who viewed this insight also viewed this insight, this is the most common breakdown of this metric)
+   * **Identifying hidden trends in metrics **(e.g. did you know there was a 20% increase in signups from the US this week, 90% drop in purchases made on your android app this week)
+* **Complications**:
+   * To do anomaly detection well, we may also need to effectively forecast or limit how anomaly detection can be used (e.g. if there are major seasonal variations in the metric, these need to be accounted for)
+
+### Unified querying across events, persons, sessions, groups etc: Team West
+
+In progress...
+
+* **Priority**: 
+* **Goal**:
+   * 
+* **Motivation**:
+   * **Customer**:
+         * 
+   * **Data**:
+         * 
+   * **Industry**:
+         * 
+* **Use cases**:
+   * 
+* **Complications**:
+   * 
+
+### ...
