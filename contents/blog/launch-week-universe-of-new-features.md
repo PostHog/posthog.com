@@ -15,7 +15,7 @@ PostHog made huge strides in 2021. To name just a few landmarks, we:
 - Raised a [$15 million Series B ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule)
 - Became one of [YC's top-valued companies](/blog/yc-top-companies)
 - Rebranded our website [in just four weeks](/blog/postmortem-rebrand)
-- Migrated from [PostgresSQL to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
+- Migrated from [postgresql to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - Achieved product market fit for PostHog Scale
 
 All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled, we acquired numerous reference customers, and went from zero revenue to significant revenue.
