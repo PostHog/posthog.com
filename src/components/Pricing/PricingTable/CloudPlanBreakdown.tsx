@@ -47,7 +47,7 @@ export const CloudPlanBreakdown = () => {
 
                             <PricingSlider
                                 marks={[10_000, 1_000_000, 1_0000_000, 100_000_000]}
-                                min={10000}
+                                min={1000000}
                                 max={100000000}
                             />
                         </div>

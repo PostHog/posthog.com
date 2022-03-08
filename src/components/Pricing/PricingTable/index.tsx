@@ -41,7 +41,7 @@ export const PricingTable = () => {
                     </Chip>
                     <Chip
                         size="md"
-                        onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
+                        onClick={(e) => setPlanType(CLOUD_PLAN, 1000000)}
                         active={currentPlanType === CLOUD_PLAN}
                     >
                         Cloud
