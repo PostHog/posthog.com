@@ -75,4 +75,4 @@ Critics are calling it "the most statistically signicant new feature since [a jo
 - **Starring:** Rick Marron
 - **Introducing:** The most addictive feature you'll ever know
 
-"So good, I wrote a 1,000 word Twitter thread about it" - A Twitter user with 100 followers 
+"So good, I wrote a 1,000 word Twitter thread about it" - A Twitter user, probably
