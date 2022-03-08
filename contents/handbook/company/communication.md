@@ -48,7 +48,8 @@ Documents any company-wide internal information, in addition to any information 
 - ✅ People discussions, e.g. benefits, pensions, share options, org structure
 - ✅ Onboarding/offboarding checklists
 - ✅ Non-engineering team sprint planning
-- ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
+- ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
+- ✅ Discussions about replacing or adding tools, services, and systems that we use
 
 **Examples of information that should NOT go here:**
 - ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
