@@ -1,5 +1,5 @@
 ---
-date: 2022-03-07
+date: 2022-03-23
 title: You can now organize your PostHog data
 rootPage: /blog
 sidebar: Blog
