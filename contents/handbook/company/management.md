@@ -25,9 +25,7 @@ That's it.
 A manager at PostHog is _not_ responsible for:
 1. Setting compensation (we have a [compensation calculator](/handbook/people/compensation) and increases are done occasionally/proactively by the people team).
 1. Setting tasks for their direct reports
-1. Creating a career path (career paths should be transparent and documented, and for now centrally managed)
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
-1. Giving feedback (managers give feedback in their capacity as individual contributor, but so does everyone else)
 
 ## How do I make sure my direct reports are happy and productive?
 
@@ -40,11 +38,12 @@ A manager at PostHog is _not_ responsible for:
 At PostHog, we exclusively hire people that are the best in their field.
 That means managers won't need to spend time telling their direct reports what to do.
 
-However, for those people to make the best decisions, they need context. That context can be:
-- what a customer said was or wasn't important to them
-- what the metrics are saying needs to be improved
-- what another team in the organisation is working on
-- what the overall goals are for PostHog
+However, for those people to make the best decisions, they need context. The things a manager can do to set context include:
+- creating a roadmap that the team can work towards
+- helping someone figure out who else to talk to within PostHog
+- creating metrics that the team should improve
+- improving the process in which a team works (things like standups, reviews etc)
+- organizing a team offsite or other meetup to work in person
 
 The shift here, and the biggest difference between PostHog and other places, is that in the end it is up to the individual to make the decisions.
 All you can do as a manager is set context. From there, you'll have to trust that we've made the right hiring decisions and that the individual is able to execute on that. If they can't, we have a [generous severance policy](/handbook/people/compensation#severance).
@@ -56,7 +55,7 @@ Again, we've hired the best people and have high talent density, so we trust eve
 As a manager, it's tempting to see yourself as the sole owner of all the information, and give it out sparingly.
 People will come to you often with questions (because they don't have the context) and when they do you'll get more validation that holding all the context yourself makes you an Important Person.
 
-What managers should aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferably in written form in a public channel. That way everyone will be able to do their best work.
+What managers should aim for at PostHog is to make themselves obsolete. Share as much context as possible, in written form and in a public channel. That way everyone will be able to do their best work.
 
 Managers also use 1-1s as a useful tool for helping to set context - we've written [some FAQs](/handbook/company/1-1s) on how to make sure you get the most out of these. 
 
