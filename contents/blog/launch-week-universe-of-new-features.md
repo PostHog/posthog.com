@@ -31,7 +31,6 @@ This is... PostHog Launch Week I: A Universe of New Features.
 ## Chapter I: Experimentation
 
 - **Releasing:** Monday, March 21
-- **Directed by:** xxxx
 - **Starring:** Neil Kakkar
 - **Introducing:** A/B testing, multivariate tests and statistical significance
 
@@ -40,7 +39,6 @@ Critics are calling it "Neil's most statistically significant new feature since 
 ## Chapter II: Project Sparkle
 
 - **Releasing:** Tuesday, March 22
-- **Directed by:** xxxx
 - **Starring:** Karl-Askel Puulman, Harry Waye and Guido Iaquinti
 - **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
@@ -48,12 +46,11 @@ Critics are calling it "Neil's most statistically significant new feature since 
 
 "Shines like a diamond" ⭐️⭐️⭐️⭐️⭐️ - Roger Hogbert
 
-"Puulman and Iaquinti are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
+"Puulman, Iaquinti and Waye are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
 
 ## Chapter III: Data Management
 
 - **Releasing:** Wednesday, March 23
-- **Directed by:** xxxxx
 - **Starring:** Alex Kim
 - **Introducing:** New Data Management UI, event definitions, definition tagging and many more
 
@@ -62,7 +59,6 @@ Critics are calling it "Neil's most statistically significant new feature since 
 ## Chapter IV: Collaboration
 
 - **Releasing:** Thursday, March 24
-- **Directed by:** xxxxx
 - **Starring:** Rick Marron and Paolo D'Amico
 - **Introducing:** 
 
@@ -71,7 +67,6 @@ Critics are calling it "Neil's most statistically significant new feature since 
 ## Chapter V: Session Recording
 
 - **Releasing:** Friday, March 25
-- **Directed by:** xxxx
 - **Starring:** Rick Marron
 - **Introducing:** The most addictive feature you'll ever know
 
