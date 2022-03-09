@@ -25,15 +25,23 @@ Armed with the above we set out to make collaboration in PostHog as easily as po
 - Granular dashboard permissions
 
 
-
 ### Use case two: Discovering interesting stuff you weren't looking for
+- Project home
+- Default dashboard
 
+
+### Use case three: Leverage what others discovered
+- Saved insights + automatic insight naming
+- Connect to Data Management
 
 ## What's next?
-
+Still in flux, depends on our learnings, ...
 
 ### Universal search
 TBD
 
 ### Activity feed
 TBD
+
+
+As always, we welcome and highly encourage you to share any feedback you may have about this or any other feature. Give us a shout in our [community Slack](/slack) or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product or Engineering team.
