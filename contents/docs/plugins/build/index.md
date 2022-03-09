@@ -8,31 +8,29 @@ PostHog makes it possible to build your own [plugins](/docs/plugins/overview) an
 
 Plugins can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some plugins that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/plugins/build/reference#jobs-1).
 
-Before building your first plugin it's important to understand how data flows through plugins in the first place. There are three critical concepts to remember:
+Before building your first plugin it's important to understand how data flows through plugins in the first place. There are two critical concepts to remember:
 
 1. Plugins act on _single events_ coming in to PostHog.
 
-2. Plugins act on events _before_ they are stored.
-
-3. The output of one plugin will go into the next plugin, creating a chain.
+2. The output of one plugin will go into the next plugin, creating a chain.
 
 Before we get started, lets look at an examples of these principles in action. 
 
 ## Example of a plugin chain
 
-The [GeoIP plugin](/integrations/geoip) is an example of a plugin which adds information to events. Specifically, it adds geographical information based on the user IP address. As above, it is triggered on each single event and adds additional informational to each event before it is stored.
+The [GeoIP plugin](/integrations/geoip) is an example of a plugin which adds information to events. Specifically, it adds geographical information based on the user IP address. It is triggered on each single event and adds additional informational to each event before it is stored.
 
 By running a second plugin after the GeoIP plugin, we create a plugin chain. Here's an example of how this can look for an individual event when a second plugin (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP plugin. 
 
 ![GeoIP Plugin Example](../../../images/plugins/geoip-plugin-example.png)
 
-Plugin chains are important because they control what the event looks like before it is stored. If you want to remove certain properties out of an event with the [Property Filter plugin](/integrations/property-filter), for example, it is best to have it run at the end of the plugin chain. 
+Plugin chains are important because they control what the event looks like before it is stored. If you want to remove certain properties out of an event with the [Property Filter plugin](/integrations/property-filter), for example, it is best to have it run at the end of the plugin chain so that all unwanted properties can be filtered out before storage.  
 
 ## Example of a plugin integrating with an external system
 
-The GeoIP plugin is an example of a plugin which modifies an event as it is ingested, but plugins _don't_ have to modify events at all. They can do all sorts of other things, such as integrating with other systems.
+The GeoIP plugin is an example of a plugin which modifies an event as it is ingested, but plugins _don't_ have to modify events at all. They can do all sorts of other things, such as integrating with or exporting to other systems.
 
-For example, a plugin can send an event to AWS S3 whenever an event is seen in PostHog. Indeed, the [S3 plugin](https://posthog.com/plugins/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
+For example, a plugin can send an event to AWS S3 whenever it is seen in PostHog. Indeed, the [S3 plugin](https://posthog.com/plugins/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
 
 Here's how this can look:
 
