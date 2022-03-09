@@ -1,5 +1,5 @@
 date: 2022-03-14
-title: PostHog Launch Week I: A Universe of New Features
+title: PostHog Launch Week I: A Universe of New Features - March 21 to 25
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -27,6 +27,8 @@ But this is just the beginning. We've also been busy making PostHog a broader an
 To celebrate, starting on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
 
 This is... PostHog Launch Week I: A Universe of New Features.
+
+> Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
 
 ## Chapter I: Experimentation
 
@@ -71,3 +73,5 @@ Critics are calling it "Neil's most statistically significant new feature since 
 - **Introducing:** The most addictive feature you'll ever know
 
 "So good, I wrote a 1,000 word Twitter thread about it" - A Twitter user, probably
+
+> Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
