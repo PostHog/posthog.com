@@ -18,7 +18,7 @@ PostHog made huge strides in 2021. To name just a few landmarks, we:
 - Migrated from [postgresql to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - Achieved product market fit for PostHog Scale
 
-All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled, we acquired numerous reference customers, and went from zero revenue to significant revenue.
+All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled, we acquired [numerous reference customers](/customers), and went from zero revenue to significant revenue.
 
 As an open-source product, we're also delighted to see huge growth in [our Slack community](/slack) - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
 
@@ -35,7 +35,7 @@ This is... PostHog Launch Week I: A Universe of New Features.
 - **Starring:** Neil Kakkar
 - **Introducing:** A/B testing, multivariate tests and statistical significance
 
-Critics are calling it "the most statistically signicant new feature since [a joke Engineers will get, help please!]"
+Critics are calling it "Neil's most statistically significant new feature since [Correlation Analysis](/docs/user-guides/correlation)"
 
 ## Chapter II: Project Sparkle
 
@@ -63,7 +63,7 @@ Critics are calling it "the most statistically signicant new feature since [a jo
 
 - **Releasing:** Thursday, March 24
 - **Directed by:** xxxxx
-- **Starring:** Paolo Damico
+- **Starring:** Rick Marron and Paolo D'Amico
 - **Introducing:** 
 
 [this one needs filling out] 
