@@ -73,8 +73,8 @@ While there is value in the items on the right, we value the items on the left m
 * _Self-hosted_: focus on customers who need to self-host, as there is a huge untapped market and we’re uniquely placed to win.
 
 * Why maintain Cloud if the focus is on Self-Hosted?
-1. **Top of Funnel:** Cloud acts as a top-of-funnel for people to quickly try out PostHog before commiting resources to self-hosting
-2. **Interate Fast:** Cloud enables us to quickly release, test and iterate on new features with our customers without waiting for longer self-hosting release cycles
+1. **Top of Funnel:** Cloud acts as a top-of-funnel for people to quickly try out PostHog before committing resources to self-hosting
+2. **Iterate Fast:** Cloud enables us to quickly release, test and iterate on new features with our customers without waiting for longer self-hosting release cycles
 3. **Benchmark for scale:** If we can support a very large instance of PostHog then we can be confident that our customers can support an instance of similar size
 
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
