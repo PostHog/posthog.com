@@ -18,7 +18,6 @@ toolsUsed:
 Initially, the team built their own tool for gathering product data, writing a JSON file into the file system for every event observed. Eventually, this proved untenable and unscalable. 
 
 “We crashed the production platform due to having too many files in the system,” said CTO and Co-founder Lukas Smith. “We considered switching to Google Analytics, but there were a lot of concerns around GDPR and I wanted something that could be self-hosted. That’s what led me to PostHog.”
-
 ## Creating plugins to connect systems and protect user privacy
 Once Witty Works’ Engineering team had deployed PostHog internally, other teams began using the platform too. Marketing, for example, wanted to use PostHog to track onboarding funnels and understand when users updated [the Witty browser extension](https://chrome.google.com/webstore/detail/witty-your-inclusive-writ/meojhlodfiihbjkcnehkdcgncnhgagog?hl=en). As a result, Witty Works used [PostHog’s plugin system](/docs/user-guides/plugins) to integrate with many tools in its stack. 
 
@@ -50,6 +49,6 @@ While ready-made integrations were available for many tools, such as Sentry and 
 
 [Witty Works’ Property Filter plugin](/integrations/property-filter) does this by deleting all configured properties inside an ingested event so that PostHog doesn’t collect any unwanted data. Running this plugin last in a plugin chain makes sure that it applies to data bought in by any other plugins too.
 
-This whole process was achieved with just 26 lines of code and was released to all PostHog users as a community plugin. Plus, because the plugin is open source like PostHog, the community has been able to enhance it even further — [the current version is now 44 lines of code and even came with tests]((https://github.com/witty-works/posthog-property-filter-plugin/blob/dev/index.js) made by [the PostHog community](/slack)!  and has now been released to all PostHog users as a community plugin after a quick review from PostHog’s team. 
+This whole process was achieved with just 26 lines of code and was released to all PostHog users as a community plugin. Plus, because the plugin is open source like PostHog, the community has been able to enhance it even further — [the current version is now 44 lines of code and even came with tests](https://github.com/witty-works/posthog-property-filter-plugin/blob/dev/index.js) made by [the PostHog community](/slack)!  and has now been released to all PostHog users as a community plugin after a quick review from PostHog’s team. 
 
 “One of the advantages of being an open-source product is that we can collaborate with users and help them build exactly what they need,” said PostHog Software Engineer Yakko Majuri. “By building their own plugins and contributing to [our plugin library](/integrations), Witty Works has helped make PostHog a better product for everyone!”
