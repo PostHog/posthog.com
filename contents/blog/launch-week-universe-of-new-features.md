@@ -60,9 +60,9 @@ Critics are calling it "Neil's most statistically significant new feature since 
 
 - **Releasing:** Thursday, March 24
 - **Starring:** Rick Marron and Paolo D'Amico
-- **Introducing:** 
+- **Introducing:** Granular dashboard permissions, automatic insight naming and much more  
 
-[this one needs filling out] 
+95% fresh on Tasty Earthworms
 
 ## Chapter V: Session Recording
 
