@@ -24,7 +24,7 @@ Once Witty Works’ Engineering team had deployed PostHog internally, other team
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/lukas-witty.png"
+        imageSource="/images/customers/lukas-witty.jpeg"
         size="md"
         name="Lukas Smith"
         title="CTO & Co-founder, Witty Works"
@@ -40,7 +40,7 @@ While ready-made integrations were available for many tools, such as Sentry and 
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/lukas-witty.png"
+        imageSource="/images/customers/lukas-witty.jpeg"
         size="md"
         name="Lukas Smith"
         title="CTO & Co-founder, Witty Works"
