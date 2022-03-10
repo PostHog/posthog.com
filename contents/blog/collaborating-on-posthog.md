@@ -62,7 +62,7 @@ And for people who love discovering insights that others helped create, we made 
 Finally worth mentioning that in the context of expanding knowledge sharing and making sure anyone can answer questions with PostHog, we introduced the new [Data Management](link_to_blog_post_here) feature, which aims to bring all the context on how your product is instrumented to your entire organization. No need to ask an engineer or the PM for which event you should use to answer a question.
 
 ## What's next?
-We continue to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). However, we're a fast moving company and we continuously reprioritize based on user feedback, market and need changes, and strategy changes, so while our goal to make more people succcessful with PostHog will remain, the way we tackle this problem and the actual product changes may change.
+We continue to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). However, we're a fast moving company and we continuously reprioritize based on user feedback, market and need changes, and strategy changes, so while our goal to make more people successful with PostHog will remain, the way we tackle this problem and the actual product changes may change.
 
 With the disclaimer above in mind, here's some exciting stuff we hope to ship soon. 
 ### Slack Previews
@@ -70,7 +70,7 @@ With the disclaimer above in mind, here's some exciting stuff we hope to ship so
 Almost every team uses some sort of IM tool (think Slack, Discord, MS Teams, ...) and in particular, it's a place for discussions. We believe that adding a bunch more context directly in your IM tool when you share a link to a PostHog insight or dashboard will speed up discussions (e.g. a screenshot of the graph, general details, recent changes, ...). We're starting with Slack to test drive this concept, but if successful, expanding to other tools will make sense.
  
 ### Email subscriptions to dashboards and insights
-As we analyzed dashboard usage in PostHog (and from conversations with users too), we discovered is quite common for teams to have 1-2 dashboards that represent critical metrics for their product and their company. These metrics are so important, that keeping an eye out on them continuously is strongly adviced (think revenue or number of sales for an e-commerce company, or retention for a pre-PMF startup). A very user friendly way of doing this is integrating with current workflows, and almost everyone uses email. So you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
+As we analyzed dashboard usage in PostHog (and from conversations with users too), we discovered is quite common for teams to have 1-2 dashboards that represent critical metrics for their product and their company. These metrics are so important, that keeping an eye out on them continuously is strongly advised (think revenue or number of sales for an e-commerce company, or retention for a pre-PMF startup). A very user friendly way of doing this is integrating with current workflows, and almost everyone uses email. So you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
 
 
 ### Embeddable graph images
