@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-02
 featuredImage: ../images/tutorials/banners/cohorts.png
-topics: ["Cohorts", "Feature flags", "Insights", "Configuration"]
+topics: ["cohorts", "feature flags", "configuration"]
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
