@@ -7,7 +7,7 @@ showTitle: true
 > ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
 > for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
 
-## What does PostHog look like?
+## What does PostHog look like on the inside?
 
 Before jumping into setup, let's dissect a PostHog. The app itself is made up of 4 components that run simultaneously:
 

@@ -256,6 +256,22 @@
                     ]
                 },
                 {
+                    "name": "Developing locally",
+                    "url": "/handbook/engineering/developing-locally"
+                },
+                {
+                    "name": "Tech stack",
+                    "url": "/handbook/engineering/stack"
+                },
+                {
+                    "name": "Project structure",
+                    "url": "/handbook/engineering/project-structure"
+                },
+                {
+                    "name": "Coding conventions",
+                    "url": "/handbook/engineering/coding-conventions"
+                },
+                {
                     "name": "Development process",
                     "url": "/handbook/engineering/development-process"
                 },
@@ -1158,24 +1174,8 @@
                     "url": "/docs/contribute/recognizing-contributions"
                 },
                 {
-                    "name": "Developing locally",
-                    "url": "/docs/contribute/developing-locally"
-                },
-                {
-                    "name": "Tech stack",
-                    "url": "/docs/contribute/stack"
-                },
-                {
-                    "name": "Project structure",
-                    "url": "/docs/contribute/project-structure"
-                },
-                {
                     "name": "Contribute to this website",
                     "url": "/docs/contribute/contribute-to-website"
-                },
-                {
-                    "name": "Coding conventions",
-                    "url": "/docs/contribute/coding-conventions"
                 }
             ]
         }
