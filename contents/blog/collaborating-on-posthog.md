@@ -38,13 +38,28 @@ For even larger teams, new challenges arise when collaborating with dashboards. 
 
 
 ### Use case two: Discovering interesting stuff you weren't looking for
-- Project home
-- Default dashboard
+Sometimes you don't know what you're looking for, or you don't know where to start. There's many different avenues to improving your product, and in particular there might be opportunities for improvements across a myriad of places. For instance, we recently [discovered](https://github.com/PostHog/posthog/pull/7973) users seldom use our paths advanced features and these could introduce mental burden to users.
+
+We created a project homepage with the goal of surfacing helpful insights very quickly that you may not have had in your radar. These insights can hopefully help you find product avenues worth improving. By making it the default page on PostHog, our aim is to help users make quick discoveries. We'll surface your most important product & company metrics here as well as popular insights. We're leveraging social proof from what other teammates are doing in your app to help you discover more product improvements.
+
+In addition, if your team uses the recordings feature we'll also surface the most recent recordings here. We found that on average returning users to the recordings feature discover proportionally more than 3X than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
+
+
+Mockup / screenshot here.
 
 
 ### Use case three: Leverage what others discovered
-- Saved insights + automatic insight naming
-- Connect to Data Management
+We found two general profiles of users of PostHog, people who are naturally curious and whose job leads them to discover insights all the time and across multiple dimensions, and people who use PostHog to answer specific questions as they arise. For people in the second camp, we wanted to improve the experience so they can leverage what natural discoverers already do. So we made it a lot easier to both save and find saved insights.
+
+The first part, for people who create insights, we've made it really easy to save now. With one-click saving and automatic insight naming you can be sure to save any useful insight for others to discover. Keep in mind the more detailed title & description, the easier it will be for others to discover useful insights.
+
+![Screenshot of automatic insight naming](../images/blog/collaborating-on-posthog_3.png)
+
+And for people who love discovering insights that others helped create, we made it easier to search and find saved insights.
+
+![Screenshot of saved insights](../images/blog/collaborating-on-posthog_2.png)
+
+Finally worth mentioning that in the context of expanding knowledge sharing and making sure anyone can answer questions with PostHog, we introduced the new [Data Management](link_to_blog_post_here) feature, which aims to bring all the context on how your product is instrumented to your entire organization. No need to ask an engineer or the PM for which event you should use to answer a question.
 
 ## What's next?
 We continue to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). However, we're a fast moving company and we continuously reprioritize based on user feedback, market and need changes, and strategy changes, so while our goal to make more people succcessful with PostHog will remain, the way we tackle this problem and the actual product changes may change.
@@ -61,8 +76,6 @@ As we analyzed dashboard usage in PostHog (and from conversations with users too
 ### Embeddable graph images
 
 You've seen the typical Medium post with a graph, well we have too and we hate they're not PostHog graphs. But aside from that superficial argument, teams have different workflows and tools where product context is shared (e.g. an intranet, Notion, Google Docs, code repositories, blog posts). Usually product decisions are at least data-informed (and we do hope this will help drive this behavior further), so we want to make sure that the context from product data is properly shared, accessible and preserved. In particular, we also want to make sure these context remains up-to-date.
-
-
 
 
 As always, we welcome and highly encourage you to share any feedback you may have about this or any other feature. Give us a shout in our [community Slack](/slack) or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product or Engineering team.
