@@ -86,7 +86,7 @@ Once the migration has run, you can scale the pod back down.
 
 ### Error Upgrading: Async migrations are not completed
 
-You might have ran into a message like this
+You might have ran into a message like this:
 ```
 List of async migrations to be applied:
 - 0123_migration_name_1 - Available on Posthog versions 1.35.0 - 1.40.9
@@ -96,8 +96,8 @@ Async migrations are not completed. See more info https://posthog.com/docs/self-
 ```
 
 This means you were trying to update to a version that requires these async migrations to be completed.
-1. If you're on a version that has these migrations available you can head over to the async migrations (at `/instance/async_migrations`). After completing the required migrations re-run the upgrade. Note: we recommend a minimum version of 1.33.0 for running async migrations for a smoother experience.
-1. If you're not on a version that has the migration available you'll first need to upgrade to that version. Then head over to the async migrations (at `/instance/async_migrations`). After completing the required migrations you can continue upgrading forward.
+1. If you're on a version that has these migrations available you can head over to the async migrations page (at `/instance/async_migrations`). After completing the required migrations, re-run the upgrade. Note: we recommend a minimum version of 1.33.0 for running async migrations for a smoother experience.
+1. If you're not on a version that has the migration available you'll first need to upgrade to that version. Then head over to the async migrations page (at `/instance/async_migrations`). After completing the required migrations you can continue upgrading forward.
 
 The table below lists out recommended PostHog app and chart versions to use for updating to if there's a need for a multi step upgrade.
 
