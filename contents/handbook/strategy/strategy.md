@@ -76,7 +76,7 @@ While there is value in the items on the right, we value the items on the left m
 1. **Top of Funnel:** Cloud acts as a top-of-funnel for people to quickly try out PostHog before committing resources to self-hosting
 2. **Iterate Fast:** Cloud enables us to quickly release, test and iterate on new features with our customers without waiting for longer self-hosting release cycles
 3. **Benchmark for scale:** If we can support a very large instance of PostHog then we can be confident that our customers can support an instance of similar size
-
+4. **Tactical: Escape valve for users that made the wrong choice** Some teams think self hosting is what they want, but realize that they'd rather migrate to cloud once they're already in production and like the product, but want zero maintenance.
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
 * _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
