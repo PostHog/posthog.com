@@ -7,6 +7,8 @@ showTitle: true
 
 We love contributions to PostHog, big or small.
 
+Here's what you need to know about contributing to our product:
+
 ## Being a part of the community
 
 We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct).
@@ -18,7 +20,7 @@ Bug reports help us make PostHog better for everyone. When you [report a bug](ht
 Before raising a new issue, please [search within existing ones](https://github.com/PostHog/posthog/issues) to make sure you're not creating a duplicate.
 
 <blockquote class='warning-note'>
-If your issue is related to security, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of creating a GitHub issue.
+    <b>Important:</b> If your issue is related to security, please email us directly at <a href="mailto:hey@posthog.com">hey@posthog.com</a> instead of creating a GitHub issue.
 </blockquote>
 
 ## Deciding what to work on

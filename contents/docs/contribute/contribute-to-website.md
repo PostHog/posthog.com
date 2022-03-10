@@ -1,5 +1,5 @@
 ---
-title: "Contribute to this website: documentation, handbook, and blog"
+title: Contribute to this website – documentation, handbook, and blog
 sidebar: Docs
 showTitle: true
 ---
