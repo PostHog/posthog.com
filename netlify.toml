@@ -1214,3 +1214,9 @@
 [[redirects]]
     from = "/handbook/engineering/databases/schema-changes"
     to = "/handbook/engineering/schema-changes"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/tutorials/categories/session-recordings"
+    to = "/tutorials/categories/session-recording"
