@@ -1,5 +1,5 @@
 ---
-date: 2022-03-07
+date: 2022-03-24
 title: Collaborating on PostHog
 rootPage: /blog
 sidebar: Blog
