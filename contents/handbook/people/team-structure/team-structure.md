@@ -10,7 +10,6 @@ hideAnchor: true
 - [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
   - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
     - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
-      - [Paolo D'Amico, Product](/handbook/company/team#paolo-damico-product)
       - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
     - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
@@ -52,7 +51,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
-- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 
@@ -63,7 +61,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
-- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 
