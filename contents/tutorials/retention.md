@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-04
 featuredImage: ../images/tutorials/banners/retention.png
-
+topics: ['Retention']
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

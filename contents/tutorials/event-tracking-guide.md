@@ -5,6 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2021-08-02
 featuredImage: ../images/tutorials/banners/actions.png
+topics: ['Configuration']
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
