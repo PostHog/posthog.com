@@ -6,7 +6,7 @@ author: ['yakko-majuri']
 topics: ['funnels']
 date: 2020-11-18
 featuredImage: ../images/tutorials/banners/revenue.png
-topics: ['Configuration', 'Trends', 'Dashboards', 'Funnels']
+topics:
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
