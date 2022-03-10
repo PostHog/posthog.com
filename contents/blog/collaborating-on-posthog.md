@@ -21,10 +21,7 @@ Armed with the above we set out to make collaboration in PostHog as easily as po
 
 ### Use case one: Sharing
 
-The most basic collaborative action for an analytics product is sharing insights. This is critical because usually in larger teams there are multiple stakeholders making or influencing product decisions. In order to make solid decisions, context must be shared. From user conversations, here are the most common use cases we found:
-- Sharing with your marketing team the effect of marketing efforts on the product (e.g. high quality signups).
-- Sharing with your executive team key metrics on the product.
-- Sharing with other engineers or PM findings that need a discussion (e.g. a drop in conversion).
+The most basic collaborative action for an analytics product is sharing insights. This is critical because usually in larger teams there are multiple stakeholders making or influencing product decisions. In order to make solid decisions, context must be shared (e.g. sharing with your marketing team the effect of marketing efforts on the product, like high quality signups).
 
 To address the above we introduced robust permalinks to insights that can easily be shared across multiple mediums. These links can now be used to link to a specific insight (with all configurations), even if you have multiple projects.
 
@@ -34,10 +31,10 @@ To address the above we introduced robust permalinks to insights that can easily
 
 Dashboards can easily be shared too, and even if you share a link to a dashboard in a different project, if the user has access to that project, they'll be automatically switched to that project.
 
-For even larger teams, new challenges arise when collaborating with dashboards. In particular, we found a strong need to prevent accidental changes that would affect metrics for others. In small teams this is usually not problematic as it's common for a single person to own the analytics process. So we introduced granular permission controls to dashboards
+For even larger teams, new challenges arise when collaborating with dashboards. In particular, we found a strong need to prevent accidental changes that would affect metrics for others. This was mentioned frequently for larger organizations. In small teams this is usually not problematic as it's common for a single person to own the analytics process. So we introduced granular permission controls to dashboards to provide confidence to users that dashboards haven't changed when they shouldn't.
 
-- Permalinks
-- Granular dashboard permissions
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png" width="500" alt="Screenshot of dashboard permissions" />
 
 
 ### Use case two: Discovering interesting stuff you weren't looking for
@@ -54,19 +51,16 @@ We continue to actively work on improving collaboration throughout the product a
 
 With the disclaimer above in mind, here's some exciting stuff we hope to ship soon. 
 ### Slack Previews
+
+Almost every team uses some sort of IM tool (think Slack, Discord, MS Teams, ...) and in particular, it's a place for discussions. We believe that adding a bunch more context directly in your IM tool when you share a link to a PostHog insight or dashboard will speed up discussions (e.g. a screenshot of the graph, general details, recent changes, ...). We're starting with Slack to test drive this concept, but if successful, expanding to other tools will make sense.
  
 ### Email subscriptions to dashboards and insights
+As we analyzed dashboard usage in PostHog (and from conversations with users too), we discovered is quite common for teams to have 1-2 dashboards that represent critical metrics for their product and their company. These metrics are so important, that keeping an eye out on them continuously is strongly adviced (think revenue or number of sales for an e-commerce company, or retention for a pre-PMF startup). A very user friendly way of doing this is integrating with current workflows, and almost everyone uses email. So you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
 
 
 ### Embeddable graph images
 
-
-
-### Universal search
-TBD
-
-### Activity feed
-TBD
+You've seen the typical Medium post with a graph, well we have too and we hate they're not PostHog graphs. But aside from that superficial argument, teams have different workflows and tools where product context is shared (e.g. an intranet, Notion, Google Docs, code repositories, blog posts). Usually product decisions are at least data-informed (and we do hope this will help drive this behavior further), so we want to make sure that the context from product data is properly shared, accessible and preserved. In particular, we also want to make sure these context remains up-to-date.
 
 
 
