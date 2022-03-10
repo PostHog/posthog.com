@@ -35,23 +35,6 @@ If you're planning to work on a bigger feature that is not on the list of issues
 
 Anyone can contribute code to PostHog, including you! To get started, follow our [local development guide](http://localhost:8000/handbook/engineering/developing-locally). Then, make your change and submit a pull request to the [`posthog` repository](https://github.com/PostHog/posthog). We'll be delighted to review your change.
 
-## Going through code review
-
-When reviewing a pull request, we have the following questions in mind:
-
-- Does the PR actually solve an issue?
-- Does the code fit into our [coding conventions](http://localhost:8000/handbook/engineering/coding-conventions)?
-- How will the solution perform with at huge scale?
-- Does the change offer a good user experience?
-- Does the UI of the change fit into our design system?
-- Are there tests and do they test the right things?
-- Are there any security flaws?
-- Does the code introduce tech debt?
-
-What we don't care about during review:
-
-- Syntax formatting. If we're arguing about syntax, that means we should install a code formatter.
-
 ## Licensing
 
 Most of PostHog's code is under the [MIT license](https://opensource.org/licenses/MIT), as [included in the PostHog repository](https://github.com/PostHog/posthog/blob/master/LICENSE) on GitHub. Code of paid features, however, is covered by a [proprietary license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE).

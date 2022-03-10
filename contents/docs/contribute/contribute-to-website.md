@@ -1,6 +1,6 @@
 ---
 title: Contribute to this website – documentation, handbook, and blog
-sidebar: Docs
+sidebar: Handbook
 showTitle: true
 ---
 

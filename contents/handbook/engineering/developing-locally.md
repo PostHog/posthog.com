@@ -9,7 +9,9 @@ showTitle: true
 
 ## What does PostHog look like on the inside?
 
-Before jumping into setup, let's dissect a PostHog. The app itself is made up of 4 components that run simultaneously:
+Before jumping into setup, let's dissect a PostHog.
+
+The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
