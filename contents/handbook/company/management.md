@@ -41,7 +41,7 @@ That means managers won't need to spend time telling their direct reports what t
 However, for those people to make the best decisions, they need context. The things a manager can do to set context include:
 - creating a roadmap that the team can work towards
 - helping someone figure out who else to talk to within PostHog
-- creating metrics that the team should improve
+- enabling the team to measure their impact
 - improving the process in which a team works (things like standups, reviews etc)
 - organizing a team offsite or other meetup to work in person
 
