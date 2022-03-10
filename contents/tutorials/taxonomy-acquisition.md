@@ -5,7 +5,7 @@ showTitle: true
 author: ['james-hawkins']
 date: 2021-09-19
 featuredImage: ../images/tutorials/banners/deep-dive.png
-topics: ['Dashboards']
+topics: ['dashboards']
 ---
 
 This tutorial will help you:

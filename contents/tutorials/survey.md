@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2021-07-14
 featuredImage: ../images/tutorials/banners/surveys.png
-topics: ["Configuration"]
+topics: ["configuration"]
 ---
 
 ## Objective
