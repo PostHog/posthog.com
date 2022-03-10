@@ -5,6 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-03
 featuredImage: ../images/tutorials/banners/spa.png
+topics: ['configuration']
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
