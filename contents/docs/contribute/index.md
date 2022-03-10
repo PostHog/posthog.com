@@ -13,21 +13,19 @@ We have an awesome, diverse, and inclusive community. In order to maintain and g
 
 ## Reporting bugs or issues
 
-Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.
+Bug reports help us make PostHog better for everyone. When you [report a bug](https://github.com/PostHog/posthog/issues/new/choose), the description will automatically be filled with a template that makes is very clear what we'd like you to add.
 
-Please search within our issues before raising a new one to make sure you're not raising a duplicate.
+Before raising a new issue, please [search within existing ones](https://github.com/PostHog/posthog/issues) to make sure you're not creating a duplicate.
 
 <blockquote class='warning-note'>
-
-**Note:** If you find a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
-
+If your issue is related to security, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of creating a GitHub issue.
 </blockquote>
 
 ## Deciding what to work on
 
-We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source product analytics platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to raise a PR directly.
+We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source product analytics platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to create a pull request directly.
 
-You can also [update PostHog's documentation, handbook, or write a blog post](/docs/contribute/contribute-to-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
+You can also [update PostHog's documentation, handbook, or write a blog post](/docs/contribute/contribute-to-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [style guide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 
 If you're planning to work on a bigger feature that is not on the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
 
