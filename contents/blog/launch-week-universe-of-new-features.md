@@ -7,7 +7,7 @@ hideAnchor: true
 featuredImage: ../images/blog/launch-week-teaser.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["Product updates"]
+categories: ["Product updates", "Launch week"]
 ---
 
 PostHog made huge strides in 2021. To name just a few landmarks, we: 
@@ -18,7 +18,7 @@ PostHog made huge strides in 2021. To name just a few landmarks, we:
 - Migrated from [postgresql to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - Achieved product market fit for PostHog Scale
 
-All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled, we acquired [numerous reference customers](/customers), and went from zero revenue to significant revenue.
+All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled and we acquired [numerous reference customers](/customers).
 
 As an open-source product, we're also delighted to see huge growth in [our Slack community](/slack) - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
 
@@ -26,7 +26,7 @@ But this is just the beginning. We've also been busy making PostHog a broader an
 
 To celebrate, starting on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
 
-This is... PostHog Launch Week I: A Universe of New Features.
+Here's a quick teaser for what's to come during _PostHog Launch Week I: A Universe of New Features_.
 
 > Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
 
