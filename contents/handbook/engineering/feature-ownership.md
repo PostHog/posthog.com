@@ -19,6 +19,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">actors-modal</span>  |
 | Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
 | API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">api-structure</span>  |
+| Application Performance Monitoring (APM) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
+| Async migrations | [@yakkomajuri][@yakkomajuri]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">billing</span> |
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">correlation</span> |
@@ -59,3 +61,4 @@ At our Engineering Offsite in February 2022 we realized the issue that some bugs
 [@pauldambra]: https://github.com/pauldambra
 [@rcmarron]: https://github.com/rcmarron
 [@Twixes]: https://github.com/Twixes
+[@yakkomajuri]: https://github.com/yakkomajuri
