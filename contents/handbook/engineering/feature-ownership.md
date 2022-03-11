@@ -25,6 +25,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Data Management | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
 | Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
@@ -44,7 +45,6 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
-| Taxonomy | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/taxonomy</span>  |
 | Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Trends | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
 
