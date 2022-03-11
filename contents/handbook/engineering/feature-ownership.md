@@ -15,37 +15,38 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
-| Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">actions</span> |
-| Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">actors-modal</span>  |
-| Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
-| API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">api-structure</span>  |
+| Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/actions</span> |
+| Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
+| Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
+| API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/api-structure</span>  |
 | Application Performance Monitoring (APM) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
 | Async migrations | [@yakkomajuri][@yakkomajuri]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
-| Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">billing</span> |
-| Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">cohorts</span>  |
-| Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">correlation</span> |
-| Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">dashboards</span> |
-| Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">events</span>  |
-| Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">experimentation</span> |
-| Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature-flags</span> |
-| Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">funnels</span>  |
-| Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">group-analytics</span> |
-| Onboarding | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">onboarding</span>  |
-| Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">lifecycle</span>  |
-| Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">paths</span> |
-| Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">permissions</span>  |
-| Persons | [@macobo][@macobo]  | <span class="lemon-tag gh-tag">persons</span>  |
-| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">home</span> |
-| Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">filters</span>  |
-| Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">recordings</span> |
-| Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">retention</span> |
-| Saved Insights | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">saved-insights</span> |
-| Session Analytics | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">sessions</span> |
-| Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">settings</span> |
-| Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">stickiness</span>  |
-| Taxonomy | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">taxonomy</span>  |
-| Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">toolbar</span>  |
-| Trends | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">trends</span>  |
+| Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
+| Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
+| Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
+| Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Onboarding | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
+| Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
+| Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
+| Persons | [@macobo][@macobo]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
+| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
+| Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
+| Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
+| Saved Insights | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
+| Session Analytics | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
+| Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
+| SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
+| Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
+| Taxonomy | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/taxonomy</span>  |
+| Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
+| Trends | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
 
 
 ## Why did we establish feature owners?
