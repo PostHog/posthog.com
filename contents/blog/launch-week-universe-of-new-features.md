@@ -4,7 +4,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ..
+featuredImage: ../images/blog/launch-week-teaser.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Product updates"]
