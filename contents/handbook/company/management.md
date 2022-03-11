@@ -10,7 +10,7 @@ As we grow, we'll increase the number of managers at PostHog. Here's what a mana
 
 You'll sometimes hear us use the term "Team Lead". A team lead is the leader of a small team. Sometimes they also manage the individuals that are part of their team, sometimes they don't.
 
-Team leads are responsible for setting context and direction within the team. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
+Team leads are responsible for making sure the team performs well. That includes things like setting context and direction within the team, and making sure the processes and rituals the team uses work well. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
 
 Team leads should make sure sprints take place on a regular basis, and are conducted transparently. Setting direction means the team leads finalize the sprint priorities. It's ok for team members to change what they picked to work on during the sprint, but it's the team leads' responsibility to help make sure team members have the right context to make good decisions if they change plan, and that everyone starts the sprint pointing in the right direction.
 
