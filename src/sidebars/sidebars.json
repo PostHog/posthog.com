@@ -1016,22 +1016,13 @@
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "name": "Insights",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Overview",
-                            "url": "/docs/api/insights"
-                        },
-                        {
-                            "name": "Trend",
-                            "url": "/docs/api/trend"
-                        },
-                        {
-                            "name": "Funnel",
-                            "url": "/docs/api/funnel"
-                        }
-                    ]
+                    "name": "Trends",
+                    "url": "/docs/api/trend"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/docs/api/funnel"
+                }
                 },
                 {
                     "name": "Actions",
@@ -1072,6 +1063,10 @@
                 {
                     "name": "Groups Types",
                     "url": "/docs/api/groups-types"
+                },
+                {
+                    "name": "Overview",
+                    "url": "/docs/api/insights"
                 },
                 {
                     "name": "Invites",
