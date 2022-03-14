@@ -19,7 +19,7 @@ Over the past few months, we've worked hard to make collaboration in PostHog as 
 
 
 
-## Use case one: Sharing
+## Sharing insights with stakeholders
 
 The most basic collaborative action for an analytics product is sharing insights. This is critical because, in larger teams, there are usually multiple stakeholders making or influencing product decisions. In order to make solid decisions, you have to share context - such as letting your Marketing team see their impact through metrics such as high quality signups.
 
