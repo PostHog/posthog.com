@@ -1,5 +1,5 @@
 ---
-title: Development process
+title: Shipping things, step by step
 sidebar: Handbook
 showTitle: true
 ---
