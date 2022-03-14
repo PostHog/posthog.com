@@ -1016,15 +1016,6 @@
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "name": "Trends",
-                    "url": "/docs/api/trend"
-                },
-                {
-                    "name": "Funnels",
-                    "url": "/docs/api/funnel"
-                }
-                },
-                {
                     "name": "Actions",
                     "url": "/docs/api/actions"
                 },
@@ -1055,6 +1046,10 @@
                 {
                     "name": "Feature Flags",
                     "url": "/docs/api/feature-flags"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/docs/api/funnel"
                 },
                 {
                     "name": "Groups",
@@ -1099,6 +1094,10 @@
                 {
                     "name": "Session_recordings",
                     "url": "/docs/api/session-recordings"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/docs/api/trend"
                 },
                 {
                     "name": "User",
