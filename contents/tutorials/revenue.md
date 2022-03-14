@@ -3,7 +3,7 @@ title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-topics: ['funnels']
+topics: ['funnels', 'configuration']
 date: 2020-11-18
 featuredImage: ../images/tutorials/banners/revenue.png
 ---

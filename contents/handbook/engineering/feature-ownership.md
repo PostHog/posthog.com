@@ -19,7 +19,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">actors-modal</span>  |
 | Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">annotations</span> |
 | API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">api-structure</span>  |
-| Billing | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">billing</span> |
+| Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">billing</span> |
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">correlation</span> |
 | Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">dashboards</span> |
@@ -39,7 +39,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">retention</span> |
 | Saved Insights | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">saved-insights</span> |
 | Session Analytics | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">sessions</span> |
-| Settings (personal & project) | [@paolodamico][@paolodamico]  |  <span class="lemon-tag gh-tag">settings</span> |
+| Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">settings</span> |
 | Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">stickiness</span>  |
 | Taxonomy | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">taxonomy</span>  |
 | Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">toolbar</span>  |
@@ -56,7 +56,6 @@ At our Engineering Offsite in February 2022 we realized the issue that some bugs
 [@macobo]: https://github.com/macobo
 [@mariusandra]: https://github.com/mariusandra
 [@neilkakkar]: https://github.com/neilkakkar
-[@paolodamico]: https://github.com/paolodamico
 [@pauldambra]: https://github.com/pauldambra
 [@rcmarron]: https://github.com/rcmarron
 [@Twixes]: https://github.com/Twixes
