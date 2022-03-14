@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Product updates"]
 ---
 
-PostHog is better with teammates. You only have to create a dashboard once, but it becomes more valuable every time you invite someone from your organization to view it. And this isn't just some vague truism: it's a measurable fact.
+PostHog is better with teammates. You only have to create a [dashboard](/docs/user-guides/dashboards) once, but it becomes more valuable every time you invite someone from your organization to view it. And this isn't just some vague truism: it's a measurable fact.
 
 Our data shows organizations with multiple teammates retain 30%+ better than those with a single user. Better collaboration also powers our [main Product metric](https://github.com/handbook/product/metrics): insight discoveries. Our conservative estimates suggest we could increase discoveries by 20% by improving collaboration workflows [1], so that's what we've done.
 
