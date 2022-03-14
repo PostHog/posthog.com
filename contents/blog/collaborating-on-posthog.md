@@ -29,7 +29,7 @@ To address the above we introduced robust permalinks to insights that can easily
 ![Concept of how insight links changed to permalinks today](../images/blog/collaborating-on-posthog_1.png)
 
 
-Dashboards can easily be shared too, and even if you share a link to a dashboard in a different project, if the user has access to that project, they'll be automatically switched to that project.
+You can share dashboards easily too. Even if you share a link to a dashboard in a different project, recipients will be automatically switched to the correct project if they have access
 
 New challenges arise when collaborating with dashboards among larger teams. In small teams, it's common for a single person to own the analytics process, but proactive feedback sessions with our larger clients demonstrated this wasn't the case for them, and caused issues.  In response, we've introduced granular permission controls to dashboards to provide confidence to users that dashboards haven't changed when they shouldn't.
 
