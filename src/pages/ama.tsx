@@ -9,8 +9,8 @@ export const AMA = () => (
         <SEO title="Ask me anything • PostHog" />
         <div className="ama-wrapper">
             <Spacer />
-            <h1 className="centered">AMA</h1>
-            <h2>Ask the PostHog founders anything.</h2>
+            <h1 className="text-center">AMA</h1>
+            <h4 className="text-center">Ask the PostHog founders anything.</h4>
 
             <div id="squeak-root" style={{ maxWidth: '450px' }} />
         </div>
