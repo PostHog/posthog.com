@@ -68,9 +68,9 @@ You can also opt to create definitions with our API. Check out our documentation
 
 1. **Rule of thumb**: The more definitions you define, the easier it will be for your teammates to understand what each event and property is describing. 
 
-Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`. A new teammate using PostHog will find it impossible to differentiate between the two, leading to incorrect queries and onboarding woes. Defining two separate definitions (with different custom names, descriptions, tags) can be very powerful in these situations, not only in documenting your data, but also in providing clarity to teammates.
+Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PH instance sending sign up events as `sign up`. Or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
 
-2. **Rule of thumb**: Official organization-wide events should be verified so that teammates can discover and use them easily. 
+3. **Rule of thumb**: Official organization-wide events should be verified so that teammates can discover and use them easily. 
 
 Verified events will be prioritized in filters and other selection components to signal to the rest of the team that this event should be used in favor of other similar events.
 
