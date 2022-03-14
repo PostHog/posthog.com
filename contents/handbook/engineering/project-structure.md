@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** This page refers to our [main product repo](https://github.com/PostHog/posthog), not our website. 
+> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. 
 
 ## Directory tree 
 
