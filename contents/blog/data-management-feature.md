@@ -93,4 +93,4 @@ Not at all! The awesome thing about definitions in PostHog is that they can be c
 
 We're excited to get these data management features in, but we're just scratching the surface. We've prepared some documentation to help you get started with creating definitions and potential use-cases.
 
-As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack).
+As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack). Or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
