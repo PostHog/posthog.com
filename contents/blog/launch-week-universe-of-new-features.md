@@ -1,5 +1,5 @@
 date: 2022-03-13
-title: PostHog Launch Week I: A Universe of New Features - March 21 to 25
+title: PostHog Launch Week I A Universe of New Features - March 21 to 25
 rootPage: /blog
 sidebar: Blog
 showTitle: true
