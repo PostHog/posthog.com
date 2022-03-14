@@ -24,7 +24,7 @@ As an open-source product, we're also delighted to see huge growth in [our Slack
 
 But this is just the beginning. We've also been busy making PostHog a broader and more powerful tool for making great products. 
 
-To celebrate, starting on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
+To celebrate, starting next week on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
 
 Here's a quick teaser for what's to come during _PostHog Launch Week I: A Universe of New Features_.
 
