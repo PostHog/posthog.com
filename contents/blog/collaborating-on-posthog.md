@@ -31,7 +31,7 @@ To address the above we introduced robust permalinks to insights that can easily
 
 You can share dashboards easily too. Even if you share a link to a dashboard in a different project, recipients will be automatically switched to the correct project if they have access
 
-New challenges arise when collaborating with dashboards among larger teams. In small teams, it's common for a single person to own the analytics process, but proactive feedback sessions with our larger clients demonstrated this wasn't the case for them, and caused issues.  In response, we've introduced granular permission controls to dashboards to provide confidence to users that dashboards haven't changed when they shouldn't.
+In small teams it's common for a single person to own the analytics process, but feedback from larger clients demonstrated this wasn't the case for them.  In response, we've introduced granular permissions to give users full control over who can edit their dashboards. This makes it easier for larger teams to work together, without stepping on each others toes.
 
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png" width="500" alt="Screenshot of dashboard permissions" />
