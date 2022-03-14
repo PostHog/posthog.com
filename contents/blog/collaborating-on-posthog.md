@@ -58,7 +58,7 @@ For people who create insights, we've introduced one-click saving and automatic 
 
 ![Screenshot of automatic insight naming](../images/blog/collaborating-on-posthog_3.png)
 
-And for people who love discovering insights that others helped create, we've made it easier to search and find saved insights.
+And for people who love discovering insights that others made, we've made it easier to search and find saved insights.
 
 ![Screenshot of saved insights](../images/blog/collaborating-on-posthog_2.png)
 
