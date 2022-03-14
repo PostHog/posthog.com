@@ -1255,3 +1255,9 @@
 [[redirects]]
     from = "/tutorials/categories/session-recordings"
     to = "/tutorials/categories/session-recording"
+
+
+# Added: 2022-03-14
+[[redirects]]
+    from = "/docs/contribute/contribute-to-website"
+    to = "/handbook/engineering/posthog-com/developing-the-website"
