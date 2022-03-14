@@ -23,7 +23,7 @@ Over the past few months, we've worked hard to make collaboration in PostHog as 
 
 The most basic collaborative action for an analytics product is sharing insights. This is critical because, in larger teams, there are usually multiple stakeholders making or influencing product decisions. In order to make solid decisions, context must be shared (e.g. sharing with your marketing team the effect of marketing efforts on the product, like high quality signups).
 
-To address the above we introduced robust permalinks to insights that can easily be shared across multiple mediums. These links can now be used to link to a specific insight (with all configurations), even if you have multiple projects.
+To address the above we introduced robust permalinks to insights that can easily be shared across multiple mediums. These links can now be used to send a specific insight (with all configurations) to a colleague, even if you are working across multiple projects.
 
 
 ![Concept of how insight links changed to permalinks today](../images/blog/collaborating-on-posthog_1.png)
