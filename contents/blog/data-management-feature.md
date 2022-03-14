@@ -11,13 +11,13 @@ author: ["alex-kim"]
 categories: ["Product updates"]
 ---
 
-As PostHog grows, the data that users are sending to PostHog continues to grow into the billions.
+As PostHog grows, the data that users are sending to PostHog continues to grow into the double-digit billions. In just the last year (since we started measuring total events), we've gone from ~8B to ~36.5B total events ingested in PostHog Cloud!
 
-Data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data
-management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
+![PostHog - total events](../images/blog/data-management-feature/total_events.png)
 
-As the biggest dogfooder of our own product, we (and many other teams) were beginning to see the consequences of the 
-lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
+Data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
+
+As the biggest dogfooder of our own product, we (and many other teams) were beginning to see the consequences of the lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
 
 1. It is hard to understand events, actions, and properties that you yourself didn't set up.
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
