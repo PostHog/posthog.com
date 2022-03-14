@@ -17,6 +17,12 @@ Every [small team](../people/team-structure/why-small-teams) has:
 - Sense of winning / losing - this bonds teams, increases urgency and creates satisfaction when we achieve things
 - Clarifies our direction
 
+## When we do this
+
+- We _do not_ do this for every team at the same time - if it takes a forced process to keep these up-to-date, and so people look at them, then the objectives aren't meaningful
+- It's up to the small team leaders to set a cadence for their own objectives and key results. Changes need to be communicated to James (who makes sure they stack up with each other properly)
+- Objectives should have a deadline
+
 ## Good goal setting
 
 - Objectives are simple
@@ -53,10 +59,10 @@ Bear the following in mind:
 
 ### What if I don't have time to do work towards my OKRs because of X (X = customer support / urgent board reporting / something else)?
 
-We're small. You should expect some work will fall between the cracks if you don't pick it up.
+Picking up the occasional thing that isn't technically going to help your goal is ok. This is because we're small and may not set 100% perfect goals. As ever, prioritize as you see fit.
 
 ## If my team repeatedly miss objectives, what happens?
 
-Objectives should be ambitious but achievable - you should be able to hit them by challenging yourself, but not to the point of burnout. 
+Objectives should be ambitious but achievable - you should be able to hit them by challenging yourself, but not to the point of burnout.
 
-If your team is consistently missing objectives, they are too hard or possibly the wrong objectives. 
+If your team is consistently missing objectives, they are too hard or possibly the wrong objectives.
