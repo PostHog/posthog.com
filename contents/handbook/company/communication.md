@@ -161,6 +161,10 @@ We mainly use Google Docs to capture internal information like meeting notes or 
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
 
+When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), talk to Cory.
+
+James (H) and Cory are admins on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
+
 ### Email
 
 1. Internal email should be avoided in nearly all cases. Use GitHub for feature / product discussion, use Slack if you cannot use GitHub, and use Google Docs for anything else.
