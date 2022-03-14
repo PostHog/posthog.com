@@ -314,46 +314,52 @@
                     ]
                 },
                 {
-                    "name": "Website development",
+                    "name": "Deployments",
                     "url": "",
                     "children": [
                         {
-                            "name": "Developing PostHog.com locally",
-                            "url": "/docs/contribute/contribute-to-website"
+                            "name": "Deployments support",
+                            "url": "/handbook/engineering/deployments-support"
                         },
                         {
-                            "name": "MDX setup",
-                            "url": "/handbook/engineering/mdx-setup"
+                            "name": "Working with cloud providers",
+                            "url": "/handbook/engineering/cloud-providers"
+                        },
+                        {
+                            "name": "Breaking glass to debug PostHog Cloud",
+                            "url": "/handbook/engineering/production-access"
                         }
                     ]
                 },
                 {
-                    "name": "Breaking glass to debug PostHog Cloud",
-                    "url": "/handbook/engineering/production-access"
+                    "name": "PostHog.com",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Developing the website",
+                            "url": "/handbook/engineering/posthog-com/developing-the-website"
+                        },
+                        {
+                            "name": "MDX setup",
+                            "url": "/handbook/engineering/posthog-com/mdx-setup"
+                        }
+                    ]
                 },
                 {
                     "name": "Development process",
                     "url": "/handbook/engineering/development-process"
                 },
                 {
-                    "name": "Deployments support",
-                    "url": "/handbook/engineering/deployments-support"
+                    "name": "Feature flags specification",
+                    "url": "/handbook/engineering/feature-flags-spec"
+                },
+                {
+                    "name": "Setting up SSL locally",
+                    "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
                     "name": "Tech talks",
                     "url": "/handbook/engineering/tech-talks"
-                },
-                {
-                    "name": "Setup SSL locally",
-                    "url": "/handbook/engineering/setup-ssl-locally"
-                },
-                {
-                    "name": "Working with cloud providers",
-                    "url": "/handbook/engineering/cloud-providers"
-                },
-                {
-                    "name": "Feature flags specification",
-                    "url": "/handbook/engineering/feature-flags-spec"
                 }
             ]
         },

@@ -1,5 +1,5 @@
 ---
-title: Support Hero and rotations
+title: Support hero
 sidebar: Handbook
 showTitle: true
 ---

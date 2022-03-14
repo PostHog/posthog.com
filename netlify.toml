@@ -1237,7 +1237,7 @@
 # Added: 2022-03-10
 [[redirects]]
     from = "/handbook/engineering/mdx"
-    to = "/handbook/engineering/mdx-setup"
+    to = "/handbook/engineering/posthog-com/mdx-setup"
 
 
 # Added: 2022-03-10

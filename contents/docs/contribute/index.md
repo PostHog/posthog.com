@@ -27,7 +27,7 @@ Before raising a new issue, please [search within existing ones](https://github.
 
 We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source product analytics platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to create a pull request directly.
 
-You can also [update PostHog's documentation, handbook, or write a blog post](/docs/contribute/contribute-to-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [style guide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
+You can also [update PostHog's documentation, handbook, or write a blog post](/handbook/engineering/posthog-com/developing-the-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [style guide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 
 If you're planning to work on a bigger feature that is not on the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
 

@@ -1,5 +1,5 @@
 ---
-title: Setup SSL locally
+title: Setting up SSL locally
 sidebar: Handbook
 showTitle: true
 ---
