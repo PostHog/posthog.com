@@ -62,7 +62,7 @@ And for people who love discovering insights that others made, we've made it eas
 
 ![Screenshot of saved insights](../images/blog/collaborating-on-posthog_2.png)
 
-To support this work, we also introduced the new [Data Management](link_to_blog_post_here) feature, which aims to bring all the context on how your product is instrumented to your entire organization. Now there's no need to ask an engineer or the PM which event you should use to answer a question, which both parties will appreciate!
+To support this work, we also introduced the new [Data Management](link_to_blog_post_here) feature, which brings together all the context on how your product is instrumented. Now there's no need to ask an Engineer or Product Manager which event you should use to answer a question, which both parties will appreciate!
 
 ## What's next?
 We continue to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). However, we're a fast moving company and we continuously reprioritize based on user feedback, market and need changes, and strategy changes, so while our goal to make more people successful with PostHog will remain, the way we tackle this problem and the actual product changes may change.
