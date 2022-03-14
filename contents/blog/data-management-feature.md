@@ -15,15 +15,14 @@ As PostHog grows, the data that users are sending to PostHog continues to grow i
 
 Data explosion is real, and we've been working hard to deliver a solution to your data management woes. Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PH. 
 
-This is the first step in a continuous effort to help make organizing your data easier:
+This is the first step in a continuous effort to help make organizing your data easier. With the new Data Management tab and UI you can:
 
-- Creating definitions for events and event properties
-- Managing data on the fly while building insights
-- New UI (Data Management tab and revamped definitions page)
-- Verifying trusted definitions
-- Categorizing your definitions with tags
-- Giving custom names and descriptions to events and properties
-- Making the right events and properties discoverable with event metrics
+- Create definitions for events and event properties
+- Manage data on the fly while building insights
+- Verify trusted definitions which are prioritzed
+- Organize your definitions with tags
+- Give custom names and descriptions to events and properties
+- Make the right events and properties discoverable with event metrics
 
 ## What is an Event?
 
