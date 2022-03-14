@@ -1,6 +1,6 @@
 ---
 date: 2022-03-23
-title: You can now organize your PostHog data
+title: PostHog lets you keep your data in check
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,16 +13,30 @@ categories: ["Product updates"]
 
 As PostHog grows, the data that users are sending to PostHog continues to grow into the billions.
 
-Data explosion is real, and we've been working hard to deliver a solution to your data management woes. Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PH. 
+Data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data
+management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
-This is the first step in a continuous effort to help make organizing your data easier. With the new Data Management tab and UI you can:
+As the biggest dogfooder of our own product, we (and many other teams) were beginning to see the consequences of the 
+lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
+
+1. It is hard to understand events, actions, and properties that you yourself didn't set up.
+2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
+3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
+
+Fret no more because we've been working hard to deliver a solution to your data management woes!
+
+Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PostHog. 
+
+This is the first step in a continuous effort to help make organizing your data easier. You can now:
 
 - Create definitions for events and event properties
 - Manage data on the fly while building insights
-- Verify trusted definitions which are prioritzed
+- Verify trusted definitions which are prioritized in the UI
 - Organize your definitions with tags
 - Give custom names and descriptions to events and properties
 - Make the right events and properties discoverable with event metrics
+
+![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
 ## What is an Event?
 
@@ -54,7 +68,7 @@ You can also opt to create definitions with our API. Check out our documentation
 
 1. **Rule of thumb**: The more definitions you define, the easier it will be for your teammates to understand what each event and property is describing. 
 
-Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PH instance sending sign up events as `sign up`. A new teammate using PH will find it impossible to differentiate between the two, leading to incorrect queries and onboarding woes. Defining two separate definitions (with different custom names, descriptions, tags) can be very powerful in these situations, not only in documenting your data, but also in providing clarity to teammates.
+Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`. A new teammate using PostHog will find it impossible to differentiate between the two, leading to incorrect queries and onboarding woes. Defining two separate definitions (with different custom names, descriptions, tags) can be very powerful in these situations, not only in documenting your data, but also in providing clarity to teammates.
 
 2. **Rule of thumb**: Official organization-wide events should be verified so that teammates can discover and use them easily. 
 
