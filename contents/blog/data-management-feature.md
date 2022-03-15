@@ -89,7 +89,6 @@ To recap, the new Data Management experience means you can:
 
 These are powerful tools for organizing your data, but we're just scratching the surface. Below are just a few ideas on our roadmap that we think you'll like:
 
-- Deeper integration of hover definition cards throughout the app
 - Role-based ownership of definitions
 - Personally identifiable information (PII) rules
 - Anomaly detection for malformed Events and Properties
