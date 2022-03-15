@@ -69,18 +69,17 @@ That is, bring data to conversations, but also talk through causes.
 
 ## 3. Changing environments can invalidate experiment results
 
-So, you've finally gotten results for the experiment above, and figured out why they're like this. Turns out, the vertical layout promotes interaction as it allows users to see all steps of the funnel in one go, click on the steps that seem surprising, see the persons involved in that step, watch their recordings, etc. etc. While the horizontal is a bit more frustrating to see all this information at a glance, causing faster bounces.
+So, you've finally got results for the experiment above, and figured out why they're like this. Turns out, the vertical layout promotes interaction – it allows users to see all steps of the funnel in one go, click on the steps that seem surprising, see the persons involved in that step, watch their recordings, etc. The horizontal layout, meanwhile, is a bit more frustrating to see all this information at a glance, causing faster bounces.
 
 That's a model that keeps on giving, even when things change.
 
-Let's say its now three months in the future, and you've done a design revamp. Horizontal bars are thinner now, while vertical bars are thicker. As a result, horizontal funnels fit in cleanly on screen, while vertical funnels don't.[^4]
+Let's say it's now three months in the future, and you've done a design revamp. Horizontal bars are thinner now, while vertical bars are thicker. As a result, horizontal funnels fit in cleanly on screen, while vertical funnels don't.[^4]
 
 You could run an experiment again to find if user preferences have changed, but if your model is right, interactions should start going down, and you can make the call to revert back to a horizontal layout.
 
 [^4]: A bit contrived, but easier to keep this blogpost manageable without explaining the ins and outs of PostHog graphs :). Also, don't tell our designer, they'll scream if they hear of this design revamp.
 
 All this is trying to say is experiment results don't stand the test of time, and reiterates the importance of extracting a useful model out of your experiment results.
-
 
 ## Bonus: Experimentation for web products is very different from clinical trials
 
