@@ -1,6 +1,6 @@
 ---
 date: 2022-03-23
-title: PostHog lets you keep your data in check
+title: Introducing Data Management in PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 author: ["alex-kim"]
-categories: ["Product updates"]
+categories: ["Product updates", "Launch week"]
 ---
 
 As PostHog grows, the data that users are sending to PostHog continues to grow into the double-digit billions. In just the last year (since we started measuring total events), we've gone from ~8B to ~36.5B total events ingested in PostHog Cloud!
@@ -23,7 +23,7 @@ As the biggest dogfooder of our own product, we (and many other teams) were begi
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
 3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
-Fret no more because we've been working hard to deliver a solution to your data management woes!
+Well, fret no more because we've been working hard to deliver a solution to your data management woes!
 
 Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PostHog. 
 
@@ -38,13 +38,12 @@ This is the first step in a continuous effort to help make organizing your data 
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
-## What is an Event?
+## How to create event and event property definitions
 
 [Events](/docs/user-guides/events) are the basic building blocks of data that is sent to PostHog. Events can capture a wide variety of different interactions, from a new user signing up to capturing a server event when an API endpoint is called.
 
 [Event Properties](/docs/user-guides/events#event-properties) make up the meat of the event. These can be viewed nested in the context of a single event, or as a flat list in the Data Management > Event Properties tab.
 
-## How to create event and event property definitions
 
 ### Creating definitions in the Insight Builder (on the fly!)
 
@@ -66,9 +65,9 @@ You can also opt to create definitions with our API. Check out our documentation
 
 ## How to use Data Management as a team (Best practices)
 
-1. **Rule of thumb**: The more definitions you define, the easier it will be for your teammates to understand what each event and property is describing. 
+1. **Rule of thumb**: The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.
 
-Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PH instance sending sign up events as `sign up`. Or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
+Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`. Or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
 
 3. **Rule of thumb**: Official organization-wide events should be verified so that teammates can discover and use them easily. 
 
@@ -80,7 +79,7 @@ We highly recommend using tags to organize events coming in from different parts
 
 ## We've moved some things around
 
-- The "Events & Actions" tab has been renamed to "Live Events".
+- Introducing "Live Events" which will help you debug your incoming event data in near real-time.
 - "Actions", "Event Stats", and "Property Stats" have been moved into the new "Data Management" tab.
 - "Event Stats" has been renamed to "Events"
 - "Property Stats" has been renamed to "Event Properties"
