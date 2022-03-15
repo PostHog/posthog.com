@@ -45,8 +45,7 @@ To aid serendipitous discoveries, we've created a project homepage to surface he
 In addition, if your team uses the [Recordings](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
 
 
-Mockup / screenshot here.
-
+![Concept of project home page](../images/blog/collaborating-on-posthog_4.png)
 
 ## Leveraging the work of your colleagues
 We find there are two general profiles for PostHog users:
