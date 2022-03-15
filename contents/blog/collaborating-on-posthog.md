@@ -37,7 +37,7 @@ In small teams it's common for a single person to own the analytics process, but
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-dashboard-permissions.png" width="500" alt="Screenshot of dashboard permissions" />
 
 
-### Use case two: Discovering interesting stuff you weren't looking for
+### Exploring data speculatively
 Sometimes you don't know what you're looking for, or you don't know where to start. There are many different avenues to improving your product. For example, we recently [discovered](https://github.com/PostHog/posthog/pull/7973) users seldom use our Paths advanced features and these could introduce mental burden to users.
 
 To aid serendipitous discoveries, we've created a project homepage to surface helpful insights you may not have considered. By making it the default page on PostHog, our aim is to help users make quick discoveries. We'll surface your most important product and company metrics here as well as popular insights, and we're leveraging social proof from what other teammates are doing in your app to help you discover more product improvements.
@@ -48,7 +48,7 @@ In addition, if your team uses the [Recordings](/product/session-recording) feat
 Mockup / screenshot here.
 
 
-## Use case three: Leverage what others discovered
+## Leveraging the work of your colleagues
 We find there are two general profiles for PostHog users:
 
 1. People who are naturally curious and whose job leads them to discover insights all the time and across multiple dimensions.
@@ -65,7 +65,9 @@ And for people who love discovering insights that others made, we've made it eas
 To support this work, we also introduced the new [Data Management](link_to_blog_post_here) feature, which brings together all the context on how your product is instrumented. Now there's no need to ask an Engineer or Product Manager which event you should use to answer a question, which both parties will appreciate!
 
 ## What's next?
-We continue to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). However, we're a fast moving company and we continuously reprioritize based on user feedback, market and need changes, and strategy changes, so while our goal to make more people successful with PostHog will remain, the way we tackle this problem and the actual product changes may change.
+We're continuing to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). 
+
+However, we're a fast moving company and we continuously reprioritize based on feedback, market needs, etc., do the way we tackle this problem may change.
 
 With the disclaimer above in mind, here's some exciting stuff we hope to ship soon. 
 ### Slack Previews
@@ -73,7 +75,9 @@ With the disclaimer above in mind, here's some exciting stuff we hope to ship so
 Almost every team uses some sort of Instant Messaging tool (think Slack, Discord, Teams, ...) and in particular, it's a place for discussions. We believe that adding more context when you share a link to a PostHog insight or dashboard will speed up discussions (e.g. a screenshot of the graph, general details, recent changes, ...). We're starting with Slack to test drive this concept, but if successful, expanding to other tools will make sense.
  
 ### Email subscriptions to dashboards and insights
-As we analyzed dashboard usage in PostHog (and from conversations with users too), we discovered it's quite common for teams to have 1-2 dashboards that represent critical metrics for their product and their company. These metrics, such as number of sales for an e-commerce company or retention for a pre-Product-Market-Fit startup, are so important that keeping an eye on them continuously is vital. A very user friendly way of doing this is integrating with current workflows, and almost everyone uses email. So you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
+As we analyzed dashboard usage in PostHog, we discovered it's quite common for teams to have 1-2 dashboards that represent their critical metrics, such as number of sales for an e-commerce company or retention for a pre-Product-Market-Fit startup. 
+
+A very user-friendly way of keeping users updated on these metrics is by integrating with their current workflows, such as email. Soon you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
 
 
 ### Embeddable graph images
