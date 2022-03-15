@@ -1,5 +1,13 @@
 ---
+date: 2022-03-21
 title: What launching Experimentation taught us about running effective A/B tests
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author: ["neil-kakkar"]
+featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImageType: full
 ---
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
@@ -8,11 +16,11 @@ It was a no brainer product decision: Since you're already analysing your data i
 
 Experiments allow you to choose a target metric, choose specific people to run this experiment on, and then estimate how long this experiment would run for.
 
-TK: Creation Image
+![PostHog - Experiment Creation](../images/blog/experimentation/experiment-creation.png)
 
 Thanks to feature flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. Once data starts trickling in, we run a Bayesian analysis to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are significant or not.
 
-TK: Running Experiment Image.
+![PostHog - Experiment Results](../images/blog/experimentation/experiment-results.png)
 
 Well, that's enough about how our experiments work. If you're interested in the technical details, check out the user guide. (TK: link) For now, let's get into three interesting things we learned about running successful experiments.
 
@@ -54,10 +62,9 @@ Both have issues. Your intuition might be how you see the world, but not necessa
 
 I'd recommend neither blindly trusting the data, nor your intuition. Experiments show you what is happening, but can't answer why. The real institutional knowledge comes with answering the why, and building up  an accurate model of who your users are, what they need, and how they interact with your product.
 
-To answer the why, you need to talk through the causes. [Create hypotheses about why](https://neilkakkar.com/Bayes-Theorem-Framework-for-Critical-Thinking.html) this is happening, watch user session recordings, and then make a call about what you want to do.
+To answer the why, you need to talk through the causes. <a target='_blank' rel="noopener" href='https://neilkakkar.com/Bayes-Theorem-Framework-for-Critical-Thinking.html'> Create hypotheses about why this is happening</a> , watch user session recordings, and then make a call about what you want to do.
 
 That is, bring data to conversations, but also talk through causes.
-
 
 ## Changing environments can invalidate experiment results
 
