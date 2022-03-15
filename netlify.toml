@@ -1178,7 +1178,6 @@
     from = "/docs/self-host/configure/async-migrations/overview"
     to = "/docs/self-host/configure/async-migrations"
 
-
 # Added: 2022-02-17
 [[redirects]]
     from = "/docs/privacy/overview"
@@ -1195,43 +1194,70 @@
     to = "/blog/best-hipaa-compliant-analytics-tools"
 
 
-# Added: 2022-03-15
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/conventions/frontend-coding"
-    to = "/docs/contribute/coding-conventions"
+    from = "/handbook/engineering/databases/async-migrations"
+    to = "/handbook/engineering/async-migrations"
 
-
-# Added: 2022-03-15
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/posthog-com/developing-the-website"
-    to = "/docs/contribute/contribute-to-website"
+    from = "/handbook/engineering/databases/event-ingestion"
+    to = "/handbook/engineering/event-ingestion"
 
 
-# Added: 2022-03-15
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/developing-locally"
-    to = "/docs/contribute/developing-locally"
+    from = "/handbook/engineering/databases/query-performance-optimization"
+    to = "/handbook/engineering/query-performance-optimization"
 
-
-# Added: 2022-03-15
+# Added: 2022-03-03
 [[redirects]]
-    from = "/handbook/engineering/project-structure"
-    to = "/docs/contribute/project-structure"
+    from = "/handbook/engineering/databases/schema-changes"
+    to = "/handbook/engineering/schema-changes"
 
 
-# Added: 2022-03-15
+# Added: 2022-03-10
 [[redirects]]
-    from = "/handbook/engineering/stack"
-    to = "/docs/contribute/stack"
+    from = "/handbook/engineering/aws"
+    to = "/handbook/engineering/cloud-providers"
 
 
-# Added: 2022-03-15
+# Added: 2022-03-10
 [[redirects]]
-    from = "/handbook/engineering/cloud-providers"
-    to = "/handbook/engineering/aws"
+    from = "/docs/contribute/coding-conventions"
+    to = "/handbook/engineering/conventions/frontend-coding"
 
 
-# Added: 2022-03-15
+# Added: 2022-03-10
 [[redirects]]
-    from = "/handbook/engineering/posthog-com/mdx-setup"
-    to = "/handbook/engineering/mdx"
+    from = "/docs/contribute/developing-locally"
+    to = "/handbook/engineering/developing-locally"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/handbook/engineering/mdx"
+    to = "/handbook/engineering/posthog-com/mdx-setup"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/project-structure"
+    to = "/handbook/engineering/project-structure"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/stack"
+    to = "/handbook/engineering/stack"
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/tutorials/categories/session-recordings"
+    to = "/tutorials/categories/session-recording"
+
+
+# Added: 2022-03-14
+[[redirects]]
+    from = "/docs/contribute/contribute-to-website"
+    to = "/handbook/engineering/posthog-com/developing-the-website"

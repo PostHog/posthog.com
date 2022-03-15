@@ -230,92 +230,136 @@
             "url": "",
             "children": [
                 {
-                    "name": "Development process",
+                    "name": "Getting started",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Developing locally",
+                            "url": "/handbook/engineering/developing-locally"
+                        },
+                        {
+                            "name": "Tech stack",
+                            "url": "/handbook/engineering/stack"
+                        },
+                        {
+                            "name": "Project structure",
+                            "url": "/handbook/engineering/project-structure"
+                        },
+                        {
+                            "name": "How we review PRs",
+                            "url": "/handbook/engineering/how-we-review"
+                        }
+                    ]
+                },
+                {
+                    "name": "Coding conventions",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Frontend coding",
+                            "url": "/handbook/engineering/conventions/frontend-coding"
+                        },
+                        {
+                            "name": "Backend coding",
+                            "url": "/handbook/engineering/conventions/backend-coding"
+                        }
+                    ]
+                },
+                {
+                    "name": "Internal processes",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Support hero",
+                            "url": "/handbook/engineering/support-hero"
+                        },
+                        {
+                            "name": "Feature ownership",
+                            "url": "/handbook/engineering/feature-ownership"
+                        },
+                        {
+                            "name": "Releasing a new version",
+                            "url": "/handbook/engineering/release-new-version"
+                        },
+                        {
+                            "name": "Bug prioritization",
+                            "url": "/handbook/engineering/bug-prioritization"
+                        }
+                    ]
+                },
+                {
+                    "name": "Working with data",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Event ingestion explained",
+                            "url": "/handbook/engineering/databases/event-ingestion"
+                        },
+                        {
+                            "name": "Making schema changes safely",
+                            "url": "/handbook/engineering/databases/schema-changes"
+                        },
+                        {
+                            "name": "How to optimize queries",
+                            "url": "/handbook/engineering/databases/query-performance-optimization"
+                        },
+                        {
+                            "name": "How to write an async migration",
+                            "url": "/handbook/engineering/databases/async-migrations"
+                        },
+                        {
+                            "name": "How to run migrations on PostHog Cloud",
+                            "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        }
+                    ]
+                },
+                {
+                    "name": "Deployments",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Deployments support",
+                            "url": "/handbook/engineering/deployments-support"
+                        },
+                        {
+                            "name": "Working with cloud providers",
+                            "url": "/handbook/engineering/cloud-providers"
+                        },
+                        {
+                            "name": "Breaking glass to debug PostHog Cloud",
+                            "url": "/handbook/engineering/production-access"
+                        }
+                    ]
+                },
+                {
+                    "name": "PostHog.com",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Developing the website",
+                            "url": "/handbook/engineering/posthog-com/developing-the-website"
+                        },
+                        {
+                            "name": "MDX setup",
+                            "url": "/handbook/engineering/posthog-com/mdx-setup"
+                        }
+                    ]
+                },
+                {
+                    "name": "Shipping things, step by step",
                     "url": "/handbook/engineering/development-process"
                 },
                 {
-                    "name": "How we review PRs",
-                    "url": "/handbook/engineering/how-we-review"
+                    "name": "Feature flags specification",
+                    "url": "/handbook/engineering/feature-flags-spec"
                 },
                 {
-                    "name": "Feature ownership",
-                    "url": "/handbook/engineering/feature-ownership"
-                },
-                {
-                    "name": "Releasing a new version",
-                    "url": "/handbook/engineering/release-new-version"
-                },
-                {
-                    "name": "Support hero",
-                    "url": "/handbook/engineering/support-hero"
-                },
-                {
-                    "name": "Deployments support",
-                    "url": "/handbook/engineering/deployments-support"
+                    "name": "Setting up SSL locally",
+                    "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
                     "name": "Tech talks",
                     "url": "/handbook/engineering/tech-talks"
-                },
-                {
-                    "name": "Bug prioritization",
-                    "url": "/handbook/engineering/bug-prioritization"
-                },
-                {
-                    "name": "Onboarding customers",
-                    "url": "/handbook/engineering/onboarding-customer"
-                },
-                {
-                    "name": "Setup SSL locally",
-                    "url": "/handbook/engineering/setup-ssl-locally"
-                },
-                {
-                    "name": "Common issues",
-                    "url": "/handbook/engineering/common-issues"
-                },
-                {
-                    "name": "Breaking glass to debug production",
-                    "url": "/handbook/engineering/production-access"
-                },
-                {
-                    "name": "Making schema changes safely",
-                    "url": "/handbook/engineering/schema-changes"
-                },
-                {
-                    "name": "AWS tips and FAQ",
-                    "url": "/handbook/engineering/aws"
-                },
-                {
-                    "name": "GCP tips and FAQ",
-                    "url": "/handbook/engineering/gcp"
-                },
-                {
-                    "name": "DigitalOcean tips and FAQ",
-                    "url": "/handbook/engineering/digitalocean"
-                },
-                {
-                    "name": "Feature flags spec",
-                    "url": "/handbook/engineering/feature-flags-spec"
-                },
-                {
-                    "name": "Website MDX setup",
-                    "url": "/handbook/engineering/mdx"
-                },
-                {
-                    "name": "Query performance optimization",
-                    "url": "/handbook/engineering/query-performance-optimization"
-                },
-                {
-                    "name": "Disruption Messages",
-                    "url": "/handbook/engineering/disruption-messages"
-                },
-                {
-                    "name": "Writing async migrations",
-                    "url": "/handbook/engineering/async-migrations"
-                },
-                {
-                    "name": "Event ingestion",
-                    "url": "/handbook/engineering/event-ingestion"
                 }
             ]
         },
@@ -374,11 +418,7 @@
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "name": "Product announcements",
-                    "url": "/handbook/growth/marketing/product-announcements"
-                },
-                {
-                    "name": "HostHogs (Running Events)",
+                    "name": "Events",
                     "url": "/handbook/growth/marketing/hosthogs"
                 },
                 {
@@ -390,20 +430,24 @@
                             "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                            "name": "Email",
-                            "url": "/handbook/growth/marketing/newsletter"
+                            "name": "Sponsorship",
+                            "url": "/handbook/growth/marketing/open-source-sponsorship"
                         },
                         {
                             "name": "Paid ads",
                             "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                            "name": "Press",
-                            "url": "/handbook/growth/marketing/press"
+                            "name": "Product launches",
+                            "url": "/handbook/growth/marketing/product-announcements"
                         },
                         {
-                            "name": "Open-source sponsorship",
-                            "url": "/handbook/growth/marketing/open-source-sponsorship"
+                            "name": "Email",
+                            "url": "/handbook/growth/marketing/newsletter"
+                        },
+                        {
+                            "name": "Press",
+                            "url": "/handbook/growth/marketing/press"
                         }
                     ]
                 }
@@ -536,6 +580,10 @@
                                 {
                                     "name": "Helm chart configuration",
                                     "url": "/docs/self-host/deploy/configuration"
+                                },
+                                {
+                                    "name": "Deploying ClickHouse using Altinity.Cloud",
+                                    "url": "/docs/self-host/configure/using-altinity-cloud"
                                 }
                             ]
                         },
@@ -860,10 +908,6 @@
                     "url": "/docs/user-guides"
                 },
                 {
-                    "name": "Application settings",
-                    "url": "/docs/user-guides/application-settings"
-                },
-                {
                     "name": "Actions",
                     "url": "/docs/user-guides/actions"
                 },
@@ -904,6 +948,10 @@
                     "url": "/docs/user-guides/group-analytics"
                 },
                 {
+                    "name": "Heatmaps",
+                    "url": "/docs/user-guides/toolbar"
+                },
+                {
                     "name": "Lifecycle",
                     "url": "/docs/user-guides/lifecycle"
                 },
@@ -924,16 +972,16 @@
                     "url": "/docs/user-guides/plugins"
                 },
                 {
-                    "name": "Recordings",
-                    "url": "/docs/user-guides/recordings"
-                },
-                {
                     "name": "Retention",
                     "url": "/docs/user-guides/retention"
                 },
                 {
-                    "name": "Sessions",
-                    "url": "/docs/user-guides/sessions"
+                    "name": "Session Recording",
+                    "url": "/docs/user-guides/recordings"
+                },
+                {
+                    "name": "Settings",
+                    "url": "/docs/user-guides/application-settings"
                 },
                 {
                     "name": "SSO & SAML",
@@ -998,24 +1046,6 @@
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "name": "Insights",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Overview",
-                            "url": "/docs/api/insights"
-                        },
-                        {
-                            "name": "Trend",
-                            "url": "/docs/api/trend"
-                        },
-                        {
-                            "name": "Funnel",
-                            "url": "/docs/api/funnel"
-                        }
-                    ]
-                },
-                {
                     "name": "Actions",
                     "url": "/docs/api/actions"
                 },
@@ -1048,12 +1078,20 @@
                     "url": "/docs/api/feature-flags"
                 },
                 {
+                    "name": "Funnels",
+                    "url": "/docs/api/funnel"
+                },
+                {
                     "name": "Groups",
                     "url": "/docs/api/groups"
                 },
                 {
                     "name": "Groups Types",
                     "url": "/docs/api/groups-types"
+                },
+                {
+                    "name": "Overview",
+                    "url": "/docs/api/insights"
                 },
                 {
                     "name": "Invites",
@@ -1086,6 +1124,10 @@
                 {
                     "name": "Session_recordings",
                     "url": "/docs/api/session-recordings"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/docs/api/trend"
                 },
                 {
                     "name": "User",
@@ -1138,26 +1180,6 @@
                 {
                     "name": "Recognizing contributions",
                     "url": "/docs/contribute/recognizing-contributions"
-                },
-                {
-                    "name": "Developing locally",
-                    "url": "/docs/contribute/developing-locally"
-                },
-                {
-                    "name": "Tech stack",
-                    "url": "/docs/contribute/stack"
-                },
-                {
-                    "name": "Project structure",
-                    "url": "/docs/contribute/project-structure"
-                },
-                {
-                    "name": "Contribute to this website",
-                    "url": "/docs/contribute/contribute-to-website"
-                },
-                {
-                    "name": "Coding conventions",
-                    "url": "/docs/contribute/coding-conventions"
                 }
             ]
         }

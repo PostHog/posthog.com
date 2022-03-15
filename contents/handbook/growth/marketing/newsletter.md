@@ -4,9 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We do not currently do email marketing, beyond product announcements via our newsletter, the PostHog Array. This is sent via Mailchimp. In the future, we will probably want to grow this channel. The Growth team use email for onboarding and other email flows, but this page covers marketing only. 
-
-Speak to Charles, Yakko, or Charles for more information. 
+We are in the process of putting together an updated regular newsletter. This is sent via Mailchimp. The Growth team use email for onboarding and other email flows, but this page covers marketing only. 
 
 ## Lists
 
@@ -15,9 +13,7 @@ We currently grow our general email list from three sources:
 - PostHog users who opt-in
 - Event attendees
 
-We send a newsletter after every product release (2-4 weeks) and include a summary of the new version and any recent news or blog posts. 
-
-We aim to include at least one new blog post in every newsletter - ideally 2-4 per edition.
+We send a newsletter called the PostHog Array after every product release (2-4 weeks) and include a summary of the new version and any recent news or blog posts.  
 
 ## Newsletter format
 
