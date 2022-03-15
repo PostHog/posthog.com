@@ -25,9 +25,7 @@ As the biggest dogfooder of our own product, we (and many other teams) were begi
 
 Well, fret no more because we've been working hard to deliver a solution to your (and our) data management woes!
 
-Today, we're officially announcing our new Data Management experience, which introduces new ways to help you organize events and properties being sent to PostHog. 
-
-This is just the first step in our ongoing commitment to making organizing your data easier. In this release, we're **introducing a dedicated Data Management tab** and giving you the power to:
+Today, we're officially announcing our new Data Management experience, which introduces new ways to organize events and properties being sent to PostHog, such as the ability to: 
 
 - Create definitions for events and event properties
 - Manage data on the fly while building insights
@@ -35,6 +33,9 @@ This is just the first step in our ongoing commitment to making organizing your 
 - Organize your definitions with tags
 - Give custom names and descriptions to events and properties
 - Make the right events and properties discoverable with event metrics
+
+All of these features can be managed from the new Data Management tab, and these are just the first steps in our ongoing commitment to making organizing your data easier.
+
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
