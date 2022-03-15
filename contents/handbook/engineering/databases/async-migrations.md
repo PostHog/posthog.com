@@ -1,12 +1,10 @@
 ---
-title: Async Migrations
+title: How to write an async migration
 sidebar: Handbook
 showTitle: true
 ---
 
-See the user facing documentation under [self-host/configure/async-migrations](/docs/self-host/configure/async-migrations)
-
-## How do async migrations work?
+Also see: user-facing documentation under [self-host/configure/async-migrations](/docs/self-host/configure/async-migrations).
 
 ### Writing an async migration
 
@@ -117,4 +115,3 @@ Code related to running an async migration, from executing operations in sequenc
 #### posthog/async_migrations/utils.py
 
 Code to support the runner in tasks that do not depend on the availability of the migration definition (module).
-
