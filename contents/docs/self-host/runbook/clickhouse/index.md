@@ -63,7 +63,7 @@ ClickHouse has a great list of [tips](https://clickhouse.com/docs/en/operations/
 - Use `performance` CPU Scaling Governor
 - Use a ton of RAM for your instance. ClickHouse loves to use the page cache to speed up queries and prevent hitting disk. If you can fit your entire dataset in memory, get a node that has that much in RAM. You will get the best performance.
 - Do not disable overcommit. The value `cat /proc/sys/vm/overcommit_memory` should be 0 or 1.
-- If you can, use SSD over spinning disk. If you use Spinning disk use 7200RPM disks.
+- If you can, use SSD over spinning disk. If you use spinning disk use 7200RPM disks.
 - Software RAID on linux is preferred. Specifically use RAID 10 in `far` layout
 - Calculate the exact number from the number of devices and the block size, using the formula: `2 * num_devices * chunk_size_in_bytes / 4096`.
 - Use `ext4`
