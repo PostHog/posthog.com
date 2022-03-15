@@ -31,11 +31,11 @@ The Data Management (pictured below) is the hub for viewing, editing and managin
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
-In creating the Data Management tab, we've made a few important changes to how data is organized. "Event Stats" and "Property Stats" have been renamed "Events" and "Event Properties" and we've moved them into the Data Management tab alongside "Actions".
+Data Management introduces more ways to organize and categorise your events. Event definitions can now be organized using tags and we've created the "Verified event" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritzed within filters and other selection components, ensuring people use the correct events when creating insights.
 
-Data Management introduces more ways to organize and categorise your events, too. Event definitions can now be organized using tags and we've created the "Verified event" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritzed within filters and other selection components, ensuring people use the correct events when creating insights.
+Existing users should note we've made a few important changes to how data is organized, too. "Event Stats" and "Property Stats" have been renamed "Events" and "Event Properties" and we've moved them into the Data Management tab alongside "Actions".
 
-We've also introduced a new Live Events tab, which makes it easy to debug incoming event data by streaming it in near real time.
+Alongside Data Management, we've also introduced a new Live Events tab, which makes it easy to debug incoming event data by streaming it in near real time.
 
 [Live Events Screenshot here]
 
