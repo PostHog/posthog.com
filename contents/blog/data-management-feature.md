@@ -11,7 +11,7 @@ author: ["alex-kim"]
 categories: ["Product updates", "Launch week"]
 ---
 
-PostHog is growing fast. In just the last year (since we started measuring total events), we measured ~36.5B total events ingested in PostHog Cloud alone! Hundreds of our self-hosted users reached the 1M total ingested events milestone this year as well.
+PostHog is growing fast. In just the last year (since we started measuring total events), we measured ~36.5B total events ingested in PostHog Cloud alone, and hundreds of self-hosted users reached the 1M total ingested events milestone!
 
 This is a sign of the superb growth we're seeing as a business, but data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
@@ -25,25 +25,25 @@ We set out to solve these pain points and the result is the new Data Management 
 
 ## The new Data Management and Live Events tabs
 
-The Data Management (pictured below) is the hub for viewing, editing and managing all the data coming into your instance. 
+The Data Management page (pictured below) is the hub for viewing, editing and managing all the data coming into your instance. 
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
-Data Management introduces more ways to organize and categorise your events. Event definitions can now be organized using tags and we've created the "Verified event" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritzed within filters and other selection components, ensuring people use the correct events when creating insights.
+Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the "Verified" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritized within filters and other selection components, ensuring people use the correct events when creating insights. We're also surfacing sortable 30 day volume and query volume metrics for each definition, which signals as a freshness indicator for how those events and properties are being used.
 
-Existing users should note we've made a few important changes to how data is organized, too. "Event Stats" and "Property Stats" have been renamed "Events" and "Event Properties" and we've moved them into the Data Management tab alongside "Actions".
+Existing users should note we've made a few important changes to how data is organized, too. "Event Stats" and "Property Stats" have been renamed "Events" and "Event Properties," and we've moved them into the Data Management tab alongside "Actions".
 
-Alongside Data Management, we've also introduced a new Live Events tab, which makes it easy to debug incoming event data by streaming it in near real time.
+Alongside Data Management, we've moved "Events" into a new Live Events tab, which makes it easy to debug incoming event data by streaming it in near real time.
 
-[Live Events Screenshot here]
+![PostHog - live events tab](../images/blog/data-management-feature/live_events.png)
 
 ## Making it easy to define events 'on the fly'
 
 Not only are we giving you more ways to organize and define events, we're also making it easy to edit them wherever you are in the product.
 
-Building an insight and see an event or Event Property that could be more descriptive? You can now create a definition for that without leaving the insight query builder.
+Building an insight and see an Event or Event property that could be more descriptive? You can now create a definition for that without leaving the insight query builder.
 
-Just hover over the Even Property in the dropdown...
+Just hover over the Event Property in the dropdown...
 
 ![PostHog - read definition hover card](../images/blog/data-management-feature/read_definition_card.png)
 
@@ -53,7 +53,7 @@ And when you click 'Edit' you can add a description, add tags or mark it as a Ve
 
 Alternatively, click on 'View' in the definition hover card and you'll be redirected to the new Data Management page, where you can explore all the Events and Event Properties you've created.
 
-[WIP screenshot]
+![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
 
 And if you want a gold star in best practice, you can also opt to create definitions with our API. Check out our documentation on how to use the [`event_definitions`](/docs/api/event-definitions) and [`property_definitions`](/docs/api/property-definitions) API endpoints.
 
@@ -69,15 +69,17 @@ Take a custom event sent as `sign_up` for example that is triggered on user sign
 
 2. Official organization-wide events should be verified so that teammates can discover and use them easily. 
 
-Verified events will be prioritized in filters and other selection components to signal to the rest of the team that this event should be used in favor of other similar events.
+Verified events will be prioritized in filters and other selection components to signal to the rest of the team that this event should be used in favor of other similar events. An example where this comes in handy is if there are two events that sound familiar, `signed up` and `signed_up`. Verifying the first tells others very explicitly that one is still being used and the other has gone stale.
 
 3. Tagging is an easy way to categorize events into custom groups, be it for a product, feature or new page. 
 
-We highly recommend using tags to organize events coming in from different parts of your product. 
+We highly recommend using tags to organize events coming in from different parts of your product. At PostHog for example, we use tags called `session-recordings`, `funnels`, and `feature-flags` to keep track of insights and dashboards related to those features. 
+
+Tags can also be useful for organizing PostHog for internal use. We create tags for each of our internal [small teams](/handbook/people/team-structure/team-structure/why-small-teams) to signal which dashboards are interesting to our respective teams.
 
 ## What's next for Data Management?
 
-To recap, the new Data Management experiences means you can:
+To recap, the new Data Management experience means you can:
 
 - Organize your definitions with tags
 - Manage event definitions on the fly while building insights
@@ -85,6 +87,12 @@ To recap, the new Data Management experiences means you can:
 - Easily manage all your Events, Event Properties and Actions in the Data Management tab
 - Debug your incoming events using in the Live Events tab
 
-These are powerful tools for organizing your data, but we're just scratching the surface. 
+These are powerful tools for organizing your data, but we're just scratching the surface. Below are just a few ideas on our roadmap that we think you'll like:
+
+- Deeper integration of hover definition cards throughout the app
+- Role-based ownership of definitions
+- Personally identifiable information (PII) rules
+- Anomaly detection for malformed Events and Properties
+- Person and Group Property definitions
 
 As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack). Or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
