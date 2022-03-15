@@ -87,6 +87,6 @@ To recap, the new Data Management experiences means you can:
 - Easily manage all your Events, Event Properties and Actions in the Data Management tab
 - Debug your incoming events using in the Live Events tab
 
-These are powerful tools for organizing your data, but we're just scratching the surface. [AV: Let's elaborate a little more here on the roadmap. Only needs to be top-level]
+These are powerful tools for organizing your data, but we're just scratching the surface. 
 
 As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack). Or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
