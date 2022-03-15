@@ -39,6 +39,10 @@ There are a few handy ways of collecting and accessing metrics about ClickHouse.
 
 If you use DataDog you can even use their examples to collect and report on metrics found [here](https://www.datadoghq.com/blog/monitor-clickhouse/).
 
+Sematext has a great post on important metrics for ClickHouse and how to collect them on their [blog](https://sematext.com/blog/clickhouse-monitoring-key-metrics/). It's a great read and quite detailed.
+
+Collecting, reporting, and monitoring metrics is similar for all installations, but unique to every organization depending on the tools you are using elsewhere within your organization. We will be firming up on our own opinions in the future, but for now it may make the most sense to integrate these metrics into systems that you are using for monitoring other production workloads.
+
 ### Zookeeper
 
 We have shipped zookeeper with our stack in preparation of sharding, but we don't broadly support sharding or replication on all installations yet. We will update this section soon.
