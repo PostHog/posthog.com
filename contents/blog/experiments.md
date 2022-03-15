@@ -2,38 +2,20 @@
 title: What launching Experimentation taught us about running effective A/B tests
 ---
 
-PostHog started off with simple product analytics. You want some data analysed, so you ingest this data. PostHog then lets you visualise this, slice it over multiple axes, and helps you answer any product questions you have.
+We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-Then came feature flags, which allow you to toggle features on and off, change what users see live.
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using feature flags to roll out new features, why not give the capability to test how well the changes are doing?
 
-It was a no brainer then to take the next step and introduce Experimentation. Since you're already analysing your data in PostHog, and are feature flagging new features, why not give the capability to test significant changes as well?
+Experiments allow you to choose a target metric, choose specific people to run this experiment on, and then estimate how long this experiment would run for.
 
-We recently launched Experiments, and there's a ton we learned about running successful experiments. That's what this post is about.
+TK: Creation Image
 
-## The Peeking Problem is poorly named
+Thanks to feature flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. Once data starts trickling in, we run a Bayesian analysis to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are significant or not.
 
-The strawman pop-sci version of the peeking problem goes something like: "You shouldn't look at experiment results while the experiment is running because that can lead to you ending experiments early, when the data is skewed in favour of one variant, thanks to random chance."
+TK: Running Experiment Image.
 
-However, peeking isn't the problem. The problem is taking action too quickly after peeking.
+Well, that's enough about how our experiments work. If you're interested in the technical details, check out the user guide. (TK: link) For now, let's get into three interesting things we learned about running successful experiments.
 
-We built this into our product: Peeking is fun, almost addicting, when you can see your experiment results changing in real time. It gives a sense of excitement, seeing your hypotheses being proven right or wrong. More importantly, it keeps you coming back to the experiment, tracking its progress.
-
-To solve the Taking-action-without-enough-information problem, we made it clear in our UI when it was okay to end an experiment: When results become significant, or the pre-determined duration for peeking has passed.[^1] This changed the conversation from 'peeking early and ending experiment if results look good' to 'waiting for the green light to switch on', and led to an overall much better experience.
-
-[^1]: If you're looking for how we calculate this, see the user guide (TK: link)
-
-
-## The kind of experiment you run determines how much data you need
-
-PostHog allows running two kinds of experiments:
-
-1. Trend experiments, which work on an absolute count. For example, a target metric like: "Number of people who clicked this specific button" would be a trend experiment. These kind of experiments deal with absolute numbers.
-
-2. Conversion experiments, which work on a relative percentage. These are the traditional popular kind of experiments. "Conversion rate for the sign up -> purchase flow"
-
-Perhaps surprisingly, trend experiments need more data and time to reach significance, versus conversion experiments. The reasoning is a bit complicated, but reach out if you're interested, we'll write an appendix! The short version is: You need 2 dimensions for both, test and control variants to accurately judge experiment results. In conversion experiments, these are people who entered the funnel, and people who exited the funnel. But for trends, you only have one count, the number of people who did the event. The second dimension for trends is exposure: a proxy for how long the experiment has been running. Since this parameter is completely dependent on time, these experiments tend to take a bit longer to reach significance. 
-
-(TK: well, all 4 params are dependent on time in a way, soooo.... this is a bit confusing)
 
 ## Choosing the right metric is hard
 
@@ -92,15 +74,14 @@ You could run an experiment again to find if user preferences have changed, but 
 All this is trying to say is experiment results don't stand the test of time, and reiterates the importance of extracting a useful model out of your experiment results.
 
 
-## Control for control
+## Bonus: Experimentation for web products is very different from clinical trials
 
-5. Control groups? -> All experiments are relative.
-  6. Selection bias
+Another interesting thing we learned is that we can't simply run experiments for web products like we do a clinical trial. Rigor is important, but if it takes you a year to make up your mind about a vertical vs horizontal layout, you'll be in trouble.
 
-TK: I don't remember what this was supposed to be??
+This kind of rigor makes sense when you're developing a new drug: there's lives at stake, and mistakes do result in casualties. Thankfully, human biology is reliably consistent, so it's not like dopamine will start causing convulsions any time soon.
 
-Multi armed bandits? -> No, skip.
+By contrast, web products are much lower stakes, and are present in an ever changing environment. Culture and individual preferences can change rapidly, and the cost of getting experiments wrong isn't too high, you can easily revert them later on.
 
-8. Clinical trials are very different from website changes -->>> hmm condense this. What am I trying to say?
+Thus, moving quickly trumps rigor in web product experiments.
 
-
+We built experiments with this in mind. It's a web product, built for products that move quickly. That's all for this post, we'd love to have you try Experiments out, and tell us what you learn :)
