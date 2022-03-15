@@ -29,7 +29,9 @@ The Data Management page (pictured below) is the hub for viewing, editing and ma
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
-Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the "Verified" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritized within filters and other selection components, ensuring people use the correct events when creating insights. We're also surfacing sortable 30 day volume and query volume metrics for each definition, which signals as a freshness indicator for how those events and properties are being used.
+Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the 'Verified' marker, which tells collaborators that an event should be favored over other similar events. 
+
+Verified events are also prioritized within filters and other selection components, and we've introduced to two sortable "freshness" indicators (30-day volume and query volume) to make it easier to choose the correct events when creating Insights.
 
 As part of this overhaul, we've made a few important changes to how data is organized, too. 'Event Stats' and 'Property Stats' have been renamed 'Events' and 'Event properties', and we've moved them into the Data Management tab alongside 'Actions'. The 'Events & Actions' tab has been renamed 'Live Events', where you can debug incoming event data by streaming it in near real time.
 
