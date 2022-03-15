@@ -23,7 +23,7 @@ The metrics you should keep an eye on with ClickHouse are:
 - Latency of Events from ingestion -> visibility in ClickHouse <- This is an indication of ClickHouse falling behind.
 - Disk IOPS
 - Disk throughput (read and write)
-- CPU IO Wait time
+- CPU I/O wait (iowait) time
 - CPU boundedness (high CPU utilization)
 - MergeTree Parts Count (by table)
 - Replication lag (by table and if enabled)
