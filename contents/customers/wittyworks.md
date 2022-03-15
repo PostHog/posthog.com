@@ -15,7 +15,7 @@ toolsUsed:
 
 [Witty Works](https://www.witty.works/) is the creator of Witty, an AI-based assistant which guides users to become better, more inclusive writers. Since launching in 2018 it has been adopted by organizations such as Microsoft and Deloitte to help discourage unconscious bias in written communications. 
 
-Initially, the team built their own tool for gathering product data, writing a JSON file into the file system for every event observed. Eventually, this proved untenable and unscalable. 
+Initially, the team built their own tool for gathering product data, writing a JSON file into the file system for every event observed. Eventually, this proved unscalable. 
 
 “We crashed the production platform due to having too many files in the system,” said CTO and Co-founder Lukas Smith. “We considered switching to Google Analytics, but there were a lot of concerns around GDPR and I wanted something that could be self-hosted. That’s what led me to PostHog.”
 ## Creating plugins to connect systems and protect user privacy
