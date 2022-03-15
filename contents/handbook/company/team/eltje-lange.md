@@ -21,7 +21,7 @@ Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/M
 
 ## My role
 
-I look after everything that has to do with the team - all hiring, people-related initiates as well as the culture here at PostHog. 
+I look after everything that has to do with the team - all hiring, people-related initiatives as well as the culture here at PostHog. 
 
 My personal goal is to scale the team in a sustainable way and create an environment where everyone feels like they belong and can genuinely be themselves, while also developing in their career. 
 

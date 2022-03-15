@@ -1,5 +1,5 @@
 ---
-title: Breaking glass to debug production
+title: Breaking glass to debug PostHog Cloud
 sidebar: Handbook
 showTitle: true
 ---
