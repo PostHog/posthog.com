@@ -21,7 +21,7 @@ As with any database it is important to keep an eye on metrics to make sure ever
 
 The metrics you should keep an eye on with ClickHouse are:
 - Latency of Events from ingestion -> visibility in ClickHouse <- This is an indication of ClickHouse falling behind.
-- Disk iops
+- Disk IOPS
 - Disk throughput (read and write)
 - CPU IO Wait time
 - CPU boundedness (high CPU utilization)
