@@ -952,6 +952,10 @@
                     "url": "/docs/user-guides/toolbar"
                 },
                 {
+                    "name": "Insights",
+                    "url": "/docs/user-guides/insights"
+                },
+                {
                     "name": "Lifecycle",
                     "url": "/docs/user-guides/lifecycle"
                 },
