@@ -27,7 +27,7 @@ We set out to solve these pain points and the result is the new Data Management 
 
 ## The new Data Management and Live Events tabs
 
-The Data Management (pictured below) is the hub viewing, editing and managing all the data coming into your instance. 
+The Data Management (pictured below) is the hub for viewing, editing and managing all the data coming into your instance. 
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
