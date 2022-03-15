@@ -12,9 +12,9 @@ featuredImageType: full
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using feature flags to roll out new features, why not give the capability to test how well the changes are doing?
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using feature flags to roll out new features, why not have the capability to test how well these features are doing?
 
-Experiments allow you to choose a target metric, choose specific people to run this experiment on, and then estimate how long this experiment would run for.
+Experiments allow you to choose a target metric, choose specific people to run this experiment on, and estimate how long this experiment would run for.
 
 ![PostHog - Experiment Creation](../images/blog/experimentation/experiment-creation.png)
 
@@ -22,7 +22,7 @@ Thanks to feature flags, you can then easily validate whether each variant looks
 
 ![PostHog - Experiment Results](../images/blog/experimentation/experiment-results.png)
 
-Well, that's enough about how our experiments work. If you're interested in the technical details, check out the user guide. (TK: link) For now, let's get into three interesting things we learned about running successful experiments.
+Well, that's enough about how experiments work. If you're interested in the technical details, check out the user guide. (TK: link) For now, let's get into three interesting things we learned about running successful experiments.
 
 
 ## Choosing the right metric is hard
