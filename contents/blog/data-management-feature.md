@@ -1,6 +1,6 @@
 ---
 date: 2022-03-23
-title: Introducing Data Management in PostHog
+title: Introducing Data Management for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,11 +11,11 @@ author: ["alex-kim"]
 categories: ["Product updates", "Launch week"]
 ---
 
-As PostHog grows, the data that users are sending to PostHog continues to grow into the double-digit billions. In just the last year (since we started measuring total events), we've gone from ~8B to ~36.5B total events ingested in PostHog Cloud!
+PostHog is growing fast. In just the last year (since we started measuring total events), we've gone from ~8B to ~36.5B total events ingested in PostHog Cloud alone!
 
 ![PostHog - total events](../images/blog/data-management-feature/total_events.png)
 
-Data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
+This is great for us as a business, but data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
 As the biggest dogfooder of our own product, we (and many other teams) were beginning to see the consequences of the lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
 
@@ -23,11 +23,11 @@ As the biggest dogfooder of our own product, we (and many other teams) were begi
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
 3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
-Well, fret no more because we've been working hard to deliver a solution to your data management woes!
+Well, fret no more because we've been working hard to deliver a solution to your (and our) data management woes!
 
-Today we're releasing our Data Management feature, which introduces new ways to help you organize events and properties being sent to PostHog. 
+Today, we're officially announcing our new Data Management experience, which introduces new ways to help you organize events and properties being sent to PostHog. 
 
-This is the first step in a continuous effort to help make organizing your data easier. You can now:
+This is just the first step in our ongoing commitment to making organizing your data easier. In this release, we're **introducing a dedicated Data Management tab** and giving you the power to:
 
 - Create definitions for events and event properties
 - Manage data on the fly while building insights
