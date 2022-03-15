@@ -8,21 +8,22 @@ hideAnchor: true
 author: ["neil-kakkar"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
+categories: ["Product updates", "Launch week"]
 ---
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using feature flags to roll out new features, why not have the capability to test how well these features are doing?
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing?
 
 Experiments allow you to choose a target metric, choose specific people to run this experiment on, and estimate how long this experiment would run for.
 
 ![PostHog - Experiment Creation](../images/blog/experimentation/experiment-creation.png)
 
-Thanks to feature flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. Once data starts trickling in, we run a Bayesian analysis to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are significant or not.
+Thanks to Feature Flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. Once data starts trickling in, we run a Bayesian analysis to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are significant or not.
 
 ![PostHog - Experiment Results](../images/blog/experimentation/experiment-results.png)
 
-Well, that's enough about how experiments work. If you're interested in the technical details, check out the user guide. (TK: link) For now, let's get into three interesting things we learned about running successful experiments.
+Well, that's enough about how experiments work. If you're interested in the technical details, check out the [Experimentation user guide](/docs/user-guides/experimentation). For now, let's get into three interesting things we learned about running successful experiments.
 
 
 ## Choosing the right metric is hard
@@ -36,7 +37,7 @@ Now, you can choose two metrics:
 
 Which one do you choose?
 
-Note that you're choosing the total interactions here, not unique interactions. Which means if one person clicks on the funnel three times, that counts as 3 interactions for either metric, as it should.
+Note that you're choosing the total interactions here, not unique interactions. Which means if one person clicks on the funnel three times, that counts as three interactions for either metric, as it should.
 
 There's a big problem with metric #1: It's global, and a lot more susceptible to things out of our control. For example, if Trends power users are somehow assigned to the control group, you'll unfortunately have a big skew towards control which has nothing to do with the different funnel layouts.
 
@@ -50,23 +51,23 @@ Another advantage of local metrics over global is that it can be hard to reliabl
 
 [^2]: Depends a lot on how big and mature your product is, and how many sub features it has. If there's only one thing the app does, the local metric is the global metric.
 
-## Experiment results aren't set in stone
+## 2. Experiment results aren't set in stone
 
-So, you just finished running the experiment above, and the results are in. Horizontal funnel layout had 1000 interactions, while vertical funnel layout had 1200. The results ended up being significant, with vertical funnel layout being 20% better.
+So, you just finished running the experiment above, and the results are in. Horizontal funnel layout had 1,000 interactions, while vertical funnel layout had 1,200. The results ended up being significant, with vertical funnel layout being 20% better.
 
 All well and good... except this goes against everything you know about using your own product. You find the vertical view congested, hard to parse, and sort of terrible.
 
 Do you blindly trust the data, or your intuition?
 
-Both have issues. Your intuition might be how you see the world, but not necessarily how people who use the product see the world. At the same time, what if there was a bug in the vertical layout implementation, which counted each interaction twice? Thus, the real number could've been 600, instead of 1200, which massively changes your product direction.
+Both have issues. Your intuition might be how you see the world, but not necessarily how people who use the product see the world. At the same time, what if there was a bug in the vertical layout implementation, which counted each interaction twice? Thus, the real number could've been 600, instead of 1,200, which massively changes your product direction.
 
-I'd recommend neither blindly trusting the data, nor your intuition. Experiments show you what is happening, but can't answer why. The real institutional knowledge comes with answering the why, and building up  an accurate model of who your users are, what they need, and how they interact with your product.
+I'd recommend neither blindly trusting the data, nor your intuition. Experiments show you what is happening, but can't answer why. The real institutional knowledge comes with answering the why, and building up an accurate model of who your users are, what they need, and how they interact with your product.
 
 To answer the why, you need to talk through the causes. <a target='_blank' rel="noopener" href='https://neilkakkar.com/Bayes-Theorem-Framework-for-Critical-Thinking.html'> Create hypotheses about why this is happening</a> , watch user session recordings, and then make a call about what you want to do.
 
 That is, bring data to conversations, but also talk through causes.
 
-## Changing environments can invalidate experiment results
+## 3. Changing environments can invalidate experiment results
 
 So, you've finally gotten results for the experiment above, and figured out why they're like this. Turns out, the vertical layout promotes interaction as it allows users to see all steps of the funnel in one go, click on the steps that seem surprising, see the persons involved in that step, watch their recordings, etc. etc. While the horizontal is a bit more frustrating to see all this information at a glance, causing faster bounces.
 
@@ -91,4 +92,6 @@ By contrast, web products are much lower stakes, and are present in an ever chan
 
 Thus, moving quickly trumps rigor in web product experiments.
 
-We built experiments with this in mind. It's a web product, built for products that move quickly. That's all for this post, we'd love to have you try Experiments out, and tell us what you learn :)
+We built Experimentation with this in mind. It's a web product, built for products that move quickly. 
+
+That's all for this post, we'd love to have you start your own experiments and tell us what you learn. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack), or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team if you have feedback to share.
