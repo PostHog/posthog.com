@@ -1215,3 +1215,45 @@
 [[redirects]]
     from = "/handbook/engineering/databases/schema-changes"
     to = "/handbook/engineering/schema-changes"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/conventions/frontend-coding"
+    to = "/docs/contribute/coding-conventions"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/developing-the-website"
+    to = "/docs/contribute/contribute-to-website"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/developing-locally"
+    to = "/docs/contribute/developing-locally"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/project-structure"
+    to = "/docs/contribute/project-structure"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/stack"
+    to = "/docs/contribute/stack"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/cloud-providers"
+    to = "/handbook/engineering/aws"
+
+
+# Added: 2022-03-15
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/mdx-setup"
+    to = "/handbook/engineering/mdx"
