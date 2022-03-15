@@ -11,7 +11,7 @@ author: ["alex-kim"]
 categories: ["Product updates", "Launch week"]
 ---
 
-PostHog is growing fast. In just the last year (since we started measuring total events), we measured ~36.5B total events ingested in PostHog Cloud alone, and hundreds of self-hosted users reached the 1M total ingested events milestone!
+PostHog is growing fast. In just the last year we've measured ~36.5B total events ingested in PostHog Cloud alone, and hundreds of self-hosted users reached the 1M total ingested events milestone.
 
 This is a sign of the superb growth we're seeing as a business, but data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
@@ -31,9 +31,7 @@ The Data Management page (pictured below) is the hub for viewing, editing and ma
 
 Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the "Verified" marker, which tells collaborators that an event should be favored over other similar events. Verified events are also prioritized within filters and other selection components, ensuring people use the correct events when creating insights. We're also surfacing sortable 30 day volume and query volume metrics for each definition, which signals as a freshness indicator for how those events and properties are being used.
 
-Existing users should note we've made a few important changes to how data is organized, too. "Event Stats" and "Property Stats" have been renamed "Events" and "Event Properties," and we've moved them into the Data Management tab alongside "Actions".
-
-Alongside Data Management, we've moved "Events" into a new Live Events tab, which makes it easy to debug incoming event data by streaming it in near real time.
+As part of this overhaul, we've made a few important changes to how data is organized, too. 'Event Stats' and 'Property Stats' have been renamed 'Events' and 'Event properties', and we've moved them into the Data Management tab alongside 'Actions'. The 'Events & Actions' tab has been renamed 'Live Events', where you can debug incoming event data by streaming it in near real time.
 
 ![PostHog - live events tab](../images/blog/data-management-feature/live_events.png)
 
@@ -43,7 +41,7 @@ Not only are we giving you more ways to organize and define events, we're also m
 
 Building an insight and see an Event or Event property that could be more descriptive? You can now create a definition for that without leaving the insight query builder.
 
-Just hover over the Event Property in the dropdown...
+Just hover over the Event property in the dropdown...
 
 ![PostHog - read definition hover card](../images/blog/data-management-feature/read_definition_card.png)
 
@@ -51,7 +49,7 @@ And when you click 'Edit' you can add a description, add tags or mark it as a Ve
 
 ![PostHog - write definition hover card](../images/blog/data-management-feature/write_definition_card.png)
 
-Alternatively, click on 'View' in the definition hover card and you'll be redirected to the new Data Management page, where you can explore all the Events and Event Properties you've created.
+Alternatively, click on 'View' in the definition hover card and you'll be redirected to the new Data Management page, where you can explore all the Events and Event properties you've created.
 
 ![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
 
@@ -65,7 +63,7 @@ To help you in your journey to data management nirvana, here are a few rules of 
 
 1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.
 
-Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self explanatory, right? Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`. Or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
+Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self-explanatory, right? Not necessarily. Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`; or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
 
 2. Official organization-wide events should be verified so that teammates can discover and use them easily. 
 
@@ -84,14 +82,14 @@ To recap, the new Data Management experience means you can:
 - Organize your definitions with tags
 - Manage event definitions on the fly while building insights
 - Verify trusted definitions which are prioritized in the UI
-- Easily manage all your Events, Event Properties and Actions in the Data Management tab
+- Easily manage all your Events, Event properties and Actions in the Data Management tab
 - Debug your incoming events using in the Live Events tab
 
 These are powerful tools for organizing your data, but we're just scratching the surface. Below are just a few ideas on our roadmap that we think you'll like:
 
 - Role-based ownership of definitions
 - Personally identifiable information (PII) rules
-- Anomaly detection for malformed Events and Properties
+- Anomaly detection for malformed events and properties
 - Person and Group Property definitions
 
-As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog) or give us a shout in our [PostHog community Slack channel](/slack). Or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
+As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack),  or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
