@@ -91,6 +91,18 @@ By contrast, web products are much lower stakes, and are present in an ever chan
 
 Thus, moving quickly trumps rigor in web product experiments.
 
-We built Experimentation with this in mind. It's a web product, built for products that move quickly. 
+We built Experimentation with this in mind. It's a web product, built for products that move quickly.
+
+Another example where this difference shines through is the peeking problem.
+
+The strawman, pop-sci version of the peeking problem goes something like: "You shouldn't look at experiment results while the experiment is running because that can lead to you ending experiments early, when the data is skewed in favour of one variant, thanks to random chance."
+
+However, peeking isn't the problem. The problem is taking action too quickly after peeking.
+
+We built this into our product: Peeking is fun, almost addicting, when you can see your experiment results changing in real time. It gives a sense of excitement, seeing your hypotheses being proven right or wrong. More importantly, it keeps you coming back to the experiment, tracking its progress.
+
+To solve the Taking-action-without-enough-information problem, we made it clear in our UI when it was okay to end an experiment: When results become significant, or the pre-determined duration for peeking has passed.[^1] This changed the conversation from 'peeking early and ending experiment if results look good' to 'waiting for the green light to switch on', and led to an overall much better experience.
+
+[^1]: If you're looking for how we calculate this, see the [user guide](/docs/user-guides/experimentation)
 
 That's all for this post, we'd love to have you start your own experiments and tell us what you learn. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack), or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team if you have feedback to share.
