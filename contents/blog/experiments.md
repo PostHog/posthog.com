@@ -85,7 +85,7 @@ All this is trying to say is experiment results don't stand the test of time, an
 
 Another interesting thing we learned is that we can't simply run experiments for web products like we do a clinical trial. Rigor is important, but if it takes you a year to make up your mind about a vertical vs horizontal layout, you'll be in trouble.
 
-This kind of rigor makes sense when you're developing a new drug: there's lives at stake, and mistakes do result in casualties. Thankfully, human biology is reliably consistent, so it's not like dopamine will start causing convulsions any time soon.
+This kind of rigor makes sense when you're developing a new drug: there's lives at stake, and mistakes do result in casualties. Further, you can take things slow because human biology is reliably consistent. It's not like paracetamol will start causing convulsions tomorrow.
 
 By contrast, web products are much lower stakes, and are present in an ever changing environment. Culture and individual preferences can change rapidly, and the cost of getting experiments wrong isn't too high, you can easily revert them later on.
 
