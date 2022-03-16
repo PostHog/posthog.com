@@ -1261,3 +1261,9 @@
 [[redirects]]
     from = "/docs/contribute/contribute-to-website"
     to = "/handbook/engineering/posthog-com/developing-the-website"
+
+
+# Added: 2022-03-16
+[[redirects]]
+    from = "/docs/self-host/configure/using-altinity-cloud"
+    to = "/docs/self-host/configure/3rd-party-clickhouse"
