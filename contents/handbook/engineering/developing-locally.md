@@ -7,9 +7,11 @@ showTitle: true
 > ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
 > for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
 
-## What does PostHog look like?
+## What does PostHog look like on the inside?
 
-Before jumping into setup, let's dissect a PostHog. The app itself is made up of 4 components that run simultaneously:
+Before jumping into setup, let's dissect a PostHog.
+
+The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
@@ -159,17 +161,23 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 ### 4. Prepare the Django server
 
+1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
+
+    ```bash
+    brew install libxml2 libxmlsec1 pkg-config
+    ```
+
 1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
     **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 
-2. Create the virtual environment in current directory called 'env':
+1. Create the virtual environment in current directory called 'env':
 
     ```bash
     python3 -m venv env
     ```
 
-3. Activate the virtual environment:
+1. Activate the virtual environment:
 
     ```bash
     # For bash/zsh/etc.
@@ -179,7 +187,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     source env/bin/activate.fish
     ```
 
-4. Install requirements with pip
+1. Install requirements with pip
 
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
@@ -196,26 +204,15 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
     If on an x86 platform, simply run the latter version.
 
-5. Install dev requirements
+1. Install dev requirements
 
     ```bash
     pip install -r requirements-dev.txt
     ```
 
-6. (optional) SAML support
-
-    If you want to run PostHog with the _full_ feature set, you'll need to install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
-
-    ```
-    brew install libxml2 libxmlsec1 pkg-config
-    pip install python3-saml==1.12.0
-    ```
-
 ### 5. Prepare databases
 
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables.
-
-If on ARM, first run `export SKIP_SERVICE_VERSION_REQUIREMENTS=1` as ClickHouse 21.9 – which is the first ARM-compatible version of ClickHouse – isn't _officially_ supported by PostHog yet.
 
 ```bash
 DEBUG=1 python manage.py migrate

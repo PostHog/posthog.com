@@ -12,9 +12,9 @@ Please spend money in a way that you think is in the best interests of the compa
 
 If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
 
-You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary.
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary and can claim VAT back on many of those purchases.
 
-For larger expenses which don't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
+For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request in this doc_, so we can document our decision making into our policy rather than making everything case by case. If it's likely to just be a one-off, you can post in #ops in Slack instead. 
 
 ## Trivial expenses
 
@@ -26,14 +26,14 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If you need to use your personal card in an emergency, please just let Charles know afterwards to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
 
 PostHog uses Brex and Revolut's built-in expenses tracking feature. You'll find using their apps the easiest way to submit receipts.
 
 ### Brex
 
 - Buy something on your Brex card.
-- If it's a digital invoice, just forward it to receipts@brex.com. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt.
+- If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt and a note.
 - You _only_ need to submit receipts for purchases of $75 or more.
 - That's it!
 
@@ -42,21 +42,21 @@ Make sure you forward digital invoices to Brex from your PostHog email address -
 ### Revolut
 
 - Buy something on your Revolut card.
-- If it's a digital invoice, just forward it to ukinvoices@posthog.com. If it's a physical receipt, take a picture and forward it to the same place.
+- If it's a digital invoice, just forward it to ukinvoices@posthog.com with a note explaining what it is for. If it's a physical receipt, take a picture and forward it to the same place with a note. 
 - You need to submit receipts for _all_ purchases. 
 
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Eltje to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just send your receipt to Charles directly and he'll process a manual payment. 
+- If you do need to use your personal card, just post the receipt in the #ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
 
-Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just let Charles know _as soon as you become aware_ and he will provide you with the relevant bank details for you to repay the company. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay the company. 
 
 ## Making larger purchases
 
-If your purchase fits within the policy below, there is no need to ask. We **cannot** pay you back for anything without a receipt if you use your personal card.
+If your purchase fits within the policy below, there is no need to ask. We _cannot_ pay you back for anything without a receipt if you use your personal card.
 
-You may not have enough space on your company card if you're a new starter, just ask Charles (and if he's unavailable, James H or Tim) to increase your limit.
+You may not have enough space on your company card if you're a new starter, just ask Charles or Grace to increase your limit.
 
 ## Equipment
 
@@ -74,7 +74,7 @@ These are just general guidelines - the most important thing is that you select 
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Tim or Charles. Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple.
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Grace or Charles. Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
@@ -114,7 +114,7 @@ We would expect to spend $250 on noise cancelling headphones.
 
 Software expenses are treated as above and will generally fall into trivial.
 
-We are *strongly opposed* to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
+We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
 
 The cost of introducing new collaborative software is that it creates another place where todo items / comments / communication can exist. This creates a disproportionate amount of complexity.
 
@@ -151,7 +151,7 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. You must provide receipts if applicable, and in this case, they must only be for yourself.
+You can spend up to $200/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
 ## Meeting each other
 
@@ -161,7 +161,7 @@ We encourage team members to try and meet up with each other when practical, and
 
 We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
 
-We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Charles know the departure and destination airports, and he'll log it accordingly. 
+We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Grace know the departure and destination airports, and she'll log it accordingly. 
 
 ## Celebrations and life events
 

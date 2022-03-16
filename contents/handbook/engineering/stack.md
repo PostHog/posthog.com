@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** This page refers to our [main product repo](https://github.com/PostHog/posthog), not our website. 
+> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. 
 
 ### Frontend
 
@@ -31,4 +31,3 @@ showTitle: true
 - Containerization: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 - Linter (frontend): [ESLint](https://eslint.org/)
 - Formatter (backend): [Black](https://pypi.org/project/black/)
-

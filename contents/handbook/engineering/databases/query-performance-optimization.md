@@ -1,5 +1,5 @@
 ---
-title: Query performance optimization
+title: How to optimize queries
 sidebar: Handbook
 showTitle: true
 ---

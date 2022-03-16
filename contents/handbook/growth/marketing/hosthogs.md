@@ -54,7 +54,7 @@ Where possible, we try to use local suppliers and source merch from sustainable 
 
 You will typically need:
 
-- [ ] An event landing page. [We have a template for this](/docs/contribute/contribute-to-website#hosthog). 
+- [ ] An event landing page. [We have a template for this](/handbook/engineering/posthog-com/developing-the-website#hosthog). 
 - [ ] A sign-up page. Eventbrite works well for creating a place where attendees can RSVP. 
 - [ ] A venue. Be sure to consider AV requirements. In the UK, [TT Liquor](https://ttliquor.co.uk/) works well. 
 - [ ] Some venue signage. Floor signs work well and [we have a template for them.](https://github.com/PostHog/company-internal/issues/558)
@@ -96,4 +96,3 @@ We do not currently expect to organize paid-for guests for our events.
 - [ ] Create a new GitHub issue to gather feedback from PostHog attendees.
 - [ ] Relay feedback from guests to the entire team via the internal #PostHogFeedback Slack channel.
 - [ ] Offset the carbon of any travel by PostHog team members and guests via [Wren](https://www.wren.co/).  
-
