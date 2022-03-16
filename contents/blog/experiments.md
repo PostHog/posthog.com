@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["neil-kakkar"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/experiments.jpeg
 featuredImageType: full
 categories: ["Product updates", "Launch week"]
 ---
