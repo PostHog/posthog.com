@@ -1,5 +1,5 @@
 ---
-date: 2022-03-15
+date: 2022-03-17
 title: The pricing guide I never had
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -46,7 +46,7 @@ So, how did we get pricing out of the way?
 
 Just because it's easy to get started, doesn't mean your product has to be cheap.
 
-Some companies with usage pricing get criticized for the escalating costs at scale. If it takes just 1 extra engineer to self build in a large company, you theoretically shold be able to charge >$100K annually. If you've competition, it depends what they charge. 
+Some companies with usage pricing get criticized for the escalating costs at scale. If it takes just one extra engineer to self build in a large company, you theoretically shold be able to charge >$100K annually. If you've competition, it depends what they charge. 
 
 ## You don't have to do all these things immediately
 
@@ -68,7 +68,7 @@ There are exceptions to this rule - relationship-driven enterprise sales, for ex
 
 ## Make pricing work for your biggest customers
 
-We implemented logarithmically-decling pricing with usage. This means something like - every time your volume goes up 10x, the incremental price decrease 5x.
+We implemented logarithmically-declining pricing with usage. This means something like - every time your volume goes up 10x, the incremental price decrease 5x.
 
 ## Don't try to make money off people that don't have money
 
@@ -80,10 +80,10 @@ Trying to get money out of tiny startups would have been a mistake.
 
 If you like what you're reading, you'll probably have had a peek at [PostHog's pricing](../pricing).
 
-Before you copy paste, we've room for improvement. Here are a few things we're working on next.
+Before you copy paste, we've room for improvement. Here are a few things we're working on next:
 
 * Transparent enterprise pricing. We're currently figuring out how to standardize this by talking to users.
-* More clarity on about what you get if you upgrade.
+* Greater clarity about what you get if you upgrade.
 * An enterprise cloud offering
 * Some way of capturing market share for _extremely high volume_ but _low marginal value_ users
 
