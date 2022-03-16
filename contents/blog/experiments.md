@@ -26,7 +26,7 @@ Thanks to Feature Flags, you can then easily validate whether each variant looks
 Well, that's enough about how experiments work. If you're interested in the technical details, check out the [Experimentation user guide](/docs/user-guides/experimentation). For now, let's get into three interesting things we learned about running successful experiments.
 
 
-## Choosing the right metric is hard
+## 1. Choose your metric carefully
 
 Let's say you're running an experiment to optimise the number of times people interact with PostHog graphs. Specifically, you're testing out different layouts for funnels, horizontal and vertical, and want to find which one leads to more interactions.
 
