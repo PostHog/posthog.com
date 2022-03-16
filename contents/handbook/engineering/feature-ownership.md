@@ -35,7 +35,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
-| Persons | [@macobo][@macobo]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
+| Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
 | Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
