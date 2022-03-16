@@ -14,7 +14,7 @@ If it's a trivial expense, just buy it. We provide you with a company card with 
 
 You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary and can claim VAT back on many of those purchases.
 
-For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request in this doc_, so we can document our decision making into our policy rather than making everything case by case.
+For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request in this doc_, so we can document our decision making into our policy rather than making everything case by case. If it's likely to just be a one-off, you can post in #ops in Slack instead. 
 
 ## Trivial expenses
 
@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If you need to use your personal card in an emergency, please post in the #ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
 
 PostHog uses Brex and Revolut's built-in expenses tracking feature. You'll find using their apps the easiest way to submit receipts.
 
@@ -50,7 +50,7 @@ Make sure you forward digital invoices to Brex from your PostHog email address -
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Eltje to purchase it for you on theirs in the first instance. 
 - If you do need to use your personal card, just post the receipt in the #ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
 
-Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just post in #ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay the company. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay the company. 
 
 ## Making larger purchases
 
