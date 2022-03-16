@@ -22,6 +22,7 @@ events_dead_letter_queue
 infi_clickhouse_orm_migrations
 person
 person_distinct_id
+person_distinct_id2
 person_distinct_id_backup
 person_static_cohort
 plugin_log_entries
