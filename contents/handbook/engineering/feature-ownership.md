@@ -9,9 +9,12 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
 
+> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/people/team-structure/platform) page for further details.
+
+
 ## Feature list
 
-You can also view the list [directly in GitHub](https://github.com/PostHog/posthog/labels?q=feature+tag) and filter issues there.
+You can also view the list [directly in GitHub](https://github.com/PostHog/posthog/labels?q=feature%2F) and filter issues there.
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
@@ -20,7 +23,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
 | API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/api-structure</span>  |
 | Application Performance Monitoring (APM) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
-| Async migrations | [@yakkomajuri][@yakkomajuri]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
+| Async migrations | [Ingestion (Team Platform)](/handbook/people/team-structure/platform)  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
