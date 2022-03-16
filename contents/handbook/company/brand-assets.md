@@ -124,3 +124,7 @@ Use fully rounded buttons and centered text.
 ### Icons
 
 Use filled in icons over outlined icons.
+
+## Presentations
+
+We use [Pitch](https://pitch.com) for polished presentations (like when giving a talk). Read more about this in our [communication guidelines](/handbook/company/communication#google-docs-and-slides).

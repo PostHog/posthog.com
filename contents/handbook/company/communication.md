@@ -48,7 +48,8 @@ Documents any company-wide internal information, in addition to any information 
 - ✅ People discussions, e.g. benefits, pensions, share options, org structure
 - ✅ Onboarding/offboarding checklists
 - ✅ Non-engineering team sprint planning
-- ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
+- ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
+- ✅ Discussions about replacing or adding tools, services, and systems that we use
 
 **Examples of information that should NOT go here:**
 - ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
@@ -159,6 +160,10 @@ Never use a Google Doc / Slides for something non-confidential that has to end u
 We mainly use Google Docs to capture internal information like meeting notes or to share company updates and metrics. We always make the doc accessible so you can comment and ask questions.
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
+
+When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), talk to Cory.
+
+James (H) and Cory are admins on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
 
 ### Email
 

@@ -31,7 +31,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
 | [Feature flags](/docs/user-guides/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [Conversion rate optimization](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
-| [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
+| [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Tracking features
 

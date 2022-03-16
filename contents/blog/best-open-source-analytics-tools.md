@@ -1,6 +1,6 @@
 ---
-date: 2021-10-15
-title: The 7 best open source analytics tools
+date: 2022-03-01
+title: The 8 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -41,7 +41,7 @@ PostHog is the best open source analytics tool for companies that are focused on
 - Unlimited ability to scale 
 
 ### Open source license
-PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data.
+PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more - or [contribute to the project directly!](https://github.com/PostHog/posthog/issues/8437) - via [the PostHog repo on GitHub](https://github.com/PostHog). 
 
 > [Try PostHog for free today](https://posthog.com/) or [schedule a demo](https://posthog.com/book-a-demo) to learn more. 
 
@@ -62,7 +62,7 @@ Apache Spark is a technical system intended for Data Engineers and Data Scientis
 - Process data in real-time using clusters
 
 ### Open source license
-Apache Spark is available under the Apache 2.0 license and is entirely free. 
+Apache Spark is available under the Apache 2.0 license and is entirely free, via [the Apache Spark repo](https://github.com/apache/spark).
 
 ## 3. [Matomo](https://matomo.org/)
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
@@ -79,7 +79,7 @@ Matomo is intended for Marketing and Content teams who need to focus on SEO acti
 - SEO and media analytics tools
 
 ### Open source license
-Matomo is available under a AGPLv3 licence. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. 
+Matomo is available under a AGPLv3 licence. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information. 
 
 ## 4. [Plausible Analytics](https://plausible.io/)
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
@@ -97,7 +97,7 @@ Plausible is intended for Marketing and Content teams who need to focus on speci
 - No cookies required, fully GDPR compliant out of the box 
 
 ### Open source license
-Plausible Analytics is available under a AGPLv3 licence. Pricing depends on the amount of traffic, with a 30-day free trial available. 
+Plausible Analytics is available under a AGPLv3 licence. Pricing depends on the amount of traffic, with a 30-day free trial available. Check [the Plausible Analytics repo on GitHub](https://github.com/plausible/analytics/) for more info. 
 
 ## 5. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
@@ -114,7 +114,7 @@ Countly is suitable for both small teams and enterprise businesses, especially t
 - Run surveys to get qualitative insights 
 
 ### Open source license
-Countly is available under a AGPLv3 licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. 
+Countly is available under a AGPLv3 licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Countly Team repo](https://github.com/Countly) for more information. 
 
 ## 6. [Metabase](https://www.metabase.com/)
 ![Metabase - open source analytics tools](../images/blog/open-source-analytics-tools/metabase-screenshot.png)
@@ -131,7 +131,7 @@ Metabase has a drag-and-drop interface which makes it especially useful for less
 - Integrate with 20+ data sources
 
 ### Open source license
-Metabase is available under a AGPL licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. 
+Metabase is available under a AGPL licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Metabase repo](https://github.com/metabase/metabase) for more information. 
 
 ## 7. [Grafana](https://grafana.com/products/cloud/) 
 ![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
@@ -148,8 +148,26 @@ Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in busine
 - Integrates with a wide range of data sources
 
 ### Open source license
-Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. 
+Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. Check [the Grafana repo](https://github.com/grafana/grafana) for more info. 
 
+## 8. [Pirsch](https://pirsch.io/)
+![Pirsch - open source analytics tool](../images/blog/open-source-analytics-tools/pirsch-open-source-analytics.jpeg)
+
+Similar to Plausible Analytics, Pirsch is a lightweight analytics tool which describes itself as an alternative to Google Analytics. Like other tools in that category, it lacks advanced or enterprise features such as [Session Recording](/docs/user-guides/recordings), [Experimentation](/docs/user-guides/experimentation) or [Feature Flags](/docs/user-guides/feature-flags). 
+
+However, as a streamlined tool Pirsch does focus on some of the analytics queries which matter most to content teams and writers - such as tracking page views, time on page and UTM parameters. It also includes a filter system which is accessible for non-technical audiences, and a dark mode. Which is nice.  
+
+### Who is Pirsch for?
+Like Plausible Analytics, Pirsch is focused on users who only need to track basic website metrics and don't need more powerful features. This makes it a good fit for bloggers and non-technical users, especially if they care about user privacy and want to avoid cookie banners across multiple sites. 
+
+### Strengths
+- No cookie banner needed
+- Automated email reports
+- Pricing based on pageviews
+- Easily track basic website metrics
+
+## Open source license
+Pirsch is completely open source, under a GNU AGPLv3 license. Pricing for the full version is based solely on pageviews, meaning it can be deployed across multiple sites at no extra cost. Check [the Pirsch repo](https://github.com/pirsch-analytics/pirsch) for more info. 
 
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. 
 >

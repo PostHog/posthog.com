@@ -279,5 +279,15 @@
         "featuresUsed": ["self-hosting", "competitor"],
         "author": { "name": "Colin Wren", "role": "CTO & Co-founder", "company": { "name": "Reciprocal.dev" } },
         "quote": "I’ve found PostHog to be miles ahead of the other tools I’ve tried so far and I’m a little miffed that I didn’t find it straight away and wasted time with Mixpanel."
+    },
+    {
+        "featuresUsed": ["self-hosting", "competitor"],
+        "author": { "name": "Jesse Redl", "role": "Senior Engineer", "company": { "name": "Vendasta" } },
+        "quote": "We tried Mixpanel and Segment, but you’re totally bound by how they’ve set up the ETL pipeline. Our senior engineering team didn’t like the GDPR compliance aspect either because you don’t own your own data. They say you do, but you don’t really. That’s when we decided to deploy PostHog."
+    },
+    {
+        "featuresUsed": ["collaboration"],
+        "author": { "name": "Taric Santos de Andrade", "role": "Product Manager", "company": { "name": "Vendasta" } },
+        "quote": "“I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.”"
     }
 ]

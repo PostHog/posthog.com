@@ -445,7 +445,7 @@ pre {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 2rem !important;
+    margin-bottom: 2rem;
     font-size: 0.85rem;
     line-height: 1.42;
     background: hsla(0, 0%, 0%, 0.04);
@@ -453,6 +453,11 @@ pre {
     overflow: auto;
     word-wrap: normal;
     padding: 1.45rem;
+
+    &.inline {
+        display: inline-block;
+        margin: 0;
+    }
 }
 table {
     margin-left: 0;

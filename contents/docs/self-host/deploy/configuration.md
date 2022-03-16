@@ -207,6 +207,11 @@ ClickHouse is the datastore system that does the bulk of heavy lifting with rega
 By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
 
 
+#### Use an external service
+To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
+
+Find out how to deploy PostHog using Altinity Cloud [in our deployment configuration docs](/docs/self-host/configure/using-altinity-cloud).
+
 #### Custom settings
 
 It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
