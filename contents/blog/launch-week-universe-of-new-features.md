@@ -31,13 +31,13 @@ Here's a quick teaser for what's to come during _PostHog Launch Week I: A Univer
 
 > Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
 
-## Chapter I: Experimentation
+## Chapter I: Data Management
 
-- **Releasing:** Monday, March 21
-- **Starring:** Neil Kakkar
-- **Introducing:** A/B testing, multivariate tests and statistical significance
+- **Releasing:** Wednesday, March 23
+- **Starring:** Alex Kim
+- **Introducing:** New Data Management UI, event definitions, definition tagging and many more
 
-Critics are calling it "Neil's most statistically significant new feature since [Correlation Analysis](/docs/user-guides/correlation)"
+"An inspiring tale about overcoming the terrifying prospect of a data explosion. Do not miss!" - An influencer who wasn't even paid to say this  
 
 ## Chapter II: Project Sparkle
 
@@ -51,13 +51,13 @@ Critics are calling it "Neil's most statistically significant new feature since 
 
 "Puulman, Iaquinti and Waye are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
 
-## Chapter III: Data Management
+## Chapter III: Experimentation
 
-- **Releasing:** Wednesday, March 23
-- **Starring:** Alex Kim
-- **Introducing:** New Data Management UI, event definitions, definition tagging and many more
+- **Releasing:** Monday, March 21
+- **Starring:** Neil Kakkar
+- **Introducing:** A/B testing, multivariate tests and statistical significance
 
-"An inspiring tale about overcoming the terrifying prospect of a data explosion. Do not miss!" - An influencer who wasn't even paid to say this  
+Critics are calling it "Neil's most statistically significant new feature since [Correlation Analysis](/docs/user-guides/correlation)"
 
 ## Chapter IV: Collaboration
 
