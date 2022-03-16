@@ -41,9 +41,9 @@ PostHog is the best open source analytics tool for companies that are focused on
 - Unlimited ability to scale 
 
 ### Open source license
-PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more - or [contribute to the project directly!](https://github.com/PostHog/posthog/issues/8437) - via [the PostHog repo on GitHub](https://github.com/PostHog). 
+PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more about [self-hosting PostHog](/docs/self-host) or [check the PostHog repo on GitHub](https://github.com/PostHog). 
 
-> [Try PostHog for free today](https://posthog.com/) or [schedule a demo](https://posthog.com/book-a-demo) to learn more. 
+> Got a question? [Speak to an engineer in our community Slack](/slack) or [book a feedback call](https://calendly.com/posthog-feedback) to chat to our Product & Engineering team directly. 
 
 ## 2. [Apache Spark](https://spark.apache.org/)
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
