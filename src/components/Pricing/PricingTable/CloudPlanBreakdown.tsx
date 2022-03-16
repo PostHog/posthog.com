@@ -45,11 +45,7 @@ export const CloudPlanBreakdown = () => {
                                 <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
                             </div>
 
-                            <PricingSlider
-                                marks={[10_000, 1_000_000, 1_0000_000, 100_000_000]}
-                                min={1000000}
-                                max={100000000}
-                            />
+                            <PricingSlider marks={[1_000_000, 1_0000_000, 100_000_000]} min={1000000} max={100000000} />
                         </div>
 
                         <div className="mb-2 border border-white border-opacity-10  rounded">
