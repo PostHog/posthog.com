@@ -1,8 +1,10 @@
 ---
-title: AWS tips and FAQ
+title: Working with cloud providers
 sidebar: Handbook
 showTitle: true
 ---
+
+## AWS
 
 ### How do I get access?
 
@@ -41,3 +43,35 @@ unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKE
 ### Deploying Posthog
 
 See docs [here](https://posthog.com/docs/self-host/deploy/aws).
+
+
+## GCP
+
+### How do I get access?
+
+Ask someone in the `#team-platform` Slack channel to add you. Anyone who has edit access can do so.
+
+To give someone access: Navigate to [PostHog project IAM](https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&supportedpurview=project) and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
+
+### Deploying Posthog
+
+See docs [here](https://posthog.com/docs/self-host/deploy/gcp).
+
+
+## DigitalOcean
+
+### How do I get access?
+
+Ask in the `#team-platform` Slack channel for someone to add you. Anyone who is an owner can do so.
+
+To give someone access: Navigate to [Posthog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their Posthog email address.
+
+### Edit 1-Click app info
+
+This can be done in the [vendor portal](https://cloud.digitalocean.com/vendorportal/), click on `PostHog` with Approved status to edit the listing.
+
+The code and setup files are in [digitalocean/marketplace-kubernetes repository](https://github.com/digitalocean/marketplace-kubernetes/tree/master/stacks/posthog).
+
+### Deploying Posthog
+
+See docs [here](https://posthog.com/docs/self-host/deploy/digital-ocean).

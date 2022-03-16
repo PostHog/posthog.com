@@ -1,6 +1,6 @@
 ---
-title: "Contribute to the website: documentation, handbook, and blog"
-sidebar: Docs
+title: Developing the website
+sidebar: Handbook
 showTitle: true
 ---
 
@@ -11,72 +11,64 @@ You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
 Below, we'll explain how to set up option two.
 
-> **Should I use the terminal or GitHub desktop?**<br/>
-This guide explains how to make changes either in the terminal, or via Github Desktop. If you're unfamiliar with the terminal or GitHub, we recommend using GitHub Desktop to make changes. You may also find [GitHub's glossary of terms](https://docs.github.com/en/get-started/quickstart/github-glossary) to be a helpful reference if you're entirely new to GitHub.
-
 ## Editing posthog.com locally
 
 ### Before you begin
 
 In order to run the PostHog website locally, you need the following installed:
 
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (installed with GitHub Desktop)
-- [Node.js](https://nodejs.org/en/download/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
+- [Node.js](https://nodejs.org/en/download/) – server runtime
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.jsn
 
-Optionally, if you are unfamiliar with using Git from the command line, you will need the following installed:
-
-- [GitHub Desktop](https://desktop.github.com/)
-- [Visual Studio Code](https://code.visualstudio.com/download)
+If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
 
 You may also want to familiarize yourself with these resources:
 
+- [GitHub's glossary of terms](https://docs.github.com/en/get-started/quickstart/github-glossary)
 - [GitHub Desktop docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)
 - [Visual Studio docs](https://code.visualstudio.com/docs)
 
 ### Cloning the posthog.com repository
 
-The [codebase for posthog.com](https://github.com/PostHog/posthog.com) is on GitHub.
+The posthog.com codebase is on GitHub at https://github.com/PostHog/posthog.com.
+To work on it locally, first you need to clone it to your disk:
 
-<HiddenSection headingType='h3' title='Via the terminal'>
+- **via the command line**
 
-You can clone the codebase from the terminal using the following command:
+    You can clone the codebase from the command line using the following command:
 
-```bash
-git clone git@github.com:PostHog/posthog.com.git
-```
+    ```bash
+    git clone git@github.com:PostHog/posthog.com.git
+    ```
 
-</HiddenSection>
+- **via GitHub Desktop**
 
-<HiddenSection headingType='h3' title='Via GitHub Desktop'>
+    You can also clone the repository with [GitHub Desktop](https://desktop.github.com/) installed, from the [posthog.com repository page](https://github.com/PostHog/posthog.com), click the **Code** button and select **Open with GitHub Desktop** from the dropdown that appears.
 
-You can also clone the repository with [GitHub desktop](https://desktop.github.com/) installed, from the [posthog.com repository page](https://github.com/PostHog/posthog.com), click the **Code** button and select **Open with GitHub Desktop** from the dropdown that appears.
+    ![Open in GitHub Desktop](../../images/docs/contribute/open-in-github-desktop.png)
 
-![Open in GitHub Desktop](../../images/docs/contribute/open-in-github-desktop.png)
+    You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
-You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
+    Once GitHub Desktop has opened you will be prompted to confirm the repository that is being cloned and the location on disk where you wish the code to be stored.
 
-Once GitHub Desktop has opened you will be prompted to confirm the repository that is being cloned and the location on disk where you wish the code to be stored.
+    ![GitHub Desktop clone to dialog](../../images/docs/contribute/github-desktop-clone-repo.png)
 
-![GitHub Desktop clone to dialog](../../images/docs/contribute/github-desktop-clone-repo.png)
+    Click **Clone** to clone the posthog.com repostory to your local disk.
 
-Click **Clone** to clone the posthog.com repostory to your local disk.
+    ![GitHub Desktop cloning to disk](../../images/docs/contribute/github-desktop-cloning-to-disk.png)
 
-![GitHub Desktop cloning to disk](../../images/docs/contribute/github-desktop-cloning-to-disk.png)
+    Once the clone has completed the GitHub Desktop interface will change to the following:
 
-Once the clone has completed the GitHub Desktop interface will change to the following:
+    ![GitHub Desktop cloned successfully](../../images/docs/contribute/github-desktop-cloned.png)
 
-![GitHub Desktop cloned successfully](../../images/docs/contribute/github-desktop-cloned.png)
+    To view the code for the website click **Open in Visual Studio Code**. Dialogs may appear around permissions and trust as you open Visual Studio Code.
 
-To view the code for the website click **Open in Visual Studio Code**. Dialogs may appear around permissions and trust as you open Visual Studio Code.
+    Once you have Visual Studio Code open, select the **Terminal** menu option. Within the dropdown select **New Terminal**. This will open a new terminal window within Visual Studio Code:
 
-Once you have Visual Studio Code open, select the **Terminal** menu option. Within the dropdown select **New Terminal**. This will open a new terminal window within Visual Studio Code:
+    ![Visual Studio Code terminal](../../images/docs/contribute/visual-studio-code-terminal.png)
 
-![Visual Studio Code terminal](../../images/docs/contribute/visual-studio-code-terminal.png)
-
-Don't worry! We only need to run a few commands in the terminal.
-
-</HiddenSection>
+    Don't worry! We only need to run a few commands in the command line.
 
 ### Running posthog.com locally
 
@@ -87,7 +79,7 @@ rm -rf ./node_modules
 brew install vips
 ```
 
-Type the following into the terminal and press return:
+Type the following into the command line and press return:
 
 ```bash
 yarn
@@ -123,35 +115,31 @@ Inside each of these are a series of markdown files for you to edit.
 
 When editing locally, changes should be made on a new Git branch. Branches should be given an "at a glance" informative name. For example, `posthog-website-contribution`.
 
-<HiddenSection headingType='h4' title='Via the terminal'>
+- **via the command line**
+    You can create a new Git branch from the command line by running:
 
-You can create a new Git branch from the terminal by running:
+    ```bash
+    git checkout -b [new-branch-name]
+    ```
 
-```bash
-git checkout -b [new-branch-name]
-```
+    For example:
 
-For example:
+    ```bash
+    git checkout -b posthog-website-contribution
+    ```
 
-```bash
-git checkout -b posthog-website-contribution
-```
 
-</HiddenSection>
+- **via GitHub Desktop**
 
-<HiddenSection headingType='h4' title='Via GitHub Desktop'>
+    You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
 
-You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
+    ![GitHub Desktop - new branch dropdown](../../images/docs/contribute/github-desktop-new-branch-dropdown.png)
 
-![GitHub Desktop - new branch dropdown](../../images/docs/contribute/github-desktop-new-branch-dropdown.png)
+    Then, in the dialog that follows, entering the new branch name.
 
-Then, in the dialog that follows, entering the new branch name.
+    ![GitHub Desktop - new branch dialog](../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
 
-![GitHub Desktop - new branch dialog](../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
-
-Once you have a new branch, you can make changes.
-
-</HiddenSection>
+    Once you have a new branch, you can make changes.
 
 ### Markdown details
 
@@ -394,116 +382,105 @@ The default HTTP status code is 301, but if you need to define a different statu
 
 It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
 
-<HiddenSection headingType='h3' title='Via the terminal'>
+- **via the command line**
 
-First, stage your changes:
+    First, stage your changes:
 
-```bash
-git add [path-to-file]
-```
+    ```bash
+    git add [path-to-file]
+    ```
 
-For example:
+    For example:
 
-```bash
-git add contents/docs/contribute/updating-documentation.md
-```
+    ```bash
+    git add contents/docs/contribute/updating-documentation.md
+    ```
 
-Once all the files that have been changed are staged, you can perform the commit:
+    Once all the files that have been changed are staged, you can perform the commit:
 
-```bash
-git commit -m '[short commit message]'
-```
+    ```bash
+    git commit -m '[short commit message]'
+    ```
 
-For example:
+    For example:
 
-```bash
-git commit -m 'Adding details on how to commit'
-```
+    ```bash
+    git commit -m 'Adding details on how to commit'
+    ```
 
-</HiddenSection>
+- **via GitHub Desktop**
 
-<HiddenSection headingType='h3' title='Via the GitHub Desktop'>
+    Files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
 
-Files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
+    ![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
 
-![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
+    Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
 
-Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
-
-![Making a commit in GitHub Desktop](../../images/docs/contribute/commit-in-github-desktop.gif)
-
-</HiddenSection>
+    ![Making a commit in GitHub Desktop](../../images/docs/contribute/commit-in-github-desktop.gif)
 
 ## Push changes to GitHub
 
 In order to request that the changes you have made are merged into the main website branch you must first push them to GitHub.
 
-<HiddenSection headingType='h3' title='Via the terminal'>
+- **via the command line**
 
-```bash
-git push origin [branch-name]
-```
+    ```bash
+    git push origin [branch-name]
+    ```
 
-For example:
+    For example:
 
-```bash
-git push origin posthog-website-contribution
-```
+    ```bash
+    git push origin posthog-website-contribution
+    ```
 
-When this is done, the terminal will show output similar to the following:
+    When this is done, the command line will show output similar to the following:
 
-```bash
-posthog-website-contribution $ git push origin posthog-website-contribution
-Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-remote: 
-remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
-remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
-remote: 
-To github.com:PostHog/posthog.com.git
- * [new branch]        posthog-website-contribution -> posthog-website-contribution
-```
+    ```bash
+    posthog-website-contribution $ git push origin posthog-website-contribution
+    Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+    remote: 
+    remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
+    remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
+    remote: 
+    To github.com:PostHog/posthog.com.git
+    * [new branch]        posthog-website-contribution -> posthog-website-contribution
+    ```
 
-This output tells you that you can create a pull request by visiting a link. In the case above, the link is `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution`. Follow the link to complete your pull request.
+    This output tells you that you can create a pull request by visiting a link. In the case above, the link is `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution`. Follow the link to complete your pull request.
 
-</HiddenSection>
+- **via GitHub Desktop**
 
-<HiddenSection headingType='h3' title='Via GitHub Desktop'>
+    Once you have committed the changes you want to push to GitHub, click the **Push origin** button.
 
-Once you have committed the changes you want to push to GitHub, click the **Push origin** button.
-
-![Push to origin from GitHub Desktop](../../images/docs/contribute/push-to-origin-github-desktop.gif)
-
-</HiddenSection>
+    ![Push to origin from GitHub Desktop](../../images/docs/contribute/push-to-origin-github-desktop.gif)
 
 ## Create a pull request
 
 Create a pull request to request that your changes be merged into the main branch of the repository.
 
-<HiddenSection headingType='h3' title='Via the terminal'>
+- **via the command line**
 
-Navigate to the link shown when you push your branch to GitHub. For example, `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution` shown below:
+    Navigate to the link shown when you push your branch to GitHub. For example, `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution` shown below:
 
-```bash
-posthog-website-contribution $ git push origin posthog-website-contribution
-Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-remote: 
-remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
-remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
-remote: 
-To github.com:PostHog/posthog.com.git
- * [new branch]        posthog-website-contribution -> posthog-website-contribution
-```
-</HiddenSection>
+    ```bash
+    posthog-website-contribution $ git push origin posthog-website-contribution
+    Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+    remote: 
+    remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
+    remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
+    remote: 
+    To github.com:PostHog/posthog.com.git
+    * [new branch]        posthog-website-contribution -> posthog-website-contribution
+    ```
 
-<HiddenSection headingType='h3' title='Via GitHub Desktop'>
+- **via GitHub Desktop**
 
-With the branch published, click the **Create pull request** button.
+    With the branch published, click the **Create pull request** button.
 
-![pull request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
+    ![pull request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
 
-This will open up a page on github.com in your default web browser.
-
-</HiddenSection>
+    This will open up a page on github.com in your default web browser.
 
 If you are pushing to an existing branch, navigate to the [posthog.com repo](https://github.com/posthog/posthog.com) and switch to the new branch using the dropdown:
 

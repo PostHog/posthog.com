@@ -1218,46 +1218,46 @@
 
 # Added: 2022-03-10
 [[redirects]]
+    from = "/handbook/engineering/aws"
+    to = "/handbook/engineering/cloud-providers"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/coding-conventions"
+    to = "/handbook/engineering/conventions/frontend-coding"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/developing-locally"
+    to = "/handbook/engineering/developing-locally"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/handbook/engineering/mdx"
+    to = "/handbook/engineering/posthog-com/mdx-setup"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/project-structure"
+    to = "/handbook/engineering/project-structure"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/stack"
+    to = "/handbook/engineering/stack"
+
+# Added: 2022-03-10
+[[redirects]]
     from = "/tutorials/categories/session-recordings"
     to = "/tutorials/categories/session-recording"
 
-# Added: 2022-03-16
+
+# Added: 2022-03-14
 [[redirects]]
-    from = "/handbook/engineering/conventions/frontend-coding"
-    to = "/docs/contribute/coding-conventions"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/posthog-com/developing-the-website"
-    to = "/docs/contribute/contribute-to-website"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/developing-locally"
-    to = "/docs/contribute/developing-locally"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/project-structure"
-    to = "/docs/contribute/project-structure"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/stack"
-    to = "/docs/contribute/stack"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/cloud-providers"
-    to = "/handbook/engineering/aws"
-
-
-# Added: 2022-03-16
-[[redirects]]
-    from = "/handbook/engineering/posthog-com/mdx-setup"
-    to = "/handbook/engineering/mdx"
+    from = "/docs/contribute/contribute-to-website"
+    to = "/handbook/engineering/posthog-com/developing-the-website"

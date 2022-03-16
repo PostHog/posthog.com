@@ -1,10 +1,10 @@
 ---
-title: ClickHouse event table migrations
+title: How to run migrations on PostHog Cloud
 sidebar: Handbook
 showTitle: true
 ---
 
-This document outlines how to do large-scale data migrations on cloud without using [Async Migrations](/handbook/engineering/databases/async-migrations).
+This document outlines how to do large-scale data migrations on PostHog Cloud without using [Async Migrations](/handbook/engineering/databases/async-migrations).
 
 ## Background
 
