@@ -1,8 +1,12 @@
 ---
-title: Deploying ClickHouse using Altinity.Cloud
+title: Deploying ClickHouse using a 3rd party service
 sidebar: Docs
 showTitle: true
 ---
+
+We are gradually adding support for 3rd parties to manage the individual services such as ClickHouse needed to run PostHog. This avoids the need for you to send data to PostHog whilst reducing the management overhead of running the product.
+
+# Deploying ClickHouse using Altinity.Cloud
 
 This document outlines how to deploy PostHog using Altinity Cloud ClickHouse clusters.
 

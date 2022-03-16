@@ -586,8 +586,8 @@
                                     "url": "/docs/self-host/deploy/configuration"
                                 },
                                 {
-                                    "name": "Deploying ClickHouse using Altinity.Cloud",
-                                    "url": "/docs/self-host/configure/using-altinity-cloud"
+                                    "name": "Deploying ClickHouse with a 3rd party managed service",
+                                    "url": "/docs/self-host/configure/3rd-party-clickhouse"
                                 }
                             ]
                         },
@@ -954,10 +954,6 @@
                 {
                     "name": "Heatmaps",
                     "url": "/docs/user-guides/toolbar"
-                },
-                {
-                    "name": "Insights",
-                    "url": "/docs/user-guides/insights"
                 },
                 {
                     "name": "Lifecycle",
