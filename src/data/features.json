@@ -1,0 +1,305 @@
+[
+    {
+        "feature": "Actions",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/actions"
+    },
+    {
+        "feature": "Annotations",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/annotations"
+    },
+    {
+        "feature": "Cohorts",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/cohorts"
+    },
+    {
+        "feature": "Correlation Analysis",
+        "planAvailability": {
+            "openSource": { "status": "unavailable", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "unavailable", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/correlation"
+    },
+    {
+        "feature": "Dashboards",
+        "planAvailability": {
+            "openSource": { "status": "partial", "explainerText": "No tagging." },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "partial", "explainerText": "No tagging." },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/dashboards"
+    },
+    {
+        "feature": "Events",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/events"
+    },
+    {
+        "feature": "Experimentation",
+        "planAvailability": {
+            "openSource": { "status": "unavailable", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "unavailable", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/experimentation"
+    },
+    {
+        "feature": "Feature Flags",
+        "planAvailability": {
+            "openSource": { "status": "partial", "explainerText": "No multivariate flags." },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "partial", "explainerText": "No multivariate flags." },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/feature-flags"
+    },
+    {
+        "feature": "Funnels",
+        "planAvailability": {
+            "openSource": {
+                "status": "partial",
+                "explainerText": "No correlation analysis. No ability to add descriptions. No ability to filter on groups."
+            },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": {
+                "status": "partial",
+                "explainerText": "No correlation analysis. No ability to add descriptions. No ability to filter on groups."
+            },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/funnels"
+    },
+    {
+        "feature": "Group Analytics",
+        "planAvailability": {
+            "openSource": { "status": "unavailable", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "unavailable", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/group-analytics"
+    },
+    {
+        "feature": "Heatmaps",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/toolbar"
+    },
+    {
+        "feature": "Lifecycle",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/lifecycle"
+    },
+    {
+        "feature": "Organizations and projects",
+        "planAvailability": {
+            "openSource": { "status": "partial", "explainerText": "One project at a time." },
+            "Scale": { "status": "partial", "explainerText": "No private projects." },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "partial", "explainerText": "One project at a time." },
+            "cloudScale": { "status": "partial", "explainerText": "No private projects." },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/organizations-and-projects"
+    },
+    {
+        "feature": "Paths",
+        "planAvailability": {
+            "openSource": {
+                "status": "partial",
+                "explainerText": "No funnel integration, grouping, wildcards or exclusions."
+            },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": {
+                "status": "partial",
+                "explainerText": "No funnel integration, grouping, wildcards or exclusions."
+            },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/paths"
+    },
+    {
+        "feature": "Persons",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/persons"
+    },
+    {
+        "feature": "Plugins",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "partial", "explainerText": "Custom plugins require approval." },
+            "cloudScale": { "status": "partial", "explainerText": "Custom plugins require approval." },
+            "cloudEnterprise": { "status": "partial", "explainerText": "Custom plugins require approval." }
+        },
+        "docsLink": "docs/user-guides/plugins"
+    },
+    {
+        "feature": "Retention",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/retention"
+    },
+    {
+        "feature": "Session Recording",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/recordings"
+    },
+    {
+        "feature": "Settings",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/settings"
+    },
+    {
+        "feature": "SAML",
+        "planAvailability": {
+            "openSource": { "status": "unavailable", "explainerText": "" },
+            "Scale": { "status": "unavailable", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "unavailable", "explainerText": "" },
+            "cloudScale": { "status": "unavailable", "explainerText": "" },
+            "cloudEnterprise": { "status": "unavailable", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/sso"
+    },
+    {
+        "feature": "SSO",
+        "planAvailability": {
+            "openSource": { "status": "partial", "explainerText": "Depends on provider." },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "partial", "explainerText": "Depends on provider." },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/sso"
+    },
+    {
+        "feature": "Toolbar",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/toolbar"
+    },
+    {
+        "feature": "Trends",
+        "planAvailability": {
+            "openSource": { "status": "full", "explainerText": "" },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/trends"
+    },
+    {
+        "feature": "Paths",
+        "planAvailability": {
+            "openSource": {
+                "status": "full",
+                "explainerText": "No correlation analysis. No ability to add descriptions. No ability to filter on groups."
+            },
+            "Scale": { "status": "full", "explainerText": "" },
+            "Enterprise": { "status": "full", "explainerText": "" },
+            "cloudNoCard": { "status": "full", "explainerText": "" },
+            "cloudScale": { "status": "full", "explainerText": "" },
+            "cloudEnterprise": { "status": "full", "explainerText": "" }
+        },
+        "docsLink": "docs/user-guides/paths"
+    }
+]

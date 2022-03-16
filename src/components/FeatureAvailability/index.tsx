@@ -1,8 +1,10 @@
 import React from 'react'
 import './FeatureAvailability.scss'
 import { CheckCircleFilled, CloseCircleFilled, InfoCircleOutlined, MinusCircleFilled } from '@ant-design/icons'
-
+import featureData from '../../data/features.json'
 type AvailablePlans = 'free' | 'standard' | 'enterpriseCloud' | 'startup' | 'openSource' | 'scale' | 'enterprise'
+
+console.log(featureData)
 
 interface PlanInterface {
     key: AvailablePlans
