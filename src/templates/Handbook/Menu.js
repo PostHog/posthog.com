@@ -18,7 +18,7 @@ function MenuItem({ item, slug, topLevel }) {
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
     const linkClasses = `outline-none flex-grow text-left transition-opacity text-gray-accent-dark hover:text-almost-black dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
-        topLevel || children || currentPage ? 'font-bold' : 'text-[15px]'
+        topLevel || (children && !url) || currentPage ? 'font-bold' : 'text-[15px]'
     }`
     return (
         <li>

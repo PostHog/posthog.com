@@ -7,7 +7,7 @@ export default function CTA() {
         <section className={section('text-center')}>
             <div className="bg-blue w-full rounded-lg px-4 py-28">
                 <h2 className={heading('lg', 'white')}>Give it a try</h2>
-                <h3 className={heading('sm', 'white')}>Join 5,500 companies already using PostHog.</h3>
+                <h3 className={heading('sm', 'white')}>Join 9,000 companies already using PostHog.</h3>
                 <div className="mt-12 flex flex-col space-y-2 md:space-y-3 items-center justify-center">
                     <CallToAction
                         type="custom"

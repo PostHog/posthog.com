@@ -63,8 +63,8 @@ For these reasons, we:
  
 - Don't use any analytics except our own. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier.
 - Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either. People can see our entire codebase, after all!
-- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product.'?
-- Don't unfairly criticize or make false claims about our competitors. We will however compare ourselves to them to help customers make a decision, and occasionally they are a better solution for what a customer needs. That's ok. 
+- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'?
+- Don't unfairly criticize or make false claims about our competitors. We will however compare ourselves to them to help customers make a decision, and occasionally they will be a better solution for what a customer needs. That's ok. 
 - Don't bombard customers with 'deals', pop-ups and other dark patterns. If you don't like them, why do you think our customers will feel differently? 
 - Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. 
 
@@ -89,17 +89,24 @@ The Marketing team's main focus is acquisition of [high quality signups](https:/
 We have identified the following acquisition channels as most important to our strategy. 
  
 - [Content](/handbook/growth/marketing/blog). We write two types of content - SEO and shareable.
-  - _SEO content_ is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring though! Our aim is to increase our organic reach on Google, basically. We sometimes put small paid ads spending behind this type of content on LinkedIn or Twitter. 
-  - _Shareable content_ is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn into signups, but they help us to build our unique and distinctive brand in the open source community. We share this content on 'super node' sites like Hacker News, Product Hunt and Reddit. 
-- [Product launches](https://posthog.com/handbook/growth/marketing/product-announcements). These bring transparency to the work that the PostHog team is doing. Product and engineering pull marketing here, not the other way around. Marketing's role is to look for cool things the team is already working on and to amplify them, often through a coordinated campaign that maximizes impact. Marketing's role is definitely _not_ to get teams to build features we think are 'marketable'. We define product broadly here - they can be anything from a major PostHog app feature to a cool internal tool that someone has built which we think the world should see. 
+  - _SEO content_ is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring though! Our aim is to increase our organic reach on Google, basically. We put monthly paid ads spend behind this type of content on LinkedIn or Twitter to increase awareness. 
+  - _Shareable content_ is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We share this content on 'super node' sites like Hacker News, Product Hunt and Reddit. 
+- [Sponsorship](/handbook/growth/marketing/open-source-sponsorship). We do this in two ways. 
+  - _Commercial sponsorship_ - Sponsoring newsletters, podcasts and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. 
+  - _Open source sponsorship_ - Sponsoring open source projects and developers that have helped us build PostHog. Sometimes we do cross-promotion with them, but it's not necessary - this is more about giving back to the community. 
+- [Product launches](/handbook/growth/marketing/product-announcements). These bring transparency to the work we do. Product and engineering pull marketing here, not the other way around. Marketing's role is to look for cool things the team is already working on and to amplify them, often through a coordinated campaign that maximizes impact. Marketing's role is definitely _not_ to get teams to build features we think are 'marketable'. We define product broadly here - it can be anything from a major PostHog app feature to a cool internal tool that  we think the world should see. 
   - We're currently experimenting with different types and size of launch to see what works most effectively here. 
-- [Paid ads](/handbook/growth/marketing/paid). This is intentionally at the bottom of the list. We advertise on Google Search and DuckDuckGo (via Bing) for _conversion_, and Twitter, LinkedIn, Reddit and Carbon for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. 
+- [Paid ads](/handbook/growth/marketing/paid). We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit and Carbon for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. Generally, we split our spend 2/3 awareness vs. 1/3 conversion. 
 
-[Developer relations and community](https://posthog.com/handbook/growth/developer-relations) is also super important to us, but covered elsewhere as we don't strictly define it as part of marketing at PostHog. Ditto for [Growth](https://posthog.com/handbook/growth/strategy). 
- 
-The only [emails](/handbook/growth/marketing/newsletter) we send are to let people know about Product updates (see 'No sneaky shit') and we haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press), if at all. 
+Other channels:
 
-We track marketing activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
+- We also send out an [email newsletter](/handbook/growth/marketing/newsletter) every 2 weeks. This is for existing users who opt-in, and usually contains one tutorial and one recent blog post, plus a couple of other fun sections. The newsletter is quite new, so the format is likely to evolve. We do not use email to try and convince new customers to use PostHog, but we want the newsletter content to be valuable enough to users to share within their organizations or externally. 
+- We haven't yet figured out how we want to do [PR](/handbook/growth/marketing/press), if at all. 
+- [Developer relations and community](https://posthog.com/handbook/growth/developer-relations) is also super important to us, but covered elsewhere as we consider it its own discipline at PostHog. Same for [Growth](https://posthog.com/handbook/growth/strategy). 
+
+## Marketing calendar
+
+We track marketing campaign activity on this (internally public only) [marketing calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=1857648072). 
 
 ## Who is our target customer and what do we want to say to them?
 

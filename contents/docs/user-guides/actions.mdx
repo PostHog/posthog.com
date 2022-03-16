@@ -6,21 +6,18 @@ showTitle: true
 
 <FeatureAvailability allPlans />
 
-> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete guide to event tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
+> Looking for a tutorial about how to use Actions? Check out our [guide to event tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
 
-Actions are PostHog's way of easily cleaning up a large amount of event data.
+Actions are PostHog's way of organizing large amounts of Events into a more useful format. Actions consist of one or more Events that you have decided to label in a specific way for use in Insights and Dashboards.
 
-Actions consist of one or more events that you have decided to put into a deliberately-labeled bucket. They're used in insights and dashboards.
-
-For example, a typical action might be one of the following:
+Examples of Actions:
 
 * 'Clicked sign up button'
 * 'User created account'
 * 'Viewed pricing page'
-* 'Submitted billing form'
+* 'Submitted payment form'
 
-
-To access the Actions page, go to the Event section on the left-hand navigation sidebar and then click on the Actions tab.
+To view your full list of Actions, go to Data Management in the left-hand navigation sidebar and then click on the Actions tab.
 
 ## Creating actions
 
@@ -30,7 +27,6 @@ The simplest way to create a frontend-based action is to visit your application 
 
 We have a full [step-by-step tutorial](/docs/tutorials/toolbar) available about using our Toolbar, with a specific section dedicated to [creating actions from frontend elements](/docs/tutorials/toolbar#creating-actions).
 
-
 ### Autocapture-based actions
 
 Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
@@ -39,15 +35,13 @@ Our [Autocapture](/docs/integrate/client/js#autocapture) functionality will capt
 
 > Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrate/client/js#autocapture) for more details.
 
-
 There are three ways to match your elements:
-
-> You **can have more than one match type** selected. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
 1. Text: The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
 2. Only match if URL contains: The URL where this action needs to take place. If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
 3. Selector: details below.
- 
+
+> _You can have more than one match type selected_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
 #### Matching selectors
 
@@ -92,7 +86,6 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
 Page views can match urls containing a string or match exactly.
 
 Custom events can be sent to your PostHog instance via our API or one of our [libraries](/docs/integrate/overview).
-
 
 <blockquote class='warning-note'>
 It is possible for an action to match multiple events. To do this, click ‘Add another match group’ when you are creating your action. Actions with multiple events work based on OR operations. That means that an action like "Clicked Read More Button" OR "Clicked More Information Button" will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
