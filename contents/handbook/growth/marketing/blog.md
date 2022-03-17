@@ -27,9 +27,9 @@ If you have any good blog post ideas join our [#ideas-for-blog-post team Slack c
 
 As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
 
-- **Blog post** = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. for Hacker News).
+- **Blog post** = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
 - **Docs - Tutorial** = Anything that explains 'how to do X' _that is specific to PostHog_. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
-- **Docs - User guide** = Specific guides to PostHog features (e.g. Actions, Funnels). 
+- **Docs - Manual** = Reference guides to PostHog features (e.g. Actions, Funnels). 
 - **Docs - Everything else** = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
 
 ## Production workflow

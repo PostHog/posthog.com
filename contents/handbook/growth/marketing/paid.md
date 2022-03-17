@@ -14,21 +14,10 @@ We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid
 We communicate with them via a shared internal Slack channel, and have 2 checkin calls with them each month. We have a very light approvals process for creative:
 
 - Hey Digital team share asset(s) for feedback in Slack
-- PostHog team approve - Charles/Joe for copy, Cory for visuals
+- PostHog team approve - Charles/Joe/Andy for copy, Cory/Lottie for visuals
 - If approval is not given within 48 hours, Hey Digital will process regardless
 
-Specific details of our media plan are shared internally only, as they contain commmercially sensitive information that could be beneficial to our competitors. 
-
-## General principles
-
-These will evolve over time:
-- Show, don't tell - share genuinely interesting content and let the user discover the product themselves. If you wouldn't click on the link, why do you think our users would?
-- Better to be opinionated and a bit divisive than unmemorable.
-- No bullshit - double down on our open/transparent product and culture.
-- _Definitely_ no unfounded technical claims or feature promises.
-- Don't be afraid to use humor, coding jokes etc. 
-
-Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](/handbook/growth/developer-relations) are also important. 
+Specific details of our media plan are shared internally only, as they contain commercially sensitive information that could be beneficial to our competitors. 
 
 ## Brand guidelines
 
@@ -36,21 +25,21 @@ Hey Digital create our ad assets for most of our main channels. These guidelines
 
 - Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels as a general guide. 
 - For specific messaging to use in copy, use our [value propositions](/handbook/growth/marketing/value-propositions) as a starting point - you do not have to copy them verbatim.  
-- We have [a handy set of assets](https://www.figma.com/file/MRmFaOSXV1zYTGnOODGyCc/Social-Media?node-id=1307%3A13884) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
+- We have [a handy set of assets](https://posthog.com/media) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Channels
 
 We currently run ads on:
-- Google Ads - _awareness, conversion_
+- Google Search - _conversion_
 - Twitter - _awareness_
-- Bing media network (inc. DuckDuckGo) - _awareness, conversion_
 - LinkedIn - _awareness_
 - Reddit - _awareness_
+- Carbon - _awareness_
 
-Generally we only use high purchase intent channels like Google and Bing for conversion. We find that other channels are much more effective for general awareness. 
+We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing and Google Display, as they did not drive high quality user signups. 
 
-We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. Charles, Joe and James H generally have admin access to these channels.
+We generally target users in the US, Canada, UK, Germany and France for general awareness, as these tend to lead to the most high quality signups. For conversion, we tend to stay more focused on US, Canada and Germany. 
 
 ## Tracking conversion
 
-We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. Charles currently keeps Google Ads updated by manually uploading conversion data - in the future, we will automate this process. 
+We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have a plugin which syncs PostHog signups to a Google Sheet that is than regularly uploaded automatically to our Google Ads account. 

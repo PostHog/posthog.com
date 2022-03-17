@@ -10,7 +10,6 @@ hideAnchor: true
 - [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
   - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
     - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
-      - [Paolo D'Amico, Product](/handbook/company/team#paolo-damico-product)
       - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
     - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
@@ -20,11 +19,11 @@ hideAnchor: true
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
       - Guido Iaquinti, Site Reliability Engineer
       - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
+      - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
-    - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
-    - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
+      - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
+      - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
-    - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations & Marketing](/handbook/company/team#charles-cook-business-operations)
     - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
@@ -52,7 +51,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
-- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 
@@ -63,7 +61,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
-- _[Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)_
 
 <br />
 

@@ -1,5 +1,5 @@
 ---
-title: Event ingestion
+title: Event ingestion explained
 sidebar: Handbook
 showTitle: true
 ---
