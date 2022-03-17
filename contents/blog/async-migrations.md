@@ -83,7 +83,14 @@ The solution we came up with for the problem mentioned above is a system for run
 
 This system allows us to **safely** run long data migrations in the background without causing any downtime, as well as provides a full suite of tools for managing and debugging these migrations easily.
 
-When we started building it, we wanted the system to have three key characteristics, listed below.
+When we started building it, we wanted the system to have three key characteristics:
+
+1. It should be asynchronous, but with guarantees.
+2. It should be safe.
+3. It should be easy to work with, both for developers and users.
+
+Here's how we achieved all three.
+
 
 **It should be asynchronous, but with guarantees.**
 
