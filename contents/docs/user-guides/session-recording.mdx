@@ -31,6 +31,18 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 
 Additionally, when dealing with inputs, if you wish to still capture the input box but not its contents, you can use the class name `ph-ignore-input` instead.
 
+## Recording console log
+
+You can optionally record anything that happens in your console log. To activate, you'll need to add `enable_recording_console_log: true` to the posthog.init call like so:
+
+```js
+posthog.init('your token', {
+    enable_recording_console_log: true
+})
+```
+
+To find the logs, click on a recording and find the 'Console' tab.
+
 ## Recordings data retention
 
 Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
