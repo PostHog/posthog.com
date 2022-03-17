@@ -173,7 +173,7 @@ An async migration can contain the following components:
 * `progress`: A function that specifies an arbitrary progress calculation, returning a percentage between 0 and 100. If not present, we calculate progress based on the number of operations executed so far, although this is often not a good proxy.
 
 
-## What's next
+## What's next?
 
 We currently have three async migrations in the codebase, each destined to make queries in PostHog significantly faster. If you're a user, make sure to run them!
 
