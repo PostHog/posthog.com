@@ -33,7 +33,7 @@ So, how did we get pricing out of the way?
 
 **No minimum spend**, so paying users can start small if they want to. This means a customer can gradually get more committed to you. If customers ask for trials, you can get them straight into a paying relationship "just keep the volume low", with a seamless way to upgrade - use the product more. That makes it easier for customers to avoid some complex processes around pilots/proofs of concept, and it stops a jarring discussion around why someone is going from $0/month to $10k/month. Don't let your pricing generate a stressful decision point.
 
-**No annual contracts**, unless a customer requests one. This cuts the risk down for customers, reducing the need for intensive evaluation periods. Ironically, the less commitment you ask for, the more you may get. Of course, some customers _will_ want you to do this, to lock in pricing, but don't default to this.
+**No annual contracts**, unless a customer requests one. This cuts the risk down for customers and reduces the need for intensive evaluation periods. Ironically, the less commitment you ask for, the more you may get. Of course, some customers _will_ want you to do this, to lock in pricing, but don't default to this.
 
 **Be transparent about pricing** so users don't have to 'talk to sales'. Is the best way to close a customer to signal to them that you're going to charge them as much as you can get away with? Many people think so. Disclaimer: we started non-transparent so we could speak to some users to figure out the right model first (and we still do this - see our non-transparent enterprise pricing)... but we make it transparent as soon as we've reasonable confidence.
 
