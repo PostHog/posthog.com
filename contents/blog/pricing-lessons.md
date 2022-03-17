@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-Imagine being able to grow twice as fast with a few hours of work. Changing the way you price has a real chance to get you there. 
+Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. 
 
 Here is a breakdown of the counterintuitive lesson I've learned as a cofounder at PostHog - the more we give away for free, and the less we ask from users on day 1, the _more_ money we make.
 
