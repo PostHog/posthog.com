@@ -52,7 +52,7 @@ Some companies with usage pricing get criticized for the escalating costs at sca
 
 Early on, optimize for learning. Later on, optimize for the best solution for your users.
 
-**We didn't start with a $0 minimum**. Last summer, we worked on finding just five reference customers for our paid product (we now have X customers).
+**We didn't start with a $0 minimum**. Last summer, we worked on finding just five reference customers for our paid product.
 
 For these, we didn't offer $0 minimum - we charged $2k/month minimum. We simply couldn't support more than this, and we were already getting enough inbound interest.
 
