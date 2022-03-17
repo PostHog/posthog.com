@@ -134,7 +134,7 @@ To achieve this, we:
 * Made available to developers a wide range of checks that can short circuit the running process, such as a precheck, a periodic healthcheck, service version requirements, and dependencies. To give one specific example, we often use prechecks to ensure the database has enough free disk space to run the migration, given we might temporarily duplicate a table's data, for instance.
 * Built the system with resumability and rollbacks in mind, ensuring migrations can behave in a sane and non-destructive way if services crash, errors are thrown, timeouts occur, etc. Depending on the circumstances, we will either continue running the migration if we've determined it to be safe, or roll the database back to the initial state. 
 
-**It should be easy to work with, both for developers and users.**
+### 3. It should be easy to work with, both for developers and users**
 
 Lastly, async migrations should be easy to launch and manage for users, as well as easy to write and build upon for developers.
 
