@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-Sharding is a horizontal cluster scaling strategy that puts parts of one ClickHouse database on different shards. This can help you:
+Sharding is a horizontal cluster scaling strategy that puts parts of one ClickHouse database on different shards. This can help you to:
 
 - Improve fault tolerance.
 
