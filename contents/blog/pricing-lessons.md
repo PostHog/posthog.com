@@ -1,6 +1,6 @@
 ---
 date: 2022-03-17
-title: The pricing guide I never had
+title: Counterintuitive lessons about our pricing
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,9 +17,9 @@ Here is a breakdown of the counterintuitive lesson I've learned as a cofounder a
 
 ## Don't let pricing get in the way of adoption
 
-Most software companies agonize over how their product is adopted yet when it comes to pricing, they default to charging a certain recurring amount per month. The only thing under deep consideration is how _much_... not _how_.
+Most software companies agonize over how their product is adopted yet when it comes to pricing, they default to charging a certain recurring amount per month. They only consider how _much_ to charge, not _how_ to charge.
 
-Our revelation was realizing that, for us, pricing shouldn't get in the way of adoption, because we don't sell top down into companies.. our most successful paying customers get there as follows:
+We realized that our pricing shouldn't get in the way of adoption, because we don't sell top-down into companies. Instead, our most successful paying customers get there as follows:
 
 * an individual engineer finds and implements the free product
 * a very small team starts using us
@@ -31,7 +31,7 @@ So, how did we get pricing out of the way?
 
 **Encourage users to upgrade**, since you need people to do exactly that! We encourage people to put in their credit card by offering our paid features starting at $0 (with a generous amount of free usage) if they do so. This lets users evaluate the paid product very easily, and upgrade with no friction if they're heavy users. This exchange feels fair to us - it helps us figure out who is serious versus playing around. Our numbers reflect that users feel the same way - over half our users enter their card details.
 
-**No minimum spend**, so paying users can start small if they want to. This means a customer can gradually get more committed to you. If customers ask for trials, you can get them straight into a paying relationship "just keep the volume low", with a seamless way to upgrade - use the product more. That makes it easier for customers to avoid some complex processes around pilots/proofs of concept, and it stops a jarring discussion around why someone is going from $0/month to $10k/month. Don't let your pricing generate a stressful decision point.
+**No minimum spend**, so paying users can start small if they want to. This means a customer can gradually get more committed to you. If customers ask for trials, you can get them straight into a paying relationship ("just keep the volume low"), with a seamless way to upgrade - use the product more. That makes it easier for customers to avoid some complex processes around pilots/proofs of concept, and it stops a jarring discussion around why someone is going from $0/month to $10k/month. Don't let your pricing generate a stressful decision point.
 
 **No annual contracts**, unless a customer requests one. This cuts the risk down for customers and reduces the need for intensive evaluation periods. Ironically, the less commitment you ask for, the more you may get. Of course, some customers _will_ want you to do this, to lock in pricing, but don't default to this.
 
@@ -46,7 +46,7 @@ So, how did we get pricing out of the way?
 
 Just because it's easy to get started, doesn't mean your product has to be cheap.
 
-Some companies with usage pricing get criticized for the escalating costs at scale. If it takes just one extra engineer to self build in a large company, you theoretically shold be able to charge >$100K annually. If you've competition, it depends what they charge. 
+Some companies with usage pricing get criticized for the escalating costs at scale. If it takes just one extra engineer to self build in a large company, you theoretically should be able to charge >$100K annually. If you've competition, it depends what they charge. 
 
 ## You don't have to do all these things immediately
 
