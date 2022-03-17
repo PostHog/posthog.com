@@ -1267,3 +1267,8 @@
 [[redirects]]
     from = "/sso"
     to = "/docs/user-guides/sso"
+
+# Added: 2022-03-17
+[[redirects]]
+    from = "/docs/user-guides/recordings"
+    to = "/docs/user-guides/session-recording"
