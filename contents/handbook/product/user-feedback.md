@@ -14,7 +14,7 @@ Gathering user feedback is critical for the development of our product. It's not
 ### Beta Testers
 We have a group in our community slack called #beta-testers this is a group of engaged community users and paying customers who are keen to give feedback on our product in order to improve the product for themselves and other users.
 
-If you would like to get feedback on a feature you're building, share details of the feature and the feedback you'd like to recieve in with this group. Be mindful that we shouldn't overburden the group with lots of small changes and focus on getting the feedback we really need to make better decisions. We should aslo follow up with the beta-testers later on to show them how their feedback has helped build a better product.
+If you would like to get feedback on a feature you're building, share details of the feature and the feedback you'd like to receive in with this group. Be mindful that we shouldn't overburden the group with lots of small changes and focus on getting the feedback we really need to make better decisions. We should also follow up with the beta-testers later on to show them how their feedback has helped build a better product.
 
 ### Feedback call process
 
