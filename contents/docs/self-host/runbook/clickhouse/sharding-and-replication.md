@@ -21,7 +21,7 @@ Sharding PostHog ClickHouse is a new experimental feature only supported startin
 
 To use sharding, first upgrade to version >= 1.34.0 and run the `0004_replicated_schema` async migration
 
-### Using PostHog helm charts
+### Using PostHog Helm charts
 
 Update `values.yaml` with the appropriate sharding settings.
 
