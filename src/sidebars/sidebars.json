@@ -644,6 +644,10 @@
                                         {
                                             "name": "Vertical Scaling",
                                             "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
+                                        },
+                                        {
+                                            "name": "Sharding and replication",
+                                            "url": "/docs/self-host/runbook/clickhouse/sharding-and-replication"
                                         }
                                     ]
                                 },
