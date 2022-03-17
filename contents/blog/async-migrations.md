@@ -1,5 +1,5 @@
 ---
-date: 2021-03-17
+date: 2021-03-18
 title: Enabling zero downtime data migrations for self-hosted users
 rootPage: /blog
 sidebar: Blog
