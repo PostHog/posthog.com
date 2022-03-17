@@ -736,6 +736,10 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
+                        },
+                        {
+                            "name": "Browser Extensions",
+                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
