@@ -92,7 +92,7 @@ When we started building it, we wanted the system to have three key characterist
 Here's how we achieved all three.
 
 
-**It should be asynchronous, but with guarantees.**
+### 1. It should be asynchronous, but with guarantees
 
 As we established earlier, long-running (and potentially unbounded) migrations can't be part of the upgrade path.
 
