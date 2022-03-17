@@ -17,7 +17,7 @@ Sharding is a horizontal cluster scaling strategy that puts parts of one ClickHo
 
 ## How to set up sharding and replication
 
-Sharding PostHog ClickHouse is a new experimental feature only supported starting PostHog 1.34.0.
+Sharding PostHog ClickHouse is a new experimental feature only supported from PostHog 1.34.0.
 
 To use sharding, first upgrade to version >= 1.34.0 and run the `0004_replicated_schema` async migration
 
