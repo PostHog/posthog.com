@@ -1,0 +1,92 @@
+---
+title: Data Management
+sidebar: Docs
+showTitle: true
+---
+
+<FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
+
+Data Management lets you organize events that come into PostHog. Managing your data becomes especially helpful in situations where:
+
+- It is hard to understand events, actions, and properties that you yourself didn't set up.
+- Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
+- Event-level context in insights and dashboards is difficult to share with external people and new team members.
+
+## What is a definition?
+
+Definitions are the basic building blocks for how you manage data at PostHog. There's no need to create any definition in order to get started analyzing your data on PostHog. However, your team's experience on PostHog can be greatly enriched when your events are defined with best practices in mind.
+
+It is also important to note that PostHog will implicitly create a skeleton definition for every event and event property it ingests, and each definition
+can be enriched with more context at any time.
+
+## When do I need a definition?
+
+Instrumentation is always changing and it can become difficult to keep track of events as their meanings and usage change across teams and over time. This is where definitions can come in handy as they are mutable representations of their immutable counterparts (events and their properties), making them ideal candidates for storing information that can adapt to changes in your product.
+
+## What can I define?
+
+### Event Definition
+
+An event definition is a mutable representation of an event. A single definition can be used to describe a set of events that share the same name.
+
+Event definitions differ from actions in that a definition can represent exactly one type of event, whereas actions are composed of multiple matching groups and therefore multiple events. We recommend using actions if your data managing use case cannot be solved with simple definitions.
+
+### Event Property Definition
+
+An event property definition is a mutable representation an event property that is nested inside an event. Event property definitions are globally defined, meaning that the same properties shared across events will share one definition.
+
+### Definition Fields
+
+Today, you can add descriptions and tags to both events and event property definitions. Event definitions can also be verified which tells collaborators that an event should be favored over other similar events.
+
+### Creating definitions
+
+Before creating your first definition, make sure at least one event of that type has been sent to PostHog. You can use the "Live Events" page to observe that your event has been ingested properly.
+
+## Creating a definition from a filter
+
+Definitions can be created on the fly anywhere in the app where there is a filter.
+
+Open the filter and hover over the item you'd like to create a definition for. See that a definition pops up on the side.
+
+![PostHog - definition card view](../../images/features/data-management/definition-card-view.png)
+
+This card represents the definition that has already been created. If you haven't created a definition here, PostHog will display an empty definition you can fill out here.
+
+Click "Edit" in the definition card.
+
+![PostHog - definition card edit](../../images/features/data-management/definition-card-edit.png)
+
+From here you can add some context that captures some context about this event or property. Keep in mind this definition will persist everywhere this event is displayed in the app.
+
+Once you've finalized everything, save your definition, and you're good to go!
+
+## Creating a definition from the Data Management page
+
+If you'd like one central place to manage all your definitions, go to the Data Management page to see a flat list of event and event property definitions.
+
+![PostHog - data management page](../../images/features/data-management/data-management-page.png)
+
+From here you may hover over event and event property names to edit definitions.
+
+You may also explore all properties nested under each event to quickly understand how your data is structured.
+
+![PostHog - data management expand](../../images/features/data-management/data-management-event-expand.png)
+
+## How to use Data Management as a team (best practices)
+
+To help you in your journey to data management nirvana, here are a few rules of thumb to consider when using these new features.
+
+1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.
+
+Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self-explanatory, right? Not necessarily. Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`; or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
+
+2. Official organization-wide events should be verified so that teammates can discover and use them easily.
+
+Verified events will be prioritized in filters and other selection components to signal to the rest of the team that this event should be used in favor of other similar events. An example where this comes in handy is if there are two events that sound familiar, `signed up` and `signed_up`. Verifying the first tells others very explicitly that one is still being used and the other has gone stale.
+
+3. Tagging is an easy way to categorize events into custom groups, be it for a product, feature or new page.
+
+We highly recommend using tags to organize events coming in from different parts of your product. At PostHog for example, we use tags called `session-recordings`, `funnels`, and `feature-flags` to keep track of insights and dashboards related to those features.
+
+Tags can also be useful for organizing PostHog for internal use. We create tags for each of our internal [small teams](/handbook/people/team-structure/team-structure/why-small-teams) to signal which dashboards are interesting to our respective teams.
