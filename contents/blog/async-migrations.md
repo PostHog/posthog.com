@@ -121,7 +121,7 @@ Also, given our monthly release schedule for minor versions, a migration added i
 
 As for how they run, we leveraged a service we already used for asynchronous operations: Celery. We only ever run one async migration task at a time, and tasks are dispatched with `track_started=True` and `ignore_result=False`, so we can keep an eye on them and handle edge cases like the Celery worker dying unexpectedly.
 
-**It should be safe.**
+### 2. It should be safe**
 
 Anytime you're messing with user databases there's a risk that things will go bad. Period.
 
