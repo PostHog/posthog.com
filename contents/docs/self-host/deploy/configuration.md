@@ -207,6 +207,11 @@ ClickHouse is the datastore system that does the bulk of heavy lifting with rega
 By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
 
 
+#### Use an external service
+To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
+
+Find out how to deploy PostHog using Altinity Cloud [in our deployment configuration docs](/docs/self-host/configure/using-altinity-cloud).
+
 #### Custom settings
 
 It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
@@ -236,7 +241,7 @@ Note: to avoid issues when upgrading this chart, provide `postgresql.postgresqlP
 #### Use an external service
 To use an external PostgreSQL service, please set `postgresql.enabled` to `false` and then configure the `externalPostgresql` values.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
 ### [PgBouncer](https://www.pgbouncer.org/)
 PgBouncer is a lightweight connection pooler for PostgreSQL and it is installed by default as part of the chart. It is currently required in order for the installation to work (see [here](https://github.com/PostHog/charts-clickhouse/issues/280) for more info).
@@ -259,6 +264,22 @@ Redis is installed by default as part of the chart. You can customize all its se
 #### Use an external service
 To use an external Redis service, please set `redis.enabled` to `false` and then configure the `externalRedis` values.
 
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+```yaml
+redis:
+  enabled: false
+
+externalRedis:
+  host: "posthog.cache.us-east-1.amazonaws.com"
+  port: 6379
+```
+
+</details>
+
 #### Credentials
 By default, Redis doesn't use any password for authentication. If you want to configure it to use a password (recommended) see the options below.
 
@@ -276,7 +297,8 @@ By default, Redis doesn't use any password for authentication. If you want to co
     1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
     2. configure your `values.yaml` to reference the secret:
-      ```
+
+      ```yaml
       redis:
         enabled: true
         auth:
@@ -301,7 +323,11 @@ By default, Redis doesn't use any password for authentication. If you want to co
       1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
       1. configure your `values.yaml` to reference the secret:
-        ```
+
+        ```yaml
+        redis:
+          enable: false
+
         externalRedis:
           host: "<YOUR_REDIS_HOST>"
           port: <YOUR_REDIS_PORT>
@@ -311,14 +337,35 @@ By default, Redis doesn't use any password for authentication. If you want to co
 
 </details>
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
 
 ### [Kafka](../runbook/kafka/)
 
-By default, Kafka is installed as part of the chart. Kafka is used as a queue between the PostHog web application and PostHog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
+Kakfa is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `kafka` namespace.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
+#### Use an external service
+To use an external Kafka service, please set `kafka.enabled` to `false` and then configure the `externalKafka` values.
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+```yaml
+kafka:
+  enabled: false
+
+externalKafka:
+  brokers:
+    - "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-2.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+```
+
+</details>
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
 
 ### [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)

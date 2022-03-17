@@ -4,15 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-### Requirements
-You need to run a Kubernetes cluster with the _Volume Expansion_ feature enabled. This feature is supported on the majority of volume types since Kubernetes version >= 1.11 (see [docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion)).
+import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
 
-To verify if your storage class allows volume expansion you can run:
-
-```shell
-kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
-true
-```
+<ResizeDiskRequirementsSnippet/>
 
 #### How-to
 

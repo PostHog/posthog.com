@@ -3,7 +3,7 @@ title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/feature-flags.png
-featuredTutorial: true
+featuredTutorial: false
 author: ['yakko-majuri']
 topics: ['feature flags']
 featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950

@@ -1,12 +1,8 @@
 ---
-title: Development process
+title: Shipping things, step by step
 sidebar: Handbook
 showTitle: true
 ---
-
-> _**Note:** This guide is aimed at people who work for PostHog. If you want to contribute, [see our Contributing Guide](/docs/contributing)._
-
-<br />
 
 Any process is a balance between speed and control. If we have a long process that requires extensive QA and 10 approvals, we will never make mistakes because we will never release anything.
 
@@ -63,7 +59,7 @@ Goals should be time-bound, but since we primarily use goals for our two-weekly 
 * **Moonshots:** These are big scary goals, we expect to fail to achieve them 50% of the time, if we fail we expect to learn something equally as valuable as if we succeed (just scraping the goal counts as a success)
 * **Roofshots:** These might also be big but we expect to achieve them 100% of the time, these can be goals where we cannot afford to fail (e.g. Launch feature to keep us compliant with new regulation) or where we are confident in our approach and don’t foresee unexpected risks / issues.
 
-### Outcomes of goals
+### Outcomes of goals
 
 When we review the status of the goals from the previous sprint, we'll classify them as follows:
 * **Nailed it:** We hit the goal spectacularly (high fives all round)
