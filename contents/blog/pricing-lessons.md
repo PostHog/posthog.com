@@ -68,7 +68,7 @@ There are exceptions to this rule - relationship-driven enterprise sales, for ex
 
 ## Make pricing work for your biggest customers
 
-We implemented logarithmically-declining pricing with usage. This means something like - every time your volume goes up 10x, the incremental price decrease 5x.
+Your biggest customers won't appreciate being gouged as their usage increases. We implemented logarithmically-declining pricing with usage. This means something like - every time your volume goes up 10x, the incremental price decreases 5x.
 
 ## Don't try to make money off people that don't have money
 
