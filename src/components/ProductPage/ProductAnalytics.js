@@ -40,7 +40,7 @@ const features = [
     },
     {
         title: 'Experimentation suite',
-        description: `Test ideas on real users with statistically significant sample sizes.`,
+        description: `A/B test changes on real users with statistically significant sample sizes.`,
         cta: {
             title: 'Learn more about experimentation',
             url: '/product/experimentation-suite',
