@@ -27,7 +27,7 @@ Our revelation was realizing that, for us, pricing shouldn't get in the way of a
 
 So, how did we get pricing out of the way?
 
-**A free for life tier** means users don't _ever_ have to part with cash (or user data) to use our product. We do this in two ways - (i) we offer an open source product with a huge range of features; (ii) we offer a little free usage on cloud for free, forever. This means we can get into production and demonstrate value to users who need to build a business case and can't just pop in their card.
+**A free-for-life tier** means users don't _ever_ have to part with cash (or user data) to use our product. We do this in two ways - (i) we offer an open source product with a huge range of features; (ii) we offer a little free usage on cloud for free, forever. This means we can get into production and demonstrate value to users who need to build a business case and can't just pop in their card.
 
 **Encourage users to upgrade**, since you need people to do exactly that! We encourage people to put in their credit card by offering our paid features starting at $0 (with a generous amount of free usage) if they do so. This lets users evaluate the paid product very easily, and upgrade with no friction if they're heavy users. This exchange feels fair to us - it helps us figure out who is serious versus playing around. Our numbers reflect that users feel the same way - over half our users enter their card details.
 
