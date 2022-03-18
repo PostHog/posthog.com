@@ -14,7 +14,7 @@ The reason we think books can be more helpful than just Googling stuff, is that 
 
 You may buy a couple of books a month without asking for permission. As a general rule, spending up to $50/month on books is fine and requires no extra permission. You can use your books budget towards audiobooks as well if you prefer. 
 
-Books do not have to be tied directly to your area, and they only need be loosely relevant to your work. For example, biographies of leaders can help a manager to learn, and can in fact be more valuable than a tactical book on management. Likewise, if you're an engineer, a book on design can also be particularly valuable for you to read.
+Books do not have to be tied directly to your area, and they only need be loosely relevant to your work. For example, biographies of leaders can help a manager to learn, and can in fact be more valuable than a tactical book on management. Likewise, if you're an engineer, a book on design can also be particularly valuable for you to read. Additionally, we host a monthly book club called BookHog, and the budget can be used for those books as well.
 
 ## Training budget
 
