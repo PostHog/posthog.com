@@ -37,7 +37,7 @@ Specifically, the new materialized columns are fast to read from disk as they co
 
 On our PostHog Cloud setup, we saw this feature improve query performance on average 55% with the p99 improvement being 25x improvement.
 
-## Speeding up JOINs for large users 10x
+## Making JOINs 10x faster for large users
 
 Over time, for larger PostHog users with over 10 million visitors some simple queries like (count of unique users) started timing out or running into memory errors.
 
