@@ -1,5 +1,5 @@
 ---
-title: Sharding and replication
+title: Horizontal scaling (sharding & replication)
 sidebar: Docs
 showTitle: true
 ---
@@ -44,3 +44,9 @@ sharding and replication settings within that platform.
 
 Note that to propagate all the schemas to the new ClickHouse nodes, you should also do an `helm upgrade` which creates the right schema
 on the new nodes.
+
+## Rebalancing data
+
+When adding new shards to an existing cluster, data between shards is not automatically rebalanced. This rebalancing is the job of the PostHog operator to do.
+
+Tools like clickhouse-copier or clickhouse-backup can help with this rebalancing.
