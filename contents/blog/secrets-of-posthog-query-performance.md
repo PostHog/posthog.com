@@ -125,7 +125,7 @@ This resulted in a roughly 23% query speed up on average. The best trick to perf
 
 ### Migrating data
 
-Changing how data is sorted on disk is not cheap when you have billions on billions of events. For example, on PostHog Cloud this took five separate attempts and over either weeks total to finish. In addition, PostHog has a lot of self-hosted users at various degrees of scale and technical skill who would need to repeat this process.
+Changing how data is sorted on disk is not cheap when you have billions on billions of events. For example, on PostHog Cloud, this took five separate attempts and multiple weeks in total to finish. In addition, PostHog has a lot of self-hosted users at various degrees of scale and technical skill who would need to repeat this process.
 
 To tackle this problem, we ended up building a new [async migrations](/docs/self-host/configure/async-migrations/overview) system, which safely runs these long-running operations at scale with the press of a button while handling common edge cases and keeping the platform usable.
 
