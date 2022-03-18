@@ -121,7 +121,7 @@ However, almost all of our most time-sensitive queries in PostHog also filter by
 ORDER BY (project_id, toDate(timestamp), event, cityHash64(distinct_id), cityHash64(uuid))
 ```
 
-This resulted in a roughly 23% query speed up on average. The best trick to performance optimization is to skip doing unnecessary work.
+This resulted in a roughly 23% query speed up on average. The best trick for performance optimizations is to skip doing unnecessary work.
 
 ### Migrating data
 
