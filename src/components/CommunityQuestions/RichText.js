@@ -1,6 +1,7 @@
 import MDEditor from '@uiw/react-md-editor'
 import React, { useEffect } from 'react'
 import rehypeSanitize from 'rehype-sanitize'
+import './style.scss'
 
 const bold = {
     name: 'bold',
