@@ -72,7 +72,7 @@ TODO: <insert cherry-picks of non-trivial CI failures>
 
 Those tests are helping us to identify and fix several bugs in our implementation, catching regressions before code gets released and enabling us to iterate faster than ever.
 
-For more informations about the technical implementation, take a look [here](https://github.com/PostHog/charts-clickhouse#testing).
+For more information about the technical implementation, take a look [here](https://github.com/PostHog/charts-clickhouse#testing).
 
 
 ## Goal 2: Improve built-in monitoring
