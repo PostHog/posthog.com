@@ -96,7 +96,7 @@ While debugging other performance issues, one question we kept asking is whether
 
 PostHog uses a [ClickHouse MergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/) table engine to store event data on disk. MergeTree tables can have an `ORDER BY` clause, which is then used by ClickHouse to store the data in a sorted format on disk and to create a sparse index of the data. The sparse index can then be used to skip reading data during queries.
 
-For PostHog our `ORDER BY` clause originally looked something like follows:
+Our `ORDER BY` clause originally looked something like this:
 
 ```sql
 ORDER BY (project_id, toDate(timestamp), cityHash64(distinct_id), cityHash64(uuid))
