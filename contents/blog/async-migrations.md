@@ -29,19 +29,19 @@ This is reasonably simple. We can modify the table in place with an `ALTER TABLE
 
 **2. Changing the engine of a table**
 
-Here things start to get a bit more complicated. ClickHouse does not support changing table engines via `ALTER TABLE` (at least not yet), so we cannot modify the table in place. 
+Here things start to get a bit more complicated. ClickHouse does not support changing table engines via `ALTER TABLE`, so we cannot modify the table in place. 
 
 Instead, we need to create a new table with the same schema, except for the engine change, and insert data from the old table into it.
 
-Luckily, ClickHouse provides a nice way to do this. With `ATTACH PARTITION`, we can copy the data from the old table to the new table reasonably quickly, by simply "attaching" the existing partition(s) to the new table.
+Luckily, ClickHouse provides a nice way to do this. With `ATTACH PARTITION`, we can "copy the data" from the old table to the new table reasonably quickly, by simply "attaching" the existing partition(s) to the new table. In reality, no data gets "copied", but rather new links are created to point to the existing data. 
 
-So while we do need to move data from a table to another, this isn't very problematic.
+So while we do need to get data from a table to another, this isn't very problematic.
 
 **3. Changing the sorting key of a table**
 
 This is where things get hairy.
 
-ClickHouse stores data on disk in order following a "sorting key".
+ClickHouse tables using engines in the `MergeTree` family [store data on disk in sorted parts following a "sorting key"](https://clickhouse.com/docs/en/development/architecture/#merge-tree).
 
 This is defined by the `ORDER BY` clause at table creation. 
 
@@ -55,7 +55,7 @@ The reason for this is that adding a column to the sorting key would require rew
 
 This means that, like in example #2, we need to create a new table and add the old data to it. However, it also means that we cannot use `ATTACH PARTITION`, as the parts on the new table will be different from those on the old table. 
 
-That leaves us with one option: selecting and inserting all the data from the old table into the new table...
+That leaves us with one option: inserting all the data from the old table into the new table...
 
 Row. By. Row.
 
@@ -69,9 +69,9 @@ As a result, we can't pop this in with our other ("normal") migrations which run
 
 But that's not all. We at PostHog have an additional problem: self-hosted users.
 
-If PostHog was a Cloud-only service, we could have a team dedicated to running this "manually" on our instance, monitoring it, and making sure everything runs smoothly.
+If PostHog was a SaaS-only platform (with no self-hosting available), we could have a team dedicated to running this "manually" on our instance, monitoring it, and making sure everything runs smoothly.
 
-However, that's not a viable option for users that run their own PostHog instance. Providing them with a runbook is _an_ option, but it doesn't align with our goal of making PostHog extremely easy to deploy and manage. 
+However, that's not a viable option for users that run their own PostHog instance. Providing them with a runbook is _an_ option, but it doesn't align with our goal of making PostHog easy to deploy and manage. 
 
 We needed something better.
 
@@ -115,11 +115,9 @@ The beauty of this system is that users have flexibility to pick a convenient pe
 
 The guarantees around completion are done via a combination of hard requirements for upgrading to certain versions and good communication through release notes and docs, and they prevent us from having to support multiple code paths depending on the state of the database.
 
-It's also worth noting that we're always able to extend the range of a migration with a new release, which allows us to give users a larger buffer to run them if we notice any issues. 
+Given our monthly release schedule for minor versions, a migration added in 1.45.0 with an upper bound of 1.48.0 gives users three months to run them before the version it is required in comes out. In addition, it allows us to start working on code that relies on the migration being done after two months, essentially as soon as the last supported version (in this case 1.47.0) is released.
 
-Also, given our monthly release schedule for minor versions, a migration added in 1.45.0 with an upper bound of 1.48.0 gives users three months to run them before the version it is required in comes out. In addition, it allows us to start working on code that relies on the migration being done after two months, essentially as soon as the last supported version (in this case 1.47.0) is released.
-
-As for how they run, we leveraged a service we already used for asynchronous operations: Celery. We only ever run one async migration task at a time, and tasks are dispatched with `track_started=True` and `ignore_result=False`, so we can keep an eye on them and handle edge cases like the Celery worker dying unexpectedly.
+As for how they run, we leveraged a service we already used for asynchronous operations: Celery. We only ever run one async migration task at a time, keep task states temporarily in Redis, and tasks are dispatched with `track_started=True` and `ignore_result=False`, so we can keep an eye on them and handle edge cases like the Celery worker dying unexpectedly.
 
 ### 2. It should be safe**
 
@@ -127,7 +125,7 @@ Anytime you're messing with user databases there's a risk that things will go ba
 
 As such, just like with any migration, async migrations still rely on reviewers, tests, and checks to ensure nothing dangerous is shipped, like a migration with `DROP TABLE events`.
 
-However, it was a top priority for us to make the async migrations system include all the necessary tools for running database operations safely on environments we don't control (user instances).
+However, it was a top priority for us to make the async migrations system include all the necessary tools for running database operations safely on environments we don't control (self-hosted instances).
 
 To achieve this, we:
 
@@ -140,13 +138,13 @@ Lastly, async migrations should be easy to launch and manage for users, as well 
 
 To cover the latter part, we implemented the aforementioned guarantees and checks, as well as made the migration definitions closely resemble other migration systems we already have in place.
 
-As for users, we built a fully-fledged UI for instance admins, where they can read about the migration, update settings, trigger a run, pause or resume a migration, force a rollback, monitor status and progress, as well as get a list of errors. 
+As for users, we built a fully-fledged UI for instance admins, where they can read about the migration, update settings (like default timeouts and automatic rollbacks), trigger a run, pause or resume a migration, force a rollback, monitor status and progress, as well as get a list of errors. 
 
 We also store the ID of the query that is currently running on the database and the ID of the Celery task handling the migration, so more advanced users can go into the services themselves for additional monitoring.
 
 Ultimately, running a migration takes only the click of a button, but all the tools are in place for debugging issues if they come about. 
 
-It's also worth noting that we implemented an API for migrations to check if they should even run at all on a given instance. This is particularly useful for preventing useless runs on fresh deploys. A user that deployed PostHog after the migration was introduced shouldn't need to run a migration to get from an old schema to the new schema, given they already have the new schema in place. In these cases, we auto complete the migration and unblock upgrades without any user input at all.
+It's also worth noting that we implemented an API for migrations to check if they should even run at all on a given instance. This is particularly useful for preventing useless runs on fresh deploys. A user that deployed PostHog after the migration was introduced shouldn't need to run a migration to get from an old schema to the new schema, given they already have the new schema in place (async migrations should come with corresponding changes to the original schema definitions). In these cases, we auto complete the migration and unblock upgrades without any user input at all.
 
 ## A closer look
 
@@ -175,7 +173,7 @@ An async migration can contain the following components:
 
 ## What's next?
 
-We currently have three async migrations in the codebase, each destined to make queries in PostHog significantly faster. If you're a user, make sure to run them!
+We currently have three async migrations in the codebase, each destined to make queries in PostHog significantly faster. If you're a user, make sure to run them! For more info, see our [dedicated docs](https://posthog.com/docs/self-host/configure/async-migrations/overview).
 
 Going forward, we're excited to make this system even better, polishing our upgrade flow, including more granular controls, and introducing automatic runs under certain circumstances. 
 
