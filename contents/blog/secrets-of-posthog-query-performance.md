@@ -102,7 +102,7 @@ Our `ORDER BY` clause originally looked something like this:
 ORDER BY (project_id, toDate(timestamp), cityHash64(distinct_id), cityHash64(uuid))
 ```
 
-Let’s consider this simplified query counting the number of users who did pageviews in a time range.
+With that in mind, let’s consider this simplified query counting the number of users who had pageviews within a given time range:
 
 ```sql
 SELECT count(DISTINCT person_id)
