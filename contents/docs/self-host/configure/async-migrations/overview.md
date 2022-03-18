@@ -6,7 +6,11 @@ showTitle: true
 
 ## What are async migrations?
 
-Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. Related internal docs can be found [here](/handbook/engineering/async-migrations).
+Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions.
+
+You can check the PostHog blog for more [information about how and why we enable async migrations on PostHog](/blog/async-migrations).  
+
+Further internal information about async migrations can be found in [our handbook](/handbook/engineering/async-migrations).
 
 ## Why are async migrations necessary?
 
