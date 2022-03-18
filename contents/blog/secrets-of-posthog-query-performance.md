@@ -131,7 +131,7 @@ To tackle this problem, we ended up building a new [async migrations](/docs/self
 
 ## Self-hosted performance
 
-As mentioned, PostHog can be self-hosted by our users. However getting it working smoothly across a wide range of deployments at scale [keeps our infrastructure team hard at work](TODO-link-to-harry-guido-blog-post).
+As mentioned, PostHog can be self-hosted by our users. However, getting it working smoothly across a wide range of deployments at scale [keeps our infrastructure team hard at work](TODO-link-to-harry-guido-blog-post).
 
 Some features released in PostHog 1.34.0 which affect performance for self-hosted users are:
 
