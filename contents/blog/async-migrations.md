@@ -1,5 +1,5 @@
 ---
-date: 2021-03-18
+date: 2022-03-18
 title: Enabling zero downtime data migrations for self-hosted users
 rootPage: /blog
 sidebar: Blog
@@ -91,7 +91,6 @@ When we started building it, we wanted the system to have three key characterist
 
 Here's how we achieved all three.
 
-
 ### 1. It should be asynchronous, but with guarantees
 
 As we established earlier, long-running (and potentially unbounded) migrations can't be part of the upgrade path.
@@ -119,7 +118,7 @@ Given our monthly release schedule for minor versions, a migration added in 1.45
 
 As for how they run, we leveraged a service we already used for asynchronous operations: Celery. We only ever run one async migration task at a time, keep task states temporarily in Redis, and tasks are dispatched with `track_started=True` and `ignore_result=False`, so we can keep an eye on them and handle edge cases like the Celery worker dying unexpectedly.
 
-### 2. It should be safe**
+### 2. It should be safe
 
 Anytime you're messing with user databases there's a risk that things will go bad. Period.
 
@@ -132,7 +131,7 @@ To achieve this, we:
 * Made available to developers a wide range of checks that can short circuit the running process, such as a precheck, a periodic healthcheck, service version requirements, and dependencies. To give one specific example, we often use prechecks to ensure the database has enough free disk space to run the migration, given we might temporarily duplicate a table's data, for instance.
 * Built the system with resumability and rollbacks in mind, ensuring migrations can behave in a sane and non-destructive way if services crash, errors are thrown, timeouts occur, etc. Depending on the circumstances, we will either continue running the migration if we've determined it to be safe, or roll the database back to the initial state. 
 
-### 3. It should be easy to work with, both for developers and users**
+### 3. It should be easy to work with, both for developers and users
 
 Lastly, async migrations should be easy to launch and manage for users, as well as easy to write and build upon for developers.
 
