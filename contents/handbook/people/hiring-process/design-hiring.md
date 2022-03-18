@@ -38,7 +38,7 @@ We are looking for proactivity, directness, good communication skills, an awaren
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
 
-The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer-) and 1-2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
+The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer) and 1-2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 
 The second part of the interview will be a portfolio interview, where you will meet a few other members of the team. You will present a deep dive into your portfolio, covering the end-to-end process from strategy to design to impact.
 
@@ -54,7 +54,7 @@ This gives you the chance to learn how we work, and for us to see your quality a
 
 A Design SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 
-*   Kick-off session with [Cory](/handbook/people/team#cory-watilo-lead-designer-)(Lead Designer)
+*   Kick-off session with [Cory](/handbook/people/team#cory-watilo-lead-designer)(Lead Designer)
 *   Meet the founders - Tim and James
 *   Time to focus on the task, we can provide support via your personal Slack channel
 *   Informal session with a team member
