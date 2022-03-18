@@ -74,7 +74,7 @@ Instead, the recommended approach is to use a ReplacingMergeTree or CollapsingMe
 
 During data ingestion, when a given `distinct_id` had its `person_id` changed, PostHog emits a row with `is_deleted=1` for the old `person_id` and a new row with `is_deleted=0`. The above query would then resolve the `distinct_id` => `person_id` mapping at query time.
 
-However, in practice, this query took too much memory and was slow due to needing a subquery to aggregate data correctly. It also had subtle issues with using timestamps for versioning, causing issues.
+However, in practice, this query was slow and used up too much of memory, due to needing a subquery to aggregate data correctly. It also had subtle issues with using timestamps for versioning, which was problematic when ClickHouse encountered equal timestamps.
 
 After noticing the problem, we realized we didn't need to actually emit rows with `is_deleted=0` to behave correctly, and could move to an alternative schema, which can be queried as follows:
 
