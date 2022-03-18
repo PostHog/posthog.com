@@ -39,7 +39,7 @@ On our PostHog Cloud setup, we saw this feature improve query performance by 55%
 
 ## Making JOINs 10x faster for large users
 
-Over time, for larger PostHog users with over 10 million visitors some simple queries like (count of unique users) started timing out or running into memory errors.
+Over time, for larger PostHog users with over 10 million visitors, some simple queries like a count of unique users started timing out or running into memory errors.
 
 We narrowed this down to one particular JOIN in our system:
 
