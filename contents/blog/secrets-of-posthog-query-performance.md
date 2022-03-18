@@ -35,7 +35,7 @@ We ended up [materializing the most used properties into new columns](/blog/clic
 
 Specifically, the new materialized columns are fast to read from disk as they compress really well and ClickHouse can skip parsing JSON entirely during queries.
 
-On our PostHog Cloud setup, we saw this feature improve query performance on average 55% with the p99 improvement being 25x improvement.
+On our PostHog Cloud setup, we saw this feature improve query performance by 55% on average, with the p99 improvement being 25x.
 
 ## Making JOINs 10x faster for large users
 
