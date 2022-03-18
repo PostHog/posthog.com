@@ -115,7 +115,7 @@ WHERE project_id = 2
 
 When executing this query, ClickHouse is able to leverage data being sorted and the sparse index to skip reading most of data from disk. In this case, events from other projects and organizations and events from months other than March.
 
-However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause:
+However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 
 ```sql
 ORDER BY (project_id, toDate(timestamp), event, cityHash64(distinct_id), cityHash64(uuid))
