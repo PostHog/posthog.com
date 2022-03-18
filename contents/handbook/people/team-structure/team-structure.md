@@ -26,7 +26,6 @@ hideAnchor: true
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations & Marketing](/handbook/company/team#charles-cook-business-operations)
-    - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
     - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
     - Grace McKenzie, Operations Manager
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
