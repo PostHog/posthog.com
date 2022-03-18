@@ -33,7 +33,7 @@ Here's a quick teaser for what's to come during _PostHog Launch Week I: A Univer
 
 ## Chapter I: Data Management
 
-- **Releasing:** Wednesday, March 23
+- **Releasing:** Monday, March 21
 - **Starring:** Alex Kim
 - **Introducing:** New Data Management UI, event definitions, definition tagging and many more
 
@@ -53,7 +53,7 @@ Here's a quick teaser for what's to come during _PostHog Launch Week I: A Univer
 
 ## Chapter III: Experimentation
 
-- **Releasing:** Monday, March 21
+- **Releasing:** Wednesday, March 23
 - **Starring:** Neil Kakkar
 - **Introducing:** A/B testing, multivariate tests and statistical significance
 
