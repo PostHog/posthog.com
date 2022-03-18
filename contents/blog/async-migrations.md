@@ -33,7 +33,7 @@ Here things start to get a bit more complicated. ClickHouse does not support cha
 
 Instead, we need to create a new table with the same schema, except for the engine change, and insert data from the old table into it.
 
-Luckily, ClickHouse provides a nice way to do this. With `ATTACH PARTITION`, we can "copy the data" from the old table to the new table reasonably quickly, by simply "attaching" the existing partition(s) to the new table. In reality, no data gets "copied", but rather new links are created to point to the existing data. 
+Luckily, ClickHouse provides a nice way to do this. With `ATTACH PARTITION`, we can "copy the data" from the old table to the new table reasonably quickly, by simply "attaching" the existing partition(s) to the new table. In reality, no data gets "copied", but rather new hard links are created to point to the existing data. 
 
 So while we do need to get data from a table to another, this isn't very problematic.
 
@@ -61,7 +61,7 @@ Row. By. Row.
 
 ## The problem
 
-Scenario #3 leaves us with a difficult problem at hand: inserting data row by row can take _a long time_. 
+Needing to execute migrations like the one above leaves us with a difficult problem at hand: inserting data row by row can take _a long time_. 
 
 The time it will take depends on the size of the table to be migrated, and thus, if we're migrating a large table (say, [our events table](https://github.com/PostHog/posthog/issues/5684)), this can take weeks.
 
@@ -161,7 +161,7 @@ Metadata about the migration is stored in Postgres, including things such as sta
 An async migration can contain the following components:
 
 * `description`: A description of the migration.
-* `operations`: A list of operations to run in sequence, each with a designated rollback. Operations can be plain SQL or an arbitrary function.
+* `operations`: A list of operations to run in sequence, each with a designated rollback. An operation can use plain SQL or arbitrary functions, and the operations list can be dynamic based on instance setup. For example, we may generate operations for each partition on a table.
 * `posthog_min_version`: The minimum version of PostHog required for running the migration.
 * `posthog_max_version`: The last PostHog version this migration can be run on.
 * `is_required`: A check that determines if this migration needs to be run on the instance. Usually verifies the current schema of a table to determine if it needs to be migrated.
