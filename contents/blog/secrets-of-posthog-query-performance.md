@@ -76,7 +76,7 @@ During data ingestion, when a given `distinct_id` had its `person_id` changed, P
 
 However, in practice, this query took too much memory and was slow due to needing a subquery to aggregate data correctly. It also had subtle issues with using timestamps for versioning, causing issues.
 
-After noticing the problem, we realised we didn't need to actually emit rows with `is_deleted=0` to behave correctly, and could move to an alternative schema, which can be queried as follows:
+After noticing the problem, we realized we didn't need to actually emit rows with `is_deleted=0` to behave correctly, and could move to an alternative schema, which can be queried as follows:
 
 ```sql
 JOIN (
