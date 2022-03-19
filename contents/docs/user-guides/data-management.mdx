@@ -80,7 +80,7 @@ You may also explore all properties nested under each event to quickly understan
 
 **1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents**
 
-Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self-explanatory, right? Not necessarily. Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`; or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
+Over time, it's easy to generate similar sounding events that are subtly different. You could, for example, have several `sign_up` custom events from different sources, such as a second app pushing data to the same instance, or `sign up` events from your frontend and backend. Describing these events properly avoids confusion for teammates and new users who weren't involved in setting up the events.
 
 2. **Official organization-wide events should be verified so that teammates can discover and use them easily**
 
