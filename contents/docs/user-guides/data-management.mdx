@@ -14,6 +14,8 @@ Data Management lets you keep events and properties organized. Managing your dat
 - Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
 - Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
+> 🚧 **Data Management is currently in beta**. If you have any feedback, please <a href="https://posthog.com/support" target="_blank">reach out</a>.
+
 ## What is a definition?
 
 Definitions are the basic building blocks for how you manage data at PostHog. You don't need to create definitions in order to get started analyzing your data on PostHog, but your team's experience on PostHog can be greatly enriched when your events are defined with best practices in mind.
@@ -43,11 +45,11 @@ Today, you can add descriptions and tags to both events and event property defin
 
 You can learn about how to best use these attributes by going to our [best practices](/docs/user-guides/data-management/#data-management-best-practices) section.
 
-### Creating definitions
+## Creating definitions
 
 Before creating your first definition, make sure at least one event of that type has been sent to PostHog. You can use the "Live Events" page to observe that your event has been ingested properly.
 
-## Creating a definition from a filter
+### Creating a definition from a filter
 
 Definitions can be created on the fly anywhere in the app where there is a filter.
 
@@ -65,7 +67,7 @@ From here you can add some context that captures some context about this event o
 
 Once you've finalized everything, save your definition, and you're good to go!
 
-## Creating a definition from the Data Management page
+### Creating a definition from the Data Management page
 
 If you'd like one central place to manage all your definitions, go to the Data Management page to see a flat list of event and event property definitions.
 
@@ -78,7 +80,6 @@ You may also explore all properties nested under each event to quickly understan
 ![PostHog - data management expand](../../images/features/data-management/data-management-event-expand.png)
 
 ## Data Management best practices
-
 
 **1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents**
 

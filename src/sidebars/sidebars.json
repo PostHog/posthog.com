@@ -928,6 +928,10 @@
                     "url": "/docs/user-guides/dashboards"
                 },
                 {
+                    "title": "Data Management",
+                    "url": "/docs/user-guides/data-management"
+                },
+                {
                     "name": "Events",
                     "url": "/docs/user-guides/events"
                 },
