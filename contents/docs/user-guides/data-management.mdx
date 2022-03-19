@@ -78,7 +78,7 @@ You may also explore all properties nested under each event to quickly understan
 ## Data Management best practices
 
 
-1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.
+**1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents**
 
 Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self-explanatory, right? Not necessarily. Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`; or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
 
