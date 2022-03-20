@@ -40,7 +40,7 @@ const features = [
     },
     {
         title: 'Experimentation suite',
-        description: `A/B test changes on real users with statistically significant sample sizes.`,
+        description: `Test changes in production with a suite that makes it easy to get the results you want.`,
         cta: {
             title: 'Learn more about experimentation',
             url: '/product/experimentation-suite',
@@ -48,7 +48,7 @@ const features = [
     },
     {
         title: 'Collaboration',
-        description: `Share insights with your team, using tools designed to help you make sense of your data.`,
+        description: `Make sense of insights your team has created, using tools designed to help share knowledge.`,
         cta: {
             title: 'Learn more about collaboration',
             url: '/product/collaboration',

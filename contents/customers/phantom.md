@@ -23,7 +23,7 @@ After discovering PostHog, Phantom went through a rapid testing process with the
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/francesco.png"
+        imageSource="/images/customers/francesco.jpg"
         size="md"
         name="Francesco Agosti"
         title="CTO & Co-founder, Phantom"
@@ -43,7 +43,7 @@ Phantom’s failure rate fell by 90% as a result of this switch and the team now
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/francesco.png"
+        imageSource="/images/customers/francesco.jpg"
         size="md"
         name="Francesco Agosti"
         title="CTO & Co-founder, Phantom"

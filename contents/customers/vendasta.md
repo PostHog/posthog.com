@@ -32,7 +32,7 @@ Recognizing the need for a self-serve solution, Kedar Page, a Data Scientist at 
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/taric-vendasta.jpeg"
+        imageSource="/images/customers/taric.jpg"
         size="md"
         name="Taric Santos de Andrade"
         title="Product Manager, Vendasta "
