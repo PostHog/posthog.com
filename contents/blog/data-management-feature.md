@@ -98,4 +98,4 @@ These are powerful tools for organizing your data, but we're just scratching the
 
 As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack),  or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
 
-> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the cool new things.
+> We're launching a new feature every day this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the cool new things.
