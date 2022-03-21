@@ -74,7 +74,7 @@ Instead, the recommended approach is to use a [ReplacingMergeTree](https://click
 
 During data ingestion, when a given `distinct_id` had its `person_id` changed, PostHog emits a row with `is_deleted=1` for the old `person_id` and a new row with `is_deleted=0`. The above query would then resolve the `distinct_id` => `person_id` mapping at query time.
 
-However, in practice, this query was slow and used up too much of memory, due to needing a subquery to aggregate data correctly. It also had subtle issues with using timestamps for versioning, which was problematic when ClickHouse encountered equal timestamps.
+However, in practice, this query was slow and used up too much memory, due to needing a subquery to aggregate data correctly. It also had subtle issues with using timestamps for versioning, which was problematic when ClickHouse encountered equal timestamps.
 
 After noticing the problem, we realized we didn't need to actually emit rows with `is_deleted=0` to behave correctly, and could move to an alternative schema, which can be queried as follows:
 
@@ -86,6 +86,17 @@ JOIN (
     GROUP BY distinct_id
     HAVING argMax(is_deleted, version) = 0
 ) AS pdi
+
+-- Table schema
+CREATE TABLE person_distinct_id2
+(
+    distinct_id VARCHAR,
+    person_id UUID,
+    project_id Int64,
+    is_deleted Int8,
+    version Int64 DEFAULT 1,
+    _timestamp DateTime
+) ENGINE = CollapsingMergeTree(version)
 ```
 
 For PostHog users with over 10 million visitors, this sped up queries previously bottlenecked on this JOIN by up to 10x.
