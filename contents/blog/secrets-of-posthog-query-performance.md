@@ -13,7 +13,9 @@ author: ["karl-aksel-puulmann"]
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.
 
-In this post, I’m going to break down the why’s and how’s of several major performance improvements we've made in the last few months.
+In this post, I’m going to break down the why’s and how’s of several major performance improvements we've made in the last few months to achieve that goal.
+
+> This post is part of our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
 ## How does querying work within PostHog?
 
@@ -23,7 +25,7 @@ These queries are processed by [ClickHouse](https://clickhouse.com/), where even
 
 However, as awesome as ClickHouse is, nothing is without sharp edges and trade-offs.
 
-## Speeding up property filtering (up to) 25x
+## Speeding up property filtering by 25x
 
 PostHog allows users to send and analyze arbitrary number of event and user properties with their data. We store this data as JSON-encoded strings in our tables.
 
@@ -171,4 +173,4 @@ Some projects currently in the pipeline are:
 - **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
 - **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
 
-_Interested on chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com)_
+> Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join our [community Slack](/slack).
