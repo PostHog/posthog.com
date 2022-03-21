@@ -1,11 +1,11 @@
 ---
-date: "2022-03-16" # :TODO
+date: "2022-03-22" # :TODO
 title: "Secrets of PostHog query performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/launch-week-teaser.jpeg # :TODO:
+featuredImage: ../images/blog/lw-queries.png
 featuredImageType: full
 categories: ["Engineering", "Product updates", "Launch week"]
 author: ["karl-aksel-puulmann"]
