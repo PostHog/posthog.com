@@ -4,18 +4,24 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We are in the process of putting together an updated regular newsletter. This is sent via Mailchimp. The Growth team use email for onboarding and other email flows, but this page covers marketing only. 
+We publish two newsletters:
+
+1. PostHog Array, a product announcement email published every four weeks
+2. HogMail, a marketing and content email published every two weeks
+
+Both emails are sent via Mailchimp. We plan to move HogMail to a weekly schedule once we're confident we can produce it to a high standard at that higher frequency. It's primarily aimed at existing users as a means to improving engagement with our content and aid product discovery through sharing tutorials, tips and ideas, not user acquisition.
 
 ## Lists
 
 We currently grow our general email list from three sources:
+
 - Newsletter signups from the website
 - PostHog users who opt-in
 - Event attendees
 
-We send a newsletter called the PostHog Array after every product release (2-4 weeks) and include a summary of the new version and any recent news or blog posts.  
+Note: Within the Mailchimp dashboard, users are automatically tagged to indicate where they came from e.g. Newsletter Subscribers, Deployed PostHog, Eventbrite, etc.
 
-## Newsletter format
+## PostHog Array format
 
 Our current newsletter structure looks roughly as follows:
 - Title/Heading
@@ -28,6 +34,13 @@ Our current newsletter structure looks roughly as follows:
 
 Feel free to use a few emojis and 1-2 images.
 
-For reference, here's an [example](https://us19.campaign-archive.com/?e=__test_email__&u=292207b434c26e77b45153b96&id=a60742692b) of a previous newsletter.
+For reference, here's an [example](/blog/the-posthog-array-1-32-0) of a previous newsletter.
 
-Note: Within the Mailchimp dashboard, users are automatically tagged to indicate where they came from e.g. Newsletter Subscribers, Deployed PostHog, Eventbrite, etc.
+## HogMail format
+
+HogMail roughly follows this format:
+
+- Featured content comprising at least one blog post and one tutorial
+- Curated third-party content we think will interest our users 
+- PostHog news, feedback requests and community updates
+- The Needle comic / cartoon from Lottie
