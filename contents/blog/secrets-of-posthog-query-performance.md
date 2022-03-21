@@ -27,7 +27,7 @@ However, as awesome as ClickHouse is, nothing is without sharp edges and trade-o
 
 ## Speeding up property filtering by 25x
 
-PostHog allows users to send and analyze arbitrary number of event and user properties with their data. We store this data as JSON-encoded strings in our tables.
+PostHog allows users to send and analyze an arbitrary number of event and user properties with their data. We store these properties as JSON-encoded string columns in our tables.
 
 One of the first issues we saw after moving to ClickHouse was that, for our largest users, filtering by properties was slow.
 
