@@ -1,29 +1,57 @@
 ---
-title: Session Recording
+title: Recordings
 sidebar: Docs
 showTitle: true
 ---
 
 <FeatureAvailability allPlans />
 
-Session Recording allows you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
+The Recordings (or Session Recording) feature allows you to record users navigating through your website and play back individual sessions to watch how real users use your product. There are multiple use cases for this:
 
-## Using Session Recording
+-   Troubleshooting bugs and UX issues: when a user runs into a problem, watch exactly what they did so you can reproduce and fix.
+-   Obtaining qualitative information on your product: for example, when you notice a drop in conversion, watch recordings to understand the **why** of users dropping.
+-   Understanding detailed interactions with your product so you can improve it.
+-   ... and many more.
 
-Recordings can only be used with our [JavaScript library](/docs/integrate/client/js) and requires the feature to be enabled in PostHog's Project Settings (`/project/settings`). Once enabled, the JS library will start recording sessions by default.
+## How to enable
 
-<blockquote class="warning-note">
-    Session Recording does not work if you send data using Segment's SDK as this data is not collected. If you use
-    Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source).
-</blockquote>
+1. Add any URL where you wish to capture recordings to your Authorized URLs (`/project/settings#authorized-urls`) project settings. You can just add your entire domain (e.g. `myposthogapp.com`).
+2. Go to your Project Settings (`/project/settings#recordings`) and enable Recordings.
 
-Recordings can be toggled on and off in the JS library by appropriately setting the [config](/docs/integrate/client/js/#config). Users who opt out of event capturing will not have their sessions recorded.
+A few things worth keeping in mind:
 
-To watch recordings, you can either visit the 'Recordings' page or click on any data point in an insight and from the list of persons related to that data point. This is specially useful in funnels, where you can drill down and watch recordings of users who converted or dropped off.
+-   Recordings can **only be used** with our [JavaScript library](/docs/integrate/client/js).
+-   In particular, this feature will not work with <b>Segment</b>, as Segment's SDK does not collect and send this data. _If you use
+    Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source)._
+-   Recordings can also be toggled on and off in the JS library by setting the relevant [config](/docs/integrate/client/js/#config) attribute. This is useful if you want to enable/disable recordings conditionally based on custom conditions (e.g. only record a specific set of users). See [Further controls](#further-controls) for details on this.
+-   Users who opt out of event capturing will not have their sessions recorded.
 
-When watching recordings, you can change the speed as well as select the option 'skip inactive' - this will skip chunks of the recording where the user was inactive on the page.
+## How to watch
 
-## Ignoring sensitive elements
+You can find relevant recordings in the following places:
+
+-   The 'Recordings' page will contain a list of all recordings. Filter the list too to find particular recordings (e.g. recordings where an exception occurred).
+-   Find recordings for a specific person by searching for them in the "Persons" page and then navigating to the 'Recordings' tab. Useful for troubleshooting particular issues for a user.
+-   When figuring out why your users converted or dropped off on a funnel, you can click on any step or drop-off to find related recordings to the specific step or drop-off (e.g. watch what users did instead of converting).
+-   For any other insight, you can always click on a specific data point and get a list of persons and recordings related to the data point.
+
+### Playback experience
+
+![Screenshot of recordings playback experience](../../images/features/recordings/recordings-playback.png)
+
+When watching recordings, here are some helpful things:
+
+-   To make sure you focus on the relevant parts of a recording, you can change the speed as well as select the option 'skip inactive' - this will skip chunks of the recording where the user was inactive on the page.
+-   You will see a list of events in the right side. This will include autocapture and custom events. If you're looking for an event in particular (e.g. `user signed up`) you can click on it to instantly jump to the point in time where the event happened.
+-   The seekbar at the bottom acts as a timeline and shows pins where specific events occurred. Hover over each pin for details.
+-   The seekbar shows a striped pattern when inactivity ocurred and a solid pattern when activity ocurred. If the pattern is red it means the recording has been buffered and loaded. If it's gray it means it's loading.
+-   The top right hand side corner will include some helpful metadata on the recording like screen size, user details, browser & OS, and location (if you are on PostHog Cloud or have the GeoIP plugin enabled.)
+-   Recordings you have watched will be shown grayed out. If you like to watch most or all the recordings for your users this will help you keep track.
+
+
+## Additional configuration
+
+### Ignoring sensitive elements
 
 If recording your application may capture sensitive user information, you need to update your codebase to prevent PostHog from capturing this during session recordings.
 
@@ -31,23 +59,19 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 
 Additionally, when dealing with inputs, if you wish to still capture the input box but not its contents, you can use the class name `ph-ignore-input` instead.
 
-## Recordings data retention
+Here's an example of how redacted elements show up in recordings.
 
-Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
+![Screenshot of a recording with redacted content](../../images/features/recordings/recordings-redacted.png)
 
-### PostHog Cloud & Clickhouse Self-hosted
+### Recordings data retention
 
-By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by executing a query like this on your Clickhouse instance.
+If you are on PostHog Cloud, recordings will be kept for <b>3 weeks</b>. We are working hard to enable the possibility of extending this.
 
-```
-ALTER TABLE session_recording_events MODIFY TTL toDate(created_at) + INTERVAL 6 WEEK
-````
+If you are on self-hosted, depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
 
-If your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above. Otherwise, the command can hang.
-
-### Legacy Postgres Self-hosted
-
-Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/project/settings#recordings).
+-   By default, recordings are kept for 3 weeks and deleted afterwards with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>.
+-   If you wish to change this setting, you can easily do so with [Instance settings](/docs/self-host/configure/instance-settings). Just change the `RECORDINGS_TTL_WEEKS` setting to the number of weeks for which you wish to persist recordings.
+    -   Please be mindful. If your Clickhouse storage is nearing capacity, you'll want to <b>temporarily increase your volume size before</b> updating the setting. Otherwise, the command can hang.
 
 ### Preserving recordings
 
