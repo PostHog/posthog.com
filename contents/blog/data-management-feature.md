@@ -21,9 +21,9 @@ As the biggest dogfooder of our own product, we (and many other teams) were begi
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
 3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
-We set out to solve these pain points and the result is the new Data Management experience we're introducing today, starting with the new Data Management tab.
+We set out to solve these pain points and the result is the new Data Management experience we're introducing today on PostHog Cloud and on Thursday for self-hosted.
 
-> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the new things we're launching this week.
+> Data Management is Chapter 1 of our [Universe of New Features launch week](/blog/launch-week-universe-of-new-features)
 
 ## The new Data Management and Live Events tabs
 
@@ -98,4 +98,4 @@ These are powerful tools for organizing your data, but we're just scratching the
 
 As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack),  or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
 
-> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the new things we're launching this week.
+> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the cool new things.
