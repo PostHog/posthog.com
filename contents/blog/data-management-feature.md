@@ -11,7 +11,7 @@ author: ["alex-kim"]
 categories: ["Product updates", "Launch week"]
 ---
 
-PostHog is growing fast. In just the last year we've measured ~36.5B total events ingested in PostHog Cloud alone, and hundreds of self-hosted users reached the 1M total ingested events milestone.
+PostHog is growing fast. In just the last year we've measured ~36.5B total events ingested in PostHog Cloud, and hundreds of self-hosted users reached the 1M total ingested events milestone.
 
 This is a sign of the superb growth we're seeing as a business, but data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
