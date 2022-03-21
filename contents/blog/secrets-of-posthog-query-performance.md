@@ -110,7 +110,12 @@ PostHog uses a [ClickHouse MergeTree](https://clickhouse.com/docs/en/engines/tab
 Our `ORDER BY` clause originally looked something like this:
 
 ```sql
-ORDER BY (project_id, toDate(timestamp), cityHash64(distinct_id), cityHash64(uuid))
+ORDER BY (
+    project_id,
+    toDate(timestamp),
+    cityHash64(distinct_id),
+    cityHash64(uuid)
+)
 ```
 
 With that in mind, let’s consider this simplified query counting the number of users who had pageviews within a given time range:
@@ -129,7 +134,13 @@ When executing this query, ClickHouse is able to leverage data being sorted and 
 However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 
 ```sql
-ORDER BY (project_id, toDate(timestamp), event, cityHash64(distinct_id), cityHash64(uuid))
+ORDER BY (
+    project_id,
+    toDate(timestamp),
+    event,
+    cityHash64(distinct_id),
+    cityHash64(uuid)
+)
 ```
 
 This resulted in a roughly 23% query speed up on average. The best trick for performance optimizations is to skip doing unnecessary work.
