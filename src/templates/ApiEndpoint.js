@@ -155,13 +155,13 @@ function Parameters({ item, objects }) {
             {pathParams?.length > 0 && (
                 <>
                     <h4>Path Parameters</h4>
-                    <Params params={pathParams} />
+                    <Params params={pathParams} objects={objects} />
                 </>
             )}
             {queryParams?.length > 0 && (
                 <>
                     <h4>Query Parameters</h4>
-                    <Params params={queryParams} />
+                    <Params params={queryParams} objects={objects} />
                 </>
             )}
         </>
@@ -487,7 +487,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                                             ? pathDescription(item)
                                                             : item.description}
                                                     </ReactMarkdown>
-                                                    <Parameters item={item} />
+                                                    <Parameters item={item} objects={objects} />
 
                                                     <RequestBody item={item} objects={objects} />
 

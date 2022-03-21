@@ -19,14 +19,13 @@ hideAnchor: true
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
       - Guido Iaquinti, Site Reliability Engineer
       - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
+      - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
-    - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
-    - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
+      - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
+      - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
     - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
-    - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
     - Harry Waye, Full Stack Engineer
   - [Charles Cook, VP of Operations & Marketing](/handbook/company/team#charles-cook-business-operations)
-    - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
     - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
     - Grace McKenzie, Operations Manager
   - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)

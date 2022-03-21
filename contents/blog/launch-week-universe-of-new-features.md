@@ -33,27 +33,27 @@ Here's a quick teaser for what's to come during _PostHog Launch Week I: A Univer
 
 ## Chapter I: Data Management
 
-- **Releasing:** Wednesday, March 23
+- **Releasing:** Monday, March 21
 - **Starring:** Alex Kim
 - **Introducing:** New Data Management UI, event definitions, definition tagging and many more
 
-"An inspiring tale about overcoming the terrifying prospect of a data explosion. Do not miss!" - An influencer who wasn't even paid to say this  
+"An inspiring tale about overcoming the terrifying prospect of a data explosion. Do not miss!" - An influencer who wasn't even paid to say this
 
 ## Chapter II: Project Sparkle
 
 - **Releasing:** Tuesday, March 22
-- **Starring:** Karl-Askel Puulman, Harry Waye and Guido Iaquinti
+- **Starring:** Karl-Aksel Puulmann, Harry Waye and Guido Iaquinti
 - **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
 "Incredibly polished" ⭐️⭐️⭐️⭐️⭐️ - Hedgehog Gazette
 
 "Shines like a diamond" ⭐️⭐️⭐️⭐️⭐️ - Roger Hogbert
 
-"Puulman, Iaquinti and Waye are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
+"Puulmann, Iaquinti and Waye are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
 
 ## Chapter III: Experimentation
 
-- **Releasing:** Monday, March 21
+- **Releasing:** Wednesday, March 23
 - **Starring:** Neil Kakkar
 - **Introducing:** A/B testing, multivariate tests and statistical significance
 
