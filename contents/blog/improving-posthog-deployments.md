@@ -46,7 +46,7 @@ Kubernetes resources are usually represented as YAML objects, while Helm helps u
 In order to make sure those resources are defined, installed and upgrade correctly across different cloud platforms, Kubernetes versions and deployment scenarios, we’ve recently introduced several layers of testing, each of which with a specific goal:
 
 * lint tests (via Helm lint): to verify if the Helm templates can be rendered without errors
-unit tests (via [`quintush/helm-unittest`](https://github.com/quintush/helm-unittest)): to verify if the rendered Helm templates are behaving as we expect
+* unit tests (via [`quintush/helm-unittest`](https://github.com/quintush/helm-unittest)): to verify if the rendered Helm templates are behaving as we expect
 
 * integration tests:
 
