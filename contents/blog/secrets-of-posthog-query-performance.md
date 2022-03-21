@@ -147,6 +147,6 @@ Some projects currently in the pipeline are:
 
 - **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. More information about our plans can be found [in this PR](https://github.com/PostHog/meta/pull/39/files#diff-4ba257e4b25986d35b3f05a142677c187a7b082284dfb66d5fd74d759c52d618).
 - **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
-- **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) is expected to land in the coming months in ClickHouse and will unlock the benefits of materialized columns with much less complexity.
+- **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
 
 _Interested on chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com)_
