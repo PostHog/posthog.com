@@ -1,5 +1,5 @@
 ---
-date: "2022-03-18" # TODO
+date: "2022-03-22"
 title: "Improving PostHog deployments"
 rootPage: /blog
 sidebar: Blog
@@ -11,17 +11,17 @@ categories: ["Engineering", "Product updates", "Launch week"]
 author: ["harry-waye", "guido-iaquinti"]
 ---
 
-PostHog was born in 2020 as an analytics product consisting of a Python application (Django + Celery) backed by a PostgreSQL datastore. The simple architecture was very easy to understand and troubleshoot. This simplicity was perfect for this stage and of the key selling points of PostHog is that users don’t need to surrender their data to a third party but instead run PostHog on their own infrastructure.
-
-The more simple the setup and maintenance, the lower the barrier of entry, and the more feedback we received on where to take the product.
+When PostHog was born in 2020, it was a simple Python application (Django + Celery) backed by a PostgreSQL datastore. Troubleshooting was easy, while the low barrier of entry meant fast adoption and more feedback on where to take the product.
 
 TODO: <insert diagram of event data flow from [here](https://www.google.com/url?q=https://posthog.com/handbook/engineering/databases/event-ingestion&sa=D&source=docs&ust=1647446368828545&usg=AOvVaw31KohI1YJiLlpt2SX8wP8P)>
 
-As time went by, the number of customers and the volume of data to ingest and analyze increased, and we realized that this simple architecture was not scalable. Our event queries using PostgreSQL were slow, and our ingestion couldn’t keep up with the volumes of events we were receiving. These limitations led us to revisit our stack:
+This was great at the start, but it couldn't last. More customers meant more data to ingest and analyze. Our ingestion couldn’t keep up with the volumes of events we were receiving, and our event queries using PostgreSQL were slow. If we wanted PostHog to scale, we had to revisit our stack:
 
 TODO: <insert slowly moving hedgehog image>
 
-Introducing Kafka helped us to decouple our data streams and our processing pipeline, while ClickHouse helped us to deliver very fast queries on a large volume of data and more horizontal scaling capabilities (for more detailed information see the [ClickHouse announcement](https://posthog.com/blog/clickhouse-announcement)). While these additions helped us scale, they come at a cost:
+Introducing Kafka helped us to decouple our data streams and our processing pipeline, while [ClickHouse helped us to deliver very fast queries](/blog/clickhouse-announcement) on a large volume of data and more horizontal scaling capabilities. These additions helped us scale, but they came at a cost: complexity.
+
+Here's a quick breakdown:
 
 * We now have additional distributed services like Kafka, ClickHouse and Zookeeper to deploy and manage.
 
@@ -29,21 +29,26 @@ Introducing Kafka helped us to decouple our data streams and our processing pipe
 
 * ClickHouse is powerful but relatively new compared to PostgreSQL, very few people know or have experience with managing a ClickHouse cluster.
 
-* ClickHouse is a relatively new product. Whereas tooling around PostgreSQL for example is very mature, we need to do some of the heavy lifting ourselves with ClickHouse.
+* ClickHouse is a relatively new product. Whereas tooling around PostgreSQL is very mature, we need to do some of the heavy lifting ourselves with ClickHouse.
 
-PostHog is built on the idea that anyone should be able to deploy, maintain and use it. We may be experts, but our users should not need to be.
+* Simple operations such as application deployments or database upgrades have become complex automations
 
-Adding distributed systems to our stack also increased its complexity (we also had to bring 3rd party dependencies like Zookeeper) and what was initially an architecture easy to understand, deploy and maintain suddenly became more complex. Simple operations such as application deployments or database upgrades have now become complex automations handling distributed systems. Supporting self-hosted and non-self-hosted installations without increasing complexity has thus become a major challenge.
+To address this complexity and make PostHog easier to deploy, maintain and use for anyone, we gave ourselves two goals:
+
+1. Improve our test framework
+2. Improve built-in monitoring
+
+This post is all about how we approached these goals, and our long-term roadmap for improving PostHog deployments.
 
 To self-host PostHog, it is still possible to use docker-compose for the evaluation stage, but what about the move into production? We currently offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/). We’ve built on top of Kubernetes because although for many scenarios it is overkill, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
 
 
 ## Goal 1: Improve test framework
 
-In order to give us confidence that every self-hosted installation is reliable and we iterate fast we needed to significantly improve our testing frameworks.
+In order to give us confidence that every self-hosted installation is reliable and we iterate fast, we needed to significantly improve our testing frameworks.
 Kubernetes resources are usually represented as YAML objects, while Helm helps us to define, install, upgrade and package them via a template engine.
 
-In order to make sure those resources are defined, installed and upgrade correctly across different cloud platforms, Kubernetes versions and deployment scenarios, we’ve recently introduced several layers of testing, each of which with a specific goal:
+In order to make sure those resources are defined, installed and upgrade correctly across different cloud platforms, Kubernetes versions and deployment scenarios, we’ve introduced several layers of testing, each of which with a specific goal:
 
 * lint tests (via Helm lint): to verify if the Helm templates can be rendered without errors
 * unit tests (via [`quintush/helm-unittest`](https://github.com/quintush/helm-unittest)): to verify if the rendered Helm templates are behaving as we expect
@@ -88,7 +93,7 @@ Thanks to this work, you can now get critical  insights about the majority of Po
 
 ## What’s next?
 
-Improving deployments for PostHog Cloud and our self-hosting customer is an effort we will keep investing in. Few of the projects we have in our roadmaps are:
+Improving deployments for PostHog Cloud and our self-hosting customers is an effort we will keep investing in. Here's a sneak peak at some of the projects in our roadmap:
 
 - keep improving our chart to align to Kubernetes best practices
 
@@ -96,4 +101,4 @@ Improving deployments for PostHog Cloud and our self-hosting customer is an effo
 
 - enhance our observability stack by integrating [OpenTelemetry](https://opentelemetry.io/) across all our components and systems
 
-_Interested on chatting about those topics? Send us an email: [engineering@posthog.com](mailto:engineering@posthog.com)_ # TODO: verify this is a valid email
+> Interested on chatting about those topics? Send us an email: [engineering@posthog.com](mailto:engineering@posthog.com)_ # TODO: verify this is a valid email or [join our community Slack](/slack).
