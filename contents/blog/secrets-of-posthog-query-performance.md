@@ -70,7 +70,7 @@ CREATE TABLE person_distinct_id
 
 This JOIN is as complicated as it is due to a restriction from ClickHouse: updating data is expensive. In ClickHouse, updates require rewriting whole parts of the table instead of individual rows.
 
-Instead, the recommended approach is to use a ReplacingMergeTree or CollapsingMergeTree [TODO LINKS] table engine and handle updating logic at query-time.
+Instead, the recommended approach is to use a [ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/) or [CollapsingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/collapsingmergetree/) table engine and handle updating logic at query-time.
 
 During data ingestion, when a given `distinct_id` had its `person_id` changed, PostHog emits a row with `is_deleted=1` for the old `person_id` and a new row with `is_deleted=0`. The above query would then resolve the `distinct_id` => `person_id` mapping at query time.
 
@@ -127,16 +127,16 @@ This resulted in a roughly 23% query speed up on average. The best trick for per
 
 Changing how data is sorted on disk is not cheap when you have billions on billions of events. For example, on PostHog Cloud, this took five separate attempts and multiple weeks in total to finish. In addition, PostHog has a lot of self-hosted users at various degrees of scale and technical skill who would need to repeat this process.
 
-To tackle this problem, we ended up building a new [async migrations](/docs/self-host/configure/async-migrations/overview) system, which safely runs these long-running operations at scale with the press of a button, while handling common edge cases and keeping the platform up and usable.
+To tackle this problem, we ended up building a new [async migrations](/blog/async-migrations) system, which safely runs these long-running operations at scale with the press of a button, while handling common edge cases and keeping the platform up and usable.
 
 ## Self-hosted performance
 
-As mentioned, PostHog can be self-hosted by our users. However, getting it working smoothly across a wide range of deployments at scale [keeps our infrastructure team hard at work](TODO-link-to-harry-guido-blog-post).
+As mentioned, PostHog can be self-hosted by our users. However, getting it working smoothly across a wide range of deployments at scale [keeps our infrastructure team hard at work](/blog/improving-posthog-deployments).
 
 Some features released in PostHog 1.34.0 which affect performance for self-hosted users are:
 
-- Ability to use an [external ClickHouse provider](docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](TODO).
-- Support for ClickHouse sharding and replication in our helm chart LINK. This allows leveraging more machines for faster queries.
+- Ability to use an [external ClickHouse provider](/docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](/marketplace/altinity).
+- Support for ClickHouse sharding and replication [in our helm chart](/docs/self-host/runbook/clickhouse/sharding-and-replication). This allows leveraging more machines for faster queries.
 - Upgrading to ClickHouse 21.11: ClickHouse is changing rapidly and each new release is bringing in new performance improvements.
 
 ## What’s next?
@@ -145,7 +145,7 @@ Performance work is never complete and PostHog has a lot of work ahead of us to 
 
 Some projects currently in the pipeline are:
 
-- **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. Read more about our plans here [link to meta PR]
+- **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. More information about our plans can be found [in this PR](https://github.com/PostHog/meta/pull/39/files#diff-4ba257e4b25986d35b3f05a142677c187a7b082284dfb66d5fd74d759c52d618).
 - **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
 - **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) is expected to land in the coming months in ClickHouse and will unlock the benefits of materialized columns with much less complexity.
 
