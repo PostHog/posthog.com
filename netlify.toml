@@ -1267,3 +1267,8 @@
 [[redirects]]
     from = "/sso"
     to = "/docs/user-guides/sso"
+    
+# Added: 2022-03-16
+[[redirects]]
+    from = "/docs/api/people"
+    to = "/docs/api/persons"
