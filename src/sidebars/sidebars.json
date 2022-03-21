@@ -642,8 +642,12 @@
                                             "url": "/docs/self-host/runbook/clickhouse/restore"
                                         },
                                         {
-                                            "name": "Vertical Scaling",
+                                            "name": "Vertical scaling",
                                             "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
+                                        },
+                                        {
+                                            "name": "Horizontal scaling (Sharding & replication)",
+                                            "url": "/docs/self-host/runbook/clickhouse/sharding-and-replication"
                                         }
                                     ]
                                 },
