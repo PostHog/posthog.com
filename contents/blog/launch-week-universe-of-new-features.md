@@ -1,5 +1,5 @@
 ---
-date: 2022-03-14
+date: 2022-03-21
 title: "PostHog Launch Week I: A Universe of New Features"
 rootPage: /blog
 sidebar: Blog
@@ -38,7 +38,7 @@ As the biggest dogfooder of our own product, we were beginning to see the conseq
 
 We set out to solve these pain points and the result is the new Data Management experience we're introducing today on PostHog Cloud and on Thursday for self-hosted.
 
-**Read:** [Introducing Data Management for PostHog](blog/data-management-feature) by Alex Kim
+**Read:** [Introducing Data Management for PostHog](blog/data-management-feature)
 
 ## Chapter II: Project Sparkle
 
