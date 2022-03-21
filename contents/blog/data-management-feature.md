@@ -27,13 +27,13 @@ We set out to solve these pain points and the result is the new Data Management 
 
 ## The new Data Management and Live Events tabs
 
-The Data Management page (pictured below) is the hub for viewing, editing and managing all the data coming into your instance. 
+The Data Management page (pictured below) is the new hub for viewing, editing and managing all the data coming into your instance. 
 
 ![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
 
 Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the 'Verified' marker, which tells collaborators that an event should be favored over other similar events. 
 
-Verified events are also prioritized within filters and other selection components, and we've introduced to two sortable "freshness" indicators (30-day volume and query volume) to make it easier to choose the correct events when creating Insights.
+Verified events are prioritized within filters and other selection components, and we've introduced to two sortable "freshness" indicators (30-day volume and query volume) to make it easier to choose the correct events when creating Insights.
 
 As part of this overhaul, we've made a few important changes to how data is organized, too. 'Event Stats' and 'Property Stats' have been renamed 'Events' and 'Event properties', and we've moved them into the Data Management tab alongside 'Actions'. The 'Events & Actions' tab has been renamed 'Live Events', where you can debug incoming event data by streaming it in near real time.
 
@@ -65,15 +65,15 @@ Oh, and in case you were wondering, the awesome thing about definitions in PostH
 
 To help you in your journey to data management nirvana, here are a few rules of thumb to consider when using these new features.
 
-1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.
+**1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents.**
 
 Take a custom event sent as `sign_up` for example that is triggered on user sign up. Pretty self-explanatory, right? Not necessarily. Imagine you have a second app pushing data to the same PostHog instance sending sign up events as `sign up`; or maybe you send a `sign up` event from your frontend and one from your backend. A new teammate using PostHog will find it impossible to differentiate between the two, potentially leading to incorrect conclusions and frustration. Describing these events properly can ensure your teammates find exactly what they're looking for.
 
-2. Official organization-wide events should be verified so that teammates can discover and use them easily. 
+2. **Official organization-wide events should be verified so that teammates can discover and use them easily.** 
 
 Verified events will be prioritized in filters and other selection components to signal to the rest of the team that this event should be used in favor of other similar events. An example where this comes in handy is if there are two events that sound familiar, `signed up` and `signed_up`. Verifying the first tells others very explicitly that one is still being used and the other has gone stale.
 
-3. Tagging is an easy way to categorize events into custom groups, be it for a product, feature or new page. 
+**3. Tagging is an easy way to categorize events into custom groups, be it for a product, feature or new page.** 
 
 We highly recommend using tags to organize events coming in from different parts of your product. At PostHog for example, we use tags called `session-recordings`, `funnels`, and `feature-flags` to keep track of insights and dashboards related to those features. 
 
