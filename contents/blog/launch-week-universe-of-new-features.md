@@ -1,6 +1,6 @@
 ---
-date: 2022-03-14
-title: "PostHog Launch Week I: A Universe of New Features - March 21 to 25"
+date: 2022-03-21
+title: "PostHog Launch Week I: A Universe of New Features"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -21,23 +21,24 @@ PostHog made huge strides in 2021. To name just a few landmarks, we:
 
 All of this (and more) lead to huge growth. Users grew by 4x, the number of open source contributors doubled and we acquired [numerous reference customers](/customers).
 
-As an open-source product, we're also delighted to see huge growth in [our Slack community](/slack) - now at over 2,000 members - and GitHub stars, which now stand at over 7,000.
-
 But this is just the beginning. We've also been busy making PostHog a broader and more powerful tool for making great products. 
 
-To celebrate, starting next week on Monday, March 21 we'll be officially launching a new feature or initative every day for a week.
-
-Here's a quick teaser for what's to come during _PostHog Launch Week I: A Universe of New Features_.
-
-> Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
+To celebrate, we're officially launching a new feature or initative every day this week. Welcome to _PostHog Launch Week I: A Universe of New Features_.
 
 ## Chapter I: Data Management
 
-- **Releasing:** Monday, March 21
 - **Starring:** Alex Kim
 - **Introducing:** New Data Management UI, event definitions, definition tagging and many more
 
-"An inspiring tale about overcoming the terrifying prospect of a data explosion. Do not miss!" - An influencer who wasn't even paid to say this
+As the biggest dogfooder of our own product, we were beginning to see the consequences of the lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
+
+1. It is hard to understand events, actions, and properties that you yourself didn't set up.
+2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
+3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
+
+We set out to solve these pain points and the result is the new Data Management experience we're introducing today on PostHog Cloud and on Thursday for self-hosted.
+
+**Read:** [Introducing Data Management for PostHog](blog/data-management-feature)
 
 ## Chapter II: Project Sparkle
 
