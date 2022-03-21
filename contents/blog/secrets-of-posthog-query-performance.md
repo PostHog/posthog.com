@@ -157,7 +157,7 @@ To tackle this problem, we ended up building a new [async migrations](/blog/asyn
 
 As mentioned, PostHog can be self-hosted by our users. However, getting it working smoothly across a wide range of deployments at scale [keeps our infrastructure team hard at work](/blog/improving-posthog-deployments).
 
-Some features released in PostHog 1.34.0 which affect performance for self-hosted users are:
+Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect performance for self-hosted users are:
 
 - Ability to use an [external ClickHouse provider](/docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](/marketplace/altinity).
 - Support for ClickHouse sharding and replication [in our helm chart](/docs/self-host/runbook/clickhouse/sharding-and-replication). This allows leveraging more machines for faster queries.
