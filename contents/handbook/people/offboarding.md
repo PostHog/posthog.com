@@ -99,7 +99,10 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Offboard member on CharlieHR <br />
 <input type="checkbox"/> Add departure to hiring forecast on Pry <br />
 <input type="checkbox"/> Remove team member from PostHog organization in GitHub <br />
+<input type="checkbox"/> Remove team member from PostHog organization in Heroku <br />
+<input type="checkbox"/> Remove team member from PostHog organization in Stripe <br />
 <input type="checkbox"/> Remove team member from PostHog organization in npm (https://www.npmjs.com/settings/posthog/members) <br />
+<input type="checkbox"/> Remove team member from PostHog packages in PyPI <br />
 <input type="checkbox"/> Remove team member from the internal company Slack <br />
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />
 <input type="checkbox"/> Remove team member from 1Password <br />
