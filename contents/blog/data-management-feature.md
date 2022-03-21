@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: ../images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
 author: ["alex-kim"]
 categories: ["Product updates", "Launch week"]
@@ -22,6 +22,8 @@ As the biggest dogfooder of our own product, we (and many other teams) were begi
 3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
 We set out to solve these pain points and the result is the new Data Management experience we're introducing today, starting with the new Data Management tab.
+
+> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the new things we're launching this week.
 
 ## The new Data Management and Live Events tabs
 
@@ -95,3 +97,5 @@ These are powerful tools for organizing your data, but we're just scratching the
 - Person and Group Property definitions
 
 As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack),  or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team.
+
+> We're launching a new feature everyday this week. Follow us [on Twitter](/posthog), join our [community Slack](/slack) or [bookmark the hub page](/blog/launch-week-universe-of-new-features) so you don't miss out on all the new things we're launching this week.
