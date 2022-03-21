@@ -218,3 +218,10 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 * `kafka.url`, `kafka.host`, `kafka.port` have been consolidated into the `externalKafka.brokers` variable.
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+## Upgrading from 16.x.x.x
+17.0.0 upgrades the Kafka dependency chart from version `12.6.0` to `14.9.3` and upgrades Kafka to version `2.8.1`.
+
+The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/kafka#upgrading) includes changes that shoudn't be relevant to the majority of our users but if you are overriding `kafka.image` or `kafka.provisioning`, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+Note: the Kafka pod will be reprovisioned as part of this upgrade and the ingestion pipeline will experience a brief downtime.
