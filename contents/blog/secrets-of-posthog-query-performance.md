@@ -1,5 +1,5 @@
 ---
-date: "2022-03-22" # :TODO
+date: "2022-03-22"
 title: "Secrets of PostHog query performance"
 rootPage: /blog
 sidebar: Blog
