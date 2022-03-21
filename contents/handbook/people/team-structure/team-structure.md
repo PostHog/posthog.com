@@ -32,7 +32,6 @@ hideAnchor: true
     - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
-  - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
   - [Simon Fisher, Customer Success Lead](/handbook/company/team#simon-fisher-customer-success)
     - [Cameron DeLeone, Customer Success Manager](/handbook/company/team#cameron-deleone-customer-success)
 
