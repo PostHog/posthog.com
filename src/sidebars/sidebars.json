@@ -389,6 +389,10 @@
                 {
                     "name": "Paid features",
                     "url": "/handbook/product/paid-features"
+                },
+                {
+                    "name": "Releasing as beta",
+                    "url": "/handbook/product/releasing-as-beta"
                 }
             ]
         },
