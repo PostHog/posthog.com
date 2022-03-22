@@ -1,6 +1,6 @@
 ---
 date: "2022-03-22"
-title: "Secrets of PostHog query performance"
+title: "The secrets of PostHog query performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
