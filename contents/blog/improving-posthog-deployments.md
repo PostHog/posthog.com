@@ -13,11 +13,11 @@ author: ["harry-waye", "guido-iaquinti"]
 
 When PostHog was born in 2020, it was a simple Python application (Django + Celery) backed by a PostgreSQL datastore. Troubleshooting was easy, while the low barrier of entry meant fast adoption and more feedback on where to take the product.
 
-This was great at the start, but it couldn't last. More customers meant more data to ingest and analyze. Our ingestion couldn’t keep up with the volumes of events we were receiving, and our event queries using PostgreSQL were slow. If we wanted PostHog to scale, we had to revisit our stack:
+This was great at the start, but it couldn't last. More customers meant more data to ingest and analyze. Our ingestion couldn’t keep up with the volumes of events we were receiving, and our event queries using PostgreSQL were slow. If we wanted PostHog to scale, we had to revisit our stack.
 
 Introducing Kafka helped us to decouple our data streams and our processing pipeline, while [ClickHouse helped us to deliver very fast queries](/blog/clickhouse-announcement) on a large volume of data and more horizontal scaling capabilities. These additions helped us scale, but they came at a cost: complexity.
 
-Here's what our architecture looks like now.
+Here's how our ingestion pipeline looks like now:
 
 ```mermaid
 graph TD
@@ -51,11 +51,10 @@ While powerful, this new architecture has created the following challenges:
 
 * Very few people know or have experience with managing a ClickHouse cluster relative to PostgreSQL. Our [partnerhship with Altinity](/blog/posthog-altinity-announce), which offers 24/7 technical support for ClickHouse, and bespoke training, is another way we're addressing this challenge. 
 
-* Simple operations such as application deployments or database upgrades have become complex automations
+* Simple operations such as application deployments or database upgrades have become complex automations.
 
 To address this complexity and make PostHog easier to deploy, maintain and use for anyone, we gave ourselves two goals: **improve our test framework** and **improve our built-in monitoring**.
 
-This post is all about how we approached these goals, and our long-term roadmap for improving PostHog deployments.
 
 > This article is part of our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
