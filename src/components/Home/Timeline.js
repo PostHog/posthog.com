@@ -22,7 +22,7 @@ export default function Timeline() {
             allTimelineJson {
                 nodes {
                     year: date(formatString: "YYYY")
-                    month: date(formatString: "MMMM")
+                    month: date(formatString: "MMM")
                     description
                     type
                 }
@@ -69,7 +69,7 @@ export default function Timeline() {
                                                 key={month}
                                                 className="timeline-entry list-none border-gray-accent-light border-dashed border-b last:border-none flex py-2 gap-3 items-start"
                                             >
-                                                <p className="text-[14px] text-gray capitalize w-[70px] flex-shrink-0 m-0">
+                                                <p className="text-[14px] text-gray capitalize w-[40px] flex-shrink-0 m-0">
                                                     {month}
                                                 </p>
                                                 <ul className="list-none m-0 p-0">
