@@ -1,6 +1,6 @@
 ---
 date: 2022-03-22
-title: "Improving PostHog deployments"
+title: "Improving testing and monitoring of PostHog deployments"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
