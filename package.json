@@ -80,6 +80,7 @@
         "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",
         "gravatar": "^1.8.2",
+        "is-plain-object": "^5.0.0",
         "katex": "^0.12.0",
         "kea": "^2.2.2",
         "kea-loaders": "^0.3.0",
