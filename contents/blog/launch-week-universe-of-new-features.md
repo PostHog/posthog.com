@@ -46,11 +46,15 @@ We set out to solve these pain points and the result is the new Data Management 
 - **Starring:** Karl-Aksel Puulmann, Harry Waye and Guido Iaquinti
 - **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
-"Incredibly polished" ⭐️⭐️⭐️⭐️⭐️ - Hedgehog Gazette
+We created 'Project Sparkle' to address two challenges: to **make PostHog scalable for anyone** and to **make self-hosting PostHog easier**.
 
-"Shines like a diamond" ⭐️⭐️⭐️⭐️⭐️ - Roger Hogbert
+In [The secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance), Karl-Aksel Puulmann details the work we've done to make PostHog faster and more scalable, including (among other things) a massive 55% improvement to query performance on PostHog Cloud.
 
-"Puulmann, Iaquinti and Waye are spectacular" ⭐️⭐️⭐️⭐️⭐️ - Christian Hedgehog Monitor
+In [How we’re making PostHog deployments easier](/blog/improving-posthog-deployments), Harry Waye and Guido Iaquinti explain how PostHog's architecture has evolved since its launch in 2020, and the steps we're taking to make self-hosted deployments easier, including multi-layered testing and improved monitoring.
+
+Finally, we're delighted to officially confirm our [partnerhship with Altinity](/blog/posthog-altinity-announce) and the launch of [PostHog Marketplace](/marketplace). You may know [Altinity](https://altinity.com/) as experts in all things ClickHouse and data infrastructure. Altinity will be offering a variety of services to help give large organizations on PostHog an increased level of support for self-hosted deployments.
+
+Going forward, the marketplace is where you’ll be able to find third-party services which layer on top of PostHog, such as companies offering support, integration or development services. Altinity is the first such company, but there are more to come in the future. 
 
 ## Chapter III: Experimentation
 
