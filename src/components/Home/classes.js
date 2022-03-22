@@ -19,9 +19,7 @@ export const heading = (size = 'lg', color = 'primary', classes = '') => {
 export const section = (className = '') => cntl`
     max-w-screen-2xl
     mx-auto
-    my-4
-    md:mt-8
-    md:my-32
+    my-16
     px-4
     ${className}
 `
