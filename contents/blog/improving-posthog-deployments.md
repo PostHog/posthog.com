@@ -1,5 +1,5 @@
 ---
-date: "2022-03-22"
+date: 2022-03-22
 title: "Improving PostHog deployments"
 rootPage: /blog
 sidebar: Blog
@@ -13,13 +13,33 @@ author: ["harry-waye", "guido-iaquinti"]
 
 When PostHog was born in 2020, it was a simple Python application (Django + Celery) backed by a PostgreSQL datastore. Troubleshooting was easy, while the low barrier of entry meant fast adoption and more feedback on where to take the product.
 
-TODO: <insert diagram of event data flow from [here](https://www.google.com/url?q=https://posthog.com/handbook/engineering/databases/event-ingestion&sa=D&source=docs&ust=1647446368828545&usg=AOvVaw31KohI1YJiLlpt2SX8wP8P)>
-
 This was great at the start, but it couldn't last. More customers meant more data to ingest and analyze. Our ingestion couldn’t keep up with the volumes of events we were receiving, and our event queries using PostgreSQL were slow. If we wanted PostHog to scale, we had to revisit our stack:
 
-TODO: <insert slowly moving hedgehog image>
+TODO: insert slowly moving hedgehog image
 
 Introducing Kafka helped us to decouple our data streams and our processing pipeline, while [ClickHouse helped us to deliver very fast queries](/blog/clickhouse-announcement) on a large volume of data and more horizontal scaling capabilities. These additions helped us scale, but they came at a cost: complexity.
+
+```mermaid
+graph TD
+    CLIENT[Client Library]
+    DECIDE["/decide API"]
+    CAPTURE[Capture API]
+    PLUGINS[Plugin server]
+    PERSONS["PostgreSQL (persons table)"]
+    Kafka2[Kafka]
+
+    CLIENT -..-> DECIDE
+
+    CLIENT -..-> CAPTURE
+    CAPTURE --> Kafka
+
+    Kafka <-..- PLUGINS
+
+    PLUGINS <--> PERSONS
+    PLUGINS --> Kafka2
+
+    Kafka2 <-..- ClickHouse
+```
 
 Here's a quick breakdown:
 
@@ -33,14 +53,11 @@ Here's a quick breakdown:
 
 * Simple operations such as application deployments or database upgrades have become complex automations
 
-To address this complexity and make PostHog easier to deploy, maintain and use for anyone, we gave ourselves two goals:
-
-1. Improve our test framework
-2. Improve built-in monitoring
+To address this complexity and make PostHog easier to deploy, maintain and use for anyone, we gave ourselves two goals: **improve our test framework** and **improve our built-in monitoring**.
 
 This post is all about how we approached these goals, and our long-term roadmap for improving PostHog deployments.
 
-To self-host PostHog, it is still possible to use docker-compose for the evaluation stage, but what about the move into production? We currently offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/). We’ve built on top of Kubernetes because although for many scenarios it is overkill, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
+> To self-host PostHog, it is still possible to use `docker-compose` for the evaluation stage, but what about the move into production? We currently offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/). We’ve built on top of Kubernetes because although for many scenarios it is overkill, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
 
 
 ## Goal 1: Improve test framework
@@ -50,7 +67,7 @@ Kubernetes resources are usually represented as YAML objects, while Helm helps u
 
 In order to make sure those resources are defined, installed and upgrade correctly across different cloud platforms, Kubernetes versions and deployment scenarios, we’ve introduced several layers of testing, each of which with a specific goal:
 
-* lint tests (via Helm lint): to verify if the Helm templates can be rendered without errors
+* lint tests (via [`helm lint`](https://helm.sh/docs/helm/helm_lint/)): to verify if the Helm templates can be rendered without errors
 * unit tests (via [`quintush/helm-unittest`](https://github.com/quintush/helm-unittest)): to verify if the rendered Helm templates are behaving as we expect
 
 * integration tests:
@@ -59,9 +76,9 @@ In order to make sure those resources are defined, installed and upgrade correct
 
     * [`k6`](https://k6.io/): HTTP test used to verify the reliability, performance and compliance of the PostHog installation (example: is the PostHog ingestion working correctly?)
 
-    * `e2e - k3s`: to verify Helm install/upgrade commands on a local k3s cluster
+    * [`k3s`](https://k3s.io/): to verify Helm install/upgrade commands across different versions
 
-    * `e2e - Amazon Web Services`, `e2e - DigitalOcean`, `e2e - Google Cloud Platform`: to verify Helm install command on the officially supported cloud platforms
+    * [`e2e - Amazon Web Services`](https://github.com/PostHog/charts-clickhouse/blob/main/.github/workflows/test-amazon-web-services-install.yaml), [`e2e - DigitalOcean`](https://github.com/PostHog/charts-clickhouse/blob/main/.github/workflows/test-digitalocean-install.yaml), [`e2e - Google Cloud Platform`](https://github.com/PostHog/charts-clickhouse/blob/main/.github/workflows/test-google-cloud-platform-install.yaml): to verify Helm install command on the officially supported cloud platforms
 
 Thanks to those layers, we can now detect scenarios like:
 
@@ -73,8 +90,6 @@ Thanks to those layers, we can now detect scenarios like:
 
 * template is valid and got rendered as we expect, works on all supported Kubernetes version, but it doesn’t work on a specific implementation of a cloud provider
 
-TODO: <insert cherry-picks of non-trivial CI failures>
-
 Those tests are helping us to identify and fix several bugs in our implementation, catching regressions before code gets released and enabling us to iterate faster than ever.
 
 For more information about the technical implementation, take a look [here](https://github.com/PostHog/charts-clickhouse#testing).
@@ -84,11 +99,15 @@ For more information about the technical implementation, take a look [here](http
 
 When you can successfully deploy a stack you are only half way in the journey. Making sure your stack is properly monitored is key in order to run and maintain a successful installation.
 
-To simplify this task for our self-hosting users, in the last couple of months we’ve improved the built-in monitoring we provide as part of PostHog by leveraging best in class open source components like Grafana, Prometheus and various service exporters.
+To simplify this task for our self-hosting users, in the last couple of months we’ve improved the built-in monitoring we provide as part of PostHog by leveraging best in class open source components like [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/) and various service exporters.
 
 We create new templated dashboards, when we identify better metrics to monitor and techniques to debug an installation and make them available to everyone in the next release.
 
-Thanks to this work, you can now get critical  insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart (see our [docs](https://posthog.com/docs/self-host/deploy/configuration) for more info).
+Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart (see our [docs](https://posthog.com/docs/self-host/deploy/configuration) for more info).
+
+![PostHog - built-in PostgreSQL dashboard](../images/blog/improving-posthog-deployments/postgresql.png)
+
+![PostHog - built-in Redis dashboard](../images/blog/improving-posthog-deployments/redis.png)
 
 
 ## What’s next?
@@ -101,4 +120,4 @@ Improving deployments for PostHog Cloud and our self-hosting customers is an eff
 
 - enhance our observability stack by integrating [OpenTelemetry](https://opentelemetry.io/) across all our components and systems
 
-> Interested on chatting about those topics? Send us an email: [engineering@posthog.com](mailto:engineering@posthog.com)_ # TODO: verify this is a valid email or [join our community Slack](/slack).
+> Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog) or [join our community Slack](/slack).
