@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["neil-kakkar"]
 featuredImage: ../images/blog/experiments.jpeg
 featuredImageType: full
-categories: ["Product updates", "Launch week"]
+categories: ["Product updates", "Launch week", "Guides"]
 ---
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
@@ -26,6 +26,8 @@ Thanks to Feature Flags, you can then easily validate whether each variant looks
 It's a powerful tool for building great products, but that's enough about how experiments work for now. If you're interested in the technical details, check out the [Experimentation user guide](/docs/user-guides/experimentation).  
 
 Instead, I'm going to share the three key things we've learned about running effective A/B tests so you can get the most out of this new feature.
+
+> This article is Chapter III in our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
 
 ## 1. Choose your metric carefully
