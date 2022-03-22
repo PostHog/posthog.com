@@ -6,7 +6,7 @@ sidebar: Handbook
 #### Logging
 As a general rule, we should have logs for every expected and unexpected actions of the application, using the appropriate _log level_.
 
-We can also send logs and errors to [Sentry](https://docs.sentry.io/platforms/python/). As a general rule, these should be kept for things like unhandled exceptions in http request / response or celery tasks.
+We should also be logging these exceptions to [Sentry](https://sentry.io/organizations/posthog2/issues/) with the [Sentry Python SDK](https://docs.sentry.io/platforms/python/). Python exceptions should almost always be captured automatically without extra instrumention, but custom ones (such as failed requests to external services, query errors, or Celery task failures) can be tracked using `capture_exception()`.
 
 ##### Levels
 A _log level_ or _log severity_ is a piece of information telling how important a given log message is:
