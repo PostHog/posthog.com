@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/launch-week-teaser.jpeg # TODO
+featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
 categories: ["Engineering", "Product updates", "Launch week"]
 author: ["harry-waye", "guido-iaquinti"]
@@ -15,9 +15,9 @@ When PostHog was born in 2020, it was a simple Python application (Django + Cele
 
 This was great at the start, but it couldn't last. More customers meant more data to ingest and analyze. Our ingestion couldn’t keep up with the volumes of events we were receiving, and our event queries using PostgreSQL were slow. If we wanted PostHog to scale, we had to revisit our stack:
 
-TODO: insert slowly moving hedgehog image
-
 Introducing Kafka helped us to decouple our data streams and our processing pipeline, while [ClickHouse helped us to deliver very fast queries](/blog/clickhouse-announcement) on a large volume of data and more horizontal scaling capabilities. These additions helped us scale, but they came at a cost: complexity.
+
+Here's what our architecture looks like now.
 
 ```mermaid
 graph TD
@@ -41,15 +41,15 @@ graph TD
     Kafka2 <-..- ClickHouse
 ```
 
-Here's a quick breakdown:
+While powerful, this new architecture has created the following challenges:
 
 * We now have additional distributed services like Kafka, ClickHouse and Zookeeper to deploy and manage.
 
 * Each additional dependency requires considerations in terms of monitoring, migrations, upgrades, durability among others.
 
-* ClickHouse is powerful but relatively new compared to PostgreSQL, very few people know or have experience with managing a ClickHouse cluster.
-
 * ClickHouse is a relatively new product. Whereas tooling around PostgreSQL is very mature, we need to do some of the heavy lifting ourselves with ClickHouse.
+
+* Very few people know or have experience with managing a ClickHouse cluster relative to PostgreSQL. Our [partnerhship with Altinity](/blog/posthog-altinity-announce), which offers 24/7 technical support for ClickHouse, and bespoke training, is another way we're addressing this challenge. 
 
 * Simple operations such as application deployments or database upgrades have become complex automations
 
@@ -57,12 +57,16 @@ To address this complexity and make PostHog easier to deploy, maintain and use f
 
 This post is all about how we approached these goals, and our long-term roadmap for improving PostHog deployments.
 
-> To self-host PostHog, it is still possible to use `docker-compose` for the evaluation stage, but what about the move into production? We currently offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/). We’ve built on top of Kubernetes because although for many scenarios it is overkill, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
-
+> This article is part of our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
 ## Goal 1: Improve test framework
 
-In order to give us confidence that every self-hosted installation is reliable and we iterate fast, we needed to significantly improve our testing frameworks.
+While you can self-host PostHog using `docker-compose` for the evaluation stage, for production we offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/).  
+
+We’ve built on top of Kubernetes because although it's overkill for many scenarios, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
+
+In order to give us confidence that every self-hosted installation is reliable and we iterate fast, we needed to significantly improve our testing frameworks. 
+
 Kubernetes resources are usually represented as YAML objects, while Helm helps us to define, install, upgrade and package them via a template engine.
 
 In order to make sure those resources are defined, installed and upgrade correctly across different cloud platforms, Kubernetes versions and deployment scenarios, we’ve introduced several layers of testing, each of which with a specific goal:
@@ -92,23 +96,21 @@ Thanks to those layers, we can now detect scenarios like:
 
 Those tests are helping us to identify and fix several bugs in our implementation, catching regressions before code gets released and enabling us to iterate faster than ever.
 
-For more information about the technical implementation, take a look [here](https://github.com/PostHog/charts-clickhouse#testing).
-
+There's more information about the technical implementation [on our repo](https://github.com/PostHog/charts-clickhouse#testing).
 
 ## Goal 2: Improve built-in monitoring
 
-When you can successfully deploy a stack you are only half way in the journey. Making sure your stack is properly monitored is key in order to run and maintain a successful installation.
+Proper monitoring is vital for maintaining a successful installation.
 
-To simplify this task for our self-hosting users, in the last couple of months we’ve improved the built-in monitoring we provide as part of PostHog by leveraging best in class open source components like [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/) and various service exporters.
+To simplify this task for our self-hosting users, we’ve improved the built-in monitoring we provide as part of PostHog by leveraging best in class open source components like [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/) and various service exporters.
 
-We create new templated dashboards, when we identify better metrics to monitor and techniques to debug an installation and make them available to everyone in the next release.
-
-Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart (see our [docs](https://posthog.com/docs/self-host/deploy/configuration) for more info).
+We create new templated dashboards when we identify better metrics to monitor, and techniques to debug an installation, and make them available to everyone in the next release.
 
 ![PostHog - built-in PostgreSQL dashboard](../images/blog/improving-posthog-deployments/postgresql.png)
 
 ![PostHog - built-in Redis dashboard](../images/blog/improving-posthog-deployments/redis.png)
 
+Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart. You can read more about these in our [chart configuration docs](https://posthog.com/docs/self-host/deploy/configuration).
 
 ## What’s next?
 
@@ -120,4 +122,6 @@ Improving deployments for PostHog Cloud and our self-hosting customers is an eff
 
 - enhance our observability stack by integrating [OpenTelemetry](https://opentelemetry.io/) across all our components and systems
 
-> Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog) or [join our community Slack](/slack).
+If you enjoyed reading this look at improving PostHog deployments, we recommend reading Karl's deep dive into the [secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance).
+
+> Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog), or [join our community Slack](/slack).
