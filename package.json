@@ -86,6 +86,7 @@
         "kea-localstorage": "^1.1.1",
         "kea-router": "^0.5.1",
         "kea-typegen": "^0.5.3",
+        "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
         "mobx": "^6.3.13",

@@ -135,13 +135,13 @@ footer a:not(.cta) {
 
 /* timeline key */
 
-.timeline-entry div:nth-child(2)[data-type='feature']:before {
+.timeline-entry li[data-type='feature']:before {
     background: #43af79;
 }
-.timeline-entry div:nth-child(2)[data-type='news']:before {
+.timeline-entry li[data-type='news']:before {
     background: #0080ff;
 }
-.timeline-entry div:nth-child(2)[data-type='milestone']:before {
+.timeline-entry li[data-type='milestone']:before {
     background: #c849f4;
 }
 

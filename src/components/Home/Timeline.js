@@ -1,3 +1,5 @@
+import { graphql, useStaticQuery } from 'gatsby'
+import groupBy from 'lodash.groupby'
 import React from 'react'
 
 // Until this gets refactored...
@@ -12,62 +14,24 @@ import React from 'react'
 // - For multiple events in a month, leave off the month after the first result (so it doesn't look like multiple months) - until someone build this correctly =]
 //
 
-const calendar = [
-    {
-        year: 2020,
-        events: [
-            { month: 'jan', type: 'news', name: 'PostHog joins YC W20 batch' },
-            { month: 'feb', type: 'news', name: 'Launched open source analytics on HackerNews' },
-            { month: 'mar', type: 'milestone', name: '1,000 stars on GitHub' },
-            { month: 'apr', type: 'feature', name: 'iOS, Android libraries' },
-            { month: 'may', type: 'feature', name: 'React native library' },
-            { month: 'jun', type: 'feature', name: 'Feature flags' },
-            { month: ' ', type: 'feature', name: 'Heatmaps' },
-            { month: 'jul', type: 'feature', name: 'Segment destination' },
-            { month: 'aug', type: 'milestone', name: '3,000 stars on GitHub' },
-            { month: 'sep', type: '', name: '' },
-            { month: 'oct', type: 'feature', name: 'ClickHouse support' },
-            { month: 'nov', type: 'feature', name: 'Session recording' },
-            { month: 'dec', type: 'feature', name: 'Lifecycle analysis' },
-        ],
-    },
-    {
-        year: 2021,
-        events: [
-            { month: 'jan', type: 'feature', name: 'Plugins' },
-            { month: 'feb', type: '', name: '' },
-            { month: 'mar', type: '', name: '' },
-            { month: 'apr', type: '', name: '' },
-            { month: 'may', type: '', name: '' },
-            { month: 'jun', type: 'feature', name: 'Multivariate testing' },
-            { month: 'jul', type: '', name: '' },
-            { month: 'aug', type: '', name: '' },
-            { month: 'sep', type: '', name: '' },
-            { month: 'oct', type: '', name: '' },
-            { month: 'nov', type: '', name: '' },
-            { month: 'dec', type: '', name: '' },
-        ],
-    },
-    {
-        year: 2022,
-        events: [
-            { month: 'jan', type: '', name: '' },
-            { month: 'feb', type: '', name: '' },
-            { month: 'mar', type: '', name: '' },
-            { month: 'apr', type: '', name: '' },
-            { month: 'may', type: '', name: '' },
-            { month: 'jun', type: '', name: '' },
-            { month: 'jul', type: '', name: '' },
-            { month: 'aug', type: '', name: '' },
-            { month: 'sep', type: '', name: '' },
-            { month: 'oct', type: '', name: '' },
-            { month: 'nov', type: '', name: '' },
-            { month: 'dec', type: '', name: '' },
-        ],
-    },
-]
-
 export default function Timeline() {
+    const {
+        allTimelineJson: { nodes },
+    } = useStaticQuery(graphql`
+        query {
+            allTimelineJson {
+                nodes {
+                    year: date(formatString: "YYYY")
+                    month: date(formatString: "MMMM")
+                    description
+                    type
+                }
+            }
+        }
+    `)
+
+    const events = groupBy(nodes, ({ year }) => year)
+
     return (
         <section className="px-4">
             <h2 className="text-center">We're just getting started</h2>
@@ -92,31 +56,38 @@ export default function Timeline() {
             </div>
 
             <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 gap-8 space-2 lg:space-4">
-                {calendar.map(({ events, year }) => {
+                {Object.keys(events).map((year) => {
+                    const months = groupBy(events[year], (event) => event.month)
                     return (
                         <div key={year} className="w-full max-w-md mx-auto lg:max-w-auto mb-4 lg:mb-0">
                             <h4 className="text-lg font-bold text-center">{year}</h4>
                             <div className="bg-gray-accent-light px-4 rounded">
-                                <ul role="list" className="pt-1 px-0 pb-4">
-                                    {events.map(({ month, type, name }) => (
-                                        <li
-                                            key={name}
-                                            className="timeline-entry list-none border-gray-accent-light border-dashed border-b last:border-none flex py-2 gap-3 items-center"
-                                        >
-                                            <div
-                                                className="text-[14px] text-gray capitalize"
-                                                style={{ flex: '0 0 40px' }}
+                                <ul role="list" className="py-1 px-0">
+                                    {Object.keys(months).map((month) => {
+                                        return (
+                                            <li
+                                                key={month}
+                                                className="timeline-entry list-none border-gray-accent-light border-dashed border-b last:border-none flex py-2 gap-3 items-start"
                                             >
-                                                {month}
-                                            </div>
-                                            <div
-                                                className="flex-auto relative text-[14px] pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2"
-                                                data-type={type}
-                                            >
-                                                {name}
-                                            </div>
-                                        </li>
-                                    ))}
+                                                <p className="text-[14px] text-gray capitalize w-[70px] flex-shrink-0 m-0">
+                                                    {month}
+                                                </p>
+                                                <ul className="list-none m-0 p-0">
+                                                    {months[month].map(({ description, type }) => {
+                                                        return (
+                                                            <li
+                                                                key={description}
+                                                                className="flex-auto relative text-[14px] pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 even:mt-1"
+                                                                data-type={type}
+                                                            >
+                                                                {description}
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                             </div>
                         </div>
