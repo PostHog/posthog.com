@@ -1232,6 +1232,14 @@
         {
             "name": "Heatmaps",
             "url": "/product/heatmaps"
+        },
+        {
+            "name": "Experimentation suite",
+            "url": "/product/experimentation-suite"
+        },
+        {
+            "name": "Collaboration",
+            "url": "/product/collaboration"
         }
     ]
 }

@@ -38,6 +38,22 @@ const features = [
             url: '/product/quantitative-analysis',
         },
     },
+    {
+        title: 'Experimentation suite',
+        description: `Test changes in production with a suite that makes it easy to get the results you want.`,
+        cta: {
+            title: 'Learn more about experimentation',
+            url: '/product/experimentation-suite',
+        },
+    },
+    {
+        title: 'Collaboration',
+        description: `Make sense of insights your team has created, using tools designed to help share knowledge.`,
+        cta: {
+            title: 'Learn more about collaboration',
+            url: '/product/collaboration',
+        },
+    },
 ]
 
 export default function ProductAnalytics({ children, className = '' }) {
