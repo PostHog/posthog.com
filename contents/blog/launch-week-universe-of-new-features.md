@@ -46,9 +46,9 @@ We set out to solve these pain points and the result is the new Data Management 
 - **Starring:** Karl-Aksel Puulmann, Harry Waye and Guido Iaquinti
 - **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
-We created 'Project Sparkle' to address two challenges: to **make PostHog scalable for anyone** and to **make self-hosting PostHog** easier.
+We created 'Project Sparkle' to address two challenges: to **make PostHog scalable for anyone** and to **make self-hosting PostHog easier**.
 
-In [The secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance), Karl-Aksel Puulmann details the work we've done to PostHog make faster and more scalable, including (among other things) a massive 55% improvement to query performance on PostHog Cloud.
+In [The secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance), Karl-Aksel Puulmann details the work we've done to make PostHog faster and more scalable, including (among other things) a massive 55% improvement to query performance on PostHog Cloud.
 
 In [How we’re making PostHog deployments easier](/blog/improving-posthog-deployments), Harry Waye and Guido Iaquinti explain how PostHog's architecture has evolved since its launch in 2020, and the steps we're taking to make self-hosted deployments easier, including multi-layered testing and improved monitoring.
 
