@@ -15,7 +15,7 @@ We want PostHog to become the first choice for product analytics at any scale. T
 
 In this post, I’m going to break down the why’s and how’s of several major performance improvements we've made in the last few months to achieve that goal.
 
-> This post is part of our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
+> This article is part of our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
 ## How does querying work within PostHog?
 
