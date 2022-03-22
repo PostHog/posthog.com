@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Product updates"]
 ---
 
-That’s right, we’re teaming up with Altinity. It’s an exciting new partnership that also marks the launch of the [PostHog Marketplace](/marketplace). Double announcement!
+That’s right, we’re [teaming up with Altinity](https://altinity.com/blog/announcing-the-new-altinity-posthog-partnership). It’s an exciting new partnership that also marks the launch of the [PostHog Marketplace](/marketplace). Double announcement!
 
 Going forward, the marketplace is where you’ll be able to find third-party services which layer on top of PostHog, such as companies offering support, integration or development services. Altinity is the first such company, but there are more to come in the future. 
 
