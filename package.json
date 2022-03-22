@@ -157,7 +157,8 @@
         "storybook-addon-gatsby": "0.0.2",
         "storybook-dark-mode": "^1.0.8",
         "style-loader": "^3.3.0",
-        "tailwindcss": "^2.2.4"
+        "tailwindcss": "^2.2.4",
+        "webpack": "5"
     },
     "husky": {
         "hooks": {
