@@ -1,5 +1,5 @@
 ---
-date: 2022-03-09
+date: 2022-03-22
 title: PostHog teams up with Altinity
 rootPage: /blog
 sidebar: Blog
