@@ -86,21 +86,35 @@ export default function Features({ title }) {
                         title="session recording"
                         index={2}
                     />
-                    ,{' '}
+                    , <br className="hidden lg:block" />
                     <FeatureButton
                         sliderRef={sliderRef}
                         activeFeature={activeFeature}
                         index={3}
                         title="feature flags"
                     />
-                    , & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={4} title="more" />
+                    ,{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        title="experimentation"
+                        index={4}
+                    />
+                    ,{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        index={5}
+                        title="collaboration"
+                    />
+                    , & <FeatureButton sliderRef={sliderRef} activeFeature={activeFeature} index={6} title="more" />
                 </h3>
             </div>
             <SliderNav
                 handlePrevious={() => sliderRef.current.slickPrev()}
                 handleNext={() => sliderRef.current.slickNext()}
                 currentIndex={activeFeature}
-                length={4}
+                length={6}
             />
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
@@ -110,6 +124,10 @@ export default function Features({ title }) {
                         image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.png" />}
                     />
                     <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.png" />} />
+                    <SliderItem
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-experimentation-suite.png" />}
+                    />
+                    <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-collaboration.png" />} />
                     <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-plugins.png" />} />
                 </Slider>
             </div>
