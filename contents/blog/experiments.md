@@ -30,7 +30,7 @@ Instead, I'm going to share the three key things we've learned about running eff
 > This article is Chapter III in our [A Universe of New Features launch week](/blog/launch-week-universe-of-new-features) series
 
 
-## 1. Choose your metric carefully
+## 1. Use specific metrics
 
 Let's say you're running an experiment to optimize the number of times users interact with PostHog graphs. Specifically, you're testing out different layouts for funnels - horizontal and vertical - and want to find which one leads to more interactions.
 
