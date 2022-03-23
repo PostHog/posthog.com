@@ -7,22 +7,35 @@ hideAnchor: true
 
 ## People
 
-
 [See team structure page](/handbook/people/team-structure/team-structure)
 
-## Mission
+## Objective
 
-Increase the number of [relevant](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021) visitors to our website. 
+Accelerate our word of mouth growth
 
-## Responsibilities
+## Motivation
+
+Word of mouth growth is driving most of our existing growth. Sustainable word of mouth growth is generated when people find something useful that they want to recommend.
+
+## Key results
+
+- 3,000 [organic signups](https://app.posthog.com/insights/w001ter4) in June 2022 (1,500 in Feb)
+- Todo ([when this metric is fixed](https://github.com/PostHog/posthog/issues/8746)): double high quality signups, by June 2022 compared to Feb.
+
+## Objective owner
+
+Charles
+
+## Function ownership
+
 - Content, including the [Blog](/handbook/growth/marketing/blog)
 - [Email marketing](/handbook/growth/marketing/newsletter)
+- Events, ie [HostHog](/handbook/growth/marketing/hosthogs)
+- Case studies
 - [Paid Ads](/handbook/growth/marketing/paid)
 - [Press](/handbook/growth/marketing/press)
-
-## Output metrics
-
-* [Quality signups](https://app.posthog.com/insights/ujGv0WqI?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464)
+- [Product launches](/handbook/growth/marketing/product-announcements)
+- Social media
 
 ## Slack channel
 

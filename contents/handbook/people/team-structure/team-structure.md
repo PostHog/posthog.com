@@ -72,12 +72,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 <br />
 
-### [Growth](growth)
-
-- [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-
-<br />
-
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
@@ -94,7 +88,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 ### [People & Operations](people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
 - Grace McKenzie (Operations Manager)
 
 <br />

@@ -9,17 +9,32 @@ hideAnchor: true
 
 [See team structure page](/handbook/people/team-structure/team-structure)
 
-## Mission
+## Objective
 
-Grow and retain customers who fit our [target audience](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021). 
+Nail Enterprise, automate Scale
 
-## Responsibilities
+## Motivation
 
-* Own initial inbound contact requests from the website
-* Deliver compelling product demonstrations
+The enterprise market is underserved (we can bring data control, scalability and consolidation), so we should take it before a competitor does. We need to do this manually before making things more self serve.
+
+We have a ton of Scale/cloud enquiries - servicing these really well gives us revenue and faster growth. Whenever we make things more self-serve, they perform better, so we should automate as much as we can for a higher conversion rate.
+
+## Key results
+
+- A new $200K ARR contract signed by June
+- $(private)M ARR in May
+- We have an automatic system to identify and engage with high quality signups
+- 10% of ARR is hands off
+  - hands off = zero touch or demo to conversion with nothing else needed
+
+## Function ownership
+
+* Demo requests / paid enquiries
+* Demos
 * Assist users in getting up and running with the product, introducing the right PostHog people at the right time
 * Make it easy to become a paying customer
-* Ensure long term success with PostHog
+* Retaining customers
+* Growing customers
 
 ## Customer
 

@@ -5,24 +5,35 @@ showTitle: true
 hideAnchor: true
 ---
 
-## People & Ops
+## People
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops & Marketing
-- Grace McKenzie, Operations Manager
+[See team structure page](/handbook/people/team-structure/team-structure)
 
-## Mission
+## Objective
 
-Make PostHog _the_ most transparent company in the world, and the best place for people to work. Our goal is to create a world-class remote company by enabling our team to (a) maximize their impact and performance, (b) grow personally and professionally, and (c) have a strong sense of purpose and belonging.
+Find and retain our world class team
 
-## Responsibilities
+## Motivation
 
-Our people team works across talent, people, operations, and culture. This is what we care about:
+To scale, we need to increase our bandwidth. This means retaining awesome people, and filling the roles we have planned with people that raise the bar.
 
-- [Talent compounds](https://posthog.com/handbook/company/values#talent-compounds) - we have a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to become exceptional at their jobs. We optimize for building high-performing teams, while delivering a great experience to everyone involved.
-- We support our team throughout the entire employee lifecycle - from making an offer, to onboarding and career development, to parental leave and eventually parting ways. 
-- We create light-touch initiatives and processes that allow PostHog to act fast (while complying with local legislation) and [iterate](/handbook/company/culture#iteration) continuously. These include performance reviews, progression frameworks, compensation reviews and many more.
-- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do. It's so important to us, we built a dedicated [handbook page](https://posthog.com/handbook/company/diversity). In the people team, we also live and breathe our culture and values, and constantly work to make PostHog an even better place to work.
+## Key results
+
+- we hire all roles on time without dipping the bar for quality (monthly)
+- we have no undesired churn (monthly)
+- engagement from surveys stays clearly above Cultureamp industry benchmarks (quarterly)
+- we stay within 5% of forecast cash burn (monthly)
+
+## Objective owner
+
+Charles
+
+## Function ownership
+
+- Hiring
+- Compensation benchmarking
+- Finance
+- Looking after people
 
 ## Customer
 
