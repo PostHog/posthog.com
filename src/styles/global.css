@@ -521,20 +521,17 @@ ul {
     table {
         @apply m-0 text-base;
         th {
-            @apply border-0 text-center;
+            @apply border-0;
             &:first-of-type {
-                @apply text-left;
             }
         }
-        tr {
-            &:first-child {
-                td {
-                    @apply border-t;
-                }
+        tr:last-child {
+            td {
+                @apply border-b-0;
             }
         }
         td {
-            @apply border-l-0 border-r-0 border-dashed border-gray-accent-light border-b text-left pl-2;
+            @apply border-dashed border-gray-accent-light border-b text-left pl-2;
             &:first-of-type {
                 @apply text-left pl-0;
             }
@@ -542,6 +539,20 @@ ul {
         img,
         svg {
             @apply mx-auto;
+        }
+    }
+
+    .params-wrapper {
+        .type {
+            @apply bg-gray-accent-light-hover dark:bg-gray-accent-dark;
+        }
+
+        .params-wrapper {
+            @apply bg-tan dark:bg-primary;
+
+            .type {
+                @apply bg-gray-accent-light dark:bg-gray-accent-dark;
+            }
         }
     }
 }

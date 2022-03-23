@@ -34,7 +34,7 @@ function Endpoints({ paths }) {
                         {Object.keys(value).map((verb) => (
                             <tr
                                 key={verb}
-                                className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b"
+                                className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
                             >
                                 <td>
                                     <code className={`method text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()}</code>
@@ -94,17 +94,17 @@ function Params({ params, objects, object, depth = 0 }) {
                 {params.map((param, index) => (
                     <li
                         key={index}
-                        className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
+                        className="py-1 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
                     >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
-                            <div className="flex">
-                                <span className="text-[15px] leading-7">{param.name}</span>
+                            <div className="flex flex-col">
+                                <span className="font-code font-bold text-[13px] leading-7">{param.name}</span>
                                 {param.schema.items?.$ref && (
                                     <>
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                             <div
                                                 type="link"
-                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mt-2 ml-2 bg-gray-accent hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-gray-accent hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
                                                 onClick={() => {
                                                     setOpenSubParams(
                                                         openSubParams.filter((item) => item !== param.schema.items.$ref)
@@ -126,7 +126,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                             <>
                                                 <div
                                                     type="link"
-                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mt-2 ml-2 bg-gray-accent-light hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-gray-accent-light dark:border-gray-accent-dark border-solid border hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
                                                     onClick={() =>
                                                         setOpenSubParams([...openSubParams, param.schema.items.$ref])
                                                     }
@@ -149,28 +149,28 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
-                                {param.schema.enum && (
-                                    <>
-                                        <div className="text-xs">
-                                            one of{' '}
-                                            {param.schema.enum.map((item) => (
-                                                <code className="mr-1" key={item}>
-                                                    {item}
-                                                </code>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
                                 {param.schema.default && (
                                     <>
                                         <div>
                                             <span className="text-xs">
                                                 Default: <code>{param.schema.default}</code>
                                             </span>
+                                        </div>
+                                    </>
+                                )}
+                                {param.schema.enum && (
+                                    <>
+                                        <div className="text-xs">
+                                            One of:{' '}
+                                            {param.schema.enum.map((item) => (
+                                                <code className="mr-1" key={item}>
+                                                    "{item}"
+                                                </code>
+                                            ))}{' '}
                                         </div>
                                     </>
                                 )}
@@ -182,7 +182,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             <>
                                 {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                     <div>
-                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark ml-7 mb-4">
+                                        <div className="params-wrapper bg-gray-accent-light dark:bg-gray-accent-dark rounded px-4 mr-2 my-1">
                                             <Params
                                                 objects={objects}
                                                 object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
