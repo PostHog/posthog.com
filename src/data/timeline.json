@@ -36,6 +36,8 @@
     { "date": "2022-02-23", "type": "feature", "description": "Data Management Suite" },
     { "date": "2022-02-26", "type": "milestone", "description": "7,000 stars on GitHub" },
     { "date": "2022-03-29", "type": "news", "description": "Offsite: Iceland" },
+    { "date": "2022-04-01", "type": "", "description": "" },
+    { "date": "2022-05-01", "type": "", "description": "" },
     { "date": "2022-06-01", "type": "feature", "description": "Automatic insight discovery" },
     { "date": "2022-06-01", "type": "feature", "description": "Console log tracking" },
     { "date": "2022-06-01", "type": "feature", "description": "Advanced insight sharing" }

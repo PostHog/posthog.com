@@ -39,18 +39,20 @@ export default function Timeline() {
                 How else would we have done all this?
             </p>
 
-            <div className="text-center flex justify-center pb-12 space-x-6">
-                <div className="flex items-center text-[15px]">
-                    <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#43AF79]"></span>
-                    <div>Major new feature</div>
-                </div>
-                <div className="flex items-center text-[15px]">
-                    <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#0080FF]"></span>
-                    <div>Company news</div>
-                </div>
-                <div className="flex items-center text-[15px]">
-                    <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#C849F4]"></span>
-                    <div>Something cool happened</div>
+            <div className="text-center pb-8 md:pb-12">
+                <div className="inline-flex flex-col md:flex-row gap-y-2 md:gap-x-6">
+                    <div className="flex items-center text-[15px] text-left gap-2">
+                        <span className="block w-[10px] h-[10px] rounded-full bg-[#43AF79]"></span>
+                        <div>Major new feature</div>
+                    </div>
+                    <div className="flex items-center text-[15px] text-left gap-2">
+                        <span className="block w-[10px] h-[10px] rounded-full bg-[#0080FF]"></span>
+                        <div>Company news</div>
+                    </div>
+                    <div className="flex items-center text-[15px] text-left gap-2">
+                        <span className="block w-[10px] h-[10px] rounded-full bg-[#C849F4]"></span>
+                        <div>Something cool happened</div>
+                    </div>
                 </div>
             </div>
 
@@ -76,7 +78,7 @@ export default function Timeline() {
                                                         return (
                                                             <li
                                                                 key={description}
-                                                                className="flex-auto relative text-[14px] pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 even:mt-1"
+                                                                className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
                                                                 data-type={type}
                                                             >
                                                                 {description}
