@@ -12,7 +12,7 @@ const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
         sliderRef.current.slickGoTo(index)
     }
     return (
-        <button className={`border-b-4 border-${borderColor} text-${textColor}`} onClick={handClick}>
+        <button className={`border-b-3 border-${borderColor} text-${textColor}`} onClick={handClick}>
             {title}
         </button>
     )

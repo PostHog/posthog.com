@@ -4,7 +4,7 @@ import cntl from 'cntl'
 export const heading = (size = 'lg', color = 'primary', classes = '') => {
     const options = {
         lg: 'text-[2.75rem] leading-[2.75rem] md:text-6xl',
-        md: 'text-3xl lg:text-5xl',
+        md: 'text-3xl lg:text-4xl',
         sm: 'text-[18px] md:text-[20px] leading-tight md:text-xl font-semibold mt-2 md:mt-3 opacity-75',
     }
     return cntl`

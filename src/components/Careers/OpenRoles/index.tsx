@@ -23,11 +23,11 @@ export const OpenRoles = () => {
                         </p>
                         <p>
                             Regardless of the timing of your application or interest in PostHog, you can go ahead and
-                            contribute to one of our
+                            contribute to one of our{' '}
                             <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
                                 good first issues
-                            </a>
-                            or build a plugin as part of our
+                            </a>{' '}
+                            or build a plugin as part of our{' '}
                             <a href="https://github.com/PostHog/posthog/issues/8437">plugin bounty</a>.
                         </p>
                         <p>
