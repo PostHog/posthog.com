@@ -7,16 +7,65 @@ hideAnchor: true
 
 ## People
 
-- James Greenhill (Team lead, Data/Infra Engineer)
-- Tiina Turban (Full Stack Engineer)
-- Yakko Majuri (Full Stack Engineer)
-- Marcus Hyett (Product Manager)
-- Guido Iaquinti (Site Reliability Engineer)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
-## Platform Sub-Team Mission Statements
+## Overall goal for app and platform
 
-- **Ingestion:** Provide the best events pipeline in the world.
-- **Infrastructure:** Make deploying, scaling, and managing PostHog easy, fast, and reliable.
+### Objective
+
+PostHog can handle 1bn events/day
+
+### Motivation
+
+The highest value users are likely to have high volumes. No-one in our enterprise pipeline has more volume than this.
+
+### Owner
+
+Karl
+
+### Key results
+
+- P95 <15 seconds for Suprdaily
+- Successful load test with Billion event queries
+
+## Sub team - Ingestion
+
+### Objective
+
+PostHog ingests events at scale, fast and accurately.
+
+### Motivation
+
+Fast and reliable ingestion and accurate data are critical for businesses to trust and continue to use our products.
+
+### Objective owner
+
+James G
+
+### Key results
+
+- P90 Ingestion <30s by June
+- Minimal data integrity issues reported caused by compromise from enabling scale by June
+
+## Sub team - Infrastructure
+
+### Objective
+
+There's a single, maintainable way to deploy PostHog at scale.
+
+### Motivation
+
+Self-hosting is a key part of our unique value proposition for large and enterprise companies to retain control of their data. We need to offer this in a reliable and scalable way.
+
+### Objective owner
+
+Guido
+
+### Key results
+
+- PostHog Cloud is using our standard helm chart and stable by June
+- Zero frustrated customers due to deployment and maintenance issues from Scale and Enterprise customers by June
+- We're capable of spinning up and maintaining multiple production grade environments (eg staging/EU/private tenant) regardless of business demand
 
 ## Roadmap
 
