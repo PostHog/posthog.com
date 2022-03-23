@@ -42,11 +42,13 @@ We also use the section below to flag premium features.
 
 We also have a new data management system!
 
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+PostHog now offers a way to organize all of your PostHog data in-house with event definitions, definition tagging and many more features.
 
-We also use the section below to flag premium features.
+![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
 
-> 🎁 This is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+Check out our blog post [here](https://posthog.com/blog/data-management-feature) or dive into the [docs](https://posthog.com/docs/user-guides/data-management)!
+
+> 🎁 Definition creation, tagging, and volume metrics are premium features that require a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 <br />
 
