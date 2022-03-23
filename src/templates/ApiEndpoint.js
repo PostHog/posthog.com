@@ -1,4 +1,5 @@
 import { Button, Select } from 'antd'
+import '@fontsource/source-code-pro'
 import CodeBlock from 'components/Home/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -98,7 +99,7 @@ function Params({ params, objects, object, depth = 0 }) {
                     >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
-                                <span className="font-code font-bold text-[13px] leading-7">{param.name}</span>
+                                <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
                                 {param.schema.items?.$ref && (
                                     <>
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (

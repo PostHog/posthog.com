@@ -143,7 +143,7 @@ module.exports = {
                 ],
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
-                code: ['Menlo', 'Consolas', 'monaco', 'monospace'],
+                code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
             },
             fontSize: {
                 '2xs': '0.65rem',
