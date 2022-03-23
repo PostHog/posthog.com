@@ -7,7 +7,7 @@
     { "date": "2020-05-01", "type": "feature", "description": "React native library" },
     { "date": "2020-06-01", "type": "feature", "description": "Feature flags" },
     { "date": "2020-06-01", "type": "feature", "description": "Heatmaps" },
-    { "date": "2020-06-02", "type": "news", "description": "Offsite: Spain" },
+    { "date": "2020-06-02", "type": "news", "description": "Offsite: Italy" },
     { "date": "2020-07-01", "type": "feature", "description": "Segment destination" },
     { "date": "2020-08-01", "type": "milestone", "description": "3,000 stars on GitHub" },
     { "date": "2020-09-01", "type": "", "description": "" },
