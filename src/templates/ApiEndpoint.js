@@ -98,67 +98,54 @@ function Params({ params, objects, object, depth = 0 }) {
                     >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex">
-                                <div className="w-8 mr-1">
-                                    {param.schema.items?.$ref && (
-                                        <>
-                                            {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
+                                <span className="text-[15px] leading-7">{param.name}</span>
+                                {param.schema.items?.$ref && (
+                                    <>
+                                        {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
+                                            <div
+                                                type="link"
+                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mt-2 ml-2 bg-gray-accent hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                onClick={() => {
+                                                    setOpenSubParams(
+                                                        openSubParams.filter((item) => item !== param.schema.items.$ref)
+                                                    )
+                                                }}
+                                            >
+                                                <svg
+                                                    className="fill-current opacity-90 group-hover:opacity-100"
+                                                    width="16"
+                                                    height="5"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <title>Click to close</title>
+                                                    <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
+                                                </svg>
+                                            </div>
+                                        ) : (
+                                            <>
                                                 <div
                                                     type="link"
-                                                    className="group p-1 rounded cursor-pointer hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
-                                                    onClick={() => {
-                                                        setOpenSubParams(
-                                                            openSubParams.filter(
-                                                                (item) => item !== param.schema.items.$ref
-                                                            )
-                                                        )
-                                                    }}
+                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mt-2 ml-2 bg-gray-accent-light hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                    onClick={() =>
+                                                        setOpenSubParams([...openSubParams, param.schema.items.$ref])
+                                                    }
                                                 >
                                                     <svg
-                                                        style={{ transform: `rotate(0deg)` }}
+                                                        className="fill-current opacity-50 group-hover:opacity-75"
+                                                        width="16"
+                                                        height="5"
+                                                        fill="none"
                                                         xmlns="http://www.w3.org/2000/svg"
-                                                        className={`h-5 w-5 transition-transform opacity-50 group-hover:opacity-75 transition-opacity`}
-                                                        viewBox="0 0 20 20"
-                                                        fill="currentColor"
                                                     >
-                                                        <path
-                                                            fillRule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clipRule="evenodd"
-                                                        />
+                                                        <title>Click to open</title>
+                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
                                                     </svg>
                                                 </div>
-                                            ) : (
-                                                <>
-                                                    <div
-                                                        type="link"
-                                                        className="p-1"
-                                                        onClick={() =>
-                                                            setOpenSubParams([
-                                                                ...openSubParams,
-                                                                param.schema.items.$ref,
-                                                            ])
-                                                        }
-                                                    >
-                                                        <svg
-                                                            style={{ transform: `rotate(-90deg)` }}
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            className={`h-5 w-5 transition-transform group-hover:opacity-75 transition-opacity`}
-                                                            viewBox="0 0 20 20"
-                                                            fill="currentColor"
-                                                        >
-                                                            <path
-                                                                fillRule="evenodd"
-                                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                                clipRule="evenodd"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                </>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
-                                <span className="text-[15px] leading-7">{param.name}</span>
+                                            </>
+                                        )}
+                                    </>
+                                )}
                             </div>
                             <div className="">
                                 <div>
@@ -171,7 +158,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         <div className="text-xs">
                                             one of{' '}
                                             {param.schema.enum.map((item) => (
-                                                <code className="border border-dashed border-red mr-1" key={item}>
+                                                <code className="mr-1" key={item}>
                                                     {item}
                                                 </code>
                                             ))}

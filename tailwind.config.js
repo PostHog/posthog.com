@@ -57,7 +57,9 @@ module.exports = {
             primary: '#151515',
             'gray-accent': '#D0D1C9',
             'gray-accent-dark': '#2C2C2C',
+            'gray-accent-dark-hover': '#3D3D3D',
             'gray-accent-light': '#E5E7E0',
+            'gray-accent-light-hover': '#C5C6C2',
         },
         rotate: {
             '-31': '-31deg',
