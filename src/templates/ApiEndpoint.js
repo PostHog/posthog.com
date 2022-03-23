@@ -28,19 +28,25 @@ function Endpoints({ paths }) {
     return (
         <div>
             <h3>Endpoints</h3>
-            <ul className="list-none m-0 p-0">
+            <table className="table-auto">
                 {Object.entries(paths).map(([path, value]) => (
-                    <li key={value}>
+                    <React.Fragment key={value}>
                         {Object.keys(value).map((verb) => (
-                            <span key={verb}>
-                                <span className={`text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()} </span>
-                                {path}
-                                <br />
-                            </span>
+                            <tr
+                                key={verb}
+                                className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b"
+                            >
+                                <td>
+                                    <code className={`method text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()}</code>
+                                </td>
+                                <td>
+                                    <code>{path}</code>
+                                </td>
+                            </tr>
                         ))}
-                    </li>
+                    </React.Fragment>
                 ))}
-            </ul>
+            </table>
         </div>
     )
 }
@@ -84,65 +90,99 @@ function Params({ params, objects, object, depth = 0 }) {
 
     return (
         <>
-            {params.map((param, index) => (
-                <div key={index}>
-                    <strong>{param.name}</strong> {param.schema.type}
-                    {param.schema.enum && (
-                        <>
-                            {' '}
-                            one of{' '}
-                            {param.schema.enum.map((item) => (
-                                <code style={{ marginRight: 4 }} key={item}>
-                                    {item}
-                                </code>
-                            ))}
-                        </>
-                    )}
-                    <br />
-                    {param.schema.default && (
-                        <>
-                            Default: <code>{param.schema.default}</code>
-                            <br />
-                        </>
-                    )}
-                    <ReactMarkdown>{param.schema.description}</ReactMarkdown>
-                    {param.schema.items?.$ref && (
-                        <>
-                            {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
-                                <div>
-                                    <Button
-                                        type="link"
-                                        onClick={() => {
-                                            setOpenSubParams(
-                                                openSubParams.filter((item) => item !== param.schema.items.$ref)
-                                            )
-                                        }}
-                                    >
-                                        Show less
-                                    </Button>
-                                    <div style={{ marginLeft: '1rem' }}>
-                                        <Params
-                                            objects={objects}
-                                            object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
-                                            depth={depth + 1}
-                                        />
-                                    </div>
+            <ul className="list-none pl-0">
+                {params.map((param, index) => (
+                    <li
+                        key={index}
+                        className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
+                    >
+                        <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
+                            <div className="flex">
+                                <div className="w-6 mr-1">
+                                    {param.schema.items?.$ref && (
+                                        <>
+                                            {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
+                                                <div
+                                                    type="link"
+                                                    onClick={() => {
+                                                        setOpenSubParams(
+                                                            openSubParams.filter(
+                                                                (item) => item !== param.schema.items.$ref
+                                                            )
+                                                        )
+                                                    }}
+                                                >
+                                                    <span>[-]</span>
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div
+                                                        type="link"
+                                                        onClick={() =>
+                                                            setOpenSubParams([
+                                                                ...openSubParams,
+                                                                param.schema.items.$ref,
+                                                            ])
+                                                        }
+                                                    >
+                                                        <span>[+]</span>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
                                 </div>
-                            ) : (
-                                <>
-                                    <Button
-                                        type="link"
-                                        onClick={() => setOpenSubParams([...openSubParams, param.schema.items.$ref])}
-                                    >
-                                        Show more
-                                    </Button>
-                                </>
-                            )}
-                        </>
-                    )}
-                    <hr />
-                </div>
-            ))}
+                                <span className="text-sm">{param.name}</span>
+                            </div>
+                            <div className="">
+                                <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                    {param.schema.type}
+                                </span>
+                                {param.schema.enum && (
+                                    <>
+                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark text-sm">
+                                            one of{' '}
+                                            {param.schema.enum.map((item) => (
+                                                <code
+                                                    className="border border-dashed border-red"
+                                                    style={{ marginRight: 4 }}
+                                                    key={item}
+                                                >
+                                                    {item}
+                                                </code>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                                {param.schema.default && (
+                                    <>
+                                        Default: <code>{param.schema.default}</code>
+                                    </>
+                                )}
+                                <ReactMarkdown>!!{param.schema.description}</ReactMarkdown>
+                            </div>
+                        </div>
+
+                        {param.schema.items?.$ref && (
+                            <>
+                                {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
+                                    <div>
+                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark ml-7">
+                                            <Params
+                                                objects={objects}
+                                                object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
+                                                depth={depth + 1}
+                                            />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}
+                            </>
+                        )}
+                    </li>
+                ))}
+            </ul>
         </>
     )
 }
@@ -205,23 +245,25 @@ function ResponseBody({ item, objects }) {
     return (
         <>
             <h4>Response</h4>
-            <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
-                {showResponse ? 'Hide' : 'Show'} response
-            </Button>
-            <br />
-            {showResponse && (
-                <Params
-                    params={Object.entries(object.properties)
-                        .map(([name, schema]) => {
-                            return {
-                                name,
-                                schema,
-                            }
-                        })
-                        .filter((item) => !item.schema.readOnly)}
-                    objects={objects}
-                />
-            )}
+            <div className="response-wrapper">
+                <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
+                    {showResponse ? 'Hide' : 'Show'} response
+                </Button>
+                <br />
+                {showResponse && (
+                    <Params
+                        params={Object.entries(object.properties)
+                            .map(([name, schema]) => {
+                                return {
+                                    name,
+                                    schema,
+                                }
+                            })
+                            .filter((item) => !item.schema.readOnly)}
+                        objects={objects}
+                    />
+                )}
+            </div>
         </>
     )
 }
@@ -259,8 +301,8 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         <>
             <div className="code-example justify-between flex">
                 <div className="text-gray">
-                    <span className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </span>
-                    {path}
+                    <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
+                    <code>{path}</code>
                 </div>
                 <Select
                     value={exampleLanguage}
@@ -466,9 +508,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                         .
                                     </p>
                                 </blockquote>
-                                <p>
-                                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
-                                </p>
+                                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
                                 <Endpoints paths={paths} />
 
