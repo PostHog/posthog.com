@@ -64,7 +64,7 @@ export default function Features({ title }) {
         <section className={section()}>
             <div>
                 <h2 className={heading('lg', 'primary', 'max-w-[1100px] mx-auto')}>{title}</h2>
-                <h3 className="text-lg md:text-2xl text-center mt-4 md:mt-8">
+                <h3 className="text-lg md:text-2xl text-center md:px-8 mt-4 md:mt-8">
                     One platform for{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
