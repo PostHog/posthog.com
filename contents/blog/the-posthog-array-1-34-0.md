@@ -74,11 +74,11 @@ Self hosted users can now manage staff users on their instance settings!
 
 This section needs updating with some one line fixes. 
 
-- Improved: Dashboard "add insight" flow
-- Improved: SSO login redirect
-- New: Experiments secondary metrics
-- New: PostHog storybook
-- New: History logging
+- **Improved**: Dashboard "add insight" flow
+- **Improved**: SSO login redirect
+- **New:** Experiments secondary metrics
+- **New**: PostHog storybook
+- **New**: History logging
 - Plus 290+ improvements & fixes!
 
 ### Deprecation & removal notices
