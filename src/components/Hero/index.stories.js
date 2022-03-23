@@ -1,9 +1,15 @@
 import { CallToAction } from 'components/CallToAction'
+import { getContext } from 'kea'
 import React from 'react'
+import { Provider } from 'react-redux'
 import { Hero as HeroComponent } from '.'
 
 export default {
-    component: HeroComponent,
+    component: (
+        <Provider store={getContext().store}>
+            <HeroComponent />
+        </Provider>
+    ),
     title: 'Components/Hero',
     argTypes: {
         ctas: {
@@ -17,7 +23,11 @@ export default {
     },
 }
 
-export const Hero = (args) => <HeroComponent {...args} />
+export const Hero = (args) => (
+    <Provider store={getContext().store}>
+        <HeroComponent {...args} />
+    </Provider>
+)
 Hero.args = {
     title: 'Self-hosted alternative to Google Analytics',
     subtitle:
