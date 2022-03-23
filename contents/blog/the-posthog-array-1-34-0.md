@@ -54,9 +54,7 @@ Check out our blog post [here](https://posthog.com/blog/data-management-feature)
 
 ### New: Property Group Filtering (or filters)
 
-A much requested feature is now here with property group filtering. You can mix and match your favorite property filters with ORs and ANDs now.
-
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+A much requested feature is now here with property group filtering. You can mix and match your favorite property filters with ORs and ANDs now. This is currently only available in the global filters for insights.
 
 <br />
 
