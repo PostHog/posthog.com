@@ -22,7 +22,7 @@ A few things worth keeping in mind:
 
 -   Recordings can **only be used** with our [JavaScript library](/docs/integrate/client/js).
 -   In particular, this feature will not work with <b>Segment</b>, as Segment's SDK does not collect and send this data. _If you use
-    Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source)._
+    Segment, and want to use the Recordings feature, you should add the PostHog library too (but make sure to only send regular event data from one source)._
 -   Recordings can also be toggled on and off in the JS library by setting the relevant [config](/docs/integrate/client/js/#config) attribute. This is useful if you want to enable/disable recordings conditionally based on custom conditions (e.g. only record a specific set of users). See [Further controls](#further-controls) for details on this.
 -   Users who opt out of event capturing will not have their sessions recorded.
 
