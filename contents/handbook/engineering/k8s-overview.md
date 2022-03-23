@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This document gives an overview of how a deployed posthog [helm chart](https://github.com/PostHog/charts-clickhouse/) works on kubernetes.
+This document gives an overview of how a deployed PostHog [Helm chart](https://github.com/PostHog/charts-clickhouse/) works on Kubernetes.
 
 To find more information on self-hosted deployment, you can read under [self-host documentation](/docs/self-host).
 
