@@ -726,7 +726,7 @@ ul {
     }
 }
 
-<<<<<<< HEAD .w-md-editor-toolbar {
+.w-md-editor-toolbar {
     @apply !h-auto !bg-white !p-2 !border-dashed !border-gray-accent-light;
     ul {
         @apply flex items-center;
