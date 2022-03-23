@@ -104,12 +104,12 @@ export const Benefits = () => {
                     <Benefit
                         image={spillMentalHealthImg}
                         title="Spill mental health chat"
-                        details="Sometimes it’s good to chat to someone if you aren’t feeling yourself. "
+                        details="Sometimes it’s good to chat to someone if you aren’t feeling yourself."
                     />
                     <Benefit
                         image={companyOffsitesImg}
                         title="Company offsites"
-                        details="Each year we organise fully paid company offsites- last year we went to a villa in Italy! Sometimes it’s good to speak face to face."
+                        details="Each year we organise fully paid company offsites - last year we went to a villa in Portugal! Sometimes it’s good to speak face to face."
                     />
                 </div>
             </Structure.Section>
