@@ -1,6 +1,6 @@
 ---
 date: 2022-03-24
-title: Introducing Collboration on PostHog
+title: Introducing Collboration for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["paolodamico"]
 featuredImage: ../images/blog/generic-release-notes.png
 featuredImageType: full
-categories: ["Product updates"]
+categories: ["Product updates", "Launch week"]
 ---
 
 PostHog is better with teammates. You only have to create a [dashboard](/docs/user-guides/dashboards) once, but it becomes more valuable every time you invite someone from your organization to view it. And this isn't just some vague truism: it's a measurable fact.
@@ -42,7 +42,7 @@ Sometimes you don't know what you're looking for, or you don't know where to sta
 
 To aid serendipitous discoveries, we've created a project homepage to surface helpful insights you may not have considered. By making it the default page on PostHog, our aim is to help users make quick discoveries. We'll surface your most important product and company metrics here as well as popular insights, and we're leveraging social proof from what other teammates are doing in your app to help you discover more product improvements.
 
-In addition, if your team uses the [Recordings](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
+In addition, if your team uses the [Session Recording](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
 
 
 ![Concept of project home page](../images/blog/collaborating-on-posthog_4.png)
@@ -53,7 +53,7 @@ We find there are two general profiles for PostHog users:
 1. People who are naturally curious and whose job leads them to discover insights all the time and across multiple dimensions.
 2. People who use PostHog to answer specific questions as they arise. 
 
-For people who create insights, we've introduced one-click saving and automatic insight naming This means people who create lots of insights don't have spend time documenting their work, while their colleagues can more easily understand what they're looking at.
+For people who create insights, we've introduced one-click saving and automatic insight naming. This means people who create lots of insights don't have spend time documenting their work, while their colleagues can easily understand what they're looking at.
 
 ![Screenshot of automatic insight naming](../images/blog/collaborating-on-posthog_3.png)
 
@@ -61,12 +61,12 @@ And for people who love discovering insights that others made, we've made it eas
 
 ![Screenshot of saved insights](../images/blog/collaborating-on-posthog_2.png)
 
-To support this work, we also introduced the new [Data Management](link_to_blog_post_here) feature, which brings together all the context on how your product is instrumented. Now there's no need to ask an Engineer or Product Manager which event you should use to answer a question, which both parties will appreciate!
+To support this work, we also introduced the new [Data Management](/blog/data-management-feature) feature, which brings together all the context on how your product is instrumented. Now there's no need to ask an Engineer or Product Manager which event you should use to answer a question, which both parties will appreciate!
 
 ## What's next?
-We're continuing to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](https://posthog.com/handbook/people/team-structure/team-app#roadmap). 
+We're continuing to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](/handbook/people/team-structure/team-app#roadmap). 
 
-However, we're a fast moving company and we continuously reprioritize based on feedback, market needs, etc., do the way we tackle this problem may change.
+However, we're a fast moving company and we continuously reprioritize based on feedback, market needs, etc., so the way we tackle this problem may change.
 
 With the disclaimer above in mind, here's some exciting stuff we hope to ship soon. 
 ### Slack Previews
@@ -74,7 +74,7 @@ With the disclaimer above in mind, here's some exciting stuff we hope to ship so
 Almost every team uses some sort of Instant Messaging tool (think Slack, Discord, Teams, ...) and in particular, it's a place for discussions. We believe that adding more context when you share a link to a PostHog insight or dashboard will speed up discussions (e.g. a screenshot of the graph, general details, recent changes, ...). We're starting with Slack to test drive this concept, but if successful, expanding to other tools will make sense.
  
 ### Email subscriptions to dashboards and insights
-As we analyzed dashboard usage in PostHog, we discovered it's quite common for teams to have 1-2 dashboards that represent their critical metrics, such as number of sales for an e-commerce company or retention for a pre-Product-Market-Fit startup. 
+As we analyzed dashboard usage in PostHog, we discovered it's quite common for teams to have one or two dashboards that represent their critical metrics, such as number of sales for an e-commerce company or retention for a pre-Product-Market-Fit startup. 
 
 A very user-friendly way of keeping users updated on these metrics is by integrating with their current workflows, such as email. Soon you'll be able to start your Mondays (or any other day) with a digest of how your product and company are doing.
 
