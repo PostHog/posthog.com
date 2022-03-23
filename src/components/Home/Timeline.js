@@ -34,16 +34,15 @@ export default function Timeline() {
 
     return (
         <section className="px-4">
-            <h2 className="text-center">We're just getting started</h2>
+            <h2 className="text-center">We ship weirdly fast</h2>
             <p className="my-6 mx-auto text-center text-base md:text-xl font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                We've shipped a lot in just a couple years. Because our talent compounds, this will continue to increase
-                exponentially.
+                How else would we have done all this?
             </p>
 
             <div className="text-center flex justify-center pb-12 space-x-6">
                 <div className="flex items-center text-[15px]">
                     <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#43AF79]"></span>
-                    <div>New feature</div>
+                    <div>Major new feature</div>
                 </div>
                 <div className="flex items-center text-[15px]">
                     <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#0080FF]"></span>
@@ -51,7 +50,7 @@ export default function Timeline() {
                 </div>
                 <div className="flex items-center text-[15px]">
                     <span className="block w-[10px] h-[10px] rounded-full mr-1 bg-[#C849F4]"></span>
-                    <div>Milestone</div>
+                    <div>Something cool happened</div>
                 </div>
             </div>
 
