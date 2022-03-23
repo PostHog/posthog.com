@@ -8,7 +8,7 @@ hideAnchor: true
 categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: 
+excerpt: ONE SENTENCE GOES HEREEEEE
 ---
 
 PostHog 1.34.0 introduces...(Excerpt info here)
@@ -28,7 +28,6 @@ PostHog 1.34.0 introduces...(Excerpt info here)
 - [Highlight4](#new-instance-configuration-ui)
 
 ### New: Highlight1
-
 PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
 
 We also use the section below to flag premium features.
@@ -38,7 +37,6 @@ We also use the section below to flag premium features.
 <br />
 
 ### New: Highlight2
-
 PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
 
 We also use the section below to flag premium features.
@@ -48,7 +46,6 @@ We also use the section below to flag premium features.
 <br />
 
 ### Improvement: Highlight3
-
 PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
 
 We also use the section below to flag premium features.
@@ -58,7 +55,6 @@ We also use the section below to flag premium features.
 <br />
 
 ### Improvement: Highlight4
-
 PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
 
 We also use the section below to flag premium features.
@@ -68,7 +64,6 @@ We also use the section below to flag premium features.
 <br />
 
 ### Other improvements & fixes
-
 This section needs updating with some one line fixes. 
 
 - Improved: Fix 1
@@ -79,24 +74,17 @@ This section needs updating with some one line fixes.
 - Plus 290+ improvements & fixes!
 
 ### Deprecation & removal notices
+- Add any deprecations here, if present. Delete if not. 
 
-- Add any deprecations here, if present. 
+## Give us your feedback
+We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
-### Talk to us about how we can improve
-
-We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
-
-As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
-
-## Community
-
+## Contributions from the community
 Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or take a look at our Plugin bounties!
 
-### Community shoutouts
-Was there anyone who did good from the community? Tag them here and link to their GitHub profiles. 
+This month we also want to say thank you to...Tag them here and link to their GitHub profiles. 
 
 ## Open roles at PostHog
-
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
 
 - [Community Engineer](https://apply.workable.com/posthog/j/449572FD18/)
