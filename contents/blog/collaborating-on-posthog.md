@@ -1,6 +1,6 @@
 ---
 date: 2022-03-24
-title: Introducing Collboration for PostHog
+title: Introducing Collaboration for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
