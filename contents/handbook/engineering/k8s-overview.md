@@ -93,6 +93,6 @@ flowchart TD
 No communication is needed into or out of this namespace other than the ingress controller for app and collecting data.
 
 Note that the specifics of this may vary:
-- Kafka, ClickHouse, Redis services may be hosted outside of the namespace or [configured differently](/docs/self-host/deploy/configuration).
+- ClickHouse, Kafka, PostgreSQL and Redis services may be hosted outside of the namespace or [configured differently](/docs/self-host/deploy/configuration).
 - The ClickHouse cluster is managed by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/) and the
     exact number of pods vary according to [sharding settings](/docs/self-host/runbook/clickhouse/sharding-and-replication).
