@@ -75,7 +75,7 @@ flowchart TD
 
     ClientApps(Client Apps)--- Ingress
 
-    %% KLUDGE: Use invisibile nodes for styling purposes
+    %% KLUDGE: Use invisible nodes for styling purposes
     Ingress --- na[ ]
     na --Other traffic--> App
     na --Events endpoint --> Events
