@@ -81,7 +81,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-yellow"
                             alt={`Li Yi Yu - Full Stack Engineer`}
-                            src="../components/TeamQuote/images/Li.png"
+                            src="../components/TeamQuote/images/li.png"
                         />
                     }
                 />
