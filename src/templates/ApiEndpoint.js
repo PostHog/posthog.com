@@ -98,12 +98,13 @@ function Params({ params, objects, object, depth = 0 }) {
                     >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex">
-                                <div className="w-6 mr-1">
+                                <div className="w-8 mr-1">
                                     {param.schema.items?.$ref && (
                                         <>
                                             {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                                 <div
                                                     type="link"
+                                                    className="group p-1 rounded cursor-pointer hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                                     onClick={() => {
                                                         setOpenSubParams(
                                                             openSubParams.filter(
@@ -112,12 +113,25 @@ function Params({ params, objects, object, depth = 0 }) {
                                                         )
                                                     }}
                                                 >
-                                                    <span>[-]</span>
+                                                    <svg
+                                                        style={{ transform: `rotate(0deg)` }}
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className={`h-5 w-5 transition-transform opacity-50 group-hover:opacity-75 transition-opacity`}
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
                                                 </div>
                                             ) : (
                                                 <>
                                                     <div
                                                         type="link"
+                                                        className="p-1"
                                                         onClick={() =>
                                                             setOpenSubParams([
                                                                 ...openSubParams,
@@ -125,29 +139,39 @@ function Params({ params, objects, object, depth = 0 }) {
                                                             ])
                                                         }
                                                     >
-                                                        <span>[+]</span>
+                                                        <svg
+                                                            style={{ transform: `rotate(-90deg)` }}
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className={`h-5 w-5 transition-transform group-hover:opacity-75 transition-opacity`}
+                                                            viewBox="0 0 20 20"
+                                                            fill="currentColor"
+                                                        >
+                                                            <path
+                                                                fillRule="evenodd"
+                                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                                clipRule="evenodd"
+                                                            />
+                                                        </svg>
                                                     </div>
                                                 </>
                                             )}
                                         </>
                                     )}
                                 </div>
-                                <span className="text-sm">{param.name}</span>
+                                <span className="text-[15px] leading-7">{param.name}</span>
                             </div>
                             <div className="">
-                                <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
-                                    {param.schema.type}
-                                </span>
+                                <div>
+                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                        {param.schema.type}
+                                    </span>
+                                </div>
                                 {param.schema.enum && (
                                     <>
-                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark text-sm">
+                                        <div className="text-xs">
                                             one of{' '}
                                             {param.schema.enum.map((item) => (
-                                                <code
-                                                    className="border border-dashed border-red"
-                                                    style={{ marginRight: 4 }}
-                                                    key={item}
-                                                >
+                                                <code className="border border-dashed border-red mr-1" key={item}>
                                                     {item}
                                                 </code>
                                             ))}
@@ -156,7 +180,11 @@ function Params({ params, objects, object, depth = 0 }) {
                                 )}
                                 {param.schema.default && (
                                     <>
-                                        Default: <code>{param.schema.default}</code>
+                                        <div>
+                                            <span className="text-xs">
+                                                Default: <code>{param.schema.default}</code>
+                                            </span>
+                                        </div>
                                     </>
                                 )}
                                 <ReactMarkdown>!!{param.schema.description}</ReactMarkdown>
@@ -167,7 +195,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             <>
                                 {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                     <div>
-                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark ml-7">
+                                        <div className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark ml-7 mb-4">
                                             <Params
                                                 objects={objects}
                                                 object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
