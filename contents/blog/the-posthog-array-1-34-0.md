@@ -22,11 +22,11 @@ PostHog 1.34.0 introduces...(Excerpt info here)
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [Homepage](#new-experimentation)
-- [Data Management](#new-dashboard-permissions)
-- [Property Group Filtering](#new-altitiny-cloud-support)
-- [Smart Insight Naming](#new-instance-configuration-ui)
-- [Staff Users]()
+- [Homepage](#new-homepage)
+- [Data Management](#new-data-management)
+- [Property Group Filtering](#new-property-group-filtering)
+- [Smart Insight Naming](#improvement-smart-insight-naming)
+- [Staff Users](#new-staff-users)
 
 ### New: Homepage
 
@@ -68,7 +68,6 @@ Previously insights had default random animal generated names that weren't very 
 ### New: Staff Users
 
 Self hosted users can now manage staff users on their instance settings!
-
 
 
 ### Other improvements & fixes
