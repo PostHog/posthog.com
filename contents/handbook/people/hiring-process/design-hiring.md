@@ -38,7 +38,7 @@ We are looking for proactivity, directness, good communication skills, an awaren
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
 
-The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer) and 1-2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
+The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer) and 1 or 2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 
 The second part of the interview will be a portfolio interview, where you will meet a few other members of the team. You will present a deep dive into your portfolio, covering the end-to-end process from strategy to design to impact.
 
