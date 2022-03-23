@@ -1,5 +1,5 @@
 ---
-date: 2022-03-21
+date: 2022-03-23
 title: "PostHog Launch Week I: A Universe of New Features"
 rootPage: /blog
 sidebar: Blog
@@ -42,7 +42,6 @@ We set out to solve these pain points and the result is the new Data Management 
 
 ## Chapter II: Project Sparkle
 
-- **Releasing:** Tuesday, March 22
 - **Starring:** Karl-Aksel Puulmann, Harry Waye and Guido Iaquinti
 - **Introducing:** Sharded ClickHouse and easier self-hosted deployments
 
@@ -58,11 +57,18 @@ Going forward, the marketplace is where you’ll be able to find third-party ser
 
 ## Chapter III: Experimentation
 
-- **Releasing:** Wednesday, March 23
 - **Starring:** Neil Kakkar
 - **Introducing:** A/B testing, multivariate tests and statistical significance
 
-Critics are calling it "Neil's most statistically significant new feature since [Correlation Analysis](/docs/user-guides/correlation)"
+Everyone has an opinion about user experience, and that's fine. But it's vital to test those opinions and validate what works, which is why we built our Experimentation suite. 
+
+Experiments allow you to choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for.
+
+Thanks to Feature Flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. We run a Bayesian analysis on the data to give a probability for each variant being the best, show a graph of how things are looking for each variant, and whether the results are statistically significant or not. It's awesome.
+
+Today, Neil Kakkar shares three things we've learned about running effective A/B tests. If you want to build better products, we seriously recommend giving it a read.
+
+**Read: [What launching Experimentation taught us about running effective A/B tests](/blog/experiments)**
 
 ## Chapter IV: Collaboration
 
