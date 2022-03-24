@@ -10,30 +10,35 @@ images:
 
 import { StaticImage } from 'gatsby-plugin-image'
 import Table from './_includes/example-table.mdx'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+
+<div className="text-center" style={{ marginTop: "-3rem" }}>
+  <GatsbyImage image={getImage(props?.images[0])} alt="Session recording screenshot" className="max-w-screen-md shadow mb-8" />
+</div>
+
+<h1 className="text-center px-8 md:text-5xl xl:text-6xl" style={{ marginBottom: "-.5rem" }}>Watch users <span className="text-red">interact</span> with your product</h1>
 
 <Hero
-    title="Watch session recordings"
-    subtitle="Play back individual user sessions to see how users interact with your product."
+    subtitle="Play back individual user sessions to see how users interact with your site or app."
     ctas={[<CallToAction href="/signup">Get started</CallToAction>]}
 />
 
-<br />
-
-<Section title="Session recording, now included in your product analytics" titleSize="sm">
+<Section titleSize="sm">
     <FeatureSnapshot
-        image="/images/session-recording-player.png"
+        image="/images/session-recording-list.png"
         features={[
             <>
-                <strong>Debug faster:</strong> see where users get stuck and draw conclusions that are hard to glean
+                <strong>Debug faster</strong><br />
+                See where users get stuck and draw conclusions that are hard to glean
                 from data.
             </>,
             <>
-                <strong>Scrub to the important moments:</strong> find where something went wrong and go back in time to
-                see what caused it.
+                <strong>Scrub to the important moments</strong><br />
+                Find where something went wrong and go back in time to see what caused it.
             </>,
             <>
-                <strong>Block sensitive data:</strong> avoid recording private data by adding a CSS class to sensitive
-                fields.
+                <strong>Block sensitive data</strong><br />
+                Avoid recording private data by adding a CSS class to sensitive fields.
             </>,
         ]}
     />
