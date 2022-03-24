@@ -4,31 +4,28 @@ showTitle: false
 showSidebar: true
 width: lg
 noindex: true
+images:
+    - './images/session-recording-player.png'
 ---
 
 import { StaticImage } from 'gatsby-plugin-image'
 import Table from './_includes/example-table.mdx'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
-<StaticImage
-    src="./images/session-recording-player.png"
-    alt="SR"
-    height={264}
-    width={390}
-/>
+<GatsbyImage image={getImage(props?.images[0])} alt="SR" height={264} width={390} />
 
 <Hero
     title="Watch session recordings"
     subtitle="Play back individual user sessions to see how users interact with your product."
-    ctas={[
-        <CallToAction href="/signup">Get started</CallToAction>,
-    ]}
+    ctas={[<CallToAction href="/signup">Get started</CallToAction>]}
 />
 
 <Section title="Why is it important to self-host your analytics?" titleSize="sm" cols={3}>
     <div>
         <h4>Understand how users are getting stuck</h4>
         <p>
-            Debug faster, or build context on analytics performance. Nothing beats watching people use your product for real.
+            Debug faster, or build context on analytics performance. Nothing beats watching people use your product for
+            real.
         </p>
     </div>
     <div>

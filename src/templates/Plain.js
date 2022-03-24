@@ -23,7 +23,7 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 export default function Plain({ data }) {
     const { pageData } = data
     const { body, excerpt } = pageData
-    const { title, featuredImage, description, showTitle, width = 'sm', noindex } = pageData?.frontmatter
+    const { title, featuredImage, description, showTitle, width = 'sm', noindex, images } = pageData?.frontmatter
     const components = {
         pre: CodeBlock,
         Hero,
@@ -46,7 +46,7 @@ export default function Plain({ data }) {
             <article className={`mx-auto my-12 md:my-24 px-4 article-content ${articleWidth[width || 'sm']}`}>
                 {showTitle && <h1 className="text-center">{title}</h1>}
                 <MDXProvider components={components}>
-                    <MDXRenderer>{body}</MDXRenderer>
+                    <MDXRenderer images={images}>{body}</MDXRenderer>
                 </MDXProvider>
             </article>
             <Section />
@@ -69,6 +69,11 @@ export const query = graphql`
                 featuredImageType
                 featuredImage {
                     publicURL
+                }
+                images {
+                    childImageSharp {
+                        gatsbyImageData
+                    }
                 }
                 width
                 noindex
