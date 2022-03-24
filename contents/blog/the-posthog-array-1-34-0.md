@@ -79,7 +79,7 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 - **New**: Shorter insight links
 
 ### Deprecation and removal notices
-- Starting on PostHog 1.35.0 (next version) the way SAML works will change from being instance-based to being domain-based. This means that SAML configuration will no longer happen with environment variables but in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review [SSO docs](/sso) for more details.
+- Starting from PostHog 1.35.0 SAML will change from being instance-based to domain-based. This means that SAML configurations will take place in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
 - If you use SAML on your self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable). Please be aware this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains (see [SSO docs](/sso) for more details.)
 
 ## Give us your feedback
