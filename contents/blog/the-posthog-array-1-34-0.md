@@ -66,7 +66,6 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 - **Improved**: SSO login redirect
 - **New:** Experiments secondary metrics
 - **New**: Shorter insight links
-- **New**: History logging
 
 ## Give us your feedback
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
