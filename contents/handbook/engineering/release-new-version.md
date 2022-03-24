@@ -16,7 +16,7 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-On the week before the release, on Friday, we institute a code freeze. We branch master into release-[version] and deploy that to our playground environment (playground.posthog.com) and ClickHouse test environment (samltest.posthog.net). Only bugfixes are allowed to be merged into this branch (and thus put on production) between the code freeze and the release going out. This gives us about three days to test if this release has any bugs.
+On the week before the release, on Thursday, we institute a code freeze (used to be Fridays but that led to a rush of PRs on the eleventh hour which made the release process trickier). We branch master into release-[version] and deploy that to our playground environment (playground.posthog.com) and ClickHouse test environment (samltest.posthog.net). Only bugfixes are allowed to be merged into this branch (and thus put on production) between the code freeze and the release going out. This gives us about three days to test if this release has any bugs.
 
 <blockquote class="warning-note">
 ⚠️ As soon as the branch is created and pushed to GitHub, the Docker image will be built and pushed to Docker Hub under the tag <code>release-[version]-unstable</code>.
@@ -28,15 +28,10 @@ On the week before the release, on Friday, we institute a code freeze. We branch
 ### Pre-release phase
 
 - [ ] Start the `release-[version]` branch to initiate the code freeze.
-- [ ] Figure out what's updated in this release with the command below. The command will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array.
+- [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array.
   ```bash
   git checkout release-[version]
   git log --pretty=format:"%s %ae" [old-version]..head > log.txt
-  ```
-- [ ] Write up the main fixes/improvements and breaking changes into `CHANGELOG.md` following the structure of the previous release
-  ```bash
-  git add CHANGELOG.md
-  git commit -m "Changelog version 1.29.0"
   ```
 - [ ] Update the `VERSION` in `posthog/version.py`
   ```bash
@@ -44,8 +39,7 @@ On the week before the release, on Friday, we institute a code freeze. We branch
   git add posthog/version.py
   git commit -m "Bump version [version]"
   ```
-- [ ] Deploy PostHog playground from the `release-[version]` branch on Heroku dashboard.
-- [ ] Deploy ClickHouse test environment from the `release-[version]-unstable` Docker image.
+- [ ] Deploy PostHog playground using the `release-[version]-unstable` Docker image's SHA (you can obtain it from Docker Hub, credentials in 1Password). The PostHog Playground uses a helm chart deployment and the `values.yaml` can be found in the internal `vpc` repository.
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
 ### Launch phase
