@@ -28,7 +28,7 @@ On the week before the release, on Thursday, we institute a code freeze (used to
 ### Pre-release phase
 
 - [ ] Start the `release-[version]` branch to initiate the code freeze.
-- [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array.
+- [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array. In addition, you can look for the `highlight` tag in PRs but be mindful it's not used very consistently.
   ```bash
   git checkout release-[version]
   git log --pretty=format:"%s %ae" [old-version]..head > log.txt
