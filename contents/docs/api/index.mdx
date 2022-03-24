@@ -141,6 +141,8 @@ def trend(self, request: request.Request, *args: Any, **kwargs: Any) -> Response
     """
 ```
 
+To check what any changes will roughly look like locally, you can go to http://127.0.0.1:8000/api/schema/redoc/.
+
 ### Insights serializer
 
 The serializer for insight [lives here](https://github.com/PostHog/posthog/blob/master/posthog/api/insight_serializers.py). Each time an insight gets created we check it against these serializers, and we'll send an error to Sentry (but not the user) if it doesn't match, to ensure the API docs are up to date.
