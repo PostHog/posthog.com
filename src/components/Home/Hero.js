@@ -17,7 +17,7 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="feature-flags" title="Feature flags" url="/product/feature-flags" />
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
-                <Feature icon="api" title="API" url="/api" />
+                <Feature icon="api" title="API" url="/docs/api" />
                 <Feature icon="data-warehouse" title="Data warehouse" url="/docs/self-host/runbook/clickhouse" />
             </ul>
         </div>
