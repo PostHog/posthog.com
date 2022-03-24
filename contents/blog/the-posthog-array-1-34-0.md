@@ -8,10 +8,10 @@ hideAnchor: true
 categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: ONE SENTENCE GOES HEREEEEE
+excerpt: PostHog 1.34.0 focuses on supporting collaboration and helping you to find and share insights on PostHog. New features in this update include a new default homepage for projects, smart names for all insights and an entire Data Managment tool!
 ---
 
-PostHog 1.34.0 introduces...(Excerpt info here)
+PostHog 1.34.0 focuses on supporting collaboration and helping you to find and share insights on PostHog. New features in this update include a new default homepage for projects, smart names for all insights and an entire Data Managment tool!
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> Before upgrading, make sure to run all async migrations on your instance. This version will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
@@ -22,79 +22,64 @@ PostHog 1.34.0 introduces...(Excerpt info here)
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [Homepage](#new-homepage)
+- [Project homepages](#new-homepage)
 - [Data Management](#new-data-management)
-- [Property Group Filtering](#new-property-group-filtering)
-- [Smart Insight Naming](#improvement-smart-insight-naming)
-- [Staff Users](#new-staff-users)
+- [Property group filtering](#new-property-group-filtering)
+- [Smart insight naming](#improvement-smart-insight-naming)
+- [Staff user controls](#new-staff-users)
 
-### New: Homepage
+### New: Project homepages
+![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
 
-PostHog now directs you to a default project homepage where you can pin your favorite dashboard to and easily access those insights!
+We've added default homepages for each project in PostHog, to help you explore new data and keep track on important metrics. You can pin your favorite dashboard directly to this new homepage to easily access those insights and we'll also surface popular insights for you too. 
 
-We also use the section below to flag premium features.
-
-> 🎁 This is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
-
-<br />
+Best of all, if your team uses [Session Recording](/product/session-recording), we'll also add your most recent recordings to the homepage too. We've found users who watch these recordings make 3x more useful discoveries, on average!
 
 ### New: Data Management
-
-We also have a new data management system!
-
-PostHog now offers a way to organize all of your PostHog data in-house with event definitions, definition tagging and many more features.
-
 ![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
 
-Check out our blog post [here](https://posthog.com/blog/data-management-feature) or dive into the [docs](https://posthog.com/docs/user-guides/data-management)!
+We've also added a new Data Management system! This new tool  helps you organize your PostHog data in-house through event definitions, definition tagging and many more features. This is especially useful in large teams, where it can sometimes be difficult to know if your insights are using the right events. 
 
-> 🎁 Definition creation, tagging, and volume metrics are premium features that require a PostHog Scale or Enterprise license. [Learn more](/pricing).
+Check out our [blogpost which explains more about Data Management on PostHog](/blog/data-management-feature) or dive straight into the [Data Management docs](https://posthog.com/docs/user-guides/data-management) for more information.
 
-<br />
+> 🎁 Definition creation, tagging, and volume metrics are premium features which require a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
-### New: Property Group Filtering (or filters)
+### Improvement: Smart insight naming
+![PostHog - smart insight naming](../images/blog/array/1_34_0-smart-naming.png)
 
-A much requested feature is now here with property group filtering. You can mix and match your favorite property filters with ORs and ANDs now. This is currently only available in the global filters for insights.
+Previously, we generated random default names for insights based on animals. It was fun and ensured each insight had a unique name, but they weren't very descriptive and didn't help if you wanted to browse existing insights. 
 
-<br />
+Now, we've added smart insight naming to automatically generate descriptive names for every insight you create. This makes it a _lot_ easier to find the insights you need - thought you can of course add custom animal names, if you want.
 
-### Improvement: Smart Insight Naming
+### New: Property group filtering
+One of the most requested features for PostHog, property group filters enable you to mix and match your favourite property filters with ```OR```s and ```AND``` conditions. This makes it much simpler to create complex filters when building insights, though this is currently only available as a global filter for insights.
 
-Previously insights had default random animal generated names that weren't very descriptive, we've now added smart insight naming! 
+### New: Staff user controls
+Self-hosted users can now manage staff users on their instance settings. Staff users are a special instance-level permission which have access to instance-wide settings - and you probably want to have multiple staff users enabled to ensure your instance can always be properly maintained.
 
-
-<br />
-
-### New: Staff Users
-
-Self hosted users can now manage staff users on their instance settings!
-
+You can manage staff users either via the PostHog UI, or the API if you prefer - check out [the staff user docs](//docs/self-host/configure/instance-settings#staff-users) for more information.
 
 ### Other improvements & fixes
-This section needs updating with some one line fixes. 
+Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 
 - **Improved**: Dashboard "add insight" flow
 - **Improved**: SSO login redirect
 - **New:** Experiments secondary metrics
 - **New**: PostHog storybook
 - **New**: History logging
-- Plus 290+ improvements & fixes!
-
-### Deprecation & removal notices
-- Add any deprecations here, if present. Delete if not. 
-
-- Add any deprecations here, if present. 
 
 ## Give us your feedback
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
-
-## Contributions from the community
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or take a look at our Plugin bounties!
+Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). 
 
 ### Community shoutouts
-This month we also want to say thank you to...Tag them here and link to their GitHub profiles. 
+This month we also want to say thank you to the following people...
+
+- [Bnomei](https://github.com/bnomei) for providing [feedback on our PHP docs](https://github.com/PostHog/posthog.com/issues/3190)
+- [Hspotorno](https://github.com/hspotorno) for additions to [Is Google Analytics Illegal?](https://isgoogleanalyticsillegal.com/)
+- [Bla](https://github.com/Bla) for submitting [ideas and feedback](https://github.com/PostHog/posthog/issues/1)
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
