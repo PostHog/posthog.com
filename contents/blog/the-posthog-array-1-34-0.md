@@ -17,6 +17,10 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 <b>IMPORTANT!</b> Before upgrading, make sure to run all async migrations on your instance. This version will not run until async migrations are completed. Please check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
 </blockquote>
 
+<blockquote class='warning-note'>
+<b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
+</blockquote>
+
 ## PostHog 1.34.0 release notes
 
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
@@ -68,6 +72,12 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 - **Improved**: SSO login redirect
 - **New:** Experiments secondary metrics
 - **New**: Shorter insight links
+
+
+### Deprecation and removal notices
+
+- Starting on PostHog 1.35.0 (next version) the way SAML works will change from being instance-based to being domain-based. This means that SAML configuration will no longer happen with environment variables but in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review [SSO docs](/sso) for more details.
+- If you use SAML on your self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable). Please be aware this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains (see [SSO docs](/sso) for more details.)
 
 ## Give us your feedback
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
