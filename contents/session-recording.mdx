@@ -10,9 +10,6 @@ images:
 
 import { StaticImage } from 'gatsby-plugin-image'
 import Table from './_includes/example-table.mdx'
-import { getImage, GatsbyImage } from 'gatsby-plugin-image'
-
-<GatsbyImage image={getImage(props?.images[0])} alt="SR" height={264} width={390} />
 
 <Hero
     title="Watch session recordings"
@@ -24,6 +21,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <Section title="Session recording, now included in your product analytics" titleSize="sm">
     <FeatureSnapshot
+        image="/images/session-recording-player.png"
         features={[
             <>
                 <strong>Debug faster:</strong> see where users get stuck and draw conclusions that are hard to glean
