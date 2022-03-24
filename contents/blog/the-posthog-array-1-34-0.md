@@ -59,7 +59,7 @@ One of the most requested features for PostHog, property group filters enable yo
 ### New: Staff user controls
 Self-hosted users can now manage staff users on their instance settings. Staff users are a special instance-level permission which have access to instance-wide settings - and you probably want to have multiple staff users enabled to ensure your instance can always be properly maintained.
 
-You can manage staff users either via the PostHog UI, or the API if you prefer - check out [the staff user docs](//docs/self-host/configure/instance-settings#staff-users) for more information.
+You can manage staff users either via the PostHog UI, or the API if you prefer - check out [the staff user docs](/docs/self-host/configure/instance-settings#staff-users) for more information.
 
 ### Other improvements & fixes
 Version 1.34.0 also adds hundreds of other fixes and improvements, including...
