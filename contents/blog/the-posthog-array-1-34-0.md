@@ -52,6 +52,8 @@ Previously, we generated random default names for insights based on animals. It 
 Now, we've added smart insight naming to automatically generate descriptive names for every insight you create. This makes it a _lot_ easier to find the insights you need - thought you can of course add custom animal names, if you want.
 
 ### New: Property group filtering
+![PostHog - property filters](../images/blog/array/1_34_0-property-filter.png)
+
 One of the most requested features for PostHog, property group filters enable you to mix and match your favourite property filters with ```OR```s and ```AND``` conditions. This makes it much simpler to create complex filters when building insights, though this is currently only available as a global filter for insights.
 
 ### New: Staff user controls
