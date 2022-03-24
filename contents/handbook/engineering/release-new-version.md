@@ -44,8 +44,7 @@ On the week before the release, on Friday, we institute a code freeze. We branch
   git add posthog/version.py
   git commit -m "Bump version [version]"
   ```
-- [ ] Deploy PostHog playground from the `release-[version]` branch on Heroku dashboard.
-- [ ] Deploy ClickHouse test environment from the `release-[version]-unstable` Docker image.
+- [ ] Deploy PostHog playground from the `release-[version]` branch.
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
 ### Launch phase
