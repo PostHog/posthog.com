@@ -66,7 +66,6 @@ Self-hosted users can now manage staff users on their instance settings. Staff u
 You can manage staff users either via the PostHog UI, or the API if you prefer - check out [the staff user docs](/docs/self-host/configure/instance-settings#staff-users) for more information.
 
 ### New: Sharding and replication support for ClickHouse
-
 Self-hosted users can now shard and replicate their data on ClickHouse to scale horizontally. This can help improve fault tolerance and improve query performance in certain situations.
 
 Check out the [horizontal scaling runbook](/docs/self-host/runbook/clickhouse/sharding-and-replication) for more information.
