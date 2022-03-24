@@ -314,6 +314,10 @@
                         {
                             "name": "How to run migrations on PostHog Cloud",
                             "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        },
+                        {
+                            "name": "Working with ClickHouse materialized columns",
+                            "url": "/handbook/engineering/databases/materialized-columns"
                         }
                     ]
                 },

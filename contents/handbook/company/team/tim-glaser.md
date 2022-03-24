@@ -16,7 +16,7 @@ After four years I thought it was time to go do something else and had lined up 
 
 In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-shaped ball and watch a lot of Bondi beach in order to perfect my Australian accent.
 
-## Areas of responsibility
+## Areas of responsibility
 
 - Build the engineering team
 - Make sure we move fast
