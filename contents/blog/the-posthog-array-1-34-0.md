@@ -22,22 +22,15 @@ PostHog 1.34.0 introduces...(Excerpt info here)
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [Highlight1](#new-experimentation)
-- [Highlight2](#new-dashboard-permissions)
-- [Highlight3](#new-altitiny-cloud-support)
-- [Highlight4](#new-instance-configuration-ui)
+- [Homepage](#new-homepage)
+- [Data Management](#new-data-management)
+- [Property Group Filtering](#new-property-group-filtering)
+- [Smart Insight Naming](#improvement-smart-insight-naming)
+- [Staff Users](#new-staff-users)
 
-### New: Highlight1
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+### New: Homepage
 
-We also use the section below to flag premium features.
-
-> 🎁 This is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
-
-<br />
-
-### New: Highlight2
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+PostHog now directs you to a default project homepage where you can pin your favorite dashboard to and easily access those insights!
 
 We also use the section below to flag premium features.
 
@@ -45,43 +38,62 @@ We also use the section below to flag premium features.
 
 <br />
 
-### Improvement: Highlight3
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+### New: Data Management
 
-We also use the section below to flag premium features.
+We also have a new data management system!
 
-> 🎁 This is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
+PostHog now offers a way to organize all of your PostHog data in-house with event definitions, definition tagging and many more features.
+
+![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
+
+Check out our blog post [here](https://posthog.com/blog/data-management-feature) or dive into the [docs](https://posthog.com/docs/user-guides/data-management)!
+
+> 🎁 Definition creation, tagging, and volume metrics are premium features that require a PostHog Scale or Enterprise license. [Learn more](/pricing).
+
+<br />
+
+### New: Property Group Filtering (or filters)
+
+A much requested feature is now here with property group filtering. You can mix and match your favorite property filters with ORs and ANDs now. This is currently only available in the global filters for insights.
 
 <br />
 
-### Improvement: Highlight4
-PostHog now offers a...simple explanation of a new feature, a link to the docs about it, and a screenshot. 
+### Improvement: Smart Insight Naming
 
-We also use the section below to flag premium features.
+Previously insights had default random animal generated names that weren't very descriptive, we've now added smart insight naming! 
 
-> 🎁 This is a premium feature and requires a PostHog Scale or Enterprise license. [Learn more](/pricing).
 
 <br />
+
+### New: Staff Users
+
+Self hosted users can now manage staff users on their instance settings!
+
 
 ### Other improvements & fixes
 This section needs updating with some one line fixes. 
 
-- Improved: Fix 1
-- Improved: Fix 2
-- Improved: Fix 3
-- Improved: Fix 4
-- New: Fix 5
+- **Improved**: Dashboard "add insight" flow
+- **Improved**: SSO login redirect
+- **New:** Experiments secondary metrics
+- **New**: PostHog storybook
+- **New**: History logging
 - Plus 290+ improvements & fixes!
 
 ### Deprecation & removal notices
 - Add any deprecations here, if present. Delete if not. 
 
+- Add any deprecations here, if present. 
+
 ## Give us your feedback
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
+
+## Contributions from the community
 Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or take a look at our Plugin bounties!
 
+### Community shoutouts
 This month we also want to say thank you to...Tag them here and link to their GitHub profiles. 
 
 ## Open roles at PostHog
