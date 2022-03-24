@@ -78,7 +78,6 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 - **New:** Experiments secondary metrics
 - **New**: Shorter insight links
 
-
 ### Deprecation and removal notices
 
 - Starting on PostHog 1.35.0 (next version) the way SAML works will change from being instance-based to being domain-based. This means that SAML configuration will no longer happen with environment variables but in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review [SSO docs](/sso) for more details.
