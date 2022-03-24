@@ -65,7 +65,7 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 - **Improved**: Dashboard "add insight" flow
 - **Improved**: SSO login redirect
 - **New:** Experiments secondary metrics
-- **New**: PostHog storybook
+- **New**: Shorter insight links
 - **New**: History logging
 
 ## Give us your feedback
