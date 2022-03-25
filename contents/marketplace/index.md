@@ -26,6 +26,14 @@ They help large organizations to deploy, manage and scale their PostHog instance
 **Services:** PostHog as a Managed Service / Deployment help
 
 <hr />
+
+<img src="/images/marketplace/birch.png" alt="birch" width="100" style={{float: 'right', marginTop: '1rem'}} />
+
+#### [**Birch**](../marketplace/birch)
+
+Deploy PostHog to your own cloud (AWS, GCP) and forget about the hastle of upgrades.
+
+<hr />
   
 <img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem'}} />
 
