@@ -514,7 +514,7 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
                                 className="article-content api-content-container api-documentation flex-grow"
                                 ref={mainEl}
                             >
-                                <h2>{name}</h2>
+                                <h2 className="!mt-0">{name}</h2>
                                 <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
                                     <p>
                                         For instructions on how to authenticate to use this endpoint, see{' '}
