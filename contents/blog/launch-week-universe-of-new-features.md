@@ -36,7 +36,7 @@ As the biggest dogfooder of our own product, we were beginning to see the conseq
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.
 3. Event-level context in insights and dashboards is difficult to share with external people and new team members.
 
-We set out to solve these pain points and the result is the new Data Management experience we're introducing today on PostHog Cloud and on Thursday for self-hosted.
+We set out to solve these pain points and the result is the new Data Management experience we're introducing today on PostHog Cloud and next week for self-hosted.
 
 **Read:** [Introducing Data Management for PostHog](/blog/data-management-feature)
 
