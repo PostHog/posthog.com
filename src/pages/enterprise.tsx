@@ -1,5 +1,6 @@
 import Layout from 'components/Layout'
 import { Structure } from './../components/Structure'
+import { CallToAction } from './../components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import CheckIcon from '../images/check.svg'
 
@@ -37,7 +38,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         <StaticImage
                             src="../../contents/images/cop-hog.png"
                             alt="'Roger that.'"
-                            className="absolute -right-24 -bottom-12 w-48 z-20"
+                            className="absolute -right-8 md:-right-24 -bottom-12 w-24 md:w-48 z-20"
                         />
 
                         <div
@@ -58,14 +59,25 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         </div>
                     </div>
 
-                    <h1 className="text-center mb-4">Extra security, compliance, and data management tools </h1>
+                    <h1 className="text-center mb-4 text-3xl md:text-4xl">
+                        Extra security, compliance, and data management tools{' '}
+                    </h1>
                     <p className="text-lg font-semibold text-center opacity-70">
-                        Plus proactive support for your PostHog instance, and for your teams using PostHog
+                        (Plus proactive support for your PostHog instance, and for your teams using PostHog)
                     </p>
+
+                    <div className="flex flex-col justify-center items-center gap-2">
+                        <CallToAction type="primary" width="56" to="/book-a-demo">
+                            Schedule a demo
+                        </CallToAction>
+                        <CallToAction type="outline" width="56" to="/signup/self-host/get-in-touch#contact">
+                            Contact sales
+                        </CallToAction>
+                    </div>
                 </section>
 
-                <div className="grid md:grid-cols-2 gap-8 mt-16">
-                    <div>
+                <div className="grid md:grid-cols-2 mt-16 px-8 md:px-0">
+                    <div className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b border-b first:!border-b first:border-t md:first:border-t-0">
                         <h3>Security</h3>
                         <p>
                             Configure PostHog to meet your security and data policies with granular controls over
@@ -89,7 +101,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b border-b first:!border-b first:border-t md:first:border-t-0">
                         <h3>Compliance</h3>
                         <p>
                             PostHog encrypts data and can be hosted on-premise, eliminating the extra steps involved in
@@ -114,7 +126,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b border-b first:!border-b first:border-t md:first:border-t-0">
                         <h3>Data management</h3>
                         <p>
                             We’ll help you configure your data and backups to control cost, while making sure you retain
@@ -138,7 +150,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b border-b first:!border-b first:border-t md:first:border-t-0">
                         <h3>Success</h3>
                         <p>
                             With direct support from PostHog engineers, our success team will make sure your team
@@ -163,7 +175,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b border-b first:!border-b first:border-t md:first:border-t-0">
                         <h3>Support</h3>
                         <p>
                             Proactive assistance from PostHog engineers makes sure your PostHog instance is reliable,
@@ -186,6 +198,15 @@ const EnterpriseLandingPage = (): JSX.Element => {
                             ))}
                         </ul>
                     </div>
+                </div>
+
+                <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4 mt-16">
+                    <CallToAction type="primary" width="56" to="/book-a-demo">
+                        Schedule a demo
+                    </CallToAction>
+                    <CallToAction type="outline" width="56" to="/signup/self-host/get-in-touch#contact">
+                        Contact sales
+                    </CallToAction>
                 </div>
             </Structure.Section>
         </Layout>
