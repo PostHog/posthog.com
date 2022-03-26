@@ -3,20 +3,20 @@
 @font-face {
     font-family: 'MatterVF';
     /* LOCAL DEVELOPMENT */
-    /*
     src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
         url('/fonts/MatterSQVF.woff') format('woff-variations'),
         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
-    */
 
     /* PRODUCTION */
+    /*
     src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
             format('woff2 supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
             format('woff supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations');
+    */
 
     font-style: normal;
     font-weight: 300 900;
@@ -26,14 +26,13 @@
 @font-face {
     font-family: 'MatterVF';
     /* LOCAL DEVELOPMENT */
-    /*
     src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
         url('/fonts/MatterSQItalicVF.woff') format('woff-variations'),
         url('/fonts/MatterSQItalicVF.woff2') format('woff2 supports variations'),
         url('/fonts/MatterSQItalicVF.woff2') format('woff2-variations');
-    */
 
     /* PRODUCTION */
+    /*
     src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
             format('woff2 supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
@@ -42,6 +41,7 @@
             format('woff supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
             format('woff-variations');
+    */
 
     font-style: italic;
     font-weight: 300 900;
@@ -470,7 +470,6 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
-    width: 100%;
 }
 fieldset {
     margin-left: 0;
@@ -603,8 +602,8 @@ th {
     -webkit-font-feature-settings: 'tnum';
     padding-left: 0.96667rem;
     padding-right: 0.96667rem;
-    padding-top: 0.725rem;
-    padding-bottom: calc(0.725rem - 1px);
+    padding-top: 0.5rem;
+    padding-bottom: calc(0.5rem - 1px);
 }
 th:first-child,
 td:first-child {
@@ -1104,17 +1103,8 @@ a.middle {
     border: none;
 }
 
-table th,
-table td {
-    border: 1px solid;
-    border-color: #e8e8e8;
-    padding-left: 10px !important;
-    max-width: 200px !important;
-}
-
 #mc_embed_signup {
     clear: left;
-    font: 14px Helvetica, Arial, sans-serif;
     width: 100%;
 }
 
