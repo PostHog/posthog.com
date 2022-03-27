@@ -38,7 +38,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         <StaticImage
                             src="../../contents/images/cop-hog.png"
                             alt="'Roger that.'"
-                            className="absolute -right-8 md:-right-24 -bottom-12 w-24 md:w-48 z-20"
+                            className="!absolute -right-8 md:-right-24 -bottom-12 w-24 md:w-48 z-20"
                         />
 
                         <div
