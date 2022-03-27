@@ -59,15 +59,6 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `POSTHOG_POSTGRES_PORT`| Port pointing to your PostgreSQL instance. | `5432` if PostHog is running in DEBUG or TEST mode.  Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_POSTGRES_SSL_MODE`| PostgreSQL SSL mode. [More info.](https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBQ-SSL-CERTIFICATES) | `None`
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
-| `SAML_ACS_URL`| Assertion Consumer Service URL from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
-| `SAML_ATTR_EMAIL`| Name of attribute that contains the email of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `email`
-| `SAML_ATTR_FIRST_NAME`| Name of attribute that contains the first name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `first_name`
-| `SAML_ATTR_LAST_NAME`| Name of attribute that contains the last name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `last_name`
-| `SAML_ATTR_PERMANENT_ID`| Name of attribute that contains the permanent ID of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `name_id`
-| `SAML_DISABLED`| Whether SAML should be completely disabled. If set at build time, this will also prevent SAML dependencies from being installed. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-| `SAML_ENFORCED`| Whether password-based login is disabled and users automatically redirected to SAML login. Requires SAML to be properly configured. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-| `SAML_ENTITY_ID`| Entity ID from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
-| `SAML_X509_CERT`| Public X509 certificate from your SAML IdP to validate SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
 | `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                      | _Empty_
 | `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                     | _Empty_
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for [GitLab authentication](/docs/user-guides/sso#gitlab). Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
