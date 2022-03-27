@@ -47,7 +47,7 @@ You can enable SSO enforcement through Authentication domains in your Organizati
 
 ## Third-party providers
 
-PostHog currently supports the SSO providers listed below. All providers are available and readily configured on PostHog Cloud. This section contains instructions on how to configure each provider in your self-hosted instance.
+PostHog currently supports the SSO providers listed below. All providers are available and readily configured on PostHog Cloud. This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based (see [SAML](#saml) below).
 
 Looking for a provider and it's in here? [Reach out to us](https://posthog.com/support), we might be able to help.
 
@@ -115,6 +115,8 @@ To set up Google SSO please follow these instructions:
 SAML (Security Assertion Markup Language) enables users to have a single set of credentials to access multiple systems. It also has the benefits of centralizing user management to aid maintenance. If your company has an Identity Provider (IdP) that uses SAML, you can integrate it with PostHog (Service Provider, SP) so your users can authenticate through your SAML portal instead of having an additional password for PostHog.
 
 PostHog supports multitenant SAML, which means you can have multiple SAML authentication servers within a single instance and even a single organization. The limitation is that you can only have one SAML provider per domain. So for instance, users with email address at `example.com` can log in with SAML provider A and users with email address at `anotherdomain.net` can use SAML provider B.
+
+> Please be sure to update PostHog to version 1.35.0 onwards. Before this version, SAML used to work instance-based with environment variables and this behavior is fully deprecated.
 
 ### Warnings
 
