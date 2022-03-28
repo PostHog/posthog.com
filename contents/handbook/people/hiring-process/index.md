@@ -203,6 +203,8 @@ The candidate will be working on a task that is similar to the day-to-day work s
 
 This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
+> If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate should also never lose out because they are not available to do a SuperDay right away.
+
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice.
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. 
