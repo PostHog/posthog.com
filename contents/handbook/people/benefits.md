@@ -22,7 +22,7 @@ In the UK, we use [Royal London](https://www.royallondon.com/) as our pension pr
 
 ### Private health insurance
 
-It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointsment. Currently, we  provide private health insurance in the US and UK. 
+It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointment. Currently, we  provide private health insurance in the US and UK. 
 
 In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). The plan includes medical, dental and vision insurance. 
 
@@ -40,7 +40,7 @@ Spill is 100% free and confidential - they do not share any personal information
 
 ### Unlimited time off
 
-Everyone in the team has [unlimited, permissionless time off](/handbook/people/time-off). This means you won't need to ask for permission before requesting time off - our people platform [CharlieHR](https://posthog.charliehr.com/) will autoapprove your request.  
+Everyone in the team has [unlimited, permissionless time off](/handbook/people/time-off). This means you won't need to ask for permission before requesting time off - our people platform [CharlieHR](https://posthog.charliehr.com/) will auto approve your request.  
 
 We also offer generous [parental leave](/handbook/people/time-off#parental-leave) for new parents. 
 
