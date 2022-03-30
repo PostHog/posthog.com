@@ -37,17 +37,17 @@ export default function Apps() {
             <div className="mt-8 md:mt-12">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                     {/* <Listing image={salesforce} /> */}
-                    <Listing name="Salesforce" image={salesforceImage} url="/apps/salesforce" />
-                    <Listing name="Hubspot" image={hubspotImage} url="/apps/hubspot" />
-                    <Listing name="Zendesk" image={zendeskImage} url="/apps/zendesk" />
-                    <Listing name="Sentry" image={sentryImage} url="/apps/sentry" />
-                    <Listing name="Zapier" image={zapierImage} url="/apps/zapier" />
-                    <Listing name="Snowflake" image={snowflakeImage} url="/apps/snowflake" />
-                    <Listing name="Pagerduty" image={pagerdutyImage} url="/apps/pagerduty" />
-                    <Listing name="Redshift" image={redshiftImage} url="/apps/redshift" />
-                    <Listing name="Amazon S3" image={s3Image} url="/apps/s3" />
-                    <Listing name="BigQuery" image={bigqueryImage} url="/apps/bigquery" />
-                    <Listing name="GeoIP" image={geoipImage} url="/apps/geoip" />
+                    <Listing name="Salesforce Connector" image={salesforceImage} url="/apps/salesforce-connector" />
+                    <Listing name="Hubspot Connector" image={hubspotImage} url="/apps/hubspot-connector" />
+                    <Listing name="Zendesk Connector" image={zendeskImage} url="/apps/zendesk-connector" />
+                    <Listing name="Sentry Connector" image={sentryImage} url="/apps/sentry-connector" />
+                    <Listing name="Zapier Connector" image={zapierImage} url="/apps/zapier-connector" />
+                    <Listing name="Snowflake Export" image={snowflakeImage} url="/apps/snowflake-export" />
+                    <Listing name="PagerDuty Connector" image={pagerdutyImage} url="/apps/pagerduty-connector" />
+                    <Listing name="Redshift Import (Beta)" image={redshiftImage} url="/apps/redshift-import" />
+                    <Listing name="S3 Export" image={s3Image} url="/apps/s3-export" />
+                    <Listing name="BigQuery Export" image={bigqueryImage} url="/apps/bigquery-export" />
+                    <Listing name="GeoIP Enrichment" image={geoipImage} url="/apps/geoip-enrichment" />
                     <li className="border-t border-l border-dashed border-gray-accent-light">
                         <a
                             href="/docs/plugins/build"
