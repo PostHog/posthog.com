@@ -16,7 +16,7 @@ import zendeskImage from '../../images/apps/logos/zendesk.svg'
 const Listing = ({ name, image, url }) => {
     return (
         <li className="border-t border-l border-dashed border-gray-accent-light">
-            <a href={url} className="flex flex-col items-center px-2 py-6 hover:bg-gray-accent-light">
+            <a href={url} className="flex flex-col items-center text-center px-2 py-6 hover:bg-gray-accent-light">
                 <img className="icon w-8 h-8 mb-2" src={image} />
                 <span className="text-primary">{name}</span>
             </a>
