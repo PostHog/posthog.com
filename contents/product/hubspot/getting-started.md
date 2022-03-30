@@ -1,6 +1,8 @@
 ---
 title: Getting started with Hubspot
 showTitle: true
+topics:
+    - hubspot
 ---
 
 Plugins and integrations are currently only available for self-hosted deployments of PostHog and are not available for users on PostHog Cloud.

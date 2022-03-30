@@ -1251,7 +1251,17 @@
         },
         {
             "name": "Hubspot connector",
-            "url": "/product/hubspot"
+            "url": "/product/hubspot",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/hubspot/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/hubspot/docs"
+                }
+            ]
         }
     ]
 }
