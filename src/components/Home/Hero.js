@@ -52,21 +52,21 @@ export default function Hero() {
                     >
                         PostHog is the <span className="text-blue">open source</span> platform for your product data,{' '}
                         <br className="hidden md:block" />
-                        complete with a{' '}
+                        complete with{' '}
                         <a
                             href="/docs/integrate/ingest-live-data"
                             className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
                         >
-                            data pipeline
+                            event pipelines
                         </a>
                         ,{' '}
                         <a
                             href="/docs/self-host/runbook/clickhouse"
                             className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
                         >
-                            data warehouse
+                            a data warehouse
                         </a>
-                        , and{' '}
+                        , and an{' '}
                         <a
                             href="/docs/api"
                             className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
