@@ -6,7 +6,7 @@ featuredImage:
 featuredTutorial: true
 date: 2022-03-31
 author: ['joe-martin']
-topics: ['zapier', ‘discord']
+topics: ['zapier', 'discord']
 ---
 
 A common use case for wanting to integrate PostHog and Discord is wanting to trigger channel notifications when specific actions are detected within PostHog, so that relevant teams are alerted. 
