@@ -10,6 +10,7 @@ import CTA from './CTA'
 import Customers from './Customers'
 import Features from './Features'
 import Hero from './Hero'
+import Apps from './Apps'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
 import Quote from './Quote'
@@ -37,6 +38,7 @@ const Home = () => {
                         </>
                     }
                 />
+                <Apps />
                 <Pipelines />
                 <Timeline />
                 <Quote />
