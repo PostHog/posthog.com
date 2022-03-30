@@ -7,9 +7,9 @@ import Icon from './Icon'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
-        <div className="text-center my-4">
+        <div className="text-center mt-0 mb-4">
             <ul
-                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-5 justify-start gap-y-2 md:gap-y-4 md:gap-x-4 items-start ${className}`}
+                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-5 justify-start gap-y-0 md:gap-y-4 md:gap-x-1 items-start ${className}`}
             >
                 <Feature icon="analytics" title="Product analytics" url="/product/#product-analytics" />
                 <Feature icon="session-recording" title="Session recording" url="/product/session-recording" />
@@ -26,13 +26,13 @@ export const FeatureStrip = ({ className = '' }) => {
 
 const Feature = ({ title, icon, url }) => {
     return (
-        <li className="w-20">
+        <li className="w-24">
             <a
                 href={url}
-                className="flex flex-col px-2 py-1 space-y-2 font-semibold items-start items-center justify-center text-black hover:text-black"
+                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-start items-center justify-center text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
-                <span className="text-[14px] lg:text-[15px]  leading-tight">{title}</span>
+                <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
             </a>
         </li>
     )
@@ -85,7 +85,7 @@ export default function Hero() {
                         </CallToAction>
                     </div>
 
-                    <h3 className="text-center text-base opacity-60 mt-16 mb-6 p-0">Built-in apps:</h3>
+                    <h3 className="text-center text-base opacity-60 mt-16 mb-2 p-0">Built-in apps:</h3>
 
                     <FeatureStrip />
                 </div>
