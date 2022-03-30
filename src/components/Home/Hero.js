@@ -7,7 +7,7 @@ import Icon from './Icon'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
-        <div className="text-center my-4 md:my-10">
+        <div className="text-center my-4">
             <ul
                 className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-2 md:grid-cols-4 justify-start gap-y-2 md:gap-y-4 md:gap-x-6 xl:gap-x-8 items-start ${className}`}
             >
@@ -20,6 +20,9 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="api" title="API" url="/docs/api" />
                 <Feature icon="data-warehouse" title="Data warehouse" url="/docs/self-host/runbook/clickhouse" />
             </ul>
+            <p className="mt-4 text-xs">
+                (Plus endless possibilities with the <a href="/apps">PostHog App Store</a>)
+            </p>
         </div>
     )
 }
@@ -41,17 +44,30 @@ const Feature = ({ title, icon, url }) => {
 export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center">
-            <div className="relative w-full z-10">
+            <div className="relative w-full z-10 pb-16">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        The product analytics suite
-                        <br /> <span className="text-red">you can host yourself</span>
+                        The platform for
+                        <br /> <span className="text-red">building great products</span>
                     </h1>
-                    <h2 className={heading('sm', 'primary', 'my-6', 'max-w-xl', 'mx-auto')}>
-                        With our open source platform, customer data never has to leave your infrastructure
+                    <h2
+                        className={heading('subtitle', 'primary', 'my-6 max-w-2xl mx-auto text-primary text-gray-dark')}
+                    >
+                        PostHog is the only <span className="text-blue">open source</span> platform for{' '}
+                        <a href="#" className="text-[#333] border-b border-dashed border-gray-primary font-semibold ">
+                            data ingestion
+                        </a>
+                        ,{' '}
+                        <a href="#" className="text-[#333] border-b border-dashed border-gray-primary font-semibold ">
+                            product analytics
+                        </a>
+                        ,{' '}
+                        <a href="#" className="text-[#333] border-b border-dashed border-gray-primary font-semibold ">
+                            experimentation
+                        </a>
+                        . And when you host PostHog on-prem,{' '}
+                        <span className="text-blue">customer data never has to leave your infrastructure</span>.
                     </h2>
-
-                    <FeatureStrip />
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
                         <CallToAction type="primary" width="56" to="/signup">
@@ -61,14 +77,17 @@ export default function Hero() {
                             Schedule a demo
                         </CallToAction>
                     </div>
+
+                    <hr className="hidden md:block max-w-xl border-0 border-t border-dashed border-gray-primary mx-auto mt-12 opacity-50" />
+
+                    <h3 className="text-center text-base opacity-60 my-8 p-0">Built-in apps &amp; features</h3>
+
+                    <FeatureStrip />
                 </div>
             </div>
-            <div className="w-full mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
-                <p className="px-4 font-semibold text-center z-10 relative mb-0 text-sm md:text-base">
-                    Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
-                </p>
+            <div className="w-full mt-8 md:mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
                 <div className="max-w-screen-2xl mx-auto w-full relative">
-                    <span className="absolute bottom-1 md:-bottom-8 xl:-bottom-16 right-0 overflow-x-hidden 2xl:overflow-x-visible">
+                    <span className="absolute bottom-0 xl:-bottom-16 right-[25%] md:right-0 overflow-x-hidden 2xl:overflow-x-visible">
                         <StaticImage
                             objectPosition="bottom"
                             loading="eager"
