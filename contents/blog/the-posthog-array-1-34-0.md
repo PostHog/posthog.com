@@ -86,7 +86,9 @@ Version 1.34.0 also adds hundreds of other fixes and improvements, including...
 We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). 
+Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack).
+
+We would also specifically like to thank PostHog team members [@hazzadous](https://github.com/hazzadous), [@guidoiaquinti](https://github.com/guidoiaquinti) and [@liyiy](https://github.com/liyiy) for their efforts on this particularly stubborn release. 
 
 ### Community shoutouts
 This month we also want to say thank you to the following people...
