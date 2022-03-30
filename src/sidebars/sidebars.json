@@ -1251,7 +1251,7 @@
         },
         {
             "name": "Hubspot connector",
-            "url": "/product/hubspot",
+            "url": "/product/hubspot-connector",
             "children": [
                 {
                     "name": "Getting started",
@@ -1260,6 +1260,62 @@
                 {
                     "name": "How it works",
                     "url": "/product/hubspot/docs"
+                }
+            ]
+        },
+        {
+            "name": "Salesforce connector",
+            "url": "/product/salesforce-connector",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/salesforce-connector/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/salesforce-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "GeoIP User Enricher",
+            "url": "/product/geoip-user-enricher",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/geoip-user-enricher/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/geoip-user-enricher/docs"
+                }
+            ]
+        },
+        {
+            "name": "BigQuery Export",
+            "url": "/product/bigquery-export",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/bigquery-export/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/bigquery-export/docs"
+                }
+            ]
+        },
+        {
+            "name": "S3 Export",
+            "url": "/product/s3-export",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/s3-export/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/s3-export/docs"
                 }
             ]
         }

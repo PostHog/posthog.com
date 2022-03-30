@@ -5,8 +5,9 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/get-started-aarrr.png
 featuredTutorial: false
 author: ["james-hawkins"]
-topics: ['hubspot']
-date: "2021-07-14"
+topics:
+    - hubspot
+date: 2020-09-29
 ---
 
 Some other words exist.
