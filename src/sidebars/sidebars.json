@@ -1248,6 +1248,10 @@
         {
             "name": "Collaboration",
             "url": "/product/collaboration"
+        },
+        {
+            "name": "Hubspot connector",
+            "url": "/product/hubspot"
         }
     ]
 }
