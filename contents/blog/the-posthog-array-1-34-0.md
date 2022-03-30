@@ -41,7 +41,7 @@ We've added default homepages for each project in PostHog, to help you explore n
 Best of all, if your team uses [Session Recording](/product/session-recording), we'll also add your most recent recordings to the homepage too. We've found users who watch these recordings make 3x more useful discoveries, on average!
 
 ### New: Data Management
-![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
+![PostHog - view definition context](../images/blog/data-management-feature/data_management_tab.png)
 
 We've also added a new Data Management system! This new tool  helps you organize your PostHog data in-house through event definitions, definition tagging and many more features. This is especially useful in large teams, where it can sometimes be difficult to know if your insights are using the right events. 
 
