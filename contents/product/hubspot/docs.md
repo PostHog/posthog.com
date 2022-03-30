@@ -1,6 +1,8 @@
 ---
 title: How the Hubspot app works
 showTitle: true
+topics:
+    - hubspot
 ---
 
 ## What is Hubspot?
