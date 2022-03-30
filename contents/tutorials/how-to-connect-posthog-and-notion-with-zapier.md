@@ -6,7 +6,7 @@ featuredImage:
 featuredTutorial: true
 date: 2022-03-31
 author: ['joe-martin']
-topics: ['zapier', ‘notion']
+topics: ['zapier', 'notion']
 ---
 
 As large organizations get started with PostHog, the number of custom actions you’re tracking can start to grow very quickly. This can become an organizational challenge for teams where multiple people are creating actions, often with different naming conventions. 
