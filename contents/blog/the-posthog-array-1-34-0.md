@@ -1,5 +1,5 @@
 ---
-date: 2022-03-24
+date: 2022-03-30
 title: Array 1.34.0
 rootPage: /blog
 sidebar: Blog
@@ -31,6 +31,7 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 - [Property group filtering](#new-property-group-filtering)
 - [Smart insight naming](#improvement-smart-insight-naming)
 - [Staff user controls](#new-staff-users)
+- [Sharding and replication support for ClickHouse](#new-sharding-and-replication-support-for-clickhouse)
 
 ### New: Project homepages
 ![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
