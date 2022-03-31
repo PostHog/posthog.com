@@ -1318,6 +1318,104 @@
                     "url": "/product/s3-export/docs"
                 }
             ]
+        },
+        {
+            "name": "Snowflake Export",
+            "url": "/product/snowflake-export",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/snowflake-export/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/snowflake-export/docs"
+                }
+            ]
+        },
+        {
+            "name": "Redshift Export",
+            "url": "/product/redshift-export",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/redshift-export/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/redshift-export/docs"
+                }
+            ]
+        },
+        {
+            "name": "PagerDuty Connector",
+            "url": "/product/pagerduty-connector",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/pagerduty-connector/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/pagerduty-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Ingestion Alert",
+            "url": "/product/ingestion-alert",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/ingestion-alert/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/ingestion-alert/docs"
+                }
+            ]
+        },
+        {
+            "name": "Zendesk Connector",
+            "url": "/product/zendesk-connector",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/zendesk-connector/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/zendesk-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Zapier Connector",
+            "url": "/product/zapier-connector",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/zapier-connector/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/zapier-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Sentry Connector",
+            "url": "/product/sentry-connector",
+            "children": [
+                {
+                    "name": "Getting started",
+                    "url": "/product/sentry-connector/getting-started"
+                },
+                {
+                    "name": "How it works",
+                    "url": "/product/sentry-connector/docs"
+                }
+            ]
         }
     ]
 }
