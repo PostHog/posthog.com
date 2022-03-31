@@ -1274,16 +1274,16 @@
             ]
         },
         {
-            "name": "GeoIP User Enricher",
-            "url": "/product/geoip-user-enricher",
+            "name": "GeoIP Enrichment",
+            "url": "/product/geoip-enrichment",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/geoip-user-enricher/getting-started"
+                    "url": "/product/geoip-enrichment/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/geoip-user-enricher/docs"
+                    "url": "/product/geoip-enrichment/docs"
                 }
             ]
         },
