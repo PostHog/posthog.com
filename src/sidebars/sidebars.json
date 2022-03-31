@@ -1426,6 +1426,26 @@
                     "url": "/product/bitbucket-release-tracker/docs"
                 }
             ]
+        },
+        {
+            "name": "Twitter Followers",
+            "url": "/product/twitter-followers",
+            "children": [
+                {
+                    "name": "How it works",
+                    "url": "/product/twitter-followers/docs"
+                }
+            ]
+        },
+        {
+            "name": "Replicator",
+            "url": "/product/replicator",
+            "children": [
+                {
+                    "name": "How it works",
+                    "url": "/product/replicator/docs"
+                }
+            ]
         }
     ]
 }
