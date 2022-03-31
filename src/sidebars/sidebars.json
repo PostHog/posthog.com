@@ -1268,10 +1268,6 @@
             "url": "/product/salesforce-connector",
             "children": [
                 {
-                    "name": "Getting started",
-                    "url": "/product/salesforce-connector/getting-started"
-                },
-                {
                     "name": "How it works",
                     "url": "/product/salesforce-connector/docs"
                 }
