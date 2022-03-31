@@ -1,5 +1,4 @@
 import React from 'react'
-import AnimateIntoView, { item } from '../AnimateIntoView'
 
 import bigqueryImage from './logos/bigquery.svg'
 import geoipImage from './logos/geoip.png'
@@ -15,14 +14,12 @@ import zendeskImage from './logos/zendesk.svg'
 
 const Listing = ({ name, image, url }) => {
     return (
-        <AnimateIntoView>
-            <li className="border-t border-l border-dashed border-gray-accent-light">
-                <a href={url} className="flex flex-col items-center text-center px-2 py-6 hover:bg-gray-accent-light">
-                    <img className="icon w-8 h-8 mb-2" src={image} />
-                    <span className="text-primary">{name}</span>
-                </a>
-            </li>
-        </AnimateIntoView>
+        <li className="border-t border-l border-dashed border-gray-accent-light">
+            <a href={url} className="flex flex-col items-center text-center px-2 py-6 hover:bg-gray-accent-light">
+                <img className="icon w-8 h-8 mb-2" src={image} />
+                <span className="text-primary">{name}</span>
+            </a>
+        </li>
     )
 }
 
