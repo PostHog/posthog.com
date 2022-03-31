@@ -1296,10 +1296,6 @@
             "url": "/product/bigquery-export",
             "children": [
                 {
-                    "name": "Getting started",
-                    "url": "/product/bigquery-export/getting-started"
-                },
-                {
                     "name": "How it works",
                     "url": "/product/bigquery-export/docs"
                 }
@@ -1309,10 +1305,6 @@
             "name": "S3 Export",
             "url": "/product/s3-export",
             "children": [
-                {
-                    "name": "Getting started",
-                    "url": "/product/s3-export/getting-started"
-                },
                 {
                     "name": "How it works",
                     "url": "/product/s3-export/docs"
