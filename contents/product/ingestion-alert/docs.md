@@ -5,21 +5,25 @@ topics:
     - ingestion alert
 ---
 
-## What is Salesforce?
+## What is this plugin used for?
+This plugin triggers a webhook when no events have been ingested for a specified period of time. It can be used to alert you when ingestion for your project / instance is not working correctly.
 
-Salesforce is the world's most popular Customer Relationship Management (CRM) platform. It's used by sales, customer support and marketing teams.
+## How can I install the Ingestion Alert plugin?
 
-## How does Salesforce integrate with PostHog?
+1. Open PostHog.
+2. Open the Plugins page from the sidebar.
+3. Head to the Advanced tab.
+4. "Install from GitHub, GitLab or npm" using this repository's URL.
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+## Is there anything else I need to be aware of?
+If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated - increase the threshold if you wish reduce the noise, you can use the [heartbeat plugin](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
 
-Currently, this integration supports sending the following data to Hubspot:
+If an alert has already been triggered and ingestion has not recovered for an extended period, you will not receive another reminder that it is down.
 
-* Email addresses
-* First names
-* Last names
-* Phone numbers
-* Company names
-* Company website URLs
+This is helpful to monitor if there are any ingestion issues within your posthog instance and within your setup (e.g. using the wrong project key).
 
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+If the plugin server itself is down, this plugin will not be able to alert you that ingestion has stopped.
+
+## How can I find out more?
+
+Easy. [Join our Slack community.](/slack)
