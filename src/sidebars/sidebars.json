@@ -1396,6 +1396,36 @@
                     "url": "/product/sentry-connector/docs"
                 }
             ]
+        },
+        {
+            "name": "GitHub Release Tracker",
+            "url": "/product/github-release-tracker",
+            "children": [
+                {
+                    "name": "How it works",
+                    "url": "/product/github-release-tracker/docs"
+                }
+            ]
+        },
+        {
+            "name": "GitLab Release Tracker",
+            "url": "/product/gitlab-release-tracker",
+            "children": [
+                {
+                    "name": "How it works",
+                    "url": "/product/gitlab-release-tracker/docs"
+                }
+            ]
+        },
+        {
+            "name": "BitBucket Release Tracker",
+            "url": "/product/bitbucket-release-tracker",
+            "children": [
+                {
+                    "name": "How it works",
+                    "url": "/product/bitbucket-release-tracker/docs"
+                }
+            ]
         }
     ]
 }
