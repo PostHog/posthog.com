@@ -5,21 +5,76 @@ topics:
     - sentry connector
 ---
 
-## What is Salesforce?
+## What does this Sentry plugin do?
 
-Salesforce is the world's most popular Customer Relationship Management (CRM) platform. It's used by sales, customer support and marketing teams.
+Our Sentry integration is a two-way integration which works on Javascript & Python. 
 
-## How does Salesforce integrate with PostHog?
+Once installed, it will:
+- Add a direct link in Sentry to the profile of the person affected in PostHog.
+- Send an `$exception` event to PostHog with a direct link to Sentry.
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
 
-Currently, this integration supports sending the following data to Hubspot:
+## How do I install with Javascript?
 
-* Email addresses
-* First names
-* Last names
-* Phone numbers
-* Company names
-* Company website URLs
+Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
 
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+- `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
+- `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+
+```js
+import posthog from 'posthog-js'
+import * as Sentry from '@sentry/browser'
+
+posthog.init('<ph_project_api_key>')
+
+Sentry.init({
+    dsn: '<your Sentry DSN>',
+    integrations: [new posthog.SentryIntegration(posthog, 'your organization', project-id)],
+})
+```
+## How do I install the Sentry plugin with Python?
+
+```bash
+pip install posthog
+```
+
+In your app, import the `posthog` library and set your api key and host **before** making any calls.
+
+```python
+import posthog
+
+# Substitutes posthog.api_key which still exists but has been deprecated
+posthog.project_api_key = '<ph_project_api_key>'
+
+# Only necessary if you want to use feature flags
+posthog.personal_api_key = '<ph_personal_api_key>'
+
+# You can remove this line if you're using app.posthog.com
+posthog.host = '<ph_instance_address>'
+```
+
+You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
+
+> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
+
+You can find your keys in the 'Project Settings' page in PostHog.
+
+To debug, you can toggle debug mode on:
+
+```python
+posthog.debug = True
+```
+
+And to make sure no calls happen during your tests, you can disable them, like so:
+
+```python
+if settings.TEST:
+    posthog.disabled = True
+```
+
+## How do I use the Sentry plugin?
+
+Once installed you'll now have `$exception` events in PostHog, which have a "Sentry URL" link to take you to the exception:
+
+From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.

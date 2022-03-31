@@ -5,21 +5,28 @@ topics:
     - zendesk connector
 ---
 
-## What is Salesforce?
+## What does this plugin do?
+The Zendesk plugin can import new and historic ticket events to PostHog. However, only the Date Type User Field is supported.
 
-Salesforce is the world's most popular Customer Relationship Management (CRM) platform. It's used by sales, customer support and marketing teams.
+## Are there any limitations?
+The ZenDesk API have a limit of 400hits/min. If you have higher ingestion than that, please contact Zendesk.
 
-## How does Salesforce integrate with PostHog?
+## How do I install the Zendesk plugin?
+Make sure to use your Zendesk Admin Account to perform the below activities.
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+- Head Over to Admin Section -> Settings -> Account.
+- In the Branding section, scroll down to Subdomain and find your subdomain there. 
+- Head to the Admin Section -> Channels -> API.
+- In Settings, follow the below steps:
+  + Turn On Token Access.
+  + Click on Add API Token.
+  + Give it some name like PostHog.
+  + Copy the Token(You won't be able to see it later).
+  + Save the Token.
 
-Currently, this integration supports sending the following data to Hubspot:
+Next, Head to the Admin section -> Manage -> User Fields. Click Add Fields and follow the steps below.
 
-* Email addresses
-* First names
-* Last names
-* Phone numbers
-* Company names
-* Company website URLs
-
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+  + Give Name
+  + Select Type `Date`.
+  + Add field key, (you will be required to share this key in PostHog while setting up)
+  + Click Save.
