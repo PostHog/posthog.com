@@ -22,7 +22,7 @@ export default function Apps() {
                 <span className="text-blue">PostHog App Store</span>
             </h2>
             <p className="my-6 mx-auto text-center text-base md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                40+ apps available
+                50+ apps available
             </p>
             <div className="mt-8 md:mt-12">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
@@ -39,7 +39,7 @@ export default function Apps() {
 
                 <footer className="text-center">
                     <CallToAction to="/apps" type="outline" className="mt-8">
-                        Browse 40+ apps
+                        Browse 50+ apps
                     </CallToAction>
                 </footer>
             </div>
