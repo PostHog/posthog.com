@@ -1,25 +1,29 @@
 ---
-title: How the Redshift export app works
+title: Redshift Export PostHog App - Docs
 showTitle: true
 topics:
     - redshift export
 ---
 
-## What is Salesforce?
+Send events to AWS Redshift on ingestion.
 
-Salesforce is the world's most popular Customer Relationship Management (CRM) platform. It's used by sales, customer support and marketing teams.
+## Instructions 
 
-## How does Salesforce integrate with PostHog?
+1. [Create a Redshift Cluster](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-launch-cluster.html)
+2. Make sure PostHog can access your cluster 
+ 
+This might require a few things:
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+- [Allowing public access to the cluster](https://aws.amazon.com/premiumsupport/knowledge-center/redshift-cluster-private-public/)
+- [Ensuring your VPC security group allows traffic to and from the Redshift cluster](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) - If this is not possible in your case, you should consider using our [S3 plugin](https://posthog.com/plugins/s3-export) and then setting up your own system for getting data into your Redshift cluster
 
-Currently, this integration supports sending the following data to Hubspot:
+3. Create a user with table creation priviledges
 
-* Email addresses
-* First names
-* Last names
-* Phone numbers
-* Company names
-* Company website URLs
+We need to create a new table to store events and execute `INSERT` queries. You can and should block us from doing anything else on any other tables. Giving us table creation permissions should be enough to ensure this:
 
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+```sql
+CREATE USER posthog WITH PASSWORD '123456yZ';
+GRANT CREATE ON DATABASE your_database TO posthog;
+```
+
+4. Add the connection details at the plugin configuration step in PostHog

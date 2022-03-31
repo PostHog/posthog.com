@@ -1316,10 +1316,6 @@
             "url": "/product/snowflake-export",
             "children": [
                 {
-                    "name": "Getting started",
-                    "url": "/product/snowflake-export/getting-started"
-                },
-                {
                     "name": "How it works",
                     "url": "/product/snowflake-export/docs"
                 }
@@ -1329,10 +1325,6 @@
             "name": "Redshift Export",
             "url": "/product/redshift-export",
             "children": [
-                {
-                    "name": "Getting started",
-                    "url": "/product/redshift-export/getting-started"
-                },
                 {
                     "name": "How it works",
                     "url": "/product/redshift-export/docs"
