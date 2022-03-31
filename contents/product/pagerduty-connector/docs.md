@@ -5,21 +5,30 @@ topics:
     - pagerduty connector
 ---
 
-## What is Salesforce?
+## What does the PagerDuty plugin do?
 
-Salesforce is the world's most popular Customer Relationship Management (CRM) platform. It's used by sales, customer support and marketing teams.
+This plugin alerts PagerDuty when a PostHog insights/trends graph goes below or above a threshold.
 
-## How does Salesforce integrate with PostHog?
+Example use cases:
+- Alert when there is no $pageviews captured on my site the past hour,
+- Alert when the rate of $billing_error events crosses a threshold.
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+## How do I configure the PagerDuty plugin?
 
-Currently, this integration supports sending the following data to Hubspot:
+- Get the trends URL.
+- Go to Insights
+- Construct the Trends query you want to alert on
+- Copy the URL
+- Choose threshold and operator (less than or equal, greater than or equal)
+- Enter PagerDuty service integration key (for Events API v2)
 
-* Email addresses
-* First names
-* Last names
-* Phone numbers
-* Company names
-* Company website URLs
+## Are there any limitations?
 
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+This PagerDuty plugin only works when reading from single-line trend graphs.
+
+It also requires PostHog 1.26.0 or above, or PostHog Cloud.
+
+## How can I find out more?
+
+Easy. [Join our Slack community.](/slack)
+
