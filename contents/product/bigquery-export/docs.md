@@ -5,10 +5,6 @@ topics:
     - bigquery export
 ---
 
-# Google BigQuery Plugin
-
-Send events to a BigQuery database on ingestion.
-
 ## Installation
 
 1. Visit 'Plugins' in PostHog
@@ -40,11 +36,11 @@ Here's how to set these up so that the PostHog plugin has access only to the tab
 
 4. Follow the instructions [on granting access to a dataset in BigQuery](https://cloud.google.com/bigquery/docs/dataset-access-controls#granting_access_to_a_dataset) to ensure your new service account has been granted either the role you created or the "BigQuery Data Owner" permission. 
 
-   <img width="1417" alt="SQL_workspace_–_BigQuery_–_Data_Warehouse_Exp_–_Google_Cloud_Platform" src="https://user-images.githubusercontent.com/1108173/130323561-444cbbf6-a994-455e-97b6-8db6df69e274.png">
+![SQL_workspace_–_BigQuery_–_Data_Warehouse_Exp_–_Google_Cloud_Platform](https://user-images.githubusercontent.com/1108173/130323561-444cbbf6-a994-455e-97b6-8db6df69e274.png)
 
-   Use the Share Dataset button to share your dataset with your new service account and either the `BigQuery DataOwner` role, or your custom role created above. In the below, we've used a custom role `PostHog Ingest`.
+Use the Share Dataset button to share your dataset with your new service account and either the `BigQuery DataOwner` role, or your custom role created above. In the below, we've used a custom role `PostHog Ingest`.
 
-   <img width="480" alt="SQL_workspace_–_BigQuery_–_Data_Warehouse_Exp_–_Google_Cloud_Platform" src="https://user-images.githubusercontent.com/1108173/130323602-50f13200-6fde-4ee9-b507-1bce75fc75b2.png">
+![SQL_workspace_–_BigQuery_–_Data_Warehouse_Exp_–_Google_Cloud_Platform](https://user-images.githubusercontent.com/1108173/130323602-50f13200-6fde-4ee9-b507-1bce75fc75b2.png)
 
 That's it! Once you've done the steps above, your data should start flowing from PostHog to BigQuery.
 
