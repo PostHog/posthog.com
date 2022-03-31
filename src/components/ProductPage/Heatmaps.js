@@ -6,7 +6,7 @@ import Section from './Section'
 
 export default function Heatmaps() {
     return (
-        <Section id="heatmaps">
+        <Section id="heatmaps" style={{ marginBottom: '3rem' }}>
             <div className="md:w-2/5">
                 <h3>Heatmaps</h3>
                 <p>

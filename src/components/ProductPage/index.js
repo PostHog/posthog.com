@@ -17,11 +17,15 @@ function ProductPage() {
             <SEO title="Product • PostHog" image="/images/product/product.png" />
             <FeatureSlider />
             <Hero />
+            <h2 className="text-center pt-8">Built-in apps</h2>
             <Navigation />
             <ProductAnalytics />
             <SessionRecording />
             <FeatureFlags />
             <Heatmaps />
+            <p className="text-[17px] text-center px-5">
+                Extend functionality further with more apps in the <a href="/apps">PostHog App Store</a>.
+            </p>
             <Platform />
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />
