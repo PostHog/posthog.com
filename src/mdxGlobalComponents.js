@@ -7,7 +7,9 @@ import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { Apps } from './components/Apps'
+import { AppsByPostHog } from './components/AppsByPostHog'
 import { AppsList } from './components/AppsList'
+import { AppsListLegacyPlugin } from './components/AppsListLegacyPlugin'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
@@ -117,7 +119,9 @@ export const shortcodes = {
     AnimateIntoView,
     AnimatedBurger,
     Apps,
+    AppsByPostHog,
     AppsList,
+    AppsListLegacyPlugin,
     ArrayCTA,
     BasicHedgehogImage,
     BlockQuote,
