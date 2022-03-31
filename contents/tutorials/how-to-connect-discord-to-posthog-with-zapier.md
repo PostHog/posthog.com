@@ -2,7 +2,7 @@
 title: How to trigger Discord notifications when an action is detected in PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: 
+featuredImage: ../images/tutorials/banners/discord-tutorial-banner.png
 featuredTutorial: true
 date: 2022-03-31
 author: ['joe-martin']
