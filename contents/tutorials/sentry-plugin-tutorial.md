@@ -13,7 +13,7 @@ PostHog offers a variety of tools which are useful for monitoring and debugging 
 
 Sentry is an excellent error-monitoring tool with specialist tools for investigating issues such as slow API calls or database queries, yet lacks the tools to analyse these issues in terms of company metrics. 
 
-In this tutorial we’ll demonstrate how connecting PostHog and Sentry enables you to correlate errors in Sentry with other product metrics, and to debug issues more easily. 
+In this tutorial, we’ll demonstrate how connecting PostHog and Sentry enables you to correlate errors in Sentry with other product metrics, and to debug issues more easily. 
 
 ## Step 1: Connect PostHog with Sentry
 
