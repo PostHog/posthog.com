@@ -11,7 +11,7 @@ const features = [
         description: `Analyze users across a series of actions. See how many people start or finish a sequence — and where they drop off.`,
         cta: {
             title: 'Learn more about Funnels',
-            url: '/product/funnels',
+            url: '/apps/funnels',
         },
     },
     {
@@ -19,7 +19,7 @@ const features = [
         description: `Answer any ad-hoc product usage question. Instantly.`,
         cta: {
             title: 'Learn more about Trends',
-            url: '/product/trends',
+            url: '/apps/trends',
         },
     },
     {
@@ -27,7 +27,7 @@ const features = [
         description: `Explore popular ways users complete a series of steps - like navigating your site or progressing through a funnel.`,
         cta: {
             title: 'Learn more about user paths',
-            url: '/product/user-paths',
+            url: '/apps/user-paths',
         },
     },
     {
@@ -35,7 +35,7 @@ const features = [
         description: `Quantitative analysis features automatically suggest which events or user properties lead to success or failure using transparent, testable, statistical models.`,
         cta: {
             title: 'Learn more about diagnosing causes',
-            url: '/product/quantitative-analysis',
+            url: '/apps/quantitative-analysis',
         },
     },
     {
@@ -43,7 +43,7 @@ const features = [
         description: `Test changes in production with a suite that makes it easy to get the results you want.`,
         cta: {
             title: 'Learn more about experimentation',
-            url: '/product/experimentation-suite',
+            url: '/apps/experimentation-suite',
         },
     },
     {
@@ -51,7 +51,7 @@ const features = [
         description: `Make sense of insights your team has created, using tools designed to help share knowledge.`,
         cta: {
             title: 'Learn more about collaboration',
-            url: '/product/collaboration',
+            url: '/apps/collaboration',
         },
     },
 ]

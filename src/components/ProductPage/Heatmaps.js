@@ -17,7 +17,7 @@ export default function Heatmaps() {
                     type="outline"
                     size="md"
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
-                    to="/product/heatmaps"
+                    to="/apps/heatmaps"
                 >
                     Learn more about heatmaps
                 </CallToAction>
