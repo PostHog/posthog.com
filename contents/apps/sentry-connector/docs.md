@@ -78,3 +78,7 @@ if settings.TEST:
 Once installed you'll now have `$exception` events in PostHog, which have a "Sentry URL" link to take you to the exception:
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

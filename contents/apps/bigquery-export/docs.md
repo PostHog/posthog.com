@@ -5,7 +5,7 @@ topics:
     - bigquery export
 ---
 
-## Installation
+## How do I install the BigQuery export app for PostHog?
 
 1. Visit 'Plugins' in PostHog
 1. Find this plugin from the repository or install `https://github.com/PostHog/bigquery-plugin`
@@ -15,7 +15,7 @@ topics:
    1. Enter your Table ID 
 1. Watch events roll into BigQuery
 
-## BigQuery permissions and service account setup
+## How do I setup BigQuery permissions for PostHog?
 
 To set the right permissions up for the BigQuery plugin, you'll need:
 1. A service account.
@@ -44,10 +44,16 @@ Use the Share Dataset button to share your dataset with your new service account
 
 That's it! Once you've done the steps above, your data should start flowing from PostHog to BigQuery.
 
-## Troubleshooting
-
-### Duplicate events
+### Why am I seeing duplicate PostHog events in BigQuery?
 
 There's a very rare case when duplicate events appear in BigQuery. This happens due to network errors, where the export seems to have failed, yet it actually reaches BigQuery.
 
 While this shouldn't happen, if you find duplicate events in BigQuery, follow these [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) to manually remove the them.
+
+## What if I have feedback on this app?
+
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

@@ -5,14 +5,20 @@ topics:
     - geoip
 ---
 
-Enrich PostHog events and persons with IP location data. Simply enable this plugin - from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
+Enrich PostHog events and persons with IP location data. Simply enable this app and from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
 
-Available on Cloud and self-hosted PostHog 1.24.0+
+## How do I install the GeoIP Enrichment app for PostHog?
+
+1. Log in to your PostHog instance
+2. Click 'Plugins' on the left-hand tool bar
+3. Search for 'GeoIP' 
+4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 
 ## How does the GeoIP User Enrichment plugin work?
 
 This plugin prefers to use event property `$ip` (which should be of type `string`), but if that is not provided,
 it uses the IP address of the client that sent the event.
+
 This way in most cases the plugin can infer the IP address without any work on your side.
 
 ## How do I add add properties?
@@ -53,3 +59,11 @@ set property `$geoip_disable` to `true` on that event.
 3. **Fetch and install** the following URL in the **Install from GitHub, GitLab or npm** section:  
    `http://github.com/PostHog/posthog-plugin-geoip`.
 4. Enable the plugin and watch your events come in with enriched data!
+
+## What if I have feedback on this app?
+
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

@@ -1,13 +1,11 @@
 ---
-title: Redshift Export PostHog App - Docs
+title: Redshift Export PostHog app
 showTitle: true
 topics:
     - redshift export
 ---
 
-Send events to AWS Redshift on ingestion.
-
-## Instructions 
+## How do I set up the Redshift Export PostHog app? 
 
 1. [Create a Redshift Cluster](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-launch-cluster.html)
 2. Make sure PostHog can access your cluster 
@@ -27,3 +25,11 @@ GRANT CREATE ON DATABASE your_database TO posthog;
 ```
 
 4. Add the connection details at the plugin configuration step in PostHog
+
+## What if I have feedback on this app?
+
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

@@ -1,15 +1,15 @@
 ---
-title: How the S3 export app works
+title: S3 Export app documentation
 showTitle: true
 topics:
     - s3 export
 ---
 
-Export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
+## How do I install the S3 Export app for PostHog?
+
+This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 
 ***Available on self-hosted PostHog 1.24.0+***
-
-## Installation
 
 1. Access PostHog's **Plugins** page from the sidebar.
 1. To perform installation either:
@@ -19,7 +19,7 @@ Export events to Amazon S3 on ingestion. Archive your data, or simply free it up
 1. Configure the plugin by entering your AWS credentials and S3 bucket details.
 1. Watch events roll into S3!
 
-## Obtaining AWS Credentials
+## How do I setup AWS credentials?
 
 1. Log in to [AWS](https://console.aws.amazon.com/).
 1. Open [S3](https://s3.console.aws.amazon.com/) in the AWS console and create a new bucket in your chosen region.
@@ -43,18 +43,16 @@ Export events to Amazon S3 on ingestion. Archive your data, or simply free it up
     1. Make sure to copy your "Access key" and "Secret access key". The latter will not be shown again.
 1. Install the plugin in PostHog and fill in the "Access key", "Secret access key", "Bucket region" and "Bucket name" fields. Adjust other parameters as needed.
 
-## Memory Usage
+## How does the S3 Export app batch events?
 
-To vastly increase export throughput, this plugin batches events in memory before uploading them to S3. Upload frequency (every minute by default) and maximum upload 
-size (1 MB by default) can be configured when the plugin is installed.
+To vastly increase export throughput, this plugin batches events in memory before uploading them to S3. Upload frequency (every minute by default) and maximum upload size (1 MB by default) can be configured when the plugin is installed.
 
 You should make sure to keep these numbers reasonable to avoid running out of memory on your server. Note that the values apply to **each** concurrent plugin server thread.
 
-## Incorrect S3 Access Configuration Handling
+## What if I have feedback on this app?
 
-If you incorrectly configured your bucket or access roles, you will not get an error message. This will change once
-[this PostHog plugin server issue](https://github.com/PostHog/plugin-server/issues/72) is resolved. Thank you for your patience! 
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
-## Questions?
+## What if my question isn't answered above?
 
-### [Join the PostHog Users Slack community.](https://posthog.com/slack)
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

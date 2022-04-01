@@ -10,10 +10,10 @@ This plugin triggers a webhook when no events have been ingested for a specified
 
 ## How can I install the Ingestion Alert plugin?
 
-1. Open PostHog.
-2. Open the Plugins page from the sidebar.
-3. Head to the Advanced tab.
-4. "Install from GitHub, GitLab or npm" using this repository's URL.
+1. Log in to your PostHog instance
+2. Click 'Plugins' on the left-hand tool bar
+3. Search for 'Ingestion Alert' 
+4. Select the app, press 'Install' and follow the on-screen instructions
 
 ## Is there anything else I need to be aware of?
 If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated - increase the threshold if you wish reduce the noise, you can use the [heartbeat plugin](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
@@ -24,6 +24,10 @@ This is helpful to monitor if there are any ingestion issues within your posthog
 
 If the plugin server itself is down, this plugin will not be able to alert you that ingestion has stopped.
 
-## How can I find out more?
+## What if I have feedback on this app?
 
-Easy. [Join our Slack community.](/slack)
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

@@ -5,9 +5,9 @@ topics:
     - zapier connector
 ---
 
-# What does the Zapier plugin do?
+# What does the Zapier Connector app do?
 
-The Zapier plugin for PostHog enables you to connect PostHog with _thousands_ of services through Zapier.
+The Zapier app for PostHog enables you to connect PostHog with _thousands_ of services through Zapier.
 
 The following steps are at your disposal:
 
@@ -18,13 +18,13 @@ Trigger | Action Performed   | Any **paid** plan
 Trigger | Action Defined     | Any **paid** plan
 Trigger | Annotation Created | Any **paid** plan
 
-## Just want to connect PostHog with practically anything?
+## How do I connect PostHog to other services with Zapier?
 
-[Our official Zapier app](https://zapier.com/apps/posthog/integrations) – compatible with PostHog Cloud as well as with self-hosted solutions – is here for you. No additional setup needed.  
+[Our official Zapier app](https://zapier.com/apps/posthog/integrations) is compatible with PostHog Cloud, as well as with self-hosted instances. No additional setup needed.  
 
-## Need something private?
+## How can I create a private PostHog connection with Zapier?
 
-Not a problem. Create a private Zapier app for PostHog easily with this package. It's just a few simple steps:
+Create a private Zapier app for PostHog easily with a few simple steps:
 
 1. Clone or download t[his repository](https://github.com/PostHog/posthog-zapier/).
 2. Enter its directory with `cd`.
@@ -55,6 +55,10 @@ Not a problem. Create a private Zapier app for PostHog easily with this package.
     ```
 9. Finish by filling in integration details in the [Zapier Platform dashboard](https://zapier.com/app/developer). And don't forget to invite users!
 
-## How can I find out more?
+## What if I have feedback on this app?
 
-Easy. [Join our Slack community.](/slack)
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+## What if my question isn't answered above?
+
+You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
