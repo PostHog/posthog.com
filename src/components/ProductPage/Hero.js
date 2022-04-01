@@ -2,7 +2,7 @@ import { motion, useAnimation } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { OpenSource, Pipelines, Warehouse } from '../../components/Icons/Icons'
+import { OpenSource, Pipelines, Warehouse } from '../Icons/Icons'
 
 export default function Hero() {
     const controls = useAnimation()

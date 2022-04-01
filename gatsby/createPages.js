@@ -12,7 +12,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
-    const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const AppTemplate = path.resolve(`src/templates/App.js`)
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
@@ -84,7 +84,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fieldValue
                 }
             }
-            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+            apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
                 nodes {
                     id
                     fields {
@@ -164,7 +164,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         name
                         url
                     }
-                    product {
+                    apps {
                         name
                         url
                     }
@@ -414,12 +414,12 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             },
         })
     })
-    result.data.product.nodes.forEach((node) => {
+    result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
         let next = null
         let previous = null
-        const sidebar = result.data.sidebars.childSidebarsJson.product
+        const sidebar = result.data.sidebars.childSidebarsJson.apps
         sidebar.some((item, index) => {
             if (item.url === slug) {
                 next = sidebar[index + 1]
@@ -429,7 +429,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
         createPage({
             path: slug,
-            component: ProductTemplate,
+            component: AppTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',

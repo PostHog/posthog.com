@@ -1208,242 +1208,242 @@
             ]
         }
     ],
-    "product": [
+    "apps": [
         {
             "name": "Overview",
             "url": "/product"
         },
         {
             "name": "Funnels",
-            "url": "/product/funnels"
+            "url": "/apps/funnels"
         },
         {
             "name": "Trends",
-            "url": "/product/trends"
+            "url": "/apps/trends"
         },
         {
             "name": "User paths",
-            "url": "/product/user-paths"
+            "url": "/apps/user-paths"
         },
         {
             "name": "Quantitative analysis",
-            "url": "/product/quantitative-analysis"
+            "url": "/apps/quantitative-analysis"
         },
         {
             "name": "Session recording",
-            "url": "/product/session-recording"
+            "url": "/apps/session-recording"
         },
         {
             "name": "Feature flags",
-            "url": "/product/feature-flags"
+            "url": "/apps/feature-flags"
         },
         {
             "name": "Heatmaps",
-            "url": "/product/heatmaps"
+            "url": "/apps/heatmaps"
         },
         {
             "name": "Experimentation suite",
-            "url": "/product/experimentation-suite"
+            "url": "/apps/experimentation-suite"
         },
         {
             "name": "Collaboration",
-            "url": "/product/collaboration"
+            "url": "/apps/collaboration"
         },
         {
             "name": "Hubspot connector",
-            "url": "/product/hubspot-connector",
+            "url": "/apps/hubspot-connector",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/hubspot/getting-started"
+                    "url": "/apps/hubspot/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/hubspot/docs"
+                    "url": "/apps/hubspot/docs"
                 }
             ]
         },
         {
             "name": "Salesforce connector",
-            "url": "/product/salesforce-connector",
+            "url": "/apps/salesforce-connector",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/salesforce-connector/docs"
+                    "url": "/apps/salesforce-connector/docs"
                 }
             ]
         },
         {
             "name": "GeoIP Enrichment",
-            "url": "/product/geoip-enrichment",
+            "url": "/apps/geoip-enrichment",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/geoip-enrichment/getting-started"
+                    "url": "/apps/geoip-enrichment/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/geoip-enrichment/docs"
+                    "url": "/apps/geoip-enrichment/docs"
                 }
             ]
         },
         {
             "name": "BigQuery Export",
-            "url": "/product/bigquery-export",
+            "url": "/apps/bigquery-export",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/bigquery-export/docs"
+                    "url": "/apps/bigquery-export/docs"
                 }
             ]
         },
         {
             "name": "S3 Export",
-            "url": "/product/s3-export",
+            "url": "/apps/s3-export",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/s3-export/docs"
+                    "url": "/apps/s3-export/docs"
                 }
             ]
         },
         {
             "name": "Snowflake Export",
-            "url": "/product/snowflake-export",
+            "url": "/apps/snowflake-export",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/snowflake-export/docs"
+                    "url": "/apps/snowflake-export/docs"
                 }
             ]
         },
         {
             "name": "Redshift Export",
-            "url": "/product/redshift-export",
+            "url": "/apps/redshift-export",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/redshift-export/docs"
+                    "url": "/apps/redshift-export/docs"
                 }
             ]
         },
         {
             "name": "PagerDuty Connector",
-            "url": "/product/pagerduty-connector",
+            "url": "/apps/pagerduty-connector",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/pagerduty-connector/getting-started"
+                    "url": "/apps/pagerduty-connector/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/pagerduty-connector/docs"
+                    "url": "/apps/pagerduty-connector/docs"
                 }
             ]
         },
         {
             "name": "Ingestion Alert",
-            "url": "/product/ingestion-alert",
+            "url": "/apps/ingestion-alert",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/ingestion-alert/getting-started"
+                    "url": "/apps/ingestion-alert/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/ingestion-alert/docs"
+                    "url": "/apps/ingestion-alert/docs"
                 }
             ]
         },
         {
             "name": "Zendesk Connector",
-            "url": "/product/zendesk-connector",
+            "url": "/apps/zendesk-connector",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/zendesk-connector/getting-started"
+                    "url": "/apps/zendesk-connector/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/zendesk-connector/docs"
+                    "url": "/apps/zendesk-connector/docs"
                 }
             ]
         },
         {
             "name": "Zapier Connector",
-            "url": "/product/zapier-connector",
+            "url": "/apps/zapier-connector",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/zapier-connector/getting-started"
+                    "url": "/apps/zapier-connector/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/zapier-connector/docs"
+                    "url": "/apps/zapier-connector/docs"
                 }
             ]
         },
         {
             "name": "Sentry Connector",
-            "url": "/product/sentry-connector",
+            "url": "/apps/sentry-connector",
             "children": [
                 {
                     "name": "Getting started",
-                    "url": "/product/sentry-connector/getting-started"
+                    "url": "/apps/sentry-connector/getting-started"
                 },
                 {
                     "name": "How it works",
-                    "url": "/product/sentry-connector/docs"
+                    "url": "/apps/sentry-connector/docs"
                 }
             ]
         },
         {
             "name": "GitHub Release Tracker",
-            "url": "/product/github-release-tracker",
+            "url": "/apps/github-release-tracker",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/github-release-tracker/docs"
+                    "url": "/apps/github-release-tracker/docs"
                 }
             ]
         },
         {
             "name": "GitLab Release Tracker",
-            "url": "/product/gitlab-release-tracker",
+            "url": "/apps/gitlab-release-tracker",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/gitlab-release-tracker/docs"
+                    "url": "/apps/gitlab-release-tracker/docs"
                 }
             ]
         },
         {
             "name": "BitBucket Release Tracker",
-            "url": "/product/bitbucket-release-tracker",
+            "url": "/apps/bitbucket-release-tracker",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/bitbucket-release-tracker/docs"
+                    "url": "/apps/bitbucket-release-tracker/docs"
                 }
             ]
         },
         {
             "name": "Twitter Followers",
-            "url": "/product/twitter-followers",
+            "url": "/apps/twitter-followers",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/twitter-followers/docs"
+                    "url": "/apps/twitter-followers/docs"
                 }
             ]
         },
         {
             "name": "Replicator",
-            "url": "/product/replicator",
+            "url": "/apps/replicator",
             "children": [
                 {
                     "name": "How it works",
-                    "url": "/product/replicator/docs"
+                    "url": "/apps/replicator/docs"
                 }
             ]
         }
