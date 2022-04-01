@@ -1312,3 +1312,15 @@
 [[redirects]]
     from = "/handbook/engineering/k8s-overview"
     to = "/docs/self-host/architecture"
+
+
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/quantitative-analysis"
+    to = "/apps/quantitative-analysis"
+
+
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/user-paths"
+    to = "/apps/user-paths"
