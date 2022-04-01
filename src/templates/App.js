@@ -26,7 +26,7 @@ export default function App({ data, pageContext: { next, previous } }) {
     const Documentation = () => {
         return (
             <>
-                <h4 className="m-0 mb-9">{title} documentation</h4>
+                <h4 className="mt-6 mb-2">{title} documentation</h4>
                 <ul className="m-0 p-0 list-none">
                     {documentation.headings?.map((heading) => {
                         const id = slugger.slug(heading.value)

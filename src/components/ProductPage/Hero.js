@@ -88,6 +88,14 @@ export default function Hero() {
                         </a>{' '}
                         and capture up to 30% more events, compared to cloud-based analytics tools.
                     </p>
+                    <p className="pt-4">
+                        <a
+                            href="/apps"
+                            className="text-center select-none rounded-full inline-block cta w-56 bg-primary dark:bg-primary-dark text-white dark:text-primary hover:text-white hover:dark:text-primary border-primary dark:primary-dark text-[17px] font-bold px-5 py-2 border-3"
+                        >
+                            Browse apps
+                        </a>
+                    </p>
                 </div>
 
                 <motion.div

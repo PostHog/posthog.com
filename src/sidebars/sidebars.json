@@ -1210,8 +1210,12 @@
     ],
     "apps": [
         {
-            "name": "Overview",
+            "name": "Product",
             "url": "/product"
+        },
+        {
+            "name": "Apps",
+            "url": "/apps"
         },
         {
             "name": "Funnels",

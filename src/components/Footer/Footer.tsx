@@ -93,9 +93,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Analytics</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Funnels" url="/product/funnels" />
-                                    <FooterMenuItem title="Trends" url="/product/trends" />
-                                    <FooterMenuItem title="Paths" url="/product/user-paths" />
+                                    <FooterMenuItem title="Funnels" url="/apps/funnels" />
+                                    <FooterMenuItem title="Trends" url="/apps/trends" />
+                                    <FooterMenuItem title="Paths" url="/apps/user-paths" />
                                 </ul>
                             </div>
                             <div>
@@ -109,12 +109,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Features</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Session recording" url="/product/session-recording" />
-                                    <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
-                                    <FooterMenuItem
-                                        title="Experimentation suite"
-                                        url="/product/experimentation-suite"
-                                    />
+                                    <FooterMenuItem title="Session recording" url="/apps/session-recording" />
+                                    <FooterMenuItem title="Feature flags" url="/apps/feature-flags" />
+                                    <FooterMenuItem title="Experimentation suite" url="/apps/experimentation-suite" />
                                     <FooterMenuItem title="Heatmaps" url="/heatmaps" />
                                 </ul>
                             </div>
@@ -129,11 +126,8 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem
-                                        title="Quantitative analysis"
-                                        url="/product/quantitative-analysis"
-                                    />
-                                    <FooterMenuItem title="Collaboration" url="/product/collaboration" />
+                                    <FooterMenuItem title="Quantitative analysis" url="/apps/quantitative-analysis" />
+                                    <FooterMenuItem title="Collaboration" url="/apps/collaboration" />
                                     <FooterMenuItem title="Integrations" url="/integrations" />
                                 </ul>
                             </div>
