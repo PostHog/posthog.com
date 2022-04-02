@@ -36,9 +36,16 @@ import propertyFilterImage from '../AppsList/logos/property-filter.png'
 const LegacyListing = ({ name, image, url }) => {
     return (
         <li className="border-t border-l border-dashed border-gray-accent-light">
-            <a href={url} className="flex flex-col items-center text-center px-2 py-6 hover:bg-gray-accent-light">
-                <img className="icon w-8 h-8 mb-2" src={image} />
+            <a
+                href={url}
+                className="flex flex-col h-full relative items-center text-center px-2 py-8 hover:bg-gray-accent-light"
+            >
+                <img className="icon w-6 h-6 mb-2" src={image} />
+
                 <span className="text-primary">{name}</span>
+                <div className="absolute top-4 right-4 inline-flex px-2 py-1 text-[12px] uppercase rounded-[2px] text-primary text-opacity-50">
+                    Free
+                </div>
             </a>
         </li>
     )
