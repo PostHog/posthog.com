@@ -39,7 +39,12 @@ On the week before the release, on Thursday, we institute a code freeze (used to
   git add posthog/version.py
   git commit -m "Bump version [version]"
   ```
-- [ ] Deploy PostHog playground using the `release-[version]-unstable` Docker image's SHA (you can obtain it from Docker Hub, credentials in 1Password). The PostHog Playground uses a helm chart deployment and the `values.yaml` can be found in the internal `vpc` repository.
+- [ ] Upgrade PostHog playground
+    - The PostHog Playground uses a helm chart deployment on Digital Ocean.
+    - The upgrade instructions can be found [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart)
+    - Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c) and switch to the right kubectl context.
+    - lookup the the `release-[version]-unstable` Docker image's SHA (you can obtain it from Docker Hub, credentials in 1Password) and update that in the [`values.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml). Make sure to commit any changes made.
+    - note that you might need to follow major upgrade notes as mentioned in the upgrade guide same way our users would need to do that.
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
 ### Launch phase
