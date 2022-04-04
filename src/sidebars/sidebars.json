@@ -326,10 +326,6 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Kubernetes architecture overview",
-                            "url": "/handbook/engineering/k8s-overview"
-                        },
-                        {
                             "name": "Deployments support",
                             "url": "/handbook/engineering/deployments-support"
                         },

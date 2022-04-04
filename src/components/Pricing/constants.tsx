@@ -22,7 +22,7 @@ export const features = {
     'Advanced features': [
         { title: 'Correlation Analysis' },
         { title: 'Group Analytics' },
-        { title: 'Multivariate Testing' },
+        { title: 'Experimentation Suite' },
         { title: 'Multiple projects' },
     ],
     Collaboration: [
