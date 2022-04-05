@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-We want to make sure upgrading PostHog is as smooth as possible. We use a syncronous and an asyncronosu migration framework to make sure database migrations are easy to be deployed, rolled back and generally safe to run.
+We want to make sure upgrading PostHog is as smooth as possible. We use a synchronous and an asynchronous migration framework to make sure database migrations are easy to be deployed, rolled back and safe to run.
 
-Because some data migrations require touching tables with that can get very large for some PostHog installation, some migrations are a little more involved. We will explicitly mention this in our changelog. We aim to minimize these types of migrations as much as possible, and their frequency will decrease over time.
+Because some data migrations require touching tables with that can get very large for some PostHog installation, some migrations are a little more involved. We will explicitly mention this in our changelog. We aim to minimize these types of migrations as much as possible, and their frequency will decrease.
 
 If you need help, feel free to create an issue, or [join our Slack](/slack).
 
