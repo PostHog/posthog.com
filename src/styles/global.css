@@ -133,6 +133,18 @@ footer a:not(.cta) {
     transition: none;
 }
 
+/* timeline key */
+
+.timeline-entry li[data-type='feature']:before {
+    background: #43af79;
+}
+.timeline-entry li[data-type='news']:before {
+    background: #0080ff;
+}
+.timeline-entry li[data-type='milestone']:before {
+    background: #c849f4;
+}
+
 /* Product page */
 
 .product-hero-image {

@@ -11,6 +11,7 @@ import Customers from './Customers'
 import Features from './Features'
 import Hero from './Hero'
 import Pipelines from './Pipelines'
+import Timeline from './Timeline'
 import Quote from './Quote'
 import Tutorials from './Tutorials'
 
@@ -37,6 +38,7 @@ const Home = () => {
                     }
                 />
                 <Pipelines />
+                <Timeline />
                 <Quote />
                 <Community />
                 <Tutorials

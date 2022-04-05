@@ -314,6 +314,10 @@
                         {
                             "name": "How to run migrations on PostHog Cloud",
                             "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        },
+                        {
+                            "name": "Working with ClickHouse materialized columns",
+                            "url": "/handbook/engineering/databases/materialized-columns"
                         }
                     ]
                 },
@@ -389,6 +393,10 @@
                 {
                     "name": "Paid features",
                     "url": "/handbook/product/paid-features"
+                },
+                {
+                    "name": "Releasing as beta",
+                    "url": "/handbook/product/releasing-as-beta"
                 }
             ]
         },
@@ -642,8 +650,12 @@
                                             "url": "/docs/self-host/runbook/clickhouse/restore"
                                         },
                                         {
-                                            "name": "Vertical Scaling",
+                                            "name": "Vertical scaling",
                                             "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
+                                        },
+                                        {
+                                            "name": "Horizontal scaling (Sharding & replication)",
+                                            "url": "/docs/self-host/runbook/clickhouse/sharding-and-replication"
                                         }
                                     ]
                                 },
@@ -930,6 +942,10 @@
                 {
                     "name": "Dashboards",
                     "url": "/docs/user-guides/dashboards"
+                },
+                {
+                    "name": "Data Management",
+                    "url": "/docs/user-guides/data-management"
                 },
                 {
                     "name": "Events",
@@ -1224,6 +1240,14 @@
         {
             "name": "Heatmaps",
             "url": "/product/heatmaps"
+        },
+        {
+            "name": "Experimentation suite",
+            "url": "/product/experimentation-suite"
+        },
+        {
+            "name": "Collaboration",
+            "url": "/product/collaboration"
         }
     ]
 }

@@ -94,6 +94,10 @@ export const Enterprise = () => {
             subtitle="Your IT & legal teams will be very pleased"
             badge="INCLUDES OPEN SOURCE & SCALE FEATURES"
         >
+            <a href="/enterprise" className="inline-block mt-2">
+                See what comes with Enterprise
+            </a>
+
             <Section title="Account & support">
                 <Features features={features['Account & support']} />
             </Section>

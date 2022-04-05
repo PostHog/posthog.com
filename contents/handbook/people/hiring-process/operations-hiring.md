@@ -39,7 +39,7 @@ We are looking for speed, autonomy, directness, good communication skills, an aw
 
 #### Technical Interview 
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/people/team-structure/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations-). For this round, you can expect questions about your background and scenario-based questions. 
+The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/people/team-structure/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations). For this round, you can expect questions about your background and scenario-based questions. 
 
 #### Operations SuperDay
 
