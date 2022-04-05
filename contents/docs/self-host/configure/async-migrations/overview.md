@@ -10,7 +10,7 @@ Async migrations are _data migrations_ that do not run synchronously on an updat
 
 You can check the PostHog blog for more [information about how and why we enable async migrations on PostHog](/blog/async-migrations).  
 
-Further internal information about async migrations can be found in [our handbook](/handbook/engineering/async-migrations).
+Further internal information about async migrations can be found in [our handbook](/handbook/engineering/databases/async-migrations).
 
 ## Why are async migrations necessary?
 
