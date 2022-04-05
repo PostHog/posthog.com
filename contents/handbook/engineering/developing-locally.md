@@ -212,11 +212,10 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 ### 5. Prepare databases
 
-We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables.
+We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables:
 
 ```bash
-DEBUG=1 python manage.py migrate
-DEBUG=1 python manage.py migrate_clickhouse
+DEBUG=1 ./bin/migrate
 ```
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
