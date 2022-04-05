@@ -531,10 +531,7 @@ ul {
             }
         }
         td {
-            @apply border-dashed border-gray-accent-light border-b text-left pl-2;
-            &:first-of-type {
-                @apply text-left pl-0;
-            }
+            border: none;
         }
         img,
         svg {
@@ -543,7 +540,8 @@ ul {
     }
 
     .params-wrapper {
-        .type {
+        .type,
+        code:not(.language-json) {
             @apply bg-gray-accent-light-hover dark:bg-gray-accent-dark;
         }
 
@@ -770,6 +768,9 @@ body.dark {
     .method {
         background: none;
         font-family: Consolas, monaco, monospace;
+    }
+    .text-xs * {
+        font-size: 0.75rem;
     }
 }
 

@@ -1,4 +1,6 @@
 import { Button, Select } from 'antd'
+import { Link } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
 import CodeBlock from 'components/Home/CodeBlock'
 import Layout from 'components/Layout'
@@ -26,27 +28,40 @@ const mapVerbsColor = {
 }
 
 function Endpoints({ paths }) {
+    const urlItems = []
+    Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
     return (
         <div>
             <h3>Endpoints</h3>
             <table className="table-auto">
-                {Object.entries(paths).map(([path, value]) => (
-                    <React.Fragment key={value}>
-                        {Object.keys(value).map((verb) => (
-                            <tr
-                                key={verb}
-                                className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
-                            >
-                                <td>
-                                    <code className={`method text-${mapVerbsColor[verb]}`}>{verb.toUpperCase()}</code>
-                                </td>
-                                <td>
-                                    <code>{path}</code>
-                                </td>
-                            </tr>
-                        ))}
-                    </React.Fragment>
-                ))}
+                <Scrollspy
+                    offset={-50}
+                    className="list-none m-0 p-0 flex flex-col space-y-2"
+                    items={urlItems}
+                    currentClassName="active-link"
+                >
+                    {Object.entries(paths).map(([path, value]) => (
+                        <React.Fragment key={value}>
+                            {Object.keys(value).map((verb) => (
+                                <tr
+                                    key={verb}
+                                    className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
+                                >
+                                    <td>
+                                        <code className={`method text-${mapVerbsColor[verb]}`}>
+                                            {verb.toUpperCase()}
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <Link offset={-50} smooth duration={300} to={pathID(verb, path)} hashSpy spy>
+                                            <code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </React.Fragment>
+                    ))}
+                </Scrollspy>
             </table>
         </div>
     )
@@ -75,6 +90,10 @@ function generateName(item) {
     }
 
     return verbMap[item.httpVerb] + ' ' + name.toLowerCase()
+}
+
+function pathID(verb, path) {
+    return verb + path.replaceAll('/', '-').replaceAll('{', '').replaceAll('}', '').slice(0, -1)
 }
 
 function Params({ params, objects, object, depth = 0 }) {
@@ -167,15 +186,19 @@ function Params({ params, objects, object, depth = 0 }) {
                                     <>
                                         <div className="text-xs">
                                             One of:{' '}
-                                            {param.schema.enum.map((item) => (
-                                                <code className="mr-1" key={item}>
-                                                    "{item}"
-                                                </code>
-                                            ))}{' '}
+                                            {param.schema.enum
+                                                .filter((item) => item && item !== '')
+                                                .map((item) => (
+                                                    <code className="mr-1" key={item}>
+                                                        "{item}"
+                                                    </code>
+                                                ))}{' '}
                                         </div>
                                     </>
                                 )}
-                                <ReactMarkdown>!!{param.schema.description}</ReactMarkdown>
+                                <div className="text-xs">
+                                    <ReactMarkdown>{param.schema.description}</ReactMarkdown>
+                                </div>
                             </div>
                         </div>
 
@@ -338,9 +361,11 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
             {exampleLanguage === 'curl' && (
                 <CodeBlock
                     code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl${item.httpVerb === 'delete' ? ' -X DELETE \\' : ''}
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : ''}${
+                        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+                    }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}="${item[1]}"`)}`}
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}`}
                     language="bash"
                     hideNumbers={true}
                 />
@@ -534,7 +559,10 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
 
                                     return (
                                         <div className="mt-8" key={item.operationId}>
-                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                            <div
+                                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                                                id={pathID(item.httpVerb, item.pathName)}
+                                            >
                                                 <div>
                                                     <h2>{generateName(item)}</h2>
                                                     <ReactMarkdown>
