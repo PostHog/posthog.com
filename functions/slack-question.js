@@ -142,6 +142,16 @@ app.view('submit-button', async ({ ack, view, client }) => {
                         }),
                         action_id: 'edit-question-button',
                     },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Open page',
+                            emoji: true,
+                        },
+                        url: `https://posthog.com${body.slug}`,
+                        action_id: 'open-page-button',
+                    },
                 ],
             },
         ],
@@ -347,6 +357,16 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                         }),
                         action_id: 'edit-question-button',
                     },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Open page',
+                            emoji: true,
+                        },
+                        url: `https://posthog.com${slug}`,
+                        action_id: 'open-page-button',
+                    },
                 ],
             },
         ],
@@ -473,12 +493,26 @@ app.action('publish-button', async ({ ack, client, body }) => {
                                 },
                             },
                         },
+                        {
+                            type: 'button',
+                            text: {
+                                type: 'plain_text',
+                                text: 'Open page',
+                                emoji: true,
+                            },
+                            url: `https://posthog.com${slug}`,
+                            action_id: 'open-page-button',
+                        },
                     ],
                 },
             ],
         }
         client.chat.update(messageUpdate)
     }
+})
+
+app.action('open-page-button', async ({ ack }) => {
+    await ack()
 })
 
 exports.handler = async (event, context, callback) => {
