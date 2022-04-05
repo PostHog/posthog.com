@@ -1,6 +1,6 @@
 ---
 date: 2022-04-05
-title: Self-hosted (and open source) alternatives to Hotjar, FullStory and LogRocket
+title: Self-hosted (and open source) alternatives to Hotjar & LogRocket
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,9 +11,9 @@ author: ["hanna-crombie"]
 categories: ["Guides", "Product analytics"]
 ---
 
-Product analytics tools are all built with one key goal in mind: providing actionable insights on user behavior. Metrics are most commonly studied in hard numbers; views, clicks, conversions. But sometimes all those numbers can feel a bit sterile. Separated from the individual user narrative, statistics are an incomplete picture. Enter session recording.
+Product analytics tools have one goal in mind: providing actionable insights on user behavior. They're all about hard numbers; views, clicks, conversions. But sometimes all those numbers can feel a bit sterile. Separated from the individual user narrative, statistics are an incomplete picture. Enter session recording.
 
-Session recordings are video renderings of actions taken by users in real-time as they visit your website. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
+Session recordings, also known as session replays, are video renderings of actions taken by your users in real-time. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
 
 ### Why is session recording useful?
 Aside from making for some fascinating watching, session recordings offer an organic way to examine navigation. They facilitate a detailed level of investigation on user behavior. By studying exactly how users interact with your product from the entry point, you can identify friction areas and tailor your development in line with their needs.
@@ -24,7 +24,7 @@ Session recordings can help you to identify:
 - How bugs come about
 - How your users are interacting with individual elements of your product
 
-This information in context can help you to optimize user experience (UX), build user-led products and, ultimately, improve conversion and retention. Session recording is a great tool to have in your arsenal when you want to act on real world user data.
+This information in context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. Session recording is a great tool to have in your arsenal when you want to act on real world user data.
 
 ### Self-hosted vs. cloud session recording
 Cloud session recording tools like Hotjar, FullStory and LogRocket can offer a convenient solution for users who want to kick off quickly. That said, the costs associated with cloud-hosting are an important factor to consider, not to mention the privacy concerns that come hand-in-hand with third-party providers.
@@ -36,7 +36,6 @@ Open source software gives you the freedom to study, modify and run the tools yo
 Here, we’ve got the lowdown on some of the best open source and self-hosted session recording tools available, so you can choose the right one for you.
 
 ## 1. [PostHog](https://posthog.com/)
-
 
 PostHog is an all-in-one product analytics platform which empowers any business to make efficient data-driven decisions. It offers all the tools required to measure user success and build better products, including feature flags, funnels, [session recording](https://posthog.com/product/session-recording), heat maps, A/B testing, trends and much more. PostHog’s tools work together natively, offering extensive, actionable user insights.
 
@@ -69,7 +68,6 @@ Custom plans are also available for scaling and enterprise customers who are wor
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](https://posthog.com/signup/self-host).
 
 ## 2. [OpenReplay](https://openreplay.com/)
-
 
 OpenReplay is an open source session replay stack which provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
 Their tooling is particularly effective for application state and customer support however – features like DevTools and co-browsing sessions are useful for monitoring performance.
@@ -121,7 +119,6 @@ No. UXWizz is not open source.
 
 ## 4. [UXlens](https://uxlens.com/)
 
-
 UXlens is a developer-first session recording tool which provides insight into user interface and conversion issues. It does not include any additional analytics tools but features useful segment filtering features that help businesses locate blocks in their funnel.
 
 ### Who is UXlens for?
@@ -146,7 +143,6 @@ No. UXlens is not open source.
 
 ## 5. [Matomo](https://matomo.org/)
 
-
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 
 ### Who is Matomo for?
@@ -170,7 +166,6 @@ Session recording is also included in Matomo’s cloud Business plan. Pricing is
 Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
 
 ## 6. [SessionStack](https://www.sessionstack.com/)
-
 
 SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Their tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
 
