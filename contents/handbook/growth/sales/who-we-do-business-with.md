@@ -11,7 +11,7 @@ We firmly adhere to laws in countries where we do business, and welcome everyone
 
 In these cases, we may choose not to do business with the customer.
 
-#### Sanctioned countries and companies
+#### Sanctioned countries and companies
 
 US laws mean we may also be prohibited from working with certain companies, due to ongoing US sanctions. In this case we do not have discretion - we are banned from working with these companies entirely. 
 
