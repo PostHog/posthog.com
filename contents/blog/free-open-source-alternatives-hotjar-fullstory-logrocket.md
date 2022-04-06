@@ -1,6 +1,6 @@
 ---
 date: 2022-04-05
-title: Self-hosted (and open source) alternatives to Hotjar & LogRocket
+title: Open source (and self-hosted) alternatives to Hotjar, FullStory & LogRocket
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,18 +11,18 @@ author: ["hanna-crombie"]
 categories: ["Guides", "Product analytics"]
 ---
 
-Product analytics tools have one goal in mind: providing actionable insights on user behavior. They're all about hard numbers; views, clicks, conversions. But sometimes all those numbers can feel a bit sterile. Separated from the individual user narrative, statistics are an incomplete picture. Enter session recording.
+Most analytics tools have one goal in mind: providing actionable insights on user behavior. It's all about hard numbers; views, clicks, conversions. But sometimes all those numbers can feel a bit sterile. Separated from the individual user narrative, statistics are an incomplete picture. Enter session recording.
+
+### Why you need session recording
 
 Session recordings, also known as session replays, are video renderings of actions taken by your users in real-time. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
 
-### Why is session recording useful?
-Aside from making for some fascinating watching, session recordings offer an organic way to examine navigation. They facilitate a detailed level of investigation on user behavior. By studying exactly how users interact with your product from the entry point, you can identify friction areas and tailor your development in line with their needs.
+Aside from making for some fascinating watching, session replays facilitate a detailed investigations of user behavior, allowing you to identify friction areas such as: 
 
-Session recordings can help you to identify:
 - Where users are getting stuck on your site
 - Hesitation at different stages of your funnel
 - How bugs come about
-- How your users are interacting with individual elements of your product
+- How your users are interacting with individual elements of your product.
 
 This information in context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. Session recording is a great tool to have in your arsenal when you want to act on real world user data.
 
@@ -36,6 +36,7 @@ Open source software gives you the freedom to study, modify and run the tools yo
 Here, we’ve got the lowdown on some of the best open source and self-hosted session recording tools available, so you can choose the right one for you.
 
 ## 1. [PostHog](https://posthog.com/)
+![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
 PostHog is an all-in-one product analytics platform which empowers any business to make efficient data-driven decisions. It offers all the tools required to measure user success and build better products, including feature flags, funnels, [session recording](https://posthog.com/product/session-recording), heat maps, A/B testing, trends and much more. PostHog’s tools work together natively, offering extensive, actionable user insights.
 
@@ -68,6 +69,7 @@ Custom plans are also available for scaling and enterprise customers who are wor
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](https://posthog.com/signup/self-host).
 
 ## 2. [OpenReplay](https://openreplay.com/)
+![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
 OpenReplay is an open source session replay stack which provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
 Their tooling is particularly effective for application state and customer support however – features like DevTools and co-browsing sessions are useful for monitoring performance.
@@ -94,7 +96,7 @@ They also offer a cloud option starting at $3.95 per month for 1,000 recordings 
 Yes. OpenReplay’s open source library is available under the ELv2 license, via [the OpenReplay repo](https://github.com/openreplay/openreplay).
 
 ## 3. [UXWizz](https://www.uxwizz.com/)
-
+![UXWizz - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
 
 UXWizz is a paired-down product analytics platform offering features like visitor insights, session recording, segments and A/B testing.
 
@@ -118,12 +120,13 @@ UXWizz is available as a self-hosted solution only and pricing ranges from £79 
 No. UXWizz is not open source.
 
 ## 4. [UXlens](https://uxlens.com/)
+![UXlens - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img4_UXlens.png)
 
-UXlens is a developer-first session recording tool which provides insight into user interface and conversion issues. It does not include any additional analytics tools but features useful segment filtering features that help businesses locate blocks in their funnel.
+UXlens is a developer-first session recording tool which provides insight into user interface and conversion issues. It does not include any additional analytics tools, but includes useful segment filtering features that help businesses locate blocks in their funnel.
 
 ### Who is UXlens for?
 
-UXlens is an ideal choice for UX designers and product teams who want to study the impact of their UI on the user journey.
+UXlens is a good choice for UX designers and product teams who want to study the impact of their UI on the user journey.
 
 ### Strengths
 
@@ -142,6 +145,7 @@ A cloud-hosted version is also available starting at $5 per month.
 No. UXlens is not open source.
 
 ## 5. [Matomo](https://matomo.org/)
+![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img5_Matomo.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 
@@ -185,4 +189,4 @@ Cloud plans with SessionStack start from $99 a month for up to 1,000 sessions. A
 
 ### Is it open source?
 
-SessionStack’s code is not open source. They do offer a self-hosted deployment option which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
+SessionStack’s code is not open source. It does offer a self-hosted deployment option, though, which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
