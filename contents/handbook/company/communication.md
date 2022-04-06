@@ -41,7 +41,7 @@ We have two repos to centralize and document private internal communication. The
 ### Company Internal
 Repository can be found in https://github.com/PostHog/company-internal
 
-Documents any company-wide information that can't be share publically within People, Ops, Legal, Finance or Strategy.
+Documents any company-wide information that can't be share publicly within People, Ops, Legal, Finance or Strategy.
 
 **Examples of information that should go here:**
 - ✅ Hiring plans and discussions _before_ we post a job ad
@@ -51,7 +51,7 @@ Documents any company-wide information that can't be share publically within Peo
 - ✅ [Sometimes] Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
 - ✅ [Sometimes] Discussions about replacing or adding tools, services, and systems that we use
 
-For company-related issues that _can_ be discussed publically, these should go in the `meta` repo which can be found in https://github.com/PostHog/meta/
+For company-related issues that _can_ be discussed publicly, these should go in the `meta` repo which can be found in https://github.com/PostHog/meta/
 
 **Examples of information that should NOT go here:**
 - ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...). Things like:
