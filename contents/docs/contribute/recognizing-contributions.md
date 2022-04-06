@@ -49,3 +49,14 @@ While we have created cards for all past contributors, the we have only started 
 'Powers' refer to the types of contributions you've made to PostHog. The types of contributions available can be seen on the [All Contributors spec](https://allcontributors.org/docs/en/emoji-key).
 
 Contributions of type `code` are automatically provided to you for merged pull requests. All other contribution types must be manually requested by a member of the PostHog team.
+
+### Sending out merch
+In shopify admin at https://posthog.myshopify.com/admin:
+
+1. Go to the "discounts" tab
+2. Click "Create Discount" then "Discount Code"
+3. Click "Generate Code" button to generate the code to send the customer
+4. Set "Fixed Amount" and the "Discount Value" to the amount of free merch you wish to give (e.g. $100)
+5. IMPORTANT: Set "Limit number of times this discount can be used in total" to 1 (so it can only be used once)
+6. Set a reasonable timeframe for this to be used (e.g. 3 months)
+7. Send the code to the customer and let them purchase some free merch
