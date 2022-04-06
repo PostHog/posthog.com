@@ -17,7 +17,7 @@ Most analytics tools have one goal in mind: providing actionable insights on use
 
 Session recordings, also known as session replays, are video renderings of actions taken by your users in real-time. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
 
-Aside from making for some fascinating watching, session replays facilitate a detailed investigations of user behavior, allowing you to identify friction areas such as: 
+Aside from making for some fascinating watching, recordings facilitate a detailed investigation of user behavior, allowing you to identify friction areas such as: 
 
 - Where users are getting stuck on your site
 - Hesitation at different stages of your funnel
@@ -144,8 +144,30 @@ A cloud-hosted version is also available starting at $5 per month.
 
 No. UXlens is not open source.
 
-## 5. [Matomo](https://matomo.org/)
-![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img5_Matomo.png)
+## 5. [SessionStack](https://www.sessionstack.com/)
+
+SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Its tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
+
+### Who is SessionStack for?
+
+SessionStack enables product managers, customer support teams and engineers to harness user navigation insights to identify friction points and bugs, and to assist users in real-time.
+
+### Strengths
+
+- Notification alerts when issues arise
+- Network traffic monitoring
+- Ability to co-browse with users to offer guidance
+- Cloud-hosting and self-hosting options available
+
+### How much does it cost?
+Cloud plans with SessionStack start from $99 a month for up to 1,000 sessions. A self-hosted deployment option is available on custom plan, which includes implementation support and customisable data volume and retention. Pricing for SessionStack’s self-hosted plan is not publicly available.
+
+### Is it open source?
+
+SessionStack’s code is not open source. It does offer a self-hosted deployment option, though, which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
+
+## 6. [Matomo](https://matomo.org/)
+![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/Matomo session recording.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 
@@ -168,25 +190,3 @@ Session recording is also included in Matomo’s cloud Business plan. Pricing is
 ### Is it open source?
 
 Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
-
-## 6. [SessionStack](https://www.sessionstack.com/)
-
-SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Their tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
-
-### Who is SessionStack for?
-
-SessionStack enables product managers, customer support teams and engineers to harness user navigation insights to identify friction points and bugs, and to assist users in real-time.
-
-### Strengths
-
-- Notification alerts when issues arise
-- Network traffic monitoring
-- Ability to co-browse with users to offer guidance
-- Cloud-hosting and self-hosting options available
-
-### How much does it cost?
-Cloud plans with SessionStack start from $99 a month for up to 1,000 sessions. A self-hosted deployment option is available on custom plan, which includes implementation support and customisable data volume and retention. Pricing for SessionStack’s self-hosted plan is not publicly available.
-
-### Is it open source?
-
-SessionStack’s code is not open source. It does offer a self-hosted deployment option, though, which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
