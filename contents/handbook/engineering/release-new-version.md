@@ -52,7 +52,7 @@ Three business days before the release, so on the Wednesday before, we institute
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
 ### Launch phase (day of the release)
-- [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array)
+- [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. 
 - [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release is completely ready, some users may see the image on Docker Hub and update immediately.**
   ```bash
   git tag -a [version] -m "Version [version]"
@@ -66,4 +66,4 @@ Three business days before the release, so on the Wednesday before, we institute
   - [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
 - [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
-- [ ] Send the newsletter with the PostHog Array. We do this through Mailchimp. You can use the template for the previously sent newsletter. You may need to ask someone with access to help with this last part.
+- [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
