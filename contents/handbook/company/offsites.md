@@ -26,6 +26,7 @@ Typical agenda:
 - 24hr Hackathon
 - All-hands strategic sessions and workshops
 - All-hands culture exercises
+- A small amount of downtime so people can explore
 
 ## Small team offsites
 
