@@ -11,7 +11,7 @@ author: ["hanna-crombie"]
 categories: ["Guides", "Product analytics"]
 ---
 
-Most analytics tools have one goal in mind: providing actionable insights on user behavior. It's all about hard numbers; views, clicks, conversions. But sometimes all those numbers can feel a bit sterile. Separated from the individual user narrative, statistics are an incomplete picture. Enter session recording.
+Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording
 
 ### Why you need session recording
 
@@ -26,14 +26,14 @@ Aside from making for some fascinating watching, recordings facilitate a detaile
 
 This context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. 
 
-Bottom line: session recording is an essential tool for making better products.
+**Bottom line:** session recording is an essential tool for making better products.
 
 ### Why self-host your session recording?
 Most popular session recording tools, such as  Hotjar, FullStory and LogRocket, are exclusively cloud-based. This is convenient, but comes with several drawbacks:
 
 1. They're expensive
 2. You don't control your user data
-3. GDPR and HIPAA compliance is a headache 
+3. GDPR and HIPAA compliance is a headache (or not possible)
 
 Self-hosting your session recording eliminates these drawbacks and allows you to keep control of your data, while open source tools give you the freedom to study, modify, and run the tools at no extra cost.
 
@@ -42,13 +42,13 @@ If that sounds good to you, coming up are the best open source (or self-hosted) 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one product analytics platform that offers all the tools required to measure user success and build better products, including but not limited to [session recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [A/B testing](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
+PostHog is an all-in-one product analytics platform that offers all the tools required to build better products, including but not limited to [Session Recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [Experimentation](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
 We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform.
 
-Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
+Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
 
 ### Strengths
 
@@ -101,13 +101,13 @@ Yes. OpenReplay’s open source library is available under the ELv2 license, via
 ## 3. [UXWizz](https://www.uxwizz.com/)
 ![UXWizz - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
 
-UXWizz is a paired-down product analytics platform offering features like visitor insights, session recording, segments and A/B testing.
+UXWizz is a pared-down product analytics platform offering features like visitor insights, session recording, segments and A/B testing.
 
 A lightweight version of session recording is available, which only stores the URL of the page and the user actions. This is designed to optimize your data storage and remove some of the manual maintenance otherwise required by UXWizz.
 
 ### Who is UXWizz for?
 
-UXWizz’s is a good choice for individuals, and marketing and product teams in small businesses who want quick, qualitative insights into their user analytics from one simple and accessible dashboard.
+UXWizz is a good choice for individuals, and marketing and product teams in small businesses who want quick, qualitative insights into their user analytics from one simple and accessible dashboard.
 
 ### Strengths
 
