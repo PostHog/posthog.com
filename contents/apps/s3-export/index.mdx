@@ -1,25 +1,25 @@
 ---
-title: S3 Export
+title: Amazon S3 Export
 documentation: /apps/s3-export/docs
 ---
 
 <Section
     divider={false}
-    title="Stream event data to Amazon S3 at high volumes."
+    title="Stream data from PostHog to Amazon S3, creating a data lake that can run at any scale."
     size="full"
     cols={3}
 >
     <div>
-        <h5>Stream event data to S3</h5>
-        <p>Get any event, such as product usage events from PostHog, into your storage.</p>
+        <h5>Stream to S3 in real-time</h5>
+        <p>Get any PostHog event, such as sign-ups or clicks, into your S3 storage every 30 seconds.</p>
     </div>
     <div>
-        <h5>Stream in realtime</h5>
-        <p>No need to wait for large batch jobs. Events get sent every 30 seconds.</p>
+       <h5>Auto-retries, just in case</h5>
+        <p>Dropping events? We re-send data automatically, giving you the most complete picture possible.</p>
     </div>
     <div>
-        <h5>Automatic retries</h5>
-        <p>Don't drop events.</p>
+        <h5>An automatic backup</h5>
+        <p>Amazon S3 is a great place to archive product data, all while you continue analysis in PostHog.</p>
     </div>
 </Section>
 
