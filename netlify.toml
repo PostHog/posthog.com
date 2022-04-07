@@ -1277,3 +1277,8 @@
 [[redirects]]
     from = "/handbook/engineering/k8s-overview"
     to = "/docs/self-host/architecture"
+
+# Added: 2022-04-07
+[[redirects]]
+    from = "/tutorials/free-hotjar-alternative"
+    to = "/blog/best-open-source-session-replay-tools"
