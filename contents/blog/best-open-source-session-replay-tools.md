@@ -63,7 +63,7 @@ Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we'
 
 ### How much does it cost?
 
-PostHog (self-hosted and cloud) free up to 1 million captured events each month when you enter card details.
+PostHog (self-hosted and cloud) is free up to 1 million captured events each month when you enter card details.
 
 [Session recording](/docs/user-guides/recordings) is **included at no extra cost** in all plans.
 
