@@ -48,7 +48,7 @@ Documents any company-wide information that can't be share publicly within Peopl
 - ✅ People discussions, e.g. benefits, pensions, share options, org structure
 - ✅ Onboarding/offboarding checklists
 - ✅ Non-engineering team sprint planning (as these will often be a mix of public and private tasks and we don't want to restrict people)
-- ✅ [Sometimes] Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
+- ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
 - ✅ [Sometimes] Discussions about replacing or adding tools, services, and systems that we use
 
 For company-related issues that _can_ be discussed publicly, these should go in the `meta` repo which can be found in https://github.com/PostHog/meta/
