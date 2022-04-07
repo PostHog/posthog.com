@@ -1,6 +1,6 @@
 ---
 date: 2022-04-07
-title: Open source (and self-hosted) alternatives to Hotjar, FullStory & LogRocket
+title: Open source (and self-hosted) alternatives to Hotjar & FullStory
 rootPage: /blog
 sidebar: Blog
 showTitle: true
