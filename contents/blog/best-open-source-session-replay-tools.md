@@ -11,7 +11,7 @@ author: ["hanna-crombie"]
 categories: ["Guides", "Product analytics"]
 ---
 
-Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording
+Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording.
 
 ### Why you need session recording
 
@@ -193,3 +193,5 @@ Session recording is also included in Matomo’s cloud Business plan. Pricing is
 ### Is it open source?
 
 Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
+
+> Interested in trying PostHog? [Book a demo](/signup/self-host/deploy#demo) to learn more or [try it for free today.](/pricing)
