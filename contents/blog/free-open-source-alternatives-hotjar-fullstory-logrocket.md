@@ -55,7 +55,6 @@ Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we'
 - Fully-featured product analytics suite
 - Unlimited scaling
 - Front-end events captured out of the box
-- Easy [migration](https://posthog.com/tutorials/free-hotjar-alternative) to your existing infrastructure
 - CSS selectors block sensitive data to protect user privacy
 - Customisable data retention
 - Enable session recording for specific user segments for more granular insights
@@ -66,7 +65,7 @@ Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we'
 
 PostHog (self-hosted and cloud) free up to 1 million captured events each month when you enter card details.
 
-[Session recording](https://posthog.com/docs/user-guides/recordings) is included at no extra cost in both plans.
+[Session recording](https://posthog.com/docs/user-guides/recordings) is included at no extra cost in all plans.
 
 
 ### Is it open source?
