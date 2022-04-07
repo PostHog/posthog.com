@@ -28,10 +28,10 @@ export const WhyWereHere = () => {
 
                             <aside className="py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center">
                                 <StaticImage
-                                    src="images/this_hog_ships.png"
+                                    src="images/this-hog-ships.png"
                                     alt="This hog ships"
                                     height={390}
-                                    width={390}
+                                    width={410}
                                 />
                             </aside>
                         </div>
@@ -53,7 +53,7 @@ export const WhyWereHere = () => {
                                 <StaticImage
                                     src="images/this-hog-ships-too.png"
                                     alt="This hog ships too"
-                                    height={353}
+                                    height={365}
                                     width={370}
                                 />
                             </aside>
