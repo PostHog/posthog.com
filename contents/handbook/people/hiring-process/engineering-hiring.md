@@ -41,7 +41,7 @@ We are looking for proactivity, directness, good communication skills, an awaren
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, usually up to 90 minutes in total.
 
-The first part is a 30-minute interview with [Tim](https://posthog.com/handbook/people/team#tim-glaser-co-founder--cto-) about your previous experiences and what motivates you to come join us. 
+The first part is a 30-minute interview with [Tim](https://posthog.com/handbook/people/team#tim-glaser-co-founder-&-cto) about your previous experiences and what motivates you to come join us. 
 
 The second part is an hour-long technical interview with one of our Engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style.
 
@@ -58,7 +58,7 @@ This gives you the chance to learn how we work, and for us to see your quality a
 
 An Engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
-*   Kick-off session with an Engineer and/or [James](https://posthog.com/handbook/people/team#james-hawkins-co-founder--ceo-)
+*   Kick-off session with an Engineer and/or [James](https://posthog.com/handbook/people/team#james-hawkins-co-founder-&-ceo)
 *   Time to focus on the task, we can provide support via your personal slack channel (we will communicate your main point of contact via email before the SuperDay)
 *   Informal session with a team member
 *   On days where we have company-wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break

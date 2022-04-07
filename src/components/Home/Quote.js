@@ -7,25 +7,23 @@ export default function HomeQuote() {
     return (
         <Quote
             className={section('text-left')}
-            name="Ben White"
-            title="@benjackwhite"
+            name="Nicolas Grenié"
+            title="Developer Advocate, Typeform"
             image={
                 <StaticImage
                     width={100}
                     height={100}
-                    alt="Ben White - @benjackwhite"
+                    alt="Nicolas Grenié - Typeform"
                     outputPixelDensities={[1, 2]}
-                    src="../../images/ben-white.png"
+                    src="../../images/nicolas_grenie.png"
                 />
             }
             quote={
                 <span>
-                    PostHog is what I always wanted a Product Analytics SaaS to be.{' '}
-                    <span className="text-red">Private cloud option</span> so GDPR becomes way more manageable,{' '}
-                    <span className="text-red">
-                        features built based on direct community feedback, focus on simplicity and usefulness
-                    </span>{' '}
-                    over vanity features...Great job people!
+                    "PostHog is a game-changer; it's a full-featured{' '}
+                    <span className="text-red">product analytics suite you can self-host.</span> There's no need to risk
+                    breaches by sending data to third parties or to waste time on lengthy compliance checks.{' '}
+                    <span className="text-red">You don't even need SQL!"</span>{' '}
                 </span>
             }
         />

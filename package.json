@@ -26,6 +26,7 @@
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
         "@docsearch/react": "^3.0.0-alpha.42",
+        "@fontsource/source-code-pro": "^4.5.4",
         "@headlessui/react": "^1.4.0",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",

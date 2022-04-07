@@ -66,6 +66,7 @@ Optionally you can submit:
 
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
+-   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
 
 For example:
 
@@ -76,7 +77,7 @@ posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': '
 or
 
 ```python
-posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc())
+posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc()))
 ```
 
 #### Setting user properties via an event

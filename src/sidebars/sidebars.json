@@ -314,6 +314,10 @@
                         {
                             "name": "How to run migrations on PostHog Cloud",
                             "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        },
+                        {
+                            "name": "Working with ClickHouse materialized columns",
+                            "url": "/handbook/engineering/databases/materialized-columns"
                         }
                     ]
                 },
@@ -321,10 +325,6 @@
                     "name": "Deployments",
                     "url": "",
                     "children": [
-                        {
-                            "name": "Kubernetes architecture overview",
-                            "url": "/handbook/engineering/k8s-overview"
-                        },
                         {
                             "name": "Deployments support",
                             "url": "/handbook/engineering/deployments-support"
@@ -1086,7 +1086,7 @@
                     "url": "/docs/api/dashboards"
                 },
                 {
-                    "name": "Event Definitions",
+                    "name": "Event definitions",
                     "url": "/docs/api/event-definitions"
                 },
                 {
@@ -1098,7 +1098,7 @@
                     "url": "/docs/api/experiments"
                 },
                 {
-                    "name": "Feature Flags",
+                    "name": "Feature flags",
                     "url": "/docs/api/feature-flags"
                 },
                 {
@@ -1110,7 +1110,7 @@
                     "url": "/docs/api/groups"
                 },
                 {
-                    "name": "Groups Types",
+                    "name": "Groups types",
                     "url": "/docs/api/groups-types"
                 },
                 {
@@ -1130,7 +1130,7 @@
                     "url": "/docs/api/persons"
                 },
                 {
-                    "name": "Plugin Configs",
+                    "name": "Plugin configs",
                     "url": "/docs/api/plugin-configs"
                 },
                 {
@@ -1142,11 +1142,11 @@
                     "url": "/docs/api/projects"
                 },
                 {
-                    "name": "Property Definitions",
+                    "name": "Property definitions",
                     "url": "/docs/api/property-definitions"
                 },
                 {
-                    "name": "Session_recordings",
+                    "name": "Session recordings",
                     "url": "/docs/api/session-recordings"
                 },
                 {
@@ -1154,7 +1154,7 @@
                     "url": "/docs/api/trend"
                 },
                 {
-                    "name": "User",
+                    "name": "Users",
                     "url": "/docs/api/user"
                 },
                 {
