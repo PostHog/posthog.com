@@ -1,5 +1,5 @@
 ---
-date: 2022-04-05
+date: 2022-04-07
 title: Open source (and self-hosted) alternatives to Hotjar, FullStory & LogRocket
 rootPage: /blog
 sidebar: Blog
@@ -24,27 +24,31 @@ Aside from making for some fascinating watching, recordings facilitate a detaile
 - How bugs come about
 - How your users are interacting with individual elements of your product.
 
-This information in context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. Session recording is a great tool to have in your arsenal when you want to act on real world user data.
+This context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. 
 
-### Self-hosted vs. cloud session recording
-Cloud session recording tools like Hotjar, FullStory and LogRocket can offer a convenient solution for users who want to kick off quickly. That said, the costs associated with cloud-hosting are an important factor to consider, not to mention the privacy concerns that come hand-in-hand with third-party providers.
+Bottom line: session recording is an essential tool for making better products.
 
-Negotiating the security impact of hosting your data in the cloud can be a headache to say the least, particularly when searching for solutions that help you to stay compliant with [GDPR](https://posthog.com/blog/best-gdpr-compliant-analytics-tools) or [HIPAA](https://posthog.com/blog/best-hipaa-compliant-analytics-tools) regulations. If sending data to third-party systems is of concern, a self-hosted option may well be the most convenient way to go.
+### Why self-host your session recording?
+Most popular session recording tools, such as  Hotjar, FullStory and LogRocket, are exclusively cloud-based. This is convenient, but comes with several drawbacks:
 
-Open source software gives you the freedom to study, modify and run the tools you are using freely. By implementing a self-hosted version of session recording, you can ensure all of your data remains on your platform.
+1. They're expensive
+2. You don't control your user data
+3. GDPR and HIPAA compliance is a headache 
 
-Here, we’ve got the lowdown on some of the best open source and self-hosted session recording tools available, so you can choose the right one for you.
+Self-hosting your session recording eliminates these drawbacks and allows you to keep control of your data, while open source tools give you the freedom to study, modify, and run the tools at no extra cost.
+
+If that sounds good to you, coming up are the best open source (or self-hosted) session recording tools right now.
 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one product analytics platform which empowers any business to make efficient data-driven decisions. It offers all the tools required to measure user success and build better products, including feature flags, funnels, [session recording](https://posthog.com/product/session-recording), heat maps, A/B testing, trends and much more. PostHog’s tools work together natively, offering extensive, actionable user insights.
+PostHog is an all-in-one product analytics platform that offers all the tools required to measure user success and build better products, including but not limited to [session recording](https://posthog.com/product/session-recording). Other features include Feature Flags, Funnels, Heat Maps, A/B testing, Trends and much more. All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
-PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics while keeping all of their data in one manageable platform. The user interface is extremely intuitive and no SQL knowledge is required, making it very easy for all members of your team to pick up the tooling and build a better understanding of your users.
+We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform.
 
-We may be a little biased here, but you can sign up for free to see how the platform works for yourself!
+Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/signup) to find out for yourself.
 
 ### Strengths
 
@@ -55,14 +59,15 @@ We may be a little biased here, but you can sign up for free to see how the plat
 - CSS selectors block sensitive data to protect user privacy
 - Customisable data retention
 - Enable session recording for specific user segments for more granular insights
+- Flexible self-hosting and managed SaaS options
+- Session recording is a no additional cost feature
 
 ### How much does it cost?
 
-PostHog (self-hosted and cloud) is available for free up to 1 million captured events each month.
+PostHog (self-hosted and cloud) free up to 1 million captured events each month when you enter card details.
 
 [Session recording](https://posthog.com/docs/user-guides/recordings) is included at no extra cost in both plans.
 
-Custom plans are also available for scaling and enterprise customers who are working with very large volumes of data. The transparent [pricing calculators](https://posthog.com/pricing?realm=self-hosted) allow you to see what you can expect to pay based on your event capture volume.
 
 ### Is it open source?
 
@@ -71,8 +76,8 @@ Yes! PostHog’s open source plans are available under an MIT license. Find out 
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
-OpenReplay is an open source session replay stack which provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
-Their tooling is particularly effective for application state and customer support however – features like DevTools and co-browsing sessions are useful for monitoring performance.
+OpenReplay is an open source session replay stack that provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
+Its tooling is particularly effective for application state and customer support, howeve – features like DevTools and co-browsing sessions are useful for monitoring performance.
 
 ### Who is OpenReplay for?
 
@@ -89,7 +94,7 @@ OpenReplay is a developer-friendly tool. It allows engineers to see how users ar
 
 OpenReplay’s self-hosted plan is available for free.
 
-They also offer a cloud option starting at $3.95 per month for 1,000 recordings with 30 days data retention.
+It also offers a cloud option starting at $3.95 per month for 1,000 recordings with 30 days data retention.
 
 ### Is it open source?
 
@@ -113,7 +118,7 @@ UXWizz’s is a good choice for individuals, and marketing and product teams in 
 
 ### How much does it cost?
 
-UXWizz is available as a self-hosted solution only and pricing ranges from £79 to £1,199 for a lifetime license, including 1 year support. Additional updates and support are priced as add-on subscriptions.
+UXWizz is available as a self-hosted solution only and pricing ranges from £79 to £1,199 for a lifetime license, including 1-year support. Additional updates and support are priced as add-on subscriptions.
 
 ### Is it open source?
 
@@ -136,9 +141,7 @@ UXlens is a good choice for UX designers and product teams who want to study the
 
 ### How much does it cost?
 
-UXlens sessions recording tool is available as a self-hosted solution for free.
-
-A cloud-hosted version is also available starting at $5 per month.
+Self-hosting is free. A cloud-hosted version is also available starting at $5 per month.
 
 ### Is it open source?
 
