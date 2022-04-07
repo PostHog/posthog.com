@@ -25,7 +25,7 @@ Karl
 
 ### Key results
 
-- P95 <15 seconds for Suprdaily
+- P95 query latency is < 15 seconds for our biggest customer (by event count)
 - Successful load test with Billion event queries
 
 ## Sub team - Ingestion
