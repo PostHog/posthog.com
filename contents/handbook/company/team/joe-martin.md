@@ -48,7 +48,7 @@ In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-
 - I am seen as brave when giving feedback and stepping on toes. I default to transparency.
 - Work I do, such as [case studies](/customers) is seen as valuable and showing a lot of insight.
 - I am seen as over-cautious and too detail-orientated when planning new work. 
-- I am seen as over-communicative in social discussions and on the topic of diversity. 
+- I am seen as over-communicative in social discussions. I talk a lot about diversity, but fail on follow-through.
 - I am seen as being biased to my past experiences. This limits my potential impact.
 
 As a result, over the next six months I will:
