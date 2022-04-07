@@ -147,7 +147,7 @@ No. UXlens is not open source.
 
 ## 5. [SessionStack](https://www.sessionstack.com/)
 
-![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img6_SessionStack.png)
+![SessionStack - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img6_SessionStack.png)
 
 SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Its tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
 
