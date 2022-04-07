@@ -42,13 +42,13 @@ If that sounds good to you, coming up are the best open source (or self-hosted) 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one product analytics platform that offers all the tools required to measure user success and build better products, including but not limited to [session recording](https://posthog.com/product/session-recording). Other features include Feature Flags, Funnels, Heat Maps, A/B testing, Trends and much more. All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
+PostHog is an all-in-one product analytics platform that offers all the tools required to measure user success and build better products, including but not limited to [session recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [A/B testing](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
 We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform.
 
-Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/signup) to find out for yourself.
+Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
 
 ### Strengths
 
@@ -65,12 +65,11 @@ Are we may be biased here? Yes. Are we wrong? We'll let you be the judge. As we'
 
 PostHog (self-hosted and cloud) free up to 1 million captured events each month when you enter card details.
 
-[Session recording](https://posthog.com/docs/user-guides/recordings) is included at no extra cost in all plans.
-
+[Session recording](/docs/user-guides/recordings) is **included at no extra cost** in all plans.
 
 ### Is it open source?
 
-Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](https://posthog.com/signup/self-host).
+Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
 
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
