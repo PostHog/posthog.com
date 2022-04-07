@@ -55,7 +55,7 @@ As a result, over the next six months I will:
 
 - Push for bigger, braver projects. I feel continuing the '[Nail Plugins](https://github.com/PostHog/posthog.com/issues/3265)' project is a good starting point, as well as unblocking [competitor comparisons](https://github.com/PostHog/posthog.com/issues/2939).
 - Default to giving only high-level feedback on content, unless requested to do more. 
-- Change my internal communication style to allow other voices more room, while also seeking opportunities to champion diversity at PostHog through action. 
+- Change my internal communication style to allow other voices more room. Actively seek opportunities to champion diversity at PostHog through action. 
 
 I'm always open to more feedback, from anyone. Got some? [Send it to me!](https://forms.gle/UcA5FdAjZJSXiqYG6)
 
