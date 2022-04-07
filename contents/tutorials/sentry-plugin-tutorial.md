@@ -3,7 +3,7 @@ title: How to correlate errors with product performance using Sentry
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/sentry-tutorial-banner.png
-featuredTutorial: true
+featuredTutorial: false
 date: 2022-03-31
 author: ['joe-martin']
 topics: ['sentry']

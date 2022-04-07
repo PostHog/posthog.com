@@ -3,7 +3,7 @@ title: How to trigger Discord notifications when an action is detected in PostHo
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/discord-tutorial-banner.png
-featuredTutorial: true
+featuredTutorial: false
 date: 2022-03-31
 author: ['joe-martin']
 topics: ['zapier', 'discord']

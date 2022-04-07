@@ -3,7 +3,7 @@ title: How to automatically organize PostHog actions in Notion
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/notion-tutorial-banner.png
-featuredTutorial: true
+featuredTutorial: false
 date: 2022-03-31
 author: ['joe-martin']
 topics: ['zapier', 'notion']
