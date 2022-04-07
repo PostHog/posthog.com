@@ -147,6 +147,8 @@ No. UXlens is not open source.
 
 ## 5. [SessionStack](https://www.sessionstack.com/)
 
+![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img6_SessionStack.png)
+
 SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Its tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
 
 ### Who is SessionStack for?
@@ -168,7 +170,7 @@ Cloud plans with SessionStack start from $99 a month for up to 1,000 sessions. A
 SessionStack’s code is not open source. It does offer a self-hosted deployment option, though, which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
 
 ## 6. [Matomo](https://matomo.org/)
-![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/Matomo session recording.png)
+![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 
