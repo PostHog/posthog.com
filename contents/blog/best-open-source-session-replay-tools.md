@@ -39,10 +39,12 @@ Self-hosting your session recording eliminates these drawbacks and allows you to
 
 If that sounds good to you, coming up are the best open source (or self-hosted) session recording tools right now.
 
+> Think we've missed a good open source session recording tool? Open an issue on [our website repo](https://github.com/PostHog/posthog.com) to make a suggestion.
+
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one product analytics platform that offers all the tools required to build better products, including but not limited to [Session Recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [Experimentation](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
+PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source-analytics-tools) platform that offers all the tools required to build better products, including but not limited to [Session Recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [Experimentation](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
