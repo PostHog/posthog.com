@@ -44,7 +44,7 @@ I'm engaged and live just outside of London. I'm passionate about punk music, vi
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
 
 - I am seen as an effective and flexible executor, planner, writer and storyteller.
-- I am seen as empathetic and extremely supportive of colleagues, especially new colleagues or those with less experience than me. 
+- I am seen as empathetic and extremely supportive of others, especially new colleagues or those with less experience than me. 
 - I am seen as brave when giving feedback and stepping on toes. I default to transparency.
 - Work I do, such as [case studies](/customers) is seen as valuable and showing a lot of insight.
 - I am seen as over-cautious and too detail-orientated when planning new work. 
