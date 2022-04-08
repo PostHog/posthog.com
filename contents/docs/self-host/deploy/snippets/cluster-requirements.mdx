@@ -27,7 +27,8 @@ import ExpandableVolumeSnippet from './expandable-volume'
     If your storage class allows it, you can modify the `reclaimPolicy` by running:
 
     ```shell
-    kubectl patch storageclass -p '{"reclaimPolicy": "Retain"}'
+    DEFAULT_STORAGE_CLASS=$(kubectl get storageclass -o=jsonpath='{.items[?(@.metadata.annotations.storageclass\.kubernetes\.io/is-default-class=="true")].metadata.name}')
+    kubectl patch storageclass "$DEFAULT_STORAGE_CLASS" -p '{"reclaimPolicy": "Retain"}'
     storageclass.storage.k8s.io/gp2 patched
     ```
 

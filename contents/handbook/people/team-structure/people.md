@@ -47,7 +47,7 @@ Every PostHog team member, as well as current, future and past candidates.
 | People want to be involved in making PostHog the best place to work  | % Response rate of Engagement survey       | 90%    | 96%     |
 | People recommend PostHog as a great place to work.                   | Average score in engagement survey         | 90%    | 94%     |
 | People feel informed about what’s happening at PostHog               | Average score in engagement survey         | 90%    | 91%     |
-| People understand PostHog's goals and know how tocontribute.         | Average score in engagement survey         | 90%    | 89%     |
+| People understand PostHog's goals and know how to contribute.        | Average score in engagement survey         | 90%    | 89%     |
 | People feel like they develop professionally.                        | Average score in engagement survey         | 85%    | 88%     |
 | People feel like they are being paid competitively.                  | Average score in engagement survey         | 80%    | 78%     |
 | People feel a sense of belonging.                                    | Average score in engagement survey.        | 80%    | 82%     |

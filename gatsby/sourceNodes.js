@@ -153,7 +153,7 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
                         process.env.SLACK_API_KEY,
                         false
                     )
-                    question.replies = [reply, ...replies.slice(1)]
+                    question.replies = [reply, ...(replies || [])?.slice(1)]
                     const node = {
                         id: createNodeId(`question-${message.thread_ts}`),
                         parent: null,

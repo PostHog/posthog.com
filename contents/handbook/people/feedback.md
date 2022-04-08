@@ -43,7 +43,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 While the 360 degree team meetings are purely feedback-focused, you should aim to spend a significant chunk of the performance review looking ahead to the next 6 months. 
 
-Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more repsonsive to changes in the market and people's roles. 
+Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more responsive to changes in the market and people's roles. 
 
 ### Some guidance for managers
 

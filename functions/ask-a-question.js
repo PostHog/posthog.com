@@ -108,6 +108,16 @@ exports.handler = async (e) => {
                         }),
                         action_id: 'edit-question-button',
                     },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Open page',
+                            emoji: true,
+                        },
+                        url: `https://posthog.com${body.slug}`,
+                        action_id: 'open-page-button',
+                    },
                 ],
             },
         ],
