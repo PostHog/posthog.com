@@ -1,20 +1,19 @@
 ---
-title: How the Customer.io Connector works
+title: How the Sendgrid Connector works
 showTitle: true
 topics:
-    - customer.io-connector
+    - sendgrid-connector
 ---
 
-## What does the Customer.io Connector app do?
-The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available.
+## What does the Sendgrid Connector app do?
+The Sendgrid Connector sends event and emails data from PostHog into Sendgrid whenever a user is identified in PostHog.
 
-## How do I install the Zendesk Connector app?
-Make sure to use your Zendesk Admin Account to perform the below activities.
+## How do I install the Sendgrid Connector app?
 
 1. Visit the "Apps" page in your instance of PostHog.
-2. Search for 'Currency Normalization' and select the app, press Install.
-3. Add your Customer.io site ID and token at the configuration step.
-4. Enable the app and watch your 'People' list get populated in Customer.io!
+2. Search for 'Sendgrid' and select the app, press Install.
+3. Add your Sendgrid API key at the configuration step.
+4. Enable the plugin and watch your contacts list get populated in Sendgrid!
 
 ## What if I have feedback on this app?
 

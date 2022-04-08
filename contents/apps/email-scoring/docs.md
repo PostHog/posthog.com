@@ -6,7 +6,7 @@ topics:
 ---
 
 ## What does the Email Scoring app do?
-The Email Scoring app adds email scores to user profiles in PostHog, giving you more context on each user. Email scores are added using the [Mailboxlayer API](https://mailboxlayer.com/). 
+The Email Scoring app adds email scores to Persons in PostHog, giving you more context on each user. Email scores are added using the [Mailboxlayer API](https://mailboxlayer.com/). 
 
 ## How do I install the Email Scoring app?
 

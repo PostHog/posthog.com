@@ -1,24 +1,25 @@
 ---
-title: How the Google Cloud Pub/Sub Connector works
+title: How the Timestamp Parser works
 showTitle: true
 topics:
-    - pub-sub
+    - timestamp-parser
 ---
 
-## What does the Google Cloud Pub/Sub app do?
-This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested.
+## What does the Timestamp Parser app do?
+This app parses events in PostHog into the following time-based categories: 
 
-## How do I install the Google Cloud Pub/Sub app?
+- Day of the week
+- Day of the month
+- Month
+- Year
+- Hour
+- Minute
+
+## How do I install the Timestamp Parser app?
 
 1. Visit the "Apps" page in your instance of PostHog.
-2. Search for 'Pub/Sub' and select the app, press Install.
-3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
-4. Enter your Topic ID.
-5. Watch events publish to Topic.
-
-## Where is my Google Cloud key .json file?
-
-You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+2. Search for 'Timestamp Parser' and select the app, press Install.
+3. Follow the on-screen steps to configure the app.
 
 ## What if I have feedback on this app?
 

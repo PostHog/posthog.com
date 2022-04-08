@@ -1,24 +1,20 @@
 ---
-title: How the Google Cloud Pub/Sub Connector works
+title: How the Useragent Enhancer works
 showTitle: true
 topics:
-    - pub-sub
+    - useragent
 ---
 
-## What does the Google Cloud Pub/Sub app do?
-This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested.
+## What does the Useragent Enhancer app do?
+This app enhances events to include browser details when the event has a `$useragent` property. This enables off-loading, retrieving and parsing of user agent strings at ingestion.
 
-## How do I install the Google Cloud Pub/Sub app?
+It's typically used to easily pass the `User-Agent` HTTP header from incoming requests.
+
+## How do I install the Useragent Enhancer app?
 
 1. Visit the "Apps" page in your instance of PostHog.
-2. Search for 'Pub/Sub' and select the app, press Install.
-3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
-4. Enter your Topic ID.
-5. Watch events publish to Topic.
-
-## Where is my Google Cloud key .json file?
-
-You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+2. Search for 'Useragent Enhancer' and select the app, press Install.
+3. Follow the on-screen steps to configure the app.
 
 ## What if I have feedback on this app?
 
