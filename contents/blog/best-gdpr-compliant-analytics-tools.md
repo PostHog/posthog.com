@@ -73,21 +73,24 @@ Yes. Plausible can be hosted on your own infrastructure so that data doesn’t h
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-Like PostHog, Countly is an enterprise-grade product analytics platform that offers an on-premises deployment suitable for businesses which want to understand their users in greater detail. 
+Like PostHog, Countly is a highly customizable product analytics platform that offers open-source and enterprise-grade versions with on-premises or cloud deployments suitable for organizations that want to understand product performance and users’ journeys in greater detail. 
 
-Countly still offers a robust suite of features, even down to the ability to tailor deployments to your branding via a white-label edition. The ability to track crashes and errors and to issue push notifications to mobile users are also useful additions over most other analytics tools. 
+Countly offers a robust suite of features, even down to the ability to tailor deployments to your branding via a white-label edition. The ability to track and report crashes, errors, and other performance metrics, and to issue push notifications to mobile users are also useful additions to most other analytics tools. 
+
+Countly’s Enterprise edition cost is data point-based instead of feature-based, allowing for full experimentation with as many plugins as needed by the organization.
 
 ### Who is Countly for?
-Countly is especially targeted to IOT organizations, or those which need to track users across mobile, desktop and IOT devices. It also offers an open-source version which is suitable for individuals. 
+Countly is especially targeted to organizations that need to securely track users across mobile, desktop, and web. It has an extensive list of SDK and integrations available and it also offers an open-source version which is suitable for individuals or small teams that need a smaller set of features for secure product and user tracking. 
 
 ### Features & benefits
-- Support for mobile and IOT devices
-- Extensible via plugins
-- Self-hosting and cloud-hosting available
+- Support for mobile, web, and desktop
+- Two editions, both extensible via plugins
+- Self-hosting and private cloud-hosting deployments available
 - Push notifications and crash analytics
 
+
 ### Is Countly GDPR compliant?
-Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services or stored in servers outside of GDPR jurisdiction. 
+Yes. Countly can be deployed onto your own infrastructure or in cloud servers based in the EU, so that data doesn’t get stored in servers outside of GDPR jurisdiction.
 
 ## 4. [GoAccess](https://goaccess.io/)
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
