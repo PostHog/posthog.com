@@ -2,16 +2,16 @@ import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import { useActions, useValues } from 'kea'
 import React from 'react'
-import { SCALE_MINIMUM_PRICING } from '../constants'
+import { ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { Plan } from './Plan'
-import { Scale } from './Plans'
+import { Enterprise } from './Plans'
 
-export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
+export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge }) {
     const { finalCost } = useValues(pricingSliderLogic)
     const { setPricingOption } = useActions(pricingSliderLogic)
-    const monthlyMinimumPrice = SCALE_MINIMUM_PRICING.toLocaleString('en-US', {
+    const monthlyMinimumPrice = ENTERPRISE_MINIMUM_PRICING.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
@@ -22,7 +22,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
             <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
                 <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
                     <div className="flex flex-col md:flex-row md:space-x-14 sm:space-y-6 md:space-y-0 items-start">
-                        <Scale
+                        <Enterprise
                             hideCalculator
                             hideActions={hideActions}
                             hideBadge={hideBadge}
@@ -41,11 +41,11 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </div>
 
                                 <PricingSlider
-                                    marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
-                                    min={1000000}
-                                    max={1000000000}
-                                    defaultValue={1000000}
-                                    pricingOption={'scale'}
+                                    marks={[10000000, 20000000, 50000000, 100000000, 1000000000, 10000000000]}
+                                    min={10000000}
+                                    max={10000000000}
+                                    defaultValue={10000000}
+                                    pricingOption={'enterprise'}
                                 />
                             </div>
 
@@ -55,28 +55,20 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">First 1 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">Free</dd>
-                                </dl>
-                                <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">1-2 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
-                                </dl>
-                                <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">2-10 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000225</dd>
+                                    <dt className="mb-0 opacity-75 text-xs">First 10 million</dt>
+                                    <dd className="mb-0 font-bold text-xs">$4,500</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000045</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.00009</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">100 million - 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000009</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.000018</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2 pb-3">
                                     <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000003</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.0000036</dd>
                                 </dl>
                             </div>
 
