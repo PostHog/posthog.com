@@ -3,46 +3,20 @@ title: Analyzing your conversion with Funnels
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
-featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=504
-author: ['yakko-majuri']
-topics:
-    - funnels
+author: ["yakko-majuri", "andy-vandervell"]
+topics: ["funnels"]
 date: 2020-09-29
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
 
-For most products, having a user land on your page is just the beginning. 
+A user landing on a page is just the beginning. You want users to sign up, use the product, pay you, or complete a series of steps in your product to make full use of a key feature.
 
-After all, a pageview isn't worth much if it doesn't lead to anything. 
+To determine how well you're achieving these goals, you need to look at conversion, and funnels are a great way to measure and visualize conversion.
 
-You want users to sign up, use the product, pay you. 
+This tutorial will walk you through creating a funnel step-by-step, while covering some of the use cases and features of PostHog Funnels. 
 
-Or, alternatively, you want them to complete a series of steps in your product to make full use of a key feature.
-
-To determine how well you're achieving these goals, you need to look at **conversion**.
-
-Conversion rates tell you how well (or poorly) you're getting users from one step or action you need them to perform to another. 
-
-For example, after a user visits your landing page, you want them to click a sign up button. Then, you want them to actually complete the signup process.
-
-This process alone raises a lot of important questions for your business metrics, such as:
-
-_"What percentage of users who visit my website actually sign up?"_
-
-To answer those questions, you should really be using funnels.
-
-![Funnel Example](../images/tutorials/funnels/insights-funnel.png)
-
-Above is a simple example of a PostHog funnel. It was made to answer the question:
-
-_"Out of the PostHog team members who visited the website, how many clicked our 'Star Repo' button?"_
-
-Just like us, you probably have a lot of questions that can be answered with funnels. 
-
-Hence, this tutorial will walk you through creating a funnel step-by-step, while covering some of the use cases and features of PostHog funnels. 
-
-## Prerequisites
+## Before you start
 
 To follow this tutorial along, you need to:
 
@@ -55,71 +29,59 @@ To follow this tutorial along, you need to:
 
 Funnels are great for when your users should perform actions in succession. That is, if you need your user to do something _and then_ do something else, funnels are a great way to gather insights into that process.
 
+![PostHog Funnel Example](../images/tutorials/funnels/top-to-bottom-funnel.png)
+
+Above is a very simple example of a Funnel in PostHog, measuring how often people visits our docs after arriving on the homepage. This users the top to bottom view, but there's also a left to right option, as seen below
+
+![PostHog Funnel Example](../images/tutorials/funnels/simple-left-right.png)
+
 Funnels can have as many steps as you like and offer a good look into both what percentage of **unique users** are converting from one step to another, as well as identifying which users convert, and which don't.
 
-A standard but very useful funnel is looking at the sign up process from end to end, for example. You can set up a funnel starting from the moment the user lands on your page to when they actually complete the process. You are then able to find out where users are dropping off, and work on improving those areas.
+A standard, but very useful, funnel is looking at the sign up process from end-to-end. You can set up a funnel starting from the moment the user lands on your page to when they actually complete the process. You are then able to find out where users are dropping off, and work on improving those areas.
 
 ## Creating your first funnel
 
-### Step 1: Navigate to 'Funnels'
+### Step 1: Create a new insight
 
-Our 'Funnels' feature is located in 'Insights'. After navigating to 'Insights' on the sidebar, click on the 'Funnels' tab to get to this page:
+Funnels are part Insights in PostHog. 
 
-![Funnels Page](../images/tutorials/funnels/funnels-page.png)
+Click on the '+' icon next to 'Insights' in the sidebar to start creating a new insight, or click on 'New insight' on the Insights page.
+
+![Funnels Page](../images/tutorials/funnels/insights-page.png)
+
+Then, in the insight builder, click on 'Funnels' to start creating your funnel.
+
+![Funnels insight](../images/tutorials/funnels/funnel-preview.png)
 
 ### Step 2: Adding steps to your funnel
 
-Once you're on the 'Funnels' page, you can then start to create your funnel.
+The Funnels builder is split into two panes: 'Query Steps' on the left for defining your funnel, and a preview pane on the right. Changes are calculated on-the-fly, so you can see if your funnel is set up correctly as you go.
 
-Click on the blue 'Add action/event' button and select the action or event you want to use as the starting point for your funnel.
+There's no limit to the number of steps you can add to your funnel, but let's start with a simple example first.
 
-You can then add a filter to that specific action now or a general filter to the entire funnel later on ('Filters' -> 'Add filter'). 
+Click on the first step to edit it and search for your desired Event or Action. In this case, we're going to select the 'Pageview' event and then apply a filter for users visiting the PostHog homepage.
 
-It's also worth noting how the PostHog funnels work in terms of what counts as a conversion to the next step. When your funnel is ready, you will have the ability to specify a time range for your funnel, such as "Last 7 days", "Last 48 hours", or a custom range. 
+FUNNEL STEP 1 VIDEO HERE
 
-Then, based on that time range, PostHog will determine conversion based on if the user performed one action after the other _at any point during the time period_. That means that if my time range is set to 2 weeks, a user may perform step 1 on day 2 and step 2 on day 13 and it will still count as a conversion. 
+You can apply filters to specific steps in the funnel, or apply a general filter to the entire funnel in the 'Filters' section below the 'Query Steps' section. By default we filter out internal and test users - read our [how to filter internal users tutorial](/tutorials/filter-internal-users) for how to set that up.
 
-### Step 3: Calculating funnel
+Next, we're going to add a second step to our funnel. The results are instantly calculated.
 
-Once you're satisfied with all the steps you've added, you can then click 'Calculate' to generate the funnel.
+FUNNEL STEP 2 VIDEO HERE
 
-This should yield something like this (without the red rectangles):
+By default, PostHog calculates the conversion rate based on a "window" of 14 days. This means a user who performs 'step 1' on day 1 and 'step 2' on day 13 and will count as a conversion. Users who convert outside of the window are considered drop-offs.
 
-![Finished Funnel](../images/tutorials/funnels/finished-funnel.png)
+You can specify a limits based on minutes, hours, days, weeks, or months using the 'Conversion window limit' box below the funnel builder.
 
-Let's go over the highlighted areas on this image:
+CONVERSION WINDOW CLIP HERE
 
-**$pageview**
+Note how, in the example above, the conversion rate drops from 10% to 7.8% when we switch from 14 days to 14 minutes.
 
-First step of the funnel. Created from the `$pageview` _event_. It has a filter added to the event specifically.
-
-**Clicked 'Star Repo' button**
-
-Second step of the funnel. Created from a custom _action_. 
-
-**Save**
-
-The 'Save' button lets you save your funnel once it has been created. It will then appear under 'Saved Funnels' at the bottom left of the page. 
-
-**Last 48 hours**
-
-Clicking here will let you configure the time range for your funnel. 
-
-**Update dashboard**
-
-For you, this button might say 'Add to Dashboard'. This lets you add your funnel to one of your custom dashboards. If you are editing a funnel that is already on a dashboard, this button will then say 'Update Dashboard'.
-
-**History**
-
-The 'History' button is available at every tab on Insights. It lets you go back through the charts and funnels you have created in the past so that you can make sure you never lose your work.
-
-### Step 4: Adding funnel to dashboard
+### Step 3: Adding funnel to dashboard
 
 If you click the 'Add to Dashboard' button on the top right, this will open up the following modal:
 
 ![Add Funnel to Dashboard](../images/tutorials/funnels/add-to-dashboard.png)
-
-Here you can set a name for your funnel and add the funnel to one of your dashboards (or create a new one).
 
 Once on the dashboard, you can resize panels as you wish, change colors, or share the dashboard publicly. To learn more about how to use our Dashboards feature you should visit our [dedicated page](/docs/user-guides/dashboards). 
 
