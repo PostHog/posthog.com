@@ -11,11 +11,11 @@ This app standardizes all your event names into a single pattern, so that data b
 ## What taxonomies are supported? 
 This app can convert from any of these taxonomies, to any other.
 
-- Camel Case: `helloThereWorld`
-- Pascal Case: `HelloThereWorld`
-- Snake Case: `hello_there_world`
-- Kebab Case: `hello-there-world`
-- Spaces: `hello there world`
+- Camel Case: `helloThereHedgehog`
+- Pascal Case: `HelloThereHedgehog`
+- Snake Case: `hello_there_hedgehog`
+- Kebab Case: `hello-there-hedgehog`
+- Spaces: `hello there hedgehog`
 
 ## How do I install the Taxonomy Standardizer app?
 
