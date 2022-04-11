@@ -118,16 +118,12 @@
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "name": "Team Core Analytics",
-                            "url": "/handbook/people/team-structure/core-analytics"
+                            "name": "Team App East",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "name": "Team Core Experience",
-                            "url": "/handbook/people/team-structure/core-experience"
-                        },
-                        {
-                            "name": "Team Growth",
-                            "url": "/handbook/people/team-structure/growth"
+                            "name": "Team App West",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
                             "name": "Team Platform",
