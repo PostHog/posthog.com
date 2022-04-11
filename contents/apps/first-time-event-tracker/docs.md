@@ -24,7 +24,7 @@ This app adds two new properties to events which you specify:
 
 No. This app will only work on events ingested _after_ the plugin was enabled. 
 
-This means it will register events as being the first if there were events that occured before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
+This means it will register events as being the first if there were events that occurred before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
 
 ## What if I have feedback on this app?
 
