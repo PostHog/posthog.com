@@ -8,7 +8,8 @@ topics:
 ## What does the Customer.io Connector app do?
 The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available.
 
-## How do I install the Customer.io Connector app?
+## How do I install the Zendesk Connector app?
+Make sure to use your Zendesk Admin Account to perform the below activities.
 
 1. Visit the "Apps" page in your instance of PostHog.
 2. Search for 'Customer.io' and select the app, press Install.

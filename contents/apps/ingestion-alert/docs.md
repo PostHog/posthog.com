@@ -5,10 +5,10 @@ topics:
     - ingestion alert
 ---
 
-## What is this plugin used for?
+## What does the Ingestion Alert app do?
 This plugin triggers a webhook when no events have been ingested for a specified period of time. It can be used to alert you when ingestion for your project / instance is not working correctly.
 
-## How can I install the Ingestion Alert plugin?
+## How do I install the Ingestion Alert app?
 
 1. Log in to your PostHog instance
 2. Click 'Plugins' on the left-hand tool bar

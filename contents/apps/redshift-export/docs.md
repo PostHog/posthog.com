@@ -5,7 +5,7 @@ topics:
     - redshift export
 ---
 
-## How do I set up the Redshift Export PostHog app? 
+## How do I install the Redshift Export app? 
 
 1. [Create a Redshift Cluster](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-launch-cluster.html)
 2. Make sure PostHog can access your cluster 
