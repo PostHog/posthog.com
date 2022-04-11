@@ -153,6 +153,8 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to $200/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
+We have a company WeWork account if you are interested in taking advantage of their All-Access membership plan. You can request to be added in the @team-people-and-ops channel on Slack.
+
 ## Meeting each other
 
 As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our bi-annual offsites.
