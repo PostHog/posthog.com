@@ -77,7 +77,7 @@ Yes! PostHog’s open source plans are available under an MIT license. Find out 
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
 OpenReplay is an open source session replay stack that provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
-Its tooling is particularly effective for application state and customer support, howeve – features like DevTools and co-browsing sessions are useful for monitoring performance.
+Its tooling is particularly effective for application state and customer support, however – features like DevTools and co-browsing sessions are useful for monitoring performance.
 
 ### Who is OpenReplay for?
 
