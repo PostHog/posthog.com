@@ -36,11 +36,13 @@ We judge your performance based on the impact you deliver overall, no matter wha
 
 ## Bias for impact
 
-Proactive people are the most successful at PostHog. Think a change should be made? Then take ownership of making it happen.
+Proactive people are the most successful at PostHog. Prioritize hard and make sure you focus your energy on what's most valuable of our customers / company then take ownership of making it happen.
 
-Today, across many product areas, we move the fastest by improving quality. It improves retention and accelerates word of mouth growth.
+Today, across many product areas, we deliver the most impact when we move fast and maintain a high quality bar. It improves retention and accelerates word of mouth growth.
 
-In engineering, this means that bias for impact is likely to mean rapidly discussing a problem and potential solution with design, rather than just shipping something that'll make the product feel broken. Focus on getting stuff out as an Minimum Viable Product, but do so thoughtfully.
+In engineering, this means that bias for impact is likely to mean putting more effort in to prioritization, scoping out the problem and design before implementation, this does not mean we aim spend weeks in slow feedback loops, rather we get together and focus all our energy on rapidly understanding the problem and solution upfront. Solving a small customer support issue super-quickly to delight them is also highly impactful since we know this is a strong contributor to our word of mouth growth.
+
+For other areas of PostHog this is likely to involve prioritizing and focussing our efforts on bigger bets which we believe can have an outsided impact (e.g. increasing sign-ups, getting a new large enterprise to start paying, increasing our rank on google, etc.)
 
 ## Talent compounds
 
