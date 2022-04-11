@@ -18,7 +18,7 @@ Provide the best events pipeline in the world.
 
 ## Responsibilities
 
-Team Ingestion owns our ingestion pipeline end-to-end. That means we own client libraries, the Django server ingestion API, the ingestion (plugin) server, as well as our Kafka and ClickHouse setup, where it pertains to event ingestion.
+Team Ingestion owns our ingestion pipeline end-to-end. That means we own the Django server ingestion API, the ingestion (plugin) server, as well as our client libraries, Kafka and ClickHouse setup, where it pertains to event ingestion.
 
 Our work generally falls into one of three categories:
 
