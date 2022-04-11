@@ -17,7 +17,7 @@ Most analytics tools just give you the hard numbers: views, clicks, conversions.
 
 Session recordings, also known as session replays, are video renderings of actions taken by your users in real-time. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
 
-Aside from making for some fascinating watching, recordings facilitate a detailed investigation of user behavior, allowing you to identify friction areas, such as: 
+Aside from making for some fascinating watching, recordings facilitate a detailed investigation of user behavior, allowing you to identify friction areas such as: 
 
 - Where users are getting stuck on your site
 - Hesitation at different stages of your funnel
