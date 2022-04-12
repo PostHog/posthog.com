@@ -136,7 +136,7 @@ There are three settings to play with under the 'Advanced options' drop down.
 - **Strict order:** Step B must happen directly after Step A
 - **Any order:** Steps can be completed in any sequence
 
-We default to 'Sequential' because a perfect A to B to C funnel is rare, and using this option will result in much lower conversion numbers in most cases. That said, it is applicable in some cases where the front-end user journey options are stricly controlled.
+We default to 'Sequential' because a perfect A to B to C funnel is rare, and using this option will result in much lower conversion numbers in most cases. That said, it is applicable in some cases where the front-end user journey options are strictly controlled.
 
 **Conversion rate calculation** controls how the conversion rate is calculated. By default we measure the overall conversion rate relative to the first step in the funnel, but here you can choose 'Relative to previous step' if you prefer. Note, however, that in the 'Top to bottom' funnel view, the relative conversaion rate appears in brackets beneath each step.
 
