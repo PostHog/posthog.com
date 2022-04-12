@@ -18,7 +18,7 @@ It is [used by teams such as WittyWorks to protect user privacy](https://posthog
 3. Search for 'Property Filter' press 'Install'
 4. Configure the by app by following the onscreen instructions. 
 
-It's important to note that this app effectively removes information from PostHog events by setting properities to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this app at the _end_ of a sequence. 
+It's important to note that this app effectively removes information from PostHog events by setting properties to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this app at the _end_ of a sequence. 
 
 Note: If you are filtering `$ip`, `event.ip` will also be set to null.
 
