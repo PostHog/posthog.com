@@ -28,7 +28,7 @@ Research from Red Hat shows that [90%](https://www.redhat.com/rhdc/managed-files
 
 - **Databases** - Many large companies use open-source database solutions such as PostgreSQL, MySQL or [Clickhouse](https://posthog.com/docs/self-host/migrate-from-postgres-to-clickhouse) rather than choosing a proprietary solution. This gives them greater compatibility and flexibility as they integrate it into the rest of their technology stack.
 
-- **Analytics** - Open-source analytics solutions have also become very popular, giving enterprises full control over their data handling, hosting, and the like. Solutions like [PostHog](https://posthog.com/) have been revolutionary in giving companies the peace of mind to know that their data is never leaving the confines of the company itself.
+- **Analytics** - Open-source analytics solutions have also become very popular, giving enterprises full control over their data handling, hosting, and the like. Solutions like [PostHog](https://posthog.com/), which also includes an [open source session recording feature](/blog/best-open-source-session-replay-tools), have been revolutionary in giving companies the peace of mind to know that their data is never leaving the confines of the company itself.
 
 These examples represent just a portion of the ways that open-source software continues to grow its influence within large organizations. The trend is accelerating as the open-source methodology spreads to just about every other part of the tech stack from low-level firmware to cloud SaaS applications.
 
