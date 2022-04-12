@@ -52,7 +52,7 @@ If a customer wants to have multiple licenses for multiple environments, but be 
 2. Manually create an invoice on the customer with the correct price. Either charge them using the method on file or send them 
 3. Once the invoice is created, add the following fields to the "metadata" section on the invoice:
    `amortize-until`, with the value being the month until which to amortize, ie `2023-03`
-   `amortized-dollar-amount`, with the value being the amount we should count every month towards our ARR
+   `amortized-dollar-amount`, with the MRR we should account for with this invoice. Probably the total amount of the invoice divided by 12.
 4. (if user hasn't created a license yet) Manually create a license in https://license.posthog.com/admin/. You should link the stripe customer id, but you can leave everything else blank. Make sure you tick "Billing ready".
 
 ### Cloud billing
