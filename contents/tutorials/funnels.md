@@ -71,19 +71,76 @@ FUNNEL STEP 2 VIDEO HERE
 
 By default, PostHog calculates the conversion rate based on a "window" of 14 days. This means a user who performs 'step 1' on day 1 and 'step 2' on day 13 and will count as a conversion. Users who convert outside of the window are considered drop-offs.
 
-You can specify a limits based on minutes, hours, days, weeks, or months using the 'Conversion window limit' box below the funnel builder.
+You can specify other limits based on minutes, hours, days, weeks, or months using the 'Conversion window limit' box below the funnel builder.
 
 CONVERSION WINDOW CLIP HERE
 
 Note how, in the example above, the conversion rate drops from 10% to 7.8% when we switch from 14 days to 14 minutes.
 
-### Step 3: Adding funnel to dashboard
+### Step 3: Evaluate Correlated Events
 
-If you click the 'Add to Dashboard' button on the top right, this will open up the following modal:
+Once you've built a funnel in PostHog, you can take advantage of one our most powerful features. Correlation Analysis.
 
-![Add Funnel to Dashboard](../images/tutorials/funnels/add-to-dashboard.png)
+[Correlation Analysis](/docs/user-guides/correlation) automatically highlights significant factors that impact the conversion rate of users within the funnel, including events and properties.
 
-Once on the dashboard, you can resize panels as you wish, change colors, or share the dashboard publicly. To learn more about how to use our Dashboards feature you should visit our [dedicated page](/docs/user-guides/dashboards). 
+It's a powerful way to discover eye-opening insights into what your users are actually doing, allowing you to refine your funnel, and better understand your product.
+
+> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud.
+
+Let's take a look at the Correlated Events for our example.
+
+![Correlated Events](../images/tutorials/funnels/correlated-events.png)
+
+The top result immediately stands out as significant. "Persons who converted were 34x more likely" to perform the "deploy option clicked" event.
+
+In other words: people who visited the our docs from the homepage were 34x more likely to then deploy PostHog.
+
+From this we can reasonably conclude that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
+
+We can also add the "deploy option clicked" event to our funnel, as per below:
+
+![Three step funnel](../images/tutorials/funnels/funnel-with-deploy-option.png)
+
+## Filters and advanced options
+
+### How to use filters on funnels
+
+As noted earlier, you can add global events that apply to the entire funnel. This is useful for interrogating a specific subset of users, such as:
+
+- Those who arrived via a Google search
+- Those who arrived via a specific UTM parameter (e.g. marketing campaigns)
+- Those who use a specific operating system
+- Users defined by location (continent, country, city etc.)
+
+To add a filter, simply click on the blue 'Add filter group' under 'Filters' and add your desired filters. You can filter by 'AND' (all filters must be met) or by 'OR' (any filter can be met).
+
+You can also use filters by [Cohorts](/docs/user-guides/cohorts) – a useful way to isolate a funnel based on users who perform a specific action, or even a group of users from the same organization.
+
+Clicking 'Add to dashboard' allows you add you funnels to an existing dashboard or a new one, and building a dashboard showing the same funnel with various filters (e.g. conversion by platform, conversion by age etc.) is a great foundation for an actional dashboard you'll monitor every week.
+
+You also have the option to breakdown your funnel in all the same ways you can filter funnels by clicking 'Add breakdown'.
+
+Here's of our example funnel broken down by continent:
+
+![Three step funnel](../images/tutorials/funnels/continent-breakdown.png)
+
+Mousing over each breakdown will show the conversion rate for that specific result. You can also add or remove properties from the breakdown using the tick boxes below the funnel. 
+
+### Advanced options
+
+There are three settings to play with under the 'Advanced options' drop down.
+
+**Step order** controls how strictly the funnel is measured. There are three options:
+
+- **Sequential (default):** Step B must happen after Step A, but any number of events can happen between
+- **Strict order:** Step B must happen directly after Step A
+- **Any order:** Steps can be completed in any sequence
+
+We default to 'Sequential' because a perfect A to B to C funnel is rare, and using this option will result in much lower conversion numbers in most cases. That said, it is applicable in some cases where the front-end user journey options are stricly controlled.
+
+**Conversion rate calculation** controls how the conversion rate is calculated. By default we measure the overall conversion rate relative to the first step in the funnel, but here you can choose 'Relative to previous step' if you prefer. Note, however, that in the 'Top to bottom' funnel view, the relative conversaion rate appears in brackets beneath each step.
+
+Finally, **Exclusion steps** allow you exclude people who triggered other events between specific steps in your funnel. There are numerous edge cases for why you might want to do this, such as wanting to exclude people who contacted support, or booked a demo, before converting. 
 
 ## Putting your funnel to use
 
