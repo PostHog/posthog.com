@@ -1,15 +1,15 @@
 ---
-title: How the Currency Normalization PostHog app works
+title: How the Currency Normalizer PostHog app works
 showTitle: true
 topics:
-    - currency normalization
+    - currency-normalizer
 ---
 
-Normalize currencies in events. E.g. amounts in EUR, USD and GBP will all be converted to EUR.
+## What does the Currency Normalizer app do?
 
-## How do I install the Currency Normalization app for PostHog?
+This app normalizes currencies in events. E.g. amounts in EUR, USD and GBP will all be converted to EUR.
 
-Follow the steps below to install the Currency Normalization app for PostHog. 
+## How do I install the Currency Normalizer app for PostHog?
 
 1. Visit the "Apps" page in your instance of PostHog.
 2. Search for 'Currency Normalization' and select the app, press Install.

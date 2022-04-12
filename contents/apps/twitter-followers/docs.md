@@ -1,11 +1,11 @@
 ---
-title: How the Twitter Followers PostHog app works
+title: How the Twitter Followers Tracker app works
 showTitle: true
 topics:
     - twitter followers
 ---
 
-## How do I install the Twitter Followers app for PostHog?
+## How do I install the Twitter Followers Tracker app for PostHog?
 
 1. Log in to your PostHog instance
 2. Click 'Plugins' on the left-hand tool bar

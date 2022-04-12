@@ -1,30 +1,33 @@
 ---
-title: How the Property Filter app works
+title: How the Airbyte Export app works
 showTitle: true
 topics:
-    - property-filter
+    - airbyte
 ---
 
-## What does the Property Filter app do?
+## What does the Airbyte Export app do?
 
-This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use. 
+This Airbyte Export app sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if this app will copy only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.
 
-It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data. 
+## How do I get started with the Airbyte Export app?
 
-## How do I install the Property Filter app?
+The Airbyte app is an API integration. You will need to get a [PostHog Personal API key](https://posthog.com/docs/api) in order to [connect Airbyte as a data destination](https://docs.airbyte.com/integrations/sources/posthog/).
 
-1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
-3. Search for 'Property Filter' press 'Install'
-4. Configure the by app by following the onscreen instructions. 
+## What output schema is available?
 
-It's important to note that this app effectively removes information from PostHog events by setting properities to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this app at the _end_ of a sequence. 
+This app is capable of syncing the following streams: 
 
-Note: If you are filtering `$ip`, `event.ip` will also be set to null.
+- Annotations
+- Cohorts
+- Events
+- FeatureFlags
+- Insights
+- InsightsPath
+- InsightsSessions
+- Persons
+- Trends
 
-## Does this filter properties for retrospective events?
-
-No. The Property Filter app will only work on events ingested _after_ it was enabled. 
+For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
 ## What if I have feedback on this app?
 

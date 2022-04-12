@@ -1,30 +1,30 @@
 ---
-title: How the Property Filter app works
+title: How the Segment Connector app works
 showTitle: true
 topics:
-    - property-filter
+    - segment
 ---
 
-## What does the Property Filter app do?
+## What does the Segment Connector app do?
 
-This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use. 
+The Segment Connector app enables you to send events to PostHog, via Segment. 
 
-It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data. 
+Segment allows you to easily manage data and integrations with services across your Growth, Product, and Marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
-## How do I install the Property Filter app?
+## How do I get started with the Segment Connector app?
 
-1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
-3. Search for 'Property Filter' press 'Install'
-4. Configure the by app by following the onscreen instructions. 
+1. In your Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment.
+2. Grab the PostHog API key from the 'Project Settings' page in PostHog.
+3. Use one of Segment's libraries to send events.
+4. See the events coming into PostHog.
 
-It's important to note that this app effectively removes information from PostHog events by setting properities to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this app at the _end_ of a sequence. 
+## Can PostHog with Segment do everything PostHog does by itself?
 
-Note: If you are filtering `$ip`, `event.ip` will also be set to null.
+We are _big_ fans of Segment, and many people in our team use it now or have used it in the past. However, it comes with some limitations for PostHog.
 
-## Does this filter properties for retrospective events?
+The Segment app gives you access to some things our JS library can do, but using Segment alone means you can't have autocapture, feature flags, session recording, heatmaps or the toolbar. Segment is also more easily blocked by ad-blockers.
 
-No. The Property Filter app will only work on events ingested _after_ it was enabled. 
+To get around these limitations, you can install the PostHog snippet or posthog-js alongside your Segment integration. You can then use Segment for any custom events (for example `segment.track('user sign up')`), and posthog-js will automatically give you access to all the extra features.
 
 ## What if I have feedback on this app?
 

@@ -1,30 +1,19 @@
 ---
-title: How the Property Filter app works
+title: How the n8n app works
 showTitle: true
 topics:
-    - property-filter
+    - n8n
 ---
 
-## What does the Property Filter app do?
+## What does the n8n app do?
 
-This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use. 
+This n8n app enables you to automate PostHog workflows and create workflows using other services, using n8n. 
 
-It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data. 
+## How do I get started with the n8n app?
 
-## How do I install the Property Filter app?
+The n8n app is an API integration. You will need a [PostHog Personal API key](https://posthog.com/docs/api), which must be [authenticated with n8n](https://docs.n8n.io/credentials/posthog/) in order to [connect n8n](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations) and get started.
 
-1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
-3. Search for 'Property Filter' press 'Install'
-4. Configure the by app by following the onscreen instructions. 
-
-It's important to note that this app effectively removes information from PostHog events by setting properities to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this app at the _end_ of a sequence. 
-
-Note: If you are filtering `$ip`, `event.ip` will also be set to null.
-
-## Does this filter properties for retrospective events?
-
-No. The Property Filter app will only work on events ingested _after_ it was enabled. 
+For more information, please check [n8n's integration documentation](https://docs.n8n.io/credentials/posthog/#posthog).
 
 ## What if I have feedback on this app?
 

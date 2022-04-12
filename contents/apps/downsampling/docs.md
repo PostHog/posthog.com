@@ -1,17 +1,17 @@
 ---
-title: How the Downsampling app works
+title: How the Downsampler app works
 showTitle: true
 topics:
     - downsampler
 ---
 
-## How do I install the Downsampling app?
+## How do I install the Downsampler app?
 
 1. Visit the "Apps" page in your instance of PostHog.
 2. Search for 'Downsampling' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-## Can I use the Downsampling app to control my PostHog bill?
+## Can I use the Downsampler app to control my PostHog bill?
 
 Yes. Paid-for versions of PostHog are priced per event and the Downsampling app enables you to reduce the number of events which your instance ingests, thereby giving you greater control over billing.
 
