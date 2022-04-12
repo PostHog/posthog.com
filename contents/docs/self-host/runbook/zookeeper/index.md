@@ -12,7 +12,7 @@ and [Kafka](./kafka).
 
 ## Failure modes
 
-### Diskspace usage increases rapidly
+### Disk space usage increases rapidly
 
 It has been observed that Zookeepers can suddenly increase it's disk usage, after 
 being in a stable state for some time. This can sometimes be resolved by ensuring 
