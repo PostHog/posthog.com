@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning you can add one-click login with single sign-on (SSO). We also allow just-in-time provisioning of users, which means that your team members can create their account self-serve (see below), and enforcing log in through an SSO provider to fit all your compliance / IT needs.
+If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning, you can add one-click login with single sign-on (SSO). We also allow just-in-time provisioning of users, which means that your team members can create their account self-serve (see below), and enforcing log in through an SSO provider to fit all your compliance / IT needs.
 
 Some SSO features may not be available in all plans, please review each section below for details.
 
@@ -18,9 +18,9 @@ To add an Authentication domain, go to your Organization settings (`/organizatio
 
 ![Screenshot: Authentication domains](../../images/features/sso/authentication-domains.png)
 
-For security purposes and prevent misuse, Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value so you can prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
+For security purposes and to prevent misuse, Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value so you can prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
 
-Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domains, ...), you should find easy instructions from your provider on how to add the required record. The record should look as follows:
+Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domains, ...) and your provider should provide simple instructions on how to add the required record. The record should look as follows:
 
 1. Select **TXT** for the record type.
 2. The Name/Host/Alias field should be `_posthog-challenge.yourdomain.com.` where `yourdomain.com` is your actual domain name. Some DNS providers may require the dot in the end or not, and some providers may auto-populate your domain name.
@@ -31,15 +31,15 @@ Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domain
 
 <FeatureAvailability allPlans />
 
-When you enable Just-in-time (JIT) user provisioning for a domain, whenever a user logs in for the first using any available SSO provider (for self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it), if their email address matches your verified domain, an account will be automatically created for them in the organization who owns the verified Authentication domain.
+When enabled, just-in-time (JIT) user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. For self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it.
 
-To enable this, navigate to Authentication domains in your Organization settings and click the switch for which you want to enable Just-in-time user provisioning.
+To enable Just-in-time (JIT) user provisioning, navigate to 'Authentication domains' in your Organization settings (accessible via the account settings menu in the top-right) and use the 'Enable automatic provisioning' toggle. 
 
 ### SSO enforcement
 
 <FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']} />
 
-You may want to enforce users log in and/or sign up to your organization only with a specific SSO provider. When this is enabled, users will not be able to log in using a password, nor request password resets, and will only be able to use the provider you specified. This will apply for administrators and organization owners too. Please be sure your SSO configuration works correctly before enabling this.
+You may want to force users log in and/or sign up to your organization using a specific SSO provider. When this is enabled, users will not be able to log in using a password, nor request password resets, and will only be able to use the provider you specified. This will apply for administrators and organization owners too. Please be sure your SSO configuration works correctly before enabling this.
 
 Please be aware if you enable SSO enforcement for a particular domain, any user who signs up or logs in with an email address on that domain will be required to use the SSO provider you enforced. This applies to existing users too and users not in your organization.
 
@@ -47,9 +47,11 @@ You can enable SSO enforcement through Authentication domains in your Organizati
 
 ## Third-party providers
 
-PostHog currently supports the SSO providers listed below. All providers are available and readily configured on PostHog Cloud. This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based (see [SAML](#saml) below).
+PostHog currently supports GitHub, GitLab and Google as SSO providers. All providers are available and readily configured on PostHog Cloud. 
 
-Looking for a provider and it's in here? [Reach out to us](https://posthog.com/support), we might be able to help.
+This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based (see [SAML](#saml) below).
+
+Looking for a provider that's not here? [Reach out to us](https://posthog.com/support), we might be able to help.
 
 <blockquote>
     Please note that you will <b>not</b> be able to use SSO with the first user of your instance. You will have to
