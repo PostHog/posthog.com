@@ -39,7 +39,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full p-2 bg-transparent border-b-2 border-gray-600 mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
+                            className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-primary dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
