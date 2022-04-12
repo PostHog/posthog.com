@@ -1,15 +1,15 @@
 ---
-title: How the n8n app works
+title: How the n8n Connector app works
 showTitle: true
 topics:
     - n8n
 ---
 
-## What does the n8n app do?
+## What does the n8n Connector app do?
 
 This n8n app enables you to automate PostHog workflows and create workflows using other services, using n8n. 
 
-## How do I get started with the n8n app?
+## How do I get started with the n8n Connector app?
 
 The n8n app is an API integration. You will need a [PostHog Personal API key](https://posthog.com/docs/api), which must be [authenticated with n8n](https://docs.n8n.io/credentials/posthog/) in order to [connect n8n](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations) and get started.
 
