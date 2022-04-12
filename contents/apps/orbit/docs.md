@@ -1,18 +1,24 @@
 ---
-title: How the Automatic Cohort Creator app works
+title: How the Orbit app works
 showTitle: true
 topics:
-    - auto-cohort
+    - orbit
 ---
 
-## What does the Automatic Cohort Creator app do?
-The Automatic Cohort Creator app enables you to specify a list of user properties which will be used to automatically assign new users to a cohort.
+## What does the Orbit app do?
 
-## How do I install the Automatic Cohort Creator app?
+
+## How do I install the Orbit app?
 
 1. Visit the "Apps" page in your instance of PostHog.
-2. Search for 'Automatic Cohort Creator' and select the app, press Install.
+2. Search for 'Orbit' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
+
+## How do I use the Orbit app?
+
+Workspace stats are sent into your PostHog instance as an `orbit love report` event, which you can filter and explore using PostHog. Supported report types include: overview, members, and activities.
+
+Refer to [Orbit's API documentation](https://docs.orbit.love/reference/about-the-orbit-api) for a full list of properties available in each report.
 
 ## What if I have feedback on this app?
 

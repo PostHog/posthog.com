@@ -1,20 +1,28 @@
 ---
-title: How the Customer.io Connector works
+title: How the PostgreSQL Export app works
 showTitle: true
 topics:
-    - customer.io-connector
+    - postgres-export
 ---
 
-## What does the Customer.io Connector app do?
-The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available.
+## What does the PostgreSQL Export app do?
+The PostgreSQL Export app enables you to export events from PostHog to a PostgreSQL instance on ingestion. 
 
-## How do I install the Zendesk Connector app?
-Make sure to use your Zendesk Admin Account to perform the below activities.
+## How do I install the PostgreSQL Export app?
+Firstly, make sure that PostHog can access your PostgreSQL instance. Wherever your instance is hosted, make sure it is set to accept incoming connections so that PostHog can connect to the database and insert events. If this is not possible in your case, consider using the S3 Export app and then setting up your own system for getting data into your Postgres instance.
+
+You will also need to create a user with table creation privileges in your PostgreSQL instance, as well as a new table to store events and execute INSERT queries. You can and should block PostHog from doing anything else on any other tables. Giving PostHog table creation permissions should be enough to ensure this:
+
+```
+CREATE USER posthog WITH PASSWORD '123456yZ';
+GRANT CREATE ON DATABASE your_database TO posthog;
+```
+
+Finally, follow the steps below.
 
 1. Visit the "Apps" page in your instance of PostHog.
-2. Search for 'Customer.io' and select the app, press Install.
-3. Add your Customer.io site ID and token at the configuration step.
-4. Enable the app and watch your 'People' list get populated in Customer.io!
+2. Search for 'PostgreSQL' and select the app, press Install.
+3. Add the connection details at the plugin configuration step in PostHog.
 
 ## What if I have feedback on this app?
 
