@@ -94,7 +94,7 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 - <input type="checkbox" /> Put on an out of office (forward email if the leavers expects external communication), then suspend the Google Workspace account for the team member
 - <input type="checkbox" /> Transfer <a href="https://support.google.com/a/answer/1247799?hl=en">ownership</a> of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.
 - <input type="checkbox" /> Make any outstanding notice payments (if applicable)
-- <input type="checkbox" /> Cancel team member's company card on Brex/Revolut - _check if they have any company subscriptions first that need transferring_
+- <input type="checkbox" /> Cancel team member's company card on Brex/Revolut - <em>check if they have any company subscriptions first that need transferring</em>
 - <input type="checkbox" /> Offboard member on CharlieHR
 - <input type="checkbox" /> Add departure to hiring forecast on Pry
 - Remove team member from:
