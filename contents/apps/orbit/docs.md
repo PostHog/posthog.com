@@ -7,6 +7,7 @@ topics:
 
 ## What does the Orbit app do?
 
+The Orbit app for PostHog pulls data from the Orbit.love workspace API into PostHog, enabling you to track your community as a product metric. 
 
 ## How do I install the Orbit app?
 
