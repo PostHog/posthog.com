@@ -13,7 +13,7 @@ className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-p
 
 <Section
     divider={false}
-    title="HogMail is a newsletter that’s about helping you make better products."
+    title="HogMail is a newsletter thats about helping you make better products."
     size="full"
     cols={2}
 >
@@ -26,7 +26,7 @@ className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-p
     <div>
         <ul className="text-[20px] font-semibold">
             <li>A selections of new articles we love</li>
-            <li>And an <span className="text-red">awesome hedgehog cartoon!</span></li>
+            <li>And an awesome hedgehog cartoon!</li>
         </ul>    
     </div>
 </Section>
