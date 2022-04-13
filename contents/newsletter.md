@@ -14,8 +14,8 @@ showTitle: true
 >
     <div>
         <ul className="text-[20px] font-semibold">
-            <li className="text-[20px]">Select cuts from the PostHog blog</li>
-            <li className="text-[20px]">The latest tutorials and news</li>
+            <li>Select cuts from the PostHog blog</li>
+            <li>The latest tutorials and news</li>
         </ul>
     </div>
     <div>
