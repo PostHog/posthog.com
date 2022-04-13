@@ -13,7 +13,7 @@ className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-p
 
 <Section
     divider={false}
-    title="HogMail is a newsletter that's about helping you make better products."
+    title="HogMail is a newsletter about helping you make better products."
     size="full"
     cols={2}
 >
