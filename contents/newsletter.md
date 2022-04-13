@@ -1,5 +1,5 @@
 ---
-title: Newsletter
+title: Subscribe to HogMail
 sidebar: Docs
 showTitle: true
 ---
