@@ -4,11 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-![PostHog Newsletter](images/docs/newsletter/newshogs.png)
+![PostHog Newsletter](images/docs/newsletter/hogmails.png)
+
+<NewsletterForm
+compact
+className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-primary dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
+/>
 
 <Section
     divider={false}
-    title="HogMail is a fortnightly newsletter that’s about helping you make better products."
+    title="HogMail is a newsletter that’s about helping you make better products."
     size="full"
     cols={2}
 >
@@ -25,8 +30,3 @@ showTitle: true
         </ul>    
     </div>
 </Section>
-
-<NewsletterForm
-compact
-className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
-/>
