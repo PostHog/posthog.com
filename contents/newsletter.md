@@ -20,8 +20,8 @@ showTitle: true
     </div>
     <div>
         <ul className="text-[20px] font-semibold">
-            <li className="text-[20px]">A selections of new articles we love</li>
-            <li className="text-[20px]">And an <span className="text-red">awesome hedgehog cartoon!</span></li>
+            <li>A selections of new articles we love</li>
+            <li>And an <span className="text-red">awesome hedgehog cartoon!</span></li>
         </ul>    
     </div>
 </Section>
