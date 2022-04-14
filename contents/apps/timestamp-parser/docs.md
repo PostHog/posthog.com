@@ -23,7 +23,7 @@ This app parses events in PostHog into the following time-based categories:
 
 ## Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Tiemstamp Parser](https://github.com/PostHog/timestamp-parser-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Timestamp Parser](https://github.com/PostHog/timestamp-parser-plugin) is available on GitHub. 
 
 ## Who created this app?
 
