@@ -1,5 +1,5 @@
 ---
-title: How the Migrator 3000 app works
+title: Migrator 3000 documentation
 showTitle: true
 topics:
     - migrator
@@ -15,7 +15,7 @@ No, this app will only migrate events and objects derived from events, such as p
 
 ## What are the requirements for this app?
 
-The Migrator 3000 app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+The Migrator 3000 app requires *two** PostHog Cloud, or a self-hosted PostHog instances running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 

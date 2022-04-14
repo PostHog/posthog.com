@@ -1,8 +1,8 @@
 ---
-title: How the Sentry Connector app works
+title: Sentry Connector documentation
 showTitle: true
 topics:
-    - sentry connector
+    - sentry-connector
 ---
 
 ## What does the Sentry Connector do?

@@ -1,8 +1,8 @@
 ---
-title: How the Zapier Connector app works
+title: Zapier Connector documentation
 showTitle: true
 topics:
-    - zapier connector
+    - zapier-connector
 ---
 
 # What does the Zapier Connector app do?

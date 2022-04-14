@@ -1,5 +1,5 @@
 ---
-title: How the Automatic Cohort Creator app works
+title: Automatic Cohort Creator documentation
 showTitle: true
 topics:
     - auto-cohort

@@ -1,5 +1,5 @@
 ---
-title: How the Event Sequence Timer app works
+title: Event Sequence Timer documentation
 showTitle: true
 topics:
     - event-timer

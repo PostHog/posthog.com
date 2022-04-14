@@ -1,5 +1,5 @@
 ---
-title: How the Currency Normalizer PostHog app works
+title: Currency Normalizer documentation
 showTitle: true
 topics:
     - currency-normalizer

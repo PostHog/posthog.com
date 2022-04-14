@@ -1,5 +1,5 @@
 ---
-title: PostHog Replicator app documentation
+title: Event Replicator documentation
 showTitle: true
 topics:
     - replicator

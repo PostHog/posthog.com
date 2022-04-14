@@ -1,5 +1,5 @@
 ---
-title: How the Segment Connector app works
+title: Segment Connector documentation
 showTitle: true
 topics:
     - segment

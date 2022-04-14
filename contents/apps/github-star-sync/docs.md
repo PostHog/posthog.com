@@ -1,5 +1,5 @@
 ---
-title: How the GitHub Star Sync app works
+title: GitHub Star Sync documentation
 showTitle: true
 topics:
     - star-sync

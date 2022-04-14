@@ -1,5 +1,5 @@
 ---
-title: How the Heartbeat app works
+title: Heartbeat documentation
 showTitle: true
 topics:
     - heartbeat

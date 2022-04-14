@@ -1,5 +1,5 @@
 ---
-title: How the GitHub Release Tracker app works
+title: GitHub Release Tracker documentation
 showTitle: true
 topics:
     - github-release-tracker

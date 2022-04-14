@@ -1,5 +1,5 @@
 ---
-title: How the Downsampler app works
+title: Downsampler documentation
 showTitle: true
 topics:
     - downsampler

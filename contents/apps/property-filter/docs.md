@@ -1,5 +1,5 @@
 ---
-title: How the Property Filter app works
+title: Property Filter documentation
 showTitle: true
 topics:
     - property-filter

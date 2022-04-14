@@ -1,5 +1,5 @@
 ---
-title: How the First Time Event Tracker app works
+title: First Time Event Tracker documentation
 showTitle: true
 topics:
     - first-time

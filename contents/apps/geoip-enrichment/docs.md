@@ -1,5 +1,5 @@
 ---
-title: GeoIP Enricher
+title: GeoIP Enricher documentation
 showTitle: true
 topics:
     - geoip

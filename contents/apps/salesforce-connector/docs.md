@@ -1,11 +1,11 @@
 ---
-title: How the Salesforce Connector  works
+title: Salesforce Connector documentation
 showTitle: true
 topics:
     - salesforce
 ---
 
-## What does the Salesforce Connector do?
+### What does the Salesforce Connector do?
 
 This app connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested. 
 

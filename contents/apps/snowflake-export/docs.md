@@ -1,8 +1,8 @@
 ---
-title: Snowflake Export for PostHog
+title: Snowflake Export documentation
 showTitle: true
 topics:
-    - snowflake export
+    - snowflake-export
 ---
 
 ## What does the Snowflake Export app do?

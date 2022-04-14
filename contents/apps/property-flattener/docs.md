@@ -1,5 +1,5 @@
 ---
-title: How the Property Flattener works
+title: Property Flattener documentation
 showTitle: true
 topics:
     - property-flattener

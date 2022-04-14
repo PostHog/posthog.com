@@ -1,5 +1,5 @@
 ---
-title: How the Google Cloud Storage Export app works
+title: Google Cloud Storage Export documentation
 showTitle: true
 topics:
     - gcs-export

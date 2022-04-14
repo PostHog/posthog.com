@@ -1,5 +1,5 @@
 ---
-title: Redshift Export app
+title: Redshift Export documentation
 showTitle: true
 topics:
     - redshift-export

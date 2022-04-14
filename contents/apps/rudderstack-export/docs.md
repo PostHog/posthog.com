@@ -1,5 +1,5 @@
 ---
-title: How the RudderStack Export app works
+title: RudderStack Export documentation
 showTitle: true
 topics:
     - rudderstack

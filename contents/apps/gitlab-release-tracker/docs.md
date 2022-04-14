@@ -1,5 +1,5 @@
 ---
-title: How the GitLab Release Tracker PostHog app works
+title: GitLab Release Tracker documentation
 showTitle: true
 topics:
     - gitlab-release-tracker

@@ -1,5 +1,5 @@
 ---
-title: How the n8n Connector app works
+title: n8n Connector documentation
 showTitle: true
 topics:
     - n8n

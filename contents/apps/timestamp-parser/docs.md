@@ -1,5 +1,5 @@
 ---
-title: How the Timestamp Parser works
+title: Timestamp Parser documentation
 showTitle: true
 topics:
     - timestamp-parser

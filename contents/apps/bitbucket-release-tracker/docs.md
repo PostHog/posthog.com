@@ -1,5 +1,5 @@
 ---
-title: How the BitBucket Release Tracker app works
+title: BitBucket Release Tracker documentation
 showTitle: true
 topics:
     - bitbucket-release-tracker

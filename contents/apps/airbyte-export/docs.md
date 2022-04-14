@@ -1,5 +1,5 @@
 ---
-title: How the Airbyte Export app works
+title: Airbyte Export documentation
 showTitle: true
 topics:
     - airbyte

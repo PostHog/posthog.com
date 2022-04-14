@@ -1,5 +1,5 @@
 ---
-title: How the Orbit Connector app works
+title: Orbit Connector documentation
 showTitle: true
 topics:
     - orbit

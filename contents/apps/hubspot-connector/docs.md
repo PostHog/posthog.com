@@ -1,5 +1,5 @@
 ---
-title: How the Hubspot Connector app works
+title: Hubspot Connector documentation
 showTitle: true
 topics:
     - hubspot

@@ -2,7 +2,7 @@
 title: How the Zendesk Connector app works
 showTitle: true
 topics:
-    - zendesk connector
+    - zendesk-connector
 ---
 
 ## What does the Zendesk Connector app do?

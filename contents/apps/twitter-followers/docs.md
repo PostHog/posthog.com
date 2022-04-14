@@ -1,5 +1,5 @@
 ---
-title: How the Twitter Followers Tracker app works
+title: Twitter Followers Tracker documentation
 showTitle: true
 topics:
     - twitter-followers

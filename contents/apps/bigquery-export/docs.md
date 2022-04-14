@@ -1,5 +1,5 @@
 ---
-title: How the BigQuery Export app works
+title: BigQuery Export documentation
 showTitle: true
 topics:
     - bigquery-export

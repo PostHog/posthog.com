@@ -1,5 +1,5 @@
 ---
-title: How the PagerDuty Connector works
+title: PagerDuty Connector documentation
 showTitle: true
 topics:
     - pagerduty connector

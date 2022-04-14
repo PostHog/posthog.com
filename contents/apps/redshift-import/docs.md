@@ -1,5 +1,5 @@
 ---
-title: How the Redshift Import app works
+title: Redshift Import documentation
 showTitle: true
 topics:
     - redshift-import

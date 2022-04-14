@@ -1,8 +1,8 @@
 ---
-title: How the Ingestion Alert app works
+title: Ingestion Alert documentation
 showTitle: true
 topics:
-    - ingestion alert
+    - ingestion-alert
 ---
 
 ## What does the Ingestion Alert app do?

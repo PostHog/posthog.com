@@ -1,5 +1,5 @@
 ---
-title: How the PostgreSQL Export app works
+title: PostgreSQL Export documentation
 showTitle: true
 topics:
     - postgres-export

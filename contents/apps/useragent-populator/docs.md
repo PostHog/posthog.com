@@ -1,5 +1,5 @@
 ---
-title: How the Useragent Populator works
+title: Useragent Populator documentation
 showTitle: true
 topics:
     - useragent

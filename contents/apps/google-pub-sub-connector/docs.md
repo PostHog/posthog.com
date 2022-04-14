@@ -1,11 +1,11 @@
 ---
-title: How the Google Cloud Pub/Sub Connector works
+title: Google Cloud Pub/Sub Connector documentation
 showTitle: true
 topics:
     - pub-sub
 ---
 
-## What does the Google Cloud Pub/Sub app do?
+## What does the Google Cloud Pub/Sub Connector do?
 
 This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta). 
 
@@ -17,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need a Google Cloud Pub/Sub account to connect to. 
 
-## How do I install the Google Cloud Pub/Sub app?
+## How do I install the Google Cloud Pub/Sub Connector?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Pub/Sub' and select the app, press Install.

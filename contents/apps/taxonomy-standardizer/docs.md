@@ -1,5 +1,5 @@
 ---
-title: How the Taxonomy Standardizer works
+title: Taxonomy Standardizer documentation
 showTitle: true
 topics:
     - taxonomy-standardizer

@@ -1,5 +1,5 @@
 ---
-title: S3 Export app documentation
+title: Amazon S3 Export documentation
 showTitle: true
 topics:
     - s3 export

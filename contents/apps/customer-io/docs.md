@@ -1,5 +1,5 @@
 ---
-title: How the Customer.io Connector works
+title: Customer.io Connector documentation
 showTitle: true
 topics:
     - customer.io-connector

@@ -1,5 +1,5 @@
 ---
-title: How the Sendgrid Connector works
+title: Sendgrid Connector documentation
 showTitle: true
 topics:
     - sendgrid-connector

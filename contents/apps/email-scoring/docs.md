@@ -1,5 +1,5 @@
 ---
-title: How the Email Scoring app works
+title: Mailboxlayer Email Scoring documentation
 showTitle: true
 topics:
     - email-scoring
