@@ -22,7 +22,7 @@ export const PricingSlider = ({
     const { setSliderValue, setInputValue, setPricingOption } = useActions(pricingSliderLogic)
     const { inputValue } = useValues(pricingSliderLogic)
 
-    setPricingOption(pricingOption)
+    //setPricingOption(pricingOption)
 
     return (
         <div className="mt-5 mb-6">

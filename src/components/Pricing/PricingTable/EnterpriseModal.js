@@ -1,7 +1,7 @@
 import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import { useActions, useValues } from 'kea'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
@@ -9,13 +9,18 @@ import { Plan } from './Plan'
 import { Enterprise } from './Plans'
 
 export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge }) {
-    const { finalCost } = useValues(pricingSliderLogic)
+    const { finalMonthlyCost, finalAnnualCost } = useValues(pricingSliderLogic)
     const { setPricingOption } = useActions(pricingSliderLogic)
     const monthlyMinimumPrice = ENTERPRISE_MINIMUM_PRICING.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
+    })
+    useEffect(() => {
+        if (open) {
+            setPricingOption('enterprise')
+        }
     })
     return (
         <Modal open={open} setOpen={setOpen}>
@@ -85,9 +90,12 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                             <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
 
                             <div className="flex justify-between items-baseline">
-                                <div className="text-base mb-0 font-bold">Estimated price</div>
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalCost}</div>
+                                    <div className="text-base">${finalAnnualCost}</div>
+                                    <div className="opacity-50">/yr (10% discount)</div>
+                                </div>
+                                <div className="mb-0 font-bold flex items-baseline">
+                                    <div className="text-base">${finalMonthlyCost}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>

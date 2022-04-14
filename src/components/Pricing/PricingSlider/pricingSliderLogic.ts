@@ -95,7 +95,20 @@ export const pricingSliderLogic = kea({
                         finalCost > CLOUD_ENTERPRISE_MINIMUM_PRICING ? finalCost : CLOUD_ENTERPRISE_MINIMUM_PRICING
                 }
 
-                return Math.round(finalCost).toLocaleString()
+                return Math.round(finalCost)
+            },
+        ],
+        finalMonthlyCost: [
+            (s) => [s.finalCost],
+            (finalCost: number) => {
+                return finalCost.toLocaleString()
+            },
+        ],
+        finalAnnualCost: [
+            (s) => [s.finalCost],
+            (finalCost: number) => {
+                const finalAnnualCost = finalCost * 10.8
+                return finalAnnualCost.toLocaleString()
             },
         ],
     }),

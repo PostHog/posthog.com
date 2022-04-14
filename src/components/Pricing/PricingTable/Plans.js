@@ -92,7 +92,7 @@ export const Enterprise = ({
     hideActions,
     hideBadge,
     hideCalculator,
-    className = 'border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20',
+    className = 'border border-solid border-gray-accent-light rounded-sm bg-white bg-opacity-20',
 }) => {
     return (
         <Plan
@@ -120,6 +120,12 @@ export const Enterprise = ({
                                     Calculate your price
                                 </Link>
                             )}
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <Price>
+                                ${Math.round(ENTERPRISE_MINIMUM_PRICING * 10.8).toLocaleString()}
+                                <span className="text-base opacity-50">/yr (10% discount)</span>
+                            </Price>
                         </div>
                     </Section>
                     <TrackedCTA

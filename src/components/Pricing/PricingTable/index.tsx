@@ -14,11 +14,12 @@ export const PricingTable = () => {
     const SELF_HOSTED_PLAN = 'self-hosted'
     const [currentPlanType, setCurrentPlanType] = useState(SELF_HOSTED_PLAN)
     const currentPlanBreakdown = currentPlanType === 'cloud' ? <CloudPlanBreakdown /> : <SelfHostedPlanBreakdown />
-    const { setSliderValue } = useActions(pricingSliderLogic)
+    const { setSliderValue, setPricingOption } = useActions(pricingSliderLogic)
     const location = useLocation()
 
     const setPlanType = (type: PricingOptionType, sliderValue: number) => {
         setCurrentPlanType(type)
+        if (type === 'cloud') setPricingOption('cloud')
         setSliderValue(inverseCurve(sliderValue))
     }
 

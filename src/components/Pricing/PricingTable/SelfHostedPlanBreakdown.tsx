@@ -6,15 +6,15 @@ import ScaleModal from './ScaleModal'
 import EnterpriseModal from './EnterpriseModal'
 
 export const SelfHostedPlanBreakdown = () => {
-    const [open, setOpen] = useState(false)
+    const [scaleOpen, setScaleOpen] = useState(false)
     const [enterpriseOpen, setEnterpriseOpen] = useState(false)
     return (
         <>
-            <ScaleModal setOpen={setOpen} open={open} hideActions />
-            <EnterpriseModal setOpen={setEnterpriseOpen} open={enterpriseOpen} hideActions />
+            <ScaleModal setOpen={setScaleOpen} open={scaleOpen} hideActions hideBadge={false} />
+            <EnterpriseModal setOpen={setEnterpriseOpen} open={enterpriseOpen} hideActions hideBadge={false} />
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <OpenSource />
-                <Scale setOpen={setOpen} />
+                <Scale setOpen={setScaleOpen} />
                 <Enterprise setOpen={setEnterpriseOpen} />
             </section>
             <section className={section()}>

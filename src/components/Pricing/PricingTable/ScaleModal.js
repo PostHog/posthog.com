@@ -1,7 +1,7 @@
 import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import { useActions, useValues } from 'kea'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SCALE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
@@ -9,13 +9,18 @@ import { Plan } from './Plan'
 import { Scale } from './Plans'
 
 export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
-    const { finalCost } = useValues(pricingSliderLogic)
+    const { finalMonthlyCost } = useValues(pricingSliderLogic)
     const { setPricingOption } = useActions(pricingSliderLogic)
     const monthlyMinimumPrice = SCALE_MINIMUM_PRICING.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
+    })
+    useEffect(() => {
+        if (open) {
+            setPricingOption('scale')
+        }
     })
     return (
         <Modal open={open} setOpen={setOpen}>
@@ -95,7 +100,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                             <div className="flex justify-between items-baseline">
                                 <div className="text-base mb-0 font-bold">Estimated price</div>
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalCost}</div>
+                                    <div className="text-base">${finalMonthlyCost}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>
