@@ -1,7 +1,7 @@
 ---
-title: Email Scoring
+title: Google Pub/Sub Connector
 featuredImage: 
-documentation: /apps/pub-sub/docs
+documentation: /apps/google-pub-sub-connector/docs
 ---
 
 <Section
@@ -11,19 +11,29 @@ documentation: /apps/pub-sub/docs
     cols={3}
 >
     <div>
-        <h5>Enable one-to-many comms</h5>
+        <h5>Enable one-to-many</h5>
         <p>Need to send event data many places at once? Send it to Pub/Sub and set up subscriptions for other users and services.</p>
     </div>
     <div>
-        <h5>Stream into other services</h5>
+        <h5>Stream it your way</h5>
         <p>Use BigQuery? Process PostHog events in-order, or in-any-order and send them straight to BigQuery using Google Dataflow.</p>
     </div>
     <div>
-        <h5>Send data more easily</h5>
+        <h5>Send data anywhere</h5>
         <p>Tired of routing data the hard way? Simplify distribution by letting Pub/Sub handle subscriptions and data delivery.</p>
     </div>
 
 </Section>
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/jesse.jpeg"
+        size="md"
+        name="Jesse Redl"
+        title="Staff Engineer, Vendasta "
+        quote={`“We've written our own Pub/Sub plugin where each event is published to Google Cloud Pub/Sub as it's processed, enabling us to hook into events. PostHog has replaced Snowplow for us as a result!”`}
+    />
+</BorderWrapper>
 
 <TutorialsSlider topic="pub-sub" />
 
