@@ -167,11 +167,11 @@ User paths give you a zoomed out view of user behavior, but session recordings a
 
 To do so, simply click on the total of people who either completed or dropped off on any given step, and you'll be presented with the list of those users. From here you can click to watch specific recordings from your funnel, view individual user profiles, or even create a cohort of all users for further analysis.
 
-Using funnel analysis and Session Recording together, one PostHog user drove a [10-20% improvement in conversion](/customers/hasura) by simply indentifying problematic processes and confusing UI elements.
+Using funnel analysis and Session Recording together, one PostHog user drove a [10-20% improvement in conversion](/customers/hasura) by simply identifying problematic processes and confusing UI elements.
 
 ## Step 5: Make improvements, test and measure
 
-With any luck, following all these steps will help you indentify issues, and prototype remedies you hope will improve conversion. You could just roll them out and see if conversion improves, but there's a better way.
+With any luck, following all these steps will help you identify issues, and prototype remedies you hope will improve conversion. You could just roll them out and see if conversion improves, but there's a better way.
 
 [Experimentation](/product/experimentation-suite) makes it easy to test changes, and validate their efficacy, before rolling them out to everyone. We **highly recommend** running an experiment before rolling out any fundamental change to your conversion funnel – not least because you can use the (hopefully positive!) results in your LinkedIn profile. Priorities.
 
