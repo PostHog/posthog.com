@@ -16,6 +16,14 @@ The GitHub Star Sync app enables you to track your GitHub stars as an event in P
 4. Configure the by specifying a GitHub user/repo to sync. 
 5. Optionally, add a personal API key to help with rate limits
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Star Sync app](https://github.com/PostHog/github-star-sync-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), and [Marius Andra](https://github.com/mariusandra) and [Tim Glaser](https://github.com/timgl) for creating the GitHub Star Sync app. 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

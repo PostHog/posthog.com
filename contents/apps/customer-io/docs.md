@@ -15,6 +15,14 @@ The Customer.io Connector sends event data from PostHog into Customer.io. User e
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Customer.io Connector](https://github.com/PostHog/customerio-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), [Michael Matloka](https://github.com/Twixes) and community members [Angela Purcell](https://github.com/purcell3a), [Conrad Kurth](https://github.com/ConradKurth) and [Alberto S](https://github.com/albtsantos) for creating the Customer.io Connector. 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

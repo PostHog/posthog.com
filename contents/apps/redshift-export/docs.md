@@ -26,6 +26,14 @@ GRANT CREATE ON DATABASE your_database TO posthog;
 
 4. Add the connection details at the plugin configuration step in PostHog
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Export app](https://github.com/PostHog/redshift-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating the Redshift Export app. 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

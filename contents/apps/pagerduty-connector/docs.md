@@ -1,11 +1,11 @@
 ---
-title: How the PagerDuty Connector app works
+title: How the PagerDuty Connector works
 showTitle: true
 topics:
     - pagerduty connector
 ---
 
-## What does the PagerDuty Connector app do?
+## What does the PagerDuty Connector do?
 
 This app alerts PagerDuty when a PostHog insights/trends graph goes below or above a threshold.
 
@@ -13,14 +13,16 @@ Example use cases:
 - Alert when there is no $pageviews captured on my site the past hour,
 - Alert when the rate of $billing_error events crosses a threshold.
 
-## How do I install the PagerDuty Connector app for PostHog?
+## How do I install the PagerDuty Connector for PostHog?
+
+This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 
 1. Log in to your PostHog instance
 2. Click 'Plugins' on the left-hand tool bar
 3. Search for 'PagerDuty' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 
-## How do I configure the PagerDuty plugin?
+## How do I configure the PagerDuty Connector?
 
 - Get the trends URL.
 - Go to Insights.
@@ -31,9 +33,17 @@ Example use cases:
 
 ## Are there any limitations?
 
-This PagerDuty plugin only works when reading from single-line trend graphs.
+This PagerDuty Connector only works when reading from single-line trend graphs.
 
 It also requires PostHog 1.26.0 or above, or PostHog Cloud.
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the PagerDuty connector](https://github.com/PostHog/posthog-pagerduty-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Michael Matloka](https://github.com/Twixes) and [Karl-Aksel Puulmann](https://github.com/macobo) for creating the Currency Normalizer. Thank you, all!
 
 ## What if I have feedback on this app?
 

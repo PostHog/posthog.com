@@ -15,6 +15,10 @@ The n8n app is an API integration. You will need a [PostHog Personal API key](ht
 
 For more information, please check [n8n's integration documentation](https://docs.n8n.io/credentials/posthog/#posthog).
 
+## Where can I find out more?
+
+Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about n8n's connector is available in [n8n's connector documentation](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations).
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

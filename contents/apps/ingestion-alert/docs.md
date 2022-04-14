@@ -24,6 +24,14 @@ This is helpful to monitor if there are any ingestion issues within your posthog
 
 If the plugin server itself is down, this plugin will not be able to alert you that ingestion has stopped.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Ingestion Alert app](https://github.com/PostHog/ingestion-alert-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Marcus Hyett](https://github.com/marcushyett-ph) and former PostHog team member [Kunal](https://github.com/kpthatsme) for creating the Ingestion Alert app. 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

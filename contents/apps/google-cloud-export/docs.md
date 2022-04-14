@@ -18,6 +18,14 @@ Before installing the Google Cloud Storage Export app, you will need your Google
 4. Enter your Project ID.
 5. Enter your bucket name.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Storage Export app](https://github.com/PostHog/posthog-gcs-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Google Cloud Storage Export app. Thanks, Yakko! 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

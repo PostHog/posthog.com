@@ -13,7 +13,15 @@ The Sendgrid Connector sends event and emails data from PostHog into Sendgrid wh
 1. Visit the "Apps" page in your instance of PostHog.
 2. Search for 'Sendgrid' and select the app, press Install.
 3. Add your Sendgrid API key at the configuration step.
-4. Enable the plugin and watch your contacts list get populated in Sendgrid!
+4. Enable the app and watch your contacts list get populated in Sendgrid!
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Sendgrid Connector](https://github.com/PostHog/sendgrid-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as and community member [Jose Fuentes Castillo](https://github.com/j-fuentesg) for creating the Sendgrid Connector. Thank you, all! 
 
 ## What if I have feedback on this app?
 

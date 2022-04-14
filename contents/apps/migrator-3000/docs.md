@@ -38,7 +38,17 @@ To configure the app, follow the configuration steps once the app is enabled and
 
 ## Were there 2999 earlier versions of this app?
 
-No, it's just a cool name. A _very_ cool name. 
+No, it's just a cool name. A _very_ cool name.
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Migrator 3000](https://github.com/posthog/posthog-plugin-migrator3000) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [James Hawkins](https://github.com/jamesefhawkins) and [Marius Andra](https://github.com/mariusandra) for creating the Migrator 3000. 
+
+Nobody has yet stepped forward to take credit for the name, however.
 
 ## What if I have feedback on this app?
 

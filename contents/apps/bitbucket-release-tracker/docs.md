@@ -1,8 +1,8 @@
 ---
-title: How the BitBucket Release Tracker PostHog app works
+title: How the BitBucket Release Tracker app works
 showTitle: true
 topics:
-    - bitbucket release tracker
+    - bitbucket-release-tracker
 ---
 
 ## How do I install the BitBucket Release Tracker PostHog app?
@@ -10,11 +10,19 @@ topics:
 To install this app, follow these simple steps...
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'BitBucket' 
 4. Select the BitBucket Release Tracker app, press 'Install'
 
 And follow the on-screen instructions to complete configuration. 
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Bitbucket Release Tracker](https://github.com/PostHog/bitbucket-release-tracker) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Michael Matloka](https://github.com/Twixes) for creating the Bitbucket Release Tracker. 
 
 ## What if I have feedback on this app?
 

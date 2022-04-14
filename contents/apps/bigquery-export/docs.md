@@ -50,6 +50,14 @@ There's a very rare case when duplicate events appear in BigQuery. This happens 
 
 While this shouldn't happen, if you find duplicate events in BigQuery, follow these [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) to manually remove the them.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the BigQuery Export app](https://github.com/PostHog/bigquery-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra), [Neil Kakkar](https://github.com/neilkakkar), [Michael Matloka](https://github.com/Twixes) and community member [Edward Hartwell Goose](https://github.com/edhgoose) for creating this BigQuery Export app. 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

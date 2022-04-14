@@ -14,6 +14,14 @@ The Automatic Cohort Creator app enables you to specify a list of user propertie
 2. Search for 'Automatic Cohort Creator' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Automatic Cohort Creator](https://github.com/PostHog/posthog-automatic-cohorts-plugin) is available on GitHub. 
+
+## Who created this app?
+
+This app was created by PostHog team member [Yakko Majuri](https://github.com/yakkomajuri). Thanks, Yakko!
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

@@ -35,6 +35,14 @@ If you select 'Yes', the stored timestamp for the first event will always be upd
 
 If you select No, the stored timestamp will only be set once and never updated. This means you will get the difference between the time of the second event and the first time the user triggered the first event.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Event Sequence Timer](https://github.com/PostHog/event-sequence-timer-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Event Sequence Timer. Thanks Yakko! 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

@@ -113,6 +113,14 @@ A transformation entry looks like this:
 
 Your GitHub username is important so that we only allow changes to transformations by the authors themselves.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Import app](https://github.com/PostHog/posthog-redshift-import-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Utsavkumar Lal](https://github.com/utsavll0) for creating the Redshift Import app. Thank you, both! 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

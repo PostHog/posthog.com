@@ -48,11 +48,18 @@ They are also set on the associated person same as above, plus set_once in `$ini
 
 ## How do I skip events without applying GeoIP enrichment?
 
-A case to be aware of is sending events from a server – such events, if not provided with custom property `$ip`,
-will be detected as sent from the location of the data center, instead of the related user.
+A case to be aware of is sending events from a server – such events, if not provided with custom property `$ip`, will be detected as sent from the location of the data center, instead of the related user.
 
 If you'd like this plugin to skip over an event and not add the above properties,
 set property `$geoip_disable` to `true` on that event.
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the GeoIP Enricher. We miss you, Paolo!
 
 ## What if I have feedback on this app?
 

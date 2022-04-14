@@ -1,5 +1,5 @@
 ---
-title: How the Email Scoring App works
+title: How the Email Scoring app works
 showTitle: true
 topics:
     - email-scoring
@@ -16,6 +16,14 @@ The Email Scoring app adds email scores to Persons in PostHog, giving you more c
 4. Click '+ Install new plugin' and use this URL to install: https://github.com/PostHog/mailboxlayer-plugin
 5. Add the API key to the config.
 6. Enable the app and watch the email scores come in!
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Email Scoring app](https://github.com/PostHog/mailboxlayer-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra) for creating the Email Scoring app. 
 
 ## What if I have feedback on this app?
 

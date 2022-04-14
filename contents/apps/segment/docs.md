@@ -26,6 +26,10 @@ The Segment app gives you access to some things our JS library can do, but using
 
 To get around these limitations, you can install the PostHog snippet or posthog-js alongside your Segment integration. You can then use Segment for any custom events (for example `segment.track('user sign up')`), and posthog-js will automatically give you access to all the extra features.
 
+## Where can I find out more?
+
+Further information about PostHog's Segment Connector is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

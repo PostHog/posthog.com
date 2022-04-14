@@ -2,10 +2,10 @@
 title: How the Twitter Followers Tracker app works
 showTitle: true
 topics:
-    - twitter followers
+    - twitter-followers
 ---
 
-## How do I install the Twitter Followers Tracker app for PostHog?
+## How do I install the Twitter Followers Tracker for PostHog?
 
 1. Log in to your PostHog instance
 2. Click 'Plugins' on the left-hand tool bar
@@ -20,6 +20,14 @@ To view your follower count as a PostHog Insight, do the following:
 2. Where it says 'Total Volume' next to the event name, change this to 'Maximum'
 3. A new dropdown will appear, titled 'Select property'. Select `follower_count`
 4. Visualize your follower count over time!
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Twitter Followers Tracker](https://github.com/PostHog/twitter-followers-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra) for creating the Twitter Followers Tracker. Thank you, both! 
 
 ## What if I have feedback on this app?
 

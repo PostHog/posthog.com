@@ -29,6 +29,10 @@ This app is capable of syncing the following streams:
 
 For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
+## Where can I find out more?
+
+Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

@@ -1654,12 +1654,12 @@
             ]
         },
         {
-            "name": "Useragent Enhancer",
-            "url": "/apps/useragent-enhancer",
+            "name": "Useragent Populator",
+            "url": "/apps/useragent-populator",
             "children": [
                 {
                     "name": "Documentation",
-                    "url": "/apps/useragent-enhancer/docs"
+                    "url": "/apps/useragent-populator/docs"
                 }
             ]
         },

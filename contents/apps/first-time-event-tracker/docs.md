@@ -26,6 +26,14 @@ No. This app will only work on events ingested _after_ the plugin was enabled.
 
 This means it will register events as being the first if there were events that occurred before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the First Time Event Tracker](https://github.com/PostHog/first-time-event-tracker) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the First Time Event Tracker. Thanks Yakko! 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

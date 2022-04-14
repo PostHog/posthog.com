@@ -12,7 +12,7 @@ This app uses a Snowflake external stage to stage events in object storage - Ama
 Prerequisites:
 - a Snowflake user
 - an S3 _or_ GCS bucket
-- an AWS _or_ GCP user with permissions to access that bucket in order to use this plugin
+- an AWS _or_ GCP user with permissions to access that bucket in order to use this app
 
 ## How do I configure the Snowflake Export app?
 
@@ -41,6 +41,14 @@ If you're exporting from PostHog Cloud, do **NOT set any IP whitelist/blacklist*
 ## Why am I seeing connection issues with the Snowflake Export app?
 
 If you're running into connection issues please verify your login credentials, make sure **all** the permissions listed above have been granted to your user, and that you do not have any IP whitelist/blacklist policy (if exporting from PostHog Cloud).
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Snowflake Export app](https://github.com/PostHog/snowflake-export-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra) and [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the Snowflake Export app. We miss you, Paolo! 
 
 ## What if I have feedback on this app?
 

@@ -7,12 +7,19 @@ topics:
 
 ## How do I install the PostHog Replicator app?
 
-1. Access PostHog's **Plugins** page from the sidebar.
-1. Go to the **Advanced** tab.
-1. **Fetch and install** the following URL in the **Install from GitHub, GitLab or npm** section:  
-   `https://github.com/PostHog/posthog-plugin-replicator`.
-1. Configure the plugin.
-1. See events come into another PostHog instance, identically to originals.
+1. Log in to your PostHog instance
+2. Click 'Plugins' on the left-hand tool bar
+3. Search for 'Replicator' 
+4. Select the app, press 'Install' and follow the on-screen instructions
+5. See events come into another PostHog instance, identically to the originals
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Replicator](https://github.com/posthog/posthog-plugin-replicator) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Michael Matloka](https://github.com/Twixes) for creating the Replicator app. 
 
 ## What if I have feedback on this app?
 

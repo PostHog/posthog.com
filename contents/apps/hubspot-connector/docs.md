@@ -31,6 +31,24 @@ Currently, this integration supports sending the following data to Hubspot:
 
 No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Hubspot Connector](https://github.com/PostHog/hubspot-plugin) is available on GitHub. 
+
+## Who created this app?
+
+A lot of people contributed to this app! We'd like to thank...
+
+- [Kunal](https://github.com/kpthatsme)
+- [Yakko Majuri](https://github.com/yakkomajuri)
+- [Marcus Hyett](https://github.com/marcushyett-ph)
+- [Marius Andra](https://github.com/mariusandra)
+- [Joe Martin](https://github.com/joethreepwood)
+- [Paul D'Ambra](https://github.com/pauldambra) and
+- [OneshotEngineering](https://github.com/oneshot-engineering)
+
+For creating the Hubspot Connector for PostHog. Thanks, all!
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

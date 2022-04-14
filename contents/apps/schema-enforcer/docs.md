@@ -45,6 +45,24 @@ It also:
 }
 ```
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Currency Normalizer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM. 
+
+## Who created this app?
+
+A lot of people worked on this app! We'd like to thank the following PostHog team members...
+
+- [Yakko Majuri](https://www.npmjs.com/~yakkomajuri)
+- [Marius Andra](https://www.npmjs.com/~mariusandra)
+- [James Greenhill](https://www.npmjs.com/~fuziontech)
+- [Michael Matloka](https://www.npmjs.com/~twixes)
+- [Alex Kim](https://www.npmjs.com/~alexkim205)
+- [Karl Aksel-Puulmann](https://www.npmjs.com/~macobo) and
+- [Tim Glaser](https://www.npmjs.com/~timgl)
+
+For creating the Schema Enforcer. Thank you, all!
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

@@ -23,6 +23,14 @@ This app can convert from any of these taxonomies, to any other.
 2. Search for 'Taxonomy Standardizer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Taxonomy Standardizer. Thank you, Yakko! 
+
 ## What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 

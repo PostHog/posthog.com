@@ -6,7 +6,7 @@ topics:
 ---
 
 ## What does the Google Cloud Pub/Sub app do?
-This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested.
+This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta). 
 
 ## How do I install the Google Cloud Pub/Sub app?
 
@@ -19,6 +19,14 @@ This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.goo
 ## Where is my Google Cloud key .json file?
 
 You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+
+## Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/vendasta/pubsub-plugin) is available on GitHub. 
+
+## Who created this app?
+
+We'd like to thank PostHog community member [Jesse Redl](https://github.com/vendasta/pubsub-plugin/commits?author=jredl-va) from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse! 
 
 ## What if I have feedback on this app?
 
