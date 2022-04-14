@@ -55,13 +55,17 @@ export const Scale = ({
             {!hideActions && (
                 <>
                     <Section title="Pricing starts at" className="mt-auto">
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center" id="scale-price">
                             <Price>
                                 ${Math.round(SCALE_MINIMUM_PRICING).toLocaleString()}
                                 <span className="text-base opacity-50">/mo</span>
                             </Price>
                             {!hideCalculator && (
-                                <Link className="text-yellow font-bold" onClick={() => setOpen(true)}>
+                                <Link
+                                    className="text-yellow font-bold"
+                                    event={{ name: 'pricing: clicked calculate price', type: 'scale' }}
+                                    onClick={() => setOpen(true)}
+                                >
                                     Calculate your price
                                 </Link>
                             )}
@@ -114,13 +118,17 @@ export const Enterprise = ({
             {!hideActions && (
                 <>
                     <Section title="Pricing starts at" className="mt-auto">
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center" id="enterprise-price">
                             <Price>
                                 ${Math.round(ENTERPRISE_MINIMUM_PRICING).toLocaleString()}
                                 <span className="text-base opacity-50">/mo</span>
                             </Price>
                             {!hideCalculator && (
-                                <Link className="text-yellow font-bold" onClick={() => setOpen(true)}>
+                                <Link
+                                    className="text-yellow font-bold"
+                                    event={{ name: 'pricing: clicked calculate price', type: 'enterprise' }}
+                                    onClick={() => setOpen(true)}
+                                >
                                     Calculate your price
                                 </Link>
                             )}
