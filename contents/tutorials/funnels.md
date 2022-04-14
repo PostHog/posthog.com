@@ -128,8 +128,6 @@ Once you've built a funnel in PostHog, you can take advantage of one our most us
 
 It's a powerful way to discover eye-opening insights into what your users are actually doing, allowing you to refine your funnel, and better understand your product.
 
-> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud.
-
 Let's take a look at the Correlated Events for our example.
 
 ![Correlated Events](../images/tutorials/funnels/correlated-events.png)
@@ -141,6 +139,8 @@ In other words: people who visited our docs from the homepage were 34x more like
 From this we can reasonably conclude that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
 
 Of course, you can also use the information in Correlated Events to refine and tweak your funnel.
+
+> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
 
 ## Step 3: Explore user paths between steps in the funnel
 
