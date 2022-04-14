@@ -2,7 +2,7 @@ import { TrackedCTA } from 'components/CallToAction/index.js'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
-import { SCALE_MINIMUM_PRICING } from '../constants'
+import { SCALE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { Features, Plan, Price, Section } from './Plan'
 import { features } from '../constants'
 
@@ -87,12 +87,19 @@ export const Scale = ({
     )
 }
 
-export const Enterprise = () => {
+export const Enterprise = ({
+    setOpen,
+    hideActions,
+    hideBadge,
+    hideCalculator,
+    className = 'border border-solid border-gray-accent-light rounded-sm bg-white bg-opacity-20',
+}) => {
     return (
         <Plan
             title="Enterprise"
             subtitle="Your IT & legal teams will be very pleased"
-            badge="INCLUDES OPEN SOURCE & SCALE FEATURES"
+            badge={!hideBadge && 'INCLUDES OPEN SOURCE & SCALE FEATURES'}
+            className={className}
         >
             <a href="/enterprise" className="inline-block mt-2">
                 See what comes with Enterprise
@@ -104,23 +111,43 @@ export const Enterprise = () => {
             <Section title="Ops & security">
                 <Features features={features['Ops & security']} />
             </Section>
-            <Section title="Pricing">
-                <Price>Custom</Price>
-            </Section>
-            <TrackedCTA
-                className="mt-7 mb-3"
-                to="/signup/self-host/get-in-touch?plan=enterprise#contact"
-                event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
-            >
-                Get in touch
-            </TrackedCTA>
-            <TrackedCTA
-                type="outline"
-                to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
-                event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
-            >
-                Book a demo
-            </TrackedCTA>
+            {!hideActions && (
+                <>
+                    <Section title="Pricing starts at" className="mt-auto">
+                        <div className="flex justify-between items-center">
+                            <Price>
+                                ${Math.round(ENTERPRISE_MINIMUM_PRICING).toLocaleString()}
+                                <span className="text-base opacity-50">/mo</span>
+                            </Price>
+                            {!hideCalculator && (
+                                <Link className="text-yellow font-bold" onClick={() => setOpen(true)}>
+                                    Calculate your price
+                                </Link>
+                            )}
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <Price>
+                                ${Math.round(ENTERPRISE_MINIMUM_PRICING * 10.8).toLocaleString()}
+                                <span className="text-base opacity-50">/yr (10% discount)</span>
+                            </Price>
+                        </div>
+                    </Section>
+                    <TrackedCTA
+                        className="mt-7 mb-3"
+                        to="/signup/self-host/get-in-touch?plan=enterprise#contact"
+                        event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+                    >
+                        Get in touch
+                    </TrackedCTA>
+                    <TrackedCTA
+                        type="outline"
+                        to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
+                        event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+                    >
+                        Book a demo
+                    </TrackedCTA>
+                </>
+            )}
         </Plan>
     )
 }

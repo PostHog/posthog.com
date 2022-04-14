@@ -7,7 +7,7 @@ import { Features, Plan, Price, Section } from './Plan'
 import { features } from '../constants'
 
 export const CloudPlanBreakdown = () => {
-    const { finalCost, eventNumber } = useValues(pricingSliderLogic)
+    const { finalMonthlyCost, eventNumber } = useValues(pricingSliderLogic)
     const eventNumberWithDelimiter = eventNumber.toLocaleString()
 
     return (
@@ -27,7 +27,7 @@ export const CloudPlanBreakdown = () => {
                         </Section>
                         <Section title="Pricing" className="mt-auto">
                             <Price>
-                                ${finalCost}
+                                ${finalMonthlyCost}
                                 <span className="text-base">
                                     <span className="opacity-50">/mo for</span> {eventNumberWithDelimiter} events
                                 </span>
@@ -41,8 +41,9 @@ export const CloudPlanBreakdown = () => {
                     <Plan title="Calculate your price" subtitle="Pay based on the events you capture each month.">
                         <div className="mb-4">
                             <div className="flex justify-between items-center mt-7">
-                                <div className="mb-0 text-sm text-primary text-opacity-75">Monthly event volume</div>
-                                <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
+                                <div className="mb-0 text-sm text-primary text-opacity-75">
+                                    Monthly event volume (millions)
+                                </div>
                             </div>
 
                             <PricingSlider
@@ -79,7 +80,7 @@ export const CloudPlanBreakdown = () => {
                         <div className="flex justify-between items-baseline border-t border-dashed border-gray-accent-light pt-3">
                             <div className="text-base mb-0 text-base font-bold">Estimated price</div>
                             <div className="mb-0 font-bold flex items-baseline">
-                                <div className="text-base">${finalCost}</div>
+                                <div className="text-base">${finalMonthlyCost}</div>
                                 <div className="opacity-50">/mo</div>
                             </div>
                         </div>
