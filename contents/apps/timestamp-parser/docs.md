@@ -29,7 +29,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Tiemstamp Parser](https://github.com/PostHog/timestamp-parser-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Timestamp Parser](https://github.com/PostHog/timestamp-parser-plugin) is available on GitHub. 
 
 ## Who created this app?
 
