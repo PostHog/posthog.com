@@ -1,5 +1,5 @@
 ---
-title: Analyzing your conversion with Funnels
+title: The complete guide to building, analyzing and iterating conversion funnels
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
@@ -14,34 +14,39 @@ A user landing on a page is just the beginning. You want users to sign up, use t
 
 To determine how well you're achieving these goals, you need to look at conversion, and funnels are a great way to measure and visualize conversion.
 
-This tutorial will walk you through creating a funnel step-by-step, while covering some of the use cases and features of PostHog Funnels. 
+This tutorial walks you through creating a conversion funnel in PostHog, and the advanced options available for analyzing, iterating on, and improving conversion.
 
 ## Before you start
 
-To follow this tutorial along, you need to:
+To follow this tutorial you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
 
 > **Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
 
-## When you should use Funnels
+### When to use Funnels
 
-Funnels are great for when your users should perform actions in succession. That is, if you need your user to do something _and then_ do something else, funnels are a great way to gather insights into that process.
+Funnels are great for when your users should perform actions in succession - i.e. if you need your user to do something _and then_ do something else.
 
 ![PostHog Funnel Example](../images/tutorials/funnels/top-to-bottom-funnel.png)
 
-Above is a very simple example of a Funnel in PostHog, measuring how often people visits our docs after arriving on the homepage. This users the top to bottom view, but there's also a left to right option, as seen below
+Above is a very simple example of a funnel in PostHog, measuring how often people visit our docs after arriving on the homepage. We have two funnel views: top-to-bottom (above) and left-to-right (below).
 
 ![PostHog Funnel Example](../images/tutorials/funnels/simple-left-right.png)
 
-Funnels can have as many steps as you like and offer a good look into both what percentage of **unique users** are converting from one step to another, as well as identifying which users convert, and which don't.
+Funnels can have as many steps as you like, and reveal both what percentage of **unique users** are converting from one step to another, and which users do or don't convert.
 
-A standard, but very useful, funnel is looking at the sign up process from end-to-end. You can set up a funnel starting from the moment the user lands on your page to when they actually complete the process. You are then able to find out where users are dropping off, and work on improving those areas.
+Creating an onboarding or sign-up funnel is one of the first things most PostHog users do, but there are plenty of other uses, such as:
 
-## Creating your first funnel
+* Percentage of users paid for a subscription once the free trial ended
+* Conversion rate from your cheaper plan to your more expensive plan
+* Percentage of users that actually used the product after signing up
+* Number of active users that tried the newest beta feature
 
-### Step 1: Create a new insight
+Funnels are also useful for interrograting complicated processes, such as a feature that requires extensive setup, or a sign up process that requires a lot of information. Setting up a funnel can help you figure out _exactly_ where users drop out of the process, so you can improve that step to make sure that users complete the funnel, even if it is a "long" one.
+
+## Step 1: Create your funnel
 
 Funnels are part Insights in PostHog. 
 
@@ -53,8 +58,6 @@ Then, in the insight builder, click on 'Funnels' to start creating your funnel.
 
 ![Funnels insight](../images/tutorials/funnels/funnel-preview.png)
 
-### Step 2: Adding steps to your funnel
-
 The Funnels builder is split into two panes: 'Query Steps' on the left for defining your funnel, and a preview pane on the right. Changes are calculated on-the-fly, so you can see if your funnel is set up correctly as you go.
 
 There's no limit to the number of steps you can add to your funnel, but let's start with a simple example first.
@@ -63,7 +66,7 @@ Click on the first step to edit it and search for your desired Event or Action. 
 
 FUNNEL STEP 1 VIDEO HERE
 
-You can apply filters to specific steps in the funnel, or apply a general filter to the entire funnel in the 'Filters' section below the 'Query Steps' section. By default we filter out internal and test users - read our [how to filter internal users tutorial](/tutorials/filter-internal-users) for how to set that up.
+You can apply filters to specific steps in the funnel, or apply a general filter to the entire funnel in the 'Filters' section below the 'Query Steps' section. We filter out internal and test users by default - read our [how to filter internal users tutorial](/tutorials/filter-internal-users) for how to set that up.
 
 Next, we're going to add a second step to our funnel. The results are instantly calculated.
 
@@ -77,9 +80,48 @@ CONVERSION WINDOW CLIP HERE
 
 Note how, in the example above, the conversion rate drops from 10% to 7.8% when we switch from 14 days to 14 minutes.
 
-### Step 3: Evaluate Correlated Events
+### Using filters in Funnels
 
-Once you've built a funnel in PostHog, you can take advantage of one our most powerful features. Correlation Analysis.
+As noted earlier, you can add global events that apply to the entire funnel. This is useful for interrogating a specific subset of users, such as:
+
+- Users who arrived via a Google search
+- Users who arrived via a specific UTM parameter (e.g. marketing campaigns)
+- Users by operating system
+- Users by location (continent, country, city etc.)
+
+To add a filter, click on the blue 'Add filter group' under 'Filters' and add your desired filters. You can filter by 'AND' (all filters must be met) or by 'OR' (any filter can be met).
+
+You can also use filters by [Cohorts](/docs/user-guides/cohorts) – a useful way to isolate a funnel based on users who perform a specific action, or even a group of users from the same organization.
+
+Clicking 'Add to dashboard' allows you add you funnels to an existing dashboard or a new one, and building a dashboard showing the same funnel with various filters (e.g. conversion by platform, conversion by age etc.) is a great foundation for an actionable dashboard you'll monitor every week.
+
+You also have the option to breakdown your funnel in all the same ways you can filter funnels by clicking 'Add breakdown'.
+
+Here's of our example funnel broken down by continent:
+
+![Three step funnel](../images/tutorials/funnels/continent-breakdown.png)
+
+Mousing over each breakdown will show the conversion rate for that specific result. You can also add or remove properties from the breakdown using the tick boxes below the funnel.
+
+### Advanced options in Funnels
+
+There are three settings to play with under the 'Advanced options' drop down.
+
+**Step order** controls how strictly the funnel is measured. There are three options:
+
+- **Sequential (default):** Step B must happen after Step A, but any number of events can happen between
+- **Strict order:** Step B must happen directly after Step A
+- **Any order:** Steps can be completed in any sequence
+
+We default to 'Sequential' because a perfect A to B to C funnel is rare, and using 'Strict order' results in much lower conversion numbers in most cases. That said, it is applicable in some cases where the front-end user journey options are strictly controlled.
+
+**Conversion rate calculation** controls how the conversion rate is calculated. By default we measure the overall conversion rate relative to the first step in the funnel, but here you can choose 'Relative to previous step' if you prefer. Note, however, that in the 'Top to bottom' funnel view, the relative conversaion rate appears in brackets beneath each step.
+
+Finally, **Exclusion steps** allow you exclude people who triggered other events between specific steps in your funnel. There are numerous edge cases for why you might want to do this, such as wanting to exclude people who contacted support, or booked a demo, before converting.
+
+## Step 2: Evaluate correlated events
+
+Once you've built a funnel in PostHog, you can take advantage of one our most useful features: Correlation Analysis.
 
 [Correlation Analysis](/docs/user-guides/correlation) automatically highlights significant factors that impact the conversion rate of users within the funnel, including events and properties.
 
@@ -93,88 +135,76 @@ Let's take a look at the Correlated Events for our example.
 
 The top result immediately stands out as significant. "Persons who converted were 34x more likely" to perform the "deploy option clicked" event.
 
-In other words: people who visited the our docs from the homepage were 34x more likely to then deploy PostHog.
+In other words: people who visited our docs from the homepage were 34x more likely consider deploying PostHog.
 
 From this we can reasonably conclude that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
 
-We can also add the "deploy option clicked" event to our funnel, as per below:
+Of course, you can also use the information in Correlated Events to refine and tweak your funnel.
 
-![Three step funnel](../images/tutorials/funnels/funnel-with-deploy-option.png)
+## Step 3: Explore User Paths between steps in the funnel
 
-## Filters and advanced options
+Another way to refine your funnel is to explore the paths people take between steps in your funnel.
 
-### How to use filters on funnels
+Click on the '...' next to any step in your funnel and, depending on which step you're selecting, you'll be presented with options to "Show user paths..."
 
-As noted earlier, you can add global events that apply to the entire funnel. This is useful for interrogating a specific subset of users, such as:
+- leading to step
+- between previous step and this step
+- after step
+- after dropoff
+- before dropoff
 
-- Those who arrived via a Google search
-- Those who arrived via a specific UTM parameter (e.g. marketing campaigns)
-- Those who use a specific operating system
-- Users defined by location (continent, country, city etc.)
+Selecting any option will instantly create a new User Path insight showing the paths users took.
 
-To add a filter, simply click on the blue 'Add filter group' under 'Filters' and add your desired filters. You can filter by 'AND' (all filters must be met) or by 'OR' (any filter can be met).
+This is useful for getting a complete picture of the "real funnel" created by user interactions, rather than the imagined "perfect funnel" engineers and designers have in their head. Spoiler: the "real funnel" and the "perfect funnel" are rarely the same!
 
-You can also use filters by [Cohorts](/docs/user-guides/cohorts) – a useful way to isolate a funnel based on users who perform a specific action, or even a group of users from the same organization.
+The "Show user paths after dropoff" option is especially useful for understanding what people do when they drop out of your desired funnel. Are they getting distracted by some other option, are you asking for too much information, or is the next step just not clear enough? 
 
-Clicking 'Add to dashboard' allows you add you funnels to an existing dashboard or a new one, and building a dashboard showing the same funnel with various filters (e.g. conversion by platform, conversion by age etc.) is a great foundation for an actional dashboard you'll monitor every week.
+Where users choose to go next can reveal a great deal about issues impacting conversion.  
 
-You also have the option to breakdown your funnel in all the same ways you can filter funnels by clicking 'Add breakdown'.
+## Step 4: Watch people navigate your funnel
 
-Here's of our example funnel broken down by continent:
+User paths give you a zoomed out view of user behavior, but session recordings are the best way to understand "the why". And because PostHog is an all-in-one platform, you can go directly from your Funnels insight to viewing session recordings of people who either converted or dropped off.
 
-![Three step funnel](../images/tutorials/funnels/continent-breakdown.png)
+To do so, simply click on the total of people who either completed or dropped off on any given step, and you'll be presented with the list of those users. From here you can click to watch specific recordings from your funnel, view individual user profiles, or even create a cohort of all users for further analysis.
 
-Mousing over each breakdown will show the conversion rate for that specific result. You can also add or remove properties from the breakdown using the tick boxes below the funnel. 
+Using funnel analysis and Session Recording together, one PostHog user drove a [10-20% improvement in conversion](/customers/hasura) by simply indentifying problematic processes and confusing UI elements.
 
-### Advanced options
+## Step 5: Make improvements, test and measure
 
-There are three settings to play with under the 'Advanced options' drop down.
+With any luck, following all these steps will help you indentify issues, and prototype remedies you hope will improve conversion. You could just roll them out and see if conversion improves, but there's a better way.
 
-**Step order** controls how strictly the funnel is measured. There are three options:
+[Experimentation](/product/experimentation-suite) makes it easy to test changes, and validate their efficacy, before rolling them out to everyone. We **highly recommend** running an experiment before rolling out any fundamental change to your conversion funnel – not least because you can use the (hopefully positive!) results in your LinkedIn profile. Priorities.
 
-- **Sequential (default):** Step B must happen after Step A, but any number of events can happen between
-- **Strict order:** Step B must happen directly after Step A
-- **Any order:** Steps can be completed in any sequence
+All you need to do is choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for. Thanks to Feature Flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. We run a Bayesian analysis on the data to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are statistically significant or not.
 
-We default to 'Sequential' because a perfect A to B to C funnel is rare, and using this option will result in much lower conversion numbers in most cases. That said, it is applicable in some cases where the front-end user journey options are strictly controlled.
+Here's an example of the output of an experiment we ran in PostHog:
 
-**Conversion rate calculation** controls how the conversion rate is calculated. By default we measure the overall conversion rate relative to the first step in the funnel, but here you can choose 'Relative to previous step' if you prefer. Note, however, that in the 'Top to bottom' funnel view, the relative conversaion rate appears in brackets beneath each step.
+In this example, we were testing a two possible changes to our User Paths insight feature against a control to see which, if any, improved the number of Discoveries (our [primary product metric](/handbook/product/metrics)) of PostHog users.
 
-Finally, **Exclusion steps** allow you exclude people who triggered other events between specific steps in your funnel. There are numerous edge cases for why you might want to do this, such as wanting to exclude people who contacted support, or booked a demo, before converting. 
+In this case, both variants were a significant improvement on the control, but the experiment showed one variant had a 97.7% probability of being the best – a good example of why it's a good idea to test more than one solution to a problem.
 
-## Putting your funnel to use
+Our [Experimentation documentation](/docs/user-guides/experimentation) provides in-depth guidance on how to setup an experiment. 
 
-### Conversion metrics
+## Further reading
 
-The simplest way to use a funnel is to calculate conversion rates for all users on a set of steps. 
+[PostHog customers](/customers) frequently tell us about how they've used PostHog improve conversion, or reduced onboarding drop off, sometimes by [as much as 50%](/customers/vendasta)
 
-This can supply relevant information for your KPIs and business metrics, such as:
+For more inspiration, we recommend reading our [Building an AARRR pirate funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
 
-* Percentage of users paid for a subscription once the free trial ended
-* Conversion rate from your cheaper plan to your more expensive plan
-* Percentage of users that actually used the product after signing up
-* Number of active users that tried the newest Beta feature
+Got a question about anything in this tutorial? Leave a question below, or [join our community Slack](/slack).
 
-In addition, if you have a complicated process such as a feature that requires extensive setup, or a sign up process that requires a lot of information, setting up a funnel can help you figure out _exactly_ where users drop out of the process, so you can improve that step to make sure that users complete the funnel, even if it is a "long" one. Once you make the necessary adjustments, it is also extremely valuable to monitor how your funnel changes over time.
 
-### Visualize individual users 
 
-PostHog not only provides you with funnels that display aggregate user data, but also allows you to see each individual user going through the funnel. 
 
-You can find this on the bottom-left of the Funnels page by scrolling down:
 
-![Individual user funnels](../images/tutorials/funnels/individual-users.png)
 
-This way, you are able to take direct action on each user, such as send a follow-up email, or give them a discount. 
 
-This can be especially useful for companies with a focus on outbound Sales, for example. Since you are able to get distinct information about where each user dropped off on a funnel, you can tailor your Sales pitch appropriately to that person. 
 
-### Filtering
+ 
 
-Filtering is a functionality present on all of PostHog's features, and it can be particularly useful for funnels. 
 
-You can use filtering to, for instance, compare funnels across [Cohorts](/docs/user-guides/cohorts) or user groups with shared properties. You can then determine what groups have better conversion rates, and investigate why.
 
-For example, if you find that conversion is about the same across all browsers, but extremely low for Internet Explorer, you might wonder if your website is actually working correctly on IE.
 
-Or, in a more advanced case, you can determine if users with the custom property `job_title` set to `Product Manager` convert better or worse than users that have it set to `Software Developer`. This can help you evaluate who your target customer base is, if it matches your expectation, and how you can improve your product's user experience as a result. 
+
+
+
