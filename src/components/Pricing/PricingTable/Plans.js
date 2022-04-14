@@ -63,7 +63,7 @@ export const Scale = ({
                             {!hideCalculator && (
                                 <Link
                                     className="text-yellow font-bold"
-                                    event={{ name: 'pricing: clicked calculate price', type: 'scale' }}
+                                    event="select edition: clicked calculate scale price"
                                     onClick={() => setOpen(true)}
                                 >
                                     Calculate your price
@@ -126,7 +126,7 @@ export const Enterprise = ({
                             {!hideCalculator && (
                                 <Link
                                     className="text-yellow font-bold"
-                                    event={{ name: 'pricing: clicked calculate price', type: 'enterprise' }}
+                                    event="select edition: clicked calculate enterprise price"
                                     onClick={() => setOpen(true)}
                                 >
                                     Calculate your price
