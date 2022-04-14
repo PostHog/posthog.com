@@ -5,11 +5,11 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
 author: ["yakko-majuri", "andy-vandervell"]
 topics: ["funnels", "user paths", "session recording", "filters"]
-date: 2020-09-29
+date: 2022-04-14
 ---
 
-**Level:** Intermediate 🦔🦔
-**Estimated reading time:** 9 minutes ☕️☕️
+- **Level:** Intermediate 🦔🦔
+- **Estimated reading time:** 9 minutes ☕️☕️
 
 A user landing on a page is just the beginning. You want users to sign up, use the product, pay you, or complete a series of steps in your product to make full use of a key feature.
 
@@ -179,6 +179,8 @@ With any luck, following all these steps will help you identify issues, and prot
 All you need to do is choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for. Thanks to Feature Flags, you can then easily validate whether each variant looks good, launch your experiment, and wait for data to come in. We run a Bayesian analysis on the data to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are statistically significant or not.
 
 Here's an example of the output of an experiment we ran in PostHog:
+
+![Experiment result](../images/tutorials/funnels/experiment-result.png)
 
 In this example, we were testing a two possible changes to our User Paths insight feature against a control to see which, if any, improved the number of Discoveries (our [primary product metric](/handbook/product/metrics)) of PostHog users.
 
