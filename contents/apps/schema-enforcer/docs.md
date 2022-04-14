@@ -5,7 +5,7 @@ topics:
     - schema-enforcer
 ---
 
-## How does this app work?
+### How does this app work?
 
 The app enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
 
@@ -18,13 +18,13 @@ It also:
 - Removes all other properties from an event except selected ones if acceptOnlySchemaProps is true
 - Configuration is done via a JSON file uploaded as a plugin attachment
 
-## What are the requirements for this app?
+### What are the requirements for this app?
 
 The Schema Enforcer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-## How do I install the Schema Enforcer for PostHog?
+### How do I install the Schema Enforcer for PostHog?
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
@@ -60,11 +60,11 @@ Below is an example configuration file:
 }
 ```
 
-## Is the source code for this app available?
+### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Currency Normalizer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM. 
 
-## Who created this app?
+### Who created this app?
 
 A lot of people worked on this app! We'd like to thank the following PostHog team members...
 
@@ -78,10 +78,10 @@ A lot of people worked on this app! We'd like to thank the following PostHog tea
 
 For creating the Schema Enforcer. Thank you, all!
 
-## What if I have feedback on this app?
+### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
-## What if my question isn't answered above?
+### What if my question isn't answered above?
 
 You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

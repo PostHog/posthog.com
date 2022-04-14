@@ -5,11 +5,11 @@ topics:
     - bigquery-export
 ---
 
-## What does the BigQuery Export app do?
+### What does the BigQuery Export app do?
 
 This app streams events from PostHog directly into a BigQuery service account, as they are ingested. This is especially useful if you have an existing data warehouse or data lake running in BigQuery. 
 
-## What are the requirements for this app?
+### What are the requirements for this app?
 
 The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
@@ -17,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to the BigQuery instance you want to export to. 
 
-## How do I install the BigQuery export app for PostHog?
+### How do I install the BigQuery export app for PostHog?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'BigQuery' and select the app, press Install.
@@ -27,7 +27,7 @@ You'll also need access to the BigQuery instance you want to export to.
    3. Enter your Table ID 
 3. Watch events roll into BigQuery
 
-## How do I setup BigQuery permissions for PostHog?
+### How do I setup BigQuery permissions for PostHog?
 
 To set the right permissions up for the BigQuery plugin, you'll need:
 1. A service account.
@@ -62,18 +62,18 @@ There's a very rare case when duplicate events appear in BigQuery. This happens 
 
 While this shouldn't happen, if you find duplicate events in BigQuery, follow these [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) to manually remove the them.
 
-## Is the source code for this app available?
+### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the BigQuery Export app](https://github.com/PostHog/bigquery-plugin) is available on GitHub. 
 
-## Who created this app?
+### Who created this app?
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra), [Neil Kakkar](https://github.com/neilkakkar), [Michael Matloka](https://github.com/Twixes) and community member [Edward Hartwell Goose](https://github.com/edhgoose) for creating this BigQuery Export app. 
 
-## What if I have feedback on this app?
+### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
-## What if my question isn't answered above?
+### What if my question isn't answered above?
 
 You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.

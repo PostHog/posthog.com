@@ -5,7 +5,7 @@ topics:
     - redshift-export
 ---
 
-## What are the requirements for this app?
+### What are the requirements for this app?
 
 Using the Redshift Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
@@ -13,7 +13,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a Redshift Cluster to export to. 
 
-## How do I install the Redshift Export app? 
+### How do I install the Redshift Export app? 
 
 1. [Create a Redshift Cluster](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-launch-cluster.html)
 2. Make sure PostHog can access your cluster 
@@ -38,14 +38,14 @@ GRANT CREATE ON DATABASE your_database TO posthog;
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Export app](https://github.com/PostHog/redshift-plugin) is available on GitHub. 
 
-## Who created this app?
+### Who created this app?
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating the Redshift Export app. 
 
-## What if I have feedback on this app?
+### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
-## What if my question isn't answered above?
+### What if my question isn't answered above?
 
 You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
