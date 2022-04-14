@@ -20,7 +20,7 @@ If you want to track releases from a private GitHub repo, you'll also need acces
 ## How do I install the GitHub Release Tracker for PostHog?
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'GitHub Release Tracker' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

@@ -16,7 +16,7 @@ You'll also need a Twitter account and, ideally, some followers.
 ## How do I install the Twitter Followers Tracker for PostHog?
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Twitter' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

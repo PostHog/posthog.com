@@ -22,7 +22,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## How do I install the First Time Event Tracker app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'First Time Event Tracker' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

@@ -9,18 +9,17 @@ topics:
 
 This app uses a Snowflake external stage to stage events in object storage - Amazon S3 or Google Cloud Storage. Staged events (stored in object storage as files containing event batches) are then copied into the final destination – your Snowflake table – once an hour. 
 
-Prerequisites:
-- a Snowflake user
-- an S3 _or_ GCS bucket
-- an AWS _or_ GCP user with permissions to access that bucket in order to use this app
-
 ## What are the requirements for this app?
 
 The First Time Event Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-You'll also need access to a Snowflake Warehouse, as well as the relevant levels of access to install and configure this app.
+You'll also need:
+
+- a Snowflake user
+- an S3 _or_ GCS bucket
+- an AWS _or_ GCP user with permissions to access that bucket in order to use this app
 
 ## How do I configure the Snowflake Export app?
 

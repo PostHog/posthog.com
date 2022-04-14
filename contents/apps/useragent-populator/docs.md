@@ -19,7 +19,7 @@ It's typically used to easily pass the `User-Agent` HTTP header from incoming re
 
 ## How do I install the Useragent Enhancer app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Useragent Populator' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

@@ -25,7 +25,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## How do I install the Taxonomy Standardizer app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Taxonomy Standardizer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

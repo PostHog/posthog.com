@@ -15,10 +15,9 @@ The Downsampler app requires either PostHog Cloud, or a self-hosted PostHog inst
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-
 ## How do I install the Downsampler app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Downsampling' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

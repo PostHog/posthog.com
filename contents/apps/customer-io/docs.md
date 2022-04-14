@@ -18,7 +18,7 @@ You'll also need access to the relevant Customer.io account.
 
 ## How do I install the Customer.io Connector app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Customer.io' and select the app, press Install.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!

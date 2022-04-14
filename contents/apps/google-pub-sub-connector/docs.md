@@ -19,7 +19,7 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 ## How do I install the Google Cloud Pub/Sub app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Pub/Sub' and select the app, press Install.
 3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
 4. Enter your Topic ID.

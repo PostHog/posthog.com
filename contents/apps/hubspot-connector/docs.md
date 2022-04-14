@@ -39,7 +39,7 @@ No other information can currently be sent to PostHog using this app. If this ap
 ## How do I install the Hubspot app on PostHog?
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Hubspot' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

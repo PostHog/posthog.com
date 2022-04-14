@@ -19,7 +19,7 @@ You'll also need an Orbit workspace you can connect to.
 
 ## How do I install the Orbit Connector app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Orbit' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

@@ -22,7 +22,7 @@ You'll also need access to an AWS S3 account.
 This app requires a PostHog 1.24.0+ self-hosted, or PostHog Cloud. 
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'S3' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 5. Configure the app by entering your AWS credentials and S3 bucket details

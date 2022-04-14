@@ -17,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## How do I install the Currency Normalizer app for PostHog?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Currency Normalization' and select the app, press Install.
 3. Update the required settings (get the API key [here](https://openexchangerates.org/)) and enable the plugin.
 

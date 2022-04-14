@@ -27,7 +27,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 ## How do I install the Schema Enforcer for PostHog?
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Schema Enforcer' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

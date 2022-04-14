@@ -21,7 +21,7 @@ You'll also need access to the Google Cloud Storage bucket you want to export to
 
 Before installing the Google Cloud Storage Export app, you will need your Google Cloud .json file. Find out how to get this in [Google's BigQuery API documentation](https://cloud.google.com/bigquery/docs/reference/libraries).
 
-1. Visit the 'Plugins' page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'GCS' and select the app, press Install and proceed to Configuration.
 3. Upload your Google Cloud key .json file.
 4. Enter your Project ID.

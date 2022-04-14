@@ -19,7 +19,7 @@ You'll also need access to the BigQuery instance you want to export to.
 
 ## How do I install the BigQuery export app for PostHog?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'BigQuery' and select the app, press Install.
 3. Follow the configuration steps:
    1. Upload your Google Cloud key `.json` file. (See below for permissions and how to retrieve this.)

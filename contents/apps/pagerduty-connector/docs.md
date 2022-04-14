@@ -27,7 +27,7 @@ You'll also need access to a PagerDuty account.
 This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'PagerDuty' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

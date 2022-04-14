@@ -20,7 +20,7 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 ## How do I install the Salesforce Connector app for PostHog?
 
 1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
+2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Salesforce' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 

@@ -11,13 +11,13 @@ This app measures the time it takes for a user to perform one event (`EventB`), 
 
 ## What are the requirements for this app?
 
-The Currency Normalizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+The Event Sequence Timer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
 ## How do I install the Event Sequence Timer app?
 
-1. Visit the "Apps" page in your instance of PostHog.
+1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Event Sequence Timer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
