@@ -92,7 +92,7 @@ export const Enterprise = ({
     hideActions,
     hideBadge,
     hideCalculator,
-    className = 'border border-solid border-gray-accent-light rounded-sm bg-white bg-opacity-20',
+    className = 'border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20',
 }) => {
     return (
         <Plan
