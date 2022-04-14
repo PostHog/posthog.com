@@ -5,6 +5,20 @@ topics:
     - replicator
 ---
 
+## What does the Replicator app do?
+
+The Replicator app copies events from one PostHog instance to another, at the moment they are ingested. No changes are made to the events by this app if it runs in isolation. 
+
+If this app is deployed in a chain then any changes made to the event data before the Replicator runs will also be copied to the new instance. Otherwise, no changes will be copied.
+
+## What are the requirements for this app?
+
+The Replicator app requires *two* instances of PostHog running either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+Both versions of PostHog should ideally be running the same version. 
+
 ## How do I install the PostHog Replicator app?
 
 1. Log in to your PostHog instance

@@ -9,6 +9,14 @@ topics:
 
 The Orbit app for PostHog pulls data from the Orbit.love workspace API into PostHog, enabling you to track your community as a product metric. 
 
+## What are the requirements for this app?
+
+The Orbit Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need an Orbit workspace you can connect to. 
+
 ## How do I install the Orbit Connector app?
 
 1. Visit the "Apps" page in your instance of PostHog.

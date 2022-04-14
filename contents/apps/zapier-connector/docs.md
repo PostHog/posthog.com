@@ -18,6 +18,14 @@ Trigger | Action Performed   | Any **paid** plan
 Trigger | Action Defined     | Any **paid** plan
 Trigger | Annotation Created | Any **paid** plan
 
+## What are the requirements for this app?
+
+Connecting Zapier requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Zapier account which can connect to the other services you want to use via this app. 
+
 ## How do I connect PostHog to other services with Zapier?
 
 [Our official Zapier app](https://zapier.com/apps/posthog/integrations) is compatible with PostHog Cloud, as well as with self-hosted instances. No additional setup needed.  

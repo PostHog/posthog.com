@@ -10,8 +10,17 @@ topics:
 This app alerts PagerDuty when a PostHog insights/trends graph goes below or above a threshold.
 
 Example use cases:
+
 - Alert when there is no $pageviews captured on my site the past hour,
 - Alert when the rate of $billing_error events crosses a threshold.
+
+## What are the requirements for this app?
+
+The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to a PagerDuty account. 
 
 ## How do I install the PagerDuty Connector for PostHog?
 

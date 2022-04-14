@@ -9,19 +9,24 @@ topics:
 
 This app enriches PostHog events and persons with IP location data. Simply enable this app and from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
 
+## How does the GeoIP Enricher app work?
+
+This app prefers to use event property `$ip` (which should be of type `string`), but if that is not provided, it uses the IP address of the client that sent the event.
+
+This way the app can, in most cases, infer the IP address without any work on your side.
+
+## What are the requirements for this app?
+
+The GeoIP Enricher requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the GeoIP Enrichment app for PostHog?
 
 1. Log in to your PostHog instance
 2. Click 'Plugins' on the left-hand tool bar
 3. Search for 'GeoIP' 
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
-
-## How does the GeoIP Enricher app work?
-
-This plugin prefers to use event property `$ip` (which should be of type `string`), but if that is not provided,
-it uses the IP address of the client that sent the event.
-
-This way in most cases the plugin can infer the IP address without any work on your side.
 
 ## How do I add add properties?
 
@@ -50,7 +55,7 @@ They are also set on the associated person same as above, plus set_once in `$ini
 
 A case to be aware of is sending events from a server – such events, if not provided with custom property `$ip`, will be detected as sent from the location of the data center, instead of the related user.
 
-If you'd like this plugin to skip over an event and not add the above properties,
+If you'd like this app to skip over an event and not add the above properties,
 set property `$geoip_disable` to `true` on that event.
 
 ## Is the source code for this app available?

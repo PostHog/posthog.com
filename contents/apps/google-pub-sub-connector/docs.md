@@ -6,7 +6,16 @@ topics:
 ---
 
 ## What does the Google Cloud Pub/Sub app do?
+
 This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta). 
+
+## What are the requirements for this app?
+
+The Pub/Sub Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Google Cloud Pub/Sub account to connect to. 
 
 ## How do I install the Google Cloud Pub/Sub app?
 

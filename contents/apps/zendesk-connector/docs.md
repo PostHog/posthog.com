@@ -5,13 +5,24 @@ topics:
     - zendesk connector
 ---
 
-## What does ththe Zendesk Connector app do?
+## What does the Zendesk Connector app do?
+
 The Zendesk Connector app can import new and historic ticket events to PostHog. However, only the Date Type User Field is currently supported.
 
+## What are the requirements for this app?
+
+The Zendesk Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Zendesk account, with admin access. 
+
 ## Are there any limitations?
+
 The ZenDesk API has a limit of 400hits/min. If you have higher ingestion than that, please contact Zendesk.
 
 ## How do I install the Zendesk Connector app?
+
 Make sure to use your Zendesk Admin Account to perform the below activities.
 
 - Head Over to Zendesk's Admin section -> Settings -> Account.

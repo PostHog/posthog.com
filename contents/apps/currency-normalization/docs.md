@@ -9,6 +9,12 @@ topics:
 
 This app normalizes currencies in events. E.g. amounts in EUR, USD and GBP will all be converted to EUR.
 
+## What are the requirements for this app?
+
+The Currency Normalizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the Currency Normalizer app for PostHog?
 
 1. Visit the "Apps" page in your instance of PostHog.

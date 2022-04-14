@@ -9,6 +9,14 @@ topics:
 
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 
+## What are the requirements for this app?
+
+The S3 Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.24.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to an AWS S3 account. 
+
 ## How do I install the S3 Export app for PostHog?
 
 This app requires a PostHog 1.24.0+ self-hosted, or PostHog Cloud. 

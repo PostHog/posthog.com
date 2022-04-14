@@ -9,6 +9,14 @@ topics:
 
 This app connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested. 
 
+## What are the requirements for this app?
+
+The Salesforce Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Salesforce account to connect to, as well as the relevant levels of access to install and configure this app. 
+
 ## How do I install the Salesforce Connector app for PostHog?
 
 1. Log in to your PostHog instance

@@ -5,6 +5,17 @@ topics:
     - downsampler
 ---
 
+## What does the Downsampler app do?
+
+This app enables you to reduce how many events a deployment of PostHog will ingest. This is especially useful for users who have huge volumes of data, but don't need to analyze it all and want to avoid large bills. 
+
+## What are the requirements for this app?
+
+The Downsampler app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+
 ## How do I install the Downsampler app?
 
 1. Visit the "Apps" page in your instance of PostHog.

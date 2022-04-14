@@ -16,6 +16,12 @@ To install this app, follow these simple steps...
 
 And follow the on-screen instructions to complete configuration. 
 
+## What are the requirements for this app?
+
+The BitBucket Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Bitbucket Release Tracker](https://github.com/PostHog/bitbucket-release-tracker) is available on GitHub. 

@@ -5,6 +5,21 @@ topics:
     - first-time
 ---
 
+## What does the First Time Event Tracker do?
+
+This app adds two new properties to events which you specify:
+
+- `is_event_first_ever`
+- `is_event_first_for_user`
+
+Using these events, you can track if each event is the first time that event has run _for a individual user_, the first time it has run _ever_, both of these, or neither.
+
+## What are the requirements for this app?
+
+The First Time Event Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the First Time Event Tracker app?
 
 1. Visit the "Apps" page in your instance of PostHog.
@@ -12,13 +27,6 @@ topics:
 3. Follow the on-screen steps to configure the app.
 
 This app will only work on events ingested _after_ the plugin was enabled. 
-
-## How does the First Time Event Tracker app work?
-
-This app adds two new properties to events which you specify:
-
-- `is_event_first_ever`
-- `is_event_first_for_user`
 
 ## Does this app work retroactively?
 

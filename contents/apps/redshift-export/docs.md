@@ -1,9 +1,17 @@
 ---
-title: Redshift Export PostHog app
+title: Redshift Export app
 showTitle: true
 topics:
-    - redshift export
+    - redshift-export
 ---
+
+## What are the requirements for this app?
+
+Using the Redshift Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to a Redshift Cluster to export to. 
 
 ## How do I install the Redshift Export app? 
 
@@ -13,7 +21,7 @@ topics:
 This might require a few things:
 
 - [Allowing public access to the cluster](https://aws.amazon.com/premiumsupport/knowledge-center/redshift-cluster-private-public/)
-- [Ensuring your VPC security group allows traffic to and from the Redshift cluster](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) - If this is not possible in your case, you should consider using our [S3 plugin](https://posthog.com/plugins/s3-export) and then setting up your own system for getting data into your Redshift cluster
+- [Ensuring your VPC security group allows traffic to and from the Redshift cluster](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) - If this is not possible in your case, you should consider using our S3 Export app and then setting up your own system for getting data into your Redshift cluster
 
 3. Create a user with table creation privileges
 
@@ -24,7 +32,7 @@ CREATE USER posthog WITH PASSWORD '123456yZ';
 GRANT CREATE ON DATABASE your_database TO posthog;
 ```
 
-4. Add the connection details at the plugin configuration step in PostHog
+4. Add the connection details at the configuration step in PostHog
 
 ## Is the source code for this app available?
 

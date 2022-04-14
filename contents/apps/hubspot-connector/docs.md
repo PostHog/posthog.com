@@ -9,16 +9,19 @@ topics:
 
 Hubspot is a full-featured marketing and CRM platform which includes tools for everything from managing inbound leads to building landing pages. As one of the world’s most popular CRM platforms, Hubspot is an essential PostHog integration for many organizations — and is especially popular with marketing teams.
 
-## How do I install the Hubspot app on PostHog?
+## What does the Hubspot Connector do?
 
-1. Log in to your PostHog instance
-2. Click 'Plugins' on the left-hand tool bar
-3. Search for 'Hubspot' 
-4. Select the app, press 'Install' and follow the on-screen instructions
+The Hubspot Connector for PostHog sends data from PostHog to Hubspot whenever an `$identify` event occurs. That is, whenever PostHog successfully identifies a user. This is useful for syncing customer information between both PostHog and Hubspot. 
 
-## How does Hubspot integrate with PostHog?
+## What are the requirements for this app?
 
-This PostHog plugin enables you to send user contact data to Hubspot whenever an $identify event occurs. That is, whenever PostHog detects the identity of a user, it can forward that identification information to Hubspot.
+The Hubspot Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Hubspot account to connect to. 
+
+## What information can I push to Hubspot from PostHog?
 
 Currently, this integration supports sending the following data to Hubspot:
 
@@ -29,7 +32,16 @@ Currently, this integration supports sending the following data to Hubspot:
 * Company names
 * Company website URLs
 
-No other information can currently be sent to PostHog using this plugin. If this plugin exists in a [plugin chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would is filtered out (for example, by using the Property Filter plugin) then filtered information cannot be sent to Hubspot.
+This information can be sent whenever an `$identify` event occurs in PostHog. 
+
+No other information can currently be sent to PostHog using this app. If this app exists in a [chain](../../../docs/plugins/build#example-of-a-plugin-chain) where the above information would be filtered out (for example, by using the Property Filter app) then filtered information cannot be sent to Hubspot.
+
+## How do I install the Hubspot app on PostHog?
+
+1. Log in to your PostHog instance
+2. Click 'Plugins' on the left-hand tool bar
+3. Search for 'Hubspot' 
+4. Select the app, press 'Install' and follow the on-screen instructions
 
 ## Is the source code for this app available?
 

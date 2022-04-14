@@ -18,7 +18,22 @@ It also:
 - Removes all other properties from an event except selected ones if acceptOnlySchemaProps is true
 - Configuration is done via a JSON file uploaded as a plugin attachment
 
-## Example configuration file
+## What are the requirements for this app?
+
+The Schema Enforcer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+## How do I install the Schema Enforcer for PostHog?
+
+1. Log in to your PostHog instance
+2. Click 'Plugins' on the left-hand tool bar
+3. Search for 'Schema Enforcer' 
+4. Select the app, press 'Install' and follow the on-screen instructions
+
+## How do I configure the Schema Enforcer?
+
+Below is an example configuration file:
 
 ```
 {

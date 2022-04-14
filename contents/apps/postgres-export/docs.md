@@ -8,6 +8,14 @@ topics:
 ## What does the PostgreSQL Export app do?
 The PostgreSQL Export app enables you to export events from PostHog to a PostgreSQL instance on ingestion. 
 
+## What are the requirements for this app?
+
+Using the PostgreSQL Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to the PostgreSQL instance you want to export to. 
+
 ## How do I install the PostgreSQL Export app?
 Firstly, make sure that PostHog can access your PostgreSQL instance. Wherever your instance is hosted, make sure it is set to accept incoming connections so that PostHog can connect to the database and insert events. If this is not possible in your case, consider using the S3 Export app and then setting up your own system for getting data into your Postgres instance.
 

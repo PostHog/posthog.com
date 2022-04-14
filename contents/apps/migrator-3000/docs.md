@@ -6,18 +6,24 @@ topics:
 ---
 
 ## What does the Migrator 3000 app do?
+
 The Migrator app enables you to move events from one PostHog instance to another, so that you can move from a self-hosted instance to a PostHog Cloud deployment, or vice versa. 
 
 ## Does the Migrator 3000 app move all content to the new instance?
+
 No, this app will only migrate events and objects derived from events, such as persons. Dashboards, Insights, Feature Flags, etc. will not be migrated and must be manually recreated on the new instance. 
+
+## What are the requirements for this app?
+
+The Migrator 3000 app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
 ## How do I install the Migrator 3000 app for PostHog Cloud?
 
-The plugin is already installed as default for PostHog Cloud users. Simply click 'Apps' on the left-hand tool bar and enable the app to get started. 
+This app is already installed as default for PostHog Cloud users. Simply click 'Apps' on the left-hand tool bar, find the Migrator 3000 app and enable it to get started. 
 
 ## How do I install the Migrator 3000 app on a self-hosted deployment?
-
-The plugin is already installed as default for PostHog Cloud users. Simply click 'Apps' on the left-hand tool bar and enable the app to get started. 
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar

@@ -5,6 +5,14 @@ topics:
     - twitter-followers
 ---
 
+## What are the requirements for this app?
+
+The Twitter Followers Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need a Twitter account and, ideally, some followers. 
+
 ## How do I install the Twitter Followers Tracker for PostHog?
 
 1. Log in to your PostHog instance

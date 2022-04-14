@@ -15,6 +15,14 @@ Once installed, it will:
 
 This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
 
+## What are the requirements for this app?
+
+The Sentry Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need an account with Sentry. 
+
 ## How do I install the Sentry Connector with Javascript?
 
 Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.

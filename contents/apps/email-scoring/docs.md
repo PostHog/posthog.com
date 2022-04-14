@@ -8,12 +8,20 @@ topics:
 ## What does the Email Scoring app do?
 The Email Scoring app adds email scores to Persons in PostHog, giving you more context on each user. Email scores are added using the [Mailboxlayer API](https://mailboxlayer.com/). 
 
+## What are the requirements for this app?
+
+The Email Scoring app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+
+You'll also need Mailboxlayer access and an API key. 
+
 ## How do I install the Email Scoring app?
 
 1. Visit the "Apps" page in your instance of PostHog.
 2. Search for 'Email Scoring' and select the app, press Install.
 3. Get an API key from Mailboxlayer.
-4. Click '+ Install new plugin' and use this URL to install: https://github.com/PostHog/mailboxlayer-plugin
+4. Click '+ Install new plugin' and use this URL to install: `https://github.com/PostHog/mailboxlayer-plugin`
 5. Add the API key to the config.
 6. Enable the app and watch the email scores come in!
 

@@ -6,7 +6,16 @@ topics:
 ---
 
 ## What does the Redshift Import app do?
+
 The Redshift Import app for PostHog enables you, predictably, to import data from a Redshift table into PostHog. Data appears in PostHog as a stream of events. 
+
+## What are the requirements for this app?
+
+Using the Redshift Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to a Redshift table to import from. 
 
 ## How do I install the Redshift Import app?
 

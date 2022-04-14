@@ -51,6 +51,12 @@ This app will keep the nested properties unchanged, but also add any nested prop
 
 As such, you can now filter your purchase events based on product__size__number for example.
 
+## What are the requirements for this app?
+
+The Property Flattener requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the Property Flattener?
 
 1. Visit the "Apps" page in your instance of PostHog.

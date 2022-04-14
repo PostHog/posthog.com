@@ -6,7 +6,13 @@ topics:
 ---
 
 ## What does the GitHub Star Sync app do?
-The GitHub Star Sync app enables you to track your GitHub stars as an event in PostHog. 
+The GitHub Star Sync app enables you to track your GitHub stars as an event in PostHog. Because Stars are important!
+
+## What are the requirements for this app?
+
+The GitHub Star Sync app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
 ## How do I install the Redshift Import app?
 

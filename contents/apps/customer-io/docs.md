@@ -8,6 +8,14 @@ topics:
 ## What does the Customer.io Connector app do?
 The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available.
 
+## What are the requirements for this app?
+
+The Customer.io Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to the relevant Customer.io account. 
+
 ## How do I install the Customer.io Connector app?
 
 1. Visit the "Apps" page in your instance of PostHog.

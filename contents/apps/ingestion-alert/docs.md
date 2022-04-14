@@ -8,6 +8,12 @@ topics:
 ## What does the Ingestion Alert app do?
 This plugin triggers a webhook when no events have been ingested for a specified period of time. It can be used to alert you when ingestion for your project / instance is not working correctly.
 
+## What are the requirements for this app?
+
+The Ingestion Alert app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the Ingestion Alert app?
 
 1. Log in to your PostHog instance
@@ -15,14 +21,15 @@ This plugin triggers a webhook when no events have been ingested for a specified
 3. Search for 'Ingestion Alert' 
 4. Select the app, press 'Install' and follow the on-screen instructions
 
-## Is there anything else I need to be aware of?
-If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated - increase the threshold if you wish reduce the noise, you can use the [heartbeat plugin](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
+## Why am I not getting ingestion alert notifications?
+
+If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated. To prevent such dead periods causing alerts you can increase the threshold. You can also use the [heartbeat plugin](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
 
 If an alert has already been triggered and ingestion has not recovered for an extended period, you will not receive another reminder that it is down.
 
 This is helpful to monitor if there are any ingestion issues within your posthog instance and within your setup (e.g. using the wrong project key).
 
-If the plugin server itself is down, this plugin will not be able to alert you that ingestion has stopped.
+If the app server itself is down, this app will not be able to alert you that ingestion has stopped.
 
 ## Is the source code for this app available?
 

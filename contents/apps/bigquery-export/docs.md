@@ -1,19 +1,31 @@
 ---
-title: How the BigQuery export app works
+title: How the BigQuery Export app works
 showTitle: true
 topics:
-    - bigquery export
+    - bigquery-export
 ---
+
+## What does the BigQuery Export app do?
+
+This app streams events from PostHog directly into a BigQuery service account, as they are ingested. This is especially useful if you have an existing data warehouse or data lake running in BigQuery. 
+
+## What are the requirements for this app?
+
+The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
+You'll also need access to the BigQuery instance you want to export to. 
 
 ## How do I install the BigQuery export app for PostHog?
 
-1. Visit 'Plugins' in PostHog
-1. Find this plugin from the repository or install `https://github.com/PostHog/bigquery-plugin`
-1. Configure the plugin
+1. Visit the "Apps" page in your instance of PostHog.
+2. Search for 'BigQuery' and select the app, press Install.
+3. Follow the configuration steps:
    1. Upload your Google Cloud key `.json` file. (See below for permissions and how to retrieve this.)
-   1. Enter your Dataset ID
-   1. Enter your Table ID 
-1. Watch events roll into BigQuery
+   2. Enter your Dataset ID
+   3. Enter your Table ID 
+3. Watch events roll into BigQuery
 
 ## How do I setup BigQuery permissions for PostHog?
 

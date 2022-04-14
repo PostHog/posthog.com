@@ -11,6 +11,12 @@ This app sets all specified properties on ingested events to `null`, effectively
 
 It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data. 
 
+## What are the requirements for this app?
+
+The Property Filter app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+
 ## How do I install the Property Filter app?
 
 1. Log in to your PostHog instance
