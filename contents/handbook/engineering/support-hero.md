@@ -13,7 +13,7 @@ When someone is _Support Hero_, they are also the secondary on-call person for t
 
 ## 1. Support Hero
 
-Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the statisfaction of helping them out and contribute to a lot of different parts of our system.
+Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out and contribute to a lot of different parts of our system.
 
 All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
 
@@ -63,7 +63,7 @@ At the moment, Charles manually tags customers based on Stripe and HubSpot data 
 
 ## Categorizing requests
 
-It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
+It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
 
 When you initially respond to an issue add a "conversation tag" with the following categories:
 * User experience _(confusing/unclear UX)_.
