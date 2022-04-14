@@ -1624,12 +1624,12 @@
             ]
         },
         {
-            "name": "Taxonomy Normalizer",
-            "url": "/apps/taxonomy-normalizer",
+            "name": "Taxonomy Standardizer",
+            "url": "/apps/taxonomy-standardizer",
             "children": [
                 {
                     "name": "Documentation",
-                    "url": "/apps/taxonomy-normalizer/docs"
+                    "url": "/apps/taxonomy-standardizer/docs"
                 }
             ]
         },
