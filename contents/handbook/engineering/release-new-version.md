@@ -6,9 +6,9 @@ showTitle: true
 
 At the moment, we release a new version every month ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
 
-For consistency, releases happen on the last Monday of every month. Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated [here](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
+For consistency, releases happen on the last Monday of every month. Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
 
-If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-1.version.0`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
+If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
 ## Version numbers
 
@@ -20,7 +20,11 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-Three business days before the release, so on the Wednesday before, we institute a code freeze (used to be Fridays but that led to a rush of PRs on the eleventh hour which made the release process trickier). We branch master into release-[version] and deploy that to our playground environment (playground.posthog.com) and ClickHouse test environment (samltest.posthog.net). Only bugfixes are allowed to be merged into this branch (and thus into production) between the code freeze and the release going out. This gives us about three days to test if the release has any bugs.
+Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch so people can have a heads up. Then, we branch master into release-[version] and deploy that to our playground environment (playground.posthog.com). We then host a hour long `break the release` session where everyone lends a hand in testing for any bugs. It is recommended to host `break the release` during an hour where as many people are available to join as possible.
+
+Only bugfixes are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
+
+The release manager is ultimately responsible for the timeline of the release. They are responsible for creating the code freeze and break the release calendar events as soon as possible. They should create these events under the `Releases` calendar linked up top.
 
 <blockquote class="warning-note">
 ⚠️ As soon as the branch is created and pushed to GitHub, the Docker image will be built and pushed to Docker Hub under the tag <code>release-[version]-unstable</code>.
