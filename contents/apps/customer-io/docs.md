@@ -6,7 +6,7 @@ topics:
 ---
 
 ### What does the Customer.io Connector app do?
-The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available.
+The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io. 
 
 ### What are the requirements for this app?
 
