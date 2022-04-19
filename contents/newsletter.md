@@ -25,7 +25,7 @@ className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-p
     </div>
     <div>
         <ul className="text-[20px] font-semibold">
-            <li>The best stuff we're reading (and watching)</li>
+            <li>The best of what we're reading</li>
             <li>And an awesome hedgehog cartoon!</li>
         </ul>    
     </div>
