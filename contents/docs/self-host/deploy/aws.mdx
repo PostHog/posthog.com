@@ -63,7 +63,7 @@ ingress-nginx:
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 ```
 
-If using an AWS application load balancer, you do not need to add the above
+If you're using a load balancer that talks HTTP (e.g. a Classic ELB in http mode), you do not need to add the above
 `ingress-nginx` values. AWS will [provide X-Forwarded-* HTTP
 headers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html), 
 and the PostHog provided nginx ingress controller will forward these headers
