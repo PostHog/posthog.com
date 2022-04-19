@@ -42,7 +42,7 @@ Today, across many product areas, we deliver the most impact when we move fast a
 
 In engineering, this means that bias for impact is likely to mean putting more effort in to prioritization, scoping out the problem and design before implementation, this does not mean we aim spend weeks in slow feedback loops, rather we get together and focus all our energy on rapidly understanding the problem and solution upfront. Solving a small customer support issue super-quickly to delight them is also highly impactful since we know this is a strong contributor to our word of mouth growth.
 
-For other areas of PostHog this is likely to involve prioritizing and focussing our efforts on bigger bets which we believe can have an outsided impact (e.g. increasing sign-ups, getting a new large enterprise to start paying, increasing our rank on google, etc.)
+For other areas of PostHog this is likely to involve prioritizing and focusing our efforts on bigger bets which we believe can have an outsided impact (e.g. increasing sign-ups, getting a new large enterprise to start paying, increasing our rank on google, etc.)
 
 ## Talent compounds
 
