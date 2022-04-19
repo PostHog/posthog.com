@@ -1,5 +1,5 @@
 ---
-title: The complete guide to building, analyzing and iterating conversion funnels
+title: How to build, analyze and optimize conversion funnels in PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
