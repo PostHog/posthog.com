@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-![PostHog Newsletter](images/docs/newsletter/hogmails.png)
+![PostHog Newsletter](images/docs/newsletter/hogmails.jpg)
 
 <NewsletterForm
 compact
@@ -25,7 +25,7 @@ className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-p
     </div>
     <div>
         <ul className="text-[20px] font-semibold">
-            <li>A selections of new articles we love</li>
+            <li>Curated articles we love</li>
             <li>And an awesome hedgehog cartoon!</li>
         </ul>    
     </div>
