@@ -22,31 +22,7 @@ hideAnchor: true
 
 ### Ingestion
 
-#### 3-year
-
-- Ingest events out of order
-- No events left behind (99.99%)
-- All events are correct (99.99%)
-- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
-- Events are ingested and visible in app within 5 seconds p99
-- Integrated delightful plugin developer experience (inside PostHog)
-    - CI/CD
-    - Testing
-    - Synthetic data testing
-- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
-
-#### 6 months
-
-- Scalable to 1Bn Persons 🎉
-- Ingestion monitoring and management
-    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
-- Events are ingested and visible in app within 30 seconds p99
-- Easy to build a well tested plugin (DevEx)
-    - Documentation
-    - GitHub Template
-        - Unit tests
-        - Style
-
+See the Ingestion roadmap on the dedicated [Ingestion Team page](/handbook/people/team-structure/ingestion).
 ### Infrastructure
 
 #### 3-year
@@ -75,7 +51,7 @@ hideAnchor: true
 * We document what we do to share context internally
 * We finish what we start, or we don't start it at all
 * We continually prioritize
-* We prioritize ublocking others
+* We prioritize unblocking others
 * We have an agenda and follow up on actions from our meetings
 * Be frugal
 

@@ -25,3 +25,10 @@ We strongly encourage all non-technical team members to take some kind of entry 
 The training budget is $1000 per calendar year, but this _isn't_ a hard limit - if you want to spend in excess of this, have a chat with your manager. Where the costs are higher than $1000, please give Charles a heads-up, so he can increase your card limit. 
 
 If possible, please share your learnings with the team afterwards!
+
+
+### Time spent training others
+
+Time spent talking at conferences and user groups, and time spent coaching others at organizations like [Code Nation](https://codenation.org/), is part of your training. You're not expected to use your own time for this. We think that activities like these help you get better at your job, advertise PostHog, and help increase the diversity of the tech industry - all things we value! 
+
+It is expected that that you would spend up to half a day a month on these activities. Like the training budget, this isn't a hard limit. If you think you need more than that talk to your manager.

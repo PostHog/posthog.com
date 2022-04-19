@@ -21,11 +21,11 @@ export const NewsletterForm = ({
 
     return compact ? (
         <div className="w-full mx-auto my-12 text-center">
-            <div className="bg-blue text-white inline-flex mx-auto h-full p-1 rounded-xl">
+            <div className="inline-flex mx-auto h-full p-1 rounded-xl border-2 border-opacity-25 border-primary dark:border-primary-dark">
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
                     <span className="mt-2 lg:mt-0 font-bold flex-grow text-lg md:text-sm lg:text-left">
-                        Yes, I'd love to receive PostHog updates in my inbox at
+                        I'd love to receive PostHog updates in my inbox at
                     </span>
                     <form
                         action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
@@ -39,7 +39,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full p-2 bg-transparent border-b-2 border-gray-600 mt-2 lg:mt-0 lg:mx-2 text-black"
+                            className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-primary dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -78,8 +78,7 @@ export const NewsletterForm = ({
                             trust me you don’t want to miss a thing.
                         </p>
                         <p className="opacity-80 mt-2 text-sm">
-                            Plus if you decide that these emails aren’t brightening your day, you can unsubscribe at any
-                            time, no hard feelings.
+                            Don't worry, you can unsubscribe at any time, no hard feelings.
                         </p>
                     </div>
 

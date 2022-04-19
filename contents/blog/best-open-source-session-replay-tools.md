@@ -1,6 +1,6 @@
 ---
 date: 2022-04-07
-title: Open source (and self-hosted) alternatives to Hotjar, FullStory & LogRocket
+title: Open source (and self-hosted) alternatives to Hotjar & FullStory
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author: ["hanna-crombie"]
-categories: ["Guides", "Product analytics"]
+categories: ["Guides", "Product analytics", "Open source"]
 ---
 
 Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording.
@@ -77,7 +77,7 @@ Yes! PostHog’s open source plans are available under an MIT license. Find out 
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
 OpenReplay is an open source session replay stack that provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
-Its tooling is particularly effective for application state and customer support, howeve – features like DevTools and co-browsing sessions are useful for monitoring performance.
+Its tooling is particularly effective for application state and customer support, however – features like DevTools and co-browsing sessions are useful for monitoring performance.
 
 ### Who is OpenReplay for?
 

@@ -3,16 +3,19 @@ import { Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
 import React, { useState } from 'react'
 import { Enterprise, OpenSource, Scale } from './Plans'
 import ScaleModal from './ScaleModal'
+import EnterpriseModal from './EnterpriseModal'
 
 export const SelfHostedPlanBreakdown = () => {
-    const [open, setOpen] = useState(false)
+    const [scaleOpen, setScaleOpen] = useState(false)
+    const [enterpriseOpen, setEnterpriseOpen] = useState(false)
     return (
         <>
-            <ScaleModal setOpen={setOpen} open={open} hideActions />
+            <ScaleModal setOpen={setScaleOpen} open={scaleOpen} hideActions hideBadge={false} />
+            <EnterpriseModal setOpen={setEnterpriseOpen} open={enterpriseOpen} hideActions hideBadge={false} />
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <OpenSource />
-                <Scale setOpen={setOpen} />
-                <Enterprise />
+                <Scale setOpen={setScaleOpen} />
+                <Enterprise setOpen={setEnterpriseOpen} />
             </section>
             <section className={section()}>
                 <h2 className="text-center text-lg opacity-50 mb-14">With all self-hosted plans:</h2>

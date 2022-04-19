@@ -7,33 +7,33 @@ hideAnchor: true
 
 ## Reporting structure
 
-- [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
-  - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
-    - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
-      - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
-    - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
-      - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
-      - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
-      - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
+- James Hawkins, CEO & Co-founder
+  - Tim Glaser, CTO & Co-founder
+    - Marcus Hyett, VP of Product
+      - Joe Martin, Product Marketer
+    - Marius Andra, Full Stack Engineer
+      - Alex Kim, Full Stack Engineer
+      - Michael Matloka, Full Stack Engineer
+      - Rick Marron, Full Stack Engineer
       - Paul D'Ambra, Full Stack Engineer
-    - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
+    - James Greenhill, Data/Infra engineer
       - Guido Iaquinti, Site Reliability Engineer
-      - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
-      - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
-    - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
-      - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
-      - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
-    - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
+      - Yakko Majuri, Full Stack Engineer
+      - Tiina Turban, Full Stack Engineer
+    - Eric Duong, Full Stack Engineer
+      - Neil Kakkar, Full Stack Engineer
+      - Li Yi Yu, Full Stack Engineer
+    - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
-  - [Charles Cook, VP of Operations & Marketing](/handbook/company/team#charles-cook-business-operations)
-    - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer)
+  - Charles Cook, VP of Operations & Marketing
+    - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
-  - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
-    - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
-    - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
-    - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
-  - [Simon Fisher, Customer Success Lead](/handbook/company/team#simon-fisher-customer-success)
-    - [Cameron DeLeone, Customer Success Manager](/handbook/company/team#cameron-deleone-customer-success)
+  - Cory Watilo, Lead Designer
+    - Lottie Coxon, Graphic Designer
+    - Eli Kinsey, Frontend Engineer
+    - Chris Clark, Product Designer
+  - Simon Fisher, Customer Success Lead
+    - Cameron DeLeone, Customer Success Manager
 
 ## Small teams
 
@@ -72,12 +72,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 <br />
 
-### [Growth](growth)
-
-- [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-
-<br />
-
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
@@ -94,8 +88,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 ### [People & Operations](people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
-- Grace McKenzie (Operations Manager)
+- [Grace McKenzie](/handbook/company/team#grace-mckenzie-operations-manager) (Operations Manager)
 
 <br />
 

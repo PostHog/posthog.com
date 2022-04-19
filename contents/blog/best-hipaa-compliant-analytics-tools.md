@@ -70,7 +70,9 @@ Unlike PostHog (above) and Plausible (below), Countly isn’t open source - thou
 - Push notifications and crash analytics
 
 ### Is Countly HIPAA compliant?
-Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services. BAA agreements may still be needed with hosting providers, however. 
+Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services. BAA agreements may still be needed with hosting providers, however.
+
+> Looking for HIPAA-compliant session recording tools as well? Read our guide to [best self-hosted session recording tools](/blog/best-open-source-session-replay-tools)
 
 ## 3. [Plausible](https://plausible.io/)
 

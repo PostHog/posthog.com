@@ -83,34 +83,52 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 
 ## Offboarding checklist
 
-<input type="checkbox"/> (Voluntary leavers only) Arrange handover <br />
-<input type="checkbox"/> (Voluntary leavers only) Schedule [Exit interview](https://forms.gle/DaNGRhmvQJcLGfpa9) <br />
-<input type="checkbox"/> Arrange company property to be returned <br />
-<input type="checkbox"/> (Contractor only) End their contract on Deel <br />
-<input type="checkbox"/> (UK employee only) Email DRG with their last day, remaining annual leave and to remove them from the pension scheme <br />
-<input type="checkbox"/> (UK employee only) Email Parallel to remove them from Bupa and Medicash <br />
-<input type="checkbox"/> (UK employee only) Email team member P45 and upcoming payslips <br />
-<input type="checkbox"/> (US employee only) Remove the team member from Gusto (Gusto will automatically end any benefits provided via the platform, e.g. medical insurance <br />
-<input type="checkbox"/> (US employee only) Get the team member to sign their termination certificate <br />
-<input type="checkbox"/> Put on an out of office (forward email if the leavers expects external communication), then suspend the GSuite account for the team member  <br />
-<input type="checkbox"/> Transfer [ownership](https://support.google.com/a/answer/1247799?hl=en) of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.  <br />
-<input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
-<input type="checkbox"/> Cancel team member's company card on Brex/Revolut - _check if they have any company subscriptions first that need transferring_ <br />
-<input type="checkbox"/> Offboard member on CharlieHR <br />
-<input type="checkbox"/> Add departure to hiring forecast on Pry <br />
-<input type="checkbox"/> Remove team member from PostHog organization in GitHub <br />
-<input type="checkbox"/> Remove team member from PostHog organization in Heroku <br />
-<input type="checkbox"/> Remove team member from PostHog organization in Stripe <br />
-<input type="checkbox"/> Remove team member from PostHog organization in npm (https://www.npmjs.com/settings/posthog/members) <br />
-<input type="checkbox"/> Remove team member from PostHog packages in PyPI <br />
-<input type="checkbox"/> Remove team member from the internal company Slack <br />
-<input type="checkbox"/> Remove team member from PostHog Users Slack <br />
-<input type="checkbox"/> Remove team member from 1Password <br />
-<input type="checkbox"/> Deactivate team member's PostHog Cloud account (https://app.posthog.com/admin/posthog/user/)<br />
-<input type="checkbox"/> Remove team member from AWS <br />
-<input type="checkbox"/> Remove team member from Workable <br />
-<input type="checkbox"/> Remove team member from Orbit (access &amp; team member state) <br />
-<input type="checkbox"/> Remove team member from license.posthog.com <br />
-<input type="checkbox"/> Remove team member from cloudflare (Only Tim can do this) <br />
-<input type="checkbox"/> Remove team member from the [Team page](/handbook/company/team) <br />
-<input type="checkbox"/> Ask their manager for any other accounts they need to be removed from <br />
+### Voluntary departures only
+
+- <input type="checkbox" /> Arrange handover
+- <input type="checkbox" /> Schedule <a href="https://forms.gle/DaNGRhmvQJcLGfpa9">exit interview</a>
+
+### All departing employees
+
+- <input type="checkbox" /> Arrange company property to be returned
+- <input type="checkbox" /> Put on an out of office (forward email if the leavers expects external communication), then suspend the Google Workspace account for the team member
+- <input type="checkbox" /> Transfer <a href="https://support.google.com/a/answer/1247799?hl=en">ownership</a> of their Google Drive to their manager to deal with - do this before finally deleting their account! Usually it makes sense to wait 1-2 months first before fully deleting an account.
+- <input type="checkbox" /> Make any outstanding notice payments (if applicable)
+- <input type="checkbox" /> Cancel team member's company card on Brex/Revolut - <em>check if they have any company subscriptions first that need transferring</em>
+- <input type="checkbox" /> Offboard member on CharlieHR
+- <input type="checkbox" /> Add departure to hiring forecast on Pry
+- Remove team member from:
+    - <input type="checkbox" /> GitHub (PostHog org)
+    - <input type="checkbox" /> Heroku (PostHog org)
+    - <input type="checkbox" /> Stripe
+    - <input type="checkbox" /> npm (<a href="https://www.npmjs.com/settings/posthog/members">PostHog org</a>)
+    - <input type="checkbox" /> PI (PostHog packages)
+    - <input type="checkbox" /> Slack (internal company)
+    - <input type="checkbox" /> Slack (community)
+    - <input type="checkbox" /> 1password
+    - <input type="checkbox" /> <a href="https://app.posthog.com/admin/posthog/user">PostHog Cloud</a>
+    - <input type="checkbox" /> AWS
+    - <input type="checkbox" /> Workable
+    - <input type="checkbox" /> Orbit (access &amp; team member state)
+    - <input type="checkbox" /> Netlify
+    - <input type="checkbox" /> PostHog <a href="https://license.posthog.com">license server</a>
+    - <input type="checkbox" /> Cloudflare (only Tim can do this)
+    - <input type="checkbox" /> Remove team member from the <a href="/handbook/company/team">Team page</a>
+    - <input type="checkbox" /> Remove any quote from <a href="/careers">careers page</a>
+    - <input type="checkbox" /> Ask their manager for any other accounts they need to be removed from
+
+### UK employees only
+
+- <input type="checkbox" /> Email DRG with their last day, remaining annual leave and to remove them from the pension scheme
+- <input type="checkbox" /> Email Parallel to remove them from Bupa and Medicash
+- <input type="checkbox" /> Email team member P45 and upcoming payslips
+
+### US employees only
+
+- <input type="checkbox" /> Remove the team member from Gusto (Gusto will automatically end any benefits provided via the platform, e.g. medical insurance
+- <input type="checkbox" /> Get the team member to sign their termination certificate
+
+### Contractors only
+
+- <input type="checkbox" /> End their contract on Deel
+

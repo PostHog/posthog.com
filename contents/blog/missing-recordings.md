@@ -11,7 +11,7 @@ author: ["rick-marron"]
 categories: ["Engineering", "Inside PostHog"]
 ---
 
-[Session Recording](product/session-recording) is one of PostHog's core features. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
+[Session Recording](product/session-recording) is one of PostHog's core features, and one of the few completely [open source ression replay tools](/blog/best-open-source-session-replay-tools) available. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
 
 Recently, we made a ton of improvements to the feature. To name a few, we:
 
