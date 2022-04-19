@@ -130,7 +130,7 @@ Let's take a look at the Correlated Events for our example.
 
 The top result immediately stands out as significant. "Persons who converted were 27x more likely" to perform the "deploy option clicked" event.
 
-In other words: people who visited our docs are 27x more likely consider deploying PostHog.
+In other words: people who visited our docs are 27x more likely to consider deploying PostHog.
 
 From this we can reasonably hypothesize that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
 
