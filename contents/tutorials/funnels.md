@@ -55,8 +55,6 @@ Funnels are part Insights in PostHog.
 
 Click on the '+' icon next to 'Insights' in the sidebar to start creating a new insight, or click on 'New insight' on the Insights page.
 
-![Funnels Page](../images/tutorials/funnels/insights-page.png)
-
 Then, in the insight builder, click on 'Funnels' to start creating your funnel.
 
 ![Funnels insight](../images/tutorials/funnels/funnel-preview.png)
@@ -67,21 +65,17 @@ There's no limit to the number of steps you can add to your funnel, but let's st
 
 Click on the first step to edit it and search for your desired Event or Action. In this case, we're going to select the 'Pageview' event and then apply a filter for users visiting the PostHog homepage.
 
-FUNNEL STEP 1 VIDEO HERE
+![Building funnel video 1](../images/tutorials/funnels/funnel-step-1.mov)
 
 You can apply filters to specific steps in the funnel, or apply a general filter to the entire funnel in the 'Filters' section below the 'Query Steps' section. We filter out internal and test users by default - read our [how to filter internal users](/tutorials/filter-internal-users) tutorial for how to set that up.
 
 Next, we're going to add a second step to our funnel. The results are instantly calculated.
 
-FUNNEL STEP 2 VIDEO HERE
+![Building funnel video 2](../images/tutorials/funnels/funnel-step-2.mov)
 
 By default, PostHog calculates the conversion rate based on a "window" of 14 days. This means a user who performs 'step 1' on day 1 and 'step 2' on day 13 and will count as a conversion. Users who convert outside of the window are considered drop-offs.
 
 You can specify other limits based on minutes, hours, days, weeks, or months using the 'Conversion window limit' box below the funnel builder.
-
-CONVERSION WINDOW CLIP HERE
-
-Note how, in the example above, the conversion rate drops from 10% to 7.8% when we switch from 14 days to 14 minutes.
 
 ### Using filters in Funnels
 
@@ -128,23 +122,25 @@ Once you've built a funnel in PostHog, you can take advantage of one our most us
 
 It's a powerful way to discover eye-opening insights into what your users are actually doing, allowing you to refine your funnel, and better understand your product.
 
+> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
+
 Let's take a look at the Correlated Events for our example.
 
 ![Correlated Events](../images/tutorials/funnels/correlated-events.png)
 
-The top result immediately stands out as significant. "Persons who converted were 34x more likely" to perform the "deploy option clicked" event.
+The top result immediately stands out as significant. "Persons who converted were 27x more likely" to perform the "deploy option clicked" event.
 
-In other words: people who visited our docs from the homepage were 34x more likely consider deploying PostHog.
+In other words: people who visited our docs are 27x more likely consider deploying PostHog.
 
-From this we can reasonably conclude that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
+From this we can reasonably hypothesize that the quality of our documentation is a contributing factor to whether users choose to deploy PostHog, and we should dedicate reasonable effort to ensuring our docs are written to a high standard, and kept up-to-date.
 
-Of course, you can also use the information in Correlated Events to refine and tweak your funnel.
+Of course, you can also use the information in Correlated Events to refine and tweak your funnel. Funnels can show you both how well your conversion funnel is performing, and the steps people take between your desired actions.
 
-> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
+Which brings us neatly to our next step... exploring user paths.
 
 ## Step 3: Explore user paths between steps in the funnel
 
-Another way to refine your funnel is to explore the paths people take between steps in your funnel.
+Another way to refine your funnel is to explore the paths people take between steps in your defined funnel.
 
 Click on the '...' next to any step in your funnel and, depending on which step you're selecting, you'll be presented with options to "Show user paths..."
 
@@ -188,11 +184,11 @@ In this case, both variants were a significant improvement on the control, but t
 
 Our [Experimentation documentation](/docs/user-guides/experimentation) provides in-depth guidance on how to setup an experiment.
 
-Once you've setup your experiment and have a winner, you're ready to enjoy the fruits of your labour. 🤑 
+Once you've setup your experiment and have a winner, you're ready to enjoy the fruits of your labour. 💰 
 
 ## Further reading
 
-[PostHog customers](/customers) frequently tell us about how they've used PostHog to improve conversion, or reduced onboarding drop off, sometimes by [as much as 50%](/customers/vendasta)
+Following these steps will help you identify problems in your funnel, and verify your solutions. [PostHog customers](/customers) frequently tell us about how they've [used PostHog to improve conversion](/customers/pry), or reduced onboarding drop off, sometimes by [as much as 50%](/customers/vendasta)
 
 For more inspiration, we recommend reading our [Building an AARRR pirate funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
 
