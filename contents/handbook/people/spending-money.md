@@ -68,7 +68,8 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-* No matter your role, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM. Feel free to upgrade to a Macbook Pro if you will be running sustained high workloads, though in practice the Air performs really well in most scenarios, including long-running compilations (e.g. Clickhouse).
+* For most roles, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM.
+* For full stack engineering roles, we recommend a Macbook Pro 14-inch M1, with the 10-core CPU, 14-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
@@ -77,8 +78,6 @@ Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are di
 When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Grace or Charles. Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
-
-We would expect to spend $1200 to $2000 on a laptop, depending on what you need to run. We find the easiest solution is to just purchase directly from Apple's website in your territory. 
 
 ### Monitor
 
