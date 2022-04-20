@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
 author: ["yakko-majuri", "andy-vandervell"]
 topics: ["funnels", "user paths", "session recording", "filters"]
-date: 2022-04-14
+date: 2022-04-20
 ---
 
 - **Level:** Intermediate 🦔🦔
