@@ -8,7 +8,6 @@ showTitle: true
 
 <NewsletterForm
 compact
-className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-primary dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
 />
 
 <Section
