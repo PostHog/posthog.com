@@ -65,13 +65,13 @@ There's no limit to the number of steps you can add to your funnel, but let's st
 
 Click on the first step to edit it and search for your desired Event or Action. In this case, we're going to select the 'Pageview' event and then apply a filter for users visiting the PostHog homepage.
 
-![Funnels step 1](../images/tutorials/funnels/funnel-step-1.gif)
+<div style="width:100%;height:0;padding-bottom:77%;position:relative;"><iframe src="https://giphy.com/embed/3t6GD975zPH3ck8RiR" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/3t6GD975zPH3ck8RiR">via GIPHY</a></p>
 
 You can apply filters to specific steps in the funnel, or apply a general filter to the entire funnel in the 'Filters' section below the 'Query Steps' section. We filter out internal and test users by default - read our [how to filter internal users](/tutorials/filter-internal-users) tutorial for how to set that up.
 
 Next, we're going to add a second step to our funnel. The results are instantly calculated.
 
-![Funnels step 2](../images/tutorials/funnels/funnel-step-2.gif)
+<iframe src="https://giphy.com/embed/3t6GD975zPH3ck8RiR" width="480" height="371" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/3t6GD975zPH3ck8RiR">via GIPHY</a></p>
 
 By default, PostHog calculates the conversion rate based on a "window" of 14 days. This means a user who performs 'step 1' on day 1 and 'step 2' on day 13 and will count as a conversion. Users who convert outside of the window are considered drop-offs.
 
