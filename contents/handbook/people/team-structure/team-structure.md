@@ -48,7 +48,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
+- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer)_
 
 <br />
 
