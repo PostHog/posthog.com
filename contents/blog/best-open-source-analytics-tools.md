@@ -29,7 +29,7 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 Of course, we _would_ say PostHog is the best open source analytics platform, but if you need convincing then you can get started for free and decide for yourself today!
 
 ### Who is PostHog for?
-PostHog is the best open source analytics tool for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for Engineering, Data Engineering and Product teams to use.
+PostHog is the best open source analytics tool for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for Engineering, Data Engineering and Product teams to use. There's also a fully-managed cloud option, which is [free to use up to 1 million events per month](/signup).
 
 ### Strengths
 - All-in-one analytics suite
@@ -41,7 +41,7 @@ PostHog is the best open source analytics tool for companies that are focused on
 - Unlimited ability to scale 
 
 ### Open source license
-PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more about [self-hosting PostHog](/signup/self-host).
+PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more about [self-hosting PostHog](/pricing).
 
 ## 2. [Apache Spark](https://spark.apache.org/)
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
