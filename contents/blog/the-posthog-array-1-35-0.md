@@ -29,7 +29,7 @@ PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you 
 
 ### New: Activity Log
 
-[[TODO: screenshot goes here]]
+<img width="827" alt="Screenshot 2022-04-21 at 15 45 07" src="https://user-images.githubusercontent.com/984817/164484091-f5dfce0b-c400-4699-ac55-642ccc2bc55b.png">
 
 Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
 
