@@ -152,3 +152,5 @@ Don't see a role for you? We're always looking for exceptional people, reach out
 <hr/>
 
 _Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+
+<ArrayCTA />

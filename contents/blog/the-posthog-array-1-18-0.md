@@ -207,3 +207,6 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Fix sessions on dashboard [\#2214](https://github.com/PostHog/posthog/pull/2214) ([timgl](https://github.com/timgl))
 - Separate Plugins dyno for Heroku [\#2213](https://github.com/PostHog/posthog/pull/2213) ([mariusandra](https://github.com/mariusandra))
 - Org/projects UX enhancements [\#2145](https://github.com/PostHog/posthog/pull/2145) ([Twixes](https://github.com/Twixes))
+
+<ArrayCTA />
+

@@ -214,3 +214,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Save session player speed in localstorage [\#2110](https://github.com/PostHog/posthog/pull/2110) ([macobo](https://github.com/macobo))
 - Improve weekly report testing [\#2014](https://github.com/PostHog/posthog/pull/2014) ([paolodamico](https://github.com/paolodamico))
 - Run posthog-production CI in a way testing migration continuity [\#1863](https://github.com/PostHog/posthog/pull/1863) ([Twixes](https://github.com/Twixes))
+
+<ArrayCTA />
