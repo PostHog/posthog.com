@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
-featuredImage: ../images/blog/blog-generic-4.png
+featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 categories: ["Product analytics", "Guides", "Open source"]
 ---
