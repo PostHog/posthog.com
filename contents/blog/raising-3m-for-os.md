@@ -326,7 +326,7 @@ If you have the luxury of choosing, which happens towards the end of your round 
 
 More hand holding is probably better if you have less experience or you need someone to push you. We were worried that some of the more supportive investors were so supportive we'd struggle to realize that the company/project's success or failure ultimately is our responsibility - not theirs. We are the ones speaking to users every day.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

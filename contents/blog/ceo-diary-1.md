@@ -72,7 +72,7 @@ We want to get more scores like the above, so we did two things:
 
 More updates coming soon! :)
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

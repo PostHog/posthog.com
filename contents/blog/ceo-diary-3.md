@@ -86,7 +86,7 @@ We are going to put more focus on our pricing and adoption model for enterprises
 
 I'll be taking advantage of our random working hours for sure, but it's great to be back and building.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

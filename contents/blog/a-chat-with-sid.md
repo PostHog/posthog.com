@@ -92,7 +92,7 @@ Sid summed up the call perfectly - "don't ask so much about what I did, but ask 
 
 We shouldn't follow blindly how GitLab worked, but getting a good sense of what they learned is powerful. The real takeaway from GitLab overall is that the product isn't the software… it's the company.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

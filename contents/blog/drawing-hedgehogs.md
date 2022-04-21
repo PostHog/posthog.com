@@ -90,7 +90,7 @@ As you can see, the hedgehog went through about 18 different variations before I
 
 You need to test different versions to find what works - but even after finding that golden hog you still need to iterate to strengthen that brand identity.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

@@ -135,7 +135,7 @@ The team is bigger, we have way more customers, and the platform is bigger and m
 
 The good news? We know we're selling something people want.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

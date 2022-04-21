@@ -26,7 +26,7 @@ Other plans for the future include enhancing connectivity with data warehouses a
 
 We’d like to thank our thousands of users and our community of contributors for their continuing support in helping us reach this milestone, and for joining us in taking this next step. If you’re interested in what else we have planned for the future, [check out our roadmap](/handbook/strategy/roadmap)!
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

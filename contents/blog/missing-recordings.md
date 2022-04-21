@@ -99,7 +99,7 @@ As for the remaining <1% of recordings that are missing, we're still working on 
 
 Read our [Sessions Recordings documentation](/docs/user-guides/recordings) for more detailed information about the feature, or you can [make an account for free](https://posthog.com/pricing) to try it out yourself!
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

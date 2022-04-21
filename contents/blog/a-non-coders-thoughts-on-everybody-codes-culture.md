@@ -40,7 +40,7 @@ I’ve made [many minor mistakes](https://github.com/PostHog/posthog.com/pull/14
 
 Ultimately, while I was initially nervous about the ‘everyone codes’ culture at PostHog, it hasn’t taken me long to start seeing benefits. As a team, we can move faster; and as individuals, we can have greater impact with less bureaucracy - as shown when I made [my first product update](https://github.com/PostHog/posthog/pull/4584) in only my second week.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact

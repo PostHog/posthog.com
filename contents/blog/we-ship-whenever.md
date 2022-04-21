@@ -50,7 +50,7 @@ We have deliberately not sought enterprise customers early on for this reason. T
 
 For now, we solve this in two ways for bigger enterprises: (i) you don't have to update so frequently, although that will mean many new features suddenly appearing in one go OR (ii) we offer maintenance of your deployment as a [paid service](/pricing).
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact
