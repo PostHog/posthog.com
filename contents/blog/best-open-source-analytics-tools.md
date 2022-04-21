@@ -13,7 +13,7 @@ categories: ["Product analytics", "Guides", "Open source"]
 
 Most well-known analytics tools demand hefty price tags, and they own your data. This is bad news for early-stage startups, or anyone who cares about user privacy. Thankfully, open source analytics tools are better, and more numerous, than ever before.
 
-Most open source alernatives to the likes of Google Analytics, Amplitude, or Mixpanel are either free, or significantly cheaper. They also allow you to modify and extend them however you wish.
+Most open source alternatives to the likes of Google Analytics, Amplitude, or Mixpanel are either free, or significantly cheaper. They also allow you to modify and extend them however you wish.
 
 Here, we’ve selected some of the best open source analytics tools across a range of categories, including big data platforms, specialized web analytics tools, and all-in-one platforms like PostHog.
 
@@ -53,12 +53,12 @@ Matomo is intended for Marketing and Content teams who need to focus on SEO acti
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
-- Ecommerce and advertising tools
+- E-commerce and advertising tools
 - Import data from Google Analytics
 - SEO and media analytics tools
 
 ### Open source license
-Matomo is available under a AGPLv3 licence. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
+Matomo is available under a AGPLv3 license. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
 
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
@@ -75,7 +75,7 @@ Countly is suitable for both small teams and enterprise businesses, especially t
 - Run surveys to get qualitative insights 
 
 ### Open source license
-Countly is available under a AGPLv3 licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Countly Team repo](https://github.com/Countly) for more information. 
+Countly is available under a AGPLv3 license. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Countly Team repo](https://github.com/Countly) for more information. 
 
 ## 4. [OpenReplay](https://github.com/openreplay/openreplay)
 
@@ -113,7 +113,7 @@ Plausible is intended for Marketing and Content teams who need to focus on speci
 - No cookies required, fully GDPR compliant out of the box 
 
 ### Open source license
-Plausible Analytics is available under a AGPLv3 licence. Pricing depends on the amount of traffic, with a 30-day free trial available. Check [the Plausible Analytics repo on GitHub](https://github.com/plausible/analytics/) for more info. 
+Plausible Analytics is available under a AGPLv3 license. Pricing depends on the amount of traffic, with a 30-day free trial available. Check [the Plausible Analytics repo on GitHub](https://github.com/plausible/analytics/) for more info. 
 
 ## 6. [Apache Spark](https://spark.apache.org/)
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
@@ -149,7 +149,7 @@ Metabase has a drag-and-drop interface which makes it especially useful for less
 - Integrate with 20+ data sources
 
 ### Open source license
-Metabase is available under a AGPL licence. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Metabase repo](https://github.com/metabase/metabase) for more information. 
+Metabase is available under a AGPL license. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Metabase repo](https://github.com/metabase/metabase) for more information. 
 
 ## 8. [Grafana](https://grafana.com/products/cloud/) 
 ![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
