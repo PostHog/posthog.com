@@ -31,10 +31,10 @@ export default function StarUsBanner() {
                     initial={{ translateY: 'calc(100% + 23px)', opacity: 0 }}
                     animate={{ translateY: '0%', opacity: 1 }}
                     exit={{ translateY: 'calc(100% + 23px)', opacity: 1 }}
-                    className="fixed bottom-[23px] z-[9998] w-full flex justify-center items-center"
+                    className="fixed bottom-0 sm:bottom-[23px] z-[9998] w-full flex justify-center items-center"
                 >
-                    <div className="flex items-center space-x-4 bg-red py-[12px] px-[25px] text-white rounded-full ">
-                        <p className="m-0 text-base font-semibold flex items-center space-x-4">
+                    <div className="flex space-x-4 bg-red py-[12px] px-[25px] text-white sm:rounded-full w-full sm:items-center sm:w-auto">
+                        <p className="mx-auto sm:m-0 sm:pr-3 text-base font-semibold flex items-center space-x-4">
                             {posthog && posthog.isFeatureEnabled && posthog.isFeatureEnabled('london-banner') ? (
                                 <Link to="/hosthog/london" className="text-white hover:text-white">
                                     Come say &#128075; at our London meet-up!
@@ -56,7 +56,7 @@ export default function StarUsBanner() {
                                 </>
                             )}
                         </p>
-                        <button className="text-white" onClick={handleClick}>
+                        <button className="text-white ml-auto" onClick={handleClick}>
                             <Close className="w-3 h-3" />
                         </button>
                     </div>
