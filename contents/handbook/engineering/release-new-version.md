@@ -80,7 +80,6 @@ The release manager is ultimately responsible for the timeline of the release. T
     - If there are any failures showing up in `k9s` during the upgrade, ask `team-platform` for guidance.
     - Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
 
-> ⚠️ Note that you might need to follow major upgrade notes as mentioned in the upgrade guide, the same way our users would be required to.
 
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
