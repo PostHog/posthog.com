@@ -26,7 +26,7 @@ It’s entirely self-serve, with the ability to auto-capture event information o
 
 Best of all, PostHog can be self-hosted on your existing infrastructure — making it an excellent alternative to tools such as Mixpanel if you’re concerned about privacy. 
 
-Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can either self-host, or use [PostHog Cloud](/pricing#cloud) if you'd prefer a fully-managed experience – it's free up to 1 million events per month 
+Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can either self-host, or use [PostHog Cloud](/pricing#cloud) if you'd prefer a fully-managed experience – it's free up to 1 million events per month. 
 
 ### Who is PostHog for?
 PostHog is ideal for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for engineering, data science, and product teams.
@@ -88,8 +88,7 @@ Its session replay feature automatically captures events, and provides useful cl
 ### Who is OpenReplay for?
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It can be self-hosted for free, though a cloud version is available for $3.95 per 1,000 monthly recordings.
 
-### Strengths
-
+### Strengths
 - Privacy friendly
 - Useful error tracking and bug fixing features
 - Optimizing conversion and understanding user journeys
