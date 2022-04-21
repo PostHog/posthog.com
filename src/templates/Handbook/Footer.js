@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Contributors from './Contributors'
 import { Edit, Issue } from 'components/Icons/Icons'
-import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import { DocsCTA } from 'components/DocsCTA'
 
 const Divider = () => {
     return (
@@ -15,7 +15,7 @@ export default function Footer({ contributors, filePath, title }) {
         <footer className="text-white">
             <div className="bg-almost-black dark:bg-gray-accent-dark max-w-screen-2xl mx-auto rounded-lg relative overflow-hidden">
                 <div className="py-14 2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-6rem)] xl:max-w-[650px] w-full xl:mx-auto ml-auto md:border-l border-opacity-30 border-gray-accent-light border-dashed px-8 md:box-content">
-                    <DocsPageSurvey />
+                    <DocsCTA />
                     <div className="relative">
                         <Divider />
                         {

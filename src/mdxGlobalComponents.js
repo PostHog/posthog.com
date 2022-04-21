@@ -37,6 +37,7 @@ import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
+import { DocsCTA } from './components/DocsCTA'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
@@ -145,6 +146,7 @@ export const shortcodes = {
     DarkModeToggle,
     DemoScheduler,
     DeployOption,
+    DocsCTA,
     DocsPageSurvey,
     FeatureAvailability,
     FeaturesComparisonTable,
