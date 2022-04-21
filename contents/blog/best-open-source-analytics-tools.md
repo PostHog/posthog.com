@@ -123,7 +123,7 @@ Apache Spark is an open source analytics engine specifically focused on large-sc
 However, the focus on libraries such as SQL make Apache Spark difficult for non-technical users as support is provided solely by the community.
 
 ### Who is Apache Spark for?
-Apache Spark is a technical system intended for Data Engineers and Data Scientists conducting large-scale analytics in an enterprise setting. 
+Apache Spark is a technical system intended for data engineers and data scientists conducting large-scale analytics in an enterprise setting. 
 
 ### Strengths
 - Great for very large data volumes
@@ -140,7 +140,7 @@ Apache Spark is available under the Apache 2.0 license and is entirely free, via
 Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 ### Who is Metabase for?
-Metabase has a drag-and-drop interface which makes it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focused on more general analytics.
+Metabase has a drag-and-drop interface which makes it especially useful for less technical users or marketing and growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focused on more general analytics.
 
 ### Strengths
 - Easy-to-use, no SQL required
