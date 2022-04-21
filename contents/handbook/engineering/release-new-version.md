@@ -41,18 +41,36 @@ The release manager is ultimately responsible for the timeline of the release. T
   git checkout release-[version]
   git log --pretty=format:"%s %ae" [old-version]..head > log.txt
   ```
-- [ ] Update the `VERSION` in `posthog/version.py`
+- [ ] Update the `VERSION` in `posthog/version.py` and add an entry in `posthog/versions.json`
   ```bash
   git checkout release-[version]
-  git add posthog/version.py
+  git add posthog/version.py posthog/versions.json
   git commit -m "Bump version [version]"
   ```
+  
+> 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the following steps. You can install all of these with `brew doctl helm k9s`.
+
+> ⚠️ You'll also want to make sure that a Docker image under the tag `release-[version]-unstable` has been created in Docker Hub by this point. You can check its build status in the Github Actions workflow for the corresponding commit.
+
 - [ ] Upgrade PostHog playground
-    - The PostHog Playground uses a helm chart deployment on Digital Ocean.
-    - The upgrade instructions can be found [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart)
-    - Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c) and switch to the right kubectl context.
-    - lookup the the `release-[version]-unstable` Docker image's SHA (you can obtain it from Docker Hub, credentials in 1Password) and update that in the [`values.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml). Make sure to commit any changes made.
-    - note that you might need to follow major upgrade notes as mentioned in the upgrade guide same way our users would need to do that.
+    - The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
+    - If this is your first time on Digital Ocean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
+
+  ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
+
+    - Copy the automatic connection script by clicking the copy icon.
+  
+  ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
+
+    - Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
+    - Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
+    - On a separate PR, navigate to [`values.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and replace the `image: -> tag:` value with the `release-[version]-unstable` tag found in Docker Hub. Tag the previous release manager on the PR and have it merged to `master`.
+    - In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart).
+    - If there are any failures showing up in `k9s` during the upgrade, ask `team-platform` for guidance.
+    - Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
+
+> ⚠️ Note that you might need to follow major upgrade notes as mentioned in the upgrade guide, the same way our users would be required to.
+
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
 
 ### Launch phase (day of the release)
