@@ -63,7 +63,7 @@ The release manager is ultimately responsible for the timeline of the release. T
   ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
 
     - Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
-    - Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
+    - Optional: Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
     - On a separate PR, navigate to [`playground.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and replace the `image: -> tag:` value with the `release-[version]-unstable` tag found in Docker Hub. Tag the previous release manager on the PR and have it merged to `master`.
     - Copy the url of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the Github UI, and copying the URL of that page.
 
