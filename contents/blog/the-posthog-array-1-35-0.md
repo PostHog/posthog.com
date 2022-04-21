@@ -59,7 +59,7 @@ Check out our [SSO docs](/sso) for more information on how to get started with S
 
 [[TODO: screenshot goes here]]
 
-[[TODO: @rcmarron Could you give a brief summary of the recent updates to project homepage that have been going on since the last version? Namely recently viewed persons, insights, and recordings.]]
+To help you quickly get to the insights you're visiting frequently, we added a list of 'your recently viewed insights' to the project homepage. Additionally, we added lists for 'recent recordings' and 'newly seen persons' to give you quick access to these commonly-visited pages.
 
 ### Other improvements & fixes
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
