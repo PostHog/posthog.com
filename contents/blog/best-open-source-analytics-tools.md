@@ -83,7 +83,7 @@ Countly is available under a AGPLv3 licence. A limited version of the product is
 
 OpenReplay is a session replay suite built for developers and privacy conscious companies. While it lacks many core analytics features, such as measuring pageviews on landing pages, it delivers useful analytical tools that augment others.
 
-Its session replay feature autmatically captures events, and provides useful click maps in addition to detecting rage clicks and slow loading pages. It also offers a straightforward funnel analysis, performance monitoring, error tracking, and extensive integrations with other logging tools.
+Its session replay feature automatically captures events, and provides useful click maps in addition to detecting rage clicks and slow loading pages. It also offers a straightforward funnel analysis, performance monitoring, error tracking, and extensive integrations with other logging tools.
 
 ### Who is OpenReplay for?
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It can be self-hosted for free, though a cloud version is available for $3.95 per 1,000 monthly recordings.
