@@ -129,4 +129,6 @@ Why? PostHog enables you to self-host your analytics, integrates with tools such
 
 There are a variety of product analytics tools available to choose from however, each with its own quirks and strengths. Popular options include platforms such as Amplitude, Heap, or Mixpanel, though none of these offer self-hosted deployments. 
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster and without writing SQL. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more. 
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

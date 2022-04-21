@@ -67,3 +67,9 @@ You aren't going to get it right on the first go. Be happy [chopping and changin
 ## Get comfortable
 
 Many of the best things you can work on are hard to measure - that's why they're opportunities; no one else wants to do them. Investing in design is like this.
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

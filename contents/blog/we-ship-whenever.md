@@ -49,3 +49,9 @@ If we keep our team first, customers and users second, then our investors will t
 We have deliberately not sought enterprise customers early on for this reason. The stronger we can get our product and engineering culture before this happens, the better a position we will be in before having to change anything.
 
 For now, we solve this in two ways for bigger enterprises: (i) you don't have to update so frequently, although that will mean many new features suddenly appearing in one go OR (ii) we offer maintenance of your deployment as a [paid service](/pricing).
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -98,3 +98,9 @@ And we're not done yet, we're still working to make it even easier to find and w
 As for the remaining <1% of recordings that are missing, we're still working on that too. The going theory is that it has to do with data compression errors or slow networks, but we're not quite to the bottom of that one yet.
 
 Read our [Sessions Recordings documentation](/docs/user-guides/recordings) for more detailed information about the feature, or you can [make an account for free](https://posthog.com/pricing) to try it out yourself!
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

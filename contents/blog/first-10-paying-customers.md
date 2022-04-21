@@ -92,5 +92,9 @@ Unless you’ve magically built a viral product that sells itself, early user ac
 
 And because we’d be remiss if we didn’t plug our own product, you can track all that user activity, traffic, and revenue using PostHog’s product analytics suite. See the full list of features [here](https://posthog.com/product-features) and sign up for a free trial today.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
 

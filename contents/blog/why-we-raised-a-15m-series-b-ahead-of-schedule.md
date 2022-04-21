@@ -25,3 +25,9 @@ You may be curious what we’ll spend the money on. Our aim is to double the siz
 Other plans for the future include enhancing connectivity with data warehouses and merging improvements from PostHog Free into our open source product. It will take a few months to get there, but we ultimately want to create an open source offering which is free and scalable for everyone from individual hobbyists to enterprise teams. 
 
 We’d like to thank our thousands of users and our community of contributors for their continuing support in helping us reach this milestone, and for joining us in taking this next step. If you’re interested in what else we have planned for the future, [check out our roadmap](/handbook/strategy/roadmap)!
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

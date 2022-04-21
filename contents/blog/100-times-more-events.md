@@ -101,3 +101,7 @@ Existing customers should get treated just as well (or better, from time to time
 We've therefore already applied this increase to any customers who are paying per event on [Cloud](https://app.posthog.com/signup). Yep, that cost us a bunch of money. But it's the right thing to do.
 
 After all, PostHog's mission is to increase the number of successful products in the world.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

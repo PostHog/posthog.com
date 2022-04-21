@@ -49,7 +49,6 @@ Deel have free templates integrated into their platform already, so you’ll onl
 
 Do not pay a lawyer to create contract templates for you - it is a fantastic waste of money better spent when you need them to handle your next funding round.
 
-
 ## Managing your money (so you can keep paying people)
 
 There are basically two sides to finance - accounting and budgeting. You know this already from YC’s <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.startupschool.org/">Startup School</a>, of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
@@ -97,3 +96,7 @@ For business planning (setting OKRs etc.), I’m yet to find a tool that genuine
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype on Clubhouse.
 
 <iframe src="https://giphy.com/embed/26DNdV3b6dqn1jzR6" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/26DNdV3b6dqn1jzR6">via GIPHY</a></p>
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

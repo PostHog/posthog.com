@@ -58,4 +58,8 @@ Andy Grove’s treatise on Intel’s strategy and growth, “[Only The Paranoid 
 
 If he were starting his career all over again, he says he’d focus on just one metric and optimize for that in all his endeavors. In his words, this would have helped him moved much faster in his career and business pursuits. We agree.
 
-_Loved this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

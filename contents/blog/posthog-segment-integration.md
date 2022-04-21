@@ -36,3 +36,10 @@ Also, if you eventually decide that you want to do all your analytics on a platf
 Are you convinced yet? Ready to start your journey with a self-hosted open source platform?
 
 If so, check out our [new Docs page about integrating PostHog with Segment](/docs/integrate/third-party/segment).
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
+

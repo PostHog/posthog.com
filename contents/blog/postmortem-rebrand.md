@@ -106,3 +106,9 @@ And this is just the start! As with everything at PostHog, we still have [a huge
 Most importantly, we hope our website is a reflection of who we are: quirky, outside-the-box, and enthusiastic about tackling large problems in unique and creative ways.
 
 *P.S. If you want to join in on the fun, [we're always hiring talented people](https://posthog.com/careers). If this post resonates with you, we'd love to hear from you!*
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -56,3 +56,9 @@ We started working long hours, but we made time to go out to walk, think and dec
 When we were working, it sounds fluffy, but being surrounded by ambitious and impressive people has probably been the most important part of being here so far. Being in San Francisco with YC gave us easy real life access to many of the real thought leaders in technology.
 
 If you want to check out the product, check out the [PostHog repo](https://github.com/posthog/posthog). If you’d like to get updates from this blog, [email me](mailto:james@posthog.com), and I’ll add you to our mailing list.
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -63,4 +63,6 @@ Naturally, we think PostHog is one of the best tools to use for user segmentatio
 
 For more information, you can also read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to-segment-users). 
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

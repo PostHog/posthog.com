@@ -86,3 +86,9 @@ Neither of us has worked at a FANG company. Neither of us knew anyone at YC, and
 We got the interview email.
 
 We just followed the instructions, and got in. They take people at any stage if they like the application.
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -78,5 +78,9 @@ Finally, I’d like to share some mistakes we’ve made in our iterative journey
 - **Projects with little to no engineering involvement:** You get a spontaneous idea on how to improve the product, gather some context, explore it, and arrive at a fully spec’d out solution with nary an engineer in sight (usually by accident). Two big problems come from this: a) you don’t reach the best solution because you lack important context, and b) you now have a project ready to be implemented but no engineer to pick it up. When working on ideas, however crazy, always involve engineering from the start - ideally have an engineer co-own the idea with you. 
 - **Strongly linked dependencies:** This can happen when you have processes that rely on different people (e.g. design having to review every view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective because you constantly get blocked by other people. Blurring scopes and removing dependencies makes it easier and faster to ship things. Remember, you have a capable team with good judgement, so no need to encumber the creative process.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, product, growth, and analytics._
+> _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
 

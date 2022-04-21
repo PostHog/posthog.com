@@ -78,4 +78,8 @@ But you can't just assume everyone will buy into the strategy because you posted
 
 Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
 
-_Loved this? Follow us on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on growth, startups, and product analytics._
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
