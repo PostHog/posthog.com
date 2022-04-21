@@ -11,7 +11,9 @@ featuredImageType: full
 excerpt: PostHog 1.35.0 introduces audit logs and a brand new way of visualizing where your users are coming from with the World Map. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus check out your Project Homepage for a few additional goodies.
 ---
 
-PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you visualize where your users are coming from. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out Project Homepage for a few additional goodies!
+PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you visualize where your users are coming from. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!
+
+We've also recently launched a new newsletter, which we send once every two weeks! Subscribe today to hear about our latest news, what we're reading and how to get the most out of PostHog. Each issue also includes a bonus hedgehog cartoon!
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> If you use SAML, please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
@@ -33,7 +35,7 @@ PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you 
 
 Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
 
-You can now view changes to feature flags and persons made in the UI and see who made them. Watch out for the activity log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
+You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the Activity Log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
 
 ### New: World Map
 
@@ -45,15 +47,15 @@ You can now view changes to feature flags and persons made in the UI and see who
 
 [[TODO: @camerondeleone do you have a screenshot that could go here about this feature? https://github.com/PostHog/posthog/pull/9225]]
 
-You can now configure SAML login on both self-hosted and cloud instances! You can configure up to one SAML provider per organization. 
+You can now configure SAML login on both self-hosted and PostHog Cloud instances! You can configure up to one SAML provider per organization. 
 
-Check out our [SSO docs](/sso) for more information on how to get started.
+Check out our [SSO docs](/sso) for more information on how to get started with SAML on PostHog. 
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
 </blockquote>
 
-### Improvement: Project Homepage Updates
+### Improvement: Project homepage updates
 
 [[TODO: screenshot goes here]]
 
@@ -62,34 +64,37 @@ Check out our [SSO docs](/sso) for more information on how to get started.
 ### Other improvements & fixes
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
 
-- **Improved**: Warn before leaving insight with unsaved changes
-- **Improved**: Redesigned funnels view
-- **Improved**: More specific breadcrumbs
-- **Improved**: Show "out-of-band" events in recordings
+- **Improved**: Warnings before leaving an insight with unsaved changes
+- **Improved**: A new, redesigned funnels view
+- **Improved**: More specific breadcrumbs in the navigation
+- **Improved**: "Out-of-band" events shown in sessiong recordings
 
 ### Deprecation and removal notices
-- Starting from PostHog 1.35.0 SAML will change from being instance-based to domain-based. This means that SAML configurations will take place in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
-- If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains (see [SSO docs](/sso) for more details.)
+- From PostHog 1.35.0 onwards, SAML will change from being instance-based to domain-based. This means that SAML configurations will take place in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+- If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso) for more details.
 
 ## Give us your feedback
-We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback). As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
+We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
 Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack).
-
-We would also specifically like to thank PostHog team members [@hazzadous](https://github.com/hazzadous), [@guidoiaquinti](https://github.com/guidoiaquinti) and [@liyiy](https://github.com/liyiy) for their efforts on this particularly stubborn release. 
 
 ### Community shoutouts
 This month we also want to say thank you to the following people...
 
 [[TODO: place community shoutouts here]]
 
+Do you want to get involved in making PostHog better? Check out our [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
 
-[[TODO: place open roles here]]
+- [Growth Engineers](https://apply.workable.com/posthog/j/F6B73AD2F6/)
+- [Site Reliabliulity Engineers - Kubernetes](https://apply.workable.com/posthog/j/7A6F1142D0/)
+- [Community Engineers](https://apply.workable.com/posthog/j/449572FD18/)
+- [Full Stack Engineers](https://apply.workable.com/posthog/j/2682B00B76/)
   
-Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. We also welcome speculative applications for roles from exceptional candidates.
+Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
 
 <hr/>
 
