@@ -22,9 +22,16 @@ PostHog 1.35.0 introduces a brand new way of visualizing where your users are co
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
+- [Activity Log](#new-activity-log)
 - [World Map](#new-world-map)
 - [Multitenant SAML](#new-multitenant-saml)
 - [Project Homepage Updates](#improvement-project-homepage-updates)
+
+### New: Activity Log
+
+[[TODO: screenshot goes here]]
+
+[[TODO: @pauldambra Could you give a brief spiel about activity log here?]]
 
 ### New: World Map
 
