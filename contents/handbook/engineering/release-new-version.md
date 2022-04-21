@@ -78,7 +78,8 @@ The release manager is ultimately responsible for the timeline of the release. T
     helm upgrade -f https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
   ```
 
-    - If there are any failures showing up in `k9s` during the upgrade, ask `team-platform` for guidance.
+    - Optional: Keep an eye on the progress of the upgrade in `k9s`
+    - If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
     - Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
 
 
