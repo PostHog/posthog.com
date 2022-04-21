@@ -64,8 +64,19 @@ The release manager is ultimately responsible for the timeline of the release. T
 
     - Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
     - Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
-    - On a separate PR, navigate to [`values.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and replace the `image: -> tag:` value with the `release-[version]-unstable` tag found in Docker Hub. Tag the previous release manager on the PR and have it merged to `master`.
-    - In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart).
+    - On a separate PR, navigate to [`playground.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and replace the `image: -> tag:` value with the `release-[version]-unstable` tag found in Docker Hub. Tag the previous release manager on the PR and have it merged to `master`.
+    - Copy the url of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the Github UI, and copying the URL of that page.
+
+  ![PostHog - Github Raw](../../images/05/release_playground_raw_github.png)
+
+  ![PostHog - Github Raw File](../../images/05/release_playground_raw_file.png)
+  
+    - In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the url you copied in the previous step. Example:
+
+  ```shell
+    helm upgrade -f https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
+  ```
+
     - If there are any failures showing up in `k9s` during the upgrade, ask `team-platform` for guidance.
     - Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
 
