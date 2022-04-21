@@ -31,7 +31,9 @@ PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you 
 
 [[TODO: screenshot goes here]]
 
-[[TODO: @pauldambra Could you give a brief spiel about activity log here?]]
+Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
+
+You can now view changes to feature flags and persons made in the UI and see who made them. Watch out for the activity log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
 
 ### New: World Map
 
