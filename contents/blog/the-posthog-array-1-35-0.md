@@ -67,7 +67,7 @@ We've added a new homepage card which lists your recently viewed insights to the
 
 We're big fans of [the Avo data governance platform](https://www.avo.app/) and were lucky enough to meet the team in person at our recent Iceland offsite. Now, we've launched a new plugin too!
 
-The Avo plugin sends events to the Avo Inspector as they are ingested by PostHog, enabling you to detect inconsistencies in your product data and help you understand how your tracking is performing. Install it from the plugin tab to get started, or find out more in [Avo's documentation](https://www.avo.app/docs/workspace/connect-inspector-to-posthog#step-2-enable-avo-inspector-plugin-in-posthog). 
+The plugin sends event schemas to the Avo Inspector as they are ingested by PostHog, enabling you to detect inconsistencies in your schema without sharing any user data. Install it from the plugin tab to get started, or find out more in [Avo's documentation](https://www.avo.app/docs/workspace/connect-inspector-to-posthog#step-2-enable-avo-inspector-plugin-in-posthog). 
 
 ### Other improvements & fixes
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
