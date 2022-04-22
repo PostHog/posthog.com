@@ -58,7 +58,7 @@ You can configure up to one SAML provider per organization, but check out our [S
 ### Improvement: Project homepage updates
 ![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
 
-In the last update, we introduced [project homepages](https://posthog.com/blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
+In the last update, we introduced [project homepages](blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
 
 We've added a new homepage card which lists your recently viewed insights to the project homepage, as well as lists of recent recordings and newly identified persons. All of this is to help give you quick access to commonly-visited pages and recent insights.
 
