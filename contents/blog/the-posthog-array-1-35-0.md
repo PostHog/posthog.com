@@ -30,7 +30,7 @@ We've also recently launched a new newsletter, which we send once every two week
 - [Project Homepage Updates](#improvement-project-homepage-updates)
 - [New Avo plugin](#new-avo-plugin)
 
-### New: Activity Log
+### New: Activity log
 <img width="827" alt="Screenshot 2022-04-21 at 15 45 07" src="https://user-images.githubusercontent.com/984817/164484091-f5dfce0b-c400-4699-ac55-642ccc2bc55b.png">
 
 Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
