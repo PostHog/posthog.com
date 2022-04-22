@@ -39,28 +39,29 @@ Ever wondered who deleted that feature flag, or merged those two people? Wonder 
 You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the Activity Log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
 
 ### New: World Map
+![PostHog - The World Map](../images/blog/array/1_35_0-map.png)
 
-[[TODO: screenshot goes here]]
+A staple request of every PostHog hackathon has finally been realized, with the introduction of a new World Map chart view, which enables you to visualize locational data easily. No more having to work out popular territories via a table view!
 
-[[TODO: @Twixes Could you give a brief spiel about world map here?]]
+The World Map is obviously especially useful for finding out where your users physically are, so you can do things like comparing the difference between your traffic and sign-ups. 
 
 ### New: Multitenant SAML
-
 [[TODO: @camerondeleone do you have a screenshot that could go here about this feature? https://github.com/PostHog/posthog/pull/9225]]
 
-You can now configure SAML login on both self-hosted and PostHog Cloud instances! You can configure up to one SAML provider per organization. 
+SAML has been a big focus point in this update (check the deprecation notices below for more info) and the upshot is that you can now configure SAML login on both self-hosted and PostHog Cloud instances! 
 
-Check out our [SSO docs](/sso) for more information on how to get started with SAML on PostHog. 
+You can configure up to one SAML provider per organization, but check out our [SSO docs](/sso) for more information on how to get started with SAML on PostHog. 
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
 </blockquote>
 
 ### Improvement: Project homepage updates
+![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
 
-[[TODO: screenshot goes here]]
+In the last update, we introduced [project homepages](https://posthog.com/blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
 
-To help you quickly get to the insights you're visiting frequently, we added a list of 'your recently viewed insights' to the project homepage. Additionally, we added lists for 'recent recordings' and 'newly seen persons' to give you quick access to these commonly-visited pages.
+We've added a new homepage card which lists your recently viewed insights to the project homepage, as well as lists of recent recordings and newly identified persons. All of this is to help give you quick access to commonly-visited pages and recent insights.
 
 ### New: Avo plugin
 ![PostHog - Avo plugin](../images/blog/array/1_35_0_avo.png)
