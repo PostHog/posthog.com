@@ -14,7 +14,7 @@ We're excited to announce that we have launched a new plugin with [Avo](https://
 
 Connecting PostHog to Avo is great if, for example, you're worried about data going missing due to naming issues or because event details aren't reliably maintained. 
 
-The new plugin, which is available immediately for users on PostHog Cloud or self-hosted deployments, works by streaming event data to the Avo Inspector as it is ingested. Once the plugin is connected, Avo reads the event schemas we send so that you can monitor the quality of your tracking without any code changes. Simple.
+The new plugin, which is available immediately for users on PostHog Cloud or self-hosted deployments, works by streaming event schema (but _not_ event data) to the Avo Inspector as it is ingested. Once the plugin is connected, Avo reads the event schemas we send so that you can monitor the quality of your tracking without any code changes and without exposing any user info. Simple.
 
 The plugin is maintained by PostHog - [check the repo here](https://github.com/PostHog/posthog-avo-plugin) - but we recommend checking out [Avo's documentation](https://www.avo.app/docs/workspace/connect-inspector-to-posthog) to learn more about how to setup the connection quickly. You can even check the Loom below where Avo demonstrates how to setup the connection in less than 90s! 
 
