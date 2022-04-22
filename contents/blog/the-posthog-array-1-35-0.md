@@ -31,7 +31,6 @@ We've also recently launched a new newsletter, which we send once every two week
 - [New Avo plugin](#new-avo-plugin)
 
 ### New: Activity Log
-
 <img width="827" alt="Screenshot 2022-04-21 at 15 45 07" src="https://user-images.githubusercontent.com/984817/164484091-f5dfce0b-c400-4699-ac55-642ccc2bc55b.png">
 
 Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
@@ -53,7 +52,7 @@ SAML has been a big focus point in this update (check the deprecation notices be
 You can configure up to one SAML provider per organization, but check out our [SSO docs](/sso) for more information on how to get started with SAML on PostHog. 
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
+<b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>. SAML support is only available on Enterprise plans.
 </blockquote>
 
 ### Improvement: Project homepage updates
