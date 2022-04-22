@@ -7,9 +7,9 @@ hideAnchor: true
 
 ## People & Ops
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops & Marketing
+- Charles Cook, VP Ops & Marketing
 - Grace McKenzie, Operations Manager
+- Coua Phang, Tech Talent Partner
 
 ## Mission
 
@@ -54,8 +54,7 @@ Every PostHog team member, as well as current, future and past candidates.
 
 
 
-## Slack channel
+## Slack channels
 
-[#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
-[#ops](https://posthog.slack.com/messages/ops) - internally public, default for ops discussions
-[#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
+[#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
+[#private-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
