@@ -28,6 +28,7 @@ We've also recently launched a new newsletter, which we send once every two week
 - [World Map](#new-world-map)
 - [Multitenant SAML](#new-multitenant-saml)
 - [Project Homepage Updates](#improvement-project-homepage-updates)
+- [New Avo plugin](#new-avo-plugin)
 
 ### New: Activity Log
 
@@ -61,6 +62,13 @@ Check out our [SSO docs](/sso) for more information on how to get started with S
 
 To help you quickly get to the insights you're visiting frequently, we added a list of 'your recently viewed insights' to the project homepage. Additionally, we added lists for 'recent recordings' and 'newly seen persons' to give you quick access to these commonly-visited pages.
 
+### New: Avo plugin
+![PostHog - Avo plugin](../images/blog/array/1_35_0_avo.png)
+
+We're big fans of [the Avo data governance platform](https://www.avo.app/) and were lucky enough to meet the team in person at our recent Iceland offsite. Now, we've launched a new plugin too!
+
+The Avo plugin sends events to the Avo Inspector as they are ingested by PostHog, enabling you to detect inconsistencies in your product data and help you understand how your tracking is performing. Install it from the plugin tab to get started, or find out more in [Avo's documentation](https://www.avo.app/docs/workspace/connect-inspector-to-posthog#step-2-enable-avo-inspector-plugin-in-posthog). 
+
 ### Other improvements & fixes
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
 
@@ -77,22 +85,24 @@ Version 1.35.0 also adds hundreds of other fixes and improvements, including...
 We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack).
+We always welcome contributions from our community and this time we want to thank the following people...
 
-### Community shoutouts
-This month we also want to say thank you to the following people...
+- [Michael Cavallaro](https://github.com/Cavallando), for Android bug fixes
+- [Rory Crispin](https://github.com/RoryCrispin), for Docs improvements
+- [Rahul](https://github.com/rahul3v), for website improvements
+- [Alberto](https://github.com/albtsantos), for plugin enhancements
+- [Joe Trollo](https://github.com/joetrollo), for Kafka and SASL support
+- [Björn and the rest of the Avo team](https://github.com/bjornj12), for the Avo plugin
 
-[[TODO: place community shoutouts here]]
-
-Do you want to get involved in making PostHog better? Check out our [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
 
-- [Growth Engineers](https://apply.workable.com/posthog/j/F6B73AD2F6/)
-- [Site Reliabliulity Engineers - Kubernetes](https://apply.workable.com/posthog/j/7A6F1142D0/)
-- [Community Engineers](https://apply.workable.com/posthog/j/449572FD18/)
-- [Full Stack Engineers](https://apply.workable.com/posthog/j/2682B00B76/)
+- [Growth Engineer](https://apply.workable.com/posthog/j/F6B73AD2F6/)
+- [Site Reliabliulity Engineer - Kubernetes](https://apply.workable.com/posthog/j/7A6F1142D0/)
+- [Community Engineer](https://apply.workable.com/posthog/j/449572FD18/)
+- [Full Stack Engineer](https://apply.workable.com/posthog/j/2682B00B76/)
   
 Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
 
