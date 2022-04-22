@@ -35,7 +35,7 @@ We've also recently launched a new newsletter, which we send once every two week
 
 Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
 
-You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the Activity Log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
+You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the activity log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/community) and tell us where we should add it next.
 
 ### New: World Map
 ![PostHog - The World Map](../images/blog/array/1_35_0-map.png)
