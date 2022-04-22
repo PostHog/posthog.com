@@ -24,7 +24,7 @@ We've also recently launched a new newsletter, which we send once every two week
 > Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- [Activity Log](#new-activity-log)
+- [Activity log](#new-activity-log)
 - [World Map](#new-world-map)
 - [Multitenant SAML](#new-multitenant-saml)
 - [Project Homepage Updates](#improvement-project-homepage-updates)
