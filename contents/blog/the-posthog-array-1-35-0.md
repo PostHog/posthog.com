@@ -44,7 +44,7 @@ A staple request of every PostHog hackathon has finally been realized, with the 
 
 The World Map is obviously especially useful for finding out where your users physically are, so you can do things like comparing the difference between your traffic and sign-ups. 
 
-### New: Multitenant SAML
+### New: Multi-tenant SAML
 [[TODO: @camerondeleone do you have a screenshot that could go here about this feature? https://github.com/PostHog/posthog/pull/9225]]
 
 SAML has been a big focus point in this update (check the deprecation notices below for more info) and the upshot is that you can now configure SAML login on both self-hosted and PostHog Cloud instances! 
