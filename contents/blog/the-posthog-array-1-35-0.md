@@ -33,7 +33,7 @@ We've also recently launched a new newsletter, which we send once every two week
 ### New: Activity log
 <img width="827" alt="A screenshot of the app showing the new 'history' tab on the feature flags page. In the screenshot you can see three recent changes by PostHog staff to our feature flags" src="https://user-images.githubusercontent.com/984817/164484091-f5dfce0b-c400-4699-ac55-642ccc2bc55b.png" />
 
-Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new Activity Log™️!
+Ever wondered who deleted that feature flag, or merged those two people? Wonder no more with the new activity log!
 
 You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the activity log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/slack) and tell us where we should add it next.
 
