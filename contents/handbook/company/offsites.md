@@ -11,7 +11,6 @@ We understand organizing travel can be a challenge when you have personal/family
 - Once a year: all-company offsite (everyone strongly encouraged to attend)
 - Twice a year: small team offsite (everyone encouraged to attend _one_ of these)
 
-
 ## All-company offsites
 
 Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
@@ -48,3 +47,11 @@ Ideas for the agenda:
 The budget for these trips is up to $1,000 per person.
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
+
+## Hedge House
+
+PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites.
+
+Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
+
+We'd recommend using the Hedge House for small team offsites for cost and convenience reasons (unless you're outside Europe, in which case - up to you). This is because we'd rather avoid the distraction/hassle/extra cost of researching and trying new locations every time.
