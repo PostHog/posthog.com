@@ -71,7 +71,6 @@ The plugin sends event schemas to the Avo Inspector as they are ingested by Po
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
 
 - **Improved**: Warnings before leaving an insight with unsaved changes
-- **Improved**: A new, redesigned funnels view
 - **Improved**: More specific breadcrumbs in the navigation
 - **Improved**: "Out-of-band" events shown in session recordings
 
