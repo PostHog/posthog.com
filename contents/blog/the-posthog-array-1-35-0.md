@@ -70,9 +70,9 @@ The plugin sends event schemas to the Avo Inspector as they are ingested by Po
 ### Other improvements & fixes
 Version 1.35.0 also adds hundreds of other fixes and improvements, including...
 
-- **Improved**: Warnings before leaving an insight with unsaved changes
-- **Improved**: More specific breadcrumbs in the navigation
-- **Improved**: "Out-of-band" events shown in session recordings
+- **New**: Warnings before leaving an insight with unsaved changes
+- **New**: Page titles that fully reflect your place in the PostHog app
+- **New**: "Out-of-band" events shown in session recordings
 
 ### Deprecation and removal notices
 - From PostHog 1.35.0 onwards, SAML will change from being instance-based to domain-based. This means that SAML configurations will take place in the PostHog UI. You will be able to have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
