@@ -37,12 +37,10 @@ Ever wondered who deleted that feature flag, or merged those two people? Wonder 
 
 You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the activity log being added to more pages in future releases. Or join [our community Slack](https://posthog.com/slack) and tell us where we should add it next.
 
-### New: World Map
-![PostHog - The World Map](../images/blog/array/1_35_0-map.png)
+### New: World map
+![PostHog - World Map](../images/blog/array/1_35_0_map.png)
 
-A staple request of every PostHog hackathon has finally been realized, with the introduction of a new World Map chart view, which enables you to visualize locational data easily. No more having to work out popular territories via a table view!
-
-The World Map is obviously especially useful for finding out where your users physically are, so you can do things like comparing the difference between your traffic and sign-ups. 
+A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](https://posthog.com/integrations/geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
 
 ### New: Multi-tenant SAML
 [[TODO: @camerondeleone do you have a screenshot that could go here about this feature? https://github.com/PostHog/posthog/pull/9225]]
