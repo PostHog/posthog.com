@@ -1,6 +1,6 @@
 ---
 date: 2022-04-25
-title: Array 1.35.0
+title: "Array 1.35.0: Maps, logs, Avo and SAML"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
