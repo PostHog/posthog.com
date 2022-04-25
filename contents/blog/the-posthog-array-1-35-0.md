@@ -11,9 +11,9 @@ featuredImageType: full
 excerpt: PostHog 1.35.0 introduces activity logs and a brand new way of visualizing where your users are coming from with the World Map. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus check out your Project Homepage for a few additional goodies.
 ---
 
-PostHog 1.35.0 introduces audit logs and a brand new World Map view to help you visualize where your users are coming from. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!
+PostHog 1.35.0 introduces audit logs and a brand new world map view to help you visualize where your users are coming from. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!
 
-We've also recently launched a new newsletter, which we send once every two weeks! Subscribe today to hear about our latest news, what we're reading and how to get the most out of PostHog. Each issue also includes a bonus hedgehog cartoon!
+We've also recently launched a new newsletter, which we send once every two weeks! [Subscribe today](/newsletter) to hear about our latest news, what we're reading and how to get the most out of PostHog. Each issue also includes a bonus hedgehog cartoon!
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> If you use SAML, please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
@@ -25,9 +25,9 @@ We've also recently launched a new newsletter, which we send once every two week
 
 **Release highlights:**
 - [Activity log](#new-activity-log)
-- [World Map](#new-world-map)
-- [Multitenant SAML](#new-multitenant-saml)
-- [Project Homepage Updates](#improvement-project-homepage-updates)
+- [World map](#new-world-map)
+- [Multi-tenant SAML](#new-multitenant-saml)
+- [Project homepage updates](#improvement-project-homepage-updates)
 - [New Avo plugin](#new-avo-plugin)
 
 ### New: Activity log
