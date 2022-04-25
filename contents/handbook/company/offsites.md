@@ -54,4 +54,4 @@ PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small 
 
 Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
 
-We'd recommend using the Hedge House for small team offsites for cost and convenience reasons (unless you're outside Europe, in which case - up to you). This is because we'd rather avoid the distraction/hassle/extra cost of researching and trying new locations every time.
+We'd recommend using the Hedge House for small team offsites for cost and convenience reasons (unless you're outside Europe, in which case - up to you). 
