@@ -167,7 +167,7 @@ Like Plausible Analytics, Pirsch is focused on users who only need to track basi
 ## Open source license
 Pirsch is completely open source, under a GNU AGPLv3 license. Pricing for the full version is based solely on pageviews, meaning it can be deployed across multiple sites at no extra cost. Check [the Pirsch repo](https://github.com/pirsch-analytics/pirsch) for more info. 
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure!
 
 <ArrayCTA />
 
