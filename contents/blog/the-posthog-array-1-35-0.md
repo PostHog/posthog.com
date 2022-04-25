@@ -43,7 +43,6 @@ You can now view changes to feature flags and persons made in the UI and see who
 A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](https://posthog.com/integrations/geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
 
 ### New: Multi-tenant SAML
-[[TODO: @camerondeleone do you have a screenshot that could go here about this feature? https://github.com/PostHog/posthog/pull/9225]]
 
 SAML has been a big focus point in this update (check the deprecation notices below for more info) and the upshot is that you can now configure SAML login on both self-hosted and PostHog Cloud instances! 
 
