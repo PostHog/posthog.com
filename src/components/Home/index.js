@@ -23,7 +23,7 @@ const Home = () => {
             <StarUsBanner />
             <Layout>
                 <SEO
-                    title="PostHog - Powerful, self-hosted product analytics"
+                    title="PostHog - The self-hosted product analytics platform"
                     description="PostHog is the all-in-one, open-source analytics platform for building better products. Try it for free."
                     image="/images/home.png"
                 />
