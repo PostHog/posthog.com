@@ -16,7 +16,7 @@ As always, this is a living document and it changes every now and then, so it's 
 
 ## Upon offer acceptance
 
-Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
+Coua or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
 
 ### US team member checklist
 - [ ] Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive 
