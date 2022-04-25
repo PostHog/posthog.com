@@ -96,8 +96,12 @@ The release manager is ultimately responsible for the timeline of the release. T
     - Bump `appVersion` to the latest app version (same number as on the Docker image).
     - Change the docker tag in [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) to point to the new tag (e.g. `release-1.29.0`).
     - Push the relevant changes and add the `bump-minor` label to the PR. **Do not merge until the latest version is built.** You can check that on [PostHog Docker](https://hub.docker.com/r/posthog/posthog/tags)
-- [ ] Cherrypick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) to make sure `master` is up to date.
-  - [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
+    - There are a few manual workflows that we need to run on this branch. Navigate to each of the following workflows, and run the workflow on the branch you just created. Note, each workflow takes around 30 minutes.
+      - [AWS](https://github.com/PostHog/charts-clickhouse/actions/workflows/test-amazon-web-services-install.yaml)
+      - [Digital Ocean](https://github.com/PostHog/charts-clickhouse/actions/workflows/test-digitalocean-install.yaml)
+      - [GCP](https://github.com/PostHog/charts-clickhouse/actions/workflows/test-google-cloud-platform-install.yaml)
+- [ ] Cherrypick the commits for the changelog and [`version.py`](https://github.com/PostHog/posthog/blob/master/posthog/version.py) into a new PR (branch `[version]-sync`) to make sure `master` is up to date.
+  - [ ] Update the [`versions.json`](https://github.com/PostHog/posthog/blob/master/versions.json) file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
 - [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 - [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
