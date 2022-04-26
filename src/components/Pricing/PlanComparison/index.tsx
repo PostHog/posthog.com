@@ -72,7 +72,7 @@ const sections = [
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: false },
+                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: true },
             },
             {
                 name: 'Initial setup',
@@ -90,6 +90,15 @@ const sections = [
                     'Open source': 'Managed by you',
                     Scale: 'We help you manage',
                     Enterprise: 'We help you manage',
+                },
+            },
+            {
+                name: 'Operate in air gapped environment',
+                tiers: {
+                    'PostHog Cloud': false,
+                    'Open source': true,
+                    Scale: false,
+                    Enterprise: true,
                 },
             },
         ],
