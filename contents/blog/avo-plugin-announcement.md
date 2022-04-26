@@ -1,5 +1,5 @@
 ---
-date: 2022-04-26
+date: 2022-04-27
 title: Introducing the Avo Inspector plugin
 rootPage: /blog
 sidebar: Blog
