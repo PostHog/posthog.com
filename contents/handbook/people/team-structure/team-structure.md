@@ -28,6 +28,7 @@ hideAnchor: true
   - Charles Cook, VP of Operations & Marketing
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
+    - Coua Phang, Tech Talent Partner
   - Cory Watilo, Lead Designer
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Frontend Engineer
@@ -89,6 +90,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 ### [People & Operations](people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Grace McKenzie](/handbook/company/team#grace-mckenzie-operations-manager) (Operations Manager)
+- Coua Phang (Tech Talent Partner)
 
 <br />
 
