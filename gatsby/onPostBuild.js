@@ -146,9 +146,12 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         encoding: 'base64',
     })
 
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
     const browser = await chromium.puppeteer.launch({
         args: await chromium.args,
-        executablePath: (await chromium.executablePath) || process.env.PUPPETEER_EXECUTABLE_PATH,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
     })
     const page = await browser.newPage()
