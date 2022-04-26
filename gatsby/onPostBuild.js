@@ -147,9 +147,9 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     })
 
     const browser = await chromium.puppeteer.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
+        args: await chromium.args,
+        executablePath: (await chromium.executablePath) || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
     })
     const page = await browser.newPage()
     await page.setViewport({
