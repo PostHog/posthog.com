@@ -24,7 +24,7 @@ const Home = () => {
             <Layout>
                 <SEO
                     title="PostHog - The self-hosted product analytics platform"
-                    description="PostHog is the all-in-one, open-source analytics platform for building better products. Try it for free."
+                    description="PostHog is the all-in-one, open-source analytics platform for building better products. Try for free."
                     image="/images/home.png"
                 />
                 <Hero />
