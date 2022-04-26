@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** The [Official RudderStack Docs page for the PostHog integration](https://docs.rudderstack.com/destinations/posthog) provides a better overview of how to set up this integration.
+> **Note:** The [Official RudderStack Docs page for the PostHog integration](https://www.rudderstack.com/docs/destinations/analytics/posthog/) provides a better overview of how to set up this integration.
 
 ## About RudderStack
 
