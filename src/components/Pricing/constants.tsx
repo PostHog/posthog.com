@@ -3,6 +3,7 @@ import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 
 export const SCALE_MINIMUM_PRICING = 0
 export const SCALE_MINIMUM_EVENTS = 0
 export const ENTERPRISE_MINIMUM_PRICING = 4500
+export const CLOUD_MINIMUM_PRICING = 0
 export const CLOUD_ENTERPRISE_MINIMUM_PRICING = 3000
 
 export const features = {
@@ -45,5 +46,11 @@ export const features = {
         { title: 'Configurable backups' },
         { title: 'Instance monitoring' },
     ],
+    Support: [
+        { title: 'Team training' },
+        { title: 'Dashboard configuration support' },
+        { title: 'Dedicated Slack channel' },
+    ],
+    'Advanced security': [{ title: 'Project permissions' }, { title: 'SSO, SAML' }],
     Benefits: [{ title: 'Hosted by PostHog' }, { title: 'Automatic upgrades' }, { title: 'Community Slack support' }],
 }
