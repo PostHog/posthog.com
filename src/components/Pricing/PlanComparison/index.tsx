@@ -119,7 +119,7 @@ const sections = [
                 name: 'Tracked users',
                 tiers: {
                     'PostHog Cloud': 'Unlimited',
-                    'Open source': '~1m (limited by database)',
+                    'Open source': '~1m (with default config)',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
                 },
