@@ -35,6 +35,28 @@ documentation: /docs/user-guides/recordings
 
 <TutorialsSlider topic="session recordings" />
 
+### How does PostHog compare?
+
+|                                       | HotJar | Logrocket |  |   Matomo  |                              PostHog                              |
+|---------------------------------------|:------:|:---------:|:--------:|:---------:|:-----------------------------------------------------------------:|
+|                                                              **Platform**                                                                             |
+| Free plan                             |    ✅   |     ✅     |          |    ✅     |                                 ✅                               |
+| Open source                           |    ❌   |     ❌     |          |    ✅     |                                 ✅                               |
+| Self-hostable                         |    ❌   |     ✅     |          |    ✅     |                                 ✅                               |
+| Cloud hosting                         |    ✅   |     ✅     |          |    ✅     |                                 ✅                               |
+| Product analytics suite               |    ❌   |     ✅     |          |    ✅     |                                 ✅                               |
+|                                                              **Session Recording**                                                                    |
+| Single-page app support               |    ✅   |     ✅     |          |     ✅     |                                 ✅                              |
+| Mobile recordings                     |    ✅   |     ✅     |          |     ✅     |                                 ✅                              |
+| Identity detection                    |    ✅   |          |          |     ✅     |                                 ✅                                |
+| Target recordings by URL              |    ✅   |          |          |     ✅     |                                 ✅                                |
+| Target by sample size                 |    ❌   |          |          |     ✅     |                                 ✅                                |
+| Filter recordings by user or cohort   |    ❌   |          |          |     ✅     |                                 ✅                                |
+| Filter recordings by event            |        |          |          |           |                                 ✅                                 |
+| Privacy masking for sensitive content |    ✅   |     ✅     |          |     ✅     |                                 ✅                               |
+| Export session data                   |    ✅   |          |          |     ✅     |                                 ❌                                 |
+| Retention policy for recordings       | 1 year |    None   |      | 24 months | 3 weeks on PostHog Cloud<br/>Unlimited on self-hosted |
+
 <Section divider={false}>
     <Quote
         imageSource="/images/customers/mishra.jpeg"
@@ -44,31 +66,5 @@ documentation: /docs/user-guides/recordings
         quote={`“I was watching session recordings for our sign-up page and realized a lot of people were trying to click something that wasn’t actually a button. We wouldn’t have noticed that needed fixing without PostHog’s session recordings.”`}
     />
 </Section>
-
-|                                       | HotJar | Amplitude | MixPanel |   Matomo  |                              PostHog                              |
-|---------------------------------------|:------:|:---------:|:--------:|:---------:|:-----------------------------------------------------------------:|
-| Free plan                             |    ✅   |     ✅     |     ✅    |     ✅     |                                 ✅                                 |
-| Open source                           |    ❌   |     ❌     |     ❌    | ✅         | ✅                                                                 |
-| Self-hostable                         |    ❌   |     ❌     |     ❌    | ✅         |                                 ✅                                 |
-| Cloud hosting                         |    ✅   |     ✅     |     ✅    | ✅         |                                 ✅                                 |
-|                  Test                                                 |           |                                                                   |
-| Single-page app support               |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Mobile recordings                     |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Identity detection                    |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Target recordings by URL              |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Target recordings by user or cohort   |    ❌   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Target by sample size                 |    ❌   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Privacy masking for sensitive content |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Heatmaps (Clicks)                     |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Heatmaps (Moves)                      |    ✅   |     ❌     |     ❌    |     ✅     |                                 ❌                                 |
-| Heatmaps (Scrolls)                    |    ✅   |     ❌     |     ❌    |     ✅     |                                 ❌                                 |
-| Rage click detection                  |    ✅   |     ❌     |     ❌    |     ❌     |                                 ✅                                 |
-| Filter by date                        |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Filter by cohort                      |    ❌   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Filter by duration                    |    ✅   |     ❌     |     ❌    |     ❌     |                                 ✅                                 |
-| Filter by event                       |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Filter by URL                         |    ✅   |     ❌     |     ❌    |     ✅     |                                 ✅                                 |
-| Export session data                   |    ✅   |     ❌     |     ❌    |     ✅     |                                 ❌                                 |
-| Retention policy for recordings       | 1 year |    None   |   None   | 24 months | 3 weeks on PostHog Cloud<br/>Unlimited on self-hosted |
 
 <Documentation />
