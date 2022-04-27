@@ -30,4 +30,6 @@ There are several benefits to using ClickHouse over PostgreSQL, such as:
 
 PostgreSQL is great for managing frequently updated data like users, but for telemetry and event data we’ll default to ClickHouse. And while our app updates ClickHouse with data changes, the source of truth remains PostgreSQL. At the same time, we’ll work hard with existing users and early enthusiasts to migrate over to ClickHouse.
 
-Check out [PostHog](https://posthog.com/docs/self-host) Free today.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

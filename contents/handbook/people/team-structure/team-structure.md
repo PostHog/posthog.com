@@ -28,6 +28,7 @@ hideAnchor: true
   - Charles Cook, VP of Operations & Marketing
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
+    - Coua Phang, Tech Talent Partner
   - Cory Watilo, Lead Designer
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Frontend Engineer
@@ -48,7 +49,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
+- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer)_
 
 <br />
 
@@ -89,6 +90,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 ### [People & Operations](people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Grace McKenzie](/handbook/company/team#grace-mckenzie-operations-manager) (Operations Manager)
+- Coua Phang (Tech Talent Partner)
 
 <br />
 

@@ -25,7 +25,7 @@ export const NewsletterForm = ({
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
                     <span className="mt-2 lg:mt-0 font-bold flex-grow text-lg md:text-sm lg:text-left">
-                        I'd love to receive PostHog updates in my inbox at
+                        I'd love to receive PostHog articles in my inbox at
                     </span>
                     <form
                         action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"

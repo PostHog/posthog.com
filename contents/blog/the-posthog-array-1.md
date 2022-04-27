@@ -74,3 +74,5 @@ These are things that we thought were cool in the last week:
 
 * We wrote a blog about [moving to SF](/blog/moving-to-sf). James was delighted it made it to the front page of HN.
 * We also started a [Youtube channel](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) – we’re not going to be big time vloggers anytime soon but we did want to make it easier for our users to understand our features. 
+
+<ArrayCTA />

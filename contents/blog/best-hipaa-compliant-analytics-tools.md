@@ -125,5 +125,7 @@ According to [Google’s own disclaimers](https://support.google.com/analytics/a
 
 Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data. 
 
-> PostHog is an open-source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure to be [used under HIPAA regulations](/docs/privacy/hipaa-compliance) without a Business Associate Agreement.
-[Try PostHog for free](/signup) today or [book a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+

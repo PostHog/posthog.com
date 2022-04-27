@@ -196,4 +196,7 @@ Session recording is also included in Matomo’s cloud Business plan. Pricing is
 
 Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
 
-> Interested in trying PostHog? [Book a demo](/signup/self-host/deploy#demo) to learn more or [try it for free today.](/pricing)
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+
