@@ -73,6 +73,8 @@ PostHog (self-hosted and cloud) is free up to 1 million captured events each mon
 
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
 
+<ArrayCTA />
+
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
