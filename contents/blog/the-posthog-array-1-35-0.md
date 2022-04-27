@@ -1,6 +1,6 @@
 ---
 date: 2022-04-25
-title: "Array 1.35.0: Introducing SAML, world map view and new plugins"
+title: "Array 1.35.0: Introducing SAML, world map view and a new plugin"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
