@@ -9,6 +9,9 @@ author: ['joe-martin']
 topics: ['sentry']
 ---
 
+- *Level:* Easy 🦔
+- *Estimated reading time:* 5 minutes ☕️
+
 PostHog offers a variety of tools which are useful for monitoring and debugging errors, such as [Session Recording](/docs/user-guides/session-recording), [Paths](/docs/user-guides/paths) and [Trends](/docs/user-guides/trends) — yet it is not a bespoke error monitoring tool. 
 
 Sentry is an excellent error-monitoring tool with specialist tools for investigating issues such as slow API calls or database queries, yet lacks the tools to analyse these issues in terms of company metrics. 
@@ -37,9 +40,11 @@ A simple example to illustrate can be seen below, using the [Trends](/docs/user-
 
 ![Rageclicks and Error Tracking in PostHog](../images/tutorials/sentry/trend-rage-error.png)
 
-We can also use the ```$exception``` event to track user behavior in other ways, such as using the [Retention](/docs/user-guides/retention) tool to see how errors impact retention. In this case, we can use Retention to examine ```$exception``` events against [Insight](/docs/user-guides/insights) views (which we can use as a proxy for successful product usage). We can compare this to control groups which did not experience the ```$exception``` event to understand how these errors are impacting overall retention. 
+We can also use the ```$exception``` event to track user behavior in other ways, such as using the [Retention](/docs/user-guides/retention) tool to see how errors impact retention. 
 
-(SCREENSHOT OF RETENTION GRAPH AS DESCRIBED)
+In this case, we can use Retention to examine ```$exception``` events against [Insight](/docs/user-guides/insights) views (which we can use as a proxy for successful product usage). We can compare this to control groups which did not experience the ```$exception``` event to understand how these errors are impacting overall retention. 
+
+![Sentry Error Tracking in PostHog](../images/tutorials/sentry/sentry_retention.png)
 
 ## Step 4: Debug errors using Sentry and PostHog
 
@@ -47,4 +52,4 @@ Connecting PostHog and Sentry also makes it easier to debug issues and explore t
 
 For example, you can jump directly from an error in Sentry to a view of the specific person in PostHog in order to view the recording directly. This enables you to view the error as it happens, with the ```$exception``` event clearly shown on the timeline — a useful tool for understanding the steps leading up to an error and getting full context. 
 
-There are many other ways to explore ```$exception``` events sent by Sentry and debug errors using tools such as [Funnels](/docs/user-guides/funnels), [Cohorts](/docs/user-guides/cohorts), [Lifecycle](/docs/user-guides/lifecycle) and more. [Check the docs for more ideas and inspiration]([Insight](/docs)!
+There are many other ways to explore ```$exception``` events sent by Sentry and debug errors using tools such as [Funnels](/docs/user-guides/funnels), [Cohorts](/docs/user-guides/cohorts), [Lifecycle](/docs/user-guides/lifecycle) and more. [Check the docs for more ideas and inspiration](/docs)!
