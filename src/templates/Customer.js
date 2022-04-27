@@ -10,6 +10,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
+import FooterCTA from 'components/FooterCTA'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -83,6 +84,7 @@ export default function Customer({ data }) {
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
+                        <FooterCTA />
                     </section>
                 </div>
             </Layout>
