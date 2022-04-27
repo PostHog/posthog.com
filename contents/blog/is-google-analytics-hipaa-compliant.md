@@ -67,4 +67,6 @@ This is important because:
 
 Read our [PostHog & HIPAA compliance guide](/docs/privacy/hipaa-compliance) for more info on how to deploy PostHog correctly, or [book a demo](https://posthog.com/book-a-demo) to learn more.
 
-> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. [Try PostHog for free today](https://posthog.com/signup) or [book a demo](https://posthog.com/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
