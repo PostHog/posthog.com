@@ -4,12 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-This tutorial explains the development workflow and best practices, using an example 'Hello World' plugin. We go from zero to publishing your plugin in the official PostHog repository.
+This tutorial explains the development workflow and best practices, using an example 'Hello World' plugin. We'll go from zero to submitting your plugin to the official PostHog repository.
+
+It's important to note PostHog Cloud users can only use plugins which have been added to [our official integration library](/integrations). Want to add your plugin to our library? All you need to do is [submit it to us for review](#submitting-your-plugin).
 
 ## Prerequisites
 
+You will need:
+
 1. A self-hosted PostHog instance (or a local development environment)
-1. Some knowledge of JavaScript (or TypeScript)
+2. Some knowledge of JavaScript (or TypeScript)
 
 ## The plugin
 
@@ -50,7 +54,7 @@ Go to Plugins -> Advanced tab -> Plugin editor -> Start coding.
 
 ![Plugin editor location](../../../images/plugins/plugin-editor-location.png)
 
-Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the plugin.](#testing)
+Then, click on "Edit Source", copy your code and config into the editor, and you're ready to [test the plugin.](#testing)
 
 ### Using a GitHub repository
 
@@ -72,7 +76,7 @@ If you wish to submit your plugin to the official repository, you need to conver
 
 [See submission instructions](#submitting-your-plugin) for how to submit the plugin to the PostHog Repository.
 
-## Testing
+## Testing your plugin
 
 For now, the best way to test plugins is to install them locally. 
 
@@ -83,7 +87,7 @@ For now, the best way to test plugins is to install them locally.
 
 This allows you to tweak your plugin and see that everything works fine.
 
-## Debugging
+## Debugging your plugin
 
 Plugins can make use of the JavaScript `console` for logging and debugging. 
 
@@ -91,21 +95,42 @@ These logs can be seen on the 'Logs' page of each plugin, which can be accessed 
 
 ## Publishing your plugin
 
-There are 4 ways to use plugins you build:
+There are four ways to use plugins you build:
 
 1. Publish the plugin to `npm` and install it with the url from `npmjs.com` 
 1. You can add it via its repository URL (e.g. GitHub/GitLab)
 1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)  
 
     This can be configured in 'Settings' -> 'Project Plugins'.
-1. Submit it to the official repository. [See below](#submitting-your-plugin) 
+1. Submit it to the official plugin library. [See below](#submitting-your-plugin). 
+
+Please note that PostHog Cloud users can only use plugins which we have checked and made available via the [official plugin library](/integrations).
+
+## Documentation
+
+If you wish to, you can contribute back to the PostHog community by submitting your plugin to the [official library](/integrations). This means everyone else can use your plugin, including users* on PostHog Cloud!
+
+Before you can submit a plugin to our [official integration library](/integrations), it's important to create some basic documentation by making a README.MD in your GitHub repo. 
+
+You can structure your documentation however you wish, but as a minimum each plugin submitted to PostHog should address the following points:
+
+- What does your plugin do?
+- What steps must users take to enable your plugin correctly?
+- What configuration options exist within your plugin?
+- What requirements does your plugin have?
+- Does your plugin need a specific version of PostHog?
 
 ## Submitting your plugin
 
-If you wish to, you can contribute back to the PostHog community by submitting your plugin to the [official Plugin Repository](/plugins). This means everyone else can use your plugin, too!
+Publishing a plugin enables you to use it on your own, self-hosted instance of PostHog. But you can also submit your plugin to our integration library so that it can be used by other users, including those on PostHog Cloud. 
 
 If you built a plugin inside the PostHog editor, first [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository)
 
 To submit, [email your plugin GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A)
 
 Once we get your email, we review the plugin to ensure it's secure, performant, and adheres to best practices. Then, we add it to our official repository and make it available for everyone to use.
+
+## Additional resources
+
+1. Check out [the developer reference docs](/docs/plugins/build/reference) for more information on special functions.
+2. Join the [#Contributing channel in our community Slack group](/slack) to ask questions, get support and collaborate with others.
