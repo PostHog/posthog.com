@@ -53,19 +53,24 @@ This plugin is admittedly useless since PostHog can already show you this inform
 
 ## Documentation guidelines
 
-To ensure that plugins are useful to others, we require that plugins submitted to [our integration library](/integrations) follow some guidelines. This helps us ensure we describe plugins correctly and give other users the information they need to use a plugin correctly. 
+To ensure that plugins are useful to others, we require that plugins [submitted to PostHog](#adding-your-plugin-to-posthog) provide some documentation as a README.MD added to the GitHub repo. This helps us ensure we describe plugins correctly and give other users the information they need to use a plugin correctly. 
 
-We encourage you to add more info, screenshots, etc., if you feel it is useful, but as a minimum we require that plugins submitted to [hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A) answer the follow questions. 
+We encourage you to add more info, screenshots, etc., if you feel it is useful, but as a minimum we require that plugins submitted to [hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A) answer the follow questions in their README.MD. 
 
 - What does your plugin do?
+- What situations is your plugin useful for?
 - What steps must users take to enable your plugin correctly?
 - What configuration options exist within your plugin?
 - What requirements does your plugin have?
 - Does your plugin need a specific version of PostHog?
 
+This information can be expressed in the README.MD in any way, including by taking the above questions as prompts. 
+
 ## Adding your plugin to PostHog
 
-Once you've built your own plugin, you can submit it our [integration library](/integrations). This means everyone else can use your plugin too, including users on PostHog Cloud. Here's how:
+Once you've built your own plugin, you can submit it our [integration library](/integrations).
+
+Here's how:
 
 1. If you built a plugin inside the PostHog editor, you first need to [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository). You can skip this step if you've already created it as a GitHub repo.
 
@@ -73,7 +78,7 @@ Once you've built your own plugin, you can submit it our [integration library](/
 
 3. Finally, [email your plugin GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A) so we can take a look.
 
-Once we get your email, we review the plugin to ensure it's secure, performant, and adheres to best practices. Then, we add it to our official repository and make it available for everyone to use.
+Once we get your email, we review the plugin to ensure it's secure, performant, and adheres to best practices. Then, we add it to our official repository and can optionally it available for everyone - including users on PostHog Cloud. 
 
 ## Next steps
 
