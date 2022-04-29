@@ -105,4 +105,11 @@ It's still good value compared to other enterprise SaaS tools, especially consid
 
 ## Going one step further... self-serve for Enterprise
 
-CONCLUSION HERE
+When I started writing this blog post even though we were being transparent about Enterprise pricing, you'd still have to contact us to actually sign up.  Here at PostHog we move pretty fast, and you can now sign up
+for an Enterprise license yourself in a fully automated manner.
+
+If having SAML integration, project permissions and a whole lot of set up and ongoing help from us is for you, you can sign up for your [Enterprise license key](https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU).
+
+Soon, you'll be able to upgrade yourself on both Cloud and Self-hosted too.
+
+If all this talk of self-serving and automation isn't for you then don't worry - you can still always [contact sales](/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#contact).
