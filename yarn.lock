@@ -3673,6 +3673,14 @@
     "@types/phoenix" "^1.5.4"
     websocket "^1.0.34"
 
+"@supabase/realtime-js@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@supabase/realtime-js/-/realtime-js-1.7.2.tgz#9670d02b8283d7780f4970660609077feab37296"
+  integrity sha512-DMUaFIKj7KszGtWTTQbhMmUzZf7UnwYqySsmY+G8HgYxvY3ZaVa+DZD0I6ofgr4OLNr0po/ODM2a4lf5m5GNBg==
+  dependencies:
+    "@types/phoenix" "^1.5.4"
+    websocket "^1.0.34"
+
 "@supabase/storage-js@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@supabase/storage-js/-/storage-js-1.7.0.tgz#42536489d8807d3feefe8fff9acff14efc0bad74"
@@ -3689,6 +3697,17 @@
     "@supabase/gotrue-js" "^1.22.13"
     "@supabase/postgrest-js" "^0.37.2"
     "@supabase/realtime-js" "^1.7.1"
+    "@supabase/storage-js" "^1.7.0"
+
+"@supabase/supabase-js@^1.31.2":
+  version "1.35.2"
+  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-1.35.2.tgz#f8a71f2ff0d88f7cd49596ee093319c6a3d97aa8"
+  integrity sha512-ItXfniG+GRFVYvYEoc7L0uXj6Zp8MZz7aQDCz9qbYdt6dUvIWxeu0cfcy/qkUcPJfpFzSYCOt8nsus0QJCjgbg==
+  dependencies:
+    "@supabase/functions-js" "^1.3.3"
+    "@supabase/gotrue-js" "^1.22.13"
+    "@supabase/postgrest-js" "^0.37.2"
+    "@supabase/realtime-js" "^1.7.2"
     "@supabase/storage-js" "^1.7.0"
 
 "@szmarczak/http-timer@^1.1.2":
@@ -4003,6 +4022,11 @@
   integrity sha512-c3mAZEuK0lvBp8tmuL74XRKn1+y2dcwOUpH7x4WrF6gk1GIgiluDRgMYQtw2OFcBvAJWlt6ASU3tSqxp0Uu0Aw==
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/js-cookie@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
+  integrity sha512-+oY0FDTO2GYKEV0YPvSshGq9t7YozVkgvXLty7zogQNuCxBhT9/3INX9Q7H1aRZ4SUDRXAKlJuA4EA5nTt7SNw==
 
 "@types/js-cookie@^2.2.6":
   version "2.2.7"
@@ -4828,7 +4852,7 @@
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
   integrity sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A==
 
-"@xobotyi/scrollbar-width@^1.9.5":
+"@xobotyi/scrollbar-width@1.9.5", "@xobotyi/scrollbar-width@^1.9.5":
   version "1.9.5"
   resolved "https://registry.yarnpkg.com/@xobotyi/scrollbar-width/-/scrollbar-width-1.9.5.tgz#80224a6919272f405b87913ca13b92929bdf3c4d"
   integrity sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==
@@ -13557,6 +13581,11 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+  integrity sha1-3QLqYIG9BWjcXQcxhEY5V7qe+ao=
+
 husky@^4.2.5:
   version "4.3.8"
   resolved "https://registry.yarnpkg.com/husky/-/husky-4.3.8.tgz#31144060be963fd6850e5cc8f019a1dfe194296d"
@@ -17499,7 +17528,7 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
   integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
 
-nano-css@^5.3.1:
+nano-css@^5.2.1, nano-css@^5.3.1:
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/nano-css/-/nano-css-5.3.4.tgz#40af6a83a76f84204f346e8ccaa9169cdae9167b"
   integrity sha512-wfcviJB6NOxDIDfr7RFn/GlaN7I/Bhe4d39ZRCJ3xvZX60LVe2qZ+rDqM49nm4YT81gAjzS+ZklhKP/Gnfnubg==
@@ -19596,7 +19625,7 @@ prettysize@^2.0.0:
   resolved "https://registry.yarnpkg.com/prettysize/-/prettysize-2.0.0.tgz#902c02480d865d9cc0813011c9feb4fa02ce6996"
   integrity sha512-VVtxR7sOh0VsG8o06Ttq5TrI1aiZKmC+ClSn4eBPaNf4SHr5lzbYW+kYGX3HocBL/MfpVrRfFZ9V3vCbLaiplg==
 
-prism-react-renderer@^1.2.0:
+prism-react-renderer@^1.2.0, prism-react-renderer@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.1.tgz#88fc9d0df6bed06ca2b9097421349f8c2f24e30d"
   integrity sha512-xUeDMEz074d0zc5y6rxiMp/dlC7C+5IDDlaEUlcBOFE2wddz7hz5PNupb087mPwTt7T9BrFmewObfCBuf/LKwQ==
@@ -19912,6 +19941,16 @@ query-string@^6.13.1, query-string@^6.13.8:
   version "6.14.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
   integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
+query-string@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.1.1.tgz#754620669db978625a90f635f12617c271a088e1"
+  integrity sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"
@@ -20785,7 +20824,7 @@ react-markdown@^5.0.3:
     unist-util-visit "^2.0.0"
     xtend "^4.0.1"
 
-react-markdown@~8.0.0:
+react-markdown@^8.0.2, react-markdown@~8.0.0:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-8.0.3.tgz#e8aba0d2f5a1b2124d476ee1fff9448a2f57e4b3"
   integrity sha512-We36SfqaKoVNpN1QqsZwWSv/OZt5J15LNgTLWynwAN5b265hrQrsjMtlRNwUvS+YyR3yDM8HpTNc4pK9H/Gc0A==
@@ -20915,6 +20954,14 @@ react-scrollspy@^3.4.3:
     classnames "^2.2.5"
     prop-types "^15.5.10"
 
+react-shadow@^19.0.3:
+  version "19.0.3"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-19.0.3.tgz#4fa00f10cb1dfe2edd296684ff9807eef440ebb7"
+  integrity sha512-B1DoQC/rOyOjDdpgC1bd7nfhrYEF9ukV/vz8HcKaFTNmUkUmFnQCp4NHgEPxDfe3HJ1Mdr5ePzu+ZYAOvX6bNg==
+  dependencies:
+    humps "^2.0.1"
+    react-use "^15.3.3"
+
 react-side-effect@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-1.2.0.tgz#0e940c78faba0c73b9b0eba9cd3dda8dfb7e7dae"
@@ -20954,6 +21001,11 @@ react-slick@~0.25.2:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-supabase@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-supabase/-/react-supabase-0.2.0.tgz#63b1083e18754b5a0e6946ef4701a0559ba713b5"
+  integrity sha512-dlAOhkFaWr8ZqHUkWflGvDpFUT69DbWE7+LxmH/a56ma/qS1EinsIKcxskPcPlaWO70QI7hxu9y8imp8qxDCLw==
+
 react-syntax-highlighter@^13.5.3:
   version "13.5.3"
   resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-13.5.3.tgz#9712850f883a3e19eb858cf93fad7bb357eea9c6"
@@ -20986,6 +21038,26 @@ react-universal-interface@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"
   integrity sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==
+
+react-use@^15.3.3:
+  version "15.3.8"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-15.3.8.tgz#ca839ac7fb3d696e5ccbeabbc8dadc2698969d30"
+  integrity sha512-GeGcrmGuUvZrY5wER3Lnph9DSYhZt5nEjped4eKDq8BRGr2CnLf9bDQWG9RFc7oCPphnscUUdOovzq0E5F2c6Q==
+  dependencies:
+    "@types/js-cookie" "2.2.6"
+    "@xobotyi/scrollbar-width" "1.9.5"
+    copy-to-clipboard "^3.2.0"
+    fast-deep-equal "^3.1.3"
+    fast-shallow-equal "^1.0.0"
+    js-cookie "^2.2.1"
+    nano-css "^5.2.1"
+    react-universal-interface "^0.6.2"
+    resize-observer-polyfill "^1.5.1"
+    screenfull "^5.0.0"
+    set-harmonic-interval "^1.0.1"
+    throttle-debounce "^2.1.0"
+    ts-easing "^0.2.0"
+    tslib "^2.0.0"
 
 react-use@^17.2.1:
   version "17.3.2"
@@ -22167,7 +22239,7 @@ schema-utils@^3.0.0, schema-utils@^3.1.0, schema-utils@^3.1.1:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-screenfull@^5.1.0:
+screenfull@^5.0.0, screenfull@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-5.2.0.tgz#6533d524d30621fc1283b9692146f3f13a93d1ba"
   integrity sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==
@@ -22917,6 +22989,23 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
+squeak-react@^1.12.8:
+  version "1.12.8"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-1.12.8.tgz#0b3cd5e8a83599378c8bccc26eacf7c9a96f4931"
+  integrity sha512-2MfATDxG+zO4V/WG+fCziivFW/pce+AlMzUuv3YmCtuM4IzuWUDwryyg1ACljeom+5SR25toE72qkBfXlmG3ww==
+  dependencies:
+    "@supabase/supabase-js" "^1.31.2"
+    formik "^2.2.9"
+    gravatar "^1.8.2"
+    prism-react-renderer "^1.3.1"
+    query-string "^7.1.1"
+    react-markdown "^8.0.2"
+    react-shadow "^19.0.3"
+    react-supabase "^0.2.0"
+    rehype-sanitize "^5.0.1"
+    styled-components "^5.3.3"
+    styled-reset "^4.3.4"
+
 sshpk@^1.7.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.17.0.tgz#578082d92d4fe612b13007496e543fa0fbcbe4c5"
@@ -23465,6 +23554,11 @@ styled-components@^5.3.3:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
+styled-reset@^4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.3.4.tgz#87b6f43caa3f83a5f9dc63773c13b8bb71efbe69"
+  integrity sha512-1UmkWmRwSPfzolKleyPjbZdBqkxSXv5ImqTP5WeSjWk0Z7IvEzsrYhrqinZfCg10eM1P6BEtFly8+puQJnN/0A==
+
 stylehacks@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/stylehacks/-/stylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5"
@@ -23906,6 +24000,11 @@ throat@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/throat/-/throat-6.0.1.tgz#d514fedad95740c12c2d7fc70ea863eb51ade375"
   integrity sha512-8hmiGIJMDlwjg7dlJ4yKGLK8EsYqKgPWbG3b4wjJddKNwc7N7Dpn08Df4szr/sZdMVeOstrdYSsqzX6BYbcB+w==
+
+throttle-debounce@^2.1.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-2.3.0.tgz#fd31865e66502071e411817e241465b3e9c372e2"
+  integrity sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==
 
 throttle-debounce@^3.0.1:
   version "3.0.1"

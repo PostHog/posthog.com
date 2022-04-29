@@ -1,26 +1,15 @@
 import React from 'react'
-import AskAQuestion from './AskAQuestion'
-import Question from './Question'
+import { Squeak } from 'squeak-react'
 
 export default function CommunityQuestions({ questions }) {
     return (
-        <>
-            {questions.length > 0 && (
-                <div className="my-10">
-                    <h3 className="mb-4">Community questions</h3>
-                    <div className="w-full grid gap-5">
-                        {questions.map((question, index) => {
-                            return (
-                                question.childrenReply &&
-                                question.childrenReply.length > 0 && (
-                                    <Question id={question.id} key={index} question={question.childrenReply} />
-                                )
-                            )
-                        })}
-                    </div>
-                </div>
-            )}
-            <AskAQuestion />
-        </>
+        <div className="max-w-[450px]">
+            <Squeak
+                apiHost="https://squeak.cloud"
+                apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+            />
+        </div>
     )
 }
