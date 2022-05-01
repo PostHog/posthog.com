@@ -69,7 +69,9 @@ That's it.
 
 > Support the projects that make PostHog possible by [heading to the PostHog repo and starring it today!](https://github.com/PostHog/posthog) We'll donate $5 for every star between now and the end of Cyber Monday!
 
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
+<ArrayCTA />
 
 
  

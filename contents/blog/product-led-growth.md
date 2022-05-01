@@ -194,3 +194,8 @@ Ultimately, despite not always being the longer route (see: Facebook), Produt-Le
 And that's what we're doing at PostHog. 
 
 Like what we're building? We'd appreciate a star on our [GitHub repo](https://github.com/PostHog/posthog).
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+

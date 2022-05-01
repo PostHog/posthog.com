@@ -134,3 +134,9 @@ As we've hit product market fit for our free _and_ paid products, we can't throw
 The team is bigger, we have way more customers, and the platform is bigger and more powerful. 
 
 The good news? We know we're selling something people want.
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

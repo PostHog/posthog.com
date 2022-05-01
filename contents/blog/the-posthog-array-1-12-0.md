@@ -102,3 +102,6 @@ We launched [a new version of our website!](https://posthog.com) Lottie and Ben 
 ### Open roles
 
 Full stack or growth engineers - [we want you!](https://posthog.com/careers). We have *just* filled the technical writer role too, you can already see the docs getting a makeover! More on that next time.
+
+<ArrayCTA />
+

@@ -34,4 +34,8 @@ Retention is a strong indicator of whether or not your users are getting frustra
 
 PostHog offers all the [tools](https://posthog.com/product) you need to identify issues with your retention and plan your dogfooding initiatives. [Deploy PostHog](https://app.posthog.com/signup) today.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

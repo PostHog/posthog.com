@@ -91,4 +91,6 @@ There are many tactics you can use to try and improve a flagging retention rate,
 
 There are a variety of product analytics tools available to help you explore your product data, understand your users and make such changes — but naturally we think PostHog is one of the best for improving retention. That’s because PostHog is an all-in-one product analytics platform, and gives you a wide breadth of tools, such as session recording, feature flags, retention tables and more. No other product analytics platform offers a similar breadth of features. 
 
-> Ready to find out more? Try [PostHog for free today](https://posthog.com/signup) or [schedule a demo with one of our engineers](https://posthog.com/book-a-demo) to see it in action and start improving your customer retention today. 
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

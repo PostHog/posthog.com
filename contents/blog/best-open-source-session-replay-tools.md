@@ -73,6 +73,8 @@ PostHog (self-hosted and cloud) is free up to 1 million captured events each mon
 
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
 
+<ArrayCTA />
+
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
@@ -196,4 +198,7 @@ Session recording is also included in Matomo’s cloud Business plan. Pricing is
 
 Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
 
-> Interested in trying PostHog? [Book a demo](/signup/self-host/deploy#demo) to learn more or [try it for free today.](/pricing)
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+

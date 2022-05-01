@@ -80,4 +80,6 @@ We often find customers prefer to start on PostHog Cloud and we make it easy to 
 
 If data privacy isn't a priority and you just need reliable analytics as quickly as possible, cloud-hosting is always a sensible option.
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

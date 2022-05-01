@@ -17,6 +17,30 @@ Plugins can be used for a wide variety of use cases, such as:
 
 > We have a comprehensive library of plugins which you can check out on our [Integrations](/integrations) page, including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce). 
 
+## Plugin chains
+
+Chains are an important part of how plugins work in PostHog. This is because most plugins act on _single events_ coming in to PostHog, meaning the output of one plugin will go into the next plugin - creating a chain. 
+
+The [GeoIP plugin](/integrations/geoip) is an example of a plugin which adds information to single events. Specifically, it adds geographical information based on the user IP address.
+
+By running a second plugin after the GeoIP plugin, we create a plugin chain. Here's an example of how this can look for an individual event when a second plugin (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP plugin. 
+
+![GeoIP Plugin Example](../../images/plugins/geoip-plugin-example.png)
+
+Plugin chains are important because they control what the event looks like _before_ it is stored. If you want to remove certain properties out of an event with the [Property Filter plugin](/integrations/property-filter), for example, it is best to have it run at the end of the plugin chain so that all unwanted properties can be filtered out before storage.
+
+## Integrations with external system
+
+Plugins on PostHog can also enable you to integrate with external systems, such as data warehouses or CRMs. 
+
+For example, a plugin can send an event to AWS S3 whenever it is seen in PostHog. Indeed, the [S3 plugin](/plugins/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
+
+Here's how this can look:
+
+![S3 Plugin Example](../../images/plugins/s3-plugin-example.png)
+
+As before, it is important to bear in mind how plugin chains work. If you wanted the event stored on S3 to contain GeoIP information, for example, then the GeoIP plugin must run _before_ the S3 plugin. 
+
 ## Enabling plugins
 
 Head to 'Project' -> 'Plugins' on the left sidebar in the PostHog app. Here you can install official PostHog plugins, install a custom plugin by pasting a link to its public repository, or write your own plugin directly in PostHog.
