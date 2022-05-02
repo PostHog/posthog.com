@@ -3,7 +3,7 @@ title: A primer on using GitHub at PostHog
 showTitle: true
 ---
 
-<blockquote><p>If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s <em>still</em> confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.</p><p>I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team on GitHub.</p><p>Have questions? Feel free to create an issue on GitHub - I explain how to do this later in the article!</p><p><em>- <a href="/handbook/company/team#cory-watilo-lead-designer">Cory Watilo</a>, Lead Designer</em></p></blockquote>
+<blockquote><p>If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s <em>still</em> confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.</p><p>I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.</p><p><em>- <a href="/handbook/company/team#cory-watilo-lead-designer">Cory Watilo</a>, Lead Designer</em></p><p>P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this <a href="/handbook/company/new-to-github#filing-an-issue">later in the article</a>!</p></blockquote>
 
 ## Key concepts
 
@@ -54,9 +54,9 @@ A great way to get realtime updates about what’s happening in GitHub is to ins
 
 Given the volume of issues and PRs, search will be your best friend. Unfortunately GitHub’s global search leaves something to be desired, so usually the easiest way to find something is to visit a repo, then clicking either [Issues](https://github.com/PostHog/posthog.com/issues) or [Pull requests](https://github.com/PostHog/posthog.com/pulls) (depending on what you're looking for) and searching from there. Type a few keywords, and if you know who authored the issue or PR, apply an author search. (You’ll see GitHub pre-populate search syntax (eg: `is:open is:issue author:corywatilo`), similar to how Gmail’s search works.
 
-## Creating an issue
+## Filing an issue
 
-Creating an issue is the primary method of getting a message in front of the team. Think of it like creating a ticket in a typical project management system. (We prefer issues over Slack messages because it's public and can sync with the rest of our code workflow. You can use Slack if you’d like to bump an issue to a group of people, but link to the issue (or PR) as GitHub acts as our source of truth.)
+Issue is the primary method of getting a message in front of the team. Think of it like creating a ticket in a typical project management system. (We prefer issues over Slack messages because it's public and can sync with the rest of our code workflow. You can use Slack if you’d like to bump an issue to a group of people, but link to the issue (or PR) as GitHub acts as our source of truth.)
 
 ### Issue templates
 
@@ -97,9 +97,25 @@ If you’re changing code to address an open issue, you can tell GitHub to autom
 
 ### Requesting a review
 
-Now that your PR is created, you can request a review (best practice) from someone relevant so they can make sure everything looks good and that they agree the change is ready to go live. They’ll be notified of your request. (By the way, you can filter to reviews that others request from you by going to your notifications, then choosing the [Review requested](https://github.com/notifications?query=reason%3Areview-requested) filter.
+Now that your PR is created, you can request a review (best practice) from someone relevant so they can make sure everything looks good and that they agree the change is ready to go live. They’ll be notified of your request. (By the way, you can filter to reviews that others request from you by going to your notifications, then choosing the [Review requested](https://github.com/notifications?query=reason%3Areview-requested) filter.)
 
-Once a team member approves your pull request, you (or they) can publish the changes by clicking the _Squash and merge_ button. It will take 10-20 minutes for your changes to appear on the site, but they'll go live automatically. At that point, you can send a link to your friends and family and tell them you're a coder now!
+### Previewing changes
+
+If you're making changes to posthog.com, you'll be able to see your changes on a "preview" version of the website. It takes 10-20 minutes for this preview to be ready.
+
+(Remember when I said we also use GitHub Actions? It basically runs some automated tests to make sure everything is spelled correctly and that nothing else broke.)
+
+Near the bottom of a pull request page, you'll see a box like this:
+
+![Checks](https://user-images.githubusercontent.com/154479/166337172-e9478e1d-a413-4a4b-93a3-04d151975904.png)
+
+(Note: This box only appears if you're a member of the PostHog GitHub org - it's not available to the public.)
+
+You can click the _Details_ link on the line that says `netlify/posthog/deploy-preview` to see the preview.
+
+### Merging changes
+
+Once a team member approves your pull request, you (or they) can publish the changes by clicking the _Squash and merge_ button. It will take another 10-20 minutes for your changes to appear on the site, but they'll go live automatically. At that point, you can send a link to your friends and family and tell them you're a coder now!
 
 ## Next steps
 
