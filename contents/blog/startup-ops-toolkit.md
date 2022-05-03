@@ -15,11 +15,11 @@ Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but w
 
 More importantly, what is the ops stack you can use to streamline and automate these?
 
-**Spoiler alert**: it’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
+**TL;DR:** It’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
 
-This article assumes you work at a US company, but most of it applies to any country. I won’t offer multiple options here - these are the tools that we have settled on using at PostHog after a bunch of trial and error (and tedious customer demos). 
+This guide assumes you work at a US company, but most of it applies to any country, and it t's split into three core sections: [hiring people](/blog/startup-ops-toolkit#hiring-people), [managing your money](/blog/startup-ops-toolkit#managing-your-money] and [keeping yourself organized](/blog/startup-ops-toolkit#keeping-yourself-organized).
 
-By recommending these, hopefully I can save you a bunch of time and precious $$$ trying to figure out how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
+I won’t offer multiple options here - these are the tools that we use at PostHog after a bunch of trial and error (and tedious customer demos). Hopefully, I can save you a bunch of time and precious $$$ trying to figure out how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
 > [Charles Cook](/handbook/company/team#charles-cook-operations-&-marketing) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs.
 
