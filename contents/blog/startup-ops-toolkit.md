@@ -1,6 +1,6 @@
 ---
 date: 2022-05-03
-title: The PostHog startup ops toolkit, 2022 edition
+title: The PostHog startup ops toolkit
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -12,8 +12,6 @@ categories: ["Startups", "Inside PostHog", "Guides"]
 ---
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?
-
-<iframe src="https://giphy.com/embed/j6wvxJLueHV10lATCF" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 More importantly, what is the ops stack you can use to streamline and automate these?
 
@@ -112,7 +110,7 @@ Now you've organized the two most important things (people, money), it's time to
 
 For **business planning** (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and non-ops people _really_ don’t like having to use another platform to track what they’re doing.
 
-> Time suck alert - when you're choosing your first tool, just pick the first one that you find that you like. Don't waste your time trying our 3-4 different tools and comparing them - it _really_ doesn't matter if you go for Greenhouse or Lever over Workable when you are a 20 person company. Save tool optimization for after the Series B. 
+> **Time suck alert:** When you're choosing your first tool, just pick the first one that you find that you like. Don't waste your time trying our 3-4 different tools and comparing them - it _really_ doesn't matter if you go for Greenhouse or Lever over Workable when you are a 20 person company. Save tool optimization for after the Series B. 
 
 ## What next?
 
