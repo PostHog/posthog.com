@@ -1,6 +1,6 @@
 ---
 date: 2022-03-01
-title: "Google Analytics was deemed illegal in some EU countries. We built a microsite in 48 hours to capitalize on the news."
+title: "Use of Google Analytics was deemed illegal in some EU countries. We built a microsite in 48 hours to capitalize on the news."
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -40,7 +40,7 @@ Within five days, we launched [IsGoogleAnalyticsIllegal.com](https://isgoogleana
 
 ## How we positioned the site
 
-We planned to launch this site on Hacker News, a site known for having an audience that really doesn’t like being sold to. If it doesn’t come across as authentic, be prepared to be torn to shreds.
+We decided to share the site on Hacker News, a site that highly values authenticity. If a post has even the slightest whiff of self-promotion, you can be prepared to be torn to shreds.
 
 Thankfully one of our marketing values is “No sneaky shit.” I can’t say it better than it’s already stated [in our Company Handbook](https://posthog.com/handbook/growth/marketing#no-sneaky-shit):
 
@@ -68,7 +68,7 @@ We also [published our codebase on GitHub](https://github.com/PostHog/isgooglean
 
 ### 2. Don’t take it too seriously
 
-When you hover over the map of countries where Google Analytics has been deemed illegal, you’ll see a photo of Ursula von der Leyen, the President of the European Commission, inferring her enthusiasm about the rulings.
+When you hover over the map of countries where Google Analytics has been deemed illegal, you’ll see a photo of Ursula von der Leyen, the President of the European Commission, indicating her enthusiasm about the rulings.
 
 There’s also a giant scrolling news-style ticker posing the question, “Is Google Analytics illegal?”
 
