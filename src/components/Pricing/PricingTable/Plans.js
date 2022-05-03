@@ -22,6 +22,7 @@ export const OpenSource = () => {
             </Section>
             <Section title="Pricing" className="mt-auto">
                 <Price>Free</Price>
+                <span className="text-base opacity-50 text-xs">&nbsp;</span>
             </Section>
             <TrackedCTA
                 to="/signup/self-host/deploy"
@@ -67,7 +68,7 @@ export const Scale = ({
                             </Price>
                             {!hideCalculator && (
                                 <Link
-                                    className="text-yellow font-bold"
+                                    className="text-red font-bold"
                                     event="select edition: clicked calculate scale price"
                                     onClick={() => setOpen(true)}
                                 >
@@ -75,6 +76,7 @@ export const Scale = ({
                                 </Link>
                             )}
                         </div>
+                        <span className="text-base opacity-50 text-xs">&nbsp;</span>
                     </Section>
                     <TrackedCTA
                         href="https://license.posthog.com/"
@@ -96,13 +98,7 @@ export const Scale = ({
     )
 }
 
-export const Enterprise = ({
-    setOpen,
-    hideActions,
-    hideBadge,
-    hideCalculator,
-    className = 'border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20',
-}) => {
+export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, className = '' }) => {
     return (
         <Plan
             title="Enterprise"
@@ -110,7 +106,7 @@ export const Enterprise = ({
             badge={!hideBadge && 'INCLUDES OPEN SOURCE & SCALE FEATURES'}
             className={className}
         >
-            <a href="/enterprise" className="inline-block mt-2">
+            <a href="/enterprise" className="inline-block mt-2 text-red font-bold">
                 See what comes with Enterprise
             </a>
 
@@ -130,7 +126,7 @@ export const Enterprise = ({
                             </Price>
                             {!hideCalculator && (
                                 <Link
-                                    className="text-yellow font-bold"
+                                    className="text-red font-bold"
                                     event="select edition: clicked calculate enterprise price"
                                     onClick={() => setOpen(true)}
                                 >
@@ -139,10 +135,13 @@ export const Enterprise = ({
                             )}
                         </div>
                         <div className="flex justify-between items-center">
+                            <span className="text-base opacity-50 text-xs">Annual discount available</span>
+
+                            {/*
                             <Price>
                                 ${Math.round(ENTERPRISE_MINIMUM_PRICING * 10.8).toLocaleString()}
-                                <span className="text-base opacity-50">/yr (10% discount)</span>
                             </Price>
+                            */}
                         </div>
                     </Section>
                     <TrackedCTA
@@ -187,7 +186,7 @@ export const Cloud = ({ setOpen, hideActions, hideBadge, hideCalculator, classNa
                             </Price>
                             {!hideCalculator && (
                                 <Link
-                                    className="text-yellow font-bold"
+                                    className="text-red font-bold"
                                     event="select edition: clicked calculate cloud price"
                                     onClick={() => setOpen(true)}
                                 >
@@ -211,7 +210,7 @@ export const CloudEnterprise = ({
     hideActions,
     hideBadge,
     hideCalculator,
-    className = 'border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20',
+    className = 'border-0 border-t lg:border-t-0 lg:border-l border-dashed border-gray-accent-light',
 }) => {
     return (
         <Plan
@@ -236,7 +235,7 @@ export const CloudEnterprise = ({
                             </Price>
                             {!hideCalculator && (
                                 <Link
-                                    className="text-yellow font-bold"
+                                    className="text-red font-bold"
                                     event="select edition: clicked calculate cloud enterprise price"
                                     onClick={() => setOpen(true)}
                                 >

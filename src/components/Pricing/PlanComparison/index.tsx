@@ -203,7 +203,7 @@ const sections = [
                 tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
-                name: 'Event & properties Taxonomy',
+                name: 'Event & properties taxonomy',
                 tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
