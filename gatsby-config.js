@@ -65,6 +65,7 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
+                    'gatsby-remark-mermaid',
                 ],
                 plugins: [`gatsby-remark-static-images`],
             },
@@ -96,6 +97,13 @@ module.exports = {
             options: {
                 name: `authors`,
                 path: `${__dirname}/src/data/authors.json`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `timeline`,
+                path: `${__dirname}/src/data/timeline.json`,
             },
         },
         {
@@ -205,6 +213,7 @@ module.exports = {
                             escapeEntities: {},
                         },
                     },
+                    'gatsby-remark-mermaid',
                 ],
             },
         },

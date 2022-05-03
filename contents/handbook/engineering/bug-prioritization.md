@@ -54,4 +54,3 @@ PostHog security issues include a priority (severity) level. This level is based
 |**security-P1**|High|7.0 - 8.9|Vulnerabilities that affect the security of the platform including the processes it supports.|Lateral authentication bypass, Stored XSS, some CSRF depending on impact|
 |**security-P2**|Medium|4.0 - 6.9|Vulnerabilities that affect multiple users, and require little or no user interaction to trigger.|Reflective XSS, Direct object reference, URL Redirect, some CSRF depending on impact|
 |**security-P3**|Low|0.1 - 3.9|Issues that affect singular users and require interaction or significant prerequisites (MitM) to trigger.|Common flaws, Debug information, Mixed Content|
-

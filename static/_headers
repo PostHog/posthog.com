@@ -1,2 +1,18 @@
 /*
   X-Frame-Options: SAMEORIGIN
+
+/brand/*
+  Cache-Control: public
+  Cache-Control: max-age=120
+
+/images/*
+  Cache-Control: public
+  Cache-Control: max-age=120
+
+/wp-content/*
+  Cache-Control: public
+  Cache-Control: max-age=120
+
+/static/*
+  Cache-Control: public
+  Cache-Control: max-age=120

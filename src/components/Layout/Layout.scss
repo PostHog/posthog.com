@@ -445,7 +445,7 @@ pre {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 2rem !important;
+    margin-bottom: 2rem;
     font-size: 0.85rem;
     line-height: 1.42;
     background: hsla(0, 0%, 0%, 0.04);
@@ -453,6 +453,11 @@ pre {
     overflow: auto;
     word-wrap: normal;
     padding: 1.45rem;
+
+    &.inline {
+        display: inline-block;
+        margin: 0;
+    }
 }
 table {
     margin-left: 0;
@@ -465,7 +470,6 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
-    width: 100%;
 }
 fieldset {
     margin-left: 0;
@@ -596,10 +600,8 @@ th {
     -moz-font-feature-settings: 'tnum';
     -ms-font-feature-settings: 'tnum';
     -webkit-font-feature-settings: 'tnum';
-    padding-left: 0.96667rem;
-    padding-right: 0.96667rem;
-    padding-top: 0.725rem;
-    padding-bottom: calc(0.725rem - 1px);
+    padding-top: 0.5rem;
+    padding-bottom: calc(0.5rem - 1px);
 }
 th:first-child,
 td:first-child {
@@ -1099,17 +1101,8 @@ a.middle {
     border: none;
 }
 
-table th,
-table td {
-    border: 1px solid;
-    border-color: #e8e8e8;
-    padding-left: 10px !important;
-    max-width: 200px !important;
-}
-
 #mc_embed_signup {
     clear: left;
-    font: 14px Helvetica, Arial, sans-serif;
     width: 100%;
 }
 

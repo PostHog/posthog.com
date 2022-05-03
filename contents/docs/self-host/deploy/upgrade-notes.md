@@ -198,9 +198,7 @@ As part of this work, the following chart inputs have changed:
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
-
 ### Upgrading from 14.x.x
-
 15.0.0 renamed the `prometheus-statsd-exporter` subchart alias from `statsd` to the default (`prometheus-statsd-exporter`).
 
 As part of this work, we've also:
@@ -209,3 +207,31 @@ As part of this work, we've also:
 * added the possibility to use an external `statsd` service by using the `externalStatsd` variable
 
 If you are using the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+### Upgrading from 15.x.x
+16.0.0 improves the configuration of Kafka.
+
+The built-in Kafka service type default is now `ClusterIP` from the previous `NodePort`. If you were relying on this setting you can override the new default by setting `kafka.service.type` to `NodePort`.
+
+As part of this work, we have also renamed a few chart inputs in order to reduce confusion and align our naming convention to the industry standards:
+
+* `kafka.url`, `kafka.host`, `kafka.port` have been consolidated into the `externalKafka.brokers` variable.
+
+If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+## Upgrading from 16.x.x
+17.0.0 upgrades the Kafka dependency chart from version `12.6.0` to `14.9.3` and upgrades Kafka to version `2.8.1`.
+
+The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/kafka#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding `kafka.image` or `kafka.provisioning`, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+Note: the Kafka pod will be reprovisioned as part of this upgrade and the ingestion pipeline will experience a brief downtime.
+
+## Upgrading from 17.x.x
+18.0.0 requires 3 [async migrations](https://posthog.com/docs/self-host/configure/async-migrations/overview) to be completed. 
+
+If you're on PostHog app version 1.33 head over to `/instance/async_migrations` and run first the three required migrations.
+
+If you're on a PostHog app version < 1.33:
+1. upgrade to chart version 16.x.x first (example: use `--version 16.1.0` in the `helm upgrade` command)
+2. run the async migrations at `/instance/async_migrations`
+3. continue the upgrade process as usual

@@ -19,8 +19,11 @@ By default, the chart installs the following dependencies:
 
 There is optional support for the following additional dependencies:
 
-- [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
+- [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
+- [grafana/loki](https://github.com/grafana/helm-charts/tree/main/charts/loki)
+- [grafana/promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail)
 - [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+- [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
 - [prometheus-community/prometheus-kafka-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter)
 - [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter)
@@ -42,9 +45,9 @@ The default configuration is geared towards minimizing costs. Here are example e
   </summary>
 
 ```yaml
-# Note that this is experimental, please let us know how this worked for you.
+# Note: those overrides are experimental, please let us know how this worked for you!
 
-# More storage space
+# Use larger storage for stateful services
 clickhouse:
   persistence:
     size: 60Gi
@@ -58,15 +61,22 @@ kafka:
     size: 20Gi
   logRetentionBytes: _15_000_000_000
 
-# Extra replicas for more loaded services
+# Add additional replicas for the stateless services
+events:
+  replicacount: 2
+
+pgbouncer:
+  replicacount: 2
+
+plugins:
+  replicacount: 2
+
 web:
   replicacount: 2
 
 worker:
   replicacount: 2
 
-plugins:
-  replicacount: 2
 ```
 
 </details>
@@ -77,9 +87,9 @@ plugins:
   </summary>
 
 ```yaml
-# Note that this is experimental, please let us know how this worked for you.
+# Note: those overrides are experimental, please let us know how this worked for you!
 
-# More storage space
+# Use larger storage for stateful services
 clickhouse:
   persistence:
     size: 200Gi
@@ -88,17 +98,21 @@ postgresql:
   persistence:
     size: 60Gi
 
-redis:
-  master:
-    size: 30Gi
-
 kafka:
   persistence:
     size: 30Gi
   logRetentionBytes: _22_000_000_000
 
-# Enable horizontal autoscaling for services
+# Enable horizontal pod autoscaling for stateless services
+events:
+  hpa:
+    enabled: true
+
 pgbouncer:
+  hpa:
+    enabled: true
+
+plugins:
   hpa:
     enabled: true
 
@@ -106,20 +120,35 @@ web:
   hpa:
     enabled: true
 
-beat:
-  hpa:
-    enabled: true
-
 worker:
   hpa:
     enabled: true
 
-plugins:
-  hpa:
-    enabled: true
 ```
 
 </details>
+
+#### Using dedicated nodes for services
+
+For the stateful services (ClickHouse, Kafka, Redis, PostgreSQL, Zookeeper), we suggest you to run them on nodes with dedicated CPU resources and fast drives (SSD/NVMe).
+
+In order to do so, after having labeled your Kubernetes nodes, you can assign pods to them using the following overrides:
+
+- ClickHouse: `clickhouse.nodeSelector`
+- Kafka: `kafka.nodeSelector`
+- Redis: `redis.master.nodeSelector`
+- PostgreSQL: `postgresql.master.nodeSelector`
+- Zookeeper: `zookeeper.nodeSelector`
+
+Example:
+
+```yaml
+clickhouse.nodeSelector:
+  diskType: ssd
+  nodeType: fast
+```
+
+For more fine grained options, `affinity` and `tolerations` overrides are also available for the majority of the stateful components. See the official Kubernetes [documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for more info.
 
 
 ### Email (SMTP service)
@@ -180,6 +209,11 @@ ClickHouse is the datastore system that does the bulk of heavy lifting with rega
 By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
 
 
+#### Use an external service
+To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
+
+Find out how to deploy PostHog using Altinity Cloud [in our deployment configuration docs](/docs/self-host/configure/using-altinity-cloud).
+
 #### Custom settings
 
 It's possible to pass custom settings to ClickHouse. This might be needed to e.g. set query time limits or increase max memory usable by clickhouse.
@@ -209,7 +243,7 @@ Note: to avoid issues when upgrading this chart, provide `postgresql.postgresqlP
 #### Use an external service
 To use an external PostgreSQL service, please set `postgresql.enabled` to `false` and then configure the `externalPostgresql` values.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
 ### [PgBouncer](https://www.pgbouncer.org/)
 PgBouncer is a lightweight connection pooler for PostgreSQL and it is installed by default as part of the chart. It is currently required in order for the installation to work (see [here](https://github.com/PostHog/charts-clickhouse/issues/280) for more info).
@@ -232,6 +266,22 @@ Redis is installed by default as part of the chart. You can customize all its se
 #### Use an external service
 To use an external Redis service, please set `redis.enabled` to `false` and then configure the `externalRedis` values.
 
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+```yaml
+redis:
+  enabled: false
+
+externalRedis:
+  host: "posthog.cache.us-east-1.amazonaws.com"
+  port: 6379
+```
+
+</details>
+
 #### Credentials
 By default, Redis doesn't use any password for authentication. If you want to configure it to use a password (recommended) see the options below.
 
@@ -249,7 +299,8 @@ By default, Redis doesn't use any password for authentication. If you want to co
     1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
     2. configure your `values.yaml` to reference the secret:
-      ```
+
+      ```yaml
       redis:
         enabled: true
         auth:
@@ -274,7 +325,11 @@ By default, Redis doesn't use any password for authentication. If you want to co
       1. create the secret by running: `kubectl -n posthog create secret generic "redis-existing-secret" --from-literal="redis-password=<YOUR_PASSWORD>"`
 
       1. configure your `values.yaml` to reference the secret:
-        ```
+
+        ```yaml
+        redis:
+          enable: false
+
         externalRedis:
           host: "<YOUR_REDIS_HOST>"
           port: <YOUR_REDIS_PORT>
@@ -284,19 +339,70 @@ By default, Redis doesn't use any password for authentication. If you want to co
 
 </details>
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
 
 ### [Kafka](../runbook/kafka/)
 
-By default, Kafka is installed as part of the chart. Kafka is used as a queue between the PostHog web application and PostHog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
+Kakfa is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `kafka` namespace.
 
-_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
+#### Use an external service
+To use an external Kafka service, please set `kafka.enabled` to `false` and then configure the `externalKafka` values.
+
+<details>
+  <summary>
+    <b>Example</b>
+  </summary>
+
+```yaml
+kafka:
+  enabled: false
+
+externalKafka:
+  brokers:
+    - "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-2.posthog.kafka.us-east-1.amazonaws.com:9094"
+    - "broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+```
+
+</details>
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
 
 ### [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
 This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
+
+
+### [Grafana](https://github.com/grafana/grafana)
+By default, `grafana` is not installed as part of the chart. If you want to enable it, please set `grafana.enabled` to `true`.
+
+The default settings provide a vanilla installation with an auto generated login. The username is `admin` and the auto-generated password can be fetched by running:
+
+```shell
+kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+```
+
+To configure the stack (like expose the service via an ingress resource, manage users, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [grafana chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) for full configuration options._
+
+
+### [Loki](https://github.com/grafana/loki)
+By default, `loki` is not installed as part of the chart. If you want to enable it, please set `loki.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [loki chart](https://github.com/grafana/helm-charts/tree/main/charts/loki) for full configuration options._
+
+
+### [Promtail](https://github.com/grafana/loki/tree/main/docs/sources/clients/promtail)
+By default, `promtail` is not installed as part of the chart. If you want to enable it, please set `promtail.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [promtail chart](https://github.com/grafana/helm-charts/tree/main/charts/promtail) for full configuration options._
 
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)

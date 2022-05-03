@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Product analytics", "Open source", "Guides"]
+categories: ["Product analytics", "Open source", "Guides", "Privacy"]
 ---
 
 The European Union's GDPR (General Data Protection Regulation) was created in 2016 to provide a framework which protects user privacy and shape how the data of users in the EU (and the UK) can be stored and shared. It applies to all businesses, non-profits and public organizations across the EU and the penalties for breaking it are severe -- up to 4% of your yearly revenue. 
@@ -137,8 +137,9 @@ However, recent GDPR rulings have punished Google Analytics users for transmitti
 
 Google offers plenty of [information about data privacy settings](https://support.google.com/analytics/topic/2919631?hl=en&ref_topic=1008008) to help users, but if you’re concerned about the risks of using Google Analytics then the safest solution is to use an analytics platform which keeps data on your own infrastructure. This ensures you can collect user data and it never has to be transmitted to other countries or shared with third parties. 
 
-> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure and is fully GDPR compliant.
->
-> [Try PostHog for free](https://posthog.com/signup) today or [book a demo](https://posthog.com/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+
  
 

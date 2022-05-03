@@ -64,16 +64,12 @@
                                         "url": "/docs/self-host/architecture"
                                     },
                                     {
-                                        "title": "Migrate from Postgres to ClickHouse",
-                                        "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
-                                    },
-                                    {
                                         "title": "Configuring PostHog",
                                         "url": "/docs/self-host#configure"
                                     },
                                     {
-                                        "title": "Self-hosted vs. PostHog Cloud",
-                                        "url": "/pricing#self-host-vs-cloud"
+                                        "title": "Migrate from Postgres to ClickHouse",
+                                        "url": "/docs/self-host/migrate-from-postgres-to-clickhouse"
                                     },
                                     {
                                         "title": "Hosting costs",
@@ -82,6 +78,10 @@
                                     {
                                         "title": "Upgrade guide",
                                         "url": "/docs/self-host/configure/upgrading-posthog"
+                                    },
+                                    {
+                                        "title": "Get help with hosting or setup",
+                                        "url": "/marketplace"
                                     }
                                 ]
                             }
@@ -168,6 +168,10 @@
                             {
                                 "title": "Build your own plugin",
                                 "url": "/docs/plugins/build"
+                            },
+                            {
+                                "title": "API documentation",
+                                "url": "/docs/api"
                             }
                         ]
                     },
@@ -214,6 +218,11 @@
                             {
                                 "title": "Features",
                                 "items": [
+                                    {
+                                        "title": "Data Management",
+                                        "url": "/docs/user-guides/data-management",
+                                        "badge": "beta"
+                                    },
                                     {
                                         "title": "Experimentation",
                                         "url": "/docs/user-guides/experimentation",
@@ -294,7 +303,7 @@
                 "items": [
                     {
                         "title": "Our story",
-                        "description": "<p>PostHog was founded in 2020. We have <strong>5,500 customers</strong>, and our team of 26 is fully distributed around the world.</p>",
+                        "description": "<p>PostHog was founded in 2020. We have <strong>9,000 customers</strong>, and our team of 30 is fully distributed around the world.</p>",
                         "link": {
                             "title": "Read our story",
                             "url": "/handbook/company/story"

@@ -28,6 +28,7 @@ app.view('submit-button', async ({ ack, view, client }) => {
         name: null,
         email: null,
         question: null,
+        subject: null,
     }
 
     Object.keys(values).forEach((valueKey) => {
@@ -62,6 +63,15 @@ app.view('submit-button', async ({ ack, view, client }) => {
                 block_id: 'name_and_slug',
             },
             {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: body.subject,
+                    emoji: true,
+                },
+                block_id: 'subject',
+            },
+            {
                 type: 'section',
                 block_id: 'question',
                 text: {
@@ -92,6 +102,7 @@ app.view('submit-button', async ({ ack, view, client }) => {
                             name: body.name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                             avatar,
                         }),
                         action_id: 'publish-button',
@@ -126,9 +137,20 @@ app.view('submit-button', async ({ ack, view, client }) => {
                             name: body.name,
                             slug: body.slug,
                             email: body.email,
+                            subject: body.subject,
                             timestamp: body.timestamp,
                         }),
                         action_id: 'edit-question-button',
+                    },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Open page',
+                            emoji: true,
+                        },
+                        url: `https://posthog.com${body.slug}`,
+                        action_id: 'open-page-button',
                     },
                 ],
             },
@@ -141,7 +163,7 @@ app.view('submit-button', async ({ ack, view, client }) => {
 app.action('edit-question-button', async ({ ack, client, body, logger }) => {
     await ack()
     try {
-        const { question, name, email, slug } = JSON.parse(body.actions[0].value)
+        const { question, name, email, slug, subject } = JSON.parse(body.actions[0].value)
         const result = await client.views.open({
             trigger_id: body.trigger_id,
             view: {
@@ -174,6 +196,19 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
                         label: {
                             type: 'plain_text',
                             text: 'Slug',
+                            emoji: true,
+                        },
+                    },
+                    {
+                        type: 'input',
+                        element: {
+                            type: 'plain_text_input',
+                            action_id: 'subject',
+                            initial_value: subject,
+                        },
+                        label: {
+                            type: 'plain_text',
+                            text: 'Subject',
                             emoji: true,
                         },
                     },
@@ -221,7 +256,6 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
                 ],
             },
         })
-        logger.info(result)
     } catch (error) {
         logger.error(error)
     }
@@ -230,7 +264,7 @@ app.action('edit-question-button', async ({ ack, client, body, logger }) => {
 app.action('unpublish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { name, slug, question, avatar, email } = JSON.parse(actions[0].value)
+    const { name, slug, question, avatar, email, subject } = JSON.parse(actions[0].value)
     const messageUpdate = {
         channel: process.env.SLACK_QUESTION_CHANNEL,
         ts: message.ts,
@@ -245,6 +279,15 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                     emoji: true,
                 },
                 block_id: 'name_and_slug',
+            },
+            {
+                type: 'header',
+                text: {
+                    type: 'plain_text',
+                    text: subject,
+                    emoji: true,
+                },
+                block_id: 'subject',
             },
             {
                 type: 'section',
@@ -314,6 +357,16 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
                         }),
                         action_id: 'edit-question-button',
                     },
+                    {
+                        type: 'button',
+                        text: {
+                            type: 'plain_text',
+                            text: 'Open page',
+                            emoji: true,
+                        },
+                        url: `https://posthog.com${slug}`,
+                        action_id: 'open-page-button',
+                    },
                 ],
             },
         ],
@@ -325,7 +378,7 @@ app.action('unpublish-button', async ({ ack, client, body }) => {
 app.action('publish-button', async ({ ack, client, body }) => {
     await ack()
     const { message, actions } = body
-    const { question, name, slug, email, avatar } = JSON.parse(actions[0].value)
+    const { question, name, slug, email, avatar, subject } = JSON.parse(actions[0].value)
     const replies = await client.conversations.replies({
         ts: message.ts,
         channel: process.env.SLACK_QUESTION_CHANNEL,
@@ -369,6 +422,15 @@ app.action('publish-button', async ({ ack, client, body }) => {
                     block_id: 'name_and_slug',
                 },
                 {
+                    type: 'header',
+                    text: {
+                        type: 'plain_text',
+                        text: subject,
+                        emoji: true,
+                    },
+                    block_id: 'subject',
+                },
+                {
                     type: 'section',
                     block_id: 'question',
                     text: {
@@ -408,6 +470,7 @@ app.action('publish-button', async ({ ack, client, body }) => {
                                 name: name,
                                 slug: slug,
                                 email: email,
+                                subject: subject,
                                 avatar,
                             }),
                             action_id: 'unpublish-button',
@@ -430,12 +493,26 @@ app.action('publish-button', async ({ ack, client, body }) => {
                                 },
                             },
                         },
+                        {
+                            type: 'button',
+                            text: {
+                                type: 'plain_text',
+                                text: 'Open page',
+                                emoji: true,
+                            },
+                            url: `https://posthog.com${slug}`,
+                            action_id: 'open-page-button',
+                        },
                     ],
                 },
             ],
         }
         client.chat.update(messageUpdate)
     }
+})
+
+app.action('open-page-button', async ({ ack }) => {
+    await ack()
 })
 
 exports.handler = async (event, context, callback) => {

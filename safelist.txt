@@ -28,6 +28,8 @@ w-full
 w-56
 w-64
 w-72
+w-2/12
+w-4/12
 opacity-40
 opacity-1
 grid-rows-1
@@ -68,3 +70,5 @@ space-x-reverse
 lg:ml-6
 text-primary
 text-primary-dark
+text-green
+sm:hidden

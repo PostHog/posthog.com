@@ -2,6 +2,8 @@ import React from 'react'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 export const SCALE_MINIMUM_PRICING = 0
 export const SCALE_MINIMUM_EVENTS = 0
+export const ENTERPRISE_MINIMUM_PRICING = 4500
+export const CLOUD_ENTERPRISE_MINIMUM_PRICING = 3000
 
 export const features = {
     Platform: [
@@ -22,7 +24,7 @@ export const features = {
     'Advanced features': [
         { title: 'Correlation Analysis' },
         { title: 'Group Analytics' },
-        { title: 'Multivariate Testing' },
+        { title: 'Experimentation Suite' },
         { title: 'Multiple projects' },
     ],
     Collaboration: [

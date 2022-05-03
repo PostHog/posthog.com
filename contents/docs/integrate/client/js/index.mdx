@@ -280,8 +280,8 @@ In order for PostHog to work optimally, we require storing a small amount of inf
 
 By default we store all this information in a `cookie`, however due to the size limitation of cookies, you may run into some issues (e.g. if you have a lot of feature flags). You can use any of the following options to store this information by setting the `persistence` parameter in PostHog's config.
 
--   `localstorage+cookie`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
--   `localstorage`. Everything is stored in localStorage.
+-   `localStorage+cookie`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
+-   `localStorage`. Everything is stored in localStorage.
 -   `cookie`. Everything is stored in a cookie.
 -   `memory`. Stores in page memory, which means data is only persisted for the duration of the page view.
 

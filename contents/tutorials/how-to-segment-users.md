@@ -4,6 +4,9 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/how-to-segment-users-banner.png
 featuredTutorial: true
+date: 2022-02-14
+author: ['marcus-hyett']
+topics: ['trends']
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕

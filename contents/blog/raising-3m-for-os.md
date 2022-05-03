@@ -130,7 +130,7 @@ Do a really good job of that and you'll get random emails from folks at bigger c
 * January 4th 2020: We started the YC W20 batch, and that meant receiving our first $150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
 * January 23rd 2020: We wrote the first line of code for PostHog
 * February 14th: We did a mini launch for a few YC companies to get early feedback
-* February 21st: PostHog [launched on HackerNews](https://news.ycombinator.com/item?id=22376732)
+* February 21st: PostHog [launched on Hacker News](https://news.ycombinator.com/item?id=22376732)
 * March 6th: Day 1 of fundraising and first cheque ($10K!)
 * March 12th: Left San Francisco due to covid and started working fully remote from the UK. Everything seemed to slow down at this point for 3 weeks. Our bank balance was $205K this day.
 * March 16th: Demo day. 
@@ -326,8 +326,10 @@ If you have the luxury of choosing, which happens towards the end of your round 
 
 More hand holding is probably better if you have less experience or you need someone to push you. We were worried that some of the more supportive investors were so supportive we'd struggle to realize that the company/project's success or failure ultimately is our responsibility - not theirs. We are the ones speaking to users every day.
 
-## Thanks for reading
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-We hope this post was useful. If you would like to follow our journey, add yourself to [our newsletter](/newsletter).
+<NewsletterForm
+compact
+/>
 
-Better yet, [use PostHog](/) yourself (free), or [star our repo](https://github.com/posthog/posthog).
+

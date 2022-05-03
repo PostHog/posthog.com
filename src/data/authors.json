@@ -151,5 +151,37 @@
         "image": "../../static/images/authors/neil-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/neilkakkar"
+    },
+    {
+        "handle": "rick-marron",
+        "name": "Rick Marron",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/rick-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/Rick_Marron"
+    },
+    {
+        "handle": "alex-kim",
+        "name": "Alex Kim",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/alex-kim-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/alex-g-kim/"
+    },
+    {
+        "handle": "harry-waye",
+        "name": "Harry Waye",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/harry-waye-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/harrywaye"
+    },
+    {
+        "handle": "guido-iaquinti",
+        "name": "Guido Iaquinti",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/guido-iaquinti-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/guidoiaquinti"
     }
 ]

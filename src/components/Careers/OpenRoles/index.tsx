@@ -14,12 +14,25 @@ export const OpenRoles = () => {
                         <p>We take exceptional people when they come along - and we really mean that!</p>
                         <p>
                             <strong>Don’t see a specific role listed?</strong> That doesn't mean we won't have a spot
-                            for you.
+                            for you.{' '}
+                            <a href="mailto:careers@posthog.com?subject=Speculative application!&body=Hi PostHog! Here's a link to my personal website, LinkedIn, CV, or equivalent.">
+                                Send us a speculative application!
+                            </a>
+                            <a href=""></a>
                         </p>
                         <p className="mt-2">
                             We take applications seriously - you won't just end up in a candidate database. We make
                             quick decisions, and if the timing isn’t quite right, we’ll do our best to provide insight
                             into a better time to apply.
+                        </p>
+                        <p>
+                            Regardless of the timing of your application or interest in PostHog, you can go ahead and
+                            contribute to one of our{' '}
+                            <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
+                                good first issues
+                            </a>{' '}
+                            or build a plugin as part of our{' '}
+                            <a href="https://github.com/PostHog/posthog/issues/8437">plugin bounty</a>.
                         </p>
                         <p>
                             <em>

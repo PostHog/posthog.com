@@ -36,22 +36,30 @@ We make things public by default because [transparency](/handbook/company/cultur
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
 
 
-We have two repos to centralize and document all internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live here, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal repos, and for newcomers to have all information they might need readily available.
+We have two repos to centralize and document private internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live in these repos or (better) in this Handbook, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal repos, and for newcomers to have all information they might need readily available.
 
 ### Company Internal
 Repository can be found in https://github.com/PostHog/company-internal
 
-Documents any company-wide internal information, in addition to any information related to People, Ops, Legal & Compliance, Finance or Strategy.
+Documents any company-wide information that can't be share publicly within People, Ops, Legal, Finance or Strategy.
 
 **Examples of information that should go here:**
-- ✅ Hiring plans and discussions before we post a job ad
+- ✅ Hiring plans and discussions _before_ we post a job ad
 - ✅ People discussions, e.g. benefits, pensions, share options, org structure
 - ✅ Onboarding/offboarding checklists
-- ✅ Non-engineering team sprint planning
-- ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
+- ✅ Non-engineering team sprint planning (as these will often be a mix of public and private tasks and we don't want to restrict people)
+- ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
+- ✅ [Sometimes] Discussions about replacing or adding tools, services, and systems that we use
+
+For company-related issues that _can_ be discussed publicly, these should go in the `meta` repo which can be found in https://github.com/PostHog/meta/
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...). Things like:
+  - Some marketing campaigns where it doesn't matter if our competitors see it; retros after campaigns
+  - Offsite planning and retros
+  - Discussions about future positioning and strategy that will end up in the Handbook anyway
+  - Discussions about tools where there isn't a security risk and it interfaces with our customers (e.g. marketing, customer support)
+  - Generally anything that will end up in the Handbook anyway, including culture and values discussions
 - ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
 - ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
 
@@ -80,8 +88,8 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 - ✅ Billing or pricing-related discussions that is not yet public.
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
-- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
+- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...).
+- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo if private or `meta` if public. 
 - ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 
 ## Written communication
@@ -159,6 +167,10 @@ Never use a Google Doc / Slides for something non-confidential that has to end u
 We mainly use Google Docs to capture internal information like meeting notes or to share company updates and metrics. We always make the doc accessible so you can comment and ask questions.
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
+
+When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), talk to Cory.
+
+James (H) and Cory are admins on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
 
 ### Email
 
