@@ -17,7 +17,7 @@ More importantly, what is the ops stack you can use to streamline and automate t
 
 **TL;DR:** It’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
 
-This guide assumes you work at a US company, but most of it applies to any country, and it's split into three core sections: [hiring people](/blog/startup-ops-toolkit#hiring-people), [managing your money](/blog/startup-ops-toolkit#managing-your-money] and [keeping yourself organized](/blog/startup-ops-toolkit#keeping-yourself-organized).
+This guide assumes you work at a US company, but most of it applies to any country, and it's split into three core sections: [hiring people](/blog/startup-ops-toolkit#1-hiring-people), [managing your money](/blog/startup-ops-toolkit#2-managing-your-money) and [keeping yourself organized](/blog/startup-ops-toolkit#3-keeping-yourself-organized).
 
 I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after two years or so of trial and error, and more than a few tedious customer demos.
 
@@ -86,8 +86,6 @@ Be responsive when it comes to re-forecasting - don't just rigidly stick to an a
 
 ### Where to put the money
 
-<iframe src="https://giphy.com/embed/3o6ZtpoNGDS4cZ8GWY" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
 Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly easy to manage virtual credit cards, and the built-in expense management negates the need for something like Expensify. It doesn’t charge you anything.
 
 In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
@@ -95,6 +93,8 @@ In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank th
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
 
 ## 3. Keeping yourself organized
+
+<iframe src="https://giphy.com/embed/xT1XGOGdyDrL2BTfxK" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 Now you've organized the two most important things (people, money), it's time to get the rest of your company running smoothly. Defining ops as ‘anything that is not building the product or talking to customers’, here is the list of other things you'll need to think about:
 
