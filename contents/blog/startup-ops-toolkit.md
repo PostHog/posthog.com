@@ -1,6 +1,6 @@
 ---
 date: 2022-05-03
-title: The PostHog startup ops toolkit
+title: The PostHog ops toolkit for early-stage startups
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,9 +17,13 @@ More importantly, what is the ops stack you can use to streamline and automate t
 
 **TL;DR:** It’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
 
-This guide assumes you work at a US company, but most of it applies to any country, and it t's split into three core sections: [hiring people](/blog/startup-ops-toolkit#hiring-people), [managing your money](/blog/startup-ops-toolkit#managing-your-money] and [keeping yourself organized](/blog/startup-ops-toolkit#keeping-yourself-organized).
+This guide assumes you work at a US company, but most of it applies to any country, and it's split into three core sections: [hiring people](/blog/startup-ops-toolkit#hiring-people), [managing your money](/blog/startup-ops-toolkit#managing-your-money] and [keeping yourself organized](/blog/startup-ops-toolkit#keeping-yourself-organized).
 
-I won’t offer multiple options here - these are the tools that we use at PostHog after a bunch of trial and error (and tedious customer demos). Hopefully, I can save you a bunch of time and precious $$$ trying to figure out how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
+I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after two years or so of trial and error, and more than a few tedious customer demos.
+
+So, read on if you want to learn how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
+
+I recommend you do. Obviously.
 
 > [Charles Cook](/handbook/company/team#charles-cook-operations-&-marketing) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs.
 
@@ -123,3 +127,7 @@ For **business planning** (setting OKRs etc.), I’m yet to find a tool that gen
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype in the metaverse.
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
+
+> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
