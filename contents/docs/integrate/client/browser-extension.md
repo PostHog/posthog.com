@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-# Product analytics for browser extensions
-
 Do you have a Firefox or Chrome browser plugin with a user interface and want to understand how it's being used? PostHog is the perfect way to do just that.
 
 ## Setup for Firefox & Chrome plugins
