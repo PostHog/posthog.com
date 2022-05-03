@@ -34,7 +34,7 @@ const features = [
         title: 'Diagnose causes with Correlation Analysis',
         description: `Correlation Analysis automatically suggests which events or user properties lead to success or failure using transparent, testable, statistical models.`,
         cta: {
-            title: 'Learn more about diagnosing causes',
+            title: 'Learn more about Correlation Analysis',
             url: '/product/correlation-analysis',
         },
     },
