@@ -117,5 +117,3 @@ For **business planning** (setting OKRs etc.), I’m yet to find a tool that gen
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype in the metaverse.
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to <a target="_blank" rel="noopener noreferrer nofollow" href="https://posthog.com/handbook">copy ours</a>. 
-
-<iframe src="https://giphy.com/embed/26DNdV3b6dqn1jzR6" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
