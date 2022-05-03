@@ -29,7 +29,7 @@ By recommending these, hopefully I can save you a bunch of time and precious $$$
 
 You’re going to be hiring people either as permanent employees or as contractors. You will need the appropriate contract, and a system for automatically paying them.
 
-<iframe src="https://giphy.com/embed/l0G18S6f5RfkI8JNK" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
+<iframe src="https://giphy.com/embed/l0G18S6f5RfkI8JNK" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ### Permanent employees (US)
 
