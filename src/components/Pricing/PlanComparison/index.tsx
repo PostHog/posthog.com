@@ -81,7 +81,7 @@ const sections = [
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: false, 'Cloud Enterprise': false },
+                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
             },
             {
                 name: 'Initial setup',
