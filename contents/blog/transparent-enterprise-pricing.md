@@ -9,10 +9,26 @@ categories: ["Inside PostHog"]
 author: ["simon-fisher"]
 ---
 
-[Contact sales](/signup/self-host/get-in-touch?plan=enterprise#contact).  That's what you're usually encouraged to do when you're trying to figure out how much it's going to cost you
-to subscribe to the premium variant of a product.  Then, if you're deemed worthy enough for a sales rep to call you, it's
-highly likely that you won't find out the pricing until you've answered a _lot_ of questions.  And maybe seen a demo.
-And perhaps your own hands-on evaluation.  And also introduced your bosses boss.  Surely there has to be a better way.
+[Contact sales](/signup/self-host/get-in-touch?plan=enterprise#contact). That's the usual answer when you're trying to figure out how much a premium, or enterprise, product tier costs. 
+
+Next, if you're deemed worthy enough for a sales rep to call you, it's highly likely you won't find out the pricing until you've answered a _lot_ of questions.
+
+And maybe seen a demo.
+
+And perhaps your own hands-on evaluation.  
+
+And also introduced your bosses' boss. 
+
+And consulted the finance deparment.
+
+And don't forget the legal department.
+
+And "hey, would you like to join our webinar?"
+
+This is everything we hate about modern SaaS companies, so we found a better way.
+
+We introduced transparant enterprise pricing.
+
 
 ##  Why did we implement transparent pricing?
 
