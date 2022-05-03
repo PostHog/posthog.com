@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/discord-tutorial-banner.png
 featuredTutorial: false
-date: 2022-03-31
+date: 2022-05-04
 author: ['joe-martin']
 topics: ['zapier', 'discord']
 ---
