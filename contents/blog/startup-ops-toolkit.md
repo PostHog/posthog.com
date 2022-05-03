@@ -119,7 +119,3 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to <a target="_blank" rel="noopener noreferrer nofollow" href="https://posthog.com/handbook">copy ours</a>. 
 
 <iframe src="https://giphy.com/embed/26DNdV3b6dqn1jzR6" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
