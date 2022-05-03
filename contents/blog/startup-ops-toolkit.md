@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["charles-cook"]
-featuredImage: ..../images/blog/posthog-release-notes-blog.png
+featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 categories: ["Startups", "Inside PostHog", "Guides"]
 ---
