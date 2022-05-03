@@ -43,7 +43,7 @@ I like <a target="_blank" rel="noopener noreferrer nofollow" href="https://gusto
 
 ### Permanent employees (non-US)
 
-Assuming you don't have a legal entity in every country, you'll need to use an Employer of Record service to hire permanent employees internationally. Deel also offer this service - it might _feel_ steep at $599/month per employee, but it's honestly worth it (and they undercut other providers last time I checked). The process is pretty straightforward and self-serve. Couple of things to note:
+Assuming you don't have a legal entity in every country, you'll need to use an Employer of Record service to hire permanent employees internationally. Deel also offers this service – it might _feel_ steep at $599/month per employee, but it's honestly worth it (and it undercuts other providers last time I checked). The process is pretty straightforward and self-serve, but here are a few things to note:
 - EOR means that technically you contract with Deel and then the employee has a contract with Deel's employer of record service. 
 - Some countries limit how long you can employ someone in this way (e.g. Germany). After that, you may need to set up a legal entity anyway.
 - You'll need to pay a deposit up front of the first month's salary.
