@@ -21,9 +21,9 @@ This article assumes you work at a US company, but most of it applies to any cou
 
 By recommending these, hopefully I can save you a bunch of time and precious $$$ trying to figure out how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
-> [Charles Cook](/handbook/company/team#charles-cook-operations-&-marketing) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs. He's half British, half Lebanese, and grew up in various countries across the Middle East, Africa and Europe. He lives in the UK with his wife Steph and 2-year old son Remy. 
+> [Charles Cook](/handbook/company/team#charles-cook-operations-&-marketing) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs.
 
-## Hiring people
+## 1. Hiring people
 
 You’re going to be hiring people either as permanent employees or as contractors. You will need the appropriate contract, and a system for automatically paying them.
 
@@ -56,7 +56,7 @@ The process is pretty straightforward and self-serve, but here are a few things 
 
 Again, Deel will handle all things payroll. 
 
-## Managing your money
+## 2. Managing your money
 
 There are basically two sides to finance - accounting and budgeting. You know this already from YC’s [Startup School](https://www.startupschool.org/), of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
 
@@ -80,7 +80,7 @@ Pry connects seamlessly with your accounting software (Quickbooks, Xero) as well
 
 Be responsive when it comes to re-forecasting - don't just rigidly stick to an arbitrary annual or quarterly process because it's 'standard practice'. We review budget vs. actuals monthly, and then reforecast as and when it feels appropriate. 
 
-## Where to put the money
+### Where to put the money
 
 <iframe src="https://giphy.com/embed/3o6ZtpoNGDS4cZ8GWY" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
@@ -90,7 +90,7 @@ In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank th
 
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
 
-## Keeping yourself organized
+## 3. Keeping yourself organized
 
 Now you've organized the two most important things (people, money), it's time to get the rest of your company running smoothly. Defining ops as ‘anything that is not building the product or talking to customers’, here is the list of other things you'll need to think about:
 
