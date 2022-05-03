@@ -98,5 +98,7 @@ This is because, in addition to tracking the metrics above, PostHog enables you 
 
 Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.[Try PostHog for free today](https://posthog.com/signup) or [schedule a demo](https://posthog.com/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
 

@@ -108,4 +108,7 @@ You couldn't, for example, use Google Analytics to track a North Star metric suc
 
 Ultimately, PostHog is a better fit for tracking both high-level and detailed product metrics, while Product and Engineering teams routinely find that [Google Analytics doesn't offer the depth of insight they need](https://posthog.com/customers/mention-me). 
 
-> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. [Try PostHog for free today](https://posthog.com/signup) or [book a demo](https://posthog.com/book-a-demo) to learn more.
+> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL.
+
+<ArrayCTA />
+

@@ -86,4 +86,8 @@ Today, Neil Kakkar shares three things we've learned about running effective A/B
 
 "So good, I wrote a 1,000 word Twitter thread about it" - A Twitter user, probably
 
-> Follow us on [Twitter](https://twitter.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog) or [join our Slack community](/slack/) to keep up-to-date on the launch week. 
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

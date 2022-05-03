@@ -84,3 +84,5 @@ Overall, we're feeling pretty pleased with ourselves this week - the level of po
 Our hunt for a superb devops person has come to a wonderful conclusion… we are delighted to say that [James G](https://twitter.com/FuzionTech) will be joining us initially as a contractor for the next few months then as a full time employee after that. He has a ton of experience of enormous user bases and already has made our funnels [an order of magnitude faster](https://github.com/PostHog/posthog/pull/751). Tim and James G are busy scoping a [deployment master plan](https://github.com/PostHog/posthog/issues/799), which will be a key part of his focus.
 
 On that note, if you are reading and are using PostHog at scale, or having any issues with load times, please [let us know](/support) - this is a real focus so more folks can use the platform without any issues.
+
+<ArrayCTA />

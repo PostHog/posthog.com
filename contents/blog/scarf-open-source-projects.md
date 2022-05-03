@@ -51,3 +51,7 @@ In order to ensure the long-term success of open-source by large businesses, we 
 At [Scarf](https://about.scarf.sh/), we’ve been hard at work trying to help open-source developers build these connections and nurture them so that all parties can benefit. [Scarf Gateway](https://about.scarf.sh/scarf-gateway) does this by delivering better observability into the distribution of open-source components, uncovering key information for creators like which companies are using the software and how they are relying on it.
 
 If we can facilitate better communication and collaboration between the open-source community and the wide range of enterprise end-users, we can make the most of the immense potential that is there for the taking.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
