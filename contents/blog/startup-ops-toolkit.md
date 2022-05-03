@@ -13,7 +13,7 @@ categories: ["Startups", "Inside PostHog", "Guides"]
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?
 
-<iframe src="https://giphy.com/embed/j6wvxJLueHV10lATCF" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/usnationalarchives-archivesgif-youinpublicservice-publicservice-j6wvxJLueHV10lATCF">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/j6wvxJLueHV10lATCF" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 More importantly, what is your ops stack you can use to streamline and automate these?
 
@@ -31,19 +31,19 @@ You’re going to be hiring people either as permanent employees or as contracto
 
 ### Permanent employees (US)
 
-Orrick has a <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant">handy free set of templates</a> you can use!
+Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use!
 
 You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement. The CIIAA means that your employees agree that their work is confidential and whatever they build at work is owned by the company. Not having this = major problems in future, especially for fundraising.
 
 Do _not_ pay a lawyer to create contract templates for you - it is a fantastic waste of money better spent when you need them to handle your next funding round.
 
-I like <a target="_blank" rel="noopener noreferrer nofollow" href="https://gusto.com/">Gusto</a> a lot for managing US payroll. It makes the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like tax reporting, healthcare benefits and mandatory insurance quite nicely. The phone support is great, but avoid email or chat. Gusto charges us $39/month plus $6 per employee.
+I like [Gusto](https://gusto.com/) a lot for managing US payroll. It makes the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like tax reporting, healthcare benefits and mandatory insurance quite nicely. The phone support is great, but avoid email or chat. Gusto charges us $39/month plus $6 per employee.
 
-> **Time suck alert:** You will need to register in the relevant state _before_ you can hire someone and onboard them onto Gusto. Online state registration laws vary and all of their websites are garbage. <a target="_blank" rel="noopener noreferrer nofollow" href="https://agent.middesk.com/">Middesk</a> can handle this for you on a pay as you go basis and will save you 3+ hours each time. If you want to go further, we use its new $2k/quarter unlimited state filing and reporting service, which is a huge time saver. You will forget a state's tax filing deadline and get fined - better to outsource the problem. 
+> **Time suck alert:** You will need to register in the relevant state _before_ you can hire someone and onboard them onto Gusto. Online state registration laws vary and all of their websites are garbage. [Middesk](https://agent.middesk.com/) can handle this for you on a pay as you go basis and will save you 3+ hours each time. If you want to go further, we use its new $2k/quarter unlimited state filing and reporting service, which is a huge time saver. You will forget a state's tax filing deadline and get fined - better to outsource the problem. 
 
 ### Contractors (Global)
 
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://www.letsdeel.com/">Deel</a> is the way to go. It covers pretty much any country and currency you’ll need, handles all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. People complain that the support has worsened as it's experienced massive growth, but I still find them very responsive and helpful. It’s one of my favorite ops products. Deel charges $35/month per contractor, and it also handles monthly payroll. 
+[Deel](https://www.letsdeel.com/) is the way to go. It covers pretty much any country and currency you’ll need, handles all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. People complain that the support has worsened as it's experienced massive growth, but I still find them very responsive and helpful. It’s one of my favorite ops products. Deel charges $35/month per contractor, and it also handles monthly payroll. 
 
 ### Permanent employees (non-US)
 
@@ -58,7 +58,7 @@ Again, Deel will handle all things payroll.
 
 ## Managing your money
 
-There are basically two sides to finance - accounting and budgeting. You know this already from YC’s <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.startupschool.org/">Startup School</a>, of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
+There are basically two sides to finance - accounting and budgeting. You know this already from YC’s [Startup School](https://www.startupschool.org/), of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
 
 <iframe src="https://giphy.com/embed/o2xbqBmHbQAbm" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
@@ -66,7 +66,7 @@ There are basically two sides to finance - accounting and budgeting. You know th
 
 For your accounting, you'll want to do the bare minimum to be legally compliant and not sued by the IRS; and have financial reports to look at so you can nod and go "hmm, yes we are still burning money at an alarming rate." Unless you are a finance-driven business, the first 2 years are _not_ the time to be optimizing your financial reporting. 
 
-We use <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.tryfondo.com/">Fondo</a> (US only) and it is unbelievably good . It becomes your outsourced finance team, and you submit everything through a shared Slack channel with them or via an online portal, which is remarkably straightforward to use. Fondo will handle your tax returns, annual filing and also send you monthly management reports. It charges on a sliding scale based on your expenses, so I’m not sharing what we pay here for confidentiality reasons.
+We use [Fondo](https://www.tryfondo.com/) (US only) and it is unbelievably good . It becomes your outsourced finance team, and you submit everything through a shared Slack channel with them or via an online portal, which is remarkably straightforward to use. Fondo will handle your tax returns, annual filing and also send you monthly management reports. It charges on a sliding scale based on your expenses, so I’m not sharing what we pay here for confidentiality reasons.
 
 > **Time suck alert:** There is no need to do bookkeeping in Xero or QuickBooks yourself – it is not a good use of your time, even if it is slightly cheaper. I know some founders who still do this even after they have hired an ops person. Baffling. 
 
@@ -74,7 +74,7 @@ We use <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.t
 
 Don’t spend _too_ much time making financial forecasts at an early stage - your priority should be to put together something credible to make sure you don’t run out of money in 6 months. For the first 1-2 years, investors need you to have some idea of what's going on financially, but it's a complete waste of time to pretend you have a detailed view of what will happen. However, as you start to approach $1m ARR, you should have a reasonably detailed view of what you want the next 2 years to look like, with something highly speculative 3-5 years out. 
 
-<a target="_blank" rel="noopener noreferrer nofollow" href="http://pry.co/">Pry</a> has been a game-changer for helping us build our forecasts. Yes, we all know you can “just” do it in Excel (which you will want to do if you have a finance background), but a tool like Pry makes it so much easier to build and share your plan. And you can skip the 2 years chained to your desk at Goldman! 
+[Pry](http://pry.co/) has been a game-changer for helping us build our forecasts. Yes, we all know you can “just” do it in Excel (which you will want to do if you have a finance background), but a tool like Pry makes it so much easier to build and share your plan. And you can skip the 2 years chained to your desk at Goldman! 
 
 Pry connects seamlessly with your accounting software (Quickbooks, Xero) as well as most banks, and you then just fill out assumptions manually or using simple formulae. It also has neat dashboards for visualizing everything, comparing budget vs. actuals, and scenario modeling. It was recently acquired by Brex, so I'd expect to see its pricing and branding change a bit. 
 
@@ -82,11 +82,11 @@ Be responsive when it comes to re-forecasting - don't just rigidly stick to an a
 
 ## Where to put the money
 
-<iframe src="https://giphy.com/embed/3o6ZtpoNGDS4cZ8GWY" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/southparkgifs-3o6ZtpoNGDS4cZ8GWY">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/3o6ZtpoNGDS4cZ8GWY" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-Put it in <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.brex.com/">Brex</a>, obviously (US only). Brex also makes it incredibly easy to manage virtual credit cards, and the built-in expense management negates the need for something like Expensify. It doesn’t charge you anything.
+Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly easy to manage virtual credit cards, and the built-in expense management negates the need for something like Expensify. It doesn’t charge you anything.
 
-In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.revolut.com/">Revolut</a> is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
+In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
 
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
 
@@ -94,11 +94,11 @@ In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://w
 
 Now you've organized the two most important things (people, money), it's time to get the rest of your company running smoothly. Defining ops as ‘anything that is not building the product or talking to customers’, here is the list of other things you'll need to think about:
 
-- <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.workable.com/">Workable</a> for **recruitment**. $99 per role per month, pay as you go. Once you're hiring 3+ people a month, consider upgrading your account. 
-- <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hubspot.com/">HubSpot</a> for **sales and CRM**. Various tiers and combos available, starting from free. Free doesn’t mean you should start there, though. We like its Marketing Starter and Sales Pro products. 
-- <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.charliehr.com/">Charlie</a> for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works. 
-- Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a <a target="_blank" rel="noopener noreferrer nofollow" href="https://posthog.com/blog/registering-trademarks">separate guide</a> for. 
-- Managing your **cap table** in Excel is very 2011. We use <a target="_blank" rel="noopener noreferrer nofollow" href="https://equity.ltse.com/">LTSE Equity</a> (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free. 
+- [Workable](https://www.workable.com/) for **recruitment**. $99 per role per month, pay as you go. Once you're hiring 3+ people a month, consider upgrading your account. 
+- [HubSpot](https://www.hubspot.com/) for **sales and CRM**. Various tiers and combos available, starting from free. Free doesn’t mean you should start there, though. We like its Marketing Starter and Sales Pro products. 
+- [Charlie](https://www.charliehr.com/) for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works. 
+- Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a [separate guide](https://posthog.com/blog/registering-trademarks) for. 
+- Managing your **cap table** in Excel is very 2011. We use [LTSE Equity](https://equity.ltse.com/) (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free. 
 - Dealing with **stock options** is one of those slightly manual things you'll still need your lawyers to help you with:
   - Your lawyers will set up your stock option scheme for you, including the agreement templates.
   - Before giving out options, you'll need to do a 409A valuation - these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation. 
@@ -106,7 +106,7 @@ Now you've organized the two most important things (people, money), it's time to
   - Once you've received board approval, it's time to send out all the paperwork to your team. You _can_ do this yourself based on your templates, but this is one area where we run it through our lawyers because getting it wrong can be very costly...
   - I guarantee you will now spend 80% of the process chasing your team for their signatures. 
   - Record all the share options you've allocated in LTSE Equity. 
-- You will almost certainly need various types of **insurance** - use <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.embroker.com/">Embroker</a> for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp - this can be done through Gusto. 
+- You will almost certainly need various types of **insurance** - use [Embroker](https://www.embroker.com/) for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp - this can be done through Gusto. 
 
 For **business planning** (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and non-ops people _really_ don’t like having to use another platform to track what they’re doing.
 
@@ -116,4 +116,4 @@ For **business planning** (setting OKRs etc.), I’m yet to find a tool that gen
 
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype in the metaverse.
 
-You should probably document all this stuff in your handbook! Don't have one yet? Feel free to <a target="_blank" rel="noopener noreferrer nofollow" href="https://posthog.com/handbook">copy ours</a>. 
+You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
