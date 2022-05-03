@@ -94,11 +94,16 @@ In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank th
 
 Now you've organized the two most important things (people, money), it's time to get the rest of your company running smoothly. Defining ops as ‘anything that is not building the product or talking to customers’, here is the list of other things you'll need to think about:
 
-- [Workable](https://www.workable.com/) for **recruitment**. $99 per role per month, pay as you go. Once you're hiring 3+ people a month, consider upgrading your account. 
-- [HubSpot](https://www.hubspot.com/) for **sales and CRM**. Various tiers and combos available, starting from free. Free doesn’t mean you should start there, though. We like its Marketing Starter and Sales Pro products. 
-- [Charlie](https://www.charliehr.com/) for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works. 
-- Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a [separate guide](https://posthog.com/blog/registering-trademarks) for. 
-- Managing your **cap table** in Excel is very 2011. We use [LTSE Equity](https://equity.ltse.com/) (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free. 
+- [Workable](https://www.workable.com/) for **recruitment**. $99 per role per month, pay as you go. Once you're hiring 3+ people a month, consider upgrading your account.
+ 
+- [HubSpot](https://www.hubspot.com/) for **sales and CRM**. Various tiers and combos available, starting from free. Free doesn’t mean you should start there, though. We like its Marketing Starter and Sales Pro products.
+ 
+- [Charlie](https://www.charliehr.com/) for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works.
+ 
+- Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a [separate guide](https://posthog.com/blog/registering-trademarks) for.
+ 
+- Managing your **cap table** in Excel is very 2011. We use [LTSE Equity](https://equity.ltse.com/) (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free.
+ 
 - Dealing with **stock options** is one of those slightly manual things you'll still need your lawyers to help you with:
   - Your lawyers will set up your stock option scheme for you, including the agreement templates.
   - Before giving out options, you'll need to do a 409A valuation - these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation. 
@@ -106,6 +111,7 @@ Now you've organized the two most important things (people, money), it's time to
   - Once you've received board approval, it's time to send out all the paperwork to your team. You _can_ do this yourself based on your templates, but this is one area where we run it through our lawyers because getting it wrong can be very costly...
   - I guarantee you will now spend 80% of the process chasing your team for their signatures. 
   - Record all the share options you've allocated in LTSE Equity. 
+
 - You will almost certainly need various types of **insurance** - use [Embroker](https://www.embroker.com/) for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp - this can be done through Gusto. 
 
 For **business planning** (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and non-ops people _really_ don’t like having to use another platform to track what they’re doing.
