@@ -548,10 +548,6 @@ td,
 th {
     text-align: left;
     border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-    font-feature-settings: 'tnum';
-    -moz-font-feature-settings: 'tnum';
-    -ms-font-feature-settings: 'tnum';
-    -webkit-font-feature-settings: 'tnum';
     padding-top: 0.5rem;
     padding-bottom: calc(0.5rem - 1px);
 }
