@@ -82,7 +82,7 @@ Put it in <a target="_blank" rel="noopener noreferrer nofollow" href="https://ww
 
 In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.revolut.com/">Revolut</a> is about the only digital bank that get anywhere near Brex features-wise, although I find its platform a lot more buggy.
 
-> Time suck alert - I know what you're thinking - surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
+> **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
 
 ## Keeping yourself organized
 
