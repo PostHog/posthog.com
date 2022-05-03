@@ -15,7 +15,7 @@ Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but w
 
 <iframe src="https://giphy.com/embed/j6wvxJLueHV10lATCF" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-More importantly, what is your ops stack you can use to streamline and automate these?
+More importantly, what is the ops stack you can use to streamline and automate these?
 
 This article assumes you work at a US company, but most of it applies to any country. I won’t offer multiple options here - these are the tools that we have settled on using at PostHog after a bunch of trial and error (and tedious customer demos). 
 
