@@ -1,5 +1,5 @@
 ---
-date: 2022-05-04
+date: 2022-05-03
 title: The PostHog startup ops toolkit, 2022 edition
 rootPage: /blog
 sidebar: Blog
