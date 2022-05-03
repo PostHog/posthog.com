@@ -27,7 +27,7 @@ And "hey, would you like to join our webinar?"
 
 This is everything we hate about modern SaaS companies, so we found a better way.
 
-We introduced transparant enterprise pricing.
+We introduced transparent enterprise pricing.
 
 
 ##  Why did we implement transparent pricing?
