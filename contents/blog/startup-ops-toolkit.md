@@ -135,6 +135,8 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
 
-> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> _Enjoy this article? [Try to our newsletter](/newsletter) to get more like it in your inbox twice a month_ 
 
-<ArrayCTA />
+<NewsletterForm
+compact
+/>
