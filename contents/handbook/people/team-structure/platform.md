@@ -64,7 +64,7 @@ Guido
 ### Key results
 
 - PostHog Cloud is using our standard helm chart and stable by June
-- Zero frustrated customers due to deployment and maintenance issues from Scale and Enterprise customers by June
+- No significant customer churn due to deployment and maintenance issues from Scale and Enterprise customers by June
 - We're capable of spinning up and maintaining multiple production grade environments (eg staging/EU/private tenant) regardless of business demand
 
 ## Roadmap
