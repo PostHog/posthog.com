@@ -26,7 +26,7 @@ Karl
 ### Key results
 
 - P95 query latency is < 15 seconds for our biggest customer (by event count)
-- Successful load test with Billion event queries
+- Our synthetic test suite successfully works against a PostHog installation with billion events
 
 ## Sub team - Ingestion
 
