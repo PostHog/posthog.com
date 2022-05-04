@@ -92,6 +92,10 @@ In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank th
 
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though – you should talk to one if you decide this is important.
 
+<NewsletterForm
+compact
+/>
+
 ## 3. Keeping yourself organized
 
 <iframe src="https://giphy.com/embed/xT1XGOGdyDrL2BTfxK" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
@@ -135,7 +139,4 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
 
-> <NewsletterForm
-> compact
-> />
 > _Enjoy this article? [Try to our newsletter](/newsletter) to get more like it in your inbox twice a month_ 
