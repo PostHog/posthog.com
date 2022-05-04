@@ -26,7 +26,7 @@ It’s entirely self-serve, with the ability to auto-capture event information o
 
 Best of all, PostHog can be self-hosted on your existing infrastructure — making it an excellent alternative to tools such as Mixpanel if you’re concerned about privacy. 
 
-Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can either self-host, or use [PostHog Cloud](/pricing#cloud) if you'd prefer a fully-managed experience – it's free up to 1 million events per month. 
+Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can self-host, but [PostHog Cloud is free up to 1 million events per month](/pricing#cloud) if you'd prefer a fully-managed experience.
 
 ### Who is PostHog for?
 PostHog is ideal for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for engineering, data science, and product teams.
@@ -88,7 +88,8 @@ Its session replay feature automatically captures events, and provides useful cl
 ### Who is OpenReplay for?
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It can be self-hosted for free, though a cloud version is available for $3.95 per 1,000 monthly recordings.
 
-### Strengths
+### Strengths
+
 - Privacy friendly
 - Useful error tracking and bug fixing features
 - Optimizing conversion and understanding user journeys
@@ -122,7 +123,7 @@ Apache Spark is an open source analytics engine specifically focused on large-sc
 However, the focus on libraries such as SQL make Apache Spark difficult for non-technical users as support is provided solely by the community.
 
 ### Who is Apache Spark for?
-Apache Spark is a technical system intended for data engineers and data scientists conducting large-scale analytics in an enterprise setting. 
+Apache Spark is a technical system intended for Data Engineers and Data Scientists conducting large-scale analytics in an enterprise setting. 
 
 ### Strengths
 - Great for very large data volumes
@@ -139,7 +140,7 @@ Apache Spark is available under the Apache 2.0 license and is entirely free, via
 Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 ### Who is Metabase for?
-Metabase has a drag-and-drop interface which makes it especially useful for less technical users or marketing and growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focused on more general analytics.
+Metabase has a drag-and-drop interface which makes it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focused on more general analytics.
 
 ### Strengths
 - Easy-to-use, no SQL required

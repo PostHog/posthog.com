@@ -83,4 +83,8 @@ As always, we welcome and highly encourage you to share any feedback you may hav
 
 <div style="border: 1px solid #D9D9D9; margin-bottom: 16px; margin-top: 16px;"></div>
 
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+
 [^1]: Based on the average number of discoveries per active user and the number of teammates that never perform a discovery, we estimated that we could get at least a ~12%+ increase in active discoverers, and 20%+ increase in weekly discoveries.

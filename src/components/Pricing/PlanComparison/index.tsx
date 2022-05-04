@@ -24,7 +24,13 @@ const tiers = [
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
     },
     {
-        name: 'PostHog Cloud',
+        name: 'Cloud',
+        href: '#',
+        priceMonthly: 9,
+        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
+    },
+    {
+        name: 'Cloud Enterprise',
         href: '#',
         priceMonthly: 9,
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
@@ -36,29 +42,32 @@ const sections = [
             {
                 name: 'Plan benefits',
                 tiers: {
-                    'PostHog Cloud': 'Scales as needed, Constant price',
+                    Cloud: 'Scales as needed, Constant price',
+                    'Cloud Enterprise': 'Advanced permissioning and SSO Integration, priority support',
                     'Open source': 'Great for small teams',
-                    Scale: 'Power analytics features, basic permissioning and priority support',
-                    Enterprise: 'Advanced permissioning and data controls',
+                    Scale: 'Power analytics features, basic permissioning',
+                    Enterprise: 'Advanced permissioning and SSO Integration, priority support',
                 },
             },
             {
                 name: 'Pricing',
                 tiers: {
-                    'PostHog Cloud': 'Free (up to 1 million events), then $0.000225/event',
+                    Cloud: 'Free (up to 1 million events), then $0.000225/event to $0.000025/event depending on volume (see calculator)',
                     'Open source': 'Free',
-                    Scale:
-                        'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
-                    Enterprise: 'Contact us',
+                    Scale: 'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
+                    Enterprise: '$4,500/mo for the first 10 million events, tiered pricing after (see calculator)',
+                    'Cloud Enterprise':
+                        '$3,000/mo for the first 10 million events, tiered pricing after (see calculator)',
                 },
             },
             {
                 name: 'Scales to...',
                 tiers: {
-                    'PostHog Cloud': 'Millions of users/mo',
+                    Cloud: 'Millions of users/mo',
                     'Open source': '~100k users/mo (no hard limit, but we recommend support beyond this)',
                     Scale: 'Millions of users/mo',
                     Enterprise: 'Millions of users/mo',
+                    'Cloud Enterprise': 'Millions of users/mo',
                 },
             },
         ],
@@ -68,28 +77,30 @@ const sections = [
         features: [
             {
                 name: 'Hosting',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: false, Enterprise: false },
+                tiers: { Cloud: true, 'Open source': false, Scale: false, Enterprise: false, 'Cloud Enterprise': true },
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
             },
             {
                 name: 'Initial setup',
                 tiers: {
-                    'PostHog Cloud': 'Instant',
+                    Cloud: 'Instant',
                     'Open source': 'Instant',
                     Scale: '1-3 days',
                     Enterprise: '1-3 days',
+                    'Cloud Enterprise': 'Instant',
                 },
             },
             {
                 name: 'Server management',
                 tiers: {
-                    'PostHog Cloud': 'Managed by PostHog',
+                    Cloud: 'Managed by PostHog',
                     'Open source': 'Managed by you',
                     Scale: 'We help you manage',
                     Enterprise: 'We help you manage',
+                    'Cloud Enterprise': 'Managed by PostHog',
                 },
             },
             {
@@ -109,32 +120,41 @@ const sections = [
             {
                 name: 'Events',
                 tiers: {
-                    'PostHog Cloud': 'Unlimited',
+                    Cloud: 'Unlimited',
                     'Open source': 'Unlimited',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
+                    'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'Tracked users',
                 tiers: {
-                    'PostHog Cloud': 'Unlimited',
+                    Cloud: 'Unlimited',
                     'Open source': '~1m (with default config)',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
+                    'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'Projects',
-                tiers: { 'PostHog Cloud': 'Multiple', 'Open source': '1', Scale: 'Multiple', Enterprise: 'Multiple' },
+                tiers: {
+                    Cloud: 'Multiple',
+                    'Open source': '1',
+                    Scale: 'Multiple',
+                    Enterprise: 'Multiple',
+                    'Cloud Enterprise': 'Multiple',
+                },
             },
             {
                 name: 'Data retention',
                 tiers: {
-                    'PostHog Cloud': '7 years',
+                    Cloud: '7 years',
                     'Open source': 'Unlimited',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
+                    'Cloud Enterprise': '7 years',
                 },
             },
         ],
@@ -144,27 +164,27 @@ const sections = [
         features: [
             {
                 name: 'Analytics suite',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Recordings',
                 docsLink: 'docs/user-guides/recordings',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Feature Flags',
                 docsLink: 'docs/user-guides/feature-flags',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Experimentation',
                 docsLink: 'docs/user-guides/experimentation',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Plugins',
                 docsLink: 'docs/user-guides/plugins',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
         ],
     },
@@ -174,30 +194,30 @@ const sections = [
             {
                 name: 'Correlation Analysis',
                 docsLink: 'docs/user-guides/correlation',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Group Analytics',
                 docsLink: 'docs/user-guides/group-analytics',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Multivariate testing',
                 docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Advanced Paths',
                 docsLink: 'docs/user-guides/paths',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Event & properties Taxonomy',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Dashboard tagging',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
         ],
     },
@@ -207,47 +227,60 @@ const sections = [
             {
                 name: 'Team members',
                 tiers: {
-                    'PostHog Cloud': 'Unlimited',
+                    Cloud: 'Unlimited',
                     'Open source': 'Unlimited',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
+                    'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'SSO/SAML',
                 docsLink: 'docs/user-guides/sso',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'API access',
                 docsLink: 'docs/api',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'User permissions',
                 docsLink: 'docs/user-guides/organizations-and-projects#permissions',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Advanced user permissions',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Private projects',
                 docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Ad blocker-resistant',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
             },
             {
                 name: 'Backup configuration',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: {
+                    Cloud: false,
+                    'Open source': false,
+                    Scale: false,
+                    Enterprise: true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Proactive security patch alerting',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: {
+                    Cloud: false,
+                    'Open source': false,
+                    Scale: false,
+                    Enterprise: true,
+                    'Cloud Enterprise': false,
+                },
             },
         ],
     },
@@ -257,22 +290,22 @@ const sections = [
             {
                 name: 'Slack',
                 docsLink: 'docs/integrate/webhooks/slack#4-add-to-action',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Microsoft Teams',
                 docsLink: 'docs/integrate/webhooks/microsoft-teams',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Discord',
                 docsLink: 'docs/integrate/webhooks/discord',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Zapier',
                 docsLink: 'https://zapier.com/apps/posthog/integrations',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
         ],
     },
@@ -282,93 +315,123 @@ const sections = [
             {
                 name: 'Slack (community)',
                 docsLink: 'slack',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true, Enterprise: true },
+                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Slack (dedicated channel)',
                 tiers: {
-                    'PostHog Cloud': '$10k/month spend or above',
+                    Cloud: '$10k/month spend or above',
                     'Open source': false,
                     Scale: '$10k/month spend or above',
                     Enterprise: true,
+                    'Cloud Enterprise': true,
                 },
             },
             {
                 name: 'Email',
                 tiers: {
-                    'PostHog Cloud': '$10k/month spend or above',
+                    Cloud: '$10k/month spend or above',
                     'Open source': false,
                     Scale: '$10k/month spend or above',
                     Enterprise: true,
+                    'Cloud Enterprise': true,
                 },
             },
             {
                 name: 'Account manager',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Training sessions',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Deployment developer pairing',
                 tiers: {
-                    'PostHog Cloud': false,
+                    Cloud: false,
                     'Open source': false,
                     Scale: '$10k/month spend or above',
                     Enterprise: true,
+                    'Cloud Enterprise': false,
                 },
             },
             {
                 name: 'Dashboard configuration support',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Monitoring configuration support',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: {
+                    Cloud: false,
+                    'Open source': false,
+                    Scale: false,
+                    Enterprise: true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Remote monitoring',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: {
+                    Cloud: false,
+                    'Open source': false,
+                    Scale: false,
+                    Enterprise: true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Terms and conditions',
                 tiers: {
-                    'PostHog Cloud': 'Standard',
+                    Cloud: 'Standard',
                     'Open source': 'MIT Licence',
                     Scale: 'Standard',
                     Enterprise: 'Bespoke',
+                    'Cloud Enterprise': 'Bespoke',
                 },
             },
             {
                 name: 'Security assessment',
                 tiers: {
-                    'PostHog Cloud': 'Standard assessment provided',
+                    Cloud: 'Standard assessment provided',
                     'Open source': 'Standard assessment provided',
                     Scale: 'Standard assessment provided',
                     Enterprise: true,
+                    'Cloud Enterprise': 'Standard assessment provided',
                 },
             },
             {
                 name: 'Bespoke pricing',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
                 name: 'Payment via invoicing',
                 tiers: {
-                    'PostHog Cloud': false,
+                    Cloud: false,
                     'Open source': false,
                     Scale: '$2k/month spend or above',
                     Enterprise: true,
+                    'Cloud Enterprise': true,
                 },
             },
             {
                 name: 'Downtime developer pairing',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: false, Enterprise: true },
+                tiers: {
+                    'PostHog Cloud': false,
+                    'Open source': false,
+                    Scale: false,
+                    Enterprise: true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Support SLAs',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: true, Enterprise: true },
+                tiers: {
+                    'PostHog Cloud': false,
+                    'Open source': false,
+                    Scale: true,
+                    Enterprise: true,
+                    'Cloud Enterprise': true,
+                },
             },
         ],
     },
@@ -511,8 +574,11 @@ export const PlanComparison = ({ className = '' }) => {
                                 >
                                     Self-hosted options
                                 </th>
-                                <th className="text-almost-black text-center border-white border-opacity-10">
-                                    Hosted solution
+                                <th
+                                    colSpan="2"
+                                    className="text-almost-black text-center border-white border-opacity-10"
+                                >
+                                    Hosted solutions
                                 </th>
                             </tr>
                             <tr>

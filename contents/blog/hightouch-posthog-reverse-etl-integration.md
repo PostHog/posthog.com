@@ -76,3 +76,7 @@ PostHog is open source and we love it when people contribute to making the produ
 We also recently ran a [PostHog Plugin Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific plugins we'd like have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
 
 Whether you have an idea for a plugin or just need some help, please [join our community Slack channel](/slack) to get involved.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

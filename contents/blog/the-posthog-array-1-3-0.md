@@ -91,3 +91,5 @@ What makes it the PR of the week is the discussion it started in our repo, it wa
 ## PostHog news
 
 We were all pretty excited at PostHog when we hit 2k stars on GitHub, we know it’s a vanity metric but we are pleased that we have started to build the foundations of a strong community thank you all!
+
+<ArrayCTA />
