@@ -135,8 +135,7 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
 
-<NewsletterForm
-compact
-/>
-
+> <NewsletterForm
+> compact
+> />
 > _Enjoy this article? [Try to our newsletter](/newsletter) to get more like it in your inbox twice a month_ 
