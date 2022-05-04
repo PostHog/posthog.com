@@ -44,7 +44,7 @@ James G
 
 ### Key results
 
-- P90 Ingestion <30s by June
+- P90 ingestion latency is < 30s by June
 - Minimal data integrity issues reported caused by compromise from enabling scale by June
 
 ## Sub team - Infrastructure
