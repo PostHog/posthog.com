@@ -39,11 +39,11 @@ Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Acces
 
 You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement. The CIIAA means that your employees agree that their work is confidential and whatever they build at work is owned by the company. Not having this = major problems in future, especially for fundraising.
 
-Do _not_ pay a lawyer to create contract templates for you - it is a fantastic waste of money better spent when you need them to handle your next funding round.
+Do _not_ pay a lawyer to create contract templates for you – it is a fantastic waste of money better spent when you need them to handle your next funding round.
 
 I like [Gusto](https://gusto.com/) a lot for managing US payroll. It makes the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like tax reporting, healthcare benefits and mandatory insurance quite nicely. The phone support is great, but avoid email or chat. Gusto charges us $39/month plus $6 per employee.
 
-> **Time suck alert:** You will need to register in the relevant state _before_ you can hire someone and onboard them onto Gusto. Online state registration laws vary and all of their websites are garbage. [Middesk](https://agent.middesk.com/) can handle this for you on a pay as you go basis and will save you 3+ hours each time. If you want to go further, we use its new $2k/quarter unlimited state filing and reporting service, which is a huge time saver. You will forget a state's tax filing deadline and get fined - better to outsource the problem. 
+> **Time suck alert:** You will need to register in the relevant state _before_ you can hire someone and onboard them onto Gusto. Online state registration laws vary and all of their websites are garbage. [Middesk](https://agent.middesk.com/) can handle this for you on a pay as you go basis and will save you 3+ hours each time. If you want to go further, we use its new $2k/quarter unlimited state filing and reporting service, which is a huge time saver. You will forget a state's tax filing deadline and get fined – better to outsource the problem. 
 
 ### Contractors (Global)
 
@@ -62,7 +62,7 @@ Again, Deel will handle all things payroll.
 
 ## 2. Managing your money
 
-There are basically two sides to finance - accounting and budgeting. You know this already from YC’s [Startup School](https://www.startupschool.org/), of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
+There are basically two sides to finance – accounting and budgeting. You know this already from YC’s [Startup School](https://www.startupschool.org/), of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...
 
 <iframe src="https://giphy.com/embed/o2xbqBmHbQAbm" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
@@ -76,13 +76,13 @@ We use [Fondo](https://www.tryfondo.com/) (US only) and it is unbelievably good 
 
 ### Budgeting & Forecasting
 
-Don’t spend _too_ much time making financial forecasts at an early stage - your priority should be to put together something credible to make sure you don’t run out of money in 6 months. For the first 1-2 years, investors need you to have some idea of what's going on financially, but it's a complete waste of time to pretend you have a detailed view of what will happen. However, as you start to approach $1m ARR, you should have a reasonably detailed view of what you want the next 2 years to look like, with something highly speculative 3-5 years out. 
+Don’t spend _too_ much time making financial forecasts at an early stage – your priority should be to put together something credible to make sure you don’t run out of money in 6 months. For the first 1-2 years, investors need you to have some idea of what's going on financially, but it's a complete waste of time to pretend you have a detailed view of what will happen. However, as you start to approach $1m ARR, you should have a reasonably detailed view of what you want the next 2 years to look like, with something highly speculative 3-5 years out. 
 
 [Pry](http://pry.co/) has been a game-changer for helping us build our forecasts. Yes, we all know you can “just” do it in Excel (which you will want to do if you have a finance background), but a tool like Pry makes it so much easier to build and share your plan. And you can skip the 2 years chained to your desk at Goldman! 
 
 Pry connects seamlessly with your accounting software (Quickbooks, Xero) as well as most banks, and you then just fill out assumptions manually or using simple formulae. It also has neat dashboards for visualizing everything, comparing budget vs. actuals, and scenario modeling. It was recently acquired by Brex, so I'd expect to see its pricing and branding change a bit. 
 
-Be responsive when it comes to re-forecasting - don't just rigidly stick to an arbitrary annual or quarterly process because it's 'standard practice'. We review budget vs. actuals monthly, and then reforecast as and when it feels appropriate. 
+Be responsive when it comes to re-forecasting – don't just rigidly stick to an arbitrary annual or quarterly process because it's 'standard practice'. We review budget vs. actuals monthly, and then reforecast as and when it feels appropriate. 
 
 ### Where to put the money
 
@@ -90,7 +90,7 @@ Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly 
 
 In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
 
-> **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
+> **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though – you should talk to one if you decide this is important.
 
 ## 3. Keeping yourself organized
 
@@ -108,7 +108,7 @@ Now you've organized the two most important things (people, money), it's time to
  
 - Managing your **cap table** in Excel is very 2011. We use [LTSE Equity](https://equity.ltse.com/) (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free.
 
-- You will almost certainly need various types of **insurance** - use [Embroker](https://www.embroker.com/) for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp - this can be done through Gusto. 
+- You will almost certainly need various types of **insurance** – use [Embroker](https://www.embroker.com/) for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp – this can be done through Gusto. 
 
 For **business planning** (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and non-ops people _really_ don’t like having to use another platform to track what they’re doing.
 
@@ -117,7 +117,7 @@ For **business planning** (setting OKRs etc.), I’m yet to find a tool that gen
 Annoyingly, dealing with stock options is one of those slightly manual things you'll still need lawyers to help you with:
 - Your lawyers will set up your stock option scheme for you, including the agreement templates.
 
-- Before giving out options, you'll need to do a 409A valuation - these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation.
+- Before giving out options, you'll need to do a 409A valuation – these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation.
  
 - Allocate your share options in batches, as you'll need a board consent signed each time. Your lawyers will write this for you. 
 
@@ -127,7 +127,7 @@ Annoyingly, dealing with stock options is one of those slightly manual things yo
 
 - Record all the share options you've allocated in LTSE Equity. 
 
-> **Time suck alert:** When you're choosing your first tool, just pick the first one that you find that you like. Don't waste your time trying our 3-4 different tools and comparing them - it _really_ doesn't matter if you go for Greenhouse or Lever over Workable when you are a 20 person company. Save tool optimization for after the Series B. 
+> **Time suck alert:** When you're choosing your first tool, just pick the first one that you find that you like. Don't waste your time trying our 3-4 different tools and comparing them – it _really_ doesn't matter if you go for Greenhouse or Lever over Workable when you are a 20 person company. Save tool optimization for after the Series B. 
 
 ## What next?
 
