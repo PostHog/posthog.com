@@ -1,6 +1,6 @@
 ---
-date: 2022-05-03
-title: The PostHog ops toolkit for early-stage startups
+date: 2022-05-04
+title: The ops toolkit for early-stage startups
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but w
 
 More importantly, what is the ops stack you can use to streamline and automate these?
 
-**TL;DR:** It’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
+**TL;DR:** It’s [Deel](https://www.letsdeel.com/) + [Gusto](https://gusto.com/) + [Fondo](https://www.tryfondo.com/) + [Pry](https://pry.co/) + [Brex](https://www.brex.com/) + [some free contract templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) + [Google Sheets/Docs](https://docs.google.com/) + [Workable](https://www.workable.com/) + [Hubspot](https://www.hubspot.com/) + [CharlieHR](https://www.charliehr.com/). 
 
 This guide assumes you work at a US company, but most of it applies to any country, and it's split into three core sections: [hiring people](/blog/startup-ops-toolkit#1-hiring-people), [managing your money](/blog/startup-ops-toolkit#2-managing-your-money) and [keeping yourself organized](/blog/startup-ops-toolkit#3-keeping-yourself-organized).
 
@@ -102,7 +102,7 @@ Now you've organized the two most important things (people, money), it's time to
  
 - [HubSpot](https://www.hubspot.com/) for **sales and CRM**. Various tiers and combos available, starting from free. Free doesn’t mean you should start there, though. We like its Marketing Starter and Sales Pro products.
  
-- [Charlie](https://www.charliehr.com/) for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works.
+- [Charlie](https://www.charliehr.com/) for **HR** things like recording salaries, time off, and contact details. $6 per employee per month. Charlie's UI looks janky, but it works. If you only have US-based employees, Gusto can do this for you too.
  
 - Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a [separate guide](https://posthog.com/blog/registering-trademarks) for.
  
