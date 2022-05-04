@@ -23,26 +23,26 @@ const features = [
         },
     },
     {
-        title: 'Visualize traffic with user paths',
+        title: 'Visualize traffic with User Paths',
         description: `Explore popular ways users complete a series of steps - like navigating your site or progressing through a funnel.`,
         cta: {
-            title: 'Learn more about user paths',
+            title: 'Learn more about User Paths',
             url: '/product/user-paths',
         },
     },
     {
-        title: 'Diagnose causes with quantitative analysis',
-        description: `Quantitative analysis features automatically suggest which events or user properties lead to success or failure using transparent, testable, statistical models.`,
+        title: 'Diagnose causes with Correlation Analysis',
+        description: `Correlation Analysis automatically suggests which events or user properties lead to success or failure using transparent, testable, statistical models.`,
         cta: {
-            title: 'Learn more about diagnosing causes',
-            url: '/product/quantitative-analysis',
+            title: 'Learn more about Correlation Analysis',
+            url: '/product/correlation-analysis',
         },
     },
     {
         title: 'Experimentation suite',
         description: `Test changes in production with a suite that makes it easy to get the results you want.`,
         cta: {
-            title: 'Learn more about experimentation',
+            title: 'Learn more about Experimentation',
             url: '/product/experimentation-suite',
         },
     },
@@ -50,7 +50,7 @@ const features = [
         title: 'Collaboration',
         description: `Make sense of insights your team has created, using tools designed to help share knowledge.`,
         cta: {
-            title: 'Learn more about collaboration',
+            title: 'Learn more about Collaboration',
             url: '/product/collaboration',
         },
     },
