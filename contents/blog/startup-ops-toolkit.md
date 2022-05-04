@@ -138,4 +138,5 @@ You should probably document all this stuff in your handbook! Don't have one yet
 <NewsletterForm
 compact
 />
+
 > _Enjoy this article? [Try to our newsletter](/newsletter) to get more like it in your inbox twice a month_ 
