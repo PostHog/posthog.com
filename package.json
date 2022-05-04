@@ -125,6 +125,7 @@
         "sass": "^1.43.2",
         "sharp": "^0.27.2",
         "slugify": "^1.6.0",
+        "squeak-react": "^1.12.10",
         "styled-components": "^5.3.3",
         "svg-sprite": "^1.5.0",
         "typescript": "^4.0.2",
