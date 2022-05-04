@@ -8,6 +8,15 @@
     }
 }
 
+:root {
+    --squeak-primary-color: 0, 0, 0;
+    --squeak-default-avatar-fill: 255, 255, 255;
+    .dark {
+        --squeak-primary-color: 255, 255, 255;
+        --squeak-default-avatar-fill: 0, 0, 0;
+    }
+}
+
 main a,
 .article-content a:not(.cta) {
     @apply text-red hover:text-red font-semibold;
