@@ -107,18 +107,25 @@ Now you've organized the two most important things (people, money), it's time to
 - Protecting your **IP** - unless you are doing R&D, you really just need to focus on trade marks. This is a reasonably complicated area I've written a [separate guide](https://posthog.com/blog/registering-trademarks) for.
  
 - Managing your **cap table** in Excel is very 2011. We use [LTSE Equity](https://equity.ltse.com/) (formerly Captable.io). If you're a startup, they'll usually import your Excel and get you all set up for free.
- 
-- Dealing with **stock options** is one of those slightly manual things you'll still need your lawyers to help you with:
-  - Your lawyers will set up your stock option scheme for you, including the agreement templates.
-  - Before giving out options, you'll need to do a 409A valuation - these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation. 
-  - Allocate your share options in batches, as you'll need a board consent signed each time. Your lawyers will write this for you. 
-  - Once you've received board approval, it's time to send out all the paperwork to your team. You _can_ do this yourself based on your templates, but this is one area where we run it through our lawyers because getting it wrong can be very costly...
-  - I guarantee you will now spend 80% of the process chasing your team for their signatures. 
-  - Record all the share options you've allocated in LTSE Equity. 
 
 - You will almost certainly need various types of **insurance** - use [Embroker](https://www.embroker.com/) for this. Specifically, you should probably get D&O/Management Liability, Errors & Omissions, and Cyber Liability coverage. Don't double pay and get Workers Comp - this can be done through Gusto. 
 
 For **business planning** (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and non-ops people _really_ don’t like having to use another platform to track what they’re doing.
+
+### Dealing with stock options
+
+Annoyingly, dealing with stock options is one of those slightly manual things you'll still need lawyers to help you with:
+- Your lawyers will set up your stock option scheme for you, including the agreement templates.
+
+- Before giving out options, you'll need to do a 409A valuation - these cost ~$1,000 each time, though LTSE Equity will throw in your first one for free when you subscribe. Each valuation lasts 12 months. Bear in mind that signing a term sheet effectively invalidates your current 409a valuation.
+ 
+- Allocate your share options in batches, as you'll need a board consent signed each time. Your lawyers will write this for you. 
+
+- Once you've received board approval, it's time to send out all the paperwork to your team. You _can_ do this yourself based on your templates, but this is one area where we run it through our lawyers because getting it wrong can be very costly...
+
+- I guarantee you will now spend 80% of the process chasing your team for their signatures. 
+
+- Record all the share options you've allocated in LTSE Equity. 
 
 > **Time suck alert:** When you're choosing your first tool, just pick the first one that you find that you like. Don't waste your time trying our 3-4 different tools and comparing them - it _really_ doesn't matter if you go for Greenhouse or Lever over Workable when you are a 20 person company. Save tool optimization for after the Series B. 
 
