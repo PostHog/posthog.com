@@ -47,7 +47,7 @@ Marius
 - Shipped features to close competitive gaps in trends
 - Reduction in user reports around feature quality
 - Shipping unified querying to make the product consistent
-- Stat-sig increase in Discoveries from experiments
+- we create a stat-sig increase in Discoveries
 
 ## Sub team - App West
 
