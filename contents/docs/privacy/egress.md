@@ -136,12 +136,12 @@ The following is an example status report that would be sent from your instance 
             "onEvent": 1,
             "Avo": 2,
             "Avo New": 1,
-            "THE CRASHER": 1
+            "THE CRASH": 1
         },
         "plugins_installed__Avo": 2,
         "plugins_installed__Avo New": 1,
         "plugins_installed__GeoIP": 38,
-        "plugins_installed__THE CRASHER": 1,
+        "plugins_installed__THE CRASH": 1,
         "plugins_installed__both servers": 1,
         "plugins_installed__job": 1,
         "plugins_installed__onEvent": 1,
