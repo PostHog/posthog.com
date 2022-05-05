@@ -34,6 +34,15 @@ They help large organizations to deploy, manage and scale their PostHog instance
 Deploy PostHog to your own cloud (AWS, GCP) and forget about the hastle of upgrades.
 
 <hr />
+
+<img src="/images/marketplace/restack.png" alt="Restack" width="100" style={{float: 'right', marginTop: '1rem'}} />
+
+#### [**Restack**](../marketplace/restack)
+
+Run PostHog on your own Kubernetes Cluster on AWS without having to worry about EKS setup, k8s provisioning, networking, updates etc.
+
+<hr />
+
   
 <img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem'}} />
 
