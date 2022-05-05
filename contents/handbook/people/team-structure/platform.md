@@ -9,25 +9,6 @@ hideAnchor: true
 
 [See team structure page](/handbook/people/team-structure/team-structure)
 
-## Overall goal for app and platform
-
-### Objective
-
-PostHog can handle 1bn events/day
-
-### Motivation
-
-The highest value users are likely to have high volumes. No-one in our enterprise pipeline has more volume than this.
-
-### Owner
-
-Karl
-
-### Key results
-
-- P95 query latency is < 15 seconds for our biggest customer (by event count)
-- Our synthetic test suite successfully works against a PostHog installation with billion events
-
 ## Sub team - Ingestion
 
 ### Objective
@@ -40,12 +21,14 @@ Fast and reliable ingestion and accurate data are critical for businesses to tru
 
 ### Objective owner
 
-James G
+James G (Yakko or Tiina?)
 
-### Key results
+### Key results (End of July 2022)
 
-- P90 ingestion latency is < 30s by June
-- Minimal data integrity issues reported caused by compromise from enabling scale by June
+- P90 ingestion latency is < 30s for unprocessed events
+- No major ingestion fires
+- Person data is ingested and stored on events to enable increased querying scale 
+- No unresolved data integrity issues reported by customers
 
 ## Sub team - Infrastructure
 
@@ -55,16 +38,18 @@ There's a single, maintainable way to deploy PostHog at scale.
 
 ### Motivation
 
-Self-hosting is a key part of our unique value proposition for large and enterprise companies to retain control of their data. We need to offer this in a reliable and scalable way.
+Self-hosting is a key part of our unique value proposition for large and enterprise companies to retain control of their data. We need to offer this in a reliable and scalable way and ensure our cloud offering makes the most of these best practices to minimise disruption to customers.
 
 ### Objective owner
 
 Guido
 
-### Key results
+### Key results (End of July 2022)
 
-- PostHog Cloud is using our standard helm chart and stable by June
-- No significant customer churn due to deployment and maintenance issues from Scale and Enterprise customers by June
+- PostHog Cloud is using our standard helm chart and is stable stable
+- We have development, staging and production environments where infrastructure is managed as code
+- We are running and offering the latest version of key components (i.e. Clickhouse is on latest version)
+- No significant customer churn due to deployment and maintenance issues from Scale and Enterprise customers
 - We're capable of spinning up and maintaining multiple production grade environments (eg staging/EU/private tenant) regardless of business demand
 
 ## Roadmap
