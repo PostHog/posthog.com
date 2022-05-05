@@ -227,7 +227,7 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/k
 Note: the Kafka pod will be reprovisioned as part of this upgrade and the ingestion pipeline will experience a brief downtime.
 
 ## Upgrading from 17.x.x
-18.0.0 requires 3 [async migrations](https://posthog.com/docs/self-host/configure/async-migrations/overview) to be completed. 
+18.0.0 requires 3 [async migrations](https://posthog.com/docs/self-host/configure/async-migrations/overview) to be completed.
 
 If you're on PostHog app version 1.33 head over to `/instance/async_migrations` and run first the three required migrations.
 
@@ -235,3 +235,8 @@ If you're on a PostHog app version < 1.33:
 1. upgrade to chart version 16.x.x first (example: use `--version 16.1.0` in the `helm upgrade` command)
 2. run the async migrations at `/instance/async_migrations`
 3. continue the upgrade process as usual
+
+## Upgrading from 18.x.x
+19.0.0 upgrades the Redis dependency chart from version `14.6.2` to `16.8.9` and upgrades Redis from version `6.2.4` to `6.2.7`.
+
+The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/redis#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding any of the values listed in the changelog, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.

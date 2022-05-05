@@ -190,6 +190,9 @@ export const ContactForm = (): JSX.Element => {
                             <option value="PostHog Enterprise (Expanded feature set for large teams)">
                                 PostHog Enterprise (Expanded feature set for large teams)
                             </option>
+                            <option value="PostHog Cloud Enterprise (Expanded feature set hosted by us)">
+                                PostHog Cloud Enterprise (Expanded feature set hosted by us)
+                            </option>
                         </select>
                     </Field>
                     <Field

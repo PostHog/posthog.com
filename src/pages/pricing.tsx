@@ -2,6 +2,7 @@ import { heading } from 'components/Home/classes'
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
+import { Squeak } from 'squeak-react'
 import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
 import { FAQs } from '../components/Pricing/FAQs'
 import { PlanComparison } from '../components/Pricing/PlanComparison'
@@ -24,10 +25,18 @@ const PricingNew = (): JSX.Element => {
                 <PricingTable />
             </section>
             <CloudVsSelfHost className="mb-28 md:pt-28 md:pb-14" />
-            <h3 className="relative text-almost-black text-center mb-6">Compare plans</h3>
+            <h3 className="relative text-primary text-center mb-6">Compare plans</h3>
             <PlanComparison className="mx-4 mb-28" />
             {/* <Savings /> */}
             <FAQs className="mx-auto px-5" />
+            <div className="mx-auto px-5 max-w-screen-md mt-12">
+                <Squeak
+                    apiHost="https://squeak.cloud"
+                    apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                    url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                    organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                />
+            </div>
             <Quote
                 className="my-24 md:my-32 px-5"
                 name="Jonathan Hyde"

@@ -1186,6 +1186,10 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
+                },
+                {
+                    "name": "Data egress & compliance",
+                    "url": "/docs/privacy/egress"
                 }
             ]
         },
@@ -1226,19 +1230,19 @@
             "url": "/product/trends"
         },
         {
-            "name": "User paths",
+            "name": "User Paths",
             "url": "/product/user-paths"
         },
         {
-            "name": "Quantitative analysis",
-            "url": "/product/quantitative-analysis"
+            "name": "Correlation Analysis",
+            "url": "/product/correlation-analysis"
         },
         {
-            "name": "Session recording",
+            "name": "Session Recording",
             "url": "/product/session-recording"
         },
         {
-            "name": "Feature flags",
+            "name": "Feature Flags",
             "url": "/product/feature-flags"
         },
         {
@@ -1246,7 +1250,7 @@
             "url": "/product/heatmaps"
         },
         {
-            "name": "Experimentation suite",
+            "name": "Experimentation",
             "url": "/product/experimentation-suite"
         },
         {

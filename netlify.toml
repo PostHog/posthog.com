@@ -1328,3 +1328,8 @@
 [[redirects]]
     from = "/handbook/engineering/posthog-com/mdx-setup"
     to = "/handbook/engineering/mdx"
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/product/quantitative-analysis"
+    to = "/product/correlation-analysis"    

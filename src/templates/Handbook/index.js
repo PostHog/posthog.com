@@ -12,7 +12,7 @@ import MainSidebar from './MainSidebar'
 import Navigation from './Navigation'
 
 export default function Handbook({
-    data: { post, questions },
+    data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
     const { hash } = useLocation()
@@ -95,7 +95,6 @@ export default function Handbook({
                                     next,
                                     previous,
                                     hideLastUpdated,
-                                    questions: questions?.nodes,
                                 }}
                             />
                         </div>
@@ -108,7 +107,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $slug: String!) {
+    query HandbookQuery($id: String!) {
         post: mdx(id: { eq: $id }) {
             id
             body
@@ -139,36 +138,6 @@ export const query = graphql`
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM D, YYYY")
-                    }
-                }
-            }
-        }
-        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
-            nodes {
-                id
-                childrenReply {
-                    id
-                    subject
-                    name
-                    ts(difference: "days")
-                    childMdx {
-                        body
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 40, height: 40)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 40, height: 40)
-                                }
-                            }
-                        }
                     }
                 }
             }
