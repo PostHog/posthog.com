@@ -85,7 +85,7 @@ While there is value in the items on the right, we value the items on the left m
 
  * 2 word summary: **Nail self-serve**
     * **Customers**
-        * **Focus on large-mid-market.** E.g. Large initial contracts (~$50k/year+) and smaller deals in organizations that will eventually become  large
+        * **Focus on large-mid-market.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become  large
         * **Non Goal:** Start doing outbound sales
     * **Product**
         * **Goals:**
