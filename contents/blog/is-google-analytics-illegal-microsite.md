@@ -10,7 +10,7 @@ author: ["cory-watilo"]
 categories: ["Inside PostHog"]
 ---
 
-On January 14, 2022, the world learned that Austria declared Google Analytics to be illegal (in its default form), since it transmits IP addresses to the United States. Both Austria and The Netherlands both announced the news within days of each other.
+On January 14, 2022, the world learned that Austria had declared Google Analytics to be illegal (in its default form), since it transmits IP addresses to the United States. The Netherlands declared the same view only days later.
 
 Given that PostHog is an open source, self-hostable analytics tool that eliminates the need to transmit data to *any* third party, this was obviously a perfect opportunity for us to capitalize on the news.
 
@@ -129,7 +129,7 @@ Unfortunately, not everyone understood this distinction.
 
 ![D99263DC-C425-4D0D-989D-48C57C899C82.jpeg](../images/blog/is-ga-illegal-microsite/D99263DC-C425-4D0D-989D-48C57C899C82.jpeg)
 
-Given the fact that one of our values is to not use sneaky marketing tactics, I'll won't deny we pushed the boundaries here.
+Given the fact that one of our values is to not use sneaky marketing tactics, I won't deny we pushed the boundaries here.
 
 There's a risk that pitching the tagline the way we did could result in a negative perception with a certain userbase. Ultimately we decided to run with it, and we’ve been pleased with the outcome.
 
