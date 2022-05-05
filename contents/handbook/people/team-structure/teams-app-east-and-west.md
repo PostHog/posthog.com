@@ -50,7 +50,7 @@ Marius
     * **Why important:** This will reduce the barriers to getting quick regular value from PostHog for people who are interested in the same set of things, helping us grow engagement particularly in larger organizations
     * **Status:**  Product Context Gathering
 1. **Session recordings stored outside Clickhouse**: We store recordings in ClickHouse today, but it’s not the ideal storage location for this data
-    * **Why urgent**: Customer’s Clickhouse storage can fill up based on a front end change - breaking PostHog. This has happened to several customers already, and it’s a pretty terrible experience, tihs will also enable us to scale much further and start charging for session recordings, increasing revenue opportunities
+    * **Why urgent**: Customer’s Clickhouse storage can fill up based on a front end change - breaking PostHog. This has happened to several customers already, and it’s a pretty terrible experience, this will also enable us to scale much further and start charging for session recordings, increasing revenue opportunities
     * **Why important**: The reason above, and by completing this, we could expand recording retention significantly - which enables a set of features around sharing and interacting with recordings.
     * **Status**: Hackathon-ed
 
