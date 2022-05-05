@@ -84,7 +84,7 @@ Like a cigarette pack that has to include a giant health warning, we tried to go
 
 ## The response
 
-Our [Hacker News post](https://news.ycombinator.com/item?id=29994183) jumped to the #2 spot on launch day, driving over 100k pageviews to the site. As with most posts, responses were mixed, though we did make some pretty silly gaffes (which we tried to rectify quickly).
+Our [Hacker News post](https://news.ycombinator.com/item?id=29994183) jumped to the #2 spot on launch day, driving over 100,000 pageviews to the site. As with most posts, responses were mixed, though we did make some pretty silly gaffes (which we tried to rectify quickly).
 
 ### Maybe don’t use hosted Google Fonts on a website where you’re trying to point out Google tracking is bad
 
@@ -131,7 +131,11 @@ Unfortunately, not everyone understood this distinction.
 
 Given the fact that one of our values is to not use sneaky marketing tactics, I'll won't deny we pushed the boundaries here.
 
-There's a risk that pitching the tagline the way we did could result in a negative perception with a certain userbase. Ultimately we decided to run with it, and we’ve been pleased with the results.
+There's a risk that pitching the tagline the way we did could result in a negative perception with a certain userbase. Ultimately we decided to run with it, and we’ve been pleased with the outcome.
+
+## Results
+
+Ultimately our goal was brand awareness. In the 30 days following the site's launch, it resulted in 52,197 unique visitors to IsGoogleAnalyticsIllegal.com, which sent 1,791 unique visitors through to posthog.com.
 
 ## What’s next?
 
@@ -139,4 +143,6 @@ We continue to update the site as there are further developments across the EU.
 
 More recently, France found Google Analytics to be illegal, so we recently [added that to the site.](https://isgoogleanalyticsillegal.com/france/) In fact, we saw a huge spike in traffic to the site around this time.
 
-If this continues to become more of a trend, we’ll have to switch from manually creating graphics for the site and switch to an actual hosted mapping solution. But if we get to that point, we’ll be sure to check that there’s no third-party tracking involved.
+If this continues to become more of a trend, we’ll have to switch from manually creating graphics for the site and switch to an actual hosted mapping solution.
+
+But if we get to that point, we’ll be sure to check that there’s no third-party tracking involved.
