@@ -98,7 +98,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Target customers for 2022
 
-Our ideal customer is an large-mid-market (~$50K) who meets as many of these these criteria as possible:
+Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these these criteria as possible:
 
 * _Needs_
   * Need to control their user data
