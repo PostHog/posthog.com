@@ -60,7 +60,7 @@ How can we:
 
 We seeded our [Google Analytics alternatives](https://isgoogleanalyticsillegal.com/alternatives) page with all of the competitors we could think of who would solve this problem for companies affected by this ruling:
 
-- Open source analytics tools
+- Open-source analytics tools
 - Self-hostable analytics tools
 - Analytics providers in the EU, where customer data isn’t transmitted to the United States
 
