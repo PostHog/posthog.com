@@ -202,7 +202,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
                                     <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
-                                    <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
+                                    <FooterMenuItem title="Apps" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
                                 </ul>
                             </div>
