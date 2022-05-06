@@ -81,6 +81,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] (_US only_) I-9 Check
 *   [ ] Team members should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
 *   [ ] Identify user as team member in [Orbit](https://app.orbit.love/login)
+*   [ ] New to GitHub? [Here's a primer on how we use GitHub at PostHog.](/handbook/company/new-to-github) It covers key concepts, managing notifications, and subscribing to channels where team communication takes place.
 
 ## During their first week
 
