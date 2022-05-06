@@ -81,7 +81,7 @@ const sections = [
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: false, 'Cloud Enterprise': false },
+                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
             },
             {
                 name: 'Initial setup',
@@ -103,6 +103,15 @@ const sections = [
                     'Cloud Enterprise': 'Managed by PostHog',
                 },
             },
+            {
+                name: 'Operate in air gapped environment',
+                tiers: {
+                    'PostHog Cloud': false,
+                    'Open source': true,
+                    Scale: false,
+                    Enterprise: true,
+                },
+            },
         ],
     },
     {
@@ -122,7 +131,7 @@ const sections = [
                 name: 'Tracked users',
                 tiers: {
                     Cloud: 'Unlimited',
-                    'Open source': '~1m (limited by database)',
+                    'Open source': '~1m (with default config)',
                     Scale: 'Unlimited',
                     Enterprise: 'Unlimited',
                     'Cloud Enterprise': 'Unlimited',

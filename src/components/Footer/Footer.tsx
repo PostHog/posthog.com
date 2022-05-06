@@ -146,6 +146,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Discussion</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Questions?" url="/questions" />
                                     <FooterMenuItem title="Slack" url="/slack" />
                                     <FooterMenuItem
                                         title="Issues"
