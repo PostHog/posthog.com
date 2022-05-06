@@ -7,7 +7,7 @@ topics:
 
 ### What does the Ingestion Alert app do?
 
-This plugin triggers a webhook when no events have been ingested for a specified period of time. It can be used to alert you when ingestion for your project / instance is not working correctly.
+This app triggers a webhook when no events have been ingested for a specified period of time. It can be used to alert you when ingestion for your project / instance is not working correctly.
 
 ### What are the requirements for this app?
 
@@ -24,7 +24,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Why am I not getting ingestion alert notifications?
 
-If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated. To prevent such dead periods causing alerts you can increase the threshold. You can also use the [heartbeat plugin](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
+If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated. To prevent such dead periods causing alerts you can increase the threshold. You can also use the [heartbeat app](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.
 
 If an alert has already been triggered and ingestion has not recovered for an extended period, you will not receive another reminder that it is down.
 

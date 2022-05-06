@@ -25,7 +25,7 @@ We're donating to three projects and one open-source developer whose work is use
 |----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Rrweb](https://github.com/rrweb-io/rrweb)                     | Rrweb is an open-source web session replay library that supports PostHog's [Session Recording](https://posthog.com/product/session-recording) feature              |
 | [Django REST](https://github.com/encode/django-rest-framework) | DRF is _the_ framework for building APIs in Django and the foundation of PostHog's web API                                                                                                                          |
-| [Babel](https://github.com/babel/)                             | We use Babel to safely run TypeScript plugins in a NodeJS environment                                                                                                                                                                           |
+| [Babel](https://github.com/babel/)                             | We use Babel to safely run TypeScript apps in a NodeJS environment                                                                                                                                                                           |
 | [Sindre Sorhus](https://github.com/sindresorhus)               | Sindre is a prolific open-source developer who maintains some of our [most-used packages](https://github.com/sponsors/community?account=PostHog&page=1&sort_by=MOST_USED)  |
 
 

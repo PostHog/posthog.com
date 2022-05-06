@@ -33,11 +33,11 @@ To set the right permissions up for the BigQuery plugin, you'll need:
 1. A service account.
 2. A dataset which has permissions allowing the service account to access it.
 
-Here's how to set these up so that the PostHog plugin has access only to the table it needs:
+Here's how to set these up so that the app has access only to the table it needs:
 
-1. [Create a service account](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication). Keep hold of the JSON file at the end of these steps for setting up the plugin, and remember the name too.
+1. [Create a service account](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication). Keep hold of the JSON file at the end of these steps for setting up the app, and remember the name too.
 
-2. Create a role which has only the specific permissions the PostHog BigQuery plugin requires (listed below), or use the built in `BigQuery DataOwner` permission. If you create a custom role, you will need:
+2. Create a role which has only the specific permissions the PostHog BigQuery app requires (listed below), or use the built in `BigQuery DataOwner` permission. If you create a custom role, you will need:
    * bigquery.datasets.get
    * bigquery.tables.create
    * bigquery.tables.get

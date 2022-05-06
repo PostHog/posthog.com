@@ -26,11 +26,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 2. Search for 'First Time Event Tracker' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-This app will only work on events ingested _after_ the plugin was enabled. 
+This app will only work on events ingested _after_ the app was enabled. 
 
 ### Does this app work retroactively?
 
-No. This app will only work on events ingested _after_ the plugin was enabled. 
+No. This app will only work on events ingested _after_ the app was enabled. 
 
 This means it will register events as being the first if there were events that occurred before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
 

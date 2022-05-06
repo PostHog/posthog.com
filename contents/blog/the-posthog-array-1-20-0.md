@@ -18,23 +18,23 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 > If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
-### [Plugins, Plugins, and more Plugins](/plugins)
+### [Apps, Apps, and more Apps](/plugins)
 
 ![Plugin Library Screenshot](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-library.png)
 
-A lot has been happening on our Plugins front. 
+A lot has been happening on our Apps front. 
 
-Besides a whole bunch work to deliver performance improvements and mature the PostHog Plugins ecosystem, we have two major changes being introduced with this new PostHog version:
+Besides a whole bunch work to deliver performance improvements and mature the PostHog Apps ecosystem, we have two major changes being introduced with this new PostHog version:
 
-**A shiny new plugin library**
+**A shiny new apps library**
 
-We have released a [plugin library](/plugins) where you can browse through all the plugins built by our core team and community, and made sure the library is populated with plugins! Thus, we now have integrations that support getting data from GitHub and GitLab, or sending data over to BigQuery and Hubspot, for example. 
+We have released a [apps library](/product) where you can browse through all the apps built by our core team and community, and made sure the library is populated with apps! Thus, we now have integrations that support getting data from GitHub and GitLab, or sending data over to BigQuery and Hubspot, for example. 
 
-We're working to make plugins available on Cloud, but, in the meanwhile, if you're self-hosting, do check out our plugins and let us know what you think!
+We're working to make apps available on Cloud, but, in the meanwhile, if you're self-hosting, do check out our apps and let us know what you think!
 
-**Plugins can now access persistent storage**
+**Apps can now access persistent storage**
 
-Up until now, plugin builders would have noticed that the `cache` could have been used to store data in-memory using Redis, but we now also support `storage`, which allows plugins to store data in a persistent form, opening up a lot of new use cases for you to explore.
+Up until now, app builders would have noticed that the `cache` could have been used to store data in-memory using Redis, but we now also support `storage`, which allows apps to store data in a persistent form, opening up a lot of new use cases for you to explore.
 
 ### [Static Cohorts](https://github.com/PostHog/posthog/pull/2932)
 

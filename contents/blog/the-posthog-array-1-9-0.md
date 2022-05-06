@@ -48,7 +48,7 @@ What's new? We:
 
 ### [Docusaurus integration](/docs/integrate/third-party/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](/docs/integrate/third-party/docusaurus) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus integration](/docs/integrate/third-party/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 

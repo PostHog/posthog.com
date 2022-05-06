@@ -22,7 +22,7 @@ You'll also need Mailboxlayer access and an API key.
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Email Scoring' and select the app, press Install.
 3. Get an API key from Mailboxlayer.
-4. Click '+ Install new plugin' and use this URL to install: `https://github.com/PostHog/mailboxlayer-plugin`
+4. Click '+ Install new app' and use this URL to install: `https://github.com/PostHog/mailboxlayer-plugin`
 5. Add the API key to the config.
 6. Enable the app and watch the email scores come in!
 

@@ -12,7 +12,7 @@ featuredImageType: standard
 
 Our primary goals for this release were to iron out bugs and improve the user experience of our Beta features.
 
-As a result, we fixed **a whole lot of stuff**. We merged dozens of PRs with session recording fixes and improvements, and a dozen more with updates to our plugins functionality. We also improved things like event ingestion, the UX for feature flags, and our settings for both organizations and projects. You can read through the entire list of fixes [later in this post](#bug-fixes-and-performance-improvements), but beware: it's quite long.
+As a result, we fixed **a whole lot of stuff**. We merged dozens of PRs with session recording fixes and improvements, and a dozen more with updates to our apps functionality. We also improved things like event ingestion, the UX for feature flags, and our settings for both organizations and projects. You can read through the entire list of fixes [later in this post](#bug-fixes-and-performance-improvements), but beware: it's quite long.
 
 Finally, thank you to everyone who helped us out with feedback and contributions during this release cycle, you help us make PostHog better every day.
 
@@ -34,11 +34,11 @@ The new version includes a lot of bugfixes that improve our session recording fe
 
 R.I.P. to the hundreds of lines of JavaScript that were removed - you will not be missed.
 
-### [Plugins are now available on Kubernetes deployments](https://github.com/PostHog/charts/pull/24)
+### [Apps are now available on Kubernetes deployments](https://github.com/PostHog/charts/pull/24)
 
-Following feedback from a user, we have now added support for [PostHog Plugins](/docs/plugins/overview) to our Helm chart. 
+Following feedback from a user, we have now added support for [PostHog Apps](/docs/plugins/overview) to our Helm chart. 
 
-If you're using the chart to deploy PostHog, upgrading to the latest version will give you access to the new plugin server (Beta).
+If you're using the chart to deploy PostHog, upgrading to the latest version will give you access to the new app server (Beta).
 
 ### [Session Recording Improvements](https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Aclosed+session)
 
@@ -121,7 +121,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Return person data together with session recording [\#2528](https://github.com/PostHog/posthog/pull/2528) ([macobo](https://github.com/macobo))
 - Fix /bin/tests [\#2527](https://github.com/PostHog/posthog/pull/2527) ([macobo](https://github.com/macobo))
 - Show which heroku processes are optional [\#2526](https://github.com/PostHog/posthog/pull/2526) ([timgl](https://github.com/timgl))
-- Fix celery heartbeat bug, Add redis & plugins to preflight [\#2520](https://github.com/PostHog/posthog/pull/2520) ([mariusandra](https://github.com/mariusandra))
+- Fix celery heartbeat bug, Add redis & apps to preflight [\#2520](https://github.com/PostHog/posthog/pull/2520) ([mariusandra](https://github.com/mariusandra))
 - Move redis status closer to other fields [\#2519](https://github.com/PostHog/posthog/pull/2519) ([mariusandra](https://github.com/mariusandra))
 - Update posthog-js and posthog-react-rrweb-player [\#2518](https://github.com/PostHog/posthog/pull/2518) ([macobo](https://github.com/macobo))
 - Show session player icons as greyed out if visited [\#2517](https://github.com/PostHog/posthog/pull/2517) ([macobo](https://github.com/macobo))

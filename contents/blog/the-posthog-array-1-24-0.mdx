@@ -35,7 +35,7 @@ Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumu
 -   **New:** Custom data attributes support for the toolbar
 -   **New:** Advanced dashboard collaboration features
 -   **New:** S3 export plugin
--   **New:** Snowflake export plugin
+-   **New:** Snowflake export app
 -   **Improvement:** Session recording support for heavy websites
 -   **Improvement:** Multiple new configuration options for `posthog-js`
 -   **Improvement:** First Time Event Tracker plugin now tracks session starts
@@ -46,13 +46,13 @@ Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumu
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
-### [GeoIP plugin for all](https://github.com/PostHog/posthog/pull/3894)
+### [GeoIP for all](https://github.com/PostHog/posthog/pull/3894)
 
 ![GeoIP](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/geoip.png)
 
-Plugins are now live on PostHog Cloud, and, as a bonus, we have now added out-of-the-box support for the PostHog GeoIP plugin, which adds location properties to your events, such as country and city, as well as a dozen other values!
+Apps are now live on PostHog Cloud, and, as a bonus, we have now added out-of-the-box support for the PostHog GeoIP enricher, which adds location properties to your events, such as country and city, as well as a dozen other values!
 
-The plugin works on both cloud and self-hosted installations (`1.24.0` minimum).
+The app works on both cloud and self-hosted installations (`1.24.0` minimum).
 
 ### [New 'Cohorts' tab on person pages](https://github.com/PostHog/posthog/pull/3744)
 
@@ -80,13 +80,13 @@ These are enterprise features available to our paying Cloud customers, and to en
 
 If you're interested in having these features on your self-hosted PostHog instance, contact us on <i>sales@posthog.com</i>.
 
-### [S3 and Snowflake export plugins](/plugins)
+### [S3 and Snowflake export apps](/plugins)
 
-We have new plugins to send PostHog events to [S3 buckets](/plugins/s3-export) and [Snowflake](/plugins/snowflake-export) instances!
+We have new apps to send PostHog events to [S3 buckets](/plugins/s3-export) and [Snowflake](/plugins/snowflake-export) instances!
 
 You have Marius to thank for these - and you really should. Our resident progressive urbanite had to work hard to get around [all sorts of hurdles](https://github.com/PostHog/snowflake-export-plugin#temporary-tables) to get these out.
 
-The plugins work on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
+The apps work on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
 
 ### [Session recording for heavy websites](https://github.com/PostHog/posthog/pull/3705)
 
@@ -118,7 +118,7 @@ See our [JS library page](/docs/integrate/client/js) for more details.
 
 ### [Track session starts](/plugins/first-time-event-tracker)
 
-Our First Time Event Tracker plugin now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
+Our First Time Event Tracker now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
 
 ### [User Interviews](https://calendly.com/posthog-feedback)
 

@@ -44,12 +44,12 @@ One example of a recent experiment is in Vendasta’s account creation process, 
 
 “I made my own [dashboards](/docs/user-guides/dashboards) to share with my team so everyone can track the results,” said Taric. “We had a drop-off of around 60% before, but this experiment cuts that in half to a 30% drop-off — a 50% improvement without a single user complaining!”
 
-## Replacing Snowplow with an open-source ETL plugin
+## Replacing Snowplow with an open-source ETL app
 
 With a self-serve solution in place to deliver on the needs of the rest of the organization, Vendasta’s Business Intelligence team is freed to focus on higher-level problems and queries. Meanwhile, the Engineering team has been able to thoroughly embed PostHog into its tech stack in a way no closed-source tool could match. 
 
 "A lot of our backend is in Golang," explains Staff Developer Jesse Redl. "Before, we were using Snowplow Insights, which gave us access to an ETL pipeline that's largely backed by [Google Cloud Dataflow and Pub/Sub](/integrations/pubsub-export)."
 
-"Now, thanks to [the open source plugin system](/integrations), we've written our own Pub/Sub plugin where each event is published to Google Cloud Pub/Sub as it's processed, enabling us to hook into events. PostHog has replaced Snowplow — and, because it's open source, we've released that plugin to PostHog's library too."
+"Now, thanks to [the open source app system](/integrations), we've written our own Pub/Sub app where each event is published to Google Cloud Pub/Sub as it's processed, enabling us to hook into events. PostHog has replaced Snowplow — and, because it's open source, we've released that app to PostHog's library too."
 
 “This open-source aspect is going to be interesting as our organization continues to evolve and grow. We’re not a start-up anymore. We’re becoming more data driven in the decisions we make…and PostHog has been a natural fit for that.”

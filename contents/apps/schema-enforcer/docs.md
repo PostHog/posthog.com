@@ -16,7 +16,7 @@ The app enables you to enforce a schema on events in PostHog as they are ingeste
 It also:
 
 - Removes all other properties from an event except selected ones if acceptOnlySchemaProps is true
-- Configuration is done via a JSON file uploaded as a plugin attachment
+- Configuration is done via a JSON file uploaded as an attachment
 
 ### What are the requirements for this app?
 
