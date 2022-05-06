@@ -107,7 +107,7 @@ See the handbook page [Deployments Support](/handbook/engineering/deployments-su
 
 If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
 
-1. Check if the plugin server is alive and healthy (suggest a restart if not - this is safe)
+1. Check if the app/plugin server is alive and healthy (suggest a restart if not - this is safe)
 2. Ask if they have Sentry set up and see any errors
 3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 

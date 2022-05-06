@@ -29,7 +29,7 @@ hideAnchor: true
 - All events are correct (99.99%)
 - The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
 - Events are ingested and visible in app within 5 seconds p99
-- Integrated delightful plugin developer experience (inside PostHog)
+- Integrated delightful app developer experience (inside PostHog)
     - CI/CD
     - Testing
     - Synthetic data testing
@@ -41,7 +41,7 @@ hideAnchor: true
 - Ingestion monitoring and management
     - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
 - Events are ingested and visible in app within 30 seconds p99
-- Easy to build a well tested plugin (DevEx)
+- Easy to build a well-tested app (DevEx)
     - Documentation
     - GitHub Template
         - Unit tests

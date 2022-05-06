@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** It's worth reading the [Building plugins overview](./overview) for a quick introduction to how to build your own plugin.
+> **Note:** It's worth reading the [Building apps overview](./overview) for a quick introduction to how to build your own app.
 
 ## plugin.json file
 
@@ -39,7 +39,7 @@ A `plugin.json` file is structured as follows:
 }
 ```
 
-Here's an example `plugin.json` file from our ['Hello world plugin'](https://github.com/PostHog/helloworldplugin):
+Here's an example `plugin.json` file from our ['Hello world app'](https://github.com/PostHog/helloworldplugin):
 
 ```json
 {
@@ -49,7 +49,7 @@ Here's an example `plugin.json` file from our ['Hello world plugin'](https://git
   "main": "index.js",
   "config": [
     {
-      "markdown": "This is a sample plugin!"
+      "markdown": "This is a sample app!"
     },
     {
       "key": "bar",
@@ -67,7 +67,7 @@ Most options in this file are self-explanatory, but there are a few worth explor
 
 ### main
 
-`main` determines the entry point for your plugin, where your `setupPlugin` and `processEvent` functions are. More on these later.
+`main` determines the entry point for your app, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
 ### config
 
@@ -78,29 +78,29 @@ Each object in a config can have the following properties:
 |   Key    |                    Type                    |                                                                           Description                                                                           |
 | :------: | :----------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |   type   | `"string"` or `"attachment"` or `"choice"` | Determines the type of the field - "attachment" asks the user for an upload, and "choice" requires the config object to have a `choices` array, explained below |
-|   key    |                  `string`                  |                                     The key of the plugin config field, used to reference the value from inside the plugin                                      |
-|   name   |                  `string`                  |                                          Displayable name of the field - appears on the plugin setup in the PostHog UI                                          |
+|   key    |                  `string`                  |                                     The key of the app config field, used to reference the value from inside the app                                      |
+|   name   |                  `string`                  |                                          Displayable name of the field - appears on the app setup in the PostHog UI                                          |
 | default  |                  `string`                  |                                                                   Default value of the field                                                                    |
 |   hint   |                  `string`                  |                                             More information about the field, displayed under the in the PostHog UI                                             |
 | markdown |                  `string`                  |                                                             Markdown to be displayed with the field                                                             |
 |  order   |                  `number`                  |                                                                           Deprecated                                                                            |
 | required |                 `boolean`                  |                                               Specifies if the user needs to provide a value for the field or not                                               |
-|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for plugins that ask for API Keys, for example                      |
+|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for apps that ask for API Keys, for example                      |
 | choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
 
-> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your plugin but can be placed anywhere in the `config` array and is useful for customizing the content of your plugin's configuration step in the PostHog UI.
+> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your app but can be placed anywhere in the `config` array and is useful for customizing the content of your app's configuration step in the PostHog UI.
 
 ## PluginMeta
 
-> Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
+> Check out [App Types](/docs/plugins/types) for a full spec of types for app authors.
 
-**Every plugin server function** is called by the plugin server with an object of type `PluginMeta` that will always contain the object `cache`, and can also include `global`, `attachments`, and `config`, which you can use in your logic. 
+**Every plugin server function** is called by the server with an object of type `PluginMeta` that will always contain the object `cache`, and can also include `global`, `attachments`, and `config`, which you can use in your logic. 
 
 Here's what they do:
 
 ### config
 
-Gives you access to the plugin config values as described in `plugin.json` and configured via the PostHog interface.
+Gives you access to the app config values as described in `plugin.json` and configured via the PostHog interface.
 
 Example:
 ```js
@@ -159,7 +159,7 @@ export function processEvent(event, { config, cache }) {
 
 ### global
 
-The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog plugins. 
+The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. 
 
 Example:
 ```js
@@ -200,11 +200,11 @@ export function setupPlugin({ attachments, global }: Meta) {
 
 ### jobs
 
-The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs-1) for more information.
+The `jobs` object gives you access to the jobs you specified in your app. See [Jobs](#jobs-1) for more information.
 
 ### geoip
 
-`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the plugin server to get location data for an IP. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
+`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the app server to get location data for an IP. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
 
 It has a `locate` method that takes an ip and returns an object possibly containing `city`, `location`, `postal`, and `subdivisions`.
 
@@ -212,13 +212,13 @@ Read more about the response from `geoip.locate` [here](https://github.com/maxmi
 
 ## setupPlugin function
 
-`setupPlugin` is a function you can use to dynamically set plugin configuration based on the user's inputs at the configuration step. 
+`setupPlugin` is a function you can use to dynamically set app configuration based on the user's inputs at the configuration step. 
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 
 It takes only an object of type `PluginMeta` as a parameter and does not return anything.
 
-Example (from the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin)):
+Example (from the [PostHog MaxMind app](https://github.com/PostHog/posthog-maxmind-plugin)):
 
 ```js
 export function setupPlugin({ attachments, global }) {
@@ -228,7 +228,7 @@ export function setupPlugin({ attachments, global }) {
 }
 ```
 
-If you throw a `RetryError` (imported from `@posthog/plugin-scaffold`) in your `setupPlugin` function, PostHog will retry the initialization up to 10 times within an hour before disabling the plugin. Errors other than `RetryError` cause the plugin to be disabled automatically.
+If you throw a `RetryError` (imported from `@posthog/plugin-scaffold`) in your `setupPlugin` function, PostHog will retry the initialization up to 10 times within an hour before disabling the plugin. Errors other than `RetryError` cause the app to be disabled automatically.
 
 `RetryError` should be used to indicate an error that is dependent on an external service, meaning that retrying it may actually lead to a different outcome (success). If you throw a `RetryError` because parsing a config option fail, it will never actually succeed.
 
@@ -262,7 +262,7 @@ export function setupPlugin({ config }) {
 
 > If you were using `processEventBatch` before, you should now use `processEvent`. `processEventBatch` has been **deprecated**.
 
-`processEvent` is the juice of your plugin. 
+`processEvent` is the juice of your app. 
 
 In essence, it takes an event as a parameter and returns an event as a result. In the process, this event can be:
 
@@ -272,7 +272,7 @@ In essence, it takes an event as a parameter and returns an event as a result. I
 
 It takes an event and an object of type `PluginMeta` as parameters and returns an event.
 
-Here's an example (from the ['Hello World Plugin'](https://github.com/PostHog/helloworldplugin)):
+Here's an example (from the ['Hello World App'](https://github.com/PostHog/helloworldplugin)):
 
 ```js
 async function processEvent(event, { config, cache }) {
@@ -289,7 +289,7 @@ async function processEvent(event, { config, cache }) {
 }
 ```
 
-As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all plugins run).
+As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
 
 > Please note that `$snapshot` events (used for session recordings) do not go through `processEvent`. Instead, you can access them via the `onSnapshot` function described below.
 
@@ -297,11 +297,11 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 > **Minimum PostHog version:** 1.25.0 
 
-`onEvent` works similarly to `processEvent`, except any returned value is ignored by the plugin server. In other words, `onEvent` can read an event but not modify it. 
+`onEvent` works similarly to `processEvent`, except any returned value is ignored by the app server. In other words, `onEvent` can read an event but not modify it. 
 
-In addition, `onEvent` functions will run after all enabled plugins have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
+In addition, `onEvent` functions will run after all enabled apps have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
 
-This was originally built for and is particularly useful for export plugins. These plugins need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
+This was originally built for and is particularly useful for export apps. These apps need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
 
 Here's a quick example:
 
@@ -323,7 +323,7 @@ async function onEvent(event) {
 
 ## Scheduled tasks
 
-Plugins can also run scheduled tasks through the functions:
+Apps can also run scheduled tasks through the functions:
 
 - `runEveryMinute`
 - `runEveryHour`
@@ -339,7 +339,7 @@ async function runEveryMinute({ config }) {
     const response = await fetch(url)
     const metrics = await response.json()
 
-  // posthog.capture is also available in plugins by default
+  // posthog.capture is also available in apps by default
     posthog.capture('github metrics', { 
         stars: metrics.stargazers_count,
         open_issues: metrics.open_issues_count,
@@ -349,11 +349,11 @@ async function runEveryMinute({ config }) {
 }
 ```
 
-It's worth noting that the plugin server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
+It's worth noting that the server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
 
 ## teardownPlugin function
 
-`teardownPlugin` is ran when a plugin VM is destroyed, because of, for example, a plugin server shutdown or an update to the plugin. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
+`teardownPlugin` is ran when a app VM is destroyed, because of, for example, a app server shutdown or an update to the app. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
 
 ```js
 async function teardownPlugin({ global }) {
@@ -377,11 +377,11 @@ async function exportEvents(events, meta) {
 }
 ```
 
-In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled plugins. In addition, if a `RetryError` is thrown, `exportEvents` is retried up to 15 times within 24 hours using an exponential backoff approach.
+In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled apps. In addition, if a `RetryError` is thrown, `exportEvents` is retried up to 15 times within 24 hours using an exponential backoff approach.
 
 ## Available packages and imports
 
-Plugins have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
+Apps have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
 
 ### Global
 
@@ -389,7 +389,7 @@ Plugins have access to some special objects in the global scope, as well as a va
 
 <blockquote class="warning-note">
 
-⚠️ Be very careful when using `fetch` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed plugins and could potentially lead to an infinite loop of event generation.
+⚠️ Be very careful when using `fetch` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
 
 </blockquote>
 
@@ -403,15 +403,15 @@ The global `posthog` object gives you access to the following:
 
 <blockquote class="warning-note">
 
-⚠️ Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed plugins and could potentially lead to an infinite loop of event generation.
+⚠️ Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
 
 </blockquote>
 
-Calling `posthog.capture` allows you to capture a new event under the same project the plugin is running in.
+Calling `posthog.capture` allows you to capture a new event under the same project the app is running in.
 
 It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
 
-Plugins can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "Plugin Server" person.
+Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "App Server" person.
 
 Method signature:
 
@@ -422,7 +422,7 @@ capture(event: string, properties?: Record<string, any>) => void
 
 <blockquote class="warning-note">
 
-⚠️ Be very careful when using `posthog.api.post` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed plugins and could potentially lead to an infinite loop of event generation.
+⚠️ Be very careful when using `posthog.api.post` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
 
 </blockquote>
 
@@ -433,7 +433,7 @@ capture(event: string, properties?: Record<string, any>) => void
 - `put(path: string, options?: ApiMethodOptions): Promise<Response>`
 - `delete(path: string, options?: ApiMethodOptions): Promise<Response>`
 
-These correspond to HTTP requests and make interacting with the PostHog API an easier process. By default, a personal API key will be provisioned for you and requests will automatically specify this key, as well as set the project the plugin is installed in as the project to use the API with.
+These correspond to HTTP requests and make interacting with the PostHog API an easier process. By default, a personal API key will be provisioned for you and requests will automatically specify this key, as well as set the project the app is installed in as the project to use the API with.
 
 You can override these defaults to interact with another PostHog project or instance. The options available are:
 
@@ -497,17 +497,17 @@ You can also use `require` for imports.
 
 ## Logs
 
-Plugins can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
+Apps can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
 
-These logs can be seen on the 'Logs' page of each plugin, which can be accessed on the 'Plugins' page of the PostHog UI.
+These logs can be seen on the 'Logs' page of each app, which can be accessed on the 'Apps' page of the PostHog UI.
 
 ## Jobs
 
 > **Minimum PostHog version:** 1.25.0
 
-Jobs are a way for plugin developers to schedule and run tasks asynchronously using a powerful scheduling API.
+Jobs are a way for app developers to schedule and run tasks asynchronously using a powerful scheduling API.
 
-Jobs make possible use cases such as retrying failed requests, a key component of plugins that export data out of PostHog.
+Jobs make possible use cases such as retrying failed requests, a key component of apps that export data out of PostHog.
 
 ### Specifying jobs
 
@@ -521,7 +521,7 @@ export const jobs = {
 }
 ```
 
-Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all plugin functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
+Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all app functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
 
 ### Triggering a job
 
@@ -576,7 +576,7 @@ export async function processEvent (event, { jobs }) {
 
 ![exportEvents Metrics Example](../../../images/plugins/exportEvents-metrics.png)
 
-Plugin metrics allow plugin developers to provide metrics for users about plugin performance. They will appear in a chart on the plugins page, which is made visible by clicking the chart icon for a specific plugin. 
+App metrics enable app developers to provide metrics for users about app performance. They will appear in a chart on the apps page, which is made visible by clicking the chart icon for a specific app. 
 
 This could be tracking the number of errors and successes when exporting events to another service, or the maximum amount of time taken for a request to a third-party API to complete, for example.
 ### Specifying metrics
@@ -604,7 +604,7 @@ Each metric type has an operation it is allowed to perform. This is as follows:
 | `max` | `max` |
 | `min` | `min` |
 
-To update a metric, access `metrics` via the plugin's `meta` object, and you'll be able to call the respective methods on them, like so:
+To update a metric, access `metrics` via the app's `meta` object, and you'll be able to call the respective methods on them, like so:
 
 ```js
 export function processEvent(event, { metrics }) {
@@ -620,21 +620,21 @@ export function processEvent(event, { metrics }) {
 
 ### exportEvents
 
-If your plugin uses `exportEvents`, some metrics will be automatically provided for you. These are:
+If your app uses `exportEvents`, some metrics will be automatically provided for you. These are:
 
 - `events_seen`: How many events the `exportEvents` function has received for processing
 - `events_delivered_successfully`: The number of events that were processed by the `exportEvents` function and no error was thrown
 - `retry_errors`: The number of explicit errors of type `RetryError` thrown by the `exportEvents` function. These errors trigger retries to ensure the payload gets delivered.
 - `other_errors`: Unexpected errors thrown by the `exportEvents` function. Any error beyond a `RetryError` is considered unexpected
-- `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the plugin exhausts all the retries triggered by a `RetryError`
+- `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the app exhausts all the retries triggered by a `RetryError`
 
 
 ## Testing
 
-In order to ensure plugins are stable and work as expected for all their users, we highly recommend writing tests for every plugin you build.
+In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
 
-### Adding testing capabilities to your plugin
-You will need to add jest and our plugin testing scaffold to your project in your `package.json` file:
+### Adding testing capabilities to your app
+You will need to add jest and our app testing scaffold to your project in your `package.json` file:
 ```json
 "jest": {
     "testEnvironment": "node"
@@ -652,11 +652,11 @@ Create your test files e.g. `index.test.js` or `index.test.ts` for testing your 
 
 ### Writing tests
 
-Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your plugin (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
-### Using the plugin scaffold
+### Using the app scaffold
 
-Since most PostHog plugins are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
+Since most PostHog apps are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
 
 * **CreateEvent** - This will mock an event being created in PostHog e.g. ```createEvent({ event: "booking completed", properties: { amount: "20", currency: "USD" } })```
 * **CreateIdentify** - This will mock an identify event e.g. ```createIdentify()```

@@ -55,7 +55,7 @@ When setting up a PostHog instance **we strongly recommend that you use HTTPS** 
 
 We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain PHI, it may be possible for malicious users to infer PHI unless it is evaluated thoroughly via expert determination.
 
-Finally, we advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Plugins are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
+Finally, we advise caution when installing, building and enabling [plugins](https://posthog.com/docs/user-guides/plugins) for your PostHog instance. Apps are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
