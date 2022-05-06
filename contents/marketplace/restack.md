@@ -6,11 +6,12 @@ hideLastUpdated: true
 
 **[← Back to Marketplace](/marketplace)**
 
-<!-- INSERT: description of you / your company here. Tip: If you provide services, include detail like the types of client you focus on, timezones covered and the size of your organization. The more specific you are, the better the ability for users to qualify themselves as relevant to you. -->
 <img src="/images/marketplace/restack.png" alt="Restack logo" width="100" style={{borderRadius: '100px', float: 'right', margin: '0 0 1rem 1rem'}} />
+
 [Restack](https://www.restack.io) enables you to run PostHog on your own Kubernetes Cluster on AWS.
-At Restack we believe in open source but also know the pain of hosting and maintaining them on your own servers. 
-Which is why we provide you the experience of using a SaaS tool but with all the benefits of an open source tool. 
+At Restack, we believe in open-source but also know the pain of hosting and maintaining them on your own servers. 
+
+That's why we provide you the experience of using a SaaS tool but with all the benefits of an open source tool. 
 
 ## Services offered
 

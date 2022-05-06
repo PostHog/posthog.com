@@ -23,7 +23,7 @@ Altinity are experts in Clickhouse and data infrastructure.
 
 They help large organizations to deploy, manage and scale their PostHog instance.
 
-**Services:** PostHog as a Managed Service / Deployment help
+**Services:** PostHog as a managed service / deployment help
 
 <hr />
 
@@ -39,7 +39,11 @@ Deploy PostHog to your own cloud (AWS, GCP) and forget about the hastle of upgra
 
 #### [**Restack**](../marketplace/restack)
 
-Run PostHog on your own Kubernetes Cluster on AWS without having to worry about EKS setup, k8s provisioning, networking, updates etc.
+Restack are experts in deploying open-source software and provide a simple way to create open-source stacks.
+
+With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without worrying about EKS setup, k8s provisioning, networking, compliance or updates.
+
+**Services:** PostHog as a managed service / GDPR, SOC 2 and HIPAA compliant deployment
 
 <hr />
 
