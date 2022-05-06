@@ -11836,14 +11836,6 @@ gatsby-remark-katex@^3.1.8:
     remark-math "^1.0.6"
     unist-util-visit "^1.4.1"
 
-gatsby-remark-mermaid@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-mermaid/-/gatsby-remark-mermaid-2.1.0.tgz#8e429a3e038cdde588cdcfbe5f584d3564322359"
-  integrity sha512-9SVQkD5aE0u8XFlnnuxWx1HTjTuVkynv9dZJAZQV0S/eZX9YR07f5LtDVqT89n9qwwKbCf3pWT82DcMatFbjeA==
-  dependencies:
-    mermaid "^8.7.0"
-    unist-util-visit "^1.4.0"
-
 gatsby-remark-prismjs@^3.5.1:
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.13.0.tgz#010c4f9371154536018d4488ee474066a438a0cb"
