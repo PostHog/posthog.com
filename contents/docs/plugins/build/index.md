@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Build your own PostHog plugin
 sidebar: Docs
 showTitle: true
 ---
@@ -8,7 +8,7 @@ PostHog makes it possible to build your own [plugins](/docs/plugins/overview) an
 
 Plugins can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some plugins that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/plugins/build/reference#jobs-1). 
 
-## Building your own plugin
+## Getting started
 
 Now, how do you make all of this happen? Each plugin has two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the JSON file has configuration for user inputs. This config is what you see in PostHog:
 
