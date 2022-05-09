@@ -76,7 +76,7 @@ Like PostHog, Countly is a extendable product analytics platform that offers sel
 Countly offers a robust suite of features and an extensive range of integrations, including a Net Promoter Score (NPS) survey plugin. The ability to track crashes and errors, and to issue push notifications to mobile users, are also useful additions over most other analytics tools.
 
 ### Who is Countly for?
-Countly's range of features make it particularly attractive to app developers, especially those working on multi-platform apps across iOS, Mac, Windows, and Android. It's open source Community Edition is available on a AGPL v3 license, though this version removes the majority of its user behavior features, such as retention, revenue tracking, user tracking, cohorts, funnels, and user flow.   
+Countly's range of features make it particularly attractive to mobile app developers, especially those working on multi-platform apps across iOS, Mac, Windows, and Android. Its open source Community Edition is available on a AGPL v3 license, though this version removes the majority of its user behavior features, such as retention, revenue tracking, user tracking, cohorts, funnels, and user flow.   
 
 ### Features & benefits
 - Support for mobile, web, desktop and IoT devices
