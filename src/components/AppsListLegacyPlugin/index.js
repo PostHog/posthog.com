@@ -29,9 +29,15 @@ import migrator3000Image from '../AppsList/logos/migrator-3000.png'
 import ingestionAlertImage from '../AppsList/logos/ingestion-alert.png'
 import heartbeatImage from '../AppsList/logos/heartbeat.png'
 import propertyFilterImage from '../AppsList/logos/property-filter.png'
-//import segmentImage from '../AppsList/logos/segment.png'
-//import airbyteImage from '../AppsList/logos/airbyte.png'
-//import n8nImage from '../AppsList/logos/n8n.png'
+import segmentImage from '../AppsList/logos/segment.png'
+import airbyteImage from '../AppsList/logos/airbyte.png'
+import n8nImage from '../AppsList/logos/n8n.png'
+import twilioImage from '../AppsList/logos/twilio.png'
+import shopifyImage from '../AppsList/logos/shopify.png'
+import intercomImage from '../AppsList/logos/intercom.png'
+import amazonkinesisImage from '../AppsList/logos/kinesis.png'
+import launchdarklyImage from '../AppsList/logos/launchdarkly.png'
+import brazeImage from '../AppsList/logos/braze.png'
 
 const LegacyListing = ({ name, image, url }) => {
     return (
@@ -119,11 +125,15 @@ export default function AppsList() {
             <LegacyListing name="Ingestion Alert" image={ingestionAlertImage} url="/apps/ingestion-alert" />
             <LegacyListing name="Heartbeat" image={heartbeatImage} url="/apps/heartbeat" />
             <LegacyListing name="Property Filter" image={propertyFilterImage} url="/apps/property-filter" />
-            {/*
+            <LegacyListing name="Twilio" image={twilioImage} url="/apps/twilio" />
+            <LegacyListing name="Shopify" image={shopifyImage} url="/apps/shopify" />
+            <LegacyListing name="Intercom" image={intercomImage} url="/apps/intercom" />
+            <LegacyListing name="Amazon Kinesis" image={amazonkinesisImage} url="/apps/amazon-kinesis" />
+            <LegacyListing name="Launch Darkly" image={launchdarklyImage} url="/apps/launch-darkly" />
+            <LegacyListing name="Braze" image={brazeImage} url="/apps/braze" />
             <LegacyListing name="Segment" image={segmentImage} url="/apps/segment" />
             <LegacyListing name="Airbyte" image={airbyteImage} url="/apps/airbyte" />
             <LegacyListing name="n8n" image={n8nImage} url="/apps/n8n" />
-            */}
         </React.Fragment>
     )
 }
