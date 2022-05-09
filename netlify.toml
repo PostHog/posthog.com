@@ -1162,7 +1162,6 @@
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
 
-
 # Added: 2022-02-14
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
@@ -1282,6 +1281,53 @@
 [[redirects]]
     from = "/tutorials/free-hotjar-alternative"
     to = "/blog/best-open-source-session-replay-tools"
+    
+# Added: 2022-05-03
+[[redirects]]
+    from = "/docs/privacy/hipaa-compliance"
+    to = "/blog/hipaa-compliant-analytics"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/conventions/frontend-coding"
+    to = "/docs/contribute/coding-conventions"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/developing-the-website"
+    to = "/docs/contribute/contribute-to-website"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/developing-locally"
+    to = "/docs/contribute/developing-locally"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/project-structure"
+    to = "/docs/contribute/project-structure"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/stack"
+    to = "/docs/contribute/stack"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/cloud-providers"
+    to = "/handbook/engineering/aws"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/mdx-setup"
+    to = "/handbook/engineering/mdx"
 
 # Added: 2022-05-03
 [[redirects]]
