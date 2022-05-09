@@ -190,8 +190,8 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	<tr>
         	<td></td>
         	<td></td>
-        	<td className="text-center"><a href="/pricing#cloud">Get started with PostHog Cloud</a></span></td>
-        	<td className="text-center"><a href="/pricing">Get started with PostHog Self-Host</a></span></td>
+        	<td className="text-center"><a href="/pricing#cloud">Get started with PostHog Cloud</a></td>
+        	<td className="text-center"><a href="/pricing">Get started with PostHog Self-Host</a></td>
     	</tr>
 	</tbody>
 </table>
