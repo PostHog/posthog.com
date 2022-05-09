@@ -17,7 +17,7 @@ Our primary goal is to build and retain our world-class team. We will accomplish
 
 1. Maximize their impact and performance
 2. Grow personally and professionally
-3. Have a strong sense of purpose and belonging.
+3. Have a strong sense of purpose and belonging
 
 ## Responsibilities
 
@@ -87,11 +87,11 @@ To manage our cap table, including options grants and exercises, we use [LTSE Eq
 
 For those pesky externalities, we use [Embroker](https://www.embroker.com/) for all of our insurance coverage.
 
-A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning.
+A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true). 
 
 And finally, if you're in the 0.0001% of startups using Teams or email (!) for internal communications, just switch to [Slack](https://slack.com/) already.
 
-_Do you have recommendations for tools not listed here (we're especially seeking some for goal-setting and performance review management), or upgrades to any of the above? Raise an issue below and let us know!
+_Do you have recommendations for tools not listed here (we're especially seeking some for goal-setting and performance review management), or upgrades to any of the above? Raise an issue below and let us know!_
 
 
 
