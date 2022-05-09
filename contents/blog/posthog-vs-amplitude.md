@@ -48,12 +48,12 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td></td>
         	<td className="w-2/12 text-center"><strong>Amplitude Analytics</strong></td>
         	<td className="w-2/12 text-center"><strong>PostHog Cloud</strong></td>
-        	<td className="w-2/12 text-center"><strong>PostHog Self-Hosted</strong></td>
+        	<td className="w-2/12 text-center"><strong>PostHog Self-host</strong></td>
     	</tr>
 	</thead>
 	<tbody>
     	<tr>
-        	<td><strong>Platform</strong></td>
+        	<td className="text-center">><strong>Platform</strong></td>
         	<td></td>
         	<td></td>
         	<td></td>
@@ -119,7 +119,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td><strong>Features</strong></td>
+        	<td className="text-center"><strong>Features</strong></td>
         	<td></td>
         	<td></td>
         	<td></td>
@@ -187,8 +187,8 @@ You can self-host PostHog and keep total control of your data. That means no thi
 		<tr>
         	<td>Predictive analytics</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
         	<td>Hedgehogs</td>
@@ -199,8 +199,8 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	<tr>
         	<td></td>
         	<td></td>
-        	<td className="text-center"><a href="/pricing">Learn more</a></td>
-        	<td className="text-center"><a href="/pricing">Learn more</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more about PostHog Cloud</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more PostHog Self-host</a></td>
     	</tr>
 	</tbody>
 </table>
@@ -372,7 +372,7 @@ Amplitude doesn't include feature flags or experimentation by default, instead b
 
 ### Transparent pricing
 
-All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on, team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and [pricing calculators](/pricing#cloud) show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.  
+All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on, team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and pricing calculators show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.  
 
 Amplitude is strictly price on application.
 
@@ -382,7 +382,7 @@ PostHog offers the option to either self-host your analytics or use a managed cl
 
 Cloud platforms are incompatible with any business who values user privacy – many PostHog users use us because they handle sensitive client data – or those who need to comply with privacy legislation, such as HIPAA in the US. 
 
-HIPAA requires that any third-party handling personal health information enter into a legal agreement (known as BAA), but Amplitude doesn't offer this option. Self-hosting PostHog doesn't require any additional legal agreements as data never leaves your infrastructure. Read our [HIPAA guidance](/docs/privacy/hipaa-compliance) for more information.
+HIPAA requires that any third-party handling personal health information enter into a legal agreement, but Amplitude doesn't offer this option. Self-hosting PostHog doesn't require any additional legal agreements as data never leaves your infrastructure. Read our [HIPAA guidance](/docs/privacy/hipaa-compliance) for more information.
 
 ## Strengths of Amplitude
 
@@ -390,9 +390,7 @@ HIPAA requires that any third-party handling personal health information enter i
 
 In addition to its analytics product, Amplitude offers Amplitude Recommend, a personalization engine powered by machine learning. It allows teams to create custom experiences, such as product recommendations or priority ordering, based on machine learning predictions. This is a potentially powerful tool for large e-commerce businesses who are looking to create an Amazon-style shopping experience.
 
-Amplitude also uses machine learning to power it calls predictive analytics, which estimates future outcomes (e.g. future conversion rate) based on current and historical data. This is useful for performance forecasting, especially for marketing teams.
-
-PostHog lacks this kind of forecasting functionality, but it does have Correlation Analysis. Correlation analysis is part of PostHog's Funnels insight and shows you correlated events and properties based on the funnel, e.g. "people who converted were 27x more likely to this event". Read [how to build, analyze and optimize conversion funnels](/tutorials/funnels) for more information on this feature.
+Amplitude also uses machine learning to power it calls predictive analytics, which estimates future outcomes (e.g. future conversion rate) based on current and historical data. This could be useful for performance forecasting, especially for marketing teams.
 
 ### Free up to 10 million events per month
 
