@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ..
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 author: ["andy-vandervell", "joe-martin"]
 categories: ["Guides", "Open source"]
