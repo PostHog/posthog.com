@@ -1,6 +1,6 @@
 ---
 date: 2022-05-09
-title: "Use of Google Analytics was deemed illegal in some EU countries. We built a microsite in 48 hours to capitalize on the news."
+title: "Using Google Analytics was deemed 'illegal' in some EU countries. We built a microsite in 48 hours to capitalize on the news."
 rootPage: /blog
 sidebar: Blog
 showTitle: true
