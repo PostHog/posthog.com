@@ -220,7 +220,8 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	</tr>
     	<tr>
         	<td>Redshift</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Google Cloud Storage</td>
@@ -289,23 +290,28 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	</tr>
     	<tr>
         	<td>Snowflake</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>        			<td className="text-center"><span className="text-red text-lg">✖</span></td>
+			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>        			<td className="text-center"><span className="text-red text-lg">✖</span></td>
+			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
         	<td>Segment</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td> 			<td className="text-center"><span className="text-green text-lg">✔</span></td>        
+			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
     	</tr>
     	<tr>
         	<td>Sentry</td>
-			<td className="text-center"><span className="text-red text-lg">✖</span></td> 			<td className="text-center"><span className="text-green text-lg">✔</span></td>        
+			<td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
     	</tr>
     	<tr>
         	<td>Zendesk</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>   			<td className="text-center"><span className="text-green text-lg">✔</span></td>        
+			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
     	</tr>
     	<tr>
         	<td>API</td>
