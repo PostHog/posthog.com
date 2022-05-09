@@ -1,5 +1,5 @@
 ---
-title: Plugins developer reference
+title: Apps developer reference
 sidebar: Docs
 showTitle: true
 ---
