@@ -31,7 +31,7 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 #### [**Birch**](../marketplace/birch)
 
-Deploy PostHog to your own cloud (AWS, GCP) and forget about the hastle of upgrades.
+Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
 
 <hr />
 
