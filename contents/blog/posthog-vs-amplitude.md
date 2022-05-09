@@ -50,10 +50,9 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td></td>
     	</tr>
     	<tr>
-        	<td>Open source</td>
-        	<td className="text-center">✖</td>
-        	<td className="text-center">✔</td>
-        	<td className="text-center">✔</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Transparent pricing</td>
