@@ -35,11 +35,9 @@ You’re going to be hiring people either as permanent employees or as contracto
 
 ### Permanent employees (US)
 
-Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use!
-
 You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement. The CIIAA means that your employees agree that their work is confidential and whatever they build at work is owned by the company. Not having this = major problems in future, especially for fundraising.
 
-Do _not_ pay a lawyer to create contract templates for you – it is a fantastic waste of money better spent when you need them to handle your next funding round.
+Do _not_ pay a lawyer to create contract templates for you – it is a fantastic waste of money better spent when you need them to handle your next funding round. Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use!
 
 I like [Gusto](https://gusto.com/) a lot for managing US payroll. It makes the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like tax reporting, healthcare benefits and mandatory insurance quite nicely. The phone support is great, but avoid email or chat. Gusto charges us $39/month plus $6 per employee.
 
