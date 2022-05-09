@@ -64,7 +64,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	<tr>
        	<td>100% self-serve</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
@@ -231,7 +231,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
        	<td>Snowflake</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
