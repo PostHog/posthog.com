@@ -15,6 +15,15 @@ PostHog and Amplitude are both product analytics tools. They tell you how people
 
 But we think PostHog is a more powerful tool for building better products. Not only does offer more features and tools for engineers to understand their users, it's an open platform that you can self-host and customize for your needs.
 
+**Contents:**
+
+- [How is PostHog different to Amplitude?](#how-is-posthog-different-from-amplitude)
+- [PostHog vs Amplitude feature comprison](#feature-comparison)
+- [Integrations and data sources](#integrations-and-data-sources)
+- [Strengths of PostHog](#strengths-of-amplitude)
+- [Strenghts of Amplitude](#strengths-of-amplitude)
+- [Coming soon to PostHog](#coming-soon-to-posthog)
+
 ## How is PostHog different from Amplitude?
 
 Let's start with the core differences. Over 9,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
@@ -30,7 +39,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
 
 <ArrayCTA /> 
 
-## Amplitude vs PostHog feature comparison
+## Feature comparison
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -50,6 +59,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td></td>
     	</tr>
     	<tr>
+			<td>Open source</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -392,11 +402,19 @@ PostHog's model is slightly different. PostHog Open Source, which [anyone can se
 
 ## Coming soon to PostHog
 
-Here are a few of things we're working on right now:
+We ship weirdly fast. Here's a short snapshot of what we're working on right now:
 
-- Thing here
-- Thing here
-- Thing here
-- Thing here
+- Console log tracking in recordings
+- Insight experience overhaul
+- Export and share visualizations as image file
+- Automated insight recommendations
+- Session analysis 2.0
+- Lightning fast querying at billion event and person scale
+- Enhanced plugin development experience
+- Rapid ingestion pipeline
+
+You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
+
+At PostHog, nearly everything we do is done in the open. You can chat with our engineers directly in the [community Slack](/slack), or ask them questions on [any of our docs pages](/docs). You can read all about how we work in our [company handbook](/handbook/getting-started/start-here).
 
 <ArrayCTA /> 
