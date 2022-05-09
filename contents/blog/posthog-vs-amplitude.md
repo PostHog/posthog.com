@@ -190,8 +190,8 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	<tr>
         	<td></td>
         	<td></td>
-        	<td className="text-center"><a href="/pricing#cloud">Get started</a></td>
-        	<td className="text-center"><a href="/pricing">Get started</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more</a></td>
     	</tr>
 	</tbody>
 </table>
@@ -218,6 +218,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
         	<td><strong>Export</strong></td>
         	<td></td>
         	<td></td>
+            <td></td>
     	</tr>
     	<tr>
         	<td>Redshift</td>
@@ -289,6 +290,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
         	<td><strong>Import</strong></td>
         	<td></td>
         	<td></td>
+            <td></td>
     	</tr>
     	<tr>
         	<td>Redshift</td>
