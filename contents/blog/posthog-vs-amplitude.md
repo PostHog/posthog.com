@@ -20,10 +20,10 @@ But we think PostHog is a more powerful tool for building better products. Not o
 Let's start with the core differences. Over 9,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
 ### 1. It's open source
-Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog) and use it to [build your own plugins](/docs/plugins/build) or even add extra functionality. You also benefit from the work of other teams who build their own plugins. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
+Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own plugins](/docs/plugins/build) or even add extra functionality. You also benefit from the work of other teams who build their own plugins. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
 
 ### 2. It's built for engineers
-Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures events, so you don't need to waste time instrumenting events every time you update your app or website. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch?plan=scale&demo=scale#demo) if you want to. 
+Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures events, so you don't need to waste time instrumenting events every time you update your app or website. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch?plan=scale&demo=scale#demo) if you have questions.
 
 ### 3. You control your data
 You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer [PostHog Cloud](/pricing#cloud) for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
@@ -51,9 +51,9 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	</tr>
     	<tr>
         	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center">✖</td>
+        	<td className="text-center">✔</td>
+        	<td className="text-center">✔</td>
     	</tr>
     	<tr>
         	<td>Transparent pricing</td>
@@ -389,8 +389,15 @@ PostHog lacks this kind of forecasting functionality, but it does have Correlati
 
 Amplitude's entry-level tier is free to use up to 10 million events per month, which compares very favorably to rivals like Mixpanel (up to 100k monthly users), Pendo (up to 1,000 monthly users) and Heap (up to 10,000 sessions per month). Once you exceed 10 million events, you'll need to speak to Amplitude's sales team to proceed further.
 
-PostHog's model is slightly different. PostHog Open Source, which [anyone can self-host](/docs/self-host), is totally free for life. PostHog Cloud is free up to 1 million events per month, though this includes premium only features like Experimentation and Correlation Analysis, whereas Amplitude's more advanced features aren't available on its free tier. Transitioning from free to paid only requires entering card details in the app.
+PostHog's model is slightly different. PostHog Open Source, which [anyone can self-host](/docs/self-host), is totally free for life. PostHog Cloud is free up to 1 million events per month, and this includes premium features like Experimentation and Correlation Analysis not available on Amplitude's free Starter tier.
 
-## Why choose PostHog?
+## Coming soon to PostHog
 
-Something something here
+Here are a few of things we're working on right now:
+
+- Thing here
+- Thing here
+- Thing here
+- Thing here
+
+<ArrayCTA /> 
