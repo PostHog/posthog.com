@@ -23,7 +23,7 @@ export const SelfHostedPlanBreakdown = () => {
                     <li className="flex space-x-4">
                         <ServerLocked className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">Data stays on your infrastructure</h3>
+                            <h3 className="text-base ">Hosted by PostHog</h3>
                             <p className="text-[14px]">
                                 Breeze through SOC 2 and HIPAA audits by eliminating a handful of subprocessors.
                             </p>

@@ -3,6 +3,7 @@ title: How to build, analyze and optimize conversion funnels in PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
+featuredTutorial: true
 author: ["yakko-majuri", "andy-vandervell"]
 topics: ["funnels", "user paths", "session recording", "filters"]
 date: 2022-04-20

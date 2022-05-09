@@ -17,6 +17,13 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: `gatsby-source-squeak`,
+            options: {
+                apiHost: 'https://squeak.cloud',
+                organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+            },
+        },
+        {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
                 endpoint:
@@ -65,7 +72,9 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    'gatsby-remark-mermaid',
+                    {
+                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
+                    },
                 ],
                 plugins: [`gatsby-remark-static-images`],
             },
@@ -213,7 +222,7 @@ module.exports = {
                             escapeEntities: {},
                         },
                     },
-                    'gatsby-remark-mermaid',
+                    `gatsby-remark-mermaid`,
                 ],
             },
         },
