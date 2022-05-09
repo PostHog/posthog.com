@@ -70,7 +70,6 @@
         "gatsby-remark-autolink-headers": "^2.1.10",
         "gatsby-remark-copy-linked-files": "^2.3.2",
         "gatsby-remark-katex": "^3.1.8",
-        "gatsby-remark-mermaid": "^2.1.0",
         "gatsby-remark-prismjs": "^3.5.1",
         "gatsby-remark-static-images": "^1.2.1",
         "gatsby-source-filesystem": "^2.1.22",
@@ -91,6 +90,7 @@
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
+        "mermaid": "^8.7.0",
         "mobx": "^6.3.13",
         "node-fetch": "^2.6.1",
         "postcss": "^8.3.5",
@@ -125,9 +125,11 @@
         "sass": "^1.43.2",
         "sharp": "^0.27.2",
         "slugify": "^1.6.0",
+        "squeak-react": "^1.12.10",
         "styled-components": "^5.3.3",
         "svg-sprite": "^1.5.0",
         "typescript": "^4.0.2",
+        "unist-util-visit": "^1.4.0",
         "xss": "^1.0.10"
     },
     "devDependencies": {

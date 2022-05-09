@@ -95,7 +95,7 @@ export const query = graphql`
             childrenReply {
                 id
                 name
-                ts(difference: "days")
+                ts: created_at(difference: "days")
                 childMdx {
                     body
                 }

@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
-categories: ["Product analytics", "Guides", "Open source"]
+categories: ["Guides", "Open source"]
 ---
 
 Most well-known analytics tools demand hefty price tags, and they own your data. This is bad news for early-stage startups, or anyone who cares about user privacy. Thankfully, open source analytics tools are better, and more numerous, than ever before.
