@@ -13,7 +13,7 @@ categories: ["Guides", "Open source"]
 
 PostHog and Amplitude are both product analytics tools. They tell you how people are using your product, not just where they come from, and help you find ways to make your product better.
 
-But we think PostHog is a more powerful tool for building better products. Not only does offer more features and tools for engineers to understand their users, it's an open platform that you can self-host and customize for your needs.
+But we think PostHog is a more powerful tool for building better products. Not only does offer it more features and tools for engineers to understand their users, it's an open platform that you can self-host and customize to your needs.
 
 **Contents:**
 
