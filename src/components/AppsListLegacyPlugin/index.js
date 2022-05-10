@@ -36,7 +36,6 @@ import twilioImage from '../AppsList/logos/twilio.png'
 import shopifyImage from '../AppsList/logos/shopify.png'
 import intercomImage from '../AppsList/logos/intercom.png'
 import amazonkinesisImage from '../AppsList/logos/kinesis.png'
-import launchdarklyImage from '../AppsList/logos/launchdarkly.png'
 import brazeImage from '../AppsList/logos/braze.png'
 
 const LegacyListing = ({ name, image, url }) => {
@@ -129,7 +128,6 @@ export default function AppsList() {
             <LegacyListing name="Shopify" image={shopifyImage} url="/apps/shopify" />
             <LegacyListing name="Intercom" image={intercomImage} url="/apps/intercom" />
             <LegacyListing name="Amazon Kinesis" image={amazonkinesisImage} url="/apps/amazon-kinesis" />
-            <LegacyListing name="Launch Darkly" image={launchdarklyImage} url="/apps/launch-darkly" />
             <LegacyListing name="Braze" image={brazeImage} url="/apps/braze" />
             <LegacyListing name="Segment" image={segmentImage} url="/apps/segment" />
             <LegacyListing name="Airbyte" image={airbyteImage} url="/apps/airbyte" />

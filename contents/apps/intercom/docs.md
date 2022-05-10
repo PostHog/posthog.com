@@ -1,43 +1,49 @@
 ---
-title: Airbyte Export documentation
+title: Intercom Connector documentation
 showTitle: true
 topics:
-    - airbyte
+    - intercom
 ---
 
-### What does the Airbyte Export app do?
+### What does the Intercom Connector app do?
 
-This Airbyte Export app sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if this app will copy only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.
+The Intercom Connectors sends specified event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.
 
-###### What are the requirements for this app?
+### What are the requirements for this app?
 
-Using the Airbyte Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-##### How do I get started with the Airbyte Export app?
+### How do I install this app for PostHog?
 
-The Airbyte app is an API integration. You will need to get a [PostHog Personal API key](https://posthog.com/docs/api) in order to [connect Airbyte as a data destination](https://docs.airbyte.com/integrations/sources/posthog/).
+1. Visit the 'Apps' page in your instance of PostHog.
+2. Search for 'Intercom' and select the app, press 'Install'.
+3. Follow the steps below to configure the app.
 
-#### What output schema is available?
+### How do I configure the Intercom Connector for PostHog?
 
-This app is capable of syncing the following streams: 
+After you've pressed 'Install', you need to add your Intercom API key at the configuration step, as well as add triggering events you want to send to Intercom.
 
-- Annotations
-- Cohorts
-- Events
-- FeatureFlags
-- Insights
-- InsightsPath
-- InsightsSessions
-- Persons
-- Trends
+- Intercom API Key (required): you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new app and receiving an API Key
+- Triggering events (required): A comma-separated list of PostHog events you want to send to Intercom (e.g.: `$identify,mycustomevent` ).
 
-For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+Additionally, you can set the following optional parameters:
+
+- Emails domain to skip (optional): A comma-separated list of email domains to ignore and not send events for in Intercom (e.g. `posthog.com,dev.posthog.com`).
+- Send events to European data storage (optional, default: False): Send events to api.eu.intercom.com, if you are using Intercom's European Data Hosting.
+
+### Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Intercom Connector app](https://github.com/posthog/posthog-intercom-plugin) is available on GitHub. 
+
+### Who created this app?
+
+We'd like to thank community member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
 
 ### Where can I find out more?
 
-Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+Check the [Intercom Developer Hub](https://developers.intercom.com/building-apps/) for more information about connecting services to Intercom. 
 
 ### What if I have feedback on this app?
 

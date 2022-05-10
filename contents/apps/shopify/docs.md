@@ -1,43 +1,53 @@
 ---
-title: Airbyte Export documentation
+title: Shopify Connector documentation
 showTitle: true
 topics:
-    - airbyte
+    - shopify
 ---
 
-### What does the Airbyte Export app do?
+### What does the Shopify Connector app do?
 
-This Airbyte Export app sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if this app will copy only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.
+The Shopify Connector for PostHog enables you to sync customer and order data from Shopify, into PostHog. 
 
-###### What are the requirements for this app?
+This app will:
 
-Using the Airbyte Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+- Associate your Shopify customers with PostHog users
+- Create a PostHog user from a Shopify customer if it doesn't exist
+- Create events for every new order
+
+If there is an error while fetching orders, the next run of `runEveryMinute()` will try to re-read information from where it was previously interupted. 
+
+### What are the requirements for this app?
+
+Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-##### How do I get started with the Airbyte Export app?
+### How do I install this app for PostHog?
 
-The Airbyte app is an API integration. You will need to get a [PostHog Personal API key](https://posthog.com/docs/api) in order to [connect Airbyte as a data destination](https://docs.airbyte.com/integrations/sources/posthog/).
+1. Visit the 'Apps' page in your instance of PostHog.
+2. Search for 'Shopify' and select the app, press 'Install'.
+3. Follow the steps below to configure the app.
 
-#### What output schema is available?
+### How do I configure the Shopify Connector for PostHog?
 
-This app is capable of syncing the following streams: 
+To configure the Shopify Connector you will need to set the store name from your Shopify account. 
 
-- Annotations
-- Cohorts
-- Events
-- FeatureFlags
-- Insights
-- InsightsPath
-- InsightsSessions
-- Persons
-- Trends
+Additionally, you will need to create a Shopify Access Token, which the Shopify Connector app will call to fetch orders into PostHog. 
 
-For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app. 
+
+### Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Shopify Connector app](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub. 
+
+### Who created this app?
+
+We'd like to thank community member [Sreeraj Rajan](https://github.com/sreeo) for his work creating this app. Thank you, Sreeraj!
 
 ### Where can I find out more?
 
-Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+Check the [Shopify API reference docs](https://shopify.dev/api) for more information about connecting services to Shopify. 
 
 ### What if I have feedback on this app?
 

@@ -1,5 +1,5 @@
 ---
-title: Airbyte Export documentation
+title: Airbyte Exporter documentation
 showTitle: true
 topics:
     - airbyte

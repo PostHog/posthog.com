@@ -1,43 +1,101 @@
 ---
-title: Airbyte Export documentation
+title: Braze Import app documentation
 showTitle: true
 topics:
-    - airbyte
+    - braze
 ---
 
-### What does the Airbyte Export app do?
+### What does the Braze Import app for PostHog do?
 
-This Airbyte Export app sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if this app will copy only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.
+This app sends Braze analytics data series to PostHog. 
 
-###### What are the requirements for this app?
+The data series is imported into PostHog once a day, in a time window corresponding to 00:00AM UTC to 12:00PM UTC of the previous day.
 
-Using the Airbyte Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+Campaigns, Canvases, News Card Feeds and Segments will only be tracked if any activity was recorded in the last 24 hours time window.
+
+### What are the requirements for this app?
+
+Using the Amazon Kinesis Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
-##### How do I get started with the Airbyte Export app?
+### How should I configure API permissions for the Braze Import app?
 
-The Airbyte app is an API integration. You will need to get a [PostHog Personal API key](https://posthog.com/docs/api) in order to [connect Airbyte as a data destination](https://docs.airbyte.com/integrations/sources/posthog/).
+Depending on what kind of analytics you want to export from Braze to Posthog, you need to give your API Key the correct permissions.
 
-#### What output schema is available?
+Campaigns:
 
-This app is capable of syncing the following streams: 
+```
+campaigns.list
+campaign.data_series
+campaigns.details
+```
 
-- Annotations
-- Cohorts
-- Events
-- FeatureFlags
-- Insights
-- InsightsPath
-- InsightsSessions
-- Persons
-- Trends
+Canvas:
 
-For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+```
+canvas.list
+canvas.data_series
+canvas.details
+```
+
+Custom Events:
+
+```
+events.list
+events.data_series
+```
+
+KPIs:
+
+```
+kpi.mau.data_series
+kpi.dau.data_series
+kpi.new_users.data_series
+kpi.uninstalls.data_series
+```
+
+News Feed Cards:
+
+```
+feed.list
+feed.data_series
+feed.details
+```
+
+Segments:
+
+```
+segments.list
+segments.data_series
+segments.details
+```
+
+Sessions:
+
+```
+sessions.data_series
+```
 
 ### Where can I find out more?
 
-Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+You can read more about [Braze REST API Key permissions](https://www.braze.com/docs/api/api_key/#how-can-i-use-it) in Braze's docs. 
+
+
+### How do I install the Braze Import app for PostHog?
+
+1. Visit the 'Apps' page in your instance of PostHog.
+2. Search for 'Braze' and select the app, press Install.
+3. Follow the steps to configure the app.
+3. Watch events roll in to PostHog. 
+
+### Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Braze Import app](https://github.com/posthog/posthog-braze-plugin) is available on GitHub. 
+
+### Who created this app?
+
+We'd like to thank community member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
 
 ### What if I have feedback on this app?
 
