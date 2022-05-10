@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
-featuredImage: ../images/blog/blog-generic-1.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---

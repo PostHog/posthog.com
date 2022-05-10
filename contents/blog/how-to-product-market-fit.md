@@ -15,6 +15,14 @@ Validating B2B product market fit is a common problem and the bad news is that t
 
 But there are some great heuristics you can use to understand whether you’re on the right track - and this article explains a little of how we use them when thinking about product market fit at PostHog.
 
+**Contents:**
+
+- [Defining the market](#defining-the-market)
+- [Measuring product market fit](#measuring-product-market-fit)
+- [Pitfalls to avoid](#pitfalls-to-avoid)
+- [How to grow after achieving B2B product market fit](#how-to-grow-after-achieving-b2b-product-market-fit)
+- [Further reading](#further-reading)
+
 > This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
 ## Defining the market

@@ -13,7 +13,20 @@ categories: ["Guides", "Product analytics", "PostHog Academy"]
 
 Customer retention metrics are some of the most important to understand and the most vital to the long term success of any product. In this article we’ll explain what customer retention is, why it’s important and some examples of tactics you can use to improve customer retention and reduce churn in your user base. 
 
-Interested in how to track retention and churn in PostHog? [Check our user guides to find out more about our Retention and Stickiness tools.](https://posthog.com/docs/user-guides/retention). 
+**Contents:**
+
+- [What is customer retention?](#what-is-customer-retention)
+- [Why is retention important?](#why-is-retention-important)
+- [What does good retention look like?](#what-does-good-retention-look-like)
+- [How to calculate customer retention](#how-to-calculate-customer-retention)
+- [Understanding cohort retention](#understanding-cohort-retention)
+- [How to read retention tables](#how-to-read-retention-tables)
+- [How to improve customer retention and reduce churn](#how-to-improve-customer-retention-and-reduce-churn)
+- [Further reading](#further-reading) 
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
+
+- What is customer retention?
 
 ## What is customer retention?
 
@@ -24,8 +37,6 @@ There are three key metrics used in retention analytics:
 - **Retention rate:** % of customers still using the product at the end of the period.
 - **Churn rate:** % of customers lost by the end of the period.
 - **Lifetime value (LTV):** How much each customer is worth to you before they churn.
-
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
 ## Why is retention important? 
 
@@ -43,7 +54,7 @@ A good benchmark for retention rate of a SaaS product is around 95-98% retention
 
 You would typically expect much higher retention rates for businesses paying >$100K/yr than you would for businesses spending <$100. However, for consumer facing and free products, retention rates of around 30% are considered a good benchmark.
 
-## How to calculate customer retention?
+## How to calculate customer retention
 
 To calculate your overall customer retention over a period you need to know: 
 
@@ -63,13 +74,13 @@ Meaning that each year a little more than half of your customers are churning an
 
 It’s important when measuring retention to choose a time period which suits your product usage. Some businesses, such as news websites, may want to measure daily or hourly retention rates while others, such as international hotels, may choose to measure retention over an annual period or longer. 
 
-## Understanding cohort retention?
+## Understanding cohort retention
 
 Understanding the retention rate for all users is a good starting point, but as you make improvements to your product you will need to understand if they're improving your retention. That's where retention tables come in. 
 
 Retntion tables break down your retention by cohorts, with each cohort being a group of users which activated within a certain time period (e.g. one week). This enables you to understand how you retain individual cohorts over time. 
 
-## How to read retention tables?
+## How to read retention tables
 
 Retention tables can appear confusing if you’ve not used them before, so let’s look at an example from PostHog’s retention tool.
 
@@ -81,9 +92,11 @@ The third column, labelled Day 0, tells you how many users in that cohort used t
 
 The remaining columns tell you how many users from each cohort came back _each day_. We can see that five users used the product on 9 July and that 20% of them came back on days one (10 July), two (11 July) and three (12 July). After that, none of them came back. The empty cells which ‘staircase’ off the chart are due to not enough time having passed for those cohorts - the data doesn't exist yet.
 
-> Find out more about retention tables in [our tutorial about measuring retention and tracking churn in PostHog](https://posthog.com/docs/tutorials/retention). 
+ <NewsletterForm
+compact
+/>
 
-## How can you improve customer retention and reduce churn?
+## How to improve customer retention and reduce churn
 
 There are many tactics you can use to try and improve a flagging retention rate, all of which can be grouped into the following categories:
 
@@ -103,6 +116,6 @@ There are a variety of product analytics tools available to help you explore you
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
 <ArrayCTA />

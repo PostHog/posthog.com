@@ -11,7 +11,15 @@ featuredImageType: full
 categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
-User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights. 
+User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights.
+
+**Contents:**
+
+- [User segmentation, explained](#user-segmentation-explained)
+- [Why is user segmentation important?](#why-is-user-segmentation-important)
+- [What are user segments used for?](#what-are-user-segments-used-for)
+- [The four different types of user segmentation](#the-four-different-types-of-user-segmentation)
+- [Further reading](#further-reading)
 
 ## User segmentation, explained
 
@@ -37,10 +45,6 @@ For example, imagine a company has 10 customers. Seven of these customers are ag
 
 Segmenting users enables you to focus on understanding, prioritizing and solving the unique needs of smaller and more focused group, rather than looking at everything at once. 
 
- <NewsletterForm
-compact
-/>
-
 ## What are user segments used for?
 
 User segmentation is especially important for activities such as:
@@ -64,6 +68,10 @@ There are four key types of segmentation you can use to identify groups of users
 * **Technographic:** What technologies do they use to interact with the product (e.g. mobile, desktop or voice assistant)
 
 It's often necessary to combine multiple segmentation types when running analyses. You might, for example, look at the behaviour of older users in France, or early-adopters on mobile. 
+
+ <NewsletterForm
+compact
+/>
 
 ## How can I segment my userbase?
 

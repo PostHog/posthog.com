@@ -6,12 +6,24 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/blog-generic-2.png
+featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
 categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
-Successful products need actionable metrics and for many businesses this starts with identifying a 'North Star' metric.
+Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.
+
+This article explores the different types of North Star metrics using examples from well-known tech companies, and how you can find the right kind of metric for your business.
+
+**Contents:**
+
+- [What is a North Star metric?](#what-is-a-north-star-metric)
+- [Types of North Star metrics](#types-of-north-star-metrics)
+- [PostHog's North Star Metric](#posthogs-north-star-metric)
+- [How to track your North Star metric](#how-to-track-your-north-star-metric)
+- [Further reading](#further-reading)
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ## What is a North Star metric?
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
@@ -70,6 +82,10 @@ Are you trying to convert free users into paid users? If so, customer growth mig
 ### User experience
 User experience metrics are numerous and will differ depending on the business or product, but they will typically directly or indirectly reference retention. If people enjoy using a product, they're more likely to continue to use it and recommend it to a friend. It's a good choice for early-stage startups or businesses which rely on word-of-mouth growth.
 
+ <NewsletterForm
+compact
+/>
+
 ## PostHog's North Star Metric
 As an open-source product analytics company, our ultimate mission is to "increase the number of successful products in the world". 
 
@@ -102,7 +118,7 @@ Of course, there are plenty of other product analytics tools - including [open-s
 
 > New to product analytics? Check out our [introduction to product analytics](https://posthog.com/blog/what-is-product-analytics), or [request a demo with one of our engineers](https://posthog.com/book-a-demo) to get started with PostHog. 
 
-## Why you shouldn't use Google Analytics to track your North Star metric
+### Why you shouldn't use Google Analytics to track your North Star metric
 
 Google Analytics is good for a lot of things, especially if you want to track basic web metrics such as pageviews or  bounce rate. However, as a _web_ analytics platform it is limited to tracking only specific metrics for websites. It can't track other types of events, nor does it offer the same breadth of analysis tools that a product analytics platform like PostHog does. 
 
@@ -121,4 +137,3 @@ Ultimately, PostHog is a better fit for tracking both high-level and detailed pr
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL.
 
 <ArrayCTA />
-

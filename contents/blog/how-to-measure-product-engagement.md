@@ -15,6 +15,14 @@ Product engagement is the most important factor when it comes to driving retenti
 
 In this article we’ll take a look at why strong customer engagement metrics are vital to the success of your product, how to define engagement for your platform, and how to use analytics tools to measure and build on the results.
 
+**Contents:**
+
+- [What is product engagement?](#what-is-product-engagement)
+- [What are product engagement metrics?](#what-are-product-engagement-metrics)
+- [What is the best way to measure product engagement?](#what-is-the-best-way-to-measure-product-engagement)
+- [What tools are good for tracking product engagement?](#what-tools-are-good-for-tracking-product-engagement)
+- [Further reading](#further-reading)
+
 > This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ## What is product engagement?
