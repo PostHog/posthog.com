@@ -360,7 +360,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 ## Strengths of PostHog 
 
 ### Integrated session recording
-While Amplitude and PostHog share many features, PostHog has [Session Recording](/product/session-recording) built into all editions of PostHog, including PostHog Open Source. 
+While Amplitude and PostHog share many features, PostHog has [Session Recording](/product/session-recording) built in as standard.
 
 Session recording is an incredibly powerful tool for understanding what people are actually doing in your product. The tight integration within PostHog means you can go from viewing a funnel insight to watching real users interact with the funnel, making it easy to diagnose problems and find solutions.
 
