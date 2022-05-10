@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
 Understanding the needs of your users better than anyone else is critical for the success of any product.
@@ -18,6 +18,8 @@ For years, taxis solved the primary user need of getting from A to B quickly. So
 However, Uber, Lyft, and co. came along and disrupted this market by understanding and solving the user’s needs better than any taxi company. They made it possible to quickly hail vehicles from wherever you are, and also built trust in the service through driver and car identification, driver ratings, and sharing your trip with trusted contacts - things previously impossible with ordinary taxis. This gave ride-sharing apps a massive advantage over normal taxis drivers.
 
 When building a product, your users don’t always know what they need; and when they do, they might not be able to express it clearly. The role of a Product Manager is to piece together multiple pieces of information to identify actual user needs and empower a team to solve them. Below are a few ways you can gather this information.
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps.
 
 ## Interviews
 Speaking 1:1 with customers is a great way to immerse yourself in their experience and the daily problems they encounter. It’s key when interviewing customers that you avoid biased or leading questions. To get unfiltered answers, ask open questions such as “Can you talk me through how you would travel home from an airport?” rather than “Can you tell me about the last time you took a taxi?” or “Did you take a taxi in the last 7 days?”.
@@ -77,8 +79,16 @@ Look at your competitor’s products and ask yourself, “Why do they have this 
 ### How does PostHog do this?
 Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
 
-There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have [run Mixpanel and PostHog side-by-side to compare performance](/customers/saga). 
+There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have [run Mixpanel and PostHog side-by-side to compare performance](/customers/saga).
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+## Further reading
+
+- [Finding your North Star metric and why it matters](/blog/north-star-metrics): Successful products need actionable metrics. Here's how to find them.
+
+- [An introduction to customer retention](/blog/introduction-to-customer-retention): Explains customer retention, why it's important and tactics you can use to reduce churn
+
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+
+> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
 <ArrayCTA />

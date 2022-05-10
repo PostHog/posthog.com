@@ -6,17 +6,24 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: [marcus-hyett]
-keywords: ["segment", "user segmentation", "segmentation"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/product-people.png
 featuredImageType: full
-categories: ["General", "Guides", "Product analytics"]
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
-User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights. 
+User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights.
+
+**Contents:**
+
+- [User segmentation, explained](#user-segmentation-explained)
+- [Why is user segmentation important?](#why-is-user-segmentation-important)
+- [What are user segments used for?](#what-are-user-segments-used-for)
+- [The four different types of user segmentation](#the-four-different-types-of-user-segmentation)
+- [Further reading](#further-reading)
 
 ## User segmentation, explained
 
-User segmentation is the process of looking at your userbase and breaking it down into groups based on user characteristics or behaviors. You can then analyze these groups to identify identify opportunities to improve and grow your product.
+User segmentation is the process of looking at your userbase and breaking it down into groups based on user characteristics or behaviors. You can then analyze these groups to identify opportunities to improve and grow your product.
 
 For example, a global ecommerce company such as Amazon might have user segments such as: 
 
@@ -24,7 +31,9 @@ For example, a global ecommerce company such as Amazon might have user segments 
 - Users who subscribe to Amazon Prime
 - Users who use the mobile app
 
-By understanding how these segments differ, Amazon would then be able to build products which better meet their individual needs. 
+By understanding how these segments differ, Amazon would then be able to build products which better meet their individual needs.
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
 ## Why is user segmentation important?
 
@@ -40,29 +49,46 @@ Segmenting users enables you to focus on understanding, prioritizing and solving
 
 User segmentation is especially important for activities such as:
 
-* **Product personalization:** Tailoring the experience to users, such as by recommending products based on their behaviours, means they’ll be more engaged and more successful. 
-* **Marketing:** You need marketing that’s relevant to your users. Sending special offers in English to customers to Japan won't lead to good conversion rates.
-* **Prioritization:** You can have more impact by focusing on solving specific problems for certain users rather than trying to build a one-size-fits all solution. (e.g. building a price comparison tool for price conscious customers).
+- **Product personalization:** Tailoring the experience to users, such as by recommending products based on their behaviours, means they’ll be more engaged and more successful.
 
-## What are the four different types of user segmentation?
+- **Marketing:** You need marketing that’s relevant to your users. Sending special offers in English to customers to Japan won't lead to good conversion rates.
 
-There are four key types of segmentation you can use to identify groups of users. 
+- **Prioritization:** You can have more impact by focusing on solving specific problems for certain users rather than trying to build a one-size-fits all solution. (e.g. building a price comparison tool for price conscious customers).
+
+## The four different types of user segmentation
+
+There are four key types of segmentation you can use to identify groups of users: 
 
 * **Demographic:** Looking at attributes of the person (e.g. age, household income, gender)
+
 * **Geographic:** Considering where they are from or where they are currently (e.g. delivery town or country of residence)
+
 * **Behavioral:** Considering how they use the product (e.g. frequency of use, average order values)
+
 * **Technographic:** What technologies do they use to interact with the product (e.g. mobile, desktop or voice assistant)
 
 It's often necessary to combine multiple segmentation types when running analyses. You might, for example, look at the behaviour of older users in France, or early-adopters on mobile. 
+
+ <NewsletterForm
+compact
+/>
 
 ## How can I segment my userbase?
 
 There are a variety tools available to help you segment users or use the segments to understand their behaviours within your product. These can include basic web analytics tools such as Google Analytics, or all-in-one product analytics tools such as PostHog. 
 
-Naturally, we think PostHog is one of the best tools to use for user segmentation because it enables you to explore segmented users using tools such as [funnels](/product/funnels), [trends](/product/trends), [paths](/product/user-paths) and more. Uniquely, PostHog also enables you to self-host your analytics platform so that you have better control of the user data and do not need to share it with third parties.
+PostHog is a powerful tool for user segmentation because you can explore segmented users using tools such as [funnels](/product/funnels), [trends](/product/trends), [paths](/product/user-paths) and more. 
 
-For more information, you can also read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to-segment-users). 
+Read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to-segment-users) to learn more about using PostHog.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+## Further reading
+
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+
+- [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to use segmentation and how to apply if to your business
+
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+
+> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
 <ArrayCTA />
