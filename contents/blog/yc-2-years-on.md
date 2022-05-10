@@ -57,7 +57,7 @@ YC has a Continuity Fund. This can invest in later stage companies.
 We've been fortunate to partner with them. They've:
 
 * invested roughly $20M
-* helped us stay focussed on (the right) users in board meetings
+* helped us stay focused on (the right) users in board meetings
 * provided endless further intros to people for advice and hiring as needed
 
 This isn't guaranteed though, but it wouldn't have happened if we'd not gone through the batch.
