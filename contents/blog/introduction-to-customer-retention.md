@@ -26,8 +26,6 @@ Customer retention metrics are some of the most important to understand and the 
 
 > This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
-- What is customer retention?
-
 ## What is customer retention?
 
 Customer retention is simply your ability to hold on to the customers you have, so that they keep coming back for more. 
@@ -110,11 +108,11 @@ There are a variety of product analytics tools available to help you explore you
 
 ## Further reading
 
-- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to user segmentation and how to apply it to your business
 
-- [How to work out what your users really need](/blog/how-to-work-out-what-users-need) - Understanding the needs of your users better than anyone else is critical for the success of any product
+- [How to work out what your users really need](/blog/how-to-work-out-what-users-need): Understanding the needs of your users better than anyone else is critical for the success of any product
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

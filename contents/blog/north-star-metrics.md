@@ -128,11 +128,11 @@ Ultimately, PostHog is a better fit for tracking both high-level and detailed pr
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
-- [An introduction to product analytics](/blog/what-is-product-analytics) - What is product analytics and how is different from using Google Analytics
+- [An introduction to product analytics](/blog/what-is-product-analytics): What is product analytics and how is different from using Google Analytics
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL.
 

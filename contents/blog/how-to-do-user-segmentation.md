@@ -83,11 +83,11 @@ Read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
-- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to use segmentation and how to apply if to your business
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

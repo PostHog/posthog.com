@@ -107,11 +107,11 @@ There are a variety of product analytics tools available to choose from however,
 
 ## Further reading
 
-- [An introduction to customer retention](/blog/introduction-to-customer-retention) - Customer retention metrics are vital to the long term success of any product
+- [An introduction to customer retention](/blog/introduction-to-customer-retention): Customer retention metrics are vital to the long term success of any product
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

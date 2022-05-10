@@ -100,11 +100,11 @@ Paying attention to engagement and building more of what your customers love is 
 
 ## Further reading
 
-- [Finding your North Star metric and why it matters](/blog/north-star-metrics) - Successful products need actionable metrics. Here's how to find them.
+- [Finding your North Star metric and why it matters](/blog/north-star-metrics): Successful products need actionable metrics. Here's how to find them.
 
-- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to user segmentation and how to apply it to your business
 
-- [An introduction to product analytics](/blog/what-is-product-analytics) - What is product analytics and how is different from using Google Analytics
+- [An introduction to product analytics](/blog/what-is-product-analytics): What is product analytics and how is different from using Google Analytics
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

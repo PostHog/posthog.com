@@ -83,11 +83,11 @@ There's no shortcut here; research takes time to do and has to be done thoroughl
 
 ## Further reading
 
-- [Finding your North Star metric and why it matters](/blog/north-star-metrics) - Successful products need actionable metrics. Here's how to find them.
+- [Finding your North Star metric and why it matters](/blog/north-star-metrics): Successful products need actionable metrics. Here's how to find them.
 
-- [An introduction to customer retention](/blog/introduction-to-customer-retention) - Explains customer retention, why it's important and tactics you can use to reduce churn
+- [An introduction to customer retention](/blog/introduction-to-customer-retention): Explains customer retention, why it's important and tactics you can use to reduce churn
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
