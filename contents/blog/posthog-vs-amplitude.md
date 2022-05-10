@@ -53,7 +53,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
 	</thead>
 	<tbody>
     	<tr>
-        	<td className="text-center">><strong>Platform</strong></td>
+        	<td><strong>Platform</strong></td>
         	<td></td>
         	<td></td>
         	<td></td>
@@ -119,7 +119,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td className="text-center"><strong>Features</strong></td>
+        	<td><strong>Features</strong></td>
         	<td></td>
         	<td></td>
         	<td></td>
@@ -310,20 +310,20 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
         	<td>Google Cloud Storage</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Snowflake</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Segment</td>
@@ -355,6 +355,8 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 *[Redshift to PostHog import plugin](/integrations/redshift-import-plugin-(beta)) currently in beta
 
+**Import available via [Reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
+
 ## Strengths of PostHog 
 
 ### Integrated session recording
@@ -362,23 +364,21 @@ While Amplitude and PostHog share many features, PostHog has [Session Recording]
 
 Session recording is an incredibly powerful tool for understanding what people are actually doing in your product. The tight integration within PostHog means you can go from viewing a funnel insight to watching real users interact with the funnel, making it easy to diagnose problems and find solutions.
 
-Amplitude doesn't have session recording, so you have to run a third-party tool like Hotjar or FullStory as well – an added expense that lacks the tight integration afforded by a built-in app.
+Amplitude doesn't have session recording, so you have to run a third-party tool [like Hotjar or FullStory](/blog/best-open-source-session-replay-tools) as well – an added expense that lacks the tight integration afforded by a built-in app.
 
 ### Experimentation and Feature Flags
 
-All paid plans of PostHog include our Experimentation suite, while feature flags and session recording are no additional cost features on all versions of PostHog, including [PostHog Open Source](/signup/self-host).  
+All paid plans of PostHog include our Experimentation suite for running A/B and multivariate tests, while feature flags and session recording are no additional cost features on all versions of PostHog, including [PostHog Open Source](/signup/self-host).  
 
-Amplitude doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment. Like all Amplitude products, Experiment is a price on application only product. 
+Amplitude analytics doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment. Like all Amplitude products, Experiment is a price on application only product. 
 
 ### Transparent pricing
 
-All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on, team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and pricing calculators show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.  
-
-Amplitude is strictly price on application.
+All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on (SAML), team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and pricing calculators show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.  
 
 ### Hosting flexibility and privacy
 
-PostHog offers the option to either self-host your analytics or use a managed cloud service, whereas Amplitude is strictly a cloud-only platform. While self-hosting isn't for everyone, it's often the best solution for a number of use cases. 
+PostHog offers the option to either [self-host your analytics](/docs/self-host) or use a managed cloud service, whereas Amplitude is strictly a cloud-only platform. While self-hosting isn't for everyone, it's often the best solution for a number of use cases. 
 
 Cloud platforms are incompatible with any business who values user privacy – many PostHog users use us because they handle sensitive client data – or those who need to comply with privacy legislation, such as HIPAA in the US. 
 
@@ -390,7 +390,7 @@ HIPAA requires that any third-party handling personal health information enter i
 
 In addition to its analytics product, Amplitude offers Amplitude Recommend, a personalization engine powered by machine learning. It allows teams to create custom experiences, such as product recommendations or priority ordering, based on machine learning predictions. This is a potentially powerful tool for large e-commerce businesses who are looking to create an Amazon-style shopping experience.
 
-Amplitude also uses machine learning to power it calls predictive analytics, which estimates future outcomes (e.g. future conversion rate) based on current and historical data. This could be useful for performance forecasting, especially for marketing teams.
+Amplitude also uses machine learning to power what it calls predictive analytics, which estimates future outcomes (e.g. future conversion rate) based on current and historical data. This could be useful for performance forecasting, especially for marketing teams.
 
 ### Free up to 10 million events per month
 
@@ -400,7 +400,7 @@ PostHog's model is slightly different. PostHog Open Source, which [anyone can se
 
 ## Coming soon to PostHog
 
-We ship weirdly fast. Here's a short snapshot of what we're working on right now:
+We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
 
 - Console log tracking in recordings
 - Insight experience overhaul
@@ -413,6 +413,8 @@ We ship weirdly fast. Here's a short snapshot of what we're working on right now
 
 You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
 
-At PostHog, nearly everything we do is done in the open. You can chat with our engineers directly in the [community Slack](/slack), or ask them questions on [any of our docs pages](/docs). You can read all about how we work in our [company handbook](/handbook/getting-started/start-here).
+At PostHog, nearly everything we do is done in the open. You can chat with our engineers directly in the [community Slack](/slack), or ask them questions on [any of our docs pages](/docs). 
+
+You can read all about how we work in our [company handbook](/handbook/getting-started/start-here).
 
 <ArrayCTA /> 
