@@ -26,7 +26,7 @@ But we think PostHog is a more powerful tool for building better products. Not o
 
 ## How is PostHog different from Amplitude?
 
-Let's start with the core differences. Over 9,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
+Let's start with the core differences. Over 9,000 companies already use PostHog, and [many have switched from Amplitude](/customers/saga). Here are a few reasons why.
 
 ### 1. It's open source
 Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own plugins](/docs/plugins/build) or even add extra functionality. You also benefit from the work of other teams who build their own plugins. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
