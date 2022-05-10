@@ -6,9 +6,9 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["marcus-hyett"]
-featuredImage: ../images/blog/blog-generic-5.png
+featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
 Customer retention metrics are some of the most important to understand and the most vital to the long term success of any product. In this article we’ll explain what customer retention is, why it’s important and some examples of tactics you can use to improve customer retention and reduce churn in your user base. 
@@ -24,6 +24,8 @@ There are three key metrics used in retention analytics:
 - **Retention rate:** % of customers still using the product at the end of the period.
 - **Churn rate:** % of customers lost by the end of the period.
 - **Lifetime value (LTV):** How much each customer is worth to you before they churn.
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
 ## Why is retention important? 
 
@@ -86,10 +88,20 @@ The remaining columns tell you how many users from each cohort came back _each d
 There are many tactics you can use to try and improve a flagging retention rate, all of which can be grouped into the following categories:
 
 - **Improving activation:** You can leverage tools such as [PostHog's Funnels](https://posthog.com/docs/user-guides/funnels) to understand where people are dropping off after they sign up, then solve these problems. Do they get to the key feature of your product before they leave? User guides and tool tips can be really helpful to help users get activated successfully.
+
 - **Creating more value for customers:** Building new features that your customers need and love will create more value for them and will drive them to return and use the product again in the future. You can use tools such as [Feature Flags](https://posthog.com/docs/user-guides/feature-flags) to test new features safely, or to roll them out to beta testers.
+
 - **Re-engagement:** Users who like your product can sometimes be distracted by other things. Well timed re-engagement messages such as "_you left these items in your basket_" can be extremely powerful in bringing customers back to your product and improving retention. Tools such as [PostHog's Paths tool](https://posthog.com/docs/user-guides/paths) can help you understand where users are getting distracted.
 
 There are a variety of product analytics tools available to help you explore your product data, understand your users and make such changes — but naturally we think PostHog is one of the best for improving retention. That’s because PostHog is an all-in-one product analytics platform, and gives you a wide breadth of tools, such as session recording, feature flags, retention tables and more. No other product analytics platform offers a similar breadth of features. 
+
+## Further reading
+
+- [What is user segementation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+
+- [How to work out what your users really need](/blog/how-to-work-out-what-users-need) - Understanding the needs of your users better than anyone else is critical for the success of any product
+
+- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

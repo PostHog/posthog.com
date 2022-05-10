@@ -6,14 +6,16 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ['hanna-crombie']
-featuredImage: ../images/blog/blog-generic-1.png
-featuredImageType: standard
-categories: ["Guides", "Product analytics"]
+featuredImage: ../images/blog/lw-queries.png
+featuredImageType: full
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
 Product engagement is the most important factor when it comes to driving retention and revenue for your business. Though it seems easy to view success through a financial lens, revenue alone is rarely a clear indicator of a sustainable product. 
 
 In this article we’ll take a look at why strong customer engagement metrics are vital to the success of your product, how to define engagement for your platform, and how to use analytics tools to measure and build on the results.
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ## What is product engagement?
 The golden rule for any product manager: [listen to your users](https://posthog.com/handbook/product/user-feedback).
@@ -84,19 +86,17 @@ By comparing the values of these metrics against each other you can begin to get
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/anca.png"
-        size="md"
-        name="Anca Filip"
-        title="Head of Product, Mention Me"
-        quote={`“PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before.”`}
-    />
-</BorderWrapper>
-
-This is because, in addition to tracking the metrics above, PostHog enables you to to understand their context through tools such as  [session recording](https://posthog.com/docs/user-guides/sessions), [heat maps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [cohorts](https://posthog.com/docs/user-guides/cohorts) and [correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
+This is because, in addition to tracking the metrics above, PostHog enables you to to understand their context through tools such as  [Session Recording](https://posthog.com/docs/user-guides/sessions), [Heatmaps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [Cohorts](https://posthog.com/docs/user-guides/cohorts) and [Correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
 
 Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
+
+## Further reading
+
+- [Finding your North Star metric and why it matters](/blog/north-star-metrics) - Successful products need actionable metrics. Here's how to find them.
+
+- [What is user segementation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+
+- [An introduction to product analytics](/blog/what-is-product-analytics) - What is product analytics and how is different from using Google Analytics
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

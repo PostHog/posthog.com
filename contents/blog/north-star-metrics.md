@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/blog-generic-2.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying a 'North Star' metric.
@@ -17,6 +17,8 @@ Successful products need actionable metrics and for many businesses this starts 
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
 
 North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you.
+
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Andy Vandervell leads content marketing at PostHog. Prior to PostHog he spend over a decade in various roles within the publishing indutry, including stints at Condé Nast and Time Inc. 
 
 ### Examples of good North Star metrics
 
@@ -106,7 +108,15 @@ Google Analytics is good for a lot of things, especially if you want to track ba
 
 You couldn't, for example, use Google Analytics to track a North Star metric such as Discoveries. Nor could you self-host it on your own infrastructure. 
 
-Ultimately, PostHog is a better fit for tracking both high-level and detailed product metrics, while Product and Engineering teams routinely find that [Google Analytics doesn't offer the depth of insight they need](https://posthog.com/customers/mention-me). 
+Ultimately, PostHog is a better fit for tracking both high-level and detailed product metrics, while Product and Engineering teams routinely find that [Google Analytics doesn't offer the depth of insight they need](https://posthog.com/customers/mention-me).
+
+## Further reading
+
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
+
+- [An introduction to product analytics](/blog/what-is-product-analytics) - What is product analytics and how is different from using Google Analytics
+
+- [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 > PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL.
 
