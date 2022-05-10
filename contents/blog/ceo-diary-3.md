@@ -15,6 +15,8 @@ It has been a dramatic month.
 
 Four weeks ago, our 16 month old daughter was diagnosed with [retinoblastoma](https://www.nhs.uk/conditions/retinoblastoma/#:~:text=Retinoblastoma%20is%20cancer%20of%20the,form%20a%20cancer%20called%20retinoblastoma.) - a fairly rare form of cancer that affects the eyes.
 
+>Update April 2022: we've finished chemo, she's now done with treatment and we're in regular testing mode. There's a very high chance it comes back, but we'll take this as a win!
+
 ## It got bad, fast
 
 The sequence of events:
