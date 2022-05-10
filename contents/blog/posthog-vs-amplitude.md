@@ -18,7 +18,7 @@ But we think PostHog is a more powerful tool for building better products. Not o
 **Contents:**
 
 - [How is PostHog different to Amplitude?](#how-is-posthog-different-from-amplitude)
-- [PostHog vs Amplitude feature comprison](#feature-comparison)
+- [PostHog vs Amplitude feature comparison](#feature-comparison)
 - [Integrations and data sources](#integrations-and-data-sources)
 - [Strengths of PostHog](#strengths-of-posthog)
 - [Strengths of Amplitude](#strengths-of-amplitude)
