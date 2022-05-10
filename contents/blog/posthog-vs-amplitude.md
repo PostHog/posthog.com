@@ -45,10 +45,10 @@ You can self-host PostHog and keep total control of your data. That means no thi
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
-        	<td></td>
-        	<td className="w-2/12 text-center"><strong>Amplitude Analytics</strong></td>
-        	<td className="w-2/12 text-center"><strong>PostHog Cloud</strong></td>
-        	<td className="w-2/12 text-center"><strong>PostHog Self-host</strong></td>
+            <td className="w-3/12"></td>
+        	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Cloud</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Self-host</strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -199,8 +199,8 @@ You can self-host PostHog and keep total control of your data. That means no thi
     	<tr>
         	<td></td>
         	<td></td>
-        	<td className="text-center"><a href="/pricing">Learn more about PostHog Cloud</a></td>
-        	<td className="text-center"><a href="/pricing">Learn more PostHog Self-host</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more</a></td>
+        	<td className="text-center"><a href="/pricing">Learn more</a></td>
     	</tr>
 	</tbody>
 </table>
