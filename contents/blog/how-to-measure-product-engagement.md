@@ -94,7 +94,7 @@ Paying attention to engagement and building more of what your customers love is 
 
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics) - Successful products need actionable metrics. Here's how to find them.
 
-- [What is user segementation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
 
 - [An introduction to product analytics](/blog/what-is-product-analytics) - What is product analytics and how is different from using Google Analytics
 

@@ -77,7 +77,7 @@ Read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to
 
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit) - How to approach finding market fit for a B2B product
 
-- [What is user segementation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement) – How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 

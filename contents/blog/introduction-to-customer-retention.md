@@ -97,7 +97,7 @@ There are a variety of product analytics tools available to help you explore you
 
 ## Further reading
 
-- [What is user segementation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
+- [What is user segmentation?](/blog/how-to-do-user-segmentation) – A quick guide to use segmentation and how to apply if to your business
 
 - [How to work out what your users really need](/blog/how-to-work-out-what-users-need) - Understanding the needs of your users better than anyone else is critical for the success of any product
 
