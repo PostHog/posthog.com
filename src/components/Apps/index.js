@@ -1,12 +1,15 @@
 import FooterCTA from 'components/FooterCTA'
-import React from 'react'
-import Layout from '../Layout'
-import { SEO } from '../seo'
-import AppsByPostHog from '../AppsByPostHog'
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { useState } from 'react'
 import AppsList from '../AppsList'
-import AppsListLegacyPlugin from '../AppsListLegacyPlugin'
+import Layout from '../Layout'
 
 function AppsPage() {
+    const {
+        apps: { nodes },
+    } = useStaticQuery(query)
+    const [apps, setApps] = useState(nodes.sort((app) => (app.frontmatter.filters?.builtIn ? -1 : 1)))
+
     return (
         <Layout>
             <header className="py-12">
@@ -19,9 +22,7 @@ function AppsPage() {
                 </p>
             </header>
             <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
-                <AppsByPostHog />
-                <AppsList />
-                <AppsListLegacyPlugin />
+                <AppsList apps={apps} />
 
                 <li className="border-t border-l border-dashed border-gray-accent-light">
                     <a
@@ -39,5 +40,29 @@ function AppsPage() {
         </Layout>
     )
 }
+
+const query = graphql`
+    query {
+        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    thumbnail {
+                        id
+                        publicURL
+                    }
+                    title
+                    filters {
+                        type
+                        maintainer
+                        builtIn
+                    }
+                }
+            }
+        }
+    }
+`
 
 export default AppsPage
