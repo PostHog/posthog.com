@@ -235,7 +235,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
-                                    <FooterMenuItem title="Media" url="/media" />
+                                    <FooterMenuItem title="Press" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
                                     <FooterMenuItem
                                         title="YouTube"
