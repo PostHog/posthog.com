@@ -2,7 +2,12 @@ import { TrackedCTA } from 'components/CallToAction/index.js'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
-import { SCALE_MINIMUM_PRICING } from '../constants'
+import {
+    SCALE_MINIMUM_PRICING,
+    ENTERPRISE_MINIMUM_PRICING,
+    CLOUD_MINIMUM_PRICING,
+    CLOUD_ENTERPRISE_MINIMUM_PRICING,
+} from '../constants'
 import { Features, Plan, Price, Section } from './Plan'
 import { features } from '../constants'
 
@@ -17,6 +22,7 @@ export const OpenSource = () => {
             </Section>
             <Section title="Pricing" className="mt-auto">
                 <Price>Free</Price>
+                <span className="text-base opacity-50 text-xs">&nbsp;</span>
             </Section>
             <TrackedCTA
                 to="/signup/self-host/deploy"
@@ -55,17 +61,22 @@ export const Scale = ({
             {!hideActions && (
                 <>
                     <Section title="Pricing starts at" className="mt-auto">
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center" id="scale-price">
                             <Price>
                                 ${Math.round(SCALE_MINIMUM_PRICING).toLocaleString()}
                                 <span className="text-base opacity-50">/mo</span>
                             </Price>
                             {!hideCalculator && (
-                                <Link className="text-yellow font-bold" onClick={() => setOpen(true)}>
+                                <Link
+                                    className="text-red font-bold"
+                                    event="select edition: clicked calculate scale price"
+                                    onClick={() => setOpen(true)}
+                                >
                                     Calculate your price
                                 </Link>
                             )}
                         </div>
+                        <span className="text-base opacity-50 text-xs">&nbsp;</span>
                     </Section>
                     <TrackedCTA
                         href="https://license.posthog.com/"
@@ -87,65 +98,168 @@ export const Scale = ({
     )
 }
 
-export const Enterprise = () => {
+export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, className = '' }) => {
     return (
         <Plan
             title="Enterprise"
             subtitle="Your IT & legal teams will be very pleased"
-            badge="INCLUDES OPEN SOURCE & SCALE FEATURES"
+            badge={!hideBadge && 'INCLUDES OPEN SOURCE & SCALE FEATURES'}
+            className={className}
         >
+            <a href="/enterprise" className="inline-block mt-2 text-red font-bold">
+                See what comes with Enterprise
+            </a>
+
             <Section title="Account & support">
                 <Features features={features['Account & support']} />
             </Section>
             <Section title="Ops & security">
                 <Features features={features['Ops & security']} />
             </Section>
-            <Section title="Pricing">
-                <Price>Custom</Price>
-            </Section>
-            <TrackedCTA
-                className="mt-7 mb-3"
-                to="/signup/self-host/get-in-touch?plan=enterprise#contact"
-                event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
-            >
-                Get in touch
-            </TrackedCTA>
-            <TrackedCTA
-                type="outline"
-                to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
-                event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
-            >
-                Book a demo
-            </TrackedCTA>
+            {!hideActions && (
+                <>
+                    <Section title="Pricing starts at" className="mt-auto">
+                        <div className="flex justify-between items-center" id="enterprise-price">
+                            <Price>
+                                ${Math.round(ENTERPRISE_MINIMUM_PRICING).toLocaleString()}
+                                <span className="text-base opacity-50">/mo</span>
+                            </Price>
+                            {!hideCalculator && (
+                                <Link
+                                    className="text-red font-bold"
+                                    event="select edition: clicked calculate enterprise price"
+                                    onClick={() => setOpen(true)}
+                                >
+                                    Calculate your price
+                                </Link>
+                            )}
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-base opacity-50 text-xs">Annual discount available</span>
+
+                            {/*
+                            <Price>
+                                ${Math.round(ENTERPRISE_MINIMUM_PRICING * 10.8).toLocaleString()}
+                            </Price>
+                            */}
+                        </div>
+                    </Section>
+                    <TrackedCTA
+                        className="mt-7 mb-3"
+                        to="/signup/self-host/get-in-touch?plan=enterprise#contact"
+                        event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+                    >
+                        Get in touch
+                    </TrackedCTA>
+                    <TrackedCTA
+                        type="outline"
+                        to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
+                        event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+                    >
+                        Book a demo
+                    </TrackedCTA>
+                </>
+            )}
         </Plan>
     )
 }
 
-export const Cloud = ({ finalCost, eventNumberWithDelimiter }) => {
+export const Cloud = ({ setOpen, hideActions, hideBadge, hideCalculator, className = '' }) => {
     return (
-        <Plan
-            title="PostHog Cloud"
-            subtitle="Turnkey, hosted solution"
-            className="border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20"
-        >
+        <Plan title="Cloud" subtitle="Turnkey, hosted solution" className={className}>
             <Section title="Platform">
                 <Features features={features['Platform']} className="grid-cols-1 md:grid-cols-2" />
             </Section>
-            <Section title="Benefits" className="mt-auto">
-                <Features features={features['Benefits']} />
+            <Section title="Advanced features">
+                <Features features={features['Advanced features']} />
             </Section>
-            <Section title="Pricing" className="mt-auto">
-                <Price>
-                    ${finalCost}
-                    <span className="text-base">
-                        <span className="opacity-50">/mo for</span> {eventNumberWithDelimiter} events
-                    </span>
-                </Price>
+            <Section title="Collaboration">
+                <Features features={features['Collaboration']} />
             </Section>
-            <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
-                Get started
-            </TrackedCTA>
-            <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
+            {!hideActions && (
+                <>
+                    <Section title="Pricing starts at" className="mt-auto">
+                        <div className="flex justify-between items-center" id="scale-price">
+                            <Price>
+                                ${Math.round(CLOUD_MINIMUM_PRICING).toLocaleString()}
+                                <span className="text-base opacity-50">/mo</span>
+                            </Price>
+                            {!hideCalculator && (
+                                <Link
+                                    className="text-red font-bold"
+                                    event="select edition: clicked calculate cloud price"
+                                    onClick={() => setOpen(true)}
+                                >
+                                    Calculate your price
+                                </Link>
+                            )}
+                        </div>
+                    </Section>
+                    <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
+                        Get started
+                    </TrackedCTA>
+                    <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
+                </>
+            )}
+        </Plan>
+    )
+}
+
+export const CloudEnterprise = ({
+    setOpen,
+    hideActions,
+    hideBadge,
+    hideCalculator,
+    className = 'border-0 border-t lg:border-t-0 lg:border-l border-dashed border-gray-accent-light',
+}) => {
+    return (
+        <Plan
+            title="Cloud Enterprise"
+            subtitle="Turnkey, hosted solution with added benefits"
+            badge={!hideBadge && 'INCLUDES CLOUD FEATURES'}
+            className={className}
+        >
+            <Section title="Platform">
+                <Features features={features['Support']} />
+            </Section>
+            <Section title="Advanced security">
+                <Features features={features['Advanced security']} />
+            </Section>
+            {!hideActions && (
+                <>
+                    <Section title="Pricing starts at" className="mt-auto">
+                        <div className="flex justify-between items-center" id="scale-price">
+                            <Price>
+                                ${Math.round(CLOUD_ENTERPRISE_MINIMUM_PRICING).toLocaleString()}
+                                <span className="text-base opacity-50">/mo</span>
+                            </Price>
+                            {!hideCalculator && (
+                                <Link
+                                    className="text-red font-bold"
+                                    event="select edition: clicked calculate cloud enterprise price"
+                                    onClick={() => setOpen(true)}
+                                >
+                                    Calculate your price
+                                </Link>
+                            )}
+                        </div>
+                    </Section>
+                    <TrackedCTA
+                        className="mt-7 mb-3"
+                        to="/signup/self-host/get-in-touch?plan=enterprise#contact"
+                        event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+                    >
+                        Get in touch
+                    </TrackedCTA>
+                    <TrackedCTA
+                        type="outline"
+                        to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
+                        event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+                    >
+                        Book a demo
+                    </TrackedCTA>
+                </>
+            )}
         </Plan>
     )
 }

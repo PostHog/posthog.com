@@ -161,7 +161,7 @@ Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect perf
 
 - Ability to use an [external ClickHouse provider](/docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](/marketplace/altinity).
 - Support for ClickHouse sharding and replication [in our helm chart](/docs/self-host/runbook/clickhouse/sharding-and-replication). This allows leveraging more machines for faster queries.
-- Upgrading to ClickHouse 21.11: ClickHouse is changing rapidly and each new release is bringing in new performance improvements.
+- (Expected in 1.35.0) Upgrading to ClickHouse 21.11: ClickHouse is changing rapidly and each new release is bringing in new performance improvements.
 
 ## What’s next?
 
@@ -175,3 +175,5 @@ Some projects currently in the pipeline are:
 
 > Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join our [community Slack](/slack).
 > 
+
+<ArrayCTA />

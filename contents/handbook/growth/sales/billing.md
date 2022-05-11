@@ -37,6 +37,23 @@ As a customer, to redeem a license key:
 1. Enter the received license key in the input.
 1. Tap on activate license key and you are good to go.
 
+#### One customer with multiple licenses
+
+If a customer wants to have multiple licenses for multiple environments, but be billed from the same account:
+1. Get the user to sign up for a license key as per normal.
+1. Manually go to https://license.posthog.com/admin/, find the license key. Keep this tab open.
+1. In another tab, create a new license key. You can use the same client name, but you'll need to use a different email. Just add `+one` to the email, so test+one@posthog.com. Copy across the `Stripe customer id`, `Stripe price id`, `Stripe subscription id` and `Stripe subscription item id`. Also tick **Billing ready**.
+1. Add a note linking back to the original license + an explanation.
+1. Click save and send the new key to the user. Repeat for how many license keys they need.
+
+#### Yearly invoice
+
+1. (if user already created a license) Cancel their subscription in Stripe
+2. Manually create an invoice on the customer with the correct price. Either charge them using the method on file or send them 
+3. Once the invoice is created, add the following fields to the "metadata" section on the invoice:
+   `amortize-until`, with the value being the month until which to amortize, ie `2023-03`
+   `amortized-dollar-amount`, with the MRR we should account for with this invoice. Probably the total amount of the invoice divided by 12.
+4. (if user hasn't created a license yet) Manually create a license in https://license.posthog.com/admin/. You should link the stripe customer id, but you can leave everything else blank. Make sure you tick "Billing ready".
 
 ### Cloud billing
 Cloud billing may be set up using self-serve. For this, the new user just needs to go to the [organization billing](https://app.posthog.com/organization/billing) page and select one of the available plans (internally please note these plans must have both `is_active` and `self_serve` set to `True`). Billing can also be set up from account creation, by adding the `plan_key` as a query string parameter (e.g. `https://app.posthog.com/signup?plan=standard`), this is helpful for redirections from landing sites where a plan has already been selected.
@@ -90,3 +107,4 @@ This section provides instructions for a PostHog team member to change subscript
 [license]: https://github.com/posthog/license
 [posthog-cloud]: https://github.com/posthog/posthog-cloud
 [stripe_dashboard]: https://dashboard.stripe.com/
+

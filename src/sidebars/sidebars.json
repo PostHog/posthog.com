@@ -118,20 +118,20 @@
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "name": "Team Core Analytics",
-                            "url": "/handbook/people/team-structure/core-analytics"
+                            "name": "Team App East",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "name": "Team Core Experience",
-                            "url": "/handbook/people/team-structure/core-experience"
-                        },
-                        {
-                            "name": "Team Growth",
-                            "url": "/handbook/people/team-structure/growth"
+                            "name": "Team App West",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
                             "name": "Team Platform",
                             "url": "/handbook/people/team-structure/platform"
+                        },
+                        {
+                            "name": "Team Ingestion",
+                            "url": "/handbook/people/team-structure/ingestion"
                         },
                         {
                             "name": "Team Marketing",
@@ -314,6 +314,10 @@
                         {
                             "name": "How to run migrations on PostHog Cloud",
                             "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                        },
+                        {
+                            "name": "Working with ClickHouse materialized columns",
+                            "url": "/handbook/engineering/databases/materialized-columns"
                         }
                     ]
                 },
@@ -796,6 +800,10 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
+                        },
+                        {
+                            "name": "Browser Extensions",
+                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
@@ -1082,7 +1090,7 @@
                     "url": "/docs/api/dashboards"
                 },
                 {
-                    "name": "Event Definitions",
+                    "name": "Event definitions",
                     "url": "/docs/api/event-definitions"
                 },
                 {
@@ -1094,7 +1102,7 @@
                     "url": "/docs/api/experiments"
                 },
                 {
-                    "name": "Feature Flags",
+                    "name": "Feature flags",
                     "url": "/docs/api/feature-flags"
                 },
                 {
@@ -1106,7 +1114,7 @@
                     "url": "/docs/api/groups"
                 },
                 {
-                    "name": "Groups Types",
+                    "name": "Groups types",
                     "url": "/docs/api/groups-types"
                 },
                 {
@@ -1126,7 +1134,7 @@
                     "url": "/docs/api/persons"
                 },
                 {
-                    "name": "Plugin Configs",
+                    "name": "Plugin configs",
                     "url": "/docs/api/plugin-configs"
                 },
                 {
@@ -1138,11 +1146,11 @@
                     "url": "/docs/api/projects"
                 },
                 {
-                    "name": "Property Definitions",
+                    "name": "Property definitions",
                     "url": "/docs/api/property-definitions"
                 },
                 {
-                    "name": "Session_recordings",
+                    "name": "Session recordings",
                     "url": "/docs/api/session-recordings"
                 },
                 {
@@ -1150,7 +1158,7 @@
                     "url": "/docs/api/trend"
                 },
                 {
-                    "name": "User",
+                    "name": "Users",
                     "url": "/docs/api/user"
                 },
                 {
@@ -1178,6 +1186,10 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
+                },
+                {
+                    "name": "Data egress & compliance",
+                    "url": "/docs/privacy/egress"
                 }
             ]
         },
@@ -1218,19 +1230,19 @@
             "url": "/product/trends"
         },
         {
-            "name": "User paths",
+            "name": "User Paths",
             "url": "/product/user-paths"
         },
         {
-            "name": "Quantitative analysis",
-            "url": "/product/quantitative-analysis"
+            "name": "Correlation Analysis",
+            "url": "/product/correlation-analysis"
         },
         {
-            "name": "Session recording",
+            "name": "Session Recording",
             "url": "/product/session-recording"
         },
         {
-            "name": "Feature flags",
+            "name": "Feature Flags",
             "url": "/product/feature-flags"
         },
         {
@@ -1238,7 +1250,7 @@
             "url": "/product/heatmaps"
         },
         {
-            "name": "Experimentation suite",
+            "name": "Experimentation",
             "url": "/product/experimentation-suite"
         },
         {

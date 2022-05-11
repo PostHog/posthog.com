@@ -49,6 +49,12 @@ docker run -it --rm \
     sh -c 'yarn && yarn start'
 ```    
 
+### Working on `/docs/api`?
+
+1. Create a [personal API key](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) in PostHog
+1. `export POSTHOG_APP_API_KEY=key`
+1. `yarn start`
+
 ## Questions?
 
 ### [Join our Slack community.](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ)

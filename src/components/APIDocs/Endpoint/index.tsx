@@ -1,6 +1,5 @@
 import React from 'react'
 import { MethodTags, method } from '../MethodTags'
-import './style.scss'
 
 interface EndpointProps {
     endpoint: string

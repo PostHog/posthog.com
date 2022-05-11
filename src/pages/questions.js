@@ -141,14 +141,14 @@ export default function FAQ({
 
 export const query = graphql`
     query AllQuestionsQuery {
-        questions: allQuestion(sort: { fields: childReply___ts, order: DESC }, limit: 20) {
+        questions: allQuestion(sort: { fields: childReply___created_at, order: DESC }, limit: 20) {
             nodes {
                 id
                 childrenReply {
                     id
                     subject
                     name
-                    ts(difference: "days")
+                    ts: created_at(difference: "days")
                     childMdx {
                         body
                         excerpt(pruneLength: 400)

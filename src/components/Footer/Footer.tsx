@@ -111,6 +111,10 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Session recording" url="/product/session-recording" />
                                     <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
+                                    <FooterMenuItem
+                                        title="Experimentation suite"
+                                        url="/product/experimentation-suite"
+                                    />
                                     <FooterMenuItem title="Heatmaps" url="/heatmaps" />
                                 </ul>
                             </div>
@@ -129,7 +133,7 @@ export function Footer(): JSX.Element {
                                         title="Quantitative analysis"
                                         url="/product/quantitative-analysis"
                                     />
-                                    <FooterMenuItem title="Open source" url="https://github.com/posthog/posthog" />
+                                    <FooterMenuItem title="Collaboration" url="/product/collaboration" />
                                     <FooterMenuItem title="Integrations" url="/integrations" />
                                 </ul>
                             </div>
@@ -142,6 +146,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Discussion</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Questions?" url="/questions" />
                                     <FooterMenuItem title="Slack" url="/slack" />
                                     <FooterMenuItem
                                         title="Issues"
@@ -180,6 +185,10 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
                                     <FooterMenuItem title="Tutorials" url="/tutorials" />
+                                    <FooterMenuItem
+                                        title="PostHog on GitHub"
+                                        url="https://github.com/posthog/posthog"
+                                    />
                                 </ul>
                             </div>
                             <div>
@@ -226,7 +235,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
-                                    <FooterMenuItem title="Media" url="/media" />
+                                    <FooterMenuItem title="Press" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
                                     <FooterMenuItem
                                         title="YouTube"

@@ -9,7 +9,7 @@ export const FeatureStrip = ({ className = '' }) => {
     return (
         <div className="text-center my-4 md:my-10">
             <ul
-                className={`list-none m-0 p-0 inline-grid mx-auto grid-cols-2 md:grid-cols-4 justify-start gap-y-2 md:gap-y-4 items-start ${className}`}
+                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-2 md:grid-cols-4 justify-start gap-y-2 md:gap-y-4 md:gap-x-6 xl:gap-x-8 items-start ${className}`}
             >
                 <Feature icon="event-pipelines" title="Event pipelines" url="/docs/integrate/ingest-live-data" />
                 <Feature icon="analytics" title="Product analytics" url="/product/#product-analytics" />
@@ -17,7 +17,7 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="feature-flags" title="Feature flags" url="/product/feature-flags" />
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
-                <Feature icon="api" title="API" url="/api" />
+                <Feature icon="api" title="API" url="/docs/api" />
                 <Feature icon="data-warehouse" title="Data warehouse" url="/docs/self-host/runbook/clickhouse" />
             </ul>
         </div>
@@ -32,7 +32,7 @@ const Feature = ({ title, icon, url }) => {
                 className="flex px-2 py-1 space-x-2 font-semibold items-start md:items-center justify-start text-black hover:text-black"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
-                <span className="text-[14px] text-left leading-tight">{title}</span>
+                <span className="text-[14px] lg:text-[15px]  text-left leading-tight">{title}</span>
             </a>
         </li>
     )

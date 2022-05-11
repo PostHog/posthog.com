@@ -6,42 +6,75 @@ showTitle: true
 
 ## Overview
 
-This page outlines how we generally manage customers, specifically those who are interested in our Scale plans. Our Cloud plan is self-serve, and may be covered by its own section in the future, but doesn't require a specific guide at this stage.
+This page outlines how we manage customers, specifically those who are interested in our Scale or Enterprise plans. Our Cloud plan is generally self-serve, although we may direct customers to sign up for a Cloud account after an initial demo based on their requirements.
 
 If you are looking for guidance on how to manage customers in HubSpot specifically, visit our [CRM page](/handbook/growth/sales/overview).
 
-## Process
+## Process 
 
-1. Customer emails us, usually hey@ or sales@, asking about our Scale plan.
-2. We respond quickly and to-the-point. We give specific and clear answers to questions, and do not hide information behind a call or demo. You should find out:
-    1. Their company's name if not obvious
-    2. Their approximate monthly events and/or MAUs
-    3. Who their cloud provider is - AWS, GCP etc.
-3. We'll usually do an intro call with James H next. The objective of this call is to help figure out with the customer what the best solution is for them, not to push a sale onto them. We have [demo guidelines here](/handbook/growth/sales/demos). For pricing, the most important things to emphasize are a) month-to-month billing only, no minimum contract and b) cost per event is _massively_ discounted at higher volumes. If multiple technical people are joining on the customer's side and they are a large company, you may want an engineer to join - only do this _very_ occasionally. 
-4. If it looks like PostHog Scale is the right solution, create [a Deal](/handbook/growth/sales/crm) in HubSpot to keep track of everything. 
-5. You should also set up a shared Slack channel to discuss implementation, as it's the easiest way to resolve any follow up questions. Add as many relevant people on PostHog's side as seems relevant - customers will have a better experience at this stage talking directly to engineers about implementation, not funnelling questions through a single point of contact. 
-6. We track implementation in a [GitHub project](https://github.com/orgs/PostHog/projects/10). The first 1-2 months are spent scaling the instance properly so we don't go too big and waste customers' money. Manage expectations - the first few weeks _should_ be a bit laggy/buggy, as this ensures we're not setting them up with a needlessly large server. 
-7. Once the customer is ready to begin event ingestion, this is the point at which we will ask for payment details, so we can start tracking usage. Generate a payment link in Stripe - ask Paolo if you need help. 
-8. Schedule a call to help them set up their first dashboards and ensure they are getting the most out of PostHog. We should ask for at least one Product Manager on the customer's side to join this call, as they are likely to be the key stakeholder at this point. 
-9. As part of this dashboard setup, you should get the relevant member(s) of our team added to their account as a guest so we can proactively support with ensuring they have the right dashboards, config etc. (but don't push if they would rather we didn't do this). 
-10. Ongoing support is provided in the shared Slack channel once they are paying. _Make sure you also add the Papercups app to the channel, so we can be responsive to support queries._
+1. Customer will either:
+   1. Book a demo directly on our calendar via our [pricing](/pricing) page
+   2. Fill in the contact form on the [signup](/signup/self-host/get-in-touch) page, which captures which plan they are interested in as well as metrics such as MAUs, event count etc.
+   3. Email us directly at hey@ or sales@
+2. (If it's a direct demo booking, skip to 3)  We'll email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
+3. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/demos) if that's what they are there for.
+4. Ensure call notes go into HubSpot against the contact/company/deal so that they are shared amongst the wider team
+5. At the end of the call we should figure out if they fit into the hands-on or self-serve pipeline, agree the relevant next steps and continue accordingly.
 
-After the initial call, if a customer is keen to proceed, you should share steps 5 through 9 with them to ensure that everyone is on the same page and expectations are managed appropriately. 
+### Self-serve pipeline
+
+This is for organizations who are likely smaller and prefer the flexibility of metered monthly billing, either on Cloud or Scale.
+1. After the initial call, send a follow-up email covering the following topics:
+   1. Any unanswered questions which came up in the call
+   2. Encouraging them to join our [User Slack](https://posthogusers.slack.com)
+   3. Encouraging them to enter credit card details to unlock the 1m event free tiers on [Cloud](https://app.posthog.com/organization/billing) or [Scale](https://license.posthog.com)
+2. Move any associated deals in HubSpot to the self-serve pipeline (see the [CRM](/handbook/growth/sales/crm) section)
+
+### Hands-on pipeline
+This is for organizations who are interested in our Enterprise plans (self-hosted or cloud) and will likely be at higher monthly event volumes (>50m) or want non-standard monthly billing.
+1. For hands-on evaluations, enterprises can do one of the following:
+   1. If they are willing to time-box the evaluation to 30 days then we can grant them free unlimited use of either a cloud account or self-hosted license.
+   2. For longer evaluations, encourage them to take advantage of the 1m free monthly events either on Cloud or Self-hosted by entering credit card details.
+2. Set up a shared public Slack channel using Slack Connect in our company workspace.  Pull the relevant PostHog team members in at the right time to help with:
+   1. Deploying and tuning a self-hosted instance
+   2. Product feedback
+   3. Anything else to make the customer successful
+3. Create a deal in the hands-on pipeline in HubSpot (see the [CRM](/handbook/growth/sales/crm) section)
+4. Schedule an initial kick-off call to agree the plan for:
+   1. Event ingestion (Autocapture is preferable)
+   2. Action and Cohort Setup
+   3. Required Insights and Dashboards
+   4. Extra features such as Feature Flags, Experiments, Plugins
+5. Check in with the customer regularly to ensure they are getting value out of the evaluation; offer calls to help them but only if they want/need it.
+6. As the trial comes to an end, schedule a call with decision makers to review the progress and agree the commercial next steps.
+
+### CS team customer profiles
+Through automation on PostHog.com and HubSpot we have the following (broad) splits of responsibility:
+
+[Cameron](https://posthogusers.slack.com/archives/D038B692C86) looks after:
+- Group Demos
+- YC onboarding
+- Scale customers in the US
+
+[Simon](https://posthogusers.slack.com/archives/D02QULW4MDZ) looks after:
+- Scale customers in the EU
+- Enterprise customers
+
 
 ### Figuring out the best solution for a customer
 
 Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific privacy or security needs to determine the most appropriate plan for them.  
 
 - _Low volume, less technical_ - start with Cloud, which is free up to 1m monthly events and very fast to get going with. 
-- _Low volume, more technical_ - Cloud still probably makes sense, unless they have privacy needs in which case Open Source will be fine up to 10k MAUs. Beyond 10k, Open Source will still work but Postgres limitations at scale means performance will be degraded. 
+- _Low volume, more technical_ - Cloud still probably makes sense, unless they have privacy needs in which case Scale has a 1m monthly event free tier. 
 - _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
-- _High volume, more technical_ - Scale, as the price per event is greatly discounted at higher volumes vs. Cloud because we don't pay hosting costs. The only time Cloud makes sense here is if the customers wants absolutely zero hassle, doesn't have privacy needs and aren't budget-focused.
+- _High volume, more technical_ - Usually Enterprise as they'll get more focused support from us, as well as SSO and Project permissions but if these aren't needed then Scale.
 
 ### What about Open Source?
 
-Open Source will be appealing to customers who want to self-host, but are happy with 3 logins only and community-based support. 
+Open Source will be appealing to customers who want to self-host, but are happy with 1 project only and community-based support. 
 
-By contrast, Scale is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
+By contrast, paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
 
 
 ### Okay, they're using PostHog. Now what?
@@ -60,7 +93,7 @@ We have developed a [script](https://github.com/PostHog/growth-accounting#calcul
 
 _Can I give a Scale customer a free trial?_
 
-No, because we don't need to - they can get up and running with our Open Source or Cloud plans first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
+No, because we don't need to - they can get up and running with up to 1 million monthly free events on either Scale or Cloud first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
 
 _Can I give a Scale customer a discount?_
 
@@ -74,7 +107,7 @@ We'd only really look to do this with people spending $10k+ per month - we don't
 
 _How do I find out a customer's usage?_
 
-[Go to this link](https://app.posthog.com/events?properties=%5B%7B%22key%22%3A%22users_who_logged_in__0__email%22%2C%22value%22%3A%22xyz%22%2C%22operator%22%3A%22icontains%22%2C%22type%22%3A%22event%22%7D%5D) and replace 'xyz' with the customer's company name. 
+[Go to this link](https://app.posthog.com/insights/ZJT7kCug) and replace 'PostHog' with the customer's organization name.  You can also filter by organization_id or license_keys if you have them. 
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 

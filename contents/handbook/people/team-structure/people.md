@@ -7,9 +7,9 @@ hideAnchor: true
 
 ## People & Ops
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops & Marketing
+- Charles Cook, VP Ops & Marketing
 - Grace McKenzie, Operations Manager
+- Coua Phang, Tech Talent Partner
 
 ## Mission
 
@@ -47,15 +47,14 @@ Every PostHog team member, as well as current, future and past candidates.
 | People want to be involved in making PostHog the best place to work  | % Response rate of Engagement survey       | 90%    | 96%     |
 | People recommend PostHog as a great place to work.                   | Average score in engagement survey         | 90%    | 94%     |
 | People feel informed about what’s happening at PostHog               | Average score in engagement survey         | 90%    | 91%     |
-| People understand PostHog's goals and know how tocontribute.         | Average score in engagement survey         | 90%    | 89%     |
+| People understand PostHog's goals and know how to contribute.        | Average score in engagement survey         | 90%    | 89%     |
 | People feel like they develop professionally.                        | Average score in engagement survey         | 85%    | 88%     |
 | People feel like they are being paid competitively.                  | Average score in engagement survey         | 80%    | 78%     |
 | People feel a sense of belonging.                                    | Average score in engagement survey.        | 80%    | 82%     |
 
 
 
-## Slack channel
+## Slack channels
 
-[#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
-[#ops](https://posthog.slack.com/messages/ops) - internally public, default for ops discussions
-[#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
+[#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
+[#private-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers

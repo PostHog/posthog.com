@@ -105,3 +105,7 @@ However, we knew when we started that PostHog's [open source library](https://gi
 With that in mind, we felt we'd get a better and happier community by thinking about the intent of the action of tracking and not just trying to sneakily track as much as possible to tell the best short term VC story about adoption. Developers are, after all, some of the most sensitive people about how data is tracked, since we are the people dealing with data all of the time.
 
 For PostHog, that meant being up front about what we track and what we don't track, and giving users the choice if they opt themselves into full user tracking. Most don't, and that's ok!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

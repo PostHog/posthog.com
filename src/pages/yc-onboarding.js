@@ -16,9 +16,9 @@ const DemoCallInfo = () => (
         </p>
         <br />
         <p>
-            The setup call will take place with Yakko, one of our developers, and runs for about an hour. Before the
-            call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and try your hand
-            at
+            The setup call will take place with Cameron from our Customer Success team, and runs for about an hour.
+            Before the call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and
+            try your hand at
             <Link to="/docs/integrate/client/snippet-installation"> installing our snippet</Link> on your website. Doing
             so would allow us to tailor the onboarding to your needs, leveraging data from your own website instead of
             demo data. However, if you prefer to get a demo first, we'll give you access to a demo playground during our
@@ -51,7 +51,7 @@ export const YCOnboarding = () => {
                 </Button>
                 <Spacer height={25} />
                 {showInfo ? <DemoCallInfo /> : null}
-                <DemoScheduler />
+                <DemoScheduler iframeSrc="https://calendly.com/cameron-posthog/yc-onboarding" />
             </div>
         </Layout>
     )

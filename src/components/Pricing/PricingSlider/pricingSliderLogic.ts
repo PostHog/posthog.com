@@ -1,29 +1,40 @@
 import { kea } from 'kea'
-import { SCALE_MINIMUM_EVENTS, SCALE_MINIMUM_PRICING } from '../constants'
-import { sliderCurve } from './LogSlider'
+import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
+import { inverseCurve, sliderCurve } from './LogSlider'
 
-export type PricingOptionType = 'self-hosted' | 'cloud'
+export type PricingOptionType = 'scale' | 'enterprise' | 'cloud' | 'cloud-enterprise'
 
 export const pricingSliderLogic = kea({
     actions: {
+        setEventNumber: (value: number) => ({ value }),
+        setInputValue: (value: number) => ({ value }),
         setSliderValue: (value: number) => ({ value }),
         setPricingOption: (option: PricingOptionType) => ({ option }),
     },
     reducers: {
         eventNumber: [
-            SCALE_MINIMUM_EVENTS,
+            0,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         sliderValue: [
-            0,
+            1,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => value,
+                setInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
+            },
+        ],
+        inputValue: [
+            1,
+            {
+                setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value) / 1000000),
+                setInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
         pricingOption: [
-            'self-hosted',
+            'scale',
             {
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
@@ -37,20 +48,38 @@ export const pricingSliderLogic = kea({
                 let alreadyCountedEvents = 0
 
                 const thresholdPrices =
-                    pricingOption === 'self-hosted'
+                    pricingOption === 'scale'
                         ? [
                               [1_000_000, 0],
                               [2_000_000, 0.00045],
                               [10_000_000, 0.000225],
                               [100_000_000, 0.000045],
-                              [Number.MAX_SAFE_INTEGER, 0.000009],
+                              [1_000_000_000, 0.000009],
+                              [Number.MAX_SAFE_INTEGER, 0.000003],
                           ]
-                        : [
+                        : pricingOption === 'enterprise'
+                        ? [
+                              [10_000_000, 0.00045],
+                              [100_000_000, 0.00009],
+                              [1_000_000_000, 0.000018],
+                              [Number.MAX_SAFE_INTEGER, 0.0000036],
+                          ]
+                        : pricingOption === 'cloud'
+                        ? [
                               [1_000_000, 0],
                               [10_000_000, 0.000225],
                               [100_000_000, 0.000075],
                               [Number.MAX_SAFE_INTEGER, 0.000025],
                           ]
+                        : pricingOption === 'cloud-enterprise'
+                        ? [
+                              [10_000_000, 0.0003],
+                              [100_000_000, 0.0001],
+                              [1_000_000_000, 0.00003],
+                              [Number.MAX_SAFE_INTEGER, 0.000006],
+                          ]
+                        : [[]]
+
                 for (const [threshold, unitPricing] of thresholdPrices) {
                     finalCost =
                         finalCost +
@@ -59,11 +88,27 @@ export const pricingSliderLogic = kea({
                     alreadyCountedEvents = threshold
                 }
 
-                if (pricingOption === 'self-hosted') {
-                    finalCost = finalCost > SCALE_MINIMUM_PRICING ? finalCost : SCALE_MINIMUM_PRICING
+                if (pricingOption === 'enterprise') {
+                    finalCost = finalCost > ENTERPRISE_MINIMUM_PRICING ? finalCost : ENTERPRISE_MINIMUM_PRICING
+                } else if (pricingOption === 'cloud-enterprise') {
+                    finalCost =
+                        finalCost > CLOUD_ENTERPRISE_MINIMUM_PRICING ? finalCost : CLOUD_ENTERPRISE_MINIMUM_PRICING
                 }
 
-                return Math.round(finalCost).toLocaleString()
+                return Math.round(finalCost)
+            },
+        ],
+        finalMonthlyCost: [
+            (s) => [s.finalCost],
+            (finalCost: number) => {
+                return finalCost.toLocaleString()
+            },
+        ],
+        finalAnnualCost: [
+            (s) => [s.finalCost],
+            (finalCost: number) => {
+                const finalAnnualCost = finalCost * 10.8
+                return finalAnnualCost.toLocaleString()
             },
         ],
     }),

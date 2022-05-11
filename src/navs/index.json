@@ -168,6 +168,10 @@
                             {
                                 "title": "Build your own plugin",
                                 "url": "/docs/plugins/build"
+                            },
+                            {
+                                "title": "API documentation",
+                                "url": "/docs/api"
                             }
                         ]
                     },
