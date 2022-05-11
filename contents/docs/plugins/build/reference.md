@@ -570,54 +570,6 @@ export async function processEvent (event, { jobs }) {
 }
 ```
 
-## Metrics
-
-> **Minimum PostHog version:** 1.27.0
-
-![exportEvents Metrics Example](../../../images/plugins/exportEvents-metrics.png)
-
-Plugin metrics allow plugin developers to provide metrics for users about plugin performance. They will appear in a chart on the plugins page, which is made visible by clicking the chart icon for a specific plugin. 
-
-This could be tracking the number of errors and successes when exporting events to another service, or the maximum amount of time taken for a request to a third-party API to complete, for example.
-### Specifying metrics
-
-To specify metrics, you should export a `metrics` object mapping string keys (metric names) to metric operations, like so:
-
-```js
-export const metrics = {
-    'metric1': 'sum',
-    'metric2': 'max',
-    'metric3': 'min'
-}
-```
-
-The supported metric operations are `sum`, `max`, and `min`. If you're using TypeScript, a handy enum is provided for you in `@posthog/plugin-scaffold`, called `MetricsOperation`. 
-
-The metric operations correspond to property aggregation operations you can use in a PostHog trends graph. `sum` metrics will show a graph where all the values for the metric during the period will be added together. `max` and `min`, on the other hand, will create a graph showing the maximum or minimum values the property had in each time period.  
-### Updating metrics
-
-Each metric type has an operation it is allowed to perform. This is as follows:
-
-| Metric type | Operation |
-| :---------: | :--------: |
-| `sum` | `increment` |
-| `max` | `max` |
-| `min` | `min` |
-
-To update a metric, access `metrics` via the plugin's `meta` object, and you'll be able to call the respective methods on them, like so:
-
-```js
-export function processEvent(event, { metrics }) {
-    metrics.metric1.increment(100) // sum is now 100
-    metrics.metric1.increment(10) // sum is now 110
-    metrics.metric1.increment(-10) // sum is now 100
-    metrics['metric2'].max(5) // max is now 5
-    metrics['metric2'].max(10) // max is now 10
-    metrics['metric3'].min(4) // min is now 4
-    metrics['metric3'].min(1) // max is now 1
-}
-```
-
 ### exportEvents
 
 If your plugin uses `exportEvents`, some metrics will be automatically provided for you. These are:
