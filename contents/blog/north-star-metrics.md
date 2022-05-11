@@ -30,7 +30,7 @@ In its simplest form, a North Star is a metric which provides a singular focus f
 
 North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you.
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Andy Vandervell leads content marketing at PostHog. Prior to PostHog he spend over a decade in various roles within the publishing indutry, including stints at Condé Nast and Time Inc. 
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ### Examples of good North Star metrics
 
