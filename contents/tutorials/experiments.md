@@ -1,16 +1,14 @@
 ---
-title: How to use Experiments without feature flags
+title: How to run Experiments without feature flags
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
 topics: ['feature flags']
-date: 2021-05-11
+date: 2022-05-11
 ---
 
-Say you want to use Experiments, but not the feature flag library, because you've rolled your own. Or, more commonly, say feature flag support in your favourite PostHog client library doesn't yet exist.
-
-This tutorial addresses exactly the above concern.
+This tutorial explains how to run an experiment in PostHog while not using our feature flag library, either because you've rolled out your own or, more commonly, because feature flag support doesn't exist yet in your favourite PostHog client library.
 
 If you're wondering how to create an experiment, [see this tutorial](https://posthog.com/docs/user-guides/experimentation#creating-an-experiment).
 
@@ -27,7 +25,6 @@ Now, for the experiment to start tracking results and run its significance calcu
 
 1. Send events along with a special feature property
 2. Send `$feature_flag_called` events
-
 
 ## Sending the right events
 
