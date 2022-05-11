@@ -219,14 +219,14 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
-## Upgrading from 16.x.x
+### Upgrading from 16.x.x
 17.0.0 upgrades the Kafka dependency chart from version `12.6.0` to `14.9.3` and upgrades Kafka to version `2.8.1`.
 
 The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/kafka#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding `kafka.image` or `kafka.provisioning`, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
 Note: the Kafka pod will be reprovisioned as part of this upgrade and the ingestion pipeline will experience a brief downtime.
 
-## Upgrading from 17.x.x
+### Upgrading from 17.x.x
 18.0.0 requires 3 [async migrations](https://posthog.com/docs/self-host/configure/async-migrations/overview) to be completed.
 
 If you're on PostHog app version 1.33 head over to `/instance/async_migrations` and run first the three required migrations.
@@ -236,12 +236,12 @@ If you're on a PostHog app version < 1.33:
 2. run the async migrations at `/instance/async_migrations`
 3. continue the upgrade process as usual
 
-## Upgrading from 18.x.x
+### Upgrading from 18.x.x
 19.0.0 upgrades the Redis dependency chart from version `14.6.2` to `16.8.9` and upgrades Redis from version `6.2.4` to `6.2.7`.
 
 The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/redis#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding any of the values listed in the changelog, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
-## Upgrading from 19.x.x
+### Upgrading from 19.x.x
 20.0.0 upgrades the [`altinity/clickhouse-operator`](https://github.com/Altinity/clickhouse-operator) from version `0.16.1` to `0.18.4`. This brings some updates to the custom resource definition (CRD). In order to keep everything in sync, please run the following steps before updating your Helm release:
 
 1. Download and extract the Helm chart release source code
