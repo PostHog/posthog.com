@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 author: ["andy-vandervell", "joe-martin"]
-categories: ["Guides", "Open source"]
+categories: ["Guides", "Open source", "Comparisons"]
 ---
 
 PostHog and Amplitude are both product analytics tools. That means they tell you where users are coming from and how they interact with your product, so that you can find ways to make it better.
@@ -29,7 +29,7 @@ But we think PostHog is a more powerful tool for building better products. Not o
 Let's start with the core differences. Over 9,000 companies already use PostHog, and [many have switched from Amplitude](/customers/saga). Here are a few reasons why.
 
 ### 1. You control your data
-You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer [PostHog Cloud](/pricing#cloud) for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
+You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer PostHog Cloud for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
 
 ### 2. It's built for engineers
 Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures events, so you don't need to waste time instrumenting events every time you update your app or website. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch?plan=scale&demo=scale#demo) if you have questions.
@@ -325,7 +325,6 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
         	<td>Sentry</td>
 			<td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>        
     	</tr>
     	<tr>
@@ -344,7 +343,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 *[Redshift to PostHog import plugin](/integrations/redshift-import-plugin-(beta)) currently in beta
 
-**Import available via [Reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
+**Import available via [reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
 
 ## Strengths of PostHog
 
