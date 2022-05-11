@@ -2,11 +2,9 @@
 title: How to use Experiments without feature flags
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: false
 author: ['neil-kakkar']
 topics: ['feature flags']
-featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
 date: 2021-05-11
 ---
 
