@@ -1,5 +1,5 @@
 ---
-date: 2022-05-09
+date: 2022-05-11
 title: Restack joins the PostHog Marketplace
 rootPage: /blog
 sidebar: Blog
