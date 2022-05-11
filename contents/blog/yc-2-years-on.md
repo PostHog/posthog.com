@@ -78,6 +78,6 @@ I did this twice then stopped primarily because I felt it'd get distracting to d
 
 There's a lot of ongoing support. A lot of this is provided through network effects so it scales surprisingly well.
 
-We've both given and received advice from dozens (probably 50 or more) other companies. This has given us years of experience in weeks, but it can make it tempting to stop thinking for yourself. I've been suggested in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions) that I should work from first principles more often, which was helpful advice.
+We've both given and received advice from dozens (probably 50 or more) other companies. This has given us years of experience in weeks, but it can make it tempting to stop thinking for yourself. It's been suggested in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions) that I should work from first principles more often, which was helpful advice.
 
 Most importantly, and as cheesy a conclusion as this is, it has changed how we see ourselves. Being part of YC means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. That has taken us from feeling like outsiders to feeling like it's very achievable to build something with a lot of impact.
