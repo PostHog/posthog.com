@@ -240,3 +240,40 @@ If you're on a PostHog app version < 1.33:
 19.0.0 upgrades the Redis dependency chart from version `14.6.2` to `16.8.9` and upgrades Redis from version `6.2.4` to `6.2.7`.
 
 The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/redis#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding any of the values listed in the changelog, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
+## Upgrading from 19.x.x
+20.0.0 upgrades the [`altinity/clickhouse-operator`](https://github.com/Altinity/clickhouse-operator) from version `0.16.1` to `0.18.4`. This brings some updates to the custom resource definition (CRD). In order to keep everything in sync, please run the following steps before updating your Helm release:
+
+1. Download and extract the Helm chart release source code
+    ```
+    mkdir -p posthog-crd-upgrade
+    wget -qO- https://github.com/PostHog/charts-clickhouse/archive/refs/tags/posthog-20.0.0.tar.gz | tar xvz - --strip 1 -C posthog-crd-upgrade
+    ```
+
+1. Update the `altinity/clickhouse-operator` CRDs by running:
+    ```
+    kubectl apply \
+        -f posthog-crd-upgrade/charts/posthog/crds/clickhouseinstallations.clickhouse.altinity.com.yaml \
+        -f posthog-crd-upgrade/charts/posthog/crds/clickhouseinstallationtemplates.clickhouse.altinity.com.yaml \
+        -f posthog-crd-upgrade/charts/posthog/crds/clickhouseoperatorconfigurations.clickhouse.altinity.com.yaml
+    ```
+
+    Note: you'll likely see a warning like:
+    ```
+    Warning: resource customresourcedefinitions/clickhouseinstallations.clickhouse.altinity.com is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+    customresourcedefinition.apiextensions.k8s.io/clickhouseinstallations.clickhouse.altinity.com configured
+
+    Warning: resource customresourcedefinitions/clickhouseinstallationtemplates.clickhouse.altinity.com is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+    customresourcedefinition.apiextensions.k8s.io/clickhouseinstallationtemplates.clickhouse.altinity.com configured
+
+    Warning: resource customresourcedefinitions/clickhouseoperatorconfigurations.clickhouse.altinity.com is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+    customresourcedefinition.apiextensions.k8s.io/clickhouseoperatorconfigurations.clickhouse.altinity.com configured
+    ```
+    but this is safe to be ignored.
+
+1. You can now move on with the Helm update as usual:
+    ```
+    helm repo update posthog
+    helm upgrade --install -f ...
+    ```
+    Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
