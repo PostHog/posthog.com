@@ -27,17 +27,7 @@ export default function Apps() {
                 50+ apps available
             </p>
             <div className="mt-8 md:mt-12">
-                <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
-                    <AppsList apps={apps.nodes} />
-                    <li className="border-t border-l border-dashed border-gray-accent-light">
-                        <a
-                            href="/docs/plugins/build"
-                            className="flex flex-col h-full items-center justify-center px-2 py-6 hover:bg-gray-accent-light"
-                        >
-                            <span className="text-red">Build your own app</span>
-                        </a>
-                    </li>
-                </ul>
+                <AppsList apps={apps.nodes} />
 
                 <footer className="text-center">
                     <CallToAction to="/apps" type="outline" className="mt-8">
@@ -51,8 +41,13 @@ export default function Apps() {
 
 const query = graphql`
     query {
-        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+        apps: allMdx(
+            filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }
+            sort: { order: ASC, fields: frontmatter___filters___builtIn }
+            limit: 16
+        ) {
             nodes {
+                id
                 fields {
                     slug
                 }
@@ -62,9 +57,12 @@ const query = graphql`
                         publicURL
                     }
                     title
+                    badge
+                    price
                     filters {
                         type
                         maintainer
+                        builtIn
                     }
                 }
             }

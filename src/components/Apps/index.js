@@ -1,14 +1,66 @@
+import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
 import AppsList from '../AppsList'
 import Layout from '../Layout'
 
+const filters = [
+    {
+        type: 'builtIn',
+        name: 'Built-in',
+    },
+    {
+        type: 'type',
+        name: 'Data-in',
+    },
+    {
+        type: 'type',
+        name: 'Data-out',
+    },
+    {
+        type: 'type',
+        name: 'Ingestion-filtering',
+    },
+    {
+        type: 'maintainer',
+        name: 'Official',
+    },
+    {
+        type: 'maintainer',
+        name: 'Community',
+    },
+]
+
 function AppsPage() {
     const {
         apps: { nodes },
     } = useStaticQuery(query)
-    const [apps, setApps] = useState(nodes.sort((app) => (app.frontmatter.filters?.builtIn ? -1 : 1)))
+    const [apps, setApps] = useState(nodes)
+    const [filteredApps, setFilteredApps] = useState(null)
+    const [currentFilter, setCurrentFilter] = useState('all')
+
+    const filter = (filter) => apps.filter(filter)
+
+    const filterApps = (type, name) => {
+        let filteredApps = []
+        if (type === 'type') {
+            filteredApps = filter((app) => app.frontmatter.filters?.type.includes(name))
+        }
+        if (type === 'maintainer') {
+            filteredApps = filter((app) => app.frontmatter.filters?.maintainer === name)
+        }
+        if (type === 'builtIn') {
+            filteredApps = filter((app) => app.frontmatter.filters?.builtIn)
+        }
+        setCurrentFilter(name)
+        setFilteredApps(filteredApps)
+    }
+
+    const resetFilters = () => {
+        setCurrentFilter('all')
+        setFilteredApps(apps)
+    }
 
     return (
         <Layout>
@@ -21,18 +73,18 @@ function AppsPage() {
                     50+ apps available
                 </p>
             </header>
-            <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
-                <AppsList apps={apps} />
-
-                <li className="border-t border-l border-dashed border-gray-accent-light">
-                    <a
-                        href="/docs/plugins/build"
-                        className="flex flex-col h-full items-center justify-center px-2 py-6 hover:bg-gray-accent-light"
-                    >
-                        <span className="text-red">Build your own app</span>
-                    </a>
-                </li>
-            </ul>
+            <div className="flex justify-center items-center mb-6 space-x-2">
+                <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
+                {filters.map(({ type, name }) => (
+                    <Chip
+                        onClick={() => filterApps(type, name.toLowerCase())}
+                        active={currentFilter === name.toLowerCase()}
+                        key={name}
+                        text={name}
+                    />
+                ))}
+            </div>
+            <AppsList apps={filteredApps || apps} />
 
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />
@@ -43,8 +95,12 @@ function AppsPage() {
 
 const query = graphql`
     query {
-        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }) {
+        apps: allMdx(
+            filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }
+            sort: { order: ASC, fields: frontmatter___filters___builtIn }
+        ) {
             nodes {
+                id
                 fields {
                     slug
                 }
@@ -54,6 +110,8 @@ const query = graphql`
                         publicURL
                     }
                     title
+                    badge
+                    price
                     filters {
                         type
                         maintainer
