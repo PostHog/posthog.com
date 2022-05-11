@@ -11,7 +11,7 @@ author: ["andy-vandervell", "joe-martin"]
 categories: ["Guides", "Open source"]
 ---
 
-PostHog and Amplitude are both product analytics tools. They tell you how people are using your product, not just where they come from, and help you find ways to make your product better.
+PostHog and Amplitude are both product analytics tools. That means they tell you where users are coming from and how they interact with your product, so that you can find ways to make it better.
 
 But we think PostHog is a more powerful tool for building better products. Not only does offer it more features and tools for engineers to understand their users, it's an open platform that you can self-host and customize to your needs.
 
@@ -28,18 +28,22 @@ But we think PostHog is a more powerful tool for building better products. Not o
 
 Let's start with the core differences. Over 9,000 companies already use PostHog, and [many have switched from Amplitude](/customers/saga). Here are a few reasons why.
 
-### 1. It's open source
-Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own plugins](/docs/plugins/build) or even add extra functionality. You also benefit from the work of other teams who build their own plugins. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
+### 1. You control your data
+You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer [PostHog Cloud](/pricing#cloud) for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
 
 ### 2. It's built for engineers
 Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures events, so you don't need to waste time instrumenting events every time you update your app or website. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch?plan=scale&demo=scale#demo) if you have questions.
 
-### 3. You control your data
-You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer [PostHog Cloud](/pricing#cloud) for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
+### 3. It's open source
+Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own plugins](/docs/plugins/build) or even add extra functionality. You also benefit from the work of other teams who build their own plugins. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
 
 <ArrayCTA /> 
 
 ## Feature comparison
+
+This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Scale](/pricing) - the paid tier of our self-hosted platform. 
+
+We also offer [PostHog Enterprise](/enterprise), which includes everything from Scale but adds enhanced training and support, SLA with downtime developer pairing, SSO, SAML, instance monitoring, and more.  
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -48,7 +52,7 @@ You can self-host PostHog and keep total control of your data. That means no thi
             <td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
         	<td className="w-3/12 text-center"><strong>PostHog Cloud</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog Self-host</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Scale</strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -57,6 +61,12 @@ You can self-host PostHog and keep total control of your data. That means no thi
         	<td></td>
         	<td></td>
         	<td></td>
+    	</tr>
+		<tr>
+			<td>Host yourself</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
 			<td>Open source</td>
@@ -216,10 +226,9 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
-        	<td></td>
-        	<td className="w-2/12 text-center"><strong>Amplitude Analytics</strong></td>
-        	<td className="w-2/12 text-center"><strong>PostHog Cloud</strong></td>
-            <td className="w-2/12 text-center"><strong>PostHog Self-Hosted</strong></td>
+        	<td className="w-3/12"></td>
+        	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -227,109 +236,91 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
         	<td><strong>Export</strong></td>
         	<td></td>
         	<td></td>
-            <td></td>
     	</tr>
     	<tr>
         	<td>Redshift</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Google Cloud Storage</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
        	<td>Snowflake</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
        	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td> 
    		</tr>
     	<tr>
         	<td>Google BigQuery</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td> 
     	</tr>
     	<tr>
         	<td>Google Pub/Sub</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>RudderStack</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Hubspot</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
         	<td>Salesforce</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
         	<td>Sentry</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
         	<td>API</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td><strong>Import</strong></td>
         	<td></td>
         	<td></td>
-            <td></td>
     	</tr>
     	<tr>
         	<td>Redshift</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span>*</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>*</td>
     	</tr>
     	<tr>
         	<td>Google Cloud Storage</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span>**</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Snowflake</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
             <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
     	</tr>
     	<tr>
         	<td>Segment</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>      
     	</tr>
     	<tr>
         	<td>Sentry</td>
@@ -340,14 +331,12 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
         	<td>Zendesk</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>       
     	</tr>
     	<tr>
         	<td>API</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 	</tbody>
 </table>
@@ -357,7 +346,15 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 **Import available via [Reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
 
-## Strengths of PostHog 
+## Strengths of PostHog
+
+### Hosting flexibility and privacy
+
+PostHog offers the option to either [self-host your analytics](/docs/self-host) or use a managed cloud service, whereas Amplitude is strictly a cloud-only platform. While self-hosting isn't for everyone, it's often the best solution for a number of use cases. 
+
+Cloud platforms are incompatible with any business who values user privacy – many PostHog users use us because they handle sensitive client data – or those who need to comply with privacy legislation, such as HIPAA in the US. 
+
+HIPAA requires that any third-party handling personal health information enter into a legal agreement, but Amplitude doesn't offer this option. Self-hosting PostHog doesn't require any additional legal agreements as data never leaves your infrastructure. Read our [HIPAA guidance](/docs/privacy/hipaa-compliance) for more information.
 
 ### Integrated session recording
 While Amplitude and PostHog share many features, PostHog has [Session Recording](/product/session-recording) built in as standard.
@@ -368,21 +365,13 @@ Amplitude doesn't have session recording, so you have to run a third-party tool 
 
 ### Experimentation and Feature Flags
 
-All paid plans of PostHog include our Experimentation suite for running A/B and multivariate tests, while feature flags and session recording are no additional cost features on all versions of PostHog, including [PostHog Open Source](/signup/self-host).  
+Feature Flags and Experimentation (A/B testing and multivariate tests) are core PostHog features, available for free for anyone generating fewer than 1 million events per month. Feature Flags are also free as part of [PostHog Open Source](/signup/self-host)
 
-Amplitude analytics doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment. Like all Amplitude products, Experiment is a price on application only product. 
+Amplitude Analytics doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment, an additional cost on top of its core analytics product.
 
 ### Transparent pricing
 
 All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on (SAML), team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and pricing calculators show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.  
-
-### Hosting flexibility and privacy
-
-PostHog offers the option to either [self-host your analytics](/docs/self-host) or use a managed cloud service, whereas Amplitude is strictly a cloud-only platform. While self-hosting isn't for everyone, it's often the best solution for a number of use cases. 
-
-Cloud platforms are incompatible with any business who values user privacy – many PostHog users use us because they handle sensitive client data – or those who need to comply with privacy legislation, such as HIPAA in the US. 
-
-HIPAA requires that any third-party handling personal health information enter into a legal agreement, but Amplitude doesn't offer this option. Self-hosting PostHog doesn't require any additional legal agreements as data never leaves your infrastructure. Read our [HIPAA guidance](/docs/privacy/hipaa-compliance) for more information.
 
 ## Strengths of Amplitude
 
@@ -396,7 +385,9 @@ Amplitude also uses machine learning to power what it calls predictive analytics
 
 Amplitude's entry-level tier is free to use up to 10 million events per month, which compares very favorably to rivals like Mixpanel (up to 100k monthly users), Pendo (up to 1,000 monthly users) and Heap (up to 10,000 sessions per month). Once you exceed 10 million events, you'll need to speak to Amplitude's sales team to proceed further.
 
-PostHog's model is slightly different. PostHog Open Source, which [anyone can self-host](/docs/self-host), is totally free for life. PostHog Cloud is free up to 1 million events per month, and this includes premium features like Experimentation and Correlation Analysis not available on Amplitude's free Starter tier.
+PostHog Cloud and PostHog Scale are free up to 1 million events per month, but unlike Amplitude you get premium features like Experimentation, Correlation Analysis, Group Analytics and user permissions for free when you're under this limit.
+
+PostHog Open Source is free for life, but is limited to one project. It includes all the core analytics features, such as Funnels, Trends, Cohorts, Paths, Feature Flags, and Session Recording, but doesn't have Experimentation or Correlation Analysis.
 
 ## Coming soon to PostHog
 
