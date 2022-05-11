@@ -1,5 +1,6 @@
 import Link from 'components/Link'
 import React from 'react'
+import builderHog from './builder-hog.png'
 
 const Listing = ({ name, image, url, badge, price }) => {
     return (
@@ -40,6 +41,15 @@ export default function AppsList({ apps }) {
                     />
                 )
             })}
+            <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red">
+                <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
+                    <img
+                        className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
+                        src={builderHog}
+                    />
+                    <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                </Link>
+            </li>
         </ul>
     )
 }
