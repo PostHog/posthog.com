@@ -11,9 +11,9 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-[YCombinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, 3 month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.
+[YCombinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.
 
-> PostHog did YCombinator's Winter 2020 batch. We made the top companies list a year later when we closed a series B led by YC Continuity. We provide an open source product analytics suite.
+PostHog did YCombinator's Winter 2020 batch. We made the top companies list a year later when we closed a series B led by YC Continuity. We provide an [open-source product analytics suite](https://posthog.com/).
 
 So, what have the last two (and a bit) years like been for us, and how could they have been better?
 
@@ -21,7 +21,7 @@ So, what have the last two (and a bit) years like been for us, and how could the
 
 It's a vague term, what does this _actually_ mean?
 
-The tools we have are an internal forum, dozens of unofficial YC Whatsapp/Slack groups filled with other founders, regular invites to informal in person events, and the contact details of all the partners and every founder. This extends to real life - we met many people there that are now good friends.
+The tools we have are an internal forum, dozens of unofficial YC WhatsApp/Slack groups filled with other founders, regular invites to informal in person events, and the contact details of all the partners and every founder. This extends to real life - we met many people there that are now good friends.
 
 Ultimately, all these new contacts gave us access to many of the best founders and investors in the world. This was critical to us - as Silicon Valley outsiders, we really knew no one before we started with YC. This helped us to meet people for advice, angel investors and a few funds.
 
@@ -52,9 +52,9 @@ However, when we do need help - it's pretty leveraged. For example, we recently 
 
 ## Money...
 
-YC has a Continuity Fund. This can invest in later stage companies.
+YC has a Continuity Fund that invests in later stage companies.
 
-We've been fortunate to partner with them. They've:
+We've been fortunate to partner with them. They have:
 
 * invested roughly $20M
 * helped us stay focused on (the right) users in board meetings
@@ -64,7 +64,7 @@ This isn't guaranteed though, but it wouldn't have happened if we'd not gone thr
 
 ## ... and how to spend it (hiring)
 
-[Work at a Startup](https://www.workatastartup.com/) is provided to YC companies for during and after the batch.
+[Work at a Startup](https://www.workatastartup.com/) is provided to YC companies during and after the batch.
 
 This has given us a bunch of interviews with candidates.
 
@@ -78,6 +78,6 @@ I did this twice then stopped primarily because I felt it'd get distracting to d
 
 There's a lot of ongoing support. A lot of this is provided through network effects so it scales surprisingly well.
 
-We've both given and received advice from dozens (probably 50 or more) of other companies. This has given us years of experience in weeks, but it can make it tempting to stop thinking for yourself. I've been suggested in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions) that I should work from first principles more often, which was helpful advice.
+We've both given and received advice from dozens (probably 50 or more) other companies. This has given us years of experience in weeks, but it can make it tempting to stop thinking for yourself. I've been suggested in a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions) that I should work from first principles more often, which was helpful advice.
 
-Most importantly, and as cheesy a conclusion as this is, it has changed how we see ourselves. Being part of YC feels means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. That has taken us from feeling like outsiders to feeling like it's very achievable to build something with a lot of impact.
+Most importantly, and as cheesy a conclusion as this is, it has changed how we see ourselves. Being part of YC means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. That has taken us from feeling like outsiders to feeling like it's very achievable to build something with a lot of impact.
