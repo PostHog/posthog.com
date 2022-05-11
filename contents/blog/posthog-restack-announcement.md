@@ -15,7 +15,7 @@ Over the last few months, we’ve steadily grown the number of businesses offeri
 
 [Restack](https://www.restack.io/) is a platform for deploying open-source software stacks simply and effectively on Kubernetes, and is run by a team of open-source enthusiasts. Through the PostHog Marketplace, Restack enables you to easily setup, run and maintain a PostHog instance on your own Kubernetes Cluster on AWS. 
 
-In short, Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console ensures that deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii).
+In short, Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console can ensure that deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii).
 
 Additionally, you can choose which region your AWS EKS cluster will be based in, enabling straightforward GDPR and CCPA compliance if needed. 
 
