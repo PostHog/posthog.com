@@ -13,7 +13,7 @@ categories: ["Product updates"]
 
 Over the last few months, we’ve steadily grown the number of businesses offering services through [the PostHog Marketplace](/marketplace). We’ve added partnerships with teams such as [Altinity](/blog/posthog-altinity-announce), Birch, TenRec and, as of today, [Restack](/marketplace/restack). 
 
-[Restack](https://www.restack.io/) is a platform for deploying open-source software stacks simply and effectively, and is run by a team of open-source enthusiasts. Through the PostHog Marketplace, Restack enables you to easily setup, run and maintain a PostHog instance on your own Kubernetes Cluster on AWS. 
+[Restack](https://www.restack.io/) is a platform for deploying open-source software stacks simply and effectively on Kubernetes, and is run by a team of open-source enthusiasts. Through the PostHog Marketplace, Restack enables you to easily setup, run and maintain a PostHog instance on your own Kubernetes Cluster on AWS. 
 
 In short, Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console ensures that deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii).
 
