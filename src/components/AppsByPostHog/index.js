@@ -29,17 +29,5 @@ const Listing = ({ name, image, url }) => {
 }
 
 export default function AppsByPostHog() {
-    return (
-        <React.Fragment>
-            <Listing name="Funnels" image={funnels} url="/apps/funnels" />
-            <Listing name="Trends" image={trends} url="/apps/trends" />
-            <Listing name="User Paths" image={userPaths} url="/apps/user-paths" />
-            <Listing name="Correlation Insights" image={correlationInsights} url="/apps/quantitative-analysis" />
-            <Listing name="Experimentation" image={experimentation} url="/apps/experimentation-suite" />
-            <Listing name="Session Recording" image={sessionRecording} url="/apps/session-recording" />
-            <Listing name="Feature Flags" image={featureFlags} url="/apps/feature-flags" />
-            <Listing name="Heatmaps" image={heatmaps} url="/apps/heatmaps" />
-            <Listing name="Web Performance" image={webPerformance} url="#" />
-        </React.Fragment>
-    )
+    return <React.Fragment></React.Fragment>
 }
