@@ -24,7 +24,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             allMdx(
                 filter: {
                     fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
-                    frontmatter: { title: { ne: "" } }
+                    frontmatter: { title: { ne: "" }, filters: { builtIn: { ne: true } }
                 }
                 limit: 1000
             ) {
@@ -84,7 +84,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     fieldValue
                 }
             }
-            apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+            apps: allMdx(
+                filter: { fields: { slug: { regex: "/^/apps/" } }, frontmatter: { filters: { builtIn: { ne: true } } } }
+            ) {
                 nodes {
                     id
                     fields {

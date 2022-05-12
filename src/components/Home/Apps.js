@@ -27,7 +27,7 @@ export default function Apps() {
                 50+ apps available
             </p>
             <div className="mt-8 md:mt-12">
-                <AppsList apps={apps.nodes} />
+                <AppsList hideBuildYourOwn apps={apps.nodes} />
 
                 <footer className="text-center">
                     <CallToAction to="/apps" type="outline" className="mt-8">
@@ -42,8 +42,10 @@ export default function Apps() {
 const query = graphql`
     query {
         apps: allMdx(
-            filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }
-            sort: { order: ASC, fields: frontmatter___filters___builtIn }
+            filter: {
+                fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } }
+                frontmatter: { filters: { builtIn: { ne: true } } }
+            }
             limit: 16
         ) {
             nodes {
