@@ -734,11 +734,15 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "To another Self-hosted instance",
+                            "name": "To another self-hosted instance",
                             "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
                         },
                         {
-                            "name": "Between Cloud and Self-hosted",
+                            "name": "To PostHog from Amplitude",
+                            "url": "/docs/self-host/migrate/migrate-from-amplitude"
+                        },
+                        {
+                            "name": "Between Cloud and self-hosted",
                             "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
                         }
                     ]
