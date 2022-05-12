@@ -69,12 +69,6 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-			<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
         	<td>Transparent pricing</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -96,7 +90,7 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
         	<td>Custom plugins</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       		<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Multi-site</td>
@@ -111,7 +105,7 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td>Autocapture</td>
+        	<td>Event autocapture</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -135,6 +129,48 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
         	<td></td>
     	</tr>
     	<tr>
+        	<td>Funnel analysis</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
+        	<td>Cohort analysis</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
+        	<td>Conversion tracking</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
+        	<td>Retention tracking</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
+        	<td>Revenue tracking</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
+        	<td>UTM tracking</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+		<tr>
+        	<td>Event tracking</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+    	<tr>
         	<td>Feature Flags</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span>*</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -153,44 +189,8 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td>Event tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
         	<td>Experimentation</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span>*</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Funnel analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Cohort analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Retention tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Dashboards</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Correlation analysis</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
@@ -347,6 +347,8 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 ## Strengths of PostHog
 
+![Posthog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+
 ### Hosting flexibility and privacy
 
 PostHog offers the option to either [self-host your analytics](/docs/self-host) or use a managed cloud service, whereas Amplitude is strictly a cloud-only platform. While self-hosting isn't for everyone, it's often the best solution for a number of use cases. 
@@ -375,6 +377,8 @@ All versions of PostHog are transparently priced – even the [Enterprise versio
 Amplitude doesn't share its pricing publibly, so you have to speak to their sales team to get up and running, and negotiate a price based on your usage. It's a bit like a really expensive restaurant. It looks fancy and expensive from the outside, but you only find out just how expensive it is when you're already sat at your table.
 
 ## Strengths of Amplitude
+
+![Amplitude screenshot](../images/blog/posthog-vs-amplitude/Amplitude Screenshot.png)
 
 ### Personalization engine and machine learning
 
