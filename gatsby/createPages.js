@@ -259,7 +259,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 menu: handbookMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents,
+                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
                 slug,
             },
         })
@@ -290,7 +290,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 menu: docsMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents,
+                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
                 slug,
             },
         })

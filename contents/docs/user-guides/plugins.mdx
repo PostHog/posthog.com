@@ -6,19 +6,20 @@ showTitle: true
 
 _Interested in what apps we have available? Check out our [App Library](/plugins)._
 
-<hr /><br />
+<hr />
+<br />
 
 <FeatureAvailability allPlans />
 
-Apps are a way to extend PostHog's functionality by either pulling data into or sending data out of PostHog. 
+Apps are a way to extend PostHog's functionality by either pulling data into or sending data out of PostHog.
 
 Our goal with apps is to allow anyone to extend and customize PostHog in order to better fit their analytics and business needs.
 
 Apps serve three key purposes:
 
-- **Enriching:** Getting data into PostHog
-- **Exporting:** Getting data out of PostHog
-- **Cleaning:** Data parsing and filtering at the ingestion step
+-   **Enriching:** Getting data into PostHog
+-   **Exporting:** Getting data out of PostHog
+-   **Cleaning:** Data parsing and filtering at the ingestion step
 
 ![App diagram](../images/../../images/plugins-diagram.svg)
 
@@ -26,7 +27,7 @@ Apps serve three key purposes:
 
 ## Architecture
 
-When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database. 
+When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database.
 
 When apps are enabled, an extra step is added to the pipeline. Instead of creating `process_event` tasks that ingest the event, `process_event_with_plugins` tasks are created first, processed by a Node.js server, and then added back into the pipeline as `process_event` tasks.
 
@@ -41,7 +42,6 @@ Configuration aside, a simple app might look like this:
 ```js
 // Special function that processes event from the queue
 async function processEvent(event) {
-
     // Add an additional property to the event
     if (event.properties) event.properties['hello'] = 'world'
 
@@ -52,9 +52,9 @@ async function processEvent(event) {
 
 This app has 3 key parts:
 
-- The `processEvent` function, which is a special function name used by PostHog to find the logic each app applies to the event.
-- Logic that uses the event, in this case to add a property `hello` with value `world` to it. This logic can add properties to the event that are either hard-coded, configuration-based, or dynamically-loaded, as well as use that event for something else, like triggering an API call or sending the data somewhere else.
-- A return statement, which will most often return a modified event, but could also not return anything (`void`), to prevent the event from being ingested.
+-   The `processEvent` function, which is a special function name used by PostHog to find the logic each app applies to the event.
+-   Logic that uses the event, in this case to add a property `hello` with value `world` to it. This logic can add properties to the event that are either hard-coded, configuration-based, or dynamically-loaded, as well as use that event for something else, like triggering an API call or sending the data somewhere else.
+-   A return statement, which will most often return a modified event, but could also not return anything (`void`), to prevent the event from being ingested.
 
 ## Example use cases
 
@@ -67,10 +67,10 @@ If you have a data lake or data warehouse, you can use apps to send PostHog even
 **Pulling data from a third-party API to enrich the event**
 
 Apps can pull in information like exchange rates, GeoIP location data, online reviews, and anything else you can think of and add it to your PostHog events, enriching the data to improve your analytics processes.
- 
+
 **Adding your own data from other sources to PostHog**
 
-In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such other tools and platforms you use. 
+In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such other tools and platforms you use.
 
 **Labeling events**
 
@@ -84,16 +84,17 @@ By default, PostHog does not enforce schemas on events it receives. However, an 
 
 To use apps, go to the Apps page using the navigation sidebar.
 The possibilities differ slightly between self-hosetd PostHog and PostHog Cloud:
-- On self-hosted access every organization starts out with only the basic preinstalled apps (like GeoIP).  
-  Preinstalled apps are enabled by default for new projects.  
-  Additional apps can be freely installed from the App Repository, or from npm/GitHub/GitLab, or even written
-  directly in the PostHog app using a built-in code editor. They can then be enabled, configured, disabled, and also
-  updated or uninstalled as desired.
-- On PostHog Cloud every organization has access to verified apps from the App Repository, managed by PostHog.  
-  That means all available apps are guaranteed to be safe and sound, but installation of non-verified ones is
-  not possible due to system safety considerations.  
-  Such managed apps can also be freely enabled, configured, and disabled. The update schedule on the other hand
-  is managed by PostHog in this case.
+
+-   On self-hosted access every organization starts out with only the basic preinstalled apps (like GeoIP).  
+    Preinstalled apps are enabled by default for new projects.  
+    Additional apps can be freely installed from the App Repository, or from npm/GitHub/GitLab, or even written
+    directly in the PostHog app using a built-in code editor. They can then be enabled, configured, disabled, and also
+    updated or uninstalled as desired.
+-   On PostHog Cloud every organization has access to verified apps from the App Repository, managed by PostHog.  
+    That means all available apps are guaranteed to be safe and sound, but installation of non-verified ones is
+    not possible due to system safety considerations.  
+    Such managed apps can also be freely enabled, configured, and disabled. The update schedule on the other hand
+    is managed by PostHog in this case.
 
 ### Installing plugappsins from private sources
 
@@ -101,11 +102,11 @@ To install apps from private sources, like private npm packages or private repos
 
 1. Either use the following environment variables:
 
-| Variable                   | Description                           | Default Value         |
-| :------------------------: | :------------------------------------ | :-------------------: |
-| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of apps released as a private npm package                                 | `None`
-| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
-| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
+|    Variable    | Description                                                                                                                              | Default Value |
+| :------------: | :--------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+|  `NPM_TOKEN`   | [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of apps released as a private npm package |    `None`     |
+| `GITHUB_TOKEN` | GitHub personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos         |    `None`     |
+| `GITLAB_TOKEN` | GitLab personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos         |    `None`     |
 
 1. Or append `?private_token=<YOUR_TOKEN>` to the app URL
 
@@ -131,4 +132,4 @@ Apps can be updated to the latest version directly on the PostHog UI.
 
 By default, PostHog will check if there are any updates available and notify you of them, but you can also force PostHog to check again by clicking 'Check again'.
 
-Before updating a Apps, if you want to check what has changed between versions, simply click on the button that says 'Update available'. This will open a new tab and show you the diff between your current version and the latest one. 
+Before updating a Apps, if you want to check what has changed between versions, simply click on the button that says 'Update available'. This will open a new tab and show you the diff between your current version and the latest one.

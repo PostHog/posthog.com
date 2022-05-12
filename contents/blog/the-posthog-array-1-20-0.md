@@ -234,3 +234,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Zapier updates [\#2686](https://github.com/PostHog/posthog/pull/2686) ([Twixes](https://github.com/Twixes))
 - Issue templates plus [\#2681](https://github.com/PostHog/posthog/pull/2681) ([Twixes](https://github.com/Twixes))
 - Make Jest tests work better with TypeScript [\#2558](https://github.com/PostHog/posthog/pull/2558) ([Twixes](https://github.com/Twixes))
+
+<ArrayCTA />

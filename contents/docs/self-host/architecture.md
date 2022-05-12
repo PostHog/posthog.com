@@ -93,3 +93,5 @@ Note that the specifics of this may vary:
 - ClickHouse, Kafka, PostgreSQL and Redis services may be hosted outside of the namespace or [configured differently](/docs/self-host/deploy/configuration).
 - The ClickHouse cluster is managed by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/) and the
     exact number of pods vary according to [sharding settings](/docs/self-host/runbook/clickhouse/sharding-and-replication).
+    
+Event ingestion is explained in more depth in our engineering handbook [here](/handbook/engineering/databases/event-ingestion). 

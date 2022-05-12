@@ -6,9 +6,9 @@ showTitle: true
 
 At the moment, we release a new version every month ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
 
-For consistency, releases happen on the last Monday of every month. Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated [here](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
+For consistency, releases happen on the last Monday of every month. Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
 
-If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-1.version.0`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
+If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
 ## Version numbers
 
@@ -20,7 +20,11 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-Three business days before the release, so on the Wednesday before, we institute a code freeze (used to be Fridays but that led to a rush of PRs on the eleventh hour which made the release process trickier). We branch master into release-[version] and deploy that to our playground environment (playground.posthog.com) and ClickHouse test environment (samltest.posthog.net). Only bugfixes are allowed to be merged into this branch (and thus into production) between the code freeze and the release going out. This gives us about three days to test if the release has any bugs.
+Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch so people can have a heads up. Then, we branch master into release-[version] and deploy that to our playground environment (playground.posthog.com). We then host a hour long `break the release` session where everyone lends a hand in testing for any bugs. It is recommended to host `break the release` during an hour where as many people are available to join as possible.
+
+Only bugfixes are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
+
+The release manager is ultimately responsible for the timeline of the release. They are responsible for creating the code freeze and break the release calendar events as soon as possible. They should create these events under the `Releases` calendar linked up top.
 
 <blockquote class="warning-note">
 ⚠️ As soon as the branch is created and pushed to GitHub, the Docker image will be built and pushed to Docker Hub under the tag <code>release-[version]-unstable</code>.
@@ -37,22 +41,52 @@ Three business days before the release, so on the Wednesday before, we institute
   git checkout release-[version]
   git log --pretty=format:"%s %ae" [old-version]..head > log.txt
   ```
-- [ ] Update the `VERSION` in `posthog/version.py`
+- [ ] Update the `VERSION` in `posthog/version.py` and add an entry in `posthog/versions.json`
   ```bash
   git checkout release-[version]
-  git add posthog/version.py
+  git add posthog/version.py posthog/versions.json
   git commit -m "Bump version [version]"
   ```
+  
+> 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the following steps. You can install all of these with `brew doctl helm k9s`.
+
+> ⚠️ You'll also want to make sure that a Docker image under the tag `release-[version]-unstable` has been created in Docker Hub by this point. You can check its build status in the Github Actions workflow for the corresponding commit.
+
 - [ ] Upgrade PostHog playground
-    - The PostHog Playground uses a helm chart deployment on Digital Ocean.
-    - The upgrade instructions can be found [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart)
-    - Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c) and switch to the right kubectl context.
-    - lookup the the `release-[version]-unstable` Docker image's SHA (you can obtain it from Docker Hub, credentials in 1Password) and update that in the [`values.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml). Make sure to commit any changes made.
-    - note that you might need to follow major upgrade notes as mentioned in the upgrade guide same way our users would need to do that.
+    - The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
+    - If this is your first time on Digital Ocean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
+
+  ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
+
+    - Copy the automatic connection script by clicking the copy icon.
+  
+  ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
+
+    - Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
+    - Optional: Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
+    - On a separate PR, navigate to [`playground.yaml`](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and replace the `image: -> tag:` value with the `release-[version]-unstable` tag found in Docker Hub. Tag the previous release manager on the PR and have it merged to `master`.
+        - ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to, if so make any additional changes needed to the values file.
+    - Copy the url of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the Github UI, and copying the URL of that page.
+
+  ![PostHog - Github Raw](../../images/05/release_playground_raw_github.png)
+
+  ![PostHog - Github Raw File](../../images/05/release_playground_raw_file.png)
+  
+    - In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the url you copied in the previous step. Example:
+
+  ```shell
+    helm upgrade -f https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
+  ```
+
+    - Optional: Keep an eye on the progress of the upgrade in `k9s`
+    - If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
+    - Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
+
+
 - [ ] **Break the release session!** It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub (this is published automatically using GitHub Actions), to avoid any potential bugs creeping up in the final build stage.
+- [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
 
 ### Launch phase (day of the release)
-- [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. 
 - [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release is completely ready, some users may see the image on Docker Hub and update immediately.**
   ```bash
   git tag -a [version] -m "Version [version]"
@@ -66,4 +100,5 @@ Three business days before the release, so on the Wednesday before, we institute
   - [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
 - [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
+- [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array)
 - [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 

@@ -239,3 +239,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Lifecycle Graph [\#2460](https://github.com/PostHog/posthog/pull/2460) ([EDsCODE](https://github.com/EDsCODE))
 - Setup ecs configs for worker process [\#2458](https://github.com/PostHog/posthog/pull/2458) ([fuziontech](https://github.com/fuziontech))
 - Remove signup process from cypress [\#2264](https://github.com/PostHog/posthog/pull/2264) ([timgl](https://github.com/timgl))
+
+<ArrayCTA />

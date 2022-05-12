@@ -118,20 +118,20 @@
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "name": "Team Core Analytics",
-                            "url": "/handbook/people/team-structure/core-analytics"
+                            "name": "Team App East",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "name": "Team Core Experience",
-                            "url": "/handbook/people/team-structure/core-experience"
-                        },
-                        {
-                            "name": "Team Growth",
-                            "url": "/handbook/people/team-structure/growth"
+                            "name": "Team App West",
+                            "url": "/handbook/engineering/feature-ownership"
                         },
                         {
                             "name": "Team Platform",
                             "url": "/handbook/people/team-structure/platform"
+                        },
+                        {
+                            "name": "Team Ingestion",
+                            "url": "/handbook/people/team-structure/ingestion"
                         },
                         {
                             "name": "Team Marketing",
@@ -800,6 +800,10 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
+                        },
+                        {
+                            "name": "Browser Extensions",
+                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
@@ -1182,6 +1186,10 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
+                },
+                {
+                    "name": "Data egress & compliance",
+                    "url": "/docs/privacy/egress"
                 }
             ]
         },
@@ -1334,6 +1342,22 @@
             ]
         },
         {
+            "name": "User Paths",
+            "url": "/product/user-paths"
+        },
+        {
+            "name": "Correlation Analysis",
+            "url": "/product/correlation-analysis"
+        },
+        {
+            "name": "Session Recording",
+            "url": "/product/session-recording"
+        },
+        {
+            "name": "Feature Flags",
+            "url": "/product/feature-flags"
+        },
+        {
             "name": "First Time Event Tracker",
             "url": "/apps/first-time-event-tracker",
             "children": [
@@ -1352,6 +1376,10 @@
                     "url": "/apps/geoip-enrichment/docs"
                 }
             ]
+        },
+        {
+            "name": "Experimentation",
+            "url": "/product/experimentation-suite"
         },
         {
             "name": "GitHub Release Tracker",

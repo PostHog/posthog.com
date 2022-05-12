@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Guides", "Privacy", "Product analytics"]
+categories: ["Guides", "Privacy",]
 ---
 
 HIPAA, which stands for the Health Insurance Portability and Accountability Act, is a piece of legislation which was first introduced in 1996. Its main goal is to ensure that personally identifiable information is protected, with $1M+ fines and 10+ year prison sentences used to enforce adherence. 
@@ -70,7 +70,9 @@ Unlike PostHog (above) and Plausible (below), Countly isn’t open source - thou
 - Push notifications and crash analytics
 
 ### Is Countly HIPAA compliant?
-Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services. BAA agreements may still be needed with hosting providers, however. 
+Yes. Similar to PostHog, Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services. BAA agreements may still be needed with hosting providers, however.
+
+> Looking for HIPAA-compliant session recording tools as well? Read our guide to [best self-hosted session recording tools](/blog/best-open-source-session-replay-tools)
 
 ## 3. [Plausible](https://plausible.io/)
 
@@ -123,5 +125,7 @@ According to [Google’s own disclaimers](https://support.google.com/analytics/a
 
 Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data. 
 
-> PostHog is an open-source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. It can be deployed on your own infrastructure to be [used under HIPAA regulations](/docs/privacy/hipaa-compliance) without a Business Associate Agreement.
-[Try PostHog for free](/signup) today or [book a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
+

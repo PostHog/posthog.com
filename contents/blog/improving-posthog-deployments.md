@@ -124,3 +124,9 @@ Improving deployments for PostHog Cloud and our self-hosting customers is an eff
 If you enjoyed reading this look at improving PostHog deployments, we recommend reading Karl's deep dive into the [secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance).
 
 > Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog), or [join our community Slack](/slack).
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

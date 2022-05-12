@@ -226,12 +226,19 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 
 ### Decide if we will hire
 
-After a SuperDay, everyone involved in the day leaves their feedback on Workable. In case of any misalignment or open questions, we will start a Slack conversation or Zoom call, to discuss feedback. If there are wildly different opinions, reflect on why.
+After a SuperDay, everyone involved in the day leaves their feedback on Workable. In case of any misalignment or open questions, or if there are wildly different opinions, you should open an issue in `company-internal` to discuss. 
 
 Responsiveness at all stages is really important to us - at each stage of the process, we should aim to get back to candidates with feedback within 48 hours. It is not ok to leave candidates waiting for weeks, or for someone to apply and never hear back from us.
 
 In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
 
+If a decision is made to hire, you should also open an issue in `company-internal` to give the team context about who the person is and why they were hired. It is helpful to include:
+
+- Role background: what they will be doing, and a summary of the recruitment process (how long open for, no. of applicants etc.)
+- Who we are hiring: a brief intro
+- Why we are hiring them: feedback from the interview process, both positive and areas to improve
+- Start date and location
+- Share the output of their SuperDay (if it contains personal info, you can just share the task)
 
 ### Making the offer
 

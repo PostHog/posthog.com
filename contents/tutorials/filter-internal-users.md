@@ -3,7 +3,7 @@ title: How to filter out internal users
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/internal-users-filter.png
-featuredTutorial: true
+featuredTutorial: false
 author: ["joe-martin"]
 topics: ['filters']
 date: 2022-02-14

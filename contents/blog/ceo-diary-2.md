@@ -60,3 +60,9 @@ PostHog is VC-backed; we're going big or going home. That means we're playing of
 When I wanted to get Tim to join me on the PostHog adventure, my personal goal was not to try to maximize the fraction of the pie I receive. It was to build a pie so damn big that everyone wins.
 
 This happens when you focus on building a successful company, not on bargaining with each other.
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -47,6 +47,7 @@ hideAnchor: true
         - Unit tests
         - Style
 
+See the Ingestion roadmap on the dedicated [Ingestion Team page](/handbook/people/team-structure/ingestion).
 ### Infrastructure
 
 #### 3-year
@@ -75,7 +76,7 @@ hideAnchor: true
 * We document what we do to share context internally
 * We finish what we start, or we don't start it at all
 * We continually prioritize
-* We prioritize ublocking others
+* We prioritize unblocking others
 * We have an agenda and follow up on actions from our meetings
 * Be frugal
 

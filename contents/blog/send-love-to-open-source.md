@@ -53,3 +53,7 @@ Also, getting people who care about open-source projects to star our repo is of 
 4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/growth/marketing/open-source-sponsorship)
 
 > Support the projects that make PostHog possible by [heading to the PostHog repo and starring it today!](https://github.com/PostHog/posthog) We'll donate $5 for every star between now and through to the end of Valentine's Day!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

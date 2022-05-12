@@ -70,5 +70,11 @@ Content and analytics go hand in hand. There are several ways/metrics to track t
 * **Links:** You can track how often your content is getting linked to through tools like SEMRush, Ahrefs, and Moz. More link-juice = more traffic.
 * **Resonance:** Think of ‘resonance’ as a catch-all term for the other metrics in ways that aren’t necessarily quantifiable. For example, if you keep getting emails about the accuracy of [an article you wrote months ago](https://posthog.com/blog/story-about-pivots), that’s resonance. If your content or thoughts keep getting brought up at conferences or in conversations with random people, that’s resonance. At all times, strive to create content that resonates - it’ll take care of every other metric.
 
-_Loved this post? Check out the rest of our [blog](https://posthog.com/blog) and read about PostHog’s cool [features](https://posthog.com/product)_
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
+
+
 
