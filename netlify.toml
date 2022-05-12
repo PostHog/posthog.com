@@ -1327,3 +1327,14 @@
 [[redirects]]
     from = "/tutorials/free-hotjar-alternative"
     to = "/blog/best-open-source-session-replay-tools"
+
+# Added: 2022-04-11
+[[redirects]]
+from = "/integrations/"
+to = "/apps"
+status = 301
+
+[[redirects]]
+from = "/integrations/*"
+to = "/apps"
+status = 301

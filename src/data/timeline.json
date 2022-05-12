@@ -82,17 +82,17 @@
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Plugins launched"
+        "description": "Apps launched"
     },
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Hubspot plugin"
+        "description": "Hubspot Connector"
     },
     {
         "date": "2021-02-01",
         "type": "milestone",
-        "description": "Redesigned app"
+        "description": "Redesigned product"
     },
     {
         "date": "2021-03-01",
@@ -102,7 +102,7 @@
     {
         "date": "2021-04-01",
         "type": "feature",
-        "description": "S3, Snowflake plugins"
+        "description": "S3, Snowflake apps"
     },
     {
         "date": "2021-05-01",
@@ -127,7 +127,7 @@
     {
         "date": "2021-07-30",
         "type": "feature",
-        "description": "Salesforce plugin"
+        "description": "Salesforce Connector"
     },
     {
         "date": "2021-08-01",
@@ -259,7 +259,7 @@
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Enhanced plugin development experience",
+        "description": "Enhanced app development experience",
         "future": true
     },
     {

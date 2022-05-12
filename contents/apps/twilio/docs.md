@@ -11,7 +11,7 @@ This app triggers SMS messages in Twilio when specified events or actions are de
 
 You can set a timeout period of between 1 second and 31536000 seconds (1 calendar year) to avoid accidentally spamming users with too many messages. 
 
-###### What are the requirements for this app?
+### What are the requirements for this app?
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
@@ -31,7 +31,7 @@ Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's d
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/posthog/posthog-twilio-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/PostHog/posthog-twilio-plugin) is available on GitHub. 
 
 ### Who created this app?
 

@@ -85,7 +85,7 @@ export default function Hero() {
                         </CallToAction>
                     </div>
 
-                    <h3 className="text-center text-base opacity-60 mt-16 mb-2 p-0">Built-in apps:</h3>
+                    <br />
 
                     <FeatureStrip />
                 </div>
