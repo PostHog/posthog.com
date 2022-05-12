@@ -7,11 +7,15 @@ topics:
 
 ### What does the Braze Import app for PostHog do?
 
-This app sends Braze analytics data series to PostHog. 
+This app sends Braze analytics data series to PostHog. It is currently in beta and is to be used at your own risk.
 
 The data series is imported into PostHog once a day, in a time window corresponding to 00:00AM UTC to 12:00PM UTC of the previous day.
 
 Campaigns, Canvases, News Card Feeds and Segments will only be tracked if any activity was recorded in the last 24 hours time window.
+
+### Why is this app in beta?
+
+As a community app, this has not been fully tested with Braze. There may be risks or bugs that arise while using it and users must do so at their own risk.
 
 ### What are the requirements for this app?
 
