@@ -1332,4 +1332,9 @@
 # Added: 2022-05-03
 [[redirects]]
     from = "/product/quantitative-analysis"
-    to = "/product/correlation-analysis"    
+    to = "/product/correlation-analysis"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/product-features"
+    to = "/blog/posthog-vs-amplitude"    
