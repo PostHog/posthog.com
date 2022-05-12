@@ -31,7 +31,7 @@ Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's d
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/marcushyett-ph/posthog-twilio-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/PostHog/posthog-twilio-plugin) is available on GitHub. 
 
 ### Who created this app?
 
