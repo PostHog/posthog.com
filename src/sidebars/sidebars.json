@@ -1702,12 +1702,12 @@
             ]
         },
         {
-            "name": "Useragent Populator",
-            "url": "/apps/useragent-populator",
+            "name": "User Agent Populator",
+            "url": "/apps/user-agent-populator",
             "children": [
                 {
                     "name": "Documentation",
-                    "url": "/apps/useragent-populator/docs"
+                    "url": "/apps/user-agent-populator/docs"
                 }
             ]
         },

@@ -9,7 +9,7 @@ const Listing = ({ name, image, url, badge, price }) => {
                 to={url}
                 className="flex flex-col h-full relative items-center text-center px-2 py-8 hover:bg-gray-accent-light"
             >
-                <img className="icon w-6 h-6 mb-2" src={image} />
+                <img className="icon w-12 h-12 p-2 mb-2 rounded-sm" src={image} />
 
                 <span className="text-primary">{name}</span>
                 <div className="absolute top-4 right-4 inline-flex space-x-2 items-center text-[12px] uppercase text-primary text-opacity-50">
