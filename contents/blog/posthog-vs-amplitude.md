@@ -378,7 +378,7 @@ Amplitude doesn't share its pricing publibly, so you have to speak to their sale
 
 ## Strengths of Amplitude
 
-![Amplitude screenshot](../images/blog/posthog-vs-amplitude/Amplitude Screenshot.png)
+![Amplitude](../images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
 
 ### Personalization engine and machine learning
 
