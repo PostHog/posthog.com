@@ -24,14 +24,14 @@ export default function Apps() {
                 <span className="text-blue">PostHog App Store</span>
             </h2>
             <p className="my-6 mx-auto text-center text-base md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                50ish apps available
+                50-ish apps available
             </p>
             <div className="mt-8 md:mt-12">
                 <AppsList hideBuildYourOwn apps={apps.nodes} />
 
                 <footer className="text-center">
                     <CallToAction to="/apps" type="outline" className="mt-8">
-                        Browse 50ish apps
+                        Browse 50-ish apps
                     </CallToAction>
                 </footer>
             </div>
