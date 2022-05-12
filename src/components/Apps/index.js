@@ -73,7 +73,7 @@ function AppsPage() {
                     50+ apps available
                 </p>
             </header>
-            <div className="flex justify-center items-center mb-6 space-x-2">
+            <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
                 <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
                 {filters.map(({ type, name }) => (
                     <Chip
