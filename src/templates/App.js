@@ -63,26 +63,8 @@ export default function App({ data, pageContext: { next, previous } }) {
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
                 className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
             >
-                <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end lg:pl-5 px-5 lg:px-0">
-                    <nav>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-3">
-                            {sidebars.apps.map(({ url, name }) => {
-                                return (
-                                    <li key={url} className={url === slug ? 'active-product relative' : ''}>
-                                        <Link
-                                            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold opacity-50 hover:opacity-80 transition-opacity"
-                                            to={url}
-                                        >
-                                            {name}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </nav>
-                </aside>
-                <section className="col-span-2 overflow-hidden">
-                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0">
+                <section>
+                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
                         <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
                         <GatsbyImage image={getImage(featuredImage)} />
                         <article>
