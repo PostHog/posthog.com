@@ -33,6 +33,7 @@ import segmentImage from '../AppsList/logos/segment.png'
 import airbyteImage from '../AppsList/logos/airbyte.png'
 import n8nImage from '../AppsList/logos/n8n.png'
 import twilioImage from '../AppsList/logos/twilio.png'
+import databricksImage from '../AppsList/logos/databricks.png'
 import shopifyImage from '../AppsList/logos/shopify.png'
 import intercomImage from '../AppsList/logos/intercom.png'
 import amazonkinesisImage from '../AppsList/logos/kinesis.png'
@@ -124,6 +125,7 @@ export default function AppsList() {
             <LegacyListing name="Ingestion Alert" image={ingestionAlertImage} url="/apps/ingestion-alert" />
             <LegacyListing name="Heartbeat" image={heartbeatImage} url="/apps/heartbeat" />
             <LegacyListing name="Property Filter" image={propertyFilterImage} url="/apps/property-filter" />
+            <LegacyListing name="Databricks" image={databricksImage} url="/apps/databricks" />
             <LegacyListing name="Twilio" image={twilioImage} url="/apps/twilio" />
             <LegacyListing name="Shopify" image={shopifyImage} url="/apps/shopify" />
             <LegacyListing name="Intercom" image={intercomImage} url="/apps/intercom" />

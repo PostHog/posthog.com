@@ -15,7 +15,7 @@ Campaigns, Canvases, News Card Feeds and Segments will only be tracked if any ac
 
 ### What are the requirements for this app?
 
-Using the Amazon Kinesis Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+Using the this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 

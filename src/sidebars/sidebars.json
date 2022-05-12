@@ -1210,48 +1210,8 @@
     ],
     "apps": [
         {
-            "name": "Product",
-            "url": "/product"
-        },
-        {
-            "name": "Apps",
+            "name": "App Store",
             "url": "/apps"
-        },
-        {
-            "name": "Funnels",
-            "url": "/apps/funnels"
-        },
-        {
-            "name": "Trends",
-            "url": "/apps/trends"
-        },
-        {
-            "name": "User paths",
-            "url": "/apps/user-paths"
-        },
-        {
-            "name": "Quantitative analysis",
-            "url": "/apps/quantitative-analysis"
-        },
-        {
-            "name": "Session recording",
-            "url": "/apps/session-recording"
-        },
-        {
-            "name": "Feature flags",
-            "url": "/apps/feature-flags"
-        },
-        {
-            "name": "Heatmaps",
-            "url": "/apps/heatmaps"
-        },
-        {
-            "name": "Experimentation suite",
-            "url": "/apps/experimentation-suite"
-        },
-        {
-            "name": "Collaboration",
-            "url": "/apps/collaboration"
         },
         {
             "name": "Airbyte Export",
@@ -1260,6 +1220,16 @@
                 {
                     "name": "Documentation",
                     "url": "/apps/airbyte-export/docs"
+                }
+            ]
+        },
+        {
+            "name": "Amazon Kinesis Import",
+            "url": "/apps/amazon-kinesis",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/amazon-kinesis/docs"
                 }
             ]
         },
@@ -1294,6 +1264,16 @@
             ]
         },
         {
+            "name": "Braze Importer",
+            "url": "/apps/braze",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/braze/docs"
+                }
+            ]
+        },
+        {
             "name": "Currency Normalizer",
             "url": "/apps/currency-normalization",
             "children": [
@@ -1310,6 +1290,16 @@
                 {
                     "name": "Documentation",
                     "url": "/apps/customer-io/docs"
+                }
+            ]
+        },
+        {
+            "name": "Databricks Export",
+            "url": "/apps/databricks",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/databricks/docs"
                 }
             ]
         },
@@ -1430,6 +1420,16 @@
                 {
                     "name": "Documentation",
                     "url": "/apps/hubspot-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Intercom Connector",
+            "url": "/apps/intercom",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/intercome/docs"
                 }
             ]
         },
@@ -1614,6 +1614,16 @@
             ]
         },
         {
+            "name": "Shopify Connector",
+            "url": "/apps/shopify",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/shopify/docs"
+                }
+            ]
+        },
+        {
             "name": "Snowflake Export",
             "url": "/apps/snowflake-export",
             "children": [
@@ -1640,6 +1650,16 @@
                 {
                     "name": "Documentation",
                     "url": "/apps/timestamp-parser/docs"
+                }
+            ]
+        },
+        {
+            "name": "Twilio Connector",
+            "url": "/apps/twilio",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/twilio/docs"
                 }
             ]
         },
