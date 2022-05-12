@@ -48,7 +48,7 @@ export default function AppsList({ apps, hideBuildYourOwn }) {
                             className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
                             src={builderHog}
                         />
-                        <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                        <h5 className="m-0 text-white relative">Build your own</h5>
                     </Link>
                 </li>
             )}
