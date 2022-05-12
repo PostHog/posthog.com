@@ -42,7 +42,7 @@ export default function Hero() {
                 <div className="lg:max-w-[480px] justify-self-end px-5 box-content">
                     <h1 className="text-primary dark:text-white opacity-50 text-[20px] mb-2">What is PostHog?</h1>
                     <h2 className="text-[48px] mt-0 font-bold">
-                        An ever-expanding suite of apps to <span className="text-red">build better products</span>
+                        An ever-expanding suite of tools to <span className="text-red">build better products</span>
                     </h2>
                     <p className="text-[17px]">
                         PostHog ships with{' '}
@@ -66,11 +66,11 @@ export default function Hero() {
                         >
                             API
                         </a>
-                        , and <strong>10+ apps</strong> we've built to make product analytics and experimentation easier
-                        - all inside one app.
+                        , and <strong>10+ tools</strong> we've built to make product analytics and experimentation
+                        easier - all in one platform.
                     </p>
                     <p className="text-[17px]">
-                        Extend functionality further with more apps in the{' '}
+                        Extend functionality further by adding apps from the{' '}
                         <a
                             href="/apps"
                             className="border-dashed border-2 border-l-0 border-t-0 border-r-0 border-gray-accent-light dark:border-opacity-50 dark:hover:border-opacity-75 text-primary dark:text-white font-medium"
@@ -93,7 +93,7 @@ export default function Hero() {
                             href="/apps"
                             className="text-center select-none rounded-full inline-block cta w-56 bg-primary dark:bg-primary-dark text-white dark:text-primary hover:text-white hover:dark:text-primary border-primary dark:primary-dark text-[17px] font-bold px-5 py-2 border-3"
                         >
-                            Browse apps
+                            Browse the App Store
                         </a>
                     </p>
                 </div>
