@@ -20,17 +20,17 @@ Before we get started, lets look at an examples of these principles in action.
 
 The [GeoIP Enricher](/integrations/geoip) is an example of an app which adds information to events. Specifically, it adds geographical information based on the user IP address. It is triggered on each single event and adds additional informational to each event before it is stored.
 
-By running a second app after the GeoIP app, we create a chain. Here's an example of how this can look for an individual event when a second plugin (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP Enricher. 
+By running a second app after the GeoIP app, we create a chain. Here's an example of how this can look for an individual event when a second app (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP Enricher. 
 
 ![GeoIP Enricher Example](../../../images/plugins/geoip-plugin-example.png)
 
-Plugin chains are important because they control what the event looks like before it is stored. If you want to remove certain properties out of an event with the [Property Filter plugin](/integrations/property-filter), for example, it is best to have it run at the end of the plugin chain so that all unwanted properties can be filtered out before storage.  
+App chains are important because they control what the event looks like before it is stored. If you want to remove certain properties out of an event with the [Property Filter app](/apps/property-filter), for example, it is best to have it run at the end of the app chain so that all unwanted properties can be filtered out before storage.  
 
 ## Example of an app integrating with an external system
 
 The GeoIP Enricher is an example of an app which modifies an event as it is ingested, but apps _don't_ have to modify events at all. They can do all sorts of other things, such as integrating with or exporting to other systems.
 
-For example, an app can send an event to AWS S3 whenever it is seen in PostHog. Indeed, the [S3 Export app](https://posthog.com/plugins/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
+For example, an app can send an event to AWS S3 whenever it is seen in PostHog. Indeed, the [S3 Export app](/apps/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
 
 Here's how this can look:
 
@@ -38,7 +38,7 @@ Here's how this can look:
 
 As before, it is important to bear in mind how chains work. If you wanted the event stored on S3 to contain GeoIP information, for example, then the GeoIP Enricher must run _before_ the S3 Exporter. 
 
-## Building your own plugin
+## Building your own app
 
 Now, how do you make all of this happen? Each app has two files: `index.js` and `plugin.json`. The index file has code for the entire app, and the JSON file has configuration for user inputs. This config is what you see in PostHog:
 

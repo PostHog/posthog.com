@@ -43,7 +43,7 @@ export default function AppsList({ apps, hideBuildYourOwn }) {
             })}
             {!hideBuildYourOwn && (
                 <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red min-h-[160px]">
-                    <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
+                    <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/docs/apps/build">
                         <img
                             className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
                             src={builderHog}

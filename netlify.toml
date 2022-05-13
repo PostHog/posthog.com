@@ -1401,6 +1401,11 @@
 
 # Added: 2022-05-13
 [[redirects]]
+  from = "/integrations"
+  to = "/apps"
+
+# Added: 2022-05-13
+[[redirects]]
   from = "/integrations/*"
   to = "/apps/:splat"
 
