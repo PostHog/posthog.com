@@ -84,7 +84,7 @@ This has the added benefit of cross functional teams forming as needed, whilst p
 
 ## Team Member Growth
 
-When a new member joins your team and at a regular cadence (i.e. every 3 months) and outside of your regular 1:1s. Managers spend time iterating on each team members growth path. Theres no formal structure for a growth path, it will be unique to the needs and experience of each person.
+When a new member joins your team and at a regular cadence (i.e. every 3 months) and outside of your regular 1:1s. Managers spend time iterating on each team members growth path. There's no formal structure for a growth path, it will be unique to the needs and experience of each person.
 
 Good questions to ask: 
 * What do you want to be when you grow up?
@@ -94,5 +94,5 @@ Good questions to ask:
 Actions to take:
 * Finding opportunities to push them outside their comfort zone (in the right direction)
 * Sharing feedback and advice to help them improve on their weaknesses
-* Pairing them with team members who are strong in certain areas to grow thier strengths futher
+* Pairing them with team members who are strong in certain areas to grow their strengths further
 
