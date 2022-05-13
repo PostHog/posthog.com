@@ -11,7 +11,7 @@ const features = [
         description: `Analyze users across a series of actions. See how many people start or finish a sequence — and where they drop off.`,
         cta: {
             title: 'Learn more about Funnels',
-            url: '/apps/funnels',
+            url: '/product/funnels',
         },
     },
     {
@@ -19,7 +19,7 @@ const features = [
         description: `Answer any ad-hoc product usage question. Instantly.`,
         cta: {
             title: 'Learn more about Trends',
-            url: '/apps/trends',
+            url: '/product/trends',
         },
     },
     {

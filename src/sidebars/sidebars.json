@@ -1026,16 +1026,16 @@
             ]
         },
         {
-            "name": "Plugins",
+            "name": "Apps",
             "url": "",
             "children": [
                 {
                     "name": "Overview",
-                    "url": "/docs/plugins"
+                    "url": "/docs/apps"
                 },
                 {
                     "name": "Plugin troubleshooting",
-                    "url": "/docs/plugins/enabling"
+                    "url": "/docs/apps/enabling"
                 },
                 {
                     "name": "Build your own",
@@ -1043,19 +1043,19 @@
                     "children": [
                         {
                             "name": "Overview",
-                            "url": "/docs/plugins/build"
+                            "url": "/docs/apps/build"
                         },
                         {
                             "name": "Tutorial",
-                            "url": "/docs/plugins/build/tutorial"
+                            "url": "/docs/apps/build/tutorial"
                         },
                         {
                             "name": "TypeScript types",
-                            "url": "/docs/plugins/build/types"
+                            "url": "/docs/apps/build/types"
                         },
                         {
-                            "name": "Plugins developer reference",
-                            "url": "/docs/plugins/build/reference"
+                            "name": "Developer reference",
+                            "url": "/docs/apps/build/reference"
                         }
                     ]
                 }

@@ -17,7 +17,7 @@ export default function FeatureFlags() {
                     type="outline"
                     size="md"
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
-                    to="/apps/feature-flags"
+                    to="/product/feature-flags"
                 >
                     Learn more about Feature Flags
                 </CallToAction>

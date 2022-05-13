@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/integrations/:splat"
+  to = "/apps/:splat"
 
 [[redirects]]
   from = "/next-steps/*"
@@ -153,12 +153,12 @@
 
 [[redirects]]
     from = "/docs/plugins/build/overview"
-    to = "/docs/plugins/build"
+    to = "/docs/apps/build"
 
 
 [[redirects]]
     from = "/docs/plugins/types"
-    to = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
 
 [[redirects]]
     from = "/docs/developing-locally"
@@ -633,7 +633,7 @@
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/plugins/overview"
-    to = "/docs/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-17
 [[redirects]]
@@ -894,7 +894,7 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/plugins/maxmind"
-    to = "/plugins"
+    to = "/apps"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -1385,7 +1385,6 @@
     from = "/product/correlation-analysis"
     to = "/apps/correlation-analysis"
 
-
 # Added: 2022-05-12
 [[redirects]]
     from = "/docs/plugins/build/reference"
@@ -1397,8 +1396,22 @@
     from = "/docs/plugins/build/types"
     to = "/docs/apps/build/types"
 
-
 # Added: 2022-05-12
 [[redirects]]
     from = "/docs/plugins/enabling"
     to = "/docs/apps/enabling"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins"
+    to = "/docs/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/integrations"
+    to = "/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/user-guides/plugins"
+    to = "/docs/user-guides/apps"

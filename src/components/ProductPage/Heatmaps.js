@@ -17,9 +17,9 @@ export default function Heatmaps() {
                     type="outline"
                     size="md"
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
-                    to="/apps/heatmaps"
+                    to="/product/heatmaps"
                 >
-                    Learn more about heatmaps
+                    Learn more about Heatmaps
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">

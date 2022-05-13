@@ -16,7 +16,7 @@ export default function SessionRecording() {
                     type="outline"
                     size="md"
                     className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
-                    to="/apps/session-recording"
+                    to="/product/session-recording"
                 >
                     Learn more about Session Recording
                 </CallToAction>
