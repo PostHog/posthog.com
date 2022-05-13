@@ -88,7 +88,7 @@ TooManyConnections: too many connections
     kubectl get pods -n posthog
     ```
 
-    This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
+    This command will list all running pods. If you want app/plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
 
 2. Get the logs for that pod using the name from the previous step:
 
@@ -181,7 +181,7 @@ User.objects.count()
 
 ### How do I restart all pods for a service?
 
-> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team.
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the app/plugin server. If you have any doubts, ask someone from the PostHog team.
 
 1. Terminate all running pods for the service:
 

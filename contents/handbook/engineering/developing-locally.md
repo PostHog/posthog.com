@@ -15,7 +15,7 @@ The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
--   Node.js plugin server (handles event ingestion and plugins)
+-   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
 
 These components rely on a few external services:
@@ -155,7 +155,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare the plugin server
+### 3. Prepare app/plugin server
 
 Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
 
@@ -224,7 +224,7 @@ DEBUG=1 ./bin/migrate
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start

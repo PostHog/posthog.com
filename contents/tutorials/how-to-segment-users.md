@@ -55,9 +55,9 @@ In this example you can instantly see that most purchases are coming from users 
 
 What if we want to see if there are countries around the world where users look at products, but don't buy them? This could help our hypothetical ecommerce company to decide which currencies to launch support for next. To do this, we need to segment users geographically by their country of residence.
 
-### Step 1: Enable the GeoIP plugin
+### Step 1: Enable the GeoIP Enricher
 
-If you haven’t done so already, click 'Plugins' and enable [the GeoIP plugin](/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
+If you haven’t done so already, click 'Apps' and enable [the GeoIP Enricher app](/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
 
 ![segmentation](../images/tutorials/segmentation/segment-posthog-3.png)
 

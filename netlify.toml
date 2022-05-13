@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/plugins/*"
-  to = "/integrations/:splat"
+  to = "/apps/:splat"
 
 [[redirects]]
   from = "/next-steps/*"
@@ -153,12 +153,12 @@
 
 [[redirects]]
     from = "/docs/plugins/build/overview"
-    to = "/docs/plugins/build"
+    to = "/docs/apps/build"
 
 
 [[redirects]]
     from = "/docs/plugins/types"
-    to = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
 
 [[redirects]]
     from = "/docs/developing-locally"
@@ -529,7 +529,7 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/features/plugins"
-    to = "/docs/user-guides/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -633,7 +633,7 @@
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/plugins/overview"
-    to = "/docs/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-17
 [[redirects]]
@@ -894,7 +894,7 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/plugins/maxmind"
-    to = "/plugins"
+    to = "/apps"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -995,7 +995,7 @@
 
 [[redirects]]
     from = "/product-features/funnels"
-    to = "/product/funnels"
+    to = "/apps/funnels"
 
 [[redirects]]
     from = "/product-features/retention"
@@ -1003,20 +1003,55 @@
 
 [[redirects]]
     from = "/product-features/feature-flags"
-    to = "/product/feature-flags"
+    to = "/apps/feature-flags"
 
 [[redirects]]
     from = "/product-features/session-recording"
-    to = "/product/session-recordings"
+    to = "/apps/session-recording"
 
 [[redirects]]
     from = "/product-features/plugins"
-    to = "/integrations"
-    status = 302
+    to = "/apps"
+    status = 301
+
+[[redirects]]
+    from = "/product/funnels"
+    to = "/apps/funnels"
+    status = 301
+
+[[redirects]]
+    from = "/product/trends"
+    to = "/apps/trends"
+    status = 301
+
+[[redirects]]
+    from = "/product/session-recording"
+    to = "/apps/session-recording"
+    status = 301
+
+[[redirects]]
+    from = "/product/feature-flags"
+    to = "/apps/feature-flags"
+    status = 301
+
+[[redirects]]
+    from = "/product/heatmaps"
+    to = "/apps/heatmaps"
+    status = 301
+
+[[redirects]]
+    from = "/product/experimentation-suite"
+    to = "/apps/experimentation-suite"
+    status = 301
+
+[[redirects]]
+    from = "/product/collaboration"
+    to = "/apps/collaboration"
+    status = 301
 
 [[redirects]]
     from = "/heatmaps"
-    to = "/product/heatmaps"
+    to = "/apps/heatmaps"
 
 
 # Added: 2021-12-09
@@ -1277,6 +1312,16 @@
     from = "/handbook/engineering/k8s-overview"
     to = "/docs/self-host/architecture"
 
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/quantitative-analysis"
+    to = "/apps/quantitative-analysis"
+
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/user-paths"
+    to = "/apps/user-paths"
+
 # Added: 2022-04-07
 [[redirects]]
     from = "/tutorials/free-hotjar-alternative"
@@ -1332,7 +1377,42 @@
 # Added: 2022-05-03
 [[redirects]]
     from = "/product/quantitative-analysis"
-    to = "/product/correlation-analysis"
+    to = "/product/correlation-analysis"    
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/build/reference"
+    to = "/docs/apps/build/reference"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/enabling"
+    to = "/docs/apps/enabling"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins"
+    to = "/docs/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+  from = "/integrations"
+  to = "/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+  from = "/integrations/*"
+  to = "/apps/:splat"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/user-guides/plugins"
+    to = "/docs/apps"
 
 # Added: 2022-05-12
 [[redirects]]

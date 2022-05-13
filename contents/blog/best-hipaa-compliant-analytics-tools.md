@@ -61,12 +61,12 @@ You _may_ need to create a BAA with your hosting provider if one doesn’t alrea
 
 Tailored to the needs of Internet Of Things (IoT) organizations, Countly’s product analytics platform offers tools such as multi-device user tracking and crash analytics. This makes it especially suited to hardware manufacturers, or teams who need to focus on debugging customer issues.
 
-Unlike PostHog (above) and Plausible (below), Countly isn’t open source - though it does offer a range of plugins to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
+Unlike PostHog (above) and Plausible (below), Countly isn’t open source - though it does offer a range of apps to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
 
 ### Features & benefits
 
 - User tracking across desktop, mobile and IOT devices
-- Library of plugins to extend functionaility
+- Library of apps to extend functionaility
 - Push notifications and crash analytics
 
 ### Is Countly HIPAA compliant?
