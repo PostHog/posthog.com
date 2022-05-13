@@ -41,13 +41,7 @@ export default function Apps() {
 
 const query = graphql`
     query {
-        apps: allMdx(
-            filter: {
-                fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } }
-                frontmatter: { filters: { builtIn: { ne: true } } }
-            }
-            limit: 16
-        ) {
+        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }, limit: 16) {
             nodes {
                 id
                 fields {
@@ -64,7 +58,6 @@ const query = graphql`
                     filters {
                         type
                         maintainer
-                        builtIn
                     }
                 }
             }

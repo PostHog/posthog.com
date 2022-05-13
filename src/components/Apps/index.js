@@ -7,10 +7,6 @@ import Layout from '../Layout'
 
 const filters = [
     {
-        type: 'builtIn',
-        name: 'Built-in',
-    },
-    {
         type: 'type',
         name: 'Data-in',
     },
@@ -95,10 +91,7 @@ function AppsPage() {
 
 const query = graphql`
     query {
-        apps: allMdx(
-            filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }
-            sort: { order: ASC, fields: frontmatter___filters___builtIn }
-        ) {
+        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } } }) {
             nodes {
                 id
                 fields {
@@ -115,7 +108,6 @@ const query = graphql`
                     filters {
                         type
                         maintainer
-                        builtIn
                     }
                 }
             }

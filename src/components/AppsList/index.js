@@ -21,7 +21,7 @@ const Listing = ({ name, image, url, badge, price }) => {
     )
 }
 
-export default function AppsList({ apps }) {
+export default function AppsList({ apps, hideBuildYourOwn }) {
     return (
         <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-t border-l border-dashed border-gray-accent-light max-w-screen-2xl mx-auto">
             {apps.map((app) => {
@@ -41,16 +41,18 @@ export default function AppsList({ apps }) {
                     />
                 )
             })}
-            <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red">
-                <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
-                    <img
-                        className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
-                        src={builderHog}
-                        alt=""
-                    />
-                    <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
-                </Link>
-            </li>
+            {!hideBuildYourOwn && (
+                <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red">
+                    <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
+                        <img
+                            className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
+                            src={builderHog}
+                            alt=""
+                        />
+                        <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                    </Link>
+                </li>
+            )}
         </ul>
     )
 }
