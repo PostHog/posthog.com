@@ -10,7 +10,7 @@ featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
 
-Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/session-recording) and [apps](/docs/user-guides/plugins), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
+Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/session-recording) and [apps](/apps), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
 
 You'll notice PostHog feels much nicer to use and that's largely in part to all the feedback we've received from our users, so thank you and keep the suggestions coming!
 
@@ -50,7 +50,7 @@ One of the main changes was the addition of app attachments, which allow you to 
 
 As a result of this, we built the [PostHog MaxMind App](https://github.com/PostHog/maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the app adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
 
-> **Note:** Apps are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind App, please follow [these instructions](https://github.com/PostHog/maxmind-plugin). If you want to build your own apps, check out our [fresh new guide](/docs/plugins/build) on how to do so.
+> **Note:** Apps are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind App, please follow [these instructions](https://github.com/PostHog/maxmind-plugin). If you want to build your own apps, check out our [fresh new guide](/docs/apps/build) on how to do so.
 
 ### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
 

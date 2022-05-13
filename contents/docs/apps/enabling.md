@@ -1,5 +1,5 @@
 ---
-title: Plugin troubleshooting
+title: Troubleshooting
 sidebar: Docs
 showTitle: true
 ---
@@ -29,11 +29,11 @@ Please [upgrade to the latest CloudFormation config](/docs/self-host/deploy/aws#
 that combines all background workers into one task and activates the server.
 
 Previously we had separate tasks for `worker-beat` and `worker-celery`. In the latest version there is just one `worker`
-that starts all three services: celery, celery-beat and plugins.
+that starts all three services: celery, celery-beat and apps.
 
 #### Helm/Kubernetes
 
-Please upgrade to at least version `1.4.0` of the PostHog helm chart to add the `plugins` deployment.
+Please upgrade to at least version `1.4.0` of the PostHog helm chart to add the `apps` deployment.
 
 #### Manual/other
 

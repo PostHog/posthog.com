@@ -529,7 +529,7 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/features/plugins"
-    to = "/docs/user-guides/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -1407,7 +1407,7 @@
 # Added: 2022-05-13
 [[redirects]]
     from = "/docs/user-guides/plugins"
-    to = "/docs/user-guides/apps"
+    to = "/docs/apps"
 
 # Added: 2022-05-12
 [[redirects]]

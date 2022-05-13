@@ -182,8 +182,8 @@ const sections = [
                 tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
             {
-                name: 'Plugins',
-                docsLink: 'docs/user-guides/plugins',
+                name: 'Apps',
+                docsLink: 'docs/apps',
                 tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
             },
         ],

@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog makes it possible to build your own [apps](/docs/plugins/overview) and integrate with other platforms. So, if [our integration library](/integrations) is missing something you need then you may still be able to create it yourself.
+PostHog makes it possible to build your own [apps](/docs/apps/overview) and integrate with other platforms. So, if [our integration library](/integrations) is missing something you need then you may still be able to create it yourself.
 
-Apps can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some apps that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/plugins/build/reference#jobs-1).
+Apps can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some apps that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/apps/build/reference#jobs-1).
 
 Before building your first app it's important to understand how data flows through apps in the first place. There are two critical concepts to remember:
 
@@ -46,7 +46,7 @@ Now, how do you make all of this happen? Each app has two files: `index.js` and 
 
 We have some special function names which enable you to process an event, like in the GeoIP Enricher, or to do something else entirely, like in the S3 Exporter. We expect `index.js` to export these special functions.
 
-Two notable functions to be aware of are `processEvent` and `onEvent`. Both of these take in a single event and the meta object. You can find out more about meta objects [in our developer reference docs](/docs/plugins/build/reference#pluginmeta), but one key property is `meta.config`. This property enables your code to read the configuration values set by users via `plugin.json`.
+Two notable functions to be aware of are `processEvent` and `onEvent`. Both of these take in a single event and the meta object. You can find out more about meta objects [in our developer reference docs](/docs/apps/build/reference#pluginmeta), but one key property is `meta.config`. This property enables your code to read the configuration values set by users via `plugin.json`.
 
 If you want to add new properties to your event, like the GeoIP Enricher does, use the `processEvent` function. Here's an example app that adds the `hello` property to events.
 
@@ -85,6 +85,6 @@ This app is admittedly useless since PostHog can already show you this informati
 
 That's all for the crash course. There's a lot you can do with apps, such as running specific jobs every hour, sending events elsewhere via HTTP endpoints or modifying events before they're stored. Here are some additional resources to help you get started in building your own app for PostHog:
 
-1. For in-depth information on all the special functions, check out [the developer reference docs](/docs/plugins/build/reference).
-2. For building your own app from start to finish, check out [our tutorial](/docs/plugins/build/tutorial).
+1. For in-depth information on all the special functions, check out [the developer reference docs](/docs/apps/build/reference).
+2. For building your own app from start to finish, check out [our tutorial](/docs/apps/build/tutorial).
 3. To ask questions or collaborate with others in the community, join [the #Contributing channel in our community Slack group](/slack).

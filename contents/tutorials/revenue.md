@@ -97,7 +97,7 @@ Here's what a dashboard with these views might look like:
 
 ![TR Per Month Image](../images/tutorials/revenue/tr-month.png)
 
-> **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build an app](/docs/plugins/overview) to automate this.
+> **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build an app](/docs/apps/overview) to automate this.
 
 ### Breaking down revenue by source
 

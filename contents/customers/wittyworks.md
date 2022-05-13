@@ -19,7 +19,7 @@ Initially, the team built their own tool for gathering product data, writing a J
 
 “We crashed the production platform due to having too many files in the system,” said CTO and Co-founder Lukas Smith. “We considered switching to Google Analytics, but there were a lot of concerns around GDPR and I wanted something that could be self-hosted. That’s what led me to PostHog.”
 ## Creating plugins to connect systems and protect user privacy
-Once Witty Works’ Engineering team had deployed PostHog internally, other teams began using the platform too. Marketing, for example, wanted to use PostHog to track onboarding funnels and understand when users updated [the Witty browser extension](https://chrome.google.com/webstore/detail/witty-your-inclusive-writ/meojhlodfiihbjkcnehkdcgncnhgagog?hl=en). As a result, Witty Works used [PostHog’s app system](/docs/user-guides/plugins) to integrate with many tools in its stack. 
+Once Witty Works’ Engineering team had deployed PostHog internally, other teams began using the platform too. Marketing, for example, wanted to use PostHog to track onboarding funnels and understand when users updated [the Witty browser extension](https://chrome.google.com/webstore/detail/witty-your-inclusive-writ/meojhlodfiihbjkcnehkdcgncnhgagog?hl=en). As a result, Witty Works used [PostHog's app system](/docs/apps) to integrate with many tools in its stack. 
 
 <BorderWrapper>
     <Quote
@@ -35,7 +35,7 @@ Once Witty Works’ Engineering team had deployed PostHog internally, other team
 
 While ready-made integrations were available for many tools, such as Sentry and HubSpot, Witty Works’ team had far bigger plans they wanted to achieve with the app system. 
 
-“User privacy is one of our key features and we’re very careful about the data we collect,” explained Lukas Smith. “PostHog has a [GeoIP Enricher](/integrations/geoip), but we didn’t want to log IP addresses for every user. We only wanted to know the country they were from. So, [we built an app of our own](/docs/plugins/build) to achieve that.”
+“User privacy is one of our key features and we’re very careful about the data we collect,” explained Lukas Smith. “PostHog has a [GeoIP Enricher](/integrations/geoip), but we didn’t want to log IP addresses for every user. We only wanted to know the country they were from. So, [we built an app of our own](/docs/apps/build) to achieve that.”
 
 <BorderWrapper>
     <Quote

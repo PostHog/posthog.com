@@ -1000,10 +1000,6 @@
                     "url": "/docs/user-guides/persons"
                 },
                 {
-                    "name": "Plugins",
-                    "url": "/docs/user-guides/plugins"
-                },
-                {
                     "name": "Retention",
                     "url": "/docs/user-guides/retention"
                 },
@@ -1038,7 +1034,7 @@
                     "url": "/docs/apps"
                 },
                 {
-                    "name": "Plugin troubleshooting",
+                    "name": "Troubleshooting",
                     "url": "/docs/apps/enabling"
                 },
                 {

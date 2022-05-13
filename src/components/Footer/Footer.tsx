@@ -93,9 +93,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Analytics</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Funnels" url="/apps/funnels" />
-                                    <FooterMenuItem title="Trends" url="/apps/trends" />
-                                    <FooterMenuItem title="Paths" url="/apps/user-paths" />
+                                    <FooterMenuItem title="Funnels" url="/product/funnels" />
+                                    <FooterMenuItem title="Trends" url="/product/trends" />
+                                    <FooterMenuItem title="Paths" url="/product/user-paths" />
                                 </ul>
                             </div>
                             <div>
@@ -111,10 +111,7 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Session recording" url="/product/session-recording" />
                                     <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
-                                    <FooterMenuItem
-                                        title="Experimentation suite"
-                                        url="/product/experimentation-suite"
-                                    />
+                                    <FooterMenuItem title="Experimentation" url="/product/experimentation-suite" />
                                     <FooterMenuItem title="Heatmaps" url="/product/heatmaps" />
                                 </ul>
                             </div>
@@ -129,10 +126,7 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem
-                                        title="Quantitative analysis"
-                                        url="/product/quantitative-analysis"
-                                    />
+                                    <FooterMenuItem title="Correlation analysis" url="/product/correlation-analysis" />
                                     <FooterMenuItem title="Collaboration" url="/product/collaboration" />
                                     <FooterMenuItem title="Apps" url="/apps" />
                                 </ul>
@@ -210,7 +204,6 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
                                     <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
-                                    <FooterMenuItem title="Apps" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
                                 </ul>
                             </div>

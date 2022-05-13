@@ -28,5 +28,5 @@ If you're having issues getting apps to work on your self-hosted instance of Pos
 
 ## Next steps
 
-- Learn more about how apps work in our detailed [manuals](/docs/user-guides/plugins).
+- Learn more about how apps work in our [docs](/docs/apps).
 - Can't find the one you're looking for? Consider [building your own](/docs/apps/build)!
