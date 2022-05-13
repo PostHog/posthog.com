@@ -1338,3 +1338,20 @@
 [[redirects]]
     from = "/product-features"
     to = "/blog/posthog-vs-amplitude"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/apps/build/reference"
+    to = "/docs/plugins/build/reference"
+
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/apps/build/types"
+    to = "/docs/plugins/build/types"
+
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/apps/enabling"
+    to = "/docs/plugins/enabling"
