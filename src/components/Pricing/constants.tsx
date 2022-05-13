@@ -16,10 +16,10 @@ export const features = {
     ],
     'Platform features': [
         { title: 'Dashboards' },
-        { title: 'Event Autocapture' },
+        { title: 'Event autocapture' },
         { title: 'Annotations' },
         { title: 'API' },
-        { title: 'Plugins' },
+        { title: 'Apps' },
         { title: 'Data I/O' },
     ],
     'Advanced features': [
