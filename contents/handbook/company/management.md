@@ -95,4 +95,5 @@ Actions to take:
 * Finding opportunities to push them outside their comfort zone (in the right direction)
 * Sharing feedback and advice to help them improve on their weaknesses
 * Pairing them with team members who are strong in certain areas to grow their strengths further
+* "Give away your legos" actively push your team to take on more responsibility (Focus on what you are good at, hand-off the rest for others to learn from)
 
