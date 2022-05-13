@@ -1,7 +1,6 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import Link from '../Link'
 import { heading, section } from './classes'
 import Icon from './Icon'
 
@@ -9,7 +8,7 @@ export const FeatureStrip = ({ className = '' }) => {
     return (
         <div className="text-center mt-0 mb-4">
             <ul
-                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-5 justify-start gap-y-0 md:gap-y-4 md:gap-x-1 items-start ${className}`}
+                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-5 justify-start gap-y-0 md:gap-y-4 md:gap-x-1 ${className}`}
             >
                 <Feature icon="analytics" title="Product analytics" url="/product/#product-analytics" />
                 <Feature icon="session-recording" title="Session recording" url="/product/session-recording" />
@@ -29,7 +28,7 @@ const Feature = ({ title, icon, url }) => {
         <li className="w-24">
             <a
                 href={url}
-                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-start items-center justify-center text-black hover:text-black rounded hover:bg-gray-accent-light"
+                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
                 <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
