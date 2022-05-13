@@ -21,7 +21,7 @@ const Listing = ({ name, image, url, badge, price }) => {
     )
 }
 
-export default function AppsList({ apps, hideBuildYourOwn }) {
+export default function AppsList({ apps }) {
     return (
         <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-t border-l border-dashed border-gray-accent-light max-w-screen-2xl mx-auto">
             {apps.map((app) => {
