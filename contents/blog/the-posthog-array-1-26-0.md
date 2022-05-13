@@ -86,11 +86,11 @@ Requests that fail because of for example, the client's network connection, will
 
 Also, Neil fixed a bug that sent requests to a wrong endpoint (with no impact on tracking). You can read about how Neil solved this issue on his [blog](https://neilkakkar.com/debugging-open-source.html).
 
-### New plugins for Redshift, PostgreSQL, Salesforce, and PagerDuty
+### New apps for Redshift, PostgreSQL, Salesforce, and PagerDuty
 
 We've just released 4 new integrations with major platforms to enhance your PostHog experience. 
 
-Export data to Redshift, Postgres, and Salesforce, and leverage the PagerDuty plugin to get alerts when metrics in PostHog cross thresholds you specify.
+Export data to Redshift, Postgres, and Salesforce, and leverage the PagerDuty app to get alerts when metrics in PostHog cross thresholds you specify.
 
 ### New querying experience
 

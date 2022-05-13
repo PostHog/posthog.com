@@ -37,7 +37,7 @@ PostHog is used by many large businesses, including SpaceX, [Hasura](https://pos
 - Self-hosting and cloud-hosting available
 - Complete control of your data and PostHog instance
 - Feature Flags, Heatmaps, Session Recording and more
-- Plugins to integrate with data warehouses
+- Apps to integrate with data warehouses
 - Unlimited ability to scale
 - Open source, via MIT license
 

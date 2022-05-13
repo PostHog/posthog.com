@@ -806,3 +806,13 @@ body.dark {
         @apply !text-red hover:!text-red font-semibold;
     }
 }
+
+.tutorials-slider .slick-list {
+    overflow: visible;
+
+    .slick-slide:last-of-type {
+        > div > div {
+            border-right: 0px;
+        }
+    }
+}
