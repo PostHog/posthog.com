@@ -81,3 +81,18 @@ That means:
 * Every [Small Team](structure) has complete control over what they ship.
 
 This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
+
+## Team Member Growth
+
+When a new member joins your team and at a regular cadence (i.e. every 3 months) and outside of your regular 1:1s. Managers spend time iterating on each team members growth path. Theres no formal structure for a growth path, it will be unique to the needs and experience of each person.
+
+Good questions to ask: 
+* What do you want to be when you grow up?
+* What are your biggest strengths and weaknesses? 
+* What parts of your role do you enjoy and least enjoy?
+
+Actions to take:
+* Finding opportunities to push them outside their comfort zone (in the right direction)
+* Sharing feedback and advice to help them improve on their weaknesses
+* Pairing them with team members who are strong in certain areas to grow thier strengths futher
+
