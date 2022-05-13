@@ -29,6 +29,24 @@ This is everything we hate about modern SaaS companies, so we found a better way
 
 We introduced transparent enterprise pricing.
 
+## What do PostHog do, anyway?
+
+We're an all-in-one product analytics suite which helps you replace siloed tools used for 
+[Analytics](/product#product-analytics), [Heatmaps](/product/heatmaps), 
+[Session recording](/product/session-recording) and [Feature flags](/product/feature-flags).  
+The real value though is that you can self-host all of this inside your own environment meaning that your 
+customer data never leaves your infrastructure.  Your compliance and legal teams will be very happy.
+
+If you choose to self-host PostHog there are three main packaging [options](/pricing):
+
+* **Open-Source** - Contains all of the base analytics features but is limited to 1 project
+* **Scale** - Contains advanced features such as experiments and group analytics and has unlimited projects
+* **Enterprise** - Comes with SAML-based SSO, project permissions and a whole lot of help from us
+
+If self-hosting isn't your thing then our hosted Cloud options may be for you:
+
+* **Cloud** - Mirrors the features of PostHog Scale, hosted by us
+* **Cloud Enterprise** - Mirrors the features of PostHog Enterprise, hosted by us
 
 ##  Why did we implement transparent pricing?
 
