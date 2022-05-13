@@ -1379,17 +1379,10 @@
     from = "/product/quantitative-analysis"
     to = "/product/correlation-analysis"    
 
-
-# Added: 2022-05-12
-[[redirects]]
-    from = "/product/correlation-analysis"
-    to = "/apps/correlation-analysis"
-
 # Added: 2022-05-12
 [[redirects]]
     from = "/docs/plugins/build/reference"
     to = "/docs/apps/build/reference"
-
 
 # Added: 2022-05-12
 [[redirects]]
