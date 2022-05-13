@@ -66,7 +66,7 @@ export default function App({ data, pageContext: { next, previous } }) {
                 <section>
                     <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
                         <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                        <GatsbyImage image={getImage(featuredImage)} />
+                        <GatsbyImage image={getImage(featuredImage)} alt="" />
                         <article>
                             <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
                                 <MDXRenderer>{body}</MDXRenderer>

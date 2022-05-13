@@ -41,17 +41,16 @@ export default function AppsList({ apps, hideBuildYourOwn }) {
                     />
                 )
             })}
-            {!hideBuildYourOwn && (
-                <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red">
-                    <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
-                        <img
-                            className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
-                            src={builderHog}
-                        />
-                        <h5 className="m-0 text-white relative">Build your own</h5>
-                    </Link>
-                </li>
-            )}
+            <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red">
+                <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/developers">
+                    <img
+                        className="md:absolute left-[-37px] bottom-[-32px] transform -scale-x-1 max-w-[32%] min-w-[100px]"
+                        src={builderHog}
+                        alt=""
+                    />
+                    <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                </Link>
+            </li>
         </ul>
     )
 }
