@@ -63,7 +63,7 @@ An operations team is never complete without a robust toolkit to allow us to aut
 
 #### **HR, Recruiting, and Payroll**
 
-[Gusto](https://www.gusto.com/) is the industry standard for managing and paying US-based employees.
+- [Gusto](https://www.gusto.com/) is the industry standard for managing and paying US-based employees.
 
 - To hire abroad, or for hiring contractors, we use [Deel](https://www.letsdeel.com/). 
 
