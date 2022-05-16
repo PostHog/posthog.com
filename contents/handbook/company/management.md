@@ -81,3 +81,21 @@ That means:
 * Every [Small Team](structure) has complete control over what they ship.
 
 This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
+
+## Team member growth
+
+When a new member joins your team and at a regular cadence (we suggest every ~3 months), you should spend time iterating on each of their team member's growth path. This should be outside of your regular 1-1s, though you may want to combine these with performance reviews. 
+
+> There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person.
+
+Good questions to ask as part of these:
+* What do you want to be when you grow up?
+* What are your biggest strengths and weaknesses? 
+* What parts of your role do you most and least enjoy?
+
+Actions to take:
+* Finding opportunities to push them outside their comfort zone (in the right direction)
+* Sharing feedback and advice to help them improve on their weaknesses
+* Pairing them with team members who are strong in certain areas to grow their strengths further
+* "[Give away your legos](https://review.firstround.com/give-away-your-legos-and-other-commandments-for-scaling-startups)" - actively push your team to take on more responsibility
+* (If relevant) Help find them an external mentor
