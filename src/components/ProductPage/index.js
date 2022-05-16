@@ -23,7 +23,7 @@ function ProductPage() {
             <FeatureFlags />
             <Heatmaps />
             <p className="text-[17px] text-center px-5">
-                Extend functionality further with the <a href="/apps">PostHog App Store</a>.
+                Extend PostHog's functionality even further with the <a href="/apps">PostHog App Store</a>.
             </p>
             <Platform />
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">

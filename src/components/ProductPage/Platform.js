@@ -32,7 +32,7 @@ const features = [
     },
     {
         title: 'Extensibility',
-        description: `Extend functionality of PostHog with our Plugins library, or build your own with our API.`,
+        description: `Extend the functionality of PostHog with our App Store, or build your own with our API.`,
         icon: <Extensibility />,
     },
 ]

@@ -70,7 +70,7 @@ export default function Hero() {
                         easier - all inside one platform.
                     </p>
                     <p className="text-[17px]">
-                        Extend functionality further with <strong>50-ish more apps</strong> in the{' '}
+                        Extend PostHog's functionality even further with <strong>50-ish more apps</strong> in the{' '}
                         <a
                             href="/apps"
                             className="border-dashed border-2 border-l-0 border-t-0 border-r-0 border-gray-accent-light dark:border-opacity-50 dark:hover:border-opacity-75 text-primary dark:text-white font-medium"
