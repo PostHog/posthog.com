@@ -300,22 +300,22 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
         	<td>Redshift</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span>*</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Google Cloud Storage</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Snowflake</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Segment</td>
@@ -340,10 +340,6 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 	</tbody>
 </table>
 </div>
-
-*[Redshift to PostHog import plugin](/integrations/redshift-import-plugin-(beta)) currently in beta
-
-**Import available via [reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
 
 ## Strengths of PostHog
 
