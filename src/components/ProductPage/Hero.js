@@ -66,7 +66,7 @@ export default function Hero() {
                         >
                             API
                         </a>
-                        , and <strong>10+ products</strong> we've built to make product analytics and experimentation
+                        , and <strong>10+ tools</strong> we've built to make product analytics and experimentation
                         easier - all inside one platform.
                     </p>
                     <p className="text-[17px]">
