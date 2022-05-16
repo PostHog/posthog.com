@@ -55,41 +55,41 @@ An operations team is never complete without a robust toolkit to allow us to aut
 
 ### Hiring
 
-**Contracts & Offer Letters**
+#### **Contracts & Offer Letters**
 
-Do _not_ pay a lawyer to create contract templates for you. Orrick has a set of [free templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use.
+- Instead of wasting money on a lawyer to create contract templates, we used a set of [free templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) from Orrick.
 
-Consider using an e-signature platform like [HelloSign](https://hellosign.com/) to avoid emailing PDFs back and forth forever.
+- To avoid emailing PDFs back and forth forever, we use the e-signature platform [HelloSign](https://hellosign.com/).
 
-**HR, Recruiting, and Payroll**
+#### **HR, Recruiting, and Payroll**
 
 [Gusto](https://www.gusto.com/) is the industry standard for managing and paying US-based employees.
 
-If you're hiring abroad, or hiring contractors, consider using [Deel](https://www.letsdeel.com/).
+- To hire abroad, or for hiring contractors, we use [Deel](https://www.letsdeel.com/). 
 
-If you are hiring in multiple states, you'll need to register and most likely pay taxes. Avoid this massive headache and use [Middesk](https://www.middesk.com/).
+- If you are hiring in multiple states, you'll need to register and most likely pay taxes. We avoid this massive headache by using [Middesk](https://www.middesk.com/).
 
-For managing employee information and time-off requests for a globally-distributed team, we use [CharlieHR](https://www.charliehr.com/).
+- For managing employee information and time-off requests for a globally-distributed team, we use [CharlieHR](https://www.charliehr.com/).
 
-If you're managing a large candidate pipeline, an ATS (Applicant Tracking Software) is a must. We use [Workable](https://www.workable.com)
+- If you're managing a large candidate pipeline, an ATS (Applicant Tracking Software) is a must. We use [Workable](https://www.workable.com).
 
-**Finance and Banking**
+#### **Finance and Banking**
 
-Unless you _really_ love Quickbooks, you should outsource this. For the US, we use [Fondo](https://www.tryfondo.com/), who are absolutely fantastic.
+- Unless you _really_ love Quickbooks, you should outsource this. For the US, we use [Fondo](https://www.tryfondo.com/), who are absolutely fantastic.
 
-For banking, credit cards, and expense management, look no further than [Brex](https://www.brex.com/). They are designed for start-ups and use your capitalization to grant significantly larger credit limits than traditional banks.
+- For banking, credit cards, and expense management, look no further than [Brex](https://www.brex.com/). They are designed for start-ups and use your capitalization to grant significantly larger credit limits than traditional banks.
 
-For financial planning, headcount planning, and forecasting, check out [Pry](http://pry.co/) who were recently acquired by Brex.
+- For financial planning, headcount planning, and forecasting, check out [Pry](http://pry.co/) who were recently acquired by Brex.
 
-To manage our cap table, including options grants and exercises, we use [LTSE Equity](https://equity.ltse.com/) who also offer 409a valuation services.
+- To manage our cap table, including options grants and exercises, we use [LTSE Equity](https://equity.ltse.com/) who also offer 409a valuation services.
 
-**Everything Else**
+#### **Everything Else**
 
-For those pesky externalities, we use [Embroker](https://www.embroker.com/) for all of our insurance coverage.
+- For those pesky externalities, we use [Embroker](https://www.embroker.com/) for all of our insurance coverage.
 
-A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true). 
+- A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true). 
 
-And finally, if you're in the 0.0001% of startups using Teams or email (!) for internal communications, just switch to [Slack](https://slack.com/) already.
+- And finally, if you're in the 0.0001% of startups using Teams or email (!) for internal communications, just switch to [Slack](https://slack.com/) already.
 
 _Do you have recommendations for tools not listed here (we're especially seeking some for goal-setting and performance review management), or upgrades to any of the above? Raise an issue below and let us know!_
 
