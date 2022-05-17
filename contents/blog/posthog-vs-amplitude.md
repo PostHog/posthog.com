@@ -220,7 +220,7 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
 
 ## Integrations and data sources
 
-Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers - but check out [PostHog's integration library](/integrations) for a full list of what's available.
+Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers – check out the [PostHog App Store](/apps) for a full list of what's available.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
