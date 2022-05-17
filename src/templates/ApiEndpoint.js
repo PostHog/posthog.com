@@ -361,7 +361,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
             {exampleLanguage === 'curl' && (
                 <CodeBlock
                     code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : ''}${
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
                         item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
                     }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
