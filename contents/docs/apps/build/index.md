@@ -16,7 +16,7 @@ Before building your first app it's important to understand how data flows throu
 
 Before we get started, lets look at an examples of these principles in action. 
 
-## Example of a app chain
+## Example of an app chain
 
 The [GeoIP Enricher](/integrations/geoip) is an example of an app which adds information to events. Specifically, it adds geographical information based on the user IP address. It is triggered on each single event and adds additional informational to each event before it is stored.
 
