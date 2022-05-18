@@ -88,6 +88,6 @@ Being part of YC means we see people we know very well go on to build very succe
 
 Before YC, we felt like outsiders. After YC, we have the confidence to build a impactful product, and that's hugely valuable.
 
- <NewsletterForm
+<NewsletterForm
 compact
 />
