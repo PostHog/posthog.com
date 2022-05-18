@@ -1,6 +1,6 @@
 ---
 date: 2022-05-18
-title: YC, 2 years on
+title: Reflecting on YC, 2 years on
 rootPage: /blog
 sidebar: Blog
 showTitle: true
