@@ -5,6 +5,9 @@ require('dotenv').config({
 })
 
 module.exports = {
+    flags: {
+        PARALLEL_QUERY_RUNNING: false,
+    },
     siteMetadata: {
         title: 'PostHog',
         titleTemplate: '%s',
