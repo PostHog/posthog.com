@@ -10,6 +10,7 @@ topics: ['zapier', 'plugins']
 ---
 - *Level:* Easy 🦔
 - *Estimated reading time:* 5 minutes ☕️
+
 As large organizations get started with PostHog, the number of custom actions you’re tracking can start to grow very quickly. This can become an organizational challenge for teams where multiple people are creating actions, often with different naming conventions. 
 
 PostHog’s Data Management suite exists to help deal with this challenge, providing a way to clarify action ownership, reduce noise and help teams collaborate. However, you may want to maintain a list of tracked actions outside of the Data Management suite for users who do not have access to PostHog.
