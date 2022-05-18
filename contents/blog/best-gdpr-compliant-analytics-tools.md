@@ -20,7 +20,7 @@ While GDPR has created an essential and much-needed framework for handling user 
 
 PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that includes tools such as Session Recording, Feature Flags, Heatmaps, and Group Analytics. It’s also available in a self-hosted deployment, which means you can control exactly where user information is stored and how it is processed. 
 
-We believe this extensive feature set makes PostHog a powerful, GDPR compliant alternative to tools such as Mixpanel and Amplitude, which only offer cloud-hosted services.
+We believe this extensive feature set makes PostHog a powerful, GDPR compliant [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, which only offer cloud-hosted services.
 
 Best of all, PostHog is entirely [self-serve](/blog/Introduction-to-self-service-analytics), with event auto-capture that enables you to start collecting information out of the box and making fast, product-led decisions. 
 
@@ -37,7 +37,7 @@ PostHog is used by many large businesses, including SpaceX, [Hasura](https://pos
 - Self-hosting and cloud-hosting available
 - Complete control of your data and PostHog instance
 - Feature Flags, Heatmaps, Session Recording and more
-- Plugins to integrate with data warehouses
+- Apps to integrate with data warehouses
 - Unlimited ability to scale
 - Open source, via MIT license
 

@@ -33,7 +33,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, Posthog will need t
 * Grow a strong and successful developer community around Posthog
 * Convert our biggest users to paying customers
 * Go broad and develop all the tools our customers need to build better products
-* Partner with others to build plugins and deploy our tools
+* Partner with others to build apps and deploy our tools
 * Ride the industry wave of increasing data control that has been triggered by growing privacy regulation
 
 
@@ -64,9 +64,9 @@ While there is value in the items on the right, we value the items on the left m
 
 * _High quality users_: focus on acquiring more high quality users over big ticket contracts, so we can get better feedback and learn faster.
 
-**Plugin-based platform vs one-stop-shop**
+**App-based platform vs one-stop-shop**
 
-* _Plugin-based platform_: integrate with the best services and data sources to solve customer problems faster
+* Apps-based platform_: integrate with the best services and data sources to solve customer problems faster
 
 **Self-hosted vs. Cloud**
 

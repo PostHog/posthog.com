@@ -43,6 +43,8 @@ PostHog is ideal for companies that are focused on building a more successful pr
 ### Open source license
 PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more about [self-hosting PostHog](/pricing).
 
+<ArrayCTA />
+
 ## 2. [Matomo](https://matomo.org/)
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -59,6 +61,12 @@ Matomo is intended for Marketing and Content teams who need to focus on SEO acti
 
 ### Open source license
 Matomo is available under a AGPLv3 license. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
+
+**Further reading:**
+
+- An in-depth comparison of [PostHog vs Amplitude](/blog/posthog-vs-amplitude)
+- The [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
+- How to [achieve B2B product market fit](/blog/how-to-product-market-fit) 
 
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)

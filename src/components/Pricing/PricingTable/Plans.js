@@ -31,8 +31,12 @@ export const OpenSource = () => {
             >
                 Deploy now
             </TrackedCTA>
-            <span className="h-[49.5px] flex justify-center items-center text-black opacity-50">
-                Includes community support on Slack
+            <span className="h-[49.5px] text-center text-gray">
+                Includes community support via our{' '}
+                <Link href="/questions" className="text-red">
+                    Questions?
+                </Link>{' '}
+                page and <Link href="/slack">Slack</Link>
             </span>
         </Plan>
     )

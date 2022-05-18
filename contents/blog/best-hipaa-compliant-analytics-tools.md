@@ -17,7 +17,7 @@ Data protected under HIPAA is called Protected Health Information (PHI), or ePHI
 
 One of the challenges for organizations affected by HIPAA is that it limits how data about customers can be gathered, stored and shared. 
 
-In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA,  Many platforms which rely on third-party cookies, such as Mixpanel or Amplitude, cannot be used under HIPAA regulations without either anonymising data or creating cumbersome (and costly) BAA agreements. 
+In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA. Many platforms which rely on third-party cookies, such as Mixpanel or Amplitude, cannot be used under HIPAA regulations without either anonymising data or creating cumbersome (and costly) BAA agreements. 
 
 ### What is a Business Associate Agreement (BAA)?
 
@@ -33,7 +33,7 @@ It's worth noting that, because BAAs expose third-parties to increased risk and 
 
 PostHog is an all-in-one analytics platform which gives you everything you need to understand your users and build better products. It’s also completely open-source and [can be self-hosted on your own infrastructure](/docs/self-host), so that you never have to share data with anyone — including PostHog. 
 
-We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just a HIPAA-compliant analytics platform, it’s also a powerful alternative to tools such as Amplitude for those who _don’t_ need to comply with HIPAA. 
+We may be biased in claiming the top spot, but we believe the combination of features such as [Session Recording](/docs/user-guides/recordings), [Feature Flags](/docs/user-guides/feature-flags), [A/B Testing](/docs/user-guides/experimentation) and [Group Analytics](/docs/user-guides/group-analytics) is one that few other platforms can match. PostHog isn’t just a HIPAA-compliant analytics platform, it’s also a [powerful alternative to tools like Amplitude](/blog/posthog-vs-amplitude) for those who _don’t_ need to comply with HIPAA. 
 
 PostHog is also entirely self-serve, with features such as event auto-capture, which make it perfect for less technical users who don’t want to write reams of SQL. Technical users can meanwhile cater the platform to their needs or integrate with internal tools via [PostHog’s open source repos](https://github.com/PostHog).
 
@@ -61,12 +61,12 @@ You _may_ need to create a BAA with your hosting provider if one doesn’t alrea
 
 Tailored to the needs of Internet Of Things (IoT) organizations, Countly’s product analytics platform offers tools such as multi-device user tracking and crash analytics. This makes it especially suited to hardware manufacturers, or teams who need to focus on debugging customer issues.
 
-Unlike PostHog (above) and Plausible (below), Countly isn’t open source - though it does offer a range of plugins to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
+Unlike PostHog (above) and Plausible (below), Countly isn’t open source - though it does offer a range of apps to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
 
 ### Features & benefits
 
 - User tracking across desktop, mobile and IOT devices
-- Library of plugins to extend functionaility
+- Library of apps to extend functionaility
 - Push notifications and crash analytics
 
 ### Is Countly HIPAA compliant?
