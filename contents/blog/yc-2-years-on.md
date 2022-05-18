@@ -1,5 +1,5 @@
 ---
-date: 2022-05-09
+date: 2022-05-18
 title: YC, 2 years on
 rootPage: /blog
 sidebar: Blog
