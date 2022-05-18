@@ -149,11 +149,11 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         </div>
                     </Section>
                     <TrackedCTA
+                        href="https://license.posthog.com/?price_id=price_1KnoBqEuIatRXSdzDQIAetUI"
                         className="mt-7 mb-3"
-                        to="/signup/self-host/get-in-touch?plan=enterprise#contact"
                         event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
                     >
-                        Get in touch
+                        Get started
                     </TrackedCTA>
                     <TrackedCTA
                         type="outline"
