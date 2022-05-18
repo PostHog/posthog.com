@@ -17,6 +17,8 @@ PostHog did YCombinator's Winter 2020 batch. We made the top companies list a ye
 
 So, what have the last two (and a bit) years like been for us, and how could they have been better?
 
+> James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the YCombinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
+
 ## The network
 
 It's a vague term, what does this _actually_ mean?
