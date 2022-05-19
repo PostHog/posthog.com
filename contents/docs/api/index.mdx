@@ -24,7 +24,7 @@ Personal API keys allow full access to your account, just like e-mail address an
 #### How to obtain a personal API key
 
 1. Click on your name/avatar on the top right.
-1. Click on 'My account'
+1. Click the gear next to your name to access 'Account settings'.
 1. Navigate to the 'Personal API Keys' section.
 1. Click "+ Create a Personal API Key".
 1. Give your new key a label – it's just for you, usually to describe the key's purpose.
@@ -114,11 +114,17 @@ API docs are generated using [drf-spectacular](https://drf-spectacular.readthedo
 
 Note: We don't automatically add new API endpoints to the sidebar, so you'll need to add those to [sidebar.json](https://github.com/PostHog/posthog.com/blob/master/src%2Fsidebars%2Fsidebars.json#L1036)
 
-You can add a `help_text="Field that does x"` attribute to any `SerializerField` to help users understand what a specific field is used for:
+You can add a `help_text="Field that does x"` attribute to any Model or Serializer field to help users understand what a specific field is used for:
 
 ```py
 class Insight(models.Model):
     last_refresh: models.DateTimeField = models.DateTimeField(blank=True, null=True, help_text="When the cache for the result of this insight was last refreshed.")
+
+class InsightSerializer(TaggedItemSerializerMixin, InsightBasicSerializer):
+    filters_hash = serializers.CharField(
+        read_only=True,
+        help_text="A hash of the filters that generate this insight.",
+    )
 ```
 
 To add a description to the top of a page, add a comment to the **viewset** class:

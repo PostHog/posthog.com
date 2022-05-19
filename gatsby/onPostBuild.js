@@ -92,7 +92,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         name
                         url
                     }
-                    product {
+                    apps {
                         name
                         url
                     }
@@ -146,10 +146,13 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         encoding: 'base64',
     })
 
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
     const browser = await chromium.puppeteer.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
     })
     const page = await browser.newPage()
     await page.setViewport({

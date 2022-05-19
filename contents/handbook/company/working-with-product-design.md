@@ -27,7 +27,7 @@ If there isn’t a clear deadline for your design request, we’ll prioritize ac
 - All Figma assets should be shared back to the project via the GitHub issue. It's also fine to socialize changes via other channels, but documenting in GitHubis critical.
 
 ## Figma mockups > GitHub comments and issues
-- Completed Figma mockups hold (almost) as much weight as pull requests. Documented designs in Figma should be considered the source of truth for implmentation. Any feedback (including GitHub comments) should make its way into mockups to be considered final.
+- Completed Figma mockups hold (almost) as much weight as pull requests. Documented designs in Figma should be considered the source of truth for implementation. Any feedback (including GitHub comments) should make its way into mockups to be considered final.
 - If effort goes into making a mockup and gathering feedback, as much effort as possible should go into making the final product look like the mock.
 
 ### When to loop in design

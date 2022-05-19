@@ -15,7 +15,7 @@ The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
--   Node.js plugin server (handles event ingestion and plugins)
+-   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
 
 These components rely on a few external services:
@@ -146,7 +146,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
-2. Install the latest Node.js 14 (the version used by PostHog in production) with `nvm install 14`. You can start using it in the current shell with `nvm use 14`.
+2. Install the latest Node.js 16 (the version used by PostHog in production) with `nvm install 16`. You can start using it in the current shell with `nvm use 16`.
 
 3. Install yarn with `npm install -g yarn@1`.
 
@@ -156,7 +156,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare the plugin server
+### 3. Prepare app/plugin server
 
 Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
 
@@ -213,11 +213,10 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 ### 5. Prepare databases
 
-We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables.
+We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables:
 
 ```bash
-DEBUG=1 python manage.py migrate
-DEBUG=1 python manage.py migrate_clickhouse
+DEBUG=1 ./bin/migrate
 ```
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
@@ -226,7 +225,7 @@ DEBUG=1 python manage.py migrate_clickhouse
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start

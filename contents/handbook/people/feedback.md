@@ -30,7 +30,7 @@ With us growing the team, we will be splitting the session into smaller groups i
 
 In addition to informal day-to-day feedback and the full team 360 degree feedback session, it is important that we enable team members to take a step back every so often and look at their performance and aspirations in a wider context. This helps us to support a team member's growth and ensure it is aligned with PostHog's needs. 
 
-This process is intended to be self-serve. The People team will ensure the process is kicked off and recorded properly, but it is the individual team member's responsibility to run the process. If you need support, ask your manager, Eltje or Charles for help. 
+This process is intended to be self-serve. The People team will ensure the process is kicked off and recorded properly, but it is the individual team member's responsibility to run the process. If you need support, ask your manager, Coua or Charles for help. 
 
 We currently run performance reviews every 6 months, based on your start date. We will probably need to change this cadence as we scale, but this feels appropriate for our current stage of growth. 
 
@@ -43,7 +43,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 While the 360 degree team meetings are purely feedback-focused, you should aim to spend a significant chunk of the performance review looking ahead to the next 6 months. 
 
-Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more repsonsive to changes in the market and people's roles. 
+Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more responsive to changes in the market and people's roles. 
 
 ### Some guidance for managers
 

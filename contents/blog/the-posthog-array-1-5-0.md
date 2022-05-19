@@ -68,3 +68,5 @@ The PostHog team is busy working out how to present all the information in PostH
 We’re growing rapidly, and we’re constantly expanding our team. We’re looking for a [strong devops engineer](https://news.ycombinator.com/item?id=23044768) to join us. If that sounds like you, please email tim@posthog.com.
 
 We are also looking for a really strong [designer / UX person](/careers#designer--ux)! [Email James](mailto:james@posthog.com) if this sounds like it's for you!
+
+<ArrayCTA />

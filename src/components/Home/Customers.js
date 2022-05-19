@@ -24,9 +24,9 @@ const Customer = ({ image, width, height }) => {
 
 export default function Customers() {
     return (
-        <section className={section('mt-4 md:mt-8')}>
+        <section className={section('-mt-4 md:mt-8')}>
             <h2 className={heading('md')}>
-                These industry leaders <span className="text-blue">self-host</span> their product analytics
+                These industry leaders <span className="text-blue">self-host</span> their product analytics with PostHog
             </h2>
             <div className="mt-8 md:mt-12">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">

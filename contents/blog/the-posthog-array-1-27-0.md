@@ -87,7 +87,7 @@ ClickHouse is deployed a bit differently than our [traditional deployment option
 
 - Domain whitelist to allow self-serve signup with social providers (#5111).
 - Better errors & empty states when generating insights.
-- Plugins UI revamp (#5137, #4871).
+- Apps UI revamp (#5137, #4871).
 - You can now pass a Personal API key to API requests to work with different projects (#5044).
 - Your instance can now be multi-org (premium feature) by setting `MULTI_ORG_ENABLED` environment variable (#5108).
 - Performance improvements around insight requests and caching to optimize resource usage.
@@ -152,3 +152,5 @@ Don't see a role for you? We're always looking for exceptional people, reach out
 <hr/>
 
 _Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+
+<ArrayCTA />

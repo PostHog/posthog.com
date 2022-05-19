@@ -1,35 +1,10 @@
-import {
-    Annotations,
-    Autocapture,
-    Compliance,
-    Dashboards,
-    Extensibility,
-    OpenSource,
-    Pipelines,
-    SelfHost,
-    Warehouse,
-} from 'components/Icons/Icons'
+import { Annotations, Autocapture, Compliance, Dashboards, Extensibility, SelfHost } from 'components/Icons/Icons'
 import { motion, useAnimation } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import AnimateIntoView, { item } from './AnimateIntoView'
 
 const features = [
-    {
-        title: 'Event pipelines',
-        description: `Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers.`,
-        icon: <Pipelines />,
-    },
-    {
-        title: 'Data warehouse export',
-        description: `Normalize data in using PostHog, then push it to BigQuery, S3, Snowflake, or Redshift.`,
-        icon: <Warehouse />,
-    },
-    {
-        title: 'Open source',
-        description: `Browse our source code, influence the roadmap, or get involved with the product directly.`,
-        icon: <OpenSource />,
-    },
     {
         title: 'Self-hostable',
         description: `Customer data stays on your servers. You’re in total control of your PostHog instance.`,
@@ -41,14 +16,14 @@ const features = [
         icon: <Autocapture />,
     },
     {
-        title: 'Compliance-friendly',
-        description: `Rely on fewer third-party subprocessors. Host in any region on the planet.`,
-        icon: <Compliance />,
-    },
-    {
         title: 'Dashboards',
         description: `Build dashboards with everyday metrics like sign-ups, purchases and conversions.`,
         icon: <Dashboards />,
+    },
+    {
+        title: 'Compliance-friendly',
+        description: `Rely on fewer third-party subprocessors. Host in any region on the planet.`,
+        icon: <Compliance />,
     },
     {
         title: 'Annotations',
@@ -57,7 +32,7 @@ const features = [
     },
     {
         title: 'Extensibility',
-        description: `Extend functionality of PostHog with our Plugins library, or build your own with our API.`,
+        description: `Extend the functionality of PostHog with our App Store, or build your own with our API.`,
         icon: <Extensibility />,
     },
 ]

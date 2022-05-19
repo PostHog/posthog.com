@@ -32,7 +32,7 @@
     {
         "date": "2020-06-01",
         "type": "feature",
-        "description": "Feature flags"
+        "description": "Feature Flags"
     },
     {
         "date": "2020-06-01",
@@ -67,7 +67,7 @@
     {
         "date": "2020-11-01",
         "type": "feature",
-        "description": "Session recording"
+        "description": "Session Recording"
     },
     {
         "date": "2020-12-01",
@@ -82,17 +82,17 @@
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Plugins launched"
+        "description": "Apps launched"
     },
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Hubspot plugin"
+        "description": "Hubspot Connector"
     },
     {
         "date": "2021-02-01",
         "type": "milestone",
-        "description": "Redesigned app"
+        "description": "Redesigned product"
     },
     {
         "date": "2021-03-01",
@@ -102,7 +102,7 @@
     {
         "date": "2021-04-01",
         "type": "feature",
-        "description": "S3, Snowflake plugins"
+        "description": "S3, Snowflake apps"
     },
     {
         "date": "2021-05-01",
@@ -127,7 +127,7 @@
     {
         "date": "2021-07-30",
         "type": "feature",
-        "description": "Salesforce plugin"
+        "description": "Salesforce Connector"
     },
     {
         "date": "2021-08-01",
@@ -147,17 +147,17 @@
     {
         "date": "2021-10-21",
         "type": "feature",
-        "description": "Multivariate feature flags"
+        "description": "Multivariate Feature Flags"
     },
     {
         "date": "2021-11-17",
         "type": "feature",
-        "description": "Correlation analysis"
+        "description": "Correlation Analysis"
     },
     {
         "date": "2021-12-01",
         "type": "feature",
-        "description": "Group analytics"
+        "description": "Group Analytics"
     },
     {
         "date": "2022-01-22",
@@ -193,7 +193,7 @@
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Insight experience overhall",
+        "description": "Insight experience overhaul",
         "future": true
     },
     {
@@ -211,7 +211,7 @@
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Awesome demo environmemt",
+        "description": "Awesome demo environment",
         "future": true
     },
     {
@@ -259,7 +259,7 @@
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Enhanced plugin development experience",
+        "description": "Enhanced app development experience",
         "future": true
     },
     {

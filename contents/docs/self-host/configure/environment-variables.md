@@ -36,8 +36,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS` | If set, disables using ProtoBuf schemas for kafka communication. Needs to be set when using an external ClickHouse service provider during initial deploy. | `False`
 | `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
-| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
-| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
+| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
 | `KAFKA_URL` | Address used by the application to contact kafka | `kafka://kafka`
 | `KAFKA_URL_FOR_CLICKHOUSE` | Address used by ClickHouse to read from kafka. Falls back to `KAFKA_URL` | `None`
@@ -47,7 +47,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `MATERIALIZE_COLUMNS_MINIMUM_QUERY_TIME` | Diagnostic for what columns to materialize | `3000`
 | `MATERIALIZE_COLUMNS_SCHEDULE_CRON` | How frequently to run clickhouse column materialization. | `0 5 * * SAT`
 | `MULTI_ORG_ENABLED` | Allows creating multiple organizations in your instance (multi-tenancy). **Requires a premium license.** | `False`
-| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
+| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of apps released as a private npm package                                 | `None`
 | `OPT_OUT_CAPTURING`        | Disable sending product usage data to PostHog. | `False`
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
@@ -59,15 +59,6 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `POSTHOG_POSTGRES_PORT`| Port pointing to your PostgreSQL instance. | `5432` if PostHog is running in DEBUG or TEST mode.  Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_POSTGRES_SSL_MODE`| PostgreSQL SSL mode. [More info.](https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBQ-SSL-CERTIFICATES) | `None`
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
-| `SAML_ACS_URL`| Assertion Consumer Service URL from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
-| `SAML_ATTR_EMAIL`| Name of attribute that contains the email of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `email`
-| `SAML_ATTR_FIRST_NAME`| Name of attribute that contains the first name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `first_name`
-| `SAML_ATTR_LAST_NAME`| Name of attribute that contains the last name of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `last_name`
-| `SAML_ATTR_PERMANENT_ID`| Name of attribute that contains the permanent ID of the user in SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| `name_id`
-| `SAML_DISABLED`| Whether SAML should be completely disabled. If set at build time, this will also prevent SAML dependencies from being installed. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-| `SAML_ENFORCED`| Whether password-based login is disabled and users automatically redirected to SAML login. Requires SAML to be properly configured. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
-| `SAML_ENTITY_ID`| Entity ID from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
-| `SAML_X509_CERT`| Public X509 certificate from your SAML IdP to validate SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
 | `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                      | _Empty_
 | `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                     | _Empty_
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for [GitLab authentication](/docs/user-guides/sso#gitlab). Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`

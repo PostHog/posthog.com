@@ -33,7 +33,7 @@ If you're planning to work on a bigger feature that is not on the list of issues
 
 ## Writing and submitting code
 
-Anyone can contribute code to PostHog, including you! To get started, follow our [local development guide](http://localhost:8000/handbook/engineering/developing-locally). Then, make your change and submit a pull request to the [`posthog` repository](https://github.com/PostHog/posthog). We'll be delighted to review your change.
+Anyone can contribute code to PostHog, including you! To get started, follow our [local development guide](/handbook/engineering/developing-locally). Then, make your change and submit a pull request to the [`posthog` repository](https://github.com/PostHog/posthog). We'll be delighted to review your change.
 
 ## Licensing
 

@@ -13,7 +13,7 @@ When someone is _Support Hero_, they are also the secondary on-call person for t
 
 ## 1. Support Hero
 
-Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the statisfaction of helping them out and contribute to a lot of different parts of our system.
+Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out and contribute to a lot of different parts of our system.
 
 All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
 
@@ -31,7 +31,8 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Papercups](#papercups)**:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on [Papercups](#papercups)).
+- [PostHog Users's Slack](https://posthog.com/slack), specifically [#_customer_support](https://posthogusers.slack.com/archives/G01JXEDAL22), where all messages will come in from the other channels (also on [Papercups](#papercups)).
+- [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) which alerts you to questions asked directly on posthog.com (via [Squeak!](https://squeak.posthog.com)'s [Q&A.js](https://squeak.posthog.com/toolkit/qna.js)). [Learn how to use Squeak!](#how-to-use-squeak)
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
@@ -63,7 +64,7 @@ At the moment, Charles manually tags customers based on Stripe and HubSpot data 
 
 ## Categorizing requests
 
-It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
+It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
 
 When you initially respond to an issue add a "conversation tag" with the following categories:
 * User experience _(confusing/unclear UX)_.
@@ -107,7 +108,7 @@ See the handbook page [Deployments Support](/handbook/engineering/deployments-su
 
 If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
 
-1. Check if the plugin server is alive and healthy (suggest a restart if not - this is safe)
+1. Check if the app/plugin server is alive and healthy (suggest a restart if not - this is safe)
 2. Ask if they have Sentry set up and see any errors
 3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 
@@ -152,8 +153,27 @@ Like every other email address in this world, hey@ gets quite a bit of spam (and
 
 For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.
 
+## How to use Squeak!
 
-## Secondary on-call
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+
+### Q&A.js by Squeak!
+
+At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
+
+Q&A.js should help reduce the load of the support hero, but you'll need to make sure questions are getting answered accurately – and in a timely manner.
+
+#### Answering questions using Squeak!
+
+When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+
+The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
+
+Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
+
+_Note: Squeak! currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/squeak/issues/112) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## 2. Secondary on-call
 
 Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
 

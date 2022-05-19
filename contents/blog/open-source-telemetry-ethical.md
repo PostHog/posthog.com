@@ -88,7 +88,7 @@ Some users are happy to be tracked personally in return for a great project, but
 
 An easy step is not to use third party software to do this.
 
-Subtle advert: we built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plugin things like Metabase or your data lake if you need them :) There are some less product focused, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
+Subtle advert: we built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plug in things like Metabase or your data lake if you need them :) There are some less product focused, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
 
 There are many third party SAAS tools (Amplitude/Mixpanel/Heap) that can provide tracking, but a project would have to send user data to them to use them, we think hence why they're rarely (ever?) seen in the open source world.
 
@@ -105,3 +105,7 @@ However, we knew when we started that PostHog's [open source library](https://gi
 With that in mind, we felt we'd get a better and happier community by thinking about the intent of the action of tracking and not just trying to sneakily track as much as possible to tell the best short term VC story about adoption. Developers are, after all, some of the most sensitive people about how data is tracked, since we are the people dealing with data all of the time.
 
 For PostHog, that meant being up front about what we track and what we don't track, and giving users the choice if they opt themselves into full user tracking. Most don't, and that's ok!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

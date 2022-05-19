@@ -13,10 +13,11 @@ export default function MainSidebar({ slug, menu, className, mainEl, height, sti
         }
     }, [])
     return (
-        <aside style={sticky ? { position: 'sticky', top } : {}} className={className}>
+        <aside style={sticky ? { position: 'sticky', top: '1rem' } : {}} className={className}>
             <nav
                 ref={navEl}
-                style={{ maxHeight: navHeight || 'auto' }}
+                //style={{ maxHeight: navHeight || 'auto' }}
+                style={{ height: 'calc(100vh - 2rem)' }}
                 className="w-[224px] overflow-y-auto overflow-x-hidden"
             >
                 <Menu menu={menu} slug={slug} topLevel />
