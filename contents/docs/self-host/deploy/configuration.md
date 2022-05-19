@@ -235,7 +235,9 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 ### [MinIO](../runbook/minio/)
 
-MinIO is installed by default as part of the chart to provide a scalable, S3 compatible object storage system. You can customize all its settings by overriding `values.yaml` variables in the `minio` namespace.
+By default, `MinIO` is not installed as part of the chart. If you want to enable it, please set `minio.enabled` to `true`.
+
+MinIO provide a scalable, S3 compatible object storage system. You can customize all its settings by overriding `values.yaml` variables in the `minio` namespace.
 
 Note: please override the default user authentication by either passing `auth.rootUser` and `auth.rootPassword` or `auth.existingSecret`.
 
