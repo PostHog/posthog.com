@@ -8,12 +8,14 @@ If you are looking for routine procedures and operations to manage PostHog insta
 
 ## Troubleshooting
 
-### helm failed for not enough resources
+### Helm failed for not enough resources
 
 While running `helm upgrade --install` you might run into an error like `timed out waiting for the condition`
 
 One of the potential causes is that Kubernetes doesn't have enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm` command is still running:
+
 1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
+
 2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
 ```
 Events:
@@ -25,6 +27,7 @@ Events:
 
 **How to fix this**: add more nodes to your Kubernetes cluster.
 
+
 ### Connection is not secure
 
 First, check that DNS is set up properly:
@@ -32,6 +35,7 @@ First, check that DNS is set up properly:
 nslookup <your-hostname> 1.1.1.1
 ```
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
+
 
 ### Kafka crash looping (disk full)
 
