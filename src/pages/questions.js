@@ -14,6 +14,7 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { Form } from 'squeak-react'
+import { SelfHost2, Partners, FAQ2, Issue2, API } from 'components/Icons/Icons'
 
 const Search = () => {
     const [value, setValue] = useState('')
@@ -142,19 +143,85 @@ export default function FAQ({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <section className="max-w-[884px] mx-auto my-12 px-5">
-                <h1>Questions &amp; answers</h1>
-                <p>
-                    We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
-                    helps you find what you're looking for even faster!)
-                </p>
-                <Search />
-                <div className="questions-content">
-                    <ul className="list-none p-0 m-0">
-                        {nodes.map((question, index) => (
-                            <Question key={index} question={question} />
-                        ))}
-                    </ul>
+            <section>
+                <div className="max-w-[884px] mx-auto my-12 px-5">
+                    <h1>Questions &amp; answers</h1>
+                    <p>
+                        We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
+                        helps you find what you're looking for even faster!)
+                    </p>
+                    <Search />
+                </div>
+
+                <div className="border border-dashed border-gray">
+                    <div className="max-w-[884px] mx-auto px-5">
+                        <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center">
+                            <li className="border-none border-dashed border-gray">
+                                <a
+                                    href="#"
+                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                                >
+                                    <SelfHost2 className="w-6 h-6 mb-2 text-gray" />
+                                    <h3 className="font-bold text-base mb-1">Self-hosting</h3>
+                                    <p className="text-xs text-gray mb-0">Deployment options</p>
+                                </a>
+                            </li>
+
+                            <li className="border-l border-dashed border-gray">
+                                <a
+                                    href="#"
+                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                                >
+                                    <Partners className="w-6 h-6 mb-2 text-gray" />
+                                    <h3 className="font-bold text-base mb-1">Partners</h3>
+                                    <p className="text-xs text-gray mb-0">Hosting &amp; support</p>
+                                </a>
+                            </li>
+
+                            <li className="border-l border-dashed border-gray">
+                                <a
+                                    href="#"
+                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                                >
+                                    <FAQ2 className="w-6 h-6 mb-2 text-gray" />
+                                    <h3 className="font-bold text-base mb-1">FAQ</h3>
+                                    <p className="text-xs text-gray mb-0">&nbsp;</p>
+                                </a>
+                            </li>
+
+                            <li className="border-l border-dashed border-gray">
+                                <a
+                                    href="#"
+                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                                >
+                                    <Issue2 className="w-6 h-6 mb-2 text-gray" />
+                                    <h3 className="font-bold text-base mb-1">Report an issue</h3>
+                                    <p className="text-xs text-gray mb-0">via GitHub</p>
+                                </a>
+                            </li>
+
+                            <li className="border-l border-dashed border-gray">
+                                <a
+                                    href="#"
+                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                                >
+                                    <API className="w-6 h-6 mb-2 text-gray" />
+                                    <h3 className="font-bold text-base mb-1">API</h3>
+                                    <p className="text-xs text-gray mb-0">Apps, data I/O</p>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div className="max-w-[884px] mx-auto my-12 px-5">
+                    <div className="questions-content">
+                        <ul className="list-none p-0 m-0">
+                            {nodes.map((question, index) => (
+                                <Question key={index} question={question} />
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </section>
         </Layout>
