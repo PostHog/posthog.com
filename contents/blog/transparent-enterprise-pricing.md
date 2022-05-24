@@ -1,91 +1,89 @@
----
-date: 2022-05-10
-title: Transparent Enterprise Pricing
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
-categories: ["Inside PostHog"]
-author: ["simon-fisher"]
----
+start of the sales dance.
 
-[Contact sales](/signup/self-host/get-in-touch?plan=enterprise#contact). That's the usual answer when you're trying to figure out how much a premium, or enterprise, product tier costs. 
-
-Next, if you're deemed worthy enough for a sales rep to call you, it's highly likely you won't find out the pricing until you've answered a _lot_ of questions.
+Even if you're deemed worthy enough for a sales rep to call you, it's likely you still won't find out the price until you've answered a _lot_ of questions.
 
 And maybe seen a demo.
 
 And perhaps your own hands-on evaluation.  
 
-And also introduced your bosses' boss. 
+And introduced your bosses' boss. 
 
-And consulted the finance deparment.
-
-And don't forget the legal department.
+And consulted the legal department.
 
 And "hey, would you like to join our webinar?"
 
-This is everything we hate about modern SaaS companies, so we found a better way.
+It's all a colossal waste of time and energy that's better spent focusing on what matters: building better products.
 
-We introduced transparent enterprise pricing.
+That's why, at PostHog, we've adopted transparent pricing and self-service for every paid plan, even PostHog Enterprise.
 
-## What do PostHog do, anyway?
+## Why transparent pricing is important
 
-We're an all-in-one product analytics suite which helps you replace siloed tools used for 
-[Analytics](/product#product-analytics), [Heatmaps](/product/heatmaps), 
-[Session recording](/product/session-recording) and [Feature flags](/product/feature-flags).  
-The real value though is that you can self-host all of this inside your own environment meaning that your 
-customer data never leaves your infrastructure.  Your compliance and legal teams will be very happy.
+For those who don't already know, PostHog is an all-in-one product analytics suite that replaces siloed tools for [product analytics](/product#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), and Experimentation. It's open source and you can host it yourself, giving you complete control over your data – we have a Cloud version too if that's your thing. 
 
-If you choose to self-host PostHog there are three main packaging [options](/pricing):
+As an open-source business, we put great value in transparency. We make our processes, policies, and team structure available for anyone to read in our company handbook, and the vast majority of our comms is visible for anyone to read on [our GitHub repo](https://github.com/PostHog/posthog/issues).
 
-* **Open-Source** - Contains all of the base analytics features but is limited to 1 project
-* **Scale** - Contains advanced features such as experiments and group analytics and has unlimited projects
-* **Enterprise** - Comes with SAML-based SSO, project permissions and a whole lot of help from us
+This philosophy extends to transparent pricing and our self-serve model. 
 
-If self-hosting isn't your thing then our hosted Cloud options may be for you:
+We believe transparent pricing is fundamentally better for both us and our customers. No one should ever feel like they're paying over the odds because they didn't haggle hard enough, or have to go through a lengthy process just to get a simple estimate.
 
-* **Cloud** - Mirrors the features of PostHog Scale, hosted by us
-* **Cloud Enterprise** - Mirrors the features of PostHog Enterprise, hosted by us
+Self-service, meanwhile, makes it easy for customers to get up and running as quickly as possible. Got a problem to solve? We'll get out of your way and let you do that, and make it easy to upgrade to a higher tier when you actually need it.
 
-##  Why did we implement transparent pricing?
+That's why we made our core paid plans totally self-serve and free 1 million events per month, with the "per event" price decreasing as usage increases, as you can see below.
 
-At PostHog we pride ourselves on transparency.  We make our processes, policies, and team structure available for anyone
-to read in our company handbook.  If you're interested in our Enterprise product then we are going to share pricing with
-you eventually, why make you wait?  That's why today, for all of our product offerings, you can 
-[calculate your price](/pricing) without speaking to us at all.
+[SCREENSHOT HERE]
 
-## How did we do it?
+This model has worked incredibly well for us. 
 
-We found that quite a few people who were interested in PostHog Enterprise had already calculated a price using the 
-Scale or Cloud pricing calculator which has been on our pricing page for a while.  PostHog Enterprise or Cloud Enterprise
-will cost you more because you get more:
+It's taken us from nothing to significant revenue, and healthy growth, in less than two years without any outbound sales. 
 
-1. Integration with SAML-based SSO providers (security policies require these more often than not in Enterprise)
-2. Project-based permissions (to keep projects private)
-3. A lot of proactive help from us in deployment, tuning, maintenance and training
+[GROWTH GRAPH HERE]
 
-We adapted our existing pricing models to be roughly 2x Scale pricing for self-hosted Enterprise, and 1.3x Cloud pricing
-for Cloud Enterprise to reflect the additional benefits you gain from these editions.  We didn't want to mandate lengthy
-annual commitments, so all of our products can be subscribed to on a monthly basis and cancelled at any time.
+Our customer success team works hard to help new and potential customers get what they need from PostHog, but we don't cold email companies or spend time chasing specific customers.
 
-That said, most larger organizations do fall into a traditional annual buying process and we are able to incentivize 
-those with bigger discounts for the upfront commitment.
+## Adopting transparent enterprise pricing
+
+The last frontier for us was our enterprise plans. While some companies practice partial transparency, we wanted 100% transparency across the board. This took a while to achieve, but we're glad we did.
+
+Our plans are split by whether you want to self-host PostHog, or have it hosted and managed by us.
+
+There are three options for [self-hosting PostHog](/pricing):
+
+- **Open-Source:** Contains all of the base analytics features but is limited to one project
+- **Scale:** Contains advanced features such as experiments and group analytics and has unlimited projects
+- **Enterprise:** Comes with SAML-based SSO, project permissions and a whole lot of help from us
+
+For PostHog Cloud, there are just two options:
+
+- **Cloud:** Mirrors the features of PostHog Scale, hosted by us
+- **Cloud Enterprise:** Mirrors the features of PostHog Enterprise, hosted by us
+
+PostHog Scale and Cloud have had transparent pricing for a while and, unsurprisingly, we found companies interested in PostHog Enterprise would calculate the price using the Scale or Cloud pricing calculators. 
+
+This makes sense in isolation, but our enterprise plans cost more because you get more, particularly on self-hosted where we offer a lot of support to ensure things run smoothly.
+
+We adapted our existing pricing models to be roughly 2x Scale pricing for self-hosted Enterprise, and 1.3x Cloud pricing for Cloud Enterprise to reflect the additional benefits you gain from these editions.
+
+We didn't want to mandate lengthy annual commitments, so all of our products can be subscribed to on a monthly basis and canceled at any time.
+
+That said, most larger organizations fall into a traditional annual buying process, and we incentivize those with bigger discounts for the upfront commitment.
 
 ## What did we learn?
 
-People expected pricing to be lower for self-hosted deployments as you incur the additional infrastructure 
-costs. Whilst it's true that running PostHog Cloud requires a minimum level of spend from us, we see the ability to 
-self-host (and all of the privacy benefits which come with it) as a premium feature which you don't get from most 
-other product analytics vendors.
+People expect self-hosted deployments to be cheaper than PostHog Cloud as they incur the additional infrastructure 
+costs. 
 
-Furthermore, we are willing to invest a significant amount of our time in ensuring our large self-hosted 
-deployments are tuned effectively so that our customers have the best PostHog experience possible.  
-That's what you get when you become an Enterprise customer with us.
+While it's true that running PostHog Cloud requires a minimum level of spend from us, self-hosting costs more than Cloud for a few important reasons:
 
-## What’s next?
+1. Self-hosting bestows unique benefits you can't get with any other equivalent product analytics platform
 
-We are going to make it even easier to become an Enterprise customer with us - we are working on the ability to self-serve 
-Enterprise sign-up and licenses.  We also want to make it easy for you to upgrade when you realise you need the 
-additional features and benefits which Enterprise brings.  Until then though, you can still
-[Contact sales](/signup/self-host/get-in-touch?plan=enterprise#contact) (we promise we will answer you)
+2. Developing a self-hosted tool requires an additional level of complexity and overhead for us
+
+3. We are willing to invest a significant amount of our time in ensuring our large, self-hosted deployments are tuned effectively so customers have the best PostHog experience possible. 
+
+This is a message we'll continue to refine, but ultimately we feel the tolerance for the expense PostHog Enterprise is directly connected to how important self-hosting is to a customer. 
+
+It's still good value compared to other enterprise SaaS tools, especially considering the breadth of features we offer, and if the price isn't right then Cloud Enterprise might be a better option for those customers.
+
+## Going one step further... self-serve for Enterprise
+
+CONCLUSION HERE
