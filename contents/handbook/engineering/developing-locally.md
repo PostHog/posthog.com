@@ -81,11 +81,6 @@ In this step we will install Postgres, Redis, ClickHouse, Kafka, MinIO and Zooke
 First, run the services in Docker:
 
 ```bash
-# ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis object_storage
-docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis object_storage
-
-# x86 (amd64) systems
 docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis object_storage
 docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis object_storage
 ```
