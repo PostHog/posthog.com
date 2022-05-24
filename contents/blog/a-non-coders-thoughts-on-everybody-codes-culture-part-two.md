@@ -1,6 +1,6 @@
 ---
-date: 2022-05-16
-title: “One year on: A Non-coders thoughts on ‘Everybody Codes’”
+date: 2022-05-30
+title: A non-coders thoughts on ‘Everybody Codes’ - Part Two
 rootPage: /blog
 sidebar: Blog
 showTitle: true
