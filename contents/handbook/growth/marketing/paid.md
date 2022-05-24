@@ -42,4 +42,4 @@ We generally target users in the US, Canada, UK, Germany and France for general 
 
 ## Tracking conversion
 
-We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have a plugin which syncs PostHog signups to a Google Sheet that is than regularly uploaded automatically to our Google Ads account. 
+We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have an app which syncs PostHog signups to a Google Sheet that is than regularly uploaded automatically to our Google Ads account. 

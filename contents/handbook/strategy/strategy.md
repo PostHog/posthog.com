@@ -33,7 +33,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, Posthog will need t
 * Grow a strong and successful developer community around Posthog
 * Convert our biggest users to paying customers
 * Go broad and develop all the tools our customers need to build better products
-* Partner with others to build plugins and deploy our tools
+* Partner with others to build apps and deploy our tools
 * Ride the industry wave of increasing data control that has been triggered by growing privacy regulation
 
 
@@ -64,9 +64,9 @@ While there is value in the items on the right, we value the items on the left m
 
 * _High quality users_: focus on acquiring more high quality users over big ticket contracts, so we can get better feedback and learn faster.
 
-**Plugin-based platform vs one-stop-shop**
+**App-based platform vs one-stop-shop**
 
-* _Plugin-based platform_: integrate with the best services and data sources to solve customer problems faster
+* Apps-based platform_: integrate with the best services and data sources to solve customer problems faster
 
 **Self-hosted vs. Cloud**
 
@@ -83,14 +83,14 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Direction for 2022
 
- * 2 word summary: **Nail Enterprise**
+ * 2 word summary: **Nail self-serve**
     * **Customers**
-        * **Focus on Enterprise.** E.g. Large initial contracts (~$200k/year+) and smaller deals in organizations that will eventually become very large. 
+        * **Focus on large-mid-market.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become  large
         * **Non Goal:** Start doing outbound sales
     * **Product**
         * **Goals:**
             * **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
-            * **Extensibility:** You can instantly connect PostHog to any other system 
+            * **Self Service Subscription:** Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
             * **Deployments:** PostHog is the easiest self-hosted product to deploy and scale in the world
         * **Non Goals:**
             * Build lots of new low quality / partial features
@@ -98,7 +98,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Target customers for 2022
 
-Our ideal customer is an Enterprise who meets as many of these these criteria as possible:
+Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these these criteria as possible:
 
 * _Needs_
   * Need to control their user data
@@ -106,4 +106,4 @@ Our ideal customer is an Enterprise who meets as many of these these criteria as
 * _Haves_
   * Have budget and savvy engineers are the decision makers
   * Have a central analytics or devops function
-  * Have deployed our open source product successfully
+  * Have a product aimed at businesses

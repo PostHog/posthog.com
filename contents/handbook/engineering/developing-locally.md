@@ -15,15 +15,16 @@ The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
--   Node.js plugin server (handles event ingestion and plugins)
+-   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
 
 These components rely on a few external services:
 
--   PostgreSQL – for storing ordinary data (users, projects, saved insights)
--   Redis – for caching and inter-service communication
 -   ClickHouse – for storing big data (events, persons – analytics queries)
 -   Kafka – for queuing events for ingestion
+-   MinIO – for storing files (session recordings, file exports)
+-   PostgreSQL – for storing ordinary data (users, projects, saved insights)
+-   Redis – for caching and inter-service communication
 -   Zookeeper – for coordinating Kafka and ClickHouse clusters
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
@@ -75,18 +76,18 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install Postgres, Redis, ClickHouse, Kafka and Zookeeper via Docker.
+In this step we will install Postgres, Redis, ClickHouse, Kafka, MinIO and Zookeeper via Docker.
 
 First, run the services in Docker:
 
 ```bash
 # ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis
-docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis object_storage
+docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis object_storage
 
 # x86 (amd64) systems
-docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis
-docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis object_storage
+docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis object_storage
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -155,7 +156,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare the plugin server
+### 3. Prepare app/plugin server
 
 Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
 
@@ -224,7 +225,7 @@ DEBUG=1 ./bin/migrate
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start

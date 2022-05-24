@@ -46,7 +46,7 @@ const Editions = ({ setDemoType }) => {
                             <Title
                                 title="Enterprise"
                                 subtitle="A focus on compliance and security"
-                                badge="SELF-HOSTED"
+                                badge="CLOUD OR SELF-HOSTED"
                             />
                             <CallToAction
                                 width="full"

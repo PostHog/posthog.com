@@ -62,9 +62,9 @@ kubectl -n posthog delete job $(kubectl -n posthog get jobs --no-headers -o cust
 helm upgrade -f values.yaml -n posthog
 ```
 
-### The plugin server has an issue
+### The app/plugin server has an issue
 
-The first thing that you can safely try here is to tell them to restart the plugins pod:
+The first thing that you can safely try here is to tell them to restart the apps pod:
 
 ```shell
 # terminate the running plugins pod

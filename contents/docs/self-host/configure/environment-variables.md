@@ -27,6 +27,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `TRUSTED_PROXIES`          | Specifies the IPs of proxies that can be trusted.                                                 | `None`
 | `TRUST_ALL_PROXIES`        | Determines if all proxies can be trusted.                                                         | `False`
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
+| `SKIP_SERVICE_VERSION_REQUIREMENTS`| Set this to True if you want to disable checking for dependent service version requirements.       | `False`
 | `ACTION_EVENT_MAPPING_INTERVAL_SECONDS`| Specify how often (in seconds) PostHog should run a job to match events to actions.       | `300`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`
@@ -36,8 +37,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS` | If set, disables using ProtoBuf schemas for kafka communication. Needs to be set when using an external ClickHouse service provider during initial deploy. | `False`
 | `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
-| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
-| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
+| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
 | `KAFKA_URL` | Address used by the application to contact kafka | `kafka://kafka`
 | `KAFKA_URL_FOR_CLICKHOUSE` | Address used by ClickHouse to read from kafka. Falls back to `KAFKA_URL` | `None`
@@ -47,7 +48,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `MATERIALIZE_COLUMNS_MINIMUM_QUERY_TIME` | Diagnostic for what columns to materialize | `3000`
 | `MATERIALIZE_COLUMNS_SCHEDULE_CRON` | How frequently to run clickhouse column materialization. | `0 5 * * SAT`
 | `MULTI_ORG_ENABLED` | Allows creating multiple organizations in your instance (multi-tenancy). **Requires a premium license.** | `False`
-| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
+| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of apps released as a private npm package                                 | `None`
 | `OPT_OUT_CAPTURING`        | Disable sending product usage data to PostHog. | `False`
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.

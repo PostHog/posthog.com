@@ -11,6 +11,8 @@ featuredImageType: full
 categories: ["Engineering", "Product updates"]
 ---
 
+> **Update (May 2022):** Plugins are now known as [apps](/apps)!
+
 The plugin server has become an integral part of PostHog, as it is responsible for event ingestion. However, it isn’t called “ingestion server” because it was originally designed to run plugins. So, how are those going?
 
 I used a combination of PostHog, Metabase, Python scripts, and Google Sheets to compile, analyze, and display the data you see here to answer that question as transparently as possible. 

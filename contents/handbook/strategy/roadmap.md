@@ -32,9 +32,9 @@ We are continually investing in performance an reliability to ensure that PostHo
 We see a ton of usecases, like integrating PostHog into an existing data warehouse, pulling in stats from other APIs, and pushing data into other services.
 
 There will be work on three main fronts:
-- Building plugins ourselves
+- Building apps ourselves
 - Giving our community the tools to create their own
-- Promote adoption of these plugins
+- Promote adoption of these apps
 
 ## 3. Experimentation
 

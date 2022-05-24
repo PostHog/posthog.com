@@ -92,7 +92,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         name
                         url
                     }
-                    product {
+                    apps {
                         name
                         url
                     }
