@@ -103,7 +103,7 @@ The referral bonus for social referrals is $500, and we again match any amount y
 
 **Referral payouts** 
 
-The bonus date is 3 months from the new team member's start date and will be processed as part of payroll - bear in mind that might be liable for income tax on the bonus. 
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll - bear in mind that you might be liable for income tax on the bonus. 
 
 **External referrals** 
 
