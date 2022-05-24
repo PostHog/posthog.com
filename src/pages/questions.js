@@ -14,7 +14,36 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { Form } from 'squeak-react'
-import { SelfHost2, Partners, FAQ2, Issue2, API } from 'components/Icons/Icons'
+import Icon from 'components/SupportImages/Icon'
+
+const TopLink = ({ title, description, link, icon, className }) => {
+    return (
+        <li className={`border-none border-dashed border-gray ${className}`}>
+            <a
+                href={link}
+                className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+            >
+                <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
+                <h3 className="font-bold text-base mb-1">{title}</h3>
+                <p className="text-xs text-gray mb-0">{description}</p>
+            </a>
+        </li>
+    )
+}
+
+const Guide = ({ title, link, icon, className }) => {
+    return (
+        <li className={`border-l border-t border-dashed border-gray ${className}`}>
+            <a
+                href={link}
+                className="flex justify-start items-center w-full text-black hover:text-black opacity-80 hover:opacity-100 p-4 space-x-2"
+            >
+                <Icon className="w-4 h-4 text-gray" name={icon} />
+                <h3 className="font-bold text-sm mb-0">{title}</h3>
+            </a>
+        </li>
+    )
+}
 
 const Search = () => {
     const [value, setValue] = useState('')
@@ -154,62 +183,35 @@ export default function FAQ({
                 </div>
 
                 <div className="border border-dashed border-gray">
-                    <div className="max-w-[884px] mx-auto px-5">
+                    <div className="max-w-[884px] mx-auto">
                         <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center">
-                            <li className="border-none border-dashed border-gray">
-                                <a
-                                    href="#"
-                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
-                                >
-                                    <SelfHost2 className="w-6 h-6 mb-2 text-gray" />
-                                    <h3 className="font-bold text-base mb-1">Self-hosting</h3>
-                                    <p className="text-xs text-gray mb-0">Deployment options</p>
-                                </a>
-                            </li>
+                            <TopLink title="Self-hosting" description="Deployment options" link="#" icon="selfHost" />
+                            <TopLink title="Partners" description="Hosting & support" link="#" icon="partners" />
+                            <TopLink title="FAQ" description="Deployment options" link="#" icon="faq2" />
+                            <TopLink title="Report an issue" description="via GitHub" link="#" icon="issue2" />
+                            <TopLink title="API" description="Apps, data I/O" link="#" icon="api" />
+                        </ol>
+                    </div>
+                </div>
 
-                            <li className="border-l border-dashed border-gray">
-                                <a
-                                    href="#"
-                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
-                                >
-                                    <Partners className="w-6 h-6 mb-2 text-gray" />
-                                    <h3 className="font-bold text-base mb-1">Partners</h3>
-                                    <p className="text-xs text-gray mb-0">Hosting &amp; support</p>
-                                </a>
-                            </li>
-
-                            <li className="border-l border-dashed border-gray">
-                                <a
-                                    href="#"
-                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
-                                >
-                                    <FAQ2 className="w-6 h-6 mb-2 text-gray" />
-                                    <h3 className="font-bold text-base mb-1">FAQ</h3>
-                                    <p className="text-xs text-gray mb-0">&nbsp;</p>
-                                </a>
-                            </li>
-
-                            <li className="border-l border-dashed border-gray">
-                                <a
-                                    href="#"
-                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
-                                >
-                                    <Issue2 className="w-6 h-6 mb-2 text-gray" />
-                                    <h3 className="font-bold text-base mb-1">Report an issue</h3>
-                                    <p className="text-xs text-gray mb-0">via GitHub</p>
-                                </a>
-                            </li>
-
-                            <li className="border-l border-dashed border-gray">
-                                <a
-                                    href="#"
-                                    className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
-                                >
-                                    <API className="w-6 h-6 mb-2 text-gray" />
-                                    <h3 className="font-bold text-base mb-1">API</h3>
-                                    <p className="text-xs text-gray mb-0">Apps, data I/O</p>
-                                </a>
-                            </li>
+                <div className="max-w-[884px] mx-auto">
+                    <h2 className="text-lg">User guides</h2>
+                </div>
+                <div className="border border-dashed border-gray">
+                    <div className="max-w-[884px] mx-auto">
+                        <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-3 grid-rows-3 justify-center">
+                            <Guide title="Trends" link="#" icon="trendz" />
+                            <Guide title="Funnels" link="#" icon="funnels" />
+                            <Guide title="User paths" link="#" icon="user-paths" />
+                            <Guide title="Correlation analysis" link="#" icon="correlation-analysis" />
+                            <Guide title="Session recording" link="#" icon="session-recording" />
+                            <Guide title="Feature flags" link="#" icon="feature-flags" />
+                            <Guide title="Experimentation" link="#" icon="experimentation" />
+                            <Guide title="Heatmaps" link="#" icon="heatmaps" />
+                            <Guide title="Apps" link="#" icon="apps" />
+                            <Guide title="Toolbar" link="#" icon="toolbar" />
+                            <Guide title="Insights" link="#" icon="insights" />
+                            <Guide title="Group Analytics" link="#" icon="group-analytics" />
                         </ol>
                     </div>
                 </div>
