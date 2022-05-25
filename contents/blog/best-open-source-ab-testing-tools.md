@@ -11,10 +11,6 @@ categories: ["Open source", "Guides"]
 author: ["hanna-crombie"]
 ---
 
-Developers and marketers are customer experts, so it’s tempting to assume we can instinctively make the best decisions for user engagement. This is a trap.
- 
-Leaders don’t want to make changes without evidence and however much we think we know about our users, making changes on theory alone is fraught with danger. That’s why you need an A/B testing tool.
-
 Also known as split testing or multivariate testing, A/B testing is the implementation of experiments which split your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
 Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests because the best things in life are free (and open source, obviously).
