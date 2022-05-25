@@ -15,19 +15,19 @@ Leaders don’t want to make changes without evidence and however much we think 
 
 Also known as split testing or multivariate testing, A/B testing is the implementation of experiments which split your audience to test variations of a product design, new feature, landing page – anything you can imagine, really.
 
-Here, we’re sharing our guide to the best free and open-source tools for experimenting with A/B tests because the best things in life are free (and open source).
+Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests because the best things in life are free (and open source, obviously).
 
 ## 1. [PostHog](https://posthog.com)
 
-PostHog is an all-in-one product analytics suite that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
+PostHog is an [all-in-one product analytics suite](/product) that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
 
-Our A/B testing capabilities, which we call our Experimentation Suite, is complemented by other tools like Feature Flags, Session Recording, Heat Maps, Path Analysis and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
+Our A/B testing capabilities, which we call our Experimentation Suite, is complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
-[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed and number of days required for you to gain significant insights.
+[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we run a Bayesian to indicated when the results are significant.  
 
 ### Who is PostHog for?
 
-PostHog is a great choice for any business that wants a complete view of their analytics in one place. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete suite of product analytics tools – and you don’t need any external tools. You can also self-host PostHog, so data never leaves your infrastructure.
+PostHog is a great choice for any business that wants a complete view of their analytics in one place. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete suite of product analytics tools – and you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
 
 ### Strengths
 
@@ -41,17 +41,17 @@ PostHog is a great choice for any business that wants a complete view of their a
 
 ### How much does it cost?
 
-We’re confident PostHog is the number one choice here, but if you want to test our theory you can [try our self-serve plans for free](https://posthog.com/pricing). 
+We’re confident PostHog is the number one choice here, but if you want to test our theory you can [try our self-serve plans for free](/pricing). 
 
 If you want to self-host, you can use Experimentation with our Scale plan, but you can also use PostHog Cloud if you prefer a fully-managed option with no infrastructure to deploy. 
 
-PostHog Scale and Cloud are free up to 1 million events per month.
+Both PostHog Scale and Cloud are [free up to 1 million events per month](/pricing).
 
 ### Open source license
 
-PostHog Open Source is available under an MIT license. You can [see further details on GitHub].
+PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over.
 
-Experimentation is not part of our pure “open source” product as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over.
+<ArrayCTA />
 
 ## 2. [GrowthBook](https://www.growthbook.io/)
 
@@ -74,8 +74,7 @@ GrowthBook open source is free and includes unlimited experiments. A hosted vers
 
 ### Open sources license
 
-GrowthBook is available under an MIT license. You can see more details on the [Growthbook GitHub](https://github.com/growthbook/growthbook/).
- 
+GrowthBook is available under an MIT license. You can see more details on the [Growthbook GitHub](https://github.com/growthbook/growthbook/). 
 
 ## 3. [Unleash](https://www.getunleash.io/)
 
