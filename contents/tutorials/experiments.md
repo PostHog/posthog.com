@@ -5,28 +5,36 @@ showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
 topics: ['feature flags']
-date: 2022-05-11
+featuredImage: ../images/tutorials/banners/experiments.png
+date: 2022-05-26
 ---
 
 This tutorial explains how to run an experiment in PostHog while not using our feature flag library, either because you've rolled out your own or, more commonly, because feature flag support doesn't exist yet in your favourite PostHog client library.
 
-If you're wondering how to create an experiment, [see this tutorial](https://posthog.com/docs/user-guides/experimentation#creating-an-experiment).
+## Step 1: Create an Experiment
 
-Once you have created an experiment, take special note of three things:
+The first step is to actually create your experiment in PostHog. Read our [how to create an experiment](/docs/user-guides/experimentation#creating-an-experiment) tutorial if you need help here.
 
-1. The feature flag associated with the experiment
-    In our example, this will be `experiment-feature-flag`
-2. The variants you've chosen for that feature flag
-    In our example, these will be `control` and `test`.
-3. The events involved in the target metric.
-    In our example, this will be a `user signed up` -> `$pageview` -> `user paid` funnel. The experiment is purely frontend, but the metric we're tracking are these two backend events coming from their own libraries, along with a `$pageview` event coming from `posthog-js`.
+Once you have created an experiment, make a note of three things:
+
+**1. The feature flag associated with the experiment**
+
+In our example, this will be `experiment-feature-flag`
+	
+**2. The variants you've chosen for that feature flag** 
+
+In our example, these will be `control` and `test`.
+	
+**3. The events involved in the target metric**
+
+In our example, this will be a `user signed up` -> `$pageview` -> `user paid` funnel. The experiment is purely frontend, but the metric we're tracking are these two backend events coming from their own libraries, along with a `$pageview` event coming from `posthog-js`.
 
 Now, for the experiment to start tracking results and run its significance calculations, we need to instrument two things:
 
 1. Send events along with a special feature property
 2. Send `$feature_flag_called` events
 
-## Sending the right events
+## Step 2: Sending the right events
 
 Experiments check whether an event belongs to an experiment or not by looking at a special property called `$feature/<feature-flag-name>`.
 
@@ -52,11 +60,11 @@ The response looks something like:
 
 and there you have it, the value for `experiment-feature-flag`.
 
-If you're not using PostHog's feature flags, check with your provider on how to get the values for a given person.
+If you're not using PostHog Feature Flags, check with your provider on how to get the values for a given person.
 
-At the end of this step, you must ensure that every event in the experiment, no matter which library it comes from, has these properties. Otherwise, Experiments UI wouldn't work. `posthog-js` does this for you automatically, but other libraries don't, as of writing.
+At the end of this step, you must ensure that every event in the experiment, no matter which library it comes from, has these properties. Otherwise, Experiments UI won't work. `posthog-js` does this for you automatically, but other libraries don't, as of writing.
 
-## Sending the `$feature_flag_called` event
+## Step 3: Sending the `$feature_flag_called` event
 
 It's often possible that the distribution of users between variants is skewed, such that there are a lot more users in test than control. To measure the relative exposure between variants, we use this event called `$feature_flag_called`.
 
