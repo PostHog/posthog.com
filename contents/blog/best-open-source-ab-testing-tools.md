@@ -19,6 +19,8 @@ Here, we’re sharing our guide to the best free and [open-source tools](/blog/b
 
 ## 1. [PostHog](https://posthog.com)
 
+![PostHog - best open source ab testing tools](../images/blog/open-source-testing-tools/img1_PostHog.png)
+
 PostHog is an [all-in-one product analytics suite](/product) that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
 
 Our A/B testing capabilities, which we call our Experimentation Suite, is complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
@@ -55,6 +57,8 @@ PostHog Open Source is available under an MIT license. You can [see further deta
 
 ## 2. [GrowthBook](https://www.growthbook.io/)
 
+![GrowthBook - best open source ab testing tools](../images/blog/open-source-testing-tools/growthbook.png)
+
 GrowthBook is an open-source platform for feature flags and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better adoption insights into their releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
 
 ### Who is GrowthBook for?
@@ -77,6 +81,8 @@ GrowthBook open source is free and includes unlimited experiments. A hosted vers
 GrowthBook is available under an MIT license. You can see more details on the [Growthbook GitHub](https://github.com/growthbook/growthbook/). 
 
 ## 3. [Unleash](https://www.getunleash.io/)
+
+![Unleash - best open source ab testing tools](../images/blog/open-source-testing-tools/img2_Unleash.png)
 
 Unleash is a feature management platform which provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
 
@@ -103,6 +109,8 @@ The open source version is available under an Apache license. You can see more d
 
 ## 4. [Mojito](https://mojito.mx/)
 
+![Unleash - best open source ab testing tools](../images/blog/open-source-testing-tools/img3_Mojito.png)
+
 Mojito is an open split testing stack that lets you build, launch and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions so you can build your own visualizations for experiment analysis.
 
 ### Who is Mojito for?
@@ -125,6 +133,8 @@ Mojito is fully free and open source and you don’t need an account to get star
 Mojito is available under a BSD 3-clause license so you can build upon it as you wish. [Take a look at Mojito on GitHub](https://github.com/mint-metrics/mojito) to learn more.
 
 ## 5. [Flagsmith](https://flagsmith.com)
+
+![Flagsmith - best open source ab testing tools](../images/blog/open-source-testing-tools/img3_Mojito.png)
 
 Flagsmith is an open-source feature flag and remote configuration service which lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s Multivariate Flags feature as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however. You’ll need to use a 3rd-party provider to receive the stream of event data derived from the behavior of the user.
 

@@ -48,7 +48,7 @@ PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform.
+We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. Combining 
 
 Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
 
@@ -74,6 +74,11 @@ PostHog (self-hosted and cloud) is free up to 1 million captured events each mon
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
 
 <ArrayCTA />
+
+**Further reading:**
+- [The best free and open source A/B testing tools](/blog/best-open-source-ab-testing-tools)
+- [The best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
+- [The best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools)
 
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
