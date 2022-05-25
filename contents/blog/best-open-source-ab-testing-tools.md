@@ -41,11 +41,7 @@ PostHog is a great choice for any team that wants a complete view of how people 
 
 ### How much does it cost?
 
-We’re confident PostHog is the number one choice here, but you can decide for yourself via [our free self-serve plans](/pricing). 
-
-If you want to self-host, you can use Experimentation with our Scale plan, but you can also use PostHog Cloud if you prefer a fully-managed option with no infrastructure to deploy. 
-
-Both PostHog Scale and Cloud are [free up to 1 million events per month](/pricing).
+While Experimentation isn't part of the free-for-life open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog's paid plans – Scale for self-hosted, and PostHog Cloud if your a prefer a fully-managed SaaS experience.
 
 ### Open source license
 
