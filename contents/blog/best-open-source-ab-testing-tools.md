@@ -141,7 +141,7 @@ Mojito is available under a BSD 3-clause license so you can build upon it as you
 
 ## 5. [Flagsmith](https://flagsmith.com)
 
-![Flagsmith - best open source ab testing tools](../images/blog/open-source-testing-tools/img3_Mojito.png)
+![Flagsmith - best open source ab testing tools](../images/blog/open-source-testing-tools/img4_Flagsmith.png)
 
 Flagsmith is an open-source feature flag and remote configuration service which lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s Multivariate Flags feature as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however. You’ll need to use a 3rd-party provider to receive the stream of event data derived from the behavior of the user.
 
