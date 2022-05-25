@@ -5,6 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: ../images/blog/experiments.jpeg
+featuredImageType: full
 categories: ["Open source", "Guides"]
 author: ["hanna-crombie"]
 ---
