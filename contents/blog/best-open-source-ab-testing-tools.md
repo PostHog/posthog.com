@@ -15,7 +15,7 @@ Developers and marketers are customer experts, so it’s tempting to assume we c
  
 Leaders don’t want to make changes without evidence and however much we think we know about our users, making changes on theory alone is fraught with danger. That’s why you need an A/B testing tool.
 
-Also known as split testing or multivariate testing, A/B testing is the implementation of experiments which split your audience to test variations of a product design, new feature, landing page – anything you can imagine, really.
+Also known as split testing or multivariate testing, A/B testing is the implementation of experiments which split your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
 Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests because the best things in life are free (and open source, obviously).
 
@@ -27,11 +27,11 @@ PostHog is an [all-in-one product analytics suite](/product) that integrates all
 
 Our A/B testing capabilities, which we call our Experimentation Suite, is complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
-[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we run a Bayesian to indicated when the results are significant.  
+[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
 
 ### Who is PostHog for?
 
-PostHog is a great choice for any business that wants a complete view of their analytics in one place. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete suite of product analytics tools – and you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
+PostHog is a great choice for any team that wants a complete view how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete suite of product analytics tools – you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
 
 ### Strengths
 
@@ -53,7 +53,7 @@ Both PostHog Scale and Cloud are [free up to 1 million events per month](/pricin
 
 ### Open source license
 
-PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read more about [how to self-host PostHog](/signup/self-host/deploy).
+PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
 
 <ArrayCTA />
 
@@ -85,7 +85,7 @@ GrowthBook open source is free and includes unlimited experiments. A hosted vers
 
 ### Open sources license
 
-GrowthBook is available under an MIT license. You can see more details on the [Growthbook GitHub](https://github.com/growthbook/growthbook/). 
+GrowthBook is available under an MIT license. Visit the [Growthbook GitHub repo](https://github.com/growthbook/growthbook/) for more info. 
 
 ## 3. [Unleash](https://www.getunleash.io/)
 
@@ -112,7 +112,7 @@ Unleash’s basic open source self-hosted plan includes A/B experimentation and 
 
 ### Open source license
 
-The open source version is available under an Apache license. You can see more details on [Unleash’s GitHub](https://github.com/Unleash/unleash).
+The open source version is available under an Apache license. Visit the [Unleash GitHub repo](https://github.com/Unleash/unleash) for more info.
 
 ## 4. [Mojito](https://mojito.mx/)
 
@@ -137,7 +137,7 @@ Mojito is fully free and open source and you don’t need an account to get star
 
 ### Open source license
 
-Mojito is available under a BSD 3-clause license so you can build upon it as you wish. [Take a look at Mojito on GitHub](https://github.com/mint-metrics/mojito) to learn more.
+Mojito is available under a BSD 3-clause license so you can build upon it as you wish. Take a look at [Mojito on GitHub](https://github.com/mint-metrics/mojito) to learn more.
 
 ## 5. [Flagsmith](https://flagsmith.com)
 
@@ -162,4 +162,4 @@ Flagsmith offers a cloud solution for free up to 50,000 requests per month. For 
 
 ### Open source license
 
-Flagsmith is open source and available on a BSD 3-clause license. [Explore Flagsmith on GitHub](https://github.com/Flagsmith/flagsmith).
+Flagsmith is open source and available on a BSD 3-clause license. Explore [Flagsmith on GitHub](https://github.com/Flagsmith/flagsmith) for more info.
