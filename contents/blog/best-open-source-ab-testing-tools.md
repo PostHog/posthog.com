@@ -41,7 +41,7 @@ PostHog is a great choice for any team that wants a complete view of how people 
 
 ### How much does it cost?
 
-We’re confident PostHog is the number one choice here, but you can decide for youself via [our free self-serve plans](/pricing). 
+We’re confident PostHog is the number one choice here, but you can decide for yourself via [our free self-serve plans](/pricing). 
 
 If you want to self-host, you can use Experimentation with our Scale plan, but you can also use PostHog Cloud if you prefer a fully-managed option with no infrastructure to deploy. 
 
