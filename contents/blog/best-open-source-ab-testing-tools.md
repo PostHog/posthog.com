@@ -45,7 +45,7 @@ While Experimentation isn't part of the free-for-life open source release, it's 
 
 ### Open source license
 
-PostHog Open Source is available under an [MIT license](https://github.com/PostHog/posthog). Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
+PostHog Open Source is available under an [MIT license](https://github.com/PostHog/posthog). Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
 
 <ArrayCTA />
 
