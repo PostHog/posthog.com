@@ -20,7 +20,7 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch so people can have a heads up. Then, we branch master into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an-hour long "Break the release" session where everyone lends a hand in testing for any bugs. It's recommended to host "Break the release" at a time when as many engineers are available as possible.
+Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people can have a heads-up. Then, we branch master into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's recommended to host "Break the release" at a time when as many engineers are available as possible.
 
 Only bugfixes and finishing touches are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
 
@@ -51,7 +51,7 @@ The release manager is ultimately responsible for the timeline of the release. T
   > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the next steps. You can install all of these with `brew install doctl helm k9s`.
 
 1. [ ] Upgrade PostHog playground
-    1. The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
+    1. The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
     1. If this is your first time on Digital Ocean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
 
       ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
@@ -61,16 +61,16 @@ The release manager is ultimately responsible for the timeline of the release. T
       ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
 
     1. Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
-    1. _Optional:_ Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the posthog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
+    1. _Optional:_ Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the PostHog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
     1. Go to the [`playground.yaml` file in the `vpc` repo](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and update the `image: -> tag:` value (`release-[version]-unstable`) with the new version. Commit the change as soon as `release-[version]-unstable` shows up [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release).
         > ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to. If so, make any additional changes to the `values.yaml` file as needed.
-    1. Copy the URL of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the Github UI, and copying the URL of that page.
+    1. Copy the URL of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the GitHub UI, and copying the URL of that page.
 
-      ![PostHog - Github Raw](../../images/05/release_playground_raw_github.png)
+      ![PostHog - GitHub Raw](../../images/05/release_playground_raw_github.png)
 
-      ![PostHog - Github Raw File](../../images/05/release_playground_raw_file.png)
+      ![PostHog - GitHub Raw File](../../images/05/release_playground_raw_file.png)
       
-    1. In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the url you copied in the previous step. Example:
+    1. In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the URL you copied in the previous step. Example:
 
       ```shell
       helm upgrade -f 'https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC' --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
@@ -92,9 +92,9 @@ The release manager is ultimately responsible for the timeline of the release. T
     1. Bump `appVersion` to the latest app version (same number as on the Docker image).
     1. Change the docker tag in [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) to point to the new tag (e.g. `release-1.29.0`).
     1. Push the relevant changes and add the `bump-minor` label to the PR. **Do not merge until the latest version is built.** You can check that on [PostHog Docker](https://hub.docker.com/r/posthog/posthog/tags)
-1. [ ] Cherrypick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) to make sure `master` is up to date.
+1. [ ] Cherry-pick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) to make sure `master` is up-to-date.
   1. [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
-1. [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
+1. [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/CloudFront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version.
 1. [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 1. [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array)
 1. [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
