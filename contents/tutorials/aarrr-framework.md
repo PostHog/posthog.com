@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/get-started-aarrr.png
 featuredTutorial: true
 author: ["james-hawkins"]
-topics: ['funnels', 'trends', 'plugins']
+topics: ['funnels', 'trends', 'plugins', 'apps']
 date: 2021-11-29
 ---
 
@@ -31,7 +31,7 @@ Starting with something is better than not starting at all. You can easily itera
 
 How many users signed up? This one is normally easy to start with.
 
-Optionally, it may be rational to add a quality signal here. For example, at PostHog we track "high quality sign ups" as our acquisition metric. To do this, we consider users who signed up that look like they fit our [target audience](/handbook/strategy/strategy) - whilst we can't exactly measure if a user ticks all the boxes, we use whatever signals we can from our product as a signal that a user is in that audience. That means usage information, hosting setup, and company-level data enrichment (to get company size), and querying the lead score in our CRM via our [Plugins](../plugins),
+Optionally, it may be rational to add a quality signal here. For example, at PostHog we track "high quality sign ups" as our acquisition metric. To do this, we consider users who signed up that look like they fit our [target audience](/handbook/strategy/strategy) - whilst we can't exactly measure if a user ticks all the boxes, we use whatever signals we can from our product as a signal that a user is in that audience. That means usage information, hosting setup, and company-level data enrichment (to get company size), and querying the lead score in our CRM via our [Apps](../plugins),
 
 ## Activation
 
@@ -62,7 +62,7 @@ What's your top revenue metric?
 
 For Software-As-A-Service (SAAS), this often means Contracted Monthly Recurring Revenue (MRR). Others may focus on Average Revenue Per User. What you choose will depend on your business model.
 
-You are able to send revenue as an event to PostHog, since you can define a property for it and you can set numerical values on properties. Using [Trends](../user-guides/trends) you can display relevant data as you need using event property averages, sums, percentiles and graph series formulae. You can even integrate with payment systems (such as Stripe) through PostHog's [Plugins](../plugins).
+You are able to send revenue as an event to PostHog, since you can define a property for it and you can set numerical values on properties. Using [Trends](../user-guides/trends) you can display relevant data as you need using event property averages, sums, percentiles and graph series formulae. You can even integrate with payment systems (such as Stripe) through PostHog's [Apps](../plugins).
 
 ## Referral
 

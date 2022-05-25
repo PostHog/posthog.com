@@ -35,11 +35,9 @@ You’re going to be hiring people either as permanent employees or as contracto
 
 ### Permanent employees (US)
 
-Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use!
-
 You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement. The CIIAA means that your employees agree that their work is confidential and whatever they build at work is owned by the company. Not having this = major problems in future, especially for fundraising.
 
-Do _not_ pay a lawyer to create contract templates for you – it is a fantastic waste of money better spent when you need them to handle your next funding round.
+Do _not_ pay a lawyer to create contract templates for you – it is a fantastic waste of money better spent when you need them to handle your next funding round. Orrick has a [handy free set of templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) you can use!
 
 I like [Gusto](https://gusto.com/) a lot for managing US payroll. It makes the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like tax reporting, healthcare benefits and mandatory insurance quite nicely. The phone support is great, but avoid email or chat. Gusto charges us $39/month plus $6 per employee.
 
@@ -58,7 +56,9 @@ The process is pretty straightforward and self-serve, but here are a few things 
 - Some countries limit how long you can employ someone in this way (e.g. Germany). After that, you may need to set up a legal entity anyway.
 - You'll need to pay a deposit up front of the first month's salary.
 
-Again, Deel will handle all things payroll. 
+Again, Deel will handle all things payroll.
+
+> PostHog is a comprehensive open-source analytics platform that helps you understand what you're users are really doing. You can self-host it on your own infrastructure, or use our full-managed Cloud service. [Learn more about using PostHog](/product).   
 
 ## 2. Managing your money
 
@@ -91,10 +91,6 @@ Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly 
 In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
 
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though – you should talk to one if you decide this is important.
-
-<NewsletterForm
-compact
-/>
 
 ## 3. Keeping yourself organized
 

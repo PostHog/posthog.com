@@ -7,7 +7,7 @@ showTitle: true
 
 If you are using Nuxt.js and want to track your application using PostHog this tutorial might help you out. 
 
-It will guide you through an example integration of PostHog using Nuxt.js plugins. 
+It will guide you through an example integration of PostHog using Nuxt.js. 
 
 ### Is this tutorial for me?
 
@@ -23,7 +23,7 @@ To follow this tutorial along, you need to:
 
 ### Minimal example
 
-We are going to implement PostHog as a [Nuxt.js plugin](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
+We are going to implement PostHog as a [Nuxt.js integration](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
 the posthog object and make it available across our application.
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
@@ -38,7 +38,7 @@ or
 npm install --save posthog-js
 ```
 
-After that we want to create a plugin in `plugins/posthog/index.js`
+After that we want to create a app in `plugins/posthog/index.js`
 
 ```javascript
 import posthog from 'posthog-js'
@@ -70,7 +70,7 @@ export default function({ app: { router } }, inject) {
 
 ```
 
-Finally, we need to activate the plugin on the client side in our `nuxt.config.js`
+Finally, we need to activate it on the client side in our `nuxt.config.js`
 
 ```javascript
 plugins: [
@@ -79,7 +79,7 @@ plugins: [
   ],
 ```
 
-### Using the plugin
+### Usage
 
 By using the example code above you can now use PostHog across your app with `this.$posthog` or `app.$posthog` - depending on the context. 
 Compare with the [Nuxt.js docs](https://nuxtjs.org/docs/2.x/directory-structure/plugins#inject-in-root--context) on further details when to use `app.$posthog` or `this.$posthog`.

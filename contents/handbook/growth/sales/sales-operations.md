@@ -44,7 +44,7 @@ This is for organizations who are interested in our Enterprise plans (self-hoste
    1. Event ingestion (Autocapture is preferable)
    2. Action and Cohort Setup
    3. Required Insights and Dashboards
-   4. Extra features such as Feature Flags, Experiments, Plugins
+   4. Extra features such as Feature Flags, Experiments, Apps
 5. Check in with the customer regularly to ensure they are getting value out of the evaluation; offer calls to help them but only if they want/need it.
 6. As the trial comes to an end, schedule a call with decision makers to review the progress and agree the commercial next steps.
 
@@ -115,7 +115,7 @@ Unfortunately we don't have a way to do this easily right now. If they have been
 
 _Can a customer transfer from Cloud to Scale?_
 
-We offer plugins for customers to export all their data to a data warehouse. Then they can [bulk import historical data](https://posthog.com/docs/integrate/ingest-historic-data).
+We offer apps for customers to export all their data to a data warehouse. Then they can [bulk import historical data](/docs/integrate/ingest-historic-data).
 
 They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
 
@@ -127,7 +127,7 @@ Downtime means that queries won't load, but event ingestion will still continue 
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 
-A good approach is to point them to our [downsampling plugin](https://posthog.com/plugins/downsampling) and set it to say only captiure 1% of users. If they then go to their [billing page](https://app.posthog.com/organization/billing), they can see the events count. Multiplying this by 100 will indicate their actual likely volume, without creating a ton of risk that they spend too much money.
+A good approach is to point them to our [Downsampler app](/plugins/downsampling) and set it to say only captiure 1% of users. If they then go to their [billing page](https://app.posthog.com/organization/billing), they can see the events count. Multiplying this by 100 will indicate their actual likely volume, without creating a ton of risk that they spend too much money.
 
 _Can we air gap an installation for customers with especially stringent compliance requirements, for example?_
 
@@ -145,7 +145,7 @@ _What privacy features does PostHog offer?_
 - You can mask IPs
 - We make it trivial to delete a user's data if requested to do so
 
-_What plugins are available?_
+_What apps are available?_
 
-We have the [full list here](https://posthog.com/plugins/). We also accept plugins built by the community, which we audit first before adding to the list. 
+We have the [full list here](/plugins/). We also accept apps built by the community, which we audit first before adding to the list. 
 

@@ -31,8 +31,12 @@ export const OpenSource = () => {
             >
                 Deploy now
             </TrackedCTA>
-            <span className="h-[49.5px] flex justify-center items-center text-black opacity-50">
-                Includes community support on Slack
+            <span className="h-[49.5px] text-center text-gray">
+                Includes community support via our{' '}
+                <Link href="/questions" className="text-red">
+                    Questions?
+                </Link>{' '}
+                page and <Link href="/slack">Slack</Link>
             </span>
         </Plan>
     )
@@ -145,11 +149,11 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         </div>
                     </Section>
                     <TrackedCTA
+                        href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
                         className="mt-7 mb-3"
-                        to="/signup/self-host/get-in-touch?plan=enterprise#contact"
                         event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
                     >
-                        Get in touch
+                        Get started
                     </TrackedCTA>
                     <TrackedCTA
                         type="outline"

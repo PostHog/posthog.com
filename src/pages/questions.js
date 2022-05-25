@@ -2,8 +2,8 @@ import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { CodeBlock } from 'components/CodeBlock'
-import AskAQuestion from 'components/CommunityQuestions/AskAQuestion'
 import { Days } from 'components/CommunityQuestions/Question'
+import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -13,16 +13,21 @@ import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
+import { Form } from 'squeak-react'
 
 const Search = () => {
     const [value, setValue] = useState('')
     const [modal, setModal] = useState(false)
     const [showForm, setShowForm] = useState(false)
+    const [formValues, setFormValues] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
         if (value.trim()) {
             setModal(true)
         }
+    }
+    const handleSqueakSubmit = (values) => {
+        setFormValues(values)
     }
     return (
         <>
@@ -58,8 +63,25 @@ const Search = () => {
                 .
             </p>
             {showForm && (
-                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }}>
-                    <AskAQuestion />
+                <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                    {formValues ? (
+                        <div>
+                            <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
+                                <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
+                                    <Check className="w-[12px] h-[12px] text-white" />
+                                </span>
+                                <span>Question sent. Thread will be posted here.</span>
+                            </p>
+                        </div>
+                    ) : (
+                        <Form
+                            onSubmit={handleSqueakSubmit}
+                            apiHost="https://squeak.cloud"
+                            apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                            url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                        />
+                    )}
                 </motion.div>
             )}
         </>

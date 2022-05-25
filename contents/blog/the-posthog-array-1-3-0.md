@@ -24,11 +24,11 @@ In addition to the work Marius put into the iOS integration, this week you can a
 
 Check out our [Android docs](/docs/integrate/client/android) on how to install it on your app.
 
-### [Gatsby Plugin](/docs/integrate/third-party/gatsby)
+### [Gatsby App](/docs/integrate/third-party/gatsby)
 
 ![](../images/04/gatsbyplugin.gif)
 
-This week also sees the first community contributed plugin – thank you [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/).
+This week also sees the first community contributed app – thank you [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/).
 
 It’s now very easy in Gatsby’s words to “make your blazing fast site even more awesome.”
 

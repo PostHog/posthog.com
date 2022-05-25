@@ -5,6 +5,8 @@ export const heading = (size = 'lg', color = 'primary', classes = '') => {
     const options = {
         lg: 'text-[2.75rem] leading-[2.75rem] md:text-6xl',
         md: 'text-3xl lg:text-4xl 2xl:text-5xl',
+        subtitle:
+            'text-lg md:text-base leading-normal md:leading-tight md:text-xl font-semibold mt-2 md:mt-3 text-[#4C4C4A]',
         sm: 'text-[18px] md:text-[20px] leading-tight md:text-xl font-semibold mt-2 md:mt-3 opacity-75',
     }
     return cntl`

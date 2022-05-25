@@ -130,7 +130,7 @@
                                 ]
                             },
                             {
-                                "title": "Top integrations",
+                                "title": "Popular apps",
                                 "items": [
                                     {
                                         "icon": "segment",
@@ -162,12 +162,12 @@
                         ],
                         "footerLinks": [
                             {
-                                "title": "Integrations",
-                                "url": "/integrations"
+                                "title": "Apps",
+                                "url": "/apps"
                             },
                             {
-                                "title": "Build your own plugin",
-                                "url": "/docs/plugins/build"
+                                "title": "Build your own app",
+                                "url": "/docs/apps/build"
                             },
                             {
                                 "title": "API documentation",
@@ -279,8 +279,8 @@
                                         "url": "/docs/user-guides/persons"
                                     },
                                     {
-                                        "title": "Plugins",
-                                        "url": "/docs/user-guides/plugins"
+                                        "title": "Apps",
+                                        "url": "/docs/apps"
                                     }
                                 ]
                             }

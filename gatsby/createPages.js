@@ -12,8 +12,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
-    const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const AppTemplate = path.resolve(`src/templates/App.js`)
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
+    const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
@@ -82,6 +83,17 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 }
                 contributors: group(field: frontmatter___authorData___name) {
                     fieldValue
+                }
+            }
+            apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        documentation
+                    }
                 }
             }
             product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
@@ -161,6 +173,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                             name
                             url
                         }
+                        name
+                        url
+                    }
+                    apps {
                         name
                         url
                     }
@@ -411,6 +427,30 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             component: CustomerTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+    result.data.apps.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { documentation } = node.frontmatter
+        let next = null
+        let previous = null
+        const sidebar = result.data.sidebars.childSidebarsJson.apps
+        sidebar.some((item, index) => {
+            if (item.url === slug) {
+                next = sidebar[index + 1]
+                previous = sidebar[index - 1]
+                return true
+            }
+        })
+        createPage({
+            path: slug,
+            component: AppTemplate,
+            context: {
+                id: node.id,
+                documentation: documentation || '',
+                next,
+                previous,
             },
         })
     })
