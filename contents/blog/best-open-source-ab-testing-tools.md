@@ -51,9 +51,14 @@ Both PostHog Scale and Cloud are [free up to 1 million events per month](/pricin
 
 ### Open source license
 
-PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over.
+PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read more about [how to self-host PostHog](/signup/self-host/deploy).
 
 <ArrayCTA />
+
+**Further reading:**
+- [The best open source Hotjar and FullStory alternatives](/blog/best-open-source-session-replay-tools)
+- [What we've learned about running effective A/B tests](/blog/experiments)
+- [The differences between PostHog and Amplitude](/blog/posthog-vs-amplitude)
 
 ## 2. [GrowthBook](https://www.growthbook.io/)
 
