@@ -48,7 +48,7 @@ PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. Combining 
+We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
 
 Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
 

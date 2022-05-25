@@ -1,5 +1,5 @@
 ---
-date: 2022-05-24
+date: 2022-05-25
 title: The 5 best free and open-source A/B testing tools
 rootPage: /blog
 sidebar: Blog
@@ -11,7 +11,7 @@ categories: ["Open source", "Guides"]
 author: ["hanna-crombie"]
 ---
 
-Also known as split testing or multivariate testing, A/B testing is the implementation of experiments which split your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
+Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
 Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests because the best things in life are free (and open source, obviously).
 
@@ -21,13 +21,13 @@ Here, we’re sharing our guide to the best free and [open-source tools](/blog/b
 
 PostHog is an [all-in-one product analytics suite](/product) that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
 
-Our A/B testing capabilities, which we call our Experimentation Suite, is complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
+Our A/B testing features, which we call our Experimentation suite, are complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
 [PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
 
 ### Who is PostHog for?
 
-PostHog is a great choice for any team that wants a complete view how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete suite of product analytics tools – you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
+PostHog is a great choice for any team that wants a complete view of how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete product analytics suite – you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
 
 ### Strengths
 
@@ -41,7 +41,7 @@ PostHog is a great choice for any team that wants a complete view how people use
 
 ### How much does it cost?
 
-We’re confident PostHog is the number one choice here, but if you want to test our theory you can [try our self-serve plans for free](/pricing). 
+We’re confident PostHog is the number one choice here, but you can decide for youself via [our free self-serve plans](/pricing). 
 
 If you want to self-host, you can use Experimentation with our Scale plan, but you can also use PostHog Cloud if you prefer a fully-managed option with no infrastructure to deploy. 
 
@@ -49,7 +49,7 @@ Both PostHog Scale and Cloud are [free up to 1 million events per month](/pricin
 
 ### Open source license
 
-PostHog Open Source is available under an MIT license. You can [see further details on GitHub]. Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
+PostHog Open Source is available under an [MIT license](https://github.com/PostHog/posthog). Experimentation isn't part of our open source release as it requires a Scale license, but Scale is free to use up to 1 million events per month and you can set event limits to ensure you don’t go over. Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
 
 <ArrayCTA />
 
@@ -62,7 +62,7 @@ PostHog Open Source is available under an MIT license. You can [see further deta
 
 ![GrowthBook - best open source ab testing tools](../images/blog/open-source-testing-tools/growthbook.png)
 
-GrowthBook is an open-source platform for feature flags and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better adoption insights into their releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
+GrowthBook is an open-source platform for feature flags and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
 
 ### Who is GrowthBook for?
 
@@ -77,7 +77,7 @@ GrowthBook is built for data, engineering and product teams who need the power o
 
 ### How much does it cost?
 
-GrowthBook open source is free and includes unlimited experiments. A hosted version includes a visual A/B test editor and is free up to 5 users, with pricing at $20 per user per month after.
+GrowthBook open source is free and includes unlimited experiments. A hosted version includes a visual A/B test editor and is free up to 5 users, with pricing at $20 per user per month thereafter.
 
 ### Open sources license
 
@@ -89,11 +89,11 @@ GrowthBook is available under an MIT license. Visit the [Growthbook GitHub repo]
 
 Unleash is a feature management platform which provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
 
-You can use Unleash to define the rules of your experiments, however the platform doesn’t provide all the tools you need to manage A/B tests end-to-end and you will need to connect your experiment with an analytics platform like Google Analytics or Mixpanel in order to visualize results.
+You can use Unleash to define the rules of your experiments, but the platform doesn’t provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like Google Analytics or Mixpanel in order to visualize results.
 
 ### Who is Unleash for?
 
-Unleash is for autonomous development teams who want to be free from constraints and get on with testing and validating new features safely. They build with key developer concerns in mind: integration, privacy, resilience and performance.
+Unleash is for autonomous development teams who want a lightweight way to test, validate and rollout new features safely. They build with key developer concerns in mind: integration, privacy, resilience and performance.
 
 ### Strengths
 
@@ -129,7 +129,7 @@ Mojito is a fully source-controlled stack for developers and technical product t
 
 ### How much does it cost?
 
-Mojito is fully free and open source and you don’t need an account to get started.
+Mojito is fully free and open source, and you don’t need an account to get started.
 
 ### Open source license
 
