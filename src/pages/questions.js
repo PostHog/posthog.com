@@ -18,14 +18,14 @@ import Icon from 'components/SupportImages/Icon'
 
 const TopLink = ({ title, description, link, icon, className }) => {
     return (
-        <li className={`border-none border-dashed border-gray ${className}`}>
+        <li className={` ${className}`}>
             <a
                 href={link}
-                className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 p-4"
+                className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
                 <h3 className="font-bold text-base mb-1">{title}</h3>
-                <p className="text-xs text-gray mb-0">{description}</p>
+                <p className="text-xs text-gray dark:text-white dark:text-opacity-75 mb-0">{description}</p>
             </a>
         </li>
     )
@@ -33,10 +33,10 @@ const TopLink = ({ title, description, link, icon, className }) => {
 
 const Guide = ({ title, link, icon, className }) => {
     return (
-        <li className={`border-l border-t border-dashed border-gray ${className}`}>
+        <li className="border-b border-dashed border-gray first:border-l">
             <a
                 href={link}
-                className="flex justify-start items-center w-full text-black hover:text-black opacity-80 hover:opacity-100 p-4 space-x-2"
+                className="flex justify-start items-center w-full text-black hover:text-black hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 opacity-80 hover:opacity-100 p-4 space-x-2"
             >
                 <Icon className="w-4 h-4 text-gray" name={icon} />
                 <h3 className="font-bold text-sm mb-0">{title}</h3>
@@ -172,8 +172,8 @@ export default function FAQ({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <section>
-                <div className="max-w-[884px] mx-auto my-12 px-5">
+            <section className="px-4">
+                <div className="max-w-4xl mx-auto my-12">
                     <h1>Questions &amp; answers</h1>
                     <p>
                         We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
@@ -182,9 +182,9 @@ export default function FAQ({
                     <Search />
                 </div>
 
-                <div className="border border-dashed border-gray">
-                    <div className="max-w-[884px] mx-auto">
-                        <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center">
+                <div className="border border-dashed border-gray mb-8">
+                    <div className="max-w-4xl w-full mx-auto">
+                        <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center divide-x divide-dashed divide-gray">
                             <TopLink title="Self-hosting" description="Deployment options" link="#" icon="selfHost" />
                             <TopLink title="Partners" description="Hosting & support" link="#" icon="partners" />
                             <TopLink title="FAQ" description="Deployment options" link="#" icon="faq2" />
@@ -194,12 +194,12 @@ export default function FAQ({
                     </div>
                 </div>
 
-                <div className="max-w-[884px] mx-auto">
+                <div className="max-w-4xl w-full mx-auto">
                     <h2 className="text-lg">User guides</h2>
                 </div>
                 <div className="border border-dashed border-gray">
-                    <div className="max-w-[884px] mx-auto">
-                        <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-3 grid-rows-3 justify-center">
+                    <div className="max-w-4xl w-full mx-auto">
+                        <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-4 grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
                             <Guide title="Trends" link="#" icon="trendz" />
                             <Guide title="Funnels" link="#" icon="funnels" />
                             <Guide title="User paths" link="#" icon="user-paths" />
@@ -213,10 +213,17 @@ export default function FAQ({
                             <Guide title="Insights" link="#" icon="insights" />
                             <Guide title="Group Analytics" link="#" icon="group-analytics" />
                         </ol>
+                        <a
+                            href="/docs/user-guides"
+                            className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20"
+                        >
+                            View all (20)
+                        </a>
                     </div>
                 </div>
 
                 <div className="max-w-[884px] mx-auto my-12 px-5">
+                    <h3>Recent questions</h3>
                     <div className="questions-content">
                         <ul className="list-none p-0 m-0">
                             {nodes.map((question, index) => (
