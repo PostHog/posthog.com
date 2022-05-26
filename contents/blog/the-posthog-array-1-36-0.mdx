@@ -11,13 +11,14 @@ featuredImageType: full
 excerpt: PostHog 1.36.0 introduces TODO MAJOR FEATURES GO HERE
 ---
 
+import AndOrFilteringImage from '../images/blog/array/1-36-0-and-or-filtering.png'
+import UniversalSearchImage from '../images/blog/array/1-36-0-universal-search.png'
 import InsightOnMultipleDashboardsImage from '../images/blog/array/1-36-0-insight-on-multiple-dashboards.png'
 import DataColorsImage from '../images/blog/array/1-36-0-data-colors.png'
 import NewFunnelVizImage from '../images/blog/array/1-36-0-new-funnel-viz.png'
 import NewFunnelVizDashboardImage from '../images/blog/array/1-36-0-new-funnel-viz-dashboard.png'
 import TimezoneImage from '../images/blog/array/1-36-0-timezone.png'
 import PreflightImage from '../images/blog/array/1-36-0-preflight.png'
-import UniversalSearchImage from '../images/blog/array/1-36-0-universal-search.png'
 
 PostHog 1.36.0 introduces... TODO
 
@@ -30,14 +31,15 @@ Want to know more about what we're up to? [Subscribe to our new newsletter](/new
 **Release highlights:**
 - TODO Joe to list highlights
 
-### Plugins are now Apps
+### Changed: Plugins are now Apps
 
 TODO: Joe to explain why plugin are now apps and how bright the future is. https://posthog.com/apps
 
-### New: Filtering groups - AND/OR
-SCREENSHOT
+### New: Filter groups - AND/OR
 
-1 sentence description to be expanded upon by Joe
+You've asked for more power filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
+
+<img src={AndOrFilteringImage} alt='AND/OR filters' style={{width: 720 }} />
 
 ### New: Multi-dashboard insights
 
@@ -53,9 +55,9 @@ Search for _anything_ within the current PostHog project from one place. That's 
 
 ### New: Full timezone support in Insights
 
-SCREENSHOT
+PostHog project settings have included the Timezone setting since version 1.24. It's been helpful from the beginning, aiding manual conversion of dates and times shown in the app, but 1.36 takes it to the next level. All Insights queries now take the project timezone into account, resulting in more accurate results for projects using timezones other than UTC, particularly when grouping by day, week, or month.
 
-<img src={TimezoneImage} alt='Insight tooltip with "UTC-10"' style={{width: 225 }} />
+<img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{width: 322 }} />
 
 ### New: Funnels redesign
 
@@ -71,15 +73,18 @@ You'll notice an updated color palette in most Insights (specifically: Trends, F
 
 <img src={DataColorsImage} alt='A funnel with new data colors' style={{width: 640}} />
 
-### New: Multi-point persons modal
-
-https://github.com/PostHog/posthog/pull/9951
-
 ### Improved: Preflight checks
 
 When self-hosting PostHog, it's crucial that all components are up and running, which is why the preflight checks screen is the first thing you see when setting up a fresh instance. Our new version of this screen makes initial setup of your instance all the more pleasant.
 
 <img src={PreflightImage} alt='New preflight checks screen' style={{width: 627 }} />
+
+
+### Improved: Switch between series in the persons modal
+
+Thanks to the new series selector, the persons modal is easier to use with multi-series Trends insights. Switch between series without ever having to close the window.
+
+<img src={MultiPointPersonsModalImage} alt='Switching between series in the persons modal' style={{width: 621}} />
 
 ### New: Restack joins the PostHog Marketplace
 
@@ -93,7 +98,7 @@ Restack enables you to deploy and benefit from a self-hosted PostHog instance, b
 
 Version 1.36 also adds hundreds of other fixes and improvements, including...
 
-- **Improved**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results.
+- **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results.
 - **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save.
 
 ### Deprecation and removal notices
