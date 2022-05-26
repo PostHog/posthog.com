@@ -75,22 +75,12 @@ const Search = () => {
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     name="faq-search"
-                    placeholder="Search hundreds of answers..."
-                    className="px-4 py-3 bg-white dark:bg-gray-accent-dark shadow-md rounded-md max-w-[477px] w-full"
+                    placeholder="Search anything product, installation, or company-related..."
+                    className="px-4 py-3 text-base bg-white dark:bg-gray-accent-dark shadow-md rounded-sm w-full"
                 />
 
-                <button className="px-6 py-3 bg-red shadow-md rounded-md text-white font-bold">Search</button>
+                <button className="px-6 py-3 bg-red shadow-md rounded-sm text-white font-bold">Search</button>
             </form>
-            <p className="text-[13px] opacity-50 m-0 mt-3">
-                Try product questions, or anything about installation or self-hosting.
-            </p>
-            <p className="text-[14px] opacity-70 m-0 mt-3">
-                Can't find the answer you're looking for?{' '}
-                <button className="text-red" onClick={() => setShowForm(!showForm)}>
-                    Ask us anything
-                </button>
-                .
-            </p>
             {showForm && (
                 <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
                     {formValues ? (
@@ -173,15 +163,17 @@ export default function FAQ({
             />
             <section className="px-4">
                 <div className="max-w-4xl mx-auto my-12">
-                    <h1>Questions &amp; answers</h1>
-                    <p>
-                        We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
-                        helps you find what you're looking for even faster!)
-                    </p>
+                    <h1>Questions?</h1>
                     <Search />
+                    <p className="mt-3 text-sm text-gray">
+                        Can't find the answer you're looking for?{' '}
+                        <button className="text-red font-semibold" onClick={() => setShowForm(!showForm)}>
+                            Ask a question
+                        </button>
+                    </p>
                 </div>
 
-                <div className="border border-dashed border-gray mb-4">
+                <div className="border-t border-b border-dashed border-gray mb-12 -mx-4">
                     <div className="max-w-4xl w-full mx-auto">
                         <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center divide-x divide-dashed divide-gray">
                             <TopLink
@@ -208,13 +200,10 @@ export default function FAQ({
                     </div>
                 </div>
 
-                <div className="text-center mb-6">
-                    <Link to="/docs/user-guides/support">More support options</Link>
+                <div className="max-w-4xl w-full mx-auto">
+                    <h3>Product manuals</h3>
                 </div>
 
-                <div className="max-w-4xl w-full mx-auto">
-                    <h2 className="text-lg">Product manuals</h2>
-                </div>
                 <div className="">
                     <div className="max-w-4xl w-full mx-auto">
                         <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-4 grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
@@ -256,7 +245,7 @@ export default function FAQ({
                     </div>
                 </div>
 
-                <div className="max-w-[884px] mx-auto my-12 px-5">
+                <div className="max-w-4xl mx-auto my-12">
                     <h3>Recent questions</h3>
                     <Squeak
                         slug={null}
