@@ -29,7 +29,7 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can self-host, but [PostHog Cloud is free up to 1 million events per month](/pricing#cloud) if you'd prefer a fully-managed experience.
 
 ### Who is PostHog for?
-PostHog is primarily designed for engineering, data science, and product teams. As an all-in-one platform, it combines the functionality of traditional product analytics platforms with tools like feature flags, session recording and A/B testing, making it ideal for teams who want a complete view of product usage without the need to running multiple products independently.
+PostHog is ideal for engineering, data science, and product teams. As an all-in-one platform, it combines the functionality of traditional product analytics platforms with tools like Feature Flags, Session Recording and A/B testing, making it ideal for teams who want a complete view of their product without the hassle of running multiple separate tools.
 
 ### Strengths
 - All-in-one analytics suite
@@ -125,9 +125,7 @@ GrowthBook is an [open source A/B testing](/blog/best-open-source-ab-testing-too
 
 It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targetting based on user properties.
 
-It lacks any other analytics features, so it's best used alongside a broader product analytics platform. 
-
-You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics tool like Mixpanel.
+You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics tool like Mixpanel, but it lacks any additional analytics features.
 
 ### Who is GrowthBook for?
 
