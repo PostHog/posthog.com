@@ -123,7 +123,7 @@ Plausible Analytics is available under a AGPLv3 license. Pricing depends on the 
 
 GrowthBook is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
 
-It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targetting based on user properties.
+It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
 
 You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics tool like Mixpanel, but it lacks any additional analytics features.
 
