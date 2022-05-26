@@ -25,7 +25,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### How should I configure API permissions for the Braze Import app?
 
-Depending on what kind of analytics you want to export from Braze to Posthog, you need to give your API Key the correct permissions.
+Depending on what kind of analytics you want to export from Braze to PostHog, you need to give your API Key the correct permissions.
 
 Campaigns:
 

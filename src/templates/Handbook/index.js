@@ -47,7 +47,7 @@ export default function Handbook({
     return (
         <>
             <SEO
-                title={`${title} - Posthog ${breadcrumbBase.name}`}
+                title={`${title} - PostHog ${breadcrumbBase.name}`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
