@@ -18,7 +18,7 @@ import { Form, Squeak } from 'squeak-react'
 
 const TopLink = ({ title, description, link, icon }) => {
     return (
-        <li>
+        <li className="w-full">
             <a
                 href={link}
                 className="flex flex-col items-center justify-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
@@ -70,7 +70,7 @@ const Search = () => {
                     apiKey="f1386529b9fafc5c3467e0380f19de4b"
                 />
             )}
-            <form onSubmit={handleSubmit} className="flex space-x-3 m-0">
+            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 m-0">
                 <input
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
@@ -175,7 +175,7 @@ export default function FAQ({
 
                 <div className="border-t border-b border-dashed border-gray mb-12 -mx-4">
                     <div className="max-w-4xl w-full mx-auto">
-                        <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center divide-x divide-dashed divide-gray">
+                        <ol className="list-none m-0 p-0 md:grid md:grid-cols-5 justify-center divide-y md:divide-y-0 md:divide-x divide-dashed divide-gray">
                             <TopLink
                                 title="Self-hosting"
                                 description="Deployment options"
@@ -204,45 +204,39 @@ export default function FAQ({
                     <h3>Product manuals</h3>
                 </div>
 
-                <div className="">
-                    <div className="max-w-4xl w-full mx-auto">
-                        <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-4 grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
-                            <Guide title="Trends" link="/docs/user-guides/trends" icon="trendz" />
-                            <Guide title="Funnels" link="/docs/user-guides/funnels" icon="funnels" />
-                            <Guide title="User paths" link="/docs/user-guides/paths" icon="user-paths" />
-                            <Guide
-                                title="Correlation analysis"
-                                link="/docs/user-guides/correlation"
-                                icon="correlation-analysis"
-                            />
-                            <Guide
-                                title="Session recording"
-                                link="/docs/user-guides/recordings"
-                                icon="session-recording"
-                            />
-                            <Guide title="Feature flags" link="/docs/user-guides/feature-flags" icon="feature-flags" />
-                            <Guide
-                                title="Experimentation"
-                                link="/docs/user-guides/experimentation"
-                                icon="experimentation"
-                            />
-                            <Guide title="Heatmaps" link="/docs/user-guides/toolbar#toolbar-features" icon="heatmaps" />
-                            <Guide title="Apps" link="/docs/apps" icon="apps" />
-                            <Guide title="Toolbar" link="/docs/user-guides/toolbar" icon="toolbar" />
-                            <Guide title="Insights" link="/docs/user-guides/insights" icon="insights" />
-                            <Guide
-                                title="Group Analytics"
-                                link="/docs/user-guides/group-analytics"
-                                icon="group-analytics"
-                            />
-                        </ol>
-                        <a
-                            href="/docs/user-guides"
-                            className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20"
-                        >
-                            View all (23)
-                        </a>
-                    </div>
+                <div className="max-w-4xl w-full mx-auto">
+                    <ol className="list-none m-0 p-0 grid md:grid-flow-col grid-cols-2 md:grid-cols-4 md:grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
+                        <Guide title="Trends" link="/docs/user-guides/trends" icon="trendz" />
+                        <Guide title="Funnels" link="/docs/user-guides/funnels" icon="funnels" />
+                        <Guide title="User paths" link="/docs/user-guides/paths" icon="user-paths" />
+                        <Guide
+                            title="Correlation analysis"
+                            link="/docs/user-guides/correlation"
+                            icon="correlation-analysis"
+                        />
+                        <Guide title="Session recording" link="/docs/user-guides/recordings" icon="session-recording" />
+                        <Guide title="Feature flags" link="/docs/user-guides/feature-flags" icon="feature-flags" />
+                        <Guide
+                            title="Experimentation"
+                            link="/docs/user-guides/experimentation"
+                            icon="experimentation"
+                        />
+                        <Guide title="Heatmaps" link="/docs/user-guides/toolbar#toolbar-features" icon="heatmaps" />
+                        <Guide title="Apps" link="/docs/apps" icon="apps" />
+                        <Guide title="Toolbar" link="/docs/user-guides/toolbar" icon="toolbar" />
+                        <Guide title="Insights" link="/docs/user-guides/insights" icon="insights" />
+                        <Guide
+                            title="Group Analytics"
+                            link="/docs/user-guides/group-analytics"
+                            icon="group-analytics"
+                        />
+                    </ol>
+                    <a
+                        href="/docs/user-guides"
+                        className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20"
+                    >
+                        View all (23)
+                    </a>
                 </div>
 
                 <div className="max-w-4xl mx-auto my-12">
