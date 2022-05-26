@@ -67,7 +67,7 @@ If you're struggling to define the best metrics for your team, [we always recomm
 There is no substitute for observing a user use your product in their natural environment. As long as you randomly sample customers you’re likely to get unbiased results here - the users will not change their behavior due to your presence. Watching session recordings can give valuable insights into why people are failing to achieve something with your product: perhaps they’re accessing your product through their mobile browser and it’s much harder to use. Watching session recordings provides a lot of context for this type of issue. 
 
 ### How does PostHog do this?
-One of the features Posthog offers is the ability to [record and replay user sessions](/docs/user-guides/session-recording) in your product. So, naturally, we use this feature on a daily basis to see how users are interacting with our product and our website - all while redacting any sensitive information to protect their privacy. 
+One of the features PostHog offers is the ability to [record and replay user sessions](/docs/user-guides/session-recording) in your product. So, naturally, we use this feature on a daily basis to see how users are interacting with our product and our website - all while redacting any sensitive information to protect their privacy. 
 
 Session recordings are often an invaluable tool for us, which is why we recently updated them to be faster and easier to use in [PostHog v1.30](/blog/the-posthog-array-1-30-0).
 

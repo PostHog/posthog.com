@@ -35,7 +35,7 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
 
     </details>
 
-1. Delete the `StatefulSet` definition but leave its `pod`s online (this is to avoid an impact to using Posthog): `kubectl -n posthog delete sts --cascade=orphan posthog-posthog-postgresql`
+1. Delete the `StatefulSet` definition but leave its `pod`s online (this is to avoid an impact to using PostHog): `kubectl -n posthog delete sts --cascade=orphan posthog-posthog-postgresql`
 
 1. In your Helm chart configuration, update the `postgresql.persistence` value in `value.yaml` to the target size (20G in this example)
 

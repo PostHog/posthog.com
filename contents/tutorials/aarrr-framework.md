@@ -54,7 +54,7 @@ You must also define a usage interval - how often you expect the retention event
 Once you've created a cohort of activated users, Retention can be measured in two ways:
 
 * n-day/n-week/n-month retention - how many of your users came back within a usage interval (use PostHog's [Retention feature](../user-guides/retention) to measure this)
-* Unbounded retention - appropriate when there isn't a set usage interval, how many users came back at all (use Posthog's Stickiness feature to measure this)
+* Unbounded retention - appropriate when there isn't a set usage interval, how many users came back at all (use PostHog's Stickiness feature to measure this)
 
 ## Revenue
 
