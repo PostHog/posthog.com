@@ -20,7 +20,7 @@ Here, we’ve selected some of the best open-source analytics tools across a ran
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - best open source analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, path analysis, heat maps, and more - it's also one of the [best open source session recording tools](/blog/best-open-source-session-replay-tools) around. 
+PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, path analysis, heat maps, and more – it's also one of the [best open source session recording tools](/blog/best-open-source-session-replay-tools) around. 
 
 It’s entirely self-serve, with the ability to auto-capture event information out of the box. The interface makes querying your data a breeze, with no SQL required. 
 
@@ -51,7 +51,7 @@ PostHog Open Source is available under an MIT license. It offers a free version 
 Matomo is an open source platform for web analytics, rather than a product analytics. That means it's great for understanding metrics such as pageviews or for planning keywords, but it lacks product analytics features such as session recording or feature flags. Nevertheless, it's an alternative to Google Analytics for users who want to protect user privacy. 
 
 ### Who is Matomo for?
-Matomo is intended for Marketing and Content teams who need to focus on SEO activities without losing control of their user data. It is suitable for both small and enterprise businesses.
+Matomo is intended for marketing and content teams who need to focus on SEO activities without losing control of their user data. It is suitable for both small and enterprise businesses.
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
@@ -104,7 +104,7 @@ OpenReplay is available under the ELv2 license [via its repo](https://github.com
 
 Like Matomo, Plausible Analytics is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is compliant with regulations such as GDPR. 
 
-Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting.
+Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 ### Who is Plausible Analytics for?
 Plausible is intended for Marketing and Content teams who need to focus on specific SEO metrics. It's designed for use in small to medium businesses or teams. 
@@ -127,7 +127,7 @@ It supports multiple development environments, each with a unique API endpoint, 
 
 It lacks any other analytics features, so it's best used alongside a broader product analytics platform. 
 
-You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics platform like Mixpanel.
+You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics tool like Mixpanel.
 
 ### Who is GrowthBook for?
 
