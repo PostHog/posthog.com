@@ -194,7 +194,7 @@ export default function FAQ({
                                 link="/marketplace"
                                 icon="partners"
                             />
-                            <TopLink title="FAQ" description="Deployment options" link="/faq" icon="faq2" />
+                            <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
                             <TopLink
                                 title="Report an issue"
                                 description="via GitHub"
