@@ -16,12 +16,12 @@ import React, { useState } from 'react'
 import { Form } from 'squeak-react'
 import Icon from 'components/SupportImages/Icon'
 
-const TopLink = ({ title, description, link, icon, className }) => {
+const TopLink = ({ title, description, link, icon }) => {
     return (
-        <li className={` ${className}`}>
+        <li>
             <a
                 href={link}
-                className="flex flex-col items-center justify-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
+                className="flex flex-col items-center justify-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
                 <h3 className="font-bold text-base mb-1">{title}</h3>
@@ -31,16 +31,16 @@ const TopLink = ({ title, description, link, icon, className }) => {
     )
 }
 
-const Guide = ({ title, link, icon, className }) => {
+const Guide = ({ title, link, icon }) => {
     return (
         <li className="border-b border-dashed border-gray first:border-l">
-            <a
-                href={link}
-                className="flex justify-start items-center w-full text-black hover:text-black hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 opacity-80 hover:opacity-100 p-4 space-x-2"
+            <Link
+                to={link}
+                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 opacity-80 hover:opacity-100 p-4 space-x-2"
             >
                 <Icon className="w-4 h-4 text-gray" name={icon} />
                 <h3 className="font-bold text-sm mb-0">{title}</h3>
-            </a>
+            </Link>
         </li>
     )
 }
@@ -182,42 +182,77 @@ export default function FAQ({
                     <Search />
                 </div>
 
-                <div className="border border-dashed border-gray mb-8">
+                <div className="border border-dashed border-gray mb-4">
                     <div className="max-w-4xl w-full mx-auto">
                         <ol className="list-none m-0 p-0 grid grid-cols-5 justify-center divide-x divide-dashed divide-gray">
-                            <TopLink title="Self-hosting" description="Deployment options" link="#" icon="selfHost" />
-                            <TopLink title="Partners" description="Hosting & support" link="#" icon="partners" />
-                            <TopLink title="FAQ" description="Deployment options" link="#" icon="faq2" />
-                            <TopLink title="Report an issue" description="via GitHub" link="#" icon="issue2" />
-                            <TopLink title="API" description="Apps, data I/O" link="#" icon="api" />
+                            <TopLink
+                                title="Self-hosting"
+                                description="Deployment options"
+                                link="/docs/self-host#deployment-options"
+                                icon="selfHost"
+                            />
+                            <TopLink
+                                title="Partners"
+                                description="Hosting & support"
+                                link="/marketplace"
+                                icon="partners"
+                            />
+                            <TopLink title="FAQ" description="Deployment options" link="/faq" icon="faq2" />
+                            <TopLink
+                                title="Report an issue"
+                                description="via GitHub"
+                                link="https://github.com/PostHog/posthog/issues"
+                                icon="issue2"
+                            />
+                            <TopLink title="API" description="Apps, data I/O" link="/docs/api" icon="api" />
                         </ol>
                     </div>
                 </div>
 
-                <div className="max-w-4xl w-full mx-auto">
-                    <h2 className="text-lg">User guides</h2>
+                <div className="text-center mb-6">
+                    <Link to="/docs/user-guides/support">More support options</Link>
                 </div>
-                <div className="border border-dashed border-gray">
+
+                <div className="max-w-4xl w-full mx-auto">
+                    <h2 className="text-lg">Product manuals</h2>
+                </div>
+                <div className="">
                     <div className="max-w-4xl w-full mx-auto">
                         <ol className="list-none m-0 p-0 grid grid-flow-col grid-cols-4 grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
-                            <Guide title="Trends" link="#" icon="trendz" />
-                            <Guide title="Funnels" link="#" icon="funnels" />
-                            <Guide title="User paths" link="#" icon="user-paths" />
-                            <Guide title="Correlation analysis" link="#" icon="correlation-analysis" />
-                            <Guide title="Session recording" link="#" icon="session-recording" />
-                            <Guide title="Feature flags" link="#" icon="feature-flags" />
-                            <Guide title="Experimentation" link="#" icon="experimentation" />
-                            <Guide title="Heatmaps" link="#" icon="heatmaps" />
-                            <Guide title="Apps" link="#" icon="apps" />
-                            <Guide title="Toolbar" link="#" icon="toolbar" />
-                            <Guide title="Insights" link="#" icon="insights" />
-                            <Guide title="Group Analytics" link="#" icon="group-analytics" />
+                            <Guide title="Trends" link="/docs/user-guides/trends" icon="trendz" />
+                            <Guide title="Funnels" link="/docs/user-guides/funnels" icon="funnels" />
+                            <Guide title="User paths" link="/docs/user-guides/paths" icon="user-paths" />
+                            <Guide
+                                title="Correlation analysis"
+                                link="/docs/user-guides/correlation"
+                                icon="correlation-analysis"
+                            />
+                            <Guide
+                                title="Session recording"
+                                link="/docs/user-guides/recordings"
+                                icon="session-recording"
+                            />
+                            <Guide title="Feature flags" link="/docs/user-guides/feature-flags" icon="feature-flags" />
+                            <Guide
+                                title="Experimentation"
+                                link="/docs/user-guides/experimentation"
+                                icon="experimentation"
+                            />
+                            <Guide title="Heatmaps" link="/docs/user-guides/toolbar#toolbar-features" icon="heatmaps" />
+                            <Guide title="Apps" link="/docs/apps" icon="apps" />
+                            <Guide title="Toolbar" link="/docs/user-guides/toolbar" icon="toolbar" />
+                            <Guide title="Insights" link="/docs/user-guides/insights" icon="insights" />
+                            <Guide
+                                title="Group Analytics"
+                                link="/docs/user-guides/group-analytics"
+                                icon="group-analytics"
+                            />
                         </ol>
                         <a
                             href="/docs/user-guides"
                             className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20"
                         >
-                            View all (20)
+                            View all (23)
                         </a>
                     </div>
                 </div>
