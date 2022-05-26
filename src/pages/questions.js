@@ -63,7 +63,6 @@ const Search = () => {
         <>
             {modal && (
                 <DocSearchModal
-                    searchParameters={{ facetFilters: [`tags:questions`] }}
                     onClose={() => setModal(false)}
                     initialQuery={value}
                     appId="B763I3AO0D"
