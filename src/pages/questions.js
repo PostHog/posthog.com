@@ -14,7 +14,10 @@ import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
+import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
+const Element = Scroll.Element
+const scroller = Scroll.scroller
 
 const TopLink = ({ title, description, link, icon }) => {
     return (
@@ -167,7 +170,10 @@ export default function FAQ({
                     <Search />
                     <p className="mt-3 text-sm text-gray">
                         Can't find the answer you're looking for?{' '}
-                        <button className="text-red font-semibold" onClick={() => setShowForm(!showForm)}>
+                        <button
+                            className="text-red font-semibold"
+                            onClick={() => scroller.scrollTo('squeak', { offset: -100 })}
+                        >
                             Ask a question
                         </button>
                     </p>
@@ -248,6 +254,7 @@ export default function FAQ({
                         url="https://pxipkquvwqaaunuzjoge.supabase.co"
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                     />
+                    <Element name="squeak" />
                 </div>
             </section>
         </Layout>
