@@ -19,7 +19,7 @@ These three are the inputs that lead to the output of career progression. If you
 
 **When we IPO, you will literally walk into any job anywhere**
 
-While being able to talk about all the cool stuff you built will help you in your future career, being an early employee that took us from very early to public is a huge and _exceptionally_ rare career achievement. That's how you leap multiple positions into an exec role, or whatever else you want to do.
+While being able to talk about all the cool stuff you built will help you in your future career, being an early employee that took us from very early to public is a huge and an _exceptionally_ rare career achievement. That's how you leap multiple positions into an exec role, or whatever else you want to do.
 
 ## Ways we help you progress
 
