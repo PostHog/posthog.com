@@ -79,7 +79,7 @@ const Search = () => {
                     className="px-4 py-3 text-base bg-white dark:bg-gray-accent-dark shadow-md rounded-sm w-full"
                 />
 
-                <button className="px-6 py-3 bg-red shadow-md rounded-sm text-white font-bold">Search</button>
+                <button className="px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">Search</button>
             </form>
             {showForm && (
                 <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>

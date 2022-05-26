@@ -51,7 +51,7 @@
   </symbol>
 
   <symbol id="funnels" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M7.147 21.232a2.697 2.697 0 1 1-5.395 0V3.698a2.697 2.697 0 1 1 5.395 0v17.534Z" fill="#000"/><path opacity=".75" d="M15.57 21.232a2.697 2.697 0 1 1-5.394 0v-10.79a2.697 2.697 0 1 1 5.395 0v10.79Z" fill="#000"/><path opacity=".5" d="M24 21.232a2.697 2.697 0 1 1-5.395 0v-6.744a2.697 2.697 0 1 1 5.396 0v6.744Z" fill="#000"/>
+    <path d="M7.147 21.232a2.697 2.697 0 1 1-5.395 0V3.698a2.697 2.697 0 1 1 5.395 0v17.534Z" fill="currentColor"/><path opacity=".75" d="M15.57 21.232a2.697 2.697 0 1 1-5.394 0v-10.79a2.697 2.697 0 1 1 5.395 0v10.79Z" fill="currentColor"/><path opacity=".5" d="M24 21.232a2.697 2.697 0 1 1-5.395 0v-6.744a2.697 2.697 0 1 1 5.396 0v6.744Z" fill="currentColor"/>
   </symbol>
 
   <symbol id="user-paths" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
