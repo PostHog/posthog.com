@@ -8,13 +8,13 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
+import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
-import { Form } from 'squeak-react'
-import Icon from 'components/SupportImages/Icon'
+import { Form, Squeak } from 'squeak-react'
 
 const TopLink = ({ title, description, link, icon }) => {
     return (
@@ -259,13 +259,13 @@ export default function FAQ({
 
                 <div className="max-w-[884px] mx-auto my-12 px-5">
                     <h3>Recent questions</h3>
-                    <div className="questions-content">
-                        <ul className="list-none p-0 m-0">
-                            {nodes.map((question, index) => (
-                                <Question key={index} question={question} />
-                            ))}
-                        </ul>
-                    </div>
+                    <Squeak
+                        slug={null}
+                        apiHost="https://squeak.cloud"
+                        apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                        url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                    />
                 </div>
             </section>
         </Layout>
