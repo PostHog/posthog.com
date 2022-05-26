@@ -10,7 +10,7 @@ featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 ---
 
-One of PostHog’s values is that everybody codes. That doesn’t mean everyone needs to bea developer, but we do encourage everyone to practice the basics of shipping, no matter their role. Even site updates require GitHub and  some basic knowledge of coding, for example. 
+One of PostHog’s values is that everybody codes. That doesn’t mean everyone needs to be a developer, but we do encourage everyone to practice the basics of shipping, no matter their role. Even site updates require GitHub and some basic knowledge of coding, for example. 
 
 But, of course, you may know that already. [I wrote about it a year ago, when I joined PostHog](/blog/a-non-coders-thoughts-on-everybody-codes-culture). Back then, my coding knowledge was limited to just a smattering of HTML.
 
@@ -36,14 +36,14 @@ One thing that hasn’t changed over the last 12 months is the importance of mak
 
 The reason mistakes are so important is, I think, because coding isn’t a prescriptive discipline. There’s no single correct way to code or write, so it’s more valuable to know why something _broke_ than how it ‘should’ be done. 
 
-Breaking things is a great way to learn about how to fix them.PostHog recently rebranded our plugins to apps and, as part of that, we launched a new apps library.  I broke a bunch of things while working on that project — but that's OK because I managed to fix most of them (with occasional help from Eli) and carried those lessons over to the ShuffleHog project.
+Breaking things is a great way to learn about how to fix them. PostHog recently rebranded plugins to apps and, as part of that, we launched a new apps library. I broke a bunch of things while working on that project — but that's OK because I managed to fix most of them (with occasional help from Eli) and carried those lessons over to the ShuffleHog project.
 
 ### Take it offline
 Something I’ve loved about becoming more confident with code is that I’ve been able to follow this passion outside of work. This creates a feedback loop where I get even more excited about what I’m learning and what I’m able to do, so I bring that energy back into work…where I _also_ learn and do more. It’s very satisfying. 
 
 ![Joe's Open Source Arcade](../images/blog/non-coders-thoughts/arcade_open_source.png)
 
-The experience I’ve had with GitHub, for example, ended up being the catalyst for me to build my own arcade emulation machine at home because I now had the skills to fork and tweak certain repos. Likewise, spending time in the world of open source software led to me playing around with a _lot_ of Raspberry Pi sensors at home.
+The experience I’ve had with GitHub, for example, ended up being the catalyst for me to build my own arcade emulation machine at home because I now had the skills to fork and tweak certain repos. Likewise, spending time in the world of open-source software led to me playing around with a _lot_ of Raspberry Pi sensors at home.
 
 These may be small projects, but they’re a million miles away from where I was before PostHog — and I’m excited to see how much farther working with code will push me to go!
 
