@@ -1432,3 +1432,9 @@
 [[redirects]]
     from = "/support"
     to = "/questions"
+
+
+# Added: 2022-05-27
+[[redirects]]
+    from = "/customers/why-i-ditched-mixpanel-for-posthog"
+    to = "/blog/why-i-ditched-google-analytics-for-posthog"
