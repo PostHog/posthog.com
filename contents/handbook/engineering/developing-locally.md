@@ -81,7 +81,7 @@ In this step we will install ClickHouse, Kafka, MinIO, PostgreSQL, Redis and Zoo
 First, run the services in Docker:
 
 ```bash
-docker compose -f docker-compose.dev.yml up clickhouse kafka object_storage db redis zookeeper
+docker compose up clickhouse kafka object_storage db redis zookeeper
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
