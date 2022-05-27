@@ -1,18 +1,15 @@
 ---
-title: '"Why I ditched Google Analytics & Mixpanel for PostHog"'
-customer: Reciprocal.dev
-logo: ../images/customers/reciprocal/reciprocal-logo.svg
-featuredImage: ../images/customers/reciprocal/reciprocal-featured-image.png
-featuredCustomer: true
-industries:
-    - UX & UI development
-users:
-    - Leadership
-    - Engineering team
-toolsUsed:
-    - Funnel analysis
-    - Self-hosting
+date: 2022-05-26
+title: Why I ditched Google Analytics and Mixpanel for PostHog
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/posthog-engineering-blog.png
+author: ["colin-wren"]
+categories: ["Inside PostHog"]
 ---
+
 _By Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/)._
 
 It took me until I built my second product, [Reciprocal.dev](https://reciprocal.dev/), to really understand the value of analytics. I’d always thought of such tools as being an invasion of privacy and questioned the need for front-end scripts when properly configured server logs could provide the same information. But, after learning how customer behaviour metrics are key to performing the iterative small tweaks needed to align a product to customer needs, I took a second look at how analytics were used in my existing products.
@@ -71,3 +68,4 @@ PostHog gave us the means to build a qualitative dataset and didn’t limit us o
 
 _This article was written by Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/), who originally shared his experience on [Medium](https://colinwren.medium.com/why-i-ditched-google-analytics-mixpanel-for-posthog-841fa77bb8cb). It is shared here with his permission._
 
+<ArrayCTA />
