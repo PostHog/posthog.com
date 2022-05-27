@@ -90,7 +90,7 @@ Its session replay feature automatically captures events, and provides useful cl
 ### Who is OpenReplay for?
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It can be self-hosted for free, though a cloud version is available for $3.95 per 1,000 monthly recordings.
 
-### Strengths
+### Strengths
 - Privacy friendly
 - Useful error tracking and bug fixing features
 - Optimizing conversion and understanding user journeys
