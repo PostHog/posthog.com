@@ -1,11 +1,11 @@
 ---
 date: 2022-05-30
-title: "Array 1.36.0: TODO MAJOR FEATURES GO HERE"
+title: 'Array 1.36.0: TODO MAJOR FEATURES GO HERE'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
+categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 excerpt: PostHog 1.36.0 introduces TODO MAJOR FEATURES GO HERE
@@ -29,7 +29,8 @@ Want to know more about what we're up to? [Subscribe to our new newsletter](/new
 > Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/self-host/configure/upgrading-posthog).
 
 **Release highlights:**
-- TODO Joe to list highlights
+
+-   TODO Joe to list highlights
 
 ### Changed: Plugins are now Apps
 
@@ -39,58 +40,65 @@ TODO: Joe to explain why plugin are now apps and how bright the future is. https
 
 You've asked for more power filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
 
-<img src={AndOrFilteringImage} alt='AND/OR filters' style={{width: 720 }} />
+<img src={AndOrFilteringImage} alt="AND/OR filters" style={{ width: 720 }} />
 
 ### New: Multi-dashboard insights
 
 Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. PostHog 1.36 allows you to simply add an insight to multiple dashboards. No hassle.
 
-<img src={InsightOnMultipleDashboardsImage} alt='"Add insight to dashboards" modal' style={{width: 502 }} />
+<img src={InsightOnMultipleDashboardsImage} alt='"Add insight to dashboards" modal' style={{ width: 502 }} />
 
 ### New: Universal Search
 
 Search for _anything_ within the current PostHog project from one place. That's Universal Search – the new power of the familiar "Search" box in the top bar.
 
-<img src={UniversalSearchImage} alt='Universal search box' style={{width: 855 }} />
+<img src={UniversalSearchImage} alt="Universal search box" style={{ width: 855 }} />
 
 ### New: Full timezone support in Insights
 
 PostHog project settings have included the Timezone setting since version 1.24. It's been helpful from the beginning, aiding manual conversion of dates and times shown in the app, but 1.36 takes it to the next level. All Insights queries now take the project timezone into account, resulting in more accurate results for projects using timezones other than UTC, particularly when grouping by day, week, or month.
 
-<img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{width: 322 }} />
+<img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
 
 ### New: Funnels redesign
 
 We've heard your feedback about Funnels taking up a bit much space and not being easy to read on dashboards. The redesigned interface addresses both points with style, making Funnels more useful than ever.
 
-<img src={NewFunnelVizImage} alt='A three-step funnel in the new UI on the insight page' style={{width: 970}} />
+<img src={NewFunnelVizImage} alt="A three-step funnel in the new UI on the insight page" style={{ width: 970 }} />
 <br />
-<img src={NewFunnelVizDashboardImage} alt='A three-step funnel in the new UI on a dashboard' style={{width: 696}} />
+<img src={NewFunnelVizDashboardImage} alt="A three-step funnel in the new UI on a dashboard" style={{ width: 696 }} />
 
 ### Improved: More pleasant and accessible data colors
 
 You'll notice an updated color palette in most Insights (specifically: Trends, Funnels, Retention, and Stickiness). It's more pleasing to the eye, but it's not just about aesthetics – accessibility is equally important to us, and so the new scheme is much more colorblind-friendly at the same time.
 
-<img src={DataColorsImage} alt='A funnel with new data colors' style={{width: 640}} />
+<img src={DataColorsImage} alt="A funnel with new data colors" style={{ width: 640 }} />
 
 ### Improved: Preflight checks
 
 When self-hosting PostHog, it's crucial that all components are up and running, which is why the preflight checks screen is the first thing you see when setting up a fresh instance. Our new version of this screen makes initial setup of your instance all the more pleasant.
 
-<img src={PreflightImage} alt='New preflight checks screen' style={{width: 627 }} />
-
+<img src={PreflightImage} alt="New preflight checks screen" style={{ width: 627 }} />
 
 ### Improved: Switch between series in the persons modal
 
 Thanks to the new series selector, the persons modal is easier to use with multi-series Trends insights. Switch between series without ever having to close the window.
 
-<img src={MultiPointPersonsModalImage} alt='Switching between series in the persons modal' style={{width: 621}} />
+<img src={MultiPointPersonsModalImage} alt="Switching between series in the persons modal" style={{ width: 621 }} />
 
 ### New: Restack joins the PostHog Marketplace
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/clVpovL0vxI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/clVpovL0vxI"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
 
-[Restack](https://posthog.com/marketplace/restack) is a platform for deployiong open-source software stacks on Kubernetes and is run by a team of open-source enthusiasts. It's a natural match for [the PostHog Marketplace](https://posthog.com/marketplace/), where we've steadily grown the number of businesses offering services and support over the last few months. 
+[Restack](https://posthog.com/marketplace/restack) is a platform for deployiong open-source software stacks on Kubernetes and is run by a team of open-source enthusiasts. It's a natural match for [the PostHog Marketplace](https://posthog.com/marketplace/), where we've steadily grown the number of businesses offering services and support over the last few months.
 
 Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console can ensure that deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii). Find out more in [the Marketplace, or head to [Restack's store listing for PostHog](https://www.restack.io/store/posthog) to find more great videos like the one above!
 
@@ -98,15 +106,15 @@ Restack enables you to deploy and benefit from a self-hosted PostHog instance, b
 
 Version 1.36 also adds hundreds of other fixes and improvements, including...
 
-- **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results.
-- **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save.
+-   **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results.
+-   **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save.
 
 ### Deprecation and removal notices
 
-- The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
-- If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso) for more details.
-- TODO Slightly different payloads for `onEvent`, `onShapshot` and `onAction` plugin functions (clarification needed from @macobo)
-https://github.com/PostHog/posthog/pull/9781
+-   The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+-   If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso) for more details.
+-   TODO Slightly different payloads for `onEvent`, `onShapshot` and `onAction` plugin functions (clarification needed from @macobo)
+    https://github.com/PostHog/posthog/pull/9781
 
 ## Give us your feedback
 
@@ -124,18 +132,18 @@ Do you want to get involved in making PostHog better? Check out our [contributin
 
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
 
-- [Growth Engineer](https://posthog.workable.com/jobs/2096622)
-- [Site Reliability Engineer - Kubernetes](https://posthog.workable.com/jobs/2105790)
-- [Senior Data Engineer](https://posthog.workable.com/jobs/2482259)
-- [Senior Product Manager](https://posthog.workable.com/jobs/2490685)
-- [Developer Advocate](https://posthog.workable.com/jobs/2422700)
-- [Full Stack Engineer - Community Tools, Website & Docs](https://posthog.workable.com/jobs/2175512)
-- [Full Stack Engineer](https://posthog.workable.com/jobs/2362038)
-- [Marketing Content Writer - 3 Month FTC](https://posthog.workable.com/jobs/2501789)
+-   [Growth Engineer](https://posthog.workable.com/jobs/2096622)
+-   [Site Reliability Engineer - Kubernetes](https://posthog.workable.com/jobs/2105790)
+-   [Senior Data Engineer](https://posthog.workable.com/jobs/2482259)
+-   [Senior Product Manager](https://posthog.workable.com/jobs/2490685)
+-   [Developer Advocate](https://posthog.workable.com/jobs/2422700)
+-   [Full Stack Engineer - Community Tools, Website & Docs](https://posthog.workable.com/jobs/2175512)
+-   [Full Stack Engineer](https://posthog.workable.com/jobs/2362038)
+-   [Marketing Content Writer - 3 Month FTC](https://posthog.workable.com/jobs/2501789)
 
 Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
 
-<hr/>
+<hr />
 
 _Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog) for more PostHog news!_
 
