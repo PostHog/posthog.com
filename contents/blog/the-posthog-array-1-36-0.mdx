@@ -39,7 +39,7 @@ TODO: Joe to explain why plugin are now apps and how bright the future is. https
 
 ### New: Filter groups - AND/OR
 
-You've asked for more power filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
+You've asked for more powerful filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
 
 <img src={AndOrFilteringImage} alt="AND/OR filters" style={{ width: 720 }} />
 
@@ -71,21 +71,21 @@ We've heard your feedback about Funnels taking up a bit much space and not being
 
 ### Improved: More pleasant and accessible data colors
 
-You'll notice an updated color palette in most Insights (specifically: Trends, Funnels, Retention, and Stickiness). It's more pleasing to the eye, but it's not just about aesthetics – accessibility is equally important to us, and so the new scheme is much more colorblind-friendly at the same time.
+You'll notice an updated color palette in most Insights (specifically: Trends, Funnels, Retention, and Stickiness). It's more pleasing to the eye, but it's not just about aesthetics – accessibility is equally important, and the new scheme is simultaneously much more colorblind-friendly.
 
 <img src={DataColorsImage} alt="A funnel with new data colors" style={{ width: 640 }} />
-
-### Improved: Preflight checks
-
-When self-hosting PostHog, it's crucial that all components are up and running, which is why the preflight checks screen is the first thing you see when setting up a fresh instance. Our new version of this screen makes initial setup of your instance all the more pleasant.
-
-<img src={PreflightImage} alt="New preflight checks screen" style={{ width: 627 }} />
 
 ### Improved: Switch between series in the persons modal
 
 Thanks to the new series selector, the persons modal is easier to use with multi-series Trends insights. Switch between series without ever having to close the window.
 
 <img src={MultiPointPersonsModalImage} alt="Switching between series in the persons modal" style={{ width: 621 }} />
+
+### Improved: Preflight checks
+
+When self-hosting PostHog, it's crucial that all components are up and running, which is why the preflight checks screen is the first thing you see when setting up a fresh instance. Our new version of this screen makes initial setup of your instance all the more pleasant.
+
+<img src={PreflightImage} alt="New preflight checks screen" style={{ width: 627 }} />
 
 ### New: Restack joins the PostHog Marketplace
 
@@ -105,17 +105,23 @@ Restack enables you to deploy and benefit from a self-hosted PostHog instance, b
 
 ### Other improvements & fixes
 
-Version 1.36 also adds hundreds of other fixes and improvements, including...
+Version 1.36 also adds hundreds of other improvements and fixes, including...
 
--   **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results.
--   **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save.
+-   **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results. [#9810](https://github.com/PostHog/posthog/pull/9810)
+-   **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save. [#9795](https://github.com/PostHog/posthog/pull/9795)
+-   **Improved**: Large numbers are now presented with the comma as the thousands separator in Insights, greatly improving readability. [#9725](https://github.com/PostHog/posthog/pull/9725) [#9733](https://github.com/PostHog/posthog/pull/9733)
+-   **Improved**: Properties table column sizing has been made smarter, making them scale better for various contents of properties. [#9502](https://github.com/PostHog/posthog/pull/9502)
+-   **Fixed**: User Paths with start/end points containing trailing slashes work now. It's also been made impossible to unselect all event categories for a more intuitive experience. [#9482](https://github.com/PostHog/posthog/pull/9482)
+-   **Fixed**: Trends insight displayed as a table can be sorted indepentently on dashboards. [#9625](https://github.com/PostHog/posthog/pull/9625)
+-   **Fixed**: Custom series names are included in CSV exports. [#9677](https://github.com/PostHog/posthog/pull/9677)
+-   **Fixed**: Automatic provisioning of PostHog users logging in with SSO has been made more reliable. For instance, users who first logged-in _before_ automatic provisioning was turned on for the organization, will automatically added to it. [#9515](https://github.com/PostHog/posthog/pull/9515)
+-   **Fixed**: The UI again always shows the correct active license. [#9575](https://github.com/PostHog/posthog/pull/9575)
 
 ### Deprecation and removal notices
 
--   The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
--   If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso) for more details.
--   TODO Slightly different payloads for `onEvent`, `onShapshot` and `onAction` plugin functions (clarification needed from @macobo)
-    https://github.com/PostHog/posthog/pull/9781
+-   For SAML admins: The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+-   For SAML admins: If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
+-   For ~~plugin~~ app developers: `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` no longer are included. All apps available in our [App Store](https://posthog.com/apps) are compatible with the change.
 
 ## Give us your feedback
 
