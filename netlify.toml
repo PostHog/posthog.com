@@ -1433,3 +1433,8 @@
 [[redirects]]
     from = "/docs/plugins/enabling"
     to = "/docs/apps/enabling"
+
+# Added: 2022-05-27
+[[redirects]]
+    from = "/blog/why-i-ditched-google-analytics-for-posthog"
+    to = "/customers/why-i-ditched-mixpanel-for-posthog"
