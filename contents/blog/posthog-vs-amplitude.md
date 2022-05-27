@@ -343,7 +343,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 ## Strengths of PostHog
 
-![Posthog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 ### Hosting flexibility and privacy
 

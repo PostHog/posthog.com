@@ -183,5 +183,13 @@
         "image": "../../static/images/authors/guido-iaquinti-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/guidoiaquinti"
+    },
+    {
+        "handle": "colin-wren",
+        "name": "Colin Wren",
+        "role": "Founder, Reciprocal.dev",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/colinwren/"
     }
 ]

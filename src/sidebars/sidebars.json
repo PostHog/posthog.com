@@ -178,6 +178,10 @@
                     "url": "/handbook/people/spending-money"
                 },
                 {
+                    "name": "Progression",
+                    "url": "/handbook/people/career-progression"
+                },
+                {
                     "name": "Training",
                     "url": "/handbook/people/training"
                 },
@@ -1123,7 +1127,7 @@
                     "url": "/docs/api/groups-types"
                 },
                 {
-                    "name": "Overview",
+                    "name": "Insights",
                     "url": "/docs/api/insights"
                 },
                 {
