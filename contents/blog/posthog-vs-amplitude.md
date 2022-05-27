@@ -220,7 +220,7 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
 
 ## Integrations and data sources
 
-Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers - but check out [PostHog's integration library](/integrations) for a full list of what's available.
+Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers – check out the [PostHog App Store](/apps) for a full list of what's available.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -300,22 +300,22 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
     	<tr>
         	<td>Redshift</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span>*</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Google Cloud Storage</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Snowflake</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Amazon S3</td>
 			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span>**</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Segment</td>
@@ -341,13 +341,9 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 </table>
 </div>
 
-*[Redshift to PostHog import plugin](/integrations/redshift-import-plugin-(beta)) currently in beta
-
-**Import available via [reverse ETL integration by Hightouch](/blog/hightouch-posthog-reverse-etl-integration)
-
 ## Strengths of PostHog
 
-![Posthog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 ### Hosting flexibility and privacy
 

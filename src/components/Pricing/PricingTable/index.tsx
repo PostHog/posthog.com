@@ -34,14 +34,14 @@ export const PricingTable = () => {
                 <div className="flex justify-center space-x-2 max-w-md mx-auto mb-12 md:mb-20">
                     <Chip
                         size="md"
-                        onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
+                        onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 1000000)}
                         active={currentPlanType === SELF_HOSTED_PLAN}
                     >
                         Self-hosted
                     </Chip>
                     <Chip
                         size="md"
-                        onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
+                        onClick={(e) => setPlanType(CLOUD_PLAN, 1000000)}
                         active={currentPlanType === CLOUD_PLAN}
                     >
                         Cloud

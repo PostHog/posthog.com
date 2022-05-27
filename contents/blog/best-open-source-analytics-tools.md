@@ -45,6 +45,9 @@ PostHog Open Source is available under an MIT license. It offers a free version 
 
 <ArrayCTA />
 
+**Further reading:**
+- [The best open-source split testing tools](/blog/best-open-source-ab-testing-tools)
+
 ## 2. [Matomo](https://matomo.org/)
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 

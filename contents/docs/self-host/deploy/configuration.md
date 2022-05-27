@@ -13,6 +13,7 @@ By default, the chart installs the following dependencies:
 
 - [altinity/clickhouse-operator](https://github.com/Altinity/clickhouse-operator/)
 - [bitnami/kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka)
+- [bitnami/minio](https://github.com/bitnami/charts/tree/master/bitnami/minio)
 - [bitnami/postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 - [bitnami/redis](https://github.com/bitnami/charts/tree/master/bitnami/redis)
 - [bitnami/zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper)
@@ -230,6 +231,20 @@ clickhouse:
 Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operations/settings/).
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
+
+
+### [MinIO](../runbook/minio/)
+
+By default, `MinIO` is not installed as part of the chart. If you want to enable it, please set `minio.enabled` to `true`.
+
+MinIO provide a scalable, S3 compatible object storage system. You can customize all its settings by overriding `values.yaml` variables in the `minio` namespace.
+
+Note: please override the default user authentication by either passing `auth.rootUser` and `auth.rootPassword` or `auth.existingSecret`.
+
+#### Use an external service
+To use an external S3 like/compatible object storage, please set `minio.enabled` to `false` and then configure the `externalObjectStorage` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [MinIO chart](https://github.com/bitnami/charts/tree/master/bitnami/minio) for full configuration options._
 
 
 ### [PostgreSQL](../runbook/postgresql/)

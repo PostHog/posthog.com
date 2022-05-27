@@ -27,6 +27,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `TRUSTED_PROXIES`          | Specifies the IPs of proxies that can be trusted.                                                 | `None`
 | `TRUST_ALL_PROXIES`        | Determines if all proxies can be trusted.                                                         | `False`
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
+| `SKIP_SERVICE_VERSION_REQUIREMENTS`| Set this to True if you want to disable checking for dependent service version requirements.       | `False`
 | `ACTION_EVENT_MAPPING_INTERVAL_SECONDS`| Specify how often (in seconds) PostHog should run a job to match events to actions.       | `300`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`

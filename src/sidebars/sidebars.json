@@ -616,6 +616,24 @@
                             "url": "/docs/self-host/runbook",
                             "children": [
                                 {
+                                    "name": "Async migrations",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/configure/async-migrations/overview"
+                                        },
+                                        {
+                                            "name": "0002_events_sample_by",
+                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+                                        },
+                                        {
+                                            "name": "0003_fill_person_distinct_id2",
+                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
+                                },
+                                {
                                     "name": "Upgrading PostHog",
                                     "url": "/docs/self-host/configure/upgrading-posthog",
                                     "children": [
@@ -674,6 +692,11 @@
                                     ]
                                 },
                                 {
+                                    "name": "MinIO",
+                                    "url": "/docs/self-host/runbook/minio",
+                                    "children": []
+                                },
+                                {
                                     "name": "PostgreSQL",
                                     "url": "/docs/self-host/runbook/postgresql",
                                     "children": [
@@ -692,24 +715,6 @@
                                     "name": "Zookeeper",
                                     "url": "/docs/self-host/runbook/zookeeper",
                                     "children": []
-                                },
-                                {
-                                    "name": "Async migrations",
-                                    "url": "",
-                                    "children": [
-                                        {
-                                            "name": "Overview",
-                                            "url": "/docs/self-host/configure/async-migrations/overview"
-                                        },
-                                        {
-                                            "name": "0002_events_sample_by",
-                                            "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
-                                        },
-                                        {
-                                            "name": "0003_fill_person_distinct_id2",
-                                            "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
-                                        }
-                                    ]
                                 }
                             ]
                         }
@@ -1118,7 +1123,7 @@
                     "url": "/docs/api/groups-types"
                 },
                 {
-                    "name": "Overview",
+                    "name": "Insights",
                     "url": "/docs/api/insights"
                 },
                 {

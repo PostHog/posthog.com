@@ -44,7 +44,7 @@ Next, Head to the Admin section -> Manage -> User Fields. Click Add Fields and f
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Currency Normalizer](https://github.com/PostHog/posthog-zendesk-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Zendesk Connector](https://github.com/PostHog/posthog-zendesk-plugin) is available on GitHub. 
 
 ### Who created this app?
 

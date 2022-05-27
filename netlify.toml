@@ -1428,3 +1428,7 @@
     from = "/docs/plugins/enabling"
     to = "/docs/apps/enabling"
 
+# Added: 2022-05-26
+[[redirects]]
+    from = "/support"
+    to = "/questions"

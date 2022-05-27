@@ -46,10 +46,10 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                                 </div>
 
                                 <PricingSlider
-                                    marks={[10000000, 20000000, 50000000, 100000000, 1000000000, 10000000000]}
-                                    min={10000000}
+                                    marks={[1000000, 10000000, 100000000, 1000000000, 10000000000]}
+                                    min={1000000}
                                     max={10000000000}
-                                    defaultValue={10000000}
+                                    defaultValue={1000000}
                                     pricingOption={'cloud-enterprise'}
                                 />
                             </div>
@@ -60,8 +60,12 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">First 10 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$3,000</dd>
+                                    <dt className="mb-0 opacity-75 text-xs">First 1 million (flat fee)</dt>
+                                    <dd className="mb-0 font-bold text-xs">$300</dd>
+                                </dl>
+                                <dl className="flex justify-between mb-0 p-2">
+                                    <dt className="mb-0 opacity-75 text-xs">1-10 million</dt>
+                                    <dd className="mb-0 font-bold text-xs">$0.0003</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>

@@ -40,7 +40,7 @@ export AWS_SESSION_TOKEN=example-session-token-as-in-previous-output
 unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKEN
 ```
 
-### Deploying Posthog
+### Deploying PostHog
 
 See docs [here](https://posthog.com/docs/self-host/deploy/aws).
 
@@ -53,7 +53,7 @@ Ask someone in the `#team-platform` Slack channel to add you. Anyone who has edi
 
 To give someone access: Navigate to [PostHog project IAM](https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&supportedpurview=project) and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
 
-### Deploying Posthog
+### Deploying PostHog
 
 See docs [here](https://posthog.com/docs/self-host/deploy/gcp).
 
@@ -64,7 +64,7 @@ See docs [here](https://posthog.com/docs/self-host/deploy/gcp).
 
 Ask in the `#team-platform` Slack channel for someone to add you. Anyone who is an owner can do so.
 
-To give someone access: Navigate to [Posthog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their Posthog email address.
+To give someone access: Navigate to [PostHog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their PostHog email address.
 
 ### Edit 1-Click app info
 
@@ -72,6 +72,6 @@ This can be done in the [vendor portal](https://cloud.digitalocean.com/vendorpor
 
 The code and setup files are in [digitalocean/marketplace-kubernetes repository](https://github.com/digitalocean/marketplace-kubernetes/tree/master/stacks/posthog).
 
-### Deploying Posthog
+### Deploying PostHog
 
 See docs [here](https://posthog.com/docs/self-host/deploy/digital-ocean).

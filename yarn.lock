@@ -22981,10 +22981,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
-squeak-react@^1.12.10:
-  version "1.12.10"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-1.12.10.tgz#21b755001a1647dacc88c657b89e880b9440d3b5"
-  integrity sha512-NWIr0RwJBLJD+qvP6aE9Nw4UB4xWcWZ12NyAzpG6LZru1jPmoowojna6ykW241V0Gzm3NDezx0XNgEbMjTAYQQ==
+squeak-react@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-1.14.0.tgz#cf2d39916c27dd3b1ead5c1d0c7655274c5b01b8"
+  integrity sha512-g38jW9yY3Vl48D1WB8JtgMcUVU2Jlko1UWLCFq9Fkyo3WOEqviFtrx6oAJtE6qbJan5vbVoHSrLyYn4VEc2ZbA==
   dependencies:
     "@supabase/supabase-js" "^1.31.2"
     formik "^2.2.9"

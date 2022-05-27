@@ -54,7 +54,7 @@ As we are fully remote, we provide [all equipment](/handbook/people/spending-mon
 
 If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access). 
 
-> If you are in the US, we have a WeWork discount via Brex. Please message Eltje or Charles to get a code. 
+> If you are in the US, we have a WeWork discount via Brex. Please message Grace to get a code. 
 
 ### Off-sites 
 
