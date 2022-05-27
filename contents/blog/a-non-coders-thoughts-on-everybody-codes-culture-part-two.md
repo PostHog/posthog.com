@@ -1,5 +1,5 @@
 ---
-date: 2022-05-30
+date: 2022-05-27
 title: A non-coders thoughts on ‘Everybody Codes’ - Part Two
 rootPage: /blog
 sidebar: Blog
