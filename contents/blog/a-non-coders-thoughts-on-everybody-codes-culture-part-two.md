@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
 ---
 
