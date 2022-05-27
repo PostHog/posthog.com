@@ -35,8 +35,9 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 - [AND/OR filtering](#new-and-or-filtering)
 - [Multi-dashboard insights](#new-multi-dashboard-insights)
 - [Universal Search](#new-universal-search)
-- [Full timezone support](#new-full-timezone-support)
+- [Timezone support for insights](#new-timezone-support-for-insights)
 - [Redesigned Funnels](#new-redesigned-funnels)
+- [A more accessible color palette](#improved-a-more-accessible-color-palette)
 - [Improved series switching in Persons](#improved-series-switching-in-persons)
 - [Improved color palette](#improved-color-palette)
 - [Improved preflight checks](#improved-preflight-checks)
@@ -44,45 +45,57 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 ### Changed: Plugins are now Apps
 
-TODO: Joe to explain why plugin are now apps and how bright the future is. https://posthog.com/apps
+You may have noticed that we recently changed the name of our plugins, essentially rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
+
+We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](apps/intercom)
 
 ### New: AND/OR filtering
 
-You've asked for more powerful filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
-
 <img src={AndOrFilteringImage} alt="AND/OR filters" style={{ width: 720 }} />
+
+A frequent request in [feedback calls](https://calendly.com/posthog-feedback) is for more powerful filtering options when creating insights. Specifically, for AND/OR filtering. Finally, we've delivered exactly that. 
+
+AND/OR operators can now be used in filters to mix and match conditions into new combinations and identify new sorts of user behaviour. We're still interested in any other requests you may have though, so why not [schedule a feedback call](https://calendly.com/posthog-feedback) and let us know your suggestions?
 
 ### New: Multi-dashboard insights
 
-Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. PostHog 1.36 allows you to simply add an insight to multiple dashboards. No hassle.
-
 <img src={InsightOnMultipleDashboardsImage} alt='"Add insight to dashboards" modal' style={{ width: 502 }} />
 
-### New: Universal Search
+Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. What a pain!
 
-Search for _anything_ within the current PostHog project from one place. That's Universal Search – the new power of the familiar "Search" box in the top bar.
+Now, thanks to PostHog 1.36, you can add a single insight to multiple dashboards at once. Now you don't need to worry about maintaining multiple insights and keeping all those copies in sync! Check [the dashboard docs](/docs/user-guides/dashboards) for more info. 
+
+### New: Universal search
 
 <img src={UniversalSearchImage} alt="Universal search box" style={{ width: 855 }} />
 
-### New: Full timezone support
+Ever struggled to find an old insight, event or cohort in your PostHog project? We've added universal search to the familiar "Search" box in the top navigation, so now you have one tool you can use to find _anything_ on PostHog. 
 
-PostHog project settings have included the Timezone setting since version 1.24. It's been helpful from the beginning, aiding manual conversion of dates and times shown in the app, but 1.36 takes it to the next level. All Insights queries now take the project timezone into account, resulting in more accurate results for projects using timezones other than UTC, particularly when grouping by day, week, or month.
+### New: Timezone support for insights
 
 <img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
 
-### New: Redesigned Funnels
+PostHog projects have included a timezone setting since [version 1.24](/blog/the-posthog-array-1-24-0), enabling you to manually convert dates and times show in the app. But 1.36 takes it to the next level.
 
-We've heard your feedback about Funnels taking up a bit much space and not being easy to read on dashboards. The redesigned interface addresses both points with style, making Funnels more useful than ever.
+As of 1.36, all insights queries take into account the timezone you've set in your Project Settings, enabling more accurate results for projects using timezones other than UTC. This is especially helpful when grouping data by day, week, or month!
+
+### New: Redesigned Funnels
 
 <img src={NewFunnelVizImage} alt="A three-step funnel in the new UI on the insight page" style={{ width: 970 }} />
 <br />
 <img src={NewFunnelVizDashboardImage} alt="A three-step funnel in the new UI on a dashboard" style={{ width: 696 }} />
 
-### Improved: More pleasant and accessible data colors
+Ever thought funnels on PostHog take up a bit too much space? Ever struggled to read longer funnels which are feature on a dashboard? You weren't the only one. That's why we redesigned them! 
 
-You'll notice an updated color palette in most Insights (specifically: Trends, Funnels, Retention, and Stickiness). It's more pleasing to the eye, but it's not just about aesthetics – accessibility is equally important, and the new scheme is simultaneously much more colorblind-friendly.
+The new interface addresses the feedback we've heard, making funnels easier to use and clearer than ever. Check [the Funnels docs](/docs/user-guides/funnels) for more information about what's possible with funnels! 
+
+### Improved: A more accessible color palette
 
 <img src={DataColorsImage} alt="A funnel with new data colors" style={{ width: 640 }} />
+
+Speaking of Funnels, you may have noticed we've updated the color palette in most Insights (specifically: [Trends](/docs/user-guides/funnels), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/Retention), and [Stickiness](/docs/user-guides/stickiness)). 
+
+The new color palette is more pleasing to the eye, but the change isn't just aesthetic. It's also much more accessible for colorblind users. We want to continue improving accessibility in PostHog, so if you have specific feedback on this topic then please [let us know in the Slack](/slack) or [create an issue](https://github.com/PostHog!
 
 ### Improved: Switch between series in the persons modal
 
