@@ -1,6 +1,6 @@
 ---
 date: 2022-05-26
-title: The 10 best open source analytics tools
+title: The 9 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -193,25 +193,6 @@ Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in busine
 
 ### Open source license
 Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. Check [the Grafana repo](https://github.com/grafana/grafana) for more info. 
-
-## 10. [Pirsch](https://pirsch.io/)
-![Pirsch - open source analytics tool](../images/blog/open-source-analytics-tools/pirsch-open-source-analytics.jpeg)
-
-Similar to Plausible Analytics, Pirsch is a lightweight analytics tool which describes itself as an alternative to Google Analytics. Like other tools in that category, it lacks advanced or enterprise features such as [Session Recording](/docs/user-guides/recordings), [Experimentation](/docs/user-guides/experimentation) or [Feature Flags](/docs/user-guides/feature-flags). 
-
-However, as a streamlined tool Pirsch does focus on some of the analytics queries which matter most to content teams and writers - such as tracking page views, time on page and UTM parameters. It also includes a filter system which is accessible for non-technical audiences, and a dark mode.
-
-### Who is Pirsch for?
-Like Plausible Analytics, Pirsch is focused on users who only need to track basic website metrics and don't need more powerful features. This makes it a good fit for bloggers and non-technical users, especially if they care about user privacy and want to avoid cookie banners across multiple sites. 
-
-### Strengths
-- No cookie banner needed
-- Automated email reports
-- Pricing based on pageviews
-- Easily track basic website metrics
-
-## Open source license
-Pirsch is completely open source, under a GNU AGPLv3 license. Pricing for the full version is based solely on pageviews, meaning it can be deployed across multiple sites at no extra cost. Check [the Pirsch repo](https://github.com/pirsch-analytics/pirsch) for more info. 
 
 > PostHog's product analytics suite has everything product-led teams need. Heatmaps, Recordings, Funnels, Feature Flags, Experimentation and more – all seamlessly integrated. You can self-host, so user data never leaves your infrastructure. 
 >
