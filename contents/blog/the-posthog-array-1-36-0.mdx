@@ -1,6 +1,6 @@
 ---
-date: 2022-05-30
-title: 'Array 1.36.0: TODO MAJOR FEATURES GO HERE'
+date: 2022-05-25
+title: 'Array 1.36.0: Introducing AND/OR filtering, timezone support and universal search'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.36.0 introduces TODO MAJOR FEATURES GO HERE
+excerpt: PostHog 1.36.0 introduces AND/OR filtering, timezone support, universal search, multi-dashboard insights and much, much more.
 ---
 
 import AndOrFilteringImage from '../images/blog/array/1-36-0-and-or-filtering.png'
@@ -31,13 +31,22 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 **Release highlights:**
 
--   TODO Joe to list highlights
+- [Plugins are now Apps](#changed-plugins-are-now-apps)
+- [AND/OR filtering](#new-and-or-filtering)
+- [Multi-dashboard insights](#new-multi-dashboard-insights)
+- [Universal Search](#new-universal-search)
+- [Full timezone support](#new-full-timezone-support)
+- [Redesigned Funnels](#new-redesigned-funnels)
+- [Improved series switching in Persons](#improved-series-switching-in-persons)
+- [Improved color palette](#improved-color-palette)
+- [Improved preflight checks](#improved-preflight-checks)
+- [Restack joins PostHog Marketplace](#new-restack-joins-the-posthog-marketplace)
 
 ### Changed: Plugins are now Apps
 
 TODO: Joe to explain why plugin are now apps and how bright the future is. https://posthog.com/apps
 
-### New: Filter groups - AND/OR
+### New: AND/OR filtering
 
 You've asked for more powerful filtering options. We deliver. Use new filter groups in Insights to match and mix conditions using AND/OR operators.
 
@@ -55,13 +64,13 @@ Search for _anything_ within the current PostHog project from one place. That's 
 
 <img src={UniversalSearchImage} alt="Universal search box" style={{ width: 855 }} />
 
-### New: Full timezone support in Insights
+### New: Full timezone support
 
 PostHog project settings have included the Timezone setting since version 1.24. It's been helpful from the beginning, aiding manual conversion of dates and times shown in the app, but 1.36 takes it to the next level. All Insights queries now take the project timezone into account, resulting in more accurate results for projects using timezones other than UTC, particularly when grouping by day, week, or month.
 
 <img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
 
-### New: Funnels redesign
+### New: Redesigned Funnels
 
 We've heard your feedback about Funnels taking up a bit much space and not being easy to read on dashboards. The redesigned interface addresses both points with style, making Funnels more useful than ever.
 
