@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpeg
+featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
 featuredImageType: full
 author: ["andy-vandervell", "joe-martin"]
 categories: ["Guides", "Open source", "Comparisons"]
