@@ -1,5 +1,5 @@
 ---
-date: 2022-05-26
+date: 2022-05-27
 title: The 9 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
