@@ -1433,7 +1433,6 @@
     from = "/support"
     to = "/questions"
 
-
 # Added: 2022-05-27
 [[redirects]]
     from = "/customers/why-i-ditched-mixpanel-for-posthog"
