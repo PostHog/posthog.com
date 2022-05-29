@@ -39,7 +39,7 @@ To create a Shopify Access Token, create an app on the admin page of your Shopif
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Shopify Connector app](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the Shopify Connector app](https://github.com/sreeo/posthog-shopify-sync-plugin) is available on GitHub. 
 
 ### Who created this app?
 
