@@ -31,7 +31,7 @@ Our original go to market plan was therefore a little like this:
 
 It took us until last Summer to get the open source product to feel successful. It became a lot less buggy, easier to deploy, much fuller featured and more scalable. As a result, we saw our inbound growth increasing and our retention improving.
 
-We then focussed on getting 5 reference customers. It turned out, we had to [Nail Funnels](new-vp-nailing-funnels) to do this.
+We then focused on getting 5 reference customers. It turned out, we had to [Nail Funnels](new-vp-nailing-funnels) to do this.
 
 ## What changed?
 
