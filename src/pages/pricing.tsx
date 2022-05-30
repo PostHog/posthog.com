@@ -52,7 +52,7 @@ const PricingNew = (): JSX.Element => {
                 }
                 quote={
                     <span>
-                        Posthog is the first analytics platform where{' '}
+                        PostHog is the first analytics platform where{' '}
                         <span className="text-red">I can be 100% confident in the data.</span> I've finally got the data
                         insight platform I've always wanted as a Product person.
                     </span>
