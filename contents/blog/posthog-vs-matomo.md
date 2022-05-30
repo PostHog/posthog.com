@@ -228,7 +228,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
 
 ## Integrations and data sources
 
-Matomo doesn't offer many dedicated integrations for syncing data with other platforms, but its Tracking and Reporting APIs allow you to query a large range of parameters.
+Matomo doesn't offer many dedicated integrations for syncing data with other platforms, but its Tracking and Reporting APIs allow you to query a large range of parameters. It also offers a Google Analytics importer.
 
 In addition to extensive selection of dedicated integrations, PostHog [offers two APIs](/docs/api): a public API for pushing data into PostHog, and a private API for exporting data and performing various actions.
 
@@ -321,6 +321,11 @@ In addition to extensive selection of dedicated integrations, PostHog [offers tw
         	<td><strong>Import</strong></td>
         	<td></td>
         	<td></td>
+    	</tr>
+        <tr>
+        	<td>Google Analytics</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
         	<td>API</td>
