@@ -31,21 +31,21 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 **Release highlights:**
 
-- [Plugins are now Apps](#changed-plugins-are-now-apps)
-- [AND/OR filtering](#new-and-or-filtering)
-- [Multi-dashboard insights](#new-multi-dashboard-insights)
-- [Universal Search](#new-universal-search)
-- [Timezone support for insights](#new-timezone-support-for-insights)
-- [Redesigned Funnels](#new-redesigned-funnels)
-- [A more accessible color palette](#improved-a-more-accessible-color-palette)
-- [Improved series switching in Persons](#improved-series-switching-in-persons)
-- [Improved color palette](#improved-color-palette)
-- [Improved preflight checks](#improved-preflight-checks)
-- [Restack joins PostHog Marketplace](#new-restack-joins-the-posthog-marketplace)
+- Changed: [Plugins are now Apps](#changed-plugins-are-now-apps)
+- New: [AND/OR filtering](#new-and-or-filtering)
+- New: [Multi-dashboard insights](#new-multi-dashboard-insights)
+- New: [Universal Search](#new-universal-search)
+- New: [Timezone support for insights](#new-timezone-support-for-insights)
+- New: [Redesigned Funnels](#new-redesigned-funnels)
+- Improved: [A more accessible color palette](#improved-a-more-accessible-color-palette)
+- Improved: [Accessible color palette](#improved-a-more-accessible-color-palette)
+- Improved: [Improved series switching in Persons](#improved-series-switching-in-persons)
+- Improved: [Better preflight checks](#improved-preflight-checks)
+- News: [Restack joins PostHog Marketplace](#new-restack-joins-the-posthog-marketplace)
 
 ### Changed: Plugins are now Apps
 
-You may have noticed that we recently changed the name of our plugins, essentially rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
+You may have noticed that we recently changed the name of our plugins, rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
 
 We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](apps/intercom)
 
@@ -63,7 +63,7 @@ AND/OR operators can now be used in filters to mix and match conditions into new
 
 Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. What a pain!
 
-Now, thanks to PostHog 1.36, you can add a single insight to multiple dashboards at once. Now you don't need to worry about maintaining multiple insights and keeping all those copies in sync! Check [the dashboard docs](/docs/user-guides/dashboards) for more info. 
+Now, from PostHog 1.36 onwards, you can add a single insight to multiple dashboards at once. That means you don't need to worry about maintaining multiple insights and keeping all those copies in sync! Check [the dashboard docs](/docs/user-guides/dashboards) for more info. 
 
 ### New: Universal search
 
@@ -75,7 +75,7 @@ Ever struggled to find an old insight, event or cohort in your PostHog project? 
 
 <img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
 
-PostHog projects have included a timezone setting since [version 1.24](/blog/the-posthog-array-1-24-0), enabling you to manually convert dates and times show in the app. But 1.36 takes it to the next level.
+PostHog projects have included a timezone setting since [version 1.24](/blog/the-posthog-array-1-24-0), enabling you to manually convert dates and times shown in the app. But 1.36 takes it to the next level.
 
 As of 1.36, all insights queries take into account the timezone you've set in your Project Settings, enabling more accurate results for projects using timezones other than UTC. This is especially helpful when grouping data by day, week, or month!
 
@@ -93,7 +93,7 @@ The new interface addresses the feedback we've heard, making funnels easier to u
 
 <img src={DataColorsImage} alt="A funnel with new data colors" style={{ width: 640 }} />
 
-Speaking of Funnels, you may have noticed we've updated the color palette in most Insights (specifically: [Trends](/docs/user-guides/funnels), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/Retention), and [Stickiness](/docs/user-guides/stickiness)). 
+Speaking of design, you may have noticed we've updated the color palette in most Insights (specifically: [Trends](/docs/user-guides/funnels), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/Retention), and [Stickiness](/docs/user-guides/stickiness)). 
 
 The new color palette is more pleasing to the eye, but the change isn't just aesthetic. It's also much more accessible for colorblind users. We want to continue improving accessibility in PostHog, so if you have specific feedback on this topic then please [let us know in the Slack](/slack) or [create an issue](https://github.com/PostHog!
 
@@ -101,7 +101,7 @@ The new color palette is more pleasing to the eye, but the change isn't just aes
 
 <img src={MultiPointPersonsModalImage} alt="Switching between series in the persons modal" style={{ width: 621 }} />
 
-Thanks to the new series selector, the Persons modal is easier to use with multi-series Trends insights. In fact, you can now switch between series without ever having to close the window and quickly zoom in on particular user segments - just like in the GIF above!
+Thanks to the new series selector, the Persons modal is easier to use with multi-series Trends insights. In fact, you can now switch between series without ever having to close the window, quickly zooming in on particular user segments - just like in the GIF above!
 
 ### Improved: Preflight checks
 
@@ -123,7 +123,7 @@ When self-hosting PostHog, it's crucial that all components are up and running, 
 
 [Restack](https://posthog.com/marketplace/restack) is a platform for deployiong open-source software stacks on Kubernetes and is run by a team of open-source enthusiasts. It's a natural match for [the PostHog Marketplace](https://posthog.com/marketplace/), where we've steadily grown the number of businesses offering services and support over the last few months.
 
-Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console can ensure that deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii). Find out more in [the Marketplace, or head to [Restack's store listing for PostHog](https://www.restack.io/store/posthog) to find more great videos like the one above!
+Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console can ensure deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii). Find out more in [the Marketplace, or head to [Restack's store listing for PostHog](https://www.restack.io/store/posthog) to find more great videos like the one above!
 
 ### Other improvements & fixes
 
@@ -141,9 +141,9 @@ Version 1.36 also adds hundreds of other improvements and fixes, including...
 
 ### Deprecation and removal notices
 
--   For SAML admins: The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
--   For SAML admins: If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
--   For ~~plugin~~ app developers: `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` no longer are included. All apps available in our [App Store](https://posthog.com/apps) are compatible with this change. `processEvent` is unaffected.
+-   **For SAML admins:** The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+-   **For SAML admins:** If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
+-   **For ~~plugin~~ app developers:** `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` are no longer included. All apps available in our [App Store](https://posthog.com/apps) are compatible with this change. `processEvent` is unaffected.
 
 ## Give us your feedback
 
