@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Guides, Comparisons"]
+featuredImage: ../images/posthog-vs-matomo/posthog-vs-matomo.jpeg
+featuredImageType: full
+categories: ["Guides", "Comparisons"]
 author: ["andy-vandervell"]
 ---
 
@@ -30,7 +32,7 @@ In contrast, PostHog is a product analytics platform designed to show you what y
 Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while Experimentation is a no cost feature at [less than 1 million events per month](/pricing).
 
 ### 2. Seamless integration with modern data stacks
-PostHog is built to work seamlessly with your data stack. That means we offer data [import and export integrations with most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools (PagerDuty, Sentry), and more via the [PostHog App Store](/apps).
+PostHog is built to work seamlessly with your data stack. That means we offer data import and export integrations with [most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools (PagerDuty, Sentry), and more via the [PostHog App Store](/apps).
 
 ### 3. It's built for engineers
 PostHog is about giving engineering and product teams the tools they need to build better products. The core product analytics tools are part of this, but we go further by providing market-leading feature flag functionality, and integrating Session Recording so you can deploy one platform that does everything, rather than integrating multiple discrete tools into your stack.
@@ -138,19 +140,13 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
     	</tr>
     	<tr>
         	<td>Feature Flags</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>Retention tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Correlation Analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
@@ -161,7 +157,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td>Campaign tracking</td>
+        	<td>UTM tracking</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -175,12 +171,6 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
     	<tr>
         	<td>User profiles</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Activity logs</td>
-        	<td className="text-center">29 to 89 EUR pa</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
@@ -217,7 +207,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
     	<tr>
         	<td>Experimentation</td>
         	<td className="text-center">199 to 599 EUR pa</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
@@ -238,9 +228,9 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
 
 ## Integrations and data sources
 
-Matomo doesn't offer many dedicated integrations for syncing data with other platforms, but its Tracking and Reporting APIs allow you query a large range of parameters.
+Matomo doesn't offer many dedicated integrations for syncing data with other platforms, but its Tracking and Reporting APIs allow you to query a large range of parameters.
 
-In addition to extensive selection of integrations, PostHog [offers two APIs](/docs/api): a public API for pushing data into PostHog, and a private API for exporting data and performing various actions.
+In addition to extensive selection of dedicated integrations, PostHog [offers two APIs](/docs/api): a public API for pushing data into PostHog, and a private API for exporting data and performing various actions.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
