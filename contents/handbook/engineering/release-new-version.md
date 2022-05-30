@@ -83,18 +83,18 @@ The release manager is ultimately responsible for the timeline of the release. T
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
 
 ### Launch (day of the release)
-1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release is completely ready, some users may see the image on Docker Hub and update immediately.**
+1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**
   ```bash
   git tag -a [version] -m "Version [version]"
-  git push origin head --tags
+  git push --follow-tags
   ```
-1. [ ] Edit the [Helm Chart](https://github.com/PostHog/charts-clickhouse):
-    1. Bump `appVersion` to the latest app version (same number as on the Docker image).
-    1. Change the docker tag in [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) to point to the new tag (e.g. `release-1.29.0`).
-    1. Push the relevant changes and add the `bump-minor` label to the PR. **Do not merge until the latest version is built.** You can check that on [PostHog Docker](https://hub.docker.com/r/posthog/posthog/tags)
-1. [ ] Cherry-pick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) to make sure `master` is up-to-date.
-  1. [ ] Update the `versions.json` file and add the new release information (release name and release date). **Merging this to master will notify users that an update is available.**
-1. [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/CloudFront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version.
-1. [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
+1. [ ] Create a new [`charts-clickhouse`](https://github.com/PostHog/charts-clickhouse) branch named `bump-[version]` to update the Helm chart:
+    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `appVersion` to the new version.
+    1. In [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) update `image.default` to point to the new tag (i.e. `:release-[version]`).
+    1. In [`ALL_VALUES.md`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) update the default value of `image.default` to what you set in the previous step.
+    1. Push the relevant changes and create a PR. Add the `bump minor` label to the PR. **Do not merge until the `release-[version]` branch is built.** (You can see that [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release-))
+1. [ ] Create a new main repo (`posthog`) branch named `sync-[version]`. Cherry-pick the `release-[version]` commits updating `version.py` and `versions.json` into `sync-[version]` and create a PR to get them into `master`. **Merging this to master will notify users that an update is available.**
+1. [ ] Go to the [EWXT9O7BVDC2O](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version.
 1. [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array)
+1. [ ] Post a message on the PostHog Users Slack (community) in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 1. [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
