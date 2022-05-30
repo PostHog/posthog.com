@@ -1,4 +1,23 @@
-start of the sales dance.
+---
+date: 2022-06-01
+title: Why we adopted transparent enterprise pricing (and you should too)
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+categories: ["Inside PostHog"]
+author: ["simon-fisher", "andy-vandervell"]
+---
+
+> "I wonder how much this SaaS product costs to..."
+>
+> "Contact sales!"
+>
+> 😤
+
+Contact. Sales.
+
+Two words that embody everything we hate about modern SaaS products. And, when you see them, you know it's just the start of the sales dance.
 
 Even if you're deemed worthy enough for a sales rep to call you, it's likely you still won't find out the price until you've answered a _lot_ of questions.
 
