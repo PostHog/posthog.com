@@ -1282,3 +1282,32 @@
 [[redirects]]
     from = "/tutorials/free-hotjar-alternative"
     to = "/blog/best-open-source-session-replay-tools"
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/blog/why-i-ditched-google-analytics-for-posthog"
+    to = "/customers/why-i-ditched-mixpanel-for-posthog"
+
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/docs/apps/build/reference"
+    to = "/docs/plugins/build/reference"
+
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/docs/apps/build/types"
+    to = "/docs/plugins/build/types"
+
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/docs/apps/enabling"
+    to = "/docs/plugins/enabling"
+
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/product/correlation-analysis"
+    to = "/product/quantitative-analysis"
