@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpeg
+featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
 featuredImageType: full
 author: ["andy-vandervell", "joe-martin"]
 categories: ["Guides", "Open source", "Comparisons"]
@@ -343,7 +343,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 ## Strengths of PostHog
 
-![Posthog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 ### Hosting flexibility and privacy
 

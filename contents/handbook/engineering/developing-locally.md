@@ -76,18 +76,12 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install Postgres, Redis, ClickHouse, Kafka, MinIO and Zookeeper via Docker.
+In this step we will install ClickHouse, Kafka, MinIO, PostgreSQL, Redis and Zookeeper via Docker.
 
 First, run the services in Docker:
 
 ```bash
-# ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis object_storage
-docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis object_storage
-
-# x86 (amd64) systems
-docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis object_storage
-docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis object_storage
+docker compose -f docker-compose.dev.yml up clickhouse kafka object_storage db redis zookeeper
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -98,14 +92,15 @@ docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis 
 
 Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
 
-```
-# docker ps
-CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS        PORTS                                                                                            NAMES
-b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
-12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
-432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
-cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
-ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1
+```shell
+# docker ps                                                                                     NAMES
+CONTAINER ID   IMAGE                               COMMAND                  CREATED         STATUS          PORTS                                                                                            NAMES
+567a4bb735be   clickhouse/clickhouse-server:22.3   "/entrypoint.sh"         3 minutes ago   Up 24 seconds   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
+9dc22c70865d   bitnami/kafka:2.8.1-debian-10-r99   "/opt/bitnami/script…"   3 minutes ago   Up 24 seconds   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
+add6475ae0db   postgres:12-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
+6037fb28659b   minio/minio                         "sh -c 'mkdir -p /da…"   3 minutes ago   Up 24 seconds   9000/tcp, 0.0.0.0:19000-19001->19000-19001/tcp                                                   posthog-object_storage-1
+d80a9304f4a7   zookeeper:3.7.0                     "/docker-entrypoint.…"   3 minutes ago   Up 24 seconds   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
+d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1                                                                       posthog-redis-1
 
 # docker logs posthog-db-1 -n 1
 2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
