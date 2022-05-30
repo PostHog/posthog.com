@@ -1437,3 +1437,8 @@
 [[redirects]]
     from = "/customers/why-i-ditched-mixpanel-for-posthog"
     to = "/blog/why-i-ditched-google-analytics-for-posthog"
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/handbook/company/1-1s"
+    to = "/handbook/company/management"
