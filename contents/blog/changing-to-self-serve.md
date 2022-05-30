@@ -26,7 +26,7 @@ The game we're playing isn't to please C-level executives or procurement - we wa
 Our original go to market plan was therefore a little like this:
 
 1. get our open source project to product market fit
-1. get a paid mid-size (~$20K-$40K a year) product to product market fit
+1. get a paid mid-size (at the time, ~$20K-$40K a year) product to product market fit
 1. get a paid large-size ($200K+ a year) product to product market fit
 
 It took us until last Summer to get the open source product to feel successful. It became a lot less buggy, easier to deploy, much fuller featured and more scalable. As a result, we saw our inbound growth increasing and our retention improving.
@@ -35,7 +35,7 @@ We then focussed on getting 5 reference customers. It turned out, we had to [Nai
 
 ## What changed?
 
-Things went much better than we thought. For the last 6 months, our paid products have averaged 20% month over month revenue growth - that's an 8.9x increase per year (for context - [3x is considered great](https://twitter.com/nimaroohis/status/1525970172237991939?s=21&t=qzYbxjpPbHlPZ7Xjus_PUA)). 
+Things went much better than we thought. For the last 6 months, our paid products have averaged 20% month over month revenue growth - that's an 8.9x increase per year (for context - [3x is considered great](https://twitter.com/nimaroohis/status/1525970172237991939?s=21&t=qzYbxjpPbHlPZ7Xjus_PUA), and [Lenny's Newsletter breaks this out in more detail](https://www.lennysnewsletter.com/p/what-is-a-good-growth-rate?s=r)). 
 
 Three things combined caused this:
 
@@ -53,7 +53,9 @@ So we should do more of what's working.
 
 For product, this means:
 
-* 
+* Quality: Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
+* Self Service Subscription: Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
+* Deployments: PostHog is the easiest self-hosted product to deploy and scale in the world
 
 For go to market, this means:
 
@@ -61,10 +63,12 @@ For go to market, this means:
 * Marketing: Accelerate word of mouth growth
 * Website and Docs: Make community self serve (for example, [make our _docs_](https://squeak.posthog.com) rather than Slack the main support channel)
 
-## What do we think the future holds?
+## A snapshot of the view future
 
 Today, we're very good at serving large mid market B2B companies who can buy quickly (through self serving).
 
+I suspect we'll focus on B2C after the above is completed. From customer calls, it feels like this is how we'll go from landing $20k-$70k customers in a couple of weeks to $100k to $300k customers in the same, short time frame. It's much _more_ appealing to do this, than to sell to B2B Enterprises that'll take months or years to purchase from us.
 
+We already have plenty of (paying) customers in B2C, but to focus on it, would require stronger mobile support, greater scalability still and a suitable pricing model so we capture the right amount of value.
 
-We think the future of our revenue will come from enterprise.
+Long term, we think the future of our revenue will come from large enterprise. We're a natural fit - data control, consolidating multiple vendors, and complete extensibility. However, we want to avoid _needing_ to go through complex purchasing decisions whilst there are easier ways to increase our numbers.
