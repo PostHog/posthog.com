@@ -23,9 +23,9 @@ import MultiPointPersonsModalImage from '../images/blog/array/1-36-0-multi-point
 
 Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](/newsletter), which we send once every two weeks!
 
-## PostHog 1.36.0 release notes
-
 > Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/self-host/configure/upgrading-posthog).
+
+## PostHog 1.36.0 release notes
 
 **Release highlights:**
 
@@ -45,7 +45,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 You may have noticed that we recently changed the name of our plugins, rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
 
-We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](apps/intercom)
+We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](apps/intercom). Enjoy!
 
 ### New: AND/OR filtering
 
@@ -56,8 +56,9 @@ A frequent request in [feedback calls](https://calendly.com/posthog-feedback) is
 AND/OR operators can now be used in filters to mix and match conditions into new combinations and identify new sorts of user behaviour. We're still interested in any other requests you may have though, so why not [schedule a feedback call](https://calendly.com/posthog-feedback) and let us know your suggestions?
 
 ### New: Multi-dashboard insights
-
+<div style="text-align: center;">
 <img src={InsightOnMultipleDashboardsImage} alt='"Add insight to dashboards" modal' style={{ width: 502 }} />
+</div>
 
 Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. What a pain!
 
@@ -70,8 +71,9 @@ Now, from PostHog 1.36 onwards, you can add a single insight to multiple dashboa
 Ever struggled to find an old insight, event or cohort in your PostHog project? We've added universal search to the familiar "Search" box in the top navigation, so now you have one tool you can use to find _anything_ on PostHog. 
 
 ### New: Timezone support for insights
-
+<div style="text-align: center;">
 <img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
+</div>
 
 PostHog projects have included a timezone setting since [version 1.24](/blog/the-posthog-array-1-24-0), enabling you to manually convert dates and times shown in the app. But 1.36 takes it to the next level.
 
@@ -80,10 +82,8 @@ As of 1.36, all insights queries take into account the timezone you've set in yo
 ### New: Redesigned Funnels
 
 <img src={NewFunnelVizImage} alt="A three-step funnel in the new UI on the insight page" style={{ width: 970 }} />
-<br />
-<img src={NewFunnelVizDashboardImage} alt="A three-step funnel in the new UI on a dashboard" style={{ width: 696 }} />
 
-Ever thought funnels on PostHog take up a bit too much space? Ever struggled to read longer funnels which are feature on a dashboard? You weren't the only one. That's why we redesigned them! 
+Ever thought funnels on PostHog take up a bit too much space? Ever struggled to read longer funnels which are featured on a dashboard? You weren't the only one. That's why we redesigned them! 
 
 The new interface addresses the feedback we've heard, making funnels easier to use and clearer than ever. Check [the Funnels docs](/docs/user-guides/funnels) for more information about what's possible with funnels! 
 
@@ -93,11 +93,12 @@ The new interface addresses the feedback we've heard, making funnels easier to u
 
 Speaking of design, you may have noticed we've updated the color palette in most Insights (specifically: [Trends](/docs/user-guides/funnels), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/Retention), and [Stickiness](/docs/user-guides/stickiness)). 
 
-The new color palette is more pleasing to the eye, but the change isn't just aesthetic. It's also much more accessible for colorblind users. We want to continue improving accessibility in PostHog, so if you have specific feedback on this topic then please [let us know in the Slack](/slack) or [create an issue](https://github.com/PostHog!
+The new color palette is more pleasing to the eye, but the change isn't just aesthetic. It's also much more accessible for colorblind users. We want to continue improving accessibility in PostHog, so if you have specific feedback on this topic then please [let us know in the Slack](/slack) or [create an issue](https://github.com/PostHog)!
 
 ### Improved: Switch between series in the persons modal
-
+<div style="text-align: center;">
 <img src={MultiPointPersonsModalImage} alt="Switching between series in the persons modal" style={{ width: 621 }} />
+</div>
 
 Thanks to the new series selector, the Persons modal is easier to use with multi-series Trends insights. In fact, you can now switch between series without ever having to close the window, quickly zooming in on particular user segments - just like in the GIF above!
 
@@ -132,7 +133,7 @@ Version 1.36 also adds hundreds of other improvements and fixes, including...
 -   **Improved**: Large numbers are now presented with the comma as the thousands separator in Insights, greatly improving readability. [#9725](https://github.com/PostHog/posthog/pull/9725) [#9733](https://github.com/PostHog/posthog/pull/9733)
 -   **Improved**: Properties table column sizing has been made smarter, making them scale better for various contents of properties. [#9502](https://github.com/PostHog/posthog/pull/9502)
 -   **Fixed**: User Paths with start/end points containing trailing slashes work now. It's also been made impossible to unselect all event categories for a more intuitive experience. [#9482](https://github.com/PostHog/posthog/pull/9482)
--   **Fixed**: Trends insight displayed as a table can be sorted indepentently on dashboards. [#9625](https://github.com/PostHog/posthog/pull/9625)
+-   **Fixed**: Trends insight displayed as a table can be sorted independently on dashboards. [#9625](https://github.com/PostHog/posthog/pull/9625)
 -   **Fixed**: Custom series names are included in CSV exports. [#9677](https://github.com/PostHog/posthog/pull/9677)
 -   **Fixed**: Automatic provisioning of PostHog users logging in with SSO has been made more reliable. For instance, users who first logged-in _before_ automatic provisioning was turned on for the organization, will be automatically added to it when they log in again. [#9515](https://github.com/PostHog/posthog/pull/9515)
 -   **Fixed**: The UI again always shows the correct active license. [#9575](https://github.com/PostHog/posthog/pull/9575)
