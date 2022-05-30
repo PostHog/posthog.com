@@ -230,7 +230,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-posthog`,
             options: {
-                // Specify the API key for your Posthog Project (required)
+                // Specify the API key for your PostHog project (required)
                 apiKey: process.env.GATSBY_POSTHOG_API_KEY,
                 // Specify the API host (http://app.posthog.com/ unless in development)
                 apiHost: process.env.GATSBY_POSTHOG_API_HOST,

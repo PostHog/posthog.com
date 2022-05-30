@@ -609,12 +609,6 @@
     from = "/signup"
     to = "/pricing"
 
-# Added: 2021-07-21
-# Not due to a rename, but to improve the website's navigation experience
-[[redirects]]
-    from = "/product-features"
-    to = "/product"
-
 # Added: 2021-07-28
 [[redirects]]
     from = "/docs/self-host/deploy/render"
@@ -1434,7 +1428,17 @@
     from = "/docs/plugins/enabling"
     to = "/docs/apps/enabling"
 
+# Added: 2022-05-26
+[[redirects]]
+    from = "/support"
+    to = "/questions"
+
 # Added: 2022-05-27
 [[redirects]]
-    from = "/blog/why-i-ditched-google-analytics-for-posthog"
-    to = "/customers/why-i-ditched-mixpanel-for-posthog"
+    from = "/customers/why-i-ditched-mixpanel-for-posthog"
+    to = "/blog/why-i-ditched-google-analytics-for-posthog"
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/handbook/company/1-1s"
+    to = "/handbook/company/management"

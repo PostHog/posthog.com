@@ -1,26 +1,26 @@
 ---
-date: 2022-04-21
+date: 2022-05-27
 title: The 9 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin"]
+author: ["joe-martin", "andy-vandervell"]
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 categories: ["Guides", "Open source"]
 ---
 
-Most well-known analytics tools demand hefty price tags, and they own your data. This is bad news for early-stage startups, or anyone who cares about user privacy. Thankfully, open source analytics tools are better, and more numerous, than ever before.
+Most well-known analytics tools demand hefty price tags, and they own your data. This is bad news for early-stage startups, or anyone who cares about user privacy. Thankfully, open-source analytics tools are better, and more numerous, than ever before.
 
 Most open source alternatives to the likes of Google Analytics, Amplitude, or Mixpanel are either free, or significantly cheaper. They also allow you to modify and extend them however you wish.
 
-Here, we’ve selected some of the best open source analytics tools across a range of categories, including big data platforms, specialized web analytics tools, and all-in-one platforms like PostHog.
+Here, we’ve selected some of the best open-source analytics tools across a range of categories, including big data platforms, specialized web analytics tools, A/B testing tools, and all-in-one platforms like PostHog.
 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - best open source analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-PostHog is an all-in-one open source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, path analysis, heat maps, and more - it's also one of the [best open source session recording tools](/blog/best-open-source-session-replay-tools) around. 
+PostHog is an all-in-one open-source analytics platform that offers all the essential tools you need to build better products, including funnels, feature flags, path analysis, A/B testing, heat maps, and more – it's also one of the [best open source session recording tools](/blog/best-open-source-session-replay-tools) around. 
 
 It’s entirely self-serve, with the ability to auto-capture event information out of the box. The interface makes querying your data a breeze, with no SQL required. 
 
@@ -29,7 +29,7 @@ Best of all, PostHog can be self-hosted on your existing infrastructure — maki
 Of course, we _would_ say PostHog is great, but if you need convincing then you can [get started for free](/pricing) and decide for yourself. You can self-host, but [PostHog Cloud is free up to 1 million events per month](/pricing#cloud) if you'd prefer a fully-managed experience.
 
 ### Who is PostHog for?
-PostHog is ideal for companies that are focused on building a more successful product. It is especially useful for those that need to stay in control of their data, and who want an all-in-one platform instead of piecing together multiple tools. It is primarily designed for engineering, data science, and product teams.
+PostHog is ideal for engineering, data science, and product teams. As an all-in-one platform, it combines the functionality of traditional product analytics platforms with tools like Feature Flags, Session Recording and A/B testing, making it ideal for teams who want a complete view of their product without the hassle of running multiple separate tools.
 
 ### Strengths
 - All-in-one analytics suite
@@ -41,7 +41,7 @@ PostHog is ideal for companies that are focused on building a more successful pr
 - Unlimited ability to scale 
 
 ### Open source license
-PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for big data analytics and large volumes of data. Find out more about [self-hosting PostHog](/pricing).
+PostHog Open Source is available under an MIT license. It offers a free version that’s great for start-ups, as well as premium options for large event volumes. Find out more about [self-hosting PostHog](/pricing).
 
 <ArrayCTA />
 
@@ -51,7 +51,7 @@ PostHog Open Source is available under an MIT license. It offers a free version 
 Matomo is an open source platform for web analytics, rather than a product analytics. That means it's great for understanding metrics such as pageviews or for planning keywords, but it lacks product analytics features such as session recording or feature flags. Nevertheless, it's an alternative to Google Analytics for users who want to protect user privacy. 
 
 ### Who is Matomo for?
-Matomo is intended for Marketing and Content teams who need to focus on SEO activities without losing control of their user data. It is suitable for both small and enterprise businesses.
+Matomo is intended for marketing and content teams who need to focus on SEO activities without losing control of their user data. It is suitable for both small and enterprise businesses.
 
 ### Strengths
 - Funnels, cohorts and acquisition analysis
@@ -61,12 +61,6 @@ Matomo is intended for Marketing and Content teams who need to focus on SEO acti
 
 ### Open source license
 Matomo is available under a AGPLv3 license. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
-
-**Further reading:**
-
-- An in-depth comparison of [PostHog vs Amplitude](/blog/posthog-vs-amplitude)
-- The [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
-- How to [achieve B2B product market fit](/blog/how-to-product-market-fit) 
 
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
@@ -96,8 +90,7 @@ Its session replay feature automatically captures events, and provides useful cl
 ### Who is OpenReplay for?
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It can be self-hosted for free, though a cloud version is available for $3.95 per 1,000 monthly recordings.
 
-### Strengths
-
+### Strengths
 - Privacy friendly
 - Useful error tracking and bug fixing features
 - Optimizing conversion and understanding user journeys
@@ -110,7 +103,7 @@ OpenReplay is available under the ELv2 license [via its repo](https://github.com
 
 Like Matomo, Plausible Analytics is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is compliant with regulations such as GDPR. 
 
-Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting.
+Unlike Matomo, Plausible is a very streamlined tool rather than a full-blown Google Analytics alternative. As a result it is a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 ### Who is Plausible Analytics for?
 Plausible is intended for Marketing and Content teams who need to focus on specific SEO metrics. It's designed for use in small to medium businesses or teams. 
@@ -121,12 +114,37 @@ Plausible is intended for Marketing and Content teams who need to focus on speci
 - No cookies required, fully GDPR compliant out of the box 
 
 ### Open source license
-Plausible Analytics is available under a AGPLv3 license. Pricing depends on the amount of traffic, with a 30-day free trial available. Check [the Plausible Analytics repo on GitHub](https://github.com/plausible/analytics/) for more info. 
+Plausible Analytics is available under a AGPLv3 license. Pricing depends on the amount of traffic, with a 30-day free trial available. Check [the Plausible Analytics repo on GitHub](https://github.com/plausible/analytics/) for more info.
 
-## 6. [Apache Spark](https://spark.apache.org/)
+## 6. GrowthBook
+
+![GrowthBook - best open source analytics tools](../images/blog/open-source-testing-tools/growthbook.png)
+
+GrowthBook is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
+
+It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
+
+You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or a analytics tool like Mixpanel, but it lacks any additional analytics features.
+
+### Who is GrowthBook for?
+
+GrowthBook is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform. It can be self-hosted free-for-life, but there's a cloud option as well which is free for up to five seats, then $20 per seat per month thereafter.
+
+### Strengths
+- Multivariate feature flags
+- Support for Mixpanel JQL querying
+- A/B testing visual editor
+- Can be self-hosted
+- No performance impact
+
+### Open source license
+
+GrowthBook is distributed under an MIT license. Check the [GitHub repo](https://github.com/growthbook/growthbook) for more info.
+
+## 7. [Apache Spark](https://spark.apache.org/)
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
 
-Apache Spark is an open source analytics engine specifically focused on large-scale data analysis — or big data analytics, as it’s commonly known. It can run on a wide range of technologies, including Hadoop, Apache Mesos or Kubernetes, which makes it an incredibly versatile analytics option. 
+Apache Spark is an open-source analytics engine specifically focused on large-scale data analysis — or big data analytics, as it’s commonly known. It can run on a wide range of technologies, including Hadoop, Apache Mesos or Kubernetes, which makes it an incredibly versatile analytics option. 
 
 However, the focus on libraries such as SQL make Apache Spark difficult for non-technical users as support is provided solely by the community.
 
@@ -142,10 +160,10 @@ Apache Spark is a technical system intended for Data Engineers and Data Scientis
 ### Open source license
 Apache Spark is available under the Apache 2.0 license and is entirely free, via [the Apache Spark repo](https://github.com/apache/spark).
 
-## 7. [Metabase](https://www.metabase.com/)
+## 8. [Metabase](https://www.metabase.com/)
 ![Metabase - open source analytics tools](../images/blog/open-source-analytics-tools/metabase-screenshot.png)
 
-Metabase is one of the most popular open source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
+Metabase is one of the most popular open-source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 ### Who is Metabase for?
 Metabase has a drag-and-drop interface which makes it especially useful for less technical users or Marketing and Growth teams. It is suitable for businesses or teams of any size. It is not designed for product analytics - instead, it is focused on more general analytics.
@@ -159,7 +177,7 @@ Metabase has a drag-and-drop interface which makes it especially useful for less
 ### Open source license
 Metabase is available under a AGPL license. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Metabase repo](https://github.com/metabase/metabase) for more information. 
 
-## 8. [Grafana](https://grafana.com/products/cloud/) 
+## 9. [Grafana](https://grafana.com/products/cloud/) 
 ![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
 
 Grafana is more of a data observability platform than a pure open source analytics tool. This is due to the fact that it focuses on interactive visualization, providing a wide variety of charts, graphs and alerts which can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
@@ -176,25 +194,6 @@ Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in busine
 ### Open source license
 Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. Check [the Grafana repo](https://github.com/grafana/grafana) for more info. 
 
-## 9. [Pirsch](https://pirsch.io/)
-![Pirsch - open source analytics tool](../images/blog/open-source-analytics-tools/pirsch-open-source-analytics.jpeg)
-
-Similar to Plausible Analytics, Pirsch is a lightweight analytics tool which describes itself as an alternative to Google Analytics. Like other tools in that category, it lacks advanced or enterprise features such as [Session Recording](/docs/user-guides/recordings), [Experimentation](/docs/user-guides/experimentation) or [Feature Flags](/docs/user-guides/feature-flags). 
-
-However, as a streamlined tool Pirsch does focus on some of the analytics queries which matter most to content teams and writers - such as tracking page views, time on page and UTM parameters. It also includes a filter system which is accessible for non-technical audiences, and a dark mode.
-
-### Who is Pirsch for?
-Like Plausible Analytics, Pirsch is focused on users who only need to track basic website metrics and don't need more powerful features. This makes it a good fit for bloggers and non-technical users, especially if they care about user privacy and want to avoid cookie banners across multiple sites. 
-
-### Strengths
-- No cookie banner needed
-- Automated email reports
-- Pricing based on pageviews
-- Easily track basic website metrics
-
-## Open source license
-Pirsch is completely open source, under a GNU AGPLv3 license. Pricing for the full version is based solely on pageviews, meaning it can be deployed across multiple sites at no extra cost. Check [the Pirsch repo](https://github.com/pirsch-analytics/pirsch) for more info. 
-
-> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL. 
+> PostHog's product analytics suite has everything product-led teams need. Heatmaps, Recordings, Funnels, Feature Flags, Experimentation and more – all seamlessly integrated. You can self-host, so user data never leaves your infrastructure. 
 >
 >[Try PostHog for free today](/pricing) or [book a demo](/book-a-demo) to learn more. 
