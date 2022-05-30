@@ -195,7 +195,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
     	<tr>
         	<td>Multi-Channel Attribution</td>
         	<td className="text-center">79 to 229 EUR pa</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
@@ -393,7 +393,7 @@ Need feedback on a design change? Roll it out to internal users first to gather 
 
 ### Automatic event tracking
 
-PostHog and Matomo both support event tracking, but PostHog goes one step further by autocapturing events so you don't have to instrument every single thing before you start tracking it. This means you start capturing useful data from the moment you deploy PostHog, but it also makes rolling out updates much easier as you don't have to update your event instrumentation  
+PostHog and Matomo both support event tracking, but PostHog goes one step further by autocapturing events so you don't have to instrument every single thing before you start tracking it. This means you start capturing useful data from the moment you deploy PostHog, but it also makes rolling out updates much easier as you don't have to define your events each time. 
 
 ### Privacy compliance
 
