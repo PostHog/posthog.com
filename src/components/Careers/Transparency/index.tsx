@@ -91,8 +91,9 @@ export const Transparency = () => {
                         className="max-w-md mx-auto"
                     >
                         <p className="mb-0 text-base text-black font-lightish">
-                            We keep our team informed about fundraising and share a monthly report covering revenue,
-                            runway, and more. It's nice when you can see your hard work paying off (literally).
+                            We keep our team informed about fundraising during the process and share a monthly report
+                            covering revenue, runway, and more. It's nice when you can see your hard work paying off
+                            (literally).
                         </p>
                     </TransparencyFeature>
                 </div>
@@ -107,21 +108,33 @@ export const Transparency = () => {
                 </div>
             </div>
 
+            <Structure.Section width="4xl">
+                <Structure.SectionHeader
+                    title="Go big"
+                    titleClassName="text-4xl"
+                    titleTag="h2"
+                    leadText="Our mission is to increase the number of successful products in the world. 
+                    In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the standard devtool for building better products."
+                    leadTextClassName="opacity-80"
+                />
+            </Structure.Section>
             <div className="pb-16 px-4 md:px-0">
-                <h3 className="mb-8">Why transparency matters</h3>
+                <br />
+                <br />
+                <h3 className="mb-8">We look for people who are:</h3>
 
                 <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
                     <TransparencyMattersItem
-                        title="Trust"
-                        description="A fully remote environment only works when we all trust each other."
+                        title="Different"
+                        description="We look for adventurers. We're here to take a small company to IPO, and beyond. We won't get there if we all think like everyone else. We're not a fit if you want a predictable career. "
                     />
                     <TransparencyMattersItem
-                        title="Inclusivity"
-                        description="Sharing information means all of us can have a voice in PostHog's future."
+                        title="Individual contributors"
+                        description="We think it's more important to give autonomy, plenty of context, and to hire exceptional people, versus hand holding. We're not a fit if you want management responsibility."
                     />
                     <TransparencyMattersItem
-                        title="Growth"
-                        description="We enable everyone to make informed decisions about what they spend time on."
+                        title="Scrappy"
+                        description="Fast, low ego people thrive here. We're informal, we use simple words and get a broad variety of work done fast. We're not a fit if you want process."
                     />
                 </div>
             </div>

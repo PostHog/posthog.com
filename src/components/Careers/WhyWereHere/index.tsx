@@ -12,16 +12,16 @@ export const WhyWereHere = () => {
                             <div>
                                 <p>
                                     Until now, tools for building products have been fragmented. Product analytics,
-                                    heatmaps, session recording and A/B testing all provide immense value, but existing
-                                    tools weren’t natively built to work together.
+                                    heatmaps, session recording, feature flagging and A/B testing are all helpful, but
+                                    no one wants to buy, send data to, and integrate multiple products.
                                 </p>
                                 <p>
                                     PostHog is different by offering these tools (and more) in a single platform that
                                     you can host yourself.
                                 </p>
                                 <p>
-                                    We started PostHog as part of Y Combinator's W20 cohort and had the most successful
-                                    B2B software launch on Hacker News since 2012 - with a product that was just 4 weeks
+                                    We started PostHog during YCombinator's W20 cohort and had the most successful B2B
+                                    software launch on Hacker News since 2012 - with a product that was just 4 weeks
                                     old.
                                 </p>
                             </div>
@@ -39,13 +39,24 @@ export const WhyWereHere = () => {
                         <div className="mb-8 flex flex-col md:flex-row-reverse">
                             <div>
                                 <p>
-                                    We're proudly backed by some of the world's top investors and believe in product-led
-                                    growth, where we build something awesome and let our product bring the users, rather
-                                    than an outbound sales team and regular cold calls.
+                                    We now have over 10K customers, we're{' '}
+                                    <a href="http://www.paulgraham.com/aord.html">default alive</a>, we grow 97% through
+                                    word of mouth, and we've a{' '}
+                                    <a href="https://github.com/posthog/posthog">very popular repo</a>.
+                                </p>
+                                <p>
+                                    We believe in product-led growth, where we build something awesome and let our
+                                    product bring the users, rather than an outbound sales team and regular cold calls.
+                                </p>
+                                <p>
+                                    The company operates transparently - we've made our{' '}
+                                    <a href="/handbook">entire handbook</a> public-facing (and{' '}
+                                    <a href="https://github.com/posthog/posthog.com">world editable</a>!).
                                 </p>
                                 <p className="mb-0">
-                                    What does this mean for you? We have a lot of capital, but we're a lean, strong team
-                                    - so you've got the opportunity to have a huge impact.
+                                    What does this mean for you? We have a lot of capital (and from the world's best
+                                    investors), but we're a lean, strong team - so you've got the opportunity to have a
+                                    huge impact.
                                 </p>
                             </div>
 
