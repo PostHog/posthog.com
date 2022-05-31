@@ -68,7 +68,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="lg:!ml-auto md:text-base"
                         title="Support"
-                        url="/support"
+                        url="/questions"
                     />
                     <FooterMenuItem
                         marginBottom="0"
@@ -146,7 +146,6 @@ export function Footer(): JSX.Element {
                                         title="Issues"
                                         url="https://github.com/PostHog/posthog.com/issues"
                                     />
-                                    <FooterMenuItem title="Support" url="/support" />
                                     <FooterMenuItem
                                         title="Contact sales"
                                         url="/signup/self-host/get-in-touch#contact"

@@ -19,9 +19,9 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 Kinesis Records must be delivered in a JSON schema.
 
-You need to configure an `eventKey` that maps to the event name in Posthog. The `eventKey` can refer to a nested key. 
+You need to configure an `eventKey` that maps to the event name in PostHog. The `eventKey` can refer to a nested key. 
 
-You can optionally configure a comma-separated list of `additionalPropertyMappings`, that will map Kinesis Record keys to Posthog Event properties. The Kinesis Record keys can be nested keys, while the corresponding Posthog mapped keys cannot be nested.
+You can optionally configure a comma-separated list of `additionalPropertyMappings`, that will map Kinesis Record keys to PostHog Event properties. The Kinesis Record keys can be nested keys, while the corresponding PostHog mapped keys cannot be nested.
 
 For example, take the following Kinesis Record
 
@@ -47,7 +47,7 @@ additionalPropertyMappings = properties.userId:distinct_id,properties.foo:foo
 Will be parsed as:
 
 ```
-// Posthog Event
+// PostHog Event
 {
     "event": "my posthog event",
     "properties: {
@@ -74,7 +74,7 @@ GetRecords
 - `IAM Secret Access Key` (required): IAM Secret Access Key with Kinesis access
 - `AWS Region` (required): AWS region where your Kinesis stream is deployed
 - `Event Key (required): The Kinesis Record key to be mapped to the PostHog event name. Can be nested (e.g. `properties.eventName`)
-- `Additional Property Mappings`: A comma-separated mapping of additional Kinesis Record keys to map to Posthog event properties. Can be nested (e.g. `properties.kinesisPropertyKey:posthogPropertyKey`)
+- `Additional Property Mappings`: A comma-separated mapping of additional Kinesis Record keys to map to PostHog event properties. Can be nested (e.g. `properties.kinesisPropertyKey:posthogPropertyKey`)
 
 ### How do I install the Amazon Kinesis Import app for PostHog?
 
