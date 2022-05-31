@@ -107,7 +107,7 @@ It's still good value compared to other enterprise SaaS tools, especially consid
 
 Things move fast at PostHog. When I started writing this blog post, our Enterprise plans had transparent pricing but still required you to contact us to get started. Not anymore.
 
-You can now sign up for an Enterprise license yourself in a fully automated manner, so all our plans are not transparently-priced and self-serve.
+You can now sign up for an Enterprise license yourself in a fully automated manner, so all our plans are now transparently-priced and self-serve.
 
 If having SAML integration, project permissions and a whole lot of set up and ongoing help from us is for you, you can sign up for your [Enterprise license key](https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU) in just a few clicks.
 
