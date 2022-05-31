@@ -65,7 +65,7 @@ For go to market, this means:
 
 ## A snapshot of the view future
 
-Today, we're very good at serving large mid market B2B companies who can buy quickly (through self serving).
+Today, we're very good at serving large mid-market B2B companies who can buy quickly (through self serving).
 
 I suspect we'll focus on B2C after the above is completed. From customer calls, it feels like this is how we'll go from landing $20k-$70k customers in a couple of weeks to $100k to $300k customers in the same, short time frame. It's much _more_ appealing to do this, than to sell to B2B Enterprises that'll take months or years to purchase from us.
 
