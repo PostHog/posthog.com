@@ -72,3 +72,9 @@ I suspect we'll focus on B2C after the above is completed. From customer calls, 
 We already have plenty of (paying) customers in B2C, but to focus on it, would require stronger mobile support, greater scalability still and a suitable pricing model so we capture the right amount of value.
 
 Long term, we think the future of our revenue will come from large enterprise. We're a natural fit - data control, consolidating multiple vendors, and complete extensibility. However, we want to avoid _needing_ to go through complex purchasing decisions whilst there are easier ways to increase our numbers.
+
+_Did you enjoy this article? Get more like it in your inbox every two weeks_
+
+ <NewsletterForm
+compact
+/>
