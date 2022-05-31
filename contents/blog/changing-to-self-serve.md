@@ -45,7 +45,7 @@ Three things combined caused this:
 
 Then we noticed something else.
 
-Some customers are very fast (a couple of weeks, or less) to sell to, with minimal interaction, whereas others take months and are very intense. In fact, almost none of the customers that have put us through a big buying process have in fact converted to revenue yet.
+Some customers are very fast (a couple of weeks, or less) to sell to, with minimal interaction, whereas others take months and are very intense. In fact, almost none of the customers that have put us through a big buying process have converted to revenue yet.
 
 ## What does Nail Self Serve mean?
 
