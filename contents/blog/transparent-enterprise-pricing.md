@@ -35,7 +35,7 @@ It's all a colossal waste of time and energy that's better spent focusing on wha
 
 That's why, at PostHog, we've adopted transparent pricing and self-service for every paid plan, even PostHog Enterprise.
 
-> Simon Fisher leads customer success at PostHog. He's made a career out of helping companies automate stuff, including seven years at IBM and five years at Chef Software. He lives in the North West of England with his wife, three young boys, a black labrador, and a killer Lego collection. Seriously, it's sweet af.
+> Simon Fisher leads customer success at PostHog. He's made a career out of helping companies automate stuff, including seven years at IBM and five years at Chef Software. He lives in Sheffield in the North of England with his wife, three young boys, a black labrador, and a killer Lego collection. Seriously, it's sweet af.
 
 ## Why transparent pricing is important
 
