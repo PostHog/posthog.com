@@ -35,11 +35,13 @@ It's all a colossal waste of time and energy that's better spent focusing on wha
 
 That's why, at PostHog, we've adopted transparent pricing and self-service for every paid plan, even PostHog Enterprise.
 
+> Simon Fisher leads customer success at PostHog. He's made a career out of helping companies automate stuff, including seven years at IBM and five years at Chef Software. He lives in the North West of England with his wife, three young boys, a black labrador, and a killer Lego collection. Seriously, it's sweet af.
+
 ## Why transparent pricing is important
 
-For those who don't already know, PostHog is an all-in-one product analytics suite that replaces siloed tools for [product analytics](/product#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), and Experimentation. It's open source and you can host it yourself, giving you complete control over your data – we have a Cloud version too if that's your thing. 
+For those new to PostHog, it's an all-in-one product analytics suite that replaces siloed tools for [product analytics](/product#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), and Experimentation. It's open source and you can host it yourself, giving you complete control over your data – we have a Cloud version too if that's your thing. 
 
-As an open-source business, we put great value in transparency. We make our processes, policies, and team structure available for anyone to read in our [company handbook](/handbook), and the vast majority of our comms is visible for anyone to read on [our GitHub repo](https://github.com/PostHog/posthog/issues).
+As an open-source business, we put great value in transparency. We make our processes, policies, team structure – even [how we pay people](/handbook/people/compensation) – available for anyone to read in our [company handbook](/handbook), and the vast majority of our comms is visible for anyone to read on [our GitHub repo](https://github.com/PostHog/posthog/issues).
 
 This philosophy extends to transparent pricing and our self-serve model. 
 
@@ -49,13 +51,13 @@ Self-service, meanwhile, makes it easy for customers to get up and running as qu
 
 That's why we made our core paid plans totally self-serve and free up to 1 million events per month, with the "per event" price decreasing as usage increases, as you can see below.
 
-[SCREENSHOT HERE]
+![PostHog pricing calc](../images/enterprise-pricing-blog/pricing-calc.png)
 
 This model has worked incredibly well for us. 
 
 It's taken us from nothing to significant revenue, and healthy growth, in less than two years without any outbound sales. 
 
-[GROWTH GRAPH HERE]
+![PostHog's revenue going sharply up and to the right](../images/blog/pricing-lesson/revenue-pricing.png)
 
 Our customer success team works hard to help new and potential customers get what they need from PostHog, but we don't cold email companies or spend time chasing specific customers.
 
@@ -113,4 +115,9 @@ If having SAML integration, project permissions and a whole lot of set up and on
 
 Our final hurdle is to make it so Scale and Cloud users can upgrade to Enterprise themselves without our intervention. It's coming soon.
 
-If all this talk of self-serving and automation isn't for you then don't worry – you can still always [contact sales](/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#contact). We love hearing from our customers, but it should be your choice when you do.
+If all this talk of self-serving and automation isn't for you then don't worry – you can still always [contact sales](/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#contact). We love hearing from our customers, but it's your choice when you do.
+
+_Did you enjoy this article? Get more like it in your inbox every two weeks_
+ <NewsletterForm
+compact
+/>
