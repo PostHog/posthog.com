@@ -29,7 +29,7 @@ Our original go to market plan was therefore a little like this:
 1. get a paid mid-size (at the time, ~$20K-$40K a year) product to product market fit
 1. get a paid large-size ($200K+ a year) product to product market fit
 
-It took us until last Summer to get the open source product to feel successful. It became a lot less buggy, easier to deploy, much fuller featured and more scalable. As a result, we saw our inbound growth increasing and our retention improving.
+It took us until last Summer to get the open source product to feel successful. It became less buggy, easier to deploy, better featured and more scalable. As a result, we saw our inbound growth increasing and our retention improving.
 
 We then focused on getting 5 reference customers. It turned out, we had to [Nail Funnels](new-vp-nailing-funnels) to do this.
 
