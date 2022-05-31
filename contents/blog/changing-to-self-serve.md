@@ -53,9 +53,9 @@ So we should do more of what's working.
 
 For product, this means:
 
-* Quality: Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
-* Self Service Subscription: Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
-* Deployments: PostHog is the easiest self-hosted product to deploy and scale in the world
+* **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
+* **Self-Service Subscription:** Customers of every size sign-up, start using and [subscribe to PostHog without asking us for help](/blog/transparent-enterprise-pricing)
+* **Deployments:** PostHog is the easiest self-hosted product to deploy and scale in the world
 
 For go to market, this means:
 
