@@ -29,7 +29,7 @@ In contrast, PostHog is a product analytics platform designed to show you what y
 ## How is PostHog different from Matomo?
 
 ### 1. It's an all-in-one product analytics platform
-Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while Experimentation is a no cost feature at [less than 1 million events per month](/pricing).
+Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while [Experimentation](/product/experimentation-suite) is [available for no cost up to 1 million events per month](/pricing).
 
 ### 2. Seamless integration with modern data stacks
 PostHog is built to work seamlessly with your data stack. That means we offer data import and export integrations with [most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools (PagerDuty, Sentry), and more via the [PostHog App Store](/apps).
@@ -47,7 +47,7 @@ Matomo On-Premise ships with a robust set of core web analytics features, while 
 
 All features in PostHog Open Source are totally free, including core product analytics tools. 
 
-PostHog Scale is a paid edition that adds Experimentation, Group Analytics, support for multiple projects, and numerous team management tools. It's priced on a per event basis and is free up to 1 million events per month.
+PostHog Scale is a paid edition that adds [Experimentation](/product/experimentation-suite), [Group Analytics](/docs/user-guides/group-analytics), support for multiple projects, and numerous team management tools. It's priced on a per event basis and is free up to 1 million events per month.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -85,7 +85,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
    		</tr>
     	<tr>
-        	<td>Custom plugins</td>
+        	<td>Custom apps</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -151,19 +151,13 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td>Content tracking</td>
+        	<td>Unique user and pageview tracking</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>UTM tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>User tracking</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -193,7 +187,7 @@ PostHog Scale is a paid edition that adds Experimentation, Group Analytics, supp
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-        	<td>Multi-Channel Attribution</td>
+        	<td>Multi-Channel attribution</td>
         	<td className="text-center">79 to 229 EUR pa</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
@@ -293,11 +287,6 @@ In addition to extensive selection of dedicated integrations, PostHog [offers tw
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
-        	<td>Salesforce</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
         	<td>Sentry</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -391,6 +380,8 @@ Feature Flags are at the core what makes PostHog a great tool for product-lead b
 
 Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
+Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. The combination of [Feature Flags](product/feature-flags) and product analytics gives developers a complete toolset to do great things.
+
 ### Automatic event tracking
 
 PostHog and Matomo both support event tracking, but PostHog goes one step further by autocapturing events so you don't have to instrument every single thing before you start tracking it. This means you start capturing useful data from the moment you deploy PostHog, but it also makes rolling out updates much easier as you don't have to define your events each time. 
@@ -399,7 +390,7 @@ PostHog and Matomo both support event tracking, but PostHog goes one step furthe
 
 Self-hosting PostHog means data never leaves your infrastructure, which makes protecting user privacy a breeze. GDPR and HIPAA compliance are vastly simplified this way, and you can go one step further by [running PostHog without any cookies](/docs/integrate/client/js#persistence) and therefore without the need for cookie banners.
 
-## Strengths Matomo
+## Strengths of Matomo
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
