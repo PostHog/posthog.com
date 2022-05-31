@@ -13,7 +13,7 @@ featuredImageType: full
 
 The longer your strategy gets, the more useless it becomes.
 
-At PostHog, we therefore communicate strategy as 'Nail X', where X is the thing we need to nail. It's simple and effective.
+That's why, at PostHog, we communicate strategy as 'Nail X', where X is the thing we need to nail. It's simple and effective.
 
 We [recently switched](https://github.com/PostHog/posthog.com/pull/3395) from Nail Enterprise to Nail Self Serve. This walks you through the previous context, and why we made that change.
 
