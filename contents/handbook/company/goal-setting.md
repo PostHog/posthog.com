@@ -24,6 +24,7 @@ Use this template:
 ## March/June/September/December 202x goals
 
 1. PostHog in the EU
+Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
 Key results
   - 100 customers using EU cloud
   - 99% uptime
