@@ -59,9 +59,9 @@ For product, this means:
 
 For go to market, this means:
 
-* Customer Success: Focus on time to revenue (for example, one of our Customer Success team's key results is volume of deals in our target range per week - rather than trying to hit an overall revenue figure)
-* Marketing: Accelerate word of mouth growth
-* Website and Docs: Make community self serve (for example, [make our _docs_](https://squeak.posthog.com) rather than Slack the main support channel)
+* **Customer Success:** Focus on time to revenue (for example, one of our Customer Success team's key results is volume of deals in our target range per week - rather than trying to hit an overall revenue figure)
+* **Marketing:** Accelerate word of mouth growth
+* **Website and Docs:** Make community self serve (for example, [make our _docs_](https://squeak.posthog.com) rather than Slack the main support channel)
 
 ## A snapshot of the view future
 
