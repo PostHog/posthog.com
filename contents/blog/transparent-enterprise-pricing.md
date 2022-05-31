@@ -109,7 +109,7 @@ Things move fast at PostHog. When I started writing this blog post, our Enterpri
 
 You can now sign up for an Enterprise license yourself in a fully automated manner, so all our plans are not transparently-priced and self-serve.
 
-If having SAML integration, project permissions and a whole lot of set up and ongoing help from us is for you, you can sign up for your [Enterprise license key](https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU).
+If having SAML integration, project permissions and a whole lot of set up and ongoing help from us is for you, you can sign up for your [Enterprise license key](https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU) in just a few clicks.
 
 Our final hurdle is to make it so Scale and Cloud users can upgrade to Enterprise themselves without our intervention. It's coming soon.
 
