@@ -35,7 +35,7 @@ We then focused on getting five reference customers. It turned out, we had to [N
 
 ## What changed?
 
-Things went much better than we thought. For the last 6 months, our paid products have averaged 20% month over month revenue growth - that's an 8.9x increase per year (for context - [3x is considered great](https://twitter.com/nimaroohis/status/1525970172237991939?s=21&t=qzYbxjpPbHlPZ7Xjus_PUA), and [Lenny's Newsletter breaks this out in more detail](https://www.lennysnewsletter.com/p/what-is-a-good-growth-rate?s=r)). 
+Things went much better than we thought. For the last six months, our paid products have averaged 20% month over month revenue growth - that's an 8.9x increase per year (for context - [3x is considered great](https://twitter.com/nimaroohis/status/1525970172237991939?s=21&t=qzYbxjpPbHlPZ7Xjus_PUA), and [Lenny's Newsletter breaks this out in more detail](https://www.lennysnewsletter.com/p/what-is-a-good-growth-rate?s=r)). 
 
 Three things combined caused this:
 
