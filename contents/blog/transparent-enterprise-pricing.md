@@ -5,8 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: ../images/blog/hog-in-a-room-generic.jpg
+featuredImageType: full
 categories: ["Inside PostHog"]
-author: ["simon-fisher"]
+author: ["simon-fisher", "Open source"]
 ---
 
 > "I wonder how much this SaaS product costs to..."
@@ -51,7 +53,7 @@ Self-service, meanwhile, makes it easy for customers to get up and running as qu
 
 That's why we made our core paid plans totally self-serve and free up to 1 million events per month, with the "per event" price decreasing as usage increases, as you can see below.
 
-![PostHog pricing calc](../images/enterprise-pricing-blog/pricing-calc.png)
+![PostHog pricing calc](../images/blog/enterprise-pricing-blog/pricing-calc.png)
 
 This model has worked incredibly well for us. 
 
