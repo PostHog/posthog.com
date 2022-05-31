@@ -29,13 +29,11 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **How do we get there?**
 
-* Build for unserved customers that can’t use cloud offerings because of data control or scale
-* Grow a strong and successful developer community around PostHog
-* Convert our biggest users to paying customers
+* Build for developers that need to control their data
+* Make every developer want to tell others about us
+* Our biggest users self-serve to paying customers 
 * Go broad and develop all the tools our customers need to build better products
-* Partner with others to build apps and deploy our tools
-* Ride the industry wave of increasing data control that has been triggered by growing privacy regulation
-
+* Empower developers to build on top of PostHog
 
 ### What should we be working on today?
 
