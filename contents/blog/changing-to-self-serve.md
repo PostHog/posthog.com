@@ -63,7 +63,7 @@ For go to market, this means:
 * **Marketing:** Accelerate word of mouth growth
 * **Website and Docs:** Make community self serve (for example, [make our _docs_](https://squeak.posthog.com) rather than Slack the main support channel)
 
-## A snapshot of the view future
+## A snapshot of the future
 
 Today, we're very good at serving large mid-market B2B companies who can buy quickly (through self serving).
 
