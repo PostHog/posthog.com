@@ -29,7 +29,7 @@ In contrast, PostHog is a product analytics platform designed to show you what y
 ## How is PostHog different from Matomo?
 
 ### 1. It's an all-in-one product analytics platform
-Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while [Experimentation](/product/experimentation-suite) is [available for no cost up to 1 million events per month](/pricing).
+Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while [Experimentation](/product/experimentation-suite) is [free up to 1 million events per month](/pricing).
 
 ### 2. Seamless integration with modern data stacks
 PostHog is built to work seamlessly with your data stack. That means we offer data import and export integrations with [most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools (PagerDuty, Sentry), and more via the [PostHog App Store](/apps).
@@ -396,7 +396,7 @@ Self-hosting PostHog means data never leaves your infrastructure, which makes pr
 
 ### E-commerce and marketing analytics
 
-Matomo is especially well-suited to content and e-commerce websites. Unlike GA, it doesn't employ any data sampling, and it offers a wide-range of features specifically designed to aid marketing teams. For example, Matomo's Multi Channel Conversion Attribution reports (a paid feature) allow marketing teams to understand how all their activities impacted a conversion, not just the last interaction. 
+Matomo is especially well-suited to content and e-commerce websites. Unlike Google Analytics, it doesn't employ any data sampling, and it offers a wide-range of features specifically designed to aid marketing teams. For example, Matomo's Multi Channel Conversion Attribution reports (a paid feature) allow marketing teams to understand how all their activities impacted a conversion, not just the last interaction. 
 
 ### Privacy compliance and optional cookie-less tracking
 
@@ -412,7 +412,6 @@ We ship new features fast. Here's a quick snapshot of what we're working on righ
 
 - Console log tracking in recordings
 - Insight experience overhaul
-- Export and share visualizations as image file
 - Automated insight recommendations
 - Lightning fast querying at billion event scale
 - Multiple cloud environments
