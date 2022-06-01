@@ -45,7 +45,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 You may have noticed that we recently changed the name of our plugins, rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
 
-We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](apps/intercom). Enjoy!
+We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](/apps/intercom). Enjoy!
 
 ### New: AND/OR filtering
 
@@ -140,7 +140,7 @@ Version 1.36 also adds hundreds of other improvements and fixes, including...
 
 ### Deprecation and removal notices
 
--   **For SAML admins:** The previous update, [PostHog 1.35.0](blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+-   **For SAML admins:** The previous update, [PostHog 1.35.0](/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
 -   **For SAML admins:** If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
 -   **For ~~plugin~~ app developers:** `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` are no longer included. All apps available in our [App Store](https://posthog.com/apps) are compatible with this change. `processEvent` is unaffected.
 
