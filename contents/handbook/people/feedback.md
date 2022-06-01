@@ -28,7 +28,7 @@ With us growing the team, we will be splitting the session into smaller groups i
 
 ## Career chats
 
-It's difficult for managers to take a step back in weekly 1:1s and talk about long term career goals. The manager is responsible for making sure a calendar invite exists that repeats every six months as a reminder to do this.
+It's difficult for managers to take a step back in weekly 1:1s and talk about long term career goals. The manager is responsible for making sure a calendar invite exists that repeats every six months as a reminder to do this. An offsite is a good place to do this if scheduling allows, but remote works too.
 
 The process is as follows:
 1. You (the managee) gather feedback from your peers about what you should do to grow and what you could improve on.
