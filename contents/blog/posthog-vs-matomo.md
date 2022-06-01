@@ -374,13 +374,13 @@ In addition to extensive selection of dedicated integrations, PostHog [offers tw
 
 ![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-### Feature Flag functionality
+### Combining Feature Flags and product analytics
 
 Feature Flags are at the core what makes PostHog a great tool for product-lead businesses. They're especially useful for gradually rolling out new features, and quickly rolling back if you detect problems, but they can be used in other creative ways. 
 
 Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
-Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. The combination of [Feature Flags](product/feature-flags) and product analytics gives developers a complete toolset to do great things.
+Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](product/feature-flags) and product analytics together gives developers a complete toolset.
 
 ### Automatic event tracking
 
