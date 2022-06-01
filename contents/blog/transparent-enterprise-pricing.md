@@ -99,7 +99,7 @@ costs.
 
 While it's true that running PostHog Cloud requires a minimum level of spend from us, self-hosting costs more than Cloud for a few important reasons:
 
-1. Developing and supporting self-hosted platform is more complex than a traditional SaaS offering (and we offer both)
+1. Developing and supporting a self-hosted platform is more complex than a traditional SaaS offering (and we offer both)
 
 2. We are willing to invest a significant amount of our time in ensuring our large, self-hosted deployments are tuned effectively so customers have the best PostHog experience possible. 
 
