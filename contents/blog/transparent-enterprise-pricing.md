@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/hog-in-a-room-generic.jpg
 featuredImageType: full
 categories: ["Inside PostHog"]
-author: ["simon-fisher", "Open source"]
+author: ["simon-fisher"]
 ---
 
 > "I wonder how much this SaaS product costs to..."
@@ -27,7 +27,7 @@ And maybe seen a demo.
 
 And perhaps your own hands-on evaluation.  
 
-And introduced your bosses' boss. 
+And introduced your boss' boss. 
 
 And consulted the legal department.
 
@@ -37,9 +37,9 @@ It's all a colossal waste of time and energy that's better spent focusing on wha
 
 That's why, at PostHog, we've adopted transparent pricing and self-service for every paid plan, even PostHog Enterprise.
 
-> Simon Fisher leads customer success at PostHog. He's made a career out of helping companies automate stuff, including seven years at IBM and five years at Chef Software. He lives in Sheffield in the North of England with his wife, three young boys, a black labrador, and a killer Lego collection. Seriously, it's sweet af.
+> Simon Fisher leads customer success at PostHog. He's made a career out of helping companies automate stuff, including seven years at IBM and five years at Chef Software. He lives in Sheffield in the North of England with his wife, three young boys, a black labrador, and a killer Lego collection. Seriously, it's sweet.
 
-## Why transparent pricing is important
+## Transparent pricing works
 
 For those new to PostHog, it's an all-in-one product analytics suite that replaces siloed tools for [product analytics](/product#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), and Experimentation. It's open source and you can host it yourself, giving you complete control over your data – we have a Cloud version too if that's your thing. 
 
@@ -97,11 +97,9 @@ costs.
 
 While it's true that running PostHog Cloud requires a minimum level of spend from us, self-hosting costs more than Cloud for a few important reasons:
 
-1. Self-hosting bestows unique benefits you can't get with any other equivalent product analytics platform
+1. Developing a self-hosted tool requires an additional level of complexity and overhead for us
 
-2. Developing a self-hosted tool requires an additional level of complexity and overhead for us
-
-3. We are willing to invest a significant amount of our time in ensuring our large, self-hosted deployments are tuned effectively so customers have the best PostHog experience possible. 
+2. We are willing to invest a significant amount of our time in ensuring our large, self-hosted deployments are tuned effectively so customers have the best PostHog experience possible. 
 
 This is a message we'll continue to refine, but ultimately we feel tolerance for the expense PostHog Enterprise is directly connected to how important self-hosting is to a customer. 
 
