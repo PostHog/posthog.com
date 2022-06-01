@@ -1,5 +1,5 @@
 ---
-date: 2022-05-30
+date: 2022-06-01
 title: PostHog vs Matomo
 rootPage: /blog
 sidebar: Blog
