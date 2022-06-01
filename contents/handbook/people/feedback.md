@@ -26,18 +26,6 @@ With us growing the team, we will be splitting the session into smaller groups i
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 - Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you). 
 
-## Career chats
-
-It's difficult for managers to take a step back in weekly 1:1s and talk about long term career goals. The manager is responsible for making sure a calendar invite exists that repeats every six months as a reminder to do this. An offsite is a good place to do this if scheduling allows, but remote works too.
-
-The process is as follows:
-1. You (the managee) gather feedback from your peers about what you should do to grow and what you could improve on.
-2. You write a list of your strengths and weaknesses, and your manager does the same.
-3. During the chat:
-  1. Talk about your strengths, weaknesses and feedback from your peers and your manager
-  2. Talk about your long term (2-5 years+) career goals.
-  3. Talk about specific things you can do in the next 6 months to develop
-
 ## How to give good feedback
 
 We know that giving feedback can sometimes be difficult, so here are a few tips on how to give good feedback:
