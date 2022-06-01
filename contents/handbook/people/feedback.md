@@ -26,34 +26,7 @@ With us growing the team, we will be splitting the session into smaller groups i
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 - Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you). 
 
-## Performance reviews
-
-In addition to informal day-to-day feedback and the full team 360 degree feedback session, it is important that we enable team members to take a step back every so often and look at their performance and aspirations in a wider context. This helps us to support a team member's growth and ensure it is aligned with PostHog's needs. 
-
-This process is intended to be self-serve. The People team will ensure the process is kicked off and recorded properly, but it is the individual team member's responsibility to run the process. If you need support, ask your manager, Coua or Charles for help. 
-
-We currently run performance reviews every 6 months, based on your start date. We will probably need to change this cadence as we scale, but this feels appropriate for our current stage of growth. 
-
-### The performance review process
-
-1. The People team adds recurring calendar invites to the calendar of the team member and their manager to kick off the performance review process.  
-2. The team member will schedule a 1 hour performance review meeting with their manager. A member of the people team may sit in on the occasional feedback meeting to see how well they are working as we get up and running. 
-3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
-4. Afterwards, the team member let's the People team that the review is complete and what next steps are needed (if any). We store the docs on [Google Drive](https://drive.google.com/drive/folders/1ElPt_fB79qgB-6tQTI8BTKStUHhy_NcS). You should then share your doc publicly with the team, for transparency and so they have the opportunity to share any additional feedback. 
-
-While the 360 degree team meetings are purely feedback-focused, you should aim to spend a significant chunk of the performance review looking ahead to the next 6 months. 
-
-Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more responsive to changes in the market and people's roles. 
-
-### Some guidance for managers
-
-- These are really important for team members - please give these reviews your full attention and don't mess around with rescheduling etc. as much as you can. 
-- As manager, you should drive the review, pausing at appropriate points to ask the team member for any questions or further comments they'd like to add. 
-- It is helpful to open by looking at the big picture before diving into the details. For example 'overall you're doing great, and there are a few things we should focus on' or 'I feel there were quite a few places where we weren't aligned, so let's figure out why.'
-- You should spend most of your time a) discussing points where you didn't agree on the assessment, and b) looking forward to the next 6 months. Feel free to skip over sections where you are in agreement to save time for more valuable discussion. 
-- You may find it helpful to have both docs up side by side on your screen as you go through the review.  
-
-### How to give good feedback
+## How to give good feedback
 
 We know that giving feedback can sometimes be difficult, so here are a few tips on how to give good feedback:
 
