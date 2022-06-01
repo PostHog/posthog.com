@@ -118,9 +118,7 @@ Certain pages on the Website may set other third party cookies. For example, we 
 
 ### Tracking technologies
 
-We may use third party tracking services, but we don’t use these services to track you individually or collect your personally identifiable-information. We may use these services to collect information about how the Website performs and how users navigate through and use the Website so we can monitor and improve our content and Website performance.
-
-Third party tracking services gather certain simple, non-personally identifying information over time, such as your IP address, browser type, internet service provider, referring and exit pages, timestamp, and similar data about your use of the Website. We do not link this information to any of your personal information such as your user name.
+We do not use third party tracking services to collect information about you.
 
 ### Do Not Track
 
@@ -248,4 +246,4 @@ Although most changes are likely to be minor, PostHog may change its privacy pol
 
 We may also provide notification to users who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.
 
-_Jan 2022_
+_Jun 2022_
