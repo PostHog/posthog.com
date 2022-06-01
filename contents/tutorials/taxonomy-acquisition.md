@@ -38,7 +38,7 @@ Now you have a sense of how to breakdown acquisition, it's time to figure out wh
 
 ⚠️ All of the following should be plotted as a time series. That means you can understand which metric moved, causing another metric to move.
 
-⚠️ [PostHog's JavaScript library](../integrate/client/js), the most frequently-used way to capture data into PostHog, will by default capture all of the utm terms below and the initial referring domain.
+⚠️ [PostHog's JavaScript library](../docs/integrate/client/js), the most frequently-used way to capture data into PostHog, will by default capture all of the utm terms below and the initial referring domain.
 
 You need to define these events within your product, and push them to PostHog. For example, "traffic" may mean people visiting your website, visiting an individual landing page, and so on. Or show both if either could be relevant.
 
