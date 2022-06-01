@@ -57,11 +57,13 @@ That's why we made our core paid plans totally self-serve and free up to 1 milli
 
 This model has worked incredibly well for us. 
 
-It's taken us from nothing to significant revenue, and healthy growth, in less than two years without any outbound sales. 
+In the last six months, we've seen 20% month over month growth on our paid plans – an 8.9x increase per year. 
 
 ![PostHog's revenue going sharply up and to the right](../images/blog/pricing-lesson/revenue-pricing.png)
 
-Our customer success team works hard to help new and potential customers get what they need from PostHog, but we don't cold email companies or spend time chasing specific customers.
+We achieved this without cold emailing companies, or chasing specific customers. We just make it super easy for companies to try us and pay us, and proactively help new and potential customers get what they need from PostHog.
+
+It's a winning combination more SaaS companies should adopt.
 
 ## Adopting transparent enterprise pricing
 
