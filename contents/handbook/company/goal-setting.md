@@ -6,7 +6,7 @@ showTitle: true
 
 ## How it works
 
-1. Every three months, a couple of weeks before the end of the period, James and Tim (+ other execs) come up with the company goals.
+1. Every three months, a couple of weeks before the end of the period, James schedules a meeting with all execs to come up with the company goals.
 2. They will then propose goals for every [small team](../people/team-structure/why-small-teams) by creating PRs against the small team pages.
 3. Each small team can change or propose alternate goals
 4. After the end of the period we'll run an all hands retrospective
