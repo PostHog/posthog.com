@@ -1,6 +1,6 @@
 ---
 date: 2022-06-01
-title: Why we adopted transparent enterprise pricing (and you should too)
+title: Why we ditched ‘talk to sales’ for transparent pricing
 rootPage: /blog
 sidebar: Blog
 showTitle: true
