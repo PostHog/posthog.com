@@ -55,7 +55,7 @@ export default function Pipelines() {
         <section className={section('text-center')}>
             <h2 className={heading()}>Event pipelines</h2>
             <h3 className={heading('sm')}>
-                Reliably ingest data at any scale to build a holistic view of your customers.
+                Reliably ingest data at any scale to build a holistic view of your customers
             </h3>
             <div className="lg:block flex">
                 <div className="grid lg:grid-cols-3 mt-8 lg:mt-16 mb-8 gap-8 lg:gap-0 w-full sm:w-3/4 lg:w-auto">

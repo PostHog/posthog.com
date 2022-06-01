@@ -78,11 +78,10 @@ This has the added benefit of cross functional teams forming as needed, whilst p
 
 ## How do I make sure my direct reports are happy and productive?
 
-1. Schedule [regular 1:1s](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES). There are three types:
+Schedule [regular 1:1s](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES). There are three types:
   - First 1-1 when a team member starts
   - Weekly 1-1s as a regular check in
-  - Quarterly 1-1s to talk about longer term career plans
-2. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months. 
+  - Quarterly 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
 
 Talking about long-term career plans every now and again is really important but easy to let slip when things get busy. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
 
