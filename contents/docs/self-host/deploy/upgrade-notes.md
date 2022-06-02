@@ -27,7 +27,7 @@ How to fix?
 - Delete Kafka and Zookeeper StatefulSet `kubectl -n posthog delete sts posthog-posthog-kafka posthog-zookeeper`
 - Delete kafka persistent volume claim `kubectl -n posthog delete pvc data-posthog-posthog-kafka-0`
 - Wait for Kafka and Zookeeper pods to spin down (deleting sts in step 1 will also trigger the pods deletion)
-- Upgrade helm chart `helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog`
+- Upgrade helm chart `helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog`
 
 ### Upgrading from 3.x.x
 
