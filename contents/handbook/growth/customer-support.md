@@ -16,7 +16,7 @@ We have a few different routes for users to contact us. As an open source compan
 
 These are the ways in which customers can currently reach us, in order of popularity:
 
-- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions
+- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Scale](/pricing#scale) and [Scale](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
 - **Email** - a user may email hey@posthog.com with a specific support query
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
@@ -39,24 +39,36 @@ Providing support is a responsibility shared across our team - we expect everyon
 
 This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat.
 
-This is why, in addition, one person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+This is why, in addition, one person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 
 ### Simple, lightweight tools
 
 We go to where our users are. That means **we respond in the same channel that they reached out to**, rather than trying to funnel them somewhere else.
 
-We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. If customer success is part of your role, you should have received an invite to join as part of your onboarding - if you didn't, ask Charles. 
+We use [Zendesk Support](https://zendesk.com/) as our internal ticket management platform to get an overview of our support requests. We also use [Halp](https://www.atlassian.com/software/halp) to easily create and manage Zendesk tickets straight from the PostHog Users Slack. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. If customer success is part of your role, you should have received an invite to join as part of your onboarding - if you didn't, ask Charles. 
 
-The first time you sign into Papercups, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
 
-A quick overview of Papercups' main features:
+There are a few different ways that support tickets can be created in Zendesk:
 
-- _Main conversations view_: when you sign into Papercups, you can either [view all conversations](https://app.papercups.io/conversations/all), or just those [assigned to you](https://app.papercups.io/conversations/me). If you are the first person to respond to a query, you will be automatically assigned that conversation. Don't forget to close a conversation by ticking the box in the top right when you are done, so we know which queries have been resolved!  
-- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer support_ channel in the [PostHog Users Slack](http://posthog.com/slack) - both work.
-- _Slack integration (2)_: In the PostHog Users Slack, messages posted in the _general_ and _feedback_ channels are also synced with the Papercups app. As above, this means you can reply to users in that Slack channel directly or in Papercups. Please try to reply in a Slack thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
-- _Email integration_: Any emails that come into hey@ get synced with Papercups and Slack, so you can reply on either of those platforms, or directly to the email. If you reply via email, please make sure you at least bcc hey@ so we know that someone has responded!
-- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
-- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation. This is useful for sharing context with other team members.
-- _Analytics_: 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. We don't report on these yet as we're still figuring out the best way for us to do support. 
+#### Slack
 
-Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
+_User Slack_
+
+- Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Halp, and assign it a priority and owner.
+
+_Dedicated Support Channels_
+
+- Our Customer Success team monitors these channels and creates tickets in Zendesk via a direct Slack integration, and will prioritize and assign them accordingly.
+
+#### Email
+
+- Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
+
+#### Zendesk Features
+
+Here are some key features in Zendesk to help you get acquainted:
+
+- _Home page_: From this screen, you can see all open tickets assigned to you that have not yet been replied to. From here, you can edit tickets to add an assignee, a priority, or tags.
+- _Views_: Here you can cycle through different lists of tickets including all unassigned and unsolved tickets.
+- _Analytics_: 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time, as well as a leaderboard tracking the performance of each Support Hero. We don't report on these yet as we're still figuring out the best way for us to do support. 
