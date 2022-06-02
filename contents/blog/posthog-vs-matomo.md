@@ -37,8 +37,6 @@ PostHog is built to work seamlessly with your data stack. That means we offer da
 ### 3. It's built for engineers
 PostHog is about giving engineering and product teams the tools they need to build better products. The core product analytics tools are part of this, but we go further by providing market-leading feature flag functionality, and integrating Session Recording so you can deploy one platform that does everything, rather than integrating multiple discrete tools into your stack.
 
-<ArrayCTA />
-
 ## Feature comparison
 
 This table compares three self-hosted plans: Matomo On-Premise, PostHog Open Source, and PostHog Scale. 
