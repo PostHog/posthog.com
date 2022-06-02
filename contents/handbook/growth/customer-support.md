@@ -45,7 +45,7 @@ This is why, in addition, one person takes on the **[Support Hero](/handbook/eng
 
 We go to where our users are. That means **we respond in the same channel that they reached out to**, rather than trying to funnel them somewhere else.
 
-We use [Zendesk Support](https://zendesk.com/) as our internal ticket management platform to get an overview of our support requests. We also use [Halp](https://www.atlassian.com/software/halp) to easily create and manage Zendesk tickets straight from the PostHog Users Slack. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. If customer success is part of your role, you should have received an invite to join as part of your onboarding - if you didn't, ask Charles. 
+We use [Zendesk Support](https://zendesk.com/) as our internal ticket management platform to get an overview of our support requests. We also use [Help](https://www.atlassian.com/software/halp) to easily create and manage Zendesk tickets straight from the PostHog Users Slack. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. If customer success is part of your role, you should have received an invite to join as part of your onboarding - if you didn't, ask Charles. 
 
 The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
 
@@ -55,7 +55,7 @@ There are a few different ways that support tickets can be created in Zendesk:
 
 _User Slack_
 
-- Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Halp, and assign it a priority and owner.
+- Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and owner.
 
 _Dedicated Support Channels_
 
