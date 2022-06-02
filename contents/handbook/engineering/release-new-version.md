@@ -47,7 +47,7 @@ The release manager is ultimately responsible for the timeline of the release. T
   git add posthog/version.py posthog/versions.json
   git commit -m "Bump version [version]"
   ```
-  
+
 > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the following steps. You can install all of these with `brew doctl helm k9s`.
 
 > ⚠️ You'll also want to make sure that a Docker image under the tag `release-[version]-unstable` has been created in Docker Hub by this point. You can check its build status in the Github Actions workflow for the corresponding commit.
@@ -59,7 +59,7 @@ The release manager is ultimately responsible for the timeline of the release. T
   ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
 
     - Copy the automatic connection script by clicking the copy icon.
-  
+
   ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
 
     - Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
@@ -71,11 +71,11 @@ The release manager is ultimately responsible for the timeline of the release. T
   ![PostHog - Github Raw](../../images/05/release_playground_raw_github.png)
 
   ![PostHog - Github Raw File](../../images/05/release_playground_raw_file.png)
-  
+
     - In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the url you copied in the previous step. Example:
 
   ```shell
-    helm upgrade -f https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
+    helm upgrade -f https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
   ```
 
     - Optional: Keep an eye on the progress of the upgrade in `k9s`
@@ -101,4 +101,4 @@ The release manager is ultimately responsible for the timeline of the release. T
 - [ ] Go to the [EWXT9O7BVDC2O](https://console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) Cloudfront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the Cloudfront cache so that users can see the new version.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 - [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array)
-- [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
+- [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post.

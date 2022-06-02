@@ -214,7 +214,7 @@ And that's it! If you see no errors, your data should now have been migrated ove
 As a final step, we should update the cluster with the following command:
 
 ```shell
-helm upgrade -f values.yaml --timeout 20m posthog posthog/posthog --atomic -n posthog
+helm upgrade -f values.yaml --timeout 30m posthog posthog/posthog --atomic -n posthog
 ```
 
 Once the command completes, you can check that all pods are healthy (status = `Running`) with the following command:
@@ -248,9 +248,9 @@ posthog-worker-7857nd8268-j8c4f                     1/1     Running   0         
 ```
 
 <ExportingEventsSnippet />
-    
-    
+
+
 ## Moving a license key
 
-    
+
 If you have an existing license key, please email [sales@posthog.com](mailto:sales@posthog.com) to move your license key over.
