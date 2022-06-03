@@ -33,9 +33,11 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 ClickHouse is an open-source column-oriented database management system. (Note: PostHog runs on ClickHouse!)
 
-Host PostHog on your own infrastrucure or private cloud, but leave the ClickHouse database management to the same team who built ClickHouse!
+Host PostHog on your own infrastructure, but leave the ClickHouse database management to the same team who built ClickHouse! ClickHouse is actively developing a hosted version of their database that splits compute from storage so that you only pay for the resources that you use, when you use them.
 
-**Services:** Managed ClickHouse clustering
+[Sign up for the beta](https://clickhouse.com/cloud/) and **be sure to put PostHog as the use case in the signup form.**
+
+**Services:** Managed ClickHouse / EU Data Locality
 
 <hr />
 
