@@ -185,6 +185,14 @@
         "link_url": "https://twitter.com/guidoiaquinti"
     },
     {
+        "handle": "simon-fisher",
+        "name": "Simon Fisher",
+        "role": "Customer Success Lead",
+        "image": "../../static/images/authors/simon-fisher.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/simfish85/"
+    },
+    {
         "handle": "colin-wren",
         "name": "Colin Wren",
         "role": "Founder, Reciprocal.dev",

@@ -62,6 +62,8 @@ Matomo is intended for marketing and content teams who need to focus on SEO acti
 ### Open source license
 Matomo is available under a AGPLv3 license. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
 
+**Related:** [In-depth PostHog vs Matomo comparison](/blog/posthog-vs-matomo)
+
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 

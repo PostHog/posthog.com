@@ -73,7 +73,7 @@ The release manager is ultimately responsible for the timeline of the release. T
     1. In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the URL you copied in the previous step. Example:
 
       ```shell
-      helm upgrade -f 'https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC' --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
+      helm upgrade -f 'https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC' --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
       ```
 
     1. Optional: Keep an eye on the progress of the upgrade in `k9s`

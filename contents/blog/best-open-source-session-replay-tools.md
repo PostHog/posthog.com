@@ -185,7 +185,7 @@ Matomo is an open web analytics platform. Touted as an alternative to Google Ana
 
 ### Who is Matomo for?
 
-Matomo is built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys.
+Matomo is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release. To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 
 ### Strengths
 

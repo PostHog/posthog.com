@@ -37,8 +37,6 @@ Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures
 ### 3. It's open source
 Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own apps](/docs/apps/build) or even add extra functionality. You also benefit from the work of other teams who build their own apps. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
 
-<ArrayCTA /> 
-
 ## Feature comparison
 
 This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Scale](/pricing) – the paid tier of our self-hosted platform. 

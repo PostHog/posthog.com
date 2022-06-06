@@ -15,11 +15,11 @@ When someone is _Support Hero_, they are also the secondary on-call person for t
 
 Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out and contribute to a lot of different parts of our system.
 
-All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
+### Expectations
 
-### Availability
+All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work. Furthermore expect that you will need a day or two the week after to follow-up on the less urgent issues. Please don't hand off too many things to the next support hero and make the start of their week more stressful.
 
-You should work your 'normal' hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as support hero you are doing the bulk of the debugging/fixing.
+You should work your 'normal' hours during this week. There will likely be more issues than you'll have time to fix so be sure to prioritise. If there's an important and urgent issue near the end of your day hand it off to someone on the other side of the Atlantic.
 
 If you are planning on taking a day off or you won't be available, please find someone to swap with and update the rotation on PagerDuty. Be sure to schedule an override for both swaps and **do not alter the rotation order** to avoid affecting other members.
 
