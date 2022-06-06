@@ -10,7 +10,7 @@ showTitle: true
 
 Before I took up Product Marketing I was a Content Marketer, a Copywriter and a Journalist. Before _that_ I was a clown, a chainsaw salesman and a cleaner in a morgue. It's been a strange life. 
 
-I'm engaged and live just outside of London. I'm passionate about punk music, videogame preservation and garlic. I can't ride a bike.
+I live just outside of London. I'm passionate about punk music, videogame preservation and garlic. I can't ride a bike.
 
 ### How I can help you
 - I can help you figure out the right way to communicate anything, to anyone. 
@@ -29,16 +29,16 @@ I'm engaged and live just outside of London. I'm passionate about punk music, vi
 
 ## Current areas of focus
 ### Execution - Q1 2022
-- [ ] **Community:** Organize the first PostHog community meet-up, with a good speaker. Retro the event and roll changes into a second event. Continue to attend and report back on other community events and meet-ups.
-- [ ] **Case studies:** Secure an enterprise-level case study. Enhance the Customers section of the site and make plans to better leverage this content.
-- [ ] **Content:** Support the Content team in creating a decent pipeline of good content that continues to deliver.
-- [ ] **Partnerships:** Find further partnership opportunities to grow the community.
-- [ ] **Internal:** Continue to advocate for less technical team members and users. Become more ambitious when it comes to shipping.
+- [x] **Community:** Organize the first PostHog community meet-up, with a good speaker. Retro the event and roll changes into a second event. Continue to attend and report back on other community events and meet-ups.
+- [x] **Case studies:** Secure an enterprise-level case study. Enhance the Customers section of the site and make plans to better leverage this content.
+- [x] **Content:** Support the Content team in creating a decent pipeline of good content that continues to deliver.
+- [x] **Partnerships:** Find further partnership opportunities to grow the community.
+- [x] **Internal:** Continue to advocate for less technical team members and users. Become more ambitious when it comes to shipping.
 
 ### Personal - Q1 2022
-- [ ] Don't lose (another, again) mission in Pandemic Legacy: Season Zero.
-- [ ] See all of my nieces at least once. And my nephew.
-- [ ] Don't miss a Donut chat.
+- [x] Don't lose (another, again) mission in Pandemic Legacy: Season Zero.
+- [x] See all of my nieces at least once. And my nephew.
+- [x] Don't miss a Donut chat.
 
 ## Feedback
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
