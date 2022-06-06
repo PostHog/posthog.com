@@ -16,7 +16,7 @@ We have a few different routes for users to contact us. As an open source compan
 
 These are the ways in which customers can currently reach us, in order of popularity:
 
-- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Scale](/pricing#scale) and [Scale](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
+- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Scale](/pricing#scale) and [Enterprise](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
 - **Email** - a user may email hey@posthog.com with a specific support query
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
