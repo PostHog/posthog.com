@@ -277,3 +277,10 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/r
     helm upgrade --install -f ...
     ```
     Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
+
+### Upgrading from 20.x.x
+
+21.0.0 changes the supported Kubernetes version to >=1.21 <= 1.24:
+
+- drops support for Kubernetes 1.20 as it has reached end of life on 2022-02-28
+- adds support for Kubernetes 1.24 released on 2022-05-24
