@@ -1442,3 +1442,8 @@
 [[redirects]]
     from = "/handbook/company/1-1s"
     to = "/handbook/company/management"
+    
+# Added: 2022-06-07
+[[redirects]]
+    from = "/lenny"
+    to = "/?utm_campaign=lenny"   
