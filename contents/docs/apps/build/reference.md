@@ -321,6 +321,8 @@ async function onEvent(event) {
 
 `onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
 
+Please note that `onSnapshot` is **not available** on PostHog Cloud - only on self-hosted installations.
+
 ## Scheduled tasks
 
 Apps can also run scheduled tasks through the functions:
