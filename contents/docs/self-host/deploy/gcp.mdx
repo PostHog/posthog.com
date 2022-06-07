@@ -43,6 +43,8 @@ ingress:
 
 ## Set up a static IP
 
+* Important * - This must be a `Global` IP address. GKE will not be able to find a `Region` IP address and assign it to the ingress controller's LB.
+
 ### In GCP web console 
 
 1. Open the Google Cloud Console
