@@ -25,10 +25,16 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about n8n's connector is available in [n8n's connector documentation](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations).
 
+### Who maintains this app?
+
+This app is maintained by n8n. For more information, check [n8n's connector documentation](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations).
+
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our FAQ page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
