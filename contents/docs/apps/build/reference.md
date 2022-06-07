@@ -350,6 +350,8 @@ async function onEvent(event) {
 
 `onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
 
+`onSnapshot` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
+
 ## Scheduled tasks
 
 Apps can also run scheduled tasks through the functions:
@@ -379,8 +381,6 @@ async function runEveryMinute({ config }) {
 ```
 
 It's worth noting that scheduled tasks are _debounced_, meaning that only a single run of a given task can be in progress at any given time. For example, if a `runEveryMinute` run takes more than a minute, it will make the system skip each following run until that current one has finished – then, the schedule will resume normally.
-
-`onSnapshot` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 
 ## `exportEvents`
 
