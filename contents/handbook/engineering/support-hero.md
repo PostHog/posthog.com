@@ -109,9 +109,9 @@ If a user is sending events to PostHog and these are not getting ingested, despi
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Halp](https://www.atlassian.com/software/halp) if you want to easily create and manage Zendesk tickets directly from inside the PostHog Users Slack. 
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp) if you want to easily create and manage Zendesk tickets directly from inside the PostHog Users Slack. 
 
-This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Halp as part of onboarding - if you didn't, ask Grace. 
+This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace. 
 
 #### How to access Zendesk
 
