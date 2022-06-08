@@ -12,7 +12,7 @@ topics:
 
 
 ### How do I install the Variance Connector app?
-
+To install the Variance app you'll need a Variance account. In your Variance account go to Variance > Integrations > Create a new PostHog connection. This will give you a Webhook URL and Authorization header value. You will then use those two values when installing the app in your PostHog instance. Don't forget to hit enable after you've added the configuration details.
 
 ### Is the source code for this app available?
 
