@@ -22,7 +22,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 ### Who created this app?
 
-This app was created by Variance. We'd like to thank everyone at Variance, especially Noah Briar, for creating the Variance connector. Thanks!
+This app was created by Variance. We'd like to thank everyone at Variance for creating the Variance connector. Thanks!
 
 ### Who maintains this app?
 
