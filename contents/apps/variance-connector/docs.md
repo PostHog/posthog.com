@@ -1,0 +1,37 @@
+---
+title: Variance Connector documentation
+showTitle: true
+topics:
+    - variance-connector
+---
+
+### What does the Variance Connector app do?
+
+
+### What are the requirements for this app?
+
+
+### How do I install the Variance Connector app?
+
+
+### Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source code for the Variance Connector](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub. 
+
+### Who created this app?
+
+This app was created by Variance. We'd like to thank everyone at Variance, especially Noah Briar, for creating the Variance connector. Thanks!
+
+### Who maintains this app?
+
+This app is maintained by Variance. For more information or to report an issues, please check [Variance's documentation](https://www.variance.com/docs/posthog).
+
+### What if I have feedback on this app?
+
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
+
+### What if my question isn't answered above?
+
+We love answering questions! You can [ask anything via our FAQ page](/questions). 
+
+You can also [join the PostHog Community Slack group](/slack) to get advice on developing your own PostHog apps.

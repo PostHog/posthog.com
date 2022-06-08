@@ -1269,6 +1269,16 @@
             "url": "/apps"
         },
         {
+            "name": "Variance Connector",
+            "url": "/apps/variance-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/variance-connector/docs"
+                }
+            ]
+        },
+        {
             "name": "Airbyte Export",
             "url": "/apps/airbyte-export",
             "children": [
