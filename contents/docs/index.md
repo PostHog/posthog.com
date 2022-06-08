@@ -64,9 +64,9 @@ Our [manuals](/docs/user-guides) also provide a complete reference guide to each
 
 ### Plugins
 
-[Plugins](/docs/plugins/overview) extend PostHog's functionality even further, allowing you to enrich your event data, send events to other services, and prevent event ingestion.  
+[Apps](/docs/plugins/overview) extend PostHog's functionality even further, allowing you to enrich your event data, send events to other services, and prevent event ingestion.  
 
-If there's something you need in PostHog that we haven't built yet, you can [request it on GitHub](https://github.com/PostHog/posthog/issues/new?labels=enhancement&template=feature_request.md), or [build a plugin for it yourself](/docs/plugins/build).
+If there's something you need in PostHog that we haven't built yet, you can [request it on GitHub](https://github.com/PostHog/posthog/issues/new?labels=enhancement&template=feature_request.md), or [build an app for it yourself](/docs/plugins/build).
 
 ### Contributing to PostHog
 

@@ -6,6 +6,8 @@ import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
+import { Apps } from './components/Apps'
+import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
@@ -114,6 +116,8 @@ export const shortcodes = {
     AnchorScrollNavbar,
     AnimateIntoView,
     AnimatedBurger,
+    Apps,
+    AppsList,
     ArrayCTA,
     BasicHedgehogImage,
     BlockQuote,

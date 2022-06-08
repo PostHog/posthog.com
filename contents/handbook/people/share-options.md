@@ -97,7 +97,7 @@ We can point you in the right direction, but we cannot give you personal tax adv
  
 The EMI plan has various additional tax benefits associated with it that we're able to offer because PostHog Inc. has a UK child company, Hiberly Ltd. Your shares are still held in PostHog Inc. even though you are employed by Hiberly Ltd. 
  
-You can find [a simple guide to EMI here](https://mylegaladviser.co.uk/advice/emi-schemes). It is worth noting that you will lose EMI tax benefits if you stop being a UK tax resident. 
+You can find [a simple guide to EMI here](https://lawble.co.uk/emi-scheme-guide-for-employees/). It is worth noting that you will lose EMI tax benefits if you stop being a UK tax resident. 
  
  
 ### I have a question that is not covered here!

@@ -31,7 +31,7 @@ For Enterprise customers, we've also added the ability to set granular permissio
 
 ### New: Experimentation
 
-PostHog now offers a full end-to-end A/B testing suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work to setup and interpret. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant.
+PostHog now offers a full, [open source end-to-end A/B testing](/blog/best-open-source-ab-testing-tools) suite! Previously you could use [Feature Flags](/product/feature-flags) to run experiments, but it took a lot of manual work to setup and interpret. We wanted to fix that. This new experimentation suite will help you plan tests by selecting users, sample sizes and run times, then track results and let you know when results are statistically significant.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_33_0-experiments.png" alt="Screenshot: Experiments view" />
 
@@ -49,7 +49,7 @@ We've redesigned dashboards to make them more useful than ever. Changes include 
 
 We've also added a new Insight Details feature that can give you a handy summary of the query. Now all the information you need to understand a dashboard is right there in front of you!
 
-![Screenshot: Dashboard redesign](../images/blog/array/1_33_0-dashboards.png)
+![Screenshot: Dashboard redesign](../images/docs/user-guides/geoip-docs-image.png)
 
 <br />
 

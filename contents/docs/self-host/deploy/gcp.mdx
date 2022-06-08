@@ -43,9 +43,17 @@ ingress:
 
 ## Set up a static IP
 
+**Important** - This must be a `Global` IP address. GKE will not be able to find a `Region` IP address and assign it to the ingress controller's LB.
+
+### In GCP web console 
+
 1. Open the Google Cloud Console
 1. Go to VPC Networks > [External IP addresses](https://console.cloud.google.com/networking/addresses/list)
-1. Add a new global static IP with the name `posthog`
+1. Add a new **global** static IP with the name `posthog`
+
+### From gcloud CLI 
+
+1. `gcloud compute addresses create posthog --global`
 
 ## Setting up DNS
 

@@ -244,3 +244,7 @@ Our plan here use GitHub actions to standup an instance of our infrastructure an
 Hey! You made it this far. If you see yourself working on challenging issues at a high paced startup with a really rad group of people. You are in luck! We are looking for people like you!
 
 Check out our [careers](/careers) page and give us a shout!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

@@ -79,3 +79,5 @@ Feel free to comment on the issue if you have any other ideas about this!
 ## PostHog news
 
 We’re growing rapidly, and we’re constantly expanding our team. We’re looking for a [strong devops engineer](https://news.ycombinator.com/item?id=23044768) to join us. If that sounds like you, please email tim@posthog.com.
+
+<ArrayCTA />

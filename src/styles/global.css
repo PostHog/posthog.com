@@ -8,6 +8,16 @@
     }
 }
 
+:root {
+    --squeak-primary-color: 0, 0, 0;
+    --squeak-default-avatar-fill: 255, 255, 255;
+    --squeak-button-color: 239, 118, 50;
+    .dark {
+        --squeak-primary-color: 255, 255, 255;
+        --squeak-default-avatar-fill: 0, 0, 0;
+    }
+}
+
 main a,
 .article-content a:not(.cta) {
     @apply text-red hover:text-red font-semibold;
@@ -32,7 +42,6 @@ p {
     li {
         font-size: 17px;
         line-height: 1.75;
-        opacity: 0.9;
 
         li {
             font-size: 1em;
@@ -794,5 +803,15 @@ body.dark {
     }
     button {
         @apply !text-red hover:!text-red font-semibold;
+    }
+}
+
+.tutorials-slider .slick-list {
+    overflow: visible;
+
+    .slick-slide:last-of-type {
+        > div > div {
+            border-right: 0px;
+        }
     }
 }

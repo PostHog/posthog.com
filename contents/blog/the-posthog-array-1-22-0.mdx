@@ -28,7 +28,7 @@ Thank you oshura3, we look forward to collaborating with you more!
 -   **New:** Support for bar charts by value
 -   **New:** UTM tags now get automatically set as user properties
 -   **New:** Equality filters now allow the selection of multiple values
--   **New:** Two more plugins!
+-   **New:** Two more apps!
 -   **New:** API Key autofill on our Docs
 -   **Improvement:** All events can now set properties on a user
 -   **Improvement:** Better tooling for updating data in dashboards
@@ -44,15 +44,15 @@ Thank you oshura3, we look forward to collaborating with you more!
 
 ## Important Announcement for Self-Hosted Users
 
-If you're self hosting PostHog, make sure you have your plugin server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
+If you're self hosting PostHog, make sure you have your app server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
 
 If it is running, you'll see a green checkmark, and hovering over it will give the message "All systems operational", like so:
 
 ![Plugin server](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-server.png)
 
-From this release (1.22.0) onwards, if your plugin server is not running, this circle will turn amber. You can click on the server to verify if your plugin server is indeed the problem.
+From this release (1.22.0) onwards, if your app server is not running, this circle will turn amber. You can click on the server to verify if your app server is indeed the problem.
 
-**Important:** next release we will move all our event ingestion to the plugin server, meaning that you **will not be able to ingest events** if your plugin server isn't running.
+**Important:** next release we will move all our event ingestion to the app server, meaning that you **will not be able to ingest events** if your app server isn't running.
 
 ## PostHog 1.22.0 Release Notes
 
@@ -70,7 +70,7 @@ We now support two different types of bar charts! When selecting a chart type, y
 
 ![UTM Tags](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/utm-tags.png)
 
-PostHog now automatically sets user properties from [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters). You can now filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page. This is a big feature for us as it gives our users an automatic way of connecting marketing and product to have a more complete view of your business. We're very excited for our community to start using this feature and extending it through [plugins](https://posthog.com/docs/plugins/overview).
+PostHog now automatically sets user properties from [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters). You can now filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page. This is a big feature for us as it gives our users an automatic way of connecting marketing and product to have a more complete view of your business. We're very excited for our community to start using this feature and extending it through [apps](https://posthog.com/docs/plugins/overview).
 
 ### [Multiple Value Selector for Equality Filters](https://github.com/PostHog/posthog/pull/3422)
 
@@ -106,21 +106,21 @@ The event properties `$set` and `$set_once` can now be used on any event to set 
 
 Previously, this would only work on `$identify` events, making it so that you needed to call multiple methods in order to send an event and set user properties based on the same data. But now, you can do it all in one, as shown in the image above.
 
-### [Event Sequence Timer Plugin](https://posthog.com/plugins/event-sequence-timer-plugin)
+### [Event Sequence Timer](https://posthog.com/plugins/event-sequence-timer-plugin)
 
-![Event Sequence Timer Plugin](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/time-events.png)
+![Event Sequence Timer](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/time-events.png)
 
 Our users requested a way to measure the time passed between certain events, and this is it!
 
-By installing the Event Sequence Timer Plugin, you can specify as many sets of events as you want and the plugin will track the time between them, either using a first touch or last touch mechanism.
+By installing the Event Sequence Timer, you can specify as many sets of events as you want and the app will track the time between them, either using a first touch or last touch mechanism.
 
 It will then add a property to your events that allows you to easily build visualizations in PostHog of the average, minimum, and maximum time between events, as well as all the other mathematical operations we support.
 
-### [Property Flattener Plugin](https://posthog.com/plugins/property-flattener)
+### [Property Flattener](https://posthog.com/plugins/property-flattener)
 
-![Property Flattener Plugin](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/flattener.png)
+![Property Flattener](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/flattener.png)
 
-The new Property Flattener Plugin allows you to convert event properties contained in a nested structure into a flat structure, allowing you to set filters based on the nested properties.
+The new Property Flattener allows you to convert event properties contained in a nested structure into a flat structure, allowing you to set filters based on the nested properties.
 
 ### [Project API Key Autofill in Docs for Cloud Users](https://github.com/PostHog/posthog.com/pull/998)
 
@@ -140,7 +140,7 @@ Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com
 
 ## Favorite ~~Issue~~ Banter
 
-On the rare occasions that our M² team (Michael & Marius) is not found working hard (and oftentimes late) on our plugin server, they can be found taking the names of Pull Requests out of context:
+On the rare occasions that our M² team (Michael & Marius) is not found working hard (and oftentimes late) on our app server, they can be found taking the names of Pull Requests out of context:
 
 ![Polish 1](../images/blog/array/polish-1.png)
 ![Polish 2](../images/blog/array/polish-2.png)
@@ -285,3 +285,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 -   Stricter Team model [\#3252](https://github.com/PostHog/posthog/pull/3252) ([Twixes](https://github.com/Twixes))
 -   Change graphs to ts [\#3181](https://github.com/PostHog/posthog/pull/3181) ([EDsCODE](https://github.com/EDsCODE))
 -   Static cohort on person modal [\#2952](https://github.com/PostHog/posthog/pull/2952) ([EDsCODE](https://github.com/EDsCODE))
+
+<ArrayCTA />

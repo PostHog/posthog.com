@@ -105,3 +105,5 @@ We also have a few backlog bugs to tackle - we will work through these.
 We've had a big influx of YCombinator S20 companies deploying the platform. It has been fun to meet everyone at the start of their journey - especially since new projects should have product analytics installed!
 
 As a new idea, we've been running 15 min onboarding sessions with each company, which has highlighted many more features we wish to improve… [Paul G was right](https://twitter.com/paulg/status/898476047263518720?lang=en), we'll be doing lots more of this.
+
+<ArrayCTA />

@@ -109,3 +109,7 @@ The European Commission published [guidance on the free flow of non-personal dat
 PostHog is an [open-source product analytics platform](/best-open-source-analytics-tools) you can self-host, so data never has to leave your infrastructure. This is ideal for businesses who handle sensitive data but don't want to sacrifice advanced features like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Funnel Analysis](/product/funnels), and [Heatmaps](/product/heatmaps) - all of which are included in PostHog.
 
 Read our [privacy compliance documentation](/docs/privacy), which covers the [GDPR](/docs/privacy/gdpr-compliance), [HIPAA](/docs/privacy/hipaa-compliance) and [CCPA](/docs/privacy/ccpa-compliance) for more information on how to deploy PostHog in a privacy-compliant manner.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

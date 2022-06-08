@@ -34,9 +34,9 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/product-analytics',
     },
     {
-        title: 'Guides',
-        slug: 'guides',
-        link: '/blog/categories/guides',
+        title: 'Open source',
+        slug: 'open-source',
+        link: '/blog/categories/open-source',
     },
 ]
 
