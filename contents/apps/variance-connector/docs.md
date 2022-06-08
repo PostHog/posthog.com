@@ -6,7 +6,7 @@ topics:
 ---
 
 ### What does the Variance Connector app do?
-
+Variance ingests your PostHog usage data in real-time and puts it in a format that is to use and work with for revenue teams. This includes extracting accounts and contacts, making it easy to see customers by their sales stage, define and monitor your PQLs, and more.
 
 ### What are the requirements for this app?
 
