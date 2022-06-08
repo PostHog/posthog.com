@@ -1,6 +1,6 @@
 ---
-date: 2022-05-19
-title: Next Up - Nailing Self Serve
+date: 2022-06-09
+title: Our new objective: Nail Self Serve
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -16,6 +16,8 @@ The longer your strategy gets, the more useless it becomes.
 That's why, at PostHog, we communicate strategy as 'Nail X', where X is the thing we need to nail. It's simple and effective.
 
 We [recently switched](https://github.com/PostHog/posthog.com/pull/3395) from Nail Enterprise to Nail Self Serve. This walks you through the previous context, and why we made that change.
+
+>James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the YCombinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
 
 ## Why did we focus on Nail Enterprise in the first place?
 
