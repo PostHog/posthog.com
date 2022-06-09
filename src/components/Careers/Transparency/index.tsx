@@ -126,15 +126,15 @@ export const Transparency = () => {
                 <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
                     <TransparencyMattersItem
                         title="Different"
-                        description="We look for adventurers. We're here to take a small company to IPO, and beyond. We won't get there if we all think like everyone else. We're not a fit if you want a predictable career. "
+                        description="We look for adventurers. We're here to take a small company to IPO, and beyond. We will only get there if we think differently to everyone else. We're not a fit if you want a predictable career. "
                     />
                     <TransparencyMattersItem
                         title="Individual contributors"
-                        description="We think it's more important to give autonomy, plenty of context, and to hire exceptional people, versus hand holding. We're not a fit if you want management responsibility."
+                        description="We think it's more important to hire exceptional people, then give them autonomy and plenty of context. We're not a fit if management responsibility is what motivates you."
                     />
                     <TransparencyMattersItem
                         title="Scrappy"
-                        description="Fast, low ego people thrive here. We're informal, we use simple words and get a broad variety of work done fast. We're not a fit if you want process."
+                        description="Fast, low ego people thrive here. We're informal, we use clear language and get a broad variety of work done fast. We're not a fit if you want process."
                     />
                 </div>
             </div>
