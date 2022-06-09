@@ -6,7 +6,7 @@ showTitle: true
 
 Offboarding team members is a sensitive time. The aim of this policy is to create transparency around how this process works.
 
-Very infrequently, we may have long term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
+Very infrequently, we may have long-term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
 
 ## Voluntary departure
 
