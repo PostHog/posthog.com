@@ -6,8 +6,8 @@ showTitle: true
 
 We have two types of rotations for engineering:
 
-1. Support Hero, first line responder to customer questions and bug reports
-2. Secondary on-call, responsible for prioritizing and solving escalated issues, Sentry errors and alerts.
+1. **Support Hero** - first line responder to customer questions and bug reports
+2. **Secondary on-call** - responsible for prioritizing and solving escalated issues, Sentry errors and alerts
 
 When someone is _Support Hero_, they are also the secondary on-call person for their team
 
