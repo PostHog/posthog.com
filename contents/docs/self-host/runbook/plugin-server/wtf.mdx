@@ -166,10 +166,17 @@ A [node-schedule](https://github.com/node-schedule/node-schedule) scheduler that
 
 However, tasks are not necessarily triggered in a given server when the scheduled time hits. We use [Redlock](https://redis.com/redis-best-practices/communication-patterns/redlock/) to ensure that only one plugin server across the fleet processes scheduled tasks at a given point in time.
 
+##### MMDB
+
+The MMDB service uses a [MaxMind](https://www.maxmind.com/en/home) database we download from mmdb.posthog.net (managed by [this service](https://github.com/PostHog/http-mmdb)) and keep in memory in the main thread to allow for geolocation data lookups by IP.
+
+The worker thread communicates with the main thread via TCP to fetch the necessary data.
 
 ##### HTTP Server
 
 A simple HTTP server that's currently only used for healthchecks.
+
+
 
 #### Communication between the main thread and worker threads
 
