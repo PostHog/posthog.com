@@ -1,5 +1,5 @@
 ---
-title: Management at PostHog
+title: Management
 sidebar: Handbook
 showTitle: true
 ---
