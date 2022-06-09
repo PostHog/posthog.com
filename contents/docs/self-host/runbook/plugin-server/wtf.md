@@ -115,7 +115,7 @@ Here's a simplified high level overview of how an event flows through the PostHo
 
 **Diagram 1: Event flow**
 
-![Event flow](../../images/../../../plugin-server/event-flow.png)
+![Event flow](../../../../images/plugin-server/event-flow.png)
 
 The event is received over in Django, where some basic validation is done on the payload (does it have a distinct ID, does the project token exist, etc).
 
@@ -137,7 +137,7 @@ Now that we understand how events flow through the system, let's go even deeper 
 
 **Diagram 2: Plugin server**
 
-![Plugin server](../../images/../../../plugin-server/plugin-server.png)
+![Plugin server](../../../../images/plugin-server/plugin-server.png)
 
 #### Main thread
 
@@ -205,13 +205,13 @@ Finally, the diagram also shows everything plugin VMs can connect to, directly o
 
 **Diagram 3: Ingestion server**
 
-![Ingestion server](../../images/../../../plugin-server/ingestion-server.png)
+![Ingestion server](../../../../images/plugin-server/ingestion-server.png)
 
 ### Async server
 
 **Diagram 4: Async server**
 
-![Async server](../../images/../../../plugin-server/async-server.png)
+![Async server](../../../../images/plugin-server/async-server.png)
 
 
 ## Plugin server management
