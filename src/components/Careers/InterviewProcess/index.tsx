@@ -53,7 +53,7 @@ export const InterviewProcess = () => {
                 <Structure.SectionHeader
                     title="Get paid to try working here"
                     titleTag="h2"
-                    leadText="We do ~2 interviews, then pay you to do some real life, or close to real life, work:"
+                    leadText="We do 2-3 short interviews, then pay you to do some real life, or close to real life, work:"
                     leadTextClassName="opacity-80"
                 />
             </Structure.Section>
