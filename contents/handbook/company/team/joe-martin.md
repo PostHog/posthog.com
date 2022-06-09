@@ -20,7 +20,7 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I enjoy helping others. You can ask me anything. There are no stupid questions.  
 
 ### How to work with me
-- I default to listening. You may need to ask for my thoughts if you want them.
+- I can be over-communicative and need to be challenged on this. Tell me if you want the short version.
 - I have a very hands-on attitude and will never say 'That's not my job'. 
 - I may parrot ('_It sounds like..._') to ensure I understand. If I'm wrong, tell me. 
 - I'm truly uncomfortable with being in the limelight. I prefer private thank yous.
