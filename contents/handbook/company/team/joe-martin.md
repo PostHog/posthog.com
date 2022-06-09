@@ -27,18 +27,16 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I value compassion and inclusivity above everything else. I try to put people first. 
 - Ad-hoc meetings are fine, but weekends are sacred. I generally work 9-6 GMT.
 
-## Current areas of focus
-### Execution - Q1 2022
-- [x] **Community:** Organize the first PostHog community meet-up, with a good speaker. Retro the event and roll changes into a second event. Continue to attend and report back on other community events and meet-ups.
-- [x] **Case studies:** Secure an enterprise-level case study. Enhance the Customers section of the site and make plans to better leverage this content.
-- [x] **Content:** Support the Content team in creating a decent pipeline of good content that continues to deliver.
-- [x] **Partnerships:** Find further partnership opportunities to grow the community.
-- [x] **Internal:** Continue to advocate for less technical team members and users. Become more ambitious when it comes to shipping.
+## Areas of focus - Q2 2022
 
-### Personal - Q1 2022
-- [x] Don't lose (another, again) mission in Pandemic Legacy: Season Zero.
-- [x] See all of my nieces at least once. And my nephew.
-- [x] Don't miss a Donut chat.
+In Q1 I focused on our internal community, content and partnerships, among other things. Among the milestones I set were organizing our first meet-up, securing an enterprise-scale case study, launching the Apps platform and leading partnerships with other orgs. These were all successful.
+
+In Q2, I'm focusing on the following areas:
+
+- [ ] **Growth & Product:** Spend more time working with the Growth, Design and Engineering teams to have a direct impact on the product. Join Engineering sprints to find opportunities to collaborate. 
+- [ ] **Technical skills:** Continue to [improve technical skills and become more capable of shipping changes](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two) autonomously. Make changes directly to the product.  
+- [ ] **Scaling impact:** Find opportunities that, like Apps and onboarding, are especially impactful for users. Deprioritize sunk cost projects, such as Marketplace. Default to high-level content feedback over line-edits.
+- [ ] **Community activation:** Focus on opportunities to grow word of mouth by activating PostHog's community outside of Slack and GitHub. Example: G2 reviews, referral programmes, partnerships.  
 
 ## Feedback
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
@@ -51,11 +49,7 @@ In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-
 - I am seen as over-communicative in social discussions. I talk a lot about diversity, but fail on follow-through.
 - I am seen as biased to my past experiences. This limits my potential impact.
 
-As a result, over the next six months I will:
-
-- Push for bigger, braver projects. I feel continuing the '[Nail Plugins](https://github.com/PostHog/posthog.com/issues/3265)' project is a good starting point, as well as unblocking [competitor comparisons](https://github.com/PostHog/posthog.com/issues/2939).
-- Default to giving only high-level feedback on content, unless requested to do more. 
-- Change my internal communication style to allow other voices more room. Actively seek opportunities to champion diversity at PostHog through action. 
+A few months later, I had my [career chat](/handbook/people/career-progression) with Marcus and gathered additional feedback. PostHog team members can [read notes from this conversation and summary of the feedback](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
 
 I'm always open to more feedback, from anyone. Got some? [Send it to me!](https://forms.gle/UcA5FdAjZJSXiqYG6)
 
