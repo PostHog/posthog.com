@@ -228,7 +228,7 @@ Any additional ingestion server instance beyond the number of partitions for `cl
 
 Additional async server instances beyond the number of partitions for `events_plugin_ingestion` will be useful, but their benefit will be limited. They will not process async handlers, but will still be able to process both jobs and scheduled tasks.
 
-## Quirks
+### Quirks
 
 - In order to work correctly, you **must** either have a fleet composed of both async servers and ingestion servers, or all servers should be running in "default" mode. 
 - We run a fork of [Piscina](https://github.com/PostHog/piscina) with two key changes: a feature called `broadcastTask`, and a [change to its internal use of the Atomics API](https://github.com/PostHog/piscina/pull/4)
