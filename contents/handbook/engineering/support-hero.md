@@ -6,8 +6,8 @@ showTitle: true
 
 We have two types of rotations for engineering:
 
-1. Support Hero, first line responder to customer questions and bug reports
-2. Secondary on-call, responsible for prioritizing and solving escalated issues, Sentry errors and alerts.
+1. **Support Hero** - first line responder to customer questions and bug reports
+2. **Secondary on-call** - responsible for prioritizing and solving escalated issues, Sentry errors and alerts
 
 When someone is _Support Hero_, they are also the secondary on-call person for their team
 
@@ -29,7 +29,7 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Zendesk](#Zendesk)**:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most support tickets will come into [Zendesk](#Zendesk)**:
 
 - [PostHog Users's Slack](https://posthog.com/slack), specifically [#_customer_support](https://posthogusers.slack.com/archives/G01JXEDAL22), where all messages will come in from the other channels (also on [Zendesk](#zendesk)).
 - [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) which alerts you to questions asked directly on posthog.com (via [Squeak!](https://squeak.posthog.com)'s [Q&A.js](https://squeak.posthog.com/toolkit/qna.js)). [Learn how to use Squeak!](#how-to-use-squeak)
@@ -109,11 +109,13 @@ If a user is sending events to PostHog and these are not getting ingested, despi
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp) if you want to easily create and manage Zendesk tickets directly from inside the PostHog Users Slack. 
+
+This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace. 
 
 #### How to access Zendesk
 
-You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com). If you don’t have access, ask Grace.
+You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
 The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
 
@@ -127,29 +129,29 @@ There are a few different ways that support tickets can be created in Zendesk:
 
 _User Slack_
 
-- Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
+Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
 
 _Dedicated Support Channels_
 
-- Our Customer Success team monitors these channels and creates tickets in Zendesk via a direct Slack integration, and will prioritize and assign them accordingly.
+Our Customer Success team monitors these channels and creates tickets in Zendesk via a direct Slack integration, and will prioritize and assign them accordingly.
 
 ##### Email
 
-- Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
+Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
 
 Goal of the Support Hero person on duty is to:
 
-* keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
+* Keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
 
-* make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
+* Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
 
-* provide actionable information as _Note_ for all the items you cannot close before the end of your shift, and remove yourself as the assignee of the ticket so the next support hero can see what is outstanding
+* Provide actionable information as _Note_ for all the items you cannot close before the end of your shift, and remove yourself as the assignee of the ticket so the next support hero can see what is outstanding
 
 ##### How to deal with spam, marketing, partnership proposals, etc.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
-For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.
+For marketing, partnership proposals or anything like that, please post in Slack in #team-marketing before taking an action.
 
 ### Squeak!
 
