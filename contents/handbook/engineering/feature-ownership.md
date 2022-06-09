@@ -55,7 +55,6 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 ## Why did we establish feature owners?
 At our Engineering Offsite in February 2022 we realized the issue that some bugs and maintenance tasks may have been falling through the cracks because there were no clear owners.
 
-
 [@alexkim205]: https://github.com/alexkim205
 [@EDsCODE]: https://github.com/EDsCODE
 [@liyiy]: https://github.com/liyiy
@@ -66,3 +65,4 @@ At our Engineering Offsite in February 2022 we realized the issue that some bugs
 [@rcmarron]: https://github.com/rcmarron
 [@Twixes]: https://github.com/Twixes
 [@yakkomajuri]: https://github.com/yakkomajuri
+[@timgl]: https://github.com/timgl

@@ -99,9 +99,9 @@ export default function Company({ menu, parentURL }) {
                         <Chat />
                         <span>Contact sales</span>
                     </Link>
-                    <Link className={footerLink} to="/support">
+                    <Link className={footerLink} to="/questions">
                         <Lifeguard />
-                        <span>Support</span>
+                        <span>Questions?</span>
                     </Link>
                 </div>
                 <div className="text-left lg:text-right">

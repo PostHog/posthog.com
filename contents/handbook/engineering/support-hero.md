@@ -13,13 +13,13 @@ When someone is _Support Hero_, they are also the secondary on-call person for t
 
 ## 1. Support Hero
 
-Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the statisfaction of helping them out and contribute to a lot of different parts of our system.
+Every week, we assign one person to be the "Support Hero." If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system.
 
-All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work.
+### Expectations
 
-### Availability
+All other work takes a back seat while you're doing support, so don't plan on doing any 'normal' work. Furthermore expect that you will need a day or two the week after to follow-up on the less urgent issues. Please don't hand off too many things to the next support hero and make the start of their week more stressful.
 
-You should work your 'normal' hours during this week. Right now people in other timezones will jump in ad-hoc to catch messages that fall outside of the Support Hero's hours. Just make sure that as support hero you are doing the bulk of the debugging/fixing.
+You should work your 'normal' hours during this week. There will likely be more issues than you'll have time to fix so be sure to prioritise. If there's an important and urgent issue near the end of your day, hand it off to someone on the other side of the Atlantic.
 
 If you are planning on taking a day off or you won't be available, please find someone to swap with and update the rotation on PagerDuty. Be sure to schedule an override for both swaps and **do not alter the rotation order** to avoid affecting other members.
 
@@ -29,9 +29,10 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Papercups](#papercups)**:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most stuff will happen in [Zendesk](#Zendesk)**:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically #_customer_support, where all messages will come in from the other channels (also on [Papercups](#papercups)).
+- [PostHog Users's Slack](https://posthog.com/slack), specifically [#_customer_support](https://posthogusers.slack.com/archives/G01JXEDAL22), where all messages will come in from the other channels (also on [Zendesk](#zendesk)).
+- [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) which alerts you to questions asked directly on posthog.com (via [Squeak!](https://squeak.posthog.com)'s [Q&A.js](https://squeak.posthog.com/toolkit/qna.js)). [Learn how to use Squeak!](#how-to-use-squeak)
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
 
@@ -45,8 +46,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
-    - [Papercups](#papercups) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
-- Housekeeping. Once a customer issue/question has been addressed, close the conversation on [Papercups](#papercups) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
 ### Prioritizing requests
 
@@ -55,17 +55,11 @@ As an engineer, when a question comes in your first instinct is to give them an 
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
 
-We tag customers in [Papercups](#papercups) according to these categories so you can easily filter them - you can view the tags in the right hand pane in the [Papercups](#papercups) app:
-
-<img width="219" alt="" src="https://user-images.githubusercontent.com/70321811/140539495-565598d1-9245-429b-b860-1d0ea1906ca9.png" />
-
-At the moment, Charles manually tags customers based on Stripe and HubSpot data once a week. The vast majority of customers fall into the Community category, so make sure you are giving Focus customers enough time if you see a query come in from them.
-
 ## Categorizing requests
 
-It's really valuable for us to understand what types of requests we've had so we can priroitize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
+It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
 
-When you initially respond to an issue add a "conversation tag" with the following categories:
+When you initially respond to an issue in Zendesk add a "tag" with the following categories:
 * User experience _(confusing/unclear UX)_.
 * Performance
 * Docs confusion _either missing or confusing_.
@@ -80,7 +74,7 @@ When you initially respond to an issue add a "conversation tag" with the followi
 
 If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
 
-If a ticket doesn't fit a category correctly, we might need to update our tags, open a PR to edit this page.
+If a ticket doesn't fit a category correctly, we might need to update our tags -- open a PR to edit this page.
 
 ### Escalating issues
 
@@ -107,53 +101,77 @@ See the handbook page [Deployments Support](/handbook/engineering/deployments-su
 
 If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
 
-1. Check if the plugin server is alive and healthy (suggest a restart if not - this is safe)
+1. Check if the app/plugin server is alive and healthy (suggest a restart if not - this is safe)
 2. Ask if they have Sentry set up and see any errors
 3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 
-### Papercups
+### Zendesk
 
-We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Papercups is an open source live customer support app. It allows us to manage all our customer conversations in one place and reply through Slack, web, or via mobile app.
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-##### How to access Papercups
-You can access the app via [app.papercups.io](https://app.papercups.io). If you don’t have access, ask Charles.
+#### How to access Zendesk
 
-The first time you sign into Papercups, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com). If you don’t have access, ask Grace.
 
-##### How to use Papercups
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
 
-You’ll spend most of your time in the “Conversations” view, where you’ll find all customer conversations divided by _status_.
+#### How to use Zendesk
+
+You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
+
+There are a few different ways that support tickets can be created in Zendesk:
+
+##### Slack
+
+_User Slack_
+
+- Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
+
+_Dedicated Support Channels_
+
+- Our Customer Success team monitors these channels and creates tickets in Zendesk via a direct Slack integration, and will prioritize and assign them accordingly.
+
+##### Email
+
+- Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
 
 Goal of the Support Hero person on duty is to:
 
-* keep the quantity of items in the _All_ section as small as possible (this is important so we can keep our focus on workable items only)
+* keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
 
 * make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
 
-* provide actionable information as _Note_ for all the items you cannot close before the end of your shift (this is important as hand-off to the next person on-call)
-
-Here's a q quick overview of Papercups' main features:
-
-- _Main conversations view_: when you sign into Papercups, you can either [view all conversations](https://app.papercups.io/conversations/all), or just those [assigned to you](https://app.papercups.io/conversations/me). If you are the first person to respond to a query, you will be automatically assigned that conversation. Don't forget to close a conversation by ticking the box in the top right when you are done, so we know which queries have been resolved!
-- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer support_ channel in the [PostHog Users Slack](http://posthog.com/slack) - both work.
-- _Slack integration (2)_: In the PostHog Users Slack, messages posted in the _general_ and _feedback_ channels are also synced with the Papercups app. As above, this means you can reply to users in that Slack channel directly or in Papercups. Please try to reply in a Slack thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
-- _Email integration_: Any emails that come into hey@ get synced with Papercups and Slack, so you can reply on either of those platforms, or directly to the email. If you reply via email, please make sure you at least bcc hey@ so we know that someone has responded!
-- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
-- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation. This is useful for sharing context with other team members.
-- _Analytics_: 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. We don't report on these yet as we're still figuring out the best way for us to do support.
-
-Papercups is an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.
+* provide actionable information as _Note_ for all the items you cannot close before the end of your shift, and remove yourself as the assignee of the ticket so the next support hero can see what is outstanding
 
 ##### How to deal with spam, marketing, partnership proposals, etc.
 
-Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Papercups). When this happens, simply mark the conversation as closed.
+Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please double check with Charles or James before taking an action.
 
+### Squeak!
 
-## Secondary on-call
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+
+#### Q&A.js by Squeak!
+
+At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
+
+Q&A.js should help reduce the load of the support hero, but you'll need to make sure questions are getting answered accurately – and in a timely manner.
+
+#### Answering questions using Squeak!
+
+When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+
+The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
+
+Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
+
+_Note: Squeak! currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/squeak/issues/112) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## 2. Secondary on-call
 
 Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
 

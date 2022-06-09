@@ -18,13 +18,13 @@ Once again, we were heavily driven by feedback, having done a bunch of calls wit
 
 > If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
-### [Scheduled Plugins and Editor](https://github.com/PostHog/posthog/pull/2743)
+### [Scheduled Apps and Editor](https://github.com/PostHog/posthog/pull/2743)
 
-![Plugin Editor Screenshot](../images/blog/array/plugin-editor.png)
+![App Editor Screenshot](../images/blog/array/plugin-editor.png)
 
-We now support scheduled plugins that run periodically on a specified time cycle (e.g. minute, hour, day), as well as have a built-in code editor for plugins right into the PostHog UI.
+We now support scheduled apps that run periodically on a specified time cycle (e.g. minute, hour, day), as well as have a built-in code editor for apps right into the PostHog UI.
 
-With the ability to run tasks in specified time intervals, you can now setup plugins that, for example, keep track of external metrics and add this data to PostHog via new events. This is possible because we now [support `posthog.capture` calls inside plugins as well](https://github.com/PostHog/posthog-plugin-server/pull/67). 
+With the ability to run tasks in specified time intervals, you can now setup apps that, for example, keep track of external metrics and add this data to PostHog via new events. This is possible because we now [support `posthog.capture` calls inside apps as well](https://github.com/PostHog/posthog-plugin-server/pull/67). 
 
 Some metrics you might want to keep track of are, for example, server performance, GitHub activities (e.g. stars ⭐ ), engagement with your project's social media profiles, and anything else you can think of!
 
@@ -45,9 +45,9 @@ async function runEveryMinute({ config }) {
 }
 ```
 
-You can learn more about scheduled plugins on the [PR that created them](https://github.com/PostHog/posthog-plugin-server/pull/63), as well as our docs for [building your own plugin](/docs/plugins/build).
+You can learn more about scheduled apps on the [PR that created them](https://github.com/PostHog/posthog-plugin-server/pull/63), as well as our docs for [building your own app](/docs/plugins/build).
 
-> **Note:** Plugins are a Beta feature currently only available on self-hosted instances. We are working to make it available on PostHog Cloud soon.
+> **Note:** Apps are a Beta feature currently and only available on self-hosted instances. We are working to make it available on PostHog Cloud soon.
 
 ### [Lifecycle Analysis](https://github.com/PostHog/posthog/pull/2460)
 
@@ -239,3 +239,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Lifecycle Graph [\#2460](https://github.com/PostHog/posthog/pull/2460) ([EDsCODE](https://github.com/EDsCODE))
 - Setup ecs configs for worker process [\#2458](https://github.com/PostHog/posthog/pull/2458) ([fuziontech](https://github.com/fuziontech))
 - Remove signup process from cypress [\#2264](https://github.com/PostHog/posthog/pull/2264) ([timgl](https://github.com/timgl))
+
+<ArrayCTA />

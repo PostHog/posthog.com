@@ -57,3 +57,11 @@ Open your account dropdown in the top right corner of the navigation bar and the
 - _Personal API keys_ - used to authenticate you against our API
 - _Security and Feature Updates_ - enable or disable email notifications with security and product feature updates only (no marketing emails)
 - _Anonymize Data Collection_ - set whether or not to allow PostHog to collect data about your usage of the product
+
+### Further reading
+
+Want to know more about what's possible with PostHog? Try these tutorials:
+
+- [How to track single-page apps](/tutorials/spa)
+
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 

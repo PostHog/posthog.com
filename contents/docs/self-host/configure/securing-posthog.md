@@ -40,9 +40,9 @@ As noted multiple times throughout our Docs, PostHog **should always run on HTTP
 
 Furthermore, if this flag is set to "True" and you are not running on HTTPS, you will not be able to log in to PostHog, since secure cookies are discarded in an unsafe environment.
 
-For most users, toggling this flag will not be necessary, as PostHog handles most cases appropriately for you. However, if you need to set it manually, you can explicitly set `SECURE_COOKIES=False` or `SECURE_COOKIES=True` as an environment variable. The main use case for this is testing, where you may need secure cookies off while setting up a production environment, or you might want them on when developing locally with HTTPS. 
+For most users, toggling this flag will not be necessary, as PostHog handles most cases appropriately for you. However, if you need to set it manually, you can explicitly set `SECURE_COOKIES=False` or `SECURE_COOKIES=True` as an environment variable. The main use case for this is testing, where you may need secure cookies off while setting up a production environment, or you might want them on when developing locally with HTTPS.
 
-For more information on Django security features, you can check out [Django's Official Docs](https://docs.djangoproject.com/en/3.1/topics/security/), which discuss secure cookies. 
+For more information on Django security features, you can check out [Django's Official Docs](https://docs.djangoproject.com/en/3.1/topics/security/), which discuss secure cookies.
 
 ## Secret key
 
@@ -54,21 +54,4 @@ Secret keys are used to encrypt cookies and password reset emails, [among other 
 openssl rand -hex 32
 ```
 
-This `SECRET_KEY` must be passed to PostHog as an environment variable. One-click deploys automatically set a secure key for you, but deployments from source and using Docker currently require you to manually set this. 
-
-### Secret key with Docker Compose
-
-When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
-
-#### Step-by-step
-
-First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
-
-Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
-
-Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
-
-This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
-```
-SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
-```
+This `SECRET_KEY` must be passed to PostHog as an environment variable.

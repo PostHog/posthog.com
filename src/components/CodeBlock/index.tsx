@@ -10,7 +10,7 @@ import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
 
-const TooltipTitle = ({ title, visible, className }: { title: string; visible: boolean; className: string }) => {
+const TooltipTitle = ({ title, visible, className }: { title: string; visible: boolean; className?: string }) => {
     return (
         <AnimatePresence>
             {visible && (
@@ -31,13 +31,13 @@ export default function Tooltip({
     title = '',
     visible,
     children,
-    className = '',
+    className,
 }: {
     title: string
     visible: boolean
-    children: JSX.Element[]
-    className: ''
-}) {
+    children: JSX.Element | JSX.Element[] | null
+    className?: string
+}): JSX.Element {
     return (
         <div className="relative">
             <TooltipTitle className={className} visible={visible} title={title} />
@@ -126,7 +126,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }
 
     return (
-        <div className="relative">
+        <div className="relative mt-2">
             <Tooltip className="right-0" title="Copied!" visible={tooltipVisible}>
                 {copyToClipboardAvailable ? (
                     <span className="text-primary dark:text-primary-dark absolute right-2 top-1">

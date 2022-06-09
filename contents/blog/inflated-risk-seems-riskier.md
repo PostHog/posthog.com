@@ -77,4 +77,6 @@ Future posts in this series will cover our fast-follow seed and series A rounds 
 
 If you haven’t tried PostHog yet what are you waiting for? We’re a fast growing, developer-first, and open source product analytics platform you can’t afford to miss.
 
-[Try PostHog Cloud](https://app.posthog.com/signup), get started in less than a minute.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

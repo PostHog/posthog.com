@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> **Have a question?** Ask anything PostHog-related at [posthog.com/questions](/questions).
+
 PostHog provides a free basic level of support to everyone via the community, with additional support options available for paying customers depending on product. 
 
 |Support type|Open Source|Cloud|Scale|Enterprise|

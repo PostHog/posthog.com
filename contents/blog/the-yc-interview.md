@@ -76,3 +76,9 @@ That magical phone call came around a week later. Dalton called asking us to acc
 The weeks that followed were quite stressful. We suddenly had to find a lawyer to create a US parent company, we had to book an Airbnb, and work out if we needed an accountant, whilst still keeping the company growing and signing our first clients.
 
 We immediately started doing regular calls with the partners and we chose to send a regular update once a week with our progress. Knowing this was coming up every Friday kept our urgency up.
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

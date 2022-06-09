@@ -7,7 +7,7 @@ showTitle: true
 
 Getting a production environment of PostHog up and running is probably one of the first things you want to do! This section goes through the different options available depending on where you'll be hosting PostHog, and includes guides on several of the most popular services. 
 
-> Note: if you self-host PostHog, you'll be managing the service yourself. This means running regular upgrades, scaling as needed etc. If you are less technical or looking for a more hands-off experience, we recommend checking out [PostHog Cloud](/docs/cloud).
+> **Note:** Self-hosting PostHog means managing the service yourself. This means running regular upgrades, scaling, etc. If you are less technical or looking for a hands-off experience, we recommend [PostHog Cloud](/docs/cloud). You can also find support partners to manage the service for you via [the PostHog Marketplace](/marketplace).
 
 ## Deployment options
 
