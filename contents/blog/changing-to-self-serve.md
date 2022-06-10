@@ -1,6 +1,6 @@
 ---
 date: 2022-06-10
-title: Our new objective: Nail Self Serve
+title: "Our new objective: Nail Self Serve"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
