@@ -127,7 +127,7 @@ One consumer group is managed by ClickHouse, via its [Kafka table engine](https:
 
 The other consumer group corresponds to the async server, which pass the event to plugins running functions like `onEvent` and `onAction`.
 
-If your server is running in "default" mode, this step is skipped, and instead async handlers are processed after the "ingest event" step on the same server.
+If your server is running in "default" mode, this step is skipped, and instead async handlers are processed after the `createEvent` step on the same server.
 
 > Note that high load production deployments run many instances of the Django server, the ingestion server, and the async server. This is handled correctly by all services, and covered later.
 
@@ -159,7 +159,6 @@ The PubSub service connects to [Redis Pub/Sub channel](https://redis.io/docs/man
 
 We use the [Graphile Worker](https://github.com/graphile/worker) for our plugin jobs implementation. This queue is a consumer that will periodically check the jobs listed in Postgres and trigger job runs when the jobs target time is reached.
 
-
 ##### Schedule
 
 A [node-schedule](https://github.com/node-schedule/node-schedule) scheduler that will trigger scheduled plugin tasks (`runEveryMinute`, `runEveryDay`, etc). 
@@ -176,11 +175,9 @@ The worker thread communicates with the main thread via TCP to fetch the necessa
 
 A simple HTTP server that's currently only used for healthchecks.
 
+#### Piscina
 
-
-#### Communication between the main thread and worker threads
-
-We use the [Piscina thread pool](https://github.com/piscinajs/piscina) to communicate between the main thread and the worker threads in the plugin server.
+We use the [Piscina thread pool](https://github.com/piscinajs/piscina) to dispatch tasks from the main thread to the worker threads in the plugin server.
 
 By default, Piscina will spawn as many worker threads as the machine's CPU cores, and each worker can process 10 tasks concurrently by default. 
 
