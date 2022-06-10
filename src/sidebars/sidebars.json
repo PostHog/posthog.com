@@ -86,7 +86,7 @@
                     "url": "/handbook/company/communication"
                 },
                 {
-                    "name": "Management at PostHog",
+                    "name": "Management",
                     "url": "/handbook/company/management"
                 },
                 {
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "Growth",
+            "name": "Customer success",
             "url": "",
             "children": [
                 {
@@ -478,21 +478,13 @@
                     "url": "/handbook/growth/customer-support"
                 },
                 {
-                    "name": "Developer relations",
-                    "url": "/handbook/growth/developer-relations"
+                    "name": "Inbound sales model",
+                    "url": "/handbook/growth/sales/overview"
                 },
                 {
-                    "name": "Customer success",
-                    "url": "",
+                    "name": "Sales operations",
+                    "url": "/handbook/growth/sales/sales-operations",
                     "children": [
-                        {
-                            "name": "Sales overview",
-                            "url": "/handbook/growth/sales/overview"
-                        },
-                        {
-                            "name": "Sales operations",
-                            "url": "/handbook/growth/sales/sales-operations"
-                        },
                         {
                             "name": "Managing our CRM",
                             "url": "/handbook/growth/sales/crm"
@@ -516,6 +508,10 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "Developer relations",
+            "url": "/handbook/growth/developer-relations"
         }
     ],
     "docs": [

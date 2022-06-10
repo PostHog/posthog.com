@@ -25,7 +25,7 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
-                We could use your help."
+                Adventurers needed."
                 image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
             />
 
