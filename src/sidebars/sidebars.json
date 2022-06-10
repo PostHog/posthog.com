@@ -630,6 +630,16 @@
                                     ]
                                 },
                                 {
+                                    "name": "Plugin server",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/runbook/plugin-server"
+                                        }
+                                    ]
+                                },
+                                {
                                     "name": "Upgrading PostHog",
                                     "url": "/docs/self-host/configure/upgrading-posthog",
                                     "children": [
