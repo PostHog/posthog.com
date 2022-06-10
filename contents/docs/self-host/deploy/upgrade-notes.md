@@ -279,8 +279,12 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/r
     Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
 
 ### Upgrading from 20.x.x
-
 21.0.0 changes the supported Kubernetes version to >=1.21 <= 1.24:
 
 - drops support for Kubernetes 1.20 as it has reached end of life on 2022-02-28
 - adds support for Kubernetes 1.24 released on 2022-05-24
+
+### Upgrading from 21.x.x
+22.0.0 upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This update brings several improvements to the overall service. For more info, you can look at the [upstream changelog](https://clickhouse.com/docs/en/whats-new/changelog/#clickhouse-release-v223-lts-2022-03-17).
+
+Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
