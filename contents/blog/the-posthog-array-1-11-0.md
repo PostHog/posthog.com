@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -81,3 +81,5 @@ We've also welcomed Michael to the team full-time, and Max is going to join us o
 Full stack or growth engineers - [we want you!](https://posthog.com/careers)
 
 We've also started looking for a Ops type person - someone that can take charge of the operational side of a quickly growing, completely remote company.
+
+<ArrayCTA />

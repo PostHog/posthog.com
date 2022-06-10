@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes']
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -17,7 +17,7 @@ Release 1.21 is a big one, on top of exciting new features and improvements, we 
 
 -   New: Our new navigation is out of beta and available to all
 -   New: assign Feature Flags to multiple groups of users
--   New: Plugins UI and new Taxonomy plugin
+-   New: Apps UI and new Taxonomy app
 -   Improvement: to Insight query caching
 -   Improvement: to Session Recording filters
 
@@ -79,26 +79,26 @@ The filters and rollout percentages can be adjusted per group, giving you greate
 
 ### [A New Plugins UI with Brand New Features](https://github.com/PostHog/posthog/pull/2774)
 
-![Plugins UI](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugins-ui.png)
+![Apps UI](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugins-ui.png)
 
-A lot has happened to our plugins feature since the last release, including:
+A lot has happened to our apps feature since the last release, including:
 
 -   An improved UI
--   The ability to reorder plugins
--   The ability to upgrade plugins (and see exactly what changed between plugin versions)
--   Autofill on commonly used plugin configuration fields
--   A new plugin configuration field type, letting plugin builders specify pre-determined choices for the user to select from
+-   The ability to reorder apps
+-   The ability to upgrade apps (and see exactly what changed between versions)
+-   Autofill on commonly used app configuration fields
+-   A new app configuration field type, letting app builders specify pre-determined choices for the user to select from
 -   A ton of performance improvements
 
-### [Taxonomy Plugin](https://posthog.com/plugins/taxonomy-standardizer)
+### [Taxonomy Standardizer](https://posthog.com/plugins/taxonomy-standardizer)
 
-![Taxonomy Plugin](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/taxonomy-plugin.png)
+![Taxonomy Standardizer](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/taxonomy-plugin.png)
 
 Standardize your event names into a single naming pattern by converting the names of your events that don't match your desired pattern into the chosen format, such as `camelCase` or `snake_case`.
 
-### [Bitbucket Release Tracker Plugin (Beta)](https://posthog.com/plugins/bitbucket-release-tracker)
+### [Bitbucket Release Tracker (Beta)](https://posthog.com/plugins/bitbucket-release-tracker)
 
-![Bitbucket Plugin](https://github.com/PostHog/bitbucket-release-tracker/raw/main/readme-assets/release-tracker.png)
+![Bitbucket App](https://github.com/PostHog/bitbucket-release-tracker/raw/main/readme-assets/release-tracker.png)
 
 Get your Bitbucket release tags into PostHog as annotations on your graphs, so you can track the impact of releases on your metrics.
 
@@ -381,3 +381,6 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 -   Add timeout and error messages [\#2876](https://github.com/PostHog/posthog/pull/2876) ([timgl](https://github.com/timgl))
 -   Add autofill for posthog props in plugin config [\#2838](https://github.com/PostHog/posthog/pull/2838) ([yakkomajuri](https://github.com/yakkomajuri))
 -   Enable SSL PostgreSQL configuration through env variables [\#2967](https://github.com/PostHog/posthog/pull/2967) ([tmilicic](https://github.com/tmilicic))
+
+<ArrayCTA />
+

@@ -54,7 +54,7 @@ For certain roles, we also publish on other job boards.
 
 **Engineering**
 
-*   HackerNews Who's Hiring
+*   Hacker News Who's Hiring
     *   Tend to get high quality candidates, and people interested in working at startups.
     *   See [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
 
@@ -79,9 +79,13 @@ Every time we open a new role, we will share the details and ideal profile with 
 
 **Personal referral** 
 
-If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
+If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice - and we will match the amount! You can also split the amount between you and the charity.
 
-Someone you have a personal or professional relationship with to confidently say they align with our values and fit our requirements. Please make sure the candidate has given their consent before putting them forward!
+Please make sure the candidate has given their consent before putting them forward. 
+
+We occasionally open up short term contracts, and you'll receive a $1,000 referral bonus if you recommend someone here to! The contract just needs to be on a full time basis and at least 3 months long.
+
+Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
 
 **Social referral** 
 
@@ -93,13 +97,13 @@ The referral bonus for social referrals is $500, and we again match any amount y
 
 **What's the process?**
 
-*   If there is an ongoing conversation, please ping Eltje into the email thread with the referred candidate, she will take it over from there.
+*   If there is an ongoing conversation, please cc careers@ into the email thread with the referred candidate and we will take it over from there.
 *   Otherwise, please upload the profile to the [Workable referral page](https://referrals.workable.com/posthog/jobs/). 
-*   If they have applied themselves already, let Eltje know within 48 hours of them applying.
+*   If they have applied themselves already, let careers@ know within 48 hours of them applying.
 
 **Referral payouts** 
 
-The bonus date is 3 months from the new team member's start date and will be processed as part of payroll (you might be liable for income tax on the bonus). 
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll - bear in mind that you might be liable for income tax on the bonus. 
 
 **External referrals** 
 
@@ -203,6 +207,8 @@ The candidate will be working on a task that is similar to the day-to-day work s
 
 This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
+> If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate should also never lose out because they are not available to do a SuperDay right away.
+
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice.
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. 
@@ -224,12 +230,19 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 
 ### Decide if we will hire
 
-After a SuperDay, everyone involved in the day leaves their feedback on Workable. In case of any misalignment or open questions, we will start a Slack conversation or Zoom call, to discuss feedback. If there are wildly different opinions, reflect on why.
+After a SuperDay, everyone involved in the day leaves their feedback on Workable. In case of any misalignment or open questions, or if there are wildly different opinions, you should open an issue in `company-internal` to discuss. 
 
 Responsiveness at all stages is really important to us - at each stage of the process, we should aim to get back to candidates with feedback within 48 hours. It is not ok to leave candidates waiting for weeks, or for someone to apply and never hear back from us.
 
 In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
 
+If a decision is made to hire, you should also open an issue in `company-internal` to give the team context about who the person is and why they were hired. It is helpful to include:
+
+- Role background: what they will be doing, and a summary of the recruitment process (how long open for, no. of applicants etc.)
+- Who we are hiring: a brief intro
+- Why we are hiring them: feedback from the interview process, both positive and areas to improve
+- Start date and location
+- Share the output of their SuperDay (if it contains personal info, you can just share the task)
 
 ### Making the offer
 

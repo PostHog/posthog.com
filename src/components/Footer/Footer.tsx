@@ -68,7 +68,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="lg:!ml-auto md:text-base"
                         title="Support"
-                        url="/support"
+                        url="/questions"
                     />
                     <FooterMenuItem
                         marginBottom="0"
@@ -111,7 +111,8 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="Session recording" url="/product/session-recording" />
                                     <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
-                                    <FooterMenuItem title="Heatmaps" url="/heatmaps" />
+                                    <FooterMenuItem title="Experimentation" url="/product/experimentation-suite" />
+                                    <FooterMenuItem title="Heatmaps" url="/product/heatmaps" />
                                 </ul>
                             </div>
                             <div>
@@ -125,12 +126,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem
-                                        title="Quantitative analysis"
-                                        url="/product/quantitative-analysis"
-                                    />
-                                    <FooterMenuItem title="Open source" url="https://github.com/posthog/posthog" />
-                                    <FooterMenuItem title="Integrations" url="/integrations" />
+                                    <FooterMenuItem title="Correlation analysis" url="/product/correlation-analysis" />
+                                    <FooterMenuItem title="Collaboration" url="/product/collaboration" />
+                                    <FooterMenuItem title="Apps" url="/apps" />
                                 </ul>
                             </div>
                         </div>
@@ -142,12 +140,12 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Discussion</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Questions?" url="/questions" />
                                     <FooterMenuItem title="Slack" url="/slack" />
                                     <FooterMenuItem
                                         title="Issues"
                                         url="https://github.com/PostHog/posthog.com/issues"
                                     />
-                                    <FooterMenuItem title="Support" url="/support" />
                                     <FooterMenuItem
                                         title="Contact sales"
                                         url="/signup/self-host/get-in-touch#contact"
@@ -164,6 +162,7 @@ export function Footer(): JSX.Element {
                                         title="PostHog FM"
                                         url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
                                     />
+                                    <FooterMenuItem title="Marketplace" url="/marketplace" />
                                 </ul>
                             </div>
                         </div>
@@ -179,6 +178,10 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
                                     <FooterMenuItem title="Tutorials" url="/tutorials" />
+                                    <FooterMenuItem
+                                        title="PostHog on GitHub"
+                                        url="https://github.com/posthog/posthog"
+                                    />
                                 </ul>
                             </div>
                             <div>
@@ -190,6 +193,7 @@ export function Footer(): JSX.Element {
                                     />
                                     <FooterMenuItem title="Docs" url="/docs" />
                                     <FooterMenuItem title="API" url="/docs/api" />
+                                    <FooterMenuItem title="Apps" url="/docs/apps" />
                                 </ul>
                             </div>
                             <div>
@@ -199,7 +203,6 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
                                     <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
-                                    <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
                                 </ul>
                             </div>
@@ -223,8 +226,9 @@ export function Footer(): JSX.Element {
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="FAQ" url="/faq" />
+                                    <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
-                                    <FooterMenuItem title="Media" url="/media" />
+                                    <FooterMenuItem title="Press" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
                                     <FooterMenuItem
                                         title="YouTube"

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["General", "Company & culture", "CEO diaries"]
+categories: ["General", "Inside PostHog", "CEO diaries"]
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
 ---
@@ -247,3 +247,9 @@ We stopped working on several ideas that probably could have worked out, _if_ we
 Those very early decisions are the most leveraged you will ever take for your startup. Whatever you stick with may well be the thing you do for the next 10 years, and the stronger product market fit you can find early on, the easier everything else will be later. It's a lot easier to sell something that people want.
 
 It turns out that PostHog has been about building something people want, that we also wanted to work on. If you're reading this article and having a tough time working out if you should pivot, drop us [an email](mailto:blog@posthog.com).
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/dogfooding.png
 featuredImageType: full
+categories: ["Inside PostHog"]
 ---
 
 Product testing is essential, but your testing won’t always pick up the small sources of friction which build up over time and frustrate your users. This is where ‘dogfooding’ comes in - regularly using your product to get the full picture and build empathy with your users.
@@ -33,4 +34,8 @@ Retention is a strong indicator of whether or not your users are getting frustra
 
 PostHog offers all the [tools](https://posthog.com/product) you need to identify issues with your retention and plan your dogfooding initiatives. [Deploy PostHog](https://app.posthog.com/signup) today.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

@@ -1,0 +1,179 @@
+---
+date: 2022-05-30
+title: 'Array 1.36.0: Introducing AND/OR filtering, timezone support and universal search'
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+categories: ['Release notes', 'Product updates']
+featuredImage: ../images/blog/posthog-array-blog.png
+featuredImageType: full
+excerpt: PostHog 1.36.0 introduces AND/OR filtering, timezone support, universal search, multi-dashboard insights and much, much more.
+---
+
+import AndOrFilteringImage from '../images/blog/array/1-36-0-and-or-filtering.png'
+import UniversalSearchImage from '../images/blog/array/1-36-0-universal-search.png'
+import InsightOnMultipleDashboardsImage from '../images/blog/array/1-36-0-insight-on-multiple-dashboards.png'
+import DataColorsImage from '../images/blog/array/1-36-0-data-colors.png'
+import NewFunnelVizImage from '../images/blog/array/1-36-0-new-funnel-viz.png'
+import NewFunnelVizDashboardImage from '../images/blog/array/1-36-0-new-funnel-viz-dashboard.png'
+import TimezoneImage from '../images/blog/array/1-36-0-timezone.png'
+import PreflightImage from '../images/blog/array/1-36-0-preflight.png'
+import MultiPointPersonsModalImage from '../images/blog/array/1-36-0-multi-point-persons-modal.gif'
+
+Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](/newsletter), which we send once every two weeks!
+
+> Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/self-host/configure/upgrading-posthog).
+
+## PostHog 1.36.0 release notes
+
+**Release highlights:**
+
+- Changed: [Plugins are now Apps](#changed-plugins-are-now-apps)
+- New: [AND/OR filtering](#new-and-or-filtering)
+- New: [Multi-dashboard insights](#new-multi-dashboard-insights)
+- New: [Universal Search](#new-universal-search)
+- New: [Timezone support for insights](#new-timezone-support-for-insights)
+- New: [Redesigned Funnels](#new-redesigned-funnels)
+- Improved: [A more accessible color palette](#improved-a-more-accessible-color-palette)
+- Improved: [Accessible color palette](#improved-a-more-accessible-color-palette)
+- Improved: [Improved series switching in Persons](#improved-series-switching-in-persons)
+- Improved: [Better preflight checks](#improved-preflight-checks)
+- News: [Restack joins PostHog Marketplace](#new-restack-joins-the-posthog-marketplace)
+
+### Changed: Plugins are now Apps
+
+You may have noticed that we recently changed the name of our plugins, rebranding them to Apps. On the surface this may seem like a simple cosmetic change, but it plays in to the growing capability of  ~~plugins~~ apps on PostHog. 
+
+We'll have more to share about [what's possible with apps](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) in the future. For now you can check out [our refreshed library](/apps) and a handful of new apps for services such as [Amazon Kinesis](/apps/amazon-kinesis), [Braze](/apps/braze) and [Intercom](/apps/intercom). Enjoy!
+
+### New: AND/OR filtering
+
+<img src={AndOrFilteringImage} alt="AND/OR filters" style={{ width: 720 }} />
+
+A frequent request in [feedback calls](https://calendly.com/posthog-feedback) is for more powerful filtering options when creating insights. Specifically, for AND/OR filtering. Finally, we've delivered exactly that. 
+
+AND/OR operators can now be used in filters to mix and match conditions into new combinations and identify new sorts of user behaviour. We're still interested in any other requests you may have though, so why not [schedule a feedback call](https://calendly.com/posthog-feedback) and let us know your suggestions?
+
+### New: Multi-dashboard insights
+<div style="text-align: center;">
+<img src={InsightOnMultipleDashboardsImage} alt='"Add insight to dashboards" modal' style={{ width: 502 }} />
+</div>
+
+Got an insight you'd like to have on two dashboards at the same time? Previously you had to duplicate it and keep the copies in sync all the time. What a pain!
+
+Now, from PostHog 1.36 onwards, you can add a single insight to multiple dashboards at once. That means you don't need to worry about maintaining multiple insights and keeping all those copies in sync! Check [the dashboard docs](/docs/user-guides/dashboards) for more info. 
+
+### New: Universal search
+
+<img src={UniversalSearchImage} alt="Universal search box" style={{ width: 855 }} />
+
+Ever struggled to find an old insight, event or cohort in your PostHog project? We've added universal search to the familiar "Search" box in the top navigation, so now you have one tool you can use to find _anything_ on PostHog. 
+
+### New: Timezone support for insights
+<div style="text-align: center;">
+<img src={TimezoneImage} alt='Insight tooltip in Eastern Daylight Time"' style={{ width: 322 }} />
+</div>
+
+PostHog projects have included a timezone setting since [version 1.24](/blog/the-posthog-array-1-24-0), enabling you to manually convert dates and times shown in the app. But 1.36 takes it to the next level.
+
+As of 1.36, all insights queries take into account the timezone you've set in your Project Settings, enabling more accurate results for projects using timezones other than UTC. This is especially helpful when grouping data by day, week, or month!
+
+### New: Redesigned Funnels
+
+<img src={NewFunnelVizImage} alt="A three-step funnel in the new UI on the insight page" style={{ width: 970 }} />
+
+Ever thought funnels on PostHog take up a bit too much space? Ever struggled to read longer funnels which are featured on a dashboard? You weren't the only one. That's why we redesigned them! 
+
+The new interface addresses the feedback we've heard, making funnels easier to use and clearer than ever. Check [the Funnels docs](/docs/user-guides/funnels) for more information about what's possible with funnels! 
+
+### Improved: A more accessible color palette
+
+<img src={DataColorsImage} alt="A funnel with new data colors" style={{ width: 640 }} />
+
+Speaking of design, you may have noticed we've updated the color palette in most Insights (specifically: [Trends](/docs/user-guides/funnels), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/Retention), and [Stickiness](/docs/user-guides/stickiness)). 
+
+The new color palette is more pleasing to the eye, but the change isn't just aesthetic. It's also much more accessible for colorblind users. We want to continue improving accessibility in PostHog, so if you have specific feedback on this topic then please [let us know in the Slack](/slack) or [create an issue](https://github.com/PostHog)!
+
+### Improved: Switch between series in the persons modal
+<div style="text-align: center;">
+<img src={MultiPointPersonsModalImage} alt="Switching between series in the persons modal" style={{ width: 621 }} />
+</div>
+
+Thanks to the new series selector, the Persons modal is easier to use with multi-series Trends insights. In fact, you can now switch between series without ever having to close the window, quickly zooming in on particular user segments - just like in the GIF above!
+
+### Improved: Preflight checks
+
+<img src={PreflightImage} alt="New preflight checks screen" style={{ width: 627 }} />
+
+When self-hosting PostHog, it's crucial that all components are up and running, which is why the preflight checks screen is the first thing you see when setting up a fresh instance. Our new version of this screen makes initial setup of your instance all the more pleasant!
+
+### New: Restack joins the PostHog Marketplace
+
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/clVpovL0vxI"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+[Restack](https://posthog.com/marketplace/restack) is a platform for deployiong open-source software stacks on Kubernetes and is run by a team of open-source enthusiasts. It's a natural match for [the PostHog Marketplace](https://posthog.com/marketplace/), where we've steadily grown the number of businesses offering services and support over the last few months.
+
+Restack enables you to deploy and benefit from a self-hosted PostHog instance, but without the maintenance busy work. Best of all, Restack Console can ensure deployments are [HIPAA](/docs/privacy/hipaa-compliance), FISMA and SOC2 compliant — handy if you deal with a lot of [PII](/blog/what-is-personal-data-pii). Find out more in [the Marketplace, or head to [Restack's store listing for PostHog](https://www.restack.io/store/posthog) to find more great videos like the one above!
+
+### Other improvements & fixes
+
+Version 1.36 also adds hundreds of other improvements and fixes, including...
+
+-   **New**: Median conversion time is now presented in funnel insights, offering results that are more resistant to being skewed by outliers. The average continues to be available in detailed results. [#9810](https://github.com/PostHog/posthog/pull/9810)
+-   **Improved**: The in-app plugin source code editor has been divided into tabs, to make editing `plugin.json` and `index.ts` slightly more intuitive. Additionally, code is now automatically formatted with `prettier` on save. [#9795](https://github.com/PostHog/posthog/pull/9795)
+-   **Improved**: Large numbers are now presented with the comma as the thousands separator in Insights, greatly improving readability. [#9725](https://github.com/PostHog/posthog/pull/9725) [#9733](https://github.com/PostHog/posthog/pull/9733)
+-   **Improved**: Properties table column sizing has been made smarter, making them scale better for various contents of properties. [#9502](https://github.com/PostHog/posthog/pull/9502)
+-   **Fixed**: User Paths with start/end points containing trailing slashes work now. It's also been made impossible to unselect all event categories for a more intuitive experience. [#9482](https://github.com/PostHog/posthog/pull/9482)
+-   **Fixed**: Trends insight displayed as a table can be sorted independently on dashboards. [#9625](https://github.com/PostHog/posthog/pull/9625)
+-   **Fixed**: Custom series names are included in CSV exports. [#9677](https://github.com/PostHog/posthog/pull/9677)
+-   **Fixed**: Automatic provisioning of PostHog users logging in with SSO has been made more reliable. For instance, users who first logged-in _before_ automatic provisioning was turned on for the organization, will be automatically added to it when they log in again. [#9515](https://github.com/PostHog/posthog/pull/9515)
+-   **Fixed**: The UI again always shows the correct active license. [#9575](https://github.com/PostHog/posthog/pull/9575)
+
+### Deprecation and removal notices
+
+-   **For SAML admins:** The previous update, [PostHog 1.35.0](/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
+-   **For SAML admins:** If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
+-   **For ~~plugin~~ app developers:** `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` are no longer included. All apps available in our [App Store](https://posthog.com/apps) are compatible with this change. `processEvent` is unaffected.
+
+## Give us your feedback
+
+We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
+
+## Contributions from the community
+
+We always welcome contributions from our community and this time we want to thank the following people...
+
+- @ParthGandhi for fixes to Posthog.com
+- @JDConley for corrections to PostHog docs
+
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+
+## Open roles at PostHog
+
+Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
+
+-   [Growth Engineer](https://posthog.workable.com/jobs/2096622)
+-   [Site Reliability Engineer - Kubernetes](https://posthog.workable.com/jobs/2105790)
+-   [Senior Data Engineer](https://posthog.workable.com/jobs/2482259)
+-   [Senior Product Manager](https://posthog.workable.com/jobs/2490685)
+-   [Developer Advocate](https://posthog.workable.com/jobs/2422700)
+-   [Full Stack Engineer - Community Tools, Website & Docs](https://posthog.workable.com/jobs/2175512)
+-   [Full Stack Engineer](https://posthog.workable.com/jobs/2362038)
+-   [Marketing Content Writer - 3 Month FTC](https://posthog.workable.com/jobs/2501789)
+
+Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
+
+<hr />
+
+_Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog) for more PostHog news!_
+
+<ArrayCTA />

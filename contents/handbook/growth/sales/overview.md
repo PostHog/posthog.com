@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This section of the Handbook covers customers who are interested in our self-hosted [Scale plans](/pricing?o=self-hosted) specifically. We also have detailed guidance on how to manage sales day-to-day under [Sales Operations](/handbook/growth/sales/sales-operations) and [CRM](/handbook/growth/sales/crm). 
+This section of the Handbook covers customers who are interested in our self-hosted [Scale or Enterprise](/pricing?o=self-hosted) plans specifically. We also have detailed guidance on how to manage sales day-to-day under [Sales Operations](/handbook/growth/sales/sales-operations) and [CRM](/handbook/growth/sales/crm). 
 
 ## Strategy
 
@@ -12,16 +12,19 @@ We currently follow a 100% inbound sales model - our approach to [product-led gr
 
 Our primary commercial focus is on customer success, not pushing sales through. We work with a smaller number of leads, but we know that the leads we receive are already pre-qualified and genuinely interested in potentially using PostHog. 
 
-## Target customer for Scale
+## Target customer for self-hosting
 
 We believe that Scale has the greatest value for the following type of PostHog customer:
 
 - Technical - engineers or technical product managers
-- Mid- to high-volume - likely 100k-1m+ monthly events
-- Strong desire to self host - devtools, privacy needs, or brand needs
-- Need the wider platform - SDKs, exports to data lakes, and/or feature flags on top of core analytics
+- Mid- to high-volume - likely 1m+ monthly events
+- Strong desire to self-host - devtools, privacy needs, or brand needs
 
-Our current plan for Scale is to focus on these customers, as they will benefit the most. 
+In addition, customers looking at the Enterprise plan will:
+- Be high-volume - at a minimum over 10m monthly events
+- Want to login via their enterprise SSO for compliance reasons
+- Need a strong project permissions model
+- Require enterprise-level support in the deployment and running of PostHog
 
 ## Our values
 

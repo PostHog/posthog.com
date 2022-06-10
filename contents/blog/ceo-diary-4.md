@@ -1,8 +1,7 @@
 ---
 date: 2021-12-09
 title: '"How come your website is so nice?"'
-categories:
-    - CEO diaries
+categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
@@ -68,3 +67,9 @@ You aren't going to get it right on the first go. Be happy [chopping and changin
 ## Get comfortable
 
 Many of the best things you can work on are hard to measure - that's why they're opportunities; no one else wants to do them. Investing in design is like this.
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

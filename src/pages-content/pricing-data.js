@@ -50,23 +50,19 @@ const plans = {
 const faqs = [
     {
         q: 'How do I know what my volume is?',
-        a:
-            'The easiest way is to enable a PostHog Cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
+        a: 'The easiest way is to enable a PostHog Cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
     },
     {
         q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
-        a:
-            'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using [our plugin](https://github.com/PostHog/posthog-plugin-migrator3000).',
+        a: 'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using our plugin - https://github.com/PostHog/posthog-plugin-migrator3000.',
     },
     {
         q: 'On the Self-hosted Open Source plan, what happens if I exceed 1 million tracked users?',
-        a:
-            "We have a soft limit, meaning if you exceed the plan's allocation, we will reach out by email to discuss options. We'll continue to track users - you won't lose any customer data.",
+        a: 'There is no hard limit set. You may likely need some kind of support at this scale.',
     },
     {
         q: 'Do I pay anything for stored events?',
-        a:
-            'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
+        a: 'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
     },
     {
         q: 'Does session recording impact costs?',
@@ -74,23 +70,19 @@ const faqs = [
     },
     {
         q: 'How long do you retain data?',
-        a:
-            'Data (except recordings, see below) in PostHog Cloud is retained for 7 years - after 1 year, data may be moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+        a: 'Data (except recordings, see below) in PostHog Cloud is retained for 7 years - after 1 year, data may be moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
     },
     {
         q: 'How long do you retain recordings?',
-        a:
-            'Recordings are kept on Clickhouse-based installations for 3 weeks. If you are self-hosting, you can change this setting (see Recordings docs). If you are on legacy Postgres recordings are kept indefinitely unless you set a custom retention policy.',
+        a: 'Recordings are kept on Clickhouse-based installations for 3 weeks. If you are self-hosting, you can change this setting (see Recordings docs). If you are on legacy Postgres recordings are kept indefinitely unless you set a custom retention policy.',
     },
     {
         q: 'What happens after the data retention period elapses?',
-        a:
-            'On PostHog Cloud, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Self-hosted Scale plan, you control your data retention and what happens to your data afterwards.',
+        a: 'On PostHog Cloud, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Self-hosted Scale plan, you control your data retention and what happens to your data afterwards.',
     },
     {
         q: 'Is there a free trial on paid plans?',
-        a:
-            'No - instead we offer a contract with no minimum length. In PostHog Cloud, the first 1 million events are free, every month. Interested in the Self-hosted Scale plan? You can try all features in PostHog Cloud first, if needed, and there is no minimum contract length since we charge on usage.',
+        a: 'No - instead we offer a contract with no minimum length. In PostHog Scale and PostHog Cloud, the first 1 million events are free, every month.',
     },
     {
         q: 'What currency are your prices in?',
@@ -98,13 +90,11 @@ const faqs = [
     },
     {
         q: 'Do you offer a discount for non-profits?',
-        a:
-            'Yes in most cases - 50% off all pricing for PostHog Cloud. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
+        a: 'Yes in most cases - 50% off all pricing for PostHog Cloud. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         q: 'Are there any minimums or annual commitments?',
-        a:
-            'For PostHog Cloud, there is no minimum - pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. For Self-hosted Scale, we have a minimum commitment of $2,000/month.',
+        a: 'No! We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of PostHog Enterprise.',
     },
 ]
 

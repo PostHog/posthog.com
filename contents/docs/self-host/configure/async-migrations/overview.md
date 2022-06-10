@@ -1,12 +1,16 @@
 ---
 title: Async Migrations
-sidebar: Handbook
+sidebar: Docs
 showTitle: true
 ---
 
 ## What are async migrations?
 
-Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions. Related internal docs can be found [here](/docs/handbook/engineering/async-migrations).
+Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions.
+
+You can check the PostHog blog for more [information about how and why we enable async migrations on PostHog](/blog/async-migrations).  
+
+Further internal information about async migrations can be found in [our handbook](/handbook/engineering/databases/async-migrations).
 
 ## Why are async migrations necessary?
 
@@ -26,6 +30,8 @@ However, worry not! We've built a system to make managing these as easy as possi
 
 ### Prerequisite
 
+Make sure you're on PostHog App version 1.33 or later.
+
 To manage async migrations, you must be a staff user. PostHog deployments from version 1.31.0 onwards will automatically give the instance's first user "staff status", but those who have deployed PostHog before 1.31.0 will have to manually update Postgres.
 
 To do so, follow our [guide for connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres) and then run the following query:
@@ -36,7 +42,7 @@ SET is_staff=true
 WHERE email=<your_email_here>
 ```
 
-To confirm that everything worked as expected, visit `/admin/` (trailing slash required) in your instance. If you're able to access the admin panel, you're good to go!
+To confirm that everything worked as expected, visit `/instance/async_migrations` in your instance. If you're able to see the migrations info, you're good to go!
 
 ### Async migrations page
 
@@ -48,32 +54,28 @@ Here's a quick summary of the different columns you see on the async migrations 
 
 | Column | Description |
 | : -----: | :--------: |
-| Name     | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) |
-| Description | An overview of what this migration does |
+| Name and Description | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) followed by an overview of what this migration does |
 | Status | The current [status](https://github.com/PostHog/posthog/blob/master/posthog/models/async_migration.py#L5) of this migration. One of: 'Not started','Running','Completed successfully','Errored','Rolled back','Starting'. |
-| Error | The last error encountered by this migration |
 | Progress | How far along this migration is (0-100) |
 | Current operation index | The index of the operation currently being executed. Useful for cross-referencing with the migration file |
 | Current query ID | The ID of the last query ran (or currently running). Useful for checking and/or killing queries in the database if necessary. |
-| Celery task ID | The ID of the Celery task running the migration. Used to force stop a migration task if necessary. |
 | Started at | When the migration started. |
 | Finished at | When the migration ended. |
 
-### Automatically running migrations
+The settings tab allows you to change the configuration, e.g. whether async migrations should run automatically.
 
-From PostHog 1.32.0 onwards, we will set `AUTO_START_ASYNC_MIGRATIONS` to `true` by default. This means that when your instance starts/re-starts, we will look for migrations that are ready to be run (based on a healthcheck, service requirement checks, version checks, etc.) and automatically start them in the background (using Celery).
+### How can I stop the migration?
 
-The current default is to trigger a task to run 30 minutes after the deploy and if there are multiple migrations to run, we will automatically run the next migration in line once the previous one completes.
+In the async migrations page at `/instance/async_migrations` you can choose to `stop` or `stop and rollback` the migration from the `...` button on the right most column.
 
-However, on PostHog 1.31.0, `AUTO_START_ASYNC_MIGRATIONS` is set to `false`. As such, to run the async migration included, you will have to manually trigger it from `/instance/async_migrations`.
+![Stopping the migration](../../../../images/async-migrations-stop-rollback.png)
 
-If you would like to customize the behaviour you can set `AUTO_START_ASYNC_MIGRATIONS` in your `values.yaml` file like this (note the two values we have in the chart default `values.yaml` should be kept):
-```
-web:
-  env:
-    - name: AUTO_START_ASYNC_MIGRATIONS
-      value: "false"
-```
+### The migration is in an Error state - what should I do?
+
+Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
+
+![Rollback errored migration](../../../../images/async-migrations-error-rollback-button.png)
+
 
 ### Celery scaling considerations
 
@@ -86,3 +88,41 @@ You can scale in two ways:
 
 Once the migration has run, you can scale the pod back down. 
 
+### Error Upgrading: Async migrations are not completed
+
+You might have ran into a message like this:
+```
+List of async migrations to be applied:
+- 0123_migration_name_1 - Available on Posthog versions 1.35.0 - 1.40.9
+- 0124_migration_name_2 - Available on Posthog versions 1.37.0 - 1.40.9
+
+Async migrations are not completed. See more info https://posthog.com/docs/self-host/configure/async-migrations/overview
+```
+
+This means you were trying to update to a version that requires these async migrations to be completed.
+1. If you're on a version that has these migrations available you can head over to the async migrations page (at `/instance/async_migrations`). After completing the required migrations, re-run the upgrade. Note: we recommend a minimum version of 1.33.0 for running async migrations for a smoother experience.
+1. If you're not on a version that has the migration available you'll first need to upgrade to that version. Then head over to the async migrations page (at `/instance/async_migrations`). After completing the required migrations you can continue upgrading forward.
+
+The table below lists out recommended PostHog app and chart versions to use for updating to if there's a need for a multi step upgrade.
+
+| Async Migration | PostHog Version | Chart Version |
+| --------------- | --------------- | --------------|
+| 0001            | 1.33.0          | 16.1.0        |
+| 0002            | 1.33.0          | 16.1.0        |
+| 0003            | 1.33.0          | 16.1.0        |
+
+
+#### Upgrading hobby deployment to a specific version
+
+Before following the normal upgrading procedure update the `.env` file to have `POSTHOG_APP_TAG` match `release-<desired version>`. For example run
+```
+echo "POSTHOG_APP_TAG=release-1.33.0" >>.env
+```
+
+#### Upgrading helm chart to a specific version
+
+To upgrade to a specific chart version you can use `--version <desired version>` flag, e.g.
+```
+helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
+```
+Make sure you have followed the [upgrade instructions](https://posthog.com/docs/self-host/configure/upgrading-posthog) for your platform (specifically major upgrade notes as needed).

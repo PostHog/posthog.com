@@ -8,6 +8,7 @@ showTitle: true
 featuredImage: ../images/blog/how-we-do-hr/how-we-do-hr.png
 featuredImageType: full
 hideAnchor: true
+categories: ["Guides", "Inside PostHog"]
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gMYWond64lM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -115,4 +116,8 @@ Another way companies can support their HR teams is to lead by example company-w
 
 Write more inclusive job descriptions, hire for traits over skills, pay people well, foster closeness often, encourage diversity (of people and ideas), and push for more transparency in your organization. That’s our secret sauce.
 
-_Loved this? Follow us on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

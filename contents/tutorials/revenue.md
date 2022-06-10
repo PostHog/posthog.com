@@ -3,7 +3,7 @@ title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-topics: ['funnels']
+topics: ['funnels', 'configuration']
 date: 2020-11-18
 featuredImage: ../images/tutorials/banners/revenue.png
 ---
@@ -97,7 +97,7 @@ Here's what a dashboard with these views might look like:
 
 ![TR Per Month Image](../images/tutorials/revenue/tr-month.png)
 
-> **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build a plugin](/docs/plugins/overview) to automate this.
+> **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build an app](/docs/apps/overview) to automate this.
 
 ### Breaking down revenue by source
 
@@ -123,7 +123,7 @@ This can also be visualized as a pie, in order to see more clearly the actual _c
 
 ![Pie Plan Breakdown Image](../images/tutorials/revenue/pie-plan-breakdown.png)
 
-> **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/plugins/currency-normalization) to do so.
+> **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalizer app](/plugins/currency-normalization) to do so.
 
 ### Conversion funnels
 

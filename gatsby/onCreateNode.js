@@ -9,10 +9,19 @@ require('dotenv').config({
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
 
-module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
-    const { createNodeField, createNode } = actions
+module.exports = exports.onCreateNode = async ({
+    node,
+    getNode,
+    actions,
+    store,
+    cache,
+    createNodeId,
+    createContentDigest,
+}) => {
+    const { createNodeField, createNode, createParentChildLink } = actions
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
+        if (parent.internal.type === 'Reply') return
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
             node,

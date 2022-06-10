@@ -26,7 +26,9 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         authorData {
                             name
                             role
-                            image
+                            image {
+                                absolutePath
+                            }
                         }
                     }
                 }
@@ -90,8 +92,8 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         title
                         url
                     }
-                    product {
-                        title
+                    apps {
+                        name
                         url
                     }
                 }
@@ -144,10 +146,13 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         encoding: 'base64',
     })
 
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
     const browser = await chromium.puppeteer.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
     })
     const page = await browser.newPage()
     await page.setViewport({
@@ -175,8 +180,19 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const image = fs.readFileSync(featuredImage.absolutePath, {
             encoding: 'base64',
         })
+        const author =
+            authorData &&
+            authorData.map((author) => {
+                const image = fs.readFileSync(author.image.absolutePath, {
+                    encoding: 'base64',
+                })
+                return {
+                    ...author,
+                    image,
+                }
+            })[0]
         await createOG({
-            html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
+            html: blogTemplate({ title, authorData: author, image, font }),
             slug: post.fields.slug,
         })
     }
@@ -196,7 +212,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             return {
                 username,
                 avatar:
-                    avatar.absolutePath &&
+                    avatar?.absolutePath &&
                     fs.readFileSync(avatar.absolutePath, {
                         encoding: 'base64',
                     }),

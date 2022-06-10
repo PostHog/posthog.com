@@ -19,18 +19,6 @@ Current focus/goals:
 - Platform (deployments)
 
 Detailed list of goals can be found in [his README](/handbook/company/team/marcus-hyett).
-
-### Paolo
-Paolo ([bio](/handbook/company/team#paolo-damico)) is a PM part of the [Core Experience](/handbook/people/team-structure/core-experience) and [Core Analytics](/handbook/people/team-structure/core-analytics) Team. In operational terms, Paolo participates in team rituals for both teams, particularly plannings, but only joins to 2 out of 3 standups every week.
-
-Current focus/goals:
-- Nailing Diagnosing Causes
-- Improving the overall user experience
-- Ensuring support for scale features and Growth Team showstoppers
-
-Detailed list of goals can be found in [his README](/handbook/company/team/paolo-damico).
-
-
 ### Chris
 Chris ([bio](/handbook/company/team#chris-clark)) is a Product Designer part of the [Core Experience](/handbook/people/team-structure/core-experience) and [Core Analytics](/handbook/people/team-structure/core-analytics) Team. In operational terms, Chris participates in team rituals for both teams, particularly plannings, but only joins to 2 out of 3 standups every week.
 

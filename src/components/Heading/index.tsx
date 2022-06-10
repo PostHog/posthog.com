@@ -6,7 +6,7 @@ const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
     const [visible, setVisible] = useState(false)
     const { href } = useLocation()
     const handleClick = () => {
-        const url = `${href}#${id}`
+        const url = `${href.replace(/#.*/, '')}#${id}`
         navigator.clipboard.writeText(url)
         setVisible(true)
         setTimeout(() => {

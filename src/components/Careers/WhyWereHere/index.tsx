@@ -21,17 +21,17 @@ export const WhyWereHere = () => {
                                 </p>
                                 <p>
                                     We started PostHog as part of Y Combinator's W20 cohort and had the most successful
-                                    B2B software launch on HackerNews since 2012 - with a product that was just 4 weeks
+                                    B2B software launch on Hacker News since 2012 - with a product that was just 4 weeks
                                     old.
                                 </p>
                             </div>
 
-                            <aside className="py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center bg-white shadow">
+                            <aside className="py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center">
                                 <StaticImage
-                                    src="images/office-hogs-1.png"
-                                    alt="Just some office hogs"
-                                    height={264}
-                                    width={390}
+                                    src="images/this-hog-ships.png"
+                                    alt="This hog ships"
+                                    height={390}
+                                    width={410}
                                 />
                             </aside>
                         </div>
@@ -49,12 +49,12 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="py-4 px-8 md:mr-8 mt-4 md:mt-0 md:-ml-16 w-full flex justify-center items-center bg-white shadow">
+                            <aside className="py-4 px-8 md:mr-8 mt-4 md:mt-0 md:-ml-16 w-full flex justify-center items-center">
                                 <StaticImage
-                                    src="images/office-hogs-2.png"
-                                    alt="Just some office hogs"
-                                    height={353}
-                                    width={349}
+                                    src="images/this-hog-ships-too.png"
+                                    alt="This hog ships too"
+                                    height={365}
+                                    width={370}
                                 />
                             </aside>
                         </div>

@@ -11,6 +11,7 @@ export const FAQs = ({ className = '' }) => {
     }
     return (
         <section className={`${className} text-almost-black max-w-screen-md`}>
+            <h3 className="text-center">FAQ</h3>
             {faqs.map((faq, index) => {
                 return (
                     <div key={index}>

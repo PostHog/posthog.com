@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -154,3 +154,6 @@ Feature flags and the toolbar (and bringing those together one day) could really
 ### Open roles
 
 Full stack or growth engineers - [we want you!](https://posthog.com/careers)
+
+<ArrayCTA />
+

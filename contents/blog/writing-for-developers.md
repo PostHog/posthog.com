@@ -8,9 +8,10 @@ showTitle: true
 hideAnchor: true
 author: ["james-hawkins"]
 featuredImageType: full
+categories: ["Startups", "CEO diaries", "Inside PostHog"]
 ---
 
-As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
+As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).
 
 Out of five posts that I hoped would get there, four did. Look mom, lots of traffic:
 
@@ -114,3 +115,9 @@ Being concise means giving a lot of information clearly and in a few words. It d
 ## Start
 
 Whatever you do, make sure you actually get something out. You can't improve something that doesn't exist.
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

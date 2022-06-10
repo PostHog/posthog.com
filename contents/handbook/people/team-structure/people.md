@@ -1,66 +1,98 @@
 ---
-title: Team People
+title: Team People & Ops
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
 
-## People & culture
+## People & Ops
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops
+- Charles Cook, VP Ops & Marketing
+- Grace McKenzie, Operations Manager
+- Coua Phang, Tech Talent Partner
 
 ## Mission
 
-Make PostHog _the_ most transparent company in the world, and the best place for people to work. Our goal is to create a world-class remote culture - optimizing for impact, autonomy and personal development. 
+Our primary goal is to build and retain our world-class team. We will accomplish this by making PostHog _the_ most transparent company in the world, and the best place for people to work. Once on board, our goal is to enable our team to: 
+
+1. Maximize their impact and performance
+2. Grow personally and professionally
+3. Have a strong sense of purpose and belonging
 
 ## Responsibilities
 
-Our people team works across talent, people operations and culture. This is what we care about:
+Our people team works across talent, people, operations, and culture. This is what we care about:
 
-- [Talent compounds](https://posthog.com/handbook/company/values#talent-compounds) - we have a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to become exceptional at their jobs. We optimize for building high-performing teams, while delivering a great experience to everyone involved.
-- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do. It's so important to us, we built a dedicated [handbook page](https://posthog.com/handbook/company/diversity)
-- We support our team throughout the entire employee lifecycle - from making an offer, to onboarding and career development, to parental leave and eventually parting ways. 
-- We create light-touch initiatives and processes that allow PostHog to act fast (while complying with local legislation) and [iterate](/handbook/company/culture#iteration) continuously. These include performance reviews, progression frameworks, compensation reviews and many more.
-- In the people team, we live and breathe our [culture](/handbook/company/culture) and [values](/handbook/company/values), and constantly work to make PostHog an even better place to work.
+- Setting a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to becoming exceptional at their jobs. This is so important to us, it's enshrined in our [values](https://posthog.com/handbook/company/values#talent-compounds).
+- Supporting our team throughout the entire employee lifecycle - from [making an offer](https://posthog.com/handbook/people/compensation), to [onboarding](https://posthog.com/handbook/people/onboarding) and [career development](https://posthog.com/handbook/people/feedback), [parental leave](https://posthog.com/handbook/people/time-off), and eventually [parting ways](https://posthog.com/handbook/people/compensation). 
+- We create light-touch initiatives, systems, and processes that allow PostHog to act fast and [scale iteratively](/handbook/company/culture#iteration) 
+- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do. It's so important to us, we have a dedicated [handbook page](https://posthog.com/handbook/company/diversity).
 
 ## Customer
 
-All small teams as well as current, future and past candidates. 
+Every PostHog team member, as well as current, future and past candidates. 
 
-## Output metrics
+## Objectives & Key Results
 
-- Primary: 0% undesired churn
+### Q2 2022
 
-Talent:
-- Hiring progress vs. plan
-- Time to hire 
-- Percentage of hires from [under-represented groups](/handbook/company/diversity#how-diversity-helps-us)
+**Objective:** Find and retain our world class team.
 
-People and culture:
-- Quarterly Team engagement survey
-- Turnover rate (voluntary and involuntary)
+**Key results:**
+- We hire 9 roles on time
+- Engagement from team surveys stays above 80% of [Cultureamp industry benchmarks](https://www.cultureamp.com/science/insights/bay-area)
+- 15% of applicants who convert to first round interviews are from under-represented backgrounds
+- We stay within 5% of forecast cash burn
 
-### Q3 2021 data
+## Slack channels
 
-Talent:
+[#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
+[#private-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
 
-* Hiring progress vs. plan: 5%
-    * Made 7 offers, 5 accepted (one rejected, one offer retracted) 
-* Time to hire: Average is 27 days, down from 34.
-* Hires from [under-represented groups](/handbook/company/diversity#how-diversity-helps-us): 0 💔
+## Tools
 
-People:
-* Engagement survey:
-    * 97% would recommend PostHog as a great place to work 👏
-    * Response rate was 80% (down from 87%), which puts us well below the benchmark of 88% 😥
-    * Overall, the average score across all questions stayed the same at 89%. I expected the score to be lower as we ran it anonymously as a trial, but it didn’t seem to have impacted the score a lot.
-    * We had big improvements around well-being and keeping people informed. However, we’ve also seen a decrease in company confidence and people seeing themselves still at PostHog in 2 years.
-    * The number of responses are still relatively small, which means we’ll still see large swings in the numbers each quarter - we’d expect these to stabilise further as we grow.
-    * We are currently working on a career progression framework, combined with compensation and management training. We’re aiming to have this work done by the end of the year, which will hopefully increase scores in the new year.
-* Retention rate: 97% 
+An operations team is never complete without a robust toolkit to allow us to automate processes and multiply our impact. Here is a summary of some of the tools we've found most effective for getting the job done. You can read more about them [here](https://posthog.com/blog/startup-ops-toolkit).
 
-## Slack channel
+### Hiring
 
-[#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
-[#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
+#### **Contracts & Offer Letters**
+
+- Instead of wasting money on a lawyer to create contract templates, we used a set of [free templates](https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant) from Orrick.
+
+- To avoid emailing PDFs back and forth forever, we use the e-signature platform [HelloSign](https://hellosign.com/).
+
+#### **HR, Recruiting, and Payroll**
+
+- [Gusto](https://www.gusto.com/) is the industry standard for managing and paying US-based employees.
+
+- To hire abroad, or for hiring contractors, we use [Deel](https://www.letsdeel.com/). 
+
+- If you are hiring in multiple states, you'll need to register and most likely pay taxes. We avoid this massive headache by using [Middesk](https://www.middesk.com/).
+
+- For managing employee information and time-off requests for a globally-distributed team, we use [CharlieHR](https://www.charliehr.com/).
+
+- If you're managing a large candidate pipeline, an ATS (Applicant Tracking Software) is a must. We use [Workable](https://www.workable.com).
+
+#### **Finance and Banking**
+
+- Unless you _really_ love Quickbooks, you should outsource this. For the US, we use [Fondo](https://www.tryfondo.com/), who are absolutely fantastic.
+
+- For banking, credit cards, and expense management, look no further than [Brex](https://www.brex.com/). They are designed for start-ups and use your capitalization to grant significantly larger credit limits than traditional banks.
+
+- For financial planning, headcount planning, and forecasting, check out [Pry](http://pry.co/) who were recently acquired by Brex.
+
+- To manage our cap table, including options grants and exercises, we use [LTSE Equity](https://equity.ltse.com/) who also offer 409a valuation services.
+
+#### **Everything Else**
+
+- For those pesky externalities, we use [Embroker](https://www.embroker.com/) for all of our insurance coverage.
+
+- A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true). 
+
+- And finally, if you're in the 0.0001% of startups using Teams or email (!) for internal communications, just switch to [Slack](https://slack.com/) already.
+
+_Do you have recommendations for tools not listed here (we're especially seeking some for goal-setting and performance review management), or upgrades to any of the above? Raise an issue below and let us know!_
+
+
+
+

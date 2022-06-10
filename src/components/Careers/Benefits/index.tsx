@@ -3,7 +3,7 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
 import compensationImg from './images/compensation.svg'
-import equityImg from './images/equity.svg'
+import hackerHouseImg from './images/hacker-house.svg'
 import ptoImg from './images/pto.svg'
 import meetingFreeDaysImg from './images/meeting-free-days.svg'
 import insuranceImg from './images/insurance.svg'
@@ -55,13 +55,8 @@ export const Benefits = () => {
                 <div className="benefits-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto border-gray-accent-light border border-dashed border-b-0 border-r-0 sm:border-r-1">
                     <Benefit
                         image={compensationImg}
-                        title="Generous, transparent compensation"
-                        details="We hire the best talent and pay accordingly"
-                    />
-                    <Benefit
-                        image={equityImg}
-                        title="Equity"
-                        details="It’s important to us that all PostHog employees can feel invested in the company’s success, so all employees receive equity in PostHog (with very employee-friendly terms)!"
+                        title="Generous, transparent compensation &amp; equity"
+                        details="We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so we offer equity with very employee-friendly terms."
                     />
                     <Benefit
                         image={ptoImg}
@@ -73,7 +68,17 @@ export const Benefits = () => {
                         title="Two meeting-free days per week"
                         details="Distracted by a calendar full of meetings? Not anymore."
                     />
+                    <Benefit
+                        image={homeOfficeImg}
+                        title="Home office"
+                        details="We provide all equipment needed have an ergonomic setup at home to be as productive as possible"
+                    />
 
+                    <Benefit
+                        image={coworkingCreditImg}
+                        title="Coworking Credit"
+                        details="$200/month budget towards co-working or café working"
+                    />
                     <Benefit image={insuranceImg} title="Medical, Dental and Vision Insurance" details="US & UK only" />
                     <Benefit
                         image={trainingBudgetImg}
@@ -81,14 +86,9 @@ export const Benefits = () => {
                         details="Free books and Audible subscription"
                     />
                     <Benefit
-                        image={coworkingCreditImg}
-                        title="Coworking Credit"
-                        details="$200/month budget towards co-working or café working"
-                    />
-                    <Benefit
-                        image={homeOfficeImg}
-                        title="Home office"
-                        details="We provide all equipment needed have an ergonomic setup at home to be as productive as possible"
+                        image={hackerHouseImg}
+                        title="Access to our UK Hacker House"
+                        details="Work with co-workers (or by yourself) in Cambridge and stay for free when you're in town."
                     />
 
                     <Benefit
@@ -99,17 +99,17 @@ export const Benefits = () => {
                     <Benefit
                         image={retirementImg}
                         title="401k/pension contributions"
-                        details="We care about you, so investing in your future is important to us. "
+                        details="We care about you, so investing in your future is important to us."
                     />
                     <Benefit
                         image={spillMentalHealthImg}
                         title="Spill mental health chat"
-                        details="Sometimes it’s good to chat to someone if you aren’t feeling yourself. "
+                        details="Sometimes it’s good to chat to someone if you aren’t feeling yourself."
                     />
                     <Benefit
                         image={companyOffsitesImg}
                         title="Company offsites"
-                        details="Each year we organise fully paid company offsites- last year we went to a villa in Italy! Sometimes it’s good to speak face to face."
+                        details="Each year we organise fully paid company offsites - last year we went to a villa in Portugal! Sometimes it’s good to speak face to face."
                     />
                 </div>
             </Structure.Section>

@@ -1,0 +1,277 @@
+[
+    {
+        "date": "2020-01-01",
+        "type": "news",
+        "description": "PostHog joins YC W20 batch"
+    },
+    {
+        "date": "2020-01-01",
+        "type": "milestone",
+        "description": "1st commit"
+    },
+    {
+        "date": "2020-02-20",
+        "type": "news",
+        "description": "Launched open source analytics on HackerNews"
+    },
+    {
+        "date": "2020-03-01",
+        "type": "milestone",
+        "description": "1,000 stars on GitHub"
+    },
+    {
+        "date": "2020-04-01",
+        "type": "feature",
+        "description": "iOS, Android libraries"
+    },
+    {
+        "date": "2020-05-01",
+        "type": "feature",
+        "description": "React native library"
+    },
+    {
+        "date": "2020-06-01",
+        "type": "feature",
+        "description": "Feature Flags"
+    },
+    {
+        "date": "2020-06-01",
+        "type": "feature",
+        "description": "Heatmaps"
+    },
+    {
+        "date": "2020-06-02",
+        "type": "news",
+        "description": "Offsite: Italy"
+    },
+    {
+        "date": "2020-07-01",
+        "type": "feature",
+        "description": "Segment destination"
+    },
+    {
+        "date": "2020-08-01",
+        "type": "milestone",
+        "description": "3,000 stars on GitHub"
+    },
+    {
+        "date": "2020-09-01",
+        "type": "",
+        "description": ""
+    },
+    {
+        "date": "2020-10-01",
+        "type": "feature",
+        "description": "ClickHouse support"
+    },
+    {
+        "date": "2020-11-01",
+        "type": "feature",
+        "description": "Session Recording"
+    },
+    {
+        "date": "2020-12-01",
+        "type": "feature",
+        "description": "Lifecycle analysis"
+    },
+    {
+        "date": "2020-12-01",
+        "type": "milestone",
+        "description": "Raised Series A"
+    },
+    {
+        "date": "2021-01-01",
+        "type": "feature",
+        "description": "Apps launched"
+    },
+    {
+        "date": "2021-01-01",
+        "type": "feature",
+        "description": "Hubspot Connector"
+    },
+    {
+        "date": "2021-02-01",
+        "type": "milestone",
+        "description": "Redesigned product"
+    },
+    {
+        "date": "2021-03-01",
+        "type": "feature",
+        "description": "Filter internal / test users"
+    },
+    {
+        "date": "2021-04-01",
+        "type": "feature",
+        "description": "S3, Snowflake apps"
+    },
+    {
+        "date": "2021-05-01",
+        "type": "feature",
+        "description": "Entirely new query builder"
+    },
+    {
+        "date": "2021-06-10",
+        "type": "milestone",
+        "description": "Raised Series B"
+    },
+    {
+        "date": "2021-07-02",
+        "type": "milestone",
+        "description": "Added to YC's top valued companies"
+    },
+    {
+        "date": "2021-07-26",
+        "type": "feature",
+        "description": "Funnels 2.0"
+    },
+    {
+        "date": "2021-07-30",
+        "type": "feature",
+        "description": "Salesforce Connector"
+    },
+    {
+        "date": "2021-08-01",
+        "type": "news",
+        "description": "Offsite: Portugal"
+    },
+    {
+        "date": "2021-09-01",
+        "type": "milestone",
+        "description": "PostHog.com complete overhaul"
+    },
+    {
+        "date": "2021-09-15",
+        "type": "feature",
+        "description": "SAML support"
+    },
+    {
+        "date": "2021-10-21",
+        "type": "feature",
+        "description": "Multivariate Feature Flags"
+    },
+    {
+        "date": "2021-11-17",
+        "type": "feature",
+        "description": "Correlation Analysis"
+    },
+    {
+        "date": "2021-12-01",
+        "type": "feature",
+        "description": "Group Analytics"
+    },
+    {
+        "date": "2022-01-22",
+        "type": "milestone",
+        "description": "5,000 stars on GitHub"
+    },
+    {
+        "date": "2022-02-01",
+        "type": "feature",
+        "description": "Experimentation Suite"
+    },
+    {
+        "date": "2022-02-23",
+        "type": "feature",
+        "description": "Data Management Suite"
+    },
+    {
+        "date": "2022-02-26",
+        "type": "milestone",
+        "description": "7,000 stars on GitHub"
+    },
+    {
+        "date": "2022-03-29",
+        "type": "news",
+        "description": "Offsite: Iceland"
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Console log tracking in recordings",
+        "future": true
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Insight experience overhaul",
+        "future": true
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Export and share visualizations as image file",
+        "future": true
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Subscribe to dashboards and insights",
+        "future": true
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Awesome demo environment",
+        "future": true
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "New onboarding experience",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Unified querying across events, persons, sessions, groups",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Automated insight recommendations",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Session analysis 2.0",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Insight delta",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "In-app setup guided tour",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Lightning fast querying at Billion event and person scale",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Enhanced app development experience",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Multiple cloud environments",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Rapid ingestion pipeline",
+        "future": true
+    }
+]

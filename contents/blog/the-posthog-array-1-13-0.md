@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -118,3 +118,6 @@ Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. S
 ### Open roles
 
 Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers)
+
+<ArrayCTA />
+

@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -82,3 +82,5 @@ Here is what we thought was cool and interesting in the last week:
 All of PostHog will be back in the UK in light of the border closures that have been happening but will aiming to cover support queries through most of US time as well as now Europe and GMT.
 
 We’ve also been trading fitness tips, James was a cyclist after all so no surprises what he is up to, Tim is getting in 2-3 HIIT sessions, whilst Aaron is taking advantage of [Down Dog’s free access](https://www.downdogapp.com/) and trying yoga so we can weather the UK’s restrictions.
+
+<ArrayCTA />

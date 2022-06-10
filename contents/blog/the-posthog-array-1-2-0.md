@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -71,3 +71,5 @@ Thank you to [SanketDG](https://github.com/sanketdg) for another pr that has hel
 ## PostHog news
 
 PostHog gets bigger every week! Not just in terms of new users and feature updates – we’re also excited to have [Marius](https://twitter.com/mariusandra) join – he was one of the first contributors but has done a stunning amount in a short time.
+
+<ArrayCTA />

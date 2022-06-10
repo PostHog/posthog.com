@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
-
-
-
 
 Shared dashboards, global annotations, retention table improvements and a metric ton of bug fixes. This week's PostHog array has it all.
 
@@ -105,3 +102,6 @@ We launched [a new version of our website!](https://posthog.com) Lottie and Ben 
 ### Open roles
 
 Full stack or growth engineers - [we want you!](https://posthog.com/careers). We have *just* filled the technical writer role too, you can already see the docs getting a makeover! More on that next time.
+
+<ArrayCTA />
+

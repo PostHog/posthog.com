@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes']
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -32,19 +32,19 @@ Thank you Sandeep, we look forward to collaborating with you more!
 
 ## Important Announcement for Self-Hosted Users
 
-If you're self hosting PostHog, make sure you have your plugin server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
+If you're self hosting PostHog, make sure you have your app server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
 
 If it is running, you'll see a green checkmark, and hovering over it will give the message "All systems operational", like so:
 
-![Plugin server](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-server.png)
+![App server](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-server.png)
 
-From this release (1.23.0) onwards, you **will not be able to ingest events** if your plugin server isn't running.
+From this release (1.23.0) onwards, you **will not be able to ingest events** if your app server isn't running.
 
 ### Special Note for CloudFormation Deployments
 
 If you've deployed PostHog via CloudFormation, make sure to check your memory limits, as they may be set too low by default (512MB).
 
-To run the plugin server, we recommend having _at least_ 1024MB of memory, or you might run the risk of running out of it.
+To run the server, we recommend having _at least_ 1024MB of memory, or you might run the risk of running out of it.
 
 ## PostHog 1.23.0 Release Notes
 
@@ -78,18 +78,18 @@ We've added an 'Organization Settings' page that lets you rename and delete your
 
 If you have a Gravatar associated with your email, PostHog will now display it on your profile and the 'Organization Settings' page.
 
-### [First Time Event Tracker Plugin](/plugins/first-time-event-tracker)
+### [First Time Event Tracker](/plugins/first-time-event-tracker)
 
 ![](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/first-time-plugin.png)
 
-Based on user requests, we have now built a plugin that adds two boolean properties to your events:
+Based on user requests, we have now built a app that adds two boolean properties to your events:
 
 -   `is_event_first_ever`: tells you if the event if the first event of its kind
 -   `is_event_first_for_user`: tells you if the event is the first event of its kind for the user
 
-By enabling the plugin, you can filter for those properties on all your analytics, to determine things like conversion rates from first touch.
+By enabling the app, you can filter for those properties on all your analytics, to determine things like conversion rates from first touch.
 
-> **Important:** This plugin will only work on events ingested after the plugin was enabled. This means it will register events as being the first if there were events that occurred before it was enabled.
+> **Important:** This app will only work on events ingested after the app was enabled. This means it will register events as being the first if there were events that occurred before it was enabled.
 
 ### [User Interviews](https://calendly.com/posthog-feedback)
 
@@ -196,3 +196,5 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 -   Plugins secret config fields [\#3341](https://github.com/PostHog/posthog/pull/3341) ([yakkomajuri](https://github.com/yakkomajuri))
 -   Add organization settings [\#3324](https://github.com/PostHog/posthog/pull/3324) ([Twixes](https://github.com/Twixes))
 -   Add docker hub build & push task to github actions [\#3277](https://github.com/PostHog/posthog/pull/3277) ([fuziontech](https://github.com/fuziontech))
+
+<ArrayCTA />

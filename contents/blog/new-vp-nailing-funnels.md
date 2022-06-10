@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 author: ["marcus-hyett"]
 featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
+categories: ["Inside PostHog", "Product analytics"]
 ---
 
 Ramping up fast in any senior product role requires understanding as much context as possible across 3 axes (Market, Product and People). I’ll talk you through my process of going from zero understanding in these three areas, to landing a clear, ambitious long-term strategy across the company in just one week.
@@ -77,4 +78,8 @@ But you can't just assume everyone will buy into the strategy because you posted
 
 Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
 
-_Loved this? Follow us on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on growth, startups, and product analytics._
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>
