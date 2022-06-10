@@ -83,6 +83,7 @@ PostHog only shares your personal information with those of its employees, contr
 - HubSpot - CRM database
 - Clearbit - marketing data engine
 - Orbit - community engagement platform
+- Zendesk - customer support tool
 
 Our service providers and partners are required by contract to safeguard any personal information they receive from us and are prohibited from using the personal information for any purpose other than to perform the services as instructed by PostHog. 
 
@@ -122,7 +123,7 @@ We do not use third party tracking services to collect information about you.
 
 ### Do Not Track
 
-"Do Not Track" is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. PostHog does not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site beyond our basic tracking, which you may opt out of. Because we do not share this kind of data with third party services or permit this kind of third party data collection for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
+"Do Not Track" is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. PostHog does not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site. Because we do not share this kind of data with third party services or permit this kind of third party data collection for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
 
 ## Global privacy practices and your rights
 
