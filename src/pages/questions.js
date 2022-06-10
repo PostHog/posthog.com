@@ -77,7 +77,7 @@ const Search = () => {
                 onSubmit={handleSubmit}
                 className="flex flex-col justify-center relative mx-auto mb-0 w-full max-w-lg"
             >
-                <div className="absolute left-4 top-[calc(50%_-_1em)] w-4 h-4">
+                <div className="absolute left-4 w-4 h-4">
                     <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                         <g opacity="1" clipPath="url(#a)">
                             <path
@@ -97,8 +97,8 @@ const Search = () => {
                     value={value}
                     name="faq-search"
                     placeholder="Search anything product, installation, or company-related..."
-                    autoFocus
-                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)"
+                    autoFocus={true}
+                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
                 />
 
                 <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
@@ -202,7 +202,7 @@ export default function FAQ({
                         </p>
                     </div>
 
-                    <span className="absolute bottom-[calc(-169px_-_3rem] -left-20 -z-10 transition-all">
+                    <span className="absolute bottom-[calc(-169px-3rem)] -left-20 z-[-10] transition-all">
                         <StaticImage
                             src="../../contents/images/search-hog-1.png"
                             alt="This hog has an answer"
@@ -213,7 +213,7 @@ export default function FAQ({
                         />
                     </span>
 
-                    <span className="absolute bottom-[calc(-113px_-_3rem] hidden md:block md:-right-36 lg:-right-30 xl:-right-25 2xl:-right-10 -z-20 transition-all">
+                    <span className="absolute bottom-[calc(-113px-3rem)] hidden md:block md:-right-36 lg:-right-30 xl:-right-25 2xl:-right-10 z-[-20] transition-all">
                         <StaticImage
                             src="../../contents/images/search-hog-2.png"
                             alt="This hog has an answer"
