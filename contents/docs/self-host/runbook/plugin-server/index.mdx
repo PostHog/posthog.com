@@ -6,8 +6,8 @@ showTitle: true
 
 import EventFlowDiagram from './diagrams/event-flow'
 import PluginServerDiagram from './diagrams/plugin-server'
-import IngestionServer from './diagrams/ingestion-server'
-import AsyncServer from './diagrams/async-server'
+import IngestionServerDiagram from './diagrams/ingestion-server'
+import AsyncServerDiagram from './diagrams/async-server'
 
 The plugin server is the core of event ingestion and the plugins platform at PostHog.
 
@@ -142,7 +142,7 @@ Now that we understand how events flow through the system, let's go even deeper 
 
 **Diagram 2: Plugin server**
 
-<PluginServer />
+<PluginServerDiagram />
 
 #### Main thread
 
@@ -214,13 +214,13 @@ Finally, the diagram also shows everything plugin VMs can connect to, directly o
 
 **Diagram 3: Ingestion server**
 
-<IngestionServer />
+<IngestionServerDiagram />
 
 ### Async server
 
 **Diagram 4: Async server**
 
-<AsyncServer />
+<AsyncServerDiagram />
 
 
 ## Plugin server management
