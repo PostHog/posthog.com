@@ -202,7 +202,7 @@ export default function FAQ({
                         </p>
                     </div>
 
-                    <span className="absolute bottom-[calc(-169px-3rem)] -left-20 z-[-10] transition-all">
+                    <span className="absolute bottom-[calc(-169px-3rem)] hidden mdlg:block md:-left-24 lg:-left-20 z-[-10] transition-all">
                         <StaticImage
                             src="../../contents/images/search-hog-1.png"
                             alt="This hog has an answer"
@@ -213,7 +213,7 @@ export default function FAQ({
                         />
                     </span>
 
-                    <span className="absolute bottom-[calc(-113px-3rem)] hidden md:block md:-right-36 lg:-right-30 xl:-right-25 2xl:-right-10 z-[-20] transition-all">
+                    <span className="absolute bottom-[calc(-113px-3rem)] hidden mdlg:block md:-right-40 lg:-right-36 xl:-right-24 2xl:-right-14 z-[-20] transition-all">
                         <StaticImage
                             src="../../contents/images/search-hog-2.png"
                             alt="This hog has an answer"
