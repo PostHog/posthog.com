@@ -60,7 +60,7 @@ export const Benefits = () => {
                     />
                     <Benefit
                         image={ptoImg}
-                        title="Paid time off"
+                        title="Unlimited vacation (with a minimum!)"
                         details="Time away from work is important, so we’ve got unlimited time off (25 days per year minimum required!), sick leave and generous parental leave."
                     />
                     <Benefit
@@ -87,8 +87,8 @@ export const Benefits = () => {
                     />
                     <Benefit
                         image={hackerHouseImg}
-                        title="Access to our UK Hacker House"
-                        details="Work with co-workers (or by yourself) in Cambridge and stay for free when you're in town."
+                        title="Access to our Hedge House"
+                        details="Work with co-workers (or by yourself) in Cambridge, UK and stay for free whenever you want."
                     />
 
                     <Benefit
