@@ -239,7 +239,7 @@ Additional async server instances beyond the number of partitions for `events_pl
 
 ### Quirks
 
-- In order to work correctly, you **must** either have a fleet composed of both async servers and ingestion servers, or all servers should be running in "default" mode. Currently all non-cloud installations use `default` mode, but we will provide options for separate scaling in the chart soon.
+- In order to work correctly, you **must** either have a fleet composed of both async servers and ingestion servers, or all servers should be running in "default" mode. Currently all non-cloud installations use "default" mode, but we will provide options for separate scaling in the chart soon.
 - We run a fork of [Piscina](https://github.com/PostHog/piscina) with two key changes: a feature called `broadcastTask`, and a [change to its internal use of the Atomics API](https://github.com/PostHog/piscina/pull/4)
 - Both our Cloud environment and self-hosted installations need to [connect to a microservice](https://github.com/PostHog/http-mmdb) we manage if they wish to use the GeoIP plugin. GeoIP capabilities are built into the plugin server.
 - Plugin VMs are not fully isolated from the environment they work on. Thus, one should always verify a plugin's source code carefully before installing it!
