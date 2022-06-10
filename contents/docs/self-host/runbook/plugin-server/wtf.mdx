@@ -194,7 +194,7 @@ Most often, a task triggered from the main thread will either immediately trigge
 
 The former happens in the case of "standalone" functions, like scheduled tasks and jobs. The task payload contains everything the VM needs to execute the function, so we call it immediately.
 
-On the other hand, the event pipeline handles the entire lifecycle of an event. The steps in the pipeline are the following:
+On the other hand, the event pipeline handles the entire lifecycle of an event. The steps currently in the pipeline are the following:
 
 1. `pluginsProcessEventStep`
 2. `prepareEventStep`
