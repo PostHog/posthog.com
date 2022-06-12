@@ -24,7 +24,7 @@ const TopLink = ({ title, description, link, icon }) => {
         <li className="w-full">
             <a
                 href={link}
-                className="flex flex-col items-center justify-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
+                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5 h-full"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
                 <h3 className="font-bold text-base mb-1">{title}</h3>
