@@ -181,6 +181,7 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 - [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
 - [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Ingestion Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Infrastructure Rotation](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
