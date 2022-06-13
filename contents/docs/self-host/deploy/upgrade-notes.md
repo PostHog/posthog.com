@@ -288,3 +288,5 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/r
 22.0.0 upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This update brings several improvements to the overall service. For more info, you can look at the [upstream changelog](https://clickhouse.com/docs/en/whats-new/changelog/#clickhouse-release-v223-lts-2022-03-17).
 
 Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
+
+Note: Async migration 0004 is required and could cause problems if not done completed. If you already the upgrade just run the migration now.
