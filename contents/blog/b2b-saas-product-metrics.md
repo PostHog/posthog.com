@@ -33,11 +33,11 @@ Read our [product page](/product) and [documentation](/docs) if that sounds like
 
 **Contents:**
 
-- What makes a good B2B product metric?
-- Choosing a North Star metric
-- Common B2B product metrics
-- Recommended B2B product metrics
-- Further reading
+- [What makes a good B2B product metric?](#what-makes-a-good-b2b-product-metric)
+- [Choosing a North Star metric](#choosing-a-north-star-metric)
+- [Common B2B product metrics](#common-b2b-saas-product-metrics)
+- [Recommended B2B product metrics](#recommended-b2b-product-metrics)
+- [Further reading](#further-reading)
 
 > This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
