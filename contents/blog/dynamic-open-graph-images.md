@@ -290,3 +290,9 @@ But this first step is light years more interesting to look at than a simple Pos
 A tip of the hat goes to the team at GitHub who worked on their new Open Graph images, as it served as a starting point in inspiring what we ultimately built.
 
 We really hope you enjoy seeing our Open Graph previews across the internet as much as we enjoyed making them!
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

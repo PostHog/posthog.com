@@ -80,7 +80,7 @@ Clickhouse has a few failure modes depending on configuration, utilization, disk
 The primary failure mode most should be aware of is around ClickHouse instance resources. ClickHouse is very resources intensive on disk, especially during heavy writes such as backfills or large migrations. What generally will happen is ClickHouse will saturate throughput to disks as the [MergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/) backed tables are constantly being merged and resorted. (A correctly sorted table's parts is critical to ClickHouse's ability to query quickly).
 
  When this happens you will notice a few things:
- - That queries will take longer and longer to execute. 
+ - That queries will take longer and longer to execute.
  - The count of Parts per table will increase slowly and then quite quickly.
  - As the Parts increase the queries will become even slower.
  - CPU IO Wait will saturate the CPU.
@@ -109,10 +109,10 @@ There are no maintenance tasks that you should be planning for with ClickHouse o
 Check out the [configuration](/docs/self-host/deploy/configuration#scaling-up) section of our self-deploy docs!
 
 ## Dictionary
-* **sharding**: is a method for splitting data up across multiple ClickHouse instances 'horizontally' 
+* **sharding**: is a method for splitting data up across multiple ClickHouse instances 'horizontally'
 * **shard**: holds a subset of the dataset that is stored on a single ClickHouse instance
 * **replica**: is a node that is responsible for a part of a shard. If you have 3 replicas of a shard that 'shard' of data is replicated across 3 ClickHouse instance 'replicas'
-* **distributed table**: is a wrapper around a multiple 'shards' of data hosted on multiple ClickHouse instances. It is a virtual table the represents the data of multiple instances. 
+* **distributed table**: is a wrapper around a multiple 'shards' of data hosted on multiple ClickHouse instances. It is a virtual table the represents the data of multiple instances.
 
 ## Useful links
 - [Official documentation](https://clickhouse.tech/docs/en/)

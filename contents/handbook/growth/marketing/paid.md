@@ -23,8 +23,7 @@ Specific details of our media plan are shared internally only, as they contain c
 
 Hey Digital create our ad assets for most of our main channels. These guidelines may be useful to you however if you are doing one-off assets for things like paid newsletter sponsorships or one off campaigns on more niche paid channels. 
 
-- Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels as a general guide. 
-- For specific messaging to use in copy, use our [value propositions](/handbook/growth/marketing/value-propositions) as a starting point - you do not have to copy them verbatim.  
+- For specific messaging to use in copy, you can use our [copy bank](https://docs.google.com/spreadsheets/d/1VOwyDs8qmXw38KgCiPeJMIGS-SedSAZLXfb2zvB_1jE/edit#gid=0), or our [value propositions](/handbook/growth/marketing/value-propositions) if you need to create something from scratch.
 - We have [a handy set of assets](https://posthog.com/media) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Channels
@@ -42,4 +41,4 @@ We generally target users in the US, Canada, UK, Germany and France for general 
 
 ## Tracking conversion
 
-We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have a plugin which syncs PostHog signups to a Google Sheet that is than regularly uploaded automatically to our Google Ads account. 
+We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have [an app](https://github.com/PostHog/plugin-write-google-ads-to-zapier) which syncs PostHog signups to Zapier, which connects to a Google Sheet that is than synced automatically to our Google Ads account once a day.

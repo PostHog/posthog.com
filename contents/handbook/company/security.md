@@ -36,7 +36,7 @@ Our policies are stored on Drata, so this section of the Handbook just serves to
 - [Encryption Policy](https://drive.google.com/file/d/1mX9s8gRRpOs7UpdZ48KGyCErL8a3DfZD/view?usp=sharing)
 - [Incident Response Plan](https://drive.google.com/file/d/1Dnj_gELBJTMlqTagGs3Mv8JWMbaLXM54/view?usp=sharing)
 - [Information Security Policy](https://drive.google.com/file/d/1Z2S-yl0jBPLVdl_0Qwc5kyIF3Dj3ypTp/view?usp=sharing)
-- [Password Policy](https://drive.google.com/file/d/1Z2S-yl0jBPLVdl_0Qwc5kyIF3Dj3ypTp/view?usp=sharing)
+- [Password Policy](https://drive.google.com/file/d/1FlOKt_yHGSH8vKMsm4z04M58RiyrWo4M/view?usp=sharing?usp=sharing)
 - [Physical Security Policy](https://drive.google.com/file/d/17JkSfMC7ILuAm3YjZRCTB7i8eWLtkuN3/view?usp=sharing)
 - [Responsible Disclosure Policy](https://drive.google.com/file/d/1ag8F2OA3FYUwRRAGbzMrDw1XV1QoqhNg/view?usp=sharing)
 - [Risk Assessment Policy](https://drive.google.com/file/d/1mnqKDqZTjOI4EJhpbpbjcVmLzCMhZDki/view?usp=sharing)

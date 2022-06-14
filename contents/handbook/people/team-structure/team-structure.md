@@ -49,7 +49,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer)_
+- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
 
 <br />
 
@@ -59,7 +59,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_
+- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
 
 <br />
 

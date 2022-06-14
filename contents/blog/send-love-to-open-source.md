@@ -25,7 +25,7 @@ We're donating to three projects and one open-source developer whose work is use
 |----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Rrweb](https://github.com/rrweb-io/rrweb)                     | Rrweb is an open-source web session replay library that supports PostHog's [Session Recording](https://posthog.com/product/session-recording) feature              |
 | [Django REST](https://github.com/encode/django-rest-framework) | DRF is _the_ framework for building APIs in Django and the foundation of PostHog's web API                                                                                                                          |
-| [Babel](https://github.com/babel/)                             | We use Babel to safely run TypeScript plugins in a NodeJS environment                                                                                                                                                                           |
+| [Babel](https://github.com/babel/)                             | We use Babel to safely run TypeScript apps in a NodeJS environment                                                                                                                                                                           |
 | [Sindre Sorhus](https://github.com/sindresorhus)               | Sindre is a prolific open-source developer who maintains some of our [most-used packages](https://github.com/sponsors/community?account=PostHog&page=1&sort_by=MOST_USED)  |
 
 
@@ -53,3 +53,7 @@ Also, getting people who care about open-source projects to star our repo is of 
 4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/growth/marketing/open-source-sponsorship)
 
 > Support the projects that make PostHog possible by [heading to the PostHog repo and starring it today!](https://github.com/PostHog/posthog) We'll donate $5 for every star between now and through to the end of Valentine's Day!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

@@ -13,6 +13,7 @@ By default, the chart installs the following dependencies:
 
 - [altinity/clickhouse-operator](https://github.com/Altinity/clickhouse-operator/)
 - [bitnami/kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka)
+- [bitnami/minio](https://github.com/bitnami/charts/tree/master/bitnami/minio)
 - [bitnami/postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 - [bitnami/redis](https://github.com/bitnami/charts/tree/master/bitnami/redis)
 - [bitnami/zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper)
@@ -20,6 +21,8 @@ By default, the chart installs the following dependencies:
 There is optional support for the following additional dependencies:
 
 - [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
+- [grafana/loki](https://github.com/grafana/helm-charts/tree/main/charts/loki)
+- [grafana/promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail)
 - [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
@@ -230,6 +233,20 @@ Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operat
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
 
+### [MinIO](../runbook/minio/)
+
+By default, `MinIO` is not installed as part of the chart. If you want to enable it, please set `minio.enabled` to `true`.
+
+MinIO provide a scalable, S3 compatible object storage system. You can customize all its settings by overriding `values.yaml` variables in the `minio` namespace.
+
+Note: please override the default user authentication by either passing `auth.rootUser` and `auth.rootPassword` or `auth.existingSecret`.
+
+#### Use an external service
+To use an external S3 like/compatible object storage, please set `minio.enabled` to `false` and then configure the `externalObjectStorage` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [MinIO chart](https://github.com/bitnami/charts/tree/master/bitnami/minio) for full configuration options._
+
+
 ### [PostgreSQL](../runbook/postgresql/)
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
@@ -372,6 +389,7 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
 
+
 ### [Grafana](https://github.com/grafana/grafana)
 By default, `grafana` is not installed as part of the chart. If you want to enable it, please set `grafana.enabled` to `true`.
 
@@ -384,6 +402,23 @@ kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password
 To configure the stack (like expose the service via an ingress resource, manage users, ...) please look at the inputs provided by the upstream chart.
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [grafana chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) for full configuration options._
+
+
+### [Loki](https://github.com/grafana/loki)
+By default, `loki` is not installed as part of the chart. If you want to enable it, please set `loki.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [loki chart](https://github.com/grafana/helm-charts/tree/main/charts/loki) for full configuration options._
+
+
+### [Promtail](https://github.com/grafana/loki/tree/main/docs/sources/clients/promtail)
+By default, `promtail` is not installed as part of the chart. If you want to enable it, please set `promtail.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [promtail chart](https://github.com/grafana/helm-charts/tree/main/charts/promtail) for full configuration options._
+
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)
 

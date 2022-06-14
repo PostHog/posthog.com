@@ -13,7 +13,7 @@ categories: ["Product updates", "Launch week", "Guides"]
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing?
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing? Plus, what is the world without a [great open-source A/B testing tool](/blog/best-open-source-ab-testing-tools)?
 
 Experiments allow you to choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for.
 
@@ -108,3 +108,7 @@ To solve the Taking-action-without-enough-information problem, we made it clear 
 [^1]: If you're looking for how we calculate this, see the [user guide](/docs/user-guides/experimentation)
 
 That's all for this post, we'd love to have you start your own experiments and tell us what you learn. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), give us a shout in our [PostHog community Slack channel](/slack), or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team if you have feedback to share.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

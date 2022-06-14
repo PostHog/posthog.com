@@ -35,7 +35,7 @@ This can be a property set by PostHog, such as `event.properties.ip`, and it can
 
 If a property does not exist on the event, the webhook message will say `undefined` for the property.
 
-For example, the followijg message format:
+For example, the following message format:
 
 ```
 [user.name] triggered [action.name] from [event.properties.country]

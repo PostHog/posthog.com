@@ -30,3 +30,7 @@ Additionally, we also welcome contributions to our Docs, especially to our [new 
 Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs to get an official shirt from Digital Ocean, we are happy to send you some [PostHog merch](https://merch.posthog.com/) if you make _one_ relevant contribution. 
 
 Happy Hacktoberfest from our entire team at PostHog. Let's get hacking!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

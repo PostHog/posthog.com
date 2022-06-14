@@ -126,7 +126,7 @@ export default function Main({
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
-                    {breadcrumbBase.name === 'Docs' && <CommunityQuestions questions={questions} />}
+                    <CommunityQuestions questions={questions} />
                 </article>
 
                 {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}

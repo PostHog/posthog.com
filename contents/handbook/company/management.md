@@ -1,5 +1,5 @@
 ---
-title: Management at PostHog
+title: Management
 sidebar: Handbook
 showTitle: true
 ---
@@ -27,13 +27,7 @@ A manager at PostHog is _not_ responsible for:
 1. Setting tasks for their direct reports
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
 
-## How do I make sure my direct reports are happy and productive?
-
-1. Schedule [regular 1:1s](/handbook/company/1-1s) every week or every other week
-1. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months
-1. Talk about the long-term career plans every now and again. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
-
-## What does setting context mean?
+### What does setting context mean?
 
 At PostHog, we exclusively hire people that are the best in their field.
 That means managers won't need to spend time telling their direct reports what to do.
@@ -59,7 +53,7 @@ What managers should aim for at PostHog is to make themselves obsolete. Share as
 
 Managers also use 1-1s as a useful tool for helping to set context - we've written [some FAQs](/handbook/company/1-1s) on how to make sure you get the most out of these. 
 
-## Part-time managers
+### Part-time managers
 
 Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job.
 That means everyone, including the CEO and CTO, still spend the majority of their time on practicing what they do best (which likely isn't management!).
@@ -71,7 +65,7 @@ That's why it's important for managers to keep practising their craft.
 
 Management tasks do come first, as giving context to your team tends to have a multiplying effect vs getting one more PR out. After that though, it's back to work.
 
-## Anti-silos
+### Anti-silos
 
 There are teams at PostHog that need to work across functions, so we have an anti-silo approach when it comes to the tasks that people work on.
 
@@ -81,3 +75,24 @@ That means:
 * Every [Small Team](structure) has complete control over what they ship.
 
 This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
+
+## How do I make sure my direct reports are happy and productive?
+
+Schedule [regular 1:1s](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES). There are three types:
+  - First 1-1 when a team member starts
+  - Weekly 1-1s as a regular check in
+  - Quarterly 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
+
+Talking about long-term career plans every now and again is really important but easy to let slip when things get busy. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
+
+### 1-1s and team member growth
+
+1-1s are the best way you can support your team members' career growth. [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member. 
+
+Most people do a weekly or bi-weekly 1-1 with their manager, with a 30min minimum. Any less than this is too short or infrequent. Try to respect 1-1s and not move them around, and make the effort to prepare - they matter a lot to your team! Make sure that 1-1s don't just become a task update session (we do this async or in sprint planning).
+
+Separately, you should take time once every ~3 months to zoom out and talk about your team's growth path at PostHog and how you can support them. Again, the template has some useful questions you can ask. 
+
+> There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person.
+
+If you want to learn more, check out First Round Review for at least [another 6 articles](https://review.firstround.com/managers-take-your-1-1s-to-the-next-level-with-these-6-must-reads) on how to have great 1-1s! 
