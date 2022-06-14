@@ -1,5 +1,5 @@
 ---
-date: 2022-06-15
+date: 2022-06-14
 title: The most useful B2B SaaS product metrics (and how to measure them)
 rootPage: /blog
 sidebar: Blog
