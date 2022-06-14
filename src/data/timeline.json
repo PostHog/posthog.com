@@ -187,41 +187,37 @@
     {
         "date": "2022-04-01",
         "type": "feature",
-        "description": "Console log tracking in recordings (beta)",
+        "description": "Console log tracking in recordings (beta)"
     },
     {
         "date": "2022-05-01",
         "type": "feature",
-        "description": "Insight experience overhaul",
+        "description": "Insight experience overhaul"
     },
     {
         "date": "2022-05-01",
         "type": "feature",
-        "description": "New onboarding experience",
-        "future": true
+        "description": "New onboarding experience"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Rapid ingestion pipeline",
+        "description": "Rapid ingestion pipeline"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Awesome demo environment",
-        "future": true
+        "description": "Awesome demo environment (in progress)"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Export and share visualizations as image file",
-        "future": true
+        "description": "Export and share visualizations as image file (in progress)"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Subscribe to dashboards and insights",
-        "future": true
+        "description": "Subscribe to dashboards and insights (in progress)"
     },
     {
         "date": "2022-09-01",
