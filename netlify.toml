@@ -1452,3 +1452,8 @@
 [[redirects]]
     from = "/blog/the-posthog-array-1-36-1"
     to = "/blog/the-posthog-array-1-36-0"
+
+# Added: 2022-06-14
+[[redirects]]
+    from = "/tutorials/b2b"
+    to = "/blog/b2b-saas-product-metrics"    
