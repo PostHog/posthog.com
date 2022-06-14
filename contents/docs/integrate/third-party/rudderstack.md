@@ -15,7 +15,9 @@ RudderStack is an open-source, warehouse-first, customer data platform for devel
 
 #### Can PostHog with RudderStack do everything PostHog does by itself?
 
-The PostHog integration with RudderStack gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture. All features for your PostHog instance will be the same, but all RudderStack sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar). 
+No. The PostHog integration with RudderStack gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture and session recording. All features for your PostHog instance will be the same, but all RudderStack sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar). 
+
+If you require session recording whilst using the Rudderstack integration, you need to additionally include the PostHog [JS snippet](/docs/integrate/client/js) and disable autocapture so you don't duplicate events.
 
 ## Setting up the integration
 
