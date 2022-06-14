@@ -1,42 +1,20 @@
 ---
-name: New blog post idea
-about: Share a new blog post idea
-title: "Blog post: {title}"
-labels: Marketing
-assignees:
+name: New content idea template
+about: Share your idea for a new piece of content
+title: "{title}"
+labels: content
+assignees: andyvan-ph
 
 ---
 
-## Premise
+## What type of content is it?
 
-_Explain the premise of the blog post_
+_Blog, tutorial, video, experimental jazz?_
 
-## Target audience
+## Strapline
 
-_Who are we trying to reach with the content?_
+_Explain the idea in a sentence or two_
 
-## Where is the blog to be published?
+## Ouline
 
-_posthog.com/blog or somewhere else?_
-
-## Who is writing the blog post?
-
-_is it one person or a collaboration_
-
-## When do we want to publish?
-
-_a rough publish date is fine_
-
-## Amplification checklist
-
-_Add or remove items to the amplification checklist_
-
-To maximize the reach of the blog content we create it's recommended that we amplify in the following way. Note that we generally discourage using hashtags on Twitter, especially in the middle of sentences. 
-
-- [ ] Twitter (west cost US)
-- [ ] Scheduled again on Twitter (east coast US and Europe)
-- [ ] LinkedIn
-- [ ] Slack (internal) to enourage our team to amplify
-- [ ] Slack (community) to encourage the community to amplify
-- [ ] PostHog News
-- [ ] Author to post and ask for additional amplification from team
+_Bullet point outline of structure / questions / topics to be covered_
