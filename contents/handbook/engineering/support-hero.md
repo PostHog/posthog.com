@@ -44,7 +44,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
-  - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
+  - If it's an email, make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
@@ -61,8 +61,9 @@ It's really valuable for us to understand what types of requests we've had so we
 
 When you initially respond to an issue in Zendesk add a "tag" with the following categories:
 * User experience _(confusing/unclear UX)_.
-* Performance
 * Docs confusion _either missing or confusing_.
+* App Performance
+* Ingestion _(either problems and not working or performance)_.
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
@@ -145,7 +146,7 @@ Goal of the Support Hero person on duty is to:
 
 * Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
 
-* Provide actionable information as _Note_ for all the items you cannot close before the end of your shift, and remove yourself as the assignee of the ticket so the next support hero can see what is outstanding
+* Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
 
 ##### How to deal with spam, marketing, partnership proposals, etc.
 
