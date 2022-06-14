@@ -185,15 +185,30 @@
         "description": "Offsite: Iceland"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-04-01",
         "type": "feature",
-        "description": "Console log tracking in recordings",
+        "description": "Console log tracking in recordings (beta)",
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "Insight experience overhaul",
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "New onboarding experience",
         "future": true
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Insight experience overhaul",
+        "description": "Rapid ingestion pipeline",
+    },
+    {
+        "date": "2022-06-01",
+        "type": "feature",
+        "description": "Awesome demo environment",
         "future": true
     },
     {
@@ -206,18 +221,6 @@
         "date": "2022-06-01",
         "type": "feature",
         "description": "Subscribe to dashboards and insights",
-        "future": true
-    },
-    {
-        "date": "2022-06-01",
-        "type": "feature",
-        "description": "Awesome demo environment",
-        "future": true
-    },
-    {
-        "date": "2022-06-01",
-        "type": "feature",
-        "description": "New onboarding experience",
         "future": true
     },
     {
@@ -266,12 +269,6 @@
         "date": "2022-09-01",
         "type": "feature",
         "description": "Multiple cloud environments",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Rapid ingestion pipeline",
         "future": true
     }
 ]
