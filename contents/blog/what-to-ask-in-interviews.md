@@ -23,27 +23,27 @@ This just doesn't feel like it should be normal. People should be able to reduce
 
 If I were job hunting, these are the themes I'd be interested in - it's skewed towards (i) startup / early growth software companies, (ii) engineers and (iii) interviews with founders (this is what I know!), but the concepts feel like they'd be useful beyond that.
 
-## Does the company have product market fit?
+## Does the company have product-market fit?
 
 This is the single most important thing a company can do to survive and grow.
 
-"Do you ever question if you have product market fit?"
-"When did you reach product market fit? How did you know?"
-"What do you need to do to get to product market fit?"
+"Do you ever question if you have product-market fit?"
+"When did you reach product-market fit? How did you know?"
+"What do you need to do to get to product-market fit?"
 "What's your revenue? What was it a year ago?"
 "How many daily active users do you have?"
 
-It's ok if these answers show you the founder doesn't have product market fit. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
+It's ok if these answers show you the founder doesn't have product-market fit. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
 
-Early stage founders are (or should be) super-mega-extra-desperately keen to have product market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it top. Many will think say (intentionally or through self-delusion) that they have it when they don't. Low user/revenue numbers and vague answers to the example questions above are a sign that it isn't there. Product market fit [is _very_ obvious](https://www.ycombinator.com/library/5z-the-real-product-market-fit).
+Early stage founders are (or should be) super-mega-extra-desperately keen to have product market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. Low user or revenue numbers and vague answers to the example questions above are a sign that it isn't there. Product market fit [is _very_ obvious](https://www.ycombinator.com/library/5z-the-real-product-market-fit).
 
 Avoid:
 
-* founders who aren't spending a ton of time talking and selling to users pre product market fit - it's a flag to attempt to outsource/delegate this
-* companies where you don't understand the product or its benefits (if it can't be explained to you, others will struggle)
-* solutions looking for a problem
+* Founders who aren't spending a ton of time talking and selling to users pre-product-market fit - it's a flag to attempt to outsource/delegate this
+* Companies where you don't understand the product or its benefits - if it can't be explained to you, others will struggle
+* Solutions looking for a problem
 
-If there is no product market fit, but you think the team could find it, it's very important the company has lots of runway (it'll be hard to raise more money without product market fit, so time to find it is crucial), that the startup doesn't have a huge team (it's harder to make rapid changes in direction with a lot of people), and that the company is fast (look out for bureaucracy/management/a team that can't work well with ambiguity).
+If there is no product-market fit, but you think the team could find it, it's very important the company has lots of runway (it'll be hard to raise more money without product-market fit, so time to find it is crucial), that the startup doesn't have a huge team (it's harder to make rapid changes in direction with a lot of people), and that the company is fast (look out for bureaucracy, management, or a team that can't work well with ambiguity).
 
 ## How much runway does the company have? Does their spending look within reason?
 
@@ -54,13 +54,13 @@ This means that the company whilst not profitable, is growing fast enough that i
 Avoid:
 
 * Companies that don't know this or don't care about it, given [the current climate](https://techcrunch.com/2022/05/06/the-venture-slowdown-isnt-coming-its-here/) - this may change in an easier fundraising environment for early stage, capital-intense business models
-* Companies that you don't believe could get to default alive (lack of time and speed to get stuff done), if they aren't
+* Companies that you don't believe could get to default alive due to a lack of time and speed to get stuff done, if they aren't
 
-There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates (ie if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up).
+There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates - if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
 
 "What's your runway? What assumptions are you making to calculate this?"
 
-If a company doesn't have product market fit, spending should be minimal so there's as much time as possible to find it. Spending a lot and having a big team just makes it harder to change direction rapidly.
+If a company doesn't have product-market fit, spending should be minimal so there's as much time as possible to find it. Spending a lot and having a big team just makes it harder to change direction rapidly.
 
 If a company has strong product market fit _and_ has a ton of traction, a shorter runway is ok.
 
@@ -78,9 +78,9 @@ We get the above a bit more often, they're good questions.
 
 ## How strong is the team?
 
-"Tell me about the team I'd be working with most closely"
+"Can you tell me about the team I'd be working with most closely?"
 "How do you compensate the team?"
-"How do you attract really strong hires?"
+"How do you attract and retain really strong hires?"
 
 You are trying to understand if they view engineering as a cost center (aka higher propensity you'll be miserable there!) or not.
 
@@ -97,7 +97,7 @@ You can't guarantee that plans won't change, but this gives you some indication 
 
 "What's the company strategy and why?"
 
-You are looking for a simple answer - else the company and the product will end up a bit of a mess.
+You are looking for a simple answer - otherwise the company and the product will end up a bit of a mess.
 
 "How do you and the other founders avoid falling out?"
 
