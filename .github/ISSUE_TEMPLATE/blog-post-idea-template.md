@@ -11,13 +11,13 @@ assignees: andyvan-ph
 
 _Blog, tutorial, video, experimental jazz?_
 
-## Why is this content worth creating?
-
-_Explain how it will be genuinely useful or interesting for readers/viewers_
-
 ## Strapline
 
 _Explain the idea in a sentence or two_
+
+## Why should we do it?
+
+_how it will it be useful or interesting for readers/viewers_
 
 ## Outline
 
