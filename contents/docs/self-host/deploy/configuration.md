@@ -229,6 +229,9 @@ following:
     nodes. We recommend you ensure that your Kubernetes worker nodes are within
     a private network or in a public network with firewall rules in place.
 
+ 1. if exposing via a `LoadBalancer` service type, restrict the ingress network
+    access to the load balancer
+
  1. to restrict access to the ClickHouse cluster, ClickHouse offers settings for
     restricting the IPs/hosts that can access the cluster. See the
     [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)
