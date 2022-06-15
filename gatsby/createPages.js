@@ -34,18 +34,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     slug
                 }
             }
-            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
             handbook: allMdx(
                 filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
             ) {
@@ -68,6 +56,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 }
             }
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            userGuides: allMdx(filter: { fields: { slug: { regex: "/^/user-guides/" } } }) {
                 nodes {
                     id
                     headings {
@@ -227,7 +227,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu) {
+    function createPosts(data, menu, template) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
             const { slug } = node.fields
@@ -245,7 +245,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             })
             createPage({
                 path: replacePath(slug),
-                component: HandbookTemplate,
+                component: template,
                 context: {
                     id: node.id,
                     next,
@@ -291,102 +291,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook')
-    createPosts(result.data.docs.nodes, 'docs')
-    createPosts(result.data.userGuides.nodes, 'userGuides')
-    result.data.handbook.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.docs.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.apidocs.nodes.forEach((node) => {
-        const slug = replacePath(node.url)
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: slug,
-            component: ApiEndpoint,
-            context: {
-                id: node.id,
-                slug,
-                menu: docsMenu,
-                next,
-                previous,
-                // menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
-            },
-        })
-    })
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate)
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate)
+    createPosts(result.data.userGuides.nodes, 'userGuides', HandbookTemplate)
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint)
 
     const tutorialsPageViews = await fetch(
         'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'
