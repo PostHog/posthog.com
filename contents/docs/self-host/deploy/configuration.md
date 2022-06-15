@@ -236,7 +236,7 @@ following:
     restricting the IPs/hosts that can access the cluster. See the
     [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)
     setting for details. We expose this setting via the Helm Chart as
-    `clickhouse.allowed_network_ips`
+    `clickhouse.allowedNetworkIps`
 
 #### Use an external service
 To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
