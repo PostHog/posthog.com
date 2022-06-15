@@ -8,6 +8,16 @@
     }
 }
 
+:root {
+    --squeak-primary-color: 0, 0, 0;
+    --squeak-default-avatar-fill: 255, 255, 255;
+    --squeak-button-color: 239, 118, 50;
+    .dark {
+        --squeak-primary-color: 255, 255, 255;
+        --squeak-default-avatar-fill: 0, 0, 0;
+    }
+}
+
 main a,
 .article-content a:not(.cta) {
     @apply text-red hover:text-red font-semibold;
@@ -135,6 +145,18 @@ footer a:not(.cta) {
 .share-links a {
     background: none;
     transition: none;
+}
+
+/* timeline key */
+
+.timeline-entry li[data-type='feature']:before {
+    background: #43af79;
+}
+.timeline-entry li[data-type='news']:before {
+    background: #0080ff;
+}
+.timeline-entry li[data-type='milestone']:before {
+    background: #c849f4;
 }
 
 /* Product page */
@@ -490,7 +512,8 @@ ul {
     }
 }
 
-.template-section-content {
+.template-section-content,
+.api-content-container {
     &:not(.divide-dashed) {
         @apply gap-x-12;
     }
@@ -512,20 +535,36 @@ ul {
     table {
         @apply m-0 text-base;
         th {
-            @apply border-0 text-center;
+            @apply border-0;
             &:first-of-type {
-                @apply text-left;
+            }
+        }
+        tr:last-child {
+            td {
+                @apply border-b-0;
             }
         }
         td {
-            @apply font-bold border-l-0 border-r-0 border-dashed border-gray-accent-light text-center;
-            &:first-of-type {
-                @apply text-left;
-            }
+            border: none;
         }
         img,
         svg {
             @apply mx-auto;
+        }
+    }
+
+    .params-wrapper {
+        .type,
+        code:not(.language-json) {
+            @apply bg-gray-accent-light-hover dark:bg-gray-accent-dark;
+        }
+
+        .params-wrapper {
+            @apply bg-tan dark:bg-primary;
+
+            .type {
+                @apply bg-gray-accent-light dark:bg-gray-accent-dark;
+            }
         }
     }
 }
@@ -645,6 +684,13 @@ ul {
     line-height: 1rem;
 }
 
+.lemon-tag.gh-tag {
+    text-transform: unset;
+    background-color: rgba(83, 117, 255, 0.1);
+    padding: 4px 8px;
+    color: #5375ff;
+}
+
 .lemon-tag.warning {
     background-color: #f7a501;
 }
@@ -673,4 +719,127 @@ ul {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.heart-pulse {
+    animation: pulse 5s linear infinite;
+}
+
+.heart-fade {
+    opacity: 0;
+    animation-name: fade;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.mermaid {
+    line-height: 1;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.w-md-editor-toolbar {
+    @apply !h-auto !bg-white !p-2 !border-dashed !border-gray-accent-light;
+    ul {
+        @apply flex items-center;
+        button {
+            @apply rounded-md !w-[32px] !h-[32px] flex items-center justify-center transition-opacity opacity-30 hover:bg-gray-accent-light hover:opacity-100;
+        }
+    }
+}
+
+.w-md-editor-input {
+    @apply !p-2;
+}
+
+.w-md-editor-content {
+    @apply !h-[150px];
+}
+
+.w-md-editor {
+    @apply mt-2 !shadow-md !bg-white dark:!bg-gray-accent-light !rounded-md overflow-hidden;
+}
+
+body.dark {
+    .w-md-editor-toolbar,
+    .w-md-editor-content {
+        @apply !bg-gray-accent-light;
+    }
+}
+
+.docs-endpoint-wrapper {
+    .endpoint-text {
+        font-family: monospace !important;
+        margin-top: 10px;
+        background-color: rgb(1, 22, 39);
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+}
+
+.api-content-container {
+    .method {
+        background: none;
+        font-family: Consolas, monaco, monospace;
+    }
+    .text-xs * {
+        font-size: 0.75rem;
+    }
+}
+
+.api-documentation {
+    hr {
+        @apply border-0 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed bg-transparent mt-2;
+    }
+    code {
+        @apply bg-gray-accent-light dark:bg-gray-accent-dark;
+        border-radius: 2px;
+        padding: 2px 3px;
+    }
+    .prism-code {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .code-example {
+        background: lighten(rgb(36, 41, 46), 10%);
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    button {
+        @apply !text-red hover:!text-red font-semibold;
+    }
+}
+
+.tutorials-slider .slick-list {
+    overflow: visible;
+
+    .slick-slide:last-of-type {
+        > div > div {
+            border-right: 0px;
+        }
+    }
 }

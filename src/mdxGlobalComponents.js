@@ -6,6 +6,8 @@ import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
+import { Apps } from './components/Apps'
+import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
@@ -96,6 +98,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
+import { Subscribe } from './components/Subscribe'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
@@ -113,6 +116,8 @@ export const shortcodes = {
     AnchorScrollNavbar,
     AnimateIntoView,
     AnimatedBurger,
+    Apps,
+    AppsList,
     ArrayCTA,
     BasicHedgehogImage,
     BlockQuote,
@@ -203,6 +208,7 @@ export const shortcodes = {
     StarUsBanner,
     StartNowButton,
     Structure,
+    Subscribe,
     TableOfContents,
     TeamQuote,
     Tooltip,

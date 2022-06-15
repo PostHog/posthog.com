@@ -12,8 +12,10 @@ import InstallingSnippet from './snippets/installing'
 import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
-import TryUnsecureSnippet from './snippets/tryunsecure'
 import SetupDNS from './snippets/setup-dns'
+import Disclaimer from './snippets/disclaimer'
+
+<Disclaimer />
 
 > Note: This deployment option is in Beta. See alternative deployment options [here](/docs/self-host#deployment-options).
 
@@ -54,12 +56,6 @@ cert-manager:
 ## Setting up DNS
 
 <SetupDNS />
-
-## Troubleshooting
-
-### I cannot connect to my PostHog instance after creation
-
-<TryUnsecureSnippet />
 
 ### Upgrading the chart
 

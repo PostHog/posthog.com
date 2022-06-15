@@ -6,112 +6,53 @@ showTitle: true
 
 <FeatureAvailability allPlans />
 
-Trends are a very powerful way to visualize how actions or events are varying over time.
+Trends are a type of [Insight](/docs/user-guides/insights), and are a powerful way to visualize how Actions or Events are varying over time.
 
-These are useful for monitoring which parts of your products are being used repeatedly, how usage is changing as well as the engagement levels of your users.
+These are useful for monitoring which parts of your products are being used repeatedly, how usage is changing, and the engagement levels of your users.
 
-## Demo video
+Access Trends by clicking 'Insights' in the left hand menu and selecting the 'Trends' tab. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kyGgDbNQto4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Using Trends
 
-## Accessing trends
+Select the Actions or Events you want to see trends of in the drop down menu on the Trends tab. You can add multiple graph series here and see how these Trends behave over time. These are set to 'Total count' by default, but the second drop down menu lets you select alternatives like 'Unique users'. 
 
-1. Click 'Insights' on the left sidebar
-2. Click the 'Trends' tab (default)
+Dotted lines show data collected so far but not resolved in the time interval selected. 
 
-![Trends Page](../../images/features/trends/trends-page.png)
+You can edit Trends further by:
 
-<br />
+- Filtering by a further Action or Event (e.g. User Sign up by UTM Source)
+- Renaming your graph series to something more useful
+- Copying your graph series (e.g. to then apply a different filter to it)
 
-## Using trends
+In the right hand pane you can:
 
-Select the actions or events you want to see trends of in the menu:
+- Filter out internal and test users
+- Add a maths formula to your series
+- Break down your aggregate values by further properties - a powerful way to get quick visual insights
 
-![Trends Menu](../../images/features/trends/trends-menu.png)
+## Chart views
 
-You can now see the trend in these actions over time.
+There are a few different ways to visualize your trend data:
 
-<br />
+- Date range: select the appropriate range for your data from a range of options
+- Grouped by: you can group this data by time intervals such as daily, weekly etc.
+- Compare to previous: this will let you compare two of the same type of time period (e.g. this week vs. last week)
+- Chart type: various visualization options, including line chart, bar chart, pie chart and table
 
-![Action trends](../../images/04/Posthog-14.png)
+At the bottom of the chart, you can view a full table of data which can be sorted in various ways. Different data series can be toggled on and off here as well. 
 
-Dotted lines show data collected so far but that which is not determined by the time interval selected.
+## Viewing individual users
 
+You can use trends to then drill down into specific instances of user behavior:
 
-## Trend filtering
+- Hover over a particular data point on your trend
+- Click anywhere to bring up a list of users in that data point
+- You can click through to that particular user or view a [Recording](/docs/user-guides/recordings) directly from the Trend view
 
-There are a few ways to filter this information.
+### Further reading
 
-- Date range
-- Time interval
-- Graphical Display
-- Property
+Want to know more about what's possible with Trends in PostHog? Try these tutorials:
 
-Date range, time intervals, and the graphical display can be changed at the top of the graph.
+- [Tracking key B2B product metrics](/tutorials/b2b)
 
-The date range can be selected as an actual date range or common time intervals like the last week or the last 90 days, the graphical display can be displayed as a line chart, table or pie graph. 
-
-Depending on your segmentation and other filters not all graphical displays will be available.
-
-Time intervals can be by the minute, hour, day, week or month.
-
-![interval gif](../../images/04/interval-time-trends.gif)
-<br />
-
-Filtering by property can be selected underneath the actions or events you have selected. 
-
-![Filter by property](../../images/features/trends/trend-filtering.png)
-
-### Filtering trend graphs by active users 
-
-When selecting actions or trends PostHog will display the total count of those actions or events. 
-
-You also have the option to filter this by active users, which will give you a count of unique users who have completed that action/event instead of the total count. 
-
-Click on 'Total Volume' next to the selected event or action to reveal a dropdown menu where you can select 'Active Users', as well as:
-
-* Sum
-* Average
-* Minimum
-* Maximum
-
-## Trend segmentation
-
-It is possible to segment the data using the ‘Breakdown by’ menu. This allows you to see how trends in Actions vary by the Event properties.
-
-This segmentation has many use cases.
-
-For example, one of the Event properties is the UTM tags – which allows you as a marketer to understand exactly how different ad campaigns are performing.
-
-Another example is that as a product-person, you can see if different devices or different browsers affect usage. Maybe people using your web-based application on mobiles are generally inactive because the interface is hard to use:
-
-You can filter the event data too, based on the Event property. This means instead of breaking out more lines or rows in the table, you can just display the exact Action trends you care about when the Event property is something specific.
-
-You can also use this at the same time as the ‘Breakdown by’ option.
-
-### Trend segmentation by event property
-
-For example, if you ran a movie streaming service, you could monitor ‘Play button – clicked’ for just one movie at a particular URL.
-
-### Trend segmentation by stickiness
-
-Trend graphs will show numbers by volume as default, it is possible to show this as stickiness. Instead of the total number of times this action had been completed it will chart the graph as the number of consecutive days a unique user has performed that action. This will allow you to optimize for repeatable actions. 
-
-To do this, select 'Shown As' and click 'Stickiness'.
-
-![Trend Stickiness](../../images/features/trends/trend-stickiness.png)
-<br />
-
-This pairs nicely with [Retention](/docs/user-guides/retention), which is essentially a stickiness metric that is date-specific. In other words, trend stickiness does not care about when an action or event happened, just about what happened on the following days after the first time. Retention, on the other hand, is measured specifically based on when a certain event happened.
-
-<br />
-
-### Trend segmentation by user
-
-When in trends, you can click on data points to reveal a modal with a table of all the unique users that make up that data. 
-
-![Segment by user](../../images/features/trends/segment-by-user.png)
-
-This way, you not only have access to the aggregate values, but can always inspect further and determine what users compose each data point.
-
-
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 

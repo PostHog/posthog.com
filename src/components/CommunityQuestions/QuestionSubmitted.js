@@ -1,12 +1,13 @@
-import React from 'react'
 import { Check } from 'components/Icons/Icons'
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import EmailSubmitted from './EmailSubmitted'
 import SubmitEmail from './SubmitEmail'
 
 export default function QuestionSubmitted({ values, emailSubmitted, isValid, loading }) {
     return (
         <div>
-            <p className="mb-0">{values.question}</p>
+            <ReactMarkdown>{values.question}</ReactMarkdown>
             <p className="text-[14px] font-semibold opacity-50">by {values.name}</p>
             <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
                 <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">

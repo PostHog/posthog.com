@@ -11,8 +11,10 @@ import InstallingSnippet from './snippets/installing'
 import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
-import TryUnsecureSnippet from './snippets/tryunsecure'
 import SetupDNS from './snippets/setup-dns'
+import Disclaimer from './snippets/disclaimer'
+
+<Disclaimer />
 
 First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info). Follow the "Managed nodes - Linux" guide.
 
@@ -60,6 +62,12 @@ ingress-nginx:
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 ```
 
+If you're using a load balancer that talks HTTP (e.g. a Classic ELB in HTTP mode), you do not need to add the above
+`ingress-nginx` values. AWS will [provide X-Forwarded-* HTTP
+headers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html),
+and the PostHog provided nginx ingress controller will forward these headers
+along to upstream PostHog services.
+
 ## Installing the chart
 
 <InstallingSnippet />
@@ -72,12 +80,6 @@ ingress-nginx:
 ## Setting up DNS
 
 <SetupDNS />
-
-## Troubleshooting
-
-### I cannot connect to my PostHog instance after creation
-
-<TryUnsecureSnippet />
 
 ### Upgrading the chart
 

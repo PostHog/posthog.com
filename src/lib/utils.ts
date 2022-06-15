@@ -38,6 +38,16 @@ export const getCookie = (name: string) => {
     return cookieValue
 }
 
+export const setCookie = (name: string, value: string, days: number) => {
+    let expires = ''
+    if (days) {
+        const date = new Date()
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+        expires = '; expires=' + date.toUTCString()
+    }
+    document.cookie = name + '=' + (value || '') + expires + '; path=/'
+}
+
 export const generateRandomHtmlId = () =>
     Math.random()
         .toString(36)
@@ -62,6 +72,7 @@ export const scrollWithOffset = (id: string, offset: number) => {
 
 // tests email address for RFC 5322 compliance
 export function isValidEmailAddress(email: string): boolean {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(String(email).toLowerCase())
 }

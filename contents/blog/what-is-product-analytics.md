@@ -6,8 +6,9 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
-featuredImage: ../images/blog/blog-generic-1.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 ## What is product analytics?
 
@@ -29,19 +30,13 @@ There are two types of data which you can gather for product analytics:
 
 There are also frameworks which can be used to translate information between the two. NPS scores, for example, are often used to translate a user sentiment into a measurable data point.
 
-> Find out how [PostHog’s enables you to leverage quantative and qualitative data](/product), or [schedule a demo](/book-a-demo) to see it in action. 
+> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ## Why are product analytics tools important?
 
 Product analytics tools are important because they enable you to make thoughtful and well-informed decisions about changes to a product. Product analytics tools also enable you to measure success (or failure!) when needed, so you know if you need to rollback or double-down on a change. 
 
 It's possible to get by without product analytics, but then it's impossible to know if changes are having a beneficial impact, or even if you are solving the right problems to start with. Product development without product analytics is like stumbling around in a dark room, trying to find the way out. You _might_ find the way out, but you might also fall down a hole! 
-
-[![Hasura case study](../images/customers/hasura/screenshot.png)](/customers/hasura)
-
-<figcaption className="text-center">
-Find out <a href="/customers/hasura">how Hasura improved conversions by 20%</a> using PostHog
-</figcaption>
 
 ## Who uses product analytics?
 
@@ -78,15 +73,7 @@ One simple set of metrics which can help all teams to focus their efforts is the
 - *Revenue:* The money bought in by users (e.g. Subscriptions, LTV)
 - *Referral:* The users who share your product (e.g. reviews, shares)
 
-
-[![AARRR Tutorial](../images/tutorials/banners/aarrr-funnel.png)](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
-
-<p align = "center"><figcaption>
-
-Find out [how to build a AARRR funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
-
-</figcaption>
-</p>
+> Find out [how to build a AARRR funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
 
 ## Do I need to share my data when using product analytics tools?
 
@@ -110,16 +97,6 @@ In short, Google Analytics provides a handy overview of web traffic or vanity me
 
 As a result, Google Analytics is often the preferred tool for specific roles in a Marketing team that uses other Google tools, but is unsuitable for the needs of Product or Engineering teams. 
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/anca.png"
-        size="md"
-        name="Anca Filip"
-        title="Head of Product, Mention Me"
-        quote={`“We used to use Google Analytics, but PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before."`}
-    />
-</BorderWrapper>
-
 ## What are the best product analytics tools?
 
 Naturally, we think PostHog is the best product analytics tool available. 
@@ -128,4 +105,14 @@ Why? PostHog enables you to self-host your analytics, integrates with tools such
 
 There are a variety of product analytics tools available to choose from however, each with its own quirks and strengths. Popular options include platforms such as Amplitude, Heap, or Mixpanel, though none of these offer self-hosted deployments. 
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster and without writing SQL. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more. 
+## Further reading
+
+- [An introduction to customer retention](/blog/introduction-to-customer-retention): Customer retention metrics are vital to the long term success of any product
+
+- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+
+- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+
+> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

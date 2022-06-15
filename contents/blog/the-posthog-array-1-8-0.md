@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -93,3 +93,5 @@ If you are proactive, fast and passionate about code - email tim@posthog.com. We
 If you're a UX or designer - reach out to james@posthog.com. We've got a fancy new logo and rebrand planned. We'd love someone to take the wheel.
 
 In other news, we're getting closer to a new logo and brand. It's '80s and hedgehog inspired. That'll take a few more weeks to appear, but watch this space.
+
+<ArrayCTA />

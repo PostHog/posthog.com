@@ -27,7 +27,7 @@ const prettyInt = (x: number): string => {
 export const sliderCurve = Math.exp
 export const inverseCurve = Math.log
 
-const SI_SYMBOL = ['', 'k', 'M']
+const SI_SYMBOL = ['', 'k', 'M', 'B']
 
 const abbreviateNumber = (number: number): string => {
     const tier = (Math.log10(Math.abs(number)) / 3) | 0

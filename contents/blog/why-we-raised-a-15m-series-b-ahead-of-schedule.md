@@ -7,6 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ["Inside PostHog"]
 ---
 
 Last week we proudly announced we’d successfully raised $15 million in a Series B funding round, with support from Y Combinator Continuity Fund and GV (formerly Google Ventures). You may have seen [the news on VentureBeat](https://venturebeat.com/2021/06/10/open-source-product-analytics-platform-posthog-raises-15m/).
@@ -24,3 +25,9 @@ You may be curious what we’ll spend the money on. Our aim is to double the siz
 Other plans for the future include enhancing connectivity with data warehouses and merging improvements from PostHog Free into our open source product. It will take a few months to get there, but we ultimately want to create an open source offering which is free and scalable for everyone from individual hobbyists to enterprise teams. 
 
 We’d like to thank our thousands of users and our community of contributors for their continuing support in helping us reach this milestone, and for joining us in taking this next step. If you’re interested in what else we have planned for the future, [check out our roadmap](/handbook/strategy/roadmap)!
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

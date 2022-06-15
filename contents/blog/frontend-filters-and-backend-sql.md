@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ["Engineering"]
 ---
 
 By: [Engineering @ PostHog](https://www.linkedin.com/company/posthog)
@@ -770,6 +771,10 @@ And you can stop recording if you want, or you can keep recording. But the-
 **Eric:**
  
 Oh, I'm actually going to stop so I don't run out of space.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
  
 
  

@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/titles.png
 featuredImageType: full
+categories: ["Startups", "Inside PostHog"]
 ---
 
 One huge mistake some startups make is using titles to establish and reinforce hierarchy. This is dangerous for two reasons:
@@ -70,4 +71,8 @@ Before PostHog started, James had to sell to get Tim to join. After the company 
 
 On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](https://posthog.com/handbook/strategy/roadmap), financing, [deployment](https://posthog.com/docs/self-host), [team structure](https://posthog.com/handbook/people/team-structure/team-structure), and [pricing](https://posthog.com/pricing) strategies.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/posthog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

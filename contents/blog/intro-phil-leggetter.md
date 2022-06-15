@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/intro-phil.png
 featuredImageType: full
+categories: ["Inside PostHog"]
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VKSPhPbhyRs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -23,3 +24,9 @@ Over the next few months, Phil aims to help our users get the most out of PostHo
 The highly organized father of three works out of his color-coordinated shed in [Dollar](https://en.wikipedia.org/wiki/Dollar,_Clackmannanshire), a small town in Clackmannanshire, Scotland, helping savvy companies build engaged communities across the dev world. A consummate gamer and techno-dance fan who admits he once obsessed over NSYNC and the Backstreet Boys, Phil also used to be into soccer, going so far as to create a website in 2006 called ‘Bring Back Beckham’ after David Beckham was dropped from the England squad. On a non-soccer-related front, Phil has also tweaked the popular AARRR framework to ‘[AAARRRP](https://www.leggetter.co.uk/aaarrrp/)’, helping companies map their business goals to what dev relations can do for them.
 
 You can find Phil online on [GitHub](https://github.com/leggetter), [Twitter](https://twitter.com/leggetter) and [LinkedIn](https://www.linkedin.com/in/leggetter/), and his [website](https://leggetter.co.uk).
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

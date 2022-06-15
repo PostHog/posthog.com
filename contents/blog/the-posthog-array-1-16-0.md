@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -36,19 +36,19 @@ Additionally, you can do so while still preserving the privacy of your users, by
 However, please note that our session recording feature is in **Beta** at the moment. This means that it can be unstable and have bugs. To report bugs you find while using it, please [open an issue for us on GitHub](https://github.com/PostHog/posthog/issues). 
 
 
-### [Plugins (Beta)](https://github.com/PostHog/posthog/issues/1896)
+### [Apps (Beta)](https://github.com/PostHog/posthog/issues/1896)
 
-![Plugins Screenshot](../images/blog/array/plugins.png)
+![Apps Screenshot](../images/blog/array/plugins.png)
 
-Plugins is another **Beta** feature that we're extremely excited for. Currently only available for self-hosted instances, plugins allow you to add additional logic to your event processing pipeline, in order to do things like enrich your data or send it somewhere else, like a data warehouse. 
+Apps is another **Beta** feature that we're extremely excited for. Currently only available for self-hosted instances, apps allow you to add additional logic to your event processing pipeline, in order to do things like enrich your data or send it somewhere else, like a data warehouse. 
 
-At the moment, we have created a few example plugins for you to test out the functionality, and have the intention of launching more for the next release. We will also be launching tutorials on how to make your own plugins, so stay tuned for that.
+At the moment, we have created a few example apps for you to test out the functionality, and have the intention of launching more for the next release. We will also be launching tutorials on how to make your own apps, so stay tuned for that.
 
-As of right now, if you're on a self-hosted instance, you should head over to 'Project' -> 'Plugins' to enable the functionality. You can start testing it out with our "Hello World" plugin, which adds a property to your events called `foo` with a value that is up to you to decide in setup. 
+As of right now, if you're on a self-hosted instance, you should head over to 'Project' -> 'Apps' to enable the functionality. You can start testing it out with our "Hello World" app, which adds a property to your events called `foo` with a value that is up to you to decide in setup. 
 
-We also have built plugins for currency normalization and GeoIP data, allowing you to convert currency values in events according to up-to-date exchange rates and determine the location of an event based on the user's IP.
+We also have built apps for currency normalization and GeoIP data, allowing you to convert currency values in events according to up-to-date exchange rates and determine the location of an event based on the user's IP.
 
-Our overall vision for plugins is to enable seamless integration with other relevant data analytics platforms, as well as allow users to more easily customize PostHog's functionality by adding their own logic and data to the event pipeline.
+Our overall vision for apps is to enable seamless integration with other relevant data analytics platforms, as well as allow users to more easily customize PostHog's functionality by adding their own logic and data to the event pipeline.
 
 Finally, as is the case with session recording, please report any bugs in the functionality on [GitHub](https://github.com/PostHog/posthog/issues).
 
@@ -184,13 +184,13 @@ In addition to the main features mentioned above, we also merged multiple PRs im
 
 ## Favorite Issue
 
-### [Plugins Epic](https://github.com/PostHog/posthog/issues/1896)
+### [Apps Epic](https://github.com/PostHog/posthog/issues/1896)
 
-Originally built over the span of a few days at an internal hackathon, our plugins feature has since undergone massive refactors and improvements. 
+Originally built over the span of a few days at an internal hackathon, our apps feature has since undergone massive refactors and improvements. 
 
 As a result, the linked issue has the following gem, as well as an in-depth discussion (AKA monologue) about the implementation, which is extremely informative:
 
-![Gallery Failed Plugins](../images/blog/array/gallery-failed.png)
+![Gallery Failed Apps](../images/blog/array/gallery-failed.png)
 
 
 ## PostHog News
@@ -206,4 +206,7 @@ Are you a Designer or Fullstack Engineer?
 Or perhaps you're not either but think you'd still be a good fit for PostHog? 
 
 [We want you!](https://posthog.com/careers) 
+
+<ArrayCTA />
+
 

@@ -9,7 +9,7 @@ keywords: ["self host analytics","self hosted analytics"]
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["General"]
+categories: ["Open source", "Guides"]
 ---
 
 PostHog is a self-hosted, [open-source analytics tool](/blog/best-open-source-analytics-tools). Transparency is one of our [core values](/handbook/company/culture) and we believe self-hosting is the best solution for many businesses, especially large enterprises with complex needs. But, why? Why do we believe in this idea when the likes of Mixpanel, Amplitude and Heap are busy doing the exact opposite?
@@ -46,6 +46,8 @@ They investigated third-party providers, but found their approach to data privac
 
 Issues around data portability are particularly crucial for healthcare companies. Any product capturing health information in the US is subject to HIPAA, which regulates how companies use protected health information (PHI). Companies need to use [HIPAA compliant analytics providers](/blog/hipaa-compliant-analytics) and sign a Business Associate Agreement (BAA) before any user tracking can occur. By self-hosting, companies keep control of their data and avoid the legal expense, time and energy drained in dealing with legal agreements.
 
+> Looking for an alternative to Google Analytics? Read our [guide to the best GDPR-compliant analytics](/blog/best-gdpr-compliant-analytics-tools) tools on the market.
+
 ## 2) More reliable data
 
 Cloud-based and self-hosted analytics do the same thing, so surely they collect the same data? Wrong.
@@ -78,4 +80,6 @@ We often find customers prefer to start on PostHog Cloud and we make it easy to 
 
 If data privacy isn't a priority and you just need reliable analytics as quickly as possible, cloud-hosting is always a sensible option.
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

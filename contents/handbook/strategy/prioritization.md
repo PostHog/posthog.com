@@ -31,7 +31,7 @@ After we’ve made significant progress towards our current milestone we will bu
 
 ## Prioritization framework
 
-- 🚀 Grow Discoveries: e.g. Will this increase the total number of Discoveries in the short or long term (our metric for people discovering a valuabe insight within our product)?
+- 🚀 Grow Discoveries: e.g. Will this increase the total number of Discoveries in the short or long term (our metric for people discovering a valuable insight within our product)?
 - 🚧 Unblock Focus Customers: e.g. Is this crucial for our focus customers to be successful? (see [Scale features prioritization][scale] for more details).
 - 🛡 Protect Trust: e.g. Will this increase or retain trust with our users, can we prevent users from seeing inconsistent or incorrect data?
 

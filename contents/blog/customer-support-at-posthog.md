@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 author: ["mo-shehu"]
 featuredImage: ../images/blog/customer-support-at-posthog/customer-support-at-posthog.jpg
+categories: ["Inside PostHog", "Open source"]
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6giGcTSdkAc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -44,4 +45,6 @@ The beauty of open source is that it’s built on a passionate community of cont
 
 Would we do things differently if we were starting over? Barely. We might hone in on Slack as our main comms channel earlier in our journey, but we’re otherwise happy with how customer support at PostHog has evolved.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/PostHog) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

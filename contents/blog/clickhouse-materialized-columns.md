@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Engineering"]
+categories: ["Engineering", "Guides"]
 author: ["karl-aksel-puulmann"]
 featuredImage: ../images/blog/blog-generic-2.png
 featuredImageType: full
@@ -148,5 +148,7 @@ After materializing our top 100 properties and updating our queries, we analyzed
 
 As a product, we're only scratching the surface of what ClickHouse can do to power product analytics. If you're interested in helping us with these kinds of problems, [we're hiring](https://posthog.com/careers)!
 
-_Keen to try out PostHog's blazingly fast analytics suite? [Deploy a free, self-hosted version](https://posthog.com/docs/self-host) today or try out our [hosted Cloud option](https://posthog.com/pricing)._
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />
 

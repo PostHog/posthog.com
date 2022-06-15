@@ -1,5 +1,5 @@
 ---
-title: Feature flags spec
+title: Feature flags specification
 sidebar: Handbook
 showTitle: true
 ---

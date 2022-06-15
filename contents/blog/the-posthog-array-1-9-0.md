@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes"]
+categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
@@ -48,7 +48,7 @@ What's new? We:
 
 ### [Docusaurus integration](/docs/integrate/third-party/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](/docs/integrate/third-party/docusaurus) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus integration](/docs/integrate/third-party/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 
@@ -133,3 +133,6 @@ There are two roles we'd love to talk to you or your friends about:
 
 * We are looking for a CSS wizard to help work with Lottie on our website and docs overhaul.
 * We're also trying to find a growth engineer. Someone technical that can help us with our own product-led growth.
+
+<ArrayCTA />
+

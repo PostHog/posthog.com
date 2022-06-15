@@ -27,7 +27,7 @@ const Nav = () => {
                                 <p className="text-[14px] font-semibold text-primary opacity-35 m-0 mb-2">{title}</p>
                             )}
                             <ul className="list-none p-0 m-0 flex flex-col space-y-2">
-                                {children.map(({ title, url }) => {
+                                {children?.map(({ title, url }) => {
                                     return (
                                         <li key={title}>
                                             <Link

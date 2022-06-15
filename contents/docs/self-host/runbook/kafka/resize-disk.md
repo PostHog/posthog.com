@@ -3,16 +3,9 @@ title: Resize disk
 sidebar: Docs
 showTitle: true
 ---
+import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
 
-### Requirements
-You need to run a Kubernetes cluster with the _Volume Expansion_ feature enabled. This feature is supported on the majority of volume types since Kubernetes version >= 1.11 (see [docs](https://kubernetes.io/docs/concepts/storage/storage-classes/#allow-volume-expansion)).
-
-To verify if your storage class allows volume expansion you can run:
-
-```shell
-kubectl get storageclass -o json | jq '.items[].allowVolumeExpansion'
-true
-```
+<ResizeDiskRequirementsSnippet/>
 
 #### How-to
 
@@ -50,7 +43,7 @@ true
 
 1. Delete the `StatefulSet` definition but leave its `pod`s online (this is to avoid an impact on the ingestion pipeline availability): `kubectl -n posthog delete sts --cascade=orphan posthog-posthog-kafka`
 
-1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example)
+1. In your Helm chart configuration, update the `kafka.persistence` value in `value.yaml` to the target size (20G in this example). You might want to update the retention policy too, more info [here](/docs/self-host/deploy/troubleshooting#why-did-we-run-into-this-problem-and-how-to-avoid-it-in-the-future)
 
 1. Run a `helm` upgrade to recycle all the pods and re-deploy the `StatefulSet` definition
 

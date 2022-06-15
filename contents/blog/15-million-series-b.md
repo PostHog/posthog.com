@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/series-b/series-b-baby.png
 author: ["joe-martin"]
+categories: ["Inside PostHog"]
 ---
 
 **Jun 10th, 2021** – [PostHog](https://posthog.com), the open source product analytics company, today announced $15 million in fresh funding and major new free features for users of data warehouses.
@@ -44,3 +45,7 @@ We also run the YC Growth Program, which brings together founder-CEOs who are le
 ### Press contacts
 
 [press@posthog.com](mailto:press@posthog.com)
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

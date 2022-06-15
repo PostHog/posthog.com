@@ -144,7 +144,8 @@ export const CompensationCalculator = () => {
                                   levelModifier[level] *
                                   stepModifier[step][1],
                               location?.currency
-                          )
+                          ) +
+                          ' + equity'
                         : '--'
                 }
             />

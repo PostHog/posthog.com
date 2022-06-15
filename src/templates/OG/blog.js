@@ -50,10 +50,10 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
           background: rgb(0, 0, 0);
           background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.5) 0%,
-            rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0) 25%,
-            rgba(0, 0, 0, 0.5) 100%
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.35) 40%,
+            rgba(0, 0, 0, 0.25) 60%,
+            rgba(0, 0, 0, 0.55) 100%
           );
         "
       ></div>
@@ -93,7 +93,7 @@ module.exports = blog = ({ title, authorData, image, font }) => `<html>
                   width: 100%;
                   height: 100%;
                 "
-                src="${authorData.image}"
+                src="data:image/png;charset=utf-8;base64,${authorData.image}"
               />
             </div>
             <div>
