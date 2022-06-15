@@ -302,7 +302,7 @@ If you are overriding `clickhouse.serviceType` to either `LoadBalancer` or `Node
 - restrict access to the ClickHouse cluster, ClickHouse offers settings for
 restricting the ips/hosts that can access the cluster. See the
 [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks) setting for details. We expose this setting
-via the Helm Chart as `clickhouse.allowed_network_ips`
+via the Helm Chart as `clickhouse.allowedNetworkIps`
 
 You can take a look at other suggestions in our docs:
 - [PostHog chart configuration](/docs/self-host/deploy/configuration)
