@@ -6,7 +6,9 @@ topics:
 ---
 
 ### What does the LaunchDarkly Connector do?
-This app exports actions — such as toggling a feature flag —  from LaunchDarkly and into PostHog via the API. This is useful for analyzing LaunchDarkly events using PostHog's product analytics suite and alongside other product data.
+This app exports actions — such as toggling a feature flag —  from LaunchDarkly and into PostHog via the API. 
+
+This is useful for analyzing LaunchDarkly events using PostHog's product analytics suite and alongside other product data.
 
 ###### What are the requirements for this app?
 Using the LaunchDarkly connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
@@ -16,10 +18,40 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 You'll also need a LaunchDarkly account, obviously.
 
 ##### How do I get started with the LaunchDarkly Connector?
-INFO COMING HERE
+
+A full explanation of how to install and configure this app through LaunchDarkly is availabe in [LaunchDarkly's PostHog integration documentation](https://docs.launchdarkly.com/integrations/posthog).
+
+To set up the app correctly, you need some information from PostHog. Specifically, your PostHog's instance URL, and an API Token.
+
+If you are using PostHog Cloud, your Instance URL will be: `https://app.posthog.com`. Alternatively, insert the domain of your self-hosted PostHog instance.
+
+To obtain an API Key, follow the steps below:
+
+1. Log in to your PostHog account.
+2. Open the Project you want to integrate.
+3. Navigate to **Project Settings**.
+4. Find your **Project API Key** listed in the page.
 
 #### How are events imported to PostHog?
-INFO COMING HERE
+Events from LaunchDarkly are automatically sent to the PostHog API with the following schema:
+
+```
+{
+"event": "string",
+"properties": {
+"launchDarklyEventId": "string",
+"launchDarklyEventAccountId": "string",
+"launchDarklyEventType": "string",
+"comment": "string",
+"distinct_id": "string",
+"email": "string",
+"firstName": "string",
+"lastName": "string",
+"title": "string"
+},
+"timestamp": "rfc3339 timestamp"
+}
+```
 
 ### Where can I find out more?
 You can find out more about this app via [LaunchDarkly’s integration documentation](https://docs.launchdarkly.com/integrations)
