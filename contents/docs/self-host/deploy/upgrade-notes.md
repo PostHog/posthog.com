@@ -307,3 +307,5 @@ via the Helm Chart as `clickhouse.allowedNetworkIps`
 For other suggestions and best practices take a look at our docs:
 - [PostHog chart configuration](/docs/self-host/deploy/configuration)
 - [Securing PostHog](/docs/)
+
+We'd like to thank Alexander Nicholson and the team at TableCheck for sharing their POC with us, which allowed us to quickly reproduce and address this issue.
