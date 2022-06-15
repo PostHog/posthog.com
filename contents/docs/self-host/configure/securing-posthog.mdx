@@ -3,6 +3,7 @@ title: Securing PostHog
 sidebar: Docs
 showTitle: true
 ---
+import Disclaimer from '../deploy/snippets/disclaimer'
 
 ## Restrict access by IP
 
@@ -57,6 +58,14 @@ openssl rand -hex 32
 This `SECRET_KEY` must be passed to PostHog as an environment variable.
 
 ## Cloud deployments
+As part of self-hosting PostHog by deploying it to a Kubernetes cluster, we need to
+make it is secure to threat actors. As every installation is unique, we will provide
+in our documentation some general guidelines on how to make it secure but it is then
+up to each administrator to make sure all the best practices are followed correctly.
 
-By self-hosting PostHog and deploying it to a Kubernetes cluster we need to make sure
-the overall installation
+<Disclaimer />
+
+* make sure your Kubernetes cluster is provisioned using industries best practices
+* make sure your installation is regularly maintained and up-to-date
+* for Helm chart configuration
+guidelines, take a look [here](docs/self-host/deploy/configuration)
