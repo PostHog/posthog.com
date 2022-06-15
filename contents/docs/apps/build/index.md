@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** If you want to build an App for PostHog Cloud, it needs to go through a review process. [Read more in the tutorial](/docs/apps/build/tutorial#submitting-your-app)
+> **Note:** You can create apps for both self-hosted and PostHog Cloud, but releasing an app on PostHog Cloud requires a review process. [Read more about the review process in the tutorial](/docs/apps/build/tutorial#submitting-your-app)
 
 PostHog makes it possible to build your own apps and integrate with other platforms. So, if [App Store](/apps) is missing something you need then you may still be able to create it yourself.
 
