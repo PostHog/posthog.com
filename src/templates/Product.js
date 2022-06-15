@@ -28,7 +28,7 @@ export default function Product({ data, pageContext: { next, previous } }) {
             <>
                 <h4 className="m-0 mb-9">{title} documentation</h4>
                 <ul className="m-0 p-0 list-none">
-                    {documentation.headings?.map((heading) => {
+                    {documentation?.headings?.map((heading) => {
                         const id = slugger.slug(heading.value)
                         return (
                             <li key={id}>

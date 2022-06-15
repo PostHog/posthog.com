@@ -37,6 +37,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
                     content: body,
                     mediaType: 'text/markdown',
                 },
+                fullName: `${user?.first_name} ${user?.last_name}`,
                 name: user?.first_name || 'Anonymous',
                 imageURL: user?.avatar,
                 created_at: new Date(created_at),

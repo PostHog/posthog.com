@@ -220,6 +220,7 @@ export default function PostLayout({
     sidebar,
     contentWidth = 650,
     questions,
+    menu,
     article = true,
 }) {
     const { hash } = useLocation()
