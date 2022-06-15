@@ -207,15 +207,12 @@ If your SMTP services requires authentication (recommended) you can either:
 
 ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by
-[clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are
-currently working to add the possibility to use an external ClickHouse service
-(see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for
-more info).
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). You can also use a ClickHouse managed service like [Altinity](https://altinity.com/) (see [here](/docs/self-host/configure/using-altinity-cloud) for more info).
 
 #### Securing ClickHouse
+By default, the PostHog Helm Chart will provision a ClickHouse cluster using a default username and password. Please provide a unique login by overriding the `clickhouse.user` and `clickhouse.password` values.
 
-By default, the PostHog Helm Chart uses a ClusterIP to expose the service
+By default, the PostHog Helm Chart uses a `ClusterIP` to expose the service
 internally to the rest of the PostHog application. This should prevent any
 external access.
 
@@ -223,16 +220,13 @@ If however you decide you want to access the ClickHouse cluster external to the
 Kubernetes cluster and need to expose it e.g. to the internet, keep in mind the
 following:
 
- 1. by default the cluster will be using a default username and password. Please
-    change this using the `clickhouse.user` and `clickhouse.password` Helm Chart
-    settings.
  1. the Helm Chart does not configure TLS for ClickHouse, thus we would
     recommend that you ensure that you configure TLS e.g. within a load balancer
     in front of the cluster.
  1. if exposing via a `LoadBalancer` or `NodePort` service type via
     `clickhouse.serviceType`, these will both expose a port on your Kubernetes
     nodes. We recommend you ensure that your Kubernetes worker nodes are within
-    a private network.
+    a private network or in a public network with firewall rules in place.
  1. to restrict access to the ClickHouse cluster, ClickHouse offers settings for
     restricting the ips/hosts that can access the cluster. See the
     [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)

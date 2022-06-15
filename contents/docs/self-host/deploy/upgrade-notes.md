@@ -288,3 +288,14 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/r
 22.0.0 upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This update brings several improvements to the overall service. For more info, you can look at the [upstream changelog](https://clickhouse.com/docs/en/whats-new/changelog/#clickhouse-release-v223-lts-2022-03-17).
 
 Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
+
+### Upgrading from 22.x.x
+23.0.0 changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
+
+If you are overriding `clickhouse.serviceType` to either `LoadBalancer` or `NodePort` please keep in mind to keep your installation secure by:
+
+- deploying your Kubernetes nodes in private subnet(s) or restrict access to those via firewall rules
+- restrict network access to the load balancer
+- add authentication to the load balancer
+
+You can take a look at other suggestions in our [docs](/docs/self-host/deploy/configuration).
