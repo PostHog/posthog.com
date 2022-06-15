@@ -19,7 +19,7 @@ You'll also need a LaunchDarkly account, obviously.
 
 ##### How do I get started with the LaunchDarkly Connector?
 
-A full explanation of how to install and configure this app through LaunchDarkly is availabe in [LaunchDarkly's PostHog integration documentation](https://docs.launchdarkly.com/integrations/posthog).
+A full explanation of how to install and configure this app through LaunchDarkly is available in [LaunchDarkly's PostHog integration documentation](https://docs.launchdarkly.com/integrations/posthog).
 
 To set up the app correctly, you need some information from PostHog. Specifically, your PostHog's instance URL, and an API Token.
 
