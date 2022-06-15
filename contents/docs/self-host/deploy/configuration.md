@@ -223,12 +223,14 @@ following:
  1. the Helm Chart does not configure TLS for ClickHouse, thus we would
     recommend that you ensure that you configure TLS e.g. within a load balancer
     in front of the cluster.
+
  1. if exposing via a `LoadBalancer` or `NodePort` service type via
     `clickhouse.serviceType`, these will both expose a port on your Kubernetes
     nodes. We recommend you ensure that your Kubernetes worker nodes are within
     a private network or in a public network with firewall rules in place.
+
  1. to restrict access to the ClickHouse cluster, ClickHouse offers settings for
-    restricting the ips/hosts that can access the cluster. See the
+    restricting the IPs/hosts that can access the cluster. See the
     [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)
     setting for details. We expose this setting via the Helm Chart as
     `clickhouse.allowed_network_ips`
