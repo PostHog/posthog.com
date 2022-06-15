@@ -292,10 +292,18 @@ Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We ex
 ### Upgrading from 22.x.x
 23.0.0 changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
 
-If you are overriding `clickhouse.serviceType` to either `LoadBalancer` or `NodePort` please keep in mind to keep your installation secure by:
+If you are overriding `clickhouse.serviceType` to either `LoadBalancer` or `NodePort` please remind to keep your installation secure by:
 
 - deploying your Kubernetes nodes in private subnet(s) or restrict access to those via firewall rules
 - restrict network access to the load balancer
 - add authentication to the load balancer
+- configure TLS for ClickHouse
+- provide a unique ClickHouse login by overriding the `clickhouse.user` and `clickhouse.password` values
+- restrict access to the ClickHouse cluster, ClickHouse offers settings for
+restricting the ips/hosts that can access the cluster. See the
+[`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks) setting for details. We expose this setting
+via the Helm Chart as `clickhouse.allowed_network_ips`
 
-You can take a look at other suggestions in our [docs](/docs/self-host/deploy/configuration).
+You can take a look at other suggestions in our docs:
+- [PostHog chart configuration](/docs/self-host/deploy/configuration)
+- [Securing PostHog](/docs/)
