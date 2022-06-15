@@ -26,6 +26,88 @@ You can also click each user to view a their entire event history.
 
 You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
 
+While ingesting events in the plugin server PostHog detects some type information for properties to allow more intelligent filtering.
+
+PostHog detects:
+
+* Boolean
+* Dates and Timestamps
+* Numbers
+* Strings
+* Everything else
+
+### Boolean (true or false)
+
+PotHog detects boolean values and allows filtering by only:
+
+* equals
+* doesn't equal
+* is set
+* is not set
+
+<img width="129" alt="query list for a boolean property lists only equals, doesn't equal, is set, and is not set" src="https://user-images.githubusercontent.com/984817/173809889-dc9a1c0d-4b5e-49a2-bb3b-2dee3325de8f.png">
+
+### Dates and Timestamps
+
+PostHog detects several formats of string as dates and times
+
+* YYYY-MM-DD,
+* Date and date and time strings from [the ISO8601 standard](https://en.wikipedia.org/wiki/ISO_8601),
+* YYYY-MM-DD HH:mm:SS,
+* DD-MM-YYYY HH:mm:SS,
+* DD/MM/YYYY HH:mm:SS,
+* YYYY/MM/DD HH:mm:SS
+* [the RFC 822 standard](https://datatracker.ietf.org/doc/html/rfc822)
+
+In detection day and month are interchangeable so MM-DD-YYYY would be detected as a date.
+
+Ten and Thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp"
+
+Filtering against that property will then show a date picker and allows filtering only: 
+
+* equals 
+* before 
+* after
+* is set
+* is not set
+
+<img width="118" alt="query list for a date time property lists only equals, before, after, is set, is not set" src="https://user-images.githubusercontent.com/984817/173811606-b041067c-e4d1-48ee-a086-1480fdbde968.png">
+
+### Numeric
+
+PostHog detects numeric properties and allow filtering by only:
+
+* equals
+* doesn't equal
+* matches regex
+* doesn't match regex
+* greater than
+* lower than
+* is set
+* is not set
+
+<img width="123" alt="query list for a numeric property lists equals, doesn't equal, matches regex, doesn't match regex, greater than, lower than, is set, and is not set" src="https://user-images.githubusercontent.com/984817/173812477-3927a8ea-a5ab-4e78-89cd-da201dd7c3b9.png">
+
+
+### Strings (text)
+
+PostHog detects text content. If it is not true/false, numeric, or a date time. You can filter by:
+
+* equals
+* doesn't equal
+* contains
+* doesn't contain
+* matches regex
+* doesn't match regex
+* is set
+* is not set
+
+<img width="119" alt="query list for a string property lists equals, doesn't equal, contains, doesn't contain, matches regex, doesn't match regex, is set, and is not set" src="https://user-images.githubusercontent.com/984817/173812967-77a59a51-2892-468e-b610-563ade949b40.png">
+
+### Everything else
+
+If PostHog does not detect a type for an event property. You can choose any of the possible filters.
+
 ## Autocapture event tracking
 
 PostHog can capture all front-end events automatically using a simple [JavaScript snippet](/docs/integrate/client/snippet-installation). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
