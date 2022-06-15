@@ -6,7 +6,7 @@ showTitle: true
 
 <FeatureAvailability allPlans />
 
-The most important thing that PostHog does is to capture events from your website or application. An event is basically any action a user takes on your website or in your application - if they click a button or visits a page, that's an event.
+The most important thing that PostHog does is to capture events from your website or application. An event is any action a user takes on your website or in your application - if they click a button or visits a page, that's an event.
 
 ## Live events
 
@@ -26,9 +26,93 @@ You can also click each user to view a their entire event history.
 
 You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
 
+While ingesting events in the plugin server PostHog detects some type information for properties to allow more intelligent filtering.
+
+PostHog detects:
+
+* Boolean
+* Dates and Timestamps
+* Numbers
+* Strings
+* Everything else
+
+### Boolean (true or false)
+
+PotHog detects boolean values and allows filtering by only:
+
+* equals
+* doesn't equal
+* is set
+* is not set
+
+![query list for a boolean property lists only equals, doesn't equal, is set, and is not set](../../images/features/events/boolean-type-operators.png)
+
+### Dates and Timestamps
+
+PostHog detects several formats of string as dates and times
+
+* YYYY-MM-DD,
+* Date and date and time strings from [the ISO8601 standard](https://en.wikipedia.org/wiki/ISO_8601),
+* YYYY-MM-DD HH:mm:SS,
+* DD-MM-YYYY HH:mm:SS,
+* DD/MM/YYYY HH:mm:SS,
+* YYYY/MM/DD HH:mm:SS
+* [the RFC 822 standard](https://datatracker.ietf.org/doc/html/rfc822)
+
+In detection day and month are interchangeable so MM-DD-YYYY would be detected as a date.
+
+Ten and Thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp"
+
+Filtering against that property will then show a date picker and allows filtering only: 
+
+* equals 
+* before 
+* after
+* is set
+* is not set
+
+
+![query list for a date time property lists only equals, before, after, is set, is not set](../../images/features/events/datetime-type-operators.png)
+
+### Numeric
+
+PostHog detects numeric properties and allow filtering by only:
+
+* equals
+* doesn't equal
+* matches regex
+* doesn't match regex
+* greater than
+* lower than
+* is set
+* is not set
+
+![query list for a numeric property lists equals, doesn't equal, matches regex, doesn't match regex, greater than, lower than, is set, and is not set](../../images/features/events/numeric-type-operators.png)
+
+
+### Strings (text)
+
+PostHog detects text content. If it is not true/false, numeric, or a date time. You can filter by:
+
+* equals
+* doesn't equal
+* contains
+* doesn't contain
+* matches regex
+* doesn't match regex
+* is set
+* is not set
+
+![query list for a string property lists equals, doesn't equal, contains, doesn't contain, matches regex, doesn't match regex, is set, and is not set](../../images/features/events/string-type-operators.png)
+
+
+### Everything else
+
+If PostHog does not detect a type for an event property. You can choose any of the possible filters.
+
 ## Autocapture event tracking
 
-PostHog can capture all front-end events automatically using a simple [JavaScript snippet](/docs/integrate/client/snippet-installation). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
+PostHog can capture all front-end events automatically using a small [JavaScript snippet](/docs/integrate/client/snippet-installation). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
 
 #### Limitations of autocapture
 
