@@ -112,7 +112,7 @@ export const query = graphql`
         }
         sidebars: sidebarsJson {
             apps {
-                name
+                title
                 url
             }
         }

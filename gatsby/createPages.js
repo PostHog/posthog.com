@@ -170,13 +170,13 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                                 children {
                                     children {
                                         children {
-                                            name
+                                            title
                                             url
                                         }
-                                        name
+                                        title
                                         url
                                     }
-                                    name
+                                    title
                                     url
                                 }
                                 title
@@ -189,7 +189,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         url
                     }
                     apps {
-                        name
+                        title
                         url
                     }
                     product {
