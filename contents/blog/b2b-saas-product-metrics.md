@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/give-back-friday.png
+featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
 categories: ["Guides", "PostHog Academy", "Product analytics"]
 author: ["andy-vandervell"]
