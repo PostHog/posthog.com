@@ -45,7 +45,7 @@ Here's what those mean in a little more detail:
 
 4. **Actionable:** Can you easily identify actions to take when you see a drop in a metric? If yes, you're onto a winner. Specific metrics are the most actionable metrics, too.
 
-It's not realistic achieve all four in every metric you use, but three out of four is a good benchmark.
+It's not realistic to achieve all four in every metric you use, but three out of four is a good benchmark.
 
 ## Common B2B SaaS product metrics
 
@@ -75,7 +75,7 @@ Early-stage companies might prefer to focus on customer retention, but revenue r
 
 While you can calculate it as a monthly or annual metric, it's commonly visualized in a retention chart (aka retention matrix), which shows you how well customers retain over a longer periods of time.
 
-The retention rate formula is `((customers at end of period - new customers) / customers at start of period) x 100`. So, a business who began a month with 3,000 customers, acquired 150 new customers, and ended the month with 3,100 customers, would have retention rate of 98.3%.
+The retention rate formula is `((customers at end of period - new customers) / customers at start of period) x 100`. So, a business that begins a month with 3,000 customers, acquires 150 new customers, and ends the month with 3,100 customers, would have retention rate of 98.3%.
 
 **Is it useful?** This is one of those fundamental metrics everyone should be measuring. If you're growing quickly but not retaining users well, you know you've got a problem. 
 
