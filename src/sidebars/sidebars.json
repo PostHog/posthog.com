@@ -1285,6 +1285,16 @@
             ]
         },
         {
+            "name": "Engage Connector",
+            "url": "/apps/engage-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/engage-connector/docs"
+                }
+            ]
+        },
+        {
             "name": "Airbyte Export",
             "url": "/apps/airbyte-export",
             "children": [
