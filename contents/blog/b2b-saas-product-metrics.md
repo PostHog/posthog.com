@@ -20,12 +20,10 @@ What, why, and how? These are the questions that matter.
 In this guide we will:
 
 1. Reveal [what makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
-2. Explain the [common metrics used by B2B SaaS companies]((#common-b2b-saas-product-metrics)
-3. [Recommend good metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
+2. Explain the [common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
+3. [Recommend metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
 
-Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too.
-
-Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
+Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too. Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
 
 If you don't already have product analytics, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
 
