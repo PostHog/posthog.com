@@ -17,7 +17,7 @@ What's one thing I've taken from this?
 
 It's normal for candidates _not_ to ask harder questions about our company, so they usually miss out on a chance to (i) de-risk our company's performance and (ii) to increase the chances they'll like working here.
 
-This just doesn't feel like it should be normal. People should be able to reduce the chances they end up in a situation like [this](https://twitter.com/carnage4life/status/1532472869334110208), or [this](https://nypost.com/2022/05/26/twitter-rescinds-job-offer-to-new-hire/).
+This isn't desirable. People should be able to reduce the chances they end up in a situation like [this](https://twitter.com/carnage4life/status/1532472869334110208), or [this](https://nypost.com/2022/05/26/twitter-rescinds-job-offer-to-new-hire/).
 
 > Disclaimer: These questions are quite direct, but a company that reacts badly to them may not be a good place to work. There are also a _lot_ of questions here - think of them as themes, and you don't need to ask them all. Prioritize based on what you hear through the process.
 
