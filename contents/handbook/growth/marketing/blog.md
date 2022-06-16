@@ -19,11 +19,11 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
 
 Andy is currently the main person responsible for our content output.
 
-You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) by filtering by the "content" label.
+You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter.
 
-All planned content will have an issue created for it. We also maintain and long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
+All planned content will have an issue created for it. We also maintain a long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
 
-If you have any good blog post ideas join our [#ideas-for-blog-post team Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an issue, or suggest it on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607). Community members can suggest them to Andy Vandervell directly or via [the User slack channel](/slack)!
+Join our [#ideas-for-blog-post team Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an issue, or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy Vandervell directly or via [the User slack channel](/slack)!
 
 ## Content categories
 
