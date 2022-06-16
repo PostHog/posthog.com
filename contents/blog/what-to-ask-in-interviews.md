@@ -35,7 +35,7 @@ This is the single most important thing a company can do to survive and grow.
 
 It's ok if these answers show you the founder doesn't have product-market fit. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
 
-Early stage founders are (or should be) super-mega-extra-desperately keen to have product market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. Low user or revenue numbers and vague answers to the example questions above are a sign that it isn't there. Product market fit [is _very_ obvious](https://www.ycombinator.com/library/5z-the-real-product-market-fit).
+Early stage founders are (or should be) super-mega-extra-desperately keen to have product-market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. Low user or revenue numbers and vague answers to the example questions above are a sign that it isn't there. Product-market fit [is _very_ obvious](https://www.ycombinator.com/library/5z-the-real-product-market-fit).
 
 Avoid:
 
