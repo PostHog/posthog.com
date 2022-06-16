@@ -19,6 +19,8 @@ No. The PostHog integration with RudderStack gives you access to everything our 
 
 If you require session recording whilst using the Rudderstack integration, you need to additionally include the PostHog [JS snippet](/docs/integrate/client/js) and disable autocapture so you don't duplicate events.
 
+Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by enabling the [device-mode connection](https://www.rudderstack.com/docs/rudderstack-cloud/rudderstack-connection-modes/#device-mode) setting.
+
 ## Setting up the integration
 
 0. Make sure you have a [RudderStack account](https://rudderstack.com/) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
