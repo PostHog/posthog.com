@@ -62,7 +62,7 @@ There are exceptions. For example, very low revenue numbers may lead to unrealis
 
 If a company doesn't have product-market fit, spending should be minimal so there's as much time as possible to find it. Spending a lot and having a big team just makes it harder to change direction rapidly.
 
-If a company has strong product market fit _and_ has a ton of traction, a shorter runway is ok.
+If a company has strong product-market fit _and_ has a ton of traction, a shorter runway is ok.
 
 Avoid: 
 
