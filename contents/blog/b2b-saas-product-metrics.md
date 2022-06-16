@@ -23,18 +23,17 @@ In this guide we will:
 2. Explain some of the common metrics used by B2B SaaS companies
 3. Help you choose the right metrics for your product
 
-This guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too.
+Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too.
 
-Oh and, spoiler alert, we build an open-source analytics platform called PostHog. It's basically Mixpanel + Hotjar + Optimizely + LaunchDarkly in one tool you can host yourself. 
+Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
 
-In other words: it's the thing you should use to understand what your users are doing.
+If you don't have product analytics already, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
 
-Read our [product page](/product) and [documentation](/docs) if that sounds like something you need.
+Read our [product page](/product) and [documentation](/docs) if you're interested.
 
 **Contents:**
 
 - [What makes a good B2B product metric?](#what-makes-a-good-b2b-product-metric)
-- [Choosing a North Star metric](#choosing-a-north-star-metric)
 - [Common B2B product metrics](#common-b2b-saas-product-metrics)
 - [Recommended B2B product metrics](#recommended-b2b-product-metrics)
 - [Further reading](#further-reading)
@@ -54,16 +53,6 @@ Here's what those mean in a little more detail:
 3. **Specific:** Some broad trends are useful, but we recommend metrics that measure specific actions. Don't measure how long users use your product, measure how long it takes for them to get value from it.
 
 4. **Actionable:** Can you easily identify actions to take when you see a drop in a metric? If yes, you're onto a winner. Specific metrics are the most actionable metrics, too.
-
-## Choosing a North Star metric
-
-Every business can benefit from a single, North Star metric – ideally one several teams can impact.  Good North Star metrics provide an effective single focus for a company's success, and are incluenced by other more specific metrics.
-
-There are numerous types of North Star metrics, such as revenue, consumption, engagement, growth efficiency, customer growth, and user experience. 
-
-Which is best for you will depend on your product and the stage of your company, but we think a user experience metric is a good idea for most B2B SaaS products.
-
-Read our guide to [finding your North Star metric](/blog/north-star-metrics) for more help with this.
 
 ## Common B2B SaaS product metrics
 
@@ -197,13 +186,15 @@ Every product requires a different metrics, but these are the metrics we'd recom
 
 You don't need to measure all of these to be successful, and other metrics might be better for your specific product, but they're a good starting point.
 
+And if you're in need a product analytics platform to track them, learn [how we can help](/product).
+
 ## Further reading
 
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
 - [How to measure product engagement](/blog/how-to-product-market-fit): Guide to defining engagement for your platform, and how to use analytics tools to measure and build on the results
 
-- [What is user segmentation?](/blog/how-to-product-market-fit): An introduction to user segmentation and how to use it in your business
+- [Finding your north star metric](/blog/north-star-metrics): All Saas products can benefit from a north star metric and this guide will help you find one
 
  <NewsletterForm
 compact
