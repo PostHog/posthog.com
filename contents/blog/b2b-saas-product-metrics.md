@@ -19,24 +19,17 @@ What, why, and how? These are the questions that matter.
 
 In this guide we will:
 
-1. Reveal what makes a useful metric for a B2B product
-2. Explain some of the common metrics used by B2B SaaS companies
-3. Help you choose the right metrics for your product
+1. Reveal [what makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
+2. Explain the [common metrics used by B2B SaaS companies]((#common-b2b-saas-product-metrics)
+3. [Recommend good metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
 
 Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too.
 
 Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
 
-If you don't have product analytics already, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
+If you don't already have product analytics, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
 
 Read our [product page](/product) and [documentation](/docs) if you're interested.
-
-**Contents:**
-
-- [What makes a good B2B product metric?](#what-makes-a-good-b2b-product-metric)
-- [Common B2B product metrics](#common-b2b-saas-product-metrics)
-- [Recommended B2B product metrics](#recommended-b2b-product-metrics)
-- [Further reading](#further-reading)
 
 > This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
@@ -53,6 +46,8 @@ Here's what those mean in a little more detail:
 3. **Specific:** Some broad trends are useful, but we recommend metrics that measure specific actions. Don't measure how long users use your product, measure how long it takes for them to get value from it.
 
 4. **Actionable:** Can you easily identify actions to take when you see a drop in a metric? If yes, you're onto a winner. Specific metrics are the most actionable metrics, too.
+
+It's not realistic achieve all four in every metric you use, but three out of four is a good benchmark.
 
 ## Common B2B SaaS product metrics
 
