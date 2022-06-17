@@ -106,6 +106,17 @@ If a user is sending events to PostHog and these are not getting ingested, despi
 2. Ask if they have Sentry set up and see any errors
 3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 
+#### Reviewing new apps
+
+From time to time, customers will request to get their apps added to PostHog Cloud, based on [this tutorial](https://posthog.com/docs/apps/build/tutorial#submitting-your-app). When this happens, do the following:
+
+1. Review the app: check it doesn't do anything dangerous, like making an arbitrary number of requests, or attempt to DDOS some server.
+2. Ensure it has a `logo.png` file
+3. Fork their GitHub project
+4. Add the forked project to our [Integrations Repository](https://github.com/PostHog/integrations-repository)
+5. Tell the marketing team about this new integration
+6. Install it on Cloud, and make it global
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
