@@ -130,7 +130,7 @@ Ultimately, PostHog is a better fit for tracking both high-level and detailed pr
 
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
-- [An introduction to product analytics](/blog/what-is-product-analytics): What is product analytics and how is different from using Google Analytics
+- [Introduction to SaaS product metrics](blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 

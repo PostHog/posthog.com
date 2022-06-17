@@ -105,7 +105,7 @@ After you’ve reached product market fit in one market, here are some growth pl
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-- [How to track key B2B product metrics](/tutorials/b2b): How to track B2B product metrics in PostHog
+- [The most useful B2B product metrics](/blog/b2b-saas-product-metrics): A guide to common SaaS product metrics and which ones you should use
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
