@@ -1,6 +1,6 @@
 ---
-date: 2022-05-27
-title: The 9 best open source analytics tools
+date: 2022-06-16
+title: The 11 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -61,6 +61,8 @@ Matomo is intended for marketing and content teams who need to focus on SEO acti
 
 ### Open source license
 Matomo is available under a AGPLv3 license. Pricing depends mainly on the amount of traffic, with free options available for low-traffic sites. Check [the Matomo repo on GitHub](https://github.com/piwik/piwik) for more information.
+
+**Related:** [In-depth PostHog vs Matomo comparison](/blog/posthog-vs-matomo)
 
 ## 3. [Countly](https://count.ly/)
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
@@ -192,7 +194,37 @@ Grafana is an ideal choice for Engineering, Dev Ops or Data Scientists in busine
 - Integrates with a wide range of data sources
 
 ### Open source license
-Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. Check [the Grafana repo](https://github.com/grafana/grafana) for more info. 
+Grafana is available under an AGPLv3 license. A limited version is available for free, while an Enterprise license is available for a cost. Check [the Grafana repo](https://github.com/grafana/grafana) for more info.
+
+### 10. [Open Web Analytics](https://www.openwebanalytics.com/)
+
+![OWA - open source analytics tools](../images/blog/open-source-analytics-tools/owa.png)
+
+Open Web Analytics (OWA) won't win any awards for presentation, but it offers plenty of features as standard and total freedom to extend it as you please.
+
+The core feature-set is Google Analytics adjacent, tracking things like unique users, page views, session duration, and pages per visit in a GA-like manner. But OWA goes further than most by including e-commerce reporting, custom action tracking, heatmaps, and tracking clicks on all DOM elements.
+
+### Who is Open Web Analytics for?
+
+It's ideal for hobbyists and small websites that don't want to use Google Analytics. Unlike Matomo, e-commerce tracking is a free feature (in fact, there is no paid version at all), making it a good option for a simple web store.
+
+### Open source license
+
+OWA is distributed under a GPLv2 license and can be [downloaded via its GitHub repo](https://github.com/Open-Web-Analytics/Open-Web-Analytics). There are no paid or cloud-hosted versions.
+
+
+## 11. [Fathom Lite](https://github.com/usefathom/fathom)
+![Fathom Lite - open source analytics tools](../images/blog/open-source-analytics-tools/fathom.png)
+
+Fathom Lite is a basic, privacy-focused web analytics tool. It's no longer in active development with Fathom Analytics going closed core, but the developers are committed to maintaning it and fixing bugs. It tracks pageviews, unique users, bounce rate, and average time on site via a fast, easy-to-understand dashboard.
+
+### Who is Fathon Lite?
+
+It's ideal for anyone who wants basic web analytics that respects user privacy for a personal or business website.
+
+### Open source license
+
+Fathom Lite is available via a permissive MIT license. Visit [the repo](https://github.com/usefathom/fathom) for more info.
 
 > PostHog's product analytics suite has everything product-led teams need. Heatmaps, Recordings, Funnels, Feature Flags, Experimentation and more – all seamlessly integrated. You can self-host, so user data never leaves your infrastructure. 
 >

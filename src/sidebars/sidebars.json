@@ -1,148 +1,148 @@
 {
     "handbook": [
         {
-            "title": "Handbook",
+            "name": "Handbook",
             "url": "/handbook"
         },
         {
-            "title": "Getting started",
+            "name": "Getting started",
             "children": [
                 {
-                    "title": "Start here",
+                    "name": "Start here",
                     "url": "/handbook/getting-started/start-here"
                 },
                 {
-                    "title": "Meetings",
+                    "name": "Meetings",
                     "url": "/handbook/getting-started/meetings"
                 }
             ]
         },
         {
-            "title": "Company",
+            "name": "Company",
             "url": "",
             "children": [
                 {
-                    "title": "Story",
+                    "name": "Story",
                     "url": "/handbook/company/story"
                 },
                 {
-                    "title": "Team",
+                    "name": "Team",
                     "url": "/handbook/company/team"
                 },
                 {
-                    "title": "Investors",
+                    "name": "Investors",
                     "url": "/handbook/strategy/investors"
                 }
             ]
         },
         {
-            "title": "Strategy",
+            "name": "Strategy",
             "url": "",
             "children": [
                 {
-                    "title": "Strategy overview",
+                    "name": "Strategy overview",
                     "url": "/handbook/strategy/strategy"
                 },
                 {
-                    "title": "Business model",
+                    "name": "Business model",
                     "url": "/handbook/strategy/business-model"
                 },
                 {
-                    "title": "Roadmap",
+                    "name": "Objectives",
+                    "url": "/handbook/strategy/objectives"
+                },
+                {
+                    "name": "Roadmap",
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
-                    "title": "Brand",
+                    "name": "Brand",
                     "url": "/handbook/strategy/brand"
-                },
-                {
-                    "title": "Prioritization",
-                    "url": "/handbook/strategy/prioritization"
                 }
             ]
         },
         {
-            "title": "How we work",
+            "name": "How we work",
             "url": "",
             "children": [
                 {
-                    "title": "Culture",
+                    "name": "Culture",
                     "url": "/handbook/company/culture"
                 },
                 {
-                    "title": "Values",
+                    "name": "Values",
                     "url": "/handbook/company/values"
                 },
                 {
-                    "title": "Goal Setting",
+                    "name": "Goal Setting",
                     "url": "/handbook/company/goal-setting"
                 },
                 {
-                    "title": "Diversity and inclusion",
+                    "name": "Diversity and inclusion",
                     "url": "/handbook/company/diversity"
                 },
                 {
-                    "title": "Communication",
+                    "name": "Communication",
                     "url": "/handbook/company/communication"
                 },
                 {
-                    "title": "Management at PostHog",
+                    "name": "Management",
                     "url": "/handbook/company/management"
                 },
                 {
-                    "title": "Offsites",
+                    "name": "Offsites",
                     "url": "/handbook/company/offsites"
                 },
                 {
-                    "title": "Security",
+                    "name": "Security",
                     "url": "/handbook/company/security"
                 },
                 {
-                    "title": "Brand assets",
+                    "name": "Brand assets",
                     "url": "/handbook/company/brand-assets"
                 },
                 {
-                    "title": "Team structure",
+                    "name": "Team structure",
                     "url": "",
                     "children": [
                         {
-                            "title": "Team structure",
+                            "name": "Team structure",
                             "url": "/handbook/people/team-structure/team-structure"
                         },
                         {
-                            "title": "Why Small Teams",
+                            "name": "Why Small Teams",
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "title": "Team App East",
+                            "name": "Team App East",
                             "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "title": "Team App West",
+                            "name": "Team App West",
                             "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "title": "Team Platform",
+                            "name": "Team Platform",
                             "url": "/handbook/people/team-structure/platform"
                         },
                         {
-                            "title": "Team Ingestion",
+                            "name": "Team Ingestion",
                             "url": "/handbook/people/team-structure/ingestion"
                         },
                         {
-                            "title": "Team Marketing",
+                            "name": "Team Marketing",
                             "url": "/handbook/people/team-structure/marketing"
                         },
                         {
-                            "title": "Team Website and Docs",
+                            "name": "Team Website and Docs",
                             "url": "/handbook/people/team-structure/website-docs"
                         },
                         {
-                            "title": "Team People and Ops",
+                            "name": "Team People and Ops",
                             "url": "/handbook/people/team-structure/people"
                         },
                         {
-                            "title": "Team Customer Success",
+                            "name": "Team Customer Success",
                             "url": "/handbook/people/team-structure/customer-success"
                         }
                     ]
@@ -150,79 +150,79 @@
             ]
         },
         {
-            "title": "People",
+            "name": "People",
             "url": "",
             "children": [
                 {
-                    "title": "Compensation",
+                    "name": "Compensation",
                     "url": "/handbook/people/compensation"
                 },
                 {
-                    "title": "Share options",
+                    "name": "Share options",
                     "url": "/handbook/people/share-options"
                 },
                 {
-                    "title": "Benefits",
+                    "name": "Benefits",
                     "url": "/handbook/people/benefits"
                 },
                 {
-                    "title": "Time off",
+                    "name": "Time off",
                     "url": "/handbook/people/time-off"
                 },
                 {
-                    "title": "Spending money",
+                    "name": "Spending money",
                     "url": "/handbook/people/spending-money"
                 },
                 {
-                    "title": "Progression",
+                    "name": "Progression",
                     "url": "/handbook/people/career-progression"
                 },
                 {
-                    "title": "Training",
+                    "name": "Training",
                     "url": "/handbook/people/training"
                 },
                 {
-                    "title": "Feedback",
+                    "name": "Feedback",
                     "url": "/handbook/people/feedback"
                 },
                 {
-                    "title": "Onboarding",
+                    "name": "Onboarding",
                     "url": "/handbook/people/onboarding"
                 },
                 {
-                    "title": "Offboarding",
+                    "name": "Offboarding",
                     "url": "/handbook/people/offboarding"
                 },
                 {
-                    "title": "Hiring process",
+                    "name": "Hiring process",
                     "url": "",
                     "children": [
                         {
-                            "title": "Overview",
+                            "name": "Overview",
                             "url": "/handbook/people/hiring-process"
                         },
                         {
-                            "title": "Design hiring",
+                            "name": "Design hiring",
                             "url": "/handbook/people/hiring-process/design-hiring"
                         },
                         {
-                            "title": "Developer Relations hiring",
+                            "name": "Developer Relations hiring",
                             "url": "/handbook/people/hiring-process/devrel-hiring"
                         },
                         {
-                            "title": "Engineering hiring",
+                            "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
                         {
-                            "title": "Exec hiring",
+                            "name": "Exec hiring",
                             "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
-                            "title": "Marketing hiring",
+                            "name": "Marketing hiring",
                             "url": "/handbook/people/hiring-process/marketing-hiring"
                         },
                         {
-                            "title": "Operations hiring",
+                            "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
                         }
                     ]
@@ -230,235 +230,235 @@
             ]
         },
         {
-            "title": "Engineering",
+            "name": "Engineering",
             "url": "",
             "children": [
                 {
-                    "title": "Getting started",
+                    "name": "Getting started",
                     "url": "",
                     "children": [
                         {
-                            "title": "Developing locally",
+                            "name": "Developing locally",
                             "url": "/handbook/engineering/developing-locally"
                         },
                         {
-                            "title": "Tech stack",
+                            "name": "Tech stack",
                             "url": "/handbook/engineering/stack"
                         },
                         {
-                            "title": "Project structure",
+                            "name": "Project structure",
                             "url": "/handbook/engineering/project-structure"
                         },
                         {
-                            "title": "How we review PRs",
+                            "name": "How we review PRs",
                             "url": "/handbook/engineering/how-we-review"
                         }
                     ]
                 },
                 {
-                    "title": "Coding conventions",
+                    "name": "Coding conventions",
                     "url": "",
                     "children": [
                         {
-                            "title": "Frontend coding",
+                            "name": "Frontend coding",
                             "url": "/handbook/engineering/conventions/frontend-coding"
                         },
                         {
-                            "title": "Backend coding",
+                            "name": "Backend coding",
                             "url": "/handbook/engineering/conventions/backend-coding"
                         }
                     ]
                 },
                 {
-                    "title": "Internal processes",
+                    "name": "Internal processes",
                     "url": "",
                     "children": [
                         {
-                            "title": "Support hero",
+                            "name": "Support hero",
                             "url": "/handbook/engineering/support-hero"
                         },
                         {
-                            "title": "Feature ownership",
+                            "name": "Feature ownership",
                             "url": "/handbook/engineering/feature-ownership"
                         },
                         {
-                            "title": "Releasing a new version",
+                            "name": "Releasing a new version",
                             "url": "/handbook/engineering/release-new-version"
                         },
                         {
-                            "title": "Bug prioritization",
+                            "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
                         }
                     ]
                 },
                 {
-                    "title": "Working with data",
+                    "name": "Working with data",
                     "url": "",
                     "children": [
                         {
-                            "title": "Event ingestion explained",
+                            "name": "Event ingestion explained",
                             "url": "/handbook/engineering/databases/event-ingestion"
                         },
                         {
-                            "title": "Making schema changes safely",
+                            "name": "Making schema changes safely",
                             "url": "/handbook/engineering/databases/schema-changes"
                         },
                         {
-                            "title": "How to optimize queries",
+                            "name": "How to optimize queries",
                             "url": "/handbook/engineering/databases/query-performance-optimization"
                         },
                         {
-                            "title": "How to write an async migration",
+                            "name": "How to write an async migration",
                             "url": "/handbook/engineering/databases/async-migrations"
                         },
                         {
-                            "title": "How to run migrations on PostHog Cloud",
+                            "name": "How to run migrations on PostHog Cloud",
                             "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
                         },
                         {
-                            "title": "Working with ClickHouse materialized columns",
+                            "name": "Working with ClickHouse materialized columns",
                             "url": "/handbook/engineering/databases/materialized-columns"
                         }
                     ]
                 },
                 {
-                    "title": "Deployments",
+                    "name": "Deployments",
                     "url": "",
                     "children": [
                         {
-                            "title": "Deployments support",
+                            "name": "Deployments support",
                             "url": "/handbook/engineering/deployments-support"
                         },
                         {
-                            "title": "Working with cloud providers",
+                            "name": "Working with cloud providers",
                             "url": "/handbook/engineering/cloud-providers"
                         },
                         {
-                            "title": "Breaking glass to debug PostHog Cloud",
+                            "name": "Breaking glass to debug PostHog Cloud",
                             "url": "/handbook/engineering/production-access"
                         }
                     ]
                 },
                 {
-                    "title": "PostHog.com",
+                    "name": "PostHog.com",
                     "url": "",
                     "children": [
                         {
-                            "title": "Developing the website",
+                            "name": "Developing the website",
                             "url": "/handbook/engineering/posthog-com/developing-the-website"
                         },
                         {
-                            "title": "MDX setup",
+                            "name": "MDX setup",
                             "url": "/handbook/engineering/posthog-com/mdx-setup"
                         }
                     ]
                 },
                 {
-                    "title": "Shipping things, step by step",
+                    "name": "Shipping things, step by step",
                     "url": "/handbook/engineering/development-process"
                 },
                 {
-                    "title": "Feature flags specification",
+                    "name": "Feature flags specification",
                     "url": "/handbook/engineering/feature-flags-spec"
                 },
                 {
-                    "title": "Setting up SSL locally",
+                    "name": "Setting up SSL locally",
                     "url": "/handbook/engineering/setup-ssl-locally"
                 },
                 {
-                    "title": "Tech talks",
+                    "name": "Tech talks",
                     "url": "/handbook/engineering/tech-talks"
                 }
             ]
         },
         {
-            "title": "Product",
+            "name": "Product",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/handbook/product/product-team"
                 },
                 {
-                    "title": "Product metrics",
+                    "name": "Product metrics",
                     "url": "/handbook/product/metrics"
                 },
                 {
-                    "title": "User feedback",
+                    "name": "User feedback",
                     "url": "/handbook/product/user-feedback"
                 },
                 {
-                    "title": "Scale features prioritization",
+                    "name": "Scale features prioritization",
                     "url": "/handbook/product/scale-features-prioritization"
                 },
                 {
-                    "title": "Paid features",
+                    "name": "Paid features",
                     "url": "/handbook/product/paid-features"
                 },
                 {
-                    "title": "Releasing as beta",
+                    "name": "Releasing as beta",
                     "url": "/handbook/product/releasing-as-beta"
                 }
             ]
         },
         {
-            "title": "Design",
+            "name": "Design",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/handbook/design/about-design"
                 }
             ]
         },
         {
-            "title": "Marketing",
+            "name": "Marketing",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/handbook/growth/marketing"
                 },
                 {
-                    "title": "Personas",
+                    "name": "Personas",
                     "url": "/handbook/growth/marketing/customer-personas"
                 },
                 {
-                    "title": "Testimonials",
+                    "name": "Testimonials",
                     "url": "/handbook/growth/marketing/testimonials"
                 },
                 {
-                    "title": "Value propositions",
+                    "name": "Value propositions",
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "title": "Events",
+                    "name": "Events",
                     "url": "/handbook/growth/marketing/hosthogs"
                 },
                 {
-                    "title": "Acquisition channels",
+                    "name": "Acquisition channels",
                     "url": "",
                     "children": [
                         {
-                            "title": "Content & SEO",
+                            "name": "Content & SEO",
                             "url": "/handbook/growth/marketing/blog"
                         },
                         {
-                            "title": "Sponsorship",
+                            "name": "Sponsorship",
                             "url": "/handbook/growth/marketing/open-source-sponsorship"
                         },
                         {
-                            "title": "Paid ads",
+                            "name": "Paid ads",
                             "url": "/handbook/growth/marketing/paid"
                         },
                         {
-                            "title": "Product launches",
+                            "name": "Product launches",
                             "url": "/handbook/growth/marketing/product-announcements"
                         },
                         {
-                            "title": "Email",
+                            "name": "Email",
                             "url": "/handbook/growth/marketing/newsletter"
                         },
                         {
-                            "title": "Press",
+                            "name": "Press",
                             "url": "/handbook/growth/marketing/press"
                         }
                     ]
@@ -466,253 +466,259 @@
             ]
         },
         {
-            "title": "Growth",
+            "name": "Customer success",
             "url": "",
             "children": [
                 {
-                    "title": "Growth strategy",
+                    "name": "Growth strategy",
                     "url": "/handbook/growth/strategy"
                 },
                 {
-                    "title": "Customer support",
+                    "name": "Customer support",
                     "url": "/handbook/growth/customer-support"
                 },
                 {
-                    "title": "Developer relations",
-                    "url": "/handbook/growth/developer-relations"
+                    "name": "Inbound sales model",
+                    "url": "/handbook/growth/sales/overview"
                 },
                 {
-                    "title": "Customer success",
-                    "url": "",
+                    "name": "Sales operations",
+                    "url": "/handbook/growth/sales/sales-operations",
                     "children": [
                         {
-                            "title": "Sales overview",
-                            "url": "/handbook/growth/sales/overview"
-                        },
-                        {
-                            "title": "Sales operations",
-                            "url": "/handbook/growth/sales/sales-operations"
-                        },
-                        {
-                            "title": "Managing our CRM",
+                            "name": "Managing our CRM",
                             "url": "/handbook/growth/sales/crm"
                         },
                         {
-                            "title": "YC onboarding",
+                            "name": "YC onboarding",
                             "url": "/handbook/growth/sales/yc-onboarding"
                         },
                         {
-                            "title": "Demos",
+                            "name": "Demos",
                             "url": "/handbook/growth/sales/demos"
                         },
                         {
-                            "title": "Billing",
+                            "name": "Billing",
                             "url": "/handbook/growth/sales/billing"
                         },
                         {
-                            "title": "Who we do business with",
+                            "name": "Who we do business with",
                             "url": "/handbook/growth/sales/who-we-do-business-with"
                         }
                     ]
                 }
             ]
+        },
+        {
+            "name": "Developer relations",
+            "url": "/handbook/growth/developer-relations"
         }
     ],
     "docs": [
         {
-            "title": "Overview",
+            "name": "Overview",
             "url": "/docs"
         },
         {
-            "title": "Deploy PostHog",
+            "name": "Deploy PostHog",
             "url": "",
             "children": [
                 {
-                    "title": "Self-host",
+                    "name": "Self-host",
                     "url": "",
                     "children": [
                         {
-                            "title": "Overview",
+                            "name": "Overview",
                             "url": "/docs/self-host"
                         },
                         {
-                            "title": "Deployments",
+                            "name": "Deployments",
                             "url": "",
                             "children": [
                                 {
-                                    "title": "AWS",
+                                    "name": "AWS",
                                     "url": "/docs/self-host/deploy/aws"
                                 },
                                 {
-                                    "title": "Azure",
+                                    "name": "Azure",
                                     "url": "/docs/self-host/deploy/azure"
                                 },
                                 {
-                                    "title": "Digital Ocean",
+                                    "name": "Digital Ocean",
                                     "url": "/docs/self-host/deploy/digital-ocean"
                                 },
                                 {
-                                    "title": "Google Cloud Platform",
+                                    "name": "Google Cloud Platform",
                                     "url": "/docs/self-host/deploy/gcp"
                                 },
                                 {
-                                    "title": "Hobby",
+                                    "name": "Hobby",
                                     "url": "/docs/self-host/deploy/hobby"
                                 },
                                 {
-                                    "title": "Other platforms",
+                                    "name": "Other platforms",
                                     "url": "/docs/self-host/deploy/other"
                                 }
                             ]
                         },
                         {
-                            "title": "Configure",
+                            "name": "Configure",
                             "url": "",
                             "children": [
                                 {
-                                    "title": "Instance settings",
+                                    "name": "Instance settings",
                                     "url": "/docs/self-host/configure/instance-settings"
                                 },
                                 {
-                                    "title": "Environment variables",
+                                    "name": "Environment variables",
                                     "url": "/docs/self-host/configure/environment-variables"
                                 },
                                 {
-                                    "title": "Securing PostHog",
+                                    "name": "Securing PostHog",
                                     "url": "/docs/self-host/configure/securing-posthog"
                                 },
                                 {
-                                    "title": "Running behind a proxy",
+                                    "name": "Running behind a proxy",
                                     "url": "/docs/self-host/configure/running-behind-proxy"
                                 },
                                 {
-                                    "title": "Configuring email",
+                                    "name": "Configuring email",
                                     "url": "/docs/self-host/configure/email"
                                 },
                                 {
-                                    "title": "Helm chart configuration",
+                                    "name": "Helm chart configuration",
                                     "url": "/docs/self-host/deploy/configuration"
                                 },
                                 {
-                                    "title": "Deploying ClickHouse using Altinity.Cloud",
+                                    "name": "Deploying ClickHouse using Altinity.Cloud",
                                     "url": "/docs/self-host/configure/using-altinity-cloud"
                                 }
                             ]
                         },
                         {
-                            "title": "Architecture",
+                            "name": "Architecture",
                             "url": "/docs/self-host/architecture"
                         },
                         {
-                            "title": "Managing hosting costs",
+                            "name": "Managing hosting costs",
                             "url": "/docs/self-host/deploy/hosting-costs"
                         },
                         {
-                            "title": "EU-only hosting",
+                            "name": "EU-only hosting",
                             "url": "/docs/self-host/deploy/hosting-in-eu"
                         },
                         {
-                            "title": "Runbook",
+                            "name": "Runbook",
                             "url": "/docs/self-host/runbook",
                             "children": [
                                 {
-                                    "title": "Async migrations",
+                                    "name": "Async migrations",
                                     "url": "",
                                     "children": [
                                         {
-                                            "title": "Overview",
+                                            "name": "Overview",
                                             "url": "/docs/self-host/configure/async-migrations/overview"
                                         },
                                         {
-                                            "title": "0002_events_sample_by",
+                                            "name": "0002_events_sample_by",
                                             "url": "/docs/self-host/configure/async-migrations/0002-events-sample-by"
                                         },
                                         {
-                                            "title": "0003_fill_person_distinct_id2",
+                                            "name": "0003_fill_person_distinct_id2",
                                             "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
                                         }
                                     ]
                                 },
                                 {
-                                    "title": "Upgrading PostHog",
+                                    "name": "Plugin server",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/runbook/plugin-server"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Upgrading PostHog",
                                     "url": "/docs/self-host/configure/upgrading-posthog",
                                     "children": [
                                         {
-                                            "title": "Upgrade notes",
+                                            "name": "Upgrade notes",
                                             "url": "/docs/self-host/deploy/upgrade-notes"
                                         }
                                     ]
                                 },
                                 {
-                                    "title": "Troubleshooting and FAQs",
+                                    "name": "Troubleshooting and FAQs",
                                     "url": "/docs/self-host/deploy/troubleshooting"
                                 },
                                 {
-                                    "title": "ClickHouse",
+                                    "name": "ClickHouse",
                                     "url": "/docs/self-host/runbook/clickhouse",
                                     "children": [
                                         {
-                                            "title": "Backup",
+                                            "name": "Backup",
                                             "url": "/docs/self-host/runbook/clickhouse/backup"
                                         },
                                         {
-                                            "title": "Kafka Engine",
+                                            "name": "Kafka Engine",
                                             "url": "/docs/self-host/runbook/clickhouse/kafka-engine"
                                         },
                                         {
-                                            "title": "Resize disk",
+                                            "name": "Resize disk",
                                             "url": "/docs/self-host/runbook/clickhouse/resize-disk"
                                         },
                                         {
-                                            "title": "Restore",
+                                            "name": "Restore",
                                             "url": "/docs/self-host/runbook/clickhouse/restore"
                                         },
                                         {
-                                            "title": "Vertical scaling",
+                                            "name": "Vertical scaling",
                                             "url": "/docs/self-host/runbook/clickhouse/vertical-scaling"
                                         },
                                         {
-                                            "title": "Horizontal scaling (Sharding & replication)",
+                                            "name": "Horizontal scaling (Sharding & replication)",
                                             "url": "/docs/self-host/runbook/clickhouse/sharding-and-replication"
                                         }
                                     ]
                                 },
                                 {
-                                    "title": "Kafka",
+                                    "name": "Kafka",
                                     "url": "/docs/self-host/runbook/kafka",
                                     "children": [
                                         {
-                                            "title": "Resize disk",
+                                            "name": "Resize disk",
                                             "url": "/docs/self-host/runbook/kafka/resize-disk"
                                         },
                                         {
-                                            "title": "Log retention",
+                                            "name": "Log retention",
                                             "url": "/docs/self-host/runbook/kafka/log-retention"
                                         }
                                     ]
                                 },
                                 {
-                                    "title": "MinIO",
+                                    "name": "MinIO",
                                     "url": "/docs/self-host/runbook/minio",
                                     "children": []
                                 },
                                 {
-                                    "title": "PostgreSQL",
+                                    "name": "PostgreSQL",
                                     "url": "/docs/self-host/runbook/postgresql",
                                     "children": [
                                         {
-                                            "title": "Resize disk",
+                                            "name": "Resize disk",
                                             "url": "/docs/self-host/runbook/postgresql/resize-disk"
                                         }
                                     ]
                                 },
                                 {
-                                    "title": "Redis",
+                                    "name": "Redis",
                                     "url": "/docs/self-host/runbook/redis",
                                     "children": []
                                 },
                                 {
-                                    "title": "Zookeeper",
+                                    "name": "Zookeeper",
                                     "url": "/docs/self-host/runbook/zookeeper",
                                     "children": []
                                 }
@@ -721,33 +727,33 @@
                     ]
                 },
                 {
-                    "title": "Cloud",
+                    "name": "Cloud",
                     "url": "",
                     "children": [
                         {
-                            "title": "Overview",
+                            "name": "Overview",
                             "url": "/docs/cloud"
                         },
                         {
-                            "title": "Deploying a reverse proxy",
+                            "name": "Deploying a reverse proxy",
                             "url": "/docs/cloud/proxy"
                         }
                     ]
                 },
                 {
-                    "title": "Migrate",
+                    "name": "Migrate",
                     "url": "",
                     "children": [
                         {
-                            "title": "To another self-hosted instance",
+                            "name": "To another self-hosted instance",
                             "url": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
                         },
                         {
-                            "title": "To PostHog from Amplitude",
+                            "name": "To PostHog from Amplitude",
                             "url": "/docs/self-host/migrate/migrate-from-amplitude"
                         },
                         {
-                            "title": "Between Cloud and self-hosted",
+                            "name": "Between Cloud and self-hosted",
                             "url": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
                         }
                     ]
@@ -755,169 +761,169 @@
             ]
         },
         {
-            "title": "Integrate PostHog",
+            "name": "Integrate PostHog",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/integrate"
                 },
                 {
-                    "title": "Ingest live data",
+                    "name": "Ingest live data",
                     "url": "/docs/integrate/ingest-live-data"
                 },
                 {
-                    "title": "Ingest historical data",
+                    "name": "Ingest historical data",
                     "url": "/docs/integrate/ingest-historic-data"
                 },
                 {
-                    "title": "Identify users",
+                    "name": "Identify users",
                     "url": "/docs/integrate/identifying-users"
                 },
                 {
-                    "title": "User properties",
+                    "name": "User properties",
                     "url": "/docs/integrate/user-properties"
                 },
                 {
-                    "title": "Badge",
+                    "name": "Badge",
                     "url": "/docs/integrate/badge"
                 },
                 {
-                    "title": "Client libraries",
+                    "name": "Client libraries",
                     "url": "",
                     "children": [
                         {
-                            "title": "Snippet installation",
+                            "name": "Snippet installation",
                             "url": "/docs/integrate/client/snippet-installation"
                         },
                         {
-                            "title": "Android",
+                            "name": "Android",
                             "url": "/docs/integrate/client/android"
                         },
                         {
-                            "title": "iOS",
+                            "name": "iOS",
                             "url": "/docs/integrate/client/ios"
                         },
                         {
-                            "title": "JavaScript",
+                            "name": "JavaScript",
                             "url": "/docs/integrate/client/js"
                         },
                         {
-                            "title": "Flutter",
+                            "name": "Flutter",
                             "url": "/docs/integrate/client/flutter"
                         },
                         {
-                            "title": "React Native",
+                            "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
                         },
                         {
-                            "title": "Browser Extensions",
+                            "name": "Browser Extensions",
                             "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
                 {
-                    "title": "Server libraries",
+                    "name": "Server libraries",
                     "url": "",
                     "children": [
                         {
-                            "title": "Elixir",
+                            "name": "Elixir",
                             "url": "/docs/integrate/server/elixir"
                         },
                         {
-                            "title": "Go",
+                            "name": "Go",
                             "url": "/docs/integrate/server/go"
                         },
                         {
-                            "title": "Java",
+                            "name": "Java",
                             "url": "/docs/integrate/server/java"
                         },
                         {
-                            "title": "Node.js",
+                            "name": "Node.js",
                             "url": "/docs/integrate/server/node"
                         },
                         {
-                            "title": "PHP",
+                            "name": "PHP",
                             "url": "/docs/integrate/server/php"
                         },
                         {
-                            "title": "Python",
+                            "name": "Python",
                             "url": "/docs/integrate/server/python"
                         },
                         {
-                            "title": "Ruby",
+                            "name": "Ruby",
                             "url": "/docs/integrate/server/ruby"
                         }
                     ]
                 },
                 {
-                    "title": "Third party",
+                    "name": "Third party",
                     "url": "",
                     "children": [
                         {
-                            "title": "Docusaurus v2",
+                            "name": "Docusaurus v2",
                             "url": "/docs/integrate/third-party/docusaurus"
                         },
                         {
-                            "title": "Gatsby",
+                            "name": "Gatsby",
                             "url": "/docs/integrate/third-party/gatsby"
                         },
                         {
-                            "title": "Google Tag Manager",
+                            "name": "Google Tag Manager",
                             "url": "/docs/integrate/third-party/google-tag-manager"
                         },
                         {
-                            "title": "Next.js",
+                            "name": "Next.js",
                             "url": "/docs/integrate/third-party/next-js"
                         },
                         {
-                            "title": "Nuxt.js",
+                            "name": "Nuxt.js",
                             "url": "/docs/integrate/third-party/nuxt-js"
                         },
                         {
-                            "title": "Retool",
+                            "name": "Retool",
                             "url": "/docs/integrate/third-party/retool"
                         },
                         {
-                            "title": "RudderStack",
+                            "name": "RudderStack",
                             "url": "/docs/integrate/third-party/rudderstack"
                         },
                         {
-                            "title": "Segment",
+                            "name": "Segment",
                             "url": "/docs/integrate/third-party/segment"
                         },
                         {
-                            "title": "Sentry",
+                            "name": "Sentry",
                             "url": "/docs/integrate/third-party/sentry"
                         },
                         {
-                            "title": "Shopify",
+                            "name": "Shopify",
                             "url": "/docs/integrate/third-party/shopify"
                         },
                         {
-                            "title": "WordPress",
+                            "name": "WordPress",
                             "url": "/docs/integrate/third-party/wordpress"
                         }
                     ]
                 },
                 {
-                    "title": "Webhooks",
+                    "name": "Webhooks",
                     "url": "",
                     "children": [
                         {
-                            "title": "Message formatting",
+                            "name": "Message formatting",
                             "url": "/docs/integrate/webhooks/message-formatting"
                         },
                         {
-                            "title": "Microsoft Teams",
+                            "name": "Microsoft Teams",
                             "url": "/docs/integrate/webhooks/microsoft-teams"
                         },
                         {
-                            "title": "Slack",
+                            "name": "Slack",
                             "url": "/docs/integrate/webhooks/slack"
                         },
                         {
-                            "title": "Discord",
+                            "name": "Discord",
                             "url": "/docs/integrate/webhooks/discord"
                         }
                     ]
@@ -925,141 +931,141 @@
             ]
         },
         {
-            "title": "Tutorials",
+            "name": "Tutorials",
             "url": "/tutorials"
         },
         {
-            "title": "Manuals",
+            "name": "Manuals",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/user-guides"
                 },
                 {
-                    "title": "Actions",
+                    "name": "Actions",
                     "url": "/docs/user-guides/actions"
                 },
                 {
-                    "title": "Annotations",
+                    "name": "Annotations",
                     "url": "/docs/user-guides/annotations"
                 },
                 {
-                    "title": "Cohorts",
+                    "name": "Cohorts",
                     "url": "/docs/user-guides/cohorts"
                 },
                 {
-                    "title": "Correlation Analysis",
+                    "name": "Correlation Analysis",
                     "url": "/docs/user-guides/correlation"
                 },
                 {
-                    "title": "Dashboards",
+                    "name": "Dashboards",
                     "url": "/docs/user-guides/dashboards"
                 },
                 {
-                    "title": "Data Management",
+                    "name": "Data Management",
                     "url": "/docs/user-guides/data-management"
                 },
                 {
-                    "title": "Events",
+                    "name": "Events",
                     "url": "/docs/user-guides/events"
                 },
                 {
-                    "title": "Experimentation",
+                    "name": "Experimentation",
                     "url": "/docs/user-guides/experimentation"
                 },
                 {
-                    "title": "Feature Flags",
+                    "name": "Feature Flags",
                     "url": "/docs/user-guides/feature-flags"
                 },
                 {
-                    "title": "Funnels",
+                    "name": "Funnels",
                     "url": "/docs/user-guides/funnels"
                 },
                 {
-                    "title": "Group Analytics",
+                    "name": "Group Analytics",
                     "url": "/docs/user-guides/group-analytics"
                 },
                 {
-                    "title": "Heatmaps",
+                    "name": "Heatmaps",
                     "url": "/docs/user-guides/toolbar"
                 },
                 {
-                    "title": "Insights",
+                    "name": "Insights",
                     "url": "/docs/user-guides/insights"
                 },
                 {
-                    "title": "Lifecycle",
+                    "name": "Lifecycle",
                     "url": "/docs/user-guides/lifecycle"
                 },
                 {
-                    "title": "Organizations and projects",
+                    "name": "Organizations and projects",
                     "url": "/docs/user-guides/organizations-and-projects"
                 },
                 {
-                    "title": "Paths",
+                    "name": "Paths",
                     "url": "/docs/user-guides/paths"
                 },
                 {
-                    "title": "Persons",
+                    "name": "Persons",
                     "url": "/docs/user-guides/persons"
                 },
                 {
-                    "title": "Retention",
+                    "name": "Retention",
                     "url": "/docs/user-guides/retention"
                 },
                 {
-                    "title": "Session Recording",
+                    "name": "Session Recording",
                     "url": "/docs/user-guides/recordings"
                 },
                 {
-                    "title": "Settings",
+                    "name": "Settings",
                     "url": "/docs/user-guides/application-settings"
                 },
                 {
-                    "title": "SSO & SAML",
+                    "name": "SSO & SAML",
                     "url": "/docs/user-guides/sso"
                 },
                 {
-                    "title": "Toolbar",
+                    "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
                 {
-                    "title": "Trends",
+                    "name": "Trends",
                     "url": "/docs/user-guides/trends"
                 }
             ]
         },
         {
-            "title": "Apps",
+            "name": "Apps",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/apps"
                 },
                 {
-                    "title": "Troubleshooting",
+                    "name": "Troubleshooting",
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "title": "Build your own",
+                    "name": "Build your own",
                     "url": "",
                     "children": [
                         {
-                            "title": "Overview",
+                            "name": "Overview",
                             "url": "/docs/apps/build"
                         },
                         {
-                            "title": "Tutorial",
+                            "name": "Tutorial",
                             "url": "/docs/apps/build/tutorial"
                         },
                         {
-                            "title": "TypeScript types",
+                            "name": "TypeScript types",
                             "url": "/docs/apps/build/types"
                         },
                         {
-                            "title": "Developer reference",
+                            "name": "Developer reference",
                             "url": "/docs/apps/build/reference"
                         }
                     ]
@@ -1067,155 +1073,155 @@
             ]
         },
         {
-            "title": "API",
+            "name": "API",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/api"
                 },
                 {
-                    "title": "POST-only public endpoints",
+                    "name": "POST-only public endpoints",
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
-                    "title": "Actions",
+                    "name": "Actions",
                     "url": "/docs/api/actions"
                 },
                 {
-                    "title": "Annotations",
+                    "name": "Annotations",
                     "url": "/docs/api/annotations"
                 },
                 {
-                    "title": "Cohorts",
+                    "name": "Cohorts",
                     "url": "/docs/api/cohorts"
                 },
                 {
-                    "title": "Dashboards",
+                    "name": "Dashboards",
                     "url": "/docs/api/dashboards"
                 },
                 {
-                    "title": "Event definitions",
+                    "name": "Event definitions",
                     "url": "/docs/api/event-definitions"
                 },
                 {
-                    "title": "Events",
+                    "name": "Events",
                     "url": "/docs/api/events"
                 },
                 {
-                    "title": "Experiments",
+                    "name": "Experiments",
                     "url": "/docs/api/experiments"
                 },
                 {
-                    "title": "Feature flags",
+                    "name": "Feature flags",
                     "url": "/docs/api/feature-flags"
                 },
                 {
-                    "title": "Funnels",
+                    "name": "Funnels",
                     "url": "/docs/api/funnel"
                 },
                 {
-                    "title": "Groups",
+                    "name": "Groups",
                     "url": "/docs/api/groups"
                 },
                 {
-                    "title": "Groups types",
+                    "name": "Groups types",
                     "url": "/docs/api/groups-types"
                 },
                 {
-                    "title": "Insights",
+                    "name": "Insights",
                     "url": "/docs/api/insights"
                 },
                 {
-                    "title": "Invites",
+                    "name": "Invites",
                     "url": "/docs/api/invites"
                 },
                 {
-                    "title": "Members",
+                    "name": "Members",
                     "url": "/docs/api/members"
                 },
                 {
-                    "title": "Persons",
+                    "name": "Persons",
                     "url": "/docs/api/persons"
                 },
                 {
-                    "title": "Plugin configs",
+                    "name": "Plugin configs",
                     "url": "/docs/api/plugin-configs"
                 },
                 {
-                    "title": "Plugins",
+                    "name": "Plugins",
                     "url": "/docs/api/plugins"
                 },
                 {
-                    "title": "Projects",
+                    "name": "Projects",
                     "url": "/docs/api/projects"
                 },
                 {
-                    "title": "Property definitions",
+                    "name": "Property definitions",
                     "url": "/docs/api/property-definitions"
                 },
                 {
-                    "title": "Session recordings",
+                    "name": "Session recordings",
                     "url": "/docs/api/session-recordings"
                 },
                 {
-                    "title": "Trends",
+                    "name": "Trends",
                     "url": "/docs/api/trend"
                 },
                 {
-                    "title": "Users",
+                    "name": "Users",
                     "url": "/docs/api/user"
                 },
                 {
-                    "title": "Data model",
+                    "name": "Data model",
                     "url": "/docs/data-model"
                 }
             ]
         },
         {
-            "title": "Privacy",
+            "name": "Privacy",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/privacy/"
                 },
                 {
-                    "title": "GDPR guidance",
+                    "name": "GDPR guidance",
                     "url": "/docs/privacy/gdpr-compliance"
                 },
                 {
-                    "title": "HIPAA guidance",
+                    "name": "HIPAA guidance",
                     "url": "/docs/privacy/hipaa-compliance"
                 },
                 {
-                    "title": "CCPA guidance",
+                    "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
                 },
                 {
-                    "title": "Data egress & compliance",
+                    "name": "Data egress & compliance",
                     "url": "/docs/privacy/egress"
                 }
             ]
         },
         {
-            "title": "Support",
+            "name": "Support",
             "url": "/docs/user-guides/support"
         },
         {
-            "title": "Contribute",
+            "name": "Contribute",
             "url": "",
             "children": [
                 {
-                    "title": "Overview",
+                    "name": "Overview",
                     "url": "/docs/contribute"
                 },
                 {
-                    "title": "Code of conduct",
+                    "name": "Code of conduct",
                     "url": "/docs/contribute/code-of-conduct"
                 },
                 {
-                    "title": "Recognizing contributions",
+                    "name": "Recognizing contributions",
                     "url": "/docs/contribute/recognizing-contributions"
                 }
             ]
@@ -1223,585 +1229,578 @@
     ],
     "product": [
         {
-            "title": "Overview",
+            "name": "Overview",
             "url": "/product"
         },
         {
-            "title": "Funnels",
+            "name": "Funnels",
             "url": "/product/funnels"
         },
         {
-            "title": "Trends",
+            "name": "Trends",
             "url": "/product/trends"
         },
         {
-            "title": "User Paths",
+            "name": "User Paths",
             "url": "/product/user-paths"
         },
         {
-            "title": "Correlation Analysis",
+            "name": "Correlation Analysis",
             "url": "/product/correlation-analysis"
         },
         {
-            "title": "Session Recording",
+            "name": "Session Recording",
             "url": "/product/session-recording"
         },
         {
-            "title": "Feature Flags",
+            "name": "Feature Flags",
             "url": "/product/feature-flags"
         },
         {
-            "title": "Heatmaps",
+            "name": "Heatmaps",
             "url": "/product/heatmaps"
         },
         {
-            "title": "Experimentation",
+            "name": "Experimentation",
             "url": "/product/experimentation-suite"
         },
         {
-            "title": "Collaboration",
+            "name": "Collaboration",
             "url": "/product/collaboration"
         }
     ],
     "apps": [
         {
-            "title": "App Store",
+            "name": "App Store",
             "url": "/apps"
         },
         {
-            "title": "Airbyte Export",
+            "name": "Variance Connector",
+            "url": "/apps/variance-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/variance-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Engage Connector",
+            "url": "/apps/engage-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/engage-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Airbyte Export",
             "url": "/apps/airbyte-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/airbyte-export/docs"
                 }
             ]
         },
         {
-            "title": "Amazon Kinesis Import",
+            "name": "Amazon Kinesis Import",
             "url": "/apps/amazon-kinesis",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/amazon-kinesis/docs"
                 }
             ]
         },
         {
-            "title": "Automatic Cohort Creator",
+            "name": "Automatic Cohort Creator",
             "url": "/apps/automatic-cohort-creator",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/automatic-cohort-creator/docs"
                 }
             ]
         },
         {
-            "title": "BigQuery Export",
+            "name": "BigQuery Export",
             "url": "/apps/bigquery-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/bigquery-export/docs"
                 }
             ]
         },
         {
-            "title": "BitBucket Release Tracker",
+            "name": "BitBucket Release Tracker",
             "url": "/apps/bitbucket-release-tracker",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/bitbucket-release-tracker/docs"
                 }
             ]
         },
         {
-            "title": "Braze Importer",
+            "name": "Braze Importer",
             "url": "/apps/braze",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/braze/docs"
                 }
             ]
         },
         {
-            "title": "Currency Normalizer",
+            "name": "Currency Normalizer",
             "url": "/apps/currency-normalization",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/currency-normalization/docs"
                 }
             ]
         },
         {
-            "title": "Customer.io Connector",
+            "name": "Customer.io Connector",
             "url": "/apps/customer-io",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/customer-io/docs"
                 }
             ]
         },
         {
-            "title": "Databricks Export",
+            "name": "Databricks Export",
             "url": "/apps/databricks",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/databricks/docs"
                 }
             ]
         },
         {
-            "title": "Downsampler",
+            "name": "Downsampler",
             "url": "/apps/downsampling",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/downsampling/docs"
                 }
             ]
         },
         {
-            "title": "Email Scoring",
+            "name": "Email Scoring",
             "url": "/apps/email-scoring",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/email-scoring/docs"
                 }
             ]
         },
         {
-            "title": "Event Sequence Timer",
+            "name": "Event Sequence Timer",
             "url": "/apps/event-sequence-timer",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/event-sequence-timer/docs"
                 }
             ]
         },
         {
-            "title": "User Paths",
+            "name": "User Paths",
             "url": "/product/user-paths"
         },
         {
-            "title": "Correlation Analysis",
+            "name": "Correlation Analysis",
             "url": "/product/correlation-analysis"
         },
         {
-            "title": "Session Recording",
+            "name": "Session Recording",
             "url": "/product/session-recording"
         },
         {
-            "title": "Feature Flags",
+            "name": "Feature Flags",
             "url": "/product/feature-flags"
         },
         {
-            "title": "First Time Event Tracker",
+            "name": "First Time Event Tracker",
             "url": "/apps/first-time-event-tracker",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/first-time-event-tracker/docs"
                 }
             ]
         },
         {
-            "title": "GeoIP Enricher",
+            "name": "GeoIP Enricher",
             "url": "/apps/geoip-enrichment",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/geoip-enrichment/docs"
                 }
             ]
         },
         {
-            "title": "Experimentation",
+            "name": "Experimentation",
             "url": "/product/experimentation-suite"
         },
         {
-            "title": "GitHub Release Tracker",
+            "name": "GitHub Release Tracker",
             "url": "/apps/github-release-tracker",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/github-release-tracker/docs"
                 }
             ]
         },
         {
-            "title": "GitHub Star Sync",
+            "name": "GitHub Star Sync",
             "url": "/apps/github-star-sync",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/github-star-sync/docs"
                 }
             ]
         },
         {
-            "title": "GitLab Release Tracker",
+            "name": "GitLab Release Tracker",
             "url": "/apps/gitlab-release-tracker",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/gitlab-release-tracker/docs"
                 }
             ]
         },
         {
-            "title": "Google Cloud Export",
+            "name": "Google Cloud Export",
             "url": "/apps/google-cloud-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/google-cloud-export/docs"
                 }
             ]
         },
         {
-            "title": "Google Pub/Sub Connector",
+            "name": "Google Pub/Sub Connector",
             "url": "/apps/google-pub-sub-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/google-pub-sub-connector/docs"
                 }
             ]
         },
         {
-            "title": "Heartbeat",
+            "name": "Heartbeat",
             "url": "/apps/heartbeat",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/heartbeat/docs"
                 }
             ]
         },
         {
-            "title": "Hubspot Connector",
+            "name": "Hubspot Connector",
             "url": "/apps/hubspot-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/hubspot-connector/docs"
                 }
             ]
         },
         {
-            "title": "Intercom Connector",
+            "name": "Intercom Connector",
             "url": "/apps/intercom",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/intercome/docs"
                 }
             ]
         },
         {
-            "title": "Ingestion Alerts",
+            "name": "Ingestion Alerts",
             "url": "/apps/ingestion-alert",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/ingestion-alert/docs"
                 }
             ]
         },
         {
-            "title": "Migrator 3000",
+            "name": "Migrator 3000",
             "url": "/apps/migrator-3000",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/migrator-3000/docs"
                 }
             ]
         },
         {
-            "title": "n8n Connector",
+            "name": "n8n Connector",
             "url": "/apps/n8n",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/n8n/docs"
                 }
             ]
         },
         {
-            "title": "Orbit Connector",
+            "name": "Orbit Connector",
             "url": "/apps/orbit",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/orbit/docs"
                 }
             ]
         },
         {
-            "title": "Pagerduty Connector",
+            "name": "Pagerduty Connector",
             "url": "/apps/pagerduty-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/pagerduty-connector/docs"
                 }
             ]
         },
         {
-            "title": "Postgres Export",
+            "name": "Postgres Export",
             "url": "/apps/postgres-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/postgres-export/docs"
                 }
             ]
         },
         {
-            "title": "Property Filter",
+            "name": "Property Filter",
             "url": "/apps/property-filter",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/property-filter/docs"
                 }
             ]
         },
         {
-            "title": "Property Flattener",
+            "name": "Property Flattener",
             "url": "/apps/property-flattener",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/property-flattener/docs"
                 }
             ]
         },
         {
-            "title": "Redshift Export",
+            "name": "Redshift Export",
             "url": "/apps/redshift-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/redshift-export/docs"
                 }
             ]
         },
         {
-            "title": "Redshift Import",
+            "name": "Redshift Import",
             "url": "/apps/redshift-import",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/redshift-import/docs"
                 }
             ]
         },
         {
-            "title": "Replicator",
+            "name": "Replicator",
             "url": "/apps/replicator",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/replicator/docs"
                 }
             ]
         },
         {
-            "title": "Rudderstack Export",
+            "name": "Rudderstack Export",
             "url": "/apps/rudderstack-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/rudderstack-export/docs"
                 }
             ]
         },
         {
-            "title": "S3 Export",
+            "name": "S3 Export",
             "url": "/apps/s3-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/s3-export/docs"
                 }
             ]
         },
         {
-            "title": "Salesforce Connector",
+            "name": "Salesforce Connector",
             "url": "/apps/salesforce-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/salesforce-connector/docs"
                 }
             ]
         },
         {
-            "title": "Schema Enforcer",
+            "name": "Schema Enforcer",
             "url": "/apps/schema-enforcer",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/schema-enforcer/docs"
                 }
             ]
         },
         {
-            "title": "Segment Connector",
+            "name": "Segment Connector",
             "url": "/apps/segment",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/segment/docs"
                 }
             ]
         },
         {
-            "title": "Sendgrid Connector",
+            "name": "Sendgrid Connector",
             "url": "/apps/sendgrid-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/sendgrid-connector/docs"
                 }
             ]
         },
         {
-            "title": "Sentry Connector",
+            "name": "Sentry Connector",
             "url": "/apps/sentry-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/sentry-connector/docs"
                 }
             ]
         },
         {
-            "title": "Shopify Connector",
+            "name": "Shopify Connector",
             "url": "/apps/shopify",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/shopify/docs"
                 }
             ]
         },
         {
-            "title": "Snowflake Export",
+            "name": "Snowflake Export",
             "url": "/apps/snowflake-export",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/snowflake-export/docs"
                 }
             ]
         },
         {
-            "title": "Taxonomy Standardizer",
+            "name": "Taxonomy Standardizer",
             "url": "/apps/taxonomy-standardizer",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/taxonomy-standardizer/docs"
                 }
             ]
         },
         {
-            "title": "Timestamp Parser",
+            "name": "Timestamp Parser",
             "url": "/apps/timestamp-parser",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/timestamp-parser/docs"
                 }
             ]
         },
         {
-            "title": "Twilio Connector",
+            "name": "Twilio Connector",
             "url": "/apps/twilio",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/twilio/docs"
                 }
             ]
         },
         {
-            "title": "Twitter Followers Tracker",
+            "name": "Twitter Followers Tracker",
             "url": "/apps/twitter-followers",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/twitter-followers/docs"
                 }
             ]
         },
         {
-            "title": "User Agent Populator",
+            "name": "User Agent Populator",
             "url": "/apps/user-agent-populator",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/user-agent-populator/docs"
                 }
             ]
         },
         {
-            "title": "Zapier Connector",
+            "name": "Zapier Connector",
             "url": "/apps/zapier-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/zapier-connector/docs"
                 }
             ]
         },
         {
-            "title": "Zendesk Connector",
+            "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector",
             "children": [
                 {
-                    "title": "Documentation",
+                    "name": "Documentation",
                     "url": "/apps/zendesk-connector/docs"
-                }
-            ]
-        }
-    ],
-    "userGuides": [
-        {
-            "title": "Analysis",
-            "children": [
-                {
-                    "title": "User guides",
-                    "url": "/user-guides"
-                },
-                {
-                    "title": "Cohorts",
-                    "url": "/user-guides/cohorts"
-                },
-                {
-                    "title": "Sessions",
-                    "url": "/user-guides/sessions"
-                },
-                {
-                    "title": "Paths",
-                    "url": "/user-guides/paths"
-                },
-                {
-                    "title": "Trends",
-                    "url": "/user-guides/trends"
                 }
             ]
         }

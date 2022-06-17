@@ -95,14 +95,14 @@ There are four ways to use apps you build:
 
 1. Publish the app to `npm` and install it with the url from `npmjs.com` 
 1. You can add it via its repository URL (e.g. GitHub/GitLab)
-1. Reference the location of the app on your local instance (e.g. /Users/yourname/path/to/plugin)  
+1. Reference the location of the app on your local instance (e.g. /Users/yourname/path/to/app)  
 
     This can be configured in 'Settings' -> 'Project Apps'.
 1. Submit it to the official repository. [See below](#submitting-your-plugin) 
 
 ## Submitting your app
 
-If you wish to, you can contribute back to the PostHog community by submitting to the [official Plugin Repository](/plugins). This means everyone else can use your app, too!
+If you wish to, you can contribute back to the PostHog community by submitting to the [official App Store](/apps). This means everyone else can use your app, too!
 
 If you built a app inside the PostHog editor, first [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository)
 

@@ -109,6 +109,8 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 ### Is Matomo GDPR compliant?
 Yes. Matomo offers first-party cookies by default and offers robust tools to ensure personally indentifiable information (PII) is anonymised. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
 
+**Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
+
 ## 5. [GoAccess](https://goaccess.io/)
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 

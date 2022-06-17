@@ -58,6 +58,19 @@ We need to configure these well, but monitoring disk util can help catch this pr
 
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 
+
+### Upgrade failed due to cert-manager conflicts
+
+If a deploy fails with the following error:
+
+```
+Error: UPGRADE FAILED: rendered manifests contain a resource that already exists. Unable to continue with update: CustomResourceDefinition "certificaterequests.cert-manager.io" in namespace "" exists and cannot be imported into the current release: invalid ownership metadata; label validation error: missing key "app.kubernetes.io/managed-by": must be set to "Helm"; annotation validation error: missing key "meta.helm.sh/release-name": must be set to "posthog"; annotation validation error: missing key "meta.helm.sh/release-namespace": must be set to "posthog"
+```
+
+The issue might be with cert-manager custom resource definitions already existing and being unupgradable.
+
+Try running helm upgrade without `--atomic` to fix this issue.
+
 ## FAQ
 
 ### How can I increase storage size?

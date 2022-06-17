@@ -152,6 +152,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         children {
                             children {
                                 children {
+                                    children {
+                                        children {
+                                            title
+                                            url
+                                        }
+                                        title
+                                        url
+                                    }
                                     title
                                     url
                                 }
@@ -190,6 +198,10 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                     apps {
                         title
+                        url
+                    }
+                    apps {
+                        name
                         url
                     }
                     product {
@@ -295,6 +307,38 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate)
     createPosts(result.data.userGuides.nodes, 'userGuides', HandbookTemplate)
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint)
+
+    result.data.apidocs.nodes.forEach((node) => {
+        const slug = replacePath(node.url)
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
+
+        createPage({
+            path: slug,
+            component: ApiEndpoint,
+            context: {
+                id: node.id,
+                slug,
+                menu: docsMenu,
+                next,
+                previous,
+                // menu: docsMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                // tableOfContents,
+                // slug,
+            },
+        })
+    })
 
     const tutorialsPageViews = await fetch(
         'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'

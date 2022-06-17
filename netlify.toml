@@ -1442,3 +1442,18 @@
 [[redirects]]
     from = "/handbook/company/1-1s"
     to = "/handbook/company/management"
+    
+# Added: 2022-06-07
+[[redirects]]
+    from = "/lenny"
+    to = "/?utm_campaign=lenny"
+    
+# Added: 2022-06-09
+[[redirects]]
+    from = "/blog/the-posthog-array-1-36-1"
+    to = "/blog/the-posthog-array-1-36-0"
+
+# Added: 2022-06-16
+[[redirects]]
+    from = "/tutorials/b2b"
+    to = "/blog/b2b-saas-product-metrics"

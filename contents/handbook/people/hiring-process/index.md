@@ -25,7 +25,7 @@ All of our recruiting is done in-house, so we do not work with external agencies
 
 We use [Pry](https://app.pry.co/posthog-core/main/hiringplan/employees) to plan our hiring forecast. We use the hiring forecast as a guide, but we have the ability to iterate on this at any time. We are super responsive to changes PostHog's needs. 
 
-For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=eltjehelene&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone in the company will have the opportunity to give their feedback on the proposed role, before we officially open ot. 
+For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=eltjehelene&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone in the company will have the opportunity to give their feedback on the proposed role, before we officially open it. 
 
 #### **How to write a great job description**
 
@@ -162,7 +162,16 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 
 ## Our interview process
 
-The general interview process we follow at PostHog is outlined below. We also wrote up specific 
+The general interview process we follow at PostHog is outlined below. We also wrote up specific details on the interview panels for all current openings. 
+
+| **Position title**        | **Location  (we're happy to hire in)** | **Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
+|---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Senior Product Manager    | GMT -08:00 to +02:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | Not created yet                |
+| Senior Data Engineer      | GMT -05:00 to +02:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.& Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Senior Data Engineer Task]()  |
+| Site Reliability Engineer | GMT -08:00 to +02:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & James H.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [Site Reliability Engineer]()  |
+| Developer Advocate        | GMT 0:00 to +02:00                     | Markerting      | Charles     | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & James H.<br/> 3) SuperDay Assessment - Charles, Joe, Andy, Tim & Grace             | [Dev Advocate Task]()          |
+| Full Stack Engineer       | GMT -08:00 to -05:00                   | Websites & Docs | Cory W.     | 1) Culture Screen- Coua<br/> 2) Technical Screen - Cory & Tim<br/> 3) SuperDay Assessment - Cory, Tim, Eli, Lottie, James H. & Charles           | Live Task (link not available) |
+| Full Stack Engineer       | GMT -08:00 to +-2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
 
 
 ### Application

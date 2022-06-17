@@ -12,7 +12,7 @@ import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
@@ -24,7 +24,7 @@ const TopLink = ({ title, description, link, icon }) => {
         <li className="w-full">
             <a
                 href={link}
-                className="flex flex-col items-center justify-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5"
+                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark hover:bg-opacity-20 px-4 py-5 h-full"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
                 <h3 className="font-bold text-base mb-1">{title}</h3>
@@ -73,16 +73,37 @@ const Search = () => {
                     apiKey="f1386529b9fafc5c3467e0380f19de4b"
                 />
             )}
-            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 m-0">
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center relative mx-auto mb-0 w-full max-w-lg"
+            >
+                <div className="absolute left-4 w-4 h-4">
+                    <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                        <g opacity="1" clipPath="url(#a)">
+                            <path
+                                d="m18 15.964-4.794-4.793A7.2 7.2 0 1 0 .001 7.2a7.2 7.2 0 0 0 11.17 6.006L15.963 18 18 15.964ZM2.04 7.2A5.16 5.16 0 0 1 7.2 2.043 5.16 5.16 0 1 1 2.04 7.2Z"
+                                fill="#90794B"
+                            />
+                        </g>
+                        <defs>
+                            <clipPath id="a">
+                                <path fill="#fff" d="M0 0h18v18H0z" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
                 <input
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     name="faq-search"
                     placeholder="Search anything product, installation, or company-related..."
-                    className="px-4 py-3 text-base bg-white dark:bg-gray-accent-dark shadow-md rounded-sm w-full"
+                    autoFocus={true}
+                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
                 />
 
-                <button className="px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">Search</button>
+                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
+                    Search
+                </button>
             </form>
             {showForm && (
                 <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
@@ -165,18 +186,43 @@ export default function FAQ({
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
             <section className="px-4">
-                <div className="max-w-4xl mx-auto my-12">
-                    <h1>Questions?</h1>
-                    <Search />
-                    <p className="mt-3 text-sm text-gray">
-                        Can't find the answer you're looking for?{' '}
-                        <button
-                            className="text-red font-semibold"
-                            onClick={() => scroller.scrollTo('squeak-bottom', { offset: -100, smooth: true })}
-                        >
-                            Ask a question
-                        </button>
-                    </p>
+                <div className="relative">
+                    <div className="max-w-4xl mx-auto my-12  flex flex-col justify-center">
+                        <h1 className="text-center">Questions?</h1>
+                        <h5 className="text-center">Search answers across posthog.com</h5>
+                        <Search />
+                        <p className="mt-3 text-sm text-gray text-center font-semibold">
+                            Can't find your answer?{' '}
+                            <button
+                                className="text-red"
+                                onClick={() => scroller.scrollTo('squeak-bottom', { offset: -100, smooth: true })}
+                            >
+                                Ask a question
+                            </button>
+                        </p>
+                    </div>
+
+                    <span className="absolute bottom-[calc(-170px-3rem)] hidden mdlg:block md:-left-24 lg:-left-20 z-[-10] transition-all">
+                        <StaticImage
+                            src="../../contents/images/search-hog-1.png"
+                            alt="This hog has an answer"
+                            height={512}
+                            width={440}
+                            placeholder="blurred"
+                            className="h-full xl:max-w-none ml-0 md:ml-0"
+                        />
+                    </span>
+
+                    <span className="absolute bottom-[calc(-101px-3rem)] hidden mdlg:block md:-right-40 lg:-right-36 xl:-right-24 2xl:-right-14 z-[-20] transition-all">
+                        <StaticImage
+                            src="../../contents/images/search-hog-2.png"
+                            alt="This hog has an answer"
+                            height={407}
+                            width={449}
+                            placeholder="blurred"
+                            className="h-full xl:max-w-none ml-0 md:ml-0"
+                        />
+                    </span>
                 </div>
 
                 <div className="border-t border-b border-dashed border-gray mb-12 -mx-4">

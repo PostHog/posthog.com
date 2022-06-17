@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** It's worth reading the [Building apps overview](./overview) for a quick introduction to how to build your own app.
+> **Note:** It's worth reading the [Building apps overview](..) for a quick introduction to how to build your own app.
 
-## plugin.json file
+## `plugin.json` file
 
 A `plugin.json` file is structured as follows:
 
@@ -18,7 +18,7 @@ A `plugin.json` file is structured as follows:
   "main": "<entry_point>",
   "config": [
     {
-      "markdown": "Custom markdown block before the fields,\n[Use links](http://example.com) and other goodies!"
+      "markdown": "A Markdown block.\n[Use links](http://example.com) and other goodies!"
     },
     {
       "key": "param1",
@@ -30,6 +30,7 @@ A `plugin.json` file is structured as follows:
       "secret": true
     },
     {
+      "key": "param2",
       "name": "<param2_name>",
       "type": "<param2_type>",
       "default": "<param2_default_value>",
@@ -65,18 +66,18 @@ Here's an example `plugin.json` file from our ['Hello world app'](https://github
 
 Most options in this file are self-explanatory, but there are a few worth exploring further:
 
-### main
+### `main`
 
 `main` determines the entry point for your app, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
-### config
+### `config`
 
 `config` consists of an array of objects that each pertain to a specific configuration field or markdown explanation for your plugin.
 
 Each object in a config can have the following properties:
 
 |   Key    |                    Type                    |                                                                           Description                                                                           |
-| :------: | :----------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| :------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   type   | `"string"` or `"attachment"` or `"choice"` | Determines the type of the field - "attachment" asks the user for an upload, and "choice" requires the config object to have a `choices` array, explained below |
 |   key    |                  `string`                  |                                     The key of the app config field, used to reference the value from inside the app                                      |
 |   name   |                  `string`                  |                                          Displayable name of the field - appears on the app setup in the PostHog UI                                          |
@@ -90,7 +91,7 @@ Each object in a config can have the following properties:
 
 > **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your app but can be placed anywhere in the `config` array and is useful for customizing the content of your app's configuration step in the PostHog UI.
 
-## PluginMeta
+## `PluginMeta`
 
 > Check out [App Types](/docs/plugins/types) for a full spec of types for app authors.
 
@@ -98,7 +99,7 @@ Each object in a config can have the following properties:
 
 Here's what they do:
 
-### config
+### `config`
 
 Gives you access to the app config values as described in `plugin.json` and configured via the PostHog interface.
 
@@ -107,12 +108,12 @@ Example:
 export async function processEvent(event, { config }) {
     event.properties['greeting'] = config.greeting
     return event
-})
+}
 ```
 
-### cache
+### `cache`
 
-A way to store values that persist across special function calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
+A way to cache values globally across plugin reloads. The values are stored in [Redis](https://redis.io/), an in-memory store. This storage is not persistent, so values _can_ be dropped by the system.
 
 The `cache` type is defined as follows:
 
@@ -157,9 +158,9 @@ export function processEvent(event, { config, cache }) {
 }
 ```
 
-### global
+### `global`
 
-The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. 
+The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. `global` is not shared across worker threads
 
 Example:
 ```js
@@ -174,10 +175,9 @@ export function processEvent(event, { global, config }) {
 }
 ```
 
+### `attachments`
 
-### attachments
-
-Attachments gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
+`attachments` gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
 
 ```js
 interface PluginAttachment {
@@ -198,19 +198,63 @@ export function setupPlugin({ attachments, global }: Meta) {
 }
 ```
 
-### jobs
+### `jobs`
 
 The `jobs` object gives you access to the jobs you specified in your app. See [Jobs](#jobs-1) for more information.
 
-### geoip
+### `geoip`
 
-`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the app server to get location data for an IP. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
+`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the app server to get location data for an IP address. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
 
-It has a `locate` method that takes an ip and returns an object possibly containing `city`, `location`, `postal`, and `subdivisions`.
+It has a `locate` method that takes an IP address and returns an object possibly containing `city`, `location`, `postal`, and `subdivisions`.
 
 Read more about the response from `geoip.locate` [here](https://github.com/maxmind/GeoIP2-node/blob/af20a9681c85445a73d3446e2a682f64d3b673db/src/models/City.ts).
 
-## setupPlugin function
+## Maximizing reliability with `RetryError`
+
+Since plugins generally handle data in some way, it's crucial for data integrity that each plugin is as reliable as possible. One system-level mechanism you can leverage to improve reliability is **function retries**.
+
+While normally a plugin function simply fails without ceremony the moment it throws an error, **select functions can be retried** by throwing a special error type: **`RetryError`** – which is included in the `@posthog/plugin-scaffold` package.
+
+As an example, it's safe to assume that a connection to an external service _will_ fail eventually. Due to security considerations, `setTimeout` cannot be used in a plugin to wait until the network problem has passed, but with function retries the solution is even simpler! Just `catch` the connection error and `throw new RetryError` – the system will re-run the function for you:
+
+```js
+import { RetryError } from '@posthog/plugin-scaffold'
+
+export function setupPlugin() {
+    try {
+        // Some network connection
+    } catch {
+        throw new RetryError('Service is unavailable, but it might be back up in a moment')
+    }
+}
+```
+
+At the same time, make sure NOT to use `RetryError` when the problem cannot be intermittent – perhaps an invalid config, an unhandled edge case, or just a random bug in the code of the plugin. Retrying such a case would just put extra load on the system, without any benefit.
+
+```js
+import { RetryError } from '@posthog/plugin-scaffold'
+
+export function setupPlugin({ config }) {
+    let eventsToTrack
+    try {
+        eventsToTrack = config.nonExistentKey.split(',')
+    } catch {
+        throw new RetryError('Retrying this will never help')
+    }
+}
+```
+
+The maximum number of retries is documented with each function, as it might differ across them. However, the mechanism is constant in its use of _exponential backoff_, that is: the wait time between retries is doubled with each attempt. For instance, if the 1st retry takes place 1 s after the initial failure, the gap between the 5th and the 6th will be 32 s (`2^5`).
+
+As of PostHog 1.37+, the following functions are _retriable_:
+- `setupPlugin`
+- `onEvent`
+- `onAction`
+- `onSnapshot`
+- `exportEvents`
+
+## `setupPlugin` function
 
 `setupPlugin` is a function you can use to dynamically set app configuration based on the user's inputs at the configuration step. 
 
@@ -228,37 +272,21 @@ export function setupPlugin({ attachments, global }) {
 }
 ```
 
-If you throw a `RetryError` (imported from `@posthog/plugin-scaffold`) in your `setupPlugin` function, PostHog will retry the initialization up to 10 times within an hour before disabling the plugin. Errors other than `RetryError` cause the app to be disabled automatically.
+`setupPlugin` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times disables the plugin. The plugin is disabled immediately if any error other than `RetryError` is thrown in `setupPlugin`.
 
-`RetryError` should be used to indicate an error that is dependent on an external service, meaning that retrying it may actually lead to a different outcome (success). If you throw a `RetryError` because parsing a config option fail, it will never actually succeed.
+On PostHog Cloud and [email-enabled](/docs/self-host/configure/email) instances of PostHog, project members are notified by email of the plugin being disabled automatically. This is to ensure that action is taken if the plugin is important for data integrity.
 
-Example:
+## `teardownPlugin` function
+
+`teardownPlugin` is ran when an app VM is destroyed, because of, for example, a app server shutdown or an update to the app. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
 
 ```js
-import { RetryError } from '@posthog/plugin-scaffold'
-
-// Good!
-export function setupPlugin() {
-    try {
-      // call some API
-    } catch {
-      throw new RetryError('Service is down, retry later')
-    }
-}
-
-// Bad!
-export function setupPlugin({ config }) {
-    let eventsToTrack
-    try {
-      // errors if array resulting from `split` has less than 6 elements
-      eventsToTrack = config.split(',')[5] 
-    } catch {
-      throw new RetryError('I will retry but never succeed')
-    }
+async function teardownPlugin({ global }) {
+  await global.buffer.flush()
 }
 ```
 
-## processEvent function
+## `processEvent` function
 
 > If you were using `processEventBatch` before, you should now use `processEvent`. `processEventBatch` has been **deprecated**.
 
@@ -293,7 +321,7 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 > Please note that `$snapshot` events (used for session recordings) do not go through `processEvent`. Instead, you can access them via the `onSnapshot` function described below.
 
-## onEvent function
+## `onEvent` function
 
 > **Minimum PostHog version:** 1.25.0 
 
@@ -314,12 +342,16 @@ async function onEvent(event) {
 }
 ```
 
+`onEvent` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 
-## onSnapshot function
+## `onSnapshot` function
 
-> **Minimum PostHog version:** 1.25.0
+> **Minimum PostHog version:** 1.25.0  
+> **Self-hosted installations-only** – not available on PostHog Cloud
 
-`onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
+`onSnapshot` works exactly like `onEvent`. The only difference between the two is that the former receives session recording events, while latter – all other events.
+
+`onSnapshot` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 
 ## Scheduled tasks
 
@@ -349,19 +381,9 @@ async function runEveryMinute({ config }) {
 }
 ```
 
-It's worth noting that the server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
+It's worth noting that scheduled tasks are _debounced_, meaning that only a single run of a given task can be in progress at any given time. For example, if a `runEveryMinute` run takes more than a minute, it will make the system skip each following run until that current one has finished – then, the schedule will resume normally.
 
-## teardownPlugin function
-
-`teardownPlugin` is ran when a app VM is destroyed, because of, for example, a app server shutdown or an update to the app. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
-
-```js
-async function teardownPlugin({ global }) {
-  await global.buffer.flush()
-}
-```
-
-## exportEvents
+## `exportEvents`
 
 `exportEvents` was built to make exporting PostHog events to third-party services (like data warehouses) extremely easy. 
 
@@ -377,7 +399,7 @@ async function exportEvents(events, meta) {
 }
 ```
 
-In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled apps. In addition, if a `RetryError` is thrown, `exportEvents` is retried up to 15 times within 24 hours using an exponential backoff approach.
+In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled apps. `exportEvents` can be retried up to 3 times (first retry after 6 s, then 12 s after that, 24 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 3 times is ignored.
 
 ## Available packages and imports
 
@@ -395,11 +417,11 @@ Apps have access to some special objects in the global scope, as well as a varie
 
 Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
 
-#### posthog
+#### `posthog`
 
 The global `posthog` object gives you access to the following:
 
-##### capture
+##### `capture`
 
 <blockquote class="warning-note">
 
@@ -418,7 +440,7 @@ Method signature:
 ```js
 capture(event: string, properties?: Record<string, any>) => void
 ```
-##### api
+##### `api`
 
 <blockquote class="warning-note">
 
@@ -469,7 +491,7 @@ await posthog.api.get(
 ### Available imports
 
 | Import name | Description |
-| :---------: | :---------: | 
+| :--------- | :--------- | 
 | `crypto`    | [Node.js standard lib's `crypto` module](https://nodejs.org/api/crypto.html) |
 | `url`    | [Node.js standard lib's `url` module](https://nodejs.org/api/url.html) |
 | `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/zlib.html) |
@@ -569,65 +591,6 @@ export async function processEvent (event, { jobs }) {
     return event
 }
 ```
-
-## Metrics
-
-> **Minimum PostHog version:** 1.27.0
-
-![exportEvents Metrics Example](../../../images/plugins/exportEvents-metrics.png)
-
-App metrics enable app developers to provide metrics for users about app performance. They will appear in a chart on the apps page, which is made visible by clicking the chart icon for a specific app. 
-
-This could be tracking the number of errors and successes when exporting events to another service, or the maximum amount of time taken for a request to a third-party API to complete, for example.
-### Specifying metrics
-
-To specify metrics, you should export a `metrics` object mapping string keys (metric names) to metric operations, like so:
-
-```js
-export const metrics = {
-    'metric1': 'sum',
-    'metric2': 'max',
-    'metric3': 'min'
-}
-```
-
-The supported metric operations are `sum`, `max`, and `min`. If you're using TypeScript, a handy enum is provided for you in `@posthog/plugin-scaffold`, called `MetricsOperation`. 
-
-The metric operations correspond to property aggregation operations you can use in a PostHog trends graph. `sum` metrics will show a graph where all the values for the metric during the period will be added together. `max` and `min`, on the other hand, will create a graph showing the maximum or minimum values the property had in each time period.  
-### Updating metrics
-
-Each metric type has an operation it is allowed to perform. This is as follows:
-
-| Metric type | Operation |
-| :---------: | :--------: |
-| `sum` | `increment` |
-| `max` | `max` |
-| `min` | `min` |
-
-To update a metric, access `metrics` via the app's `meta` object, and you'll be able to call the respective methods on them, like so:
-
-```js
-export function processEvent(event, { metrics }) {
-    metrics.metric1.increment(100) // sum is now 100
-    metrics.metric1.increment(10) // sum is now 110
-    metrics.metric1.increment(-10) // sum is now 100
-    metrics['metric2'].max(5) // max is now 5
-    metrics['metric2'].max(10) // max is now 10
-    metrics['metric3'].min(4) // min is now 4
-    metrics['metric3'].min(1) // max is now 1
-}
-```
-
-### exportEvents
-
-If your app uses `exportEvents`, some metrics will be automatically provided for you. These are:
-
-- `events_seen`: How many events the `exportEvents` function has received for processing
-- `events_delivered_successfully`: The number of events that were processed by the `exportEvents` function and no error was thrown
-- `retry_errors`: The number of explicit errors of type `RetryError` thrown by the `exportEvents` function. These errors trigger retries to ensure the payload gets delivered.
-- `other_errors`: Unexpected errors thrown by the `exportEvents` function. Any error beyond a `RetryError` is considered unexpected
-- `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the app exhausts all the retries triggered by a `RetryError`
-
 
 ## Testing
 
