@@ -1,6 +1,6 @@
 ---
 date: 2022-06-16
-title: The most useful B2B SaaS product metrics (and how to measure them)
+title: The most useful B2B SaaS product metrics
 rootPage: /blog
 sidebar: Blog
 showTitle: true
