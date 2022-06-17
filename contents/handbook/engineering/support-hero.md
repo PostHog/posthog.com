@@ -44,7 +44,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
-  - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
+  - If it's an email, make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
@@ -61,8 +61,9 @@ It's really valuable for us to understand what types of requests we've had so we
 
 When you initially respond to an issue in Zendesk add a "tag" with the following categories:
 * User experience _(confusing/unclear UX)_.
-* Performance
 * Docs confusion _either missing or confusing_.
+* App Performance
+* Ingestion _(either problems and not working or performance)_.
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
@@ -105,6 +106,17 @@ If a user is sending events to PostHog and these are not getting ingested, despi
 2. Ask if they have Sentry set up and see any errors
 3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
 
+#### Reviewing new apps
+
+From time to time, customers will request to get their apps added to PostHog Cloud, based on [this tutorial](https://posthog.com/docs/apps/build/tutorial#submitting-your-app). When this happens, do the following:
+
+1. Review the app: check it doesn't do anything dangerous, like making an arbitrary number of requests, or attempt to DDOS some server.
+2. Ensure it has a `logo.png` file
+3. Fork their GitHub project
+4. Add the forked project to our [Integrations Repository](https://github.com/PostHog/integrations-repository)
+5. Tell the marketing team about this new integration
+6. Install it on Cloud, and make it global
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
@@ -145,7 +157,7 @@ Goal of the Support Hero person on duty is to:
 
 * Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
 
-* Provide actionable information as _Note_ for all the items you cannot close before the end of your shift, and remove yourself as the assignee of the ticket so the next support hero can see what is outstanding
+* Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
 
 ##### How to deal with spam, marketing, partnership proposals, etc.
 
@@ -181,6 +193,7 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 - [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
 - [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Platform Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Ingestion Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Infrastructure Rotation](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.

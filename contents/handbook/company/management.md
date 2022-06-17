@@ -96,3 +96,55 @@ Separately, you should take time once every ~3 months to zoom out and talk about
 > There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person.
 
 If you want to learn more, check out First Round Review for at least [another 6 articles](https://review.firstround.com/managers-take-your-1-1s-to-the-next-level-with-these-6-must-reads) on how to have great 1-1s! 
+
+## Management training
+
+We provide PostHog managers with training, because:
+
+a) Some of those people have never managed before
+b) Some of those people may have managed, but never had any support or training
+c) Those who have managed and had training will benefit because PostHog has a very particular culture and approach to management
+
+Our approach is discussion-based and informal. We do everything internally as we believe this will result in a more relevant and useful experience.
+
+We have held two sessions and plan to do two more:
+
+- _Part 1: The basics_ - [deck here](https://docs.google.com/presentation/d/1TLMHx-w1zLjZTXoP8rxWYHkAzenS0g9LKRbvQ4jGsX0/edit#slide=id.p)
+- _Part 2: Supporting team member growth_ - we discussed:
+  - What are people doing today around team member growth?
+  - Why does growth matter to your team members?
+  - Example growth conversations & plans (good and bad)
+  - What does a good growth conversation & plan look like at PostHog?
+  - The output of this session was the [section above](https://posthog.com/handbook/company/management#how-do-i-make-sure-my-direct-reports-are-happy-and-productive), which includes new 1-1 templates to help guide growth conversations
+
+Coming soon:
+
+- _Part 3: How to have difficult conversations_ - topics to include:
+  - "I'm struggling/burnt out"
+  - "I'm not enjoying my work"
+  - "I'm having a conflict with someone else"
+  - Legal issues
+- _Part 4: TBD_
+
+### Ongoing support for managers
+
+Once we've completed these sessions, we plan to run a recurring optional session for managers to join, using the following structure:
+
+- Welcome and role assignment (lead, notes). - 5min
+- How has the last month been, and raise any particular challenge you'd like to discuss. You don't always have to bring something to the group to discuss. - 10min
+- Group selects 1 or 2 challenges to discuss in depth. Usually you'll find there will be a topic applicable to multiple people.
+- Roundtable coaching - 45min
+
+### Recommended reading
+
+There are a million good books out there and you'll want to read more widely, but these ones have been recommended by multiple members of the team:
+
+- [The Making of a Manager: What to Do When Everyone Looks to You](https://www.goodreads.com/book/show/38821039-the-making-of-a-manager) by Julie Zhuo (great for first time managers)
+- [High Growth Handbook](https://www.goodreads.com/book/show/40536148-high-growth-handbook) by Elad Gil (covers a lot of ground beyond management)
+- [The Messy Middle](https://www.goodreads.com/book/show/40179007-the-messy-middle) by Scott Belsky (ditto)
+- [Non Violent Communication](https://www.goodreads.com/book/show/3601593-non-violent-communication-a-language-of-life) by Marshall Rosenberg (communication-focused, not specific to management)
+
+Some good blogs:
+
+- [The Pragmatic Engineer](https://blog.pragmaticengineer.com/author/gergely/)
+- [Cap Watkins](https://capwatkins.com/blog)

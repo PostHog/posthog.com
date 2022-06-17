@@ -349,7 +349,7 @@ async function onEvent(event) {
 > **Minimum PostHog version:** 1.25.0  
 > **Self-hosted installations-only** – not available on PostHog Cloud
 
-`onSnapshot` works exactly like `onEvent`. The only difference between the two is that te former receives session recording events, while latter – all other events.
+`onSnapshot` works exactly like `onEvent`. The only difference between the two is that the former receives session recording events, while latter – all other events.
 
 `onSnapshot` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 

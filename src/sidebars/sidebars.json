@@ -48,16 +48,16 @@
                     "url": "/handbook/strategy/business-model"
                 },
                 {
+                    "name": "Objectives",
+                    "url": "/handbook/strategy/objectives"
+                },
+                {
                     "name": "Roadmap",
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
                     "name": "Brand",
                     "url": "/handbook/strategy/brand"
-                },
-                {
-                    "name": "Prioritization",
-                    "url": "/handbook/strategy/prioritization"
                 }
             ]
         },
@@ -626,6 +626,16 @@
                                         {
                                             "name": "0003_fill_person_distinct_id2",
                                             "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Plugin server",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/runbook/plugin-server"
                                         }
                                     ]
                                 },
@@ -1263,6 +1273,26 @@
         {
             "name": "App Store",
             "url": "/apps"
+        },
+        {
+            "name": "Variance Connector",
+            "url": "/apps/variance-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/variance-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Engage Connector",
+            "url": "/apps/engage-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/engage-connector/docs"
+                }
+            ]
         },
         {
             "name": "Airbyte Export",

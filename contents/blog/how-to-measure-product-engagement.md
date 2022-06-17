@@ -104,7 +104,7 @@ Paying attention to engagement and building more of what your customers love is 
 
 - [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to user segmentation and how to apply it to your business
 
-- [An introduction to product analytics](/blog/what-is-product-analytics): What is product analytics and how is different from using Google Analytics
+- [B2B Product Metrics 101:](/blog/b2b-saas-product-metrics): Everything you need to know about metrics for B2B SaaS products
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
