@@ -198,7 +198,7 @@ Grafana is available under an AGPLv3 license. A limited version is available for
 
 ### 10. [Open Web Analytics](https://www.openwebanalytics.com/)
 
-![OWA - open source analytics tools](../images/blog/open-source-analytics-tools/fathom.png)
+![OWA - open source analytics tools](../images/blog/open-source-analytics-tools/owa.png)
 
 Open Web Analytics (OWA) won't win any awards for presentation, but it offers plenty of features as standard and total freedom to extend it as you please.
 
