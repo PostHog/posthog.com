@@ -5,9 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/hog-in-a-room-generic.jpg
+featuredImage: ../images/blog/migrating-hog.jpg
 featuredImageType: full
-categories: ["Inside PostHog", "Guides"]
+categories: ["Guides", "Product analytics"]
 author: ["simon-fisher"]
 ---
 
