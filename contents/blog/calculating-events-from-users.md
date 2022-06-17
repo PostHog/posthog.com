@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/migrating-hog.jpg
+featuredImage: ../images/blog/posthog-data-management.png
 featuredImageType: full
 categories: ["Guides", "Product analytics"]
 author: ["simon-fisher"]
