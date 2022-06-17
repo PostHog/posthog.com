@@ -1,6 +1,6 @@
 ---
 date: 2022-06-16
-title: The 10 best open source analytics tools
+title: The 11 best open source analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
