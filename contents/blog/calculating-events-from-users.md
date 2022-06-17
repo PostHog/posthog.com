@@ -1,6 +1,6 @@
 ---
 date: 2022-06-17
-title: How do I even calculate my event count anyway?
+title: The two ways to estimate your monthly event usage
 rootPage: /blog
 sidebar: Blog
 showTitle: true
