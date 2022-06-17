@@ -1457,3 +1457,93 @@
 [[redirects]]
     from = "/tutorials/b2b"
     to = "/blog/b2b-saas-product-metrics"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/actions"
+    to = "/user-guides/actions"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/cohorts"
+    to = "/user-guides/cohorts"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/cohorts"
+    to = "/user-guides/cohorts"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/correlation"
+    to = "/user-guides/correlation"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/data-management"
+    to = "/user-guides/data-management"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/experimentation"
+    to = "/user-guides/experimentation"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/feature-flags"
+    to = "/user-guides/feature-flags"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/funnels"
+    to = "/user-guides/funnels"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/group-analytics"
+    to = "/user-guides/group-analytics"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides"
+    to = "/user-guides"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/insights"
+    to = "/user-guides/insights"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/lifecycle"
+    to = "/user-guides/lifecycle"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/organizations-and-projects"
+    to = "/user-guides/organizations-and-projects"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/sessions"
+    to = "/user-guides/sessions"
+
+
+# Added: 2022-06-17
+[[redirects]]
+    from = "/docs/user-guides/sso"
+    to = "/user-guides/sso"
