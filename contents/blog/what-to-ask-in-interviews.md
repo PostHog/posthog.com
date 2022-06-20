@@ -99,7 +99,7 @@ You can't guarantee that plans won't change, but this gives you some indication 
 
 "What's the company strategy and why?"
 
-You are looking for a simple answer - otherwise the company and the product will end up a bit of a mess.
+You are looking for a simple answer - otherwise the company and the product will end up a bit of a mess. At PostHog, we define strategy as simply "Nail X", where X is the thing we need to nail. We're currently focused on [Nail Self Serve](/blog/changing-to-self-serve).
 
 "How do you and the other founders avoid falling out?"
 
