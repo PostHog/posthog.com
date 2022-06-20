@@ -558,6 +558,10 @@
                                 {
                                     "name": "Other platforms",
                                     "url": "/docs/self-host/deploy/other"
+                                },
+                                {
+                                    "name": "Sizing FAQ",
+                                    "url": "/docs/self-host/deploy/deployment-sizing-faq"
                                 }
                             ]
                         },
