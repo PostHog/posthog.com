@@ -33,7 +33,7 @@ This is the single most important thing a company can do to survive and grow.
 "What's your revenue? What was it a year ago?"
 "How many daily active users do you have?"
 
-It's ok if these answers show you the founder doesn't have product-market fit. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
+It's ok if these answers show you the founder doesn't have [product market fit[(/blog/how-to-product-market-fit]. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
 
 Early stage founders are (or should be) super-mega-extra-desperately keen to have product-market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. 
 
