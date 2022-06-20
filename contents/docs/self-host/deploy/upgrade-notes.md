@@ -288,3 +288,24 @@ The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/r
 22.0.0 upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This update brings several improvements to the overall service. For more info, you can look at the [upstream changelog](https://clickhouse.com/docs/en/whats-new/changelog/#clickhouse-release-v223-lts-2022-03-17).
 
 Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
+
+### Upgrading from 22.x.x
+23.0.0 changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
+
+If you are not overriding the `clickhouse.serviceType` **there's nothing you need to do**. If you are overriding it using either `LoadBalancer` or `NodePort` please remember to keep your installation secure by:
+
+- deploying your Kubernetes nodes in private subnet(s) or restrict access to those via firewall rules
+- restrict network access to the load balancer
+- add authentication to the load balancer
+- configure TLS for ClickHouse
+- provide a unique ClickHouse login by overriding the `clickhouse.user` and `clickhouse.password` values
+- restrict access to the ClickHouse cluster, ClickHouse offers settings for
+restricting the ips/hosts that can access the cluster. See the
+[`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks) setting for details. We expose this setting
+via the Helm Chart as `clickhouse.allowedNetworkIps`
+
+For other suggestions and best practices take a look at our docs:
+- [PostHog chart configuration](/docs/self-host/deploy/configuration)
+- [Securing PostHog](/docs/)
+
+We'd like to thank Alexander Nicholson and the team at TableCheck for sharing their POC with us, which allowed us to quickly reproduce and address this issue.

@@ -6,10 +6,11 @@ showTitle: true
 
 ## How it works
 
-1. Every three months, a couple of weeks before the end of the period, James schedules a meeting with all execs to come up with the company goals.
-2. They will then propose goals for every [small team](../people/team-structure/why-small-teams) by creating PRs against the small team pages.
-3. Each small team can change or propose alternate goals
-4. After the end of the period we'll run an all hands retrospective
+1. Grace runs this process every three months.
+2. A couple of weeks before the end of the period, there is a meeting with all execs to come up with the objectives for each small team.
+3. They will then propose draft key results for every [small team](../people/team-structure/why-small-teams) by creating PRs against the small team pages, and there will be 1/1s with every small team leader to discuss context and to make edits as needed.
+4. Each small team can change or propose alternate key results.
+5. After the end of the period, each team should run a retrospective on their goals, and this should be shared with the rest of the company
 
 ## Why we do this
 

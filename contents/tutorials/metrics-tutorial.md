@@ -1,5 +1,5 @@
 ---
-title: Tracking key B2B product metrics
+title: How to tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
@@ -14,7 +14,7 @@ If you run a B2B business, it is especially important to track group usage of yo
 
 Since usage may vary from company to company in your clients list, digging deeper into how these different teams and businesses use your product is essential to developing a platform that meets the use-case of your core audience well.
 
-As such, this tutorial will walk you through how to track usage of your B2B product, going over key metrics and how you can set up your analytics views to reflect them.
+As such, this tutorial will walk you through how to track [key B2B product metrics](/blog/b2b-saas-product-metrics) in PostHog.
 
 ### Prerequisites
 

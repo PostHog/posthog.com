@@ -25,7 +25,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 > Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/self-host/configure/upgrading-posthog).
 
-**Patch 1.36.1**: This update addresses an issue where some deployments, right after upgrading to 1.36.0, required a restart to fully ingest events again.
+[**Patch 1.36.1**](https://github.com/PostHog/posthog/compare/release-1.36.0...release-1.36.1): This update addresses an issue where some deployments, right after upgrading to 1.36.0, required a restart to fully ingest events again. If you're already on 1.36.0, you only need to update if your instance has problems ingesting events.
 
 ## PostHog 1.36.0 release notes
 
@@ -139,6 +139,8 @@ Version 1.36 also adds hundreds of other improvements and fixes, including...
 -   **Fixed**: Custom series names are included in CSV exports. [#9677](https://github.com/PostHog/posthog/pull/9677)
 -   **Fixed**: Automatic provisioning of PostHog users logging in with SSO has been made more reliable. For instance, users who first logged-in _before_ automatic provisioning was turned on for the organization, will be automatically added to it when they log in again. [#9515](https://github.com/PostHog/posthog/pull/9515)
 -   **Fixed**: The UI again always shows the correct active license. [#9575](https://github.com/PostHog/posthog/pull/9575)
+
+View the commit log in GitHub for a full history of changes: [`release-1.35.0...release-1.36.0`](https://github.com/PostHog/posthog/compare/release-1.35.0...release-1.36.0).
 
 ### Deprecation and removal notices
 

@@ -48,16 +48,16 @@
                     "url": "/handbook/strategy/business-model"
                 },
                 {
+                    "name": "Objectives",
+                    "url": "/handbook/strategy/objectives"
+                },
+                {
                     "name": "Roadmap",
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
                     "name": "Brand",
                     "url": "/handbook/strategy/brand"
-                },
-                {
-                    "name": "Prioritization",
-                    "url": "/handbook/strategy/prioritization"
                 }
             ]
         },
@@ -1273,6 +1273,26 @@
         {
             "name": "App Store",
             "url": "/apps"
+        },
+        {
+            "name": "Variance Connector",
+            "url": "/apps/variance-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/variance-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Engage Connector",
+            "url": "/apps/engage-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/engage-connector/docs"
+                }
+            ]
         },
         {
             "name": "Airbyte Export",
