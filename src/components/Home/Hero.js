@@ -43,36 +43,12 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        The product analytics suite
-                        <br /> <span className="text-red">you can host yourself</span>
+                        The <span className="text-red">open source</span> ProductOps platform
                     </h1>
                     <h2
                         className={heading('subtitle', 'primary', 'my-6 max-w-2xl mx-auto text-primary text-gray-dark')}
                     >
-                        PostHog is the <span className="text-blue">open source</span> platform for your product data,{' '}
-                        <br className="hidden md:block" />
-                        complete with{' '}
-                        <a
-                            href="/docs/integrate/ingest-live-data"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            event pipelines
-                        </a>
-                        ,{' '}
-                        <a
-                            href="/docs/self-host/runbook/clickhouse"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            a data warehouse
-                        </a>
-                        , and an{' '}
-                        <a
-                            href="/docs/api"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            API
-                        </a>
-                        .
+                        All the tools you need. With the modern data stack you want.
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
