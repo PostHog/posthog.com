@@ -19,9 +19,9 @@ It's normal for candidates _not_ to ask harder questions about our company, so t
 
 This isn't desirable. People should be able to reduce the chances they end up in a situation like [this](https://twitter.com/carnage4life/status/1532472869334110208), or [this](https://nypost.com/2022/05/26/twitter-rescinds-job-offer-to-new-hire/).
 
-> Disclaimer: These questions are quite direct, but a company that reacts badly to them may not be a good place to work. There are also a _lot_ of questions here - think of them as themes, and you don't need to ask them all. Prioritize based on what you hear through the process.
+> Disclaimer: These questions are direct, but a company that reacts badly to them may not be a good place to work. There are also a _lot_ of questions here - think of them as themes, and you don't need to ask them all. Prioritize based on what you hear through the process.
 
-If I were job hunting, these are the themes I'd be interested in - it's skewed towards (i) startup / early growth software companies, (ii) engineers and (iii) interviews with founders (this is what I know!), but the concepts feel like they'd be useful beyond that.
+If I were job hunting, these are the themes I'd be interested in - it's skewed towards (i) startup / early growth software companies, (ii) engineers and (iii) interviews with founders (I am one), but the concepts feel like they'd be useful beyond that.
 
 ## Does the company have product-market fit?
 
@@ -110,8 +110,6 @@ One of the most common ways for an early stage company to die is that the founde
 
 This will reveal perhaps what the hardest challenge will be, and where you could add the most value if you joined 
 
-## Do I want to work here?
+## Be reasonable, but buyer beware
 
-"How long does setting up the dev environment take?"
-
-A classic.
+Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed - just don't shy away from asking to see if they're headed in the right direction.
