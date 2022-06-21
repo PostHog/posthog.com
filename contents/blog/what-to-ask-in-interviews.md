@@ -1,6 +1,6 @@
 ---
-date: 2022-06-08
-title: The really important job interview questions engineers should ask, but don't
+date: 2022-06-22
+title: "The really important job interview questions engineers should ask, but don't"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
