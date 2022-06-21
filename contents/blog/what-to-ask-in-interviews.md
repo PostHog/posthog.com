@@ -71,6 +71,10 @@ Avoid:
 * Companies that assume wild increases in revenue to survive, within a short timeframe
 * Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
+ <NewsletterForm
+compact
+/>
+
 ## What's the culture like?
 
 "What are the company values, and why? Can you give me some specific ways you've followed them?"
