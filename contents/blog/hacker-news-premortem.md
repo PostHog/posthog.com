@@ -11,7 +11,7 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-Hacker News is a place for developers to discuss tech news. Getting to the front page of links is one of the most [stressful but valuable](https://twitter.com/james406/status/1506293206643785728) things that can happen to developer focussed startup.
+Hacker News is a place for developers to discuss tech news. Getting to the front page of links is one of the most [stressful but valuable](https://twitter.com/james406/status/1506293206643785728) things that can happen to developer focused startup.
 
 The New Yorker [sums it up](https://www.newyorker.com/news/letter-from-silicon-valley/the-lonely-work-of-moderating-hacker-news) better than I can:
 
