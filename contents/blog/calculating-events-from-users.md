@@ -73,7 +73,7 @@ We then did a deeper analysis of the different types of customers and came up wi
     	<tr>
 			<td className="w-3/12"><strong>Product</strong></td>
         	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
-        	<td className="w-3/12 text-center"><strong>Monthly<br>events<br>per MAU</strong></td>
+        	<td className="w-3/12 text-center"><strong>Monthly events per MAU</strong></td>
         	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
         	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
     	</tr>
