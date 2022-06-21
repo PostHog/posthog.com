@@ -74,7 +74,8 @@ Avoid:
 
 "What are the company values, and why? Can you give me some specific ways you've followed them?"
 "Who decides what to build?"
-"What do you look for when you hire?"
+"How does a typical workday look?"
+"What are the things or behaviors that would cause a person in this role to fail?"
 
 We get the above a bit more often, they're good questions.
 
@@ -83,17 +84,17 @@ We get the above a bit more often, they're good questions.
 "Can you tell me about the team I'd be working with most closely?"
 "How do you compensate the team?"
 "How do you attract and retain really strong hires?"
+"Do you share board slides with the team?"
 
-You are trying to understand if they view engineering as a cost center (aka higher propensity you'll be miserable there!) or not.
+If you want to learn in this role - do you believe this company is able to attract people who are as good as or better than you?
 
-Beyond that, if you want to learn in this role - do you believe this company is able to attract people who are as good as or better than you?
+You are trying to understand if they view engineering as a cost center (aka higher propensity you'll be miserable there!) or not. Thoughtful answers to how to hire and pay people indicate this is prioritized. Sharing more information rather than less shows trust and partnership with employees.
 
 ## What's in store in the future?
 
 "What motivates you?"
 "What are you most proud of so far?"
 "Do you plan to sell the company?"
-"Do you believe in secondaries? Would you offer these to your team, if possible?"
 
 You can't guarantee that plans won't change, but this gives you some indication of what is in store and it helps you understand the founders' motivation better.
 
