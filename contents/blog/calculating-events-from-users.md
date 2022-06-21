@@ -1,5 +1,5 @@
 ---
-date: 2022-06-17
+date: 2022-06-21
 title: The two ways to estimate your monthly event usage
 rootPage: /blog
 sidebar: Blog
@@ -29,7 +29,7 @@ We settled on event-based pricing for two main reasons:
 
 Although point one is mainly focused on our own Cloud, we wanted pricing parity between our Cloud and self-hosted editions so that it was easy to migrate between the two. Hence event-based pricing for all editions.
 
-## Ok, that makes sense, but how do I estimate my event count?
+## Ok, that makes sense, but how do I calculate my event count?
 
 There are two ways to estimate your event count. One takes a bit of time but will give you a very accurate estimate; the second is much quicker but is more of a guestimate.
 
