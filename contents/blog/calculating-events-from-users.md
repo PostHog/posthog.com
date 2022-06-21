@@ -76,6 +76,7 @@ We then did a deeper analysis of the different types of customers and came up wi
         	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
     	</tr>
 	</thead>
+	<tbody>
 		  <tr>
 			<td>PostHog</td>
         	<td className="text-center">B2B</td>
