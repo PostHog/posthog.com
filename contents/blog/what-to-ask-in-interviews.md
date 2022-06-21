@@ -21,7 +21,7 @@ This isn't desirable. People should be able to reduce the chances they end up in
 
 > Disclaimer: These questions are direct, but a company that reacts badly to them may not be a good place to work. There are also a _lot_ of questions here - think of them as themes, and you don't need to ask them all. Prioritize based on what you hear through the process.
 
-If I were job hunting, these are the themes I'd be interested in - it's skewed towards (i) startup / early growth software companies, (ii) engineers and (iii) interviews with founders (I am one), but the concepts feel like they'd be useful beyond that.
+If I were job hunting, these are the themes I'd be interested in – it's skewed towards (i) startup / early growth software companies, (ii) engineers and (iii) interviews with founders (I am one), but the concepts feel like they'd be useful beyond that.
 
 ## Does the company have product-market fit?
 
@@ -35,14 +35,16 @@ This is the single most important thing a company can do to survive and grow.
 
 It's ok if these answers show you the founder doesn't have [product market fit[(/blog/how-to-product-market-fit]. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
 
-Early stage founders are (or should be) super-mega-extra-desperately keen to have product-market fit - it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. 
+Early stage founders are (or should be) super-mega-extra-desperately keen to have product-market fit – it's all that really matters. The ones that will succeed are those that are honest about this (or those that have it already) and are prioritizing it. Many will think or say (intentionally or through self-delusion) that they have it when they don't. 
 
 Low user or revenue numbers and vague answers to the example questions above are a sign that it isn't there. Product-market fit [is _very_ obvious](https://www.ycombinator.com/library/5z-the-real-product-market-fit).
 
 Avoid:
 
-* Founders who aren't spending a ton of time talking and selling to users pre-product-market fit - it's a flag to attempt to outsource/delegate this
-* Companies where you don't understand the product or its benefits - if it can't be explained to you, others will struggle
+* Founders who aren't spending a ton of time talking and selling to users pre-product-market fit – it's a flag to attempt to outsource/delegate this
+
+* Companies where you don't understand the product or its benefits – if it can't be explained to you, others will struggle
+
 * Solutions looking for a problem
 
 If there is no product-market fit, but you think the team could find it, it's very important the company has lots of runway (it'll be hard to raise more money without product-market fit, so time to find it is crucial), doesn't have a huge team (it's harder to make rapid changes in direction with a lot of people), and moves fast (look out for bureaucracy, management, or a team that can't work well with ambiguity).
@@ -55,10 +57,11 @@ This means that the company whilst not profitable, is growing fast enough that i
 
 Avoid:
 
-* Companies that don't know this or don't care about it, given [the current climate](https://techcrunch.com/2022/05/06/the-venture-slowdown-isnt-coming-its-here/) - this may change in an easier fundraising environment for early stage, capital-intense business models
+* Companies that don't know this or don't care about it, given [the current climate](https://techcrunch.com/2022/05/06/the-venture-slowdown-isnt-coming-its-here/) – this may change in an easier fundraising environment for early stage, capital-intense business models
+
 * Companies that you don't believe could get to default alive due to a lack of time and speed to get stuff done
 
-There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates - if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
+There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates – if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
 
 "What's your runway? What assumptions are you making to calculate this? What are your fundraising plans?"
 
@@ -69,6 +72,7 @@ If a company has strong product-market fit _and_ has a ton of traction, a shorte
 Avoid: 
 
 * Companies that assume wild increases in revenue to survive, within a short timeframe
+
 * Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
  <NewsletterForm
@@ -117,7 +121,7 @@ This will reveal perhaps what the hardest challenge will be, and where you could
 
 ## Be reasonable, but buyer beware
 
-Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed - just don't shy away from asking to see if they're headed in the right direction.
+Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed – just don't shy away from asking to see if they're headed in the right direction.
 
 <NewsletterForm
 compact
