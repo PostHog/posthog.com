@@ -39,7 +39,9 @@ The most accurate way to figure out your event count is to take advantage of our
 
 Simply use one of our [libraries](/docs/integrate#libraries) to send your event data to PostHog ([autocapture](/docs/integrate/ingest-live-data#autocapture) is easiest) and check your event usage on the [Billing](https://app.posthog.com/organization/billing) page in the app.
 
-Once you've sent a typical week's worth of data then you can do some multiplication to project your monthly event count. If you get close to the 1 million event limit then you can stop sending events and project forward based on how many days worth of data has already been captured.
+Once you've sent a typical week's worth of data then you can do some multiplication to project your monthly event count. 
+
+If you get close to the 1 million event limit then you can stop sending events and project forward based on how many days worth of data has already been captured.
 
 ### 2. Estimate based on MAU and your product category
 
@@ -63,7 +65,7 @@ For a little more context, we took a look at PostHog Cloud customers to get a be
 
 As a rule of thumb, most fell within the range of 50-100 tracked events per MAU per month. 
 
-We then did a deeper analysis of the different types of customers and came up with the following list of product types and expected events/MAU/month.
+We then did a deeper analysis of the different types of customers and came up with the following list of product types and expected monthly events per MAU.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -71,7 +73,7 @@ We then did a deeper analysis of the different types of customers and came up wi
     	<tr>
 			<td className="w-3/12"><strong>Product</strong></td>
         	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
-        	<td className="w-3/12 text-center"><strong>Events per MAU</strong></td>
+        	<td className="w-3/12 text-center"><strong>Monthly<br>events<br>per MAU</strong></td>
         	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
         	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
     	</tr>
@@ -85,7 +87,7 @@ We then did a deeper analysis of the different types of customers and came up wi
         	<td className="text-center">Web</td>
       	</tr>
 		<tr>
-			<td>Financial Reporting</td>
+			<td>Financial reporting</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">44</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Web</td>
@@ -104,7 +106,7 @@ We then did a deeper analysis of the different types of customers and came up wi
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>     	<td className="text-center">Web</td>
       	</tr>
 		<tr>
-			<td>Speed to text API</td>
+			<td>Speech to text API</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">583</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">API</td>
@@ -143,7 +145,7 @@ We then did a deeper analysis of the different types of customers and came up wi
 </table>
 </div>
 
-As you can see, event count varies wildly across different types of products, but this should help you get closer to an estimated event count
+As you can see, event counts vary wildly across different types of products, but this should help you get closer to an estimated event count
 based on your product and MAU count.
 
 Once you've got this figure you can visit the [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
