@@ -69,7 +69,7 @@ We then did a deeper analysis of the different types of customers and came up wi
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
-		<td className="w-3/12"><strong>Product</strong></td>
+			<td className="w-3/12"><strong>Product</strong></td>
         	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
         	<td className="w-3/12 text-center"><strong>Events per MAU</strong></td>
         	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
@@ -77,75 +77,67 @@ We then did a deeper analysis of the different types of customers and came up wi
     	</tr>
 	</thead>
 	<tbody>
-		  <tr>
+		<tr>
 			<td>PostHog</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">87</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center">Web</td>
-      </tr>
-		  <tr>
+      	</tr>
+		<tr>
 			<td>Financial Reporting</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">44</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">Web</td>
-    </tr>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Web</td>
+    	</tr>
 		<tr>
 			<td>Cloud monitoring</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">22</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">Web</td>
-      </tr>
-		  <tr>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>	
+          	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
 			<td>Document management</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">54</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>       			
-          <td className="text-center">Web</td>
-      </tr>
-		  <tr>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>     	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
 			<td>Speed to text API</td>
         	<td className="text-center">B2B</td>
         	<td className="text-center">583</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">API</td>
-    </tr>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">API</td>
+     	</tr>
 		<tr>
 			<td>Crypto wallet</td>
         	<td className="text-center">B2C</td>
         	<td className="text-center">162</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">Browser extension</td>
-      </tr>
-		  <tr>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Browser extension</td>
+      	</tr>
+		<tr>
 			<td>Meditation app</td>
         	<td className="text-center">B2C</td>
         	<td className="text-center">118</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">Android, iOS</td>
-      </tr>
-		  <tr>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Android, iOS</td>
+      	</tr>
+		<tr>
 			<td>Fashion retail</td>
         	<td className="text-center">B2C</td>
         	<td className="text-center">31</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>         			
-          <td className="text-center">Web</td>
-      </tr>
-		  <tr>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>         <td className="text-center">Web</td>
+      	</tr>
+		<tr>
 			<td>Event booking</td>
         	<td className="text-center">B2C</td>
         	<td className="text-center">8</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
-          <td className="text-center">React Native</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">React Native</td>
     	</tr>
-		  <tr>
+		<tr>
 			<td>Restaurant booking</td>
         	<td className="text-center">B2B2C</td>
         	<td className="text-center">54</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        			
-          <td className="text-center">Web, Mobile</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        <td className="text-center">Web, Mobile</td>
     	</tr>	
 	</tbody>
 </table>
