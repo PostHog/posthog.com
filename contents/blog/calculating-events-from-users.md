@@ -64,6 +64,7 @@ For a little more context, we took a look at PostHog Cloud customers to get a be
 As a rule of thumb, most fell within the range of 50-100 tracked events per MAU per month. 
 
 We then did a deeper analysis of the different types of customers and came up with the following list of product types and expected events/MAU/month.
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
