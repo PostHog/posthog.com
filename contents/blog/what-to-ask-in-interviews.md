@@ -1,6 +1,6 @@
 ---
 date: 2022-06-08
-title: Really important interview questions that more engineers should ask
+title: The really important job interview questions engineers should ask, but don't
 rootPage: /blog
 sidebar: Blog
 showTitle: true
