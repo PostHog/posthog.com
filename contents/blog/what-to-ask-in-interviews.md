@@ -118,3 +118,7 @@ This will reveal perhaps what the hardest challenge will be, and where you could
 ## Be reasonable, but buyer beware
 
 Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed - just don't shy away from asking to see if they're headed in the right direction.
+
+<NewsletterForm
+compact
+/>
