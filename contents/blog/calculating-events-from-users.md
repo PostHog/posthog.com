@@ -69,7 +69,7 @@ We then did a deeper analysis of the different types of customers and came up wi
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
-            <td className="w-3/12"><strong>Product</td>
+		<td className="w-3/12"><strong>Product</strong></td>
         	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
         	<td className="w-3/12 text-center"><strong>Events per MAU</strong></td>
         	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
