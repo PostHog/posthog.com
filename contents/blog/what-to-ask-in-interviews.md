@@ -60,7 +60,7 @@ Avoid:
 
 There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates - if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
 
-"What's your runway? What assumptions are you making to calculate this?"
+"What's your runway? What assumptions are you making to calculate this? What are your fundraising plans?"
 
 If a company doesn't have product-market fit, spending should be minimal so there's as much time as possible to find it. Spending a lot and having a big team just makes it harder to change direction rapidly.
 
@@ -69,6 +69,7 @@ If a company has strong product-market fit _and_ has a ton of traction, a shorte
 Avoid: 
 
 * Companies that assume wild increases in revenue to survive, within a short timeframe
+* Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
 ## What's the culture like?
 
