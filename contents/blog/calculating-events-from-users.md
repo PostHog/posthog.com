@@ -64,20 +64,90 @@ For a little more context, we took a look at PostHog Cloud customers to get a be
 As a rule of thumb, most fell within the range of 50-100 tracked events per MAU per month. 
 
 We then did a deeper analysis of the different types of customers and came up with the following list of product types and expected events/MAU/month.
-
-| Product             | B2B/B2C | Events/MAU | Autocapture | Platforms |
-|---------------------|---------|------------| ----------- | --------- |
-| PostHog             | B2B     | 87         | Yes | Web |
-| Financial Reporting | B2B     | 44         | No | Web |
-| Cloud Monitoring    | B2B     | 22         | No | Web |
-| Document Management | B2B     | 54         | Yes | Web |
-| Speech to Text API | B2B     | 583        | No | API |
-| Crypto Wallet | B2C     | 162        | No | Browser Extension |
-| Meditation App | B2C     | 118        | No | Android, iOS |
-| Banking | B2C     | 61         | Yes | Web |
-| Fashion Retail | B2C | 31         | Yes | Web |
-| Event Booking | B2C | 8 | No | React Native |
-| Restaurant Booking | B2B2C | 54 | Yes | Web, Mobile |
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+            <td className="w-3/12"><strong>Product</td>
+        	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
+        	<td className="w-3/12 text-center"><strong>Events per MAU</strong></td>
+        	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
+        	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
+    	</tr>
+	</thead>
+		  <tr>
+			<td>PostHog</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">87</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center">Web</td>
+      </tr>
+		  <tr>
+			<td>Financial Reporting</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">44</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">Web</td>
+    </tr>
+		<tr>
+			<td>Cloud monitoring</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">22</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">Web</td>
+      </tr>
+		  <tr>
+			<td>Document management</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>       			
+          <td className="text-center">Web</td>
+      </tr>
+		  <tr>
+			<td>Speed to text API</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">583</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">API</td>
+    </tr>
+		<tr>
+			<td>Crypto wallet</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">162</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">Browser extension</td>
+      </tr>
+		  <tr>
+			<td>Meditation app</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">118</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">Android, iOS</td>
+      </tr>
+		  <tr>
+			<td>Fashion retail</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">31</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>         			
+          <td className="text-center">Web</td>
+      </tr>
+		  <tr>
+			<td>Event booking</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">8</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        			
+          <td className="text-center">React Native</td>
+    	</tr>
+		  <tr>
+			<td>Restaurant booking</td>
+        	<td className="text-center">B2B2C</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        			
+          <td className="text-center">Web, Mobile</td>
+    	</tr>	
+	</tbody>
+</table>
+</div>
 
 As you can see, event count varies wildly across different types of products, but this should help you get closer to an estimated event count
 based on your product and MAU count.
