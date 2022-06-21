@@ -1,15 +1,14 @@
 import { TrackedCTA } from 'components/CallToAction/index.js'
-import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
 import {
-    SCALE_MINIMUM_PRICING,
-    ENTERPRISE_MINIMUM_PRICING,
-    CLOUD_MINIMUM_PRICING,
     CLOUD_ENTERPRISE_MINIMUM_PRICING,
+    CLOUD_MINIMUM_PRICING,
+    ENTERPRISE_MINIMUM_PRICING,
+    features,
+    SCALE_MINIMUM_PRICING,
 } from '../constants'
 import { Features, Plan, Price, Section } from './Plan'
-import { features } from '../constants'
 
 export const OpenSource = () => {
     return (
@@ -199,7 +198,11 @@ export const Cloud = ({ setOpen, hideActions, hideBadge, hideCalculator, classNa
                             )}
                         </div>
                     </Section>
-                    <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
+                    <TrackedCTA
+                        to="https://app.posthog.com/signup"
+                        className="my-7"
+                        event={{ name: 'select edition: clicked get started', type: 'cloud' }}
+                    >
                         Get started
                     </TrackedCTA>
                     <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
