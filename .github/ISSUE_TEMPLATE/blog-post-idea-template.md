@@ -1,5 +1,5 @@
 ---
-name: {Insert content type}: New content idea template
+name: [Insert content type]: New content idea template
 about: Share your idea for a new piece of content
 title: "{title}"
 labels: content
