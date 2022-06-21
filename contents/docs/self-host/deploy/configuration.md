@@ -46,7 +46,7 @@ The default configuration is geared towards minimizing costs. Here are example e
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -55,12 +55,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 20Gi
+    size: 30Gi
 
 kafka:
   persistence:
-    size: 20Gi
-  logRetentionBytes: _15_000_000_000
+    size: 60Gi
+  logRetentionBytes: _45_000_000_000
 
 # Add additional replicas for the stateless services
 events:
@@ -88,7 +88,7 @@ worker:
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -97,12 +97,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 60Gi
+    size: 100Gi
 
 kafka:
   persistence:
-    size: 30Gi
-  logRetentionBytes: _22_000_000_000
+    size: 200Gi
+  logRetentionBytes: _150_000_000_000
 
 # Enable horizontal pod autoscaling for stateless services
 events:
