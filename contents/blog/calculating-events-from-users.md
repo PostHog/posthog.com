@@ -1,6 +1,6 @@
 ---
 date: 2022-06-21
-title: The two ways to estimate your monthly event usage
+title: "The two ways to estimate your monthly event usage"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
