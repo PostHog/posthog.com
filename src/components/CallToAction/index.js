@@ -29,18 +29,16 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    bg-tan
-    bg-opacity-75
+    bg-tan/75
     dark:bg-primary
     text-primary
     text-opacity-80
     hover:text-opacity-100
     dark:text-primary-dark
     hover:text-primary
-    border-opacity-10
     hover:border-opacity-25
     active:border-opacity-50
-    border-primary
+    border-primary/10
     dark:border-primary-dark
 `
 

@@ -21,7 +21,7 @@ export const NewsletterForm = ({
 
     return compact ? (
         <div className="w-full mx-auto my-12 text-center">
-            <div className="inline-flex mx-auto h-full p-1 rounded-xl border-2 border-opacity-25 border-primary dark:border-primary-dark">
+            <div className="inline-flex mx-auto h-full p-1 rounded-xl border-2 border-primary/25 dark:border-primary-dark">
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
                     <span className="mt-2 lg:mt-0 font-bold flex-grow text-lg md:text-sm lg:text-left">
@@ -39,7 +39,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full p-2 bg-transparent border-b-2 border-opacity-25 border-primary dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
+                            className="block w-full p-2 bg-transparent border-b-2 border-primary/25 dark:border-primary-dark mt-2 lg:mt-0 lg:mx-2 text-lg md:text-sm lg:text-left outline-none"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"

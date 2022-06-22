@@ -29,7 +29,7 @@ const FeaturedCustomer = ({ customer }) => {
             url={slug}
             className="max-w-[1140px] -mb-6 md:-mb-12 relative mx-auto flex flex-row-reverse space-x-4 space-x-reverse justify-between pt-16"
         >
-            <div className="max-w-full md:max-w-[364px] w-full absolute md:relative inset-0 md:before:bg-transparent before:absolute before:inset-0 before:w-full before:h-full before:bg-white before:bg-opacity-80 before:z-10">
+            <div className="max-w-full md:max-w-[364px] w-full absolute md:relative inset-0 md:before:bg-transparent before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80 before:z-10">
                 <img
                     className="object-cover md:object-contain absolute w-full h-full object-bottom"
                     src={featuredImage?.publicURL}
@@ -89,7 +89,7 @@ export default function Customers() {
                             return (
                                 <li key={index}>
                                     <Card className="inline-block relative h-full" url={slug}>
-                                        <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white before:bg-opacity-80">
+                                        <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80">
                                             <img
                                                 src={featuredImage?.publicURL}
                                                 className="w-full h-full object-cover"
