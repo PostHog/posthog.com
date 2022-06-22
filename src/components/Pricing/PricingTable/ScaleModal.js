@@ -24,7 +24,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
     })
     return (
         <Modal open={open} setOpen={setOpen}>
-            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
+            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 -translate-x-1/2">
                 <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
                     <div className="flex flex-col md:flex-row md:space-x-14 sm:space-y-6 md:space-y-0 items-start">
                         <Scale
