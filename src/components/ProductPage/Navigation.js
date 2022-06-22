@@ -38,7 +38,7 @@ export default function Navigation() {
                 offset={-90}
                 className="list-none m-0 p-0 inline-flex font-semibold bg-white dark:bg-gray-accent-dark rounded shadow-md overflow-hidden"
                 items={features.map(({ url }) => url)}
-                currentClassName="bg-gray-accent-light dark:bg-primary dark:bg-opacity-80"
+                currentClassName="bg-gray-accent-light dark:bg-primary/80"
             >
                 {features.map(({ title, icon, url }) => (
                     <li key={title}>
@@ -46,7 +46,7 @@ export default function Navigation() {
                             offset={-110}
                             smooth
                             to={url}
-                            className="text-primary dark:text-white hover:text-primary hover:bg-gray-accent-light hover:bg-opacity-50 dark:hover:bg-gray-accent dark:hover:bg-opacity-20 dark:hover:text-white opacity-80 flex h-full items-center space-x-2 px-4 py-3 md:px-6 md:py-3"
+                            className="text-primary dark:text-white hover:text-primary hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent/20 dark:hover:text-white opacity-80 flex h-full items-center space-x-2 px-4 py-3 md:px-6 md:py-3"
                         >
                             {icon}
                             <span className="hidden lg:inline-block text-[14px]">{title}</span>
