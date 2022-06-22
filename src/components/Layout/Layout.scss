@@ -501,9 +501,9 @@ li > ol {
     margin-top: calc(1.45rem / 2);
 }
 li > ul {
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
-    padding-bottom: 1rem;
+    margin-bottom: calc(1.45rem / 4);
+    margin-top: calc(1.45rem / 4);
+    padding-bottom: 0.5rem;
 }
 blockquote *:last-child {
     margin-bottom: 0;
