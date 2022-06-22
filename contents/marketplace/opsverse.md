@@ -6,7 +6,7 @@ hideLastUpdated: true
 
 **[← Back to Marketplace](/marketplace)**
 
-<img src="/images/marketplace/opsverse.png" alt="OpsVerse" width="250" style={{ float: 'right', margin: '0 0 1rem 1rem'}} />
+<img src="/images/marketplace/opsverse_icon.png" alt="OpsVerse" width="175" style={{ float: 'right', margin: '0 0 1rem 1rem'}} />
 
 OpsVerse provides fully managed DevOps tools that can run in any cloud including in your own cloud account.
 
