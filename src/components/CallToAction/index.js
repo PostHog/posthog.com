@@ -8,18 +8,17 @@ const sizes = {
     xs: 'text-[13px] font-semibold px-2 py-[.2rem] border-2',
     sm: 'text-small font-semibold px-3 py-1 border-2',
     md: 'text-small font-semibold px-5 py-2 border-2',
-    lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
+    lg: 'text-base font-bold px-5 py-2 ',
 }
 
 const primary = cntl`
-    bg-primary
-    dark:bg-primary-dark
+    bg-red
+    dark:bg-red
     text-white
-    dark:text-primary
+    text-primary
     hover:text-white
     hover:dark:text-primary
-    border-primary
-    dark:primary-dark
+    border-red
 `
 
 const secondary = cntl`
@@ -54,7 +53,7 @@ const buttonTypes = {
 const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
-    rounded-full
+    rounded-sm
     inline-block
     cta
     w-${width}
