@@ -13,7 +13,7 @@ author: ["simon-fisher"]
 
 When talking through our editions and pricing options with potential customers I'm often asked "How can I estimate my event count?"
 
-If you aren't already using an analytics tool, or it doesn't readily give you a count of tracked events, it can be quite tricky to figure out how much adopting an event-based platform like PostHog is going to cost you.
+If you're not already using an analytics tool, or it doesn't readily give you a count of tracked events, it can be quite tricky to figure out how much adopting an event-based platform like PostHog is going to cost you.
 
 This guide explains why we price by event and offers some tips for estimating your usage.
 
