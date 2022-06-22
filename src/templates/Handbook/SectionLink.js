@@ -4,7 +4,7 @@ import { CircleArrow } from 'components/Icons/Icons'
 
 export default function SectionLink({ link, previous, className }) {
     const linkClasses = previous ? 'flex-row-reverse space-x-reverse' : 'flex-row'
-    const iconClasses = previous ? 'transform rotate-180' : ''
+    const iconClasses = previous ? 'rotate-180' : ''
     return (
         <div className={className}>
             {link && (
