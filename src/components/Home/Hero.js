@@ -24,10 +24,10 @@ export const FeatureStrip = ({ className = '' }) => {
 
 const Feature = ({ title, icon, url }) => {
     return (
-        <li className="w-40 border-dashed border-gray-accent-light p-1 h-24 border-l last:border-r">
+        <li className="w-40 border-dashed border-gray-accent-light p-1 h-20 border-l last:border-r">
             <a
                 href={url}
-                className="flex flex-col py-4 px-2 h-full space-y-1 font-semibold items-center justify-center text-black hover:text-black rounded hover:bg-gray-accent-light"
+                className="flex flex-col py-4 px-2 h-full space-y-2 font-semibold items-center justify-center text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
                 <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
