@@ -51,8 +51,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
 
-<br />
-
 #### App West
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
@@ -60,8 +58,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
-
-<br />
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
@@ -71,33 +67,24 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 
-<br />
-
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
-
-<br />
 
 ### [Website and Docs](website-docs)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
 - [Eli Kinsey](/handbook/company/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
-<br />
-
 ### [People & Operations](people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Grace McKenzie](/handbook/company/team#grace-mckenzie-operations-manager) (Operations Manager)
 - Coua Phang (Tech Talent Partner)
 
-<br />
-
 ### [Customer Success](customer-success)
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
 - [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
-
 
 ## Organization changes
 
