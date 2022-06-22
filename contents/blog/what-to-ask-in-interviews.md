@@ -27,11 +27,11 @@ If I were job hunting, these are the themes I'd be interested in – it's skewed
 
 This is the single most important thing a company can do to survive and grow.
 
-"Do you ever question if you have product-market fit?"
-"When did you reach product-market fit? How did you know?"
-"What do you need to do to get to product-market fit?"
-"What's your revenue? What was it a year ago?"
-"How many daily active users do you have?"
+- "Do you ever question if you have product-market fit?"
+- "When did you reach product-market fit? How did you know?"
+- "What do you need to do to get to product-market fit?"
+- "What's your revenue? What was it a year ago?"
+- "How many daily active users do you have?"
 
 It's ok if these answers show you the founder doesn't have [product market fit](/blog/how-to-product-market-fit]. In this case, figure out if they will get to a yes. Unless you want to join a sinking ship, of course!
 
@@ -51,7 +51,7 @@ If there is no product-market fit, but you think the team could find it, it's ve
 
 ## How much runway does the company have? Does their spending look within reason?
 
-"Are you [default alive](http://www.paulgraham.com/aord.html)?"
+- "Are you [default alive](http://www.paulgraham.com/aord.html)?"
 
 This means that the company whilst not profitable, is growing fast enough that it will become profitable ahead of running out of money.
 
@@ -63,7 +63,9 @@ Avoid:
 
 There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates – if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
 
-"What's your runway? What assumptions are you making to calculate this? What are your fundraising plans?"
+- "What's your runway?" 
+- "What assumptions are you making to calculate this?" 
+- "What are your fundraising plans?"
 
 If a company doesn't have product-market fit, spending should be minimal so there's as much time as possible to find it. Spending a lot and having a big team just makes it harder to change direction rapidly.
 
@@ -81,19 +83,19 @@ compact
 
 ## What's the culture like?
 
-"What are the company values, and why? Can you give me some specific ways you've followed them?"
-"Who decides what to build?"
-"How does a typical workday look?"
-"What are the things or behaviors that would cause a person in this role to fail?"
+- "What are the company values, and why? Can you give me some specific ways you've followed them?"
+- "Who decides what to build?"
+- "How does a typical workday look?"
+- "What are the things or behaviors that would cause a person in this role to fail?"
 
 We get the above a bit more often, they're good questions.
 
 ## How strong is the team?
 
-"Can you tell me about the team I'd be working with most closely?"
-"How do you compensate the team?"
-"How do you attract and retain really strong hires?"
-"Do you share board slides with the team?"
+- "Can you tell me about the team I'd be working with most closely?"
+- "How do you compensate the team?"
+- "How do you attract and retain really strong hires?"
+- "Do you share board slides with the team?"
 
 If you want to learn in this role - do you believe this company is able to attract people who are as good as or better than you?
 
@@ -101,21 +103,21 @@ You are trying to understand if they view engineering as a cost center (aka high
 
 ## What's in store in the future?
 
-"What motivates you?"
-"What are you most proud of so far?"
-"Do you plan to sell the company?"
+- "What motivates you?"
+- "What are you most proud of so far?"
+- "Do you plan to sell the company?"
 
 You can't guarantee that plans won't change, but this gives you some indication of what is in store and it helps you understand the founders' motivation better.
 
-"What's the company strategy and why?"
+- "What's the company strategy and why?"
 
 You are looking for a simple answer - otherwise the company and the product will end up a bit of a mess. At PostHog, we define strategy as simply "Nail X", where X is the thing we need to nail. We're currently focused on [Nail Self Serve](/blog/changing-to-self-serve).
 
-"How do you and the other founders avoid falling out?"
+- "How do you and the other founders avoid falling out?"
 
 One of the most common ways for an early stage company to die is that the founders break up. Hopefully they've put some proactive thought into their relationship.
 
-"What keeps you up at night?"
+- "What keeps you up at night?"
 
 This will reveal perhaps what the hardest challenge will be, and where you could add the most value if you joined 
 
