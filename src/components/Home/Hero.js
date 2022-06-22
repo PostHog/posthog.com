@@ -44,7 +44,7 @@ export default function Hero() {
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
                         The product analytics suite
-                        <br /> <span className="text-red">you can host yourself</span>
+                        <br /> <span className="text-red">that killed Amplitude</span>
                     </h1>
                     <h2
                         className={heading('subtitle', 'primary', 'my-6 max-w-2xl mx-auto text-primary text-gray-dark')}
