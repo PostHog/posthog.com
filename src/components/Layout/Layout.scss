@@ -264,7 +264,7 @@ h6 {
     text-rendering: optimizeLegibility;
 
     a {
-        font-variation-settings: 'wght' 800; // override ant
+        font-variation-settings: 'wght' 800 !important; // override ant
     }
 
     code {
