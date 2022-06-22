@@ -64,22 +64,6 @@ export default function Hero() {
                     <FeatureStrip />
                 </div>
             </div>
-            <div className="w-full mt-8 md:mt-20 xl:mt-0 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
-                <div className="max-w-screen-2xl mx-auto w-full relative mt-12 md:mt-0">
-                    <span className="absolute bottom-0 xl:-bottom-16 right-0 overflow-x-hidden 2xl:overflow-x-visible">
-                        <StaticImage
-                            objectPosition="bottom"
-                            loading="eager"
-                            placeholder="none"
-                            width={400}
-                            imgClassName="h-auto"
-                            className="h-full max-w-[200px] md:max-w-[300px] xl:max-w-none mr-0 md:mr-0"
-                            objectFit="contain"
-                            src="./images/hero-right.png"
-                        />
-                    </span>
-                </div>
-            </div>
         </section>
     )
 }
