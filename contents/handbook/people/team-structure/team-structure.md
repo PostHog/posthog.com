@@ -7,33 +7,33 @@ hideAnchor: true
 
 ## Reporting structure
 
-- James Hawkins, CEO & Co-founder
-  - Tim Glaser, CTO & Co-founder
-    - Marcus Hyett, VP of Product
+- **James Hawkins, CEO & Co-founder**
+  - **Tim Glaser, CTO & Co-founder**
+    - **Marcus Hyett, VP of Product**
       - Joe Martin, Product Marketer
-    - Marius Andra, Full Stack Engineer
+    - **Marius Andra, Full Stack Engineer**
       - Alex Kim, Full Stack Engineer
       - Michael Matloka, Full Stack Engineer
       - Rick Marron, Full Stack Engineer
       - Paul D'Ambra, Full Stack Engineer
-    - James Greenhill, Data/Infra engineer
+    - **James Greenhill, Data/Infra engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Yakko Majuri, Full Stack Engineer
       - Tiina Turban, Full Stack Engineer
-    - Eric Duong, Full Stack Engineer
+    - **Eric Duong, Full Stack Engineer**
       - Neil Kakkar, Full Stack Engineer
       - Li Yi Yu, Full Stack Engineer
     - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
-  - Charles Cook, VP of Operations & Marketing
+  - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
     - Coua Phang, Tech Talent Partner
-  - Cory Watilo, Lead Designer
+  - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
-    - Eli Kinsey, Frontend Engineer
+    - Eli Kinsey, Front End Engineer
     - Chris Clark, Product Designer
-  - Simon Fisher, Customer Success Lead
+  - **Simon Fisher, Customer Success Lead**
     - Cameron DeLeone, Customer Success Manager
 
 ## Small teams
