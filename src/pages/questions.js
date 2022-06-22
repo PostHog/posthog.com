@@ -24,7 +24,7 @@ const TopLink = ({ title, description, link, icon }) => {
         <li className="w-full">
             <a
                 href={link}
-                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent dark:hover:bg-gray-accent-dark/20 px-4 py-5 h-full"
+                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent/25 dark:hover:bg-gray-accent/10 px-4 py-5 h-full"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
                 <h3 className="font-bold text-base mb-1">{title}</h3>
@@ -39,7 +39,7 @@ const Guide = ({ title, link, icon }) => {
         <li className="border-b border-dashed border-gray first:border-l">
             <Link
                 to={link}
-                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark/20 opacity-80 hover:opacity-100 p-4 space-x-2"
+                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent/10 opacity-80 hover:opacity-100 p-4 space-x-2"
             >
                 <Icon className="w-4 h-4 text-gray" name={icon} />
                 <h3 className="font-bold text-sm mb-0">{title}</h3>
