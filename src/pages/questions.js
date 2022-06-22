@@ -1,4 +1,5 @@
 import { DocSearchModal } from '@docsearch/react'
+import { Router } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { CodeBlock } from 'components/CodeBlock'
@@ -7,11 +8,11 @@ import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
+import QuestionPage from 'components/Question'
 import { SEO } from 'components/seo'
 import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
-import { graphql } from 'gatsby'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
@@ -172,11 +173,7 @@ const Question = ({ question }) => {
     )
 }
 
-export default function FAQ({
-    data: {
-        questions: { nodes },
-    },
-}) {
+function FAQ() {
     return (
         <Layout>
             <SEO title={'Questions - PostHog'} />
@@ -311,38 +308,15 @@ export default function FAQ({
     )
 }
 
-export const query = graphql`
-    query AllQuestionsQuery {
-        questions: allQuestion(sort: { fields: childReply___created_at, order: DESC }, limit: 20) {
-            nodes {
-                id
-                childrenReply {
-                    id
-                    subject
-                    name
-                    ts: created_at(difference: "days")
-                    childMdx {
-                        body
-                        excerpt(pruneLength: 400)
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 20, height: 20)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 20, height: 20)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+function IndividualQuestion() {
+    return <p>TEST</p>
+}
+
+export default function Questions() {
+    return (
+        <Router>
+            <FAQ path="/questions" />
+            <QuestionPage path="/questions/:permalink" />
+        </Router>
+    )
+}
