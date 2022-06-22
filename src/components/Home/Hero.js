@@ -6,9 +6,9 @@ import Icon from './Icon'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
-        <div className="text-center mt-0 mb-4 border-gray-accent border-t border-b">
+        <div className="text-center mt-0 mb-4 border-gray-accent-light border-dashed border-t border-b">
             <ul
-                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-7 justify-start gap-y-0 md:gap-y-4 md:gap-x-1 ${className}`}
+                className={`list-none m-0 p-0 inline-grid mx-auto grid-cols-3 md:grid-cols-7 justify-start gap-y-0 md:gap-y-4 ${className}`}
             >
                 <Feature icon="analytics" title="Product analytics" url="/product/#product-analytics" />
                 <Feature icon="session-recording" title="Session recording" url="/product/session-recording" />
@@ -24,10 +24,10 @@ export const FeatureStrip = ({ className = '' }) => {
 
 const Feature = ({ title, icon, url }) => {
     return (
-        <li className="w-40 border-dashed border-gray-accent border-l last:border-r">
+        <li className="w-40 border-dashed border-gray-accent-light p-1 h-24 border-l last:border-r">
             <a
                 href={url}
-                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-gray-accent-light"
+                className="flex flex-col py-4 px-2 h-full space-y-1 font-semibold items-center justify-center text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
                 <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
@@ -40,7 +40,7 @@ export default function Hero() {
     return (
         <section className="flex border-dashed flex-col justify-center items-center">
             <div className="relative w-full z-10">
-                <div className={section('z-10 relative')}>
+                <div className={section('z-10 relative !mb-12')}>
                     <h1 className={heading()}>
                         The <span className="text-red">open source</span> ProductOps platform
                     </h1>
@@ -58,11 +58,11 @@ export default function Hero() {
                             Schedule a demo
                         </CallToAction>
                     </div>
-
-                    <br />
-
-                    <FeatureStrip />
                 </div>
+            </div>
+
+            <div className="relative w-full">
+                <FeatureStrip />
             </div>
         </section>
     )
