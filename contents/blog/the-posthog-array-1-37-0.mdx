@@ -15,6 +15,7 @@ import Cohorts2 from '../images/blog/array/1-37-0-cohorts-2-0.png'
 import DancingHog from '../images/blog/array/1-37-0-dancing-hog.gif'
 import EventPage from '../images/blog/array/1-37-0-event-page.png'
 import ConfigurableColumns from '../images/blog/array/1-37-0-configurable-columns.png'
+import APICompression from '../images/blog/array/1-37-0-compression.png'
 
 Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](/newsletter), which we send once every two weeks!
 
@@ -92,7 +93,9 @@ On the live events page, you can now save the custom event columns that you want
 
 ### Improved: Faster response times in the app
 
-Loading insights and recordings just got a little bit faster. We realized that some data payloads were quite big. As a result, the network was slowing things down. To improve this, we added compression to a few of the endpoints in the app. 
+Loading insights and recordings just got a little bit faster. We realized that some data payloads were quite big. As a result, the network was slowing things down. To improve this, we added compression to a few of the endpoints in the app. We see at least 50% smaller responses sent to clients 🚀 
+
+<img src={APICompression} alt="a screenshot showing an API client receiving 308KB instead of 1.4MB of data" style={{ width: 800 }} />
 
 Here's to things being faster. 🍻
 
