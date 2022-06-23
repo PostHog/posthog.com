@@ -53,6 +53,8 @@ Recordings are kept indefinitely by default. You can can set recordings to delet
 
 We're working towards a solution for archiving and preserving recordings data for future reference. You can follow up on this [GitHub issue](https://github.com/PostHog/posthog/issues/2142).
 
+In order to simplify the archival process, since [posthog-js 1.24.0](https://github.com/PostHog/posthog-js/pull/405), recording length is capped at 24 hours. 
+
 ### Further controls
 
 If you want more granular controls, you can choose to enable session recording using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
