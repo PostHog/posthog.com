@@ -1,7 +1,7 @@
 ---
-name: [Insert content type]: New content idea template
+name: New content idea template
 about: Share your idea for a new piece of content
-title: "{title}"
+title: "{Content Type} - {Working title}"
 labels: content
 assignees: andyvan-ph
 
