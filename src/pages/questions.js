@@ -308,15 +308,11 @@ function FAQ() {
     )
 }
 
-function IndividualQuestion() {
-    return <p>TEST</p>
-}
-
 export default function Questions() {
     return (
-        <Router>
-            <FAQ path="/questions" />
-            <QuestionPage path="/questions/:permalink" />
+        <Router basepath="/questions">
+            <QuestionPage key="question" path="/:permalink" />
+            <FAQ key="faq" path="/" />
         </Router>
     )
 }
