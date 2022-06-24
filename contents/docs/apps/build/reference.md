@@ -250,7 +250,6 @@ The maximum number of retries is documented with each function, as it might diff
 As of PostHog 1.37+, the following functions are _retriable_:
 - `setupPlugin`
 - `onEvent`
-- `onAction`
 - `onSnapshot`
 - `exportEvents`
 
