@@ -8,8 +8,8 @@
   status = 200
 
 [[redirects]]
-  from = "/questions/*"
-  to = "/questions"
+  from = "/question/*"
+  to = "/question"
   status = 200
 
 [[redirects]]
