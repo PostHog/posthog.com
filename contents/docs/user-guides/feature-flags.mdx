@@ -22,7 +22,27 @@ In the sidebar, go to 'Feature Flags' and click '+ New Feature Flag'.
 
 Think of a descriptive name and select how you want to roll out your feature.
 
-![Create feature flags](../../images/features/feature-flags/feature-flags-page.png)
+![Create feature flags](../../images/features/feature-flags/feature-flag-page.png)
+
+## Persisting flag across authentication steps
+
+You also have an option to persist flags across authentication steps.
+
+Consider this case: An anonymous person comes to your website
+and you show them a green call to action.
+
+With usual feature flags, the flag value can change when someone logs in, or changes their identity. So, once they login, they may see a red call
+to action instead.
+
+This usually is not a problem since experiments run either completely for anonymous users, or completely for logged in users.
+
+However, with some businesses, like e-commerce, it's very common to browse things anonymously and login right before checking out. In cases like these
+you can preserve the feature flag values by checking this checkbox.
+
+![Persist feature flags](../../images/features/feature-flags/feature-flag-persist.png)
+
+Note that this slows down the feature flag response a bit. Also note that this functionality is currently available for `posthog-js` only.
+If you're using another client library, you can [follow this guide to get the same feature](/tutorials/experiments)
 
 ## Implementing the feature flag
 

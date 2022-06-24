@@ -64,6 +64,21 @@ If you're not using PostHog Feature Flags, check with your provider on how to ge
 
 At the end of this step, you must ensure that every event in the experiment, no matter which library it comes from, has these properties. Otherwise, Experiments UI won't work. `posthog-js` does this for you automatically, but other libraries don't, as of writing.
 
+### Persisting flag across authentication steps (optional)
+
+If you're dealing with an experiment where you want to [persist behaviour across authentication steps](docs/user-guides/feature-flags#persisting-flag-across-authentication-steps), there's two more things to note:
+
+1. Check the relevant box in the UI to persist behaviour across authentication steps.
+2. Whenever you send an `$identify` call that identifies a previously anonymous user with a new ID, send both IDs in the `/decide` call like so:
+
+    ```
+    {
+        token: <whatever token you're using>
+        distinct_id: <authenticated user's distinct ID>
+        $anon_distinct_id: <anonymous user's distinct ID>
+    }
+    ```
+    You only need to do this once after an identify call. For reference, check [the posthog-js implementation](https://github.com/PostHog/posthog-js/pull/404)
 ## Step 3: Sending the `$feature_flag_called` event
 
 It's often possible that the distribution of users between variants is skewed, such that there are a lot more users in test than control. To measure the relative exposure between variants, we use this event called `$feature_flag_called`.
