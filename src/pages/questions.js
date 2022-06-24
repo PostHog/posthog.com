@@ -11,7 +11,6 @@ import { SEO } from 'components/seo'
 import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
-import { graphql } from 'gatsby'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
@@ -172,11 +171,7 @@ const Question = ({ question }) => {
     )
 }
 
-export default function FAQ({
-    data: {
-        questions: { nodes },
-    },
-}) {
+export default function FAQ() {
     return (
         <Layout>
             <SEO title={'Questions - PostHog'} />
@@ -310,39 +305,3 @@ export default function FAQ({
         </Layout>
     )
 }
-
-export const query = graphql`
-    query AllQuestionsQuery {
-        questions: allQuestion(sort: { fields: childReply___created_at, order: DESC }, limit: 20) {
-            nodes {
-                id
-                childrenReply {
-                    id
-                    subject
-                    name
-                    ts: created_at(difference: "days")
-                    childMdx {
-                        body
-                        excerpt(pruneLength: 400)
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 20, height: 20)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 20, height: 20)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`

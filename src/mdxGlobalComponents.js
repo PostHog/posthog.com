@@ -85,6 +85,7 @@ import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
+import { Question } from './components/Question'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
@@ -195,6 +196,7 @@ export const shortcodes = {
     ProductFooter,
     ProductPage,
     ProductSectionHeader,
+    Question,
     ResponsiveAnchor,
     RocketHorizontalRule,
     DesignedForYourStackBlock,

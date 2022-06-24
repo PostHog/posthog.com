@@ -8,6 +8,11 @@
   status = 200
 
 [[redirects]]
+  from = "/question/*"
+  to = "/question"
+  status = 200
+
+[[redirects]]
   from = "/careers/*"
   to = "/careers"
   status = 200
