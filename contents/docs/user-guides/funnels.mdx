@@ -149,6 +149,62 @@ You can then break down your funnel by this feature flag and compare the convers
 
 N.B. When it comes to A/B testing - it's important to recognize that there can be a lot of noise in experiments and if you have a minimal improvement in your conversion rate is more likely to be due to some bias or noise than your feature being worse or better. Over time, we will build out more advanced A/B testing capabilities with built-in statistical analysis to help you understand the confidence level in the results. Check out [our roadmap](/handbook/strategy/roadmap) to learn more.
 
+### Choosing breakdown property behaviour
+
+When creating a funnel with a mix of frontend and backend events, like, say `$pageview` and `user sign up`, it's very much possible that the same properties don't exist on every event. In such a case, when you want to breakdown by `browser`, you can choose from which step the properties should be selected, by modifying the attribution type right below the breakdown.
+
+There's 4 modes to choose from.
+
+#### First Touchpoint
+
+In this case, the first property value seen from all steps is chosen.
+
+Consider this example sequence of events:
+
+1. `$pageview` with `browser = Chrome`
+2. `user signed up` with `browser = Firefox`
+
+The first touchpoint means that `Chrome` will be the breakdown value.
+
+With the first touchpoint mode, one person will always only have one value.
+
+#### Last Touchpoint
+
+In this case, the last property value seen from all steps is chosen.
+
+Consider the same example as above:
+
+1. `$pageview` with `browser = Chrome`
+2. `user signed up` with `browser = Firefox`
+
+The first touchpoint means that `Firefox` will be the breakdown value.
+
+With the last touchpoint mode, one person will always only have one value.
+
+#### Specific Step
+
+In this case, only the property value seen at that specific step is chosen.
+
+For the example above, when step one is chosen, the value will be Chrome, otherwise Firefox.
+
+However, with the specific step mode, one person can have more than one property value.
+
+For example, if the events were:
+
+
+1. `$pageview` with `browser = Chrome`
+2. `user signed up` with `browser = Chrome`
+
+1. `$pageview` with `browser = Firefox`
+2. `user signed up` with `browser = Firefox`
+
+Then for both step 1 and 2 attribution, the person would have both Chrome and Firefox as their breakdown values.
+
+#### All Steps
+
+In this case, the property value must be seen in all steps to be considered in the funnel.
+
+
 ### Understand seasonality in your conversion rates
 
 It's unlikely that your conversion rate will remain stable every day or every week. This is normal, but it's important to understand the external factors that can cause these fluctuations so you don't jump to conclusions too quickly when analyzing a big change or drop-off.
