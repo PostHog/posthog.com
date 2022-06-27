@@ -13,7 +13,7 @@ This app prevents duplicate events from being ingested into PostHog. It's partic
 
 The Unduplicator crafts an event UUID based on key properties for the event, so if the event is the same (see below for definition) it'll end with the same UUID.
 
-When events areprocessed by ClickHouse, the DB will automatically dedupe events which have the same `toDate(timestamp)`, `event`, `distinct_id` and `uuid` combo, effectively making sure duplicates are not stored.
+When events are processed by ClickHouse, the database will automatically dedupe events which have the same `toDate(timestamp)`, `event`, `distinct_id` and `uuid` combo, effectively making sure duplicates are not stored.
 
 The app has two modes, which define what's considered a duplicate event. Either mode will prevent duplicates within a project, though duplicates across projects are still permitted.
 
