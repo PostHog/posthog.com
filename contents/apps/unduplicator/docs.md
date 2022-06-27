@@ -15,7 +15,7 @@ The Unduplicator crafts an event UUID based on key properties for the event, so 
 
 When events are processed by ClickHouse, the database will automatically dedupe events which have the same `toDate(timestamp)`, `event`, `distinct_id` and `uuid` combo, effectively making sure duplicates are not stored.
 
-The app has two modes, which define what's considered a duplicate event. Either mode will prevent duplicates within a project, though duplicates across projects are still permitted.
+The app has two modes that define what's considered a duplicate event. Either mode will prevent duplicates within a project, though duplicates across projects are still permitted.
 
 - **Event and Timestamp**. An event will be treated as duplicate if the timestamp, event name and user's distinct ID matches exactly, regardless of what internal properties are included.
 - **All Properties**. An event will be treated as duplicate only if all properties match exactly, as well as the timestamp, event name and user's distinct ID.
