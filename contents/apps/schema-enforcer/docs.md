@@ -88,6 +88,6 @@ We love feature requests and feedback! Please [create an issue](https://github.c
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our FAQ page](/questions).
+We love answering questions. Ask us anything via [our Support page](/questions).
 
 You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
