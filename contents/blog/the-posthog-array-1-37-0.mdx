@@ -97,6 +97,10 @@ We've made it faster to load insights and recordings. We realized that some data
 
 Here's to things being faster!
 
+### Improved: App retry and failure logic
+
+The retry policy of apps (formerly known as plugins) has been consolidated. Built-in retries with `RetryError` are now more widely available. Additionally, you will be notified by email if an app fails to load in your project due to a fatal `setupPlugin` error ([email configuration required](https://posthog.com/docs/self-host/configure/email)). See [Apps developer reference](https://posthog.com/docs/apps/build/reference#maximizing-reliability-with-retryerror) for more details.
+
 ### Other improvements & fixes
 
 Version 1.37 also adds hundreds of other improvements and fixes, including...
@@ -111,7 +115,7 @@ View the commit log in GitHub for a full history of changes: [`release-1.36.0...
 
 ### Deprecation and removal notices
 
--   **For feature flags:** Feature flags can no longer depend on cohorts with behavioral conditions. They can still depend on cohorts with only property conditions.
+-   **For feature flags:** Feature flags can no longer depend on cohorts with behavioral conditions. They can still depend on cohorts with only property conditions. You can read [more context here](https://github.com/PostHog/posthog/issues/8628).
 
 ## Give us your feedback
 
