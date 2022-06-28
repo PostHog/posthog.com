@@ -47,7 +47,7 @@ No. As a product analytics platform, PostHog creates user profiles and thus requ
 
 ## 2. [Fathom](https://usefathom.com/)
 
-![Fathom - GDPR compliant analytics](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+![Fathom - GDPR compliant analytics](../images/blog/open-source-analytics-tools/fathom.png)
 
 Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy as a priority. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also includes a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
 
