@@ -140,7 +140,7 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 ### Matomo and GDPR compliance
 Matomo offers first-party cookies by default and offers robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
 
-### Can you use Countly without cookie consent banners?
+### Can you use Matomo without cookie consent banners?
 
 Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it can collect.
 
