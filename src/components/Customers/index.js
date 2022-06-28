@@ -62,18 +62,17 @@ export default function Customers() {
                 <section className="bg-black dark py-16 md:py-32 px-4">
                     <div>
                         <Quote
-                            logo="/images/customers/pry.svg"
-                            name="Tiffany Wong"
-                            title="Co-founder, Pry"
-                            imageSource="/images/customers/tiffany.png"
+                            logo="/images/customers/mention-me.svg"
+                            name="Joe Saunderson"
+                            title="Software Engineer, Mention Me"
+                            imageSource="/images/customers/joe.png"
                             quote={
                                 <span>
-                                    “Hosting PostHog on our own infrastructure was easy to do and means{' '}
+                                    “We looked at{' '}
                                     <span className="text-red">
-                                        we can be confident that our data is safe and shared with as few platforms as
-                                        possible.
+                                        Amplitude, Mixpanel and Pendo and they were far too expensive.
                                     </span>{' '}
-                                    This is really important to us, as we’re often dealing with sensitive data.”
+                                    Not only that, it was also very unclear how they worked in terms of data privacy.”
                                 </span>
                             }
                         />
@@ -112,17 +111,15 @@ export default function Customers() {
                 <section className="my-16 md:my-32 px-4">
                     <div>
                         <Quote
-                            logo="/images/customers/mention-me.svg"
-                            name="Lleo Harress"
-                            title="Software Engineer"
-                            image={<StaticImage width={100} quality={100} src="./images/lleo.png" />}
+                            logo="/images/customers/weweb.svg"
+                            name="Quentin Durantay"
+                            title="Growth, WeWeb"
+                            imageSource="/images/customers/quentin.jpeg"
                             quote={
                                 <span>
-                                    “The fact that PostHog is open source is really helpful. The cloud formation
-                                    templates made deployment easy and{' '}
-                                    <span className="text-red">we were up and running within a day,</span> but we can
-                                    also open the codebase and build on it. We’ve iterated an entire stack for ourselves
-                                    since launch.”
+                                    “I love PostHog! The tool that finally made me churn from Amplitude.{' '}
+                                    <span className="text-red">1/10th of the price and 10x the value.</span> I highly
+                                    recommend it!”
                                 </span>
                             }
                         />
