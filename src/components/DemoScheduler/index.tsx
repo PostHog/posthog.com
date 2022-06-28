@@ -14,7 +14,6 @@ export const DemoScheduler = ({
     const { posthog } = useValues(posthogAnalyticsLogic)
     const calendlyEventScheduled = (e: EventScheduledEvent) => {
         const { event, payload = null } = e.data
-        console.log(`Event type: ${type}`)
         posthog?.capture(event, {
             calendly_event_uri: payload?.event.uri,
             calendly_invitee_uri: payload?.invitee.uri,
