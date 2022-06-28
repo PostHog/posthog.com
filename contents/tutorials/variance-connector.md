@@ -70,3 +70,5 @@ Say you want to keep track of the PQL progress for all your accounts in [Salesfo
 ![Variance Connector for PostHog](../images/tutorials/variance/variance-connector-posthog-5.png)
 
 From there how you use that data is really up to you. Some users use it in CRM views for their sales team, to kick off automation flows, and a whole host of other scenarios. As we said at the beginning, a big part of the value of Variance is transforming analytics data into the structure of revenue, which means making it easy to work with in your CRM.
+
+Ready to get started? [Sign-up to Variance for free](https://www.variance.com/) and install the connector app in just a few minutes. 
