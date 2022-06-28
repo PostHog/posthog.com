@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import { mergeClassList } from '../../lib/utils'
 
-import emailSignup from './images/email-signup.svg'
-
 export const NewsletterForm = ({
     compact = false,
     bgColor = '#08042f',
@@ -21,8 +19,19 @@ export const NewsletterForm = ({
             <div className="flex w-full h-full p-1 border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <div className={classList}>
                     <div className="flex flex-col md:flex-row space-x-4 items-center">
-                        <figure className="shrink-0 grow-0 basis-12 m-0">
-                            <img src={emailSignup} alt="Sign up for mailing list" className="block h-12 mb-0" />
+                        <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
+                            <svg
+                                className="block h-12 mb-0 fill-current"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 50 50"
+                            >
+                                <path
+                                    d="M41.5 7.5c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7Z"
+                                    fill="#F54E00"
+                                />
+                                <path d="M41.5 23.5c.34 0 .67-.02 1-.06V36.5c0 1.654-1.346 3-3 3h-32c-1.654 0-3-1.346-3-3v-20c0-1.654 1.346-3 3-3h25.06c-.04.33-.06.66-.06 1 0 2.125.74 4.074 1.97 5.615l-8.849 8.85a3.005 3.005 0 0 1-4.244 0l-11.172-11.17a1 1 0 1 0-1.414 1.414l11.17 11.17a4.984 4.984 0 0 0 3.535 1.46c1.28 0 2.56-.484 3.535-1.46l8.85-8.85A8.987 8.987 0 0 0 41.5 23.5Z" />
+                            </svg>
                         </figure>
 
                         <span className="flex flex-col space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
@@ -61,7 +70,7 @@ export const NewsletterForm = ({
                             </div>
                             <input
                                 type="submit"
-                                className="bg-primary text-white text-base shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 rounded-full w-full md:w-auto"
+                                className="bg-primary dark:bg-white text-white dark:text-black text-base shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 rounded-full w-full md:w-auto"
                                 value="Subscribe"
                             />
                         </form>
