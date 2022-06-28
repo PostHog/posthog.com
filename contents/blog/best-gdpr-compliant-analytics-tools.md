@@ -47,7 +47,7 @@ No. As a product analytics platform, PostHog creates user profiles and thus requ
 
 ## 2. [Fathom](https://usefathom.com/)
 
-![Fathom - GDPR compliant analytics](../images/blog/open-source-analytics-tools/fathom.png)
+![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
 
 Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy as a priority. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also includes a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
 
@@ -116,7 +116,7 @@ Countly's range of features make it particularly attractive to mobile app develo
 Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction.
 
 ### Can you use Countly without cookie consent banners?
-Yes. Plausible is a cookie-less solution, so you don't need to acquire permission from users to comply with GDPR.
+No. Countly requires you to collect consent to comply with GDPR, though it has consent systems built into the product. 
 
 ## 5. Matomo
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
@@ -140,7 +140,7 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 ### Matomo and GDPR compliance
 Matomo offers first-party cookies by default and offers robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
 
-### Can you use Countly without cookie consent banners?
+### Can you use Matomo without cookie consent banners?
 
 Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it can collect.
 
