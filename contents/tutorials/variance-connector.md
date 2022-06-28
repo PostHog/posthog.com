@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/variance-connector-tutorial.png
 author: ["noah-brier"]
-topics: ['variance', 'connector', 'plugins', 'apps']
+topics: ['variance']
 date: 2022-07-01
 ---
 
