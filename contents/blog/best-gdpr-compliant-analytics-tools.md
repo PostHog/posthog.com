@@ -116,7 +116,7 @@ Countly's range of features make it particularly attractive to mobile app develo
 Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction.
 
 ### Can you use Countly without cookie consent banners?
-Yes. Plausible is a cookie-less solution, so you don't need to acquire permission from users to comply with GDPR.
+No. Countly requires you to collect consent to comply with GDPR, though it has consent systems built into the product. 
 
 ## 5. Matomo
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
