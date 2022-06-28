@@ -25,7 +25,7 @@ PostHog is an all-in-one, [open source analytics platform](/blog/best-open-sourc
 Unlike [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed. It also supports event auto capture, so you can start collecting useful data immediately without instrumenting events by hand.
 
 ### Who is PostHog for?
-PostHog is especially helpful for product teams that want to understand how users use their product, but need complete control of their data. As it's open source, it's great for early-stage startups, but the powerful toolset and range of integrations make it ideal for enterprise-scale businesses, too. PostHog is used by many large businesses, including SpaceX, [Hasura](https://posthog.com/customers/hasura), [Phantom](https://posthog.com/customers/phantom), Airbus and YCombinator. 
+PostHog is especially helpful for product teams that want to understand how users use their product, but need complete control of their data. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) make it ideal for enterprise-scale businesses, too. PostHog is used by many large businesses, including SpaceX, [Hasura](https://posthog.com/customers/hasura), [Phantom](https://posthog.com/customers/phantom), Airbus and YCombinator. 
 
 ### Features & benefits
 - An all-in-one analytics suite
@@ -41,7 +41,7 @@ PostHog is especially helpful for product teams that want to understand how user
 PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
 
 ### Can you use PostHog without cookie banners?
-No. As a product analytics platform, PostHog creates user profiles and thus requires cookie permission notifications to be used in a GDPR compliant manner. You can use the Property Filter app to prevent PostHog from collecting any personally identifiable information, including IP-based location. 
+No. As a product analytics platform, PostHog creates user profiles and thus requires cookie permission notifications to be used in a GDPR compliant manner. You can use the [Property Filter app](/apps/property-filter) to prevent PostHog from collecting any personally identifiable information, including IP-based location. 
 
 <ArrayCTA />
 
