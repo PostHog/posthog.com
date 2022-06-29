@@ -11,7 +11,7 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-Imagine you're working on someting for other developers that you really, _really_ want to be great.
+Imagine you're working on something for other developers that you really, _really_ want to be great.
 
 You're creating a [new startup](https://www.youtube.com/watch?v=KdtPNRzuKrk), you're [creating a blog post](https://www.youtube.com/watch?v=fGT5kFMU048), you're working on [a side project](https://www.youtube.com/watch?v=ab47XHidvwQ).
 
