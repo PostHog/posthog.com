@@ -1,9 +1,8 @@
 import { Funnels, Lifecycle, PathAnalysis, Retention, RightArrow, Stickiness, Trends } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import productAnalyticsHog from './images/product-analytics-hog.png'
-import productAnalytics from './images/product-analytics.png'
 
 const Title = ({ title }) => {
     return <h3 className="text-2xl mt-5 mb-0">{title}</h3>
@@ -35,9 +34,9 @@ export const ProductAnalytics = () => {
     ]
     return (
         <div className="grid grid-cols-5 gap-7 pt-5">
-            <div className="col-span-3">
+            <div className="col-span-3 max-h-[400px]">
                 <motion.div initial={{ translateY: '100%' }} animate={{ translateY: 0 }}>
-                    <img src={productAnalytics} />
+                    <StaticImage className="w-full" src="./images/product-analytics.png" />
                 </motion.div>
             </div>
             <div className="col-span-2 relative flex flex-col">
@@ -66,8 +65,12 @@ export const ProductAnalytics = () => {
                             Compare to Amplitude, Heap, Mixpanel
                         </Link>
                     </div>
-
-                    <img className="max-w-[360px] w-full flex-shrink-0" src={productAnalyticsHog} />
+                    <div className="relative">
+                        <StaticImage
+                            className="max-w-[360px] w-full flex-shrink-0"
+                            src="./images/product-analytics-hog.png"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,23 +78,32 @@ export const ProductAnalytics = () => {
 }
 
 export const SessionRecording = () => {
-    return null
-    // <Container
-    //     image={sessionRecording}
-    //     footer={
-    //         <div className="flex items-end mt-auto">
-    //             <div className="mb-3">
-    //                 <hr className="w-[20px] h-[3px] rounded-full" />
-    //                 <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
-    //                     Compare to Hotjar, Logrocket, Matomo
-    //                 </Link>
-    //             </div>
+    return (
+        <div className="grid grid-cols-2 gap-7 pt-5">
+            <div className="max-h-[400px]">
+                <motion.div initial={{ translateY: '100%' }} animate={{ translateY: 0 }}>
+                    <StaticImage className="w-full" src="./images/session-recording.png" />
+                </motion.div>
+            </div>
+            <div className="relative flex flex-col">
+                <div>
+                    <Title title={'Session recording'} />
+                    <Subtitle subtitle="with console logs. Watch a group of sessions for users in a cohort." />
 
-    //             <img className="max-w-[360px] w-full flex-shrink-0" src={sessionRecordingHog} />
-    //         </div>
-    //     }
-    //     title="Session recording"
-    //     subtitle="with console logs. Watch a group of sessions for users in a cohort."
-    //     cta={{ url: '/product/session-recording', title: 'Learn more' }}
-    // />
+                    <CTA url="/product/session-recording" title="Explore" />
+                </div>
+                <div className="flex items-end mt-auto w-full">
+                    <div className="mb-3 flex-grow">
+                        <hr className="w-[20px] h-[3px] rounded-full" />
+                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                            Compare to Hotjar, Logrocket, Matomo
+                        </Link>
+                    </div>
+                    <div className="relative w-3/4">
+                        <StaticImage className="w-full" src="./images/session-recording-hog.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
