@@ -14,10 +14,13 @@ Variance lets revenue teams get more out of their analytics data. Using the [Var
 
 To get the most out of [Variance](https://www.variance.com/), there are a few key use cases:
 
-- **Account-level activity**: If you work in B2B, one of the key challenges you need to solve for is how to see data at the account instead of user level. For an account to be activated, for instance, someone—you don’t care who—needs to connect a data source. PostHog supports [group analytics](/docs/user-guides/group-analytics), but many teams still capture data at the user level. However, it can be a challenge to aggregate it up to accounts or workspaces. Variance rolls everything up at the account level to make this easy.
+- **Account-level activity**: Revenue teams at B2B companies need to see data account level to be effective, but many teams still capture data at the user level, making it a challenge to aggregate it up to accounts or workspaces. Variance rolls everything up at the account level to make this easy.
+
 - **Milestones**: In sales scenarios, it’s common to want to see the progress a specific prospect or customer has made across all of their journey stages. Milestones make it easy to describe those sales stages in a data-driven way and monitor them in real-time on all accounts and contacts.
-- **Real-time alerts and synthetic events**: Another big component of Variance is the ability to alert anyone on the team of exactly the activity they want from only the customers they care about (such as the ones they are marked “owner” of in CRM). In addition, Variance lets teams create “synthetic events” they can be alerted of, such as when a customer is fully onboarded or has reached PQL.
-- **CRM sync**: Finally, a key function of Variance is to make this data easy to sync back to your CRM tools. Unfortunately, those tools aren’t great at understanding event-driven data right now, so Variance reshapes it into a format that makes sense, making it easy to create views or kick off campaigns in your CRM using product data.
+
+- **Real-time alerts and synthetic events**: Variance lets sales personnel create specific, customisable alerts for customer activity on accounts they own. Variance also lets teams create “synthetic events”, such as when a customer is fully onboarded or has reached PQL.
+
+- **CRM sync**: Most CRM tools can't understand event-driven data, so Variance reshapes it into a format that makes sense, making it easy to create views or kick off campaigns in your CRM using product data.
 
 If any of that sounds interesting, then follow along as we break down those common use cases...
 
