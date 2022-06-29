@@ -33,7 +33,7 @@ This app is capable of syncing the following streams:
 - Persons
 - Trends
 
-For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+For more info, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
 ### Where can I find out more?
 
