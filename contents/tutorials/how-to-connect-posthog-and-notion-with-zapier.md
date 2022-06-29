@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/notion-tutorial-banner.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-topics: ['zapier', 'plugins']
+topics: ['apps']
 ---
 - *Level:* Easy 🦔
 - *Estimated reading time:* 5 minutes ☕️
