@@ -74,7 +74,7 @@ Yes, it's actually designed this way. Fathom is a cookie-less solution, so you d
 ## 3. [Plausible](https://plausible.io/)
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Plausible is an open source web analytics platform, created as an alternative to tools such as Google Analytics. This means it offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+Plausible web analytics platform created as an alternative to tools such as Google Analytics – it used to be open source, but has since gone closed core. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -167,4 +167,4 @@ GoAccess can be configured not to collect PII (personally identifying informatio
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+ <NewsletterForm compact />
