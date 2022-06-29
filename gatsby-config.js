@@ -129,7 +129,12 @@ module.exports = {
                 path: `${__dirname}/static/images/authors`,
             },
         },
-        `gatsby-transformer-gitinfo`,
+        {
+            resolve: `gatsby-plugin-git-info`,
+            options: {
+                match: '{src,contents}/**/*.{mdx,md}',
+            },
+        },
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
