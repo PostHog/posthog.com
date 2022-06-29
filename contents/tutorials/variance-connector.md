@@ -14,7 +14,7 @@ Variance lets revenue teams get more out of their analytics data. Using the [Var
 
 To get the most out of [Variance](https://www.variance.com/), there are a few key use cases:
 
-- **Account-level activity**: Revenue teams at B2B companies need to see data account level to be effective, but many teams still capture data at the user level, making it a challenge to aggregate it up to accounts or workspaces. Variance rolls everything up at the account level to make this easy.
+- **Account-level activity**: Revenue teams at B2B companies need to see account level data to be effective, but many teams still capture data at the user level, making it a challenge to aggregate it up to accounts or workspaces. Variance rolls everything up at the account level to make this easy.
 
 - **Milestones**: In sales scenarios, it’s common to want to see the progress a specific prospect or customer has made across all of their journey stages. Milestones make it easy to describe those sales stages in a data-driven way and monitor them in real-time on all accounts and contacts.
 
