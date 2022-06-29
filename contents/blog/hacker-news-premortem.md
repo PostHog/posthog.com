@@ -1,5 +1,5 @@
 ---
-date: 2022-06-20
+date: 2022-06-29
 title: The magic of a Hacker News Pre-Mortem
 rootPage: /blog
 sidebar: Blog
@@ -11,9 +11,9 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-Imagine you're working on something that you really, _really_ want to be great.
+Imagine you're working on someting for other developers that you really, _really_ want to be great.
 
-You're creating a new startup, you're creating a blog post, you're working on a side project.
+You're creating a [new startup](https://www.youtube.com/watch?v=KdtPNRzuKrk), you're [creating a blog post](https://www.youtube.com/watch?v=fGT5kFMU048), you're working on [a side project](https://www.youtube.com/watch?v=ab47XHidvwQ).
 
 Enter, the Hacker News Pre-Mortem.
 
@@ -23,13 +23,13 @@ The New Yorker [sums it up](https://www.newyorker.com/news/letter-from-silicon-v
 
 > "readers who visit the site to learn how engineers and entrepreneurs talk, and what they talk about, can find themselves immersed in conversations that resemble the output of duelling Markov bots trained on libertarian economics blogs"
 
-A Hacker News Pre-Mortem is a term (source: I just made it up) for when you do your best to preempt the criticism your thing could get if it got to the front page of Hacker News.
+A Hacker News Pre-Mortem is a term I just made it up, for when you do your best to preempt the criticism your thing could get if it got to the front page of Hacker News.
 
 > This is _not_ a 'how to go viral' guide. If you want to do that, ironically don't focus on it. Instead, create unusually helpful content and share it. I mainly write about topics other founders ask me, or interesting things I observe first hand about our company), since I am in a unique position to write about those topics.
 
 We've had our [repo](https://github.com/posthog/posthog), [side projects](https://isgoogleanalyticsillegal.com/) and [several](what-to-ask-in-interviews) [blog](story-about-pivots) [posts](moving-to-sf/) all get to the front page.
 
-So, what are the basic criticisms that come up over and over?
+So, what are the basic criticisms that come up over and over for projects posted there?
 
 ## I can't tell from your website what this does
 
@@ -55,23 +55,36 @@ If this is universal feedback, you don't have product market fit. If it's from t
 
 ## I got stuck trying to use it
 
-A lot of people will try your thing out, if they can.
+One of the things we've learned about working with developers is that a lot of technical people will try your thing out, if they can.
 
 Make sure someone else is using your product in production before you launch it. You'll get no end of edge cases. Or even "majority cases" cases like the first ever user of PostHog:
 
 ![user gets stuck because they cannot log into PostHog](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
-At least they liked the website. We had a handful of friends using PostHog first, then we ran some Twitter ads to get a further 20 ish companies using the product, then we put it on Hacker News. Do not let this slow you down though (just optimize for "does anyone care" early on) - it took us [a month of intense work](pivot-to-posthog), as one example.
+Hey, at least they liked the website.
+
+We had a handful of friends using PostHog first, then we ran some Twitter ads to get a further 20 ish companies using the product, then we put it on Hacker News.
+
+Do not let this slow you down though (just optimize for "does anyone care" early on) - it took us just [a month of intense work](pivot-to-posthog) to do this, as one example. See some other [things that are fast](https://patrickcollison.com/fast).
 
 [Example](https://news.ycombinator.com/item?id=30698771) | [Example 2](https://news.ycombinator.com/item?id=29892909) | [Example 3](https://news.ycombinator.com/item?id=29629604) | [Example 4](https://news.ycombinator.com/item?id=27885861)
 
 ## This doesn't seem like a sustainable business
 
+If your thing looks unsustainable, then no one wants to rely on it.
+
+The basics here are:
+
+i) there's some way of making money from the thing that is obvious to readers
+ii) _if_ the target marget is super niche, then it has an obvious (or explained) path to expanding beyond this
+
 [Example](https://news.ycombinator.com/item?id=28289988) | [Example 2](https://news.ycombinator.com/item?id=20107991) | [Example 3](https://news.ycombinator.com/item?id=20108075)
 
 ## I need to know how much it'll cost
 
-Put pricing on there if you can. If you're not ready to create a paid version yet, then state your plans in this area (and create an easy way for people to get in touch so you can get all the signal you can).
+Put pricing on there if you can.
+
+If you're not ready to create a paid version yet, then state your plans in this area (and create an easy way for people to get in touch so you can get all the signal you can).
 
 If you do have pricing, be as clear as possible on how your plans work.
 
@@ -81,15 +94,21 @@ Fun fact: [PostHog's pricing page](../../pricing) is the second most popular pla
 
 ## I can't see the difference between this and X?
 
+If you're building something in a crowded space, like - say - an analytics product, people need a very good reason to use a tiny new startup's thing, over a better established competitor,
+
+Reasons they feel this way:
+
+- your thing won't have many features
+- it will be buggy
+- people may not trust you with their data
+
+These can all be offset by early adopters if there is something important that is different about what you're working on.
+
 [Extreme exampe](https://news.ycombinator.com/item?id=30290722) | [Example 2](https://news.ycombinator.com/item?id=28120858) | [Example 3](https://news.ycombinator.com/item?id=28118240) | [Example 4](https://news.ycombinator.com/item?id=29262281)
-
-## You can easily do this for free using X
-
-[Example](https://news.ycombinator.com/item?id=30640693) | [Example 2](https://news.ycombinator.com/item?id=29267823)
 
 ## I don't trust you with my data, or I have a security concern
 
-Firstly, signals that you know what you are doing are important. If you have an application that'll handle lots of personal data, you must have the basics in place where appropriate.
+Small signals that you know what you are doing are the creator of a technical product are important. A privacy policy, for example, or no obvious security flaws. No typos, nice design - the details all add up here.
 
 Transparency is a way to build on this. Explain exactly how you handle data, and what your business is aiming to be. If you've got VC funding, some users will assume you're somehow going to harvest and sell data if there's no clear businss model.
 
@@ -100,18 +119,25 @@ In the rush to get a Minimum Viable Product out, it's easy to overlook the impor
 
 ## This title is misleading
 
-Misleading / clickbaity titles land badly.
+Misleading / clickbaity titles get called out.
+
+Clearly, your title _must_ [be interesting](writing-for-developers) ("would I read this"), but it has to be truthful.
 
 [Example](https://news.ycombinator.com/item?id=30543456) | [Example 2](https://news.ycombinator.com/item?id=29792628) | [Example 3](https://news.ycombinator.com/item?id=31490603) | [Example 4](https://news.ycombinator.com/item?id=31478760)
 
 ## I disagree with this approach
 
+So, you've built something different. Just make sure you've got some early user feedback, and have thought it through.
+
+_If_ you have done those things, polarizing people is better than invoking no feelings at all. Your project will die if it's forgetful.
+
 [Example](https://news.ycombinator.com/item?id=30594508) | [Example 2](https://news.ycombinator.com/item?id=30593513) | [Example 3](https://news.ycombinator.com/item?id=29845834) | [Example 4](https://news.ycombinator.com/item?id=29844670)
 
 ## This won't load on mobile
 
-[Example](https://news.ycombinator.com/item?id=28087142)
+Lots of people reading news websites are using mobile devices. We hit the front page [on Hacker News yesterday](https://news.ycombinator.com/item?id=31906933) and had 27k visitors on desktop, 21k on mobile (and 347 on tablets). Fact.
 
+[Example](https://news.ycombinator.com/item?id=28087142)
 
 ## I could build this myself
 
