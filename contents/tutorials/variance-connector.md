@@ -8,7 +8,7 @@ topics: ['apps']
 date: 2022-07-01
 ---
 
-_Estimated reading time: 15 minutes_ ☕☕☕
+_Estimated reading time: 6 minutes_ ☕☕
 
 Variance enables revenue teams get more out of their analytics data. Using the Variance Connector to integrate Variance with PostHog makes it easy to send your event data on to Variance for processing. 
 
@@ -35,7 +35,9 @@ By doing this, we make it easy to see all that activity rolled up on an account 
 ![Variance Connector for PostHog](../images/tutorials/variance/variance-connector-posthog-2.png)
 
 ## Milestones
-Milestones are how Variance describes data-driven sales or customer journey stages. Essentially, they’re a partner to the more typical sales stages you would see inside a B2B software organization, but instead of being based on intuition, they’re based on the actual actions of your prospects and customers on your website and in your product. Common Milestones used inside SaaS companies include Onboarded, Activated, and PQL ([product-qualified lead](https://www.variance.com/guides/product-qualified-leads-pql)). 
+Milestones are how Variance describes data-driven sales or customer journey stages. Essentially, they’re a partner to the more typical sales stages you would see inside a B2B software organization, but instead of being based on intuition, they’re based on the actual actions of your prospects and customers on your website and in your product. 
+
+Common Milestones used inside SaaS companies include Onboarded, Activated, and PQL ([product-qualified lead](https://www.variance.com/guides/product-qualified-leads-pql)). 
 
 Getting started with building Milestones in Variance is easy. You just use our Milestone builder to describe the events, thresholds, properties, and even time windows that you want to use to define these stages.
 
