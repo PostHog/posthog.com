@@ -1,5 +1,5 @@
 ---
-title: How to connect PostHog to Variance
+title: How to enrich customer data by connecting PostHog with Variance
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/variance-connector-tutorial.png
