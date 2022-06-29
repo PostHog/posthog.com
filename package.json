@@ -14,7 +14,7 @@
     "private": true,
     "scripts": {
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0",
+        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
