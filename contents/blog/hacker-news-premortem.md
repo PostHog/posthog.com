@@ -1,6 +1,6 @@
 ---
 date: 2022-06-20
-title: The magic of a Hacker News pre-mortem
+title: The magic of a Hacker News Pre-Mortem
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,19 +11,25 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-Hacker News is a place for developers to discuss tech news. Getting to the front page of links is one of the most [stressful but valuable](https://twitter.com/james406/status/1506293206643785728) things that can happen to developer focused startup.
+Imagine you're working on something that you really, _really_ want to be great.
+
+You're creating a new startup, you're creating a blog post, you're working on a side project.
+
+Enter, the Hacker News Pre-Mortem.
+
+[Hacker News](https://news.ycombinator.com) is a place for developers to discuss tech news - it's a list of interesting links, each with discussion. Getting to the front page is one of the most [awesome but terrifying](https://twitter.com/james406/status/1506293206643785728) things that can happen to a developer focused startup.
 
 The New Yorker [sums it up](https://www.newyorker.com/news/letter-from-silicon-valley/the-lonely-work-of-moderating-hacker-news) better than I can:
 
 > "readers who visit the site to learn how engineers and entrepreneurs talk, and what they talk about, can find themselves immersed in conversations that resemble the output of duelling Markov bots trained on libertarian economics blogs"
 
-When I build or give feedback on something at PostHog that is really important or could wind up going viral, I run a Hacker News pre-mortem either solo or with others.
+A Hacker News Pre-Mortem is a term (source: I just made it up) for when you do your best to preempt the criticism your thing could get if it got to the front page of Hacker News.
 
-This means I preempt all the criticism our thing could get if it went viral.
+> This is _not_ a 'how to go viral' guide. If you want to do that, ironically don't focus on it. Instead, create unusually helpful content and share it. I mainly write about topics other founders ask me, or interesting things I observe first hand about our company), since I am in a unique position to write about those topics.
 
-If you keep producing interesting stuff, this really can happen - we've had our [repo](https://github.com/posthog/posthog), [side projects](https://isgoogleanalyticsillegal.com/) and [blog](story-about-pivots) [posts](moving-to-sf/) all get to the front page.
+We've had our [repo](https://github.com/posthog/posthog), [side projects](https://isgoogleanalyticsillegal.com/) and [several](what-to-ask-in-interviews) [blog](story-about-pivots) [posts](moving-to-sf/) all get to the front page.
 
-Having read through lots of other launches, I've covered lots of the repeated criticisms that came up:
+So, what are the basic criticisms that come up over and over?
 
 ## I can't tell from your website what this does
 
