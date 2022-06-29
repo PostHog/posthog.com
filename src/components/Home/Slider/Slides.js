@@ -34,7 +34,7 @@ export const ProductAnalytics = () => {
     ]
     return (
         <div className="grid grid-cols-5 gap-7 pt-5">
-            <div className="col-span-3 max-h-[400px]">
+            <div className="col-span-3 h-[400px]">
                 <motion.div initial={{ translateY: '100%' }} animate={{ translateY: 0 }}>
                     <StaticImage className="w-full" src="./images/product-analytics.png" />
                 </motion.div>
@@ -80,7 +80,7 @@ export const ProductAnalytics = () => {
 export const SessionRecording = () => {
     return (
         <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="max-h-[400px]">
+            <div className="h-[400px]">
                 <motion.div initial={{ translateY: '100%' }} animate={{ translateY: 0 }}>
                     <StaticImage className="w-full" src="./images/session-recording.png" />
                 </motion.div>
@@ -101,6 +101,57 @@ export const SessionRecording = () => {
                     </div>
                     <div className="relative w-3/4">
                         <StaticImage className="w-full" src="./images/session-recording-hog.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const FeatureFlags = () => {
+    return (
+        <div className="grid grid-cols-2 gap-7 pt-5">
+            <div className="h-[400px] relative">
+                <motion.div
+                    className="absolute left-0 bottom-0 w-3/4"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage className="w-full" src="./images/feature-flags-2.png" />
+                </motion.div>
+                <motion.div
+                    className="absolute right-0 top-0 w-3/4"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage className="w-full" src="./images/feature-flags-1.png" />
+                </motion.div>
+            </div>
+            <div className="relative flex flex-col">
+                <div>
+                    <Title title={'Feature flags'} />
+                    <Subtitle
+                        subtitle={
+                            <>
+                                with multivariate testing. Roll out features to <br />
+                                groups or specific users.
+                            </>
+                        }
+                    />
+
+                    <CTA url="/product/feature-flags" title="See how it works" />
+                </div>
+                <div className="flex items-end mt-auto w-full">
+                    <div className="mb-3 flex-grow">
+                        <hr className="w-[20px] h-[3px] rounded-full" />
+                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                            Compare to LaunchDarkly
+                        </Link>
+                    </div>
+                    <div className="relative w-3/4">
+                        <div className="absolute bottom-0">
+                            <StaticImage className="w-full max-w-[480px]" src="./images/feature-flags-hog.png" />
+                        </div>
                     </div>
                 </div>
             </div>
