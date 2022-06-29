@@ -33,11 +33,15 @@ This app is capable of syncing the following streams:
 - Persons
 - Trends
 
-For more information, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+For more info, please check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
 ### Where can I find out more?
 
 Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+
+### Who maintains this app?
+
+This app is maintained by Airbyte. For more information, check [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
 ### What if I have feedback on this app?
 
@@ -45,4 +49,6 @@ We love feature requests and feedback! Please [create an issue](https://github.c
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our Support page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.

@@ -79,7 +79,7 @@ GetRecords
 ### How do I install the Amazon Kinesis Import app for PostHog?
 
 1. Visit the 'Apps' page in your instance of PostHog.
-2. Search for 'Amazon Kinesis' and select the app, press Install.
+2. Search for 'AWS Kinesis' and select the app, press Install.
 3. Follow the steps to configure the app.
 3. Watch events roll in to PostHog. 
 
@@ -93,7 +93,11 @@ Check [Amazon's Kinesis documentation](https://docs.aws.amazon.com/kinesis/index
 
 ### Who created this app?
 
-We'd like to thank community member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
+We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
+
+### Who maintains this app?
+
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report on the repo](https://github.com/posthog/posthog-kinesis-plugin) to let us know!
 
 ### What if I have feedback on this app?
 
@@ -101,4 +105,6 @@ We love feature requests and feedback! Please [create an issue](https://github.c
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our Support page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
