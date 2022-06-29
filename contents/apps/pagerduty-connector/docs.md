@@ -16,9 +16,9 @@ Example use cases:
 
 ### What are the requirements for this app?
 
-The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
+The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.26.0](https://posthog.com/blog/the-posthog-array-1-26-0) or later. 
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+Not running 1.26.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
 
 You'll also need access to a PagerDuty account. 
 

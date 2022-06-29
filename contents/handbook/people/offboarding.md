@@ -6,7 +6,7 @@ showTitle: true
 
 Offboarding team members is a sensitive time. The aim of this policy is to create transparency around how this process works.
 
-Very infrequently, we may have long term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
+Very infrequently, we may have long-term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
 
 ## Voluntary departure
 
@@ -83,6 +83,37 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 
 ## Offboarding checklist
 
+<input type="checkbox"/> (Voluntary leavers only) Arrange handover <br />
+<input type="checkbox"/> (Voluntary leavers only) Schedule [Exit interview](https://forms.gle/DaNGRhmvQJcLGfpa9) <br />
+<input type="checkbox"/> Arrange company property to be returned <br />
+<input type="checkbox"/> (Contractor only) End their contract on Deel <br />
+<input type="checkbox"/> (UK employee only) Email DRG with their last day, remaining annual leave and to remove them from the pension scheme <br />
+<input type="checkbox"/> (UK employee only) Email Parallel to remove them from Bupa and Medicash <br />
+<input type="checkbox"/> (UK employee only) Email team member P45 and upcoming payslips <br />
+<input type="checkbox"/> (US employee only) Remove the team member from Gusto (Gusto will automatically end any benefits provided via the platform, e.g. medical insurance <br />
+<input type="checkbox"/> (US employee only) Get the team member to sign their termination certificate <br />
+<input type="checkbox"/> Put on an out of office ([forward email](https://admin.google.com/ac/apps/gmail/defaultrouting) if the leavers expects external communication), then delete the account for the team member - you will be prompted to transfer their files and calendar at that point!  <br />
+<input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
+<input type="checkbox"/> Cancel team member's company card on Brex/Revolut - _check if they have any company subscriptions first that need transferring_ <br />
+<input type="checkbox"/> Offboard member on CharlieHR <br />
+<input type="checkbox"/> Add departure to hiring forecast on Pry <br />
+<input type="checkbox"/> Remove team member from PostHog organization in GitHub <br />
+<input type="checkbox"/> Remove team member from PostHog organization in Heroku <br />
+<input type="checkbox"/> Remove team member from PostHog organization in Stripe <br />
+<input type="checkbox"/> Remove team member from PostHog organization in npm (https://www.npmjs.com/settings/posthog/members) <br />
+<input type="checkbox"/> Remove team member from PostHog packages in PyPI <br />
+<input type="checkbox"/> Remove team member from the internal company Slack <br />
+<input type="checkbox"/> Remove team member from PostHog Users Slack <br />
+<input type="checkbox"/> Remove team member from 1Password <br />
+<input type="checkbox"/> Deactivate team member's PostHog Cloud account (https://app.posthog.com/admin/posthog/user/)<br />
+<input type="checkbox"/> Remove team member from AWS <br />
+<input type="checkbox"/> Remove team member from Workable <br />
+<input type="checkbox"/> Remove team member from Orbit (access &amp; team member state) <br />
+<input type="checkbox"/> Remove team member from license.posthog.com <br />
+<input type="checkbox"/> Remove team member from Cloudflare (Only Tim can do this) <br />
+<input type="checkbox"/> Remove team member from the [Team page](/handbook/company/team) <br />
+<input type="checkbox"/> Ask them (if voluntary) and their manager for any other accounts they need to be removed from <br />
+
 ### Voluntary departures only
 
 - <input type="checkbox" /> Arrange handover
@@ -131,4 +162,3 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 ### Contractors only
 
 - <input type="checkbox" /> End their contract on Deel
-

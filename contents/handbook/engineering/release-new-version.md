@@ -78,9 +78,11 @@ The release manager is ultimately responsible for the timeline of the release. T
 
     1. Optional: Keep an eye on the progress of the upgrade in `k9s`
     1. If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
+    1. Optional: Verify playground is running the latest image by running `kubectl get pod --namespace posthog`. In the output of that command, you should see a row like `posthog-web-6447ff5fdf-gs664`. Copy this row (the numbers after `posthog-web-` will be different), and then run `kubectl  describe pod --namespace posthog posthog-web-6447ff5fdf-gs664`. If you scroll up in that output, you should see a line like `Image: posthog/posthog@sha256:daf43a4a4cd06658e41273bb8fe4a74f17b295d67c6f1e16c17243b5d09af7ee`. This is the sha of the image that is running. You can compare this to the sha in Docker Hub to verify that the image is the latest.
     1. Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
 1. [ ] Time for the "Break the release" session! It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub to avoid any potential bugs creeping up in the final build stage.
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
+1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 
 ### Launch (day of the release)
 1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**

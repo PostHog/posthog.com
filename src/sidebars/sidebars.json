@@ -48,16 +48,16 @@
                     "url": "/handbook/strategy/business-model"
                 },
                 {
+                    "name": "Objectives",
+                    "url": "/handbook/strategy/objectives"
+                },
+                {
                     "name": "Roadmap",
                     "url": "/handbook/strategy/roadmap"
                 },
                 {
                     "name": "Brand",
                     "url": "/handbook/strategy/brand"
-                },
-                {
-                    "name": "Prioritization",
-                    "url": "/handbook/strategy/prioritization"
                 }
             ]
         },
@@ -74,7 +74,7 @@
                     "url": "/handbook/company/values"
                 },
                 {
-                    "name": "Goal Setting",
+                    "name": "Goal setting",
                     "url": "/handbook/company/goal-setting"
                 },
                 {
@@ -86,7 +86,7 @@
                     "url": "/handbook/company/communication"
                 },
                 {
-                    "name": "Management at PostHog",
+                    "name": "Management",
                     "url": "/handbook/company/management"
                 },
                 {
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "Growth",
+            "name": "Customer success",
             "url": "",
             "children": [
                 {
@@ -478,21 +478,13 @@
                     "url": "/handbook/growth/customer-support"
                 },
                 {
-                    "name": "Developer relations",
-                    "url": "/handbook/growth/developer-relations"
+                    "name": "Inbound sales model",
+                    "url": "/handbook/growth/sales/overview"
                 },
                 {
-                    "name": "Customer success",
-                    "url": "",
+                    "name": "Sales operations",
+                    "url": "/handbook/growth/sales/sales-operations",
                     "children": [
-                        {
-                            "name": "Sales overview",
-                            "url": "/handbook/growth/sales/overview"
-                        },
-                        {
-                            "name": "Sales operations",
-                            "url": "/handbook/growth/sales/sales-operations"
-                        },
                         {
                             "name": "Managing our CRM",
                             "url": "/handbook/growth/sales/crm"
@@ -516,6 +508,10 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "Developer relations",
+            "url": "/handbook/growth/developer-relations"
         }
     ],
     "docs": [
@@ -630,6 +626,16 @@
                                         {
                                             "name": "0003_fill_person_distinct_id2",
                                             "url": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Plugin server",
+                                    "url": "",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/self-host/runbook/plugin-server"
                                         }
                                     ]
                                 },
@@ -1267,6 +1273,26 @@
         {
             "name": "App Store",
             "url": "/apps"
+        },
+        {
+            "name": "Variance Connector",
+            "url": "/apps/variance-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/variance-connector/docs"
+                }
+            ]
+        },
+        {
+            "name": "Engage Connector",
+            "url": "/apps/engage-connector",
+            "children": [
+                {
+                    "name": "Documentation",
+                    "url": "/apps/engage-connector/docs"
+                }
+            ]
         },
         {
             "name": "Airbyte Export",

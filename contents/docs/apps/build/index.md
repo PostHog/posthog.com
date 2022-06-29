@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> **Note:** You can create apps for both self-hosted and PostHog Cloud, but releasing an app on PostHog Cloud requires a review process. [Read more about the review process in the tutorial](/docs/apps/build/tutorial#submitting-your-app)
+
 PostHog makes it possible to build your own apps and integrate with other platforms. So, if [App Store](/apps) is missing something you need then you may still be able to create it yourself.
 
 Apps can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some apps that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/apps/build/reference#jobs-1).
@@ -18,7 +20,7 @@ Before we get started, lets look at an examples of these principles in action.
 
 ## Example of an app chain
 
-The [GeoIP Enricher](/integrations/geoip) is an example of an app which adds information to events. Specifically, it adds geographical information based on the user IP address. It is triggered on each single event and adds additional informational to each event before it is stored.
+The [GeoIP Enricher](/apps/geoip-enrichment) is an example of an app which adds information to events. Specifically, it adds geographical information based on the user IP address. It is triggered on each single event and adds additional informational to each event before it is stored.
 
 By running a second app after the GeoIP app, we create a chain. Here's an example of how this can look for an individual event when a second app (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP Enricher. 
 

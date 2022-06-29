@@ -51,7 +51,7 @@ export const YCOnboarding = () => {
                 </Button>
                 <Spacer height={25} />
                 {showInfo ? <DemoCallInfo /> : null}
-                <DemoScheduler iframeSrc="https://calendly.com/cameron-posthog/yc-onboarding" />
+                <DemoScheduler iframeSrc="https://calendly.com/d/dsb-3y3-9v9" />
             </div>
         </Layout>
     )

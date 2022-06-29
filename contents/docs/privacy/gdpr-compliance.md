@@ -55,6 +55,14 @@ This means both technical measures (like encrypting data) and organizational mea
 
 If you have a data breach, you have 72 hours to tell the data subjects or face penalties. (This notification requirement may be waived if you use technological safeguards, such as encryption, to render data useless to an attacker.)
 
+### You should not transfer EU users' personal data outside the EU
+
+If you are self-hosting PostHog on a server outside the EU and are collecting EU user data, you should anonymize any of those users' personal data. 
+
+If you are using PostHog Cloud in any country, we also recommend you anonymize any EU user data, as PostHog Cloud is hosted in the US. 
+
+The PostHog [Property Filter app](https://posthog.com/apps/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
+
 ## How to set PostHog up for GDPR compliance
 
 GDPR requirements differ depending on how your business interacts with personal data. Companies can be data controllers, data processors, or both a controller and a processor. [Data controllers](https://gdpr-info.eu/art-24-gdpr/) collect their end users’ data and decide why and how it is processed. [Data processors](https://gdpr-info.eu/art-28-gdpr/) are businesses instructed to process customer data on behalf of other businesses.
@@ -68,11 +76,9 @@ If you are using PostHog Cloud then PostHog is the Data Processor and you are th
 
 If you are self-hosting PostHog then you are both the Data Processor and the Data Controller because you are responsible for your PostHog instance.
 
-In both cases you are the Data Controller.
-
 ### Step 1: Choose a hosting provider
 
-We recommend hosting PostHog on your own infrastructure, or a private cloud such as AWS, Google Cloud Platform or Microsoft Azure.
+We recommend hosting PostHog on your own infrastructure, or a private cloud such as AWS, Google Cloud Platform or Microsoft Azure. 
 
 ### Step 2: Deploy PostHog
 
@@ -104,6 +110,10 @@ If a user **opts out** then you must stop data capturing and processing. Here ar
 - Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
 
 - Do not initialize the posthog-js SDK via the call to `init`. If you do this you should ensure your application logic always performs conditional checks regarding the initialization state of the PostHog SDK.
+
+### Step 5: Enable the Property Filter app (optional)
+
+If you are self-hosting PostHog outside the EU, or are using PostHog Cloud, and are capturing EU users' data, you should enable the [Property Filter app](https://posthog.com/apps/property-filter). This will allow you to anonymize user data. 
 
 ## Complying with 'right to be forgotten' requests
 

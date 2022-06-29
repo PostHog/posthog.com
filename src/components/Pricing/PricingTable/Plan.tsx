@@ -24,7 +24,7 @@ export const Features = ({ features, size, className = '' }) => {
 export const Badge = ({ title, className = '' }) => {
     return (
         <span
-            className={`text-[11px] py-1 px-2 rounded-sm border border-primary border-opacity-50 opacity-50 font-normal leading-none ${className}`}
+            className={`text-[11px] py-1 px-2 rounded-sm border border-primary/50 opacity-50 font-normal leading-none ${className}`}
         >
             {title}
         </span>
