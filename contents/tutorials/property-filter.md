@@ -16,7 +16,7 @@ It also has the ability to discard IP data by default. However, if this option i
 
 That's where the Property Filter, which was created by the team at [Witty Works](https://www.witty.works/), comes in. Witty Works see privacy as a core feature, but also needs to collect some data to develop data-driven solutions. 
 
-For this reason Witty Works created the property filter plugin as a way to determine the _country_ from which requests are coming, while discarding all other data to protect users privacy. Here's how!
+For this reason Witty Works created the [Property Filter app](/apps/property-filter) as a way to determine the _country_ from which requests are coming, while discarding all other data to protect users privacy. Here's how!
 
 # 1. Install the Property Filter app
 
@@ -32,7 +32,7 @@ It's important to note that this app effectively removes information from PostHo
 
 Apps on PostHog run in a sequential chain and in order for the Property Filter to remove unwanted information, that information first has to be present. In short: Ensure that the Property Filter runs _after_ the GeoIP Enricher. 
 
-![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial.png.png)
+![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial.png)
 
 You can reorder the app chain simply by selecting 'Edit Order' and dragging the apps to run in any order you want. Apps at the top of the list run first, while those at the bottom run last. 
 
@@ -42,9 +42,9 @@ This app sets all specified properties on ingested events to `null`, effectively
 
 To configure the app to remove selected properties, simply select the blue gear icon and enter the properties you wish to remove. 
 
-![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial-2.png.png)
+![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial-2.png)
 
-Below is the full configuration Witty Works uses to filter out unwanted data before it is written to Posthog's event log:
+Below is the full configuration Witty Works uses to filter out unwanted data before it is written to PostHog's event log:
 
 ```$geoip_city_name,$geoip_longitude,$geoip_latitude,$ip,$geoip_postal_code,$current_url,$performance_raw,$referrer,$initial_referrer,$pathname```
 
