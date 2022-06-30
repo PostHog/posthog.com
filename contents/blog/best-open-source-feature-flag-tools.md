@@ -1,5 +1,5 @@
 ---
-date: 2022-06-31
+date: 2022-06-30
 title: The 6 best free and open-source feature flag tools
 rootPage: /blog
 sidebar: Blog
