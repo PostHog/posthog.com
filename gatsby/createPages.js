@@ -344,15 +344,15 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
-    const tutorialsPageViews = await fetch(
-        'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'
+    const tutorialsPageViewExport = await fetch(
+        'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
     ).then((res) => res.json())
 
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
         let pageViews
-        tutorialsPageViews.items[0].result.some((insight) => {
+        tutorialsPageViewExport.dashboard.items[0].result.some((insight) => {
             if (insight.breakdown_value.includes(slug)) {
                 pageViews = insight.aggregated_value
                 return true
