@@ -104,7 +104,7 @@ Reasons they feel this way:
 
 These can all be offset by early adopters if there is something important that is different about what you're working on.
 
-[Extreme exampe](https://news.ycombinator.com/item?id=30290722) | [Example 2](https://news.ycombinator.com/item?id=28120858) | [Example 3](https://news.ycombinator.com/item?id=28118240) | [Example 4](https://news.ycombinator.com/item?id=29262281)
+[Extreme example](https://news.ycombinator.com/item?id=30290722) | [Example 2](https://news.ycombinator.com/item?id=28120858) | [Example 3](https://news.ycombinator.com/item?id=28118240) | [Example 4](https://news.ycombinator.com/item?id=29262281)
 
 ## I don't trust you with my data, or I have a security concern
 
