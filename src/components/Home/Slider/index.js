@@ -102,6 +102,7 @@ export default function Slider() {
                         </button>
                     </div>
                     <SliderComponent
+                        adaptiveHeight
                         onInit={() => setLazyLoad('ondemand')}
                         lazyLoad={lazyLoad}
                         ref={(slideRef) => setSlideRef(slideRef)}
