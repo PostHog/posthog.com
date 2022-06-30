@@ -339,7 +339,7 @@ export const ABTesting = () => {
                             Compare to LaunchDarkly
                         </Link>
                     </div>
-                    <div className="md:relative w-3/4">
+                    <div className="md:relative w-1/2">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
