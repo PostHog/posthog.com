@@ -15,6 +15,7 @@ module.exports = {
         twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
+    trailingSlash: 'always',
     plugins: [
         {
             resolve: `gatsby-source-squeak`,
@@ -231,7 +232,6 @@ module.exports = {
                 ],
             },
         },
-        `gatsby-plugin-remove-trailing-slashes`,
         {
             resolve: `gatsby-plugin-posthog`,
             options: {
