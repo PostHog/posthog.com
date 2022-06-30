@@ -78,6 +78,9 @@ The value for `$feature_flag` is the name of the feature flag (`experiment-featu
 
 In most of our client libraries, we send this event whenever we make the API call to `/decide` to get feature flags for a person. It's a good idea that you do the same.
 
----
-
 And that's all! You should be good to run any experiment you want with these changes. Let us know if you face any issues.
+
+### Further reading
+
+- [How to safely roll out new features using feature flags](/tutorials/feature-flags)
+- [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
