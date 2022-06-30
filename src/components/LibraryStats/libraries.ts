@@ -1,6 +1,10 @@
 interface LibrariesListInterface {
     name: string
     path: string
+    stars?: number
+    openIssues?: number
+    pullRequests?: number
+    lastCommit?: string
 }
 
 export const librariesList: LibrariesListInterface[] = [

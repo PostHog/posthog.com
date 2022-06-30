@@ -1,24 +1,24 @@
-import { kea } from 'kea'
+import { kea, actions, reducers } from 'kea'
 
-export const layoutLogic = kea({
-    actions: {
-        setAnchorOpen: (open) => ({ open }),
-        setAnchorHide: (hide) => ({ hide }),
+export const layoutLogic = kea([
+    actions({
+        setAnchorOpen: (open: boolean) => ({ open }),
+        setAnchorHide: (hide: boolean) => ({ hide }),
 
-        setSidebarOpen: (open) => ({ open }),
-        setSidebarHide: (hide) => ({ hide }),
+        setSidebarOpen: (open: boolean) => ({ open }),
+        setSidebarHide: (hide: boolean) => ({ hide }),
 
-        setSidebarDocked: (docked) => ({ docked }),
+        setSidebarDocked: (docked: boolean) => ({ docked }),
         setSidebarContentEntry: (entry) => ({ entry }),
-        setWebsiteTheme: (theme) => ({ theme }),
+        setWebsiteTheme: (theme: 'dark' | 'light') => ({ theme }),
         setSidebarContentStructure: (entry, tree, dir) => ({ entry, tree, dir }),
         onSidebarContentExpanded: (expandedKeys) => ({ expandedKeys }),
         onSidebarContentSelected: (selectedKey) => ({ selectedKey }),
         onChangeMenuState: (nItem) => ({ nItem }),
         setIsGetStartedModalOpen: (open) => ({ open }),
-    },
+    }),
 
-    reducers: {
+    reducers({
         anchorOpen: [
             false,
             {
@@ -102,7 +102,7 @@ export const layoutLogic = kea({
         menuNItem: [
             null,
             {
-                onChangeMenuState: (state, { nItem }) => nItem,
+                onChangeMenuState: (_, { nItem }) => nItem,
             },
         ],
         isGetStartedModalOpen: [
@@ -111,5 +111,5 @@ export const layoutLogic = kea({
                 setIsGetStartedModalOpen: (_, { open }) => open,
             },
         ],
-    },
-})
+    }),
+])

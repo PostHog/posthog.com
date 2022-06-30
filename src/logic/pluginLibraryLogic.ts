@@ -1,18 +1,21 @@
-import { kea } from 'kea'
+import { kea, actions, reducers, events, listeners, selectors } from 'kea'
+import { loaders } from 'kea-loaders'
+import { actionToUrl, urlToAction } from 'kea-router'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
 
-export const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
+export const toPathName = (pluginName: string) => pluginName.toLowerCase().replace(/ /g, '-')
 
-export const pluginLibraryLogic = kea({
-    actions: {
+export const pluginLibraryLogic = kea([
+    actions({
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
         openLibrary: true,
         openPlugin: (pluginName) => ({ pluginName }),
         openPluginPath: (pathname) => ({ pathname }),
-    },
-    reducers: () => ({
+    }),
+
+    reducers(() => ({
         filter: [
             'all',
             {
@@ -47,8 +50,9 @@ export const pluginLibraryLogic = kea({
                 setActivePlugin: () => false,
             },
         ],
-    }),
-    loaders: () => ({
+    })),
+
+    loaders(() => ({
         plugins: [
             [],
             {
@@ -60,8 +64,9 @@ export const pluginLibraryLogic = kea({
                 },
             },
         ],
-    }),
-    selectors: {
+    })),
+
+    selectors({
         filteredPlugins: [
             (s) => [s.plugins, s.filter],
             (plugins, filter) =>
@@ -72,19 +77,25 @@ export const pluginLibraryLogic = kea({
             (pluginPathname, filteredPlugins) =>
                 filteredPlugins.find((plugin) => toPathName(plugin.name) === pluginPathname),
         ],
-    },
-    events: ({ actions }) => ({
+    }),
+
+    events(({ actions }) => ({
         afterMount: () => {
             // only load in the frontend
             if (typeof window !== 'undefined') {
                 actions.loadPlugins()
             }
         },
-    }),
-    listeners: ({ values, actions }) => ({
+    })),
+
+    listeners(({ values, actions }) => ({
         openPlugin: async ({ pluginName }) => {
+            if (typeof window === 'undefined') {
+                return
+            }
+
             const { setActivePlugin } = actions
-            let plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
+            const plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
             let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
             if (plugin.url.includes('github.com/')) {
                 try {
@@ -98,9 +109,11 @@ export const pluginLibraryLogic = kea({
                     // can't load the readme, revert to default text
                 }
             }
+
             if (!markdown.includes('Installation')) {
                 markdown += pluginInstallationMd
             }
+
             plugin['markdown'] = markdown
                 .split(/!\[.*\]\(.*\)/)
                 .join('')
@@ -124,15 +137,17 @@ export const pluginLibraryLogic = kea({
                 actions.openLibrary()
             }
         },
-    }),
-    actionToUrl: () => ({
+    })),
+
+    actionToUrl(() => ({
         openLibrary: () => '/plugins/',
         openPlugin: ({ pluginName }) => `/plugins/${toPathName(pluginName)}`,
         openPluginPath: ({ pathname }) => `/plugins/${pathname}`,
-    }),
-    urlToAction: ({ actions }) => ({
+    })),
+
+    urlToAction(({ actions }) => ({
         '/plugins': () => actions.openLibrary(),
         '/plugins/': () => actions.openLibrary(),
         '/plugins/:pathname': ({ pathname }) => actions.openPluginPath(pathname),
-    }),
-})
+    })),
+])

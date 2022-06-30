@@ -1,4 +1,5 @@
-import { kea } from 'kea'
+import { kea, events } from 'kea'
+import { loaders } from 'kea-loaders'
 import { librariesList } from './libraries'
 
 export interface Library {
@@ -12,12 +13,12 @@ export interface Library {
 
 const ONE_HOUR = 1000 * 60 * 60
 
-export const libraryStatsLogic = kea({
-    loaders: {
+export const libraryStatsLogic = kea([
+    loaders(() => ({
         libraries: [
             [] as Library[],
             {
-                loadLibraryStats: async () => {
+                loadLibraries: async () => {
                     // Try to load a cache first to prevent GitHub rate limiting
                     const statsCacheTimestamp = localStorage.getItem('library_stats_timestamp')
                     if (statsCacheTimestamp && new Date().getTime() - Number(statsCacheTimestamp) < ONE_HOUR) {
@@ -31,10 +32,10 @@ export const libraryStatsLogic = kea({
                         const library = librariesList[i]
                         const repoRes = await (await fetch(`https://api.github.com/repos/${library.path}`)).json()
 
-                        librariesList[i]['stars'] = repoRes.stargazers_count
-                        librariesList[i]['openIssues'] = 0
-                        librariesList[i]['pullRequests'] = 0
-                        librariesList[i]['lastCommit'] = new Date(repoRes.pushed_at).toLocaleDateString('en-GB')
+                        librariesList[i].stars = repoRes.stargazers_count
+                        librariesList[i].openIssues = 0
+                        librariesList[i].pullRequests = 0
+                        librariesList[i].lastCommit = new Date(repoRes.pushed_at).toLocaleDateString('en-GB')
 
                         if (typeof repoRes.open_issues_count === 'number' && repoRes.open_issues_count > 0) {
                             const pullRequestsRes = await (
@@ -46,21 +47,23 @@ export const libraryStatsLogic = kea({
                         }
                     }
 
-                    const sortedLibraries = librariesList.sort((a, b) => b.stars - a.stars)
+                    const sortedLibraries = librariesList.sort((a, b) => (b?.stars || 0) - (a?.stars || 0))
                     localStorage.setItem('library_stats_timestamp_cache', JSON.stringify(sortedLibraries))
                     localStorage.setItem('library_stats_timestamp', String(new Date().getTime()))
+
+                    console.log(sortedLibraries)
 
                     return sortedLibraries
                 },
             },
         ],
-    },
-    events: ({ actions }) => ({
+    })),
+    events(({ actions }) => ({
         afterMount: () => {
             // only load in the frontend
             if (typeof window !== 'undefined') {
-                actions.loadLibraryStats()
+                actions.loadLibraries()
             }
         },
-    }),
-})
+    })),
+])
