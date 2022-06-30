@@ -253,9 +253,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                // Exclude specific pages or groups of pages using glob parameters
-                // See: https://github.com/isaacs/minimatch
-                exclude: [],
+                excludes: [],
                 createLinkInHead: true,
                 query: `
                 {
@@ -264,7 +262,6 @@ module.exports = {
                         siteUrl
                     }
                   }
-
                   allSitePage {
                     nodes {
                       path
@@ -274,38 +271,13 @@ module.exports = {
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                serialize: async ({ site, allSitePage }) => {
-                    const allQueriedPages = allSitePage.nodes.map((node) => {
-                        let changefreq = 'monthly'
-                        let priority = 0.7
-                        const path = node.path
-                        if (path === '/') {
-                            priority = 1.0
-                            changefreq = 'monthly'
-                        } else if (path.includes('blog')) {
-                            if (path === '/blog') {
-                                changefreq = 'weekly'
-                            } else {
-                                changefreq = 'yearly'
-                            }
-                        } else if (path.includes('product')) {
-                            priority = 0.8
-                        } else if (path.includes('docs')) {
-                            priority = 0.9
-                        } else if (path.includes('handbook')) {
-                            priority = 0.6
-                        } else if (path.includes('pricing')) {
-                            priority = 0.8
-                        } else if (path.includes('plugins')) {
-                            changefreq = 'daily'
-                        }
-
+                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
+                    const transformedPages = allPages.map(({ path }) => {
                         return {
-                            url: `${site.siteMetadata.siteUrl}${path}`,
-                            changefreq: changefreq,
-                            priority: priority,
+                            path: `${site.siteMetadata.siteUrl}${path}`,
                         }
                     })
+
                     let plugins = []
                     try {
                         const pluginsResponse = await fetch(
@@ -317,12 +289,42 @@ module.exports = {
                     }
 
                     plugins = plugins.map((plugin) => ({
-                        url: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
-                        changefreq: 'daily',
-                        priority: 0.8,
+                        path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...allQueriedPages, ...plugins]
+                    return [...transformedPages, ...plugins]
+                },
+                serialize: async ({ path }) => {
+                    let changefreq = 'monthly'
+                    let priority = 0.7
+
+                    if (path === '/') {
+                        priority = 1.0
+                        changefreq = 'monthly'
+                    } else if (path.includes('blog')) {
+                        if (path === '/blog') {
+                            changefreq = 'weekly'
+                        } else {
+                            changefreq = 'yearly'
+                        }
+                    } else if (path.includes('product')) {
+                        priority = 0.8
+                    } else if (path.includes('docs')) {
+                        priority = 0.9
+                    } else if (path.includes('handbook')) {
+                        priority = 0.6
+                    } else if (path.includes('pricing')) {
+                        priority = 0.8
+                    } else if (path.includes('plugins')) {
+                        priority = 0.8
+                        changefreq = 'daily'
+                    }
+
+                    return {
+                        url: path,
+                        changefreq: changefreq,
+                        priority: priority,
+                    }
                 },
             },
         },
