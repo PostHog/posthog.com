@@ -76,12 +76,10 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install ClickHouse, Kafka, MinIO, PostgreSQL, Redis and Zookeeper via Docker.
-
-First, run the services in Docker:
+In this step we will start all the external services needed by PostHog to work:
 
 ```bash
-docker compose -f docker-compose.dev.yml up clickhouse kafka object_storage db redis zookeeper
+docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
