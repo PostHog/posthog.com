@@ -77,9 +77,7 @@ Avoid:
 
 * Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
- <NewsletterForm
-compact
-/>
+<NewsletterForm compact />
 
 ## What's the culture like?
 

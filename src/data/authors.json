@@ -199,5 +199,13 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/colinwren/"
+    },
+    {
+        "handle": "lukas-smith",
+        "name": "Lukas Kahwe Smith",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/lsmith/"
     }
 ]

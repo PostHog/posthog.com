@@ -59,9 +59,3 @@ With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without 
 
   
 <img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
-
-#### [**Tenrec**](../marketplace/tenrec) (Coming soon)
-
-Tenrec provide an EU-hosted version of PostHog.
-
-This means you can use PostHog Scale with no data needing to leave the EU.

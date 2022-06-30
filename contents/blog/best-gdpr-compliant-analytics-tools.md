@@ -13,7 +13,7 @@ categories: ["Open source", "Guides", "Privacy"]
 
 The European Union's GDPR (General Data Protection Regulation) was created in 2016 to provide a framework which protects user privacy and shape how the data of users in the EU (and the UK) can be stored and shared. It applies to all businesses, non-profits and public organizations across the EU and the penalties for breaking it are severe – up to 4% of your yearly revenue. 
 
-While GDPR has created an essential and much-needed framework for handling user data, it has also complicated the ways in which teams can collect user information. A ruling in Austria, for example, punished a business for using Google Analytics (GA) and exporting user data to Google's US-based servers. It's since been followed by similar rulings in [https://isgoogleanalyticsillegal.com/france](France), the [Netherlands](https://isgoogleanalyticsillegal.com/netherlands) and [Italy](https://isgoogleanalyticsillegal.com/italy). 
+While GDPR has created an essential and much-needed framework for handling user data, it has also complicated the ways in which teams can collect user information. A ruling in Austria, for example, punished a business for using Google Analytics (GA) and exporting user data to Google's US-based servers. It's since been followed by similar rulings in [France](https://isgoogleanalyticsillegal.com/france), the [Netherlands](https://isgoogleanalyticsillegal.com/netherlands) and [Italy](https://isgoogleanalyticsillegal.com/italy). 
 
 As a result, many teams are now searching for new GDPR-compliant analytics tools for fear that [Google Analytics may be illegal](https://isgoogleanalyticsillegal.com/). This list compiles some of the best, privacy-friendly alternatives. 
 
@@ -74,7 +74,7 @@ Yes, it's actually designed this way. Fathom is a cookie-less solution, so you d
 ## 3. [Plausible](https://plausible.io/)
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Plausible is an open source web analytics platform, created as an alternative to tools such as Google Analytics. This means it offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+Plausible web analytics platform created as an alternative to tools such as Google Analytics – it used to be open source, but has since gone closed core. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -167,4 +167,4 @@ GoAccess can be configured not to collect PII (personally identifying informatio
 
 > PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+ <NewsletterForm compact />
