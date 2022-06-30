@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SliderComponent from 'react-slick'
 import { slideButtons } from './slideButtons'
-import { FeatureFlags, ProductAnalytics, SessionRecording } from './Slides'
+import { ABTesting, FeatureFlags, ProductAnalytics, SessionRecording } from './Slides'
 
 const SlideButton = ({ title, Icon, activeSlide, index }) => {
     const active = activeSlide === index
@@ -59,6 +59,7 @@ export default function Slider() {
                     <ProductAnalytics />
                     <SessionRecording />
                     <FeatureFlags />
+                    <ABTesting />
                 </SliderComponent>
             </div>
         </div>

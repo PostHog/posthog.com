@@ -1,4 +1,14 @@
-import { Funnels, Lifecycle, PathAnalysis, Retention, RightArrow, Stickiness, Trends } from 'components/Icons/Icons'
+import {
+    DiagonalArrow,
+    Experimentation,
+    Funnels,
+    Lifecycle,
+    PathAnalysis,
+    Retention,
+    RightArrow,
+    Stickiness,
+    Trends,
+} from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -149,8 +159,70 @@ export const FeatureFlags = () => {
                         </Link>
                     </div>
                     <div className="relative w-3/4">
-                        <div className="absolute bottom-0">
+                        <div className="absolute bottom-0 right-0">
                             <StaticImage className="w-full max-w-[480px]" src="./images/feature-flags-hog.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const ABTesting = () => {
+    const features = [
+        { title: 'Experimentation Suite', Icon: Experimentation },
+        { title: 'Correlation Analysis', Icon: DiagonalArrow },
+    ]
+
+    return (
+        <div className="grid grid-cols-2 gap-7 pt-5">
+            <div className="h-[400px] relative">
+                <motion.div
+                    className="absolute left-0 top-5 w-11/12"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage className="w-full" src="./images/ab-testing-2.png" />
+                </motion.div>
+                <motion.div
+                    className="absolute right-5 top-0 w-3/4"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage className="w-full" src="./images/ab-testing-1.png" />
+                </motion.div>
+            </div>
+            <div className="relative flex flex-col">
+                <div>
+                    <Title title={'A/B testing'} />
+                    <Subtitle subtitle="with multivariate testing" />
+                    <ul className="list-none m-0 p-0 mt-5 inline-block">
+                        {features.map(({ title, Icon }) => {
+                            return (
+                                <li className="odd:border-b border-gray-accent-light border-dashed" key={title}>
+                                    <Link className="text-black hover:text-black flex items-center space-x-2 text-[14px] py-3">
+                                        <span>
+                                            <Icon className="w-[20px]" />
+                                        </span>
+                                        <span className="opacity-70">{title}</span>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    <CTA url="/product/ab-testing" title="See how it works" />
+                </div>
+                <div className="flex items-end mt-auto w-full">
+                    <div className="mb-3 flex-grow">
+                        <hr className="w-[20px] h-[3px] rounded-full" />
+                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                            Compare to LaunchDarkly
+                        </Link>
+                    </div>
+                    <div className="relative w-3/4">
+                        <div className="absolute bottom-0 right-0">
+                            <StaticImage className="w-full max-w-[480px]" src="./images/ab-testing-hog.png" />
                         </div>
                     </div>
                 </div>
