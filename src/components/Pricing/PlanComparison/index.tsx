@@ -492,9 +492,9 @@ export const PlanComparison = ({ className = '' }) => {
                                     </thead>
                                     <tbody className="divide-y divide-gray-200">
                                         {section.features.map((feature) => (
-                                            <tr key={feature.name} className="border-white border-opacity-10">
+                                            <tr key={feature.name} className="border-white/10">
                                                 <th
-                                                    className="py-5 px-4 text-sm font-normal text-gray-500 border-white border-opacity-10 w-1/2"
+                                                    className="py-5 px-4 text-sm font-normal text-gray-500 border-white/10 w-1/2"
                                                     scope="row"
                                                 >
                                                     {feature.name}
@@ -568,22 +568,16 @@ export const PlanComparison = ({ className = '' }) => {
                                 <th style={{ border: 0 }} className="text-almost-black text-center">
                                     &nbsp;
                                 </th>
-                                <th
-                                    colSpan="3"
-                                    className="text-almost-black text-center border-white border-opacity-10"
-                                >
+                                <th colSpan="3" className="text-almost-black text-center border-white/10">
                                     Self-hosted options
                                 </th>
-                                <th
-                                    colSpan="2"
-                                    className="text-almost-black text-center border-white border-opacity-10"
-                                >
+                                <th colSpan="2" className="text-almost-black text-center border-white/10">
                                     Hosted solutions
                                 </th>
                             </tr>
                             <tr>
                                 <th
-                                    className="pb-4 px-6 text-sm font-medium text-almost-black text-center border-white border-opacity-10 sticky top-0  z-10 bg-opacity-50"
+                                    className="pb-4 px-6 text-sm font-medium text-almost-black text-center border-white/10 sticky top-0  z-10 bg-opacity-50"
                                     scope="col"
                                 >
                                     <span className="sr-only">Feature by</span>
@@ -592,7 +586,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-almost-black text-center border-white border-opacity-10 sticky top-0  z-10 bg-opacity-75"
+                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-almost-black text-center border-white/10 sticky top-0  z-10 bg-opacity-75"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -604,7 +598,7 @@ export const PlanComparison = ({ className = '' }) => {
                             {/* 
                             <tr>
                                 <th
-                                    className="py-8 px-6 text-sm font-medium text-almost-black text-left align-top border-white border-opacity-10"
+                                    className="py-8 px-6 text-sm font-medium text-almost-black text-left align-top border-white/10"
                                     scope="row"
                                 >
                                     Pricing
@@ -612,7 +606,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <td
                                         key={tier.name}
-                                        className="h-full py-8 px-6 align-top border-white border-opacity-10"
+                                        className="h-full py-8 px-6 align-top border-white/10"
                                     >
                                         <div className="relative h-full table">
                                             <p>
@@ -638,7 +632,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     {section.name && (
                                         <tr>
                                             <th
-                                                className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-almost-black border-white border-opacity-10"
+                                                className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-almost-black border-white/10"
                                                 colSpan={4}
                                                 scope="colgroup"
                                                 style={{
@@ -653,7 +647,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     {section.features.map((feature) => (
                                         <tr key={feature.name}>
                                             <th
-                                                className="py-5 px-6 text-sm font-normal text-almost-black text-left border-white border-opacity-10"
+                                                className="py-5 px-6 text-sm font-normal text-almost-black text-left border-white/10"
                                                 scope="row"
                                             >
                                                 {typeof feature.docsLink === 'string' ? (
@@ -663,10 +657,7 @@ export const PlanComparison = ({ className = '' }) => {
                                                 )}
                                             </th>
                                             {tiers.map((tier) => (
-                                                <td
-                                                    key={tier.name}
-                                                    className="py-5 px-6 border-white border-opacity-10"
-                                                >
+                                                <td key={tier.name} className="py-5 px-6 border-white/10">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
                                                         <span className="block text-sm text-center text-almost-black text-opacity-75">
                                                             {feature.tiers[tier.name]}
@@ -710,12 +701,12 @@ export const PlanComparison = ({ className = '' }) => {
                         </tbody>
                         {expanded ? (
                             <tfoot className="hidden">
-                                <tr className="border-t border-white border-opacity-10">
+                                <tr className="border-t border-white/10">
                                     <th className="sr-only" scope="row">
                                         Choose your plan
                                     </th>
                                     {tiers.map((tier) => (
-                                        <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
+                                        <td key={tier.name} className="pt-5 px-6 border-white/10">
                                             <a
                                                 href={tier.href}
                                                 className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"

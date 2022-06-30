@@ -1,15 +1,11 @@
 ---
 name: New content idea template
 about: Share your idea for a new piece of content
-title: "{title}"
+title: "{Content type} - {title}"
 labels: content
 assignees: andyvan-ph
 
 ---
-
-## What type of content is it?
-
-_Blog, tutorial, video, experimental jazz?_
 
 ## Strapline
 

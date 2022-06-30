@@ -13,8 +13,7 @@ const button = cntl`
     text-white
     hover:!text-white
     !bg-transparent
-    !border-white
-    !border-opacity-10
+    !border-white/10
     hover:!border-opacity-25
     font-semibold
 `
