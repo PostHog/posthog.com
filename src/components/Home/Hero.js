@@ -46,14 +46,14 @@ export default function Hero() {
                         The <span className="text-red">open source</span> Product OS
                     </h1>
                     <h2 className={heading('subtitle', 'primary', 'my-6 text-black opacity-50')}>
-                        Ships with a suite of product and engineering tools. Built on the modern data stack you want.
+                        A suite of product and data tools. Built on the modern data stack.
                     </h2>
 
-                    <div className="flex flex-col w- md:flex-row justify-center items-center gap-2">
-                        <CallToAction type="primary" className="w-40 shadow-xl" to="/signup">
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+                        <CallToAction type="primary" className="w-full md:w-40 shadow-xl" to="/signup">
                             Try PostHog
                         </CallToAction>
-                        <CallToAction type="secondary" className="w-40 shadow-xl" to="/book-a-demo">
+                        <CallToAction type="secondary" className="w-full md:w-40 shadow-xl" to="/book-a-demo">
                             Get a demo
                         </CallToAction>
                     </div>

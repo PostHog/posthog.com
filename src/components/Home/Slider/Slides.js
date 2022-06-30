@@ -21,36 +21,48 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 const Title = ({ title }) => {
-    return <h3 className="text-2xl mt-5 mb-0">{title}</h3>
+    return <h3 className="hidden md:block text-2xl mt-5 mb-0">{title}</h3>
 }
 
-const Subtitle = ({ subtitle }) => {
-    return <h4 className="text-[18px] opacity-70 m-0 font-semibold">{subtitle}</h4>
+const Subtitle = ({ subtitle, className = '' }) => {
+    return <h4 className={`text-[18px] opacity-70 m-0 font-semibold ${className}`}>{subtitle}</h4>
 }
 
 const CTA = ({ url, title }) => {
     return (
-        <Link className="text-[15px] flex space-x-1 items-center font-bold mt-4" to={url}>
+        <Link className="text-[15px] flex space-x-1 items-center font-bold mt-4 group" to={url}>
             <span>{title}</span>
             <span className="text-gray-accent-light">
-                <RightArrow className="w-[20px]" />
+                <RightArrow className="w-[20px] bounce" />
             </span>
         </Link>
     )
 }
 
+const ContentContainer = ({ children, className = '' }) => {
+    return <div className={`flex flex-col order-1 md:order-2 ${className}`}>{children}</div>
+}
+
+const Content = ({ children }) => {
+    return <div className="max-w-[420px] md:px-0 md:py-0 px-5 pb-5">{children}</div>
+}
+
+const ImageContainer = ({ children, className = '' }) => {
+    return <div className={`relative h-[300px] xl:h-[400px] order-2 md:order-1 ${className}`}>{children}</div>
+}
+
 export const ProductAnalytics = () => {
     const features = [
-        { title: 'Funnels', Icon: Funnels },
-        { title: 'User paths', Icon: PathAnalysis },
-        { title: 'Lifecycle', Icon: Lifecycle },
-        { title: 'Trends', Icon: Trends },
-        { title: 'Stickiness', Icon: Stickiness },
-        { title: 'Retention', Icon: Retention },
+        { title: 'Funnels', Icon: Funnels, url: '/product/funnels' },
+        { title: 'User paths', Icon: PathAnalysis, url: '/product/user-paths' },
+        { title: 'Lifecycle', Icon: Lifecycle, url: '/product/correlation-analysis' },
+        { title: 'Trends', Icon: Trends, url: '/product/trends' },
+        { title: 'Stickiness', Icon: Stickiness, url: '/product/correlation-analysis' },
+        { title: 'Retention', Icon: Retention, url: '/product/correlation-analysis' },
     ]
     return (
-        <div className="grid grid-cols-5 gap-7 pt-5">
-            <div className="col-span-3 h-[400px]">
+        <div className="relative grid grid-cols-2 xl:grid-cols-5 gap-7 pt-5">
+            <ImageContainer className="xl:col-span-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -60,20 +72,24 @@ export const ProductAnalytics = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        objectFit="contain"
-                        className="w-full h-full"
+                        objectFit="cover"
+                        objectPosition="top left"
+                        className="w-[200%] md:w-full h-full"
                         src="./images/product-analytics.png"
                     />
                 </motion.div>
-            </div>
-            <div className="col-span-2 relative flex flex-col">
-                <div className="max-w-sm">
+            </ImageContainer>
+            <ContentContainer className="xl:col-span-2 ">
+                <Content>
                     <Title title={'Product analytics'} />
-                    <ul className="list-none m-0 p-0 grid grid-cols-3 home-product-analytics-features mt-5">
-                        {features.map(({ title, Icon }) => {
+                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-5">
+                        {features.map(({ title, Icon, url }) => {
                             return (
                                 <li key={title}>
-                                    <Link className="text-black hover:text-black flex items-center space-x-2 text-[14px] py-3 px-4">
+                                    <Link
+                                        to={url}
+                                        className="text-black hover:text-black flex items-center space-x-2 text-[14px] py-2 md:py-3 px-3 md:px-4 md:border-b-0 border-b border-dashed border-gray-accent-light hover:bg-gray-accent-light transition-all"
+                                    >
                                         <span>
                                             <Icon className="w-[20px]" />
                                         </span>
@@ -84,32 +100,40 @@ export const ProductAnalytics = () => {
                         })}
                     </ul>
                     <CTA url="/product" title="Explore" />
-                </div>
-                <div className="flex items-end mt-auto">
-                    <div className="mb-3">
+                </Content>
+                <div className="flex items-end mt-auto w-full">
+                    <div className="hidden md:block mb-3">
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
                             Compare to Amplitude, Heap, Mixpanel
                         </Link>
                     </div>
-                    <div className="relative">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="max-w-[360px] w-full flex-shrink-0"
-                            src="./images/product-analytics-hog.png"
-                        />
+                    <div className="md:relative w-3/4">
+                        <div className="absolute bottom-0 right-0">
+                            <motion.div
+                                transition={{ delay: 0.5 }}
+                                initial={{ translateX: '100%' }}
+                                animate={{ translateX: 0 }}
+                            >
+                                <StaticImage
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[215px] xl:max-w-[360px]"
+                                    src="./images/product-analytics-hog.png"
+                                />
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const SessionRecording = () => {
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px]">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -117,48 +141,57 @@ export const SessionRecording = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        objectPosition="bottom"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full"
+                        className="w-[200%] md:w-full h-full"
                         src="./images/session-recording.png"
                     />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'Session recording'} />
                     <Subtitle subtitle="with console logs. Watch a group of sessions for users in a cohort." />
 
                     <CTA url="/product/session-recording" title="Explore" />
-                </div>
+                </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="mb-3 flex-grow">
+                    <div className="mb-3 flex-grow md:px-0 px-5">
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
                             Compare to Hotjar, Logrocket, Matomo
                         </Link>
                     </div>
-                    <div className="relative w-3/4">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full"
-                            src="./images/session-recording-hog.png"
-                        />
+                    <div className="md:relative w-1/2 md:w-3/4">
+                        <div className="absolute bottom-0 right-0">
+                            <motion.div
+                                transition={{ delay: 0.5 }}
+                                initial={{ translateX: '100%' }}
+                                animate={{ translateX: 0 }}
+                            >
+                                <StaticImage
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[250px] md:max-w-full"
+                                    src="./images/session-recording-hog.png"
+                                />
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const FeatureFlags = () => {
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px] relative overflow-hidden">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px]">
                 <motion.div
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.2 }}
                     className="absolute left-0 bottom-0 w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
@@ -166,12 +199,12 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-full"
+                        className="w-[150%] md:w-full"
                         src="./images/feature-flags-2.png"
                     />
                 </motion.div>
                 <motion.div
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.3 }}
                     className="absolute right-0 top-0 w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
@@ -179,53 +212,62 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-full"
+                        className="w-[150%] md:w-full"
                         src="./images/feature-flags-1.png"
                     />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'Feature flags'} />
-                    <Subtitle subtitle="with multivariate testing. Roll out features to groups or specific users." />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="with multivariate testing. Roll out features to groups or specific users."
+                    />
 
                     <CTA url="/product/feature-flags" title="See how it works" />
-                </div>
+                </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="mb-3 flex-grow">
+                    <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
                             Compare to LaunchDarkly
                         </Link>
                     </div>
-                    <div className="relative w-3/4">
+                    <div className="md:relative w-3/4">
                         <div className="absolute bottom-0 right-0">
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[480px]"
-                                src="./images/feature-flags-hog.png"
-                            />
+                            <motion.div
+                                transition={{ delay: 0.5 }}
+                                initial={{ translateX: '100%' }}
+                                animate={{ translateX: 0 }}
+                            >
+                                <StaticImage
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[250px] xl:max-w-[480px]"
+                                    src="./images/feature-flags-hog.png"
+                                />
+                            </motion.div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const ABTesting = () => {
     const features = [
-        { title: 'Experimentation Suite', Icon: Experimentation },
-        { title: 'Correlation Analysis', Icon: DiagonalArrow },
+        { title: 'Experimentation Suite', Icon: Experimentation, url: '/product/experimentation-suite' },
+        { title: 'Correlation Analysis', Icon: DiagonalArrow, url: '/product/correlation-analysis' },
     ]
 
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px] relative overflow-hidden">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="absolute left-0 top-5 w-11/12"
+                    className="absolute left-0 top-5 w-[150%] md:w-11/12"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -233,24 +275,27 @@ export const ABTesting = () => {
                 </motion.div>
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="absolute right-5 top-0 w-3/4"
+                    className="absolute right-5 top-0 w-[100%] md:w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage placeholder="none" quality={100} className="w-full" src="./images/ab-testing-1.png" />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'A/B testing'} />
                     <Subtitle subtitle="with multivariate testing" />
                     <ul className="list-none m-0 p-0 mt-5 inline-block">
-                        {features.map(({ title, Icon }) => {
+                        {features.map(({ title, Icon, url }) => {
                             return (
                                 <li className="odd:border-b border-gray-accent-light border-dashed" key={title}>
-                                    <Link className="text-black hover:text-black flex items-center space-x-2 text-[14px] py-3">
+                                    <Link
+                                        to={url}
+                                        className="text-black hover:text-black flex items-center space-x-2 text-[12px] md:text-[14px] py-3"
+                                    >
                                         <span>
-                                            <Icon className="w-[20px]" />
+                                            <Icon className="w-[16px] md:w-[20px]" />
                                         </span>
                                         <span className="opacity-70">{title}</span>
                                     </Link>
@@ -258,44 +303,50 @@ export const ABTesting = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product/ab-testing" title="See how it works" />
-                </div>
+                    <CTA url="/product/correlation-analysis" title="See how it works" />
+                </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="mb-3 flex-grow">
+                    <div className="hidden md:block mb-3 flex-grow">
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
                             Compare to LaunchDarkly
                         </Link>
                     </div>
-                    <div className="relative w-3/4">
+                    <div className="md:relative w-3/4">
                         <div className="absolute bottom-0 right-0">
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[480px]"
-                                src="./images/ab-testing-hog.png"
-                            />
+                            <motion.div
+                                transition={{ delay: 0.5 }}
+                                initial={{ translateX: '100%' }}
+                                animate={{ translateX: 0 }}
+                            >
+                                <StaticImage
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[200px] lg:max-w-[250px] xl:max-w-[480px]"
+                                    src="./images/ab-testing-hog.png"
+                                />
+                            </motion.div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const EventPipelines = () => {
     const data = [
-        { Icon: JS, url: '' },
-        { Icon: ReactIcon, url: '' },
-        { Icon: NodeJS, url: '' },
-        { Icon: Ruby, url: '' },
-        { Icon: Ios, url: '' },
-        { Icon: Android, url: '' },
+        { Icon: JS, url: '/docs/integrate/client/js' },
+        { Icon: ReactIcon, url: '/docs/integrate/client/react-native' },
+        { Icon: NodeJS, url: '/docs/integrate/server/node' },
+        { Icon: Ruby, url: '/docs/integrate/server/ruby' },
+        { Icon: Ios, url: '/docs/integrate/client/ios' },
+        { Icon: Android, url: '/docs/integrate/client/android' },
     ]
 
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px] relative">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -310,9 +361,9 @@ export const EventPipelines = () => {
                         src="./images/event-pipelines.png"
                     />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'Event pipelines'} />
                     <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
                     <ul className="list-none m-0 p-0 mt-5 flex space-x-2 items-center">
@@ -327,35 +378,41 @@ export const EventPipelines = () => {
                         })}
                     </ul>
                     <CTA url="/docs/integrate" title="Browse all libraries" />
-                </div>
+                </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="mb-3 flex-grow">
+                    <div className="hidden md:block mb-3 flex-grow">
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <p className="text-[14px] m-0">Use another service?</p>
                         <Link className="text-[14px]" to="/docs/apps/build">
                             Build an app connector
                         </Link>
                     </div>
-                    <div className="relative w-3/4">
+                    <div className="md:relative w-3/4">
                         <div className="absolute bottom-0 right-0">
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[480px]"
-                                src="./images/event-pipelines-hog.png"
-                            />
+                            <motion.div
+                                transition={{ delay: 0.5 }}
+                                initial={{ translateX: '100%' }}
+                                animate={{ translateX: 0 }}
+                            >
+                                <StaticImage
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[250px] xl:max-w-[480px]"
+                                    src="./images/event-pipelines-hog.png"
+                                />
+                            </motion.div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const DataWarehouse = () => {
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px] relative">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -370,33 +427,42 @@ export const DataWarehouse = () => {
                         src="./images/data-warehouse.png"
                     />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'Data warehouse'} />
-                    <Subtitle subtitle="Sync with your warehouse. Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse." />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="Sync with your warehouse. Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse."
+                    />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
-                </div>
+                </Content>
                 <div className="mt-auto w-full">
-                    <div className="w-full">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full"
-                            src="./images/data-warehouse-hog.png"
-                        />
+                    <div className="w-1/2 md:w-full md:relative absolute bottom-0 right-0">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full"
+                                src="./images/data-warehouse-hog.png"
+                            />
+                        </motion.div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
 
 export const SelfHosting = () => {
     return (
-        <div className="grid grid-cols-2 gap-7 pt-5">
-            <div className="h-[400px] relative">
+        <div className="relative grid grid-cols-2 gap-7 pt-5">
+            <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -411,25 +477,34 @@ export const SelfHosting = () => {
                         src="./images/self-hosting.png"
                     />
                 </motion.div>
-            </div>
-            <div className="relative flex flex-col">
-                <div className="max-w-[420px]">
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
                     <Title title={'Self hosting'} />
-                    <Subtitle subtitle="Host on-prem so customer data never leaves your infrastructure. Plus get full SQL access." />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="Host on-prem so customer data never leaves your infrastructure. Plus get full SQL access."
+                    />
 
                     <CTA url="/docs/self-host" title="Learn more" />
-                </div>
+                </Content>
                 <div className="mt-auto w-full">
                     <div className="w-full">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[225px]"
-                            src="./images/self-hosting-hog.png"
-                        />
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateY: '100%' }}
+                            animate={{ translateY: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[225px]"
+                                src="./images/self-hosting-hog.png"
+                            />
+                        </motion.div>
                     </div>
                 </div>
-            </div>
+            </ContentContainer>
         </div>
     )
 }
