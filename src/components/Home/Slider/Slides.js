@@ -78,9 +78,8 @@ export const ProductAnalytics = () => {
                         quality={100}
                         objectFit="cover"
                         objectPosition="top left"
-                        className="w-[200%] md:w-full h-full max-w-[907.5px] rotate-2"
+                        className="w-[200%] md:w-full h-full shadow-xl max-w-[907.5px] rotate-2"
                         src="./images/product-analytics.png"
-                        imgClassName="shadow-xl"
                     />
                 </motion.div>
             </ImageContainer>
@@ -144,7 +143,7 @@ export const SessionRecording = () => {
             <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="h-full"
+                    className="h-full flex items-end"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -153,8 +152,7 @@ export const SessionRecording = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        imgClassName="shadow-xl"
-                        className="md:w-full h-full rotate-2 max-w-[754.5px]"
+                        className="md:w-full rotate-2 max-w-[754.5px] shadow-xl"
                         src="./images/session-recording.png"
                     />
                 </motion.div>
@@ -212,8 +210,7 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        imgClassName="shadow-xl"
-                        className="w-[150%] md:w-full rotate-1"
+                        className="w-[150%] md:w-full rotate-1 shadow-xl"
                         src="./images/feature-flags-2.png"
                     />
                 </motion.div>
@@ -226,8 +223,7 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        imgClassName="shadow-xl"
-                        className="w-[150%] md:w-full -rotate-1"
+                        className="w-[150%] md:w-full -rotate-1 shadow-xl"
                         src="./images/feature-flags-1.png"
                     />
                 </motion.div>
@@ -291,8 +287,7 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        imgClassName="shadow-xl"
-                        className="w-full rotate-1"
+                        className="w-full rotate-1 shadow-xl"
                         src="./images/ab-testing-2.png"
                     />
                 </motion.div>
@@ -306,8 +301,7 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        imgClassName="shadow-xl"
-                        className="w-full -rotate-1"
+                        className="w-full -rotate-1 shadow-xl"
                         src="./images/ab-testing-1.png"
                     />
                 </motion.div>
