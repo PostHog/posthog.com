@@ -1,5 +1,5 @@
 ---
-date: 2022-06-29
+date: 2022-06-30
 title: The magic of a Hacker News Pre-Mortem
 rootPage: /blog
 sidebar: Blog
