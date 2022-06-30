@@ -2,15 +2,13 @@ import { kea, events } from 'kea'
 import { loaders } from 'kea-loaders'
 import { ignoreContributors } from '../../pages-content/community-constants'
 
-import type { contributorStatsLogicType } from './contributorStatsLogicType'
-
 interface Dataset {
     labels: string[]
     breakdown_value: string
     data: number[]
 }
 
-export const contributorStatsLogic = kea<contributorStatsLogicType>([
+export const contributorStatsLogic = kea([
     loaders({
         datasets: [
             [] as Dataset[],
