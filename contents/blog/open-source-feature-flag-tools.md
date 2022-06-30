@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/
+featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author: ["hanna-crombie"]
 categories: ["Open source"]
