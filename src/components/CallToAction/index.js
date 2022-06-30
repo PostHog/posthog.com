@@ -63,6 +63,9 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     rounded-sm
     inline-block
     cta
+    relative
+    active:top-[1px]
+    active:scale-[.97]
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}

@@ -33,12 +33,14 @@ const Customer = ({ image, width, height, className = '' }) => {
 
 export default function Customers() {
     return (
-        <section className={section('-mt-4 md:mt-12')}>
-            <h2 className={heading('md')}>
-                These industry leaders <span className="text-blue">build their data stack</span> on
-                <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14" />
-            </h2>
-            <div className="mt-8 md:mt-12">
+        <section className="mb-16 -mt-6">
+            <div className="bg-almost-black md:py-12 2xl:py-16 px-4 relative z-20">
+                <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-5xl text-white max-w-screen-2xl mx-auto">
+                    These industry leaders <span className="text-yellow">run their data stack</span> on
+                    <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
+                </h2>
+            </div>
+            <div className="mt-8 max-w-screen-2xl mx-auto">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                     <Customer className="max-h-[44px]" image={yCombinator} />
                     <Customer className="max-h-[36px]" image={staples} />

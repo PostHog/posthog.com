@@ -15,18 +15,20 @@ import {
 const SlideButton = ({ title, Icon, activeSlide, index }) => {
     const active = activeSlide === index
     return (
-        <li className="p-2">
+        <li className="p-1">
             <button
-                className={`flex flex-col items-center justify-center pb-[20px] pt-[10px] w-full rounded-md transition-all ${
-                    active ? 'bg-gray-accent-light' : ''
+                className={`flex flex-col items-center justify-center pb-[20px] pt-[10px] w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] ${
+                    active ? 'bg-gray-accent/40 hover:bg-gray-accent/40 active ' : 'group '
                 }`}
             >
-                <span className="w-[52px] h-[52px] flex justify-center items-center">
+                <span className="w-[52px] h-[52px] flex justify-center items-center opacity-60 group-hover:opacity-90">
                     <span className="absolute">
                         <Icon active={active} />
                     </span>
                 </span>
-                <p className={`lg:text-sm opacity-75 m-0 ${active ? 'font-bold' : 'font-semibold'}`}>{title}</p>
+                <p className={`lg:text-xs xl:text-sm opacity-90 m-0 ${active ? 'font-bold' : 'font-semibold'}`}>
+                    {title}
+                </p>
             </button>
         </li>
     )
@@ -63,39 +65,39 @@ export default function Slider() {
                         })}
                     </SliderComponent>
                 </div>
-                <div className="block md:hidden relative px-5">
+                <div className="block md:hidden px-3">
                     <p className="text-[14px] text-black opacity-50 text-center mt-0">Explore the toolkit</p>
-                    <select
-                        onChange={handleDropdownChange}
-                        className="appearance-none text-primary bg-white block p-3 w-full rounded font-bold"
-                    >
-                        {slideButtons.map(({ title, Icon }, index) => {
-                            return <option key={title}>{title}</option>
-                        })}
-                    </select>
-                    <svg
-                        className="absolute right-7 top-1/2 -translate-y-1/2"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g opacity="0.3">
-                            <path
-                                d="M10.4016 3.98684L6.99792 7.39165L3.59424 3.98684C3.13815 3.53075 2.39931 3.53075 1.94322 3.98684C1.48768 4.44239 1.48768 5.18177 1.94322 5.63731L6.17276 9.86685C6.62831 10.3218 7.36658 10.3218 7.8221 9.86685L12.0511 5.63787C12.5072 5.18232 12.5072 4.4435 12.0516 3.98742C11.5961 3.53134 10.8577 3.5313 10.4016 3.98684Z"
-                                fill="black"
-                            />
-                        </g>
-                    </svg>
+                    <div className="relative">
+                        <select
+                            onChange={handleDropdownChange}
+                            className="appearance-none text-primary text-md bg-white block p-3 w-full rounded font-bold shadow-lg"
+                        >
+                            {slideButtons.map(({ title, Icon }, index) => {
+                                return <option key={title}>{title}</option>
+                            })}
+                        </select>
+                        <svg
+                            className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g opacity="0.3">
+                                <path
+                                    d="M10.4016 3.98684L6.99792 7.39165L3.59424 3.98684C3.13815 3.53075 2.39931 3.53075 1.94322 3.98684C1.48768 4.44239 1.48768 5.18177 1.94322 5.63731L6.17276 9.86685C6.62831 10.3218 7.36658 10.3218 7.8221 9.86685L12.0511 5.63787C12.5072 5.18232 12.5072 4.4435 12.0516 3.98742C11.5961 3.53134 10.8577 3.5313 10.4016 3.98684Z"
+                                    fill="black"
+                                />
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center lg:min-h-[325px] xl:min-h-[420px]">
                     <div className="flex-grow hidden md:flex justify-center items-center">
                         <button
                             onClick={() => slideRef.slickPrev()}
-                            className="px-3 py-2 bg-white rounded-md shadow-md text-primary"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97]"
                         >
-                            <RightArrow className="rotate-180 w-[14px]" />
+                            <RightArrow className="rotate-180 w-5" />
                         </button>
                     </div>
                     <SliderComponent
@@ -118,9 +120,9 @@ export default function Slider() {
                     <div className="flex-grow hidden md:flex justify-center items-center">
                         <button
                             onClick={() => slideRef.slickNext()}
-                            className="px-3 py-2 bg-white rounded-md shadow-md text-primary"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97]"
                         >
-                            <RightArrow className="w-[14px]" />
+                            <RightArrow className="w-5" />
                         </button>
                     </div>
                 </div>

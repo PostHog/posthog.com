@@ -21,11 +21,11 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 const Title = ({ title }) => {
-    return <h3 className="hidden md:block text-2xl mt-5 mb-0">{title}</h3>
+    return <h3 className="text-lg md:text-2xl md:mt-5 mb-2 md:mb-0">{title}</h3>
 }
 
 const Subtitle = ({ subtitle, className = '' }) => {
-    return <h4 className={`text-[18px] opacity-70 m-0 font-semibold ${className}`}>{subtitle}</h4>
+    return <h4 className={`text-[18px] opacity-70 m-0 font-semibold leading-tight ${className}`}>{subtitle}</h4>
 }
 
 const CTA = ({ url, title }) => {
@@ -40,11 +40,11 @@ const CTA = ({ url, title }) => {
 }
 
 const ContentContainer = ({ children, className = '' }) => {
-    return <div className={`flex flex-col order-1 md:order-2 ${className}`}>{children}</div>
+    return <div className={`flex flex-col pb-6 order-1 md:order-2 ${className}`}>{children}</div>
 }
 
 const Content = ({ children }) => {
-    return <div className="max-w-[420px] md:px-0 md:py-0 px-5 pb-5">{children}</div>
+    return <div className="max-w-[450px] md:px-0 md:py-0 px-5 pb-5">{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -61,8 +61,8 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: Retention, url: '/product/correlation-analysis' },
     ]
     return (
-        <div className="relative grid grid-cols-2 xl:grid-cols-5 gap-7 pt-5">
-            <ImageContainer className="xl:col-span-3">
+        <div className="relative grid grid-cols-5 md:gap-5 pt-5">
+            <ImageContainer className="col-span-2 md:col-span-3 px-8 pt-4 -ml-8 md:-ml-0">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -74,21 +74,21 @@ export const ProductAnalytics = () => {
                         quality={100}
                         objectFit="cover"
                         objectPosition="top left"
-                        className="w-[200%] md:w-full h-full"
+                        className="w-[200%] md:w-full h-full max-w-[907.5px] shadow-xl rotate-2"
                         src="./images/product-analytics.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer className="xl:col-span-2 ">
+            <ContentContainer className="col-span-3 md:col-span-2">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-5">
+                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-2">
                         {features.map(({ title, Icon, url }) => {
                             return (
-                                <li key={title}>
+                                <li key={title} className="p-[3px]">
                                     <Link
                                         to={url}
-                                        className="text-black hover:text-black flex items-center space-x-2 text-[14px] py-2 md:py-3 px-3 md:px-4 md:border-b-0 border-b border-dashed border-gray-accent-light hover:bg-gray-accent-light transition-all"
+                                        className="text-black transition-all hover:text-black hover:bg-gray-accent/25 focus:bg-gray-accent/40 flex items-center space-x-2 text-[14px] py-2 md:py-3 px-2 xl:px-2 md:border-b-0 border-b border-dashed border-gray-accent-light hover:bg-gray-accent-light transition-all"
                                     >
                                         <span>
                                             <Icon className="w-[20px]" />
@@ -104,7 +104,10 @@ export const ProductAnalytics = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                        <Link
+                            to="/blog/categories/comparisons"
+                            className="text-primary/80 inline-block leading-tight text-[12px]"
+                        >
                             Compare to Amplitude, Heap, Mixpanel
                         </Link>
                     </div>
@@ -133,7 +136,7 @@ export const ProductAnalytics = () => {
 export const SessionRecording = () => {
     return (
         <div className="relative grid grid-cols-2 gap-7 pt-5">
-            <ImageContainer>
+            <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -145,7 +148,7 @@ export const SessionRecording = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[200%] md:w-full h-full"
+                        className="md:w-full h-full shadow-xl rotate-2 max-w-[754.5px]"
                         src="./images/session-recording.png"
                     />
                 </motion.div>
@@ -160,7 +163,10 @@ export const SessionRecording = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="mb-3 flex-grow md:px-0 px-5">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                        <Link
+                            to="/blog/categories/comparisons"
+                            className="text-primary/80 inline-block leading-tight text-[12px]"
+                        >
                             Compare to Hotjar, Logrocket, Matomo
                         </Link>
                     </div>
@@ -189,17 +195,17 @@ export const SessionRecording = () => {
 export const FeatureFlags = () => {
     return (
         <div className="relative grid grid-cols-2 gap-7 pt-5">
-            <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px]">
+            <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px] md:ml-4">
                 <motion.div
                     transition={{ delay: 0.2 }}
-                    className="absolute left-0 bottom-0 w-3/4"
+                    className="absolute left-0 bottom-2 w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-[150%] md:w-full"
+                        className="w-[150%] shadow-xl md:w-full rotate-1"
                         src="./images/feature-flags-2.png"
                     />
                 </motion.div>
@@ -212,7 +218,7 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-[150%] md:w-full"
+                        className="w-[150%] shadow-xl md:w-full -rotate-1"
                         src="./images/feature-flags-1.png"
                     />
                 </motion.div>
@@ -230,7 +236,10 @@ export const FeatureFlags = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                        <Link
+                            to="/blog/categories/comparisons"
+                            className="text-primary/80 inline-block leading-tight text-[12px]"
+                        >
                             Compare to LaunchDarkly
                         </Link>
                     </div>
@@ -264,14 +273,20 @@ export const ABTesting = () => {
 
     return (
         <div className="relative grid grid-cols-2 gap-7 pt-5">
-            <ImageContainer>
+            <ImageContainer className="md:ml-4">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="absolute left-0 top-5 w-[150%] md:w-11/12"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
-                    <StaticImage placeholder="none" quality={100} className="w-full" src="./images/ab-testing-2.png" />
+                    <StaticImage
+                        placeholder="none"
+                        quality={100}
+                        objectFit="contain"
+                        className="w-full shadow-xl rotate-1"
+                        src="./images/ab-testing-2.png"
+                    />
                 </motion.div>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -279,7 +294,13 @@ export const ABTesting = () => {
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
-                    <StaticImage placeholder="none" quality={100} className="w-full" src="./images/ab-testing-1.png" />
+                    <StaticImage
+                        placeholder="none"
+                        quality={100}
+                        objectFit="contain"
+                        className="w-full shadow-xl -rotate-1"
+                        src="./images/ab-testing-1.png"
+                    />
                 </motion.div>
             </ImageContainer>
             <ContentContainer>
@@ -308,7 +329,10 @@ export const ABTesting = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link to="/blog/categories/comparisons" className="text-primary text-[12px]">
+                        <Link
+                            to="/blog/categories/comparisons"
+                            className="text-primary/80 inline-block leading-tight text-[12px]"
+                        >
                             Compare to LaunchDarkly
                         </Link>
                     </div>

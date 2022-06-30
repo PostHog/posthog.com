@@ -382,6 +382,12 @@ ul {
 
     margin: 0;
     padding: 0;
+
+    button.active {
+        span {
+            @apply opacity-100;
+        }
+    }
 }
 .slick-list:focus {
     outline: none;

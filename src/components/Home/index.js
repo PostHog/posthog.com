@@ -24,8 +24,8 @@ const Home = () => {
             <StarUsBanner />
             <Layout>
                 <SEO
-                    title="PostHog - The self-hosted product analytics platform"
-                    description="PostHog is the all-in-one, open-source analytics platform for building better products. Try it for free."
+                    title="PostHog - The open source Product OS"
+                    description="PostHog is the all-in-one platform for building better products - with product analytics, feature flags, session recordings, a/b testing, heatmaps, and more."
                     image="/images/home.png"
                 />
                 <Hero />
