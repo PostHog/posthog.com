@@ -136,17 +136,21 @@ It's top-priority for us that events are fully processed and saved as soon as po
 
 This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
 
-## How does the event buffer help?
+<details>
 
-Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
+  <summary>How does the event buffer help?</summary>
 
-1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
-  This event gets person ID `A`.
-2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
-  This event gets person ID `A`.
-3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
-  OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
-4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
-  This event gets person ID `A`.
+  Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
 
-Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
+  1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
+    This event gets person ID `A`.
+  2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
+    This event gets person ID `A`.
+  3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
+    OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
+  4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
+    This event gets person ID `A`.
+
+  Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
+
+</details>
