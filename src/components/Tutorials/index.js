@@ -121,8 +121,9 @@ const CardView = ({ data }) => {
                             <Link to={slug}>
                                 {featuredImage ? (
                                     <GatsbyImage
-                                        className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
+                                        className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md w-full"
                                         image={getImage(featuredImage)}
+                                        width={600}
                                     />
                                 ) : (
                                     <img width={700} height={395} src="/banner.png" />
@@ -276,7 +277,7 @@ export const TutorialsFragment = graphql`
             }
             featuredImage {
                 childImageSharp {
-                    gatsbyImageData(width: 700, height: 395, placeholder: NONE)
+                    gatsbyImageData(placeholder: NONE)
                 }
             }
         }

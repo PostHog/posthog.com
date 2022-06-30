@@ -49,6 +49,7 @@ export default function Contact(props) {
                         contact: <ContactForm />,
                         demo: (
                             <DemoScheduler
+                                type={demoType}
                                 iframeSrc={
                                     {
                                         scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
