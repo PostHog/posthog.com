@@ -45,15 +45,15 @@ export default function Hero() {
                     <h1 className={heading()}>
                         The <span className="text-red">open source</span> Product OS
                     </h1>
-                    <h2 className={heading('subtitle', 'primary', 'my-6 text-black opacity-50')}>
+                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
                         A suite of product and data tools. Built on the modern data stack.
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction type="primary" className="w-full md:w-40 shadow-xl" to="/signup">
+                        <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
                             Try PostHog
                         </CallToAction>
-                        <CallToAction type="secondary" className="w-full md:w-40 shadow-xl" to="/book-a-demo">
+                        <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
                             Get a demo
                         </CallToAction>
                     </div>

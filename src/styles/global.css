@@ -92,6 +92,10 @@ p {
                 transform: rotate(-90deg);
                 transition: all 0.25s ease-out;
             }
+
+            & + p {
+                margin-top: 0.25rem;
+            }
         }
 
         &[open] {
@@ -382,6 +386,12 @@ ul {
 
     margin: 0;
     padding: 0;
+
+    button.active {
+        span {
+            @apply opacity-100;
+        }
+    }
 }
 .slick-list:focus {
     outline: none;

@@ -75,7 +75,7 @@ export const EventPipelines = ({ active }) => {
             />
             <path
                 d="M14.649 26.0178L6.60775 20.0596L14.649 14.1039L22.6903 20.0596L14.649 26.0178Z"
-                fill={active ? '#D0C8FF' : 'rgba(0, 0, 0, 1)'}
+                fill={active ? '#D0C8FF' : 'rgba(0, 0, 0, .25)'}
             />
         </svg>
     )
