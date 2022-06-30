@@ -200,7 +200,7 @@ export const SessionRecording = () => {
 export const FeatureFlags = () => {
     return (
         <div className="relative grid grid-cols-2 gap-7 pt-5">
-            <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px] md:ml-4">
+            <ImageContainer className="h-[40vw] md:h-[200px] xl:h-[400px] md:ml-4">
                 <motion.div
                     transition={{ delay: 0.2 }}
                     className="absolute left-0 bottom-2 w-3/4"
