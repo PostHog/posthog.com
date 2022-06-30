@@ -116,7 +116,6 @@ In the rush to get a Minimum Viable Product out, it's easy to overlook the impor
 
 [Example](https://news.ycombinator.com/item?id=29898582) | [Example 2](https://news.ycombinator.com/item?id=28280362) | [Example 3](https://news.ycombinator.com/item?id=27978440) | [Example 4](https://news.ycombinator.com/item?id=30642077) | [Example 5](https://news.ycombinator.com/item?id=20109511)
 
-
 ## This title is misleading
 
 Misleading / clickbaity titles get called out.
@@ -135,7 +134,7 @@ _If_ you have done those things, polarizing people is better than invoking no fe
 
 ## This won't load on mobile
 
-Lots of people reading news websites are using mobile devices. We hit the front page [on Hacker News yesterday](https://news.ycombinator.com/item?id=31906933) and had 27k visitors on desktop, 21k on mobile (and 347 on tablets). Fact.
+Lots of people reading news websites are using mobile devices. We hit the front page [on Hacker News recently](https://news.ycombinator.com/item?id=31906933) and had 27k visitors on desktop, 21k on mobile (and 347 on tablets). Fact.
 
 [Example](https://news.ycombinator.com/item?id=28087142)
 
@@ -147,6 +146,4 @@ It's an [in-joke](https://news.ycombinator.com/item?id=8863).
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
+<NewsletterForm compact />
