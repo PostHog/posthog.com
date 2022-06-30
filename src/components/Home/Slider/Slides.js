@@ -74,8 +74,9 @@ export const ProductAnalytics = () => {
                         quality={100}
                         objectFit="cover"
                         objectPosition="top left"
-                        className="w-[200%] md:w-full h-full max-w-[907.5px] shadow-xl rotate-2"
+                        className="w-[200%] md:w-full h-full max-w-[907.5px] rotate-2"
                         src="./images/product-analytics.png"
+                        imgClassName="shadow-xl"
                     />
                 </motion.div>
             </ImageContainer>
@@ -148,7 +149,8 @@ export const SessionRecording = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="md:w-full h-full shadow-xl rotate-2 max-w-[754.5px]"
+                        imgClassName="shadow-xl"
+                        className="md:w-full h-full rotate-2 max-w-[754.5px]"
                         src="./images/session-recording.png"
                     />
                 </motion.div>
@@ -205,7 +207,8 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-[150%] shadow-xl md:w-full rotate-1"
+                        imgClassName="shadow-xl"
+                        className="w-[150%] md:w-full rotate-1"
                         src="./images/feature-flags-2.png"
                     />
                 </motion.div>
@@ -218,7 +221,8 @@ export const FeatureFlags = () => {
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-[150%] shadow-xl md:w-full -rotate-1"
+                        imgClassName="shadow-xl"
+                        className="w-[150%] md:w-full -rotate-1"
                         src="./images/feature-flags-1.png"
                     />
                 </motion.div>
@@ -284,7 +288,8 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full shadow-xl rotate-1"
+                        imgClassName="shadow-xl"
+                        className="w-full rotate-1"
                         src="./images/ab-testing-2.png"
                     />
                 </motion.div>
@@ -298,7 +303,8 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full shadow-xl -rotate-1"
+                        imgClassName="shadow-xl"
+                        className="w-full -rotate-1"
                         src="./images/ab-testing-1.png"
                     />
                 </motion.div>

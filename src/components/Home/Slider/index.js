@@ -38,6 +38,7 @@ export default function Slider() {
     const [buttonRef, setButtonRef] = useState()
     const [slideRef, setSlideRef] = useState()
     const [activeSlide, setActiveSlide] = useState(0)
+    const [lazyLoad, setLazyLoad] = useState()
 
     const handleButtonChange = (_oldIndex, newIndex) => {
         setActiveSlide(newIndex)
@@ -91,7 +92,7 @@ export default function Slider() {
                         </svg>
                     </div>
                 </div>
-                <div className="flex items-center lg:min-h-[325px] xl:min-h-[420px]">
+                <div className="flex items-center">
                     <div className="flex-grow hidden md:flex justify-center items-center">
                         <button
                             onClick={() => slideRef.slickPrev()}
@@ -101,7 +102,8 @@ export default function Slider() {
                         </button>
                     </div>
                     <SliderComponent
-                        lazyLoad="ondemand"
+                        onInit={() => setLazyLoad('ondemand')}
+                        lazyLoad={lazyLoad}
                         ref={(slideRef) => setSlideRef(slideRef)}
                         asNavFor={buttonRef}
                         arrows={false}
