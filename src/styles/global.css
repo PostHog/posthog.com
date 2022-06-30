@@ -817,7 +817,7 @@ body.dark {
 }
 
 .home-slider .slick-track > div {
-    @apply border-r border-dashed border-gray-accent-light border-b;
+    @apply border-r border-dashed border-gray-accent-light;
 }
 
 .home-product-analytics-features {
