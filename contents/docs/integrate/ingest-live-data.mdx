@@ -128,10 +128,10 @@ import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
 
 # Event ingestion nuances
 
-It's top-priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits those three conditions:
+It's top-priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
 
-- isn't anonymous (anonymous events are recognized by having the `distinct_id` the same as the `$device_id` property)
-- isn't an `$identify` event (i.e. `posthog.identify()`)
+- isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
+- isn't an `$identify` event (e.g. from `posthog.identify()`)
 - its `distinct_id` cannot be matched to an existing person
 
 This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
