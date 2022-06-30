@@ -301,7 +301,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate)
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate)
-    createPosts(result.data.userGuides.nodes, 'userGuides', HandbookTemplate)
+    createPosts(result.data.userGuides.nodes, 'docs', HandbookTemplate)
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint)
 
     result.data.apidocs.nodes.forEach((node) => {
