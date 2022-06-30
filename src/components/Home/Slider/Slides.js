@@ -82,7 +82,7 @@ export const ProductAnalytics = () => {
             <ContentContainer className="col-span-3 md:col-span-2">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-2">
+                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-2 mr-4">
                         {features.map(({ title, Icon, url }) => {
                             return (
                                 <li key={title} className="p-[3px]">

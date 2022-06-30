@@ -91,11 +91,11 @@ export default function Slider() {
                         </svg>
                     </div>
                 </div>
-                <div className="flex items-center lg:min-h-[325px] xl:min-h-[420px]">
-                    <div className="flex-grow hidden md:flex justify-center items-center">
+                <div className="flex items-center relative lg:min-h-[325px] xl:min-h-[420px]">
+                    <div className="flex-grow hidden md:flex justify-center items-center mdlg:absolute mdlg:left-4 xl:static">
                         <button
                             onClick={() => slideRef.slickPrev()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97]"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] mdlg:z-30"
                         >
                             <RightArrow className="rotate-180 w-5" />
                         </button>
@@ -117,10 +117,10 @@ export default function Slider() {
                         <DataWarehouse />
                         <SelfHosting />
                     </SliderComponent>
-                    <div className="flex-grow hidden md:flex justify-center items-center">
+                    <div className="flex-grow hidden md:flex justify-center items-center mdlg:absolute mdlg:right-4 xl:static">
                         <button
                             onClick={() => slideRef.slickNext()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97]"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] mdlg:z-30"
                         >
                             <RightArrow className="w-5" />
                         </button>
