@@ -82,6 +82,7 @@ The release manager is ultimately responsible for the timeline of the release. T
     1. Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
 1. [ ] Time for the "Break the release" session! It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub to avoid any potential bugs creeping up in the final build stage.
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
+1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 
 ### Launch (day of the release)
 1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**

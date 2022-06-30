@@ -92,6 +92,10 @@ p {
                 transform: rotate(-90deg);
                 transition: all 0.25s ease-out;
             }
+
+            & + p {
+                margin-top: 0.25rem;
+            }
         }
 
         &[open] {

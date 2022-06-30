@@ -264,7 +264,7 @@ h6 {
     text-rendering: optimizeLegibility;
 
     a {
-        font-variation-settings: 'wght' 800; // override ant
+        font-variation-settings: 'wght' 800 !important; // override ant
     }
 
     code {
@@ -420,6 +420,7 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
+    width: 100%;
 }
 fieldset {
     margin-left: 0;
@@ -502,9 +503,9 @@ li > ol {
     margin-top: calc(1.45rem / 2);
 }
 li > ul {
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
-    padding-bottom: 1rem;
+    margin-bottom: calc(1.45rem / 4);
+    margin-top: calc(1.45rem / 4);
+    padding-bottom: 0.5rem;
 }
 blockquote *:last-child {
     margin-bottom: 0;
