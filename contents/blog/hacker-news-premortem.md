@@ -13,7 +13,7 @@ featuredImageType: full
 
 Imagine you're working on something for other developers that you really, _really_ want to be great.
 
-You're creating a new startup, you're creating a blog post, you're working on a side project.
+Perhaps you're creating a new startup, perhaps you're creating a blog post, or perhaps you're working on a side project that you want to share with the world.
 
 Enter, the Hacker News Pre-Mortem.
 
