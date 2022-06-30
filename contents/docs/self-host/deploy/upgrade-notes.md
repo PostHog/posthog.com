@@ -7,6 +7,7 @@ showTitle: true
 ### 24.0.0
 This version changes the supported Kubernetes version to >=1.22 <= 1.24 by dropping the support for Kubernetes 1.21 as it has reached end of life on 2022-06-28.
 
+
 ### 23.0.0
 This version changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
 
@@ -34,11 +35,13 @@ This version upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This updat
 
 Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
 
+
 ### 21.0.0
 This version changes the supported Kubernetes version to >=1.21 <= 1.24:
 
 - drops support for Kubernetes 1.20 as it has reached end of life on 2022-02-28
 - adds support for Kubernetes 1.24 released on 2022-05-24
+
 
 ### 20.0.0
 This version upgrades the [`altinity/clickhouse-operator`](https://github.com/Altinity/clickhouse-operator) from version `0.16.1` to `0.18.4`. This brings some updates to the custom resource definition (CRD). In order to keep everything in sync, please run the following steps before updating your Helm release:
@@ -77,10 +80,12 @@ This version upgrades the [`altinity/clickhouse-operator`](https://github.com/Al
     ```
     Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
 
+
 ### 19.0.0
 This version upgrades the Redis dependency chart from version `14.6.2` to `16.8.9` and upgrades Redis from version `6.2.4` to `6.2.7`.
 
 The [upstream changelog](https://github.com/bitnami/charts/tree/master/bitnami/redis#upgrading) includes changes that shouldn't be relevant to the majority of our users but if you are overriding any of the values listed in the changelog, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
 
 ### 18.0.0
 This version requires 3 [async migrations](https://posthog.com/docs/self-host/configure/async-migrations/overview) to be completed.
@@ -91,6 +96,7 @@ If you're on a PostHog app version < 1.33:
 1. upgrade to chart version 16.x.x first (example: use `--version 16.1.0` in the `helm upgrade` command)
 2. run the async migrations at `/instance/async_migrations`
 3. continue the upgrade process as usual
+
 
 ### 17.0.0
 This version upgrades the Kafka dependency chart from version `12.6.0` to `14.9.3` and upgrades Kafka to version `2.8.1`.
@@ -111,6 +117,7 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
+
 ### 15.0.0
 This version renamed the `prometheus-statsd-exporter` subchart alias from `statsd` to the default (`prometheus-statsd-exporter`).
 
@@ -120,6 +127,7 @@ As part of this work, we've also:
 * added the possibility to use an external `statsd` service by using the `externalStatsd` variable
 
 If you are using the `statsd` or the `metrics` variables, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
 
 ### 14.0.0
 This version fixes customizing PostgreSQL installation, previously many `values.yaml` values did not work as expected.
@@ -135,6 +143,7 @@ As part of this work, the following chart inputs have changed:
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
+
 ### 13.0.0
 This version fixes connecting to an external ClickHouse cluster. You can now also specify a secret containing the external ClickHouse service password.
 
@@ -148,6 +157,7 @@ As part of this work, the following chart inputs have changed:
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
 
+
 ### 12.0.0
 This version fixes a couple of long standing bugs related to the Redis service setup. You can now provide a Redis password (or a pointer to a Kubernetes secret containing it) directly in your `values.yaml` file.
 
@@ -158,6 +168,7 @@ As part of this work, we have also renamed a few chart inputs in order to reduce
 - `redis.password` -> `externalRedis.password`
 
 If you are overriding any of those values, please make the corresponding changes before upgrading. Otherwise **there's nothing you need to do**.
+
 
 ### 11.0.0
 This version removes some legacy Helm annotations not needed anymore. By removing those and upgrading your installation, all future upgrades to stateless components should now happen without downtime (see [#179](https://github.com/PostHog/charts-clickhouse/pull/179) for more info).
@@ -182,6 +193,7 @@ Note: you can safely ignore errors like `error: --overwrite is false but found t
 
 After that you continue the Helm upgrade process as usual.
 
+
 ### 10.0.0
 This version introduces two major changes:
 
@@ -198,11 +210,13 @@ This version introduces two major changes:
 
     If you are overriding any of those, please make the corresponding changes before upgrading. Depending on your settings and setup, during this upgrade the ClickHouse pod might get recreated.
 
+
 ### 9.0.0
 This version changes the supported Kubernetes version to >=1.20 <= 1.23:
 
 - drops support for Kubernetes 1.19 as it has reached end of life on 2021-10-28
 - adds support for Kubernetes 1.23 released on 2021-12-07
+
 
 ### 8.0.0
 This version deprecates the `beat` deployment ([#184](https://github.com/PostHog/charts-clickhouse/pull/184)) as its functionalities are now executed by the `workers` deployment.
@@ -217,12 +231,14 @@ As result, we have deprecated the following Helm values:
 
 If you didn’t make any customization to those, there’s nothing you need to do. Otherwise, please rename your customized values to be in the `workers.` scope.
 
+
 ### 7.0.0
 This version upgrades the Helm dependency chart [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager) from version `1.2.0` to `1.6.1`. This brings some updates to the custom resource definition (CRD).
 
 If you **are not** overriding `cert-manager.installCRDs` by setting it to `false` **there’s nothing you need to do**. You can go on updating your Helm release as usual and enjoy your day!
 
 If otherwise you are manually managing the `cert-manager`‘s CRDs, please remember to update the definitions in order to keep everything in sync.
+
 
 ### 6.0.0
 This version upgrades the [`altinity/clickhouse-operator`](https://github.com/Altinity/clickhouse-operator) version to `0.16.1`. This brings some updates to the custom resource definition (CRD). In order to keep everything in sync, please run the following steps before updating your Helm release:
@@ -261,6 +277,7 @@ This version upgrades the [`altinity/clickhouse-operator`](https://github.com/Al
     ```
     Note: the ClickHouse pod will not be restarted but the `clickhouse-operator` will, no downtime is expected as part of this release.
 
+
 ### 5.0.0
 This version changes defaults for Kafka PVC size and log retention policy. If your upgrade fails with the following:
 ```
@@ -270,6 +287,7 @@ There are two options:
 1. Change your values to match to what the Kafka values were before (`size: 5Gi` and `logRetentionBytes: _4_000_000_000`)
 2. Resize the PVC (Persistent Volume Claim) used by Kafka following our runbook [kafka-resize-disk](https://posthog.com/docs/self-host/runbook/kafka/resize-disk)
 
+
 ### 4.0.0
 This version introduces a [breaking change](https://github.com/PostHog/charts-clickhouse/pull/156) related to how `cert-manager` CRDs resources are deployed.
 
@@ -278,6 +296,7 @@ This version introduces a [breaking change](https://github.com/PostHog/charts-cl
 
     * to automatically install and manage them as part of your Helm release, simply leave the new `cert-manager.installCRDs` variable set to `true`
     * to manually install and manage them, simply set the new `cert-manager.installCRDs` variable to `false`
+
 
 ### 3.0.0
 This version changes the way ZK is run in the chart. ZK has been spun out and is now a cluster being used for Kafka and ClickHouse. An unfortunate side effect of that is that Kafka StatefulSet must be deleted. The reason for this is because Kafka records the cluster ID in ZooKeeper and when you swap it out it complains that the cluster ID has changed and refuses to start. Note that when you delete the Kafka StatefulSet and pod you might lose some events that were in Kafka, but not yet in ClickHouse.
@@ -292,6 +311,7 @@ How to fix?
 - Delete kafka persistent volume claim `kubectl -n posthog delete pvc data-posthog-posthog-kafka-0`
 - Wait for Kafka and Zookeeper pods to spin down (deleting sts in step 1 will also trigger the pods deletion)
 - Upgrade helm chart `helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog`
+
 
 ### 2.0.0
 This version updated Redis chart in an incompatible way. If your upgrade fails with the following:
