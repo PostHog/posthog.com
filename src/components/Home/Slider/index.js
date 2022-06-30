@@ -17,7 +17,7 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
     return (
         <li className="p-1">
             <button
-                className={`flex flex-col items-center justify-center pb-[20px] pt-[10px] w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] ${
+                className={`flex flex-col items-center justify-center pt-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] ${
                     active ? 'bg-gray-accent/40 hover:bg-gray-accent/40 active ' : 'group '
                 }`}
             >
@@ -26,7 +26,7 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
                         <Icon active={active} />
                     </span>
                 </span>
-                <p className={`lg:text-xs xl:text-sm opacity-90 m-0 ${active ? 'font-bold' : 'font-semibold'}`}>
+                <p className={`lg:text-xs xl:text-sm opacity-90 m-0 -mt-2 ${active ? 'font-bold' : 'font-semibold'}`}>
                     {title}
                 </p>
             </button>

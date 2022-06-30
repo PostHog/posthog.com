@@ -44,7 +44,7 @@ const CTA = ({ url, title }) => {
 }
 
 const ContentContainer = ({ children, className = '' }) => {
-    return <div className={`flex flex-col pb-6 order-1 md:order-2 ${className}`}>{children}</div>
+    return <div className={`flex flex-col order-1 md:order-2 ${className}`}>{children}</div>
 }
 
 const Content = ({ children }) => {
@@ -117,7 +117,7 @@ export const ProductAnalytics = () => {
                         </Link>
                     </div>
                     <div className="md:relative w-3/4">
-                        <div className="absolute bottom-0 right-0">
+                        <div className="absolute -bottom-2 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
                                 initial={{ translateX: '100%' }}
