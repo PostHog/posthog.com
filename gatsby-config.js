@@ -15,7 +15,7 @@ module.exports = {
         twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
-    trailingSlash: 'always',
+    trailingSlash: 'never',
     plugins: [
         {
             resolve: `gatsby-source-squeak`,
