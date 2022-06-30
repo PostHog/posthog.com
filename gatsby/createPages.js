@@ -200,10 +200,6 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         title
                         url
                     }
-                    apps {
-                        name
-                        url
-                    }
                     product {
                         title
                         url
