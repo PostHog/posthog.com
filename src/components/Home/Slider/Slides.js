@@ -513,22 +513,6 @@ export const SelfHosting = () => {
 
                     <CTA url="/docs/self-host" title="Learn more" />
                 </Content>
-                <div className="mt-auto w-full">
-                    <div className="w-full">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateY: '100%' }}
-                            animate={{ translateY: 0 }}
-                        >
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[225px]"
-                                src="./images/self-hosting-hog.png"
-                            />
-                        </motion.div>
-                    </div>
-                </div>
             </ContentContainer>
         </div>
     )
