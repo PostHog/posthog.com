@@ -21,16 +21,20 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 const Title = ({ title }) => {
-    return <h3 className="text-lg md:text-2xl md:mt-5 mb-2 md:mb-0">{title}</h3>
+    return <h3 className="text-lg md:text-2xl md:mt-5 mb-0">{title}</h3>
 }
 
 const Subtitle = ({ subtitle, className = '' }) => {
-    return <h4 className={`text-[18px] opacity-70 m-0 font-semibold leading-tight ${className}`}>{subtitle}</h4>
+    return <h4 className={`text-[18px] opacity-70 mb-3 font-semibold leading-tight ${className}`}>{subtitle}</h4>
+}
+
+const Description = ({ description, className = '' }) => {
+    return <p className={`text-[16px] opacity-70 m-0 leading-tight ${className}`}>{description}</p>
 }
 
 const CTA = ({ url, title }) => {
     return (
-        <Link className="text-[15px] flex space-x-1 items-center font-bold mt-4 group" to={url}>
+        <Link className="text-[15px] flex space-x-1 items-center font-bold my-4 group" to={url}>
             <span>{title}</span>
             <span className="text-gray-accent-light">
                 <RightArrow className="w-[20px] bounce" />
@@ -44,7 +48,7 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children }) => {
-    return <div className="max-w-[450px] md:px-0 md:py-0 px-5 pb-5">{children}</div>
+    return <div className="max-w-[450px] md:py-0 pl-5 md:px-0 pb-5">{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -82,7 +86,7 @@ export const ProductAnalytics = () => {
             <ContentContainer className="col-span-3 md:col-span-2">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-2 mr-4">
+                    <ul className="list-none m-0 p-0 grid md:grid-cols-3 home-product-analytics-features md:mt-2 mr-3">
                         {features.map(({ title, Icon, url }) => {
                             return (
                                 <li key={title} className="p-[3px]">
@@ -135,7 +139,7 @@ export const ProductAnalytics = () => {
 
 export const SessionRecording = () => {
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="relative grid grid-cols-2 md:gap-7 pt-5">
             <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -156,7 +160,8 @@ export const SessionRecording = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Session recording'} />
-                    <Subtitle subtitle="with console logs. Watch a group of sessions for users in a cohort." />
+                    <Subtitle subtitle="with console logs" />
+                    <Description description="Watch a group of sessions for users in a cohort." />
 
                     <CTA url="/product/session-recording" title="Explore" />
                 </Content>
@@ -226,10 +231,8 @@ export const FeatureFlags = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Feature flags'} />
-                    <Subtitle
-                        className="text-[14px] md:text-[18px]"
-                        subtitle="with multivariate testing. Roll out features to groups or specific users."
-                    />
+                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="with multivariate testing" />
+                    <Description description="Roll out features to groups or specific users." />
 
                     <CTA url="/product/feature-flags" title="See how it works" />
                 </Content>
@@ -307,13 +310,13 @@ export const ABTesting = () => {
                 <Content>
                     <Title title={'A/B testing'} />
                     <Subtitle subtitle="with multivariate testing" />
-                    <ul className="list-none m-0 p-0 mt-5 inline-block">
+                    <ul className="list-none m-0 p-0 inline-block">
                         {features.map(({ title, Icon, url }) => {
                             return (
                                 <li className="odd:border-b border-gray-accent-light border-dashed" key={title}>
                                     <Link
                                         to={url}
-                                        className="text-black hover:text-black flex items-center space-x-2 text-[12px] md:text-[14px] py-3"
+                                        className="text-black hover:text-black flex items-center space-x-2 text-[14px] md:text-[14px] py-3"
                                     >
                                         <span>
                                             <Icon className="w-[16px] md:w-[20px]" />
@@ -390,10 +393,10 @@ export const EventPipelines = () => {
                 <Content>
                     <Title title={'Event pipelines'} />
                     <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
-                    <ul className="list-none m-0 p-0 mt-5 flex space-x-2 items-center">
+                    <ul className="list-none m-0 p-0 mt-5 md:mt-0 grid grid-cols-3 md:flex md:space-x-2 space-y-2 md:space-y-0 items-center justify-center md:justify-start">
                         {data.map(({ Icon, url }, index) => {
                             return (
-                                <li key={index}>
+                                <li key={index} className="m-0 mr-2 md:mr-0 p-0">
                                     <Link className="text-primary hover:text-primary" to={url}>
                                         <Icon className="w-[22px]" />
                                     </Link>
@@ -455,10 +458,8 @@ export const DataWarehouse = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Data warehouse'} />
-                    <Subtitle
-                        className="text-[14px] md:text-[18px]"
-                        subtitle="Sync with your warehouse. Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse."
-                    />
+                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Sync with your warehouse." />
+                    <Description description="Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse." />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
                 </Content>
