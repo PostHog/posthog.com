@@ -17,7 +17,7 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
     return (
         <li className="p-1">
             <button
-                className={`flex flex-col items-center justify-center pt-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] ${
+                className={`flex flex-col items-center justify-center pt-1 px-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] space-y-2 md:space-y-0 h-full ${
                     active ? 'bg-gray-accent/40 hover:bg-gray-accent/40 active ' : 'group '
                 }`}
             >
@@ -26,7 +26,11 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
                         <Icon active={active} />
                     </span>
                 </span>
-                <p className={`lg:text-xs xl:text-sm opacity-90 m-0 -mt-2 ${active ? 'font-bold' : 'font-semibold'}`}>
+                <p
+                    className={`leading-tight text-xs lg:text-xs xl:text-sm opacity-90 m-0 -mt-2 ${
+                        active ? 'font-bold' : 'font-semibold'
+                    }`}
+                >
                     {title}
                 </p>
             </button>
@@ -59,7 +63,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={7}
                         focusOnSelect
-                        className="home-slider-buttons list-none max-w-2xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl mx-auto m-0 p-0 border-r border-l border-gray-accent-light border-dashed"
+                        className="home-slider-buttons list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl mx-auto m-0 p-0 border-r border-l border-gray-accent-light border-dashed"
                     >
                         {slideButtons.map((slide, index) => {
                             return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -93,10 +97,10 @@ export default function Slider() {
                     </div>
                 </div>
                 <div className="flex items-center">
-                    <div className="flex-grow hidden md:flex justify-center items-center mdlg:absolute mdlg:left-4 xl:static">
+                    <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:left-2 xl:static">
                         <button
                             onClick={() => slideRef.slickPrev()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] mdlg:z-30"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] md:z-30"
                         >
                             <RightArrow className="rotate-180 w-5" />
                         </button>
@@ -110,7 +114,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={1}
                         infinite
-                        className="home-slider flex-shrink-0 list-none max-w-2xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center divide divide-x divide-gray-accent-light divide-dashed overflow-auto md:border-l md:border-r border-gray-accent-light border-dashed"
+                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center divide divide-x divide-gray-accent-light divide-dashed overflow-auto md:border-l md:border-r border-gray-accent-light border-dashed"
                     >
                         <ProductAnalytics />
                         <SessionRecording />
@@ -120,10 +124,10 @@ export default function Slider() {
                         <DataWarehouse />
                         <SelfHosting />
                     </SliderComponent>
-                    <div className="flex-grow hidden md:flex justify-center items-center mdlg:absolute mdlg:right-4 xl:static">
+                    <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:right-2 xl:static">
                         <button
                             onClick={() => slideRef.slickNext()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] mdlg:z-30"
+                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] md:z-30"
                         >
                             <RightArrow className="w-5" />
                         </button>

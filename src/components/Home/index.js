@@ -31,13 +31,6 @@ const Home = () => {
                 <Hero />
                 <Customers />
                 <BeforeAndAfter />
-                <Features
-                    title={
-                        <>
-                            Everything product-led teams need <span className="text-yellow">in one place</span>
-                        </>
-                    }
-                />
                 <Apps />
                 <Pipelines />
                 <Timeline />

@@ -40,7 +40,7 @@ export default function Customers() {
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>
             </div>
-            <div className="mt-8 max-w-screen-2xl mx-auto">
+            <div className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                     <Customer className="max-h-[44px]" image={yCombinator} />
                     <Customer className="max-h-[36px]" image={staples} />
