@@ -43,7 +43,8 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        The <span className="text-red">open source</span> Product OS
+                        The <span className="text-red inline-block">open source</span>{' '}
+                        <span className="inline-block">Product OS</span>
                     </h1>
                     <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
                         A suite of product and data tools. Built on the modern data stack.
