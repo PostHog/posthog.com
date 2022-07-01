@@ -74,11 +74,16 @@ export default function Slider() {
                     <p className="text-[14px] text-black opacity-50 text-center mt-0">Explore the toolkit</p>
                     <div className="relative">
                         <select
+                            value={activeSlide}
                             onChange={handleDropdownChange}
                             className="appearance-none text-primary text-center text-md bg-white block p-3 w-full rounded font-bold shadow-lg"
                         >
                             {slideButtons.map(({ title, Icon }, index) => {
-                                return <option key={title}>{title}</option>
+                                return (
+                                    <option value={index} key={title}>
+                                        {title}
+                                    </option>
+                                )
                             })}
                         </select>
                         <svg
