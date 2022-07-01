@@ -65,7 +65,7 @@ The "default" mode follows the old architecture - one server doing everything. I
 
 The "ingestion" mode handles ingestion-related processing almost exclusively. The one bit of processing it does for plugins is handling the `processEvent` function - the function allowing events to be modified pre-ingestion. However, any additional processing triggered through running that function is **not** processed by the "ingestion" server.
 
-Lastly, the "async" server handles everything the "ingestion" server doesn't. The three key areas it covers are plugin jobs, scheduled tasks (e.g. `runEveryMinute`), and "async handlers" (webhooks, `onEvent`, `onAction`).
+Lastly, the "async" server handles everything the "ingestion" server doesn't. The three key areas it covers are plugin jobs, scheduled tasks (e.g. `runEveryMinute`), and "async handlers" (webhooks, `onEvent`).
 
 ## Plugins
 
@@ -76,7 +76,7 @@ Just before we dig into the architecture, it's important to get a briefing on ke
 Plugins can:
 
 1. Process events before they're ingested (via `processEvent`)
-2. Access events and actions after the event has been ingested* (via `onEvent`, `onAction`, and `exportEvents`)
+2. Access events and actions after the event has been ingested* (via `onEvent` and `exportEvents`)
 3. Schedule periodic tasks (via `runEveryMinute`, `runEveryHour`, and `runEveryDay`)
 4. Trigger custom jobs to be run at any given point in the future (via the jobs API)
 5. Access APIs for key-value storage (using Postgres) and cache (using Redis)
@@ -130,7 +130,7 @@ The processed event is then put into another Kafka topic, which two consumer gro
 
 One consumer group is managed by ClickHouse, via its [Kafka table engine](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/), which consumes messages from Kafka into rows in the database.
 
-The other consumer group corresponds to the async server, which pass the event to plugins running functions like `onEvent` and `onAction`.
+The other consumer group corresponds to the async server, which pass the event to plugins running functions like `onEvent`.
 
 If your server is running in "default" mode, this step is skipped, and instead async handlers are processed after the `createEvent` step on the same server.
 

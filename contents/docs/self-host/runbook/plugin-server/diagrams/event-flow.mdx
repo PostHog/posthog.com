@@ -42,7 +42,7 @@ flowchart LR
             direction LR
 
             KafkaConsumer(Kafka Consumer)
-            AsyncHandlers(runAsyncHandlers<BR>onEvent,onAction,webhooks)
+            AsyncHandlers(runAsyncHandlers<BR>onEvent,webhooks)
             Piscina(Piscina)
 
             subgraph MainThread [Main thread]

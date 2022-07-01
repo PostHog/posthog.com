@@ -5,7 +5,7 @@ export const SliderNavButton = ({ onClick, disabled, previous }) => {
     return (
         <button disabled={disabled} onClick={onClick}>
             <SliderNavArrow
-                className={previous ? 'transform rotate-180' : ''}
+                className={previous ? 'rotate-180' : ''}
                 bgColor={disabled ? '#E5E7E0' : 'black'}
                 arrowColor={disabled ? '#BFBFBC' : '#EEEFE9'}
             />

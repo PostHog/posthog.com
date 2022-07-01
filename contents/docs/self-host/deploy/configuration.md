@@ -46,7 +46,7 @@ The default configuration is geared towards minimizing costs. Here are example e
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -55,12 +55,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 20Gi
+    size: 30Gi
 
 kafka:
   persistence:
-    size: 20Gi
-  logRetentionBytes: _15_000_000_000
+    size: 60Gi
+  logRetentionBytes: _45_000_000_000
 
 # Add additional replicas for the stateless services
 events:
@@ -88,7 +88,7 @@ worker:
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -97,12 +97,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 60Gi
+    size: 100Gi
 
 kafka:
   persistence:
-    size: 30Gi
-  logRetentionBytes: _22_000_000_000
+    size: 200Gi
+  logRetentionBytes: _150_000_000_000
 
 # Enable horizontal pod autoscaling for stateless services
 events:
@@ -207,8 +207,36 @@ If your SMTP services requires authentication (recommended) you can either:
 
 ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). You can also use a ClickHouse managed service like [Altinity](https://altinity.com/) (see [here](/docs/self-host/configure/using-altinity-cloud) for more info).
 
+#### Securing ClickHouse
+By default, the PostHog Helm Chart will provision a ClickHouse cluster using a default username and password. Please provide a unique login by overriding the `clickhouse.user` and `clickhouse.password` values.
+
+By default, the PostHog Helm Chart uses a `ClusterIP` to expose the service
+internally to the rest of the PostHog application. This should prevent any
+external access.
+
+If however you decide you want to access the ClickHouse cluster external to the
+Kubernetes cluster and need to expose it e.g. to the internet, keep in mind the
+following:
+
+ 1. the Helm Chart does not configure TLS for ClickHouse, thus we would
+    recommend that you ensure that you configure TLS e.g. within a load balancer
+    in front of the cluster.
+
+ 1. if exposing via a `LoadBalancer` or `NodePort` service type via
+    `clickhouse.serviceType`, these will both expose a port on your Kubernetes
+    nodes. We recommend you ensure that your Kubernetes worker nodes are within
+    a private network or in a public network with firewall rules in place.
+
+ 1. if exposing via a `LoadBalancer` service type, restrict the ingress network
+    access to the load balancer
+
+ 1. to restrict access to the ClickHouse cluster, ClickHouse offers settings for
+    restricting the IPs/hosts that can access the cluster. See the
+    [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)
+    setting for details. We expose this setting via the Helm Chart as
+    `clickhouse.allowedNetworkIps`
 
 #### Use an external service
 To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.

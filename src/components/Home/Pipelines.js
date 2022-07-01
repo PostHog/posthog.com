@@ -33,9 +33,9 @@ const PipelineGraphic = () => {
                 <div className="w-[1px] lg:w-1/2 h-full lg:h-[1px] border-l-2 lg:border-t-2 self-start border-gray-accent-light border-dashed" />
             </div>
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
-                <div className="absolute left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-full -top-8 z-10">
+                <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-full -top-8 z-10">
                     <Icon name="logo-bullet" className="w-16 h-16 mx-auto" />
-                    <h5 className="text-base font-bold hidden bg-tan border border-gray border-opacity-50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
+                    <h5 className="text-base font-bold hidden bg-tan border border-gray/50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
                         Self-serve product analytics for 90% of your product questions
                     </h5>
                 </div>

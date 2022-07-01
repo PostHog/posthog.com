@@ -8,6 +8,11 @@
   status = 200
 
 [[redirects]]
+  from = "/question/*"
+  to = "/question"
+  status = 200
+
+[[redirects]]
   from = "/careers/*"
   to = "/careers"
   status = 200
@@ -1452,3 +1457,8 @@
 [[redirects]]
     from = "/blog/the-posthog-array-1-36-1"
     to = "/blog/the-posthog-array-1-36-0"
+
+# Added: 2022-06-16
+[[redirects]]
+    from = "/tutorials/b2b"
+    to = "/blog/b2b-saas-product-metrics"

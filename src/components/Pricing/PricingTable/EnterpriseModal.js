@@ -24,7 +24,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
     })
     return (
         <Modal open={open} setOpen={setOpen}>
-            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
+            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 -translate-x-1/2">
                 <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
                     <div className="flex flex-col md:flex-row md:space-x-14 sm:space-y-6 md:space-y-0 items-start">
                         <Enterprise
@@ -54,7 +54,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                                 />
                             </div>
 
-                            <div className="mb-4 border border-white border-opacity-10 rounded">
+                            <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
                                     <div className="mb-0 text-xs text-almost-black text-opacity-75">Event volume</div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
