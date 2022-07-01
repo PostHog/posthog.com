@@ -143,7 +143,7 @@ export const SessionRecording = () => {
             <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="h-full flex items-end"
+                    className="h-full md:flex md:items-end"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -152,7 +152,7 @@ export const SessionRecording = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="md:w-full rotate-2 max-w-[754.5px] shadow-xl"
+                        className="w-[170%] md:w-full rotate-2 md:max-w-[754.5px] shadow-xl"
                         src="./images/session-recording.png"
                     />
                 </motion.div>
@@ -384,7 +384,7 @@ export const EventPipelines = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full"
+                        className="w-[170%] md:w-full h-full"
                         src="./images/event-pipelines.png"
                     />
                 </motion.div>
