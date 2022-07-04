@@ -169,7 +169,7 @@ The general interview process we follow at PostHog is outlined below. We also wr
 | Senior Product Manager    | GMT -08:00 to +02:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | Not created yet                |
 | Senior Data Engineer      | GMT -05:00 to +02:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Senior Data Engineer Task]()  |
 | Site Reliability Engineer | GMT -08:00 to +02:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [Site Reliability Engineer]()  |
-| Developer Advocate        | GMT 0:00 to +02:00                     | Markerting      | Charles     | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & James H.<br/> 3) SuperDay Assessment - Charles, Joe, Andy, Tim & Grace             | [Dev Advocate Task]()          |
+| Developer Advocate        | GMT 0:00 to +02:00                     | Website & Docs      | Cory     | 1) Culture Screen - Coua<br/> 2) Technical Screen - James H.<br/> 3) SuperDay Assessment - Charles, Joe, Andy, Tim & Grace             | [Dev Advocate Task]()          |
 | Full Stack Engineer       | GMT -08:00 to +-2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
 
 
