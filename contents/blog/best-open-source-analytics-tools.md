@@ -15,7 +15,7 @@ Most well-known analytics tools demand hefty price tags, and they own your data.
 
 Most open source alternatives to the likes of Google Analytics, Amplitude, or Mixpanel are either free, or significantly cheaper. They also allow you to modify and extend them however you wish.
 
-Here, we’ve selected some of the best open-source analytics tools across a range of categories, including big data platforms, specialized web analytics tools, A/B testing tools, [open-source feature flag tools]((/blog/best-open-source-feature-flag-tools)), and all-in-one platforms like PostHog.
+Here, we’ve selected some of the best open-source analytics tools across a range of categories, including big data platforms, specialized web analytics tools, A/B testing tools, [open-source feature flag tools](/blog/best-open-source-feature-flag-tools), and all-in-one platforms like PostHog.
 
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - best open source analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
