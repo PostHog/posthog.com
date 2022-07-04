@@ -191,3 +191,6 @@ DevCycle has a 14 day free plan with up to 1,000 client-side monthly active user
 ### Open source license
 
 DevCycle is open source and available under an MIT license. You can [find them on GitHub here](https://github.com/DevCycleHQ).
+
+<NewsletterForm compact />
+
