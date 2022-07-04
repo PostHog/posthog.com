@@ -9,7 +9,7 @@ hideAnchor: true
 
 - James Greenhill (Team lead, Data/Infra Engineer)
 - Guido Iaquinti (Site Reliability Engineer)
-- Harry Wave (Full Stack Engineer)
+- Harry Waye (Full Stack Engineer)
 
 ## Mission Statement
 Make deploying, scaling, and managing PostHog easy, fast, and reliable.
