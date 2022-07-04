@@ -19,7 +19,7 @@ Increase the number of [relevant](https://posthog.com/handbook/strategy/strategy
 * **Objective**:
     * Accelerate word of mouth growth by significantly increasing awareness of what PostHog does as a company and as a product
 * **Key Results:**
-    * We hit 1,800 new monthly org signups
+    * Average 450 new org signups per week
     * Increase HogMail subscribers to 1,000
     * Get 20 reviews on our G2 profile
 * **Rationale:**
