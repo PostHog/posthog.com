@@ -1,5 +1,5 @@
 ---
-title: Team Infrsstructure
+title: Team Infrastructure
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
