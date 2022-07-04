@@ -12,7 +12,7 @@ hideAnchor: true
 - Yakko Majuri (Full Stack Engineer)
 - Marcus Hyett (Product Manager)
 - Guido Iaquinti (Site Reliability Engineer)
-- Harry Wave (Full Stack Engineer)
+- Harry Waye (Full Stack Engineer)
 
 ## Platform Sub-Teams
 
