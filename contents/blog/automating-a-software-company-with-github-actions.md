@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Engineering", "Guides"]
 author: ["michael-matloka"]
-featuredImage: ../images/blog/automating-software-company-github-actions.png
+featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
 ---
 
