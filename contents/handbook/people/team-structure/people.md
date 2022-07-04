@@ -19,6 +19,16 @@ Our primary goal is to build and retain our world-class team. We will accomplish
 2. Grow personally and professionally
 3. Have a strong sense of purpose and belonging
 
+## Q3 2022 Goals
+* **Proposed Objective:**
+    * Grow PostHog by 20% without compromising team happiness or our runway
+* **Proposed Key Results:**
+    * We have offers accepted by a senior product manager, 2x SREs, senior data engineer, developer advocate, and 4x full stack engineer.
+    * We stay within 5% of forecast cash burn. 
+    * Increase survey score for _I see myself still working at PostHog in two years' time _in team survey from 80% to >=85%. 
+* **Rationale:**
+    * Other teams depend on us hiring and retaining exceptional talent. And we need to do that without running out of money or forgetting to keep improving PostHog as a place to work. 
+
 ## Responsibilities
 
 Our people team works across talent, people, operations, and culture. This is what we care about:
