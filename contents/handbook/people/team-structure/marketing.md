@@ -14,6 +14,18 @@ hideAnchor: true
 
 Increase the number of [relevant](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021) visitors to our website. 
 
+## Q3 2022 Goals
+
+* **Objective**:
+    * Accelerate word of mouth growth by significantly increasing awareness of what PostHog does as a company and as a product
+* **Key Results:**
+    * We hit 1,800 new monthly org signups
+    * Increase HogMail subscribers to 1,000
+    * Get 20 reviews on our G2 profile
+* **Rationale:**
+    * Word of mouth continues to be our main driver of growth, but we want to be more focused in our approach, and in particular shift focus a bit from ‘telling people PostHog exists’ to ‘telling people what PostHog does’, given we’ve now done quite a lot of top of funnel brand awareness, sponsorships etc. 
+    * Moving from tracking all user signups to orgs only means Marketing is focused on the number that we can actually influence the most. 
+
 ## Responsibilities
 - Content, including the [Blog](/handbook/growth/marketing/blog)
 - [Email marketing](/handbook/growth/marketing/newsletter)
