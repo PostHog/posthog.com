@@ -7,16 +7,14 @@ showTitle: true
 import { Tabs } from 'antd'
 export const TabPane = Tabs.TabPane
 
-Live data ingestion, opposed to [historical data ingestions](/docs/integrate/ingest-historic-data), is the process of sending events from your applications to PostHog in real-time; as they happen.
+PostHog enables you to analyze data in real-time, as events come in. Make full use of this power by ingesting live data with our analytics integrations: [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), as well as [third-party platforms](/docs/integrate/overview#integrations).
 
-Live (real-time) events can be integrated using [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), and [third-party platform integrations](/docs/integrate/overview#integrations).
-
-The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For the purposes of the guide we'll focus on the client libraries as a means for data ingestion.
+The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For simplicity, we'll focus on _client_ libraries as a means of data ingestion.
 
 The guide covers the following:
 
 -   [Installing and initializing a PostHog library](#install-a-library)
--   [How autocapture works with the JavaScript library](#autocapture)
+-   [How autocapture works with the JavaScript library](#use-autocapture)
 -   [How to capture user events with PostHog](#capture-user-events)
 -   [How to identify and associate users with events](#identify-users)
 
@@ -61,7 +59,7 @@ import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
   </TabPane>
 </Tabs>
 
-# Autocapture
+# Use autocapture
 
 import JSAutoCapture from './client/js/snippets/autocapture.mdx'
 import JSCaptureIgnoreElements from './client/js/snippets/capture-ignore-elements.mdx'
