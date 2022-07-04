@@ -48,4 +48,3 @@ Make deploying, scaling, and managing PostHog easy, fast, and reliable.
 ## Slack channel
 
 [#team-platform](https://posthog.slack.com/archives/C01MM7VT7MG)
-diff --git a/src/sidebars/sidebars.json b/src/sidebars/sidebars.json
