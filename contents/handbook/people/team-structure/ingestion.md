@@ -16,6 +16,17 @@ Team ingestion is part of the [Platform team](/handbook/people/team-structure/pl
 
 Provide the best events pipeline in the world.
 
+## Q3 2022 Goals
+* **Objective**:
+    * Events are ingested, processed, and exported quickly, reliably and accurately
+* **Key Results**:
+    * End-to-end P95 time to ingest &lt;60 seconds (across the 3 month period)
+    * Apps reliability > 99% (across the 3 month period)
+    * Ship a solution to enable accurate persons on events ingestion for faster querying across all teams
+* **Rationale**:
+    * Ingesting data is the most crucial part of our product, missing, slow or inaccurate data makes the product useless to our customers and has proven to drive churn in the past
+    * We need to maintain a high bar for speed and push the boundaries of reliability and accuracy of our data
+
 ## Responsibilities
 
 Team Ingestion owns our ingestion pipeline end-to-end. That means we own the Django server ingestion API, the ingestion (plugin) server, as well as our client libraries, Kafka and ClickHouse setup, where it pertains to event ingestion.
