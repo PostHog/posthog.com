@@ -1,5 +1,5 @@
 ---
-date: 2021-08-09
+date: 2022-07-05
 title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,8 @@ Some of the above work requires a human brain constantly – software is all 1s 
 What about all the tedious tasks though? Running tests, publishing releases, deploying services, keeping the repository clean. Plain chores – boring and following the same pattern every time, but which are still are important.
 
 We don't need intelligence (artificial or otherwise) for those tasks every single time. We just need it once to define the jobs to be done, and have those jobs run based on some triggers. Actually, let's take this further: any programming language you want, any supporting services you need, ready-made solutions up for grabs, and deep integration with the version control platform.
+
+> _This article was originally published in August, 2021. It has been updated to reflect recent product changes_
 
 ## Actions 101
 
