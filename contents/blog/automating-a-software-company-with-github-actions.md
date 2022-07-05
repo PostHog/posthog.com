@@ -413,11 +413,11 @@ Here's what this looks like in GitHub's workflow visualization feature:
 
 ![Visualization 1. Autobump](../images/blog/github-actions/1-autobump.png)
 
-But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all of the aforementioned release tasks run automatically.
+But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all the aforementioned release tasks run automatically.
 
-In fact, there are so many tasks that run automatically that the workflow would take up too much space in this post, but you can take a look at one such full example in our [plugin server's repo](https://github.com/PostHog/plugin-server/blob/master/.github/workflows/cd.yaml). In it, we use our own GitHub Action (free on the Actions Marketplace) that compares package version between the reposistory contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
+In fact, there are too many steps to show them all in this post – but I encourage you to take a look at real-world YAML that we use in our JS library's repo: [`cd.yaml`](https://github.com/PostHog/posthog-js/blob/master/.github/workflows/cd.yml). In it, we also use our own GitHub Action (free on the Actions Marketplace) which compares package version between the reposistory contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
 
-That workflow has a fascinating visualization – which, remember, is actually an extension of the previous autobump workflow.
+GitHub can also _visualize_ workflows – extremely boring if there's only one job, but here the graph is quite informative. Do keep in mind that this CD process is really an extension of the previous autobump workflow.
 
 ![Visualization 2. Autorelease](../images/blog/github-actions/2-autorelease.png)
 
