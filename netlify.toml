@@ -1462,3 +1462,8 @@
 [[redirects]]
     from = "/tutorials/b2b"
     to = "/blog/b2b-saas-product-metrics"
+
+# Added: 2022-06-30
+[[redirects]]
+    from = "/tutorials/categories/plugins"
+    to = "/tutorials/categories/apps"
