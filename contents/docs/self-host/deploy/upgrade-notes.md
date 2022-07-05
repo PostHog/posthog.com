@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+### 25.0.0
+This version upgrades the PgBouncer service from version 1.12.0 to 1.17.0. As part of this upgrade, we've migrated from the container image `edoburu/pgbouncer:1.12.0` to `bitnami/pgbouncer:1.17.0`. If you are not overriding `pgbouncer.env` values, **there's nothing you need to do**. Otherwise, please remember to verify if those are working with the [new container image](https://hub.docker.com/r/bitnami/pgbouncer).
+
+
 ### 24.0.0
 This version changes the supported Kubernetes version to >=1.22 <= 1.24 by dropping the support for Kubernetes 1.21 as it has reached end of life on 2022-06-28.
 
