@@ -11,6 +11,7 @@
     "keywords": [
         "gatsby"
     ],
+    "private": true,
     "scripts": {
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
@@ -72,7 +73,6 @@
         "gatsby-remark-prismjs": "^3.5.1",
         "gatsby-remark-static-images": "^1.2.1",
         "gatsby-source-filesystem": "^2.1.22",
-        "gatsby-transformer-gitinfo": "^1.1.0",
         "gatsby-transformer-json": "^2.2.8",
         "gatsby-transformer-remark": "^2.8.7",
         "gatsby-transformer-sharp": "^2.2.14",
@@ -176,6 +176,9 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
+    "workspaces": [
+        "plugins/*"
+    ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
