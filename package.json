@@ -89,7 +89,7 @@
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
-        "mermaid": "^8.7.0",
+        "mermaid": "^9.1.2",
         "mobx": "^6.3.13",
         "node-fetch": "^2.6.1",
         "prism-react-renderer": "^1.2.0",
