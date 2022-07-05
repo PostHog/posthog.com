@@ -27,6 +27,7 @@ export const OpenSource = () => {
                 to="/signup/self-host/deploy"
                 className="mt-7 mb-3"
                 event={{ name: 'select edition: clicked get started', type: 'open_source' }}
+                featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
             >
                 Deploy now
             </TrackedCTA>
@@ -85,6 +86,7 @@ export const Scale = ({
                         href="https://license.posthog.com/"
                         className="mt-7 mb-3"
                         event={{ name: 'select edition: clicked get started', type: 'scale' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Get started
                     </TrackedCTA>
@@ -92,6 +94,7 @@ export const Scale = ({
                         type="outline"
                         to="/signup/self-host/get-in-touch?plan=scale&demo=scale#demo"
                         event={{ name: 'select edition: clicked book demo', type: 'scale' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Book a demo
                     </TrackedCTA>
@@ -151,6 +154,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
                         className="mt-7 mb-3"
                         event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Get started
                     </TrackedCTA>
@@ -158,6 +162,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         type="outline"
                         to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
                         event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Book a demo
                     </TrackedCTA>
@@ -202,6 +207,7 @@ export const Cloud = ({ setOpen, hideActions, hideBadge, hideCalculator, classNa
                         to="https://app.posthog.com/signup"
                         className="my-7"
                         event={{ name: 'select edition: clicked get started', type: 'cloud' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Get started
                     </TrackedCTA>
@@ -255,6 +261,7 @@ export const CloudEnterprise = ({
                         className="mt-7 mb-3"
                         to="/signup/self-host/get-in-touch?plan=enterprise#contact"
                         event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Get in touch
                     </TrackedCTA>
@@ -262,6 +269,7 @@ export const CloudEnterprise = ({
                         type="outline"
                         to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
                         event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+                        featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                     >
                         Book a demo
                     </TrackedCTA>

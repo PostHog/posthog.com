@@ -42,6 +42,7 @@ export default function SignUp() {
                             <TrackedCTA
                                 to="/signup/self-host"
                                 event={{ name: 'get started: clicked Continue', type: 'self_host' }}
+                                featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                             >
                                 Continue
                             </TrackedCTA>
@@ -64,6 +65,7 @@ export default function SignUp() {
                             <TrackedCTA
                                 href="https://app.posthog.com/signup"
                                 event={{ name: 'get started: clicked Continue', type: 'cloud' }}
+                                featureFlag={{ response: 'slider_on', name: 'homepage-feature-slider' }}
                             >
                                 Continue
                             </TrackedCTA>
