@@ -187,7 +187,7 @@ export const DocsIndex: React.FC = () => {
                                 <Link
                                     to={link.to}
                                     key={link.name}
-                                    disablePrefetch={true}
+                                    disablePrefetch
                                     className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                 >
                                     <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
@@ -218,7 +218,7 @@ export const DocsIndex: React.FC = () => {
                                 <p className="text-sm text-gray">Spin up your PostHog instance</p>
                             </div>
 
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {deployment.map((deploy) => {
                                     return (
                                         <li className="flex-grow" key={deploy.name}>
@@ -226,7 +226,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={deploy.to}
                                                 title={deploy.name}
                                                 icon={deploy.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={deploy.badge}
                                             />
                                         </li>
@@ -242,7 +242,7 @@ export const DocsIndex: React.FC = () => {
                                 </h4>
                                 <p className="text-gray">Start tracking events and users</p>
                             </div>
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {libraries.map((library) => {
                                     return (
                                         <li className="flex-grow" key={library.name}>
@@ -250,7 +250,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={library.to}
                                                 title={library.name}
                                                 icon={library.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={undefined}
                                             />
                                         </li>
@@ -264,7 +264,7 @@ export const DocsIndex: React.FC = () => {
                                 <span className="text-gray text-base">3.</span> Customize
                             </h4>
                             <p className="text-gray">Customize your installation with apps</p>
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {apps.map((app) => {
                                     return (
                                         <li className="flex-grow" key={app.name}>
@@ -272,7 +272,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={app.to}
                                                 title={app.name}
                                                 icon={app.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={undefined}
                                             />
                                         </li>
@@ -295,11 +295,11 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Link
                                         to={link.to}
-                                        disablePrefetch={true}
-                                        className="w-full h-full flex items-center px-8 py-5 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        disablePrefetch
+                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                     >
-                                        <Icon className="w-6 h-6 text-gray" name={link.icon} />
-                                        <h3 className="text-lg font-bold text-sm m-0">{link.name}</h3>
+                                        <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
+                                        <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>
                                     </Link>
                                 </li>
                             )
