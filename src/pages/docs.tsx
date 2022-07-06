@@ -3,7 +3,9 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
+import { PostHogWhite } from 'components/Icons/Icons'
 import DeployOption from 'components/DeployOption'
+import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import { DocSearchModal } from '@docsearch/react'
@@ -26,7 +28,7 @@ const quickLinks = [
         icon: 'apps',
         name: 'Apps',
         to: '/docs/apps',
-        description: 'Explore over 50 apps to make PostHog work for you.',
+        description: 'Extend PostHog by adding your own funcionality.',
     },
     {
         icon: 'partners',
@@ -38,7 +40,7 @@ const quickLinks = [
         icon: 'feature-flags',
         name: 'API',
         to: '/docs/api',
-        description: 'Interact with PostHog programatically through our API.',
+        description: 'Interact with PostHog programmatically through our API.',
     },
     {
         icon: 'faq2',
@@ -49,11 +51,12 @@ const quickLinks = [
 ]
 
 const deployment = [
-    { name: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws' },
-    { name: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs' },
-    { name: 'Digital Ocean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean' },
-    { name: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure' },
-    { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'hobby' },
+    { name: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
+    { name: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
+    { name: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
+    { name: 'Digital Ocean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
+    { name: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
+    { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'hobby', badge: undefined },
 ]
 
 const libraries = [
@@ -71,6 +74,7 @@ const apps = [
     { name: 'Slack', to: '/docs/integrate/webhooks/slack', icon: 'slack' },
     { name: 'Shopify', to: '/docs/integrate/third-party/shopify', icon: 'shopify' },
     { name: 'WordPress', to: '/docs/integrate/third-party/wordpress', icon: 'wordpress' },
+    { name: 'Zapier', to: '/docs/integrate/third-party/zapier', icon: 'zapier' },
 ]
 
 const featureLinks = [
@@ -89,7 +93,16 @@ const featureLinks = [
 ]
 
 export const DocsIndex: React.FC = () => {
+    const [query, setQuery] = React.useState<string>('')
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault()
+
+        if (query.trim()) {
+            setSearchOpen(true)
+        }
+    }
 
     return (
         <Layout>
@@ -100,9 +113,9 @@ export const DocsIndex: React.FC = () => {
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
 
-            <div className="max-w-5xl mx-auto space-y-24">
+            <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
                 <div>
-                    <div className="flex items-center justify-start relative py-20 overflow-hidden items-center">
+                    <div className="flex justify-start relative py-12 lg:py-20 overflow-hidden items-center -mx-px">
                         <div className="w-full">
                             <h1 className="font-bold mb-2">Documentation</h1>
                             <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
@@ -114,14 +127,15 @@ export const DocsIndex: React.FC = () => {
                                         appId="B763I3AO0D"
                                         indexName="posthog"
                                         apiKey="f1386529b9fafc5c3467e0380f19de4b"
+                                        initialQuery={query}
                                         onClose={() => setSearchOpen(false)}
                                     />,
                                     document.body
                                 )}
 
-                            <button
-                                onClick={() => setSearchOpen(true)}
-                                className="flex items-center relative mb-0 w-full max-w-lg mt-6"
+                            <form
+                                onSubmit={handleSubmit}
+                                className="flex items-center relative mb-0 mt-8 w-full max-w-lg"
                             >
                                 <div className="absolute left-4 w-4 h-4">
                                     <svg
@@ -143,13 +157,22 @@ export const DocsIndex: React.FC = () => {
                                         </defs>
                                     </svg>
                                 </div>
-                                <div className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]">
-                                    Search documentation
-                                </div>
-                            </button>
+                                <input
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    value={query}
+                                    name="docs-search"
+                                    placeholder="Search documentation..."
+                                    autoFocus={true}
+                                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
+                                />
+
+                                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
+                                    Search
+                                </button>
+                            </form>
                         </div>
 
-                        <span className="absolute right-0 bottom-0">
+                        <span className="hidden lg:block absolute right-0 bottom-0">
                             <StaticImage
                                 src="../../contents/images/search-hog-3.png"
                                 alt="This hog has an answer"
@@ -158,7 +181,7 @@ export const DocsIndex: React.FC = () => {
                             />
                         </span>
                     </div>
-                    <div className="grid grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                         {quickLinks.map((link) => {
                             return (
                                 <Link
@@ -166,10 +189,10 @@ export const DocsIndex: React.FC = () => {
                                     key={link.name}
                                     className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                 >
-                                    <Icon className="w-6 h-6 text-gray mt-0.5" name={link.icon} />
+                                    <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
                                     <div>
-                                        <h3 className="text-lg font-bold text-orange">{link.name}</h3>
-                                        <p className="text-black dark:text-white font-medium mb-2">
+                                        <h3 className="text-lg font-bold text-orange mb-0.5">{link.name}</h3>
+                                        <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
                                             {link.description}
                                         </p>
                                     </div>
@@ -179,14 +202,21 @@ export const DocsIndex: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-10">
                     <div className="text-center">
                         <h2 className="font-bold mb-1">Get started</h2>
                         <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
+                        <CallToAction
+                            type="primary"
+                            className="w-64 shadow-xl inline-flex items-center space-x-2"
+                            to="https://app.posthog.com/signup"
+                        >
+                            <span>Deploy Now on</span> <PostHogWhite />
+                        </CallToAction>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-x-4">
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded px-6 py-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
+                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
                                 <h4 className="font-bold mb-1">
                                     <span className="text-gray text-base">1.</span> Deploy
@@ -194,7 +224,7 @@ export const DocsIndex: React.FC = () => {
                                 <p className="text-sm text-gray">Spin up your PostHog instance</p>
                             </div>
 
-                            <ul className="w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
                                 {deployment.map((deploy) => {
                                     return (
                                         <li className="flex-grow" key={deploy.name}>
@@ -203,7 +233,7 @@ export const DocsIndex: React.FC = () => {
                                                 title={deploy.name}
                                                 icon={deploy.icon}
                                                 disablePrefetch={false}
-                                                badge={undefined}
+                                                badge={deploy.badge}
                                             />
                                         </li>
                                     )
@@ -211,14 +241,14 @@ export const DocsIndex: React.FC = () => {
                             </ul>
                         </div>
 
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded px-6 py-4">
+                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
                                 <h4 className="font-bold mb-1">
                                     <span className="text-gray text-base">2.</span> Integrate
                                 </h4>
                                 <p className="text-gray">Start tracking events and users</p>
                             </div>
-                            <ul className="w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
                                 {libraries.map((library) => {
                                     return (
                                         <li className="flex-grow" key={library.name}>
@@ -235,12 +265,12 @@ export const DocsIndex: React.FC = () => {
                             </ul>
                         </div>
 
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded px-6 py-4">
+                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <h4 className="font-bold mb-1">
                                 <span className="text-gray text-base">3.</span> Customize
                             </h4>
-                            <p className="text-gray">Customize your installation to fit your needs</p>
-                            <ul className="w-full list-none m-0 p-0">
+                            <p className="text-gray">Customize your installation with apps</p>
+                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
                                 {apps.map((app) => {
                                     return (
                                         <li className="flex-grow" key={app.name}>
@@ -262,7 +292,7 @@ export const DocsIndex: React.FC = () => {
                 <div>
                     <h2 className="text-center font-bold mb-8">Browse guides by feature</h2>
 
-                    <ul className="grid grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
+                    <ul className="grid grid-cols-2 lg:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
                         {featureLinks.map((link) => {
                             return (
                                 <li
@@ -271,7 +301,7 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Link
                                         to={link.to}
-                                        className="w-full h-full flex items-center px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        className="w-full h-full flex items-center px-8 py-5 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                     >
                                         <Icon className="w-6 h-6 text-gray" name={link.icon} />
                                         <h3 className="text-lg font-bold text-sm m-0">{link.name}</h3>
