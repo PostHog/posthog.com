@@ -28,25 +28,25 @@ But first of all, what exactly is a **CSS selector**?
 
 Syntax of CSS selectors is quite powerfull, but for now PostHog supports only a basic selector functionality. Let's go through it in a detail.
 
-###Type selectors
+### Type selectors
 
 Type selectors match all elements with a given HTML tag name.
 
 *Example:* `button` selector will match any `<button>` element.
 
-###Class selectors
+### Class selectors
 
 Class selectors match all elements with a given class name. Selector will also match if an element has other classes besides a given one.
 
 *Example:* `.comment` selector will match all elements with `class="comment"`.
 
-###ID selectors
+### ID selectors
 
 ID selectors match an element with a given ID. Element ID should be unique accross a page.
 
 *Example:* `#header` selector will match an element with `id="header"`.
 
-###Attribute selectors
+### Attribute selectors
 
 Attribute selectors match all elements with a given attribute. Attributes are basically are parameters of HTML elements. For istance, `type` and `name` are attributes in the following snippet:
 
@@ -63,7 +63,7 @@ Attribute selectors in PostHog can match both the fact of "presence" of atrribut
 
 *Example*: `[type]` selector will match all elements having `type` attribute (both empty and with some value). `[type='text']` selector will match only elements with `type='text'` (like a code snippet above).
 
-###Combinators
+### Combinators
 
 Combinators allow to chain different selectors together.
 
@@ -129,7 +129,7 @@ In general, CSS selectors are well-suited for situations like:
 ## Configuring CSS selectors
 There are two ways to do it - through the Toolbar and Data Management section.
 
-###Toolbar
+### Toolbar
 Go to your PostHog instance and select `Toolbar` in the bottom of the sidebar.
 
 ![Toolbar Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_location.png)
@@ -140,28 +140,32 @@ After your website is open, you should see a PostHog logo 🦔 floating around. 
 
 ![Toolbar In Action](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_in_action.png).
 
-The best option to start creating actions with CSS selectors is to use `Inspect` and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to change it!
+The best option to start creating actions with CSS selectors is to use `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
-Alternatively, you can go to `Actions` in the toolbar, select `New action` and then press `Select Element`. You should get the `Actions` menu like a one below:
+Alternatively, you can go to the `Actions` option in the toolbar, select `New action` and then press `Select Element`. You should get the `Actions` menu like a one below:
 
 ![Action Menu](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/create_action.png).
 
 Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
-###Data Management section
+### Data Management section
 Another way to create CSS selectors is to go to the `Data Management` section which is located in the sidebar of your PostHog instance.
 
 ![Data Management Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/data_management_location.png).
 
-On the `Data Management` page, select the `Actions` tab. Then press the `New Action` button. You should see the menu like a one below.
+On the `Data Management` page, select the `Actions` tab. Then press the `New Action` button. You should see the menu like this:
 
 ![Create New Action Data Management](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
 
-You can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar`. So right now we wiil go for `From event or pageview`. Press it.
+Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So instead of this we wiil select `From event or pageview` option.
 
-You will see a new page with `Match Group` menu open. Choose the `Autocapture` option there which will allow to define your `Actions`.
+Finaly you should see a new page with a `Match Group` menu open. Choose the `Autocapture` option.
 
 ![Create New Action Data Management](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/match_groups.png).
 
 Scroll down a bit and you will find the `HTML selector matches` section. Here you can define your CSS selectors.
+
+It's worth noting that using `Match groups` it is possible to use CSS selectors alongside other filter like `Text equals` and `Link target equals`. Moreover, you can even define several `Match groups` for a one action.
+
+> Happy matching!
 
