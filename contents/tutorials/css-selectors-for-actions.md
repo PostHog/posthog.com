@@ -5,7 +5,7 @@ showTitle: true
 author: ['hophog']
 date: 2022-07-06
 featuredImage: ../images/tutorials/banners/css-selectors-for-actions.png
-topics: ["actions", "css selectors", "data attributes"]
+topics: ["actions", "CSS selectors", "data attributes"]
 ---
 
 _Estimated reading time: 7 minutes_ ☕
@@ -26,24 +26,28 @@ But first of all, what exactly is a **CSS selector**?
     div > span.yellow
 ```
 
-Syntax of CSS selectors is quite powerfull, but for now PostHog supports only a basic selector functionality. Let's go through it in detail:
+Syntax of CSS selectors is quite powerfull, but for now PostHog supports only a basic selector functionality. Let's go through it in a detail.
 
-**Type selectors**
+###Type selectors
+
 Type selectors match all elements with a given HTML tag name.
 
 *Example:* `button` selector will match any `<button>` element.
 
-**Class selectors**
+###Class selectors
+
 Class selectors match all elements with a given class name. Selector will also match if an element has other classes besides a given one.
 
 *Example:* `.comment` selector will match all elements with `class="comment"`.
 
-**ID selectors**
+###ID selectors
+
 ID selectors match an element with a given ID. Element ID should be unique accross a page.
 
 *Example:* `#header` selector will match an element with `id="header"`.
 
-**Attribute selectors**
+###Attribute selectors
+
 Attribute selectors match all elements with a given attribute. Attributes are basically are parameters of HTML elements. For istance, `type` and `name` are attributes in the following snippet:
 
 ```html
@@ -59,7 +63,8 @@ Attribute selectors in PostHog can match both the fact of "presence" of atrribut
 
 *Example*: `[type]` selector will match all elements having `type` attribute (both empty and with some value). `[type='text']` selector will match only elements with `type='text'` (like a code snippet above).
 
-**Combinators**
+###Combinators
+
 Combinators allow to chain different selectors together.
 
 |Combinator Name|Syntax|Example|
@@ -75,7 +80,7 @@ These selectos are especially usefull for matching different UI states. `:` sele
 *Example*: `button:hover` selector will match all buttons in a hovered state.
 
 
-### Data attributes
+## Data attributes
 
 [Data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) is a type of HTML tag attributes which is especially usefull for defining actions in PostHog. Using them you can easily 'put' different events into one bucket. Data attrbutes are any attributes following the name convention `data-*` where `*` can be anything. 
 
@@ -107,8 +112,8 @@ If you want to selects only buttons, then you can do the following:
 
 Data attributes is a very flexible approach allowing to group together different events which otherwise would be really difficult to group. But with any powerfull tool, you should spend some time understanding what is the best way to apply it.
 
-## When you should use CSS selectors to create actions in PostHog?
-The first step for creating actions in PostHog should be a Toolbar. In the process the tool will automatically create CSS selector for you - chances it will be good from the start. If you realize the generated selector **is not wide/narrow enough** for your use case, then it's time to apply your CSS selectors knowledge.
+## When to use CSS selectors
+The first place for creating actions in PostHog should be a Toolbar. In the process the tool will automatically create CSS selector for you - chances it will be good from the start. If you realize the generated selector **is not wide/narrow enough** for your use case, then it's time to apply your CSS selectors knowledge.
 
 In general, CSS selectors are well-suited for situations like:
 
@@ -121,10 +126,10 @@ In general, CSS selectors are well-suited for situations like:
 > As a rule of thumb, it is probaly a **bad idea** to use complex CSS selectors with class names and combinators. Layouts tend to change, class names can be unreliable (especially if you use Tailwind CSS). So if you are considering using CSS selectors, **data attributes** is probably the best option to control specificity.
 
 
-## How to configure actions using CSS selectors in PostHog?
+## Configuring CSS selectors
 There are two ways to do it - through the Toolbar and Data Management section.
 
-**Toolbar**
+###Toolbar
 Go to your PostHog instance and select `Toolbar` in the bottom of the sidebar.
 
 ![Toolbar Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_location.png)
@@ -143,7 +148,7 @@ Alternatively, you can go to `Actions` in the toolbar, select `New action` and t
 
 Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
-**Data Management**
+###Data Management section
 Another way to create CSS selectors is to go to the `Data Management` section which is located in the sidebar of your PostHog instance.
 
 ![Data Management Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/data_management_location.png).
