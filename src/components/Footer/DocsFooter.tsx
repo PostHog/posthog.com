@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'antd'
 
 interface DocsFooterProps {
     filename: string
@@ -9,7 +8,7 @@ interface DocsFooterProps {
 export function DocsFooter({ filename, title }: DocsFooterProps) {
     return (
         <div className="docs-footer">
-            <Row>
+            {/*<Row>
                 <h3>Reach out</h3>
                 If you need help on any of the above, feel free to create an issue on{' '}
                 <a href="https://github.com/PostHog/posthog">our repo</a>, or <a href="/slack">join our Slack</a> where
@@ -51,7 +50,7 @@ export function DocsFooter({ filename, title }: DocsFooterProps) {
                     </a>
                     <br />
                 </Col>
-            </Row>
+            </Row>*/}
         </div>
     )
 }

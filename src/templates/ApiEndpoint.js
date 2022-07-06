@@ -1,12 +1,10 @@
-import { Button, Select } from 'antd'
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
 import CodeBlock from 'components/Home/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import 'core-js/features/array/at'
-import 'core-js/features/string/replace-all'
+import { Listbox } from '@headlessui/react'
 import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
@@ -285,9 +283,9 @@ function ResponseBody({ item, objects }) {
         <>
             <h4>Response</h4>
             <div className="response-wrapper">
-                <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
+                <button type="button" className="p-0 text-orange" onClick={() => setShowResponse(!showResponse)}>
                     {showResponse ? 'Hide' : 'Show'} response
-                </Button>
+                </button>
                 <br />
                 {showResponse && (
                     <Params
@@ -343,19 +341,14 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
                 </div>
-                <Select
-                    value={exampleLanguage}
-                    onChange={(key) => setExampleLanguage(key)}
-                    bordered={false}
-                    style={{ border: 0, background: 'transparent', width: 90 }}
-                >
-                    <Select.Option key="curl" value="curl">
+                <Listbox value={exampleLanguage} onChange={setExampleLanguage}>
+                    <Listbox.Option key="curl" value="curl">
                         curl
-                    </Select.Option>
-                    <Select.Option key="python" value="python">
+                    </Listbox.Option>
+                    <Listbox.Option key="python" value="python">
                         python
-                    </Select.Option>
-                </Select>
+                    </Listbox.Option>
+                </Listbox>
             </div>
 
             {exampleLanguage === 'curl' && (

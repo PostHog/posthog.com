@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import modalSaasCloud from '../../images/modal-saas-cloud.svg'
 import modalSelfDeploy from '../../images/modal-self-deploy.svg'
-import { Button } from 'antd'
+import { Close } from 'components/Icons/Icons'
 import Modal from 'react-modal'
 import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
@@ -58,7 +58,10 @@ export const GetStartedModal = () => {
                     </div>
                 </a>
             </div>
-            <Button icon="close" onClick={() => setIsGetStartedModalOpen(false)} className="modalClose" />
+
+            <button type="button" onClick={() => setIsGetStartedModalOpen(false)} className="modalClose">
+                <Close />
+            </button>
         </Modal>
     )
 }

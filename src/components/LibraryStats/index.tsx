@@ -1,7 +1,6 @@
 import React from 'react'
 import { useValues } from 'kea'
 import { libraryStatsLogic, Library } from './libraryStatsLogic'
-import { Spin } from 'antd'
 
 export const LibraryStats = () => {
     const { libraries, librariesLoading } = useValues(libraryStatsLogic)
@@ -9,7 +8,9 @@ export const LibraryStats = () => {
     return (
         <>
             {librariesLoading ? (
-                <Spin className="center" />
+                {
+                    /*<Spin className="center" />*/
+                }
             ) : (
                 <table>
                     <thead>

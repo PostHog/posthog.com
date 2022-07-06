@@ -2,7 +2,6 @@ import React from 'react'
 import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
-import { Input } from 'antd'
 
 interface PricingSliderProps {
     marks?: number[]
@@ -26,10 +25,9 @@ export const PricingSlider = ({
 
     return (
         <div className="mt-5 mb-6">
-            <Input
+            <input
                 name="event"
                 type="number"
-                autoFocus
                 value={inputValue}
                 onChange={({ target: { value } }) => setInputValue(value)}
             />

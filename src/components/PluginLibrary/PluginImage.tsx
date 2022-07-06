@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card } from 'antd'
 import { CodeOutlined } from '@ant-design/icons'
 
 export const PluginImage = ({ imageSrc }: { imageSrc?: string }) => {
-    return (
+    return null /*(
         <Card
             style={{
                 width: 60,
@@ -25,5 +24,5 @@ export const PluginImage = ({ imageSrc }: { imageSrc?: string }) => {
                 <CodeOutlined style={{ fontSize: 32 }} />
             )}
         </Card>
-    )
+    )*/
 }

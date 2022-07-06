@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Spin } from 'antd'
-import queryString from 'query-string'
+import { PostHog } from 'components/Icons/Icons'
 import { SEO } from '../components/seo'
 
 function Slack() {
     /* This component will redirect the user to the Slack users group. */
-    const [source, setSource] = useState(null)
+    const [source, setSource] = useState<string | null>(null)
     const slackUrl = 'https://join.slack.com/t/posthogusers/shared_invite/zt-1bofr1csx-ESKP9_iHkrRIpoaoDKqA_Q'
 
     useEffect(() => {
-        const { s } = queryString.parse(location.search)
+        const s = new URLSearchParams(location.search).get('s')
+
         setSource(s)
         /* Wait for any UTM tags to be registered in a $pageview,
         we wait a few more seconds if the user is coming from app so 
@@ -35,8 +35,8 @@ function Slack() {
                         in the PostHog app.
                     </div>
                 )}
-                <div style={{ marginTop: '2rem' }}>
-                    <Spin size="large" />
+                <div className="mt-8 animate-pulse">
+                    <PostHog />
                 </div>
             </div>
         </>

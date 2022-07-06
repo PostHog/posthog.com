@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { locationFactor } from './compensation_data/location_factor'
 import { sfBenchmark } from './compensation_data/sf_benchmark'
-import { Select, Statistic, Tag, Radio } from 'antd'
+// import { Select, Statistic, Tag, Radio } from 'antd'
 import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
 
-import 'antd/lib/statistic/style/css'
-import 'antd/lib/tag/style/css'
-import 'antd/lib/radio/style/css'
 import './style.scss'
 
 const formatCur = (val: number, currency: string) => {
@@ -67,7 +64,7 @@ export const CompensationCalculator = () => {
 
     const countries = unique(locationFactor.map((l) => l.country))
 
-    return (
+    return null /*(
         <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">
             <p>Select a role</p>
             <Select style={{ width: '100%', marginBottom: '0.75rem' }} value={job} onChange={setItem('job')}>
@@ -161,5 +158,5 @@ export const CompensationCalculator = () => {
             )}
             <br />
         </div>
-    )
+    )*/
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Tag } from 'antd'
 
 export type method = 'post' | 'put' | 'patch' | 'get' | 'delete'
 
@@ -16,7 +15,7 @@ const methodToColor: Record<method, string> = {
 }
 
 const MethodTag = ({ method }: { method: method }) => {
-    return <Tag color={methodToColor[method]}>{method.toUpperCase()}</Tag>
+    return null //<Tag color={methodToColor[method]}>{method.toUpperCase()}</Tag>
 }
 
 export const MethodTags = ({ allowedMethods }: MethodTagsProps) => {

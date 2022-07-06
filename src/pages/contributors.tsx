@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
-import { Row, Tabs, Spin } from 'antd'
 import { useActions, useValues } from 'kea'
 import { contributorsLogic } from '../logic/contributorsLogic'
 import { SEO } from '../components/seo'
@@ -11,11 +10,9 @@ import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
 import { ContributorsChart } from 'components/ContributorsChart'
 
-const { TabPane } = Tabs
-
 export const ContributorsPage = () => {
     const { setSearchQuery } = useActions(contributorsLogic)
-    const { filteredContributors, contributorsLoading } = useValues(contributorsLogic)
+    // const { filteredContributors, contributorsLoading } = useValues(contributorsLogic)
     const [activeTab, setActiveTab] = useState('list')
 
     const handleTabClick = (newTab: string) => {
@@ -36,17 +33,17 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
+                    {/*<Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
                         <TabPane tab="List" key="list" />
                         <TabPane tab="Stats" key="stats" />
-                    </Tabs>
+                    </Tabs>*/}
                     <Spacer height={20} />
 
                     {activeTab === 'list' ? (
                         <>
                             <ContributorSearch />
                             <Spacer height={20} />
-                            <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
+                            {/*<Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
                                 {contributorsLoading ? (
                                     <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
                                 ) : (
@@ -64,7 +61,7 @@ export const ContributorsPage = () => {
                                         ))}
                                     </>
                                 )}
-                            </Row>
+                            </Row>*/}
                         </>
                     ) : (
                         <ContributorsChart />

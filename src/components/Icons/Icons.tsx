@@ -724,7 +724,7 @@ export const Prohibited = ({ className = '' }: { className: string }): JSX.Eleme
     )
 }
 
-export const Close = ({ className = '' }: { className: string }): JSX.Element => {
+export const Close = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -785,7 +785,7 @@ export const Browser = ({ className = '' }: { className: string }): JSX.Element 
     )
 }
 
-export const Cloud = ({ className = '' }: { className: string }): JSX.Element => {
+export const Cloud = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
