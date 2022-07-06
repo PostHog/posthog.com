@@ -5,7 +5,6 @@ import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
 import { PostHogWhite } from 'components/Icons/Icons'
 import DeployOption from 'components/DeployOption'
-import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import { DocSearchModal } from '@docsearch/react'
@@ -206,13 +205,6 @@ export const DocsIndex: React.FC = () => {
                     <div className="text-center">
                         <h2 className="font-bold mb-1">Get started</h2>
                         <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
-                        <CallToAction
-                            type="primary"
-                            className="w-64 shadow-xl inline-flex items-center space-x-2"
-                            to="https://app.posthog.com/signup"
-                        >
-                            <span>Deploy Now on</span> <PostHogWhite />
-                        </CallToAction>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
