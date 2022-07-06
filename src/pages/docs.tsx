@@ -208,7 +208,7 @@ export const DocsIndex: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                        <div className="bg-white dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
                                 <h4 className="font-bold mb-1">
                                     <span className="text-gray text-base">1.</span> Deploy
@@ -233,7 +233,7 @@ export const DocsIndex: React.FC = () => {
                             </ul>
                         </div>
 
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                        <div className="bg-white dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
                                 <h4 className="font-bold mb-1">
                                     <span className="text-gray text-base">2.</span> Integrate
@@ -257,7 +257,7 @@ export const DocsIndex: React.FC = () => {
                             </ul>
                         </div>
 
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                        <div className="bg-white dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <h4 className="font-bold mb-1">
                                 <span className="text-gray text-base">3.</span> Customize
                             </h4>
