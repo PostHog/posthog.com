@@ -3,7 +3,6 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
-import { PostHogWhite } from 'components/Icons/Icons'
 import DeployOption from 'components/DeployOption'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
@@ -73,7 +72,7 @@ const apps = [
     { name: 'Slack', to: '/docs/integrate/webhooks/slack', icon: 'slack' },
     { name: 'Shopify', to: '/docs/integrate/third-party/shopify', icon: 'shopify' },
     { name: 'WordPress', to: '/docs/integrate/third-party/wordpress', icon: 'wordpress' },
-    { name: 'Zapier', to: '/docs/integrate/third-party/zapier', icon: 'zapier' },
+    { name: 'Zapier', to: '/apps/zapier-connector', icon: 'zapier' },
 ]
 
 const featureLinks = [
@@ -114,8 +113,8 @@ export const DocsIndex: React.FC = () => {
 
             <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
                 <section>
-                    <div className="flex justify-start relative py-12 lg:py-20 overflow-hidden items-center -mx-px">
-                        <div className="w-full">
+                    <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
+                        <div className="w-full z-20">
                             <h1 className="font-bold mb-2">Documentation</h1>
                             <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
 
@@ -171,14 +170,16 @@ export const DocsIndex: React.FC = () => {
                             </form>
                         </div>
 
-                        <span className="hidden lg:block absolute right-0 bottom-0">
-                            <StaticImage
-                                src="../../contents/images/search-hog-3.png"
-                                alt="This hog has an answer"
-                                width={500}
-                                placeholder="blurred"
-                            />
-                        </span>
+                        <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
+                            <span className="absolute right-0 bottom-0">
+                                <StaticImage
+                                    src="../../contents/images/search-hog-3.png"
+                                    alt="This hog has an answer"
+                                    width={500}
+                                    placeholder="blurred"
+                                />
+                            </span>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                         {quickLinks.map((link) => {
@@ -186,6 +187,7 @@ export const DocsIndex: React.FC = () => {
                                 <Link
                                     to={link.to}
                                     key={link.name}
+                                    disablePrefetch
                                     className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                 >
                                     <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
@@ -216,7 +218,7 @@ export const DocsIndex: React.FC = () => {
                                 <p className="text-sm text-gray">Spin up your PostHog instance</p>
                             </div>
 
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {deployment.map((deploy) => {
                                     return (
                                         <li className="flex-grow" key={deploy.name}>
@@ -224,7 +226,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={deploy.to}
                                                 title={deploy.name}
                                                 icon={deploy.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={deploy.badge}
                                             />
                                         </li>
@@ -240,7 +242,7 @@ export const DocsIndex: React.FC = () => {
                                 </h4>
                                 <p className="text-gray">Start tracking events and users</p>
                             </div>
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {libraries.map((library) => {
                                     return (
                                         <li className="flex-grow" key={library.name}>
@@ -248,7 +250,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={library.to}
                                                 title={library.name}
                                                 icon={library.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={undefined}
                                             />
                                         </li>
@@ -262,7 +264,7 @@ export const DocsIndex: React.FC = () => {
                                 <span className="text-gray text-base">3.</span> Customize
                             </h4>
                             <p className="text-gray">Customize your installation with apps</p>
-                            <ul className="grid grid-cols-2 md:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
                                 {apps.map((app) => {
                                     return (
                                         <li className="flex-grow" key={app.name}>
@@ -270,7 +272,7 @@ export const DocsIndex: React.FC = () => {
                                                 url={app.to}
                                                 title={app.name}
                                                 icon={app.icon}
-                                                disablePrefetch={false}
+                                                disablePrefetch
                                                 badge={undefined}
                                             />
                                         </li>
@@ -293,10 +295,11 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Link
                                         to={link.to}
-                                        className="w-full h-full flex items-center px-8 py-5 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        disablePrefetch
+                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                     >
-                                        <Icon className="w-6 h-6 text-gray" name={link.icon} />
-                                        <h3 className="text-lg font-bold text-sm m-0">{link.name}</h3>
+                                        <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
+                                        <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>
                                     </Link>
                                 </li>
                             )
