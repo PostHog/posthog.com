@@ -76,7 +76,7 @@ export const TrackedCTA = ({ event: { name: eventName, ...event }, featureFlag, 
     const { posthog } = useValues(posthogAnalyticsLogic)
 
     const handleClick = () => {
-        posthog?.capture(eventName, event)
+        posthog?.capture(eventName, {...event, [`$feature/{feature_flag}`]: featureFlag.response})
         if (featureFlag) {
             posthog?.capture('$feature_flag_called', {
                 feature_flag_response: featureFlag.response,
