@@ -24,7 +24,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### How do I configure the URL Normalizer?
 
-No confiuuration is needed. The URL Normalizer will automatically convert all URLs to lowercase and remove any trailing slashes. 
+No configuration is needed. The URL Normalizer will automatically convert all URLs to lowercase and remove any trailing slashes. 
 
 If you'd like to normalize URLs into a different format, please consider contributing a PR to [the repo](https://github.com/PostHog/posthog-url-normalizer-plugin). 
 
