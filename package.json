@@ -25,7 +25,6 @@
         "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "@ant-design/icons": "^4.1.0",
         "@docsearch/react": "^3.0.0-alpha.42",
         "@fontsource/source-code-pro": "^4.5.4",
         "@headlessui/react": "^1.4.0",
@@ -36,7 +35,6 @@
         "@supabase/supabase-js": "^1.29.4",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@uiw/react-md-editor": "^3.9.5",
-        "antd": "^3.23.2",
         "chart.js": "^2.9.4",
         "chrome-aws-lambda": "^10.1.0",
         "cntl": "^1.0.0",
