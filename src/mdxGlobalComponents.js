@@ -47,7 +47,6 @@ import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
-import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
@@ -56,7 +55,6 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
-import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
@@ -154,7 +152,6 @@ export const shortcodes = {
     FloatedImage,
     Footer,
     FooterCTA,
-    GetStartedModal,
     GithubIcon,
     Heading,
     HiddenSection,
@@ -163,7 +160,6 @@ export const shortcodes = {
     ImageBlock,
     InlineCode,
     LandingPageCallToAction,
-    LibraryStats,
     Link,
     Logo,
     MainNav,
