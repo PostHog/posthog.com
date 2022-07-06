@@ -3,7 +3,6 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
-import { PostHogWhite } from 'components/Icons/Icons'
 import DeployOption from 'components/DeployOption'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
@@ -73,7 +72,7 @@ const apps = [
     { name: 'Slack', to: '/docs/integrate/webhooks/slack', icon: 'slack' },
     { name: 'Shopify', to: '/docs/integrate/third-party/shopify', icon: 'shopify' },
     { name: 'WordPress', to: '/docs/integrate/third-party/wordpress', icon: 'wordpress' },
-    { name: 'Zapier', to: '/docs/integrate/third-party/zapier', icon: 'zapier' },
+    { name: 'Zapier', to: '/apps/zapier-connector', icon: 'zapier' },
 ]
 
 const featureLinks = [
@@ -114,7 +113,7 @@ export const DocsIndex: React.FC = () => {
 
             <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
                 <section>
-                    <div className="flex justify-start relative py-12 lg:py-20 overflow-hidden items-center -mx-px">
+                    <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
                         <div className="w-full">
                             <h1 className="font-bold mb-2">Documentation</h1>
                             <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
@@ -171,14 +170,16 @@ export const DocsIndex: React.FC = () => {
                             </form>
                         </div>
 
-                        <span className="hidden lg:block absolute right-0 bottom-0">
-                            <StaticImage
-                                src="../../contents/images/search-hog-3.png"
-                                alt="This hog has an answer"
-                                width={500}
-                                placeholder="blurred"
-                            />
-                        </span>
+                        <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full">
+                            <span className="absolute right-0 bottom-0">
+                                <StaticImage
+                                    src="../../contents/images/search-hog-3.png"
+                                    alt="This hog has an answer"
+                                    width={500}
+                                    placeholder="blurred"
+                                />
+                            </span>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                         {quickLinks.map((link) => {
@@ -186,6 +187,7 @@ export const DocsIndex: React.FC = () => {
                                 <Link
                                     to={link.to}
                                     key={link.name}
+                                    disablePrefetch={true}
                                     className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                 >
                                     <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
@@ -293,6 +295,7 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Link
                                         to={link.to}
+                                        disablePrefetch={true}
                                         className="w-full h-full flex items-center px-8 py-5 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                     >
                                         <Icon className="w-6 h-6 text-gray" name={link.icon} />
