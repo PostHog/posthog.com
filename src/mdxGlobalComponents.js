@@ -1,11 +1,11 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
-import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
+import { AnimateIntoView } from './components/AnimateIntoView'
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
 import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
@@ -33,8 +33,8 @@ import { Contact } from './components/Contact'
 import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
-import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { ContributorSearch } from './components/ContributorSearch'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -96,8 +96,8 @@ import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
-import { StarUsBanner } from './components/StarUsBanner'
 import { StartNowButton } from './components/StartNowButton'
+import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { TableOfContents } from './components/TableOfContents'
@@ -111,12 +111,12 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
-    AnimateIntoView,
     AnimatedBurger,
+    AnimateIntoView,
+    Endpoint,
+    MethodTags,
     Apps,
     AppsList,
     ArrayCTA,
@@ -144,8 +144,8 @@ export const shortcodes = {
     ContactForm,
     Container,
     ContributorCard,
-    ContributorSearch,
     ContributorsChart,
+    ContributorSearch,
     Customers,
     DarkModeToggle,
     DemoScheduler,
@@ -207,8 +207,8 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     StarRepoButton,
-    StarUsBanner,
     StartNowButton,
+    StarUsBanner,
     Structure,
     Subscribe,
     TableOfContents,
