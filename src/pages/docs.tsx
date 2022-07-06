@@ -113,7 +113,7 @@ export const DocsIndex: React.FC = () => {
             />
 
             <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
-                <div>
+                <section>
                     <div className="flex justify-start relative py-12 lg:py-20 overflow-hidden items-center -mx-px">
                         <div className="w-full">
                             <h1 className="font-bold mb-2">Documentation</h1>
@@ -199,9 +199,9 @@ export const DocsIndex: React.FC = () => {
                             )
                         })}
                     </div>
-                </div>
+                </section>
 
-                <div className="space-y-10">
+                <section className="space-y-10">
                     <div className="text-center">
                         <h2 className="font-bold mb-1">Get started</h2>
                         <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
@@ -279,9 +279,9 @@ export const DocsIndex: React.FC = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div>
+                <section>
                     <h2 className="text-center font-bold mb-8">Browse guides by feature</h2>
 
                     <ul className="grid grid-cols-2 lg:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
@@ -308,7 +308,7 @@ export const DocsIndex: React.FC = () => {
                             </Link>
                         </li>
                     </ul>
-                </div>
+                </section>
             </div>
         </Layout>
     )
