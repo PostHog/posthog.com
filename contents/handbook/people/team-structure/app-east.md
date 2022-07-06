@@ -20,7 +20,7 @@ Makers everywhere get better at building products because of PostHog
 ## Q3 2022 Goals
 * **Objective:**
     * Increase the number of successful new organizations on PostHog
-* **Proposed Key Results:**
+* **Key Results:**
     * [>20% increase] in activation (to Discovery)
     * [>20% increase] in number of teams with 2+ team-members
     * Design and build the reusable components needed to support others (i.e. session recordings and onboarding experiences) faster and high quality
