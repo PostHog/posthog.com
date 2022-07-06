@@ -18,7 +18,7 @@ hideAnchor: true
 Makers everywhere get better at building products because of PostHog
 
 ## Q3 2022 Goals
-* **Proposed Objective:**
+* **Objective:**
     * Increase the number of successful new organizations on PostHog
 * **Proposed Key Results:**
     * [>20% increase] in activation (to Discovery)
