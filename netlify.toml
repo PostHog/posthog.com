@@ -1463,6 +1463,11 @@
     from = "/tutorials/b2b"
     to = "/blog/b2b-saas-product-metrics"
 
+# Added: 2022-06-28
+[[redirects]]
+    from = "/docs/self-host/migrate-to-cloud"
+    to = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    
 # Added: 2022-06-30
 [[redirects]]
     from = "/tutorials/categories/plugins"
