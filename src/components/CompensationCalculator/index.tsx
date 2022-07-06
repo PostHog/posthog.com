@@ -195,7 +195,11 @@ export const CompensationCalculator = () => {
                     Base salary
                 </label>
                 <div className="text-xl mt-1" id="compensation">
-                    {job && country && region && location && typeof calculatedLocationFactor === 'number'
+                    {job &&
+                    country &&
+                    region &&
+                    findLocation(country, region) &&
+                    typeof calculatedLocationFactor === 'number'
                         ? formatCur(
                               sfBenchmark[job] *
                                   calculatedLocationFactor *
