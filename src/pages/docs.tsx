@@ -114,7 +114,7 @@ export const DocsIndex: React.FC = () => {
             <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
                 <section>
                     <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
-                        <div className="w-full">
+                        <div className="w-full z-20">
                             <h1 className="font-bold mb-2">Documentation</h1>
                             <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
 
@@ -170,7 +170,7 @@ export const DocsIndex: React.FC = () => {
                             </form>
                         </div>
 
-                        <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full">
+                        <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
                             <span className="absolute right-0 bottom-0">
                                 <StaticImage
                                     src="../../contents/images/search-hog-3.png"
