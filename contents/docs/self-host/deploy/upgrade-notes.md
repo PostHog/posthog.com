@@ -11,6 +11,9 @@ This version upgrades the PgBouncer service from version 1.12.0 to 1.17.0. As pa
 ### 24.0.0
 This version changes the supported Kubernetes version to >=1.22 <= 1.24 by dropping the support for Kubernetes 1.21 as it has reached end of life on 2022-06-28.
 
+### 23.4.0
+
+Updated the app version to 1.37.0 which requires the async migration 0004 to be completed, head over to `/instance/async_migrations` and make sure you run that before updating.
 
 ### 23.0.0
 This version changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
