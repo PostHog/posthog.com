@@ -17,7 +17,6 @@
   to = "/careers"
   status = 200
 
-
 [[redirects]]
     from = "/docs/integrations/android-integration"
     to = "/docs/libraries/android"
@@ -1472,3 +1471,7 @@
 [[redirects]]
     from = "/tutorials/categories/plugins"
     to = "/tutorials/categories/apps"
+
+[[redirects]]
+  from = "/startups"
+  to = "/pricing#startup-plan"
