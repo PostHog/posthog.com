@@ -18,14 +18,20 @@ hideAnchor: true
 Makers everywhere get better at building products because of PostHog
 
 ## Q3 2022 Goals
-* **Objective:**
-    * Increase the number of successful new organizations on PostHog
+* **Objective 1:**
+    * Increase the number of successful organizations on PostHog
 * **Key Results:**
-    * [>20% increase] in activation (to Discovery)
-    * [>20% increase] in number of teams with 2+ team-members
-    * Design and build the reusable components needed to support others (i.e. session recordings and onboarding experiences) faster and high quality
+    * Increase in [retention](https://app.posthog.com/insights/bj3-djOy): week 4 retention from the previous week goes from 21.5% to 30%.
 * **Rationale:**
     * To nail self-serve we need every new organization that signs up to have a smooth and easy experience, from ingesting their first event to understanding how to use product analytics to inviting their team to share insights
+
+* **Objective 2:**
+    * Make it **easy to build** new features quickly that fit in with our design system.
+* **Key Results:**
+    * 50% reduction in custom and inline CSS styles. Exact metric TBD.
+* **Rationale:**
+    * PostHog engineers are slowed down with our legacy frontend practices.
+
 
 ## Roadmap
 
