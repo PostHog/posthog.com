@@ -56,7 +56,7 @@ const Select = (props: SelectProps) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Listbox.Options className="absolute top-full mt-1 w-full bg-white rounded z-50 p-0 text-xs max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1">
+                        <Listbox.Options className="absolute top-full mt-1 w-full bg-white rounded z-50 p-0 text-xs max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-lg">
                             {props.options.map((option) => (
                                 <Listbox.Option
                                     value={option}
@@ -72,7 +72,7 @@ const Select = (props: SelectProps) => {
                                                 <span
                                                     className={classNames(
                                                         selected ? 'font-semibold' : 'font-normal',
-                                                        'ml-3 block truncate text-xs'
+                                                        'ml-1 block truncate text-xs'
                                                     )}
                                                 >
                                                     {props.display ? props.display(option) : option}

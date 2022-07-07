@@ -86,32 +86,32 @@ import CURLCapture from './server/curl/snippets/capture.mdx'
 
 > The server libraries handle batching capture requests. If you decide to use the API directly you will need to manage this yourself.
 
-// <Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-//   <TabPane tab="Node.js" key="1">
-//     <NodeCapture />
-//     <p>For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.</p>
-//   </TabPane>
-//   <TabPane tab="Python" key="2">
-//     <PythonCapture />
-//     <p>For more information see the <a href="/docs/integrate/server/python">python docs</a>.</p>
-//   </TabPane>
-//   <TabPane tab="PHP" key="3">
-//     <PHPCapture />
-//     <p>For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.</p>
-//   </TabPane>
-//   <TabPane tab="Go" key="4">
-//     <GoCapture />
-//     <p>For more information see the <a href="/docs/integrate/server/go">Go docs</a>.</p>
-//   </TabPane>
-//   <TabPane tab="Ruby" key="5">
-//     <RubyCapture />
-//     <p>For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.</p>
-//   </TabPane>    
-//   <TabPane tab="cURL" key="6">
-//     <CURLCapture />
-//     <p>For more information see the <a href="/docs/api">API docs</a>.</p>
-//   </TabPane>
-// </Tabs>
+<CodeSnippets snippets={[
+["Node.js", <>
+    <NodeCapture />
+    <p>For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.</p>
+</>],
+["Python", <>
+    <PythonCapture />
+    <p>For more information see the <a href="/docs/integrate/server/python">python docs</a>.</p>
+</>],
+["PHP", <>
+    <PHPCapture />
+    <p>For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.</p>
+</>],
+["Go", <>
+    <GoCapture />
+    <p>For more information see the <a href="/docs/integrate/server/go">Go docs</a>.</p>
+</>],
+["Ruby", <>
+    <RubyCapture />
+    <p>For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.</p>
+</>],
+["cURL", <>
+    <CURLCapture />
+    <p>For more information see the <a href="/docs/api">API docs</a>.</p>
+</>],
+]} />
 
 ## User identification
 

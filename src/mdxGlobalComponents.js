@@ -1,7 +1,5 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -27,6 +25,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CodeSnippets } from './components/CodeSnippets'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
@@ -105,8 +104,6 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
@@ -132,6 +129,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CodeSnippets,
     CommunityQuestions,
     CompensationCalculator,
     Contact,

@@ -312,6 +312,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
+    console.log(result.data.apidocs.nodes)
+
     result.data.apidocs.nodes.forEach((node) => {
         const slug = replacePath(node.url)
         let next = null

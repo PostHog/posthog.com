@@ -85,10 +85,6 @@ The following examples use `company` as a group type and `id:5` as the group key
 
 > **Tip:** Use a singular form of the group type throughout ingestion
 
-
-/*import { Tabs } from 'antd'
-export const TabPane = Tabs.TabPane
-
 import GroupsIngestionPosthogJs from './snippets/groups-ingestion-posthog-js.mdx'
 import GroupsIngestionPython from './snippets/groups-ingestion-python.mdx'
 import GroupsIngestionPHP from './snippets/groups-ingestion-php.mdx'
@@ -97,29 +93,15 @@ import GroupsIngestionNode from './snippets/groups-ingestion-node.mdx'
 import GroupsIngestionSegment from './snippets/groups-ingestion-segment.mdx'
 import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-    <TabPane tab="JavaScript" key="1">
-        <GroupsIngestionPosthogJs />
-    </TabPane>
-    <TabPane tab="Python" key="2">
-        <GroupsIngestionPython />
-    </TabPane>
-    <TabPane tab="PHP" key="3">
-        <GroupsIngestionPHP />
-    </TabPane>
-    <TabPane tab="Golang" key="4">
-        <GroupsIngestionGo />
-    </TabPane>
-    <TabPane tab="NodeJS" key="5">
-        <GroupsIngestionNode />
-    </TabPane>
-    <TabPane tab="Segment" key="6">
-        <GroupsIngestionSegment />
-    </TabPane>
-    <TabPane tab="Other libraries" key="7">
-        <GroupsIngestionOther />
-    </TabPane>
-</Tabs>*/
+<CodeSnippets snippets={[
+["JavaScript", GroupsIngestionPosthogJs],
+["Python", GroupsIngestionPython],
+["PHP", GroupsIngestionPHP],
+["GoLang", GroupsIngestionGo],
+["NodeJS", GroupsIngestionNode],
+["Segment", GroupsIngestionSegment],
+["Other", GroupsIngestionOther],
+]} />
 
 ## Analysing group insights
 
@@ -176,21 +158,21 @@ import GroupsFeatureFlagsGo from './snippets/groups-flags-go.mdx'
 import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 
 <Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-    <TabPane tab="JavaScript" key="1">
-        <GroupsFeatureFlagsPosthogJs />
-    </TabPane>
-    <TabPane tab="Python" key="2">
-        <GroupsFeatureFlagsPython />
-    </TabPane>
-    <TabPane tab="PHP" key="3">
-        <GroupsFeatureFlagsPHP />
-    </TabPane>
-    <TabPane tab="Golang" key="4">
-        <GroupsFeatureFlagsGo />
-    </TabPane>
-    <TabPane tab="NodeJS" key="5">
-        <GroupsFeatureFlagsNode />
-    </TabPane>
+<TabPane tab="JavaScript" key="1">
+<GroupsFeatureFlagsPosthogJs />
+</TabPane>
+<TabPane tab="Python" key="2">
+<GroupsFeatureFlagsPython />
+</TabPane>
+<TabPane tab="PHP" key="3">
+<GroupsFeatureFlagsPHP />
+</TabPane>
+<TabPane tab="Golang" key="4">
+<GroupsFeatureFlagsGo />
+</TabPane>
+<TabPane tab="NodeJS" key="5">
+<GroupsFeatureFlagsNode />
+</TabPane>
 </Tabs>
 
 ## Renaming group types
@@ -214,6 +196,6 @@ Please [reach out](/slack) if you have feedback!
 
 Want to know more about what's possible with Groups in PostHog? Try these tutorials:
 
-- [How to track how teams use your product](/tutorials/tracking-teams)
+-   [How to track how teams use your product](/tutorials/tracking-teams)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).

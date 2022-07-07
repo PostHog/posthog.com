@@ -27,37 +27,23 @@ If you prefer to learn by doing, you can get started on the web with the [JavaSc
 
 Install the library for the platform you are building your application for.
 
-// import JSInstall from './client/js/snippets/install.mdx'
-// import AndroidInstall from './client/android/snippets/install.mdx'
-// import AndroidConfigure from './client/android/snippets/configure.mdx'
-// import IOSInstall from './client/ios/snippets/install.mdx'
-// import IOSConfigure from './client/ios/snippets/configure.mdx'
-// import FlutterPackage from './client/flutter/snippets/package.mdx'
-// import FlutterInstall from './client/flutter/snippets/install.mdx'
-// import ReactNativeInstall from './client/react-native/snippets/install.mdx'
-// import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
-//
-// <Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-// <TabPane tab="JavaScript" key="1">
-// <JSInstall />
-// </TabPane>
-// <TabPane tab="Android" key="2">
-// <AndroidInstall />
-// <AndroidConfigure />
-// </TabPane>
-// <TabPane tab="iOS" key="3">
-// <IOSInstall />
-// <IOSConfigure />
-// </TabPane>
-// <TabPane tab="Flutter" key="4">
-// <FlutterPackage />
-// <FlutterInstall />
-// </TabPane>
-// <TabPane tab="React Native" key="5">
-// <ReactNativeInstall />
-// <ReactNativeConfigure />
-// </TabPane>
-// </Tabs>
+import JSInstall from './client/js/snippets/install.mdx'
+import AndroidInstall from './client/android/snippets/install.mdx'
+import AndroidConfigure from './client/android/snippets/configure.mdx'
+import IOSInstall from './client/ios/snippets/install.mdx'
+import IOSConfigure from './client/ios/snippets/configure.mdx'
+import FlutterPackage from './client/flutter/snippets/package.mdx'
+import FlutterInstall from './client/flutter/snippets/install.mdx'
+import ReactNativeInstall from './client/react-native/snippets/install.mdx'
+import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
+
+<CodeSnippets snippets={[
+["JavaScript", <JSInstall />],
+["Android", <><AndroidInstall /><AndroidConfigure /></>],
+["iOS", <><IOSInstall /><IOSConfigure /></>],
+["Flutter", <><FlutterPackage /><FlutterInstall /></>],
+["React Native", <><ReactNativeInstall /><ReactNativeConfigure /></>],
+]} />
 
 # Use autocapture
 
@@ -76,27 +62,19 @@ import AndroidCapture from './client/android/snippets/capture.mdx'
 import IOSCapture from './client/ios/snippets/capture.mdx'
 import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-<TabPane tab="JavaScript" key="1">
-<JSCapture />
-</TabPane>
-<TabPane tab="Android" key="2">
-<AndroidCapture />
+<CodeSnippets snippets={[
+["JavaScript", <JSCapture />],
+["Android", <><AndroidCapture /><p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p></>],
+["iOS", <><IOSCapture /><p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p></>],
+["Flutter", <>
 
-<p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
-</TabPane>
-<TabPane tab="iOS" key="3">
-<IOSCapture />
-<p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
-</TabPane>
-<TabPane tab="Flutter" key="4">
 <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-</TabPane>
-<TabPane tab="React Native" key="5">
+</>],
+["React Native", <>
 <ReactNativeCapture />
 <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
-</TabPane>
-</Tabs>
+</>],
+]} />
 
 # Identify users
 
@@ -105,26 +83,13 @@ import AndroidIdentify from './client/android/snippets/identify.mdx'
 import IOSIdentify from './client/ios/snippets/identify.mdx'
 import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-<TabPane tab="JavaScript" key="1">
-<JSIdentify />
-</TabPane>
-<TabPane tab="Android" key="2">
-<AndroidIdentify />
-</TabPane>
-<TabPane tab="iOS" key="3">
-<IOSIdentify />
-</TabPane>
-<TabPane tab="Flutter" key="4">
-
-<p>
-See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
-</p>
-</TabPane>
-<TabPane tab="React Native" key="5">
-<ReactNativeIdentify />
-</TabPane>
-</Tabs>
+<CodeSnippets snippets={[
+["JavaScript", <JSIdentify />],
+["Android", <AndroidIdentify />],
+["iOS", <IOSIdentify />],
+["Flutter", <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>],
+["React Native", <ReactNativeIdentify />],
+]} />
 
 # Event ingestion nuances
 
