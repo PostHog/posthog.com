@@ -7,7 +7,7 @@ export const IngestionAppsList = () => {
     } = useStaticQuery<QueryResult>(query)
 
     return (
-        <ul className="grid grid-cols-1 lg:grid-cols-2 list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <ul className="list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {apps.map((app) => {
                 return (
                     <li
@@ -18,13 +18,17 @@ export const IngestionAppsList = () => {
                         <Link
                             style={{ background: 'none' }}
                             to={app.frontmatter.documentation}
-                            className="h-full flex lg:flex-col lg:items-center p-2"
+                            className="h-full flex p-2"
                         >
-                            <img className="icon w-12 h-12 p-2 rounded-sm" src={app.frontmatter.thumbnail.publicURL} />
+                            <div className="shrink-0 grow-0 basis-[84px] flex justify-center pt-1">
+                                <img className="icon w-8 h-8 mr-1" src={app.frontmatter.thumbnail.publicURL} />
+                            </div>
 
-                            <div className="ml-2 lg:ml-0 mt-2 lg:text-center">
-                                <span className="text-black dark:text-white">{app.frontmatter.title}</span>
-                                <p className="mt-0.5 text-black dark:text-white font-normal text-xs text-gray-accent-dark">
+                            <div className="flex-1">
+                                <div className="text-black dark:text-white leading-none pt-2">
+                                    {app.frontmatter.title}
+                                </div>
+                                <p className="text-black/60 dark:text-white/60 font-normal !text-[15px] !mb-2">
                                     {app.frontmatter.description}
                                 </p>
                             </div>
