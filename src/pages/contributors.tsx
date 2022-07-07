@@ -30,9 +30,7 @@ export const ContributorsPage = () => {
                             <Tab>
                                 {({ selected }) => (
                                     <span
-                                        className={`font-semibold focus:outline-none ${
-                                            selected ? 'text-orange' : 'text-gray'
-                                        }`}
+                                        className={`px-2 py-1 font-semibold ${selected ? 'text-orange' : 'text-gray'}`}
                                     >
                                         List
                                     </span>
@@ -41,9 +39,7 @@ export const ContributorsPage = () => {
                             <Tab>
                                 {({ selected }) => (
                                     <span
-                                        className={`font-semibold focus:outline-none ${
-                                            selected ? 'text-orange' : 'text-gray'
-                                        }`}
+                                        className={`px-2 py-1 font-semibold ${selected ? 'text-orange' : 'text-gray'}`}
                                     >
                                         Stats
                                     </span>
@@ -72,7 +68,7 @@ export const ContributorsPage = () => {
                                             </svg>
                                         </div>
                                     ) : (
-                                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
                                             {filteredContributors.map((contributor: Contributor) => (
                                                 <ContributorCard
                                                     key={contributor.login}
