@@ -16,6 +16,7 @@ import '../styles/api-docs.scss'
 import MainSidebar from './Handbook/MainSidebar'
 import Navigation from './Handbook/Navigation'
 import SectionLinks from './Handbook/SectionLinks'
+import { SelectorIcon } from '@heroicons/react/outline'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -336,18 +337,35 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     let queryParams = item.parameters?.filter((param) => param.in === 'query')
     return (
         <>
-            <div className="code-example justify-between flex">
+            <div className="code-example justify-between flex items-center flex-wrap py-1">
                 <div className="text-gray">
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
                 </div>
-                <Listbox value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Option key="curl" value="curl">
-                        curl
-                    </Listbox.Option>
-                    <Listbox.Option key="python" value="python">
-                        python
-                    </Listbox.Option>
+
+                <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
+                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-xs flex items-center ">
+                        <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
+                        <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
+                    </Listbox.Button>
+                    <Listbox.Options
+                        as="ul"
+                        className="absolute right-0 top-full mt-1 bg-white list-none px-0 py-1 rounded-sm shadow focus:outline-none z-50"
+                    >
+                        {['curl', 'python'].map((option) => (
+                            <Listbox.Option
+                                key={option}
+                                value={option}
+                                className={({ active, selected }) =>
+                                    `${selected ? 'font-semibold' : ''} ${
+                                        active ? 'bg-orange text-white' : 'text-gray-accent-dark'
+                                    } w-full pl-3 pr-6 cursor-pointer`
+                                }
+                            >
+                                <span className="text-xs">{option}</span>
+                            </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
                 </Listbox>
             </div>
 
