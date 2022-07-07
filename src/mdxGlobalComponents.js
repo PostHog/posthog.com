@@ -54,6 +54,7 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
+import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
@@ -158,6 +159,7 @@ export const shortcodes = {
     ImageBlock,
     InlineCode,
     LandingPageCallToAction,
+    LibraryStats,
     Link,
     Logo,
     MainNav,
