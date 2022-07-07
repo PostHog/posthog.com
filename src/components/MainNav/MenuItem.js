@@ -31,14 +31,14 @@ export default function MenuItem({ menuItem }) {
                         {title}
                     </CallToAction>
                 ) : (
-                    <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes)}>
+                    <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes, hovered)}>
                         {title}
                     </Link>
                 )}
                 {sub &&
                     (breakpoints.md ? (
                         <button
-                            className="text-primary dark:text-primary-dark flex-grow flex justify-end mr-4"
+                            className={`text-primary dark:text-primary-dark flex-grow flex justify-end mr-4`}
                             onClick={handleSubClick}
                         >
                             {hovered ? <Minus /> : <Plus />}

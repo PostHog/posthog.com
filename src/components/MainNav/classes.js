@@ -44,9 +44,10 @@ export const menuItem = (hideBorder) => cntl`
     lg:flex
     lg:justify-center
     menu-item
+    relative
     ${!hideBorder ? border : ''}
 `
-export const link = (className = '') => cntl`
+export const link = (className = '', hovered = false) => cntl`
     relative
     font-semibold
     px-4
@@ -57,5 +58,6 @@ export const link = (className = '') => cntl`
     dark:hover:text-white
     text-almost-black
     hover:text-almost-black
+    ${hovered ? 'bg-white' : ''}
     ${className}
 `

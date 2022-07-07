@@ -18,38 +18,7 @@ export default function MainNav() {
                     classes
                     hideBorder
                     sub {
-                        title
-                        description
                         component
-                        items {
-                            title
-                            description
-                            component {
-                                position
-                                name
-                            }
-                            link {
-                                title
-                                url
-                            }
-                            sections {
-                                link {
-                                    title
-                                    url
-                                }
-                                title
-                                items {
-                                    icon
-                                    title
-                                    url
-                                    badge
-                                }
-                            }
-                            footerLinks {
-                                title
-                                url
-                            }
-                        }
                     }
                 }
             }
