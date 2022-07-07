@@ -97,7 +97,7 @@ import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
 ["JavaScript", GroupsIngestionPosthogJs],
 ["Python", GroupsIngestionPython],
 ["PHP", GroupsIngestionPHP],
-["GoLang", GroupsIngestionGo],
+["Golang", GroupsIngestionGo],
 ["NodeJS", GroupsIngestionNode],
 ["Segment", GroupsIngestionSegment],
 ["Other", GroupsIngestionOther],
@@ -157,23 +157,13 @@ import GroupsFeatureFlagsPHP from './snippets/groups-flags-php.mdx'
 import GroupsFeatureFlagsGo from './snippets/groups-flags-go.mdx'
 import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-<TabPane tab="JavaScript" key="1">
-<GroupsFeatureFlagsPosthogJs />
-</TabPane>
-<TabPane tab="Python" key="2">
-<GroupsFeatureFlagsPython />
-</TabPane>
-<TabPane tab="PHP" key="3">
-<GroupsFeatureFlagsPHP />
-</TabPane>
-<TabPane tab="Golang" key="4">
-<GroupsFeatureFlagsGo />
-</TabPane>
-<TabPane tab="NodeJS" key="5">
-<GroupsFeatureFlagsNode />
-</TabPane>
-</Tabs>
+<CodeSnippets snippets={[
+["JavaScript", GroupsFeatureFlagsPosthogJs],
+["Python", GroupsFeatureFlagsPython],
+["PHP", GroupsFeatureFlagsPHP],
+["Golang", GroupsFeatureFlagsGo],
+["NodeJS", GroupsFeatureFlagsNode],
+]} />
 
 ## Renaming group types
 

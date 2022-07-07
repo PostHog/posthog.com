@@ -124,29 +124,29 @@ import GoIdentify from './server/go/snippets/identify.mdx'
 import RubyIdentify from './server/ruby/snippets/identify.mdx'
 import CURLIdentify from './server/curl/snippets/identify.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-  <TabPane tab="Node.js" key="1">
+<CodeSnippets snippets={[
+["Node.js", <>
     <NodeIdentify />
     <p>For more information see the <a href="/docs/integrate/server/node">Node.js docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Python" key="2">
+</>],
+["Python", <>
     <PythonIdentify />
     <p>For more information see the <a href="/docs/integrate/server/python">Python docs</a>.</p>
-  </TabPane>
-  <TabPane tab="PHP" key="3">
+</>],
+["PHP", <>
     <PHPIdentify />
     <p>For more information see the <a href="/docs/integrate/server/php">PHP docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Go" key="4">
+</>],
+["Go", <>
     <GoIdentify />
     <p>For more information see the <a href="/docs/integrate/server/go">Go docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Ruby" key="5">
+</>],
+["Ruby", <>
     <RubyIdentify />
     <p>For more information see the <a href="/docs/integrate/server/ruby">Ruby docs</a>.</p>
-  </TabPane>    
-  <TabPane tab="cURL" key="6">
+</>],
+["cURL", <>
     <CURLIdentify />
     <p>For more information see the <a href="/docs/api">API docs</a>.</p>
-  </TabPane>
-</Tabs>
+</>],
+]} />
