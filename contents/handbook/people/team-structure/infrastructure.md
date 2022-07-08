@@ -18,8 +18,9 @@ Make deploying, scaling, and managing PostHog easy, fast, and reliable.
 * **Proposed Objective**:
     * PostHog Cloud in the US remains reliable and launch EU Cloud
 * **Proposed Key Results**:
-    * Multiple organizations using EU hosted PostHog Cloud with similar reliability to US cloud in July
-    * All deployment methods are support the latest stable versions of dependencies (so we can leverage the benefits of later versions)
+    * Multiple organizations using EU hosted PostHog Cloud without regressions in either EU or US cloud
+    * Reliable monitoring and alerting on all key services
+    * Upgrade to Kubernetes 1.25 to unblock key customers
     * Meet SOC 2 compliance requirements for all cloud infrastructure
 * **Rationale**:
     * To nail self-serve we need to make it as easy as possible for customers to sign up and get started
