@@ -58,6 +58,12 @@ export const link = (className = '', hovered = false) => cntl`
     dark:hover:text-white
     text-almost-black
     hover:text-almost-black
-    ${hovered ? 'bg-white' : ''}
+    flex
+    items-center
+    space-between
+    w-full
+    space-x-2
+    rounded-t-md
+    ${hovered ? 'lg:bg-white lg:shadow-md' : ''}
     ${className}
 `

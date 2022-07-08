@@ -31,21 +31,23 @@ export default function MenuItem({ menuItem }) {
                         {title}
                     </CallToAction>
                 ) : (
-                    <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes, hovered)}>
-                        {title}
+                    <Link
+                        onClick={breakpoints.md && sub && handleSubClick}
+                        to={url}
+                        className={link(classes, sub && hovered)}
+                    >
+                        <span>{title}</span>
+                        {sub && !breakpoints.md && <Chevron className="text-gray mt-1 -ml-3" />}
                     </Link>
                 )}
-                {sub &&
-                    (breakpoints.md ? (
-                        <button
-                            className={`text-primary dark:text-primary-dark flex-grow flex justify-end mr-4`}
-                            onClick={handleSubClick}
-                        >
-                            {hovered ? <Minus /> : <Plus />}
-                        </button>
-                    ) : (
-                        <Chevron className="text-gray mt-1 -ml-3" />
-                    ))}
+                {sub && breakpoints.md && (
+                    <button
+                        className={`text-primary rounded- dark:text-primary-dark flex-grow flex justify-end mr-4`}
+                        onClick={handleSubClick}
+                    >
+                        {hovered ? <Minus /> : <Plus />}
+                    </button>
+                )}
             </span>
 
             {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}

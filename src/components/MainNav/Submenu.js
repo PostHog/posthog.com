@@ -15,7 +15,7 @@ export default function Submenu({ referenceElement, menu, open, parentURL }) {
         shown: { height: 'auto' },
     }
     return (
-        <div className="z-10 top-5 lg:pt-5 lg:absolute left-0 lg:block text-almost-black w-max">
+        <div className="z-10 top-3 lg:pt-5 lg:absolute left-0 lg:block text-almost-black w-max">
             <motion.div
                 className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 my-6 rounded-md"
                 variants={variants}
