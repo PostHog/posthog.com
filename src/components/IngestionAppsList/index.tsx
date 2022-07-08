@@ -15,20 +15,16 @@ export const IngestionAppsList = () => {
                         style={{ margin: 0 }}
                         className="border-r border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                     >
-                        <Link
-                            style={{ background: 'none' }}
-                            to={app.frontmatter.documentation}
-                            className="h-full flex p-2"
-                        >
+                        <Link to={app.frontmatter.documentation} className="flex p-2 !bg-none">
                             <div className="shrink-0 grow-0 basis-[84px] flex justify-center pt-1">
-                                <img className="icon w-8 h-8 mr-1" src={app.frontmatter.thumbnail.publicURL} />
+                                <img className="icon w-8 h-8" src={app.frontmatter.thumbnail.publicURL} />
                             </div>
 
                             <div className="flex-1">
                                 <div className="text-black dark:text-white leading-none pt-2">
                                     {app.frontmatter.title}
                                 </div>
-                                <p className="text-black/60 dark:text-white/60 font-normal !text-[15px] !mb-2">
+                                <p className="text-black/60 dark:text-white/60 font-normal mt-0.5 !text-[15px] !mb-2">
                                     {app.frontmatter.description}
                                 </p>
                             </div>
