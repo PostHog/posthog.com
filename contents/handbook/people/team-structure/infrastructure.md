@@ -18,7 +18,7 @@ Make deploying, scaling, and managing PostHog easy, fast, and reliable.
 * **Proposed Objective**:
     * PostHog Cloud in the US remains reliable and launch EU Cloud
 * **Proposed Key Results**:
-    * >100 organizations using EU hosted PostHog Cloud
+    * Multiple organizations using EU hosted PostHog Cloud with similar reliability to US cloud in July
     * All deployment methods are support the latest stable versions of dependencies (so we can leverage the benefits of later versions)
     * Meet SOC 2 compliance requirements for all cloud infrastructure
 * **Rationale**:
