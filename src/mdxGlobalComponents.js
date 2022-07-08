@@ -47,7 +47,6 @@ import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
-import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
@@ -56,7 +55,6 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
-import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
@@ -68,7 +66,6 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
-import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
@@ -86,21 +83,17 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
-import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
-import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
-import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
-import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { Tutorials } from './components/Tutorials'
@@ -158,7 +151,6 @@ export const shortcodes = {
     FloatedImage,
     Footer,
     FooterCTA,
-    GetStartedModal,
     GithubIcon,
     Heading,
     HiddenSection,
@@ -167,7 +159,6 @@ export const shortcodes = {
     ImageBlock,
     InlineCode,
     LandingPageCallToAction,
-    LibraryStats,
     Link,
     Logo,
     MainNav,
@@ -179,7 +170,6 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
-    PlanComparisonTable,
     PostCard,
     PostLayout,
     CloudVsSelfHost,
@@ -197,21 +187,17 @@ export const shortcodes = {
     ProductPage,
     ProductSectionHeader,
     Question,
-    ResponsiveAnchor,
     RocketHorizontalRule,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
-    SignupModal,
     SliderNav,
     Spacer,
     StarRepoButton,
     StarUsBanner,
-    StartNowButton,
     Structure,
     Subscribe,
-    TableOfContents,
     TeamQuote,
     Tooltip,
     Tutorials,
