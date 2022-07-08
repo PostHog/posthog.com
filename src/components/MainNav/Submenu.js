@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Docs from './Submenus/docs'
 import Company from './Submenus/docs'
-import Community from './Submenus/docs'
+import Community from './Submenus/community'
 
 const submenus = {
     Docs,
