@@ -23,8 +23,8 @@ Makers everywhere get better at building products because of PostHog
     * Increase the % of customers successfully using multiple core tools
 * **Proposed Key Results:**
     * Launch all missing competitive session recording features like console log, network tab recording, playlist mode
-    * Launch MVP for mobile session recording
-    * [Metric TBD] Improve feature flag reliability by x%
+    * Improve feature flag capabilities (Pending specifics)
+    * Stretch: Proof of concept for mobile session recording
 * **Rationale:**
     * This should drive us to focus on:
         * Improving core features, such as session recording and feature flags to make them more valuable and attractive to use
