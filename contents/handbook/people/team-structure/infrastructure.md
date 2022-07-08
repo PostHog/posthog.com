@@ -16,7 +16,7 @@ Make deploying, scaling, and managing PostHog easy, fast, and reliable.
 
 ## Q3 2022 Goals
 * **Proposed Objective**:
-    * Lots of customers are self-serving PostHog Cloud in the EU
+    * PostHog Cloud in the US remains reliable and launch EU Cloud
 * **Proposed Key Results**:
     * >100 organizations using EU hosted PostHog Cloud
     * All deployment methods are support the latest stable versions of dependencies (so we can leverage the benefits of later versions)
