@@ -9,20 +9,22 @@
             "url": "/pricing"
         },
         {
-            "title": "Customers",
-            "url": "/customers"
-        },
-        {
             "title": "Docs",
             "url": "/docs",
             "sub": {
-                "component": "Docs",
-                "items": []
+                "component": "Docs"
             }
         },
         {
-            "title": "Blog",
-            "url": "/blog"
+            "title": "Using PostHog",
+            "url": "/tutorials"
+        },
+        {
+            "title": "Community",
+            "url": "/community",
+            "sub": {
+                "component": "Community"
+            }
         },
         {
             "title": "Company",
@@ -33,13 +35,6 @@
                 "component": "Company",
                 "items": []
             }
-        },
-        {
-            "title": "Get started",
-            "classes": "lg:ml-6",
-            "cta": true,
-            "url": "/signup",
-            "hideBorder": true
         },
         {
             "title": "Login",

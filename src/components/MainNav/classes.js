@@ -44,7 +44,6 @@ export const menuItem = (hideBorder) => cntl`
     lg:flex
     lg:justify-center
     menu-item
-    relative
     ${!hideBorder ? border : ''}
 `
 export const link = (className = '', hovered = false) => cntl`

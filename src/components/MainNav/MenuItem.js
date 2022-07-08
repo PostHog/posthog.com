@@ -5,6 +5,7 @@ import Link from '../Link'
 import Submenu from './Submenu'
 import { menuItem as menuItemClass, link } from './classes'
 import { CallToAction } from 'components/CallToAction'
+import { usePopper } from 'react-popper'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
@@ -13,14 +14,17 @@ export default function MenuItem({ menuItem }) {
     const handleSubClick = () => {
         setHovered(!hovered)
     }
-    const referenceElement = useRef(null)
+    const [referenceElement, setReferenceElement] = useState(null)
+    const [popperElement, setPopperElement] = useState(null)
+    const { styles, attributes } = usePopper(referenceElement, popperElement)
     return (
         <li
+            ref={setReferenceElement}
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
             className={menuItemClass(hideBorder)}
         >
-            <span ref={referenceElement} className="flex justify-between items-center">
+            <span className="flex justify-between items-center">
                 {cta ? (
                     <CallToAction
                         size="sm"
@@ -50,7 +54,11 @@ export default function MenuItem({ menuItem }) {
                 )}
             </span>
 
-            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
+            {sub && hovered && (
+                <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                    <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />
+                </div>
+            )}
         </li>
     )
 }
