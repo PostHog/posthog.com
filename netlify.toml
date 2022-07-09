@@ -1,6 +1,5 @@
 [build.environment]
   NODE_VERSION = "16"
-  NODE_OPTIONS = "--max-old-space-size"
   GATSBY_CPU_COUNT = "2"
 
 [[redirects]]
