@@ -1,14 +1,10 @@
 import { CallToAction } from 'components/CallToAction'
-import { GitHub, LinkedIn, YouTube, Slack, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Squeak } from 'squeak-react'
-
-interface Social {
-    Icon: React.ReactNode
-    url: string
-}
+import Header from './Header'
+import RightCol from './RightCol'
 
 interface ColMenuItems {
     title: string
@@ -17,41 +13,6 @@ interface ColMenuItems {
 }
 
 export default function Docs() {
-    const social: Social[] = [
-        {
-            Icon: <Slack className="w-[24px]" />,
-            url: '/slack',
-        },
-        {
-            Icon: <Twitter className="w-[24px]" />,
-            url: 'https://twitter.com/posthog',
-        },
-        {
-            Icon: (
-                <span className="text-[#0A66C2]">
-                    <LinkedIn className="w-[24px]" />
-                </span>
-            ),
-            url: 'https://www.linkedin.com/company/posthog',
-        },
-        {
-            Icon: (
-                <span className="text-[#ED1D24]">
-                    <YouTube className="w-[24px]" />
-                </span>
-            ),
-            url: 'https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA',
-        },
-        {
-            Icon: (
-                <span className="text-black">
-                    <GitHub className="w-[24px]" />
-                </span>
-            ),
-            url: 'https://github.com/PostHog',
-        },
-    ]
-
     const resources: ColMenuItems[] = [
         {
             title: 'Marketplace',
@@ -87,18 +48,7 @@ export default function Docs() {
 
     return (
         <section>
-            <div className="flex justify-between items-center p-4 border-b border-gray-accent-light border-dashed">
-                <h2 className="text-lg m-0 opacity-70 text-black">Community</h2>
-                <ul className="list-none flex space-x-2">
-                    {social.map(({ Icon, url }: Social) => {
-                        return (
-                            <li key={url}>
-                                <Link to={url}>{Icon}</Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
+            <Header title="Community" />
             <div className="flex">
                 <div className="border-r border-gray-accent-light border-dashed w-[500px]">
                     <div className="p-4 ">
@@ -160,9 +110,8 @@ export default function Docs() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="bg-gray-accent-light bg-opacity-10 p-4">
-                    <h2 className="text-[18px] opacity-70 font-bold m-0 mb-2 text-black">Resources</h2>
-                    <ol className="m-0 list-none p-0 max-w-[225px]">
+                <RightCol title="Resources">
+                    <ol className="m-0 list-none p-0">
                         {resources.map(({ title, description, url }: ColMenuItems) => {
                             return (
                                 <li key={title}>
@@ -176,7 +125,7 @@ export default function Docs() {
                             )
                         })}
                     </ol>
-                </div>
+                </RightCol>
             </div>
         </section>
     )
