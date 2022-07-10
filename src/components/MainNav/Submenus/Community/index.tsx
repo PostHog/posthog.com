@@ -2,9 +2,9 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Squeak } from 'squeak-react'
-import Header from './Header'
-import RightCol from './RightCol'
-import CallToAction from './CallToAction'
+import Header from '../Header'
+import RightCol from '../RightCol'
+import CallToAction from '../CallToAction'
 
 interface ColMenuItems {
     title: string

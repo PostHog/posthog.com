@@ -78,7 +78,7 @@ export default function Blog() {
                             )
                         })}
                     </ul>
-                    <CallToAction to="/blog" className="mt-2">
+                    <CallToAction to="/blog" className="mt-2 !w-full">
                         Visit the PostHog Blog
                     </CallToAction>
                 </div>

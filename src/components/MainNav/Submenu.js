@@ -1,8 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import Docs from './Submenus/Docs'
+import Docs from './Submenus/Docs/index'
 import Company from './Submenus/Company/index'
-import Community from './Submenus/Community'
+import Community from './Submenus/Community/index'
 
 const submenus = {
     Docs,

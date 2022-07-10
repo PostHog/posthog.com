@@ -24,7 +24,7 @@ const Block = ({
         <div className="sm:px-4 py-4">
             <h3 className="text-[18px] font-bold mt-0 mb-2 text-black opacity-70">{title}</h3>
             <>{children}</>
-            <CallToAction to={cta.url} className="mt-4">
+            <CallToAction to={cta.url} className="mt-4 !w-full">
                 {cta.label}
             </CallToAction>
         </div>
@@ -105,7 +105,7 @@ const Handbook = () => {
                     )
                 })}
             </ol>
-            <CallToAction to="/handbook" className="mt-4">
+            <CallToAction to="/handbook" className="mt-4 !w-full">
                 Browse handbook
             </CallToAction>
         </div>
