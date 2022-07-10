@@ -86,9 +86,11 @@ const Handbook = () => {
         <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
             <div className="flex items-center w-full justify-between opacity-70">
                 <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
-                <SearchBar className="flex-grow-0 !p-0 w-auto" base={'handbook'} />
+                <SearchBar className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
             </div>
-            <p className="text-[14px] m-0 mt-2">We’re open source and operate in public as much as we can.</p>
+            <p className="text-[14px] m-0 mt-2 dark:text-white">
+                We’re open source and operate in public as much as we can.
+            </p>
             <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                 {nav.map(({ title, url }: HandbookNav, index) => {
                     return (
@@ -97,7 +99,7 @@ const Handbook = () => {
                                 className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2"
                                 to={url}
                             >
-                                <span className="text-[14px] text-black opacity-20 leading-none font-semibold">
+                                <span className="text-[14px] text-black opacity-20 leading-none font-semibold dark:text-white">
                                     {index + 1}.
                                 </span>
                                 <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
@@ -133,13 +135,13 @@ export default function Docs() {
                     </div>
                     <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light border-t border-gray-accent-light border-dashed">
                         <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
-                            <p className="m-0 text-[14px]">
+                            <p className="m-0 text-[14px] dark:text-white">
                                 Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
                                 <strong>{teamMembers.group.length - 1} countries</strong>. Some travel full-time.
                             </p>
                         </Block>
                         <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
-                            <p className="m-0 text-[14px]">
+                            <p className="m-0 text-[14px] dark:text-white">
                                 We’re currently hiring for <strong>{jobs.totalCount} roles</strong>. We’re unlike any
                                 company you’ve ever worked for.
                             </p>

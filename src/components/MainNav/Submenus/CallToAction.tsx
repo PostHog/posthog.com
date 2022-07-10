@@ -15,7 +15,7 @@ export default function CallToAction({
             to={to}
             type="outline"
             size="sm"
-            className={`!bg-transparent hover:border-orange hover:border-opacity-100 !transition-all ${className}`}
+            className={`!bg-transparent hover:border-orange dark:hover:border-orange dark:hover:border-opacity-100 hover:border-opacity-100 !transition-all ${className}`}
         >
             {children}
         </CTA>

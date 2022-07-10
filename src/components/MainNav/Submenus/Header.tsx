@@ -31,7 +31,7 @@ export default function Header({ title }: Props) {
         },
         {
             Icon: (
-                <span className="text-[#ED1D24]">
+                <span className="text-white dark:text-gray-accent-dark">
                     <YouTube className="w-[24px]" />
                 </span>
             ),
@@ -39,7 +39,7 @@ export default function Header({ title }: Props) {
         },
         {
             Icon: (
-                <span className="text-black">
+                <span className="text-black dark:text-white">
                     <GitHub className="w-[24px]" />
                 </span>
             ),
@@ -50,7 +50,7 @@ export default function Header({ title }: Props) {
     return (
         <div className="flex justify-between items-center p-4 border-b border-gray-accent-light border-dashed">
             <h2 className="text-lg m-0 opacity-70 text-black">{title}</h2>
-            <ul className="list-none flex space-x-2">
+            <ul className="list-none flex space-x-3">
                 {social.map(({ Icon, url }: Social) => {
                     return (
                         <li key={url}>

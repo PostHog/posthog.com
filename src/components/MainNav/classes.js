@@ -63,6 +63,6 @@ export const link = (className = '', hovered = false) => cntl`
     w-full
     space-x-2
     rounded-t-md
-    ${hovered ? 'lg:bg-white lg:shadow-md' : ''}
+    ${hovered ? 'lg:bg-white lg:dark:bg-gray-accent-dark lg:shadow-md' : ''}
     ${className}
 `

@@ -21,7 +21,7 @@
         },
         {
             "title": "Community",
-            "url": "/community",
+            "url": "/questions",
             "sub": {
                 "component": "Community"
             }
@@ -31,8 +31,7 @@
             "url": "/handbook/company/story",
             "sub": {
                 "title": "Company",
-                "component": "Company",
-                "items": []
+                "component": "Company"
             }
         },
         {

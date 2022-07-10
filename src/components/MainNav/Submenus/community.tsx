@@ -73,7 +73,7 @@ export default function Docs() {
                         <div className="grid sm:grid-cols-2 items-center">
                             <div>
                                 <h3 className="text-[18px] opacity-70 mt-0 text-black">Merch</h3>
-                                <p className="text-[14px]">
+                                <p className="text-[14px] dark:text-white">
                                     Did you happen to be looking for hedgehog-themed merch? We’ve got just the thing...
                                 </p>
                             </div>
@@ -81,7 +81,7 @@ export default function Docs() {
                                 <StaticImage width={280} alt="PostHog merch" src="../images/merch.png" />
                             </div>
                         </div>
-                        <p className="text-[14px]">
+                        <p className="text-[14px] dark:text-white">
                             P.S. Get free merch by{' '}
                             <Link className="text-red hover:text-red font-bold" to="https://github.com/PostHog">
                                 contributing
@@ -104,7 +104,7 @@ export default function Docs() {
                                 <li key={title}>
                                     <Link className="rounded-md py-2 block" to={url}>
                                         <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
-                                        <p className="text-[14px] opacity-50 m-0 text-black font-medium">
+                                        <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
                                             {description}
                                         </p>
                                     </Link>

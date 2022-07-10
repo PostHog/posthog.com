@@ -57,7 +57,7 @@ export default function Blog() {
                             />
                         )}
                         <h4 className="text-[14px] font-bold m-0 text-black opacity-70 mt-2">{title}</h4>
-                        <p className="text-[14px] m-0 text-black opacity-50">{date}</p>
+                        <p className="text-[14px] m-0 text-black opacity-50 dark:text-white">{date}</p>
                     </Link>
                     <h4 className="text-[15px] font-bold opacity-50 mt-4 mb-1">Categories</h4>
                     <ul className="list-none m-0 p-0">
@@ -82,13 +82,15 @@ export default function Blog() {
                         Visit the PostHog Blog
                     </CallToAction>
                 </div>
-                <ul className="list-none m-0 p-0 md:mt-auto mt-4">
+                <ul className="list-none m-0 p-0 md:mt-auto mt-7">
                     {links.map(({ title, url, description }: Links) => {
                         return (
                             <li key={title}>
                                 <Link className="rounded-md px-2 py-2 block hover:bg-tan hover:bg-opacity-50" to={url}>
                                     <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                    <p className="m-0 text-[14px] text-black opacity-50">{description}</p>
+                                    <p className="m-0 text-[14px] text-black opacity-50 dark:text-white">
+                                        {description}
+                                    </p>
                                 </Link>
                             </li>
                         )

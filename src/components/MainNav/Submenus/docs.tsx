@@ -60,17 +60,27 @@ export default function Docs() {
     return (
         <div className="rounded-md md:flex">
             <section className="p-4 border-r border-gray-accent-light border-dashed">
-                <div className="flex justify-between items-center opacity-50 mb-4">
+                <div className="flex justify-between items-center opacity-70 mb-4">
                     <h2 className="text-sm font-semibold m-0 flex-shrink-0">Table of contents</h2>
-                    <SearchBar className="flex-grow-0 !p-0 w-auto" base={'docs'} />
+                    <SearchBar className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
                 </div>
                 <ol className="m-0 list-none p-0">
-                    {leftColMenuItems.map(({ title, description, url }: ColMenuItems) => {
+                    {leftColMenuItems.map(({ title, description, url }: ColMenuItems, index) => {
                         return (
                             <li key={title}>
-                                <Link className="rounded-md px-2 py-2 block hover:bg-tan hover:bg-opacity-50" to={url}>
-                                    <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                    <p className="text-[14px] opacity-50 m-0 text-black font-medium">{description}</p>
+                                <Link
+                                    className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-start space-x-2"
+                                    to={url}
+                                >
+                                    <span className="text-[14px] text-black opacity-20 leading-none font-semibold dark:text-white mt-[2px]">
+                                        {index + 1}.
+                                    </span>
+                                    <div>
+                                        <h3 className="text-base m-0 opacity-70">{title}</h3>
+                                        <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                            {description}
+                                        </p>
+                                    </div>
                                 </Link>
                             </li>
                         )
@@ -88,7 +98,9 @@ export default function Docs() {
                             <li key={title}>
                                 <Link className="rounded-md py-2 block" to={url}>
                                     <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                    <p className="text-[14px] opacity-50 m-0 text-black font-medium">{description}</p>
+                                    <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                        {description}
+                                    </p>
                                 </Link>
                             </li>
                         )
