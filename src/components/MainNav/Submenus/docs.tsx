@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import CallToAction from './CallToAction'
 import { Search } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
@@ -76,13 +76,7 @@ export default function Docs() {
                         )
                     })}
                 </ol>
-                <CallToAction
-                    className="inline-block mt-4 !bg-transparent"
-                    width="full"
-                    size="sm"
-                    to="/docs"
-                    type="outline"
-                >
+                <CallToAction className="inline-block mt-4 !w-full" to="/docs">
                     Visit Docs
                 </CallToAction>
             </section>

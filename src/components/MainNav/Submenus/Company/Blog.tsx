@@ -3,8 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import RightCol from '../RightCol'
 import Link from 'components/Link'
-import { CallToAction } from 'components/CallToAction'
 import slugify from 'slugify'
+import CallToAction from '../CallToAction'
 
 interface Category {
     fieldValue: string
@@ -78,7 +78,7 @@ export default function Blog() {
                             )
                         })}
                     </ul>
-                    <CallToAction to="/blog" width="full" type="outline" size="sm" className="!bg-transparent mt-2">
+                    <CallToAction to="/blog" className="mt-2">
                         Visit the PostHog Blog
                     </CallToAction>
                 </div>

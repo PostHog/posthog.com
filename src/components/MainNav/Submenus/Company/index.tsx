@@ -1,4 +1,3 @@
-import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
@@ -8,6 +7,7 @@ import RightCol from '../RightCol'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
 import SearchBar from '../../../../templates/Handbook/SearchBar'
+import CallToAction from '../CallToAction'
 
 interface HandbookNav {
     title: string
@@ -27,7 +27,7 @@ const Block = ({
         <div className="sm:px-4 py-4">
             <h3 className="text-[18px] font-bold mt-0 mb-2 text-black opacity-70">{title}</h3>
             <>{children}</>
-            <CallToAction to={cta.url} width="full" type="outline" size="sm" className="!bg-transparent mt-4">
+            <CallToAction to={cta.url} className="mt-4">
                 {cta.label}
             </CallToAction>
         </div>
@@ -88,7 +88,6 @@ const Handbook = () => {
                 <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
                 <SearchBar className="flex-grow-0 !p-0 w-auto" base={'handbook'} />
             </div>
-
             <p className="text-[14px] m-0 mt-2">We’re open source and operate in public as much as we can.</p>
             <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                 {nav.map(({ title, url }: HandbookNav, index) => {
@@ -107,7 +106,7 @@ const Handbook = () => {
                     )
                 })}
             </ol>
-            <CallToAction to="/handbook" width="full" type="outline" size="sm" className="!bg-transparent mt-4">
+            <CallToAction to="/handbook" className="mt-4">
                 Browse handbook
             </CallToAction>
         </div>
@@ -128,13 +127,7 @@ export default function Docs() {
                             Our mission is to{' '}
                             <span className="text-red">increase the number of successful products</span> in the world.
                         </h3>
-                        <CallToAction
-                            to="/company"
-                            width="full"
-                            type="outline"
-                            size="sm"
-                            className="!bg-transparent mt-4"
-                        >
+                        <CallToAction to="/company" className="mt-4">
                             Read our story
                         </CallToAction>
                     </div>

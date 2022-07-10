@@ -1,10 +1,10 @@
-import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Squeak } from 'squeak-react'
 import Header from './Header'
 import RightCol from './RightCol'
+import CallToAction from './CallToAction'
 
 interface ColMenuItems {
     title: string
@@ -54,9 +54,7 @@ export default function Docs() {
                     <div className="md:p-4 md:mb-0 mb-4">
                         <div className="flex justify-between items-center">
                             <h3 className="text-[18px] opacity-70 m-0 text-black">Recent questions</h3>
-                            <CallToAction to="/questions" type="outline" size="sm" className="!bg-transparent">
-                                Ask a question
-                            </CallToAction>
+                            <CallToAction to="/questions">Ask a question</CallToAction>
                         </div>
                         <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4">
                             <Squeak
@@ -67,13 +65,7 @@ export default function Docs() {
                                 organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                             />
                         </div>
-                        <CallToAction
-                            to="/questions"
-                            width="full"
-                            type="outline"
-                            size="sm"
-                            className="!bg-transparent mt-4"
-                        >
+                        <CallToAction to="/questions" className="!w-full mt-4">
                             Browse recent questions
                         </CallToAction>
                     </div>
@@ -91,22 +83,16 @@ export default function Docs() {
                         </div>
                         <p className="text-[14px]">
                             P.S. Get free merch by{' '}
-                            <Link className="text-red font-bold" to="https://github.com/PostHog">
+                            <Link className="text-red hover:text-red font-bold" to="https://github.com/PostHog">
                                 contributing
                             </Link>{' '}
                             or{' '}
-                            <Link className="text-red font-bold" to="/questions">
+                            <Link className="text-red hover:text-red font-bold" to="/questions">
                                 answering community questions
                             </Link>
                             .
                         </p>
-                        <CallToAction
-                            to="https://merch.posthog.com/collections/all"
-                            width="full"
-                            type="outline"
-                            size="sm"
-                            className="!bg-transparent mt-4"
-                        >
+                        <CallToAction to="https://merch.posthog.com/collections/all" className="!w-full mt-4">
                             Visit the merch store
                         </CallToAction>
                     </div>
