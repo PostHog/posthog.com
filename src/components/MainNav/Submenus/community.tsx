@@ -78,7 +78,12 @@ export default function Docs() {
                                 </p>
                             </div>
                             <div>
-                                <StaticImage width={280} alt="PostHog merch" src="../images/merch.png" />
+                                <StaticImage
+                                    className="pointer-events-none"
+                                    width={280}
+                                    alt="PostHog merch"
+                                    src="../images/merch.png"
+                                />
                             </div>
                         </div>
                         <p className="text-[14px] dark:text-white">

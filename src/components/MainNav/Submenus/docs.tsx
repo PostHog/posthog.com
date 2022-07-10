@@ -1,5 +1,4 @@
 import CallToAction from './CallToAction'
-import { Search } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
 import SearchBar from '../../../templates/Handbook/SearchBar'

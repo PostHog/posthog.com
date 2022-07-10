@@ -1,9 +1,6 @@
-import { Search } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
-import { Squeak } from 'squeak-react'
 import Header from '../Header'
-import RightCol from '../RightCol'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
 import SearchBar from '../../../../templates/Handbook/SearchBar'
@@ -129,7 +126,7 @@ export default function Docs() {
                             Our mission is to{' '}
                             <span className="text-red">increase the number of successful products</span> in the world.
                         </h3>
-                        <CallToAction to="/company" className="mt-4">
+                        <CallToAction to="/handbook" className="mt-4">
                             Read our story
                         </CallToAction>
                     </div>
