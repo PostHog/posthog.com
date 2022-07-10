@@ -2,6 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
+import SearchBar from '../../../templates/Handbook/SearchBar'
 
 interface ColMenuItems {
     title: string
@@ -60,11 +61,8 @@ export default function Docs() {
         <div className="rounded-md md:flex">
             <section className="p-4 border-r border-gray-accent-light border-dashed">
                 <div className="flex justify-between items-center opacity-50 mb-4">
-                    <h2 className="text-sm font-semibold m-0">Table of contents</h2>
-                    <button className="text-sm font-semibold flex space-x-2 items-center">
-                        <Search />
-                        <span>Search docs</span>
-                    </button>
+                    <h2 className="text-sm font-semibold m-0 flex-shrink-0">Table of contents</h2>
+                    <SearchBar className="flex-grow-0 !p-0 w-auto" base={'docs'} />
                 </div>
                 <ol className="m-0 list-none p-0">
                     {leftColMenuItems.map(({ title, description, url }: ColMenuItems) => {

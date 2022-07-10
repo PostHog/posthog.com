@@ -49,7 +49,13 @@ export default function Blog() {
                 <div>
                     <h2 className="text-[18px] opacity-70 font-bold m-0 mb-2 text-black">Blog</h2>
                     <Link className="text-inherit hover:text-inherit mt-2 inline-block" to={slug}>
-                        {image && <GatsbyImage alt="Blog featured image" image={image} className="rounded-sm" />}
+                        {image && (
+                            <GatsbyImage
+                                alt="Blog featured image"
+                                image={image}
+                                className="rounded-sm pointer-events-none"
+                            />
+                        )}
                         <h4 className="text-[14px] font-bold m-0 text-black opacity-70 mt-2">{title}</h4>
                         <p className="text-[14px] m-0 text-black opacity-50">{date}</p>
                     </Link>

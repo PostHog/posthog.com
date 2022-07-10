@@ -7,6 +7,7 @@ import Header from '../Header'
 import RightCol from '../RightCol'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
+import SearchBar from '../../../../templates/Handbook/SearchBar'
 
 interface HandbookNav {
     title: string
@@ -83,13 +84,11 @@ const Handbook = () => {
 
     return (
         <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="flex items-center w-full justify-between">
-                <h3 className="text-[18px] font-bold m-0 text-black opacity-70">Handbook</h3>
-                <button className="text-sm font-semibold flex space-x-2 items-center">
-                    <Search />
-                    <span className="opacity-30">Search handbook</span>
-                </button>
+            <div className="flex items-center w-full justify-between opacity-70">
+                <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
+                <SearchBar className="flex-grow-0 !p-0 w-auto" base={'handbook'} />
             </div>
+
             <p className="text-[14px] m-0 mt-2">We’re open source and operate in public as much as we can.</p>
             <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                 {nav.map(({ title, url }: HandbookNav, index) => {
