@@ -19,7 +19,7 @@ export default function Submenu({ referenceElement, menu, open, parentURL }) {
     return (
         <div className="z-10 lg:pt-5 lg:block text-almost-black relative -top-5">
             <motion.div
-                className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 my-6 rounded-md"
+                className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 mt-6 rounded-md"
                 variants={variants}
                 initial="hidden"
                 animate="shown"

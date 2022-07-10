@@ -55,7 +55,7 @@ export default function MenuItem({ menuItem }) {
             </span>
 
             {sub && hovered && (
-                <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                <div ref={setPopperElement} style={!breakpoints.md ? styles.popper : {}} {...attributes.popper}>
                     <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />
                 </div>
             )}

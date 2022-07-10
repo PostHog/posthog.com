@@ -57,8 +57,8 @@ export default function Docs() {
     ]
 
     return (
-        <div className="rounded-md flex">
-            <section className="p-7 border-r border-gray-accent-light border-dashed">
+        <div className="rounded-md md:flex">
+            <section className="p-4 border-r border-gray-accent-light border-dashed">
                 <div className="flex justify-between items-center opacity-50 mb-4">
                     <h2 className="text-sm font-semibold m-0">Table of contents</h2>
                     <button className="text-sm font-semibold flex space-x-2 items-center">
@@ -88,7 +88,7 @@ export default function Docs() {
                     Visit Docs
                 </CallToAction>
             </section>
-            <section className="bg-gray-accent-light bg-opacity-10 p-7">
+            <section className="bg-gray-accent-light bg-opacity-10 p-4">
                 <h2 className="text-sm opacity-50 font-semibold m-0 mb-4">PostHog platform</h2>
                 <ol className="m-0 list-none p-0 max-w-[225px]">
                     {rightColMenuItems.map(({ title, description, url }: ColMenuItems) => {

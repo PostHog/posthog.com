@@ -49,9 +49,9 @@ export default function Docs() {
     return (
         <section>
             <Header title="Community" />
-            <div className="flex">
-                <div className="border-r border-gray-accent-light border-dashed w-[500px]">
-                    <div className="p-4 ">
+            <div className="md:flex md:p-0 p-5">
+                <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
+                    <div className="md:p-4 md:mb-0 mb-4">
                         <div className="flex justify-between items-center">
                             <h3 className="text-[18px] opacity-70 m-0 text-black">Recent questions</h3>
                             <CallToAction to="/questions" type="outline" size="sm" className="!bg-transparent">
@@ -60,6 +60,7 @@ export default function Docs() {
                         </div>
                         <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4">
                             <Squeak
+                                slug={null}
                                 apiHost="https://squeak.cloud"
                                 apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
                                 url="https://pxipkquvwqaaunuzjoge.supabase.co"
@@ -76,8 +77,8 @@ export default function Docs() {
                             Browse recent questions
                         </CallToAction>
                     </div>
-                    <div className="py-7 px-4 border-t border-gray-accent-light border-dashed">
-                        <div className="grid grid-cols-2 items-center">
+                    <div className="py-7 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
+                        <div className="grid sm:grid-cols-2 items-center">
                             <div>
                                 <h3 className="text-[18px] opacity-70 mt-0 text-black">Merch</h3>
                                 <p className="text-[14px]">

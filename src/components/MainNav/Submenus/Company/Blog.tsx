@@ -76,7 +76,7 @@ export default function Blog() {
                         Visit the PostHog Blog
                     </CallToAction>
                 </div>
-                <ul className="list-none m-0 p-0 mt-auto">
+                <ul className="list-none m-0 p-0 md:mt-auto mt-4">
                     {links.map(({ title, url, description }: Links) => {
                         return (
                             <li key={title}>

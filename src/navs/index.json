@@ -28,7 +28,6 @@
         },
         {
             "title": "Company",
-            "hideBorder": true,
             "url": "/handbook/company/story",
             "sub": {
                 "title": "Company",

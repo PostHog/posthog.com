@@ -23,7 +23,7 @@ const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="p-4">
+        <div className="sm:px-4 py-4">
             <h3 className="text-[18px] font-bold mt-0 mb-2 text-black opacity-70">{title}</h3>
             <>{children}</>
             <CallToAction to={cta.url} width="full" type="outline" size="sm" className="!bg-transparent mt-4">
@@ -82,7 +82,7 @@ const Handbook = () => {
     ]
 
     return (
-        <div className="py-7 px-4 border-t border-gray-accent-light border-dashed">
+        <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
             <div className="flex items-center w-full justify-between">
                 <h3 className="text-[18px] font-bold m-0 text-black opacity-70">Handbook</h3>
                 <button className="text-sm font-semibold flex space-x-2 items-center">
@@ -121,9 +121,9 @@ export default function Docs() {
     return (
         <section>
             <Header title="Company" />
-            <div className="flex">
-                <div className="border-r border-gray-accent-light border-dashed w-[500px]">
-                    <div className="p-4 text-center">
+            <div className="md:flex md:p-0 p-4">
+                <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
+                    <div className="md:px-4 py-4 text-center">
                         <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
                         <h3 className="text-xl font-bold mt-2 mb-0">
                             Our mission is to{' '}
@@ -139,14 +139,14 @@ export default function Docs() {
                             Read our story
                         </CallToAction>
                     </div>
-                    <div className="grid grid-cols-2 divide-x divide-dashed divide-gray-accent-light border-t border-gray-accent-light border-dashed">
+                    <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light border-t border-gray-accent-light border-dashed">
                         <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
                             <p className="m-0 text-[14px]">
                                 Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
                                 <strong>{teamMembers.group.length - 1} countries</strong>. Some travel full-time.
                             </p>
                         </Block>
-                        <Block title="Team" cta={{ url: '/careers', label: 'Explore careers' }}>
+                        <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                             <p className="m-0 text-[14px]">
                                 We’re currently hiring for <strong>{jobs.totalCount} roles</strong>. We’re unlike any
                                 company you’ve ever worked for.
