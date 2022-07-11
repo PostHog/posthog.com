@@ -511,4 +511,58 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
+    const LibraryTemplate = path.resolve(`src/templates/Library.tsx`)
+    const libraries = await graphql(`
+        {
+            allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/docs/integrate/(client|server)/(?!.*snippets/).*/" } }
+                    frontmatter: { title: { ne: "" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+        }
+    `)
+
+    libraries.data.allMdx.nodes.forEach((node) => {
+        const { slug } = node.fields
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        const tableOfContents = formatToc(node.headings)
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
+
+        createPage({
+            path: replacePath(node.fields.slug),
+            component: LibraryTemplate,
+            context: {
+                id: node.id,
+                next,
+                previous,
+                menu: docsMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
+                slug,
+            },
+        })
+    })
 }

@@ -1,21 +1,22 @@
 import React, { useRef } from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import { shortcodes } from '../../mdxGlobalComponents'
 import MainSidebar from './MainSidebar'
 import MobileSidebar from './MobileSidebar'
-import SectionLinks from 'components/SectionLinks'
+import SectionLinks, { SectionLinksProps } from 'components/SectionLinks'
 import StickySidebar from './StickySidebar'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import CommunityQuestions from 'components/CommunityQuestions'
 import { Heading } from 'components/Heading'
-import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
+import { InlineCode } from 'components/InlineCode'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
+import LibraryFeatures, { LibraryFeaturesProps } from 'components/LibraryFeatures'
+import { GitHub } from 'components/Icons/Icons'
 import { ZoomImage } from 'components/ZoomImage'
 
 const Iframe = (props) => {
@@ -30,7 +31,7 @@ const Iframe = (props) => {
     }
 }
 
-const SectionLinksBottom = ({ previous, next }) => {
+const SectionLinksBottom = ({ previous, next }: SectionLinksProps) => {
     return (
         <>
             <hr className="w-[calc(100vw-2rem)] m-0 bg-transparent border-t border-r-0 border-l-0 border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark" />
@@ -43,27 +44,39 @@ const SectionLinksBottom = ({ previous, next }) => {
     )
 }
 
-const SectionLinksTop = ({ previous, next }) => {
+const SectionLinksTop = ({ previous, next }: SectionLinksProps) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
 }
 
+type DocsLayoutProps = {
+    title: string
+    github?: string
+    features?: LibraryFeaturesProps['availability']
+    lastUpdated: string
+    menu: any
+    slug: string
+    body: string
+    tableOfContents: any
+    next: any
+    previous: any
+    hideLastUpdated: boolean
+    hideAnchor: boolean
+}
+
 export default function DocsLayout({
-    handleMobileMenuClick,
-    filePath,
     title,
+    github,
     lastUpdated,
     menu,
     slug,
-    breadcrumb,
-    breadcrumbBase,
     hideAnchor,
+    features,
     tableOfContents,
     body,
     next,
     previous,
     hideLastUpdated,
-    questions,
-}) {
+}: DocsLayoutProps) {
     const components = {
         Team,
         iframe: Iframe,
@@ -80,9 +93,10 @@ export default function DocsLayout({
         TestimonialsTable,
         ...shortcodes,
     }
-    const breakpoints = useBreakpoint()
+
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = useRef()
+
     return (
         <div className="relative">
             <SectionLinksTop next={next} previous={previous} />
@@ -101,23 +115,33 @@ export default function DocsLayout({
                     className="w-full 2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-auto"
                 >
                     <section className="mb-8 relative">
-                        <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
+                        <h1 className="flex items-center justify-between dark:text-white text-3xl sm:text-5xl mt-0 mb-2">
+                            {title}
+                            {github && (
+                                <Link href={github} disablePrefetch>
+                                    <GitHub className="w-8 h-8 text-black/80 hover:text-black/60" />
+                                </Link>
+                            )}
+                        </h1>
                         {!hideLastUpdated && (
                             <p className="mt-1 mb-0 opacity-50">
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
                         )}
                     </section>
-                    {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+
+                    {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+
                     <section className="article-content handbook-docs-content">
+                        <LibraryFeatures availability={features} />
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
-                    <CommunityQuestions questions={questions} />
+                    <CommunityQuestions />
                 </article>
 
-                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
+                {showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>

@@ -12,7 +12,7 @@ import Navigation from 'components/Docs/Navigation'
 
 import '../styles/handbook.scss'
 
-export default function Handbook({
+export default function Library({
     data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
@@ -24,7 +24,7 @@ export default function Handbook({
         contributors,
         fields: { slug },
     } = post
-    const { title, hideAnchor, description, featuredImage, hideLastUpdated } = frontmatter
+    const { title, hideAnchor, github, features, description, featuredImage, hideLastUpdated } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
@@ -44,6 +44,8 @@ export default function Handbook({
             scroll.scrollMore(-50)
         }
     }, [])
+
+    console.log(github)
 
     return (
         <>
@@ -81,22 +83,18 @@ export default function Handbook({
                         />
                         <div id="handbook-content-menu-wrapper">
                             <DocsLayout
-                                {...{
-                                    handleMobileMenuClick,
-                                    filePath,
-                                    title,
-                                    lastUpdated,
-                                    menu,
-                                    slug,
-                                    breadcrumb,
-                                    breadcrumbBase,
-                                    hideAnchor,
-                                    tableOfContents,
-                                    body,
-                                    next,
-                                    previous,
-                                    hideLastUpdated,
-                                }}
+                                title={title}
+                                slug={slug}
+                                github={github}
+                                features={features}
+                                menu={menu}
+                                lastUpdated={lastUpdated}
+                                hideAnchor={hideAnchor}
+                                tableOfContents={tableOfContents}
+                                body={body}
+                                next={next}
+                                previous={previous}
+                                hideLastUpdated={hideLastUpdated}
                             />
                         </div>
                     </div>
@@ -108,7 +106,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!) {
+    query LibraryQuery($id: String!) {
         post: mdx(id: { eq: $id }) {
             id
             body
@@ -129,10 +127,19 @@ export const query = graphql`
                 title
                 hideAnchor
                 description
+                github
+                features {
+                    eventCapture
+                    userIdentification
+                    autoCapture
+                    sessionRecording
+                    featureFlags
+                }
                 hideLastUpdated
                 featuredImage {
                     publicURL
                 }
+                github
             }
             parent {
                 ... on File {
