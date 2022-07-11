@@ -45,8 +45,6 @@ export default function Library({
         }
     }, [])
 
-    console.log(github)
-
     return (
         <>
             <SEO
