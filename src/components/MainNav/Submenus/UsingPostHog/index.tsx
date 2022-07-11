@@ -84,7 +84,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
-                                <h3 className="text-[18px] font-bold m-0 text-black ">User guides</h3>
+                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">User guides</h3>
                                 <SearchBar
                                     label={false}
                                     className="flex-grow-0 !p-0 w-auto dark:text-white"
@@ -128,7 +128,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                         <li key={slug}>
                                             <Link className="inline-block" to={slug}>
                                                 <GatsbyImage
-                                                    className="rounded-md bg-gray-accent-light dark:bg-opacity-10 pointer-events-none"
+                                                    className="rounded bg-tan dark:bg-[#444] pointer-events-none"
                                                     image={image}
                                                     alt={title}
                                                 />
@@ -147,10 +147,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                             {resources.map(({ title, description, url }: ColMenuItems) => {
                                 return (
                                     <li key={title}>
-                                        <Link
-                                            className="rounded-md py-2 px-3 block hover:bg-tan hover:bg-opacity-50"
-                                            to={url}
-                                        >
+                                        <Link className="rounded-sm py-2 px-3 block hover:bg-tan/50" to={url}>
                                             <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
                                             <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
                                                 {description}

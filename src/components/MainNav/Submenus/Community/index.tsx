@@ -113,7 +113,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 return (
                                     <li key={title}>
                                         <Link
-                                            className="rounded-md py-2 px-3 block hover:bg-tan hover:bg-opacity-50"
+                                            className="rounded-sm py-2 px-3 block hover:bg-tan hover:bg-opacity-50"
                                             to={url}
                                         >
                                             <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>

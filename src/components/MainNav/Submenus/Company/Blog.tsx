@@ -86,7 +86,7 @@ export default function Blog() {
                     {links.map(({ title, url, description }: Links) => {
                         return (
                             <li key={title}>
-                                <Link className="rounded-md px-2 py-2 block hover:bg-tan hover:bg-opacity-50" to={url}>
+                                <Link className="rounded-sm px-3 py-2 block hover:bg-tan/50" to={url}>
                                     <h3 className="text-base m-0 opacity-70">{title}</h3>
                                     <p className="m-0 text-[14px] text-black opacity-50 dark:text-white">
                                         {description}
