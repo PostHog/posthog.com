@@ -1472,3 +1472,8 @@
 [[redirects]]
     from = "/tutorials/categories/plugins"
     to = "/tutorials/categories/apps"
+    
+# Added: 2022-07-08
+[[redirects]]
+    from = "/startups"
+    to = "/pricing#startup-plan"
