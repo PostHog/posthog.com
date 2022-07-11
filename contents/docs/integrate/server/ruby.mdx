@@ -3,7 +3,13 @@ title: Ruby Library
 sidebarTitle: Ruby
 sidebar: Docs
 showTitle: true
-ruby: https://github.com/PostHog/posthog-ruby
+github: https://github.com/PostHog/posthog-ruby
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: true
 ---
 
 This is an optional library you can install if you're working with Ruby. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.

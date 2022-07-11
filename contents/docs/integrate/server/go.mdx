@@ -4,6 +4,12 @@ sidebarTitle: Go
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-go
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: true
 ---
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
