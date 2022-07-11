@@ -21,7 +21,7 @@ interface Tutorial {
     }
 }
 
-export default function Product({ referenceElement }: { referenceElement: HTMLDivElement }) {
+export default function UsingPosthog({ referenceElement }: { referenceElement: HTMLDivElement }) {
     const {
         tutorials: { nodes },
     } = useStaticQuery(query)
@@ -121,14 +121,14 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                             <div className="opacity-70">
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
-                            <ul className="m-0 list-none p-0 mt-2 grid grid-cols-3 gap-4">
+                            <ul className="m-0 list-none p-0 mt-2 grid grid-cols-2 gap-4">
                                 {nodes.map(({ slug, title, frontmatter: { featuredImage } }: Tutorial) => {
                                     const image = featuredImage && getImage(featuredImage)
                                     return (
                                         <li key={slug}>
                                             <Link className="inline-block" to={slug}>
                                                 <GatsbyImage
-                                                    className="rounded-md bg-gray-accent-light dark:bg-gray-accent-dark pointer-events-none"
+                                                    className="rounded-md bg-gray-accent-light dark:bg-opacity-10 pointer-events-none"
                                                     image={image}
                                                     alt={title}
                                                 />
@@ -169,7 +169,11 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
 
 const query = graphql`
     {
-        tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
+        tutorials: allMdx(
+            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
+            limit: 2
+            sort: { fields: frontmatter___date, order: DESC }
+        ) {
             nodes {
                 slug
                 frontmatter {
