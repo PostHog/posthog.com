@@ -31,54 +31,7 @@ const Block = ({
     )
 }
 
-const Handbook = () => {
-    const nav: HandbookNav[] = [
-        {
-            title: 'Getting started',
-            url: '/handbook/getting-started/start-here',
-        },
-        {
-            title: 'Company',
-            url: '/handbook/company/story',
-        },
-        {
-            title: 'Strategy',
-            url: '/handbook/strategy/strategy',
-        },
-        {
-            title: 'How we work',
-            url: '/handbook/company/culture',
-        },
-        {
-            title: 'People',
-            url: '/handbook/people/compensation',
-        },
-        {
-            title: 'Engineering',
-            url: '/handbook/engineering/developing-locally',
-        },
-        {
-            title: 'Product',
-            url: '/handbook/product/product-team',
-        },
-        {
-            title: 'Design',
-            url: '/handbook/design/about-design',
-        },
-        {
-            title: 'Marketing',
-            url: '/handbook/growth/marketing',
-        },
-        {
-            title: 'Customer success',
-            url: '/handbook/growth/strategy',
-        },
-        {
-            title: 'Developer relations',
-            url: '/handbook/growth/developer-relations',
-        },
-    ]
-
+const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
         <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
             <div className="flex items-center w-full justify-between opacity-70">
@@ -89,7 +42,7 @@ const Handbook = () => {
                 We’re open source and operate in public as much as we can.
             </p>
             <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
-                {nav.map(({ title, url }: HandbookNav, index) => {
+                {menu.map(({ title, url }: HandbookNav, index) => {
                     return (
                         <li key={title}>
                             <Link
@@ -113,7 +66,16 @@ const Handbook = () => {
 }
 
 export default function Docs() {
-    const { teamMembers, jobs } = useStaticQuery(query)
+    const { teamMembers, jobs, sidebars } = useStaticQuery(query)
+
+    const handbookMenu = sidebars.childSidebarsJson.handbook
+        .slice(1, sidebars.childSidebarsJson.handbook.length)
+        .map(({ name, url, children }: { name: string; url: string; children: { name: string; url: string }[] }) => {
+            return {
+                title: name,
+                url: url || children.filter(({ url }) => url)[0].url,
+            }
+        })
 
     return (
         <section>
@@ -144,7 +106,7 @@ export default function Docs() {
                             </p>
                         </Block>
                     </div>
-                    <Handbook />
+                    <Handbook menu={handbookMenu} />
                 </div>
                 <Blog />
             </div>
@@ -162,6 +124,18 @@ const query = graphql`
         }
         jobs: allJobs {
             totalCount
+        }
+        sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
+            childSidebarsJson {
+                handbook {
+                    children {
+                        name
+                        url
+                    }
+                    name
+                    url
+                }
+            }
         }
     }
 `
