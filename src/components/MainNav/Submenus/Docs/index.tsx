@@ -71,7 +71,7 @@ export default function Docs() {
                                     className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-start space-x-2"
                                     to={url}
                                 >
-                                    <span className="text-[14px] text-black opacity-20 leading-none font-semibold dark:text-white mt-[2px]">
+                                    <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white mt-[2px] w-4">
                                         {index + 1}.
                                     </span>
                                     <div>
