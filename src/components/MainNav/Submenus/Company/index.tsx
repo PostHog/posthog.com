@@ -5,6 +5,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
 import SearchBar from '../../../../templates/Handbook/SearchBar'
 import CallToAction from '../CallToAction'
+import { Wrapper } from '../Wrapper'
 
 interface HandbookNav {
     title: string
@@ -33,39 +34,41 @@ const Block = ({
 
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
-        <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="flex items-center w-full justify-between opacity-70">
-                <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
-                <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
+        <div className="md:py-7 py-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
+            <div className="max-w-[500px] mx-auto xl:max-w-auto md:px-4">
+                <div className="flex items-center w-full justify-between opacity-70">
+                    <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
+                    <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
+                </div>
+                <p className="text-[14px] m-0 mt-2 dark:text-white">
+                    We’re open source and operate in public as much as we can.
+                </p>
+                <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
+                    {menu.map(({ title, url }: HandbookNav, index) => {
+                        return (
+                            <li key={title}>
+                                <Link
+                                    className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2"
+                                    to={url}
+                                >
+                                    <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4">
+                                        {index + 1}.
+                                    </span>
+                                    <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ol>
+                <CallToAction to="/handbook" className="mt-4 !w-full">
+                    Browse handbook
+                </CallToAction>
             </div>
-            <p className="text-[14px] m-0 mt-2 dark:text-white">
-                We’re open source and operate in public as much as we can.
-            </p>
-            <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
-                {menu.map(({ title, url }: HandbookNav, index) => {
-                    return (
-                        <li key={title}>
-                            <Link
-                                className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2"
-                                to={url}
-                            >
-                                <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4">
-                                    {index + 1}.
-                                </span>
-                                <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ol>
-            <CallToAction to="/handbook" className="mt-4 !w-full">
-                Browse handbook
-            </CallToAction>
         </div>
     )
 }
 
-export default function Docs() {
+export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
     const { teamMembers, jobs, sidebars } = useStaticQuery(query)
 
     const handbookMenu = sidebars.childSidebarsJson.handbook
@@ -78,39 +81,45 @@ export default function Docs() {
         })
 
     return (
-        <section className="flex md:flex-col flex-col-reverse">
-            <Header title="Company" />
-            <div className="md:flex md:p-0 p-4">
-                <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
-                    <div className="md:px-4 py-4 text-center">
-                        <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
-                        <h3 className="text-xl font-bold mt-2 mb-0 leading-tight">
-                            Our mission is to{' '}
-                            <span className="text-red">increase the number of successful products</span> in the world.
-                        </h3>
-                        <CallToAction to="/handbook" className="mt-4">
-                            Read our story
-                        </CallToAction>
+        <Wrapper placement="bottom-end" referenceElement={referenceElement} className="w-full xl:w-auto">
+            <section className="flex md:flex-col flex-col-reverse">
+                <Header title="Company" />
+                <div className="md:flex md:p-0 p-4">
+                    <div className="md:border-r border-gray-accent-light border-dashed flex-grow xl:w-[500px]">
+                        <div className="md:px-4 py-4 text-center max-w-[500px] mx-auto xl:max-w-auto">
+                            <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
+                            <h3 className="text-xl font-bold mt-2 mb-0 leading-tight">
+                                Our mission is to{' '}
+                                <span className="text-red">increase the number of successful products</span> in the
+                                world.
+                            </h3>
+                            <CallToAction to="/handbook" className="mt-4">
+                                Read our story
+                            </CallToAction>
+                        </div>
+                        <div className="border-t border-gray-accent-light border-dashed">
+                            <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light max-w-[500px] mx-auto xl:max-w-auto">
+                                <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
+                                    <p className="m-0 text-[14px] dark:text-white">
+                                        Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
+                                        <strong>{teamMembers.group.length - 1} countries</strong>. Some travel
+                                        full-time.
+                                    </p>
+                                </Block>
+                                <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
+                                    <p className="m-0 text-[14px] dark:text-white">
+                                        We’re currently hiring for <strong>{jobs.totalCount} roles</strong>. We’re
+                                        unlike any company you’ve ever worked for.
+                                    </p>
+                                </Block>
+                            </div>
+                        </div>
+                        <Handbook menu={handbookMenu} />
                     </div>
-                    <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light border-t border-gray-accent-light border-dashed">
-                        <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
-                            <p className="m-0 text-[14px] dark:text-white">
-                                Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
-                                <strong>{teamMembers.group.length - 1} countries</strong>. Some travel full-time.
-                            </p>
-                        </Block>
-                        <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
-                            <p className="m-0 text-[14px] dark:text-white">
-                                We’re currently hiring for <strong>{jobs.totalCount} roles</strong>. We’re unlike any
-                                company you’ve ever worked for.
-                            </p>
-                        </Block>
-                    </div>
-                    <Handbook menu={handbookMenu} />
+                    <Blog />
                 </div>
-                <Blog />
-            </div>
-        </section>
+            </section>
+        </Wrapper>
     )
 }
 

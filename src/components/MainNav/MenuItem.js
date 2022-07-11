@@ -15,10 +15,6 @@ export default function MenuItem({ menuItem, referenceElement }) {
         setHovered(!hovered)
     }
 
-    const [popperElement, setPopperElement] = useState(null)
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
-        placement: sub?.placement,
-    })
     return (
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
@@ -55,11 +51,7 @@ export default function MenuItem({ menuItem, referenceElement }) {
                 )}
             </span>
 
-            {sub && hovered && (
-                <div ref={setPopperElement} style={!breakpoints.md ? styles.popper : {}} {...attributes.popper}>
-                    <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />
-                </div>
-            )}
+            {title === 'Company' && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
         </li>
     )
 }

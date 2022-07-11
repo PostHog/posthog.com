@@ -146,6 +146,7 @@
         "@tailwindcss/line-clamp": "^0.4.0",
         "@tailwindcss/typography": "^0.5.2",
         "@types/chart.js": "^2.9.31",
+        "@types/gatsby-plugin-breakpoints": "^1.3.2",
         "@types/mdx-js__react": "^1.5.3",
         "@types/react-helmet": "^6.1.0",
         "@types/react-modal": "^3.10.6",

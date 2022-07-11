@@ -35,7 +35,10 @@ export default function MainNav() {
     const menuLength = menu.length
     const halfMenu = Math.floor(menuLength / 2)
     return (
-        <div ref={setReferenceElement} className="flex justify-between items-center max-w-screen-2xl mx-auto">
+        <div
+            ref={setReferenceElement}
+            className="flex justify-between items-center max-w-screen-2xl mx-auto lg:relative"
+        >
             <Link
                 className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
                 to="/"
