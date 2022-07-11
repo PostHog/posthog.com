@@ -49,7 +49,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                                 className="rounded-md px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2"
                                 to={url}
                             >
-                                <span className="text-[14px] text-black opacity-20 leading-none font-semibold dark:text-white">
+                                <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4">
                                     {index + 1}.
                                 </span>
                                 <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
