@@ -1037,6 +1037,10 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
+                },
+                {
+                    "name": "Sessions",
+                    "url": "/docs/user-guides/sessions"
                 }
             ]
         },
