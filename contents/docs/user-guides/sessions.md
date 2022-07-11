@@ -39,7 +39,6 @@ Within the trends tab, you can aggregate results by the count of unique sessions
 
 To do this analysis, simply select Unique sessions from the aggregation dropdown.
 
-
 ![Session counts](../../images/user-guides/sessions/unique-sessions.png)
 
 ### Using session counts in formulas
