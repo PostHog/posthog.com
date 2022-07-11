@@ -8,7 +8,7 @@ Session analysis helps you to understand product usage by uncovering the amount 
 
 This helps you to understand which of your features drive the most engagement and how to improve your product.
 
-## What is a session
+## What is a session?
 
 A session is a set of events that have been grouped together to try to capture a single "use" of your product.
 
