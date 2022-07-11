@@ -12,28 +12,28 @@
             "title": "Docs",
             "url": "/docs",
             "sub": {
-                "component": "Docs",
-                "placement": "bottom-start"
+                "component": "Docs"
             }
         },
         {
             "title": "Using PostHog",
-            "url": "/tutorials"
+            "url": "/tutorials",
+            "sub": {
+                "component": "UsingPostHog"
+            }
         },
         {
             "title": "Community",
             "url": "/questions",
             "sub": {
-                "component": "Community",
-                "placement": "bottom-end"
+                "component": "Community"
             }
         },
         {
             "title": "Company",
             "url": "/handbook/company/story",
             "sub": {
-                "component": "Company",
-                "placement": "bottom-end"
+                "component": "Company"
             }
         },
         {

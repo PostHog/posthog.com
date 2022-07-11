@@ -18,7 +18,6 @@ export default function MainNav() {
                     hideBorder
                     sub {
                         component
-                        placement
                     }
                 }
             }
