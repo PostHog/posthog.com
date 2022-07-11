@@ -61,7 +61,7 @@ export default function Docs() {
             <section className="p-4 border-r border-gray-accent-light border-dashed">
                 <div className="flex justify-between items-center opacity-70 mb-4">
                     <h2 className="text-sm font-semibold m-0 flex-shrink-0">Table of contents</h2>
-                    <SearchBar className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
+                    <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
                 </div>
                 <ol className="m-0 list-none p-0">
                     {leftColMenuItems.map(({ title, description, url }: ColMenuItems, index) => {

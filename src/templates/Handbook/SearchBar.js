@@ -6,7 +6,7 @@ import { useValues } from 'kea'
 import React, { useEffect } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
-export default function SearchBar({ base, className = '' }) {
+export default function SearchBar({ base, label = true, className = '' }) {
     const breakpoints = useBreakpoint()
     const { posthog } = useValues(posthogAnalyticsLogic)
 
@@ -46,11 +46,15 @@ export default function SearchBar({ base, className = '' }) {
     }, [])
 
     return (
-        <div className={`flex space-x-3 w-full text-[14px] px-3 items-center flex-grow relative ${className}`}>
+        <div
+            className={`flex space-x-3 w-full text-[14px] px-3 items-center flex-grow relative ${
+                !label ? 'docsearch-no-label' : ''
+            } ${className}`}
+        >
             <DocSearch
                 translations={{
                     button: {
-                        buttonText: `Search ${breakpoints.xs ? '' : base} `,
+                        buttonText: label ? `Search ${breakpoints.xs ? '' : base} ` : '',
                         buttonAriaLabel: 'Search',
                     },
                 }}

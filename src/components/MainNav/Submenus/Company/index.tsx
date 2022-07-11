@@ -36,7 +36,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
         <div className="md:py-7 py-4 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
             <div className="flex items-center w-full justify-between opacity-70">
                 <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
-                <SearchBar className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
+                <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
             </div>
             <p className="text-[14px] m-0 mt-2 dark:text-white">
                 We’re open source and operate in public as much as we can.

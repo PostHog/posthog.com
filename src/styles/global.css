@@ -819,3 +819,10 @@ body.dark {
         }
     }
 }
+
+.docsearch-no-label {
+    @apply -mr-3;
+    .DocSearch-Button-Keys {
+        @apply hidden;
+    }
+}
