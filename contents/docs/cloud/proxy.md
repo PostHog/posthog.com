@@ -32,7 +32,8 @@ NB Cloudfront doesn't forward headers, cookies, or query parameters received fro
 2. Set the origin domain to your PostHog instance. `app.posthog.com` for PostHog cloud.
 3. Allow all HTTP methods
 4. Create, and attach to the distribution, [an "origin request policy"](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) that forwards all query parameters
-    * This cache policy may also need to forward any headers your application needs. For example the `Authorization` header.
+    * In "Cache key settings" for the "Cache policy" set "Query strings" to "All".
+    * You may also need to set any headers your application needs as part of the cache key. For example the `Authorization` or `Content-Type` headers.
 
 ![a screenshot of the cloudfront cache policy settings](/images/docs/cloud/cloudfront-proxy/cache-policy.png)
 
