@@ -5,11 +5,12 @@ import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import { animateScroll as scroll } from 'react-scroll'
-import '../../styles/handbook.scss'
-import ArticleFooter from './Footer'
-import Main from './Main'
-import MainSidebar from './MainSidebar'
-import Navigation from './Navigation'
+import DocsLayout from 'components/Docs/Layout'
+import MainSidebar from 'components/Docs/MainSidebar'
+import ArticleFooter from 'components/Docs/Footer'
+import Navigation from 'components/Docs/Navigation'
+
+import '../styles/handbook.scss'
 
 export default function Handbook({
     data: { post },
@@ -79,11 +80,12 @@ export default function Handbook({
                             handleMobileMenuClick={handleMobileMenuClick}
                         />
                         <div id="handbook-content-menu-wrapper">
-                            <Main
+                            <DocsLayout
                                 {...{
                                     handleMobileMenuClick,
                                     filePath,
                                     title,
+                                    questions: [],
                                     lastUpdated,
                                     menu,
                                     slug,

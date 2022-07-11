@@ -89,6 +89,7 @@ import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
@@ -104,6 +105,8 @@ import { Subscribe } from './components/Subscribe'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { TotalCountries } from './components/TotalCountries'
+import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
@@ -201,6 +204,7 @@ export const shortcodes = {
     Question,
     ResponsiveAnchor,
     RocketHorizontalRule,
+    SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
@@ -216,6 +220,8 @@ export const shortcodes = {
     TableOfContents,
     TeamQuote,
     Tooltip,
+    TotalCountries,
+    TotalTeam,
     Tutorials,
     TutorialsSlider,
     VisitLibrary,

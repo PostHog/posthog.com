@@ -15,9 +15,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import ReactMarkdown from 'react-markdown'
 import '../styles/api-docs.scss'
-import MainSidebar from './Handbook/MainSidebar'
-import Navigation from './Handbook/Navigation'
-import SectionLinks from './Handbook/SectionLinks'
+import MainSidebar from 'components/Docs/MainSidebar'
+import Navigation from 'components/Docs/Navigation'
+import SectionLinks from 'components/SectionLinks'
 
 const mapVerbsColor = {
     get: 'blue',

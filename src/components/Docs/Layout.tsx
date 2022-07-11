@@ -1,4 +1,13 @@
+import React, { useRef } from 'react'
 import { MDXProvider } from '@mdx-js/react'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+
+import { shortcodes } from '../../mdxGlobalComponents'
+import MainSidebar from './MainSidebar'
+import MobileSidebar from './MobileSidebar'
+import SectionLinks from 'components/SectionLinks'
+import StickySidebar from './StickySidebar'
 import { Blockquote } from 'components/BlockQuote'
 import { CodeBlock } from 'components/CodeBlock'
 import CommunityQuestions from 'components/CommunityQuestions'
@@ -8,17 +17,7 @@ import Link from 'components/Link'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql, useStaticQuery } from 'gatsby'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useRef } from 'react'
-import { shortcodes } from '../../mdxGlobalComponents'
-import MainSidebar from './MainSidebar'
-import MobileSidebar from './MobileSidebar'
-import SectionLinks from './SectionLinks'
-import StickySidebar from './StickySidebar'
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
         return (
@@ -48,7 +47,7 @@ const SectionLinksTop = ({ previous, next }) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
 }
 
-export default function Main({
+export default function DocsLayout({
     handleMobileMenuClick,
     filePath,
     title,
@@ -65,14 +64,6 @@ export default function Main({
     hideLastUpdated,
     questions,
 }) {
-    const { countries } = useStaticQuery(query)
-
-    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
-
-    const TotalTeam = (props) => (
-        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
-    )
-
     const components = {
         Team,
         iframe: Iframe,
@@ -86,9 +77,6 @@ export default function Main({
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
-        a: A,
-        TotalCountries,
-        TotalTeam,
         TestimonialsTable,
         ...shortcodes,
     }
@@ -135,13 +123,3 @@ export default function Main({
         </div>
     )
 }
-
-const query = graphql`
-    query {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
-    }
-`

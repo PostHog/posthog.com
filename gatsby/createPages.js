@@ -4,9 +4,8 @@ const slugify = require('slugify')
 const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
-module.exports = exports.createPages = async ({ actions, graphql }) => {
-    const { createPage } = actions
-    const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
+module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
