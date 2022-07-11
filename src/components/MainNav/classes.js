@@ -49,10 +49,10 @@ export const menuItem = (hideBorder) => cntl`
 export const link = (className = '', hovered = false) => cntl`
     relative
     font-semibold
-    px-4
+    px-3.5
     py-3
     lg:py-2
-    text-[15px]
+    text-[14.5px]
     dark:text-white
     dark:hover:text-white
     text-almost-black

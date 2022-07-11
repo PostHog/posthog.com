@@ -88,7 +88,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                         })}
                     </ol>
                     <CallToAction className="inline-block mt-4 !w-full" to="/docs">
-                        Visit Docs
+                        Visit the docs
                     </CallToAction>
                 </section>
                 <section className="bg-gray-accent-light bg-opacity-10 pt-6 px-3 pb-3">

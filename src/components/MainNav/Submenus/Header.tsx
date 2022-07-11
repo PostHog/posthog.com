@@ -50,7 +50,7 @@ export default function Header({ title }: Props) {
     return (
         <div className="flex md:justify-between items-center py-4 px-6 md:border-b md:border-t-0 border-t border-gray-accent-light border-dashed">
             <h2 className="text-lg m-0 opacity-70 text-black md:block hidden">{title}</h2>
-            <ul className="list-none flex space-x-3 p-0 md:w-auto w-full md:justify-start justify-between">
+            <ul className="list-none flex space-x-4 p-0 md:w-auto w-full md:justify-start justify-between">
                 {social.map(({ Icon, url }: Social) => {
                     return (
                         <li key={url}>
