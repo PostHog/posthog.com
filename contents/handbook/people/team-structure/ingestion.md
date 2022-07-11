@@ -9,23 +9,37 @@ Team ingestion is part of the [Platform team](/handbook/people/team-structure/pl
 
 ## People
 
-- Tiina Turban (Full Stack Engineer)
-- Yakko Majuri (Full Stack Engineer)
+- Karl-Aksel Puulmann (Fullstack Engineer)
+- Tiina Turban (Fullstack Engineer)
+- Yakko Majuri (Fullstack Engineer)
+
 
 ## Mission statement
 
 Provide the best events pipeline in the world.
 
 ## Q3 2022 Goals
-* **Objective**:
-    * Events are ingested, processed, and exported quickly, reliably and accurately
+
+### Objective 1: Events are ingested, processed, and exported quickly, reliably and accurately
+
 * **Key Results**:
-    * End-to-end P95 time to ingest &lt;60 seconds (across the 3 month period)
-    * Apps reliability > 99% (across the 3 month period)
+    * End-to-end P95 time to ingest events is under:
+        * 1m30s for "normal events"
+        * 2m30s for "buffer events"
+    * We ingest 99.99% of valid events
     * Ship a solution to enable accurate persons on events ingestion for faster querying across all teams
 * **Rationale**:
     * Ingesting data is the most crucial part of our product, missing, slow or inaccurate data makes the product useless to our customers and has proven to drive churn in the past
     * We need to maintain a high bar for speed and push the boundaries of reliability and accuracy of our data
+    
+> Note that for the end-to-end ingestion time result we will be using a metric that adds up to 60s of delay
+    
+### Objective 2: Apps in our official library are work reliably to meet customer needs
+
+* **Key Results**:
+    * Measure customer sentiment on apps and improve sentiment significantly by the end of the quarter
+* **Rationale**:
+    * Apps are a key part of the PostHog platform and a key component of analytics workflows for larger clients
 
 ## Responsibilities
 
