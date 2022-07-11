@@ -7,19 +7,20 @@ import { menuItem as menuItemClass, link } from './classes'
 import { CallToAction } from 'components/CallToAction'
 import { usePopper } from 'react-popper'
 
-export default function MenuItem({ menuItem }) {
+export default function MenuItem({ menuItem, referenceElement }) {
     const [hovered, setHovered] = useState(false)
     const { title, url, sub, hideBorder, cta, classes = '' } = menuItem
     const breakpoints = useBreakpoint()
     const handleSubClick = () => {
         setHovered(!hovered)
     }
-    const [referenceElement, setReferenceElement] = useState(null)
+
     const [popperElement, setPopperElement] = useState(null)
-    const { styles, attributes } = usePopper(referenceElement, popperElement)
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement: sub?.placement,
+    })
     return (
         <li
-            ref={setReferenceElement}
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
             className={menuItemClass(hideBorder)}

@@ -12,7 +12,8 @@
             "title": "Docs",
             "url": "/docs",
             "sub": {
-                "component": "Docs"
+                "component": "Docs",
+                "placement": "bottom-start"
             }
         },
         {
@@ -23,15 +24,16 @@
             "title": "Community",
             "url": "/questions",
             "sub": {
-                "component": "Community"
+                "component": "Community",
+                "placement": "bottom-end"
             }
         },
         {
             "title": "Company",
             "url": "/handbook/company/story",
             "sub": {
-                "title": "Company",
-                "component": "Company"
+                "component": "Company",
+                "placement": "bottom-end"
             }
         },
         {

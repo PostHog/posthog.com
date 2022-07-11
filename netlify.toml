@@ -1,6 +1,5 @@
 [dev]
   command = "yarn start"
-  port = 8888
   targetPort = 8001
 
 [[redirects]]
