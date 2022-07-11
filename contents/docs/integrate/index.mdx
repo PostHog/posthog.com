@@ -42,13 +42,13 @@ Some features such as session recording are only available with our JavaScript l
 
 <OverflowXSection>
 
-|                     Library                             | Maintainer   | Event Capture | User Identification | Autocapture | Session Recording |                         Feature Flags                         |
-| :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: | :---------: | :---------------: | :-----------------------------------------------------------: |
-|        [JavaScript](/docs/integrate/client/js)          | PostHog Team |       ✅      |          ✅          |    ✅      |        ✅          |                              ✅                               |
-|       [Android](/docs/integrate/client/android)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
-|           [iOS](/docs/integrate/client/ios)             | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
-|       [Flutter](/docs/integrate/client/flutter)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
-|  [React Native](/docs/integrate/client/react-native)    | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+|                       Library                       |  Maintainer  | Event Capture | User Identification | Autocapture | Session Recording | Feature Flags |
+| :-------------------------------------------------: | :----------: | :-----------: | :-----------------: | :---------: | :---------------: | :-----------: |
+|       [JavaScript](/docs/integrate/client/js)       | PostHog Team |      ✅       |         ✅          |     ✅      |        ✅         |      ✅       |
+|      [Android](/docs/integrate/client/android)      | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
+|          [iOS](/docs/integrate/client/ios)          | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
+|      [Flutter](/docs/integrate/client/flutter)      | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
+| [React Native](/docs/integrate/client/react-native) | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
 
 </OverflowXSection>
 
@@ -56,39 +56,26 @@ Some features such as session recording are only available with our JavaScript l
 
 > **Note:** Session recording is not possible on server-side libraries.
 
-|                     Library                             | Maintainer   | Event Capture | User Identification | Feature Flags |
-| :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: |:------------: |
-|         [NodeJS](/docs/integrate/server/node)            | PostHog Team |       ✅      |          ✅          |      ✅       |
-|        [Python](/docs/integrate/server/python)           | PostHog Team |       ✅      |          ✅          |      ✅       |
-|           [PHP](/docs/integrate/server/php)              | PostHog Team |       ✅      |          ✅          |      ✅       |
-|          [Ruby](/docs/integrate/server/ruby)             | PostHog Team |       ✅      |          ✅          |      ✅       |
-|          [Golang](/docs/integrate/server/go)             | PostHog Team |       ✅      |          ✅          |      ✅       |
-|        [Elixir](/docs/integrate/server/elixir)           |  Community   |       ✅      |          ✅          |      ❌       |
-| [Nim](https://github.com/Yardanico/posthog-nim)         |  Community   |       ✅      |          ✅          |      ❌       |
-
-
-
-<HiddenSection headingType='h3' title='Library activity stats' >
-
-<LibraryStats />
-
-</HiddenSection>
-
-## Integrations
-
-|                       Integration                        |                                          Description                                           |    Maintainer    | Sends data to PostHog? | Pulls data from PostHog? |
-| :------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------: | :--------------------: | :----------------------: |
-|             [Sentry](/docs/integrate/third-party/sentry)             | A two-way integration to get PostHog user data into Sentry and Sentry exceptions into PostHog. |   PostHog Team   |           ✅           |            ✅            |
-|            [Segment](/docs/integrate/third-party/segment)            |                    Integration to use PostHog as a destination in Segment.                     |   PostHog Team   |           ✅           |            ❌            |
-|          [RudderStack](/docs/integrate/third-party/sentry)           |                  Integration to use PostHog as a destination in RudderStack.                   | RudderStack Team |           ✅           |            ❌            |
-|              [Slack](/docs/integrate/webhooks/slack)              |             PostHog webhooks to receive messages in Slack when an action happens.              |   PostHog Team   |           ❌           |            ✅            |
-|    [Microsoft Teams](/docs/integrate/webhooks/microsoft-teams)    |        PostHog webhooks to receive messages in Microsoft Teams when an action happens.         |   PostHog Team   |           ❌           |            ✅            |
-|    [Discord](/docs/integrate/webhooks/discord)    |        PostHog webhooks to receive messages in Discord when an action happens.         |   PostHog Team   |           ❌           |            ✅            |
-|             [Gatsby](/docs/integrate/third-party/gatsby)             |                    A wrapper over `posthog-js` provided as a Gatsby plugin.                    |    Community     |           ✅           |            ❌            |
-|         [Docusaurus](/docs/integrate/third-party/docusaurus)         |                  A wrapper over `posthog-js` provided as a Docusaurus integration.                  |    Community     |           ✅           |            ❌            |
-|  [Zapier](https://zapier.com/apps/posthog/integrations)  |                           Use PostHog triggers in Zapier workflows.                            |   PostHog Team   |           ❌           |            ✅            |
-| [n8n](https://docs.n8n.io/nodes/n8n-nodes-base.postHog/) |                             Use PostHog triggers in n8n workflows.                             |     n8n Team     |           ❌           |            ✅            |
+|                     Library                     |  Maintainer  | Event Capture | User Identification | Feature Flags |
+| :---------------------------------------------: | :----------: | :-----------: | :-----------------: | :-----------: |
+|      [NodeJS](/docs/integrate/server/node)      | PostHog Team |      ✅       |         ✅          |      ✅       |
+|     [Python](/docs/integrate/server/python)     | PostHog Team |      ✅       |         ✅          |      ✅       |
+|        [PHP](/docs/integrate/server/php)        | PostHog Team |      ✅       |         ✅          |      ✅       |
+|       [Ruby](/docs/integrate/server/ruby)       | PostHog Team |      ✅       |         ✅          |      ✅       |
+|       [Golang](/docs/integrate/server/go)       | PostHog Team |      ✅       |         ✅          |      ✅       |
+|     [Elixir](/docs/integrate/server/elixir)     |  Community   |      ✅       |         ✅          |      ❌       |
+| [Nim](https://github.com/Yardanico/posthog-nim) |  Community   |      ✅       |         ✅          |      ❌       |
 
 ## Apps
 
-Visit our [apps section](/docs/plugins/overview) for more information.
+Apps extend PostHog's functionality and are an incredibly powerful part of the PostHog ecosystem. They can help you:
+- Bring data in from 3rd party services
+- Enrich events in your pipeline by adding extra data
+- Filter events to keep your data clean
+- Much, much more...
+
+Below is a list of all apps for bringing data into PostHog. For a list of all our apps, see [here](/apps)
+
+<IngestionAppsList />
+
+> For more detail on how apps work and tutorials on how to build your own, see our [apps docs](/docs/apps).
