@@ -58,6 +58,8 @@ export default function Docs() {
                         </div>
                         <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4">
                             <Squeak
+                                limit={5}
+                                topics={false}
                                 slug={null}
                                 apiHost="https://squeak.cloud"
                                 apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
@@ -82,7 +84,7 @@ export default function Docs() {
                                     className="pointer-events-none"
                                     width={280}
                                     alt="PostHog merch"
-                                    src="../images/merch.png"
+                                    src="../../images/merch.png"
                                 />
                             </div>
                         </div>
