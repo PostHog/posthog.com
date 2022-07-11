@@ -35,7 +35,7 @@ NB Cloudfront doesn't forward headers, cookies, or query parameters received fro
     * In "Cache key settings" for the "Cache policy" set "Query strings" to "All".
     * You may also need to set any headers your application needs as part of the cache key. For example the `Authorization` or `Content-Type` headers.
 
-![a screenshot of the cloudfront cache policy settings](/images/docs/cloud/cloudfront-proxy/cache-policy.png)
+![a screenshot of the cloudfront cache policy settings](../../images/docs/cloud/cloudfront-proxy/cache-policy.png)
 
 5. Choose the appropriate price class for your use
 6. Once the distribution is deployed set its URL as the api host in your JS snippet or SDK config
