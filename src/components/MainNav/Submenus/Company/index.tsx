@@ -35,47 +35,47 @@ const Handbook = () => {
     const nav: HandbookNav[] = [
         {
             title: 'Getting started',
-            url: '',
+            url: '/handbook/getting-started/start-here',
         },
         {
             title: 'Company',
-            url: '',
+            url: '/handbook/company/story',
         },
         {
             title: 'Strategy',
-            url: '',
+            url: '/handbook/strategy/strategy',
         },
         {
             title: 'How we work',
-            url: '',
+            url: '/handbook/company/culture',
         },
         {
             title: 'People',
-            url: '',
+            url: '/handbook/people/compensation',
         },
         {
             title: 'Engineering',
-            url: '',
+            url: '/handbook/engineering/developing-locally',
         },
         {
             title: 'Product',
-            url: '',
+            url: '/handbook/product/product-team',
         },
         {
             title: 'Design',
-            url: '',
+            url: '/handbook/design/about-design',
         },
         {
             title: 'Marketing',
-            url: '',
+            url: '/handbook/growth/marketing',
         },
         {
             title: 'Customer success',
-            url: '',
+            url: '/handbook/growth/strategy',
         },
         {
             title: 'Developer relations',
-            url: '',
+            url: '/handbook/growth/developer-relations',
         },
     ]
 
