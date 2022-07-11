@@ -52,7 +52,7 @@ export default function Docs() {
             <div className="md:flex md:p-0 p-5">
                 <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                     <div className="md:p-4 md:mb-0 mb-4">
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between">
                             <h3 className="text-[18px] opacity-70 m-0 text-black">Recent questions</h3>
                             <CallToAction to="/questions">Ask a question</CallToAction>
                         </div>
