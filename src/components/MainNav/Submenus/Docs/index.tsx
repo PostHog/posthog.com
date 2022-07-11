@@ -60,7 +60,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
     return (
         <Wrapper referenceElement={referenceElement} placement="bottom-start">
             <div className="rounded-md md:flex">
-                <section className="p-4 border-r border-gray-accent-light border-dashed">
+                <section className="p-6 border-r border-gray-accent-light border-dashed">
                     <div className="flex items-center w-full justify-between opacity-70">
                         <h3 className="text-[18px] font-bold m-0 text-black ">Table of contents</h3>
                         <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
@@ -91,7 +91,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                         Visit Docs
                     </CallToAction>
                 </section>
-                <section className="bg-gray-accent-light bg-opacity-10 p-4">
+                <section className="bg-gray-accent-light bg-opacity-10 p-6">
                     <h3 className="text-[18px] font-bold m-0 text-black/70">PostHog platform</h3>
                     <ol className="m-0 list-none p-0 max-w-[250px] mt-2">
                         {rightColMenuItems.map(({ title, description, url }: ColMenuItems) => {

@@ -22,7 +22,7 @@ const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="sm:px-4 py-4">
+        <div className="sm:px-6 py-6">
             <h3 className="text-[18px] font-bold mt-0 mb-2 text-black opacity-70">{title}</h3>
             <>{children}</>
             <CallToAction to={cta.url} className="mt-4 !w-full">
@@ -34,8 +34,8 @@ const Block = ({
 
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
-        <div className="md:py-7 py-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="max-w-[500px] mx-auto xl:max-w-auto md:px-4">
+        <div className="md:py-7 py-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
+            <div className="max-w-[500px] mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
                     <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
@@ -86,7 +86,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <Header title="Company" />
                 <div className="md:flex md:p-0 p-4">
                     <div className="md:border-r border-gray-accent-light border-dashed flex-grow xl:w-[500px]">
-                        <div className="md:px-4 py-4 text-center max-w-[500px] mx-auto xl:max-w-auto">
+                        <div className="md:px-6 py-6 text-center max-w-[500px] mx-auto xl:max-w-auto">
                             <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
                             <h3 className="text-xl font-bold mt-2 mb-0 leading-tight">
                                 Our mission is to{' '}

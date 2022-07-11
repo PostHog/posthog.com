@@ -53,7 +53,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <Header title="Community" />
                 <div className="md:flex md:p-0 p-5">
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
-                        <div className="md:p-4 md:mb-0 mb-4">
+                        <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex justify-between">
                                 <h3 className="text-[18px] opacity-70 m-0 text-black">Recent questions</h3>
                                 <CallToAction to="/questions">Ask a question</CallToAction>
@@ -73,7 +73,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 Browse recent questions
                             </CallToAction>
                         </div>
-                        <div className="py-7 md:px-4 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
+                        <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
                                 <div>
                                     <h3 className="text-[18px] opacity-70 mt-0 text-black">Merch</h3>
