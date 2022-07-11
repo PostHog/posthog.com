@@ -54,6 +54,7 @@ import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
+import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
@@ -165,6 +166,7 @@ export const shortcodes = {
     Home,
     HostingOption,
     ImageBlock,
+    IngestionAppsList,
     InlineCode,
     LandingPageCallToAction,
     LibraryStats,
