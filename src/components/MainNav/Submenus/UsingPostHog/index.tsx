@@ -21,7 +21,7 @@ interface Tutorial {
     }
 }
 
-export default function Product({ referenceElement }: { referenceElement: HTMLDivElement }) {
+export default function UsingPosthog({ referenceElement }: { referenceElement: HTMLDivElement }) {
     const {
         tutorials: { nodes },
     } = useStaticQuery(query)
@@ -128,7 +128,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                                         <li key={slug}>
                                             <Link className="inline-block" to={slug}>
                                                 <GatsbyImage
-                                                    className="rounded-md bg-gray-accent-light dark:bg-gray-accent-dark pointer-events-none"
+                                                    className="rounded-md bg-gray-accent-light dark:bg-opacity-10 pointer-events-none"
                                                     image={image}
                                                     alt={title}
                                                 />
@@ -169,7 +169,11 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
 
 const query = graphql`
     {
-        tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
+        tutorials: allMdx(
+            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
+            limit: 2
+            sort: { fields: frontmatter___date, order: DESC }
+        ) {
             nodes {
                 slug
                 frontmatter {
