@@ -53,7 +53,7 @@ To do this analysis, simply make the series in your trends (e.g. unique sessions
 
 ### Filtering by session duration
 
-Sometimes, it can be helpful to filter out sessions that are either too short or too long. For example, this allows you to dig into users who only use your product for a few seconds, or filter those users out, so you can better understand those who stick around longer.
+Sometimes, it can be helpful to filter out sessions that are either too short or too long. For example, this enables you to dig into users who only use your product for a few seconds, or filter those users out, so you can better understand those who stick around longer.
 
 To accomplish this, you can use the 'Session duration' property in the property filters.
 
