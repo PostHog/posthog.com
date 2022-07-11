@@ -78,7 +78,7 @@ export default function Docs() {
         })
 
     return (
-        <section>
+        <section className="flex md:flex-col flex-col-reverse">
             <Header title="Company" />
             <div className="md:flex md:p-0 p-4">
                 <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
