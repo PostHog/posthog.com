@@ -63,7 +63,6 @@ To accomplish this, you can use the 'Session duration' property in the property 
 
 You can plot session durations overtime to understand if your users are becoming more or less engaged with your product. To accomplish this, select one of the property aggregators (e.g median, 90th percentile etc) and then select 'Session duration' as the property to plot.
 
-
 ![Session counts](../../images/user-guides/sessions/median-duration.png)
 
 ### Distribution of session duration
