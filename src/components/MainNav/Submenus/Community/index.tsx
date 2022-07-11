@@ -109,7 +109,10 @@ export default function Docs() {
                         {resources.map(({ title, description, url }: ColMenuItems) => {
                             return (
                                 <li key={title}>
-                                    <Link className="rounded-md py-2 block" to={url}>
+                                    <Link
+                                        className="rounded-md py-2 px-3 block hover:bg-tan hover:bg-opacity-50"
+                                        to={url}
+                                    >
                                         <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
                                         <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
                                             {description}
