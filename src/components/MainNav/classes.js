@@ -61,7 +61,7 @@ export const link = (className = '', hovered = false) => cntl`
     items-center
     space-between
     w-full
-    space-x-2
+    space-x-1.5
     rounded-t-md
     ${hovered ? 'lg:bg-white lg:dark:bg-gray-accent-dark lg:shadow-md' : ''}
     ${className}
