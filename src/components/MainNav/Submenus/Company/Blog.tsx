@@ -1,7 +1,7 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import RightCol from '../RightCol'
+import RightColWide from '../RightColWide'
 import Link from 'components/Link'
 import slugify from 'slugify'
 import CallToAction from '../CallToAction'
@@ -40,13 +40,13 @@ export default function Blog() {
             description: 'Demo, license questions, dad jokes',
             url: '/signup/self-host/get-in-touch#contact',
         },
-        { title: 'Media', description: 'Logos and things', url: '/media' },
+        { title: 'Media', description: 'Company bio, logos, hedgehogs', url: '/media' },
     ]
 
     return (
-        <RightCol>
+        <RightColWide>
             <div className="flex flex-col h-full">
-                <div>
+                <div className="px-3">
                     <h2 className="text-[18px] opacity-70 font-bold m-0 mb-2 text-black">Blog</h2>
                     <Link
                         className="text-inherit hover:text-inherit mt-2 inline-block relative active:top-[1px] active:scale-[.99]"
@@ -59,10 +59,10 @@ export default function Blog() {
                                 className="rounded-sm pointer-events-none"
                             />
                         )}
-                        <h4 className="text-[14px] font-bold m-0 text-black opacity-70 mt-2">{title}</h4>
-                        <p className="text-[14px] m-0 text-black opacity-50 dark:text-white">{date}</p>
+                        <h4 className="text-base font-bold m-0 text-black/70 mt-2 leading-tight">{title}</h4>
+                        <p className="text-xs m-0 mt-1 text-black/50 dark:text-white/50">{date}</p>
                     </Link>
-                    <h4 className="text-[15px] font-bold opacity-50 mt-4 mb-1">Categories</h4>
+                    <h4 className="text-[15px] font-semibold opacity-40 mt-4 mb-1">Categories</h4>
                     <ul className="list-none m-0 p-0">
                         {categories.slice(0, 5).map(({ fieldValue }: Category) => {
                             const slug = slugify(fieldValue, { lower: true })
@@ -89,7 +89,10 @@ export default function Blog() {
                     {links.map(({ title, url, description }: Links) => {
                         return (
                             <li key={title}>
-                                <Link className="rounded-sm px-3 py-2 block hover:bg-tan/50" to={url}>
+                                <Link
+                                    className="rounded-sm px-3 py-2 block hover:bg-tan/50 relative active:top-[1px] active:scale-[.99]"
+                                    to={url}
+                                >
                                     <h3 className="text-base m-0 opacity-70">{title}</h3>
                                     <p className="m-0 text-[14px] text-black opacity-50 dark:text-white">
                                         {description}
@@ -100,7 +103,7 @@ export default function Blog() {
                     })}
                 </ul>
             </div>
-        </RightCol>
+        </RightColWide>
     )
 }
 
@@ -127,7 +130,7 @@ const query = graphql`
                     featuredImage {
                         id
                         childImageSharp {
-                            gatsbyImageData(width: 250)
+                            gatsbyImageData(width: 350)
                         }
                     }
                 }

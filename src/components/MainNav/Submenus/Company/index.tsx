@@ -22,8 +22,8 @@ const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="sm:px-6 py-6">
-            <h3 className="text-[18px] font-bold mt-0 mb-2 text-black opacity-70">{title}</h3>
+        <div className="sm:px-12 py-6">
+            <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
             <>{children}</>
             <CallToAction to={cta.url} className="mt-4 !w-full">
                 {cta.label}
@@ -35,15 +35,15 @@ const Block = ({
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
         <div className="md:py-7 py-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="max-w-[500px] mx-auto xl:max-w-auto md:px-6">
+            <div className="max-w-2xl mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
                     <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
                 </div>
                 <p className="text-[14px] m-0 mt-2 dark:text-white">
-                    We’re open source and operate in public as much as we can.
+                    We're open source and operate in public as much as we can.
                 </p>
-                <ol className="list-none m-0 p-0 grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
+                <ol className="list-none m-0 p-0 md:grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                     {menu.map(({ title, url }: HandbookNav, index) => {
                         return (
                             <li key={title}>
@@ -81,14 +81,18 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         })
 
     return (
-        <Wrapper placement="bottom-end" referenceElement={referenceElement} className="w-full xl:w-auto">
+        <Wrapper
+            placement="bottom-end"
+            referenceElement={referenceElement}
+            className="w-full xl:max-w-4xl 2xl:max-w-5xl"
+        >
             <section className="flex md:flex-col flex-col-reverse">
                 <Header title="Company" />
                 <div className="md:flex md:p-0 p-4">
-                    <div className="md:border-r border-gray-accent-light border-dashed flex-grow xl:w-[500px]">
-                        <div className="md:px-6 py-6 text-center max-w-[500px] mx-auto xl:max-w-auto">
-                            <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
-                            <h3 className="text-xl font-bold mt-2 mb-0 leading-tight">
+                    <div className="md:border-r border-gray-accent-light border-dashed flex-grow">
+                        <div className="md:px-6 py-6 text-center mx-auto">
+                            <h2 className="text-[15px] font-semibold text-black/40 m-0">About PostHog</h2>
+                            <h3 className="text-xl xl:text-2xl font-bold mt-3 mb-0 leading-tight">
                                 Our mission is to{' '}
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
@@ -98,7 +102,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                             </CallToAction>
                         </div>
                         <div className="border-t border-gray-accent-light border-dashed">
-                            <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light max-w-[500px] mx-auto xl:max-w-auto">
+                            <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light max-w-3xl mx-auto xl:max-w-auto">
                                 <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
                                         Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
