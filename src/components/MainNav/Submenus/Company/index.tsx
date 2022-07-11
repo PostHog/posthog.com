@@ -84,7 +84,7 @@ export default function Docs() {
                 <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                     <div className="md:px-4 py-4 text-center">
                         <h2 className="text-[15px] font-semibold text-black opacity-75 m-0">About PostHog</h2>
-                        <h3 className="text-xl font-bold mt-2 mb-0">
+                        <h3 className="text-xl font-bold mt-2 mb-0 leading-tight">
                             Our mission is to{' '}
                             <span className="text-red">increase the number of successful products</span> in the world.
                         </h3>
