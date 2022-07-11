@@ -34,7 +34,7 @@ Provide the best events pipeline in the world.
     
 > Note that for the end-to-end ingestion time result we will be using a metric that adds up to 60s of delay
     
-### Objective 2: Apps in our official library are work reliably to meet customer needs
+### Objective 2: Apps in our official library work reliably to meet customer needs
 
 * **Key Results**:
     * Measure customer sentiment on apps and improve sentiment significantly by the end of the quarter
