@@ -2,7 +2,7 @@ import React from 'react'
 import SectionLink, { SectionLinkProps } from './SectionLink'
 
 export type SectionLinksProps = {
-    next: SectionLinkProps
+    next?: SectionLinkProps
     previous?: SectionLinkProps
     className?: string
 }
@@ -11,7 +11,7 @@ export default function NextArticle({ next, previous, className = '' }: SectionL
     return (
         <div className={`flex justify-between items-center gap-x-4 ${className}`}>
             <SectionLink link={previous?.link} previous />
-            <SectionLink link={next.link} />
+            <SectionLink link={next?.link} />
         </div>
     )
 }

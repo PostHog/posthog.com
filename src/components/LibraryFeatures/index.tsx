@@ -15,10 +15,10 @@ export type LibraryFeaturesProps = {
 
 export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
     return availability ? (
-        <div className="bg-gray-accent-light px-6 py-4 space-y-2 my-4">
+        <div className="bg-gray-accent-light dark:bg-gray-accent-dark px-6 py-4 space-y-2 my-4 rounded">
             <h6 className="text-gray !my-0 text-sm">What features are available?</h6>
 
-            <ul className="grid grid-cols-3 list-none p-0 m-0 gap-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-2">
                 {features.map((feature) => (
                     <li key={feature.key} className="flex items-center space-x-1.5">
                         {availability[feature.key] ? (
