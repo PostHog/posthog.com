@@ -48,7 +48,10 @@ export default function Blog() {
             <div className="flex flex-col h-full">
                 <div>
                     <h2 className="text-[18px] opacity-70 font-bold m-0 mb-2 text-black">Blog</h2>
-                    <Link className="text-inherit hover:text-inherit mt-2 inline-block" to={slug}>
+                    <Link
+                        className="text-inherit hover:text-inherit mt-2 inline-block relative active:top-[1px] active:scale-[.99]"
+                        to={slug}
+                    >
                         {image && (
                             <GatsbyImage
                                 alt="Blog featured image"

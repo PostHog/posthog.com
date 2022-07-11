@@ -53,12 +53,12 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <Header title="Community" />
                 <div className="md:flex md:p-0 p-5">
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
-                        <div className="md:p-6 md:mb-0 mb-4">
-                            <div className="flex justify-between">
-                                <h3 className="text-[18px] opacity-70 m-0 text-black">Recent questions</h3>
+                        <div className="md:p-6 md:pr-3 md:mb-0 mb-4">
+                            <div className="flex justify-between items-center mr-3">
+                                <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">Recent questions</h3>
                                 <CallToAction to="/questions">Ask a question</CallToAction>
                             </div>
-                            <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4">
+                            <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4 pr-3">
                                 <Squeak
                                     limit={5}
                                     topics={false}
@@ -69,9 +69,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                     organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                                 />
                             </div>
-                            <CallToAction to="/questions" className="!w-full mt-4">
-                                Browse recent questions
-                            </CallToAction>
+                            <div className="md:mr-3">
+                                <CallToAction to="/questions" className="!w-full mt-4">
+                                    Browse recent questions
+                                </CallToAction>
+                            </div>
                         </div>
                         <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
@@ -113,7 +115,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 return (
                                     <li key={title}>
                                         <Link
-                                            className="rounded-sm py-2 px-3 block hover:bg-tan hover:bg-opacity-50"
+                                            className="rounded-sm py-2 px-3 block hover:bg-tan/50 relative active:top-[1px] active:scale-[.99]"
                                             to={url}
                                         >
                                             <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
