@@ -1,7 +1,7 @@
 import React from 'react'
 import CheckIcon from '../../images/check.svg'
 import MinusIcon from '../../images/x.svg'
-import InfoIcon from '../InfoIcon'
+import InfoIcon from '../InfoIcon/Index'
 import Link from 'components/Link'
 
 const features = [

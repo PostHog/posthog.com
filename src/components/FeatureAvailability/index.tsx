@@ -1,5 +1,5 @@
 import React from 'react'
-import InfoIcon from '../InfoIcon'
+import InfoIcon from '../InfoIcon/Index'
 import CheckIcon from '../../images/check.svg'
 import MinusIcon from '../../images/x.svg'
 import WarningIcon from '../../images/warning.svg'
