@@ -2,12 +2,6 @@
 title: Snippet Installation
 sidebar: Docs
 showTitle: true
-features:
-    eventCapture: true
-    userIdentification: false
-    autoCapture: true
-    sessionRecording: false
-    featureFlags: false
 ---
 
 The easiest way to get going is to add a JavaScript snippet to your application.

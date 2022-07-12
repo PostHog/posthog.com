@@ -1,5 +1,5 @@
 import React from 'react'
-import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons'
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 
 const features = [
     { key: 'eventCapture', name: 'Event Capture' },
@@ -20,11 +20,11 @@ export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-2">
                 {features.map((feature) => (
-                    <li key={feature.key} className="flex items-center space-x-1.5">
+                    <li key={feature.key} className="flex items-center space-x-1">
                         {availability[feature.key] ? (
-                            <CheckCircleFilled className="!text-green" />
+                            <CheckCircleIcon className="text-green w-3 h-3" />
                         ) : (
-                            <CloseCircleFilled className="!text-red" />
+                            <XCircleIcon className="text-red w-3 h-3" />
                         )}
                         <span className="text-xs">{feature.name}</span>
                     </li>
