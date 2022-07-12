@@ -81,8 +81,8 @@ export default function Blog() {
                             )
                         })}
                     </ul>
-                    <CallToAction to="/blog" className="mt-2 !w-full">
-                        Visit the PostHog Blog
+                    <CallToAction to="/blog" className="mt-2 !w-full mb-8">
+                        Visit the PostHog blog
                     </CallToAction>
                 </div>
                 <ul className="list-none m-0 p-0 md:mt-auto mt-7">

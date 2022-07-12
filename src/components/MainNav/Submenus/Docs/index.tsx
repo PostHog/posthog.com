@@ -78,7 +78,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                         </span>
                                         <div>
                                             <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                            <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                            <p className="text-[14px] pt-[3px] opacity-50 m-0 text-black font-medium dark:text-white">
                                                 {description}
                                             </p>
                                         </div>
@@ -102,7 +102,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                         to={url}
                                     >
                                         <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                        <p className="text-[14px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                        <p className="text-[14px] pt-[3px] opacity-50 m-0 text-black font-medium dark:text-white">
                                             {description}
                                         </p>
                                     </Link>
