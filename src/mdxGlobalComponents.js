@@ -95,6 +95,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
+import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { Tutorials } from './components/Tutorials'
@@ -200,6 +201,7 @@ export const shortcodes = {
     StarUsBanner,
     Structure,
     Subscribe,
+    Tab,
     TeamQuote,
     Tooltip,
     Tutorials,
