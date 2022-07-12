@@ -53,7 +53,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             <section className="flex md:flex-col flex-col-reverse">
                 <Header title="Community" />
                 <div className="md:flex md:p-0 p-5">
-                    <div className="md:border-r border-gray-accent-light border-dashed w-[325px] md:w-[500px] lg:w-[650px]">
+                    <div className="md:border-r border-gray-accent-light border-dashed w-full md:w-[500px] lg:w-[650px]">
                         <div className="md:p-6 lg:px-9 md:pr-3 md:mb-0 mb-4">
                             <div className="flex justify-between items-center mr-2">
                                 <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">Recent questions</h3>
