@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useState } from 'react'
 import { Squeak } from 'squeak-react'
 import Header from '../Header'
 import RightCol from '../RightCol'
@@ -14,6 +14,7 @@ interface ColMenuItems {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
+    const [questionsLoading, setQuestionsLoading] = useState(true)
     const resources: ColMenuItems[] = [
         {
             title: 'Marketplace',
@@ -59,16 +60,44 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 <CallToAction to="/questions">Ask a question</CallToAction>
                             </div>
                             <div className="h-[300px] overflow-auto overflow-x-hidden mt-4 -mr-3 pr-3">
-                                <Squeak
-                                    limit={5}
-                                    topics={false}
-                                    slug={null}
-                                    apiHost="https://squeak.cloud"
-                                    apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
-                                    url="https://pxipkquvwqaaunuzjoge.supabase.co"
-                                    organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                                />
+                                {questionsLoading && (
+                                    <div className="w-full h-full flex justify-center items-center">
+                                        <svg
+                                            className="animate-spin h-8 w-8 text-black dark:text-white"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="3"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75 fill-gray-accent-light dark:fill-gray-accent-dark"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                )}
+                                <div style={questionsLoading ? { display: 'none' } : {}}>
+                                    <Squeak
+                                        onLoad={() => setQuestionsLoading(false)}
+                                        limit={5}
+                                        topics={false}
+                                        slug={null}
+                                        apiHost="https://squeak.cloud"
+                                        apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                                        url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                                    />
+                                </div>
                             </div>
+
                             <div className="md:mr-2">
                                 <CallToAction to="/questions" className="!w-full mt-4">
                                     Browse recent questions
