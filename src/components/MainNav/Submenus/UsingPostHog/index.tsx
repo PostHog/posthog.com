@@ -48,9 +48,9 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/signup/self-host/get-in-touch#contact',
         },
         {
-            title: 'Support',
+            title: 'PostHog on GitHub',
             description: 'See recent activity, browse libraries, request a feature, or file an issue',
-            url: '/slack',
+            url: 'https://github.com/posthog',
         },
     ]
 
