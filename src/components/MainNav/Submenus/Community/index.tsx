@@ -52,13 +52,13 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             <section className="flex md:flex-col flex-col-reverse">
                 <Header title="Community" />
                 <div className="md:flex md:p-0 p-5">
-                    <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
-                        <div className="md:p-6 md:pr-3 md:mb-0 mb-4">
-                            <div className="flex justify-between items-center mr-3">
+                    <div className="md:border-r border-gray-accent-light border-dashed w-[300px] md:w-[500px] lg:w-[650px]">
+                        <div className="md:p-6 lg:px-9 md:pr-3 md:mb-0 mb-4">
+                            <div className="flex justify-between items-center mr-2">
                                 <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">Recent questions</h3>
                                 <CallToAction to="/questions">Ask a question</CallToAction>
                             </div>
-                            <div className=" h-[300px] overflow-auto overflow-x-hidden mt-4 pr-3">
+                            <div className="h-[300px] overflow-auto overflow-x-hidden mt-4 -mr-3 pr-3">
                                 <Squeak
                                     limit={5}
                                     topics={false}
@@ -69,18 +69,18 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                     organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                                 />
                             </div>
-                            <div className="md:mr-3">
+                            <div className="md:mr-2">
                                 <CallToAction to="/questions" className="!w-full mt-4">
                                     Browse recent questions
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
+                        <div className="py-7 md:px-6 lg:px-9 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
                                 <div>
                                     <h3 className="text-[18px] opacity-70 mt-0 text-black">Merch</h3>
                                     <p className="text-[14px] dark:text-white">
-                                        Did you happen to be looking for hedgehog-themed merch? We’ve got just the
+                                        Did you happen to be looking for hedgehog-themed merch? We've got just the
                                         thing...
                                     </p>
                                 </div>

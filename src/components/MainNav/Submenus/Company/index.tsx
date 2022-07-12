@@ -22,7 +22,7 @@ const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="sm:px-12 py-6">
+        <div className="py-6 md:px-6 xl:px-12">
             <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
             <>{children}</>
             <CallToAction to={cta.url} className="mt-4 !w-full">
@@ -92,12 +92,12 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                     <div className="md:border-r border-gray-accent-light border-dashed flex-grow">
                         <div className="md:px-6 py-6 text-center mx-auto">
                             <h2 className="text-[15px] font-semibold text-black/40 m-0">About PostHog</h2>
-                            <h3 className="text-xl xl:text-2xl font-bold mt-3 mb-0 leading-tight">
+                            <h3 className="text-xl xl:text-2xl font-bold mt-3 mb-0 !leading-tight">
                                 Our mission is to{' '}
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook" className="mt-4">
+                            <CallToAction to="/handbook" className="mt-3 !px-12">
                                 Read our story
                             </CallToAction>
                         </div>
@@ -112,8 +112,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                                 <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
-                                        We’re currently hiring for <strong>{jobs.totalCount} roles</strong>. We’re
-                                        unlike any company you’ve ever worked for.
+                                        We're currently hiring for <strong>{jobs.totalCount} roles</strong>. We're
+                                        unlike any company you've ever worked for.
                                     </p>
                                 </Block>
                             </div>

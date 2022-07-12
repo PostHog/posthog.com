@@ -71,7 +71,7 @@ export default function Blog() {
                                 <li key={url} className="group">
                                     <Link
                                         to={url}
-                                        className="py-2 block border-b border-gray-accent-light border-dashed group group-last:border-b-0"
+                                        className="py-2.5 block border-b border-gray-accent-light border-dashed group group-last:border-b-0"
                                     >
                                         <h3 className="text-base m-0 opacity-70 group-hover:text-red group-hover:opacity-100 transition-all">
                                             {fieldValue}
