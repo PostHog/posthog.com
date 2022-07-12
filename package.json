@@ -29,7 +29,6 @@
         "@docsearch/react": "^3.0.0-alpha.42",
         "@fontsource/source-code-pro": "^4.5.4",
         "@headlessui/react": "^1.4.0",
-        "@heroicons/react": "^1.0.6",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",
         "@popperjs/core": "^2.11.2",

@@ -78,34 +78,15 @@ function Plan({
         >
             {restricted ? (
                 <>
-                    <img
-                        src={WarningIcon}
-                        alt="Restriction apply"
-                        width="18"
-                        height="18"
-                        className="h-4 w-4 mr-2 text-green-500"
-                        aria-hidden="true"
-                    />
+                    <img src={WarningIcon} alt="Restriction apply" className="h-4 w-4 mr-2" aria-hidden="true" />
                 </>
             ) : available ? (
                 <>
-                    <img
-                        src={CheckIcon}
-                        alt="Available"
-                        width="18"
-                        height="18"
-                        className="h-4 w-4 mr-2 text-green-500"
-                        aria-hidden="true"
-                    />
+                    <img src={CheckIcon} alt="Available" className="h-3 w-3 mr-2" aria-hidden="true" />
                 </>
             ) : (
                 <>
-                    <img
-                        src={MinusIcon}
-                        alt="Not available"
-                        className="h-4 w-4 mr-2 text-green-500"
-                        aria-hidden="true"
-                    />
+                    <img src={MinusIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
                 </>
             )}
             {name}
@@ -130,7 +111,7 @@ export function FeatureAvailability({
                             href="/pricing?realm=self-hosted"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
-                            <InfoIcon className="h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
                     <ul className="p-0 mb-0">
@@ -151,7 +132,7 @@ export function FeatureAvailability({
                             href="/pricing?realm=cloud"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
-                            <InfoIcon className="h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
                     <ul className="pl-0 mb-0 grid sm:grid-cols-2">

@@ -35,27 +35,13 @@ export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
                 {features.map((feature) => (
                     <li key={feature.key} className="flex items-center">
                         {availability[feature.key] ? (
-                            <img
-                                src={CheckIcon}
-                                alt="Available"
-                                width="18"
-                                height="18"
-                                className="h-5 w-5 text-green-500"
-                                aria-hidden="true"
-                            />
+                            <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
                         ) : (
-                            <img
-                                src={MinusIcon}
-                                alt="Not available"
-                                width="18"
-                                height="18"
-                                className="h-5 w-5 text-green-500"
-                                aria-hidden="true"
-                            />
+                            <img src={MinusIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
                         )}
                         <span className="text-[15px] ml-2 mr-.5">{feature.name}</span>
                         <Link href={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
-                            <InfoIcon className="h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </li>
                 ))}
