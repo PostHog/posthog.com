@@ -124,8 +124,8 @@ export default function DocsLayout({
                         <h1 className="flex items-center justify-between dark:text-white text-3xl sm:text-5xl mt-0 mb-2">
                             {title}
                             {github && (
-                                <Link href={github} disablePrefetch>
-                                    <GitHub className="w-8 h-8 text-black/80 hover:text-black/60" />
+                                <Link to={github}>
+                                    <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
                                 </Link>
                             )}
                         </h1>
