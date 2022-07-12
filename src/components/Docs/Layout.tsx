@@ -57,8 +57,14 @@ type DocsLayoutProps = {
     slug: string
     body: string
     tableOfContents: any
-    next: any
-    previous: any
+    next: {
+        name: string
+        url: string
+    }
+    previous: {
+        name: string
+        url: string
+    }
     hideLastUpdated: boolean
     hideAnchor: boolean
 }
