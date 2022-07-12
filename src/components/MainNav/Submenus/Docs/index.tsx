@@ -70,7 +70,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                             return (
                                 <li key={title}>
                                     <Link
-                                        className="rounded-sm px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-start space-x-2 relative active:top-[1px] active:scale-[.99]"
+                                        className="rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-start space-x-2 relative active:top-[1px] active:scale-[.99]"
                                         to={url}
                                     >
                                         <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white mt-[2px] w-4">

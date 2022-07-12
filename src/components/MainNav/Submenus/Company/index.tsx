@@ -90,7 +90,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <Header title="Company" />
                 <div className="md:flex md:p-0 p-4">
                     <div className="md:border-r border-gray-accent-light border-dashed flex-grow">
-                        <div className="md:px-6 py-6 text-center mx-auto">
+                        <div className="md:px-6 pt-0 md:pt-6 pb-6 text-center mx-auto">
                             <h2 className="text-[15px] font-semibold text-black/40 m-0">About PostHog</h2>
                             <h3 className="text-xl xl:text-2xl font-bold mt-3 mb-0 !leading-tight">
                                 Our mission is to{' '}
