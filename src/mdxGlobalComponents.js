@@ -1,7 +1,5 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -107,8 +105,6 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
