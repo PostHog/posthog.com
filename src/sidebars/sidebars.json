@@ -596,6 +596,10 @@
                                 {
                                     "name": "Deploying ClickHouse using Altinity.Cloud",
                                     "url": "/docs/self-host/configure/using-altinity-cloud"
+                                },
+                                {
+                                    "name": "Configuring Slack",
+                                    "url": "/docs/self-host/configure/slack"
                                 }
                             ]
                         },
@@ -901,6 +905,10 @@
                             "url": "/docs/integrate/third-party/sentry"
                         },
                         {
+                            "name": "Slack",
+                            "url": "/docs/integrate/third-party/slack"
+                        },
+                        {
                             "name": "Shopify",
                             "url": "/docs/integrate/third-party/shopify"
                         },
@@ -1041,6 +1049,10 @@
                 {
                     "name": "Sessions",
                     "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Subscriptions",
+                    "url": "/docs/user-guides/subscriptions"
                 }
             ]
         },
