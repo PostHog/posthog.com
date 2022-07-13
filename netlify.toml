@@ -1477,3 +1477,13 @@
 [[redirects]]
     from = "/startups"
     to = "/pricing#startup-plan"
+    
+# Added: 2022-07-11
+[[redirects]]
+    from = "/trial"
+    to = "/pricing"
+    
+# Added: 2022-07-12
+[[redirects]]
+    from = "/schedule-demo"
+    to = "/book-a-demo"

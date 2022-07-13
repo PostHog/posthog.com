@@ -2,7 +2,6 @@ import React from 'react'
 import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
-import { Input } from 'antd'
 
 interface PricingSliderProps {
     marks?: number[]
@@ -22,14 +21,12 @@ export const PricingSlider = ({
     const { setSliderValue, setInputValue, setPricingOption } = useActions(pricingSliderLogic)
     const { inputValue } = useValues(pricingSliderLogic)
 
-    //setPricingOption(pricingOption)
-
     return (
         <div className="mt-5 mb-6">
-            <Input
+            <input
                 name="event"
                 type="number"
-                autoFocus
+                className="w-full border border-gray-accent-light rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-orange focus:border-orange bg-white text-gray-accent-dark text-sm"
                 value={inputValue}
                 onChange={({ target: { value } }) => setInputValue(value)}
             />

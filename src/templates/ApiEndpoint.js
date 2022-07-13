@@ -1,4 +1,4 @@
-import { Button, Select } from 'antd'
+// import { Button, Select } from 'antd'
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
@@ -285,9 +285,9 @@ function ResponseBody({ item, objects }) {
         <>
             <h4>Response</h4>
             <div className="response-wrapper">
-                <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
+                {/*<Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
                     {showResponse ? 'Hide' : 'Show'} response
-                </Button>
+                </Button>*/}
                 <br />
                 {showResponse && (
                     <Params
@@ -343,7 +343,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
                 </div>
-                <Select
+                {/*<Select
                     value={exampleLanguage}
                     onChange={(key) => setExampleLanguage(key)}
                     bordered={false}
@@ -355,7 +355,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                     <Select.Option key="python" value="python">
                         python
                     </Select.Option>
-                </Select>
+                </Select>*/}
             </div>
 
             {exampleLanguage === 'curl' && (

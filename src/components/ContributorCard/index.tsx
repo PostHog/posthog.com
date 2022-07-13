@@ -1,4 +1,4 @@
-import { Card, Col, Progress, Tag } from 'antd'
+// import { Card, Col, Progress, Tag } from 'antd'
 import { Spacer } from 'components/Spacer'
 import { Link } from 'gatsby'
 import React from 'react'
@@ -53,7 +53,7 @@ const ContributorCardStructure = ({
         </Tooltip>
     )
 
-    return (
+    return null /*(
         <Col sm={12} md={12} lg={8} xl={6} style={{ marginBottom: 20 }}>
             <Card
                 style={{ height: 450, display: 'flex', marginBottom: 20 }}
@@ -129,7 +129,7 @@ const ContributorCardStructure = ({
                 </h2>
             </Card>
         </Col>
-    )
+    )*/
 }
 
 export const ContributorCard = ({
