@@ -4017,6 +4017,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/gatsby-plugin-breakpoints@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@types/gatsby-plugin-breakpoints/-/gatsby-plugin-breakpoints-1.3.2.tgz#ba7fb33cf43274ab143d9d06cfb38a2cf3f0bf27"
+  integrity sha512-hP3ey2iZFaVibTEQmdUjVM3eWsCh7xp/FVaxkJZmsiPdT3qknaqa8ztuMHMGAGRG6yBbZYnW4/nKTqXz8fD+lA==
+
 "@types/get-port@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@types/get-port/-/get-port-3.2.0.tgz#f9e0a11443cc21336470185eae3dfba4495d29bc"
@@ -23245,10 +23250,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
-squeak-react@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-2.0.0.tgz#50677c3c2afd19597148769c4e3b939e31fe2428"
-  integrity sha512-yRzCHM8DesMnV9/bbmCm2xe2f0JMD9eQcrIRMDsMvK8QQAtmkV7I5gliY/arwhIjC4JpXj5D25r8hEi8HjayRQ==
+squeak-react@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-2.4.0.tgz#9c8cb4758d04e075b03d71d36de893bb4e3b52a2"
+  integrity sha512-zV4zK8Qn6wbVf1FNtRS/DBvu50zEdO2QCBZqMSdWbMSvXQpwKzYaRixxKmOOEUMp1dz4j/vLGPSMmKaX7XJ8FQ==
   dependencies:
     "@supabase/supabase-js" "^1.31.2"
     formik "^2.2.9"
