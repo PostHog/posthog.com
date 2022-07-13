@@ -9,7 +9,7 @@ export const Spinner = ({ className }: SpinnerProps) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             version="1.1"
-            className={`w-8 h-8 animate-spin text-gray-accent-light ${className}`}
+            className={`w-8 h-8 animate-spin text-gray-accent-light dark:text-gray-accent-dark ${className}`}
         >
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g fill="currentColor" fillRule="evenodd">

@@ -12,7 +12,7 @@ export const Tab: React.FC & {
         <HeadlessTab
             className={({ selected }) =>
                 classNames(
-                    selected ? 'bg-orange text-white' : 'bg-white',
+                    selected ? 'bg-red text-white' : 'bg-white dark:bg-gray-accent-dark',
                     'px-4 py-1.5 rounded shadow-sm text-sm font-medium whitespace-nowrap'
                 )
             }

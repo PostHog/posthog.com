@@ -20,7 +20,7 @@ const formatCur = (val: number, currency = 'USD') => {
 
 const Factor: React.FC = (props) => {
     return (
-        <div className="px-1.5 bg-white rounded border border-black/10 text-gray-accent-dark whitespace-nowrap text-2xs my-1">
+        <div className="px-1.5 bg-white dark:bg-gray-accent-dark rounded border border-black/10 text-gray-accent-dark dark:text-gray whitespace-nowrap text-2xs my-1">
             {props.children}
         </div>
     )
@@ -121,7 +121,7 @@ export const CompensationCalculator = () => {
 
             <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
                 <RadioGroup.Label className="block text-sm">Level</RadioGroup.Label>
-                <div className="w-full max-w-xs md:max-w-full md:w-auto inline-flex flex-col items-stretch md:flex-row md:items-center bg-white rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-xs mt-1.5">
+                <div className="w-full max-w-xs md:max-w-full md:w-auto inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-xs mt-1.5">
                     {Object.entries(levelModifier).map(([level, modifier]) => (
                         <RadioGroup.Option
                             as="button"

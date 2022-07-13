@@ -50,7 +50,7 @@ export const Combobox = (props: ComboboxProps) => {
                             onChange={(event) => setQuery(event.target.value)}
                             displayValue={props.display}
                             placeholder={currentValue || props.placeholder || 'Select a value'}
-                            className={`relative block w-full text-left bg-white px-2.5 py-1.5 rounded border border-black/10 text-xs select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600`}
+                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-xs select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600`}
                         />
 
                         <span className="ml-3 absolute right-0 pr-2 pointer-events-none">
@@ -68,7 +68,7 @@ export const Combobox = (props: ComboboxProps) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full max-w-lg bg-white rounded p-0 z-50 text-xs max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
+                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full max-w-lg bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-xs max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
                             {filteredOptions.length === 0 && query !== '' ? (
                                 <div className="px-2.5 py-1 text-xs text-gray">No results</div>
                             ) : (
