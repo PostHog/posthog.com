@@ -91,6 +91,7 @@ import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionT
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
+import { Spinner } from './components/Spinner'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
@@ -197,6 +198,7 @@ export const shortcodes = {
     FeaturedSectionTripleImage,
     SliderNav,
     Spacer,
+    Spinner,
     StarRepoButton,
     StarUsBanner,
     Structure,

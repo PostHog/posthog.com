@@ -22,7 +22,7 @@ export const Tab: React.FC & {
     )
 }
 
-Tab.Group = function TabGroup({ children }) {
+const TabGroup: typeof HeadlessTab.Group = ({ children }) => {
     return (
         <HeadlessTab.Group as="div" className="my-6">
             {children}
@@ -30,14 +30,27 @@ Tab.Group = function TabGroup({ children }) {
     )
 }
 
-Tab.List = function TabList({ children }) {
-    return <HeadlessTab.List className="space-x-3 flex items-center flex-wrap">{children}</HeadlessTab.List>
+TabGroup.displayName = 'TabGroup'
+
+const TabList: typeof HeadlessTab.List = ({ children, className, ...props }) => {
+    return (
+        <HeadlessTab.List {...props} className={`space-x-3 flex items-center flex-wrap ${className}`}>
+            {children}
+        </HeadlessTab.List>
+    )
 }
 
-Tab.Panels = function TabPanels({ children }) {
+TabList.displayName = 'TabList'
+
+const TabPanels: typeof HeadlessTab.Panels = ({ children }) => {
     return <HeadlessTab.Panels className="mt-4">{children}</HeadlessTab.Panels>
 }
 
+TabPanels.displayName = 'TabPanels'
+
+Tab.Group = TabGroup
+Tab.List = TabList
 Tab.Panel = HeadlessTab.Panel
+Tab.Panels = TabPanels
 
 export default Tab
