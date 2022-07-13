@@ -5,74 +5,62 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog provides multiple integrations to send events from your apps, use the API, and ingest historical data into your PostHog instance.
+After setting up your PostHog instance, the next step is to begin sending events from your app or website. PostHog acts as a catch-all destination for events from across your entire product.
+PostHog provides a number of ways to start ingesting events:
 
-Our goal is for you to be able to integrate PostHog with your language, framework, or platform of choosing, without having to adapt your technology stack.
+1. Installing our snippet
+2. Using client or server libraries
+3. Our API
+4. Third-party apps
 
-There are two common phases of integration with PostHog:
+> **Have existing data in a warehouse or database?** Learn more about bringing in historical events [here](/docs/integrate/ingest-historic-data)
 
-1. Live (real-time) events from an application in development, test, or deployed to production
-2. Historical events from an existing data source such as a data warehouse
+## Getting started
 
-## Live events
+There are a number of ways to get started with integrating PostHog. Each of these methods provides a bit of info on how to get started, as well as some of the considerations when picking how you will bring events into PostHog.
 
-Live (real-time) events can be integrated using [client libraries](#client-libraries), [server libraries](#server-libraries), and [third-party platform integrations](#integrations).
+### Snippet
 
-The fastest way to get started with PostHog on the web is via the using the [JavaScript snippet](/docs/integrate/client/snippet-installation).
+This is the fastest way to get started with PostHog on the web and will automatically capture events when users view your website.
+You can also use the [toolbar](/docs/user-guides/toolbar) to set up custom events for when users perform certain actions.
 
-For more information read the [live data ingestion guide](/docs/integrate/ingest-live-data).
+Typically, the snippet installation makes the most sense for non-technical users or for getting things up and running quick. If you want more detail on exactly what your users are doing, as well as if you have a website that you anticipate will change it's layout frequently, we would recommend using one of our [client](#client-libraries) or [server](#server) libraries.
 
-## Historical events
+```html
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
+</script>
+```
 
-By ingesting historical data into PostHog you can apply the same analysis to your historical and real-time data.
+Place this snippet in the `<head>` tags of your website, ideally just above the closing `</head>` tag. You will need to do this for all pages that you wish to track.
 
-Historical events need to be integrated using a PostHog [server library](#server-libraries) or directly via the [PostHog API](/docs/api/overview).
-
-For more information read the [historical data ingestion guide](/docs/integrate/ingest-historic-data).
-
-## Libraries
-
-Refer to the tables below for an overview of the functionality in each of our client and server libraries.
+For more information read the [snippet installation guide](/docs/integrate/snippet-installation).
 
 ### Client libraries
 
-Some features such as session recording are only available with our JavaScript library.
+Below is a list of all of our standalone libraries for capturing events from your app or website with PostHog.
 
-> We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this and let us know if you think we should prioritize support for any specific library.
-
-<OverflowXSection>
-
-|                       Library                       |  Maintainer  | Event Capture | User Identification | Autocapture | Session Recording | Feature Flags |
-| :-------------------------------------------------: | :----------: | :-----------: | :-----------------: | :---------: | :---------------: | :-----------: |
-|       [JavaScript](/docs/integrate/client/js)       | PostHog Team |      ✅       |         ✅          |     ✅      |        ✅         |      ✅       |
-|      [Android](/docs/integrate/client/android)      | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
-|          [iOS](/docs/integrate/client/ios)          | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
-|      [Flutter](/docs/integrate/client/flutter)      | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
-| [React Native](/docs/integrate/client/react-native) | PostHog Team |      ✅       |         ✅          |     ❌      |        ❌         |      ❌       |
-
-</OverflowXSection>
+<ClientLibraries />
 
 ### Server libraries
 
-> **Note:** Session recording is not possible on server-side libraries.
+<ServerLibraries />
 
-|                     Library                     |  Maintainer  | Event Capture | User Identification | Feature Flags |
-| :---------------------------------------------: | :----------: | :-----------: | :-----------------: | :-----------: |
-|      [NodeJS](/docs/integrate/server/node)      | PostHog Team |      ✅       |         ✅          |      ✅       |
-|     [Python](/docs/integrate/server/python)     | PostHog Team |      ✅       |         ✅          |      ✅       |
-|        [PHP](/docs/integrate/server/php)        | PostHog Team |      ✅       |         ✅          |      ✅       |
-|       [Ruby](/docs/integrate/server/ruby)       | PostHog Team |      ✅       |         ✅          |      ✅       |
-|       [Golang](/docs/integrate/server/go)       | PostHog Team |      ✅       |         ✅          |      ✅       |
-|     [Elixir](/docs/integrate/server/elixir)     |  Community   |      ✅       |         ✅          |      ❌       |
-| [Nim](https://github.com/Yardanico/posthog-nim) |  Community   |      ✅       |         ✅          |      ❌       |
+### API
 
-## Apps
+One of the most powerful features of PostHog is the ability to ingest events directly via our `Events` API.
+
+If you're looking to bring data in from a third party service, there may already be an [app](#apps) for that!
+
+### Apps
 
 Apps extend PostHog's functionality and are an incredibly powerful part of the PostHog ecosystem. They can help you:
-- Bring data in from 3rd party services
-- Enrich events in your pipeline by adding extra data
-- Filter events to keep your data clean
-- Much, much more...
+
+-   Bring data in from 3rd party services
+-   Enrich events in your pipeline by adding extra data
+-   Filter events to keep your data clean
+-   Much, much more...
 
 Below is a list of all apps for bringing data into PostHog. For a list of all our apps, see [here](/apps)
 

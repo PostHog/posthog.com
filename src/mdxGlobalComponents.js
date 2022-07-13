@@ -26,6 +26,7 @@ import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
+import { ClientLibraries } from './components/ClientLibraries'
 import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -91,6 +92,7 @@ import { DesignedForYourStackBlock } from './components/Sections/DesignedForYour
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { ServerLibraries } from './components/ServerLibraries'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -135,6 +137,7 @@ export const shortcodes = {
     WorkingAtPostHog,
     Checkbox,
     Chip,
+    ClientLibraries,
     CodeBlock,
     CommunityQuestions,
     CompensationCalculator,
@@ -200,6 +203,7 @@ export const shortcodes = {
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    ServerLibraries,
     SliderNav,
     Spacer,
     StarRepoButton,
