@@ -26,12 +26,12 @@ export type LibraryFeaturesProps = {
 
 export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
     return availability ? (
-        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4 space-y-2 my-4">
+        <div className="xl:border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark xl:pt-4 pb-4 space-y-2 -mt-4 xl:mt-4 mb-4">
             <h6 className="text-gray !mt-0 pb-1 font-semibold text-sm">
                 Which features are available in this library?
             </h6>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-x-2 gap-y-1">
                 {features.map((feature) => (
                     <li key={feature.key} className="flex items-center">
                         {availability[feature.key] ? (
@@ -41,7 +41,7 @@ export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
                         )}
                         <span className="text-[15px] ml-2 mr-.5">{feature.name}</span>
                         <Link href={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
-                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-4 xl:w-3.5 h-4 xl:h-3.5 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </li>
                 ))}
