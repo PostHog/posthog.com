@@ -206,20 +206,8 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
-                            "name": "Design hiring",
-                            "url": "/handbook/people/hiring-process/design-hiring"
-                        },
-                        {
-                            "name": "Developer Relations hiring",
-                            "url": "/handbook/people/hiring-process/devrel-hiring"
-                        },
-                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
-                        },
-                        {
-                            "name": "Exec hiring",
-                            "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
                             "name": "Marketing hiring",
@@ -228,6 +216,14 @@
                         {
                             "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
+                        },
+                        {
+                            "name": "Design hiring",
+                            "url": "/handbook/people/hiring-process/design-hiring"
+                        },
+                        {
+                            "name": "Exec hiring",
+                            "url": "/handbook/people/hiring-process/exec-hiring"
                         }
                     ]
                 }
