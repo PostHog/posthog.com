@@ -65,6 +65,7 @@ _All of our libraries work with PostHog Cloud and Self-hosted versions._
 | ---------------------------------------------------------------- | ------------------------------------------------------ | ----- | ------------ |
 | Privacy friendly                                                 | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | Ad-blocker friendly                                              | <span style="color: #71AA55">**Live**</span>           |       | ✔            |
+| [Subscriptions](/docs/user-guides/subscriptions)                 | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [Team management](https://github.com/PostHog/posthog/issues/260) | <span style="color: #F9BD2B">**In development**</span> | ✔     | ✔            |
 | [CSV export](https://github.com/PostHog/posthog/issues/724)      | <span style="color: #F9BD2B">**In development**</span> | ✔     | ✔            |
 | User roles                                                       | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
