@@ -27,6 +27,16 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 <hr />
 
+<img src="/images/marketplace/birch.png" alt="birch" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
+
+#### [**Birch**](../marketplace/birch)
+
+Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
+
+**Services:** PostHog as a managed service / deployment help
+
+<hr />
+
 <img src="/images/marketplace/clickhouse.svg" alt="ClickHouse" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
 
 #### [**ClickHouse**](../marketplace/clickhouse)
@@ -34,14 +44,6 @@ They help large organizations to deploy, manage and scale their PostHog instance
 ClickHouse is an open-source column-oriented database management system. (Note: PostHog runs on ClickHouse!)
 
 **Services:** Managed ClickHouse / EU Data Locality
-
-<hr />
-
-<img src="/images/marketplace/birch.png" alt="birch" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
-
-#### [**Birch**](../marketplace/birch)
-
-Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
 
 <hr />
 
