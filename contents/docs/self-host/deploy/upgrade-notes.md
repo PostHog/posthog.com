@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 ### 26.0.0
-This version upgrades the Prometheus service from version `2.31.1` to `2.36.2`. As part of this upgrade, we've also changed some defaults values in the `prometheus` stanza:
+This version upgrades the Prometheus service from version `2.31.1` to `2.36.2`. As part of this upgrade, we've also changed some default values in the `prometheus` stanza:
 
 * `prometheus.alertmanager`
 * `prometheus.kubeStateMetrics`
