@@ -76,12 +76,10 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install ClickHouse, Kafka, MinIO, PostgreSQL, Redis and Zookeeper via Docker.
-
-First, run the services in Docker:
+In this step we will start all the external services needed by PostHog to work:
 
 ```bash
-docker compose -f docker-compose.dev.yml up clickhouse kafka object_storage db redis zookeeper
+docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -276,6 +274,8 @@ This means that your activity is immediately reflected in the current project, w
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+
+This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
 ## Extra: Debugging the backend in PyCharm
 

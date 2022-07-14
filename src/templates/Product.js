@@ -12,7 +12,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import GithubSlugger from 'github-slugger'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import SectionLinks from './Handbook/SectionLinks'
+import SectionLinks from 'components/SectionLinks'
 
 export default function Product({ data, pageContext: { next, previous } }) {
     const { pageData, documentation, sidebars } = data

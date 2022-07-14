@@ -264,7 +264,7 @@ h6 {
     text-rendering: optimizeLegibility;
 
     a {
-        font-variation-settings: 'wght' 800; // override ant
+        font-variation-settings: 'wght' 800 !important; // override ant
     }
 
     code {
@@ -275,11 +275,13 @@ h6 {
 h1 {
     font-size: 48px;
     line-height: normal;
+    letter-spacing: -0.03em;
 }
 
 h2 {
     font-size: 40px;
     line-height: normal;
+    letter-spacing: -0.03em;
 }
 h3 {
     font-size: 30px;
@@ -418,6 +420,7 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
+    width: 100%;
 }
 fieldset {
     margin-left: 0;
@@ -500,9 +503,9 @@ li > ol {
     margin-top: calc(1.45rem / 2);
 }
 li > ul {
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
-    padding-bottom: 1rem;
+    margin-bottom: calc(1.45rem / 4);
+    margin-top: calc(1.45rem / 4);
+    padding-bottom: 0.5rem;
 }
 blockquote *:last-child {
     margin-bottom: 0;
@@ -1019,14 +1022,6 @@ a.middle {
 
 .navy {
     color: #35416b !important;
-}
-
-.bg-blue {
-    background-color: #1d4aff !important;
-}
-
-.bg-red {
-    background-color: #f96132 !important;
 }
 
 .bg-zambezi {

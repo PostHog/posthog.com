@@ -31,7 +31,11 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Michael Matloka](https://github.com/Twixes) and [Marius Andra](https://github.com/mariusandra) and [Neil Kakkar](https://github.com/neilkakkar) for creating the Downsampler. 
+We'd like to thank PostHog team members [Michael Matloka](https://github.com/Twixes) and [Marius Andra](https://github.com/mariusandra) and [Neil Kakkar](https://github.com/neilkakkar) for creating the Downsampler.
+
+### Who maintains this app?
+
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
 
 ### What if I have feedback on this app?
 
@@ -39,4 +43,6 @@ We love feature requests and feedback! Please [create an issue](https://github.c
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our Support page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.

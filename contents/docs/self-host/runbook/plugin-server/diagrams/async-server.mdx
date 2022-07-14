@@ -30,7 +30,7 @@ flowchart LR
             end
 
             subgraph WorkerThread [Worker thread]
-                AsyncHandlers(runAsyncHandlers<BR>onEvent,onAction,webhooks)
+                AsyncHandlers(runAsyncHandlers<BR>onEvent,webhooks)
                 Scheduled(Scheduled tasks)
                 Jobs(Plugin jobs)
                 ReloadPlugins(Reload plugins<BR>Reload actions)
