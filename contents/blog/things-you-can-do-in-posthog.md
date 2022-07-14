@@ -29,11 +29,13 @@ But maybe you can replace all of them with just PostHog?
 
 We've built PostHog so companies don't have to run multiple services to get the insights they need. 
 
-PostHog Cloud delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
+[PostHog Cloud](/pricing) delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
 
-And if you self-host PostHog, you get a built-in data warehouse based on ClickHouse into the bargain. 
+And if you [self-host PostHog](/docs/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
 
 ## 2. Build an AARRR pirate metrics dashboard
+
+![AARRR pirate metrics](../images/blog/things-to-do-in-posthog/aarrr.png)
 
 AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic framework for driving product-led growth, and it's a great place to start when building your first dashboard in PostHog.
 
@@ -47,21 +49,19 @@ Read our guide to [getting started with the AARRR framework](/tutorials/aarrr-fr
 
 When [Phantom](/customers/phantom) started using PostHog, it couldn't deploy new updates or features to all users instantly. In Phantom's case this was because the product was a browser extension. Using Feature Flags as kill switches gave them a degree of control not normally available to such products.
 
-## 4. Track errors as events
+## 4. Gather user feedback
 
-You can track any sort of event in PostHog, including failures or other sort of errors. All you need to do is put an [action](https://posthog.com/docs/user-guides/actions) or [event](https://posthog.com/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our Sentry Connector to track errors as events.  
+![gathering feedback](../images/blog/things-to-do-in-posthog/feedback.png)
 
-Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform. 
-
-## 5. Gather user feedback
-
-You can use PostHog to gather feedback on your product, website, or conduct user polls.
+You can [use PostHog to gather feedback on your product](/tutorials/survey), website, or conduct user polls.
 
 On our website, every docs page has a question asking whether the page was useful – we use this to help identify pages that need improvement. We also ask anyone who gets a 404 on our website whether pineapple belongs on pizza. We use this to report people to the pizza police. 
 
 Look, PostHog lets you control your own data so you can protect and respect user privacy, but there are limits! The limit is pineapple on pizza.
 
-## 6. Discover who your power users are
+## 5. Discover who your power users are
+
+![discovering power users](../images/blog/things-to-do-in-posthog/cohorts.png)
 
 You can learn a huge amount by discovering who your most active users are. 
 
@@ -69,19 +69,27 @@ What are the features they use the most? How often do they perform specific task
 
 These are the kinds of insights that inform your marketing efforts, your product roadmap, and help you find product market fit.
 
-For this you'll want to use our powerful Cohorts features by using the "completed event regularly" condition. For example, an e-commerce platform might ask for "users who bought an item in 5 out of the last 7 weeks".
+For this you'll want to employ our powerful Cohorts tool by using the "completed event regularly" or "completed an event multiple times" conditions. An e-commerce platform might ask for "users who bought an item in 5 out of the last 7 weeks" – we track many things, including users who view dashboards freqently.
 
-If you're unsure what action you want to track, try heading to Data Management and sorting your events by '30-day query volume' or '30-day query volume' to find the most frequent events for your product.
+## 6. Validate a product change using experiments
 
-## 7. Validate a product change using experiments
+![PostHog experiments](../images/blog/things-to-do-in-posthog/experiments-1.png)
 
 Experimentation is a fundamental tool every engineer and product manager needs. While you can roll out changes and observe their impact after the fact, it's impossible to verify whether small shifts in your metrics are down to your changes or some other unknown variable.
 
 PostHog's Experimentation suite is built atop our Feature Flag functionality, allowing you to run straight A/B tests and multivariate tests. You can set a minimum acceptable improvement for the test, and PostHog will recommend a sample size and test duration based on your parameters.
 
+![PostHog experiments](../images/blog/things-to-do-in-posthog/experiments-2.png)
+
 We then run a Bayesian analysis on the data to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are statistically significant or not.
 
 For more info, you can read the [Experimentation user guide](/docs/user-guides/experimentation) and our [guide to running effective A/B tests](/blog/experiments).
+
+## 7. Track errors as events
+
+You can track any sort of event in PostHog, including failures or other sort of errors. All you need to do is put an [action](https://posthog.com/docs/user-guides/actions) or [event](https://posthog.com/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our Sentry Connector to track errors as events.  
+
+Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform. 
 
 ## 8. Track the performance of marketing campaigns
 
@@ -136,6 +144,8 @@ You can also capture users who didn't churn using the "started doing an event ag
 Try experimenting with any of the above, while also using AND/OR operators, to create new and useful insights.
 
 ## 13. Spend a week watching people using your product
+
+![recording filters posthog](../images/blog/things-to-do-in-posthog/recordings.png)
 
 Seriously, sometimes it's just useful to spend a whole load of time watching people using your product. 
 
