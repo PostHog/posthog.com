@@ -54,8 +54,3 @@ Restack are experts in deploying open-source software and provide a simple way t
 With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without worrying about EKS setup, k8s provisioning, networking, compliance or updates.
 
 **Services:** PostHog as a managed service / GDPR, SOC 2 and HIPAA compliant deployment
-
-<hr />
-
-  
-<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
