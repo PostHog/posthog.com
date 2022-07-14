@@ -92,7 +92,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 - [ ] Draft [budget](https://docs.google.com/spreadsheets/d/1ZwDgcoEtDMICtxuozwEfJUHqJH12_E-jyylGQbWCLQQ/edit?usp=sharing)
   - Using the tentative schedule, you can begin to estimate a rough budget to guide planning. Here are some benchmarks to use, however these will vary a lot based on location, size of team, and how cost-constrained you are:
-    - Accomodations = $200/night/person
+    - Accommodations = $200/night/person
     - Intercontinental airfare = $1000/person; intracontinental airfar = $500/person
     - Ground transportation = $50/day/person
     - Food & drinks = $50/day/person 
