@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../Header'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
-import SearchBar from '../../../../templates/Handbook/SearchBar'
+import SearchBar from 'components/Docs/SearchBar'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 
