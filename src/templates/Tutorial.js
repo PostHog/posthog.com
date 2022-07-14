@@ -17,9 +17,9 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import slugify from 'slugify'
-import { CodeBlock } from '../components/CodeBlock'
+import { CodeBlock } from 'components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import MobileSidebar from './Handbook/MobileSidebar'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {

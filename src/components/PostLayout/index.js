@@ -7,7 +7,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
-import InternalSidebarLink from '../../templates/Handbook/InternalSidebarLink'
+import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
