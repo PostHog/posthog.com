@@ -25,7 +25,7 @@ Let's start with a big one.
 
 You could use Amplitude for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, Optimizely for testing, and Redshift for your data warehouse – these are sensible choices.
 
-Alternatively, you can just use PostHog.
+But maybe you can replace all of them with just PostHog?
 
 We've built PostHog so companies don't have to run multiple services to get the insights they need. 
 
@@ -45,7 +45,7 @@ Read our guide to [getting started with the AARRR framework](/tutorials/aarrr-fr
 
 [Feature flags](/docs/user-guides/feature-flags) are often used to turn new features on under certain conditions, so that you can test things with a certain [cohort](/docs/user-guides/cohorts) or user segment. But you can also use them globally, then leverage the flag as a kill switch to turn features off in the event of an emergency. 
 
-Some PostHog users, such as [Phantom](/customers/phantom), aren't able to deploy new updates or features to all users instantly. In Phantom's case this is because the product is a browser extension. Using Feature Flags as kill switches in this way offers a degree of control not normally available to such products.
+When [Phantom](/customers/phantom) started using PostHog, it couldn't deploy new updates or features to all users instantly. In Phantom's case this was because the product was a browser extension. Using Feature Flags as kill switches gave them a degree of control not normally available to such products.
 
 ## 4. Track errors as events
 
