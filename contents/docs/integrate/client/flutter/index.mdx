@@ -3,11 +3,16 @@ title: Flutter library
 sidebarTitle: Flutter
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-flutter
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: false
 ---
 
-<VisitLibrary name="Flutter" to="https://github.com/PostHog/posthog-flutter" />
-
-This is an optional library you can install if you're working with Flutter.  It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
+This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 ## Package
 
@@ -21,7 +26,6 @@ To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](h
 
 ### Supported methods
 
-
 | Method           | Android | iOS | Web |
 | ---------------- | ------- | --- | --- |
 | `identify`       | X       | X   | X   |
@@ -34,7 +38,6 @@ To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](h
 | `enable`         | X       | X   |     |
 | `debug`          | X\*     | X   | X   |
 | `setContext`     | X       | X   |     |
-
 
 > Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
 

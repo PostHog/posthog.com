@@ -11,6 +11,8 @@ import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
 import { ContributorsChart } from 'components/ContributorsChart'
 
+import 'antd/lib/input/style/css'
+
 const { TabPane } = Tabs
 
 export const ContributorsPage = () => {

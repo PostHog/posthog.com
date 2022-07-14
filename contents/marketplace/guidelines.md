@@ -11,6 +11,7 @@ hideLastUpdated: true
 Please [submit a Pull Request to posthog.com](https://github.com/PostHog/posthog.com). You'll need to:
 
 * Take our [listing template](listing-template), and create a copy in posthog.com/contents/marketplace/YOUR-NAME.md
+* Add an email address you'd like to receive any leads
 * PostHog's team will then review your pull request. We will:
   * Add a contact form
   * Add you to our menu structure
@@ -69,3 +70,16 @@ We reserve the right to remove listings if they are causing issues such as:
 
 * consistent poor reviews from users
 * not following the our [community standards](/.../docs/contribute/code-of-conduct#our-standards)
+
+## Excluded listing types
+
+Overall we are very open, so just create a listing or email us marketplace@posthog.com if you've any questions. We are happy to receive listings for:
+
+* Products built on top of our infrastructure
+* Professional service providers (implementation / day to day management of the instance / analytics consultancy / integration)
+* Paid app builders
+* Anything else that will help spread the project, or enhance users' experience on it.
+
+There is one listing type we don't want to support - we do not want to add more listings that provide a hosted version of our open source product. This leads to us sending you users, supporting them for free, with less control and often on an outdated version - all of which creates a poor experience than if they just use our cloud product.
+
+The exception to this is if you are a large business that can help us dristribute PostHog more widely than we could reach ayway, so this contributes positively towards [helping increase the number of successful products in the world](/handbook/strategy/strategy).

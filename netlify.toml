@@ -1,3 +1,8 @@
+[dev]
+  command = "yarn start"
+  port = 8888
+  targetPort = 8001
+
 [[redirects]]
   from = "/plugins/*"
   to = "/apps/:splat"
@@ -5,6 +10,11 @@
 [[redirects]]
   from = "/next-steps/*"
   to = "/next-steps"
+  status = 200
+
+[[redirects]]
+  from = "/question/*"
+  to = "/question"
   status = 200
 
 [[redirects]]
@@ -1457,3 +1467,18 @@
 [[redirects]]
     from = "/tutorials/b2b"
     to = "/blog/b2b-saas-product-metrics"
+
+# Added: 2022-06-28
+[[redirects]]
+    from = "/docs/self-host/migrate-to-cloud"
+    to = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    
+# Added: 2022-06-30
+[[redirects]]
+    from = "/tutorials/categories/plugins"
+    to = "/tutorials/categories/apps"
+    
+# Added: 2022-07-08
+[[redirects]]
+    from = "/startups"
+    to = "/pricing#startup-plan"

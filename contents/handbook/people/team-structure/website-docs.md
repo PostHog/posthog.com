@@ -23,6 +23,18 @@ We’re here to:
 - Own posthog.com
 - Own the docs
 
+## Q3 2022 Goals
+* **Objective**:
+    * Make posthog.com a great resource for new and returning users
+* **Key Results**:
+    * 25% decrease in support tickets per customer
+    * Ensure the top 50 [most visited Docs pages](https://docs.google.com/spreadsheets/d/1awe15l2_Hy8EMcbGeiCLlhv03pRpiqD3PG_7Q_FnESo/edit#gid=420779973) are up to date
+    * Make sure the conversion rate doesn’t fall
+* **Rationale**:
+    * Whilst we don’t want to eliminate our engineer:engineer interaction, there are likely 10x as many lurkers who never solve their problems.
+    * Producing an exceptional documentation experience will encourage more word of mouth growth.
+    * I currently think the dev advocate should go into the website & docs team
+
 ## Output metrics
 
 - Primary: [Quality signups](https://app.posthog.com/insights/ujGv0WqI?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464)

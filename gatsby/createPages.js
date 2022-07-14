@@ -4,9 +4,8 @@ const slugify = require('slugify')
 const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
-module.exports = exports.createPages = async ({ actions, graphql }) => {
-    const { createPage } = actions
-    const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
+module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -344,15 +343,15 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         })
     })
 
-    const tutorialsPageViews = await fetch(
-        'https://app.posthog.com/api/shared_dashboards/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q'
+    const tutorialsPageViewExport = await fetch(
+        'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
     ).then((res) => res.json())
 
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
         let pageViews
-        tutorialsPageViews.items[0].result.some((insight) => {
+        tutorialsPageViewExport.dashboard.items[0].result.some((insight) => {
             if (insight.breakdown_value.includes(slug)) {
                 pageViews = insight.aggregated_value
                 return true
@@ -509,6 +508,60 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             component: Question,
             context: {
                 id,
+            },
+        })
+    })
+
+    const LibraryTemplate = path.resolve(`src/templates/Library.tsx`)
+    const libraries = await graphql(`
+        {
+            allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/docs/integrate/(client|server)/(?!.*snippets/).*/" } }
+                    frontmatter: { title: { ne: "" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+        }
+    `)
+
+    libraries.data.allMdx.nodes.forEach((node) => {
+        const { slug } = node.fields
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        const tableOfContents = formatToc(node.headings)
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
+
+        createPage({
+            path: replacePath(node.fields.slug),
+            component: LibraryTemplate,
+            context: {
+                id: node.id,
+                next,
+                previous,
+                menu: docsMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
+                slug,
             },
         })
     })

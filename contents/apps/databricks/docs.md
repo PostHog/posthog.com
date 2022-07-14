@@ -45,6 +45,10 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 We'd like to thank community members [Sandeep Guptan](https://github.com/samcaspus) and [Himanshu Garg](https://github.com/merrcury) for their work creating this app. Thank you, both!
 
+### Who maintains this app?
+
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/posthog/posthog-databricks-plugin) to let us know!
+
 ### Where can I find out more?
 
 Check [Databricks' API documentation](https://docs.databricks.com/) for more information on pulling and pushing data from/to Databricks. 
@@ -55,4 +59,6 @@ We love feature requests and feedback! Please [create an issue](https://github.c
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our Support page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.

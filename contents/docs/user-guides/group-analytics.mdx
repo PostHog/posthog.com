@@ -34,6 +34,8 @@ As another example, if `transaction` is a group type, then each `transactionID` 
 
 ## Defining groups
 
+> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab
+
 Groups are at the event level. If everything is setup correctly, then events that come into PostHog have a group associated with them, which is determined by you. See below for how to set this up.
 
 Thus, there's no new events corresponding to groups: it's simply the events that already exist, aggregated by group values.
@@ -117,8 +119,6 @@ import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
         <GroupsIngestionOther />
     </TabPane>
 </Tabs>
-
-> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab
 
 ## Analysing group insights
 

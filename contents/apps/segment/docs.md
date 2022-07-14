@@ -38,10 +38,16 @@ To get around these limitations, you can install the PostHog snippet or posthog-
 
 Further information about PostHog's Segment Connector is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
 
+### Who maintains this app?
+
+This app is maintained by Segment. For more information, please check [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think. 
 
 ### What if my question isn't answered above?
 
-You can [join the PostHog Community Slack group](/slack) to ask more questions, or get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our Support page](/questions).
+
+You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.

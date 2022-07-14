@@ -74,7 +74,7 @@
                     "url": "/handbook/company/values"
                 },
                 {
-                    "name": "Goal Setting",
+                    "name": "Goal setting",
                     "url": "/handbook/company/goal-setting"
                 },
                 {
@@ -115,11 +115,11 @@
                         },
                         {
                             "name": "Team App East",
-                            "url": "/handbook/engineering/feature-ownership"
+                            "url": "/handbook/engineering/app-east"
                         },
                         {
                             "name": "Team App West",
-                            "url": "/handbook/engineering/feature-ownership"
+                            "url": "/handbook/engineering/app-west"
                         },
                         {
                             "name": "Team Platform",
@@ -128,6 +128,10 @@
                         {
                             "name": "Team Ingestion",
                             "url": "/handbook/people/team-structure/ingestion"
+                        },
+                        {
+                            "name": "Team Infrastructure",
+                            "url": "/handbook/people/team-structure/infrastructure"
                         },
                         {
                             "name": "Team Marketing",
@@ -202,20 +206,8 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
-                            "name": "Design hiring",
-                            "url": "/handbook/people/hiring-process/design-hiring"
-                        },
-                        {
-                            "name": "Developer Relations hiring",
-                            "url": "/handbook/people/hiring-process/devrel-hiring"
-                        },
-                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
-                        },
-                        {
-                            "name": "Exec hiring",
-                            "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
                             "name": "Marketing hiring",
@@ -224,6 +216,14 @@
                         {
                             "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
+                        },
+                        {
+                            "name": "Design hiring",
+                            "url": "/handbook/people/hiring-process/design-hiring"
+                        },
+                        {
+                            "name": "Exec hiring",
+                            "url": "/handbook/people/hiring-process/exec-hiring"
                         }
                     ]
                 }
@@ -592,6 +592,10 @@
                                 {
                                     "name": "Deploying ClickHouse using Altinity.Cloud",
                                     "url": "/docs/self-host/configure/using-altinity-cloud"
+                                },
+                                {
+                                    "name": "Configuring Slack",
+                                    "url": "/docs/self-host/configure/slack"
                                 }
                             ]
                         },
@@ -897,6 +901,10 @@
                             "url": "/docs/integrate/third-party/sentry"
                         },
                         {
+                            "name": "Slack",
+                            "url": "/docs/integrate/third-party/slack"
+                        },
+                        {
                             "name": "Shopify",
                             "url": "/docs/integrate/third-party/shopify"
                         },
@@ -1033,6 +1041,14 @@
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
+                },
+                {
+                    "name": "Sessions",
+                    "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Subscriptions",
+                    "url": "/docs/user-guides/subscriptions"
                 }
             ]
         },
