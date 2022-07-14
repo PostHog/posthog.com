@@ -17,7 +17,7 @@ We used to call ourselves a product analytics platform, but product analytics is
 
 And that got us wondering... just how many useful things can you do with PostHog?
 
-The answer? A lot – and this list is just a snapshot of the posibilities.
+The answer? A lot – and this list is just a snapshot of the possibilities.
 
 > Got an idea to add to this article? Share it on the [PostHog website repo](https://github.com/PostHog/posthog.com/issues).
 
@@ -57,7 +57,7 @@ These are the kinds of insights that inform your marketing efforts, your product
 
 For this you'll want to employ our powerful Cohorts tool by using the "completed event regularly" or "completed an event multiple times" conditions. 
 
-An e-commerce platform might ask for "users who bought an item in 5 out of the last 7 weeks" – we track many things, including users who view dashboards freqently.
+An e-commerce platform might ask for "users who bought an item in 5 out of the last 7 weeks" – we track many things, including users who view dashboards frequently.
 
 ## 4. Gather user feedback
 
