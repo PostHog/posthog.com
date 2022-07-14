@@ -17,7 +17,7 @@ interface LogSliderProps {
 
 const MySlider = Slider.createSliderWithTooltip(Slider)
 
-const prettyInt = (x: number): string => {
+export const prettyInt = (x: number): string => {
     return Math.round(x)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')

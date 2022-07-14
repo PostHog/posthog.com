@@ -34,7 +34,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         pricingOption: [
-            'scale',
+            'cloud',
             {
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
