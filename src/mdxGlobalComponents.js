@@ -54,6 +54,7 @@ import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
+import { LibraryFeatures } from './components/LibraryFeatures'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
@@ -83,6 +84,7 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
@@ -97,6 +99,8 @@ import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { TotalCountries } from './components/TotalCountries'
+import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
@@ -159,6 +163,7 @@ export const shortcodes = {
     IngestionAppsList,
     InlineCode,
     LandingPageCallToAction,
+    LibraryFeatures,
     Link,
     Logo,
     MainNav,
@@ -188,6 +193,7 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     RocketHorizontalRule,
+    SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
@@ -202,6 +208,8 @@ export const shortcodes = {
     Tab,
     TeamQuote,
     Tooltip,
+    TotalCountries,
+    TotalTeam,
     Tutorials,
     TutorialsSlider,
     VisitLibrary,

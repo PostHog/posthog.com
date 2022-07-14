@@ -15,9 +15,9 @@ import ReactMarkdown from 'react-markdown'
 import '../styles/api-docs.scss'
 import { Listbox } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
-import MainSidebar from './Handbook/MainSidebar'
-import Navigation from './Handbook/Navigation'
-import SectionLinks from './Handbook/SectionLinks'
+import MainSidebar from 'components/Docs/MainSidebar'
+import Navigation from 'components/Docs/Navigation'
+import SectionLinks from 'components/SectionLinks'
 
 const mapVerbsColor = {
     get: 'blue',
