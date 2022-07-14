@@ -275,11 +275,13 @@ h6 {
 h1 {
     font-size: 48px;
     line-height: normal;
+    letter-spacing: -0.03em;
 }
 
 h2 {
     font-size: 40px;
     line-height: normal;
+    letter-spacing: -0.03em;
 }
 h3 {
     font-size: 30px;
@@ -1020,14 +1022,6 @@ a.middle {
 
 .navy {
     color: #35416b !important;
-}
-
-.bg-blue {
-    background-color: #1d4aff !important;
-}
-
-.bg-red {
-    background-color: #f96132 !important;
 }
 
 .bg-zambezi {
