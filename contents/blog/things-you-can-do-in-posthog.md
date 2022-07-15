@@ -19,6 +19,30 @@ And that got us wondering... just how many useful things can you do with PostHog
 
 The answer? A lot – and this list is just a snapshot of the possibilities.
 
+Here's the TL;DR:
+
+1. [Replace multiple services with just PostHog](#1-replace-multiple-services-with-just-posthog)
+1. [Build an AARRR pirate metrics dashboard](#2-build-an-aarrr-pirate-metrics-dashboard)
+1. [Discover who your power users are](#3-discover-who-your-power-users-are)
+1. [Gather user feedback](#4-gather-user-feedback)
+1. [Identify users who are at risk of churning](#5-identify-users-who-are-at-risk-of-churning)
+1. [Validate a product change using experiments](#6-validate-a-product-change-using-experiments)
+1. [Use feature flags as kill switches](#7-use-feature-flags-as-kill-switches)
+1. [Track the performance of marketing campaigns](#8-track-the-performance-of-marketing-campaigns)
+1. [Use Correlation Analysis to discover commonalities](#9-use-correlation-analysis-to-discover-commonalities)
+1. [Track errors as events](#10-track-errors-as-events)
+1. [Watch users interact with your acquisition funnel](#11-watch-users-interact-with-your-acquisition-funnel)
+1. [Analyze retrospective data](#12-analyze-retrospective-data)
+1. [Spend a week watching people using your product](#13-spend-a-week-watching-people-using-your-product)
+1. [Build your own app](#14-build-your-own-app)
+1. [Subscribe to an insight or dashboard](#15-subscribe-to-an-insight-or-dashboard)
+1. [Capture where people first heard about you](#16-capture-where-people-first-heard-about-you)
+1. [Measure how long it takes users to complete a series of actions](#17-measure-how-long-it-takes-users-to-complete-a-series-of-actions)
+1. [Organize your custom events in Notion](#18-organize-your-custom-events-in-notion)
+1. [Collect location data while respecting user privacy](#19-collect-location-data-while-respecting-user-privacy)
+1. [Connect PagerDuty and PostHog to get threshold alerts](#20-connect-pagerduty-and-posthog-to-get-threshold-alerts)
+1. [Track support tickets by connecting Zendesk](#21-track-support-tickets-by-connecting-zendesk)
+
 > Got an idea to add to this article? Share it on the [PostHog website repo](https://github.com/PostHog/posthog.com/issues).
 
 ### 1. Replace multiple services with just PostHog
