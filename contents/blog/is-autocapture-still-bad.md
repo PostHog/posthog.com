@@ -71,7 +71,7 @@ In Ampltiude’s article, Adam Greco argues that autocapture is bad and that the
 
 How many of us have perfect foresight and can accurately predict the needs of so many, so far in advance, for example? What opportunities are lost in the meantime? What happens when circumstances change, or someone asks a question you didn’t anticipate? What about fast-moving businesses where the needs of teams are likely to change?
 
-As [one of my colleagues puts it](https://github.com/PostHog/posthog.com/issues/3593#issuecomment-1160197161): “Instrumentation is for the world we wish existed, autocapture is for the world that actually exists.”
+As [one of my colleagues puts it](https://github.com/PostHog/posthog.com/issues/3593#issuecomment-1160197161): “Manual instrumentation is for the world we wish existed; autocapture is for the world that actually exists.”
 
 Again, this is why PostHog offers both — because different teams need different solutions. Autocapture is best for some, manual is best for others and, for most, a mixture of both is preferable. Ultimately, it’s only by understanding and adapting to these needs that anyone, including PostHog, can build the best product. 
 
