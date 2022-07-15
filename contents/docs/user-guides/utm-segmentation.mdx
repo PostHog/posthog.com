@@ -1,0 +1,25 @@
+---
+title: UTM segementation
+sidebar: Docs
+showTitle: true
+---
+
+<FeatureAvailability allPlans />
+
+UTM parameters are a set 5 five parameters, that allow you to track 
+the effectiveness of marketing campaings acroos traffic sources. The parameters
+are attached to a link using query parameters, for example:
+
+https://www.example.com/page?utm_source=twitter&utm_medium=social&utm_campaing=promoted-tweets
+
+Posthog supports the following parameters:
+
+| Parameter    | Purpose                                        | Example                         |
+|--------------|------------------------------------------------|---------------------------------|
+| utm_source   | Identifies which site sent the traffic         | utm_source=google               |
+| utm_medium   | Allows you to type of link was used            | utm_medium=cpc                  |
+| utm_campaign | Helps identify specific promotions or campains | utm_campaign=google-ad-campaign |
+
+> Note that UTM only appear once you set them for **link at least once**.
+
+### Further reading
