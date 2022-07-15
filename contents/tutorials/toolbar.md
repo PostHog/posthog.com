@@ -1,14 +1,13 @@
 ---
-title: Visualizing user behavior - Toolbar
+title: Using the PostHog Toolbar to visualize behavior and create actions
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
 featuredImage: ../images/tutorials/banners/toolbar.png
-featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=48
-author: ['yakko-majuri']
+author: ['yakko-majuri', 'andy-vandervell']
 topics:
     - heatmaps
-date: 2020-09-24
+date: 2022-07-15
 ---
 
 _Estimated reading time: 6 minutes_ ☕☕
@@ -84,7 +83,9 @@ Here's another example from our website with the heatmap enabled:
 
 ![PostHog Website Footer](../images/tutorials/toolbar/posthog-footer.png)
 
-What the toolbar is doing here is displaying the number of clicks on each of those elements over the past 7 days. 
+What the toolbar is doing here is displaying the number of clicks on each of those elements over the past 7 days.
+
+You can change date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a new menu where you can select various ranges and a list of the most clicked on elements in descending order.
 
 Numbers at the bottom or top of the screen just indicate that there are more elements that are not currently being displayed on the page. 
 
@@ -92,7 +93,7 @@ With the heatmap enabled, if you then click on an element, you will also be able
 
 ![Heatmap Selected Element](../images/tutorials/toolbar/selected-element.png)
 
-## Creating actions
+## Using Inspect and creating actions
 
 When you're on your website with the toolbar enabled, you're able to create actions with just a few clicks.
 
@@ -120,27 +121,19 @@ If you want to create a more advanced action, you can also create it here.
 
 Here are the options you have for creating an action:
 
-**Element filters**
+#### Element filters
 
 These are used by PostHog to find the specific element you're creating the action for. 
 
-_Link href_
+- **Link target:** Where a click on the element leads to (if available).
 
-Where a click on the element leads to (if available). 
+- **Text:** Inner text of the element (if available).
 
-_Text_
+- **Selecto:** Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. This is useful if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
 
-Inner text of the element (if available). 
+- **Page URL:** If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
 
-_Selector_
-
-Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. This is useful if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
-
-_URL_
-
-If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
-
-**Add another element**
+#### Add another element**
 
 If you want your action to cover more than one element, you can click 'Add another element' right above 'Create Action'. 
 
@@ -150,13 +143,13 @@ This is useful if you have various buttons that take you to the same page, for i
 
 A good use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
-### Step 2: Seeing your existing actions
+### Seeing your existing actions
 
 Once you have created an action, it will be available for you in PostHog.
 
 However, you can also visualize your actions with the toolbar.
 
-By toggling on 'Actions' (green flag icon), you should have a view of all actions on the page. 
+By toggling on 'Actions' (yellow target icon), you'll see a view of all actions on the page. 
 
 ![Toolbar Actions](../images/tutorials/toolbar/toolbar-actions.png)
 
@@ -164,10 +157,8 @@ Here, you can click an element and see all actions that use it. This is a great 
 
 Additionally, by clicking a specific action on an element, you can update or delete it.
 
-## Just the beginning...
+## Further reading
 
-That's it! You've now learned to use the main functionalities of our toolbar. 
-
-We would like to note once more that the PostHog Toolbar is in Beta (and we mean it!), so if you do find any issues, please report them to us on [GitHub](https://github.com/PostHog/posthog/issues). 
-
-The toolbar should also be getting new features soon, so stay tuned.
+- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
+- [B2B produce metrics 101](/blog/b2b-saas-product-metrics)
