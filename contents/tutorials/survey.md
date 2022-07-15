@@ -46,7 +46,7 @@ For most this will mean implementing some simple HTML, like this:
 </form> 
 ```
 
-## 3. Send the data as a PostHog event**
+## 3. Send the data as a PostHog event
 
 Next, you need to determine an event name for the specific survey you are running and capture a PostHog event with that name when the usersubmits the survey (e.g. via a button click).
 
@@ -69,7 +69,7 @@ const submitDataToPostHog = () => {
 }
 ```
 
-**4. Analyze the data in PostHog**
+## 4. Analyze the data in PostHog
 
 There's a lot you can do with survey data in PostHog, such as:
 
