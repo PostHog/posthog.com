@@ -8,37 +8,28 @@ featuredImage: ../images/tutorials/banners/surveys.png
 topics: ["configuration"]
 ---
 
-## Objective
+- **Level:** Easy 🦔
+- **Estimated reading time:** 3 minutes ☕️
 
-Running a user feedback survey without any backend
-
-## Why is this useful?
-
-Getting user feedback is very important for improving your product. With PostHog, you run a survey without a backend, and can easily pair the survey data with all other metrics about your product.
+Getting user feedback is very important for improving your product, and you can use PostHog to run surveys and pair the survey data with all other metrics about your product.
 
 This is especially helpful for static websites, or those using static site generators like Gatsby or Node.js.
 
-## Prerequisites
-
-To follow this tutorial along, you should:
-
-1. Have [deployed PostHog](/docs/deployment) or be using PostHog Cloud.
-
-> **Note:** PostHog surveys are best for binary or categorical data. If you want to collect arbitrary responses, PostHog might not be the most suitable tool.
-
-## Step-by-step instructions
-
-**1. Determine what you want to ask in your survey.**
+## 1. Decide what you want to know
    
-PostHog is best suited for visualizing data that is categorical, binary, interval-based, or on a scale. In other words, there should be a limited set of possibilities from which an answer is chosen, rather than accepting arbitrary data.
+PostHog is best suited for visualizing data that is categorical, binary, interval-based, or on a scale. 
 
-PostHog also allows users to visualize arbitrary data from surveys, but we believe other services may be better suited for this.
-    
-> **Fun Fact:** At PostHog we use PostHog to run our _"Was this page helpful?"_ survey.
+In other words, there should be a limited set of possibilities from which an answer is chosen, rather than accepting arbitrary data.
 
-**2. Implement your survey frontend e.g. by using HTML forms.**
+While you can visualize arbitrary data from surveys in PostHog,  we believe other services may be better suited for this.
 
-Example:
+For this example, we're going to ask users to rate their experience using four options: 'Poor', 'OK', 'Good', and 'Great'.
+
+On the PostHog website, we collect feedback on docs pages and tutorials using this method.
+
+## 2. Implement your survey frontend
+
+For most this will mean implementing some simple HTML, like this:
 
 ```html
 <p>How would you rate your experience with this feature?</p>
@@ -47,7 +38,7 @@ Example:
   		<select id="survey-select">
           <option value="3">Great</option>
           <option value="2">Good</option>
-          <option value="1">Ok</option>
+          <option value="1">OK</option>
           <option value="0">Poor</option>
         </select>
   </div>
@@ -55,9 +46,9 @@ Example:
 </form> 
 ```
 
-**3. Send the data as a PostHog event**
+## 3. Send the data as a PostHog event**
 
-Determine an event name for the specific survey you are running and capture a PostHog event with that name when the usersubmits the survey (e.g. via a button click).
+Next, you need to determine an event name for the specific survey you are running and capture a PostHog event with that name when the usersubmits the survey (e.g. via a button click).
 
 Following the example from above, we could do:
 
@@ -88,10 +79,6 @@ There's a lot you can do with survey data in PostHog, such as:
 - Tracking retention and conversion by user preferences 
 - Getting the average, sum, maximum, and minimum values of numerical data
 
-For example, here's a dashboard based on app ratings:
-
-![PostHog Survey Dashboard](../images/tutorials/survey/survey-dashboard.png)
-
-And that's it! 
+And that's it!
 
 You've created a mechanism for getting user feedback with just a few lines of code, no backend, and that integrates seamlessly with the rest of your product data. 

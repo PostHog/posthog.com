@@ -29,7 +29,7 @@ Enter the PostHog Toolbar.
 
 Consider the question: _"Where are my users clicking?"_
 
-![Toolbar landing image](../images/tutorials/toolbar/toolbar-landing-page.png)
+![Toolbar landing image](../images/tutorials/toolbar/posthog-homepage.png)
 
 How's that for an answer?
 
@@ -42,47 +42,41 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment).
 1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. 
 
-> **Note:** Our Toolbar only works with our [JavaScript library](/docs/integrate/client/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
+> **Note:** The toolbar only works with our [JavaScript library](/docs/integrate/client/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
 
-## Why use the toolbar
+## Why use the toolbar?
 
 Before we go right into how to use the PostHog Toolbar, it's useful to understand why you'd want to do so.
 
-Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in its current form, it can:
+Currently, the toolbar lets you: 
 
+1. Inspect any clickable element on a webpage
+1. Create custom Actions based on page elements
+1. Discover the most cliked on elements of a webpage
+1. Highlight elements associated to a custom event / action
+1. View and control active feature flags
 
-1. Display user clicks on your website/web app in a visual way
-1. Tell you what element is the most clicked on a given page
-1. Create actions in a simple way
-1. Display all actions you have on a page (based on frontend elements)
+Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) and to create actions. This helps us to do things like prioritize which parts of our website or product to redesign, as any PostHog user can easily see the potential impact of their work. 
 
-Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) as well as create actions. This helps us to do things like prioritize which parts of our website or product to redesign, as any PostHog user can easily see the potential impact of their work. 
-
-Overall, the toolbar gives valuable context regarding how users are navigating your website or application, helping you design the menus, determine how to display information, and structure your product in a way that steers users towards the actions you would like them to perform.
+Overall, the toolbar offers valuable context on how users are navigating your website or application, helping you design the menus, determine how to display information, and structure your product in a way that steers users towards the actions you would like them to perform.
 
 ## Launching the Toolbar
 
-The PostHog Toolbar will only be enabled for you - not your users. Effectively, the little floating hedgehog will only appear on your website if the current visitor is authenticated into your PostHog instance i.e. this can be you or anyone on your team. 
+The PostHog Toolbar will only be enabled for you – not your users. The little floating hedgehog will only appear if the current visitor is authenticated into your PostHog instance.
 
-To launch the toolbar, you can just access your website and it should appear for you. If that does not work, you can go over to PostHog and click the 'Launch Toolbar' button on the top left of the sidebar:
+To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you launch the toolbar on.
 
-![Launch Toolbar](../images/tutorials/toolbar/launch-toolbar.png)
+## Using the Heatmap
 
-This will prompt you to select the URL you'd like to launch it on (in case you are tracking multiple websites). Once you've clicked the desired URL, you will then be taken to a new tab where your website will load with the toolbar enabled.
-
-<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are a user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
-
-## Using the heatmap
-
-### Step 1: Enabling the heatmap
+### Enabling the heatmap
 
 The heatmap is the most exciting feature of our toolbar. To use it, just hover over the hedgehog, and click on the red fire (🔥) icon. 
 
-The process is the same for toggling any functionality on or off. By default, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
+The process is the same for toggling any functionality on or off.
 
 ![Launch Toolbar](../images/tutorials/toolbar/toolbar-options.png)
 
-### Step 2: Understanding the heatmap
+### Understanding the heatmap
 
 With the heatmap on, you should now see that clickable elements on your website have a red overlay on them, with numbers on small yellow/orange boxes on the top right of each element. The bottom and/or top of your screen might also have these boxes.
 
@@ -100,13 +94,11 @@ With the heatmap enabled, if you then click on an element, you will also be able
 
 ## Creating actions
 
-Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions). 
-
-### Step 1: Using 'Inspect'
-
 When you're on your website with the toolbar enabled, you're able to create actions with just a few clicks.
 
-If you're in PostHog, when you click to create an action, we will also give you the option to 'Inspect element on your site', which makes use of the toolbar.
+Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions).
+
+### Using 'Inspect'
 
 To create an action from an element, toggle on 'Inspect' after hovering over the hedgehog. This is the blue button with the magnifying glass (🔍).
 
