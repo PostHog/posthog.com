@@ -40,7 +40,7 @@ export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
                             <img src={MinusIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
                         )}
                         <span className="text-[15px] ml-2 mr-.5">{feature.name}</span>
-                        <Link href={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
+                        <Link to={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
                             <InfoIcon className="w-4 xl:w-3.5 h-4 xl:h-3.5 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </li>
