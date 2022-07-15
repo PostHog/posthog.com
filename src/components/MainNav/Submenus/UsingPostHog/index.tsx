@@ -28,6 +28,11 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
 
     const resources: ColMenuItems[] = [
         {
+            title: 'Customer stories',
+            description: 'See how PostHog is helping move the needle up and to the right',
+            url: '/customers',
+        },
+        {
             title: 'Marketplace',
             description: 'Companies and products who can help with PostHog',
             url: '/marketplace',
