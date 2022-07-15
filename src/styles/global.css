@@ -359,6 +359,10 @@ ul {
     @apply shadow-none;
 }
 
+.rc-slider.log-slider .rc-slider-tooltip {
+    display: none;
+}
+
 /* Slider base styles */
 .slick-slider {
     position: relative;
