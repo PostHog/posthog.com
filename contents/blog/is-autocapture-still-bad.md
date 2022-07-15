@@ -67,7 +67,7 @@ If security and user privacy are concerns, whether because of HIPAA regulations 
 
 ## So, is autocapture ‘still’ bad?
 
-In Ampltiude’s article, Adam Greco argues that autocapture is bad and that the correct approach is to create an exhaustive list of data to track in advance, then manually tracking those events only. However, this argument overlooks some essential factors. 
+In Ampltiude’s article, Adam Greco argues that autocapture is bad and that the correct approach is to create an exhaustive list of data to track in advance, then manually tracking those events only.
 
 How many of us have perfect foresight and can accurately predict the needs of so many, so far in advance, for example? What opportunities are lost in the meantime? What happens when circumstances change, or someone asks a question you didn’t anticipate? What about fast-moving businesses where the needs of teams are likely to change?
 
