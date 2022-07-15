@@ -19,16 +19,6 @@ Our primary goal is to build and retain our world-class team. We will accomplish
 2. Grow personally and professionally
 3. Have a strong sense of purpose and belonging
 
-## Q3 2022 Goals
-* **Proposed Objective:**
-    * Grow PostHog team by 20% without compromising team happiness or our runway
-* **Proposed Key Results:**
-    * We have offers accepted by a senior product manager, 2x SREs, senior data engineer, developer advocate, and 4x full stack engineer.
-    * We stay within 5% of forecast cash burn. 
-    * Increase survey score for _I see myself still working at PostHog in two years' time _in team survey from 80% to >=85%. 
-* **Rationale:**
-    * Other teams depend on us hiring and retaining exceptional talent. And we need to do that without running out of money or forgetting to keep improving PostHog as a place to work. 
-
 ## Responsibilities
 
 Our people team works across talent, people, operations, and culture. This is what we care about:
@@ -44,15 +34,16 @@ Every PostHog team member, as well as current, future and past candidates.
 
 ## Objectives & Key Results
 
-### Q2 2022
+## Q3 2022 
 
-**Objective:** Find and retain our world class team.
-
-**Key results:**
-- We hire 9 roles on time
-- Engagement from team surveys stays above 80% of [Cultureamp industry benchmarks](https://www.cultureamp.com/science/insights/bay-area)
-- 15% of applicants who convert to first round interviews are from under-represented backgrounds
-- We stay within 5% of forecast cash burn
+* **Proposed Objective:**
+    * Grow PostHog team by 20% without compromising team happiness or our runway
+* **Proposed Key Results:**
+    * We have offers accepted by a senior product manager, 2x SREs, senior data engineer, developer advocate, and 4x full stack engineer.
+    * We stay within 5% of forecast cash burn. 
+    * Increase survey score for _I see myself still working at PostHog in two years' time _in team survey from 80% to >=85%. 
+* **Rationale:**
+    * Other teams depend on us hiring and retaining exceptional talent. And we need to do that without running out of money or forgetting to keep improving PostHog as a place to work. 
 
 ## Slack channels
 
@@ -83,6 +74,8 @@ An operations team is never complete without a robust toolkit to allow us to aut
 
 - If you're managing a large candidate pipeline, an ATS (Applicant Tracking Software) is a must. We use [Workable](https://www.workable.com).
 
+- For managing our US 401(k) we use [Pentegra](https://www.pentegra.com/), which requires a manual [monthly reporting process](https://docs.google.com/document/d/1hgCDpI280xbor75LyGUFmwjr_AVx3n-F57Iz_-YhNaA/edit?usp=sharing). However, we will be exploring more self-serve options in the future as we now have Operations team members in the US who can act as company fiduciaries. We offer up to a 4% on employee contributions.
+
 #### **Finance and Banking**
 
 - Unless you _really_ love Quickbooks, you should outsource this. For the US, we use [Fondo](https://www.tryfondo.com/), who are absolutely fantastic.
@@ -92,6 +85,8 @@ An operations team is never complete without a robust toolkit to allow us to aut
 - For financial planning, headcount planning, and forecasting, check out [Pry](http://pry.co/) who were recently acquired by Brex.
 
 - To manage our cap table, including options grants and exercises, we use [LTSE Equity](https://equity.ltse.com/) who also offer 409a valuation services.
+
+- We stay on top of any state and local tax obligations triggered by employee presence or sales volume using [Anrok](https://anrok.com/), which connects seamlessly and imports sales data from Stripe. They also provide automated support for registering with local tax authorities to automate the remittance process.
 
 #### **Everything Else**
 
