@@ -49,7 +49,7 @@ Adam’s article also raises the point that someone may make changes to your pro
 
 Amplitude’s article suggests that autocapture saves time for product managers because they don’t need to plan which events to track in advance, but it creates more work for analysts who need to deal with the extra information. 
 
-What the article neglects to mention is that the opposite is also true: manual instrumentation saves time for data quality teams, but creates more work for product managers and engineers. 
+But the article neglects to mention the opposite is also true: manual instrumentation saves time for data quality teams, but creates more work for product managers and engineers. 
 
 Manual instrumentation also takes longer to implement initially and can have an opportunity cost when you realize, three months in, that you’re not tracking all the data you need. 
 
