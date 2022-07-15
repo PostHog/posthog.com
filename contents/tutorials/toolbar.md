@@ -13,13 +13,11 @@ date: 2022-07-15
 - **Level:** Easy
 - **Estimated reading time:** 6 minutes_ ☕☕
 
-An underlying purpose of analytics is to answer questions by utilizing data.
+An underlying purpose of analytics is to answer questions by utilizing data:
 
-_"Who's using my website?"_ 
-
-_"What type of people pay for my product?"_
-
-_"Why am I not retaining users?"_
+- _"Who's using my website?"_ 
+- _"What type of people pay for my product?"_
+- _"Why am I not retaining users?"_
 
 Often times, these questions don't have a simple answer, and, more often than not, just getting _any_ answer to your questions requires a good amount of effort. 
 
@@ -33,7 +31,7 @@ Consider the question: _"Where are my users clicking?"_
 
 How's that for an answer?
 
-This tutorial will walk you through using the PostHog Toolbar to answer some of your analytics questions, as well as show you step-by-step how to create actions with it, so that you can sort through your events and level up your PostHog game. 
+This tutorial will walk you through using the PostHog Toolbar to answer some of your analytics questions, and give you step-by-step instructions for creating actions with it, so that you can sort through your events and level up your PostHog game. 
 
 ## Prerequisites
 
@@ -64,7 +62,7 @@ Overall, the toolbar offers valuable context on how users are navigating your we
 
 The PostHog Toolbar will only be enabled for you – not your users. The little floating hedgehog will only appear if the current visitor is authenticated into your PostHog instance.
 
-To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you launch the toolbar on.
+To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you wan to launch the toolbar on.
 
 ## Using the heatmap
 
@@ -86,7 +84,7 @@ Here's another example from our website with the heatmap enabled:
 
 What the toolbar is doing here is displaying the number of clicks on each of those elements over the past 7 days.
 
-You can change date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a new menu where you can select various ranges and a list of the most clicked on elements in descending order.
+You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a new menu where you can select various ranges, and view a list of the most clicked on elements in descending order.
 
 Numbers at the bottom or top of the screen just indicate that there are more elements that are not currently being displayed on the page. 
 
@@ -100,7 +98,7 @@ When you're on your website with the toolbar enabled, you're able to create acti
 
 Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions).
 
-### Using 'Inspect'
+### How to create and action
 
 To create an action from an element, toggle on 'Inspect' after hovering over the hedgehog. This is the blue button with the magnifying glass (🔍).
 
@@ -134,7 +132,7 @@ These are used by PostHog to find the specific element you're creating the actio
 
 - **Page URL:** If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
 
-#### Add another element**
+#### Add another element
 
 If you want your action to cover more than one element, you can click 'Add another element' right above 'Create Action'. 
 
@@ -162,4 +160,4 @@ Additionally, by clicking a specific action on an element, you can update or del
 
 - [How to run Experiments without feature flags](/tutorials/experiments)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
-- [B2B produce metrics 101](/blog/b2b-saas-product-metrics)
+- [B2B product metrics 101](/blog/b2b-saas-product-metrics)
