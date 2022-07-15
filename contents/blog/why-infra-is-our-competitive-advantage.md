@@ -15,7 +15,7 @@ We're hiring more SREs. I think it's worth explaining why I think PostHog is the
 ## Building a product
 
 In most places, with the exception of outages, working in infrastructure means you're working on an invisible part of the company.
-Sure, building out fast CI pipelines and continous deployment makes the rest of the engineering team more productive, but all your competitors do this too.
+Sure, building out fast CI pipelines and continuous deployment makes the rest of the engineering team more productive, but all your competitors do this too.
 
 At PostHog, giving people the option to self-host is one of our biggest advantages compared to our competitors.
 That means we treat our self hosted infra like a product.
