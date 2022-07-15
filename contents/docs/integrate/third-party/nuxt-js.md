@@ -46,8 +46,9 @@ import Vue from 'vue'
 
 export default function({ app: { router } }, inject) {
   // Init PostHog
-  posthog.init('POSTHOG_API_KEY', {
-    api_host: 'POSTHOG_HOST',
+  // Remember that since it is a client side plugin, the env variables must be registered in the [nuxt.config file](https://nuxtjs.org/docs/configuration-glossary/configuration-env/)
+  posthog.init(process.env.posthogApiKey, {
+    api_host: process.env.posthogHost,
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })
