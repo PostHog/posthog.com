@@ -10,7 +10,8 @@ topics:
 date: 2022-07-15
 ---
 
-_Estimated reading time: 6 minutes_ ☕☕
+- **Level:** Easy
+- **Estimated reading time:** 6 minutes_ ☕☕
 
 An underlying purpose of analytics is to answer questions by utilizing data.
 
