@@ -3,7 +3,7 @@ title: Running surveys with no backend
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-date: 2021-07-14
+date: 2022-07-15
 featuredImage: ../images/tutorials/banners/surveys.png
 topics: ["configuration"]
 ---
@@ -48,7 +48,7 @@ For most this will mean implementing some simple HTML, like this:
 
 ## 3. Send the data as a PostHog event
 
-Next, you need to determine an event name for the specific survey you are running and capture a PostHog event with that name when the usersubmits the survey (e.g. via a button click).
+Next, you need to determine an event name for the specific survey you are running and capture a PostHog event with that name when the user submits the survey (e.g. via a button click).
 
 Following the example from above, we could do:
 

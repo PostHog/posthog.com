@@ -51,7 +51,7 @@ Currently, the toolbar lets you:
 
 1. Inspect any clickable element on a webpage
 1. Create custom Actions based on page elements
-1. Discover the most cliked on elements of a webpage
+1. Discover the most clicked on elements of a webpage
 1. Highlight elements associated to a custom event / action
 1. View and control active feature flags
 
@@ -65,7 +65,7 @@ The PostHog Toolbar will only be enabled for you – not your users. The little 
 
 To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you launch the toolbar on.
 
-## Using the Heatmap
+## Using the heatmap
 
 ### Enabling the heatmap
 
@@ -129,7 +129,7 @@ These are used by PostHog to find the specific element you're creating the actio
 
 - **Text:** Inner text of the element (if available).
 
-- **Selecto:** Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. This is useful if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
+- **Selector:** Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. This is useful if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
 
 - **Page URL:** If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
 
