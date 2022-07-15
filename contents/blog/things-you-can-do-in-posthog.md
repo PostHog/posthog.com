@@ -159,7 +159,11 @@ Seriously, sometimes it's just useful to spend a whole load of time watching peo
 
 In the Recordings page in PostHog, you can filter all recordings based on cohorts you've already created, or specific events you're interested in. You can also select a date range and a minimum/maximum recording duration. 
 
-Once setup, you're ready to dive in and discover all the odd things users do that you never anticipated, the problems they encounter, and the workarounds they employ. You'll be amazed what you find.  
+Once setup, you're ready to dive in and discover all the odd things users do that you never anticipated, the problems they encounter, and the workarounds they employ.
+
+![twitter quote](../images/blog/things-to-do-in-posthog/twitter-quote.png)
+
+This guy gets it.
 
 ## 14. Build your own app
 
