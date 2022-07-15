@@ -18,6 +18,7 @@ const features = [
     },
     { key: 'sessionRecording', name: 'Session recording', url: 'https://posthog.com/docs/user-guides/recordings' },
     { key: 'featureFlags', name: 'Feature flags', url: 'https://posthog.com/docs/user-guides/feature-flags' },
+    { key: 'groupAnalytics', name: 'Group analytics', url: 'https://posthog.com/docs/user-guides/group-analytics' },
 ] as const
 
 export type LibraryFeaturesProps = {
