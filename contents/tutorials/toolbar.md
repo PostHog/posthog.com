@@ -1,5 +1,5 @@
 ---
-title: Using the PostHog Toolbar to visualize behavior and create actions
+title: "Using the PostHog Toolbar: Visualize behavior and create actions"
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
