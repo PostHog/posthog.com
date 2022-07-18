@@ -789,6 +789,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Libraries",
+                    "url": "/docs/integrate/libraries"
+                },
+                {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
                 },
