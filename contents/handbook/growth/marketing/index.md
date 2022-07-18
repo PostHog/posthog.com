@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our approach is to provide internal Marketing-as-a-Service, aka MaaS. We are an engineering-led company, and believe in product-led, word of mouth growth. The best way marketing can contribute to PostHog's success is to act as a service to our product teams that amplifies the work they are doing.
+Our approach is to provide internal Marketing-as-a-Service, aka MaaS. We are an engineering-led company, and believe in product-led, word of mouth growth. The best way marketing can contribute to PostHog's success is to act as a service to our product teams and amplify the work they are doing.
 
 ## Marketing vision 
 
