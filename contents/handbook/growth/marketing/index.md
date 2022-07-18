@@ -15,7 +15,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-visi
 - **Behaviours**
   - _Acting as a service to the engineering teams_ - we actively engage with engineering teams, find out what they’re working on and partner with them to amplify what they are doing. Engineers don’t like talking to marketing people in most companies. We want our engineers to want to talk to marketing because we provide them with such a great service. 
   - _Word of mouth mindset_ - by IPO, we want to have built a hugely successful company on the basis of this specific type of growth (vs. technical paid ads, or brand/BR for example). 
-  - _Speed_ - we want to be hyper-reactive, low process, and as reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly then iterate. 
+  - _Speed_ - we want to be hyper-reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 - **Tactics**
   - _Content for our ideal customer_ - we delivery genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs, HubSpot are examples of companies who do this brilliantly for their audience. 
   - _Being present at events_ - we want to be known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating written content. 
