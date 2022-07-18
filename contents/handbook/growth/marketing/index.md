@@ -13,7 +13,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-visi
 ### Things we want to be brilliant at
 
 - **Behaviours**
-  - _Acting as a service to the engineering teams_ - actively engaged with engineering teams, finding out what they’re working on then partner with them to amplify what they are doing. Engineers don’t like talking to marketing people in most companies. We want our engineers to want to talk to marketing because we provide them with such a great service. 
+  - _Acting as a service to the engineering teams_ - we actively engage with engineering teams, find out what they’re working on and partner with them to amplify what they are doing. Engineers don’t like talking to marketing people in most companies. We want our engineers to want to talk to marketing because we provide them with such a great service. 
   - _Word of mouth mindset_ - by IPO, we want to have built a hugely successful company on the basis of this specific type of growth (vs. technical paid ads, or brand/BR for example). 
   - _Speed_ - we want to be hyper-reactive, low process, and as reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly then iterate. 
 - **Tactics**
