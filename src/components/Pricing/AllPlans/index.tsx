@@ -10,8 +10,11 @@ interface IPlan {
         event: number
         monthly?: number
     }
-    getStartedURL: string
-    demo: {
+    mainCTA: {
+        title: string
+        url: string
+    }
+    demoCTA?: {
         title: string
         url: string
     }
@@ -24,10 +27,13 @@ const cloudPlans: IPlan[] = [
         pricing: {
             event: 0.000225,
         },
-        getStartedURL: '',
-        demo: {
+        mainCTA: {
+            title: 'Get started',
+            url: 'https://app.posthog.com/signup',
+        },
+        demoCTA: {
             title: 'Join a group demo',
-            url: '',
+            url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
         },
     },
     {
@@ -37,10 +43,13 @@ const cloudPlans: IPlan[] = [
             event: 0.0003,
             monthly: 300,
         },
-        getStartedURL: '',
-        demo: {
+        mainCTA: {
+            title: 'Get in touch',
+            url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+        },
+        demoCTA: {
             title: 'Book a demo',
-            url: '',
+            url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
     },
 ]
@@ -52,10 +61,13 @@ const selfHostPlans: IPlan[] = [
         pricing: {
             event: 0.0003,
         },
-        getStartedURL: '',
-        demo: {
-            title: 'Book a demo',
-            url: '',
+        mainCTA: {
+            title: 'Deploy now',
+            url: '/signup/self-host/deploy',
+        },
+        demoCTA: {
+            title: 'Join a group demo',
+            url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
         },
     },
     {
@@ -65,10 +77,13 @@ const selfHostPlans: IPlan[] = [
             event: 0.00045,
             monthly: 450,
         },
-        getStartedURL: '',
-        demo: {
+        mainCTA: {
+            title: 'Get in touch',
+            url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
+        },
+        demoCTA: {
             title: 'Book a demo',
-            url: '',
+            url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
     },
 ]
@@ -94,16 +109,18 @@ const Plan = (plan: IPlan) => {
                     </span>
                 </p>
             </div>
-            <CallToAction type="primary" width="full" className="shadow-md" to={plan.getStartedURL}>
-                Get started
+            <CallToAction type="primary" width="full" className="shadow-md" to={plan.mainCTA.url}>
+                {plan.mainCTA.title}
             </CallToAction>
-            <CallToAction
-                className="bg-white !border border-gray-accent-light text-black mt-3 shadow-md"
-                width="full"
-                to={plan.demo.url}
-            >
-                {plan.demo.title}
-            </CallToAction>
+            {plan.demoCTA && (
+                <CallToAction
+                    className="bg-white !border border-gray-accent-light !text-black mt-3 shadow-md"
+                    width="full"
+                    to={plan.demoCTA?.url}
+                >
+                    {plan.demoCTA?.title}
+                </CallToAction>
+            )}
         </li>
     )
 }

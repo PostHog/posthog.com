@@ -31,7 +31,7 @@ const Button = ({
 }) => {
     return (
         <button
-            className={`text-base font-bold flex items-center w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
+            className={`text-base font-bold flex items-center flex-grow sm:flex-grow-0 sm:w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
                 active ? 'border-red' : 'border-white'
             } border-[2.5px] transition-colors`}
             onClick={onClick}
@@ -156,7 +156,7 @@ const PricingNew = (): JSX.Element => {
                             analytics, feature flags, and session recordings.
                         </p>
                         <Link
-                            className="p-2 max-w-[250px] bg-primary flex items-center justify-center space-x-4 rounded-sm text-white text-[15px] font-bold"
+                            className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold"
                             to="https://github.com/PostHog/posthog"
                         >
                             <GitHub />

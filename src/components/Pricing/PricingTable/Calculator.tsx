@@ -1,7 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import { CLOUD_MINIMUM_PRICING, CLOUD_ENTERPRISE_MINIMUM_PRICING } from '../constants'
+import { CLOUD_MINIMUM_PRICING, CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
@@ -13,6 +13,14 @@ interface IPricingOptions {
     badge: string
     breakdown?: number[]
     icon: React.ReactNode
+    mainCTA: {
+        title: string
+        url: string
+    }
+    demoCTA?: {
+        title: string
+        url: string
+    }
 }
 
 interface IconProps {
@@ -73,6 +81,14 @@ const cloudOptions = {
     badge: 'Self-serve',
     breakdown: [0, 0.000225, 0.000075, 0.000025],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
+    mainCTA: {
+        title: 'Get started',
+        url: 'https://app.posthog.com/signup',
+    },
+    demoCTA: {
+        title: 'Join a group demo',
+        url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
+    },
 }
 
 const cloudEnterpriseOptions = {
@@ -81,6 +97,14 @@ const cloudEnterpriseOptions = {
     badge: 'Enterprise',
     breakdown: [300, 0.0003, 0.0001, 0.00003, 0.000006],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
+    mainCTA: {
+        title: 'Get in touch',
+        url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+    },
+    demoCTA: {
+        title: 'Book a demo',
+        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+    },
 }
 
 const selfHostedOptions = {
@@ -88,6 +112,14 @@ const selfHostedOptions = {
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Self serve',
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
+    mainCTA: {
+        title: 'Deploy now',
+        url: '/signup/self-host/deploy',
+    },
+    demoCTA: {
+        title: 'Join a group demo',
+        url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
+    },
 }
 
 const selfHostedEnterpriseOptions = {
@@ -96,6 +128,14 @@ const selfHostedEnterpriseOptions = {
     badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
+    mainCTA: {
+        title: 'Get in touch',
+        url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
+    },
+    demoCTA: {
+        title: 'Book a demo',
+        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+    },
 }
 
 export default function Calculator({ selfHost, enterprise }: { selfHost: boolean; enterprise: boolean }) {
@@ -104,7 +144,11 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
     const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
     const monthlyMinimumPrice = (
-        !selfHost && enterprise ? CLOUD_ENTERPRISE_MINIMUM_PRICING : CLOUD_MINIMUM_PRICING
+        !selfHost && enterprise
+            ? CLOUD_ENTERPRISE_MINIMUM_PRICING
+            : selfHost && enterprise
+            ? ENTERPRISE_MINIMUM_PRICING
+            : CLOUD_MINIMUM_PRICING
     ).toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -214,15 +258,18 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     </p>
                 </div>
                 <div className="mt-7">
-                    <CallToAction type="primary" width="full" className="shadow-md">
-                        Get started
+                    <CallToAction type="primary" width="full" className="shadow-md" to={optionDetails?.mainCTA.url}>
+                        {optionDetails?.mainCTA.title}
                     </CallToAction>
-                    <CallToAction
-                        className="bg-white !border border-gray-accent text-black mt-3 shadow-md"
-                        width="full"
-                    >
-                        Join a group demo
-                    </CallToAction>
+                    {optionDetails?.demoCTA && (
+                        <CallToAction
+                            to={optionDetails?.demoCTA?.url}
+                            className="bg-white !border border-gray-accent !text-black mt-3 shadow-md"
+                            width="full"
+                        >
+                            {optionDetails?.demoCTA?.title}
+                        </CallToAction>
+                    )}
                 </div>
             </div>
         </motion.div>
