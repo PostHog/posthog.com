@@ -1,17 +1,24 @@
 import { CallToAction } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import { CLOUD_MINIMUM_PRICING, CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
+import {
+    CLOUD_MINIMUM_PRICING,
+    CLOUD_ENTERPRISE_MINIMUM_PRICING,
+    ENTERPRISE_MINIMUM_PRICING,
+    SCALE_MINIMUM_PRICING,
+} from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 
 interface IPricingOptions {
+    minimumPrice: number
     title: string
     subtitle: string
     badge: string
     breakdown?: number[]
+    breakdownLabels?: string[]
     icon: React.ReactNode
     mainCTA: {
         title: string
@@ -76,6 +83,7 @@ const breakdownLabels = [
 ]
 
 const cloudOptions = {
+    minimumPrice: CLOUD_MINIMUM_PRICING,
     title: 'PostHog Cloud',
     subtitle: 'Turnkey, hosted by PostHog',
     badge: 'Self-serve',
@@ -92,6 +100,7 @@ const cloudOptions = {
 }
 
 const cloudEnterpriseOptions = {
+    minimumPrice: CLOUD_ENTERPRISE_MINIMUM_PRICING,
     title: 'PostHog Cloud',
     subtitle: 'Managed & supported by PostHog',
     badge: 'Enterprise',
@@ -108,9 +117,19 @@ const cloudEnterpriseOptions = {
 }
 
 const selfHostedOptions = {
+    minimumPrice: SCALE_MINIMUM_PRICING,
     title: 'PostHog Self-hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Self serve',
+    breakdown: [0, 0.00045, 0.000225, 0.000045, 0.000009, 0.000003],
+    breakdownLabels: [
+        'First 1 million',
+        '1-2 million',
+        '2-10 million',
+        '10-100 million',
+        '100 million - 1 billion',
+        'More than 1 billion',
+    ],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Deploy now',
@@ -123,13 +142,14 @@ const selfHostedOptions = {
 }
 
 const selfHostedEnterpriseOptions = {
+    minimumPrice: ENTERPRISE_MINIMUM_PRICING,
     title: 'PostHog Self-hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
-        title: 'Get in touch',
+        title: 'Get started',
         url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
     },
     demoCTA: {
@@ -143,18 +163,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
     const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
-    const monthlyMinimumPrice = (
-        !selfHost && enterprise
-            ? CLOUD_ENTERPRISE_MINIMUM_PRICING
-            : selfHost && enterprise
-            ? ENTERPRISE_MINIMUM_PRICING
-            : CLOUD_MINIMUM_PRICING
-    ).toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-    })
+    const monthlyMinimumPrice =
+        optionDetails &&
+        optionDetails.minimumPrice.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        })
 
     const { setPricingOption, setSliderValue } = useActions(pricingSliderLogic)
 
@@ -175,9 +191,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         }
         if (selfHost && !enterprise) {
             optionDetails = selfHostedOptions
-        } else {
-            setPricingOption(pricingOption)
+            pricingOption = 'scale'
         }
+        setPricingOption(pricingOption)
         setOptionDetails(optionDetails)
     }, [selfHost, enterprise])
 
@@ -214,7 +230,11 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     </p>
                 </div>
                 <div className="mb-12">
-                    <PricingSlider />
+                    <PricingSlider
+                        marks={[1000000, 10000000, 100000000, 1000000000, 10000000000]}
+                        min={1000000}
+                        max={10000000000}
+                    />
                 </div>
                 {breakdown && (
                     <>
@@ -225,7 +245,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
-                                        <p className="text-[14px] font-medium m-0">{breakdownLabels[index]}</p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {(optionDetails?.breakdownLabels || breakdownLabels)[index]}
+                                        </p>
                                         <p className="text-[14px] font-medium m-0">${price}</p>
                                     </li>
                                 )
@@ -239,9 +261,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         </button>
                         <div className="flex items-center space-x-2 justify-between my-4 pb-2 border-b border-gray-accent-light border-dashed">
                             <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                            <p className="text-[15px] font-bold m-0">
-                                {selfHost && !enterprise ? '$0' : monthlyMinimumPrice}
-                            </p>
+                            <p className="text-[15px] font-bold m-0">{monthlyMinimumPrice}</p>
                         </div>
                     </>
                 )}
@@ -249,11 +269,13 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     <h4 className="text-base m-0 font-bold leading-tight">
                         Estimated price
                         <br />
-                        <span className="text-[13px] opacity-60 font-semibold">for 1 million events</span>
+                        <span className="text-[13px] opacity-60 font-semibold">
+                            for {prettyInt(sliderCurve(sliderValue))} events
+                        </span>
                         <span className="text-[12px] font-medium opacity-50">/mo</span>
                     </h4>
                     <p className="text[20px] font-bold">
-                        ${selfHost && !enterprise ? 0 : finalMonthlyCost}
+                        ${finalMonthlyCost}
                         <span className="font-medium text-[15px] opacity-50">/mo</span>
                     </p>
                 </div>

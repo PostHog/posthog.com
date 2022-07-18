@@ -1,9 +1,7 @@
 import React from 'react'
-import { useActions, useValues } from 'kea'
+import { useActions } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
-import { Input } from 'antd'
-import { CallToAction } from 'components/CallToAction'
 
 interface PricingSliderProps {
     marks?: number[]
