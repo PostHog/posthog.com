@@ -92,7 +92,7 @@ const Plan = (plan: IPlan) => {
     return (
         <li>
             <h4 className="m-0 text-lg">{plan.title}</h4>
-            <p className="m-0 text-black/50 font-medium">{plan.description}</p>
+            <p className="m-0 text-black/50 font-medium text-[14px]">{plan.description}</p>
             <div className="my-7">
                 <h5 className="text-[15px] opacity-50 m-0 font-medium">Pricing</h5>
                 <p className="m-0">
@@ -142,7 +142,7 @@ const PlanSection = ({
                 <Icon className="opacity-30 w-[36px] mr-2" />
                 <div>
                     <h3 className="m-0 text-lg">{title}</h3>
-                    <p className="m-0 text-black/50 font-medium">{subtitle}</p>
+                    <p className="m-0 text-black/50 font-medium text-[14px]">{subtitle}</p>
                 </div>
             </div>
             <ul className="list-none grid sm:grid-cols-2 m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 mt-5 pt-9 border-gray-accent-light border-dashed border-t">
@@ -159,7 +159,7 @@ export default function AllPlans() {
     return (
         <>
             <div className="flex">
-                <div className="grow-0 shrink-0 basis-[150px]">Hello</div>
+                <div className="grow-0 shrink-0 basis-[180px] transition-all">Sup.</div>
                 <div className="flex-1 grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 mt-9">
                     <PlanSection
                         title="PostHog Cloud"
@@ -179,7 +179,7 @@ export default function AllPlans() {
                 {showComparison && <PlanComparison />}
                 <button
                     onClick={() => setShowComparison(!showComparison)}
-                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm ml-[150px]"
+                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm ml-[180px]"
                 >
                     {showComparison ? 'Hide' : 'Show'} full comparison
                 </button>

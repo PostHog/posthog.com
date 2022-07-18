@@ -6,25 +6,7 @@ import './styles/index.scss'
 
 const tiers = [
     {
-        name: 'Open source',
-        href: '#',
-        priceMonthly: 29,
-        description: 'Quis eleifend a tincidunt pellentesque. A tempor in sed.',
-    },
-    {
-        name: 'Scale',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
-        name: 'Enterprise',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
-        name: 'Cloud',
+        name: 'Cloud Self-serve',
         href: '#',
         priceMonthly: 9,
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
@@ -35,6 +17,18 @@ const tiers = [
         priceMonthly: 9,
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
+    {
+        name: 'Self-host Self-serve',
+        href: '#',
+        priceMonthly: 59,
+        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
+    },
+    {
+        name: 'Self-host Enterprise',
+        href: '#',
+        priceMonthly: 59,
+        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
+    },
 ]
 const sections = [
     {
@@ -42,20 +36,23 @@ const sections = [
             {
                 name: 'Plan benefits',
                 tiers: {
-                    Cloud: 'Scales as needed, Constant price',
+                    'Cloud Self-serve': 'Scales as needed, Constant price',
                     'Cloud Enterprise': 'Advanced permissioning and SSO Integration, priority support',
                     'Open source': 'Great for small teams',
-                    Scale: 'Power analytics features, basic permissioning',
-                    Enterprise: 'Advanced permissioning and SSO Integration, priority support',
+                    'Self-host Self-serve': 'Power analytics features, basic permissioning',
+                    'Self-host Enterprise': 'Advanced permissioning and SSO Integration, priority support',
                 },
             },
             {
                 name: 'Pricing',
                 tiers: {
-                    Cloud: 'Free (up to 1 million events), then $0.000225/event to $0.000025/event depending on volume (see calculator)',
+                    'Cloud Self-serve':
+                        'Free (up to 1 million events), then $0.000225/event to $0.000025/event depending on volume (see calculator)',
                     'Open source': 'Free',
-                    Scale: 'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
-                    Enterprise: '$4,500/mo for the first 10 million events, tiered pricing after (see calculator)',
+                    'Self-host Self-serve':
+                        'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
+                    'Self-host Enterprise':
+                        '$4,500/mo for the first 10 million events, tiered pricing after (see calculator)',
                     'Cloud Enterprise':
                         '$3,000/mo for the first 10 million events, tiered pricing after (see calculator)',
                 },
@@ -63,10 +60,10 @@ const sections = [
             {
                 name: 'Scales to...',
                 tiers: {
-                    Cloud: 'Millions of users/mo',
+                    'Cloud Self-serve': 'Millions of users/mo',
                     'Open source': '~100k users/mo (no hard limit, but we recommend support beyond this)',
-                    Scale: 'Millions of users/mo',
-                    Enterprise: 'Millions of users/mo',
+                    'Self-host Self-serve': 'Millions of users/mo',
+                    'Self-host Enterprise': 'Millions of users/mo',
                     'Cloud Enterprise': 'Millions of users/mo',
                 },
             },
@@ -77,29 +74,41 @@ const sections = [
         features: [
             {
                 name: 'Hosting',
-                tiers: { Cloud: true, 'Open source': false, Scale: false, Enterprise: false, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': false,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Initial setup',
                 tiers: {
-                    Cloud: 'Instant',
+                    'Cloud Self-serve': 'Instant',
                     'Open source': 'Instant',
-                    Scale: '1-3 days',
-                    Enterprise: '1-3 days',
+                    'Self-host Self-serve': '1-3 days',
+                    'Self-host Enterprise': '1-3 days',
                     'Cloud Enterprise': 'Instant',
                 },
             },
             {
                 name: 'Server management',
                 tiers: {
-                    Cloud: 'Managed by PostHog',
+                    'Cloud Self-serve': 'Managed by PostHog',
                     'Open source': 'Managed by you',
-                    Scale: 'We help you manage',
-                    Enterprise: 'We help you manage',
+                    'Self-host Self-serve': 'We help you manage',
+                    'Self-host Enterprise': 'We help you manage',
                     'Cloud Enterprise': 'Managed by PostHog',
                 },
             },
@@ -108,8 +117,8 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': false,
                     'Open source': true,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                 },
             },
         ],
@@ -120,40 +129,40 @@ const sections = [
             {
                 name: 'Events',
                 tiers: {
-                    Cloud: 'Unlimited',
+                    'Cloud Self-serve': 'Unlimited',
                     'Open source': 'Unlimited',
-                    Scale: 'Unlimited',
-                    Enterprise: 'Unlimited',
+                    'Self-host Self-serve': 'Unlimited',
+                    'Self-host Enterprise': 'Unlimited',
                     'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'Tracked users',
                 tiers: {
-                    Cloud: 'Unlimited',
+                    'Cloud Self-serve': 'Unlimited',
                     'Open source': '~1m (with default config)',
-                    Scale: 'Unlimited',
-                    Enterprise: 'Unlimited',
+                    'Self-host Self-serve': 'Unlimited',
+                    'Self-host Enterprise': 'Unlimited',
                     'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'Projects',
                 tiers: {
-                    Cloud: 'Multiple',
+                    'Cloud Self-serve': 'Multiple',
                     'Open source': '1',
-                    Scale: 'Multiple',
-                    Enterprise: 'Multiple',
+                    'Self-host Self-serve': 'Multiple',
+                    'Self-host Enterprise': 'Multiple',
                     'Cloud Enterprise': 'Multiple',
                 },
             },
             {
                 name: 'Data retention',
                 tiers: {
-                    Cloud: '7 years',
+                    'Cloud Self-serve': '7 years',
                     'Open source': 'Unlimited',
-                    Scale: 'Unlimited',
-                    Enterprise: 'Unlimited',
+                    'Self-host Self-serve': 'Unlimited',
+                    'Self-host Enterprise': 'Unlimited',
                     'Cloud Enterprise': '7 years',
                 },
             },
@@ -164,27 +173,57 @@ const sections = [
         features: [
             {
                 name: 'Analytics suite',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Recordings',
                 docsLink: 'docs/user-guides/recordings',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Feature Flags',
                 docsLink: 'docs/user-guides/feature-flags',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Experimentation',
                 docsLink: 'docs/user-guides/experimentation',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Apps',
                 docsLink: 'docs/apps',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
         ],
     },
@@ -194,30 +233,66 @@ const sections = [
             {
                 name: 'Correlation Analysis',
                 docsLink: 'docs/user-guides/correlation',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Group Analytics',
                 docsLink: 'docs/user-guides/group-analytics',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Multivariate testing',
                 docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Advanced Paths',
                 docsLink: 'docs/user-guides/paths',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Event & properties taxonomy',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Dashboard tagging',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
         ],
     },
@@ -227,58 +302,94 @@ const sections = [
             {
                 name: 'Team members',
                 tiers: {
-                    Cloud: 'Unlimited',
+                    'Cloud Self-serve': 'Unlimited',
                     'Open source': 'Unlimited',
-                    Scale: 'Unlimited',
-                    Enterprise: 'Unlimited',
+                    'Self-host Self-serve': 'Unlimited',
+                    'Self-host Enterprise': 'Unlimited',
                     'Cloud Enterprise': 'Unlimited',
                 },
             },
             {
                 name: 'SSO/SAML',
                 docsLink: 'docs/user-guides/sso',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'API access',
                 docsLink: 'docs/api',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'User permissions',
                 docsLink: 'docs/user-guides/organizations-and-projects#permissions',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Advanced user permissions',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Private projects',
                 docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Ad blocker-resistant',
-                tiers: { Cloud: false, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': false },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': false,
+                },
             },
             {
                 name: 'Backup configuration',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
             {
                 name: 'Proactive security patch alerting',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
@@ -290,22 +401,46 @@ const sections = [
             {
                 name: 'Slack',
                 docsLink: 'docs/integrate/webhooks/slack#4-add-to-action',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Microsoft Teams',
                 docsLink: 'docs/integrate/webhooks/microsoft-teams',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Discord',
                 docsLink: 'docs/integrate/webhooks/discord',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Zapier',
                 docsLink: 'https://zapier.com/apps/posthog/integrations',
-                tiers: { Cloud: true, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
         ],
     },
@@ -315,101 +450,131 @@ const sections = [
             {
                 name: 'Slack (community)',
                 docsLink: 'slack',
-                tiers: { Cloud: true, 'Open source': true, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Slack (dedicated channel)',
                 tiers: {
-                    Cloud: '$10k/month spend or above',
+                    'Cloud Self-serve': '$10k/month spend or above',
                     'Open source': false,
-                    Scale: '$10k/month spend or above',
-                    Enterprise: true,
+                    'Self-host Self-serve': '$10k/month spend or above',
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': true,
                 },
             },
             {
                 name: 'Email',
                 tiers: {
-                    Cloud: '$10k/month spend or above',
+                    'Cloud Self-serve': '$10k/month spend or above',
                     'Open source': false,
-                    Scale: '$10k/month spend or above',
-                    Enterprise: true,
+                    'Self-host Self-serve': '$10k/month spend or above',
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': true,
                 },
             },
             {
                 name: 'Account manager',
-                tiers: { Cloud: false, 'Open source': false, Scale: true, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Training sessions',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Deployment developer pairing',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: '$10k/month spend or above',
-                    Enterprise: true,
+                    'Self-host Self-serve': '$10k/month spend or above',
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
             {
                 name: 'Dashboard configuration support',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Monitoring configuration support',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
             {
                 name: 'Remote monitoring',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
             {
                 name: 'Terms and conditions',
                 tiers: {
-                    Cloud: 'Standard',
+                    'Cloud Self-serve': 'Standard',
                     'Open source': 'MIT Licence',
-                    Scale: 'Standard',
-                    Enterprise: 'Bespoke',
+                    'Self-host Self-serve': 'Standard',
+                    'Self-host Enterprise': 'Bespoke',
                     'Cloud Enterprise': 'Bespoke',
                 },
             },
             {
                 name: 'Security assessment',
                 tiers: {
-                    Cloud: 'Standard assessment provided',
+                    'Cloud Self-serve': 'Standard assessment provided',
                     'Open source': 'Standard assessment provided',
-                    Scale: 'Standard assessment provided',
-                    Enterprise: true,
+                    'Self-host Self-serve': 'Standard assessment provided',
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': 'Standard assessment provided',
                 },
             },
             {
                 name: 'Bespoke pricing',
-                tiers: { Cloud: false, 'Open source': false, Scale: false, Enterprise: true, 'Cloud Enterprise': true },
+                tiers: {
+                    'Cloud Self-serve': false,
+                    'Open source': false,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
+                },
             },
             {
                 name: 'Payment via invoicing',
                 tiers: {
-                    Cloud: false,
+                    'Cloud Self-serve': false,
                     'Open source': false,
-                    Scale: '$2k/month spend or above',
-                    Enterprise: true,
+                    'Self-host Self-serve': '$2k/month spend or above',
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': true,
                 },
             },
@@ -418,8 +583,8 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': false,
                     'Open source': false,
-                    Scale: false,
-                    Enterprise: true,
+                    'Self-host Self-serve': false,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': false,
                 },
             },
@@ -428,8 +593,8 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': false,
                     'Open source': false,
-                    Scale: true,
-                    Enterprise: true,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
                     'Cloud Enterprise': true,
                 },
             },
@@ -565,19 +730,8 @@ export const PlanComparison = ({ className = '' }) => {
                         <caption className="sr-only">Pricing plan comparison</caption>
                         <thead>
                             <tr>
-                                <th style={{ border: 0 }} className="text-almost-black">
-                                    &nbsp;
-                                </th>
-                                <th colSpan="3" className="text-almost-black border-white/10">
-                                    Self-hosted options
-                                </th>
-                                <th colSpan="2" className="text-almost-black border-white/10">
-                                    Hosted solutions
-                                </th>
-                            </tr>
-                            <tr>
                                 <th
-                                    className="pb-4 px-6 text-sm font-medium text-almost-black border-white/10 sticky top-0  w-[150px] z-10 bg-opacity-50"
+                                    className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[180px] z-10 bg-opacity-50"
                                     scope="col"
                                 >
                                     <span className="sr-only">Feature by</span>
@@ -586,7 +740,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="pb-2 px-6 leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75 w-[150px]"
+                                        className="py-2 px-3 text-[14px] leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -647,7 +801,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     {section.features.map((feature) => (
                                         <tr key={feature.name}>
                                             <th
-                                                className="py-5 px-6 text-sm font-normal text-almost-black text-left border-white/10"
+                                                className="py-2 px-3 text-xs font-medium text-almost-black text-left border-white/10 w-[180px]"
                                                 scope="row"
                                             >
                                                 {typeof feature.docsLink === 'string' ? (
@@ -657,9 +811,9 @@ export const PlanComparison = ({ className = '' }) => {
                                                 )}
                                             </th>
                                             {tiers.map((tier) => (
-                                                <td key={tier.name} className="py-5 px-6 border-white/10">
+                                                <td key={tier.name} className="py-2 px-3 border-white/10 text-xs">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-almost-black text-opacity-75">
+                                                        <span className="block text-xs text-almost-black text-opacity-75">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (
@@ -668,18 +822,14 @@ export const PlanComparison = ({ className = '' }) => {
                                                                 <img
                                                                     src={CheckIcon}
                                                                     alt="Checked"
-                                                                    width="18"
-                                                                    height="18"
-                                                                    className="m-auto h-5 w-5 text-green-500"
+                                                                    className="h-4 w-4 text-green-500"
                                                                     aria-hidden="true"
                                                                 />
                                                             ) : (
                                                                 <img
                                                                     src={MinusIcon}
                                                                     alt="Checked"
-                                                                    width="18"
-                                                                    height="18"
-                                                                    className="m-auto h-5 w-5 text-red-500"
+                                                                    className="h-4 w-4 text-red-500"
                                                                     aria-hidden="true"
                                                                 />
                                                             )}
