@@ -17,7 +17,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-visi
   - _Word of mouth mindset_ - by IPO, we want to have built a hugely successful company on the basis of this specific type of growth (vs. technical paid ads, or brand/BR for example). 
   - _Speed_ - we want to be hyper-reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 - **Tactics**
-  - _Content for our ideal customer_ - we delivery genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs, HubSpot are examples of companies who do this brilliantly for their audience. 
+  - _Content for our ideal customer_ - we deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience. 
   - _Being present at events_ - we want to be known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating written content. 
   - _Being really cool and interesting people in online communities_ - we could do a lot more of this in relevant communities in Slack/Discord/StackOverflow etc, and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall we want to be a net contributor to those communities.
 
