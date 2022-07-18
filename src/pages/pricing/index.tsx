@@ -36,7 +36,7 @@ const Button = ({
 }) => {
     return (
         <button
-            className={`text-base font-bold flex items-center w-[186px] justify-between px-[16px] py-[12px] bg-white rounded-sm ${
+            className={`text-base font-bold flex items-center w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
                 active ? 'border-red' : 'border-white'
             } border-[2.5px] transition-colors`}
             onClick={onClick}
@@ -44,7 +44,7 @@ const Button = ({
             <span>{children}</span>
 
             <svg
-                className={`${active ? 'opacity-100' : 'opacity-0'} transition-opacity`}
+                className={`${active ? 'opacity-100' : 'opacity-0'} transition-none`}
                 width="18"
                 height="14"
                 viewBox="0 0 18 14"
@@ -91,22 +91,25 @@ const PricingNew = (): JSX.Element => {
                 <div className="border-y border-gray-accent-light border-dashed py-6">
                     <div className={section}>
                         <h3 className="m-0 text-lg">
-                            Pricing starts at $0.000225
-                            <span className="text-base font-medium text-black/50 ">/event</span> and is discounted up to
-                            90% for large event volumes.
+                            Pricing starts at <span className="font-black">$0.000225</span>
+                            <span className="text-sm font-semibold text-black/50">/event</span> and is discounted{' '}
+                            <span className="font-black">up to 90%</span> for large event volumes.
                         </h3>
                         <p className="m-0 text-[14px] font-bold text-black/50">
-                            Need help <Link className="font-bold">estimating your event volume?</Link>
+                            Need help{' '}
+                            <Link to="/blog/calculating-events-from-users" className="font-bold">
+                                estimating your event volume?
+                            </Link>
                         </p>
                     </div>
                 </div>
             </section>
             <section className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0`}>
                 <div>
-                    <h2 className="text-xl m-0 mb-6 md:mb-10">Calculate your monthly price</h2>
+                    <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
                     <div>
-                        <h3 className="m-0 text-lg">Do you need to self-host?</h3>
-                        <p className="m-0 text-black/50 font-medium">
+                        <h3 className="m-0 mb-1 text-[18px]">Do you need to self-host?</h3>
+                        <p className="m-0 text-black/50 font-medium text-sm">
                             Customer data never leaves your infrastructure or private cloud.
                         </p>
                         <div className="flex space-x-3 mt-3">
@@ -117,8 +120,8 @@ const PricingNew = (): JSX.Element => {
                                 No
                             </Button>
                         </div>
-                        <h3 className="m-0 text-lg mt-9">Are you an enterprise?</h3>
-                        <p className="m-0 text-black/50 font-medium">
+                        <h3 className="m-0 mb-1 text-[18px] mt-9">Are you an enterprise?</h3>
+                        <p className="m-0 text-black/50 font-medium text-sm">
                             Advanced permissioning, proactive support, training, SSO/SAML & more
                         </p>
                         <div className="flex space-x-3 mt-3">
