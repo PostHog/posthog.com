@@ -69,31 +69,31 @@ const breakdownLabels = [
 
 const cloudOptions = {
     title: 'PostHog Cloud',
-    subtitle: 'Turnkey, hosted & managed by PostHog',
+    subtitle: 'Turnkey, hosted by PostHog',
     badge: 'Self-serve',
     breakdown: [0, 0.000225, 0.000075, 0.000025],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
 }
 
 const cloudEnterpriseOptions = {
-    title: 'PostHog Cloud Enterprise',
-    subtitle: 'Turnkey, hosted solution with added benefits',
-    badge: 'Includes Cloud features',
+    title: 'PostHog Cloud',
+    subtitle: 'Managed & supported by PostHog',
+    badge: 'Enterprise',
     breakdown: [300, 0.0003, 0.0001, 0.00003, 0.000006],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
 }
 
-const openSourceOptions = {
-    title: 'Open Source',
-    subtitle: 'Great for startups',
-    badge: 'Limited to 1 project',
+const selfHostedOptions = {
+    title: 'PostHog Self-hosted',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Self serve',
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
 }
 
-const openSourceEnterpriseOptions = {
-    title: 'Open Source Enterprise',
-    subtitle: 'Your IT & legal teams will be very pleased',
-    badge: 'Includes open source features',
+const selfHostedEnterpriseOptions = {
+    title: 'PostHog Self-hosted',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
 }
@@ -118,7 +118,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         let optionDetails
         let pricingOption
         if (selfHost && enterprise) {
-            optionDetails = openSourceEnterpriseOptions
+            optionDetails = selfHostedEnterpriseOptions
             pricingOption = 'enterprise'
         }
         if (!selfHost && enterprise) {
@@ -130,7 +130,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
             pricingOption = 'cloud'
         }
         if (selfHost && !enterprise) {
-            optionDetails = openSourceOptions
+            optionDetails = selfHostedOptions
         } else {
             setPricingOption(pricingOption)
         }
@@ -151,14 +151,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 <span className="inline-block mr-2">{optionDetails?.icon}</span>
                 <div>
                     <div className="flex items-center flex-wrap">
-                        <h3 className="m-0 text-lg mr-2">{optionDetails?.title}</h3>
+                        <h3 className="m-0 text-[18px] font-black mr-2">{optionDetails?.title}</h3>
                         <span
-                            className={`text-[11px] py-1 px-2 rounded-sm border border-primary/50 opacity-50 font-normal leading-none`}
+                            className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
                         >
                             {optionDetails?.badge}
                         </span>
                     </div>
-                    <p className="m-0 text-black/50 font-medium">{optionDetails?.subtitle}</p>
+                    <p className="m-0 text-black/50 font-medium text-xs">{optionDetails?.subtitle}</p>
                 </div>
             </div>
             <div className="mt-5">
@@ -191,7 +191,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                             onClick={() => setShowFullBreakdown(!showFullBreakdown)}
                             className="p-2 w-full font-semibold text-black/50 bg-tan rounded-sm mt-4"
                         >
-                            {showFullBreakdown ? 'Hide' : 'See'} full breakdown
+                            {showFullBreakdown ? 'Hide' : 'Show'} full breakdown
                         </button>
                         <div className="flex items-center space-x-2 justify-between my-4 pb-2 border-b border-gray-accent-light border-dashed">
                             <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
@@ -218,7 +218,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         Get started
                     </CallToAction>
                     <CallToAction
-                        className="bg-white !border border-gray-accent-light text-black mt-3 shadow-md"
+                        className="bg-white !border border-gray-accent text-black mt-3 shadow-md"
                         width="full"
                     >
                         Join a group demo
