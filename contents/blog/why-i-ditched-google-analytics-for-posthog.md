@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
 author: ["colin-wren"]
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Comparisons"]
 ---
 
 _By Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/)._
