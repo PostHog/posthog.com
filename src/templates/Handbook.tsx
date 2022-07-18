@@ -15,12 +15,8 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
-import { shortcodes } from '../../mdxGlobalComponents'
-import DocsLayout from 'components/Docs/Layout'
-import MainSidebar from 'components/Docs/MainSidebar'
-import ArticleFooter from 'components/Docs/Footer'
-import Navigation from 'components/Docs/Navigation'
-import '../../styles/handbook.scss'
+import { shortcodes } from '../mdxGlobalComponents'
+import '../styles/handbook.scss'
 
 const HandbookSidebar = ({ contributors, title, location }) => {
     return (
