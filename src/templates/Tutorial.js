@@ -17,9 +17,9 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import slugify from 'slugify'
-import { CodeBlock } from '../components/CodeBlock'
+import { CodeBlock } from 'components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import MobileSidebar from './Handbook/MobileSidebar'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -87,7 +87,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
     const { pageData } = data
-    const { body, excerpt } = pageData
+    const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
         iframe: Iframe,
@@ -120,7 +120,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <Breadcrumbs
                 crumbs={[

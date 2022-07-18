@@ -21,50 +21,42 @@
             ]
         },
         {
-            "title": "Resources",
-            "children": [
-                {
-                    "title": "Docs",
-                    "url": "/docs"
-                },
-                {
-                    "title": "API",
-                    "url": "/docs/api"
-                },
-                {
-                    "title": "Blog",
-                    "url": "/blog"
-                },
-                {
-                    "title": "Tutorials",
-                    "url": "/tutorials"
-                },
-                {
-                    "title": "User guides",
-                    "url": "/user-guides"
-                }
-            ]
+            "title": "Pricing",
+            "url": "/pricing"
+        },
+        {
+            "title": "Docs",
+            "url": "/docs",
+            "sub": {
+                "component": "Docs"
+            }
+        },
+        {
+            "title": "Using PostHog",
+            "url": "/tutorials",
+            "sub": {
+                "component": "UsingPostHog"
+            }
+        },
+        {
+            "title": "Community",
+            "url": "/questions",
+            "sub": {
+                "component": "Community"
+            }
         },
         {
             "title": "Company",
-            "children": [
-                {
-                    "title": "Our story",
-                    "url": "/handbook/company/story"
-                },
-                {
-                    "title": "Handbook",
-                    "url": "/handbook"
-                },
-                {
-                    "title": "Commmunity",
-                    "url": "/contributors"
-                },
-                {
-                    "title": "Careers",
-                    "url": "/careers"
-                }
-            ]
+            "url": "/handbook/company/story",
+            "sub": {
+                "component": "Company"
+            }
+        },
+        {
+            "title": "Login",
+            "classes": "text-center w-full",
+            "url": "https://app.posthog.com/login",
+            "hideBorder": true
         }
     ]
 }

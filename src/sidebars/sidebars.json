@@ -114,12 +114,12 @@
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "title": "Team App East",
-                            "url": "/handbook/engineering/feature-ownership"
+                            "name": "Team App East",
+                            "url": "/handbook/engineering/app-east"
                         },
                         {
-                            "title": "Team App West",
-                            "url": "/handbook/engineering/feature-ownership"
+                            "name": "Team App West",
+                            "url": "/handbook/engineering/app-west"
                         },
                         {
                             "title": "Team Platform",
@@ -130,7 +130,11 @@
                             "url": "/handbook/people/team-structure/ingestion"
                         },
                         {
-                            "title": "Team Marketing",
+                            "name": "Team Infrastructure",
+                            "url": "/handbook/people/team-structure/infrastructure"
+                        },
+                        {
+                            "name": "Team Marketing",
                             "url": "/handbook/people/team-structure/marketing"
                         },
                         {
@@ -202,28 +206,24 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
-                            "title": "Design hiring",
-                            "url": "/handbook/people/hiring-process/design-hiring"
-                        },
-                        {
-                            "title": "Developer Relations hiring",
-                            "url": "/handbook/people/hiring-process/devrel-hiring"
-                        },
-                        {
-                            "title": "Engineering hiring",
+                            "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
                         {
-                            "title": "Exec hiring",
-                            "url": "/handbook/people/hiring-process/exec-hiring"
-                        },
-                        {
-                            "title": "Marketing hiring",
+                            "name": "Marketing hiring",
                             "url": "/handbook/people/hiring-process/marketing-hiring"
                         },
                         {
                             "title": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
+                        },
+                        {
+                            "name": "Design hiring",
+                            "url": "/handbook/people/hiring-process/design-hiring"
+                        },
+                        {
+                            "name": "Exec hiring",
+                            "url": "/handbook/people/hiring-process/exec-hiring"
                         }
                     ]
                 }
@@ -592,6 +592,10 @@
                                 {
                                     "title": "Deploying ClickHouse using Altinity.Cloud",
                                     "url": "/docs/self-host/configure/using-altinity-cloud"
+                                },
+                                {
+                                    "name": "Configuring Slack",
+                                    "url": "/docs/self-host/configure/slack"
                                 }
                             ]
                         },
@@ -897,7 +901,11 @@
                             "url": "/docs/integrate/third-party/sentry"
                         },
                         {
-                            "title": "Shopify",
+                            "name": "Slack",
+                            "url": "/docs/integrate/third-party/slack"
+                        },
+                        {
+                            "name": "Shopify",
                             "url": "/docs/integrate/third-party/shopify"
                         },
                         {
@@ -1033,6 +1041,14 @@
                 {
                     "title": "Trends",
                     "url": "/docs/user-guides/trends"
+                },
+                {
+                    "name": "Sessions",
+                    "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Subscriptions",
+                    "url": "/docs/user-guides/subscriptions"
                 }
             ]
         },

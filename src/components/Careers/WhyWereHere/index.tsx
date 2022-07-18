@@ -41,7 +41,7 @@ export const WhyWereHere = () => {
                                 <p>
                                     We now have over 10K customers, we're{' '}
                                     <a href="http://www.paulgraham.com/aord.html">default alive</a>, we grow 97% through
-                                    word of mouth, and we've a{' '}
+                                    word of mouth, and we have a{' '}
                                     <a href="https://github.com/posthog/posthog">very popular repo</a>.
                                 </p>
                                 <p>

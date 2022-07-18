@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/discord-tutorial-banner.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-topics: ['plugins', 'zapier']
+topics: ['apps', 'zapier']
 ---
 
 - *Level:* Easy 🦔

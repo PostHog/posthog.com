@@ -8,6 +8,7 @@ import MenuItem from './MenuItem'
 
 export default function MainNav() {
     const [expanded, expandMenu] = useState(false)
+    const [referenceElement, setReferenceElement] = useState(null)
     const menu = data?.navsJson?.main
     const breakpoints = useBreakpoint()
     const variants = {
@@ -15,9 +16,12 @@ export default function MainNav() {
         shown: { height: 'auto' },
     }
     const menuLength = menu.length
-    const halfMenu = Math.floor(menuLength / 2)
+    const halfMenu = Math.floor(menuLength / 2) + 1
     return (
-        <div className="flex justify-between items-center">
+        <div
+            ref={setReferenceElement}
+            className="flex justify-between items-center max-w-screen-2xl mx-auto lg:relative"
+        >
             <Link
                 className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
                 to="/"
@@ -32,9 +36,9 @@ export default function MainNav() {
                     animate="shown"
                 >
                     <div className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl mx-auto">
-                        <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto">
+                        <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full space-x-[1px] lg:w-auto">
                             {menu.slice(0, halfMenu).map((menuItem, index) => {
-                                return <MenuItem key={index} menuItem={menuItem} />
+                                return <MenuItem referenceElement={referenceElement} key={index} menuItem={menuItem} />
                             })}
                         </ul>
                         {!breakpoints.md && (
@@ -47,7 +51,7 @@ export default function MainNav() {
                         )}
                         <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto justify-end">
                             {menu.slice(halfMenu, menu.length).map((menuItem, index) => {
-                                return <MenuItem key={index} menuItem={menuItem} />
+                                return <MenuItem referenceElement={referenceElement} key={index} menuItem={menuItem} />
                             })}
                         </ul>
                     </div>

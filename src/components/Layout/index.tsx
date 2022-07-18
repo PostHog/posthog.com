@@ -8,7 +8,6 @@ import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
-import { GetStartedModal } from '../../components/GetStartedModal'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import SearchBar from '../../templates/Handbook/SearchBar'
 import { Footer } from '../Footer/Footer'
@@ -61,7 +60,6 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
             </div>
 
             <PosthogAnnouncement />
-            <GetStartedModal />
         </>
     )
 }

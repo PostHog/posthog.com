@@ -9,8 +9,6 @@ hideAnchor: true
 
 - **James Hawkins, CEO & Co-founder**
   - **Tim Glaser, CTO & Co-founder**
-    - **Marcus Hyett, VP of Product**
-      - Joe Martin, Product Marketer
     - **Marius Andra, Full Stack Engineer**
       - Alex Kim, Full Stack Engineer
       - Michael Matloka, Full Stack Engineer
@@ -29,6 +27,7 @@ hideAnchor: true
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
     - Coua Phang, Tech Talent Partner
+    - Joe Martin, Product Marketer
   - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer

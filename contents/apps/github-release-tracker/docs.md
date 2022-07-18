@@ -26,7 +26,7 @@ If you want to track releases from a private GitHub repo, you'll also need acces
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Release Tracker](https://github.com/PostHog/currency-normalization-plugin) is available on GitHub. 
+PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Release Tracker](https://github.com/PostHog/github-release-tracking-plugin) is available on GitHub. 
 
 ### Who created this app?
 

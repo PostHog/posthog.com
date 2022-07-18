@@ -37,7 +37,7 @@ There are two ways to estimate your event count. One takes a bit of time but wil
 
 The most accurate way to figure out your event count is to take advantage of our [1 million event per month free tier](/pricing) on PostHog Cloud.
 
-Simply use one of our [libraries](/docs/integrate#libraries) to send your event data to PostHog ([autocapture](/docs/integrate/ingest-live-data#autocapture) is easiest) and check your event usage on the [Billing](https://app.posthog.com/organization/billing) page in the app.
+Simply use one of our [libraries](/docs/integrate#libraries) to send your event data to PostHog ([autocapture](/docs/integrate/ingest-live-data#use-autocapture) is easiest) and check your event usage on the [Billing](https://app.posthog.com/organization/billing) page in the app.
 
 Once you've sent a typical week's worth of data then you can do some multiplication to project your monthly event count. 
 
@@ -55,7 +55,7 @@ This can be a useful starting point, but user interaction patterns vary by type 
 
 * For an infrastructure monitoring product I could be checking it in the morning and then only visiting the app if I'm alerted to a problem, generating events sporadically
 
-Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both.  
+Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both.  
 
 As autocapture generates events for every pageview and click, it can start to get quite noisy, however there are things that can be done to limit that.
 

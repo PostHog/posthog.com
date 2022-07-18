@@ -35,16 +35,18 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    bg-tan/75
+    bg-tan
+    bg-opacity-75
     dark:bg-primary
     text-primary
     text-opacity-80
     hover:text-opacity-100
     dark:text-primary-dark
     hover:text-primary
+    border-opacity-10
     hover:border-opacity-25
     active:border-opacity-50
-    border-primary/10
+    border-primary
     dark:border-primary-dark
 `
 
@@ -61,16 +63,29 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     rounded-sm
     inline-block
     cta
+    relative
+    active:top-[1px]
+    active:scale-[.97]
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
     ${className}
 `
 
-export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
+export const TrackedCTA = ({ event: { name: eventName, ...event }, featureFlag, ...props }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+    const handleClick = () => {
+        posthog?.capture(eventName, { ...event, [`$feature/{feature_flag}`]: featureFlag.response })
+        if (featureFlag) {
+            posthog?.capture('$feature_flag_called', {
+                feature_flag_response: featureFlag.response,
+                feature_flag: featureFlag.name,
+            })
+        }
+    }
+
+    return <CallToAction {...props} onClick={handleClick} />
 }
 
 export const CallToAction = ({

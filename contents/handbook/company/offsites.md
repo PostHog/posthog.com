@@ -44,7 +44,7 @@ Ideas for the agenda:
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
 
 
-The budget for these trips is up to $1,000 per person.
+The budget for these trips is up to $1,500 per person, not including airfare, which we ask team members to use their best judgement for.
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
@@ -61,7 +61,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - It is worth getting people to hold dates as early as possible, even before you've selected a location
 - [ ] Choose location
   - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes or COVID testing requirements
-  - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location
+  - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
+  - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
 - [ ] Announce to team
   - You can have fun with this and build excitement by progressively dropping hints and having folks try to guess the location
@@ -90,7 +91,12 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **6 weeks out**
 
 - [ ] Draft [budget](https://docs.google.com/spreadsheets/d/1ZwDgcoEtDMICtxuozwEfJUHqJH12_E-jyylGQbWCLQQ/edit?usp=sharing)
-  - Using the tentative schedule, you can begin to estimate a rough budget to guide planning
+  - Using the tentative schedule, you can begin to estimate a rough budget to guide planning. Here are some benchmarks to use, however these will vary a lot based on location, size of team, and how cost-constrained you are:
+    - Accommodations = $200/night/person
+    - Intercontinental airfare = $1000/person; intracontinental airfar = $500/person
+    - Ground transportation = $50/day/person
+    - Food & drinks = $50/day/person 
+    - Contingency = 10% of total budget
 - [ ] Secure transportation
   - Book any group transportation like coaches or a rental car ahead of time
 - [ ] Finalize team outings and book as needed

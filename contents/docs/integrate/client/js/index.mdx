@@ -3,6 +3,13 @@ title: JavaScript library
 sidebarTitle: JavaScript
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-js
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: true
+    sessionRecording: true
+    featureFlags: true
 ---
 
 > **Note:** You can just use our [snippet](/docs/integrate/client/snippet-installation) to start capturing events with our JS.
@@ -334,10 +341,10 @@ Some of the most relevant options are:
 
 In this section we describe some additional details on advanced configuration available.
 
-| Attribute                                                                      | Description                                                                                                    |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Attribute                                                                     | Description                                                                                                    |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
-| `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`           | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
+| `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 
 <blockquote class="warning-note">
     These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are
