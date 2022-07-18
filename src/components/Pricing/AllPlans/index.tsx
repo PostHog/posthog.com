@@ -1,7 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { PlanComparison } from '../PlanComparison'
-import { CloudIcon, SelfHostIcon } from '../PricingTable/Calculator'
+import { CloudIcon, SelfHostIcon } from '../Calculator/index'
 
 interface IPlan {
     title: string

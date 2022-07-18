@@ -70,6 +70,7 @@ import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { AllPlans } from './components/Pricing/AllPlans'
+import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
@@ -177,6 +178,7 @@ export const shortcodes = {
     PostCard,
     PostLayout,
     AllPlans,
+    Calculator,
     CloudVsSelfHost,
     FAQs,
     Features,
