@@ -69,31 +69,31 @@ const breakdownLabels = [
 
 const cloudOptions = {
     title: 'PostHog Cloud',
-    subtitle: 'Turnkey, hosted & managed by PostHog',
+    subtitle: 'Turnkey, hosted by PostHog',
     badge: 'Self-serve',
     breakdown: [0, 0.000225, 0.000075, 0.000025],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
 }
 
 const cloudEnterpriseOptions = {
-    title: 'PostHog Cloud Enterprise',
-    subtitle: 'Turnkey, hosted solution with added benefits',
-    badge: 'Includes Cloud features',
+    title: 'PostHog Cloud',
+    subtitle: 'Managed & supported by PostHog',
+    badge: 'Enterprise',
     breakdown: [300, 0.0003, 0.0001, 0.00003, 0.000006],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
 }
 
-const openSourceOptions = {
-    title: 'Open Source',
-    subtitle: 'Great for startups',
-    badge: 'Limited to 1 project',
+const selfHostedOptions = {
+    title: 'PostHog Self-hosted',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Self serve',
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
 }
 
-const openSourceEnterpriseOptions = {
-    title: 'Open Source Enterprise',
-    subtitle: 'Your IT & legal teams will be very pleased',
-    badge: 'Includes open source features',
+const selfHostedEnterpriseOptions = {
+    title: 'PostHog Self-hosted',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
 }
@@ -118,7 +118,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         let optionDetails
         let pricingOption
         if (selfHost && enterprise) {
-            optionDetails = openSourceEnterpriseOptions
+            optionDetails = selfHostedEnterpriseOptions
             pricingOption = 'enterprise'
         }
         if (!selfHost && enterprise) {
@@ -130,7 +130,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
             pricingOption = 'cloud'
         }
         if (selfHost && !enterprise) {
-            optionDetails = openSourceOptions
+            optionDetails = selfHostedOptions
         } else {
             setPricingOption(pricingOption)
         }
