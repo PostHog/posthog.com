@@ -84,7 +84,18 @@ const classes = (type, size = 'lg', className = '') => cntl`
     ${className}
 `
 
-export const Quote = ({ quote, name, title, image, className = '', imageSource, size = 'lg', logo }) => {
+interface Props {
+    quote: string | JSX.Element
+    name: string | JSX.Element
+    title: string | JSX.Element
+    image: JSX.Element
+    className?: string
+    imageSource?: string
+    size?: string
+    logo?: string
+}
+
+export const Quote = ({ quote, name, title, image, className = '', imageSource, size = 'lg', logo }: Props) => {
     return (
         <section className={classes('section', size, className)}>
             {logo && <img src={logo} className="mb-9" />}

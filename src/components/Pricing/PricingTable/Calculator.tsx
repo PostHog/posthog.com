@@ -19,7 +19,7 @@ interface IconProps {
     className?: string
 }
 
-const CloudIcon = ({ className = '' }: IconProps) => {
+export const CloudIcon = ({ className = '' }: IconProps) => {
     return (
         <svg
             className={className}
@@ -39,7 +39,7 @@ const CloudIcon = ({ className = '' }: IconProps) => {
     )
 }
 
-const SelfHostIcon = ({ className = '' }: IconProps) => {
+export const SelfHostIcon = ({ className = '' }: IconProps) => {
     return (
         <svg
             className={className}

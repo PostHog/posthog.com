@@ -423,7 +423,7 @@ export const Twitter = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const GitHub = ({ className }: { className: string }): JSX.Element => {
+export const GitHub = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}

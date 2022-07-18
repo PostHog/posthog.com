@@ -69,6 +69,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
+import { AllPlans } from './components/Pricing/AllPlans'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
@@ -175,6 +176,7 @@ export const shortcodes = {
     PageHeader,
     PostCard,
     PostLayout,
+    AllPlans,
     CloudVsSelfHost,
     FAQs,
     Features,
