@@ -1,5 +1,5 @@
 ---
-title: How Momentum Dash analyzes 2 million active users, with help from Altinity
+title: How Momentum Dash analyzes 2 million users, with help from Altinity
 customer: Momentum Dash
 logo: ../images/customers/momentumdash/momentum_dash_logo.svg
 featuredImage: ../images/customers/momentumdash/featured_momentumdash.jpeg
