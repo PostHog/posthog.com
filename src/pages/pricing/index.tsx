@@ -65,27 +65,28 @@ const PricingNew = (): JSX.Element => {
         <Layout>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
-                <div className={`grid lg:grid-cols-2 mt-12 md:mt-18 lg:gap-x-4 lg:gap-y-0 gap-y-6 ${section}`}>
-                    <div>
+                <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
+                    <div className="lg:order-2">
+                        <StaticImage
+                            alt="The cutest hedgehog you've ever seen driving a red tractor"
+                            src="./images/tractor-hog.png"
+                            className="lg:-mt-4 xl:-mt-12 max-w-screen-sm"
+                        />
+                    </div>
+                    <div className="lg:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl m-0">
                             Pay per tracked event.
                             <br /> Get access to all features.
                         </h1>
-                        <h2 className="text-lg text-blue mt-2">
-                            <span className="text-black/50 m-0">Your first 1 million events are included.</span> Every
-                            month.
+                        <h2 className="text-lg text-blue mt-2 leading-tight">
+                            <span className="text-black/50 m-0">Your first 1 million events are included.</span>{' '}
+                            <span className="inline-block">Every month.</span>
                         </h2>
-                    </div>
-                    <div>
-                        <StaticImage
-                            alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src="./images/tractor-hog.png"
-                        />
                     </div>
                 </div>
                 <div className="border-y border-gray-accent-light border-dashed py-6">
                     <div className={section}>
-                        <h3 className="m-0 text-lg">
+                        <h3 className="m-0 mb-1 text-lg leading-tight">
                             Pricing starts at <span className="font-black">$0.000225</span>
                             <span className="text-sm font-semibold text-black/50">/event</span> and is discounted{' '}
                             <span className="font-black">up to 90%</span> for large event volumes.
