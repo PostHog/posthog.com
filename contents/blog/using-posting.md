@@ -15,11 +15,10 @@ PostHog is a growing platform.
 
 We used to call ourselves a product analytics platform, but product analytics is just one feature [among many](/product) these days.
 
-And that got us wondering... just how many useful things can you do with PostHog?
+And that got us wondering... what are some of the most useful things you can you do with PostHog?
 
 The answer? A lot – and this list is just a snapshot of the possibilities.
 
-Here's the TL;DR:
 
 1. [Replace multiple services with just PostHog](#1-replace-multiple-services-with-just-posthog)
 1. [Build an AARRR pirate metrics dashboard](#2-build-an-aarrr-pirate-metrics-dashboard)
@@ -43,7 +42,6 @@ Here's the TL;DR:
 1. [Connect PagerDuty and PostHog to get threshold alerts](#20-connect-pagerduty-and-posthog-to-get-threshold-alerts) 
 1. [Track support tickets by connecting Zendesk](#21-track-support-tickets-by-connecting-zendesk) 
 
-> Got an idea to add to this article? Share it on the [PostHog website repo](https://github.com/PostHog/posthog.com/issues).
 
 ### 1. Replace multiple services with just PostHog
 
@@ -87,9 +85,11 @@ An e-commerce platform might ask for "users who bought an item in 5 out of the l
 
 ![pineapple on pizza](../images/blog/things-to-do-in-posthog/pinepapple.png)
 
-You can [use PostHog to gather feedback on your product](/tutorials/survey), website, or conduct user polls.
+Because PostHog is all about tracking events, it's easy to create your own simple feedback interfaces and analyse the results in PostHog.
 
 On our website, every docs page has a question asking whether the page was useful – we use this to help identify pages that need improvement. We also ask anyone who gets a 404 on our website whether pineapple belongs on pizza. We use this to report people to the pizza police. 
+
+Read our [running surveys with no backend](/tutorials/survey) tutorial to learn how.
 
 ## 5. Identify users who are at risk of churning
 
@@ -123,7 +123,7 @@ Try experimenting with any of the above, while also using AND/OR operators, to c
 
 Experimentation is a fundamental tool every engineer and product manager needs. While you can roll out changes and observe their impact after the fact, it's impossible to verify whether small shifts in your metrics are down to your changes or some other unknown variable.
 
-PostHog's Experimentation suite is built atop our Feature Flag functionality, allowing you to run straight A/B tests and multivariate tests. You can set a minimum acceptable improvement for the test, and PostHog will recommend a sample size and test duration based on your parameters.
+PostHog's Experimentation suite is built atop our Feature Flag functionality, so you can run A/B tests and multivariate tests with ease. You set a minimum acceptable improvement for the test, and PostHog will recommend a sample size and test duration based on your parameters.
 
 ![PostHog experiments](../images/blog/things-to-do-in-posthog/experiments-2.png)
 
@@ -163,7 +163,7 @@ Tracking errors can be enormously useful for deciding where to invest engineerin
 
 ![funnel users](../images/blog/things-to-do-in-posthog/converted-users.png)
 
-One of the beauties of having session recording and product analytics in one tool is the seamless way you can go from reviewing a funnel insight to watching exactly what those same users are doing. 
+Having session recording and product analytics in one tool means you can go from reviewing a funnel insight to watching exactly what those same users are doing, seamlessly. 
 
 Simply click on the number of users who completed the step, or dropped off, and you can view the full list of those users, and recordings of their sessions. From here you can understand what they're doing individually, or create a cohort from them to drill down further.
 
@@ -191,9 +191,9 @@ This guy gets it.
 
 ## 14. Build your own app
 
-PostHog is an open source platform and one of the key benefits is you don't have to wait for us to build a specific integration you need. You can build yourself. 
+PostHog is an open source platform and one of the key benefits is you don't have to wait for us to build a specific integration you need. You can build it yourself. 
 
-The PostHog App Store has numerous examples of useful apps built by our community, such as [URL Normalizer](/apps/url-normalizer) (thanks to Mark Bennett), the [Property Filter](/apps/property-filter) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/apps/user-agent-populator) (thanks to Weyert).
+[The PostHog App Store](/apps) has numerous examples of useful apps built by our community, such as [URL Normalizer](/apps/url-normalizer) (thanks to Mark Bennett), the [Property Filter](/apps/property-filter) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/apps/user-agent-populator) (thanks to Weyert).
 
 There's no shortage of official PostHog apps, too. We've built over 40 apps and integrations so far, including import and export apps for most of the popular data warehouses on the market. 
 
