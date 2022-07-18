@@ -12,13 +12,16 @@ import 'components/Pricing/styles/index.scss'
 import { SEO } from '../../components/seo'
 import cntl from 'cntl'
 import Link from 'components/Link'
-import { Check } from 'components/Icons/Icons'
+import { Check, GitHub } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
 import Calculator from 'components/Pricing/PricingTable/Calculator'
 import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
+import GitHubButton from 'react-github-btn'
+import AnimateIntoView from 'components/AnimateIntoView'
+import { CallToAction } from 'components/CallToAction'
 
 export const section = cntl`
     max-w-6xl
@@ -146,6 +149,58 @@ const PricingNew = (): JSX.Element => {
                     Compare all plans
                 </h2>
                 <AllPlans />
+            </section>
+            <section className={`${section} mb-12 mt-24`}>
+                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">
+                    PostHog open source
+                </h2>
+                <div className="grid lg:grid-cols-2 gap-x-4">
+                    <div>
+                        <p>
+                            Our original open source product is available for self-hosting, and ships with product
+                            analytics, feature flags, and session recordings.
+                        </p>
+                        <Link
+                            className="p-2 max-w-[250px] bg-primary flex items-center justify-center space-x-4 rounded-sm text-white text-[15px] font-bold"
+                            to="https://github.com/PostHog/posthog"
+                        >
+                            <GitHub />
+                            <span>Browse on GitHub</span>
+                        </Link>
+                        <p className="text-[15px] opacity-50 mt-2">Limited to one project and community support</p>
+                    </div>
+
+                    <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
+                        <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:-rotate-6 sm:-mr-8 flex-shrink-0">
+                            <p className="text-white mb-2 mt-0">Wnat to be our next star?</p>
+                            <span className="h-[28px] w-[125px]">
+                                <GitHubButton
+                                    href="https://github.com/posthog/posthog"
+                                    data-size="large"
+                                    data-show-count="true"
+                                    aria-label="Star posthog/posthog on GitHub"
+                                >
+                                    Star
+                                </GitHubButton>
+                            </span>
+                            <svg
+                                className="absolute left-2 sm:left-auto sm:right-2 -bottom-5"
+                                width="35"
+                                height="29"
+                                viewBox="0 0 35 29"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
+                                    fill="#2D2D2D"
+                                />
+                            </svg>
+                        </div>
+
+                        <StaticImage src="./images/star-hog.png" width={242} alt="Star Hog" />
+                    </div>
+                </div>
             </section>
         </Layout>
     )
