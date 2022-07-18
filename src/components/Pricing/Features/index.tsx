@@ -85,7 +85,7 @@ const leftCol: IColumn[] = [
 const rightCol: IColumn[] = [
     { title: 'Enterprise plans offer:', section: enterpisePlansOffer },
     {
-        title: 'Plus on Enterprise self-hosted:',
+        title: 'Plus, on Enterprise self-hosted:',
         section: enterpriseSelfHosted,
     },
 ]
@@ -106,7 +106,7 @@ const Check = () => {
 const Section = ({ title, section, className = '' }: IColumn) => {
     return (
         <ul className={`list-none m-0 p-0 mb-6 ${className}`}>
-            <h5 className="text-[15px] text-white/50 m-0 mb-2">{title}</h5>
+            <h5 className="text-[15px] text-white/50 m-0 mb-4">{title}</h5>
             <ul className="list-none p-0 m-0 grid gap-y-4">
                 {section.map(({ title, icon, enterpriseSelfHostOnly }) => {
                     return (
@@ -132,20 +132,25 @@ const Section = ({ title, section, className = '' }: IColumn) => {
 
 export default function Features() {
     return (
-        <div className="bg-primary rounded-[10px] grid sm:grid-cols-3 lg:grid-cols-4 relative">
-            <div className="grid sm:grid-rows-2 sm:grid-cols-2 md:grid-cols-3 sm:grid-flow-col sm:col-span-3 p-11 lg:pb-5 pb-0">
-                {leftCol.map((section) => {
-                    return <Section key={section.title} {...section} />
-                })}
+        <div className="bg-primary rounded-[10px] lg:pl-4 lg:pr-2 relative">
+            <div className="lg:grid lg:grid-cols-4">
+                <div className="lg:col-span-3">
+                    <div className="xs:grid xs:gap-x-2 sm:gap-x-8 sm:gap-y-4 grid-cols-2 lg:grid-cols-3 p-6 lg:pt-10 pb-0">
+                        {leftCol.map((section) => {
+                            return <Section key={section.title} {...section} />
+                        })}
+                    </div>
+                    <p className="flex items-center px-8 pb-3 lg:pb-0 lg:mb-0 before:w-[9px] before:h-[9px] before:rounded-full before:bg-dark-yellow before:mr-1 text-[12px] text-white font-medium">
+                        <span className="opacity-60 block pl-1">Currently available on Enterprise Self-host only</span>
+                    </p>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-2 lg:block p-6 lg:py-10 border-t lg:border-t-0 lg:border-l border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
+                    {rightCol.map((section) => {
+                        return <Section key={section.title} {...section} />
+                    })}
+                </div>
             </div>
-            <div className="grid sm:grid-rows-1 sm:col-span-3 lg:col-span-1 lg:grid-rows-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-flow-col p-11 lg:pt-11 pt-6 pb-5 lg:border-l lg:border-t-0 border-t border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
-                {rightCol.map((section) => {
-                    return <Section key={section.title} {...section} />
-                })}
-            </div>
-            <p className="flex absolute left-11 bottom-1 lg:bottom-4 items-center before:w-[9px] before:h-[9px] before:rounded-full before:bg-dark-yellow before:mr-1 text-[12px] text-white font-medium">
-                <span className="opacity-60">Currently available on Enterprise Self-host only</span>
-            </p>
         </div>
     )
 }
