@@ -1482,3 +1482,12 @@
 [[redirects]]
     from = "/startups"
     to = "/pricing#startup-plan"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/app-east"
+
+[[redirects]]
+from = "/handbook/engineering/app-west"
+to = "/handbook/people/team-structure/app-west"
