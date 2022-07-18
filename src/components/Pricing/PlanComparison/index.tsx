@@ -466,7 +466,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
                                 <a
                                     href={tier.href}
-                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900 hidden"
+                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black hover:bg-gray-900 hidden"
                                 >
                                     Buy {tier.name}
                                 </a>
@@ -501,7 +501,7 @@ export const PlanComparison = ({ className = '' }) => {
                                                 </th>
                                                 <td className="py-5 pr-4">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-almost-black text-center">
+                                                        <span className="block text-sm text-almost-black">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (
@@ -546,7 +546,7 @@ export const PlanComparison = ({ className = '' }) => {
                             >
                                 <a
                                     href={tier.href}
-                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
+                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
                                 >
                                     Buy {tier.name}
                                 </a>
@@ -565,19 +565,19 @@ export const PlanComparison = ({ className = '' }) => {
                         <caption className="sr-only">Pricing plan comparison</caption>
                         <thead>
                             <tr>
-                                <th style={{ border: 0 }} className="text-almost-black text-center">
+                                <th style={{ border: 0 }} className="text-almost-black">
                                     &nbsp;
                                 </th>
-                                <th colSpan="3" className="text-almost-black text-center border-white/10">
+                                <th colSpan="3" className="text-almost-black border-white/10">
                                     Self-hosted options
                                 </th>
-                                <th colSpan="2" className="text-almost-black text-center border-white/10">
+                                <th colSpan="2" className="text-almost-black border-white/10">
                                     Hosted solutions
                                 </th>
                             </tr>
                             <tr>
                                 <th
-                                    className="pb-4 px-6 text-sm font-medium text-almost-black text-center border-white/10 sticky top-0  z-10 bg-opacity-50"
+                                    className="pb-4 px-6 text-sm font-medium text-almost-black border-white/10 sticky top-0  w-[150px] z-10 bg-opacity-50"
                                     scope="col"
                                 >
                                     <span className="sr-only">Feature by</span>
@@ -586,7 +586,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-almost-black text-center border-white/10 sticky top-0  z-10 bg-opacity-75"
+                                        className="pb-2 px-6 leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75 w-[150px]"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -618,7 +618,7 @@ export const PlanComparison = ({ className = '' }) => {
                                             <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
                                             <a
                                                 href={tier.href}
-                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
+                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
                                             >
                                                 Buy {tier.name}
                                             </a>
@@ -659,7 +659,7 @@ export const PlanComparison = ({ className = '' }) => {
                                             {tiers.map((tier) => (
                                                 <td key={tier.name} className="py-5 px-6 border-white/10">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-center text-almost-black text-opacity-75">
+                                                        <span className="block text-sm text-almost-black text-opacity-75">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (
@@ -709,7 +709,7 @@ export const PlanComparison = ({ className = '' }) => {
                                         <td key={tier.name} className="pt-5 px-6 border-white/10">
                                             <a
                                                 href={tier.href}
-                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
+                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
                                             >
                                                 Buy {tier.name}
                                             </a>

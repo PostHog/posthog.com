@@ -141,27 +141,30 @@ export default function AllPlans() {
     const [showComparison, setShowComparison] = useState(false)
     return (
         <>
-            <div className="grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 mt-9">
-                <PlanSection
-                    title="PostHog Cloud"
-                    subtitle="Turnkey, hosted & managed by PostHog"
-                    Icon={CloudIcon}
-                    plans={cloudPlans}
-                />
-                <PlanSection
-                    title="Self-hosted"
-                    subtitle="Deploy to your private cloud or infrastructure"
-                    Icon={SelfHostIcon}
-                    plans={selfHostPlans}
-                />
+            <div className="flex">
+                <div className="grow-0 shrink-0 basis-[150px]">Hello</div>
+                <div className="flex-1 grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 mt-9">
+                    <PlanSection
+                        title="PostHog Cloud"
+                        subtitle="Turnkey, hosted & managed by PostHog"
+                        Icon={CloudIcon}
+                        plans={cloudPlans}
+                    />
+                    <PlanSection
+                        title="Self-hosted"
+                        subtitle="Deploy to your private cloud or infrastructure"
+                        Icon={SelfHostIcon}
+                        plans={selfHostPlans}
+                    />
+                </div>
             </div>
-            <div className=" mt-9">
+            <div className="mt-9">
                 {showComparison && <PlanComparison />}
                 <button
                     onClick={() => setShowComparison(!showComparison)}
-                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
+                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm ml-[150px]"
                 >
-                    {showComparison ? 'Hide' : 'See'} full comparison
+                    {showComparison ? 'Hide' : 'Show'} full comparison
                 </button>
             </div>
         </>

@@ -162,7 +162,10 @@ const PricingNew = (): JSX.Element => {
                             <GitHub />
                             <span>Browse on GitHub</span>
                         </Link>
-                        <p className="text-[15px] opacity-50 mt-2">Limited to one project and community support</p>
+                        <p className="text-xs opacity-50 mt-2">
+                            Limited to one project and community support. <br />
+                            Scales to ~100k users/mo (limited by database).
+                        </p>
                     </div>
 
                     <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
