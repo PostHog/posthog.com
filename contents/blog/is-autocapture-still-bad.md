@@ -13,9 +13,9 @@ categories: ["Product analytics"]
 
 Is autocapture bad? Has it ever been good? Earlier this year Amplitude posed these questions in a blogpost by Product Evangelist Adam Greco. Yes, he said, ‘[Auto-track is still bad](https://amplitude.com/blog/autotrack-is-bad)’ – and he went on to explain the four main reasons why.
 
-Unlike Amplitude (which requires manual instrumentation), PostHog offers both. You can [track custom events manually](/tutorials/event-tracking-guide), you can use autocapture, or you can use a mixture. We’ve long thought this approach is best because it offers teams more flexibility and choice, so we were naturally curious why Adam thought otherwise.
+Unlike Amplitude (which requires manual instrumentation), PostHog offers both. You can [track custom events manually](/tutorials/event-tracking-guide), you can use autocapture, or you can use a mixture. We’ve long thought this approach is best because it offers teams more flexibility and choice, so we were naturally curious about the arguments against this approach.
 
-So, why does Amplitude think it’s better to give users a more limited product? In the article Adam makes four main arguments against autocapture:
+So, why does Amplitude think it’s better to give users a more limited product? In the article there are four main arguments against autocapture:
 
 1. Autocapture means you capture more data. Too much data, in Amplitude’s opinion.
 
@@ -39,15 +39,15 @@ Also, what's the alternative here? Having less data because you can only track t
 
 ## 2. Autocapture creates bad data
 
-Amplitude argues autocapture means you need someone to police and clean the data. This may have been an issue for teams in the past, but with modern tools it’s possible to simply give users the information they need. 
+Amplitude argues autocapture means you need someone to police and clean the data. This may have been an issue for teams in the past, but with modern tools it’s possible to simply give users the information they need instead. 
 
 At PostHog, we do this through our [Data Management suite](/docs/user-guides/data-management), which lets you to add tags, descriptions and more to every event you track — whether autocaptured or not. At a glance you can see when an event has been created,  modified, deleted or gone ‘stale’.
 
-Adam’s article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics platform can protect your codebase from rogue engineers!
+The article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics platform can protect your codebase from rogue engineers!
 
 ## 3. Autocapture takes the same/more time
 
-Amplitude’s article suggests that autocapture saves time for product managers because they don’t need to plan which events to track in advance, but it creates more work for analysts who need to deal with the extra information. 
+Amplitude suggests that autocapture saves time for product managers because they don’t need to plan which events to track in advance, but it creates more work for analysts who need to deal with the extra information. 
 
 But the article neglects to mention the opposite is also true: manual instrumentation saves time for data quality teams, but creates more work for product managers and engineers. 
 
@@ -67,9 +67,9 @@ If security and user privacy are concerns, whether because of HIPAA regulations 
 
 ## So, is autocapture ‘still’ bad?
 
-In Ampltiude’s article, Adam Greco argues that autocapture is bad and that the correct approach is to create an exhaustive list of data to track in advance, then manually tracking those events only.
+Amplitude repeatedly argues that autocapture is bad and that the correct approach is to create an exhaustive list of data to track in advance, then manually tracking those events only.
 
-How many of us have perfect foresight and can accurately predict the needs of so many, so far in advance, for example? What opportunities are lost in the meantime? What happens when circumstances change, or someone asks a question you didn’t anticipate? What about fast-moving businesses where the needs of teams are likely to change?
+But how many of us have perfect foresight and can accurately predict the needs of so many, so far in advance, for example? What opportunities are lost in the meantime? What happens when circumstances change, or someone asks a question you didn’t anticipate? What about fast-moving businesses where the needs of teams are likely to change regularly?
 
 As [one of my colleagues puts it](https://github.com/PostHog/posthog.com/issues/3593#issuecomment-1160197161): “Manual instrumentation is for the world we wish existed; autocapture is for the world that actually exists.”
 
