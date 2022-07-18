@@ -18,6 +18,7 @@ import Calculator from 'components/Pricing/PricingTable/Calculator'
 import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import Features from 'components/Pricing/Features/index'
+import AllPlans from 'components/Pricing/AllPlans'
 
 export const section = cntl`
     max-w-6xl
@@ -139,6 +140,12 @@ const PricingNew = (): JSX.Element => {
                 </h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
+            </section>
+            <section className={`${section} mb-12 mt-24`}>
+                <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
+                    Compare all plans
+                </h2>
+                <AllPlans />
             </section>
         </Layout>
     )

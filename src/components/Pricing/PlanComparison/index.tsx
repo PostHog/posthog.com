@@ -442,7 +442,7 @@ function classNames(...classes) {
 }
 
 export const PlanComparison = ({ className = '' }) => {
-    const [expanded, setExpanded] = useState(false)
+    const [expanded] = useState(true)
 
     const displaySections = expanded ? sections : sections.slice(0, 1)
 
@@ -719,13 +719,6 @@ export const PlanComparison = ({ className = '' }) => {
                             </tfoot>
                         ) : null}
                     </table>
-                    {!expanded ? (
-                        <div className="absolute bottom-4 left-0 w-full text-center">
-                            <CallToAction type="primary" width="56" onClick={(_) => setExpanded(true)}>
-                                See full comparison
-                            </CallToAction>
-                        </div>
-                    ) : null}
                 </div>
             </div>
         </section>
