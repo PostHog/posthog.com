@@ -12,6 +12,7 @@ interface IPricingOptions {
     subtitle: string
     badge: string
     breakdown?: number[]
+    breakdownLabels?: string[]
     icon: React.ReactNode
     mainCTA: {
         title: string
@@ -111,6 +112,15 @@ const selfHostedOptions = {
     title: 'PostHog Self-hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Self serve',
+    breakdown: [0, 0.00045, 0.000225, 0.000045, 0.000009, 0.000003],
+    breakdownLabels: [
+        'First 1 million',
+        '1-2 million',
+        '2-10 million',
+        '10-100 million',
+        '100 million - 1 billion',
+        'More than 1 billion',
+    ],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Deploy now',
@@ -225,7 +235,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
-                                        <p className="text-[14px] font-medium m-0">{breakdownLabels[index]}</p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {(optionDetails?.breakdownLabels || breakdownLabels)[index]}
+                                        </p>
                                         <p className="text-[14px] font-medium m-0">${price}</p>
                                     </li>
                                 )
