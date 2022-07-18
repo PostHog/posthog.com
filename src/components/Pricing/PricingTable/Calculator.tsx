@@ -1,7 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import { CLOUD_MINIMUM_PRICING, CLOUD_ENTERPRISE_MINIMUM_PRICING } from '../constants'
+import { CLOUD_MINIMUM_PRICING, CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
@@ -144,7 +144,11 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
     const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
     const monthlyMinimumPrice = (
-        !selfHost && enterprise ? CLOUD_ENTERPRISE_MINIMUM_PRICING : CLOUD_MINIMUM_PRICING
+        !selfHost && enterprise
+            ? CLOUD_ENTERPRISE_MINIMUM_PRICING
+            : selfHost && enterprise
+            ? ENTERPRISE_MINIMUM_PRICING
+            : CLOUD_MINIMUM_PRICING
     ).toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
