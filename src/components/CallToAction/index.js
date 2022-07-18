@@ -24,7 +24,7 @@ const primary = cntl`
     active:bg-red-active
     active:border-red-active
     dark:primary-dark
-    button-shadow
+    shadow-xl
 `
 
 const secondary = cntl`
