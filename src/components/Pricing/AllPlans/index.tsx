@@ -78,7 +78,7 @@ const selfHostPlans: IPlan[] = [
             monthly: 450,
         },
         mainCTA: {
-            title: 'Get in touch',
+            title: 'Get started',
             url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
         },
         demoCTA: {

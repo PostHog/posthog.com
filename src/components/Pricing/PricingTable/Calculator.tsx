@@ -149,7 +149,7 @@ const selfHostedEnterpriseOptions = {
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
-        title: 'Get in touch',
+        title: 'Get started',
         url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
     },
     demoCTA: {
