@@ -205,6 +205,28 @@ const PricingNew = (): JSX.Element => {
             <section className={`${section} my-12`}>
                 <FAQs />
             </section>
+            <section className="bg-primary">
+                <Quote
+                    className="py-12 md:py-16 px-5 bg-primary"
+                    name={<span className="text-white">Jonathan Hyde</span>}
+                    title={<span className="text-white">Former Head of Product, Legl</span>}
+                    image={
+                        <StaticImage
+                            width={100}
+                            height={100}
+                            alt="Jonathan Hyde - Former Head of Product, Legl"
+                            src="../../images/jonathan-hyde-plain.png"
+                        />
+                    }
+                    quote={
+                        <span className="text-white">
+                            PostHog is the first analytics platform where{' '}
+                            <span className="text-yellow">I can be 100% confident in the data.</span> I've finally got
+                            the data insight platform I've always wanted as a Product person.
+                        </span>
+                    }
+                />
+            </section>
         </Layout>
     )
 }
