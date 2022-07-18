@@ -10,8 +10,7 @@ export const FAQs = ({ className = '' }) => {
         shown: { height: 'auto' },
     }
     return (
-        <section className={`${className} text-almost-black max-w-screen-md`}>
-            <h3 className="text-center">FAQ</h3>
+        <section className={`${className} text-almost-black`}>
             {faqs.map((faq, index) => {
                 return (
                     <div key={index}>

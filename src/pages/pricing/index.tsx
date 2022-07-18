@@ -202,6 +202,9 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
+            <section className={`${section} my-12`}>
+                <FAQs />
+            </section>
         </Layout>
     )
 }
