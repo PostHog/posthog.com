@@ -8,7 +8,7 @@ Our approach is to provide internal Marketing-as-a-Service, aka MaaS. We are an 
 
 ## Marketing vision 
 
-PostHog's [2026 vision](https://posthog.com/handbook/strategy/strategy#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing at PostHog will look like at that point. 
+PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
 
