@@ -231,9 +231,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 </div>
                 <div className="mb-12">
                     <PricingSlider
-                        marks={[1000000, 10000000, 100000000, 1000000000, 10000000000]}
+                        marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
                         min={1000000}
-                        max={10000000000}
+                        max={1000000000}
                     />
                 </div>
                 {breakdown && (

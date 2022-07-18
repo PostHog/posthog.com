@@ -158,32 +158,35 @@ export default function AllPlans() {
     const [showComparison, setShowComparison] = useState(false)
     return (
         <>
-            <div className="flex">
-                <div className="grow-0 shrink-0 basis-[180px] transition-all">Sup.</div>
-                <div className="flex-1 grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 mt-9">
-                    <PlanSection
-                        title="PostHog Cloud"
-                        subtitle="Turnkey, hosted & managed by PostHog"
-                        Icon={CloudIcon}
-                        plans={cloudPlans}
-                    />
-                    <PlanSection
-                        title="Self-hosted"
-                        subtitle="Deploy to your private cloud or infrastructure"
-                        Icon={SelfHostIcon}
-                        plans={selfHostPlans}
-                    />
+            <div
+                className={`grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
+                    showComparison ? 'lg:ml-[180px]' : ''
+                }`}
+            >
+                <PlanSection
+                    title="PostHog Cloud"
+                    subtitle="Turnkey, hosted & managed by PostHog"
+                    Icon={CloudIcon}
+                    plans={cloudPlans}
+                />
+                <PlanSection
+                    title="Self-hosted"
+                    subtitle="Deploy to your private cloud or infrastructure"
+                    Icon={SelfHostIcon}
+                    plans={selfHostPlans}
+                />
+            </div>
+            {showComparison && (
+                <div className="mb-9">
+                    <PlanComparison />
                 </div>
-            </div>
-            <div className="mt-9">
-                {showComparison && <PlanComparison />}
-                <button
-                    onClick={() => setShowComparison(!showComparison)}
-                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm ml-[180px]"
-                >
-                    {showComparison ? 'Hide' : 'Show'} full comparison
-                </button>
-            </div>
+            )}
+            <button
+                onClick={() => setShowComparison(!showComparison)}
+                className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
+            >
+                {showComparison ? 'Hide' : 'Show'} full comparison
+            </button>
         </>
     )
 }
