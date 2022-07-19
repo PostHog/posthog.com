@@ -1,3 +1,4 @@
+import Link from 'components/Link'
 import React from 'react'
 import { icons } from './icons'
 
@@ -5,6 +6,7 @@ interface IFeature {
     title: string
     icon?: React.ReactNode
     enterpriseSelfHostOnly?: boolean
+    url?: string
 }
 
 interface IColumn {
@@ -15,19 +17,12 @@ interface IColumn {
 
 const features: IFeature[] = [
     { title: 'Product Analytics', icon: icons.analytics },
-
     { title: 'Session Recording', icon: icons.sessionRecording },
-
     { title: 'Feature Flags', icon: icons.featureFlags },
-
     { title: 'Heatmaps', icon: icons.heatmaps },
-
     { title: 'A/B Testing', icon: icons.abTesting },
-
     { title: 'Correlation Insights', icon: icons.correlationInsights },
-
     { title: 'Group analytics', icon: icons.groupAnalytics },
-
     { title: 'Team collaboration', icon: icons.teamCollaboration },
 ]
 
@@ -49,7 +44,10 @@ const planAllowances: IFeature[] = [
     { title: 'Unlimited event tracking' },
 ]
 
-const support: IFeature[] = [{ title: 'Community support at posthog.com/questions' }, { title: 'Community Slack' }]
+const support: IFeature[] = [
+    { title: 'Community support at posthog.com/questions', url: '/questions' },
+    { title: 'Community Slack' },
+]
 
 const enterpisePlansOffer: IFeature[] = [
     { title: 'Dedicated support (email, Slack)' },
@@ -103,12 +101,22 @@ const Check = () => {
     )
 }
 
+const Parent = ({ children, url }: { children: React.ReactNode; url?: string }): JSX.Element => {
+    return url ? (
+        <Link className="text-white hover:text-white" to={url}>
+            {children}
+        </Link>
+    ) : (
+        <>{children}</>
+    )
+}
+
 const Section = ({ title, section, className = '' }: IColumn) => {
     return (
         <ul className={`list-none m-0 p-0 mb-6 ${className}`}>
             <h5 className="text-[15px] text-white/50 m-0 mb-4">{title}</h5>
             <ul className="list-none p-0 m-0 grid gap-y-4">
-                {section.map(({ title, icon, enterpriseSelfHostOnly }) => {
+                {section.map(({ title, icon, enterpriseSelfHostOnly, url }) => {
                     return (
                         <li
                             key={title}
@@ -121,7 +129,9 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                             <span className="w-[32px] flex justify-center items-center flex-shrink-0">
                                 {icon || <Check />}
                             </span>
-                            <span>{title}</span>
+                            <Parent url={url}>
+                                <span>{title}</span>
+                            </Parent>
                         </li>
                     )
                 })}
