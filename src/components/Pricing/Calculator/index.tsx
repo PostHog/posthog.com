@@ -162,7 +162,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
-    const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
+    const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 3)
     const monthlyMinimumPrice =
         optionDetails &&
         optionDetails.minimumPrice > 0 &&
