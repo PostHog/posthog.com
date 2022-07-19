@@ -218,7 +218,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                             {optionDetails?.badge}
                         </span>
                     </div>
-                    <p className="m-0 text-black/50 font-medium text-xs">{optionDetails?.subtitle}</p>
+                    <p className="m-0 mt-1 text-black/50 font-medium text-xs">{optionDetails?.subtitle}</p>
                 </div>
             </div>
             <div className="mt-5">
