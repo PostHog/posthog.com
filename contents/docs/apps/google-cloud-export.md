@@ -1,6 +1,9 @@
 ---
-title: Google Cloud Storage Export
-showTitle: true
+title: Google Cloud Export
+layout: app
+github: https://github.com/PostHog/posthog-gcs-plugin
+installUrl: https://app.posthog.com/project/apps?name=GCS+Export
+thumbnail: ../../apps/thumbnails/gcs-export.png
 topics:
     - gcs-export
 ---

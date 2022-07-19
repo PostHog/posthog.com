@@ -1,6 +1,9 @@
 ---
 title: Migrator 3000
-showTitle: true
+layout: app
+github: https://github.com/posthog/posthog-plugin-migrator3000
+installUrl: https://app.posthog.com/project/apps?name=Migrator+3000
+thumbnail: ../../apps/thumbnails/migrator-3000.png
 topics:
     - migrator
 ---

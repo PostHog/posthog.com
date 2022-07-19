@@ -1,6 +1,9 @@
 ---
 title: Orbit Connector
-showTitle: true
+layout: app
+github: https://github.com/PostHog/posthog-orbit-love-plugin
+installUrl: https://app.posthog.com/project/apps?name=Orbit+Love+Report+Sync
+thumbnail: ../../apps/thumbnails/orbit-stats-sync.png
 topics:
     - orbit
 ---

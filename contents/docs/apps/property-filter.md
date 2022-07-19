@@ -1,6 +1,9 @@
 ---
 title: Property Filter
-showTitle: true
+layout: app
+github: https://github.com/witty-works/posthog-property-filter-plugin
+installUrl: https://app.posthog.com/project/apps?name=Property%20Filter
+thumbnail: ../../apps/thumbnails/property-filter.png
 topics:
     - property-filter
 ---

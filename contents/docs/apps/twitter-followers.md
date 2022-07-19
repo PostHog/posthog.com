@@ -1,6 +1,9 @@
 ---
 title: Twitter Followers Tracker
-showTitle: true
+layout: app
+github: https://github.com/PostHog/twitter-followers-plugin
+installUrl: https://app.posthog.com/project/apps?name=Twitter+Followers
+thumbnail: ../../apps/thumbnails/twitter-followers.png
 topics:
     - twitter-followers
 ---

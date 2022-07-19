@@ -1,6 +1,9 @@
 ---
 title: Taxonomy Standardizer
-showTitle: true
+layout: app
+installUrl: https://app.posthog.com/project/apps?name=Taxonomy+Plugin
+github: https://github.com/PostHog/taxonomy-plugin
+thumbnail: ../../apps/thumbnails/taxonomy-standardizer.png
 topics:
     - taxonomy-standardizer
 ---

@@ -1,6 +1,9 @@
 ---
 title: Property Flattener
-showTitle: true
+layout: app
+github: https://github.com/PostHog/flatten-properties-plugin
+installUrl: https://app.posthog.com/project/apps?name=Property%20Flattener%20Plugin
+thumbnail: ../../apps/thumbnails/property-flattener.png
 topics:
     - property-flattener
 ---
