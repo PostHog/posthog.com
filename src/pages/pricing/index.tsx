@@ -64,7 +64,7 @@ const Button = ({
 const PricingNew = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
-    const [currentModal, setCurrentModal] = useState<string | boolean>('self host')
+    const [currentModal, setCurrentModal] = useState<string | boolean>(false)
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
