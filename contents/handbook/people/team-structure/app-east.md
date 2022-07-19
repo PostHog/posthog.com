@@ -8,10 +8,10 @@ hideAnchor: true
 ## People
 
 - Marius Andra (Team lead)
-- Ben White (Engineer)
-- Paul D'Ambra (Engineer)
-- Michael Matloka (Engineer)
+- Ben White (Full Stack Engineer)
 - Emanuele Capparelli (Growth Engineer)
+- Michael Matloka (Full Stack Engineer)
+- Paul D'Ambra (Full Stack Engineer)
 
 ## Mission
 
