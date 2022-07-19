@@ -4,8 +4,6 @@ import { graphql } from 'gatsby'
 import DocsLayout from 'components/Docs/Layout'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { CallToAction } from 'components/CallToAction'
 
 export const AppTemplate = ({
     data: { post },
@@ -17,7 +15,7 @@ export const AppTemplate = ({
         contributors,
         fields: { slug },
     } = post
-    const { title, github, thumbnail, features, installUrl, description } = frontmatter
+    const { title, github, thumbnail, description } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
@@ -29,15 +27,11 @@ export const AppTemplate = ({
                 <div className="flex items-center flex-wrap mb-2">
                     {thumbnail?.publicURL && <img src={thumbnail.publicURL} alt="app icon" className="w-8 h-8 mr-2" />}
                     <h1 className="mb-0 mr-auto">{title}</h1>
-                    <div className="flex items-center space-x-3">
-                        {github && (
-                            <Link to={github}>
-                                <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
-                            </Link>
-                        )}
-
-                        {installUrl && <CallToAction to={installUrl}>Install</CallToAction>}
-                    </div>
+                    {github && (
+                        <Link to={github}>
+                            <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
+                        </Link>
+                    )}
                 </div>
             }
             filePath={filePath}
