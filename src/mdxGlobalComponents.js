@@ -70,8 +70,11 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
+import { AllPlans } from './components/Pricing/AllPlans'
+import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
+import { Features } from './components/Pricing/Features'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
@@ -179,8 +182,11 @@ export const shortcodes = {
     PageHeader,
     PostCard,
     PostLayout,
+    AllPlans,
+    Calculator,
     CloudVsSelfHost,
     FAQs,
+    Features,
     PlanComparison,
     PricingHero,
     PricingSlider,

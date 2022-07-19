@@ -423,7 +423,7 @@ export const Twitter = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const GitHub = ({ className }: { className: string }): JSX.Element => {
+export const GitHub = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -1468,9 +1468,9 @@ export const More = (props): JSX.Element => {
     )
 }
 
-export const Check = ({ color = 'primary', ...other }: { color?: string }): JSX.Element => {
+export const Check = (props): JSX.Element => {
     return (
-        <svg {...other} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path
                 fillRule="evenodd"
                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -2047,6 +2047,18 @@ export const YouTube = ({ className }: { className: string }): JSX.Element => {
                 d="M23.5057 6.64457C23.2289 5.6106 22.4184 4.79536 21.3904 4.51698C19.5123 4 11.9999 4 11.9999 4C11.9999 4 4.48763 4 2.60954 4.4971C1.60131 4.77548 0.771002 5.6106 0.494232 6.64457C0 8.53355 0 12.4507 0 12.4507C0 12.4507 0 16.3877 0.494232 18.2568C0.771002 19.2908 1.58154 20.106 2.60954 20.3844C4.50739 20.9014 11.9999 20.9014 11.9999 20.9014C11.9999 20.9014 19.5123 20.9014 21.3904 20.4043C22.4184 20.1259 23.2289 19.3107 23.5057 18.2767C23.9999 16.3877 23.9999 12.4706 23.9999 12.4706C23.9999 12.4706 24.0197 8.53355 23.5057 6.64457Z"
             />
             <path fill="currentColor" d="M15.8545 12.4507L9.60742 8.83179V16.0696L15.8545 12.4507Z" />
+        </svg>
+    )
+}
+
+export const Info = (props: any): JSX.Element => {
+    return (
+        <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1D4AFF" fillOpacity="0.15" />
+            <path
+                d="M9.04839 15.5074H11.4194V8.53041H9.04839V15.5074ZM9 6.36221H11.5V4.08801H9V6.36221Z"
+                fill="#1D4AFF"
+            />
         </svg>
     )
 }
