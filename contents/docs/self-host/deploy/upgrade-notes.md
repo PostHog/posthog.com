@@ -4,8 +4,20 @@ sidebar: Docs
 showTitle: true
 ---
 
+### 26.0.0
+This version upgrades the Prometheus service from version `2.31.1` to `2.36.2`. As part of this upgrade, we've also changed some default values in the `prometheus` stanza:
+
+* `prometheus.alertmanager`
+* `prometheus.kubeStateMetrics`
+* `prometheus.nodeExporter`
+* `prometheus.alertmanagerFiles`
+
+now defaults as the upstream Helm chart.
+
+Additionally `prometheus.serverFiles.alerting_rules.yml` has now new defaults that from now on we will consider _UNSTABLE_. Alerting is an important part of any production system. With this Helm chart, we aim to provide a good collection of default rules that can be used to successfully alert an operator if a PostHog installation is not working as expected. As those rules will probably evolve over time and as we don’t want to cut a new major release every time it happens, please consider the default values of this input variable as _UNSTABLE_. Please consider to explicitly override this input in your `values.yaml` if you need to keep it stable.
+
 ### 25.0.0
-This version upgrades the PgBouncer service from version 1.12.0 to 1.17.0. As part of this upgrade, we've migrated from the container image `edoburu/pgbouncer:1.12.0` to `bitnami/pgbouncer:1.17.0`. If you are not overriding `pgbouncer.env` values, **there's nothing you need to do**. Otherwise, please remember to verify if those are working with the [new container image](https://hub.docker.com/r/bitnami/pgbouncer).
+This version upgrades the PgBouncer service from version `1.12.0` to `1.17.0`. As part of this upgrade, we've migrated from the container image `edoburu/pgbouncer:1.12.0` to `bitnami/pgbouncer:1.17.0`. If you are not overriding `pgbouncer.env` values, **there's nothing you need to do**. Otherwise, please remember to verify if those are working with the [new container image](https://hub.docker.com/r/bitnami/pgbouncer).
 
 ### 24.0.0
 This version changes the supported Kubernetes version to >=1.22 <= 1.24 by dropping the support for Kubernetes 1.21 as it has reached end of life on 2022-06-28.

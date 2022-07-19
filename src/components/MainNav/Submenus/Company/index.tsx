@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../Header'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
-import SearchBar from '../../../../templates/Handbook/SearchBar'
+import SearchBar from 'components/Docs/SearchBar'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 
@@ -97,7 +97,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook" className="mt-3 !px-12">
+                            <CallToAction to="/handbook/company/story" className="mt-3 !px-12">
                                 Read our story
                             </CallToAction>
                         </div>
