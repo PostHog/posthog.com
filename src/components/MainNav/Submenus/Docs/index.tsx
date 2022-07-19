@@ -1,7 +1,7 @@
 import CallToAction from '../CallToAction'
 import Link from 'components/Link'
 import React from 'react'
-import SearchBar from '../../../../templates/Handbook/SearchBar'
+import SearchBar from 'components/Docs/SearchBar'
 import { Wrapper } from '../Wrapper'
 
 interface ColMenuItems {

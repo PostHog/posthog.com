@@ -3,7 +3,7 @@ import React from 'react'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
-import SearchBar from '../../../../templates/Handbook/SearchBar'
+import SearchBar from 'components/Docs/SearchBar'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
@@ -27,6 +27,11 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
     } = useStaticQuery(query)
 
     const resources: ColMenuItems[] = [
+        {
+            title: 'Customer stories',
+            description: 'See how PostHog is moving the needle up and to the right',
+            url: '/customers',
+        },
         {
             title: 'Marketplace',
             description: 'Companies and products who can help with PostHog',

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/get-started-aarrr.png
 featuredTutorial: true
-author: ["james-hawkins"]
+author: ['james-hawkins']
 topics: ['funnels', 'trends', 'plugins', 'apps']
 date: 2021-11-29
 ---
@@ -19,11 +19,11 @@ Regardless if you're in B2B or B2C, we believe the best practice is to focus on 
 
 The way you optimize a metric may involve product, marketing or sales. Just because you now track retention, doesn't mean you only have a product lever to pull to improve it. Consider for each metric which approach is the most relevant for optimization.
 
-For products with a variety of user personas, it may make sense to run several versions of this funnel for different personas. For example, a CEO may use Salesforce very differently to a salesperson - so it's rational to consider activation and retention behaviors quite differently. Likewise, for marketplace products - your  users will likely have different value propositions depending on if they are on the supply or demand side of your business.
+For products with a variety of user personas, it may make sense to run several versions of this funnel for different personas. For example, a CEO may use Salesforce very differently to a salesperson - so it's rational to consider activation and retention behaviors quite differently. Likewise, for marketplace products - your users will likely have different value propositions depending on if they are on the supply or demand side of your business.
 
 These are also only top level metrics. You will want to track more than this. However, if you start by making sure you have one metric for each point of the AARRR framework, then you will have a valuable event taxonomy to get started with PostHog. We'd recommend after getting this in place, that you focus on 'deep dive' dashboards which cover metrics that can affect a top level metric. For example, a [deep dive acquisition dashboard](taxonomy-acquisition) will contain conversion rates, traffic volumes by source and so on.
 
-Once you have defined each of the following metrics, save them to a [Dashboard](../user-guides/dashboards) in PostHog, so you can easily check their performance over time.
+Once you have defined each of the following metrics, save them to a [Dashboard](/docs/user-guides/dashboards) in PostHog, so you can easily check their performance over time.
 
 Starting with something is better than not starting at all. You can easily iterate metrics and what you pick here is a reversible decision.
 
@@ -53,8 +53,8 @@ You must also define a usage interval - how often you expect the retention event
 
 Once you've created a cohort of activated users, Retention can be measured in two ways:
 
-* n-day/n-week/n-month retention - how many of your users came back within a usage interval (use PostHog's [Retention feature](../user-guides/retention) to measure this)
-* Unbounded retention - appropriate when there isn't a set usage interval, how many users came back at all (use PostHog's Stickiness feature to measure this)
+-   n-day/n-week/n-month retention - how many of your users came back within a usage interval (use PostHog's [Retention feature](/docs/user-guides/retention) to measure this)
+-   Unbounded retention - appropriate when there isn't a set usage interval, how many users came back at all (use PostHog's Stickiness feature to measure this)
 
 ## Revenue
 
@@ -62,7 +62,7 @@ What's your top revenue metric?
 
 For Software-As-A-Service (SAAS), this often means Contracted Monthly Recurring Revenue (MRR). Others may focus on Average Revenue Per User. What you choose will depend on your business model.
 
-You are able to send revenue as an event to PostHog, since you can define a property for it and you can set numerical values on properties. Using [Trends](../user-guides/trends) you can display relevant data as you need using event property averages, sums, percentiles and graph series formulae. You can even integrate with payment systems (such as Stripe) through PostHog's [Apps](../plugins).
+You are able to send revenue as an event to PostHog, since you can define a property for it and you can set numerical values on properties. Using [Trends](/docs/user-guides/trends) you can display relevant data as you need using event property averages, sums, percentiles and graph series formulae. You can even integrate with payment systems (such as Stripe) through PostHog's [Apps](../plugins).
 
 ## Referral
 

@@ -52,10 +52,10 @@ export default function Hero() {
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
-                            Try PostHog
+                            Get started
                         </CallToAction>
                         <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
-                            Get a demo
+                            Book a demo
                         </CallToAction>
                     </div>
                 </div>
