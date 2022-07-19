@@ -17,6 +17,8 @@ import shape from './images/shape.svg'
 import Modal from 'components/Modal'
 import SelfHost from 'components/Pricing/Overlays/SelfHost'
 import Enterprise from 'components/Pricing/Overlays/Enterprise'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 
 export const section = cntl`
     max-w-6xl
@@ -65,6 +67,7 @@ const PricingNew = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
@@ -202,6 +205,9 @@ const PricingNew = (): JSX.Element => {
                             analytics, feature flags, and session recordings.
                         </p>
                         <Link
+                            onClick={() =>
+                                posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
+                            }
                             className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold relative active:top-[1px] active:scale-[.97]"
                             to="https://github.com/PostHog/posthog"
                         >
