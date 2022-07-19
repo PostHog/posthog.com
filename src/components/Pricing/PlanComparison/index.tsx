@@ -36,7 +36,7 @@ const sections = [
             {
                 name: 'Plan benefits',
                 tiers: {
-                    'Cloud Self-serve': 'Scales as needed, Constant price',
+                    'Cloud Self-serve': 'Scales as needed, no infrastructure to manage',
                     'Cloud Enterprise': 'Advanced permissioning and SSO Integration, priority support',
                     'Open source': 'Great for small teams',
                     'Self-host Self-serve': 'Power analytics features, basic permissioning',
@@ -44,27 +44,33 @@ const sections = [
                 },
             },
             {
-                name: 'Pricing',
+                name: 'Base pricing',
                 tiers: {
-                    'Cloud Self-serve':
-                        'Free (up to 1 million events), then $0.000225/event to $0.000025/event depending on volume (see calculator)',
+                    'Cloud Self-serve': '$0/mo',
                     'Open source': 'Free',
-                    'Self-host Self-serve':
-                        'Free (up to 1 million events), then $0.00045/event to $0.000009/event depending on volume (see calculator)',
-                    'Self-host Enterprise':
-                        '$4,500/mo for the first 10 million events, tiered pricing after (see calculator)',
-                    'Cloud Enterprise':
-                        '$3,000/mo for the first 10 million events, tiered pricing after (see calculator)',
+                    'Self-host Self-serve': '$0/mo',
+                    'Self-host Enterprise': '$450/mo',
+                    'Cloud Enterprise': '$300/mo',
                 },
             },
             {
-                name: 'Scales to...',
+                name: 'Per-event pricing (starts at)',
                 tiers: {
-                    'Cloud Self-serve': 'Millions of users/mo',
-                    'Open source': '~100k users/mo (no hard limit, but we recommend support beyond this)',
-                    'Self-host Self-serve': 'Millions of users/mo',
-                    'Self-host Enterprise': 'Millions of users/mo',
-                    'Cloud Enterprise': 'Millions of users/mo',
+                    'Cloud Self-serve': 'First 1 million events/mo free, then $0.000225/event',
+                    'Open source': 'Free',
+                    'Self-host Self-serve': 'First 1 million events/mo free, then $0.0003/event',
+                    'Self-host Enterprise': 'First 1 million events/mo included, then $0.00045/event',
+                    'Cloud Enterprise': 'First 1 million events/mo included, then $0.0003/event',
+                },
+            },
+            {
+                name: 'Volume discounts available - up to 90% off (see calculator above)',
+                tiers: {
+                    'Cloud Self-serve': true,
+                    'Open source': false,
+                    'Self-host Self-serve': true,
+                    'Self-host Enterprise': true,
+                    'Cloud Enterprise': true,
                 },
             },
         ],
