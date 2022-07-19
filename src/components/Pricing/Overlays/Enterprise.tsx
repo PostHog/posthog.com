@@ -47,7 +47,7 @@ export default function Enterprise({ setOpen }: { setOpen: (open: boolean) => vo
         <motion.div
             initial={{ translateX: '100%' }}
             animate={{ translateX: 0 }}
-            className="bg-white p-9 max-w-[450px] h-full ml-auto relative z-10 overflow-auto"
+            className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10 overflow-auto"
         >
             <div className="flex items-end justify-between">
                 <h2 className="text-3xl m-0">Enterprise</h2>
@@ -110,17 +110,22 @@ export default function Enterprise({ setOpen }: { setOpen: (open: boolean) => vo
                     </svg>
                 </button>
             </div>
-            <h3 className="text-[18px] text-black/50 m-0 mt-2">
+            <h3 className="text-[18px] !text-bold/50 m-0 mt-2">
                 Extra security, compliance, and data management tools. Plus proactive support for your PostHog instance,
                 and for your teams using PostHog.
             </h3>
             <ul className="list-none m-0 p-0 mt-6">
                 {sections.map((section) => {
                     return (
-                        <li key={section.title}>
-                            <h4 className="text-base m-0 mt-4">{section.title}</h4>
-                            <p className="text-[15px] font-medium m-0 text-black/50">{section.description}</p>
-                            <ul className="list-none p-0 my-2">
+                        <li
+                            key={section.title}
+                            className="border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-2 first:mt-0"
+                        >
+                            <h4 className="text-lg m-0 mt-4">{section.title}</h4>
+                            <p className="text-[15px] font-medium m-0 leading-snug text-black/50">
+                                {section.description}
+                            </p>
+                            <ul className="list-none p-0 my-2 space-y-1">
                                 {section.features.map((feature) => {
                                     return (
                                         <li key={feature} className="flex items-start space-x-2 text-gray-accent-light">

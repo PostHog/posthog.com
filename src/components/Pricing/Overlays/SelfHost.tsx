@@ -23,7 +23,7 @@ export default function SelfHost({ setOpen }: { setOpen: (open: boolean) => void
         <motion.div
             initial={{ translateX: '100%' }}
             animate={{ translateX: 0 }}
-            className="bg-white p-9 max-w-[450px] h-full ml-auto relative z-10"
+            className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10"
         >
             <div className="flex items-end justify-between">
                 <h2 className="text-3xl m-0">Self-hosting</h2>
@@ -86,15 +86,20 @@ export default function SelfHost({ setOpen }: { setOpen: (open: boolean) => void
                     </svg>
                 </button>
             </div>
-            <h3 className="text-[18px] text-black/50 m-0 mt-2">Host on-prem so customer data stays private.</h3>
+            <h3 className="text-[18px] !text-bold/50 m-0 mt-2">Host on-prem so customer data stays private.</h3>
             <ul className="list-none m-0 p-0 mt-6">
                 {features.map((feature) => {
                     return (
-                        <li key={feature.title} className="flex items-start space-x-2 text-gray-accent-light">
+                        <li
+                            key={feature.title}
+                            className="flex items-start space-x-2 text-gray-accent-light border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-4 first:mt-0 first:pt-0"
+                        >
                             <Check className="w-[20px] flex-shrink-0" />
                             <div>
                                 <h4 className="text-base m-0">{feature.title}</h4>
-                                <p className="text-[15px] font-medium m-0 text-black/50">{feature.description}</p>
+                                <p className="text-[15px] font-semibold m-0 leading-snug text-black/50">
+                                    {feature.description}
+                                </p>
                             </div>
                         </li>
                     )

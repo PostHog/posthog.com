@@ -87,6 +87,7 @@ const PricingNew = (): JSX.Element => {
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
                             src="./images/tractor-hog.png"
                             className="lg:-mt-4 xl:-mt-12 max-w-screen-sm"
+                            loading="eager"
                         />
                     </div>
                     <div className="lg:order-1">
@@ -109,7 +110,6 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
             <div className="relative">
-                <img src={shape} className="absolute w-screen left-0 -bottom-12 md:block hidden" />
                 <section
                     className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
                 >
@@ -154,6 +154,7 @@ const PricingNew = (): JSX.Element => {
                     </div>
                     <Calculator enterprise={enterprise} selfHost={selfHost} />
                 </section>
+                <img src={shape} className="absolute w-screen left-0 -bottom-12 md:block hidden" />
             </div>
             <section className={section}>
                 <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
@@ -179,7 +180,7 @@ const PricingNew = (): JSX.Element => {
                             analytics, feature flags, and session recordings.
                         </p>
                         <Link
-                            className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold"
+                            className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold relative active:top-[1px] active:scale-[.97]"
                             to="https://github.com/PostHog/posthog"
                         >
                             <GitHub />
@@ -258,7 +259,7 @@ const PricingNew = (): JSX.Element => {
                         <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
-                            className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm"
+                            className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm relative active:top-[1px] active:scale-[.97]"
                         >
                             <span>Beam me up!</span>
                             <svg
