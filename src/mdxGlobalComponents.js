@@ -40,6 +40,7 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EucloudForm } from './components/EucloudForm'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
@@ -149,6 +150,7 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EucloudForm,
     FeatureAvailability,
     FeaturesComparisonTable,
     FeaturesNav,
