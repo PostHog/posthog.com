@@ -73,7 +73,7 @@ const selfHostPlans: IPlan[] = [
             title: 'Join a group demo',
             url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
         },
-        pricingOption: 'scale',
+        pricingOption: 'self-hosted',
     },
     {
         title: 'Enterprise',
@@ -90,7 +90,7 @@ const selfHostPlans: IPlan[] = [
             title: 'Book a demo',
             url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
-        pricingOption: 'enterprise',
+        pricingOption: 'self-hosted-enterprise',
     },
 ]
 

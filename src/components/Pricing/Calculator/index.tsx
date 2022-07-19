@@ -179,7 +179,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         let pricingOption
         if (selfHost && enterprise) {
             optionDetails = selfHostedEnterpriseOptions
-            pricingOption = 'enterprise'
+            pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && enterprise) {
             optionDetails = cloudEnterpriseOptions
@@ -191,7 +191,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         }
         if (selfHost && !enterprise) {
             optionDetails = selfHostedOptions
-            pricingOption = 'scale'
+            pricingOption = 'self-hosted'
         }
         setPricingOption(pricingOption)
         setOptionDetails(optionDetails)
