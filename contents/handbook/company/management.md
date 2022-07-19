@@ -107,24 +107,16 @@ c) Those who have managed and had training will benefit because PostHog has a ve
 
 Our approach is discussion-based and informal. We do everything internally as we believe this will result in a more relevant and useful experience.
 
-We have held two sessions and plan to do two more:
+We have held three sessions and plan to do one more:
 
 - _Part 1: The basics_ - [deck here](https://docs.google.com/presentation/d/1TLMHx-w1zLjZTXoP8rxWYHkAzenS0g9LKRbvQ4jGsX0/edit#slide=id.p)
-- _Part 2: Supporting team member growth_ - we discussed:
+- _Part 2: Supporting team member growth_ - no deck. We discussed:
   - What are people doing today around team member growth?
   - Why does growth matter to your team members?
   - Example growth conversations & plans (good and bad)
   - What does a good growth conversation & plan look like at PostHog?
   - The output of this session was the [section above](https://posthog.com/handbook/company/management#how-do-i-make-sure-my-direct-reports-are-happy-and-productive), which includes new 1-1 templates to help guide growth conversations
-
-Coming soon:
-
-- _Part 3: How to have difficult conversations_ - topics to include:
-  - "I'm struggling/burnt out"
-  - "I'm not enjoying my work"
-  - "I'm having a conflict with someone else"
-  - Legal issues
-- _Part 4: TBD_
+  - _Part 3: Difficult conversations - [deck here](https://docs.google.com/presentation/d/10nRDDpfaZKOToqP6l2aqKVkXd8k1gu-lOU7Ts4eehAM/edit?userstoinvite=james.g%40posthog.com&actionButton=1#slide=id.p)_
 
 ### Ongoing support for managers
 
