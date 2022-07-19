@@ -8,7 +8,7 @@ import { SEO } from '../../components/seo'
 import cntl from 'cntl'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
-import Calculator from 'components/Pricing/PricingTable/Calculator'
+import Calculator from 'components/Pricing/Calculator/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
@@ -201,6 +201,7 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
             <section className={`${section} my-12`}>
+                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12">

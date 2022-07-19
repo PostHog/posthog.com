@@ -613,7 +613,7 @@ export const PlanComparison = ({ className = '' }) => {
 
     return (
         <section className={className}>
-            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 overflow-hidden relative ">
+            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 relative ">
                 {/* xs to lg */}
                 <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                     {tiers.map((tier, tierIdx) => (
@@ -723,7 +723,7 @@ export const PlanComparison = ({ className = '' }) => {
                 {/* lg+ */}
                 <div className="hidden lg:block">
                     <table
-                        className={`w-full h-px table-fixed relative mb-0 rounded-lg overflow-hidden ${
+                        className={`w-full h-px table-fixed relative mb-0 rounded-lg ${
                             expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
                         }`}
                     >
@@ -740,7 +740,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="py-2 px-3 text-[14px] leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75"
+                                        className="py-2 px-3 text-[14px] leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
                                         scope="col"
                                     >
                                         {tier.name}

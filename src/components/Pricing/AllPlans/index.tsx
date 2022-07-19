@@ -1,7 +1,8 @@
 import { CallToAction } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { PlanComparison } from '../PlanComparison'
-import { CloudIcon, SelfHostIcon } from '../PricingTable/Calculator'
+import { CloudIcon, SelfHostIcon } from '../Calculator/index'
+import { motion } from 'framer-motion'
 
 interface IPlan {
     title: string
@@ -177,16 +178,18 @@ export default function AllPlans() {
                 />
             </div>
             {showComparison && (
-                <div className="mb-9">
+                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} className="mb-9">
                     <PlanComparison />
-                </div>
+                </motion.div>
             )}
-            <button
-                onClick={() => setShowComparison(!showComparison)}
-                className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
-            >
-                {showComparison ? 'Hide' : 'Show'} full comparison
-            </button>
+            {!showComparison && (
+                <button
+                    onClick={() => setShowComparison(!showComparison)}
+                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
+                >
+                    Show full comparison
+                </button>
+            )}
         </>
     )
 }
