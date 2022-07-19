@@ -7,13 +7,16 @@ import 'components/Pricing/styles/index.scss'
 import { SEO } from '../../components/seo'
 import cntl from 'cntl'
 import Link from 'components/Link'
-import { GitHub } from 'components/Icons/Icons'
+import { GitHub, Info } from 'components/Icons/Icons'
 import Calculator from 'components/Pricing/Calculator/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
 import { animateScroll as scroll } from 'react-scroll'
 import shape from './images/shape.svg'
+import Modal from 'components/Modal'
+import SelfHost from 'components/Pricing/Overlays/SelfHost'
+import Enterprise from 'components/Pricing/Overlays/Enterprise'
 
 export const section = cntl`
     max-w-6xl
@@ -61,9 +64,21 @@ const Button = ({
 const PricingNew = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
+    const [currentModal, setCurrentModal] = useState<string | boolean>('self host')
+
+    const handleInfo = (currentModal: string) => {
+        setCurrentModal(currentModal)
+    }
 
     return (
         <Layout>
+            <Modal open={!!currentModal} setOpen={setCurrentModal}>
+                {currentModal === 'self host' ? (
+                    <SelfHost setOpen={setCurrentModal} />
+                ) : (
+                    <Enterprise setOpen={setCurrentModal} />
+                )}
+            </Modal>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
@@ -109,7 +124,12 @@ const PricingNew = (): JSX.Element => {
                     <div className="relative flex flex-col">
                         <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
                         <div>
-                            <h3 className="m-0 mb-1 text-[18px]">Do you need to self-host?</h3>
+                            <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
+                                <span>Do you need to self-host?</span>
+                                <button onClick={() => handleInfo('self host')}>
+                                    <Info />
+                                </button>
+                            </h3>
                             <p className="m-0 text-black/50 font-medium text-sm">
                                 Customer data never leaves your infrastructure or private cloud.
                             </p>
@@ -121,7 +141,12 @@ const PricingNew = (): JSX.Element => {
                                     No
                                 </Button>
                             </div>
-                            <h3 className="m-0 mb-1 text-[18px] mt-9">Are you an enterprise?</h3>
+                            <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
+                                <span>Are you an enterprise?</span>
+                                <button onClick={() => handleInfo('enterprise')}>
+                                    <Info />
+                                </button>
+                            </h3>
                             <p className="m-0 text-black/50 font-medium text-sm">
                                 Advanced permissioning, proactive support, training, SSO/SAML & more
                             </p>
