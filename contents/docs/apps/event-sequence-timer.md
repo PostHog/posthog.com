@@ -1,6 +1,9 @@
 ---
 title: Event Sequence Timer
-showTitle: true
+layout: app
+github: https://github.com/PostHog/event-sequence-timer-plugin
+installUrl: https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin
+thumbnail: ../../apps/thumbnails/event-sequence-timer-plugin.png
 topics:
     - event-timer
 ---

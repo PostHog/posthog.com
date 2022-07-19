@@ -1,6 +1,8 @@
 ---
 title: Segment Connector
-showTitle: true
+layout: app
+github: https://github.com/PostHog/posthog-segment
+thumbnail: ../../apps/thumbnails/segment.png
 topics:
     - segment
 ---

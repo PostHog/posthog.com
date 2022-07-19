@@ -1,6 +1,9 @@
 ---
 title: URL Normalizer
-showTitle: true
+layout: app
+github: https://github.com/PostHog/posthog-url-normalizer-plugin
+installUrl: https://app.posthog.com/project/apps?name=URL%20Normalizer
+thumbnail: ../../apps/thumbnails/url_normalizer.png
 topics:
     - url-normalizer
 ---

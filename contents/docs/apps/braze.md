@@ -1,7 +1,9 @@
 ---
 title: Braze Import app
+layout: app
 sidebar: Docs
-showTitle: true
+github: https://github.com/posthog/posthog-braze-plugin
+thumbnail: ../../apps/thumbnails/braze.png
 topics:
     - braze
 ---

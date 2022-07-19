@@ -1,6 +1,9 @@
 ---
 title: Hubspot Connector
-showTitle: true
+layout: app
+github: https://github.com/PostHog/hubspot-plugin
+installUrl: https://app.posthog.com/project/apps?name=Hubspot
+thumbnail: ../../apps/thumbnails/hubspot.svg
 topics:
     - hubspot
 ---

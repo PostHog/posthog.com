@@ -1,6 +1,6 @@
 ---
 title: Sentry Connector
-showTitle: true
+layout: app
 topics:
     - sentry-connector
 ---

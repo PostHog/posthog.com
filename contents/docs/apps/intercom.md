@@ -1,6 +1,9 @@
 ---
 title: Intercom Connector
-showTitle: true
+layout: app
+github: https://github.com/posthog/posthog-intercom-plugin
+installUrl: https://app.posthog.com/project/apps?name=Intercom
+thumbnail: ../../apps/thumbnails/intercom.png
 topics:
     - intercom
 ---

@@ -1,6 +1,9 @@
 ---
 title: Engage Connector
-showTitle: true
+layout: app
+github: https://github.com/PostHog/posthog-engage-so-plugin
+installUrl: https://app.posthog.com/project/apps?name=Engage
+thumbnail: ../../apps/thumbnails/engage_logo.png
 topics:
     - engage
 ---

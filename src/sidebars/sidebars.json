@@ -1136,7 +1136,7 @@
                                 },
                                 {
                                     "url": "/docs/apps/email-scoring",
-                                    "name": "Mailboxlayer Email Scoring"
+                                    "name": "Email Scoring"
                                 },
                                 {
                                     "url": "/docs/apps/n8n",
@@ -1198,7 +1198,7 @@
                                 },
                                 {
                                     "url": "/docs/apps/google-pub-sub-connector",
-                                    "name": "Google Cloud Pub/Sub Connector"
+                                    "name": "GCP Pub/Sub Connector"
                                 },
                                 {
                                     "url": "/docs/apps/google-cloud-export",

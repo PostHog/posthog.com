@@ -1,6 +1,9 @@
 ---
 title: Zendesk Connector
-showTitle: true
+layout: app
+github: https://github.com/PostHog/posthog-zendesk-plugin
+installUrl: https://app.posthog.com/project/apps?name=posthog-zendesk-plugin
+thumbnail: ../../apps/thumbnails/zendesk.svg
 topics:
     - zendesk-connector
 ---

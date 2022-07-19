@@ -1,6 +1,9 @@
 ---
 title: PostgreSQL Export
-showTitle: true
+layout: app
+github: https://github.com/PostHog/postgres-plugin
+installUrl: https://app.posthog.com/project/apps?name=PostgreSQL
+thumbnail: ../../apps/thumbnails/postgresql-export.png
 topics:
     - postgres-export
 ---

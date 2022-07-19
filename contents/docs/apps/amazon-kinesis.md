@@ -1,6 +1,9 @@
 ---
 title: Amazon Kinesis Import
-showTitle: true
+layout: app
+github: https://github.com/posthog/posthog-kinesis-plugin
+installUrl: https://app.posthog.com/project/apps?name=Kinesis
+thumbnail: ../../apps/thumbnails/kinesis.png
 topics:
     - amazon-kinesis
 ---

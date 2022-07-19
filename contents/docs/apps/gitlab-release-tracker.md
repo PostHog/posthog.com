@@ -1,6 +1,9 @@
 ---
 title: GitLab Release Tracker
-showTitle: true
+layout: app
+github: https://github.com/PostHog/gitlab-release-tracking-plugin
+installUrl: https://app.posthog.com/project/apps?name=Gitlab+Release+Tracker
+thumbnail: ../../apps/thumbnails/gitlab.png
 topics:
     - gitlab-release-tracker
 ---
@@ -24,7 +27,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the GitLab Release Tracker](https://github.com/PostHog/currency-normalization-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the GitLab Release Tracker](https://github.com/PostHog/gitlab-release-tracking-plugin) is available on GitHub.
 
 ### Who created this app?
 
