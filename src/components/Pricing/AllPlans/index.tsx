@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { PlanComparison } from '../PlanComparison'
 import { CloudIcon, SelfHostIcon } from '../Calculator/index'
@@ -19,6 +19,7 @@ interface IPlan {
         title: string
         url: string
     }
+    pricingOption: string
 }
 
 const cloudPlans: IPlan[] = [
@@ -36,6 +37,7 @@ const cloudPlans: IPlan[] = [
             title: 'Join a group demo',
             url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
         },
+        pricingOption: 'cloud',
     },
     {
         title: 'Enterprise',
@@ -52,6 +54,7 @@ const cloudPlans: IPlan[] = [
             title: 'Book a demo',
             url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
+        pricingOption: 'cloud-enterprise',
     },
 ]
 
@@ -70,6 +73,7 @@ const selfHostPlans: IPlan[] = [
             title: 'Join a group demo',
             url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
         },
+        pricingOption: 'scale',
     },
     {
         title: 'Enterprise',
@@ -86,6 +90,7 @@ const selfHostPlans: IPlan[] = [
             title: 'Book a demo',
             url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
+        pricingOption: 'enterprise',
     },
 ]
 
@@ -110,17 +115,24 @@ const Plan = (plan: IPlan) => {
                     </span>
                 </p>
             </div>
-            <CallToAction type="primary" width="full" className="shadow-md" to={plan.mainCTA.url}>
+            <TrackedCTA
+                event={{ name: `clicked ${plan.mainCTA.title}`, type: plan.pricingOption }}
+                type="primary"
+                width="full"
+                className="shadow-md"
+                to={plan.mainCTA.url}
+            >
                 {plan.mainCTA.title}
-            </CallToAction>
+            </TrackedCTA>
             {plan.demoCTA && (
-                <CallToAction
+                <TrackedCTA
+                    event={{ name: `clicked ${plan.demoCTA?.title}`, type: plan.pricingOption }}
                     className="bg-white !border border-gray-accent-light !text-black mt-3 shadow-md"
                     width="full"
                     to={plan.demoCTA?.url}
                 >
                     {plan.demoCTA?.title}
-                </CallToAction>
+                </TrackedCTA>
             )}
         </li>
     )

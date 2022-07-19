@@ -72,20 +72,10 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     ${className}
 `
 
-export const TrackedCTA = ({ event: { name: eventName, ...event }, featureFlag, ...props }) => {
+export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    const handleClick = () => {
-        posthog?.capture(eventName, {...event, [`$feature/{feature_flag}`]: featureFlag.response})
-        if (featureFlag) {
-            posthog?.capture('$feature_flag_called', {
-                feature_flag_response: featureFlag.response,
-                feature_flag: featureFlag.name,
-            })
-        }
-    }
-
-    return <CallToAction {...props} onClick={handleClick} />
+    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
 }
 
 export const CallToAction = ({

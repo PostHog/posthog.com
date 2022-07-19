@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import {
@@ -159,7 +159,7 @@ const selfHostedEnterpriseOptions = {
 }
 
 export default function Calculator({ selfHost, enterprise }: { selfHost: boolean; enterprise: boolean }) {
-    const { finalMonthlyCost, sliderValue } = useValues(pricingSliderLogic)
+    const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
     const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
@@ -282,17 +282,24 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     </p>
                 </div>
                 <div className="mt-4">
-                    <CallToAction type="primary" width="full" className="shadow-md" to={optionDetails?.mainCTA.url}>
+                    <TrackedCTA
+                        event={{ name: `clicked ${optionDetails?.mainCTA.title}`, type: pricingOption }}
+                        type="primary"
+                        width="full"
+                        className="shadow-md"
+                        to={optionDetails?.mainCTA.url}
+                    >
                         {optionDetails?.mainCTA.title}
-                    </CallToAction>
+                    </TrackedCTA>
                     {optionDetails?.demoCTA && (
-                        <CallToAction
+                        <TrackedCTA
+                            event={{ name: `clicked ${optionDetails?.demoCTA?.title}`, type: pricingOption }}
                             to={optionDetails?.demoCTA?.url}
                             className="bg-white !border border-gray-accent !text-black mt-3 shadow-md"
                             width="full"
                         >
                             {optionDetails?.demoCTA?.title}
-                        </CallToAction>
+                        </TrackedCTA>
                     )}
                 </div>
             </div>
