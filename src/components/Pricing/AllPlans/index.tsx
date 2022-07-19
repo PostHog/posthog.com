@@ -67,7 +67,7 @@ const selfHostPlans: IPlan[] = [
         },
         mainCTA: {
             title: 'Get started',
-            url: '/signup/self-host/deploy',
+            url: 'https://license.posthog.com/',
         },
         demoCTA: {
             title: 'Join a group demo',
