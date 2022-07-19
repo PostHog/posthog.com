@@ -1,6 +1,5 @@
 import { Check } from 'components/Icons/Icons'
 import React from 'react'
-import { motion } from 'framer-motion'
 
 const features = [
     {
@@ -20,11 +19,7 @@ const features = [
 
 export default function SelfHost({ setOpen }: { setOpen: (open: boolean) => void }) {
     return (
-        <motion.div
-            initial={{ translateX: '100%' }}
-            animate={{ translateX: 0 }}
-            className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10"
-        >
+        <div className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10">
             <div className="flex items-end justify-between">
                 <h2 className="text-3xl m-0">Self-hosting</h2>
                 <button onClick={() => setOpen(false)}>
@@ -105,6 +100,6 @@ export default function SelfHost({ setOpen }: { setOpen: (open: boolean) => void
                     )
                 })}
             </ul>
-        </motion.div>
+        </div>
     )
 }

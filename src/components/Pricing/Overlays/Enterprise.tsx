@@ -1,6 +1,5 @@
 import { Check } from 'components/Icons/Icons'
 import React from 'react'
-import { motion } from 'framer-motion'
 
 const sections = [
     {
@@ -44,11 +43,7 @@ const sections = [
 
 export default function Enterprise({ setOpen }: { setOpen: (open: boolean) => void }) {
     return (
-        <motion.div
-            initial={{ translateX: '100%' }}
-            animate={{ translateX: 0 }}
-            className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10 overflow-auto"
-        >
+        <div className="bg-white p-9 w-full max-w-lg h-full ml-auto relative z-10 overflow-auto">
             <div className="flex items-end justify-between">
                 <h2 className="text-3xl m-0">Enterprise</h2>
                 <button onClick={() => setOpen(false)}>
@@ -139,6 +134,6 @@ export default function Enterprise({ setOpen }: { setOpen: (open: boolean) => vo
                     )
                 })}
             </ul>
-        </motion.div>
+        </div>
     )
 }
