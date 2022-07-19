@@ -11,6 +11,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: true
+    groupAnalytics: false
 ---
 
 This is an optional library you can install if you're working with Ruby. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
@@ -42,15 +43,19 @@ You can find your key in the 'Project Settings' page in PostHog.
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
 
 A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+-   `distinct id` which uniquely identifies your user
+-   `event name` to specify the event
+
+*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
-- `properties`, which is a dictionary with any information you'd like to add
-- `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
+
+-   `properties`, which is a dictionary with any information you'd like to add
+-   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 
 For example:
+
 ```c
 posthog.capture({
     distinct_id: 'distinct id',
@@ -106,14 +111,16 @@ posthog.capture({
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
 like segment users by these properties.
 
 An `identify` call requires:
-- `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key:value pairs 
+
+-   `distinct id` which uniquely identifies your user
+-   `properties` with a dict with any key:value pairs
 
 For example:
+
 ```c
 posthog.identify({
   distinct_id: "user:123",
@@ -137,10 +144,12 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
 
 An `alias` call requires:
-- `previous distinct id`: the unique ID of the user from beforehand
-- `distinct id`: the current unique id
+
+-   `previous distinct id`: the unique ID of the user from beforehand
+-   `distinct id`: the current unique id
 
 For example:
+
 ```c
 posthog.alias({
   distinct_id: "user:123",

@@ -11,6 +11,7 @@ features:
     autoCapture: true
     sessionRecording: true
     featureFlags: true
+    groupAnalytics: true
 ---
 
 > **Note:** You can just use our [snippet](/docs/integrate/client/snippet-installation) to start capturing events with our JS.
@@ -159,6 +160,22 @@ posthog.capture('$pageview')
 
 This will automatically send the current URL.
 
+### Signup example
+
+As an example, here is how to put some of the above concepts together:
+
+```js
+function signup(email) {
+    // Your own internal logic for creating an account and getting a user_id
+    let userId = createAccount(email)
+
+    // Identify user with internal ID
+    posthog.identify(userId)
+    // Set email or any other data
+    posthog.people.set({ email: email })
+}
+```
+
 ### Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
@@ -260,21 +277,44 @@ posthog.reloadFeatureFlags()
 posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
-### Complete signup pseudocode
+### Group analytics
 
-As an example, here is how to put some of the above concepts together:
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-js version of `1.16.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Make a group active and update properties
 
 ```js
-function signup(email) {
-    // Your own internal logic for creating an account and getting a user_id
-    let userId = createAccount(email)
+posthog.group('company', 'id:5', {
+    company_name: 'Awesome Inc.',
+    employees: 11,
+})
+```
 
-    // Identify user with internal ID
-    posthog.identify(userId)
-    // Set email or any other data
-    posthog.people.set({ email: email })
+-   Make a group active without updating properties
+
+```js
+posthog.group('company', 'id:77')
+```
+
+Once a group has been made active, all subsequent events that are sent using the client will be associated with that group automatically.
+
+#### Handling logging out
+
+When the user logs out it's important to call `posthog.reset()` to avoid new events being registered under the previously active group.
+
+#### Integrating groups with feature flags
+
+If you have updated tracking, you can use group-based feature flags as normal.
+
+```js
+if (posthog.isFeatureEnabled('new-groups-feature')) {
+    // do something
 }
 ```
+
+To check flag status for a different group, first switch the active group by calling `posthog.group()`.
 
 ## Persistence
 

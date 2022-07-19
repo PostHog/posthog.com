@@ -11,6 +11,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: true
+    groupAnalytics: true
 ---
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
@@ -54,15 +55,16 @@ Capture allows you to capture anything a user does within your system, which you
 
 A `capture` call requires:
 
-* `distinct id` which uniquely identifies your user
-* `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+-   `distinct id` which uniquely identifies your user
+-   `event name` to specify the event
+    -   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
 
-* `properties`, which can be an array with any information you'd like to add
+-   `properties`, which can be an array with any information you'd like to add
 
 For example:
+
 ```go
 client.Enqueue(posthog.Capture{
   DistinctId: "test-user",
@@ -72,7 +74,6 @@ client.Enqueue(posthog.Capture{
     Set("friends", 42),
 })
 ```
-
 
 #### Setting user properties via an event
 
@@ -87,7 +88,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "test-user",
   Event:      "test-snippet",
   Properties: map[string]interface{}{
-		"eventProp":    "value1", 
+		"eventProp":    "value1",
 		"$set": map[string]interface{}{
 			"userProp": "value2",
 		},
@@ -108,7 +109,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "test-user",
   Event:      "test-snippet",
   Properties: map[string]interface{}{
-		"eventProp":    "value1", 
+		"eventProp":    "value1",
 		"$set_once": map[string]interface{}{
 			"userProp": "value2",
 		},
@@ -124,13 +125,13 @@ client.Enqueue(posthog.Capture{
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
 like segment users by these properties.
 
 An identify call requires:
 
-* `distinct id` which uniquely identifies your user
-* `properties` with a dictionary of any key:value pairs you'd like to add
+-   `distinct id` which uniquely identifies your user
+-   `properties` with a dictionary of any key:value pairs you'd like to add
 
 For example:
 
@@ -157,8 +158,8 @@ If you're using PostHog in the front-end and back-end, doing the identify call i
 
 An alias call requires
 
-* `distinct id` the current unique id
-* `alias` the unique ID of the user before
+-   `distinct id` the current unique id
+-   `alias` the unique ID of the user before
 
 For example:
 
@@ -168,6 +169,7 @@ client.Enqueue(posthog.Alias{
   Alias: "user:12345",
 })
 ```
+
 ### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send page views from your backend, like so:
@@ -189,7 +191,7 @@ client.Enqueue(posthog.Capture{
 
 To check if a feature flag is on for a given user, you can call `isFeatureEnabled`, passing the flag's key and the user's distinct ID. You can optionally pass a third argument to override the default result to be returned if the flag is not found. This is set to `false` by default.
 
-```js
+```go
 // IsFeatureEnabled(flagKey string, distinctId string, defaultResult bool) (bool, error)
 isFlagEnabledForUser, err := client.IsFeatureEnabled('flag-key', 'user distinct id', false)
 
@@ -204,10 +206,40 @@ if (isFlagEnabledForUser) {
 
 When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `ReloadFeatureFlags`:
 
-```js
+```go
 client.ReloadFeatureFlags()
 
 // Do something with feature flags here
+```
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires the latest version of posthog-go
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "[distinct id]",
+    Event:      "some event",
+    Groups: posthog.NewGroups().
+        Set("company", "id:5").
+})
+
+```
+
+-   Update properties on a group
+
+```go
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "id:5",
+    Properties: posthog.NewProperties().
+        Set("company_name", "Awesome Inc").
+        Set("employees", 11),
+})
 ```
 
 ## Thank you

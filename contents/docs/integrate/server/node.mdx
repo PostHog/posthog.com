@@ -11,6 +11,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: true
+    groupAnalytics: true
 ---
 
 If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
@@ -216,6 +217,35 @@ When initializing PostHog, you can configure the interval at which feature flags
 await client.reloadFeatureFlags()
 
 // Do something with feature flags here
+```
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-node version of `1.2.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```js
+client.capture({
+    event: 'some event',
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' },
+})
+```
+
+-   Update properties on a group
+
+```js
+client.groupIdentify({
+    groupType: 'company',
+    groupKey: 'id:5',
+    properties: {
+        company_name: 'Awesome Inc',
+        employees: 11,
+    },
+})
 ```
 
 ### Shutdown

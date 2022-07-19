@@ -11,6 +11,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: false
+    groupAnalytics: false
 ---
 
 <blockquote class="warning-note">
@@ -19,14 +20,15 @@ features:
 
 This is an optional library you can install if you're working with Java. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
-## Installation 
+## Installation
 
-The best way to install the PostHog Android library is with a build system like 
-Gradle or Maven. This ensures you can easily upgrade to the latest versions. 
+The best way to install the PostHog Android library is with a build system like
+Gradle or Maven. This ensures you can easily upgrade to the latest versions.
 
-Lookup the latest version in [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/posthog). 
+Lookup the latest version in [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/posthog).
 
 ### Gradle
+
 All you need to do is add the `posthog` module to your `build.gradle`:
 
 ```bash
@@ -36,6 +38,7 @@ dependencies {
 ```
 
 ### Maven
+
 All you need to do is add the `posthog` module to your `pom.xml`:
 
 ```xml
@@ -76,14 +79,18 @@ class Sample {
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
 
 A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+-   `distinct id` which uniquely identifies your user
+-   `event name` to specify the event
+
+*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
-- `properties`, which is a dictionary with any information you'd like to add
+
+-   `properties`, which is a dictionary with any information you'd like to add
 
 For example:
+
 ```js
 posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
   {
@@ -97,14 +104,16 @@ posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
 like segment users by these properties.
 
 An `identify` call requires:
-- `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key:value pairs 
+
+-   `distinct id` which uniquely identifies your user
+-   `properties` with a dict with any key:value pairs
 
 For example:
+
 ```js
 posthog.identify("distinct id", new HashMap<String, Object>() {
   {
@@ -195,4 +204,3 @@ posthog.setOnce("distinct id", new HashMap<String, Object>() {
   }
 });
 ```
-
