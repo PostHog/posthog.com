@@ -62,7 +62,7 @@ const selfHostPlans: IPlan[] = [
             event: 0.0003,
         },
         mainCTA: {
-            title: 'Deploy now',
+            title: 'Get started',
             url: '/signup/self-host/deploy',
         },
         demoCTA: {

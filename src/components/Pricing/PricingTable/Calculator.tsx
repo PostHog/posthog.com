@@ -238,7 +238,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 </div>
                 {breakdown && (
                     <>
-                        <ul className="grid gap-y-3 m-0 p-0">
+                        <ul className="grid gap-y-2 m-0 p-0">
                             {breakdown.map((price, index) => {
                                 return (
                                     <li
@@ -255,31 +255,31 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         </ul>
                         <button
                             onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                            className="p-2 w-full font-semibold text-black/50 bg-tan rounded-sm mt-4"
+                            className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-xs"
                         >
                             {showFullBreakdown ? 'Hide' : 'Show'} full breakdown
                         </button>
-                        <div className="flex items-center space-x-2 justify-between my-4 pb-2 border-b border-gray-accent-light border-dashed">
+                        <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
                             <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                            <p className="text-[15px] font-bold m-0">{monthlyMinimumPrice}</p>
+                            <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
                         </div>
                     </>
                 )}
                 <div className="flex space-x-2 justify-between items-center">
-                    <h4 className="text-base m-0 font-bold leading-tight">
+                    <h4 className="text-base m-0 font-extrabold leading-tight">
                         Estimated price
                         <br />
-                        <span className="text-[13px] opacity-60 font-semibold">
+                        <span className="text-[13px] opacity-60 font-bold">
                             for {prettyInt(sliderCurve(sliderValue))} events
                         </span>
-                        <span className="text-[12px] font-medium opacity-50">/mo</span>
+                        <span className="text-[12px] font-semibold opacity-50">/mo</span>
                     </h4>
-                    <p className="text[20px] font-bold">
+                    <p className="text-[20px] font-bold">
                         ${finalMonthlyCost}
                         <span className="font-medium text-[15px] opacity-50">/mo</span>
                     </p>
                 </div>
-                <div className="mt-7">
+                <div className="mt-4">
                     <CallToAction type="primary" width="full" className="shadow-md" to={optionDetails?.mainCTA.url}>
                         {optionDetails?.mainCTA.title}
                     </CallToAction>

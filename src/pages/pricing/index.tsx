@@ -91,7 +91,7 @@ const PricingNew = (): JSX.Element => {
                             <span className="text-sm font-semibold text-black/50">/event</span> and is discounted{' '}
                             <span className="font-black">up to 90%</span> for large event volumes.
                         </h3>
-                        <p className="m-0 text-[14px] font-bold text-black/50">
+                        <p className="m-0 text-[14px] font-semibold text-black/50">
                             Need help{' '}
                             <Link to="/blog/calculating-events-from-users" className="font-bold">
                                 estimating your event volume?
@@ -170,7 +170,7 @@ const PricingNew = (): JSX.Element => {
 
                     <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
                         <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:-rotate-6 sm:-mr-8 flex-shrink-0">
-                            <p className="text-white mb-2 mt-0">Want to be our next star?</p>
+                            <p className="text-white mb-2 mt-0 font-comic">Want to be our next star?</p>
                             <span className="h-[28px] w-[125px]">
                                 <GitHubButton
                                     href="https://github.com/posthog/posthog"
