@@ -25,7 +25,9 @@ export const AppTemplate = ({
             title={title}
             titleElement={
                 <div className="flex items-center flex-wrap mb-2">
-                    {thumbnail?.publicURL && <img src={thumbnail.publicURL} alt="app icon" className="w-8 h-8 mr-2" />}
+                    {thumbnail?.publicURL && (
+                        <img src={thumbnail.publicURL} alt="app icon" className="hidden lg:block w-8 h-8 mr-2" />
+                    )}
                     <h1 className="mb-0 mr-auto">{title}</h1>
                     {github && (
                         <Link to={github}>
