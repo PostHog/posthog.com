@@ -95,18 +95,10 @@ const PricingNew = (): JSX.Element => {
                             <br /> Get access to all features.
                         </h1>
                         <h2 className="text-lg text-blue mt-2 leading-tight">
-                            <span className="text-black/50 m-0">Your first 1 million events are included.</span>{' '}
-                            <span className="inline-block">Every month.</span>
+                            <span className="text-black/50 m-0">Your first</span>{' '}
+                            <span className="inline-block">1 million events are free.</span>{' '}
+                            <span className="text-black/50 m-0">Every month.</span>
                         </h2>
-                    </div>
-                </div>
-                <div className="border-y border-gray-accent-light border-dashed py-6">
-                    <div className={section}>
-                        <h3 className="m-0 mb-1 text-lg leading-tight">
-                            Pricing starts at <span className="font-black">$0.000225</span>
-                            <span className="text-sm font-semibold text-black/50">/event</span> and is discounted{' '}
-                            <span className="font-black">up to 90%</span> for large event volumes.
-                        </h3>
                         <p className="m-0 text-[14px] font-semibold text-black/50">
                             Need help{' '}
                             <Link to="/blog/calculating-events-from-users" className="font-bold">
@@ -159,30 +151,6 @@ const PricingNew = (): JSX.Element => {
                                 </Button>
                             </div>
                         </div>
-                        <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start justify-center mt-auto pt-24">
-                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" />
-                            <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-2 -mt-12 flex-shrink-0">
-                                <p className="text-white m-0 text-[18px] font-bold font-comic">
-                                    No need to “contact sales”
-                                </p>
-                                <p className="text-[15px] mt-0 mb-2 text-white font-comic">
-                                    (although you can if you like!)
-                                </p>
-                                <svg
-                                    className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
-                                    width="35"
-                                    height="29"
-                                    viewBox="0 0 35 29"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                        fill="#2D2D2D"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
                     </div>
                     <Calculator enterprise={enterprise} selfHost={selfHost} />
                 </section>
@@ -218,8 +186,7 @@ const PricingNew = (): JSX.Element => {
                             <span>Browse on GitHub</span>
                         </Link>
                         <p className="text-xs opacity-50 mt-2">
-                            Limited to one project and community support. <br />
-                            Scales to ~100k users/mo (limited by database).
+                            Limitations: one project, no user permissions, and community support only.
                         </p>
                     </div>
 
