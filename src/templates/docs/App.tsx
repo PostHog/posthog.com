@@ -4,18 +4,24 @@ import { graphql } from 'gatsby'
 import DocsLayout from 'components/Docs/Layout'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
+import { CallToAction } from 'components/CallToAction'
+import { getCookie } from '../../lib/utils'
 
 export const AppTemplate = ({
     data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) => {
+    const [showCTA, setShowCTA] = React.useState<boolean>(
+        typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
+    )
+
     const {
         body,
         frontmatter,
         contributors,
         fields: { slug },
     } = post
-    const { title, github, thumbnail, description } = frontmatter
+    const { title, github, thumbnail, installUrl, description } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
@@ -29,11 +35,19 @@ export const AppTemplate = ({
                         <img src={thumbnail.publicURL} alt="app icon" className="hidden lg:block w-8 h-8 mr-2" />
                     )}
                     <h1 className="mb-0 mr-auto">{title}</h1>
-                    {github && (
-                        <Link to={github}>
-                            <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
-                        </Link>
-                    )}
+                    <div className="flex items-center space-x-3">
+                        {github && (
+                            <Link to={github}>
+                                <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
+                            </Link>
+                        )}
+
+                        {installUrl && showCTA && (
+                            <CallToAction className="hidden lg:block" to={installUrl}>
+                                Install
+                            </CallToAction>
+                        )}
+                    </div>
                 </div>
             }
             filePath={filePath}
