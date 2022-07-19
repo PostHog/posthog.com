@@ -132,8 +132,8 @@ const selfHostedOptions = {
     ],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
-        title: 'Deploy now',
-        url: '/signup/self-host/deploy',
+        title: 'Get started',
+        url: 'https://license.posthog.com/',
     },
     demoCTA: {
         title: 'Join a group demo',
