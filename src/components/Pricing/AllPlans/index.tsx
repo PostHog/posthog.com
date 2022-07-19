@@ -181,12 +181,14 @@ export default function AllPlans() {
                     <PlanComparison />
                 </div>
             )}
-            <button
-                onClick={() => setShowComparison(!showComparison)}
-                className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
-            >
-                {showComparison ? 'Hide' : 'Show'} full comparison
-            </button>
+            {!showComparison && (
+                <button
+                    onClick={() => setShowComparison(!showComparison)}
+                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
+                >
+                    Show full comparison
+                </button>
+            )}
         </>
     )
 }

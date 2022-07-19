@@ -253,12 +253,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                 )
                             })}
                         </ul>
-                        <button
-                            onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                            className="p-2 w-full font-semibold text-black/50 bg-tan rounded-sm mt-4"
-                        >
-                            {showFullBreakdown ? 'Hide' : 'Show'} full breakdown
-                        </button>
+                        {!showFullBreakdown && (
+                            <button
+                                onClick={() => setShowFullBreakdown(!showFullBreakdown)}
+                                className="p-2 w-full font-semibold text-black/50 bg-tan rounded-sm mt-4"
+                            >
+                                Show full breakdown
+                            </button>
+                        )}
                         <div className="flex items-center space-x-2 justify-between my-4 pb-2 border-b border-gray-accent-light border-dashed">
                             <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
                             <p className="text-[15px] font-bold m-0">{monthlyMinimumPrice}</p>
