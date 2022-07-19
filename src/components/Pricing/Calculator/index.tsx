@@ -165,6 +165,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 2)
     const monthlyMinimumPrice =
         optionDetails &&
+        optionDetails.minimumPrice > 0 &&
         optionDetails.minimumPrice.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -261,13 +262,15 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                 Show full breakdown
                             </button>
                         )}
-                        <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
-                            <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                            <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
-                        </div>
+                        {monthlyMinimumPrice && (
+                            <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
+                                <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
+                                <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
+                            </div>
+                        )}
                     </>
                 )}
-                <div className="flex space-x-2 justify-between items-center">
+                <div className="flex space-x-2 justify-between items-center mt-2">
                     <h4 className="text-base m-0 font-extrabold leading-tight">
                         Estimated price
                         <br />
