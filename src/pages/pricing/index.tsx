@@ -13,6 +13,7 @@ import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
 import { animateScroll as scroll } from 'react-scroll'
+import shape from './images/shape.svg'
 
 export const section = cntl`
     max-w-6xl
@@ -100,38 +101,67 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0`}>
-                <div>
-                    <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
-                    <div>
-                        <h3 className="m-0 mb-1 text-[18px]">Do you need to self-host?</h3>
-                        <p className="m-0 text-black/50 font-medium text-sm">
-                            Customer data never leaves your infrastructure or private cloud.
-                        </p>
-                        <div className="flex space-x-3 mt-3">
-                            <Button onClick={() => setSelfHost(true)} active={selfHost}>
-                                Yes
-                            </Button>
-                            <Button onClick={() => setSelfHost(false)} active={!selfHost}>
-                                No
-                            </Button>
+            <div className="relative">
+                <img src={shape} className="absolute w-screen left-0 -bottom-12 md:block hidden" />
+                <section
+                    className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
+                >
+                    <div className="relative flex flex-col">
+                        <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
+                        <div>
+                            <h3 className="m-0 mb-1 text-[18px]">Do you need to self-host?</h3>
+                            <p className="m-0 text-black/50 font-medium text-sm">
+                                Customer data never leaves your infrastructure or private cloud.
+                            </p>
+                            <div className="flex space-x-3 mt-3">
+                                <Button onClick={() => setSelfHost(true)} active={selfHost}>
+                                    Yes
+                                </Button>
+                                <Button onClick={() => setSelfHost(false)} active={!selfHost}>
+                                    No
+                                </Button>
+                            </div>
+                            <h3 className="m-0 mb-1 text-[18px] mt-9">Are you an enterprise?</h3>
+                            <p className="m-0 text-black/50 font-medium text-sm">
+                                Advanced permissioning, proactive support, training, SSO/SAML & more
+                            </p>
+                            <div className="flex space-x-3 mt-3">
+                                <Button onClick={() => setEnterprise(true)} active={enterprise}>
+                                    Yes
+                                </Button>
+                                <Button onClick={() => setEnterprise(false)} active={!enterprise}>
+                                    No
+                                </Button>
+                            </div>
                         </div>
-                        <h3 className="m-0 mb-1 text-[18px] mt-9">Are you an enterprise?</h3>
-                        <p className="m-0 text-black/50 font-medium text-sm">
-                            Advanced permissioning, proactive support, training, SSO/SAML & more
-                        </p>
-                        <div className="flex space-x-3 mt-3">
-                            <Button onClick={() => setEnterprise(true)} active={enterprise}>
-                                Yes
-                            </Button>
-                            <Button onClick={() => setEnterprise(false)} active={!enterprise}>
-                                No
-                            </Button>
+                        <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start justify-center mt-auto pt-24">
+                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" />
+                            <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-2 -mt-12 flex-shrink-0">
+                                <p className="text-white m-0 text-[18px] font-bold font-comic">
+                                    No need to “contact sales”
+                                </p>
+                                <p className="text-[15px] mt-0 mb-2 text-white font-comic">
+                                    (although you can if you like!)
+                                </p>
+                                <svg
+                                    className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
+                                    width="35"
+                                    height="29"
+                                    viewBox="0 0 35 29"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
+                                        fill="#2D2D2D"
+                                    />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <Calculator enterprise={enterprise} selfHost={selfHost} />
-            </section>
+                    <Calculator enterprise={enterprise} selfHost={selfHost} />
+                </section>
+            </div>
             <section className={section}>
                 <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
                     What comes in PostHog?
@@ -230,8 +260,10 @@ const PricingNew = (): JSX.Element => {
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
                     <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
-                        <p className="text-white m-0 text-[18px] font-bold">Looking for the signup button?</p>
-                        <p className="text-[15px] mt-0 mb-2 text-white">(I’ll take you there.)</p>
+                        <p className="text-white m-0 text-[18px] font-bold font-comic">
+                            Looking for the signup button?
+                        </p>
+                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
                             className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm"
