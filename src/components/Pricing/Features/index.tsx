@@ -16,12 +16,12 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product Analytics', icon: icons.analytics },
-    { title: 'Session Recording', icon: icons.sessionRecording },
-    { title: 'Feature Flags', icon: icons.featureFlags },
+    { title: 'Product analytics', icon: icons.analytics },
+    { title: 'Session recording', icon: icons.sessionRecording },
+    { title: 'Feature flags', icon: icons.featureFlags },
     { title: 'Heatmaps', icon: icons.heatmaps },
-    { title: 'A/B Testing', icon: icons.abTesting },
-    { title: 'Correlation Insights', icon: icons.correlationInsights },
+    { title: 'A/B testing', icon: icons.abTesting },
+    { title: 'Correlation insights', icon: icons.correlationInsights },
     { title: 'Group analytics', icon: icons.groupAnalytics },
     { title: 'Team collaboration', icon: icons.teamCollaboration },
 ]
@@ -83,7 +83,7 @@ const leftCol: IColumn[] = [
 const rightCol: IColumn[] = [
     { title: 'Enterprise plans offer:', section: enterpisePlansOffer },
     {
-        title: 'Plus, on Enterprise self-hosted:',
+        title: 'Plus, on Enterprise (Self-Hosted):',
         section: enterpriseSelfHosted,
     },
 ]
@@ -151,7 +151,9 @@ export default function Features() {
                         })}
                     </div>
                     <p className="flex items-center px-8 pb-3 lg:pb-0 lg:mb-0 before:w-[9px] before:h-[9px] before:rounded-full before:bg-dark-yellow before:mr-1 text-[12px] text-white font-medium">
-                        <span className="opacity-60 block pl-1">Currently available on Enterprise Self-host only</span>
+                        <span className="opacity-60 block pl-1">
+                            Currently available on Enterprise (Self-Hosted) only
+                        </span>
                     </p>
                 </div>
 

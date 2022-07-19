@@ -86,7 +86,7 @@ const cloudOptions = {
     minimumPrice: CLOUD_MINIMUM_PRICING,
     title: 'PostHog Cloud',
     subtitle: 'Turnkey, hosted by PostHog',
-    badge: 'Self-serve',
+    badge: 'Self-Serve',
     breakdown: [0, 0.000225, 0.000075, 0.000025],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
@@ -118,9 +118,9 @@ const cloudEnterpriseOptions = {
 
 const selfHostedOptions = {
     minimumPrice: SCALE_MINIMUM_PRICING,
-    title: 'PostHog Self-hosted',
+    title: 'PostHog Self-Hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
-    badge: 'Self serve',
+    badge: 'Self-Serve',
     breakdown: [0, 0.00045, 0.000225, 0.000045, 0.000009, 0.000003],
     breakdownLabels: [
         'First 1 million',
@@ -143,7 +143,7 @@ const selfHostedOptions = {
 
 const selfHostedEnterpriseOptions = {
     minimumPrice: ENTERPRISE_MINIMUM_PRICING,
-    title: 'PostHog Self-hosted',
+    title: 'PostHog Self-Hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
