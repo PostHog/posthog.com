@@ -170,7 +170,7 @@ const PricingNew = (): JSX.Element => {
 
                     <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
                         <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:-rotate-6 sm:-mr-8 flex-shrink-0">
-                            <p className="text-white mb-2 mt-0">Wnat to be our next star?</p>
+                            <p className="text-white mb-2 mt-0">Want to be our next star?</p>
                             <span className="h-[28px] w-[125px]">
                                 <GitHubButton
                                     href="https://github.com/posthog/posthog"
