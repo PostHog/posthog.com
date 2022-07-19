@@ -1295,10 +1295,6 @@
                                     "name": "Taxonomy Standardizer"
                                 },
                                 {
-                                    "url": "/docs/apps/timestamp-parser",
-                                    "name": "Timestamp Parser"
-                                },
-                                {
                                     "url": "/docs/apps/unduplicator",
                                     "name": "Unduplicator"
                                 }
@@ -1319,6 +1315,10 @@
                                 {
                                     "url": "/docs/apps/geoip-enrichment",
                                     "name": "GeoIP Enricher"
+                                },
+                                {
+                                    "url": "/docs/apps/timestamp-parser",
+                                    "name": "Timestamp Parser"
                                 },
                                 {
                                     "url": "/docs/apps/url-normalizer",
