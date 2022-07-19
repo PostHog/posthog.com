@@ -12,9 +12,9 @@ const features = [
         description: 'First-party cookie means privacy trackers don’t block PostHog like a third-party script.',
     },
     {
-        title: 'Easy deploy instructions for most private Cloud platforms',
+        title: 'Easy deploy instructions for most private cloud platforms',
         description:
-            'Step-by-step instructions for hosting on AWS, Digital Ocean, Google Cloud, or deploying with Helm Chart',
+            'Step-by-step instructions for hosting on AWS, DigitalOcean, Google Cloud, or deploying with Helm Chart',
     },
 ]
 
