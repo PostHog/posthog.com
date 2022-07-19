@@ -8,7 +8,7 @@ export default function Modal({ open, setOpen, children }) {
             {open && (
                 <motion.div
                     className="h-full"
-                    transition={{ duration: 0.04 }}
+                    transition={{ duration: 0.15 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                 >

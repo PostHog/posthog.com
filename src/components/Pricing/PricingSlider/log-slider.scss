@@ -13,6 +13,10 @@
     }
 }
 
+.rc-slider {
+    width: calc(100% - 14px);
+}
+
 @media screen and (max-width: 1076px) {
     .rc-slider {
         max-width: 100%;
