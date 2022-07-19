@@ -52,7 +52,7 @@ const deployment = [
     { name: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
     { name: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
     { name: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
-    { name: 'Digital Ocean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
+    { name: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
     { name: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
     { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'hobby', badge: undefined },
 ]

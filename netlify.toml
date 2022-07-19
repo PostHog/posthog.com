@@ -1794,7 +1794,6 @@
     from = "/apps/zapier-connector/docs"
     to = "/docs/apps/zapier-connector"
 
-
 # Added: 2022-07-14
 [[redirects]]
     from = "/apps/zendesk-connector/docs"
@@ -1805,6 +1804,7 @@
     from = "/handbook/engineering/app-east"
     to = "/handbook/people/team-structure/app-east"
 
+# Added: 2022-07-18
 [[redirects]]
-from = "/handbook/engineering/app-west"
-to = "/handbook/people/team-structure/app-west"
+    from = "/handbook/engineering/app-west"
+    to = "/handbook/people/team-structure/app-west"
