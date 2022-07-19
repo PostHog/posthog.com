@@ -82,7 +82,7 @@ function Plan({
                 </>
             ) : available ? (
                 <>
-                    <img src={CheckIcon} alt="Available" className="h-3 w-3 mr-2" aria-hidden="true" />
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
                 </>
             ) : (
                 <>

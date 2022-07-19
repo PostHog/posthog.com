@@ -132,6 +132,7 @@ export const query = graphql`
                     autoCapture
                     sessionRecording
                     featureFlags
+                    groupAnalytics
                 }
                 hideLastUpdated
                 featuredImage {
