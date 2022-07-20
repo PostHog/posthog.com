@@ -18,7 +18,7 @@ In most places, with the exception of outages, working in infrastructure means y
 
 Sure, building out fast CI pipelines and continuous deployment, improving system reliability, and empowering other engineers to do more (providing methodologies, tools, etc) makes the rest of the engineering team more productive, but all your competitors do this too.
 
-At PostHog, giving people the option to self-host is one of our biggest advantages compared to our competitors. That means we treat our self hosted infra like a product. And, like any good product, we've written great public documentation.
+At PostHog, giving people the option to self-host is one of our biggest advantages compared to our competitors. That means we treat our self-hosted infra like a product. And, like any good product, we've written great public documentation.
 
 To make sure our customers don't experience issues, we do automated testing of our Helm chart on all major cloud providers. We get [Issues](https://github.com/PostHog/charts/issues) raised by real customers, not just internal 'consumers'.
 
@@ -34,7 +34,6 @@ We run one of the biggest PostHog instances ourselves, with >20 billion events. 
 
 Did you just read a sales pitch? Yes. Should you [immediately apply for the SRE role](https://apply.workable.com/posthog/j/071DD5C05A/) at PostHog? Also yes.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
 <NewsletterForm
 compact
