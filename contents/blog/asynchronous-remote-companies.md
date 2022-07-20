@@ -20,7 +20,9 @@ It stopped us both from breaking focus to discuss every single time we spoke to 
 Asynchronous work has been key to our success at PostHog:
 
 * It means we're able to operate all-remotely, across a range of timezones.
-* Asynchronous communication can be shared much more easily - so it's easy to share more context and to be more transparent with a wider team, which enables people to be autonomous and empowered.
+
+* Asynchronous communication can be shared much more easily – so it's easy to share more context and to be more transparent with a wider team, which enables people to be autonomous and empowered.
+
 * You can focus on your work. An awful lot of people hate meetings!
 
 ## Making teams feel like teams
@@ -29,7 +31,7 @@ After YC, we raised a bunch of money, and hired people. We have always been disc
 
 Features got shipped fast, yet everything felt calm. We grew a lot.
 
-The more we kicked ass, the more we realized - we have to keep this team together. To do that, we decided getting to know each other better was the best way to avoid churn - there was so little time made for informal discussion otherwise.
+The more we kicked ass, the more we realized – we have to keep this team together. To do that, we decided getting to know each other better was the best way to avoid churn – there was so little time made for informal discussion otherwise.
 
 So we hired a big house in Tuscany for a week, after about six months of working together. For almost everyone, it was our first time meeting.
 
@@ -41,7 +43,7 @@ We [now mandate](/handbook/company/offsites) an annual all-company offsite where
 
 ## You can get too asynchronous
 
-The "better" you run a company, removing unnecessary meetings, using more written communication, the less time you "lose" to socializing. We tried things like Zoom catchups, but it's not the same – Zoom is just too close to feeling like a work meeting compared to getting dinner or going for a walk.
+The "better" you run a company – removing unnecessary meetings, using more written communication – the less time you "lose" to socializing. We tried things like Zoom catchups, but it's not the same – Zoom is just too close to feeling like a work meeting compared to getting dinner or going for a walk.
 
 Don't get me wrong – working asynchronously has huge upside. This time often goes back to people having more time with their families, or more time building things. It enables everything at the top of this post.
 
