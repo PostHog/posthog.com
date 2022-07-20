@@ -139,7 +139,7 @@ If you receive an application via email or some other non-Workable channel like 
 
 For most roles, we don’t just rely on incoming applications. Direct outreach is a great way to influence the hiring pipeline, and enables us to:
 
-*   Aapproach people with very specific or relevant experience, even when they are not currently looking for a new role
+*   Approach people with very specific or relevant experience, even when they are not currently looking for a new role
 *   Encourage candidates from a wider range of backgrounds to apply
 *   Build our employer brand and general awareness
 
@@ -152,7 +152,7 @@ Good places to look for people include:
 *   StackOverflow
 *   AngelList
 
-Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite licence (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
+Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite license (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
 
 ### Booking interviews through Workable
 

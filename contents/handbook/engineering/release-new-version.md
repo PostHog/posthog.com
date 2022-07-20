@@ -51,8 +51,8 @@ The release manager is ultimately responsible for the timeline of the release. T
   > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the next steps. You can install all of these with `brew install doctl helm k9s`.
 
 1. [ ] Upgrade PostHog playground
-    1. The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
-    1. If this is your first time on Digital Ocean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
+    1. The PostHog Playground uses a helm chart deployment on DigitalOcean. Find the playground cluster in our [DigitalOcean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
+    1. If this is your first time on DigitalOcean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
 
       ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
 
