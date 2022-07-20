@@ -140,6 +140,14 @@ module.exports = {
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                comic: [
+                    'Comic Sans MS',
+                    'Comic Sans',
+                    'Arial Rounded MT Bold',
+                    'Helvetica Rounded',
+                    'Arial',
+                    'sans-serif',
+                ],
             },
             fontSize: {
                 '2xs': '0.65rem',

@@ -15,7 +15,7 @@ export default function DeploymentOptions({ className = '' }) {
                 <DeployOption title="Amazon AWS" icon="aws" url="/docs/self-host/deploy/aws" />
                 <DeployOption title="Google Cloud" icon="gcs" url="/docs/self-host/deploy/gcp" />
                 <DeployOption title="Helm Chart" icon="helm chart" url="/docs/self-host/deploy/other" />
-                <DeployOption title="Digital Ocean" icon="digital ocean" url="/docs/self-host/deploy/digital-ocean" />
+                <DeployOption title="DigitalOcean" icon="digital ocean" url="/docs/self-host/deploy/digital-ocean" />
                 <DeployOption title="Source" icon="github" url="https://github.com/PostHog/posthog" />
             </ul>
             <div className="flex justify-between items-center bg-gray-accent-light px-[18px] py-[16px] rounded-md flex-col xl:flex-row space-y-2 xl:space-y-0 ">

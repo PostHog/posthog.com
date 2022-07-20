@@ -5,6 +5,7 @@ const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
 const careersTemplate = require('../src/templates/OG/careers.js')
+const tutorialTemplate = require('../src/templates/OG/tutorial.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -53,6 +54,18 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     contributors {
                         username
                         avatar {
+                            absolutePath
+                        }
+                    }
+                }
+            }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        featuredImage {
                             absolutePath
                         }
                     }
@@ -260,6 +273,18 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
         slug: 'careers',
     })
+
+    // Tutorials OG
+    for (const post of data.tutorials.nodes) {
+        const { featuredImage } = post.frontmatter
+        const image = fs.readFileSync(featuredImage.absolutePath, {
+            encoding: 'base64',
+        })
+        await createOG({
+            html: tutorialTemplate({ image }),
+            slug: post.fields.slug,
+        })
+    }
 
     await browser.close()
 }

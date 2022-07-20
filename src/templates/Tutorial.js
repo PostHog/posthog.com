@@ -87,7 +87,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
     const { pageData } = data
-    const { body, excerpt } = pageData
+    const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
         iframe: Iframe,
@@ -120,7 +120,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <Breadcrumbs
                 crumbs={[

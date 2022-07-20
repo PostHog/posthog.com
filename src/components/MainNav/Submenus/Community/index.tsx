@@ -22,6 +22,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             url: '/marketplace',
         },
         {
+            title: 'Customer stories',
+            description: 'See how PostHog is moving the needle up and to the right',
+            url: '/customers',
+        },
+        {
             title: 'Contributors',
             description: 'Fix a bug, get credit for the merch store (and warm fuzzies)',
             url: '/contributors',
