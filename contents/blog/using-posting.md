@@ -188,8 +188,6 @@ Quoting [MentionMe Software Engineer Lleo Harress](https://posthog.com/customers
 
 ## 14. Spend a week watching people using your product
 
-![recording filters posthog](../images/blog/things-to-do-in-posthog/session-recording.png)
-
 Seriously, sometimes it's just useful to spend a whole load of time watching people using your product. 
 
 In the Recordings page in PostHog, you can filter all recordings based on cohorts you've already created, or specific events you're interested in. You can also select a date range and a minimum/maximum recording duration. 
