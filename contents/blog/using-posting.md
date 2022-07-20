@@ -235,7 +235,15 @@ But what if you want geographic data, but don't don't to collect more personally
 
 Enter the [Property Filter](/apps/property-filter) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
 
-## 20. Connect PagerDuty and PostHog to get threshold alerts
+## 20. Visualize user behavior using the PostHog Toolbar
+
+Want to see where people are clicking on any page on your website or web app, just like this?
+
+[INSERT IMAGE HERE]
+
+Try the [PostHog Toolbar](/tutorials/toolbar).
+
+## 21. Connect PagerDuty and PostHog to get threshold alerts
 
 Connecting PagerDuty and PostHog allows you to get alerts on all sorts of metrics based on PostHog events. 
 
@@ -243,7 +251,7 @@ Want to know when you're going viral? Set an alert when website page views go ab
 
 It's also useful for setting goals and receiving alerts when you achieve them.
 
-## 21. Track support tickets by connecting Zendesk
+## 22. Track support tickets by connecting Zendesk
 
 The [Zendesk Connector for PostHog](/apps/zendesk-connector) is a two-way connector that allows you turn Zendesk tickets into PostHog events and enrich Zendesk tickets with PostHog event data. 
 
