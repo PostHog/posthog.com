@@ -29,7 +29,7 @@ Most of the people we deal with are experienced engineers and SREs themselves, a
 ## How to serve 20bn events for real time analytics
 
 We don't _just_ build infrastructure for other people to run.
-We run one of the biggest PostHog instances ourselves, with 20bn events.
+We run one of the biggest PostHog instances ourselves, with >20 billion events.
 And before you ask, yes, our cloud infrastructure runs the same helm chart that we ship to our customers.
 
 
