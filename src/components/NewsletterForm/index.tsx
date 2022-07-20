@@ -36,7 +36,7 @@ export const NewsletterForm = ({
 
                         <span className="flex flex-col space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
                             <span className="text-lg">The best of PostHog.</span>{' '}
-                            <span className="text-sm md:text-lg">Delivered twice a month </span>
+                            <span className="text-sm md:text-lg">Delivered twice a month.</span>
                         </span>
                     </div>
                     <div className="md:ml-16 mt-2 md:mt-0">
