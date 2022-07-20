@@ -16,6 +16,11 @@ const features = [
         description:
             'Step-by-step instructions for hosting on AWS, DigitalOcean, Google Cloud, or deploying with Helm Chart',
     },
+    {
+        title: 'Trusted by industry leaders',
+        description: 'Find out why these teams self-host PostHog',
+        features: ['Hasura', 'Airbus', '[Saga](/customers/saga)'],
+    },
 ]
 
 export default function SelfHost({ setOpen, open }: { setOpen: (open: boolean) => void; open: boolean }) {
