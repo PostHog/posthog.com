@@ -1,6 +1,6 @@
 ---
 date: 2022-07-13
-title: "You can't make friends asynchronously"
+title: "Remote companies can be too asynchronous"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -44,3 +44,5 @@ The "better" you run a company, removing unnecessary meetings, using more writte
 Don't get me wrong - working asynchronously has huge upside. This time often goes back to people having more time with their families, or more time building things. It enables everything at the top of this post.
 
 But, knowing each other more deeply helps create a true team - where people can more deeply trust and empathize with each other.
+
+So, if you're building a remote company, don't wait too long to initiate those links. It could be the difference between success and failure.
