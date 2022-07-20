@@ -16,7 +16,7 @@ We're hiring [Site Reliability Engineers](https://apply.workable.com/posthog/j/0
 
 In most places, with the exception of outages, working in infrastructure means you're working on an invisible part of the company.
 
-Sure, building out fast CI pipelines and continuous deployment makes the rest of the engineering team more productive, but all your competitors do this too.
+Sure, building out fast CI pipelines and continuous deployment, improving system reliability, and empowering other engineers to do more (providing methodologies, tools, etc) makes the rest of the engineering team more productive, but all your competitors do this too.
 
 At PostHog, giving people the option to self-host is one of our biggest advantages compared to our competitors. That means we treat our self hosted infra like a product. And, like any good product, we've written great public documentation.
 
