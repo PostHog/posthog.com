@@ -39,7 +39,7 @@ It transformed the company. People came together and got more comfortable giving
 
 We [now mandate](/handbook/company/offsites) an annual all-company offsite where everyone is strongly encouraged to attend, and twice-annual small team offsites for people to work together and socialize. We also provide a $200 monthly budget for co-working, and a $250 monthly budget to cover the cost of travel and meals to meet colleagues.
 
-## You can get too asynchronous
+## You can get too asynchronous
 
 The "better" you run a company, removing unnecessary meetings, using more written communication, the less time you "lose" to socializing. We tried things like Zoom catchups, but it's not the same - Zoom is just too close to feeling like a work meeting compared to getting dinner or going for a walk.
 
