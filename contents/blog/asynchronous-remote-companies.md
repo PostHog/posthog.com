@@ -41,11 +41,11 @@ We [now mandate](/handbook/company/offsites) an annual all-company offsite where
 
 ## You can get too asynchronous
 
-The "better" you run a company, removing unnecessary meetings, using more written communication, the less time you "lose" to socializing. We tried things like Zoom catchups, but it's not the same - Zoom is just too close to feeling like a work meeting compared to getting dinner or going for a walk.
+The "better" you run a company, removing unnecessary meetings, using more written communication, the less time you "lose" to socializing. We tried things like Zoom catchups, but it's not the same – Zoom is just too close to feeling like a work meeting compared to getting dinner or going for a walk.
 
-Don't get me wrong - working asynchronously has huge upside. This time often goes back to people having more time with their families, or more time building things. It enables everything at the top of this post.
+Don't get me wrong – working asynchronously has huge upside. This time often goes back to people having more time with their families, or more time building things. It enables everything at the top of this post.
 
-But, knowing each other more deeply helps create a true team - where people can more deeply trust and empathize with each other.
+But, knowing each other more deeply helps create a true team – where people can more deeply trust and empathize with each other.
 
 So, if you're building a remote company, don't wait too long to initiate those links. It could be the difference between success and failure.
 
