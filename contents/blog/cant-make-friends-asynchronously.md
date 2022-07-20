@@ -25,7 +25,7 @@ Asynchronous work has been key to our success at PostHog:
 
 ## Making teams feel like teams
 
-After YC, we raised a bunch of money, and hired people. We have always been disciplined around how we do meetings - the majority have a clear purpose, notes and action items.
+After YC, we raised a bunch of money, and hired people. We have always been disciplined around how we do meetings – the majority have a clear purpose, notes and action items, and meetings are banned on Tuesdays and Thursdays.
 
 Features got shipped fast, yet everything felt calm. We grew a lot.
 
@@ -36,6 +36,8 @@ So we hired a big house in Tuscany for a week, after about six months of working
 The TL;DR?
 
 It transformed the company. People came together and got more comfortable giving direct feedback, we changed our product trajectory (it gave us the idea for apps and for session recording, which led to our philosophy around consolidating a bunch of tools), and we realized we have to do this often. 
+
+We [now mandate](/handbook/company/offsites) an annual all-company offsite where everyone is strongly encouraged to attend, and twice-annual small team offsites for people to work together and socialize. We also provide a $200 monthly budget for co-working, and a $250 monthly budget to cover the cost of travel and meals to meet colleagues.
 
 ## You can get too asynchronous
 
