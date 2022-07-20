@@ -6,7 +6,9 @@ showTitle: true
 
 ## Press enquiries
 
-Any press-related enquiries should be directed to press@posthog.com. Only James, Tim or Charles should be talking to the press on PostHog's behalf. If someone from the press approaches you, please raise with one of them in the first instance. 
+Any press-related enquiries should be directed to press@posthog.com - this includes any emails you receive personally. Only Joe, James, Tim or Charles should be talking to the press on PostHog's behalf. 
+
+With the exception of occasional major press releases (see below), PR is purely a reactive activity at PostHog. We do not invest in proactive PR yet, as we believe other channels are a higher priority. 
 
 ## Managing press releases
 

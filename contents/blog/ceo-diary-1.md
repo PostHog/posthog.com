@@ -71,3 +71,9 @@ We want to get more scores like the above, so we did two things:
 1. We're launching marketing initiatives to promote PostHog even further to teams that feel like the above scores. The test is: "Can we do this without building any more paid features?"
 
 More updates coming soon! :)
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

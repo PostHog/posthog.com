@@ -31,7 +31,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
 | [Feature flags](/docs/user-guides/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [Conversion rate optimization](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
-| [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
+| [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Tracking features
 
@@ -65,6 +65,7 @@ _All of our libraries work with PostHog Cloud and Self-hosted versions._
 | ---------------------------------------------------------------- | ------------------------------------------------------ | ----- | ------------ |
 | Privacy friendly                                                 | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | Ad-blocker friendly                                              | <span style="color: #71AA55">**Live**</span>           |       | ✔            |
+| [Subscriptions](/docs/user-guides/subscriptions)                 | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [Team management](https://github.com/PostHog/posthog/issues/260) | <span style="color: #F9BD2B">**In development**</span> | ✔     | ✔            |
 | [CSV export](https://github.com/PostHog/posthog/issues/724)      | <span style="color: #F9BD2B">**In development**</span> | ✔     | ✔            |
 | User roles                                                       | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |

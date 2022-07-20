@@ -17,9 +17,9 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import slugify from 'slugify'
-import { CodeBlock } from '../components/CodeBlock'
+import { CodeBlock } from 'components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import MobileSidebar from './Handbook/MobileSidebar'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -86,8 +86,8 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
 }
 
 export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
-    const { pageData, questions } = data
-    const { body, excerpt } = pageData
+    const { pageData } = data
+    const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
         iframe: Iframe,
@@ -120,7 +120,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={featuredImage?.publicURL}
+                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <Breadcrumbs
                 crumbs={[
@@ -131,7 +131,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
             <PostLayout
-                questions={<CommunityQuestions questions={questions?.nodes} />}
+                questions={<CommunityQuestions />}
                 body={body}
                 featuredImage={featuredImage}
                 featuredVideo={featuredVideo}
@@ -177,7 +177,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
 }
 
 export const query = graphql`
-    query TutorialLayout($id: String!, $slug: String!) {
+    query TutorialLayout($id: String!) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -202,34 +202,6 @@ export const query = graphql`
                     publicURL
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
-                    }
-                }
-            }
-        }
-        questions: allQuestion(filter: { slug: { in: [$slug] } }) {
-            nodes {
-                childrenReply {
-                    id
-                    subject
-                    name
-                    childMdx {
-                        body
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 40, height: 40)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 40, height: 40)
-                                }
-                            }
-                        }
                     }
                 }
             }

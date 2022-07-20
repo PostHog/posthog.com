@@ -14,11 +14,11 @@ export const contributorStatsLogic = kea({
             {
                 loadDatasets: async () => {
                     const datasetsRes = await fetch(
-                        'https://app.posthog.com/api/shared_dashboards/6j6-3tr86CgbNK_4PmyYHxHQYTdvEg/'
+                        'https://app.posthog.com/shared/6j6-3tr86CgbNK_4PmyYHxHQYTdvEg.json'
                     )
                     const datasetsJson = await datasetsRes.json()
 
-                    let sortedDatasets = datasetsJson.items[0].result.sort((a: Dataset, b: Dataset) => {
+                    let sortedDatasets = datasetsJson.dashboard.items[0].result.sort((a: Dataset, b: Dataset) => {
                         const aTotal = a.data.reduce((aggregate, current) => aggregate + current)
                         const bTotal = b.data.reduce((aggregate, current) => aggregate + current)
                         if (bTotal > aTotal) {

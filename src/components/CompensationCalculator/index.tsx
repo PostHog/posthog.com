@@ -6,6 +6,7 @@ import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
 
+import 'antd/lib/select/style/css'
 import 'antd/lib/statistic/style/css'
 import 'antd/lib/tag/style/css'
 import 'antd/lib/radio/style/css'
@@ -144,7 +145,8 @@ export const CompensationCalculator = () => {
                                   levelModifier[level] *
                                   stepModifier[step][1],
                               location?.currency
-                          )
+                          ) +
+                          ' + equity'
                         : '--'
                 }
             />

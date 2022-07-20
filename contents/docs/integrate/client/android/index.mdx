@@ -1,11 +1,18 @@
 ---
 title: Android library
+layout: library
 sidebarTitle: Android
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-android
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: false
+    groupAnalytics: false
 ---
-
-<VisitLibrary name="Android" to="https://github.com/PostHog/posthog-android" official />
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
@@ -80,7 +87,7 @@ PostHog.with(this)
 
 ### Flush
 
-You can set the number of events in the configuration that should queue before flushing. 
+You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
 
 You can also configure the flush interval. By default we flush all events after `30` seconds,

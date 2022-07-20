@@ -17,7 +17,7 @@ It should **not** be used as a production instance for tracking a product with a
 ## Pre-requisites
 
 -   You have deployed a Linux Ubuntu Virtual Machine.
-    -   A $10/month (2GB RAM) droplet on Digital Ocean can handle approximately 100k events spread over a month
+    -   A $10/month (2GB RAM) droplet on DigitalOcean can handle approximately 100k events spread over a month
     -   We recommend a $20/ month (4GB RAM) if you expect any surges in event volumes
     -   Over 100K we'd recommend our Scale deployment methods
 
@@ -47,9 +47,9 @@ For a quick install that uses Docker, run the following command:
 
 ## Upgrading
 
-To upgrade PostHog, you can run `./posthog/bin/upgrade`. This will cause a few minutes of downtime.
-
-If `./posthog/bin/upgrade` can't be found, run `cd posthog && git pull origin master && cd ../` first.
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
+```
 
 ## Migrating
 

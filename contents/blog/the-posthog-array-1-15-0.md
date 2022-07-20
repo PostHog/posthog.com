@@ -84,7 +84,7 @@ Have you gotten your weekly report yet?
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).
 
-For those who don't know, Hacktoberfest is an initiative led by Digital Ocean to promote open source projects and foster the overall open 
+For those who don't know, Hacktoberfest is an initiative led by DigitalOcean to promote open source projects and foster the overall open 
 source community. 
 
 As a result, we have now [tagged some good first issues](https://github.com/PostHog/posthog/labels/Hacktoberfest) on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
@@ -268,4 +268,7 @@ If you're still a little confused about ClickHouse, this might help:
 <span class='center'>
 <iframe src="https://giphy.com/embed/XmBwOQ9YpXNoCzaPOE" width="400" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 </span>
+
+<ArrayCTA />
+
 

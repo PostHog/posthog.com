@@ -1,151 +1,109 @@
 import { TrackedCTA } from 'components/CallToAction/index.js'
-import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
+import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
+import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import React from 'react'
-import { SCALE_MINIMUM_PRICING } from '../constants'
+import { SelfHostIcon } from '../Calculator'
+import {
+    CLOUD_ENTERPRISE_MINIMUM_PRICING,
+    CLOUD_MINIMUM_PRICING,
+    ENTERPRISE_MINIMUM_PRICING,
+    features,
+    SCALE_MINIMUM_PRICING,
+} from '../constants'
 import { Features, Plan, Price, Section } from './Plan'
-import { features } from '../constants'
 
-export const OpenSource = () => {
+const Feature = ({ children }) => {
     return (
-        <Plan title="Open source" subtitle="Great for startups" badge="LIMITED TO 1 PROJECT">
-            <Section title="Platform" className="mb-auto">
-                <Features features={features['Platform']} size="sm" className="grid-cols-1 md:grid-cols-2 gap-y-4" />
-            </Section>
-            <Section title="Platform features" className="mt-auto">
-                <Features features={features['Platform features']} className="grid-cols-1 md:grid-cols-2" />
-            </Section>
-            <Section title="Pricing" className="mt-auto">
-                <Price>Free</Price>
-            </Section>
-            <TrackedCTA
-                to="/signup/self-host/deploy"
-                className="mt-7 mb-3"
-                event={{ name: 'select edition: clicked get started', type: 'open_source' }}
-            >
-                Deploy now
-            </TrackedCTA>
-            <span className="h-[49.5px] flex justify-center items-center text-black opacity-50">
-                Includes community support on Slack
+        <li className={`text-black font-semibold text-[15px] flex space-x-2 items-center leading-tight`}>
+            <span className="w-4 flex justify-center items-center flex-shrink-0 opacity-75">
+                <Check2 />
             </span>
-        </Plan>
+            <span>{children}</span>
+        </li>
     )
 }
 
-export const Scale = ({
-    setOpen,
-    hideActions,
-    hideBadge,
-    hideCalculator,
-    className = 'border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20',
-}) => {
+export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className = '' }) => {
     return (
         <Plan
-            title="Scale"
-            subtitle="For large userbases or event volumes"
-            badge={!hideBadge && 'INCLUDES OPEN SOURCE FEATURES'}
+            icon={<SelfHostIcon />}
+            title="Self-Host"
+            subtitle="with community support"
+            badge={'Self-Serve'}
             className={className}
         >
-            <Section title="Advanced features">
-                <Features features={features['Advanced features']} />
-            </Section>
-            <Section title="Collaboration">
-                <Features features={features['Collaboration']} />
-            </Section>
-            {!hideActions && (
-                <>
-                    <Section title="Pricing starts at" className="mt-auto">
-                        <div className="flex justify-between items-center">
-                            <Price>
-                                ${Math.round(SCALE_MINIMUM_PRICING).toLocaleString()}
-                                <span className="text-base opacity-50">/mo</span>
-                            </Price>
-                            {!hideCalculator && (
-                                <Link className="text-yellow font-bold" onClick={() => setOpen(true)}>
-                                    Calculate your price
-                                </Link>
-                            )}
-                        </div>
-                    </Section>
-                    <TrackedCTA
-                        href="https://license.posthog.com/"
-                        className="mt-7 mb-3"
-                        event={{ name: 'select edition: clicked get started', type: 'scale' }}
-                    >
-                        Get started
-                    </TrackedCTA>
-                    <TrackedCTA
-                        type="outline"
-                        to="/signup/self-host/get-in-touch?plan=scale&demo=scale#demo"
-                        event={{ name: 'select edition: clicked book demo', type: 'scale' }}
-                    >
-                        Book a demo
-                    </TrackedCTA>
-                </>
-            )}
+            <div className="h-full flex flex-col">
+                <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
+                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
+                    <p className="m-0">
+                        <span>
+                            <strong>$0.0003</strong>
+                            <span className="text-[13px] opacity-50">/event</span>
+                        </span>
+                    </p>
+                    <p className="text-blue font-semibold mb-0 text-[14px]">First 1 million events free every month</p>
+                </div>
+                <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
+                    <Feature>Unlimited tracked users</Feature>
+                    <Feature>Unlimited teammates</Feature>
+                    <Feature>Unlimited event tracking</Feature>
+                </ul>
+                <TrackedCTA
+                    href="https://license.posthog.com/"
+                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    event={{ name: `clicked Choose Self-Serve`, type: 'self-hosted' }}
+                >
+                    Choose Self-Serve
+                </TrackedCTA>
+            </div>
         </Plan>
     )
 }
 
-export const Enterprise = () => {
+export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, className = '' }) => {
     return (
         <Plan
-            title="Enterprise"
-            subtitle="Your IT & legal teams will be very pleased"
-            badge="INCLUDES OPEN SOURCE & SCALE FEATURES"
+            icon={<SelfHostIcon />}
+            title="Self-Host"
+            subtitle="with dedicated, proactive support"
+            badge={'Enterprise'}
+            className={className}
         >
-            <Section title="Account & support">
-                <Features features={features['Account & support']} />
-            </Section>
-            <Section title="Ops & security">
-                <Features features={features['Ops & security']} />
-            </Section>
-            <Section title="Pricing">
-                <Price>Custom</Price>
-            </Section>
-            <TrackedCTA
-                className="mt-7 mb-3"
-                to="/signup/self-host/get-in-touch?plan=enterprise#contact"
-                event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
-            >
-                Get in touch
-            </TrackedCTA>
-            <TrackedCTA
-                type="outline"
-                to="/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo"
-                event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
-            >
-                Book a demo
-            </TrackedCTA>
-        </Plan>
-    )
-}
+            <div className="h-full flex flex-col">
+                <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
+                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
+                    <p className="m-0">
+                        <strong>$450</strong>
+                        <span className="text-[13px] opacity-50">/monthly</span>
+                        <span className="inline-block opacity-50 mx-2">+</span>
 
-export const Cloud = ({ finalCost, eventNumberWithDelimiter }) => {
-    return (
-        <Plan
-            title="PostHog Cloud"
-            subtitle="Turnkey, hosted solution"
-            className="border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20"
-        >
-            <Section title="Platform">
-                <Features features={features['Platform']} className="grid-cols-1 md:grid-cols-2" />
-            </Section>
-            <Section title="Benefits" className="mt-auto">
-                <Features features={features['Benefits']} />
-            </Section>
-            <Section title="Pricing" className="mt-auto">
-                <Price>
-                    ${finalCost}
-                    <span className="text-base">
-                        <span className="opacity-50">/mo for</span> {eventNumberWithDelimiter} events
-                    </span>
-                </Price>
-            </Section>
-            <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
-                Get started
-            </TrackedCTA>
-            <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
+                        <span>
+                            <strong>$0.00045</strong>
+                            <span className="text-[13px] opacity-50">/event</span>
+                        </span>
+                    </p>
+
+                    <p className="text-blue font-semibold mb-0 text-[14px]">
+                        First 1 million events included every month
+                    </p>
+                </div>
+                <p className="text-[13px] text-black/50">Self-Serve benefits plus...</p>
+                <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
+                    <Feature>SQL access</Feature>
+                    <Feature>Team training</Feature>
+                    <Feature>SSO/SAML</Feature>
+                    <Feature>Project permissions</Feature>
+                    <Feature>Configurable backups</Feature>
+                </ul>
+                <TrackedCTA
+                    href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
+                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    event={{ name: `clicked Choose Enterprise`, type: 'self-hosted-enterprise' }}
+                >
+                    Choose Enterprise
+                </TrackedCTA>
+            </div>
         </Plan>
     )
 }

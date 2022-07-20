@@ -5,21 +5,26 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-[13px] font-semibold px-2 py-[.2rem] border-2',
-    sm: 'text-small font-semibold px-3 py-1 border-2',
-    md: 'text-small font-semibold px-5 py-2 border-2',
-    lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
+    xs: 'text-[14px] font-bold px-3 py-[4px] border-2',
+    sm: 'text-[15px] font-bold px-4 py-[6px] border-2',
+    md: 'text-[16px] font-bold px-5 py-[7px] border-2',
+    lg: 'text-[17px] font-bold px-6 py-[8px] border-3 ',
 }
 
 const primary = cntl`
-    bg-primary
+    bg-red
+    border-red
     dark:bg-primary-dark
     text-white
     dark:text-primary
     hover:text-white
     hover:dark:text-primary
-    border-primary
+    hover:bg-red-hover
+    hover:border-red-hover
+    active:bg-red-active
+    active:border-red-active
     dark:primary-dark
+    button-shadow
 `
 
 const secondary = cntl`
@@ -49,14 +54,18 @@ const buttonTypes = {
     primary,
     secondary,
     outline,
+    custom: '',
 }
 
 const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
-    rounded-full
+    rounded-sm
     inline-block
     cta
+    relative
+    active:top-[1px]
+    active:scale-[.97]
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}

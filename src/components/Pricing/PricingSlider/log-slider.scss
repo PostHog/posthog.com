@@ -13,14 +13,22 @@
     }
 }
 
+.rc-slider {
+    width: calc(100% - 14px);
+}
+
 @media screen and (max-width: 1076px) {
     .rc-slider {
-        max-width: 90%;
+        max-width: 100%;
     }
 
     .rc-slider-mark-text {
         font-size: 13px;
         font-weight: bold;
         margin-top: 4px;
+
+        &:first-child {
+            transform: none;
+        }
     }
 }

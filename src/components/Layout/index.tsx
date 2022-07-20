@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import { useValues } from 'kea'
+import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
-import { GetStartedModal } from '../../components/GetStartedModal'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
@@ -24,7 +24,6 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
             <main>{children}</main>
             <Footer />
             <PosthogAnnouncement />
-            <GetStartedModal />
         </>
     )
 }

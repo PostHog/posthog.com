@@ -1,10 +1,20 @@
+[dev]
+  command = "yarn start"
+  port = 8888
+  targetPort = 8001
+
 [[redirects]]
   from = "/plugins/*"
-  to = "/integrations/:splat"
+  to = "/apps/:splat"
 
 [[redirects]]
   from = "/next-steps/*"
   to = "/next-steps"
+  status = 200
+
+[[redirects]]
+  from = "/question/*"
+  to = "/question"
   status = 200
 
 [[redirects]]
@@ -153,12 +163,12 @@
 
 [[redirects]]
     from = "/docs/plugins/build/overview"
-    to = "/docs/plugins/build"
+    to = "/docs/apps/build"
 
 
 [[redirects]]
     from = "/docs/plugins/types"
-    to = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
 
 [[redirects]]
     from = "/docs/developing-locally"
@@ -529,7 +539,7 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/features/plugins"
-    to = "/docs/user-guides/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -609,12 +619,6 @@
     from = "/signup"
     to = "/pricing"
 
-# Added: 2021-07-21
-# Not due to a rename, but to improve the website's navigation experience
-[[redirects]]
-    from = "/product-features"
-    to = "/product"
-
 # Added: 2021-07-28
 [[redirects]]
     from = "/docs/self-host/deploy/render"
@@ -633,7 +637,7 @@
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/plugins/overview"
-    to = "/docs/plugins"
+    to = "/docs/apps"
 
 # Added: 2021-07-17
 [[redirects]]
@@ -819,7 +823,7 @@
 # Manually Added: 2021-10-26
 [[redirects]]
     from = "/docs/user-guides/users"
-    to = "/docs/user-guides/persons"    
+    to = "/docs/user-guides/persons"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -859,118 +863,118 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/request_demo"
-    to = "/schedule-demo" 
-    
+    to = "/schedule-demo"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/strategy/investor-updates"
-    to = "/handbook/strategy/investors" 
-    
+    to = "/handbook/strategy/investors"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/engineering/feature-parity"
-    to = "/handbook/strategy/strategy" 
-    
+    to = "/handbook/strategy/strategy"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/contribute/updating-documentation"
-    to = "/docs/contribute" 
-    
+    to = "/docs/contribute"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/marketing/messaging_framework"
-    to = "/handbook/growth/marketing" 
-    
+    to = "/handbook/growth/marketing"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/handbook/engineering/support-hero"
-    to = "/handbook/growth/handbook/support-hero" 
-    
+    to = "/handbook/growth/handbook/support-hero"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/people/handbook/people/hiring-process/marketing-hiring"
-    to = "/handbook/people/hiring-process/marketing-hiring" 
-    
+    to = "/handbook/people/hiring-process/marketing-hiring"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/plugins/maxmind"
-    to = "/plugins"
-    
+    to = "/apps"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/about"
-    to = "/handbook/company/story" 
-    
+    to = "/handbook/company/story"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/team"
     to = "/handbook/company/team"
-    
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/contact"
-    to = "/signup/self-host/get-in-touch#contact" 
-    
+    to = "/signup/self-host/get-in-touch#contact"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrate/third-party"
-    to = "/docs/integrate" 
-    
+    to = "/docs/integrate"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/deployment/running-behind-proxy"
-    to = "/docs/self-host/configure/running-behind-proxy" 
-    
+    to = "/docs/self-host/configure/running-behind-proxy"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/integrated"
-    to = "/docs/integrate" 
-    
+    to = "/docs/integrate"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/scaling-posthog"
-    to = "/docs/self-host/deploy/configuration#scaling-up" 
-    
+    to = "/docs/self-host/deploy/configuration#scaling-up"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/growth/sales/"
-    to = "/handbook/growth/sales/overview" 
-    
+    to = "/handbook/growth/sales/overview"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/api/api"
-    to = "/docs/api" 
-    
+    to = "/docs/api"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/code-of-conduct"
-    to = "/docs/contribute/code-of-conduct" 
-    
+    to = "/docs/contribute/code-of-conduct"
+
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/docs/self-host/docs/self-host/postgres-vs-clickhouse"
-    to = "/docs/self-host/postgres-vs-clickhouse" 
+    to = "/docs/self-host/postgres-vs-clickhouse"
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-29-1"
-    to = "/blog/the-posthog-array-1-29-0" 
+    to = "/blog/the-posthog-array-1-29-0"
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-28-1"
-    to = "/blog/the-posthog-array-1-28-0" 
+    to = "/blog/the-posthog-array-1-28-0"
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-23-1"
-    to = "/blog/the-posthog-array-1-23-0" 
+    to = "/blog/the-posthog-array-1-23-0"
 
 # Manually Added: 2021-11-10
 [[redirects]]
     from = "/blog/the-posthog-array-1-15-1"
-    to = "/blog/the-posthog-array-1-15-0" 
-    
+    to = "/blog/the-posthog-array-1-15-0"
+
 # Added: 2021-11-10
 [[redirects]]
     from = "/handbook/people/team-structure/design"
@@ -995,7 +999,7 @@
 
 [[redirects]]
     from = "/product-features/funnels"
-    to = "/product/funnels"
+    to = "/apps/funnels"
 
 [[redirects]]
     from = "/product-features/retention"
@@ -1003,20 +1007,55 @@
 
 [[redirects]]
     from = "/product-features/feature-flags"
-    to = "/product/feature-flags"
+    to = "/apps/feature-flags"
 
 [[redirects]]
     from = "/product-features/session-recording"
-    to = "/product/session-recordings"
+    to = "/apps/session-recording"
 
 [[redirects]]
     from = "/product-features/plugins"
-    to = "/integrations"
-    status = 302
+    to = "/apps"
+    status = 301
+
+[[redirects]]
+    from = "/product/funnels"
+    to = "/apps/funnels"
+    status = 301
+
+[[redirects]]
+    from = "/product/trends"
+    to = "/apps/trends"
+    status = 301
+
+[[redirects]]
+    from = "/product/session-recording"
+    to = "/apps/session-recording"
+    status = 301
+
+[[redirects]]
+    from = "/product/feature-flags"
+    to = "/apps/feature-flags"
+    status = 301
+
+[[redirects]]
+    from = "/product/heatmaps"
+    to = "/apps/heatmaps"
+    status = 301
+
+[[redirects]]
+    from = "/product/experimentation-suite"
+    to = "/apps/experimentation-suite"
+    status = 301
+
+[[redirects]]
+    from = "/product/collaboration"
+    to = "/apps/collaboration"
+    status = 301
 
 [[redirects]]
     from = "/heatmaps"
-    to = "/product/heatmaps"
+    to = "/apps/heatmaps"
 
 
 # Added: 2021-12-09
@@ -1119,7 +1158,7 @@
 [[redirects]]
     from = "/docs/tutorials/tracking-teams"
     to = "/tutorials/tracking-teams"
-    
+
 # Added: 2021-12-03
 [[redirects]]
     from = "/handbook/company/branding"
@@ -1148,9 +1187,9 @@
 [[redirects]]
     from = "/docs/tutorials/how-to-segment-users"
     to = "/tutorials/how-to-segment-users"
-    
+
 [build]
-    command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
 
 # Added: 2022-02-03
 [[redirects]]
@@ -1161,7 +1200,6 @@
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
 
 # Added: 2022-02-14
 [[redirects]]
@@ -1178,7 +1216,6 @@
     from = "/docs/self-host/configure/async-migrations/overview"
     to = "/docs/self-host/configure/async-migrations"
 
-
 # Added: 2022-02-17
 [[redirects]]
     from = "/docs/privacy/overview"
@@ -1193,3 +1230,585 @@
 [[redirects]]
     from = "/blog/hipaa-compliant-analytics"
     to = "/blog/best-hipaa-compliant-analytics-tools"
+
+
+# Added: 2022-03-03
+[[redirects]]
+    from = "/handbook/engineering/databases/async-migrations"
+    to = "/handbook/engineering/async-migrations"
+
+# Added: 2022-03-03
+[[redirects]]
+    from = "/handbook/engineering/databases/event-ingestion"
+    to = "/handbook/engineering/event-ingestion"
+
+
+# Added: 2022-03-03
+[[redirects]]
+    from = "/handbook/engineering/databases/query-performance-optimization"
+    to = "/handbook/engineering/query-performance-optimization"
+
+# Added: 2022-03-03
+[[redirects]]
+    from = "/handbook/engineering/databases/schema-changes"
+    to = "/handbook/engineering/schema-changes"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/handbook/engineering/aws"
+    to = "/handbook/engineering/cloud-providers"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/coding-conventions"
+    to = "/handbook/engineering/conventions/frontend-coding"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/developing-locally"
+    to = "/handbook/engineering/developing-locally"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/handbook/engineering/mdx"
+    to = "/handbook/engineering/posthog-com/mdx-setup"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/project-structure"
+    to = "/handbook/engineering/project-structure"
+
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/docs/contribute/stack"
+    to = "/handbook/engineering/stack"
+
+# Added: 2022-03-10
+[[redirects]]
+    from = "/tutorials/categories/session-recordings"
+    to = "/tutorials/categories/session-recording"
+
+
+# Added: 2022-03-14
+[[redirects]]
+    from = "/docs/contribute/contribute-to-website"
+    to = "/handbook/engineering/posthog-com/developing-the-website"
+
+
+# Added: 2022-03-16
+[[redirects]]
+    from = "/sso"
+    to = "/docs/user-guides/sso"
+
+# Added: 2022-03-16
+[[redirects]]
+    from = "/docs/api/people"
+    to = "/docs/api/persons"
+
+# Added: 2022-03-25
+[[redirects]]
+    from = "/handbook/engineering/k8s-overview"
+    to = "/docs/self-host/architecture"
+
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/quantitative-analysis"
+    to = "/apps/quantitative-analysis"
+
+# Added: 2022-04-01
+[[redirects]]
+    from = "/product/user-paths"
+    to = "/apps/user-paths"
+
+# Added: 2022-04-07
+[[redirects]]
+    from = "/tutorials/free-hotjar-alternative"
+    to = "/blog/best-open-source-session-replay-tools"
+    
+# Added: 2022-05-03
+[[redirects]]
+    from = "/docs/privacy/hipaa-compliance"
+    to = "/blog/hipaa-compliant-analytics"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/conventions/frontend-coding"
+    to = "/docs/contribute/coding-conventions"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/developing-the-website"
+    to = "/docs/contribute/contribute-to-website"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/developing-locally"
+    to = "/docs/contribute/developing-locally"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/project-structure"
+    to = "/docs/contribute/project-structure"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/stack"
+    to = "/docs/contribute/stack"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/cloud-providers"
+    to = "/handbook/engineering/aws"
+
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/handbook/engineering/posthog-com/mdx-setup"
+    to = "/handbook/engineering/mdx"
+
+# Added: 2022-05-03
+[[redirects]]
+    from = "/product/quantitative-analysis"
+    to = "/product/correlation-analysis"    
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/build/reference"
+    to = "/docs/apps/build/reference"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/docs/plugins/enabling"
+    to = "/docs/apps/enabling"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins"
+    to = "/docs/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+  from = "/integrations"
+  to = "/apps"
+
+# Added: 2022-05-13
+[[redirects]]
+  from = "/integrations/*"
+  to = "/apps/:splat"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/user-guides/plugins"
+    to = "/docs/apps"
+
+# Added: 2022-05-12
+[[redirects]]
+    from = "/product-features"
+    to = "/blog/posthog-vs-amplitude"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins/build/reference"
+    to = "/docs/apps/build/reference"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins/build/types"
+    to = "/docs/apps/build/types"
+
+# Added: 2022-05-13
+[[redirects]]
+    from = "/docs/plugins/enabling"
+    to = "/docs/apps/enabling"
+
+# Added: 2022-05-26
+[[redirects]]
+    from = "/support"
+    to = "/questions"
+
+# Added: 2022-05-27
+[[redirects]]
+    from = "/customers/why-i-ditched-mixpanel-for-posthog"
+    to = "/blog/why-i-ditched-google-analytics-for-posthog"
+
+# Added: 2022-05-30
+[[redirects]]
+    from = "/handbook/company/1-1s"
+    to = "/handbook/company/management"
+    
+# Added: 2022-06-07
+[[redirects]]
+    from = "/lenny"
+    to = "/?utm_campaign=lenny"
+    
+# Added: 2022-06-09
+[[redirects]]
+    from = "/blog/the-posthog-array-1-36-1"
+    to = "/blog/the-posthog-array-1-36-0"
+
+# Added: 2022-06-16
+[[redirects]]
+    from = "/tutorials/b2b"
+    to = "/blog/b2b-saas-product-metrics"
+
+# Added: 2022-06-28
+[[redirects]]
+    from = "/docs/self-host/migrate-to-cloud"
+    to = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    
+# Added: 2022-06-30
+[[redirects]]
+    from = "/tutorials/categories/plugins"
+    to = "/tutorials/categories/apps"
+    
+# Added: 2022-07-08
+[[redirects]]
+    from = "/startups"
+    to = "/pricing#startup-plan"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/airbyte-export/docs"
+    to = "/docs/apps/airbyte-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/amazon-kinesis/docs"
+    to = "/docs/apps/amazon-kinesis"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/automatic-cohort-creator/docs"
+    to = "/docs/apps/automatic-cohort-creator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/bigquery-export/docs"
+    to = "/docs/apps/bigquery-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/bitbucket-release-tracker/docs"
+    to = "/docs/apps/bitbucket-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/braze/docs"
+    to = "/docs/apps/braze"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/currency-normalization/docs"
+    to = "/docs/apps/currency-normalization"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/customer-io/docs"
+    to = "/docs/apps/customer-io"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/databricks/docs"
+    to = "/docs/apps/databricks"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/downsampling/docs"
+    to = "/docs/apps/downsampling"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/email-scoring/docs"
+    to = "/docs/apps/email-scoring"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/engage-connector/docs"
+    to = "/docs/apps/engage-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/event-sequence-timer/docs"
+    to = "/docs/apps/event-sequence-timer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/first-time-event-tracker/docs"
+    to = "/docs/apps/first-time-event-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/geoip-enrichment/docs"
+    to = "/docs/apps/geoip-enrichment"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/github-release-tracker/docs"
+    to = "/docs/apps/github-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/github-star-sync/docs"
+    to = "/docs/apps/github-star-sync"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/gitlab-release-tracker/docs"
+    to = "/docs/apps/gitlab-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/google-cloud-export/docs"
+    to = "/docs/apps/google-cloud-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/google-pub-sub-connector/docs"
+    to = "/docs/apps/google-pub-sub-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/heartbeat/docs"
+    to = "/docs/apps/heartbeat"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/hubspot-connector/docs"
+    to = "/docs/apps/hubspot-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/ingestion-alert/docs"
+    to = "/docs/apps/ingestion-alert"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/intercom/docs"
+    to = "/docs/apps/intercom"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/migrator-3000/docs"
+    to = "/docs/apps/migrator-3000"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/n8n/docs"
+    to = "/docs/apps/n8n"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/orbit/docs"
+    to = "/docs/apps/orbit"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/pagerduty-connector/docs"
+    to = "/docs/apps/pagerduty-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/postgres-export/docs"
+    to = "/docs/apps/postgres-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/property-filter/docs"
+    to = "/docs/apps/property-filter"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/property-flattener/docs"
+    to = "/docs/apps/property-flattener"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/redshift-export/docs"
+    to = "/docs/apps/redshift-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/redshift-import/docs"
+    to = "/docs/apps/redshift-import"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/replicator/docs"
+    to = "/docs/apps/replicator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/rudderstack-export/docs"
+    to = "/docs/apps/rudderstack-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/s3-export/docs"
+    to = "/docs/apps/s3-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/salesforce-connector/docs"
+    to = "/docs/apps/salesforce-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/schema-enforcer/docs"
+    to = "/docs/apps/schema-enforcer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/segment/docs"
+    to = "/docs/apps/segment"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/sendgrid-connector/docs"
+    to = "/docs/apps/sendgrid-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/sentry-connector/docs"
+    to = "/docs/apps/sentry-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/shopify/docs"
+    to = "/docs/apps/shopify"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/snowflake-export/docs"
+    to = "/docs/apps/snowflake-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/taxonomy-standardizer/docs"
+    to = "/docs/apps/taxonomy-standardizer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/timestamp-parser/docs"
+    to = "/docs/apps/timestamp-parser"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/twilio/docs"
+    to = "/docs/apps/twilio"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/twitter-followers/docs"
+    to = "/docs/apps/twitter-followers"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/unduplicator/docs"
+    to = "/docs/apps/unduplicator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/url-normalizer/docs"
+    to = "/docs/apps/url-normalizer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/user-agent-populator/docs"
+    to = "/docs/apps/user-agent-populator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/variance-connector/docs"
+    to = "/docs/apps/variance-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zapier-connector/docs"
+    to = "/docs/apps/zapier-connector"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zendesk-connector/docs"
+    to = "/docs/apps/zendesk-connector"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/app-east"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/blog/the-posthog-array-1-37-1"
+    to = "/blog/the-posthog-array-1-37-0"
+
+[[redirects]]
+    from = "/handbook/engineering/app-west"
+    to = "/handbook/people/team-structure/app-west"

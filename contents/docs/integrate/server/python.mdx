@@ -1,11 +1,18 @@
 ---
 title: Python Library
+layout: library
 sidebarTitle: Python
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-python
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: true
+    groupAnalytics: true
 ---
-
-<VisitLibrary name="Python" to="https://github.com/PostHog/posthog-python" official />
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
@@ -66,6 +73,7 @@ Optionally you can submit:
 
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
+-   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
 
 For example:
 
@@ -76,7 +84,7 @@ posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': '
 or
 
 ```python
-posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc())
+posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc()))
 ```
 
 #### Setting user properties via an event
@@ -184,6 +192,27 @@ def homepage(request):
 ```
 
 > **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-python version of `1.4.3` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```python
+posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
+```
+
+-   Update properties on a group
+
+```python
+posthog.group_identify('company', 'id:10', {
+    'company_name': 'company_name',
+    'employees': 11
+})
+```
 
 ### Sending page views
 

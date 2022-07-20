@@ -1,11 +1,18 @@
 ---
 title: PHP library
+layout: library
 sidebarTitle: PHP
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-php
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: true
+    groupAnalytics: true
 ---
-
-<VisitLibrary name="PHP" to="https://github.com/PostHog/posthog-php" official />
 
 This is an optional library you can install if you're working with PHP. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
@@ -15,7 +22,7 @@ Add the following to composer.json:
 ```json
 {
     "require": {
-        "posthog/posthog-php": "1.0.*"
+        "posthog/posthog-php": "2.1.*"
     }
 }
 ```
@@ -171,10 +178,36 @@ PostHog::capture(array(
 
 To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
 
-```php
+```js
 if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
     // do something here
 }
+```
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-php version of `2.1.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```js
+PostHog::capture(array(
+    'distinctId' => '[distinct id]',
+    'event' => 'some event',
+    '$groups' => array("company" => "id:5")
+));
+```
+
+-   Update properties on a group
+
+```js
+PostHog::groupIdentify(array(
+    'groupType' => 'company',
+    'groupKey' => 'id:5',
+    'properties' => array("company_name" => "Awesome Inc", "employees" => 11)
+));
 ```
 
 ## Thank you

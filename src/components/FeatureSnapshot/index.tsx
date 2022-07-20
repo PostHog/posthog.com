@@ -2,7 +2,7 @@ import React from 'react'
 
 export function FeatureSnapshot({
     image,
-    features,
+    features = [],
     reverse,
 }: {
     image: string

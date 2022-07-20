@@ -15,7 +15,6 @@ This blog post explains why we're removing the "Sessions" page in PostHog. This 
 
 Now, you will see a **Recordings** tab on the main menu in its place.
 
-
 ## Why?
 
 We got continuous reports from users that this page was causing confusion (e.g. "missing recordings", sessions definition not fitting all use cases, inability to filter properly), which led us to question the purpose of this page and sessions in general at PostHog. 
@@ -28,7 +27,6 @@ We found two main session analytics use cases:
 We realized we don't currently support the first use case fully. The only session-based analysis you can do is session duration distribution and even then it has the fundamental problem of how sessions are computed. Not all products define sessions the same way, and further, we had edge cases such as server-side events being sent asynchronously for a user.
 
 For the second case, sessions is not the best way to solve the problem. Further, all the work we are doing around Paths and Quantitative Analysis (see [Diagnosing Causes](/handbook/strategy/strategy#milestone-2-early-august-onwards)) will actually solve for this use case and provide significantly more value. In particular, you'll get the same useful qualitative information, but the quantitative overlay will greatly reduce bias (and effort).
-
 
 ### What's new?
 
@@ -50,3 +48,7 @@ In addition to the changes above, we're also significantly improving recordings 
 
 ## What's next?
 We are considering full support for session-based behavioral analytics and want to gather more context on the use cases for this. In particular, we want to make sure users have flexibility around their own concept of sessions, support a full range of analytics (e.g. session count, duration, multi-device sessions), etc.
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

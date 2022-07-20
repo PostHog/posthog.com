@@ -7,82 +7,36 @@ hideAnchor: true
 
 ## People
 
-[See team structure page](/handbook/people/team-structure/team-structure)
+- James Greenhill (Team lead, Data/Infra Engineer)
+- Tiina Turban (Full Stack Engineer)
+- Yakko Majuri (Full Stack Engineer)
+- Marcus Hyett (Product Manager)
+- Guido Iaquinti (Site Reliability Engineer)
+- Harry Waye (Full Stack Engineer)
 
-# Platform Sub-Team Mission Statements
+## Platform Sub-Teams
 
-## Ingestion
-
-**Provide the best events pipeline in the world.**
-
-## Infrastructure
-
-**Make deploying, scaling, and managing PostHog easy, fast, and reliable.**
-
-# Roadmap
-
-## Ingestion
-
-### 3 year
-
-- Ingest events out of order
-- No events left behind (99.99%)
-- All events are correct (99.99%)
-- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
-- Events are ingested and visible in app within 5 seconds p99
-- Integrated delightful plugin developer experience (inside PostHog)
-    - CI/CD
-    - Testing
-    - Synthetic data testing
-- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
-
-### 6 months
-
-- Scalable to 1Bn Persons 🎉
-- Ingestion monitoring and management
-    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
-- Events are ingested and visible in app within 30 seconds p99
-- Easy to build a well tested plugin (DevEx)
-    - Documentation
-    - GitHub Template
-        - Unit tests
-        - Style
-
-## Infrastructure
-
-### 3 year
-
-- All infrastructure is managed as code
-- Cloud is global
-- Best in class security and privacy compliance
-- Scale beyond 1 Trillion events / month
-- Support Non-Cube Deploys 🤖
-
-### 6 month
-
-- No Heroku
-- ClickHouse Upgraded
-- Good logging and monitoring
-- 5 Billion / month events
-- SOC 2 Ready
-- All infra is managed as code on prod / staging + EU Ready 🎈
+- **Ingestion:** Provide the best events pipeline in the world. [Ingestion Team page](/handbook/people/team-structure/ingestion).
+- **Infrastructure:** Make deploying, scaling, and managing PostHog easy, fast, and reliable. [Infrastructure Team Page](/handbook/people/team-structure/infrastructure)
   
-# How we work?
-## Guidelines
+## How we work?
+
+### Guidelines
+
 * We work as teams on one goal/project - not having a single person alone working on a goal
 * The board should be our source of truth
 * We document what we do to share context internally
 * We finish what we start, or we don't start it at all
 * We continually prioritize
-* We prioritize ublocking others
+* We prioritize unblocking others
 * We have an agenda and follow up on actions from our meetings
 * Be frugal
 
-## Standups
+### Standups
 We have a Platform wide standup every Monday, Wednesday, and Friday. Standups are an opportunity for us to discuss what we are working on, feedback, and topics we may want other people's opinions on. It is also an important forum to announce that you are blocked or ask for help. Everyone should try to make standups but feel free to drop off if what is being talked about isn't relevant or valuable to you.
 
 
-## Engineering Planning
+### Engineering Planning
 We plan our work using a two week sprint with sprint planning and retro meetings on the wednesday before the start of the next print. We primarily use the [Platform project board](https://github.com/orgs/PostHog/projects/10) to communicate what we are working on for the sprint, what is blocked, in review, done, and what we are planning on doing next.
 
 ### Sprint Planning
@@ -111,6 +65,7 @@ We use a [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style boar
 We also tag the tasks that we set aside for the sprint with the sprint number/name so that we can filter out what is on the board for a quick view of how we are making progress against the sprint goals.
 
 The board also acts as a source of truth for other teams to have a quick check in on the progress of tasks for the sprint, especially if they will be the primary consumers of the product of the task. This works within the team as well.
-# Slack channel
+
+## Slack channel
 
 [#team-platform](https://posthog.slack.com/messages/team-platform)

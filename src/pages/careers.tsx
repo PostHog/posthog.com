@@ -1,4 +1,3 @@
-import { GetStartedModal } from 'components/GetStartedModal'
 import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -25,7 +24,7 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
-                We could use your help."
+                Adventurers needed."
                 image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
             />
 
@@ -53,7 +52,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-red"
                             alt={`Charles Cook - Business Operations`}
-                            src="../components/TeamQuote/images/Charles.png"
+                            src="../components/TeamQuote/images/charles.png"
                         />
                     }
                 />
@@ -65,20 +64,23 @@ const IndexPage = () => {
                     width="max-w-3xl"
                     value={
                         <>
-                            It's a lot of fun and a unique experience to get to{' '}
-                            <span className="text-red">work with people from all over the world</span> around a unified
-                            goal.
+                            <span className="text-red">I feel so welcome to just be my true self here,</span> while also
+                            being able to get consistent and honest feedback on how I can improve myself even further.{' '}
+                            <span className="text-gray">
+                                (Also, I made a TikTok of our company offsite in Portugal and my CEO made an account and
+                                liked it, so that was cool.)
+                            </span>
                         </>
                     }
-                    author="Kunal Pathak"
-                    role="Growth Engineer"
+                    author="Li Yi Yu"
+                    role="Full Stack Engineer"
                     img={
                         <StaticImage
                             width={100}
                             height={100}
                             imgClassName="rounded-full bg-yellow"
-                            alt={`Kunal Pathak - Growth Engineer`}
-                            src="../components/TeamQuote/images/Kunal.png"
+                            alt={`Li Yi Yu - Full Stack Engineer`}
+                            src="../components/TeamQuote/images/li.png"
                         />
                     }
                 />
@@ -105,7 +107,7 @@ const IndexPage = () => {
                             height={100}
                             imgClassName="rounded-full bg-blue"
                             alt={`Eric Duong - Software Engineer`}
-                            src="../components/TeamQuote/images/Eric.png"
+                            src="../components/TeamQuote/images/eric.png"
                         />
                     }
                 />
@@ -113,31 +115,30 @@ const IndexPage = () => {
                 <TeamQuote
                     backgroundColor=""
                     textColor="text-primary"
-                    fontSize=""
+                    fontSize="text-4xl"
                     width="max-w-4xl"
                     value={
                         <>
-                            I love PostHog's level of autonomy and transparency.{' '}
-                            <span className="text-red"> We have a lot of freedom and trust in the team,</span> but we
-                            also hold each other accountable and don’t shy away from giving (and receiving) a lot of
-                            feedback. Plus the team helped me to pick up some basic coding skills, which is amazing!
+                            I'm not sure I've ever been more productive at work.{' '}
+                            <span className="text-red">
+                                I look forward to meeting-free Tuesdays and Thursdays almost as much as weekends.
+                            </span>
                         </>
                     }
-                    author="Eltje Lange"
-                    role="People & Talent"
+                    author="Chris Clark"
+                    role="Product Designer"
                     img={
                         <StaticImage
                             width={100}
                             height={100}
-                            imgClassName="rounded-full bg-tan"
-                            alt={`Eltje Lange - People & Talent`}
-                            src="../components/TeamQuote/images/Eltje.png"
+                            imgClassName="rounded-full bg-yellow"
+                            alt={`Chris Clark - Product Designer`}
+                            src="../components/TeamQuote/images/chris.png"
                         />
                     }
                 />
                 <OpenRoles />
             </div>
-            <GetStartedModal />
         </Layout>
     )
 }

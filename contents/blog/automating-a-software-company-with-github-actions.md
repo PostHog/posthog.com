@@ -1,5 +1,5 @@
 ---
-date: 2021-08-09
+date: 2022-07-05
 title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
@@ -7,28 +7,27 @@ showTitle: true
 hideAnchor: true
 categories: ["Engineering", "Guides"]
 author: ["michael-matloka"]
-featuredImage: ../images/blog/automating-software-company-github-actions.png
+featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
 ---
-
-**This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a self-hostable product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/?utm_medium=blog&utm_campaign=github-actions-post)**
 
 When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies… Whew. And that's before we get to product, people, or ops considerations.
 
 Some of the above work requires a human brain constantly – software is all 1s and 0s, but in the end it serves human purposes. Without a massive breakthrough in artificial intelligence, figuring out features that compile AND suit human needs programmatically remains a pipe dream.
 
-What about all the tedious tasks though? Running tests, publishing releases, deploying services,
-keeping the repository clean. Plain chores – boring and following the same pattern every time.
-They still are important though!
+What about all the tedious tasks though? Running tests, publishing releases, deploying services, keeping the repository clean. Plain chores – boring and following the same pattern every time, but which are still are important.
 
 We don't need intelligence (artificial or otherwise) for those tasks every single time. We just need it once to define the jobs to be done, and have those jobs run based on some triggers. Actually, let's take this further: any programming language you want, any supporting services you need, ready-made solutions up for grabs, and deep integration with the version control platform.
+
+> _This article was originally published in August, 2021. It has been updated to reflect recent product changes_
 
 ## Actions 101
 
 This is where GitHub Actions come in. With Actions, you can define per-repository **workflows** which run on robust **runner** virtual machines. They run every time a specific type of event happens – say, a push to `main`, push to a pull request, addition of an issue label, or manual workflow dispatch.
 
-A workflow consists of any number of **jobs**, each job being a series of **steps** that run a shell script _or_ a standalone action. Standalone actions can be ran directly if written in TypeScript, or with the overhead of a Docker container for ultimate flexibility, and a multitude of them is freely available on
-the [GitHub Marketplace](https://github.com/marketplace?type=actions).
+A workflow consists of any number of **jobs**, each job being a series of **steps** that run a shell script _or_ a standalone action. 
+
+Standalone actions can be run directly if written in TypeScript, or with the overhead of a Docker container for ultimate flexibility, and a multitude of them is freely available on the [GitHub Marketplace](https://github.com/marketplace?type=actions).
 
 This sounds pretty powerful already. But let's see where all this can take us in practice, with some
 concrete examples right out of [PostHog GitHub](https://github.com/PostHog).
@@ -115,7 +114,9 @@ jobs:
 ```
 
 I've skipped app-specific setup steps and services, but there are a couple of interesting things in this:
+
 1. The workflow is made so simple by Cypress's ready-made suite runner action – [`cypress-io/github-action`](https://github.com/marketplace/actions/cypress-io). It smartly takes care of the task including test parallelization and integration with the [Cypress Dashboard](https://www.cypress.io/dashboard) - much better than shell scripts.
+
 2. GitHub Actions have a feature called "artifacts". It's storage provided by GitHub that temporarily stores files resulting from job runs and allows downloading these files. In this case it's screenshots from failed tests that [`actions/upload-artifact`](https://github.com/marketplace/actions/upload-a-build-artifact) uploads for us to view.
 
 ### Linting and formatting
@@ -123,7 +124,8 @@ I've skipped app-specific setup steps and services, but there are a couple of in
 Functionality tests verify that things _work_ as expected. It's great to have code that works, but having code that's _written well_ is even greater, otherwise development gets harder and harder over time.
 
 To ensure that we don't add _overly_ messy spaghetti with every new feature, we use:
-- linters, for making sure that best practices are used in the code and nothing funky is slipping through,
+- linters, for making sure that best practices are used in the code and nothing funky is slipping through
+
 - formatters, for standardizing the look of our code and making it readable.
 
 As with tests, it's great to run this on every PR to keep the quality of code landing in `master` high.
@@ -162,7 +164,9 @@ jobs:
 
 ### Keeping stale PRs in check
 
-As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](https://posthog.com/handbook/company/values#step-on-toes) approach, some PRs are left lingering for a bit – maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. In any case, the longer a PR sits unattended, the harder it is to come back to, and it just causes more confusion later on.
+As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](https://posthog.com/handbook/company/values#step-on-toes) approach, some PRs are left lingering for a bit – maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. 
+
+In any case, the longer a PR sits unattended, the harder it is to come back to, and it just causes more confusion later on.
 
 To minimize that, we've added a very simple workflow to scan PRs for inactivity:
 
@@ -192,8 +196,10 @@ It looks trivial – it's just one step – but that's because all the heavy lif
 
 Curiously, while the action can handle stale issues in an analogous way, we've found it to be awfully more noisy than valuable, so we recommend against that. If an old issue is not on our radar at the moment, a bot alert won't make it relevant.
 
-> Wondering what all those `@v1`, `@v2`, `@v4` mean?  
-> This is simply pinning against Git tags. Because ready-made actions are just GitHub repositories, they are specified the same way as repositories in all other contexts – you can specify a revision (commit hash, branch name, Git tag…) - otherwise the latest revision of the default branch is used.  
+> Wondering what all those `@v1`, `@v2`, `@v4` mean?
+>  
+> This is simply pinning against Git tags. Because ready-made actions are just GitHub repositories, they are specified the same way as repositories in all other contexts – you can specify a revision (commit hash, branch name, Git tag…) - otherwise the latest revision of the default branch is used.
+>  
 > Tags are particularly nice, because they are created when publishing a release using GitHub's UI.
 
 ### Deploying continuously
@@ -328,8 +334,7 @@ jobs:
               run: echo ${{ steps.docker_build.outputs.digest }}
 ```
 
-Hint: Since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/), but GitHub Actions are still free for public repositories (and with limits for private ones), you can build Docker images and then push them to Docker Hub very similar to the above workflow.
-Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `true`, _et voila_, now you are pushing.
+Hint: Since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/), but GitHub Actions are still free for public repositories (and with limits for private ones), you can build Docker images and then push them to Docker Hub very similar to the above workflow. Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `true`, _et voila_, now you are pushing.
 
 ### Putting releases out
 
@@ -410,11 +415,11 @@ Here's what this looks like in GitHub's workflow visualization feature:
 
 ![Visualization 1. Autobump](../images/blog/github-actions/1-autobump.png)
 
-But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all of the aforementioned release tasks run automatically.
+But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all the aforementioned release tasks run automatically.
 
-In fact, there are so many tasks that run automatically that the workflow would take up too much space in this post, but you can take a look at one such full example in our [plugin server's repo](https://github.com/PostHog/plugin-server/blob/master/.github/workflows/cd.yaml). In it, we use our own GitHub Action (free on the Actions Marketplace) that compares package version between the reposistory contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
+In fact, there are too many steps to show them all in this post – but I encourage you to take a look at real-world YAML that we use in our JS library's repo: [`cd.yaml`](https://github.com/PostHog/posthog-js/blob/master/.github/workflows/cd.yml). In it, we also use our own GitHub Action (free on the Actions Marketplace) which compares package version between the reposistory contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
 
-That workflow has a fascinating visualization – which, remember, is actually an extension of the previous autobump workflow.
+GitHub can also _visualize_ workflows – extremely boring if there's only one job, but here the graph is quite informative. Do keep in mind that this CD process is really an extension of the previous autobump workflow.
 
 ![Visualization 2. Autorelease](../images/blog/github-actions/2-autorelease.png)
 
@@ -422,7 +427,9 @@ That workflow has a fascinating visualization – which, remember, is actually a
 
 This entire website, posthog.com, is stored in a GitHub repository: [PostHog/posthog.com](https://github.com/PostHog/posthog.com). In fact, this very post is nothing more than a Markdown file in the repository's `/contents/blog/` directory.
 
-All in all, we've got quite a bit of copy. All that text is written by humans… And that poses a problem, because humans make mistkes. Leters get mixed up, which isn't always easy to spot. It's also a bit of a waste of time for a human to
+All in all, we've got quite a bit of copy. All that text is written by humans… And that poses a problem, because humans make mistkes. 
+
+Leters get mixed up, which isn't always easy to spot. It's also a bit of a waste of time for a human to
 be spending time looking for that, instead of thinking about the actual style and substance of the text.
 
 For these reasons on every PR we try to fix any typos noticed. For that we use [`codespell`](https://github.com/codespell-project/codespell), in an action looking like this:
@@ -543,4 +550,6 @@ jobs:
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
 
-_Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm compact />

@@ -13,6 +13,7 @@ By default, the chart installs the following dependencies:
 
 - [altinity/clickhouse-operator](https://github.com/Altinity/clickhouse-operator/)
 - [bitnami/kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka)
+- [bitnami/minio](https://github.com/bitnami/charts/tree/master/bitnami/minio)
 - [bitnami/postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 - [bitnami/redis](https://github.com/bitnami/charts/tree/master/bitnami/redis)
 - [bitnami/zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper)
@@ -20,6 +21,8 @@ By default, the chart installs the following dependencies:
 There is optional support for the following additional dependencies:
 
 - [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
+- [grafana/loki](https://github.com/grafana/helm-charts/tree/main/charts/loki)
+- [grafana/promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail)
 - [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
@@ -43,7 +46,7 @@ The default configuration is geared towards minimizing costs. Here are example e
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -52,12 +55,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 20Gi
+    size: 30Gi
 
 kafka:
   persistence:
-    size: 20Gi
-  logRetentionBytes: _15_000_000_000
+    size: 60Gi
+  logRetentionBytes: _45_000_000_000
 
 # Add additional replicas for the stateless services
 events:
@@ -85,7 +88,7 @@ worker:
   </summary>
 
 ```yaml
-# Note: those overrides are experimental, please let us know how this worked for you!
+# Note: those overrides are experimental as each installation and workload is unique
 
 # Use larger storage for stateful services
 clickhouse:
@@ -94,12 +97,12 @@ clickhouse:
 
 postgresql:
   persistence:
-    size: 60Gi
+    size: 100Gi
 
 kafka:
   persistence:
-    size: 30Gi
-  logRetentionBytes: _22_000_000_000
+    size: 200Gi
+  logRetentionBytes: _150_000_000_000
 
 # Enable horizontal pod autoscaling for stateless services
 events:
@@ -204,8 +207,41 @@ If your SMTP services requires authentication (recommended) you can either:
 
 ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
-By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). We are currently working to add the possibility to use an external ClickHouse service (see [issue #279](https://github.com/PostHog/charts-clickhouse/issues/279) for more info).
+By default, ClickHouse is installed as a part of the chart, powered by [clickhouse-operator](https://github.com/Altinity/clickhouse-operator/). You can also use a ClickHouse managed service like [Altinity](https://altinity.com/) (see [here](/docs/self-host/configure/using-altinity-cloud) for more info).
 
+#### Securing ClickHouse
+By default, the PostHog Helm Chart will provision a ClickHouse cluster using a default username and password. Please provide a unique login by overriding the `clickhouse.user` and `clickhouse.password` values.
+
+By default, the PostHog Helm Chart uses a `ClusterIP` to expose the service
+internally to the rest of the PostHog application. This should prevent any
+external access.
+
+If however you decide you want to access the ClickHouse cluster external to the
+Kubernetes cluster and need to expose it e.g. to the internet, keep in mind the
+following:
+
+ 1. the Helm Chart does not configure TLS for ClickHouse, thus we would
+    recommend that you ensure that you configure TLS e.g. within a load balancer
+    in front of the cluster.
+
+ 1. if exposing via a `LoadBalancer` or `NodePort` service type via
+    `clickhouse.serviceType`, these will both expose a port on your Kubernetes
+    nodes. We recommend you ensure that your Kubernetes worker nodes are within
+    a private network or in a public network with firewall rules in place.
+
+ 1. if exposing via a `LoadBalancer` service type, restrict the ingress network
+    access to the load balancer
+
+ 1. to restrict access to the ClickHouse cluster, ClickHouse offers settings for
+    restricting the IPs/hosts that can access the cluster. See the
+    [`user_name/networks`](https://clickhouse.com/docs/en/operations/settings/settings-users/#user-namenetworks)
+    setting for details. We expose this setting via the Helm Chart as
+    `clickhouse.allowedNetworkIps`
+
+#### Use an external service
+To use an external ClickHouse service, please set `clickhouse.enabled` to `false` and then configure the `externalClickhouse` values.
+
+Find out how to deploy PostHog using Altinity Cloud [in our deployment configuration docs](/docs/self-host/configure/using-altinity-cloud).
 
 #### Custom settings
 
@@ -223,6 +259,20 @@ clickhouse:
 Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operations/settings/).
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
+
+
+### [MinIO](../runbook/minio/)
+
+By default, `MinIO` is not installed as part of the chart. If you want to enable it, please set `minio.enabled` to `true`.
+
+MinIO provide a scalable, S3 compatible object storage system. You can customize all its settings by overriding `values.yaml` variables in the `minio` namespace.
+
+Note: please override the default user authentication by either passing `auth.rootUser` and `auth.rootPassword` or `auth.existingSecret`.
+
+#### Use an external service
+To use an external S3 like/compatible object storage, please set `minio.enabled` to `false` and then configure the `externalObjectStorage` values.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [MinIO chart](https://github.com/bitnami/charts/tree/master/bitnami/minio) for full configuration options._
 
 
 ### [PostgreSQL](../runbook/postgresql/)
@@ -367,6 +417,7 @@ _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/char
 
 This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
 
+
 ### [Grafana](https://github.com/grafana/grafana)
 By default, `grafana` is not installed as part of the chart. If you want to enable it, please set `grafana.enabled` to `true`.
 
@@ -379,6 +430,23 @@ kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password
 To configure the stack (like expose the service via an ingress resource, manage users, ...) please look at the inputs provided by the upstream chart.
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [grafana chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) for full configuration options._
+
+
+### [Loki](https://github.com/grafana/loki)
+By default, `loki` is not installed as part of the chart. If you want to enable it, please set `loki.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [loki chart](https://github.com/grafana/helm-charts/tree/main/charts/loki) for full configuration options._
+
+
+### [Promtail](https://github.com/grafana/loki/tree/main/docs/sources/clients/promtail)
+By default, `promtail` is not installed as part of the chart. If you want to enable it, please set `promtail.enabled` to `true`.
+
+To configure the stack (like expose the service via an ingress resource, ...) please look at the inputs provided by the upstream chart.
+
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [promtail chart](https://github.com/grafana/helm-charts/tree/main/charts/promtail) for full configuration options._
+
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)
 

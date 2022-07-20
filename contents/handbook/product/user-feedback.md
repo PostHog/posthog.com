@@ -11,20 +11,10 @@ Gathering user feedback is critical for the development of our product. It's not
 > 😍 Want to share feedback? [File an issue](https://posthog.com/posthog/posthog/issues) or reach out on [Slack](/slack). **We're always happy to hear from you!**
 
 
-### Feedback heroes
-> **Historic context:** Previously a single person owned the feedback process. As we grew, we created the Feedback Hero ([see discussion](https://github.com/PostHog/product-internal/issues/98)) to scale our feedback process. On November 2021, we decided to remove the figure of "Feedback Hero" as multiple people now talk to users continuously for a variety of reasons.  
+### Beta Testers
+We have a group in our [community Slack](/slack) called #beta-testers for engaged community users and paying customers who are keen to give feedback on our product in order to improve it for themselves and other users.
 
-Almost everyone at PostHog talks to users, we believe this is critical to build a successful product. However, we have some people (Marcus, Joe & Paolo) that are more continuously involved in this process and are frequently talking to users. These feedback heroes are responsible for:
-
-1. Proactive reach out to users to schedule feedback calls, case studies or usability tests (as needed).
-2. Having the feedback calls and inviting other team members to join.
-3. Housekeeping. Logging the relevant notes and other reports (see [process](#feedback-process)) below. Send the user applicable rewards as a thank you for their time.
-4. Follow-up. Create any relevant issues, follow-up with users around specific issues, questions or concerns.
-
-### BETA - Contact owners
-As more people at PostHog are taking to users in a decentralized fashion, we want to make sure we don't overwhelm users or abuse of their time. To do so, we have contact onwers who gatekeep users. Each owner can have a better control of when we've spoken to those users and make sure we only schedule conversations when it's appropriate. Other team members can ask the contact owner for an intro, and/or help scheduling a call with those users.
-
-The contact list and contact onwers can be found in [this doc](https://docs.google.com/spreadsheets/d/15nYBas4sP0iY4xIGRJ7wLhKlzYrDJxXHTeNWcRl6Xk4/edit)
+If you would like to get feedback on something you're building, share details and the feedback you'd like to receive with this group. Be mindful that we shouldn't overburden the group with lots of small changes. Instead, focus on getting feedback we really need to make better decisions. We should also follow up with the beta-testers later on to show them how their feedback has helped build a better product.
 
 ### Feedback call process
 

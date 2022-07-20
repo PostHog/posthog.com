@@ -3,7 +3,7 @@ title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/feature-flags.png
-featuredTutorial: true
+featuredTutorial: false
 author: ['yakko-majuri']
 topics: ['feature flags']
 featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
@@ -193,7 +193,11 @@ And this brings us to the next example.
 
 <div class="note-block"><b>Fun Fact:</b> We used a PostHog Feature Flag to release this very tutorial. This was the first tutorial we wrote but didn't want to release a lonely tutorial on the website. We also did not want to have to put all tutorials in one PR, so we wrapped our Tutorials section on the navigation with a feature flag and merged tutorials one by one as they came. Then, when we felt like we were ready to launch, we just toggled the flag on.</div>
 
-
 ### Rollback with peace of mind
 
 You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality. When something breaks, you can always roll it back safely with minor consequences (if implemented correctly).
+
+### Further reading
+
+- [The best free and open-source feature toggle platforms](/blog/best-open-source-feature-flag-tools)
+- [How to run Experiments without feature flags](/tutorials/experiments)
