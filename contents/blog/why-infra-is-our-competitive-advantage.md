@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog"]
+author: ["tim-glaser"]
 featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
 ---
