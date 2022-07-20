@@ -119,7 +119,7 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
-Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (espcially for posthog.com).
+Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
 
 ## 7. Documenting
 

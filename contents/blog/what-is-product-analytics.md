@@ -85,7 +85,7 @@ PostHog enables you to self-host your product analytics, so you keep data on you
 
 There are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. Self-hosting your product analytics platform also provides other benefits, such as circumventing ad blockers due to the lack of third-party cookies.
 
-> Find out [how to self-host product analytics](/docs/self-host) with PostHog and easily deploy to your infrastructure using Digital Ocean. 
+> Find out [how to self-host product analytics](/docs/self-host) with PostHog and easily deploy to your infrastructure using DigitalOcean. 
 
 ## Is Google Analytics good for product analytics?
 

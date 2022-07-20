@@ -5,7 +5,6 @@ const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
 module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
-    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -19,6 +18,11 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
+    const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
+
     const result = await graphql(`
         {
             allMdx(
@@ -60,6 +64,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     headings {
                         depth
                         value
+                    }
+                    frontmatter {
+                        layout
                     }
                     fields {
                         slug
@@ -211,7 +218,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     `)
 
     if (result.errors) {
-        return Promise.reject(mdPagesResult.errors)
+        return Promise.reject(result.errors)
     }
 
     function formatToc(headings) {
@@ -282,6 +289,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
     result.data.docs.nodes.forEach((node) => {
         const { slug } = node.fields
+        const { layout = 'handbook' } = node.frontmatter
         let next = null
         let previous = null
         let breadcrumb = null
@@ -297,7 +305,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
         createPage({
             path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
+            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : HandbookTemplate,
             context: {
                 id: node.id,
                 next,
@@ -508,60 +516,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             component: Question,
             context: {
                 id,
-            },
-        })
-    })
-
-    const LibraryTemplate = path.resolve(`src/templates/Library.tsx`)
-    const libraries = await graphql(`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/docs/integrate/(client|server)/(?!.*snippets/).*/" } }
-                    frontmatter: { title: { ne: "" } }
-                }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-
-    libraries.data.allMdx.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: LibraryTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
             },
         })
     })

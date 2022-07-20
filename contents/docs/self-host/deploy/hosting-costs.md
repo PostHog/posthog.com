@@ -52,7 +52,7 @@ We recommend taking your planned configuration and plugging it into the pricing 
 - [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
 - [AWS Pricing Calculator](https://calculator.aws/#/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Digital Ocean Pricing Calculator](https://www.digitalocean.com/pricing/calculator)
+- [DigitalOcean Pricing Calculator](https://www.digitalocean.com/pricing/calculator)
 
 ## Help us make this guide better
 
