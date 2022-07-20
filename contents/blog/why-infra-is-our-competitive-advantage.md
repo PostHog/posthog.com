@@ -30,7 +30,7 @@ Most of the people we deal with are experienced engineers and SREs themselves, a
 
 We don't _just_ build infrastructure for other people to run.
 We run one of the biggest PostHog instances ourselves, with >20 billion events.
-And before you ask, yes, our cloud infrastructure runs the same helm chart that we ship to our customers.
+And before you ask, yes, our cloud infrastructure runs the same Helm chart that we ship to our customers.
 
 
 Did you just read a sales pitch? Yes. Should you immediately apply for the SRE role at PostHog? Also yes.
