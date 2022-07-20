@@ -1,11 +1,11 @@
 ---
-date: 2022-07-18
-title: 20+ ways PostHog can help you build better products
+date: 2022-07-20
+title: 22 ways you can use PostHog to build better products
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Guides", "Product analytics"]
@@ -19,11 +19,11 @@ And that got us wondering... what are some of the most useful things you can you
 
 The answer? A lot – and this list is just a snapshot of the possibilities.
 
-
 1. [Replace multiple services with just PostHog](#1-replace-multiple-services-with-just-posthog)
 1. [Build an AARRR pirate metrics dashboard](#2-build-an-aarrr-pirate-metrics-dashboard)
 1. [Discover who your power users are](#3-discover-who-your-power-users-are)
 1. [Gather user feedback](#4-gather-user-feedback)
+1. [Calculate custom metrics using formulas](#5-calculate-custom-metrics-using-formulas)
 1. [Identify users who are at risk of churning](#5-identify-users-who-are-at-risk-of-churning) 
 1. [Validate a product change using experiments](#6-validate-a-product-change-using-experiments)
 1. [Use feature flags as kill switches](#7-use-feature-flags-as-kill-switches) 
@@ -39,9 +39,8 @@ The answer? A lot – and this list is just a snapshot of the possibilities.
 1. [Measure how long it takes users to complete a series of actions](#17-measure-how-long-it-takes-users-to-complete-a-series-of-actions) 
 1. [Organize your custom events in Notion](#18-organize-your-custom-events-in-notion)
 1. [Collect location data while respecting user privacy](#19-collect-location-data-while-respecting-user-privacy) 
-1. [Connect PagerDuty and PostHog to get threshold alerts](#20-connect-pagerduty-and-posthog-to-get-threshold-alerts) 
+1. [Visualize user behavior using the PostHog Toolbar](#20-visualize-user-behavior-using-the-posthog-toolbar) 
 1. [Track support tickets by connecting Zendesk](#21-track-support-tickets-by-connecting-zendesk) 
-
 
 ### 1. Replace multiple services with just PostHog
 
@@ -55,11 +54,11 @@ We've built PostHog so companies don't have to run multiple services to get the 
 
 [PostHog Cloud](/pricing) delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
 
-And if you [self-host PostHog](/docs/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
+And if you [self-host PostHog](/signup/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
 
 ## 2. Build an AARRR pirate metrics dashboard
 
-![AARRR pirate metrics](../images/blog/things-to-do-in-posthog/aarrr.png)
+![AARRR pirate metrics](../images/blog/using-posthog/aarrr.png)
 
 AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic framework for driving product-led growth, and it's a great place to start when building your first dashboard in PostHog.
 
@@ -69,7 +68,7 @@ Read our guide to [getting started with the AARRR framework](/tutorials/aarrr-fr
 
 ## 3. Discover who your power users are
 
-![discovering power users](../images/blog/things-to-do-in-posthog/cohorts.png)
+![discovering power users](../images/blog/using-posthog/cohorts.png)
 
 You can learn a huge amount by discovering who your most active users are, and what they're doing.
 
@@ -77,21 +76,33 @@ What are the features they use the most? How often do they perform specific task
 
 These are the kinds of insights that inform your marketing efforts, your product roadmap, and help you find product market fit.
 
-For this you'll want to employ our powerful Cohorts tool by using the "completed event regularly" or "completed an event multiple times" conditions. 
+Find yours by using the "completed event regularly" or "completed an event multiple times" Cohort conditions. 
 
 An e-commerce platform might ask for "users who bought an item in 5 out of the last 7 weeks" – we track many things, including users who view dashboards frequently.
 
 ## 4. Gather user feedback
 
-![pineapple on pizza](../images/blog/things-to-do-in-posthog/pinepapple.png)
+![pineapple on pizza](../images/blog/using-posthog/pinepapple.png)
 
 Because PostHog is all about tracking events, it's easy to create your own simple feedback interfaces and analyse the results in PostHog.
 
-On our website, every docs page has a question asking whether the page was useful – we use this to help identify pages that need improvement. We also ask anyone who gets a 404 on our website whether pineapple belongs on pizza. We use this to report people to the pizza police. 
+On our website, every docs page has a question asking whether the page was useful – we use this to help identify pages that need improvement. 
+
+We also ask anyone who gets a 404 on our website whether pineapple belongs on pizza. We use this to report people to the pizza police. 
 
 Read our [running surveys with no backend](/tutorials/survey) tutorial to learn how.
 
-## 5. Identify users who are at risk of churning
+## 5. Calculate custom metrics using formulas
+
+You can track pretty much anything in PostHog, including custom metrics for business and product performance.
+
+To do so, go to 'Advanced Options' on any Trends insight and enter any custom formula for the metric your interested in.
+
+For example, you could track your conversion rate by dividing `users signed up` by `website pageviews` and multiplying by 100, or new user activation by dividing `new users who completed key action` by `total number of new users` and multiplying by 100.
+
+Our guide to [B2B product metrics](/blog/b2b-saas-product-metrics) will give you some ideas for what to track.
+
+## 6. Identify users who are at risk of churning
 
 You can track users who could churn using "stopped doing an event" Cohort condition.
 
@@ -117,27 +128,27 @@ Here are a few more examples:
 
 Try experimenting with any of the above, while also using AND/OR operators, to create new and useful insights.
 
-## 6. Validate a product change using experiments
+## 7. Validate a product change using experiments
 
-![PostHog experiments](../images/blog/things-to-do-in-posthog/experiments-1.png)
+![PostHog experiments](../images/blog/using-posthog/experiments-1.png)
 
 Experimentation is a fundamental tool every engineer and product manager needs. While you can roll out changes and observe their impact after the fact, it's impossible to verify whether small shifts in your metrics are down to your changes or some other unknown variable.
 
 PostHog's Experimentation suite is built atop our Feature Flag functionality, so you can run A/B tests and multivariate tests with ease. You set a minimum acceptable improvement for the test, and PostHog will recommend a sample size and test duration based on your parameters.
 
-![PostHog experiments](../images/blog/things-to-do-in-posthog/experiments-2.png)
+![PostHog experiments](../images/blog/using-posthog/experiments-2.png)
 
 We then run a Bayesian analysis on the data to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are statistically significant or not.
 
 For more info, you can read the [Experimentation user guide](/docs/user-guides/experimentation) and our [guide to running effective A/B tests](/blog/experiments).
 
-## 7. Use feature flags as kill switches
+## 8. Use feature flags as kill switches
 
 [Feature flags](/docs/user-guides/feature-flags) are often used to turn new features on under certain conditions, so that you can test things with a certain [cohort](/docs/user-guides/cohorts) or user segment. But you can also use them globally, then leverage the flag as a kill switch to turn features off in the event of an emergency. 
 
 When [Phantom](/customers/phantom) started using PostHog, it couldn't deploy new updates or features to all users instantly. In Phantom's case this was because the product was a browser extension. Using Feature Flags as kill switches gave them a degree of control not normally available to such products. 
 
-## 8. Track the performance of marketing campaigns
+## 9. Track the performance of marketing campaigns
 
 PostHog can track all sorts of data, including a variety of UTM fields – many of which will be automatically captured. Creating insights based on UTM parameters in PostHog also enables you to follow users along your entire funnel in a single platform, so you can isolate how paid ads correlate to traffic, acquisition and retention.
 
@@ -145,29 +156,29 @@ Quoting [Pry CEO and co-founder Andy Su](https://posthog.com/customers/pry):
 
 > "We were asking: How valuable are customers who come to us via ads as opposed to those who are organic? We were able to answer that question with PostHog and use that information to make decisions about our advertising strategy.”
 
-## 9. Use Correlation Analysis to discover commonalities
+## 10. Use Correlation Analysis to discover commonalities
 
-![correlation analysis posthog](../images/blog/things-to-do-in-posthog/correlation-analysis.png)
+![correlation analysis posthog](../images/blog/using-posthog/correlation-analysis.png)
 
 Accessible via Funnel insights, [Correlation Analysis](https://posthog.com/docs/user-guides/correlation) shows you the events and person properties that your converting users have in common. Is there an industry that really loves your product that you don't event know about? Correlation Analysis helps surface insights like these, which can change your product strategy completely.
 
 It's also great for marketing and website teams. For example, we know visitors complete a specific user journey on our website are 5.0x more likely to perform the 'clicked calculate scale price' event, 8x more likely to have used docs search, and 2.9x more likely to have arrived via Google.
 
-## 10. Track errors as events
+## 11. Track errors as events
 
 You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](https://posthog.com/docs/user-guides/actions) or [event](https://posthog.com/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our [Sentry Connector](/apps/sentry-connector) to track errors as events.  
 
 Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform.
 
-## 11. Watch users interact with your acquisition funnel
+## 12. Watch users interact with your acquisition funnel
 
-![funnel users](../images/blog/things-to-do-in-posthog/converted-users.png)
+![funnel users](../images/blog/using-posthog/converted-users.png)
 
 Having session recording and product analytics in one tool means you can go from reviewing a funnel insight to watching exactly what those same users are doing, seamlessly. 
 
 Simply click on the number of users who completed the step, or dropped off, and you can view the full list of those users, and recordings of their sessions. From here you can understand what they're doing individually, or create a cohort from them to drill down further.
 
-## 12. Analyze retrospective data
+## 13. Analyze retrospective data
 
 With some analytics platforms, you can only look at data once you've started collecting it – you have to define an action, then wait months to gather data for it. In PostHog, you can look at retroactive data easily as we capture information automatically and enable you to make faster decisions. 
 
@@ -175,7 +186,7 @@ Quoting [MentionMe Software Engineer Lleo Harress](https://posthog.com/customers
 
 > “Retrospective data and event autocapture have been especially useful. We’ve had occasions where we’ve speculated something but haven’t been capturing the data to prove it, so we define an event and then see the retroactive data for it immediately. Previously we’d have to wait months to get usable data like that in Google Analytics or other tools.”
 
-## 13. Spend a week watching people using your product
+## 14. Spend a week watching people using your product
 
 ![recording filters posthog](../images/blog/things-to-do-in-posthog/session-recording.png)
 
@@ -185,11 +196,11 @@ In the Recordings page in PostHog, you can filter all recordings based on cohort
 
 Once setup, you're ready to dive in and discover all the odd things users do that you never anticipated, the problems they encounter, and the workarounds they employ.
 
-![twitter quote](../images/blog/things-to-do-in-posthog/twitter-quote.png)
+![twitter quote](../images/blog/using-posthog/twitter-quote.png)
 
 This guy gets it.
 
-## 14. Build your own app
+## 15. Build your own app
 
 PostHog is an open source platform and one of the key benefits is you don't have to wait for us to build a specific integration you need. You can build it yourself. 
 
@@ -199,27 +210,27 @@ There's no shortage of official PostHog apps, too. We've built over 40 apps and 
 
 Don't fancy building your own? Don't hesitate to suggest one on the [PostHog repo](https://github.com/PostHog/posthog). We might decide to build it ourselves, or there may be another member of the community with the same problem. 
 
-## 15. Subscribe to an insight or dashboard
+## 16. Subscribe to an insight or dashboard
 
-![posthog insight subscriptions](../images/blog/things-to-do-in-posthog/subscriptions.png)
+![posthog insight subscriptions](../images/blog/using-posthog/subscriptions.png)
 
 You don't need to login to PostHog everyday to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
 
 Coming soon: Slack channel subscriptions!
 
-## 16. Capture where people first heard about you
+## 17. Capture where people first heard about you
 
 It's useful for sales and marketing teams to understand how people find your product. There are numerous ways to do this, and like so many things you can track this using PostHog. 
 
 We ask everyone who books a PostHog demo this question using a free text box – we could use a defined list, but we prefer the flexibility. We collect this data in PostHog for our marketing and customer success dashboards.
 
-## 17. Measure how long it takes users to complete a series of actions
+## 18. Measure how long it takes users to complete a series of actions
 
 Whether you want to understand how long it takes to onboard a new organization, or how long it takes for customers to complete a purchase, the [Event Sequence Timer](/apps/event-sequence-timer) lets you define a series of events in order and track the time to complete them all. 
 
 Once you're tracking this metric you can then make changes to improve the process and examine the difference, positive or negative. Improving processes like onboarding can have a big impact on customer satisfaction and other important downline metrics, like [new user activation](/blog/b2b-saas-product-metrics#new-user-activation).
 
-## 18. Organize your custom events in Notion
+## 19. Organize your custom events in Notion
 
 No modern data platform is complete without a [Zapier Connector](/apps/zapier-connector), so naturally PostHog has one. 
 
@@ -227,7 +238,7 @@ What's possible with PostHog and Zapier combined is almost limitless, but one op
 
 This can be useful for sharing your most valuable metrics with colleagues who don't use PostHog, or to simply keep an eye on things and make sure people aren't creating duplicate custom events.
  
-## 19. Collect location data while respecting user privacy
+## 20. Collect location data while respecting user privacy
 
 We created the [GeoIP Enricher](/apps/geoip-enrichment) app to enhance events and persons with IP location data, allowing you to run queries on a range of geographic data, including city name, country, continent and time zone data. 
 
@@ -235,21 +246,13 @@ But what if you want geographic data, but don't don't to collect more personally
 
 Enter the [Property Filter](/apps/property-filter) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
 
-## 20. Visualize user behavior using the PostHog Toolbar
+## 21. Visualize user behavior using the PostHog Toolbar
 
 Want to see where people are clicking on any page on your website or web app, just like this?
 
-[INSERT IMAGE HERE]
+![heatmap](../images/blog/using-posthog/docs-heatmap.png)
 
 Try the [PostHog Toolbar](/tutorials/toolbar).
-
-## 21. Connect PagerDuty and PostHog to get threshold alerts
-
-Connecting PagerDuty and PostHog allows you to get alerts on all sorts of metrics based on PostHog events. 
-
-Want to know when you're going viral? Set an alert when website page views go above a threshold. You can do the same for tracking errors, logins – pretty much anything you can track as an event on a Trends insight. 
-
-It's also useful for setting goals and receiving alerts when you achieve them.
 
 ## 22. Track support tickets by connecting Zendesk
 
