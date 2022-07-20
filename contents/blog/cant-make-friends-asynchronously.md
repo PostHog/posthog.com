@@ -1,5 +1,5 @@
 ---
-date: 2022-07-13
+date: 2022-07-20
 title: "Remote companies can be too asynchronous"
 rootPage: /blog
 sidebar: Blog
