@@ -40,18 +40,18 @@ export default function SelfHost() {
                 </div>
                 <div className="max-w-screen-lg mx-auto flex md:flex-row flex-col items-center">
                     <Plan title="Open source" subtitle="with community support">
-                        <p className="text-black/70 my-2">
+                        <p className="text-black/70 my-2 text-base">
                             Our original open source product is available on GitHub and offers product analytics,
                             feature flags, and session recordings.
                         </p>
-                        <p className="text-[15px] opacity-50">Limitations: One project, no user permissions</p>
+                        <p className="text-[14px] opacity-50">Limitations: One project, no user permissions</p>
                     </Plan>
                     <div className="flex-shrink-0">
                         <TrackedCTA
                             event={{ name: 'select edition: clicked get started', type: 'self-hosted' }}
                             to="/signup/self-host/deploy"
-                            type="outline"
-                            className="!bg-white"
+                            type="secondary"
+                            className="!bg-white shadow-lg"
                         >
                             View deployment instructions
                         </TrackedCTA>

@@ -9,7 +9,7 @@ import Link from 'components/Link'
 import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator'
 
 const Feature = ({ children }) => {
-    return <li className="flex space-x-2 items-center font-semibold text-opacity-75">{children}</li>
+    return <li className="flex space-x-3 items-start font-semibold text-[15px] text-opacity-75">{children}</li>
 }
 
 const Scales = () => {
@@ -166,11 +166,11 @@ export default function SignUp() {
                                             <span className="text-[13px] opacity-50">/event</span>
                                         </span>
                                     </p>
-                                    <p className="text-blue font-semibold mb-0">
+                                    <p className="text-blue font-semibold text-[14px] mb-0">
                                         First 1 million events free every month
                                     </p>
                                 </div>
-                                <ul className="p-0 list-none grid gap-5 mt-0 mb-9">
+                                <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
                                         <Scales />
                                         <span>Scales automatically</span>
@@ -185,11 +185,11 @@ export default function SignUp() {
                                     </Feature>
                                 </ul>
                                 <TrackedCTA
-                                    className="mt-auto"
+                                    className="mt-auto shadow-xl"
                                     href="https://app.posthog.com/signup"
                                     event={{ name: `clicked Continue`, type: 'cloud' }}
                                 >
-                                    Continue
+                                    Sign up for PostHog Cloud
                                 </TrackedCTA>
                                 <p className="text-[13px] text-center mt-4 mb-0 min-h-[40px]">
                                     <span className="font-semibold">Enterprise plan available</span> with advanced
@@ -214,11 +214,11 @@ export default function SignUp() {
                                             <span className="text-[13px] opacity-50">/event</span>
                                         </span>
                                     </p>
-                                    <p className="text-blue font-semibold mb-0">
+                                    <p className="text-blue font-semibold mb-0 text-[14px]">
                                         First 1 million events free every month
                                     </p>
                                 </div>
-                                <ul className="p-0 list-none grid gap-5 mt-0 mb-9">
+                                <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
                                         <EasyDeploy className="w-7 h-7" />
                                         <span>Easy deploy for most private cloud platforms</span>
@@ -234,12 +234,12 @@ export default function SignUp() {
                                 </ul>
                                 <TrackedCTA
                                     to="/signup/self-host"
-                                    className="mt-auto"
+                                    className="mt-auto shadow-xl"
                                     event={{ name: `clicked Continue`, type: 'self-hosted' }}
                                 >
-                                    Continue
+                                    Select your edition
                                 </TrackedCTA>
-                                <p className="text-[13px] text-center mt-4 mb-0 min-h-[40px] flex justify-center items-center">
+                                <p className="text-[13px] text-center mt-4 mb-0 min-h-[40px] flex justify-center">
                                     3 editions available
                                 </p>
                             </div>

@@ -1,5 +1,5 @@
 import { TrackedCTA } from 'components/CallToAction/index.js'
-import { Check } from 'components/Icons/Icons'
+import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import React from 'react'
@@ -15,9 +15,9 @@ import { Features, Plan, Price, Section } from './Plan'
 
 const Feature = ({ children }) => {
     return (
-        <li className={`text-black font-semibold text-[14px] flex space-x-2 items-center leading-tight`}>
-            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
-                <Check />
+        <li className={`text-black font-semibold text-[15px] flex space-x-2 items-center leading-tight`}>
+            <span className="w-4 flex justify-center items-center flex-shrink-0 opacity-75">
+                <Check2 />
             </span>
             <span>{children}</span>
         </li>
@@ -42,16 +42,16 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
                             <span className="text-[13px] opacity-50">/event</span>
                         </span>
                     </p>
-                    <p className="text-blue font-semibold mb-0">First 1 million events free every month</p>
+                    <p className="text-blue font-semibold mb-0 text-[14px]">First 1 million events free every month</p>
                 </div>
-                <ul className="list-none p-0 m-0 grid gap-y-1 mb-6">
+                <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
                     <Feature>Unlimited tracked users</Feature>
                     <Feature>Unlimited teammates</Feature>
                     <Feature>Unlimited event tracking</Feature>
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/"
-                    className="mt-7 mb-3 mt-auto"
+                    className="mt-7 mb-3 mt-auto shadow-xl"
                     event={{ name: `clicked Choose Self-Serve`, type: 'self-hosted' }}
                 >
                     Choose Self-Serve
@@ -84,10 +84,12 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         </span>
                     </p>
 
-                    <p className="text-blue font-semibold mb-0">First 1 million events included every month</p>
+                    <p className="text-blue font-semibold mb-0 text-[14px]">
+                        First 1 million events included every month
+                    </p>
                 </div>
                 <p className="text-[13px] text-black/50">Self-Serve benefits plus...</p>
-                <ul className="list-none p-0 m-0 grid gap-y-1 mb-6">
+                <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
                     <Feature>SQL access</Feature>
                     <Feature>Team training</Feature>
                     <Feature>SSO/SAML</Feature>
@@ -96,7 +98,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
-                    className="mt-7 mb-3 mt-auto"
+                    className="mt-7 mb-3 mt-auto shadow-xl"
                     event={{ name: `clicked Choose Enterprise`, type: 'self-hosted-enterprise' }}
                 >
                     Choose Enterprise
