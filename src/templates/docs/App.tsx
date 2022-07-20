@@ -41,7 +41,7 @@ export const AppTemplate = ({
                         )}
 
                         {installUrl && showCTA && (
-                            <CallToAction type="outline" className="bg-white/40" to={installUrl}>
+                            <CallToAction type="secondary" to={installUrl}>
                                 <div className="flex items-center space-x-2">
                                     <span>Install</span>
                                     {thumbnail?.publicURL && (
