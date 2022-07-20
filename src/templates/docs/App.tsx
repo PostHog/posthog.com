@@ -30,12 +30,10 @@ export const AppTemplate = ({
         <DocsLayout
             title={title}
             titleElement={
-                <div className="flex items-center flex-wrap mb-2">
-                    {thumbnail?.publicURL && (
-                        <img src={thumbnail.publicURL} alt="app icon" className="hidden lg:block w-8 h-8 mr-2" />
-                    )}
-                    <h1 className="mb-0 mr-auto">{title}</h1>
-                    <div className="flex items-center space-x-3">
+                <div className="flex items-center mb-2 space-x-4 lg:space-x-6">
+                    <h1 className="block mb-0 mr-auto">{title}</h1>
+
+                    <div className="shrink-0 flex flex-col items-end space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
                         {github && (
                             <Link to={github}>
                                 <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -43,8 +41,17 @@ export const AppTemplate = ({
                         )}
 
                         {installUrl && showCTA && (
-                            <CallToAction className="hidden lg:block" to={installUrl}>
-                                Install
+                            <CallToAction type="outline" className="bg-white/40" to={installUrl}>
+                                <div className="flex items-center space-x-2">
+                                    <span>Install</span>
+                                    {thumbnail?.publicURL && (
+                                        <img
+                                            src={thumbnail.publicURL}
+                                            alt="app icon"
+                                            className="hidden md:block w-5 h-5 object-scale-down"
+                                        />
+                                    )}
+                                </div>
                             </CallToAction>
                         )}
                     </div>
