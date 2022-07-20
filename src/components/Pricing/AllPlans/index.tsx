@@ -1,4 +1,4 @@
-import { CallToAction, TrackedCTA } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { PlanComparison } from '../PlanComparison'
 import { CloudIcon, SelfHostIcon } from '../Calculator/index'
@@ -94,9 +94,9 @@ const selfHostPlans: IPlan[] = [
     },
 ]
 
-const Plan = (plan: IPlan) => {
+const Plan = ({ plan }: { plan: IPlan }) => {
     return (
-        <li>
+        <li className="flex flex-col">
             <h4 className="m-0 text-lg">{plan.title}</h4>
             <p className="m-0 text-black/50 font-medium text-[14px]">{plan.description}</p>
             <div className="my-7">
@@ -119,8 +119,9 @@ const Plan = (plan: IPlan) => {
                 event={{ name: `clicked ${plan.mainCTA.title}`, type: plan.pricingOption }}
                 type="primary"
                 width="full"
-                className="shadow-md"
+                className="shadow-md mt-auto"
                 to={plan.mainCTA.url}
+                size="sm"
             >
                 {plan.mainCTA.title}
             </TrackedCTA>
@@ -130,6 +131,7 @@ const Plan = (plan: IPlan) => {
                     className="bg-white !border border-gray-accent-light !text-black mt-3 shadow-md"
                     width="full"
                     to={plan.demoCTA?.url}
+                    size="sm"
                 >
                     {plan.demoCTA?.title}
                 </TrackedCTA>
@@ -160,7 +162,7 @@ const PlanSection = ({
             </div>
             <ul className="list-none grid sm:grid-cols-2 m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 mt-5 pt-9 border-gray-accent-light border-dashed border-t">
                 {plans.map((plan) => {
-                    return <Plan key={plan.title} {...plan} />
+                    return <Plan key={plan.title} plan={plan} />
                 })}
             </ul>
         </div>
