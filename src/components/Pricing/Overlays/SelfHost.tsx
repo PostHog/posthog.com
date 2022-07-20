@@ -17,9 +17,13 @@ const features = [
             'Step-by-step instructions for hosting on AWS, DigitalOcean, Google Cloud, or deploying with Helm Chart',
     },
     {
-        title: 'Trusted by industry leaders',
-        description: 'Find out why these teams self-host PostHog',
-        features: ['Hasura', 'Airbus', '[Saga](/customers/saga)'],
+        title: 'Self-hosting made easy',
+        description: 'Get support from our marketplace of PostHog partners',
+        features: [
+            '**Altinity** - PostHog deployment and ClickHouse support',
+            '**Restack** - GDPR, SOC  2 and HIPAA compliant deployments',
+            '**Birch** - PostHog deployment and management',
+        ],
     },
 ]
 
