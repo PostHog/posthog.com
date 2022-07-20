@@ -524,6 +524,10 @@
             "url": "",
             "children": [
                 {
+                    "name": "Overview",
+                    "url": "/docs/deploy"
+                },
+                {
                     "name": "Self-host",
                     "url": "",
                     "children": [
