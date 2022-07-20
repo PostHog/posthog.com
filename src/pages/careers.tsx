@@ -1,4 +1,3 @@
-import { GetStartedModal } from 'components/GetStartedModal'
 import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -140,7 +139,6 @@ const IndexPage = () => {
                 />
                 <OpenRoles />
             </div>
-            <GetStartedModal />
         </Layout>
     )
 }

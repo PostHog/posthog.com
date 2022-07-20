@@ -21,6 +21,17 @@ Grow and retain customers who fit our [target audience](https://posthog.com/hand
 * Make it easy to become a paying customer
 * Ensure long term success with PostHog
 
+## Q3 2022 Goals
+
+* **Proposed Objective:**
+    * Minimize time to revenue
+* **Proposed Key Results:**
+    * Add 3 x 20-70k customers a week (new or increased usage)
+    * Do not churn any customers with 20-70k spend who’ve previously paid in this range (from dips out of this range or cancellations)
+    * We track the ideal customer profile against every sign up and prioritize based on this
+* **Rationale:**
+    * We need to get the company excited about Ideal Customer Profile customers, not just big ones.
+
 ## Customer
 
 Primarily brand new and existing users of Scale and Enterprise

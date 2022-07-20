@@ -4,9 +4,26 @@ sidebar: Docs
 showTitle: true
 ---
 
+### 26.0.0
+This version upgrades the Prometheus service from version `2.31.1` to `2.36.2`. As part of this upgrade, we've also changed some default values in the `prometheus` stanza:
+
+* `prometheus.alertmanager`
+* `prometheus.kubeStateMetrics`
+* `prometheus.nodeExporter`
+* `prometheus.alertmanagerFiles`
+
+now defaults as the upstream Helm chart.
+
+Additionally `prometheus.serverFiles.alerting_rules.yml` has now new defaults that from now on we will consider _UNSTABLE_. Alerting is an important part of any production system. With this Helm chart, we aim to provide a good collection of default rules that can be used to successfully alert an operator if a PostHog installation is not working as expected. As those rules will probably evolve over time and as we don’t want to cut a new major release every time it happens, please consider the default values of this input variable as _UNSTABLE_. Please consider to explicitly override this input in your `values.yaml` if you need to keep it stable.
+
+### 25.0.0
+This version upgrades the PgBouncer service from version `1.12.0` to `1.17.0`. As part of this upgrade, we've migrated from the container image `edoburu/pgbouncer:1.12.0` to `bitnami/pgbouncer:1.17.0`. If you are not overriding `pgbouncer.env` values, **there's nothing you need to do**. Otherwise, please remember to verify if those are working with the [new container image](https://hub.docker.com/r/bitnami/pgbouncer).
+
 ### 24.0.0
 This version changes the supported Kubernetes version to >=1.22 <= 1.24 by dropping the support for Kubernetes 1.21 as it has reached end of life on 2022-06-28.
 
+### 23.4.0
+Updated the app version to 1.37.0 which requires the async migration 0004 to be completed, head over to `/instance/async_migrations` and make sure you run that before updating.
 
 ### 23.0.0
 This version changes the default ClickHouse service type from `NodePort` to `ClusterIP`. This is to remove the possibility of exposing the service in environments where the Kubernetes nodes are not deployed in private subnets or when they are deployed in public subnets but without any network restriction in place.
@@ -29,19 +46,16 @@ For other suggestions and best practices take a look at our docs:
 
 We'd like to thank Alexander Nicholson and the team at TableCheck for sharing their POC with us, which allowed us to quickly reproduce and address this issue.
 
-
 ### 22.0.0
 This version upgrades ClickHouse from version `21.6.5` to `22.3.6.5`. This update brings several improvements to the overall service. For more info, you can look at the [upstream changelog](https://clickhouse.com/docs/en/whats-new/changelog/#clickhouse-release-v223-lts-2022-03-17).
 
 Note: the ClickHouse pod(s) will be reprovisioned as part of this upgrade. We expect no downtime for the ingestion pipeline.
-
 
 ### 21.0.0
 This version changes the supported Kubernetes version to >=1.21 <= 1.24:
 
 - drops support for Kubernetes 1.20 as it has reached end of life on 2022-02-28
 - adds support for Kubernetes 1.24 released on 2022-05-24
-
 
 ### 20.0.0
 This version upgrades the [`altinity/clickhouse-operator`](https://github.com/Altinity/clickhouse-operator) from version `0.16.1` to `0.18.4`. This brings some updates to the custom resource definition (CRD). In order to keep everything in sync, please run the following steps before updating your Helm release:
@@ -217,7 +231,6 @@ This version changes the supported Kubernetes version to >=1.20 <= 1.23:
 - drops support for Kubernetes 1.19 as it has reached end of life on 2021-10-28
 - adds support for Kubernetes 1.23 released on 2021-12-07
 
-
 ### 8.0.0
 This version deprecates the `beat` deployment ([#184](https://github.com/PostHog/charts-clickhouse/pull/184)) as its functionalities are now executed by the `workers` deployment.
 
@@ -230,7 +243,6 @@ As result, we have deprecated the following Helm values:
 - `beat.affinity`
 
 If you didn’t make any customization to those, there’s nothing you need to do. Otherwise, please rename your customized values to be in the `workers.` scope.
-
 
 ### 7.0.0
 This version upgrades the Helm dependency chart [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager) from version `1.2.0` to `1.6.1`. This brings some updates to the custom resource definition (CRD).

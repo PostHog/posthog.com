@@ -58,7 +58,7 @@ PostHog Open Source is available under an [MIT license](https://github.com/PostH
 
 ![GrowthBook - best open source ab testing tools](../images/blog/open-source-testing-tools/growthbook.png)
 
-GrowthBook is an open-source platform for feature flags and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
+GrowthBook is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
 
 ### Who is GrowthBook for?
 

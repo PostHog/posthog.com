@@ -15,11 +15,11 @@ See [Hobby Deployment](hobby) for details on volumes.
 See [DigitalOcean Kubernetes pricing](https://www.digitalocean.com/pricing#kubernetes).
 
 At the time of writing the suggested default setup is as follows:
-1. $40 for compute (2x smallest prod nodes)
+1. $48 for compute (2x basic nodes of 4GB & 2vcpu each)
 1. $6.4 for storage (64Gi block storage)
 1. $10 for load balancer (1x small LB)
 
-Making the total \~$60 / month
+Making the total \~$65 / month
 
 ## AWS
 
@@ -52,7 +52,7 @@ We recommend taking your planned configuration and plugging it into the pricing 
 - [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
 - [AWS Pricing Calculator](https://calculator.aws/#/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Digital Ocean Pricing Calculator](https://www.digitalocean.com/pricing/calculator)
+- [DigitalOcean Pricing Calculator](https://www.digitalocean.com/pricing/calculator)
 
 ## Help us make this guide better
 

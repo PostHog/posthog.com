@@ -27,6 +27,16 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 <hr />
 
+<img src="/images/marketplace/birch.png" alt="birch" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
+
+#### [**Birch**](../marketplace/birch)
+
+Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
+
+**Services:** PostHog as a managed service / deployment help
+
+<hr />
+
 <img src="/images/marketplace/clickhouse.svg" alt="ClickHouse" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
 
 #### [**ClickHouse**](../marketplace/clickhouse)
@@ -34,14 +44,6 @@ They help large organizations to deploy, manage and scale their PostHog instance
 ClickHouse is an open-source column-oriented database management system. (Note: PostHog runs on ClickHouse!)
 
 **Services:** Managed ClickHouse / EU Data Locality
-
-<hr />
-
-<img src="/images/marketplace/birch.png" alt="birch" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
-
-#### [**Birch**](../marketplace/birch)
-
-Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
 
 <hr />
 
@@ -54,8 +56,3 @@ Restack are experts in deploying open-source software and provide a simple way t
 With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without worrying about EKS setup, k8s provisioning, networking, compliance or updates.
 
 **Services:** PostHog as a managed service / GDPR, SOC 2 and HIPAA compliant deployment
-
-<hr />
-
-  
-<img src="/images/marketplace/tenrec.jpg" alt="Tenrec" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />

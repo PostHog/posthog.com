@@ -1,8 +1,7 @@
 import React from 'react'
-import { useActions, useValues } from 'kea'
+import { useActions } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
-import { Input } from 'antd'
 
 interface PricingSliderProps {
     marks?: number[]
@@ -17,29 +16,16 @@ export const PricingSlider = ({
     min = 10000,
     max = 150000000,
     stepsInRange = 100,
-    pricingOption = 'scale',
 }: PricingSliderProps) => {
-    const { setSliderValue, setInputValue, setPricingOption } = useActions(pricingSliderLogic)
-    const { inputValue } = useValues(pricingSliderLogic)
-
-    //setPricingOption(pricingOption)
+    const { setSliderValue } = useActions(pricingSliderLogic)
 
     return (
-        <div className="mt-5 mb-6">
-            <Input
-                name="event"
-                type="number"
-                autoFocus
-                value={inputValue}
-                onChange={({ target: { value } }) => setInputValue(value)}
-            />
-            <LogSlider
-                min={min}
-                max={max}
-                marks={marks}
-                stepsInRange={stepsInRange}
-                onChange={(value) => setSliderValue(value)}
-            />
-        </div>
+        <LogSlider
+            min={min}
+            max={max}
+            marks={marks}
+            stepsInRange={stepsInRange}
+            onChange={(value) => setSliderValue(value)}
+        />
     )
 }
