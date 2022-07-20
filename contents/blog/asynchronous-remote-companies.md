@@ -48,3 +48,5 @@ Don't get me wrong - working asynchronously has huge upside. This time often goe
 But, knowing each other more deeply helps create a true team - where people can more deeply trust and empathize with each other.
 
 So, if you're building a remote company, don't wait too long to initiate those links. It could be the difference between success and failure.
+
+ <NewsletterForm compact />
