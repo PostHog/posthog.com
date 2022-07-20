@@ -1482,3 +1482,321 @@
 [[redirects]]
     from = "/startups"
     to = "/pricing#startup-plan"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/airbyte-export"
+    to = "/apps/airbyte-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/amazon-kinesis"
+    to = "/apps/amazon-kinesis/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/automatic-cohort-creator"
+    to = "/apps/automatic-cohort-creator/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/bigquery-export"
+    to = "/apps/bigquery-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/bitbucket-release-tracker"
+    to = "/apps/bitbucket-release-tracker/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/braze"
+    to = "/apps/braze/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/currency-normalization"
+    to = "/apps/currency-normalization/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/customer-io"
+    to = "/apps/customer-io/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/databricks"
+    to = "/apps/databricks/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/downsampling"
+    to = "/apps/downsampling/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/email-scoring"
+    to = "/apps/email-scoring/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/engage-connector"
+    to = "/apps/engage-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/event-sequence-timer"
+    to = "/apps/event-sequence-timer/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/first-time-event-tracker"
+    to = "/apps/first-time-event-tracker/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/geoip-enrichment"
+    to = "/apps/geoip-enrichment/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/github-release-tracker"
+    to = "/apps/github-release-tracker/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/github-star-sync"
+    to = "/apps/github-star-sync/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/gitlab-release-tracker"
+    to = "/apps/gitlab-release-tracker/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/google-cloud-export"
+    to = "/apps/google-cloud-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/google-pub-sub-connector"
+    to = "/apps/google-pub-sub-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/heartbeat"
+    to = "/apps/heartbeat/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/hubspot-connector"
+    to = "/apps/hubspot-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/ingestion-alert"
+    to = "/apps/ingestion-alert/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/intercom"
+    to = "/apps/intercom/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/migrator-3000"
+    to = "/apps/migrator-3000/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/n8n"
+    to = "/apps/n8n/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/orbit"
+    to = "/apps/orbit/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/pagerduty-connector"
+    to = "/apps/pagerduty-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/postgres-export"
+    to = "/apps/postgres-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/property-filter"
+    to = "/apps/property-filter/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/property-flattener"
+    to = "/apps/property-flattener/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/redshift-export"
+    to = "/apps/redshift-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/redshift-import"
+    to = "/apps/redshift-import/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/replicator"
+    to = "/apps/replicator/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/rudderstack-export"
+    to = "/apps/rudderstack-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/s3-export"
+    to = "/apps/s3-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/salesforce-connector"
+    to = "/apps/salesforce-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/schema-enforcer"
+    to = "/apps/schema-enforcer/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/segment"
+    to = "/apps/segment/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/sendgrid-connector"
+    to = "/apps/sendgrid-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/sentry-connector"
+    to = "/apps/sentry-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/shopify"
+    to = "/apps/shopify/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/snowflake-export"
+    to = "/apps/snowflake-export/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/taxonomy-standardizer"
+    to = "/apps/taxonomy-standardizer/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/timestamp-parser"
+    to = "/apps/timestamp-parser/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/twilio"
+    to = "/apps/twilio/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/twitter-followers"
+    to = "/apps/twitter-followers/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/unduplicator"
+    to = "/apps/unduplicator/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/url-normalizer"
+    to = "/apps/url-normalizer/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/user-agent-populator"
+    to = "/apps/user-agent-populator/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/variance-connector"
+    to = "/apps/variance-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/zapier-connector"
+    to = "/apps/zapier-connector/docs"
+
+
+# Added: 2022-07-20
+[[redirects]]
+    from = "/docs/apps/zendesk-connector"
+    to = "/apps/zendesk-connector/docs"
