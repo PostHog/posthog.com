@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import DocsLayout from 'components/Docs/Layout'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
-import { CallToAction } from 'components/CallToAction'
+import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import { getCookie } from '../../lib/utils'
 
 export const AppTemplate = ({
@@ -33,7 +33,7 @@ export const AppTemplate = ({
                 <div className="flex items-center mb-2 space-x-4 lg:space-x-6">
                     <h1 className="block mb-0 mr-auto">{title}</h1>
 
-                    <div className="shrink-0 flex flex-col items-end space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
+                    <div className="shrink-0 flex flex-col items-end space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
                         {github && (
                             <Link to={github}>
                                 <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -41,9 +41,9 @@ export const AppTemplate = ({
                         )}
 
                         {installUrl && showCTA && (
-                            <CallToAction type="secondary" to={installUrl}>
-                                <div className="flex items-center space-x-2">
-                                    <span>Install</span>
+                            <CallToAction className="" to={installUrl}>
+                                <div className="flex items-center space-x-2 px-1 py-0.5">
+                                    <span className="text-[17px]">Install</span>
                                     {thumbnail?.publicURL && (
                                         <img
                                             src={thumbnail.publicURL}
