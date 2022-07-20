@@ -15,8 +15,8 @@ import GitHubButton from 'react-github-btn'
 import { animateScroll as scroll } from 'react-scroll'
 import shape from './images/shape.svg'
 import Modal from 'components/Modal'
-import SelfHost from 'components/Pricing/Overlays/SelfHost'
-import Enterprise from 'components/Pricing/Overlays/Enterprise'
+import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
+import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
 
@@ -75,13 +75,8 @@ const PricingNew = (): JSX.Element => {
 
     return (
         <Layout>
-            <Modal open={!!currentModal} setOpen={setCurrentModal}>
-                {currentModal === 'self host' ? (
-                    <SelfHost setOpen={setCurrentModal} />
-                ) : (
-                    <Enterprise setOpen={setCurrentModal} />
-                )}
-            </Modal>
+            <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
+            <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
