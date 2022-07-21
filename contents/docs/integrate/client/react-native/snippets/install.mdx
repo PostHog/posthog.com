@@ -1,22 +1,17 @@
-First make sure you have [CocoaPods](https://cocoapods.org/) installed. 
-Learn about [React Native-specific instructions](https://reactnative.dev/docs/integration-with-existing-apps#configuring-cocoapods-dependencies).
 
-Then add the `posthog-react-native` package to your project:
+In your React Native or Expo project
 
-```bash
-yarn add posthog-react-native
-```
-
-Then link the native libraries:
+Then add the `@posthog/react-native` package to your project:
+PostHog has some required peer dependencies in order to function. 
 
 ```bash
-yarn react-native link
-```
+# React Native
+yarn add @posthog/react-native expo-file-system expo-application expo-device
+# (Optional) Install extra libraries for more enriched events
+yarn add install expo-localization expo-network
 
-If you're building for iOS, also make sure you have the latest PostHog iOS Pod installed: 
-
-```bash
-cd ios
-pod install
-cd ..
+# Expo
+expo install @posthog/react-native expo-file-system expo-application expo-device
+# (Optional) Install extra libraries for more enriched events
+expo install expo-localization expo-network
 ```

@@ -29,7 +29,19 @@ import ReactNativeConfigure from './snippets/configure.mdx'
 
 <ReactNativeConfigure />
 
-## Making calls
+## Usage
+
+### Autocapture
+
+Autocapture tracks these events:
+
+* `Application Opened` - once when the App is opened from a closed state
+* `Application Became Active` - when the App comes to the foreground (e.g. from the app switcher)
+* `Application Backgrounded` - when the App is sent to the background by the user
+* `Keyboard Shown` - when the keyboard appears for user input
+* `Keyboard Hidden` - when the keyboard is dismissed from user input
+* `$screen` - when the user navigates (if using @react-navigation/native)
+* `$autocapture` - touch events when the user interacts with the screen
 
 ### Identify
 
@@ -54,7 +66,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```js
-PostHog.capture('some event', { $set: { userProperty: 'value' } })
+posthog.capture('some event', { $set: { userProperty: 'value' } })
 ```
 
 **Usage**
@@ -66,7 +78,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```js
-PostHog.capture('some event', { $set_once: { userProperty: 'value' } })
+posthog.capture('some event', { $set_once: { userProperty: 'value' } })
 ```
 
 **Usage**
@@ -84,9 +96,9 @@ no matter how many events have gathered.
 You can also manually flush the queue, like so:
 
 ```javascript
-import PostHog from 'posthog-react-native'
-
-PostHog.flush()
+posthog.flush()
+// or using async/await
+await posthig.flushAsync()
 ```
 
 ### Reset
@@ -94,38 +106,113 @@ PostHog.flush()
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
 ```javascript
-import PostHog from 'posthog-react-native'
-
-PostHog.reset()
+posthog.reset()
 ```
 
 ### Opt in/out
 
-To Opt in/out of tracking, use the following calls:
+By default, PostHog has tracking enabled unless it is forcefully disabled by default using the option `{ enable: false }`.
+
+You can give your users the option to opt in or out by calling the relevant methods. Once these have been called they are persisted and will be respected until optIn/Out is called again or the `reset` function is called.
+
+To Opt in/out of tracking, use the following calls. 
 
 ```javascript
-import PostHog from 'posthog-react-native'
-
-PostHog.enable() // opt in
-PostHog.disable() // opt out
+posthog.optIn() // opt in
+posthog.optOut() // opt out
 ```
 
-This is the suggested way to prevent capturing data from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in.
+If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
 
-If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+### Featue Flags
+
+Feature Flags can be loaded directly or via a helpful hook
+
+```
+import { useFeatueFlag } from "posthog-react-native"
+
+
+const MyComponent = () => {
+    const showFlaggedFeature = useFeatureFlag("my-flag-id")
+    const multiVariantFeature = useFeatureFlag("my-multivariant-featue-flag-id")
+
+    if (showFlaggedFeature === undefined) {
+        // the response is undefined if the flags are being loaded
+        return null
+    }
+
+    return showFlaggedFeature ? (
+        <Text>Testing feature 😄</Text>
+    ) : (
+        <Text>Not Testing feature 😢</Text>
+    )
+}
+
+
+You can give your users the option to opt in or out by calling the relevant methods. Once these have been called they are persisted and will be respected until optIn/Out is called again or the `reset` function is called.
+
+To Opt in/out of tracking, use the following calls. 
+
+```javascript
+posthog.optIn() // opt in
+posthog.optOut() // opt out
+```
+
+If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+
 
 ### Sending screen views
 
-With `recordScreenViews`, PostHog will try to record all screen changes automatically.
+With the `PostHogProvider`, screen tracking is automatically captured if the `autocapture` property is used. Currently only [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) is supported by autocapture and it is important that the `PostHogProvider` is configured as a child of the `NavigationContainer` as below:
+
+```jsx
+// App.(js|ts)
+import PostHog from 'posthog-react-native'
+import {NavigationContainer} from '@react-navigation/native';
+
+export function App() {
+    return (
+        <NavigationContainer>
+            <PostHogProvider apiKey="<ph_project_api_key>" autocapture>
+                <MyApp.Navigator>
+                    <MyApp.Screen
+                        name="Home"
+                        component={HomeScreen}
+                    />
+              </MyApp.Navigator>
+            </PostHogProvider>
+        </NavigationContainer>
+    )
+}
+```
+
+By default only the Screen name is tracked but it is possible to track the params or modify the name by intercepting the autocapture like so:
+
+```jsx
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    navigation: {
+        routeToName: (name, params) => {
+            if (params.id) return `${name}/${params.id}`
+            return name
+        },
+        routeToParams: (name, params) => {
+            if (name === "SensitiveScreen) return undefined
+            return params
+        },
+    }
+}}>
+    ...
+</PostHogProvider>
+```
+
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
 This function requires a `name`. You may also pass in an optional `properties` object.
 
 ```javascript
-import PostHog from 'posthog-react-native'
 
-PostHog.screen('Dashboard', {
+posthog.screen('Dashboard', {
     background: 'blue',
     hero: 'superhog',
 })
