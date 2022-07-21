@@ -15,7 +15,7 @@ You'll want to use a reverse proxy if you want to use PostHog Cloud but still wa
 We like [using Caddy because it makes setting up the reverse proxy](https://caddyserver.com/docs/quick-starts/reverse-proxy) and TLS a breeze.
 
 ```bash
-docker run -p 80:80 -p 443:443 caddy caddy reverse-proxy --to p.posthog.com:443 --from <YOUR_TRACKING_DOMAIN>
+docker run -p 80:80 -p 443:443 caddy caddy reverse-proxy --to app.posthog.com:443 --from <YOUR_TRACKING_DOMAIN>
 ```
 
 You'll want to sub out `YOUR_TRACKING_DOMAIN` for whatever domain you use for proxying to PostHog. We'd suggest something like `e.yourdomain.com` or the like.
