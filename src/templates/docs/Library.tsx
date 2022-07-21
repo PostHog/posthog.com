@@ -85,6 +85,7 @@ export const query = graphql`
                     autoCapture
                     sessionRecording
                     featureFlags
+                    groupAnalytics
                 }
                 featuredImage {
                     publicURL
