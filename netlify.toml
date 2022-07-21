@@ -1485,13 +1485,22 @@
 # Added: 2022-07-08
 [[redirects]]
     from = "/startups"
-    to = "/pricing#startup-plan"
+    to = "/pricing"
+    
+# Added: 2022-07-11
+[[redirects]]
+    from = "/trial"
+    to = "/pricing"
+    
+# Added: 2022-07-12
+[[redirects]]
+    from = "/schedule-demo"
+    to = "/book-a-demo"
 
 # Added: 2022-07-14
 [[redirects]]
     from = "/apps/airbyte-export/docs"
     to = "/docs/apps/airbyte-export"
-
 
 # Added: 2022-07-14
 [[redirects]]
