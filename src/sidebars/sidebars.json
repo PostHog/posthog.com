@@ -1053,6 +1053,10 @@
                 {
                     "name": "Subscriptions",
                     "url": "/docs/user-guides/subscriptions"
+                },
+                {
+                    "name": "UTM segmentation",
+                    "url": "/docs/user-guides/utm-segmentation"
                 }
             ]
         },
