@@ -1,7 +1,5 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -96,10 +94,12 @@ import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionT
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
+import { Spinner } from './components/Spinner'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
+import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
@@ -112,8 +112,6 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
@@ -208,10 +206,12 @@ export const shortcodes = {
     FeaturedSectionTripleImage,
     SliderNav,
     Spacer,
+    Spinner,
     StarRepoButton,
     StarUsBanner,
     Structure,
     Subscribe,
+    Tab,
     TeamQuote,
     Tooltip,
     TotalCountries,

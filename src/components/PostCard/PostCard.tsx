@@ -1,4 +1,3 @@
-import 'antd/lib/card/style/css'
 import Byline from 'components/Blog/BlogAuthor/Byline'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
