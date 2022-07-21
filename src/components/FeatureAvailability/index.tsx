@@ -108,7 +108,7 @@ export function FeatureAvailability({
                     <h5 className="flex items-center space-x-1 !mt-0">
                         <span>Self-hosted plans</span>
                         <Link
-                            href="/pricing?realm=self-hosted"
+                            href="/pricing?plan=self-hosted"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
                             <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
@@ -129,7 +129,7 @@ export function FeatureAvailability({
                     <h5 className="flex items-center space-x-1 !mt-0">
                         <span>Cloud plans</span>
                         <Link
-                            href="/pricing?realm=cloud"
+                            href="/pricing?plan=cloud"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
                             <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
