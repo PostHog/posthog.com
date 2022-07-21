@@ -1,12 +1,12 @@
 ---
-date: 2022-07-14
-title: Is autocapture ‘still’ bad?
+date: 2022-07-26
+title: Is autocapture ‘still’ bad? An argument
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: [joe-martin]
-featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 categories: ["Product analytics"]
 ---
