@@ -124,17 +124,17 @@ posthog.optOut() // opt out
 
 If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
 
-### Featue Flags
+### Feature Flags
 
 Feature Flags can be loaded directly or via a helpful hook
 
-```
-import { useFeatueFlag } from "posthog-react-native"
+```js
+import { useFeatureFlag } from "posthog-react-native"
 
 
 const MyComponent = () => {
     const showFlaggedFeature = useFeatureFlag("my-flag-id")
-    const multiVariantFeature = useFeatureFlag("my-multivariant-featue-flag-id")
+    const multiVariantFeature = useFeatureFlag("my-multivariant-feature-flag-id")
 
     if (showFlaggedFeature === undefined) {
         // the response is undefined if the flags are being loaded
