@@ -1039,6 +1039,10 @@
                     "url": "/docs/user-guides/sso"
                 },
                 {
+                    "name": "Stickiness",
+                    "url": "/docs/user-guides/stickiness"
+                },
+                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
