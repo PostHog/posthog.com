@@ -14,6 +14,7 @@ type ComboboxProps = {
 
 export const Combobox = (props: ComboboxProps) => {
     const [query, setQuery] = React.useState<string>('')
+    const [focused, setFocused] = React.useState<boolean>(false)
 
     const filteredOptions =
         query === ''
@@ -40,17 +41,23 @@ export const Combobox = (props: ComboboxProps) => {
                     <HeadlessCombobox.Label className="text-sm">{props.label}</HeadlessCombobox.Label>
                     <HeadlessCombobox.Button
                         as="div"
-                        className="block flex items-center relative w-full max-w-md focus:outline-none shadow-sm mt-1.5"
+                        className="flex items-center relative w-full max-w-md focus:outline-none shadow-sm mt-1.5"
                     >
                         <HeadlessCombobox.Input
-                            onFocus={(event: React.FocusEvent<HTMLInputElement>) => (event.target.value = '')}
+                            onBlur={() => setFocused(false)}
+                            onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
+                                event.target.value = ''
+                                setFocused(true)
+                            }}
                             onClick={(event: React.MouseEvent<HTMLInputElement>) =>
                                 ((event.target as HTMLInputElement).value = '')
                             }
                             onChange={(event) => setQuery(event.target.value)}
                             displayValue={props.display}
                             placeholder={currentValue || props.placeholder || 'Select a value'}
-                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-xs select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600`}
+                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-xs select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600 ${
+                                focused ? '' : 'cursor-pointer'
+                            }`}
                         />
 
                         <span className="ml-3 absolute right-0 pr-2 pointer-events-none">
