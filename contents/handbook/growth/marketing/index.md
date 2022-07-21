@@ -18,7 +18,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-visi
  
 - **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than technical paid ads, or brand/PR.
 
-- **Speed:** We want to be hyper-reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
+- **Speed:** We want to be reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
 #### Tactics
 
