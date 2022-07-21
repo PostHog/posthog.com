@@ -34,7 +34,7 @@ TabGroup.displayName = 'TabGroup'
 
 const TabList: typeof HeadlessTab.List = ({ children, className, ...props }) => {
     return (
-        <HeadlessTab.List {...props} className={`space-x-3 flex items-center flex-wrap ${className}`}>
+        <HeadlessTab.List {...props} className={`space-x-3 flex items-center overflow-x-auto ${className}`}>
             {children}
         </HeadlessTab.List>
     )
