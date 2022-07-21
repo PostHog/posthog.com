@@ -12,60 +12,12 @@ hideAnchor: true
 - Yakko Majuri (Full Stack Engineer)
 - Marcus Hyett (Product Manager)
 - Guido Iaquinti (Site Reliability Engineer)
+- Harry Waye (Full Stack Engineer)
 
-## Platform Sub-Team Mission Statements
+## Platform Sub-Teams
 
-- **Ingestion:** Provide the best events pipeline in the world.
-- **Infrastructure:** Make deploying, scaling, and managing PostHog easy, fast, and reliable.
-
-## Roadmap
-
-### Ingestion
-
-#### 3-year
-
-- Ingest events out of order
-- No events left behind (99.99%)
-- All events are correct (99.99%)
-- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
-- Events are ingested and visible in app within 5 seconds p99
-- Integrated delightful app developer experience (inside PostHog)
-    - CI/CD
-    - Testing
-    - Synthetic data testing
-- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
-
-#### 6 months
-
-- Scalable to 1Bn Persons 🎉
-- Ingestion monitoring and management
-    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
-- Events are ingested and visible in app within 30 seconds p99
-- Easy to build a well-tested app (DevEx)
-    - Documentation
-    - GitHub Template
-        - Unit tests
-        - Style
-
-See the Ingestion roadmap on the dedicated [Ingestion Team page](/handbook/people/team-structure/ingestion).
-### Infrastructure
-
-#### 3-year
-
-- All infrastructure is managed as code
-- Cloud is global
-- Best in class security and privacy compliance
-- Scale beyond 1 Trillion events / month
-- Support Non-Cube Deploys 🤖
-
-#### 6 month
-
-- No Heroku
-- ClickHouse Upgraded
-- Good logging and monitoring
-- 5 Billion / month events
-- SOC 2 Ready
-- All infra is managed as code on prod / staging + EU Ready 🎈
+- **Ingestion:** Provide the best events pipeline in the world. [Ingestion Team page](/handbook/people/team-structure/ingestion).
+- **Infrastructure:** Make deploying, scaling, and managing PostHog easy, fast, and reliable. [Infrastructure Team Page](/handbook/people/team-structure/infrastructure)
   
 ## How we work?
 

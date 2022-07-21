@@ -13,7 +13,7 @@ import GithubSlugger from 'github-slugger'
 import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import SectionLinks from './Handbook/SectionLinks'
+import SectionLinks from 'components/SectionLinks'
 
 export default function App({ data, pageContext: { next, previous } }) {
     const { pageData, documentation, sidebars } = data

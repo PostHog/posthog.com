@@ -105,11 +105,12 @@ This means you were trying to update to a version that requires these async migr
 
 The table below lists out recommended PostHog app and chart versions to use for updating to if there's a need for a multi step upgrade.
 
-| Async Migration | PostHog Version | Chart Version |
-| --------------- | --------------- | --------------|
-| 0001            | 1.33.0          | 16.1.0        |
-| 0002            | 1.33.0          | 16.1.0        |
-| 0003            | 1.33.0          | 16.1.0        |
+| Async Migration | PostHog Version | Chart Version | Notes  |
+| --------------- | --------------- | --------------| ------ |
+| 0001            | 1.33.0          | 16.1.0        |        |
+| 0002            | 1.33.0          | 16.1.0        |        |
+| 0003            | 1.33.0          | 16.1.0        |        |
+| 0004            | 1.36.1          | 26.0.0        | Run the async migration right after upgrading as there could be problems with ingestion otherwise | 
 
 
 #### Upgrading hobby deployment to a specific version

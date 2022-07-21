@@ -40,7 +40,7 @@ Proactive people are the most successful at PostHog. Prioritize hard and make su
 
 Today, across many product areas, we deliver the most impact when we move fast and maintain a high quality bar. It improves retention and accelerates word of mouth growth.
 
-In engineering, this means that bias for impact is likely to mean putting more effort into prioritization, scoping out the problem and designing before implementation. It doesn't mean we aim spend weeks in slow feedback loops. Instead, we get together and focus all our energy on rapidly understanding the problem and solution upfront. Solving a small customer support issue super-quickly to delight them is also highly impactful since we know this is a strong contributor to our word of mouth growth.
+In engineering, this means that bias for impact is likely to mean putting more effort into prioritization, scoping out the problem and designing before implementation. It doesn't mean we aim to spend weeks in slow feedback loops. Instead, we get together and focus all our energy on rapidly understanding the problem and solution upfront. Solving a small customer support issue super-quickly to delight them is also highly impactful since we know this is a strong contributor to our word of mouth growth.
 
 For other areas of PostHog this is likely to involve prioritizing and focusing our efforts on bigger bets which we believe can have an outsided impact (e.g. increasing sign-ups, getting a new large enterprise to start paying, increasing our rank on google, etc.)
 

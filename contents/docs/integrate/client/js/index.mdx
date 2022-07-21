@@ -1,8 +1,17 @@
 ---
 title: JavaScript library
+layout: library
 sidebarTitle: JavaScript
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-js
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: true
+    sessionRecording: true
+    featureFlags: true
+    groupAnalytics: true
 ---
 
 > **Note:** You can just use our [snippet](/docs/integrate/client/snippet-installation) to start capturing events with our JS.
@@ -151,6 +160,22 @@ posthog.capture('$pageview')
 
 This will automatically send the current URL.
 
+### Signup example
+
+As an example, here is how to put some of the above concepts together:
+
+```js
+function signup(email) {
+    // Your own internal logic for creating an account and getting a user_id
+    let userId = createAccount(email)
+
+    // Identify user with internal ID
+    posthog.identify(userId)
+    // Set email or any other data
+    posthog.people.set({ email: email })
+}
+```
+
 ### Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
@@ -252,21 +277,44 @@ posthog.reloadFeatureFlags()
 posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
-### Complete signup pseudocode
+### Group analytics
 
-As an example, here is how to put some of the above concepts together:
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-js version of `1.16.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Make a group active and update properties
 
 ```js
-function signup(email) {
-    // Your own internal logic for creating an account and getting a user_id
-    let userId = createAccount(email)
+posthog.group('company', 'id:5', {
+    company_name: 'Awesome Inc.',
+    employees: 11,
+})
+```
 
-    // Identify user with internal ID
-    posthog.identify(userId)
-    // Set email or any other data
-    posthog.people.set({ email: email })
+-   Make a group active without updating properties
+
+```js
+posthog.group('company', 'id:77')
+```
+
+Once a group has been made active, all subsequent events that are sent using the client will be associated with that group automatically.
+
+#### Handling logging out
+
+When the user logs out it's important to call `posthog.reset()` to avoid new events being registered under the previously active group.
+
+#### Integrating groups with feature flags
+
+If you have updated tracking, you can use group-based feature flags as normal.
+
+```js
+if (posthog.isFeatureEnabled('new-groups-feature')) {
+    // do something
 }
 ```
+
+To check flag status for a different group, first switch the active group by calling `posthog.group()`.
 
 ## Persistence
 
@@ -317,7 +365,7 @@ Some of the most relevant options are:
 | Attribute                                                                                                                                                                                 | Description                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://app.posthog.com`                                                                                                           | URL of your PostHog instance.                                                                                                  |
-| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                          | Determines if PostHog should [autocapture](#autocapture) events.                                                               |
+| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                          | Determines if PostHog should [autocapture](#autocapture) events. This setting does not affect capturing pageview events (see `capture_pageview`).            |
 | `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageview events.                                                            |
 | `disable_persistence`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                 | Disable persisting user data across pages. This will disable cookies, session storage and local storage.                       |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if users should be opted out of session recording.                                                                  |
@@ -334,10 +382,10 @@ Some of the most relevant options are:
 
 In this section we describe some additional details on advanced configuration available.
 
-| Attribute                                                                      | Description                                                                                                    |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Attribute                                                                     | Description                                                                                                    |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
-| `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`           | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
+| `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 
 <blockquote class="warning-note">
     These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are

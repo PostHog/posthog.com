@@ -68,7 +68,7 @@ On a high level during ingestion, app server:
 
 Kafka is used as a resilient message bus between different services.
 
-You can find relevant kafka topics [in the PostHog codebase](https://github.com/PostHog/posthog/blob/master/ee/kafka_client/topics.py).
+You can find relevant kafka topics [in the PostHog codebase](https://github.com/PostHog/posthog/blob/master/posthog/kafka_client/topics.py).
 
 
 ## ClickHouse

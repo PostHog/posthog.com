@@ -31,23 +31,31 @@ export const Badge = ({ title, className = '' }) => {
     )
 }
 
-export const Title = ({ className = '', title, subtitle, badge }) => {
+export const Title = ({ className = '', title, subtitle, badge, icon }) => {
     return (
-        <span className={className}>
-            <h3 className="my-0 text-xl md:text-2xl">
-                <span>{title}</span>
-                {badge && <Badge className="ml-2 align-middle" title={badge} />}
-            </h3>
-            <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
-        </span>
+        <div>
+            {icon && <span className="inline-block opacity-30">{icon}</span>}
+            <div>
+                <div className="flex items-center flex-wrap">
+                    <h3 className="m-0 text-[18px] font-black mr-2">{title}</h3>
+                    {badge && (
+                        <span
+                            className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
+                        >
+                            {badge}
+                        </span>
+                    )}
+                </div>
+                <p className="m-0 mt-1 text-black/50 font-medium text-xs">{subtitle}</p>
+            </div>
+        </div>
     )
 }
 
-export const Plan = ({ title, subtitle, badge, children, className = '', style = {} }) => {
+export const Plan = ({ title, subtitle, badge, children, className = '', style = {}, icon }) => {
     return (
         <div style={style} className={`flex flex-col py-6 md:py-9 px-6 md:px-14 ${className}`}>
-            <Title title={title} subtitle={subtitle} />
-            {badge && <Badge className="self-start" title={badge} />}
+            <Title icon={icon} title={title} subtitle={subtitle} badge={badge} />
             {children}
         </div>
     )
