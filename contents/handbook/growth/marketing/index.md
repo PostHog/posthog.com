@@ -42,7 +42,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-visi
 
 - **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
 
-- **PRL** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch. 
+- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch. 
 
 ## How marketing works
 
@@ -114,7 +114,7 @@ The Marketing team's main focus is acquisition of [high quality signups](https:/
  
 - **Email content:** We send out [HogMail](/handbook/growth/marketing/newsletter) every 2 weeks. The format is evolving, but it's a combination of PostHog News, tutorials and generally interesting content we've seen online that we think our users will like.
  
-#### [Sponsorship](/handbook/growth/marketing/open-source-sponsorship). 
+#### [Sponsorship](/handbook/growth/marketing/open-source-sponsorship)
 
 We do this in two ways:
 
