@@ -8,8 +8,6 @@ topics:
     - s3 export
 ---
 
-### What does the S3 Export app do?
-
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 
 ### What are the requirements for this app?
@@ -35,6 +33,7 @@ This app requires a PostHog 1.24.0+ self-hosted, or PostHog Cloud.
 
 1. Log in to [AWS](https://console.aws.amazon.com/).
 2. Open [S3](https://s3.console.aws.amazon.com/) in the AWS console and create a new bucket in your chosen region.
+    1. Make a note of what region your bucket is in
 3. Open [IAM](https://console.aws.amazon.com/iam/home) and create a new policy to allow access to this bucket.
     1. Open "Policies" and click "Create policy"
     2. On the "Visual Editor" tab, click "Choose a service" and select "S3"
@@ -60,6 +59,15 @@ This app requires a PostHog 1.24.0+ self-hosted, or PostHog Cloud.
 To vastly increase export throughput, this app batches events in memory before uploading them to S3. Upload frequency (every minute by default) and maximum upload size (1 MB by default) can be configured when the app is installed.
 
 You should make sure to keep these numbers reasonable to avoid running out of memory on your server. Note that the values apply to **each** concurrent app server thread.
+
+### Configuration
+
+| Option                                                                                                            | Description                                                  |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| <span class="whitespace-nowrap">`AWS Access Key`</span><br /><br />**Type:** String<br />**Required:** Yes        | The Access Key ID for the User you created in AWS.           |
+| <span class="whitespace-nowrap">`AWS Access Secret Key`</span><br /><br />**Type:** String<br />**Required:** Yes | The secret Access Key for the User you created in AWS.       |
+| <span class="whitespace-nowrap">`AWS Region`</span><br /><br />**Type:** String<br />**Required:** Yes            | The AWS region where you created the destination bucket.     |
+| <span class="whitespace-nowrap">`S3 Bucket Name`</span><br /><br />**Type:** String<br />**Required:** Yes        | The name of the bucket where you would like to send exports. |
 
 ### Is the source code for this app available?
 
