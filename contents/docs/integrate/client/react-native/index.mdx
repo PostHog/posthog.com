@@ -8,14 +8,14 @@ github: https://github.com/PostHog/posthog-react-native
 features:
     eventCapture: true
     userIdentification: true
-    autoCapture: false
+    autoCapture: true
     sessionRecording: false
-    featureFlags: false
-    groupAnalytics: false
+    featureFlags: true
+    groupAnalytics: true
 ---
 
-This is an optional library you can install if you're working with React Native. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously,
-making it perfect to use in any part of your mobile app.
+Purely built for React Native, this library allows you to integrate PostHog with your React Native project. For React Native projects built with Expo, there are no mobile native dependencies outside of supported Expo packages.
+
 
 ## Installation
 
@@ -131,6 +131,6 @@ PostHog.screen('Dashboard', {
 })
 ```
 
-## Thank you
+## Upgrading from V1 to V2
 
 This library is largely based on the `analytics-react-native` package.
