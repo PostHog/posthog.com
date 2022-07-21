@@ -2,7 +2,7 @@ import { kea } from 'kea'
 import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
 import { inverseCurve, sliderCurve } from './LogSlider'
 
-export type PricingOptionType = 'scale' | 'enterprise' | 'cloud' | 'cloud-enterprise'
+export type PricingOptionType = 'self-hosted' | 'self-hosted-enterprise' | 'cloud' | 'cloud-enterprise'
 
 export const pricingSliderLogic = kea({
     actions: {
@@ -34,7 +34,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         pricingOption: [
-            'scale',
+            'cloud',
             {
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
@@ -48,7 +48,7 @@ export const pricingSliderLogic = kea({
                 let alreadyCountedEvents = 0
 
                 const thresholdPrices =
-                    pricingOption === 'scale'
+                    pricingOption === 'self-hosted'
                         ? [
                               [1_000_000, 0],
                               [2_000_000, 0.00045],
@@ -57,7 +57,7 @@ export const pricingSliderLogic = kea({
                               [1_000_000_000, 0.000009],
                               [Number.MAX_SAFE_INTEGER, 0.000003],
                           ]
-                        : pricingOption === 'enterprise'
+                        : pricingOption === 'self-hosted-enterprise'
                         ? [
                               [10_000_000, 0.00045],
                               [100_000_000, 0.00009],
@@ -88,7 +88,7 @@ export const pricingSliderLogic = kea({
                     alreadyCountedEvents = threshold
                 }
 
-                if (pricingOption === 'enterprise') {
+                if (pricingOption === 'self-hosted-enterprise') {
                     finalCost = finalCost > ENTERPRISE_MINIMUM_PRICING ? finalCost : ENTERPRISE_MINIMUM_PRICING
                 } else if (pricingOption === 'cloud-enterprise') {
                     finalCost =

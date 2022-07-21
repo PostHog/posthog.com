@@ -108,12 +108,11 @@ export const ProductAnalytics = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link
-                            to="/blog/categories/comparisons"
-                            className="text-primary/80 inline-block leading-tight text-[12px]"
-                        >
-                            Compare to Amplitude, Heap, Mixpanel
-                        </Link>
+                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
+                            Compare to <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
+                            <Link to="/blog/why-i-ditched-google-analytics-for-posthog">Mixpanel</Link>,{' '}
+                            <Link to="/blog/posthog-vs-matomo">Matomo</Link>
+                        </div>
                     </div>
                     <div className="md:relative w-3/4">
                         <div className="absolute -bottom-2 right-0">
@@ -168,12 +167,9 @@ export const SessionRecording = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="mb-3 flex-grow md:px-0 px-5">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link
-                            to="/blog/categories/comparisons"
-                            className="text-primary/80 inline-block leading-tight text-[12px]"
-                        >
+                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
                             Compare to Hotjar, Logrocket, Matomo
-                        </Link>
+                        </div>
                     </div>
                     <div className="md:relative w-1/2 md:w-3/4">
                         <div className="absolute bottom-0 right-0">
@@ -239,12 +235,9 @@ export const FeatureFlags = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link
-                            to="/blog/categories/comparisons"
-                            className="text-primary/80 inline-block leading-tight text-[12px]"
-                        >
-                            Compare to LaunchDarkly
-                        </Link>
+                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
+                            Compare to LaunchDarkly, Flagsmith, GrowthBook
+                        </div>
                     </div>
                     <div className="md:relative w-3/4">
                         <div className="absolute bottom-0 right-0">
@@ -327,17 +320,14 @@ export const ABTesting = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product/correlation-analysis" title="See how it works" />
+                    <CTA url="/product/experimentation-suite" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
                         <hr className="w-[20px] h-[3px] rounded-full" />
-                        <Link
-                            to="/blog/categories/comparisons"
-                            className="text-primary/80 inline-block leading-tight text-[12px]"
-                        >
-                            Compare to LaunchDarkly
-                        </Link>
+                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
+                            Compare to Mixpanel, Optimizely, VWO
+                        </div>
                     </div>
                     <div className="md:relative w-1/2">
                         <div className="absolute bottom-0 right-0">
