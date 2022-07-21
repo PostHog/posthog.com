@@ -71,7 +71,7 @@ export const NewsletterForm = ({
                             <input
                                 type="submit"
                                 className="bg-primary dark:bg-white text-white dark:text-black text-base shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 rounded-full w-full md:w-auto"
-                                value="Try HogMail"
+                                value="Sign me up!"
                             />
                         </form>
                     </div>
