@@ -9,19 +9,20 @@ PostHog offers a number of different deployment options:
     -   Recommended as it's **the fastest way** to try PostHog out.
     -   Comes with **extra features for reliability and security** and automatic updates.
 -   [Hobby](#hobby-deployment) - Recommended for testing or very small hobby projects _(&lt;100k events/month)_
--   [PostHog Self-hosted](#posthog-self-hosted) - Recommended for most self-host deployments.
+-   [PostHog Self-hosted](#posthog-self-hosted) - Recommended for users who need to keep data on their own infrastructure or private cloud.
 
 ## PostHog Cloud
 
-[PostHog Cloud](/pricing) is our managed hosting service and let's you start using PostHog in only a few clicks.
+[PostHog Cloud](/pricing) is our managed hosting service and enables you to start using PostHog in only a few clicks.
 We generally recommend this option for most users as it's the easiest to try out and offers the most features out of the box:
 
 -   **1 million events included _free_ every month!**
--   Highly-scalable infrastructure to handle large event volumes _(>100m events/month)_
+-   Highly-scalable infrastructure to handle large event volumes
 -   Automatic updates when new features are released
--   Unlimited teammates and SSO/SAML _(Enterprise only)_
 
-<div class="flex flex-col items-stretch lg:flex-row lg:items-center justify-between bg-gray-accent-light py-4 px-6 rounded-sm mb-4 space-y-3 lg:space-y-0 lg:space-x-3">
+For more information, check out our [pricing](/pricing) page.
+
+<div class="flex flex-col items-stretch lg:flex-row lg:items-center justify-between bg-gray-accent-light dark:bg-gray-accent-dark py-4 px-6 rounded-sm mb-4 space-y-3 lg:space-y-0 lg:space-x-3">
     <div class="space-y-1">
         <span class="font-semibold text-lg block">Get started with PostHog Cloud.</span>
         <span class="text-base text-gray block">The easiest and quickest way to set-up PostHog.</span>
@@ -29,14 +30,14 @@ We generally recommend this option for most users as it's the easiest to try out
     <CallToAction class="shrink-0" to="/signup">Deploy now</CallToAction>
 </div>
 
-For more information, check out our [pricing](/pricing) page.
+Change your mind later? You can always [migrate to a self-hosted instance later](/docs/self-host/migrate/migrate-between-cloud-and-self-hosted).
 
 ## Hobby deployment
 
 The [Hobby](/docs/self-host/hobby) deployment is the most basic method for hosting PostHog yourself, and is suitable for testing or very small projects.
 This deployment runs the entire PostHog stack on a single VM, meaning it can only handle relatively low event volumes (&lt;100k events/month).
 
-For more information on setting up a hobby deployment, check out [here](/docs/self-host/hobby) for instructions.
+For more information on setting up a hobby deployment, check out [our Hobby deployment docs](/docs/self-host/hobby) for instructions.
 
 ## PostHog Self-hosted
 
@@ -50,6 +51,8 @@ This method offers a number of benefits over PostHog Cloud:
 
 However, this also means that you will need to manage all updates, scaling, and security by yourself.
 This method is generally best suited for those who need maximum control over their own data.
+
+Need help setting up your deployment? Take a look at some of our official partners from [the PostHog Marketplace](/marketplace).
 
 #### Guides for deploying PostHog yourself
 
