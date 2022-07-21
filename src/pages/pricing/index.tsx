@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from '../../components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -14,11 +14,12 @@ import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
 import { animateScroll as scroll } from 'react-scroll'
 import shape from './images/shape.svg'
-import Modal from 'components/Modal'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
+import queryString from 'query-string'
+import { useLocation } from '@reach/router'
 
 export const section = cntl`
     max-w-6xl
@@ -68,10 +69,38 @@ const PricingNew = (): JSX.Element => {
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const location = useLocation()
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
     }
+
+    useEffect(() => {
+        const { plan } = queryString.parse(location.search)
+        if (plan) {
+            let selfHost = false
+            let enterprise = false
+            switch (plan) {
+                case 'cloud':
+                    selfHost = false
+                    enterprise = false
+                    break
+                case 'cloud-enterprise':
+                    selfHost = false
+                    enterprise = true
+                    break
+                case 'self-hosted':
+                    selfHost = true
+                    enterprise = false
+                    break
+                case 'self-hosted-enterprise':
+                    selfHost = true
+                    enterprise = true
+            }
+            setSelfHost(selfHost)
+            setEnterprise(enterprise)
+        }
+    }, [])
 
     return (
         <Layout>
