@@ -46,6 +46,7 @@ module.exports = {
         'gatsby-plugin-react-helmet',
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
+        `gatsby-plugin-webpack-bundle-analyser-v2`,
         `gatsby-plugin-smoothscroll`,
         {
             resolve: `gatsby-source-filesystem`,
