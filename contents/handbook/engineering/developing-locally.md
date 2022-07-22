@@ -58,7 +58,15 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
 
-4. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+4. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+
+    ```bash
+    sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    ```
+
+    ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
+
+5. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
     ```bash
     git clone https://github.com/PostHog/posthog && cd posthog/

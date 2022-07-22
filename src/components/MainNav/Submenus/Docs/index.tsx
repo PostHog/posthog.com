@@ -20,7 +20,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         {
             title: 'Deploy PostHog',
             description: 'Cloud or self-host',
-            url: '/docs/self-host',
+            url: '/docs/deploy',
         },
         {
             title: 'Integrate PostHog',

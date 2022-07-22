@@ -3,3 +3,5 @@
 *.lock
 .cache/
 public/
+node_modules/
+static/
