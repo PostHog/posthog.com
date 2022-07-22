@@ -4,9 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { Tabs } from 'antd'
-export const TabPane = Tabs.TabPane
-
 PostHog enables you to analyze data in real-time, as events come in. Make full use of this power by ingesting live data with our analytics integrations: [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), as well as [third-party platforms](/docs/integrate/overview#integrations).
 
 The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For simplicity, we'll focus on _client_ libraries as a means of data ingestion.
@@ -37,27 +34,39 @@ import FlutterInstall from './client/flutter/snippets/install.mdx'
 import ReactNativeInstall from './client/react-native/snippets/install.mdx'
 import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-  <TabPane tab="JavaScript" key="1">
-    <JSInstall />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidInstall />
-    <AndroidConfigure />
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSInstall />
-    <IOSConfigure />
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <FlutterPackage />
-    <FlutterInstall />
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeInstall />
-    <ReactNativeConfigure />
-  </TabPane>
-</Tabs>
+import Tab from "components/Tab"
+
+<Tab.Group>
+   <Tab.List>
+      <Tab>JavaScript</Tab>
+      <Tab>Android</Tab>
+      <Tab>iOS</Tab>
+      <Tab>Flutter</Tab>
+      <Tab>React Native</Tab>
+   </Tab.List>
+
+   <Tab.Panels>
+      <Tab.Panel>
+         <JSInstall />
+      </Tab.Panel>
+      <Tab.Panel>
+         <AndroidInstall />
+         <AndroidConfigure />
+      </Tab.Panel>
+      <Tab.Panel>
+         <IOSInstall />
+         <IOSConfigure />
+      </Tab.Panel>
+      <Tab.Panel>
+         <FlutterPackage />
+         <FlutterInstall />
+      </Tab.Panel>
+      <Tab.Panel>
+         <ReactNativeInstall />
+         <ReactNativeConfigure />
+      </Tab.Panel>
+   </Tab.Panels>
+</Tab.Group>
 
 # Use autocapture
 
@@ -76,26 +85,36 @@ import AndroidCapture from './client/android/snippets/capture.mdx'
 import IOSCapture from './client/ios/snippets/capture.mdx'
 import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
-  <TabPane tab="JavaScript" key="1">
-    <JSCapture />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidCapture />
-    <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSCapture />
-    <p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeCapture />
-    <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
-  </TabPane>
-</Tabs>
+<Tab.Group>
+   <Tab.List>
+      <Tab>JavaScript</Tab>
+      <Tab>Android</Tab>
+      <Tab>iOS</Tab>
+      <Tab>Flutter</Tab>
+      <Tab>React Native</Tab>
+   </Tab.List>
+
+   <Tab.Panels>
+      <Tab.Panel>
+         <JSCapture />
+      </Tab.Panel>
+      <Tab.Panel>
+         <AndroidCapture />
+         <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
+      </Tab.Panel>
+      <Tab.Panel>
+         <IOSCapture />
+         <p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
+      </Tab.Panel>
+      <Tab.Panel>
+         <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
+      </Tab.Panel>
+      <Tab.Panel>
+         <ReactNativeCapture />
+         <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
+      </Tab.Panel>
+   </Tab.Panels>
+</Tab.Group>
 
 # Identify users
 
@@ -104,33 +123,41 @@ import AndroidIdentify from './client/android/snippets/identify.mdx'
 import IOSIdentify from './client/ios/snippets/identify.mdx'
 import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-  <TabPane tab="JavaScript" key="1">
-    <JSIdentify />
-  </TabPane>
-  <TabPane tab="Android" key="2">
-    <AndroidIdentify />
-  </TabPane>
-  <TabPane tab="iOS" key="3">
-    <IOSIdentify />
-  </TabPane>
-  <TabPane tab="Flutter" key="4">
-    <p>
-      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
-    </p>
-  </TabPane>
-  <TabPane tab="React Native" key="5">
-    <ReactNativeIdentify />
-  </TabPane>
-</Tabs>
+<Tab.Group>
+   <Tab.List>
+      <Tab>JavaScript</Tab>
+      <Tab>Android</Tab>
+      <Tab>iOS</Tab>
+      <Tab>Flutter</Tab>
+      <Tab>React Native</Tab>
+   </Tab.List>
+
+   <Tab.Panels>
+      <Tab.Panel>
+         <JSIdentify />
+      </Tab.Panel>
+      <Tab.Panel>
+         <AndroidIdentify />
+      </Tab.Panel>
+      <Tab.Panel>
+         <IOSIdentify />
+      </Tab.Panel>
+      <Tab.Panel>
+         <p> See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
+      </Tab.Panel>
+      <Tab.Panel>
+         <ReactNativeIdentify />
+      </Tab.Panel>
+   </Tab.Panels>
+</Tab.Group>
 
 # Event ingestion nuances
 
 It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
 
-- isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
-- isn't an `$identify` event (e.g. from `posthog.identify()`)
-- its `distinct_id` cannot be matched to an existing person
+-   isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
+-   isn't an `$identify` event (e.g. from `posthog.identify()`)
+-   its `distinct_id` cannot be matched to an existing person
 
 This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
 
@@ -138,17 +165,17 @@ This delay mechanism is called the **event buffer**, and it materially improves 
 
   <summary>How does the event buffer help?</summary>
 
-  Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
+Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
 
-  1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
-    This event gets person ID `A`.
-  2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
-    This event gets person ID `A`.
-  3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
-    OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
-  4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
-    This event gets person ID `A`.
+1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
+   This event gets person ID `A`.
+2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
+   This event gets person ID `A`.
+3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
+   OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
+4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
+   This event gets person ID `A`.
 
-  Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
+Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
 
 </details>

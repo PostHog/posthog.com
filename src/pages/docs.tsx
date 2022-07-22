@@ -12,9 +12,9 @@ import { createPortal } from 'react-dom'
 const quickLinks = [
     {
         icon: 'selfHost',
-        name: 'Self-host',
-        to: '/docs/self-host',
-        description: 'Detailed information on getting PostHog running on your own.',
+        name: 'Deploy',
+        to: '/docs/deploy',
+        description: 'Detailed information on getting PostHog running.',
     },
     {
         icon: 'api',
@@ -192,7 +192,7 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
                                     <div>
-                                        <h3 className="text-lg font-bold text-orange mb-0.5">{link.name}</h3>
+                                        <h3 className="text-lg font-bold text-red mb-0.5">{link.name}</h3>
                                         <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
                                             {link.description}
                                         </p>
@@ -296,7 +296,7 @@ export const DocsIndex: React.FC = () => {
                                     <Link
                                         to={link.to}
                                         disablePrefetch
-                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark text-black"
                                     >
                                         <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
                                         <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>

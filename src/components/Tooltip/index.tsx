@@ -13,7 +13,7 @@ export default function Tooltip({ children, title }: { children: JSX.Element; ti
             })}
             <span
                 role="tooltip"
-                className="bg-primary text-white rounded-md px-2 py-1 group-hover:visible invisible text-xs"
+                className="bg-primary text-white rounded-md px-2 py-1 group-hover:visible invisible text-xs z-50"
                 ref={setPopperElement}
                 style={styles.popper}
                 {...attributes.popper}

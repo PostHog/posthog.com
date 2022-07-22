@@ -1481,13 +1481,22 @@
 # Added: 2022-07-08
 [[redirects]]
     from = "/startups"
-    to = "/pricing#startup-plan"
+    to = "/pricing"
+    
+# Added: 2022-07-11
+[[redirects]]
+    from = "/trial"
+    to = "/pricing"
+    
+# Added: 2022-07-12
+[[redirects]]
+    from = "/schedule-demo"
+    to = "/book-a-demo"
 
 # Added: 2022-07-14
 [[redirects]]
     from = "/apps/airbyte-export/docs"
     to = "/docs/apps/airbyte-export"
-
 
 # Added: 2022-07-14
 [[redirects]]
@@ -1805,6 +1814,10 @@
     to = "/handbook/people/team-structure/app-east"
 
 # Added: 2022-07-18
+[[redirects]]
+    from = "/blog/the-posthog-array-1-37-1"
+    to = "/blog/the-posthog-array-1-37-0"
+
 [[redirects]]
     from = "/handbook/engineering/app-west"
     to = "/handbook/people/team-structure/app-west"

@@ -82,4 +82,4 @@ Overall we are very open, so just create a listing or email us marketplace@posth
 
 There is one listing type we don't want to support - we do not want to add more listings that provide a hosted version of our open source product. This leads to us sending you users, supporting them for free, with less control and often on an outdated version - all of which creates a poor experience than if they just use our cloud product.
 
-The exception to this is if you are a large business that can help us dristribute PostHog more widely than we could reach ayway, so this contributes positively towards [helping increase the number of successful products in the world](/handbook/strategy/strategy).
+The exception to this is if you are a large business that can help us distribute PostHog more widely than we could reach ayway, so this contributes positively towards [helping increase the number of successful products in the world](/handbook/strategy/strategy).

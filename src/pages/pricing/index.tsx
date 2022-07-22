@@ -15,8 +15,8 @@ import GitHubButton from 'react-github-btn'
 import { animateScroll as scroll } from 'react-scroll'
 import shape from './images/shape.svg'
 import Modal from 'components/Modal'
-import SelfHost from 'components/Pricing/Overlays/SelfHost'
-import Enterprise from 'components/Pricing/Overlays/Enterprise'
+import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
+import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
 
@@ -75,13 +75,8 @@ const PricingNew = (): JSX.Element => {
 
     return (
         <Layout>
-            <Modal open={!!currentModal} setOpen={setCurrentModal}>
-                {currentModal === 'self host' ? (
-                    <SelfHost setOpen={setCurrentModal} />
-                ) : (
-                    <Enterprise setOpen={setCurrentModal} />
-                )}
-            </Modal>
+            <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
+            <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
@@ -91,6 +86,7 @@ const PricingNew = (): JSX.Element => {
                             src="./images/tractor-hog.png"
                             className="lg:-mt-4 xl:-mt-12 max-w-screen-sm"
                             loading="eager"
+                            placeholder="none"
                         />
                     </div>
                     <div className="lg:order-1">
@@ -155,7 +151,7 @@ const PricingNew = (): JSX.Element => {
                             </div>
                         </div>
                         <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
-                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" />
+                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" placeholder="none" />
                             <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
                                 <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
                                 <p className="text-[14px] mt-0 mb-2 text-white font-comic">
@@ -247,7 +243,7 @@ const PricingNew = (): JSX.Element => {
                             </svg>
                         </div>
 
-                        <StaticImage src="./images/star-hog.png" width={242} alt="Star Hog" />
+                        <StaticImage src="./images/star-hog.png" width={242} alt="Star Hog" placeholder="none" />
                     </div>
                 </div>
             </section>
@@ -266,6 +262,7 @@ const PricingNew = (): JSX.Element => {
                             height={100}
                             alt="Jonathan Hyde - Former Head of Product, Legl"
                             src="../../images/jonathan-hyde-plain.png"
+                            placeholder="none"
                         />
                     }
                     quote={
@@ -279,7 +276,7 @@ const PricingNew = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} />
+                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?

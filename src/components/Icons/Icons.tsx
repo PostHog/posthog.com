@@ -1480,6 +1480,18 @@ export const Check = (props): JSX.Element => {
     )
 }
 
+export const Check2 = (props): JSX.Element => {
+    return (
+        <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="m3.995 8.15 3.468 3.47 8.24-8.24a1.305 1.305 0 0 1 1.84 0l.783.782a1.305 1.305 0 0 1 0 1.842L8.46 15.869a1.304 1.304 0 0 1-1.833.008l-5.238-5.15A1.255 1.255 0 0 1 1 9.785c.004-.367.141-.682.409-.934l.772-.726a1.303 1.303 0 0 1 1.814.027V8.15Z"
+            />
+        </svg>
+    )
+}
+
 export const Puzzle = (props): JSX.Element => {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
