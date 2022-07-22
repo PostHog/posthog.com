@@ -524,6 +524,10 @@
             "url": "",
             "children": [
                 {
+                    "name": "Overview",
+                    "url": "/docs/deploy"
+                },
+                {
                     "name": "Self-host",
                     "url": "",
                     "children": [
@@ -1053,6 +1057,10 @@
                 {
                     "name": "Subscriptions",
                     "url": "/docs/user-guides/subscriptions"
+                },
+                {
+                    "name": "UTM segmentation",
+                    "url": "/docs/user-guides/utm-segmentation"
                 }
             ]
         },

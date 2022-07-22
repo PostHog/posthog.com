@@ -9,13 +9,13 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 ### Analysis features
 
-| Feature                                     | Status                                       | Cloud | Self-host |
-| ------------------------------------------- | -------------------------------------------- | ----- | ------------ |
-| [Cohort analysis](/docs/user-guides/cohorts)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Session analysis](/docs/user-guides/sessions) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Path analysis](/docs/user-guides/paths)       | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Trends](/docs/user-guides/trends)             | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| UTM segmentation                            | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| Feature                                               | Status                                       | Cloud | Self-host |
+| ----------------------------------------------------- | -------------------------------------------- | ----- | ------------ |
+| [Cohort analysis](/docs/user-guides/cohorts)          | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Session analysis](/docs/user-guides/sessions)        | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Path analysis](/docs/user-guides/paths)              | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Trends](/docs/user-guides/trends)                    | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [UTM segmentation](/docs/user-guides/utm-segmentation)| <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Visualization features
 
