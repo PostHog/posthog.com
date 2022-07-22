@@ -35,13 +35,70 @@ import ReactNativeConfigure from './snippets/configure.mdx'
 
 Autocapture tracks these events:
 
-* `Application Opened` - once when the App is opened from a closed state
-* `Application Became Active` - when the App comes to the foreground (e.g. from the app switcher)
-* `Application Backgrounded` - when the App is sent to the background by the user
-* `Keyboard Shown` - when the keyboard appears for user input
-* `Keyboard Hidden` - when the keyboard is dismissed from user input
-* `$screen` - when the user navigates (if using @react-navigation/native)
-* `$autocapture` - touch events when the user interacts with the screen
+* **Application Opened** - once when the App is opened from a closed state
+* **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
+* **Application Backgrounded** - when the App is sent to the background by the user
+* **Keyboard Shown** - when the keyboard appears for user input
+* **Keyboard Hidden** - when the keyboard is dismissed from user input
+* **$screen** - when the user navigates (if using @react-navigation/native)
+* **$autocapture** - touch events when the user interacts with the screen
+
+With Autocapture, all touch events for children of `PosthogProvider` will be tracked, capturing a snapshot of the view heirachy at that point. This allows you to create Insights in PostHog without having to add many custom events.
+
+PostHog will try to generate a sensible name for the touched element based on the React component `displayName` or `name` but you can force this to something reliable (and also clearly marked for posthog tracking) using the `ph-label` prop.
+
+```jsx
+<View ph-label="my-special-label"></View>
+```
+
+If there are elements you don't want to be captured, you can add the `ph-no-capture` property like so. If this property is found anywhere in the view heirachy, the entire touch event is ignored.
+
+```jsx
+<View ph-no-capture>Sensitive view here</View>
+```
+
+Basic usage:
+```jsx
+// App.(js|ts)
+import PostHog from 'posthog-react-native'
+import {NavigationContainer} from '@react-navigation/native';
+
+export function App() {
+    return (
+        <NavigationContainer>
+            <PostHogProvider apiKey="<ph_project_api_key>" autocapture>
+                {/* Rest of app */}
+            </PostHogProvider>
+        </NavigationContainer>
+    )
+}
+```
+
+You can tweak how autocapture works by passing custom options.
+
+```jsx
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true, // If you don't want to capture touch events set this to false
+    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
+    customLabelProp: "ph-label",
+    noCaptureProp: "ph-no-capture",
+
+    navigation: {
+        // By default only the Screen name is tracked but it is possible to track the 
+        // params or modify the name by intercepting theautocapture like so
+        routeToName: (name, params) => {
+            if (params.id) return `${name}/${params.id}`
+            return name
+        },
+        routeToParams: (name, params) => {
+            if (name === "SensitiveScreen) return undefined
+            return params
+        },
+    }
+}}>
+    ...
+</PostHogProvider>
+```
 
 ### Identify
 
@@ -147,68 +204,18 @@ const MyComponent = () => {
         <Text>Not Testing feature 😢</Text>
     )
 }
-
-
-You can give your users the option to opt in or out by calling the relevant methods. Once these have been called they are persisted and will be respected until optIn/Out is called again or the `reset` function is called.
-
-To Opt in/out of tracking, use the following calls. 
-
-```javascript
-posthog.optIn() // opt in
-posthog.optOut() // opt out
 ```
 
-If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+Whilst the hook is active, PostHog will periodically refresh all the feature flags for the user based on the config property `{ "decidePollInterval": 30000 # every 30 seconds }`.
 
 
 ### Sending screen views
 
 With the `PostHogProvider`, screen tracking is automatically captured if the `autocapture` property is used. Currently only [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) is supported by autocapture and it is important that the `PostHogProvider` is configured as a child of the `NavigationContainer` as below:
 
-```jsx
-// App.(js|ts)
-import PostHog from 'posthog-react-native'
-import {NavigationContainer} from '@react-navigation/native';
+See [autocapture](#autocapture) for configuration.
 
-export function App() {
-    return (
-        <NavigationContainer>
-            <PostHogProvider apiKey="<ph_project_api_key>" autocapture>
-                <MyApp.Navigator>
-                    <MyApp.Screen
-                        name="Home"
-                        component={HomeScreen}
-                    />
-              </MyApp.Navigator>
-            </PostHogProvider>
-        </NavigationContainer>
-    )
-}
-```
-
-By default only the Screen name is tracked but it is possible to track the params or modify the name by intercepting the autocapture like so:
-
-```jsx
-<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
-    navigation: {
-        routeToName: (name, params) => {
-            if (params.id) return `${name}/${params.id}`
-            return name
-        },
-        routeToParams: (name, params) => {
-            if (name === "SensitiveScreen) return undefined
-            return params
-        },
-    }
-}}>
-    ...
-</PostHogProvider>
-```
-
-
-If you want to manually send a new screen capture event, use the `screen` function.
-
-This function requires a `name`. You may also pass in an optional `properties` object.
+If you want to manually send a new screen capture event, use the `screen` function. This function requires a `name`. You may also pass in an optional `properties` object.
 
 ```javascript
 
@@ -220,4 +227,39 @@ posthog.screen('Dashboard', {
 
 ## Upgrading from V1 to V2
 
-This library is largely based on the `analytics-react-native` package.
+V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
+
+For iOS, the new React Native SDK will attempt to migrate the previously peristed data which should result in no unexpected changes to tracked data.
+
+For Android, it is unfortunately not possible for persisted Android data to be loaded which means stored information such as the randomly generated `anonymousId` or the `distinctId` set by `posthog.identify` will not be present. For identified users, the simple workaround is to ensure that `identify` is called at least once when the app loads. For anonymous users there is unfortunately no straightforward workaround they will show up as new anonymous users in PostHog.
+
+```jsx
+// DEPRECATED V1 Setup
+
+import PostHog from 'posthog-react-native'
+
+await PostHog.setup('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+    host: 'https://app.posthog.com',
+    captureApplicationLifecycleEvents: false, // Replaced by `PostHogProvider`
+    captureDeepLinks: false, // No longer supported
+    recordScreenViews: false, // Replaced by `PostHogProvider` supporting @react-navigation/native
+    flushInterval: 30, // Stays the same
+    flushAt: 20, // Stays the same
+    android: {...}, // No longer needed
+    iOS: {...}, // No longer needed
+})
+
+PostHog.capture("foo")
+
+
+// V2 Setup difference
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+    host: 'https://app.posthog.com',
+    // Add any other options here.
+})
+
+# Use created instance rather than the PostHog class
+posthog.capture("foo")
+```
