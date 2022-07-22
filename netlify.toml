@@ -3,6 +3,9 @@
   port = 8888
   targetPort = 8001
 
+[build.processing]
+  skip_processing = true
+
 [[redirects]]
   from = "/plugins/*"
   to = "/apps/:splat"
