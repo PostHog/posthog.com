@@ -137,7 +137,7 @@ Autocapture tracks these events:
 * **$screen** - when the user navigates (if using @react-navigation/native)
 * **$autocapture** - touch events when the user interacts with the screen
 
-With Autocapture, all touch events for children of `PosthogProvider` will be tracked, capturing a snapshot of the view heirachy at that point. This allows you to create Insights in PostHog without having to add many custom events.
+With Autocapture, all touch events for children of `PosthogProvider` will be tracked, capturing a snapshot of the view hierarchy at that point. This allows you to create Insights in PostHog without having to add many custom events.
 
 PostHog will try to generate a sensible name for the touched element based on the React component `displayName` or `name` but you can force this to something reliable (and also clearly marked for posthog tracking) using the `ph-label` prop.
 
@@ -145,7 +145,7 @@ PostHog will try to generate a sensible name for the touched element based on th
 <View ph-label="my-special-label"></View>
 ```
 
-If there are elements you don't want to be captured, you can add the `ph-no-capture` property like so. If this property is found anywhere in the view heirachy, the entire touch event is ignored.
+If there are elements you don't want to be captured, you can add the `ph-no-capture` property like so. If this property is found anywhere in the view hierarchy, the entire touch event is ignored.
 
 ```jsx
 <View ph-no-capture>Sensitive view here</View>
@@ -294,7 +294,7 @@ However, please note that this does not store properties against the User, only 
 
 #### Removing stored Super Properties
 
-Super Properties are persisted across sessions so you have to explictly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `posthog.unregister`, like so:
+Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `posthog.unregister`, like so:
 
 ```js
 posthog.unregister('icecream pref'),
