@@ -32,7 +32,6 @@ import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
-import { ContributorsChart } from './components/ContributorsChart'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -144,7 +143,6 @@ export const shortcodes = {
     Container,
     ContributorCard,
     ContributorSearch,
-    ContributorsChart,
     Customers,
     DarkModeToggle,
     DemoScheduler,
