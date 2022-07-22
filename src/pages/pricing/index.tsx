@@ -76,11 +76,12 @@ const PricingNew = (): JSX.Element => {
     }
 
     useEffect(() => {
-        const { plan } = queryString.parse(location.search)
-        if (plan) {
+        const { plan, realm } = queryString.parse(location.search)
+        const search = plan || realm
+        if (search) {
             let selfHost = false
             let enterprise = false
-            switch (plan) {
+            switch (search) {
                 case 'cloud':
                     selfHost = false
                     enterprise = false
