@@ -239,6 +239,41 @@ posthog.capture('some event', { $set_once: { userProperty: 'value' } })
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
+
+
+### Super Properties
+
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
+
+They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
+
+For example, take a look at the following call:
+
+```js
+posthog.register({
+    'icecream pref': 'vanilla',
+    team_id: 22,
+})
+```
+
+The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+#### Removing stored Super Properties
+
+Super Properties are persisted across sessions so you have to explictly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `posthog.unregister`, like so:
+
+```js
+posthog.unregister('icecream pref'),
+```
+
+This will remove the Super Property and subsequent events will not include it.
+
+If you are doing this as part of a user logging out you can instead simply use `posthog.reset` which takes care of clearing all stored Super Properties and more.
+
+
+
 ### Flush
 
 You can set the number of events in the configuration that should queue before flushing.
@@ -285,7 +320,6 @@ Feature Flags can be loaded directly or via a helpful hook
 ```js
 import { useFeatureFlag } from "posthog-react-native"
 
-
 const MyComponent = () => {
     const showFlaggedFeature = useFeatureFlag("my-flag-id")
     const multiVariantFeature = useFeatureFlag("my-multivariant-feature-flag-id")
@@ -304,6 +338,48 @@ const MyComponent = () => {
 ```
 
 Whilst the hook is active, PostHog will periodically refresh all the feature flags for the user based on the config property `{ "decidePollInterval": 30000 # every 30 seconds }`.
+
+Alternatively you can call load the feature flags directly:
+```js
+// Defaults to undefined if not loaded yet or if there was a problem loading
+posthog.getFeatureFlag("my-flag")
+// Provide an optional default if the flags are not loaded
+posthog.getFeatureFlag("my-flag", false) 
+// Multi variant feature flags are returned as a string
+posthog.getFeatureFlag("my-multivariant-flag", "control") 
+
+```
+
+PostHog will load feature flags when instantiated and will refresh periodically based on the configured options or whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync` 
+```js
+posthog.reloadFeatureFlagsAsync()
+  .then(refreshedFlags => console.log(refreshedFlags))
+```
+
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.).
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Make a group active and update properties
+
+```js
+posthog.group('company', 'id:5', {
+    company_name: 'Awesome Inc.',
+    employees: 11,
+})
+```
+
+-   Make a group active without updating properties
+
+```js
+posthog.group('company', 'id:77')
+```
+
+Once a group has been made active, all subsequent events that are sent using the client will be associated with that group automatically.
+
 
 
 ### Sending screen views
@@ -357,6 +433,6 @@ const posthog = new PostHog('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
     // Add any other options here.
 })
 
-# Use created instance rather than the PostHog class
+// Use created instance rather than the PostHog class
 posthog.capture("foo")
 ```
