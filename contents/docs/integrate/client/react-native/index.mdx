@@ -91,6 +91,38 @@ export function MyApp() {
     )
 }
 ```
+
+### Configuration options
+
+For most people, the default configuration options will work great but if you need to you can further customise how PostHog will work.
+
+```ts
+export const posthog = new PostHog("<ph_project_api_key>", {
+    // PostHog API host
+    host?: string = "https://app.posthog.com",
+    // The number of events to queue before sending to Posthog (flushing)
+    flushAt?: number = 20,
+    // The interval in milliseconds between periodic flushes
+    flushInterval?: number = 10000
+    // If set to false, tracking will be disabled until `optIn` is called
+    enable?: boolean = true,
+    // Whether to track that `getFeatureFlag` was called (used by Expriements)
+    sendFeatureFlagEvent?: boolean = true,
+    // Whether to load feature flags when initialised or not
+    preloadFeatureFlags?: boolean = true,
+    // The interval in milliseconds between decide polls (refreshing feature flags)
+    decidePollInterval?: number = 30000,
+    // How many times we will retry HTTP requests
+    fetchRetryCount?: number = 3,
+    // The delay between HTTP request retries
+    fetchRetryDelay?: number = 3000,
+    // For Session Analysis how long before we expire a session
+    sessionExpirationTimeSeconds?: number = 1800 # 30 mins
+    // Whether to post events to PostHog in JSON or compressed format
+    captureMode?: 'json' | 'form'
+})
+```
+
 ## Usage
 
 ### Autocapture
