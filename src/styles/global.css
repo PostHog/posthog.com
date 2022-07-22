@@ -74,7 +74,7 @@ p {
     }
 
     blockquote:not(.quote) {
-        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
+        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-4;
     }
 
     iframe {
