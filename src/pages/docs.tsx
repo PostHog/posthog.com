@@ -296,7 +296,7 @@ export const DocsIndex: React.FC = () => {
                                     <Link
                                         to={link.to}
                                         disablePrefetch
-                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark text-black"
                                     >
                                         <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
                                         <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>
