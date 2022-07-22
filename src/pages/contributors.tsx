@@ -8,7 +8,7 @@ import pluginLibraryOgImage from '../images/posthog-plugins.png'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
-// import { ContributorsChart } from 'components/ContributorsChart'
+import { ContributorsChart } from 'components/ContributorsChart'
 import Tab from 'components/Tab'
 import Spinner from 'components/Spinner'
 
@@ -57,7 +57,9 @@ export const ContributorsPage = () => {
                                 </div>
                             </Tab.Panel>
 
-                            <Tab.Panel></Tab.Panel>
+                            <Tab.Panel>
+                                <ContributorsChart />
+                            </Tab.Panel>
                         </Tab.Panels>
                     </Tab.Group>
 

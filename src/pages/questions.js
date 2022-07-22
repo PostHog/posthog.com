@@ -14,7 +14,7 @@ import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
-// import { Form, Squeak } from 'squeak-react'
+import { Form, Squeak } from 'squeak-react'
 const Element = Scroll.Element
 const scroller = Scroll.scroller
 
@@ -106,17 +106,16 @@ const Search = () => {
             </form>
             {showForm && (
                 <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
-                    {
-                        formValues ? (
-                            <div>
-                                <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
-                                    <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
-                                        <Check className="w-[12px] h-[12px] text-white" />
-                                    </span>
-                                    <span>Question sent. Thread will be posted here.</span>
-                                </p>
-                            </div>
-                        ) : null /*(
+                    {formValues ? (
+                        <div>
+                            <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
+                                <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
+                                    <Check className="w-[12px] h-[12px] text-white" />
+                                </span>
+                                <span>Question sent. Thread will be posted here.</span>
+                            </p>
+                        </div>
+                    ) : (
                         <Form
                             onSubmit={handleSqueakSubmit}
                             apiHost="https://squeak.cloud"
@@ -124,8 +123,7 @@ const Search = () => {
                             url="https://pxipkquvwqaaunuzjoge.supabase.co"
                             organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                         />
-                    )*/
-                    }
+                    )}
                 </motion.div>
             )}
         </>
@@ -291,7 +289,7 @@ export default function FAQ() {
                 <div className="max-w-4xl mx-auto my-12">
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
-                    {/*<Squeak
+                    <Squeak
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
@@ -300,7 +298,7 @@ export default function FAQ() {
                         apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
                         url="https://pxipkquvwqaaunuzjoge.supabase.co"
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                    />*/}
+                    />
                     <Element name="squeak-bottom" />
                 </div>
             </section>
