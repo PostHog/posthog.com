@@ -1,25 +1,30 @@
 import { Close } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
-import { useValues } from 'kea'
-import React from 'react'
-import { SCALE_MINIMUM_EVENTS, SCALE_MINIMUM_PRICING } from '../constants'
+import { useActions, useValues } from 'kea'
+import React, { useEffect } from 'react'
+import { SCALE_MINIMUM_PRICING } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { Plan } from './Plan'
 import { Scale } from './Plans'
 
 export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
-    const { finalCost, eventNumber } = useValues(pricingSliderLogic)
-    const eventNumberWithDelimiter = eventNumber.toLocaleString()
+    const { finalMonthlyCost } = useValues(pricingSliderLogic)
+    const { setPricingOption } = useActions(pricingSliderLogic)
     const monthlyMinimumPrice = SCALE_MINIMUM_PRICING.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
     })
+    useEffect(() => {
+        if (open) {
+            setPricingOption('scale')
+        }
+    })
     return (
         <Modal open={open} setOpen={setOpen}>
-            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
+            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 -translate-x-1/2">
                 <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
                     <div className="flex flex-col md:flex-row md:space-x-14 sm:space-y-6 md:space-y-0 items-start">
                         <Scale
@@ -36,20 +41,20 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                             <div className="mb-4">
                                 <div className="flex justify-between items-center mt-7">
                                     <div className="mb-0 text-sm text-primary text-opacity-75">
-                                        Monthly event volume
+                                        Monthly event volume (millions)
                                     </div>
-                                    <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
                                 </div>
 
                                 <PricingSlider
-                                    marks={[1000, 1000000, 2000000, 10000000, 150000000]}
-                                    min={1000}
-                                    max={150000000}
-                                    defaultValue={1000}
+                                    marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
+                                    min={1000000}
+                                    max={1000000000}
+                                    defaultValue={1000000}
+                                    pricingOption={'scale'}
                                 />
                             </div>
 
-                            <div className="mb-4 border border-white border-opacity-10 rounded">
+                            <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
                                     <div className="mb-0 text-xs text-almost-black text-opacity-75">Event volume</div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
@@ -76,7 +81,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2 pb-3">
                                     <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">Even cheaper</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.000003</dd>
                                 </dl>
                             </div>
 
@@ -95,7 +100,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                             <div className="flex justify-between items-baseline">
                                 <div className="text-base mb-0 font-bold">Estimated price</div>
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalCost}</div>
+                                    <div className="text-base">${finalMonthlyCost}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>

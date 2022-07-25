@@ -1,11 +1,11 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
+import { Apps } from './components/Apps'
+import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
@@ -45,16 +45,16 @@ import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
-import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
+import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
-import { LibraryStats } from './components/LibraryStats'
+import { LibraryFeatures } from './components/LibraryFeatures'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
@@ -66,11 +66,13 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
-import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
+import { AllPlans } from './components/Pricing/AllPlans'
+import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
+import { Features } from './components/Pricing/Features'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
@@ -83,23 +85,25 @@ import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
-import { ResponsiveAnchor } from './components/ResponsiveAnchor'
+import { Question } from './components/Question'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
-import { SignupModal } from './components/SignupModal'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
+import { Spinner } from './components/Spinner'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
-import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
-import { TableOfContents } from './components/TableOfContents'
+import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Tooltip } from './components/Tooltip'
+import { TotalCountries } from './components/TotalCountries'
+import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
@@ -108,12 +112,12 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
     AnimatedBurger,
+    Apps,
+    AppsList,
     ArrayCTA,
     BasicHedgehogImage,
     BlockQuote,
@@ -153,16 +157,16 @@ export const shortcodes = {
     FloatedImage,
     Footer,
     FooterCTA,
-    GetStartedModal,
     GithubIcon,
     Heading,
     HiddenSection,
     Home,
     HostingOption,
     ImageBlock,
+    IngestionAppsList,
     InlineCode,
     LandingPageCallToAction,
-    LibraryStats,
+    LibraryFeatures,
     Link,
     Logo,
     MainNav,
@@ -174,11 +178,13 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
-    PlanComparisonTable,
     PostCard,
     PostLayout,
+    AllPlans,
+    Calculator,
     CloudVsSelfHost,
     FAQs,
+    Features,
     PlanComparison,
     PricingHero,
     PricingSlider,
@@ -191,23 +197,25 @@ export const shortcodes = {
     ProductFooter,
     ProductPage,
     ProductSectionHeader,
-    ResponsiveAnchor,
+    Question,
     RocketHorizontalRule,
+    SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
-    SignupModal,
     SliderNav,
     Spacer,
+    Spinner,
     StarRepoButton,
     StarUsBanner,
-    StartNowButton,
     Structure,
     Subscribe,
-    TableOfContents,
+    Tab,
     TeamQuote,
     Tooltip,
+    TotalCountries,
+    TotalTeam,
     Tutorials,
     TutorialsSlider,
     VisitLibrary,

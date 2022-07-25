@@ -2,33 +2,69 @@ import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { CodeBlock } from 'components/CodeBlock'
-import AskAQuestion from 'components/CommunityQuestions/AskAQuestion'
 import { Days } from 'components/CommunityQuestions/Question'
+import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
+import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
-import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
+import Scroll from 'react-scroll'
+import { Form, Squeak } from 'squeak-react'
+const Element = Scroll.Element
+const scroller = Scroll.scroller
+
+const TopLink = ({ title, description, link, icon }) => {
+    return (
+        <li className="w-full">
+            <a
+                href={link}
+                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent/25 dark:hover:bg-gray-accent/10 px-4 py-5 h-full"
+            >
+                <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
+                <h3 className="font-bold text-base mb-1">{title}</h3>
+                <p className="text-xs text-gray dark:text-white dark:text-opacity-75 mb-0">{description}</p>
+            </a>
+        </li>
+    )
+}
+
+const Guide = ({ title, link, icon }) => {
+    return (
+        <li className="border-b border-dashed border-gray first:border-l">
+            <Link
+                to={link}
+                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent/10 opacity-80 hover:opacity-100 p-4 space-x-2"
+            >
+                <Icon className="w-4 h-4 text-gray" name={icon} />
+                <h3 className="font-bold text-sm mb-0">{title}</h3>
+            </Link>
+        </li>
+    )
+}
 
 const Search = () => {
     const [value, setValue] = useState('')
     const [modal, setModal] = useState(false)
     const [showForm, setShowForm] = useState(false)
+    const [formValues, setFormValues] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
         if (value.trim()) {
             setModal(true)
         }
     }
+    const handleSqueakSubmit = (values) => {
+        setFormValues(values)
+    }
     return (
         <>
             {modal && (
                 <DocSearchModal
-                    searchParameters={{ facetFilters: [`tags:questions`] }}
                     onClose={() => setModal(false)}
                     initialQuery={value}
                     appId="B763I3AO0D"
@@ -36,30 +72,58 @@ const Search = () => {
                     apiKey="f1386529b9fafc5c3467e0380f19de4b"
                 />
             )}
-            <form onSubmit={handleSubmit} className="flex space-x-3 m-0">
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center relative mx-auto mb-0 w-full max-w-lg"
+            >
+                <div className="absolute left-4 w-4 h-4">
+                    <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                        <g opacity="1" clipPath="url(#a)">
+                            <path
+                                d="m18 15.964-4.794-4.793A7.2 7.2 0 1 0 .001 7.2a7.2 7.2 0 0 0 11.17 6.006L15.963 18 18 15.964ZM2.04 7.2A5.16 5.16 0 0 1 7.2 2.043 5.16 5.16 0 1 1 2.04 7.2Z"
+                                fill="#90794B"
+                            />
+                        </g>
+                        <defs>
+                            <clipPath id="a">
+                                <path fill="#fff" d="M0 0h18v18H0z" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
                 <input
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     name="faq-search"
-                    placeholder="Search hundreds of answers..."
-                    className="px-4 py-3 bg-white dark:bg-gray-accent-dark shadow-md rounded-md max-w-[477px] w-full"
+                    placeholder="Search anything product, installation, or company-related..."
+                    autoFocus={true}
+                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
                 />
 
-                <button className="px-6 py-3 bg-red shadow-md rounded-md text-white font-bold">Search</button>
-            </form>
-            <p className="text-[13px] opacity-50 m-0 mt-3">
-                Try product questions, or anything about installation or self-hosting.
-            </p>
-            <p className="text-[14px] opacity-70 m-0 mt-3">
-                Can't find the answer you're looking for?{' '}
-                <button className="text-red" onClick={() => setShowForm(!showForm)}>
-                    Ask us anything
+                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
+                    Search
                 </button>
-                .
-            </p>
+            </form>
             {showForm && (
-                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }}>
-                    <AskAQuestion />
+                <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                    {formValues ? (
+                        <div>
+                            <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
+                                <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
+                                    <Check className="w-[12px] h-[12px] text-white" />
+                                </span>
+                                <span>Question sent. Thread will be posted here.</span>
+                            </p>
+                        </div>
+                    ) : (
+                        <Form
+                            onSubmit={handleSqueakSubmit}
+                            apiHost="https://squeak.cloud"
+                            apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                            url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                        />
+                    )}
                 </motion.div>
             )}
         </>
@@ -107,11 +171,7 @@ const Question = ({ question }) => {
     )
 }
 
-export default function FAQ({
-    data: {
-        questions: { nodes },
-    },
-}) {
+export default function FAQ() {
     return (
         <Layout>
             <SEO title={'Questions - PostHog'} />
@@ -120,57 +180,128 @@ export default function FAQ({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <section className="max-w-[884px] mx-auto my-12 px-5">
-                <h1>Questions &amp; answers</h1>
-                <p>
-                    We've been asked hundreds of questions, so we decided to compile the answers here. (We hope this
-                    helps you find what you're looking for even faster!)
-                </p>
-                <Search />
-                <div className="questions-content">
-                    <ul className="list-none p-0 m-0">
-                        {nodes.map((question, index) => (
-                            <Question key={index} question={question} />
-                        ))}
-                    </ul>
+            <section className="px-4">
+                <div className="relative">
+                    <div className="max-w-4xl mx-auto my-12  flex flex-col justify-center">
+                        <h1 className="text-center">Questions?</h1>
+                        <h5 className="text-center">Search answers across posthog.com</h5>
+                        <Search />
+                        <p className="mt-3 text-sm text-gray text-center font-semibold">
+                            Can't find your answer?{' '}
+                            <button
+                                className="text-red"
+                                onClick={() => scroller.scrollTo('squeak-bottom', { offset: -100, smooth: true })}
+                            >
+                                Ask a question
+                            </button>
+                        </p>
+                    </div>
+
+                    <span className="absolute bottom-[calc(-170px-3rem)] hidden mdlg:block md:-left-24 lg:-left-20 z-[-10] transition-all">
+                        <StaticImage
+                            src="../../contents/images/search-hog-1.png"
+                            alt="This hog has an answer"
+                            height={512}
+                            width={440}
+                            placeholder="blurred"
+                            className="h-full xl:max-w-none ml-0 md:ml-0"
+                        />
+                    </span>
+
+                    <span className="absolute bottom-[calc(-101px-3rem)] hidden mdlg:block md:-right-40 lg:-right-36 xl:-right-24 2xl:-right-14 z-[-20] transition-all">
+                        <StaticImage
+                            src="../../contents/images/search-hog-2.png"
+                            alt="This hog has an answer"
+                            height={407}
+                            width={449}
+                            placeholder="blurred"
+                            className="h-full xl:max-w-none ml-0 md:ml-0"
+                        />
+                    </span>
+                </div>
+
+                <div className="border-t border-b border-dashed border-gray mb-12 -mx-4">
+                    <div className="max-w-4xl w-full mx-auto">
+                        <ol className="list-none m-0 p-0 md:grid md:grid-cols-5 justify-center divide-y md:divide-y-0 md:divide-x divide-dashed divide-gray">
+                            <TopLink
+                                title="Self-hosting"
+                                description="Deployment options"
+                                link="/docs/self-host#deployment-options"
+                                icon="selfHost"
+                            />
+                            <TopLink
+                                title="Partners"
+                                description="Hosting & support"
+                                link="/marketplace"
+                                icon="partners"
+                            />
+                            <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
+                            <TopLink
+                                title="Report an issue"
+                                description="via GitHub"
+                                link="https://github.com/PostHog/posthog/issues"
+                                icon="issue2"
+                            />
+                            <TopLink title="API" description="Apps, data I/O" link="/docs/api" icon="api" />
+                        </ol>
+                    </div>
+                </div>
+
+                <div className="max-w-4xl w-full mx-auto">
+                    <h3>Product manuals</h3>
+                </div>
+
+                <div className="max-w-4xl w-full mx-auto">
+                    <ol className="list-none m-0 p-0 grid md:grid-flow-col grid-cols-2 md:grid-cols-4 md:grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
+                        <Guide title="Trends" link="/docs/user-guides/trends" icon="trendz" />
+                        <Guide title="Funnels" link="/docs/user-guides/funnels" icon="funnels" />
+                        <Guide title="User paths" link="/docs/user-guides/paths" icon="user-paths" />
+                        <Guide
+                            title="Correlation analysis"
+                            link="/docs/user-guides/correlation"
+                            icon="correlation-analysis"
+                        />
+                        <Guide title="Session recording" link="/docs/user-guides/recordings" icon="session-recording" />
+                        <Guide title="Feature flags" link="/docs/user-guides/feature-flags" icon="feature-flags" />
+                        <Guide
+                            title="Experimentation"
+                            link="/docs/user-guides/experimentation"
+                            icon="experimentation"
+                        />
+                        <Guide title="Heatmaps" link="/docs/user-guides/toolbar#toolbar-features" icon="heatmaps" />
+                        <Guide title="Apps" link="/docs/apps" icon="apps" />
+                        <Guide title="Toolbar" link="/docs/user-guides/toolbar" icon="toolbar" />
+                        <Guide title="Insights" link="/docs/user-guides/insights" icon="insights" />
+                        <Guide
+                            title="Group Analytics"
+                            link="/docs/user-guides/group-analytics"
+                            icon="group-analytics"
+                        />
+                    </ol>
+                    <a
+                        href="/docs/user-guides"
+                        className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
+                    >
+                        View all (23)
+                    </a>
+                </div>
+
+                <div className="max-w-4xl mx-auto my-12">
+                    <h3>Recent questions</h3>
+                    <Element name="squeak-top" />
+                    <Squeak
+                        onSubmit={(_values, formType) =>
+                            formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
+                        }
+                        slug={null}
+                        apiHost="https://squeak.cloud"
+                        apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
+                        url="https://pxipkquvwqaaunuzjoge.supabase.co"
+                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                    />
+                    <Element name="squeak-bottom" />
                 </div>
             </section>
         </Layout>
     )
 }
-
-export const query = graphql`
-    query AllQuestionsQuery {
-        questions: allQuestion(sort: { fields: childReply___ts, order: DESC }, limit: 20) {
-            nodes {
-                id
-                childrenReply {
-                    id
-                    subject
-                    name
-                    ts(difference: "days")
-                    childMdx {
-                        body
-                        excerpt(pruneLength: 400)
-                    }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 20, height: 20)
-                        }
-                    }
-                    teamMember {
-                        frontmatter {
-                            name
-                            jobTitle
-                            headshot {
-                                childImageSharp {
-                                    gatsbyImageData(width: 20, height: 20)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`

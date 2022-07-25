@@ -1,21 +1,16 @@
-import { Enterprise, OpenSource, Scale } from 'components/Pricing/PricingTable/Plans'
-import ScaleModal from 'components/Pricing/PricingTable/ScaleModal'
+import { TrackedCTA } from 'components/CallToAction'
+import Link from 'components/Link'
+import { Plan, Title } from 'components/Pricing/PricingTable/Plan'
+import { Enterprise, OpenSource, Scale, SelfHosted } from 'components/Pricing/PricingTable/Plans'
 import { SEO } from 'components/seo'
 import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useState } from 'react'
 
 export default function SelfHost() {
-    const { posthog } = useValues(posthogAnalyticsLogic)
-    const [open, setOpen] = useState(false)
-    const setModalOpen = (state) => {
-        setOpen(state)
-        if (state) {
-            posthog?.capture('opened pricing modal')
-        }
-    }
+    const [scaleOpen, setScaleOpen] = useState(false)
+    const [enterpriseOpen, setEnterpriseOpen] = useState(false)
+
     return (
         <Layout
             crumbs={[
@@ -29,17 +24,39 @@ export default function SelfHost() {
             ]}
         >
             <SEO title="Self-host - PostHog" />
-            <ScaleModal hideActions setOpen={setModalOpen} open={open} />
-            <section className="px-4">
-                <Intro title="Select your edition" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <OpenSource />
-                    <Scale setOpen={setModalOpen} />
-                    <Enterprise />
-                </div>
-                <p className="text-center mt-8 md:mt-16 font-semibold text-black text-opacity-50">
-                    You can change your plan later.
+            <section>
+                <Intro title="How do you want to run PostHog?" />
+                <p className="text-center -mt-16 mb-12">
+                    Not sure which edition is right for you?{' '}
+                    <Link to="/pricing" className="font-semibold">
+                        Build your perfect plan.
+                    </Link>
                 </p>
+                <div className="border-t border-b border-dashed border-gray-accent-light">
+                    <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
+                        <SelfHosted />
+                        <Enterprise />
+                    </div>
+                </div>
+                <div className="max-w-screen-lg mx-auto flex md:flex-row flex-col items-center">
+                    <Plan title="Open source" subtitle="with community support">
+                        <p className="text-black/70 my-2 text-base">
+                            Our original open source product is available on GitHub and offers product analytics,
+                            feature flags, and session recordings.
+                        </p>
+                        <p className="text-[14px] opacity-50">Limitations: One project, no user permissions</p>
+                    </Plan>
+                    <div className="flex-shrink-0">
+                        <TrackedCTA
+                            event={{ name: 'select edition: clicked get started', type: 'self-hosted' }}
+                            to="/signup/self-host/deploy"
+                            type="secondary"
+                            className="!bg-white shadow-lg"
+                        >
+                            View deployment instructions
+                        </TrackedCTA>
+                    </div>
+                </div>
             </section>
         </Layout>
     )

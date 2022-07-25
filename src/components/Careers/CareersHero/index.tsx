@@ -12,7 +12,7 @@ export const CareersHero = () => {
                     <h1 className="mb-0 pb-0 text-2xl !leading-tight md:text-4xl lg:text-5xl">
                         We're working to increase the number of successful products in the world.
                         <br />
-                        <span className="text-red">We could use your help.</span>
+                        <span className="text-red">Adventurers needed.</span>
                     </h1>
 
                     <div className="w-full sm:w-72 mx-auto">

@@ -1,38 +1,37 @@
-import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import Link from '../Link'
 import { heading, section } from './classes'
 import Icon from './Icon'
+import Slider from './Slider'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
-        <div className="text-center my-4 md:my-10">
+        <div className="text-center mt-0 mb-4">
             <ul
-                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-2 md:grid-cols-4 justify-start gap-y-2 md:gap-y-4 md:gap-x-6 xl:gap-x-8 items-start ${className}`}
+                className={`list-none m-0 p-0 pb-2 inline-grid mx-auto grid-cols-3 md:grid-cols-5 justify-start gap-y-0 md:gap-y-4 md:gap-x-1 ${className}`}
             >
-                <Feature icon="event-pipelines" title="Event pipelines" url="/docs/integrate/ingest-live-data" />
                 <Feature icon="analytics" title="Product analytics" url="/product/#product-analytics" />
                 <Feature icon="session-recording" title="Session recording" url="/product/session-recording" />
                 <Feature icon="feature-flags" title="Feature flags" url="/product/feature-flags" />
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
-                <Feature icon="api" title="API" url="/docs/api" />
-                <Feature icon="data-warehouse" title="Data warehouse" url="/docs/self-host/runbook/clickhouse" />
             </ul>
+            <p className="mt-4 text-xs">
+                Plus 50-ish apps available in the <a href="/apps">PostHog App Store</a>
+            </p>
         </div>
     )
 }
 
 const Feature = ({ title, icon, url }) => {
     return (
-        <li>
+        <li className="w-24">
             <a
                 href={url}
-                className="flex px-2 py-1 space-x-2 font-semibold items-start md:items-center justify-start text-black hover:text-black"
+                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
-                <span className="text-[14px] lg:text-[15px]  text-left leading-tight">{title}</span>
+                <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
             </a>
         </li>
     )
@@ -44,43 +43,23 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        The product analytics suite
-                        <br /> <span className="text-red">you can host yourself</span>
+                        The <span className="text-red inline-block">open source</span>{' '}
+                        <span className="inline-block">Product OS</span>
                     </h1>
-                    <h2 className={heading('sm', 'primary', 'my-6', 'max-w-xl', 'mx-auto')}>
-                        With our open source platform, customer data never has to leave your infrastructure
+                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
+                        A suite of product and data tools. Built on the modern data stack.
                     </h2>
 
-                    <FeatureStrip />
-
-                    <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
-                        <CallToAction type="primary" width="56" to="/signup">
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+                        <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
                             Get started
                         </CallToAction>
-                        <CallToAction type="outline" width="56" to="/book-a-demo">
-                            Schedule a demo
+                        <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
+                            Book a demo
                         </CallToAction>
                     </div>
                 </div>
-            </div>
-            <div className="w-full mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
-                <p className="px-4 font-semibold text-center z-10 relative mb-0 text-sm md:text-base">
-                    Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
-                </p>
-                <div className="max-w-screen-2xl mx-auto w-full relative">
-                    <span className="absolute bottom-1 md:-bottom-8 xl:-bottom-16 right-0 overflow-x-hidden 2xl:overflow-x-visible">
-                        <StaticImage
-                            objectPosition="bottom"
-                            loading="eager"
-                            placeholder="none"
-                            width={400}
-                            imgClassName="h-auto"
-                            className="h-full max-w-[200px] md:max-w-[300px] xl:max-w-none mr-0 md:mr-0"
-                            objectFit="contain"
-                            src="./images/hero-right.png"
-                        />
-                    </span>
-                </div>
+                <Slider />
             </div>
         </section>
     )

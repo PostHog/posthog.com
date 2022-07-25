@@ -5,6 +5,7 @@ const blogTemplate = require('../src/templates/OG/blog.js')
 const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
 const careersTemplate = require('../src/templates/OG/careers.js')
+const tutorialTemplate = require('../src/templates/OG/tutorial.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -58,6 +59,18 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        featuredImage {
+                            absolutePath
+                        }
+                    }
+                }
+            }
             sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
                 childSidebarsJson {
                     handbook {
@@ -92,7 +105,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                         name
                         url
                     }
-                    product {
+                    apps {
                         name
                         url
                     }
@@ -146,10 +159,13 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         encoding: 'base64',
     })
 
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
     const browser = await chromium.puppeteer.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
     })
     const page = await browser.newPage()
     await page.setViewport({
@@ -257,6 +273,18 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
         slug: 'careers',
     })
+
+    // Tutorials OG
+    for (const post of data.tutorials.nodes) {
+        const { featuredImage } = post.frontmatter
+        const image = fs.readFileSync(featuredImage.absolutePath, {
+            encoding: 'base64',
+        })
+        await createOG({
+            html: tutorialTemplate({ image }),
+            slug: post.fields.slug,
+        })
+    }
 
     await browser.close()
 }

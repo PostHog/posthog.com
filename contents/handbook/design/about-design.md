@@ -25,7 +25,7 @@ Design at PostHog:
 
 ## How we work
 
-Design tasks are managed on GitHub project boards. See below:
+Design tasks are managed on GitHub project boards and work is documented in Figma. See below:
 
 ### Product Design
 
@@ -54,6 +54,9 @@ Designs for website & docs typically start in Balsamiq wireframes, then progress
 Because of the volume of content we publish, blog artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/14) project board managed by Lottie.
 
 When [authoring a blog post](/handbook/growth/marketing/blog), add the `Artwork` project board so we can create visuals and make sure the post is listed on our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) with a publish date. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
+
+
+It's also worth trying out [CustomHog](https://www.figma.com/file/HwUmk7WqccLkGgNNGAs4zN/Art-board?node-id=4168%3A24524) to create your own hedgehog content. (This function is still in early stages so if help is needed just reach out to Lottie on slack).
 
 ## **Providing feedback**
 

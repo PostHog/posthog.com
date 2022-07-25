@@ -12,15 +12,15 @@ If you submit a Pull Request to a repository under the `PostHog` organization, a
 
 If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out!
 
-## Plugins
+## Apps
 
-If you build a plugin for PostHog that is accepted into our [official repository](https://github.com/PostHog/plugin-repository), we will list you as a contributor in the categories `code` and `plugin`, as well as send you some merch. 
+If you build a app for PostHog that is accepted into our [official repository](https://github.com/PostHog/plugin-repository), we will list you as a contributor in the categories `code` and `plugin` or `app`, as well as send you some merch. 
 
 ## Non-PR contributions
 
 We follow the [All Contributors spec](https://allcontributors.org/docs/en/emoji-key) for recognizing contributions. This means that if you are actively engaged in discussions, open bug reports, or contribute in other ways, a PostHog team member is able to add you to our contributors list for any of the contribution types listed in the link above.
 
-At the moment we only provide merch for `code` (PR merged) and `plugin` (plugin accepted into official repo) contributions, however, as a contributor in a category other than those two, we'll still list you on our [README](https://github.com/PostHog/posthog#contributors-) and create a contributor card for you on our [contributors page](/contributors).
+At the moment we only provide merch for `code` (PR merged) and `plugin` or `app` (app accepted into official repo) contributions, however, as a contributor in a category other than those two, we'll still list you on our [README](https://github.com/PostHog/posthog#contributors-) and create a contributor card for you on our [contributors page](/contributors).
 
 ## Contributor cards
 

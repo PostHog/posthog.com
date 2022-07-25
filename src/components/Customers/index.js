@@ -29,7 +29,7 @@ const FeaturedCustomer = ({ customer }) => {
             url={slug}
             className="max-w-[1140px] -mb-6 md:-mb-12 relative mx-auto flex flex-row-reverse space-x-4 space-x-reverse justify-between pt-16"
         >
-            <div className="max-w-full md:max-w-[364px] w-full absolute md:relative inset-0 md:before:bg-transparent before:absolute before:inset-0 before:w-full before:h-full before:bg-white before:bg-opacity-80 before:z-10">
+            <div className="max-w-full md:max-w-[364px] w-full absolute md:relative inset-0 md:before:bg-transparent before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80 before:z-10">
                 <img
                     className="object-cover md:object-contain absolute w-full h-full object-bottom"
                     src={featuredImage?.publicURL}
@@ -39,7 +39,7 @@ const FeaturedCustomer = ({ customer }) => {
                 <img src={logo?.publicURL} />
                 <h2 className="text-2xl my-7">{title}</h2>
                 <span to={slug} className="text-red hover:text-red font-bold flex space-x-1 items-center text-[17px]">
-                    <span>By Colin Wren, Co-founder of Reciprocal.dev</span>
+                    <span>Read case study</span>
                     <RightArrow className="w-5 h-5 bounce" />
                 </span>
             </div>
@@ -62,18 +62,17 @@ export default function Customers() {
                 <section className="bg-black dark py-16 md:py-32 px-4">
                     <div>
                         <Quote
-                            logo="/images/customers/pry.svg"
-                            name="Tiffany Wong"
-                            title="Co-founder, Pry"
-                            imageSource="/images/customers/tiffany.png"
+                            logo="/images/customers/mention-me.svg"
+                            name="Joe Saunderson"
+                            title="Software Engineer, Mention Me"
+                            imageSource="/images/customers/joe.png"
                             quote={
                                 <span>
-                                    “Hosting PostHog on our own infrastructure was easy to do and means{' '}
+                                    “We looked at{' '}
                                     <span className="text-red">
-                                        we can be confident that our data is safe and shared with as few platforms as
-                                        possible.
+                                        Amplitude, Mixpanel and Pendo and they were far too expensive.
                                     </span>{' '}
-                                    This is really important to us, as we’re often dealing with sensitive data.”
+                                    Not only that, it was also very unclear how they worked in terms of data privacy.”
                                 </span>
                             }
                         />
@@ -89,7 +88,7 @@ export default function Customers() {
                             return (
                                 <li key={index}>
                                     <Card className="inline-block relative h-full" url={slug}>
-                                        <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white before:bg-opacity-80">
+                                        <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80">
                                             <img
                                                 src={featuredImage?.publicURL}
                                                 className="w-full h-full object-cover"
@@ -112,17 +111,15 @@ export default function Customers() {
                 <section className="my-16 md:my-32 px-4">
                     <div>
                         <Quote
-                            logo="/images/customers/mention-me.svg"
-                            name="Lleo Harress"
-                            title="Software Engineer"
-                            image={<StaticImage width={100} quality={100} src="./images/lleo.png" />}
+                            logo="/images/customers/weweb.svg"
+                            name="Quentin Durantay"
+                            title="Growth, WeWeb"
+                            imageSource="/images/customers/quentin.jpeg"
                             quote={
                                 <span>
-                                    “The fact that PostHog is open source is really helpful. The cloud formation
-                                    templates made deployment easy and{' '}
-                                    <span className="text-red">we were up and running within a day,</span> but we can
-                                    also open the codebase and build on it. We’ve iterated an entire stack for ourselves
-                                    since launch.”
+                                    “I love PostHog! The tool that finally made me churn from Amplitude.{' '}
+                                    <span className="text-red">1/10th of the price and 10x the value.</span> I highly
+                                    recommend it!”
                                 </span>
                             }
                         />

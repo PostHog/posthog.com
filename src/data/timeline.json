@@ -32,7 +32,7 @@
     {
         "date": "2020-06-01",
         "type": "feature",
-        "description": "Feature flags"
+        "description": "Feature Flags"
     },
     {
         "date": "2020-06-01",
@@ -67,7 +67,7 @@
     {
         "date": "2020-11-01",
         "type": "feature",
-        "description": "Session recording"
+        "description": "Session Recording"
     },
     {
         "date": "2020-12-01",
@@ -82,17 +82,17 @@
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Plugins launched"
+        "description": "Apps launched"
     },
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Hubspot plugin"
+        "description": "Hubspot Connector"
     },
     {
         "date": "2021-02-01",
         "type": "milestone",
-        "description": "Redesigned app"
+        "description": "Redesigned product"
     },
     {
         "date": "2021-03-01",
@@ -102,7 +102,7 @@
     {
         "date": "2021-04-01",
         "type": "feature",
-        "description": "S3, Snowflake plugins"
+        "description": "S3, Snowflake apps"
     },
     {
         "date": "2021-05-01",
@@ -127,7 +127,7 @@
     {
         "date": "2021-07-30",
         "type": "feature",
-        "description": "Salesforce plugin"
+        "description": "Salesforce Connector"
     },
     {
         "date": "2021-08-01",
@@ -147,17 +147,17 @@
     {
         "date": "2021-10-21",
         "type": "feature",
-        "description": "Multivariate feature flags"
+        "description": "Multivariate Feature Flags"
     },
     {
         "date": "2021-11-17",
         "type": "feature",
-        "description": "Correlation analysis"
+        "description": "Correlation Analysis"
     },
     {
         "date": "2021-12-01",
         "type": "feature",
-        "description": "Group analytics"
+        "description": "Group Analytics"
     },
     {
         "date": "2022-01-22",
@@ -185,40 +185,39 @@
         "description": "Offsite: Iceland"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-04-01",
         "type": "feature",
-        "description": "Console log tracking in recordings",
-        "future": true
+        "description": "Console log tracking in recordings (beta)"
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "Insight experience overhaul"
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "New onboarding experience"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Insight experience overhaul",
-        "future": true
+        "description": "Rapid ingestion pipeline"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Export and share visualizations as image file",
-        "future": true
+        "description": "Awesome demo environment (in progress)"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Subscribe to dashboards and insights",
-        "future": true
+        "description": "Export and share visualizations as image file (in progress)"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Awesome demo environmemt",
-        "future": true
-    },
-    {
-        "date": "2022-06-01",
-        "type": "feature",
-        "description": "New onboarding experience",
-        "future": true
+        "description": "Subscribe to dashboards and insights (in progress)"
     },
     {
         "date": "2022-09-01",
@@ -259,19 +258,13 @@
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Enhanced plugin development experience",
+        "description": "Enhanced app development experience",
         "future": true
     },
     {
         "date": "2022-09-01",
         "type": "feature",
         "description": "Multiple cloud environments",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Rapid ingestion pipeline",
         "future": true
     }
 ]

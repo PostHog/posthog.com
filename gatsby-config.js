@@ -17,6 +17,13 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: `gatsby-source-squeak`,
+            options: {
+                apiHost: 'https://squeak.cloud',
+                organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+            },
+        },
+        {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
                 endpoint:
@@ -65,7 +72,9 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    'gatsby-remark-mermaid',
+                    {
+                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
+                    },
                 ],
                 plugins: [`gatsby-remark-static-images`],
             },
@@ -120,7 +129,12 @@ module.exports = {
                 path: `${__dirname}/static/images/authors`,
             },
         },
-        `gatsby-transformer-gitinfo`,
+        {
+            resolve: `gatsby-plugin-git-info`,
+            options: {
+                match: '{src,contents}/**/*.{mdx,md}',
+            },
+        },
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
@@ -130,8 +144,8 @@ module.exports = {
                 name: 'gatsby-starter-markdown',
                 short_name: 'starter',
                 start_url: '/',
-                background_color: '#663399',
-                theme_color: '#663399',
+                background_color: '#f96132',
+                theme_color: '#f96132',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
             },
@@ -213,7 +227,7 @@ module.exports = {
                             escapeEntities: {},
                         },
                     },
-                    'gatsby-remark-mermaid',
+                    `gatsby-remark-mermaid`,
                 ],
             },
         },
@@ -221,7 +235,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-posthog`,
             options: {
-                // Specify the API key for your Posthog Project (required)
+                // Specify the API key for your PostHog project (required)
                 apiKey: process.env.GATSBY_POSTHOG_API_KEY,
                 // Specify the API host (http://app.posthog.com/ unless in development)
                 apiHost: process.env.GATSBY_POSTHOG_API_HOST,

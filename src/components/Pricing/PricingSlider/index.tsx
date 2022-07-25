@@ -8,6 +8,7 @@ interface PricingSliderProps {
     min?: number
     max?: number
     stepsInRange?: number
+    pricingOption?: string
 }
 
 export const PricingSlider = ({
@@ -19,14 +20,12 @@ export const PricingSlider = ({
     const { setSliderValue } = useActions(pricingSliderLogic)
 
     return (
-        <div className="mt-5 mb-6">
-            <LogSlider
-                min={min}
-                max={max}
-                marks={marks}
-                stepsInRange={stepsInRange}
-                onChange={(value) => setSliderValue(value)}
-            />
-        </div>
+        <LogSlider
+            min={min}
+            max={max}
+            marks={marks}
+            stepsInRange={stepsInRange}
+            onChange={(value) => setSliderValue(value)}
+        />
     )
 }

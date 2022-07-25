@@ -2,6 +2,13 @@
 .cache
 node_modules
 yarn-error.log
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Build directory
 /public
@@ -23,3 +30,4 @@ static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
 yarn.lock
 fonts
+src/components/Layout/Fonts.scss

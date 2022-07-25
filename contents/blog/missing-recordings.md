@@ -11,7 +11,7 @@ author: ["rick-marron"]
 categories: ["Engineering", "Inside PostHog"]
 ---
 
-[Session Recording](product/session-recording) is one of PostHog's core features. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
+[Session Recording](product/session-recording) is one of PostHog's core features, and one of the few completely [open source ression replay tools](/blog/best-open-source-session-replay-tools) available. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
 
 Recently, we made a ton of improvements to the feature. To name a few, we:
 
@@ -98,3 +98,9 @@ And we're not done yet, we're still working to make it even easier to find and w
 As for the remaining <1% of recordings that are missing, we're still working on that too. The going theory is that it has to do with data compression errors or slow networks, but we're not quite to the bottom of that one yet.
 
 Read our [Sessions Recordings documentation](/docs/user-guides/recordings) for more detailed information about the feature, or you can [make an account for free](https://posthog.com/pricing) to try it out yourself!
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

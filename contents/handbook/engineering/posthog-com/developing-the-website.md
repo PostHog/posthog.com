@@ -19,7 +19,7 @@ In order to run the PostHog website locally, you need the following installed:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
 - [Node.js](https://nodejs.org/en/download/) – server runtime
-- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.jsn
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.js
 
 If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
 
@@ -380,7 +380,7 @@ The default HTTP status code is 301, but if you need to define a different statu
 
 ## Committing changes
 
-It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
+It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documentation. This helps the pull request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
 
 - **via the command line**
 

@@ -20,11 +20,11 @@ export default function Community() {
                 <h2 className={heading('md', 'white')}>
                     Join our <span className="text-red">huuuuge*</span> open source community
                 </h2>
-                <h3 className={heading('sm', 'tan')}>*7,100+ stars on GitHub</h3>
+                <h3 className={heading('sm', 'tan')}>*8,300+ stars on GitHub</h3>
                 <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-1 sm:divide-y-0 sm:divide-x-1 divide-dashed">
-                    <CommunityStat title="26k+" description="Developer community" />
-                    <CommunityStat title="270+" description="Contributors" />
-                    <CommunityStat title="35b+" description="Events tracked" />
+                    <CommunityStat title="30k+" description="Developer community" />
+                    <CommunityStat title="280+" description="Contributors" />
+                    <CommunityStat title="44b+" description="Events tracked" />
                 </ul>
                 <CallToAction type="outline" width="56" href="https://github.com/PostHog/posthog">
                     Browse on GitHub

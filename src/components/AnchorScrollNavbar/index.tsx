@@ -108,7 +108,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         <>
             <div className={classList}>{navbarLinks}</div>
 
-            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan rounded border-opacity-25">
+            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan/25 rounded">
                 <select
                     className="appearance-none text-white bg-primary block p-3 w-full rounded font-bold"
                     value={currentSection}

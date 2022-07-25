@@ -6,7 +6,7 @@ const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
     const [visible, setVisible] = useState(false)
     const { href } = useLocation()
     const handleClick = () => {
-        const url = `${href.replace(/#.*/,'')}#${id}`
+        const url = `${href.replace(/#.*/, '')}#${id}`
         navigator.clipboard.writeText(url)
         setVisible(true)
         setTimeout(() => {
@@ -17,7 +17,7 @@ const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
     return (
         <span
             style={{ opacity: hovered || visible ? '1' : '0' }}
-            className="absolute transform left-[-32px] pr-[32px] top-1/2 -translate-y-1/2 hidden md:flex justify-center transition-opacity"
+            className="absolute left-[-32px] pr-[32px] top-1/2 -translate-y-1/2 hidden md:flex justify-center transition-opacity"
         >
             <AnimatePresence>
                 {visible && (

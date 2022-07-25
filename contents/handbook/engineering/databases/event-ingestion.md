@@ -55,11 +55,11 @@ It is responsible for:
 
 The design goal of this service is to be as simple and resilient as possible to avoid dropping events.
 
-### Plugin server
+### App server
 
-On a high level during ingestion, plugin server:
+On a high level during ingestion, app server:
 - Reads events from `events_plugin_ingestion` kafka topic
-- Runs user-created plugins on the events, potentially modifying the shape of the events.
+- Runs user-created apps on the events, potentially modifying the shape of the events.
 - Handles `person` (and groups) creation and updates, using `posthog_person` postgresql table as the source of truth.
 - Sends events, persons, groups to specialized kafka tables for clickhouse to read.
 - Does that in a highly parallelized way to handle high ingestion volume.
@@ -68,7 +68,7 @@ On a high level during ingestion, plugin server:
 
 Kafka is used as a resilient message bus between different services.
 
-You can find relevant kafka topics [in the PostHog codebase](https://github.com/PostHog/posthog/blob/master/ee/kafka_client/topics.py).
+You can find relevant kafka topics [in the PostHog codebase](https://github.com/PostHog/posthog/blob/master/posthog/kafka_client/topics.py).
 
 
 ## ClickHouse

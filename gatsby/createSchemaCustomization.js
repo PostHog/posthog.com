@@ -12,6 +12,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       }
       type Frontmatter {
         authorData: [AuthorsJson] @link(by: "handle", from: "author")
+        badge: String
       }
       type Replies {
         name: String

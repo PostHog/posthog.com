@@ -15,15 +15,16 @@ The app itself is made up of 4 components that run simultaneously:
 
 -   Django server
 -   Celery worker (handles execution of background tasks)
--   Node.js plugin server (handles event ingestion and plugins)
+-   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
 
 These components rely on a few external services:
 
--   PostgreSQL – for storing ordinary data (users, projects, saved insights)
--   Redis – for caching and inter-service communication
 -   ClickHouse – for storing big data (events, persons – analytics queries)
 -   Kafka – for queuing events for ingestion
+-   MinIO – for storing files (session recordings, file exports)
+-   PostgreSQL – for storing ordinary data (users, projects, saved insights)
+-   Redis – for caching and inter-service communication
 -   Zookeeper – for coordinating Kafka and ClickHouse clusters
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
@@ -75,18 +76,10 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install Postgres, Redis, ClickHouse, Kafka and Zookeeper via Docker.
-
-First, run the services in Docker:
+In this step we will start all the external services needed by PostHog to work:
 
 ```bash
-# ARM (arm64) systems (e.g. Apple Silicon)
-docker compose -f docker-compose.arm64.yml pull zookeeper kafka clickhouse db redis
-docker compose -f docker-compose.arm64.yml up zookeeper kafka clickhouse db redis
-
-# x86 (amd64) systems
-docker compose -f docker-compose.dev.yml pull zookeeper kafka clickhouse db redis
-docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis
+docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -97,14 +90,15 @@ docker compose -f docker-compose.dev.yml up zookeeper kafka clickhouse db redis
 
 Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
 
-```
-# docker ps
-CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS        PORTS                                                                                            NAMES
-b0f72510b818   posthog/clickhouse:v21.9.2.17-stable   "/entrypoint.sh"         26 hours ago   Up 21 hours   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
-12d146b93d69   wurstmeister/kafka                     "start-kafka.sh"         26 hours ago   Up 21 hours   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
-432afd46fc93   postgres:12-alpine                     "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
-cdbf065ffa3f   zookeeper                              "/docker-entrypoint.…"   26 hours ago   Up 21 hours   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
-ff77dcf7facd   redis:alpine                           "docker-entrypoint.s…"   26 hours ago   Up 21 hours   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1
+```shell
+# docker ps                                                                                     NAMES
+CONTAINER ID   IMAGE                               COMMAND                  CREATED         STATUS          PORTS                                                                                            NAMES
+567a4bb735be   clickhouse/clickhouse-server:22.3   "/entrypoint.sh"         3 minutes ago   Up 24 seconds   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
+9dc22c70865d   bitnami/kafka:2.8.1-debian-10-r99   "/opt/bitnami/script…"   3 minutes ago   Up 24 seconds   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
+add6475ae0db   postgres:12-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
+6037fb28659b   minio/minio                         "sh -c 'mkdir -p /da…"   3 minutes ago   Up 24 seconds   9000/tcp, 0.0.0.0:19000-19001->19000-19001/tcp                                                   posthog-object_storage-1
+d80a9304f4a7   zookeeper:3.7.0                     "/docker-entrypoint.…"   3 minutes ago   Up 24 seconds   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
+d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1                                                                       posthog-redis-1
 
 # docker logs posthog-db-1 -n 1
 2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
@@ -155,7 +149,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare the plugin server
+### 3. Prepare app/plugin server
 
 Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
 
@@ -224,7 +218,7 @@ DEBUG=1 ./bin/migrate
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start
@@ -280,6 +274,8 @@ This means that your activity is immediately reflected in the current project, w
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+
+This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
 ## Extra: Debugging the backend in PyCharm
 

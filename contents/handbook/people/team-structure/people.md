@@ -7,55 +7,87 @@ hideAnchor: true
 
 ## People & Ops
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops & Marketing
+- Charles Cook, VP Ops & Marketing
 - Grace McKenzie, Operations Manager
+- Coua Phang, Tech Talent Partner
 
 ## Mission
 
-Make PostHog _the_ most transparent company in the world, and the best place for people to work. Our goal is to create a world-class remote company by enabling our team to (a) maximize their impact and performance, (b) grow personally and professionally, and (c) have a strong sense of purpose and belonging.
+Our primary goal is to build and retain our world-class team. We will accomplish this by making PostHog _the_ most transparent company in the world, and the best place for people to work. Once on board, our goal is to enable our team to: 
+
+1. Maximize their impact and performance
+2. Grow personally and professionally
+3. Have a strong sense of purpose and belonging
 
 ## Responsibilities
 
 Our people team works across talent, people, operations, and culture. This is what we care about:
 
-- [Talent compounds](https://posthog.com/handbook/company/values#talent-compounds) - we have a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to become exceptional at their jobs. We optimize for building high-performing teams, while delivering a great experience to everyone involved.
-- We support our team throughout the entire employee lifecycle - from making an offer, to onboarding and career development, to parental leave and eventually parting ways. 
-- We create light-touch initiatives and processes that allow PostHog to act fast (while complying with local legislation) and [iterate](/handbook/company/culture#iteration) continuously. These include performance reviews, progression frameworks, compensation reviews and many more.
-- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do. It's so important to us, we built a dedicated [handbook page](https://posthog.com/handbook/company/diversity). In the people team, we also live and breathe our culture and values, and constantly work to make PostHog an even better place to work.
+- Setting a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to becoming exceptional at their jobs. This is so important to us, it's enshrined in our [values](https://posthog.com/handbook/company/values#talent-compounds).
+- Supporting our team throughout the entire employee lifecycle - from [making an offer](https://posthog.com/handbook/people/compensation), to [onboarding](https://posthog.com/handbook/people/onboarding) and [career development](https://posthog.com/handbook/people/feedback), [parental leave](https://posthog.com/handbook/people/time-off), and eventually [parting ways](https://posthog.com/handbook/people/compensation). 
+- We create light-touch initiatives, systems, and processes that allow PostHog to act fast and [scale iteratively](/handbook/company/culture#iteration) 
+- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do. It's so important to us, we have a dedicated [handbook page](https://posthog.com/handbook/company/diversity).
 
 ## Customer
 
 Every PostHog team member, as well as current, future and past candidates. 
 
-## Output metrics
+## Objectives & Key Results
 
-**Talent**
+## Q3 2022 
 
-| Success metrics                                                      | Measured by                                | Target | Q4 2021 |
-|----------------------------------------------------------------------|--------------------------------------------|--------|---------|
-| Meeting our hiring forecast                                          | % of hiring forecast hit                   | 100%   | 100%    |
-| Optimizing the hiring process for speed                              | Time to hire in days                       | 25     | 27      |
-| Hitting the [Rooney Rule](https://posthog.com/handbook/company/diversity)                                              | Under-represented candidates in final stage| 33%    | 25%     |
-| Offers accepted                                                      | % of offers                                | 100%   | 100%    |
+* **Proposed Objective:**
+    * Grow PostHog team by 20% without compromising team happiness or our runway
+* **Proposed Key Results:**
+    * We have offers accepted by a senior product manager, 2x SREs, senior data engineer, developer advocate, and 4x full stack engineer.
+    * We stay within 5% of forecast cash burn. 
+    * Increase survey score for _I see myself still working at PostHog in two years' time _in team survey from 80% to >=85%. 
+* **Rationale:**
+    * Other teams depend on us hiring and retaining exceptional talent. And we need to do that without running out of money or forgetting to keep improving PostHog as a place to work. 
 
-**People**
+## Slack channels
 
-| Success metrics                                                      | Measured by                                | Target | Q4 2021 |
-|----------------------------------------------------------------------|--------------------------------------------|--------|---------|
-| People want to stay with PostHog                                     | % Turnover per quarter                     | 5%     | 3.5%    |
-| People want to be involved in making PostHog the best place to work  | % Response rate of Engagement survey       | 90%    | 96%     |
-| People recommend PostHog as a great place to work.                   | Average score in engagement survey         | 90%    | 94%     |
-| People feel informed about what’s happening at PostHog               | Average score in engagement survey         | 90%    | 91%     |
-| People understand PostHog's goals and know how tocontribute.         | Average score in engagement survey         | 90%    | 89%     |
-| People feel like they develop professionally.                        | Average score in engagement survey         | 85%    | 88%     |
-| People feel like they are being paid competitively.                  | Average score in engagement survey         | 80%    | 78%     |
-| People feel a sense of belonging.                                    | Average score in engagement survey.        | 80%    | 82%     |
+[#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
+[#private-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
+
+## Tools
+
+An operations team is never complete without a robust toolkit to allow us to automate processes and multiply our impact. Here is a summary of some of the tools we've found most effective for getting the job done. You can read more about why we chose them [here](https://posthog.com/blog/startup-ops-toolkit).
+
+### Hiring
+
+#### **Contracts & Offer Letters**
+
+- All templates are stored in the _Legal Docs [CONFIDENTIAL]_ shared Google Drive, in the _Team_ folder. 
+- To avoid emailing PDFs back and forth forever, we use the e-signature platform [HelloSign](https://hellosign.com/).
+
+#### **HR, Recruiting, and Payroll**
+
+- [Gusto](https://www.gusto.com/) - platform for managing all permanent US employees, including contracts, healthcare and payroll. 
+  - We use [Middesk](https://www.middesk.com/) to manage all our state registrations and filings on our behalf. 
+  - For managing our US 401(k) we use [Pentegra](https://www.pentegra.com/), which requires a manual [monthly reporting process](https://docs.google.com/document/d/1hgCDpI280xbor75LyGUFmwjr_AVx3n-F57Iz_-YhNaA/edit?usp=sharing). However, we will be exploring more self-serve options in the future as we now have Operations team members in the US who can act as company fiduciaries.
+- [Deel](https://www.letsdeel.com/) - platform for managing all employees outside the US and UK (using their EOR service), and all contractors globally. 
+- UK contracts are currently done manually in Google Drive, with payroll also being run manually. 
+- [CharlieHR](https://www.charliehr.com/) - used to store all team personal details, documents, pay and for booking any type of leave.
+- [Workable](https://www.workable.com) - our ATS for managing all recruitment. 
+
+#### **Finance and Banking**
+
+- Accounting:
+  - For the US, we use [Fondo](https://www.tryfondo.com). We have a shared Slack channel with them. 
+  - For the UK, we use [DRG](https://www.donaldreid.co.uk/). Everything is managed by email. 
+- Banking:
+  - [Brex](https://www.brex.com/) is our main account, which we also use for team credit cards and expense management.
+  - We have backup savings accounts with Mercury and SVB. 
+- [Pry](http://pry.co/) (recently acquired by Brex) is our main financial planning tool. 
+- [LTSE Equity](https://equity.ltse.com/) is where we manage our cap table. 
+- [Anrok](https://anrok.com/) helps us stay on top of any state and local tax obligations triggered by employee presence or sales volume, and connects seamlessly and imports sales data from Stripe. They also provide automated support for registering with local tax authorities to automate the remittance process (though we don't use this part of their service yet). 
+
+#### **Everything Else**
+
+- For those pesky externalities, we use [Embroker](https://www.embroker.com/) for all of our insurance coverage.
+- A bit unusual for an operations team, we track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true).
 
 
 
-## Slack channel
 
-[#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
-[#ops](https://posthog.slack.com/messages/ops) - internally public, default for ops discussions
-[#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers

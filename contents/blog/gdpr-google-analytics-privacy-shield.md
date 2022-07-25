@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/google-analytics-gdpr.png
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["Privacy", "Product analytics"]
+categories: ["Privacy"]
 ---
 
 Ten years ago today, the European Commission published the first draft of the General Data Protection Regulation (GDPR). But, as [the recent ruling in Austria concerning one website's use of Google Analytics](https://isgoogleanalyticsillegal.com/) proves, how those rules are enforced and interpreted is still contested.
@@ -73,4 +73,6 @@ This legal instability makes controlling your own data, in our view, critically 
 
 The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution is a waste of time and money.
 
-> PostHog is an open source product analytics tool which enables teams to build better products faster without sharing their user data with third parties. [Try PostHog for free today](/signup) or [schedule a demo](/book-a-demo) to learn more.
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

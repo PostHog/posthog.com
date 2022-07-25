@@ -62,7 +62,7 @@ To address this complexity and make PostHog easier to deploy, maintain and use f
 
 While you can self-host PostHog using `docker-compose` for the evaluation stage, for production we offer an abstraction system built on top of the [Kubernetes](https://kubernetes.io/) platform via [Helm](https://helm.sh/).  
 
-We’ve built on top of Kubernetes because although it's overkill for many scenarios, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), Digital Ocean and Google Cloud Platform.
+We’ve built on top of Kubernetes because although it's overkill for many scenarios, it allows us to focus on one abstraction but target any cloud provider that has a Kubernetes offerings. Currently we support AWS, Azure (alpha), DigitalOcean and Google Cloud Platform.
 
 In order to give us confidence that every self-hosted installation is reliable and we iterate fast, we needed to significantly improve our testing frameworks. 
 
@@ -124,3 +124,9 @@ Improving deployments for PostHog Cloud and our self-hosting customers is an eff
 If you enjoyed reading this look at improving PostHog deployments, we recommend reading Karl's deep dive into the [secrets of PostHog query performance](/blog/secrets-of-posthog-query-performance).
 
 > Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog), or [join our community Slack](/slack).
+
+_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+
+<NewsletterForm
+compact
+/>

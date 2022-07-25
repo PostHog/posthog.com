@@ -12,7 +12,7 @@ categories: ["Engineering", "Open Source"]
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).
 
-For those who don't know, Hacktoberfest is an initiative led by Digital Ocean to promote open source projects and foster the overall open 
+For those who don't know, Hacktoberfest is an initiative led by DigitalOcean to promote open source projects and foster the overall open 
 source community. 
 
 It encourages developers to contribute to public repositories on GitHub via pull requests by offering to ship a t-shirt to developers who have successfully submitted 4 valid PRs in the month of October ([Official Rules](https://hacktoberfest.digitalocean.com/#rules)).
@@ -27,6 +27,10 @@ From the perspective of the Hacktoberfest rules, you are able to contribute to a
 
 Additionally, we also welcome contributions to our Docs, especially to our [new tutorials section](https://github.com/PostHog/posthog.com/issues/491). These are related to the [repository for this website](https://github.com/PostHog/posthog.com). 
 
-Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs to get an official shirt from Digital Ocean, we are happy to send you some [PostHog merch](https://merch.posthog.com/) if you make _one_ relevant contribution. 
+Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs to get an official shirt from DigitalOcean, we are happy to send you some [PostHog merch](https://merch.posthog.com/) if you make _one_ relevant contribution. 
 
 Happy Hacktoberfest from our entire team at PostHog. Let's get hacking!
+
+> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+
+<ArrayCTA />

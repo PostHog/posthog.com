@@ -1,4 +1,3 @@
-import { GetStartedModal } from 'components/GetStartedModal'
 import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -25,7 +24,7 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
-                We could use your help."
+                Adventurers needed."
                 image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
             />
 
@@ -140,7 +139,6 @@ const IndexPage = () => {
                 />
                 <OpenRoles />
             </div>
-            <GetStartedModal />
         </Layout>
     )
 }

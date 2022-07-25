@@ -8,7 +8,7 @@ showTitle: true
 
 Feature Flags allow you to safely deploy and roll back new features. This means you can ship the code for new features and then roll them out to your users in a managed way. If something has goes wrong, you can then roll back without having to re-deploy your application. Feature Flags can also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription.
 
-> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature.
+> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature. 
 
 ## Learning resources
 
@@ -22,7 +22,25 @@ In the sidebar, go to 'Feature Flags' and click '+ New Feature Flag'.
 
 Think of a descriptive name and select how you want to roll out your feature.
 
-![Create feature flags](../../images/features/feature-flags/feature-flags-page.png)
+![Create feature flags](../../images/features/feature-flags/feature-flag-page.png)
+
+## Persisting feature flags across authentication steps
+
+You also have an option to persist flags across authentication steps.
+
+Consider this case: An anonymous person comes to your website and you show them a green call to action.
+
+With usual feature flags, the flag value can change when someone logs in, or changes their identity. So, once they login, they may see a red call to action instead.
+
+
+This usually is not a problem since experiments run either completely for anonymous users, or completely for logged in users.
+
+However, with some businesses, like e-commerce, it's very common to browse things anonymously and login right before checking out. In cases like these you can preserve the feature flag values by checking this checkbox.
+
+![Persist feature flags](../../images/features/feature-flags/feature-flag-persist.png)
+
+Note that this slows down the feature flag response slightly. Also note that this functionality is currently available for `posthog-js` only.
+If you're using another client library, you can [follow this guide to get the same feature](/tutorials/experiments)
 
 ## Implementing the feature flag
 
@@ -180,3 +198,14 @@ If you'd like to compare all variants for which we have data in one graph, apply
 ## Experimentation
 
 Feature Flags and Experimentation are different features and work for different use cases. Check out our [Experimentation](/docs/user-guides/experimentation) manual for more details.
+
+### Further reading
+
+Want to know more about what's possible with Feature Flags in PostHog? Try these tutorials:
+
+- [How to run Experiments without feature flags](/tutorials/experiments)
+- [Tracking key B2B product metrics](/tutorials/b2b)
+- [Analyzing user behavior with cohorts](/tutorials/cohorts)
+- [How to safely roll out new features](/tutorials/feature-flags)
+
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 

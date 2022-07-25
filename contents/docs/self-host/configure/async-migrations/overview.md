@@ -8,13 +8,13 @@ showTitle: true
 
 Async migrations are _data migrations_ that do not run synchronously on an update to a PostHog instance. Rather, they execute on the background of a running PostHog instance, and should be completed within a range of PostHog versions.
 
-You can check the PostHog blog for more [information about how and why we enable async migrations on PostHog](/blog/async-migrations).  
+You can check the PostHog blog for more [information about how and why we enable async migrations on PostHog](/blog/async-migrations).
 
 Further internal information about async migrations can be found in [our handbook](/handbook/engineering/databases/async-migrations).
 
 ## Why are async migrations necessary?
 
-Migrations are inevitable, and sometimes it may be necessary to execute non-trivial schema changes that can take a long time to complete. 
+Migrations are inevitable, and sometimes it may be necessary to execute non-trivial schema changes that can take a long time to complete.
 
 For example, ClickHouse does not support changing the primary key of a table, which is a change we were [forced to make in anticipation of upgrading ClickHouse beyond version 21.6](https://github.com/PostHog/posthog/issues/5684). As a result, the way to change the schema of the table was to create a new table and insert all the data from the old table into it, which took us an entire week to run on PostHog Cloud.
 
@@ -37,7 +37,7 @@ To manage async migrations, you must be a staff user. PostHog deployments from v
 To do so, follow our [guide for connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres) and then run the following query:
 
 ```sql
-UPDATE posthog_user 
+UPDATE posthog_user
 SET is_staff=true
 WHERE email=<your_email_here>
 ```
@@ -46,7 +46,7 @@ To confirm that everything worked as expected, visit `/instance/async_migrations
 
 ### Async migrations page
 
-We've added a page where you can manage async migrations at `/instance/async_migrations`. 
+We've added a page where you can manage async migrations at `/instance/async_migrations`.
 
 On this page you can trigger runs, stop running migrations, perform migration rollbacks, check errors, and gather useful debugging information.
 
@@ -84,9 +84,9 @@ To run async migrations, we occupy one Celery worker process to run the task. Ce
 You can scale in two ways:
 
 1. Horizontally by increasing the desired number of replicas of `posthog-worker`
-2. Vertically by increasing the CPU request of a `posthog-worker` pod 
+2. Vertically by increasing the CPU request of a `posthog-worker` pod
 
-Once the migration has run, you can scale the pod back down. 
+Once the migration has run, you can scale the pod back down.
 
 ### Error Upgrading: Async migrations are not completed
 
@@ -105,11 +105,12 @@ This means you were trying to update to a version that requires these async migr
 
 The table below lists out recommended PostHog app and chart versions to use for updating to if there's a need for a multi step upgrade.
 
-| Async Migration | PostHog Version | Chart Version |
-| --------------- | --------------- | --------------|
-| 0001            | 1.33.0          | 16.1.0        |
-| 0002            | 1.33.0          | 16.1.0        |
-| 0003            | 1.33.0          | 16.1.0        |
+| Async Migration | PostHog Version | Chart Version | Notes  |
+| --------------- | --------------- | --------------| ------ |
+| 0001            | 1.33.0          | 16.1.0        |        |
+| 0002            | 1.33.0          | 16.1.0        |        |
+| 0003            | 1.33.0          | 16.1.0        |        |
+| 0004            | 1.36.1          | 26.0.0        | Run the async migration right after upgrading as there could be problems with ingestion otherwise | 
 
 
 #### Upgrading hobby deployment to a specific version
@@ -123,6 +124,6 @@ echo "POSTHOG_APP_TAG=release-1.33.0" >>.env
 
 To upgrade to a specific chart version you can use `--version <desired version>` flag, e.g.
 ```
-helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
+helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
 ```
 Make sure you have followed the [upgrade instructions](https://posthog.com/docs/self-host/configure/upgrading-posthog) for your platform (specifically major upgrade notes as needed).

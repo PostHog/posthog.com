@@ -1,15 +1,22 @@
 ---
 title: Node.js library
+layout: library
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
+github: https://github.com/PostHog/posthog-node
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: false
+    sessionRecording: false
+    featureFlags: true
+    groupAnalytics: true
 ---
-
-<VisitLibrary name="Node.js" to="https://github.com/PostHog/posthog-node" official />
 
 If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
-## Installation 
+## Installation
 
 Run either `npm` or `yarn` in terminal to add it to your project:
 
@@ -25,8 +32,8 @@ In your app, set your API key **before** making any calls.
 import PostHog from 'posthog-node'
 
 const client = new PostHog(
-  '<ph_project_api_key>',
-  { host: '<ph_instance_address>' } // You can omit this line if using PostHog Cloud
+    '<ph_project_api_key>',
+    { host: '<ph_instance_address>' } // You can omit this line if using PostHog Cloud
 )
 
 // On program exit, call shutdown to stop pending pollers and flush any remaining events
@@ -39,15 +46,13 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 ### Options
 
-
-| Variable                   | Description                           | Default value         |
-| :------------------------: | :------------------------------------ | :-------------------: |
-| `host` | Your PostHog host | `https://app.posthog.com/` |
-| `flushAt` | After how many capture calls we should flush the queue (in one batch) | `20` |
-| `flushInterval` | After how many ms we should flush the queue | `10000` |
-| `personalApiKey` | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for using feature flags  | `null` |
-| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API | `300000` |
-
+|           Variable            | Description                                                                                              |       Default value        |
+| :---------------------------: | :------------------------------------------------------------------------------------------------------- | :------------------------: |
+|            `host`             | Your PostHog host                                                                                        | `https://app.posthog.com/` |
+|           `flushAt`           | After how many capture calls we should flush the queue (in one batch)                                    |            `20`            |
+|        `flushInterval`        | After how many ms we should flush the queue                                                              |          `10000`           |
+|       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for using feature flags |           `null`           |
+| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` and `flushInterval` to `0`.
 
@@ -58,22 +63,26 @@ You can find your key in the 'Project Settings' page in PostHog.
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
 
 A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to identify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+-   `distinct id` which uniquely identifies your user
+-   `event name` to identify the event
+
+*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
-- `properties`, which is an object with any information you'd like to add
+
+-   `properties`, which is an object with any information you'd like to add
 
 For example:
+
 ```js
 client.capture({
-  distinctId: 'distinct id',
-  event: 'movie played',
-  properties: {
-    movieId: '123',
-    category: 'romcom'
-  }
+    distinctId: 'distinct id',
+    event: 'movie played',
+    properties: {
+        movieId: '123',
+        category: 'romcom',
+    },
 })
 ```
 
@@ -87,11 +96,11 @@ To set properties on your users via an event, you can leverage the event propert
 
 ```js
 client.capture({
-  distinctId: 'distinct id',
-  event: 'movie played',
-  properties: {
-    $set: { userProperty: 'value' }
-  }
+    distinctId: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set: { userProperty: 'value' },
+    },
 })
 ```
 
@@ -105,11 +114,11 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 ```js
 client.capture({
-  distinctId: 'distinct id',
-  event: 'movie played',
-  properties: {
-    $set_once: { userProperty: 'value' }
-  }
+    distinctId: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set_once: { userProperty: 'value' },
+    },
 })
 ```
 
@@ -121,22 +130,23 @@ client.capture({
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
 like segment users by these properties.
 
 An `identify` call requires:
-- `distinctId` – a distinct ID belonging to the user
-- `properties` – a user properties object
+
+-   `distinctId` – a distinct ID belonging to the user
+-   `properties` – a user properties object
 
 For example:
 
 ```js
 client.identify({
-  distinctId: "user:123",
-  properties: {
-    email: 'john@doe.com',
-    proUser: false
-  }
+    distinctId: 'user:123',
+    properties: {
+        email: 'john@doe.com',
+        proUser: false,
+    },
 })
 ```
 
@@ -153,15 +163,16 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
 
 An `alias` call requires:
-- `distinctId` – the current distinct ID of the user
-- `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
+
+-   `distinctId` – the current distinct ID of the user
+-   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
 
 ```js
 client.alias({
-  distinctId: "user:123",
-  alias: "user:12345",
+    distinctId: 'user:123',
+    alias: 'user:12345',
 })
 ```
 
@@ -171,11 +182,11 @@ If you're aiming for a full back-end implementation of PostHog, you can send `pa
 
 ```js
 client.capture({
-  distinctId: 'distinct id',
-  event: '$pageview',
-  properties: {
-    $current_url: 'https://example.com'
-  }
+    distinctId: 'distinct id',
+    event: '$pageview',
+    properties: {
+        $current_url: 'https://example.com',
+    },
 })
 ```
 
@@ -192,7 +203,7 @@ To check if a feature flag is on for a given user, you can call `isFeatureEnable
 const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id')
 
 if (isMyFlagEnabledForUser) {
-  // Do something differently for this user
+    // Do something differently for this user
 }
 ```
 
@@ -206,6 +217,35 @@ When initializing PostHog, you can configure the interval at which feature flags
 await client.reloadFeatureFlags()
 
 // Do something with feature flags here
+```
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-node version of `1.2.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```js
+client.capture({
+    event: 'some event',
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' },
+})
+```
+
+-   Update properties on a group
+
+```js
+client.groupIdentify({
+    groupType: 'company',
+    groupKey: 'id:5',
+    properties: {
+        company_name: 'Awesome Inc',
+        employees: 11,
+    },
+})
 ```
 
 ### Shutdown
