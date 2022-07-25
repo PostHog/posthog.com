@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import DocsLayout from 'components/Docs/Layout'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
-import CallToAction from 'components/MainNav/Submenus/CallToAction'
+import { CallToAction } from 'components/CallToAction'
 import { getCookie } from '../../lib/utils'
 
 export const AppTemplate = ({
@@ -30,10 +30,22 @@ export const AppTemplate = ({
         <DocsLayout
             title={title}
             titleElement={
-                <div className="flex items-center mb-2 space-x-4 lg:space-x-6">
-                    <h1 className="block mb-0 mr-auto">{title}</h1>
+                <div className="flex flex-col sm:flex-row items-start mb-2">
+                    {thumbnail?.publicURL && (
+                        <div
+                            style={{ height: '52px' }}
+                            className="hidden md:flex items-center justify-center shrink-0 mr-2"
+                        >
+                            <img src={thumbnail.publicURL} alt="app icon" className="w-8 h-8 object-scale-down" />
+                        </div>
+                    )}
 
-                    <div className="shrink-0 flex flex-col items-end space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
+                    <h1 className="block my-0 mr-auto">{title}</h1>
+
+                    <div
+                        style={{ height: '52px' }}
+                        className="shrink-0 flex items-center space-x-3 mt-3 sm:mt-0 sm:ml-4"
+                    >
                         {github && (
                             <Link to={github}>
                                 <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -41,17 +53,8 @@ export const AppTemplate = ({
                         )}
 
                         {installUrl && showCTA && (
-                            <CallToAction className="" to={installUrl}>
-                                <div className="flex items-center space-x-2 px-1 py-0.5">
-                                    <span className="text-[17px]">Install</span>
-                                    {thumbnail?.publicURL && (
-                                        <img
-                                            src={thumbnail.publicURL}
-                                            alt="app icon"
-                                            className="hidden md:block w-5 h-5 object-scale-down"
-                                        />
-                                    )}
-                                </div>
+                            <CallToAction to={installUrl}>
+                                <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
                             </CallToAction>
                         )}
                     </div>
