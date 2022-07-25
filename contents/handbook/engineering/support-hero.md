@@ -189,11 +189,11 @@ _Note: Squeak! currently uses a separate authentication system from PostHog Clou
 
 Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
 
-### Rotation
+### Schedules
 
-- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Ingestion Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
-- [Infrastructure Rotation](https://posthog.pagerduty.com/schedules#P78OOWZ)
+- [Secondary - App East](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Secondary - App West](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary – Platform Ingestion](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
