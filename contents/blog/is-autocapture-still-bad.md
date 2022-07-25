@@ -1,6 +1,6 @@
 ---
 date: 2022-07-25
-title: Is autocapture ‘still’ bad? An argument
+title: Is autocapture ‘still’ bad?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
