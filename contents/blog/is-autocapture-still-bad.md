@@ -1,5 +1,5 @@
 ---
-date: 2022-07-26
+date: 2022-07-25
 title: Is autocapture ‘still’ bad? An argument
 rootPage: /blog
 sidebar: Blog
