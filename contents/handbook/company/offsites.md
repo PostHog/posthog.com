@@ -37,6 +37,7 @@ Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
+- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
 - We'd encourage you to get an AirBnB for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
 
