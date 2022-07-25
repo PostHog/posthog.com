@@ -1,39 +1,51 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { faqs } from '../../../pages-content/pricing-data'
 import { Plus, Minus } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
+import Fuse from 'fuse.js'
+
+const fuse = new Fuse(faqs, { keys: ['q', 'a'], includeMatches: true })
 
 export const FAQs = ({ className = '' }) => {
-    const variants = {
-        hidden: { height: 0 },
-        shown: { height: 'auto' },
-    }
-    return (
-        <section className={`${className} text-almost-black max-w-screen-md`}>
-            <h3 className="text-center">FAQ</h3>
-            {faqs.map((faq, index) => {
-                return (
-                    <div key={index}>
-                        <Disclosure>
-                            {({ open }) => (
-                                <>
-                                    <Disclosure.Button className="flex items-start space-x-2 text-left w-full text-base md:text-lg font-semibold py-4 border-dashed border-gray-accent-light border-b">
-                                        {open ? <Minus /> : <Plus />}
-                                        <span className="-my-1">{faq.q}</span>
-                                    </Disclosure.Button>
+    const [questions, setQuestions] = useState(faqs)
 
-                                    {open && (
-                                        <motion.div initial="hidden" animate="shown" variants={variants}>
-                                            <Disclosure.Panel className="py-4 text-base pl-8">{faq.a}</Disclosure.Panel>
-                                        </motion.div>
-                                    )}
-                                </>
-                            )}
-                        </Disclosure>
-                    </div>
-                )
-            })}
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const filtered = fuse.search(e.target.value).map((item) => item.item)
+        setQuestions(filtered.length ? filtered : faqs)
+    }
+
+    return (
+        <section className={`${className}`}>
+            <input
+                onChange={handleChange}
+                placeholder="Search questions asked on this page"
+                className="bg-gray-accent-light py-3 px-4 rounded-sm text-[15px] font-semibold w-full"
+            />
+            <ul className="list-none m-0 p-0 grid gap-y-6 mt-4">
+                {questions &&
+                    questions.map((faq, index) => {
+                        const { author, q, a } = faq
+                        return (
+                            <li key={index}>
+                                <div className="flex items-center space-x-2 relative">
+                                    <span className="flex-shrink-0 relative">
+                                        <span className="absolute w-full h-full left-1/2 translate-y-[55%] border-l border-b border-dashed border-gray-accent-light rounded-sm" />
+                                        <span>{author.q.image}</span>
+                                    </span>
+                                    <p className="text-[15px] font-semibold m-0">{q}</p>
+                                </div>
+                                <div className="flex items-start space-x-2 pt-2 ml-[calc(40px+.5rem)]">
+                                    <span className="flex-shrink-0">{author.a.image}</span>
+                                    <span>
+                                        <p className="text-[15px] font-semibold text-red m-0">{author.a.name}</p>
+                                        <p className="text-[14px] font-normal m-0">{a}</p>
+                                    </span>
+                                </div>
+                            </li>
+                        )
+                    })}
+            </ul>
         </section>
     )
 }

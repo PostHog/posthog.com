@@ -4,9 +4,7 @@ const slugify = require('slugify')
 const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
-module.exports = exports.createPages = async ({ actions, graphql }) => {
-    const { createPage } = actions
-    const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
+module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -20,6 +18,11 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
+    const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
+
     const result = await graphql(`
         {
             allMdx(
@@ -61,6 +64,9 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     headings {
                         depth
                         value
+                    }
+                    frontmatter {
+                        layout
                     }
                     fields {
                         slug
@@ -212,7 +218,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     `)
 
     if (result.errors) {
-        return Promise.reject(mdPagesResult.errors)
+        return Promise.reject(result.errors)
     }
 
     function formatToc(headings) {
@@ -283,6 +289,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     result.data.docs.nodes.forEach((node) => {
         const { slug } = node.fields
+        const { layout = 'handbook' } = node.frontmatter
         let next = null
         let previous = null
         let breadcrumb = null
@@ -298,7 +305,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
         createPage({
             path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
+            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : HandbookTemplate,
             context: {
                 id: node.id,
                 next,

@@ -1,4 +1,3 @@
-import { Button, Select } from 'antd'
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
@@ -6,7 +5,6 @@ import CodeBlock from 'components/Home/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
-import 'core-js/features/string/replace-all'
 import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
@@ -15,9 +13,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import ReactMarkdown from 'react-markdown'
 import '../styles/api-docs.scss'
-import MainSidebar from './Handbook/MainSidebar'
-import Navigation from './Handbook/Navigation'
-import SectionLinks from './Handbook/SectionLinks'
+import { Listbox } from '@headlessui/react'
+import { SelectorIcon } from '@heroicons/react/outline'
+import MainSidebar from 'components/Docs/MainSidebar'
+import Navigation from 'components/Docs/Navigation'
+import SectionLinks from 'components/SectionLinks'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -285,9 +285,9 @@ function ResponseBody({ item, objects }) {
         <>
             <h4>Response</h4>
             <div className="response-wrapper">
-                <Button type="link" style={{ padding: 0 }} onClick={() => setShowResponse(!showResponse)}>
+                <button className="mt-2 text-sm" onClick={() => setShowResponse(!showResponse)}>
                     {showResponse ? 'Hide' : 'Show'} response
-                </Button>
+                </button>
                 <br />
                 {showResponse && (
                     <Params
@@ -338,24 +338,36 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     let queryParams = item.parameters?.filter((param) => param.in === 'query')
     return (
         <>
-            <div className="code-example justify-between flex">
+            <div className="code-example justify-between flex my-1.5">
                 <div className="text-gray">
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
                 </div>
-                <Select
-                    value={exampleLanguage}
-                    onChange={(key) => setExampleLanguage(key)}
-                    bordered={false}
-                    style={{ border: 0, background: 'transparent', width: 90 }}
-                >
-                    <Select.Option key="curl" value="curl">
-                        curl
-                    </Select.Option>
-                    <Select.Option key="python" value="python">
-                        python
-                    </Select.Option>
-                </Select>
+
+                <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
+                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-xs flex items-center ">
+                        <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
+                        <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
+                    </Listbox.Button>
+                    <Listbox.Options
+                        as="ul"
+                        className="absolute right-0 top-full mt-1 bg-white list-none px-0 py-1 rounded-sm shadow focus:outline-none z-50"
+                    >
+                        {['curl', 'python'].map((option) => (
+                            <Listbox.Option
+                                key={option}
+                                value={option}
+                                className={({ active, selected }) =>
+                                    `${selected ? 'font-semibold' : ''} ${
+                                        active ? 'bg-orange text-white' : 'text-gray-accent-dark'
+                                    } w-full pl-3 pr-6 cursor-pointer`
+                                }
+                            >
+                                <span className="text-xs">{option}</span>
+                            </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
+                </Listbox>
             </div>
 
             {exampleLanguage === 'curl' && (

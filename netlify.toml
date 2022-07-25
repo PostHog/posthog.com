@@ -1,3 +1,8 @@
+[dev]
+  command = "yarn start"
+  port = 8888
+  targetPort = 8001
+
 [[redirects]]
   from = "/plugins/*"
   to = "/apps/:splat"
@@ -1476,322 +1481,343 @@
 # Added: 2022-07-08
 [[redirects]]
     from = "/startups"
-    to = "/pricing#startup-plan"
-
-
-# Added: 2022-07-21
+    to = "/pricing"
+    
+# Added: 2022-07-11
 [[redirects]]
-    from = "/docs/apps/airbyte-export"
-    to = "/apps/airbyte-export/docs"
-
-
-# Added: 2022-07-21
+    from = "/trial"
+    to = "/pricing"
+    
+# Added: 2022-07-12
 [[redirects]]
-    from = "/docs/apps/amazon-kinesis"
-    to = "/apps/amazon-kinesis/docs"
+    from = "/schedule-demo"
+    to = "/book-a-demo"
 
-
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/automatic-cohort-creator"
-    to = "/apps/automatic-cohort-creator/docs"
+    from = "/apps/airbyte-export/docs"
+    to = "/docs/apps/airbyte-export"
 
-
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/bigquery-export"
-    to = "/apps/bigquery-export/docs"
+    from = "/apps/amazon-kinesis/docs"
+    to = "/docs/apps/amazon-kinesis"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/bitbucket-release-tracker"
-    to = "/apps/bitbucket-release-tracker/docs"
+    from = "/apps/automatic-cohort-creator/docs"
+    to = "/docs/apps/automatic-cohort-creator"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/braze"
-    to = "/apps/braze/docs"
+    from = "/apps/bigquery-export/docs"
+    to = "/docs/apps/bigquery-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/currency-normalization"
-    to = "/apps/currency-normalization/docs"
+    from = "/apps/bitbucket-release-tracker/docs"
+    to = "/docs/apps/bitbucket-release-tracker"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/customer-io"
-    to = "/apps/customer-io/docs"
+    from = "/apps/braze/docs"
+    to = "/docs/apps/braze"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/databricks"
-    to = "/apps/databricks/docs"
+    from = "/apps/currency-normalization/docs"
+    to = "/docs/apps/currency-normalization"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/downsampling"
-    to = "/apps/downsampling/docs"
+    from = "/apps/customer-io/docs"
+    to = "/docs/apps/customer-io"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/email-scoring"
-    to = "/apps/email-scoring/docs"
+    from = "/apps/databricks/docs"
+    to = "/docs/apps/databricks"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/engage-connector"
-    to = "/apps/engage-connector/docs"
+    from = "/apps/downsampling/docs"
+    to = "/docs/apps/downsampling"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/event-sequence-timer"
-    to = "/apps/event-sequence-timer/docs"
+    from = "/apps/email-scoring/docs"
+    to = "/docs/apps/email-scoring"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/first-time-event-tracker"
-    to = "/apps/first-time-event-tracker/docs"
+    from = "/apps/engage-connector/docs"
+    to = "/docs/apps/engage-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/geoip-enrichment"
-    to = "/apps/geoip-enrichment/docs"
+    from = "/apps/event-sequence-timer/docs"
+    to = "/docs/apps/event-sequence-timer"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/github-release-tracker"
-    to = "/apps/github-release-tracker/docs"
+    from = "/apps/first-time-event-tracker/docs"
+    to = "/docs/apps/first-time-event-tracker"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/github-star-sync"
-    to = "/apps/github-star-sync/docs"
+    from = "/apps/geoip-enrichment/docs"
+    to = "/docs/apps/geoip-enrichment"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/gitlab-release-tracker"
-    to = "/apps/gitlab-release-tracker/docs"
+    from = "/apps/github-release-tracker/docs"
+    to = "/docs/apps/github-release-tracker"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/google-cloud-export"
-    to = "/apps/google-cloud-export/docs"
+    from = "/apps/github-star-sync/docs"
+    to = "/docs/apps/github-star-sync"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/google-pub-sub-connector"
-    to = "/apps/google-pub-sub-connector/docs"
+    from = "/apps/gitlab-release-tracker/docs"
+    to = "/docs/apps/gitlab-release-tracker"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/heartbeat"
-    to = "/apps/heartbeat/docs"
+    from = "/apps/google-cloud-export/docs"
+    to = "/docs/apps/google-cloud-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/hubspot-connector"
-    to = "/apps/hubspot-connector/docs"
+    from = "/apps/google-pub-sub-connector/docs"
+    to = "/docs/apps/google-pub-sub-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/ingestion-alert"
-    to = "/apps/ingestion-alert/docs"
+    from = "/apps/heartbeat/docs"
+    to = "/docs/apps/heartbeat"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/intercom"
-    to = "/apps/intercom/docs"
+    from = "/apps/hubspot-connector/docs"
+    to = "/docs/apps/hubspot-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/migrator-3000"
-    to = "/apps/migrator-3000/docs"
+    from = "/apps/ingestion-alert/docs"
+    to = "/docs/apps/ingestion-alert"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/n8n"
-    to = "/apps/n8n/docs"
+    from = "/apps/intercom/docs"
+    to = "/docs/apps/intercom"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/orbit"
-    to = "/apps/orbit/docs"
+    from = "/apps/migrator-3000/docs"
+    to = "/docs/apps/migrator-3000"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/pagerduty-connector"
-    to = "/apps/pagerduty-connector/docs"
+    from = "/apps/n8n/docs"
+    to = "/docs/apps/n8n"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/postgres-export"
-    to = "/apps/postgres-export/docs"
+    from = "/apps/orbit/docs"
+    to = "/docs/apps/orbit"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/property-filter"
-    to = "/apps/property-filter/docs"
+    from = "/apps/pagerduty-connector/docs"
+    to = "/docs/apps/pagerduty-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/property-flattener"
-    to = "/apps/property-flattener/docs"
+    from = "/apps/postgres-export/docs"
+    to = "/docs/apps/postgres-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/redshift-export"
-    to = "/apps/redshift-export/docs"
+    from = "/apps/property-filter/docs"
+    to = "/docs/apps/property-filter"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/redshift-import"
-    to = "/apps/redshift-import/docs"
+    from = "/apps/property-flattener/docs"
+    to = "/docs/apps/property-flattener"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/replicator"
-    to = "/apps/replicator/docs"
+    from = "/apps/redshift-export/docs"
+    to = "/docs/apps/redshift-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/rudderstack-export"
-    to = "/apps/rudderstack-export/docs"
+    from = "/apps/redshift-import/docs"
+    to = "/docs/apps/redshift-import"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/s3-export"
-    to = "/apps/s3-export/docs"
+    from = "/apps/replicator/docs"
+    to = "/docs/apps/replicator"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/salesforce-connector"
-    to = "/apps/salesforce-connector/docs"
+    from = "/apps/rudderstack-export/docs"
+    to = "/docs/apps/rudderstack-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/schema-enforcer"
-    to = "/apps/schema-enforcer/docs"
+    from = "/apps/s3-export/docs"
+    to = "/docs/apps/s3-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/segment"
-    to = "/apps/segment/docs"
+    from = "/apps/salesforce-connector/docs"
+    to = "/docs/apps/salesforce-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/sendgrid-connector"
-    to = "/apps/sendgrid-connector/docs"
+    from = "/apps/schema-enforcer/docs"
+    to = "/docs/apps/schema-enforcer"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/sentry-connector"
-    to = "/apps/sentry-connector/docs"
+    from = "/apps/segment/docs"
+    to = "/docs/apps/segment"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/shopify"
-    to = "/apps/shopify/docs"
+    from = "/apps/sendgrid-connector/docs"
+    to = "/docs/apps/sendgrid-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/snowflake-export"
-    to = "/apps/snowflake-export/docs"
+    from = "/apps/sentry-connector/docs"
+    to = "/docs/apps/sentry-connector"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/taxonomy-standardizer"
-    to = "/apps/taxonomy-standardizer/docs"
+    from = "/apps/shopify/docs"
+    to = "/docs/apps/shopify"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/timestamp-parser"
-    to = "/apps/timestamp-parser/docs"
+    from = "/apps/snowflake-export/docs"
+    to = "/docs/apps/snowflake-export"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/twilio"
-    to = "/apps/twilio/docs"
+    from = "/apps/taxonomy-standardizer/docs"
+    to = "/docs/apps/taxonomy-standardizer"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/twitter-followers"
-    to = "/apps/twitter-followers/docs"
+    from = "/apps/timestamp-parser/docs"
+    to = "/docs/apps/timestamp-parser"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/unduplicator"
-    to = "/apps/unduplicator/docs"
+    from = "/apps/twilio/docs"
+    to = "/docs/apps/twilio"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/url-normalizer"
-    to = "/apps/url-normalizer/docs"
+    from = "/apps/twitter-followers/docs"
+    to = "/docs/apps/twitter-followers"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/user-agent-populator"
-    to = "/apps/user-agent-populator/docs"
+    from = "/apps/unduplicator/docs"
+    to = "/docs/apps/unduplicator"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/variance-connector"
-    to = "/apps/variance-connector/docs"
+    from = "/apps/url-normalizer/docs"
+    to = "/docs/apps/url-normalizer"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/zapier-connector"
-    to = "/apps/zapier-connector/docs"
+    from = "/apps/user-agent-populator/docs"
+    to = "/docs/apps/user-agent-populator"
 
 
-# Added: 2022-07-21
+# Added: 2022-07-14
 [[redirects]]
-    from = "/docs/apps/zendesk-connector"
-    to = "/apps/zendesk-connector/docs"
+    from = "/apps/variance-connector/docs"
+    to = "/docs/apps/variance-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zapier-connector/docs"
+    to = "/docs/apps/zapier-connector"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zendesk-connector/docs"
+    to = "/docs/apps/zendesk-connector"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/app-east"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/blog/the-posthog-array-1-37-1"
+    to = "/blog/the-posthog-array-1-37-0"
+
+[[redirects]]
+    from = "/handbook/engineering/app-west"
+    to = "/handbook/people/team-structure/app-west"

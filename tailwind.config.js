@@ -63,12 +63,6 @@ module.exports = {
             'gray-accent-light': '#E5E7E0',
             'gray-accent-light-hover': '#C5C6C2',
         },
-        rotate: {
-            '-31': '-31deg',
-            45: '45deg',
-            '-45': '-45deg',
-            180: '180deg',
-        },
         screens: {
             xs: '482px',
             sm: '640px',
@@ -146,6 +140,14 @@ module.exports = {
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                comic: [
+                    'Comic Sans MS',
+                    'Comic Sans',
+                    'Arial Rounded MT Bold',
+                    'Helvetica Rounded',
+                    'Arial',
+                    'sans-serif',
+                ],
             },
             fontSize: {
                 '2xs': '0.65rem',
