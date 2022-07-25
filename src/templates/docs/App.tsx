@@ -30,12 +30,22 @@ export const AppTemplate = ({
         <DocsLayout
             title={title}
             titleElement={
-                <div className="flex items-center flex-wrap mb-2">
+                <div className="flex flex-col sm:flex-row items-start mb-2">
                     {thumbnail?.publicURL && (
-                        <img src={thumbnail.publicURL} alt="app icon" className="hidden lg:block w-8 h-8 mr-2" />
+                        <div
+                            style={{ height: '52px' }}
+                            className="hidden md:flex items-center justify-center shrink-0 mr-2"
+                        >
+                            <img src={thumbnail.publicURL} alt="app icon" className="w-8 h-8 object-scale-down" />
+                        </div>
                     )}
-                    <h1 className="mb-0 mr-auto">{title}</h1>
-                    <div className="flex items-center space-x-3">
+
+                    <h1 className="block my-0 mr-auto">{title}</h1>
+
+                    <div
+                        style={{ height: '52px' }}
+                        className="shrink-0 flex items-center space-x-3 mt-3 sm:mt-0 sm:ml-4"
+                    >
                         {github && (
                             <Link to={github}>
                                 <GitHub className="w-7 h-7 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -43,8 +53,8 @@ export const AppTemplate = ({
                         )}
 
                         {installUrl && showCTA && (
-                            <CallToAction className="hidden lg:block" to={installUrl}>
-                                Install
+                            <CallToAction to={installUrl}>
+                                <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
                             </CallToAction>
                         )}
                     </div>
