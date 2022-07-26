@@ -54,7 +54,7 @@ When creating a cohort from scratch, you'll first choose between two type of coh
 
 ### Static cohorts
 
-You might want to batch users together based on based on the value of some mutable property at a certain point in time. So, for example, if you wanted to save a cohort of users you experimented on, and selected them based on usage at a given point in time, you might want to 'freeze' that list and have it accessible to track them at a later point in time. To do so, you can upload a csv of users. Unlike a dynamic cohort, a static cohort will not change as user properties/events change.
+You might want to batch users together based on the value of some mutable property at a certain point in time. So, for example, if you wanted to save a cohort of users you experimented on, and selected them based on usage at a given point in time, you might want to 'freeze' that list and have it accessible to track them at a later point in time. To do so, you can upload a csv of users. Unlike a dynamic cohort, a static cohort will not change as user properties/events change.
 
 ### Dynamic cohorts 
 
