@@ -15,7 +15,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
 
 export default function App({ data, pageContext: { next, previous } }) {
-    const { pageData, documentation, sidebars } = data
+    const { pageData, documentation } = data
     const {
         body,
         excerpt,
@@ -108,12 +108,6 @@ export const query = graphql`
             headings {
                 depth
                 value
-            }
-        }
-        sidebars: sidebarsJson {
-            apps {
-                name
-                url
             }
         }
     }

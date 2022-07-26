@@ -1,3 +1,4 @@
+import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import FooterCTA from 'components/FooterCTA'
@@ -10,11 +11,10 @@ import TutorialsSlider from 'components/TutorialsSlider'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import GithubSlugger from 'github-slugger'
-import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
 
-export default function Product({ data, pageContext: { next, previous } }) {
+export default function Product({ data }) {
     const { pageData, documentation, sidebars } = data
     const {
         body,
@@ -23,6 +23,18 @@ export default function Product({ data, pageContext: { next, previous } }) {
     } = pageData
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
+
+    let next = null
+    let previous = null
+    const sidebar = sidebars.product
+    sidebar.some((item, index) => {
+        if (item.url === slug) {
+            next = sidebar[index + 1]
+            previous = sidebar[index - 1]
+            return true
+        }
+    })
+
     const Documentation = () => {
         return (
             <>

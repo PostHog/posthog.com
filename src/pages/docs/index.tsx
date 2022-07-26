@@ -30,8 +30,8 @@ const quickLinks = [
     },
     {
         icon: 'partners',
-        name: 'Tutorials',
-        to: '/tutorials',
+        name: 'User guides',
+        to: '/docs/user-guides',
         description: 'Step-by-step guides on how to use every feature.',
     },
     {
@@ -173,7 +173,7 @@ export const DocsIndex: React.FC = () => {
                         <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
                             <span className="absolute right-0 bottom-0">
                                 <StaticImage
-                                    src="../../contents/images/search-hog-3.png"
+                                    src="../../../contents/images/search-hog-3.png"
                                     alt="This hog has an answer"
                                     width={500}
                                     placeholder="blurred"

@@ -1,24 +1,28 @@
-const { replacePath, flattenMenu } = require('./utils')
+const { replacePath, formatToc } = require('./utils')
 const path = require('path')
 const slugify = require('slugify')
-const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
 module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
-    const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
+
+    const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
-    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
-    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
-    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
 
+    // Tutorials
+    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
+    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
+    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
+
+    // Docs
+    const DocsTemplate = path.resolve(`src/templates/docs/Main.tsx`)
+    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
     const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
@@ -61,10 +65,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
-                    headings {
-                        depth
-                        value
-                    }
                     frontmatter {
                         layout
                     }
@@ -132,67 +132,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     }
                 }
             }
-            sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-                childSidebarsJson {
-                    handbook {
-                        children {
-                            children {
-                                children {
-                                    children {
-                                        children {
-                                            name
-                                            url
-                                        }
-                                        name
-                                        url
-                                    }
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    docs {
-                        children {
-                            children {
-                                children {
-                                    children {
-                                        children {
-                                            name
-                                            url
-                                        }
-                                        name
-                                        url
-                                    }
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    apps {
-                        name
-                        url
-                    }
-                    product {
-                        name
-                        url
-                    }
-                }
-            }
-            categories: allMdx(limit: 1000) {
+            categories: allMdx(filter: { slug: { glob: "blog/*" } }) {
                 group(field: frontmatter___categories) {
                     category: fieldValue
                 }
@@ -221,22 +161,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         return Promise.reject(result.errors)
     }
 
-    function formatToc(headings) {
-        const slugger = new Slugger()
-        return headings.map((heading) => {
-            return {
-                ...heading,
-                depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
-            }
-        })
-    }
-
-    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
-    const docsMenu = result.data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
     const categories = {}
+
     result.data.categories.group.forEach(({ category }) => {
         const slug = slugify(category, { lower: true })
         const url = `/blog/categories/${slug}`
@@ -258,30 +184,12 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
     result.data.handbook.nodes.forEach((node) => {
         const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
 
         createPage({
             path: replacePath(node.fields.slug),
             component: HandbookTemplate,
             context: {
                 id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
                 slug,
             },
         })
@@ -289,31 +197,13 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
     result.data.docs.nodes.forEach((node) => {
         const { slug } = node.fields
-        const { layout = 'handbook' } = node.frontmatter
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
+        const { layout = 'docs' } = node.frontmatter
 
         createPage({
             path: replacePath(node.fields.slug),
-            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : HandbookTemplate,
+            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : DocsTemplate,
             context: {
                 id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
                 slug,
             },
         })
@@ -321,17 +211,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
     result.data.apidocs.nodes.forEach((node) => {
         const slug = replacePath(node.url)
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
 
         createPage({
             path: slug,
@@ -339,14 +218,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             context: {
                 id: node.id,
                 slug,
-                menu: docsMenu,
-                next,
-                previous,
-                // menu: docsMenu,
-                breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
             },
         })
     })
@@ -440,48 +312,26 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = result.data.sidebars.childSidebarsJson.apps
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
+
         createPage({
             path: slug,
             component: AppTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
     result.data.product.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = result.data.sidebars.childSidebarsJson.product
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
+
         createPage({
             path: slug,
             component: ProductTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })

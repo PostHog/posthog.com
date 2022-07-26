@@ -652,22 +652,31 @@ ul {
 .DocSearch-Search-Icon {
     @apply hidden;
 }
+
 .DocSearch.DocSearch-Container {
     z-index: 99999999;
 }
+
 .DocSearch-Button {
     @apply flex-grow text-left flex items-center space-x-1;
 }
+
 .DocSearch-Button-Placeholder {
     @apply inline-flex items-center;
 }
+
 .DocSearch-Button-Container {
     @apply flex items-center;
 }
+
 .DocSearch-Button-Placeholder::before {
     content: url('/images/search.svg');
     height: 16px;
     @apply mr-3;
+}
+
+.DocSearch-Button-Keys {
+    @apply flex items-center space-x-1 !ml-4;
 }
 
 /* Lemon Tag */

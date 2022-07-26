@@ -49,7 +49,24 @@ const SectionLinksBottom = ({ previous, next }: SectionLinksProps) => {
 }
 
 const SectionLinksTop = ({ previous, next }: SectionLinksProps) => {
-    return <SectionLinks className="mt-9" previous={previous} next={next} />
+    return previous || next ? <SectionLinks className="mt-9" previous={previous} next={next} /> : null
+}
+
+function flattenMenu(items, breadcrumb = []) {
+    return items.reduce((acc, item) => {
+        if (item.url) {
+            acc.push({ url: item.url, name: item.name, breadcrumb })
+        }
+        if (item.children) {
+            acc.push(
+                ...flattenMenu(item.children, [
+                    ...breadcrumb,
+                    { name: item.name, url: item.url || item.children[0].url },
+                ])
+            )
+        }
+        return acc
+    }, [])
 }
 
 type DocsLayoutProps = {
@@ -59,18 +76,9 @@ type DocsLayoutProps = {
     lastUpdated: string
     menu: any
     slug: string
-    body: string
-    breadcrumb: any
-    breadcrumbBase: any
+    body?: string
+    breadcrumbBase: { name: string; url: string }
     tableOfContents: any
-    next: {
-        name: string
-        url: string
-    }
-    previous: {
-        name: string
-        url: string
-    }
     hideLastUpdated: boolean
     hideAnchor: boolean
     contributors: any[]
@@ -85,12 +93,9 @@ export default function DocsLayout({
     menu,
     slug,
     hideAnchor,
-    breadcrumb,
     breadcrumbBase,
     tableOfContents,
     body,
-    next,
-    previous,
     hideLastUpdated,
     contributors,
     children,
@@ -114,6 +119,14 @@ export default function DocsLayout({
 
     const { hash } = useLocation()
 
+    const flatMenu = flattenMenu(menu)
+    const currentIndex = flatMenu.findIndex((item) => item.url === slug)
+
+    const next = flatMenu[currentIndex + 1]
+    const previous = flatMenu[currentIndex - 1]
+
+    const breadcrumb = flattenMenu[currentIndex]?.breadcrumb
+
     React.useEffect(() => {
         if (hash) {
             scroll.scrollMore(-50)
@@ -127,7 +140,7 @@ export default function DocsLayout({
 
     return (
         <Layout>
-            <div className="handbook-container px-4">
+            <div className="handbook-container">
                 <div id="handbook-menu-wrapper">
                     <Menu
                         width="calc(100vw - 80px)"
@@ -150,15 +163,13 @@ export default function DocsLayout({
                     <Navigation
                         title={title}
                         filePath={filePath}
-                        next={next}
-                        previous={previous}
                         breadcrumb={breadcrumb}
                         breadcrumbBase={breadcrumbBase}
                         menuOpen={menuOpen}
                         handleMobileMenuClick={() => setMenuOpen((open) => !open)}
                     />
                     <div id="handbook-content-menu-wrapper">
-                        <div className="relative">
+                        <div className="relative px-4">
                             <SectionLinksTop next={next} previous={previous} />
                             <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
                                 <MainSidebar
@@ -190,10 +201,14 @@ export default function DocsLayout({
 
                                     <section className="article-content handbook-docs-content">
                                         {children}
-                                        <MDXProvider components={components}>
-                                            <MDXRenderer>{body}</MDXRenderer>
-                                        </MDXProvider>
+
+                                        {body && (
+                                            <MDXProvider components={components}>
+                                                <MDXRenderer>{body}</MDXRenderer>
+                                            </MDXProvider>
+                                        )}
                                     </section>
+
                                     <CommunityQuestions />
                                 </article>
 

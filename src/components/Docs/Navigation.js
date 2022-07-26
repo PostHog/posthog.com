@@ -45,16 +45,7 @@ const Crumb = ({ url, text, className }) => {
     )
 }
 
-export default function Navigation({
-    breadcrumb,
-    breadcrumbBase,
-    filePath,
-    title,
-    menuOpen,
-    handleMobileMenuClick,
-    next,
-    previous,
-}) {
+export default function Navigation({ breadcrumb, breadcrumbBase, filePath, title, menuOpen, handleMobileMenuClick }) {
     return (
         <div
             style={{

@@ -5,13 +5,11 @@ import DocsLayout from 'components/Docs/Layout'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
-import { getCookie } from '../../lib/utils'
+import { getCookie, formatToc } from 'lib/utils'
+import { docs } from '../../sidebars/sidebars.json'
 
-export const AppTemplate = ({
-    data: { post },
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
-}) => {
-    const [showCTA, setShowCTA] = React.useState<boolean>(
+export const AppTemplate = ({ data: { post } }) => {
+    const [showCTA, _] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
@@ -19,12 +17,15 @@ export const AppTemplate = ({
         body,
         frontmatter,
         contributors,
+        headings,
         fields: { slug },
     } = post
     const { title, github, thumbnail, installUrl, description } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
+
+    const tableOfContents = formatToc(headings)
 
     return (
         <DocsLayout
@@ -62,20 +63,17 @@ export const AppTemplate = ({
             }
             filePath={filePath}
             slug={slug}
-            menu={menu}
+            menu={docs}
             lastUpdated={lastUpdated}
             hideAnchor={false}
             tableOfContents={tableOfContents}
-            breadcrumb={breadcrumb}
-            breadcrumbBase={breadcrumbBase}
+            breadcrumbBase={{ name: 'Docs', url: '/docs' }}
             body={body}
-            next={next}
-            previous={previous}
             hideLastUpdated={false}
             contributors={contributors}
         >
             <SEO
-                title={`${title} - PostHog ${breadcrumbBase.name}`}
+                title={`${title} - PostHog Docs`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
@@ -92,6 +90,10 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+            }
+            headings {
+                depth
+                value
             }
             contributors {
                 url

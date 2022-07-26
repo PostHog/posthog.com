@@ -1,4 +1,16 @@
 import { AuthorsData, LibraryPluginType } from 'types'
+import Slugger from 'github-slugger'
+
+export function formatToc(headings) {
+    const slugger = new Slugger()
+    return headings.map((heading) => {
+        return {
+            ...heading,
+            depth: heading.depth - 2,
+            url: slugger.slug(heading.value),
+        }
+    })
+}
 
 export const unsafeHash = (str: string) => {
     let a = 1,

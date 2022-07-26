@@ -1,11 +1,14 @@
 import React from 'react'
-import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
-import DocsLayout from 'components/Docs/Layout'
+import { docs } from '../../sidebars/sidebars.json'
 import { formatToc } from 'lib/utils'
-import { handbook } from '../sidebars/sidebars.json'
 
-export default function Handbook({ data: { post } }) {
+import DocsLayout from 'components/Docs/Layout'
+import { SEO } from 'components/seo'
+
+export default function Docs({ data }) {
+    const { post } = data
+
     const {
         body,
         frontmatter,
@@ -25,17 +28,17 @@ export default function Handbook({ data: { post } }) {
             title={title}
             filePath={filePath}
             lastUpdated={lastUpdated}
-            menu={handbook}
+            menu={docs}
             slug={slug}
-            breadcrumbBase={{ name: 'Handbook', url: '/handbook' }}
+            breadcrumbBase={{ name: 'Docs', url: '/docs' }}
             hideAnchor={hideAnchor}
-            tableOfContents={tableOfContents}
+            tableOfContents={[...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }]}
             body={body}
             hideLastUpdated={hideLastUpdated}
             contributors={contributors}
         >
             <SEO
-                title={`${title} - PostHog Handbook`}
+                title={`${title} - PostHog Docs`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
@@ -45,7 +48,7 @@ export default function Handbook({ data: { post } }) {
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!) {
+    query DocsQuery($id: String!) {
         post: mdx(id: { eq: $id }) {
             id
             body

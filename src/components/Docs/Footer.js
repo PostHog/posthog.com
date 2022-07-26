@@ -12,7 +12,7 @@ const Divider = () => {
 
 export default function Footer({ contributors, filePath, title }) {
     return (
-        <footer className="text-white">
+        <footer className="text-white px-4">
             <div className="bg-almost-black dark:bg-gray-accent-dark max-w-screen-2xl mx-auto rounded-lg relative overflow-hidden">
                 <div className="py-14 2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-6rem)] xl:max-w-[650px] w-full xl:mx-auto ml-auto md:border-l border-gray-accent-light/30 border-dashed px-8 md:box-content">
                     <DocsPageSurvey />

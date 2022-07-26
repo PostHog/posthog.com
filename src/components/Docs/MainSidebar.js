@@ -25,3 +25,67 @@ export default function MainSidebar({ slug, menu, className, mainEl, height, sti
         </aside>
     )
 }
+
+export const query = graphql`
+    fragment DocsSidebar on Query {
+        docsSidebar: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
+            childSidebarsJson {
+                docs {
+                    children {
+                        children {
+                            children {
+                                children {
+                                    children {
+                                        name
+                                        url
+                                    }
+                                    name
+                                    url
+                                }
+                                name
+                                url
+                            }
+                            name
+                            url
+                        }
+                        name
+                        url
+                    }
+                    name
+                    url
+                }
+            }
+        }
+    }
+
+    fragment HandbookSidebar on Query {
+        handbookSidebar: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
+            childSidebarsJson {
+                handbook {
+                    children {
+                        children {
+                            children {
+                                children {
+                                    children {
+                                        name
+                                        url
+                                    }
+                                    name
+                                    url
+                                }
+                                name
+                                url
+                            }
+                            name
+                            url
+                        }
+                        name
+                        url
+                    }
+                    name
+                    url
+                }
+            }
+        }
+    }
+`

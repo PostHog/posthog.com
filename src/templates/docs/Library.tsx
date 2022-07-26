@@ -5,21 +5,23 @@ import DocsLayout from 'components/Docs/Layout'
 import LibraryFeatures from 'components/LibraryFeatures'
 import Link from 'components/Link'
 import { GitHub } from 'components/Icons/Icons'
+import { formatToc } from 'lib/utils'
+import { docs } from 'sidebars/sidebars.json'
 
-export default function Library({
-    data: { post },
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
-}) {
+export default function Library({ data: { post } }) {
     const {
         body,
         frontmatter,
         contributors,
+        headings,
         fields: { slug },
     } = post
     const { title, github, features, description } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
+
+    const tableOfContents = formatToc(headings)
 
     return (
         <DocsLayout
@@ -34,20 +36,17 @@ export default function Library({
             }
             filePath={filePath}
             slug={slug}
-            menu={menu}
+            menu={docs}
             lastUpdated={lastUpdated}
             hideAnchor={false}
             tableOfContents={tableOfContents}
-            breadcrumb={breadcrumb}
-            breadcrumbBase={breadcrumbBase}
+            breadcrumbBase={{ name: 'Docs', url: '/docs' }}
             body={body}
-            next={next}
-            previous={previous}
             hideLastUpdated={false}
             contributors={contributors}
         >
             <SEO
-                title={`${title} - PostHog ${breadcrumbBase.name}`}
+                title={`${title} - PostHog Docs`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
