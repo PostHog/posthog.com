@@ -13,9 +13,9 @@ export default function CTA() {
                         type="custom"
                         width="56"
                         className="bg-white text-blue hover:text-blue border-2 border-white"
-                        to="/signup"
+                        to="https://app.posthog.com/signup"
                     >
-                        Get started
+                        Get started free
                     </CallToAction>
                     <CallToAction
                         type="custom"
