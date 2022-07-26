@@ -221,6 +221,46 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         return Promise.reject(result.errors)
     }
 
+    const layouts = {
+        apps: AppDocsTemplate,
+        library: LibraryTemplate,
+    }
+
+    function createPosts(data, menu, template) {
+        const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
+        data.forEach((node) => {
+            const layout = node?.frontmatter?.layout
+            const { slug } = node.fields
+            let next = null
+            let previous = null
+            let breadcrumb = null
+            const tableOfContents = formatToc(node.headings)
+            menuFlattened.some((item, index) => {
+                if (item.url === slug) {
+                    next = menuFlattened[index + 1]
+                    previous = menuFlattened[index - 1]
+                    breadcrumb = item.breadcrumb
+                    return true
+                }
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: layouts[layout] || template,
+                context: {
+                    id: node.id,
+                    next,
+                    previous,
+                    menu: result.data.sidebars.childSidebarsJson[menu],
+                    breadcrumb,
+                    breadcrumbBase: menuFlattened[0],
+                    tableOfContents,
+                    slug,
+                },
+            })
+        })
+    }
+
     function formatToc(headings) {
         const slugger = new Slugger()
         return headings.map((heading) => {
@@ -232,10 +272,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     }
 
-    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
-    const docsMenu = result.data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
     const categories = {}
     result.data.categories.group.forEach(({ category }) => {
         const slug = slugify(category, { lower: true })
@@ -256,100 +292,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    result.data.handbook.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.docs.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { layout = 'handbook' } = node.frontmatter
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.apidocs.nodes.forEach((node) => {
-        const slug = replacePath(node.url)
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: slug,
-            component: ApiEndpoint,
-            context: {
-                id: node.id,
-                slug,
-                menu: docsMenu,
-                next,
-                previous,
-                // menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
-            },
-        })
-    })
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate)
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate)
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint)
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'

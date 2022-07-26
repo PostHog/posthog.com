@@ -8,10 +8,14 @@
 const React = require('react')
 
 import { initKea, wrapElement } from './kea'
+import HandbookLayout from './src/templates/Handbook'
 
 export const wrapPageElement = ({ element, props }) => {
+    const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
-    return wrapElement({ element })
+    return wrapElement({
+        element: /^handbook|^docs/.test(slug) ? <HandbookLayout {...props} /> : element,
+    })
 }
 
 export const onRenderBody = function ({ setPreBodyComponents }) {
