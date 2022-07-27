@@ -29,7 +29,7 @@ These components rely on a few external services:
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
 
--   the external services run in Docker over `docker-compose`
+-   the external services run in Docker over `docker compose`
 -   PostHog itself runs on the host (your system)
 
 This is what we'll be using in the guide below.
@@ -76,10 +76,12 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will start all the external services needed by PostHog to work:
+In this step we will start all the external services needed by PostHog to work.
+
+We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
 
 ```bash
-docker-compose -f docker-compose.dev.yml up
+docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
