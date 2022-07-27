@@ -1,26 +1,23 @@
 ---
 title: Funnels
-sidebar: Docs
-showTitle: true
-topics:
-    - funnels
+category: Visualization & Analysis
 ---
 
 <FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
 
 ## Why do funnels matter?
 
-For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow and understanding where the bottlenecks and friction points are in it. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users. 
+For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow and understanding where the bottlenecks and friction points are in it. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users.
 
 ## What can you learn from funnels?
 
-* Understand where people are getting stuck during your flow
-* Find out who is successful and who is not
-* Identify the steps which have the highest friction and time to convert
-* Identify possible causes of failure or success
-* Understand how your changes are improving your activation flow
-* Understand seasonality in your conversion rates
-* Refining your funnel to filter out noise
+-   Understand where people are getting stuck during your flow
+-   Find out who is successful and who is not
+-   Identify the steps which have the highest friction and time to convert
+-   Identify possible causes of failure or success
+-   Understand how your changes are improving your activation flow
+-   Understand seasonality in your conversion rates
+-   Refining your funnel to filter out noise
 
 ## Getting started
 
@@ -134,7 +131,6 @@ You can break down by a number of user and event properties (e.g. browser, count
 
 The above process depends on thinking up a hypothesis to test. PostHog can also do this thinking for you, by automatically showing you which events and properties most significantly affect the conversion rate of users. To find out how to use this feature, check out [Correlation Analysis](correlation).
 
-
 ### Understand how your changes are improving your flow
 
 There are multiple ways to understand how your changes, fixes, and new features affect your funnel success rate - the simplest and most common is to look at how the conversion rate changes over time.
@@ -194,8 +190,8 @@ For example, if the events were:
 1. `$pageview` with `browser = Chrome`
 2. `user signed up` with `browser = Chrome`
 
-1. `$pageview` with `browser = Firefox`
-2. `user signed up` with `browser = Firefox`
+3. `$pageview` with `browser = Firefox`
+4. `user signed up` with `browser = Firefox`
 
 Then for both step 1 and 2 attribution, the person would have both `Chrome` and `Firefox` as their breakdown values.
 
@@ -221,20 +217,20 @@ When you've dialled in your funnel, and you're comfortable getting results and i
 
 The most common configurations you might consider tweaking are:
 
-* **Conversion window limit:** This sets how long to wait before you consider someone a failure if they don't achieve the success event. Reducing the conversion window will ensure you see who went through the funnel in a short space of time; increasing it will capture people who went partway through the funnel, went away and came back later to complete it. Setting up an appropriate conversion window limit will also ensure your conversion rate is not changing over time as you measure it.
-* **Step order:**
-    * **Sequential:** When measuring people who've gone through the steps in your funnel in the order set, and they have triggered several other events in between. For example, when measuring an advert's effect on conversion, whether someone has seen the ad before or after coming to your product would likely result in a different conversion rate. The first occurrences of events specified in steps are taken into account (within the conversion window).
-    * **Strict Order:** When you only want to measure people who've gone through the steps in your funnel in order and not triggered any other events in between. For example, if you want to exclude users who have searched for another product after initially finding a product in a checkout funnel)
-    * **Any Order:** When measuring people who've gone through all of the steps in a funnel, but they could have completed them in any order. For example, when there are many paths to the final stage of the funnel, such as subscribing to a podcast where people may subscribe immediately, listen to an episode first, follow the author first, etc.
+-   **Conversion window limit:** This sets how long to wait before you consider someone a failure if they don't achieve the success event. Reducing the conversion window will ensure you see who went through the funnel in a short space of time; increasing it will capture people who went partway through the funnel, went away and came back later to complete it. Setting up an appropriate conversion window limit will also ensure your conversion rate is not changing over time as you measure it.
+-   **Step order:**
+    -   **Sequential:** When measuring people who've gone through the steps in your funnel in the order set, and they have triggered several other events in between. For example, when measuring an advert's effect on conversion, whether someone has seen the ad before or after coming to your product would likely result in a different conversion rate. The first occurrences of events specified in steps are taken into account (within the conversion window).
+    -   **Strict Order:** When you only want to measure people who've gone through the steps in your funnel in order and not triggered any other events in between. For example, if you want to exclude users who have searched for another product after initially finding a product in a checkout funnel)
+    -   **Any Order:** When measuring people who've gone through all of the steps in a funnel, but they could have completed them in any order. For example, when there are many paths to the final stage of the funnel, such as subscribing to a podcast where people may subscribe immediately, listen to an episode first, follow the author first, etc.
 
 ### Further reading
 
 Want to know more about what's possible with Funnels in PostHog? Try these tutorials:
 
-- [Getting started with AARRR](/tutorials/aarrr-framework)
-- [Building an AARRR 'Pirate' Funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
-- [Analyzing your conversion with Funnels](/tutorials/funnels)
-- [Sales and revenue tracking](/tutorials/revenue)
-- [Building and measuring a sign up funnel with Next.js, Supabase and PostHog](/tutorials/nextjs-supabase-signup-funnel)
+-   [Getting started with AARRR](/tutorials/aarrr-framework)
+-   [Building an AARRR 'Pirate' Funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
+-   [Analyzing your conversion with Funnels](/tutorials/funnels)
+-   [Sales and revenue tracking](/tutorials/revenue)
+-   [Building and measuring a sign up funnel with Next.js, Supabase and PostHog](/tutorials/nextjs-supabase-signup-funnel)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).

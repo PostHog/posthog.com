@@ -59,21 +59,21 @@ type DocsLayoutProps = {
     lastUpdated: string
     menu: any
     slug: string
-    body: string
-    breadcrumb: any
-    breadcrumbBase: any
-    tableOfContents: any
-    next: {
+    body?: string
+    breadcrumb?: { name: string; url: string }[]
+    breadcrumbBase: { name: string; url: string }
+    tableOfContents?: any
+    next?: {
         name: string
         url: string
     }
-    previous: {
+    previous?: {
         name: string
         url: string
     }
-    hideLastUpdated: boolean
-    hideAnchor: boolean
-    contributors: any[]
+    hideLastUpdated?: boolean
+    hideAnchor?: boolean
+    contributors?: any[]
     children: React.ReactNode
 }
 
@@ -84,14 +84,14 @@ export default function DocsLayout({
     lastUpdated,
     menu,
     slug,
-    hideAnchor,
+    hideAnchor = false,
     breadcrumb,
     breadcrumbBase,
     tableOfContents,
     body,
     next,
     previous,
-    hideLastUpdated,
+    hideLastUpdated = false,
     contributors,
     children,
 }: DocsLayoutProps) {
@@ -190,9 +190,12 @@ export default function DocsLayout({
 
                                     <section className="article-content handbook-docs-content">
                                         {children}
-                                        <MDXProvider components={components}>
-                                            <MDXRenderer>{body}</MDXRenderer>
-                                        </MDXProvider>
+
+                                        {body && (
+                                            <MDXProvider components={components}>
+                                                <MDXRenderer>{body}</MDXRenderer>
+                                            </MDXProvider>
+                                        )}
                                     </section>
                                     <CommunityQuestions />
                                 </article>

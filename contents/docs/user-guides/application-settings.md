@@ -1,7 +1,6 @@
 ---
 title: Settings & Billing
-sidebar: Docs
-showTitle: true
+category: Management
 ---
 
 <FeatureAvailability allPlans />

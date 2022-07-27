@@ -1,7 +1,6 @@
 ---
 title: Organizations and projects
-sidebar: Docs
-showTitle: true
+category: Management
 ---
 
 PostHog gives you tools for data access control and logical separation of data: organizations and projects.
@@ -14,10 +13,10 @@ Most commonly a PostHog organization represents a real-world company or other ty
 To switch between organizations, to open the current organization's settings, or to create a new organization, use the account dropdown on the right of the top bar.
 
 ### Multiple organizations
+
 As a PostHog Cloud user, you can create, manage, and join organizations without limits. For self-hosted see details below.
 
-<FeatureAvailability availablePlans={['free', 'standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']}  />
-
+<FeatureAvailability availablePlans={['free', 'standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
 ### Notifications
 
@@ -44,20 +43,19 @@ Every new organization (including the one created for you on account creation) c
 
 To switch between projects, navigate to project settings, or to create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
 
-
 ### Multiple projects
+
 Multiple projects are available on the following plans.
 
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']}  />
-
+<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
 ### Ways of organizing projects
 
 There are several practical ways of using projects:
 
-- A project per environment – you may want to test out analytics instrumentation in development or staging environments, while keeping that test data separate from production.
-- A project per product – if you have several unlinked products, it makes sense to reflect that separation in PostHog too.
-- A project per multiple products or the whole company – if your offering is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all digital assets.
+-   A project per environment – you may want to test out analytics instrumentation in development or staging environments, while keeping that test data separate from production.
+-   A project per product – if you have several unlinked products, it makes sense to reflect that separation in PostHog too.
+-   A project per multiple products or the whole company – if your offering is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all digital assets.
 
 Which way is the best fit for you depends on the characteristics of your product and business.
 
@@ -69,30 +67,30 @@ This makes for the smoothest collaboration. However, if you require access to da
 
 ### Access levels
 
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']}  />
+<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
 There are three access levels in PostHog: Member, Administrator, and Owner.
 Please note that an organization must have one and only one Owner.
 
 See permissions at each level below:
 
-| | Member (base level) | Administrator | Owner |
-| --- | --- | --- | --- |
-| Viewing and querying project data | ✅ | ✅ | ✅ |
-| Inviting new members | ✅ | ✅ | ✅ |
-| Billing management | ✅ | ✅ | ✅ |
-| Project creation and deletion | ❌ | ✅ | ✅ |
-| Project settings management (incl. [project-specific memberships](#private-projects)) | ❌ | ✅ | ✅ |
-| Organization settings management (incl. memberships) | ❌ | ✅ | ✅ |
-| Leaving the organization | ✅ | ✅ | ❌ |
-| Transferring ownership | ❌ | ❌ | ✅ |
-| Organization deletion | ❌ | ❌ | ✅ |
+|                                                                                       | Member (base level) | Administrator | Owner |
+| ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
+| Viewing and querying project data                                                     | ✅                  | ✅            | ✅    |
+| Inviting new members                                                                  | ✅                  | ✅            | ✅    |
+| Billing management                                                                    | ✅                  | ✅            | ✅    |
+| Project creation and deletion                                                         | ❌                  | ✅            | ✅    |
+| Project settings management (incl. [project-specific memberships](#private-projects)) | ❌                  | ✅            | ✅    |
+| Organization settings management (incl. memberships)                                  | ❌                  | ✅            | ✅    |
+| Leaving the organization                                                              | ✅                  | ✅            | ❌    |
+| Transferring ownership                                                                | ❌                  | ❌            | ✅    |
+| Organization deletion                                                                 | ❌                  | ❌            | ✅    |
 
 Access levels can be viewed and changed in the Members section of organization settings.
 
 ### Private projects
 
-<FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']}  />
+<FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']} />
 
 If you'd like to restrict access to data within the organization to only those who need it, you can make a project _private_. Projects with this setting enabled become **private by default and invite-only** (except for Administrators and the Owner, who get access implicitly). For members who don't have access to a project, that project is hidden completely, as if it didn't exist.
 

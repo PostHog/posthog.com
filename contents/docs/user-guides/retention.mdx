@@ -1,7 +1,6 @@
 ---
 title: Retention
-sidebar: Docs
-showTitle: true
+category: Visualization & Analysis
 ---
 
 <FeatureAvailability allPlans />
@@ -14,9 +13,9 @@ The retention table is structured as follows:
 
 #### Column 1: Cohort
 
-The table starts from 11 days before the day you are viewing it, and each row is incremented by one day until "yesterday" (last row). 
+The table starts from 11 days before the day you are viewing it, and each row is incremented by one day until "yesterday" (last row).
 
-For [Recurring Retention](#recurring-retention), the cohort is defined by the group of distinct users that performed the event on that time period. 
+For [Recurring Retention](#recurring-retention), the cohort is defined by the group of distinct users that performed the event on that time period.
 
 For [First Time Retention](#first-time-retention), the cohort is defined by the group of distinct users that performed the event _for the first time_ on that time period.
 
@@ -32,10 +31,10 @@ It's easiest to explain retention using the following visual example:
 
 ![Retention table](../../images/retention-table.png)
 
-- Looking at the row for "Sun. 12 July", 3 users visited the website on that day (Day 0).
-- Then, the next day (Day 1), 33% of those users visited **again**. In other words, one of the distinct users who visited the website on the 12th also visited on the 13th. One of those users also visited once more on Day 5 (i.e. 5 days after the 12th -> 17th).
-- Retention tracks distinct users and is a great way to see how well they are being retained. Do they come back often? Or do they just visit once? (More on this in the next section).
-- Finally, note that the retention table is filled from the bottom up, in a queue-like manner. That means cohorts are added and removed on a First In First Out basis. They are added at the bottom of the table daily, and the first row (oldest) is removed from the top.
+-   Looking at the row for "Sun. 12 July", 3 users visited the website on that day (Day 0).
+-   Then, the next day (Day 1), 33% of those users visited **again**. In other words, one of the distinct users who visited the website on the 12th also visited on the 13th. One of those users also visited once more on Day 5 (i.e. 5 days after the 12th -> 17th).
+-   Retention tracks distinct users and is a great way to see how well they are being retained. Do they come back often? Or do they just visit once? (More on this in the next section).
+-   Finally, note that the retention table is filled from the bottom up, in a queue-like manner. That means cohorts are added and removed on a First In First Out basis. They are added at the bottom of the table daily, and the first row (oldest) is removed from the top.
 
 > Users are distinct on each cohort, but not _across_ cohorts. A user from the 12th who came back on the 15th will be represented in both rows.
 
@@ -59,6 +58,6 @@ The _cohortizing event_ is the event that determines if the user is a part of a 
 
 Want to know more about what's possible with Retention in PostHog? Try these tutorials:
 
-- [How to measure retention and track churn](/tutorials/retention)
+-   [How to measure retention and track churn](/tutorials/retention)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
