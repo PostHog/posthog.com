@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/cookieless-tracking.png
 featuredTutorial: false
 date: 2022-06-28
 author: ['joe-martin']
-topics: ['tracking', ‘cookies', ‘gdpr']
+topics: [‘gdpr']
 ---
 
 Level: Medium 🦔🦔
