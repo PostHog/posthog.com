@@ -2,7 +2,7 @@ import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
@@ -189,14 +189,38 @@ const Menu = ({ name, url, children, className = '', handleLinkClick }) => {
         }
         setOpen(isActive || (children && isOpen(children)))
     }, [])
+
+    const variants = {
+        hidden: {
+            translateX: '100%',
+            opacity: 0,
+        },
+        visible: {
+            transition: {
+                delay: 0.3,
+            },
+            translateX: 0,
+            opacity: '100%',
+        },
+    }
+
     return (
         <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
                     <Link onClick={() => handleLinkClick && handleLinkClick()} className={buttonClasses} to={url}>
-                        <span className={isActive ? 'active-link' : 'opacity-50 hover:opacity-100 transition-opacity'}>
-                            {name}
-                        </span>
+                        <AnimatePresence>
+                            {isActive && (
+                                <motion.span
+                                    variants={variants}
+                                    className="absolute w-[4px] bg-red rounded-[2px] h-[65%] left-0"
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="hidden"
+                                />
+                            )}
+                        </AnimatePresence>
+                        <span className={'opacity-50 hover:opacity-100 transition-opacity'}>{name}</span>
                         {children && children.length > 0 && <Chevron open={open} />}
                     </Link>
                 ) : (
