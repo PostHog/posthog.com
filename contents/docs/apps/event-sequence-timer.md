@@ -26,7 +26,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### How to configure the Event Sequence Timer app?
 
-First, you must configure the tist of events to track time differences on. This list is specified as follows:
+First, you must configure the list of events to track time differences on. This list is specified as follows:
 
 `(eventA,eventB),(eventC,eventD),(eventA,eventD)`
 
