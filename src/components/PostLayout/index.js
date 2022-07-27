@@ -257,7 +257,7 @@ export default function PostLayout({
     const toc = tableOfContents?.filter((item) => item.depth <= 2)
 
     return (
-        <div id="handbook-menu-wrapper">
+        <div id="menu-wrapper">
             {menu && (
                 <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
                     <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
@@ -281,8 +281,8 @@ export default function PostLayout({
                         },
                     }}
                     onClose={() => setMobileMenuOpen(false)}
-                    pageWrapId="handbook-content-menu-wrapper"
-                    outerContainerId="handbook-menu-wrapper"
+                    pageWrapId="content-menu-wrapper"
+                    outerContainerId="menu-wrapper"
                     overlayClassName="backdrop-blur"
                     isOpen={mobileMenuOpen}
                 >
@@ -307,7 +307,7 @@ export default function PostLayout({
                     </div>
                 )}
                 <article
-                    id="handbook-content-menu-wrapper"
+                    id="content-menu-wrapper"
                     className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
                 >
                     <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
