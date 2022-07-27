@@ -17,6 +17,11 @@ import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
+import LibraryFeatures from 'components/LibraryFeatures'
+import { GitHub } from 'components/Icons/Icons'
+import { getCookie } from 'lib/utils'
+import { CallToAction } from 'components/CallToAction'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const HandbookSidebar = ({ contributors, title, location }) => {
     return (
@@ -70,12 +75,15 @@ export default function Handbook({
         contributors,
         fields: { slug },
     } = post
-    const { title, hideAnchor, description, featuredImage, hideLastUpdated } = frontmatter
+    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
-    const filePath = `/${parent?.relativePath}`
-
     const showToc = !hideAnchor && tableOfContents?.length > 0
+
+    const [showCTA, setShowCTA] = React.useState<boolean>(
+        typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
+    )
+
     const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
 
     const TotalTeam = (props) => (
@@ -141,7 +149,25 @@ export default function Handbook({
                     <section>
                         <div className="mb-8 relative">
                             <Breadcrumb breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]} />
-                            <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
+                            <div className="flex items-center mt-0 flex-wrap justify-between">
+                                <div className="flex items-center space-x-2 mb-2">
+                                    {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
+                                    <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
+                                </div>
+                                <div className="flex items-center space-x-2 mb-2">
+                                    {github && (
+                                        <Link to={github}>
+                                            <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
+                                        </Link>
+                                    )}
+                                    {installUrl && showCTA && (
+                                        <CallToAction size="sm" to={installUrl}>
+                                            <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
+                                        </CallToAction>
+                                    )}
+                                </div>
+                            </div>
+
                             {!hideLastUpdated && (
                                 <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
                                     Last updated: <time>{lastUpdated}</time>
@@ -149,6 +175,7 @@ export default function Handbook({
                             )}
                             {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
+                        {features && <LibraryFeatures availability={features} />}
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
@@ -189,6 +216,21 @@ export const query = graphql`
                 hideAnchor
                 description
                 hideLastUpdated
+                github
+                features {
+                    eventCapture
+                    userIdentification
+                    autoCapture
+                    sessionRecording
+                    featureFlags
+                    groupAnalytics
+                }
+                thumbnail {
+                    childImageSharp {
+                        gatsbyImageData(placeholder: NONE, width: 36)
+                    }
+                }
+                installUrl
                 featuredImage {
                     publicURL
                 }
