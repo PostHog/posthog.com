@@ -24,9 +24,9 @@ const HandbookSidebar = ({ contributors, title, location }) => {
                 <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
                     <Contributors
                         className="flex flex-col space-y-2"
-                        contributors={contributors.map(({ url, username, avatar }) => ({
+                        contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
-                            name: username,
+                            name: teamData?.name || username,
                             image: avatar?.publicURL,
                         }))}
                     />
@@ -180,6 +180,10 @@ export const query = graphql`
                 username
                 avatar {
                     publicURL
+                }
+                teamData {
+                    name
+                    jobTitle
                 }
             }
             frontmatter {
