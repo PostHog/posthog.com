@@ -1,6 +1,6 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import { Facebook, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -11,6 +11,7 @@ import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
+import { push as PushMenu } from 'react-burger-menu'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -170,7 +171,7 @@ const Chevron = ({ open }) => {
     )
 }
 
-const Menu = ({ name, url, children, className = '' }) => {
+const Menu = ({ name, url, children, className = '', handleLinkClick }) => {
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
@@ -192,7 +193,7 @@ const Menu = ({ name, url, children, className = '' }) => {
         <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
-                    <Link className={buttonClasses} to={url}>
+                    <Link onClick={() => handleLinkClick && handleLinkClick()} className={buttonClasses} to={url}>
                         <span className={isActive ? 'active-link' : 'opacity-50 hover:opacity-100 transition-opacity'}>
                             {name}
                         </span>
@@ -207,12 +208,25 @@ const Menu = ({ name, url, children, className = '' }) => {
                 {children && children.length > 0 && (
                     <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
                         {children.map((child, index) => {
-                            return <Menu key={child.name} {...child} />
+                            return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
                         })}
                     </motion.div>
                 )}
             </li>
         </ul>
+    )
+}
+
+const TableOfContents = ({ menu, handleLinkClick }) => {
+    return (
+        <>
+            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">Table of contents</p>
+            <nav>
+                {menu.map((menuItem, index) => {
+                    return <Menu handleLinkClick={handleLinkClick} className="ml-0" key={menuItem.name} {...menuItem} />
+                })}
+            </nav>
+        </>
     )
 }
 
@@ -228,6 +242,11 @@ export default function PostLayout({
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const handleMobileMenuClick = () => {
+        setMobileMenuOpen(!mobileMenuOpen)
+    }
 
     useEffect(() => {
         if (hash) {
@@ -238,11 +257,36 @@ export default function PostLayout({
     const toc = tableOfContents?.filter((item) => item.depth <= 2)
 
     return (
-        <>
+        <div id="handbook-menu-wrapper">
             <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                    <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                </button>
                 <SearchBar />
                 <DarkModeToggle />
             </div>
+            <PushMenu
+                width="calc(100vw - 80px)"
+                customBurgerIcon={false}
+                customCrossIcon={false}
+                styles={{
+                    bmOverlay: {
+                        background: 'transparent',
+                    },
+                    bmMenuWrap: {
+                        height: '80%',
+                    },
+                }}
+                onClose={() => setMobileMenuOpen(false)}
+                pageWrapId="handbook-content-menu-wrapper"
+                outerContainerId="handbook-menu-wrapper"
+                overlayClassName="backdrop-blur"
+                isOpen={mobileMenuOpen}
+            >
+                <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-5">
+                    <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                </div>
+            </PushMenu>
             <div
                 style={{
                     gridAutoColumns: menu
@@ -252,20 +296,16 @@ export default function PostLayout({
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
                         <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
-                            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">
-                                Table of contents
-                            </p>
-                            <nav>
-                                {menu.map((menuItem, index) => {
-                                    return <Menu className="ml-0" key={menuItem.name} {...menuItem} />
-                                })}
-                            </nav>
+                            <TableOfContents menu={menu} />
                         </aside>
                     </div>
                 )}
-                <article className="col-span-2 px-5 lg:px-10 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
+                <article
+                    id="handbook-content-menu-wrapper"
+                    className="col-span-2 px-5 lg:px-10 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full"
+                >
                     <div className="w-full max-w-[650px] lg:max-w-[650px] mx-auto article-content">{children}</div>
                     {questions && questions}
                 </article>
@@ -297,6 +337,6 @@ export default function PostLayout({
                     </div>
                 </aside>
             </div>
-        </>
+        </div>
     )
 }
