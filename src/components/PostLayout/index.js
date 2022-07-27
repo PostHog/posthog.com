@@ -2,12 +2,15 @@ import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
 import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
+import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
+import SearchBar from 'components/Docs/SearchBar'
+import { DarkModeToggle } from 'components/DarkModeToggle'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -121,9 +124,9 @@ export const Contributors = ({ contributors, className = '' }) => {
     const classes = 'flex space-x-2 items-center no-underline'
     return (
         <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.map(({ image, id, name, url, state }) => {
+            {contributors.slice(0, 3).map(({ image, id, name, url, state }) => {
                 return (
-                    <li key={id}>
+                    <li key={name}>
                         {url ? (
                             <Link state={state} className={classes} to={url}>
                                 <Contributor image={image} name={name} />
@@ -144,12 +147,82 @@ export const Text = ({ children }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
+const Chevron = ({ open }) => {
+    return (
+        <div className="bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white">
+            <svg
+                className="transition-transform w-"
+                style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <g opacity="0.3">
+                    <path
+                        d="M3.59608 9.74106L6.99976 6.33626L10.4034 9.74106C10.8595 10.1972 11.5984 10.1972 12.0545 9.74106C12.51 9.28551 12.51 8.54613 12.0545 8.0906L7.82492 3.86106C7.36937 3.40606 6.6311 3.40606 6.17558 3.86106L1.9466 8.09004V8.09059C1.4905 8.54613 1.4905 9.28441 1.94605 9.74049C2.40159 10.1966 3.13987 10.1966 3.59595 9.74103L3.59608 9.74106Z"
+                        fill="currentColor"
+                    />
+                </g>
+            </svg>
+        </div>
+    )
+}
+
+const Menu = ({ name, url, children, className = '' }) => {
+    const { pathname } = useLocation()
+    const isActive = url === pathname
+    const [open, setOpen] = useState(false)
+    const buttonClasses = `text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[5px] inline-block w-full rounded-md ${
+        children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
+    }`
+    useEffect(() => {
+        const isOpen = (children) => {
+            return (
+                children &&
+                children.some((child) => {
+                    return child.url === pathname || isOpen(child.children)
+                })
+            )
+        }
+        setOpen(isActive || (children && isOpen(children)))
+    }, [])
+    return (
+        <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
+            <li>
+                {name && url ? (
+                    <Link className={buttonClasses} to={url}>
+                        <span className={isActive ? 'active-link' : 'opacity-50 hover:opacity-100 transition-opacity'}>
+                            {name}
+                        </span>
+                        {children && children.length > 0 && <Chevron open={open} />}
+                    </Link>
+                ) : (
+                    <button className={buttonClasses} onClick={() => setOpen(!open)}>
+                        <span>{name}</span>
+                        {children && children.length > 0 && <Chevron open={open} />}
+                    </button>
+                )}
+                {children && children.length > 0 && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
+                        {children.map((child, index) => {
+                            return <Menu key={child.name} {...child} />
+                        })}
+                    </motion.div>
+                )}
+            </li>
+        </ul>
+    )
+}
+
 export default function PostLayout({
     tableOfContents,
     children,
     sidebar,
     contentWidth = 650,
     questions,
+    menu,
     article = true,
 }) {
     const { hash } = useLocation()
@@ -165,43 +238,65 @@ export default function PostLayout({
     const toc = tableOfContents?.filter((item) => item.depth <= 2)
 
     return (
-        <div
-            style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
-            className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
-        >
-            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
-                <div style={{ maxWidth: contentWidth }} className={`w-full ${article ? 'article-content' : ''}`}>
-                    {children}
-                </div>
-                {questions && questions}
-            </article>
-            <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
-                <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                    {sidebar && sidebar}
-                    {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                        <div className="pt-12 px-5 lg:px-8 !border-t-0">
-                            <h4 className="text-[13px] mb-2">On this page</h4>
-                            <Scrollspy
-                                offset={-50}
-                                className="list-none m-0 p-0 flex flex-col space-y-[10px]"
-                                items={tableOfContents?.map((navItem) => navItem.url)}
-                                currentClassName="active-product"
-                            >
-                                {toc.map((navItem, index) => (
-                                    <li className="relative leading-none" key={index}>
-                                        <InternalSidebarLink
-                                            url={navItem.url}
-                                            name={navItem.value}
-                                            depth={navItem.depth}
-                                            className="hover:opacity-100 opacity-60 text-[14px]"
-                                        />
-                                    </li>
-                                ))}
-                            </Scrollspy>
-                        </div>
-                    )}
-                </div>
-            </aside>
-        </div>
+        <>
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                <SearchBar />
+                <DarkModeToggle />
+            </div>
+            <div
+                style={{
+                    gridAutoColumns: menu
+                        ? `265px 1fr 1fr min-content`
+                        : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                }}
+                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+            >
+                {menu && (
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                        <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">
+                                Table of contents
+                            </p>
+                            <nav>
+                                {menu.map((menuItem, index) => {
+                                    return <Menu className="ml-0" key={menuItem.name} {...menuItem} />
+                                })}
+                            </nav>
+                        </aside>
+                    </div>
+                )}
+                <article className="col-span-2 px-5 lg:px-10 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full">
+                    <div className="w-full max-w-[650px] lg:max-w-[650px] mx-auto article-content">{children}</div>
+                    {questions && questions}
+                </article>
+                <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[300px] justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                    <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
+                        {sidebar && sidebar}
+                        {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
+                            <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6">
+                                <h4 className="text-[13px] mb-2">On this page</h4>
+                                <Scrollspy
+                                    offset={-50}
+                                    className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                    items={tableOfContents?.map((navItem) => navItem.url)}
+                                    currentClassName="active-product"
+                                >
+                                    {toc.map((navItem, index) => (
+                                        <li className="relative leading-none" key={navItem.url}>
+                                            <InternalSidebarLink
+                                                url={navItem.url}
+                                                name={navItem.value}
+                                                depth={navItem.depth}
+                                                className="hover:opacity-100 opacity-60 text-[14px]"
+                                            />
+                                        </li>
+                                    ))}
+                                </Scrollspy>
+                            </div>
+                        )}
+                    </div>
+                </aside>
+            </div>
+        </>
     )
 }
