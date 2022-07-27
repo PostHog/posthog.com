@@ -16,12 +16,13 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../mdxGlobalComponents'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const HandbookSidebar = ({ contributors, title, location }) => {
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection title={`Author${contributors?.length > 1 ? 's' : ''}`}>
                     <Contributors
                         className="flex flex-col space-y-2"
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
@@ -74,11 +75,7 @@ export default function Handbook({
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
 
-    const styles = {
-        bmOverlay: {
-            background: 'transparent',
-        },
-    }
+    const showToc = !hideAnchor && tableOfContents?.length > 0
     const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
 
     const TotalTeam = (props) => (
@@ -150,6 +147,7 @@ export default function Handbook({
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}
+                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>

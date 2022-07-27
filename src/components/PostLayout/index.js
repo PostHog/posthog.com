@@ -258,39 +258,43 @@ export default function PostLayout({
 
     return (
         <div id="handbook-menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
-                <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                    <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                </button>
-                <SearchBar />
-                <DarkModeToggle />
-            </div>
-            <PushMenu
-                width="calc(100vw - 80px)"
-                customBurgerIcon={false}
-                customCrossIcon={false}
-                styles={{
-                    bmOverlay: {
-                        background: 'transparent',
-                    },
-                    bmMenuWrap: {
-                        height: '80%',
-                    },
-                }}
-                onClose={() => setMobileMenuOpen(false)}
-                pageWrapId="handbook-content-menu-wrapper"
-                outerContainerId="handbook-menu-wrapper"
-                overlayClassName="backdrop-blur"
-                isOpen={mobileMenuOpen}
-            >
-                <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-5">
-                    <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+            {menu && (
+                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                    <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                    </button>
+                    <SearchBar />
+                    <DarkModeToggle />
                 </div>
-            </PushMenu>
+            )}
+            {menu && (
+                <PushMenu
+                    width="calc(100vw - 80px)"
+                    customBurgerIcon={false}
+                    customCrossIcon={false}
+                    styles={{
+                        bmOverlay: {
+                            background: 'transparent',
+                        },
+                        bmMenuWrap: {
+                            height: '80%',
+                        },
+                    }}
+                    onClose={() => setMobileMenuOpen(false)}
+                    pageWrapId="handbook-content-menu-wrapper"
+                    outerContainerId="handbook-menu-wrapper"
+                    overlayClassName="backdrop-blur"
+                    isOpen={mobileMenuOpen}
+                >
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-5">
+                        <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                    </div>
+                </PushMenu>
+            )}
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `265px 1fr 1fr min-content`
+                        ? `265px 1fr 1fr 265px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
@@ -304,12 +308,14 @@ export default function PostLayout({
                 )}
                 <article
                     id="handbook-content-menu-wrapper"
-                    className="col-span-2 px-5 lg:px-10 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full"
+                    className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
                 >
-                    <div className="w-full max-w-[650px] lg:max-w-[650px] mx-auto article-content">{children}</div>
+                    <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
+                        {children}
+                    </div>
                     {questions && questions}
                 </article>
-                <aside className="lg:sticky top-20 flex-shrink-0 w-full lg:w-[300px] justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                     <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                         {sidebar && sidebar}
                         {view === 'Article' && !breakpoints.md && toc?.length > 1 && (

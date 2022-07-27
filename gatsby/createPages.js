@@ -230,11 +230,11 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
             const layout = node?.frontmatter?.layout
-            const { slug } = node.fields
+            const slug = node.fields?.slug || node.url
             let next = null
             let previous = null
             let breadcrumb = null
-            const tableOfContents = formatToc(node.headings)
+            const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
