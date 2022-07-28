@@ -605,7 +605,7 @@ You will need to add jest and our app testing scaffold to your project in your `
     "test": "jest ."
 },
 "devDependencies": {
-    "@posthog/plugin-scaffold": "0.10.0",
+    "@posthog/plugin-scaffold": "*",
     "jest": "^27.0.4"
 }
 ```
