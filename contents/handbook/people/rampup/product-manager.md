@@ -10,7 +10,7 @@ This is a rough guide to ramping up as a PM in PostHog
 
 ### Day 1
 **Outcome**: Get started
-* Get set up and follow your onboaridng checklist
+* Get set up and follow your onboarding checklist
 * Do your first analysis in PostHog (e.g. Who are our biggest customers? what's the most used feature?)
 * Set up time to meet everyone in your team and understand their current strategy, motivations and risks
 * Read up about the OKRs of your team
@@ -32,7 +32,7 @@ This is a rough guide to ramping up as a PM in PostHog
 
 ### Quarter 1
 **Outcome**: Hit your goals and set the strategy for the next quarter
-* Pull out the stops to get your team across the line with their previous
+* Pull out the stops to get your team across the line with their existing goals
 * Work with leadership and your team to define ambitious goals for next quarter
 * Use data and customer context to rationalize priorities
 
@@ -46,8 +46,8 @@ As well as your day job with specific teams, its important we have PMs having co
 * You push the limits of what's possible in PostHog to help us build more advanced tools and you work with SQL to get answers to the most complex queries
 
 ### Customer Research
-* You're always talking with our customers, and you intimiately know how their frictions with our products
-* You're giving customer insights to every team (in and oustdie of product) to help them prioritize better
+* You're always talking with our customers, and you intimately know how their frictions with our products
+* You're giving customer insights to every team (in and outside of product) to help them prioritize better
 * You're the first to hear about new opportunites and problems that our customers need solved and you capture this information
 
 ### Growth
