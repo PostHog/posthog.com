@@ -20,11 +20,13 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
+import { CallToAction } from 'components/CallToAction'
 
 export const section = cntl`
     max-w-6xl
     mx-auto
-    px-5
+    px-4
+    md:px-0
 `
 
 const Button = ({
@@ -102,75 +104,174 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
+
+            <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
+                <div className="max-w-6xl mx-auto flex items-center">
+                    <p className="font-semibold text-xs text-black/50 text-right m-0">
+                        One price, <br />
+                        full product suite:
+                    </p>
+                    <ProductPillars />
+                </div>
+            </section>
             <section>
-                <div className="grid grid-cols-3 max-w-5xl mx-auto gap-x-8">
-                    <div className="bg-white p-4 rounded grid grid-cols-2 col-span-2 gap-x-8">
-                        <div className="">
-                            <div>
-                                <h2 className="text-2xl">PostHog Cloud</h2>
-                                <p className="mb-2">Turnkey, hosted solution</p>
-                            </div>
-                            <div className="leading-tight">
-                                <span className="text-base font-bold">Free</span>{' '}
-                                <span className="text-black/75 text-xs">for 1 million events/mo</span>
-                                <br />
-                                <span className="text-black/50 text-xs">then $0.00045/event</span>
-                            </div>
-                            <div className="my-2">
-                                <button className="text-orange text-xs font-bold">Show volume discounts</button>
-                            </div>
-                            <div className="border-t border-dashed border-gray-accent flex justify-between pt-2">
-                                <div className="flex flex-col">
-                                    <strong className="text-[18px]">Monthly estimate</strong>
-                                    <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
-                                </div>
+                <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto">
+                    <div className="md:col-span-2">
+                        <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
+                            <div className="flex flex-col w-full md:max-w-[380px] mx-auto">
                                 <div>
-                                    <strong className="text-[18px] text-black">$0</strong>
-                                    <span className="text-sm text-black/60">/mo</span>
+                                    <h2 className="text-xl flex items-center">
+                                        PostHog Cloud{' '}
+                                        <span className="bg-yellow inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2">
+                                            Cheapest option
+                                        </span>
+                                    </h2>
+                                    <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
+                                </div>
+                                <div className="leading-none mt-3">
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <br />
+                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                </div>
+                                <div className="my-1">
+                                    <button className="text-orange text-xs font-bold">Show volume discounts</button>
+
+                                    <div className="grid grid-cols-3 text-xs gap-x-2 gap-y-2 hidden">
+                                        <div className="col-span-2">First 1 million events/mo</div>
+                                        <strong>Included</strong>
+
+                                        <div className="col-span-2">1-2 million</div>
+                                        <strong>
+                                            $0.00045<span className="font-normal text-black/50">/event</span>
+                                        </strong>
+
+                                        <div className="col-span-2">2-10 million</div>
+                                        <strong>
+                                            $0.000225<span className="font-normal text-black/50">/event</span>
+                                        </strong>
+
+                                        <div className="col-span-2">10-100 million</div>
+                                        <strong>
+                                            $0.000075<span className="font-normal text-black/50">/event</span>
+                                        </strong>
+
+                                        <div className="col-span-2">100 million - 1 billion</div>
+                                        <strong>
+                                            $0.000025<span className="font-normal text-black/50">/event</span>
+                                        </strong>
+
+                                        <div className="col-span-2">More than 1 billion</div>
+                                        <strong>
+                                            $0.000025<span className="font-normal text-black/50">/event</span>
+                                        </strong>
+
+                                        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+                                            B2C company with insane event volumes?{' '}
+                                            <Link to="#" className="font-bold text-orange inline-block">
+                                                Apply for a discount
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                                    <div className="flex flex-col">
+                                        <strong className="text-[16px]">Monthly estimate</strong>
+                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                    </div>
+                                    <div>
+                                        <strong className="text-[18px] text-black">$0</strong>
+                                        <span className="text-xs text-black/60">/mo</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                                        Get started - free
+                                    </CallToAction>
                                 </div>
                             </div>
+
+                            <div className="flex flex-col w-full md:max-w-[380px] mx-auto">
+                                <div>
+                                    <h2 className="text-xl">Self-hosted</h2>
+                                    <p className="mb-2 text-[14px] text-black/50">
+                                        Customer data never leaves your infrastructure
+                                    </p>
+                                </div>
+                                <div className="leading-none mt-3">
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <br />
+                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                </div>
+                                <div className="my-1">
+                                    <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                                </div>
+                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                                    <div className="flex flex-col">
+                                        <strong className="text-[16px]">Monthly estimate</strong>
+                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                    </div>
+                                    <div>
+                                        <strong className="text-[18px] text-black">$0</strong>
+                                        <span className="text-xs text-black/60">/mo</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                                        Get started - free
+                                    </CallToAction>
+                                </div>
+                            </div>
+                        </div>
+                        <p className="mt-4 text-center text-[14px] font-semibold text-black/50">
+                            Not sure which plan is right for you?{' '}
+                            <Link to="#" className="font-bold">
+                                Try our plan wizard.
+                            </Link>
+                            <br />
+                            Need help{' '}
+                            <Link to="/blog/calculating-events-from-users" className="font-bold">
+                                estimating your event volume?
+                            </Link>
+                        </p>
+                    </div>
+                    <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto">
+                        <div>
+                            <h2 className="text-xl flex items-baseline">
+                                Enterprise{' '}
+                                <span className="inline-flex text-xs text-black/50 font-semibold ml-2">
+                                    Cloud or self-host
+                                </span>
+                            </h2>
+                            <p className="mb-2 text-[14px] text-black/50">
+                                SSO/SAML, advanced permissions, proactive support, team training, &amp; more
+                            </p>
+                        </div>
+                        <div className="leading-none mt-3">
+                            <span className="text-black/50 text-xs font-medium block mb-1">Starts at</span>
+                            <span className="text-[18px] font-bold">$450</span>
+                            {''}
+                            <span className="text-black/75 font-semibold text-[14px]">/mo for 1 million events</span>
+                            <br />
+                            <span className="text-black/50 font-semibold text-xs block mt-1">then $0.00045/event</span>
+                        </div>
+                        <div className="my-1">
+                            <button className="text-orange text-xs font-bold">Show volume discounts</button>
                         </div>
 
-                        <div className="">
-                            <div>
-                                <h2 className="text-2xl">Self-hosted</h2>
-                                <p className="mb-2">Customer data never leaves your infrastructure</p>
-                            </div>
-                            <div className="leading-tight">
-                                <span className="text-base font-bold">Free</span>{' '}
-                                <span className="text-black/75 text-xs">for 1 million events/mo</span>
-                                <br />
-                                <span className="text-black/50 text-xs">then $0.00045/event</span>
-                            </div>
-                            <div className="my-2">
-                                <button className="text-orange text-xs font-bold">Show volume discounts</button>
-                            </div>
-                            <div className="border-t border-dashed border-gray-accent flex justify-between pt-2">
-                                <div className="flex flex-col">
-                                    <strong className="text-[18px]">Monthly estimate</strong>
-                                    <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
-                                </div>
-                                <div>
-                                    <strong className="text-[18px] text-black">$0</strong>
-                                    <span className="text-sm text-black/60">/mo</span>
-                                </div>
-                            </div>
+                        <div className="mt-4">
+                            <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                                Get started
+                            </CallToAction>
                         </div>
                     </div>
-                    <div>Enterprise</div>
                 </div>
             </section>
 
-            <ProductPillars />
-
             <div className="relative">
-                <p className="m-0 text-[14px] font-semibold text-black/50">
-                    Need help{' '}
-                    <Link to="/blog/calculating-events-from-users" className="font-bold">
-                        estimating your event volume?
-                    </Link>
-                </p>
-
                 <section
                     className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
                 >
