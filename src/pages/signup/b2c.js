@@ -8,7 +8,7 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { CallToAction } from 'components/CallToAction'
 
 export default function SelfHost() {
-    const [submitted, setSubmitted] = useState(true)
+    const [submitted, setSubmitted] = useState(false)
     useEffect(() => {
         typeof window !== 'undefined' && window.scrollTo(0, 0)
     })
