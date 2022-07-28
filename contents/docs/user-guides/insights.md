@@ -1,6 +1,7 @@
 ---
 title: Insights
 category: Visualization & Analysis
+icon: insights
 ---
 
 <FeatureAvailability allPlans />
