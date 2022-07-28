@@ -13,6 +13,7 @@ excerpt: PostHog 1.38.0 introduces exports and subscriptions for dashboards and 
 
 import SessionAnalysis from '../images/blog/array/1-38-0-session-analysis.png'
 import BreakdownBins from '../images/blog/array/1-38-0-breakdown.png'
+import SearchImprove from '../images/blog/array/1-38-0-search.png'
 
 Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](/newsletter), which we send out every two weeks!
 
@@ -26,6 +27,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 - New: [Session analysis]
 - New: [Feature flag persistence across authentication steps]
 - New: [Breakdown bins]
+- Improved: [Universal search]
 - Improved: [Funnel breakdown attribution]
 - Improved: [Library support for multivariate feature flags and experiments]
 - New: [Four new apps released]
@@ -73,6 +75,16 @@ Now, when using the trends breakdown feature, if the property that you're breaki
 For example, if you breakdown by a `price` property, instead of seeing the counts of discrete values like `10.99`, `11.00`, `12.50`, you'll now see the counts of binned values, such as `10.00-13.00`,`13.01-15.00`.
 
 Prefer it the old way? Using the menu on the breakdown table, you can adjust the number of bins used or simply revert to using the discrete values.
+
+### Improved: [Universal search]
+<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
+
+Universal search got a massive upgrade in this update and now enables you to search for specific users with ease. This is especially useful if you want to find specific organizations or users quickly, such as if you're looking for more context on a bug report. 
+
+Universal search wasn't the only search-based update this time, either. We also made searching on the Persons page _much_ faster and more reliable than it was before. 
+
+
+
 
 ### Improved: Funnel breakdown attribution
 You can now choose which specific funnel step a breakdown property should come from, and whether the same value should be copied over to other funnel steps for analysis. This is very handy for getting even more value from funnels, and further information is included in the [funnel documentation](https://posthog.com/docs/user-guides/funnels#choosing-breakdown-property-behaviour).
