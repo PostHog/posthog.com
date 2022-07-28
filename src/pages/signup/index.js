@@ -143,12 +143,6 @@ export default function SignUp() {
             <SEO title="Get started - PostHog" />
             <section>
                 <Intro title="How do you want to run PostHog?" />
-                <p className="text-center -mt-16 mb-12">
-                    Not sure which edition is right for you?{' '}
-                    <Link to="/pricing" className="font-semibold">
-                        Build your perfect plan.
-                    </Link>
-                </p>
                 <div className="border-t border-b border-dashed border-gray-accent-light">
                     <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
                         <Plan

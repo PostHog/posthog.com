@@ -358,7 +358,7 @@ const PricingNew = (): JSX.Element => {
                                     className="grid text-xs gap-x-2 gap-y-2 mt-4"
                                 >
                                     <div className="col-span-2">First 1 million events/mo</div>
-                                    <strong>$450</strong>
+                                    <strong>Included</strong>
 
                                     <div className="col-span-2">1-10 million</div>
                                     <strong>
