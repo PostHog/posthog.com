@@ -99,13 +99,12 @@ The community has been busy building many new apps for the PostHog app store and
 - [Variance Connector](/apps/variance-connector), for sending event data to [Variance](https://www.variance.com/) so you can define accurate Product Qualified Leads in your CRM
 
 Interested in building your own app? [Here's how to get started](/docs/apps)!
+
 ### Improved: Optimized ClickHouse space and speeding up queries
-
-`properties` column takes up most of the space in any PostHog ClickHouse setup. This release changes out the default compression scheme for ZSTD(3). This reduces space usage by around 2.4x and can speed up uncached queries up to 2.4x.
-
-See https://github.com/PostHog/posthog/issues/10616 for full measurements and other details.
+The `properties` column takes up most of the space in any PostHog ClickHouse setup. [This release](https://github.com/PostHog/posthog/issues/10616) changes out the default compression scheme for ZSTD(3), reducing space by around 2.4x and speeding up uncached queries by up to 2.4x.
 
 After running this migration only new data will use the updated compression scheme. To get the full benefit of compression on existing data, run `OPTIMIZE TABLE sharded_events FINAL` on your clickhouse cluster which will rewrite existing data.
+
 ### Other improvements & fixes
 Version 1.38 also adds hundreds of other improvements and fixes, including...
 
