@@ -18,6 +18,7 @@ import shape from './images/shape.svg'
 import Modal from 'components/Modal'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
+import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
@@ -87,6 +88,7 @@ const PricingNew = (): JSX.Element => {
     const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
+    const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
 
     const handleInfo = (currentModal: string) => {
@@ -101,6 +103,7 @@ const PricingNew = (): JSX.Element => {
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
+            <WhyCloud open={whyCloudOpen} setOpen={setWhyCloudOpen} />
             <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
@@ -146,8 +149,11 @@ const PricingNew = (): JSX.Element => {
                                 <div>
                                     <h2 className="text-xl flex items-center">
                                         PostHog Cloud{' '}
-                                        <span className="bg-yellow inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2">
-                                            Cheapest option
+                                        <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
+                                            <span className="text-black/50">Recommended</span>
+                                            <button onClick={() => setWhyCloudOpen(true)} className="text-red">
+                                                Why?
+                                            </button>
                                         </span>
                                     </h2>
                                     <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
