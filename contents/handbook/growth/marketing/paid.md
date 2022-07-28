@@ -33,11 +33,14 @@ We currently run ads on:
 - Twitter - _awareness_
 - LinkedIn - _awareness_
 - Reddit - _awareness_
-- Carbon - _awareness_
 
-We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing and Google Display, as they did not drive high quality user signups. 
+We are testing ads on:
+- Quora - _awareness_
+- Product Hunt - _awareness, conversion_
 
-We generally target users in the US, Canada, UK, Germany and France for general awareness, as these tend to lead to the most high quality signups. For conversion, we tend to stay more focused on US, Canada and Germany. 
+We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing, Carbon Ads, and Google Display, as they did not drive high quality user signups. 
+
+We generally target users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups.
 
 ## Tracking conversion
 
