@@ -207,44 +207,25 @@
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Awesome demo environment (in progress)"
+        "description": "Awesome demo environment"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "Export and share visualizations as image file (in progress)"
+        "description": "Export and share visualizations as image file"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "Subscribe to dashboards and insights (in progress)"
+        "description": "Subscribe to dashboards and insights"
     },
     {
-        "date": "2022-09-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "Unified querying across events, persons, sessions, groups",
-        "future": true
+        "description": "Session analysis across insights",
     },
     {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Automated insight recommendations",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Session analysis 2.0",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Insight delta",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
+        "date": "2022-07-01",
         "type": "feature",
         "description": "In-app setup guided tour",
         "future": true
@@ -252,19 +233,43 @@
     {
         "date": "2022-09-01",
         "type": "feature",
+        "description": "PostHog Cloud EU",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Session Recordings DevTools",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Turbo feature flags",
+        "future": true
+    },
+    {
+        "date": "2022-09-01",
+        "type": "feature",
+        "description": "Extenended insight visualizations",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
+        "description": "Unified querying across events, persons, sessions, groups",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
+        "description": "Automated insight recommendations",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
         "description": "Lightning fast querying at Billion event and person scale",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Enhanced app development experience",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Multiple cloud environments",
         "future": true
     }
 ]
