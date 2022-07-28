@@ -82,7 +82,9 @@ const PricingNew = (): JSX.Element => {
             <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
-                <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
+                <div
+                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
+                >
                     <div className="lg:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
@@ -106,7 +108,7 @@ const PricingNew = (): JSX.Element => {
             </section>
 
             <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
-                <div className="max-w-6xl mx-auto flex items-center">
+                <div className="max-w-6xl mx-auto flex items-center md:px-4">
                     <p className="font-semibold text-xs text-black/50 text-right m-0">
                         One price, <br />
                         full product suite:
@@ -115,10 +117,10 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
             <section>
-                <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto">
+                <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
                     <div className="md:col-span-2">
                         <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
-                            <div className="flex flex-col w-full md:max-w-[380px] mx-auto">
+                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
                                 <div>
                                     <h2 className="text-xl flex items-center">
                                         PostHog Cloud{' '}
@@ -192,7 +194,7 @@ const PricingNew = (): JSX.Element => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col w-full md:max-w-[380px] mx-auto">
+                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
                                 <div>
                                     <h2 className="text-xl">Self-hosted</h2>
                                     <p className="mb-2 text-[14px] text-black/50">
@@ -271,7 +273,7 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
 
-            <div className="relative">
+            <div className="relative md:px-4">
                 <section
                     className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
                 >
@@ -340,20 +342,20 @@ const PricingNew = (): JSX.Element => {
                 </section>
                 <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
             </div>
-            <section className={section}>
+            <section className={`${section} md:px-4`}>
                 <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
                     What comes in PostHog?
                 </h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
             </section>
-            <section className={`${section} mb-12 mt-24`}>
+            <section className={`${section} mb-12 mt-24 md:px-4`}>
                 <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
                     Compare all plans
                 </h2>
                 <AllPlans />
             </section>
-            <section className={`${section} mb-12 mt-24`}>
+            <section className={`${section} mb-12 mt-24 md:px-4`}>
                 <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">
                     PostHog open source
                 </h2>
@@ -410,11 +412,11 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} my-12`}>
+            <section className={`${section} my-12  md:px-4`}>
                 <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>
-            <section className="bg-primary my-12">
+            <section className="bg-primary my-12 md:px-4">
                 <Quote
                     className="py-12 md:py-16 px-5 bg-primary"
                     name={<span className="text-white">Jonathan Hyde</span>}
