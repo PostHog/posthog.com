@@ -11,7 +11,7 @@ This is a rough guide to ramping up as a PM in PostHog
 ### Day 1
 **Outcome**: Get started
 * Get set up and follow your onboaridng checklist
-* Do your first analysis in PostHog (e.g. Who are our biggest customers? whats the most used feature?)
+* Do your first analysis in PostHog (e.g. Who are our biggest customers? what's the most used feature?)
 * Set up time to meet everyone in your team and understand their current strategy, motivations and risks
 * Read up about the OKRs of your team
 * Attend the Company All Hands
