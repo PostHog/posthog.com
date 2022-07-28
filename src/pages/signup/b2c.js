@@ -26,7 +26,7 @@ export default function SelfHost() {
         >
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
-                <Intro title="Apply for B2C volume discounts">
+                <Intro title="Apply for a B2C volume discount">
                     <div className="max-w-xl mx-auto mt-12">
                         {submitted ? (
                             <Plan
