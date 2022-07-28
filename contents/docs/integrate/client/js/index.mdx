@@ -326,12 +326,12 @@ In order for PostHog to work optimally, we require storing a small amount of inf
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default we store all this information in a `cookie`, however due to the size limitation of cookies, you may run into some issues (e.g. if you have a lot of feature flags). You can use any of the following options to store this information by setting the `persistence` parameter in PostHog's config.
+By default we store all this information in a `cookie`, however due to the size limitation of cookies, you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
 
--   `localStorage+cookie`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
--   `localStorage`. Everything is stored in localStorage.
--   `cookie`. Everything is stored in a cookie.
--   `memory`. Stores in page memory, which means data is only persisted for the duration of the page view.
+-   `persistence: "cookie"` (default). Everything is stored in a cookie.
+-   `persistence: "localStorage+cookie"`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
+-   `persistence: "localStorage"`. Everything is stored in localStorage.
+-   `persistence: "memory"`. Stores in page memory, which means data is only persisted for the duration of the page view.
 
 <blockquote class="warning-note">
     Warning: Please be aware that localStorage can't be used across subdomains. If you have multiple sites on the same
