@@ -22,6 +22,7 @@ import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
 import { motion } from 'framer-motion'
+import Enterprise from 'components/Pricing/Modals/Enterprise'
 
 export const section = cntl`
     max-w-6xl
@@ -85,6 +86,7 @@ const PricingNew = (): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
+    const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
 
     const handleInfo = (currentModal: string) => {
@@ -99,6 +101,7 @@ const PricingNew = (): JSX.Element => {
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
+            <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div
@@ -385,7 +388,7 @@ const PricingNew = (): JSX.Element => {
                                 type="primary"
                                 width="full"
                                 className="shadow-md"
-                                to="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
+                                onClick={() => setEnterpriseModalOpen(true)}
                             >
                                 Get started
                             </CallToAction>

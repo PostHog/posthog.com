@@ -117,6 +117,24 @@ const cloudEnterpriseOptions = {
     },
 }
 
+const cloudEnterpriseOptions2 = {
+    minimumPrice: ENTERPRISE_MINIMUM_PRICING,
+    title: 'PostHog',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Enterprise',
+    breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
+    icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
+
+    mainCTA: {
+        title: 'Get in touch',
+        url: '/signup/cloud/enterprise',
+    },
+    demoCTA: {
+        title: 'Book a demo',
+        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+    },
+}
+
 const selfHostedOptions = {
     minimumPrice: SCALE_MINIMUM_PRICING,
     title: 'PostHog Self-Hosted',
@@ -184,7 +202,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
             pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && enterprise) {
-            optionDetails = selfHostedEnterpriseOptions
+            optionDetails = cloudEnterpriseOptions2
             pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && !enterprise) {

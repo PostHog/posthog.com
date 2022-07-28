@@ -8,11 +8,11 @@ import React from 'react'
 import Link from 'components/Link'
 import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator'
 
-const Feature = ({ children }) => {
+export const Feature = ({ children }) => {
     return <li className="flex space-x-3 items-start font-semibold text-[15px] text-opacity-75">{children}</li>
 }
 
-const Scales = () => {
+export const Scales = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -25,7 +25,7 @@ const Scales = () => {
     )
 }
 
-const Tracking = () => {
+export const Tracking = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -51,7 +51,7 @@ const Tracking = () => {
     )
 }
 
-const Automatic = () => {
+export const Automatic = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -64,7 +64,7 @@ const Automatic = () => {
     )
 }
 
-const EasyDeploy = () => {
+export const EasyDeploy = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -77,7 +77,7 @@ const EasyDeploy = () => {
     )
 }
 
-const Access = () => {
+export const Access = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -106,7 +106,7 @@ const Access = () => {
     )
 }
 
-const Bypass = () => {
+export const Bypass = () => {
     return (
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
