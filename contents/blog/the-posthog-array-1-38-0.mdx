@@ -11,38 +11,42 @@ featuredImageType: full
 excerpt: PostHog 1.38.0 introduces <Joe to add detail here>
 ---
 
+
+import SessionAnalysis from '../images/blog/array/1-38-0-session-analysis.png'
+import BreakdownBins from '../images/blog/array/1-38-0-breakdown.png'
+
 Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](/newsletter), which we send out every two weeks!
 
 > Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/self-host/configure/upgrading-posthog).
 
 ## PostHog 1.38.0 release notes
 
-< ANY IMPORTANT DEPRECATION NOTICES CAN GO HERE >
+[ANY IMPORTANT DEPRECATION NOTICES CAN GO HERE]
 
 **Release highlights:**
 
-- New: <Highlight 1>
-- New: <Highlight 2>
-- New: <Highlight 3>
-- Improved: <Highlight 4>>
-- Improved: <Highlight 5>
+- New: [Highlight 1]
+- New: [Highlight 2]
+- New: [Highlight 3]
+- Improved: [Highlight 4]
+- Improved: [Highlight 5]
 
-### New: <Highlight 1>
-
-Please add a screenshot here.
-Please add a sentence of copy about this highlight.
-
-###  New: <Highlight 2>
+### New: [Highlight 1]
 
 Please add a screenshot here.
 Please add a sentence of copy about this highlight.
 
-### New: <Highlight 3>
+###  New: [Highlight 2]
 
 Please add a screenshot here.
 Please add a sentence of copy about this highlight.
 
-### Improved: <Highlight 4>
+### New: [Highlight 3]
+
+Please add a screenshot here.
+Please add a sentence of copy about this highlight.
+
+### Improved: [Highlight 4]
 
 Please add a screenshot here.
 Please add a sentence of copy about this highlight.
@@ -56,10 +60,35 @@ We've added multiple ways to get Insights and Dashboards out of PostHog and into
 
 [Get started with Subscriptions here](https://posthog.com/docs/user-guides/subscriptions)
 
+### New: Session analysis
+
+We've added support for tracking and analyzing sessions within the insights feature.
+
+You can now answer questions like:
+* What's the average number of sessions/user/day?
+* How many users visit a page and have a session length greater than 30 seconds?
+* What's the distribution of session lengths for users who perform an event?
+* How many unique sessions happen per day where a specific event is performed?
+
+To learn more about this feature, check out the [sessions documentation](/docs/user-guides/sessions).
+
+Note: Sessions are currently only supported in `posthog-js`. Support for other libraries is coming soon.
+
+<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
 
 ### New: Feature Flag Persistence across authentication steps
 
 For posthog-js only for now, but you can ensure that users get a consistent experience with feature flags across login steps. This is great for experiments where you'd want the same user to be shown the same variant throughout, no matter how their userID changes. [Read more](https://posthog.com/docs/user-guides/feature-flags#persisting-feature-flags-across-authentication-steps)
+
+### New: Breakdown bins
+
+Now, when using the trends breakdown feature, if the property that you're breaking down by is a numerical value, it will be binned.
+
+For example, if you breakdown by a `price` property, instead of seeing the counts of discrete values like `10.99`, `11.00`, `12.50`, you would now see the counts of binned values like `10.00-13.00`,`13.01-15.00`.
+
+Using the menu on the breakdown, you can adjust the number of bins used or go back to using the discrete values.
+
+<img src={BreakdownBins} alt="Breakdown Bins" style={{ width: 300 }} />
 
 ### Improved: Funnel Breakdown Attribution
 
