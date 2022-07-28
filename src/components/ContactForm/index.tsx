@@ -202,7 +202,10 @@ export const ContactForm = (): JSX.Element => {
                     >
                         <textarea value={formValues.reason_for_self_host} onChange={handleChange} />
                     </Field>
-                    <input type="submit" className="block w-full mt-4 button button-primary mx-auto cursor-pointer" />
+                    <input
+                        type="submit"
+                        className="text-center select-none rounded-sm inline-block cta relative active:top-[1px] active:scale-[.97] w-auto bg-red border-red dark:bg-red text-white dark:text-white hover:text-white hover:dark:text-white hover:bg-red-hover hover:border-red-hover active:bg-red-active active:border-red-active dark:primary-dark button-shadow text-[17px] font-bold px-6 py-[8px] border-3 !w-full shadow-xl cursor-pointer"
+                    />
                 </form>
             )}
         </div>
