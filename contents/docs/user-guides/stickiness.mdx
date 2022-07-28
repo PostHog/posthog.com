@@ -8,22 +8,52 @@ showTitle: true
 
 Stickiness is a type of [Insight](/docs/user-guides/insights) that allows you to see how many times users perform a specific event in a period of time.
 
-These analyses are useful in tracking if an event is particularly engaging for users. For example, while you may track Weekly Active Users (WAU) using our Trend insight, stickiness would allow you to distill the WAUs who are highly engaged within that week.
+These analyses are useful in tracking if an event is particularly engaging for users.
+For example, while you may track Weekly Active Users (WAU) using our Trend insight, stickiness would allow you to distill the WAUs who are highly engaged within that week.
 
-## Using Stickiness
+### What questions can Stickiness answer?
+
+-   How deeply are users engaging with my product?
+-   Who are my most highly-engaged users?
+-   Are users engaging more with my product now than they did a month ago?
+
+### Getting started
+
+To create a Stickiness insight, navigate to the Insights tab on the side menu of your dashboard and click the 'New insight' button. Next, open the dropdown labeled 'Type' and change it from 'Trends' to 'Stickiness'.
+
+### Using Stickiness
 
 Select the event you want to see the stickiness for in the drop down menu on the Stickiness tab under "Steps".
 
-The y-axis on the graph will correspond to the number of unique users or groups. THe x-axis corresponds to the number of times the user or group has performed the event in the specified time period. 
+The y-axis on the graph will correspond to the number of unique users or groups. The x-axis corresponds to the number of times the user or group has performed the event in the specified time period.
+As an example, let's say you have your date range set at _7 days_, and the data point at _3 days_ has a value of `1,740`.
+This means that `1,740` unique people performed this event on _3 out of the last 7 days_.
 
-You can edit Stickiness further by:
-- Adding more events that you want to compare the Stickiness of
-- Changing the time range or interval
+It's also worth noting that Stickiness measures the number of users who performed an action an **exact** number of times.
+For example, if a user performed an event in 4 out of the last 5 weeks, they would _only_ be included in this group, and not the group who performed the action in 3 out of 5 weeks.
 
-## Viewing individual users
+Now that have the hang of Stickiness, you can tune your insight further by:
+
+-   Adding more events that you want to compare the Stickiness of
+-   Changing the time range or interval
+-   Filtering events based on properties
+
+### Viewing individual users
 
 You can drill down into specific users who have performed an event or action multiple times:
 
-- Hover a particular data point on your stickiness graph
-- Click on the datapoint to bring up a list of users related to that data point
-- You can create a cohort of those users directly from the modal that appears
+1.  Hover a particular data point on your stickiness graph
+2.  Click on the datapoint to bring up a list of users related to that data point
+3.  You can create a cohort of those users directly from the modal that appears
+
+This is useful when you're looking to create cohorts of highly-engaged users who frequently use a certain feature or view a certain page.
+
+### Stickiness vs. Retention
+
+At the surface, both Stickiness and [Retention](/docs/user-guides/retention) can look very similar, and while they are closely related it's important to understand the differences between them.
+
+-   **Retention** - Measures the percent of users who came back and performed an event within a given period **at least once**
+-   **Stickiness** - Measures **how many** times within a period a user performed an event
+
+Both Stickiness and Retention are important when analyzing _how engaged users are with your product_.
+In general, retention is good at measuring how well you're doing at keeping users engaged overall, whereas Stickiness measures how deeply users are engaging with your product.
