@@ -9,6 +9,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import { GitHub, Info } from 'components/Icons/Icons'
 import Calculator from 'components/Pricing/Calculator/index'
+import ProductPillars from 'components/Pricing/ProductPillars/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
@@ -90,25 +91,86 @@ const PricingNew = (): JSX.Element => {
                         />
                     </div>
                     <div className="lg:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl m-0">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
                             Pay per tracked event.
                             <br /> Get access to all features.
                         </h1>
-                        <h2 className="text-lg text-blue mt-2 leading-tight">
-                            <span className="text-black/50 m-0">Your first</span>{' '}
-                            <span className="inline-block">1 million events are free.</span>{' '}
-                            <span className="text-black/50 m-0">Every month.</span>
-                        </h2>
-                        <p className="m-0 text-[14px] font-semibold text-black/50">
-                            Need help{' '}
-                            <Link to="/blog/calculating-events-from-users" className="font-bold">
-                                estimating your event volume?
-                            </Link>
+                        <p className="text-[18px] text-black/75">
+                            Starts at <span className="text-lg font-bold">$0</span>/mo for the first 1 million monthly
+                            events &mdash; every month
                         </p>
                     </div>
                 </div>
             </section>
+            <section>
+                <div className="grid grid-cols-3 max-w-5xl mx-auto gap-x-8">
+                    <div className="bg-white p-4 rounded grid grid-cols-2 col-span-2 gap-x-8">
+                        <div className="">
+                            <div>
+                                <h2 className="text-2xl">PostHog Cloud</h2>
+                                <p className="mb-2">Turnkey, hosted solution</p>
+                            </div>
+                            <div className="leading-tight">
+                                <span className="text-base font-bold">Free</span>{' '}
+                                <span className="text-black/75 text-xs">for 1 million events/mo</span>
+                                <br />
+                                <span className="text-black/50 text-xs">then $0.00045/event</span>
+                            </div>
+                            <div className="my-2">
+                                <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                            </div>
+                            <div className="border-t border-dashed border-gray-accent flex justify-between pt-2">
+                                <div className="flex flex-col">
+                                    <strong className="text-[18px]">Monthly estimate</strong>
+                                    <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                </div>
+                                <div>
+                                    <strong className="text-[18px] text-black">$0</strong>
+                                    <span className="text-sm text-black/60">/mo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="">
+                            <div>
+                                <h2 className="text-2xl">Self-hosted</h2>
+                                <p className="mb-2">Customer data never leaves your infrastructure</p>
+                            </div>
+                            <div className="leading-tight">
+                                <span className="text-base font-bold">Free</span>{' '}
+                                <span className="text-black/75 text-xs">for 1 million events/mo</span>
+                                <br />
+                                <span className="text-black/50 text-xs">then $0.00045/event</span>
+                            </div>
+                            <div className="my-2">
+                                <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                            </div>
+                            <div className="border-t border-dashed border-gray-accent flex justify-between pt-2">
+                                <div className="flex flex-col">
+                                    <strong className="text-[18px]">Monthly estimate</strong>
+                                    <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                </div>
+                                <div>
+                                    <strong className="text-[18px] text-black">$0</strong>
+                                    <span className="text-sm text-black/60">/mo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>Enterprise</div>
+                </div>
+            </section>
+
+            <ProductPillars />
+
             <div className="relative">
+                <p className="m-0 text-[14px] font-semibold text-black/50">
+                    Need help{' '}
+                    <Link to="/blog/calculating-events-from-users" className="font-bold">
+                        estimating your event volume?
+                    </Link>
+                </p>
+
                 <section
                     className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
                 >
