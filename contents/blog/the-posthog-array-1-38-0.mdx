@@ -1,6 +1,6 @@
 ---
 date: 2022-07-01
-title: 'Array 1.38.0: <Joe to add headline here>'
+title: 'Array 1.38.0: Exports, subscriptions and session analysis!'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,9 +8,8 @@ hideAnchor: true
 categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.38.0 introduces <Joe to add detail here>
+excerpt: PostHog 1.38.0 introduces exports and subscriptions for dashboards and insights, plus improved feature flag persistence and much more!
 ---
-
 
 import SessionAnalysis from '../images/blog/array/1-38-0-session-analysis.png'
 import BreakdownBins from '../images/blog/array/1-38-0-breakdown.png'
@@ -21,66 +20,52 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 ## PostHog 1.38.0 release notes
 
-[ANY IMPORTANT DEPRECATION NOTICES CAN GO HERE]
-
 **Release highlights:**
 
-- New: [Highlight 1]
-- New: [Highlight 2]
-- New: [Highlight 3]
-- Improved: [Highlight 4]
-- Improved: [Highlight 5]
+- New: [Subscriptions & exports for dashboards and insights]
+- New: [Session analysis]
+- New: [Feature flag persistence across authentication steps]
+- New: [Breakdown bins]
+- Improved: [Funnel breakdown attribution]
+- Improved: [Library support for multivariate feature flags and experiments]
+- New: [Four new apps released]
 
-### New: [Highlight 1]
+### New: Subscriptions & exports for dashboards and insights
 
-Please add a screenshot here.
-Please add a sentence of copy about this highlight.
+We've added multiple ways to get insights and dashboards out of PostHog and into your other daily tools, such as Slack. You can now:
 
-###  New: [Highlight 2]
+- Export any dashboard or insight as a nicely rendered image, to share anywhere you need
+- Setup email subcriptions to have insight and dashboard updates sent to you and your team regularly
+- Setup Slack subscriptions to get scheduled updates (with image previes) into any channel you choose
 
-Please add a screenshot here.
-Please add a sentence of copy about this highlight.
+We've already found subscriptions to be incredibly useful for our team, so go ahead and [get started]](/docs/user-guides/subscriptions)!
 
-### New: [Highlight 3]
+### New: Session analysis returns
 
-Please add a screenshot here.
-Please add a sentence of copy about this highlight.
+<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
 
-### Improved: [Highlight 4]
+After previously [deprecating the Sessions page](/blog/sessions-removal), we've now bought it back in a new and improved form. As of 1.38.0, we've added support for tracking and analyzing sessions within the insights feature.
 
-Please add a screenshot here.
-Please add a sentence of copy about this highlight.
+Session analysis is a powerful way to get answers to questions such as:
 
-### New: Subscriptions & Exports
-
-We've added multiple ways to get Insights and Dashboards out of PostHog and into the places you need them most. From any Dashboard or Insight you can now:
-- Export it as an nicely rendered image
-- Setup **email subcriptions** to have regular reports sent to you, your colleagues or any other interested parties
-- Setup **Slack subscriptions** to get scheduled messages into any channel you choose with image previews
-
-[Get started with Subscriptions here](https://posthog.com/docs/user-guides/subscriptions)
-
-### New: Session analysis
-
-We've added support for tracking and analyzing sessions within the insights feature.
-
-You can now answer questions like:
 * What's the average number of sessions/user/day?
 * How many users visit a page and have a session length greater than 30 seconds?
 * What's the distribution of session lengths for users who perform an event?
 * How many unique sessions happen per day where a specific event is performed?
 
-To learn more about this feature, check out the [sessions documentation](/docs/user-guides/sessions).
+To learn more about session analysis, check out the [sessions documentation](/docs/user-guides/sessions).
 
-Note: Sessions are currently only supported in `posthog-js`. Support for other libraries is coming soon.
+**Note:** Sessions are currently only supported in `posthog-js`. Support for other libraries is coming soon.
 
-<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
+### New: Feature flag persistence across authentication steps
 
-### New: Feature Flag Persistence across authentication steps
+Want to ensure users get a consistent experience across login steps? 1.38.0 improves feature flag persistence for such cases, which is great for experiments where you want the same user to be shown the same variant, no matter how their userID changes. Find out more in the [feature flag persistence docs](https://posthog.com/docs/user-guides/feature-flags#persisting-feature-flags-across-authentication-steps).
 
-For posthog-js only for now, but you can ensure that users get a consistent experience with feature flags across login steps. This is great for experiments where you'd want the same user to be shown the same variant throughout, no matter how their userID changes. [Read more](https://posthog.com/docs/user-guides/feature-flags#persisting-feature-flags-across-authentication-steps)
+**Note:** This is currently only supported in `posthog-js`.
 
 ### New: Breakdown bins
+
+<img src={BreakdownBins} alt="Breakdown Bins" style={{ width: 300 }} />
 
 Now, when using the trends breakdown feature, if the property that you're breaking down by is a numerical value, it will be binned.
 
@@ -88,15 +73,13 @@ For example, if you breakdown by a `price` property, instead of seeing the count
 
 Using the menu on the breakdown, you can adjust the number of bins used or go back to using the discrete values.
 
-<img src={BreakdownBins} alt="Breakdown Bins" style={{ width: 300 }} />
+### Improved: Funnel breakdown attribution
 
-### Improved: Funnel Breakdown Attribution
+You can now choose which specific funnel step a breakdown property should come from, and whether the same value should be copied over to other funnel steps for analysis. This is very handy for getting even more value from funnels, and further information is included in the [funnel documentation](https://posthog.com/docs/user-guides/funnels#choosing-breakdown-property-behaviour).
 
-You can now choose which specific funnel step a breakdown property should come from, and if the same value should be copied over to other funnel steps or not for analysis. [Read more here](https://posthog.com/docs/user-guides/funnels#choosing-breakdown-property-behaviour)
+### Improved: Library support for multivariate feature flags and experiments
 
-### Improved: Libraries support for multivariate feature flags and experiments
-
-Our Node, Ruby, Go, and PHP libraries now have support for experiments! In beta right now is also feature flags, groups, and session analytics support for our mobile libraries.
+Our Node, Ruby, Go, and PHP libraries have been updated to support experiments! We are also trialling support for feature flags, groups, and session analytics in our mobile libraries. Interested in giving it a go? Let us know in [the Slack community](/slack)!
 
 ### New: Four new apps released
 
