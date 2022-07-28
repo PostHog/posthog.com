@@ -144,7 +144,7 @@ const selfHostedOptions = {
 
 const selfHostedEnterpriseOptions = {
     minimumPrice: ENTERPRISE_MINIMUM_PRICING,
-    title: 'PostHog Self-Hosted',
+    title: 'PostHog',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
     breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
@@ -184,8 +184,8 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
             pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && enterprise) {
-            optionDetails = cloudEnterpriseOptions
-            pricingOption = 'cloud-enterprise'
+            optionDetails = selfHostedEnterpriseOptions
+            pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && !enterprise) {
             optionDetails = cloudOptions

@@ -67,6 +67,17 @@ const Button = ({
     )
 }
 
+const B2C = () => {
+    return (
+        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+            B2C company with insane event volumes?{' '}
+            <Link to="/signup/b2c" className="font-bold text-orange inline-block">
+                Apply for a discount
+            </Link>
+        </div>
+    )
+}
+
 const PricingNew = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
@@ -189,12 +200,7 @@ const PricingNew = (): JSX.Element => {
                                                 $0.000025<span className="font-normal text-black/50">/event</span>
                                             </strong>
 
-                                            <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-                                                B2C company with insane event volumes?{' '}
-                                                <Link to="#" className="font-bold text-orange inline-block">
-                                                    Apply for a discount
-                                                </Link>
-                                            </div>
+                                            <B2C />
                                         </motion.div>
                                     )}
                                 </div>
@@ -210,7 +216,12 @@ const PricingNew = (): JSX.Element => {
                                 </div>
 
                                 <div className="mt-4">
-                                    <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                                    <CallToAction
+                                        type="primary"
+                                        width="full"
+                                        className="shadow-md"
+                                        to="https://app.posthog.com/signup"
+                                    >
                                         Get started - free
                                     </CallToAction>
                                 </div>
@@ -275,12 +286,7 @@ const PricingNew = (): JSX.Element => {
                                                 $0.000003<span className="font-normal text-black/50">/event</span>
                                             </strong>
 
-                                            <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-                                                B2C company with insane event volumes?{' '}
-                                                <Link to="#" className="font-bold text-orange inline-block">
-                                                    Apply for a discount
-                                                </Link>
-                                            </div>
+                                            <B2C />
                                         </motion.div>
                                     )}
                                 </div>
@@ -297,20 +303,17 @@ const PricingNew = (): JSX.Element => {
                                 </div>
 
                                 <div className="mt-4">
-                                    <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                                    <CallToAction
+                                        type="primary"
+                                        width="full"
+                                        className="shadow-md"
+                                        to="https://license.posthog.com/"
+                                    >
                                         Get started - free
                                     </CallToAction>
                                 </div>
                             </div>
                         </div>
-                        {!showPlanBuilder && (
-                            <p className="mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
-                                Estimate your monthly cost with our{' '}
-                                <button onClick={() => setShowPlanBuilder(true)} className="font-bold text-red">
-                                    plan builder
-                                </button>
-                            </p>
-                        )}
                     </div>
                     <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto">
                         <div>
@@ -372,23 +375,33 @@ const PricingNew = (): JSX.Element => {
                                         $0.0000036<span className="font-normal text-black/50">/event</span>
                                     </strong>
 
-                                    <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-                                        B2C company with insane event volumes?{' '}
-                                        <Link to="#" className="font-bold text-orange inline-block">
-                                            Apply for a discount
-                                        </Link>
-                                    </div>
+                                    <B2C />
                                 </motion.div>
                             )}
                         </div>
 
                         <div className="mt-4">
-                            <CallToAction type="primary" width="full" className="shadow-md" to="#">
+                            <CallToAction
+                                type="primary"
+                                width="full"
+                                className="shadow-md"
+                                to="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
+                            >
                                 Get started
                             </CallToAction>
                         </div>
                     </div>
                 </div>
+                {!showPlanBuilder && (
+                    <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
+                        <p className="col-span-2 mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
+                            Estimate your monthly cost with our{' '}
+                            <button onClick={() => setShowPlanBuilder(true)} className="font-bold text-red">
+                                plan builder
+                            </button>
+                        </p>
+                    </div>
+                )}
             </section>
 
             {showPlanBuilder && (
