@@ -139,7 +139,7 @@ const PricingNew = (): JSX.Element => {
                                 <div className="my-1">
                                     <button className="text-orange text-xs font-bold">Show volume discounts</button>
 
-                                    <div className="grid grid-cols-3 text-xs gap-x-2 gap-y-2 hidden">
+                                    <div className="grid grid-cols-3 text-xs gap-x-2 gap-y-2 mt-4 hidden">
                                         <div className="col-span-2">First 1 million events/mo</div>
                                         <strong>Included</strong>
 
