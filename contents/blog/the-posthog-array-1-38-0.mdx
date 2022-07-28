@@ -1,5 +1,5 @@
 ---
-date: 2022-07-01
+date: 2022-06-28
 title: 'Array 1.38.0: Exports, subscriptions and session analysis!'
 rootPage: /blog
 sidebar: Blog
@@ -25,7 +25,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 
 - New: [Subscriptions & exports for dashboards and insights](#subscriptions-&-exports-for-dashboards-and-insights)
 - New: [Session analysis returns](#session-analysis-returns)
-- New: Async migration 0005(#asyn-migration-0005)
+- New: [Async migration 0005](#async-migration-0005)
 - New: [Feature flag persistence across authentication steps](#feature-flag-persistence-across-authentication-steps)
 - New: [Breakdown bins](#breakdown-bins)
 - Improved: [Universal search](#universal-search)
@@ -36,14 +36,14 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 ### New: Subscriptions & exports for dashboards and insights
 We've added multiple ways to get insights and dashboards out of PostHog and into your other daily tools, such as Slack. You can now:
 
-- Export any dashboard or insight as a nicely rendered image, to share anywhere you need
-- Setup email subcriptions to have insight and dashboard updates sent to you and your team regularly
-- Setup Slack subscriptions to get scheduled updates (with image previes) into any channel you choose
+- Export dashboards or insights as an image, to share anywhere you need
+- Setup email subcriptions to have updates sent to you and your team regularly
+- Setup Slack subscriptions to get scheduled updates into any channel you choose
 
-We've already found subscriptions to be incredibly useful for our team, so go ahead and [get started]](/docs/user-guides/subscriptions)!
+We've already found subscriptions to be incredibly useful for our team, so go ahead and [get started](/docs/user-guides/subscriptions)!
 
 ### New: Session analysis returns
-<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
+<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 800 }} />
 
 After previously [deprecating the Sessions page](/blog/sessions-removal), we've now bought sessions back in a new and improved form. As of 1.38.0, we've added support for tracking and analyzing sessions within the insights feature.
 
@@ -56,7 +56,7 @@ This will enable you to get answers to questions such as:
 
 To learn more about session analysis, check out the [sessions documentation](/docs/user-guides/sessions).
 
-**Note:** Sessions are currently only supported in `posthog-js`. Support for other libraries is coming soon.
+**Note:** Sessions are currently only supported in `posthog-js`. 
 
 ### New: Async migration 0005
 There is a new async migration available which changes the persons table in ClickHouse to use `version` instead of `_timestamp` for collapsing entires. This helps avoid various data integrity issues due to race conditions and batching of Kafka messages within the plugin-server. 
@@ -69,7 +69,7 @@ Want to ensure users get a consistent experience across login steps? 1.38.0 impr
 **Note:** This is currently only supported in `posthog-js`.
 
 ### New: Breakdown bins
-<img src={BreakdownBins} alt="Breakdown Bins" style={{ width: 300 }} />
+<img src={BreakdownBins} alt="Breakdown Bins" style={{ width: 800 }} />
 
 Now, when using the trends breakdown feature, if the property that you're breaking down by is a numerical value, it will be binned into a group.
 
@@ -77,8 +77,8 @@ For example, if you breakdown by a `price` property, instead of seeing the count
 
 Prefer it the old way? Using the menu on the breakdown table, you can adjust the number of bins used or simply revert to using the discrete values.
 
-### Improved: [Universal search]
-<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 500 }} />
+### Improved: Universal search
+<img src={SessionAnalysis} alt="Session Analysis" style={{ width: 800 }} />
 
 Universal search got a massive upgrade in this update and now enables you to search for specific users with ease. This is especially useful if you want to find specific organizations or users quickly, such as if you're looking for more context on a bug report. 
 
@@ -95,8 +95,8 @@ The community has been busy building many new apps for the PostHog app store and
 
 - [Unduplicator](/apps/unduplicator), for cleaning duplicate events during data imports
 - [URL Normalizer](/apps/url-normalizer), for introducing consistent casing across PostHog 
-- [Engage Connector](/apps/engage-connector), for sending user data to [Engage](https://engage.so/) for segmentation and marketing automation
-- [Variance Connector](/apps/variance-connector), for sending event data to [Variance](https://www.variance.com/) so you can define accurate Product Qualified Leads in your CRM
+- [Engage Connector](/apps/engage-connector), for sending data to [Engage](https://engage.so/) for marketing automation
+- [Variance Connector](/apps/variance-connector), for sending data to [Variance](https://www.variance.com/) so you can define PQLs
 
 Interested in building your own app? [Here's how to get started](/docs/apps)!
 
