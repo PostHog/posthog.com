@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from '../../components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -21,6 +21,7 @@ import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
+import { motion } from 'framer-motion'
 
 export const section = cntl`
     max-w-6xl
@@ -71,10 +72,17 @@ const PricingNew = (): JSX.Element => {
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
+    const [showPlanBuilder, setShowPlanBuilder] = useState(false)
+    const builderRef = useRef<HTMLDivElement>()
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
     }
+
+    useEffect(() => {
+        if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [showPlanBuilder])
 
     return (
         <Layout>
@@ -137,44 +145,58 @@ const PricingNew = (): JSX.Element => {
                                     <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
                                 </div>
                                 <div className="my-1">
-                                    <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                                    {!showVolumeDiscounts && (
+                                        <button
+                                            className="text-orange text-xs font-bold"
+                                            onClick={() => setShowVolumeDiscounts(true)}
+                                        >
+                                            Show volume discounts
+                                        </button>
+                                    )}
 
-                                    <div className="grid grid-cols-3 text-xs gap-x-2 gap-y-2 mt-4 hidden">
-                                        <div className="col-span-2">First 1 million events/mo</div>
-                                        <strong>Included</strong>
+                                    {showVolumeDiscounts && (
+                                        <motion.div
+                                            style={{ gridTemplateColumns: '1fr' }}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                        >
+                                            <div className="col-span-2">First 1 million events/mo</div>
+                                            <strong>Included</strong>
 
-                                        <div className="col-span-2">1-2 million</div>
-                                        <strong>
-                                            $0.00045<span className="font-normal text-black/50">/event</span>
-                                        </strong>
+                                            <div className="col-span-2">1-2 million</div>
+                                            <strong>
+                                                $0.00045<span className="font-normal text-black/50">/event</span>
+                                            </strong>
 
-                                        <div className="col-span-2">2-10 million</div>
-                                        <strong>
-                                            $0.000225<span className="font-normal text-black/50">/event</span>
-                                        </strong>
+                                            <div className="col-span-2">2-10 million</div>
+                                            <strong>
+                                                $0.000225<span className="font-normal text-black/50">/event</span>
+                                            </strong>
 
-                                        <div className="col-span-2">10-100 million</div>
-                                        <strong>
-                                            $0.000075<span className="font-normal text-black/50">/event</span>
-                                        </strong>
+                                            <div className="col-span-2">10-100 million</div>
+                                            <strong>
+                                                $0.000075<span className="font-normal text-black/50">/event</span>
+                                            </strong>
 
-                                        <div className="col-span-2">100 million - 1 billion</div>
-                                        <strong>
-                                            $0.000025<span className="font-normal text-black/50">/event</span>
-                                        </strong>
+                                            <div className="col-span-2">100 million - 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
 
-                                        <div className="col-span-2">More than 1 billion</div>
-                                        <strong>
-                                            $0.000025<span className="font-normal text-black/50">/event</span>
-                                        </strong>
+                                            <div className="col-span-2">More than 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
 
-                                        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-                                            B2C company with insane event volumes?{' '}
-                                            <Link to="#" className="font-bold text-orange inline-block">
-                                                Apply for a discount
-                                            </Link>
-                                        </div>
-                                    </div>
+                                            <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+                                                B2C company with insane event volumes?{' '}
+                                                <Link to="#" className="font-bold text-orange inline-block">
+                                                    Apply for a discount
+                                                </Link>
+                                            </div>
+                                        </motion.div>
+                                    )}
                                 </div>
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
@@ -207,9 +229,62 @@ const PricingNew = (): JSX.Element => {
                                     <br />
                                     <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
                                 </div>
+
                                 <div className="my-1">
-                                    <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                                    {!showVolumeDiscounts && (
+                                        <button
+                                            className="text-orange text-xs font-bold"
+                                            onClick={() => setShowVolumeDiscounts(true)}
+                                        >
+                                            Show volume discounts
+                                        </button>
+                                    )}
+
+                                    {showVolumeDiscounts && (
+                                        <motion.div
+                                            style={{ gridTemplateColumns: '1fr' }}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                        >
+                                            <div className="col-span-2">First 1 million events/mo</div>
+                                            <strong>Included</strong>
+
+                                            <div className="col-span-2">1-2 million</div>
+                                            <strong>
+                                                $0.00045<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">2-10 million</div>
+                                            <strong>
+                                                $0.000225<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">10-100 million</div>
+                                            <strong>
+                                                $0.000045<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">100 million - 1 billion</div>
+                                            <strong>
+                                                $0.000009<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">More than 1 billion</div>
+                                            <strong>
+                                                $0.000003<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+                                                B2C company with insane event volumes?{' '}
+                                                <Link to="#" className="font-bold text-orange inline-block">
+                                                    Apply for a discount
+                                                </Link>
+                                            </div>
+                                        </motion.div>
+                                    )}
                                 </div>
+
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
                                         <strong className="text-[16px]">Monthly estimate</strong>
@@ -228,12 +303,14 @@ const PricingNew = (): JSX.Element => {
                                 </div>
                             </div>
                         </div>
-                        <p className="mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
-                            Estimate your monthly cost with our{' '}
-                            <Link to="#" className="font-bold">
-                                plan builder
-                            </Link>
-                        </p>
+                        {!showPlanBuilder && (
+                            <p className="mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
+                                Estimate your monthly cost with our{' '}
+                                <button onClick={() => setShowPlanBuilder(true)} className="font-bold text-red">
+                                    plan builder
+                                </button>
+                            </p>
+                        )}
                     </div>
                     <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto">
                         <div>
@@ -256,7 +333,53 @@ const PricingNew = (): JSX.Element => {
                             <span className="text-black/50 font-semibold text-xs block mt-1">then $0.00045/event</span>
                         </div>
                         <div className="my-1">
-                            <button className="text-orange text-xs font-bold">Show volume discounts</button>
+                            {!showVolumeDiscounts && (
+                                <button
+                                    className="text-orange text-xs font-bold"
+                                    onClick={() => setShowVolumeDiscounts(true)}
+                                >
+                                    Show volume discounts
+                                </button>
+                            )}
+
+                            {showVolumeDiscounts && (
+                                <motion.div
+                                    style={{ gridTemplateColumns: '1fr' }}
+                                    initial={{ height: 0 }}
+                                    animate={{ height: 'auto' }}
+                                    className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                >
+                                    <div className="col-span-2">First 1 million events/mo</div>
+                                    <strong>$450</strong>
+
+                                    <div className="col-span-2">1-10 million</div>
+                                    <strong>
+                                        $0.00045<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">10-100 million</div>
+                                    <strong>
+                                        $0.00009<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">100 million - 1 billion</div>
+                                    <strong>
+                                        $0.000018<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">More than 1 billion</div>
+                                    <strong>
+                                        $0.0000036<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+                                        B2C company with insane event volumes?{' '}
+                                        <Link to="#" className="font-bold text-orange inline-block">
+                                            Apply for a discount
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
 
                         <div className="mt-4">
@@ -268,75 +391,89 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
 
-            <div className="relative md:px-4">
-                <section
-                    className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
+            {showPlanBuilder && (
+                <motion.div
+                    ref={builderRef}
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    className="relative md:px-4"
                 >
-                    <div className="relative flex flex-col">
-                        <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
-                        <div>
-                            <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
-                                <span>Do you need to self-host?</span>
-                                <button onClick={() => handleInfo('self host')}>
-                                    <Info />
-                                </button>
-                            </h3>
-                            <p className="m-0 text-black/50 font-medium text-sm">
-                                Customer data never leaves your infrastructure or private cloud.
-                            </p>
-                            <div className="flex space-x-3 mt-3">
-                                <Button onClick={() => setSelfHost(true)} active={selfHost}>
-                                    Yes
-                                </Button>
-                                <Button onClick={() => setSelfHost(false)} active={!selfHost}>
-                                    No
-                                </Button>
-                            </div>
-                            <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
-                                <span>Are you an enterprise?</span>
-                                <button onClick={() => handleInfo('enterprise')}>
-                                    <Info />
-                                </button>
-                            </h3>
-                            <p className="m-0 text-black/50 font-medium text-sm">
-                                Advanced permissioning, proactive support, training, SSO/SAML & more
-                            </p>
-                            <div className="flex space-x-3 mt-3">
-                                <Button onClick={() => setEnterprise(true)} active={enterprise}>
-                                    Yes
-                                </Button>
-                                <Button onClick={() => setEnterprise(false)} active={!enterprise}>
-                                    No
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
-                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" placeholder="none" />
-                            <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
-                                <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
-                                <p className="text-[14px] mt-0 mb-2 text-white font-comic">
-                                    for one low monthly price?!
+                    <section
+                        className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
+                    >
+                        <div className="relative flex flex-col">
+                            <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
+                            <div>
+                                <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
+                                    <span>Do you need to self-host?</span>
+                                    <button onClick={() => handleInfo('self host')}>
+                                        <Info />
+                                    </button>
+                                </h3>
+                                <p className="m-0 text-black/50 font-medium text-sm">
+                                    Customer data never leaves your infrastructure or private cloud.
                                 </p>
-                                <svg
-                                    className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
-                                    width="35"
-                                    height="29"
-                                    viewBox="0 0 35 29"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                        fill="#2D2D2D"
-                                    />
-                                </svg>
+                                <div className="flex space-x-3 mt-3">
+                                    <Button onClick={() => setSelfHost(true)} active={selfHost}>
+                                        Yes
+                                    </Button>
+                                    <Button onClick={() => setSelfHost(false)} active={!selfHost}>
+                                        No
+                                    </Button>
+                                </div>
+                                <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
+                                    <span>Are you an enterprise?</span>
+                                    <button onClick={() => handleInfo('enterprise')}>
+                                        <Info />
+                                    </button>
+                                </h3>
+                                <p className="m-0 text-black/50 font-medium text-sm">
+                                    Advanced permissioning, proactive support, training, SSO/SAML & more
+                                </p>
+                                <div className="flex space-x-3 mt-3">
+                                    <Button onClick={() => setEnterprise(true)} active={enterprise}>
+                                        Yes
+                                    </Button>
+                                    <Button onClick={() => setEnterprise(false)} active={!enterprise}>
+                                        No
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
+                                <StaticImage
+                                    width={183}
+                                    alt="Sport Hog"
+                                    src="./images/sport-hog.png"
+                                    placeholder="none"
+                                />
+                                <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
+                                    <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
+                                    <p className="text-[14px] mt-0 mb-2 text-white font-comic">
+                                        for one low monthly price?!
+                                    </p>
+                                    <svg
+                                        className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
+                                        width="35"
+                                        height="29"
+                                        viewBox="0 0 35 29"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
+                                            fill="#2D2D2D"
+                                        />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <Calculator enterprise={enterprise} selfHost={selfHost} />
-                </section>
-                <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
-            </div>
+                        <Calculator enterprise={enterprise} selfHost={selfHost} />
+                    </section>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+                        <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
+                    </motion.div>
+                </motion.div>
+            )}
             <section className={`${section} pt-12 md:px-4`}>
                 <h2 className="text-xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
