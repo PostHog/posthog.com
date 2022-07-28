@@ -125,7 +125,7 @@ const PricingNew = (): JSX.Element => {
                                     <h2 className="text-xl flex items-center">
                                         PostHog Cloud{' '}
                                         <span className="bg-yellow inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2">
-                                            Cheapest option
+                                            Best value
                                         </span>
                                     </h2>
                                     <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
