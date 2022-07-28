@@ -58,7 +58,15 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
 
-4. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+4. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+
+    ```bash
+    sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    ```
+
+    ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
+
+5. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
     ```bash
     git clone https://github.com/PostHog/posthog && cd posthog/
@@ -68,7 +76,9 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will start all the external services needed by PostHog to work:
+In this step we will start all the external services needed by PostHog to work.
+
+We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
 
 ```bash
 docker compose -f docker-compose.dev.yml up
@@ -178,7 +188,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
     ```bash
-    brew install openssl
+    brew install openssl brotli
     CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 

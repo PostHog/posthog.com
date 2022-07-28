@@ -3,8 +3,6 @@ import Layout from '../components/Layout'
 import { DemoScheduler } from '../components/DemoScheduler'
 import { Spacer } from '../components/Spacer'
 import { Link } from 'gatsby'
-import { Button } from 'antd'
-import './styles/yc-onboarding.scss'
 
 const DemoCallInfo = () => (
     <>
@@ -38,17 +36,12 @@ export const YCOnboarding = () => {
     const [showInfo, setShowInfo] = useState(false)
     return (
         <Layout>
-            <div className="get-in-touch-wrapper">
+            <div className="flex flex-col items-stretch w-full max-w-4xl mx-auto">
                 <Spacer />
                 <h1 className="centered">PostHog YC Onboarding</h1>
-                <Button
-                    className="centered"
-                    style={{ margin: 'auto' }}
-                    type="primary"
-                    onClick={() => setShowInfo(!showInfo)}
-                >
+                <button onClick={() => setShowInfo(!showInfo)} className="text-orange font-semibold w-32 mx-auto">
                     {showInfo ? 'Hide Info' : 'Show Info'}
-                </Button>
+                </button>
                 <Spacer height={25} />
                 {showInfo ? <DemoCallInfo /> : null}
                 <DemoScheduler iframeSrc="https://calendly.com/d/dsb-3y3-9v9" />

@@ -36,6 +36,7 @@ p {
     h6 {
         letter-spacing: -0.015em;
         margin-top: 2rem;
+        margin-bottom: 0.5rem;
     }
 
     p,
@@ -64,6 +65,11 @@ p {
         margin-bottom: 1rem;
     }
 
+    ul,
+    ol {
+        margin-bottom: 1rem;
+    }
+
     li li {
         font-size: 1rem;
     }
@@ -73,7 +79,7 @@ p {
     }
 
     blockquote:not(.quote) {
-        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
+        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-4;
     }
 
     iframe {

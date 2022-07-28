@@ -14,11 +14,11 @@ const sizes = {
 const primary = cntl`
     bg-red
     border-red
-    dark:bg-primary-dark
+    dark:bg-red
     text-white
-    dark:text-primary
+    dark:text-white
     hover:text-white
-    hover:dark:text-primary
+    hover:dark:text-white
     hover:bg-red-hover
     hover:border-red-hover
     active:bg-red-active
