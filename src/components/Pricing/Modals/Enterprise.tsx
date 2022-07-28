@@ -76,73 +76,67 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                     </button>
                     <section className="-mt-16">
                         <Intro title="How do you want to run PostHog?" />
-                        <p className="text-center -mt-16 mb-12">
-                            Not sure which edition is right for you?{' '}
-                            <Link to="/pricing" className="font-semibold">
-                                Build your perfect plan.
-                            </Link>
-                        </p>
-                        <div className="border-t border-b border-dashed border-gray-accent-light">
-                            <div className="grid md:grid-cols-2 md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
-                                <Plan
-                                    icon={<CloudIcon className="w-7 h-7" />}
-                                    title="PostHog Cloud"
-                                    subtitle="SaaS solution managed by the PostHog core team"
-                                >
-                                    <div className="flex flex-col h-full">
-                                        <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
-                                            <Feature>
-                                                <Scales />
-                                                <span>Scales automatically</span>
-                                            </Feature>
-                                            <Feature>
-                                                <Tracking className="w-7 h-7" />
-                                                <span>Start tracking events immediately</span>
-                                            </Feature>
-                                            <Feature>
-                                                <Automatic className="w-7 h-7" />
-                                                <span>Automatic upgrades</span>
-                                            </Feature>
-                                        </ul>
-                                        <TrackedCTA
-                                            className="mt-auto shadow-xl"
-                                            href="/signup/cloud/enterprise"
-                                            event={{ name: `clicked Continue`, type: 'cloud' }}
-                                        >
-                                            Choose PostHog Enterprise Cloud
-                                        </TrackedCTA>
-                                    </div>
-                                </Plan>
-                                <Plan
-                                    icon={<SelfHostIcon className="w-7 h-7" />}
-                                    title="Self-host"
-                                    subtitle="Customer data never leaves your infrastructure"
-                                >
-                                    <div className="flex flex-col h-full">
-                                        <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
-                                            <Feature>
-                                                <EasyDeploy className="w-7 h-7" />
-                                                <span>Easy deploy for most private cloud platforms</span>
-                                            </Feature>
-                                            <Feature>
-                                                <Access className="w-7 h-7" />
-                                                <span>Full access to production instance</span>
-                                            </Feature>
-                                            <Feature>
-                                                <Bypass className="w-7 h-7" />
-                                                <span>Capture up to 30% more events by bypassing ad blockers</span>
-                                            </Feature>
-                                        </ul>
-                                        <TrackedCTA
-                                            to="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
-                                            className="mt-auto shadow-xl"
-                                            event={{ name: `clicked Continue`, type: 'self-hosted' }}
-                                        >
-                                            Choose Enterprise Self-Hosting
-                                        </TrackedCTA>
-                                    </div>
-                                </Plan>
-                            </div>
+                        <div className="grid md:grid-cols-2 md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
+                            <Plan
+                                icon={<CloudIcon className="w-7 h-7" />}
+                                title="PostHog Cloud"
+                                subtitle="SaaS solution managed by the PostHog core team"
+                                badge="Enterprise"
+                            >
+                                <div className="flex flex-col h-full mt-4">
+                                    <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
+                                        <Feature>
+                                            <Scales />
+                                            <span>Scales automatically</span>
+                                        </Feature>
+                                        <Feature>
+                                            <Tracking className="w-7 h-7" />
+                                            <span>Start tracking events immediately</span>
+                                        </Feature>
+                                        <Feature>
+                                            <Automatic className="w-7 h-7" />
+                                            <span>Automatic upgrades</span>
+                                        </Feature>
+                                    </ul>
+                                    <TrackedCTA
+                                        className="mt-auto shadow-xl"
+                                        href="/signup/cloud/enterprise"
+                                        event={{ name: `clicked Continue`, type: 'cloud' }}
+                                    >
+                                        Choose PostHog Enterprise Cloud
+                                    </TrackedCTA>
+                                </div>
+                            </Plan>
+                            <Plan
+                                icon={<SelfHostIcon className="w-7 h-7" />}
+                                title="Self-host"
+                                subtitle="Customer data never leaves your infrastructure"
+                                badge="Enterprise"
+                            >
+                                <div className="flex flex-col h-full mt-4">
+                                    <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
+                                        <Feature>
+                                            <EasyDeploy className="w-7 h-7" />
+                                            <span>Easy deploy for most private cloud platforms</span>
+                                        </Feature>
+                                        <Feature>
+                                            <Access className="w-7 h-7" />
+                                            <span>Full access to production instance</span>
+                                        </Feature>
+                                        <Feature>
+                                            <Bypass className="w-7 h-7" />
+                                            <span>Capture up to 30% more events by bypassing ad blockers</span>
+                                        </Feature>
+                                    </ul>
+                                    <TrackedCTA
+                                        to="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
+                                        className="mt-auto shadow-xl"
+                                        event={{ name: `clicked Continue`, type: 'self-hosted' }}
+                                    >
+                                        Choose Enterprise Self-Hosting
+                                    </TrackedCTA>
+                                </div>
+                            </Plan>
                         </div>
                     </section>
                 </div>

@@ -50,11 +50,15 @@ export default function SelfHost() {
                                 </div>
                             </Plan>
                         ) : (
-                            <HubspotForm
-                                portalId="6958578"
-                                formId="3aa5d0ac-60e2-469a-a57b-e0c209a15b5b"
-                                onSubmit={() => setSubmitted(true)}
-                            />
+                            <>
+                                <h2>Get more info about PostHog Enterprise Cloud</h2>
+                                <p className="pt-2 pb-4">Just fill out this painless form and we'll be in touch.</p>
+                                <HubspotForm
+                                    portalId="6958578"
+                                    formId="3aa5d0ac-60e2-469a-a57b-e0c209a15b5b"
+                                    onSubmit={() => setSubmitted(true)}
+                                />
+                            </>
                         )}
                     </div>
                 </Intro>
