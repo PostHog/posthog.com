@@ -48,7 +48,7 @@ const cloudPlans: IPlan[] = [
         },
         mainCTA: {
             title: 'Get in touch',
-            url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+            url: '/signup/cloud/enterprise',
         },
         demoCTA: {
             title: 'Book a demo',
