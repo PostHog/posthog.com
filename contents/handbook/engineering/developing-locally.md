@@ -76,7 +76,9 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will start all the external services needed by PostHog to work:
+In this step we will start all the external services needed by PostHog to work.
+
+We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
 
 ```bash
 docker compose -f docker-compose.dev.yml up
@@ -186,7 +188,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
     ```bash
-    brew install openssl
+    brew install openssl brotli
     CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 

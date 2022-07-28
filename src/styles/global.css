@@ -65,7 +65,8 @@ p {
         margin-bottom: 1rem;
     }
 
-    ul {
+    ul,
+    ol {
         margin-bottom: 1rem;
     }
 
