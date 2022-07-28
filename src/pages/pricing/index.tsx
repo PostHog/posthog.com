@@ -100,7 +100,7 @@ const PricingNew = (): JSX.Element => {
                             <br /> Get access to all features.
                         </h1>
                         <p className="text-[18px] text-black/75">
-                            Starts at <span className="text-lg font-bold">$0</span>/mo for the first 1 million monthly
+                            Starts at <span className="text-lg font-bold">$0</span>/mo for your first 1 million monthly
                             events &mdash; every month
                         </p>
                     </div>
@@ -228,15 +228,10 @@ const PricingNew = (): JSX.Element => {
                                 </div>
                             </div>
                         </div>
-                        <p className="mt-4 text-center text-[14px] font-semibold text-black/50">
-                            Not sure which plan is right for you?{' '}
+                        <p className="mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
+                            Estimate your monthly cost with our{' '}
                             <Link to="#" className="font-bold">
-                                Try our plan wizard.
-                            </Link>
-                            <br />
-                            Need help{' '}
-                            <Link to="/blog/calculating-events-from-users" className="font-bold">
-                                estimating your event volume?
+                                plan builder
                             </Link>
                         </p>
                     </div>

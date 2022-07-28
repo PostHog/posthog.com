@@ -11,6 +11,7 @@ import { PricingSlider } from '../PricingSlider'
 import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
+import Link from 'components/Link'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -305,6 +306,13 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         </TrackedCTA>
                     )}
                 </div>
+
+                <p className="text-xs text-center pt-4 pb-0 m-0 text-black/50">
+                    Not sure your event volume?{' '}
+                    <Link to="/blog/calculating-events-from-users" className="font-bold">
+                        Here's a handy guide.
+                    </Link>
+                </p>
             </div>
         </motion.div>
     )
