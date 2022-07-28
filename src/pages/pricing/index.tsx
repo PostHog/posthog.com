@@ -20,7 +20,7 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
-import { CallToAction } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction'
 import { motion } from 'framer-motion'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 
@@ -219,14 +219,15 @@ const PricingNew = (): JSX.Element => {
                                 </div>
 
                                 <div className="mt-4">
-                                    <CallToAction
+                                    <TrackedCTA
+                                        event={{ name: `clicked Get started - free`, type: 'cloud' }}
                                         type="primary"
                                         width="full"
                                         className="shadow-md"
                                         to="https://app.posthog.com/signup"
                                     >
                                         Get started - free
-                                    </CallToAction>
+                                    </TrackedCTA>
                                 </div>
                             </div>
 
@@ -306,14 +307,15 @@ const PricingNew = (): JSX.Element => {
                                 </div>
 
                                 <div className="mt-4">
-                                    <CallToAction
+                                    <TrackedCTA
+                                        event={{ name: `clicked Get started - free`, type: 'self-hosted' }}
                                         type="primary"
                                         width="full"
                                         className="shadow-md"
                                         to="https://license.posthog.com/"
                                     >
                                         Get started - free
-                                    </CallToAction>
+                                    </TrackedCTA>
                                 </div>
                             </div>
                         </div>
@@ -384,14 +386,15 @@ const PricingNew = (): JSX.Element => {
                         </div>
 
                         <div className="mt-4">
-                            <CallToAction
+                            <TrackedCTA
+                                event={{ name: `clicked Get started`, type: 'self-hosted-enterprise' }}
                                 type="primary"
                                 width="full"
                                 className="shadow-md"
                                 onClick={() => setEnterpriseModalOpen(true)}
                             >
                                 Get started
-                            </CallToAction>
+                            </TrackedCTA>
                         </div>
                     </div>
                 </div>
