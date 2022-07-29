@@ -142,6 +142,7 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    title={title}
                     questions={<CommunityQuestions />}
                     menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}

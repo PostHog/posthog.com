@@ -149,6 +149,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 <Crumb className="whitespace-nowrap" title={title} truncate />
             </Breadcrumbs>
             <PostLayout
+                title={title}
                 contentWidth={790}
                 sidebar={
                     <BlogPostSidebar

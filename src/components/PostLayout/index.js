@@ -272,6 +272,7 @@ export default function PostLayout({
     questions,
     menu,
     article = true,
+    title,
 }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
@@ -360,6 +361,7 @@ export default function PostLayout({
                             <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6">
                                 <h4 className="text-[13px] mb-2">On this page</h4>
                                 <Scrollspy
+                                    key={title}
                                     offset={-50}
                                     className="list-none m-0 p-0 flex flex-col space-y-[10px]"
                                     items={tableOfContents?.map((navItem) => navItem.url)}
