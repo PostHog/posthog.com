@@ -366,7 +366,12 @@ const PricingNew = (): JSX.Element => {
                                     <div className="col-span-2">First 1 million events/mo</div>
                                     <strong>Included</strong>
 
-                                    <div className="col-span-2">1-10 million</div>
+                                    <div className="col-span-2">1-2 million</div>
+                                    <strong>
+                                        $0.00045<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">2-10 million</div>
                                     <strong>
                                         $0.00045<span className="font-normal text-black/50">/event</span>
                                     </strong>
