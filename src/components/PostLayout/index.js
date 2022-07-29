@@ -337,7 +337,11 @@ export default function PostLayout({
                     <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
                         {children}
                     </div>
-                    {questions && questions}
+                    {questions && (
+                        <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
+                            {questions}
+                        </div>
+                    )}
                 </article>
                 <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                     <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">

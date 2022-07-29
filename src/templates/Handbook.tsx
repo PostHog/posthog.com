@@ -22,6 +22,7 @@ import { GitHub } from 'components/Icons/Icons'
 import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import CommunityQuestions from 'components/CommunityQuestions'
 
 const HandbookSidebar = ({ contributors, title, location }) => {
     return (
@@ -141,6 +142,7 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    questions={<CommunityQuestions />}
                     menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
                     tableOfContents={tableOfContents}
