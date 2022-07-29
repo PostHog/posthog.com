@@ -12,6 +12,22 @@ export default function SelfHost() {
     useEffect(() => {
         typeof window !== 'undefined' && window.scrollTo(0, 0)
     })
+
+    useEffect(() => {
+        window.addEventListener('message', handler)
+        return () => {
+            window.removeEventListener('message', handler)
+        }
+    }, [])
+
+    function handler(event) {
+        if (event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+            if (event.data.id === '3aa5d0ac-60e2-469a-a57b-e0c209a15b5b') {
+                setSubmitted(true)
+            }
+        }
+    }
+
     return (
         <Layout
             crumbs={[

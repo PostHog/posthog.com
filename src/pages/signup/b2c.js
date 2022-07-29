@@ -12,6 +12,22 @@ export default function SelfHost() {
     useEffect(() => {
         typeof window !== 'undefined' && window.scrollTo(0, 0)
     })
+
+    useEffect(() => {
+        window.addEventListener('message', handler)
+        return () => {
+            window.removeEventListener('message', handler)
+        }
+    }, [])
+
+    function handler(event) {
+        if (event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+            if (event.data.id === 'ee6b0bef-e2d6-45f7-b946-ab7ae54cc2e4') {
+                setSubmitted(true)
+            }
+        }
+    }
+
     return (
         <Layout
             crumbs={[
@@ -47,11 +63,7 @@ export default function SelfHost() {
                                 </div>
                             </Plan>
                         ) : (
-                            <HubspotForm
-                                portalId="6958578"
-                                formId="ee6b0bef-e2d6-45f7-b946-ab7ae54cc2e4"
-                                onSubmit={() => setSubmitted(true)}
-                            />
+                            <HubspotForm portalId="6958578" formId="ee6b0bef-e2d6-45f7-b946-ab7ae54cc2e4" />
                         )}
                     </div>
                 </Intro>
