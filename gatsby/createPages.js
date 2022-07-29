@@ -292,9 +292,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, 'Handbook')
-    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, 'Docs')
-    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, 'Docs')
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook' })
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'

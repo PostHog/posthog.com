@@ -171,7 +171,7 @@ const Chevron = ({ open }) => {
     )
 }
 
-const Menu = ({ name, url, children, className = '', handleLinkClick }) => {
+const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }) => {
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
@@ -220,7 +220,9 @@ const Menu = ({ name, url, children, className = '', handleLinkClick }) => {
                                 />
                             )}
                         </AnimatePresence>
-                        <span className={'opacity-50 hover:opacity-100 transition-opacity'}>{name}</span>
+                        <span className={`${!topLevel ? 'opacity-50' : ''} hover:opacity-100 transition-opacity`}>
+                            {name}
+                        </span>
                         {children && children.length > 0 && <Chevron open={open} />}
                     </Link>
                 ) : (
@@ -247,7 +249,15 @@ const TableOfContents = ({ menu, handleLinkClick }) => {
             <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">Table of contents</p>
             <nav>
                 {menu.map((menuItem, index) => {
-                    return <Menu handleLinkClick={handleLinkClick} className="ml-0" key={menuItem.name} {...menuItem} />
+                    return (
+                        <Menu
+                            topLevel
+                            handleLinkClick={handleLinkClick}
+                            className="ml-0"
+                            key={menuItem.name}
+                            {...menuItem}
+                        />
+                    )
                 })}
             </nav>
         </>
