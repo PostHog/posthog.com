@@ -1,7 +1,8 @@
 ---
 title: Insights
 category: Visualization & Analysis
-icon: insights
+icon: InsightsIcon
+description: Visualize & analyze your data
 ---
 
 <FeatureAvailability allPlans />

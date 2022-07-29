@@ -1,8 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { docs } from '../../sidebars/sidebars.json'
-import Icon from 'components/SupportImages/Icon'
+import * as allIcons from 'components/UserGuideIcons'
 
+import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import DocsLayout from 'components/Docs/Layout'
 
@@ -30,17 +31,28 @@ export default function UserGuides({ data }) {
 
             <h3>Browse by feature</h3>
 
-            <div className="flex flex-col w-full shrink-0 flex-wrap h-screen">
+            <div className="flex flex-col w-full shrink-0 flex-wrap">
                 {guides.group.map((group) => {
                     return (
                         <div key={group.category} className="w-1/2 odd:order-2 event:order-1">
                             <h5>{group.category}</h5>
-                            <ul className="list-none m-0 p-0">
+                            <ul className="list-none m-0 p-0 space-y-4">
                                 {group.nodes.map((page) => {
+                                    const Icon = allIcons[page.frontmatter.icon]
+
                                     return (
-                                        <li key={page.slug} className="flex items-center space-x-2">
-                                            <Icon className="w-5 h-5" name={page.frontmatter.icon} />
-                                            <a href={'/' + page.slug}>{page.frontmatter.title}</a>
+                                        <li key={page.slug}>
+                                            <Link to={'/' + page.slug} className="flex items-center space-x-2">
+                                                {Icon && <Icon className="w-6 h-6" />}
+                                                <div>
+                                                    <span className="block font-bold !mb-0">
+                                                        {page.frontmatter.title}
+                                                    </span>
+                                                    <p className="block text-gray !mb-0">
+                                                        {page.frontmatter.description}
+                                                    </p>
+                                                </div>
+                                            </Link>
                                         </li>
                                     )
                                 })}
@@ -61,8 +73,9 @@ export const query = graphql`
                 nodes {
                     slug
                     frontmatter {
-                        title
                         icon
+                        title
+                        description
                     }
                 }
             }
