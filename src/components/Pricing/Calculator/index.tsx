@@ -204,7 +204,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         }
         if (!selfHost && enterprise) {
             optionDetails = cloudEnterpriseOptions2
-            pricingOption = 'self-hosted-enterprise'
+            pricingOption = 'cloud-enterprise'
         }
         if (!selfHost && !enterprise) {
             optionDetails = cloudOptions

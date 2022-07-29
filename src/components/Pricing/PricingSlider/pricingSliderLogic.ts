@@ -12,9 +12,9 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
                   [1_000_000, 0],
                   [2_000_000, 0.00045],
                   [10_000_000, 0.000225],
-                  [100_000_000, 0.000045],
-                  [1_000_000_000, 0.000009],
-                  [Number.MAX_SAFE_INTEGER, 0.000003],
+                  [100_000_000, 0.000075],
+                  [1_000_000_000, 0.000025],
+                  [Number.MAX_SAFE_INTEGER, 0.000025],
               ]
             : pricingOption === 'self-hosted-enterprise'
             ? [
@@ -26,16 +26,18 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
             : pricingOption === 'cloud'
             ? [
                   [1_000_000, 0],
+                  [2_000_000, 0.00045],
                   [10_000_000, 0.000225],
                   [100_000_000, 0.000075],
+                  [1_000_000_000, 0.000025],
                   [Number.MAX_SAFE_INTEGER, 0.000025],
               ]
             : pricingOption === 'cloud-enterprise'
             ? [
-                  [10_000_000, 0.0003],
-                  [100_000_000, 0.0001],
-                  [1_000_000_000, 0.00003],
-                  [Number.MAX_SAFE_INTEGER, 0.000006],
+                  [10_000_000, 0.00045],
+                  [100_000_000, 0.00009],
+                  [1_000_000_000, 0.000018],
+                  [Number.MAX_SAFE_INTEGER, 0.0000036],
               ]
             : [[]]
 
