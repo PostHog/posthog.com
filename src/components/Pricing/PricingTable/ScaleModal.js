@@ -56,32 +56,32 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
 
                             <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
-                                    <div className="mb-0 text-xs text-almost-black text-opacity-75">Event volume</div>
+                                    <div className="mb-0 text-sm text-almost-black text-opacity-75">Event volume</div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">First 1 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">Free</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">First 1 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">Free</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">1-2 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">1-2 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.00045</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">2-10 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">2-10 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.00045</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.00009</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">10-100 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.00009</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">100 million - 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000018</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">100 million - 1 billion</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.000018</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2 pb-3">
-                                    <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.0000036</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">More than 1 billion</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.0000036</dd>
                                 </dl>
                             </div>
 
@@ -90,7 +90,7 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">
-                                    <div className="text-base">{monthlyMinimumPrice}</div>
+                                    <div className="text-lg">{monthlyMinimumPrice}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>
@@ -98,9 +98,9 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                             <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
 
                             <div className="flex justify-between items-baseline">
-                                <div className="text-base mb-0 font-bold">Estimated price</div>
+                                <div className="text-lg mb-0 font-bold">Estimated price</div>
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalMonthlyCost}</div>
+                                    <div className="text-lg">${finalMonthlyCost}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>

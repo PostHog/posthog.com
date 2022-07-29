@@ -11,11 +11,16 @@
 :root {
     --squeak-primary-color: 0, 0, 0;
     --squeak-default-avatar-fill: 255, 255, 255;
-    --squeak-button-color: 239, 118, 50;
+    --squeak-button-color: 245, 78, 0;
     .dark {
         --squeak-primary-color: 255, 255, 255;
         --squeak-default-avatar-fill: 0, 0, 0;
     }
+}
+
+*,
+a {
+    @apply box-border;
 }
 
 main a,
@@ -27,6 +32,10 @@ p {
     font-variant-numeric: proportional-nums;
 }
 
+blockquote {
+    letter-spacing: -0.015em;
+}
+
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
     h2,
@@ -34,9 +43,8 @@ p {
     h4,
     h5,
     h6 {
+        @apply mt-8;
         letter-spacing: -0.015em;
-        margin-top: 2rem;
-        margin-bottom: 0.5rem;
     }
 
     p,
@@ -54,6 +62,10 @@ p {
         }
     }
 
+    blockquote {
+        letter-spacing: initial;
+    }
+
     &.handbook-docs-content {
         p,
         li {
@@ -62,20 +74,25 @@ p {
     }
 
     p {
-        margin-bottom: 1rem;
+        @apply mb-4;
     }
 
     ul,
     ol {
-        margin-bottom: 1rem;
+        @apply mb-4;
+
+        ul,
+        ol {
+            @apply mb-2;
+        }
     }
 
     li li {
-        font-size: 1rem;
+        @apply text-lg;
     }
 
     li {
-        margin-bottom: 0.125rem;
+        @apply mb-0.5;
     }
 
     blockquote:not(.quote) {
@@ -88,7 +105,7 @@ p {
 
     /* expandable/collapsible sections */
     details {
-        @apply p-2 cursor-pointer text-base border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+        @apply p-2 cursor-pointer text-lg border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
 
         > summary {
             @apply text-red list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
@@ -218,7 +235,7 @@ div[class^='feature-'].text-center {
 
 article .article-content {
     blockquote:not('.quote') {
-        @apply text-base;
+        @apply text-lg;
     }
 }
 
@@ -548,7 +565,7 @@ ul {
         }
     }
     table {
-        @apply m-0 text-base;
+        @apply m-0 text-lg;
         th {
             @apply border-0;
             &:first-of-type {
@@ -588,7 +605,7 @@ ul {
 
 .next-steps-content {
     p {
-        @apply text-base;
+        @apply text-lg;
         margin-bottom: 20px;
     }
 }
@@ -798,7 +815,7 @@ body.dark {
         background: none;
         font-family: Consolas, monaco, monospace;
     }
-    .text-xs * {
+    .text-sm * {
         font-size: 0.75rem;
     }
 }

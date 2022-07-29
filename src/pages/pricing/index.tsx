@@ -45,7 +45,7 @@ const Button = ({
 }) => {
     return (
         <button
-            className={`text-base font-bold flex items-center flex-grow sm:flex-grow-0 sm:w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
+            className={`text-lg font-bold flex items-center flex-grow sm:flex-grow-0 sm:w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
                 active ? 'border-red' : 'border-white'
             } border-[2.5px] transition-colors`}
             onClick={onClick}
@@ -137,7 +137,7 @@ const PricingNew = (): JSX.Element => {
 
             <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
                 <div className="max-w-6xl mx-auto flex items-center md:px-4">
-                    <p className="font-semibold text-xs text-black/50 text-right m-0">
+                    <p className="font-semibold text-sm text-black/50 text-right m-0">
                         One price, <br />
                         full product suite:
                     </p>
@@ -150,11 +150,14 @@ const PricingNew = (): JSX.Element => {
                         <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
                             <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
                                 <div>
-                                    <h2 className="text-xl flex items-center">
+                                    <h2 className="text-xl mb-0 flex items-center">
                                         PostHog Cloud{' '}
                                         <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
                                             <span className="text-black/50">Recommended</span>
-                                            <button onClick={() => setWhyCloudOpen(true)} className="text-red">
+                                            <button
+                                                onClick={() => setWhyCloudOpen(true)}
+                                                className="text-red font-semibold"
+                                            >
                                                 Why?
                                             </button>
                                         </span>
@@ -162,15 +165,15 @@ const PricingNew = (): JSX.Element => {
                                     <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
                                 </div>
                                 <div className="leading-none mt-3">
-                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-lg font-bold">Free</span>{' '}
                                     <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
                                     <br />
-                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                    <span className="text-black/50 text-sm font-medium">then $0.00045/event</span>
                                 </div>
                                 <div className="my-1">
                                     {!showVolumeDiscounts && (
                                         <button
-                                            className="text-orange text-xs font-bold"
+                                            className="text-orange text-sm font-bold"
                                             onClick={() => setShowVolumeDiscounts(true)}
                                         >
                                             Show volume discounts
@@ -182,7 +185,7 @@ const PricingNew = (): JSX.Element => {
                                             style={{ gridTemplateColumns: '1fr' }}
                                             initial={{ height: 0 }}
                                             animate={{ height: 'auto' }}
-                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                            className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                         >
                                             <div className="col-span-2">First 1 million events/mo</div>
                                             <strong>Included</strong>
@@ -219,11 +222,11 @@ const PricingNew = (): JSX.Element => {
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
                                         <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                        <span className="text-sm text-black/60">for 1,000,000 events/mo</span>
                                     </div>
                                     <div>
                                         <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
-                                        <span className="text-xs text-black/60">/mo</span>
+                                        <span className="text-sm text-black/60">/mo</span>
                                     </div>
                                 </div>
 
@@ -242,22 +245,22 @@ const PricingNew = (): JSX.Element => {
 
                             <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
                                 <div>
-                                    <h2 className="text-xl">Self-hosted</h2>
+                                    <h2 className="text-xl mb-0">Self-hosted</h2>
                                     <p className="mb-2 text-[14px] text-black/50">
                                         Customer data never leaves your infrastructure
                                     </p>
                                 </div>
                                 <div className="leading-none mt-3">
-                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-lg font-bold">Free</span>{' '}
                                     <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
                                     <br />
-                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                    <span className="text-black/50 text-sm font-medium">then $0.00045/event</span>
                                 </div>
 
                                 <div className="my-1">
                                     {!showVolumeDiscounts && (
                                         <button
-                                            className="text-orange text-xs font-bold"
+                                            className="text-orange text-sm font-bold"
                                             onClick={() => setShowVolumeDiscounts(true)}
                                         >
                                             Show volume discounts
@@ -269,7 +272,7 @@ const PricingNew = (): JSX.Element => {
                                             style={{ gridTemplateColumns: '1fr' }}
                                             initial={{ height: 0 }}
                                             animate={{ height: 'auto' }}
-                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                            className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                         >
                                             <div className="col-span-2">First 1 million events/mo</div>
                                             <strong>Included</strong>
@@ -307,11 +310,11 @@ const PricingNew = (): JSX.Element => {
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
                                         <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                        <span className="text-sm text-black/60">for 1,000,000 events/mo</span>
                                     </div>
                                     <div>
                                         <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
-                                        <span className="text-xs text-black/60">/mo</span>
+                                        <span className="text-sm text-black/60">/mo</span>
                                     </div>
                                 </div>
 
@@ -329,11 +332,11 @@ const PricingNew = (): JSX.Element => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto">
+                    <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto box-border">
                         <div>
                             <h2 className="text-xl flex items-baseline">
                                 Enterprise{' '}
-                                <span className="inline-flex text-xs text-black/50 font-semibold ml-2">
+                                <span className="inline-flex text-sm text-black/50 font-semibold ml-2">
                                     Cloud or self-host
                                 </span>
                             </h2>
@@ -342,17 +345,17 @@ const PricingNew = (): JSX.Element => {
                             </p>
                         </div>
                         <div className="leading-none mt-3">
-                            <span className="text-black/50 text-xs font-medium block mb-1">Starts at</span>
+                            <span className="text-black/50 text-sm font-medium block mb-1">Starts at</span>
                             <span className="text-[18px] font-bold">$450</span>
                             {''}
                             <span className="text-black/75 font-semibold text-[14px]">/mo for 1 million events</span>
                             <br />
-                            <span className="text-black/50 font-semibold text-xs block mt-1">then $0.00045/event</span>
+                            <span className="text-black/50 font-semibold text-sm block mt-1">then $0.00045/event</span>
                         </div>
                         <div className="my-1">
                             {!showVolumeDiscounts && (
                                 <button
-                                    className="text-orange text-xs font-bold"
+                                    className="text-orange text-sm font-bold"
                                     onClick={() => setShowVolumeDiscounts(true)}
                                 >
                                     Show volume discounts
@@ -364,7 +367,7 @@ const PricingNew = (): JSX.Element => {
                                     style={{ gridTemplateColumns: '1fr' }}
                                     initial={{ height: 0 }}
                                     animate={{ height: 'auto' }}
-                                    className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                    className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                 >
                                     <div className="col-span-2">First 1 million events/mo</div>
                                     <strong>Included</strong>
@@ -435,7 +438,7 @@ const PricingNew = (): JSX.Element => {
                         className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
                     >
                         <div className="relative flex flex-col">
-                            <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
+                            <h2 className="text-2xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
                             <div>
                                 <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
                                     <span>Do you need to self-host?</span>
@@ -538,7 +541,7 @@ const PricingNew = (): JSX.Element => {
                             <GitHub />
                             <span>Browse on GitHub</span>
                         </Link>
-                        <p className="text-xs opacity-50 mt-2">
+                        <p className="text-sm opacity-50 mt-2">
                             Limitations: one project, no user permissions, and community support only.
                         </p>
                     </div>

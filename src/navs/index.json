@@ -17,7 +17,7 @@
         },
         {
             "title": "Using PostHog",
-            "url": "/tutorials",
+            "url": "/docs/user-guides",
             "sub": {
                 "component": "UsingPostHog"
             }

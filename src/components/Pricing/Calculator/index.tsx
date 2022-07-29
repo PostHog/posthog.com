@@ -232,14 +232,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 <span className="inline-block mr-2">{optionDetails?.icon}</span>
                 <div>
                     <div className="flex items-center flex-wrap">
-                        <h3 className="m-0 text-[18px] font-black mr-2">{optionDetails?.title}</h3>
+                        <h3 className="m-0 text-xl font-black mr-2">{optionDetails?.title}</h3>
                         <span
                             className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
                         >
                             {optionDetails?.badge}
                         </span>
                     </div>
-                    <p className="m-0 mt-1 text-black/50 font-medium text-xs">{optionDetails?.subtitle}</p>
+                    <p className="m-0 text-black/50 font-medium text-sm">{optionDetails?.subtitle}</p>
                 </div>
             </div>
             <div className="mt-5">
@@ -277,7 +277,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         {!showFullBreakdown && (
                             <button
                                 onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-xs"
+                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-sm"
                             >
                                 Show full breakdown
                             </button>
@@ -291,7 +291,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     </>
                 )}
                 <div className="flex space-x-2 justify-between items-center mt-2">
-                    <h4 className="text-base m-0 font-extrabold leading-tight">
+                    <h4 className="text-lg m-0 font-extrabold leading-tight">
                         Estimated price
                         <br />
                         <span className="text-[13px] opacity-60 font-bold">
@@ -326,7 +326,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                     )}
                 </div>
 
-                <p className="text-xs text-center pt-4 pb-0 m-0 text-black/50">
+                <p className="text-sm text-center pt-4 pb-0 m-0 text-black/50">
                     Not sure your event volume?{' '}
                     <Link to="/blog/calculating-events-from-users" className="font-bold">
                         Here's a handy guide.

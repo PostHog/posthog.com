@@ -24,12 +24,6 @@ body {
     font-variation-settings: 'wght' 475;
 }
 
-a {
-    color: black;
-    font-weight: semibold;
-    transition: none !important; /* unfortunately necessary until antd is removed */
-}
-
 em,
 i {
     font-variant: none;
@@ -202,10 +196,7 @@ textarea {
     -webkit-appearance: button;
     font: inherit;
 }
-html {
-    font: 112.5%/1.45em georgia, serif;
-    box-sizing: border-box;
-}
+
 * {
     box-sizing: inherit;
 }
@@ -255,16 +246,16 @@ h4,
 h5,
 h6 {
     color: inherit;
-    font-variation-settings: 'wght' 800; // override ant
+    font-variation-settings: 'wght' 800;
     letter-spacing: -0.02em;
-    text-rendering: optimizeLegibility;
+    margin-bottom: 1rem;
 
     a {
-        font-variation-settings: 'wght' 800 !important; // override ant
+        font-variation-settings: 'wght' 800;
     }
 
     code {
-        font-weight: bold;
+        font-variation-settings: 'wght' 800;
     }
 }
 
@@ -285,6 +276,7 @@ h3 {
 }
 h4 {
     font-size: 24px;
+    margin-bottom: 0.75rem;
 }
 h5 {
     margin-left: 0;
@@ -414,7 +406,6 @@ table {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
-    font-size: 14px;
     line-height: 1.45rem;
     width: 100%;
 }
@@ -494,23 +485,11 @@ ol li {
 ul li {
     padding-left: 0;
 }
-li > ol {
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
-}
-li > ul {
-    margin-bottom: calc(1.45rem / 4);
-    margin-top: calc(1.45rem / 4);
-    padding-bottom: 0.5rem;
-}
 blockquote *:last-child {
     margin-bottom: 0;
 }
 p *:last-child {
     margin-bottom: 0;
-}
-li > p {
-    margin-bottom: calc(1.45rem / 2);
 }
 kbd {
     font-size: 0.85rem;
@@ -608,7 +587,6 @@ header {
     }
     p,
     li {
-        font-size: 1.25em;
         line-height: 1.75em;
         opacity: 0.9;
         li {

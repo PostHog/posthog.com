@@ -34,7 +34,7 @@ export default function WorkableOpenRoles({ department = '' }: { department?: st
                                 return (
                                     <li className="border-b border-dashed border-gray-accent-light" key={title}>
                                         <a
-                                            className="px-4 py-3 text-base text-primary hover:text-primary font-bold flex justify-between"
+                                            className="px-4 py-3 text-lg text-primary hover:text-primary font-bold flex justify-between"
                                             href={url}
                                         >
                                             <span>{title}</span>

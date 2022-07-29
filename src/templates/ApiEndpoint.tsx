@@ -177,14 +177,14 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
                                 {param.schema.default && (
                                     <>
                                         <div>
-                                            <span className="text-xs">
+                                            <span className="text-sm">
                                                 Default: <code>{param.schema.default}</code>
                                             </span>
                                         </div>
@@ -192,7 +192,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                 )}
                                 {param.schema.enum && (
                                     <>
-                                        <div className="text-xs">
+                                        <div className="text-sm">
                                             One of:{' '}
                                             {param.schema.enum
                                                 .filter((item) => item && item !== '')
@@ -204,7 +204,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-xs">
+                                <div className="text-sm">
                                     <ReactMarkdown>{param.schema.description}</ReactMarkdown>
                                 </div>
                             </div>
@@ -349,7 +349,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                 </div>
 
                 <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-xs flex items-center ">
+                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-sm flex items-center ">
                         <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
                         <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
                     </Listbox.Button>
@@ -367,7 +367,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                                     } w-full pl-3 pr-6 cursor-pointer`
                                 }
                             >
-                                <span className="text-xs">{option}</span>
+                                <span className="text-sm">{option}</span>
                             </Listbox.Option>
                         ))}
                     </Listbox.Options>
