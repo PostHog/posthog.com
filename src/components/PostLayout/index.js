@@ -176,8 +176,8 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
     const buttonClasses = `mb-1 text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[5px] inline-block w-full rounded-md ${
-        children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''
-    }`
+        children || topLevel ? 'hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-all' : ''
+    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''}`
     useEffect(() => {
         const isOpen = (children) => {
             return (
