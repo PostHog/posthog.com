@@ -75,7 +75,15 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
 export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+    return (
+        <CallToAction
+            {...props}
+            onClick={() => {
+                posthog?.capture(eventName, event)
+                props.onClick && props.onClick()
+            }}
+        />
+    )
 }
 
 export const CallToAction = ({
