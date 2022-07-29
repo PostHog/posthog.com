@@ -187,7 +187,7 @@
     {
         "date": "2022-04-01",
         "type": "feature",
-        "description": "Console log tracking in recordings (beta)"
+        "description": "Console log tracking in recordings"
     },
     {
         "date": "2022-05-01",
@@ -207,7 +207,7 @@
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Awesome demo environment"
+        "description": "Demo environment"
     },
     {
         "date": "2022-07-01",
@@ -222,7 +222,7 @@
     {
         "date": "2022-07-01",
         "type": "feature",
-        "description": "Session analysis across insights",
+        "description": "Session analysis across insights"
     },
     {
         "date": "2022-07-01",
@@ -269,7 +269,7 @@
     {
         "date": "2022-11-01",
         "type": "feature",
-        "description": "Lightning fast querying at Billion event and person scale",
+        "description": "Lightning fast querying at billion-event and person scale",
         "future": true
     }
 ]
