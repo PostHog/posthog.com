@@ -208,7 +208,16 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
         <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
-                    <Link onClick={() => handleLinkClick && handleLinkClick()} className={buttonClasses} to={url}>
+                    <Link
+                        onClick={() => {
+                            handleLinkClick && handleLinkClick()
+                            if (children && children.length > 0) {
+                                setOpen(!open)
+                            }
+                        }}
+                        className={buttonClasses}
+                        to={url}
+                    >
                         <AnimatePresence>
                             {isActive && (
                                 <motion.span
