@@ -53,7 +53,15 @@ function Endpoints({ paths }) {
                                         </code>
                                     </td>
                                     <td>
-                                        <Link offset={-50} smooth duration={300} to={pathID(verb, path)} hashSpy spy>
+                                        <Link
+                                            offset={-50}
+                                            className="cursor-pointer"
+                                            smooth
+                                            duration={300}
+                                            to={pathID(verb, path)}
+                                            hashSpy
+                                            spy
+                                        >
                                             <code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>
                                         </Link>
                                     </td>
@@ -226,8 +234,8 @@ function Params({ params, objects, object, depth = 0 }) {
     )
 }
 function Parameters({ item, objects }) {
-    let pathParams = item.parameters?.filter((param) => param.in === 'path')
-    let queryParams = item.parameters?.filter((param) => param.in === 'query')
+    const pathParams = item.parameters?.filter((param) => param.in === 'path')
+    const queryParams = item.parameters?.filter((param) => param.in === 'query')
 
     return (
         <>
@@ -248,11 +256,11 @@ function Parameters({ item, objects }) {
 }
 
 function RequestBody({ item, objects }) {
-    let objectKey =
+    const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
         item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
     if (!objectKey) return null
-    let object = objects.schemas[objectKey]
+    const object = objects.schemas[objectKey]
 
     return (
         <>
@@ -274,12 +282,12 @@ function RequestBody({ item, objects }) {
 }
 
 function ResponseBody({ item, objects }) {
-    let objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
+    const objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
         ?.split('/')
         .at(-1)
     if (!objectKey) return null
-    let object = objects.schemas[objectKey]
-    let [showResponse, setShowResponse] = useState(false)
+    const object = objects.schemas[objectKey]
+    const [showResponse, setShowResponse] = useState(false)
 
     return (
         <>
@@ -311,19 +319,15 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     let params = []
 
     if (item.requestBody) {
-        let objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
+        const objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
         if (!objectKey) return null
-        let object = objects.schemas[objectKey]
+        const object = objects.schemas[objectKey]
         params = Object.entries(object.properties).filter(
             ([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly
         )
         // If no params are required, just grab the first relevant one as an example
         if (params.length === 0) {
-            params = [
-                Object.entries(object.properties).filter(
-                    ([name, schema]) => ['id', 'short_id'].indexOf(name) === -1
-                )[0],
-            ]
+            params = [Object.entries(object.properties).filter(([name]) => ['id', 'short_id'].indexOf(name) === -1)[0]]
         }
         params = params.map(([name, schema]) => {
             return [
@@ -335,10 +339,10 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         })
     }
     const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
-    let queryParams = item.parameters?.filter((param) => param.in === 'query')
+
     return (
         <>
-            <div className="code-example justify-between flex my-1.5">
+            <div className="code-example flex items-center justify-between my-1.5">
                 <div className="text-gray">
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
@@ -406,7 +410,7 @@ response = requests.${item.httpVerb}(
     )
 }
 
-function ResponseExample({ item, objects, objectKey }) {
+function ResponseExample({ objects, objectKey }) {
     if (!objectKey) {
         return 'No response'
     }
@@ -420,7 +424,7 @@ function ResponseExample({ item, objects, objectKey }) {
             )}
             language="json"
         >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            {({ className, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ background: '#24292E', margin: 0 }}>
                     {tokens.map((line, i) => (
                         <div {...getLineProps({ line, key: i })} key={i}>
@@ -436,7 +440,7 @@ function ResponseExample({ item, objects, objectKey }) {
 }
 
 const pathDescription = (item) => {
-    let name = humanReadableName(item.operationId).toLowerCase()
+    const name = humanReadableName(item.operationId).toLowerCase()
     if (item.operationId.includes('_list')) {
         return (
             <>
@@ -469,7 +473,6 @@ const SectionLinksTop = ({ previous, next }) => {
 
 export default function ApiEndpoint({ data, pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase } }) {
     const {
-        data: { id, url },
         components: { components },
     } = data
     const name = humanReadableName(data.data.name)
@@ -567,7 +570,6 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
 
                                 {items.map((item) => {
                                     item = item.operationSpec
-                                    let objectKey = 'Dashboard'
 
                                     return (
                                         <div className="mt-8" key={item.operationId}>

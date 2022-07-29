@@ -65,6 +65,11 @@ p {
         margin-bottom: 1rem;
     }
 
+    ul,
+    ol {
+        margin-bottom: 1rem;
+    }
+
     li li {
         font-size: 1rem;
     }
