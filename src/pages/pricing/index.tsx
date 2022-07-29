@@ -24,6 +24,8 @@ import { useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import { motion } from 'framer-motion'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
+import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { prettyInt } from 'components/Pricing/PricingSlider/LogSlider'
 
 export const section = cntl`
     max-w-6xl
@@ -90,6 +92,7 @@ const PricingNew = (): JSX.Element => {
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
+    const { cloudCost, selfHostedCost } = useValues(pricingSliderLogic)
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
@@ -219,7 +222,7 @@ const PricingNew = (): JSX.Element => {
                                         <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
                                     </div>
                                     <div>
-                                        <strong className="text-[18px] text-black">$0</strong>
+                                        <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
                                         <span className="text-xs text-black/60">/mo</span>
                                     </div>
                                 </div>
@@ -307,7 +310,7 @@ const PricingNew = (): JSX.Element => {
                                         <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
                                     </div>
                                     <div>
-                                        <strong className="text-[18px] text-black">$0</strong>
+                                        <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
                                         <span className="text-xs text-black/60">/mo</span>
                                     </div>
                                 </div>
