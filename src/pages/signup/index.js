@@ -153,16 +153,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
-                                    <p className="m-0">
-                                        <span>
-                                            <strong>$0.000225</strong>
-                                            <span className="text-[13px] opacity-50">/event</span>
-                                        </span>
-                                    </p>
-                                    <p className="text-blue font-semibold text-[14px] mb-0">
-                                        First 1 million events free every month
-                                    </p>
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <span className="text-black/50 text-xs font-medium block">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
@@ -199,16 +192,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
-                                    <p className="m-0">
-                                        <span>
-                                            <strong>$0.0003</strong>
-                                            <span className="text-[13px] opacity-50">/event</span>
-                                        </span>
-                                    </p>
-                                    <p className="text-blue font-semibold mb-0 text-[14px]">
-                                        First 1 million events free every month
-                                    </p>
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <span className="block text-black/50 text-xs font-medium">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
