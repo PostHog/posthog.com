@@ -74,7 +74,7 @@ const Button = ({
 const B2C = () => {
     return (
         <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-            B2C company with insane event volumes?{' '}
+            B2C company with insane event volume?{' '}
             <Link to="/signup/b2c" className="font-bold text-orange inline-block">
                 Apply for a discount
             </Link>
@@ -286,17 +286,17 @@ const PricingNew = (): JSX.Element => {
 
                                             <div className="col-span-2">10-100 million</div>
                                             <strong>
-                                                $0.000045<span className="font-normal text-black/50">/event</span>
+                                                $0.000075<span className="font-normal text-black/50">/event</span>
                                             </strong>
 
                                             <div className="col-span-2">100 million - 1 billion</div>
                                             <strong>
-                                                $0.000009<span className="font-normal text-black/50">/event</span>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
                                             </strong>
 
                                             <div className="col-span-2">More than 1 billion</div>
                                             <strong>
-                                                $0.000003<span className="font-normal text-black/50">/event</span>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
                                             </strong>
 
                                             <B2C />
@@ -369,7 +369,12 @@ const PricingNew = (): JSX.Element => {
                                     <div className="col-span-2">First 1 million events/mo</div>
                                     <strong>Included</strong>
 
-                                    <div className="col-span-2">1-10 million</div>
+                                    <div className="col-span-2">1-2 million</div>
+                                    <strong>
+                                        $0.00045<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">2-10 million</div>
                                     <strong>
                                         $0.00045<span className="font-normal text-black/50">/event</span>
                                     </strong>

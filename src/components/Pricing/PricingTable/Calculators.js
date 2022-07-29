@@ -29,7 +29,7 @@ export const CloudCalculator = () => {
                 </dl>
                 <dl className="flex justify-between mb-0 p-2">
                     <dt className="mb-0 opacity-75 text-xs font-normal">More than 1 million</dt>
-                    <dd className="mb-0 font-bold text-xs">$0.000225</dd>
+                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
                 </dl>
             </div>
             <div className="flex justify-between items-baseline border-t border-dashed border-gray-accent-light pt-3">

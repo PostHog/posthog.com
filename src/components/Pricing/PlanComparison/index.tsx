@@ -56,11 +56,11 @@ const sections = [
             {
                 name: 'Per-event pricing (starts at)',
                 tiers: {
-                    'Cloud (Self-Serve)': 'First 1 million events/mo free, then $0.000225/event',
+                    'Cloud (Self-Serve)': 'First 1 million events/mo free, then $0.00045/event',
                     'Open Source': 'Free',
-                    'Self-Hosted (Self-Serve)': 'First 1 million events/mo free, then $0.0003/event',
+                    'Self-Hosted (Self-Serve)': 'First 1 million events/mo free, then $0.00045/event',
                     'Self-Hosted (Enterprise)': 'First 1 million events/mo included, then $0.00045/event',
-                    'Cloud (Enterprise)': 'First 1 million events/mo included, then $0.0003/event',
+                    'Cloud (Enterprise)': 'First 1 million events/mo included, then $0.00045/event',
                 },
             },
             {

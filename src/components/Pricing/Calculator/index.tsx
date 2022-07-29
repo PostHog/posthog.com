@@ -77,7 +77,8 @@ export const SelfHostIcon = ({ className = '' }: IconProps) => {
 
 const breakdownLabels = [
     'First 1 million',
-    '1-10 million',
+    '1-2 million',
+    '2-10 million',
     '10-100 million',
     '100 million - 1 billion',
     'More than 1 billion',
@@ -88,7 +89,7 @@ const cloudOptions = {
     title: 'PostHog Cloud',
     subtitle: 'Turnkey, hosted by PostHog',
     badge: 'Self-Serve',
-    breakdown: [0, 0.000225, 0.000075, 0.000025],
+    breakdown: ['$0', '$0.00045', '$0.000225', '$0.000075', '$0.000025'],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get started',
@@ -105,7 +106,7 @@ const cloudEnterpriseOptions = {
     title: 'PostHog Cloud',
     subtitle: 'Managed & supported by PostHog',
     badge: 'Enterprise',
-    breakdown: [300, 0.0003, 0.0001, 0.00003, 0.000006],
+    breakdown: ['Included', '$0.00045', '$0.00009', '$0.000018', '$0.0000036'],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get in touch',
@@ -122,7 +123,7 @@ const cloudEnterpriseOptions2 = {
     title: 'PostHog',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
-    breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
+    breakdown: ['Included', '$0.00045', '$0.00009', '$0.000018', '$0.0000036'],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
 
     mainCTA: {
@@ -140,7 +141,7 @@ const selfHostedOptions = {
     title: 'PostHog Self-Hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Self-Serve',
-    breakdown: [0, 0.00045, 0.000225, 0.000045, 0.000009, 0.000003],
+    breakdown: ['$0', '$0.00045', '$0.000225', '$0.000075', '$0.000025', '$0.000025'],
     breakdownLabels: [
         'First 1 million',
         '1-2 million',
@@ -165,7 +166,7 @@ const selfHostedEnterpriseOptions = {
     title: 'PostHog',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
-    breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
+    breakdown: ['Included', '$0.00045', '$0.00009', '$0.000018', '$0.0000036'],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get started',
@@ -268,7 +269,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         <p className="text-[14px] font-medium m-0">
                                             {(optionDetails?.breakdownLabels || breakdownLabels)[index]}
                                         </p>
-                                        <p className="text-[14px] font-medium m-0">${price}</p>
+                                        <p className="text-[14px] font-medium m-0">{price}</p>
                                     </li>
                                 )
                             })}

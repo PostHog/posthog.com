@@ -69,19 +69,19 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">2-10 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000225</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.00045</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000045</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.00009</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-xs">100 million - 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000009</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.000018</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2 pb-3">
                                     <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000003</dd>
+                                    <dd className="mb-0 font-bold text-xs">$0.0000036</dd>
                                 </dl>
                             </div>
 
