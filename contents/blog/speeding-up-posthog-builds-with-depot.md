@@ -13,7 +13,7 @@ categories: ["Inside PostHog", "Open source"]
 
 We recently helped PostHog swap out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster!
 
-## What is Depot
+## What is Depot?
 
 [Depot](https://depot.dev) is a managed container build service — we run both Intel and Arm builder machines so that you can build native container images for both architectures. Each instance runs [BuildKit](https://github.com/moby/buildkit), the modern engine that backs `docker build` with 4 CPUs, 8GB of RAM, and a persistent 50GB NVMe cache disk. We fully manage the lifecycle of your project builder instances; today, Depot launches builder machines in AWS and Fly.io.
 
