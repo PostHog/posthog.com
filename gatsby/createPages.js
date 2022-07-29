@@ -226,7 +226,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         library: LibraryTemplate,
     }
 
-    function createPosts(data, menu, template) {
+    function createPosts(data, menu, template, breadcrumbBase) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
             const layout = node?.frontmatter?.layout
@@ -253,7 +253,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     previous,
                     menu: result.data.sidebars.childSidebarsJson[menu],
                     breadcrumb,
-                    breadcrumbBase: menuFlattened[0],
+                    breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
                 },
@@ -292,9 +292,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate)
-    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate)
-    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint)
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, 'Handbook')
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, 'Docs')
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, 'Docs')
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
