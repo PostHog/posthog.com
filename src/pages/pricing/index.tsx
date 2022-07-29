@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from '../../components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -9,6 +9,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import { GitHub, Info } from 'components/Icons/Icons'
 import Calculator from 'components/Pricing/Calculator/index'
+import ProductPillars from 'components/Pricing/ProductPillars/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
@@ -17,13 +18,20 @@ import shape from './images/shape.svg'
 import Modal from 'components/Modal'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
+import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
+import { TrackedCTA } from 'components/CallToAction'
+import { motion } from 'framer-motion'
+import Enterprise from 'components/Pricing/Modals/Enterprise'
+import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { prettyInt } from 'components/Pricing/PricingSlider/LogSlider'
 
 export const section = cntl`
     max-w-6xl
     mx-auto
-    px-5
+    px-4
+    md:px-0
 `
 
 const Button = ({
@@ -63,23 +71,48 @@ const Button = ({
     )
 }
 
+const B2C = () => {
+    return (
+        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
+            B2C company with insane event volume?{' '}
+            <Link to="/signup/b2c" className="font-bold text-orange inline-block">
+                Apply for a discount
+            </Link>
+        </div>
+    )
+}
+
 const PricingNew = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { posthog } = useValues(posthogAnalyticsLogic)
+    const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
+    const [showPlanBuilder, setShowPlanBuilder] = useState(false)
+    const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
+    const [whyCloudOpen, setWhyCloudOpen] = useState(false)
+    const builderRef = useRef<HTMLDivElement>()
+    const { cloudCost, selfHostedCost } = useValues(pricingSliderLogic)
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
     }
 
+    useEffect(() => {
+        if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [showPlanBuilder])
+
     return (
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
+            <WhyCloud open={whyCloudOpen} setOpen={setWhyCloudOpen} />
+            <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
-                <div className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 ${section}`}>
+                <div
+                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
+                >
                     <div className="lg:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
@@ -90,107 +123,402 @@ const PricingNew = (): JSX.Element => {
                         />
                     </div>
                     <div className="lg:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl m-0">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
                             Pay per tracked event.
                             <br /> Get access to all features.
                         </h1>
-                        <h2 className="text-lg text-blue mt-2 leading-tight">
-                            <span className="text-black/50 m-0">Your first</span>{' '}
-                            <span className="inline-block">1 million events are free.</span>{' '}
-                            <span className="text-black/50 m-0">Every month.</span>
-                        </h2>
-                        <p className="m-0 text-[14px] font-semibold text-black/50">
-                            Need help{' '}
-                            <Link to="/blog/calculating-events-from-users" className="font-bold">
-                                estimating your event volume?
-                            </Link>
+                        <p className="text-[18px] text-black/75">
+                            Starts at <span className="text-lg font-bold">$0</span>/mo for your first 1 million monthly
+                            events &mdash; every month
                         </p>
                     </div>
                 </div>
             </section>
-            <div className="relative">
-                <section
-                    className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
-                >
-                    <div className="relative flex flex-col">
-                        <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
-                        <div>
-                            <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
-                                <span>Do you need to self-host?</span>
-                                <button onClick={() => handleInfo('self host')}>
-                                    <Info />
-                                </button>
-                            </h3>
-                            <p className="m-0 text-black/50 font-medium text-sm">
-                                Customer data never leaves your infrastructure or private cloud.
-                            </p>
-                            <div className="flex space-x-3 mt-3">
-                                <Button onClick={() => setSelfHost(true)} active={selfHost}>
-                                    Yes
-                                </Button>
-                                <Button onClick={() => setSelfHost(false)} active={!selfHost}>
-                                    No
-                                </Button>
+
+            <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
+                <div className="max-w-6xl mx-auto flex items-center md:px-4">
+                    <p className="font-semibold text-xs text-black/50 text-right m-0">
+                        One price, <br />
+                        full product suite:
+                    </p>
+                    <ProductPillars />
+                </div>
+            </section>
+            <section>
+                <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
+                    <div className="md:col-span-2">
+                        <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
+                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
+                                <div>
+                                    <h2 className="text-xl flex items-center">
+                                        PostHog Cloud{' '}
+                                        <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
+                                            <span className="text-black/50">Recommended</span>
+                                            <button onClick={() => setWhyCloudOpen(true)} className="text-red">
+                                                Why?
+                                            </button>
+                                        </span>
+                                    </h2>
+                                    <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
+                                </div>
+                                <div className="leading-none mt-3">
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <br />
+                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                </div>
+                                <div className="my-1">
+                                    {!showVolumeDiscounts && (
+                                        <button
+                                            className="text-orange text-xs font-bold"
+                                            onClick={() => setShowVolumeDiscounts(true)}
+                                        >
+                                            Show volume discounts
+                                        </button>
+                                    )}
+
+                                    {showVolumeDiscounts && (
+                                        <motion.div
+                                            style={{ gridTemplateColumns: '1fr' }}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                        >
+                                            <div className="col-span-2">First 1 million events/mo</div>
+                                            <strong>Included</strong>
+
+                                            <div className="col-span-2">1-2 million</div>
+                                            <strong>
+                                                $0.00045<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">2-10 million</div>
+                                            <strong>
+                                                $0.000225<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">10-100 million</div>
+                                            <strong>
+                                                $0.000075<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">100 million - 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">More than 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <B2C />
+                                        </motion.div>
+                                    )}
+                                </div>
+                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                                    <div className="flex flex-col">
+                                        <strong className="text-[16px]">Monthly estimate</strong>
+                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                    </div>
+                                    <div>
+                                        <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
+                                        <span className="text-xs text-black/60">/mo</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <TrackedCTA
+                                        event={{ name: `clicked Get started - free`, type: 'cloud' }}
+                                        type="primary"
+                                        width="full"
+                                        className="shadow-md"
+                                        to="https://app.posthog.com/signup"
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
+                                </div>
                             </div>
-                            <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
-                                <span>Are you an enterprise?</span>
-                                <button onClick={() => handleInfo('enterprise')}>
-                                    <Info />
-                                </button>
-                            </h3>
-                            <p className="m-0 text-black/50 font-medium text-sm">
-                                Advanced permissioning, proactive support, training, SSO/SAML & more
-                            </p>
-                            <div className="flex space-x-3 mt-3">
-                                <Button onClick={() => setEnterprise(true)} active={enterprise}>
-                                    Yes
-                                </Button>
-                                <Button onClick={() => setEnterprise(false)} active={!enterprise}>
-                                    No
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
-                            <StaticImage width={183} alt="Sport Hog" src="./images/sport-hog.png" placeholder="none" />
-                            <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
-                                <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
-                                <p className="text-[14px] mt-0 mb-2 text-white font-comic">
-                                    for one low monthly price?!
-                                </p>
-                                <svg
-                                    className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
-                                    width="35"
-                                    height="29"
-                                    viewBox="0 0 35 29"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                        fill="#2D2D2D"
-                                    />
-                                </svg>
+
+                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
+                                <div>
+                                    <h2 className="text-xl">Self-hosted</h2>
+                                    <p className="mb-2 text-[14px] text-black/50">
+                                        Customer data never leaves your infrastructure
+                                    </p>
+                                </div>
+                                <div className="leading-none mt-3">
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <br />
+                                    <span className="text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                </div>
+
+                                <div className="my-1">
+                                    {!showVolumeDiscounts && (
+                                        <button
+                                            className="text-orange text-xs font-bold"
+                                            onClick={() => setShowVolumeDiscounts(true)}
+                                        >
+                                            Show volume discounts
+                                        </button>
+                                    )}
+
+                                    {showVolumeDiscounts && (
+                                        <motion.div
+                                            style={{ gridTemplateColumns: '1fr' }}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                        >
+                                            <div className="col-span-2">First 1 million events/mo</div>
+                                            <strong>Included</strong>
+
+                                            <div className="col-span-2">1-2 million</div>
+                                            <strong>
+                                                $0.00045<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">2-10 million</div>
+                                            <strong>
+                                                $0.000225<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">10-100 million</div>
+                                            <strong>
+                                                $0.000075<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">100 million - 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <div className="col-span-2">More than 1 billion</div>
+                                            <strong>
+                                                $0.000025<span className="font-normal text-black/50">/event</span>
+                                            </strong>
+
+                                            <B2C />
+                                        </motion.div>
+                                    )}
+                                </div>
+
+                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                                    <div className="flex flex-col">
+                                        <strong className="text-[16px]">Monthly estimate</strong>
+                                        <span className="text-xs text-black/60">for 1,000,000 events/mo</span>
+                                    </div>
+                                    <div>
+                                        <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
+                                        <span className="text-xs text-black/60">/mo</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <TrackedCTA
+                                        event={{ name: `clicked Get started - free`, type: 'self-hosted' }}
+                                        type="primary"
+                                        width="full"
+                                        className="shadow-md"
+                                        to="https://license.posthog.com/"
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <Calculator enterprise={enterprise} selfHost={selfHost} />
-                </section>
-                <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
-            </div>
-            <section className={section}>
-                <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
-                    What comes in PostHog?
-                </h2>
+                    <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto">
+                        <div>
+                            <h2 className="text-xl flex items-baseline">
+                                Enterprise{' '}
+                                <span className="inline-flex text-xs text-black/50 font-semibold ml-2">
+                                    Cloud or self-host
+                                </span>
+                            </h2>
+                            <p className="mb-2 text-[14px] text-black/50">
+                                SSO/SAML, advanced permissions, proactive support, team training, &amp; more
+                            </p>
+                        </div>
+                        <div className="leading-none mt-3">
+                            <span className="text-black/50 text-xs font-medium block mb-1">Starts at</span>
+                            <span className="text-[18px] font-bold">$450</span>
+                            {''}
+                            <span className="text-black/75 font-semibold text-[14px]">/mo for 1 million events</span>
+                            <br />
+                            <span className="text-black/50 font-semibold text-xs block mt-1">then $0.00045/event</span>
+                        </div>
+                        <div className="my-1">
+                            {!showVolumeDiscounts && (
+                                <button
+                                    className="text-orange text-xs font-bold"
+                                    onClick={() => setShowVolumeDiscounts(true)}
+                                >
+                                    Show volume discounts
+                                </button>
+                            )}
+
+                            {showVolumeDiscounts && (
+                                <motion.div
+                                    style={{ gridTemplateColumns: '1fr' }}
+                                    initial={{ height: 0 }}
+                                    animate={{ height: 'auto' }}
+                                    className="grid text-xs gap-x-2 gap-y-2 mt-4"
+                                >
+                                    <div className="col-span-2">First 1 million events/mo</div>
+                                    <strong>Included</strong>
+
+                                    <div className="col-span-2">1-2 million</div>
+                                    <strong>
+                                        $0.00045<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">2-10 million</div>
+                                    <strong>
+                                        $0.00045<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">10-100 million</div>
+                                    <strong>
+                                        $0.00009<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">100 million - 1 billion</div>
+                                    <strong>
+                                        $0.000018<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <div className="col-span-2">More than 1 billion</div>
+                                    <strong>
+                                        $0.0000036<span className="font-normal text-black/50">/event</span>
+                                    </strong>
+
+                                    <B2C />
+                                </motion.div>
+                            )}
+                        </div>
+
+                        <div className="mt-4">
+                            <TrackedCTA
+                                event={{ name: `clicked Get started`, type: 'self-hosted-enterprise' }}
+                                type="primary"
+                                width="full"
+                                className="shadow-md"
+                                onClick={() => setEnterpriseModalOpen(true)}
+                            >
+                                Get started
+                            </TrackedCTA>
+                        </div>
+                    </div>
+                </div>
+                {!showPlanBuilder && (
+                    <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
+                        <p className="col-span-2 mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
+                            Estimate your monthly cost with our{' '}
+                            <button onClick={() => setShowPlanBuilder(true)} className="font-bold text-red">
+                                plan builder
+                            </button>
+                        </p>
+                    </div>
+                )}
+            </section>
+
+            {showPlanBuilder && (
+                <motion.div
+                    ref={builderRef}
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    className="relative md:px-4"
+                >
+                    <section
+                        className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
+                    >
+                        <div className="relative flex flex-col">
+                            <h2 className="text-xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
+                            <div>
+                                <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
+                                    <span>Do you need to self-host?</span>
+                                    <button onClick={() => handleInfo('self host')}>
+                                        <Info />
+                                    </button>
+                                </h3>
+                                <p className="m-0 text-black/50 font-medium text-sm">
+                                    Customer data never leaves your infrastructure or private cloud.
+                                </p>
+                                <div className="flex space-x-3 mt-3">
+                                    <Button onClick={() => setSelfHost(true)} active={selfHost}>
+                                        Yes
+                                    </Button>
+                                    <Button onClick={() => setSelfHost(false)} active={!selfHost}>
+                                        No
+                                    </Button>
+                                </div>
+                                <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
+                                    <span>Are you an enterprise?</span>
+                                    <button onClick={() => handleInfo('enterprise')}>
+                                        <Info />
+                                    </button>
+                                </h3>
+                                <p className="m-0 text-black/50 font-medium text-sm">
+                                    Advanced permissioning, proactive support, training, SSO/SAML & more
+                                </p>
+                                <div className="flex space-x-3 mt-3">
+                                    <Button onClick={() => setEnterprise(true)} active={enterprise}>
+                                        Yes
+                                    </Button>
+                                    <Button onClick={() => setEnterprise(false)} active={!enterprise}>
+                                        No
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
+                                <StaticImage
+                                    width={183}
+                                    alt="Sport Hog"
+                                    src="./images/sport-hog.png"
+                                    placeholder="none"
+                                />
+                                <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
+                                    <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
+                                    <p className="text-[14px] mt-0 mb-2 text-white font-comic">
+                                        for one low monthly price?!
+                                    </p>
+                                    <svg
+                                        className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
+                                        width="35"
+                                        height="29"
+                                        viewBox="0 0 35 29"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
+                                            fill="#2D2D2D"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <Calculator enterprise={enterprise} selfHost={selfHost} />
+                    </section>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+                        <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
+                    </motion.div>
+                </motion.div>
+            )}
+            <section className={`${section} pt-12 md:px-4`}>
+                <h2 className="text-xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
             </section>
-            <section className={`${section} mb-12 mt-24`}>
-                <h2 className="text-xl m-0 flex items-center after:ml-6 after:flex-grow after:border-t after:border-gray-accent-light after:border-dashed">
+            <section className={`${section} mb-12 mt-24 md:px-4`}>
+                <h2 className="text-xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     Compare all plans
                 </h2>
                 <AllPlans />
             </section>
-            <section className={`${section} mb-12 mt-24`}>
+            <section className={`${section} mb-12 mt-24 md:px-4`}>
                 <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">
                     PostHog open source
                 </h2>
@@ -247,11 +575,11 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} my-12`}>
+            <section className={`${section} my-12  md:px-4`}>
                 <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>
-            <section className="bg-primary my-12">
+            <section className="bg-primary my-12 md:px-4">
                 <Quote
                     className="py-12 md:py-16 px-5 bg-primary"
                     name={<span className="text-white">Jonathan Hyde</span>}

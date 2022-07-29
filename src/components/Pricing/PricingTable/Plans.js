@@ -38,7 +38,7 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
                     <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
                     <p className="m-0">
                         <span>
-                            <strong>$0.0003</strong>
+                            <strong>$0.00045</strong>
                             <span className="text-[13px] opacity-50">/event</span>
                         </span>
                     </p>
@@ -88,7 +88,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         First 1 million events included every month
                     </p>
                 </div>
-                <p className="text-[13px] text-black/50">Self-Serve benefits plus...</p>
+                <p className="text-[13px] text-black/50 mb-2">Self-Serve benefits plus...</p>
                 <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
                     <Feature>SQL access</Feature>
                     <Feature>Team training</Feature>

@@ -8,11 +8,11 @@ import React from 'react'
 import Link from 'components/Link'
 import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator'
 
-const Feature = ({ children }) => {
+export const Feature = ({ children }) => {
     return <li className="flex space-x-3 items-start font-semibold text-[15px] text-opacity-75">{children}</li>
 }
 
-const Scales = () => {
+export const Scales = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -25,7 +25,7 @@ const Scales = () => {
     )
 }
 
-const Tracking = () => {
+export const Tracking = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -51,7 +51,7 @@ const Tracking = () => {
     )
 }
 
-const Automatic = () => {
+export const Automatic = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -64,7 +64,7 @@ const Automatic = () => {
     )
 }
 
-const EasyDeploy = () => {
+export const EasyDeploy = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -77,7 +77,7 @@ const EasyDeploy = () => {
     )
 }
 
-const Access = () => {
+export const Access = () => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -106,7 +106,7 @@ const Access = () => {
     )
 }
 
-const Bypass = () => {
+export const Bypass = () => {
     return (
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -143,12 +143,6 @@ export default function SignUp() {
             <SEO title="Get started - PostHog" />
             <section>
                 <Intro title="How do you want to run PostHog?" />
-                <p className="text-center -mt-16 mb-12">
-                    Not sure which edition is right for you?{' '}
-                    <Link to="/pricing" className="font-semibold">
-                        Build your perfect plan.
-                    </Link>
-                </p>
                 <div className="border-t border-b border-dashed border-gray-accent-light">
                     <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
                         <Plan
@@ -159,16 +153,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
-                                    <p className="m-0">
-                                        <span>
-                                            <strong>$0.000225</strong>
-                                            <span className="text-[13px] opacity-50">/event</span>
-                                        </span>
-                                    </p>
-                                    <p className="text-blue font-semibold text-[14px] mb-0">
-                                        First 1 million events free every month
-                                    </p>
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <span className="text-black/50 text-xs font-medium block">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
@@ -194,9 +181,7 @@ export default function SignUp() {
                                 <p className="text-[13px] text-center mt-4 mb-0 min-h-[40px]">
                                     <span className="font-semibold">Enterprise plan available</span> with advanced
                                     permissioning, proactive support, training, SSO/SAML.{' '}
-                                    <Link to="/signup/self-host/get-in-touch?plan=enterprise#contact">
-                                        Contact sales
-                                    </Link>
+                                    <Link to="/signup/cloud/enterprise">Contact sales</Link>
                                 </p>
                             </div>
                         </Plan>
@@ -207,16 +192,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
-                                    <p className="m-0">
-                                        <span>
-                                            <strong>$0.0003</strong>
-                                            <span className="text-[13px] opacity-50">/event</span>
-                                        </span>
-                                    </p>
-                                    <p className="text-blue font-semibold mb-0 text-[14px]">
-                                        First 1 million events free every month
-                                    </p>
+                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
+                                    <span className="block text-black/50 text-xs font-medium">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
