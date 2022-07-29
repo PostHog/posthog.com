@@ -5,13 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
+categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
 
 import { Link } from 'gatsby'
-import { Button } from 'antd'
 
 Release 1.21 is a big one, on top of exciting new features and improvements, we put extra time into the overall stability of PostHog squashing dozens of issues. Some highlights of this release:
 
@@ -25,11 +24,13 @@ We received a lot of great feedback and issue reports and over this release cycl
 
 Make sure to upgrade to get the new features, improvements and fixes.
 
-<Link to="/docs/deployment">
-    <Button className="center" type="primary" size="large">
-        Install PostHog
-    </Button>
-</Link>
+<br />
+
+<div class="flex items-center justify-center">
+  <CallToAction to="/docs/deployment">
+    Install PostHog
+  </CallToAction>
+</div>
 
 <br />
 
@@ -383,4 +384,3 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 -   Enable SSL PostgreSQL configuration through env variables [\#2967](https://github.com/PostHog/posthog/pull/2967) ([tmilicic](https://github.com/tmilicic))
 
 <ArrayCTA />
-

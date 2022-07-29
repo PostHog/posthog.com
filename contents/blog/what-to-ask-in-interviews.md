@@ -55,13 +55,13 @@ If there is no product-market fit, but you think the team could find it, it's ve
 
 This means that the company whilst not profitable, is growing fast enough that it will become profitable ahead of running out of money.
 
-Avoid:
+This means:
 
-* Companies that don't know this or don't care about it, given [the current climate](https://techcrunch.com/2022/05/06/the-venture-slowdown-isnt-coming-its-here/) – this may change in an easier fundraising environment for early stage, capital-intense business models
+* Avoid companies that don't know if they're default alive or don't care about it, given [the current climate](https://techcrunch.com/2022/05/06/the-venture-slowdown-isnt-coming-its-here/) – this may change in an easier fundraising environment for early stage, capital-intense business models
 
-* Companies that you don't believe could get to default alive due to a lack of time and speed to get stuff done
+* Avoid companies that you don't believe could get to default alive because they don't have enough time or are too slow to get things done
 
-There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates – if I went from $1 to $2 of revenue yesterday, we'd be pretty darn rich if we kept that growth rate up.
+There are exceptions. For example, very low revenue numbers may lead to unrealistic growth rates – if I went from $1 to $2 of revenue yesterday, I'd be pretty darn rich if I kept that growth rate up.
 
 - "What's your runway?" 
 - "What assumptions are you making to calculate this?" 
@@ -77,15 +77,13 @@ Avoid:
 
 * Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
- <NewsletterForm
-compact
-/>
+<NewsletterForm compact />
 
 ## What's the culture like?
 
 - "What are the company values, and why? Can you give me some specific ways you've followed them?"
 - "Who decides what to build?"
-- "How does a typical workday look?"
+- "What does a typical workday look?"
 - "What are the things or behaviors that would cause a person in this role to fail?"
 
 We get the above a bit more often, they're good questions.
@@ -97,9 +95,9 @@ We get the above a bit more often, they're good questions.
 - "How do you attract and retain really strong hires?"
 - "Do you share board slides with the team?"
 
-If you want to learn in this role - do you believe this company is able to attract people who are as good as or better than you?
+If you want to learn in this role ask yourself: do you believe this company is able to attract people who are as good as or better than you?
 
-You are trying to understand if they view engineering as a cost center (aka higher propensity you'll be miserable there!) or not. Thoughtful answers to how to hire and pay people indicate this is prioritized. Sharing more information rather than less shows trust and partnership with employees.
+You are trying to understand if they view engineering as a cost center (aka a higher chance you'll be miserable there!) or not. Thoughtful answers to how to hire and pay people indicate this is prioritized. Sharing more information rather than less shows trust and partnership with employees.
 
 ## What's in store in the future?
 

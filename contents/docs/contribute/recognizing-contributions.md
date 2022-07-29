@@ -49,3 +49,6 @@ While we have created cards for all past contributors, the we have only started 
 'Powers' refer to the types of contributions you've made to PostHog. The types of contributions available can be seen on the [All Contributors spec](https://allcontributors.org/docs/en/emoji-key).
 
 Contributions of type `code` are automatically provided to you for merged pull requests. All other contribution types must be manually requested by a member of the PostHog team.
+
+### Sending out merch
+Follow instructions on [giving away merch for free](/handbook/company/merch-store)

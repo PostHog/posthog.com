@@ -54,7 +54,7 @@ PostHog Scale is a paid edition that adds [Experimentation](/product/experimenta
           <td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Matomo On-Premise</strong></td>
         	<td className="w-3/12 text-center"><strong>PostHog Open Source</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog Scale</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Self-Hosted</strong></td>
     	</tr>
 	</thead>
 	<tbody>

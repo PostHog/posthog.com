@@ -76,12 +76,12 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 ### 1. Spin up external services
 
-In this step we will install ClickHouse, Kafka, MinIO, PostgreSQL, Redis and Zookeeper via Docker.
+In this step we will start all the external services needed by PostHog to work.
 
-First, run the services in Docker:
+We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
 
 ```bash
-docker compose -f docker-compose.dev.yml up clickhouse kafka object_storage db redis zookeeper
+docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
@@ -188,7 +188,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
     ```bash
-    brew install openssl
+    brew install openssl brotli
     CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
@@ -276,6 +276,8 @@ This means that your activity is immediately reflected in the current project, w
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+
+This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
 ## Extra: Debugging the backend in PyCharm
 

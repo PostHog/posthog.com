@@ -31,11 +31,6 @@ The release manager is ultimately responsible for the timeline of the release. T
 ### Pre-release (Wednesday before the release)
 
 1. [ ] Start the `release-[version]` branch from `master` to initiate the code freeze.
-1. [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array. In addition, you can look for the `highlight` tag in PRs but be mindful it's not used very consistently.
-  ```bash
-  git checkout release-[version]
-  git log --pretty=format:"%s %ae" [old-version]..head > log.txt
-  ```
 1. [ ] Update the `VERSION` value in `posthog/version.py` and add an appropriate entry in `posthog/versions.json`. Then commit those changes:
   ```bash
   git checkout release-[version]
@@ -51,8 +46,8 @@ The release manager is ultimately responsible for the timeline of the release. T
   > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the next steps. You can install all of these with `brew install doctl helm k9s`.
 
 1. [ ] Upgrade PostHog playground
-    1. The PostHog Playground uses a helm chart deployment on Digital Ocean. Find the playground cluster in our [Digital Ocean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
-    1. If this is your first time on Digital Ocean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
+    1. The PostHog Playground uses a helm chart deployment on DigitalOcean. Find the playground cluster in our [DigitalOcean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
+    1. If this is your first time on DigitalOcean, you'll see the below screen. If it's not, or you don't see the Getting Started flow, click "Remind me how to use this file to connect to the cluster" in the "Config file" section under the "Overview" tab. Click Get Started.
 
       ![PostHog - Get Started Kubernetes](../../images/05/digital_ocean_release_01.png)
 
@@ -80,7 +75,12 @@ The release manager is ultimately responsible for the timeline of the release. T
     1. If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
     1. Optional: Verify playground is running the latest image by running `kubectl get pod --namespace posthog`. In the output of that command, you should see a row like `posthog-web-6447ff5fdf-gs664`. Copy this row (the numbers after `posthog-web-` will be different), and then run `kubectl  describe pod --namespace posthog posthog-web-6447ff5fdf-gs664`. If you scroll up in that output, you should see a line like `Image: posthog/posthog@sha256:daf43a4a4cd06658e41273bb8fe4a74f17b295d67c6f1e16c17243b5d09af7ee`. This is the sha of the image that is running. You can compare this to the sha in Docker Hub to verify that the image is the latest.
     1. Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
-1. [ ] Time for the "Break the release" session! It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub to avoid any potential bugs creeping up in the final build stage.
+1. [ ] Time for the "Break the release" session! It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub to avoid any potential bugs creeping up in the final build stage. You're responsible for running the session, prepare the [release checklist doc](https://docs.google.com/document/d/1tyTChgLM8ZKCIyP05yDeyzS7y-s2ii5lm5WltREO3so) by adding the template at the top.
+1. [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `changelog.txt`, sorted by PR [type and scope](https://www.conventionalcommits.org/en/). You can use this list to obtain external contributions to highlight in the Array. In addition, you can look for the `highlight` tag in PRs but be mindful it's not used very consistently.
+  ```bash
+  git checkout release-[version]
+  git log --pretty=format:"%s %ae" [old-version]..head | sort -t ':' -k 1,1 -s > changelog.txt
+  ```
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
 1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 

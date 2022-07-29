@@ -8,44 +8,70 @@ hideAnchor: true
 
 ## Our approach to hiring 
 
-Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams). So our hiring process is designed to optimize for 3 things -  speed, quality and experience! 
-
+Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams).
 
 ## Hiring Process
 
-The following page outline how we hire here at PostHog. 
+### Summary of process for current live roles
 
-> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [marketing](/handbook/people/hiring-process/marketing-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
+| **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
+|---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Senior Product Manager    | GMT -8:00 to +2:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | [Senior Product Manager Task](https://github.com/PostHog/company-internal/blob/master/superdays/product-manager.md) |
+| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
+| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
+| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
+| Technical Content Marketer       | GMT -8:00 to +2:00                   | Marketing   | Charles | 1) Culture Screen - Charles<br/> 2) Technical Screen - James H & Andy<br/> 3) SuperWeek Assessment - Charles, Andy, Tim, James H., Joe | [Technical Content Marketer Task](https://docs.google.com/document/d/1jR7lcNrF_-x-Pczaa5deGnIlkyHuXe2fARwBryie8sU/edit?usp=sharing) |
 
-All of our recruiting is done in-house, so we do not work with external agencies for any of our roles currently. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
+Tasks are only available internally - please do not share these publicly. 
+
+### External recruiters
+
+All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
 ### Deciding to hire
 
 [‘Talent Compounds’](https://posthog.com/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
 
-We use [Pry](https://app.pry.co/posthog-core/main/hiringplan/employees) to plan our hiring forecast. We use the hiring forecast as a guide, but we have the ability to iterate on this at any time. We are super responsive to changes PostHog's needs. 
+We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterate on this pretty much every month, so we can stay super responsive to changes PostHog's needs. Typically we know:
 
-For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=eltjehelene&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone in the company will have the opportunity to give their feedback on the proposed role, before we officially open it. 
+- 3 months out - exact job titles we want to hire for, and in which month
+- 6 months out - number of each type of job (e.g. 1x designer, 3x engineer)
+- 12-24 months out - number of hires overall we want to add to the team
 
-#### **How to write a great job description**
+For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=couaphang&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone will have the opportunity to give their feedback on the proposed role before we publish it.
 
-We generally structure our job description in the following way, which Workable optimizes for:
+### The role of the Hiring Manager
 
-1. Describe the company, role and impact 
-2. Skills needed in order to be successful
-3. What we offer in return
-4. Call to action
+The hiring manager is a role assigned to the person who will work most closely with the People & Ops team to make a hire. Usually this is the person who will manage the new hire or is a Small Team lead. 
 
-We have plenty of examples of previous roles available on Workable. Section 3 and 4 are also saved on Workable as templates, and can be copy/pasted from current roles. When writing a job description, make sure it’s written in a clear and engaging way, with our target audience in mind. 
+If you are a hiring manager for a role, you will usually:
+- Give input into the job spec to make sure it's right
+- Give the People & Ops team feedback on candidates 
+- Conduct the technical interview
+- Kick off the SuperDay and be the candidate's main point of contact on the day
+- Make the offer call 
 
-Once the details of the role have been agreed on, the talent team can add the role to Workable and all relevant job boards. 
+#### How to write a great job description
 
+The People & Ops team will then write up the full job description in Workable. 
+
+As we keep iterating on our specs, the best approach is to copy our most recently advertised role over in Workable. We find the following approaches work well:
+- Being extremely clear and precise about what this person will actually be working on (including linking to example PRs/Issues of similar work in GitHub where possible)
+- Sharing why this role specifically is exciting, and the impact they will get to have
+- Linking to as much useful contextual information as possible, including the small team they will be working on
+- Using the absolute minimum number of requirements needed - 5 'must-haves' absolute max
+- Run the text through a [gender decoder tool](https://gender-decoder.katmatfield.com/) to check for unconscious bias
+- Don't use specific years of experience as a qualifier
+
+Once the hiring manager has signed off on the spec, we will publish it on Workable. 
+
+In order to get coverage in multiple timezones, we usually clone a job post across London, New York and San Francisco locations, but then push all applicants into a single pipeline after the first interview. Unfortunately Workable doesn't have a good way to manage truly remote global roles. 
 
 #### Job boards
 
-Workable will automatically add the role on our [careers page](https://posthog.com/careers), and publish the job descriptions on 17 free job boards, including LinkedIn, Glassdoor, Indeed, AngelList etc. We also manually add the role to YC's [Work at a Startup](https://www.workatastartup.com/jobs). 
+Workable will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Workable and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will also automatically pull all our new roles through. 
 
-For certain roles, we also publish on other job boards. 
+We also add all roles to YC's [Work at a Startup](https://www.workatastartup.com/jobs). For certain roles, we also publish on other job boards:
 
 **Design**
 
@@ -54,46 +80,29 @@ For certain roles, we also publish on other job boards.
 
 **Engineering**
 
-*   Hacker News Who's Hiring
-    *   Tend to get high quality candidates, and people interested in working at startups.
-    *   See [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
+*   Hacker News Who's Hiring - see [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
+*   [The Pragmatic Engineer](https://pragmatic-engineer.pallet.com/jobs)
 
 **Product**
 
 *   [Mind the Product](https://www.mindtheproduct.com/)
 *   [ProductHunt](https://www.producthunt.com/)
-
-**Remote**
-
-*   [WeWorkRemotely](https://weworkremotely.com/) 
-    *   High volume of candidates, often low quality.
-*   [RemoteOK](https://remoteok.io/)
-    *   Also high volume of candidates, similar quality.
-
-Once the role is online, the People team will share the details with the team, to encourage referrals. 
+*   [Lenny's Job Board](https://lennys-jobs.pallet.com/jobs)
 
 
 #### Referrals
 
-Every time we open a new role, we will share the details and ideal profile with the team during All Hands on Monday.
+Every time we open a new role, we will share the details and ideal profile with the team during All Hands.
 
 **Personal referral** 
 
-If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice - and we will match the amount! You can also split the amount between you and the charity.
+If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice where we will match the amount! You can also split the amount between you and the charity.
 
 Please make sure the candidate has given their consent before putting them forward. 
 
-We occasionally open up short term contracts, and you'll receive a $1,000 referral bonus if you recommend someone here to! The contract just needs to be on a full time basis and at least 3 months long.
+We occasionally open up short term contracts, and you'll receive a $1,000 referral bonus if you recommend someone here too! The contract just needs to be on a full time basis and at least 3 months long.
 
 Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
-
-**Social referral** 
-
-The [Workable referral page](https://referrals.workable.com/posthog/jobs/) makes it super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
-
-If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
-
-The referral bonus for social referrals is $500, and we again match any amount you choose to give to charity.  
 
 **What's the process?**
 
@@ -101,11 +110,19 @@ The referral bonus for social referrals is $500, and we again match any amount y
 *   Otherwise, please upload the profile to the [Workable referral page](https://referrals.workable.com/posthog/jobs/). 
 *   If they have applied themselves already, let careers@ know within 48 hours of them applying.
 
+**Social referral** 
+
+The [Workable referral page](https://referrals.workable.com/posthog/jobs/) makes it super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
+
+If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
+
+The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
+
 **Referral payouts** 
 
-The bonus date is 3 months from the new team member's start date and will be processed as part of payroll - bear in mind that you might be liable for income tax on the bonus. 
+You'll get paid the bonus 3 months from the new team member's start date, and it will be processed as part of payroll. Bear in mind that you might be liable for income tax on the bonus. 
 
-**External referrals** 
+**Non-team referrals** 
 
 We also welcome external referrals, e.g. from:
 
@@ -117,7 +134,7 @@ As a thank you, we will give you $50 credit for our [merch shop](https://merch.p
 
 ## Managing candidates
 
-All of our candidates are managed in [Workable](https://posthog.workable.com/backend) - please ask Eltje or Charles for an invite to view candidates, leave feedback, and schedule meetings. 
+All of our candidates are managed in [Workable](https://posthog.workable.com/backend) - please ask Coua or Charles for an invite to view candidates, leave feedback, and schedule meetings. 
 
 We record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog.
 
@@ -125,66 +142,48 @@ Workable is a pretty intuitive platform to use, but here are a few helpful tips 
 
 *   [A guide to getting started with the basics](https://help.workable.com/hc/en-us/articles/360038712074-Hiring-Manager-Getting-Started-) - this is pretty much everything you need if you are mainly using Workable to leave feedback on candidates you've met, but are otherwise not involved in the recruitment process.
 *   Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Workable record for everyone on the hiring team to see.
-*   When emailing candidates from within Workable, you can select a Template from the drop down bar (and customise it if you want). If you find yourself writing the same email, it is worth saving as a template.
+*   When emailing candidates from within Workable, you can select a Template from the drop down bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
-If we receive an application via email or if someone contacts us through a non-Workable channel like Slack, we can either:
-
-*   Forward their email onto our dedicated Workable email address - this is the most effective option.
-*   If you think they are a strong candidate but they didn't email, introduce them directly to us via our careers email address.
-*   As a last resort, ask them to apply via the relevant link on our [Careers page](https://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
+If you receive an application via email or some other non-Workable channel like Slack, pass it on to careers@posthog.com. 
 
 ## Sourcing
 
-For most roles, we can’t just rely on incoming applications - direct outreach is a great way to influence the hiring pipeline. Direct outreach has a few advantages:
+For most roles, we don’t just rely on incoming applications. Direct outreach is a great way to influence the hiring pipeline, and enables us to:
 
-*   We can approach people with very specific or relevant experience, even when they are not currently looking for a new role
-*   It allows us to encourage candidates from a wider range of backgrounds to apply
-*   It also helps with building an employer brand and general awareness
+*   Approach people with very specific or relevant experience, even when they are not currently looking for a new role
+*   Encourage candidates from a wider range of backgrounds to apply
+*   Build our employer brand and general awareness
 
-It is possible to research a list of potential candidates through:
+Good places to look for people include:
 
-*   Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-) is a great tool to find profiles, email addresses and social media profiles!
+*   Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-)
 *   LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
 *   Twitter
-*   Behance
-*   Dribble
+*   GitHub
+*   StackOverflow
 *   AngelList
 
-It is important before starting outreach like this that we consider _why_ a candidate messaged through this approach would move to us, so that our note to them can explain why we felt it might be a nice fit.
+Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite license (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
 
+### Booking interviews through Workable
 
-### Booking meetings
+**Schedule interviews through Workable itself.** Do not use Google Calendar, otherwise the event won't be populated with useful candidate info and we won't have a record of the meeting anywhere. 
 
-To book meetings through Workable, the Google Calendar and Zoom accounts need to be connected under Settings first - this enables us to schedule meetings from within Workable itself. This way, Workable will automatically populate the calendar invitation with all the useful info for interviewers like resumes so we don't need to do it manually.
+When we book a meeting, we have the option of selecting a Google Meet or Zoom call.  Zoom should be the default, unless we are scheduling a meeting where the organizer is not attending themselves, in which case use Google Meet (as Zoom will requires the host to attend).
 
-When we book a meeting, we have the option of selecting a Google Meet or Zoom call.  Zoom should be the default, unless we are scheduling a meeting where the organised is not attending themselves, in which case use Google Meet (as Zoom will requires the host to attend).
+## Hiring process overview
 
-
-## Our interview process
-
-The general interview process we follow at PostHog is outlined below. We also wrote up specific details on the interview panels for all current openings. 
-
-| **Position title**        | **Location  (we're happy to hire in)** | **Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
-|---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Product Manager    | GMT -08:00 to +02:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | Not created yet                |
-| Senior Data Engineer      | GMT -05:00 to +02:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.& Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Senior Data Engineer Task]()  |
-| Site Reliability Engineer | GMT -08:00 to +02:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & James H.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [Site Reliability Engineer]()  |
-| Developer Advocate        | GMT 0:00 to +02:00                     | Markerting      | Charles     | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & James H.<br/> 3) SuperDay Assessment - Charles, Joe, Andy, Tim & Grace             | [Dev Advocate Task]()          |
-| Full Stack Engineer       | GMT -08:00 to -05:00                   | Websites & Docs | Cory W.     | 1) Culture Screen- Coua<br/> 2) Technical Screen - Cory & Tim<br/> 3) SuperDay Assessment - Cory, Tim, Eli, Lottie, James H. & Charles           | Live Task (link not available) |
-| Full Stack Engineer       | GMT -08:00 to +-2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
-
+> A good rule of thumb when deciding whether not to progress at any stage - if the candidate doesn't get a _definite yes_ then assume it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
 
 ### Application
 
-The Talent team reviews applications and resumes/portfolios carefully and leaves their feedback as a Comment on the candidate's record in Workable.
+The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Workable if relevant.
 
-If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. It is understandable why people don't do this, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
+If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
-> A good rule of thumb when deciding whether not to progress - if the candidate doesn't get a _definite yes_ then it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
+Candidates who are unsuccessful at this stage will receive an automated rejection email, unless they personalized their application, in which we will try to send a personalized reply.
 
-Candidates who are unsuccessful at this stage will receive automated feedback, unless they personalized their application, in which we will try to send a personalized reply.
-
-### Culture interview with the talent team
+### First interview - culture interview with People & Ops 
 
 We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Workable.
 
@@ -192,39 +191,36 @@ This is to allow both PostHog and the candidate to assess whether the candidate 
 
 This round is loosely structured into 4 different sections:
 
-1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front.
+1. (If we sourced them) PostHog - quick intro about the company and role
 2. Candidate background and mindset
 3. Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned.
 4. Answer any open questions
 
-Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
+Candidates who are unsuccessful at this stage should receive a short personalized email with feedback. 
 
-### Technical interview with the hiring team
+### Second interview - technical interview with the Hiring Manager
 
-In this round, the candidate will meet a couple of future team members. This round is usually between 60-90 minutes and will focus on a mix of motivation, technical skills/experience and mindset. Please check the specific hiring process for each team for more details.  
+In this round, the candidate will meet a 1-2 future team members. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
 
-As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_.
+As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
 
-Candidates who are unsuccessful at this stage should receive a personalized email with feedback.
+Candidates who are unsuccessful at this stage should receive a personalized email with feedback, including a few bullets that are quite specific. 
 
+### Final round - PostHog SuperDay
 
-### PostHog SuperDay
+The final stage of our interview process is what we call a PostHog SuperDay. This is a paid full day of work with us, which we can flexibly arrange around the candidate's schedule.
 
-The final stage of our interview process is what we call a PostHog SuperDay. This is a paid full day of work with us, which we can flexibly arrange around the candidates schedule.
+> If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate will never lose out because they are not available to do a SuperDay right away.
 
-The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of our team members, and if they haven’t already, our founders.
+The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of our team members, and if they haven’t already, our founders. This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
-
-> If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate should also never lose out because they are not available to do a SuperDay right away.
-
-We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice.
+We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice.
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. 
 
-There will also be someone having a casual chat with the candidate. This person is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
-
 Overall, the candidate should aim to spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we will base our decision on the output of the day. 
+
+> For everyone on the PostHog team meeting a candidate, ask yourself - will this person raise the bar at PostHog? The answer should be yes if we want to hire them. 
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 
@@ -236,16 +232,13 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 *   (One day after the SuperDay) Pay the candidate using the bank details they provided.
 
-
 ### Decide if we will hire
 
-After a SuperDay, everyone involved in the day leaves their feedback on Workable. In case of any misalignment or open questions, or if there are wildly different opinions, you should open an issue in `company-internal` to discuss. 
+> We aim to make a decision within 48 hours of SuperDay - being decisive is important at this stage, as great candidates will probably be fielding multiple job offers. 
 
-Responsiveness at all stages is really important to us - at each stage of the process, we should aim to get back to candidates with feedback within 48 hours. It is not ok to leave candidates waiting for weeks, or for someone to apply and never hear back from us.
+After a SuperDay, everyone involved in the day leaves their feedback on Workable. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
 
-In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
-
-If a decision is made to hire, you should also open an issue in `company-internal` to give the team context about who the person is and why they were hired. It is helpful to include:
+If a decision is made to hire, the People & Ops team will also open an issue in `company-internal` to give the team context about who the person is and why they were hired. It is helpful to include:
 
 - Role background: what they will be doing, and a summary of the recruitment process (how long open for, no. of applicants etc.)
 - Who we are hiring: a brief intro
@@ -253,17 +246,19 @@ If a decision is made to hire, you should also open an issue in `company-interna
 - Start date and location
 - Share the output of their SuperDay (if it contains personal info, you can just share the task)
 
+If we don't make an offer, it's important to clearly outline to the candidate why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
+
 ### Making the offer
 
 Hooray!
 
-The Talent Team will prepare the offer details and arrange a time for the hiring manager to make the offer call. 
+The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and the hiring manager. 
 
-During the offer call, the hiring manager will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
+During the offer call, the Hiring Manager will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
 
-The talent team will then follow up with an offer email, outlining all details. 
+The People & Ops team will then follow up with an offer email, outlining all details. 
 
-Once the candidate accepts, the People team will kick off the [onboarding process](https://posthog.com/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
+Once the candidate accepts, the People & Ops team will kick off the [onboarding process](https://posthog.com/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
 ## Visa sponsorship
 
@@ -274,4 +269,4 @@ Building a diverse team is at the heart of our culture at PostHog and we are pro
 
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.
 
-In case a candidate needs a visa sponsorship, please keep in mind that the process is lengthy and costly.
+If a candidate needs visa sponsorship, please keep in mind that the process is lengthy and costly.

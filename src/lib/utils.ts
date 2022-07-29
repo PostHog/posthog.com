@@ -15,6 +15,10 @@ export const unsafeHash = (str: string) => {
     return String(a)
 }
 
+export const classNames = (...classes: (string | null | undefined)[]) => {
+    return classes.filter(Boolean).join(' ')
+}
+
 export const getPluginImageSrc = (plugin: LibraryPluginType) =>
     plugin.imageLink
         ? plugin.imageLink
@@ -72,6 +76,7 @@ export const scrollWithOffset = (id: string, offset: number) => {
 
 // tests email address for RFC 5322 compliance
 export function isValidEmailAddress(email: string): boolean {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(String(email).toLowerCase())
 }
