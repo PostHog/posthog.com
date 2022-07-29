@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/cookieless-tracking.png
 featuredTutorial: false
-date: 2022-06-28
+date: 2022-06-29
 author: ['joe-martin']
-topics: ['tracking', 'cookies', 'privacy', 'gdpr']
+topics: ['configuration']
 ---
 
 Level: Medium 🦔🦔
@@ -37,7 +37,8 @@ As for _why_, this information is tracked only so that PostHog can work optimall
 
 If you don’t want to store data in a cookie, you have two other options for where data can be stored: localStorage, or page memory. 
 
-- **localStorage:** This stores all information locally, with the user. The downside of this approach is that it cannot be used across subdomains — so if you have a project which requires this then we strongly recommend using cookies instead. 
+- **localStorage:** This stores all information locally, with the user. The downside of this approach is that it cannot be used across subdomains — so if you have a project which requires this then we strongly recommend using cookies instead.
+ 
 - **Page memory:** This stores all events within the page’s short-term memory. This is great for avoiding cookies, but data only persists for the duration of the page view. Returning users will be viewed as _new_ users. 
 
 ## Step 2: Configure persistence
@@ -50,7 +51,7 @@ If you’ve not set up the Javascript client yet, you’ll need to do that first
 yarn add posthog-js
 ```
 
-To finish installation, include it it in your files:
+To finish installation, include it in your files:
 
 ```
 import posthog from 'posthog-js'
