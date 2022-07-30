@@ -1,6 +1,6 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { Facebook, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
+import { Edit, Facebook, Issue, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -282,6 +282,7 @@ export default function PostLayout({
     menu,
     article = true,
     title,
+    filePath,
 }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
@@ -308,7 +309,6 @@ export default function PostLayout({
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
                     </button>
                     <SearchBar />
-                    <DarkModeToggle />
                 </div>
             )}
             {menu && (
@@ -363,32 +363,51 @@ export default function PostLayout({
                         </div>
                     )}
                 </article>
-                <aside className="flex-shrink-0 w-full justify-self-end pb-20 my-10 lg:my-0 mr-auto h-full">
+                <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
                     <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                         {sidebar && <div className="pt-6 top-10 sticky">{sidebar}</div>}
-                        {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                            <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6 sticky bottom-10">
-                                <h4 className="text-[13px] mb-2">On this page</h4>
-                                <Scrollspy
-                                    key={title}
-                                    offset={-50}
-                                    className="list-none m-0 p-0 flex flex-col space-y-[10px]"
-                                    items={tableOfContents?.map((navItem) => navItem.url)}
-                                    currentClassName="active-product"
+                        <div className="lg:pt-12 !border-t-0 mt-auto sticky bottom-5">
+                            {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
+                                <div className="px-5 lg:px-6">
+                                    <h4 className="text-[13px] mb-2">On this page</h4>
+                                    <Scrollspy
+                                        key={title}
+                                        offset={-50}
+                                        className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                        items={tableOfContents?.map((navItem) => navItem.url)}
+                                        currentClassName="active-product"
+                                    >
+                                        {toc.map((navItem, index) => (
+                                            <li className="relative leading-none" key={navItem.url}>
+                                                <InternalSidebarLink
+                                                    url={navItem.url}
+                                                    name={navItem.value}
+                                                    depth={navItem.depth}
+                                                    className="hover:opacity-100 opacity-60 text-[14px]"
+                                                />
+                                            </li>
+                                        ))}
+                                    </Scrollspy>
+                                </div>
+                            )}
+                            <div className="px-5 lg:px-6 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <Link
+                                    href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                    className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
                                 >
-                                    {toc.map((navItem, index) => (
-                                        <li className="relative leading-none" key={navItem.url}>
-                                            <InternalSidebarLink
-                                                url={navItem.url}
-                                                name={navItem.value}
-                                                depth={navItem.depth}
-                                                className="hover:opacity-100 opacity-60 text-[14px]"
-                                            />
-                                        </li>
-                                    ))}
-                                </Scrollspy>
+                                    <Edit />
+                                </Link>
+                                <Link
+                                    href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                    className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                >
+                                    <Issue />
+                                </Link>
+                                <div className="!ml-auto">
+                                    <DarkModeToggle />
+                                </div>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </aside>
             </div>

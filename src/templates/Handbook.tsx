@@ -80,6 +80,7 @@ export default function Handbook({
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
+    const filePath = post?.parent?.relativePath
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
@@ -143,6 +144,7 @@ export default function Handbook({
             <Layout>
                 <PostLayout
                     title={title}
+                    filePath={filePath}
                     questions={<CommunityQuestions />}
                     menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
@@ -242,7 +244,7 @@ export const query = graphql`
                 ... on File {
                     relativePath
                     fields {
-                        gitLogLatestDate(formatString: "MMM D, YYYY")
+                        gitLogLatestDate(formatString: "MMM DD, YYYY")
                     }
                 }
             }
