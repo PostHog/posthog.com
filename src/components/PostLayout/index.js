@@ -12,6 +12,7 @@ import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { push as PushMenu } from 'react-burger-menu'
+import Tooltip from 'components/Tooltip'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -391,18 +392,26 @@ export default function PostLayout({
                                 </div>
                             )}
                             <div className="px-5 lg:px-6 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
-                                <Link
-                                    href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                    className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                >
-                                    <Edit />
-                                </Link>
-                                <Link
-                                    href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                    className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                >
-                                    <Issue />
-                                </Link>
+                                <Tooltip title="Edit post">
+                                    <span className="relative">
+                                        <Link
+                                            href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                            className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                        >
+                                            <Edit />
+                                        </Link>
+                                    </span>
+                                </Tooltip>
+                                <Tooltip title="Raise an issue">
+                                    <span className="relative">
+                                        <Link
+                                            href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                            className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                        >
+                                            <Issue />
+                                        </Link>
+                                    </span>
+                                </Tooltip>
                                 <div className="!ml-auto">
                                     <DarkModeToggle />
                                 </div>
