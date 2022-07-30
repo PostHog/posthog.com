@@ -30,9 +30,7 @@ export const OpenRoles = () => {
                             contribute to one of our{' '}
                             <a href="https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">
                                 good first issues
-                            </a>{' '}
-                            or build an app as part of our{' '}
-                            <a href="https://github.com/PostHog/posthog/issues/8437">app bounty</a>.
+                            </a>.
                         </p>
                         <p>
                             <em>
