@@ -50,9 +50,9 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 
 export function Footer(): JSX.Element {
     return (
-        <footer className="max-w-screen-2xl mx-auto mt-20 pb-9 px-4 leading">
-            <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 max-w-6xl mx-auto">
-                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap">
+        <footer className="mt-20 leading">
+            <div className="py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 w-full">
+                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap max-w-6xl mx-auto px-4">
                     <li className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
                         <Logo noText />
                     </li>
@@ -78,7 +78,7 @@ export function Footer(): JSX.Element {
                     />
                 </ul>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0 px-4">
                 <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
                     <Accordion title={'Product analytics suite'} titleClasses={linksHeadingLg}>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
@@ -240,34 +240,36 @@ export function Footer(): JSX.Element {
                     </Accordion>
                 </div>
             </div>
-            <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 items-center text-base max-w-6xl mx-auto">
-                <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4">
-                    <li>
-                        <Link
-                            to="/docs/contribute/code-of-conduct"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Code of conduct
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/privacy"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Privacy
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/terms"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Terms
-                        </Link>
-                    </li>
-                </ul>
+            <div className="py-5 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
+                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center text-base px-5">
+                    <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
+                    <ul className="m-0 p-0 list-none sm:ml-auto flex sm:space-x-8 space-x-4 mt-2 sm:mt-0">
+                        <li>
+                            <Link
+                                to="/docs/contribute/code-of-conduct"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Code of conduct
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/privacy"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Privacy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/terms"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Terms
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </footer>
     )
