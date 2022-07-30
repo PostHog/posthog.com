@@ -124,6 +124,10 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
                 nodes {
                     id
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -347,12 +351,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const postCategories = node.frontmatter.categories || []
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
             context: {
                 id: node.id,
-                categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                tableOfContents,
+                categories: postCategories.map((category) => ({ name: category, url: categories[category].url })),
                 slug,
             },
         })

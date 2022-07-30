@@ -57,11 +57,11 @@ export const SidebarSection = ({ title, children, className = '' }) => {
 export const Topics = ({ topics }) => {
     return (
         <ul className="list-none p-0 flex items-start flex-wrap -m-1">
-            {topics.map(({ title, url, state }) => {
+            {topics.map(({ name, url, state }) => {
                 return (
-                    <li className="m-1" key={title}>
+                    <li className="m-1" key={name}>
                         <Chip state={state} className="text-red hover:text-red" href={url} size="xs">
-                            {title}
+                            {name}
                         </Chip>
                     </li>
                 )
@@ -274,6 +274,23 @@ const TableOfContents = ({ menu, handleLinkClick }) => {
     )
 }
 
+const Breadcrumb = ({ crumbs }) => {
+    return (
+        <ul className="list-none flex m-0 p-0 mb-2">
+            {crumbs.map(({ name, url }) => {
+                return (
+                    <li
+                        key={url}
+                        className='after:content-["/"] after:mx-1 after:text-gray-accent-light last:after:hidden'
+                    >
+                        <Link to={url}>{name}</Link>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 export default function PostLayout({
     tableOfContents,
     children,
@@ -284,6 +301,7 @@ export default function PostLayout({
     article = true,
     title,
     filePath,
+    breadcrumb,
 }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
@@ -304,14 +322,14 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper">
-            {menu && (
-                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                {menu && (
                     <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
                     </button>
-                    <SearchBar />
-                </div>
-            )}
+                )}
+                <SearchBar />
+            </div>
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -355,21 +373,24 @@ export default function PostLayout({
                     id="content-menu-wrapper"
                     className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
                 >
-                    <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
-                        {children}
+                    <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto'}`}>
+                        {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
+                        <div className="article-content">{children}</div>
                     </div>
                     {questions && (
-                        <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto article-content'}`}>
-                            {questions}
-                        </div>
+                        <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto'}`}>{questions}</div>
                     )}
                 </article>
                 <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
                     <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                        {sidebar && <div className="pt-6 top-10 sticky">{sidebar}</div>}
-                        <div className="lg:pt-12 !border-t-0 mt-auto sticky bottom-5">
+                        {sidebar && (
+                            <div className="relative h-full">
+                                <div className="pt-6 top-10 sticky">{sidebar}</div>
+                            </div>
+                        )}
+                        <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-5">
                             {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                                <div className="px-5 lg:px-6">
+                                <div className="px-5 lg:px-8">
                                     <h4 className="text-[13px] mb-2">On this page</h4>
                                     <Scrollspy
                                         key={title}
@@ -391,7 +412,7 @@ export default function PostLayout({
                                     </Scrollspy>
                                 </div>
                             )}
-                            <div className="px-5 lg:px-6 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                            <div className="px-5 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                 <Tooltip title="Edit post">
                                     <span className="relative">
                                         <Link

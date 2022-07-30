@@ -71,24 +71,6 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                     <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
                 </Text>
             </SidebarSection>
-            <SidebarSection>
-                <Link
-                    href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
-                >
-                    <Text>
-                        <Edit className="h-[20px] w-[20px]" /> <span>Edit post</span>
-                    </Text>
-                </Link>
-                <Link
-                    href={`https://github.com/PostHog/posthog.com/issues/new?title=Blog feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                    className="text-primary hover:text-primary dark:text-white dark:hover:text-white mt-2 inline-block"
-                >
-                    <Text>
-                        <Issue className="h-[20px] w-[20px]" /> <span>Raise an issue</span>
-                    </Text>
-                </Link>
-            </SidebarSection>
         </>
     )
 }
@@ -113,7 +95,7 @@ export default function BlogPost({ data, pageContext, location }) {
         a: A,
         ...shortcodes,
     }
-    const { categories } = pageContext
+    const { categories, tableOfContents } = pageContext
 
     return (
         <Layout>
@@ -127,30 +109,12 @@ export default function BlogPost({ data, pageContext, location }) {
                         : featuredImage?.publicURL
                 }
             />
-            <Breadcrumbs className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary" darkModeToggle>
-                <Crumb title="Blog" url="/blog" />
-                {categories && (
-                    <li>
-                        <ul className="list-none p-0 m-0 flex ">
-                            {categories.map((category, index) => {
-                                const { title, url } = category
-                                return (
-                                    <Crumb
-                                        key={index}
-                                        title={title}
-                                        url={url}
-                                        className="whitespace-nowrap border-r-0 items-baseline"
-                                    />
-                                )
-                            })}
-                        </ul>
-                    </li>
-                )}
-                <Crumb className="whitespace-nowrap" title={title} truncate />
-            </Breadcrumbs>
             <PostLayout
                 title={title}
                 contentWidth={790}
+                filePath={filePath}
+                tableOfContents={tableOfContents}
+                breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
                 sidebar={
                     <BlogPostSidebar
                         categories={categories}

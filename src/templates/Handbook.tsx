@@ -46,23 +46,6 @@ const HandbookSidebar = ({ contributors, title, location }) => {
     )
 }
 
-const Breadcrumb = ({ breadcrumb }) => {
-    return (
-        <ul className="list-none flex m-0 p-0">
-            {breadcrumb.map(({ name, url }) => {
-                return (
-                    <li
-                        key={url}
-                        className='after:content-["/"] after:mx-1 after:text-gray-accent-light last:after:hidden'
-                    >
-                        <Link to={url}>{name}</Link>
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
-
 export default function Handbook({
     data: { post, countries },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
@@ -150,10 +133,10 @@ export default function Handbook({
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
                     tableOfContents={tableOfContents}
                     contentWidth="100%"
+                    breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
                 >
                     <section>
                         <div className="mb-8 relative">
-                            <Breadcrumb breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]} />
                             <div className="flex items-center mt-0 flex-wrap justify-between">
                                 <div className="flex items-center space-x-2 mb-2">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
