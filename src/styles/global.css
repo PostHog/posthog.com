@@ -887,3 +887,7 @@ body.dark {
     margin-left: 7px !important;
     padding: 1px 3px;
 }
+
+.crumb-has-next::after {
+    content: '→' !important;
+}

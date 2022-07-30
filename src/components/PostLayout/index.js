@@ -189,7 +189,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
             )
         }
         setOpen(isActive || (children && isOpen(children)))
-    }, [])
+    }, [url])
 
     const variants = {
         hidden: {
@@ -276,14 +276,19 @@ const TableOfContents = ({ menu, handleLinkClick }) => {
 
 const Breadcrumb = ({ crumbs }) => {
     return (
-        <ul className="list-none flex m-0 p-0 mb-2">
-            {crumbs.map(({ name, url }) => {
+        <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
+            {crumbs.map(({ name, url, next }, index) => {
+                const hasNext = !!crumbs[index + 1]?.next
                 return (
                     <li
                         key={url}
-                        className='after:content-["/"] after:mx-1 after:text-gray-accent-light last:after:hidden'
+                        className={`after:mx-1 after:text-gray-accent-light last:after:hidden ${
+                            hasNext ? 'crumb-has-next' : 'after:content-["/"]'
+                        }`}
                     >
-                        <Link to={url}>{name}</Link>
+                        <Link className={next ? 'opacity-70 hover:opacity-100 transition-opacity' : ''} to={url}>
+                            {name}
+                        </Link>
                     </li>
                 )
             })}

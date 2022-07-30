@@ -243,7 +243,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
                     previous = menuFlattened[index - 1]
-                    breadcrumb = item.breadcrumb
+                    breadcrumb = [...item.breadcrumb, ...(next ? [{ ...next, next: true }] : [])]
                     return true
                 }
             })
