@@ -345,7 +345,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-0 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-16 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
                             <TableOfContents menu={menu} />
                         </aside>
                     </div>
@@ -363,11 +363,11 @@ export default function PostLayout({
                         </div>
                     )}
                 </article>
-                <aside className="lg:sticky top-0 flex-shrink-0 w-full justify-self-end lg:box-content my-10 lg:my-0 lg:pt-12 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                <aside className="flex-shrink-0 w-full justify-self-end pb-20 my-10 lg:my-0 mr-auto h-full">
                     <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                        {sidebar && sidebar}
+                        {sidebar && <div className="pt-6 top-10 sticky">{sidebar}</div>}
                         {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                            <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6">
+                            <div className="pt-12 !border-t-0 mt-auto px-5 lg:px-6 sticky bottom-10">
                                 <h4 className="text-[13px] mb-2">On this page</h4>
                                 <Scrollspy
                                     key={title}
