@@ -1,10 +1,27 @@
 import React, { useState } from 'react'
 import { usePopper } from 'react-popper'
 
-export default function Tooltip({ children, title }: { children: JSX.Element; title: string }) {
+export default function Tooltip({
+    children,
+    title,
+    offset,
+}: {
+    children: JSX.Element
+    title: string
+    offset?: [number, number]
+}) {
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
-    const { styles, attributes } = usePopper(referenceElement, popperElement)
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: offset ? offset : [0, 10],
+                },
+            },
+        ],
+    })
 
     return (
         <span className="group">
