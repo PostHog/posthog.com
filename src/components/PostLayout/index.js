@@ -13,6 +13,8 @@ import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
+import Toggle from 'components/Toggle'
+import { ArrowsExpandIcon } from '@heroicons/react/outline'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -312,6 +314,7 @@ export default function PostLayout({
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [fullWidthContent, setFullWidthContent] = useState(false)
 
     const handleMobileMenuClick = () => {
         setMobileMenuOpen(!mobileMenuOpen)
@@ -321,6 +324,15 @@ export default function PostLayout({
         if (hash) {
             scroll.scrollMore(-50)
         }
+    }, [])
+
+    const handleFullWidthContentChange = (checked) => {
+        setFullWidthContent(checked)
+        localStorage.setItem('full-width-content', checked)
+    }
+
+    useEffect(() => {
+        setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
     }, [])
 
     const toc = tableOfContents?.filter((item) => item.depth <= 2)
@@ -376,14 +388,24 @@ export default function PostLayout({
                 )}
                 <article
                     id="content-menu-wrapper"
-                    className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
+                    className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
                 >
-                    <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto'}`}>
+                    <div
+                        className={`w-full transition-all ${!fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'} ${
+                            menu ? 'mx-auto' : 'lg:ml-auto'
+                        }`}
+                    >
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
                         <div className="article-content">{children}</div>
                     </div>
                     {questions && (
-                        <div className={`w-full lg:max-w-[650px] ${menu ? 'mx-auto' : 'lg:ml-auto'}`}>{questions}</div>
+                        <div
+                            className={`w-full lg:max-w-[650px] ${
+                                !fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'
+                            } ${menu ? 'mx-auto' : 'lg:ml-auto'}`}
+                        >
+                            {questions}
+                        </div>
                     )}
                 </article>
                 <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
@@ -438,8 +460,22 @@ export default function PostLayout({
                                         </Link>
                                     </span>
                                 </Tooltip>
-                                <div className="!ml-auto">
-                                    <DarkModeToggle />
+                                <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
+                                    <Tooltip title="Toggle full-width content">
+                                        <span className="relative">
+                                            <Toggle
+                                                icon={<ArrowsExpandIcon className="w-[17px]" />}
+                                                checked={fullWidthContent}
+                                                onChange={handleFullWidthContentChange}
+                                            />
+                                        </span>
+                                    </Tooltip>
+
+                                    <Tooltip title="Toggle dark mode">
+                                        <span className="relative">
+                                            <DarkModeToggle />
+                                        </span>
+                                    </Tooltip>
                                 </div>
                             </div>
                         </div>
