@@ -86,6 +86,9 @@ This is the property that we want to filter based on. These properties can be:
 -   Properties on the event itself
 -   Properties on the person who sent the event
 -   Properties on Groups that this event is a member of _(See [Group analytics](/docs/user-guides/group-analytics))_
+-   Properties on sessions
+-   Properties on [Cohorts](/docs/user-guides/cohorts) the user is a member of
+-   Properties on the HTML element if an event was autocaptured
 
 By default, the dropdown will only show properties that have been seen on a specific event before, but if you instead want to filter based on an unseen property, you can scroll all the way to the bottom of the list and click 'Show X properties that haven't been seen with this event'
 
@@ -161,6 +164,12 @@ For readability, PostHog will only load the first 25 values of a breakdown when 
 
 > **Note: ** Currently, you're only able to breakdown an insight by a single property, but we're actively working on the ability to breakdown based on more than one property
 
+#### Viewing totals for each breakdown value
+
+If you're more interested in the total count of an event over a given time period, you can switch to either the [Value bar chart](#value-bar-chart) or [Table](#table) view to see the total number of events for each breakdown value.
+
+![sample breakdown bar chart](../../images/docs/user-guides/trends/breakdown-bars.png)
+
 #### Breaking down numerical values into bins
 
 When breaking down based on a string value, your graph will be split up with separate series for _every distinct value_ of that property. This works well for text values, however when trying to analyze numeric or time properties,
@@ -170,6 +179,8 @@ this is often far too granualar. As a solution, when breaking down a numeric pro
 
 PostHog will then break up your events into the specified number of bins based on the distinct values of the property.
 For example, if your property can take the values `20, 21, 22, ..., 40` and you split it up into `10` bins, it will break your events up into ranges of `20 - 22`, `22 - 24`, etc.
+
+> Note that this aggregates all breakdown values, not just the top 25 ones, like it happens for non-numeric values
 
 ## Viewing individual users and cohorts
 
