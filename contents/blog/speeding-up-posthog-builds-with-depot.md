@@ -6,20 +6,19 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["kyle-galbraith", "jacob-gillespie"]
-featuredImage: ../images/blog/titles.png
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 categories: ["Inside PostHog", "Open source"]
 ---
 
-We recently helped PostHog swap out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster!
+PostHog recently swapped out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster, so PostHog invited us — the founders of Depot — to share more about how Depot works and will benefit the PostHog community. 
 
-## What is Depot?
+## How does Depot work?
 
-[Depot](https://depot.dev) is a managed container build service — we run both Intel and Arm builder machines so that you can build native container images for both architectures. Each instance runs [BuildKit](https://github.com/moby/buildkit), the modern engine that backs `docker build` with 4 CPUs, 8GB of RAM, and a persistent 50GB NVMe cache disk. We fully manage the lifecycle of your project builder instances; today, Depot launches builder machines in AWS and Fly.io.
+[Depot](https://depot.dev) is a managed container build service which runs both Intel and Arm builder machines so you can build native container images for both architectures. Each instance runs [BuildKit](https://github.com/moby/buildkit), the modern engine that backs `docker build` with 4 CPUs, 8GB of RAM, and a persistent 50GB NVMe cache disk. Depot fully manages the lifecycle of project builder instances; today, Depot launches builder machines in AWS and Fly.io.
 
 The `depot build` CLI implements the same options as `docker build` for easy adoption. By offloading the build to a remote Depot builder, the build can make use of the centralized persistent cache, so build steps that are unchanged can be instantly reused. Remote builds also are not limited by local resource constraints like CPU, RAM, or network.
 
-### Building Docker images in GitHub Actions
 
 One of the most common use-cases for Depot is accelerating Docker image builds in CI providers like GitHub Actions. We often see a 2-3x speedup when using Depot, compared to the standard `docker/build-push-action` action.
 
@@ -33,7 +32,7 @@ Assuming that a build uses `cache-from` and `cache-to` to cache layers, the bigg
 
 ## Depot and PostHog
 
-We use PostHog at Depot to track our core product metrics; builds started and completed per week, build time in minutes, what versions of our `depot` CLI are running in the wild, etc. It's quite the universal tool, and we would recommend it to just about anyone.
+At Depot, we use PostHog to track our core product metrics; builds started and completed per week, build time in minutes, what versions of our `depot` CLI are running in the wild, etc. It's quite the universal tool, and we would recommend it to just about anyone.
 
 We also maintain several [benchmarks of popular open-source projects](https://depot.dev/#benchmarks), including PostHog, to help us gauge the performance of Depot. The benchmarks compare the speed of container builds on GitHub Actions with and without Depot, for each new commit to the upstream project. We generally see a 2-3x speedup with Depot.
 
@@ -99,7 +98,6 @@ After switching to `depot build`, those same builds took only [3 minutes on aver
 
 A 5x speed up with very little change to the existing workflow, just one line if we don't include the OIDC improvement.
 
-## Conclusion
 
 PostHog is a great product with a great team that has a lot of experience in building optimal Docker images. By building those images on Depot's builders, we are able to maximize the cache speedup of those optimized images, allowing PostHog to spend less time waiting for builds.
 
