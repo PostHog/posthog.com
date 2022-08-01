@@ -5,10 +5,12 @@ export default function Tooltip({
     children,
     title,
     offset,
+    className = '',
 }: {
     children: JSX.Element
     title: string
     offset?: [number, number]
+    className?: string
 }) {
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
@@ -24,7 +26,7 @@ export default function Tooltip({
     })
 
     return (
-        <span className="group">
+        <span className={`group ${className}`}>
             {React.cloneElement(children, {
                 ref: setReferenceElement,
             })}

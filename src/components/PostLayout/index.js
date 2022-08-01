@@ -1,6 +1,6 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { Edit, Facebook, Issue, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
+import { Edit, ExpandDocument, Facebook, Issue, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -327,9 +327,9 @@ export default function PostLayout({
         }
     }, [])
 
-    const handleFullWidthContentChange = (checked) => {
-        setFullWidthContent(checked)
-        localStorage.setItem('full-width-content', checked)
+    const handleFullWidthContentChange = () => {
+        setFullWidthContent(!fullWidthContent)
+        localStorage.setItem('full-width-content', fullWidthContent)
     }
 
     useEffect(() => {
@@ -405,13 +405,13 @@ export default function PostLayout({
                     {questions && <div className={contentContainerClasses}>{questions}</div>}
                 </article>
                 {!hideSidebar && sidebar && (
-                    <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border">
+                    <aside className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border">
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
                                 <div className="pt-6 top-10 sticky">{sidebar}</div>
                             </div>
 
-                            <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-5">
+                            <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
                                 {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
                                     <div className="px-5 lg:px-8 max-h-72 overflow-auto">
                                         <h4 className="text-[13px] mb-2">On this page</h4>
@@ -435,10 +435,10 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <div className="px-5 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <div className="px-5 flex space-x-3 mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {filePath && (
                                         <>
-                                            <Tooltip title="Edit post">
+                                            <Tooltip className="py-2" title="Edit post">
                                                 <span className="relative">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
@@ -448,7 +448,7 @@ export default function PostLayout({
                                                     </Link>
                                                 </span>
                                             </Tooltip>
-                                            <Tooltip title="Raise an issue">
+                                            <Tooltip className="py-2" title="Raise an issue">
                                                 <span className="relative">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
@@ -461,17 +461,21 @@ export default function PostLayout({
                                         </>
                                     )}
                                     <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
-                                        <Tooltip title="Toggle full-width content">
-                                            <span className="relative">
-                                                <Toggle
-                                                    icon={<ArrowsExpandIcon className="w-[17px]" />}
-                                                    checked={fullWidthContent}
-                                                    onChange={handleFullWidthContentChange}
-                                                />
-                                            </span>
+                                        <Tooltip
+                                            className="py-2 border-x border-gray-accent-light dark:border-gray-accent-dark border-dashed flex"
+                                            title="Toggle content width"
+                                        >
+                                            <button
+                                                onClick={handleFullWidthContentChange}
+                                                className={
+                                                    'relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded-[3px] flex items-center justify-center transition-colors mx-1'
+                                                }
+                                            >
+                                                <ExpandDocument expanded={fullWidthContent} />
+                                            </button>
                                         </Tooltip>
 
-                                        <Tooltip title="Toggle dark mode">
+                                        <Tooltip className="py-2" title="Toggle dark mode">
                                             <span className="relative">
                                                 <DarkModeToggle />
                                             </span>
