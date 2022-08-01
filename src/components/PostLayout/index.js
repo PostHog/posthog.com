@@ -396,7 +396,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menu={menu} />
                         </aside>
                     </div>
@@ -420,7 +420,7 @@ export default function PostLayout({
 
                             <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
                                 {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                                    <div className="px-5 lg:px-8 max-h-72 overflow-auto">
+                                    <div className="px-5 lg:px-8 lg:pb-4 max-h-72 overflow-auto">
                                         <h4 className="text-[13px] mb-2">On this page</h4>
                                         <Scrollspy
                                             key={title}
@@ -439,10 +439,18 @@ export default function PostLayout({
                                                     />
                                                 </li>
                                             ))}
+                                            <li>
+                                                <a
+                                                    href="#squeak-questions"
+                                                    className="text-almost-black hover:text-orange dark:text-white dark:hover:text-orange cursor-pointer hover:opacity-100 opacity-60 text-[14px] mt-[5px]"
+                                                >
+                                                    Questions?
+                                                </a>
+                                            </li>
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <div className="px-5 flex space-x-3 mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <div className="px-5 flex space-x-3 mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {filePath && (
                                         <>
                                             <Tooltip className="py-2" title="Edit post">
