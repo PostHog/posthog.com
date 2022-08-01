@@ -63,6 +63,7 @@ export function Footer(): JSX.Element {
                         url="/handbook/company/story"
                     />
                     <FooterMenuItem marginBottom="0" className="md:text-lg" title="Blog" url="/blog" />
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Newsletter" url="/newsletter" />
                     <FooterMenuItem marginBottom="0" className="md:text-lg" title="Careers" url="/careers" />
                     <FooterMenuItem
                         marginBottom="0"

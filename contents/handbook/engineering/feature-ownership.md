@@ -34,7 +34,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
 | Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
-| Onboarding | [@liyiy][@liyiy]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Onboarding | [@kappa90][@kappa90]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
