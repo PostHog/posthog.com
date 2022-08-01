@@ -696,13 +696,14 @@ ul {
     }
 
     &:before {
-        content: '';
-        position: absolute;
-        width: 4px;
-        height: 100%;
         background: #f54e00;
+        bottom: 4px;
         border-radius: 2px;
+        content: '';
         left: -12px;
+        position: absolute;
+        top: 4px;
+        width: 4px;
     }
 }
 

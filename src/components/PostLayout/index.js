@@ -263,7 +263,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
 const TableOfContents = ({ menu, handleLinkClick }) => {
     return (
         <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 m2-3 ml-3 text-[15px]">
+            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
                 Table of contents
             </p>
             <nav>
@@ -425,24 +425,24 @@ export default function PostLayout({
                                         <Scrollspy
                                             key={title}
                                             offset={-50}
-                                            className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                            className="list-none m-0 p-0 flex flex-col"
                                             items={tableOfContents?.map((navItem) => navItem.url)}
                                             currentClassName="active-product"
                                         >
                                             {toc.map((navItem, index) => (
-                                                <li className="relative leading-none" key={navItem.url}>
+                                                <li className="relative leading-none m-0" key={navItem.url}>
                                                     <InternalSidebarLink
                                                         url={navItem.url}
                                                         name={navItem.value}
                                                         depth={navItem.depth}
-                                                        className="hover:opacity-100 opacity-60 text-[14px]"
+                                                        className="hover:opacity-100 opacity-60 text-[14px] py-2 block relative active:top-[0.5px] active:scale-[.99]"
                                                     />
                                                 </li>
                                             ))}
-                                            <li>
+                                            <li className="mt-0">
                                                 <a
                                                     href="#squeak-questions"
-                                                    className="text-almost-black hover:text-orange dark:text-white dark:hover:text-orange cursor-pointer hover:opacity-100 opacity-60 text-[14px] mt-[5px]"
+                                                    className="text-almost-black hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
                                                 >
                                                     Questions?
                                                 </a>
