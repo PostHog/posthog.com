@@ -291,7 +291,7 @@ const Breadcrumb = ({ crumbs }) => {
                 return (
                     <li
                         key={url}
-                        className={`after:mx-1 after:text-gray-accent-light last:after:hidden ${
+                        className={`after:mx-2 after:text-gray-accent-light last:after:hidden ${
                             hasNext ? 'crumb-has-next' : 'after:content-["/"]'
                         }`}
                     >
