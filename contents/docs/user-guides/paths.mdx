@@ -69,6 +69,8 @@ As you can see, we now have 3 steps in our journey, starting with a user viewing
 In this case, some users navigated directly to the `/docs/integrate` page, and as a result there is no intermediate step displayed.
 However for other users, such as those who first navigated to the `/docs/deploy` page, we can see a 3rd step now, corresponding to wherever they navigated after viewing the `/docs/deploy` page.
 
+> **Note: ** If a user visits `/docs/deploy`, then refreshes the page, i.e. they visit `/docs/deploy` again, we count this as the same step. In other words, no two consecutive steps ever have the same event/URL.
+
 For example, 15 users returned back to the `/docs/` page, while another 15 continued on to the self host documentation.
 We can also now see a red portion of our flow, which corresponds to the number of users who did not navigate anywhere else after viewing this page, and are considered to have dropped off at this step.
 
@@ -191,7 +193,27 @@ This option is very useful when analyzing paths that are visually dense, and all
 
 #### Path cleaning rules
 
-Path cleaning rules are an advanced feature that can be used to standardize the form of URLs within a Paths visualization. These rules consist of two parts: a regex which is used to match the various URLs you would like to combine, and an alias, which is the name given to any events that matched the regex.
-In this sense, these path cleaning rules are an advanced for of [Wildcard groups](#wildcard-groups), which use regex to match instead of the simple `*` wildcard.
+Path cleaning rules are an advanced feature that can be used to standardize the form of URLs and event names within a Paths visualization.
+These rules consist of two parts:
+
+-   A **Regex** which is used to match the various URLs you would like to combine, and
+-   An **Alias**, which is used to replace the portion that matched the regex.
+
+In this sense, these path cleaning rules are an advanced version of [Wildcard groups](#wildcard-groups), which use regex to match instead of the simple `*` wildcard.
 
 Path cleaning rules can either be added directly to an insight, or you can configure global path cleaning rules by clicking the 'Configure Project Rules' button.
+
+![create path cleaning dialogue](../../images/docs/user-guides/paths/path-cleaning.png)
+
+To give a better idea of how path cleaning rules work, let's take the example from the image above.
+
+In this case, our app uses a URL structure of the form `/merchant/<merchant_id>/dashboard` where `merchant_id` is a number corresponding to the unique ID of a merchant.
+Within our paths insight, we don't want to show different URLs for each merchant dashboard, so we'll combine them all into a single event, which we can do using the following regex: `\/merchant\/\d+\/dashboard$`.
+
+> **Note: ** We don't need to add slashes to the beginning or end of our regex
+
+Here, we're using the `\d+` token to match the unique ID of any merchant. Finally, we'll set `/merchant/dashboard` as our alias.
+Now, any Pageview events that have a pathname that matches our regex will have their path replaced with `/merchant/dashboard`.
+
+For example, `https://example.com/merchant/23423/dashboard` would become `https://example.com/merchant/dashboard`.
+Since all these events now have the same URL, they will all be combined within our insight and shown as a single step.
