@@ -218,7 +218,9 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                                 setOpen(!open)
                             }
                         }}
-                        className={buttonClasses}
+                        className={`${buttonClasses} ${
+                            !topLevel ? 'opacity-50' : ''
+                        } hover:opacity-100 transition-opacity`}
                         to={url}
                     >
                         <AnimatePresence>
@@ -232,9 +234,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                                 />
                             )}
                         </AnimatePresence>
-                        <span className={`${!topLevel ? 'opacity-50' : ''} hover:opacity-100 transition-opacity`}>
-                            {name}
-                        </span>
+                        <span>{name}</span>
                         {children && children.length > 0 && <Chevron open={open} />}
                     </Link>
                 ) : (
