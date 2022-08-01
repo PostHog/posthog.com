@@ -301,6 +301,31 @@ const Breadcrumb = ({ crumbs }) => {
     )
 }
 
+const SidebarAction = ({ children, title, width, className = '', href, onClick }) => {
+    const buttonClasses =
+        'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors text-gray dark:text-[#999] hover:text-gray dark:hover:text-[#999]'
+
+    return (
+        <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
+            <Tooltip className="flex" title={title}>
+                <span className="relative flex">
+                    {href ? (
+                        <Link className={buttonClasses} to={href}>
+                            {children}
+                        </Link>
+                    ) : onClick ? (
+                        <button className={buttonClasses} onClick={onClick}>
+                            {children}
+                        </button>
+                    ) : (
+                        children
+                    )}
+                </span>
+            </Tooltip>
+        </li>
+    )
+}
+
 export default function PostLayout({
     tableOfContents,
     children,
@@ -438,53 +463,34 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <div className="px-5 flex space-x-3 mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <ul className="list-none px-5 flex mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {filePath && (
                                         <>
-                                            <Tooltip className="py-2" title="Edit post">
-                                                <span className="relative">
-                                                    <Link
-                                                        href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                                    >
-                                                        <Edit />
-                                                    </Link>
-                                                </span>
-                                            </Tooltip>
-                                            <Tooltip className="py-2" title="Raise an issue">
-                                                <span className="relative">
-                                                    <Link
-                                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                                    >
-                                                        <Issue />
-                                                    </Link>
-                                                </span>
-                                            </Tooltip>
+                                            <SidebarAction
+                                                href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                title="Edit this page"
+                                            >
+                                                <Edit />
+                                            </SidebarAction>
+                                            <SidebarAction
+                                                title="Raise an issue"
+                                                href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                            >
+                                                <Issue />
+                                            </SidebarAction>
                                         </>
                                     )}
-                                    <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
-                                        <Tooltip
-                                            className="py-2 border-x border-gray-accent-light dark:border-gray-accent-dark border-dashed flex"
-                                            title="Toggle content width"
-                                        >
-                                            <button
-                                                onClick={handleFullWidthContentChange}
-                                                className={
-                                                    'relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded-[3px] flex items-center justify-center transition-colors mx-1'
-                                                }
-                                            >
-                                                <ExpandDocument expanded={fullWidthContent} />
-                                            </button>
-                                        </Tooltip>
-
-                                        <Tooltip className="py-2" title="Toggle dark mode">
-                                            <span className="relative">
-                                                <DarkModeToggle />
-                                            </span>
-                                        </Tooltip>
-                                    </div>
-                                </div>
+                                    <SidebarAction
+                                        className="!ml-auto"
+                                        title="Toggle content width"
+                                        onClick={handleFullWidthContentChange}
+                                    >
+                                        <ExpandDocument expanded={fullWidthContent} />
+                                    </SidebarAction>
+                                    <SidebarAction className="ml-1" width="auto" title="Toggle dark mode">
+                                        <DarkModeToggle />
+                                    </SidebarAction>
+                                </ul>
                             </div>
                         </div>
                     </aside>
