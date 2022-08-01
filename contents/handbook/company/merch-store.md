@@ -34,6 +34,9 @@ We sell it through our [merch store](https://merch.posthog.com/) store on Shopif
 ## How do we give away merch for free?
 
 ### Individuals
+
+> If someone is requesting a merch code because they submitted a PR, check that they haven't received the code [automatically first](/posthog.com/docs/contribute/recognizing-contributions#pull-requests) - this manual process is only needed if the automated one fails, or for other types of one-off merch codes. 
+
 In [Shopify admin](https://posthog.myshopify.com/admin):
 
 1. Go to the "Discounts" tab
