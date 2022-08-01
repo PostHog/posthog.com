@@ -18,6 +18,8 @@
     }
 }
 
+/* links and text */
+
 *,
 a {
     @apply box-border;
@@ -36,6 +38,46 @@ blockquote {
     letter-spacing: -0.015em;
 }
 
+/* headers */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: inherit;
+    font-variation-settings: 'wght' 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+
+    a {
+        font-variation-settings: 'wght' 800;
+    }
+
+    code {
+        font-variation-settings: 'wght' 800;
+    }
+}
+
+h1 {
+    @apply text-5xl font-bold leading-normal;
+    letter-spacing: -0.03em;
+}
+
+h2 {
+    @apply text-3xl font-bold leading-normal;
+    letter-spacing: -0.03em;
+}
+
+h3 {
+    @apply text-2xl leading-normal;
+}
+
+h4 {
+    @apply text-xl leading-normal mb-3;
+}
+
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
     h2,
@@ -47,13 +89,18 @@ blockquote {
         letter-spacing: -0.015em;
     }
 
+    h2 {
+        code {
+            @apply font-bold;
+        }
+    }
+
     p,
     li {
-        font-size: 17px;
-        line-height: 1.75;
+        @apply text-base leading-7;
 
         li {
-            font-size: 1em;
+            @apply text-base;
         }
 
         img.blog-post-img-large {
@@ -62,14 +109,19 @@ blockquote {
         }
     }
 
-    blockquote {
-        letter-spacing: initial;
+    li {
+        @apply mb-0.5;
     }
 
-    &.handbook-docs-content {
-        p,
-        li {
-            font-size: 16px;
+    code {
+        @apply font-medium;
+    }
+
+    blockquote {
+        letter-spacing: initial;
+
+        code {
+            @apply bg-gray-accent dark:bg-gray-accent-dark;
         }
     }
 
@@ -86,15 +138,6 @@ blockquote {
             @apply mb-2;
         }
     }
-
-    li li {
-        @apply text-lg;
-    }
-
-    li {
-        @apply mb-0.5;
-    }
-
     blockquote:not(.quote) {
         @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-4;
     }
