@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Inside PostHog", "Open source"]
 ---
 
-PostHog recently swapped out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster, so PostHog invited us — the founders of Depot — to share more about how Depot works and will benefit the PostHog community. 
+PostHog recently swapped out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster, so PostHog invited us — the founders of Depot — to share more about how Depot works and will benefit the PostHog community.
 
 ## How does Depot work?
 
@@ -98,10 +98,6 @@ After switching to `depot build`, those same builds took only [3 minutes on aver
 
 A 5x speed up with very little change to the existing workflow, just one line if we don't include the OIDC improvement.
 
-The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to Depot, PostHog can get more done, iterate faster and fix bugs without interruptions. 
+The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to Depot, PostHog can get more done, iterate faster and fix bugs without interruptions.
 
 _Want to give it a go? [Try out Depot's free, 30-day trial](https://depot.dev/)._
-
-
-
-
