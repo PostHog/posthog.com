@@ -18,7 +18,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`lg:px-[50px] text-2xl lg:text-3xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`lg:px-[50px] text-2xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
 }
 
 const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {

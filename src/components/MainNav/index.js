@@ -59,7 +59,11 @@ export default function MainNav() {
                         </ul>
                         {!breakpoints.md && (
                             <Link
-                                className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark hidden lg:block"
+                                className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark hidden lg:block 
+                                relative
+                                hover:scale-[1.01]
+                                active:top-[0.5px]
+                                active:scale-[.99]"
                                 to="/"
                             >
                                 <Logo />

@@ -32,7 +32,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                 title="Enterprise analytics by PostHog"
                 description="Extra requirements for your enterprise org? PostHog does that."
             />
-            <Structure.Section width="4xl" className="text-base">
+            <Structure.Section width="4xl" className="text-lg">
                 <section className="px-5">
                     <div className="text-center relative mb-8 mt-12 inline-block">
                         <StaticImage

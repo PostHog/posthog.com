@@ -61,7 +61,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch, badge 
     return (
         <Link
             disablePrefetch={disablePrefetch}
-            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent-light dark:hover:bg-opacity-10 rounded flex items-center space-x-2 text-[14px]"
+            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
             to={url}
             onClick={() => {
                 posthog?.capture('deploy option clicked', { deploy_option: title })

@@ -39,7 +39,7 @@ const Filter = ({ title, options, path, view, activeFilter }) => {
             <h5 className="m-0 inline-block text-[15px] px-4 font-semibold opacity-[.85]">{title}</h5>
             <ul className="list-none p-0 m-0 flex flex-col space-y-3 overflow-hidden pl-4 mt-3">
                 <li
-                    className={`flex items-center space-x-2 text-base font-semibold relative ${
+                    className={`flex items-center space-x-2 text-lg font-semibold relative ${
                         !activeFilter ? 'active-product' : ''
                     }`}
                 >
@@ -94,7 +94,7 @@ const CardView = ({ data }) => {
                         <div className="w-full text-black dark:text-white">
                             <div className="flex justify-between items-center mb-2">
                                 {Contributor && (
-                                    <ul className="flex space-x-2 list-none p-0 m-0">
+                                    <ul className="flex space-x-4 list-none p-0 m-0">
                                         {Contributor.map(({ image, name, id }) => {
                                             return (
                                                 <li key={id} className="flex space-x-2 items-center">
