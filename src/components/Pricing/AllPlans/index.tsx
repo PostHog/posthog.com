@@ -27,7 +27,7 @@ const cloudPlans: IPlan[] = [
         title: 'Self-serve',
         description: 'with community support',
         pricing: {
-            event: 0.000225,
+            event: 0.00045,
         },
         mainCTA: {
             title: 'Get started',
@@ -43,12 +43,12 @@ const cloudPlans: IPlan[] = [
         title: 'Enterprise',
         description: 'with dedicated, proactive support',
         pricing: {
-            event: 0.0003,
-            monthly: 300,
+            event: 0.00045,
+            monthly: 450,
         },
         mainCTA: {
             title: 'Get in touch',
-            url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+            url: '/signup/cloud/enterprise',
         },
         demoCTA: {
             title: 'Book a demo',
@@ -63,7 +63,7 @@ const selfHostPlans: IPlan[] = [
         title: 'Self-serve',
         description: 'with community support',
         pricing: {
-            event: 0.0003,
+            event: 0.00045,
         },
         mainCTA: {
             title: 'Get started',
@@ -199,7 +199,7 @@ export default function AllPlans() {
             {!showComparison && (
                 <button
                     onClick={() => setShowComparison(!showComparison)}
-                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm"
+                    className="p-3 w-full font-semibold text-black/50 bg-gray-accent rounded-sm text-sm"
                 >
                     Show full comparison
                 </button>
