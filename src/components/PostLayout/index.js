@@ -396,7 +396,7 @@ export default function PostLayout({
                 )}
                 <article
                     id="content-menu-wrapper"
-                    className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
+                    className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
@@ -405,7 +405,7 @@ export default function PostLayout({
                     {questions && <div className={contentContainerClasses}>{questions}</div>}
                 </article>
                 {!hideSidebar && sidebar && (
-                    <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
+                    <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border">
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
                                 <div className="pt-6 top-10 sticky">{sidebar}</div>

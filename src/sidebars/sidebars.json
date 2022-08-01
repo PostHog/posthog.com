@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "People",
+            "name": "People & Ops",
             "url": "",
             "children": [
                 {
@@ -196,6 +196,10 @@
                 {
                     "name": "Offboarding",
                     "url": "/handbook/people/offboarding"
+                },
+                {
+                    "name": "Merch store",
+                    "url": "/handbook/company/merch-store"
                 },
                 {
                     "name": "Hiring process",
@@ -430,11 +434,7 @@
                     "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
-                    "name": "Events",
-                    "url": "/handbook/growth/marketing/hosthogs"
-                },
-                {
-                    "name": "Acquisition channels",
+                    "name": "Marketing channels",
                     "url": "",
                     "children": [
                         {
@@ -448,10 +448,6 @@
                         {
                             "name": "Paid ads",
                             "url": "/handbook/growth/marketing/paid"
-                        },
-                        {
-                            "name": "Product launches",
-                            "url": "/handbook/growth/marketing/product-announcements"
                         },
                         {
                             "name": "Email",
@@ -508,10 +504,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "name": "Developer relations",
-            "url": "/handbook/growth/developer-relations"
         }
     ],
     "docs": [
@@ -1041,6 +1033,10 @@
                 {
                     "name": "SSO & SAML",
                     "url": "/docs/user-guides/sso"
+                },
+                {
+                    "name": "Stickiness",
+                    "url": "/docs/user-guides/stickiness"
                 },
                 {
                     "name": "Toolbar",

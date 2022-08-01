@@ -45,7 +45,7 @@ export default function Timeline() {
     return (
         <section className="px-4">
             <h2 className="text-center">We ship weirdly fast</h2>
-            <p className="my-6 mx-auto text-center text-base md:text-xl font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
+            <p className="my-6 mx-auto text-center text-lg md:text-xl font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
                 How else would we have done all this?
             </p>
 

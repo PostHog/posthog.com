@@ -55,7 +55,7 @@ export const Combobox = (props: ComboboxProps) => {
                             onChange={(event) => setQuery(event.target.value)}
                             displayValue={props.display}
                             placeholder={currentValue || props.placeholder || 'Select a value'}
-                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-xs select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600 ${
+                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-sm select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600 ${
                                 focused ? '' : 'cursor-pointer'
                             }`}
                         />
@@ -75,16 +75,16 @@ export const Combobox = (props: ComboboxProps) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full max-w-lg bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-xs max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
+                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full max-w-lg bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-sm max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
                             {filteredOptions.length === 0 && query !== '' ? (
-                                <div className="px-2.5 py-1 text-xs text-gray">No results</div>
+                                <div className="px-2.5 py-1 text-sm text-gray">No results</div>
                             ) : (
                                 filteredOptions.map((option) => (
                                     <HeadlessCombobox.Option
                                         value={option}
                                         key={option}
                                         className={({ active }) => `
-                                            list-none px-2.5 cursor-pointer focus:outline-none text-xs py-1
+                                            list-none px-2.5 cursor-pointer focus:outline-none text-sm py-1
                                             ${active ? 'bg-orange text-white' : ''}
                                         `}
                                     >
@@ -93,7 +93,7 @@ export const Combobox = (props: ComboboxProps) => {
                                                 <span
                                                     className={classNames(
                                                         selected ? 'font-semibold' : 'font-normal',
-                                                        'ml-1 block truncate text-xs'
+                                                        'ml-1 block truncate text-sm'
                                                     )}
                                                 >
                                                     {props.display ? props.display(option) : option}

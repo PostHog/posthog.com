@@ -70,7 +70,7 @@ export const NewsletterForm = ({
                             </div>
                             <input
                                 type="submit"
-                                className="bg-primary dark:bg-white text-white dark:text-black text-base shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 rounded-full w-full md:w-auto"
+                                className="bg-primary dark:bg-white text-white dark:text-black text-lg shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
                                 value="Sign me up!"
                             />
                         </form>

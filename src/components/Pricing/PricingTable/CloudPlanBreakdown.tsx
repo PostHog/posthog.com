@@ -29,14 +29,14 @@ export const CloudPlanBreakdown = () => {
                     <li className="flex space-x-4">
                         <CloudIcon className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">Hosted by PostHog</h3>
+                            <h3 className="text-lg ">Hosted by PostHog</h3>
                             <p className="text-[14px]">Get up and running quickly with no infrastructure to deploy.</p>
                         </div>
                     </li>
                     <li className="flex space-x-4">
                         <Lightning className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">Automatic upgrades</h3>
+                            <h3 className="text-lg ">Automatic upgrades</h3>
                             <p className="text-[14px]">
                                 Get the latest and greatest features as soon as we release them.
                             </p>

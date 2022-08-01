@@ -7,7 +7,7 @@ export const feature = (size = 'md') => cntl`
     font-semibold
     ${
         {
-            md: 'text-base',
+            md: 'text-lg',
             sm: 'text-[14px]',
         }[size]
     }
