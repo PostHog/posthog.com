@@ -98,11 +98,10 @@ After switching to `depot build`, those same builds took only [3 minutes on aver
 
 A 5x speed up with very little change to the existing workflow, just one line if we don't include the OIDC improvement.
 
+The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to Depot, PostHog can get more done, iterate faster and fix bugs without interruptions. 
 
-PostHog is a great product with a great team that has a lot of experience in building optimal Docker images. By building those images on Depot's builders, we are able to maximize the cache speedup of those optimized images, allowing PostHog to spend less time waiting for builds.
+_Want to give it a go? [Try out Depot's free, 30-day trial](https://depot.dev/)._
 
-A build that takes 16 minutes and is run 20 times a day accounts for over 5 hours of build time. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to Depot, PostHog's Docker builds are 5 times faster.
 
-We are very excited about what we are building with Depot. Working with collaborators like PostHog shows that there are great opportunities to help out open-source projects!
 
-If you are interested in trying out Depot, we offer a free 30-day trial that includes unlimited build minutes. [Give us a try](https://depot.dev) and let us know if we can help speed up your container image build.
+
