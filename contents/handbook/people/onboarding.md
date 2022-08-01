@@ -38,7 +38,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 ### Everyone
 
 *   [ ] Confirm which team this person will be in
-*   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability)
+*   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Coua to ask them for availability)
 *   [ ] Introduce new joiner to onboarding buddy
 
 ## Two weeks before they join
