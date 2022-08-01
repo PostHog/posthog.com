@@ -181,8 +181,10 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
-    const buttonClasses = `mb-[3px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[5px] inline-block w-full rounded-md ${
-        children || topLevel ? 'hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-all' : ''
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+        children || topLevel
+            ? 'hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-all min-h-[36px]'
+            : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''}`
     useEffect(() => {
         const isOpen = (children) => {
@@ -211,7 +213,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     }
 
     return (
-        <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
                     <Link
@@ -261,7 +263,9 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
 const TableOfContents = ({ menu, handleLinkClick }) => {
     return (
         <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">Table of contents</p>
+            <p className="text-black dark:text-white font-semibold opacity-25 m-0 m2-3 ml-3 text-[15px]">
+                Table of contents
+            </p>
             <nav>
                 {menu.map((menuItem, index) => {
                     return (
@@ -377,7 +381,7 @@ export default function PostLayout({
                     overlayClassName="backdrop-blur"
                     isOpen={mobileMenuOpen}
                 >
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-5">
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
                         <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
                     </div>
                 </PushMenu>
