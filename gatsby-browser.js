@@ -25,5 +25,10 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return /^handbook|^docs\//.test(slug) ? <HandbookLayout {...props} /> : element
+    return /^handbook|^docs\/(?!api)/.test(slug) &&
+        !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
+        <HandbookLayout {...props} />
+    ) : (
+        element
+    )
 }

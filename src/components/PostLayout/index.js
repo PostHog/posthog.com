@@ -309,12 +309,13 @@ export default function PostLayout({
     title,
     filePath,
     breadcrumb,
+    hideSidebar,
 }) {
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [fullWidthContent, setFullWidthContent] = useState(false)
+    const [fullWidthContent, setFullWidthContent] = useState(hideSidebar || !sidebar)
 
     const handleMobileMenuClick = () => {
         setMobileMenuOpen(!mobileMenuOpen)
@@ -332,10 +333,17 @@ export default function PostLayout({
     }
 
     useEffect(() => {
-        setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
-    }, [])
+        if (!hideSidebar && sidebar) {
+            setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
+        } else {
+            setFullWidthContent(true)
+        }
+    }, [sidebar, hideSidebar])
 
-    const toc = tableOfContents?.filter((item) => item.depth <= 2)
+    const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth <= 2)
+    const contentContainerClasses = `w-full transition-all ${
+        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'
+    } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <div id="menu-wrapper">
@@ -390,97 +398,90 @@ export default function PostLayout({
                     id="content-menu-wrapper"
                     className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full"
                 >
-                    <div
-                        className={`w-full transition-all ${!fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'} ${
-                            menu ? 'mx-auto' : 'lg:ml-auto'
-                        }`}
-                    >
+                    <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
                         <div className="article-content">{children}</div>
                     </div>
-                    {questions && (
-                        <div
-                            className={`w-full lg:max-w-[650px] ${
-                                !fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'
-                            } ${menu ? 'mx-auto' : 'lg:ml-auto'}`}
-                        >
-                            {questions}
-                        </div>
-                    )}
+                    {questions && <div className={contentContainerClasses}>{questions}</div>}
                 </article>
-                <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
-                    <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                        {sidebar && (
+                {!hideSidebar && sidebar && (
+                    <aside className="flex-shrink-0 w-full justify-self-end pb-5 my-10 lg:my-0 mr-auto h-full lg:px-0 px-5">
+                        <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
                                 <div className="pt-6 top-10 sticky">{sidebar}</div>
                             </div>
-                        )}
-                        <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-5">
-                            {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                                <div className="px-5 lg:px-8">
-                                    <h4 className="text-[13px] mb-2">On this page</h4>
-                                    <Scrollspy
-                                        key={title}
-                                        offset={-50}
-                                        className="list-none m-0 p-0 flex flex-col space-y-[10px]"
-                                        items={tableOfContents?.map((navItem) => navItem.url)}
-                                        currentClassName="active-product"
-                                    >
-                                        {toc.map((navItem, index) => (
-                                            <li className="relative leading-none" key={navItem.url}>
-                                                <InternalSidebarLink
-                                                    url={navItem.url}
-                                                    name={navItem.value}
-                                                    depth={navItem.depth}
-                                                    className="hover:opacity-100 opacity-60 text-[14px]"
-                                                />
-                                            </li>
-                                        ))}
-                                    </Scrollspy>
-                                </div>
-                            )}
-                            <div className="px-5 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
-                                <Tooltip title="Edit post">
-                                    <span className="relative">
-                                        <Link
-                                            href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                            className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                        >
-                                            <Edit />
-                                        </Link>
-                                    </span>
-                                </Tooltip>
-                                <Tooltip title="Raise an issue">
-                                    <span className="relative">
-                                        <Link
-                                            href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                            className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
-                                        >
-                                            <Issue />
-                                        </Link>
-                                    </span>
-                                </Tooltip>
-                                <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
-                                    <Tooltip title="Toggle full-width content">
-                                        <span className="relative">
-                                            <Toggle
-                                                icon={<ArrowsExpandIcon className="w-[17px]" />}
-                                                checked={fullWidthContent}
-                                                onChange={handleFullWidthContentChange}
-                                            />
-                                        </span>
-                                    </Tooltip>
 
-                                    <Tooltip title="Toggle dark mode">
-                                        <span className="relative">
-                                            <DarkModeToggle />
-                                        </span>
-                                    </Tooltip>
+                            <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-5">
+                                {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
+                                    <div className="px-5 lg:px-8 max-h-72 overflow-auto">
+                                        <h4 className="text-[13px] mb-2">On this page</h4>
+                                        <Scrollspy
+                                            key={title}
+                                            offset={-50}
+                                            className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                            items={tableOfContents?.map((navItem) => navItem.url)}
+                                            currentClassName="active-product"
+                                        >
+                                            {toc.map((navItem, index) => (
+                                                <li className="relative leading-none" key={navItem.url}>
+                                                    <InternalSidebarLink
+                                                        url={navItem.url}
+                                                        name={navItem.value}
+                                                        depth={navItem.depth}
+                                                        className="hover:opacity-100 opacity-60 text-[14px]"
+                                                    />
+                                                </li>
+                                            ))}
+                                        </Scrollspy>
+                                    </div>
+                                )}
+                                <div className="px-5 flex space-x-2 mt-0 lg:mt-10 mb-10 lg:mb-0 pt-5 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                    {filePath && (
+                                        <>
+                                            <Tooltip title="Edit post">
+                                                <span className="relative">
+                                                    <Link
+                                                        href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                                    >
+                                                        <Edit />
+                                                    </Link>
+                                                </span>
+                                            </Tooltip>
+                                            <Tooltip title="Raise an issue">
+                                                <span className="relative">
+                                                    <Link
+                                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                                    >
+                                                        <Issue />
+                                                    </Link>
+                                                </span>
+                                            </Tooltip>
+                                        </>
+                                    )}
+                                    <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
+                                        <Tooltip title="Toggle full-width content">
+                                            <span className="relative">
+                                                <Toggle
+                                                    icon={<ArrowsExpandIcon className="w-[17px]" />}
+                                                    checked={fullWidthContent}
+                                                    onChange={handleFullWidthContentChange}
+                                                />
+                                            </span>
+                                        </Tooltip>
+
+                                        <Tooltip title="Toggle dark mode">
+                                            <span className="relative">
+                                                <DarkModeToggle />
+                                            </span>
+                                        </Tooltip>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </aside>
+                    </aside>
+                )}
             </div>
         </div>
     )

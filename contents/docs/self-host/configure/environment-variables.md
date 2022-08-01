@@ -2,6 +2,7 @@
 title: Environment variables
 sidebar: Docs
 showTitle: true
+hideAnchor: true
 ---
 
 

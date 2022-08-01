@@ -24,7 +24,7 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
 
-const HandbookSidebar = ({ contributors, title, location }) => {
+export const HandbookSidebar = ({ contributors, title, location }) => {
     return (
         <>
             {contributors && (
@@ -134,6 +134,7 @@ export default function Handbook({
                     tableOfContents={tableOfContents}
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+                    hideSidebar={hideAnchor}
                 >
                     <section>
                         <div className="mb-8 relative">
