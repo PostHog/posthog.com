@@ -452,12 +452,12 @@ export default function PostLayout({
                                 )}
                                 <div className="px-5 flex space-x-3 mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {filePath && (
-                                        <>
+                                        <span className="flex space-x-3 items-center text-gray dark:text-[#999]">
                                             <Tooltip className="py-2" title="Edit post">
-                                                <span className="relative">
+                                                <span className="relative border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                                        className="inline-block p-1 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-all active:top-[0.5px] active:scale-[.98] hover:bg-gray-accent-light rounded"
                                                     >
                                                         <Edit />
                                                     </Link>
@@ -467,23 +467,23 @@ export default function PostLayout({
                                                 <span className="relative">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                                        className="dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-colors"
+                                                        className="inline-block p-1 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-all active:top-[0.5px] active:scale-[.98] hover:bg-gray-accent-light rounded"
                                                     >
                                                         <Issue />
                                                     </Link>
                                                 </span>
                                             </Tooltip>
-                                        </>
+                                        </span>
                                     )}
-                                    <div className="!ml-auto flex space-x-3 items-center text-gray dark:text-[#999]">
+                                    <div className="!ml-auto flex space-x-3 items-center text-black dark:text-[#999]">
                                         <Tooltip
-                                            className="py-2 border-x border-gray-accent-light dark:border-gray-accent-dark border-dashed flex"
+                                            className="py-2 border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex"
                                             title="Toggle content width"
                                         >
                                             <button
                                                 onClick={handleFullWidthContentChange}
                                                 className={
-                                                    'relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded-[3px] flex items-center justify-center transition-colors mx-1'
+                                                    'relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded flex items-center justify-center transition-colors mx-1 opacity-50 hover:opacity-100'
                                                 }
                                             >
                                                 <ExpandDocument expanded={fullWidthContent} />
