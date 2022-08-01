@@ -39,9 +39,12 @@ const ShareLink = ({ children, url }) => {
         }
     }
     return (
-        <a className="text-primary hover:text-primary dark:text-white dark:hover:text-white" onClick={handleClick}>
+        <button
+            className="flex text-primary hover:text-primary dark:text-white dark:hover:text-white"
+            onClick={handleClick}
+        >
             {children}
-        </a>
+        </button>
     )
 }
 
