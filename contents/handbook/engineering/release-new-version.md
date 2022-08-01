@@ -30,7 +30,7 @@ The release manager is ultimately responsible for the timeline of the release. T
 
 ### Pre-release (Wednesday before the release)
 
-1. [ ] Post in #dev about the upcoming release (replace <version> and <array draft pr> from Joe)
+1. [ ] Post in #dev about the upcoming release (replace `<version>` and `<array draft pr>` from Joe)
 ```
 Release is happening next Monday. Which means 
 1. There will be code freeze today (fixes that need to be cherry picked later should be tagged with `release-<version>`)
