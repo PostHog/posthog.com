@@ -223,6 +223,15 @@ posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 
 # returns string or None
 ```
 
+**Getting all flag values**
+
+You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
+
+```python
+posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
+# returns dict of flag key and value pairs.
+```
+
 #### Local Evaluation
 
 > **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
