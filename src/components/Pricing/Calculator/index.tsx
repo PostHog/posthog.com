@@ -327,7 +327,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 </div>
 
                 <p className="text-xs text-center pt-4 pb-0 m-0 text-black/50">
-                    Not sure your event volume?{' '}
+                    Not sure about your event volume?{' '}
                     <Link to="/blog/calculating-events-from-users" className="font-bold">
                         Here's a handy guide.
                     </Link>
