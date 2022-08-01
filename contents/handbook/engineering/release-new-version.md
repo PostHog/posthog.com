@@ -81,6 +81,7 @@ The release manager is ultimately responsible for the timeline of the release. T
   git checkout release-[version]
   git log --pretty=format:"%s %ae" [old-version]..head | sort -t ':' -k 1,1 -s > changelog.txt
   ```
+1. Review any user-contributed apps to be included in the release. Please tag Joe Martin for reviews, as Marketing will create the relevant app pages and arrange co-marketing once apps have been reviewed. 
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
 1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 
