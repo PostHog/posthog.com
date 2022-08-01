@@ -74,6 +74,7 @@ Optionally you can submit:
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 -   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
+-   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event.
 
 For example:
 
@@ -169,8 +170,6 @@ posthog.alias('anonymous session id', 'distinct id')
 
 ### Feature flags
 
-> **Note:** To use feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-
 PostHog's [Feature Flags](/docs/user-guides/feature-flags) allow you to safely deploy and roll back new features.
 
 When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
@@ -179,6 +178,7 @@ When using them with one of libraries, you should check if a feature flag is ena
 
 ```python
 posthog.feature_enabled('beta-feature', 'distinct id')
+# returns True or False
 ```
 
 **Example use case**
@@ -192,6 +192,54 @@ def homepage(request):
 ```
 
 > **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
+
+**Get a flag value**
+
+If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
+
+
+```python
+posthog.get_feature_flag('beta-feature', 'distinct id')
+# returns string or None
+```
+
+**Overriding server properties**
+
+Sometimes, you might want to use properties that aren't available on PostHog's servers / haven't been ingested yet / were set incorrectly earlier to evaluate feature flags. You can do so by setting properties the flag depends on with these calls.
+
+For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
+
+
+```python
+posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
+# returns string or None
+```
+
+The same holds for groups. If you have a group name `organisation`, you can add properties like so:
+
+
+```python
+posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google', group_properties={'organisation': {'is_authorized': True})
+# returns string or None
+```
+
+#### Local Evaluation
+
+> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
+
+All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
+
+1. The library must be initialised with a personal API key
+2. You must know all person or group properties the flag depends on.
+
+Then, the flag can be evaluated locally. The method signature looks exactly like above
+
+```python
+posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
+# returns string or None
+```
+
+> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be upto a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `posthog.poll_interval = <value in seconds>`.
 
 ### Group analytics
 
