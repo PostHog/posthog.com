@@ -68,14 +68,26 @@ h1 {
 h2 {
     @apply text-3xl font-bold leading-normal;
     letter-spacing: -0.03em;
+
+    code {
+        @apply !font-bold !text-3xl;
+    }
 }
 
 h3 {
     @apply text-2xl leading-normal;
+
+    code {
+        @apply !font-bold !text-2xl;
+    }
 }
 
 h4 {
     @apply text-xl leading-normal mb-3;
+
+    code {
+        @apply !font-bold !text-xl;
+    }
 }
 
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
@@ -87,12 +99,6 @@ h4 {
     h6 {
         @apply mt-8;
         letter-spacing: -0.015em;
-    }
-
-    h2 {
-        code {
-            @apply font-bold;
-        }
     }
 
     p,
@@ -114,7 +120,7 @@ h4 {
     }
 
     code {
-        @apply font-medium;
+        @apply font-medium text-sm;
     }
 
     blockquote {
@@ -724,7 +730,7 @@ ul {
     @apply flex-grow text-left flex items-center space-x-1;
 }
 .DocSearch-Button-Placeholder {
-    @apply inline-flex items-center dark:text-white text-black opacity-25 text-base;
+    @apply inline-flex items-center dark:text-white text-black opacity-25 text-[15px];
 }
 .DocSearch-Button-Container {
     @apply flex items-center;
