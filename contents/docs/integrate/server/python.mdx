@@ -205,7 +205,7 @@ posthog.get_feature_flag('beta-feature', 'distinct id')
 
 **Overriding server properties**
 
-Sometimes, you might want to use properties that aren't available on PostHog's servers / haven't been ingested yet / were set incorrectly earlier to evaluate feature flags. You can do so by setting properties the flag depends on with these calls.
+Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
 
 For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
