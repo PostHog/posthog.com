@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-![PostHog Newsletter](images/docs/newsletter/hogmails.jpg)
+![PostHog Newsletter](images/docs/newsletter/hogmail.png)
 
 <NewsletterForm
 compact
@@ -14,18 +14,18 @@ compact
     divider={false}
     title="A newsletter about making better products"
     size="full"
-    cols={2}
+    cols={3}
 >
-    <div>
-        <ul className="text-[20px] font-semibold">
-            <li>Select cuts from the PostHog blog</li>
-            <li>The latest tutorials and news</li>
-        </ul>
+    <div class="center">
+        <h1>1.</h1>
+        <h5>Important news from the PostHog blog</h5>
     </div>
-    <div>
-        <ul className="text-[20px] font-semibold">
-            <li>The best of what we're reading</li>
-            <li>And an awesome hedgehog cartoon!</li>
-        </ul>    
+    <div class="center">
+        <h1>2.</h1>
+        <h5>The latest PostHog tutorials and tips</h5>
+    </div>
+    <div class="center">
+        <h1>3.</h1>
+        <h5>Our favourite coffee-break reading</h5>
     </div>
 </Section>
