@@ -457,6 +457,7 @@ export default function PostLayout({
                     </div>
                 )}
                 <article
+                    key={`${title}-article`}
                     id="content-menu-wrapper"
                     className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
                 >
@@ -469,7 +470,10 @@ export default function PostLayout({
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
-                    <aside className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border">
+                    <aside
+                        key={`${title}-sidebar`}
+                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border"
+                    >
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
                                 <div className="pt-6 top-10 sticky">{sidebar}</div>
@@ -480,7 +484,6 @@ export default function PostLayout({
                                     <div className="px-5 lg:px-8 lg:pb-4 max-h-72 overflow-auto lg:block hidden">
                                         <h4 className="text-[13px] mb-2">On this page</h4>
                                         <Scrollspy
-                                            key={title}
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"
                                             items={tableOfContents?.map((navItem) => navItem.url)}
