@@ -18,7 +18,7 @@ compact
 >
     <div class="center">
         <h1>1.</h1>
-        <h5>Important news from the PostHog blog</h5>
+        <h5>Never miss a PostHog blog post</h5>
     </div>
     <div class="center">
         <h1>2.</h1>
