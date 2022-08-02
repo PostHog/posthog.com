@@ -387,7 +387,7 @@ By default, Redis doesn't use any password for authentication. If you want to co
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
-### [Kafka](../runbook/kafka/)
+### [Kafka](../../runbook/services/kafka/)
 
 Kakfa is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `kafka` namespace.
 

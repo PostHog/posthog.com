@@ -76,7 +76,7 @@ You can manage staff users either via the PostHog UI, or the API if you prefer -
 
 Self-hosted users can now shard and replicate their data on ClickHouse to scale horizontally. This can help improve fault tolerance and improve query performance in certain situations.
 
-Check out the [horizontal scaling runbook](/docs/self-host/runbook/clickhouse/sharding-and-replication) for more information.
+Check out the [horizontal scaling runbook](/docs/runbook/services/clickhouse/sharding-and-replication) for more information.
 
 ### Other improvements & fixes
 
