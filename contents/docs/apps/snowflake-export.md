@@ -4,72 +4,205 @@ layout: app
 github: https://github.com/PostHog/snowflake-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=Snowflake
 thumbnail: ../../apps/thumbnails/snowflake.svg
+official: true
 topics:
     - snowflake-export
 ---
 
-### What does the Snowflake Export app do?
+This app allows you to export both live and historical events from PostHog into Snowflake.
+This is useful when you want to run custom SQL queries on your data in PostHog using Snowflake's high-performance infrastructure.
 
-This app uses a Snowflake external stage to stage events in object storage - Amazon S3 or Google Cloud Storage. Staged events (stored in object storage as files containing event batches) are then copied into the final destination – your Snowflake table – once an hour.
+This app utilizes a Snowflake [external stage](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) to stage events in object storage - Amazon S3 or Google Cloud Storage.
+Staged events (stored in object storage as files containing event batches) are then copied into the final destination – your Snowflake table – once every 10 minutes by default.
 
-### What are the requirements for this app?
+### Install
 
-The First Time Event Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+#### PostHog Cloud
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+PostHog Cloud users can find the app [here on the apps page](https://app.posthog.com/project/apps?name=Snowflake).
 
-You'll also need:
+Before you can enable the app, you will need to [configure it](#configure) by clicking on the settings icon.
+Once the app has been configured, you can enable it by flipping the toggle and it will start exporting newly ingested events to Snowflake.
 
--   a Snowflake user
--   an S3 _or_ GCS bucket
--   an AWS _or_ GCP user with permissions to access that bucket in order to use this app
+#### PostHog Self-hosted
 
-### How do I configure the Snowflake Export app?
+> The Snowflake Export app requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
+> Not running 1.24.0? Find out [how to update](/docs/runbook/upgrading-posthog)!
 
-1. [Create a new user in Snowflake](https://docs.snowflake.com/en/sql-reference/sql/create-user.html) that this app can use.
-    > ⚠️ Make sure it has appropriate permissions to **create stages**, as well as **create, modify, and copy into a table** in your desired database.
-2. Make sure you have a [Snowflake Warehouse](https://docs.snowflake.com/en/user-guide/warehouses-overview.html) set up. Warehouses are needed to perform `COPY INTO` statements. We recommend a warehouse that will start up automatically when needed.
-3. Fill in the configuration options with the user you just created, passing its username and password. For the Snowflake account ID, this can be found in your Snowflake URL. For example, if your URL is: `https://xxx11111.us-east-1.snowflakecomputing.com/`, your account ID will be `xxx11111.us-east-1`. You may also pass in the Cloud provider if that does not work e.g. `xxx11111.us-east-1.aws`.
-4. **GCS-only.** Make sure the user available to the plugin has permissions on the storage integration you created at Step 2 of the GCS configuration instructions. You can do this like so:
-    ```sql
-    GRANT USAGE ON INTEGRATION <your_gcs_integration_name> TO ROLE <plugin_user_role>
-    ```
+1. Log in to your PostHog instance
+2. Click 'Apps' on the left-hand navigation
+3. Search for 'Snowflake'
+4. Select the 'Snowflake Export' app and press 'Install'
+5. [Configure the app](#configure) by entering both your AWS & Snowflake credentials
+6. Enable the app and watch events roll into Snowflake!
 
-If you're exporting from PostHog Cloud, do **NOT set any IP whitelist/blacklist** or other network policies. PostHog Cloud operates on a decentralized network of computing resources and therefore the IPs could change at any time.
+### Configure
 
-### How do I configure Amazon S3 for the Snowflake Export app?
+#### Set-up Snowflake
+
+To get started, you'll need to create a [Snowflake account](https://signup.snowflake.com/). Once you've set up your account, login to your Snowflake instance.
+
+##### Creating a virtual warehouse
+
+First, we'll need to set up a [Snowflake Virtual Warehouse](https://docs.snowflake.com/en/user-guide/warehouses-overview.html).
+If you already have a Snowflake Warehouse that you would like to use you can skip this step.
+
+To create a new warehouse, login to Snowflake and navigate to "Admin" > "Warehouses" on the left panel and click on the "+ Warehouse" button.
+Give your new warehouse a name and choose a size for it.
+
+For more information on choosing a size for your warehouse, checkout the [Snowflake docs](https://docs.snowflake.com/en/user-guide/warehouses-considerations.html).
+
+![creating a snowflake warehouse](../../images/docs/apps/snowflake-export/snowflake-warehouse.png)
+
+##### Creating a new database
+
+Now that we have a warehouse set up, we'll create a new database to store our exported data. To do this we'll use a [Worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet.html) to execute SQL statements with our new Warehouse.
+
+We can create a new Worksheet by navigating to the Worksheets tab and clicking the "+ Worksheet" button. Then in the code editor, paste the following SQL:
+
+```sql
+CREATE DATABASE IF NOT EXISTS POSTHOG_DB;
+```
+
+This will create a new database called `POSTHOG_DB` where we can store our exports.
+
+##### Set-up roles and permissions
+
+Now that we have our warehouse and database set up, we're going to start to get our permissions configured so PostHog can access these resources.
+
+We'll do this by creating a new role `POSTHOG_EXPORT` which we'll grant only the necessary permissions that PostHog needs with the following SQL:
+
+```sql
+CREATE ROLE IF NOT EXISTS POSTHOG_EXPORT;
+
+GRANT USAGE ON WAREHOUSE POSTHOG_WH TO ROLE POSTHOG_EXPORT;
+GRANT USAGE ON DATABASE POSTHOG_DB TO ROLE POSTHOG_EXPORT;
+GRANT USAGE,CREATE TABLE,CREATE STAGE ON SCHEMA POSTHOG_DB.PUBLIC TO ROLE POSTHOG_EXPORT;
+GRANT INSERT,UPDATE ON ALL TABLES IN SCHEMA POSTHOG_DB.PUBLIC TO ROLE POSTHOG_EXPORT;
+
+-- This will ensure that our admin user still has access to the table PostHog creates for our export data
+GRANT ALL ON FUTURE TABLES IN SCHEMA POSTHOG_DB.PUBLIC TO ROLE ACCOUNTADMIN;
+```
+
+> **Note: ** For all the SQL snippets, _make sure to execute every line_! This can be done by selecting the entire block of commands within the editor and pressing the blue play button in the top right.
+
+This will create a new role called `POSTHOG_EXPORT` with permission to use our newly created Warehouse, as well as permission to `INSERT` and `UPDATE` on tables in our database `POSTHOG_DB`.
+
+Finally, we'll create a new user and grant the `POSTHOG_EXPORT` role to it. Make sure to keep track of the password you use for this user as we'll need it later!
+
+```sql
+CREATE USER IF NOT EXISTS POSTHOG
+    PASSWORD = '<your_password>'
+    DEFAULT_ROLE = POSTHOG_EXPORT
+    MUST_CHANGE_PASSWORD = false;
+
+GRANT ROLE POSTHOG_EXPORT TO USER POSTHOG;
+```
+
+#### Set-up external staging
+
+This app uses an [External stage](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) to store exported data, which can then be copied into Snowflake for processing.
+Currently, we support both Amazon S3 and Google Cloud Storage for staging files.
+
+##### Connect Amazon S3 to Snowflake
 
 1. Create a new S3 bucket, preferably in the same AWS region as your Snowflake instance.
-2. Follow [this Snowflake guide on S3](https://docs.snowflake.com/en/user-guide/data-load-s3-config-aws-iam-user.html) to configure AWS IAM User Credentials to Access Amazon S3. However, instead of doing step 3 yourself, input the AWS Key ID and Secret Key in the appropriate app configuration options. We'll take care of creating the stage for you.
+2. Follow [this Snowflake guide on S3](https://docs.snowflake.com/en/user-guide/data-load-s3-config-aws-iam-user.html) to configure AWS IAM User Credentials to access Amazon S3. However, instead of doing step 3 yourself, input the AWS Key ID and Secret Key in the appropriate app configuration options. We'll take care of creating the stage for you.
 
-### How do I configure Google Cloud Storage for the Snowflake Export app?
+##### Connect Google Cloud Storage to Snowflake
 
 1. Create a new GCS bucket.
 2. Follow [this Snowflake guide on GCS](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html) to create a storage integration and generate a user for Snowflake to use when accessing your bucket. Make sure not to skip over any part of the guide!
-3. Download the service account credentials JSON file and upload it in the configuration step of this app.
+3. Download the service account credentials JSON file, we'll upload this into PostHog during the configuration step.
 
-### Why am I seeing connection issues with the Snowflake Export app?
+Make sure the user available to the plugin has permissions on the storage integration you just created. You can do this like so:
 
-If you're running into connection issues please verify your login credentials, make sure **all** the permissions listed above have been granted to your user, and that you do not have any IP whitelist/blacklist policy (if exporting from PostHog Cloud).
+```sql
+GRANT USAGE ON INTEGRATION <your_gcs_integration_name> TO ROLE POSTHOG_EXPORT;
+```
 
-### Is the source code for this app available?
+#### Configure the app within PostHog
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Snowflake Export app](https://github.com/PostHog/snowflake-export-plugin) is available on GitHub.
+Now that Snowflake is set up, the last step is to configure the app. Below are the required options that you'll need to fill-in to get the app running.
+There are also additional options available for advanced users who need to customize their integration further.
 
-### Who created this app?
+**`Snowflake account`**<br />
+This can be found in your Snowflake URL. For example, if your URL when viewing Snowflake begins with: `https://app.snowflake.com/us-east-2.aws/xxx1111/...`, then your account ID would be `xxx1111.us-east-2.aws`.
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra) and [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the Snowflake Export app. We miss you, Paolo!
+**`Snowflake username`**<br />
+The name of the user in Snowflake that has access to our database. If you followed the tutorial above, this will be `POSTHOG`
 
-### Who maintains this app?
+**`Snowflake password`**<br />
+The password for the user we created.
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
+**`Snowflake database name`**<br />
+The name of the database where we would like PostHog to store our info. If you followed the tutorial above, set this as `POSTHOG_DB`
 
-### What if I have feedback on this app?
+**`Snowflake database schema`**<br />
+The schema within our database that we would like to use. If you followed the tutorial above, set this as `PUBLIC`
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+**`Snowflake table name`**<br />
+The table within our database that we would like to copy our exported data into. If a table with the provided name does not exist yet, it will be created
 
-### What if my question isn't answered above?
+**`Virtual warehouse to use for copying files`**<br />
+The Warehouse we would like to use for executing our operations. If you followed, the tutorial above, set this as `POSTHOG_WH`
 
-We love answering questions. Ask us anything via [our Support page](/questions).
+**`Stage type`**<br />
+Whether you set up external staging with `S3` or `GCS`. Depending on what you set up, you will need to provide different config information.
+
+**`Name to use for external stage`**<br />
+The name of the stage within Snowflake for sourcing data from.
+
+##### Amazon S3
+
+**`Bucket name`**<br />
+The name of the S3 bucket to use for exporting data. This should be without the path or region.
+
+**`AWS access key ID`**<br />
+The access key ID for the IAM user with access to your bucket.
+
+**`AWS secret access key`**<br />
+The secret access key for the IAM user with access to your bucket.
+
+**`S3 Bucket region`**<br />
+The region where your bucket is located. We recommend using the same region as your Snowflake instance.
+
+##### Google Cloud Storage
+
+**`Bucket name`**<br />
+The name of the GCS bucket to use for exporting data. This should be without the path or region.
+
+**`GCS storage integration name`**<br />
+The name of the integration within Snowflake you created in [this step](#connect-google-cloud-storage-to-snowflake)
+
+**`GCS credentials file`**<br />
+A JSON file with your credentials for accessing GCS. Instructions on how to get this file can be found in [this Google Cloud tutorial](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication)
+
+#### Your export is now set up!
+
+Now that the app is configured, all you'll need to do is "Enable" it and PostHog will start exporting events to Snowflake!
+
+### Troubleshooting
+
+#### Why am I seeing connection issues with the Snowflake Export app?
+
+If you're running into connection issues please verify your login credentials, make sure **all** the permissions listed above have been granted to your user.
+
+If you're exporting from PostHog Cloud, do **NOT set any IP whitelist/blacklist** or other network policies. PostHog Cloud operates on a decentralized network of computing resources and therefore the IPs could change at any time.
+
+### Further information
+
+#### Who created this app?
+
+A lot of people worked on this app! We'd like to thank the following contributors for creating the Snowflake Export app. Thank you, all!
+
+-   [Yakko Majuri](https://github.com/yakkomajuri)
+-   [Marius Andra](https://github.com/mariusandra)
+-   [Michael Matloka](https://github.com/Twixes)
+-   [Paolo D'Amico](https://github.com/paolodamico) (We miss you Paolo!)
+
+#### What if my question isn't answered above?
+
+We love answering questions. Ask us anything via [our Support page](/questions) or using the Q&A widget at the bottom of the page.
 
 You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
