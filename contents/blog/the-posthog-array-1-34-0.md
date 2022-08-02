@@ -23,7 +23,7 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 
 ## PostHog 1.34.0 release notes
 
-> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
+> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 

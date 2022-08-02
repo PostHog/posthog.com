@@ -20,7 +20,7 @@ Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, int
 
 ## PostHog 1.31.0 release notes
 
-> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 - [Group Analytics](#group-analytics)

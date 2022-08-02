@@ -21,7 +21,7 @@ For Enterprise customers, we've also added the ability to set granular permissio
 
 ## PostHog 1.33.0 release notes
 
-> To upgrade your PostHog instance, you can check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
+> To upgrade your PostHog instance, you can check out our [upgrade guide](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 

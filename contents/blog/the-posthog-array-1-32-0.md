@@ -17,7 +17,7 @@ excerpt: PostHog 1.32.0 makes it easier to find what you want in the Persons & G
 
 ## PostHog 1.32.0 release notes
 
-> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 - [Redesigned Persons & Groups pages](#redesigned-persons--groups-pages)
