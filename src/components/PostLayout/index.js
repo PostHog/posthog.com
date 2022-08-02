@@ -17,6 +17,7 @@ import Toggle from 'components/Toggle'
 import { ArrowsExpandIcon } from '@heroicons/react/outline'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import { replacePath } from '../../../gatsby/utils'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -180,8 +181,9 @@ const Chevron = ({ open }) => {
 }
 
 const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }) => {
-    const { pathname } = useLocation()
-    const isActive = url === pathname
+    const location = useLocation()
+    const pathname = replacePath(location?.pathname)
+    const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState(false)
     const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
         children || topLevel
@@ -197,8 +199,9 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                 })
             )
         }
-        setOpen(isActive || (children && isOpen(children)))
-    }, [url])
+        setOpen(url === pathname || (children && isOpen(children)))
+        setIsActive(url === pathname)
+    }, [pathname])
 
     const variants = {
         hidden: {
