@@ -181,9 +181,11 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     const { pathname } = useLocation()
     const isActive = url === pathname
     const [open, setOpen] = useState(false)
-    const buttonClasses = `mb-[3px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white px-3 py-[5px] inline-block w-full rounded-md ${
-        children || topLevel ? 'hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark transition-all' : ''
-    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark' : ''}`
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+        children || topLevel
+            ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
+            : ''
+    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
     useEffect(() => {
         const isOpen = (children) => {
             return (
@@ -211,7 +213,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     }
 
     return (
-        <ul className={`list-none m-0 p-0 text-base font-semibold overflow-hidden ml-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
                     <Link
@@ -261,7 +263,9 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
 const TableOfContents = ({ menu, handleLinkClick }) => {
     return (
         <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-3 ml-3">Table of contents</p>
+            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
+                Table of contents
+            </p>
             <nav>
                 {menu.map((menuItem, index) => {
                     return (
@@ -288,7 +292,7 @@ const Breadcrumb = ({ crumbs }) => {
                 return (
                     <li
                         key={index}
-                        className={`after:mx-1 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
+                        className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
                     >
                         {active ? (
                             <span className="text-black/40 dark:text-white/40 font-semibold">{name}</span>
@@ -304,7 +308,7 @@ const Breadcrumb = ({ crumbs }) => {
 
 const SidebarAction = ({ children, title, width, className = '', href, onClick }) => {
     const buttonClasses =
-        'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors text-gray dark:text-[#999] hover:text-gray dark:hover:text-[#999]'
+        'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
 
     return (
         <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
@@ -403,7 +407,7 @@ export default function PostLayout({
                     overlayClassName="backdrop-blur"
                     isOpen={mobileMenuOpen}
                 >
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-5">
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
                         <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
                     </div>
                 </PushMenu>
@@ -418,7 +422,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
+                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menu={menu} />
                         </aside>
                     </div>
@@ -442,25 +446,33 @@ export default function PostLayout({
 
                             <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
                                 {view === 'Article' && toc?.length > 1 && (
-                                    <div className="px-5 lg:px-8 max-h-72 overflow-auto lg:block hidden">
+                                    <div className="px-5 lg:px-8 lg:pb-4 max-h-72 overflow-auto lg:block hidden">
                                         <h4 className="text-[13px] mb-2">On this page</h4>
                                         <Scrollspy
                                             key={title}
                                             offset={-50}
-                                            className="list-none m-0 p-0 flex flex-col space-y-[10px]"
+                                            className="list-none m-0 p-0 flex flex-col"
                                             items={tableOfContents?.map((navItem) => navItem.url)}
                                             currentClassName="active-product"
                                         >
                                             {toc.map((navItem, index) => (
-                                                <li className="relative leading-none" key={navItem.url}>
+                                                <li className="relative leading-none m-0" key={navItem.url}>
                                                     <InternalSidebarLink
                                                         url={navItem.url}
                                                         name={navItem.value}
                                                         depth={navItem.depth}
-                                                        className="hover:opacity-100 opacity-60 text-[14px]"
+                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
                                                     />
                                                 </li>
                                             ))}
+                                            <li className="mt-0">
+                                                <a
+                                                    href="#squeak-questions"
+                                                    className="text-almost-black hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                >
+                                                    Questions?
+                                                </a>
+                                            </li>
                                         </Scrollspy>
                                     </div>
                                 )}

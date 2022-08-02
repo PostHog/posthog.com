@@ -13,7 +13,7 @@ export default function Toggle({
 }) {
     return (
         <span className="flex space-x-1.5 items-center">
-            {icon}
+            <span className="opacity-50">{icon}</span>
             <Switch
                 checked={checked}
                 onChange={onChange}
