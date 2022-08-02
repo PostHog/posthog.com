@@ -835,15 +835,15 @@
                     "children": [
                         {
                             "name": "To another self-hosted instance",
-                            "url": "/docs/runbook/migrate-to-another-self-hosted-instance"
+                            "url": "/docs/runbook/migrate/migrate-to-another-self-hosted-instance"
                         },
                         {
                             "name": "To PostHog from Amplitude",
-                            "url": "/docs/runbook/migrate-from-amplitude"
+                            "url": "/docs/runbook/migrate/migrate-from-amplitude"
                         },
                         {
                             "name": "Between Cloud and self-hosted",
-                            "url": "/docs/runbook/migrate-between-cloud-and-self-hosted"
+                            "url": "/docs/runbook/migrate/migrate-between-cloud-and-self-hosted"
                         }
                     ]
                 },
