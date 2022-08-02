@@ -1,5 +1,5 @@
 ---
-title: Debugging long-running migrations when upgrading Postgres-backed PostHog
+title: Debugging long-running migrations
 sidebar: Docs
 showTitle: true
 ---
@@ -8,7 +8,7 @@ When trying to upgrade a self-hosted Postgres-backed PostHog instance, we have s
 
 For example, when trying to migrate the persons table, some users have reported that a lock is never acquired, making the migration hang.
 
-This usually happens because some analytics queries are taking too long to complete. 
+This usually happens because some analytics queries are taking too long to complete.
 
 To get rid of these queries and run the migration, you can use the script below on the node where the PostHog Django server (web) is running.
 
@@ -19,7 +19,6 @@ To get rid of these queries and run the migration, you can use the script below 
 <summary><b>Python script</b></summary>
 
 <br />
-
 
 ```python
 # How to run:
@@ -77,8 +76,6 @@ while open_queries and len(open_queries) > 0 and tries < MAX_TRIES:
 ```
 
 </details>
-
-
 
 <details>
 
