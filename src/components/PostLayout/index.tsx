@@ -13,13 +13,12 @@ import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
-import Toggle from 'components/Toggle'
-import { ArrowsExpandIcon } from '@heroicons/react/outline'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { replacePath } from '../../../gatsby/utils'
+import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
 
-const Iframe = (props) => {
+const Iframe = (props: any) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
         return (
             <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
@@ -31,7 +30,7 @@ const Iframe = (props) => {
     }
 }
 
-const ShareLink = ({ children, url }) => {
+const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
     const height = 436
     const handleClick = () => {
@@ -51,9 +50,17 @@ const ShareLink = ({ children, url }) => {
     )
 }
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props: any) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-export const SidebarSection = ({ title, children, className = '' }) => {
+export const SidebarSection = ({
+    title,
+    children,
+    className = '',
+}: {
+    title?: string
+    children: React.ReactNode
+    className?: string
+}) => {
     return (
         <div className={`py-4 px-5 lg:px-8 ${className}`}>
             {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
@@ -62,10 +69,10 @@ export const SidebarSection = ({ title, children, className = '' }) => {
     )
 }
 
-export const Topics = ({ topics }) => {
+export const Topics = ({ topics }: { topics: ITopic[] }) => {
     return (
         <ul className="list-none p-0 flex items-start flex-wrap -m-1">
-            {topics.map(({ name, url, state }) => {
+            {topics.map(({ name, url, state }: ITopic) => {
                 return (
                     <li className="m-1" key={name}>
                         <Chip state={state} className="text-red hover:text-red" href={url} size="xs">
@@ -78,11 +85,11 @@ export const Topics = ({ topics }) => {
     )
 }
 
-export const PageViews = ({ pageViews }) => {
+export const PageViews = ({ pageViews }: { pageViews: string | number }) => {
     return <p className="m-0 opacity-50 font-semibold">{pageViews} views</p>
 }
 
-export const ShareLinks = ({ title, href }) => {
+export const ShareLinks = ({ title, href }: { title: string; href: string }) => {
     return (
         <div className="opacity-50 flex space-x-3 items-center">
             <ShareLink url={`https://www.facebook.com/sharer/sharer.php?u=${href}`}>
@@ -106,12 +113,13 @@ export const ShareLinks = ({ title, href }) => {
     )
 }
 
-export const Contributor = ({ image, name }) => {
+export const Contributor = ({ image, name }: IContributor) => {
+    const gatsbyImage = image && getImage(image)
     return (
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
-                {image ? (
-                    <GatsbyImage image={getImage(image)} />
+                {gatsbyImage ? (
+                    <GatsbyImage image={gatsbyImage} alt={name} />
                 ) : (
                     <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -130,11 +138,17 @@ export const Contributor = ({ image, name }) => {
     )
 }
 
-export const Contributors = ({ contributors, className = '' }) => {
+export const Contributors = ({
+    contributors,
+    className = '',
+}: {
+    contributors: IContributor[]
+    className?: string
+}) => {
     const classes = 'flex space-x-2 items-center no-underline'
     return (
         <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.slice(0, 3).map(({ image, id, name, url, state }) => {
+            {contributors.slice(0, 3).map(({ image, name, url, state }) => {
                 return (
                     <li key={name}>
                         {url ? (
@@ -153,11 +167,11 @@ export const Contributors = ({ contributors, className = '' }) => {
     )
 }
 
-export const Text = ({ children }) => {
+export const Text = ({ children }: { children: React.ReactNode }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
-const Chevron = ({ open }) => {
+const Chevron = ({ open }: { open: boolean }) => {
     return (
         <div className="bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white">
             <svg
@@ -180,21 +194,21 @@ const Chevron = ({ open }) => {
     )
 }
 
-const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }) => {
+const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }: IMenu) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
     useEffect(() => {
-        const isOpen = (children) => {
+        const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
                 children &&
-                children.some((child) => {
+                children.some((child: IMenu) => {
                     return child.url === pathname || isOpen(child.children)
                 })
             )
@@ -245,17 +259,17 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             )}
                         </AnimatePresence>
                         <span>{name}</span>
-                        {children && children.length > 0 && <Chevron open={open} />}
+                        {children && children.length > 0 && <Chevron open={open ?? false} />}
                     </Link>
                 ) : (
                     <button className={buttonClasses} onClick={() => setOpen(!open)}>
                         <span>{name}</span>
-                        {children && children.length > 0 && <Chevron open={open} />}
+                        {children && children.length > 0 && <Chevron open={open ?? false} />}
                     </button>
                 )}
                 {children && children.length > 0 && (
                     <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
-                        {children.map((child, index) => {
+                        {children.map((child) => {
                             return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
                         })}
                     </motion.div>
@@ -265,14 +279,14 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     )
 }
 
-const TableOfContents = ({ menu, handleLinkClick }) => {
+const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkClick?: () => void }) => {
     return (
         <>
             <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
                 Table of contents
             </p>
             <nav>
-                {menu.map((menuItem, index) => {
+                {menu.map((menuItem) => {
                     return (
                         <Menu
                             topLevel
@@ -288,11 +302,11 @@ const TableOfContents = ({ menu, handleLinkClick }) => {
     )
 }
 
-const Breadcrumb = ({ crumbs }) => {
+const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     const { pathname } = useLocation()
     return (
         <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
-            {crumbs.map(({ name, url, next }, index) => {
+            {crumbs.map(({ name, url }, index) => {
                 const active = index === crumbs.length - 1 && url === pathname
                 return (
                     <li
@@ -311,7 +325,7 @@ const Breadcrumb = ({ crumbs }) => {
     )
 }
 
-const SidebarAction = ({ children, title, width, className = '', href, onClick }) => {
+const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     const buttonClasses =
         'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
 
@@ -336,7 +350,7 @@ const SidebarAction = ({ children, title, width, className = '', href, onClick }
     )
 }
 
-const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }) => {
+const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }: INextPost) => {
     return (
         <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
             <div className={contentContainerClasses}>
@@ -375,7 +389,7 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
-}) {
+}: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
@@ -393,7 +407,7 @@ export default function PostLayout({
     }, [])
 
     const handleFullWidthContentChange = () => {
-        localStorage.setItem('full-width-content', !fullWidthContent)
+        localStorage.setItem('full-width-content', !fullWidthContent + '')
         setFullWidthContent(!fullWidthContent)
     }
 
