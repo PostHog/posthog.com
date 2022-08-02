@@ -13,28 +13,28 @@ This app allows you to export both live and historical events from PostHog into 
 This is useful when you want to run custom SQL queries on your data in PostHog using Snowflake's high-performance infrastructure.
 
 This app utilizes a Snowflake [external stage](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) to stage events in object storage - Amazon S3 or Google Cloud Storage.
-Staged events (stored in object storage as files containing event batches) are then copied into the final destination – your Snowflake table – once an hour.
+Staged events (stored in object storage as files containing event batches) are then copied into the final destination – your Snowflake table – once every 10 minutes by default.
 
 ### Install
 
 #### PostHog Cloud
 
-PostHog Cloud users can find the app [here in their dashboard](https://app.posthog.com/project/apps?name=Snowflake).
+PostHog Cloud users can find the app [here on the apps page](https://app.posthog.com/project/apps?name=Snowflake).
 
 Before you can enable the app, you will need to [configure it](#configure) by clicking on the settings icon.
-Once the app has been configured, you can enable it by flipping the toggle and it will start exporting newly ingested events to S3.
+Once the app has been configured, you can enable it by flipping the toggle and it will start exporting newly ingested events to Snowflake.
 
 #### PostHog Self-hosted
 
-> The S3 Export Plugin requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
+> The Snowflake Export app requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
 > Not running 1.24.0? Find out [how to update](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand navigation
-3. Search for 'S3'
-4. Select the 'S3 Export Plugin' and press 'Install'
-5. [Configure the app](#configure) by entering your AWS credentials and S3 bucket details
-6. Enable the app and Watch events roll into S3!
+3. Search for 'Snowflake'
+4. Select the 'Snowflake Export' app and press 'Install'
+5. [Configure the app](#configure) by entering both your AWS & Snowflake credentials
+6. Enable the app and watch events roll into Snowflake!
 
 ### Configure
 
@@ -107,9 +107,9 @@ Currently, we support both Amazon S3 and Google Cloud Storage for staging files.
 ##### Connect Amazon S3 to Snowflake
 
 1. Create a new S3 bucket, preferably in the same AWS region as your Snowflake instance.
-2. Follow [this Snowflake guide on S3](https://docs.snowflake.com/en/user-guide/data-load-s3-config-aws-iam-user.html) to configure AWS IAM User Credentials to Access Amazon S3. However, instead of doing step 3 yourself, input the AWS Key ID and Secret Key in the appropriate app configuration options. We'll take care of creating the stage for you.
+2. Follow [this Snowflake guide on S3](https://docs.snowflake.com/en/user-guide/data-load-s3-config-aws-iam-user.html) to configure AWS IAM User Credentials to access Amazon S3. However, instead of doing step 3 yourself, input the AWS Key ID and Secret Key in the appropriate app configuration options. We'll take care of creating the stage for you.
 
-##### Connect Google Cloud Storage to snowflake
+##### Connect Google Cloud Storage to Snowflake
 
 1. Create a new GCS bucket.
 2. Follow [this Snowflake guide on GCS](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html) to create a storage integration and generate a user for Snowflake to use when accessing your bucket. Make sure not to skip over any part of the guide!
@@ -194,7 +194,7 @@ If you're exporting from PostHog Cloud, do **NOT set any IP whitelist/blacklist*
 
 #### Who created this app?
 
-A lot of people worked on this app! We'd like to thank the following contributors for creating the S3 Export app. Thank you, all!
+A lot of people worked on this app! We'd like to thank the following contributors for creating the Snowflake Export app. Thank you, all!
 
 -   [Yakko Majuri](https://github.com/yakkomajuri)
 -   [Marius Andra](https://github.com/mariusandra)
