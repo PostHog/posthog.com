@@ -76,7 +76,7 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     // The delay between HTTP request retries
     fetchRetryDelay?: number = 3000,
     // For Session Analysis how long before we expire a session
-    sessionExpirationTimeSeconds?: number = 1800 # 30 mins
+    sessionExpirationTimeSeconds?: number = 1800 // 30 mins
     // Whether to post events to PostHog in JSON or compressed format
     captureMode?: 'json' | 'form'
 })
