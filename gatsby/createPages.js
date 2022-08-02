@@ -239,12 +239,12 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             let next = null
             let previous = null
             let breadcrumb = null
-            let nextURL = null
+            let nextURL = ''
             const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
-                    nextURL = next?.url || ''
+                    nextURL = next && next.url ? nextURL : ''
                     previous = menuFlattened[index - 1]
                     breadcrumb = [...item.breadcrumb]
                     return true
