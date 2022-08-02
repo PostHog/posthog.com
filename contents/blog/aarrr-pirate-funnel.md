@@ -17,12 +17,12 @@ In this guide, you'll learn:
 
 - [How the AARRR funnel works](#how-does-the-aarrr-funnel-work)
 - [Why you should use the AARRR framework](#why-should-you-use-the-aarrr-framework)
-- [How to build your own AARRR funnel](#how-to-build-your-own-aarrr-pirate-funnel)
+- [How to build an AARRR pirate funnel](#how-to-build-an-aarrr-pirate-funnel)
 - [How to drive growth using pirate metrics](#how-to-drive-growth-using-pirate-metrics)
 
 ## How does the AARRR funnel work?
 
-First created by entrepreneur and investor David McClure in 2007, the five pirate metrics are:
+The five pirate metrics are:
 
 - **Acquisition:** How many users signed up to your product?
 
@@ -34,27 +34,29 @@ First created by entrepreneur and investor David McClure in 2007, the five pirat
 
 - **Referral:** Do your users like the product enough to share it?
 
-Some versions add a sixth category, Awareness, but the basic concept is the same. Tracking the five pirate metrics will give you a complete, end-to-end view of user behavior, and help you understand areas of weakness and opportunity.
+Some versions add a sixth category, Awareness, but the original framework created by Dave McClure in 2007 holds true.
+
+Tracking the five pirate metrics will give you a complete, end-to-end view of user behavior, and help you understand areas of weakness and opportunity.
 
 McClure visualized the AARRR funnel in a table similar to the one below. 
 
-This version is what the funnel might look like for our product, PostHog, an [all-in-one product platform](/product) comprising product analytics, session recording, and feature flags – note, the figures here are purely illustrative.
+This version is what the funnel might look like for our product, PostHog, an all-in-one product platform comprising [product analytics](/product), [session recording](/product/session-recording), [feature flags](/product/feature-flags) and [more](/blog/using-posting) – note, the figures here are purely illustrative.
 
 | **Category** | **User Status**                                      | **Conversion** |
 |:------------:|:----------------------------------------------------:|:--------------:|
 | Acquisition  | Visits website                                       | 100%           |
 | Acquisition  | Enters signup funnel                                 | 30%            |
 | Acquisition  | Creates account                                      | 10%            |
-|              |                                                      |                |
+| -            | -                                                    | -              |
 | Activation   | Deploys product and ingests events                   | 8%             |
-| Activation   | Creates an insight, watches a session recording etc. | 7%             |
-|              |                                                      |                |
+| Activation   | Creates an insight, watches recording etc.           | 7%             |
+| -            | -                                                    | -              |
 | Retention    | Logs in at least once per week                       | 5%             |
 | Retention    | Invites a colleague / creates a team                 | 4%             |
-|              |                                                      |                |
+| -            | -                                                    | -              |
 | Revenue      | User starts paying / enters card details             | 3%             |
-| Revenue      | User continues to pay long term                 | 2%             |
-|              |                                                      |                |
+| Revenue      | User continues to pay long term                      | 2%             |
+| -            | -                                                    | -              |
 | Referral     | Recommends to a friend                               | 1%             |
 | Referral     | Reviews product or shares on social media            | 1%             |
 
@@ -62,49 +64,27 @@ Applying conversion rates is largely optional – the real value comes from form
 
 ## Why should you use the AARRR framework?
 
-So those are the fundamentals of the pirate metrics framework, but why should you use it? 
-
-There are a few key benefits:
+So those are the fundamentals of the pirate metrics framework, but why should you use it? There are a few key benefits:
 
 ### 1. It puts the focus on individual users, not organizations
 
-Regardless of whether you're a B2B or B2C company, we believe it's best practice to focus on end users, not organizations. 
-
-A company is a collection of people. If you build for the end users within, a company's activation, retention and revenue will follow. While it's still useful to track larger groups of organizations using your product, it shouldn't be a top-level metric.
-
-Pirate metrics puts the emphasis on users, making it a great component in running a successful, product-led business.
+Regardless of whether you're a B2B or B2C company, we believe it's best practice to focus on end users, not organizations. A company is a collection of people. If you build for the end users within, a company's activation, retention and revenue will follow. While it's still useful to track larger groups of organizations using your product, it shouldn't be a top-level metric.
 
 ### 2. It creates a baseline single source of truth
 
-What's more useful? Exploring the solution to a problem, or debating the best way to measure whether the problem exists or not?
-
-It's all too easy to get stuck in semantic debates about the best way to measure the impact of a product change, or go searching for problems that don't exist because you don't have a clear picture of what "normal" looks like.
-
-That's why we recommend startups who deploy PostHog prioritize building a pirate metrics dashboard. It's a great jumping off point for investigating issues and experimenting with solutions, and makes it easy to identify if/when something has had a material impact on user behavior.
+What's more useful? Exploring the solution to a problem, or debating the best way to measure whether the problem exists or not? It's all too easy to get stuck in semantic debates about the best way to measure the impact of a product change, or go searching for problems that don't exist because you don't have a clear picture of what "normal" looks like.
 
 ### 3. It acts as an early warning system
 
-Once you've started tracking your core metrics and have a clear picture of historical trends, it'll be obvious when something has changed for good or bad.  
-
-Has an activation metric taken a nosedive? Maybe there's a bug in the onboarding process you need to fix. Are users logging in less frequently over time? Perhaps you need to find ways to re-engage existing users.
-
-Your pirate metrics are the vital signs for your business.
+Once you've started tracking your core metrics and have a clear picture of historical trends, it'll be obvious when something has changed for good or bad. Has an activation metric taken a nosedive? Check onboarding process for bugs. Are users logging in less frequently over time? Perhaps you need to find ways to re-engage existing users. Your pirate metrics are the vital signs for your business.
 
 ### 4. It helps you identify weaknesses and opportunities
 
-Where should you focus your time to grow your business?
+Where should you focus your time to grow your business? Are you acquiring, activating and retaining users, but not seeing revenue growth? It's time to focus on monetization. Are your users retaining well, but you're not seeing much growth? You have an acquisition problem.
 
-Are you acquiring, activating and retaining users, but not seeing revenue growth? It's time to focus on monetization.
+> 💡 **PostHog Tip:** People may call it the pirate funnel, but the framework doesn't dictate where you should spend your time – it brings clarity to where you are and where you're going. Retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction, so early-stage products may want to focus more effort there ahead of other metrics. Don't start with acquisition just because it's at the top.
 
-Are your users retaining well, but you're not seeing much growth? You have an acquisition problem.
-
-Above all, the framework makes it easier to isolate your strengths and weaknesses, and see the impact of your efforts to improve. 
-
-> 💡 **PostHog Tip:** People may call it the pirate funnel, but the framework doesn't dictate where you should spend your time – it brings clarity to where you are and where you're going.
->
-> Where you focus your efforts is entirely up to you. For example, retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction, so early-stage products may want to focus more effort there ahead of other metrics.
-
-### 4. You can use it to compare different groups of users
+### 5. Pirate metrics are comparative
 
 Pirate metrics are top level, but they're also comparable – a key quality of any good metric.
 
@@ -118,7 +98,7 @@ Comparing cohorts is also a great way to understand if your product works better
 
 > 💡 **PostHog Tip:** You can apply different cohorts to any insight in PostHog, but you can also apply them to entire dashboards of insights. Simply create your cohort and then click 'Add filter' on your AARRR dashboard (it's at the top next to the date range), search for your cohort and then apply.
 
-## How to build your own AARRR pirate funnel
+## How to build an AARRR pirate funnel
 
 So you're sold on the AARRR framework, how do you get started?
 
@@ -210,9 +190,7 @@ If you can imagine three or four random letters, it's probably an acronym for a 
 
 ## How to drive growth using pirate metrics 
 
-So, you've started tracking user behavior, chosen your pirate metrics and built your dashboard... what next?
-
-We recommend taking the following steps:
+So, you've started tracking user behavior, chosen your pirate metrics and built your dashboard... what next? We recommend taking the following steps:
 
 ### 1. Validate your metrics
 
@@ -239,9 +217,9 @@ Here's how our earlier table might look if we assigned different PostHog teams t
 | Acquisition  | Visits website                                       | Marketing                  |
 | Acquisition  | Enters signup funnel                                 | Marketing / Website & Docs |
 | Acquisition  | Creates account                                      | Website & Docs             |
-|              |                                                      |                            |
+| -            | -                                                    | -                          |
 | Activation   | Deploys product and ingests events                   | Platform                   |
-| Activation   | Creates an insight, watches a session recording etc. | Growth / App Teams         |
+| Activation   | Creates an insight, session recording etc.           | Growth / App Teams         |
 |              |                                                      |                            |
 | Retention    | Logs in at least once per week                       | Growth / App Teams         |
 | Retention    | Invites a colleague / creates a team                 | Growth / App Teams         |
@@ -266,13 +244,13 @@ Dave McClure's original framework suggests you should spend 80% of your effort o
 
 > 💡 **PostHog Tip:** You can use PostHog at every stage of this journey: product analytics to track user behavior, session recording to observe and identify real user pain points, experimentation to run A/B tests and multivariate tests on the best solutions, and feature flags to stagger new features and target them on user properties and behaviors.      
    
-## Final thoughts and further reading
+## Takeaways and further reading
 
-There's a reason the AARRR framework is still popular 15 years since its inception: it's simple on the surface, but unlocks great depths of insight into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
+1. There's a reason the AARRR framework is still popular 15 years since its inception: it's simple on the surface, but unlocks great depths of insight into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
 
-When implementing it, we recommend focusing on one or two metrics to improve at a time. Trying to optimize all of them simultaneously is maddening unless you have enough dedicated resource to deploy. 
+2. When implementing it, it's best to focus one or two metrics to improve at a time. Trying to optimize all of them simultaneously is maddening unless you have enough dedicated resource to deploy. 
 
-Less is more when it comes to metrics, too. It might be tempting to have three or four measures for retention, for example, but try to stick to one or two for each category.  
+3. Less is more when it comes to metrics, too. It might be tempting to have three or four measures for retention, for example, but try to stick to one or two for each category.  
 
 Here's some recommended further reading around product growth and user engagement:
 
