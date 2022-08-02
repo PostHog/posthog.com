@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
+import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requirements.mdx'
 
 <ResizeDiskRequirementsSnippet/>
 
