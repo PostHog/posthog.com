@@ -244,7 +244,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
                     previous = menuFlattened[index - 1]
-                    breadcrumb = [...item.breadcrumb, ...(next ? [{ ...next, next: true }] : [])]
+                    breadcrumb = [...item.breadcrumb]
                     return true
                 }
             })
@@ -297,9 +297,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook' })
-    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs' })
-    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs' })
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'

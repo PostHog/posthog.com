@@ -223,7 +223,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                         }}
                         className={`${buttonClasses} ${
                             !topLevel ? 'opacity-50' : ''
-                        } hover:opacity-100 transition-opacity`}
+                        } hover:opacity-100 transition-opacity ${isActive ? 'opacity-100' : ''}`}
                         to={url}
                     >
                         <AnimatePresence>
@@ -280,20 +280,21 @@ const TableOfContents = ({ menu, handleLinkClick }) => {
 }
 
 const Breadcrumb = ({ crumbs }) => {
+    const { pathname } = useLocation()
     return (
         <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url, next }, index) => {
-                const hasNext = !!crumbs[index + 1]?.next
+                const active = index === crumbs.length - 1 && url === pathname
                 return (
                     <li
-                        key={url}
-                        className={`after:mx-1 after:text-gray-accent-light last:after:hidden ${
-                            hasNext ? 'crumb-has-next' : 'after:content-["/"]'
-                        }`}
+                        key={index}
+                        className={`after:mx-1 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
                     >
-                        <Link className={next ? 'opacity-70 hover:opacity-100 transition-opacity' : ''} to={url}>
-                            {name}
-                        </Link>
+                        {active ? (
+                            <span className="text-black/40 dark:text-white/40 font-semibold">{name}</span>
+                        ) : (
+                            <Link to={url}>{name}</Link>
+                        )}
                     </li>
                 )
             })}
@@ -339,7 +340,7 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
 }) {
-    const { hash } = useLocation()
+    const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -427,7 +428,7 @@ export default function PostLayout({
                     className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
-                        {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
+                        {breadcrumb && <Breadcrumb crumbs={[...breadcrumb, { name: title, url: pathname }]} />}
                         <div className="article-content">{children}</div>
                     </div>
                     {questions && <div className={contentContainerClasses}>{questions}</div>}
@@ -440,8 +441,8 @@ export default function PostLayout({
                             </div>
 
                             <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
-                                {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                                    <div className="px-5 lg:px-8 max-h-72 overflow-auto">
+                                {view === 'Article' && toc?.length > 1 && (
+                                    <div className="px-5 lg:px-8 max-h-72 overflow-auto lg:block hidden">
                                         <h4 className="text-[13px] mb-2">On this page</h4>
                                         <Scrollspy
                                             key={title}
