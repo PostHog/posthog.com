@@ -15,6 +15,8 @@ import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
 import Toggle from 'components/Toggle'
 import { ArrowsExpandIcon } from '@heroicons/react/outline'
+import { CallToAction } from 'components/CallToAction'
+import { DocsPageSurvey } from 'components/DocsPageSurvey'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -331,6 +333,32 @@ const SidebarAction = ({ children, title, width, className = '', href, onClick }
     )
 }
 
+const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }) => {
+    return (
+        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+            <div className={contentContainerClasses}>
+                <p className="text-lg text-black/40 m-0 font-bold">Next article</p>
+                <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
+                <p className="relative max-h-24 overflow-hidden">
+                    {excerpt}
+                    <span className="bg-gradient-to-t from-tan to-transparent absolute w-full h-full inset-0" />
+                </p>
+                <CallToAction to={fields?.slug}>Read next article</CallToAction>
+            </div>
+        </div>
+    )
+}
+
+const Survey = ({ contentContainerClasses = '' }) => {
+    return (
+        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+            <div className={contentContainerClasses}>
+                <DocsPageSurvey />
+            </div>
+        </div>
+    )
+}
+
 export default function PostLayout({
     tableOfContents,
     children,
@@ -343,6 +371,7 @@ export default function PostLayout({
     filePath,
     breadcrumb,
     hideSidebar,
+    nextPost,
 }) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -374,8 +403,8 @@ export default function PostLayout({
     }, [sidebar, hideSidebar])
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth <= 2)
-    const contentContainerClasses = `w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[650px]' : 'lg:max-w-full'
+    const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
+        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
     } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
@@ -429,13 +458,15 @@ export default function PostLayout({
                 )}
                 <article
                     id="content-menu-wrapper"
-                    className="col-span-2 px-5 lg:px-12 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={[...breadcrumb, { name: title, url: pathname }]} />}
                         <div className="article-content">{children}</div>
+                        {questions && questions}
                     </div>
-                    {questions && <div className={contentContainerClasses}>{questions}</div>}
+                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
                     <aside className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border">

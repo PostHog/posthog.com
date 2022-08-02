@@ -2,7 +2,6 @@ import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import CommunityQuestions from 'components/CommunityQuestions'
-import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
@@ -159,9 +158,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 ) : (
                     <Iframe src={featuredVideo} />
                 )}
-                <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
-                    <DocsPageSurvey />
-                </div>
             </PostLayout>
         </Layout>
     )

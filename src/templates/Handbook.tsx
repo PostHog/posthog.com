@@ -47,7 +47,7 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
 }
 
 export default function Handbook({
-    data: { post, countries },
+    data: { post, countries, nextPost },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
@@ -139,6 +139,7 @@ export default function Handbook({
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
                     hideSidebar={hideAnchor}
+                    nextPost={nextPost}
                 >
                     <section>
                         <div className="mb-8 relative">
@@ -180,10 +181,19 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!) {
+    query HandbookQuery($id: String!, $nextURL: String!) {
         countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
             group(field: frontmatter___country) {
                 totalCount
+            }
+        }
+        nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
+            excerpt(pruneLength: 500)
+            frontmatter {
+                title
+            }
+            fields {
+                slug
             }
         }
         post: mdx(id: { eq: $id }) {

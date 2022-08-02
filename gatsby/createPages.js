@@ -239,10 +239,12 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             let next = null
             let previous = null
             let breadcrumb = null
+            let nextURL = null
             const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
+                    nextURL = next?.url || ''
                     previous = menuFlattened[index - 1]
                     breadcrumb = [...item.breadcrumb]
                     return true
@@ -254,6 +256,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 component: layouts[layout] || template,
                 context: {
                     id: node.id,
+                    nextURL,
                     next,
                     previous,
                     menu: result.data.sidebars.childSidebarsJson[menu],
