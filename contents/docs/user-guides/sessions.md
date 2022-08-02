@@ -16,17 +16,17 @@ As events are sent to PostHog, they are grouped into sessions on the client. If 
 
 ### Common questions
 
-* **Can a session span different devices?:** No, sessions are tied to a single device and instance of a PostHog client. This means if a user is using two different browsers (e.g. Chrome and Firefox) they will be treated as two separate sessions.
-* **Can a session span browser tabs and windows?:** Yes, as a user moves between different tabs and windows, their events will be grouped into a single session. However, if they open a completely new browser (e.g. move from Chrome to Firefox) then a new session will be created.
-* **Which clients support sessions?:** Today, PostHog-JS is the only client that supports sessions. However, we are planning to add it to the other front-end libraries.
-* **How are sessions split?:** Sessions are split when there is no user activity for more than 30 minutes.
-* **What defines user activity for a session?:** User activity is defined as any event sent from the client (including Autocapture events). Also, if recordings are enabled, then user activity from the recording (like mouse movement) will extend the session.
-* **Is there a limit on session length?:** Yes, the longest allowed session is 24 hours. If a session is longer than that, it will be split.
-* **Is a session the same as a recording?:** Both sessions and recordings are tracked using the same ID. So if a new session is created, then a new recording is created too.
+-   **Can a session span different devices?:** No, sessions are tied to a single device and instance of a PostHog client. This means if a user is using two different browsers (e.g. Chrome and Firefox) they will be treated as two separate sessions.
+-   **Can a session span browser tabs and windows?:** Yes, as a user moves between different tabs and windows, their events will be grouped into a single session. However, if they open a completely new browser (e.g. move from Chrome to Firefox) then a new session will be created.
+-   **Which clients support sessions?:** Today, PostHog-JS is the only client that supports sessions. However, we are planning to add it to the other front-end libraries.
+-   **How are sessions split?:** Sessions are split when there is no user activity for more than 30 minutes.
+-   **What defines user activity for a session?:** User activity is defined as any event sent from the client (including Autocapture events). Also, if recordings are enabled, then user activity from the recording (like mouse movement) will extend the session.
+-   **Is there a limit on session length?:** Yes, the longest allowed session is 24 hours. If a session is longer than that, it will be split.
+-   **Is a session the same as a recording?:** Both sessions and recordings are tracked using the same ID. So if a new session is created, then a new recording is created too.
 
 ## Session analysis
 
-Within the trends tab of insights, you can analyze sessions along with your other data. 
+Within the trends tab of insights, you can analyze sessions along with your other data.
 
 <blockquote class='warning-note'>
 <b>IMPORTANT: </b> 
@@ -39,17 +39,18 @@ Within the trends tab, you can aggregate results by the count of unique sessions
 
 To do this analysis, simply select Unique sessions from the aggregation dropdown.
 
-![Session counts](../../images/user-guides/sessions/unique-sessions.png)
+![Session counts](../../images/docs/user-guides/sessions/unique-sessions.png)
 
 ### Using session counts in formulas
 
 Combining session counts with other trends is a very powerful way to understand things like:
-* The average number of sessions per user where a specific action occurs
-* The average number of a specific events per session
+
+-   The average number of sessions per user where a specific action occurs
+-   The average number of a specific events per session
 
 To do this analysis, simply make the series in your trends (e.g. unique sessions where an event occurs), and then use that series in a formula.
 
-![Session counts](../../images/user-guides/sessions/session-formula.png)
+![Session counts](../../images/docs/user-guides/sessions/session-formula.png)
 
 ### Filtering by session duration
 
@@ -57,13 +58,13 @@ Sometimes, it can be helpful to filter out sessions that are either too short or
 
 To accomplish this, you can use the 'Session duration' property in the property filters.
 
-![Session counts](../../images/user-guides/sessions/duration-filter.png)
+![Session counts](../../images/docs/user-guides/sessions/duration-filter.png)
 
 ### Plotting session duration
 
 You can plot session durations overtime to understand if your users are becoming more or less engaged with your product. To accomplish this, select one of the property aggregators (e.g median, 90th percentile etc) and then select 'Session duration' as the property to plot.
 
-![Session counts](../../images/user-guides/sessions/median-duration.png)
+![Session counts](../../images/docs/user-guides/sessions/median-duration.png)
 
 ### Distribution of session duration
 
@@ -71,6 +72,4 @@ Breaking down data by the distribution of session durations can be useful when t
 
 To look at the distribution of session durations, click 'Add breakdown' and then select the 'Session duration' property.
 
-![Session counts](../../images/user-guides/sessions/duration-breakdown.png)
-
-
+![Session counts](../../images/docs/user-guides/sessions/duration-breakdown.png)

@@ -18,7 +18,7 @@ export default function Header({ title }: Props) {
             url: '/slack',
         },
         {
-            Icon: <Twitter className="w-[24px]" />,
+            Icon: <Twitter className="w-[24px] text-[#1d9bf0]" />,
             url: 'https://twitter.com/posthog',
         },
         {

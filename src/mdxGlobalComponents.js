@@ -102,6 +102,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
 import { TotalTeam } from './components/TotalTeam'
@@ -215,6 +216,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toggle,
     Tooltip,
     TotalCountries,
     TotalTeam,

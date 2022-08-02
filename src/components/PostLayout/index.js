@@ -1,13 +1,23 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { Facebook, LinkedIn, Mail, Twitter } from 'components/Icons/Icons'
+import { Edit, ExpandDocument, Facebook, Issue, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
 import Link from 'components/Link'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
+import SearchBar from 'components/Docs/SearchBar'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+import { push as PushMenu } from 'react-burger-menu'
+import Tooltip from 'components/Tooltip'
+import Toggle from 'components/Toggle'
+import { ArrowsExpandIcon } from '@heroicons/react/outline'
+import { CallToAction } from 'components/CallToAction'
+import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import { replacePath } from '../../../gatsby/utils'
 
 const Iframe = (props) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -32,9 +42,12 @@ const ShareLink = ({ children, url }) => {
         }
     }
     return (
-        <a className="text-primary hover:text-primary dark:text-white dark:hover:text-white" onClick={handleClick}>
+        <button
+            className="flex text-primary hover:text-primary dark:text-white dark:hover:text-white"
+            onClick={handleClick}
+        >
             {children}
-        </a>
+        </button>
     )
 }
 
@@ -52,11 +65,11 @@ export const SidebarSection = ({ title, children, className = '' }) => {
 export const Topics = ({ topics }) => {
     return (
         <ul className="list-none p-0 flex items-start flex-wrap -m-1">
-            {topics.map(({ title, url, state }) => {
+            {topics.map(({ name, url, state }) => {
                 return (
-                    <li className="m-1" key={title}>
+                    <li className="m-1" key={name}>
                         <Chip state={state} className="text-red hover:text-red" href={url} size="xs">
-                            {title}
+                            {name}
                         </Chip>
                     </li>
                 )
@@ -121,9 +134,9 @@ export const Contributors = ({ contributors, className = '' }) => {
     const classes = 'flex space-x-2 items-center no-underline'
     return (
         <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.map(({ image, id, name, url, state }) => {
+            {contributors.slice(0, 3).map(({ image, id, name, url, state }) => {
                 return (
-                    <li key={id}>
+                    <li key={name}>
                         {url ? (
                             <Link state={state} className={classes} to={url}>
                                 <Contributor image={image} name={name} />
@@ -144,17 +157,234 @@ export const Text = ({ children }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
+const Chevron = ({ open }) => {
+    return (
+        <div className="bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white">
+            <svg
+                className="transition-transform w-"
+                style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <g opacity="0.3">
+                    <path
+                        d="M3.59608 9.74106L6.99976 6.33626L10.4034 9.74106C10.8595 10.1972 11.5984 10.1972 12.0545 9.74106C12.51 9.28551 12.51 8.54613 12.0545 8.0906L7.82492 3.86106C7.36937 3.40606 6.6311 3.40606 6.17558 3.86106L1.9466 8.09004V8.09059C1.4905 8.54613 1.4905 9.28441 1.94605 9.74049C2.40159 10.1966 3.13987 10.1966 3.59595 9.74103L3.59608 9.74106Z"
+                        fill="currentColor"
+                    />
+                </g>
+            </svg>
+        </div>
+    )
+}
+
+const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }) => {
+    const location = useLocation()
+    const pathname = replacePath(location?.pathname)
+    const [isActive, setIsActive] = useState(false)
+    const [open, setOpen] = useState(false)
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+        children || topLevel
+            ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
+            : ''
+    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+    useEffect(() => {
+        const isOpen = (children) => {
+            return (
+                children &&
+                children.some((child) => {
+                    return child.url === pathname || isOpen(child.children)
+                })
+            )
+        }
+        setOpen(url === pathname || (children && isOpen(children)))
+        setIsActive(url === pathname)
+    }, [pathname])
+
+    const variants = {
+        hidden: {
+            translateX: '100%',
+            opacity: 0,
+        },
+        visible: {
+            transition: {
+                delay: 0.3,
+            },
+            translateX: 0,
+            opacity: '100%',
+        },
+    }
+
+    return (
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
+            <li>
+                {name && url ? (
+                    <Link
+                        onClick={() => {
+                            handleLinkClick && handleLinkClick()
+                            if (children && children.length > 0) {
+                                setOpen(!open)
+                            }
+                        }}
+                        className={`${buttonClasses} ${
+                            !topLevel ? 'opacity-50' : ''
+                        } hover:opacity-100 transition-opacity ${isActive ? 'opacity-100' : ''}`}
+                        to={url}
+                    >
+                        <AnimatePresence>
+                            {isActive && (
+                                <motion.span
+                                    variants={variants}
+                                    className="absolute w-[4px] bg-red rounded-[2px] h-[65%] left-0"
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="hidden"
+                                />
+                            )}
+                        </AnimatePresence>
+                        <span>{name}</span>
+                        {children && children.length > 0 && <Chevron open={open} />}
+                    </Link>
+                ) : (
+                    <button className={buttonClasses} onClick={() => setOpen(!open)}>
+                        <span>{name}</span>
+                        {children && children.length > 0 && <Chevron open={open} />}
+                    </button>
+                )}
+                {children && children.length > 0 && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
+                        {children.map((child, index) => {
+                            return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
+                        })}
+                    </motion.div>
+                )}
+            </li>
+        </ul>
+    )
+}
+
+const TableOfContents = ({ menu, handleLinkClick }) => {
+    return (
+        <>
+            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
+                Table of contents
+            </p>
+            <nav>
+                {menu.map((menuItem, index) => {
+                    return (
+                        <Menu
+                            topLevel
+                            handleLinkClick={handleLinkClick}
+                            className="ml-0"
+                            key={menuItem.name}
+                            {...menuItem}
+                        />
+                    )
+                })}
+            </nav>
+        </>
+    )
+}
+
+const Breadcrumb = ({ crumbs }) => {
+    const { pathname } = useLocation()
+    return (
+        <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
+            {crumbs.map(({ name, url, next }, index) => {
+                const active = index === crumbs.length - 1 && url === pathname
+                return (
+                    <li
+                        key={index}
+                        className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
+                    >
+                        {active ? (
+                            <span className="text-black/40 dark:text-white/40 font-semibold">{name}</span>
+                        ) : (
+                            <Link to={url}>{name}</Link>
+                        )}
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+const SidebarAction = ({ children, title, width, className = '', href, onClick }) => {
+    const buttonClasses =
+        'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
+
+    return (
+        <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
+            <Tooltip className="flex" title={title}>
+                <span className="relative flex">
+                    {href ? (
+                        <Link className={buttonClasses} to={href}>
+                            {children}
+                        </Link>
+                    ) : onClick ? (
+                        <button className={buttonClasses} onClick={onClick}>
+                            {children}
+                        </button>
+                    ) : (
+                        children
+                    )}
+                </span>
+            </Tooltip>
+        </li>
+    )
+}
+
+const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }) => {
+    return (
+        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+            <div className={contentContainerClasses}>
+                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold">Next article</p>
+                <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
+                <p className="relative max-h-24 overflow-hidden">
+                    {excerpt}
+                    <span className="bg-gradient-to-t from-tan dark:from-primary to-transparent absolute w-full h-full inset-0" />
+                </p>
+                <CallToAction to={fields?.slug}>Read next article</CallToAction>
+            </div>
+        </div>
+    )
+}
+
+const Survey = ({ contentContainerClasses = '' }) => {
+    return (
+        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+            <div className={contentContainerClasses}>
+                <DocsPageSurvey />
+            </div>
+        </div>
+    )
+}
+
 export default function PostLayout({
     tableOfContents,
     children,
     sidebar,
     contentWidth = 650,
     questions,
+    menu,
     article = true,
+    title,
+    filePath,
+    breadcrumb,
+    hideSidebar,
+    nextPost,
 }) {
-    const { hash } = useLocation()
+    const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [fullWidthContent, setFullWidthContent] = useState(hideSidebar || !sidebar)
+
+    const handleMobileMenuClick = () => {
+        setMobileMenuOpen(!mobileMenuOpen)
+    }
 
     useEffect(() => {
         if (hash) {
@@ -162,46 +392,152 @@ export default function PostLayout({
         }
     }, [])
 
-    const toc = tableOfContents?.filter((item) => item.depth <= 2)
+    const handleFullWidthContentChange = () => {
+        localStorage.setItem('full-width-content', !fullWidthContent)
+        setFullWidthContent(!fullWidthContent)
+    }
+
+    useEffect(() => {
+        if (!hideSidebar && sidebar) {
+            setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
+        } else {
+            setFullWidthContent(true)
+        }
+    }, [sidebar, hideSidebar])
+
+    const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth <= 2)
+    const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
+        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
+    } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
-        <div
-            style={{ gridAutoColumns: `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)` }}
-            className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
-        >
-            <article className="col-span-2 px-5 lg:px-8 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto">
-                <div style={{ maxWidth: contentWidth }} className={`w-full ${article ? 'article-content' : ''}`}>
-                    {children}
-                </div>
-                {questions && questions}
-            </article>
-            <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end lg:box-content my-10 lg:my-0 lg:mt-10 pb-20 mr-auto overflow-y-auto lg:h-[calc(100vh-7.5rem)]">
-                <div className="grid divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                    {sidebar && sidebar}
-                    {view === 'Article' && !breakpoints.md && toc?.length > 1 && (
-                        <div className="pt-12 px-5 lg:px-8 !border-t-0">
-                            <h4 className="text-[13px] mb-2">On this page</h4>
-                            <Scrollspy
-                                offset={-50}
-                                className="list-none m-0 p-0 flex flex-col space-y-[10px]"
-                                items={tableOfContents?.map((navItem) => navItem.url)}
-                                currentClassName="active-product"
-                            >
-                                {toc.map((navItem, index) => (
-                                    <li className="relative leading-none" key={index}>
-                                        <InternalSidebarLink
-                                            url={navItem.url}
-                                            name={navItem.value}
-                                            depth={navItem.depth}
-                                            className="hover:opacity-100 opacity-60 text-[14px]"
-                                        />
-                                    </li>
-                                ))}
-                            </Scrollspy>
+        <div id="menu-wrapper">
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                {menu && (
+                    <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                    </button>
+                )}
+                <SearchBar />
+            </div>
+            {menu && (
+                <PushMenu
+                    width="calc(100vw - 80px)"
+                    customBurgerIcon={false}
+                    customCrossIcon={false}
+                    styles={{
+                        bmOverlay: {
+                            background: 'transparent',
+                        },
+                        bmMenuWrap: {
+                            height: '80%',
+                        },
+                    }}
+                    onClose={() => setMobileMenuOpen(false)}
+                    pageWrapId="content-menu-wrapper"
+                    outerContainerId="menu-wrapper"
+                    overlayClassName="backdrop-blur"
+                    isOpen={mobileMenuOpen}
+                >
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
+                        <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                    </div>
+                </PushMenu>
+            )}
+            <div
+                style={{
+                    gridAutoColumns: menu
+                        ? `265px 1fr 1fr 265px`
+                        : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                }}
+                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+            >
+                {menu && (
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
+                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                            <TableOfContents menu={menu} />
+                        </aside>
+                    </div>
+                )}
+                <article
+                    key={`${title}-article`}
+                    id="content-menu-wrapper"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
+                >
+                    <div className={contentContainerClasses}>
+                        {breadcrumb && <Breadcrumb crumbs={[...breadcrumb, { name: title, url: pathname }]} />}
+                        <div className="article-content">{children}</div>
+                        {questions && questions}
+                    </div>
+                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
+                </article>
+                {!hideSidebar && sidebar && (
+                    <aside
+                        key={`${title}-sidebar`}
+                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border"
+                    >
+                        <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
+                            <div className="relative h-full">
+                                <div className="pt-6 top-10 sticky">{sidebar}</div>
+                            </div>
+
+                            <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
+                                {view === 'Article' && toc?.length > 1 && (
+                                    <div className="px-5 lg:px-8 lg:pb-4 max-h-72 overflow-auto lg:block hidden">
+                                        <h4 className="text-[13px] mb-2">On this page</h4>
+                                        <Scrollspy
+                                            offset={-50}
+                                            className="list-none m-0 p-0 flex flex-col"
+                                            items={tableOfContents?.map((navItem) => navItem.url)}
+                                            currentClassName="active-product"
+                                        >
+                                            {toc.map((navItem, index) => (
+                                                <li className="relative leading-none m-0" key={navItem.url}>
+                                                    <InternalSidebarLink
+                                                        url={navItem.url}
+                                                        name={navItem.value}
+                                                        depth={navItem.depth}
+                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                    />
+                                                </li>
+                                            ))}
+                                        </Scrollspy>
+                                    </div>
+                                )}
+                                <ul className="list-none px-5 flex mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                    {filePath && (
+                                        <>
+                                            <SidebarAction
+                                                href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                title="Edit this page"
+                                            >
+                                                <Edit />
+                                            </SidebarAction>
+                                            <SidebarAction
+                                                title="Raise an issue"
+                                                href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                            >
+                                                <Issue />
+                                            </SidebarAction>
+                                        </>
+                                    )}
+                                    <SidebarAction
+                                        className="!ml-auto"
+                                        title="Toggle content width"
+                                        onClick={handleFullWidthContentChange}
+                                    >
+                                        <ExpandDocument expanded={fullWidthContent} />
+                                    </SidebarAction>
+                                    <SidebarAction className="ml-1" width="auto" title="Toggle dark mode">
+                                        <DarkModeToggle />
+                                    </SidebarAction>
+                                </ul>
+                            </div>
                         </div>
-                    )}
-                </div>
-            </aside>
+                    </aside>
+                )}
+            </div>
         </div>
     )
 }
