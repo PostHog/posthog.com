@@ -34,7 +34,7 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,
-                            image: avatar?.publicURL,
+                            image: avatar,
                         }))}
                     />
                 </SidebarSection>
@@ -207,7 +207,9 @@ export const query = graphql`
                 url
                 username
                 avatar {
-                    publicURL
+                    childImageSharp {
+                        gatsbyImageData(width: 38, height: 38)
+                    }
                 }
                 teamData {
                     name
