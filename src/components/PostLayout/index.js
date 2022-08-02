@@ -450,32 +450,32 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <div className="px-5 flex space-x-3 mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <div className="pl-2 pr-3 w-full flex justify-between space-x-3 mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {filePath && (
-                                        <span className="flex space-x-3 items-center text-gray dark:text-[#999]">
-                                            <Tooltip className="py-2" title="Edit post">
-                                                <span className="relative border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                                        <div className="flex space-x-1 h-full items-center text-gray dark:text-[#999]">
+                                            <Tooltip className="inline-block" title="Edit post">
+                                                <span className="inline-block relative pr-2 border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                        className="inline-block p-1 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-all active:top-[0.5px] active:scale-[.98] hover:bg-gray-accent-light rounded"
+                                                        className="inline-block p-2 w-8 h-8 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition relative active:top-[0.5px] active:scale-[.9] hover:bg-gray-accent-light rounded"
                                                     >
                                                         <Edit />
                                                     </Link>
                                                 </span>
                                             </Tooltip>
-                                            <Tooltip className="py-2" title="Raise an issue">
-                                                <span className="relative">
+                                            <Tooltip className="inline-block" title="Raise an issue">
+                                                <span className="inline-block relative">
                                                     <Link
                                                         href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                                        className="inline-block p-1 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition-all active:top-[0.5px] active:scale-[.98] hover:bg-gray-accent-light rounded"
+                                                        className="inline-block p-2 w-8 h-8 dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition relative active:top-[0.5px] active:scale-[.9] hover:bg-gray-accent-light rounded"
                                                     >
                                                         <Issue />
                                                     </Link>
                                                 </span>
                                             </Tooltip>
-                                        </span>
+                                        </div>
                                     )}
-                                    <div className="!ml-auto flex space-x-3 items-center text-black dark:text-[#999]">
+                                    <div className="flex space-x-3 items-center text-black dark:text-[#999]">
                                         <Tooltip
                                             className="py-2 border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex"
                                             title="Toggle content width"
@@ -483,7 +483,7 @@ export default function PostLayout({
                                             <button
                                                 onClick={handleFullWidthContentChange}
                                                 className={
-                                                    'relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded flex items-center justify-center transition-colors mx-1 opacity-50 hover:opacity-100'
+                                                    'hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark w-8 h-8 rounded flex items-center justify-center transition-colors mx-1 opacity-50 hover:opacity-100 relative active:top-[0.5px] active:scale-[.95]'
                                                 }
                                             >
                                                 <ExpandDocument expanded={fullWidthContent} />
