@@ -26,6 +26,6 @@ compact
     </div>
     <div class="center">
         <h1>3.</h1>
-        <h5>Our favourite coffee-break reading</h5>
+        <h5>Curated advice on building great products</h5>
     </div>
 </Section>
