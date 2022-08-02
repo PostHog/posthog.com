@@ -49,7 +49,7 @@ This version is what the funnel might look like for our product, PostHog, an all
 | Acquisition  | Creates account                                      | 10%            |
 | -            | -                                                    | -              |
 | Activation   | Deploys product and ingests events                   | 8%             |
-| Activation   | Creates an insight, watches recording etc.           | 7%             |
+| Activation   | Uses a core feature                                  | 7%             |
 | -            | -                                                    | -              |
 | Retention    | Logs in at least once per week                       | 5%             |
 | Retention    | Invites a colleague / creates a team                 | 4%             |
@@ -58,7 +58,7 @@ This version is what the funnel might look like for our product, PostHog, an all
 | Revenue      | User continues to pay long term                      | 2%             |
 | -            | -                                                    | -              |
 | Referral     | Recommends to a friend                               | 1%             |
-| Referral     | Reviews product or shares on social media            | 1%             |
+| Referral     | Reviews product                                      | 1%             |
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
 
@@ -207,16 +207,16 @@ Here's how our earlier table might look if we assigned different PostHog teams t
 | Acquisition  | Creates account                                      | Website & Docs             |
 | -            | -                                                    | -                          |
 | Activation   | Deploys product and ingests events                   | Platform                   |
-| Activation   | Creates an insight, session recording etc.           | Growth / App Teams         |
-|              |                                                      |                            |
+| Activation   | Uses a core feature.                                 | Growth / App Teams         |
+| -            | -                                                    | -                          |
 | Retention    | Logs in at least once per week                       | Growth / App Teams         |
 | Retention    | Invites a colleague / creates a team                 | Growth / App Teams         |
-|              |                                                      |                            |
+| -            | -                                                    | -                          |
 | Revenue      | User starts paying / enters card details             | Growth / Customer Success  |
 | Revenue      | User continues to pay long term                 | Growth / Customer Success / Platform  |
-|              |                                                      |                            |
+| -            | -                                                    |                            |
 | Referral     | Recommends to a friend                               | All                        |
-| Referral     | Reviews product or shares on social media            | Marketing                  |
+| Referral     | Reviews product                                      | Marketing                  |
 
 As you can see, there is overlap at all levels of the funnel. "Recommending to a friend" is a quality metric that all teams influence through their work. 
 
