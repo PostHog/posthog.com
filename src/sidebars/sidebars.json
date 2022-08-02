@@ -853,7 +853,7 @@
                     "children": [
                         {
                             "name": "Overview",
-                            "url": "/docs/runbook/async-migrations/overview"
+                            "url": "/docs/runbook/async-migrations"
                         },
                         {
                             "name": "0002_events_sample_by",

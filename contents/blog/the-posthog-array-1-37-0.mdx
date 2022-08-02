@@ -24,17 +24,17 @@ Want to know more about what we're up to? [Subscribe to HogMail, our new newslet
 ## PostHog 1.37.0 release notes
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> This version will not run until async migration `0004_replicated_schema` is completed. Before upgrading, please make sure this migration is completed. Check out the <a href="/docs/self-host/configure/async-migrations/overview" target="_blank">async migrations</a> docs for details.
+<b>IMPORTANT!</b> This version will not run until async migration `0004_replicated_schema` is completed. Before upgrading, please make sure this migration is completed. Check out the <a href="/docs/runbook/async-migrations" target="_blank">async migrations</a> docs for details.
 </blockquote>
 
 **Release highlights:**
 
-- New: [Cohorts 2.0](#new-cohorts-2.0)
-- New: [Event and property detail pages](#new-event-and-property-detail-pages)
-- New: [Dancing hedgehogs](#new-dancing-hedgehogs)
-- Improved: [Save event columns](#improved-save-event-columns)
-- Improved: [Faster response times](#improved-faster-response-times)
-- Improved: [App retry and failure logic](#improved-app-retry-and-failure-logic)
+-   New: [Cohorts 2.0](#new-cohorts-2.0)
+-   New: [Event and property detail pages](#new-event-and-property-detail-pages)
+-   New: [Dancing hedgehogs](#new-dancing-hedgehogs)
+-   Improved: [Save event columns](#improved-save-event-columns)
+-   Improved: [Faster response times](#improved-faster-response-times)
+-   Improved: [App retry and failure logic](#improved-app-retry-and-failure-logic)
 
 ### New: Cohorts 2.0
 
@@ -45,19 +45,21 @@ Cohorts are an extremely powerful tool. They let you define a group of users to 
 #### New condition types
 
 Previously, cohorts could only be defined using the following conditions:
-* Match users who have a certain property
-* Match users who have completed a certain event
+
+-   Match users who have a certain property
+-   Match users who have completed a certain event
 
 We've now added the following conditions:
-* **Did not complete event:** Find users who aren't doing what you expect. For example, "Give me users who visited the home page, but did not click on the 'Sign up' button.".
-* **Completed an event multiple times:** Find your most active users. For example, "Give me users who have 'Bought item' more than 3 times in the last 30 days".
-* **Completed a sequence of events:** Find users using your product in a very specific way. For example, "Give me users who added something to their cart and then entered a promo code within a day".
-* **Did not complete a sequence of events:** Find users who aren't using your product as you'd like. For example, "Give me users who added something to their cart, but didn't checkout within a day".
-* **Do not have the property:** Find more specific sets of users. For example, "Give me users outside of Europe".
-* **Completed an event for the first time:** Find the newest users of a feature. For example, "Give me users who bought an item for the first time in the last 7 days".
-* **Completed an event regularly:** Find your power users. For example, "Give me users who bought an item in 5 out of the last 7 weeks".
-* **Stopped doing an event:** Find your users that are at risk of churning. For example, "Give me users who haven't bought anything in the last 7 days, but had bought something in the 30 days prior".
-* **Started doing an event again:** Find your users that did not churn. For example, "Give me users who bought something, then didn't for 2 weeks, but have again in the last 7 days".
+
+-   **Did not complete event:** Find users who aren't doing what you expect. For example, "Give me users who visited the home page, but did not click on the 'Sign up' button.".
+-   **Completed an event multiple times:** Find your most active users. For example, "Give me users who have 'Bought item' more than 3 times in the last 30 days".
+-   **Completed a sequence of events:** Find users using your product in a very specific way. For example, "Give me users who added something to their cart and then entered a promo code within a day".
+-   **Did not complete a sequence of events:** Find users who aren't using your product as you'd like. For example, "Give me users who added something to their cart, but didn't checkout within a day".
+-   **Do not have the property:** Find more specific sets of users. For example, "Give me users outside of Europe".
+-   **Completed an event for the first time:** Find the newest users of a feature. For example, "Give me users who bought an item for the first time in the last 7 days".
+-   **Completed an event regularly:** Find your power users. For example, "Give me users who bought an item in 5 out of the last 7 weeks".
+-   **Stopped doing an event:** Find your users that are at risk of churning. For example, "Give me users who haven't bought anything in the last 7 days, but had bought something in the 30 days prior".
+-   **Started doing an event again:** Find your users that did not churn. For example, "Give me users who bought something, then didn't for 2 weeks, but have again in the last 7 days".
 
 #### AND/OR operators within cohort conditions
 
@@ -65,7 +67,7 @@ You can now combine these new conditions using complex AND/OR groupings.
 
 For example, you can define a cohort that is "Give me users who are outside of Europe AND have either regularly bought an item 4 of the last 5 weeks OR bought 3 items in the past week".
 
-With the combination of these new conditions and the new AND/OR operators, you can now define extremely powerful cohorts for finding the exact users that you're looking for. 
+With the combination of these new conditions and the new AND/OR operators, you can now define extremely powerful cohorts for finding the exact users that you're looking for.
 
 #### Nested cohorts
 
@@ -76,10 +78,11 @@ Using these nested cohorts enables you to avoid redefining the same cohort over 
 ### New: Event and property detail pages
 
 We've added a new page within Data Management, which enables you to dig into the details of all events and properties. For example, on the event page, you can now see:
-* When an event was first and last seen
-* How many times it was sent in the last 30 days
-* The top properties for that event
-* A filterable list of the specific event for you to explore
+
+-   When an event was first and last seen
+-   How many times it was sent in the last 30 days
+-   The top properties for that event
+-   A filterable list of the specific event for you to explore
 
 <img src={EventPage} alt="Event Page" style={{ width: 720 }} />
 
@@ -96,7 +99,7 @@ You can now select and reorder the custom event columns that you want to see on 
 
 ### Improved: Faster response times in the app
 
-We've made it faster to load insights and recordings. We realized that some data payloads were quite big, which resulted in the network slowing things down. To improve this, we added compression to a few of the endpoints in the app, and now see at least 50% smaller responses sent to clients.  
+We've made it faster to load insights and recordings. We realized that some data payloads were quite big, which resulted in the network slowing things down. To improve this, we added compression to a few of the endpoints in the app, and now see at least 50% smaller responses sent to clients.
 
 <img src={APICompression} alt="a screenshot showing an API client receiving 308KB instead of 1.4MB of data" style={{ width: 800 }} />
 
@@ -130,8 +133,8 @@ We’re always working on improving PostHog and would love to talk to you! Pleas
 
 We always welcome contributions from our community and this time we want to thank the following people...
 
-- @MichaelLampe for a correction to PostHog docs
-- @girlProg for corrections to PostHog.com
+-   @MichaelLampe for a correction to PostHog docs
+-   @girlProg for corrections to PostHog.com
 
 Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 

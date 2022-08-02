@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-
 [`0002_events_sample_by`](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0002_events_sample_by.py) is an async migration added to change the `SAMPLE BY` and `ORDER BY` clauses of our events table in ClickHouse.
 
 There were 2 important reasons for doing this:
@@ -19,7 +18,6 @@ There were 2 important reasons for doing this:
 1. Make sure you have enough free space in your ClickHouse instance. We certify this via a preflight check before running the migration, but it is good that you're also aware of the requirement.
 2. Make sure we have a long enough retention policy in Kafka (ClickHouse event ingestion will be paused during the migration, and to make sure we don't lose any data we'll want to make sure events won't expire too fast from Kafka).
 
-
 <details>
 
 <summary>
@@ -28,13 +26,15 @@ There were 2 important reasons for doing this:
 
 <br />
 
-For ClickHouse check the events table size from the `/instance/status` page in the app. You can find it under "ClickHouse table sizes". We need that to be smaller than "ClickHouse disk free space" as we'll be duplicating the events table. If you need to increase your ClickHouse storage check out our [ClickHouse resize disk docs](/docs/self-host/runbook/clickhouse/resize-disk).
+For ClickHouse check the events table size from the `/instance/status` page in the app. You can find it under "ClickHouse table sizes". We need that to be smaller than "ClickHouse disk free space" as we'll be duplicating the events table. If you need to increase your ClickHouse storage check out our [ClickHouse resize disk docs](/docs/runbook/services/clickhouse/resize-disk).
 
 For Kafka by default we have `logRetentionHours=24`, but you could have overridden it in your `values.yaml`, which guarantees the minimal amount of time we'll keep events. Note, that there's also `logRetentionBytes` to better use the disk available, which might mean your retention in reality can be a lot longer than 24h. You can check what the oldest message is by running in your kafka pod shell:
+
 ```
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clickhouse_events_proto --from-beginning --max-messages 1
 ```
-Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest making sure you have at least 3 days worth of data. See the docs for info about [resizing kafka](/docs/self-host/runbook/kafka/resize-disk) and [kafka log retention](/docs/self-host/runbook/kafka/log-retention).
+
+Recall that we'll be pausing the event ingestion during this migration (likely for less than 30min), if the ingestion is paused for longer than we have retained in Kafka we would lose events/data. We suggest making sure you have at least 3 days worth of data. See the docs for info about [resizing kafka](/docs/runbook/services/kafka/resize-disk) and [kafka log retention](/docs/runbook/services/kafka/log-retention).
 
 </details>
 
@@ -64,11 +64,11 @@ To be extra safe we don't delete `events_backup_0002_events_sample_by` table, bu
 
 No. During the migration event ingestion from Kafka to ClickHouse will be paused for a brief period. There won't be any data loss as we'll be consuming all the events from Kafka later. Furthermore this migration duplicates the events table and keeps the old table as a backup so we can always restore it.
 
-
 ### Will this migration stop ingestion?
 
 Yes, but please note that:
-1. There will *not* be any data loss as we'll be consuming all the events from Kafka later.
+
+1. There will _not_ be any data loss as we'll be consuming all the events from Kafka later.
 1. Ingestion is stopped only for a brief period of time, when we are processing the last partition of the old events table and renaming the tables.
 1. Ingestion will only be stopped from Kafka to ClickHouse, which is the last step in the ingestion pipeline (see [architecture](https://posthog.com/docs/self-host/architecture)).
 
@@ -93,4 +93,3 @@ To scale ClickHouse vertically (add more memory), follow [this scaling guide](/d
 ### Kafka is crash looping (disk full) - what should I do?
 
 Please see our troubleshooting guide [here](/docs/self-host/deploy/troubleshooting#kafka-crash-looping-disk-full)
-
