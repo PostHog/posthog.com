@@ -128,10 +128,14 @@ export default function Handbook({
                 <PostLayout
                     title={title}
                     filePath={filePath}
-                    questions={<CommunityQuestions />}
+                    questions={
+                        <div id="squeak-questions">
+                            <CommunityQuestions />
+                        </div>
+                    }
                     menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
-                    tableOfContents={tableOfContents}
+                    tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
                     hideSidebar={hideAnchor}

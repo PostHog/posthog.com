@@ -361,8 +361,8 @@ export default function PostLayout({
     }, [])
 
     const handleFullWidthContentChange = () => {
+        localStorage.setItem('full-width-content', !fullWidthContent)
         setFullWidthContent(!fullWidthContent)
-        localStorage.setItem('full-width-content', fullWidthContent)
     }
 
     useEffect(() => {
@@ -465,14 +465,6 @@ export default function PostLayout({
                                                     />
                                                 </li>
                                             ))}
-                                            <li className="mt-0">
-                                                <a
-                                                    href="#squeak-questions"
-                                                    className="text-almost-black hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                >
-                                                    Questions?
-                                                </a>
-                                            </li>
                                         </Scrollspy>
                                     </div>
                                 )}
