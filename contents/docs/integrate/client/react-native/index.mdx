@@ -19,18 +19,14 @@ Purely built for React Native, this library allows you to integrate PostHog with
 
 ## Installation
 
-In your React Native or Expo project add the `@posthog/react-native` package to your project as well as the required peer dependencies.
+In your React Native or Expo project add the `posthog-react-native` package to your project as well as the required peer dependencies.
 
 ```bash
 # React Native
-yarn add @posthog/react-native expo-file-system expo-application expo-device
-# (Optional) Install extra libraries for more enriched events
-yarn add install expo-localization expo-network
+yarn add posthog-react-native expo-file-system expo-application expo-device expo-localization
 
 # Expo
-expo install @posthog/react-native expo-file-system expo-application expo-device
-# (Optional) Install extra libraries for more enriched events
-expo install expo-localization expo-network
+expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
 ```
 
 ## Configuration
@@ -110,8 +106,6 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     sendFeatureFlagEvent?: boolean = true,
     // Whether to load feature flags when initialised or not
     preloadFeatureFlags?: boolean = true,
-    // The interval in milliseconds between decide polls (refreshing feature flags)
-    decidePollInterval?: number = 30000,
     // How many times we will retry HTTP requests
     fetchRetryCount?: number = 3,
     // The delay between HTTP request retries
@@ -369,8 +363,6 @@ const MyComponent = () => {
 }
 ```
 
-Whilst the hook is active, PostHog will periodically refresh all the feature flags for the user based on the config property `{ "decidePollInterval": 30000 # every 30 seconds }`.
-
 Alternatively you can call load the feature flags directly:
 ```js
 // Defaults to undefined if not loaded yet or if there was a problem loading
@@ -382,7 +374,7 @@ posthog.getFeatureFlag("my-multivariant-flag", "control")
 
 ```
 
-PostHog will load feature flags when instantiated and will refresh periodically based on the configured options or whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync` 
+PostHog will load feature flags when instantiated and will refresh whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync` 
 ```js
 posthog.reloadFeatureFlagsAsync()
   .then(refreshedFlags => console.log(refreshedFlags))
