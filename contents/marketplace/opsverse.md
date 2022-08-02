@@ -14,17 +14,13 @@ Get a fully managed PostHog in the cloud region of your choice.
 
 ## Services offered
 
-- Managed PostHog
+- Managed PostHog open source
 - Data locality within the cloud region of your choice including EU
 - Data locality within your own cloud account
 
 ### App
 Launch and manage your PostHog instance from the OpsVerse admin console.
- 
-### Pricing
 
-[Please contact us](https://opsverse.io/fully-managed-posthog/)
+## Contact and Pricing info
 
-## Contact
-
-[Request Access](https://opsverse.io/fully-managed-posthog/)
+[Request Access](marketplace+opsverse@posthog.com)
