@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Product analytics", "Guides"]
 ---
 
-The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior that's useful for marketers, product managers and growth hackers at startups.
+The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It's useful for marketers, product managers and growth hackers at startups.
 
 In this guide, you'll learn:
 
@@ -38,7 +38,7 @@ Some versions add a sixth category, Awareness, but the original framework create
 
 Tracking the five pirate metrics will give you a complete, end-to-end view of user behavior, and help you understand areas of weakness and opportunity.
 
-McClure visualized the AARRR funnel in a table similar to the one below. 
+McClure visualized the AARRR funnel in a table like the one below. 
 
 This version is what the funnel might look like for our product, PostHog, an all-in-one product platform comprising [product analytics](/product), [session recording](/product/session-recording), [feature flags](/product/feature-flags) and [more](/blog/using-posting) – note, the figures here are purely illustrative.
 
@@ -60,7 +60,7 @@ This version is what the funnel might look like for our product, PostHog, an all
 | Referral     | Recommends to a friend                               | 1%             |
 | Referral     | Reviews product or shares on social media            | 1%             |
 
-Applying conversion rates is largely optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
+Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
 
 ## Why should you use the AARRR framework?
 
@@ -68,33 +68,25 @@ So those are the fundamentals of the pirate metrics framework, but why should yo
 
 ### 1. It puts the focus on individual users, not organizations
 
-Regardless of whether you're a B2B or B2C company, we believe it's best practice to focus on end users, not organizations. A company is a collection of people. If you build for the end users within, a company's activation, retention and revenue will follow. While it's still useful to track larger groups of organizations using your product, it shouldn't be a top-level metric.
+Regardless of whether you're a B2B or B2C company, it's best practice to focus on end users, not organizations. A company is a collection of people. Build for the its end users and the company's activation, retention and revenue will follow.
 
 ### 2. It creates a baseline single source of truth
 
-What's more useful? Exploring the solution to a problem, or debating the best way to measure whether the problem exists or not? It's all too easy to get stuck in semantic debates about the best way to measure the impact of a product change, or go searching for problems that don't exist because you don't have a clear picture of what "normal" looks like.
+What's more useful? Exploring the solution to a problem, or debating the best way to measure whether the problem exists or not? It's easy to get stuck in semantic debates about the best way to measure the impact of a product change. or go searching for problems that don't exist because you don't have a clear picture of what "normal" looks like.
 
 ### 3. It acts as an early warning system
 
-Once you've started tracking your core metrics and have a clear picture of historical trends, it'll be obvious when something has changed for good or bad. Has an activation metric taken a nosedive? Check onboarding process for bugs. Are users logging in less frequently over time? Perhaps you need to find ways to re-engage existing users. Your pirate metrics are the vital signs for your business.
+Once you have clear picture of historical trends, it'll be obvious when something has changed for good or ill. Has an activation metric taken a nosedive? Check onboarding process for bugs. Are users logging in less frequently over time? Perhaps you need to find ways to re-engage existing users. Your pirate metrics are the vital signs for your business.
 
 ### 4. It helps you identify weaknesses and opportunities
 
 Where should you focus your time to grow your business? Are you acquiring, activating and retaining users, but not seeing revenue growth? It's time to focus on monetization. Are your users retaining well, but you're not seeing much growth? You have an acquisition problem.
 
-> 💡 **PostHog Tip:** People may call it the pirate funnel, but the framework doesn't dictate where you should spend your time – it brings clarity to where you are and where you're going. Retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction, so early-stage products may want to focus more effort there ahead of other metrics. Don't start with acquisition just because it's at the top.
+> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate where you should spend your time. Retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction. Don't start with acquisition just because it's at the top.
 
 ### 5. Pirate metrics are comparative
 
-Pirate metrics are top level, but they're also comparable – a key quality of any good metric.
-
-Provided you're using a decent analytics platform, it's easy to use your pirate metrics as a way to compare different groups (cohorts) of users.
-
-A CEO may use Salesforce very differently to a salesperson, so it's rational to consider activation and retention behaviors quite differently. 
-
-Likewise, for marketplace products, your users will likely have different value propositions depending on if they are on the supply or demand side of your business.
-
-Comparing cohorts is also a great way to understand if your product works better for one group than another, which can influence your development and marketing efforts.
+Pirate metrics are top level, but they're also comparable – a key quality of any good metric. Provided you're using a decent analytics platform, it's easy to use your pirate metrics as a way to compare different groups (cohorts) of users. A CEO has different needs to a salesperson, so it's sensible to consider activation and retention differently.
 
 > 💡 **PostHog Tip:** You can apply different cohorts to any insight in PostHog, but you can also apply them to entire dashboards of insights. Simply create your cohort and then click 'Add filter' on your AARRR dashboard (it's at the top next to the date range), search for your cohort and then apply.
 
@@ -104,9 +96,9 @@ So you're sold on the AARRR framework, how do you get started?
 
 It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's not so good at tracking specific user behavior in products. Enter product analytics.
 
-There's no shortage of choice in the product analytics space. [Amplitude](/blog/posthog-vs-amplitude) and [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog) are the market leaders, but more affordable and open source alternatives like [PostHog](https://posthog.com/), [Matomo](/blog/posthog-vs-matomo), and LogRocket mean you don't have to pay through the nose to get actionable analytics.
+There's no shortage of choice in the product analytics space. [Amplitude](/blog/posthog-vs-amplitude) and [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog) are the market leaders, but better value alternatives like [PostHog](https://posthog.com/) and [Matomo](/blog/posthog-vs-matomo) mean you don't have to pay through the nose to get actionable analytics.
 
-If you don't already have product analytics, take a look at [what PostHog offers](https://posthog.com/) or [book a demo](/book-a-demo) to see the product in action. A business intelligence platform might be useful as well – we use Metabase.
+If you don't already have product analytics, take a look at [what PostHog offers](https://posthog.com/) or [book a demo](/book-a-demo) to see the product in action. A business intelligence platform might be useful as well – we use Metabase.
 
 Once you've chosen an analytics platform, you're ready to start finding your pirate metrics and building a dashboard to track them.
 
@@ -124,9 +116,9 @@ Let's take a look at some examples, starting at the top.
 
 Acquisition is probably the easiest metric to define, but what you track will depend on what kind of product you're building.
 
-For an e-commerce website, overall unique users is an important metric, but this is less important for a B2B product that's interested in user signups to use their product.
+For an e-commerce website, overall unique users is an important metric, but user signups is better for B2B products.
 
-It may also be prudent to add a quality metric here, too. If you have a specific type of user in mind for your product, tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
+It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
  
 ### 2. Activation
 
@@ -136,13 +128,9 @@ It may also be prudent to add a quality metric here, too. If you have a specific
 - New users who enable a third-party integration
 - New users who who spend x minutes using the product/website
 
-Some users don't stick around because they never used the product properly in the first place – i.e. they created an account, but didn't do anything once they were in.
+Some users create accounts but never use your product. Tracking activation helps you isolate onboarding issues from long term retention issues.
 
-Measuring activation helps you clarify whether you need to focus on this problem, or the separate retention problem of users coming back once they have experienced value for the first time.
-
-Don't be afraid to go deep here. Good activation metrics capture the "aha" moment a user should experience when they get value from your product.
-
-For PostHog, this means capturing when users answer a product question by creating an insight or viewing a session recording – we call this metric 'Discoveries'.
+Don't be afraid to go deep here. Good activation metrics capture the "aha" moment a user have when they get value from your product.
 
 > 💡 **PostHog Tip:** It's a good idea to double check your chosen activation metric leads to increased retention. To do so, [create a cohort of activated users](/docs/user-guides/cohorts) and check you retain them significantly better than non-activated but signed-up users. If your retention doesn't change, you need to rethink your activation metric.
 
@@ -151,13 +139,13 @@ For PostHog, this means capturing when users answer a product question by creati
 - Activated users who came back within n-days/weeks/months
 - How often activated users come back and perform an action
 
-Retention is one of the most important metrics in any business. If your product can nail activation and retention, it's a good sign you have a product people value, and that investing in monetization and acquisition won't be time and money wasted.
+Retention is one of the most important metrics in any business. If you nail activation and retention, it's a good sign you have a product people value.
 
-For most products, measuring retention means defining a usage interval – i.e. how often you expect your retention event to occur. Payroll software might measure monthly retention, a learning platform weekly retention, and a social network daily retention, for example.
+For most products, measuring retention means defining a usage interval – i.e. how often you expect your retention event to occur. Do you expect users to come back every day, week or month.
 
-It may also make sense to track unbounded retention, where there is no usage interval and you're just interested in whether users come back, and how many times they come back in a given time period.
+You can also track unbounded retention, where you track if/how often users return without a specific interval.
 
-> 💡 **PostHog Tip:** There are two ways to track retention in PostHog. Create a [retention insight](/docs/user-guides/retention) for tracking the percentage of users who performed an event within a given time period, or a [stickiness insight](/docs/user-guides/stickiness) to track how many times an activated user returned and performed an action. And whatever you're measuring, make sure you're tracking activated users and not just 'all users'.
+> 💡 **PostHog Tip:** There are two ways to track retention in PostHog. Create a [retention insight](/docs/user-guides/retention) for tracking the percentage of users who performed an event within a given time period; use a [stickiness insight](/docs/user-guides/stickiness) to track how many times an activated user returned and performed an action. And, whatever you're measuring, make sure you're tracking activated users and not 'all users'.
 
 ### 4. Referral
 
@@ -167,7 +155,7 @@ It may also make sense to track unbounded retention, where there is no usage int
 
 Is there a better validation for your product than someone inviting a colleague, or a friend, to use it?
 
-Not only is it a great sign that people enjoy using what you've built, it's also a powerful driver for word-of-mouth growth – aka, the best kind of growth.
+It's a great sign that people enjoy using what you've built and a powerful driver for word-of-mouth growth – aka, the best kind of growth.
 
 Referral metrics are especially important for products or services that have a growth loop – i.e. when the product experience is improved through multiple users, or when friends are using it together.
 
@@ -182,7 +170,7 @@ Referrals can also be both internal (more users from the same organization) or e
 
 What you track here will depend on your business.
 
-Monthly recurring revenue (MRR) is the most likely metric for a B2B SaaS platform; B2C companies / subscription businesses may want to track average revenue per user (ARPU), while e-commerce platforms will probably prefer Average Basket Value (ABV). 
+Monthly recurring revenue (MRR) is good for a B2B SaaS products. B2C companies businesses may prefer average revenue per user (ARPU), while e-commerce platforms prefer Average Basket Value (ABV). 
 
 If you can imagine three or four random letters, it's probably an acronym for a revenue metric!
 
@@ -194,21 +182,21 @@ So, you've started tracking user behavior, chosen your pirate metrics and built 
 
 ### 1. Validate your metrics
 
-As noted earlier, it's a good idea to check your metrics before you start making business critical decisions! Validating your main activation metric actually leads to better retention is the big one, but it's worth checking all your metrics are tracking correctly and still make sense. Review them all periodically.
+As noted earlier, it's a good idea to check your metrics before you start making business critical decisions! Validating your main activation metric leads to better retention is the big one, but review them all periodically. 
 
 ### 2. Prioritize your metrics
 
-Don't start with Acquisition just because it's at the top. Instead, ask yourself... what's your biggest problem right now? 
+Don't start with Acquisition because it's at the top. Instead, ask yourself... what's your biggest problem right now? 
 
-Once you've acquired your first users, most early-stage startups should focus their efforts on retention and activation. A product with loads of signups and terrible activation and retention isn't a product, it's a churning machine.
+Most early-stage startups should focus their efforts on retention and activation. A product with loads of signups and terrible activation and retention isn't a product, it's a churn machine.
 
-Even products that rely on viral growth (e.g. social media apps) need some confidence in their user experience before turning on the acquisition taps. First impressions last.
+Even products that rely on viral growth (e.g. social media apps) need some confidence in their user experience. First impressions last.
 
 ### 3. Assign metric owners
 
-AARRR is sometimes considered a "marketing framework". This is nonsense. It spans multiple disciplines, which is why it's such a useful framework for product-led growth. And if you want to influence them all, people and teams need to own them.
+AARRR is sometimes considered a "marketing framework". This is nonsense. It spans disciplines, which is why it's a useful framework for product-led growth. And if you want to influence them all, people and teams need to own them.
 
-At PostHog, we're [organized into small teams](/handbook/people/team-structure/why-small-teams). Instead of a monolithic "engineering team", we have small, nimble teams dedicated to things like data ingestion, infrastructure, the product etc. 
+At PostHog, we're [organized into small teams](/handbook/people/team-structure/why-small-teams).
 
 Here's how our earlier table might look if we assigned different PostHog teams to it:
 
@@ -230,25 +218,25 @@ Here's how our earlier table might look if we assigned different PostHog teams t
 | Referral     | Recommends to a friend                               | All                        |
 | Referral     | Reviews product or shares on social media            | Marketing                  |
 
-As you can see, there is overlap at all levels of the funnel and "recommending to a friend" is a quality metric that all teams influence through their work. 
+As you can see, there is overlap at all levels of the funnel. "Recommending to a friend" is a quality metric that all teams influence through their work. 
 
 ### 4. Research, test and iterate
 
 This is where effective analytics become essential. Your pirate metrics identify problems and opportunities, but you need to drill down deeper to understand the causes. 
 
-Use session recordings to observe real users using your product to understand their pain points, develop solutions and A/B test those solutions on your cohorts to test their effectiveness.
+Use session recordings to observe real users using your product, develop solutions and A/B test them to test their effectiveness.
 
-Once you've found good solutions, roll them out to your users and measure the results. Even when you think you have a winning solution, it's best to roll our your solution to a subset of users first to make sure they have the expected impact – use Feature Flags to do this.
+Once you've found good solutions, roll them out to your users and measure the results. It's best to roll our your solution to a subset of users first to make sure they have the expected impact – use [feature flags](/product/feature-flags) to do this.
 
-Dave McClure's original framework suggests you should spend 80% of your effort on refining and improving existing features, and 20% on new ones. It's a good rule of thumb.
+Dave McClure's original framework suggests you spend 80% of your effort on refining and improving existing features, and 20% on new ones. It's a good rule of thumb.
 
-> 💡 **PostHog Tip:** You can use PostHog at every stage of this journey: product analytics to track user behavior, session recording to observe and identify real user pain points, experimentation to run A/B tests and multivariate tests on the best solutions, and feature flags to stagger new features and target them on user properties and behaviors.      
-   
+> 💡 **PostHog Tip:** You can use PostHog at every stage of this journey. Use product analytics to track user behavior, session recording to observe and identify real user pain points, experimentation to run A/B tests and multivariate tests, and feature flags to stagger feature releases.
+ 
 ## Takeaways and further reading
 
-1. There's a reason the AARRR framework is still popular 15 years since its inception: it's simple on the surface, but unlocks great depths of insight into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
+1. There's a reason pirate metrics is still popular 15 years since its inception.  It's simple on the surface, but unlocks great depths of insight into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
 
-2. When implementing it, it's best to focus one or two metrics to improve at a time. Trying to optimize all of them simultaneously is maddening unless you have enough dedicated resource to deploy. 
+2. When implementing it, it's best to focus on one or two metrics to improve at a time. Trying to optimize all of them simultaneously is maddening unless you have enough dedicated resource to deploy. 
 
 3. Less is more when it comes to metrics, too. It might be tempting to have three or four measures for retention, for example, but try to stick to one or two for each category.  
 
