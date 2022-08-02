@@ -244,7 +244,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
-                    nextURL = next && next.url ? nextURL : ''
+                    nextURL = next && next.url ? next.url : ''
                     previous = menuFlattened[index - 1]
                     breadcrumb = [...item.breadcrumb]
                     return true
