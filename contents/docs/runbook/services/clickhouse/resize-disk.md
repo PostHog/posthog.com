@@ -3,6 +3,7 @@ title: Resize disk
 sidebar: Docs
 showTitle: true
 ---
+
 import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
 
 <ResizeDiskRequirementsSnippet/>
@@ -10,6 +11,7 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
 #### How-to
 
 1. Connect to the Clickhouse container to verify the data directory filesystem size (in this example 20G)
+
     ```shell
     kubectl -n posthog exec -it chi-posthog-posthog-0-0-0 -- /bin/bash
     clickhouse@chi-posthog-posthog-0-0-0:/$ df -h /var/lib/clickhouse/
@@ -30,9 +32,11 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
     ```
 
 #### Troubleshooting
+
 If the resize didn't work check for errors in the ClickHouse operator pod.
 
 This procedure doesn't work to decrease a volume. If you try, the disk won't be resized and the following errors can be seen in the ClickHouse operator pod
+
 ```
 posthog/posthog:ERROR unable to reconcile PVC(posthog/data-volumeclaim-template-chi-posthog-posthog-0-0-0) err: PersistentVolumeClaim "data-volumeclaim-template-chi-posthog-posthog-0-0-0" is in valid: spec.resources.requests.storage: Forbidden: field can not be less than previous value
 ```
@@ -42,5 +46,5 @@ For increases double check what the storage class is that's used for ClickHouse 
 ```shell
 kubectl get pvc data-volumeclaim-template-chi-posthog-posthog-0-0-0 -o json | jq '.spec.storageClassName'
 ```
-If a storage class with that name doesn't exist (`kubectl get storageclass`), then it's probably because [major upgrade steps from 9.x.x](https://posthog.com/docs/self-host/deploy/upgrade-notes#upgrading-from-9xx) weren't completed. Set `installCustomStorageClass: true` & run a `helm upgrade` first (without the storage increase request).
 
+If a storage class with that name doesn't exist (`kubectl get storageclass`), then it's probably because [major upgrade steps from 9.x.x](/docs/runbook/upgrade-notes#upgrading-from-9xx) weren't completed. Set `installCustomStorageClass: true` & run a `helm upgrade` first (without the storage increase request).
