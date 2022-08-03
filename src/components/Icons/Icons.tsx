@@ -2107,3 +2107,28 @@ export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean }) =>
         </svg>
     )
 }
+
+export const InfoOutlined = (props: any): JSX.Element => {
+    return (
+        <svg {...props} width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M11.5137 0C5.43881 0 0.513672 4.92514 0.513672 11C0.513672 17.0749 5.43881 22 11.5137 22C17.5885 22 22.5137 17.0749 22.5137 11C22.5137 4.92514 17.5885 0 11.5137 0ZM11.5137 1.49961C6.26711 1.49961 2.01319 5.75353 2.01319 11.0001C2.01319 16.2466 6.26711 20.5006 11.5137 20.5006C16.7602 20.5006 21.0142 16.2466 21.0142 11.0001C21.0142 5.75353 16.7602 1.49961 11.5137 1.49961Z"
+                fill="currentColor"
+            />
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M11.5178 9.00024C11.932 9.00024 12.2681 9.41446 12.2681 9.75049V14.2501C12.2681 14.6644 11.9321 15.0004 11.5178 15.0004C11.1036 15.0004 10.7676 14.5862 10.7676 14.2501V9.75049C10.7676 9.33627 11.1036 9.00024 11.5178 9.00024Z"
+                fill="currentColor"
+            />
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M12.5163 6.99942C12.5163 8.33317 10.5156 8.33317 10.5156 6.99942C10.5156 5.66653 12.5163 5.66653 12.5163 6.99942Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+}

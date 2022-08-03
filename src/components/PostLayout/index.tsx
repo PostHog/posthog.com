@@ -1,11 +1,21 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { Edit, ExpandDocument, Facebook, Issue, LinkedIn, Mail, MobileMenu, Twitter } from 'components/Icons/Icons'
+import {
+    Edit,
+    ExpandDocument,
+    Facebook,
+    InfoOutlined,
+    Issue,
+    LinkedIn,
+    Mail,
+    MobileMenu,
+    Twitter,
+} from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
@@ -17,6 +27,7 @@ import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { replacePath } from '../../../gatsby/utils'
 import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
+import { Popover } from 'components/Popover'
 
 const Iframe = (props: any) => {
     if (props.src && props.src.indexOf('youtube.com') !== -1) {
@@ -325,20 +336,20 @@ const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     )
 }
 
-const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
-    const buttonClasses =
-        'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
+export const sidebarButtonClasses =
+    'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
 
+const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
         <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
             <Tooltip className="flex" title={title}>
                 <span className="relative flex">
                     {href ? (
-                        <Link className={buttonClasses} to={href}>
+                        <Link className={sidebarButtonClasses} to={href}>
                             {children}
                         </Link>
                     ) : onClick ? (
-                        <button className={buttonClasses} onClick={onClick}>
+                        <button className={sidebarButtonClasses} onClick={onClick}>
                             {children}
                         </button>
                     ) : (
@@ -395,6 +406,9 @@ export default function PostLayout({
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(hideSidebar || !sidebar)
+    const [showTocButton, setShowTocButton] = useState(null)
+    const topSidebarSection = useRef(null)
+    const bottomSidebarSection = useRef(null)
 
     const handleMobileMenuClick = () => {
         setMobileMenuOpen(!mobileMenuOpen)
@@ -405,6 +419,19 @@ export default function PostLayout({
             scroll.scrollMore(-50)
         }
     }, [])
+
+    useEffect(() => {
+        setShowTocButton(null)
+    }, [tableOfContents])
+
+    useEffect(() => {
+        if (showTocButton === null) {
+            setShowTocButton(
+                topSidebarSection?.current?.getBoundingClientRect().bottom >=
+                    bottomSidebarSection?.current?.getBoundingClientRect().top
+            )
+        }
+    }, [showTocButton])
 
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
@@ -493,12 +520,17 @@ export default function PostLayout({
                     >
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
-                                <div className="pt-6 top-10 sticky">{sidebar}</div>
+                                <div ref={topSidebarSection} className="pt-6 top-10 sticky">
+                                    {sidebar}
+                                </div>
                             </div>
 
-                            <div className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
-                                {view === 'Article' && toc?.length > 1 && (
-                                    <div className="px-5 lg:px-8 lg:pb-4 max-h-72 overflow-auto lg:block hidden">
+                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
+                                {view === 'Article' && toc?.length > 1 && !showTocButton && (
+                                    <div
+                                        style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
+                                        className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
+                                    >
                                         <h4 className="text-[13px] mb-2">On this page</h4>
                                         <Scrollspy
                                             offset={-50}
@@ -520,6 +552,38 @@ export default function PostLayout({
                                     </div>
                                 )}
                                 <ul className="list-none px-5 flex mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                    {view === 'Article' && toc?.length > 1 && showTocButton && (
+                                        <SidebarAction title="On this page">
+                                            <Popover
+                                                button={
+                                                    <span className={sidebarButtonClasses}>
+                                                        <InfoOutlined />
+                                                    </span>
+                                                }
+                                            >
+                                                <div className="p-4 w-[250px] text-left">
+                                                    <h4 className="text-[13px] mb-2">On this page</h4>
+                                                    <Scrollspy
+                                                        offset={-50}
+                                                        className="list-none m-0 p-0 flex flex-col"
+                                                        items={tableOfContents?.map((navItem) => navItem.url)}
+                                                        currentClassName="active-product"
+                                                    >
+                                                        {toc.map((navItem, index) => (
+                                                            <li className="relative leading-none m-0" key={navItem.url}>
+                                                                <InternalSidebarLink
+                                                                    url={navItem.url}
+                                                                    name={navItem.value}
+                                                                    depth={navItem.depth}
+                                                                    className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                                />
+                                                            </li>
+                                                        ))}
+                                                    </Scrollspy>
+                                                </div>
+                                            </Popover>
+                                        </SidebarAction>
+                                    )}
                                     {filePath && (
                                         <>
                                             <SidebarAction
