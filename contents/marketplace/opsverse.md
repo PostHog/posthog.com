@@ -23,4 +23,4 @@ Launch and manage your PostHog instance from the OpsVerse admin console.
 
 ## Contact and Pricing info
 
-[Request Access](marketplace+opsverse@posthog.com)
+[Request Access](mailto:marketplace+opsverse@posthog.com)
