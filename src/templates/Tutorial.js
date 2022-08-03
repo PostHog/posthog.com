@@ -1,9 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
-import Breadcrumbs from 'components/Breadcrumbs'
 import CommunityQuestions from 'components/CommunityQuestions'
-import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
@@ -75,7 +73,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
                 <SidebarSection title="Filed under...">
                     <Topics
                         topics={categories?.map((category) => ({
-                            title: category,
+                            name: category,
                             url: `/tutorials/categories/${slugify(category, { lower: true })}`,
                         }))}
                     />
@@ -122,14 +120,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <Breadcrumbs
-                crumbs={[
-                    { title: 'Tutorials', url: '/tutorials' },
-                    { title: title, truncate: true },
-                ]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
-            />
             <PostLayout
                 questions={<CommunityQuestions />}
                 body={body}
@@ -147,7 +137,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                     />
                 }
             >
-                <h1 className="text-2xl mb-6">{title}</h1>
+                <h1 className="text-2xl mb-6 mt-0">{title}</h1>
                 <GatsbyImage
                     className="mb-6 bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
                     image={getImage(featuredImage)}
@@ -168,9 +158,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 ) : (
                     <Iframe src={featuredVideo} />
                 )}
-                <div className="bg-primary dark:bg-gray-accent-dark rounded-lg px-6 py-8 mt-8">
-                    <DocsPageSurvey />
-                </div>
             </PostLayout>
         </Layout>
     )
