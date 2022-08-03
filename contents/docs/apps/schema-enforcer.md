@@ -1,6 +1,5 @@
 ---
 title: Schema Enforcer
-layout: app
 github: https://github.com/PostHog/schema-enforcer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Schema%20Enforcer
 thumbnail: ../../apps/thumbnails/schema-enforcer.png

@@ -1,6 +1,5 @@
 ---
 title: First Time Event Tracker
-layout: app
 github: https://github.com/PostHog/first-time-event-tracker
 installUrl: https://app.posthog.com/project/apps?name=First%20Time%20Event%20Tracker
 thumbnail: ../../apps/thumbnails/first-time-event-tracker.png

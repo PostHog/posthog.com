@@ -1,6 +1,5 @@
 ---
 title: Currency Normalizer
-layout: app
 github: https://github.com/PostHog/currency-normalization-plugin
 installUrl: https://app.posthog.com/project/apps?name=Currency%20Normalization
 thumbnail: ../../apps/thumbnails/currency-normalization.png
