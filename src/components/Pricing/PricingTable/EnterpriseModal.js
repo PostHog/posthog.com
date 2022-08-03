@@ -73,11 +73,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
                                     <dt className="mb-0 opacity-75 text-sm">100 million - 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-sm">$0.000018</dd>
-                                </dl>
-                                <dl className="flex justify-between mb-0 p-2 pb-3">
-                                    <dt className="mb-0 opacity-75 text-sm">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-sm">$0.0000036</dd>
+                                    <dd className="mb-0 font-bold text-sm">$0.000025</dd>
                                 </dl>
                             </div>
 
