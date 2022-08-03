@@ -63,8 +63,8 @@ With installation complete, it’s time to configure how you want data to persis
 Here’s how to do that if you want to to store data in localStorage:
 
 ```
-posthog.init('sTMFPsFhdP1Ssg', {
-    api_host: 'https://app.posthog.com',
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },
@@ -76,8 +76,8 @@ posthog.init('sTMFPsFhdP1Ssg', {
 And here’s how to do it if you want to store data in page memory:
 
 ```
-posthog.init('sTMFPsFhdP1Ssg', {
-    api_host: 'https://app.posthog.com',
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },
