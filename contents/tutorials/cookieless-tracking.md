@@ -1,5 +1,5 @@
 ---
-title: How to track users without using cookies
+title: How to use PostHog without cookie banners
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/cookieless-tracking.png
@@ -68,7 +68,7 @@ posthog.init('sTMFPsFhdP1Ssg', {
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },
-    persistence: localStorage,
+    persistence: 'localStorage',
     // ... more options
 })
 ```
@@ -81,7 +81,7 @@ posthog.init('sTMFPsFhdP1Ssg', {
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },
-    persistence: memory,
+    persistence: 'memory',
     // ... more options
 })
 ```
