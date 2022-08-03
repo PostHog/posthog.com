@@ -90,7 +90,7 @@ If you don't already have product analytics, take a look at [what PostHog offers
 
 Once you've chosen an analytics platform, you're ready to start finding your pirate metrics and building a dashboard to track them.
 
-Let's take a look at some examples, starting at the top.
+Let's take a look at some pirate metrics examples, starting at the top.
 
 ### 1. Acquisition
 
