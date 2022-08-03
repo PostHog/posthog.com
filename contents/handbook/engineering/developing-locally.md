@@ -188,7 +188,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
 
     ```bash
-    brew install openssl brotli
+    brew install openssl
     CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
@@ -199,6 +199,12 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     ```
 
     If on an x86 platform, simply run the latter version.
+
+    You'll also need to install the `brotli` compression tool:
+
+    ```bash
+    brew install brotli
+    ```
 
 1. Install dev requirements
 
