@@ -64,7 +64,7 @@ AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic frame
 
 What metrics you choose will depend on the business and it's fine to have more than one metric for each category. What's vital, however, is that they're easy to understand, actionable and comparable.
 
-Read our complete guide to [bulding a pirate metrics funnel](/blog/aarrr-pirate-funnel) for more on this.
+Read our complete guide to [building a pirate metrics funnel](/blog/aarrr-pirate-funnel) for more on this.
 
 ## 3. Discover who your power users are
 
