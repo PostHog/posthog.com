@@ -9,8 +9,8 @@ author: ['joe-martin']
 topics: ['configuration']
 ---
 
-Level: Medium 🦔🦔
-Estimated reading time: 5 minutes ☕️
+- **Level:** Medium 🦔🦔
+- **Estimated reading time:** 5 minutes ☕️
 
 Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This approach is fairly typical and enables you to track users across sessions, but there are some situations where cookie-less tracking is preferable. 
 
