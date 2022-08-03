@@ -48,6 +48,8 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
+To help manage users' expectations, you might find it useful to share a message in #community-support when you are signing on and off for the day.
+
 ### Prioritizing requests
 
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
