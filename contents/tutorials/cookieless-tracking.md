@@ -19,7 +19,7 @@ These include:
 - If you have concerns about user privacy or regulation such as [GDPR](/docs/integrate/gdpr) or [HIPPA](/docs/privacy/hipaa-compliance).
 - If you have your own system for identifying users across multiple sessions, or if you don’t need to track user identities at all.
 
-If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use localStorage instead. If you’re interested in other options, such as storing data in page memory, please check [the posthog-js persistence docs](/docs/integrate/client/js#persistence).
+If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use pgae memory instead.
 
 ## Step 1: Decide where to store the data
 
