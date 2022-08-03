@@ -182,9 +182,11 @@ export const Text = ({ children }: { children: React.ReactNode }) => {
     return <p className="m-0 opacity-50 font-semibold flex items-center space-x-2 text-[14px]">{children}</p>
 }
 
-const Chevron = ({ open }: { open: boolean }) => {
+const Chevron = ({ open, className = '' }: { open: boolean; className: string }) => {
     return (
-        <div className="bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white">
+        <div
+            className={`bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white ${className}`}
+        >
             <svg
                 className="transition-transform w-"
                 style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
@@ -275,9 +277,20 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                         {isWithChild && <Chevron open={open ?? false} />}
                     </Link>
                 ) : (
-                    <button className={buttonClasses} onClick={() => setOpen(!open)}>
-                        <span>{name}</span>
-                        {isWithChild && <Chevron open={open ?? false} />}
+                    <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
+                        {isWithChild ? (
+                            <>
+                                <Link
+                                    className="text-inherit hover:text-inherit flex-grow pl-3 py-1"
+                                    to={children[0]?.url || ''}
+                                >
+                                    {name}
+                                </Link>
+                                <Chevron className="mr-2" open={open ?? false} />
+                            </>
+                        ) : (
+                            <span className="inline-block pl-3 pr-2 py-1">name</span>
+                        )}
                     </button>
                 )}
                 {isWithChild && (
