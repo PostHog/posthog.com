@@ -4,7 +4,50 @@ export const SCALE_MINIMUM_PRICING = 0
 export const SCALE_MINIMUM_EVENTS = 0
 export const ENTERPRISE_MINIMUM_PRICING = 450
 export const CLOUD_MINIMUM_PRICING = 0
-export const CLOUD_ENTERPRISE_MINIMUM_PRICING = 300
+export const CLOUD_ENTERPRISE_MINIMUM_PRICING = 450
+
+export const pricingLabels = {
+    1_000_000: 'First 1 million events/mo',
+    2_000_000: '1-2 million',
+    10_000_000: '2-10 million',
+    100_000_000: '10-100 million',
+    1_000_000_000: '100 million - 1 billion',
+}
+
+export const pricing = {
+    'self-hosted': [
+        [1_000_000, 0],
+        [2_000_000, 0.00045],
+        [10_000_000, 0.000225],
+        [100_000_000, 0.000075],
+        [1_000_000_000, 0.000025],
+        [Number.MAX_SAFE_INTEGER, 0.000025],
+    ],
+    'self-hosted-enterprise': [
+        [1_000_000, 0],
+        [2_000_000, 0.00045],
+        [10_000_000, 0.00045],
+        [100_000_000, 0.00009],
+        [1_000_000_000, 0.000018],
+        [Number.MAX_SAFE_INTEGER, 0.0000036],
+    ],
+    cloud: [
+        [1_000_000, 0],
+        [2_000_000, 0.00045],
+        [10_000_000, 0.000225],
+        [100_000_000, 0.000075],
+        [1_000_000_000, 0.000025],
+        [Number.MAX_SAFE_INTEGER, 0.000025],
+    ],
+    'cloud-enterprise': [
+        [1_000_000, 0],
+        [2_000_000, 0.00045],
+        [10_000_000, 0.00045],
+        [100_000_000, 0.00009],
+        [1_000_000_000, 0.000018],
+        [Number.MAX_SAFE_INTEGER, 0.0000036],
+    ],
+}
 
 export const features = {
     Platform: [

@@ -1,45 +1,12 @@
 import { kea } from 'kea'
-import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
-import { inverseCurve, sliderCurve } from './LogSlider'
+import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING, pricing } from '../constants'
+import { inverseCurve, prettyInt, sliderCurve } from './LogSlider'
 
 const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
     let finalCost = 0
     let alreadyCountedEvents = 0
 
-    const thresholdPrices =
-        pricingOption === 'self-hosted'
-            ? [
-                  [1_000_000, 0],
-                  [2_000_000, 0.00045],
-                  [10_000_000, 0.000225],
-                  [100_000_000, 0.000075],
-                  [1_000_000_000, 0.000025],
-                  [Number.MAX_SAFE_INTEGER, 0.000025],
-              ]
-            : pricingOption === 'self-hosted-enterprise'
-            ? [
-                  [10_000_000, 0.00045],
-                  [100_000_000, 0.00009],
-                  [1_000_000_000, 0.000018],
-                  [Number.MAX_SAFE_INTEGER, 0.0000036],
-              ]
-            : pricingOption === 'cloud'
-            ? [
-                  [1_000_000, 0],
-                  [2_000_000, 0.00045],
-                  [10_000_000, 0.000225],
-                  [100_000_000, 0.000075],
-                  [1_000_000_000, 0.000025],
-                  [Number.MAX_SAFE_INTEGER, 0.000025],
-              ]
-            : pricingOption === 'cloud-enterprise'
-            ? [
-                  [10_000_000, 0.00045],
-                  [100_000_000, 0.00009],
-                  [1_000_000_000, 0.000018],
-                  [Number.MAX_SAFE_INTEGER, 0.0000036],
-              ]
-            : [[]]
+    const thresholdPrices = pricing[pricingOption] || [[]]
 
     for (const [threshold, unitPricing] of thresholdPrices) {
         finalCost =
@@ -75,7 +42,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         sliderValue: [
-            1,
+            null,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => value,
                 setInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
