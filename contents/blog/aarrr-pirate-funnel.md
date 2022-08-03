@@ -1,6 +1,7 @@
 ---
-date: 2022-08-02
-title: "How to build and use an AARRR funnel (aka pirate metrics)"
+date: 2022-08-03
+title: "How to build and use an AARRR pirate funnel (aka pirate metrics)"
+description: "The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior."
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -66,29 +67,17 @@ Applying conversion rates is optional – the real value comes from forming an u
 
 So those are the fundamentals of the pirate metrics framework, but why should you use it? There are a few key benefits:
 
-### 1. It puts the focus on individual users, not organizations
+1. **It's about users, not organizations:** B2B products should avoid optimizing for specific companies. Build for a company's end users and its activation, retention and revenue will follow. 
 
-Regardless of whether you're a B2B or B2C company, it's best practice to focus on end users, not organizations. A company is a collection of people. Build for the its end users and the company's activation, retention and revenue will follow.
+2. **It creates a baseline single source of truth:** It's easy to get lost if you don't know what "normal" looks like. Your pirate metrics give you a baseline.
 
-### 2. It creates a baseline single source of truth
+3. **It acts as an early warning system:** Once you have a clear picture of historical trends, it'll be obvious when something has changed for good or ill.
 
-What's more useful? Exploring the solution to a problem, or debating the best way to measure whether the problem exists or not? It's easy to get stuck in semantic debates about the best way to measure the impact of a product change. or go searching for problems that don't exist because you don't have a clear picture of what "normal" looks like.
+4. **It helps you identify weaknesses and opportunities:** Are you acquiring, activating and retaining users, but not seeing revenue growth? It's time to focus on monetization. Retaining well, but not seeing growth? You have an acquisition problem.
 
-### 3. It acts as an early warning system
+5. **Pirate metrics are comparative:** A CEO has different needs to a salesperson, so it's sensible to consider activation and retention differently. You can use your pirate metrics to compare different cohorts of users.
 
-Once you have clear picture of historical trends, it'll be obvious when something has changed for good or ill. Has an activation metric taken a nosedive? Check onboarding process for bugs. Are users logging in less frequently over time? Perhaps you need to find ways to re-engage existing users. Your pirate metrics are the vital signs for your business.
-
-### 4. It helps you identify weaknesses and opportunities
-
-Where should you focus your time to grow your business? Are you acquiring, activating and retaining users, but not seeing revenue growth? It's time to focus on monetization. Are your users retaining well, but you're not seeing much growth? You have an acquisition problem.
-
-> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate where you should spend your time. Retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction. Don't start with acquisition just because it's at the top.
-
-### 5. Pirate metrics are comparative
-
-Pirate metrics are top level, but they're also comparable – a key quality of any good metric. Provided you're using a decent analytics platform, it's easy to use your pirate metrics as a way to compare different groups (cohorts) of users. A CEO has different needs to a salesperson, so it's sensible to consider activation and retention differently.
-
-> 💡 **PostHog Tip:** You can apply different cohorts to any insight in PostHog, but you can also apply them to entire dashboards of insights. Simply create your cohort and then click 'Add filter' on your AARRR dashboard (it's at the top next to the date range), search for your cohort and then apply.
+> 💡 **PostHog Tip:** You can apply cohorts to any insight in PostHog, but you can also apply them to entire dashboards of insights. Simply create your cohort and then click 'Add filter' on your AARRR dashboard (it's at the top next to the date range), search for your cohort and then apply.
 
 ## How to build an AARRR pirate funnel
 
@@ -119,6 +108,8 @@ Acquisition is probably the easiest metric to define, but what you track will de
 For an e-commerce website, overall unique users is an important metric, but user signups is better for B2B products.
 
 It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
+
+> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate where you should spend your time. Retention is a great indicator of [product-market fit](/blog/how-to-product-market-fit) and user satisfaction. Don't start with acquisition just because it's at the top.
  
 ### 2. Activation
 
