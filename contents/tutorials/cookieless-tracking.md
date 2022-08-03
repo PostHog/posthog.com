@@ -55,7 +55,7 @@ To finish installation, include it in your files:
 
 ```
 import posthog from 'posthog-js'
-posthog.init('sTMFPsFhdP1Ssg', { api_host: 'https://app.posthog.com' })
+posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 ```
 
 With installation complete, it’s time to configure how you want data to persist. There are various configuration options you can use (a full list is available [here](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L933)), which are passed as an object to `posthog.init`.
