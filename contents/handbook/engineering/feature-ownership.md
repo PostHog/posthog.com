@@ -72,3 +72,4 @@ Some of the features we are building may exist in other products already. It is 
 [@Twixes]: https://github.com/Twixes
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
+[@kappa90]: https://github.com/kappa90
