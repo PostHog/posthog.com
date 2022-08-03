@@ -35,8 +35,8 @@ export const NewsletterForm = ({
                         </figure>
 
                         <span className="flex flex-col space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
-                            <span className="text-lg">Email updates from PostHog?</span>{' '}
-                            <span className="text-sm md:text-lg">Where do I sign up?!</span>
+                            <span className="text-lg">The best of PostHog.</span>{' '}
+                            <span className="text-sm md:text-lg">Delivered twice a month.</span>
                         </span>
                     </div>
                     <div className="md:ml-16 mt-2 md:mt-0">
@@ -70,8 +70,8 @@ export const NewsletterForm = ({
                             </div>
                             <input
                                 type="submit"
-                                className="bg-primary dark:bg-white text-white dark:text-black text-base shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 rounded-full w-full md:w-auto"
-                                value="Subscribe"
+                                className="bg-primary dark:bg-white text-white dark:text-black text-lg shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
+                                value="Sign me up!"
                             />
                         </form>
                     </div>

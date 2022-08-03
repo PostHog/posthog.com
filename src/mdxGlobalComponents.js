@@ -1,7 +1,5 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -70,12 +68,16 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
+import { AllPlans } from './components/Pricing/AllPlans'
+import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
+import { Features } from './components/Pricing/Features'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
+import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
@@ -93,11 +95,14 @@ import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionT
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
+import { Spinner } from './components/Spinner'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
+import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
 import { TotalTeam } from './components/TotalTeam'
@@ -109,8 +114,6 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
@@ -179,12 +182,16 @@ export const shortcodes = {
     PageHeader,
     PostCard,
     PostLayout,
+    AllPlans,
+    Calculator,
     CloudVsSelfHost,
     FAQs,
+    Features,
     PlanComparison,
     PricingHero,
     PricingSlider,
     PricingTable,
+    ProductPillars,
     Quote,
     Savings,
     ProductAnchorNavbar,
@@ -202,11 +209,14 @@ export const shortcodes = {
     FeaturedSectionTripleImage,
     SliderNav,
     Spacer,
+    Spinner,
     StarRepoButton,
     StarUsBanner,
     Structure,
     Subscribe,
+    Tab,
     TeamQuote,
+    Toggle,
     Tooltip,
     TotalCountries,
     TotalTeam,

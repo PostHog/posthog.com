@@ -16,7 +16,7 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
             </ul>
-            <p className="mt-4 text-xs">
+            <p className="mt-4 text-sm">
                 Plus 50-ish apps available in the <a href="/apps">PostHog App Store</a>
             </p>
         </div>
@@ -52,10 +52,10 @@ export default function Hero() {
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
-                            Try PostHog
+                            Get started
                         </CallToAction>
                         <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
-                            Get a demo
+                            Book a demo
                         </CallToAction>
                     </div>
                 </div>

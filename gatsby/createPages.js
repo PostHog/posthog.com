@@ -5,7 +5,6 @@ const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
 module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
-    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -14,11 +13,17 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
-    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+
+    // Docs
+    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
+    const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
+
     const result = await graphql(`
         {
             allMdx(
@@ -60,6 +65,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     headings {
                         depth
                         value
+                    }
+                    frontmatter {
+                        layout
                     }
                     fields {
                         slug
@@ -117,6 +125,10 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
                 nodes {
                     id
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -211,7 +223,50 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     `)
 
     if (result.errors) {
-        return Promise.reject(mdPagesResult.errors)
+        return Promise.reject(result.errors)
+    }
+
+    const layouts = {
+        apps: AppDocsTemplate,
+        library: LibraryTemplate,
+    }
+
+    function createPosts(data, menu, template, breadcrumbBase) {
+        const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
+        data.forEach((node) => {
+            const layout = node?.frontmatter?.layout
+            const slug = node.fields?.slug || node.url
+            let next = null
+            let previous = null
+            let breadcrumb = null
+            let nextURL = ''
+            const tableOfContents = node.headings && formatToc(node.headings)
+            menuFlattened.some((item, index) => {
+                if (item.url === slug) {
+                    next = menuFlattened[index + 1]
+                    nextURL = next && next.url ? next.url : ''
+                    previous = menuFlattened[index - 1]
+                    breadcrumb = [...item.breadcrumb]
+                    return true
+                }
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: layouts[layout] || template,
+                context: {
+                    id: node.id,
+                    nextURL,
+                    next,
+                    previous,
+                    menu: result.data.sidebars.childSidebarsJson[menu],
+                    breadcrumb,
+                    breadcrumbBase: breadcrumbBase || menuFlattened[0],
+                    tableOfContents,
+                    slug,
+                },
+            })
+        })
     }
 
     function formatToc(headings) {
@@ -225,10 +280,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     }
 
-    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
-    const docsMenu = result.data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
     const categories = {}
     result.data.categories.group.forEach(({ category }) => {
         const slug = slugify(category, { lower: true })
@@ -249,99 +300,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    result.data.handbook.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.docs.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.apidocs.nodes.forEach((node) => {
-        const slug = replacePath(node.url)
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: slug,
-            component: ApiEndpoint,
-            context: {
-                id: node.id,
-                slug,
-                menu: docsMenu,
-                next,
-                previous,
-                // menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
-            },
-        })
-    })
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
@@ -394,12 +355,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const postCategories = node.frontmatter.categories || []
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
             context: {
                 id: node.id,
-                categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                tableOfContents,
+                categories: postCategories.map((category) => ({ name: category, url: categories[category].url })),
                 slug,
             },
         })
@@ -508,60 +471,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             component: Question,
             context: {
                 id,
-            },
-        })
-    })
-
-    const LibraryTemplate = path.resolve(`src/templates/Library.tsx`)
-    const libraries = await graphql(`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/docs/integrate/(client|server)/(?!.*snippets/).*/" } }
-                    frontmatter: { title: { ne: "" } }
-                }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-
-    libraries.data.allMdx.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: LibraryTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
             },
         })
     })

@@ -434,11 +434,24 @@ It takes 2 arguments, the first one being an event name (required), and the seco
 
 Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "App Server" person.
 
+Apps can optionally pass a `timestamp`, which need to be in isoformat. If not set, the timestamp will default to current time.
+
+Example:
+```js
+posthog.capture('Stripe Customer Subscribed', {
+  distinct_id: 'a user id',
+  timestamp: new Date(subscription.created*1000).toISOString()
+})
+```
+
+
 Method signature:
 
 ```js
 capture(event: string, properties?: Record<string, any>) => void
 ```
+
+
 ##### `api`
 
 <blockquote class="warning-note">

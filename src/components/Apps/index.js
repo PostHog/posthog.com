@@ -65,7 +65,7 @@ function AppsPage() {
                     Do more with your data with <br className="hidden lg:block" />
                     <span className="text-blue">PostHog Apps</span>
                 </h2>
-                <p className="my-6 mx-auto text-center text-base md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
+                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
                     50-ish apps available
                 </p>
             </header>

@@ -10,10 +10,21 @@ hideAnchor: true
 
 Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams).
 
-
 ## Hiring Process
 
-> This page outlines the hiring process we use internally. We have more detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [marketing](/handbook/people/hiring-process/marketing-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
+### Summary of process for current live roles
+
+| **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
+|---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Senior Product Manager    | GMT -8:00 to +2:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | [Senior Product Manager Task](https://github.com/PostHog/company-internal/blob/master/superdays/product-manager.md) |
+| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
+| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
+| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
+| Technical Content Marketer       | GMT -8:00 to +2:00                   | Marketing   | Charles | 1) Culture Screen - Charles<br/> 2) Technical Screen - James H & Andy<br/> 3) SuperWeek Assessment - Charles, Andy, Tim, James H., Joe | [Technical Content Marketer Task](https://docs.google.com/document/d/1jR7lcNrF_-x-Pczaa5deGnIlkyHuXe2fARwBryie8sU/edit?usp=sharing) |
+
+Tasks are only available internally - please do not share these publicly. 
+
+### External recruiters
 
 All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
@@ -139,7 +150,7 @@ If you receive an application via email or some other non-Workable channel like 
 
 For most roles, we don’t just rely on incoming applications. Direct outreach is a great way to influence the hiring pipeline, and enables us to:
 
-*   Aapproach people with very specific or relevant experience, even when they are not currently looking for a new role
+*   Approach people with very specific or relevant experience, even when they are not currently looking for a new role
 *   Encourage candidates from a wider range of backgrounds to apply
 *   Build our employer brand and general awareness
 
@@ -152,7 +163,7 @@ Good places to look for people include:
 *   StackOverflow
 *   AngelList
 
-Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite licence (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
+Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite license (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
 
 ### Booking interviews through Workable
 
@@ -163,17 +174,6 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 ## Hiring process overview
 
 > A good rule of thumb when deciding whether not to progress at any stage - if the candidate doesn't get a _definite yes_ then assume it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
-
-### Summary of process for each role
-
-| **Position title**        | **Location  (we're happy to hire in)** | **Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
-|---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Product Manager    | GMT -08:00 to +02:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | [Senior Product Manager Task](https://github.com/PostHog/company-internal/blob/master/superdays/product-manager.md) |
-| Senior Data Engineer      | GMT -05:00 to +02:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Senior Data Engineer Task]()  |
-| Site Reliability Engineer | GMT -08:00 to +02:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [Site Reliability Engineer]()  |
-| Developer Advocate        | GMT 0:00 to +02:00                     | Website & Docs      | Cory     | 1) Culture Screen - Coua<br/> 2) Technical Screen - James H.<br/> 3) SuperDay Assessment - Charles, Joe, Andy, Tim & Grace             | [Dev Advocate Task]()          |
-| Full Stack Engineer       | GMT -08:00 to +-2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
-
 
 ### Application
 
@@ -191,7 +191,7 @@ This is to allow both PostHog and the candidate to assess whether the candidate 
 
 This round is loosely structured into 4 different sections:
 
-1. [ If it was cold outreach] PostHog - quick intro about the company and role
+1. (If we sourced them) PostHog - quick intro about the company and role
 2. Candidate background and mindset
 3. Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned.
 4. Answer any open questions

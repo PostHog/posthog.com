@@ -27,7 +27,7 @@ export function BlogFooter({ blogArticleSlug }: BlogFooterProps): JSX.Element {
 
                     return (
                         <Structure.Section width="xl" className="my-36">
-                            <header className="text-xs text-gray-400 uppercase mb-4">More Posts</header>
+                            <header className="text-sm text-gray-400 uppercase mb-4">More Posts</header>
                             {postCards}
                         </Structure.Section>
                     )

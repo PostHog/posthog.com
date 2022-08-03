@@ -158,7 +158,7 @@ We have a company WeWork All Access account that allows you to book desks in any
 
 As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our bi-annual offsites.
 
-We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month. 
+We encourage team members to try and meet up with each other when practical, and provide everyone with an $300 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month. 
 
 We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
 

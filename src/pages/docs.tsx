@@ -12,9 +12,9 @@ import { createPortal } from 'react-dom'
 const quickLinks = [
     {
         icon: 'selfHost',
-        name: 'Self-host',
-        to: '/docs/self-host',
-        description: 'Detailed information on getting PostHog running on your own.',
+        name: 'Deploy',
+        to: '/docs/deploy',
+        description: 'Detailed information on getting PostHog running.',
     },
     {
         icon: 'api',
@@ -52,7 +52,7 @@ const deployment = [
     { name: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
     { name: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
     { name: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
-    { name: 'Digital Ocean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
+    { name: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
     { name: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
     { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'hobby', badge: undefined },
 ]
@@ -116,7 +116,9 @@ export const DocsIndex: React.FC = () => {
                     <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
                         <div className="w-full z-20">
                             <h1 className="font-bold mb-2">Documentation</h1>
-                            <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
+                            <h5 className="text-opacity-60 font-semibold">
+                                In-depth tutorials, references, and examples for everything PostHog
+                            </h5>
 
                             {searchOpen &&
                                 createPortal(
@@ -161,10 +163,10 @@ export const DocsIndex: React.FC = () => {
                                     name="docs-search"
                                     placeholder="Search documentation..."
                                     autoFocus={true}
-                                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
+                                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg"
                                 />
 
-                                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
+                                <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">
                                     Search
                                 </button>
                             </form>
@@ -192,7 +194,7 @@ export const DocsIndex: React.FC = () => {
                                 >
                                     <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
                                     <div>
-                                        <h3 className="text-lg font-bold text-orange mb-0.5">{link.name}</h3>
+                                        <h3 className="text-lg font-bold text-red mb-0.5">{link.name}</h3>
                                         <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
                                             {link.description}
                                         </p>
@@ -212,13 +214,13 @@ export const DocsIndex: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
                         <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
-                                <h4 className="font-bold mb-1">
-                                    <span className="text-gray text-base">1.</span> Deploy
+                                <h4 className="font-bold mb-0">
+                                    <span className="text-gray text-lg">1.</span> Deploy
                                 </h4>
-                                <p className="text-sm text-gray">Spin up your PostHog instance</p>
+                                <p className="text-base text-gray">Spin up your PostHog instance</p>
                             </div>
 
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                 {deployment.map((deploy) => {
                                     return (
                                         <li className="flex-grow" key={deploy.name}>
@@ -237,12 +239,12 @@ export const DocsIndex: React.FC = () => {
 
                         <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                             <div>
-                                <h4 className="font-bold mb-1">
-                                    <span className="text-gray text-base">2.</span> Integrate
+                                <h4 className="font-bold mb-0">
+                                    <span className="text-gray text-lg">2.</span> Integrate
                                 </h4>
-                                <p className="text-gray">Start tracking events and users</p>
+                                <p className="text-base text-gray">Start tracking events and users</p>
                             </div>
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                 {libraries.map((library) => {
                                     return (
                                         <li className="flex-grow" key={library.name}>
@@ -260,11 +262,11 @@ export const DocsIndex: React.FC = () => {
                         </div>
 
                         <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                            <h4 className="font-bold mb-1">
-                                <span className="text-gray text-base">3.</span> Customize
+                            <h4 className="font-bold mb-0">
+                                <span className="text-gray text-lg">3.</span> Customize
                             </h4>
-                            <p className="text-gray">Customize your installation with apps</p>
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
+                            <p className="text-base text-gray">Customize your installation with apps</p>
+                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                 {apps.map((app) => {
                                     return (
                                         <li className="flex-grow" key={app.name}>
@@ -296,7 +298,7 @@ export const DocsIndex: React.FC = () => {
                                     <Link
                                         to={link.to}
                                         disablePrefetch
-                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark text-black"
                                     >
                                         <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
                                         <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>

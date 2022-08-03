@@ -28,6 +28,11 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
 
     const resources: ColMenuItems[] = [
         {
+            title: 'Customer stories',
+            description: 'See how PostHog is moving the needle up and to the right',
+            url: '/customers',
+        },
+        {
             title: 'Marketplace',
             description: 'Companies and products who can help with PostHog',
             url: '/marketplace',
@@ -99,12 +104,12 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                                 className="rounded-md md:px-2 py-2 hover:bg-tan/50 flex items-start space-x-2 relative active:top-[1px] active:scale-[.99]"
                                                 to={url}
                                             >
-                                                <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white mt-[2px] w-4">
+                                                <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white mt-1 w-4">
                                                     {index + 1}.
                                                 </span>
                                                 <div>
                                                     <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                                    <p className="text-[14px] pt-[3px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                                    <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white">
                                                         {description}
                                                     </p>
                                                 </div>
@@ -155,7 +160,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                             to={url}
                                         >
                                             <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
-                                            <p className="text-[14px] pt-[3px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                            <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white">
                                                 {description}
                                             </p>
                                         </Link>

@@ -7,7 +7,7 @@ const Listing = ({ name, image, url, badge, price }) => {
         <li className="border-b border-r border-dashed border-gray-accent-light">
             <Link
                 to={url}
-                className="flex flex-col h-full relative items-center text-center px-2 py-8 hover:bg-gray-accent-light"
+                className="flex flex-col relative items-center text-center px-2 py-8 justify-center hover:bg-gray-accent-light"
             >
                 <img className="icon w-12 h-12 p-2 mb-2 rounded-sm" src={image} />
 

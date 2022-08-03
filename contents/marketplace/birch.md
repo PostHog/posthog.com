@@ -22,4 +22,4 @@ $25/month
 
 ## Contact
 
-[Get Started](mailto:danny@usebirch.com)
+[Email to get started](marketplace+birch@posthog.com)
