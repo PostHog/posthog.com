@@ -6,22 +6,22 @@ const sections = [
     {
         title: 'Easier',
         features: [
-            'No need to hassle with deployment or hosting',
-            'Automatic upgrades - always get the latest version of PostHog',
+            'PostHog Cloud never runs out of space or resources',
+            'Automatic upgrades to the latest version of PostHog',
         ],
     },
     {
-        title: 'Cheaper',
+        title: 'Simpler',
         features: [
-            'Because of economies of scale, we can offer lower prices for PostHog Cloud',
-            'No need to pay for separate hosting for a self-hosted instance,',
+            'No need to pay for separate hosting or support',
+            'Migrate to a self-hosted instance later, if needed',
         ],
     },
     {
         title: 'Faster to try',
         features: [
             'Sign up and start tracking events as soon as right now',
-            'Ultimately want to self-host, but just interested in trying PostHog? We can help transfer your instance from PostHog Cloud to a self-hosted instance anytime. (Just email us!)',
+            'No hardware setup; just install the snippet and start tracking',
         ],
     },
 ]
