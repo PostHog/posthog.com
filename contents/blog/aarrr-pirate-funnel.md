@@ -1,7 +1,6 @@
 ---
 date: 2022-08-03
 title: "The AARRR Pirate Funnel: A complete guide to pirate metrics"
-description: "The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior."
 rootPage: /blog
 sidebar: Blog
 showTitle: true
