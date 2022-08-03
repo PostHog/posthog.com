@@ -191,6 +191,6 @@ Once you've setup your experiment and have a winner, you're ready to enjoy the f
 
 Following these steps will help you identify problems in your funnel, and verify your solutions. [PostHog customers](/customers) frequently tell us about how they've [used PostHog to improve conversion](/customers/pry), or reduced onboarding drop off, sometimes by [as much as 50%](/customers/vendasta)
 
-For more inspiration, we recommend reading our [Building an AARRR pirate funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
+For more inspiration, we recommend reading our guide [building an AARRR pirate funnel](/blog/aarrr-pirate-funnel) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
 
 Got a question about anything in this tutorial? Leave a question below, or [join our community Slack](/slack).
