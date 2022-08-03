@@ -242,6 +242,8 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
         },
     }
 
+    const isWithChild = children && children.length > 0
+
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
@@ -249,13 +251,13 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                     <Link
                         onClick={() => {
                             handleLinkClick && handleLinkClick()
-                            if (children && children.length > 0) {
+                            if (isWithChild) {
                                 setOpen(!open)
                             }
                         }}
                         className={`${buttonClasses} ${
                             !topLevel ? 'opacity-50' : ''
-                        } hover:opacity-100 transition-opacity ${isActive ? 'opacity-100' : ''}`}
+                        } hover:opacity-100 transition-opacity ${isActive || isWithChild ? 'opacity-100' : ''}`}
                         to={url}
                     >
                         <AnimatePresence>
@@ -270,15 +272,15 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             )}
                         </AnimatePresence>
                         <span>{name}</span>
-                        {children && children.length > 0 && <Chevron open={open ?? false} />}
+                        {isWithChild && <Chevron open={open ?? false} />}
                     </Link>
                 ) : (
                     <button className={buttonClasses} onClick={() => setOpen(!open)}>
                         <span>{name}</span>
-                        {children && children.length > 0 && <Chevron open={open ?? false} />}
+                        {isWithChild && <Chevron open={open ?? false} />}
                     </button>
                 )}
-                {children && children.length > 0 && (
+                {isWithChild && (
                     <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
                         {children.map((child) => {
                             return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
