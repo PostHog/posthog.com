@@ -42,7 +42,7 @@ const Breakdown = ({ planName }) => {
         const included = price[1] === 0
         return (
             <>
-                <div className="col-span-2">{label || 'More than 1 billion'}</div>
+                <div className="col-span-2">{label || '100 million - 1 billion'}</div>
                 <strong className="text-right">
                     {included ? (
                         'Included'
