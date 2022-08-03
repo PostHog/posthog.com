@@ -316,11 +316,10 @@ const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkC
 }
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
-    const { pathname } = useLocation()
     return (
         <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
-                const active = index === crumbs.length - 1 && url === pathname
+                const active = index === crumbs.length - 1
                 return (
                     <li
                         key={index}
@@ -508,7 +507,7 @@ export default function PostLayout({
                     className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
-                        {breadcrumb && <Breadcrumb crumbs={[...breadcrumb, { name: title, url: pathname }]} />}
+                        {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
                         <div className="article-content">{children}</div>
                         {questions && questions}
                     </div>
