@@ -16,22 +16,18 @@ The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a cl
 In this guide, you'll learn:
 
 - [How the AARRR funnel works](#how-does-the-aarrr-funnel-work)
-- [Why you should use the AARRR framework](#why-should-you-use-the-aarrr-framework)
+- [Why you should use the AARRR framework](#why-should-you-use-aarrr)
 - [How to build an AARRR pirate funnel](#how-to-build-an-aarrr-pirate-funnel)
-- [How to drive growth using pirate metrics](#how-to-drive-growth-using-pirate-metrics)
+- [How to use pirate metrics in your product](#how-to-use-pirate-metrics-in-your-product)
 
 ## How does the AARRR funnel work?
 
 The five pirate metrics are:
 
 - **Acquisition:** How many users signed up to your product?
-
 - **Activation:** Do those new users actually use the product?
-
 - **Retention:** Do your activated users continue to use the product?
-
 - **Revenue:** How many users go on to pay you and how much?
-
 - **Referral:** Do your users like the product enough to share it?
 
 Some versions add a sixth category, Awareness, but the original framework created by Dave McClure in 2007 holds true.
@@ -62,7 +58,7 @@ This version is what the funnel might look like for our product, PostHog, an all
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
 
-## Why should you use the AARRR framework?
+## Why should you use AARRR
 
 So those are the fundamentals of the pirate metrics framework, but why should you use it? There are a few key benefits:
 
@@ -166,7 +162,7 @@ If you can imagine three or four random letters, it's probably an acronym for a 
 
 > 💡 **PostHog Tip:** You can send revenue data to PostHog by defining a property and setting a numerical value on that property. You can then visualize revenue data in Trends using event property averages, sums, percentiles and formulas. You can even integrate with payment systems via the [PostHog App Store](/apps).
 
-## How to drive growth using pirate metrics 
+## How to use pirate metrics in your product
 
 So, you've started tracking user behavior, chosen your pirate metrics and built your dashboard... what next? We recommend taking the following steps:
 
