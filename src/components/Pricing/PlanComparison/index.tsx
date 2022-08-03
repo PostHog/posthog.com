@@ -50,7 +50,7 @@ const sections = [
                     'Open Source': 'Free',
                     'Self-Hosted (Self-Serve)': '$0/mo',
                     'Self-Hosted (Enterprise)': '$450/mo',
-                    'Cloud (Enterprise)': '$300/mo',
+                    'Cloud (Enterprise)': '$450/mo',
                 },
             },
             {
