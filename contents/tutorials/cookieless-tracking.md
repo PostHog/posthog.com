@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/cookieless-tracking.png
 featuredTutorial: false
-date: 2022-06-29
+date: 2022-08-03
 author: ['joe-martin']
 topics: ['configuration']
 ---
