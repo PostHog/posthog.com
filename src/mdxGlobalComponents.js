@@ -66,6 +66,7 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
+import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { AllPlans } from './components/Pricing/AllPlans'
@@ -180,6 +181,7 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
+    Popover,
     PostCard,
     PostLayout,
     AllPlans,

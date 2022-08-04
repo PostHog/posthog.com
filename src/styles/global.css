@@ -692,7 +692,7 @@ ul {
 
 .active-product {
     a {
-        @apply opacity-100;
+        @apply opacity-100 font-bold;
     }
 
     &:before {

@@ -23,7 +23,7 @@ const Title = ({ children, className = '' }) => {
 
 const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
     return (
-        <div className="lg:mb-7 mb-4 overflow-hidden">
+        <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
             {featuredImage && (
                 <div className="relative">
                     <GatsbyImage

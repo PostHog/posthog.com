@@ -1,6 +1,5 @@
 ---
 title: GitHub Star Sync
-layout: app
 github: https://github.com/PostHog/github-star-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Star+Sync
 thumbnail: ../../apps/thumbnails/github.png
