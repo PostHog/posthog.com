@@ -25,7 +25,7 @@ This is a rough guide to ramping up as a PM in PostHog
 * Share an interesting finding from PostHog in the demo section of the company all hands
 
 ### Month 1
-**Outcome**: Your teams's are hitting their goals faster
+**Outcome**: Your teams are hitting their goals faster
 * Finding opportunities to reduce scope and increase impact of big projects
 * Giving the team the context they need to design and build really amazing solutions to customer problems
 * Enabling the team move faster by finding and removing bottlenecks
