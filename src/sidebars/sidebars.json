@@ -198,6 +198,17 @@
                     "url": "/handbook/people/offboarding"
                 },
                 {
+                    "name": "Ramp up plans",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Product Manager Ramp Up",
+                            "url": "/handbook/people/rampup/product-manager.md"
+                        }
+                    ]
+                },
+                {
+
                     "name": "Merch store",
                     "url": "/handbook/company/merch-store"
                 },
