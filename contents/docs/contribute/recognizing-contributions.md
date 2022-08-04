@@ -8,9 +8,9 @@ At PostHog we aim to recognize all contributions made to our open source codebas
 
 ## Pull requests
 
-If you submit a Pull Request to a repository under the `PostHog` organization, a bot will automatically try to send you an email with a merch code. If this fails, the bot will try to let you know in a comment so that you can email Yakko (the bot creator and babysitter) and get your merch code. 
+If you submit a Pull Request to a repository under the `PostHog` organization, a bot will automatically send you an email to get in touch with us for a merch code. 
 
-If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out!
+We usually give out $100 for a product or app-related PR, and $25 for something on posthog.com (but we have gone over and above this for particularly large community PRs before!)
 
 ## Apps
 
