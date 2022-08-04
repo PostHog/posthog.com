@@ -74,7 +74,7 @@ export const SidebarSection = ({
 }) => {
     return (
         <div className={`py-4 px-5 lg:px-8 ${className}`}>
-            {title && <h3 className="text-[13px] opacity-40 font-semibold mb-3">{title}</h3>}
+            {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
     )
@@ -351,7 +351,7 @@ const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
 }
 
 export const sidebarButtonClasses =
-    'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark m-1 transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
+    'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark my-1 space-x-[1px] transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
 
 const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
@@ -379,7 +379,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
     return (
         <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
             <div className={contentContainerClasses}>
-                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold">Next article</p>
+                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold pt-6">Next article</p>
                 <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
                 <p className="relative max-h-24 overflow-hidden">
                     {excerpt}
@@ -393,7 +393,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
 
 const Survey = ({ contentContainerClasses = '' }) => {
     return (
-        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="pt-8 pb-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
             <div className={contentContainerClasses}>
                 <DocsPageSurvey />
             </div>
@@ -517,7 +517,7 @@ export default function PostLayout({
                 <article
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-10 lg:pb-20 ml-auto w-full h-full box-border"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
@@ -545,7 +545,7 @@ export default function PostLayout({
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
                                         className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-[13px] mb-2">On this page</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"
@@ -565,7 +565,7 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <ul className="list-none px-5 flex mt-0 lg:mt-10 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
                                     {view === 'Article' && toc?.length > 1 && showTocButton && (
                                         <SidebarAction title="On this page">
                                             <Popover
@@ -621,7 +621,7 @@ export default function PostLayout({
                                     >
                                         <ExpandDocument expanded={fullWidthContent} />
                                     </SidebarAction>
-                                    <SidebarAction className="ml-1" width="auto" title="Toggle dark mode">
+                                    <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
                                         <DarkModeToggle />
                                     </SidebarAction>
                                 </ul>
