@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-There really hasn't been a single situation where sharing pretty much everything we do hasn't been to our company's advantage.
+There really hasn't been a single situation where transparency hasn't been to our company's advantage.
 
 Most companies seem to share when necessary but not by default. I hope this piece changes that - as a startup, you've done something wrong if you don't trust your own team.
 
