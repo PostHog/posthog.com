@@ -45,7 +45,7 @@ const Editions = ({ setDemoType }) => {
                             />
                             <CallToAction
                                 width="full"
-                                className="mt-7 shadow-xl"
+                                className="mt-7"
                                 type="primary"
                                 onClick={() => setDemoType('scale')}
                                 event={{ name: 'book a demo: clicked scale demo' }}
@@ -61,7 +61,7 @@ const Editions = ({ setDemoType }) => {
                             />
                             <CallToAction
                                 width="full"
-                                className="mt-7 shadow-xl"
+                                className="mt-7"
                                 type="primary"
                                 onClick={() => setDemoType('enterprise')}
                                 event={{ name: 'book a demo: clicked enterprise demo' }}

@@ -1,57 +1,83 @@
-Setup the PostHog React native SDK as follows:
+The recommended flow for sertting up PostHog React Native is to use the `PostHogProvider` which utilises the Context API to pass posthog around as well as enabling autocapture and ensuring that the queue is flushed at the right time:
 
-```js
-import PostHog from 'posthog-react-native'
+```jsx
+// App.(js|ts)
+import PostHog, { usePostHog } from 'posthog-react-native'
+...
 
-await PostHog.setup('<ph_project_api_key>', {
-    // PostHog API host (https://app.posthog.com by default)
-    host: '<ph_instance_address>',
+export function MyApp() {
+    return (
+        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+            // PostHog API host (https://app.posthog.com by default)
+            host: '<ph_instance_address>',
+        }}>
+            <MyComponent />
+        </PostHogProvider>
+    )
+}
 
-    // Record certain application events automatically! (false by default)
-    captureApplicationLifecycleEvents: false,
+// The rest of this documentation assumes you are using the `PostHogProvider` 
+// and as such can utilise the `usePostHog` hook as follows:
 
-    // Capture deep links as part of the screen call. (false by default)
-    captureDeepLinks: false,
+const MyComponent = () => {
+    const posthog = usePostHog()
 
-    // Record screen views automatically! (false by default)
-    recordScreenViews: false,
-
-    // Max delay before flushing the queue (30 seconds by default)
-    flushInterval: 30,
-
-    // Maximum number of events to keep in queue before flushing (20 by default)
-    flushAt: 20,
-
-    // Used only for Android
-    android: {
-        // Enable or disable collection of ANDROID_ID (true by default)
-        collectDeviceId: true,
-    },
-
-    // Used only for iOS
-    iOS: {
-        // Automatically capture in-app purchases from the App Store (false by default)
-        captureInAppPurchases: false,
-
-        // Capture push notifications (false by default)
-        capturePushNotifications: false,
-
-        // The maximum number of items to queue before starting to drop old ones. (1000 by default)
-        maxQueueSize: 1000,
-
-        // Record bluetooth information. (false by default)
-        shouldUseBluetooth: false,
-
-        // Use location services. Will ask for permissions. (false by default)
-        shouldUseLocationServices: false
-    }
-})
+    useEffect(() => {
+        posthog.capture("MyComponent loaded", { foo: "bar" })
+    }, [])
+}
 ```
 
-See the [iOS integration](https://posthog.com/docs/integrate/client/ios) and 
-[Android integration](https://posthog.com/docs/integrate/client/android) pages for more details on
-some of these options.
+Alternatively you can simply create a global instance of PostHog with your API Key and any options. This allows you to use PostHog outside of the `PostHogProvider` but limits the functionality of PostHog (such as autocapture).
 
-The `PostHog.setup()` call returns a promise, which resolves once the initialization
-has finished. All calls to functions (e.g. `capture`) will be queued and dispatched once
-initialization has finished. 
+```js
+// posthog.js
+import PostHog from 'posthog-react-native'
+
+export const posthog = new PostHog("<ph_project_api_key>", {
+    // PostHog API host (https://app.posthog.com by default)
+    host: '<ph_instance_address>',
+})
+
+
+// app.js
+import posthog from './posthog'
+
+posthog.identify("example@posthog.com")
+
+// You can even use this instance with the PostHogProvider
+export function MyApp() {
+    return (
+        <PostHogProvider client={posthog}>
+            {/* Your app code */}
+        </PostHogProvider>
+    )
+}
+```
+
+For most people, the default configuration options will work great but if you need to you can further customise how PostHog will work.
+
+```ts
+export const posthog = new PostHog("<ph_project_api_key>", {
+    // PostHog API host
+    host?: string = "https://app.posthog.com",
+    // The number of events to queue before sending to Posthog (flushing)
+    flushAt?: number = 20,
+    // The interval in milliseconds between periodic flushes
+    flushInterval?: number = 10000
+    // If set to false, tracking will be disabled until `optIn` is called
+    enable?: boolean = true,
+    // Whether to track that `getFeatureFlag` was called (used by Expriements)
+    sendFeatureFlagEvent?: boolean = true,
+    // Whether to load feature flags when initialised or not
+    preloadFeatureFlags?: boolean = true,
+    // How many times we will retry HTTP requests
+    fetchRetryCount?: number = 3,
+    // The delay between HTTP request retries
+    fetchRetryDelay?: number = 3000,
+    // For Session Analysis how long before we expire a session
+    sessionExpirationTimeSeconds?: number = 1800 // 30 mins
+    // Whether to post events to PostHog in JSON or compressed format
+    captureMode?: 'json' | 'form'
+})
+```

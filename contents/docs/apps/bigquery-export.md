@@ -1,6 +1,5 @@
 ---
 title: BigQuery Export
-layout: app
 github: https://github.com/PostHog/bigquery-plugin
 installUrl: https://app.posthog.com/project/apps?name=BigQuery+Export
 thumbnail: ../../apps/thumbnails/bigquery.svg

@@ -66,6 +66,7 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
+import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { AllPlans } from './components/Pricing/AllPlans'
@@ -77,6 +78,7 @@ import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
+import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
@@ -101,6 +103,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
 import { TotalTeam } from './components/TotalTeam'
@@ -178,6 +181,7 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
+    Popover,
     PostCard,
     PostLayout,
     AllPlans,
@@ -189,6 +193,7 @@ export const shortcodes = {
     PricingHero,
     PricingSlider,
     PricingTable,
+    ProductPillars,
     Quote,
     Savings,
     ProductAnchorNavbar,
@@ -213,6 +218,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toggle,
     Tooltip,
     TotalCountries,
     TotalTeam,

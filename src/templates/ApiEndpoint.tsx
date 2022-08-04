@@ -18,6 +18,9 @@ import { SelectorIcon } from '@heroicons/react/outline'
 import MainSidebar from 'components/Docs/MainSidebar'
 import Navigation from 'components/Docs/Navigation'
 import SectionLinks from 'components/SectionLinks'
+import PostLayout from 'components/PostLayout'
+import CommunityQuestions from 'components/CommunityQuestions'
+import { HandbookSidebar } from './Handbook'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -53,7 +56,15 @@ function Endpoints({ paths }) {
                                         </code>
                                     </td>
                                     <td>
-                                        <Link offset={-50} smooth duration={300} to={pathID(verb, path)} hashSpy spy>
+                                        <Link
+                                            offset={-50}
+                                            className="cursor-pointer"
+                                            smooth
+                                            duration={300}
+                                            to={pathID(verb, path)}
+                                            hashSpy
+                                            spy
+                                        >
                                             <code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>
                                         </Link>
                                     </td>
@@ -169,14 +180,14 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
                                 {param.schema.default && (
                                     <>
                                         <div>
-                                            <span className="text-xs">
+                                            <span className="text-sm">
                                                 Default: <code>{param.schema.default}</code>
                                             </span>
                                         </div>
@@ -184,7 +195,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                 )}
                                 {param.schema.enum && (
                                     <>
-                                        <div className="text-xs">
+                                        <div className="text-sm">
                                             One of:{' '}
                                             {param.schema.enum
                                                 .filter((item) => item && item !== '')
@@ -196,7 +207,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-xs">
+                                <div className="text-sm">
                                     <ReactMarkdown>{param.schema.description}</ReactMarkdown>
                                 </div>
                             </div>
@@ -226,8 +237,8 @@ function Params({ params, objects, object, depth = 0 }) {
     )
 }
 function Parameters({ item, objects }) {
-    let pathParams = item.parameters?.filter((param) => param.in === 'path')
-    let queryParams = item.parameters?.filter((param) => param.in === 'query')
+    const pathParams = item.parameters?.filter((param) => param.in === 'path')
+    const queryParams = item.parameters?.filter((param) => param.in === 'query')
 
     return (
         <>
@@ -248,11 +259,11 @@ function Parameters({ item, objects }) {
 }
 
 function RequestBody({ item, objects }) {
-    let objectKey =
+    const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
         item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
     if (!objectKey) return null
-    let object = objects.schemas[objectKey]
+    const object = objects.schemas[objectKey]
 
     return (
         <>
@@ -274,12 +285,12 @@ function RequestBody({ item, objects }) {
 }
 
 function ResponseBody({ item, objects }) {
-    let objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
+    const objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
         ?.split('/')
         .at(-1)
     if (!objectKey) return null
-    let object = objects.schemas[objectKey]
-    let [showResponse, setShowResponse] = useState(false)
+    const object = objects.schemas[objectKey]
+    const [showResponse, setShowResponse] = useState(false)
 
     return (
         <>
@@ -311,19 +322,15 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     let params = []
 
     if (item.requestBody) {
-        let objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
+        const objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
         if (!objectKey) return null
-        let object = objects.schemas[objectKey]
+        const object = objects.schemas[objectKey]
         params = Object.entries(object.properties).filter(
             ([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly
         )
         // If no params are required, just grab the first relevant one as an example
         if (params.length === 0) {
-            params = [
-                Object.entries(object.properties).filter(
-                    ([name, schema]) => ['id', 'short_id'].indexOf(name) === -1
-                )[0],
-            ]
+            params = [Object.entries(object.properties).filter(([name]) => ['id', 'short_id'].indexOf(name) === -1)[0]]
         }
         params = params.map(([name, schema]) => {
             return [
@@ -335,17 +342,17 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         })
     }
     const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
-    let queryParams = item.parameters?.filter((param) => param.in === 'query')
+
     return (
         <>
-            <div className="code-example justify-between flex my-1.5">
+            <div className="code-example flex items-center justify-between my-1.5">
                 <div className="text-gray">
                     <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
                     <code>{path}</code>
                 </div>
 
                 <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-xs flex items-center ">
+                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-sm flex items-center ">
                         <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
                         <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
                     </Listbox.Button>
@@ -363,7 +370,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
                                     } w-full pl-3 pr-6 cursor-pointer`
                                 }
                             >
-                                <span className="text-xs">{option}</span>
+                                <span className="text-sm">{option}</span>
                             </Listbox.Option>
                         ))}
                     </Listbox.Options>
@@ -406,7 +413,7 @@ response = requests.${item.httpVerb}(
     )
 }
 
-function ResponseExample({ item, objects, objectKey }) {
+function ResponseExample({ objects, objectKey }) {
     if (!objectKey) {
         return 'No response'
     }
@@ -420,7 +427,7 @@ function ResponseExample({ item, objects, objectKey }) {
             )}
             language="json"
         >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            {({ className, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ background: '#24292E', margin: 0 }}>
                     {tokens.map((line, i) => (
                         <div {...getLineProps({ line, key: i })} key={i}>
@@ -436,7 +443,7 @@ function ResponseExample({ item, objects, objectKey }) {
 }
 
 const pathDescription = (item) => {
-    let name = humanReadableName(item.operationId).toLowerCase()
+    const name = humanReadableName(item.operationId).toLowerCase()
     if (item.operationId.includes('_list')) {
         return (
             <>
@@ -467,9 +474,12 @@ const SectionLinksTop = ({ previous, next }) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
 }
 
-export default function ApiEndpoint({ data, pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase } }) {
+export default function ApiEndpoint({
+    data,
+    pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase, tableOfContents },
+    location,
+}) {
     const {
-        data: { id, url },
         components: { components },
     } = data
     const name = humanReadableName(data.data.name)
@@ -508,126 +518,87 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
     }, [])
 
     return (
-        <>
+        <Layout>
             <SEO title={`${name} API Reference - PostHog`} />
-            <Layout>
-                <div className="handbook-container px-4">
-                    <div id="handbook-menu-wrapper">
-                        <Menu
-                            width="calc(100vw - 80px)"
-                            onClose={() => setMenuOpen(false)}
-                            customBurgerIcon={false}
-                            customCrossIcon={false}
-                            styles={styles}
-                            pageWrapId="handbook-content-menu-wrapper"
-                            outerContainerId="handbook-menu-wrapper"
-                            overlayClassName="backdrop-blur"
-                            isOpen={menuOpen}
-                        >
-                            <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32 md:hidden" />
-                        </Menu>
-                        <Navigation
-                            title={name}
-                            filePath={null}
-                            breadcrumb={breadcrumb}
-                            breadcrumbBase={breadcrumbBase}
-                            menuOpen={menuOpen}
-                            handleMobileMenuClick={handleMobileMenuClick}
-                        />
-                    </div>
-                    <section id="handbook-content-menu-wrapper">
-                        <SectionLinksTop next={next} previous={previous} />
-                        <div className="flex items-start mt-8 md:space-x-16">
-                            <MainSidebar
-                                height={'auto'}
-                                sticky
-                                top={90}
-                                mainEl={mainEl}
-                                menu={menu}
-                                slug={slug}
-                                className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
-                            />
-                            <article
-                                className="article-content api-content-container api-documentation flex-grow"
-                                ref={mainEl}
+            <PostLayout
+                title={name}
+                questions={<CommunityQuestions />}
+                menu={menu}
+                tableOfContents={tableOfContents}
+                contentWidth="100%"
+                breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+            >
+                <h2 className="!mt-0">{name}</h2>
+                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
+                    <p>
+                        For instructions on how to authenticate to use this endpoint, see{' '}
+                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
+                            API overview
+                        </a>
+                        .
+                    </p>
+                </blockquote>
+                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+
+                <Endpoints paths={paths} />
+
+                {items.map((item) => {
+                    item = item.operationSpec
+
+                    return (
+                        <div className="mt-8" key={item.operationId}>
+                            <div
+                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                                id={pathID(item.httpVerb, item.pathName)}
                             >
-                                <h2 className="!mt-0">{name}</h2>
-                                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
-                                    <p>
-                                        For instructions on how to authenticate to use this endpoint, see{' '}
-                                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
-                                            API overview
-                                        </a>
-                                        .
-                                    </p>
-                                </blockquote>
-                                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+                                <div>
+                                    <h2>{generateName(item)}</h2>
+                                    <ReactMarkdown>
+                                        {!item.description || item.description === items[0].operationSpec?.description
+                                            ? pathDescription(item)
+                                            : item.description}
+                                    </ReactMarkdown>
+                                    <Parameters item={item} objects={objects} />
 
-                                <Endpoints paths={paths} />
+                                    <RequestBody item={item} objects={objects} />
 
-                                {items.map((item) => {
-                                    item = item.operationSpec
-                                    let objectKey = 'Dashboard'
+                                    <ResponseBody item={item} objects={objects} />
+                                </div>
+                                <div className="lg:sticky top-0">
+                                    <h4>Request</h4>
+                                    <RequestExample
+                                        item={item}
+                                        objects={objects}
+                                        exampleLanguage={exampleLanguage}
+                                        setExampleLanguage={setExampleLanguage}
+                                    />
 
-                                    return (
-                                        <div className="mt-8" key={item.operationId}>
-                                            <div
-                                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-                                                id={pathID(item.httpVerb, item.pathName)}
-                                            >
-                                                <div>
-                                                    <h2>{generateName(item)}</h2>
-                                                    <ReactMarkdown>
-                                                        {!item.description ||
-                                                        item.description === items[0].operationSpec?.description
-                                                            ? pathDescription(item)
-                                                            : item.description}
-                                                    </ReactMarkdown>
-                                                    <Parameters item={item} objects={objects} />
-
-                                                    <RequestBody item={item} objects={objects} />
-
-                                                    <ResponseBody item={item} objects={objects} />
-                                                </div>
-                                                <div className="lg:sticky top-0">
-                                                    <h4>Request</h4>
-                                                    <RequestExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-
-                                                    <h4>Response</h4>
-                                                    <ResponseExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        objectKey={
-                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                                'application/json'
-                                                            ]?.schema['$ref']
-                                                                ?.split('/')
-                                                                .at(-1) ||
-                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                                'application/json'
-                                                            ]?.schema['items']['$ref']
-                                                                ?.split('/')
-                                                                .at(-1)
-                                                        }
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </article>
+                                    <h4>Response</h4>
+                                    <ResponseExample
+                                        item={item}
+                                        objects={objects}
+                                        objectKey={
+                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                'application/json'
+                                            ]?.schema['$ref']
+                                                ?.split('/')
+                                                .at(-1) ||
+                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                'application/json'
+                                            ]?.schema['items']['$ref']
+                                                ?.split('/')
+                                                .at(-1)
+                                        }
+                                        exampleLanguage={exampleLanguage}
+                                        setExampleLanguage={setExampleLanguage}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </section>
-                </div>
-            </Layout>
-        </>
+                    )
+                })}
+            </PostLayout>
+        </Layout>
     )
 }
 

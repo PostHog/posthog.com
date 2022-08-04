@@ -7,19 +7,19 @@ export default function AskQuestion({ isValid, loading, setFieldValue, submitFor
     return (
         <>
             <Field
-                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md w-full shadow-md"
+                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-lg rounded-md w-full shadow-md"
                 type="text"
                 name="name"
                 placeholder="Full name"
             />
             <Field
-                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
+                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-lg rounded-md mt-2 w-full shadow-md"
                 type="email"
                 name="email"
                 placeholder="Email"
             />
             <Field
-                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-base rounded-md mt-2 w-full shadow-md"
+                className="bg-white dark:bg-gray-accent-light dark:text-primary py-2 px-4 text-lg rounded-md mt-2 w-full shadow-md"
                 type="text"
                 name="subject"
                 placeholder="Subject"

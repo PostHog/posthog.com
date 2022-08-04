@@ -1,6 +1,5 @@
 ---
 title: Airbyte Exporter
-layout: app
 installUrl: https://docs.airbyte.com/integrations/sources/posthog/
 thumbnail: ../../apps/thumbnails/airbyte.png
 topics:

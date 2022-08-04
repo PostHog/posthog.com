@@ -21,7 +21,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 const Title = ({ title }) => {
-    return <h3 className="text-lg lg:text-2xl lg:mt-5 mb-0">{title}</h3>
+    return <h3 className="text-lg lg:text-3xl lg:mt-5 mb-0">{title}</h3>
 }
 
 const Subtitle = ({ subtitle, className = '' }) => {

@@ -1,6 +1,5 @@
 ---
 title: Variance Connector
-layout: app
 github: https://github.com/PostHog/posthog-variance-plugin
 installUrl: https://app.posthog.com/project/apps?name=Variance
 thumbnail: ../../apps/thumbnails/variance.png
