@@ -9,6 +9,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import { GitHub, Info } from 'components/Icons/Icons'
 import Calculator from 'components/Pricing/Calculator/index'
+import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator/index'
 import ProductPillars from 'components/Pricing/ProductPillars/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
@@ -27,6 +28,33 @@ import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
+
+
+const Benefit = ({ children }) => {
+    return (
+        <li
+            className="font-semibold text-[14px] flex space-x-2 items-center leading-tight"
+        >
+            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
+                <Check />
+            </span>
+            <span>{children}</span>
+        </li>
+    )
+}
+
+const Check = () => {
+    return (
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
+                fill="#BFBFBC"
+            />
+        </svg>
+    )
+}
 
 export const section = cntl`
     max-w-6xl
@@ -149,12 +177,11 @@ const PricingNew = (): JSX.Element => {
                     <div className="lg:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
                             Pay per tracked event.
-                            <br /> Get access to all features.
+                            <br />Get the whole hog.
                         </h1>
-                        <p className="text-[18px] text-black/75">
-                            Starts at <span className="text-lg font-bold">$0</span>/mo for your first 1 million monthly
-                            events &mdash; every month
-                        </p>
+                        <h3 className="text-xl text-black/50 font-bold">
+                            Your first 1 million events are free. <span className="text-blue">Every month.</span>
+                        </h3>
                     </div>
                 </div>
             </section>
@@ -168,26 +195,122 @@ const PricingNew = (): JSX.Element => {
                     <ProductPillars />
                 </div>
             </section>
+
+            
+            
+            <section className="flex flex-col md:flex-row gap-12 px-4 md:px-0">
+                <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
+                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl">
+                        <div className="mb-4">
+                            <CloudIcon className="opacity-30 mb-2" />
+                            <h2 className="text-xl mb-1 flex items-center">
+                                PostHog Cloud{' '}
+                                <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
+                                    <span className="text-black/50">Recommended</span>
+                                    <button
+                                        onClick={() => setWhyCloudOpen(true)}
+                                        className="text-red font-semibold"
+                                    >
+                                        Why?
+                                    </button>
+                                </span>
+                            </h2>
+                            <p className="mb-2 text-sm text-black/50 leading-tight">SaaS solution managed by the PostHog core team</p>
+                        </div>
+
+                        <ul className="list-none p-0 m-0 grid gap-y-2">
+                            <Benefit>Full product suite</Benefit>
+                            <Benefit>Hosted & managed by PostHog</Benefit>
+                            <Benefit>Always get the latest features</Benefit>
+                        </ul>
+                    </div>
+
+                    <div className="order-3 md:order-2 bg-white px-8 pt-8 rounded-md shadow-xl">
+                        <div className="mb-4">
+                            <CloudIcon className="opacity-30 mb-2" />
+                            <h2 className="text-xl mb-1 flex items-center">
+                                Self-hosted{' '}
+                            </h2>
+                            <p className="mb-2 text-sm text-black/50 leading-tight">Customer data never leaves your infrastructure</p>
+                        </div>
+
+                        <ul className="list-none p-0 m-0 grid gap-y-2">
+                            <Benefit>Full feature set of PostHog Cloud but on your infrastructure</Benefit>
+                            <Benefit>Full access to your production instance</Benefit>
+                            <Benefit>Paid deployment support available in the PostHog Marketplace</Benefit>
+                        </ul>
+                    </div>
+
+                    <div className="order-2 mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
+                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                            <div className="flex flex-col">
+                                <strong className="text-[16px]">Monthly estimate</strong>
+                                <span className="text-sm text-black/60">
+                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
+                                    events/mo
+                                </span>
+                            </div>
+                            <div>
+                                <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
+                                <span className="text-sm text-black/60">/mo</span>
+                            </div>
+                        </div>
+
+                        <div className="mt-4">
+                            <TrackedCTA
+                                event={{ name: `clicked Get started - free`, type: 'cloud' }}
+                                type="primary"
+                                width="full"
+                                className="shadow-md"
+                                to="https://app.posthog.com/signup"
+                            >
+                                Get started - free
+                            </TrackedCTA>
+                        </div>
+                    </div>
+
+                    <div className="order-4 bg-white px-8 pb-8 rounded-bl rounded-br shadow-xl">
+                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                            <div className="flex flex-col">
+                                <strong className="text-[16px]">Monthly estimate</strong>
+                                <span className="text-sm text-black/60">
+                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
+                                    events/mo
+                                </span>
+                            </div>
+                            <div>
+                                <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
+                                <span className="text-sm text-black/60">/mo</span>
+                            </div>
+                        </div>
+
+                        <div className="mt-4">
+                            <TrackedCTA
+                                event={{ name: `clicked Get started - free`, type: 'self-hosted' }}
+                                type="primary"
+                                width="full"
+                                className="shadow-md"
+                                to="https://license.posthog.com/"
+                            >
+                                Get started - free
+                            </TrackedCTA>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex-shrink md:basis-96">
+                    right col
+                </div>
+            </section>
+
+            <br />
+            <br />
+            <br />
+
             <section>
                 <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
                     <div className="md:col-span-2">
                         <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
                             <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
-                                <div>
-                                    <h2 className="text-xl mb-0 flex items-center">
-                                        PostHog Cloud{' '}
-                                        <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
-                                            <span className="text-black/50">Recommended</span>
-                                            <button
-                                                onClick={() => setWhyCloudOpen(true)}
-                                                className="text-red font-semibold"
-                                            >
-                                                Why?
-                                            </button>
-                                        </span>
-                                    </h2>
-                                    <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
-                                </div>
                                 <div className="leading-none mt-3">
                                     <span className="text-lg font-bold">Free</span>{' '}
                                     <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
@@ -216,31 +339,6 @@ const PricingNew = (): JSX.Element => {
                                             <B2C />
                                         </motion.div>
                                     )}
-                                </div>
-                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                                    <div className="flex flex-col">
-                                        <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">
-                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
-                                            events/mo
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
-                                        <span className="text-sm text-black/60">/mo</span>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Get started - free`, type: 'cloud' }}
-                                        type="primary"
-                                        width="full"
-                                        className="shadow-md"
-                                        to="https://app.posthog.com/signup"
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
                                 </div>
                             </div>
 
@@ -280,32 +378,6 @@ const PricingNew = (): JSX.Element => {
                                             <B2C />
                                         </motion.div>
                                     )}
-                                </div>
-
-                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                                    <div className="flex flex-col">
-                                        <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">
-                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
-                                            events/mo
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
-                                        <span className="text-sm text-black/60">/mo</span>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Get started - free`, type: 'self-hosted' }}
-                                        type="primary"
-                                        width="full"
-                                        className="shadow-md"
-                                        to="https://license.posthog.com/"
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
                                 </div>
                             </div>
                         </div>
