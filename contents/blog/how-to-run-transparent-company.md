@@ -11,27 +11,33 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-## Who this is for
+There really hasn't been a single situation where sharing pretty much everything we do hasn't been to our company's advantage.
 
-I'm gearing this around _internal_ transparency, for startups. PostHog (like a handful of others) shares _most_ of this stuff externally too.
+Most companies seem to share when necessary but not by default. I hope this piece changes that - as a startup, you've done something wrong if you don't trust your own team.
+
+Being realistic, to help this most people - this is mainly written about _internal_ transparency... and it's startup-focussed too, since that's what I know.
+
+If you want to gain even more advantages here, I would encourage you though to share this stuff by default externally unless there's a good reason not to.
+
+There are probably some startups where this doesn't work. Perhaps in design led companies, where control might be a competitive advantage and is more important than autonomy, or in companies that aren't managed consistently - you can't share a non-existent pay structure, for example (and, yes, it is hard work to implement something like that from very early, but we felt that work was worth it to prevent unfairness and employee churn).
 
 ## Why this matters
 
-I _cannot believe_ that more companies don't do this stuff. It is in the top five most impactful decisions we've made.
+This section is a bit effusive. Skip it if you're not in the mood for that.
 
-Above all, it enables people to work autonomously. There are two ways to grow a team - autonomy, or control. We chose the former because it's the kind of place we'd want to work, and therefore it makes it a better place to work for our team. That lets us hire and retain stronger people.
+I _cannot believe_ that more companies, and especially startups, don't do this stuff. It is in the top five most impactful decisions we've made.
 
-Transparency works particularly well in an all remote company. Like ours. It makes asynchronous work much easier.
+Above all, it enables people to work autonomously. There are two ways to grow a team - autonomy, or control. We chose the former because it's the kind of place we'd want to work, and therefore it makes it a better place to work for our team. That lets us hire and retain stronger people. Talent compounds, y'all.
 
-We didn't expect this, but hiring has been _a gazillion times_ easier because of this too. Since we share most of the below publicly, people thinking about working here can build trust much more easily, and it makes us stand apart from the thousands of other startups.
+Transparency works particularly well in an all remote company. Like ours. That's because having this stuff written down and shared makes asynchronous work much easier.
 
-There are probably some startups where this doesn't work. Perhaps in design led companies, where control is more important than autonomy, or in companies that aren't managed consistently - you can't share a non-existent pay structure, for example (and, yes, it is hard work to implement something like that from very early, but we felt that work was worth it to prevent unfairness and employee churn).
+We didn't expect this, but hiring great has become much easier. Since we share most of the below publicly, people thinking about working here can build trust much more easily, and it makes us stand apart from the thousands of other startups. Transparency makes the whole company a joint project, between our team and the community around it too.
 
 ## General communication
 
 ### Tool minimalism
 
-There will be so much context available, that you need to be a little more mindful of making it easy to find stuff.
+There will be so much context available, that you need to be more mindful of making it easy to find stuff.
 
 The simplest way to keep things easy to find, is to have fewer places to look.
 
@@ -41,55 +47,60 @@ Broadly for us this means:
 
 ### Highlighting what matters
 
-Now you've got everything being shared, so that's probably a lot of stuff.
-
-We use a weekly 30 mins all hands (including written notes) to highlight what really matters across all teams.
+We use a weekly 30 mins all hands (including written notes) to highlight across everything being shared what really matters across all teams.
 
 It has:
 
-* Top level news - any major things to note
+* Top level news - any major things to note (for example, strategy details or changes, new team members)
 * Revenue - this is an output of all the other teams working well
 * OKRs - are we on track or not for each key result, and any extra context
-* Handpicked list of any important policy changes
+* Handpicked list of any important policy changes from our handbook
 * Demos - if people have something cool to show that they built, they can show it off
 
 ## Finance
 
 * Fundraising
 
+We share why we are fundraising, or not, and what our goals are for the business that'll make this easier.
+
+If we are fundraising, we'll provide updates on the process. We'll share what our specific goals are for a term sheet, and how we're doing as we run the process.
 
 * Stock options
 
-People should know what % of the company they own, their strike price, the terms of their options, and 
-
+Everyone should know the percentage of the company they own, their strike price, the terms of their options, and the impact of fundraising on this stuff.
 
 At some stage, we'll do more here - letting people model what options are worth depending on how the company performs, for example.
-
 
 * Financial reports (profit/loss/balance etc)
 
 This should be copy pasta from your board slides. We share the monthly reports our accountants create with our team.
 
-Building product
+## Building product
+
+We're split into small teams. Each small team runs their own sprints. They share:
 
 * How last sprint went
 * What the plan is for the next sprint
-* Issues
+* An open calendar invite/Zoom link in case anyone wants to join the sprint call
+* Issues in GitHub that explain thinking, include feature requests, or have problems or bugs
 
-Strategy
+We have an _executive_ small team too, which works exactly like all the other small teams. This is probably the _most_ impactful team's work to share with everyone else, yet it's probably the least likely to be shared in most companies.
+
+## Strategy
 
 * OKRs, including _why_ they were picked
 * Board meeting slides
+* Board meeting notes (since the meeting's primary purpose is to cover strategic topics, so the outcome matters too)
 
-People
+## People
 
 * Pay structure
 
 Overall, our pay and communication around it, is designed to make pay "get out of the way". 
 
-We have a system (TODO INSERT LINK TO CALCULATOR) for paying everyone here. This means we can justify for every team member exactly why they're paid. We proactively review this every few months and make adjustments if the market or performance has changed.
+We have a system (TODO INSERT LINK TO CALCULATOR) for paying everyone here. This means we can justify for every team member exactly why they're paid. We proactively review every team member compared to this every few months and make adjustments if the market or their performance has changed.
 
-We don't share individuals' pay details with each other as it's the only area we don't want employee feedback. Quite simply, if people influence each others' pay, then it would make the process of giving and receiving direct feedback harder. We don't want people to have to be defensive with each other.
+We don't share individuals' pay details with each other as it's the only area we don't want employee feedback, and we don't make all changes at the same time. Quite simply, if people influence each others' pay, then it would make the process of giving and receiving direct feedback harder. We don't want people to have to be defensive with each other.
 
 * Hiring (and "not-hiring") decisions
 
@@ -102,6 +113,8 @@ This let's our team level each other up at decision making, it increases account
 * Firing decisions (when for performance reasons)
 
 If someone leaves for performance reasons, we'll communicate to the rest of the company what went wrong. Sometimes that means running a post-mortem on the hiring process too, which is also shared.
+
+This sounds scary to share, but for the rest of the team, more clarity rather than less, is how you reduce uncertainty. And as a company when we make these decisions, it increases accountability.
 
 * Holidays
 
