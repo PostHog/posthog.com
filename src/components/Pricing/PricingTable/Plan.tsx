@@ -12,7 +12,7 @@ export const Feature = ({ title, icon, size }) => {
 
 export const Features = ({ features, size, className = '' }) => {
     return (
-        <ul className={`p-0 list-none m-0 grid gap-2 text-xs ${className}`}>
+        <ul className={`p-0 list-none m-0 grid gap-2 text-sm ${className}`}>
             {features.map((feature, index) => {
                 const { title, icon } = feature
                 return <Feature key={index} title={title} icon={icon} size={size} />
@@ -24,7 +24,7 @@ export const Features = ({ features, size, className = '' }) => {
 export const Badge = ({ title, className = '' }) => {
     return (
         <span
-            className={`text-[11px] py-1 px-2 rounded-sm border border-primary/50 opacity-50 font-normal leading-none ${className}`}
+            className={`text-xs py-1 px-2 rounded-sm border border-primary/50 opacity-50 font-normal leading-none ${className}`}
         >
             {title}
         </span>
@@ -37,16 +37,16 @@ export const Title = ({ className = '', title, subtitle, badge, icon }) => {
             {icon && <span className="inline-block opacity-30">{icon}</span>}
             <div>
                 <div className="flex items-center flex-wrap">
-                    <h3 className="m-0 text-[18px] font-black mr-2">{title}</h3>
+                    <h3 className="m-0 text-xl font-black mr-2">{title}</h3>
                     {badge && (
                         <span
-                            className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
+                            className={`text-xs py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
                         >
                             {badge}
                         </span>
                     )}
                 </div>
-                <p className="m-0 mt-1 text-black/50 font-medium text-xs">{subtitle}</p>
+                <p className="m-0 mt-1 text-black/50 font-medium text-sm">{subtitle}</p>
             </div>
         </div>
     )

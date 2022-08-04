@@ -1,6 +1,5 @@
 ---
 title: GitHub Release Tracker
-layout: app
 github: https://github.com/PostHog/github-release-tracking-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Release+Tracker
 thumbnail: ../../apps/thumbnails/github.png

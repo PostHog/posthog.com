@@ -153,9 +153,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-lg font-bold">Free</span>{' '}
                                     <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
-                                    <span className="text-black/50 text-xs font-medium block">then $0.00045/event</span>
+                                    <span className="text-black/50 text-sm font-medium block">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
@@ -172,8 +172,9 @@ export default function SignUp() {
                                     </Feature>
                                 </ul>
                                 <TrackedCTA
-                                    className="mt-auto shadow-xl"
+                                    className="mt-auto"
                                     href="https://app.posthog.com/signup"
+                                    size="md"
                                     event={{ name: `clicked Continue`, type: 'cloud' }}
                                 >
                                     Sign up for PostHog Cloud
@@ -192,9 +193,9 @@ export default function SignUp() {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
-                                    <span className="text-base font-bold">Free</span>{' '}
+                                    <span className="text-lg font-bold">Free</span>{' '}
                                     <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
-                                    <span className="block text-black/50 text-xs font-medium">then $0.00045/event</span>
+                                    <span className="block text-black/50 text-sm font-medium">then $0.00045/event</span>
                                 </div>
                                 <ul className="p-0 list-none grid gap-4 mt-0 mb-9">
                                     <Feature>
@@ -212,7 +213,8 @@ export default function SignUp() {
                                 </ul>
                                 <TrackedCTA
                                     to="/signup/self-host"
-                                    className="mt-auto shadow-xl"
+                                    className="mt-auto"
+                                    size="md"
                                     event={{ name: `clicked Continue`, type: 'self-hosted' }}
                                 >
                                     Select your edition

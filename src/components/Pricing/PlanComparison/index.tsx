@@ -50,7 +50,7 @@ const sections = [
                     'Open Source': 'Free',
                     'Self-Hosted (Self-Serve)': '$0/mo',
                     'Self-Hosted (Enterprise)': '$450/mo',
-                    'Cloud (Enterprise)': '$300/mo',
+                    'Cloud (Enterprise)': '$450/mo',
                 },
             },
             {
@@ -632,7 +632,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
                                         ${tier.priceMonthly}
                                     </span>{' '}
-                                    <span className="text-base font-medium text-gray-500">/mo</span>
+                                    <span className="text-lg font-medium text-gray-500">/mo</span>
                                 </p>
                                 <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
                                 <a
@@ -746,7 +746,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="py-2 px-3 text-[14px] leading-6 text-base font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
+                                        className="py-2 px-3 text-[14px] leading-6 text-lg font-bold text-almost-black border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -773,7 +773,7 @@ export const PlanComparison = ({ className = '' }) => {
                                                 <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
                                                     ${tier.priceMonthly}
                                                 </span>{' '}
-                                                <span className="text-base font-medium text-gray-500">/mo</span>
+                                                <span className="text-lg font-medium text-gray-500">/mo</span>
                                             </p>
                                             <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
                                             <a
@@ -807,7 +807,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     {section.features.map((feature) => (
                                         <tr key={feature.name}>
                                             <th
-                                                className="py-2 px-3 text-xs font-medium text-almost-black text-left border-white/10 w-[180px]"
+                                                className="py-2 px-3 text-sm font-medium text-almost-black text-left border-white/10 w-[180px]"
                                                 scope="row"
                                             >
                                                 {typeof feature.docsLink === 'string' ? (
@@ -817,9 +817,9 @@ export const PlanComparison = ({ className = '' }) => {
                                                 )}
                                             </th>
                                             {tiers.map((tier) => (
-                                                <td key={tier.name} className="py-2 px-3 border-white/10 text-xs">
+                                                <td key={tier.name} className="py-2 px-3 border-white/10 text-sm">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-xs text-almost-black text-opacity-75">
+                                                        <span className="block text-sm text-almost-black text-opacity-75">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (

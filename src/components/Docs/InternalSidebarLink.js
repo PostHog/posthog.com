@@ -15,7 +15,7 @@ export default function InternalSidebarLink({ url, name, depth, className = '', 
                 duration={300}
                 to={url}
                 hashSpy
-                className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange cursor-pointer ${className}`}
+                className={`text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer ${className}`}
                 spy
                 onSetActive={() => {
                     reportScrollUpdated(url)

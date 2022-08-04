@@ -15,7 +15,7 @@ export default function SessionRecording() {
                 <CallToAction
                     type="outline"
                     size="md"
-                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
+                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-lg"
                     to="/product/session-recording"
                 >
                     Learn more about Session Recording

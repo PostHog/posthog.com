@@ -1,6 +1,5 @@
 ---
 title: Amazon S3 Export
-layout: app
 github: https://github.com/PostHog/s3-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=S3+Export+Plugin
 thumbnail: ../../apps/thumbnails/s3.svg

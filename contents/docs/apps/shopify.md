@@ -1,6 +1,5 @@
 ---
 title: Shopify Connector
-layout: app
 github: https://github.com/posthog/posthog-shopify-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Shopify
 thumbnail: ../../apps/thumbnails/shopify.png

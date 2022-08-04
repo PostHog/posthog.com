@@ -7,30 +7,41 @@ import React, { useState } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 const button = cntl`
+    text-[17px]
+    font-bold
     flex
-    space-x-2
     items-center
-    text-white
-    hover:!text-white
-    !bg-transparent
-    !border-white/10
-    hover:!border-opacity-25
-    font-semibold
+    flex-grow
+    sm:flex-grow-0
+    sm:w-[220px]
+    justify-between
+    px-4
+    py-2
+    bg-white
+    rounded-sm
+    shadow-sm 
+    text-black/70 
+    hover:text-black/95 
+    relative
+    active:top-[1px] 
+    active:scale-[.97] 
+    transition-none 
+    transition-colors
 `
 
 const ResponseButtons = ({ submitResponse }) => {
     return (
         <>
-            <h3 className="text-white mb-5 !mt-0">Was this page useful?</h3>
-            <div className="flex space-x-5 items-center">
-                <CallToAction onClick={() => submitResponse(true)} size="sm" type="outline" className={button}>
-                    <ThumbsUp />
+            <h3 className="text-lg font-bold m-0 mb-3">Was this page useful?</h3>
+            <div className="flex space-x-3 items-center">
+                <button onClick={() => submitResponse(true)} className={button}>
                     <span>Yes</span>
-                </CallToAction>
-                <CallToAction onClick={() => submitResponse(false)} size="sm" type="outline" className={button}>
-                    <ThumbsDown />
+                    <ThumbsUp />
+                </button>
+                <button onClick={() => submitResponse(false)} className={button}>
                     <span>Could be better</span>
-                </CallToAction>
+                    <ThumbsDown />
+                </button>
             </div>
         </>
     )
@@ -39,12 +50,10 @@ const ResponseButtons = ({ submitResponse }) => {
 const ResponseMessage = () => {
     return (
         <motion.div initial={{ translateY: '100%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
-            <h3 className="text-white mb-5">Thanks for the feedback!</h3>
-            <p className="m-0 text-white">
-                If you need help on any of the above, feel free to create an issue on{' '}
-                <a href="https://github.com/PostHog/posthog">our repo</a>, or <a href="/slack">join our Slack</a> where
-                a member of our team can assist you! Chances are that if you have a problem or question, someone else
-                does too - so please don't hesitate to create a new issue or ask us a question.
+            <h3 className="text-lg font-bold m-0 mb-3">Thanks for the feedback!</h3>
+            <p>If you need help on any of the above, feel free to ask a question above, create an issue on{' '}
+                <a href="https://github.com/PostHog/posthog">our repo</a>.</p>
+            <p>Chances are that if you have a problem or question, someone else does too - so please don't hesitate to reach out!
             </p>
         </motion.div>
     )

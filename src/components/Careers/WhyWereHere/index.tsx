@@ -6,7 +6,7 @@ export const WhyWereHere = () => {
     return (
         <div className="careers-why-were-here" id="why-were-here">
             <div className="text-left">
-                <Structure.Section width="2xl" className="text-base">
+                <Structure.Section width="2xl" className="text-lg">
                     <div className="text-opacity-80 text-gray-100">
                         <div className="mb-8 flex flex-col md:flex-row">
                             <div>

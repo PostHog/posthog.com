@@ -26,7 +26,7 @@ const Tags = ({ title, tags }) => {
     return (
         <li className="border-b border-dashed border-gray-accent-light">
             <h4 className="text-gray m-0 text-[15px]">{title}</h4>
-            <ul className="list-none m-0 p-0 text-base flex flex-wrap">
+            <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
                 {tags.map((tag, index) => {
                     return (
                         <li key={index} className="font-bold after:content-['\002C\00A0'] last:after:content-['']">
