@@ -6,6 +6,7 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { NewsletterForm } from 'components/NewsletterForm'
 import PostLayout, { Contributors, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
@@ -69,6 +70,11 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
             <SidebarSection>
                 <Text>
                     <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
+                </Text>
+            </SidebarSection>
+            <SidebarSection>
+                <Text>
+                    <NewsletterForm compact></NewsletterForm>
                 </Text>
             </SidebarSection>
         </>
