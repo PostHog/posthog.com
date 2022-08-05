@@ -189,17 +189,17 @@ Here's how our earlier table might look if we assigned different PostHog teams t
 | **Category** | **User Status**                                      | **Team**                   |
 |--------------|------------------------------------------------------|----------------------------|
 | Acquisition  | Visits website                                       | Marketing                  |
-| Acquisition  | Enters signup funnel                                 | Marketing / Website & Docs |
-| Acquisition  | Creates account                                      | Website & Docs             |
+| Acquisition  | Enters signup funnel                                 | Marketing / Website        |
+| Acquisition  | Creates account                                      | Website                    |
 | -            | -                                                    | -                          |
 | Activation   | Deploys product and ingests events                   | Platform                   |
-| Activation   | Uses a core feature.                                 | Growth / App Teams         |
+| Activation   | Uses a core feature.                                 | Growth / App               |
 | -            | -                                                    | -                          |
-| Retention    | Logs in at least once per week                       | Growth / App Teams         |
-| Retention    | Invites a colleague / creates a team                 | Growth / App Teams         |
+| Retention    | Logs in at least once per week                       | Growth / App               |
+| Retention    | Invites a colleague / creates a team                 | Growth / App               |
 | -            | -                                                    | -                          |
-| Revenue      | User starts paying / enters card details             | Growth / Customer Success  |
-| Revenue      | User continues to pay long term                 | Growth / Customer Success / Platform  |
+| Revenue      | User starts paying / enters card details             | Growth / Customer          |
+| Revenue      | User continues to pay long term                      | Customer / Platform        |
 | -            | -                                                    |                            |
 | Referral     | Recommends to a friend                               | All                        |
 | Referral     | Reviews product                                      | Marketing                  |
