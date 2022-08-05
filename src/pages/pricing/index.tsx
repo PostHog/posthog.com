@@ -31,8 +31,8 @@ import { pricing, pricingLabels } from 'components/Pricing/constants'
 
 const Benefit = ({ children }) => {
     return (
-        <li className="font-semibold text-sm flex space-x-2 items-center leading-tight">
-            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
+        <li className="font-medium text-sm flex gap-x-1.5 items-start leading-tight">
+            <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
                 <Check />
             </span>
             <span>{children}</span>
@@ -206,7 +206,7 @@ const PricingNew = (): JSX.Element => {
                 <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
                     <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl">
                         <div className="mb-4">
-                            <CloudIcon className="opacity-30 mb-2" />
+                            <CloudIcon className="opacity-30 mb-3" />
                             <h2 className="text-xl mb-1 flex items-center">
                                 {enterpriseMode ? (
                                     ' PostHog Enterprise Cloud'
@@ -239,7 +239,7 @@ const PricingNew = (): JSX.Element => {
 
                     <div className="order-3 md:order-2 bg-white px-8 pt-8 rounded-md shadow-xl">
                         <div className="mb-4">
-                            <CloudIcon className="opacity-30 mb-2" />
+                            <SelfHostIcon className="opacity-30 mb-3" />
                             <h2 className="text-xl mb-1 flex items-center">
                                 {enterpriseMode ? 'Self-hosted Enterprise' : 'Self-hosted'}
                             </h2>
@@ -286,7 +286,7 @@ const PricingNew = (): JSX.Element => {
                                         : 'https://app.posthog.com/signup'
                                 }
                             >
-                                Get started - free
+                                {enterpriseMode ? "Get in touch" : "Get started - free"}
                             </TrackedCTA>
                         </div>
                     </div>

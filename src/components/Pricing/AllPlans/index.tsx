@@ -28,20 +28,17 @@ const cloudPlans: IPlan[] = [
         description: 'with community support',
         pricing: {
             event: 0.00045,
+            monthly: '0',
         },
         mainCTA: {
             title: 'Get started',
             url: 'https://app.posthog.com/signup',
         },
-        demoCTA: {
-            title: 'Join a group demo',
-            url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
-        },
         pricingOption: 'cloud',
     },
     {
-        title: 'Enterprise',
-        description: 'with dedicated, proactive support',
+        title: 'with Enterprise package',
+        description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
             event: 0.00045,
             monthly: 450,
@@ -49,10 +46,6 @@ const cloudPlans: IPlan[] = [
         mainCTA: {
             title: 'Get in touch',
             url: '/signup/cloud/enterprise',
-        },
-        demoCTA: {
-            title: 'Book a demo',
-            url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
         },
         pricingOption: 'cloud-enterprise',
     },
@@ -64,20 +57,17 @@ const selfHostPlans: IPlan[] = [
         description: 'with community support',
         pricing: {
             event: 0.00045,
+            monthly: '0',
         },
         mainCTA: {
             title: 'Get started',
             url: 'https://license.posthog.com/',
         },
-        demoCTA: {
-            title: 'Join a group demo',
-            url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
-        },
         pricingOption: 'self-hosted',
     },
     {
-        title: 'Enterprise',
-        description: 'with dedicated, proactive support',
+        title: 'with Enterprise package',
+        description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
             event: 0.00045,
             monthly: 450,
@@ -86,10 +76,6 @@ const selfHostPlans: IPlan[] = [
             title: 'Get started',
             url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
         },
-        demoCTA: {
-            title: 'Book a demo',
-            url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
-        },
         pricingOption: 'self-hosted-enterprise',
     },
 ]
@@ -97,24 +83,20 @@ const selfHostPlans: IPlan[] = [
 const Plan = ({ plan }: { plan: IPlan }) => {
     return (
         <li className="flex flex-col">
-            <h4 className="m-0 text-lg">{plan.title}</h4>
-            <p className="m-0 text-black/50 font-medium text-[14px]">{plan.description}</p>
-            <div className="my-7">
-                <h5 className="text-[15px] opacity-50 m-0 font-medium">Pricing</h5>
+            <h4 className="m-0 text-base">{plan.title}</h4>
+            <div className="my-2">
+                <h5 className="text-sm opacity-50 m-0 font-medium">Starts at</h5>
                 <p className="m-0">
                     {plan.pricing.monthly && (
                         <>
                             <strong>${plan.pricing.monthly}</strong>
-                            <span className="text-[13px] opacity-50">/monthly</span>
+                            <span className="text-[13px] opacity-50">/mo</span>
                             <span className="inline-block opacity-50 mx-2">+</span>
                         </>
                     )}
-                    <span>
-                        <strong>${plan.pricing.event}</strong>
-                        <span className="text-[13px] opacity-50">/event</span>
-                    </span>
                 </p>
             </div>
+            <p className="m-0 pb-4 text-black/50 font-medium leading-tight text-sm">{plan.description}</p>
             <TrackedCTA
                 event={{ name: `clicked ${plan.mainCTA.title}`, type: plan.pricingOption }}
                 type="primary"
@@ -125,17 +107,6 @@ const Plan = ({ plan }: { plan: IPlan }) => {
             >
                 {plan.mainCTA.title}
             </TrackedCTA>
-            {plan.demoCTA && (
-                <TrackedCTA
-                    event={{ name: `clicked ${plan.demoCTA?.title}`, type: plan.pricingOption }}
-                    className="bg-white !border border-gray-accent-light !text-black mt-3 shadow-md"
-                    width="full"
-                    to={plan.demoCTA?.url}
-                    size="sm"
-                >
-                    {plan.demoCTA?.title}
-                </TrackedCTA>
-            )}
         </li>
     )
 }
