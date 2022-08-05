@@ -15,10 +15,8 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
         alreadyCountedEvents = threshold
     }
 
-    if (pricingOption === 'self-hosted-enterprise') {
-        finalCost = finalCost > ENTERPRISE_MINIMUM_PRICING ? finalCost : ENTERPRISE_MINIMUM_PRICING
-    } else if (pricingOption === 'cloud-enterprise') {
-        finalCost = finalCost > CLOUD_ENTERPRISE_MINIMUM_PRICING ? finalCost : CLOUD_ENTERPRISE_MINIMUM_PRICING
+    if (pricingOption === 'cloud-enterprise' || pricingOption === 'self-hosted-enterprise') {
+        finalCost += 450
     }
 
     return Math.round(finalCost)
