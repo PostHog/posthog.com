@@ -14,6 +14,7 @@ import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 import Link from 'components/Link'
+import Toggle from 'components/Toggle'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -157,11 +158,22 @@ const selfHostedEnterpriseOptions = {
     },
 }
 
-export default function Calculator({ selfHost, enterprise }: { selfHost: boolean; enterprise: boolean }) {
+export default function Calculator({
+    selfHost,
+    enterprise,
+    enterpriseMode,
+    handleEnterpriseModeChange,
+    setCurrentModal,
+}: {
+    selfHost: boolean
+    enterprise: boolean
+    enterpriseMode: boolean
+    handleEnterpriseModeChange: (checked: boolean) => void
+    setCurrentModal: (currentModal: string) => void
+}) {
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
-    const [showFullBreakdown, setShowFullBreakdown] = useState(false)
-    const breakdown = showFullBreakdown ? pricing[pricingOption] : pricing[pricingOption]?.slice(0, 3)
+    const breakdown = pricing[pricingOption]
     const monthlyMinimumPrice =
         optionDetails &&
         optionDetails.minimumPrice.toLocaleString('en-US', {
@@ -204,31 +216,25 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         <motion.div
             initial={{ opacity: 0, translateY: -20 }}
             animate={{ opacity: 1, translateY: 0 }}
-            className="py-7 px-8 bg-white shadow-lg rounded-md md:max-w-[476px] w-full mx-auto"
+            className="bg-transparent w-full"
         >
-            <div className="flex">
-                <span className="inline-block mr-2">{optionDetails?.icon}</span>
-                <div>
-                    <div className="flex items-center flex-wrap">
-                        <h3 className="m-0 text-xl font-black mr-2">{optionDetails?.title}</h3>
-                        <span
-                            className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
-                        >
-                            {optionDetails?.badge}
-                        </span>
+            <div>
+                <div className="pb-6 mb-6 border-b border-gray-accent-light border-dashed">
+                    <div className="flex justify-between items-center">
+                        <h4 className="text-[15px] m-0 ">Enterprise mode</h4>
+                        <Toggle checked={enterpriseMode} onChange={handleEnterpriseModeChange} />
                     </div>
-                    <p className="m-0 text-black/50 font-medium text-sm">{optionDetails?.subtitle}</p>
-                </div>
-            </div>
-            <div className="mt-5">
-                <div className="flex items-center space-x-2 justify-between mb-3">
-                    <p className="text-[15px] font-bold m-0">Monthly event volume</p>
-                    <p className="text-[15px] font-bold m-0">
-                        {prettyInt(sliderCurve(sliderValue))} events
-                        <span className="text-[13px] opacity-50">/mo</span>
+                    <p className="text-[13px] font-bold m-0 text-black/60 my-1">
+                        Starts at $450/mo and comes with SSO, advanced permissions, and a dedicated Slack channel for
+                        support
                     </p>
+                    <button className="font-bold text-red text-[14px]" onClick={() => setCurrentModal('enterprise')}>
+                        Details
+                    </button>
                 </div>
-                <div className="mb-12">
+                <h4 className="text-[15px] font-bold m-0 ">Estimate your price</h4>
+                <p className="text-[14px] font-bold m-0 text-black/60">Monthly event volume</p>
+                <div className="mb-12 mt-3">
                     <PricingSlider
                         marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
                         min={1000000}
@@ -245,7 +251,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
-                                        <p className="text-[14px] font-medium m-0">{label || '100 million - 1 billion'}</p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {label || '100 million - 1 billion'}
+                                        </p>
                                         <p className="text-[14px] font-medium m-0">
                                             {price[1] === 0 ? 'Included' : price[1]}
                                         </p>
@@ -253,61 +261,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                 )
                             })}
                         </ul>
-                        {!showFullBreakdown && (
-                            <button
-                                onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-sm"
-                            >
-                                Show full breakdown
-                            </button>
-                        )}
-
-                        <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
-                            <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                            <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
-                        </div>
                     </>
                 )}
-                <div className="flex space-x-2 justify-between items-center mt-2">
-                    <h4 className="text-lg m-0 font-extrabold leading-tight">
-                        Estimated price
-                        <br />
-                        <span className="text-[13px] opacity-60 font-bold">
-                            for {prettyInt(sliderCurve(sliderValue))} events
-                        </span>
-                        <span className="text-[12px] font-semibold opacity-50">/mo</span>
-                    </h4>
-                    <p className="text-[20px] font-bold">
-                        ${finalMonthlyCost}
-                        <span className="font-medium text-[15px] opacity-50">/mo</span>
-                    </p>
-                </div>
-                <div className="mt-4">
-                    <TrackedCTA
-                        event={{ name: `clicked ${optionDetails?.mainCTA.title}`, type: pricingOption }}
-                        type="primary"
-                        width="full"
-                        className="shadow-md"
-                        to={optionDetails?.mainCTA.url}
-                    >
-                        {optionDetails?.mainCTA.title}
-                    </TrackedCTA>
-                    {optionDetails?.demoCTA && (
-                        <TrackedCTA
-                            event={{ name: `clicked ${optionDetails?.demoCTA?.title}`, type: pricingOption }}
-                            to={optionDetails?.demoCTA?.url}
-                            className="bg-white !border border-gray-accent !text-black mt-3 shadow-md"
-                            width="full"
-                        >
-                            {optionDetails?.demoCTA?.title}
-                        </TrackedCTA>
-                    )}
-                </div>
 
                 <p className="text-sm text-center pt-4 pb-0 m-0 text-black/50">
-                    Not sure about your event volume?{' '}
-                    <Link to="/blog/calculating-events-from-users" className="font-bold">
-                        Here's a handy guide.
+                    B2C company with millions of users?
+                    <br />
+                    <Link to="/signup/b2c" className="font-bold">
+                        Apply for a volume pricing plan
                     </Link>
                 </p>
             </div>

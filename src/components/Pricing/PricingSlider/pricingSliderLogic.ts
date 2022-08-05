@@ -81,6 +81,18 @@ export const pricingSliderLogic = kea({
                 return calculatePrice(eventNumber, 'self-hosted')
             },
         ],
+        cloudEnterpriseCost: [
+            (s) => [s.eventNumber],
+            (eventNumber: number) => {
+                return calculatePrice(eventNumber, 'cloud-enterprise')
+            },
+        ],
+        selfHostedEnterpriseCost: [
+            (s) => [s.eventNumber],
+            (eventNumber: number) => {
+                return calculatePrice(eventNumber, 'self-hosted-enterprise')
+            },
+        ],
         finalMonthlyCost: [
             (s) => [s.finalCost],
             (finalCost: number) => {
