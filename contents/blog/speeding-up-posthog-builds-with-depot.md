@@ -1,12 +1,12 @@
 ---
-date: 2022-07-28
+date: 2022-08-05
 title: Speeding up PostHog builds with Depot
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["kyle-galbraith", "jacob-gillespie"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 categories: ["Inside PostHog", "Open source"]
 ---
@@ -15,10 +15,9 @@ PostHog recently swapped out Docker for Depot in their container image builds wi
 
 ## How does Depot work?
 
-[Depot](https://depot.dev) is a managed container build service which runs both Intel and Arm builder machines so you can build native container images for both architectures. Each instance runs [BuildKit](https://github.com/moby/buildkit), the modern engine that backs `docker build` with 4 CPUs, 8GB of RAM, and a persistent 50GB NVMe cache disk. Depot fully manages the lifecycle of project builder instances; today, Depot launches builder machines in AWS and Fly.io.
+[Depot](https://depot.dev) is a managed container build service which runs both Intel and Arm builder machines so you can build native container images for both architectures. Each instance runs [BuildKit](https://github.com/moby/buildkit), the modern engine that backs `docker build` with four CPUs, 8GB of RAM, and a persistent 50GB NVMe cache disk. Depot fully manages the lifecycle of project builder instances; today, Depot launches builder machines in AWS and Fly.io.
 
 The `depot build` CLI implements the same options as `docker build` for easy adoption. By offloading the build to a remote Depot builder, the build can make use of the centralized persistent cache, so build steps that are unchanged can be instantly reused. Remote builds also are not limited by local resource constraints like CPU, RAM, or network.
-
 
 One of the most common use-cases for Depot is accelerating Docker image builds in CI providers like GitHub Actions. We often see a 2-3x speedup when using Depot, compared to the standard `docker/build-push-action` action.
 
@@ -28,7 +27,7 @@ Builds in GitHub Actions can be slow for a few primary reasons:
 2. Using the layer cache requires saving and loading the cache before and after the build, which can be slow as cache sizes increase.
 3. Resources like total cache size and available CPUs are constrained in the Actions environment.
 
-Assuming that a build uses `cache-from` and `cache-to` to cache layers, the biggest bottlenecks afterwards are the last two reasons. Saving and loading the cache to tarballs is slow, and the time taken to restore the cache can often outweigh the potential speedups of having the cache at all. And GitHub Actions only provides 2 CPUs today for the build to use.
+Assuming that a build uses `cache-from` and `cache-to` to cache layers, the biggest bottlenecks afterwards are the last two reasons. Saving and loading the cache to tarballs is slow, and the time taken to restore the cache can often outweigh the potential speedups of having the cache at all. And GitHub Actions only provides two CPUs today for the build to use.
 
 ## Depot and PostHog
 
@@ -36,7 +35,7 @@ At Depot, we use PostHog to track our core product metrics; builds started and c
 
 We also maintain several [benchmarks of popular open-source projects](https://depot.dev/#benchmarks), including PostHog, to help us gauge the performance of Depot. The benchmarks compare the speed of container builds on GitHub Actions with and without Depot, for each new commit to the upstream project. We generally see a 2-3x speedup with Depot.
 
-PostHog was one of the projects we [selected to benchmark](https://depot.dev/benchmark/posthog), and we observed average build times of only 3 minutes with Depot's remote builders. At the time, PostHog's own build workflows took around 16 minutes for the same build.
+PostHog was one of the projects we [selected to benchmark](https://depot.dev/benchmark/posthog), and we observed average build times of only three minutes with Depot's remote builders. At the time, PostHog's own build workflows took around 16 minutes for the same build.
 
 So, we reached out to Tim at PostHog to show him the benchmark results and suggest that we use Depot for PostHog. Tim suggested we open a pull request implementing the switch.
 
@@ -92,12 +91,11 @@ Before switching to Depot, builds using `docker build` took over [16 minutes to 
 
 ![GitHub Actions Docker Build](../images/blog/speeding-up-posthog-builds-with-depot/posthog-docker-build.png)
 
-After switching to `depot build`, those same builds took only [3 minutes on average](https://github.com/PostHog/posthog/runs/7545904011?check_suite_focus=true):
+After switching to `depot build`, those same builds took only [three minutes on average](https://github.com/PostHog/posthog/runs/7545904011?check_suite_focus=true):
 
 ![GitHub Actions Depot Build](../images/blog/speeding-up-posthog-builds-with-depot/posthog-depot-build.png)
 
 A 5x speed up with very little change to the existing workflow, just one line if we don't include the OIDC improvement.
 
-The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to Depot, PostHog can get more done, iterate faster and fix bugs without interruptions.
+The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to [Depot](https://depot.dev), PostHog can get more done, iterate faster and fix bugs without interruptions.
 
-_Want to give it a go? [Try out Depot's free, 30-day trial](https://depot.dev/)._
