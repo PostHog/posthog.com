@@ -221,19 +221,19 @@ export default function Calculator({
             <div>
                 <div className="pb-6 mb-6 border-b border-gray-accent-light border-dashed">
                     <div className="flex justify-between items-center">
-                        <h4 className="text-[15px] m-0 ">Enterprise mode</h4>
+                        <h4 className="text-base m-0 ">Enterprise mode</h4>
                         <Toggle checked={enterpriseMode} onChange={handleEnterpriseModeChange} />
                     </div>
-                    <p className="text-[13px] font-bold m-0 text-black/60 my-1">
+                    <p className="text-sm m-0 text-black/60 my-1">
                         Starts at $450/mo and comes with SSO, advanced permissions, and a dedicated Slack channel for
                         support
                     </p>
-                    <button className="font-bold text-red text-[14px]" onClick={() => setCurrentModal('enterprise')}>
+                    <button className="font-semibold text-red text-sm" onClick={() => setCurrentModal('enterprise')}>
                         Details
                     </button>
                 </div>
-                <h4 className="text-[15px] font-bold m-0 ">Estimate your price</h4>
-                <p className="text-[14px] font-bold m-0 text-black/60">Monthly event volume</p>
+                <h4 className="text-base font-bold m-0 ">Estimate your price</h4>
+                <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
                 <div className="mb-12 mt-3">
                     <PricingSlider
                         marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
@@ -255,7 +255,7 @@ export default function Calculator({
                                             {label || '100 million - 1 billion'}
                                         </p>
                                         <p className="text-[14px] font-medium m-0">
-                                            {price[1] === 0 ? 'Included' : price[1]}
+                                            {price[1] === 0 ? 'Free' : price[1]}
                                         </p>
                                     </li>
                                 )

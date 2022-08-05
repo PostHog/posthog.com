@@ -348,7 +348,7 @@ const PricingNew = (): JSX.Element => {
                             <span>Schedule a demo</span>
                         </Link>
                         <Link
-                            to="/signup/self-host/get-in-touch#contact"
+                            to="/signup/cloud/enterprise"
                             className="text-[15px] font-semibold text-blue hover:text-blue flex space-x-2 items-center"
                         >
                             <svg
