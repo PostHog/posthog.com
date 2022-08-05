@@ -39,7 +39,7 @@ Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_c
 
 ### YC Deal
 
-You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding). 
+You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
 
 ### Events
 Follow Printfection's instructions on creating a giveaway [campaign](https://help.printfection.com/hc/en-us/articles/208654107-Collection-campaigns-How-to-collect-review-and-approve-orders-via-external-ordering-or-csv) for this.
