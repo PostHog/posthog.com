@@ -2022,3 +2022,21 @@
 [[redirects]]
     from = "/docs/cloud/proxy"
     to = "/docs/integrate/proxy"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    to = "/docs/migrate/migrate-between-cloud-and-self-hosted"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-from-amplitude"
+    to = "/docs/migrate/migrate-from-amplitude"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
