@@ -1,6 +1,5 @@
 ---
 title: Redshift Export
-layout: app
 github: https://github.com/PostHog/redshift-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Export
 thumbnail: ../../apps/thumbnails/redshift.svg

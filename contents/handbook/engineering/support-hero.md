@@ -48,6 +48,8 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
+To help manage users' expectations, you might find it useful to share a message in #community-support when you are signing on and off for the day.
+
 ### Prioritizing requests
 
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
@@ -180,6 +182,8 @@ Q&A.js should help reduce the load of the support hero, but you'll need to make 
 When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
 
 The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
+
+> **Important:** Do not sign up directly on squeak.cloud. Start by answering a question on the site - this creates an account within PostHog's Squeak! Cloud account. (As an alternate, you can ask an existing admin to invite you.) (Signing up directly on squeak.cloud creates a new account for you to use Squeak! on another site, which isn't what we want.)
 
 Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
 

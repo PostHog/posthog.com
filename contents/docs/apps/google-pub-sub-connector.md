@@ -1,6 +1,5 @@
 ---
 title: GCP Pub/Sub Connector
-layout: app
 github: https://github.com/vendasta/pubsub-plugin
 installUrl: https://app.posthog.com/project/apps?name=Pub%2FSub%20Export
 thumbnail: ../../apps/thumbnails/pub-sub-export.png

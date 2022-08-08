@@ -1,6 +1,5 @@
 ---
 title: n8n Connector
-layout: app
 thumbnail: ../../apps/thumbnails/n8n.png
 topics:
     - n8n

@@ -198,6 +198,16 @@
                     "url": "/handbook/people/offboarding"
                 },
                 {
+                    "name": "Ramp up plans",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Product Manager Ramp Up",
+                            "url": "/handbook/people/rampup/product-manager.md"
+                        }
+                    ]
+                },
+                {
                     "name": "Merch store",
                     "url": "/handbook/company/merch-store"
                 },
@@ -510,6 +520,16 @@
         {
             "name": "Overview",
             "url": "/docs"
+        },
+        {
+            "name": "Getting started",
+            "url": "",
+            "children": [
+                {
+                    "name": "Quickstart with PostHog Cloud",
+                    "url": "/docs/getting-started/cloud"
+                }
+            ]
         },
         {
             "name": "Self-host",

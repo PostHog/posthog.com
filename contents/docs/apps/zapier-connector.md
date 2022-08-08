@@ -1,6 +1,5 @@
 ---
 title: Zapier Connector
-layout: app
 github: https://github.com/PostHog/posthog-zapier/
 installUrl: https://zapier.com/apps/posthog/integrations
 thumbnail: ../../apps/thumbnails/zapier.svg

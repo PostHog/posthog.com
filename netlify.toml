@@ -2006,3 +2006,13 @@
 [[redirects]]
     from = "/docs/self-host/configure/upgrading-posthog"
     to = "/docs/runbook/upgrading-posthog"
+
+
+# Added: 2022-08-03
+[[redirects]]
+    from = "/tutorials/aarrr-framework"
+    to = "/blog/aarrr-pirate-funnel"
+
+[[redirects]]
+    from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/blog/aarrr-pirate-funnel"    

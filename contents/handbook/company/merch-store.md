@@ -34,15 +34,14 @@ We sell it through our [merch store](https://merch.posthog.com/) store on Shopif
 ## How do we give away merch for free?
 
 ### Individuals
-In [Shopify admin](https://posthog.myshopify.com/admin):
 
-1. Go to the "Discounts" tab
-2. Click "Create Discount" then "Discount Code"
-3. Click "Generate Code" button to generate the code to send the customer
-4. Set "Fixed Amount" and the "Discount Value" to the amount of free merch you wish to give (e.g. $100)
-5. IMPORTANT: Set "Limit number of times this discount can be used in total" to 1 (so it can only be used once)
-6. Set a reasonable timeframe for this to be used (e.g. 3 months)
-7. Send the code to the customer
+Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_cards). You can either copy the code, or create a 'new customer' and send them the code directly.
+
+Alternatively, if you want to send them a specific product via Printfection, you can create a 'New Order' under [this campaign](https://app.printfection.com/account/campaign/manage.php?storeid=304946). 
+
+### YC Deal
+
+You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
 
 ### Events
 Follow Printfection's instructions on creating a giveaway [campaign](https://help.printfection.com/hc/en-us/articles/208654107-Collection-campaigns-How-to-collect-review-and-approve-orders-via-external-ordering-or-csv) for this.

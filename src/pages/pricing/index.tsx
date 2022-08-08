@@ -20,12 +20,13 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import { motion } from 'framer-motion'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { prettyInt } from 'components/Pricing/PricingSlider/LogSlider'
+import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
+import { pricing, pricingLabels } from 'components/Pricing/constants'
 
 export const section = cntl`
     max-w-6xl
@@ -33,6 +34,29 @@ export const section = cntl`
     px-4
     md:px-0
 `
+
+const Breakdown = ({ planName }) => {
+    const breakdown = pricing[planName]
+    return breakdown.map((price, index) => {
+        const label = pricingLabels[price[0]]
+        const included = price[1] === 0
+        return (
+            <>
+                <div className="col-span-2">{label || '100 million - 1 billion'}</div>
+                <strong className="text-right">
+                    {included ? (
+                        'Included'
+                    ) : (
+                        <>
+                            {price[1]}
+                            <span className="font-normal text-black/50">/event</span>
+                        </>
+                    )}
+                </strong>
+            </>
+        )
+    })
+}
 
 const Button = ({
     onClick,
@@ -92,7 +116,7 @@ const PricingNew = (): JSX.Element => {
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
-    const { cloudCost, selfHostedCost } = useValues(pricingSliderLogic)
+    const { cloudCost, selfHostedCost, sliderValue } = useValues(pricingSliderLogic)
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
@@ -187,33 +211,7 @@ const PricingNew = (): JSX.Element => {
                                             animate={{ height: 'auto' }}
                                             className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                         >
-                                            <div className="col-span-2">First 1 million events/mo</div>
-                                            <strong>Included</strong>
-
-                                            <div className="col-span-2">1-2 million</div>
-                                            <strong>
-                                                $0.00045<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">2-10 million</div>
-                                            <strong>
-                                                $0.000225<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">10-100 million</div>
-                                            <strong>
-                                                $0.000075<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">100 million - 1 billion</div>
-                                            <strong>
-                                                $0.000025<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">More than 1 billion</div>
-                                            <strong>
-                                                $0.000025<span className="font-normal text-black/50">/event</span>
-                                            </strong>
+                                            <Breakdown planName="cloud" />
 
                                             <B2C />
                                         </motion.div>
@@ -222,7 +220,10 @@ const PricingNew = (): JSX.Element => {
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
                                         <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">for 1,000,000 events/mo</span>
+                                        <span className="text-sm text-black/60">
+                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
+                                            events/mo
+                                        </span>
                                     </div>
                                     <div>
                                         <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
@@ -274,33 +275,7 @@ const PricingNew = (): JSX.Element => {
                                             animate={{ height: 'auto' }}
                                             className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                         >
-                                            <div className="col-span-2">First 1 million events/mo</div>
-                                            <strong>Included</strong>
-
-                                            <div className="col-span-2">1-2 million</div>
-                                            <strong>
-                                                $0.00045<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">2-10 million</div>
-                                            <strong>
-                                                $0.000225<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">10-100 million</div>
-                                            <strong>
-                                                $0.000075<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">100 million - 1 billion</div>
-                                            <strong>
-                                                $0.000025<span className="font-normal text-black/50">/event</span>
-                                            </strong>
-
-                                            <div className="col-span-2">More than 1 billion</div>
-                                            <strong>
-                                                $0.000025<span className="font-normal text-black/50">/event</span>
-                                            </strong>
+                                            <Breakdown planName="self-hosted" />
 
                                             <B2C />
                                         </motion.div>
@@ -310,7 +285,10 @@ const PricingNew = (): JSX.Element => {
                                 <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                                     <div className="flex flex-col">
                                         <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">for 1,000,000 events/mo</span>
+                                        <span className="text-sm text-black/60">
+                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
+                                            events/mo
+                                        </span>
                                     </div>
                                     <div>
                                         <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
@@ -369,33 +347,7 @@ const PricingNew = (): JSX.Element => {
                                     animate={{ height: 'auto' }}
                                     className="grid text-sm gap-x-2 gap-y-2 mt-4"
                                 >
-                                    <div className="col-span-2">First 1 million events/mo</div>
-                                    <strong>Included</strong>
-
-                                    <div className="col-span-2">1-2 million</div>
-                                    <strong>
-                                        $0.00045<span className="font-normal text-black/50">/event</span>
-                                    </strong>
-
-                                    <div className="col-span-2">2-10 million</div>
-                                    <strong>
-                                        $0.00045<span className="font-normal text-black/50">/event</span>
-                                    </strong>
-
-                                    <div className="col-span-2">10-100 million</div>
-                                    <strong>
-                                        $0.00009<span className="font-normal text-black/50">/event</span>
-                                    </strong>
-
-                                    <div className="col-span-2">100 million - 1 billion</div>
-                                    <strong>
-                                        $0.000018<span className="font-normal text-black/50">/event</span>
-                                    </strong>
-
-                                    <div className="col-span-2">More than 1 billion</div>
-                                    <strong>
-                                        $0.0000036<span className="font-normal text-black/50">/event</span>
-                                    </strong>
+                                    <Breakdown planName="cloud-enterprise" />
 
                                     <B2C />
                                 </motion.div>
