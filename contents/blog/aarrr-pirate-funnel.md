@@ -1,6 +1,6 @@
 ---
 date: 2022-08-03
-title: "The AARRR Pirate Funnel: A complete guide to pirate metrics"
+title: "Building an AARRR pirate funnel (and why it's worth it)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -161,6 +161,8 @@ Monthly recurring revenue (MRR) is good for a B2B SaaS products. B2C companies b
 If you can imagine three or four random letters, it's probably an acronym for a revenue metric!
 
 > 💡 **PostHog Tip:** You can send revenue data to PostHog by defining a property and setting a numerical value on that property. You can then visualize revenue data in Trends using event property averages, sums, percentiles and formulas. You can even integrate with payment systems via the [PostHog App Store](/apps).
+
+<NewsletterForm compact />
 
 ## How to use pirate metrics in your product
 
