@@ -46,7 +46,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                         key={title}
                         className={`text-black font-semibold text-[14px] flex flex-col space-y-2 items-center text-center leading-tight`}
                     >
-                        <span className="w-[32px] flex justify-center items-center flex-shrink-0">{icon}</span>
+                        <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
                         <Parent url={url}>
                             <span>{title}</span>
                         </Parent>

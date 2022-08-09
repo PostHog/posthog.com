@@ -21,7 +21,7 @@ const features: IFeature[] = [
     { title: 'Feature flags', icon: ProductIcons.featureFlags },
     { title: 'Heatmaps', icon: ProductIcons.heatmaps },
     { title: 'A/B testing', icon: ProductIcons.abTesting },
-    { title: 'Correlation insights', icon: ProductIcons.correlationInsights },
+    { title: 'Correlation analysis', icon: ProductIcons.correlationAnalysis },
     { title: 'Group analytics', icon: ProductIcons.groupAnalytics },
     { title: 'Team collaboration', icon: ProductIcons.teamCollaboration },
 ]
@@ -29,11 +29,11 @@ const features: IFeature[] = [
 const dataStack: IFeature[] = [
     { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
     { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
-    { title: 'SQL access', icon: ProductIcons.sqlAccess, enterpriseSelfHostOnly: true },
+    { title: 'SQL access', icon: ProductIcons.sql, enterpriseSelfHostOnly: true },
     { title: 'App library', icon: ProductIcons.appLibrary },
     { title: 'Event autocapture', icon: ProductIcons.eventAutocapture },
     { title: 'API', icon: ProductIcons.api },
-    { title: 'Multiple projects', icon: ProductIcons.multipleProjects },
+    { title: 'Multiple projects', icon: ProductIcons.projects },
     { title: 'User permissions', icon: ProductIcons.userPermissions },
 ]
 
@@ -126,7 +126,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                     : ''
                             }`}
                         >
-                            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
+                            <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">
                                 {icon || <Check />}
                             </span>
                             <Parent url={url}>
