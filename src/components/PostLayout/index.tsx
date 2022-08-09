@@ -305,12 +305,22 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     )
 }
 
-const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkClick?: () => void }) => {
+const TableOfContents = ({
+    menu,
+    handleLinkClick,
+    title,
+}: {
+    menu: IMenu[]
+    handleLinkClick?: () => void
+    title?: string | boolean
+}) => {
     return (
         <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
-                Table of contents
-            </p>
+            {title && (
+                <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
+                    Table of contents
+                </p>
+            )}
             <nav>
                 {menu.map((menuItem) => {
                     return (
@@ -414,6 +424,9 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
+    hideSurvey,
+    hideSearch,
+    menuTitle = 'Table of contents',
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -467,14 +480,16 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
-                {menu && (
-                    <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                    </button>
-                )}
-                <SearchBar />
-            </div>
+            {!hideSearch && (
+                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                    {menu && (
+                        <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                            <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                        </button>
+                    )}
+                    <SearchBar />
+                </div>
+            )}
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -495,7 +510,11 @@ export default function PostLayout({
                     isOpen={mobileMenuOpen}
                 >
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                        <TableOfContents
+                            title={menuTitle}
+                            handleLinkClick={() => setMobileMenuOpen(false)}
+                            menu={menu}
+                        />
                     </div>
                 </PushMenu>
             )}
@@ -510,7 +529,7 @@ export default function PostLayout({
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
                         <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            <TableOfContents menu={menu} />
+                            <TableOfContents title={menuTitle} menu={menu} />
                         </aside>
                     </div>
                 )}
@@ -521,10 +540,10 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className="article-content">{children}</div>
+                        <div className={article ? 'article-content' : ''}>{children}</div>
                         {questions && questions}
                     </div>
-                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
@@ -545,7 +564,9 @@ export default function PostLayout({
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
                                         className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"

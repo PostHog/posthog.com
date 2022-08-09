@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Hero() {
     return (
-        <section className="text-center pt-14">
+        <section className="text-center pt-14 mb-8">
             <div className="px-5 max-w-screen-2xl mx-auto">
                 <h1 className="text-6xl m-0">
                     The modern platform for <br />
