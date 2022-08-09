@@ -414,6 +414,7 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
+    survey = true,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -467,7 +468,7 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                 {menu && (
                     <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
@@ -521,10 +522,10 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className="article-content">{children}</div>
+                        <div className={article ? 'article-content' : ''}>{children}</div>
                         {questions && questions}
                     </div>
-                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {survey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
@@ -545,7 +546,9 @@ export default function PostLayout({
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
                                         className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"
