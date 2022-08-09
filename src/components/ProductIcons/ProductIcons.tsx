@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const icons = {
+export const ProductIcons = {
     analytics: (
         <svg
             width="19"
