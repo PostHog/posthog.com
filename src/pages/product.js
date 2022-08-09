@@ -1,3 +1,11 @@
-import ProductPage from 'components/ProductPage'
+import Layout from 'components/Layout'
+import Hero from 'components/Product/Hero'
+import React from 'react'
 
-export default ProductPage
+export default function Product() {
+    return (
+        <Layout>
+            <Hero />
+        </Layout>
+    )
+}
