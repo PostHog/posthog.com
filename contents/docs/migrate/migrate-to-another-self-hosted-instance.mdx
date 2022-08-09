@@ -3,13 +3,14 @@ title: Migrate to another self-hosted instance
 sidebar: Docs
 showTitle: true
 ---
+
 import ExportingEventsSnippet from './snippets/exporting-events'
 
 > If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues). You should also be aware that **some of the steps on this document are potentially destructive**! Proceed with caution.
 
 **PostHog backed by PostgreSQL is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for [vastly superior performance](/docs/self-host/postgres-vs-clickhouse), as well as to receive new features and continued support in the future.
 
-> Note: If you're looking for a more hands-off experience we recommend migrating to [PostHog Cloud](/docs/self-host/migrate-to-cloud).
+> Note: If you're looking for a more hands-off experience we recommend migrating to [PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted).
 
 ## Requirements
 
@@ -249,8 +250,6 @@ posthog-worker-7857nd8268-j8c4f                     1/1     Running   0         
 
 <ExportingEventsSnippet />
 
-
 ## Moving a license key
-
 
 If you have an existing license key, please email [sales@posthog.com](mailto:sales@posthog.com) to move your license key over.

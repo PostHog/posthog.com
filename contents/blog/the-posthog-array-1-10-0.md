@@ -18,7 +18,7 @@ Feature flags have also come out! If you're a developer and thinking of tweaking
 
 On top of that (yep, there is more), we have a better retention view, deployment on platform.sh, new ways to edit our code with Porter, and a whole load of performance improvements as always.
 
-If you're self hosting and desire these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
+If you're self hosting and desire these features - [update your PostHog](/docs/runbook/upgrading-posthog).
 
 Please also update your `posthog-js` version to at least `1.2.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 

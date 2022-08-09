@@ -1822,6 +1822,192 @@
     from = "/handbook/engineering/app-west"
     to = "/handbook/people/team-structure/app-west"
 
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0001-events-sample-by"
+    to = "/docs/runbook/async-migrations/0001-events-sample-by"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+    to = "/docs/runbook/async-migrations/0002-events-sample-by"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+    to = "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/overview"
+    to = "/docs/runbook/async-migrations"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/disaster-recovery"
+    to = "/docs/runbook/disaster-recovery"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    to = "/docs/runbook/migrate/migrate-between-cloud-and-self-hosted"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-from-amplitude"
+    to = "/docs/runbook/migrate/migrate-from-amplitude"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/runbook/migrate/migrate-to-another-self-hosted-instance"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/backup"
+    to = "/docs/runbook/services/clickhouse/backup"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse"
+    to = "/docs/runbook/services/clickhouse"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/kafka-engine"
+    to = "/docs/runbook/services/clickhouse/kafka-engine"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/resize-disk"
+    to = "/docs/runbook/services/clickhouse/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/restore"
+    to = "/docs/runbook/services/clickhouse/restore"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/sharding-and-replication"
+    to = "/docs/runbook/services/clickhouse/sharding-and-replication"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/vertical-scaling"
+    to = "/docs/runbook/services/clickhouse/vertical-scaling"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka"
+    to = "/docs/runbook/services/kafka"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka/log-retention"
+    to = "/docs/runbook/services/kafka/log-retention"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka/resize-disk"
+    to = "/docs/runbook/services/kafka/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/minio"
+    to = "/docs/runbook/services/minio"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/async-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/async-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/event-flow"
+    to = "/docs/runbook/services/plugin-server/diagrams/event-flow"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/ingestion-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/ingestion-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/plugin-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/plugin-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server"
+    to = "/docs/runbook/services/plugin-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/postgresql"
+    to = "/docs/runbook/services/postgresql"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/postgres-upgrade-migrations"
+    to = "/docs/runbook/services/postgresql/long-migrations"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/postgresql/resize-disk"
+    to = "/docs/runbook/services/postgresql/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/redis"
+    to = "/docs/runbook/services/redis"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/zookeeper"
+    to = "/docs/runbook/services/zookeeper"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/deploy/upgrade-notes"
+    to = "/docs/runbook/upgrade-notes"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/upgrading-posthog"
+    to = "/docs/runbook/upgrading-posthog"
+
+
 # Added: 2022-08-03
 [[redirects]]
     from = "/tutorials/aarrr-framework"
@@ -1830,3 +2016,27 @@
 [[redirects]]
     from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/blog/aarrr-pirate-funnel"    
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/cloud/proxy"
+    to = "/docs/integrate/proxy"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    to = "/docs/migrate/migrate-between-cloud-and-self-hosted"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-from-amplitude"
+    to = "/docs/migrate/migrate-from-amplitude"
+
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"

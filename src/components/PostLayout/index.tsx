@@ -545,7 +545,9 @@ export default function PostLayout({
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
                                         className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"
