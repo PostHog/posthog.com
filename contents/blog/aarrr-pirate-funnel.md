@@ -162,8 +162,6 @@ If you can imagine three or four random letters, it's probably an acronym for a 
 
 > 💡 **PostHog Tip:** You can send revenue data to PostHog by defining a property and setting a numerical value on that property. You can then visualize revenue data in Trends using event property averages, sums, percentiles and formulas. You can even integrate with payment systems via the [PostHog App Store](/apps).
 
-<NewsletterForm compact />
-
 ## How to use pirate metrics in your product
 
 So, you've started tracking user behavior, chosen your pirate metrics and built your dashboard... what next? We recommend taking the following steps:
