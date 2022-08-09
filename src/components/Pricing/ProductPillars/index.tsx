@@ -1,6 +1,7 @@
 import Link from 'components/Link'
 import React from 'react'
-import { icons } from '../Features/icons'
+import { ProductIcons } from '../../ProductIcons/ProductIcons'
+
 
 interface IFeature {
     title: string
@@ -16,12 +17,12 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product analytics', icon: icons.analytics },
-    { title: 'Session recording', icon: icons.sessionRecording },
-    { title: 'Feature flags', icon: icons.featureFlags },
-    { title: 'A/B testing', icon: icons.abTesting },
-    { title: 'Event pipelines', icon: icons.eventPipelines },
-    { title: 'Data warehouse', icon: icons.dataWarehouse },
+    { title: 'Product analytics', icon: ProductIcons.analytics },
+    { title: 'Session recording', icon: ProductIcons.sessionRecording },
+    { title: 'Feature flags', icon: ProductIcons.featureFlags },
+    { title: 'A/B testing', icon: ProductIcons.abTesting },
+    { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
+    { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
 ]
 
 const productPillars: IColumn[] = [{ title: 'Features', section: features, className: 'md:row-span-2' }]
@@ -45,7 +46,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                         key={title}
                         className={`text-black font-semibold text-[14px] flex flex-col space-y-2 items-center text-center leading-tight`}
                     >
-                        <span className="w-[32px] flex justify-center items-center flex-shrink-0">{icon}</span>
+                        <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
                         <Parent url={url}>
                             <span>{title}</span>
                         </Parent>
