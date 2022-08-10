@@ -109,13 +109,14 @@ export const DocsIndex: React.FC = () => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
-                <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4 lg:-mt-12">
+                <div className="space-y-16 lg:space-y-24 lg:-mt-12">
                     <section>
-                        <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
+                        <div className="flex justify-start relative pb-12 md:py-12 lg:py-20 items-center -mx-px">
                             <div className="w-full z-20">
                                 <h1 className="font-bold mb-2">Documentation</h1>
                                 <h5 className="text-opacity-60 font-semibold">
-                                    In-depth tutorials, references, and examples for everything PostHog
+                                    In-depth tutorials, references, and <br className="hidden md:block 2xl:hidden" />
+                                    examples for everything PostHog
                                 </h5>
 
                                 {searchOpen &&
@@ -170,7 +171,7 @@ export const DocsIndex: React.FC = () => {
                                 </form>
                             </div>
 
-                            <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
+                            <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
                                 <span className="absolute right-0 bottom-0">
                                     <StaticImage
                                         src="../../contents/images/search-hog-3.png"
@@ -181,7 +182,7 @@ export const DocsIndex: React.FC = () => {
                                 </span>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                             {quickLinks.map((link) => {
                                 return (
                                     <Link
@@ -209,7 +210,7 @@ export const DocsIndex: React.FC = () => {
                             <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                                 <div>
                                     <h4 className="font-bold mb-0">
@@ -218,7 +219,7 @@ export const DocsIndex: React.FC = () => {
                                     <p className="text-base text-gray">Spin up your PostHog instance</p>
                                 </div>
 
-                                <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {deployment.map((deploy) => {
                                         return (
                                             <li className="flex-grow" key={deploy.name}>
@@ -235,14 +236,14 @@ export const DocsIndex: React.FC = () => {
                                 </ul>
                             </div>
 
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <div>
                                     <h4 className="font-bold mb-0">
                                         <span className="text-gray text-lg">2.</span> Integrate
                                     </h4>
                                     <p className="text-base text-gray">Start tracking events and users</p>
                                 </div>
-                                <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {libraries.map((library) => {
                                         return (
                                             <li className="flex-grow" key={library.name}>
@@ -259,12 +260,12 @@ export const DocsIndex: React.FC = () => {
                                 </ul>
                             </div>
 
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <h4 className="font-bold mb-0">
                                     <span className="text-gray text-lg">3.</span> Customize
                                 </h4>
                                 <p className="text-base text-gray">Customize your installation with apps</p>
-                                <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {apps.map((app) => {
                                         return (
                                             <li className="flex-grow" key={app.name}>
@@ -286,7 +287,7 @@ export const DocsIndex: React.FC = () => {
                     <section>
                         <h2 className="text-center font-bold mb-8">Browse guides by feature</h2>
 
-                        <ul className="grid grid-cols-2 lg:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
+                        <ul className="grid grid-cols-2 xl:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
                             {featureLinks.map((link) => {
                                 return (
                                     <li
