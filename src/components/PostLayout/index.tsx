@@ -212,7 +212,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
@@ -266,7 +266,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-red rounded-[2px] h-[65%] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
