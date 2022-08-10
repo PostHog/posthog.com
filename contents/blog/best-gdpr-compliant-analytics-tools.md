@@ -292,7 +292,7 @@ GoAccess is for system administrators and software engineers who need to track w
 GoAccess can be configured not to collect PII (personally identifying information) and relies on log file stats which may not require cookies. If configured in this way, GoAccess is GDPR compliant. 
 
 ### Can you use GoAccess without cookie consent banners?
-You can configue GoAccess to either not collect IP addresses or anonymize them, so it can be used without banners.
+You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without banners.
 
 <table>
     <tr>
