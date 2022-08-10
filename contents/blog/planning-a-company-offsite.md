@@ -17,7 +17,7 @@ We give employees [social and co-working budgets](/handbook/people/benefits) to 
 
 In large companies, offsite planning is centralized within the People or Operations teams, but this isn’t possible in many early-stage startups. This guide is all about how to plan a killer offsite in just eight weeks – including a few tips and tricks I’ve learned over a decade of organizing team retreats.
 
-> Grace McKenzie is Operations Manager at PostHog. Add more copy here
+> Grace McKenzie is the Operations Manager at PostHog, where she tackles any and all back office projects that help build the scaffolding we need as our company scales. In her spare time, you can find her on the rugby pitch playing flanker or at her local billiards hall practicing her 8-ball breaks.
 
 ## It starts with a really good checklist
 
