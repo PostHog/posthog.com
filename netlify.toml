@@ -2064,3 +2064,11 @@
 [[redirects]]
     from = "/handbook/product/pm-rampup"
     to = "/handbook/people/ramp-up/product-manager"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/team-structure/why-small-teams"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/apps/build"

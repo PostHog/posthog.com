@@ -18,7 +18,7 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 </blockquote>
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
+<b>IMPORTANT!</b> If you use SAML please read our <a href="#deprecation-and-removal-notices">deprecation notices below</a>.
 </blockquote>
 
 ## PostHog 1.34.0 release notes

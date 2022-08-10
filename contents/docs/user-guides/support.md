@@ -30,7 +30,7 @@ By default, the Scale plan does not include items marked with a '+'. However, we
 There are three ways to get free support from the PostHog community:
 
 * Ask a question directly in these Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions
-* Join >1,500 developers in [our public Slack group](../slack)
+* Join >1,500 developers in [our public Slack group](/slack)
 * Open an issue in our [main project's GitHub repo](https://github.com/posthog/posthog)
 
 We are very grateful for folks that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
