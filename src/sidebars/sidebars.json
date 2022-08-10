@@ -586,6 +586,10 @@
                             "url": "/docs/self-host/configure/securing-posthog"
                         },
                         {
+                            "name": "Monitoring with Grafana",
+                            "url": "/docs/self-host/configure/monitoring-with-grafana"
+                        },
+                        {
                             "name": "Running behind a proxy",
                             "url": "/docs/self-host/configure/running-behind-proxy"
                         },
