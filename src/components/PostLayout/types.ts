@@ -48,13 +48,13 @@ export interface INextPost {
 }
 
 export interface IProps {
-    tableOfContents: {
+    tableOfContents?: {
         url: string
         value: string
         depth: number
     }[]
     children: React.ReactNode
-    sidebar: React.ReactNode
+    sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
     menu?: IMenu[]
@@ -62,6 +62,7 @@ export interface IProps {
     title: string
     filePath?: string
     breadcrumb?: ICrumb[]
-    hideSidebar: boolean
+    hideSidebar?: boolean
     nextPost?: INextPost
+    survey?: boolean
 }

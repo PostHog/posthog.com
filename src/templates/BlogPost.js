@@ -27,7 +27,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
             {featuredImage && (
                 <div className="relative">
                     <GatsbyImage
-                        className={`rounded-lg z-0 relative ${
+                        className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
                                 ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
                                 : ''
@@ -35,7 +35,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary">{title}</Title>
+                        <Title className="lg:absolute bottom-0 lg:text-white text-primary px-8">{title}</Title>
                     )}
                 </div>
             )}
