@@ -35,6 +35,7 @@
         "@popperjs/core": "^2.11.2",
         "@slack/bolt": "^3.8.1",
         "@supabase/supabase-js": "^1.29.4",
+        "@types/react-slick": "^0.23.10",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@uiw/react-md-editor": "^3.9.5",
         "chart.js": "^2.9.4",

@@ -45,6 +45,7 @@ import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
+import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
@@ -160,6 +161,7 @@ export const shortcodes = {
     FloatedImage,
     Footer,
     FooterCTA,
+    FullWidthBorderSlider,
     GithubIcon,
     Heading,
     HiddenSection,
