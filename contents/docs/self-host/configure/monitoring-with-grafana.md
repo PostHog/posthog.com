@@ -1,5 +1,5 @@
 ---
-title: Monitoring with Grafana
+title: Monitoring with Prometheus and Grafana
 ---
 
 This guide covers how to configure monitoring of your self-hosted deployment through Grafana.
@@ -27,8 +27,6 @@ grafana:
     enabled: true
 prometheus:
     enabled: true
-    alertmanager:
-        enabled: true
 ```
 
 Next, we'll need to upgrade our deployment to spin-up the additional services, which can be done using the following command:
@@ -53,6 +51,7 @@ kubectl -n posthog port-forward svc/posthog-grafana 8080:80
 ```
 
 Our Grafana dashboard should now be available at `localhost:8080`, and we can log in using the username `admin` along with the password we just retrieved.
+For information on exposing Grafana through an Nginx ingress, take a look at the [configuration options](https://github.com/grafana/helm-charts/tree/main/charts/grafana) for the upstream Grafana chart.
 
 ![basic cluster overview dashboard](../../../images/docs/self-host/configure/monitoring-with-grafana/overview.png)
 
@@ -74,16 +73,16 @@ If you are using an external Kafka service, you can use the `prometheus-kafka-ex
 
 ### PostgreSQL monitoring
 
-For streaming information from Postgres, we use the [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter) chart, which can be installed by setting `prometheus-postgres-exporter.enabled` to `true` in your `values.yaml` file.
-If you are using an external Postgres deployment, you can use the `prometheus-postgres-exporter.config.datasource` option to set the location for your managed service.
+To expose PostgreSQL metrics, we use the [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter) chart, which can be installed by setting `prometheus-postgres-exporter.enabled` to `true` in your `values.yaml` file.
+If you are using an external PostgreSQL deployment, you can use the `prometheus-postgres-exporter.config.datasource` option to set the location for your managed service.
 
-![sample postgres dashboard](../../../images/docs/self-host/configure/monitoring-with-grafana/postrges.png)
+![sample PostgreSQL dashboard](../../../images/docs/self-host/configure/monitoring-with-grafana/postgresql.png)
 
 _A sample of the default Postgres dashboard_
 
 ### Redis monitoring
 
-For streaming information from Redis, we use the [prometheus-community/prometheus-redis-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter) chart, which can be installed by setting `prometheus-redis-exporter.enabled` to `true` in your `values.yaml` file.
+To expose metrics from Redis, we use the [prometheus-community/prometheus-redis-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter) chart, which can be installed by setting `prometheus-redis-exporter.enabled` to `true` in your `values.yaml` file.
 If you are using an external Redis service, you can use the `prometheus-redis-exporter.redisAddress` option to set the location for your managed service.
 
 ![sample redis dashboard](../../../images/docs/self-host/configure/monitoring-with-grafana/redis.png)
