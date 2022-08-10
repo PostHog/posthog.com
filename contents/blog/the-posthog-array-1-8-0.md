@@ -12,7 +12,7 @@ featuredImageType: standard
 
 What's box-fresh in PostHog? Cumulative graphs, better paths, and an upgrade to our actions.
 
-If you're self hosting and want these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
+If you're self hosting and want these features - [update your PostHog](/docs/runbook/upgrading-posthog).
 
 ## Release notes
 

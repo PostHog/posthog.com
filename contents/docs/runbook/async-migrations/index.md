@@ -53,7 +53,7 @@ On this page you can trigger runs, stop running migrations, perform migration ro
 Here's a quick summary of the different columns you see on the async migrations table:
 
 | Column | Description |
-| : -----: | :--------: |
+| :----- | :-------- |
 | Name and Description | The migration's name. This corresponds to the migration file name in [`posthog/async_migrations/migrations`](https://github.com/PostHog/posthog/tree/master/posthog/async_migrations/migrations) followed by an overview of what this migration does |
 | Status | The current [status](https://github.com/PostHog/posthog/blob/master/posthog/models/async_migration.py#L5) of this migration. One of: 'Not started','Running','Completed successfully','Errored','Rolled back','Starting'. |
 | Progress | How far along this migration is (0-100) |
@@ -68,13 +68,13 @@ The settings tab allows you to change the configuration, e.g. whether async migr
 
 In the async migrations page at `/instance/async_migrations` you can choose to `stop` or `stop and rollback` the migration from the `...` button on the right most column.
 
-![Stopping the migration](../../../../images/async-migrations-stop-rollback.png)
+![Stopping the migration](../../../images/async-migrations-stop-rollback.png)
 
 ### The migration is in an Error state - what should I do?
 
 Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
 
-![Rollback errored migration](../../../../images/async-migrations-error-rollback-button.png)
+![Rollback errored migration](../../../images/async-migrations-error-rollback-button.png)
 
 
 ### Celery scaling considerations
@@ -126,4 +126,4 @@ To upgrade to a specific chart version you can use `--version <desired version>`
 ```
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
 ```
-Make sure you have followed the [upgrade instructions](https://posthog.com/docs/self-host/configure/upgrading-posthog) for your platform (specifically major upgrade notes as needed).
+Make sure you have followed the [upgrade instructions](https://posthog.com/docs/runbook/upgrading-posthog) for your platform (specifically major upgrade notes as needed).

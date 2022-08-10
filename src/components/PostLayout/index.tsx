@@ -463,7 +463,7 @@ export default function PostLayout({
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
+        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
     } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (

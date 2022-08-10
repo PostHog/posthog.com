@@ -17,7 +17,7 @@ We did a bunch of interviews with users and had a lot of discussions with the co
 
 The result is a release with new features and a ton of bug fixes, aimed at making PostHog better, faster, and more secure for our users. 
 
-If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 ## Release Notes
 

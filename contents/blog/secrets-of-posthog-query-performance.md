@@ -1,14 +1,14 @@
 ---
-date: "2022-03-22"
-title: "The secrets of PostHog query performance"
+date: '2022-03-22'
+title: 'The secrets of PostHog query performance'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/lw-queries.png
 featuredImageType: full
-categories: ["Engineering", "Product updates", "Launch week"]
-author: ["karl-aksel-puulmann"]
+categories: ['Engineering', 'Product updates', 'Launch week']
+author: ['karl-aksel-puulmann']
 ---
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.
@@ -159,9 +159,9 @@ As mentioned, PostHog can be self-hosted by our users. However, getting it worki
 
 Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect performance for self-hosted users are:
 
-- Ability to use an [external ClickHouse provider](/docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](/marketplace/altinity).
-- Support for ClickHouse sharding and replication [in our helm chart](/docs/self-host/runbook/clickhouse/sharding-and-replication). This allows leveraging more machines for faster queries.
-- (Expected in 1.35.0) Upgrading to ClickHouse 21.11: ClickHouse is changing rapidly and each new release is bringing in new performance improvements.
+-   Ability to use an [external ClickHouse provider](/docs/self-host/configure/using-altinity-cloud). We’ve [partnered with Altinity to help support larger installations](/marketplace/altinity).
+-   Support for ClickHouse sharding and replication [in our helm chart](/docs/runbook/services/clickhouse/sharding-and-replication). This allows leveraging more machines for faster queries.
+-   (Expected in 1.35.0) Upgrading to ClickHouse 21.11: ClickHouse is changing rapidly and each new release is bringing in new performance improvements.
 
 ## What’s next?
 
@@ -169,11 +169,10 @@ Performance work is never complete and PostHog has a lot of work ahead of us to 
 
 Some projects currently in the pipeline are:
 
-- **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. More information about our plans can be found [in this PR](https://github.com/PostHog/meta/pull/39/files#diff-4ba257e4b25986d35b3f05a142677c187a7b082284dfb66d5fd74d759c52d618).
-- **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
-- **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
+-   **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. More information about our plans can be found [in this PR](https://github.com/PostHog/meta/pull/39/files#diff-4ba257e4b25986d35b3f05a142677c187a7b082284dfb66d5fd74d759c52d618).
+-   **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
+-   **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
 
 > Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join our [community Slack](/slack).
-> 
 
 <ArrayCTA />

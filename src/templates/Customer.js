@@ -79,13 +79,15 @@ export default function Customer({ data }) {
                             <Tags title="Tools used" tags={toolsUsed} />
                         </ul>
                     </aside>
-                    <section className="article-content customer-content">
-                        <h1 className="text-3xl">{title}</h1>
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                    <div>
+                        <section className="article-content customer-content">
+                            <h1 className="text-5xl leading-tight">{title}</h1>
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </section>
                         <FooterCTA />
-                    </section>
+                    </div>
                 </div>
             </Layout>
         </>
