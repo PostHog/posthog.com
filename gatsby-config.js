@@ -144,8 +144,8 @@ module.exports = {
                 name: 'gatsby-starter-markdown',
                 short_name: 'starter',
                 start_url: '/',
-                background_color: '#f96132',
-                theme_color: '#f96132',
+                background_color: '#EEEFE9',
+                theme_color: '#D0D1C9',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
             },
