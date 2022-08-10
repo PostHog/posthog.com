@@ -1191,21 +1191,10 @@
 [build]
     command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
 
-# Added: 2022-02-03
-[[redirects]]
-    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-
 # Added: 2022-02-04
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
-# Added: 2022-02-14
-[[redirects]]
-    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-
 
 # Added: 2022-02-14
 [[redirects]]
@@ -1214,7 +1203,7 @@
 
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations/overview"
-    to = "/docs/self-host/configure/async-migrations"
+    to = "/docs/runbook/async-migrations"
 
 # Added: 2022-02-17
 [[redirects]]
@@ -1867,7 +1856,7 @@
 # Added: 2022-08-02
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/runbook/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
 
 
 # Added: 2022-08-02
@@ -2035,6 +2024,10 @@
     from = "/docs/self-host/migrate/migrate-from-amplitude"
     to = "/docs/migrate/migrate-from-amplitude"
 
+# Added: 2022-02-03
+[[redirects]]
+    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
+    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
 
 # Added: 2022-08-08
 [[redirects]]
