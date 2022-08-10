@@ -2033,3 +2033,28 @@
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
     to = "/docs/migrate/migrate-to-another-self-hosted-instance"
+
+# Added: 2022-08-10
+[[redirects]]
+    from = "/plugins/customer.io"
+    to = "/apps/customer-io"
+
+[[redirects]]
+    from = "/plugins/hubspot"
+    to = "/apps/hubspot-connector"
+
+[[redirects]]
+    from = "/plugins/pub/sub-export"
+    to = "/apps/google-pub-sub-connector"
+
+[[redirects]]
+    from = "/plugins/sendgrid"
+    to = "/apps/sendgrid-connector"
+
+[[redirects]]
+    from = "/plugins/geoip"
+    to = "/apps/apps/geoip-enrichment"
+
+[[redirects]]
+    from = "/plugins/event-sequence-timer-plugin"
+    to = "/apps/event-sequence-timer"
