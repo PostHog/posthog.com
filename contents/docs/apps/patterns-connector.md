@@ -10,7 +10,7 @@ topics:
 
 ### What does the Patterns Connector do?
 
-This Airbyte Export app sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if this app will copy only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.
+The Patterns Connector enables you to send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models. 
 
 ###### What are the requirements for this app?
 
