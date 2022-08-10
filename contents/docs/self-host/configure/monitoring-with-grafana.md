@@ -63,7 +63,7 @@ For more information on configuring and using Grafana, check out the [official d
 ## Setting up service-specific monitoring
 
 While the basic cluster-overview monitoring is useful for monitoring overall cluster health, there is still a lot of important information about each service within PostHog that isn't available.
-To fix this, PostHog includes a number of connectors for Prometheus that allow us to stream metrics from specific services into their own separate dashboard.
+To fix this, PostHog includes a number of exporters for Prometheus that allow us to stream metrics from specific services into their own separate dashboard.
 
 For more information on the configuration values for each service, check out [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for the full list of configuration options.
 
