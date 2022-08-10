@@ -378,7 +378,7 @@ Feature Flags are at the core what makes PostHog a great tool for product-lead b
 
 Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
-Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](product/feature-flags) and product analytics together gives developers a complete toolset.
+Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](/product/feature-flags) and product analytics together gives developers a complete toolset.
 
 ### Automatic event tracking
 

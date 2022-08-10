@@ -14,7 +14,7 @@ excerpt: PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysi
 Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/runbook/migrate/migrate-to-another-self-hosted-instance" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/migrate/migrate-to-another-self-hosted-instance" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.31.0 release notes
@@ -86,7 +86,7 @@ The sidebar has been made more graceful: it adjusts to the screen size in a smar
 
 ### Deprecation & removal notices
 
-1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/runbook/migrate/migrate-to-another-self-hosted-instance) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-to-another-self-hosted-instance) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're [deprecating the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
 
 ### Talk to us about how we can improve
