@@ -111,10 +111,10 @@ export const DocsIndex: React.FC = () => {
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <div className="space-y-16 lg:space-y-24 lg:-mt-12">
                     <section>
-                        <div className="flex justify-start relative pb-12 md:py-12 lg:py-20 items-center -mx-px">
+                        <div className="flex justify-start relative pb-12 md:pt-12 md:pb-20 lg:pt-16 lg:pb-32 items-center -mx-px">
                             <div className="w-full z-20">
-                                <h1 className="font-bold mb-2">Documentation</h1>
-                                <h5 className="text-opacity-60 font-semibold">
+                                <h1 className="font-bold text-5xl mb-2">Documentation</h1>
+                                <h5 className="opacity-60 font-semibold leading-tight">
                                     In-depth tutorials, references, and <br className="hidden md:block 2xl:hidden" />
                                     examples for everything PostHog
                                 </h5>
@@ -162,7 +162,7 @@ export const DocsIndex: React.FC = () => {
                                         name="docs-search"
                                         placeholder="Search documentation..."
                                         autoFocus={true}
-                                        className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg"
+                                        className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
                                     />
 
                                     <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">
@@ -182,7 +182,7 @@ export const DocsIndex: React.FC = () => {
                                 </span>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-8">
                             {quickLinks.map((link) => {
                                 return (
                                     <Link
