@@ -72,7 +72,7 @@ For more information on the configuration values for each service, check out [AL
 For streaming information from Kafka, we use the [prometheus-community/prometheus-kafka-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-kafka-exporter) chart, which can be installed by setting `prometheus-kafka-exporter.enabled` to `true` in your `values.yaml` file.
 If you are using an external Kafka service, you can use the `prometheus-kafka-exporter.kafkaServer` option to set the location for your managed service.
 
-### Postgres monitoring
+### PostgreSQL monitoring
 
 For streaming information from Postgres, we use the [prometheus-community/prometheus-postgres-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter) chart, which can be installed by setting `prometheus-postgres-exporter.enabled` to `true` in your `values.yaml` file.
 If you are using an external Postgres deployment, you can use the `prometheus-postgres-exporter.config.datasource` option to set the location for your managed service.
