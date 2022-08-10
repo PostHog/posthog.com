@@ -2,23 +2,23 @@
 title: Monitoring with Grafana
 ---
 
-This guide covers how to configure monitoring of your self-hosted PostHog instance through Grafana.
+This guide covers how to configure monitoring of your self-hosted deployment through Grafana.
 If you are targeting a production use-case, we _highly_ recommend setting up all of these options.
 
 ## Getting started
 
-By default, the PostHog Helm chart does not come with Grafana enabled, so we will need to update our config values in order to enable it.
+By default, the PostHog Helm chart does not come with Grafana enabled, so we will need to update our config values in order to install it.
 
 > **Note: ** This guide requires you to be running a Helm chart version of at least `26.0.6`. If you are running an older version, take a look at our guide on [how to upgrade PostHog](/docs/runbook/upgrading-posthog)
 
 ## Setting up cluster monitoring
 
-This section covers setting up basic monitoring for the entire Kubernetes cluster, and provides basic metrics such as CPU & memory usage, disk IOs, as well as pod health.
+This section covers setting up basic monitoring for the entire Kubernetes cluster, and provides basic metrics such as CPU usage, memory usage, and disk IOs.
 
 To set up basic monitoring, we will need to enable the following two charts:
 
-- [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
-- [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
+-   [grafana/grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
+-   [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
 
 which can be done by adding the following lines to our `values.yaml`
 
@@ -31,7 +31,7 @@ prometheus:
         enabled: true
 ```
 
-Next, we'll need to update our deployment to spin-up the additional services, which can be done using the following command:
+Next, we'll need to upgrade our deployment to spin-up the additional services, which can be done using the following command:
 
 ```
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
@@ -40,8 +40,7 @@ helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/po
 ### Connecting to Grafana
 
 Once our deployment is back up and running, we can now log in to Grafana to see our dashboards.
-The default settings provide a vanilla installation with an auto generated login.
-The username is `admin` and the auto-generated password can be fetched by running:
+By default, a single user is created with the username `admin` and an auto-generated password can be fetched by running:
 
 ```
 kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
@@ -53,20 +52,18 @@ Next, we'll connect to Grafana by port-forwarding into the `posthog-grafana` ser
 kubectl -n posthog port-forward svc/posthog-grafana 8080:80
 ```
 
-Our Grafana dashboard is now available at `localhost:8080`, which we can log in to using the password we just retrieved.
+Our Grafana dashboard should now be available at `localhost:8080`, and we can log in using the username `admin` along with the password we just retrieved.
 
 ![basic cluster overview dashboard](../../../images/docs/self-host/configure/monitoring-with-grafana/overview.png)
 
-If we go to the list of Dashboards and navigate to PostHog > Kubernetes (cluster overview), you should see a pre-configured dashboard with a number of metrics related to our cluster!
+Finally, if we now go to the list of Dashboards and navigate to PostHog > Kubernetes (cluster overview), you should see a pre-configured dashboard with a number of metrics related to our cluster!
 
 For more information on configuring and using Grafana, check out the [official docs](https://grafana.com/docs/grafana/latest/getting-started/)
 
 ## Setting up service-specific monitoring
 
-While the basic cluster-overview monitoring is useful for monitoring overall cluster health, the nature of PostHog being broken-up into a number of services means that a lot of important information is still not available.
+While the basic cluster-overview monitoring is useful for monitoring overall cluster health, there is still a lot of important information about each service within PostHog that isn't available.
 To fix this, PostHog includes a number of connectors for Prometheus that allow us to stream metrics from specific services into their own separate dashboard.
-
-As mentioned above, you will need to re-deploy your chart with these new configuration values for these changes to go into effect.
 
 For more information on the configuration values for each service, check out [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for the full list of configuration options.
 
@@ -100,8 +97,8 @@ This step requires that you already have Grafana set-up, which you can do by fol
 
 To set this up, we will need to enable the following two charts:
 
-- [grafana/loki](https://github.com/grafana/helm-charts/tree/main/charts/loki)
-- [grafana/promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail)
+-   [grafana/loki](https://github.com/grafana/helm-charts/tree/main/charts/loki)
+-   [grafana/promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail)
 
 which can be done by adding the following values to your configuration:
 
