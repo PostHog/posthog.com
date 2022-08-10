@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "People & Ops",
+            "name": "People & ops",
             "url": "",
             "children": [
                 {
@@ -202,8 +202,8 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Product Manager Ramp Up",
-                            "url": "/handbook/people/rampup/product-manager.md"
+                            "name": "Product Manager ramp up",
+                            "url": "/handbook/people/ramp-up/product-manager"
                         }
                     ]
                 },
