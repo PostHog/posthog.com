@@ -152,9 +152,27 @@ h4 {
         @apply rounded w-full;
     }
 
+    thead {
+        text-align: left;
+    }
+    td,
+    th {
+        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b text-left pt-2;
+        padding-bottom: calc(0.5rem - 1px);
+
+        &:not(:first-child) {
+            @apply pl-8;
+        }
+    }
+
+    th:last-child,
+    td:last-child {
+        padding-right: 0;
+    }
+
     /* expandable/collapsible sections */
     details {
-        @apply p-2 cursor-pointer text-lg border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+        @apply p-2 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
 
         > summary {
             @apply text-red list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
