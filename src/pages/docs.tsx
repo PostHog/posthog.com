@@ -13,7 +13,7 @@ const quickLinks = [
     {
         icon: 'selfHost',
         name: 'Deploy',
-        to: '/docs/deploy',
+        to: '/docs/self-host',
         description: 'Detailed information on getting PostHog running.',
     },
     {

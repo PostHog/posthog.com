@@ -5,7 +5,7 @@ import { SEO } from 'components/seo'
 function Slack() {
     /* This component will redirect the user to the Slack users group. */
     const [source, setSource] = useState<string | null>(null)
-    const slackUrl = 'https://join.slack.com/t/posthogusers/shared_invite/zt-1chf8vjjr-uyu88Xvsu1cSEi3ILFqSqw'
+    const slackUrl = 'https://join.slack.com/t/posthogusers/shared_invite/zt-1dz36uco2-0aeU3ESyIML2oCr7kpPkNg'
 
     useEffect(() => {
         const s = new URLSearchParams(window.location.search).get('s')

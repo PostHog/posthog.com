@@ -126,4 +126,4 @@ To upgrade to a specific chart version you can use `--version <desired version>`
 ```
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
 ```
-Make sure you have followed the [upgrade instructions](https://posthog.com/docs/self-host/configure/upgrading-posthog) for your platform (specifically major upgrade notes as needed).
+Make sure you have followed the [upgrade instructions](https://posthog.com/docs/runbook/upgrading-posthog) for your platform (specifically major upgrade notes as needed).

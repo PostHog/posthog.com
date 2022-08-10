@@ -4,13 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
+import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requirements'
 
 <ResizeDiskRequirementsSnippet/>
 
 #### How-to
 
 1. Connect to the Postgresql container to verify the data directory filesystem size (in this example 10GB)
+
     ```shell
     kubectl -n posthog exec -it posthog-posthog-postgresql-0 -- /bin/bash
     I have no name!@posthog-posthog-postgresql-0:/$ df -h /bitnami/postgresql
@@ -19,6 +20,7 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
     ```
 
 1. Resize the underlying PVC (in this example we are resizing it to to 20G)
+
     ```shell
     kubectl -n posthog patch pvc data-posthog-posthog-postgresql-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
     persistentvolumeclaim/data-posthog-posthog-postgresql-0 patched

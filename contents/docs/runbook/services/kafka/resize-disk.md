@@ -3,13 +3,15 @@ title: Resize disk
 sidebar: Docs
 showTitle: true
 ---
-import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
+
+import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requirements'
 
 <ResizeDiskRequirementsSnippet/>
 
 #### How-to
 
 1. List your pods
+
     ```shell
     kubectl get pods -n posthog
     NAME                          READY   STATUS    RESTARTS   AGE
@@ -17,6 +19,7 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
     ```
 
 1. Connect to the Kafka container to verify the data directory filesystem size (in this example 15GB)
+
     ```shell
     kubectl -n posthog exec -it posthog-posthog-kafka-0 -- /bin/bash
     posthog-posthog-kafka-0:/$ df -h /bitnami/kafka
@@ -25,6 +28,7 @@ import ResizeDiskRequirementsSnippet from '../snippets/resize-disk-requirements'
     ```
 
 1. Resize the underlying PVC (in this example we are resizing it to to 20G)
+
     ```shell
     kubectl -n posthog patch pvc data-posthog-posthog-kafka-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
     persistentvolumeclaim/data-posthog-posthog-kafka-0 patched
