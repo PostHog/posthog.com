@@ -2058,3 +2058,9 @@
 [[redirects]]
     from = "/plugins/event-sequence-timer-plugin"
     to = "/apps/event-sequence-timer"
+
+
+# Added: 2022-08-10
+[[redirects]]
+    from = "/handbook/product/pm-rampup"
+    to = "/handbook/people/ramp-up/product-manager"
