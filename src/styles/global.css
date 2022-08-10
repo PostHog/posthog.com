@@ -101,6 +101,10 @@ h4 {
         letter-spacing: -0.015em;
     }
 
+    h2 + h3 {
+        @apply mt-4;
+    }
+
     p,
     li {
         @apply text-base leading-7;
@@ -133,6 +137,17 @@ h4 {
 
     p {
         @apply mb-4;
+
+        & + ul,
+        & + ol {
+            @apply -mt-2;
+        }
+
+        & + h2,
+        & + h3,
+        & + h4 {
+            @apply mt-4;
+        }
     }
 
     ul,
@@ -172,7 +187,7 @@ h4 {
 
     /* expandable/collapsible sections */
     details {
-        @apply p-2 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+        @apply p-2 pl-4 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
 
         > summary {
             @apply text-red list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];

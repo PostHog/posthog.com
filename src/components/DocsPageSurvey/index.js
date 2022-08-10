@@ -17,14 +17,18 @@ const button = cntl`
     justify-between
     px-4
     py-2
-    bg-white
     rounded-sm
     shadow-sm 
+    bg-white
     text-black/70 
     hover:text-black/95 
+    dark:bg-white/30
+    dark:text-white/90
+    dark:hover:bg-white/40
+    dark:hover:text-white/100
     relative
     active:top-[1px] 
-    active:scale-[.97] 
+    active:scale-[.98] 
     transition-none 
     transition-colors
 `
