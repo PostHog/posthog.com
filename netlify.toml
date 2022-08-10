@@ -1201,10 +1201,6 @@
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
 
-[[redirects]]
-    from = "/docs/self-host/configure/async-migrations/overview"
-    to = "/docs/runbook/async-migrations"
-
 # Added: 2022-02-17
 [[redirects]]
     from = "/docs/privacy/overview"
@@ -1810,6 +1806,10 @@
 [[redirects]]
     from = "/handbook/engineering/app-west"
     to = "/handbook/people/team-structure/app-west"
+
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations"
+    to = "/docs/runbook/async-migrations"
 
 # Added: 2022-08-02
 [[redirects]]

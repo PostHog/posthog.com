@@ -638,6 +638,10 @@
                                     "url": "/docs/runbook/async-migrations"
                                 },
                                 {
+                                    "name": "0001-events-sample-by",
+                                    "url": "/docs/runbook/async-migrations/0001-events-sample-by"
+                                },
+                                {
                                     "name": "0002_events_sample_by",
                                     "url": "/docs/runbook/async-migrations/0002-events-sample-by"
                                 },
