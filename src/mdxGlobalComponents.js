@@ -90,6 +90,7 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
@@ -206,6 +207,7 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     RocketHorizontalRule,
+    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,

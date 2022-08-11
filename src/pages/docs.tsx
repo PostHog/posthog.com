@@ -1,15 +1,13 @@
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
 import DeployOption from 'components/DeployOption'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
-import { DocSearchModal } from '@docsearch/react'
-import { createPortal } from 'react-dom'
 import PostLayout from 'components/PostLayout'
 import { docs } from '../sidebars/sidebars.json'
+import SearchBox from 'components/SearchBox'
 
 const quickLinks = [
     {
@@ -93,17 +91,6 @@ const featureLinks = [
 ]
 
 export const DocsIndex: React.FC = () => {
-    const [query, setQuery] = React.useState<string>('')
-    const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
-
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault()
-
-        if (query.trim()) {
-            setSearchOpen(true)
-        }
-    }
-
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
@@ -114,61 +101,12 @@ export const DocsIndex: React.FC = () => {
                         <div className="flex justify-start relative pb-12 md:pt-12 md:pb-20 lg:pt-16 lg:pb-32 items-center -mx-px">
                             <div className="w-full z-20">
                                 <h1 className="font-bold text-5xl mb-2">Documentation</h1>
-                                <h5 className="opacity-60 font-semibold leading-tight">
+                                <h5 className="opacity-60 font-semibold leading-tight mb-8">
                                     In-depth tutorials, references, and <br className="hidden md:block 2xl:hidden" />
                                     examples for everything PostHog
                                 </h5>
 
-                                {searchOpen &&
-                                    createPortal(
-                                        <DocSearchModal
-                                            initialScrollY={window.scrollY}
-                                            appId="B763I3AO0D"
-                                            indexName="posthog"
-                                            apiKey="f1386529b9fafc5c3467e0380f19de4b"
-                                            initialQuery={query}
-                                            onClose={() => setSearchOpen(false)}
-                                        />,
-                                        document.body
-                                    )}
-
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className="flex items-center relative mb-0 mt-8 w-full max-w-lg"
-                                >
-                                    <div className="absolute left-4 w-4 h-4">
-                                        <svg
-                                            className="opacity-50"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 18 18"
-                                        >
-                                            <g opacity="1" clipPath="url(#a)">
-                                                <path
-                                                    d="m18 15.964-4.794-4.793A7.2 7.2 0 1 0 .001 7.2a7.2 7.2 0 0 0 11.17 6.006L15.963 18 18 15.964ZM2.04 7.2A5.16 5.16 0 0 1 7.2 2.043 5.16 5.16 0 1 1 2.04 7.2Z"
-                                                    fill="#90794B"
-                                                />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="a">
-                                                    <path fill="#fff" d="M0 0h18v18H0z" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </div>
-                                    <input
-                                        onChange={(e) => setQuery(e.target.value)}
-                                        value={query}
-                                        name="docs-search"
-                                        placeholder="Search documentation..."
-                                        autoFocus={true}
-                                        className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
-                                    />
-
-                                    <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">
-                                        Search
-                                    </button>
-                                </form>
+                                <SearchBox />
                             </div>
 
                             <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">

@@ -4,13 +4,18 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { docs } from '../sidebars/sidebars.json'
+import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import SearchBox from 'components/SearchBox'
+// import Modal from 'components/Modal'
 
 const categories: {
     name: string
     manuals: {
         name: string
         url: string
+        category: string
         description: string
         icon: typeof ProductIcons[keyof typeof ProductIcons]
     }[]
@@ -21,54 +26,63 @@ const categories: {
             {
                 name: 'Insights',
                 url: '/manuals/insights',
+                category: 'insights',
                 description: 'Visualize your events and actions',
                 icon: ProductIcons.analytics,
             },
             {
                 name: 'Group analytics',
                 url: '/manuals/group-analytics',
+                category: 'group analytics',
                 description: 'Track and analyze objects other than users',
                 icon: ProductIcons.groupAnalytics,
             },
             {
                 name: 'Graphs & trends',
                 url: '/manuals/trends',
+                category: 'trends',
                 description: 'Plot data from people, events, and properties',
                 icon: ProductIcons.trends,
             },
             {
                 name: 'Dashboards',
                 url: '/manuals/dashboards',
+                category: 'dashboards',
                 description: 'Group and track important metrics',
                 icon: ProductIcons.dashboards,
             },
             {
                 name: 'Funnels',
                 url: '/manuals/funnels',
-                description: 'inspect the journey of a user through your app',
+                category: 'funnels',
+                description: 'Inspect the journey of a user through your app',
                 icon: ProductIcons.funnels,
             },
             {
                 name: 'Lifecycle',
                 url: '/manuals/lifecycle',
+                category: 'lifecycle',
                 description: 'Understand when users drop-off',
                 icon: ProductIcons.lifecycle,
             },
             {
                 name: 'Path analysis',
                 url: '/manuals/paths',
+                category: 'paths',
                 description: 'Inspect how users journey through your product',
                 icon: ProductIcons.pathAnalysis,
             },
             {
                 name: 'Stickiness',
                 url: '/manuals/stickiness',
+                category: 'stickiness',
                 description: 'See your most engaged users',
                 icon: ProductIcons.stickiness,
             },
             {
                 name: 'Retention',
                 url: '/manuals/retenion',
+                category: 'retention',
                 description: 'Track how many of your users return',
                 icon: ProductIcons.retention,
             },
@@ -80,12 +94,14 @@ const categories: {
             {
                 name: 'Session recording',
                 url: '/manuals/recordings',
+                category: 'session recording',
                 description: 'Playback sessions from your users',
                 icon: ProductIcons.sessionRecording,
             },
             {
                 name: 'Heatmaps',
                 url: '/manuals/heatmaps',
+                category: 'heatmaps',
                 description: 'Find the most popular areas within your app',
                 icon: ProductIcons.heatmaps,
             },
@@ -97,18 +113,21 @@ const categories: {
             {
                 name: 'Feature flags',
                 url: '/manuals/feature-flags',
+                category: 'feature flags',
                 description: 'Safely deploy and rollback new features',
                 icon: ProductIcons.featureFlags,
             },
             {
                 name: 'Experimentation',
                 url: '/manuals/experimentation',
+                category: 'experimentation',
                 description: 'A/B test new changes to your product',
                 icon: ProductIcons.experiments,
             },
             {
                 name: 'Correlation analysis',
                 url: '/manuals/correlation',
+                category: 'correlation analysis',
                 description: 'Automatically highlight factors that affect conversion',
                 icon: ProductIcons.correlationAnalysis,
             },
@@ -120,48 +139,56 @@ const categories: {
             {
                 name: 'Actions',
                 url: '/manuals/actions',
+                category: 'actions',
                 description: 'Combine multiple events into one',
                 icon: ProductIcons.actions,
             },
             {
                 name: 'Annotations',
                 url: '/manuals/annotations',
+                category: 'annotations',
                 description: 'Leave notes on your charts for significant events and releases',
                 icon: ProductIcons.annotations,
             },
             {
                 name: 'Cohorts',
                 url: '/manuals/cohorts',
+                category: 'cohorts',
                 description: 'Create a list of users who have something in common',
                 icon: ProductIcons.cohorts,
             },
             {
                 name: 'Events',
                 url: '/manuals/events',
+                category: 'events',
                 description: 'An events is any action a users takes in your product',
                 icon: ProductIcons.events,
             },
             {
                 name: 'Data management',
                 url: '/manuals/data-management',
+                category: 'data management',
                 description: 'Keep events and properties organized',
                 icon: ProductIcons.dataManagement,
             },
             {
                 name: 'Persons',
                 url: '/manuals/persons',
+                category: 'persons',
                 description: 'Track and segment individual users',
                 icon: ProductIcons.persons,
             },
             {
                 name: 'Sessions',
                 url: '/manuals/sessions',
+                category: 'sessions',
                 description: 'View all events a user performed across their visit',
                 icon: ProductIcons.sessions,
             },
             {
                 name: 'UTM segmentation',
                 url: '/manuals/utm-segmentation',
+                category: 'utm segmentation',
                 description: 'Track the effectiveness of campaigns',
                 icon: ProductIcons.utm,
             },
@@ -173,36 +200,42 @@ const categories: {
             {
                 name: 'Team collaboration',
                 url: '/manuals/organizations-and-projects',
+                category: 'team collaboration',
                 description: 'Manage users within your organization',
                 icon: ProductIcons.teamCollaboration,
             },
             {
                 name: 'SSO (SAML)',
                 url: '/manuals/sso',
+                category: 'sso',
                 description: 'One-click login with single sign-on (SSO)',
                 icon: ProductIcons.sso,
             },
             {
                 name: 'Organizations and projects',
                 url: '/manuals/organizations-and-projects',
+                category: 'organizations and projects',
                 description: 'Organize your data and control access',
                 icon: ProductIcons.projects,
             },
             {
                 name: 'Settings',
                 url: '/manuals/settings',
+                category: 'settings',
                 description: 'Organization controls, billing, and project configuration',
                 icon: ProductIcons.settings,
             },
             {
                 name: 'Toolbar',
                 url: '/manuals/toolbar',
+                category: 'toolbar',
                 description: "Like 'Inspect Element' but for user behavior",
                 icon: ProductIcons.toolbar,
             },
             {
                 name: 'Notifications and alerts',
                 url: '/manuals/subscriptions',
+                category: 'notifications and alerts',
                 description: 'Receive updates from your insights an dashboards',
                 icon: ProductIcons.notifications,
             },
@@ -210,17 +243,36 @@ const categories: {
     },
 ]
 
-export const UsingPostHog: React.FC = () => {
+export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
+    const { tutorials, featuredTutorials } = data
+
+    const tutorialsByCategory = tutorials.group.reduce((acc, curr) => {
+        return {
+            ...acc,
+            [curr.category]: curr.nodes,
+        }
+    }, {})
+
+    // const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
+
     return (
         <Layout>
             <SEO title="Using PostHog - PostHog" />
 
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <section className="px-1">
-                    <h1>Using PostHog</h1>
+                    <h1 className="text-5xl">Using PostHog</h1>
                     <p className="max-w-2xl">
                         This section covers everything you need to know about using PostHog. If you're looking for help
                         tracking events or deploying a self-host version of PostHog, <a href="/docs">visit the docs</a>
+                    </p>
+
+                    <div className="my-4">
+                        <SearchBox />
+                    </div>
+
+                    <p>
+                        If you don't find the answer you're looking for, <a href="/questions">ask a question here</a>.
                     </p>
                 </section>
 
@@ -229,20 +281,37 @@ export const UsingPostHog: React.FC = () => {
                     {categories.map((category) => {
                         return (
                             <div key={category.name}>
-                                <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold">
+                                <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
                                     {category.name}
                                 </h4>
-                                <ul className="grid grid-cols-2 px-1">
+                                <ul className="grid grid-cols-2 px-1 my-6">
                                     {category.manuals.map((manual) => {
+                                        // const tutorials = tutorialsByCategory[manual.category]
+
                                         return (
-                                            <li key={manual.name} className="flex items-start space-x-3">
-                                                <span className="w-6 h-6 text-gray">{manual.icon}</span>
-                                                <div>
-                                                    <Link className="text-red font-semibold" to={manual.url}>
-                                                        {manual.name}
-                                                    </Link>
-                                                    <p>{manual.description}</p>
-                                                </div>
+                                            <li key={manual.name} className="list-none">
+                                                <Link
+                                                    className="flex items-start space-x-3 rounded relative hover:bg-gray-accent-light active:top-[0.5px] active:scale-[.98] px-3 py-4"
+                                                    to={manual.url}
+                                                >
+                                                    <span className="w-6 h-6 text-gray">{manual.icon}</span>
+                                                    <div className="space-y-1">
+                                                        <span className="text-red font-semibold">{manual.name}</span>
+                                                        <p className="text-gray m-0 font-normal text-sm">
+                                                            {manual.description}
+                                                        </p>
+
+                                                        {/*{tutorialsByCategory[manual.category] ? (
+                                                            <button
+                                                                onClick={() => setCurrentModal(manual.category)}
+                                                                className="bg-gray-accent-light rounded-md text-sm px-2 py-1 text-gray font-medium z-10"
+                                                            >
+                                                                {tutorials.length}{' '}
+                                                                {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
+                                                            </button>
+                                                        ) : null}*/}
+                                                    </div>
+                                                </Link>
                                             </li>
                                         )
                                     })}
@@ -251,9 +320,72 @@ export const UsingPostHog: React.FC = () => {
                         )
                     })}
                 </section>
+
+                <section>
+                    <h3 className="px-1 font-bold">Featured tutorials</h3>
+                    <p>Here's where we highlight interesting things you can do with PostHog</p>
+                    <Link
+                        to="/tutorials"
+                        className="bg-white rounded border border-gray-accent-light px-8 py-3 text-gray font-semibold relative active:top-[0.5px] active:scale-[.98]"
+                    >
+                        Browse tutorials
+                    </Link>
+
+                    <div className="grid grid-cols-2 gap-x-12 gap-y-4 mt-8 max-w-2xl">
+                        {featuredTutorials.nodes.map((tutorial) => {
+                            return (
+                                <Link key={tutorial.id} to={tutorial.fields.slug}>
+                                    <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </section>
             </PostLayout>
         </Layout>
     )
 }
+
+export const query = graphql`
+    {
+        tutorials: allMdx(filter: { slug: { glob: "tutorials/*" } }) {
+            group(field: frontmatter___topics) {
+                category: fieldValue
+                nodes {
+                    frontmatter {
+                        title
+                    }
+                    slug
+                }
+            }
+        }
+        featuredTutorials: allMdx(
+            filter: {
+                slug: {
+                    in: [
+                        "tutorials/cookieless-tracking"
+                        "tutorials/survey"
+                        "tutorials/experiments"
+                        "tutorials/how-to-embed-shared-dashboard"
+                    ]
+                }
+            }
+        ) {
+            nodes {
+                id
+                fields {
+                    slug
+                }
+                frontmatter {
+                    featuredImage {
+                        childImageSharp {
+                            gatsbyImageData(placeholder: NONE)
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
 
 export default UsingPostHog
