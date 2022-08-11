@@ -289,7 +289,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                     </h4>
                                     <ul className="grid grid-cols-2 px-1 my-6">
                                         {category.manuals.map((manual) => {
-                                            // const tutorials = tutorialsByCategory[manual.category]
+                                            const tutorials = tutorialsByCategory[manual.category]
 
                                             return (
                                                 <li key={manual.name} className="list-none">
@@ -306,15 +306,18 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                                 {manual.description}
                                                             </p>
 
-                                                            {/*{tutorialsByCategory[manual.category] ? (
-                                                            <button
-                                                                onClick={() => setCurrentModal(manual.category)}
-                                                                className="bg-gray-accent-light rounded-md text-sm px-2 py-1 text-gray font-medium z-10"
-                                                            >
-                                                                {tutorials.length}{' '}
-                                                                {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
-                                                            </button>
-                                                        ) : null}*/}
+                                                            {tutorialsByCategory[manual.category] ? (
+                                                                <Link
+                                                                    to={
+                                                                        '/tutorials/categories/' +
+                                                                        slugify(manual.category)
+                                                                    }
+                                                                    className="inline-block bg-gray-accent-light rounded-md text-sm px-2 py-1 text-gray font-medium z-10"
+                                                                >
+                                                                    {tutorials.length}{' '}
+                                                                    {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
+                                                                </Link>
+                                                            ) : null}
                                                         </div>
                                                     </Link>
                                                 </li>

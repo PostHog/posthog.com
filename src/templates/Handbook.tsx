@@ -24,7 +24,7 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
 
-export const HandbookSidebar = ({ contributors, title, location }) => {
+export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
         <>
             {contributors && (
@@ -42,13 +42,23 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
+
+            {related && (
+                <SidebarSection title="Related Articles">
+                    {related.map(({ childMdx }) => (
+                        <Link key={childMdx.fields.slug} to={childMdx.fields.slug} className="text-base">
+                            {childMdx.frontmatter.title}
+                        </Link>
+                    ))}
+                </SidebarSection>
+            )}
         </>
     )
 }
 
 export default function Handbook({
     data: { post, countries, nextPost },
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
     const { hash } = useLocation()
@@ -59,7 +69,8 @@ export default function Handbook({
         contributors,
         fields: { slug },
     } = post
-    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail } = frontmatter
+    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
+        frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -134,7 +145,14 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
-                    sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
+                    sidebar={
+                        <HandbookSidebar
+                            contributors={contributors}
+                            title={title}
+                            location={location}
+                            related={related}
+                        />
+                    }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
@@ -233,6 +251,16 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE, width: 36)
+                    }
+                }
+                related {
+                    childMdx {
+                        fields {
+                            slug
+                        }
+                        frontmatter {
+                            title
+                        }
                     }
                 }
                 installUrl
