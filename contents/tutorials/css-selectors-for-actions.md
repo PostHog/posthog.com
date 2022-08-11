@@ -20,7 +20,7 @@ But first of all, what exactly is a **CSS selector**?
 
 ## Understanding CSS selectors
 
-[CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) is a set of user-defined rules allowing to select specific elements on a web page. For instance, the next snippet will match all `span` elements with a class `yellow` right inside a `div` element:
+[CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) is a set of user-defined rules which enable you to select specific elements on a web page. For instance, the next snippet will match all `span` elements with a class `yellow` right inside a `div` element:
 
 ```css
     div > span.yellow
