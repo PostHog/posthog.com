@@ -8,8 +8,8 @@ import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/SearchBox'
-import slugify from 'slugify'
-// import Modal from 'components/Modal'
+import { Close } from 'components/Icons/Icons'
+import Modal from 'components/Modal'
 
 const categories: {
     name: string
@@ -254,7 +254,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
         }
     }, {})
 
-    // const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
+    const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
 
     return (
         <Layout>
@@ -298,26 +298,26 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                         className="flex items-start space-x-3 rounded relative hover:bg-gray-accent-light active:top-[0.5px] active:scale-[.98] px-3 py-4"
                                                         to={manual.url}
                                                     >
-                                                        <span className="w-6 h-6 text-gray">{manual.icon}</span>
-                                                        <div className="space-y-1">
-                                                            <span className="text-red font-semibold">
-                                                                {manual.name}
-                                                            </span>
+                                                        <span className="w-6 h-6 text-gray shrink-0">
+                                                            {manual.icon}
+                                                        </span>
+                                                        <div>
+                                                            <span className="text-red font-bold">{manual.name}</span>
                                                             <p className="text-gray m-0 font-normal text-sm">
                                                                 {manual.description}
                                                             </p>
 
                                                             {tutorialsByCategory[manual.category] ? (
-                                                                <Link
-                                                                    to={
-                                                                        '/tutorials/categories/' +
-                                                                        slugify(manual.category)
-                                                                    }
-                                                                    className="inline-block bg-gray-accent-light rounded-md text-sm px-2 py-1 text-gray font-medium z-10"
+                                                                <button
+                                                                    onClick={(event) => {
+                                                                        event.preventDefault()
+                                                                        setCurrentModal(manual.category)
+                                                                    }}
+                                                                    className="relative mt-2 inline-block bg-black/10 rounded-md text-sm px-2 py-1 text-gray font-semibold z-50"
                                                                 >
                                                                     {tutorials.length}{' '}
                                                                     {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
-                                                                </Link>
+                                                                </button>
                                                             ) : null}
                                                         </div>
                                                     </Link>
@@ -330,8 +330,41 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         })}
                     </section>
 
-                    <section>
-                        <h3 className="px-1 font-bold">Featured tutorials</h3>
+                    <Modal open={currentModal !== undefined} setOpen={() => setCurrentModal(undefined)}>
+                        <div className="bg-white w-full max-w-md h-screen ml-auto relative z-10 flex flex-col overflow-hidden">
+                            <div className="flex items-center justify-between shrink-0 px-8 pt-8">
+                                <h2 className="text-xl m-0">Related tutorials</h2>
+                                <button onClick={() => setCurrentModal(undefined)}>
+                                    <Close className="w-4 h-4 text-gray" />
+                                </button>
+                            </div>
+
+                            <div className="w-full overflow-y-scroll mt-6 flex-grow">
+                                <ul className="list-none m-0 p-0 space-y-6 px-8">
+                                    {currentModal &&
+                                        tutorialsByCategory[currentModal].map((tutorial) => (
+                                            <li key={tutorial.fields.slug} className="bg-tan">
+                                                <Link to={tutorial.fields.slug}>
+                                                    <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
+                                                </Link>
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+
+                            <div className="py-4 px-8 shrink-0">
+                                <Link
+                                    to="/tutorials"
+                                    className="block border-2 border-gray-accent-light text-gray rounded py-2 w-full text-center relative active:top-[0.5px] active:scale-[.98]"
+                                >
+                                    Browse all tutorials
+                                </Link>
+                            </div>
+                        </div>
+                    </Modal>
+
+                    <section className="px-1">
+                        <h3 className="font-bold">Featured tutorials</h3>
                         <p>Here's where we highlight interesting things you can do with PostHog</p>
                         <Link
                             to="/tutorials"
@@ -364,8 +397,15 @@ export const query = graphql`
                 nodes {
                     frontmatter {
                         title
+                        featuredImage {
+                            childImageSharp {
+                                gatsbyImageData(placeholder: NONE)
+                            }
+                        }
                     }
-                    slug
+                    fields {
+                        slug
+                    }
                 }
             }
         }
