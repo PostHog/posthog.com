@@ -1465,7 +1465,7 @@
                     "url": "/manual/organizations-and-projects"
                 },
                 {
-                    "name": "Paths",
+                    "name": "Path analysis",
                     "url": "/manual/paths"
                 },
                 {
@@ -1505,8 +1505,8 @@
                     "url": "/manual/sessions"
                 },
                 {
-                    "name": "Subscriptions",
-                    "url": "/manual/subscriptions"
+                    "name": "Notifications and alerts",
+                    "url": "/manual/notifications-and-alerts"
                 },
                 {
                     "name": "UTM segmentation",
