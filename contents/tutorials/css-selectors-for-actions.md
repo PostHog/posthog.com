@@ -140,7 +140,7 @@ After your website is open, you should see a PostHog logo 🦔 floating around. 
 
 ![Toolbar In Action](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_in_action.png).
 
-The best option to start creating actions with CSS selectors is to use `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
+The best option to start creating actions with CSS selectors is to use the `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
 Alternatively, you can go to the `Actions` option in the toolbar, select `New action` and then press `Select Element`. You should get the `Actions` menu like a one below:
 
