@@ -14,7 +14,7 @@ PostHog supports different methods for creating [actions](/docs/user-guides/acti
 
 As the name suggests, [**autocapturing** is the easiest option](/blog/is-autocapture-still-bad), because users don't have to do anything - actions are identified and captured automatically. While this is really nice, the amount of events generated this way can sometimes be overwhelming for a targeted analysis.
 
-**Toolbar**, on the other hand, allows to visually select a specific UI element right on your webiste which later will be attributed as an action. Under the hood Toolbar generates a CSS selector matching the UI element. Toolbar is quite clever, but sometimes automatically generated selector can be too broad or, on the contrary, too narrow. This might be the right time to create a selector manually.
+The **toolbar**, on the other hand, enables you to visually select a specific UI element right on your website which will later be attributed as an action. Under the hood the toolbar generates a CSS selector matching the UI element. The toolbar is quite clever, but sometimes automatically generated selectors can be too broad or, on the contrary, too narrow. In these instances, you can create a selector manually.
 
 But first of all, what exactly is a **CSS selector**?
 
