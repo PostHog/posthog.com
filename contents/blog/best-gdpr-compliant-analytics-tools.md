@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Guides", "Privacy"]
 ---
 
-Since it came into law in 2018, the European Union's GDPR  has applied restrictions on how you can use tools like Google Analytics to track and collect user data.
+Since it came into law in 2018, the European Union's GDPR has applied restrictions on how you can use tools like Google Analytics to track and collect user data.
 
 In this guide, we'll cover:
 
@@ -51,11 +51,6 @@ GDPR-compliant analytics tools come in various guises, which you can define as g
 
 ## 1. [PostHog](https://posthog.com/product)
 
-- **Open Source:** <span className="text-green text-lg">✔</span>
-- **Self Hosting:** <span className="text-green text-lg">✔</span>
-- **EU Cloud Hosting:** Coming Q4 2022
-- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
-
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
@@ -86,58 +81,13 @@ PostHog is especially helpful for product teams that want to understand how user
 
 PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
 
-### Can you use PostHog without cookie banners?
-Yes. While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
+While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
 
-## 2. [Fathom](https://usefathom.com/)
+## 2. [Plausible](https://plausible.io/)
 
-![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
-
-Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
-
-While based in Canada, Fathom offers EU-hosting. It also employs what it calls intelligent routing. This ensures that non-EU users are routed via its US servers, while EU users are routed via its EU-based and owned servers. Fathom claims this means non-EU visitors get better performance compared to other, similar services that use EU-only hosting.
-
-<table>
-    <tr>
-        <td><strong>Open Source</strong></td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    </tr>
-    <tr>
-        <td><strong>Self Hosting</strong></td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    </tr>
-    <tr>
-        <td><strong>EU Cloud Hosting</strong></td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td><strong>Cookieless Tracking</strong></td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
-
-### Who is Fathom for?
-Fathom is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
-
-### Features & benefits
-- Fast and lightweight tracking script
-- No cookie banner required
-- EU isolation and intelligent routing
-- Email reports
-- Multi-domain tracking
-
-### Fathom and GDPR compliance
-
-As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no compromises.
-
-### Can you use Fathom without cookie consent banners?
-
-Yes, it's actually designed this way. Fathom is a cookie-less solution, so you don't need cookie banners when using it.
-
-## 3. [Plausible](https://plausible.io/)
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Plausible is an alternative to tools such as Google Analytics – it used to be open source, but has since gone closed core. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+Plausible is an alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -153,31 +103,43 @@ Plausible is an alternative to Google Analytics and is a good fit for small cont
 - No tracking across sessions, devices or sites
 
 ### Plausible and GDPR compliance
-Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR compliant analytics.
 
-### Can you use Plausible without cookie consent banners?
-Yes. Plausible is a cookie-less solution, so you don't need to acquire permission from users to comply with GDPR.
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-<table>
-    <tr>
-        <td><strong>Open Source</strong></td>
-        <td className="text-left"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td><strong>Self Hosting</strong></td>
-        <td className="text-left"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td><strong>EU Cloud Hosting</strong></td>
-        <td className="text-left"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td><strong>Cookieless Tracking</strong></td>
-        <td className="text-left"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
+Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR compliant analytics. It's doesn't collect any personal data, such as IP addresses, so you don't need to acquire permission from users to comply with GDPR.
+
+## 3. [Fathom](https://usefathom.com/)
+
+![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
+
+Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
+
+While based in Canada, Fathom offers EU-hosting. It also employs what it calls intelligent routing. This ensures that non-EU users are routed via its US servers, while EU users are routed via its EU-based and owned servers. Fathom claims this means non-EU visitors get better performance compared to other, similar services that use EU-only hosting.
+
+### Who is Fathom for?
+Fathom is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
+
+### Features & benefits
+- Fast and lightweight tracking script
+- No cookie banner required
+- EU isolation and intelligent routing
+- Email reports
+- Multi-domain tracking
+
+### Fathom and GDPR compliance
+
+- **Open Source:** <span className="text-red text-lg">✖</span>
+- **Self Hosting:** <span className="text-red text-lg">✖</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
+As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no compromises. It's also a cookie-less solution, so you don't need cookie banners when using it.
 
 ## 4. [Countly](https://count.ly/)
+
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
 Like PostHog, Countly is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
@@ -194,31 +156,16 @@ Countly's range of features make it particularly attractive to mobile app develo
 - Push notifications and crash analytics
 
 ### Countly and GDPR compliance
-Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction.
 
-### Can you use Countly without cookie consent banners?
-No. Countly requires you to collect consent to comply with GDPR, though it has consent systems built into the product. 
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-red text-lg">✖</span>
 
-<table>
-    <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    </tr>
-</table>
+Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction. It doesn't offer a cookie-less tracking option, but it does have consent systems built in.
 
 ## 5. Matomo
+
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 Matomo is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open source. 
@@ -238,34 +185,18 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 - Open source, via GPL 3.0
 
 ### Matomo and GDPR compliance
-Matomo offers first-party cookies by default and robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers.
 
-### Can you use Matomo without cookie consent banners?
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it collects.
-
-<table>
-    <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
+Matomo offers first-party cookies by default and robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers. Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it collects.
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
 ## 6. [GoAccess](https://goaccess.io/)
+
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
 GoAccess is a completely open source web log analyzer and viewer which runs in a browser-based terminal to give you an overview of the most common website metrics. This means it can act as a replacement for tools such as Google Analytics, though it falls short of a product analytics platform in capabilities. 
@@ -282,26 +213,10 @@ GoAccess is for system administrators and software engineers who need to track w
 - Runs inside a terminal or browser
 
 ### GoAccess and GDPR compliance
-GoAccess can be configured not to collect PII (personally identifying information) and relies on log file stats which may not require cookies. If configured in this way, GoAccess is GDPR compliant. 
 
-### Can you use GoAccess without cookie consent banners?
-You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without banners.
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-<table>
-    <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
+GoAccess can be configured not to collect PII (personally identifying information) and relies on log file stats which may not require cookies. You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without cookie banners.
