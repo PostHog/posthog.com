@@ -12,7 +12,7 @@ excerpt: PostHog 1.32.0 makes it easier to find what you want in the Persons & G
 ---
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/runbook/migrate/migrate-to-another-self-hosted-instance" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/migrate/migrate-to-another-self-hosted-instance" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.32.0 release notes
@@ -79,7 +79,7 @@ Funnels with breakdowns just got a lot better. This new view enables you to quic
 
 ### Deprecation & removal notices
 
-1. Since the previous version (1.31.0), we no longer support a Postgres-only deployment of PostHog. Read [our migration guide](/docs/runbook/migrate/migrate-to-another-self-hosted-instance) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. Since the previous version (1.31.0), we no longer support a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-to-another-self-hosted-instance) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're removing support for insights with "Minute" intervals. From user feedback, these insights were hard to parse and could lead to significant performance issues in self-hosted instances. Please [reach out](/support) if you have any feedback on this. More details on the [PR](https://github.com/PostHog/posthog/pull/7847).
 
 ### Talk to us about how we can improve

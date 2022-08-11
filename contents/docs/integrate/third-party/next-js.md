@@ -18,7 +18,7 @@ We are going to look at some minimal example code which should get you started q
 
 To follow this tutorial along, you need to:
 
-1. Have a [self-hosted instance of PostHog](/docs/self-host) or use [PostHog Cloud](/docs/cloud).
+1. Have a [self-hosted instance of PostHog](/docs/self-host) or use [PostHog Cloud](/docs/getting-started/cloud).
 2. Have a running Next.js application
 
 ### Setup and tracking page views (automatically)

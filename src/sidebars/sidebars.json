@@ -157,7 +157,7 @@
             ]
         },
         {
-            "name": "People & Ops",
+            "name": "People & ops",
             "url": "",
             "children": [
                 {
@@ -205,8 +205,8 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Product Manager Ramp Up",
-                            "url": "/handbook/people/rampup/product-manager.md"
+                            "name": "Product Manager ramp up",
+                            "url": "/handbook/people/ramp-up/product-manager"
                         }
                     ]
                 },
@@ -646,6 +646,10 @@
                                 {
                                     "name": "Overview",
                                     "url": "/docs/runbook/async-migrations"
+                                },
+                                {
+                                    "name": "0001-events-sample-by",
+                                    "url": "/docs/runbook/async-migrations/0001-events-sample-by"
                                 },
                                 {
                                     "name": "0002_events_sample_by",

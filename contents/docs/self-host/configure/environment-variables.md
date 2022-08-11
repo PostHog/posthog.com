@@ -18,7 +18,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 
 | Variable                   | Description                           | Default Value          |
-| :------------------------: | :------------------------------------ | :-------------------: |
+| :------------------------ | :------------------------------------ | :------------------- |
 | `SECRET_KEY`               | **❗️ Always required.** [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
 | `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://posthog.your-domain.com`)            | **❗️ Always required.** Principal/canonical URL of your PostHog instance. Needed for emails, webhooks and SSO to work properly. We currently do not support subpaths in this URL. | `http://localhost:8000`
 | `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode, else `True`
@@ -78,7 +78,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 The following settings should mainly be managed with [Instance settings](/docs/self-host/configure/instance-settings). However, if you can still set them via environment variables if you prefer. Please be mindful that if these settings are overridden in the settings page, the overridden values will prevail.
 
 | Variable                   | Description                           | Default Value          | Managed with Instance Settings |
-| :------------------------: | :------------------------------------ | :-------------------: |  :-------------------: |
+| :------------------------ | :------------------------------------ | :------------------- |  :------------------- |
 | `EMAIL_DEFAULT_FROM` | Please see [configuring email] for details.| Please see [configuring email] for details.  | ✅ Yes
 | `EMAIL_ENABLED` | Please see [configuring email] for details.| Please see [configuring email] for details. | ✅ Yes
 | `EMAIL_HOST_PASSWORD` | Please see [configuring email] for details.               | Please see [configuring email] for details. | ✅ Yes

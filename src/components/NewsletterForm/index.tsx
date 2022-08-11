@@ -52,7 +52,7 @@ export const NewsletterForm = ({
                             <input
                                 type="email"
                                 name="EMAIL"
-                                className="block w-full px-4 py-2 flex-1 bg-gray-accent-light dark:bg-gray-accent-dark rounded-md border-0 text-lg font-bold md:text-[18px] md:text-left outline-none text-center max-w-sm"
+                                className="block w-full px-4 py-2 flex-1 bg-white dark:bg-gray-accent-dark rounded-md border-0 text-lg font-bold md:text-[18px] md:text-left outline-none text-center max-w-sm"
                                 id="mce-EMAIL"
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="email@address.com"
@@ -70,7 +70,7 @@ export const NewsletterForm = ({
                             </div>
                             <input
                                 type="submit"
-                                className="bg-primary dark:bg-white text-white dark:text-black text-lg shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
+                                className="bg-red dark:bg-white text-white dark:text-black text-lg shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
                                 value="Sign me up!"
                             />
                         </form>

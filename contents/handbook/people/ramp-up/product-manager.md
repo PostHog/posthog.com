@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a rough guide to ramping up as a PM in PostHog
+This is a rough guide to ramping up as a product manager in PostHog.
 
 ## Timeline
 

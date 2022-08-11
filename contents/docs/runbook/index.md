@@ -15,9 +15,9 @@ This section contains routine procedures and operations to manage your self-host
 
 ### Migrating
 
--   [To another self-hosted instance](/docs/runbook/migrate/migrate-to-another-self-hosted-instance)
--   [To PostHog from Amplitude](/docs/runbook/migrate/migrate-from-amplitude)
--   [Between Cloud and self-hosted](/docs/runbook/migrate/migrate-between-cloud-and-self-hosted)
+-   [To another self-hosted instance](/docs/migrate/migrate-to-another-self-hosted-instance)
+-   [To PostHog from Amplitude](/docs/migrate/migrate-from-amplitude/)
+-   [Between Cloud and self-hosted](/docs/migrate/migrate-between-cloud-and-self-hosted)
 
 ### Services
 

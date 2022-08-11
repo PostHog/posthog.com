@@ -281,7 +281,7 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 ## Extra: Debugging the backend in PyCharm
 
-With [PyCharm's](/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
+With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.
