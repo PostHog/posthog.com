@@ -16,7 +16,7 @@ Authentication domains need to be verified if you are on PostHog Cloud. If you a
 
 To add an Authentication domain, go to your Organization settings (`/organization/settings#authentication-domains`).
 
-![Screenshot: Authentication domains](../../images/features/sso/authentication-domains.png)
+![Screenshot: Authentication domains](../images/features/sso/authentication-domains.png)
 
 For security purposes and to prevent misuse, Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value so you can prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
 
@@ -33,7 +33,7 @@ Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domain
 
 When enabled, just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. For self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it.
 
-To enable just-in-time user provisioning, navigate to 'Authentication domains' in your Organization settings (accessible via the account settings menu in the top-right) and use the 'Enable automatic provisioning' toggle. 
+To enable just-in-time user provisioning, navigate to 'Authentication domains' in your Organization settings (accessible via the account settings menu in the top-right) and use the 'Enable automatic provisioning' toggle.
 
 ### SSO enforcement
 
@@ -47,7 +47,7 @@ You can enable SSO enforcement through Authentication domains in your Organizati
 
 ## Third-party providers
 
-PostHog currently supports GitHub, GitLab and Google as SSO providers. All providers are available and readily configured on PostHog Cloud. 
+PostHog currently supports GitHub, GitLab and Google as SSO providers. All providers are available and readily configured on PostHog Cloud.
 
 This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based (see [SAML](#saml) below).
 
@@ -183,7 +183,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
     - **SAML ACS URL**: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint or IdP sign-on URL.
     - **SAML X.509 certificate**: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to **keep any spaces and new lines** (don't format it). The first and last line of the certificate (e.g. `-----BEGIN CERTIFICATE-----`) are optional.
 
-    ![Screenshot: SAML configuration](../../images/features/sso/saml-configuration.png)
+    ![Screenshot: SAML configuration](../images/features/sso/saml-configuration.png)
 
 4. Once you've configured all the settings above, you can now log out and attempt logging in using SAML (you just need to enter your email address).
 

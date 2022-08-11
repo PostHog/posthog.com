@@ -39,7 +39,7 @@ Within the trends tab, you can aggregate results by the count of unique sessions
 
 To do this analysis, simply select Unique sessions from the aggregation dropdown.
 
-![Session counts](../../images/docs/user-guides/sessions/unique-sessions.png)
+![Session counts](../images/docs/user-guides/sessions/unique-sessions.png)
 
 ### Using session counts in formulas
 
@@ -50,7 +50,7 @@ Combining session counts with other trends is a very powerful way to understand 
 
 To do this analysis, simply make the series in your trends (e.g. unique sessions where an event occurs), and then use that series in a formula.
 
-![Session counts](../../images/docs/user-guides/sessions/session-formula.png)
+![Session counts](../images/docs/user-guides/sessions/session-formula.png)
 
 ### Filtering by session duration
 
@@ -58,13 +58,13 @@ Sometimes, it can be helpful to filter out sessions that are either too short or
 
 To accomplish this, you can use the 'Session duration' property in the property filters.
 
-![Session counts](../../images/docs/user-guides/sessions/duration-filter.png)
+![Session counts](../images/docs/user-guides/sessions/duration-filter.png)
 
 ### Plotting session duration
 
 You can plot session durations overtime to understand if your users are becoming more or less engaged with your product. To accomplish this, select one of the property aggregators (e.g median, 90th percentile etc) and then select 'Session duration' as the property to plot.
 
-![Session counts](../../images/docs/user-guides/sessions/median-duration.png)
+![Session counts](../images/docs/user-guides/sessions/median-duration.png)
 
 ### Distribution of session duration
 
@@ -72,4 +72,4 @@ Breaking down data by the distribution of session durations can be useful when t
 
 To look at the distribution of session durations, click 'Add breakdown' and then select the 'Session duration' property.
 
-![Session counts](../../images/docs/user-guides/sessions/duration-breakdown.png)
+![Session counts](../images/docs/user-guides/sessions/duration-breakdown.png)

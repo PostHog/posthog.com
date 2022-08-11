@@ -39,32 +39,35 @@ Our lifecycle chart for "Message sent" looks like this:
 ![image](https://user-images.githubusercontent.com/85295485/139205374-d891ef11-2ed2-4e92-abcb-80726795d881.png)
 
 Everything above the zero line on the horizontal access represents a user who was active in the interval:
-* **New** - Users who did the action during the interval and were also created during that period (e.g. Created an account and sent a message today)
-* **Returning** - This is someone who was active in the previous interval and is also active in the current interval (e.g. sent a message yesterday and also sent a message today)
-* **Resurrecting** - This is someone who was not active in the previous interval and became active once again (e.g. did not send any messages for 10 days, but sent one today)
+
+-   **New** - Users who did the action during the interval and were also created during that period (e.g. Created an account and sent a message today)
+-   **Returning** - This is someone who was active in the previous interval and is also active in the current interval (e.g. sent a message yesterday and also sent a message today)
+-   **Resurrecting** - This is someone who was not active in the previous interval and became active once again (e.g. did not send any messages for 10 days, but sent one today)
 
 Everything below the zero line represents a user who was not active in the interval:
-* **Dormant** - These are users who are not active in the current interval, but they were active in the previous interval (e.g. someone who has not sent a message today, but sent one yesterday)
+
+-   **Dormant** - These are users who are not active in the current interval, but they were active in the previous interval (e.g. someone who has not sent a message today, but sent one yesterday)
 
 **What to look for in your lifecycle chart?**
 This can vary a bit depending on your product, but in a general sense:
-- You want to see your "Returning" users growing or at least staying constant, otherwise this signals a leaky bucket problem.
-- If you have a large number of "Resurrecting" users it could mean that the interval you selected is not aligned with your product's true natural frequency (e.g. users use it weekly but you're watching it daily), 
-- If you're investing efforts in acquiring new users to your product (or the feature you're exploring), you want to see that this indeed translates in new users popping up.
+
+-   You want to see your "Returning" users growing or at least staying constant, otherwise this signals a leaky bucket problem.
+-   If you have a large number of "Resurrecting" users it could mean that the interval you selected is not aligned with your product's true natural frequency (e.g. users use it weekly but you're watching it daily),
+-   If you're investing efforts in acquiring new users to your product (or the feature you're exploring), you want to see that this indeed translates in new users popping up.
 
 ## Going Deeper
 
 Now that you have an overview of your lifecycle, you can now dig into ares which look problematic. In our graph we can see a big drop in active users on the 23 October. If you click on the graph of "Dormant users," we will show you the users who became dormant here:
 
 With the information from this graph in mind, you may want to dig deeper to understand the following questions. Our [Retention](retention) tool is better for answering this.
-- Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
-- Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
+
+-   Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
+-   Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
 
 ![image](https://user-images.githubusercontent.com/85295485/139206407-40bfa178-76d8-47a5-8482-fbf0f682c1d6.png)
 
-You can then click through to look at these individual users behavior in the events or recordings tools 
+You can then click through to look at these individual users behavior in the events or recordings tools
 
 ![image](https://user-images.githubusercontent.com/85295485/139206528-bbdce478-97d9-48ad-888d-3220b50e2b42.png)
 
 Or create a cohort for further analysis in the trends tool.
-
