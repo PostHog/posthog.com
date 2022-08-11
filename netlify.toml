@@ -2073,166 +2073,166 @@
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/actions"
-    to = "/manuals/actions"
+    to = "/manual/actions"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/annotations"
-    to = "/manuals/annotations"
+    to = "/manual/annotations"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/application-settings"
-    to = "/manuals/application-settings"
+    to = "/manual/application-settings"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/cohorts"
-    to = "/manuals/cohorts"
+    to = "/manual/cohorts"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/correlation"
-    to = "/manuals/correlation"
+    to = "/manual/correlation"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/dashboards"
-    to = "/manuals/dashboards"
+    to = "/manual/dashboards"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/data-management"
-    to = "/manuals/data-management"
+    to = "/manual/data-management"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/events"
-    to = "/manuals/events"
+    to = "/manual/events"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/experimentation"
-    to = "/manuals/experimentation"
+    to = "/manual/experimentation"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/feature-flags"
-    to = "/manuals/feature-flags"
+    to = "/manual/feature-flags"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/funnels"
-    to = "/manuals/funnels"
+    to = "/manual/funnels"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/group-analytics"
-    to = "/manuals/group-analytics"
+    to = "/manual/group-analytics"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides"
-    to = "/manuals"
+    to = "/manual"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/insights"
-    to = "/manuals/insights"
+    to = "/manual/insights"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/lifecycle"
-    to = "/manuals/lifecycle"
+    to = "/manual/lifecycle"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/organizations-and-projects"
-    to = "/manuals/organizations-and-projects"
+    to = "/manual/organizations-and-projects"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/paths"
-    to = "/manuals/paths"
+    to = "/manual/paths"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/persons"
-    to = "/manuals/persons"
+    to = "/manual/persons"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/recordings"
-    to = "/manuals/recordings"
+    to = "/manual/recordings"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/retention"
-    to = "/manuals/retention"
+    to = "/manual/retention"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/sessions"
-    to = "/manuals/sessions"
+    to = "/manual/sessions"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/sso"
-    to = "/manuals/sso"
+    to = "/manual/sso"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/stickiness"
-    to = "/manuals/stickiness"
+    to = "/manual/stickiness"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/subscriptions"
-    to = "/manuals/subscriptions"
+    to = "/manual/subscriptions"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/support"
-    to = "/manuals/support"
+    to = "/manual/support"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/toolbar"
-    to = "/manuals/toolbar"
+    to = "/manual/toolbar"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/trends"
-    to = "/manuals/trends"
+    to = "/manual/trends"
 
 
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/utm-segmentation"
-    to = "/manuals/utm-segmentation"
+    to = "/manual/utm-segmentation"

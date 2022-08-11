@@ -1401,116 +1401,116 @@
             "url": "/using-posthog"
         },
         {
-            "name": "Product manuals",
+            "name": "Product manual",
             "url": "",
             "children": [
                 {
                     "name": "Actions",
-                    "url": "/manuals/actions"
+                    "url": "/manual/actions"
                 },
                 {
                     "name": "Annotations",
-                    "url": "/manuals/annotations"
+                    "url": "/manual/annotations"
                 },
                 {
                     "name": "Cohorts",
-                    "url": "/manuals/cohorts"
+                    "url": "/manual/cohorts"
                 },
                 {
                     "name": "Correlation Analysis",
-                    "url": "/manuals/correlation"
+                    "url": "/manual/correlation"
                 },
                 {
                     "name": "Dashboards",
-                    "url": "/manuals/dashboards"
+                    "url": "/manual/dashboards"
                 },
                 {
                     "name": "Data Management",
-                    "url": "/manuals/data-management"
+                    "url": "/manual/data-management"
                 },
                 {
                     "name": "Events",
-                    "url": "/manuals/events"
+                    "url": "/manual/events"
                 },
                 {
                     "name": "Experimentation",
-                    "url": "/manuals/experimentation"
+                    "url": "/manual/experimentation"
                 },
                 {
                     "name": "Feature Flags",
-                    "url": "/manuals/feature-flags"
+                    "url": "/manual/feature-flags"
                 },
                 {
                     "name": "Funnels",
-                    "url": "/manuals/funnels"
+                    "url": "/manual/funnels"
                 },
                 {
                     "name": "Group Analytics",
-                    "url": "/manuals/group-analytics"
+                    "url": "/manual/group-analytics"
                 },
                 {
                     "name": "Heatmaps",
-                    "url": "/manuals/toolbar"
+                    "url": "/manual/toolbar"
                 },
                 {
                     "name": "Insights",
-                    "url": "/manuals/insights"
+                    "url": "/manual/insights"
                 },
                 {
                     "name": "Lifecycle",
-                    "url": "/manuals/lifecycle"
+                    "url": "/manual/lifecycle"
                 },
                 {
                     "name": "Organizations and projects",
-                    "url": "/manuals/organizations-and-projects"
+                    "url": "/manual/organizations-and-projects"
                 },
                 {
                     "name": "Paths",
-                    "url": "/manuals/paths"
+                    "url": "/manual/paths"
                 },
                 {
                     "name": "Persons",
-                    "url": "/manuals/persons"
+                    "url": "/manual/persons"
                 },
                 {
                     "name": "Retention",
-                    "url": "/manuals/retention"
+                    "url": "/manual/retention"
                 },
                 {
                     "name": "Session Recording",
-                    "url": "/manuals/recordings"
+                    "url": "/manual/recordings"
                 },
                 {
                     "name": "Settings",
-                    "url": "/manuals/application-settings"
+                    "url": "/manual/application-settings"
                 },
                 {
                     "name": "SSO & SAML",
-                    "url": "/manuals/sso"
+                    "url": "/manual/sso"
                 },
                 {
                     "name": "Stickiness",
-                    "url": "/manuals/stickiness"
+                    "url": "/manual/stickiness"
                 },
                 {
                     "name": "Toolbar",
-                    "url": "/manuals/toolbar"
+                    "url": "/manual/toolbar"
                 },
                 {
                     "name": "Trends",
-                    "url": "/manuals/trends"
+                    "url": "/manual/trends"
                 },
                 {
                     "name": "Sessions",
-                    "url": "/manuals/sessions"
+                    "url": "/manual/sessions"
                 },
                 {
                     "name": "Subscriptions",
-                    "url": "/manuals/subscriptions"
+                    "url": "/manual/subscriptions"
                 },
                 {
                     "name": "UTM segmentation",
-                    "url": "/manuals/utm-segmentation"
+                    "url": "/manual/utm-segmentation"
                 }
             ]
         },
@@ -1520,7 +1520,7 @@
         },
         {
             "name": "Support",
-            "url": "/manuals/support"
+            "url": "/manual/support"
         }
     ],
     "product": [
