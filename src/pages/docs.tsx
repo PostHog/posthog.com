@@ -75,21 +75,6 @@ const apps = [
     { name: 'Zapier', to: '/apps/zapier-connector', icon: 'zapier' },
 ]
 
-const featureLinks = [
-    { name: 'Trends', to: '/docs/user-guides/trends', icon: 'trendz' },
-    { name: 'Funnels', to: '/docs/user-guides/funnels', icon: 'funnels' },
-    { name: 'User paths', to: '/docs/user-guides/paths', icon: 'user-paths' },
-    { name: 'Correlation analysis', to: '/docs/user-guides/correlation', icon: 'correlation-analysis' },
-    { name: 'Session recording', to: '/docs/user-guides/recordings', icon: 'session-recording' },
-    { name: 'Feature flags', to: '/docs/user-guides/feature-flags', icon: 'feature-flags' },
-    { name: 'Experimentation', to: '/docs/user-guides/experimentation', icon: 'experimentation' },
-    { name: 'Heatmaps', to: '/docs/user-guides/toolbar', icon: 'heatmaps' },
-    { name: 'Apps', to: '/docs/apps', icon: 'apps' },
-    { name: 'Toolbar', to: '/docs/user-guides/toolbar', icon: 'toolbar' },
-    { name: 'Insights', to: '/docs/user-guides/insights', icon: 'insights' },
-    { name: 'Group analytics', to: '/docs/user-guides/group-analytics', icon: 'group-analytics' },
-]
-
 export const DocsIndex: React.FC = () => {
     return (
         <Layout>
@@ -220,36 +205,6 @@ export const DocsIndex: React.FC = () => {
                                 </ul>
                             </div>
                         </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-center font-bold mb-8">Browse guides by feature</h2>
-
-                        <ul className="grid grid-cols-2 xl:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
-                            {featureLinks.map((link) => {
-                                return (
-                                    <li
-                                        key={link.name}
-                                        className="list-none border-dashed border-b border-r border-gray-accent-light dark:border-gray-accent-dark"
-                                    >
-                                        <Link
-                                            to={link.to}
-                                            disablePrefetch
-                                            className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark text-black"
-                                        >
-                                            <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
-                                            <h3 className="font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-
-                            <li className="list-none border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark border-r border-b col-span-full">
-                                <Link className="flex items-center justify-center w-full py-4" to="/docs/user-guides">
-                                    View all (23)
-                                </Link>
-                            </li>
-                        </ul>
                     </section>
                 </div>
             </PostLayout>
