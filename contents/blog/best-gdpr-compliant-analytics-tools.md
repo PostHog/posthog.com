@@ -52,6 +52,11 @@ GDPR-compliant analytics tools come in various guises, which you can define as g
 ## 1. [PostHog](https://posthog.com/product)
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** Coming Q4 2022
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
 PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
 
 (Think Amplitude + Hotjar + LaunchDarkly in one platform and you're pretty close.)
