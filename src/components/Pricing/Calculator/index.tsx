@@ -277,17 +277,19 @@ export default function Calculator({
                 <div className="pt-4 mt-4 border-t border-gray-accent-light border-dashed">
                     <p className="hidden text-red text-sm font-bold mb-0">Calculate your monthly price</p>
                     <h4 className="text-base m-0 pb-1">Calculate your monthly price</h4>
-                    <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
-                    <div className="mb-8 mt-3">
-                        <PricingSlider
-                            marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
-                            min={1000000}
-                            max={1000000000}
-                        />
+                    <div>
+                        <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
+                        <div className="mb-8 mt-3">
+                            <PricingSlider
+                                marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
+                                min={1000000}
+                                max={1000000000}
+                            />
+                        </div>
+                        <p className="text-sm pb-0 m-0">
+                            <Link className="font-semibold" to="/blog/calculating-events-from-users">How to estimate your event volume</Link>
+                        </p>
                     </div>
-                    <p className="text-sm pb-0 m-0">
-                        <Link className="font-semibold" to="/blog/calculating-events-from-users">How to estimate your event volume</Link>
-                    </p>
                 </div>
             </div>
         </motion.div>
