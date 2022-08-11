@@ -202,9 +202,9 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
 
-            <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto">
+            <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto items-start">
                 <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
-                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative">
+                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative pb-2 ">
                         <div className="mb-4">
                             <CloudIcon className="opacity-30 mb-3" />
                             <h2 className="text-xl mb-1 flex items-center">
@@ -237,7 +237,7 @@ const PricingNew = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div className="order-3 md:order-2 bg-white px-8 pt-8 rounded-md shadow-xl">
+                    <div className="order-3 md:order-2 bg-white px-8 pt-8 pb-2 rounded-md shadow-xl">
                         <div className="mb-4">
                             <SelfHostIcon className="opacity-30 mb-3" />
                             <h2 className="text-xl mb-1 flex items-center">

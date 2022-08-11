@@ -1786,8 +1786,8 @@ export const YouTube = ({ className }: { className: string }): JSX.Element => {
 export const Info = (props: any): JSX.Element => {
     return (
         <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="10" fillOpacity="0.25" />
-            <path
+            <circle cx="10" cy="10" r="10" fillOpacity="0.2" />
+            <path fillOpacity="0.75"
                 d="M9.04839 15.5074H11.4194V8.53041H9.04839V15.5074ZM9 6.36221H11.5V4.08801H9V6.36221Z"
             />
         </svg>

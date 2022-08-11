@@ -15,6 +15,8 @@ import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import Toggle from 'components/Toggle'
+import { Info } from 'components/Icons/Icons'
+
 
 interface IPricingOptions {
     minimumPrice: number
@@ -219,31 +221,11 @@ export default function Calculator({
             className="bg-transparent w-full"
         >
             <div>
-                <div className="pb-6 mb-6 border-b border-gray-accent-light border-dashed">
-                    <div className="flex justify-between items-center">
-                        <h4 className="text-base m-0 ">Enterprise mode</h4>
-                        <Toggle checked={enterpriseMode} onChange={handleEnterpriseModeChange} />
-                    </div>
-                    <p className="text-sm m-0 text-black/60 my-1">
-                        Starts at $450/mo and comes with SSO, advanced permissions, and a dedicated Slack channel for
-                        support
-                    </p>
-                    <button className="font-semibold text-red text-sm" onClick={() => setCurrentModal('enterprise')}>
-                        Details
-                    </button>
-                </div>
-                <h4 className="text-base font-bold m-0 ">Estimate your price</h4>
-                <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
-                <div className="mb-12 mt-3">
-                    <PricingSlider
-                        marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
-                        min={1000000}
-                        max={1000000000}
-                    />
-                </div>
+                <h4 className="text-lg font-bold m-0 ">Pricing breakdown</h4>
+                <p className="text-sm mb-2 text-semibold">Pay per event</p>
                 {pricingOption && (
                     <>
-                        <ul className="grid gap-y-2 m-0 p-0">
+                        <ul className="grid gap-y-1 m-0 p-0">
                             {breakdown.map((price, index) => {
                                 const label = pricingLabels[price[0]]
                                 return (
@@ -268,13 +250,45 @@ export default function Calculator({
                     </>
                 )}
 
-                <p className="text-sm text-center pt-4 pb-0 m-0 text-black/50">
+                <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
                     B2C company with millions of users?
                     <br />
                     <Link to="/signup/b2c" className="font-bold">
                         Apply for a volume pricing plan
                     </Link>
                 </p>
+
+                <div className="pt-4 border-t border-gray-accent-light border-dashed">
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-x-1">
+                            <h4 className="text-base m-0">Enterprise package</h4>
+                            <button className="font-semibold text-black text-sm" onClick={() => setCurrentModal('enterprise')}>
+                                <Info />
+                            </button>
+                        </div>
+                        <Toggle checked={enterpriseMode} onChange={handleEnterpriseModeChange} />
+                    </div>
+                    <p className="text-sm m-0 text-black/60 mt-1.5 mb-0">
+                        Starts at $450/mo and comes with SSO, advanced permissions, and a dedicated Slack channel for
+                        support
+                    </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-gray-accent-light border-dashed">
+                    <p className="hidden text-red text-sm font-bold mb-0">Calculate your monthly price</p>
+                    <h4 className="text-base m-0 pb-1">Calculate your monthly price</h4>
+                    <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
+                    <div className="mb-8 mt-3">
+                        <PricingSlider
+                            marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
+                            min={1000000}
+                            max={1000000000}
+                        />
+                    </div>
+                    <p className="text-sm pb-0 m-0">
+                        <Link className="font-semibold" to="/blog/calculating-events-from-users">How to estimate your event volume</Link>
+                    </p>
+                </div>
             </div>
         </motion.div>
     )
