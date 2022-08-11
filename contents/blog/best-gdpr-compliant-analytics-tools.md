@@ -67,13 +67,13 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 #### How much does PostHog cost?
 
-STUFF HERE
+All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/docs/user-guides/experimentation), [Correlation Analysis](/docs/user-guides/correlation), [Cohorts](/user-guides/cohorts) and [Group Analytics](/docs/user-guides/group-analytics). The open source edition is free to self-host and includes the core product analytics features,  Session Recording and support for one project only. 
 
 ### 2. [Plausible](https://plausible.io/)
 
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Plausible is an alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+Plausible is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -99,7 +99,7 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 #### How much does Plausible cost?
 
-STUFF HERE
+Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker.
 
 ### 3. [Fathom](https://usefathom.com/)
 
@@ -132,7 +132,7 @@ As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no com
 
 #### How much does Fathom cost?
 
-STUFF HERE
+Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plausible. A website generating 1 million pageviews per month would pay $54 per month, compared to around $71 with Plausible. Fathom also offers two months free use for paying annually, but there is no free-to-use open sourcre version.
 
 ### 4. [Countly](https://count.ly/)
 
@@ -164,7 +164,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-STUFF HERE
+Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it exlcudes most of its user behavior features. 
 
 ### 5. Matomo
 
@@ -196,6 +196,8 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 Matomo offers first-party cookies by default and robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers. Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it collects.
 
 #### How much does Matomo cost?
+
+Matomo's core open source analytics is free to self-host. More advanced features, such as A/B testing and Custom resports, are add-ons charged for annually at varying rates. Its managed cloud service charges by hits (any pageview, event, download etc.) with 1 million hits costing £139 (approx. $170) per month.
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
@@ -229,4 +231,4 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 
 #### How much does GoAccess cost?
 
-STUFF HERE
+GoAccess is open source and has no paid tiers.
