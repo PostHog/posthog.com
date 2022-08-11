@@ -1,6 +1,9 @@
 {
     "handbook": [
         {
+            "name": "Table of contents"
+        },
+        {
             "name": "Handbook",
             "url": "/handbook"
         },
