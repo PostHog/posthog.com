@@ -67,7 +67,7 @@ One mainstay event that we do at every all-company offsite is a 24-hour hackatho
 
 ## Budget
 
-<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/26nfp8HGGHLPGY2KQ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p>
+<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/26nfp8HGGHLPGY2KQ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
 I won’t sugar coat it – offsites will be some of the larger single expenses you will incur as a company each year. However, in my experience, the benefits of hosting a well-organized offsite greatly outweigh the cons if you budget effectively and manage costs as you go. 
 
