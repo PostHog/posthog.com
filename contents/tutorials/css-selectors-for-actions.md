@@ -165,7 +165,7 @@ Finaly you should see a new page with a `Match Group` menu open. Choose the `Aut
 
 Scroll down a bit and you will find the `HTML selector matches` section. Here you can define your CSS selectors.
 
-It's worth noting that using `Match groups` it is possible to use CSS selectors alongside other filter like `Text equals` and `Link target equals`. Moreover, you can even define several `Match groups` for a one action.
+It's worth noting that using `Match groups` it is possible to use CSS selectors alongside other filters, like `Text equals` and `Link target equals`. Moreover, you can even define several `Match groups` for a one action.
 
 > Happy matching!
 
