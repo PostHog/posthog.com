@@ -31,7 +31,7 @@ There are numerous ways to achieve GDPR compliance, which you can broadly catego
 
 All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source Google Analytics alternatives.
 
-## 1. [PostHog](https://posthog.com/product)
+### 1. [PostHog](https://posthog.com/product)
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
@@ -41,10 +41,10 @@ PostHog is an all-in-one, [open source analytics platform](/blog/best-open-sourc
 
 Unlike [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event auto capture, so you can start collecting useful data immediately without instrumenting events by hand.
 
-### Who is PostHog for?
+#### Who is PostHog for?
 PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size.
 
-### Features & benefits
+#### Features & benefits
 - An all-in-one analytics suite
 - Easy to use, no SQL required
 - Self-hosting and cloud-hosting available
@@ -54,7 +54,7 @@ PostHog is especially helpful for product teams that want to understand how user
 - Unlimited ability to scale
 - Open source, via MIT license
 
-### PostHog and GDPR compliance
+#### PostHog and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
@@ -65,7 +65,11 @@ PostHog can be deployed onto your own infrastructure, so you retain full control
 
 While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
 
-## 2. [Plausible](https://plausible.io/)
+#### How much does PostHog cost?
+
+STUFF HERE
+
+### 2. [Plausible](https://plausible.io/)
 
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
@@ -75,16 +79,16 @@ Plausible’s lightweight nature does offer several benefits however, such as a 
 
 Plausible’s intense focus on privacy makes it an attractive option for individuals, but also imposes restrictions on how data can be used and stored. There’s no way to identify users or track behavior across multiple sessions or devices, for example. 
 
-### Who is Plausible for?
+#### Who is Plausible for?
 Plausible is an alternative to Google Analytics and is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
 
-### Features & benefits
+#### Features & benefits
 - Lightweight script with minimal page speed impact
 - No need for any cookies, at all
 - Minimal data collection for users
 - No tracking across sessions, devices or sites
 
-### Plausible and GDPR compliance
+#### Plausible and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
@@ -93,7 +97,11 @@ Plausible is an alternative to Google Analytics and is a good fit for small cont
 
 Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR compliant analytics. It's doesn't collect any personal data, such as IP addresses, so you don't need to acquire permission from users to comply with GDPR.
 
-## 3. [Fathom](https://usefathom.com/)
+#### How much does Plausible cost?
+
+STUFF HERE
+
+### 3. [Fathom](https://usefathom.com/)
 
 ![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
 
@@ -101,17 +109,19 @@ Fathom is a popular, privacy-friendly alternative to Google Analytics that's bui
 
 While based in Canada, Fathom offers EU-hosting. It also employs what it calls intelligent routing. This ensures that non-EU users are routed via its US servers, while EU users are routed via its EU-based and owned servers. Fathom claims this means non-EU visitors get better performance compared to other, similar services that use EU-only hosting.
 
-### Who is Fathom for?
+#### Who is Fathom for?
+
 Fathom is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
 
-### Features & benefits
+#### Features & benefits
+
 - Fast and lightweight tracking script
 - No cookie banner required
 - EU isolation and intelligent routing
 - Email reports
 - Multi-domain tracking
 
-### Fathom and GDPR compliance
+#### Fathom and GDPR compliance
 
 - **Open Source:** <span className="text-red text-lg">✖</span>
 - **Self Hosting:** <span className="text-red text-lg">✖</span>
@@ -120,7 +130,11 @@ Fathom is ideal for individual users and companies who only require basic web an
 
 As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no compromises. It's also a cookie-less solution, so you don't need cookie banners when using it.
 
-## 4. [Countly](https://count.ly/)
+#### How much does Fathom cost?
+
+STUFF HERE
+
+### 4. [Countly](https://count.ly/)
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
@@ -128,16 +142,18 @@ Like PostHog, Countly is an extendable product analytics platform that offers se
 
 Countly offers a robust suite of features and an extensive range of integrations, including a Net Promoter Score (NPS) survey plugin. The ability to track crashes and errors, and to issue push notifications to mobile users, are also useful additions over most other analytics tools.
 
-### Who is Countly for?
+#### Who is Countly for?
+
 Countly's range of features make it particularly attractive to mobile app developers, especially those working on multi-platform apps across iOS, Mac, Windows, and Android. Its open source Community Edition is available on a AGPL v3 license, though this version removes the majority of its user behavior features, such as retention, revenue tracking, user tracking, cohorts, funnels, and user flow.   
 
-### Features & benefits
+#### Features & benefits
+
 - Support for mobile, web, desktop and IoT devices
 - Extensible via plugins
 - Self-hosting and private cloud deployments available
 - Push notifications and crash analytics
 
-### Countly and GDPR compliance
+#### Countly and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
@@ -146,7 +162,11 @@ Countly's range of features make it particularly attractive to mobile app develo
 
 Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction. It doesn't offer a cookie-less tracking option, but it does have consent systems built in.
 
-## 5. Matomo
+#### How much does Countly cost?
+
+STUFF HERE
+
+### 5. Matomo
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -156,17 +176,17 @@ One of Matomo’s most appealing features is the ability to import existing Goog
 
 Matomo offers a wealth of other features, from custom alerts to tag managers and media analytics, though many of these are sold under per-feature subscriptions which can make the cost of on-premise deployments hard to predict. 
 
-### Who is Matomo for?
+#### Who is Matomo for?
 Matomo is suitable for businesses of all sizes which need an alternative to Google Analytics. The cloud version of Matomo is also easy to setup, making it ideal for non-technical users.
 
-### Features & benefits
+#### Features & benefits
 - Cloud hosting on European servers
 - Self-hosting version available
 - All-in-one Google Analytics replacement
 - Google Analytics importer
 - Open source, via GPL 3.0
 
-### Matomo and GDPR compliance
+#### Matomo and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
@@ -175,9 +195,11 @@ Matomo is suitable for businesses of all sizes which need an alternative to Goog
 
 Matomo offers first-party cookies by default and robust tools to ensure personally identifiable information (PII) is anonymized. Additionally, it can be deployed either on-premises, or into EU-based cloud servers. Yes. Matomo offers the option of cookie-less tracking, though this does reduce the quality of data it collects.
 
+#### How much does Matomo cost?
+
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-## 6. [GoAccess](https://goaccess.io/)
+### 6. [GoAccess](https://goaccess.io/)
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
@@ -185,16 +207,18 @@ GoAccess is a completely open source web log analyzer and viewer which runs in a
 
 Functioning in real-time, GoAccess is useful for spotting who is using up your bandwidth and identifying aggressive crawlers or bots, as well as tracking site metrics such as page views, visitors and time-on-page. The toolset, design and reliance on a terminal make it a popular choice for sysadmins. 
 
-### Who is GoAccess for?
+#### Who is GoAccess for?
+
 GoAccess is for system administrators and software engineers who need to track web performance across smaller sites. It’s unsuitable for those needing a self-service analytics platform or who need easy integration with other tools or data warehouses. 
 
-### Features & benefits
+#### Features & benefits
+
 - Open source, via MIT license
 - Completely real-time tracking
 - Customizable dashboards
 - Runs inside a terminal or browser
 
-### GoAccess and GDPR compliance
+#### GoAccess and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
@@ -202,3 +226,7 @@ GoAccess is for system administrators and software engineers who need to track w
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
 You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without cookie banners.
+
+#### How much does GoAccess cost?
+
+STUFF HERE
