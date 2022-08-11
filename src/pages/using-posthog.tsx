@@ -8,6 +8,7 @@ import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/SearchBox'
+import slugify from 'slugify'
 // import Modal from 'components/Modal'
 
 const categories: {
