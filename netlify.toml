@@ -2040,3 +2040,9 @@
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
     to = "/docs/migrate/migrate-to-another-self-hosted-instance"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/handbook/people/ramp-up/product-manager"
+    to = "/handbook/product/pm-rampup"
