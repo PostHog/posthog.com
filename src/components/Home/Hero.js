@@ -1,8 +1,8 @@
-import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { CallToAction } from '../CallToAction'
 import { heading, section } from './classes'
 import Icon from './Icon'
+import Slider from './Slider'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -16,7 +16,7 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
             </ul>
-            <p className="mt-4 text-xs">
+            <p className="mt-4 text-sm">
                 Plus 50-ish apps available in the <a href="/apps">PostHog App Store</a>
             </p>
         </div>
@@ -43,67 +43,23 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative')}>
                     <h1 className={heading()}>
-                        The product analytics suite
-                        <br /> <span className="text-red">you can host yourself</span>
+                        The <span className="text-red inline-block">open source</span>{' '}
+                        <span className="inline-block">Product OS</span>
                     </h1>
-                    <h2
-                        className={heading('subtitle', 'primary', 'my-6 max-w-2xl mx-auto text-primary text-gray-dark')}
-                    >
-                        PostHog is the <span className="text-blue">open source</span> platform for your product data,{' '}
-                        <br className="hidden md:block" />
-                        complete with{' '}
-                        <a
-                            href="/docs/integrate/ingest-live-data"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            event pipelines
-                        </a>
-                        ,{' '}
-                        <a
-                            href="/docs/self-host/runbook/clickhouse"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            a data warehouse
-                        </a>
-                        , and an{' '}
-                        <a
-                            href="/docs/api"
-                            className="text-[#333] border-b border-dashed border-gray-primary font-semibold"
-                        >
-                            API
-                        </a>
-                        .
+                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
+                        A suite of product and data tools. Built on the modern data stack.
                     </h2>
 
-                    <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
-                        <CallToAction type="primary" width="56" to="/signup">
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+                        <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
                             Get started
                         </CallToAction>
-                        <CallToAction type="outline" width="56" to="/book-a-demo">
-                            Schedule a demo
+                        <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
+                            Book a demo
                         </CallToAction>
                     </div>
-
-                    <br />
-
-                    <FeatureStrip />
                 </div>
-            </div>
-            <div className="w-full mt-8 md:mt-20 xl:mt-0 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
-                <div className="max-w-screen-2xl mx-auto w-full relative mt-12 md:mt-0">
-                    <span className="absolute bottom-0 xl:-bottom-16 right-0 overflow-x-hidden 2xl:overflow-x-visible">
-                        <StaticImage
-                            objectPosition="bottom"
-                            loading="eager"
-                            placeholder="none"
-                            width={400}
-                            imgClassName="h-auto"
-                            className="h-full max-w-[200px] md:max-w-[300px] xl:max-w-none mr-0 md:mr-0"
-                            objectFit="contain"
-                            src="./images/hero-right.png"
-                        />
-                    </span>
-                </div>
+                <Slider />
             </div>
         </section>
     )

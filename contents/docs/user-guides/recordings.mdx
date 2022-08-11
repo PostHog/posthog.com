@@ -37,17 +37,13 @@ Depending on how your app or website is built, recordings can take a lot of disk
 
 ### PostHog Cloud & Clickhouse Self-hosted
 
-By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by executing a query like this on your Clickhouse instance.
+By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page.
 
-```
-ALTER TABLE session_recording_events MODIFY TTL toDate(created_at) + INTERVAL 6 WEEK
-````
-
-If your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above. Otherwise, the command can hang.
+Please note, if your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above (even if you're decreasing the value). Otherwise, the command can hang.
 
 ### Legacy Postgres Self-hosted
 
-Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/project/settings#recordings).
+Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/docs/user-guides/application-settings#project-settings).
 
 ### Preserving recordings
 
@@ -81,7 +77,7 @@ There are some configurations that can be used to adjust how recordings are capt
 Attribute | Description
 ----------|----------
 `maskAllInputs`<br/><br/>**Type:** Boolean<br/>**Default:** `true`|When `true`, all data from user input fields will be replaced by '*'s.
-`maskInputOptions`<br/><br/>**Type:** Object<br/>**Default:** `{}`|Only takes effect if `maskAllInputs` is `false`. It determines which specific input field types should be masked. An example value might be `{ password: true }`. Options are: `password`,`textarea`,`select`,`color`,`date`,`email`,`month`,`number`,`range`,`search`,`tel`,`text`,`time`,`url`,`week`, and `datetime-local`.
+`maskInputOptions`<br/><br/>**Type:** Object<br/>**Default:** `{}`|Only takes effect if `maskAllInputs` is `false`. It determines which specific input field types should be masked. An example value might be `{ password: true }`. Options are: `password`, `textarea`, `select`, `color`, `date`, `email`, `month`, `number`, `range`, `search`, `tel`, `text`, `time`, `url`, `week`, and `datetime-local`.
 `inlineStylesheet`<br/><br/>**Type:** Boolean<br/>**Default:** `true`|If `false`, stylesheets will not be included with the recording data. Rather, a URL pointing to the stylesheet will be included. Setting this to false will decrease the storage space used for recordings and improve playback buffering time, but it can also cause some flickering in the playback experience. 
 
 
@@ -96,3 +92,65 @@ posthog.init('<ph_project_api_key>', {
     // ... other options
 })
 ```
+
+
+## Troubleshooting
+
+Having trouble with recordings? Below are some tips for getting past some common issues
+
+### Recordings are not being captured
+
+There are a few common reasons that you may not see recordings appear in your project.
+
+#### Permitted domain setting
+
+In your project settings page, there's a section for 'Authorized URLs'. This is the list of domains where posthog will capture recordings. You should make sure it's not too restrictive.
+
+For example, you may have `https://www.example.com` in the list. This will stop PostHog from capturing recordings on `https://example.com`.
+
+If no domains are set here, PostHog will capture recordings on all domains.
+
+#### Posthog-js configurations
+
+If you had previously disabled session recordings, you may have set the `disable_session_recording` option to `true` in posthog-js.
+
+To re-enable session recordings you want to either remove the `disable_session_recording` option or set it to `false`.
+
+You can read more about [posthog-js configurations here](/docs/integrate/client/js#config).
+
+#### Content security policy
+
+When recordings are enabled, PostHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
+
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to add `https://app.posthog.com` (or your host URL if you are self hosted) to your list.
+
+If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
+
+#### Ad/tracking blockers
+
+Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you're testing your app locally, you may need to disable any ad/tracking blockers that you're running in your browser. 
+
+### Website is not recording properly
+
+If you're having issues with recordings not looking correct, there are a couple things to do.
+
+#### Update posthog-js
+
+We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of posthog-js on your website.
+
+To check the version that you're using, you can run the following in your console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
+#### Report your specific issue
+
+To report a specific problem, you can open a [GitHub issue](https://github.com/PostHog/posthog/issues/new/choose). To help us figure it out as quickly as possible, please include the following information:
+
+* The URL of the page that you're trying to record
+* The version of posthog that you're using
+* The version of posthog-js that you're using
+* Details about the specific issue with your recording (e.g. how it looks and how it should look)
+* If you're on posthog-cloud, a link to the specific recording
+* Any unique details about your website (e.g. the frameworks that you're using etc.)

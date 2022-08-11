@@ -11,7 +11,6 @@ featuredImageType: standard
 ---
 
 import { Link } from 'gatsby'
-import { Button } from 'antd'
 
 PostHog 1.22 is out with awesome new features, usability and performance improvements, and the usual bug squashing.
 
@@ -34,11 +33,13 @@ Thank you oshura3, we look forward to collaborating with you more!
 -   **Improvement:** Better tooling for updating data in dashboards
 -   **Improvement:** A whole new UX for individual person pages
 
-<Link to="https://app.posthog.com/signup">
-    <Button className="center" type="primary" size="large">
-        Try PostHog Cloud Now
-    </Button>
-</Link>
+<br />
+
+<div class="flex items-center justify-center">
+  <CallToAction to="https://app.posthog.com/signup">
+    Try PostHog Cloud Now
+  </CallToAction>
+</div>
 
 <br />
 
@@ -56,7 +57,7 @@ From this release (1.22.0) onwards, if your app server is not running, this circ
 
 ## PostHog 1.22.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 ### [Bar Charts by Graph Series/Value](https://github.com/PostHog/posthog/pull/3457)
 

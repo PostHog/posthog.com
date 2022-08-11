@@ -46,16 +46,23 @@ export const menuItem = (hideBorder) => cntl`
     menu-item
     ${!hideBorder ? border : ''}
 `
-export const link = (className = '') => cntl`
+export const link = (className = '', hovered = false) => cntl`
     relative
     font-semibold
-    px-4
+    px-3.5
     py-3
     lg:py-2
-    text-[15px]
+    text-sm
     dark:text-white
     dark:hover:text-white
     text-almost-black
     hover:text-almost-black
+    flex
+    items-center
+    space-between
+    w-full
+    space-x-1.5
+    rounded-t-md
+    ${hovered ? 'lg:bg-white lg:dark:bg-gray-accent-dark lg:shadow-md' : ''}
     ${className}
 `

@@ -8,8 +8,10 @@ While we have set up the company to work asynchronously as much as possible, the
 
 We understand organizing travel can be a challenge when you have personal/family commitments to manage, so we try to take a balanced approach to meetups:
 
-- Once a year: all-company offsite (everyone strongly encouraged to attend)
-- Twice a year: small team offsite (everyone encouraged to attend _one_ of these)
+- Once a year: all-company offsite
+- Once a year: Small Team offsite (app and platform teams do this as a single combined offsite)
+- Occasionally: [in-person onboarding](https://posthog.com/handbook/people/onboarding#onboarding-buddy)
+- Whenever you like: [in-person meetups](https://posthog.com/handbook/people/spending-money#meeting-each-other)
 
 ## All-company offsites
 
@@ -29,26 +31,32 @@ Typical agenda:
 
 ## Small team offsites
 
-We want to try to encourage small teams to get together twice each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
+We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
 
 Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
-- We'd encourage you to pick a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
+- You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
+- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
 - We'd encourage you to get an AirBnB for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
-- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having a light agenda and an idea of what you want to achieve _before_ the start of the trip. 
+- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
 
 Ideas for the agenda:
 - Planning session. What does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](https://posthog.com/handbook/people/team-structure/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
 
-
-The budget for these trips is up to $1,000 per person.
+The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
-## How to plan an offsite in 8 weeks
+## Hedge House
+
+PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
+
+Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
+
+## How to plan an offsite in 8 weeks - a checklist
 
 Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. To use any of the templates, create a copy to your own drive and edit as you see fit.
 
@@ -61,7 +69,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - It is worth getting people to hold dates as early as possible, even before you've selected a location
 - [ ] Choose location
   - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes or COVID testing requirements
-  - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location
+  - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
+  - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
 - [ ] Announce to team
   - You can have fun with this and build excitement by progressively dropping hints and having folks try to guess the location
@@ -90,7 +99,12 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **6 weeks out**
 
 - [ ] Draft [budget](https://docs.google.com/spreadsheets/d/1ZwDgcoEtDMICtxuozwEfJUHqJH12_E-jyylGQbWCLQQ/edit?usp=sharing)
-  - Using the tentative schedule, you can begin to estimate a rough budget to guide planning
+  - Using the tentative schedule, you can begin to estimate a rough budget to guide planning. Here are some benchmarks to use, however these will vary a lot based on location, size of team, and how cost-constrained you are:
+    - Accommodations = $200/night/person
+    - Intercontinental airfare = $1000/person; intracontinental airfare = $500/person
+    - Ground transportation = $50/day/person
+    - Food & drinks = $50/day/person 
+    - Contingency = 10% of total budget
 - [ ] Secure transportation
   - Book any group transportation like coaches or a rental car ahead of time
 - [ ] Finalize team outings and book as needed
@@ -148,11 +162,3 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **2 weeks after**
 - [ ] Compile post-mortem feedback and share with team
 - [ ] Host post-mortem meeting to discuss any outstanding issues (optional)
-
-## Hedge House
-
-PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites.
-
-Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
-
-We'd recommend using the Hedge House for small team offsites for cost and convenience reasons (unless you're outside Europe, in which case - up to you). 

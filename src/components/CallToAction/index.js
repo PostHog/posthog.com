@@ -5,20 +5,24 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-[13px] font-semibold px-2 py-[.2rem] border-2',
-    sm: 'text-small font-semibold px-3 py-1 border-2',
-    md: 'text-small font-semibold px-5 py-2 border-2',
-    lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
+    xs: 'text-sm font-bold px-4 py-2',
+    sm: 'text-sm font-bold px-6 py-2.5',
+    md: 'text-base font-bold px-5 py-3',
+    lg: 'text-base font-bold px-6 py-3',
 }
 
 const primary = cntl`
-    bg-primary
-    dark:bg-primary-dark
+    bg-red
+    border-red
+    dark:bg-red
     text-white
-    dark:text-primary
+    dark:text-white
     hover:text-white
-    hover:dark:text-primary
-    border-primary
+    hover:dark:text-white
+    hover:bg-red-hover
+    hover:border-red-hover
+    active:bg-red-active
+    active:border-red-active
     dark:primary-dark
 `
 
@@ -30,31 +34,32 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    bg-tan/75
-    dark:bg-primary
+    bg-white
+    border-black/10
+    hover:border-black/30
+    border
     text-primary
-    text-opacity-80
-    hover:text-opacity-100
-    dark:text-primary-dark
     hover:text-primary
-    hover:border-opacity-25
-    active:border-opacity-50
-    border-primary/10
-    dark:border-primary-dark
 `
 
 const buttonTypes = {
     primary,
     secondary,
     outline,
+    custom: '',
 }
 
 const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
-    rounded-full
+    rounded-sm
     inline-block
     cta
+    button-shadow
+    shadow-xl
+    relative
+    active:top-[0.5px]
+    active:scale-[.98]
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
@@ -64,7 +69,15 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
 export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+    return (
+        <CallToAction
+            {...props}
+            onClick={() => {
+                posthog?.capture(eventName, event)
+                props.onClick && props.onClick()
+            }}
+        />
+    )
 }
 
 export const CallToAction = ({

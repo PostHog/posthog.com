@@ -41,7 +41,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability)
 *   [ ] Introduce new joiner to onboarding buddy
 
-## Two weeks before they join
+## One week before they join
 
 *   [ ] Send team member a link to the [Handbook](https://posthog.com/handbook) and a copy of this page so they can check everything has been done
 *   [ ] Create GSuite account for the team member
@@ -68,6 +68,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] _(UK only)_ Ask if they want to be part of our [private healthcare](https://posthog.com/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions)
 *   [ ] _(UK only)_ Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll 
 *   [ ] (_US only)_ Add the team member to [Gusto](https://app.gusto.com/)
+*   [ ] Add the team member to the [compensation spreadsheet](https://docs.google.com/spreadsheets/d/1IqsNexQcxGNCdChskO8tnyICARW2TMZG5KL1g0FWflI/edit#gid=1302232181) so we can track pay changes appropriately
 *   [ ] [Sponsor a hedgehog](https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637) on their behalf!
 
 

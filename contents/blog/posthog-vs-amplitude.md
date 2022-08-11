@@ -32,16 +32,14 @@ Let's start with the core differences. Over 9,000 companies already use PostHog,
 You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer PostHog Cloud for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
 
 ### 2. It's built for engineers
-Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch?plan=scale&demo=scale#demo) if you have questions.
+Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/signup/self-host/get-in-touch) if you have questions.
 
 ### 3. It's open source
 Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own apps](/docs/apps/build) or even add extra functionality. You also benefit from the work of other teams who build their own apps. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
 
 ## Feature comparison
 
-This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Scale](/pricing) – the paid tier of our self-hosted platform. 
-
-We also offer [PostHog Enterprise](/enterprise), which includes everything from Scale but adds enhanced training and support, SLA with downtime developer pairing, SSO, SAML, instance monitoring, and more.  
+This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Self-Hosted](/pricing). Single sign-on and multitenancy are available as bolt-ons to all plans. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -50,7 +48,7 @@ We also offer [PostHog Enterprise](/enterprise), which includes everything from 
             <td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
         	<td className="w-3/12 text-center"><strong>PostHog Cloud</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog Scale</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Self-Hosted</strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -384,7 +382,7 @@ Amplitude also uses machine learning to power what it calls predictive analytics
 
 Amplitude's entry-level tier is free to use up to 10 million events per month, which compares very favorably to rivals like Mixpanel (up to 100k monthly users), Pendo (up to 1,000 monthly users) and Heap (up to 10,000 sessions per month). Once you exceed 10 million events, you'll need to speak to Amplitude's sales team to proceed further.
 
-PostHog Cloud and PostHog Scale are free up to 1 million events per month, but unlike Amplitude you get premium features like Experimentation, Correlation Analysis, Group Analytics and user permissions for free when you're under this limit.
+PostHog Cloud and PostHog Self-Hosted are free up to 1 million events per month, but unlike Amplitude you get premium features like Experimentation, Correlation Analysis, Group Analytics and user permissions for free when you're under this limit.
 
 PostHog Open Source is free for life, but is limited to one project. It includes all the core analytics features, such as Funnels, Trends, Cohorts, Paths, Feature Flags, and Session Recording, but doesn't have Experimentation or Correlation Analysis.
 
@@ -392,14 +390,14 @@ PostHog Open Source is free for life, but is limited to one project. It includes
 
 We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
 
-- Console log tracking in recordings
-- Insight experience overhaul
-- Export and share visualizations as image file
+- In-app setup guided tour
+- PostHog Cloud EU
+- Session Recordings DevTools
+- Turbo feature flags
+- Unified querying across events, persons, sessions, groups
 - Automated insight recommendations
-- Session analysis 2.0
 - Lightning fast querying at billion event and person scale
-- Enhanced plugin development experience
-- Rapid ingestion pipeline
+- Extended insight visualizations
 
 You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
 

@@ -1,0 +1,151 @@
+---
+title: Libraries
+sidebarTitle: Libraries
+sidebar: Docs
+showTitle: true
+---
+
+PostHog provides a number of both official and community maintained libraries to help you easily integrate with your preferred language or framework.
+This document outlines all of our current client-side and server-side libraries, as well as which features each of them currently supports.
+
+For information on how to send events using these libraries, check out [this guide](/docs/integrate/ingest-live-data).
+
+## Client libraries
+
+Some features such as session recording are only available with our JavaScript library.
+
+> We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this.
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Library</th>
+<th style="text-align:left">Maintainer</th>
+<th style="text-align:left">Event Capture</th>
+<th style="text-align:left">User Identification</th>
+<th style="text-align:left">Autocapture</th>
+<th style="text-align:left">Session Recording</th>
+<th style="text-align:left">Feature Flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/client/js">JavaScript</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/client/android">Android</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/client/ios">iOS</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/client/flutter">Flutter</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/client/react-native">React Native</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+<td style="text-align:left">❌</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+## Server libraries
+
+> **Note:** Session recording is not possible on server-side libraries.
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Library</th>
+<th style="text-align:left">Maintainer</th>
+<th style="text-align:left">Event Capture</th>
+<th style="text-align:left">User Identification</th>
+<th style="text-align:left">Feature Flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/node">NodeJS</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/python">Python</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/php">PHP</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/ruby">Ruby</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/go">Golang</a></td>
+<td style="text-align:left">PostHog Team</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="/docs/integrate/server/elixir">Elixir</a></td>
+<td style="text-align:left">Community</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Yardanico/posthog-nim">Nim</a></td>
+<td style="text-align:left">Community</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">✅</td>
+<td style="text-align:left">❌</td>
+</tr>
+</tbody>
+</table>
+
+</div>

@@ -85,9 +85,6 @@ The following examples use `company` as a group type and `id:5` as the group key
 
 > **Tip:** Use a singular form of the group type throughout ingestion
 
-import { Tabs } from 'antd'
-export const TabPane = Tabs.TabPane
-
 import GroupsIngestionPosthogJs from './snippets/groups-ingestion-posthog-js.mdx'
 import GroupsIngestionPython from './snippets/groups-ingestion-python.mdx'
 import GroupsIngestionPHP from './snippets/groups-ingestion-php.mdx'
@@ -96,29 +93,43 @@ import GroupsIngestionNode from './snippets/groups-ingestion-node.mdx'
 import GroupsIngestionSegment from './snippets/groups-ingestion-segment.mdx'
 import GroupsIngestionOther from './snippets/groups-ingestion-other.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-    <TabPane tab="JavaScript" key="1">
+import Tab from "components/Tab"
+
+<Tab.Group>
+<Tab.List>
+    <Tab>JavaScript</Tab>
+    <Tab>Python</Tab>
+    <Tab>PHP</Tab>
+    <Tab>Go</Tab>
+    <Tab>Node.js</Tab>
+    <Tab>Segment</Tab>
+    <Tab>Other libraries</Tab>
+</Tab.List>
+
+<Tab.Panels>
+    <Tab.Panel>
         <GroupsIngestionPosthogJs />
-    </TabPane>
-    <TabPane tab="Python" key="2">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionPython />
-    </TabPane>
-    <TabPane tab="PHP" key="3">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionPHP />
-    </TabPane>
-    <TabPane tab="Golang" key="4">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionGo />
-    </TabPane>
-    <TabPane tab="NodeJS" key="5">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionNode />
-    </TabPane>
-    <TabPane tab="Segment" key="6">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionSegment />
-    </TabPane>
-    <TabPane tab="Other libraries" key="7">
+    </Tab.Panel>
+    <Tab.Panel>
         <GroupsIngestionOther />
-    </TabPane>
-</Tabs>
+    </Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 ## Analysing group insights
 
@@ -140,7 +151,7 @@ To view groups and their properties, head to the "Persons and Groups" tab on the
 
 From here you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left).
 
-![View Groups](../../images/docs/user-guides/view-groups.png)
+![View Groups](../../images/docs/user-guides/funnels/view-groups.png)
 
 ### Organizations signed up in last week
 
@@ -148,7 +159,7 @@ If we wanted to see how many organizations signed up in the last week we can cre
 
 This will show us the trend of sign ups by organization as opposed to per user.
 
-![View Groups](../../images/docs/user-guides/signed-up-organizations.png)
+![View Groups](../../images/docs/user-guides/funnels/signed-up-organizations.png)
 
 ### Organization signup funnel
 
@@ -156,7 +167,7 @@ You can use groups in many insights, for example in a funnel you may want to und
 
 This will show how many organizations have made it through the funnel as opposed to individual users.
 
-![View Groups](../../images/docs/user-guides/funnels-group-aggregation.png)
+![View Groups](../../images/docs/user-guides/funnels/funnels-group-aggregation.png)
 
 ## How to think about Feature Flags with groups
 
@@ -174,23 +185,22 @@ import GroupsFeatureFlagsPHP from './snippets/groups-flags-php.mdx'
 import GroupsFeatureFlagsGo from './snippets/groups-flags-go.mdx'
 import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 
-<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
-    <TabPane tab="JavaScript" key="1">
-        <GroupsFeatureFlagsPosthogJs />
-    </TabPane>
-    <TabPane tab="Python" key="2">
-        <GroupsFeatureFlagsPython />
-    </TabPane>
-    <TabPane tab="PHP" key="3">
-        <GroupsFeatureFlagsPHP />
-    </TabPane>
-    <TabPane tab="Golang" key="4">
-        <GroupsFeatureFlagsGo />
-    </TabPane>
-    <TabPane tab="NodeJS" key="5">
-        <GroupsFeatureFlagsNode />
-    </TabPane>
-</Tabs>
+<Tab.Group>
+    <Tab.List>
+        <Tab>JavaScript</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Go</Tab>
+        <Tab>Node.js</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel><GroupsFeatureFlagsPosthogJs /></Tab.Panel>
+        <Tab.Panel><GroupsFeatureFlagsPython /></Tab.Panel>
+        <Tab.Panel><GroupsFeatureFlagsPHP /></Tab.Panel>
+        <Tab.Panel><GroupsFeatureFlagsGo /></Tab.Panel>
+        <Tab.Panel><GroupsFeatureFlagsNode /></Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
 
 ## Renaming group types
 
@@ -213,6 +223,6 @@ Please [reach out](/slack) if you have feedback!
 
 Want to know more about what's possible with Groups in PostHog? Try these tutorials:
 
-- [How to track how teams use your product](/tutorials/tracking-teams)
+-   [How to track how teams use your product](/tutorials/tracking-teams)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials). 
+Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).

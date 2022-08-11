@@ -50,7 +50,7 @@ const Blog = ({
                             compact
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
-                        <header className="text-xs text-gray-400 text-center uppercase mb-8">Recent Posts</header>
+                        <header className="text-sm text-gray-400 text-center uppercase mb-8">Recent Posts</header>
                         <section className="grid md:grid-cols-3 md:gap-4 lg:gap-8">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>

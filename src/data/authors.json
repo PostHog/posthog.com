@@ -207,5 +207,37 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/lsmith/"
+    },
+    {
+        "handle": "tim-glaser",
+        "name": "Tim Glaser",
+        "role": "Co-founder/CTO of PostHog",
+        "image": "../../static/images/authors/tim-glaser.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/timgl/"
+    },
+    {
+        "handle": "noah-brier",
+        "name": "Noah Brier",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/noahbrier/"
+    },
+    {
+        "handle": "kyle-galbraith",
+        "name": "Kyle Galbraith",
+        "role": "Co-founder/CEO of Depot",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/kylegalbraith"
+    },
+    {
+        "handle": "jacob-gillespie",
+        "name": "Jacob Gillespie",
+        "role": "Co-founder/CTO of Depot",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/jacobwgillespie"
     }
 ]

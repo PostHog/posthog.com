@@ -1,5 +1,5 @@
 ---
-title: How to tracking key B2B product metrics
+title: How to track key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']

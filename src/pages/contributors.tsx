@@ -1,29 +1,19 @@
-import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import { Spacer } from '../components/Spacer'
-import { Row, Tabs, Spin } from 'antd'
-import { useActions, useValues } from 'kea'
+import React from 'react'
+import Layout from 'components/Layout'
+import { Spacer } from 'components/Spacer'
+import { useValues } from 'kea'
 import { contributorsLogic } from '../logic/contributorsLogic'
-import { SEO } from '../components/seo'
+import { SEO } from 'components/seo'
 import pluginLibraryOgImage from '../images/posthog-plugins.png'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
 import { ContributorsChart } from 'components/ContributorsChart'
-
-const { TabPane } = Tabs
+import Tab from 'components/Tab'
+import Spinner from 'components/Spinner'
 
 export const ContributorsPage = () => {
-    const { setSearchQuery } = useActions(contributorsLogic)
     const { filteredContributors, contributorsLoading } = useValues(contributorsLogic)
-    const [activeTab, setActiveTab] = useState('list')
-
-    const handleTabClick = (newTab: string) => {
-        setActiveTab(newTab)
-        if (newTab === 'list') {
-            setSearchQuery('')
-        }
-    }
 
     return (
         <div className="contributors-page-wrapper">
@@ -36,39 +26,44 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
-                        <TabPane tab="List" key="list" />
-                        <TabPane tab="Stats" key="stats" />
-                    </Tabs>
-                    <Spacer height={20} />
+                    <Tab.Group>
+                        <Tab.List className="justify-center my-8">
+                            <Tab>List</Tab>
+                            <Tab>Stats</Tab>
+                        </Tab.List>
 
-                    {activeTab === 'list' ? (
-                        <>
-                            <ContributorSearch />
-                            <Spacer height={20} />
-                            <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
-                                {contributorsLoading ? (
-                                    <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
-                                ) : (
-                                    <>
-                                        {filteredContributors.map((contributor: Contributor) => (
-                                            <ContributorCard
-                                                key={contributor.login}
-                                                name={contributor.login}
-                                                link={contributor.profile}
-                                                imageSrc={contributor.avatar_url}
-                                                contributions={contributor.contributions}
-                                                mvpWins={contributor.mvpWins}
-                                                contributorLevel={contributor.level}
-                                            />
-                                        ))}
-                                    </>
-                                )}
-                            </Row>
-                        </>
-                    ) : (
-                        <ContributorsChart />
-                    )}
+                        <Tab.Panels>
+                            <Tab.Panel>
+                                <div className="flex flex-col items-center space-y-8 px-6">
+                                    <ContributorSearch />
+
+                                    {contributorsLoading ? (
+                                        <Spinner />
+                                    ) : (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+                                            {filteredContributors.map((contributor: Contributor) => (
+                                                <ContributorCard
+                                                    key={contributor.login}
+                                                    name={contributor.login}
+                                                    link={contributor.profile}
+                                                    imageSrc={contributor.avatar_url}
+                                                    contributions={contributor.contributions}
+                                                    mvpWins={contributor.mvpWins}
+                                                    contributorLevel={contributor.level}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </Tab.Panel>
+
+                            <Tab.Panel>
+                                <ContributorsChart />
+                            </Tab.Panel>
+                        </Tab.Panels>
+                    </Tab.Group>
+
+                    <Spacer height={20} />
                 </div>
                 <Spacer />
             </Layout>

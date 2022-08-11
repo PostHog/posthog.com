@@ -61,7 +61,7 @@ You can use PostHog to monitor user behaviors through metrics across your produc
 ### How does PostHog do this?
 It's fair to say that metrics are a vital part of the way we work at PostHog and, unsurprisingly, we use our own product to collect such information. We have dedicated dashboards setup for most teams and [a north star metric we use](/blog/north-star-metrics) as a company to stay on track, but we also enable everyone to query the data themselves and discover new insights.
 
-If you're struggling to define the best metrics for your team, [we always recommend the AARRR 'pirate' framework](/docs/tutorials/aarrr-framework) as a good starting point. 
+If you're struggling to define the best metrics for your team, [we always recommend the AARRR 'pirate' framework](/blog/aarrr-pirate-funnel) as a good starting point. 
 
 ## Session recordings
 There is no substitute for observing a user use your product in their natural environment. As long as you randomly sample customers you’re likely to get unbiased results here - the users will not change their behavior due to your presence. Watching session recordings can give valuable insights into why people are failing to achieve something with your product: perhaps they’re accessing your product through their mobile browser and it’s much harder to use. Watching session recordings provides a lot of context for this type of issue. 

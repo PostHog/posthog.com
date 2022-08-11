@@ -1,3 +1,8 @@
+[dev]
+  command = "yarn start"
+  port = 8888
+  targetPort = 8001
+
 [[redirects]]
   from = "/plugins/*"
   to = "/apps/:splat"
@@ -1186,11 +1191,6 @@
 [build]
     command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
 
-# Added: 2022-02-03
-[[redirects]]
-    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-
 # Added: 2022-02-04
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
@@ -1198,18 +1198,8 @@
 
 # Added: 2022-02-14
 [[redirects]]
-    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-
-
-# Added: 2022-02-14
-[[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
-[[redirects]]
-    from = "/docs/self-host/configure/async-migrations/overview"
-    to = "/docs/self-host/configure/async-migrations"
 
 # Added: 2022-02-17
 [[redirects]]
@@ -1472,3 +1462,609 @@
 [[redirects]]
     from = "/tutorials/categories/plugins"
     to = "/tutorials/categories/apps"
+    
+# Added: 2022-07-08
+[[redirects]]
+    from = "/startups"
+    to = "/pricing"
+    
+# Added: 2022-07-11
+[[redirects]]
+    from = "/trial"
+    to = "/pricing"
+    
+# Added: 2022-07-12
+[[redirects]]
+    from = "/schedule-demo"
+    to = "/book-a-demo"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/airbyte-export/docs"
+    to = "/docs/apps/airbyte-export"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/amazon-kinesis/docs"
+    to = "/docs/apps/amazon-kinesis"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/automatic-cohort-creator/docs"
+    to = "/docs/apps/automatic-cohort-creator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/bigquery-export/docs"
+    to = "/docs/apps/bigquery-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/bitbucket-release-tracker/docs"
+    to = "/docs/apps/bitbucket-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/braze/docs"
+    to = "/docs/apps/braze"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/currency-normalization/docs"
+    to = "/docs/apps/currency-normalization"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/customer-io/docs"
+    to = "/docs/apps/customer-io"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/databricks/docs"
+    to = "/docs/apps/databricks"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/downsampling/docs"
+    to = "/docs/apps/downsampling"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/email-scoring/docs"
+    to = "/docs/apps/email-scoring"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/engage-connector/docs"
+    to = "/docs/apps/engage-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/event-sequence-timer/docs"
+    to = "/docs/apps/event-sequence-timer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/first-time-event-tracker/docs"
+    to = "/docs/apps/first-time-event-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/geoip-enrichment/docs"
+    to = "/docs/apps/geoip-enrichment"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/github-release-tracker/docs"
+    to = "/docs/apps/github-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/github-star-sync/docs"
+    to = "/docs/apps/github-star-sync"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/gitlab-release-tracker/docs"
+    to = "/docs/apps/gitlab-release-tracker"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/google-cloud-export/docs"
+    to = "/docs/apps/google-cloud-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/google-pub-sub-connector/docs"
+    to = "/docs/apps/google-pub-sub-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/heartbeat/docs"
+    to = "/docs/apps/heartbeat"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/hubspot-connector/docs"
+    to = "/docs/apps/hubspot-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/ingestion-alert/docs"
+    to = "/docs/apps/ingestion-alert"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/intercom/docs"
+    to = "/docs/apps/intercom"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/migrator-3000/docs"
+    to = "/docs/apps/migrator-3000"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/n8n/docs"
+    to = "/docs/apps/n8n"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/orbit/docs"
+    to = "/docs/apps/orbit"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/pagerduty-connector/docs"
+    to = "/docs/apps/pagerduty-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/postgres-export/docs"
+    to = "/docs/apps/postgres-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/property-filter/docs"
+    to = "/docs/apps/property-filter"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/property-flattener/docs"
+    to = "/docs/apps/property-flattener"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/redshift-export/docs"
+    to = "/docs/apps/redshift-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/redshift-import/docs"
+    to = "/docs/apps/redshift-import"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/replicator/docs"
+    to = "/docs/apps/replicator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/rudderstack-export/docs"
+    to = "/docs/apps/rudderstack-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/s3-export/docs"
+    to = "/docs/apps/s3-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/salesforce-connector/docs"
+    to = "/docs/apps/salesforce-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/schema-enforcer/docs"
+    to = "/docs/apps/schema-enforcer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/segment/docs"
+    to = "/docs/apps/segment"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/sendgrid-connector/docs"
+    to = "/docs/apps/sendgrid-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/sentry-connector/docs"
+    to = "/docs/apps/sentry-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/shopify/docs"
+    to = "/docs/apps/shopify"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/snowflake-export/docs"
+    to = "/docs/apps/snowflake-export"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/taxonomy-standardizer/docs"
+    to = "/docs/apps/taxonomy-standardizer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/timestamp-parser/docs"
+    to = "/docs/apps/timestamp-parser"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/twilio/docs"
+    to = "/docs/apps/twilio"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/twitter-followers/docs"
+    to = "/docs/apps/twitter-followers"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/unduplicator/docs"
+    to = "/docs/apps/unduplicator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/url-normalizer/docs"
+    to = "/docs/apps/url-normalizer"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/user-agent-populator/docs"
+    to = "/docs/apps/user-agent-populator"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/variance-connector/docs"
+    to = "/docs/apps/variance-connector"
+
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zapier-connector/docs"
+    to = "/docs/apps/zapier-connector"
+
+# Added: 2022-07-14
+[[redirects]]
+    from = "/apps/zendesk-connector/docs"
+    to = "/docs/apps/zendesk-connector"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/app-east"
+
+# Added: 2022-07-18
+[[redirects]]
+    from = "/blog/the-posthog-array-1-37-1"
+    to = "/blog/the-posthog-array-1-37-0"
+
+[[redirects]]
+    from = "/handbook/engineering/app-west"
+    to = "/handbook/people/team-structure/app-west"
+
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations"
+    to = "/docs/runbook/async-migrations"
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0001-events-sample-by"
+    to = "/docs/runbook/async-migrations/0001-events-sample-by"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0002-events-sample-by"
+    to = "/docs/runbook/async-migrations/0002-events-sample-by"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
+    to = "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations/overview"
+    to = "/docs/runbook/async-migrations"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/disaster-recovery"
+    to = "/docs/runbook/disaster-recovery"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    to = "/docs/runbook/migrate/migrate-between-cloud-and-self-hosted"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-from-amplitude"
+    to = "/docs/runbook/migrate/migrate-from-amplitude"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/backup"
+    to = "/docs/runbook/services/clickhouse/backup"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse"
+    to = "/docs/runbook/services/clickhouse"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/kafka-engine"
+    to = "/docs/runbook/services/clickhouse/kafka-engine"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/resize-disk"
+    to = "/docs/runbook/services/clickhouse/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/restore"
+    to = "/docs/runbook/services/clickhouse/restore"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/sharding-and-replication"
+    to = "/docs/runbook/services/clickhouse/sharding-and-replication"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/clickhouse/vertical-scaling"
+    to = "/docs/runbook/services/clickhouse/vertical-scaling"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka"
+    to = "/docs/runbook/services/kafka"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka/log-retention"
+    to = "/docs/runbook/services/kafka/log-retention"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/kafka/resize-disk"
+    to = "/docs/runbook/services/kafka/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/minio"
+    to = "/docs/runbook/services/minio"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/async-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/async-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/event-flow"
+    to = "/docs/runbook/services/plugin-server/diagrams/event-flow"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/ingestion-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/ingestion-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server/diagrams/plugin-server"
+    to = "/docs/runbook/services/plugin-server/diagrams/plugin-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/plugin-server"
+    to = "/docs/runbook/services/plugin-server"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/postgresql"
+    to = "/docs/runbook/services/postgresql"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/postgres-upgrade-migrations"
+    to = "/docs/runbook/services/postgresql/long-migrations"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/postgresql/resize-disk"
+    to = "/docs/runbook/services/postgresql/resize-disk"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/redis"
+    to = "/docs/runbook/services/redis"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/runbook/zookeeper"
+    to = "/docs/runbook/services/zookeeper"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/deploy/upgrade-notes"
+    to = "/docs/runbook/upgrade-notes"
+
+
+# Added: 2022-08-02
+[[redirects]]
+    from = "/docs/self-host/configure/upgrading-posthog"
+    to = "/docs/runbook/upgrading-posthog"
+
+
+# Added: 2022-08-03
+[[redirects]]
+    from = "/tutorials/aarrr-framework"
+    to = "/blog/aarrr-pirate-funnel"
+
+[[redirects]]
+    from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
+    to = "/blog/aarrr-pirate-funnel"    
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/cloud/proxy"
+    to = "/docs/integrate/proxy"
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+    to = "/docs/migrate/migrate-between-cloud-and-self-hosted"
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-from-amplitude"
+    to = "/docs/migrate/migrate-from-amplitude"
+
+# Added: 2022-02-03
+[[redirects]]
+    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
+    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+
+# Added: 2022-08-08
+[[redirects]]
+    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
+
+# Added: 2022-08-10
+[[redirects]]
+    from = "/plugins/customer.io"
+    to = "/apps/customer-io"
+
+[[redirects]]
+    from = "/plugins/hubspot"
+    to = "/apps/hubspot-connector"
+
+[[redirects]]
+    from = "/plugins/pub/sub-export"
+    to = "/apps/google-pub-sub-connector"
+
+[[redirects]]
+    from = "/plugins/sendgrid"
+    to = "/apps/sendgrid-connector"
+
+[[redirects]]
+    from = "/plugins/geoip"
+    to = "/apps/apps/geoip-enrichment"
+
+[[redirects]]
+    from = "/plugins/event-sequence-timer-plugin"
+    to = "/apps/event-sequence-timer"
+
+# Added: 2022-08-10
+[[redirects]]
+    from = "/handbook/product/pm-rampup"
+    to = "/handbook/people/ramp-up/product-manager"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/team-structure/why-small-teams"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/apps/build"
