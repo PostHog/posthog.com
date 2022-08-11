@@ -50,37 +50,19 @@ GDPR-compliant analytics tools come in various guises, which you can define as g
 - **Best:** You self-host and control all data / no personal data is collected
 
 ## 1. [PostHog](https://posthog.com/product)
-![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
 - **EU Cloud Hosting:** Coming Q4 2022
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
+![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+
 PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
 
 (Think Amplitude + Hotjar + LaunchDarkly in one platform and you're pretty close.)
 
 Unlike [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event auto capture, so you can start collecting useful data immediately without instrumenting events by hand.
-
-<table>
-    <tr>
-        <td><strong>Open Source</strong></td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td>Coming Q4 2022</td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
 
 ### Who is PostHog for?
 PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size.
@@ -96,6 +78,12 @@ PostHog is especially helpful for product teams that want to understand how user
 - Open source, via MIT license
 
 ### PostHog and GDPR compliance
+
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** Coming Q4 2022
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
 PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
 
 ### Can you use PostHog without cookie banners?
