@@ -247,10 +247,12 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
 
     const isWithChild = children && children.length > 0
 
+    console.log(name, url)
+
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
-                {url === null && name ? (
+                {url === undefined && name ? (
                     <p className="text-black dark:text-white font-semibold opacity-25 m-0 my-2 ml-3 text-[15px]">
                         {name}
                     </p>
