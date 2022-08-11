@@ -326,47 +326,65 @@ const PricingNew = (): JSX.Element => {
                             </TrackedCTA>
                         </div>
                     </div>
-                    <div className="md:col-span-2 mt-10 order-5 mx-auto flex space-x-8">
-                        <Link
-                            to="/signup/self-host/get-in-touch#demo"
-                            className="text-[15px] font-semibold text-blue hover:text-blue flex space-x-2 items-center"
-                        >
-                            <svg
-                                width="24"
-                                height="17"
-                                viewBox="0 0 24 17"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="text-black/30"
+                    <div className="md:col-span-2 mt-8 order-5">
+                        <div className="mx-auto flex justify-center space-x-8 pb-4 mb-6 border-b border-dashed border-gray-accent-light">
+                            <Link
+                                to="/signup/self-host/get-in-touch#demo"
+                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
                             >
-                                <path
-                                    d="M3.105 0.499996C2.21906 0.499996 1.5 1.22 1.5 2.105V13.9999H0V15.4558C0 16.308 0.691872 16.9999 1.54406 16.9999H22.3182C23.2473 16.9999 24.0001 16.2471 24.0001 15.318V13.9999H22.5001V2.05244C22.5001 1.19744 21.8026 0.499924 20.9476 0.499924L3.105 0.499996ZM3.105 2L20.9999 2.0525V13.9999H13.4737C13.4662 14.8249 12.7912 15.4999 11.9653 15.4999C11.1375 15.4999 10.4625 14.8268 10.4568 13.9999H3.00002V2.10506C3.00002 2.04693 3.0469 2.00006 3.10502 2.00006L3.105 2ZM12.0347 3.5C10.3744 3.5 9.0234 4.86406 9.0234 6.54416C9.0234 7.94854 9.97214 9.1232 11.25 9.47384C9.14246 9.68384 7.22155 10.7816 5.95867 12.4916H10.0161C10.2833 12.4869 10.557 12.486 10.8364 12.4916H13.3209C13.5037 12.4888 13.6847 12.4897 13.8628 12.4916H18.0169C16.7691 10.7994 14.8811 9.70544 12.7989 9.47672C14.0861 9.13172 15.0432 7.9542 15.0432 6.54416C15.0442 4.86416 13.6961 3.5 12.0358 3.5H12.0347Z"
-                                    fill="currentColor"
-                                />
-                            </svg>
+                                <svg
+                                    width="24"
+                                    height="17"
+                                    viewBox="0 0 24 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="text-black/30 group-hover:text-blue"
+                                >
+                                    <path
+                                        d="M3.105 0.499996C2.21906 0.499996 1.5 1.22 1.5 2.105V13.9999H0V15.4558C0 16.308 0.691872 16.9999 1.54406 16.9999H22.3182C23.2473 16.9999 24.0001 16.2471 24.0001 15.318V13.9999H22.5001V2.05244C22.5001 1.19744 21.8026 0.499924 20.9476 0.499924L3.105 0.499996ZM3.105 2L20.9999 2.0525V13.9999H13.4737C13.4662 14.8249 12.7912 15.4999 11.9653 15.4999C11.1375 15.4999 10.4625 14.8268 10.4568 13.9999H3.00002V2.10506C3.00002 2.04693 3.0469 2.00006 3.10502 2.00006L3.105 2ZM12.0347 3.5C10.3744 3.5 9.0234 4.86406 9.0234 6.54416C9.0234 7.94854 9.97214 9.1232 11.25 9.47384C9.14246 9.68384 7.22155 10.7816 5.95867 12.4916H10.0161C10.2833 12.4869 10.557 12.486 10.8364 12.4916H13.3209C13.5037 12.4888 13.6847 12.4897 13.8628 12.4916H18.0169C16.7691 10.7994 14.8811 9.70544 12.7989 9.47672C14.0861 9.13172 15.0432 7.9542 15.0432 6.54416C15.0442 4.86416 13.6961 3.5 12.0358 3.5H12.0347Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
 
-                            <span>Schedule a demo</span>
-                        </Link>
-                        <Link
-                            to="/signup/cloud/enterprise"
-                            className="text-[15px] font-semibold text-blue hover:text-blue flex space-x-2 items-center"
-                        >
-                            <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 20 20"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="text-black/30"
+                                <span>Schedule a demo</span>
+                            </Link>
+                            <Link
+                                to="/signup/cloud/enterprise"
+                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
                             >
-                                <path
-                                    d="M18.7569 1.24141C18.4467 0.932806 17.9842 0.826566 17.5717 0.975786L1.6631 6.65779C1.23498 6.81013 0.938096 7.20389 0.910756 7.65779C0.883412 8.11247 1.12952 8.53825 1.53732 8.74295L6.74832 11.3475L13.4085 6.59055L8.65072 13.2523L11.2553 18.4633C11.4491 18.8493 11.8436 19.0907 12.2725 19.0907C12.2959 19.0907 12.3186 19.0899 12.3412 19.0883C12.7959 19.0618 13.1905 18.7657 13.3436 18.3368L19.0256 2.42658C19.1717 2.01408 19.0678 1.55158 18.7568 1.24142L18.7569 1.24141Z"
-                                    fill="currentColor"
-                                />
-                            </svg>
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="text-black/30 group-hover:text-blue"
+                                >
+                                    <path
+                                        d="M18.7569 1.24141C18.4467 0.932806 17.9842 0.826566 17.5717 0.975786L1.6631 6.65779C1.23498 6.81013 0.938096 7.20389 0.910756 7.65779C0.883412 8.11247 1.12952 8.53825 1.53732 8.74295L6.74832 11.3475L13.4085 6.59055L8.65072 13.2523L11.2553 18.4633C11.4491 18.8493 11.8436 19.0907 12.2725 19.0907C12.2959 19.0907 12.3186 19.0899 12.3412 19.0883C12.7959 19.0618 13.1905 18.7657 13.3436 18.3368L19.0256 2.42658C19.1717 2.01408 19.0678 1.55158 18.7568 1.24142L18.7569 1.24141Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
 
-                            <span>Get in touch</span>
-                        </Link>
+                                <span>Get in touch</span>
+                            </Link>
+                        </div>
+                        <div>
+                            <h4 className="text-sm mb-0 font-normal opacity-75">
+                                <span className="font-bold">
+                                    Looking for {' '}
+
+                                    <Link
+                                        className="border-b border-dashed border-gray-accent-light"
+                                        onClick={() =>
+                                            posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
+                                        }
+                                    >
+                                PostHog Open Source</Link>?</span> (No credit card required)</h4>
+                            <p className="text-sm opacity-60">
+                                Available with product analytics, feature flags, and session recordings – limited to 1 project and no user permissions
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div className="flex-shrink md:basis-96 box-border flex">
@@ -381,76 +399,19 @@ const PricingNew = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-xl m-0 flex items-center">What comes in PostHog?</h2>
+            <section className={`${section} mt-12 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     Compare all plans
                 </h2>
                 <AllPlans />
             </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">
-                    PostHog open source
-                </h2>
-                <div className="grid lg:grid-cols-2 gap-x-4">
-                    <div>
-                        <p>
-                            Our original open source product is available for self-hosting, and ships with product
-                            analytics, feature flags, and session recordings.
-                        </p>
-                        <Link
-                            onClick={() =>
-                                posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                            }
-                            className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold relative active:top-[1px] active:scale-[.97]"
-                            to="https://github.com/PostHog/posthog"
-                        >
-                            <GitHub />
-                            <span>Browse on GitHub</span>
-                        </Link>
-                        <p className="text-sm opacity-50 mt-2">
-                            Limitations: one project, no user permissions, and community support only.
-                        </p>
-                    </div>
-
-                    <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
-                        <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:-rotate-6 sm:-mr-8 flex-shrink-0">
-                            <p className="text-white mb-2 mt-0 font-comic">Want to be our next star?</p>
-                            <span className="h-[28px] w-[125px]">
-                                <GitHubButton
-                                    href="https://github.com/posthog/posthog"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star posthog/posthog on GitHub"
-                                >
-                                    Star
-                                </GitHubButton>
-                            </span>
-                            <svg
-                                className="absolute left-2 sm:left-auto sm:right-2 -bottom-5"
-                                width="35"
-                                height="29"
-                                viewBox="0 0 35 29"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                    fill="#2D2D2D"
-                                />
-                            </svg>
-                        </div>
-
-                        <StaticImage src="./images/star-hog.png" width={242} alt="Star Hog" placeholder="none" />
-                    </div>
-                </div>
-            </section>
             <section className={`${section} my-12  md:px-4`}>
-                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12 md:px-4">
