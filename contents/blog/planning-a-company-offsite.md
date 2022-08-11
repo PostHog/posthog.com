@@ -88,4 +88,4 @@ As a reference, we budget $1,500 per person for a small team offsite and $3,000 
 
 Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out our [open-source guide](/handbook/company/offsites) for how we plan an offsites in eight weeks. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
 
- <NewsletterForm compact />
+<NewsletterForm compact />
