@@ -11,43 +11,25 @@ featuredImageType: full
 categories: ["Guides", "Privacy"]
 ---
 
-Since it came into law in 2018, the European Union's GDPR has applied restrictions on how you can use tools like Google Analytics to track and collect user data.
+The GDPR places significant restrictions on how you can use tools like Google Analytics to track and collect user data.
 
-In this guide, we'll cover:
-
-- How the GDPR impacts website and app analytics
-- Recent legal rulings on GDPR and Google Analytics
-- The best GDPR-compliant alternatives to Google Analytics
-
-## The GDPR and analytics
-
-Important PSA: There is **no universal legal definition** of what constitutes "GDPR-compliant analytics". It's a complicated regulation which defines principles which are now being tested in court.
-
-But, as a starting point, there are three principles you need to know:
+And, while there is **no universal legal definition** of what constitutes "GDPR-compliant analytics", there are some fundamental principles you can follow:
 
 1. **You must acquire "unambiguous consent":** Tucking a notice away in your terms and conditions isn't enough. This is why cookie banners are a thing. You need user consent if you're collecting [personally identifiable information](/blog/what-is-personal-data-pii).
 
 2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff  trained in how to handle data. You must also delete any personal data you hold if a user requests it.
 
-3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to US. This is a hot button issue and one of the main reasons companies are seeking alternatives to Google Analytics.
+3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transeferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
 
-We strongly recommend you take specialist advice on how GDPR applies to you, but these three principles are a good starting point. 
+## The best GDPR-compliant analytics tools
 
-Read our [guide to personally identifiable information (PII)](/blog/what-is-personal-data-pii) if you're unsure whether you're capturing data that's covered under the GDPR.
-
-## Recent GDPR rulings
-
-Recent uncertainty around GDPR and Google Analytics started in early 2022 when The Austrian Data Protection Agency (DPA) ruled against a medical website which used Google Analytics. This was deemed illegal due to an earlier case that [invalidated the so-called EU-US Privacy Shield](/blog/gdpr-google-analytics-privacy-shield), which previously enabled EU to US data transfers.
-
-Now, transferring personal data to the US from the EU is considered a breach of the GDPR unless sufficient measures are taken to anonymize the data. The Austrian ruling was followed by further advisories and rulings in France, Netherlands and Italy. We keep a record of all the latest rulings on [IsGoogleAnalyticsIllegal.com](https://isgoogleanalyticsillegal.com/).
-
-### The best GDPR-compliant analytics
-
-GDPR-compliant analytics tools come in various guises, which you can define as good, better, best:
+There are numerous ways to achieve GDPR compliance, which you can broadly categorize as good, better, best:
 
 - **Good:** Data transferred to the US is anonymized
 - **Better:** Data is stored in EU cloud servers
 - **Best:** You self-host and control all data / no personal data is collected
+
+All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source Google Analytics alternatives.
 
 ## 1. [PostHog](https://posthog.com/product)
 
