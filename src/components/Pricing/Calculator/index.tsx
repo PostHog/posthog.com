@@ -245,7 +245,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
-                                        <p className="text-[14px] font-medium m-0">{label || '100 million - 1 billion'}</p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {label || '100 million - 1 billion'}
+                                        </p>
                                         <p className="text-[14px] font-medium m-0">
                                             {price[1] === 0 ? 'Included' : price[1]}
                                         </p>

@@ -69,7 +69,7 @@ We can provide things like reseller licenses to you with no upfront cost.
 We reserve the right to remove listings if they are causing issues such as:
 
 * consistent poor reviews from users
-* not following the our [community standards](/.../docs/contribute/code-of-conduct#our-standards)
+* not following the our [community standards](/docs/contribute/code-of-conduct#our-standards)
 
 ## Excluded listing types
 

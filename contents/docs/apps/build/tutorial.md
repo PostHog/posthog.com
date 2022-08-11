@@ -42,7 +42,7 @@ And our config would look like:
 ]
 ```
 
-For information on what code to write and what special functions to use, check out [the overview](/docs/apps/build/overview) and [the developer reference](/docs/apps/build/reference).
+For information on what code to write and what special functions to use, check out [the overview](/docs/apps/build) and [the developer reference](/docs/apps/build/reference).
 
 ### Using the app source editor
 

@@ -19,6 +19,7 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import InstallClusterIssuer from './snippets/install-cluster-issuer'
 import Disclaimer from './snippets/disclaimer'
+import NextSteps from './snippets/next-steps'
 
 <Disclaimer />
 
@@ -36,7 +37,6 @@ get US$100 in credit over 60 days (i.e. run PostHog for free for ~2 months).
 </center>
 
 Then you can either follow the [1-click install](https://marketplace.digitalocean.com/apps/posthog-1) or the [manual install](#manual-install).
-
 
 ## 1-click install
 
@@ -57,13 +57,13 @@ It's unfortunately [not yet possible to provide parameters to DigitalOcean 1-cli
 Create a `values.yaml` file in the current directory with the following content:
 
 ```yaml
-cloud: "do"
+cloud: 'do'
 ingress:
-  hostname: <your-hostname>
-  nginx:
-    enabled: true
+    hostname: <your-hostname>
+    nginx:
+        enabled: true
 cert-manager:
-  enabled: true
+    enabled: true
 ```
 
 Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
@@ -88,13 +88,13 @@ to enable proxy protocol support in the load balancer and in the `nginx` ingress
 #   - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
 #
 ingress-nginx:
-  controller:
-    config:
-      use-proxy-protocol: true
-    service:
-      annotations:
-        service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
-        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    controller:
+        config:
+            use-proxy-protocol: true
+        service:
+            annotations:
+                service.beta.kubernetes.io/do-loadbalancer-hostname: <your-hostname>
+                service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
 ```
 
 and since you started with the one-click deploy you'll need the Helm chart locally, so run:
@@ -106,6 +106,7 @@ now you can upgrade your cluster with the new values:
 <CommandHelmUpgradeSnippet />
 
 #### 2. Install `ClusterIssuer`
+
 <InstallClusterIssuer />
 
 #### 3. Lookup the address of the installation
@@ -118,7 +119,6 @@ Please use the web UI to get your IP address.
 #### 4. Setting up DNS
 
 <SetupDNS />
-
 
 ## Install via doctl
 
@@ -134,7 +134,6 @@ doctl kubernetes cluster create \
 
 This will also configure your `kubectl` access.
 
-
 ## Manual install
 
 First, we need to set up a Kubernetes cluster (see the official DigitalOcean [documentation](https://docs.digitalocean.com/products/kubernetes/quickstart/) for more info).
@@ -143,27 +142,28 @@ First, we need to set up a Kubernetes cluster (see the official DigitalOcean [do
 
 > Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
-> * for PostgreSQL, take a look at [DigitalOcean managed databases](https://www.digitalocean.com/products/managed-databases-postgresql/)
-> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
-> * for Redis, take a look at [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
-> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
->
+> -   for PostgreSQL, take a look at [DigitalOcean managed databases](https://www.digitalocean.com/products/managed-databases-postgresql/)
+> -   for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> -   for Redis, take a look at [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+> -   for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
 
 #### 1. Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
+
 ```yaml
-cloud: "do"
+cloud: 'do'
 ingress:
-  hostname: <your-hostname>
-  nginx:
-    enabled: true
+    hostname: <your-hostname>
+    nginx:
+        enabled: true
 cert-manager:
-  enabled: true
+    enabled: true
 ```
 
 Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
+
 ```
 #
 # For DigitalOcean LB (TCP) mode, we need to enable some additional config
@@ -208,7 +208,13 @@ Please use the web UI to get your IP address.
 <SetupDNS />
 
 ## Upgrading the chart
+
 <UpgradingSnippet />
 
 ## Uninstalling the chart
+
 <UninstallingSnippet />
+
+## Next steps
+
+<NextSteps />
