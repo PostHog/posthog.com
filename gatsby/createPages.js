@@ -69,9 +69,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     }
                 }
             }
-            manuals: allMdx(
-                filter: { fields: { slug: { regex: "/^/manuals/" } }, frontmatter: { title: { ne: "" } } }
-            ) {
+            manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -306,7 +304,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.manuals.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/manuals' })
+    createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
