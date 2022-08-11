@@ -21,6 +21,8 @@ In large companies, offsite planning is centralized within the People or Operati
 
 ## It starts with a really good checklist
 
+<div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/4xWGyVKoXqg2eVCiq9" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+
 Here’s [one we made earlier](/handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) – feel free to use it.
 
 Seriously, a comprehensive checklist is a must for offsite planning. We made this list to help team leaders organize their small team offsites independently. Our three person “Plops” (that’s People & Operations) team help where possible, but with nine teams all organizing one or more meetups a year, we need people to take ownership.
@@ -37,6 +39,8 @@ Here are some key items to highlight:
 
 ## Choosing a location
 
+<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/1jv9YQIX4cvtRAHVRy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+
 Choosing where to host your offsite is one of the most subjective planning decisions you will make. When I’m thinking about where to host, I consider a few things: 
 
 - **Timing:** Depending on the season, you can have wildly different experiences. For example, hosting an offsite in Reykjavik during Icelandic winter, or at the height of forest fire season in central Washington, can mean a fairly uncomfortable few days for your team. Check what conditions will be like in a given location before locking in your dates, and consider that seasons in your part of the world may not match those in different hemispheres or climates.
@@ -51,6 +55,8 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 ## Planning your schedule
 
+<div style="width:100%;height:0;padding-bottom:194%;position:relative;"><iframe src="https://giphy.com/embed/elDpvxPF5FfcBbwOvR" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+
 It’s tempting to maximize your time together by packing the itinerary full of brainstorming, planning, and breakout sessions. Don’t overdo this. In reality, having a good split between sessions, free social time, and fun activities is important to avoid burning your team out. 
 
 In my experience, planning for a majority of unstructured time can lead to really amazing brainstorming and ideation. People will inevitably discuss their work as it’s a major thing that everyone has in common.
@@ -60,6 +66,8 @@ One mainstay event that we do at every all-company offsite is a 24-hour hackatho
 > **Pro Tip:** Encourage people to take time-off either before or after the offsite and use their company-sponsored travel for a lower-cost vacation in an interesting locale. After our Iceland offsite, my teammate Neil and I rented a camper van and traveled around the [iconic Ring Road](https://www.nordicvisitor.com/blog/5-things-to-know-about-icelands-ring-road/) for a week! Other team members arranged their own excursions together. It’s a great way to create social connections.
 
 ## Budget
+
+<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/26nfp8HGGHLPGY2KQ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p>
 
 I won’t sugar coat it – offsites will be some of the larger single expenses you will incur as a company each year. However, in my experience, the benefits of hosting a well-organized offsite greatly outweigh the cons if you budget effectively and manage costs as you go. 
 
