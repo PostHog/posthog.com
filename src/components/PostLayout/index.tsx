@@ -212,7 +212,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
@@ -266,7 +266,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-red rounded-[2px] h-[65%] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
@@ -330,7 +330,7 @@ const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkC
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     return (
-        <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
+        <ul className="list-none flex mt-8 lg:mt-0 p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
                 const active = index === crumbs.length - 1
                 return (
@@ -414,6 +414,7 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
+    survey = true,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -462,12 +463,12 @@ export default function PostLayout({
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
+        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
     } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                 {menu && (
                     <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
@@ -517,14 +518,14 @@ export default function PostLayout({
                 <article
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className="article-content">{children}</div>
+                        <div className={article ? 'article-content' : ''}>{children}</div>
                         {questions && questions}
                     </div>
-                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {survey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
@@ -545,7 +546,9 @@ export default function PostLayout({
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
                                         className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"

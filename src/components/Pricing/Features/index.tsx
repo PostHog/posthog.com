@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import React from 'react'
-import { icons } from './icons'
+import { ProductIcons } from '../../ProductIcons/ProductIcons'
 
 interface IFeature {
     title: string
@@ -16,25 +16,25 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product analytics', icon: icons.analytics },
-    { title: 'Session recording', icon: icons.sessionRecording },
-    { title: 'Feature flags', icon: icons.featureFlags },
-    { title: 'Heatmaps', icon: icons.heatmaps },
-    { title: 'A/B testing', icon: icons.abTesting },
-    { title: 'Correlation insights', icon: icons.correlationInsights },
-    { title: 'Group analytics', icon: icons.groupAnalytics },
-    { title: 'Team collaboration', icon: icons.teamCollaboration },
+    { title: 'Product analytics', icon: ProductIcons.analytics },
+    { title: 'Session recording', icon: ProductIcons.sessionRecording },
+    { title: 'Feature flags', icon: ProductIcons.featureFlags },
+    { title: 'Heatmaps', icon: ProductIcons.heatmaps },
+    { title: 'A/B testing', icon: ProductIcons.abTesting },
+    { title: 'Correlation analysis', icon: ProductIcons.correlationAnalysis },
+    { title: 'Group analytics', icon: ProductIcons.groupAnalytics },
+    { title: 'Team collaboration', icon: ProductIcons.teamCollaboration },
 ]
 
 const dataStack: IFeature[] = [
-    { title: 'Event pipelines', icon: icons.eventPipelines },
-    { title: 'Data warehouse', icon: icons.dataWarehouse },
-    // { title: 'SQL access', icon: icons.sqlAccess, enterpriseSelfHostOnly: true },
-    { title: 'App library', icon: icons.appLibrary },
-    { title: 'Event autocapture', icon: icons.eventAutocapture },
-    { title: 'API', icon: icons.api },
-    { title: 'Multiple projects', icon: icons.multipleProjects },
-    { title: 'User permissions', icon: icons.userPermissions },
+    { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
+    { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
+    { title: 'SQL access', icon: ProductIcons.sql, enterpriseSelfHostOnly: true },
+    { title: 'App library', icon: ProductIcons.appLibrary },
+    { title: 'Event autocapture', icon: ProductIcons.eventAutocapture },
+    { title: 'API', icon: ProductIcons.api },
+    { title: 'Multiple projects', icon: ProductIcons.projects },
+    { title: 'User permissions', icon: ProductIcons.userPermissions },
 ]
 
 const planAllowances: IFeature[] = [
@@ -116,7 +116,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                     : ''
                             }`}
                         >
-                            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
+                            <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">
                                 {icon || <Check />}
                             </span>
                             <Parent url={url}>

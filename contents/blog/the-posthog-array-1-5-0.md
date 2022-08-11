@@ -12,7 +12,7 @@ featuredImageType: standard
 
 Another week, another PostHog Array. We're steadily working towards parity with other tools. This week's highlights include a new website, multiple dashboards, a sleek new design and breaking down by cohorts.
 
-[Click here for instructions](/docs/self-host/configure/upgrading-posthog) on how to update.
+[Click here for instructions](/docs/runbook/upgrading-posthog) on how to update.
 
 ## Release notes
 

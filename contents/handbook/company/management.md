@@ -116,7 +116,7 @@ We have held three sessions and plan to do one more:
   - Example growth conversations & plans (good and bad)
   - What does a good growth conversation & plan look like at PostHog?
   - The output of this session was the [section above](https://posthog.com/handbook/company/management#how-do-i-make-sure-my-direct-reports-are-happy-and-productive), which includes new 1-1 templates to help guide growth conversations
-  - _Part 3: Difficult conversations - [deck here](https://docs.google.com/presentation/d/10nRDDpfaZKOToqP6l2aqKVkXd8k1gu-lOU7Ts4eehAM/edit?userstoinvite=james.g%40posthog.com&actionButton=1#slide=id.p)_
+- _Part 3: Difficult conversations - [deck here](https://docs.google.com/presentation/d/10nRDDpfaZKOToqP6l2aqKVkXd8k1gu-lOU7Ts4eehAM/edit?userstoinvite=james.g%40posthog.com&actionButton=1#slide=id.p)_
 
 ### Ongoing support for managers
 
