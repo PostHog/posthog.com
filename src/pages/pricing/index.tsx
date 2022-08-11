@@ -31,7 +31,7 @@ import { pricing, pricingLabels } from 'components/Pricing/constants'
 
 const Benefit = ({ children }) => {
     return (
-        <li className="font-medium text-sm flex gap-x-1.5 items-start leading-tight">
+        <li className="font-medium text-[15px] flex gap-x-1.5 items-start leading-tight">
             <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
                 <Check />
             </span>
@@ -204,7 +204,7 @@ const PricingNew = (): JSX.Element => {
 
             <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto">
                 <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
-                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl">
+                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative">
                         <div className="mb-4">
                             <CloudIcon className="opacity-30 mb-3" />
                             <h2 className="text-xl mb-1 flex items-center">
@@ -213,13 +213,13 @@ const PricingNew = (): JSX.Element => {
                                 ) : (
                                     <>
                                         PostHog Cloud{' '}
-                                        <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
-                                            <span className="text-black/50">Recommended</span>
+                                        <span className="absolute -top-3 right-4 bg-red inline-flex text-sm px-2 py-1 rounded-[3px] font-semibold ml-2 space-x-1">
+                                            <span className="text-white font-bold">Recommended</span>
                                             <button
                                                 onClick={() => setWhyCloudOpen(true)}
-                                                className="text-red font-semibold"
+                                                className="text-white"
                                             >
-                                                Why?
+                                                <Info />
                                             </button>
                                         </span>
                                     </>
@@ -255,7 +255,7 @@ const PricingNew = (): JSX.Element => {
                         </ul>
                     </div>
 
-                    <div className="order-2 mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
+                    <div className="order-2 relative mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
                         <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
                             <div className="flex flex-col">
                                 <strong className="text-[16px]">Monthly estimate</strong>
