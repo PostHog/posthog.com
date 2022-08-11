@@ -1,6 +1,6 @@
 ---
 date: 2022-08-08
-title: A startup's guide to planning an offsite in just 8 weeks
+title: A startup guide to planning an offsite in just 8 weeks
 rootPage: /blog
 sidebar: Blog
 showTitle: true
