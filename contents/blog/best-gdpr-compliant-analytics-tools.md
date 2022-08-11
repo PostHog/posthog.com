@@ -219,4 +219,4 @@ GoAccess is for system administrators and software engineers who need to track w
 - **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-GoAccess can be configured not to collect PII (personally identifying information) and relies on log file stats which may not require cookies. You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without cookie banners.
+You can configure GoAccess to either not collect IP addresses or anonymize them, so it can be used without cookie banners.
