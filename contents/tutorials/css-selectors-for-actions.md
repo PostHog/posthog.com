@@ -26,7 +26,7 @@ But first of all, what exactly is a **CSS selector**?
     div > span.yellow
 ```
 
-Syntax of CSS selectors is quite powerfull, but for now PostHog supports only a basic selector functionality. Let's go through it in a detail.
+The syntax of CSS selectors is quite powerful, but (for now) PostHog supports a basic selector functionality. Let's go through it in detail.
 
 ### Type selectors
 
