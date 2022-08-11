@@ -2068,3 +2068,171 @@
 [[redirects]]
     from = "/docs/plugins/build"
     to = "/docs/apps/build"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/actions"
+    to = "/manuals/actions"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/annotations"
+    to = "/manuals/annotations"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/application-settings"
+    to = "/manuals/application-settings"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/cohorts"
+    to = "/manuals/cohorts"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/correlation"
+    to = "/manuals/correlation"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/dashboards"
+    to = "/manuals/dashboards"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/data-management"
+    to = "/manuals/data-management"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/events"
+    to = "/manuals/events"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/experimentation"
+    to = "/manuals/experimentation"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/feature-flags"
+    to = "/manuals/feature-flags"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/funnels"
+    to = "/manuals/funnels"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/group-analytics"
+    to = "/manuals/group-analytics"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides"
+    to = "/manuals"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/insights"
+    to = "/manuals/insights"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/lifecycle"
+    to = "/manuals/lifecycle"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/organizations-and-projects"
+    to = "/manuals/organizations-and-projects"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/paths"
+    to = "/manuals/paths"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/persons"
+    to = "/manuals/persons"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/recordings"
+    to = "/manuals/recordings"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/retention"
+    to = "/manuals/retention"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/sessions"
+    to = "/manuals/sessions"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/sso"
+    to = "/manuals/sso"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/stickiness"
+    to = "/manuals/stickiness"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/subscriptions"
+    to = "/manuals/subscriptions"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/support"
+    to = "/manuals/support"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/toolbar"
+    to = "/manuals/toolbar"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/trends"
+    to = "/manuals/trends"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/utm-segmentation"
+    to = "/manuals/utm-segmentation"
