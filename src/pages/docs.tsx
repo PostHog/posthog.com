@@ -91,7 +91,7 @@ export const DocsIndex: React.FC = () => {
                                     examples for everything PostHog
                                 </h5>
 
-                                <SearchBox />
+                                <SearchBox placeholder="Seach documentation..." />
                             </div>
 
                             <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">

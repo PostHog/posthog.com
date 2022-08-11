@@ -2,7 +2,11 @@ import React from 'react'
 import { DocSearchModal } from '@docsearch/react'
 import { createPortal } from 'react-dom'
 
-export const SearchBox: React.FC = () => {
+type SearchBoxProps = {
+    placeholder?: string
+}
+
+export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder }) => {
     const [query, setQuery] = React.useState<string>('')
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
 
@@ -49,7 +53,7 @@ export const SearchBox: React.FC = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     value={query}
                     name="docs-search"
-                    placeholder="Search documentation..."
+                    placeholder={placeholder || 'Search...'}
                     autoFocus={true}
                     className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
                 />

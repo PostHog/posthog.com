@@ -271,7 +271,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         </p>
 
                         <div className="my-4">
-                            <SearchBox />
+                            <SearchBox placeholder="Search..." />
                         </div>
 
                         <p>
@@ -281,7 +281,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                     </section>
 
                     <section>
-                        <h3 className="px-1 font-bold">Product manual</h3>
+                        <h3 className="px-1 font-bold text-3xl mb-4">Product manual</h3>
                         {categories.map((category) => {
                             return (
                                 <div key={category.name}>
@@ -295,7 +295,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                             return (
                                                 <li key={manual.name} className="list-none">
                                                     <Link
-                                                        className="flex items-start space-x-3 rounded relative hover:bg-gray-accent-light active:top-[0.5px] active:scale-[.98] px-3 py-4"
+                                                        className="flex items-start space-x-3 rounded relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.98] px-3 py-4"
                                                         to={manual.url}
                                                     >
                                                         <span className="w-6 h-6 text-gray shrink-0">
@@ -331,7 +331,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                     </section>
 
                     <Modal open={currentModal !== undefined} setOpen={() => setCurrentModal(undefined)}>
-                        <div className="bg-white w-full max-w-md h-screen ml-auto relative z-10 flex flex-col overflow-hidden">
+                        <div className="bg-white dark:bg-primary w-full max-w-md h-screen ml-auto relative z-10 flex flex-col overflow-hidden">
                             <div className="flex items-center justify-between shrink-0 px-8 pt-8">
                                 <h2 className="text-xl m-0">Related tutorials</h2>
                                 <button onClick={() => setCurrentModal(undefined)}>
@@ -343,7 +343,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                 <ul className="list-none m-0 p-0 space-y-6 px-8">
                                     {currentModal &&
                                         tutorialsByCategory[currentModal].map((tutorial) => (
-                                            <li key={tutorial.fields.slug} className="bg-tan">
+                                            <li key={tutorial.fields.slug} className="bg-tan dark:bg-gray-accent-dark">
                                                 <Link to={tutorial.fields.slug}>
                                                     <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                                 </Link>
@@ -363,20 +363,26 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         </div>
                     </Modal>
 
-                    <section className="px-1 space-y-3">
-                        <h3 className="font-bold mb-0">Featured tutorials</h3>
-                        <p>Here's where we highlight interesting things you can do with PostHog</p>
-                        <Link
-                            to="/tutorials"
-                            className="inline-block bg-white rounded border-2 border-gray-accent-light px-8 py-2 text-gray font-semibold relative active:top-[0.5px] active:scale-[.98]"
-                        >
-                            Browse tutorials
-                        </Link>
+                    <section className="px-1 space-y-6">
+                        <div className="space-y-3">
+                            <h3 className="font-bold mb-0">Featured tutorials</h3>
+                            <p>Here's where we highlight interesting things you can do with PostHog</p>
+                            <Link
+                                to="/tutorials"
+                                className="inline-block bg-white dark:bg-gray-accent-dark rounded border-2 border-gray-accent-light dark:border-white/20 px-8 py-2 text-gray dark:text-white font-semibold relative active:top-[0.5px] active:scale-[.98]"
+                            >
+                                Browse tutorials
+                            </Link>
+                        </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 mt-8 max-w-2xl">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mt-8 max-w-sm sm:max-w-2xl">
                             {featuredTutorials.nodes.map((tutorial) => {
                                 return (
-                                    <Link key={tutorial.id} to={tutorial.fields.slug} className="bg-gray-accent-light">
+                                    <Link
+                                        key={tutorial.id}
+                                        to={tutorial.fields.slug}
+                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded"
+                                    >
                                         <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                     </Link>
                                 )
