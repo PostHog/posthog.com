@@ -58,6 +58,25 @@ PostHog is an all-in-one, [open source analytics platform](/blog/best-open-sourc
 
 Unlike [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event auto capture, so you can start collecting useful data immediately without instrumenting events by hand.
 
+<table>
+    <tr>
+        <td><strong>Open Source</strong></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+    </tr>
+    <tr>
+        <td>Self Hosting</td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+    </tr>
+    <tr>
+        <td>EU Cloud Hosting</td>
+        <td>Coming Q4 2022</td>
+    </tr>
+    <tr>
+        <td>Cookieless Tracking</td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+    </tr>
+</table>
+
 ### Who is PostHog for?
 PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size.
 
@@ -77,25 +96,6 @@ PostHog can be deployed onto your own infrastructure, so you retain full control
 ### Can you use PostHog without cookie banners?
 Yes. While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
 
-<table>
-    <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td>Coming Q4 2022</td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
-
 ## 2. [Fathom](https://usefathom.com/)
 
 ![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
@@ -103,6 +103,25 @@ Yes. While PostHog uses cookies by default, it can be [configured not to use coo
 Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
 
 While based in Canada, Fathom offers EU-hosting. It also employs what it calls intelligent routing. This ensures that non-EU users are routed via its US servers, while EU users are routed via its EU-based and owned servers. Fathom claims this means non-EU visitors get better performance compared to other, similar services that use EU-only hosting.
+
+<table>
+    <tr>
+        <td><strong>Open Source</strong></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+    </tr>
+    <tr>
+        <td><strong>Self Hosting</strong></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+    </tr>
+    <tr>
+        <td><strong>EU Cloud Hosting</strong></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+    </tr>
+    <tr>
+        <td><strong>Cookieless Tracking</strong></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+    </tr>
+</table>
 
 ### Who is Fathom for?
 Fathom is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
@@ -121,25 +140,6 @@ As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no com
 ### Can you use Fathom without cookie consent banners?
 
 Yes, it's actually designed this way. Fathom is a cookie-less solution, so you don't need cookie banners when using it.
-
-<table>
-    <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    </tr>
-    <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    </tr>
-    <tr>
-        <td>EU Cloud Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-    <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    </tr>
-</table>
 
 ## 3. [Plausible](https://plausible.io/)
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
@@ -167,20 +167,20 @@ Yes. Plausible is a cookie-less solution, so you don't need to acquire permissio
 
 <table>
     <tr>
-        <td>Open Source</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td><strong>Open Source</strong></td>
+        <td className="text-left"><span className="text-green text-lg">✔</span></td>
     </tr>
     <tr>
-        <td>Self Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td><strong>Self Hosting</strong></td>
+        <td className="text-left"><span className="text-green text-lg">✔</span></td>
     </tr>
     <tr>
-        <td>EU Cloud Hosting</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td><strong>EU Cloud Hosting</strong></td>
+        <td className="text-left"><span className="text-green text-lg">✔</span></td>
     </tr>
     <tr>
-        <td>Cookieless Tracking</td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td><strong>Cookieless Tracking</strong></td>
+        <td className="text-left"><span className="text-green text-lg">✔</span></td>
     </tr>
 </table>
 
