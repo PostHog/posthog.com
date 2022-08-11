@@ -157,7 +157,7 @@ On the `Data Management` page, select the `Actions` tab. Then press the `New Act
 
 ![Create New Action Data Management](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
 
-Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So instead of this we wiil select `From event or pageview` option.
+Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So, instead we wiil select `From event or pageview` option.
 
 Finaly you should see a new page with a `Match Group` menu open. Choose the `Autocapture` option.
 
