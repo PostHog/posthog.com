@@ -255,9 +255,6 @@ export default function Calculator({
                                             {label || '100 million - 1 billion'}
                                         </p>
                                         <p className="text-[14px] font-medium m-0">
-                                            {label || '100 million - 1 billion'}
-                                        </p>
-                                        <p className="text-[14px] font-medium m-0">
                                             {price[1] === 0
                                                 ? enterpriseMode
                                                     ? '$450 (flat fee)'
