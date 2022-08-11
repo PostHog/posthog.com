@@ -288,7 +288,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                     <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
                                         {category.name}
                                     </h4>
-                                    <ul className="grid grid-cols-2 px-1 my-6">
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 px-1 my-6">
                                         {category.manuals.map((manual) => {
                                             const tutorials = tutorialsByCategory[manual.category]
 
@@ -363,20 +363,20 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         </div>
                     </Modal>
 
-                    <section className="px-1">
-                        <h3 className="font-bold">Featured tutorials</h3>
+                    <section className="px-1 space-y-3">
+                        <h3 className="font-bold mb-0">Featured tutorials</h3>
                         <p>Here's where we highlight interesting things you can do with PostHog</p>
                         <Link
                             to="/tutorials"
-                            className="bg-white rounded border border-gray-accent-light px-8 py-3 text-gray font-semibold relative active:top-[0.5px] active:scale-[.98]"
+                            className="inline-block bg-white rounded border-2 border-gray-accent-light px-8 py-2 text-gray font-semibold relative active:top-[0.5px] active:scale-[.98]"
                         >
                             Browse tutorials
                         </Link>
 
-                        <div className="grid grid-cols-2 gap-x-12 gap-y-4 mt-8 max-w-2xl">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 mt-8 max-w-2xl">
                             {featuredTutorials.nodes.map((tutorial) => {
                                 return (
-                                    <Link key={tutorial.id} to={tutorial.fields.slug}>
+                                    <Link key={tutorial.id} to={tutorial.fields.slug} className="bg-gray-accent-light">
                                         <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                     </Link>
                                 )
