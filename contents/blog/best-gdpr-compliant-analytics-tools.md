@@ -23,7 +23,7 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 
 ## The best GDPR-compliant analytics tools
 
-There are numerous ways to achieve GDPR compliance, which you can broadly categorize as good, better, best:
+There are numerous ways to achieve GDPR compliance, which you can broadly categorize as either good, better or best:
 
 - **Good:** Data transferred to the US is anonymized
 - **Better:** Data is stored in EU cloud servers
