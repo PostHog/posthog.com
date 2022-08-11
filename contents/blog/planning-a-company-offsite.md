@@ -23,6 +23,7 @@ In large companies, offsite planning is centralized within the People or Operati
 
 <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/4xWGyVKoXqg2eVCiq9" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
+
 Here’s [one we made earlier](/handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) – feel free to use it.
 
 Seriously, a comprehensive checklist is a must for offsite planning. We made this list to help team leaders organize their small team offsites independently. Our three person “Plops” (that’s People & Operations) team help where possible, but with nine teams all organizing one or more meetups a year, we need people to take ownership.
@@ -41,6 +42,7 @@ Here are some key items to highlight:
 
 <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/1jv9YQIX4cvtRAHVRy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
+
 Choosing where to host your offsite is one of the most subjective planning decisions you will make. When I’m thinking about where to host, I consider a few things: 
 
 - **Timing:** Depending on the season, you can have wildly different experiences. For example, hosting an offsite in Reykjavik during Icelandic winter, or at the height of forest fire season in central Washington, can mean a fairly uncomfortable few days for your team. Check what conditions will be like in a given location before locking in your dates, and consider that seasons in your part of the world may not match those in different hemispheres or climates.
@@ -51,7 +53,7 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 - **Affordability:** An ideal offsite location depends on the stage of the company – a realistic budget for a five-person company won’t be the same as one for 100. Work out how much you can spend per person on travel and accommodation for your chosen location as soon as possible. And don’t go to Switzerland – it will bankrupt you.
 
- <NewsletterForm compact />
+<NewsletterForm compact />
 
 ## Planning your schedule
 
@@ -86,4 +88,6 @@ As a reference, we budget $1,500 per person for a small team offsite and $3,000 
 
 ## Final thoughts
 
-Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out our open-source guide for how we plan an offsites in eight weeks. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
+Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out [our open-source guide](handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) for how we plan an offsites in eight weeks. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
+
+<NewsletterForm compact />
