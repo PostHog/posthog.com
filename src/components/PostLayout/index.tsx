@@ -217,6 +217,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -249,7 +250,11 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
-                {name && url ? (
+                {url === null && name ? (
+                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 my-2 ml-3 text-[15px]">
+                        {name}
+                    </p>
+                ) : name && url ? (
                     <Link
                         onClick={() => {
                             handleLinkClick && handleLinkClick()
@@ -308,9 +313,6 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
 const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkClick?: () => void }) => {
     return (
         <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
-                Table of contents
-            </p>
             <nav>
                 {menu.map((menuItem) => {
                     return (
@@ -414,6 +416,7 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
+    survey = true,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -467,7 +470,7 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
+            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                 {menu && (
                     <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
@@ -521,10 +524,10 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className="article-content">{children}</div>
+                        <div className={article ? 'article-content' : ''}>{children}</div>
                         {questions && questions}
                     </div>
-                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {survey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
