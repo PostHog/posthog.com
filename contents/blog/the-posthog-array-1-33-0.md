@@ -50,7 +50,7 @@ We've redesigned dashboards to make them more useful than ever. Changes include 
 
 We've also added a new Insight Details feature that can give you a handy summary of the query. Now all the information you need to understand a dashboard is right there in front of you!
 
-![Screenshot: Dashboard redesign](../images/docs/user-guides/geoip-docs-image.png)
+![Screenshot: Dashboard redesign](../images/docs/user-guides/funnels/geoip-docs-image.png)
 
 <br />
 

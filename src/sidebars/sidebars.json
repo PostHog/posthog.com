@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "People & Ops",
+            "name": "People & ops",
             "url": "",
             "children": [
                 {
@@ -202,8 +202,8 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Product Manager Ramp Up",
-                            "url": "/handbook/people/rampup/product-manager.md"
+                            "name": "Product Manager ramp up",
+                            "url": "/handbook/people/ramp-up/product-manager"
                         }
                     ]
                 },
@@ -586,6 +586,10 @@
                             "url": "/docs/self-host/configure/securing-posthog"
                         },
                         {
+                            "name": "Monitoring with Grafana",
+                            "url": "/docs/self-host/configure/monitoring-with-grafana"
+                        },
+                        {
                             "name": "Running behind a proxy",
                             "url": "/docs/self-host/configure/running-behind-proxy"
                         },
@@ -636,6 +640,10 @@
                                 {
                                     "name": "Overview",
                                     "url": "/docs/runbook/async-migrations"
+                                },
+                                {
+                                    "name": "0001-events-sample-by",
+                                    "url": "/docs/runbook/async-migrations/0001-events-sample-by"
                                 },
                                 {
                                     "name": "0002_events_sample_by",
@@ -1040,6 +1048,10 @@
                     "url": "/docs/user-guides/recordings"
                 },
                 {
+                    "name": "Sessions",
+                    "url": "/docs/user-guides/sessions"
+                },
+                {
                     "name": "Settings",
                     "url": "/docs/user-guides/application-settings"
                 },
@@ -1052,20 +1064,16 @@
                     "url": "/docs/user-guides/stickiness"
                 },
                 {
+                    "name": "Subscriptions",
+                    "url": "/docs/user-guides/subscriptions"
+                },
+                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
                 {
                     "name": "Trends",
                     "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "Sessions",
-                    "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Subscriptions",
-                    "url": "/docs/user-guides/subscriptions"
                 },
                 {
                     "name": "UTM segmentation",

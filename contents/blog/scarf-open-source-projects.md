@@ -26,7 +26,7 @@ Research from Red Hat shows that [90%](https://www.redhat.com/rhdc/managed-files
 
 -   **Operating Systems** - For the majority of computing workloads in the enterprise space, Linux is the operating system of choice. From web servers, containers, remote development environments, and beyond, Linux has become one of the most important open-source projects to the modern enterprise.
 
--   **Databases** - Many large companies use open-source database solutions such as PostgreSQL, MySQL or [Clickhouse](/docs/runbook/migrate/migrate-to-another-self-hosted-instance) rather than choosing a proprietary solution. This gives them greater compatibility and flexibility as they integrate it into the rest of their technology stack.
+-   **Databases** - Many large companies use open-source database solutions such as PostgreSQL, MySQL or [Clickhouse](/docs/migrate/migrate-to-another-self-hosted-instance) rather than choosing a proprietary solution. This gives them greater compatibility and flexibility as they integrate it into the rest of their technology stack.
 
 -   **Analytics** - Open-source analytics solutions have also become very popular, giving enterprises full control over their data handling, hosting, and the like. Solutions like [PostHog](https://posthog.com/), which also includes an [open source session recording feature](/blog/best-open-source-session-replay-tools), have been revolutionary in giving companies the peace of mind to know that their data is never leaving the confines of the company itself.
 

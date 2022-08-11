@@ -1191,11 +1191,6 @@
 [build]
     command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
 
-# Added: 2022-02-03
-[[redirects]]
-    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-
 # Added: 2022-02-04
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
@@ -1203,18 +1198,8 @@
 
 # Added: 2022-02-14
 [[redirects]]
-    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-
-
-# Added: 2022-02-14
-[[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
-[[redirects]]
-    from = "/docs/self-host/configure/async-migrations/overview"
-    to = "/docs/self-host/configure/async-migrations"
 
 # Added: 2022-02-17
 [[redirects]]
@@ -1822,6 +1807,10 @@
     from = "/handbook/engineering/app-west"
     to = "/handbook/people/team-structure/app-west"
 
+[[redirects]]
+    from = "/docs/self-host/configure/async-migrations"
+    to = "/docs/runbook/async-migrations"
+
 # Added: 2022-08-02
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations/0001-events-sample-by"
@@ -1867,7 +1856,7 @@
 # Added: 2022-08-02
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/runbook/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
 
 
 # Added: 2022-08-02
@@ -2017,32 +2006,65 @@
     from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/blog/aarrr-pirate-funnel"    
 
-
 # Added: 2022-08-08
 [[redirects]]
     from = "/docs/cloud/proxy"
     to = "/docs/integrate/proxy"
-
 
 # Added: 2022-08-08
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
     to = "/docs/migrate/migrate-between-cloud-and-self-hosted"
 
-
 # Added: 2022-08-08
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-from-amplitude"
     to = "/docs/migrate/migrate-from-amplitude"
 
+# Added: 2022-02-03
+[[redirects]]
+    from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
+    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
 
 # Added: 2022-08-08
 [[redirects]]
     from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
     to = "/docs/migrate/migrate-to-another-self-hosted-instance"
 
-
-# Added: 2022-08-11
+# Added: 2022-08-10
 [[redirects]]
-    from = "/handbook/people/ramp-up/product-manager"
-    to = "/handbook/product/pm-rampup"
+    from = "/plugins/customer.io"
+    to = "/apps/customer-io"
+
+[[redirects]]
+    from = "/plugins/hubspot"
+    to = "/apps/hubspot-connector"
+
+[[redirects]]
+    from = "/plugins/pub/sub-export"
+    to = "/apps/google-pub-sub-connector"
+
+[[redirects]]
+    from = "/plugins/sendgrid"
+    to = "/apps/sendgrid-connector"
+
+[[redirects]]
+    from = "/plugins/geoip"
+    to = "/apps/apps/geoip-enrichment"
+
+[[redirects]]
+    from = "/plugins/event-sequence-timer-plugin"
+    to = "/apps/event-sequence-timer"
+
+# Added: 2022-08-10
+[[redirects]]
+    from = "/handbook/product/pm-rampup"
+    to = "/handbook/people/ramp-up/product-manager"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/team-structure/why-small-teams"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/apps/build"

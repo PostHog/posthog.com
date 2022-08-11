@@ -40,7 +40,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 ### Who created this app?
 
-This app was created by [community members at WittyWorks](<(https://posthog.com/customers/wittyworks)>) to protect the privacy of their users. We'd like to thank [Christian](https://github.com/Christian-aman-insurely) and [Lukas Kahwe Smnith](https://github.com/lsmith77) for creating the Property Filter.
+This app was created by [community members at WittyWorks](/customers/wittyworks) to protect the privacy of their users. We'd like to thank [Christian](https://github.com/Christian-aman-insurely) and [Lukas Kahwe Smnith](https://github.com/lsmith77) for creating the Property Filter.
 
 ### Who maintains this app?
 

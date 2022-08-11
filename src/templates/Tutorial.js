@@ -137,7 +137,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                     />
                 }
             >
-                <h1 className="text-2xl mb-6 mt-0">{title}</h1>
+                <h1 className="text-4xl mb-6 mt-0">{title}</h1>
                 <GatsbyImage
                     className="mb-6 bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
                     image={getImage(featuredImage)}
