@@ -44,12 +44,16 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
             </SidebarSection>
 
             {related && (
-                <SidebarSection title="Related Articles">
-                    {related.map(({ childMdx }) => (
-                        <Link key={childMdx.fields.slug} to={childMdx.fields.slug} className="text-base">
-                            {childMdx.frontmatter.title}
-                        </Link>
-                    ))}
+                <SidebarSection title="Related articles">
+                    <ul className="p-0 space-y-1.5">
+                        {related.map(({ childMdx }) => (
+                            <li key={childMdx.fields.slug} className="list-none">
+                                <Link to={childMdx.fields.slug} className="text-sm block">
+                                    {childMdx.frontmatter.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </SidebarSection>
             )}
         </>
