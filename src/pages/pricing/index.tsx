@@ -213,7 +213,7 @@ const PricingNew = (): JSX.Element => {
                                 ) : (
                                     <>
                                         PostHog Cloud{' '}
-                                        <span className="absolute -top-3 right-4 bg-red inline-flex text-sm px-2 py-1 rounded-[3px] font-semibold ml-2 space-x-1">
+                                        <span className="absolute -top-[3px] right-3 bg-red inline-flex text-sm px-3 py-2 rounded-[3px] font-semibold ml-2 space-x-1">
                                             <span className="text-white font-bold">Recommended</span>
                                             <button
                                                 onClick={() => setWhyCloudOpen(true)}
@@ -370,7 +370,7 @@ const PricingNew = (): JSX.Element => {
                             </Link>
                         </div>
                         <div>
-                            <h4 className="text-sm mb-0 font-normal opacity-75">
+                            <h4 className="text-[15px] mb-0 font-normal opacity-75">
                                 <span className="font-bold">
                                     Looking for {' '}
 
