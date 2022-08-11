@@ -374,12 +374,13 @@ const PricingNew = (): JSX.Element => {
                                 <span className="font-bold">
                                     Looking for {' '}
 
-                                    <Link
-                                        className="border-b border-dashed border-gray-accent-light"
-                                        onClick={() =>
-                                            posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                                        }
-                                    >
+                                <Link
+                                    className="border-b border-dashed border-gray-accent-light text-black"
+                                    onClick={() =>
+                                        posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
+                                    }
+                                    to="https://github.com/PostHog/posthog"
+                                >
                                 PostHog Open Source</Link>?</span> (No credit card required)</h4>
                             <p className="text-sm opacity-60">
                                 Available with product analytics, feature flags, and session recordings – limited to 1 project and no user permissions
