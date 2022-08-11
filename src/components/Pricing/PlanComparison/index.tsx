@@ -29,6 +29,12 @@ const tiers = [
         priceMonthly: 59,
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
     },
+    {
+        name: 'Open Source',
+        href: '#',
+        priceMonthly: 59,
+        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
+    },
 ]
 const sections = [
     {
@@ -731,7 +737,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="py-2 px-3 text-[14px] text-lg font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
+                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -777,7 +783,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     {section.name && (
                                         <tr>
                                             <th
-                                                className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-almost-black border-white/10"
+                                                className="bg-transparent pt-6 pb-3 pl-3 text-lg font-bold text-left text-almost-black border-white/10"
                                                 colSpan={5}
                                                 scope="colgroup"
                                                 style={{
@@ -790,7 +796,7 @@ export const PlanComparison = ({ className = '' }) => {
                                         </tr>
                                     )}
                                     {section.features.map((feature) => (
-                                        <tr key={feature.name}>
+                                        <tr className="align-top" key={feature.name}>
                                             <th
                                                 className="py-2 px-3 text-sm font-medium text-almost-black text-left border-white/10 w-[180px]"
                                                 scope="row"
