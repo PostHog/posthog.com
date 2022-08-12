@@ -1553,6 +1553,10 @@
             "url": "/tutorials",
             "children": [
                 {
+                    "name": "All tutorials",
+                    "url": "/tutorials"
+                },
+                {
                     "name": "Actions",
                     "url": "/tutorials/categories/actions"
                 },
