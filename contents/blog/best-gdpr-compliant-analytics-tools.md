@@ -235,4 +235,5 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 
 GoAccess is open source and has no paid tiers.
 
-<NewsletterForm compact />
+<GDPRForm compact />
+

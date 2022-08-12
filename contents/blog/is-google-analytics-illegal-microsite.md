@@ -146,3 +146,5 @@ More recently, France found Google Analytics to be illegal, so we recently [adde
 If this continues to become more of a trend, we’ll have to switch from manually creating graphics for the site and switch to an actual hosted mapping solution.
 
 But if we get to that point, we’ll be sure to check that there’s no third-party tracking involved.
+
+<GDPRForm compact />

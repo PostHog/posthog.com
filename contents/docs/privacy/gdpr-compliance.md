@@ -9,6 +9,8 @@ The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy a
 
 We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe.
 
+<GDPRForm compact />
+
 ## What data is protected under GDPR?
 
 [Personal data](/blog/what-is-personal-data-pii) is protected under GDPR, which means any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data.
