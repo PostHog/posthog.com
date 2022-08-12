@@ -11,12 +11,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
-    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
-    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+
+    // Tutorials
+    const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
+    const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
+    const TutorialsAuthorTemplate = path.resolve(`src/templates/tutorials/TutorialsAuthor.tsx`)
 
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
@@ -58,6 +60,18 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 }
             }
             docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -292,6 +306,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
@@ -307,12 +322,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 return true
             }
         })
+
         createPage({
             path: replacePath(node.fields.slug),
             component: TutorialTemplate,
             context: {
                 id: node.id,
                 tableOfContents,
+                menu: result.data.sidebars.childSidebarsJson.docs,
                 pageViews,
                 slug,
             },
