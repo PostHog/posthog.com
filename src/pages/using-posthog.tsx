@@ -276,8 +276,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         </div>
 
                         <p>
-                            If you don't find the answer you're looking for,{' '}
-                            <a href="/questions">ask a question</a>.
+                            If you don't find the answer you're looking for, <a href="/questions">ask a question</a>.
                         </p>
                     </section>
 
@@ -304,7 +303,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                         </span>
                                                         <div>
                                                             <span className="text-red font-bold">{manual.name}</span>
-                                                            <p className="text-black/60 group-hover:text-black/75 m-0 font-normal text-sm">
+                                                            <p className="text-black/60 group-hover:text-black/75 m-0 font-normal text-sm dark:text-white dark:group-hover:text-white/80">
                                                                 {manual.description}
                                                             </p>
 
@@ -344,7 +343,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                 <ul className="list-none m-0 p-0 space-y-6 px-8">
                                     {currentModal &&
                                         tutorialsByCategory[currentModal].map((tutorial) => (
-                                            <li key={tutorial.fields.slug} className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]">
+                                            <li
+                                                key={tutorial.fields.slug}
+                                                className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
+                                            >
                                                 <Link to={tutorial.fields.slug}>
                                                     <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                                 </Link>
@@ -364,8 +366,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                     <section className="px-1 space-y-6 pb-12">
                         <div className="space-y-3 mb-8">
                             <h3 className="font-bold mb-0 text-3xl">Featured tutorials</h3>
-                            <p className="pt-0 text-opacity-75">Here's where we highlight interesting things you can do with PostHog.</p>
-                             
+                            <p className="pt-0 text-opacity-75">
+                                Here's where we highlight interesting things you can do with PostHog.
+                            </p>
+
                             <CallToAction type="outline" className="!w-full md:!w-48 shadow-xl" to="/tutorials">
                                 Browse tutorials
                             </CallToAction>
