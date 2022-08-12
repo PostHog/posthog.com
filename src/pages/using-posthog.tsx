@@ -281,7 +281,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <SearchBox placeholder="Search..." />
                         </div>
 
-                        <p className="text-sm text-black/75">
+                        <p className="text-sm text-black/75 dark:text-white">
                             Don't see the answer you're looking for? <a href="/questions">Ask a question</a>
                         </p>
                     </section>
