@@ -233,6 +233,14 @@
         "link_url": "https://twitter.com/kylegalbraith"
     },
     {
+        "handle": "igor-kotua",
+        "name": "Igor Kotua",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/igorkotua/"
+    },
+    {
         "handle": "jacob-gillespie",
         "name": "Jacob Gillespie",
         "role": "Co-founder/CTO of Depot",
