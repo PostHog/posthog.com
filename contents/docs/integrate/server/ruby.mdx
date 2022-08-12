@@ -35,6 +35,10 @@ posthog = PostHog::Client.new({
 
 You can find your key in the 'Project Settings' page in PostHog.
 
+### Debug logging
+
+The log level by default is set to WARN. You can change it to DEBUG if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
+
 ## Making calls
 
 ### Capture
