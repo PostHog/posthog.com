@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import PostLayout from 'components/PostLayout'
+import PostLayout, { TableOfContents } from 'components/PostLayout'
 import API from 'components/Product/API'
 import Apps from 'components/Product/Apps'
 import DataWarehouse from 'components/Product/DataWarehouse'
@@ -9,7 +9,10 @@ import Hero from 'components/Product/Hero'
 import SelfHosting from 'components/Product/SelfHosting'
 import { ProductIcons } from 'components/ProductIcons/ProductIcons'
 import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import Scrollspy from 'react-scrollspy'
+import { Link } from 'react-scroll'
+import Slider from 'react-slick'
 
 const features: IProps[] = [
     {
@@ -74,7 +77,62 @@ const features: IProps[] = [
     },
 ]
 
+const menu = [
+    {
+        title: 'Overview',
+        url: 'overview',
+        icon: ProductIcons.posthogMonochrome,
+    },
+    { title: 'Top features', url: 'top-features', icon: ProductIcons.topFeatures },
+    { title: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
+    { title: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
+    { title: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
+    { title: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
+    { title: 'API', url: 'api', icon: ProductIcons.api },
+]
+
+const Menu = () => {
+    return (
+        <Scrollspy
+            className="list-none m-0 p-0 flex flex-col space-y-1"
+            items={menu.map((navItem) => navItem.url)}
+            currentClassName="bg-gray-accent-light"
+            on
+        >
+            {menu.map(({ title, url, icon }) => {
+                return (
+                    <li key={title}>
+                        <Link
+                            smooth
+                            duration={300}
+                            to={url}
+                            hashSpy
+                            className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black"
+                            spy
+                        >
+                            <span className="w-[36px]">{icon}</span>
+                            <span>{title}</span>
+                        </Link>
+                    </li>
+                )
+            })}
+        </Scrollspy>
+    )
+}
+
+const sliderSettings = {
+    dots: false,
+    infinite: false,
+    arrows: false,
+    speed: 500,
+    slidesToScroll: 1,
+    autoplay: false,
+    variableWidth: true,
+}
+
 export default function Product() {
+    const sliderRef = useRef()
+    const [activeSliderIndex, setActiveSliderIndex] = useState(0)
     return (
         <Layout>
             <Hero />
@@ -83,23 +141,49 @@ export default function Product() {
                 hideSidebar
                 hideSearch
                 hideSurvey
-                menu={[{ name: 'Overview', url: '/product' }]}
-                menuTitle={false}
+                menu={<Menu />}
                 article={false}
                 contentContainerClassName="w-full pb-12"
             >
-                <div className="max-w-5xl mx-auto px-5 box-content">
-                    <h1 className="text-5xl m-0">Top features</h1>
+                <div className="sticky top-0 z-10 bg-tan px-5 lg:hidden mb-6 py-2">
+                    <Slider ref={sliderRef} {...sliderSettings}>
+                        {menu.map(({ title, icon, url }, index) => {
+                            return (
+                                <div key={title}>
+                                    <Link
+                                        smooth
+                                        duration={300}
+                                        offset={-57}
+                                        to={url}
+                                        hashSpy
+                                        className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
+                                            activeSliderIndex === index ? 'bg-gray-accent-light' : ''
+                                        }`}
+                                        spy
+                                        onClick={() => sliderRef?.current?.slickGoTo(index)}
+                                        onSetActive={() => {
+                                            setActiveSliderIndex(index)
+                                            sliderRef?.current?.slickGoTo(index)
+                                        }}
+                                    >
+                                        <span className="w-[25px]">{icon}</span>
+                                        <span>{title}</span>
+                                    </Link>
+                                </div>
+                            )
+                        })}
+                    </Slider>
+                </div>
+                <div id="top-features" className="max-w-5xl mx-auto px-5 box-content">
+                    <h1 className="text-4xl md:text-5xl m-0">Top features</h1>
                     <p className="text-xl text-black/50 font-semibold m-0 mt-3 max-w-[700px]">
                         Product analytics was the trojan horse, but PostHog also ships with session recording, feature
                         flags, A/B testing, and more.
                     </p>
                 </div>
-                <div>
-                    {features.map((feature, index) => (
-                        <FeatureWrapperCol key={index} {...feature} />
-                    ))}
-                </div>
+                {features.map((feature, index) => (
+                    <FeatureWrapperCol key={index} {...feature} />
+                ))}
                 <Apps />
                 <EventPipelines />
                 <DataWarehouse />

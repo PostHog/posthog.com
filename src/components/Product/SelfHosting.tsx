@@ -47,6 +47,7 @@ const deploymentInstructions = [
 export default function SelfHosting() {
     return (
         <FeatureWrapperRow
+            id="self-hosting"
             title="Self-hosting"
             description={
                 <>
@@ -54,7 +55,7 @@ export default function SelfHosting() {
                         Host on-prem or in your private cloud so customer data never leaves your infrastructure.
                         <strong>Don’t need to self-host?</strong> Use PostHog Cloud and we’ll manage everything for you.
                     </p>
-                    <div className="flex space-x-4 justify-between mt-10">
+                    <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 justify-between mt-10">
                         <ul className="list-none m-0 p-0 grid gap-y-7 max-w-[450px]">
                             {features.map(({ title, description }) => {
                                 return (
@@ -70,7 +71,7 @@ export default function SelfHosting() {
                         </ul>
                         <div className="flex-shrink-0">
                             <p className="text-black/50 m-0 mb-3 text-center">Easy deploy instructions</p>
-                            <ul className="list-none m-0 p-0 grid divide-y divide-gray-accent-light divide-dashed border border-gray-accent-light border-dashed w-[240px]">
+                            <ul className="list-none m-0 p-0 grid divide-y divide-gray-accent-light divide-dashed border border-gray-accent-light border-dashed w-full md:w-[240px]">
                                 {deploymentInstructions.map(({ title, url, Icon }) => {
                                     return (
                                         <li key={title}>

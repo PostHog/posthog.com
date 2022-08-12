@@ -30,16 +30,17 @@ const features = [
 export default function API() {
     return (
         <FeatureWrapperRow
+            id="api"
             title="API"
             description={
                 <>
                     <p>Do literally anything with your data with PostHog APIs. Here are a few things you can do:</p>
-                    <ul className="list-none m-0 p-0 grid grid-cols-2 border-y border-x border-gray-accent-light border-dashed">
+                    <ul className="list-none m-0 p-0 sm:grid grid-cols-2 border-y border-x border-gray-accent-light border-dashed">
                         {features.map(({ title, description }) => {
                             return (
                                 <li
                                     key={title}
-                                    className="p-8 border-b border-gray-accent-light border-dashed odd:border-r last:border-b-0"
+                                    className="p-8 border-b border-gray-accent-light border-dashed sm:odd:border-r last:border-b-0"
                                 >
                                     <h5 className="text-[17px] m-0">{title}</h5>
                                     <p className="text-[15px] m-0 text-black/70">{description}</p>

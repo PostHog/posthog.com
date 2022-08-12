@@ -963,3 +963,16 @@ body.dark {
 .crumb-has-next::after {
     content: '→' !important;
 }
+
+.product-event-pipelines > ul {
+    @apply list-none m-0 p-0 grid grid-cols-3 xl:grid-cols-6 items-center border-t border-l border-dashed border-gray-accent-light;
+}
+
+@media (min-width: 1280px) {
+    .product-event-pipelines {
+        grid-template-columns: 1fr 64rem 1fr;
+        > ul {
+            grid-column: 2 / span 2;
+        }
+    }
+}

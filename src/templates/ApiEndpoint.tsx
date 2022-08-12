@@ -18,7 +18,7 @@ import { SelectorIcon } from '@heroicons/react/outline'
 import MainSidebar from 'components/Docs/MainSidebar'
 import Navigation from 'components/Docs/Navigation'
 import SectionLinks from 'components/SectionLinks'
-import PostLayout from 'components/PostLayout'
+import PostLayout, { TableOfContents } from 'components/PostLayout'
 import CommunityQuestions from 'components/CommunityQuestions'
 import { HandbookSidebar } from './Handbook'
 
@@ -523,7 +523,7 @@ export default function ApiEndpoint({
             <PostLayout
                 title={name}
                 questions={<CommunityQuestions />}
-                menu={menu}
+                menu={<TableOfContents menu={menu} />}
                 tableOfContents={tableOfContents}
                 contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}

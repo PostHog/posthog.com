@@ -25,6 +25,7 @@ export default function Apps() {
     const [activeSlide, setActiveSlide] = useState(0)
     return (
         <FeatureWrapperRow
+            id="apps"
             title="Apps"
             cta={{
                 url: '/apps',

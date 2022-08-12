@@ -70,6 +70,7 @@ const pipelines = [
 export default function EventPipelines() {
     return (
         <FeatureWrapperRow
+            id="event-pipelines"
             title="Event pipelines"
             cta={{
                 url: '/docs/integrate',
@@ -90,19 +91,16 @@ export default function EventPipelines() {
                 </>
             }
         >
-            <div style={{ gridTemplateColumns: '1fr 64rem 1fr' }} className="grid">
-                <ul
-                    style={{ gridColumn: '2 / span 2' }}
-                    className="list-none m-0 p-0 grid grid-cols-6 items-center col-span-2 border-t border-l border-dashed border-gray-accent-light"
-                >
+            <div className="grid product-event-pipelines">
+                <ul>
                     {pipelines.map(({ Icon, title }) => {
                         return (
                             <li
                                 key={title}
                                 className=" flex items-center justify-center text-center border-b border-r border-dashed border-gray-accent-light py-6"
                             >
-                                <span>
-                                    <Icon className="h-[100px] w-[100px]" />
+                                <span className="flex flex-col justify-center items-center">
+                                    <Icon className="md:h-[100px] md:w-[100px] h-[50px] w-[50px]" />
                                     <p className="text-black/70 m-0 mt-2">{title}</p>
                                 </span>
                             </li>

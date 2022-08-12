@@ -305,10 +305,10 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     )
 }
 
-const TableOfContents = ({
+export const TableOfContents = ({
     menu,
     handleLinkClick,
-    title,
+    title = 'Table of contents',
 }: {
     menu: IMenu[]
     handleLinkClick?: () => void
@@ -426,7 +426,6 @@ export default function PostLayout({
     nextPost,
     hideSurvey,
     hideSearch,
-    menuTitle = 'Table of contents',
     contentContainerClassName,
 }: IProps) {
     const { hash, pathname } = useLocation()
@@ -513,11 +512,7 @@ export default function PostLayout({
                     isOpen={mobileMenuOpen}
                 >
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        <TableOfContents
-                            title={menuTitle}
-                            handleLinkClick={() => setMobileMenuOpen(false)}
-                            menu={menu}
-                        />
+                        {menu}
                     </div>
                 </PushMenu>
             )}
@@ -532,7 +527,7 @@ export default function PostLayout({
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
                         <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            <TableOfContents title={menuTitle} menu={menu} />
+                            {menu}
                         </aside>
                     </div>
                 )}

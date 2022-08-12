@@ -1,4 +1,5 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import React from 'react'
 
 export interface ITopic {
     name: string
@@ -57,7 +58,7 @@ export interface IProps {
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
-    menu?: IMenu[]
+    menu?: React.ReactNode
     article?: boolean
     title: string
     filePath?: string
@@ -66,6 +67,5 @@ export interface IProps {
     nextPost?: INextPost
     hideSurvey?: boolean
     hideSearch?: boolean
-    menuTitle?: string | boolean
     contentContainerClassName?: string
 }

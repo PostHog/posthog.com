@@ -6,6 +6,7 @@ import dataWarehouse from './images/data-warehouse.svg'
 export default function DataWarehouse() {
     return (
         <FeatureWrapperRow
+            id="data-warehouse"
             title="Data warehouse"
             description={
                 <>
