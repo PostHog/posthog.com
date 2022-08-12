@@ -21,9 +21,9 @@ Of course, PostHog isn’t the only open source software out there. In fact, the
 ![PostHog - best open source analytics for engineers](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 ## 1. [PostHog](/pricing)
-*Useful for:* Product analytics, session recording, feature flags
-*Alternative to:* [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)
-*License:* [MIT](https://en.wikipedia.org/wiki/MIT_License)
+**Useful for:** Product analytics, session recording, feature flags<br/>
+**Alternative to:** [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)<br/>
+**License:** [MIT](https://en.wikipedia.org/wiki/MIT_License)<br/>
 
 Of course, PostHog may not be the _only_ open source software useful to engineers, but it’s our (completely biased) favorite. 
 
@@ -45,9 +45,9 @@ Unlike proprietary platforms such as Amplitude however, PostHog offers far more 
 ![Metabase - open source data visualization for engineers](../images/blog/open-source-engineers/metabase-open-source.png)
 
 ## 2. [Metabase](/https://www.metabase.com/)
-*Useful for:* Data visualization, business intelligence
-*Alternative to:* Looker, Tableau, PowerBI
-*License:* [AGPL](https://en.wikipedia.org/wiki/Affero_General_Public_License)
+**Useful for:** Data visualization, business intelligence<br/>
+**Alternative to:** Looker, Tableau, PowerBI<br/>
+**License:** [AGPL](https://en.wikipedia.org/wiki/Affero_General_Public_License)<br/>
 
 For visualizing data in a different way and running complex business intelligence, Metabase is an easy recommendation because it’s something we make use of at PostHog too, filling in the gap for competitors such as Looker.
 
@@ -62,9 +62,9 @@ What makes Metabase so essential is that, like PostHog, it enables you to accomp
 ![Rudderstack - open source data pipeline for engineers](../images/blog/open-source-engineers/rudderstack-open-source.png)
 
 ## 3. [RudderStack](https://www.rudderstack.com/)
-*Useful for:* CDP, Data pipeline
-*Alternative to:* Segment, Tealium 
-*License:* [AGPLv3](https://en.wikipedia.org/wiki/Affero_General_Public_License)
+**Useful for:** CDP, Data pipeline<br/>
+**Alternative to:** Segment, Tealium <br/>
+**License:** [AGPLv3](https://en.wikipedia.org/wiki/Affero_General_Public_License)<br/>
 
 RudderStack has two things in common with PostHog. Firstly, it can act as a data pipeline to funnel ingested events to other sources, such as a data warehouse or third-party platform. Secondly, you need _two_ capital letters to spell it correctly. 
 
@@ -81,9 +81,9 @@ RudderStack is perfect for teams which are concerned with regulatory compliance,
 ![NocoDB - open source database collaboration for engineers](../images/blog/open-source-engineers/nocodb-open-source.png)
 
 ## 4. [NocoDB](https://www.nocodb.com/)
-*Useful for:* Database collaboration
-*Alternative to:* Airtable, Postgres 
-*License:* [AGPLv3](https://en.wikipedia.org/wiki/Affero_General_Public_License)
+*Useful for:* Database collaboration<br/>
+*Alternative to:* Airtable, Postgres <br/>
+*License:* [AGPLv3](https://en.wikipedia.org/wiki/Affero_General_Public_License)<br/>
 
 NocoDB isn’t just an alternative to database tools like Airtable — it can also act as a tool which sits on top of platforms like Airtable, converting complex databases into ‘smart spreadsheets’. 
 
@@ -99,9 +99,9 @@ If you are comfortable with code however, NocoDB has a few advanced features up 
 ![n8n - open source automation for engineers](../images/blog/open-source-engineers/n8n-open-source.png)
 
 ## 5. [n8n](https://n8n.io/)
-*Useful for:* Workflow automation, connecting services
-*Alternative to:* Zapier, node-red 
-*License:* [Sustainable use license](https://github.com/n8n-io/n8n/blob/master/LICENSE.md)
+**Useful for:** Workflow automation, connecting services<br/>
+**Alternative to:** Zapier, node-red <br/>
+**License:** [Sustainable use license](https://github.com/n8n-io/n8n/blob/master/LICENSE.md)<br/>
 
 When you need to automate work, move data between platforms, or create basic bots there are generally two options: you can create a custom solution which you’ll then need to maintain and manage…or you can use n8n. 
 
@@ -119,9 +119,9 @@ As with most open-source solutions, n8n can be self-hosted if you need to keep s
 ![Netdata - open source monitoring service for engineers](../images/blog/open-source-engineers/netdata-open-source.png)
 
 ## 6. [Netdata](https://www.netdata.cloud/)
-*Useful for:* System monitoring
-*Alternative to:* Datadog, Newrelic
-*License:* [GPL 3.0](https://github.com/netdata/netdata)
+**Useful for:** System monitoring <br/>
+**Alternative to:** Datadog, Newrelic <br/>
+**License:** [GPL 3.0](https://github.com/netdata/netdata) <br/>
 
 Compatible with almost any physical or virtual server, Netdata’s open source agent enables you to collect and visualize any available metric in real-time. This means you can effortlessly track over 2,000+ metrics in graphs, as well as configure 200+ alerts to notify you when something goes awry. 
 
@@ -136,9 +136,9 @@ Going beyond this, Netdata also offers more advanced anomaly detection issues fo
 ![ClickHouse - open source database for engineers](../images/blog/open-source-engineers/clickhouse-open-source.png)
 
 ## 7. ClickHouse
-*Useful for:* Database management, powering PostHog
-*Alternative to:* Redshift, Bigquery, Snowflake
-*License:*
+**Useful for:** Database management, powering PostHog<br/>
+**Alternative to:** Redshift, Bigquery, Snowflake<br/>
+**License:** [Apache 2.0](https://github.com/ClickHouse/ClickHouse/blob/master/LICENSE)<br/>
 
 We’re such big fans of ClickHouse that we not only partner with the team through [the PostHog Marketplace](/marketplace), we also [use it to power our own product](/blog/clickhouse-announcement)!
 
