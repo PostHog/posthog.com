@@ -1,5 +1,5 @@
 ---
-date: 2022-08-11
+date: 2022-08-12
 title: The 6 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
@@ -232,3 +232,5 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 #### How much does GoAccess cost?
 
 GoAccess is open source and has no paid tiers.
+
+ <NewsletterForm compact />
