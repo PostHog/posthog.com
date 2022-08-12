@@ -1,5 +1,5 @@
-import Tutorials from 'components/Tutorials'
 import { graphql } from 'gatsby'
+import Tutorials from 'components/Tutorials'
 
 export default Tutorials
 

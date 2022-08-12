@@ -101,6 +101,7 @@ export default function Handbook({
             return <iframe {...props} />
         }
     }
+
     const components = {
         Team,
         iframe: Iframe,

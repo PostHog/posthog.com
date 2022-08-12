@@ -1550,7 +1550,53 @@
         },
         {
             "name": "Tutorials",
-            "url": "/tutorials"
+            "url": "/tutorials",
+            "children": [
+                {
+                    "name": "Actions",
+                    "url": "/tutorials/categories/actions"
+                },
+                {
+                    "name": "Apps",
+                    "url": "/tutorials/categories/apps"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/tutorials/categories/cohorts"
+                },
+                {
+                    "name": "Dashboards",
+                    "url": "/tutorials/categories/dashboards"
+                },
+                {
+                    "name": "Feature flags",
+                    "url": "/tutorials/categories/feature-flags"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/tutorials/categories/funnels"
+                },
+                {
+                    "name": "Heatmaps",
+                    "url": "/tutorials/categories/heatmaps"
+                },
+                {
+                    "name": "Path analysis",
+                    "url": "/tutorials/categories/user-paths"
+                },
+                {
+                    "name": "Retention",
+                    "url": "/tutorials/categories/retention"
+                },
+                {
+                    "name": "Session recording",
+                    "url": "/tutorials/categories/session-recording"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/tutorials/categories/session-recording"
+                }
+            ]
         },
         {
             "name": "Support",

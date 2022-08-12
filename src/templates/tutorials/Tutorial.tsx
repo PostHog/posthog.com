@@ -14,9 +14,9 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
+import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { CodeBlock } from 'components/CodeBlock'
-import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const Iframe = (props) => {
@@ -83,7 +83,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
     )
 }
 
-export default function Tutorial({ data, pageContext: { pageViews, tableOfContents }, location }) {
+export default function Tutorial({ data, pageContext: { pageViews, tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
@@ -127,6 +127,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                 featuredVideo={featuredVideo}
                 tableOfContents={tableOfContents}
                 title={title}
+                menu={menu}
                 sidebar={
                     <TutorialSidebar
                         contributors={contributors}
