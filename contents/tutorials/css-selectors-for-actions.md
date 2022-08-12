@@ -42,7 +42,7 @@ Class selectors match all elements with a given class name. A selector will also
 
 ### ID selectors
 
-ID selectors match an element with a given ID. Element ID should be unique accross a page.
+ID selectors match an element with a given ID. Element ID should be unique across a page.
 
 *Example:* `#header` selector will match an element with `id="header"`.
 
@@ -122,7 +122,7 @@ In general, CSS selectors are well-suited for situations such as...
 - UI states represented with pseudo-classes like `:hover`, `:visited` and others
 - Targeting one specific element by id (e.g anchors)
 
-> As a rule of thumb, it is probaly a **bad idea** to use complex CSS selectors with class names and combinators. Layouts tend to change and class names can be unreliable (especially if you use Tailwind CSS). So,if you are considering using CSS selectors, **data attributes** are probably the best option to control specificity.
+> As a rule of thumb, it is probably a **bad idea** to use complex CSS selectors with class names and combinators. Layouts tend to change and class names can be unreliable (especially if you use Tailwind CSS). So,if you are considering using CSS selectors, **data attributes** are probably the best option to control specificity.
 
 ## Configuring CSS selectors
 There are two ways to do it - through the Toolbar and Data Management section.
@@ -155,7 +155,7 @@ On the `Data Management` page, select the `Actions` tab. Then press the `New Act
 
 ![Create New Action Data Management](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
 
-Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So, instead we wiil select `From event or pageview` option.
+Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So, instead we will select `From event or pageview` option.
 
 Finaly you should see a new page with a `Match Group` menu open. Choose the `Autocapture` option.
 
