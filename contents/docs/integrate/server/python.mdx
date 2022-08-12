@@ -175,9 +175,12 @@ When using them with one of libraries, you should check if a feature flag is ena
 
 **How to check if a flag is enabled**
 
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
+
+
 ```python
 posthog.feature_enabled('beta-feature', 'distinct id')
-# returns True or False
+# returns True or False or None
 ```
 
 **Example use case**
@@ -196,10 +199,12 @@ def homepage(request):
 
 If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
 
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
+
 
 ```python
 posthog.get_feature_flag('beta-feature', 'distinct id')
-# returns string or None
+# returns string or True or False or None
 ```
 
 **Overriding server properties**
@@ -250,6 +255,10 @@ posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_a
 ```
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `posthog.poll_interval = <value in seconds>`.
+
+**Restricting evaluation to local only**
+
+Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 
 ### Group analytics
 
