@@ -270,10 +270,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <div className="space-y-12">
                     <section className="px-1">
-                        <h1 className="text-5xl">Using PostHog</h1>
+                        <h1 className="text-5xl mb-4">Using PostHog</h1>
                         <p className="max-w-2xl">
                             This section covers everything you need to know about using PostHog. If you're looking for
-                            help tracking events or deploying a self-host version of PostHog,{' '}
+                            help tracking events or deploying a self-host version of PostHog, {' '}
                             <a href="/docs">visit the docs</a>.
                         </p>
 
@@ -281,9 +281,9 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <SearchBox placeholder="Search..." />
                         </div>
 
-                        <p className="text-sm">
-                            If you don't find the answer you're looking for,{' '}
-                            <a href="/questions">ask a question</a>.
+                        <p className="text-sm text-black/75">
+                            Don't see the answer you're looking for?{' '}
+                            <a href="/questions">Ask a question</a>
                         </p>
                     </section>
 
