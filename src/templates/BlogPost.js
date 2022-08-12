@@ -18,16 +18,16 @@ import { shortcodes } from '../mdxGlobalComponents'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`lg:px-[50px] text-2xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`text-2xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
 }
 
 const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
     return (
-        <div className="lg:mb-7 mb-4 overflow-hidden">
+        <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
             {featuredImage && (
                 <div className="relative">
                     <GatsbyImage
-                        className={`rounded-lg z-0 relative ${
+                        className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
                                 ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
                                 : ''
@@ -35,7 +35,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary">{title}</Title>
+                        <Title className="lg:absolute bottom-0 lg:text-white text-primary px-8">{title}</Title>
                     )}
                 </div>
             )}
@@ -43,7 +43,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
             {contributors && (
                 <Contributors
                     contributors={contributors}
-                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3 lg:px-[50px]"
+                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3"
                 />
             )}
         </div>
@@ -132,7 +132,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     featuredImageType={featuredImageType}
                     contributors={contributors}
                 />
-                <div className="lg:px-[50px]">
+                <div className="">
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>

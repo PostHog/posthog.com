@@ -90,11 +90,11 @@ Spend money when it makes sense to do so. See our general policy on spending mon
 
 ### How do you keep the product together as a company?
 
-Marcus is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+Tim is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 ### How do you stop duplicate work?
 
-Marcus has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+Tim has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 

@@ -27,10 +27,10 @@ export type LibraryFeaturesProps = {
 
 export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
     return availability ? (
-        <div className="xl:border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark xl:pt-4 pb-4 space-y-2 -mt-4 xl:mt-4 mb-4">
-            <h6 className="text-gray !mt-0 pb-1 font-semibold text-sm">
+        <div className="lg:border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pt-3 pb-4 space-y-2 -mt-4 lg:mt-4 mb-4">
+            <h5 className="text-primary/50 dark:text-primary-dark/50 pt-2 pb-1 !m-0 font-semibold text-base">
                 Which features are available in this library?
-            </h6>
+            </h5>
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-x-2 gap-y-1">
                 {features.map((feature) => (

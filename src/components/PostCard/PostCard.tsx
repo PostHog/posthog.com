@@ -50,7 +50,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
             }}
         >
             <h2
-                className="text-white text-2xl text-gray-100 font-sans normal-case my-1"
+                className="text-white text-4xl text-gray-100 font-sans normal-case my-1"
                 style={{ textDecoration: 'inherit' }}
             >
                 {post.frontmatter.title}

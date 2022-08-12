@@ -1,6 +1,5 @@
 ---
 title: Timestamp Parser
-layout: app
 github: https://github.com/PostHog/timestamp-parser-plugin
 installUrl: https://app.posthog.com/project/apps?name=Timestamp%20Parser
 thumbnail: ../../apps/thumbnails/timestamp-parser.png
@@ -35,7 +34,7 @@ Once the app has been enabled, it will automatically start parsing all new event
 ##### PostHog Self-hosted
 
 > The Timestamp Parser requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-> Not running 1.30.0? Find out [how to update](https://posthog.com/docs/self-host/configure/upgrading-posthog).
+> Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog).
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Timestamp Parser'.

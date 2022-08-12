@@ -34,7 +34,7 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,
-                            image: avatar?.publicURL,
+                            image: avatar,
                         }))}
                     />
                 </SidebarSection>
@@ -129,7 +129,7 @@ export default function Handbook({
                     title={title}
                     filePath={filePath}
                     questions={
-                        <div id="squeak-questions">
+                        <div id="squeak-questions" className="pb-8">
                             <CommunityQuestions />
                         </div>
                     }
@@ -144,7 +144,7 @@ export default function Handbook({
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2 mt-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
@@ -207,7 +207,9 @@ export const query = graphql`
                 url
                 username
                 avatar {
-                    publicURL
+                    childImageSharp {
+                        gatsbyImageData(width: 38, height: 38)
+                    }
                 }
                 teamData {
                     name

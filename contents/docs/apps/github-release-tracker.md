@@ -1,6 +1,5 @@
 ---
 title: GitHub Release Tracker
-layout: app
 github: https://github.com/PostHog/github-release-tracking-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Release+Tracker
 thumbnail: ../../apps/thumbnails/github.png
@@ -16,7 +15,7 @@ This app enables you to tracker releases in GitHub as events in PostHog. This is
 
 The GitHub Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 If you want to track releases from a private GitHub repo, you'll also need access to it.
 

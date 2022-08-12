@@ -7,24 +7,28 @@ import React, { useState } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 const button = cntl`
-    text-lg
+    text-[17px]
     font-bold
     flex
     items-center
     flex-grow
     sm:flex-grow-0
-    sm:w-[186px]
+    sm:w-[220px]
     justify-between
     px-4
     py-2
-    bg-white
     rounded-sm
     shadow-sm 
+    bg-white
     text-black/70 
     hover:text-black/95 
+    dark:bg-white/30
+    dark:text-white/90
+    dark:hover:bg-white/40
+    dark:hover:text-white/100
     relative
     active:top-[1px] 
-    active:scale-[.97] 
+    active:scale-[.98] 
     transition-none 
     transition-colors
 `
@@ -39,7 +43,7 @@ const ResponseButtons = ({ submitResponse }) => {
                     <ThumbsUp />
                 </button>
                 <button onClick={() => submitResponse(false)} className={button}>
-                    <span>No</span>
+                    <span>Could be better</span>
                     <ThumbsDown />
                 </button>
             </div>
@@ -51,11 +55,13 @@ const ResponseMessage = () => {
     return (
         <motion.div initial={{ translateY: '100%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
             <h3 className="text-lg font-bold m-0 mb-3">Thanks for the feedback!</h3>
-            <p className="m-0">
-                If you need help on any of the above, feel free to create an issue on{' '}
-                <a href="https://github.com/PostHog/posthog">our repo</a>, or <a href="/slack">join our Slack</a> where
-                a member of our team can assist you! Chances are that if you have a problem or question, someone else
-                does too - so please don't hesitate to create a new issue or ask us a question.
+            <p>
+                If you need help on any of the above, feel free to ask a question above, create an issue on{' '}
+                <a href="https://github.com/PostHog/posthog">our repo</a>.
+            </p>
+            <p>
+                Chances are that if you have a problem or question, someone else does too - so please don't hesitate to
+                reach out!
             </p>
         </motion.div>
     )

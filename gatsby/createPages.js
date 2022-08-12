@@ -21,8 +21,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
-    const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
-    const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
 
     const result = await graphql(`
         {
@@ -65,9 +63,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     headings {
                         depth
                         value
-                    }
-                    frontmatter {
-                        layout
                     }
                     fields {
                         slug
@@ -226,15 +221,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         return Promise.reject(result.errors)
     }
 
-    const layouts = {
-        apps: AppDocsTemplate,
-        library: LibraryTemplate,
-    }
-
     function createPosts(data, menu, template, breadcrumbBase) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
-            const layout = node?.frontmatter?.layout
             const slug = node.fields?.slug || node.url
             let next = null
             let previous = null
@@ -253,7 +242,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
 
             createPage({
                 path: replacePath(slug),
-                component: layouts[layout] || template,
+                component: template,
                 context: {
                     id: node.id,
                     nextURL,
