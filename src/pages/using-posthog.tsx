@@ -207,9 +207,9 @@ const categories: {
         manuals: [
             {
                 name: 'Team collaboration',
-                url: '/manual/organizations-and-projects',
+                url: '/manual/team-collaboration',
                 category: 'team collaboration',
-                description: 'Manage users within your organization',
+                description: 'Tools for working together',
                 icon: ProductIcons.teamCollaboration,
             },
             {
@@ -220,7 +220,7 @@ const categories: {
                 icon: ProductIcons.sso,
             },
             {
-                name: 'Organizations and projects',
+                name: 'Organizations & projects',
                 url: '/manual/organizations-and-projects',
                 category: 'organizations and projects',
                 description: 'Organize your data and control access',
@@ -241,7 +241,7 @@ const categories: {
                 icon: ProductIcons.toolbar,
             },
             {
-                name: 'Notifications and alerts',
+                name: 'Notifications & alerts',
                 url: '/manual/subscriptions',
                 category: 'notifications and alerts',
                 description: 'Receive updates from your insights an dashboards',

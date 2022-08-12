@@ -123,7 +123,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                     )
                                 })}
                             </ol>
-                            <CallToAction className="inline-block mt-4 !w-full" to="/docs/user-guides">
+                            <CallToAction className="inline-block mt-4 !w-full" to="/using-posthog">
                                 Visit user guides
                             </CallToAction>
                         </div>
