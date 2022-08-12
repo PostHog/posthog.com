@@ -21,7 +21,7 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 
 3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transeferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
 
-## The best GDPR-compliant analytics
+## The best GDPR-compliant analytics tools
 
 There are numerous ways to achieve GDPR compliance, which you can broadly categorize as either good, better or best:
 
