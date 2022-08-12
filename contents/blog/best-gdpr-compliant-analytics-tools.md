@@ -31,11 +31,11 @@ There are numerous ways to achieve GDPR compliance, which you can broadly catego
 
 All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source Google Analytics alternatives.
 
-### 1. [PostHog](https://posthog.com/product)
+### 1. PostHog
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-PostHog is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
+[PostHog](https://posthog.com) is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
 
 (Think Amplitude + Hotjar + LaunchDarkly in one platform and you're pretty close.)
 
@@ -69,13 +69,11 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/docs/user-guides/experimentation), [Correlation Analysis](/docs/user-guides/correlation), [Cohorts](/user-guides/cohorts) and [Group Analytics](/docs/user-guides/group-analytics). The open source edition is free to self-host and includes the core product analytics features,  Session Recording and support for one project only.
 
-<ArrayCTA />
-
-### 2. [Plausible](https://plausible.io/)
+### 2. Plausible
 
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-Plausible is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+[Plausible](https://plausible.io/) is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -103,11 +101,11 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker.
 
-### 3. [Fathom](https://usefathom.com/)
+### 3. Fathom
 
 ![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
 
-Fathom is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
+[Fathom](https://usefathom.com/) is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
 
 While based in Canada, Fathom offers EU-hosting. It also employs what it calls intelligent routing. This ensures that non-EU users are routed via its US servers, while EU users are routed via its EU-based and owned servers. Fathom claims this means non-EU visitors get better performance compared to other, similar services that use EU-only hosting.
 
@@ -136,11 +134,11 @@ As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no com
 
 Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plausible. A website generating 1 million pageviews per month would pay $54 per month, compared to around $71 with Plausible. Fathom also offers two months free use for paying annually, but there is no free-to-use open sourcre version.
 
-### 4. [Countly](https://count.ly/)
+### 4. Countly
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-Like PostHog, Countly is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
+Like PostHog, [Countly](https://count.ly/) is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
 
 Countly offers a robust suite of features and an extensive range of integrations, including a Net Promoter Score (NPS) survey plugin. The ability to track crashes and errors, and to issue push notifications to mobile users, are also useful additions over most other analytics tools.
 
@@ -172,7 +170,7 @@ Countly doesn't publish pricing on its website. You have to contact sales. Its o
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
-Matomo is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open source. 
+[Matomo](https://matomo.org/) is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open source. 
 
 One of Matomo’s most appealing features is the ability to import existing Google Analytics data into Matomo when getting started, so that you don’t lose any previous insights.
 
@@ -203,11 +201,11 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-### 6. [GoAccess](https://goaccess.io/)
+### 6. GoAccess
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
-GoAccess is a completely open source web log analyzer and viewer which runs in a browser-based terminal to give you an overview of the most common website metrics. This means it can act as a replacement for tools such as Google Analytics, though it falls short of a product analytics platform in capabilities. 
+[GoAccess](https://goaccess.io/) is a completely open source web log analyzer and viewer which runs in a browser-based terminal to give you an overview of the most common website metrics. This means it can act as a replacement for tools such as Google Analytics, though it falls short of a product analytics platform in capabilities. 
 
 Functioning in real-time, GoAccess is useful for spotting who is using up your bandwidth and identifying aggressive crawlers or bots, as well as tracking site metrics such as page views, visitors and time-on-page. The toolset, design and reliance on a terminal make it a popular choice for sysadmins. 
 
@@ -235,4 +233,4 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 
 GoAccess is open source and has no paid tiers.
 
- <NewsletterForm compact />
+<NewsletterForm compact />
