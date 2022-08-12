@@ -8,20 +8,84 @@ showTitle: true
 
 PostHog provides a free basic level of support to everyone via the community, with additional support options available for paying customers depending on product. 
 
-|Support type|Open Source|Cloud|Scale|Enterprise|
-|---|---|---|---|---|
-|[Community](#community-support)|✔️|✔️|✔️|✔️|
-|[Dedicated Slack](#dedicated-slack)| |Minimum $2k/month spend|+|✔️|
-|[Dedicated email](#dedicated-email)| | | |✔️|
-|[Training sessions](#training-sessions)| | | |✔️|
-|[Deployment developer pairing](#deployment-developer-pairing)| | |+|✔️|
-|[Configuration assistance](#configuration-assistance)| | | |✔️|
-|[Terms and Conditions](#terms-and-conditions)|MIT Licence|Standard|Standard|MSA|
-|[Security assessment](#security-assessment)|Standard assessment provided|Standard assessment provided|Standard assessment provided|✔️|
-|[Bespoke pricing](#bespoke-pricing)| | | |✔️|
-|[Payment via invoicing](#payment-via-invoicing)| | |Minimum $2k/month spend|✔️|
-|[Downtime developer pairing](#downtime-developer-pairing)| | | |✔️|
-|[Region-specific private cloud infrastructure managed by PostHog](#region-specific-cloud-infrastructure-managed-by-posthog)| | | |✔️|
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="text-sm">
+<thead>
+<tr>
+<th>Support type</th>
+<th>Open Source</th>
+<th>PostHog Cloud</th>
+<th>Self-hosted</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#community-support">Community</a></td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#dedicated-slack">Dedicated Slack</a></td>
+<td></td>
+<td>Minimum $2k/month spend</td>
+<td>+</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#dedicated-email">Dedicated email</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#training-sessions">Training sessions</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#configuration-assistance">Configuration assistance</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#terms-and-conditions">Terms and Conditions</a></td>
+<td>MIT Licence</td>
+<td>Standard</td>
+<td>Standard</td>
+<td>MSA</td>
+</tr>
+<tr>
+<td><a href="#security-assessment">Security assessment</a></td>
+<td>Standard assessment provided</td>
+<td>Standard assessment provided</td>
+<td>Standard assessment provided</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#bespoke-pricing">Bespoke pricing</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✔️</td>
+</tr>
+<tr>
+<td><a href="#payment-via-invoicing">Payment via invoicing</a></td>
+<td></td>
+<td></td>
+<td>Minimum $2k/month spend</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 By default, the Scale plan does not include items marked with a '+'. However, we work with several partners that can offer a 'fully supported' experience for Scale customers - visit our [partner directory](/marketplace) to learn more. 
 
@@ -71,12 +135,6 @@ We run a set number of group training sessions with your end users. We will walk
 
 These are useful at first for the initial adoption of PostHog. As you organically add more people to the platform, we can make sure everyone understands how to derive the most value.
 
-## Deployment developer pairing
-
-We will send you to the correct docs to follow to deploy. If you get stuck, will clarify over Slack in the first instance. If that proves tough, then we'll hop on a call with you to figure out the issue.
-
-We do not have access to the infrastructure of our customers. Deployment developer pairing means we can have a developer join a call with one of your developers (ideally with a screenshare, although we can do audio only), to help you quickly get up and running. This is in addition to our extensive [documentation](/docs).
-
 ## Configuration assistance
 
 We help you define meaningful dashboards for your company and regularly check in that the configuration of PostHog is helping you improve your product.
@@ -123,16 +181,3 @@ For example, we have been asked if we can offer a set fee with a large usage cap
 We only take payments via credit or debit card, processed via Stripe. 
 
 For companies with invoices over $2,000/month, we are able to support manual invoicing if needed. Just email billing@posthog.com and we'll set this up.
-
-## Downtime developer pairing
-
-We can provide SLAs for emergency video or audio call sessions between one of our engineers and your team if you suffer:
-
-* Data loss (pipeline downtime)
-* Complete failure of PostHog to load
-
-This does _not_ cover bugs, partial outages of the product or query slowness.
-
-## Region-specific cloud infrastructure managed by PostHog
-
-We recommend customers with data-control requirements self host PostHog, giving you complete flexibility as to the location you deploy in. However, for Enterprise customers we can host PostHog for you in a private cloud environment, in a region and with a provider of your choosing.
