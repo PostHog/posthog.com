@@ -9,6 +9,7 @@ import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/SearchBox'
 import { Close } from 'components/Icons/Icons'
+import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
 
 const categories: {
@@ -367,12 +368,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         <div className="space-y-3">
                             <h3 className="font-bold mb-0">Featured tutorials</h3>
                             <p>Here's where we highlight interesting things you can do with PostHog</p>
-                            <Link
-                                to="/tutorials"
-                                className="inline-block bg-white dark:bg-gray-accent-dark rounded border-2 border-gray-accent-light dark:border-white/20 px-8 py-2 text-gray dark:text-white font-semibold relative active:top-[0.5px] active:scale-[.98]"
-                            >
+                             
+                            <CallToAction type="secondary" className="!w-full md:!w-48 shadow-xl" to="/tutorials">
                                 Browse tutorials
-                            </Link>
+                            </CallToAction>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mt-8 max-w-sm sm:max-w-2xl">
