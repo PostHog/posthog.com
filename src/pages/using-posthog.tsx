@@ -22,7 +22,7 @@ const categories: {
     }[]
 }[] = [
     {
-        name: 'Product analytics',
+        name: '1. Product analytics',
         manuals: [
             {
                 name: 'Insights',
@@ -90,7 +90,7 @@ const categories: {
         ],
     },
     {
-        name: 'Visualize',
+        name: '2. Visualize',
         manuals: [
             {
                 name: 'Session recording',
@@ -109,7 +109,7 @@ const categories: {
         ],
     },
     {
-        name: 'Optimization',
+        name: '3. Optimization',
         manuals: [
             {
                 name: 'Feature flags',
@@ -135,7 +135,7 @@ const categories: {
         ],
     },
     {
-        name: 'Data',
+        name: '4. Data',
         manuals: [
             {
                 name: 'Actions',
@@ -196,7 +196,7 @@ const categories: {
         ],
     },
     {
-        name: 'Project settings',
+        name: '5. Project settings',
         manuals: [
             {
                 name: 'Team collaboration',
@@ -267,7 +267,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         <p className="max-w-2xl">
                             This section covers everything you need to know about using PostHog. If you're looking for
                             help tracking events or deploying a self-host version of PostHog,{' '}
-                            <a href="/docs">visit the docs</a>
+                            <a href="/docs">visit the docs</a>.
                         </p>
 
                         <div className="my-4">
@@ -276,7 +276,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
 
                         <p>
                             If you don't find the answer you're looking for,{' '}
-                            <a href="/questions">ask a question here</a>.
+                            <a href="/questions">ask a question</a>.
                         </p>
                     </section>
 
@@ -295,7 +295,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                             return (
                                                 <li key={manual.name} className="list-none">
                                                     <Link
-                                                        className="flex items-start space-x-3 rounded relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.98] px-3 py-4"
+                                                        className="flex items-start h-full space-x-3 rounded relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.99] px-3 py-4"
                                                         to={manual.url}
                                                     >
                                                         <span className="w-6 h-6 text-gray shrink-0">
@@ -313,7 +313,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                                         event.preventDefault()
                                                                         setCurrentModal(manual.category)
                                                                     }}
-                                                                    className="relative mt-2 inline-block bg-black/10 rounded-md text-sm px-2 py-1 text-gray font-semibold z-50 hover:text-red"
+                                                                    className="relative mt-2 inline-block bg-black/10 rounded-md text-xs px-2 py-1 text-gray font-semibold z-50 hover:bg-red hover:text-white"
                                                                 >
                                                                     {tutorials.length}{' '}
                                                                     {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
