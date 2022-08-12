@@ -228,7 +228,7 @@ The same holds for groups. If you have a group name `organisation`, you can add 
 
 
 ```c
-posthog.get_feature_flag('beta-feature', 'distinct id', groups: {'organisation': 'google', group_properties: {'organisation': {'is_authorized': True})
+posthog.get_feature_flag('beta-feature', 'distinct id', groups: {'organisation': 'google'}, group_properties: {'organisation': {'is_authorized': True})
 # returns string or Nil
 ```
 
