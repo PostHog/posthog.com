@@ -289,14 +289,14 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                     <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
                                         {category.name}
                                     </h4>
-                                    <ul className="grid grid-cols-1 sm:grid-cols-2 px-1 my-6">
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 px-1 my-6 gap-[1px]">
                                         {category.manuals.map((manual) => {
                                             const tutorials = tutorialsByCategory[manual.category]
 
                                             return (
                                                 <li key={manual.name} className="list-none">
                                                     <Link
-                                                        className="flex items-start h-full space-x-3 rounded relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.99] px-3 py-4"
+                                                        className="group flex items-start h-full space-x-3 rounded relative hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.99] px-3 py-4"
                                                         to={manual.url}
                                                     >
                                                         <span className="w-6 h-6 text-gray shrink-0">
@@ -304,7 +304,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                         </span>
                                                         <div>
                                                             <span className="text-red font-bold">{manual.name}</span>
-                                                            <p className="text-gray m-0 font-normal text-sm">
+                                                            <p className="text-black/60 group-hover:text-black/75 m-0 font-normal text-sm">
                                                                 {manual.description}
                                                             </p>
 
@@ -344,7 +344,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                 <ul className="list-none m-0 p-0 space-y-6 px-8">
                                     {currentModal &&
                                         tutorialsByCategory[currentModal].map((tutorial) => (
-                                            <li key={tutorial.fields.slug} className="bg-tan dark:bg-gray-accent-dark">
+                                            <li key={tutorial.fields.slug} className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]">
                                                 <Link to={tutorial.fields.slug}>
                                                     <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                                 </Link>
@@ -354,33 +354,30 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             </div>
 
                             <div className="py-4 px-8 shrink-0">
-                                <Link
-                                    to="/tutorials"
-                                    className="block border-2 border-gray-accent-light text-gray rounded py-2 w-full text-center relative active:top-[0.5px] active:scale-[.98]"
-                                >
+                                <CallToAction type="primary" className="!w-full shadow-xl" to="/tutorials">
                                     Browse all tutorials
-                                </Link>
+                                </CallToAction>
                             </div>
                         </div>
                     </Modal>
 
-                    <section className="px-1 space-y-6">
-                        <div className="space-y-3">
-                            <h3 className="font-bold mb-0">Featured tutorials</h3>
-                            <p>Here's where we highlight interesting things you can do with PostHog</p>
+                    <section className="px-1 space-y-6 pb-12">
+                        <div className="space-y-3 mb-8">
+                            <h3 className="font-bold mb-0 text-3xl">Featured tutorials</h3>
+                            <p className="pt-0 text-opacity-75">Here's where we highlight interesting things you can do with PostHog.</p>
                              
-                            <CallToAction type="secondary" className="!w-full md:!w-48 shadow-xl" to="/tutorials">
+                            <CallToAction type="outline" className="!w-full md:!w-48 shadow-xl" to="/tutorials">
                                 Browse tutorials
                             </CallToAction>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mt-8 max-w-sm sm:max-w-2xl">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-8 max-w-sm sm:max-w-4xl">
                             {featuredTutorials.nodes.map((tutorial) => {
                                 return (
                                     <Link
                                         key={tutorial.id}
                                         to={tutorial.fields.slug}
-                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded"
+                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
                                     >
                                         <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                     </Link>
