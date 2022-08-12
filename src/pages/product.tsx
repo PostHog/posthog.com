@@ -79,16 +79,16 @@ const features: IProps[] = [
 
 const menu = [
     {
-        title: 'Overview',
+        name: 'Overview',
         url: 'overview',
         icon: ProductIcons.posthogMonochrome,
     },
-    { title: 'Top features', url: 'top-features', icon: ProductIcons.topFeatures },
-    { title: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
-    { title: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
-    { title: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
-    { title: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
-    { title: 'API', url: 'api', icon: ProductIcons.api },
+    { name: 'Top features', url: 'top-features', icon: ProductIcons.topFeatures },
+    { name: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
+    { name: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
+    { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
+    { name: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
+    { name: 'API', url: 'api', icon: ProductIcons.api },
 ]
 
 const Menu = () => {
@@ -141,15 +141,16 @@ export default function Product() {
                 hideSidebar
                 hideSearch
                 hideSurvey
-                menu={<Menu />}
+                menu={menu}
                 article={false}
                 contentContainerClassName="w-full pb-12"
+                menuType="scroll"
             >
                 <div className="sticky top-0 z-10 bg-tan px-5 lg:hidden mb-6 py-2">
                     <Slider ref={sliderRef} {...sliderSettings}>
-                        {menu.map(({ title, icon, url }, index) => {
+                        {menu.map(({ name, icon, url }, index) => {
                             return (
-                                <div key={title}>
+                                <div key={name}>
                                     <Link
                                         smooth
                                         duration={300}
@@ -167,7 +168,7 @@ export default function Product() {
                                         }}
                                     >
                                         <span className="w-[25px]">{icon}</span>
-                                        <span>{title}</span>
+                                        <span>{name}</span>
                                     </Link>
                                 </div>
                             )

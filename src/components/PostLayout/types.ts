@@ -1,5 +1,4 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
-import React from 'react'
 
 export interface ITopic {
     name: string
@@ -21,6 +20,7 @@ export interface IMenu {
     className?: string
     handleLinkClick?: () => void
     topLevel?: boolean
+    menuType?: 'scroll' | 'standard'
 }
 
 export interface ICrumb {
@@ -58,7 +58,7 @@ export interface IProps {
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
-    menu?: React.ReactNode
+    menu?: IMenu[]
     article?: boolean
     title: string
     filePath?: string
@@ -68,4 +68,5 @@ export interface IProps {
     hideSurvey?: boolean
     hideSearch?: boolean
     contentContainerClassName?: string
+    menuType?: 'scroll' | 'standard'
 }

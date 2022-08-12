@@ -133,7 +133,7 @@ export default function Handbook({
                             <CommunityQuestions />
                         </div>
                     }
-                    menu={<TableOfContents menu={menu} />}
+                    menu={menu}
                     sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"

@@ -13,6 +13,61 @@ import GithubSlugger from 'github-slugger'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
+import PostLayout from 'components/PostLayout'
+import { ProductIcons } from 'components/ProductIcons/ProductIcons'
+
+const menu = [
+    {
+        name: 'Overview',
+        url: '/product#overview',
+        icon: ProductIcons.posthogMonochrome,
+    },
+    {
+        name: 'Top features',
+        url: '/product#top-features',
+        icon: ProductIcons.topFeatures,
+        children: [
+            {
+                name: 'Funnels',
+                url: '/product/funnels',
+            },
+            {
+                name: 'Graphs & trends',
+                url: '/product/trends',
+            },
+            {
+                name: 'User paths',
+                url: '/product/user-paths',
+            },
+            {
+                name: 'Team collaboration',
+                url: '/product/collaboration',
+            },
+            {
+                name: 'Session recording',
+                url: '/product/session-recording',
+            },
+
+            {
+                name: 'Feature flags',
+                url: '/product/feature-flags',
+            },
+            {
+                name: 'Experimentation suite',
+                url: '/product/experimentation-suite',
+            },
+            {
+                name: 'Correlation analysis',
+                url: '/product/correlation-analysis',
+            },
+        ],
+    },
+    { name: 'Apps', url: '/product#apps', icon: ProductIcons.appLibrary },
+    { name: 'Event pipelines', url: '/product#event-pipelines', icon: ProductIcons.eventPipelines },
+    { name: 'Data warehouse', url: '/product#data-warehouse', icon: ProductIcons.dataWarehouse },
+    { name: 'Self-hosting', url: '/product#self-hosting', icon: ProductIcons.selfHosting },
+    { name: 'API', url: 'api', icon: ProductIcons.api },
+]
 
 export default function Product({ data, pageContext: { next, previous } }) {
     const { pageData, documentation, sidebars } = data
@@ -54,49 +109,19 @@ export default function Product({ data, pageContext: { next, previous } }) {
                 title={`${title} - PostHog`}
                 description={description || excerpt}
             />
-            <Breadcrumbs
-                crumbs={[{ title: 'Product', url: '/product' }, { title }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-0 z-10 bg-tan dark:bg-primary"
-            />
-            <div
-                style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
-                className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
-            >
-                <aside className="lg:sticky top-20 flex-shrink-0 lg:mt-24 mb-12 lg:mb-0 justify-self-end lg:pl-5 px-5 lg:px-0">
-                    <nav>
-                        <ul className="list-none p-0 m-0 flex flex-col space-y-3">
-                            {sidebars.product.map(({ url, name }) => {
-                                return (
-                                    <li key={url} className={url === slug ? 'active-product relative' : ''}>
-                                        <Link
-                                            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold opacity-50 hover:opacity-80 transition-opacity"
-                                            to={url}
-                                        >
-                                            {name}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </nav>
-                </aside>
-                <section className="col-span-2 overflow-hidden">
-                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0">
-                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                        <GatsbyImage image={getImage(featuredImage)} />
-                        <article>
-                            <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </article>
-                        <div className="mt-12">
-                            <SectionLinks next={next} previous={previous} />
-                        </div>
-                        <FooterCTA />
-                    </div>
-                </section>
-            </div>
+            <PostLayout title={title} menu={menu} hideSidebar>
+                <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
+                <GatsbyImage image={getImage(featuredImage)} />
+                <article>
+                    <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
+                        <MDXRenderer>{body}</MDXRenderer>
+                    </MDXProvider>
+                </article>
+                <div className="mt-12">
+                    <SectionLinks next={next} previous={previous} />
+                </div>
+                <FooterCTA />
+            </PostLayout>
         </Layout>
     )
 }

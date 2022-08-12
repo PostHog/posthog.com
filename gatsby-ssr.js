@@ -9,6 +9,7 @@ const React = require('react')
 
 import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
+import Product from './src/templates/Product'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
@@ -18,6 +19,8 @@ export const wrapPageElement = ({ element, props }) => {
             /^handbook|^docs\/(?!api)/.test(slug) &&
             !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
                 <HandbookLayout {...props} />
+            ) : /^product\//.test(slug) ? (
+                <Product {...props} />
             ) : (
                 element
             ),

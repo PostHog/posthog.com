@@ -523,7 +523,7 @@ export default function ApiEndpoint({
             <PostLayout
                 title={name}
                 questions={<CommunityQuestions />}
-                menu={<TableOfContents menu={menu} />}
+                menu={menu}
                 tableOfContents={tableOfContents}
                 contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}

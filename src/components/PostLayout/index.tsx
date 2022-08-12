@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SearchBar from 'components/Docs/SearchBar'
@@ -25,7 +25,7 @@ import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { replacePath } from '../../../gatsby/utils'
+import { flattenMenu, replacePath } from '../../../gatsby/utils'
 import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
 import { Popover } from 'components/Popover'
 
@@ -207,12 +207,21 @@ const Chevron = ({ open, className = '' }: { open: boolean; className: string })
     )
 }
 
-const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }: IMenu) => {
+const Menu = ({
+    name,
+    url,
+    children,
+    className = '',
+    handleLinkClick,
+    topLevel,
+    menuType = 'standard',
+    icon,
+}: IMenu) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
@@ -245,12 +254,16 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     }
 
     const isWithChild = children && children.length > 0
-
+    const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
+    const menuLinkProps = {
+        standard: {},
+        scroll: { offset: -50, smooth: true, duration: 300, hashSpy: true, spy: true },
+    }[menuType]
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
             <li>
                 {name && url ? (
-                    <Link
+                    <MenuLink
                         onClick={() => {
                             handleLinkClick && handleLinkClick()
                             if (isWithChild) {
@@ -261,6 +274,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             !topLevel ? 'opacity-50' : ''
                         } hover:opacity-100 transition-opacity ${isActive || isWithChild ? 'opacity-100' : ''}`}
                         to={url}
+                        {...menuLinkProps}
                     >
                         <AnimatePresence>
                             {isActive && (
@@ -273,9 +287,16 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                                 />
                             )}
                         </AnimatePresence>
-                        <span>{name}</span>
+                        {icon ? (
+                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
+                                <span className="w-[25px]">{icon}</span>
+                                <span>{name}</span>
+                            </span>
+                        ) : (
+                            <span>{name}</span>
+                        )}
                         {isWithChild && <Chevron open={open ?? false} />}
-                    </Link>
+                    </MenuLink>
                 ) : (
                     <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
                         {isWithChild ? (
@@ -309,30 +330,47 @@ export const TableOfContents = ({
     menu,
     handleLinkClick,
     title = 'Table of contents',
+    menuType = 'standard',
 }: {
     menu: IMenu[]
     handleLinkClick?: () => void
     title?: string | boolean
+    menuType?: 'scroll' | 'standard'
 }) => {
+    const Wrapper = {
+        standard: React.Fragment,
+        scroll: Scrollspy,
+    }[menuType]
+    const wrapperProps = {
+        standard: {},
+        scroll: {
+            componentTag: 'div',
+            offset: -50,
+            items: flattenMenu(menu)?.map((navItem) => navItem.url),
+            currentClassName: 'bg-gray-accent-light',
+        },
+    }[menuType]
     return (
         <>
             {title && (
-                <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
-                    Table of contents
-                </p>
+                <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">{title}</p>
             )}
+
             <nav>
-                {menu.map((menuItem) => {
-                    return (
-                        <Menu
-                            topLevel
-                            handleLinkClick={handleLinkClick}
-                            className="ml-0"
-                            key={menuItem.name}
-                            {...menuItem}
-                        />
-                    )
-                })}
+                <Wrapper {...wrapperProps}>
+                    {menu.map((menuItem) => {
+                        return (
+                            <Menu
+                                menuType={menuType}
+                                topLevel
+                                handleLinkClick={handleLinkClick}
+                                className="ml-0"
+                                key={menuItem.name}
+                                {...menuItem}
+                            />
+                        )
+                    })}
+                </Wrapper>
             </nav>
         </>
     )
@@ -427,6 +465,7 @@ export default function PostLayout({
     hideSurvey,
     hideSearch,
     contentContainerClassName,
+    menuType = 'standard',
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -512,7 +551,11 @@ export default function PostLayout({
                     isOpen={mobileMenuOpen}
                 >
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        {menu}
+                        <TableOfContents
+                            menuType={menuType}
+                            handleLinkClick={() => setMobileMenuOpen(false)}
+                            menu={menu}
+                        />
                     </div>
                 </PushMenu>
             )}
@@ -527,7 +570,7 @@ export default function PostLayout({
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
                         <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            {menu}
+                            <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>
                 )}
