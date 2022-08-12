@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import FullWidthBorderSlider from 'components/FullWidthBorderSlider'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { CallToAction } from 'components/CallToAction'
+import { FeatureWrapperRow } from './FeatureWrapper'
 
 const Slide = ({ fields: { slug }, frontmatter: { title, thumbnail, featuredImage } }) => {
     const icon = getImage(thumbnail)
@@ -22,21 +24,28 @@ export default function Apps() {
     } = useStaticQuery(query)
     const [activeSlide, setActiveSlide] = useState(0)
     return (
-        <div className="mt-28 max-w-[700px]">
-            <h3 className="m-0 text-5xl">Apps</h3>
-            <p className="font-semibold text-black/75 m-0 mt-3">
-                PostHog apps let you do literally <strong className="text-blue">apps</strong>olutely anything with your
-                data. Connect to your CS, marketing, and engineering clouds – or create your own app if it doesn’t exist
-                yet.
-            </p>
-            <FullWidthBorderSlider
+        <FeatureWrapperRow
+            title="Apps"
+            cta={{
+                url: '/apps',
+                title: 'Browse 50+ apps',
+            }}
+            description={
+                <p>
+                    PostHog apps let you do literally <strong className="text-blue">apps</strong>olutely anything with
+                    your data. Connect to your CS, marketing, and engineering clouds – or create your own app if it
+                    doesn’t exist yet.
+                </p>
+            }
+        >
+            {/* <FullWidthBorderSlider
                 title="Popular apps"
                 setActiveSlide={setActiveSlide}
                 activeSlide={activeSlide}
                 slides={apps}
                 slideTemplate={Slide}
-            />
-        </div>
+            /> */}
+        </FeatureWrapperRow>
     )
 }
 

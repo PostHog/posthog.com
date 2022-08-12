@@ -67,4 +67,5 @@ export interface IProps {
     hideSurvey?: boolean
     hideSearch?: boolean
     menuTitle?: string | boolean
+    contentContainerClassName?: string
 }

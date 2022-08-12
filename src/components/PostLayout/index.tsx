@@ -427,6 +427,7 @@ export default function PostLayout({
     hideSurvey,
     hideSearch,
     menuTitle = 'Table of contents',
+    contentContainerClassName,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -474,9 +475,11 @@ export default function PostLayout({
     }, [sidebar, hideSidebar])
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
-    const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
-    } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+    const contentContainerClasses =
+        contentContainerClassName ||
+        `px-5 lg:px-12 w-full transition-all ${
+            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
+        } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <div id="menu-wrapper">

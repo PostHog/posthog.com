@@ -1,8 +1,12 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
+import API from 'components/Product/API'
 import Apps from 'components/Product/Apps'
-import FeatureWrapper, { IProps } from 'components/Product/FeatureWrapper'
+import DataWarehouse from 'components/Product/DataWarehouse'
+import EventPipelines from 'components/Product/EventPipelines'
+import { IProps, FeatureWrapperCol } from 'components/Product/FeatureWrapper'
 import Hero from 'components/Product/Hero'
+import SelfHosting from 'components/Product/SelfHosting'
 import { ProductIcons } from 'components/ProductIcons/ProductIcons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
@@ -82,18 +86,25 @@ export default function Product() {
                 menu={[{ name: 'Overview', url: '/product' }]}
                 menuTitle={false}
                 article={false}
+                contentContainerClassName="w-full pb-12"
             >
-                <h1 className="text-5xl m-0">Top features</h1>
-                <p className="text-xl text-black/50 font-semibold m-0 mt-3 max-w-[700px]">
-                    Product analytics was the trojan horse, but PostHog also ships with session recording, feature
-                    flags, A/B testing, and more.
-                </p>
+                <div className="max-w-5xl mx-auto px-5 box-content">
+                    <h1 className="text-5xl m-0">Top features</h1>
+                    <p className="text-xl text-black/50 font-semibold m-0 mt-3 max-w-[700px]">
+                        Product analytics was the trojan horse, but PostHog also ships with session recording, feature
+                        flags, A/B testing, and more.
+                    </p>
+                </div>
                 <div>
                     {features.map((feature, index) => (
-                        <FeatureWrapper key={index} {...feature} />
+                        <FeatureWrapperCol key={index} {...feature} />
                     ))}
                 </div>
                 <Apps />
+                <EventPipelines />
+                <DataWarehouse />
+                <SelfHosting />
+                <API />
             </PostLayout>
         </Layout>
     )

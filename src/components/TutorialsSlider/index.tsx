@@ -12,7 +12,6 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
     )
     const [activeSlide, setActiveSlide] = useState(0)
 
-    console.log(tutorials)
     return (
         <FullWidthBorderSlider
             setActiveSlide={setActiveSlide}

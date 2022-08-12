@@ -19,9 +19,9 @@ export interface IProps {
     image: React.ReactNode
 }
 
-export default function FeatureWrapper({ title, subtitle, icon, cta, disclaimer, features, image }: IProps) {
+export const FeatureWrapperCol = ({ title, subtitle, icon, cta, disclaimer, features, image }: IProps) => {
     return (
-        <div className="grid grid-cols-3 space-x-16 items-center py-8 border-b border-gray-accent-light border-dashed last:border-b-0">
+        <div className="grid grid-cols-3 space-x-16 items-center py-8 border-b border-gray-accent-light border-dashed last:border-b-0 max-w-5xl mx-auto px-5 box-content">
             <div>
                 {icon && (
                     <span className="w-[45px] h-[45px] bg-gray-accent-light flex justify-center items-center rounded-md mb-3">
@@ -59,6 +59,40 @@ export default function FeatureWrapper({ title, subtitle, icon, cta, disclaimer,
                 </div>
             </div>
             <div className="col-span-2">{image}</div>
+        </div>
+    )
+}
+
+export const FeatureWrapperRow = ({
+    title,
+    description,
+    children,
+    cta,
+}: {
+    title: string
+    description: string | React.ReactNode
+    children?: React.ReactNode
+    cta?: {
+        url: string
+        title: string
+    }
+}) => {
+    return (
+        <div className="mt-28">
+            <div className="max-w-5xl mx-auto px-5 box-content">
+                <div className="max-w-[820px]">
+                    <h3 className="m-0 text-5xl">{title}</h3>
+                    <div className="font-semibold text-black/75 mt-3">{description}</div>
+                </div>
+            </div>
+            {children}
+            {cta && (
+                <div className="max-w-5xl mx-auto px-5 box-content">
+                    <CallToAction to={cta?.url} type="secondary" size="sm" className={'mt-6'}>
+                        {cta?.title}
+                    </CallToAction>
+                </div>
+            )}
         </div>
     )
 }
