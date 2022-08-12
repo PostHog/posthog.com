@@ -14,6 +14,7 @@ import Modal from 'components/Modal'
 
 const categories: {
     name: string
+    anchor: string
     manuals: {
         name: string
         url: string
@@ -24,6 +25,7 @@ const categories: {
 }[] = [
     {
         name: '1. Product analytics',
+        anchor: 'produt-analytics',
         manuals: [
             {
                 name: 'Insights',
@@ -92,6 +94,7 @@ const categories: {
     },
     {
         name: '2. Visualize',
+        anchor: 'visualize',
         manuals: [
             {
                 name: 'Session recording',
@@ -110,7 +113,8 @@ const categories: {
         ],
     },
     {
-        name: '3. Optimization',
+        name: '3. Optimize',
+        anchor: 'optimize',
         manuals: [
             {
                 name: 'Feature flags',
@@ -137,6 +141,7 @@ const categories: {
     },
     {
         name: '4. Data',
+        anchor: 'data',
         manuals: [
             {
                 name: 'Actions',
@@ -198,6 +203,7 @@ const categories: {
     },
     {
         name: '5. Project settings',
+        anchor: 'project-settings',
         manuals: [
             {
                 name: 'Team collaboration',
@@ -275,7 +281,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <SearchBox placeholder="Search..." />
                         </div>
 
-                        <p>
+                        <p className="text-sm">
                             If you don't find the answer you're looking for,{' '}
                             <a href="/questions">ask a question</a>.
                         </p>
@@ -286,7 +292,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         {categories.map((category) => {
                             return (
                                 <div key={category.name}>
-                                    <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
+                                    <h4 id={category.anchor} className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
                                         {category.name}
                                     </h4>
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 px-1 my-6 gap-[1px]">
