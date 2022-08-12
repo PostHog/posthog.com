@@ -55,7 +55,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder }) => {
                     name="docs-search"
                     placeholder={placeholder || 'Search...'}
                     autoFocus={true}
-                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
+                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
                 />
 
                 <button className="hidden px-6 py-2.5 bg-red text-lg shadow-md rounded-sm text-white font-bold">

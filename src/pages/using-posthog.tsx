@@ -312,7 +312,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                         </span>
                                                         <div>
                                                             <span className="text-red font-bold">{manual.name}</span>
-                                                            <p className="text-black/60 group-hover:text-black/75 m-0 font-normal text-sm dark:text-white dark:group-hover:text-white/80">
+                                                            <p className="text-black/60 group-hover:text-black/75 m-0 font-normal text-sm dark:text-white/80 dark:group-hover:text-white/95">
                                                                 {manual.description}
                                                             </p>
 
@@ -322,7 +322,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                                         event.preventDefault()
                                                                         setCurrentModal(manual.category)
                                                                     }}
-                                                                    className="relative mt-2 inline-block bg-black/10 rounded-md text-xs px-2 py-1 text-gray font-semibold z-50 hover:bg-red hover:text-white"
+                                                                    className="relative mt-2 inline-block bg-black/10 rounded-sm text-xs px-2 py-1 text-black/50 dark:text-white/70 font-semibold z-50 hover:bg-red hover:text-white dark:bg-white/10 dark:hover:bg-white/30"
                                                                 >
                                                                     {tutorials.length}{' '}
                                                                     {tutorials.length > 1 ? 'tutorials' : 'tutorial'}
@@ -390,7 +390,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                     <Link
                                         key={tutorial.id}
                                         to={tutorial.fields.slug}
-                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
+                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded border-2 border-solid border-tan dark:border-transparent dark:hover:border-orange hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
                                     >
                                         <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
                                     </Link>
