@@ -1521,7 +1521,11 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Organizations and projects",
+                            "name": "Team collaboration",
+                            "url": "/manual/team-collaboration"
+                        },
+                        {
+                            "name": "Organizations & projects",
                             "url": "/manual/organizations-and-projects"
                         },
                         {
@@ -1537,7 +1541,7 @@
                             "url": "/manual/toolbar"
                         },
                         {
-                            "name": "Notifications and alerts",
+                            "name": "Notifications & alerts",
                             "url": "/manual/notifications-and-alerts"
                         }
                     ]

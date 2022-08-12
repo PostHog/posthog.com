@@ -14,6 +14,7 @@ import Modal from 'components/Modal'
 
 const categories: {
     name: string
+    anchor: string
     manuals: {
         name: string
         url: string
@@ -24,6 +25,7 @@ const categories: {
 }[] = [
     {
         name: '1. Product analytics',
+        anchor: 'produt-analytics',
         manuals: [
             {
                 name: 'Insights',
@@ -92,6 +94,7 @@ const categories: {
     },
     {
         name: '2. Visualize',
+        anchor: 'visualize',
         manuals: [
             {
                 name: 'Session recording',
@@ -110,7 +113,8 @@ const categories: {
         ],
     },
     {
-        name: '3. Optimization',
+        name: '3. Optimize',
+        anchor: 'optimize',
         manuals: [
             {
                 name: 'Feature flags',
@@ -137,6 +141,7 @@ const categories: {
     },
     {
         name: '4. Data',
+        anchor: 'data',
         manuals: [
             {
                 name: 'Actions',
@@ -198,12 +203,13 @@ const categories: {
     },
     {
         name: '5. Project settings',
+        anchor: 'project-settings',
         manuals: [
             {
                 name: 'Team collaboration',
-                url: '/manual/organizations-and-projects',
+                url: '/manual/team-collaboration',
                 category: 'team collaboration',
-                description: 'Manage users within your organization',
+                description: 'Tools for working together',
                 icon: ProductIcons.teamCollaboration,
             },
             {
@@ -214,7 +220,7 @@ const categories: {
                 icon: ProductIcons.sso,
             },
             {
-                name: 'Organizations and projects',
+                name: 'Organizations & projects',
                 url: '/manual/organizations-and-projects',
                 category: 'organizations and projects',
                 description: 'Organize your data and control access',
@@ -235,7 +241,7 @@ const categories: {
                 icon: ProductIcons.toolbar,
             },
             {
-                name: 'Notifications and alerts',
+                name: 'Notifications & alerts',
                 url: '/manual/subscriptions',
                 category: 'notifications and alerts',
                 description: 'Receive updates from your insights an dashboards',
@@ -264,7 +270,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <div className="space-y-12">
                     <section className="px-1">
-                        <h1 className="text-5xl">Using PostHog</h1>
+                        <h1 className="text-5xl mb-4">Using PostHog</h1>
                         <p className="max-w-2xl">
                             This section covers everything you need to know about using PostHog. If you're looking for
                             help tracking events or deploying a self-host version of PostHog,{' '}
@@ -275,8 +281,8 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <SearchBox placeholder="Search..." />
                         </div>
 
-                        <p>
-                            If you don't find the answer you're looking for, <a href="/questions">ask a question</a>.
+                        <p className="text-sm text-black/75">
+                            Don't see the answer you're looking for? <a href="/questions">Ask a question</a>
                         </p>
                     </section>
 
@@ -285,7 +291,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         {categories.map((category) => {
                             return (
                                 <div key={category.name}>
-                                    <h4 className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4">
+                                    <h4
+                                        id={category.anchor}
+                                        className="pb-2 border-b border-dashed border-gray px-1 font-bold mt-4"
+                                    >
                                         {category.name}
                                     </h4>
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 px-1 my-6 gap-[1px]">

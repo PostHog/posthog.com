@@ -2069,7 +2069,6 @@
     from = "/docs/plugins/build"
     to = "/docs/apps/build"
 
-
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides/actions"
@@ -2236,7 +2235,6 @@
 [[redirects]]
     from = "/docs/user-guides/utm-segmentation"
     to = "/manual/utm-segmentation"
-
 
 # Added: 2022-08-11
 [[redirects]]

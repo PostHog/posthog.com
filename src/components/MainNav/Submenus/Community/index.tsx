@@ -23,7 +23,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         },
         {
             title: 'Customer stories',
-            description: 'See how PostHog is moving the needle up and to the right',
+            description: 'See how PostHog is supporting industry leaders',
             url: '/customers',
         },
         {
