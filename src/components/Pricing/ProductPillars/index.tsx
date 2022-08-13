@@ -2,7 +2,6 @@ import Link from 'components/Link'
 import React from 'react'
 import { ProductIcons } from '../../ProductIcons/ProductIcons'
 
-
 interface IFeature {
     title: string
     icon?: React.ReactNode

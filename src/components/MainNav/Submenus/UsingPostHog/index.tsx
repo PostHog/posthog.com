@@ -29,7 +29,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
     const resources: ColMenuItems[] = [
         {
             title: 'Customer stories',
-            description: 'See how PostHog is moving the needle up and to the right',
+            description: 'See how PostHog is supporting industry leaders',
             url: '/customers',
         },
         {
@@ -62,23 +62,28 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
     const userGuides: ColMenuItems[] = [
         {
             title: 'Product analytics',
-            description: 'Trends, cohorts, sessions, paths',
-            url: '/docs/user-guides#analysis-features',
+            description: 'Insights, funnels, graphs & trends, path analysis + 5 more',
+            url: '/using-posthog#product-analytics',
         },
         {
-            title: 'Visualizations',
-            description: 'Actions, dashboards, person history',
-            url: '/docs/user-guides#visualization-features',
+            title: 'Visualize',
+            description: 'Session recording, Heatmaps',
+            url: '/using-posthog#visualize',
         },
         {
-            title: 'Optimization',
-            description: 'Feature flags, A/B testing, conversions',
-            url: '/docs/user-guides#optimization-features',
+            title: 'Optimize',
+            description: 'Feature flags, experimentation & A/B testing + 1 more',
+            url: '/using-posthog#optimize',
         },
         {
-            title: 'Tracking',
-            description: 'Autocapture, realtime events',
-            url: '/docs/user-guides#tracking-features',
+            title: 'Data',
+            description: 'Actions, cohorts, data management, sessions + 4 more',
+            url: '/using-posthog#data',
+        },
+        {
+            title: 'Project settings',
+            description: 'Team collaboration, organization and projects, toolbar + 3 more',
+            url: '/using-posthog#project-settings',
         },
     ]
 
@@ -118,7 +123,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                     )
                                 })}
                             </ol>
-                            <CallToAction className="inline-block mt-4 !w-full" to="/docs/user-guides">
+                            <CallToAction className="inline-block mt-4 !w-full" to="/using-posthog">
                                 Visit user guides
                             </CallToAction>
                         </div>
