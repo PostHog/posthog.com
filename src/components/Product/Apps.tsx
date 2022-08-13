@@ -32,21 +32,13 @@ export default function Apps() {
                 title: 'Browse 50+ apps',
             }}
             description={
-                <p>
+                <p className="m-0">
                     PostHog apps let you do literally <strong className="text-blue">apps</strong>olutely anything with
                     your data. Connect to your CS, marketing, and engineering clouds – or create your own app if it
                     doesn’t exist yet.
                 </p>
             }
-        >
-            {/* <FullWidthBorderSlider
-                title="Popular apps"
-                setActiveSlide={setActiveSlide}
-                activeSlide={activeSlide}
-                slides={apps}
-                slideTemplate={Slide}
-            /> */}
-        </FeatureWrapperRow>
+        />
     )
 }
 

@@ -175,16 +175,18 @@ export default function Product() {
                         })}
                     </Slider>
                 </div>
-                <div id="top-features" className="max-w-5xl mx-auto px-5 box-content">
-                    <h1 className="text-4xl md:text-5xl m-0">Top features</h1>
-                    <p className="text-xl text-black/50 font-semibold m-0 mt-3 max-w-[700px]">
-                        Product analytics was the trojan horse, but PostHog also ships with session recording, feature
-                        flags, A/B testing, and more.
-                    </p>
+                <div id="top-features">
+                    <div className="max-w-5xl mx-auto px-5 box-content">
+                        <h1 className="text-4xl md:text-5xl m-0">Top features</h1>
+                        <p className="text-xl text-black/50 font-semibold m-0 mt-3 max-w-[700px]">
+                            Product analytics was the trojan horse, but PostHog also ships with session recording,
+                            feature flags, A/B testing, and more.
+                        </p>
+                    </div>
+                    {features.map((feature, index) => (
+                        <FeatureWrapperCol key={index} {...feature} />
+                    ))}
                 </div>
-                {features.map((feature, index) => (
-                    <FeatureWrapperCol key={index} {...feature} />
-                ))}
                 <Apps />
                 <EventPipelines />
                 <DataWarehouse />
