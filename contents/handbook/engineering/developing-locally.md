@@ -178,7 +178,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     ```
     - On Linux
     ```bash
-    sudo apt-get install libxmlsec1-dev pkg-config
+    sudo apt-get install libxml2 libxmlsec1-dev pkg-config
     ```
 
 1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
