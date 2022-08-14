@@ -9,6 +9,7 @@
         },
         {
             "name": "Getting started",
+            "url": "",
             "children": [
                 {
                     "name": "Start here",
@@ -390,6 +391,7 @@
         },
         {
             "name": "Product",
+            "url": "",
             "children": [
                 {
                     "name": "Overview",
@@ -419,6 +421,7 @@
         },
         {
             "name": "Design",
+            "url": "",
             "children": [
                 {
                     "name": "Overview",
