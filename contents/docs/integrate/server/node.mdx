@@ -244,7 +244,7 @@ For example, if the `beta-feature` depends on the `is_authorized` property, and 
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {personProperties: {is_authorized: true}})
 ```
 
-The same holds for groups. If you have a group name `organisation`, you can add properties like so:
+The same holds for [groups](manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
 
 
 ```js
