@@ -1,11 +1,11 @@
 ---
-date: 2022-08-08
-title: A startup guide to planning an offsite in just 8 weeks
+date: 2022-08-15
+title: "How to plan a killer company offsite in just 8 weeks"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 author: ["grace-mckenzie"]
 categories: ["Inside PostHog", "Guides"]
@@ -15,7 +15,7 @@ As a company born at the beginning of the pandemic, PostHog has been fully-remot
 
 We give employees [social and co-working budgets](/handbook/people/benefits) to encourage meetups and in-person onboarding. But the main way we facilitate in-person collaboration is [through offsites](/handbook/company/offsites) – small team offsites for focused work, and one all-company offsite per year for high-level strategic planning and cross-team interaction.  
 
-In large companies, offsite planning is centralized within the People or Operations teams, but this isn’t possible in many early-stage startups. This guide is all about how to plan a killer offsite in just eight weeks – including a few tips and tricks I’ve learned over a decade of organizing team retreats.
+In large companies, offsite planning is centralized within the People or Operations teams, but this isn’t possible in many early-stage startups. This guide is for those small to medium startups who need a little help, and includes a few tips and tricks I’ve learned over a decade of organizing team retreats.
 
 > Grace McKenzie is the Operations Manager at PostHog, where she tackles any and all back office projects that help build the scaffolding we need as our company scales. In her spare time, you can find her on the rugby pitch playing flanker or at her local billiards hall practicing her 8-ball breaks.
 
@@ -23,16 +23,15 @@ In large companies, offsite planning is centralized within the People or Operati
 
 <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/4xWGyVKoXqg2eVCiq9" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
-
 Here’s [one we made earlier](/handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) – feel free to use it.
 
-Seriously, a comprehensive checklist is a must for offsite planning. We made this list to help team leaders organize their small team offsites independently. Our three person “Plops” (that’s People & Operations) team help where possible, but with nine teams all organizing one or more meetups a year, we need people to take ownership.
+Seriously, a comprehensive checklist is a must for offsite planning. We made this list to help team leaders organize their small team offsites independently. Our three person “Plops” (that’s People & Operations) team help where possible, but with nine small teams all organizing one or more meetups a year, we need people to take ownership.
 
 The checklist is structured as an eight-week timeline with items to check off at eight weeks, seven weeks and so on. It also includes post-offsite items for collecting feedback – we’ve learnt a lot about running offsites from gathering feedback on them!
 
 Here are some key items to highlight:
 
-- Centralizing flight booking is a huge headache, so don’t do it. We give all team members company cards for this reason – see our startup ops kit for more on this. This also means you don’t have to gather up lots of sensitive info (passport numbers etc.).  
+- Centralizing flight booking is a huge headache, so don’t do it. We give all team members company cards for this reason – see our [startup ops kit](/blog/startup-ops-toolkit) for more on this. This also means you don’t have to gather up lots of sensitive info (passport numbers etc.).  
 
 - Decide in advance who is going to record the notes from offsites sessions. It is really easy for post-offsite followup to fall through the cracks, which means a bunch of time and effort wasted. 
 
@@ -47,9 +46,7 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 - **Timing:** Depending on the season, you can have wildly different experiences. For example, hosting an offsite in Reykjavik during Icelandic winter, or at the height of forest fire season in central Washington, can mean a fairly uncomfortable few days for your team. Check what conditions will be like in a given location before locking in your dates, and consider that seasons in your part of the world may not match those in different hemispheres or climates.
 
-
 - **Novelty:** Planning an offsite in an exciting or exotic location can really enhance the excitement factor for your event, but it’s important to take into consideration travel duration and jet lag. Even if you’re choosing somewhere less exotic, choosing a novel venue like a super cool AirBnB or a quirky hotel can spice things up without stretching your team too thin.
-
 
 - **Affordability:** An ideal offsite location depends on the stage of the company – a realistic budget for a five-person company won’t be the same as one for 100. Work out how much you can spend per person on travel and accommodation for your chosen location as soon as possible. And don’t go to Switzerland – it will bankrupt you.
 
@@ -59,7 +56,7 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 <div style="width:100%;height:0;padding-bottom:194%;position:relative;"><iframe src="https://giphy.com/embed/elDpvxPF5FfcBbwOvR" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
-It’s tempting to maximize your time together by packing the itinerary full of brainstorming, planning, and breakout sessions. Don’t overdo this. In reality, having a good split between sessions, free social time, and fun activities is important to avoid burning your team out. 
+It’s tempting to maximize your time together by packing the itinerary full of brainstorming, planning, and breakout sessions. Don’t overdo this. In reality, having a good balance between sessions, free social time, and fun activities is important to avoid burning your team out. 
 
 In my experience, planning for a majority of unstructured time can lead to really amazing brainstorming and ideation. People will inevitably discuss their work as it’s a major thing that everyone has in common.
 
