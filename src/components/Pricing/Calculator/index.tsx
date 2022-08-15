@@ -6,11 +6,14 @@ import {
     CLOUD_ENTERPRISE_MINIMUM_PRICING,
     ENTERPRISE_MINIMUM_PRICING,
     SCALE_MINIMUM_PRICING,
+    pricing,
+    pricingLabels,
 } from '../constants'
 import { PricingSlider } from '../PricingSlider'
 import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
+import Link from 'components/Link'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -18,7 +21,6 @@ interface IPricingOptions {
     subtitle: string
     badge: string
     breakdown?: number[]
-    breakdownLabels?: string[]
     icon: React.ReactNode
     mainCTA: {
         title: string
@@ -74,20 +76,11 @@ export const SelfHostIcon = ({ className = '' }: IconProps) => {
     )
 }
 
-const breakdownLabels = [
-    'First 1 million',
-    '1-10 million',
-    '10-100 million',
-    '100 million - 1 billion',
-    'More than 1 billion',
-]
-
 const cloudOptions = {
     minimumPrice: CLOUD_MINIMUM_PRICING,
     title: 'PostHog Cloud',
     subtitle: 'Turnkey, hosted by PostHog',
     badge: 'Self-Serve',
-    breakdown: [0, 0.000225, 0.000075, 0.000025],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get started',
@@ -104,11 +97,27 @@ const cloudEnterpriseOptions = {
     title: 'PostHog Cloud',
     subtitle: 'Managed & supported by PostHog',
     badge: 'Enterprise',
-    breakdown: [300, 0.0003, 0.0001, 0.00003, 0.000006],
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get in touch',
         url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+    },
+    demoCTA: {
+        title: 'Book a demo',
+        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+    },
+}
+
+const cloudEnterpriseOptions2 = {
+    minimumPrice: ENTERPRISE_MINIMUM_PRICING,
+    title: 'PostHog',
+    subtitle: 'Deploy to your infrastructure or private cloud',
+    badge: 'Enterprise',
+    icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
+
+    mainCTA: {
+        title: 'Get in touch',
+        url: '/signup/cloud/enterprise',
     },
     demoCTA: {
         title: 'Book a demo',
@@ -121,15 +130,6 @@ const selfHostedOptions = {
     title: 'PostHog Self-Hosted',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Self-Serve',
-    breakdown: [0, 0.00045, 0.000225, 0.000045, 0.000009, 0.000003],
-    breakdownLabels: [
-        'First 1 million',
-        '1-2 million',
-        '2-10 million',
-        '10-100 million',
-        '100 million - 1 billion',
-        'More than 1 billion',
-    ],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get started',
@@ -143,10 +143,9 @@ const selfHostedOptions = {
 
 const selfHostedEnterpriseOptions = {
     minimumPrice: ENTERPRISE_MINIMUM_PRICING,
-    title: 'PostHog Self-Hosted',
+    title: 'PostHog',
     subtitle: 'Deploy to your infrastructure or private cloud',
     badge: 'Enterprise',
-    breakdown: [450, 0.00045, 0.00009, 0.000018, 0.0000036],
     icon: <SelfHostIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get started',
@@ -162,10 +161,9 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
     const [showFullBreakdown, setShowFullBreakdown] = useState(false)
-    const breakdown = showFullBreakdown ? optionDetails?.breakdown : optionDetails?.breakdown?.slice(0, 3)
+    const breakdown = showFullBreakdown ? pricing[pricingOption] : pricing[pricingOption]?.slice(0, 3)
     const monthlyMinimumPrice =
         optionDetails &&
-        optionDetails.minimumPrice > 0 &&
         optionDetails.minimumPrice.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -183,7 +181,7 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
             pricingOption = 'self-hosted-enterprise'
         }
         if (!selfHost && enterprise) {
-            optionDetails = cloudEnterpriseOptions
+            optionDetails = cloudEnterpriseOptions2
             pricingOption = 'cloud-enterprise'
         }
         if (!selfHost && !enterprise) {
@@ -212,14 +210,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                 <span className="inline-block mr-2">{optionDetails?.icon}</span>
                 <div>
                     <div className="flex items-center flex-wrap">
-                        <h3 className="m-0 text-[18px] font-black mr-2">{optionDetails?.title}</h3>
+                        <h3 className="m-0 text-xl font-black mr-2">{optionDetails?.title}</h3>
                         <span
                             className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
                         >
                             {optionDetails?.badge}
                         </span>
                     </div>
-                    <p className="m-0 mt-1 text-black/50 font-medium text-xs">{optionDetails?.subtitle}</p>
+                    <p className="m-0 text-black/50 font-medium text-sm">{optionDetails?.subtitle}</p>
                 </div>
             </div>
             <div className="mt-5">
@@ -237,19 +235,22 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         max={1000000000}
                     />
                 </div>
-                {breakdown && (
+                {pricingOption && (
                     <>
                         <ul className="grid gap-y-2 m-0 p-0">
                             {breakdown.map((price, index) => {
+                                const label = pricingLabels[price[0]]
                                 return (
                                     <li
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
                                         <p className="text-[14px] font-medium m-0">
-                                            {(optionDetails?.breakdownLabels || breakdownLabels)[index]}
+                                            {label || '100 million - 1 billion'}
                                         </p>
-                                        <p className="text-[14px] font-medium m-0">${price}</p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {price[1] === 0 ? 'Included' : price[1]}
+                                        </p>
                                     </li>
                                 )
                             })}
@@ -257,21 +258,20 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         {!showFullBreakdown && (
                             <button
                                 onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-xs"
+                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-sm"
                             >
                                 Show full breakdown
                             </button>
                         )}
-                        {monthlyMinimumPrice && (
-                            <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
-                                <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                                <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
-                            </div>
-                        )}
+
+                        <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
+                            <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
+                            <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
+                        </div>
                     </>
                 )}
                 <div className="flex space-x-2 justify-between items-center mt-2">
-                    <h4 className="text-base m-0 font-extrabold leading-tight">
+                    <h4 className="text-lg m-0 font-extrabold leading-tight">
                         Estimated price
                         <br />
                         <span className="text-[13px] opacity-60 font-bold">
@@ -305,6 +305,13 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                         </TrackedCTA>
                     )}
                 </div>
+
+                <p className="text-sm text-center pt-4 pb-0 m-0 text-black/50">
+                    Not sure about your event volume?{' '}
+                    <Link to="/blog/calculating-events-from-users" className="font-bold">
+                        Here's a handy guide.
+                    </Link>
+                </p>
             </div>
         </motion.div>
     )

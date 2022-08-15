@@ -1,6 +1,5 @@
 ---
 title: URL Normalizer
-layout: app
 github: https://github.com/PostHog/posthog-url-normalizer-plugin
 installUrl: https://app.posthog.com/project/apps?name=URL%20Normalizer
 thumbnail: ../../apps/thumbnails/url_normalizer.png
@@ -18,7 +17,7 @@ By default, the URL Normalizer converts all URLs to lowercase and strips trailin
 
 The URL Normalizer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the URL Normalizer?
 

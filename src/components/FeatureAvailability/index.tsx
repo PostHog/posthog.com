@@ -24,7 +24,7 @@ const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
         },
         {
             key: 'standard',
-            name: 'Standard',
+            name: 'Self-Serve',
         },
         {
             key: 'enterpriseCloud',
@@ -38,7 +38,7 @@ const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
         },
         {
             key: 'scale',
-            name: 'Scale',
+            name: 'Self-Serve',
         },
         {
             key: 'enterprise',
@@ -70,10 +70,10 @@ function Plan({
         <li
             className={
                 restricted
-                    ? 'restricted flex items-center !text-sm'
+                    ? 'restricted flex items-center !text-sm space-y-2'
                     : available
-                    ? 'flex items-center !text-sm'
-                    : 'unavailable flex items-center !text-sm'
+                    ? 'flex items-center !text-sm space-y-2'
+                    : 'unavailable flex items-center !text-sm space-y-2'
             }
         >
             {restricted ? (
@@ -101,17 +101,19 @@ export function FeatureAvailability({
     restrictedPlans,
 }: FeatureAvailabilityProps): JSX.Element {
     return (
-        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4 space-y-2 my-4">
-            <h6 className="text-gray !mt-0 pb-1 font-semibold text-sm">Where is this feature available?</h6>
+        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-4 pb-1 space-y-2 -mt-2 mb-5">
+            <h6 className="text-primary/50 dark:text-primary-dark/50 !mt-0 mb-2 pb-1 font-semibold text-base">
+                Where is this feature available?
+            </h6>
             <div className="grid grid-cols-3 gap-4">
                 <div>
-                    <h5 className="flex items-center space-x-1 !mt-0">
+                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
                         <span>Self-hosted plans</span>
                         <Link
                             href="/pricing?realm=self-hosted"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
-                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
                     <ul className="p-0 mb-0">
@@ -126,13 +128,13 @@ export function FeatureAvailability({
                     </ul>
                 </div>
                 <div className="col-span-2">
-                    <h5 className="flex items-center space-x-1 !mt-0">
+                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
                         <span>Cloud plans</span>
                         <Link
                             href="/pricing?realm=cloud"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
                         >
-                            <InfoIcon className="w-3 h-3 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
                     <ul className="pl-0 mb-0 grid sm:grid-cols-2">

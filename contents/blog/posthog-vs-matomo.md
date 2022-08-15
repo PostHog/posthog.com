@@ -39,13 +39,13 @@ PostHog is about giving engineering and product teams the tools they need to bui
 
 ## Feature comparison
 
-This table compares three self-hosted plans: Matomo On-Premise, PostHog Open Source, and PostHog Scale. 
+This table compares three self-hosted plans: Matomo On-Premise, PostHog Open Source, and PostHog Self-Host – our paid self-hosted plan. 
 
 Matomo On-Premise ships with a robust set of core web analytics features, while advanced product analytics features are available at various prices from the Matomo On-Premise Marketplace.
 
 All features in PostHog Open Source are totally free, including core product analytics tools. 
 
-PostHog Scale is a paid edition that adds [Experimentation](/product/experimentation-suite), [Group Analytics](/docs/user-guides/group-analytics), support for multiple projects, and numerous team management tools. It's priced on a per event basis and is free up to 1 million events per month.
+PostHog Self-Hosted is a paid edition that adds [Experimentation](/product/experimentation-suite), [Group Analytics](/docs/user-guides/group-analytics), support for multiple projects, and numerous team management tools. It's priced on a per event basis and is free up to 1 million events per month.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -378,7 +378,7 @@ Feature Flags are at the core what makes PostHog a great tool for product-lead b
 
 Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
-Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](product/feature-flags) and product analytics together gives developers a complete toolset.
+Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](/product/feature-flags) and product analytics together gives developers a complete toolset.
 
 ### Automatic event tracking
 
@@ -408,13 +408,14 @@ Matomo is ideal for anyone who uses popular off-the-shelf content management sys
 
 We ship new features fast. Here's a quick snapshot of what we're working on right now:
 
-- Console log tracking in recordings
-- Insight experience overhaul
+- In-app setup guided tour
+- PostHog Cloud EU
+- Session Recordings DevTools
+- Turbo feature flags
+- Unified querying across events, persons, sessions, groups
 - Automated insight recommendations
-- Lightning fast querying at billion event scale
-- Multiple cloud environments
-- Rapid ingestion pipeline
-- Session analysis 2.0
+- Lightning fast querying at billion event and person scale
+- Extended insight visualizations
 
 Got a question? [Ask them here](/questions).
 

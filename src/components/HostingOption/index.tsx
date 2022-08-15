@@ -21,7 +21,7 @@ export const HostingOption = ({ handle, name, url }: HostingOptionProps) => {
                 >
                     <use xlinkHref={`#${handle}`} />
                 </svg>
-                <span className="text-black text-xs text-opacity-70 leading-tight">{name}</span>
+                <span className="text-black text-sm text-opacity-70 leading-tight">{name}</span>
             </Link>
         </li>
     )

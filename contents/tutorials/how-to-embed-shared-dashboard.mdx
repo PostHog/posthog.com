@@ -25,7 +25,7 @@ A shared Dashboard contains:
 -   When the Insights within the Dashboard were last updated
 -   The Insight charts
 
-![Dashboard with explanation labels](../images/user-guides/dashboards/shared-dashboard-overview.png)
+![Dashboard with explanation labels](../images/docs/user-guides/dashboards/shared-dashboard-overview.png)
 
 To embed a shared Dashboard using an `<iframe />` set the `src` attribute to the URL of the public Dashboard.
 
@@ -33,8 +33,10 @@ For example, the following code:
 
 ```html
 <iframe
-    style="max-width: 800px; height: 700px;"
-    src="https://app.posthog.com/shared_dashboard/fEjuk1e61iQjYiRjODPDjpbsyhIfpg"
+    width="100%"
+    height="700"
+    frameborder="0"
+    src="https://app.posthog.com/embedded/fEjuk1e61iQjYiRjODPDjpbsyhIfpg"
 />
 ```
 
@@ -42,7 +44,64 @@ Produces the following embedded dashboard:
 
 <center>
     <iframe
-        style="max-width: 800px; height: 700px;"
-        src="https://app.posthog.com/shared_dashboard/fEjuk1e61iQjYiRjODPDjpbsyhIfpg"
+        id="my-posthog-iframe"
+        name="MyPostHogIframe"
+        width="100%" height="700"
+        src="https://app.posthog.com/embedded/fEjuk1e61iQjYiRjODPDjpbsyhIfpg"
     />
 </center>
+
+## Expanding the iframe to match the height of the Dashboard
+
+Due to restrictions with cross-origin iframes, we emit a special message from the embedded Dashboard which you can listen to in order to adjust the iframe to match its height. This is ideal if you want to to show the full dashboard with out the need to scroll.
+
+**Simple HTML embed example**
+
+```html
+<html>
+    <iframe
+        id="my-posthog-iframe"
+        name="MyPostHogIframe"
+        width="100%"
+        height="400"
+        src="https://app.posthog.com/embedded/PQ_VjRR-9F49pRJfmLaoflADhoKTsw"
+    ></iframe>
+
+    <script type="text/javascript">
+        window.addEventListener('message', (e) => {
+            if (e.data.event === 'posthog:dimensions' && e.data.name === 'MyPostHogIframe') {
+                document.getElementById('my-posthog-iframe').height = e.data.height
+            }
+        })
+    </script>
+</html>
+```
+
+**React application example**
+
+```tsx
+function App() {
+    const [height, setHeight] = useState(400)
+
+    useEffect(() => {
+        const onChange = (e: any) => {
+            if (e.data.event === 'posthog:dimensions' && e.data.name === 'MyPostHogIframe') {
+                setHeight(e.data.height)
+            }
+        }
+        window.addEventListener('message', onChange)
+        return () => window.removeEventListener('message', onChange)
+    }, [])
+
+    return (
+        <div>
+            <iframe
+                name="MyPostHogIframe"
+                width="100%"
+                height={height}
+                src="https://app.posthog.com/embedded/PQ_VjRR-9F49pRJfmLaoflADhoKTsw"
+            ></iframe>
+        </div>
+    )
+}
+```

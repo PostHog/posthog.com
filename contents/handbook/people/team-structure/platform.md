@@ -10,7 +10,6 @@ hideAnchor: true
 - James Greenhill (Team lead, Data/Infra Engineer)
 - Tiina Turban (Full Stack Engineer)
 - Yakko Majuri (Full Stack Engineer)
-- Marcus Hyett (Product Manager)
 - Guido Iaquinti (Site Reliability Engineer)
 - Harry Waye (Full Stack Engineer)
 

@@ -23,7 +23,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         },
         {
             title: 'Customer stories',
-            description: 'See how PostHog is moving the needle up and to the right',
+            description: 'See how PostHog is supporting industry leaders',
             url: '/customers',
         },
         {
@@ -153,7 +153,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                             to={url}
                                         >
                                             <h3 className="text-base m-0 opacity-70 text-black">{title}</h3>
-                                            <p className="text-[14px] pt-[3px] opacity-50 m-0 text-black font-medium dark:text-white">
+                                            <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white">
                                                 {description}
                                             </p>
                                         </Link>

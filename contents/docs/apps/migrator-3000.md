@@ -1,6 +1,5 @@
 ---
 title: Migrator 3000
-layout: app
 github: https://github.com/posthog/posthog-plugin-migrator3000
 installUrl: https://app.posthog.com/project/apps?name=Migrator+3000
 thumbnail: ../../apps/thumbnails/migrator-3000.png
@@ -20,7 +19,7 @@ No, this app will only migrate events and objects derived from events, such as p
 
 The Migrator 3000 app requires \*two\*\* PostHog Cloud, or a self-hosted PostHog instances running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Migrator 3000 app for PostHog Cloud?
 

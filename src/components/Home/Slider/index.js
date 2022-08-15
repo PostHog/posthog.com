@@ -27,7 +27,7 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
                     </span>
                 </span>
                 <p
-                    className={`leading-tight text-xs lg:text-xs xl:text-sm opacity-90 m-0 -mt-2 ${
+                    className={`leading-tight text-sm lg:text-md opacity-90 m-0 -mt-2 ${
                         active ? 'font-bold' : 'font-semibold'
                     }`}
                 >

@@ -45,7 +45,7 @@ const Form = () => {
                 onSubmit={handleSubmit}
             >
                 <span className="flex-grow w-full">
-                    <label htmlFor="email" className="text-base">
+                    <label htmlFor="email" className="text-lg">
                         Email address
                     </label>
                     <input

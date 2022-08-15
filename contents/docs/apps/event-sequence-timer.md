@@ -1,6 +1,5 @@
 ---
 title: Event Sequence Timer
-layout: app
 github: https://github.com/PostHog/event-sequence-timer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin
 thumbnail: ../../apps/thumbnails/event-sequence-timer-plugin.png
@@ -16,7 +15,7 @@ This app measures the time it takes for a user to perform one event (`EventB`), 
 
 The Event Sequence Timer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Event Sequence Timer app?
 
@@ -26,7 +25,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### How to configure the Event Sequence Timer app?
 
-First, you must configure the tist of events to track time differences on. This list is specified as follows:
+First, you must configure the list of events to track time differences on. This list is specified as follows:
 
 `(eventA,eventB),(eventC,eventD),(eventA,eventD)`
 

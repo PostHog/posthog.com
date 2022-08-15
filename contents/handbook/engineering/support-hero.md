@@ -48,6 +48,8 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
+To help manage users' expectations, you might find it useful to share a message in #community-support when you are signing on and off for the day.
+
 ### Prioritizing requests
 
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
@@ -181,6 +183,8 @@ When a question is posted, a notification is sent to the [#squeak-ping](https://
 
 The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
+> **Important:** Do not sign up directly on squeak.cloud. Start by answering a question on the site - this creates an account within PostHog's Squeak! Cloud account. (As an alternate, you can ask an existing admin to invite you.) (Signing up directly on squeak.cloud creates a new account for you to use Squeak! on another site, which isn't what we want.)
+
 Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
 
 _Note: Squeak! currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/squeak/issues/112) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
@@ -189,11 +193,11 @@ _Note: Squeak! currently uses a separate authentication system from PostHog Clou
 
 Every team has a Secondary on-call rotation. Unlike support hero, you are still expected to do feature work. During the week that you are on-call, you are responsible for prioritizing and solving escalated issues, sentry errors and alerts that happen within your team. It also means helping out the support hero where necessary.
 
-### Rotation
+### Schedules
 
-- [Core Experience Rotation](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Core Analytics Rotation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Ingestion Rotation](https://posthog.pagerduty.com/schedules#PM8YSH8)
-- [Infrastructure Rotation](https://posthog.pagerduty.com/schedules#P78OOWZ)
+- [Secondary - App East](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Secondary - App West](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary – Platform Ingestion](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
