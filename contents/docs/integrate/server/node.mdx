@@ -271,7 +271,7 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 1. The library must be initialised with a personal API key
 2. You must know all person or group properties the flag depends on.
 
-Then, the flag can be evaluated locally. The method signature looks exactly like above
+Then, the flag can be evaluated locally. The method signature looks exactly like above.
 
 ```js
 await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'is_authorized': True}})
