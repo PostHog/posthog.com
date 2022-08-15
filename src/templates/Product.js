@@ -16,6 +16,51 @@ import SectionLinks from 'components/SectionLinks'
 import PostLayout from 'components/PostLayout'
 import { ProductIcons } from 'components/ProductIcons/ProductIcons'
 
+const features = [
+    { name: 'Product analytics' },
+    {
+        name: 'Funnels',
+        url: '/product/funnels',
+        icon: ProductIcons.funnels,
+    },
+    {
+        name: 'Graphs & trends',
+        url: '/product/trends',
+        icon: ProductIcons.trends,
+    },
+    {
+        name: 'User paths',
+        url: '/product/user-paths',
+        icon: ProductIcons.pathAnalysis,
+    },
+    {
+        name: 'Team collaboration',
+        url: '/product/collaboration',
+        icon: ProductIcons.teamCollaboration,
+    },
+    {
+        name: 'Session recording',
+        url: '/product/session-recording',
+        icon: ProductIcons.sessionRecording,
+    },
+
+    {
+        name: 'Feature flags',
+        url: '/product/feature-flags',
+        icon: ProductIcons.featureFlags,
+    },
+    {
+        name: 'Experimentation suite',
+        url: '/product/experimentation-suite',
+        icon: ProductIcons.experiments,
+    },
+    {
+        name: 'Correlation analysis',
+        url: '/product/correlation-analysis',
+        icon: ProductIcons.correlationAnalysis,
+    },
+]
+
 const menu = [
     {
         name: 'Overview',
@@ -26,41 +71,7 @@ const menu = [
         name: 'Top features',
         url: '/product#top-features',
         icon: ProductIcons.topFeatures,
-        children: [
-            {
-                name: 'Funnels',
-                url: '/product/funnels',
-            },
-            {
-                name: 'Graphs & trends',
-                url: '/product/trends',
-            },
-            {
-                name: 'User paths',
-                url: '/product/user-paths',
-            },
-            {
-                name: 'Team collaboration',
-                url: '/product/collaboration',
-            },
-            {
-                name: 'Session recording',
-                url: '/product/session-recording',
-            },
-
-            {
-                name: 'Feature flags',
-                url: '/product/feature-flags',
-            },
-            {
-                name: 'Experimentation suite',
-                url: '/product/experimentation-suite',
-            },
-            {
-                name: 'Correlation analysis',
-                url: '/product/correlation-analysis',
-            },
-        ],
+        children: features.map(({ name, url }) => ({ name, url })),
     },
     { name: 'Apps', url: '/product#apps', icon: ProductIcons.appLibrary },
     { name: 'Event pipelines', url: '/product#event-pipelines', icon: ProductIcons.eventPipelines },
@@ -69,7 +80,7 @@ const menu = [
     { name: 'API', url: 'api', icon: ProductIcons.api },
 ]
 
-export default function Product({ data, pageContext: { next, previous } }) {
+export default function Product({ data, pageContext: { next, previous }, location }) {
     const { pageData, documentation, sidebars } = data
     const {
         body,
@@ -78,6 +89,9 @@ export default function Product({ data, pageContext: { next, previous } }) {
     } = pageData
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
+    const feature = features.find((menuItem) => {
+        return menuItem?.url?.replace(/\/$/, '') === location.pathname.replace(/\/$/, '')
+    })
     const Documentation = () => {
         return (
             <>
@@ -109,18 +123,53 @@ export default function Product({ data, pageContext: { next, previous } }) {
                 title={`${title} - PostHog`}
                 description={description || excerpt}
             />
-            <PostLayout title={title} menu={menu} hideSidebar>
-                <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                <GatsbyImage image={getImage(featuredImage)} />
-                <article>
-                    <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
-                </article>
-                <div className="mt-12">
-                    <SectionLinks next={next} previous={previous} />
+
+            <PostLayout
+                hideSurvey
+                title={title}
+                menu={menu}
+                hideSidebar
+                contentContainerClassName="w-full"
+                article={false}
+            >
+                <div className="border-b border-gray-accent-light border-dashed py-3 lg:-mt-12">
+                    <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
+                        <div className="flex-1">
+                            <Link
+                                to={previous.url}
+                                className="text-[15px] font-semibold text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2"
+                            >
+                                <RightArrow className="w-[14px] rotate-180" />
+                                <span>{previous.name}</span>
+                            </Link>
+                        </div>
+                        <p className="m-0 text-[15px] font-bold">{title}</p>
+                        <div className="flex-1 flex justify-end">
+                            <Link
+                                to={next.url}
+                                className="text-[15px] font-semibold text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2"
+                            >
+                                <span>{next.name}</span>
+                                <RightArrow className="w-[14px]" />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-                <FooterCTA />
+                <article className=" max-w-5xl mx-auto px-5">
+                    <div className="flex items-center space-x-2 mt-12 mb-5">
+                        <span className="rounded-[3px] bg-gray-accent-light h-9 w-9 flex items-center justify-center">
+                            <span className="w-5 h-5 text-black">{feature.icon}</span>
+                        </span>
+                        <h1 className="m-0 text-lg text-black/70">{title}</h1>
+                    </div>
+                    <h2 className="text-5xl m-0 mb-5">{subtitle}</h2>
+                    <GatsbyImage image={getImage(featuredImage)} />
+                    <div className="article-content">
+                        <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </article>
             </PostLayout>
         </Layout>
     )
@@ -136,6 +185,7 @@ export const query = graphql`
             }
             frontmatter {
                 title
+                subtitle
                 description
                 featuredImage {
                     childImageSharp {
