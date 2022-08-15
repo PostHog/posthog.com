@@ -1,6 +1,5 @@
 ---
 title: Shopify Connector
-layout: app
 github: https://github.com/posthog/posthog-shopify-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Shopify
 thumbnail: ../../apps/thumbnails/shopify.png
@@ -24,7 +23,7 @@ If there is an error while fetching orders, the next run of `runEveryMinute()` w
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install this app for PostHog?
 

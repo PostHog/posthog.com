@@ -73,7 +73,7 @@ One simple set of metrics which can help all teams to focus their efforts is the
 - *Revenue:* The money bought in by users (e.g. Subscriptions, LTV)
 - *Referral:* The users who share your product (e.g. reviews, shares)
 
-> Find out [how to build a AARRR funnel](/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog) in PostHog
+> Find out [how to build a AARRR funnel](/blog/aarrr-pirate-funnel) in PostHog
 
 ## Do I need to share my data when using product analytics tools?
 

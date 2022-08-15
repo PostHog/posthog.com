@@ -56,28 +56,28 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
 
                             <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
-                                    <div className="mb-0 text-xs text-almost-black text-opacity-75">Event volume</div>
+                                    <div className="mb-0 text-sm text-almost-black text-opacity-75">Event volume</div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">First 1 million (flat fee)</dt>
-                                    <dd className="mb-0 font-bold text-xs">$300</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">First 1 million (flat fee)</dt>
+                                    <dd className="mb-0 font-bold text-sm">$300</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">1-10 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.0003</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">1-10 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.0003</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.0001</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">10-100 million</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.0001</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2">
-                                    <dt className="mb-0 opacity-75 text-xs">100 million - 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.00003</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">100 million - 1 billion</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.00003</dd>
                                 </dl>
                                 <dl className="flex justify-between mb-0 p-2 pb-3">
-                                    <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
-                                    <dd className="mb-0 font-bold text-xs">$0.000006</dd>
+                                    <dt className="mb-0 opacity-75 text-sm">More than 1 billion</dt>
+                                    <dd className="mb-0 font-bold text-sm">$0.000006</dd>
                                 </dl>
                             </div>
 
@@ -86,7 +86,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">
-                                    <div className="text-base">{monthlyMinimumPrice}</div>
+                                    <div className="text-lg">{monthlyMinimumPrice}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>
@@ -95,11 +95,11 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
 
                             <div className="flex justify-between items-baseline">
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalAnnualCost}</div>
+                                    <div className="text-lg">${finalAnnualCost}</div>
                                     <div className="opacity-50">/yr (10% discount)</div>
                                 </div>
                                 <div className="mb-0 font-bold flex items-baseline">
-                                    <div className="text-base">${finalMonthlyCost}</div>
+                                    <div className="text-lg">${finalMonthlyCost}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                         className="absolute top-2 right-2 sm:top-3 sm:right-3 lg:top-6 lg:right-6"
                         onClick={() => setOpen(false)}
                     >
-                        <Close className="w-3 h-3 sm:w-auto sm:h-auto" />
+                        <Close className="w-3 h-3 sm:w-auto sm:h-auto text-white" />
                     </button>
                 </div>
             </div>

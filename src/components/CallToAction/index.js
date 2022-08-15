@@ -5,10 +5,10 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-[14px] font-bold px-3 py-[4px] border-2',
-    sm: 'text-[15px] font-bold px-4 py-[6px] border-2',
-    md: 'text-[16px] font-bold px-5 py-[7px] border-2',
-    lg: 'text-[17px] font-bold px-6 py-[8px] border-3 ',
+    xs: 'text-sm font-bold px-4 py-2',
+    sm: 'text-sm font-bold px-6 py-2.5',
+    md: 'text-base font-bold px-5 py-3',
+    lg: 'text-base font-bold px-6 py-3',
 }
 
 const primary = cntl`
@@ -24,7 +24,6 @@ const primary = cntl`
     active:bg-red-active
     active:border-red-active
     dark:primary-dark
-    button-shadow
 `
 
 const secondary = cntl`
@@ -35,19 +34,12 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    bg-tan
-    bg-opacity-75
-    dark:bg-primary
+    bg-white
+    border-black/10
+    hover:border-black/30
+    border
     text-primary
-    text-opacity-80
-    hover:text-opacity-100
-    dark:text-primary-dark
     hover:text-primary
-    border-opacity-10
-    hover:border-opacity-25
-    active:border-opacity-50
-    border-primary
-    dark:border-primary-dark
 `
 
 const buttonTypes = {
@@ -63,9 +55,11 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
     rounded-sm
     inline-block
     cta
+    button-shadow
+    shadow-xl
     relative
-    active:top-[1px]
-    active:scale-[.97]
+    active:top-[0.5px]
+    active:scale-[.98]
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
@@ -75,7 +69,15 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'lg') =
 export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
-    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+    return (
+        <CallToAction
+            {...props}
+            onClick={() => {
+                posthog?.capture(eventName, event)
+                props.onClick && props.onClick()
+            }}
+        />
+    )
 }
 
 export const CallToAction = ({

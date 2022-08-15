@@ -16,7 +16,7 @@ export const FeatureStrip = ({ className = '' }) => {
                 <Feature icon="heatmaps" title="Heatmaps" url="/product/heatmaps" />
                 <Feature icon="experiments" title="Experiments" url="/product/experimentation-suite" />
             </ul>
-            <p className="mt-4 text-xs">
+            <p className="mt-4 text-sm">
                 Plus 50-ish apps available in the <a href="/apps">PostHog App Store</a>
             </p>
         </div>

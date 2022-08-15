@@ -1,6 +1,5 @@
 ---
 title: Salesforce Connector
-layout: app
 github: https://github.com/Vinovest/posthog-salesforce
 installUrl: https://app.posthog.com/project/apps?name=Salesforce
 thumbnail: ../../apps/thumbnails/salesforce.svg
@@ -16,7 +15,7 @@ This app connects to your Salesforce instance, sending events from PostHog to Sa
 
 The Salesforce Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need a Salesforce account to connect to, as well as the relevant levels of access to install and configure this app.
 

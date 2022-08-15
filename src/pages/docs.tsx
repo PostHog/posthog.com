@@ -1,19 +1,19 @@
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import Breadcrumbs from 'components/Breadcrumbs'
 import Icon from 'components/SupportImages/Icon'
 import DeployOption from 'components/DeployOption'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
-import { DocSearchModal } from '@docsearch/react'
-import { createPortal } from 'react-dom'
+import PostLayout from 'components/PostLayout'
+import { docs } from '../sidebars/sidebars.json'
+import SearchBox from 'components/SearchBox'
 
 const quickLinks = [
     {
         icon: 'selfHost',
         name: 'Deploy',
-        to: '/docs/deploy',
+        to: '/docs/self-host',
         description: 'Detailed information on getting PostHog running.',
     },
     {
@@ -75,244 +75,139 @@ const apps = [
     { name: 'Zapier', to: '/apps/zapier-connector', icon: 'zapier' },
 ]
 
-const featureLinks = [
-    { name: 'Trends', to: '/docs/user-guides/trends', icon: 'trendz' },
-    { name: 'Funnels', to: '/docs/user-guides/funnels', icon: 'funnels' },
-    { name: 'User paths', to: '/docs/user-guides/paths', icon: 'user-paths' },
-    { name: 'Correlation analysis', to: '/docs/user-guides/correlation', icon: 'correlation-analysis' },
-    { name: 'Session recording', to: '/docs/user-guides/recordings', icon: 'session-recording' },
-    { name: 'Feature flags', to: '/docs/user-guides/feature-flags', icon: 'feature-flags' },
-    { name: 'Experimentation', to: '/docs/user-guides/experimentation', icon: 'experimentation' },
-    { name: 'Heatmaps', to: '/docs/user-guides/toolbar', icon: 'heatmaps' },
-    { name: 'Apps', to: '/docs/apps', icon: 'apps' },
-    { name: 'Toolbar', to: '/docs/user-guides/toolbar', icon: 'toolbar' },
-    { name: 'Insights', to: '/docs/user-guides/insights', icon: 'insights' },
-    { name: 'Group analytics', to: '/docs/user-guides/group-analytics', icon: 'group-analytics' },
-]
-
 export const DocsIndex: React.FC = () => {
-    const [query, setQuery] = React.useState<string>('')
-    const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
-
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault()
-
-        if (query.trim()) {
-            setSearchOpen(true)
-        }
-    }
-
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
-            <Breadcrumbs
-                crumbs={[{ title: 'Docs' }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
-            />
 
-            <div className="max-w-5xl mx-auto space-y-16 lg:space-y-24 px-4">
-                <section>
-                    <div className="flex justify-start relative py-12 lg:py-20 items-center -mx-px">
-                        <div className="w-full z-20">
-                            <h1 className="font-bold mb-2">Documentation</h1>
-                            <h5>In-depth tutorials, references, and examples for everything in PostHog</h5>
+            <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
+                <div className="space-y-16 lg:space-y-24 lg:-mt-12">
+                    <section>
+                        <div className="flex justify-start relative pb-12 md:pt-12 md:pb-20 lg:pt-16 lg:pb-32 items-center -mx-px">
+                            <div className="w-full z-20">
+                                <h1 className="font-bold text-5xl mb-2">Documentation</h1>
+                                <h5 className="opacity-60 font-semibold leading-tight mb-8">
+                                    In-depth tutorials, references, and <br className="hidden md:block 2xl:hidden" />
+                                    examples for everything PostHog
+                                </h5>
 
-                            {searchOpen &&
-                                createPortal(
-                                    <DocSearchModal
-                                        initialScrollY={window.scrollY}
-                                        appId="B763I3AO0D"
-                                        indexName="posthog"
-                                        apiKey="f1386529b9fafc5c3467e0380f19de4b"
-                                        initialQuery={query}
-                                        onClose={() => setSearchOpen(false)}
-                                    />,
-                                    document.body
-                                )}
-
-                            <form
-                                onSubmit={handleSubmit}
-                                className="flex items-center relative mb-0 mt-8 w-full max-w-lg"
-                            >
-                                <div className="absolute left-4 w-4 h-4">
-                                    <svg
-                                        className="opacity-50"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 18 18"
-                                    >
-                                        <g opacity="1" clipPath="url(#a)">
-                                            <path
-                                                d="m18 15.964-4.794-4.793A7.2 7.2 0 1 0 .001 7.2a7.2 7.2 0 0 0 11.17 6.006L15.963 18 18 15.964ZM2.04 7.2A5.16 5.16 0 0 1 7.2 2.043 5.16 5.16 0 1 1 2.04 7.2Z"
-                                                fill="#90794B"
-                                            />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="a">
-                                                <path fill="#fff" d="M0 0h18v18H0z" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <input
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    value={query}
-                                    name="docs-search"
-                                    placeholder="Search documentation..."
-                                    autoFocus={true}
-                                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
-                                />
-
-                                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
-                                    Search
-                                </button>
-                            </form>
-                        </div>
-
-                        <div className="absolute hidden lg:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
-                            <span className="absolute right-0 bottom-0">
-                                <StaticImage
-                                    src="../../contents/images/search-hog-3.png"
-                                    alt="This hog has an answer"
-                                    width={500}
-                                    placeholder="blurred"
-                                />
-                            </span>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                        {quickLinks.map((link) => {
-                            return (
-                                <Link
-                                    to={link.to}
-                                    key={link.name}
-                                    disablePrefetch
-                                    className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
-                                >
-                                    <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
-                                    <div>
-                                        <h3 className="text-lg font-bold text-red mb-0.5">{link.name}</h3>
-                                        <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
-                                            {link.description}
-                                        </p>
-                                    </div>
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </section>
-
-                <section className="space-y-10">
-                    <div className="text-center">
-                        <h2 className="font-bold mb-1">Get started</h2>
-                        <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 rounded lg:rounded-none overflow-hidden">
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                            <div>
-                                <h4 className="font-bold mb-1">
-                                    <span className="text-gray text-base">1.</span> Deploy
-                                </h4>
-                                <p className="text-sm text-gray">Spin up your PostHog instance</p>
+                                <SearchBox placeholder="Seach documentation..." />
                             </div>
 
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
-                                {deployment.map((deploy) => {
-                                    return (
-                                        <li className="flex-grow" key={deploy.name}>
-                                            <DeployOption
-                                                url={deploy.to}
-                                                title={deploy.name}
-                                                icon={deploy.icon}
-                                                disablePrefetch
-                                                badge={deploy.badge}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                            <div>
-                                <h4 className="font-bold mb-1">
-                                    <span className="text-gray text-base">2.</span> Integrate
-                                </h4>
-                                <p className="text-gray">Start tracking events and users</p>
+                            <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
+                                <span className="absolute right-0 bottom-0">
+                                    <StaticImage
+                                        src="../../contents/images/search-hog-3.png"
+                                        alt="This hog has an answer"
+                                        width={500}
+                                        placeholder="blurred"
+                                    />
+                                </span>
                             </div>
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
-                                {libraries.map((library) => {
-                                    return (
-                                        <li className="flex-grow" key={library.name}>
-                                            <DeployOption
-                                                url={library.to}
-                                                title={library.name}
-                                                icon={library.icon}
-                                                disablePrefetch
-                                                badge={undefined}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
                         </div>
-
-                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                            <h4 className="font-bold mb-1">
-                                <span className="text-gray text-base">3.</span> Customize
-                            </h4>
-                            <p className="text-gray">Customize your installation with apps</p>
-                            <ul className="grid grid-cols-2 lg:grid-cols-1 w-full list-none m-0 p-0">
-                                {apps.map((app) => {
-                                    return (
-                                        <li className="flex-grow" key={app.name}>
-                                            <DeployOption
-                                                url={app.to}
-                                                title={app.name}
-                                                icon={app.icon}
-                                                disablePrefetch
-                                                badge={undefined}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 className="text-center font-bold mb-8">Browse guides by feature</h2>
-
-                    <ul className="grid grid-cols-2 lg:grid-cols-4 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark m-0 p-0">
-                        {featureLinks.map((link) => {
-                            return (
-                                <li
-                                    key={link.name}
-                                    className="list-none border-dashed border-b border-r border-gray-accent-light dark:border-gray-accent-dark"
-                                >
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-8">
+                            {quickLinks.map((link) => {
+                                return (
                                     <Link
                                         to={link.to}
+                                        key={link.name}
                                         disablePrefetch
-                                        className="w-full h-full flex flex-col sm:flex-row items-center px-8 py-5 flex items-start space-y-2 sm:space-y-0 sm:space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                                        className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                                     >
-                                        <Icon className="w-6 h-6 text-gray shrink-0" name={link.icon} />
-                                        <h3 className="text-lg font-bold text-sm m-0 whitespace-nowrap">{link.name}</h3>
+                                        <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />
+                                        <div>
+                                            <h3 className="text-lg font-bold text-red mb-0.5">{link.name}</h3>
+                                            <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
+                                                {link.description}
+                                            </p>
+                                        </div>
                                     </Link>
-                                </li>
-                            )
-                        })}
+                                )
+                            })}
+                        </div>
+                    </section>
 
-                        <li className="list-none border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark border-r border-b col-span-full">
-                            <Link className="flex items-center justify-center w-full py-4" to="/docs/user-guides">
-                                View all (23)
-                            </Link>
-                        </li>
-                    </ul>
-                </section>
-            </div>
+                    <section className="space-y-10">
+                        <div className="text-center">
+                            <h2 className="font-bold mb-1">Get started</h2>
+                            <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
+                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
+                                <div>
+                                    <h4 className="font-bold mb-0">
+                                        <span className="text-gray text-lg">1.</span> Deploy
+                                    </h4>
+                                    <p className="text-base text-gray">Spin up your PostHog instance</p>
+                                </div>
+
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                    {deployment.map((deploy) => {
+                                        return (
+                                            <li className="flex-grow" key={deploy.name}>
+                                                <DeployOption
+                                                    url={deploy.to}
+                                                    title={deploy.name}
+                                                    icon={deploy.icon}
+                                                    disablePrefetch
+                                                    badge={deploy.badge}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+
+                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
+                                <div>
+                                    <h4 className="font-bold mb-0">
+                                        <span className="text-gray text-lg">2.</span> Integrate
+                                    </h4>
+                                    <p className="text-base text-gray">Start tracking events and users</p>
+                                </div>
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                    {libraries.map((library) => {
+                                        return (
+                                            <li className="flex-grow" key={library.name}>
+                                                <DeployOption
+                                                    url={library.to}
+                                                    title={library.name}
+                                                    icon={library.icon}
+                                                    disablePrefetch
+                                                    badge={undefined}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+
+                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
+                                <h4 className="font-bold mb-0">
+                                    <span className="text-gray text-lg">3.</span> Customize
+                                </h4>
+                                <p className="text-base text-gray">Customize your installation with apps</p>
+                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                    {apps.map((app) => {
+                                        return (
+                                            <li className="flex-grow" key={app.name}>
+                                                <DeployOption
+                                                    url={app.to}
+                                                    title={app.name}
+                                                    icon={app.icon}
+                                                    disablePrefetch
+                                                    badge={undefined}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </PostLayout>
         </Layout>
     )
 }

@@ -67,7 +67,7 @@ export const ProductFeature = ({
 
                             // <img src={`${featureIcon}`} alt={`${featureName} icon`} />
                         )}
-                        <div className="font-semibold text-base">{featureName}</div>
+                        <div className="font-semibold text-lg">{featureName}</div>
                     </div>
                 )}
 

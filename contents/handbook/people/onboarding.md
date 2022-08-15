@@ -41,7 +41,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability)
 *   [ ] Introduce new joiner to onboarding buddy
 
-## Two weeks before they join
+## One week before they join
 
 *   [ ] Send team member a link to the [Handbook](https://posthog.com/handbook) and a copy of this page so they can check everything has been done
 *   [ ] Create GSuite account for the team member

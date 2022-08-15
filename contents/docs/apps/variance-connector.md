@@ -1,6 +1,5 @@
 ---
 title: Variance Connector
-layout: app
 github: https://github.com/PostHog/posthog-variance-plugin
 installUrl: https://app.posthog.com/project/apps?name=Variance
 thumbnail: ../../apps/thumbnails/variance.png
@@ -16,7 +15,7 @@ This app exports PostHog data to Variance in real-time and formats it for use by
 
 The Variance Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The app supports `capture`, `page`, `identify`, and `alias` calls.
 
-Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Variance Connector app?
 

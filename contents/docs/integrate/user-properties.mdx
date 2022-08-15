@@ -25,7 +25,7 @@ Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have
 
 ## How do values get overridden?
 
-**The section below explains how overrides will work in the future, but currently overrides ignore timestamps. This means at the moment `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.**
+> The section below explains how overrides will work in the future, but currently overrides ignore timestamps. This means at the moment `set` always overrides, `set_once` only writes when the value doesn't exist and `alias` upon property name conflict uses the value from person 1.
 
 We rely on timestamps to know the order in which events happened. Note that we don't use ingestion order because events can arrive to PostHog in different order compared to when they were performed, e.g. when network was unreliable and some packets were resent later or when we're importing older events from a different PostHog instance.
 
@@ -72,7 +72,7 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 13 | yes       | yes       | set_once  | set_once  | after              | 2
 
 
-> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples using our [python library](docs/integrate/server/python):
+> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples using our [python library](/docs/integrate/server/python):
 
 For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
 ```python

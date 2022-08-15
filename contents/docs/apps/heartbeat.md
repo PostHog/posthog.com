@@ -1,6 +1,5 @@
 ---
 title: Heartbeat
-layout: app
 github: https://github.com/PostHog/posthog-heartbeat-plugin
 installUrl: https://app.posthog.com/project/apps?name=Heartbeat
 thumbnail: ../../apps/thumbnails/heartbeat.png
@@ -16,7 +15,7 @@ The Heartbeat app simply sends one event to your project every minute for as lon
 
 The Heartbeat app doesn't require a living heart, but it _does_ require either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later. 
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)! 
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)! 
 
 ### How do I install the Heartbeat app?
 

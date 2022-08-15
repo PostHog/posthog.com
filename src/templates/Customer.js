@@ -26,7 +26,7 @@ const Tags = ({ title, tags }) => {
     return (
         <li className="border-b border-dashed border-gray-accent-light">
             <h4 className="text-gray m-0 text-[15px]">{title}</h4>
-            <ul className="list-none m-0 p-0 text-base flex flex-wrap">
+            <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
                 {tags.map((tag, index) => {
                     return (
                         <li key={index} className="font-bold after:content-['\002C\00A0'] last:after:content-['']">
@@ -79,13 +79,15 @@ export default function Customer({ data }) {
                             <Tags title="Tools used" tags={toolsUsed} />
                         </ul>
                     </aside>
-                    <section className="article-content customer-content">
-                        <h1 className="text-3xl">{title}</h1>
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                    <div>
+                        <section className="article-content customer-content">
+                            <h1 className="text-5xl leading-tight">{title}</h1>
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </section>
                         <FooterCTA />
-                    </section>
+                    </div>
                 </div>
             </Layout>
         </>

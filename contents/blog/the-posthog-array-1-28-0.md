@@ -28,7 +28,7 @@ This version includes a subsequent patch release (1.28.1) launched on **Septembe
 
 ## PostHog 1.28.0 release notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 

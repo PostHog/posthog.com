@@ -24,12 +24,6 @@ body {
     font-variation-settings: 'wght' 475;
 }
 
-a {
-    color: black;
-    font-weight: semibold;
-    transition: none !important; /* unfortunately necessary until antd is removed */
-}
-
 em,
 i {
     font-variant: none;
@@ -72,10 +66,6 @@ progress {
 [hidden],
 template {
     display: none;
-}
-a {
-    -webkit-text-decoration-skip: objects;
-    color: #1d4aff;
 }
 a:active,
 a:hover {
@@ -206,10 +196,7 @@ textarea {
     -webkit-appearance: button;
     font: inherit;
 }
-html {
-    font: 112.5%/1.45em georgia, serif;
-    box-sizing: border-box;
-}
+
 * {
     box-sizing: inherit;
 }
@@ -252,44 +239,6 @@ img {
     padding-top: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: inherit;
-    font-variation-settings: 'wght' 800; // override ant
-    letter-spacing: -0.02em;
-    text-rendering: optimizeLegibility;
-
-    a {
-        font-variation-settings: 'wght' 800 !important; // override ant
-    }
-
-    code {
-        font-weight: bold;
-    }
-}
-
-h1 {
-    font-size: 48px;
-    line-height: normal;
-    letter-spacing: -0.03em;
-}
-
-h2 {
-    font-size: 40px;
-    line-height: normal;
-    letter-spacing: -0.03em;
-}
-h3 {
-    font-size: 30px;
-    line-height: normal;
-}
-h4 {
-    font-size: 24px;
-}
 h5 {
     margin-left: 0;
     margin-right: 0;
@@ -418,7 +367,6 @@ table {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
-    font-size: 14px;
     line-height: 1.45rem;
     width: 100%;
 }
@@ -498,23 +446,11 @@ ol li {
 ul li {
     padding-left: 0;
 }
-li > ol {
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
-}
-li > ul {
-    margin-bottom: calc(1.45rem / 4);
-    margin-top: calc(1.45rem / 4);
-    padding-bottom: 0.5rem;
-}
 blockquote *:last-child {
     margin-bottom: 0;
 }
 p *:last-child {
     margin-bottom: 0;
-}
-li > p {
-    margin-bottom: calc(1.45rem / 2);
 }
 kbd {
     font-size: 0.85rem;
@@ -536,24 +472,6 @@ abbr[title] {
     border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
     cursor: help;
     text-decoration: none;
-}
-thead {
-    text-align: left;
-}
-td,
-th {
-    text-align: left;
-    border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-    padding-top: 0.5rem;
-    padding-bottom: calc(0.5rem - 1px);
-}
-th:first-child,
-td:first-child {
-    padding-left: 0;
-}
-th:last-child,
-td:last-child {
-    padding-right: 0;
 }
 
 /* CUSTOM */
@@ -612,7 +530,6 @@ header {
     }
     p,
     li {
-        font-size: 1.25em;
         line-height: 1.75em;
         opacity: 0.9;
         li {

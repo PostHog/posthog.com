@@ -26,7 +26,7 @@ li.whr-item {
 }
 
 h3.whr-title {
-    @apply text-base m-0 leading-none;
+    @apply text-lg m-0 leading-none;
 
     a {
         @apply block p-4 pr-10 relative;

@@ -39,7 +39,7 @@ export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, blogUpda
                 <img className="h-full w-full absolute object-cover top-0 shadow-lg" src={featuredImage} />
 
                 <div className="md:absolute p-8 top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col">
-                    <time className="opacity-50 text-base w-full max-w-xl mb-2 text-white">
+                    <time className="opacity-50 text-lg w-full max-w-xl mb-2 text-white">
                         {blogDate === blogUpdatedDate ? blogDate : `Last updated: ${blogUpdatedDate}`}
                     </time>
                     <Structure.SectionHeader

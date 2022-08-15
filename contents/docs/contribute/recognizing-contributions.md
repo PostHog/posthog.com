@@ -10,7 +10,7 @@ At PostHog we aim to recognize all contributions made to our open source codebas
 
 If you submit a Pull Request to a repository under the `PostHog` organization, a bot will automatically try to send you an email with a merch code. If this fails, the bot will try to let you know in a comment so that you can email Yakko (the bot creator and babysitter) and get your merch code. 
 
-If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out!
+If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out! Someone on the PostHog team will send you a code [manually](/handbook/company/merch-store#individuals). 
 
 ## Apps
 
@@ -49,3 +49,6 @@ While we have created cards for all past contributors, the we have only started 
 'Powers' refer to the types of contributions you've made to PostHog. The types of contributions available can be seen on the [All Contributors spec](https://allcontributors.org/docs/en/emoji-key).
 
 Contributions of type `code` are automatically provided to you for merged pull requests. All other contribution types must be manually requested by a member of the PostHog team.
+
+### Sending out merch
+Follow instructions on [giving away merch for free](/handbook/company/merch-store)

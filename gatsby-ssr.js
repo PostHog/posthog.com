@@ -8,10 +8,20 @@
 const React = require('react')
 
 import { initKea, wrapElement } from './kea'
+import HandbookLayout from './src/templates/Handbook'
 
 export const wrapPageElement = ({ element, props }) => {
+    const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
-    return wrapElement({ element })
+    return wrapElement({
+        element:
+            /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
+            !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
+                <HandbookLayout {...props} />
+            ) : (
+                element
+            ),
+    })
 }
 
 export const onRenderBody = function ({ setPreBodyComponents }) {
@@ -36,7 +46,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (/^handbook|^docs|^blog|^integrations|^product|^tutorials|^questions/.test(slug) &&
+            (/^handbook|^docs|^blog|^integrations|^product|^tutorials|^questions|^using-posthog|^manual/.test(slug) &&
                 (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
             'light'
     } catch (err) {}

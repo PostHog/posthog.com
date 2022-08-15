@@ -23,7 +23,7 @@ export const SelfHostedPlanBreakdown = () => {
                     <li className="flex space-x-4">
                         <ServerLocked className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">Hosted by PostHog</h3>
+                            <h3 className="text-lg ">Hosted by PostHog</h3>
                             <p className="text-[14px]">
                                 Breeze through SOC 2 and HIPAA audits by eliminating a handful of subprocessors.
                             </p>
@@ -32,7 +32,7 @@ export const SelfHostedPlanBreakdown = () => {
                     <li className="flex space-x-4">
                         <WebCode className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">Full access to production instance</h3>
+                            <h3 className="text-lg ">Full access to production instance</h3>
                             <p className="text-[14px]">
                                 Audit code running on your servers for compliance and security.
                             </p>
@@ -41,7 +41,7 @@ export const SelfHostedPlanBreakdown = () => {
                     <li className="flex space-x-4">
                         <Prohibited className="flex-shrink-0" />
                         <div className="opacity-75">
-                            <h3 className="text-base ">No third-party cookies</h3>
+                            <h3 className="text-lg ">No third-party cookies</h3>
                             <p className="text-[14px]">
                                 By hosting yourself, PostHog’s tracking code is less susceptible to browser privacy
                                 features and ad blockers.
