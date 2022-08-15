@@ -15,11 +15,11 @@ Our CEO and co-founder, James Hawkins, recently joined Y Combinator to talk abou
 
 ## 1. Marius Andra
 
-James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted to build libraries that would make PostHog work on mobile, desktop and other programming languages, but they didn't have capacity to complete the work themselves.
+James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop and other programming languages, but they didn't have capacity to complete the work themselves.
 
-Handily, James noticed a similar hobby project that launched on Hacker News around the time, and he reached out to the creator to offer them some contract work to build the SDKs. Marius was the creator.
+Handily, James noticed a similar hobby project that launched on Hacker News recently. He reached out to the creator to offer them some contract work to build the SDKs. Marius was the creator.
 
-"Just from watching him do some actual work with us, it was really clear that he was very talented, and that's why we thought, hey, we should just get him in full-time."
+James: "Just from watching him do some actual work with us, it was really clear that he was very talented, and that's why we thought, hey, we should just get him in full-time."
 
 And that's how Marius become employee no.1 at PostHog.
 
@@ -27,7 +27,7 @@ And that's how Marius become employee no.1 at PostHog.
 
 ## 2. Eric Duong
 
-After PostHog's seed round, James and Tim decided PostHog would be a remote company, and they began outlining what is now our famous [public company handbook](/handbook/).
+After PostHog's seed round, James and Tim decided PostHog would be a remote company.  They then began outlining what is now our famous [public company handbook](/handbook/).
 
 The handbook was important for a few reasons:
 
@@ -43,17 +43,17 @@ Again, it started out with a trial "Super Week" of paid work.
 
 James: "He was supposed to start on a Monday, but over the weekend he'd already shipped a bunch of stuff. So before he even started, we already knew that we were going to end up hiring this person too."
 
-> **What we learned:** Think about your culture from the start! Crafting the company handbook helped us understand the kind of people who would be successful at PostHog, and make PostHog a success in return. It's hard to retrofit a culture when you've already hired a dozen or so people, so don't wait.
+> **What we learned:** Think about your culture from the start! Crafting the company handbook helped us understand the kind of people who would make PostHog a success. It's hard to retrofit a culture when you've already hired a dozen or so people, so don't wait.
 
 ## 3. James Greenhill
 
 In the early days, CEO James would check out people who starred the repo and sometimes get in touch to gather feedback. He saw James G was a data engineer at Uber and this piqued his interest.
 
-On a call, James G explained Uber had built a bunch of internal tools like PostHog for data control reasons, and PostHog's self-hosted model had potential. He found the project interesting and wanted to work on it, so he did a Super Week like Eric and Marius.
+On a call, James G explained Uber had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it, so he did a Super Week like Eric and Marius.
 
 James: "It was obvious, we were learning tons from him around how to make the platform more scalable. I would've never have thought we'd be able to hire a data engineer. He'd worked at a ton of other really impressive places, but we didn't go outbound looking for him. He was someone who'd used the project, or he thought it was cool on the internet first. So he was kind of already qualified, just being interested."
 
-> **What we learned:** Look beyond job ads (and your first users could be your best hires). While we post adverts for all our open roles, many of PostHog's more important hires have come from recommendations, connecting with communities, and having conversations with people. 
+> **What we learned:** Look beyond job ads (and your first users could be your best hires). While we post adverts for all our open roles, many of PostHog's hires have come from recommendations, connecting with communities, and serendipitous conversations.
 
 ## 4. Lottie Coxon
 
