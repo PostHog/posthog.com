@@ -1,6 +1,6 @@
-import { Quote } from 'components/Pricing/Quote'
-import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
+import { Quote } from 'components/Pricing/Quote'
 import { section } from './classes'
 
 export default function HomeQuote() {
@@ -14,6 +14,7 @@ export default function HomeQuote() {
                     width={100}
                     height={100}
                     alt="Nicolas Grenié - Typeform"
+                    outputPixelDensities={[1, 2]}
                     src="../../images/nicolas_grenie.png"
                 />
             }
