@@ -85,7 +85,7 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 
 ## 5. Michael Matloka
 
-![Michael](../images/blog/posthog-first-five/michael.jpg)
+![Michael](../images/blog/posthog-first-five/michael.png)
 
 Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
 
