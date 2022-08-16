@@ -17,7 +17,7 @@ We give employees [social and co-working budgets](/handbook/people/benefits) to 
 
 In large companies, offsite planning is centralized within the People or Operations teams, but this isn’t possible in many early-stage startups. This guide is for those small to medium startups who need a little help, and includes a few tips and tricks I’ve learned over a decade of organizing team retreats.
 
-> Grace McKenzie is the Operations Manager at PostHog, where she tackles any and all back office projects that help build the scaffolding we need as our company scales. In her spare time, you can find her on the rugby pitch playing flanker or at her local billiards hall practicing her 8-ball breaks.
+> Grace McKenzie is the Operations Manager at PostHog. She tackles any and all back office projects that help build the scaffolding we need as our company scales. In her spare time, you can find her on the rugby pitch playing flanker or at her local billiards hall practicing her 8-ball breaks.
 
 ## It starts with a really good checklist
 
@@ -33,14 +33,13 @@ Here are some key items to highlight:
 
 - Centralizing flight booking is a huge headache, so don’t do it. We give all team members company cards for this reason – see our [startup ops kit](/blog/startup-ops-toolkit) for more on this. This also means you don’t have to gather up lots of sensitive info (passport numbers etc.).  
 
-- Decide in advance who is going to record the notes from offsites sessions. It is really easy for post-offsite followup to fall through the cracks, which means a bunch of time and effort wasted. 
+- Decide in advance who is going to record the notes from offsites sessions. It is really easy for post-offsite follow-up to fall through the cracks, which means a bunch of wasted time and effort. 
 
 - It’s good if the offsite organizer arrives a day early to prep for the team's arrival. Whether it’s grocery shopping or troubleshooting airport transfers, it just makes everyone’s experience smoother.
 
 ## Choosing a location
 
 <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/1jv9YQIX4cvtRAHVRy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
-
 
 Choosing where to host your offsite is one of the most subjective planning decisions you will make. When I’m thinking about where to host, I consider a few things: 
 
@@ -58,7 +57,7 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 It’s tempting to maximize your time together by packing the itinerary full of brainstorming, planning, and breakout sessions. Don’t overdo this. In reality, having a good balance between sessions, free social time, and fun activities is important to avoid burning your team out. 
 
-In my experience, planning for a majority of unstructured time can lead to really amazing brainstorming and ideation. People will inevitably discuss their work as it’s a major thing that everyone has in common.
+In my experience, planning for a majority of unstructured time can lead to really amazing brainstorming and ideation. People will inevitably discuss their work anyway as it’s something that everyone has in common.
 
 One mainstay event that we do at every all-company offsite is a 24-hour hackathon, where our team comes up with the most outlandish ideas possible, and self-organizes into interdisciplinary teams to produce an MVP by the following day. Some core features of our product, like the ability to view your users on a world map; and some seriously silly things, like a children’s book focused on product analytics, have been born from this highly-rated session.
 
@@ -85,6 +84,6 @@ As a reference, we budget $1,500 per person for a small team offsite and $3,000 
 
 ## Final thoughts
 
-Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out [our open-source guide](handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) for how we plan an offsites in eight weeks. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
+Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out [our open-source guide](handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) for planning offsites. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
 
 <NewsletterForm compact />
