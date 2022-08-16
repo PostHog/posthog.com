@@ -81,7 +81,7 @@ const menu = [
     { name: 'API', url: 'api', icon: ProductIcons.api },
 ]
 
-export default function Product({ data, pageContext: { next, previous }, location }) {
+export default function Product({ data, location }) {
     const { pageData, documentation, sidebars } = data
     const {
         body,
@@ -90,8 +90,16 @@ export default function Product({ data, pageContext: { next, previous }, locatio
     } = pageData
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
-    const feature = features.find((menuItem) => {
-        return menuItem?.url?.replace(/\/$/, '') === location.pathname.replace(/\/$/, '')
+    let feature
+    let next
+    let previous
+    features.some((menuItem, index) => {
+        if (menuItem?.url?.replace(/\/$/, '') === location.pathname.replace(/\/$/, '')) {
+            feature = menuItem
+            next = features[index + 1]
+            previous = features[index - 1]
+            return true
+        }
     })
     const Documentation = () => {
         return (
@@ -136,23 +144,27 @@ export default function Product({ data, pageContext: { next, previous }, locatio
                 <div className="border-b border-gray-accent-light border-dashed py-3 lg:-mt-12">
                     <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
                         <div className="flex-1">
-                            <Link
-                                to={previous.url}
-                                className="text-[15px] font-semibold text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2"
-                            >
-                                <RightArrow className="w-[14px] rotate-180" />
-                                <span>{previous.name}</span>
-                            </Link>
+                            {previous?.url && (
+                                <Link
+                                    to={previous?.url}
+                                    className="text-[15px] font-semibold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
+                                >
+                                    <RightArrow className="w-[14px] rotate-180" />
+                                    <span>{previous?.name}</span>
+                                </Link>
+                            )}
                         </div>
                         <p className="m-0 text-[15px] font-bold">{title}</p>
                         <div className="flex-1 flex justify-end">
-                            <Link
-                                to={next.url}
-                                className="text-[15px] font-semibold text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2"
-                            >
-                                <span>{next.name}</span>
-                                <RightArrow className="w-[14px]" />
-                            </Link>
+                            {next?.url && (
+                                <Link
+                                    to={next?.url}
+                                    className="text-[15px] font-semibold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
+                                >
+                                    <span>{next?.name}</span>
+                                    <RightArrow className="w-[14px]" />
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
