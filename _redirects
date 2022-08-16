@@ -1,4 +1,4 @@
-/plugins/* /apps/* 301
+/plugins/* /apps/:splat 301
 /next-steps/* /next-steps 301
 /question/* /question 301
 /careers/* /careers 301
@@ -229,7 +229,7 @@
 /docs/tutorials/toolbar /tutorials/toolbar 301
 /docs/tutorials/tracking-teams /tutorials/tracking-teams 301
 /handbook/company/branding /handbook/company/brand-assets 301
-/docs/tutorials/* /tutorials/* 301
+/docs/tutorials/* /tutorials/:splat 301
 /docs/self-host/hobby-deployment /docs/self-host/deploy/hobby 301
 /handbook/engineering/ee-setup /docs/contribute/developing-locally 301
 /docs/user-guides/sessions /blog/sessions-removal 301
@@ -271,7 +271,7 @@
 /docs/plugins/enabling /docs/apps/enabling 301
 /docs/plugins /docs/apps 301
 /integrations /apps 301
-/integrations/* /apps/* 301
+/integrations/* /apps/:splat 301
 /docs/user-guides/plugins /docs/apps 301
 /product-features /blog/posthog-vs-amplitude 301
 /docs/plugins/build/reference /docs/apps/build/reference 301
