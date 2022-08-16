@@ -26,7 +26,6 @@
   to = "/careers"
   status = 200
 
-
 [[redirects]]
     from = "/docs/integrations/android-integration"
     to = "/docs/libraries/android"
