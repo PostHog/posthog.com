@@ -1,5 +1,5 @@
 ---
-date: 2022-08-15
+date: 2022-08-16
 title: "How to plan a killer company offsite in just 8 weeks"
 rootPage: /blog
 sidebar: Blog
