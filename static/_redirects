@@ -1,6 +1,3 @@
-/next-steps/* /next-steps 301
-/question/* /question 301
-/careers/* /careers 301
 /docs/integrations/android-integration /docs/libraries/android 301
 /docs/integrations/community /docs/libraries/community 301
 /docs/integrations/docusaurus-integration /docs/libraries/docusaurus 301
@@ -418,6 +415,9 @@
 /docs/user-guides/trends /manual/trends 301
 /docs/user-guides/utm-segmentation /manual/utm-segmentation 301
 /docs/user-guides/subscriptions /manual/notifications-and-alerts 301
+/next-steps/* /next-steps 301
+/question/* /question 301
+/careers/* /careers 301
 /plugins/* /apps/:splat 301
 /docs/tutorials/* /tutorials/:splat 301
 /integrations/* /apps/:splat 301
