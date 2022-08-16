@@ -198,7 +198,7 @@ PostHog::getFeatureFlag('multivariate-flag', 'some distinct id');
 
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
 
-FOr example, if the `beta-feature` depends on the `is_authorized` property, and you knwo the value of the property, you can tell PostHog to use this property, like so:
+FOr example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
 ```js
 PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
