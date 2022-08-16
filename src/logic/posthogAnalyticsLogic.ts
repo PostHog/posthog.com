@@ -1,13 +1,13 @@
-import { kea } from 'kea'
+import { kea, actions, reducers, listeners, events, selectors } from 'kea'
 import { getCookie } from 'lib/utils'
 
-export const posthogAnalyticsLogic = kea({
-    actions: {
+export const posthogAnalyticsLogic = kea([
+    actions(() => ({
         posthogFound: (posthog) => ({ posthog }),
         setFeatureFlags: (featureFlags, featureFlagVariants) => ({ featureFlags, featureFlagVariants }),
-    },
+    })),
 
-    reducers: {
+    reducers(() => ({
         featureFlags: [
             {},
             {
@@ -29,17 +29,17 @@ export const posthogAnalyticsLogic = kea({
                 posthogFound: (_, { posthog }) => posthog,
             },
         ],
-    },
+    })),
 
-    listeners: ({ actions }) => ({
+    listeners(({ actions }) => ({
         posthogFound: ({ posthog }) => {
             if (posthog.onFeatureFlags) {
                 posthog.onFeatureFlags(actions.setFeatureFlags)
             }
         },
-    }),
+    })),
 
-    events: ({ actions, cache }) => ({
+    events(({ actions, cache }) => ({
         afterMount: () => {
             if (typeof window !== 'undefined') {
                 if (window.posthog) {
@@ -60,9 +60,9 @@ export const posthogAnalyticsLogic = kea({
                 window.clearInterval(cache.posthogInterval)
             }
         },
-    }),
+    })),
 
-    selectors: {
+    selectors(() => ({
         activeFeatureFlags: [
             (s) => [s.featureFlags],
             (featureFlags) =>
@@ -82,5 +82,5 @@ export const posthogAnalyticsLogic = kea({
                 }
             },
         ],
-    },
-})
+    })),
+])

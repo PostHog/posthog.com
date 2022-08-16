@@ -1,16 +1,20 @@
-import { kea } from 'kea'
+import { kea, key, actions, reducers, listeners, connect, events } from 'kea'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
-export const scrollspyCaptureLogic = kea({
-    key: (props) => props.key,
+export const scrollspyCaptureLogic = kea([
+    key((props) => props.key as string),
 
-    actions: {
-        reportScrollUpdated: (elementId: string) => ({ elementId }),
-        setLastUpdatedAt: (lastUpdatedAt: number) => ({ lastUpdatedAt }),
-        setLastElementViewed: (elementId: string) => ({ elementId }),
-    },
+    actions({
+        reportScrollUpdated: (elementId) => ({ elementId }),
+        setLastUpdatedAt: (lastUpdatedAt) => ({ lastUpdatedAt }),
+        setLastElementViewed: (elementId) => ({ elementId }),
+    }),
 
-    reducers: {
+    connect({
+        values: [posthogAnalyticsLogic, ['posthog']],
+    }),
+
+    reducers(() => ({
         lastUpdatedAt: [
             null as null | number,
             {
@@ -23,9 +27,9 @@ export const scrollspyCaptureLogic = kea({
                 setLastElementViewed: (_, { elementId }) => elementId,
             },
         ],
-    },
+    })),
 
-    listeners: ({ actions, values }) => ({
+    listeners(({ actions, values }) => ({
         reportScrollUpdated: async ({ elementId }, breakpoint) => {
             await breakpoint(2000)
             const now = new Date().valueOf()
@@ -41,16 +45,12 @@ export const scrollspyCaptureLogic = kea({
             actions.setLastUpdatedAt(now)
             actions.setLastElementViewed(elementId)
         },
-    }),
+    })),
 
-    connect: {
-        values: [posthogAnalyticsLogic, ['posthog']],
-    },
-
-    events: ({ actions }) => ({
+    events(({ actions }) => ({
         afterMount: () => {
             const now = new Date().valueOf()
             actions.setLastUpdatedAt(now)
         },
-    }),
-})
+    })),
+])
