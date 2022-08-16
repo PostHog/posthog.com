@@ -31,17 +31,17 @@ And that's how Marius become employee no.1 at PostHog.
 
 ![Eric](../images/blog/posthog-first-five/eric.jpg)
 
-After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining what is now our famous [public company handbook](/handbook/).
+After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining our now famous [public company handbook](/handbook/).
 
 The handbook was important for a few reasons:
 
 1. It made the company look more mature from an outsider's perspective.
 
-2. It helped James and Tim think through their philosophy and what kind of company they wanted to build.
+2. It helped James and Tim think through their philosophy, and what kind of company they wanted to build.
 
 3. It was a great advert for potential hires.
 
-Eric was the first employee to actually apply for a job at PostHog. James and Tim interviewed him separately and both concluded he was smart and scrappy – two values we crave in every PostHog employee.
+Eric was the first employee to actually apply for a job at PostHog. James and Tim interviewed him separately, and both concluded he was smart and scrappy – two values we crave in every PostHog employee.
 
 Again, it started out with a trial "Super Week" (actually three days) of paid work. 
 
@@ -73,7 +73,7 @@ Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "h
 
 ![Lottie](../images/blog/posthog-first-five/logo-meme.png)
 
-It all started with that damned that... or when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
+It all started with that damned smile... or when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
 
 James: "Everyone else has blue websites that are super boring. You're on their pricing page, there's no pricing information; it's "talk to sales". So we're going to name ourselves after a hedgehog. We're going to have just like a weird, unusual style, because we are the weird and unusual one that's joined, and that's how we'll win, we're not going to win by being the same."
 
@@ -87,7 +87,7 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 
 ![Michael](../images/blog/posthog-first-five/michael.jpg)
 
-Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because we our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
+Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
 
 Michael's was the first role where James and Tim interviewed multiple candidates for the role. Despite being just two weeks from finishing high school, Michael stood out for many reasons: 
 
