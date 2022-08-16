@@ -11,11 +11,11 @@ featuredImageType: full
 categories: ["Inside PostHog"]
 ---
 
-Our CEO and co-founder, James Hawkins, recently joined Y Combinator to talk about the first five hires PostHog ever made, how we made them and why. This is the story behind each hire and the lessons we learned along the way.
+Our CEO and co-founder, James Hawkins, recently joined Y Combinator to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.
 
 ## 1. Marius Andra
 
-James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop and other programming languages, but they didn't have capacity to complete the work themselves.
+James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop, and other programming languages, but they didn't have capacity to complete the work themselves.
 
 Handily, James noticed a similar hobby project that launched on Hacker News recently. He reached out to the creator to offer them some contract work to build the SDKs. Marius was the creator.
 
@@ -27,7 +27,7 @@ And that's how Marius become employee no.1 at PostHog.
 
 ## 2. Eric Duong
 
-After PostHog's seed round, James and Tim decided PostHog would be a remote company.  They then began outlining what is now our famous [public company handbook](/handbook/).
+After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining what is now our famous [public company handbook](/handbook/).
 
 The handbook was important for a few reasons:
 
@@ -39,7 +39,7 @@ The handbook was important for a few reasons:
 
 Eric was the first employee to actually apply for a job at PostHog. James and Tim interviewed him separately and both concluded he was smart and scrappy – two values we crave in every PostHog employee.
 
-Again, it started out with a trial "Super Week" of paid work. 
+Again, it started out with a trial "Super Week" (actually three days) of paid work. 
 
 James: "He was supposed to start on a Monday, but over the weekend he'd already shipped a bunch of stuff. So before he even started, we already knew that we were going to end up hiring this person too."
 
@@ -49,7 +49,7 @@ James: "He was supposed to start on a Monday, but over the weekend he'd already 
 
 In the early days, CEO James would check out people who starred the repo and sometimes get in touch to gather feedback. He saw James G was a data engineer at Uber and this piqued his interest.
 
-On a call, James G explained Uber had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it, so he did a Super Week like Eric and Marius.
+On a call, James G explained Uber had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it, so he did a 3-day Super Week like Eric and Marius.
 
 James: "It was obvious, we were learning tons from him around how to make the platform more scalable. I would've never have thought we'd be able to hire a data engineer. He'd worked at a ton of other really impressive places, but we didn't go outbound looking for him. He was someone who'd used the project, or he thought it was cool on the internet first. So he was kind of already qualified, just being interested."
 
@@ -57,17 +57,17 @@ James: "It was obvious, we were learning tons from him around how to make the pl
 
 ## 4. Lottie Coxon
 
-Lottie is a graphic designer and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
+Lottie is a graphic designer, and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
 
 [image here]
 
-Believe it or not, that was PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
+Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
 
-It all started when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation and evidence of people using it were important, but they decided good design and a unique brand would be important too.
+It all started when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
 
 James: "Everyone else has blue websites that are super boring. You're on their pricing page, there's no pricing information; it's "talk to sales". So we're going to name ourselves after a hedgehog. We're going to have just like a weird, unusual style, because we are the weird and unusual one that's joined, and that's how we'll win, we're not going to win by being the same."
 
-With that decided, James sought out a graphic designer to work with and found Lottie on Twitter. Her portfolio was "really weird" and "kinda cool" according to James.
+With that decided, James sought out a graphic designer, and found Lottie on Twitter. Her portfolio was "really weird" and "kinda cool" according to James.
 
 Like previous hires, Lottie did some paid contract work first and immediately impressed. As Tim said at the time: "Watching Lottie do her job, felt like watching someone perform magic to us."
 
@@ -75,9 +75,9 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 
 ## 5. Michael Matloka
 
-Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because we our product is built for developers, it's a great place for us to hire. Our open source approach and transparent processes help us stand out.
+Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because we our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
 
-Michael's was the first role where James and Tim interviewed multiple candidates for the role. Despite being just two weeks from finishing college, Michael stood out for many reasons: 
+Michael's was the first role where James and Tim interviewed multiple candidates for the role. Despite being just two weeks from finishing high school, Michael stood out for many reasons: 
 
 1. He already had a successful side project with 10,000 users. It proved he could ship products from front to back and do full stack. 
 
@@ -85,7 +85,7 @@ Michael's was the first role where James and Tim interviewed multiple candidates
 
 3. He thought a little like a product person.
 
-Once again, he did a paid Super Week and proved he had the same characteristics that made Marius, Eric, Lottie and James G successful.
+Once again, he did a paid 3-day "Super Week" and proved he had the same characteristics that made Marius, Eric, Lottie and James G successful.
 
 > **What we learned:** Look for T-shaped people. This is especially important for your early hires. You can't afford to hire specialists in every arena, so it's vital to find people who are experts in one or two disciplines, but are capable in others as well. Michael's experience of shipping his own project showed he had that quality.
 
