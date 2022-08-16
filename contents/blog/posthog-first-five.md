@@ -111,6 +111,10 @@ Hiring is one of the most important but stressful things you'll do as a startup.
 4. Hire great talent, not (just) impressive looking CVs
 5. Scrappy and self-motivated T-shaped people FTW
 
-This is just a snapshot of the lessons we learnt, but there's a broader theme here. While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our [core values](/handbook/company/values).
+There's also a broader theme here. 
+
+While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. 
+
+Successful companies are built on collective strength, which is why talent compounds is one of our [core values](/handbook/company/values).
 
 <NewsletterForm compact />
