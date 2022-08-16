@@ -1,11 +1,15 @@
 {
     "handbook": [
         {
+            "name": "Table of contents"
+        },
+        {
             "name": "Handbook",
             "url": "/handbook"
         },
         {
             "name": "Getting started",
+            "url": "",
             "children": [
                 {
                     "name": "Start here",
@@ -387,6 +391,7 @@
         },
         {
             "name": "Product",
+            "url": "",
             "children": [
                 {
                     "name": "Overview",
@@ -416,6 +421,7 @@
         },
         {
             "name": "Design",
+            "url": "",
             "children": [
                 {
                     "name": "Overview",
@@ -517,6 +523,9 @@
         }
     ],
     "docs": [
+        {
+            "name": "Docs"
+        },
         {
             "name": "Overview",
             "url": "/docs"
@@ -960,128 +969,6 @@
             ]
         },
         {
-            "name": "Tutorials",
-            "url": "/tutorials"
-        },
-        {
-            "name": "Manuals",
-            "url": "",
-            "children": [
-                {
-                    "name": "Overview",
-                    "url": "/docs/user-guides"
-                },
-                {
-                    "name": "Actions",
-                    "url": "/docs/user-guides/actions"
-                },
-                {
-                    "name": "Annotations",
-                    "url": "/docs/user-guides/annotations"
-                },
-                {
-                    "name": "Cohorts",
-                    "url": "/docs/user-guides/cohorts"
-                },
-                {
-                    "name": "Correlation Analysis",
-                    "url": "/docs/user-guides/correlation"
-                },
-                {
-                    "name": "Dashboards",
-                    "url": "/docs/user-guides/dashboards"
-                },
-                {
-                    "name": "Data Management",
-                    "url": "/docs/user-guides/data-management"
-                },
-                {
-                    "name": "Events",
-                    "url": "/docs/user-guides/events"
-                },
-                {
-                    "name": "Experimentation",
-                    "url": "/docs/user-guides/experimentation"
-                },
-                {
-                    "name": "Feature Flags",
-                    "url": "/docs/user-guides/feature-flags"
-                },
-                {
-                    "name": "Funnels",
-                    "url": "/docs/user-guides/funnels"
-                },
-                {
-                    "name": "Group Analytics",
-                    "url": "/docs/user-guides/group-analytics"
-                },
-                {
-                    "name": "Heatmaps",
-                    "url": "/docs/user-guides/toolbar"
-                },
-                {
-                    "name": "Insights",
-                    "url": "/docs/user-guides/insights"
-                },
-                {
-                    "name": "Lifecycle",
-                    "url": "/docs/user-guides/lifecycle"
-                },
-                {
-                    "name": "Organizations and projects",
-                    "url": "/docs/user-guides/organizations-and-projects"
-                },
-                {
-                    "name": "Paths",
-                    "url": "/docs/user-guides/paths"
-                },
-                {
-                    "name": "Persons",
-                    "url": "/docs/user-guides/persons"
-                },
-                {
-                    "name": "Retention",
-                    "url": "/docs/user-guides/retention"
-                },
-                {
-                    "name": "Session Recording",
-                    "url": "/docs/user-guides/recordings"
-                },
-                {
-                    "name": "Sessions",
-                    "url": "/docs/user-guides/sessions"
-                },
-                {
-                    "name": "Settings",
-                    "url": "/docs/user-guides/application-settings"
-                },
-                {
-                    "name": "SSO & SAML",
-                    "url": "/docs/user-guides/sso"
-                },
-                {
-                    "name": "Stickiness",
-                    "url": "/docs/user-guides/stickiness"
-                },
-                {
-                    "name": "Subscriptions",
-                    "url": "/docs/user-guides/subscriptions"
-                },
-                {
-                    "name": "Toolbar",
-                    "url": "/docs/user-guides/toolbar"
-                },
-                {
-                    "name": "Trends",
-                    "url": "/docs/user-guides/trends"
-                },
-                {
-                    "name": "UTM segmentation",
-                    "url": "/docs/user-guides/utm-segmentation"
-                }
-            ]
-        },
-        {
             "name": "Apps",
             "url": "",
             "children": [
@@ -1492,10 +1379,6 @@
             ]
         },
         {
-            "name": "Support",
-            "url": "/docs/user-guides/support"
-        },
-        {
             "name": "Contribute",
             "url": "",
             "children": [
@@ -1512,6 +1395,219 @@
                     "url": "/docs/contribute/recognizing-contributions"
                 }
             ]
+        },
+        {
+            "name": "Using PostHog"
+        },
+        {
+            "name": "Table of contents",
+            "url": "/using-posthog"
+        },
+        {
+            "name": "Product manual",
+            "url": "",
+            "children": [
+                {
+                    "name": "Product analytics",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Dashboards",
+                            "url": "/manual/dashboards"
+                        },
+                        {
+                            "name": "Funnels",
+                            "url": "/manual/funnels"
+                        },
+                        {
+                            "name": "Group Analytics",
+                            "url": "/manual/group-analytics"
+                        },
+                        {
+                            "name": "Insights",
+                            "url": "/manual/insights"
+                        },
+                        {
+                            "name": "Lifecycle",
+                            "url": "/manual/lifecycle"
+                        },
+                        {
+                            "name": "Path analysis",
+                            "url": "/manual/paths"
+                        },
+                        {
+                            "name": "Retention",
+                            "url": "/manual/retention"
+                        },
+                        {
+                            "name": "Stickiness",
+                            "url": "/manual/stickiness"
+                        },
+                        {
+                            "name": "Trends",
+                            "url": "/manual/trends"
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualization",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Heatmaps",
+                            "url": "/manual/toolbar"
+                        },
+                        {
+                            "name": "Session Recording",
+                            "url": "/manual/recordings"
+                        }
+                    ]
+                },
+                {
+                    "name": "Optimization",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Correlation Analysis",
+                            "url": "/manual/correlation"
+                        },
+                        {
+                            "name": "Experimentation",
+                            "url": "/manual/experimentation"
+                        },
+                        {
+                            "name": "Feature Flags",
+                            "url": "/manual/feature-flags"
+                        }
+                    ]
+                },
+                {
+                    "name": "Data",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Actions",
+                            "url": "/manual/actions"
+                        },
+                        {
+                            "name": "Annotations",
+                            "url": "/manual/annotations"
+                        },
+                        {
+                            "name": "Cohorts",
+                            "url": "/manual/cohorts"
+                        },
+                        {
+                            "name": "Data Management",
+                            "url": "/manual/data-management"
+                        },
+                        {
+                            "name": "Events",
+                            "url": "/manual/events"
+                        },
+                        {
+                            "name": "Persons",
+                            "url": "/manual/persons"
+                        },
+                        {
+                            "name": "Sessions",
+                            "url": "/manual/sessions"
+                        },
+                        {
+                            "name": "UTM segmentation",
+                            "url": "/manual/utm-segmentation"
+                        }
+                    ]
+                },
+                {
+                    "name": "Project settings",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Team collaboration",
+                            "url": "/manual/team-collaboration"
+                        },
+                        {
+                            "name": "Organizations & projects",
+                            "url": "/manual/organizations-and-projects"
+                        },
+                        {
+                            "name": "Settings",
+                            "url": "/manual/application-settings"
+                        },
+                        {
+                            "name": "SSO & SAML",
+                            "url": "/manual/sso"
+                        },
+                        {
+                            "name": "Toolbar",
+                            "url": "/manual/toolbar"
+                        },
+                        {
+                            "name": "Notifications & alerts",
+                            "url": "/manual/notifications-and-alerts"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Tutorials",
+            "url": "/tutorials",
+            "children": [
+                {
+                    "name": "All tutorials",
+                    "url": "/tutorials"
+                },
+                {
+                    "name": "Actions",
+                    "url": "/tutorials/categories/actions"
+                },
+                {
+                    "name": "Apps",
+                    "url": "/tutorials/categories/apps"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/tutorials/categories/cohorts"
+                },
+                {
+                    "name": "Dashboards",
+                    "url": "/tutorials/categories/dashboards"
+                },
+                {
+                    "name": "Feature flags",
+                    "url": "/tutorials/categories/feature-flags"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/tutorials/categories/funnels"
+                },
+                {
+                    "name": "Heatmaps",
+                    "url": "/tutorials/categories/heatmaps"
+                },
+                {
+                    "name": "Path analysis",
+                    "url": "/tutorials/categories/user-paths"
+                },
+                {
+                    "name": "Retention",
+                    "url": "/tutorials/categories/retention"
+                },
+                {
+                    "name": "Session recording",
+                    "url": "/tutorials/categories/session-recording"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/tutorials/categories/session-recording"
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "url": "/manual/support"
         }
     ],
     "product": [

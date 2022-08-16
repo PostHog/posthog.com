@@ -105,7 +105,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                         className="absolute top-2 right-2 sm:top-3 sm:right-3 lg:top-6 lg:right-6"
                         onClick={() => setOpen(false)}
                     >
-                        <Close className="w-3 h-3 sm:w-auto sm:h-auto" />
+                        <Close className="w-3 h-3 sm:w-auto sm:h-auto text-white" />
                     </button>
                 </div>
             </div>
