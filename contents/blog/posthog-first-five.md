@@ -67,7 +67,7 @@ James: "It was obvious, we were learning tons from him around how to make the pl
 
 Lottie is a graphic designer, and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
 
-<p align="center"><img src="../images/blog/posthog-first-five/old-logo.png" alt="oringal posthog logo"></p>
+<p align="center"><img src="../images/blog/posthog-first-five/old-logo.png" alt="original posthog logo"></p>
 
 Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
 
