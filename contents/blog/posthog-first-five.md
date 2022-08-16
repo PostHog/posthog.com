@@ -1,6 +1,6 @@
 ---
 date: 2022-08-16
-title: What we learned about hiring from our "first five" employees
+title: What we learned about hiring from our first five employees
 rootPage: /blog
 sidebar: Blog
 showTitle: true
