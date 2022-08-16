@@ -58,7 +58,7 @@ PostHog is especially helpful for product teams that want to understand how user
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
-- **EU Cloud Hosting:** Coming Q4 2022 - [register interest](/signup/eu-cloud)
+- **EU Cloud Hosting:** Coming Q4 2022 – [join the waitlist](/signup/eu-cloud)
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
 PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
