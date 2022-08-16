@@ -9,7 +9,7 @@ The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy a
 
 We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe.
 
-<GDPRForm compact />
+<GDPRForm />
 
 ## What data is protected under GDPR?
 

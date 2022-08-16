@@ -35,7 +35,7 @@ Most popular session recording tools, such as  Hotjar, FullStory and LogRocket, 
 2. You don't control your user data
 3. GDPR and HIPAA compliance is a headache (or not possible)
 
-<GDPRForm compact />
+<GDPRForm />
 
 Self-hosting your session recording eliminates these drawbacks and allows you to keep control of your data, while open source tools give you the freedom to study, modify, and run the tools at no extra cost.
 

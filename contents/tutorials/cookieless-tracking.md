@@ -21,7 +21,7 @@ These include:
 
 If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use pgae memory instead.
 
-<GDPRForm compact />
+<GDPRForm />
 
 ## Step 1: Decide where to store the data
 

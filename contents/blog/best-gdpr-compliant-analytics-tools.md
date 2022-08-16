@@ -69,7 +69,7 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/docs/user-guides/experimentation), [Correlation Analysis](/docs/user-guides/correlation), [Cohorts](/user-guides/cohorts) and [Group Analytics](/docs/user-guides/group-analytics). The open source edition is free to self-host and includes the core product analytics features,  Session Recording and support for one project only.
 
-<GDPRForm compact />
+<GDPRForm />
 
 ### 2. Plausible
 
@@ -235,5 +235,5 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 
 GoAccess is open source and has no paid tiers.
 
-<GDPRForm compact />
+<GDPRForm />
 

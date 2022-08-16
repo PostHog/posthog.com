@@ -84,7 +84,7 @@ Tracking the actual users can really help understand the kinds of user profiles 
 
 Some users are happy to be tracked personally in return for a great project, but we think in most cases that this is unacceptably invasive by default, and it's important to ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
 
-<GDPRForm compact />
+<GDPRForm />
 
 ## It's not just the data, it's how the tracking works too
 

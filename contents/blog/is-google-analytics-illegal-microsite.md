@@ -147,4 +147,4 @@ If this continues to become more of a trend, we’ll have to switch from manuall
 
 But if we get to that point, we’ll be sure to check that there’s no third-party tracking involved.
 
-<GDPRForm compact />
+<GDPRForm />

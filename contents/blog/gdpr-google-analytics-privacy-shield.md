@@ -64,7 +64,7 @@ To understand why, it helps to break down the history of the GDPR:
 
 >Read our guide to the [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) for advice on alternatives to Google Analytics
 
-<GDPRForm compact />
+<GDPRForm />
 
 ## What happens next?
 Once you break down the chain of events, one thing becomes abundantly clear: a new Privacy Shield, such as that suggested by Google, would run into the same legal challenges that scuppered previous agreements. 

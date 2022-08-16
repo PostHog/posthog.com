@@ -19,7 +19,7 @@ In short, Restack enables you to deploy and benefit from a self-hosted PostHog i
 
 Additionally, you can choose which region your AWS EKS cluster will be based in, enabling straightforward GDPR and CCPA compliance if needed. 
 
-<GDPRForm compact />
+<GDPRForm />
 
 We’re very excited about this partnership with Restack because it offers another, simple way for teams to use PostHog in conjunction with other open-source tools, such as Airbyte or Hasura. Then, using PostHog’s open-source plugin system, it’s possible to easily build integrations between platforms in your stack. 
 
