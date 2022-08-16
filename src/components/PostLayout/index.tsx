@@ -524,8 +524,8 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className={article ? 'article-content' : ''}>{children}</div>
-                        {questions && questions}
+                        <div>{children}</div>
+                        {questions}
                     </div>
                     {survey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}

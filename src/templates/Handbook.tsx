@@ -193,9 +193,11 @@ export default function Handbook({
                             {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                        <div className="article-content">
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
                     </section>
                 </PostLayout>
             </Layout>
