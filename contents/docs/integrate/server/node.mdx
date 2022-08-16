@@ -332,3 +332,15 @@ You should call `shutdown` on your program's exit to exit cleanly:
 // Stop pending pollers and flush any remaining events
 client.shutdown()
 ```
+
+
+## Upgrading from V1 to V2
+
+V2.x.x of the Node.js library is completely rewritten in Typescript and is based on a new JS core shared with other JavaScript based libraries with the goal of ensuring new features and fixes reach the different libraries at the same pace.
+
+With the release of V2, the API was kept mostly the same but with some small changes and deprecations:
+
+1. The minimum PostHog version requirement is 1.38
+2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
+2. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
+3. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
