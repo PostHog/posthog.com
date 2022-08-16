@@ -1,12 +1,12 @@
 ---
-date: 2022-08-12
-title: Lessons about startup hiring from our "first five" employees
+date: 2022-08-16
+title: What we learned about hiring from our "first five" employees
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["james-hawkins", "andy-vandervell"]
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 categories: ["Inside PostHog"]
 ---
@@ -14,6 +14,8 @@ categories: ["Inside PostHog"]
 Our CEO and co-founder, James Hawkins, recently joined Y Combinator to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.
 
 ## 1. Marius Andra
+
+![Marius](../images/blog/posthog-first-five/marius.jpg)
 
 James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop, and other programming languages, but they didn't have capacity to complete the work themselves.
 
@@ -26,6 +28,8 @@ And that's how Marius become employee no.1 at PostHog.
 > **What We Learned:** Testing people with paid work is a great way to understand if they're a good fit for your business. The Super Week / Super Day concept is something we've baked into our [hiring process](/handbook/people/hiring-process). Great people will find ways to shine if you give them the chance. 
 
 ## 2. Eric Duong
+
+![Eric](../images/blog/posthog-first-five/eric.jpg)
 
 After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining what is now our famous [public company handbook](/handbook/).
 
@@ -47,6 +51,8 @@ James: "He was supposed to start on a Monday, but over the weekend he'd already 
 
 ## 3. James Greenhill
 
+![James](../images/blog/posthog-first-five/james.jpg)
+
 In the early days, CEO James would check out people who starred the repo and sometimes get in touch to gather feedback. He saw James G was a data engineer at Uber and this piqued his interest.
 
 On a call, James G explained Uber had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it, so he did a 3-day Super Week like Eric and Marius.
@@ -57,13 +63,17 @@ James: "It was obvious, we were learning tons from him around how to make the pl
 
 ## 4. Lottie Coxon
 
+![Lottie](../images/blog/posthog-first-five/lottie.jpg)
+
 Lottie is a graphic designer, and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
 
-[image here]
+![Lottie](../images/blog/posthog-first-five/old-logo.png)
 
 Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
 
-It all started when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
+![Lottie](../images/blog/posthog-first-five/logo-meme.png)
+
+It all started with that damned that... or when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
 
 James: "Everyone else has blue websites that are super boring. You're on their pricing page, there's no pricing information; it's "talk to sales". So we're going to name ourselves after a hedgehog. We're going to have just like a weird, unusual style, because we are the weird and unusual one that's joined, and that's how we'll win, we're not going to win by being the same."
 
@@ -74,6 +84,8 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 > **What we learned:** [Talent compounds](/handbook/company/values#talent-compounds. Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking CVs, look for talent that will motivate others to do their best.
 
 ## 5. Michael Matloka
+
+![Michael](../images/blog/posthog-first-five/michael.jpg)
 
 Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because we our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
 
@@ -91,7 +103,7 @@ Once again, he did a paid 3-day "Super Week" and proved he had the same characte
 
 ## Final thoughts
 
-Hiring is one of the most important but complex things you'll do as a startup. The key takeaways from our first five hires were:
+Hiring is one of the most important but stressful things you'll do as a startup. We're always learning and getting better at it, but we're pleased to say that (as of writing) all our first five are still with us. For us, the key takeaways were:
 
 1. Test people out before you hire them full time
 2. Define your culture and your "ideal hires" from the start
