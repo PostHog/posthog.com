@@ -16,7 +16,7 @@ import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import Toggle from 'components/Toggle'
 import { Info } from 'components/Icons/Icons'
-
+import { posthogAnalyticsLogic } from '../../../logic/posthogAnalyticsLogic'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -173,7 +173,9 @@ export default function Calculator({
     handleEnterpriseModeChange: (checked: boolean) => void
     setCurrentModal: (currentModal: string) => void
 }) {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
+    const [showSlider, setShowSlider] = useState(false)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
     const breakdown = pricing[pricingOption]
     const monthlyMinimumPrice =
@@ -262,7 +264,10 @@ export default function Calculator({
                     <div className="flex justify-between items-center">
                         <div className="flex gap-x-1">
                             <h4 className="text-base m-0">Enterprise package</h4>
-                            <button className="font-semibold text-black text-sm" onClick={() => setCurrentModal('enterprise')}>
+                            <button
+                                className="font-semibold text-black text-sm"
+                                onClick={() => setCurrentModal('enterprise')}
+                            >
                                 <Info />
                             </button>
                         </div>
@@ -275,20 +280,37 @@ export default function Calculator({
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-gray-accent-light border-dashed">
-                    <p className="hidden text-red text-sm font-bold mb-0">Calculate your monthly price</p>
-                    <h4 className="text-base m-0 pb-1">Calculate your monthly price</h4>
-                    <div>
-                        <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
-                        <div className="mb-8 mt-3">
-                            <PricingSlider
-                                marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
-                                min={1000000}
-                                max={1000000000}
-                            />
+                    {(!showSlider ||
+                        (posthog?.isFeatureEnabled && !posthog?.isFeatureEnabled('pricing-page-slider'))) && (
+                        <button onClick={() => setShowSlider(true)} className="text-red text-sm font-bold">
+                            Calculate your monthly price
+                        </button>
+                    )}
+                    <div
+                        style={{
+                            display:
+                                showSlider ||
+                                (posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('pricing-page-slider'))
+                                    ? 'block'
+                                    : 'none',
+                        }}
+                    >
+                        <h4 className="text-base m-0 pb-1">Calculate your monthly price</h4>
+                        <div>
+                            <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
+                            <div className="mb-8 mt-3">
+                                <PricingSlider
+                                    marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
+                                    min={1000000}
+                                    max={1000000000}
+                                />
+                            </div>
+                            <p className="text-sm pb-0 m-0">
+                                <Link className="font-semibold" to="/blog/calculating-events-from-users">
+                                    How to estimate your event volume
+                                </Link>
+                            </p>
                         </div>
-                        <p className="text-sm pb-0 m-0">
-                            <Link className="font-semibold" to="/blog/calculating-events-from-users">How to estimate your event volume</Link>
-                        </p>
                     </div>
                 </div>
             </div>
