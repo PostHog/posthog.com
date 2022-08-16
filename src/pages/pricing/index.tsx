@@ -9,6 +9,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import { GitHub, Info } from 'components/Icons/Icons'
 import Calculator from 'components/Pricing/Calculator/index'
+import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator/index'
 import ProductPillars from 'components/Pricing/ProductPillars/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
@@ -27,6 +28,30 @@ import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
+
+const Benefit = ({ children }) => {
+    return (
+        <li className="font-medium text-[15px] flex gap-x-1.5 items-start leading-tight">
+            <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
+                <Check />
+            </span>
+            <span>{children}</span>
+        </li>
+    )
+}
+
+const Check = () => {
+    return (
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
+                fill="#BFBFBC"
+            />
+        </svg>
+    )
+}
 
 export const section = cntl`
     max-w-6xl
@@ -116,7 +141,15 @@ const PricingNew = (): JSX.Element => {
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
-    const { cloudCost, selfHostedCost, sliderValue } = useValues(pricingSliderLogic)
+    const { cloudCost, selfHostedCost, cloudEnterpriseCost, selfHostedEnterpriseCost, sliderValue } =
+        useValues(pricingSliderLogic)
+    const [enterpriseMode, setEnterpriseMode] = useState(false)
+    const { setPricingOption } = useActions(pricingSliderLogic)
+
+    const handleEnterpriseModeChange = (checked: boolean) => {
+        setPricingOption(checked ? 'cloud-enterprise' : 'cloud')
+        setEnterpriseMode(checked)
+    }
 
     const handleInfo = (currentModal: string) => {
         setCurrentModal(currentModal)
@@ -149,12 +182,12 @@ const PricingNew = (): JSX.Element => {
                     <div className="lg:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
                             Pay per tracked event.
-                            <br /> Get access to all features.
+                            <br />
+                            Get the whole hog.
                         </h1>
-                        <p className="text-[18px] text-black/75">
-                            Starts at <span className="text-lg font-bold">$0</span>/mo for your first 1 million monthly
-                            events &mdash; every month
-                        </p>
+                        <h3 className="text-xl text-black/50 font-bold">
+                            Your first 1 million events are free. <span className="text-blue">Every month.</span>
+                        </h3>
                     </div>
                 </div>
             </section>
@@ -168,370 +201,221 @@ const PricingNew = (): JSX.Element => {
                     <ProductPillars />
                 </div>
             </section>
-            <section>
-                <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
-                    <div className="md:col-span-2">
-                        <div className="bg-white px-6 py-10 rounded grid md:grid-cols-2 gap-y-12 md:gap-y-0 md:gap-x-10 shadow-lg">
-                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
-                                <div>
-                                    <h2 className="text-xl mb-0 flex items-center">
+
+            <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto items-start">
+                <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
+                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative pb-2 ">
+                        <div className="mb-4">
+                            <CloudIcon className="opacity-30 mb-3" />
+                            <h2 className="text-xl mb-1 flex items-center">
+                                {enterpriseMode ? (
+                                    ' PostHog Enterprise Cloud'
+                                ) : (
+                                    <>
                                         PostHog Cloud{' '}
-                                        <span className="border-yellow border inline-flex text-xs px-[4px] py-[2px] rounded-[3px] font-semibold ml-2 space-x-1">
-                                            <span className="text-black/50">Recommended</span>
-                                            <button
-                                                onClick={() => setWhyCloudOpen(true)}
-                                                className="text-red font-semibold"
-                                            >
-                                                Why?
+                                        <span className="absolute -top-[3px] right-3 bg-red inline-flex text-sm px-3 py-2 rounded-[3px] font-semibold ml-2 space-x-1">
+                                            <span className="text-white font-bold">Recommended</span>
+                                            <button onClick={() => setWhyCloudOpen(true)} className="text-white">
+                                                <Info />
                                             </button>
                                         </span>
-                                    </h2>
-                                    <p className="mb-2 text-[14px] text-black/50">Turnkey, hosted solution</p>
-                                </div>
-                                <div className="leading-none mt-3">
-                                    <span className="text-lg font-bold">Free</span>{' '}
-                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
-                                    <br />
-                                    <span className="text-black/50 text-sm font-medium">then $0.00045/event</span>
-                                </div>
-                                <div className="my-1">
-                                    {!showVolumeDiscounts && (
-                                        <button
-                                            className="text-orange text-sm font-bold"
-                                            onClick={() => setShowVolumeDiscounts(true)}
-                                        >
-                                            Show volume discounts
-                                        </button>
-                                    )}
-
-                                    {showVolumeDiscounts && (
-                                        <motion.div
-                                            style={{ gridTemplateColumns: '1fr' }}
-                                            initial={{ height: 0 }}
-                                            animate={{ height: 'auto' }}
-                                            className="grid text-sm gap-x-2 gap-y-2 mt-4"
-                                        >
-                                            <Breakdown planName="cloud" />
-
-                                            <B2C />
-                                        </motion.div>
-                                    )}
-                                </div>
-                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                                    <div className="flex flex-col">
-                                        <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">
-                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
-                                            events/mo
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <strong className="text-[18px] text-black">${prettyInt(cloudCost)}</strong>
-                                        <span className="text-sm text-black/60">/mo</span>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Get started - free`, type: 'cloud' }}
-                                        type="primary"
-                                        width="full"
-                                        className="shadow-md"
-                                        to="https://app.posthog.com/signup"
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col w-full md:max-w-[350px] mx-auto">
-                                <div>
-                                    <h2 className="text-xl mb-0">Self-hosted</h2>
-                                    <p className="mb-2 text-[14px] text-black/50">
-                                        Customer data never leaves your infrastructure
-                                    </p>
-                                </div>
-                                <div className="leading-none mt-3">
-                                    <span className="text-lg font-bold">Free</span>{' '}
-                                    <span className="text-black/75 font-bold text-sm">for 1 million events/mo</span>
-                                    <br />
-                                    <span className="text-black/50 text-sm font-medium">then $0.00045/event</span>
-                                </div>
-
-                                <div className="my-1">
-                                    {!showVolumeDiscounts && (
-                                        <button
-                                            className="text-orange text-sm font-bold"
-                                            onClick={() => setShowVolumeDiscounts(true)}
-                                        >
-                                            Show volume discounts
-                                        </button>
-                                    )}
-
-                                    {showVolumeDiscounts && (
-                                        <motion.div
-                                            style={{ gridTemplateColumns: '1fr' }}
-                                            initial={{ height: 0 }}
-                                            animate={{ height: 'auto' }}
-                                            className="grid text-sm gap-x-2 gap-y-2 mt-4"
-                                        >
-                                            <Breakdown planName="self-hosted" />
-
-                                            <B2C />
-                                        </motion.div>
-                                    )}
-                                </div>
-
-                                <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                                    <div className="flex flex-col">
-                                        <strong className="text-[16px]">Monthly estimate</strong>
-                                        <span className="text-sm text-black/60">
-                                            for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'}{' '}
-                                            events/mo
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <strong className="text-[18px] text-black">${prettyInt(selfHostedCost)}</strong>
-                                        <span className="text-sm text-black/60">/mo</span>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Get started - free`, type: 'self-hosted' }}
-                                        type="primary"
-                                        width="full"
-                                        className="shadow-md"
-                                        to="https://license.posthog.com/"
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col pt-10 w-full px-4 md:max-w-[320px] md:px-0 md:mx-auto box-border">
-                        <div>
-                            <h2 className="text-xl flex items-baseline">
-                                Enterprise{' '}
-                                <span className="inline-flex text-sm text-black/50 font-semibold ml-2">
-                                    Cloud or self-host
-                                </span>
+                                    </>
+                                )}
                             </h2>
-                            <p className="mb-2 text-[14px] text-black/50">
-                                SSO/SAML, advanced permissions, proactive support, team training, &amp; more
+                            <p className="mb-2 text-sm text-black/50 leading-tight">
+                                SaaS solution managed by the PostHog core team
                             </p>
                         </div>
-                        <div className="leading-none mt-3">
-                            <span className="text-black/50 text-sm font-medium block mb-1">Starts at</span>
-                            <span className="text-[18px] font-bold">$450</span>
-                            {''}
-                            <span className="text-black/75 font-semibold text-[14px]">/mo for 1 million events</span>
-                            <br />
-                            <span className="text-black/50 font-semibold text-sm block mt-1">then $0.00045/event</span>
+
+                        <ul className="list-none p-0 m-0 grid gap-y-2">
+                            <Benefit>Full product suite</Benefit>
+                            <Benefit>Hosted & managed by PostHog</Benefit>
+                            <Benefit>Always get the latest features</Benefit>
+                        </ul>
+                    </div>
+
+                    <div className="order-3 md:order-2 bg-white px-8 pt-8 pb-2 rounded-md shadow-xl">
+                        <div className="mb-4">
+                            <SelfHostIcon className="opacity-30 mb-3" />
+                            <h2 className="text-xl mb-1 flex items-center">
+                                {enterpriseMode ? 'Self-hosted Enterprise' : 'Self-hosted'}
+                            </h2>
+                            <p className="mb-2 text-sm text-black/50 leading-tight">
+                                Customer data never leaves your infrastructure
+                            </p>
                         </div>
-                        <div className="my-1">
-                            {!showVolumeDiscounts && (
-                                <button
-                                    className="text-orange text-sm font-bold"
-                                    onClick={() => setShowVolumeDiscounts(true)}
-                                >
-                                    Show volume discounts
-                                </button>
-                            )}
 
-                            {showVolumeDiscounts && (
-                                <motion.div
-                                    style={{ gridTemplateColumns: '1fr' }}
-                                    initial={{ height: 0 }}
-                                    animate={{ height: 'auto' }}
-                                    className="grid text-sm gap-x-2 gap-y-2 mt-4"
-                                >
-                                    <Breakdown planName="cloud-enterprise" />
+                        <ul className="list-none p-0 m-0 grid gap-y-2">
+                            <Benefit>Full feature set of PostHog Cloud but on your infrastructure</Benefit>
+                            <Benefit>Full access to your production instance</Benefit>
+                            <Benefit>Paid deployment support available in the PostHog Marketplace</Benefit>
+                        </ul>
+                    </div>
 
-                                    <B2C />
-                                </motion.div>
-                            )}
+                    <div className="order-2 relative mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
+                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                            <div className="flex flex-col">
+                                <strong className="text-[16px]">Monthly estimate</strong>
+                                <span className="text-sm text-black/60">
+                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
+                                </span>
+                            </div>
+                            <div>
+                                <strong className="text-[18px] text-black">
+                                    ${prettyInt(enterpriseMode ? cloudEnterpriseCost : cloudCost)}
+                                </strong>
+                                <span className="text-sm text-black/60">/mo</span>
+                            </div>
                         </div>
 
                         <div className="mt-4">
                             <TrackedCTA
-                                event={{ name: `clicked Get started`, type: 'self-hosted-enterprise' }}
+                                event={{
+                                    name: `clicked Get started - free`,
+                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                                }}
                                 type="primary"
                                 width="full"
                                 className="shadow-md"
-                                onClick={() => setEnterpriseModalOpen(true)}
+                                to={
+                                    enterpriseMode
+                                        ? 'https://posthog.com/signup/cloud/enterprise'
+                                        : 'https://app.posthog.com/signup'
+                                }
                             >
-                                Get started
+                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
                             </TrackedCTA>
                         </div>
                     </div>
-                </div>
-                {!showPlanBuilder && (
-                    <div className="grid md:grid-cols-3 max-w-6xl gap-x-8 mx-4 md:mx-auto md:px-4">
-                        <p className="col-span-2 mt-4 text-center text-[14px] font-semibold text-black/50 leading-loose">
-                            Estimate your monthly cost with our{' '}
-                            <button onClick={() => setShowPlanBuilder(true)} className="font-bold text-red">
-                                plan builder
-                            </button>
-                        </p>
-                    </div>
-                )}
-            </section>
 
-            {showPlanBuilder && (
-                <motion.div
-                    ref={builderRef}
-                    initial={{ height: 0 }}
-                    animate={{ height: 'auto' }}
-                    className="relative md:px-4"
-                >
-                    <section
-                        className={`${section} my-8 md:my-12 grid md:grid-cols-2 md:gap-y-0 gap-y-12 md:gap-x-4 gap-x-0 items-start z-10 relative`}
-                    >
-                        <div className="relative flex flex-col">
-                            <h2 className="text-2xl m-0 mb-6 md:mb-8">Calculate your monthly price</h2>
-                            <div>
-                                <h3 className="m-0 mb-1 text-[18px] flex items-center space-x-1">
-                                    <span>Do you need to self-host?</span>
-                                    <button onClick={() => handleInfo('self host')}>
-                                        <Info />
-                                    </button>
-                                </h3>
-                                <p className="m-0 text-black/50 font-medium text-sm">
-                                    Customer data never leaves your infrastructure or private cloud.
-                                </p>
-                                <div className="flex space-x-3 mt-3">
-                                    <Button onClick={() => setSelfHost(true)} active={selfHost}>
-                                        Yes
-                                    </Button>
-                                    <Button onClick={() => setSelfHost(false)} active={!selfHost}>
-                                        No
-                                    </Button>
-                                </div>
-                                <h3 className="m-0 mb-1 text-[18px] mt-9 flex items-center space-x-1">
-                                    <span>Are you an enterprise?</span>
-                                    <button onClick={() => handleInfo('enterprise')}>
-                                        <Info />
-                                    </button>
-                                </h3>
-                                <p className="m-0 text-black/50 font-medium text-sm">
-                                    Advanced permissioning, proactive support, training, SSO/SAML & more
-                                </p>
-                                <div className="flex space-x-3 mt-3">
-                                    <Button onClick={() => setEnterprise(true)} active={enterprise}>
-                                        Yes
-                                    </Button>
-                                    <Button onClick={() => setEnterprise(false)} active={!enterprise}>
-                                        No
-                                    </Button>
-                                </div>
+                    <div className="order-4 bg-white px-8 pb-8 rounded-bl rounded-br shadow-xl">
+                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
+                            <div className="flex flex-col">
+                                <strong className="text-[16px]">Monthly estimate</strong>
+                                <span className="text-sm text-black/60">
+                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
+                                </span>
                             </div>
-                            <div className="sm:flex-row flex-col-reverse md:flex hidden items-center sm:items-start mt-auto pt-24">
-                                <StaticImage
-                                    width={183}
-                                    alt="Sport Hog"
-                                    src="./images/sport-hog.png"
-                                    placeholder="none"
-                                />
-                                <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-ml-4 -mt-8 flex-shrink-0">
-                                    <p className="text-white m-0 text-[16px] font-bold font-comic">5 products in one</p>
-                                    <p className="text-[14px] mt-0 mb-2 text-white font-comic">
-                                        for one low monthly price?!
-                                    </p>
-                                    <svg
-                                        className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
-                                        width="35"
-                                        height="29"
-                                        viewBox="0 0 35 29"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                            fill="#2D2D2D"
-                                        />
-                                    </svg>
-                                </div>
+                            <div>
+                                <strong className="text-[18px] text-black">
+                                    ${prettyInt(enterpriseMode ? selfHostedEnterpriseCost : selfHostedCost)}
+                                </strong>
+                                <span className="text-sm text-black/60">/mo</span>
                             </div>
                         </div>
-                        <Calculator enterprise={enterprise} selfHost={selfHost} />
-                    </section>
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-                        <img src={shape} className="absolute w-screen left-0 -bottom-14 md:block hidden" />
-                    </motion.div>
-                </motion.div>
-            )}
-            <section className={`${section} pt-12 md:px-4`}>
-                <h2 className="text-xl m-0 flex items-center">What comes in PostHog?</h2>
+
+                        <div className="mt-4">
+                            <TrackedCTA
+                                event={{
+                                    name: `clicked Get started - free`,
+                                    type: enterpriseMode ? 'self-hosted-enterprise' : 'self-hosted',
+                                }}
+                                type="primary"
+                                width="full"
+                                className="shadow-md"
+                                to={
+                                    enterpriseMode
+                                        ? 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU'
+                                        : 'https://license.posthog.com/'
+                                }
+                            >
+                                Get started - free
+                            </TrackedCTA>
+                        </div>
+                    </div>
+                    <div className="md:col-span-2 mt-8 order-5">
+                        <div className="mx-auto flex justify-center space-x-8 pb-4 mb-6 border-b border-dashed border-gray-accent-light">
+                            <Link
+                                to="/signup/self-host/get-in-touch#demo"
+                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
+                            >
+                                <svg
+                                    width="24"
+                                    height="17"
+                                    viewBox="0 0 24 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="text-black/30 group-hover:text-blue"
+                                >
+                                    <path
+                                        d="M3.105 0.499996C2.21906 0.499996 1.5 1.22 1.5 2.105V13.9999H0V15.4558C0 16.308 0.691872 16.9999 1.54406 16.9999H22.3182C23.2473 16.9999 24.0001 16.2471 24.0001 15.318V13.9999H22.5001V2.05244C22.5001 1.19744 21.8026 0.499924 20.9476 0.499924L3.105 0.499996ZM3.105 2L20.9999 2.0525V13.9999H13.4737C13.4662 14.8249 12.7912 15.4999 11.9653 15.4999C11.1375 15.4999 10.4625 14.8268 10.4568 13.9999H3.00002V2.10506C3.00002 2.04693 3.0469 2.00006 3.10502 2.00006L3.105 2ZM12.0347 3.5C10.3744 3.5 9.0234 4.86406 9.0234 6.54416C9.0234 7.94854 9.97214 9.1232 11.25 9.47384C9.14246 9.68384 7.22155 10.7816 5.95867 12.4916H10.0161C10.2833 12.4869 10.557 12.486 10.8364 12.4916H13.3209C13.5037 12.4888 13.6847 12.4897 13.8628 12.4916H18.0169C16.7691 10.7994 14.8811 9.70544 12.7989 9.47672C14.0861 9.13172 15.0432 7.9542 15.0432 6.54416C15.0442 4.86416 13.6961 3.5 12.0358 3.5H12.0347Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+
+                                <span>Schedule a demo</span>
+                            </Link>
+                            <Link
+                                to="/signup/cloud/enterprise"
+                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="text-black/30 group-hover:text-blue"
+                                >
+                                    <path
+                                        d="M18.7569 1.24141C18.4467 0.932806 17.9842 0.826566 17.5717 0.975786L1.6631 6.65779C1.23498 6.81013 0.938096 7.20389 0.910756 7.65779C0.883412 8.11247 1.12952 8.53825 1.53732 8.74295L6.74832 11.3475L13.4085 6.59055L8.65072 13.2523L11.2553 18.4633C11.4491 18.8493 11.8436 19.0907 12.2725 19.0907C12.2959 19.0907 12.3186 19.0899 12.3412 19.0883C12.7959 19.0618 13.1905 18.7657 13.3436 18.3368L19.0256 2.42658C19.1717 2.01408 19.0678 1.55158 18.7568 1.24142L18.7569 1.24141Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+
+                                <span>Get in touch</span>
+                            </Link>
+                        </div>
+                        <div>
+                            <h4 className="text-[15px] mb-0 font-normal opacity-75">
+                                <span className="font-bold">
+                                    Looking for{' '}
+                                    <Link
+                                        className="border-b border-dashed border-gray-accent-light text-black"
+                                        onClick={() =>
+                                            posthog &&
+                                            posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
+                                        }
+                                        to="https://github.com/PostHog/posthog"
+                                    >
+                                        PostHog Open Source
+                                    </Link>
+                                    ?
+                                </span>{' '}
+                                (No credit card required)
+                            </h4>
+                            <p className="text-sm opacity-60">
+                                Available with product analytics, feature flags, and session recordings – limited to 1
+                                project and no user permissions
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex-shrink md:basis-96 box-border flex">
+                    <div className="md:max-w-[290px] mx-auto">
+                        <Calculator
+                            enterpriseMode={enterpriseMode}
+                            handleEnterpriseModeChange={handleEnterpriseModeChange}
+                            enterprise={enterprise}
+                            selfHost={selfHost}
+                            setCurrentModal={setCurrentModal}
+                        />
+                    </div>
+                </div>
+            </section>
+            <section className={`${section} mt-12 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
             </section>
-            <section className={`${section} mb-12 mt-24 md:px-4`}>
-                <h2 className="text-xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     Compare all plans
                 </h2>
                 <AllPlans />
             </section>
-            <section className={`${section} mb-12 mt-24 md:px-4`}>
-                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">
-                    PostHog open source
-                </h2>
-                <div className="grid lg:grid-cols-2 gap-x-4">
-                    <div>
-                        <p>
-                            Our original open source product is available for self-hosting, and ships with product
-                            analytics, feature flags, and session recordings.
-                        </p>
-                        <Link
-                            onClick={() =>
-                                posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                            }
-                            className="p-2 sm:max-w-[250px] sm:w-auto w-full bg-primary flex items-center justify-center space-x-4 rounded-sm text-white hover:text-white text-[15px] font-bold relative active:top-[1px] active:scale-[.97]"
-                            to="https://github.com/PostHog/posthog"
-                        >
-                            <GitHub />
-                            <span>Browse on GitHub</span>
-                        </Link>
-                        <p className="text-sm opacity-50 mt-2">
-                            Limitations: one project, no user permissions, and community support only.
-                        </p>
-                    </div>
-
-                    <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center mt-6 lg:-mt-10">
-                        <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:-rotate-6 sm:-mr-8 flex-shrink-0">
-                            <p className="text-white mb-2 mt-0 font-comic">Want to be our next star?</p>
-                            <span className="h-[28px] w-[125px]">
-                                <GitHubButton
-                                    href="https://github.com/posthog/posthog"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star posthog/posthog on GitHub"
-                                >
-                                    Star
-                                </GitHubButton>
-                            </span>
-                            <svg
-                                className="absolute left-2 sm:left-auto sm:right-2 -bottom-5"
-                                width="35"
-                                height="29"
-                                viewBox="0 0 35 29"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                    fill="#2D2D2D"
-                                />
-                            </svg>
-                        </div>
-
-                        <StaticImage src="./images/star-hog.png" width={242} alt="Star Hog" placeholder="none" />
-                    </div>
-                </div>
-            </section>
             <section className={`${section} my-12  md:px-4`}>
-                <h2 className="text-xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12 md:px-4">

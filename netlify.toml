@@ -1,3 +1,7 @@
+[build.environment]
+  NODE_VERSION = "16"
+  GATSBY_CPU_COUNT = "2"
+
 [dev]
   command = "yarn start"
   port = 8888
@@ -21,7 +25,6 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
-
 
 [[redirects]]
     from = "/docs/integrations/android-integration"
@@ -2144,7 +2147,7 @@
 # Added: 2022-08-11
 [[redirects]]
     from = "/docs/user-guides"
-    to = "/manual"
+    to = "/using-posthog"
 
 
 # Added: 2022-08-11

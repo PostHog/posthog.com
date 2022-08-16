@@ -50,7 +50,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 |            `host`             | Your PostHog host                                                                                        | `https://app.posthog.com/` |
 |           `flushAt`           | After how many capture calls we should flush the queue (in one batch)                                    |            `20`            |
 |        `flushInterval`        | After how many ms we should flush the queue                                                              |          `10000`           |
-|       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for using feature flags |           `null`           |
+|       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` and `flushInterval` to `0`.
@@ -189,16 +189,20 @@ client.capture({
 })
 ```
 
+
 ### Feature flags
 
-> Note that to use feature flags you must specify `personalApiKey` in [options passed to the `PostHog` constructor](#options).
+PostHog's [feature flags](/docs/user-guides/feature-flags) enable you to safely deploy and roll back new features.
 
-#### Checking if a feature is enabled
+When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
 
-To check if a feature flag is on for a given user, you can call `isFeatureEnabled`, passing the flag's key and the user's distinct ID. You can optionally pass a third argument to override the default result to be returned if the flag is not found. This is set to `false` by default.
+**How to check if a flag is enabled**
+
+> **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
+
 
 ```js
-// isFeatureEnabled(key: string, distinctId: string, defaultResult?: boolean): Promise<boolean>
+// isFeatureEnabled(key: string, distinctId: string, options: {}): Promise<boolean | undefined>
 const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id')
 
 if (isMyFlagEnabledForUser) {
@@ -206,7 +210,80 @@ if (isMyFlagEnabledForUser) {
 }
 ```
 
-> If your feature flag relies entirely on rollout percentage (i.e. it has no filters), `isFeatureEnabled` will provide a fast response, allowing it to be used in the logic for API endpoints, for example. Flags that depend on filters require a call to the PostHog API so will take longer.
+**Get a flag value**
+
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
+
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
+
+
+```js
+// getFeatureFlag(key: string, distinctId: string, options: {}): Promise<string | boolean | undefined>
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
+```
+
+**Overriding server properties**
+
+Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
+
+For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
+
+
+```js
+// getFeatureFlag(
+//    key: string,
+//    distinctId: string,
+//    options?: {
+//      groups?: Record<string, string>
+//      personProperties?: Record<string, string>
+//      groupProperties?: Record<string, Record<string, string>>
+//      onlyEvaluateLocally?: boolean
+//      sendFeatureFlagEvents?: boolean
+//    }
+//  ): Promise<string | boolean | undefined>
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {personProperties: {is_authorized: true}})
+```
+
+The same holds for [groups](manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
+
+
+```js
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
+```
+
+**Getting all flag values**
+
+You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
+
+```js
+await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
+# returns dict of flag key and value pairs.
+```
+
+#### Local Evaluation
+
+> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
+
+> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
+
+All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
+
+1. The library must be initialised with a personal API key
+2. You must know all person or group properties the flag depends on.
+
+Then, the flag can be evaluated locally. The method signature looks exactly like above.
+
+```js
+await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'is_authorized': True}})
+# returns string or None
+```
+
+> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `featureFlagsPollingInterval` during client initialisation.
+
+**Restricting evaluation to local only**
+
+Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
+
 
 #### Reloading feature flags
 
@@ -255,3 +332,15 @@ You should call `shutdown` on your program's exit to exit cleanly:
 // Stop pending pollers and flush any remaining events
 client.shutdown()
 ```
+
+
+## Upgrading from V1 to V2
+
+V2.x.x of the Node.js library is completely rewritten in Typescript and is based on a new JS core shared with other JavaScript based libraries with the goal of ensuring new features and fixes reach the different libraries at the same pace.
+
+With the release of V2, the API was kept mostly the same but with some small changes and deprecations:
+
+1. The minimum PostHog version requirement is 1.38
+2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
+2. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
+3. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)

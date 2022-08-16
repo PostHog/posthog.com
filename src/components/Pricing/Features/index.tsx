@@ -49,18 +49,12 @@ const support: IFeature[] = [
     { title: 'Community Slack' },
 ]
 
-const enterpisePlansOffer: IFeature[] = [
+const enterpisePackage: IFeature[] = [
     { title: 'Dedicated support (email, Slack)' },
+    { title: 'SSO SAML' },
+    { title: 'Advanced permissions' },
     { title: 'Team training' },
-    { title: 'Configuration support' },
-    { title: 'SSO/SAML' },
-]
-
-const enterpriseSelfHosted: IFeature[] = [
-    { title: 'Deployment support' },
-    { title: 'Project permissions' },
-    { title: 'Configurable backups' },
-    { title: 'SLA available' },
+    { title: 'Dashboard configuration' },
 ]
 
 const leftCol: IColumn[] = [
@@ -80,13 +74,7 @@ const leftCol: IColumn[] = [
     },
 ]
 
-const rightCol: IColumn[] = [
-    { title: 'Enterprise plans offer:', section: enterpisePlansOffer },
-    {
-        title: 'Plus, on Enterprise (Self-Hosted):',
-        section: enterpriseSelfHosted,
-    },
-]
+const rightCol: IColumn[] = [{ title: 'Enterprise package', section: enterpisePackage }]
 
 const Check = () => {
     return (
@@ -144,20 +132,15 @@ export default function Features() {
     return (
         <div className="bg-primary rounded-[10px] lg:pl-4 lg:pr-2 relative">
             <div className="lg:grid lg:grid-cols-4">
-                <div className="lg:col-span-3">
-                    <div className="xs:grid xs:gap-x-2 sm:gap-x-8 sm:gap-y-4 grid-cols-2 lg:grid-cols-3 p-6 lg:pt-10 pb-0">
+                <div className="lg:col-span-3 lg:border-r border-dashed border-[#5B5B5B]">
+                    <div className="xs:grid xs:gap-x-2 sm:gap-x-8 sm:gap-y-4 grid-cols-2 lg:grid-cols-3 p-6 lg:pt-10 pb-4">
                         {leftCol.map((section) => {
                             return <Section key={section.title} {...section} />
                         })}
                     </div>
-                    <p className="flex items-center px-8 pb-3 lg:pb-0 lg:mb-0 before:w-[9px] before:h-[9px] before:rounded-full before:bg-dark-yellow before:mr-1 text-[12px] text-white font-medium">
-                        <span className="opacity-60 block pl-1">
-                            Currently available on Enterprise (Self-Hosted) only
-                        </span>
-                    </p>
                 </div>
 
-                <div className="sm:grid sm:grid-cols-2 lg:block p-6 lg:py-10 border-t lg:border-t-0 lg:border-l border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
+                <div className="sm:grid sm:grid-cols-2 lg:block p-6 lg:py-10 border-t lg:border-t-0 lg:border-0 border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
                     {rightCol.map((section) => {
                         return <Section key={section.title} {...section} />
                     })}

@@ -2,6 +2,8 @@ import Tutorials from 'components/Tutorials'
 
 export default Tutorials
 
+import { graphql } from 'gatsby'
+
 export const pageQuery = graphql`
     query ($activeFilter: String) {
         tutorials: allMdx(
