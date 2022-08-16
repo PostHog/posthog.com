@@ -15,7 +15,7 @@ Our CEO and co-founder, James Hawkins, recently joined Y Combinator to talk abou
 
 ## 1. Marius Andra
 
-![Marius](../images/blog/posthog-first-five/marius.jpg)
+![Marius](../images/blog/posthog-first-five/marius.png)
 
 James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop, and other programming languages, but they didn't have capacity to complete the work themselves.
 
@@ -29,7 +29,7 @@ And that's how Marius become employee no.1 at PostHog.
 
 ## 2. Eric Duong
 
-![Eric](../images/blog/posthog-first-five/eric.jpg)
+![Eric](../images/blog/posthog-first-five/eric.png)
 
 After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining our now famous [public company handbook](/handbook/).
 
@@ -51,7 +51,7 @@ James: "He was supposed to start on a Monday, but over the weekend he'd already 
 
 ## 3. James Greenhill
 
-![James](../images/blog/posthog-first-five/james.jpg)
+![James](../images/blog/posthog-first-five/james.png)
 
 In the early days, CEO James would check out people who starred the repo and sometimes get in touch to gather feedback. He saw James G was a data engineer at Uber and this piqued his interest.
 
@@ -63,15 +63,15 @@ James: "It was obvious, we were learning tons from him around how to make the pl
 
 ## 4. Lottie Coxon
 
-![Lottie](../images/blog/posthog-first-five/lottie.jpg)
+![Lottie](../images/blog/posthog-first-five/lottie.png)
 
 Lottie is a graphic designer, and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
 
-![Lottie](../images/blog/posthog-first-five/old-logo.png)
+<p align="center">![old posthog logo](../images/blog/posthog-first-five/old-logo.png)</p>
 
 Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
 
-![Lottie](../images/blog/posthog-first-five/logo-meme.png)
+<p align="center">![logo meme](../images/blog/posthog-first-five/logo-meme.png)</p>
 
 It all started with that damned smile... or when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
 
@@ -81,7 +81,7 @@ With that decided, James sought out a graphic designer, and found Lottie on Twit
 
 Like previous hires, Lottie did some paid contract work first and immediately impressed. As Tim said at the time: "Watching Lottie do her job, felt like watching someone perform magic to us."
 
-> **What we learned:** [Talent compounds](/handbook/company/values#talent-compounds. Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking CVs, look for talent that will motivate others to do their best.
+> **What we learned:** [Talent compounds](/handbook/company/values#talent-compounds). Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking CVs, look for talent that will motivate others to do their best.
 
 ## 5. Michael Matloka
 
