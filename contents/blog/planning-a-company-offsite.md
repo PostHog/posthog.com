@@ -62,7 +62,7 @@ In my experience, planning for a majority of unstructured time can lead to reall
 
 One mainstay event that we do at every all-company offsite is a 24-hour hackathon, where our team comes up with the most outlandish ideas possible, and self-organizes into interdisciplinary teams to produce an MVP by the following day. Some core features of our product, like the ability to view your users on a world map; and some seriously silly things, like a children’s book focused on product analytics, have been born from this highly-rated session.
 
-> **Pro Tip:** Encourage people to take time-off either before or after the offsite and use their company-sponsored travel for a lower-cost vacation in an interesting locale. After our Iceland offsite, my teammate Neil and I rented a camper van and traveled around the [iconic Ring Road](https://www.nordicvisitor.com/blog/5-things-to-know-about-icelands-ring-road/) for a week! Other team members arranged their own excursions together. It’s a great way to create social connections.
+> **Pro Tip:** Encourage people to use their company-sponsored travel for a lower-cost vacation in an interesting locale. After our Iceland offsite, my teammate Neil and I rented a camper van and traveled around the [iconic Ring Road](https://www.nordicvisitor.com/blog/5-things-to-know-about-icelands-ring-road/) for a week! Other team members arranged their own excursions together. It’s a great way to create social connections.
 
 ## Budget
 
