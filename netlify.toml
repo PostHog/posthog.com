@@ -2031,413 +2031,158 @@
     from = "/docs/plugins/build"
     to = "/docs/apps/build"
 
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/actions"
-    to = "/manual/actions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/annotations"
-    to = "/manual/annotations"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/application-settings"
-    to = "/manual/application-settings"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/cohorts"
-    to = "/manual/cohorts"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/correlation"
-    to = "/manual/correlation"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/dashboards"
-    to = "/manual/dashboards"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/data-management"
-    to = "/manual/data-management"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/events"
-    to = "/manual/events"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/experimentation"
-    to = "/manual/experimentation"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/feature-flags"
-    to = "/manual/feature-flags"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/funnels"
-    to = "/manual/funnels"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/group-analytics"
-    to = "/manual/group-analytics"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides"
-    to = "/using-posthog"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/insights"
-    to = "/manual/insights"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/lifecycle"
-    to = "/manual/lifecycle"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/organizations-and-projects"
-    to = "/manual/organizations-and-projects"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/paths"
-    to = "/manual/paths"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/manual/persons"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/recordings"
-    to = "/manual/recordings"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/retention"
-    to = "/manual/retention"
 
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/sessions"
-    to = "/manual/sessions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/sso"
-    to = "/manual/sso"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/stickiness"
-    to = "/manual/stickiness"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/subscriptions"
-    to = "/manual/subscriptions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/support"
-    to = "/manual/support"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/toolbar"
-    to = "/manual/toolbar"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/trends"
-    to = "/manual/trends"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/utm-segmentation"
-    to = "/manual/utm-segmentation"
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/subscriptions"
-    to = "/manual/notifications-and-alerts"
-
-# Added: 2022-08-24
-[[redirects]]
-    from = "/docs/data-model"
-    to = "/docs/how-posthog-works/data-model"
-    force = true
-
-# Added: 2022-08-25
-[[redirects]]
-    from = "/docs/self-host/architecture"
-    to = "/docs/how-posthog-works"
-
-# Added: 2022-08-29
-[[redirects]]
-    from = "/handbook/engineering/databases"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
-
-# Added: 2022-08-29
-[[redirects]]
-    from = "/docs/architecture/ingestion-pipeline"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
-
-# Added: 2022-09-01
-[[redirects]]
-    from = "/blog/the-posthog-array-1-39-1"
-    to = "/blog/the-posthog-array-1-39-0"
-    
-# Added: 2022-09-02    
-[[redirects]]
-    from = "/product/experimentation"
-    to = "/product/experimentation-suite"
-
-# Added: 2022-09-11 # Updated: 2022-09-15
-[[redirects]]
-    from = "/handbook/strategy/strategy"
-    to = "/handbook/strategy/overview"
-
-# Added: 2022-09-12
-[[redirects]]
-    from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/product-analytics"
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/engineering/app-east"
-    to = "/handbook/people/team-structure/product-analytics"
-
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/team-east"
-    to = "/handbook/people/team-structure/product-analytics"
+    from = "/manual/actions"
+    to = "/docs/user-guides/actions"
 
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/ingestion"
-    to = "/handbook/people/team-structure/pipeline"
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/app-east"
-    to = "/handbook/people/team-structure/product-analytics"
-
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/app-east/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
-
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/product-analytics/objectives"
+    from = "/manual/annotations"
+    to = "/docs/user-guides/annotations"
 
-# Added: 2022-09-15 # Modified: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/platform"
-    to = "/handbook/people/team-structure/infrastructure"
-
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/platform/mission"
-    to = "/handbook/people/team-structure/infrastructure/mission"
+    from = "/manual/application-settings"
+    to = "/docs/user-guides/application-settings"
 
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/platform/objectives"
-    to = "/handbook/people/team-structure/infrastructure/objectives"
+    from = "/manual/cohorts"
+    to = "/docs/user-guides/cohorts"
 
 
-# Added: 2022-09-16
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/strategy/overview"
-    to = "/handbook/strategy/strategy"
+    from = "/manual/correlation"
+    to = "/docs/user-guides/correlation"
 
-# Added: 2022-09-24
-[[redirects]]
-    from = "/handbook/company/website-design-process"
-    to = "/handbook/designing-posthog-website"
 
-# Added: 2022-09-24
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/design/about-design"
-    to = "/handbook/design/philosophy"
+    from = "/manual/dashboards"
+    to = "/docs/user-guides/dashboards"
 
-# Added: 2022-09-24
-[[redirects]]
-    from = "/handbook/company/working-with-product-design"
-    to = "/handbook/engineering/product-design"
 
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace"
-    to = "/partners"
+    from = "/manual/data-management"
+    to = "/docs/user-guides/data-management"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/altinity"
-    to = "/partners/altinity"
+    from = "/manual/events"
+    to = "/docs/user-guides/events"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/clickhouse"
-    to = "/partners/clickhouse"
+    from = "/manual/experimentation"
+    to = "/docs/user-guides/experimentation"
 
-# Added: 2022-10-01
-[[redirects]]
-    from = "/marketplace/guidelines"
-    to = "/partners/guidelines"
-
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/listing-template"
-    to = "/partners/listing-template"
+    from = "/manual/feature-flags"
+    to = "/docs/user-guides/feature-flags"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/opsverse"
-    to = "/partners/opsverse"
+    from = "/manual/funnels"
+    to = "/docs/user-guides/funnels"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/restack"
-    to = "/partners/restack"
+    from = "/manual/group-analytics"
+    to = "/docs/user-guides/group-analytics"
 
 
-# Added: 2022-10-02
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east/mission"
-    to = "/handbook/people/team-structure/experimentation/mission"
+    from = "/manual/insights"
+    to = "/docs/user-guides/insights"
 
 
-# Added: 2022-10-02
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/app-west/objectives"
-    to = "/handbook/people/team-structure/experimentation/objectives"
+    from = "/manual/lifecycle"
+    to = "/docs/user-guides/lifecycle"
 
-
-# Added: 2022-10-02
-[[redirects]]
-    from = "/docs/integrate/client/browser-extension"
-    to = "/docs/integrate/browser-extension"
 
-# Added: 2022-10-03
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/product-analytics"
-    to = "/handbook/people/team-structure/app-east"
+    from = "/manual/organizations-and-projects"
+    to = "/docs/user-guides/organizations-and-projects"
 
 
-# Added: 2022-10-03
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/experimentation/mission"
-    to = "/handbook/people/team-structure/app-east/mission"
+    from = "/manual/paths"
+    to = "/docs/user-guides/paths"
 
 
-# Added: 2022-10-03
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/product-analytics/mission"
-    to = "/handbook/people/team-structure/app-west/mission"
+    from = "/manual/persons"
+    to = "/docs/user-guides/persons"
 
 
-# Added: 2022-10-03
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/pipeline"
-    to = "/handbook/people/team-structure/ingestion"
+    from = "/manual/recordings"
+    to = "/docs/user-guides/recordings"
 
 
-# Added: 2022-10-03
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/app-west/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
+    from = "/manual/retention"
+    to = "/docs/user-guides/retention"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/altinity"
-    to = "/marketplace/altinity"
+    from = "/manual/sessions"
+    to = "/docs/user-guides/sessions"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/clickhouse"
-    to = "/marketplace/clickhouse"
+    from = "/manual/sso"
+    to = "/docs/user-guides/sso"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/guidelines"
-    to = "/marketplace/guidelines"
+    from = "/manual/stickiness"
+    to = "/docs/user-guides/stickiness"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners"
-    to = "/marketplace"
+    from = "/manual/notifications-and-alerts"
+    to = "/docs/user-guides/subscriptions"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/listing-template"
-    to = "/marketplace/listing-template"
+    from = "/manual/support"
+    to = "/docs/user-guides/support"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/opsverse"
-    to = "/marketplace/opsverse"
+    from = "/manual/trends"
+    to = "/docs/user-guides/trends"
 
 
-# Added: 2022-10-07
+# Added: 2022-08-16
 [[redirects]]
-    from = "/partners/restack"
-    to = "/marketplace/restack"
+    from = "/manual/utm-segmentation"
+    to = "/docs/user-guides/utm-segmentation"
