@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["james-hawkins", "andy-vandervell"]
+author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 categories: ["Inside PostHog"]
@@ -25,7 +25,7 @@ James: "Just from watching him do some actual work with us, it was really clear 
 
 And that's how Marius become employee no.1 at PostHog.
 
-> **What We Learned:** Testing people with paid work is a great way to understand if they're a good fit for your business. The Super Week / Super Day concept is something we've baked into our [hiring process](/handbook/people/hiring-process). Great people will find ways to shine if you give them the chance. 
+> **What we learned:** Testing people with paid work is a great way to understand if they're a good fit for your business. The Super Week / Super Day concept is something we've baked into our [hiring process](/handbook/people/hiring-process). Great people will find ways to shine if you give them the chance. 
 
 ## 2. Eric Duong
 
