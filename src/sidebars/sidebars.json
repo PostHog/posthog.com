@@ -300,6 +300,10 @@
                             "url": "/handbook/engineering/feature-ownership"
                         },
                         {
+                            "name": "Working with product design",
+                            "url": "/handbook/engineering/product-design"
+                        },
+                        {
                             "name": "Releasing a new version",
                             "url": "/handbook/engineering/release-new-version"
                         },
