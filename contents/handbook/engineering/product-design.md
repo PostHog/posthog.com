@@ -14,7 +14,7 @@ If you're improving an existing feature that is popular, you are probably creati
 
 If you're shipping an entirely new feature (ie SQL for PostHog), then you should be figuring out if anyone cares, which usually means creating a v0.1, and releasing it behind a feature flag to some friendly users (pro tip - make friends by being support hero).
 
-Please _communicate_ what your expectation is to product design too here!
+Please _communicate_ to product design what your expectations are!
 
 ### T-shirt sizes
 
