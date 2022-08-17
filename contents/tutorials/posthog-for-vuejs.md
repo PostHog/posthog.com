@@ -210,7 +210,7 @@ export default {
 }
 ```
 
-## Bonus Points—Bind PostHog to Vue Router
+## Bonus Points: Bind PostHog to Vue Router
 
 While PostHog will automatically capture paths, I can optionally bind it to Vue’s built-in router using the **afterEach** function. Additionally, I will mount PostHog inside **nextTick** so that the capture event fires after the page is mounted. 
 
