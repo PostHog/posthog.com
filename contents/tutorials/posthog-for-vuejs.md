@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
 featuredTutorial: false
 date: 2022-08-17
-author: ['matthew-pregasen']
+author: ['mathew-pregasen']
 topics: ['configuration']
 ---
 
@@ -31,7 +31,7 @@ yarn install posthog #for team yarn!
 
 The fun part. Initialization. There are multiple **valid** ways to initialize PostHog. While all are fair game, some may be looked down upon by others—*cough*, React purists, *cough*. I will cover three methods — plugins, provide/inject, and Vue.prototype. Choose what is best for you, considering your Vue version and your codebase’s stylistic choices. 
 
-### Initialization Method 1: Create a Plugin
+### Method 1: Create a Plugin
 
 _Note: For both Vue 3.x and Vue 2.x users_
 
@@ -143,7 +143,7 @@ export default {
 </script>
 ```
 
-### Initialization Method 2: Use provide / inject
+### Method 2: Use provide / inject
 
 _Note: For Vue 3.x users only_
 
