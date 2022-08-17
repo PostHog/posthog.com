@@ -247,5 +247,13 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/jacobwgillespie"
+    },
+    {
+        "handle": "grace-mckenzie",
+        "name": "Grace McKenzie",
+        "role": "Operations Manager",
+        "image": "../../static/images/authors/grace.jpg",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/withgracetoo/"
     }
 ]
