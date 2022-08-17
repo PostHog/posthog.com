@@ -60,7 +60,7 @@ module.exports = exports.onCreateNode = async ({
                     }
                 })
             )
-            node.contributors = contributorsNode
+            createNodeField({ node, name: 'contributors', value: contributorsNode })
         }
     }
     if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
