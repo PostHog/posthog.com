@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import React from 'react'
-import { icons } from './icons'
+import { ProductIcons } from '../../ProductIcons/ProductIcons'
 
 interface IFeature {
     title: string
@@ -16,25 +16,25 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product analytics', icon: icons.analytics },
-    { title: 'Session recording', icon: icons.sessionRecording },
-    { title: 'Feature flags', icon: icons.featureFlags },
-    { title: 'Heatmaps', icon: icons.heatmaps },
-    { title: 'A/B testing', icon: icons.abTesting },
-    { title: 'Correlation insights', icon: icons.correlationInsights },
-    { title: 'Group analytics', icon: icons.groupAnalytics },
-    { title: 'Team collaboration', icon: icons.teamCollaboration },
+    { title: 'Product analytics', icon: ProductIcons.analytics },
+    { title: 'Session recording', icon: ProductIcons.sessionRecording },
+    { title: 'Feature flags', icon: ProductIcons.featureFlags },
+    { title: 'Heatmaps', icon: ProductIcons.heatmaps },
+    { title: 'A/B testing', icon: ProductIcons.abTesting },
+    { title: 'Correlation analysis', icon: ProductIcons.correlationAnalysis },
+    { title: 'Group analytics', icon: ProductIcons.groupAnalytics },
+    { title: 'Team collaboration', icon: ProductIcons.teamCollaboration },
 ]
 
 const dataStack: IFeature[] = [
-    { title: 'Event pipelines', icon: icons.eventPipelines },
-    { title: 'Data warehouse', icon: icons.dataWarehouse },
-    { title: 'SQL access', icon: icons.sqlAccess, enterpriseSelfHostOnly: true },
-    { title: 'App library', icon: icons.appLibrary },
-    { title: 'Event autocapture', icon: icons.eventAutocapture },
-    { title: 'API', icon: icons.api },
-    { title: 'Multiple projects', icon: icons.multipleProjects },
-    { title: 'User permissions', icon: icons.userPermissions },
+    { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
+    { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
+    { title: 'SQL access', icon: ProductIcons.sql, enterpriseSelfHostOnly: true },
+    { title: 'App library', icon: ProductIcons.appLibrary },
+    { title: 'Event autocapture', icon: ProductIcons.eventAutocapture },
+    { title: 'API', icon: ProductIcons.api },
+    { title: 'Multiple projects', icon: ProductIcons.projects },
+    { title: 'User permissions', icon: ProductIcons.userPermissions },
 ]
 
 const planAllowances: IFeature[] = [
@@ -49,18 +49,12 @@ const support: IFeature[] = [
     { title: 'Community Slack' },
 ]
 
-const enterpisePlansOffer: IFeature[] = [
+const enterpisePackage: IFeature[] = [
     { title: 'Dedicated support (email, Slack)' },
+    { title: 'SSO SAML' },
+    { title: 'Advanced permissions' },
     { title: 'Team training' },
-    { title: 'Configuration support' },
-    { title: 'SSO/SAML' },
-]
-
-const enterpriseSelfHosted: IFeature[] = [
-    { title: 'Deployment support' },
-    { title: 'Project permissions' },
-    { title: 'Configurable backups' },
-    { title: 'SLA available' },
+    { title: 'Dashboard configuration' },
 ]
 
 const leftCol: IColumn[] = [
@@ -81,11 +75,7 @@ const leftCol: IColumn[] = [
 ]
 
 const rightCol: IColumn[] = [
-    { title: 'Enterprise plans offer:', section: enterpisePlansOffer },
-    {
-        title: 'Plus, on Enterprise (Self-Hosted):',
-        section: enterpriseSelfHosted,
-    },
+    { title: 'Enterprise package', section: enterpisePackage },
 ]
 
 const Check = () => {
@@ -126,7 +116,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                     : ''
                             }`}
                         >
-                            <span className="w-[32px] flex justify-center items-center flex-shrink-0">
+                            <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">
                                 {icon || <Check />}
                             </span>
                             <Parent url={url}>
@@ -144,20 +134,15 @@ export default function Features() {
     return (
         <div className="bg-primary rounded-[10px] lg:pl-4 lg:pr-2 relative">
             <div className="lg:grid lg:grid-cols-4">
-                <div className="lg:col-span-3">
-                    <div className="xs:grid xs:gap-x-2 sm:gap-x-8 sm:gap-y-4 grid-cols-2 lg:grid-cols-3 p-6 lg:pt-10 pb-0">
+                <div className="lg:col-span-3 lg:border-r border-dashed border-[#5B5B5B]">
+                    <div className="xs:grid xs:gap-x-2 sm:gap-x-8 sm:gap-y-4 grid-cols-2 lg:grid-cols-3 p-6 lg:pt-10 pb-4">
                         {leftCol.map((section) => {
                             return <Section key={section.title} {...section} />
                         })}
                     </div>
-                    <p className="flex items-center px-8 pb-3 lg:pb-0 lg:mb-0 before:w-[9px] before:h-[9px] before:rounded-full before:bg-dark-yellow before:mr-1 text-[12px] text-white font-medium">
-                        <span className="opacity-60 block pl-1">
-                            Currently available on Enterprise (Self-Hosted) only
-                        </span>
-                    </p>
                 </div>
 
-                <div className="sm:grid sm:grid-cols-2 lg:block p-6 lg:py-10 border-t lg:border-t-0 lg:border-l border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
+                <div className="sm:grid sm:grid-cols-2 lg:block p-6 lg:py-10 border-t lg:border-t-0 lg:border-0 border-dashed border-[#5B5B5B] lg:mb-0 mb-4">
                     {rightCol.map((section) => {
                         return <Section key={section.title} {...section} />
                     })}

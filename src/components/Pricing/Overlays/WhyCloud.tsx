@@ -7,21 +7,22 @@ const sections = [
         title: 'Easier',
         features: [
             'No need to hassle with deployment or hosting',
-            'Automatic upgrades - always get the latest version of PostHog',
+            'PostHog Cloud never runs out of space or resources',
+            'Automatic upgrades - always enjoy the latest version of PostHog',
         ],
     },
     {
-        title: 'Cheaper',
+        title: 'Cheaper than self-hosting',
         features: [
             'Because of economies of scale, we can offer lower prices for PostHog Cloud',
-            'No need to pay for separate hosting for a self-hosted instance,',
+            'No need to pay for separate hosting',
         ],
     },
     {
-        title: 'Faster to try',
+        title: 'Faster to kick the tires',
         features: [
             'Sign up and start tracking events as soon as right now',
-            'Ultimately want to self-host, but just interested in trying PostHog? We can help transfer your instance from PostHog Cloud to a self-hosted instance anytime. (Just email us!)',
+            'Ultimately want to self-host, but just interested in trying PostHog? Migrating to a self-hosted instance is easy - just email us!',
         ],
     },
 ]
@@ -88,9 +89,9 @@ export default function WhyCloud({ setOpen, open }: { setOpen: (open: boolean) =
                         </defs>
                     </svg>
                 </button>
-                <h2 className="text-2xl m-0">Why is PostHog Cloud recommended?</h2>
+                <h2 className="text-2xl m-0">Why we recommend PostHog Cloud</h2>
 
-                <h3 className="text-[18px] !text-bold/50 m-0 mt-2">
+                <h3 className="text-lg text-semibold opacity-50 m-0 mt-2">
                     PostHog Cloud is the easiest way to try the PostHog suite.
                 </h3>
                 <ul className="list-none m-0 p-0 mt-6">
@@ -109,7 +110,7 @@ export default function WhyCloud({ setOpen, open }: { setOpen: (open: boolean) =
                                                 className="flex items-start space-x-2 text-gray-accent-light"
                                             >
                                                 <Check className="w-[20px] flex-shrink-0" />
-                                                <span className="text-black font-semibold">{feature}</span>
+                                                <span className="text-black font-medium">{feature}</span>
                                             </li>
                                         )
                                     })}

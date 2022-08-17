@@ -15,7 +15,7 @@ export const wrapPageElement = ({ element, props }) => {
     initKea(true, props.location)
     return wrapElement({
         element:
-            /^handbook|^docs\/(?!api)/.test(slug) &&
+            /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
             !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
                 <HandbookLayout {...props} />
             ) : (
@@ -46,7 +46,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (/^handbook|^docs|^blog|^integrations|^product|^tutorials|^questions/.test(slug) &&
+            (/^handbook|^docs|^blog|^integrations|^product|^tutorials|^questions|^using-posthog|^manual/.test(slug) &&
                 (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
             'light'
     } catch (err) {}

@@ -39,7 +39,7 @@ const Home = () => {
                 <Tutorials
                     title="Tutorials"
                     subtitle="See PostHog in action"
-                    cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
+                    cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
                 />
                 <CTA />
             </Layout>

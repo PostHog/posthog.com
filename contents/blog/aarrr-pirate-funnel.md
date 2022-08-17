@@ -1,6 +1,6 @@
 ---
 date: 2022-08-03
-title: "The AARRR Pirate Funnel: A complete guide to pirate metrics"
+title: "Building an AARRR pirate funnel (how and why)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -39,7 +39,7 @@ McClure visualized the AARRR funnel in a table like the one below.
 This version is what the funnel might look like for our product, PostHog, an all-in-one product platform comprising [product analytics](/product), [session recording](/product/session-recording), [feature flags](/product/feature-flags) and [more](/blog/using-posting) – note, the figures here are purely illustrative.
 
 | **Category** | **User Status**                                      | **Conversion** |
-|:------------:|:----------------------------------------------------:|:--------------:|
+|--------------|------------------------------------------------------|----------------|
 | Acquisition  | Visits website                                       | 100%           |
 | Acquisition  | Enters signup funnel                                 | 30%            |
 | Acquisition  | Creates account                                      | 10%            |
@@ -187,19 +187,19 @@ At PostHog, we're [organized into small teams](/handbook/people/team-structure/w
 Here's how our earlier table might look if we assigned different PostHog teams to it:
 
 | **Category** | **User Status**                                      | **Team**                   |
-|:------------:|:----------------------------------------------------:|:--------------------------:|
+|--------------|------------------------------------------------------|----------------------------|
 | Acquisition  | Visits website                                       | Marketing                  |
-| Acquisition  | Enters signup funnel                                 | Marketing / Website & Docs |
-| Acquisition  | Creates account                                      | Website & Docs             |
+| Acquisition  | Enters signup funnel                                 | Marketing / Website        |
+| Acquisition  | Creates account                                      | Website                    |
 | -            | -                                                    | -                          |
 | Activation   | Deploys product and ingests events                   | Platform                   |
-| Activation   | Uses a core feature.                                 | Growth / App Teams         |
+| Activation   | Uses a core feature.                                 | Growth / App               |
 | -            | -                                                    | -                          |
-| Retention    | Logs in at least once per week                       | Growth / App Teams         |
-| Retention    | Invites a colleague / creates a team                 | Growth / App Teams         |
+| Retention    | Logs in at least once per week                       | Growth / App               |
+| Retention    | Invites a colleague / creates a team                 | Growth / App               |
 | -            | -                                                    | -                          |
-| Revenue      | User starts paying / enters card details             | Growth / Customer Success  |
-| Revenue      | User continues to pay long term                 | Growth / Customer Success / Platform  |
+| Revenue      | User starts paying / enters card details             | Growth / Customer          |
+| Revenue      | User continues to pay long term                      | Customer / Platform        |
 | -            | -                                                    |                            |
 | Referral     | Recommends to a friend                               | All                        |
 | Referral     | Reviews product                                      | Marketing                  |

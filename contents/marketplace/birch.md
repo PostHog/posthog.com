@@ -22,4 +22,4 @@ $25/month
 
 ## Contact
 
-[Email to get started](marketplace+birch@posthog.com)
+[Email to get started](mailto:marketplace+birch@posthog.com)

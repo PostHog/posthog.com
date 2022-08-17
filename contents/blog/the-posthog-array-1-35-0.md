@@ -16,12 +16,12 @@ PostHog 1.35.0 introduces audit logs and a brand new world map view to help you 
 We've also recently launched a new newsletter, which we send once every two weeks! [Subscribe today](/newsletter) to hear about our latest news, what we're reading and how to get the most out of PostHog. Each issue also includes a bonus hedgehog cartoon!
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> If you use SAML, please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>.
+<b>IMPORTANT!</b> If you use SAML, please read our <a href="#deprecation-and-removal-notices">deprecation notices below</a>.
 </blockquote>
 
 ## PostHog 1.35.0 release notes
 
-> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host/configure/upgrading-posthog).
+> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 - [Activity log](#new-activity-log)
@@ -49,13 +49,13 @@ SAML has been a big focus point in this update (check the deprecation notices be
 You can configure up to one SAML provider per organization, but check out our [SSO docs](/sso) for more information on how to get started with SAML on PostHog. 
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> If you use SAML please read our <a href="deprecation-and-removal-notices">deprecation notices below</a>. SAML support is only available on Enterprise plans.
+<b>IMPORTANT!</b> If you use SAML please read our <a href="#deprecation-and-removal-notices">deprecation notices below</a>. SAML support is only available on Enterprise plans.
 </blockquote>
 
 ### Improvement: Project homepage updates
 ![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
 
-In the last update, we introduced [project homepages](blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
+In the last update, we introduced [project homepages](/blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
 
 We've added a new homepage card which lists your recently viewed insights to the project homepage, as well as lists of recent recordings and newly identified persons. All of this is to help give you quick access to commonly-visited pages and recent insights.
 

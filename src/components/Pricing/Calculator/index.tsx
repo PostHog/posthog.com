@@ -14,6 +14,9 @@ import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 import Link from 'components/Link'
+import Toggle from 'components/Toggle'
+import { Info } from 'components/Icons/Icons'
+import { posthogAnalyticsLogic } from '../../../logic/posthogAnalyticsLogic'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -157,11 +160,24 @@ const selfHostedEnterpriseOptions = {
     },
 }
 
-export default function Calculator({ selfHost, enterprise }: { selfHost: boolean; enterprise: boolean }) {
+export default function Calculator({
+    selfHost,
+    enterprise,
+    enterpriseMode,
+    handleEnterpriseModeChange,
+    setCurrentModal,
+}: {
+    selfHost: boolean
+    enterprise: boolean
+    enterpriseMode: boolean
+    handleEnterpriseModeChange: (checked: boolean) => void
+    setCurrentModal: (currentModal: string) => void
+}) {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
+    const [showSlider, setShowSlider] = useState(false)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
-    const [showFullBreakdown, setShowFullBreakdown] = useState(false)
-    const breakdown = showFullBreakdown ? pricing[pricingOption] : pricing[pricingOption]?.slice(0, 3)
+    const breakdown = pricing[pricingOption]
     const monthlyMinimumPrice =
         optionDetails &&
         optionDetails.minimumPrice.toLocaleString('en-US', {
@@ -204,40 +220,14 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
         <motion.div
             initial={{ opacity: 0, translateY: -20 }}
             animate={{ opacity: 1, translateY: 0 }}
-            className="py-7 px-8 bg-white shadow-lg rounded-md md:max-w-[476px] w-full mx-auto"
+            className="bg-transparent w-full"
         >
-            <div className="flex">
-                <span className="inline-block mr-2">{optionDetails?.icon}</span>
-                <div>
-                    <div className="flex items-center flex-wrap">
-                        <h3 className="m-0 text-xl font-black mr-2">{optionDetails?.title}</h3>
-                        <span
-                            className={`text-[12px] py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
-                        >
-                            {optionDetails?.badge}
-                        </span>
-                    </div>
-                    <p className="m-0 text-black/50 font-medium text-sm">{optionDetails?.subtitle}</p>
-                </div>
-            </div>
-            <div className="mt-5">
-                <div className="flex items-center space-x-2 justify-between mb-3">
-                    <p className="text-[15px] font-bold m-0">Monthly event volume</p>
-                    <p className="text-[15px] font-bold m-0">
-                        {prettyInt(sliderCurve(sliderValue))} events
-                        <span className="text-[13px] opacity-50">/mo</span>
-                    </p>
-                </div>
-                <div className="mb-12">
-                    <PricingSlider
-                        marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
-                        min={1000000}
-                        max={1000000000}
-                    />
-                </div>
+            <div>
+                <h4 className="text-lg font-bold m-0 ">Pricing breakdown</h4>
+                <p className="text-sm mb-2 text-semibold">Pay per event</p>
                 {pricingOption && (
                     <>
-                        <ul className="grid gap-y-2 m-0 p-0">
+                        <ul className="grid gap-y-1 m-0 p-0">
                             {breakdown.map((price, index) => {
                                 const label = pricingLabels[price[0]]
                                 return (
@@ -245,71 +235,84 @@ export default function Calculator({ selfHost, enterprise }: { selfHost: boolean
                                         key={index}
                                         className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                                     >
-                                        <p className="text-[14px] font-medium m-0">{label || '100 million - 1 billion'}</p>
                                         <p className="text-[14px] font-medium m-0">
-                                            {price[1] === 0 ? 'Included' : price[1]}
+                                            {label || '100 million - 1 billion'}
+                                        </p>
+                                        <p className="text-[14px] font-medium m-0">
+                                            {price[1] === 0
+                                                ? enterpriseMode
+                                                    ? '$450 (flat fee)'
+                                                    : 'Free'
+                                                : `$${price[1]}`}
                                         </p>
                                     </li>
                                 )
                             })}
                         </ul>
-                        {!showFullBreakdown && (
-                            <button
-                                onClick={() => setShowFullBreakdown(!showFullBreakdown)}
-                                className="p-1.5 w-full font-semibold text-black/50 bg-tan hover:bg-gray-accent-light rounded-sm mt-3 text-sm"
-                            >
-                                Show full breakdown
-                            </button>
-                        )}
-
-                        <div className="flex items-center space-x-2 justify-between mt-4 mb-2 pb-2 border-b border-gray-accent-light border-dashed">
-                            <p className="text-[15px] font-bold m-0">+ Monthly minimum</p>
-                            <p className="text-[16px] font-bold m-0">{monthlyMinimumPrice}</p>
-                        </div>
                     </>
                 )}
-                <div className="flex space-x-2 justify-between items-center mt-2">
-                    <h4 className="text-lg m-0 font-extrabold leading-tight">
-                        Estimated price
-                        <br />
-                        <span className="text-[13px] opacity-60 font-bold">
-                            for {prettyInt(sliderCurve(sliderValue))} events
-                        </span>
-                        <span className="text-[12px] font-semibold opacity-50">/mo</span>
-                    </h4>
-                    <p className="text-[20px] font-bold">
-                        ${finalMonthlyCost}
-                        <span className="font-medium text-[15px] opacity-50">/mo</span>
-                    </p>
-                </div>
-                <div className="mt-4">
-                    <TrackedCTA
-                        event={{ name: `clicked ${optionDetails?.mainCTA.title}`, type: pricingOption }}
-                        type="primary"
-                        width="full"
-                        className="shadow-md"
-                        to={optionDetails?.mainCTA.url}
-                    >
-                        {optionDetails?.mainCTA.title}
-                    </TrackedCTA>
-                    {optionDetails?.demoCTA && (
-                        <TrackedCTA
-                            event={{ name: `clicked ${optionDetails?.demoCTA?.title}`, type: pricingOption }}
-                            to={optionDetails?.demoCTA?.url}
-                            className="bg-white !border border-gray-accent !text-black mt-3 shadow-md"
-                            width="full"
-                        >
-                            {optionDetails?.demoCTA?.title}
-                        </TrackedCTA>
-                    )}
-                </div>
 
-                <p className="text-sm text-center pt-4 pb-0 m-0 text-black/50">
-                    Not sure about your event volume?{' '}
-                    <Link to="/blog/calculating-events-from-users" className="font-bold">
-                        Here's a handy guide.
+                <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
+                    B2C company with millions of users?
+                    <br />
+                    <Link to="/signup/b2c" className="font-bold">
+                        Apply for a volume pricing plan
                     </Link>
                 </p>
+
+                <div className="pt-4 border-t border-gray-accent-light border-dashed">
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-x-1">
+                            <h4 className="text-base m-0">Enterprise package</h4>
+                            <button
+                                className="font-semibold text-black text-sm"
+                                onClick={() => setCurrentModal('enterprise')}
+                            >
+                                <Info />
+                            </button>
+                        </div>
+                        <Toggle checked={enterpriseMode} onChange={handleEnterpriseModeChange} />
+                    </div>
+                    <p className="text-sm m-0 text-black/60 mt-1.5 mb-0">
+                        Starts at $450/mo and comes with SSO, advanced permissions, and a dedicated Slack channel for
+                        support
+                    </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-gray-accent-light border-dashed">
+                    {(!showSlider ||
+                        (posthog?.isFeatureEnabled && !posthog?.isFeatureEnabled('pricing-page-slider'))) && (
+                        <button onClick={() => setShowSlider(true)} className="text-red text-sm font-bold">
+                            Calculate your monthly price
+                        </button>
+                    )}
+                    <div
+                        style={{
+                            display:
+                                showSlider ||
+                                (posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('pricing-page-slider'))
+                                    ? 'block'
+                                    : 'none',
+                        }}
+                    >
+                        <h4 className="text-base m-0 pb-1">Calculate your monthly price</h4>
+                        <div>
+                            <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
+                            <div className="mb-8 mt-3">
+                                <PricingSlider
+                                    marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
+                                    min={1000000}
+                                    max={1000000000}
+                                />
+                            </div>
+                            <p className="text-sm pb-0 m-0">
+                                <Link className="font-semibold" to="/blog/calculating-events-from-users">
+                                    How to estimate your event volume
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </motion.div>
     )
