@@ -459,6 +459,7 @@ export default function PostLayout({
     children,
     sidebar,
     contentWidth = 650,
+    menuWidth = 265,
     questions,
     menu,
     article = true,
@@ -567,14 +568,14 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `265px 1fr 1fr 265px`
+                        ? `${menuWidth}px 1fr 1fr 265px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                        <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>

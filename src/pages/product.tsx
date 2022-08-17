@@ -145,6 +145,7 @@ export default function Product() {
                 article={false}
                 contentContainerClassName="w-full pb-12"
                 menuType="scroll"
+                menuWidth={350}
             >
                 <div className="sticky top-0 z-10 bg-tan px-5 lg:hidden mb-6 py-2">
                     <Slider ref={sliderRef} {...sliderSettings}>
