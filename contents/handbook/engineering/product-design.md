@@ -18,7 +18,7 @@ Please _communicate_ to product design what your expectations are!
 
 ### T-shirt sizes
 
-The more complex a feature to implement, the more likely it is that involving product design will make you faster.
+The more complex a feature is to implement, the more likely it is that involving product design will make you faster.
 
 ### Your design skill
 
