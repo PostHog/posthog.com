@@ -406,6 +406,9 @@
 /docs/user-guides/trends /manual/trends 301
 /docs/user-guides/utm-segmentation /manual/utm-segmentation 301
 /docs/user-guides/subscriptions /manual/notifications-and-alerts 301
+/plugins /apps 301
 /plugins/* /apps/:splat 301
+/docs/tutorials /tutorials 301
 /docs/tutorials/* /tutorials/:splat 301
+/integrations /apps 301
 /integrations/* /apps/:splat 301
