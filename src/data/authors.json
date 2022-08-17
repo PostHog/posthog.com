@@ -241,6 +241,14 @@
         "link_url": "https://www.linkedin.com/in/igorkotua/"
     },
     {
+        "handle": "matthew-pregasen",
+        "name": "Matthew Pregasen",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/mathew-pregasen-9a993948/"
+    },
+    {
         "handle": "jacob-gillespie",
         "name": "Jacob Gillespie",
         "role": "Co-founder/CTO of Depot",
