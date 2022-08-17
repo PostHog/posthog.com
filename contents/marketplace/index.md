@@ -33,7 +33,7 @@ They help large organizations to deploy, manage and scale their PostHog instance
 
 Deploy PostHog to your own cloud (AWS, GCP) and forget about the hassle of upgrades.
 
-**Services:** PostHog as a managed service / deployment help
+**Services:** PostHog as a managed service / Deployment help
 
 <hr />
 
@@ -57,10 +57,12 @@ With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without 
 
 **Services:** PostHog as a managed service / GDPR, SOC 2 and HIPAA compliant deployment
 
+<hr />
+
 <img src="/images/marketplace/opsverse_icon.png" alt="OpsVerse" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
 
 #### [**OpsVerse**](../marketplace/opsverse)
 
-Get a fully managed PostHog in the cloud region of your choice or within your own cloud.
+Get a fully managed PostHog instance in the cloud region of your choice, or within your own cloud.
 
-**Services:** PostHog as a managed service with data locality
+**Services:** PostHog as a managed service / Data locality
