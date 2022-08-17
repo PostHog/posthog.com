@@ -24,22 +24,6 @@ module.exports = exports.createPages = async ({ actions: { createPage, createRed
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
-    // Redirects
-    createRedirect({
-        fromPath: `/next-steps/*`,
-        toPath: `/next-steps`,
-    })
-
-    createRedirect({
-        fromPath: `/question/*`,
-        toPath: `/question `,
-    })
-
-    createRedirect({
-        fromPath: `/careers/*`,
-        toPath: `/careers`,
-    })
-
     const result = await graphql(`
         {
             allMdx(
