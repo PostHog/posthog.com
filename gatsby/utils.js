@@ -4,7 +4,11 @@ const replacePath = (path) => (path === `/` ? path : path.replace(/\/$/, ``))
 function flattenMenu(items, breadcrumb = []) {
     return items.reduce((acc, item) => {
         if (item.url) {
-            acc.push({ url: item.url, name: item.name, breadcrumb })
+            acc.push({
+                url: item.url,
+                name: item.name,
+                breadcrumb: [...breadcrumb, { url: item.url, name: item.name }],
+            })
         }
         if (item.children) {
             acc.push(

@@ -70,7 +70,7 @@ It’s not just those events that you have explicitly captured that are availabl
 ## CRM Sync
 Finally, most of the focus up to now has been on how to see this data in Variance or Slack, but for revenue teams, it’s also critical they can see that data in their CRM. To that end, we have a super simple way to keep data synced to Hubspot and Salesforce. 
 
-Say you want to keep track of the PQL progress for all your accounts in [Salesforce](/apps/salesforce-connector) or [Hubspot](apps/hubspot-connector). All you have to do is find the property that Milestone generates on the Account and toggle on syncing.
+Say you want to keep track of the PQL progress for all your accounts in [Salesforce](/apps/salesforce-connector) or [Hubspot](/apps/hubspot-connector). All you have to do is find the property that Milestone generates on the Account and toggle on syncing.
 
 ![Variance Connector for PostHog](../images/tutorials/variance/variance-connector-posthog-5.png)
 

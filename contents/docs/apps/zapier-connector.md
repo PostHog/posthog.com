@@ -1,6 +1,5 @@
 ---
 title: Zapier Connector
-layout: app
 github: https://github.com/PostHog/posthog-zapier/
 installUrl: https://zapier.com/apps/posthog/integrations
 thumbnail: ../../apps/thumbnails/zapier.svg
@@ -25,7 +24,7 @@ The following steps are at your disposal:
 
 Connecting Zapier requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need a Zapier account which can connect to the other services you want to use via this app.
 

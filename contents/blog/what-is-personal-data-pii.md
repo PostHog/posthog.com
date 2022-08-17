@@ -57,7 +57,7 @@ Protected Health Information (PHI) is a _type_ of PII as defined by the US HIPAA
 
 PHI that's connected to individual identifiers, such as name, address, etc.,  must be treated with extreme care under HIPAA. Penalties for breaches include fines and even jail time in extreme cases.
 
-If HIPAA compliance is a concern for your business, read our guide to the [best HIPAA-compliant analytics tools](blog/best-hipaa-compliant-analytics-tools). And, in case you were wondering, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant).
+If HIPAA compliance is a concern for your business, read our guide to the [best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools). And, in case you were wondering, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant).
 
 ## What is personal data?
 
@@ -106,7 +106,7 @@ The European Commission published [guidance on the free flow of non-personal dat
 
 ## PostHog and privacy compliance
 
-PostHog is an [open-source product analytics platform](/best-open-source-analytics-tools) you can self-host, so data never has to leave your infrastructure. This is ideal for businesses who handle sensitive data but don't want to sacrifice advanced features like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Funnel Analysis](/product/funnels), and [Heatmaps](/product/heatmaps) - all of which are included in PostHog.
+PostHog is an [open-source product analytics platform](/blog/best-open-source-analytics-tools) you can self-host, so data never has to leave your infrastructure. This is ideal for businesses who handle sensitive data but don't want to sacrifice advanced features like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Funnel Analysis](/product/funnels), and [Heatmaps](/product/heatmaps) - all of which are included in PostHog.
 
 Read our [privacy compliance documentation](/docs/privacy), which covers the [GDPR](/docs/privacy/gdpr-compliance), [HIPAA](/docs/privacy/hipaa-compliance) and [CCPA](/docs/privacy/ccpa-compliance) for more information on how to deploy PostHog in a privacy-compliant manner.
 

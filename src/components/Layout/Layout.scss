@@ -473,24 +473,6 @@ abbr[title] {
     cursor: help;
     text-decoration: none;
 }
-thead {
-    text-align: left;
-}
-td,
-th {
-    text-align: left;
-    border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-    padding-top: 0.5rem;
-    padding-bottom: calc(0.5rem - 1px);
-}
-th:first-child,
-td:first-child {
-    padding-left: 0;
-}
-th:last-child,
-td:last-child {
-    padding-right: 0;
-}
 
 /* CUSTOM */
 

@@ -66,6 +66,7 @@ import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
+import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { AllPlans } from './components/Pricing/AllPlans'
@@ -84,10 +85,12 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
+import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
+import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
@@ -180,6 +183,7 @@ export const shortcodes = {
     OtherFeaturesBlock,
     OverflowXSection,
     PageHeader,
+    Popover,
     PostCard,
     PostLayout,
     AllPlans,
@@ -198,10 +202,12 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
+    ProductIcons,
     ProductPage,
     ProductSectionHeader,
     Question,
     RocketHorizontalRule,
+    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,

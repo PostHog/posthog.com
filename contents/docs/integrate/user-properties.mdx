@@ -72,7 +72,7 @@ P1 refers to Person or 1's property and P2 to Person or distinct id 2's property
 13 | yes       | yes       | set_once  | set_once  | after              | 2
 
 
-> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples using our [python library](docs/integrate/server/python):
+> **Note:** Here with equal timestamps and the current call (set/set_once) equal to the previous (rows 4 and 11) this means that we could end up using either person's value. We will optimize for efficiency here to minimize database writes (similarly to why set/set_once doesn't override). To elaborate look at the following examples using our [python library](/docs/integrate/server/python):
 
 For `identify` this series of calls would mean we end up with `location` being `Rome` or `New York`.
 ```python

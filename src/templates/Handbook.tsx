@@ -24,7 +24,7 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
 
-export const HandbookSidebar = ({ contributors, title, location }) => {
+export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
         <>
             {contributors && (
@@ -34,7 +34,7 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,
-                            image: avatar?.publicURL,
+                            image: avatar,
                         }))}
                     />
                 </SidebarSection>
@@ -42,13 +42,27 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
+
+            {related && (
+                <SidebarSection title="Related articles">
+                    <ul className="p-0 space-y-1.5">
+                        {related.map(({ childMdx }) => (
+                            <li key={childMdx.fields.slug} className="list-none">
+                                <Link to={childMdx.fields.slug} className="text-sm block">
+                                    {childMdx.frontmatter.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </SidebarSection>
+            )}
         </>
     )
 }
 
 export default function Handbook({
     data: { post, countries, nextPost },
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
     const { hash } = useLocation()
@@ -59,7 +73,8 @@ export default function Handbook({
         contributors,
         fields: { slug },
     } = post
-    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail } = frontmatter
+    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
+        frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -86,6 +101,7 @@ export default function Handbook({
             return <iframe {...props} />
         }
     }
+
     const components = {
         Team,
         iframe: Iframe,
@@ -129,12 +145,19 @@ export default function Handbook({
                     title={title}
                     filePath={filePath}
                     questions={
-                        <div id="squeak-questions">
+                        <div id="squeak-questions" className="pb-8">
                             <CommunityQuestions />
                         </div>
                     }
                     menu={menu}
-                    sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
+                    sidebar={
+                        <HandbookSidebar
+                            contributors={contributors}
+                            title={title}
+                            location={location}
+                            related={related}
+                        />
+                    }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
@@ -144,7 +167,7 @@ export default function Handbook({
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2 mt-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
@@ -207,7 +230,9 @@ export const query = graphql`
                 url
                 username
                 avatar {
-                    publicURL
+                    childImageSharp {
+                        gatsbyImageData(width: 38, height: 38)
+                    }
                 }
                 teamData {
                     name
@@ -231,6 +256,16 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE, width: 36)
+                    }
+                }
+                related {
+                    childMdx {
+                        fields {
+                            slug
+                        }
+                        frontmatter {
+                            title
+                        }
                     }
                 }
                 installUrl

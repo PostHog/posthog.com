@@ -1,6 +1,5 @@
 ---
 title: GitHub Star Sync
-layout: app
 github: https://github.com/PostHog/github-star-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Star+Sync
 thumbnail: ../../apps/thumbnails/github.png
@@ -16,7 +15,7 @@ The GitHub Star Sync app enables you to track your GitHub stars as an event in P
 
 The GitHub Star Sync app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Redshift Import app?
 
