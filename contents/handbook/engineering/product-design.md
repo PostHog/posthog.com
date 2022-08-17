@@ -12,7 +12,7 @@ As the feature owner, you should make a choice if you're building a very basic f
 
 If you're improving an existing feature that is popular, you are probably creating v2.
 
-If you're shipping an entirely new feature (ie SQL for PostHog), then you should be figuring out if anyone cares, which usually means creating a v0.1, and releasing it behind a feature flag to some friendly users (pro tip - make friends by being support hero).
+If you're shipping an entirely new feature (i.e. SQL for PostHog), then you should figure out if anyone cares, which usually means creating a v0.1, and releasing it behind a feature flag to some friendly users (pro tip: make friends by being support hero).
 
 Please _communicate_ to product design what your expectations are!
 
