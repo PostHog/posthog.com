@@ -4,7 +4,7 @@ const slugify = require('slugify')
 const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
 
-module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
+module.exports = exports.createPages = async ({ actions: { createPage, createRedirect }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -23,6 +23,22 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+
+    // Redirects
+    createRedirect({
+        fromPath: `/next-steps/*`,
+        toPath: `/next-steps`,
+    })
+
+    createRedirect({
+        fromPath: `/question/*`,
+        toPath: `/question `,
+    })
+
+    createRedirect({
+        fromPath: `/careers/*`,
+        toPath: `/careers`,
+    })
 
     const result = await graphql(`
         {
