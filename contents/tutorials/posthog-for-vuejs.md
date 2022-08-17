@@ -2,7 +2,7 @@
 title: PostHog for VueJS users – a code-snippet walkthrough 
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/cookieless-tracking.png
+featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
 featuredTutorial: false
 date: 2022-08-17
 author: ['matthew-pregasen']
@@ -19,7 +19,7 @@ Today, I will cover implementing PostHog in Vue, tracing over both **Vue 3.x** a
 
 ## Installing PostHog
 
-First, I will install PostHog using either **npm** or **yarn**. 
+First, I will install PostHog using either npm or yarn. 
 
 ```bash
 npm install posthog #for team npm! 
@@ -29,11 +29,11 @@ yarn install posthog #for team yarn!
 
 ## Initializing PostHog
 
-The fun part. Initialization. There are multiple **valid** ways to initialize PostHog. While all are fair game, some may be looked down upon by others—*cough*, React purists, *cough*. I will cover three methods — **plugins**, **provide/inject**, and **Vue.prototype**. Choose what is best for you, considering your Vue version and your codebase’s stylistic choices. 
+The fun part. Initialization. There are multiple **valid** ways to initialize PostHog. While all are fair game, some may be looked down upon by others—*cough*, React purists, *cough*. I will cover three methods — plugins, provide/inject, and Vue.prototype. Choose what is best for you, considering your Vue version and your codebase’s stylistic choices. 
 
 ### Initialization Method 1: Create a Plugin
 
-**For both Vue 3.x and Vue 2.x users** 
+_Note: For both Vue 3.x and Vue 2.x users_
 
 I will begin by spawning a plugins folder from within my src. You may already have one! 
 
@@ -43,16 +43,16 @@ cd plugins
 touch posthog.js 
 ```
 
-**Import Vue**
+#### Step 1: Import Vue
 
-In **posthog.js**, I will import PostHog from the previously installed package **posthog-js**. 
+In `posthog.js`, I will import PostHog from the previously installed package `posthog-js`. 
 
 ```jsx
 //./plugins/posthog.js
 import posthog from "posthog-js";
 ```
 
-**Initialize the Plugin** 
+#### Step 2: Initialize the Plugin 
 
 Next, I will create a plugin and assign PostHog to Vue’s global properties. The code will differ depending on my version of Vue. 
 
@@ -92,9 +92,9 @@ export default {
 };
 ```
 
-**Finally, activate the plugin.**
+#### Step 3: Activate the plugin
 
-I am going to navigate to where I initialize my app—for me, that’s **index.js** for my **Vue 3.x** app and main.js for my **Vue 2.x** app. For you, fair chance it will be in the same. 
+I am going to navigate to where I initialize my app — for me, that’s `index.js` for my Vue 3.x app and `main.js` for my Vue 2.x app. For you, fair chance it will be in the same. 
 
 Here, I will add the following lines of code: 
 
@@ -118,7 +118,7 @@ import posthogPlugin from "./plugins/posthog"; // import the plugin
 Vue.use(posthogPlugin); // install the plugin, before new Vue()
 ```
 
-**That’s it!** Now I can use PostHog throughout my Vue app using **this.$posthog**. Note, the **$** prefix is necessary—if you’re actually on the fence over which method to use, choose this technique as PostHog is worth some serious **💵**. 😉. 
+**That’s it!** Now I can use PostHog throughout my Vue app using `this.$posthog`. Note, the `$` prefix is necessary — if you’re actually on the fence over which method to use, choose this technique as PostHog is worth some serious 💵. 😉. 
 
 ```jsx
 //component.vue
@@ -145,11 +145,11 @@ export default {
 
 ### Initialization Method 2: Use provide / inject
 
-**For Vue 3.x users only.** 
+_Note: For Vue 3.x users only_
 
-With **Vue 3.x**, developers can use **provide()** and **inject()** to pipe global values into any component without prop drilling. And if you don’t know what prop drilling is, good for you.
+With Vue 3.x, developers can use `provide()` and `inject()` to pipe global values into any component without prop drilling. And if you don’t know what prop drilling is, good for you.
 
-**First, initialize Vue.**
+#### Step 1: Initialize Vue
 
 Prior to mounting my app, I will (i) import PostHog, (ii) initialize it, and (iii) provide it to my app. This **must** be done *before* I mount my app — if I provide PostHog *after* mounting it, PostHog will not be predictably available. 
 
@@ -165,7 +165,9 @@ posthog.init("<YOUR POSTHOG PUBLIC KEY>", {
 app.provide("posthog", posthog);
 ```
 
-**Then, inject**. In any Vue file, I can inject PostHog and use it via **this.posthog**. No **$** prefix. Arguably, this is the preferable method if you’re humble like J Cole. 
+#### Step 2: Inject in any Vue file
+
+I can inject PostHog and use it via `this.posthog`. No `$` prefix. Arguably, this is the preferable method if you’re humble like J Cole. 
 
 ```jsx
 //component.vue
@@ -187,18 +189,18 @@ While this method is more declarative — as you need to inject PostHog into eve
 
 ### Method 3: Use Vue.prototype
 
-**For Vue 2.x users only**. 
+_Note: For Vue 2.x users only_ 
 
-While **Vue 3.x** dramatically clamped down on global variables, in **Vue 2.x**, you can initialize PostHog by using **Object.defineProperty** and **Vue.prototype**. 
+While Vue 3.x dramatically clamped down on global variables, in Vue 2.x, you can initialize PostHog by using `Object.defineProperty` and `Vue.prototype`. 
 
-**Anywhere, declare:**  
+Anywhere, declare: 
 
 ```jsx
 import posthog from "posthog-js";
 Object.defineProperty(Vue.prototype, '$posthog', { value: posthog });
 ```
 
-**Then, access PostHog**. I can do this by calling **this.$posthog**. 
+Then, access PostHog. I can do this by calling `this.$posthog`. 
 
 ```jsx
 //component.vue
@@ -212,7 +214,7 @@ export default {
 
 ## Bonus Points: Bind PostHog to Vue Router
 
-While PostHog will automatically capture paths, I can optionally bind it to Vue’s built-in router using the **afterEach** function. Additionally, I will mount PostHog inside **nextTick** so that the capture event fires after the page is mounted. 
+While PostHog will automatically capture paths, I can optionally bind it to Vue’s built-in router using the `afterEach` function. Additionally, I will mount PostHog inside `nextTick` so that the capture event fires after the page is mounted. 
 
 **Vue 3.x:** 
 
@@ -246,7 +248,7 @@ export default new Router({
 });
 ```
 
-## That’s it! Now we can use PostHog to Capture Events
+## Conclusion
 
 Here’s a simple example of me using PostHog to capture a barebones login button. 
 
