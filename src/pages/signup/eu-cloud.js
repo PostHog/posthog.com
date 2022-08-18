@@ -45,8 +45,8 @@ export default function SelfHost() {
 
                 <div className="max-w-5xl mx-auto mt-12">
 
-                    <div className="md:flex gap-8">
-                        <aside className="grow-0 shrink-0 basis-[428px]">
+                    <div className="md:flex gap-8 xl:gap-16">
+                        <aside className="grow-0 shrink-0 basis-[428px] pt-6">
                 
                             <StaticImage
                                 width={428}
