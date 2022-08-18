@@ -64,7 +64,7 @@ const ResponseFeedback: React.FC<{ title: string; onSubmit: (response: string) =
             <form onSubmit={handleSubmit} className="w-full space-y-3">
                 <h3 className=" text-xlfont-bold m-0">{title}</h3>
                 <textarea
-                    className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-sm"
+                    className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-sm dark:bg-white/10 dark:text-white"
                     rows={3}
                     onChange={(event) => setFeedback(event.target.value)}
                     autoFocus
