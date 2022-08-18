@@ -121,7 +121,7 @@ const Search = () => {
                         <Form
                             onSubmit={handleSqueakSubmit}
                             apiHost={
-                                process.env.CONTEXT === 'production'
+                                process.env.GATSBY_CONTEXT === 'production'
                                     ? 'https://squeak.cloud'
                                     : 'https://staging.squeak.cloud'
                             }
@@ -301,7 +301,7 @@ export default function FAQ() {
                         }
                         slug={null}
                         apiHost={
-                            process.env.CONTEXT === 'production'
+                            process.env.GATSBY_CONTEXT === 'production'
                                 ? 'https://squeak.cloud'
                                 : 'https://staging.squeak.cloud'
                         }

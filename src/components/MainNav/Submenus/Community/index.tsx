@@ -96,7 +96,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                         topics={false}
                                         slug={null}
                                         apiHost={
-                                            process.env.CONTEXT === 'production'
+                                            process.env.GATSBY_CONTEXT === 'production'
                                                 ? 'https://squeak.cloud'
                                                 : 'https://staging.squeak.cloud'
                                         }
