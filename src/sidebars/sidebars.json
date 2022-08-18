@@ -969,280 +969,28 @@
             ]
         },
         {
-            "name": "Apps",
+            "name": "Building apps",
             "url": "",
             "children": [
                 {
                     "name": "Overview",
-                    "url": "/docs/apps"
+                    "url": "/docs/apps/build"
+                },
+                {
+                    "name": "Tutorial",
+                    "url": "/docs/apps/build/tutorial"
                 },
                 {
                     "name": "Troubleshooting",
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "Build your own",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Overview",
-                            "url": "/docs/apps/build"
-                        },
-                        {
-                            "name": "Tutorial",
-                            "url": "/docs/apps/build/tutorial"
-                        },
-                        {
-                            "name": "TypeScript types",
-                            "url": "/docs/apps/build/types"
-                        },
-                        {
-                            "name": "Developer reference",
-                            "url": "/docs/apps/build/reference"
-                        }
-                    ]
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 },
                 {
-                    "name": "All apps",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Import",
-                            "url": "",
-                            "children": [
-                                {
-                                    "url": "/docs/apps/amazon-kinesis",
-                                    "name": "Amazon Kinesis Import"
-                                },
-                                {
-                                    "url": "/docs/apps/bitbucket-release-tracker",
-                                    "name": "BitBucket Release Tracker"
-                                },
-                                {
-                                    "url": "/docs/apps/braze",
-                                    "name": "Braze Import"
-                                },
-                                {
-                                    "url": "/docs/apps/replicator",
-                                    "name": "Event Replicator"
-                                },
-                                {
-                                    "url": "/docs/apps/github-release-tracker",
-                                    "name": "GitHub Release Tracker"
-                                },
-                                {
-                                    "url": "/docs/apps/github-star-sync",
-                                    "name": "GitHub Star Sync"
-                                },
-                                {
-                                    "url": "/docs/apps/gitlab-release-tracker",
-                                    "name": "GitLab Release Tracker"
-                                },
-                                {
-                                    "url": "/docs/apps/heartbeat",
-                                    "name": "Heartbeat"
-                                },
-                                {
-                                    "url": "/docs/apps/ingestion-alert",
-                                    "name": "Ingestion Alert"
-                                },
-                                {
-                                    "url": "/docs/apps/email-scoring",
-                                    "name": "Email Scoring"
-                                },
-                                {
-                                    "url": "/docs/apps/n8n",
-                                    "name": "n8n Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/orbit",
-                                    "name": "Orbit Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/redshift-import",
-                                    "name": "Redshift Import"
-                                },
-                                {
-                                    "url": "/docs/apps/segment",
-                                    "name": "Segment Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/shopify",
-                                    "name": "Shopify Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/twitter-followers",
-                                    "name": "Twitter Followers Tracker"
-                                },
-                                {
-                                    "url": "/docs/apps/zendesk-connector",
-                                    "name": "Zendesk Connector"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "Export",
-                            "url": "",
-                            "children": [
-                                {
-                                    "url": "/docs/apps/airbyte-export",
-                                    "name": "Airbyte Exporter"
-                                },
-                                {
-                                    "url": "/docs/apps/s3-export",
-                                    "name": "Amazon S3 Export"
-                                },
-                                {
-                                    "url": "/docs/apps/bigquery-export",
-                                    "name": "BigQuery Export"
-                                },
-                                {
-                                    "url": "/docs/apps/customer-io",
-                                    "name": "Customer.io Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/databricks",
-                                    "name": "Databricks Export"
-                                },
-                                {
-                                    "url": "/docs/apps/engage-connector",
-                                    "name": "Engage Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/google-pub-sub-connector",
-                                    "name": "GCP Pub/Sub Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/google-cloud-export",
-                                    "name": "Google Cloud Storage Export"
-                                },
-                                {
-                                    "url": "/docs/apps/hubspot-connector",
-                                    "name": "Hubspot Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/intercom",
-                                    "name": "Intercom Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/migrator-3000",
-                                    "name": "Migrator 3000"
-                                },
-                                {
-                                    "url": "/docs/apps/pagerduty-connector",
-                                    "name": "PagerDuty Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/postgres-export",
-                                    "name": "PostgreSQL Export"
-                                },
-                                {
-                                    "url": "/docs/apps/redshift-export",
-                                    "name": "Redshift Export"
-                                },
-                                {
-                                    "url": "/docs/apps/rudderstack-export",
-                                    "name": "RudderStack Export"
-                                },
-                                {
-                                    "url": "/docs/apps/salesforce-connector",
-                                    "name": "Salesforce Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/sendgrid-connector",
-                                    "name": "Sendgrid Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/sentry-connector",
-                                    "name": "Sentry Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/snowflake-export",
-                                    "name": "Snowflake Export"
-                                },
-                                {
-                                    "url": "/docs/apps/twilio",
-                                    "name": "Twilio Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/variance-connector",
-                                    "name": "Variance Connector"
-                                },
-                                {
-                                    "url": "/docs/apps/zapier-connector",
-                                    "name": "Zapier Connector"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "Ingestion filtering",
-                            "url": "",
-                            "children": [
-                                {
-                                    "url": "/docs/apps/downsampling",
-                                    "name": "Downsampler"
-                                },
-                                {
-                                    "url": "/docs/apps/event-sequence-timer",
-                                    "name": "Event Sequence Timer"
-                                },
-                                {
-                                    "url": "/docs/apps/first-time-event-tracker",
-                                    "name": "First Time Event Tracker"
-                                },
-                                {
-                                    "url": "/docs/apps/property-filter",
-                                    "name": "Property Filter"
-                                },
-                                {
-                                    "url": "/docs/apps/property-flattener",
-                                    "name": "Property Flattener"
-                                },
-                                {
-                                    "url": "/docs/apps/schema-enforcer",
-                                    "name": "Schema Enforcer"
-                                },
-                                {
-                                    "url": "/docs/apps/taxonomy-standardizer",
-                                    "name": "Taxonomy Standardizer"
-                                },
-                                {
-                                    "url": "/docs/apps/unduplicator",
-                                    "name": "Unduplicator"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "Event transformation",
-                            "url": "",
-                            "children": [
-                                {
-                                    "url": "/docs/apps/automatic-cohort-creator",
-                                    "name": "Automatic Cohort Creator"
-                                },
-                                {
-                                    "url": "/docs/apps/currency-normalization",
-                                    "name": "Currency Normalizer"
-                                },
-                                {
-                                    "url": "/docs/apps/geoip-enrichment",
-                                    "name": "GeoIP Enricher"
-                                },
-                                {
-                                    "url": "/docs/apps/timestamp-parser",
-                                    "name": "Timestamp Parser"
-                                },
-                                {
-                                    "url": "/docs/apps/url-normalizer",
-                                    "name": "URL Normalizer"
-                                },
-                                {
-                                    "url": "/docs/apps/user-agent-populator",
-                                    "name": "User Agent Populator"
-                                }
-                            ]
-                        }
-                    ]
+                    "name": "Developer reference",
+                    "url": "/docs/apps/build/reference"
                 }
             ]
         },
@@ -1546,6 +1294,248 @@
                         {
                             "name": "Notifications & alerts",
                             "url": "/manual/notifications-and-alerts"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Apps",
+            "url": "/docs/apps",
+            "children": [
+                {
+                    "name": "Import",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/amazon-kinesis",
+                            "name": "Amazon Kinesis Import"
+                        },
+                        {
+                            "url": "/docs/apps/bitbucket-release-tracker",
+                            "name": "BitBucket Release Tracker"
+                        },
+                        {
+                            "url": "/docs/apps/braze",
+                            "name": "Braze Import"
+                        },
+                        {
+                            "url": "/docs/apps/replicator",
+                            "name": "Event Replicator"
+                        },
+                        {
+                            "url": "/docs/apps/github-release-tracker",
+                            "name": "GitHub Release Tracker"
+                        },
+                        {
+                            "url": "/docs/apps/github-star-sync",
+                            "name": "GitHub Star Sync"
+                        },
+                        {
+                            "url": "/docs/apps/gitlab-release-tracker",
+                            "name": "GitLab Release Tracker"
+                        },
+                        {
+                            "url": "/docs/apps/heartbeat",
+                            "name": "Heartbeat"
+                        },
+                        {
+                            "url": "/docs/apps/ingestion-alert",
+                            "name": "Ingestion Alert"
+                        },
+                        {
+                            "url": "/docs/apps/email-scoring",
+                            "name": "Email Scoring"
+                        },
+                        {
+                            "url": "/docs/apps/n8n",
+                            "name": "n8n Connector"
+                        },
+                        {
+                            "url": "/docs/apps/orbit",
+                            "name": "Orbit Connector"
+                        },
+                        {
+                            "url": "/docs/apps/redshift-import",
+                            "name": "Redshift Import"
+                        },
+                        {
+                            "url": "/docs/apps/segment",
+                            "name": "Segment Connector"
+                        },
+                        {
+                            "url": "/docs/apps/shopify",
+                            "name": "Shopify Connector"
+                        },
+                        {
+                            "url": "/docs/apps/twitter-followers",
+                            "name": "Twitter Followers Tracker"
+                        },
+                        {
+                            "url": "/docs/apps/zendesk-connector",
+                            "name": "Zendesk Connector"
+                        }
+                    ]
+                },
+                {
+                    "name": "Export",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/airbyte-export",
+                            "name": "Airbyte Exporter"
+                        },
+                        {
+                            "url": "/docs/apps/s3-export",
+                            "name": "Amazon S3 Export"
+                        },
+                        {
+                            "url": "/docs/apps/bigquery-export",
+                            "name": "BigQuery Export"
+                        },
+                        {
+                            "url": "/docs/apps/customer-io",
+                            "name": "Customer.io Connector"
+                        },
+                        {
+                            "url": "/docs/apps/databricks",
+                            "name": "Databricks Export"
+                        },
+                        {
+                            "url": "/docs/apps/engage-connector",
+                            "name": "Engage Connector"
+                        },
+                        {
+                            "url": "/docs/apps/google-pub-sub-connector",
+                            "name": "GCP Pub/Sub Connector"
+                        },
+                        {
+                            "url": "/docs/apps/google-cloud-export",
+                            "name": "Google Cloud Storage Export"
+                        },
+                        {
+                            "url": "/docs/apps/hubspot-connector",
+                            "name": "Hubspot Connector"
+                        },
+                        {
+                            "url": "/docs/apps/intercom",
+                            "name": "Intercom Connector"
+                        },
+                        {
+                            "url": "/docs/apps/migrator-3000",
+                            "name": "Migrator 3000"
+                        },
+                        {
+                            "url": "/docs/apps/pagerduty-connector",
+                            "name": "PagerDuty Connector"
+                        },
+                        {
+                            "url": "/docs/apps/postgres-export",
+                            "name": "PostgreSQL Export"
+                        },
+                        {
+                            "url": "/docs/apps/redshift-export",
+                            "name": "Redshift Export"
+                        },
+                        {
+                            "url": "/docs/apps/rudderstack-export",
+                            "name": "RudderStack Export"
+                        },
+                        {
+                            "url": "/docs/apps/salesforce-connector",
+                            "name": "Salesforce Connector"
+                        },
+                        {
+                            "url": "/docs/apps/sendgrid-connector",
+                            "name": "Sendgrid Connector"
+                        },
+                        {
+                            "url": "/docs/apps/sentry-connector",
+                            "name": "Sentry Connector"
+                        },
+                        {
+                            "url": "/docs/apps/snowflake-export",
+                            "name": "Snowflake Export"
+                        },
+                        {
+                            "url": "/docs/apps/twilio",
+                            "name": "Twilio Connector"
+                        },
+                        {
+                            "url": "/docs/apps/variance-connector",
+                            "name": "Variance Connector"
+                        },
+                        {
+                            "url": "/docs/apps/zapier-connector",
+                            "name": "Zapier Connector"
+                        }
+                    ]
+                },
+                {
+                    "name": "Ingestion filtering",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/downsampling",
+                            "name": "Downsampler"
+                        },
+                        {
+                            "url": "/docs/apps/event-sequence-timer",
+                            "name": "Event Sequence Timer"
+                        },
+                        {
+                            "url": "/docs/apps/first-time-event-tracker",
+                            "name": "First Time Event Tracker"
+                        },
+                        {
+                            "url": "/docs/apps/property-filter",
+                            "name": "Property Filter"
+                        },
+                        {
+                            "url": "/docs/apps/property-flattener",
+                            "name": "Property Flattener"
+                        },
+                        {
+                            "url": "/docs/apps/schema-enforcer",
+                            "name": "Schema Enforcer"
+                        },
+                        {
+                            "url": "/docs/apps/taxonomy-standardizer",
+                            "name": "Taxonomy Standardizer"
+                        },
+                        {
+                            "url": "/docs/apps/unduplicator",
+                            "name": "Unduplicator"
+                        }
+                    ]
+                },
+                {
+                    "name": "Event transformation",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/automatic-cohort-creator",
+                            "name": "Automatic Cohort Creator"
+                        },
+                        {
+                            "url": "/docs/apps/currency-normalization",
+                            "name": "Currency Normalizer"
+                        },
+                        {
+                            "url": "/docs/apps/geoip-enrichment",
+                            "name": "GeoIP Enricher"
+                        },
+                        {
+                            "url": "/docs/apps/timestamp-parser",
+                            "name": "Timestamp Parser"
+                        },
+                        {
+                            "url": "/docs/apps/url-normalizer",
+                            "name": "URL Normalizer"
+                        },
+                        {
+                            "url": "/docs/apps/user-agent-populator",
+                            "name": "User Agent Populator"
                         }
                     ]
                 }
