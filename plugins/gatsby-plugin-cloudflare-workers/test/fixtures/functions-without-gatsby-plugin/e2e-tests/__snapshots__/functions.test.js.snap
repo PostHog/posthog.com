@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Local functions can parse different ways of sending data file in multipart/form 1`] = `
+Object {
+  "body": Object {
+    "something": "here",
+  },
+  "files": Array [
+    Object {
+      "buffer": Object {
+        "data": Array [
+          104,
+          105,
+        ],
+        "type": "Buffer",
+      },
+      "encoding": "7bit",
+      "fieldname": "file",
+      "mimetype": "text/plain",
+      "originalname": "test.txt",
+      "size": 2,
+    },
+  ],
+}
+`;
+
+exports[`Local routing dynamic routes 1`] = `
+Object {
+  "super": "additional",
+  "userId": "23",
+}
+`;
+
+exports[`Local routing dynamic routes 2`] = `
+Object {
+  "*": "super",
+  "0": "super",
+}
+`;
+
+exports[`Local routing routes with special characters 1`] = `"I-Am-Capitalized.js"`;
+
+exports[`Local routing routes with special characters 2`] = `"some whitespace.js"`;
+
+exports[`Local routing routes with special characters 3`] = `"with-äöü-umlaut.js"`;
+
+exports[`Local routing routes with special characters 4`] = `"some-àè-french.js"`;
+
+exports[`Local routing routes with special characters 5`] = `"some-אודות.js"`;

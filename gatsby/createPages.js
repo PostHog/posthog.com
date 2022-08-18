@@ -13,7 +13,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
-    const Question = path.resolve(`src/templates/Question.js`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -221,11 +220,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 nodes {
                     id
                     slug
-                }
-            }
-            questions: allQuestion {
-                nodes {
-                    id
                 }
             }
         }
@@ -469,15 +463,5 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 },
             })
         }
-    })
-    result.data.questions.nodes.forEach((node) => {
-        const { id } = node
-        createPage({
-            path: `questions/${id}`,
-            component: Question,
-            context: {
-                id,
-            },
-        })
     })
 }
