@@ -288,7 +288,7 @@ export default function FAQ() {
                     </a>
                 </div>
 
-                <div className="max-w-4xl mx-auto my-12">
+                {/* <div className="max-w-4xl mx-auto my-12">
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
@@ -300,7 +300,7 @@ export default function FAQ() {
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                     />
                     <Element name="squeak-bottom" />
-                </div>
+                </div> */}
             </section>
         </Layout>
     )
