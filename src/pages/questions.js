@@ -120,7 +120,11 @@ const Search = () => {
                     ) : (
                         <Form
                             onSubmit={handleSqueakSubmit}
-                            apiHost="https://squeak.cloud"
+                            apiHost={
+                                process.env.GATSBY_CONTEXT === 'production'
+                                    ? 'https://squeak.cloud'
+                                    : 'https://staging.squeak.cloud'
+                            }
                             apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
                             url="https://pxipkquvwqaaunuzjoge.supabase.co"
                             organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
@@ -288,7 +292,7 @@ export default function FAQ() {
                     </a>
                 </div>
 
-                {/* <div className="max-w-4xl mx-auto my-12">
+                <div className="max-w-4xl mx-auto my-12">
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
@@ -296,11 +300,15 @@ export default function FAQ() {
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
                         slug={null}
-                        apiHost="https://squeak.cloud"
+                        apiHost={
+                            process.env.GATSBY_CONTEXT === 'production'
+                                ? 'https://squeak.cloud'
+                                : 'https://staging.squeak.cloud'
+                        }
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                     />
                     <Element name="squeak-bottom" />
-                </div> */}
+                </div>
             </section>
         </Layout>
     )
