@@ -95,7 +95,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                         limit={5}
                                         topics={false}
                                         slug={null}
-                                        apiHost="https://squeak.cloud"
+                                        apiHost={
+                                            process.env.GATSBY_CONTEXT === 'production'
+                                                ? 'https://squeak.cloud'
+                                                : 'https://staging.squeak.cloud'
+                                        }
                                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                                     />
                                 </div>
