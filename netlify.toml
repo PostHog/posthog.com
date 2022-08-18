@@ -1,3 +1,7 @@
+[build.environment]
+  NODE_VERSION = "16"
+  GATSBY_CPU_COUNT = "2"
+
 [dev]
   command = "yarn start"
   port = 8888
@@ -21,7 +25,6 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
-
 
 [[redirects]]
     from = "/docs/integrations/android-integration"
