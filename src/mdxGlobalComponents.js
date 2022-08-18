@@ -81,6 +81,7 @@ import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
+import { Quote2 } from './components/Quote2'
 import { Savings } from './components/Pricing/Savings'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
@@ -199,6 +200,7 @@ export const shortcodes = {
     PricingTable,
     ProductPillars,
     Quote,
+    Quote2,
     Savings,
     ProductAnchorNavbar,
     ProductFeature,
