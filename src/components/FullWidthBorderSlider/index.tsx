@@ -23,9 +23,9 @@ const SlideTemplate = ({ date, url, authors, title, ...other }: ISliderItem) => 
     const image = getImage(other.image)
     return (
         <>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center mb-4">
                 {authors && (
-                    <ul className="flex space-x-2 list-none p-0 m-0">
+                    <ul className="flex space-x-2 list-none p-0 !m-0">
                         {authors.map(({ name, id, ...other }) => {
                             const image = getImage(other.image)
                             return (
@@ -48,12 +48,14 @@ const SlideTemplate = ({ date, url, authors, title, ...other }: ISliderItem) => 
             </div>
 
             {image && (
-                <Link to={url}>
-                    {image ? (
-                        <GatsbyImage image={image} alt={title} />
-                    ) : (
-                        <img width={514} height={289} src="/banner.png" />
-                    )}
+                <Link to={url} className="no-hover">
+                    <div className="block bg-gray-accent-light hover:bg-gray-accent/50 rounded relative active:top-[0.5px] active:scale-[.99]">
+                        {image ? (
+                            <GatsbyImage image={image} alt={title} />
+                        ) : (
+                            <img width={514} height={289} src="/banner.png" />
+                        )}
+                    </div>
                 </Link>
             )}
         </>

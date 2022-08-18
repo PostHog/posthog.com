@@ -30,6 +30,11 @@ main a,
     @apply text-red hover:text-red font-semibold;
 }
 
+a.no-hover {
+    /* override links in article-content so they don't have animated underlines on hover */
+    @apply !bg-none !pb-0;
+}
+
 p {
     font-variant-numeric: proportional-nums;
 }

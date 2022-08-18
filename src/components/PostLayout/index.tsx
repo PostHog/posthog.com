@@ -574,8 +574,8 @@ export default function PostLayout({
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full justify-self-end px-8 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
+                        <aside className="lg:sticky bg-tan top-10 flex-shrink-0 w-full justify-self-end px-8 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>
