@@ -1,6 +1,7 @@
 import Layout from 'components/Layout'
 import PostLayout, { TableOfContents } from 'components/PostLayout'
 import API from 'components/Product/API'
+import CTA from 'components/Product/CTA'
 import Apps from 'components/Product/Apps'
 import DataWarehouse from 'components/Product/DataWarehouse'
 import EventPipelines from 'components/Product/EventPipelines'
@@ -143,38 +144,40 @@ export default function Product() {
                 hideSurvey
                 menu={menu}
                 article={false}
-                contentContainerClassName="w-full pb-12"
+                contentContainerClassName="w-full pb-12 md:px-12 md:-mt-8"
                 menuType="scroll"
                 menuWidth={350}
             >
-                <div className="sticky top-0 z-10 bg-tan px-5 lg:hidden mb-6 py-2">
-                    <Slider ref={sliderRef} {...sliderSettings}>
-                        {menu.map(({ name, icon, url }, index) => {
-                            return (
-                                <div key={name}>
-                                    <Link
-                                        smooth
-                                        duration={300}
-                                        offset={-57}
-                                        to={url}
-                                        hashSpy
-                                        className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
-                                            activeSliderIndex === index ? 'bg-gray-accent-light' : ''
-                                        }`}
-                                        spy
-                                        onClick={() => sliderRef?.current?.slickGoTo(index)}
-                                        onSetActive={() => {
-                                            setActiveSliderIndex(index)
-                                            sliderRef?.current?.slickGoTo(index)
-                                        }}
-                                    >
-                                        <span className="w-[25px]">{icon}</span>
-                                        <span>{name}</span>
-                                    </Link>
-                                </div>
-                            )
-                        })}
-                    </Slider>
+                <div className="sticky top-0 z-10 bg-tan lg:hidden mb-6 py-2">
+                    <div className="pl-5">
+                        <Slider ref={sliderRef} {...sliderSettings}>
+                            {menu.map(({ name, icon, url }, index) => {
+                                return (
+                                    <div key={name}>
+                                        <Link
+                                            smooth
+                                            duration={300}
+                                            offset={-57}
+                                            to={url}
+                                            hashSpy
+                                            className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
+                                                activeSliderIndex === index ? 'bg-gray-accent-light' : ''
+                                            }`}
+                                            spy
+                                            onClick={() => sliderRef?.current?.slickGoTo(index)}
+                                            onSetActive={() => {
+                                                setActiveSliderIndex(index)
+                                                sliderRef?.current?.slickGoTo(index)
+                                            }}
+                                        >
+                                            <span className="w-[25px]">{icon}</span>
+                                            <span>{name}</span>
+                                        </Link>
+                                    </div>
+                                )
+                            })}
+                        </Slider>
+                    </div>
                 </div>
                 <div id="top-features">
                     <div className="max-w-5xl mx-auto px-5 box-content">
@@ -193,6 +196,7 @@ export default function Product() {
                 <DataWarehouse />
                 <SelfHosting />
                 <API />
+                <CTA className="mt-12 -mx-12 -mb-20" />
             </PostLayout>
         </Layout>
     )

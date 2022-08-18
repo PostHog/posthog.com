@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import FooterCTA from 'components/FooterCTA'
+import CTA from 'components/Product/CTA'
 import { RightArrow } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -168,7 +169,7 @@ export default function Product({ data, location }) {
                         </div>
                     </div>
                 </div>
-                <article className=" max-w-5xl mx-auto px-5">
+                <article className=" max-w-5xl mx-auto px-12">
                     <div className="flex items-center space-x-2 mt-12 mb-5">
                         <span className="rounded-[3px] bg-gray-accent-light h-9 w-9 flex items-center justify-center">
                             <span className="w-5 h-5 text-black">{feature.icon}</span>
@@ -183,6 +184,7 @@ export default function Product({ data, location }) {
                         </MDXProvider>
                     </div>
                 </article>
+                <CTA />
             </PostLayout>
         </Layout>
     )
