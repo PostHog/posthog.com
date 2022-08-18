@@ -43,8 +43,8 @@ export const FeatureWrapperCol = ({ title, subtitle, icon, cta, disclaimer, feat
                                         key={title}
                                         className="border-b border-gray-accent-light border-dashed last:border-b-0"
                                     >
-                                        <Link to={url} className="flex space-x-2 items-center text-lg py-3 ">
-                                            <span className="w-[36px] h-[36px] flex items-center justify-center bg-gray-accent-light rounded-sm">
+                                        <Link to={url} className="flex space-x-2 items-center text-base py-2 px-1 my-1 rounded group hover:bg-gray-accent-light transition-all relative active:top-[1px] active:scale-[.99]">
+                                            <span className="w-[36px] h-[36px] flex items-center justify-center bg-gray-accent-light group-hover:bg-gray-accent/50 rounded-sm">
                                                 <span className="w-[20px] text-black">{icon}</span>
                                             </span>
                                             <span>{title}</span>

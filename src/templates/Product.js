@@ -148,7 +148,7 @@ export default function Product({ data, location }) {
                             {previous?.url && (
                                 <Link
                                     to={previous?.url}
-                                    className="text-[15px] font-semibold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
+                                    className="text-[15px] font-bold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
                                 >
                                     <RightArrow className="w-[14px] rotate-180" />
                                     <span>{previous?.name}</span>
@@ -160,7 +160,7 @@ export default function Product({ data, location }) {
                             {next?.url && (
                                 <Link
                                     to={next?.url}
-                                    className="text-[15px] font-semibold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
+                                    className="text-[15px] font-bold text-black/60 hover:text-black/60 bg-white rounded-sm px-4 py-2 inline-flex items-center space-x-2 relative active:top-[0.5px] active:scale-[.98]"
                                 >
                                     <span>{next?.name}</span>
                                     <RightArrow className="w-[14px]" />
