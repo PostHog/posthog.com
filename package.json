@@ -13,7 +13,7 @@
     ],
     "private": true,
     "scripts": {
-        "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+        "build": "gatsby build --log-pages",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -41,7 +41,6 @@
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
         "country-code-emoji": "^2.3.0",
-        "cross-env": "^7.0.3",
         "dotenv": "^10.0.0",
         "eslint-plugin-flowtype": "^2.50.3",
         "form-data": "^4.0.0",
