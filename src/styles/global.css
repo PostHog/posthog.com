@@ -177,11 +177,11 @@ h4 {
     }
     td,
     th {
-        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b text-left pt-2;
+        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b pt-2;
         padding-bottom: calc(0.5rem - 1px);
 
         &:not(:first-child) {
-            @apply pl-8;
+            @apply px-4;
         }
     }
 
