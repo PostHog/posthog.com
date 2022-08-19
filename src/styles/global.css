@@ -996,3 +996,8 @@ body.dark {
 .crumb-has-next::after {
     content: '→' !important;
 }
+
+iframe[src*='youtube.com'],
+iframe[src*='youtube-nocookie.com'] {
+    @apply aspect-video w-full h-auto;
+}
