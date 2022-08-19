@@ -116,6 +116,7 @@ import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableOpenRoles } from './components/WorkableOpenRoles'
 import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
+import { iframe } from './components/iframe'
 
 export const shortcodes = {
     Accordion,
@@ -234,4 +235,5 @@ export const shortcodes = {
     WorkableOpenRoles,
     WorkableSnippet,
     ZoomImage,
+    iframe,
 }
