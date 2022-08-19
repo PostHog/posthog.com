@@ -19,15 +19,18 @@ module.exports = exports.onCreateNode = async ({
     createContentDigest,
 }) => {
     const { createNodeField, createNode, createParentChildLink } = actions
+
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent.internal.type === 'Reply') return
         const slug = createFilePath({ node, getNode, basePath: `pages` })
+
         createNodeField({
             node,
             name: `slug`,
             value: replacePath(slug),
         })
+
         // Create GitHub contributor nodes for handbook & docs
         if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
@@ -36,9 +39,11 @@ module.exports = exports.onCreateNode = async ({
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
             }).then((res) => res.json())
+
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )
+
             const contributorsNode = await Promise.all(
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
@@ -63,6 +68,53 @@ module.exports = exports.onCreateNode = async ({
             node.contributors = contributorsNode
         }
     }
+
+    if ((node.internal.type === 'MarkdownRemark' || node.internal.type === 'Mdx') && node?.frontmatter?.github) {
+        const { name, owner } = GitUrlParse(node.frontmatter.github)
+
+        try {
+            if (name && owner) {
+                const repo = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
+                    headers: {
+                        Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                    },
+                })
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const { default_branch } = await repo.json()
+
+                const res = await fetch(
+                    `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/plugin.json`,
+                    {
+                        headers: {
+                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                        },
+                    }
+                )
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const body = await res.text()
+                const { config } = JSON.parse(body)
+
+                if (config) {
+                    createNodeField({
+                        node,
+                        name: `appConfig`,
+                        value: config,
+                    })
+                }
+            }
+        } catch (error) {
+            console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
+        }
+    }
+
     if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
@@ -81,15 +133,18 @@ module.exports = exports.onCreateNode = async ({
                 cache,
                 store,
             }))
+
         if (markdown) {
             node.markdown___NODE = markdown.id
             node.slug = `/integrations/${slugify(node.name, { lower: true })}`
         }
+
         const { default_branch } = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
             headers: {
                 Authorization: `token ${process.env.GITHUB_API_KEY}`,
             },
         }).then((res) => res.json())
+
         const imageURL = `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/logo.png`
         let image
         try {

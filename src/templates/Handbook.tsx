@@ -23,6 +23,7 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
+import Markdown from 'markdown-to-jsx'
 
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
@@ -60,18 +61,80 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
     )
 }
 
+type AppParametersProps = {
+    config: {
+        key: string
+        name: string | null
+        required: boolean | null
+        type: string | null
+        hint: string | null
+        description: string | null
+    }[]
+}
+
+export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
+    const AppParameters = () => {
+        if (!config) {
+            return null
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {config.map((option) => {
+                        return (
+                            <tr key={option.key}>
+                                <td>
+                                    <div className="mb-6">
+                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                            {option.name}
+                                        </code>
+                                    </div>
+
+                                    {option.type && (
+                                        <div>
+                                            <strong>Type: </strong>
+                                            <span>{option.type}</span>
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <strong>Required: </strong>
+                                        <span>{option.required ? 'True' : 'False'}</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <Markdown>{option.description || option.hint}</Markdown>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    return AppParameters
+}
+
 export default function Handbook({
-    data: { post, countries, nextPost },
+    data: { post, nextPost },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
     const { hash } = useLocation()
-    const [menuOpen, setMenuOpen] = useState(false)
     const {
         body,
         frontmatter,
         contributors,
-        fields: { slug },
+        fields: { slug, appConfig },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
@@ -107,6 +170,7 @@ export default function Handbook({
         TotalCountries,
         TotalTeam,
         TestimonialsTable,
+        AppParameters: AppParametersFactory({ config: appConfig }),
         ...shortcodes,
     }
 
@@ -215,6 +279,14 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                appConfig {
+                    key
+                    name
+                    required
+                    type
+                    hint
+                    description
+                }
             }
             contributors {
                 url
