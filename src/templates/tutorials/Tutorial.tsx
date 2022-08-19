@@ -19,7 +19,7 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { CodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
-import { iframe as Iframe } from 'components/iframe'
+import { iframe as Iframe } from 'components/iframe/index'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -78,7 +78,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
-        iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
