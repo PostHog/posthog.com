@@ -2,61 +2,123 @@ import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Slider from 'react-slick'
+import { Link } from 'react-scroll'
 
 const slides = [
     {
+        url: 'product-analytics',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/product-analytics.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/product-analytics.png"
+            />
         ),
     },
     {
+        url: 'session-recording',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/session-recording.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/session-recording.png"
+            />
         ),
     },
     {
+        url: 'feature-flags',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/feature-flags.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/feature-flags.png"
+            />
         ),
     },
     {
+        url: 'ab-tests-and-experiments',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/experimentation.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/experimentation.png"
+            />
         ),
     },
     {
+        url: 'data-warehouse',
+        image: <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/sql.png" />,
+    },
+    {
+        url: 'event-pipelines',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/sql.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/event-pipelines.png"
+            />
         ),
     },
     {
+        url: 'api',
+        image: <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/api.png" />,
+    },
+    {
+        url: 'data-warehouse',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/event-pipelines.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-tree.png"
+            />
         ),
     },
     {
+        url: 'data-warehouse',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/api.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-tractor.png"
+            />
         ),
     },
     {
+        url: 'data-warehouse',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data-tree.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-warehouse.png"
+            />
         ),
     },
     {
+        url: 'data-warehouse',
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data-tractor.png" />
-        ),
-    },
-    {
-        image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data-warehouse.png" />
-        ),
-    },
-    {
-        image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/warehouse-sync.png" />
+            <StaticImage
+                placeholder="none"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/warehouse-sync.png"
+            />
         ),
     },
 ]
@@ -105,7 +167,11 @@ export default function Hero() {
                 {...sliderSettings}
             >
                 {slides.map((slide, index) => {
-                    return <Slide key={index} image={slide.image} />
+                    return (
+                        <Link key={index} className="cursor-pointer" smooth duration={300} offset={-57} to={slide.url}>
+                            <Slide image={slide.image} />
+                        </Link>
+                    )
                 })}
             </Slider>
         </section>

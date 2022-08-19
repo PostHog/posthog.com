@@ -15,6 +15,7 @@ import Scrollspy from 'react-scrollspy'
 import { Link } from 'react-scroll'
 import Slider from 'react-slick'
 import { SEO } from 'components/seo'
+import slugify from 'slugify'
 
 const features: IProps[] = [
     {
@@ -190,7 +191,7 @@ export default function Product() {
                         </p>
                     </div>
                     {features.map((feature, index) => (
-                        <FeatureWrapperCol key={index} {...feature} />
+                        <FeatureWrapperCol id={slugify(feature.title, { lower: true })} key={index} {...feature} />
                     ))}
                 </div>
                 <Apps />
