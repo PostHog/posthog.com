@@ -7,7 +7,7 @@ showTitle: true
 
 Apps extend PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs.
 
-> Check out [all out apps here](/apps), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce).
+> We have a [comprehensive library of apps](/apps), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce).
 
 Apps can be used for a wide variety of use cases, such as:
 
