@@ -14,6 +14,7 @@ import React, { useRef, useState } from 'react'
 import Scrollspy from 'react-scrollspy'
 import { Link } from 'react-scroll'
 import Slider from 'react-slick'
+import { SEO } from 'components/seo'
 
 const features: IProps[] = [
     {
@@ -136,6 +137,7 @@ export default function Product() {
     const [activeSliderIndex, setActiveSliderIndex] = useState(0)
     return (
         <Layout>
+            <SEO title={`Product - PostHog`} />
             <Hero />
             <PostLayout
                 title="Product"
