@@ -186,9 +186,9 @@ client.Enqueue(posthog.Capture{
 
 > Note that to use feature flags you must specify `PersonalApiKey` in the [options passed to `posthog.NewWithConfig`](#usage).
 
-#### Checking if a feature is enabled
+**How to check if a flag is enabled**
 
-To check if a feature flag is on for a given user, you can call `isFeatureEnabled`, passing the flag's key and the user's distinct ID. You can optionally pass a third argument to override the default result to be returned if the flag is not found. This is set to `false` by default.
+> **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
 
 ```go
 // IsFeatureEnabled(FeatureFlagPayload) (interface{}, error)
@@ -208,9 +208,11 @@ if (isFlagEnabledForUser) {
 
 > **Note:** Whenever we face an error computing the flag, the library returns `nil`, instead of `true` or `false` or a string variant value.
 
-#### Get a flag value
+**Get a flag value**
 
-If you're using multivariate flags, you can get what value the flag is enabled to.
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
+
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
 
 ```go
 // GetFeatureFlag(FeatureFlagPayload) (interface{}, error)
@@ -222,11 +224,11 @@ enabledVariant, err := client.GetFeatureFlag(
 )
 ```
 
-#### Overriding server properties
+**Overriding server properties**
 
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
 
-For example, if the `beta-feature` depends on the `is_authorized` property and you know the value of the property, you can tell PostHog to use this property, like so:
+For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
 ```go
 enabledVariant, err := client.GetFeatureFlag(
