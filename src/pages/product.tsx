@@ -198,7 +198,7 @@ export default function Product() {
                 <DataWarehouse />
                 <SelfHosting />
                 <API />
-                <CTA className="mt-12 -mx-12 -mb-20" />
+                <CTA className="mt-12 -mx-12 !-mb-12 md:!-mb-20" />
             </PostLayout>
         </Layout>
     )
