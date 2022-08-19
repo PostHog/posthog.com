@@ -1017,12 +1017,12 @@ body.dark {
 
 .product-hogs-slider {
     .slick-list {
-        @apply py-10;
+        @apply -mt-16 md:-mt-20 -mb-8 md:mb-0;
     }
     .slick-track {
         @apply flex items-end;
         .slick-slide {
-            @apply -ml-28;
+            @apply -ml-12;
         }
     }
 }

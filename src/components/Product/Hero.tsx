@@ -41,12 +41,12 @@ const slides = [
     },
     {
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data.png" />
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data-tree.png" />
         ),
     },
     {
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/taking-data-to-warehouse.png" />
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/data-tractor.png" />
         ),
     },
     {
@@ -56,7 +56,7 @@ const slides = [
     },
     {
         image: (
-            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/export-to-data-warehouse.png" />
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/warehouse-sync.png" />
         ),
     },
 ]
@@ -69,19 +69,19 @@ const sliderSettings = {
     autoplay: true,
     variableWidth: true,
     autoplaySpeed: 0,
-    speed: 70000,
+    speed: 100000,
     cssEase: 'linear',
 }
 
 const Slide = ({ image }) => {
-    return <div className="hover:scale-[1.2] transition-transform">{image}</div>
+    return <div className="hover:scale-[1.1] transition-transform">{image}</div>
 }
 
 export default function Hero() {
     const [activeSlide, setActiveSlide] = useState(0)
     return (
         <section id="overview" className="text-center pt-7 sm:pt-14 mb-8">
-            <div className="px-5 max-w-screen-2xl mx-auto">
+            <div className="px-5 max-w-screen-2xl mx-auto relative z-10">
                 <h1 className="text-3xl sm:text-4xl md:text-6xl m-0">
                     The modern platform for <br />
                     <span className="text-red">product analytics</span> and{' '}
