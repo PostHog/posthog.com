@@ -155,8 +155,6 @@ export default function Handbook({
 
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-    console.log(appConfig)
-
     const components = {
         Team,
         inlineCode: InlineCode,
