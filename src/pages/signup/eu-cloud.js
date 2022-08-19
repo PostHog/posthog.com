@@ -58,7 +58,7 @@ export default function SelfHost() {
                                 <Plan
                                     className="px-0"
                                     title="While you're waiting..."
-                                    subtitle="We'll get back to you when PostHog Cloud EU is ready. In the mean time, you can use PostHog Cloud (US), or you can self-host, then migrate data when we're ready for you."
+                                    subtitle="We'll get back to you when PostHog Cloud EU is ready. In the meantime, you can use PostHog Cloud (US), or you can self-host, then migrate data when we're ready for you."
                                 >
                                     <div className="mt-6 flex justify-between items-center bg-gray-accent-light px-[18px] py-[16px] rounded-md flex-col xl:flex-row space-y-2 xl:space-y-0 ">
                                         <p className="m-0 font-bold">Try PostHog Cloud for free</p>
