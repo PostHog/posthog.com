@@ -50,20 +50,8 @@ const pipelines = [
         title: 'Zapier',
     },
     {
-        Icon: Sentry,
-        title: 'Sentry',
-    },
-    {
-        Icon: Slack,
-        title: 'Slack',
-    },
-    {
         Icon: Shopify,
         title: 'Shopify',
-    },
-    {
-        Icon: WordPress,
-        title: 'WordPress',
     },
 ]
 
@@ -85,8 +73,7 @@ export default function EventPipelines() {
                     </p>
                     <p>
                         And if there’s no app for what you’re looking to do, there probably will be soon – or{' '}
-                        <Link to="/docs/apps/build">you can build it*</Link>! (Check out our{' '}
-                        <Link to="https://github.com/PostHog/posthog/issues/8437">app bounty list</Link>.)
+                        <Link to="/docs/apps/build">you can build it</Link>! 
                     </p>
                 </>
             }
