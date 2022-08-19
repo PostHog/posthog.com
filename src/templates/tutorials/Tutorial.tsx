@@ -19,18 +19,7 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { CodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
-
-const Iframe = (props) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
-        return (
-            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-            </div>
-        )
-    } else {
-        return <iframe {...props} />
-    }
-}
+import { iframe as Iframe } from 'components/iframe'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
