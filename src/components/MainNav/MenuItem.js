@@ -51,7 +51,7 @@ export default function MenuItem({ menuItem, referenceElement }) {
                 )}
             </span>
 
-            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
+            {sub && title === 'Product' && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
         </li>
     )
 }
