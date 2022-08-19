@@ -49,7 +49,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (/^handbook|^docs|^blog|^integrations|^product|^tutorials|^questions|^using-posthog|^manual/.test(slug) &&
+            (/^handbook|^docs|^blog|^integrations|^tutorials|^questions|^using-posthog|^manual/.test(slug) &&
                 (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
             'light'
     } catch (err) {}
