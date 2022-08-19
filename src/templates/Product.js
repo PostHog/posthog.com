@@ -52,6 +52,11 @@ const features = [
         icon: ProductIcons.featureFlags,
     },
     {
+        name: 'Heatmaps',
+        url: '/product/heatmaps',
+        icon: ProductIcons.heatmaps,
+    },
+    {
         name: 'Experimentation suite',
         url: '/product/experimentation-suite',
         icon: ProductIcons.experiments,
