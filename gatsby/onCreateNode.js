@@ -67,51 +67,51 @@ module.exports = exports.onCreateNode = async ({
             )
             node.contributors = contributorsNode
         }
-    }
 
-    if ((node.internal.type === 'MarkdownRemark' || node.internal.type === 'Mdx') && node?.frontmatter?.github) {
-        const { name, owner } = GitUrlParse(node.frontmatter.github)
+        if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
+            const { name, owner } = GitUrlParse(node.frontmatter.github)
 
-        try {
-            if (name && owner) {
-                const repo = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
-                    headers: {
-                        Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                    },
-                })
-
-                if (res.status !== 200) {
-                    throw `Got status code ${res.status}`
-                }
-
-                const { default_branch } = await repo.json()
-
-                const res = await fetch(
-                    `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/plugin.json`,
-                    {
+            try {
+                if (name && owner) {
+                    const repo = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
                         headers: {
                             Authorization: `token ${process.env.GITHUB_API_KEY}`,
                         },
-                    }
-                )
-
-                if (res.status !== 200) {
-                    throw `Got status code ${res.status}`
-                }
-
-                const body = await res.text()
-                const { config } = JSON.parse(body)
-
-                if (config) {
-                    createNodeField({
-                        node,
-                        name: `appConfig`,
-                        value: config,
                     })
+
+                    if (repo.status !== 200) {
+                        throw `Got status code ${repo.status}`
+                    }
+
+                    const { default_branch } = await repo.json()
+
+                    const res = await fetch(
+                        `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/plugin.json`,
+                        {
+                            headers: {
+                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                            },
+                        }
+                    )
+
+                    if (res.status !== 200) {
+                        throw `Got status code ${res.status}`
+                    }
+
+                    const body = await res.text()
+                    const { config } = JSON.parse(body)
+
+                    if (config) {
+                        createNodeField({
+                            node,
+                            name: `appConfig`,
+                            value: config,
+                        })
+                    }
                 }
+            } catch (error) {
+                console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
             }
-        } catch (error) {
-            console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
         }
     }
 

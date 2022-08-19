@@ -88,6 +88,10 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                 </thead>
                 <tbody>
                     {config.map((option) => {
+                        if (!option.name) {
+                            return null
+                        }
+
                         return (
                             <tr key={option.key}>
                                 <td>
@@ -111,7 +115,9 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                                 </td>
 
                                 <td>
-                                    <Markdown>{option.description || option.hint}</Markdown>
+                                    {option.description || option.hint ? (
+                                        <Markdown>{option.description || option.hint}</Markdown>
+                                    ) : null}
                                 </td>
                             </tr>
                         )
@@ -148,6 +154,8 @@ export default function Handbook({
     )
 
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+    console.log(appConfig)
 
     const components = {
         Team,
