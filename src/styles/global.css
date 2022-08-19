@@ -1014,3 +1014,15 @@ body.dark {
         }
     }
 }
+
+.product-hogs-slider {
+    .slick-list {
+        @apply py-10;
+    }
+    .slick-track {
+        @apply flex items-end;
+        .slick-slide {
+            @apply -ml-28;
+        }
+    }
+}

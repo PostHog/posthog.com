@@ -1,8 +1,40 @@
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useState } from 'react'
+import Slider from 'react-slick'
+
+const slides = [
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-1.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-2.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-3.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-4.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-5.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-6.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-7.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-8.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-9.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-10.png" /> },
+    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-11.png" /> },
+]
+
+const sliderSettings = {
+    dots: false,
+    infinite: true,
+    arrows: false,
+    slidesToScroll: 11,
+    autoplay: true,
+    variableWidth: true,
+    autoplaySpeed: 0,
+    speed: 50000,
+    cssEase: 'linear',
+}
+
+const Slide = ({ image }) => {
+    return <div className="hover:scale-[1.2] transition-transform">{image}</div>
+}
 
 export default function Hero() {
+    const [activeSlide, setActiveSlide] = useState(0)
     return (
         <section id="overview" className="text-center pt-7 sm:pt-14 mb-8">
             <div className="px-5 max-w-screen-2xl mx-auto">
@@ -23,7 +55,15 @@ export default function Hero() {
                     </CallToAction>
                 </div>
             </div>
-            <StaticImage placeholder="none" loading="eager" src="./images/product-hogs.png" alt="Product hogs" />
+            <Slider
+                beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
+                className="product-hogs-slider"
+                {...sliderSettings}
+            >
+                {slides.map((slide, index) => {
+                    return <Slide key={index} image={slide.image} />
+                })}
+            </Slider>
         </section>
     )
 }
