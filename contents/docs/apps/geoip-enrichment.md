@@ -60,6 +60,10 @@ A case to be aware of is sending events from a server – such events, if not pr
 If you'd like this app to skip over an event and not add the above properties,
 set property `$geoip_disable` to `true` on that event.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip) is available on GitHub.

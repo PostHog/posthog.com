@@ -69,6 +69,10 @@ Create a private Zapier app for PostHog easily with a few simple steps:
 
 Further information about the Zapier Connector is available in [Zapier's integration documentation](https://zapier.com/help/doc/how-to-get-started-with-posthog-on-zapier).
 
+### Configuration
+
+<AppParameters />
+
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.

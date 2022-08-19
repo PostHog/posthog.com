@@ -67,6 +67,10 @@ We can also break down an insight by `month` to get an idea of how it varies ove
 
 Overall, the timestamp parser is a simple yet incredibly powerful app that these examples only scratch the surface on.
 
+### Configuration
+
+<AppParameters />
+
 ### Have a question?
 
 We love answering questions. Ask us anything via [our Support page](/questions) or using the Q&A widget at the bottom of this page.

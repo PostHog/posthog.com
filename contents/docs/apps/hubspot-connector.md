@@ -38,6 +38,10 @@ This information can be sent whenever an `$identify` event occurs in PostHog.
 
 No other information can currently be sent to PostHog using this app. If this app exists in a chain where the above information would be filtered out (for example, by using the Property Filter app) then filtered information cannot be sent to Hubspot.
 
+### Configuration
+
+<AppParameters />
+
 ### How do I install the Hubspot app on PostHog?
 
 1. Log in to your PostHog instance

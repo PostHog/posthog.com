@@ -26,6 +26,10 @@ You'll also need access to the relevant Customer.io account.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Customer.io Connector](https://github.com/PostHog/customerio-plugin) is available on GitHub.

@@ -42,6 +42,10 @@ This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 -   Choose threshold and operator (less than or equal, greater than or equal).
 -   Enter PagerDuty service integration key (for Events API v2).
 
+### Configuration
+
+<AppParameters />
+
 ### Are there any limitations?
 
 This PagerDuty Connector only works when reading from single-line trend graphs.

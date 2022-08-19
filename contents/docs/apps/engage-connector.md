@@ -46,6 +46,10 @@ Once you have made a note of your keys, log in to your PostHog instance and foll
 
 Now, as soon as the app is enabled, PostHog will start sending your events to Engage in real-time.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Engage Connector](https://github.com/PostHog/posthog-engage-so-plugin) is available on GitHub.

@@ -44,6 +44,10 @@ To configure the app, follow the configuration steps once the app is enabled and
 
 -   **PostHog version** - Self-hosted users can find their PostHog version from /instance/status
 
+### Configuration
+
+<AppParameters />
+
 ### Were there 2999 earlier versions of this app?
 
 No, it's just a cool name. A _very_ cool name.

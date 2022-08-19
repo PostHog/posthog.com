@@ -45,9 +45,7 @@ Once the app has been configured and enabled, it will begin to transform all new
 
 Before an app can be enabled in PostHog, it has to be configured.
 
-| Option | Description |
-| --- | --- |
-| <span class="whitespace-nowrap mr-4">`Can override existing`<br />`browser related properties?`</span> <br /><br />**Type:** Boolean<br />**Default:** false | Should the app override the `$browser`, `$browser_version`, etc. properties based on the `$useragent` property, even if they have already been set.
+<AppParameters />
 
 ### Using the User Agent Populator
 

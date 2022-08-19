@@ -88,6 +88,10 @@ Once installed you'll now have `$exception` events in PostHog, which have a "Sen
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
 
+### Configuration
+
+<AppParameters />
+
 ### Who maintains this app?
 
 This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!

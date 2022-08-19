@@ -35,6 +35,10 @@ Additionally, you can set the following optional parameters:
 -   Emails domain to skip (optional): A comma-separated list of email domains to ignore and not send events for in Intercom (e.g. `posthog.com,dev.posthog.com`).
 -   Send events to European data storage (optional, default: False): Send events to api.eu.intercom.com, if you are using Intercom's European Data Hosting.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Intercom Connector app](https://github.com/posthog/posthog-intercom-plugin) is available on GitHub.
