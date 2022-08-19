@@ -40,21 +40,22 @@ const features = [
         url: '/product/collaboration',
         icon: ProductIcons.teamCollaboration,
     },
+    { name: 'Insights' },
     {
         name: 'Session recording',
         url: '/product/session-recording',
         icon: ProductIcons.sessionRecording,
     },
-
-    {
-        name: 'Feature flags',
-        url: '/product/feature-flags',
-        icon: ProductIcons.featureFlags,
-    },
     {
         name: 'Heatmaps',
         url: '/product/heatmaps',
         icon: ProductIcons.heatmaps,
+    },
+    { name: 'Experimentation' },
+    {
+        name: 'Feature flags',
+        url: '/product/feature-flags',
+        icon: ProductIcons.featureFlags,
     },
     {
         name: 'Experimentation',
