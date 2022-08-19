@@ -1301,8 +1301,12 @@
         },
         {
             "name": "Apps",
-            "url": "/docs/apps",
+            "url": "",
             "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/apps"
+                },
                 {
                     "name": "Import",
                     "url": "",
