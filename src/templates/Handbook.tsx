@@ -147,11 +147,6 @@ export default function Handbook({
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
-    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
-
-    const TotalTeam = (props) => (
-        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
-    )
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
     const components = {
@@ -167,15 +162,9 @@ export default function Handbook({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
-        TotalCountries,
-        TotalTeam,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
         ...shortcodes,
-    }
-
-    const handleMobileMenuClick = () => {
-        setMenuOpen(!menuOpen)
     }
 
     useEffect(() => {
@@ -259,11 +248,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!) {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
