@@ -1,7 +1,3 @@
-/plugins/* /apps/:splat 301
-/next-steps/* /next-steps 301
-/question/* /question 301
-/careers/* /careers 301
 /docs/integrations/android-integration /docs/libraries/android 301
 /docs/integrations/community /docs/libraries/community 301
 /docs/integrations/docusaurus-integration /docs/libraries/docusaurus 301
@@ -26,8 +22,6 @@
 /handbook/company/structure /handbook/people/team-structure/why-small-teams 301
 /handbook/people/team /handbook/company/team 301
 /handbook/growth/customer-success /handbook/growth/customer-support 301
-/handbook/growth/customer-success /handbook/growth/customer-support 301
-/handbook/getting-started /handbook/getting-started/start-here 301
 /handbook/getting-started /handbook/getting-started/start-here 301
 /handbook/people/team-structure/user-experience /handbook/people/team-structure/core-experience 301
 /docs/plugins/build/overview /docs/apps/build 301
@@ -121,7 +115,6 @@
 /docs/integrate/overview /docs/integrate 301
 /docs/integrations /docs/integrate 301
 /docs/libraries /docs/integrate 301
-/signup /pricing 301
 /docs/self-host/deploy/render /docs/self-host/deploy/other#render 301
 /docs/self-host/deploy/qovery /docs/self-host/deploy/other 301
 /docs/tutorials/actions /docs/tutorials/event-tracking-guide 301
@@ -156,7 +149,6 @@
 /blog/Building-the-future-of-game-analytics-pureskill /blog/building-the-future-of-game-analytics-pureskill 301
 /handbook/product/scale-features-prioritization /handbook/product/enterprise-features-prioritization 301
 /handbook/engineering/debugging /handbook/engineering/production-access 301
-/docs/user-guides/session-recording /docs/user-guides/recordings 301
 /docs/user-guides/session-recording /docs/user-guides/recordings 301
 /handbook/product/scale-features-prioritization /handbook/engineering/scale-features-prioritization 301
 /blog/sessions-deprecation /blog/sessions-removal 301
@@ -222,12 +214,10 @@
 /docs/tutorials/toolbar /tutorials/toolbar 301
 /docs/tutorials/tracking-teams /tutorials/tracking-teams 301
 /handbook/company/branding /handbook/company/brand-assets 301
-/docs/tutorials/* /tutorials/:splat 301
 /docs/self-host/hobby-deployment /docs/self-host/deploy/hobby 301
 /handbook/engineering/ee-setup /docs/contribute/developing-locally 301
 /docs/user-guides/sessions /blog/sessions-removal 301
 /docs/tutorials/how-to-segment-users /tutorials/how-to-segment-users 301
-/docs/self-host/runbook/clickhouse/vertical_scaling /docs/self-host/runbook/clickhouse/vertical-scaling 301
 /docs/self-host/runbook/clickhouse/vertical_scaling /docs/self-host/runbook/clickhouse/vertical-scaling 301
 /docs/privacy/overview /docs/privacy 301
 /docs/integrate/gdpr /docs/privacy/gdpr-compliance 301
@@ -259,17 +249,13 @@
 /handbook/engineering/cloud-providers /handbook/engineering/aws 301
 /handbook/engineering/posthog-com/mdx-setup /handbook/engineering/mdx 301
 /product/quantitative-analysis /product/correlation-analysis 301
-/docs/plugins/build/reference /docs/apps/build/reference 301
 /docs/plugins/build/types /docs/apps/build/types 301
 /docs/plugins/enabling /docs/apps/enabling 301
 /docs/plugins /docs/apps 301
 /integrations /apps 301
-/integrations/* /apps/:splat 301
 /docs/user-guides/plugins /docs/apps 301
 /product-features /blog/posthog-vs-amplitude 301
 /docs/plugins/build/reference /docs/apps/build/reference 301
-/docs/plugins/build/types /docs/apps/build/types 301
-/docs/plugins/enabling /docs/apps/enabling 301
 /support /questions 301
 /customers/why-i-ditched-mixpanel-for-posthog /blog/why-i-ditched-google-analytics-for-posthog 301
 /handbook/company/1-1s /handbook/company/management 301
@@ -375,7 +361,6 @@
 /docs/self-host/migrate/migrate-between-cloud-and-self-hosted /docs/migrate/migrate-between-cloud-and-self-hosted 301
 /docs/self-host/migrate/migrate-from-amplitude /docs/migrate/migrate-from-amplitude 301
 /docs/self-host/migrate-from-postgres-to-clickhouse /docs/self-host/migrate/migrate-to-another-self-hosted-instance 301
-/docs/self-host/migrate/migrate-to-another-self-hosted-instance /docs/migrate/migrate-to-another-self-hosted-instance 301
 /plugins/customer.io /apps/customer-io 301
 /plugins/hubspot /apps/hubspot-connector 301
 /plugins/pub/sub-export /apps/google-pub-sub-connector 301
@@ -414,3 +399,9 @@
 /docs/user-guides/trends /manual/trends 301
 /docs/user-guides/utm-segmentation /manual/utm-segmentation 301
 /docs/user-guides/subscriptions /manual/notifications-and-alerts 301
+/next-steps/* /next-steps 200 
+/question/* /question 200
+/careers/* /careers 200
+/plugins/* /apps/:splat 301
+/docs/tutorials/* /tutorials/:splat 301
+/integrations/* /apps/:splat 301

@@ -1025,4 +1025,8 @@ body.dark {
             @apply -ml-12;
         }
     }
+
+iframe[src*='youtube.com'],
+iframe[src*='youtube-nocookie.com'] {
+    @apply aspect-video w-full h-auto;
 }

@@ -29,18 +29,6 @@ import { flattenMenu, replacePath } from '../../../gatsby/utils'
 import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
 import { Popover } from 'components/Popover'
 
-const Iframe = (props: any) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
-        return (
-            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-            </div>
-        )
-    } else {
-        return <iframe {...props} />
-    }
-}
-
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
     const height = 436
@@ -587,8 +575,8 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className={article ? 'article-content' : ''}>{children}</div>
-                        {questions && questions}
+                        <div>{children}</div>
+                        {questions}
                     </div>
                     {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}

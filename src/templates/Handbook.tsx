@@ -90,21 +90,9 @@ export default function Handbook({
         <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
     )
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-    const Iframe = (props) => {
-        if (props.src && props.src.indexOf('youtube.com') !== -1) {
-            return (
-                <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                    <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-                </div>
-            )
-        } else {
-            return <iframe {...props} />
-        }
-    }
 
     const components = {
         Team,
-        iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
@@ -193,9 +181,11 @@ export default function Handbook({
                             {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                        <div className="article-content">
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
                     </section>
                 </PostLayout>
             </Layout>

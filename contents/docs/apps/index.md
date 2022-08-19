@@ -5,7 +5,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-Apps extend PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs. 
+Apps extend PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs.
+
+> We have a [comprehensive library of apps](/apps), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce).
 
 Apps can be used for a wide variety of use cases, such as:
 
@@ -15,8 +17,6 @@ Apps can be used for a wide variety of use cases, such as:
 - **Adding your own data from other sources to PostHog.** In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such as other tools and platforms you use.
 - **Labeling events.** In order to facilitate sorting through your events, apps can be used to determine arbitrary logic that can label an event (e.g. by setting a `label` property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data somewhere else.
 - **Enforcing event schemas.** By default, PostHog does not enforce schemas on events it receives. However, an app could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
-
-> We have a [comprehensive library of apps](/apps), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce). 
 
 ## Enabling apps
 

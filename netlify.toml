@@ -1157,7 +1157,7 @@
     to = "/tutorials/how-to-segment-users"
 
 [build]
-    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL GATSBY_CONTEXT=$CONTEXT gatsby build"
 
 # Added: 2022-02-04
 [[redirects]]

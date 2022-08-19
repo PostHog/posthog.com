@@ -46,6 +46,7 @@ import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
+import { GDPRForm } from './components/GDPRForm'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
@@ -165,6 +166,7 @@ export const shortcodes = {
     Footer,
     FooterCTA,
     FullWidthBorderSlider,
+    GDPRForm,
     GithubIcon,
     Heading,
     HiddenSection,
