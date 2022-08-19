@@ -203,13 +203,6 @@
 /product-features/feature-flags /apps/feature-flags 301
 /product-features/session-recording /apps/session-recording 301
 /product-features/plugins /apps 301
-/product/funnels /apps/funnels 301
-/product/trends /apps/trends 301
-/product/session-recording /apps/session-recording 301
-/product/feature-flags /apps/feature-flags 301
-/product/heatmaps /apps/heatmaps 301
-/product/experimentation-suite /apps/experimentation-suite 301
-/product/collaboration /apps/collaboration 301
 /heatmaps /apps/heatmaps 301
 /docs/tutorials/aarrr-framework /tutorials/aarrr-framework 301
 /docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog /tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog 301

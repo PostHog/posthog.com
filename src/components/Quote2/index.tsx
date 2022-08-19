@@ -3,15 +3,12 @@ import React from 'react'
 
 const base = {
     section: cntl`
-        !max-w-screen-lg
         mx-auto
         font-bold
-        bg-black
         text-white
+        max-w-5xl
         grid
-        grid-cols-[minmax(200px,_1fr)_4fr]
-
-        -mx-12 mt-6 xl:mx-0
+        md:grid-cols-[minmax(200px,_1fr)_4fr]
     `,
     quote: cntl`
         text-xl
@@ -20,19 +17,17 @@ const base = {
         flex 
         justify-center 
         items-center 
-        p-8 
-        border-b 
-        border-dashed 
-        border-gray-accent-light/50
+        p-8
     `,
     tagline: cntl`
-        flex
+        hidden
+        md:flex
         justify-center
         items-center
         text-center
         border-r
         border-dashed
-        border-gray-accent-light/50
+        border-gray-accent-dark
         font-semibold
         text-white/50
         leading-tight
@@ -115,32 +110,54 @@ interface Props {
     className?: string
     size?: string
     logo?: string
-    quote: string | JSX.Element
+    quote: string
     companyTagline?: string
     image: JSX.Element
     imageSource?: string
     name: string | JSX.Element
     title: string | JSX.Element
+    offset?: number
 }
 
-export const Quote2 = ({ className = '', size = 'md', logo, quote, companyTagline, image, imageSource, name, title }: Props) => {
+export const Quote2 = ({
+    className = '',
+    size = 'md',
+    logo,
+    quote,
+    companyTagline,
+    image,
+    imageSource,
+    name,
+    title,
+    offset,
+}: Props) => {
     return (
-        <section className={classes('section', size, className)}>
-            <div className="flex justify-center items-center p-8 border-b border-r border-dashed border-gray-accent-light/50">
-                {logo && <img src={logo} />}
+        <section style={offset ? { marginTop: -(offset / 3) * 2 } : {}} className="bg-black">
+            <div className={classes('section', size, className)}>
+                <div
+                    style={offset ? { paddingTop: offset } : {}}
+                    className="hidden md:flex justify-center items-center p-8 border-r border-dashed border-gray-accent-dark"
+                >
+                    {logo && <img src={logo} />}
+                </div>
+
+                <blockquote style={offset ? { paddingTop: offset } : {}} className={classes('quote', size)}>
+                    <div>
+                        <div className="md:hidden mb-6">{logo && <img src={logo} />}</div>
+                        <div dangerouslySetInnerHTML={{ __html: quote }} />
+                    </div>
+                </blockquote>
             </div>
-            <blockquote className={classes('quote', size)}>
-                {quote}
-            </blockquote>
-            <div className={classes('tagline', size)}>
-                {companyTagline}
-            </div>
-            <div className={classes('footer', size)}>
-                {imageSource ? <img className={classes('image', size)} src={imageSource} /> : image}
-                <span className="flex items-baseline space-x-2">
-                    <cite className={classes('name', size)}>{name}</cite>
-                    <cite className={classes('title', size)}>{title}</cite>
-                </span>
+            <hr className="w-full border-0 border-t border-gray-accent-dark border-dashed m-0" />
+            <div className={classes('section', size, className)}>
+                <div className={classes('tagline', size)}>{companyTagline}</div>
+                <div className={classes('footer', size)}>
+                    {imageSource ? <img className={classes('image', size)} src={imageSource} /> : image}
+                    <span className="flex items-baseline space-x-2">
+                        <cite className={classes('name', size)}>{name}</cite>
+                        <cite className={classes('title', size)}>{title}</cite>
+                    </span>
+                </div>
             </div>
         </section>
     )

@@ -82,6 +82,8 @@ const menu = [
     { name: 'API', url: 'api', icon: ProductIcons.api },
 ]
 
+const Container = ({ children }) => <div className="max-w-5xl mx-auto px-12">{children}</div>
+
 export default function Product({ data, location }) {
     const { pageData, documentation, sidebars } = data
     const {
@@ -169,17 +171,19 @@ export default function Product({ data, location }) {
                         </div>
                     </div>
                 </div>
-                <article className=" max-w-5xl mx-auto px-12">
-                    <div className="flex items-center space-x-2 mt-12 mb-5">
-                        <span className="rounded-[3px] bg-gray-accent-light h-9 w-9 flex items-center justify-center">
-                            <span className="w-5 h-5 text-black">{feature.icon}</span>
-                        </span>
-                        <h1 className="m-0 text-lg text-black/70">{title}</h1>
-                    </div>
-                    <h2 className="text-5xl m-0 mb-5">{subtitle}</h2>
-                    <GatsbyImage image={getImage(featuredImage)} />
+                <article>
+                    <Container>
+                        <div className="flex items-center space-x-2 mt-12 mb-5">
+                            <span className="rounded-[3px] bg-gray-accent-light h-9 w-9 flex items-center justify-center">
+                                <span className="w-5 h-5 text-black">{feature.icon}</span>
+                            </span>
+                            <h1 className="m-0 text-lg text-black/70">{title}</h1>
+                        </div>
+                        <h2 className="text-5xl m-0 mb-5">{subtitle}</h2>
+                        <GatsbyImage image={getImage(featuredImage)} />
+                    </Container>
                     <div className="article-content">
-                        <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
+                        <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation, Container }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
