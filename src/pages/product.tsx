@@ -40,7 +40,7 @@ const features: IProps[] = [
             {
                 title: 'Dashboards & collaboration',
                 icon: ProductIcons?.dashboards,
-                url: '/product/dashboards',
+                url: '/product/collaboration',
             },
         ],
     },

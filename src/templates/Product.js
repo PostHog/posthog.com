@@ -57,7 +57,7 @@ const features = [
         icon: ProductIcons.heatmaps,
     },
     {
-        name: 'Experimentation suite',
+        name: 'Experimentation',
         url: '/product/experimentation-suite',
         icon: ProductIcons.experiments,
     },
@@ -151,7 +151,7 @@ export default function Product({ data, location }) {
             >
                 <div className="border-b border-gray-accent-light border-dashed py-3 lg:-mt-12">
                     <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
-                        <div className="flex-1">
+                        <div className="md:flex-1">
                             {previous?.url && (
                                 <Link
                                     to={previous?.url}
@@ -162,8 +162,8 @@ export default function Product({ data, location }) {
                                 </Link>
                             )}
                         </div>
-                        <p className="m-0 font-bold">{title}</p>
-                        <div className="flex-1 flex justify-end">
+                        <p className="m-0 font-bold hidden md:block">{title}</p>
+                        <div className="md:flex-1 flex justify-end">
                             {next?.url && (
                                 <Link
                                     to={next?.url}
