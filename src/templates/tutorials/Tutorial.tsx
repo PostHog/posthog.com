@@ -19,7 +19,6 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { CodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
-import { iframe as Iframe } from 'components/iframe/index'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -146,7 +145,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                         </MDXProvider>
                     </div>
                 ) : (
-                    <Iframe src={featuredVideo} />
+                    <iframe src={featuredVideo} />
                 )}
             </PostLayout>
         </Layout>
