@@ -4,17 +4,61 @@ import React, { useState } from 'react'
 import Slider from 'react-slick'
 
 const slides = [
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-1.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-2.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-3.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-4.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-5.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-6.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-7.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-8.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-9.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-10.png" /> },
-    { image: <StaticImage quality={100} objectFit="contain" alt="" src="./images/hogs/hog-11.png" /> },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-1.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-2.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-3.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-4.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-5.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-6.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-7.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-8.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-9.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-10.png" />
+        ),
+    },
+    {
+        image: (
+            <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/hog-11.png" />
+        ),
+    },
 ]
 
 const sliderSettings = {
