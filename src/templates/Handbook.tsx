@@ -23,7 +23,6 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
-import Markdown from 'markdown-to-jsx'
 
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
@@ -72,7 +71,22 @@ type AppParametersProps = {
     }[]
 }
 
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
+    const components = {
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        pre: CodeBlock,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
+        a: A,
+    }
     const AppParameters = () => {
         if (!config) {
             return null
@@ -94,7 +108,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
                         return (
                             <tr key={option.key}>
-                                <td>
+                                <td width={300}>
                                     <div className="mb-6">
                                         <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
                                             {option.name}
@@ -113,12 +127,13 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                                         <span>{option.required ? 'True' : 'False'}</span>
                                     </div>
                                 </td>
-
-                                <td>
-                                    {option.description || option.hint ? (
-                                        <Markdown>{option.description || option.hint}</Markdown>
-                                    ) : null}
-                                </td>
+                                {option?.childMdx?.body && (
+                                    <td>
+                                        <MDXProvider components={components}>
+                                            <MDXRenderer>{option.childMdx.body}</MDXRenderer>
+                                        </MDXProvider>
+                                    </td>
+                                )}
                             </tr>
                         )
                     })}
@@ -140,7 +155,8 @@ export default function Handbook({
         body,
         frontmatter,
         contributors,
-        fields: { slug, appConfig },
+        appConfig,
+        fields: { slug },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
@@ -152,10 +168,6 @@ export default function Handbook({
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
-
-    const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-
-    console.log(appConfig)
 
     const components = {
         Team,
@@ -271,14 +283,15 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-                appConfig {
-                    key
-                    name
-                    required
-                    type
-                    hint
-                    description
+            }
+            appConfig: childrenAppConfig {
+                childMdx {
+                    body
                 }
+                key
+                name
+                required
+                type
             }
             contributors {
                 url

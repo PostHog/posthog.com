@@ -102,10 +102,25 @@ module.exports = exports.onCreateNode = async ({
                     const { config } = JSON.parse(body)
 
                     if (config) {
-                        createNodeField({
-                            node,
-                            name: `appConfig`,
-                            value: config,
+                        config.forEach(({ hint, description, ...other }, index) => {
+                            const body = description || hint
+                            if (body) {
+                                const appConfigID = createNodeId(`app-config-${node.id}-${index}`)
+                                const appConfigNode = {
+                                    id: appConfigID,
+                                    parent: null,
+                                    children: [],
+                                    internal: {
+                                        type: `AppConfig`,
+                                        contentDigest: createContentDigest(body),
+                                        content: body,
+                                        mediaType: 'text/markdown',
+                                    },
+                                    ...other,
+                                }
+                                createNode(appConfigNode)
+                                createParentChildLink({ parent: node, child: appConfigNode })
+                            }
                         })
                     }
                 }

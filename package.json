@@ -89,7 +89,6 @@
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
-        "markdown-to-jsx": "^7.1.7",
         "mermaid": "^9.1.5",
         "mobx": "^6.3.13",
         "node-fetch": "^2.6.1",
