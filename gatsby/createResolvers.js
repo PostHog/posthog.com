@@ -1,5 +1,23 @@
 module.exports = exports.createResolvers = ({ createResolvers }) => {
     const resolvers = {
+        GlossaryJson: {
+            page: {
+                resolve: async (source, args, context, info) => {
+                    const data = await context.nodeModel.runQuery({
+                        query: {
+                            filter: {
+                                fields: {
+                                    slug: { eq: source.slug },
+                                },
+                            },
+                        },
+                        type: 'Mdx',
+                        firstOnly: true,
+                    })
+                    return data
+                },
+            },
+        },
         Contributors: {
             teamData: {
                 resolve: async (source, args, context, info) => {

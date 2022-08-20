@@ -19,6 +19,7 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { CodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
+import GlossaryElement from 'components/GlossaryElement'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -88,6 +89,8 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
+        p: GlossaryElement,
+        li: (props) => GlossaryElement({ as: 'li', ...props }),
         ...shortcodes,
     }
     const { hash } = useLocation()

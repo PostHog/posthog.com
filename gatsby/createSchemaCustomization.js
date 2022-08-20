@@ -20,6 +20,13 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       imageURL: String
       subject: String
     }
+    type GlossaryJson implements Node {
+      page: Mdx
+      word: String
+      pluralize: Boolean
+      slug: String
+      description: String
+    }
     type Question implements Node {
       rawBody: String
       name: String

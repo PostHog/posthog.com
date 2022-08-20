@@ -47,6 +47,7 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { GDPRForm } from './components/GDPRForm'
 import { GithubIcon } from './components/GithubIcon'
+import { GlossaryElement } from './components/GlossaryElement'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
@@ -165,6 +166,7 @@ export const shortcodes = {
     FooterCTA,
     GDPRForm,
     GithubIcon,
+    GlossaryElement,
     Heading,
     HiddenSection,
     Home,

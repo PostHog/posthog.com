@@ -346,7 +346,7 @@ export const sidebarButtonClasses =
 const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
         <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
-            <Tooltip className="flex" title={title}>
+            <Tooltip className="flex" content={title}>
                 <span className="relative flex">
                     {href ? (
                         <Link className={sidebarButtonClasses} to={href}>

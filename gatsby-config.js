@@ -127,6 +127,13 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
+                name: `glossary`,
+                path: `${__dirname}/src/data/glossary.json`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
                 name: `authorImages`,
                 path: `${__dirname}/static/images/authors`,
             },

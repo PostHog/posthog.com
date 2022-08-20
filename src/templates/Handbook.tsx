@@ -23,6 +23,7 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
+import GlossaryElement from 'components/GlossaryElement'
 
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
@@ -104,6 +105,8 @@ export default function Handbook({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
+        p: GlossaryElement,
+        li: (props) => GlossaryElement({ as: 'li', ...props }),
         TotalCountries,
         TotalTeam,
         TestimonialsTable,
