@@ -6,6 +6,8 @@ import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
 import './NotFoundPage.scss'
+import Lottie from 'react-lottie'
+import pizzaFight from '../../lotties/pizza-fight.json'
 
 export default function NotFoundPage(): JSX.Element {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -30,34 +32,41 @@ export default function NotFoundPage(): JSX.Element {
     return (
         <Layout className="not-found-page-container">
             <div className="centered py-12">
-                <h2>Oops, there's nothing here</h2>
+                <div className="relative z-10">
+                    <h2>Oops, there's nothing here</h2>
 
-                <p>
-                    Think this is a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll fix
-                    it!
-                </p>
+                    <p>
+                        Think this is a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll
+                        fix it!
+                    </p>
 
-                <p>
-                    <strong>But while you're here,</strong> we have an important question...
-                </p>
+                    <p>
+                        <strong>But while you're here,</strong> we have an important question...
+                    </p>
 
-                <h4>Does pineapple belong on pizza?</h4>
+                    <h4>Does pineapple belong on pizza?</h4>
 
-                <div style={{ paddingBottom: 10 }}>
-                    {submittedPreference ? (
-                        <p>Thanks for letting us know!</p>
-                    ) : (
-                        <div className="flex justify-center space-x-2">
-                            <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
-                            <Chip onClick={() => capturePineapplePreference(false)} text="No" />
-                        </div>
-                    )}
+                    <div style={{ paddingBottom: 10 }}>
+                        {submittedPreference ? (
+                            <p>Thanks for letting us know!</p>
+                        ) : (
+                            <div className="flex justify-center space-x-2">
+                                <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
+                                <Chip onClick={() => capturePineapplePreference(false)} text="No" />
+                            </div>
+                        )}
+                    </div>
                 </div>
-
-                <div className="hedgehog my-8">
-                    <BasicHedgehogImage />
+                <div className="-mt-20 sm:-mt-32 max-w-2xl w-full mx-auto relative">
+                    <span className="w-full h-[2px] bg-black absolute left-0 bottom-[20%] rounded-md" />
+                    <Lottie
+                        options={{
+                            loop: true,
+                            autoplay: true,
+                            animationData: pizzaFight,
+                        }}
+                    />
                 </div>
-
                 <CallToAction type="primary" width="84" to="/">
                     Take me back to the homepage
                 </CallToAction>
