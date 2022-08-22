@@ -37,7 +37,7 @@ export default function Tooltip({
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
                         {...attributes.popper}
                     >
-                        <div className="bg-primary dark:bg-gray-accent-light text-white dark:text-black rounded-md px-2 py-1 text-sm z-20">
+                        <div className="bg-gray-accent-light dark:bg-gray-accent-dark text-black dark:text-white rounded-md px-2 py-1 text-sm z-20 shadow-lg">
                             {content}
                         </div>
                     </div>,

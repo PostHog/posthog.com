@@ -1,19 +1,41 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import reactStringReplace from 'react-string-replace'
-import React from 'react'
+import React, { useState } from 'react'
 import pluralizeWord from 'pluralize'
 import Tooltip from '../Tooltip'
 import { CallToAction } from 'components/CallToAction'
 
-const TooltipContent = ({ slug, description, title }) => {
+export const TooltipContent = ({ slug, description, title, video }) => {
+    const [view, setView] = useState('article')
     return (
-        <div className="max-w-[320px] p-4">
-            <h4 className="text-2xl m-0">{title}</h4>
-            <p className="text-base m-0 mt-4">{description}</p>
-            {slug && (
-                <CallToAction size="sm" className="mt-6" width="full" to={slug}>
-                    Learn more
-                </CallToAction>
+        <div className={'w-[350px] p-4'}>
+            {video && (
+                <div className="grid grid-cols-2 mb-4 pb-4 relative">
+                    <button onClick={() => setView('article')} className="font-semibold">
+                        Article
+                    </button>
+                    <button onClick={() => setView('video')} className="font-semibold">
+                        Video
+                    </button>
+                    <span
+                        className={`w-1/2 h-[2px] rounded-full bg-red absolute bottom-0 transition-all ${
+                            view === 'article' ? 'translate-x-0' : 'translate-x-full'
+                        }`}
+                    />
+                </div>
+            )}
+            {view === 'article' ? (
+                <>
+                    <h4 className="text-2xl m-0">{title}</h4>
+                    <p className="text-base m-0 mt-4">{description}</p>
+                    {slug && (
+                        <CallToAction size="sm" className="mt-6" width="full" to={slug}>
+                            Continue reading
+                        </CallToAction>
+                    )}
+                </>
+            ) : (
+                <iframe className="aspect-video w-full m-0" src={video} />
             )}
         </div>
     )

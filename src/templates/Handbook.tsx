@@ -62,7 +62,7 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
 }
 
 export default function Handbook({
-    data: { post, countries, nextPost },
+    data: { post, countries, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
@@ -90,7 +90,10 @@ export default function Handbook({
     const TotalTeam = (props) => (
         <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
     )
-    const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+    const A = (props) => (
+        <Link {...props} glossary={glossary?.nodes} className="text-red hover:text-red font-semibold" />
+    )
 
     const components = {
         Team,
@@ -105,8 +108,6 @@ export default function Handbook({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
-        p: GlossaryElement,
-        li: (props) => GlossaryElement({ as: 'li', ...props }),
         TotalCountries,
         TotalTeam,
         TestimonialsTable,
@@ -197,10 +198,22 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!) {
+    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
         countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
             group(field: frontmatter___country) {
                 totalCount
+            }
+        }
+        glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    featuredVideo
+                }
+                excerpt(pruneLength: 300)
             }
         }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {

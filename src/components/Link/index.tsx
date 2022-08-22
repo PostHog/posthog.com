@@ -4,6 +4,8 @@ import { useValues } from 'kea'
 import React from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import type { GatsbyLinkProps } from 'gatsby'
+import Tooltip from 'components/Tooltip'
+import { TooltipContent } from 'components/GlossaryElement'
 
 interface Props {
     to: string
@@ -29,6 +31,7 @@ export default function Link({
     state = {},
     event = '',
     href,
+    glossary,
     ...other
 }: Props) {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -41,14 +44,34 @@ export default function Link({
     }
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
+    const preview = glossary?.find((glossaryItem) => {
+        return glossaryItem.fields?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
+    })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
             {children}
         </button>
     ) : internal ? (
-        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-            {children}
-        </GatsbyLink>
+        preview ? (
+            <Tooltip
+                content={
+                    <TooltipContent
+                        title={preview.frontmatter?.title}
+                        slug={url}
+                        description={preview.excerpt}
+                        video={preview.frontmatter?.featuredVideo}
+                    />
+                }
+            >
+                <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    {children}
+                </GatsbyLink>
+            </Tooltip>
+        ) : (
+            <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                {children}
+            </GatsbyLink>
+        )
     ) : (
         <a
             target={external ? '_blank' : ''}

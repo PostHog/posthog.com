@@ -3,6 +3,7 @@ const path = require('path')
 const slugify = require('slugify')
 const Slugger = require('github-slugger')
 const { default: fetch } = require('node-fetch')
+const markdownLinkExtractor = require('markdown-link-extractor')
 
 module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
@@ -50,6 +51,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             apidocs: allApiEndpoint {
@@ -69,6 +71,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
@@ -81,6 +84,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -238,7 +242,12 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     function createPosts(data, menu, template, breadcrumbBase) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
+            const links =
+                node?.rawBody &&
+                markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
             const slug = node.fields?.slug || node.url
+            if (slug === '/docs/self-host/deploy/hosting-costs')
+                console.log('HEY DUDE!', markdownLinkExtractor(node?.rawBody), links)
             let next = null
             let previous = null
             let breadcrumb = null
@@ -267,6 +276,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    links,
                 },
             })
         })

@@ -12955,6 +12955,13 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
+html-link-extractor@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/html-link-extractor/-/html-link-extractor-1.0.5.tgz#a4be345cb13b8c3352d82b28c8b124bb7bf5dd6f"
+  integrity sha512-ADd49pudM157uWHwHQPUSX4ssMsvR/yHIswOR5CUfBdK9g9ZYGMhVSE6KZVHJ6kCkR0gH4htsfzU6zECDNVwyw==
+  dependencies:
+    cheerio "^1.0.0-rc.10"
+
 html-minifier-terser@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/html-minifier-terser/-/html-minifier-terser-5.1.1.tgz#922e96f1f3bb60832c2634b79884096389b1f054"
@@ -15815,6 +15822,14 @@ markdown-escapes@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
+
+markdown-link-extractor@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-4.0.1.tgz#c94f16f8fb939a0900631d58684f7541fe056ea8"
+  integrity sha512-3QPSRKM20HPGuG62eq3CH6FCYtHn2cvooxgc8LTIDEpn6hrNuqTtHicPp01f56Sy/Sen+z9xdRp58mZAjQ7Tsg==
+  dependencies:
+    html-link-extractor "^1.0.5"
+    marked "^4.0.15"
 
 markdown-table@^1.1.0:
   version "1.1.3"
