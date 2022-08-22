@@ -33,7 +33,7 @@ Netdata is an open source monitoring and troubleshooting platform used by engine
         size="md"
         name="Andy Maguire"
         title="Analytics & Machine Learning Lead, Netdata"
-        quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or Gainsight.”`}
+        quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}
     />
 </BorderWrapper>
 
