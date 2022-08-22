@@ -90,8 +90,7 @@ docker compose -f docker-compose.dev.yml up
 
 > **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall).
 
->**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases stopping the `postgresql` service will solve this. 
-On Linux use this command to stop Postgresql if runing already in background.
+>**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
 ```bash
 sudo service postgresql stop
 ```
@@ -137,7 +136,6 @@ brew install postgresql
 - On Linux
 
 ```bash
-sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
 
@@ -212,7 +210,6 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
     - On Linux
     ```bash
-    apt-get update
     sudo apt-get install brotli libpq-dev -y
 GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
