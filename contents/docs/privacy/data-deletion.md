@@ -5,9 +5,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-## How to delete data from posthog
+## How to delete data from PostHog
 
-One can remove unwanted data from posthog by:
+You can remove unwanted data from PostHog by:
 1. Deleting teams/organizations
 2. Deleting persons
 
@@ -18,7 +18,7 @@ When deleting individual persons, you can also choose to delete all of their eve
 
 ## Asynchronous data deletion
 
-While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
+While most data in PostHog is deleted instantly, event data is not. Instead, data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
 
 This is done because data deletion in ClickHouse is expensive and it can impact performance for other users.
 
