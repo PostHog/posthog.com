@@ -1,14 +1,12 @@
-import { CopyOutlined } from '@ant-design/icons'
+import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import darkTheme from 'prism-react-renderer/themes/nightOwl'
-import lightTheme from 'prism-react-renderer/themes/nightOwlLight'
-import React, { useEffect, useState } from 'react'
+import darkTheme from './themes/dark'
+import lightTheme from './themes/light'
 import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import './style.scss'
 
 const TooltipTitle = ({ title, visible, className }: { title: string; visible: boolean; className?: string }) => {
     return (
@@ -106,10 +104,12 @@ export const CodeBlock = (props: CodeBlockProps) => {
             XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
             null
         )
+
         const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the API key of your ${projectName} project in PostHog Cloud.'>${token}</span>`
         const tokenMatchRegex = new RegExp(token, 'g')
         const snapshotIndex = 0
         let node: HTMLElement | null = phTokenElements.snapshotItem(snapshotIndex) as HTMLElement
+
         while (node) {
             node.innerHTML = node.innerHTML.replace(tokenMatchRegex, tokenHighlightHtml)
             node = phTokenElements.snapshotItem(snapshotIndex + 1) as HTMLElement
@@ -126,37 +126,65 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }
 
     return (
-        <div className="relative mt-2">
-            <Tooltip className="right-0" title="Copied!" visible={tooltipVisible}>
-                {copyToClipboardAvailable ? (
-                    <span className="text-primary dark:text-primary-dark absolute right-2 top-1">
-                        <CopyOutlined onClick={copyToClipboard} />
-                    </span>
-                ) : null}
-            </Tooltip>
-            <Highlight
-                {...defaultProps}
-                code={code || props.children.props.children.trim()}
-                language={language as Language}
-                theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
-            >
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre
-                        className={`${className} !bg-gray-accent-light dark:!bg-gray-accent-dark`}
-                        style={{ ...style, padding: '20px' }}
-                        id={codeBlockId}
+        <div className="relative my-2 rounded overflow-hidden">
+            <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center justify-between">
+                <div>JavaScript</div>
+
+                <button onClick={copyToClipboard} className="text-gray dark:text-primary-dark">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="w-4 h-4"
                     >
-                        {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line, key: i })}>
-                                {line.map((token, key) => {
-                                    const { className, ...other } = getTokenProps({ token, key })
-                                    return <span key={key} className={`${className} text-shadow-none`} {...other} />
-                                })}
-                            </div>
-                        ))}
-                    </pre>
-                )}
-            </Highlight>
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                    </svg>
+                </button>
+            </div>
+
+            <pre className="m-0 p-0 rounded-none">
+                <Highlight
+                    {...defaultProps}
+                    code={code || props.children.props.children.trim()}
+                    language={language as Language}
+                    theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
+                >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                        <div className="flex p-4" style={{ ...style }} id={codeBlockId}>
+                            <span className="select-none">
+                                {tokens.map((line, i) => (
+                                    <div key={i} {...getLineProps({ line, key: i })}>
+                                        <div className="inline-block w-4 text-right mr-4">{i + 1}</div>
+                                    </div>
+                                ))}
+                            </span>
+                            <code className={`${className} block rounded-none !m-0`}>
+                                {tokens.map((line, i) => (
+                                    <div key={i} {...getLineProps({ line, key: i })}>
+                                        {line.map((token, key) => {
+                                            const { className, ...other } = getTokenProps({ token, key })
+                                            return (
+                                                <span
+                                                    key={key}
+                                                    className={`${className} text-shadow-none`}
+                                                    {...other}
+                                                />
+                                            )
+                                        })}
+                                    </div>
+                                ))}
+                            </code>
+                        </div>
+                    )}
+                </Highlight>
+            </pre>
         </div>
     )
 }
