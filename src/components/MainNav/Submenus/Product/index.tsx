@@ -5,6 +5,9 @@ import SearchBar from 'components/Docs/SearchBar'
 import { Wrapper } from '../Wrapper'
 import ProductIcons from 'components/ProductIcons'
 import { graphql, useStaticQuery } from 'gatsby'
+import LogoVendasta from './vendasta.svg'
+import LogoHasura from './hasura.svg'
+import LogoPhantom from './phantom.svg'
 
 interface Features {
     title: string
@@ -27,19 +30,9 @@ const leftColMenuItems: LeftColMenuItems[] = [
                 url: '/product#product-analytics',
             },
             {
-                title: 'Session Recording',
+                title: 'Session recording',
                 icon: ProductIcons.sessionRecording,
                 url: '/product/session-recording',
-            },
-            {
-                title: 'Feature Flags',
-                icon: ProductIcons.featureFlags,
-                url: '/product/feature-flags',
-            },
-            {
-                title: 'A/B Testing',
-                icon: ProductIcons.abTesting,
-                url: '/product/experimentation-suite',
             },
             {
                 title: 'Heatmaps',
@@ -47,7 +40,17 @@ const leftColMenuItems: LeftColMenuItems[] = [
                 url: '/product/heatmaps',
             },
             {
-                title: 'Correlation Insights',
+                title: 'Feature flags',
+                icon: ProductIcons.featureFlags,
+                url: '/product/feature-flags',
+            },
+            {
+                title: 'A/B testing',
+                icon: ProductIcons.abTesting,
+                url: '/product/experimentation-suite',
+            },
+            {
+                title: 'Correlation analysis',
                 icon: ProductIcons.correlationAnalysis,
                 url: '/product/correlation-analysis',
             },
@@ -59,7 +62,7 @@ const leftColMenuItems: LeftColMenuItems[] = [
             {
                 title: 'Event pipelines',
                 icon: ProductIcons.eventPipelines,
-                url: '/docs/integrate',
+                url: '/product#event-pipelines',
             },
             {
                 title: 'Data warehouse',
@@ -69,17 +72,17 @@ const leftColMenuItems: LeftColMenuItems[] = [
             {
                 title: 'App library',
                 icon: ProductIcons.appLibrary,
-                url: '/apps',
+                url: '/product#apps',
             },
             {
                 title: 'Self-hosting',
                 icon: ProductIcons.selfHosting,
-                url: '/docs/self-host',
+                url: '/product#self-hosting',
             },
             {
                 title: 'API',
                 icon: ProductIcons.api,
-                url: '/docs/api',
+                url: '/product#api',
             },
         ],
     },
@@ -127,20 +130,34 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                 <section className="bg-gray-accent-light bg-opacity-10 py-6 px-3">
                     <h3 className="text-[18px] font-bold m-0 text-black/70 pl-3">Customer stories</h3>
                     <ol className="m-0 list-none p-0 max-w-[250px] mt-2">
-                        {customers.map(({ fields: { slug }, frontmatter: { logo, title } }) => {
-                            return (
-                                <Link
-                                    key={slug}
-                                    className="rounded-sm py-2 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
-                                    to={slug}
-                                >
-                                    <img className="h-[25px]" src={logo?.publicURL} />
-                                    <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-2">
-                                        {title}
-                                    </p>
-                                </Link>
-                            )
-                        })}
+                        <Link
+                            className="rounded-sm py-2 mb-1 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
+                            to="/customers/vendasta"
+                        >
+                            <img className="h-[25px]" src={LogoVendasta} />
+                            <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
+                                How Vendesta replaced Snowplow and cut onboarding drop-off by 50%
+                            </p>
+                        </Link>
+                        <Link
+                            className="rounded-sm py-2 mb-1 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
+                            to="/customers/hasura"
+                        >
+                            <img className="h-[25px]" src={LogoHasura} />
+                            <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
+                                How Hasura improved conversion rates by 10-20% with PostHog
+                            </p>
+                        </Link>
+                        <Link
+                            className="rounded-sm py-2 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
+                            to="/customers/phantom"
+                        >
+                            <img className="h-[25px]" src={LogoPhantom} />
+                            <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
+                                How Phantom enhanced its product and cut failure rates by 90%
+                            </p>
+                        </Link>
+
                     </ol>
                     <CallToAction
                         className="mt-4 !w-full inline-flex items-center justify-center space-x-1"

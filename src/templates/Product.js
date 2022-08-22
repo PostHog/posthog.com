@@ -31,7 +31,7 @@ const features = [
         icon: ProductIcons.trends,
     },
     {
-        name: 'User paths',
+        name: 'Path analysis',
         url: '/product/user-paths',
         icon: ProductIcons.pathAnalysis,
     },

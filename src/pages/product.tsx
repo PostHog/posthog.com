@@ -34,7 +34,7 @@ const features: IProps[] = [
                 url: '/product/trends',
             },
             {
-                title: 'User paths',
+                title: 'Path analysis',
                 icon: ProductIcons?.pathAnalysis,
                 url: '/product/user-paths',
             },
