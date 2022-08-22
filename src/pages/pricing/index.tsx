@@ -215,10 +215,7 @@ const PricingNew = (): JSX.Element => {
                                         PostHog Cloud{' '}
                                         <span className="absolute -top-[3px] right-3 bg-red inline-flex text-sm px-3 py-2 rounded-[3px] font-semibold ml-2 space-x-1">
                                             <span className="text-white font-bold">Recommended</span>
-                                            <button
-                                                onClick={() => setWhyCloudOpen(true)}
-                                                className="text-white"
-                                            >
+                                            <button onClick={() => setWhyCloudOpen(true)} className="text-white">
                                                 <Info />
                                             </button>
                                         </span>
@@ -286,7 +283,7 @@ const PricingNew = (): JSX.Element => {
                                         : 'https://app.posthog.com/signup'
                                 }
                             >
-                                {enterpriseMode ? "Get in touch" : "Get started - free"}
+                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
                             </TrackedCTA>
                         </div>
                     </div>
@@ -372,18 +369,24 @@ const PricingNew = (): JSX.Element => {
                         <div>
                             <h4 className="text-[15px] mb-0 font-normal opacity-75">
                                 <span className="font-bold">
-                                    Looking for {' '}
-
-                                <Link
-                                    className="border-b border-dashed border-gray-accent-light text-black"
-                                    onClick={() =>
-                                        posthog && posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                                    }
-                                    to="https://github.com/PostHog/posthog"
-                                >
-                                PostHog Open Source</Link>?</span> (No credit card required)</h4>
+                                    Looking for{' '}
+                                    <Link
+                                        className="border-b border-dashed border-gray-accent-light text-black"
+                                        onClick={() =>
+                                            posthog &&
+                                            posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
+                                        }
+                                        to="https://github.com/PostHog/posthog"
+                                    >
+                                        PostHog Open Source
+                                    </Link>
+                                    ?
+                                </span>{' '}
+                                (No credit card required)
+                            </h4>
                             <p className="text-sm opacity-60">
-                                Available with product analytics, feature flags, and session recordings – limited to 1 project and no user permissions
+                                Available with product analytics, feature flags, and session recordings – limited to 1
+                                project and no user permissions
                             </p>
                         </div>
                     </div>
