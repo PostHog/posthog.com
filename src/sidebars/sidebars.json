@@ -1123,6 +1123,10 @@
                 {
                     "name": "Data egress & compliance",
                     "url": "/docs/privacy/egress"
+                },
+                {
+                    "name": "Data deletion",
+                    "url": "/docs/privacy/data-deletion"
                 }
             ]
         },

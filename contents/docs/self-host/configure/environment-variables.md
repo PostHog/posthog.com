@@ -8,7 +8,7 @@ hideAnchor: true
 
 As of [PostHog 1.33.0](/blog/the-posthog-array-1-33-0) some settings can now be managed directly in the app, without having to connect to your cluster and/or redeploy. If you are on version 1.33.0 or newer, please review [Instance settings](/docs/self-host/configure/instance-settings) first.
 
-For settings that can be managed with Instance Settings, you can either set the values via environment variables or through the Instance Settings page in your instance. However, it is strongly **recommended to use Instance settings.** Environment variables are only loaded when there are no values in Instance settings, which means that environment variables could reflect outdated values. 
+For settings that can be managed with Instance Settings, you can either set the values via environment variables or through the Instance Settings page in your instance. However, it is strongly **recommended to use Instance settings.** Environment variables are only loaded when there are no values in Instance settings, which means that environment variables could reflect outdated values.
 
 For other settings, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them. However, for general use, you most likely do not have to worry about the vast majority of these.
 
@@ -71,6 +71,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | _Empty_
+| `CLEAR_CLICKHOUSE_REMOVED_DATA_SCHEDULE_CRON` | When data is (asynchronously) deleted from the events table | `0 5 * * SAT`
 
 
 ## Instance settings
