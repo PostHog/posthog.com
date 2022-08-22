@@ -11,7 +11,7 @@ export default function Contact(props) {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const location = useLocation()
     const [activeTab, setActiveTab] = useState('demo')
-    const [demoType, setDemoType] = useState(props.demoType || 'group')
+    const [demoType, setDemoType] = useState(props.demoType || 'scale')
     const handleChipClick = (tab) => {
         setActiveTab(tab)
         posthog?.capture(`contact: clicked ${tab} button`)
