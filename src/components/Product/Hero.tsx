@@ -6,10 +6,12 @@ import { Link } from 'react-scroll'
 
 const slides = [
     {
+        label: 'Product analytics',
         url: 'product-analytics',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -18,10 +20,12 @@ const slides = [
         ),
     },
     {
+        label: 'Session recording',
         url: 'session-recording',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -30,10 +34,12 @@ const slides = [
         ),
     },
     {
+        label: 'Feature flags',
         url: 'feature-flags',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -42,10 +48,12 @@ const slides = [
         ),
     },
     {
+        label: 'AB tests and experiments',
         url: 'ab-tests-and-experiments',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -54,14 +62,26 @@ const slides = [
         ),
     },
     {
+        label: 'Data warehouse',
         url: 'data-warehouse',
-        image: <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/sql.png" />,
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/sql.png"
+            />
+        ),
     },
     {
+        label: 'Event pipelines',
         url: 'event-pipelines',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -70,14 +90,26 @@ const slides = [
         ),
     },
     {
+        label: 'API',
         url: 'api',
-        image: <StaticImage placeholder="none" quality={100} objectFit="contain" alt="" src="./images/hogs/api.png" />,
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/api.png"
+            />
+        ),
     },
     {
+        label: 'Data warehouse',
         url: 'data-warehouse',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -86,10 +118,12 @@ const slides = [
         ),
     },
     {
+        label: 'Data warehouse',
         url: 'data-warehouse',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -98,10 +132,12 @@ const slides = [
         ),
     },
     {
+        label: 'Data warehouse',
         url: 'data-warehouse',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -110,10 +146,12 @@ const slides = [
         ),
     },
     {
+        label: 'Data warehouse',
         url: 'data-warehouse',
         image: (
             <StaticImage
                 placeholder="none"
+                loading="eager"
                 quality={100}
                 objectFit="contain"
                 alt=""
@@ -135,8 +173,15 @@ const sliderSettings = {
     cssEase: 'linear',
 }
 
-const Slide = ({ image }) => {
-    return <div className="hover:scale-[1.1] transition-transform">{image}</div>
+const Slide = ({ image, label }) => {
+    return (
+        <div className="relative group">
+            <div className="hover:scale-[1.1] transition-transform">{image}</div>
+            <span className="absolute left-0 top-0 text-white bg-primary rounded-md px-2 group-hover:visible invisible">
+                {label}
+            </span>
+        </div>
+    )
 }
 
 export default function Hero() {
@@ -169,7 +214,7 @@ export default function Hero() {
                 {slides.map((slide, index) => {
                     return (
                         <Link key={index} className="cursor-pointer" smooth duration={300} offset={-57} to={slide.url}>
-                            <Slide image={slide.image} />
+                            <Slide {...slide} />
                         </Link>
                     )
                 })}
