@@ -396,7 +396,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
 const Survey = ({ contentContainerClasses = '' }) => {
     return (
         <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
-            <div className={`pb-2 ${contentContainerClasses}`}>
+            <div className={contentContainerClasses}>
                 <DocsPageSurvey />
             </div>
         </div>
