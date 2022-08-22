@@ -45,7 +45,7 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx)!
 
-## macOS Prerequisites
+## macOS prerequisites
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
