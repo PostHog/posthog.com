@@ -76,7 +76,7 @@ const ResponseFeedback: React.FC<{ title: string; placeholder: string; onSubmit:
                 />
 
                 <button
-                    className="text-base px-4 py-1.5 rounded-sm shadow-sm bg-white text-black/70 hover:text-black/95 dark:bg-white/30 dark:text-white/90 dark:hover:bg-white/40 dark:hover:text-white/100 relative active:top-[1px] active:scale-[.98] transition-colors cursor-pointer"
+                    className="text-base px-4 py-1.5 rounded-sm font-semibold shadow-sm bg-white text-black/70 hover:text-black/95 dark:bg-white/30 dark:text-white/90 dark:hover:bg-white/40 dark:hover:text-white/100 relative active:top-[1px] active:scale-[.98] transition-colors cursor-pointer"
                     disabled={feedback.trim() === ''}
                 >
                     Send feedback
