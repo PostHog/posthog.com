@@ -15,7 +15,7 @@ toolsUsed:
     - Apps
 ---
 
-Netdata is a web monitoring and troubleshooting platform used by engineers at many of the biggest technology companies in the world, including Microsoft, Amazon and Nvidia. In 2020 Netdata’s teams began looking for a way to track and analyze user behavior, considering many different tools in the process.  
+Netdata is an open source monitoring and troubleshooting platform used by engineers at many of the biggest technology companies in the world, including Microsoft, Amazon and Nvidia. In 2020 Netdata’s teams began looking for a way to track and analyze user behavior, considering many different tools in the process.  
 
 “At my last company, we paid hundreds of thousands of dollars for tools like [Google Analytics](https://isgoogleanalyticsillegal.com/) 360,” said Andrew Maguire, Netdata’s Analytics and Machine Learning Lead. “But when I joined Netdata I wanted to look at new tools. I looked at [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Amplitude](https://posthog.com/docs/migrate/migrate-from-amplitude)…but they’re all old and stodgy and I didn’t want to go near them because they’re built for enterprises, not start-ups like Netdata.”
 
