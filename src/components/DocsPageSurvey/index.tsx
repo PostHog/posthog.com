@@ -89,11 +89,7 @@ const ResponseFeedback: React.FC<{ title: string; placeholder: string; onSubmit:
 const ResponseMessage = () => {
     return (
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
-            <h3 className="text-xl font-bold m-0 mb-3">Thanks for the feedback!</h3>
-            <p>
-                If you need help on any of the above, feel free to ask a question above, create an issue on{' '}
-                <a href="https://github.com/PostHog/posthog">our repo</a>.
-            </p>
+            <h3 className="text-xl font-bold m-0">Thanks for the feedback!</h3>
         </motion.div>
     )
 }
