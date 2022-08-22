@@ -213,7 +213,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     - On Linux
     ```bash
     apt-get update
-    apt-get install brotli -y
+    sudo apt-get install brotli libpq-dev -y
     CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
