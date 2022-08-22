@@ -18,7 +18,7 @@ When deleting individual persons, you can choose to also delete all their events
 
 ## Asynchronous data deletion
 
-While most data in posthog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
+While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
 
 This is done because data deletion in ClickHouse is expensive and it can impact performance for other users.
 
