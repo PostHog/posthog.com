@@ -13,7 +13,7 @@ One can remove unwanted data from posthog by:
 
 This can be done either under settings pages (1) or under persons & groups pages (2).
 
-When deleting individual persons, you can choose to also delete all their events. When deleting teams, all data under the team
+When deleting individual persons, you can also choose to delete all of their events. When deleting teams, all data under the team
 (including events) are automatically removed.
 
 ## Asynchronous data deletion
